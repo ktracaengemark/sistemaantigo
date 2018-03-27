@@ -233,7 +233,7 @@
 										<?php } ?>
 
 										<div class="form-group" id="2div<?php echo $i ?>">
-											<div class="panel panel-info">
+											<div class="panel panel-danger">
 												<div class="panel-heading">
 													<div class="row">
 														<div class="col-md-1">

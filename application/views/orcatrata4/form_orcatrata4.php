@@ -115,7 +115,7 @@
 
 							<div class="panel panel-<?php echo $panel; ?>">
 
-								<div class="panel-heading"><strong>Orçamentos</strong></div>
+								<div class="panel-heading"><strong>Troca/Devol.</strong></div>
 								<div class="panel-body">
 
 									<?php echo form_open_multipart($form_open_path); ?>
@@ -157,6 +157,64 @@
 
 										<hr>
 										-->
+										<div class="form-group">
+											<div class="panel panel-danger">
+												<div class="panel-heading">
+													<div class="row">										
+														
+														<div class="col-md-4">
+															<label for="idApp_Cliente">Cliente *</label>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																	id="idApp_Cliente" name="idApp_Cliente">
+																<option value="">-- Sel. um Cliente --</option>
+																<?php
+																foreach ($select['idApp_Cliente'] as $key => $row) {
+																	if ($orcatrata['idApp_Cliente'] == $key) {
+																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																	} else {
+																		echo '<option value="' . $key . '">' . $row . '</option>';
+																	}
+																}
+																?>
+															</select>
+														</div>
+														
+														<div class="col-md-4">
+															<label for="Orcamento">Orçamento</label>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																	id="Orcamento" name="Orcamento">
+																<option value="">-- Sel. um Orçam. --</option>
+																<?php
+																foreach ($select['Orcamento'] as $key => $row) {
+																	if ($orcatrata['Orcamento'] == $key) {
+																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																	} else {
+																		echo '<option value="' . $key . '">' . $row . '</option>';
+																	}
+																}
+																?>
+															</select>
+														</div>
+														<div class="col-md-4">
+															<label for="TipoDevolucao">Tipo de Devolução</label>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																	id="TipoDevolucao" name="TipoDevolucao">
+																<option value="">-- Sel. Tipo de Devolução --</option>
+																<?php
+																foreach ($select['TipoDevolucao'] as $key => $row) {
+																	if ($orcatrata['TipoDevolucao'] == $key) {
+																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																	} else {
+																		echo '<option value="' . $key . '">' . $row . '</option>';
+																	}
+																}
+																?>
+															</select>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>										
 										<div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
 											<div class="panel panel-primary">
 												<div class="panel-heading collapsed" role="tab" id="heading1" data-toggle="collapse" data-parent="#accordion1" data-target="#collapse1" aria-expanded="false">								<h4 class="panel-title">
@@ -311,7 +369,7 @@
 														<?php } ?>
 
 														<div class="form-group" id="2div<?php echo $i ?>">
-															<div class="panel panel-info">
+															<div class="panel panel-danger">
 																<div class="panel-heading">
 																	<div class="row">
 																		<div class="col-md-1">
@@ -421,7 +479,7 @@
 												<div id="collapse4" class="panel-collapse" role="tabpanel" aria-labelledby="heading4" aria-expanded="false">
 													<div class="panel-body">
 														<div class="form-group">
-															<div class="panel panel-info">
+															<div class="panel panel-danger">
 																<div class="panel-heading">
 																	<div class="row">
 																		<div class="col-md-3">
@@ -458,7 +516,7 @@
 													</div>
 													<div class="panel-body">
 														<div class="form-group">
-															<div class="panel panel-info">
+															<div class="panel panel-danger">
 																<div class="panel-heading">
 																	<div class="row">
 																		<div class="col-md-3">
@@ -765,7 +823,7 @@
 												<div id="collapse8" class="panel-collapse" role="tabpanel" aria-labelledby="heading8" aria-expanded="false">
 													<div class="panel-body">
 														<div class="form-group">
-															<div class="panel panel-info">
+															<div class="panel panel-danger">
 																<div class="panel-heading">
 																	<div class="col-md-1"></div>
 																	<div class="form-group text-center">
