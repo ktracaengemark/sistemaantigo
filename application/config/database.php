@@ -111,7 +111,8 @@ $db['default'] = array(
 	'password' => '',
 */
     #'database' => 'ci',
-    'database' => 'app',
+    #'database' => 'app',
+	'database' => 'app.sistemaantigo',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,

@@ -128,12 +128,12 @@
 
 												<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
 
-													<a class="btn btn-success" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+													<a class="btn btn-success" href="<?php echo base_url() . 'orcatrata4/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
 														<span class="glyphicon glyphicon-edit"></span> Editar Dados
 													</a>
 													
 														
-													<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
+													<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrintDev/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
 														<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 													</a>
 													
@@ -141,10 +141,10 @@
 													<br><br>
 
 													<h4>
-														<span class="glyphicon glyphicon-tags"></span> <b>Nº Orç.:</b> <?php echo $row['idApp_OrcaTrata']; ?>
+														<span class="glyphicon glyphicon-tags"></span> <b>Nº Dev.:</b> <?php echo $row['idApp_OrcaTrata']; ?>
 													</h4>
 													<h5>
-														<span class="glyphicon glyphicon-calendar"></span> <b>Data do Orçamento:</b> <?php echo $row['DataOrca']; ?>
+														<span class="glyphicon glyphicon-calendar"></span> <b>Data da Devolução:</b> <?php echo $row['DataOrca']; ?>
 													</h5>
 
 													<p>
@@ -191,21 +191,21 @@
 
 												<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
 
-													<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+													<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata4/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
 														<span class="glyphicon glyphicon-edit"></span> Editar Dados
 													</a>
 													
-													<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
+													<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrintDev/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
 														<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 													</a>
 
 													<br><br>
 
 													<h4>
-														<span class="glyphicon glyphicon-tags"></span> <b>Nº Orç.:</b> <?php echo $row['idApp_OrcaTrata']; ?>
+														<span class="glyphicon glyphicon-tags"></span> <b>Nº Dev.:</b> <?php echo $row['idApp_OrcaTrata']; ?>
 													</h4>
 													<h5>
-														<span class="glyphicon glyphicon-calendar"></span> <b>Data do Orçamento:</b> <?php echo $row['DataOrca']; ?>
+														<span class="glyphicon glyphicon-calendar"></span> <b>Data da Devolução:</b> <?php echo $row['DataOrca']; ?>
 													</h5>
 
 													<p>
