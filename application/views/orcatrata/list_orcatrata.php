@@ -34,7 +34,7 @@
 									</div>	
 								</div>
 
-								<div class="col-md-3 text-center">
+								<div class="col-md-3 text-left">
 									<label for="">Agendamentos:</label>
 									<div class="form-group">
 										<div class="row">
@@ -52,7 +52,7 @@
 									</div>	
 								</div>
 
-								<div class="col-md-3 text-right">
+								<div class="col-md-3 text-left">
 									<label for="">Orçamentos:</label>
 									<div class="form-group ">
 										<div class="row">
@@ -69,7 +69,7 @@
 										</div>		
 									</div>	
 								</div>
-								<div class="col-md-3 text-right">
+								<div class="col-md-3 text-left">
 									<label for="">Devoluções:</label>
 									<div class="form-group ">
 										<div class="row">

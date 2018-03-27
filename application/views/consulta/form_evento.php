@@ -34,11 +34,12 @@
 							<div class="col-md-3 form-inline text-left">
 								<label for="Data">Data:</label>
 								<div class="input-group <?php echo $datepicker; ?>">
-									<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-										   name="Data" value="<?php echo $query['Data']; ?>">
 									<span class="input-group-addon" disabled>
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
+									<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+										   name="Data" value="<?php echo $query['Data']; ?>">
+									
 								</div>
 							</div>
 							<div class="col-md-6 form-inline text-left">
@@ -46,20 +47,22 @@
 									<label for="Hora">Hora:</label><br>
 									De
 									<div class="col-md-4 input-group <?php echo $timepicker; ?>">
-										<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5"  placeholder="HH:MM"
-											   accept=""name="HoraInicio" value="<?php echo $query['HoraInicio']; ?>">
 										<span class="input-group-addon">
 											<span class="glyphicon glyphicon-time"></span>
 										</span>
+										<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5"  placeholder="HH:MM"
+											   accept=""name="HoraInicio" value="<?php echo $query['HoraInicio']; ?>">
+										
 									</div>
 
 									Até
 									<div class="col-md-4 input-group <?php echo $timepicker; ?>">
-										<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5" placeholder="HH:MM"
-											   accept=""name="HoraFim" value="<?php echo $query['HoraFim']; ?>">
 										<span class="input-group-addon">
 											<span class="glyphicon glyphicon-time"></span>
 										</span>
+										<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5" placeholder="HH:MM"
+											   accept=""name="HoraFim" value="<?php echo $query['HoraFim']; ?>">
+										
 									</div>
 								</div>
 							</div>

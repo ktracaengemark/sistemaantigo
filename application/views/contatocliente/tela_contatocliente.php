@@ -16,7 +16,7 @@
 						<div class="row">
 							<div class="col-md-2 "></div>
 							<div class="col-md-8 col-lg-8">
-								<div class="col-md-4 text-left">
+								<div class="col-md-3 text-left">
 									<label for="">Cliente & Contatos:</label>
 									<div class="form-group">
 										<div class="row">	
@@ -34,7 +34,7 @@
 									</div>	
 								</div>
 
-								<div class="col-md-4 text-center">
+								<div class="col-md-3 text-left">
 									<label for="">Agendamentos:</label>
 									<div class="form-group">
 										<div class="row">
@@ -52,7 +52,7 @@
 									</div>	
 								</div>
 
-								<div class="col-md-4 text-right">
+								<div class="col-md-3 text-left">
 									<label for="">Orçamentos:</label>
 									<div class="form-group ">
 										<div class="row">
@@ -63,6 +63,23 @@
 											</a>
 											<a <?php if (preg_match("/orcatrata\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
 												<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'orcatrata/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+													<span class="glyphicon glyphicon-plus"></span> Cad.
+												</a>
+											</a>
+										</div>		
+									</div>	
+								</div>
+								<div class="col-md-3 text-left">
+									<label for="">Devoluções:</label>
+									<div class="form-group ">
+										<div class="row">
+											<a <?php if (preg_match("/orcatrata4\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
+												<a class="btn btn-md btn-success" href="<?php echo base_url() . 'orcatrata4/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+													<span class="glyphicon glyphicon-usd"></span> List.
+												</a>
+											</a>
+											<a <?php if (preg_match("/orcatrata4\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
+												<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'orcatrata4/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 													<span class="glyphicon glyphicon-plus"></span> Cad.
 												</a>
 											</a>
