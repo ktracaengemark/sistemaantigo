@@ -303,6 +303,7 @@
 														<div class="input_fields_wrap2">
 
 														<?php
+														$QtdSoma = $ProdutoSoma = 0;
 														for ($i=1; $i <= $count['PCount']; $i++) {
 														?>
 
@@ -310,6 +311,8 @@
 														<input type="hidden" name="idApp_ProdutoVenda<?php echo $i ?>" value="<?php echo $produto[$i]['idApp_ProdutoVenda']; ?>"/>
 														<?php } ?>
 
+														<input type="hidden" name="ProdutoHidden" id="ProdutoHidden<?php echo $i ?>" value="<?php echo $i ?>">
+														
 														<div class="form-group" id="2div<?php echo $i ?>">
 															<div class="panel panel-info">
 																<div class="panel-heading">
@@ -317,7 +320,7 @@
 																		<div class="col-md-1">
 																			<label for="QtdVendaProduto">Qtd<?php echo $i ?>:</label>
 																			<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaProduto<?php echo $i ?>" placeholder="0"
-																					onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto')"
+																					onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																					autofocus name="QtdVendaProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdVendaProduto'] ?>">
 																		</div>
 																		<div class="col-md-7">
@@ -374,13 +377,13 @@
 																					<span class="glyphicon glyphicon-calendar"></span>
 																				</span>
 																				<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																					   name="DataValidadeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['DataValidadeProduto']; ?>">
-																				
+																					   name="DataValidadeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['DataValidadeProduto']; ?>">																				
 																			</div>
 																		</div>
 																		<div class="col-md-1">
 																			<label><br></label><br>
-																			<button type="button" id="<?php echo $i ?>" class="remove_field2 btn btn-danger">
+																			<button type="button" id="<?php echo $i ?>" class="remove_field2 btn btn-danger"
+																					onclick="calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',1,<?php echo $i ?>,'CountMax',0,'ProdutoHidden')">
 																				<span class="glyphicon glyphicon-trash"></span>
 																			</button>
 																		</div>
@@ -390,11 +393,38 @@
 														</div>
 
 														<?php
+														$QtdSoma+=$produto[$i]['QtdVendaProduto'];
+														$ProdutoSoma++;
 														}
 														?>
 
 														</div>
 
+														<div class="panel panel-info">
+															<div class="panel-heading text-left">
+																<div class="form-group">	
+																	<div class="row">	
+																		<div class="col-md-3">	
+																			<a class="add_field_button2 btn btn-warning"
+																					onclick="calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
+																				<span class="glyphicon glyphicon-plus"></span> Adic. Produtos ou Serviços
+																			</a>
+																		</div>
+																		<div class="col-md-2">	
+																			<b>Total de Produtos: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
+																		</div>
+																		<div class="col-md-2">	
+																			<b>Total de Peças: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
+																		</div>
+																	</div>
+																</div>	
+															</div>
+														</div>
+														
+														<input type="hidden" name="CountMax" id="CountMax" value="<?php echo $ProdutoSoma ?>">
+														
+														<br />
+														<!--
 														<div class="form-group">
 															<div class="row">
 																<div class="col-md-3">
@@ -404,6 +434,7 @@
 																</div>
 															</div>
 														</div>
+														-->
 													</div>													
 												</div>
 											</div>
