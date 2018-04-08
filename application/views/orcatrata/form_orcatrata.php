@@ -404,6 +404,7 @@
 															<div class="panel-heading text-left">
 																<div class="form-group">	
 																	<div class="row">	
+																		<br>
 																		<div class="col-md-3">	
 																			<a class="add_field_button2 btn btn-warning"
 																					onclick="calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">

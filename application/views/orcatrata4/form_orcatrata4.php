@@ -161,7 +161,8 @@
 											<div class="panel panel-danger">
 												<div class="panel-heading">
 													<div class="row">										
-														
+														<div class="col-md-4"></div>
+														<!--
 														<div class="col-md-4">
 															<label for="idApp_Cliente">Cliente *</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
@@ -178,7 +179,7 @@
 																?>
 															</select>
 														</div>
-														
+														-->
 														<div class="col-md-4">
 															<label for="Orcamento">Orçamento</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>

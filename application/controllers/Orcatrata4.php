@@ -183,7 +183,7 @@ class Orcatrata4 extends CI_Controller {
         $data['select']['QuitadoRecebiveis'] = $this->Basico_model->select_status_sn();
         $data['select']['Profissional'] = $this->Profissional_model->select_profissional();
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
-        $data['select']['Orcamento'] = $this->Basico_model->select_orcatrata();
+        $data['select']['Orcamento'] = $this->Basico_model->select_orcatrata2();
 		$data['select']['TipoDevolucao'] = $this->Tipodespesa_model->select_tipodevolucao();
         #$data['select']['Servico'] = $this->Basico_model->select_servico();
         #$data['select']['Produto'] = $this->Basico_model->select_produto();
@@ -585,7 +585,7 @@ class Orcatrata4 extends CI_Controller {
         #$data['select']['Produto'] = $this->Basico_model->select_produto();
         #$data['select']['Servico'] = $this->Basico_model->select_servicos();
         $data['select']['Produto'] = $this->Basico_model->select_produtos();
-		$data['select']['Orcamento'] = $this->Basico_model->select_orcatrata();
+		$data['select']['Orcamento'] = $this->Basico_model->select_orcatrata3();
 		$data['select']['TipoDevolucao'] = $this->Tipodespesa_model->select_tipodevolucao();
 
         $data['titulo'] = 'Editar Devolução';

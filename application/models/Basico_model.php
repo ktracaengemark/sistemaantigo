@@ -507,7 +507,9 @@ class Basico_model extends CI_Model {
 						LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
 				WHERE
 					P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
-					P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
+					P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+					P.TipoRD = "R" AND
+					P.ServicoConcluido = "N"
 				ORDER BY
 					idApp_OrcaTrata ASC'
     );
@@ -523,7 +525,9 @@ class Basico_model extends CI_Model {
 						LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
 				WHERE
 					P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
-					P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
+					P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+					P.TipoRD = "R" AND
+					P.ServicoConcluido = "N"
 				ORDER BY
 					idApp_OrcaTrata ASC'
     );
@@ -536,7 +540,103 @@ class Basico_model extends CI_Model {
 
         return $array;
     }
+	
+	public function select_orcatrata2($data = FALSE) {
 
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT
+					P.idApp_OrcaTrata,					
+					CONCAT(P.idApp_OrcaTrata, " --- ", C.NomeCliente) AS NomeCliente,
+					C.idApp_Cliente
+				FROM
+					App_OrcaTrata AS P
+						LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
+				WHERE
+					P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+					P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+					P.TipoRD = "R" AND
+					C.idApp_Cliente = ' . $_SESSION['Cliente']['idApp_Cliente'] . ' AND
+					P.ServicoConcluido = "N"
+				ORDER BY
+					idApp_OrcaTrata ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT
+					P.idApp_OrcaTrata,
+					CONCAT(P.idApp_OrcaTrata, " --- ", C.NomeCliente) AS NomeCliente,
+					C.idApp_Cliente
+				FROM
+					App_OrcaTrata AS P
+						LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
+				WHERE
+					P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+					P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+					P.TipoRD = "R" AND
+					C.idApp_Cliente = ' . $_SESSION['Cliente']['idApp_Cliente'] . ' AND
+					P.ServicoConcluido = "N"
+				ORDER BY
+					idApp_OrcaTrata ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idApp_OrcaTrata] = $row->NomeCliente;
+            }
+        }
+
+        return $array;
+    }
+	
+	public function select_orcatrata3($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT
+					P.idApp_OrcaTrata,					
+					CONCAT(P.idApp_OrcaTrata, " --- ", C.NomeCliente) AS NomeCliente,
+					C.idApp_Cliente
+				FROM
+					App_OrcaTrata AS P
+						LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
+				WHERE
+					P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+					P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+					P.TipoRD = "R" AND
+					C.idApp_Cliente = ' . $_SESSION['Cliente']['idApp_Cliente'] . ' 
+				ORDER BY
+					idApp_OrcaTrata ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT
+					P.idApp_OrcaTrata,
+					CONCAT(P.idApp_OrcaTrata, " --- ", C.NomeCliente) AS NomeCliente,
+					C.idApp_Cliente
+				FROM
+					App_OrcaTrata AS P
+						LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
+				WHERE
+					P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+					P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+					P.TipoRD = "R" AND
+					C.idApp_Cliente = ' . $_SESSION['Cliente']['idApp_Cliente'] . ' 
+				ORDER BY
+					idApp_OrcaTrata ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idApp_OrcaTrata] = $row->NomeCliente;
+            }
+        }
+
+        return $array;
+    }
+	
 	public function select_profissional($data = FALSE) {
 
         if ($data === TRUE) {

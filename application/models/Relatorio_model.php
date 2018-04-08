@@ -2507,7 +2507,9 @@ exit();*/
         $query = $this->db->query('
             SELECT
                 C.NomeCliente,
-                OT.idApp_OrcaTrata,
+				C.Telefone1,
+				CONCAT(IFNULL(C.NomeCliente,""), " --- ", IFNULL(C.Telefone1,"")) AS NomeCliente,
+				OT.idApp_OrcaTrata,
                 OT.AprovadoOrca,
                 OT.DataOrca,
 				OT.DataEntradaOrca,
@@ -2515,6 +2517,7 @@ exit();*/
                 OT.ValorOrca,
 				OT.ValorEntradaOrca,
 				OT.ValorRestanteOrca,
+				OT.DataVencimentoOrca,
                 OT.ServicoConcluido,
                 OT.QuitadoOrca,
                 OT.DataConclusao,
@@ -2522,6 +2525,7 @@ exit();*/
 				OT.DataRetorno,
 				OT.TipoRD,
 				OT.FormaPagamento,
+				OT.ObsOrca,
 				TFP.FormaPag,
 				TSU.Nome
             FROM
@@ -2568,7 +2572,8 @@ exit();*/
 				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
 				$row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
 				$row->DataPrazo = $this->basico->mascara_data($row->DataPrazo, 'barras');
-                $row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
+                $row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
+				$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
                 $row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
 				$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
 

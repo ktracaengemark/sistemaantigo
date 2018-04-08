@@ -57,7 +57,9 @@
 						<th class="active">Dt. Concl.</th>
                         <th class="active">Dt. Quit.</th>
 						<th class="active">Dt. Retor.</th>
-                        <th class="active">Profissional</th>
+                        <th class="active">Dt. Venc.</th>
+						<th class="active">Obs.</th>
+						<th class="active">Prof.</th>
                         <th class="active"></th>
                     </tr>
                 </thead>
@@ -81,13 +83,15 @@
 							echo '<td>' . $row['ServicoConcluido'] . '</td>';
 							echo '<td>' . $row['QuitadoOrca'] . '</td>';
                             echo '<td>' . $row['FormaPag'] . '</td>';
-                            echo '<td>' . $row['DataOrca'] . '</td>';
+                            echo '<td>' . $row['DataOrca'] . '</td>';							
 							echo '<td>' . $row['DataConclusao'] . '</td>';
                             echo '<td>' . $row['DataQuitado'] . '</td>';
 							echo '<td>' . $row['DataRetorno'] . '</td>';
+							echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
+							echo '<td>' . $row['ObsOrca'] . '</td>';
 							echo '<td>' . $row['Nome'] . '</td>';
                             #echo '</div>';
-                            echo '<td class="notclickable">
+							echo '<td class="notclickable">
                                     <a class="btn btn-md btn-info notclickable" target="_blank" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
                                         <span class="glyphicon glyphicon-print notclickable"></span>
                                     </a>
