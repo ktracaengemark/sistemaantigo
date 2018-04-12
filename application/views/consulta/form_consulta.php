@@ -14,10 +14,10 @@
 
 					<div class="form-group">
 						<div class="row">
-							<div class="col-md-2 "></div>
-							<div class="col-md-8 col-lg-8">
+							<div class="col-md-1 "></div>
+							<div class="col-md-8 col-lg-10">
 								<div class="col-md-3 text-left">
-									<label for="">Cliente & Contatos:</label>
+									<label for="">Cliente & Conts:</label>
 									<div class="form-group">
 										<div class="row">	
 											<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
@@ -87,8 +87,8 @@
 									</div>	
 								</div>
 							</div>
-							<div class="col-md-2 "></div>
-						</div>
+							<div class="col-md-1 "></div>
+						</div>	
 					</div>
 					<!--
 					<div class="form-group">
