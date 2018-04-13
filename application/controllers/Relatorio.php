@@ -185,6 +185,10 @@ class Relatorio extends CI_Controller {
 		if (!$data['query']['DataInicio2'])
            $data['query']['DataInicio2'] = '01/01/2017';
 		*/
+		if (!$data['query']['DataInicio'])
+           $data['query']['DataInicio'] = date("d/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
+		if (!$data['query']['DataFim'])
+           $data['query']['DataFim'] = date("t/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
