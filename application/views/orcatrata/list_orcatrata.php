@@ -141,7 +141,7 @@
 													<br><br>
 
 													<h4>
-														<span class="glyphicon glyphicon-tags"></span> <b>Nº Orç.:</b> <?php echo $row['idApp_OrcaTrata']; ?>
+														<span class="glyphicon glyphicon-arrow-up"></span> <b>Nº Orçam.:</b> <?php echo $row['idApp_OrcaTrata']; ?>
 													</h4>
 													<h5>
 														<span class="glyphicon glyphicon-calendar"></span> <b>Data do Orçamento:</b> <?php echo $row['DataOrca']; ?>
@@ -202,7 +202,7 @@
 													<br><br>
 
 													<h4>
-														<span class="glyphicon glyphicon-tags"></span> <b>Nº Orç.:</b> <?php echo $row['idApp_OrcaTrata']; ?>
+														<span class="glyphicon glyphicon-arrow-up"></span> <b>Nº Orçam.:</b> <?php echo $row['idApp_OrcaTrata']; ?>
 													</h4>
 													<h5>
 														<span class="glyphicon glyphicon-calendar"></span> <b>Data do Orçamento:</b> <?php echo $row['DataOrca']; ?>
