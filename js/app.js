@@ -1366,7 +1366,7 @@ function adicionaServico() {
                         </div>\
 						<div class="col-md-4">\
                             <label for="idTab_Servico">Serviços:</label><br>\
-                            <select class="form-control" id="listadinamica'+ps+'" onchange="buscaValor(this.value,this.name,\'Servico\','+ps+')" name="idTab_Servico'+ps+'">\
+                            <select class="form-control" id="listadinamica'+ps+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+ps+',\'Produto\')" name="idTab_Servico'+ps+'">\
                                 <option value="">-- Selecione uma opção --</option>\
                             </select>\
                         </div>\
@@ -1426,7 +1426,7 @@ function adicionaServico() {
 
     //request the JSON data and parse into the select element
     $.ajax({
-        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=1',
+        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=2',
         dataType: 'JSON',
         type: "GET",
         success: function (data) {

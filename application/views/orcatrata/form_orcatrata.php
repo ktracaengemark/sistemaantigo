@@ -193,7 +193,7 @@
 																				<span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
 																			</a>-->
 																			<?php } ?>
-																			<select data-placeholder="Selecione uma opção..." class="form-control" onchange="buscaValor(this.value,this.name,'Servico',<?php echo $i ?>)" <?php echo $readonly; ?>
+																			<select data-placeholder="Selecione uma opção..." class="form-control" onchange="buscaValor2Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
 																					id="lista" name="idTab_Servico<?php echo $i ?>">
 																				<option value="">-- Selecione uma opção --</option>
 																				<?php
@@ -276,7 +276,7 @@
 														?>
 
 														</div>
-														<!--
+														
 														<div class="form-group">
 															<div class="row">
 																<div class="col-md-3"></div>
@@ -289,7 +289,7 @@
 														</div>
 
 														<hr>
-														-->
+														
 														<input type="hidden" name="PCount" id="PCount" value="<?php echo $count['PCount']; ?>"/>
 
 														<div class="input_fields_wrap2">
