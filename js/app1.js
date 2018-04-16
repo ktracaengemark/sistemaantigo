@@ -90,46 +90,6 @@ function calculaQtdSoma(campo, soma, somaproduto, excluir, produtonum, countmax,
 
 }
 
-/*Atualiza o somatório do Qtd Devolvido no Orcatrata*/
-function calculaQtdSomaDev(campo, soma, somaproduto, excluir, produtonum, countmax, adicionar, hidden) {
-
-    qtdsoma = 0;
-    i = j = 1;
-
-    if(excluir == 1){
-        for(k=0; k<$("#"+countmax).val(); k++) {
-            /*
-            if(($("#"+hidden+i).val()))
-                console.log('>> existe '+$("#"+campo+i).val()+' <> '+hidden+' <> '+produtonum+' <> '+$("#"+somaproduto).html()+' <<>> '+i+' '+k);
-            else
-                console.log('>> não '+$("#"+campo+i).val()+' <> '+hidden+' <> '+produtonum+' <> '+$("#"+somaproduto).html()+' <<>> '+i+' '+k);
-            */
-            if(i != produtonum && ($("#"+campo+i).val())) {
-                qtdsoma += parseInt($("#"+campo+i).val());
-                j++;
-            }
-            i++;
-        }
-    }
-    else {
-        if(adicionar)
-            $("#"+countmax).val((parseInt($("#"+countmax).val())+1));
-
-        for(k=1; k<=$("#"+countmax).val(); k++) {
-            if($("#"+campo+k).val()) {
-                qtdsoma += parseInt($("#"+campo+k).val());
-                j++;
-            }
-            //j++;
-        }
-    }
-
-    $("#"+soma).html(qtdsoma);
-    $("#"+somaproduto).html(j-1);
-    //console.log('>> ' + qtdsoma);
-
-}
-
 /*
  * Função responsável por carregar valores nos respectivos campos do orcatrata
  * caso o botão Quitado seja alterado para SIM
@@ -1400,7 +1360,7 @@ function adicionaServico() {
                             <label for="QtdVendaServico">Qtd:</label><br>\
                             <div class="input-group">\
                                 <input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico'+ps+'" placeholder="0"\
-                                    onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax\',0,\'ServicoHidden\')"\
+                                    onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'QTD\',\'Servico\')"\
                                     name="QtdVendaServico'+ps+'" value="">\
                             </div>\
                         </div>\
