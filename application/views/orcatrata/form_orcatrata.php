@@ -431,7 +431,8 @@
 																	<div class="row">	
 																		<br>																
 																		<div class="col-md-3 text-left">
-																			<a class="btn btn-md btn-danger" onclick="adicionaServico()">
+																			<a class="btn btn-md btn-danger" onclick="adicionaServico()"
+																				onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax',1,0)">
 																				<span class="glyphicon glyphicon-minus"></span> Revomer Produto Devolvido
 																			</a>
 																		</div>
