@@ -1353,7 +1353,7 @@ function adicionaServico() {
 
     $(".input_fields_wrap").append('\
         <div class="form-group" id="1div'+ps+'">\
-            <div class="panel panel-danger">\
+            <div class="panel panel-info">\
                 <div class="panel-heading">\
                     <div class="row">\
 						<div class="col-md-2">\
@@ -1394,16 +1394,6 @@ function adicionaServico() {
                             <input type="text" class="form-control" id="ObsServico'+ps+'" maxlength="250"\
                                    name="ObsServico'+ps+'" value="">\
                         </div>\
-						<div class="col-md-2">\
-							<label for="DataValidadeServico'+ps+'">Val. do Servico:</label>\
-							<div class="input-group DatePicker">\
-								<span class="input-group-addon" disabled>\
-									<span class="glyphicon glyphicon-calendar"></span>\
-								</span>\
-								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
-									   name="DataValidadeServico'+ps+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
-							</div>\
-						</div>\
                         <div class="col-md-3">\
                             <label for="ConcluidoServico">Concluído? </label><br>\
                             <div class="form-group">\
@@ -1436,7 +1426,7 @@ function adicionaServico() {
 
     //request the JSON data and parse into the select element
     $.ajax({
-        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=2',
+        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=1',
         dataType: 'JSON',
         type: "GET",
         success: function (data) {
