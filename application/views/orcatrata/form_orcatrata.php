@@ -186,7 +186,7 @@
 																					onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico')"
 																					autofocus name="QtdVendaServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdVendaServico'] ?>">
 																		</div>
-																		<div class="col-md-6">
+																		<div class="col-md-7">
 																			<label for="idTab_Servico">Serviço:</label>
 																			<?php if ($i == 1) { ?>
 																			<!--<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>servico/cadastrar/servico" role="button">
@@ -227,7 +227,8 @@
 																		</div>
 																	</div>
 																	<div class="row">
-																		<div class="col-md-6">
+																		<div class="col-md-1"></div>
+																		<div class="col-md-7">
 																			<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
 																			<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
 																				   name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
@@ -242,6 +243,7 @@
 																					   name="DataValidadeServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataValidadeServico']; ?>">																				
 																			</div>
 																		</div>
+																		<!--
 																		<div class="col-md-3">
 																			<label for="ConcluidoServico">Concluído? </label><br>
 																			<div class="form-group">
@@ -270,7 +272,8 @@
 																				</div>
 																			</div>
 																		</div>
-																		<div class="col-md-2">
+																		-->
+																		<div class="col-md-1">
 																			<label><br></label><br>
 																			<button type="button" id="<?php echo $i ?>" class="remove_field btn btn-danger">
 																				<span class="glyphicon glyphicon-trash"></span>
@@ -287,13 +290,17 @@
 
 														</div>
 														
-														<div class="form-group">
-															<div class="row">
-																<div class="col-md-3"></div>
-																<div class="col-md-3 text-left">
-																	<a class="btn btn-md btn-danger" onclick="adicionaServico()">
-																		<span class="glyphicon glyphicon-plus"></span> Serviços
-																	</a>
+														<div class="panel panel-danger">
+															<div class="panel-heading text-left">
+																<div class="form-group">	
+																	<div class="row">	
+																		<br>																
+																		<div class="col-md-3 text-left">
+																			<a class="btn btn-md btn-danger" onclick="adicionaServico()">
+																				<span class="glyphicon glyphicon-minus"></span> Revomer Produto Devolvido
+																			</a>
+																		</div>
+																	</div>
 																</div>
 															</div>
 														</div>
@@ -408,7 +415,7 @@
 																	<div class="row">	
 																		<br>
 																		<div class="col-md-3">	
-																			<a class="add_field_button2 btn btn-warning"
+																			<a class="add_field_button2 btn btn-primary"
 																					onclick="calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
 																				<span class="glyphicon glyphicon-plus"></span> Adic. Produtos ou Serviços
 																			</a>

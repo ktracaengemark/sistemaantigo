@@ -1356,7 +1356,7 @@ function adicionaServico() {
             <div class="panel panel-danger">\
                 <div class="panel-heading">\
                     <div class="row">\
-						<div class="col-md-2">\
+						<div class="col-md-1">\
                             <label for="QtdVendaServico">Qtd:</label><br>\
                             <div class="input-group">\
                                 <input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico'+ps+'" placeholder="0"\
@@ -1364,13 +1364,13 @@ function adicionaServico() {
                                     name="QtdVendaServico'+ps+'" value="">\
                             </div>\
                         </div>\
-						<div class="col-md-4">\
+						<div class="col-md-7">\
                             <label for="idTab_Servico">Serviços:</label><br>\
                             <select class="form-control" id="listadinamica'+ps+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+ps+',\'Produto\')" name="idTab_Servico'+ps+'">\
                                 <option value="">-- Selecione uma opção --</option>\
                             </select>\
                         </div>\
-                        <div class="col-md-3">\
+                        <div class="col-md-2">\
                             <label for="ValorVendaServico">Valor do Serviço:</label><br>\
                             <div class="input-group" id="txtHint">\
                                 <span class="input-group-addon" id="basic-addon1">R$</span>\
@@ -1379,7 +1379,7 @@ function adicionaServico() {
                                     name="ValorVendaServico'+ps+'" value="">\
                             </div>\
                         </div>\
-                        <div class="col-md-3">\
+                        <div class="col-md-2">\
                             <label for="SubtotalServico">Subtotal:</label><br>\
                             <div class="input-group id="txtHint">\
                                 <span class="input-group-addon" id="basic-addon1">R$</span>\
@@ -1389,7 +1389,8 @@ function adicionaServico() {
                         </div>\
                     </div>\
                     <div class="row">\
-                        <div class="col-md-6">\
+                        <div class="col-md-1"></div>\
+						<div class="col-md-7">\
                             <label for="ObsServico'+ps+'">Obs:</label><br>\
                             <input type="text" class="form-control" id="ObsServico'+ps+'" maxlength="250"\
                                    name="ObsServico'+ps+'" value="">\
@@ -1404,22 +1405,7 @@ function adicionaServico() {
 									   name="DataValidadeServico'+ps+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 							</div>\
 						</div>\
-                        <div class="col-md-3">\
-                            <label for="ConcluidoServico">Concluído? </label><br>\
-                            <div class="form-group">\
-                                <div class="btn-group" data-toggle="buttons">\
-                                    <label class="btn btn-warning active" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'N">\
-                                    <input type="radio" name="ConcluidoServico'+ps+'" id="radiogeraldinamico"\
-                                        autocomplete="off" value="N" checked>Não\
-                                    </label>\
-                                    <label class="btn btn-default" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'S">\
-                                    <input type="radio" name="ConcluidoServico'+ps+'" id="radiogeraldinamico"\
-                                        autocomplete="off" value="S">Sim\
-                                    </label>\
-                                </div>\
-                            </div>\
-                        </div>\
-						<div class="col-md-2">\
+						<div class="col-md-1">\
                             <label><br></label><br>\
                             <a href="#" id="'+ps+'" class="remove_field btn btn-danger">\
                                 <span class="glyphicon glyphicon-trash"></span>\
