@@ -177,7 +177,7 @@
 														<?php } ?>
 
 														<div class="form-group" id="1div<?php echo $i ?>">
-															<div class="panel panel-info">
+															<div class="panel panel-danger">
 																<div class="panel-heading">
 																	<div class="row">
 																		<div class="col-md-1">
@@ -231,6 +231,16 @@
 																			<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
 																			<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
 																				   name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
+																		</div>
+																		<div class="col-md-2">
+																			<label for="DataValidadeServico<?php echo $i ?>">Val. do Produto:</label>
+																			<div class="input-group <?php echo $datepicker; ?>">
+																				<span class="input-group-addon" disabled>
+																					<span class="glyphicon glyphicon-calendar"></span>
+																				</span>
+																				<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																					   name="DataValidadeServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataValidadeServico']; ?>">																				
+																			</div>
 																		</div>
 																		<div class="col-md-3">
 																			<label for="ConcluidoServico">Concluído? </label><br>
