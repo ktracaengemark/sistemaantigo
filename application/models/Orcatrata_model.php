@@ -144,8 +144,8 @@ class Orcatrata_model extends CI_Model {
 			. 'OT.TipoRD = "R" AND '
             . 'OT.AprovadoOrca = "' . $aprovado . '" '
             . 'ORDER BY '
-			. 'OT.ServicoConcluido ASC, '
-			. 'OT.QuitadoOrca ASC ');
+			#. 'OT.DataOrca DESC, '
+			. 'OT.ServicoConcluido ASC ');
         /*
           echo $this->db->last_query();
           echo "<pre>";

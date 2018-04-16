@@ -130,7 +130,6 @@ class Orcatrata4_model extends CI_Model {
 
         $query = $this->db->query('SELECT '
             . 'OT.idApp_OrcaTrata, '
-			. 'OT.Orcamento, '
             . 'OT.DataOrca, '
 			. 'OT.DataPrazo, '
             . 'OT.ProfissionalOrca, '
@@ -145,8 +144,8 @@ class Orcatrata4_model extends CI_Model {
 			. 'OT.TipoRD = "D" AND '
             . 'OT.AprovadoOrca = "' . $aprovado . '" '
             . 'ORDER BY '
-			. 'OT.ServicoConcluido ASC, '
-			. 'OT.QuitadoOrca ASC ');
+			#. 'OT.DataOrca DESC, '
+			. 'OT.ServicoConcluido ASC ');
         /*
           echo $this->db->last_query();
           echo "<pre>";
