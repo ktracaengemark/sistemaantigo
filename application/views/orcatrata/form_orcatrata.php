@@ -298,6 +298,7 @@
 														<div class="input_fields_wrap">
 
 														<?php
+														$QtdSomaDev = $ServicoSoma = 0;
 														for ($i=1; $i <= $count['SCount']; $i++) {
 														?>
 
@@ -305,6 +306,8 @@
 														<input type="hidden" name="idApp_ServicoVenda<?php echo $i ?>" value="<?php echo $servico[$i]['idApp_ServicoVenda']; ?>"/>
 														<?php } ?>
 
+														<input type="hidden" name="ServicoHidden" id="ServicoHidden<?php echo $i ?>" value="<?php echo $i ?>">
+														
 														<div class="form-group" id="1div<?php echo $i ?>">
 															<div class="panel panel-danger">
 																<div class="panel-heading">
@@ -312,7 +315,7 @@
 																		<div class="col-md-1">
 																			<label for="QtdVendaServico">Qtd:</label>
 																			<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico<?php echo $i ?>" placeholder="0"
-																					onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico')"
+																					onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax',0,'ServicoHidden')"
 																					autofocus name="QtdVendaServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdVendaServico'] ?>">
 																		</div>
 																		<div class="col-md-7">
@@ -404,7 +407,8 @@
 																		-->
 																		<div class="col-md-1">
 																			<label><br></label><br>
-																			<button type="button" id="<?php echo $i ?>" class="remove_field btn btn-danger">
+																			<button type="button" id="<?php echo $i ?>" class="remove_field btn btn-danger"
+																				onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',1,<?php echo $i ?>,'CountMax',0,'ServicoHidden')">
 																				<span class="glyphicon glyphicon-trash"></span>
 																			</button>
 																		</div>
@@ -414,6 +418,8 @@
 														</div>
 
 														<?php
+														$QtdSomaDev+=$servico[$i]['QtdVendaServico'];
+														$ServicoSoma++;
 														}
 														?>
 
@@ -428,6 +434,12 @@
 																			<a class="btn btn-md btn-danger" onclick="adicionaServico()">
 																				<span class="glyphicon glyphicon-minus"></span> Revomer Produto Devolvido
 																			</a>
+																		</div>
+																		<div class="col-md-2">	
+																			<b>Total de Produtos: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
+																		</div>
+																		<div class="col-md-2">	
+																			<b>Total de Peças Devol.: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
 																		</div>
 																	</div>
 																</div>

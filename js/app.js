@@ -1447,8 +1447,9 @@ function adicionaServico() {
 						</div>\
 						<div class="col-md-1">\
                             <label><br></label><br>\
-                            <a href="#" id="'+ps+'" class="remove_field btn btn-danger">\
-                                <span class="glyphicon glyphicon-trash"></span>\
+							<a href="#" id="'+ps+'" class="remove_field btn btn-danger"\
+                                onclick="calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax\',0,\'ServicoHidden\')">\
+								<span class="glyphicon glyphicon-trash"></span>\
                             </a>\
                         </div>\
                     </div>\
