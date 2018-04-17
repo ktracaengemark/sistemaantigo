@@ -1579,44 +1579,37 @@ function adicionaServicoCompra() {
     ); //add input box
 
     //get a reference to the select element
-    $select = $('#listadinamica'+ps);
+	$select = $('#listadinamica'+ps);
 
-    //request the JSON data and parse into the select element
-    $.ajax({
-        url: window.location.origin+ '/' + app + '/GetvaluesCompra_json.php?q=1',
-        dataType: 'JSON',
-        type: "GET",
-        success: function (data) {
-            //clear the current content of the select
-            $select.html('');
-            //iterate over the data and append a select option
-            $select.append('<option value="">-- Selecione uma opção --</option>');
-            $.each(data, function (key, val) {
-                //alert(val.id);
-                $select.append('<option value="' + val.id + '">' + val.name + '</option>');
-            })
-        },
-        error: function () {
-            //alert('erro listadinamicaA');
-            //if there is an error append a 'none available' option
-            $select.html('<option id="-1">ERRO</option>');
-        }
+	//request the JSON data and parse into the select element
+	$.ajax({
+		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=2',
+		dataType: 'JSON',
+		type: "GET",
+		success: function (data) {
+			//clear the current content of the select
+			$select.html('');
+			//iterate over the data and append a select option
+			$select.append('<option value="">-- Selecione uma opção --</option>');
+			$.each(data, function (key, val) {
+				//alert(val.id);
+				$select.append('<option value="' + val.id + '">' + val.name + '</option>');
+			})
+			$('.Chosen').chosen({
+				disable_search_threshold: 10,
+				multiple_text: "Selecione uma ou mais opções",
+				single_text: "Selecione uma opção",
+				no_results_text: "Nenhum resultado para",
+				width: "100%"
+			});
+		},
+		error: function () {
+			//alert('erro listadinamicaB');
+			//if there is an error append a 'none available' option
+			$select.html('<option id="-1">ERRO</option>');
+		}
 
-    });
-
-    //permite o uso de radio buttons nesse bloco dinâmico
-    $('input:radio[id="radiogeraldinamico"]').change(function() {
-
-        var value = $(this).val();
-        var name = $(this).attr("name");
-
-        //console.log(value + ' <<>> ' + name);
-
-        $('label[name="radio_' + name + '"]').removeClass();
-        $('label[name="radio_' + name + '"]').addClass("btn btn-default");
-        $('#radio_' + name + value).addClass("btn btn-warning active");
-
-    });
+	});
 }
 
 $("#first-choice").change(function () {

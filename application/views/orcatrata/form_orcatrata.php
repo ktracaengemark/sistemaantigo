@@ -316,7 +316,7 @@
 																			<label for="QtdVendaServico">Qtd:</label>
 																			<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico<?php echo $i ?>" placeholder="0"
 																					onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax',0,'ServicoHidden')"
-																					name="QtdVendaServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdVendaServico'] ?>">
+																					autofocus name="QtdVendaServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdVendaServico'] ?>">
 																		</div>
 																		<div class="col-md-7">
 																			<label for="idTab_Servico">Serviço:</label>
@@ -326,7 +326,7 @@
 																			</a>-->
 																			<?php } ?>
 																			<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor2Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
-																					id="lista" name="idTab_Servico<?php echo $i ?>">
+																					id="listadinamica<?php echo $i ?>" name="idTab_Servico<?php echo $i ?>">																					
 																				<option value="">-- Selecione uma opção --</option>
 																				<?php
 																				foreach ($select['Servico'] as $key => $row) {
@@ -431,8 +431,7 @@
 																	<div class="row">	
 																		<br>																
 																		<div class="col-md-3 text-left">
-																			<a class="btn btn-md btn-danger" onclick="adicionaServico()"
-																				onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax',1,0)">
+																			<a class="btn btn-md btn-danger" onclick="adicionaServico()">
 																				<span class="glyphicon glyphicon-minus"></span> Revomer Produto Devolvido
 																			</a>
 																		</div>
