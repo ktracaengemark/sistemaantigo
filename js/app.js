@@ -1406,7 +1406,7 @@ function adicionaServico() {
                         </div>\
 						<div class="col-md-7">\
                             <label for="idTab_Servico">Serviços:</label><br>\
-                            <select class="form-control" id="listadinamica'+ps+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+ps+',\'Produto\')" name="idTab_Servico'+ps+'">\
+                            <select class="form-control" id="listadinamica'+ps+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+ps+',\'Servico\')" name="idTab_Servico'+ps+'">\
                                 <option value="">-- Selecione uma opção --</option>\
                             </select>\
                         </div>\

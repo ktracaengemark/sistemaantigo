@@ -325,7 +325,7 @@
 																				<span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
 																			</a>-->
 																			<?php } ?>
-																			<select data-placeholder="Selecione uma opção..." class="form-control" onchange="buscaValor2Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
+																			<select data-placeholder="Selecione uma opção..." class="form-control" onchange="buscaValor2Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Servico')" <?php echo $readonly; ?>
 																					id="lista" name="idTab_Servico<?php echo $i ?>">
 																				<option value="">-- Selecione uma opção --</option>
 																				<?php
