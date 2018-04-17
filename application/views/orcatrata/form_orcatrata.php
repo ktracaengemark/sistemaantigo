@@ -316,7 +316,7 @@
 																			<label for="QtdVendaServico">Qtd:</label>
 																			<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico<?php echo $i ?>" placeholder="0"
 																					onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax',0,'ServicoHidden')"
-																					autofocus name="QtdVendaServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdVendaServico'] ?>">
+																					name="QtdVendaServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdVendaServico'] ?>">
 																		</div>
 																		<div class="col-md-7">
 																			<label for="idTab_Servico">Serviço:</label>
@@ -325,7 +325,7 @@
 																				<span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
 																			</a>-->
 																			<?php } ?>
-																			<select data-placeholder="Selecione uma opção..." class="form-control" onchange="buscaValor2Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Servico')" <?php echo $readonly; ?>
+																			<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor2Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
 																					id="lista" name="idTab_Servico<?php echo $i ?>">
 																				<option value="">-- Selecione uma opção --</option>
 																				<?php

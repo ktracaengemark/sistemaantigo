@@ -280,7 +280,7 @@ class Orcatrata extends CI_Controller {
                     $data['servico'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
                     $data['servico'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['servico'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
-					$data['produto'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['produto'][$j]['DataValidadeServico'], 'mysql');
+					$data['servico'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeServico'], 'mysql');
                     $data['servico'][$j]['ValorVendaServico'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorVendaServico']));
                     unset($data['servico'][$j]['SubtotalServico']);
                 }
