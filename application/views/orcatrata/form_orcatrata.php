@@ -441,7 +441,16 @@
 																					   name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
 																			</div>
 																		</div>
-
+																		<!--
+																		<div class="col-md-3">
+																			<label for="ValorDev">Devolução:</label><br>
+																			<div class="input-group" id="txtHint">
+																				<span class="input-group-addon" id="basic-addon1">R$</span>
+																				<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00"
+																					   name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
+																			</div>
+																		</div>
+																		-->
 																		<div class="col-md-3">
 																			<label for="ValorEntradaOrca">Desconto</label><br>
 																			<div class="input-group" id="txtHint">

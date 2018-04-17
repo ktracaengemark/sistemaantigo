@@ -1069,6 +1069,43 @@ function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
 
 }
 
+function buscaValorDevTabelas(id, campo, tabela, num, campo2) {
+
+    $.ajax({
+        // url para o arquivo json.php
+        url: window.location.origin + "/" + app + "/Valor_json.php?tabela=" + tabela + "&campo2=" + campo2,
+        // dataType json
+        dataType: "json",
+        // função para de sucesso
+        success: function (data) {
+
+            // executo este laço para acessar os itens do objeto javaScript
+            for (i = 0; i < data.length; i++) {
+
+                if (data[i].id == id) {
+
+                    //carrega o valor no campo de acordo com a opção selecionada
+                    $('#'+campo).val(data[i].valor);
+
+                    //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
+                    if ($("#QtdVenda"+campo2+num).val()) {
+                        calculaSubtotalDev($("#idTab_"+campo2+num).val(),$("#QtdVenda"+campo2+num).val(),num,'OUTRO',campo2);
+                        break;
+                    }
+
+                    //para cada valor carregado o orçamento é calculado/atualizado
+                    //através da chamada de sua função
+                    calculaDevolucao();
+                    break;
+                }
+
+            }//fim do laço
+
+        }
+    });//termina o ajax
+
+
+}
 
 function buscaValorCompra(id, campo, tabela, num) {
 
@@ -1184,6 +1221,36 @@ function calculaSubtotal(valor, campo, num, tipo, tabela) {
 
 }
 
+function calculaSubtotalDev(valor, campo, num, tipo, tabela) {
+
+    if (tipo == 'VP') {
+        //variável valor recebe o valor do produto selecionado
+        var data = $("#QtdVenda"+tabela+num).val();
+
+        //o subtotal é calculado como o produto da quantidade pelo seu valor
+        var subtotal = (valor.replace(".","").replace(",",".") * data);
+        //alert('>>>'+valor+' :: '+campo+' :: '+num+' :: '+tipo+'<<<');
+    } else if (tipo == 'QTD') {
+        //variável valor recebe o valor do produto selecionado
+        var data = $("#idTab_"+tabela+num).val();
+
+        //o subtotal é calculado como o produto da quantidade pelo seu valor
+        var subtotal = (valor * data.replace(".","").replace(",","."));
+    } else {
+        //o subtotal é calculado como o produto da quantidade pelo seu valor
+        var subtotal = (valor.replace(".","").replace(",",".") * campo.replace(".","").replace(",","."));
+    }
+
+    subtotal = mascaraValorReal(subtotal);
+    //o subtotal é escrito no seu campo no formulário
+    $('#Subtotal'+tabela+num).val(subtotal);
+
+    //para cada vez que o subtotal for calculado o orçamento e o total restante
+    //também serão atualizados
+    calculaDevolucao();
+
+}
+
 function calculaSubtotalCompra(valor, campo, num, tipo, tabela) {
 
     if (tipo == 'VP') {
@@ -1290,6 +1357,49 @@ function calculaOrcamento() {
     //escreve o subtotal no campo do formulário
     $('#ValorOrca').val(subtotal);
     calculaResta($("#ValorEntradaOrca").val());
+}
+
+function calculaDevolucao() {
+
+    //captura o número incrementador do formulário, que controla quantos campos
+    //foram acrescidos tanto para serviços quanto para produtos
+    var sc = parseFloat($('#SCount').val().replace(".","").replace(",","."));
+    var pc = parseFloat($('#PCount').val().replace(".","").replace(",","."));
+    //define o subtotal inicial em 0.00
+    var subtotal = 0.00;
+
+    //variável incrementadora
+    var i = 0;
+    //percorre todos os campos de serviço, somando seus valores
+    while (i <= sc) {
+
+        //soma os valores apenas dos campos que existirem, o que forem apagados
+        //ou removidos são ignorados
+        if ($('#SubtotalServico'+i).val())
+            //subtotal += parseFloat($('#idTab_Servico'+i).val().replace(".","").replace(",","."));
+            subtotal += parseFloat($('#SubtotalServico'+i).val().replace(".","").replace(",","."));
+
+        //incrementa a variável i
+        i++;
+    }
+
+    //faz o mesmo que o laço anterior mas agora para produtos
+    var i = 0;
+    while (i <= pc) {
+
+        if ($('#SubtotalProduto'+i).val())
+            subtotal += parseFloat($('#SubtotalProduto'+i).val().replace(".","").replace(",","."));
+
+        i++;
+    }
+
+    //calcula o subtotal, configurando para duas casas decimais e trocando o
+    //ponto para o vírgula como separador de casas decimais
+    subtotal = mascaraValorReal(subtotal);
+
+    //escreve o subtotal no campo do formulário
+    $('#ValorDev').val(subtotal);
+    //calculaResta($("#ValorEntradaOrca").val());
 }
 
 function calculaDespesas() {
