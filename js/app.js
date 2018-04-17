@@ -285,7 +285,8 @@ function calculaResta(entrada) {
 
     //recebe o valor do orçamento
     var orcamento = $("#ValorOrca").val();
-    var resta = (orcamento.replace(".","").replace(",",".") - entrada.replace(".","").replace(",","."));
+	var devolucao = $("#ValorDev").val();
+    var resta = (orcamento.replace(".","").replace(",",".") - devolucao.replace(".","").replace(",",".") - entrada.replace(".","").replace(",","."));
 
     resta = mascaraValorReal(resta);
 
@@ -1320,11 +1321,11 @@ function calculaOrcamento() {
 
     //captura o número incrementador do formulário, que controla quantos campos
     //foram acrescidos tanto para serviços quanto para produtos
-    var sc = parseFloat($('#SCount').val().replace(".","").replace(",","."));
+    //var sc = parseFloat($('#SCount').val().replace(".","").replace(",","."));
     var pc = parseFloat($('#PCount').val().replace(".","").replace(",","."));
     //define o subtotal inicial em 0.00
     var subtotal = 0.00;
-
+/*
     //variável incrementadora
     var i = 0;
     //percorre todos os campos de serviço, somando seus valores
@@ -1339,7 +1340,7 @@ function calculaOrcamento() {
         //incrementa a variável i
         i++;
     }
-
+*/
     //faz o mesmo que o laço anterior mas agora para produtos
     var i = 0;
     while (i <= pc) {
@@ -1364,7 +1365,7 @@ function calculaDevolucao() {
     //captura o número incrementador do formulário, que controla quantos campos
     //foram acrescidos tanto para serviços quanto para produtos
     var sc = parseFloat($('#SCount').val().replace(".","").replace(",","."));
-    var pc = parseFloat($('#PCount').val().replace(".","").replace(",","."));
+    //var pc = parseFloat($('#PCount').val().replace(".","").replace(",","."));
     //define o subtotal inicial em 0.00
     var subtotal = 0.00;
 
@@ -1382,7 +1383,7 @@ function calculaDevolucao() {
         //incrementa a variável i
         i++;
     }
-
+/*
     //faz o mesmo que o laço anterior mas agora para produtos
     var i = 0;
     while (i <= pc) {
@@ -1392,14 +1393,14 @@ function calculaDevolucao() {
 
         i++;
     }
-
+*/
     //calcula o subtotal, configurando para duas casas decimais e trocando o
     //ponto para o vírgula como separador de casas decimais
     subtotal = mascaraValorReal(subtotal);
 
     //escreve o subtotal no campo do formulário
     $('#ValorDev').val(subtotal);
-    //calculaResta($("#ValorEntradaOrca").val());
+    calculaResta($("#ValorEntradaOrca").val());
 }
 
 function calculaDespesas() {
@@ -1516,7 +1517,7 @@ function adicionaServico() {
                         </div>\
 						<div class="col-md-7">\
                             <label for="idTab_Servico">Serviços:</label><br>\
-                            <select class="form-control Chosen" id="listadinamica'+ps+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+ps+',\'Produto\')" name="idTab_Servico'+ps+'">\
+                            <select class="form-control Chosen" id="listadinamica'+ps+'" onchange="buscaValorDevTabelas(this.value,this.name,\'Valor\','+ps+',\'Produto\')" name="idTab_Servico'+ps+'">\
                                 <option value="">-- Selecione uma opção --</option>\
                             </select>\
                         </div>\
@@ -1846,7 +1847,7 @@ $(document).ready(function () {
 								<label for="QtdVendaServico">Qtd:</label><br>\
 								<div class="input-group">\
 									<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico'+ps+'" placeholder="0"\
-										onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
+										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
 										name="QtdVendaServico'+ps+'" value="">\
 								</div>\
 							</div>\
@@ -1861,7 +1862,7 @@ $(document).ready(function () {
 								<div class="input-group" id="txtHint">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
-										onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'VP\',\'Servico\')"\
+										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'VP\',\'Servico\')"\
 										name="ValorVendaServico'+ps+'" value="">\
 								</div>\
 							</div>\
