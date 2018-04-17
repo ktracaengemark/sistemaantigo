@@ -292,7 +292,7 @@
 														<input type="hidden" name="CountMax" id="CountMax" value="<?php echo $ProdutoSoma ?>">
 														
 														<hr>
-														
+																												
 														<input type="hidden" name="SCount" id="SCount" value="<?php echo $count['SCount']; ?>"/>
 
 														<div class="input_fields_wrap">
@@ -315,7 +315,7 @@
 																		<div class="col-md-1">
 																			<label for="QtdVendaServico">Qtd:</label>
 																			<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico<?php echo $i ?>" placeholder="0"
-																					onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax',0,'ServicoHidden')"
+																					onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
 																					autofocus name="QtdVendaServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdVendaServico'] ?>">
 																		</div>
 																		<div class="col-md-7">
@@ -408,7 +408,7 @@
 																		<div class="col-md-1">
 																			<label><br></label><br>
 																			<button type="button" id="<?php echo $i ?>" class="remove_field btn btn-danger"
-																				onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',1,<?php echo $i ?>,'CountMax',0,'ServicoHidden')">
+																				onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',1,<?php echo $i ?>,'CountMax2',0,'ServicoHidden')">
 																				<span class="glyphicon glyphicon-trash"></span>
 																			</button>
 																		</div>
@@ -431,7 +431,8 @@
 																	<div class="row">	
 																		<br>																
 																		<div class="col-md-3 text-left">
-																			<a class="btn btn-md btn-danger" onclick="adicionaServico()">
+																			<a class="btn btn-md btn-danger" onclick="adicionaServico()"
+																				onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
 																				<span class="glyphicon glyphicon-minus"></span> Revomer Produto Devolvido
 																			</a>
 																		</div>
@@ -445,7 +446,7 @@
 																</div>
 															</div>
 														</div>
-														
+														<input type="hidden" name="CountMax2" id="CountMax2" value="<?php echo $ServicoSoma ?>">
 													</div>													
 												</div>
 											</div>

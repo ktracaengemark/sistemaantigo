@@ -1400,7 +1400,7 @@ function adicionaServico() {
                             <label for="QtdVendaServico">Qtd:</label><br>\
                             <div class="input-group">\
                                 <input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico'+ps+'" placeholder="0"\
-                                    onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax\',0,\'ServicoHidden\')"\
+                                    onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
                                     name="QtdVendaServico'+ps+'" value="">\
                             </div>\
                         </div>\
@@ -1448,7 +1448,7 @@ function adicionaServico() {
 						<div class="col-md-1">\
                             <label><br></label><br>\
 							<a href="#" id="'+ps+'" class="remove_field btn btn-danger"\
-                                onclick="calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax\',0,\'ServicoHidden\')">\
+                                onclick="calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
 								<span class="glyphicon glyphicon-trash"></span>\
                             </a>\
                         </div>\
