@@ -1267,7 +1267,7 @@ function calculaOrcamento() {
         //ou removidos são ignorados
         if ($('#SubtotalServico'+i).val())
             //subtotal += parseFloat($('#idTab_Servico'+i).val().replace(".","").replace(",","."));
-            subtotal += parseFloat($('#SubtotalServico'+i).val().replace(".","").replace(",","."));
+            subtotal -= parseFloat($('#SubtotalServico'+i).val().replace(".","").replace(",","."));
 
         //incrementa a variável i
         i++;
