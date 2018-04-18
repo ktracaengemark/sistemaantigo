@@ -136,19 +136,21 @@
 				</table>
 				
 				<hr />
-				<h3 class="text-center">Orçamento & Forma de Pagam.</h3>
+				<h3 class="text-center">Orçamento, Devolução & Forma de Pagam.</h3>
 
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<th class="col-md-4" scope="col">Orçamento</th>
-							<th class="col-md-4" scope="col">Desconto</th>
-							<th class="col-md-4" scope="col">Resta Pagar</th>
+							<th class="col-md-3" scope="col">Orçamento</th>
+							<th class="col-md-3" scope="col">Devolução</th>
+							<th class="col-md-3" scope="col">Desconto</th>
+							<th class="col-md-3" scope="col">Resta Pagar</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td><?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
+							<td><?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
 							<td><?php echo number_format($orcatrata['ValorEntradaOrca'], 2, ',', '.') ?></td>
 							<td><?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
 						</tr>
