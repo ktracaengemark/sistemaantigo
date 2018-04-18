@@ -2325,7 +2325,7 @@ $(document).ready(function () {
     $(".input_fields_wrap").on("click",".remove_field", function(e){ //user click on remove text
         $("#1div"+$(this).attr("id")).remove();
         //após remover o campo refaz o cálculo do orçamento e total restante
-        calculaOrcamento();
+        calculaDevolucao();
     })
 
     //Remove os campos adicionados dinamicamente
