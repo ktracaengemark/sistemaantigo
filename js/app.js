@@ -1852,14 +1852,14 @@ $(document).ready(function () {
 								</div>\
 							</div>\
 							<div class="col-md-7">\
-								<label for="idTab_Servico">Serviços:</label><br>\
+								<label for="idTab_Servico">Produto:</label><br>\
 								<select class="form-control Chosen" id="listadinamica'+ps+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+ps+',\'Produto\')" name="idTab_Servico'+ps+'">\
 									<option value="">-- Selecione uma opção --</option>\
 								</select>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="ValorVendaServico">Valor do Serviço:</label><br>\
-								<div class="input-group" id="txtHint">\
+								<label for="ValorVendaServico">Valor do Produto:</label><br>\
+								<div class="input-group">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
 										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'VP\',\'Servico\')"\
@@ -1883,7 +1883,7 @@ $(document).ready(function () {
 									   name="ObsServico'+ps+'" value="">\
 							</div>\
 							<div class="col-md-2">\
-								<label for="DataValidadeServico'+ps+'">Val. do Servico:</label>\
+								<label for="DataValidadeServico'+ps+'">Valid. do Prod:</label>\
 								<div class="input-group DatePicker">\
 									<span class="input-group-addon" disabled>\
 										<span class="glyphicon glyphicon-calendar"></span>\

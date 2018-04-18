@@ -240,14 +240,14 @@
 																		<div class="col-md-3">	
 																			<a class="add_field_button2 btn btn-primary"
 																					onclick="calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
-																				<span class="glyphicon glyphicon-plus"></span> Adic. Produtos ou Serviços
+																				<span class="glyphicon glyphicon-plus"></span> Adic. Produtos Entregues
 																			</a>
 																		</div>
 																		<div class="col-md-2">	
-																			<b>Total de Produtos: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
+																			<b>Linhas = <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
 																		</div>
 																		<div class="col-md-2">	
-																			<b>Total de Peças Entr.: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
+																			<b>Produtos Entregues = <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
 																		</div>
 																	</div>
 																</div>	
@@ -284,7 +284,7 @@
 																					autofocus name="QtdVendaServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdVendaServico'] ?>">
 																		</div>
 																		<div class="col-md-7">
-																			<label for="idTab_Servico">Serviço:</label>
+																			<label for="idTab_Servico">Produto:</label>
 																			<?php if ($i == 1) { ?>
 																			<!--<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>servico/cadastrar/servico" role="button">
 																				<span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
@@ -305,14 +305,13 @@
 																			</select>
 																		</div>
 																		<div class="col-md-2">
-																			<label for="ValorVendaServico">Valor do Serviço:</label>
-																			<div class="input-group" id="txtHint">
+																			<label for="ValorVendaServico">Valor do Produto:</label>
+																			<div class="input-group">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
 																				<input type="text" class="form-control Valor" id="idTab_Servico<?php echo $i ?>" maxlength="10" placeholder="0,00"
 																					onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','VP','Servico')"
 																					name="ValorVendaServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorVendaServico'] ?>">
 																			</div>
-
 																		</div>
 																		<div class="col-md-2">
 																			<label for="SubtotalServico">Subtotal:</label>
@@ -331,7 +330,7 @@
 																				   name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
 																		</div>
 																		<div class="col-md-2">
-																			<label for="DataValidadeServico<?php echo $i ?>">Val. do Produto:</label>
+																			<label for="DataValidadeServico<?php echo $i ?>">Valid. do Prod.:</label>
 																			<div class="input-group <?php echo $datepicker; ?>">
 																				<span class="input-group-addon" disabled>
 																					<span class="glyphicon glyphicon-calendar"></span>
@@ -398,14 +397,14 @@
 																		<div class="col-md-3 text-left">
 																			<a class="add_field_button  btn btn-danger" 
 																					onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
-																				<span class="glyphicon glyphicon-minus"></span> Revomer Produto Devolvido
+																				<span class="glyphicon glyphicon-minus"></span> Adc. Produtos Devolvidos
 																			</a>
 																		</div>
 																		<div class="col-md-2">	
-																			<b>Total de Produtos: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
+																			<b>Linhas = <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
 																		</div>
 																		<div class="col-md-2">	
-																			<b>Total de Peças Devol.: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
+																			<b>Produtos Devolvidos = <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
 																		</div>
 																	</div>
 																</div>
