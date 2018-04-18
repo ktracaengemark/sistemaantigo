@@ -2006,7 +2006,7 @@ exit();*/
             return $query;
         }
     }
-
+	
 	public function list_produtosdevol1($data, $completo) {
 
         if ($data['DataFim']) {

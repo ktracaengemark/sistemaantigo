@@ -197,7 +197,7 @@ class Orcatrata extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
 
-        if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorDev']|| $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
+        if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorDev'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
             $data['orcamentoin'] = 'in';
         else
             $data['orcamentoin'] = '';

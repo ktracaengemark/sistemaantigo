@@ -1004,7 +1004,6 @@ class Relatorio extends CI_Controller {
 
 }
 
-	
     public function estoque2() {
 
         if ($this->input->get('m') == 1)
@@ -1257,7 +1256,7 @@ class Relatorio extends CI_Controller {
         $this->load->view('basico/footer');
 
     }
-
+	
 	public function produtosdevol1() {
 
         if ($this->input->get('m') == 1)
