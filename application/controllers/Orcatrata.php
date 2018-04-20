@@ -79,6 +79,7 @@ class Orcatrata extends CI_Controller {
             'QtdParcelasOrca',
             'DataVencimentoOrca',
             'ObsOrca',
+			'Modalidade',
 			'TipoRD',
         ), TRUE));
 

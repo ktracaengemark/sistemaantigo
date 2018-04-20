@@ -480,19 +480,21 @@
 																			<div class="input-group" id="txtHint">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
 																				<input type="text" class="form-control Valor" id="ValorOrca" maxlength="10" placeholder="0,00"
+																					   onkeyup="calculaResta(this.value)"
 																					   name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
 																			</div>
 																		</div>
 																		
 																		<div class="col-md-3">
-																			<label for="ValorDev">Devolução:</label><br>
+																			<label for="ValorDev">Devolução/ Desconto:</label><br>
 																			<div class="input-group" id="txtHint">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
 																				<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00"
+																					   onkeyup="calculaResta(this.value)"
 																					   name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
 																			</div>
 																		</div>
-
+																		<!--
 																		<div class="col-md-3">
 																			<label for="ValorEntradaOrca">Desconto</label><br>
 																			<div class="input-group" id="txtHint">
@@ -502,7 +504,7 @@
 																					name="ValorEntradaOrca" value="<?php echo $orcatrata['ValorEntradaOrca'] ?>">
 																			</div>
 																		</div>
-
+																		-->
 																		<div class="col-md-3">
 																			<label for="ValorRestanteOrca">Resta Pagar:</label><br>
 																			<div class="input-group" id="txtHint">
@@ -543,8 +545,7 @@
 																				<?php
 																				$options = array(
 																			        ''	=> '-- Selecione uma opção --',
-																			        'A'	=> 'À VISTA',
-																					'P'	=> 'À PRAZO/ PARC.',
+																					'P'	=> 'PARCELADO',
 																			        'M'	=> 'MENSALIDADE',
 																				);
 																				$cfg = 'data-placeholder="Selecione uma opção..." class="form-control" ' . $readonly . '
