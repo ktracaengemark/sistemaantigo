@@ -63,7 +63,7 @@ class Orcatrataprint_model extends CI_Model {
         return $query;
     }
 
-	    public function get_servico($data) {
+	public function get_servico($data) {
 		$query = $this->db->query(
             'SELECT
             	PV.QtdVendaServico,

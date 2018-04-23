@@ -22,22 +22,22 @@
 					<thead>
 						<tr>
 							<!--<th scope="col">Nº</th>-->
-							<th scope="col">Qtd</th>																				
+							<th class="col-md-1" scope="col">Qtd</th>																				
 							<!--<th scope="col">CodProd.</th>
 							<th scope="col">CategProd.</th>-->												
-							<th scope="col">DescProd.</th>							
-							<th scope="col">Valor</th>
-							<th scope="col">Subtotal</th>
+							<th class="col-md-9" scope="col">DescProd.</th>							
+							<th class="col-md-1" scope="col">Valor</th>
+							<th class="col-md-1" scope="col">Subtotal</th>
 						</tr>	
 						<tr>
-							<th scope="col"></th>
-							<th scope="col">id</th>	
+							<th class="col-md-1" scope="col"></th>
+							<th class="col-md-9" scope="col">id</th>	
 							<!--<th scope="col">Unidade</th>																				
 							<th scope="col">Aux1</th>
 							<th scope="col">Aux2</th>-->
 							<!--<th scope="col">Tipo Venda</th>
 							<th scope="col">Desc Venda</th>-->
-							<th scope="col">Data</th>							
+							<th class="col-md-1" scope="col">Data</th>							
 						</tr>
 					</thead>
 
@@ -82,22 +82,22 @@
 					<thead>
 						<tr>
 							<!--<th scope="col">Nº</th>-->
-							<th scope="col">Qtd</th>																				
+							<th class="col-md-1" scope="col">Qtd</th>																				
 							<!--<th scope="col">CodProd.</th>
 							<th scope="col">CategProd.</th>-->												
-							<th scope="col">DescProd.</th>							
-							<th scope="col">Valor</th>
-							<th scope="col">Subtotal</th>
+							<th class="col-md-9" scope="col">DescProd.</th>							
+							<th class="col-md-1" scope="col">Valor</th>
+							<th class="col-md-1" scope="col">Subtotal</th>
 						</tr>	
 						<tr>
-							<th scope="col"></th>
-							<th scope="col">id</th>	
+							<th class="col-md-1" scope="col"></th>
+							<th class="col-md-9" scope="col">id</th>	
 							<!--<th scope="col">Unidade</th>																				
 							<th scope="col">Aux1</th>
 							<th scope="col">Aux2</th>-->
 							<!--<th scope="col">Tipo Venda</th>
 							<th scope="col">Desc Venda</th>-->
-							<th scope="col">Data</th>							
+							<th class="col-md-1" scope="col">Data</th>							
 						</tr>
 					</thead>
 
@@ -141,17 +141,17 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<th class="col-md-3" scope="col">Orçamento</th>
-							<th class="col-md-3" scope="col">Devolução</th>
-							<th class="col-md-3" scope="col">Desconto</th>
-							<th class="col-md-3" scope="col">Resta Pagar</th>
+							<th class="col-md-4" scope="col">Orçamento</th>
+							<th class="col-md-4" scope="col">Devolução</th>
+							<!--<th class="col-md-3" scope="col">Desconto</th>-->
+							<th class="col-md-4" scope="col">Resta Pagar</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td><?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
 							<td><?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
-							<td><?php echo number_format($orcatrata['ValorEntradaOrca'], 2, ',', '.') ?></td>
+							<!--<td><?php echo number_format($orcatrata['ValorEntradaOrca'], 2, ',', '.') ?></td>-->
 							<td><?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
 						</tr>
 					</tbody>
@@ -180,12 +180,12 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<th scope="col">Parcela</th>
-							<th scope="col">Valor Parcela</th>
-							<th scope="col">Data Venc. Parc</th>
-							<th scope="col">Valor Pago</th>
-							<th scope="col">Data Pag</th>
-							<th scope="col">Quitado?</th>
+							<th class="col-md-2" scope="col">Parcela</th>
+							<th class="col-md-2" scope="col">Valor Parcela</th>
+							<th class="col-md-2" scope="col">Data Venc. Parc</th>
+							<th class="col-md-2" scope="col">Valor Pago</th>
+							<th class="col-md-2" scope="col">Data Pag</th>
+							<th class="col-md-2" scope="col">Quitado?</th>
 						</tr>
 					</thead>
 
