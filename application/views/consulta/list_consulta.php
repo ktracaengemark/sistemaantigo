@@ -43,8 +43,8 @@
 													<span class="glyphicon glyphicon-calendar"></span> List.
 												</a>
 											</a>
-											<a <?php if (preg_match("/consulta\/(cadastrar|alterar)\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'consulta/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+											<a <?php if (preg_match("/consulta\/(cadastrar1|alterar)\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
+												<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'consulta/cadastrar1/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 													<span class="glyphicon glyphicon-plus"></span> Cad.
 												</a>
 											</a>

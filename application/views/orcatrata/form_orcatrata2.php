@@ -429,7 +429,7 @@
 
 
 											<div class="form-group">
-												<div class="panel panel-info">
+												<div class="panel panel-warning">
 													<div class="panel-heading">
 														<div class="row">
 															<div class="col-md-2">

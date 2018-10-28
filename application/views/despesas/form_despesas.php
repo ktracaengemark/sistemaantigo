@@ -492,7 +492,7 @@
 											<input type="hidden" name="idApp_ParcelasPagaveis<?php echo $i ?>" value="<?php echo $parcelaspag[$i]['idApp_ParcelasPagaveis']; ?>"/>
 											<?php } ?>
 											<div class="form-group">
-												<div class="panel panel-danger">
+												<div class="panel panel-warning">
 													<div class="panel-heading">
 														<div class="row">
 															<div class="col-md-2">

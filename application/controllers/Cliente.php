@@ -74,6 +74,7 @@ class Cliente extends CI_Controller {
 
             'RegistroFicha',
 			'Associado',
+			'idApp_Profissional',
         ), TRUE));
 
        
@@ -86,12 +87,15 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-		
+		$this->form_validation->set_rules('idApp_Profissional', 'Profissional', 'required|trim');
 		
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Associado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['idApp_Profissional'] = $this->Basico_model->select_profissional2();
+		
+		$data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 		
         $data['titulo'] = 'Cadastrar Cliente';
         $data['form_open_path'] = 'cliente/cadastrar';

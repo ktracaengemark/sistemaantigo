@@ -58,27 +58,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-md-4">
-												<label for="idApp_Profissional">Profissional:*</label>
-												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
-														id="idApp_Profissional" name="idApp_Profissional">
-													<!--<option value="">-- Selecione um Profissional --</option>-->
-													<?php echo $select['option']; ?>
-													<?php
-													foreach ($select['idApp_Profissional'] as $key => $row) {
-														if ($query['idApp_Profissional'] == $key) {
-															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-														} else {
-															echo '<option value="' . $key . '">' . $row . '</option>';
-														}
-													}
-													?>
-												</select>
-											</div>
-										</div>
-									</div>
+									
 									<!--
 									<div class="col-md-2">
 										<label for="Associado">Associado?</label><br>
