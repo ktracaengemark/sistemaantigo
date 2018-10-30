@@ -455,6 +455,29 @@ class Basico_model extends CI_Model {
         }
     }
 	
+	public function get_profissional($data) {
+
+        if (isset($data) && $data) {
+
+			$query = $this->db->query('
+				SELECT *
+					FROM
+						Sis_Usuario
+					WHERE
+						idSis_Usuario = "' . $data . '"
+				');
+
+            if ($query->num_rows() === 0) {
+                return '';
+            } else {
+                $query = $query->result_array();
+                return $query[0]['Nome'];
+            }
+        } else {
+            return '';
+        }
+    }	
+	
 	public function select_cliente($data = FALSE) {
 
         if ($data === TRUE) {

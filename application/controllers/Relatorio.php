@@ -2359,6 +2359,8 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+		
+		$data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 
         $data['titulo'] = 'Relatório de Clientes';
 

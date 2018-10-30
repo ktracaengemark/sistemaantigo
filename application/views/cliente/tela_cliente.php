@@ -118,7 +118,7 @@
 												
 											echo ' 
 											<tr>
-												<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-user"></span> Empresa:</td>
+												<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-home"></span> Empresa:</td>
 												<td>' . $query['Empresa'] . '</td>
 											</tr>  
 											';
@@ -234,6 +234,17 @@
 											<tr>
 												<td><span class="glyphicon glyphicon-file"></span> Obs:</td>
 												<td>' . nl2br($query['Obs']) . '</td>
+											</tr>
+											';
+											
+											}
+											
+											if ($query['Profissional']) {
+												
+											echo '                                                 
+											<tr>
+												<td><span class="glyphicon glyphicon-user"></span> Profissional:</td>
+												<td>' . $query['Profissional'] . '</td>
 											</tr>
 											';
 											

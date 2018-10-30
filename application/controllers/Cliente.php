@@ -74,7 +74,7 @@ class Cliente extends CI_Controller {
 
             'RegistroFicha',
 			'Associado',
-			'idApp_Profissional',
+			'Profissional',
         ), TRUE));
 
        
@@ -87,13 +87,13 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-		$this->form_validation->set_rules('idApp_Profissional', 'Profissional', 'required|trim');
+		$this->form_validation->set_rules('Profissional', 'Profissional', 'required|trim');
 		
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Associado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
-		$data['select']['idApp_Profissional'] = $this->Basico_model->select_profissional2();
+		$data['select']['Profissional'] = $this->Basico_model->select_profissional2();
 		
 		$data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 		
@@ -189,6 +189,7 @@ class Cliente extends CI_Controller {
             'Email',
             'RegistroFicha',
 			'Associado',
+			'Profissional',
         ), TRUE);
 
         if ($id) {
@@ -204,11 +205,15 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-
+		$this->form_validation->set_rules('Profissional', 'Profissional', 'required|trim');
+		
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Associado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['Profissional'] = $this->Basico_model->select_profissional2();
+		
+		$data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 		
         $data['titulo'] = 'Editar Dados';
         $data['form_open_path'] = 'cliente/alterar';
@@ -232,7 +237,7 @@ class Cliente extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('cliente/form_cliente', $data);
+            $this->load->view('cliente/form_cliente2', $data);
         } else {
 
             $data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
@@ -249,7 +254,7 @@ class Cliente extends CI_Controller {
 
             if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
                 $data['msg'] = '?m=2';
-                redirect(base_url() . 'cliente/form_cliente/' . $data['query']['idApp_Cliente'] . $data['msg']);
+                redirect(base_url() . 'cliente/form_cliente2/' . $data['query']['idApp_Cliente'] . $data['msg']);
                 exit();
             } else {
 
@@ -433,6 +438,7 @@ class Cliente extends CI_Controller {
         $data['query']['Sexo'] = $this->Basico_model->get_sexo($data['query']['Sexo']);
 		$data['query']['Ativo'] = $this->Basico_model->get_ativo($data['query']['Ativo']);
 		$data['query']['Empresa'] = $this->Basico_model->get_empresa($data['query']['Empresa']);
+		$data['query']['Profissional'] = $this->Basico_model->get_profissional($data['query']['Profissional']);
 		
         $data['query']['Telefone'] = $data['query']['Telefone1'];
         ($data['query']['Telefone2']) ? $data['query']['Telefone'] = $data['query']['Telefone'] . ' - ' . $data['query']['Telefone2'] : FALSE;

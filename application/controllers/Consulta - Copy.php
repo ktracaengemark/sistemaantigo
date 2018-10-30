@@ -52,8 +52,7 @@ class Consulta extends CI_Controller {
             'idApp_Agenda',
             'idApp_Cliente',
 			'idSis_EmpresaFilial',
-            'Data2',
-			'Data',
+            'Data',
             'HoraInicio',
             'HoraFim',
             'Paciente',
@@ -89,8 +88,7 @@ class Consulta extends CI_Controller {
 		*/
 		if ($this->input->get('start') && $this->input->get('end')) {
             $data['query']['Data'] = date('d/m/Y', substr($this->input->get('start'), 0, -3));
-            $data['query']['Data2'] = date('d/m/Y', substr($this->input->get('end'), 0, -3));
-			$data['query']['HoraInicio'] = date('H:i', substr($this->input->get('start'), 0, -3));
+            $data['query']['HoraInicio'] = date('H:i', substr($this->input->get('start'), 0, -3));
             $data['query']['HoraFim'] = date('H:i', substr($this->input->get('end'), 0, -3));
         }
 		
@@ -107,8 +105,7 @@ class Consulta extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
-        $this->form_validation->set_rules('Data2', 'Data do Fim', 'required|trim|valid_date');
-		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
+        $this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
         $this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
         #$this->form_validation->set_rules('idTab_TipoConsulta', 'Tipo de Consulta', 'required|trim');
         $this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
@@ -168,8 +165,7 @@ class Consulta extends CI_Controller {
 
 			$data['query']['Tipo'] = 2;
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
-            #$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
-            $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
+            $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
             //$data['query']['idTab_Status'] = 1;
             $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
 			$data['query']['Empresa'] = $_SESSION['log']['Empresa'];
@@ -177,9 +173,8 @@ class Consulta extends CI_Controller {
 
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
 
-            #unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
-			unset($data['query']['Data'], $data['query']['Data2'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
-			
+            unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
+
             $data['campos'] = array_keys($data['query']);
             $data['anterior'] = array();
 
@@ -222,8 +217,7 @@ class Consulta extends CI_Controller {
             'idApp_Agenda',
             'idApp_Cliente',
             'Data',
-            'Data2',
-			'HoraInicio',
+            'HoraInicio',
             'HoraFim',
             'Paciente',
 			'idTab_Status',
@@ -246,8 +240,7 @@ class Consulta extends CI_Controller {
 
         if (isset($_SESSION['agenda']) && !$data['query']['HoraInicio'] && !$data['query']['HoraFim']) {
             $data['query']['Data'] = date('d/m/Y', $_SESSION['agenda']['HoraInicio']);
-            $data['query']['Data2'] = date('d/m/Y', substr($this->input->get('end'), 0, -3));
-			$data['query']['HoraInicio'] = date('H:i', $_SESSION['agenda']['HoraInicio']);
+            $data['query']['HoraInicio'] = date('H:i', $_SESSION['agenda']['HoraInicio']);
             $data['query']['HoraFim'] = date('H:i', $_SESSION['agenda']['HoraFim']);
         }
 
@@ -264,8 +257,7 @@ class Consulta extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
-        $this->form_validation->set_rules('Data2', 'Data do Fim', 'required|trim|valid_date');
-		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
+        $this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
         $this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
         #$this->form_validation->set_rules('idTab_TipoConsulta', 'Tipo de Consulta', 'required|trim');
         #$this->form_validation->set_rules('idApp_Profissional', 'Profissional', 'required|trim');
@@ -316,23 +308,21 @@ class Consulta extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('consulta/form_consulta2', $data);
+            $this->load->view('consulta/form_consulta3', $data);
         } else {
 
 			$data['query']['Tipo'] = 2;
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
-            #$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
-            $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
-			//$data['query']['idTab_Status'] = 1;
+            $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
+            //$data['query']['idTab_Status'] = 1;
             $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
 			$data['query']['Empresa'] = $_SESSION['log']['Empresa'];
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
 
-            #unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
-			unset($data['query']['Data'], $data['query']['Data2'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
-			
+            unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
+
             $data['campos'] = array_keys($data['query']);
             $data['anterior'] = array();
 
@@ -344,7 +334,7 @@ class Consulta extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('consulta/form_consulta2', $data);
+                $this->load->view('consulta/form_consulta3', $data);
             } else {
 
                 $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Consulta'], FALSE);
@@ -533,8 +523,7 @@ class Consulta extends CI_Controller {
             'idApp_Cliente',
 			#'idSis_EmpresaFilial',
             'Data',
-            'Data2',
-			'HoraInicio',
+            'HoraInicio',
             'HoraFim',
             'idTab_Status',
             'Paciente',
@@ -558,8 +547,7 @@ class Consulta extends CI_Controller {
             $datafim = explode(' ', $data['query']['DataFim']);
 
             $data['query']['Data'] = $this->basico->mascara_data($dataini[0], 'barras');
-            $data['query']['Data2'] = $this->basico->mascara_data($datafim[0], 'barras');
-			$data['query']['HoraInicio'] = substr($dataini[1], 0, 5);
+            $data['query']['HoraInicio'] = substr($dataini[1], 0, 5);
             $data['query']['HoraFim'] = substr($datafim[1], 0, 5);
         }
         else {
@@ -596,8 +584,7 @@ class Consulta extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
-        $this->form_validation->set_rules('Data2', 'Data Fim', 'required|trim|valid_date');
-		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
+        $this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
         $this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
         #$this->form_validation->set_rules('idTab_TipoConsulta', 'Tipo de Consulta', 'required|trim');
         #$this->form_validation->set_rules('idApp_Profissional', 'Profissional', 'required|trim');
@@ -645,15 +632,13 @@ class Consulta extends CI_Controller {
 
             $data['query']['Tipo'] = 2;
 			$data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
-            #$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
-			$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
+            $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
 			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
             //exit();
 
-            #unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
-			unset($data['query']['Data'], $data['query']['Data2'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
-			
+            unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
+
             $data['anterior'] = $this->Consulta_model->get_consulta($data['query']['idApp_Consulta']);
             $data['campos'] = array_keys($data['query']);
 
@@ -768,9 +753,8 @@ class Consulta extends CI_Controller {
 					'idApp_Cliente',
 					#'idSis_EmpresaFilial',
                     'Data',
-					'Data2',
-					'HoraInicio',
-					'HoraFim',
+                    'HoraInicio',
+                    'HoraFim',
                     'Evento',
                     'Obs',
 					'idApp_Profissional',
@@ -779,16 +763,14 @@ class Consulta extends CI_Controller {
 
         if ($this->input->get('start') && $this->input->get('end')) {
             $data['query']['Data'] = date('d/m/Y', substr($this->input->get('start'), 0, -3));
-            $data['query']['Data2'] = date('d/m/Y', substr($this->input->get('end'), 0, -3));
-			$data['query']['HoraInicio'] = date('H:i', substr($this->input->get('start'), 0, -3));
+            $data['query']['HoraInicio'] = date('H:i', substr($this->input->get('start'), 0, -3));
             $data['query']['HoraFim'] = date('H:i', substr($this->input->get('end'), 0, -3));
         }
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
-        $this->form_validation->set_rules('Data2', 'Data do Fim', 'required|trim|valid_date');
-		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
+        $this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
         $this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
 		#$this->form_validation->set_rules('idApp_Profissional', 'Profissional', 'required|trim');
 		$this->form_validation->set_rules('idApp_Agenda', 'Agenda do Profissional', 'required|trim');
@@ -820,18 +802,15 @@ class Consulta extends CI_Controller {
 
 			$data['query']['Tipo'] = 1;
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
-            #$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
-            $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
-			//$data['query']['idTab_Status'] = 1;
+            $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
             $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
 			$data['query']['Empresa'] = $_SESSION['log']['Empresa'];
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
 
-            #unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
-			unset($data['query']['Data'], $data['query']['Data2'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
-			
+            unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
+
             $data['campos'] = array_keys($data['query']);
             $data['anterior'] = array();
 
@@ -871,8 +850,7 @@ class Consulta extends CI_Controller {
 			'idApp_Consulta',
             'idApp_Agenda',
 			#'idSis_EmpresaFilial',
-            'Data2',
-			'Data',
+            'Data',
             'HoraInicio',
             'HoraFim',
             'Evento',
@@ -889,13 +867,8 @@ class Consulta extends CI_Controller {
             $datafim = explode(' ', $data['query']['DataFim']);
 
             $data['query']['Data'] = $this->basico->mascara_data($dataini[0], 'barras');
-            $data['query']['Data2'] = $this->basico->mascara_data($datafim[0], 'barras');
-			$data['query']['HoraInicio'] = substr($dataini[1], 0, 5);
+            $data['query']['HoraInicio'] = substr($dataini[1], 0, 5);
             $data['query']['HoraFim'] = substr($datafim[1], 0, 5);
-        }
-		else {
-            $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
-            $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
         }
 
         if ($data['query']['DataFim'] < date('Y-m-d H:i:s', time())) {
@@ -912,8 +885,7 @@ class Consulta extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
-        $this->form_validation->set_rules('Data2', 'Data Fim', 'required|trim|valid_date');
-		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
+        $this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
         $this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
 		#$this->form_validation->set_rules('idApp_Profissional', 'Profissional', 'required|trim');
 		$this->form_validation->set_rules('idApp_Agenda', 'Agenda do Profissional', 'required|trim');
@@ -938,14 +910,13 @@ class Consulta extends CI_Controller {
 
 			$data['query']['Tipo'] = 1;
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
-            $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
+            $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
 			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
             //exit();
 
-            #unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
-			unset($data['query']['Data'], $data['query']['Data2'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
-			
+            unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
+
             $data['anterior'] = $this->Consulta_model->get_consulta($data['query']['idApp_Consulta']);
             $data['campos'] = array_keys($data['query']);
 

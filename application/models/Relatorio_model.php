@@ -3181,7 +3181,9 @@ exit();*/
         $data['Campo'] = (!$data['Campo']) ? 'C.NomeCliente' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$filtro10 = ($data['Ativo'] != '#') ? 'C.Ativo = "' . $data['Ativo'] . '" AND ' : FALSE;
-        $query = $this->db->query('
+        $q = ($_SESSION['log']['Permissao'] > 2) ? ' C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		
+		$query = $this->db->query('
             SELECT
 				C.idApp_Cliente,
                 C.NomeCliente,
@@ -3201,9 +3203,11 @@ exit();*/
                     LEFT JOIN Tab_Municipio AS M ON C.Municipio = M.idTab_Municipio
 
             WHERE
-                C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				C.Empresa = ' . $_SESSION['log']['Empresa'] . '
+                ' . $q . '
+				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				C.Empresa = ' . $_SESSION['log']['Empresa'] . ' 
 				' . $data['NomeCliente'] . '
+
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');
