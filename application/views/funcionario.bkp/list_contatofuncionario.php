@@ -2,14 +2,14 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="btn-group" role="group">
-			<a class="btn btn-md btn-primary active">
+			<a class="btn btn-lg btn-primary active">
 				<span class="glyphicon glyphicon-sort-by-attributes"></span> <?php echo '<b>Total:</b> ' . $query->num_rows() ?>
 			</a>
 		</div>
 
 		<div class="btn-group" role="group">
-			<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>Contatofunc/cadastrar" role="button">
-				<span class="glyphicon glyphicon-plus"></span> Novo Contato
+			<a class="btn btn-lg btn-warning" href="<?php echo base_url() ?>Contatofunc/cadastrar" role="button">
+				<span class="glyphicon glyphicon-plus"></span> Cad.
 			</a>
 		</div>
 	</div>
@@ -46,7 +46,7 @@ foreach ($query->result_array() as $row) {
 
         <div class="bs-callout bs-callout-<?php echo $row['class']; ?>" id=callout-overview-not-both>
 
-            <a class="btn btn-<?php echo $row['class']; ?>" href="<?php echo base_url() . 'Contatofunc/alterar/' . $row['idApp_ContatoUsuario'] ?>" role="button">
+            <a class="btn btn-<?php echo $row['class']; ?>" href="<?php echo base_url() . 'Contatofunc/alterar/' . $row['idApp_ContatoFunc'] ?>" role="button">
                 <span class="glyphicon glyphicon-edit"></span> Editar Dados
             </a>
 
@@ -54,7 +54,7 @@ foreach ($query->result_array() as $row) {
 
             <h4>
                 <span class="<?php echo $row['icon']; ?>"></span>
-                <?php echo $row['NomeContatoUsuario'] . '</small></code>'; ?>
+                <?php echo $row['NomeContatoFunc'] . '</small></code>'; ?>
                 <?php echo $row['vida']; ?>
 
 			</h4>
@@ -81,8 +81,8 @@ foreach ($query->result_array() as $row) {
                 <?php } ?>
 			</p>
 			<p>
-				<?php if ($row['TelefoneContatoUsuario']) { ?>
-				<span class="glyphicon glyphicon-phone-alt"></span> <b>Telefone:</b> <?php echo $row['TelefoneContatoUsuario']; ?>
+				<?php if ($row['TelefoneContatoFunc']) { ?>
+				<span class="glyphicon glyphicon-phone-alt"></span> <b>Telefone:</b> <?php echo $row['TelefoneContatoFunc']; ?>
 				<?php } ?>
             </p>
 			<p>

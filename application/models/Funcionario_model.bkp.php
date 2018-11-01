@@ -29,28 +29,6 @@ class Funcionario_model extends CI_Model {
         }
     }
 
-    public function set_agenda($data) {
-        #unset($data['idSisgef_Fila']);
-        /*
-          echo $this->db->last_query();
-          echo '<br>';
-          echo "<pre>";
-          print_r($data);
-          echo "</pre>";
-          exit();
-         */
-        $query = $this->db->insert('App_Agenda', $data);
-
-        if ($this->db->affected_rows() === 0) {
-            return FALSE;
-        }
-        else {
-            #return TRUE;
-            return $this->db->insert_id();
-        }
-
-    }
-	
     public function get_funcionario($data) {
         $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE idSis_Usuario = ' . $data);
 
@@ -128,13 +106,13 @@ class Funcionario_model extends CI_Model {
 
         $query = $this->db->query('SELECT * '
                 . 'FROM Sis_Usuario WHERE '
-                #. 'Funcionario = ' . $_SESSION['log']['id'] . ' AND '
+                . 'Funcionario = ' . $_SESSION['log']['id'] . ' AND '
 				. 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND '
                 . '(Nome like "%' . $data . '%" OR '
                 #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
                 #. 'Nome like "%' . $data . '%" OR '
                 . 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
-                . 'Celular like "%' . $data . '%") '
+                . 'Celular like "%' . $data . '%" OR Telefone2 like "%' . $data . '%" OR Telefone3 like "%' . $data . '%") '
                 . 'ORDER BY Nome ASC ');
         /*
           echo $this->db->last_query();
@@ -162,9 +140,9 @@ class Funcionario_model extends CI_Model {
 
         $query = $this->db->query(
             'SELECT * '
-                . 'FROM App_ContatoUsuario WHERE '
+                . 'FROM App_ContatoFunc WHERE '
                 . 'idSis_Usuario = ' . $id . ' '
-            . 'ORDER BY NomeContatoUsuario ASC ');
+            . 'ORDER BY NomeContatoFunc ASC ');
         /*
           echo $this->db->last_query();
           echo "<pre>";

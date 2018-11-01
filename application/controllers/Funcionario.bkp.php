@@ -61,17 +61,7 @@ class Funcionario extends CI_Controller {
 			'Permissao',
 			'Funcao',
 			'Inativo',
-			'CpfUsuario',
-			'RgUsuario',
-			'OrgaoExpUsuario',
-			'EstadoEmUsuario',
-			'DataEmUsuario',
-			'EnderecoUsuario',
-			'BairroUsuario',
-			'MunicipioUsuario',
-			'EstadoUsuario',
-			'CepUsuario',
-			'CompAgenda',
+
         ), TRUE));
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -82,9 +72,8 @@ class Funcionario extends CI_Controller {
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
         $this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
-		$this->form_validation->set_rules('Permissao', 'Acesso Às Agendas', 'required|trim');
+		$this->form_validation->set_rules('Permissao', 'Nível', 'required|trim');
 		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
 
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
@@ -92,8 +81,7 @@ class Funcionario extends CI_Controller {
 		$data['select']['Inativo'] = $this->Basico_model->select_inativo();
 		$data['select']['Permissao'] = $this->Basico_model->select_permissao();
 		$data['select']['Funcao'] = $this->Funcao_model->select_funcao();
-		$data['select']['CompAgenda'] = $this->Basico_model->select_status_sn();
-		
+
         $data['titulo'] = 'Cadastrar Usuário';
         $data['form_open_path'] = 'funcionario/cadastrar';
         $data['readonly'] = '';
@@ -113,19 +101,12 @@ class Funcionario extends CI_Controller {
 
 
 			$data['query']['Empresa'] = $_SESSION['log']['id'];
-			$data['query']['QuemCad'] = $_SESSION['log']['id'];
-			$data['query']['idSis_Empresa'] = $_SESSION['log']['id'];
-			$data['query']['NomeEmpresa'] = $_SESSION['log']['NomeEmpresa'];
             $data['query']['Senha'] = md5($data['query']['Senha']);
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
-			$data['query']['DataEmUsuario'] = $this->basico->mascara_data($data['query']['DataEmUsuario'], 'mysql');
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['query']['Inativo'] = 0;
-			$data['query']['Nivel'] = 6;
-			$data['query']['Permissao'] = 3;
-			$data['query']['Funcao'] = 1;            
-			unset($data['query']['Confirma']);
+            unset($data['query']['Confirma']);
 
 
             $data['campos'] = array_keys($data['query']);
@@ -141,20 +122,9 @@ class Funcionario extends CI_Controller {
             } else {
 
                 $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idSis_Usuario'], FALSE);
-                $data['auditoria'] = $this->Basico_model->set_auditoriaempresa($data['auditoriaitem'], 'Sis_Usuario', 'CREATE', $data['auditoriaitem']);
+                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Usuario', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
-				$data['agenda'] = array(
-                    'NomeAgenda' => 'Padrão',
-					'Empresa' => $_SESSION['log']['id'],
-                    'idSis_Usuario' => $data['idSis_Usuario']
-                );
-                $data['campos'] = array_keys($data['agenda']);
-
-                $data['idApp_Agenda'] = $this->Funcionario_model->set_agenda($data['agenda']);
-                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['agenda'], $data['campos'], $data['idSis_Usuario']);
-                $data['auditoria'] = $this->Basico_model->set_auditoriaempresa($data['auditoriaitem'], 'App_Agenda', 'CREATE', $data['auditoriaitem'], $data['idSis_Usuario']);
-				
                 redirect(base_url() . 'funcionario/prontuario/' . $data['idSis_Usuario'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/funcionario/' .  $data['msg']);
                 exit();
@@ -185,23 +155,12 @@ class Funcionario extends CI_Controller {
 			'Permissao',
 			'Funcao',
 			'Inativo',
-			'CpfUsuario',
-			'RgUsuario',
-			'OrgaoExpUsuario',
-			'EstadoEmUsuario',
-			'DataEmUsuario',
-			'EnderecoUsuario',
-			'BairroUsuario',
-			'MunicipioUsuario',
-			'EstadoUsuario',
-			'CepUsuario',
-			'CompAgenda',
+
         ), TRUE);
 
         if ($id) {
             $data['query'] = $this->Funcionario_model->get_funcionario($id);
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
-			$data['query']['DataEmUsuario'] = $this->basico->mascara_data($data['query']['DataEmUsuario'], 'barras');
         }
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -209,8 +168,7 @@ class Funcionario extends CI_Controller {
         #$this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim|is_unique_duplo[Sis_Usuario.Nome.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
         $this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
-		$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+        $this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('Permissao', 'Nível', 'required|trim');
 		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
@@ -221,8 +179,7 @@ class Funcionario extends CI_Controller {
 		$data['select']['Inativo'] = $this->Basico_model->select_inativo();
 		$data['select']['Permissao'] = $this->Basico_model->select_permissao();
 		$data['select']['Funcao'] = $this->Funcao_model->select_funcao();
-		$data['select']['CompAgenda'] = $this->Basico_model->select_status_sn();
-		
+
         $data['titulo'] = 'Editar Usuário';
         $data['form_open_path'] = 'funcionario/alterar';
         $data['readonly'] = '';
@@ -239,12 +196,11 @@ class Funcionario extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('funcionario/form_funcionarioalterar', $data);
+            $this->load->view('funcionario/form_funcionario', $data);
         } else {
 
             $data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
-			$data['query']['DataEmUsuario'] = $this->basico->mascara_data($data['query']['DataEmUsuario'], 'mysql');
             #$data['query']['Obs'] = nl2br($data['query']['Obs']);
             #$data['query']['Funcionario'] = $_SESSION['log']['id'];
 
@@ -255,14 +211,14 @@ class Funcionario extends CI_Controller {
 
             if ($data['auditoriaitem'] && $this->Funcionario_model->update_funcionario($data['query'], $data['query']['idSis_Usuario']) === FALSE) {
                 $data['msg'] = '?m=2';
-                redirect(base_url() . 'funcionario/form_funcionarioalterar/' . $data['query']['idSis_Usuario'] . $data['msg']);
+                redirect(base_url() . 'funcionario/form_funcionario/' . $data['query']['idSis_Usuario'] . $data['msg']);
                 exit();
             } else {
 
                 if ($data['auditoriaitem'] === FALSE) {
                     $data['msg'] = '';
                 } else {
-                    $data['auditoria'] = $this->Basico_model->set_auditoriaempresa($data['auditoriaitem'], 'Sis_Usuario', 'UPDATE', $data['auditoriaitem']);
+                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Usuario', 'UPDATE', $data['auditoriaitem']);
                     $data['msg'] = '?m=1';
                 }
 
@@ -382,9 +338,8 @@ class Funcionario extends CI_Controller {
 		$data['query']['Permissao'] = $this->Basico_model->get_permissao($data['query']['Permissao']);
 		$data['query']['Empresa'] = $this->Basico_model->get_empresa($data['query']['Empresa']);
 		#$data['query']['Funcionario'] = $data['query']['Funcionario'];
-		$data['query']['CompAgenda'] = $this->Basico_model->get_compagenda($data['query']['CompAgenda']);
+
         $data['query']['Telefone'] = $data['query']['Celular'];
-		$data['query']['CpfUsuario'] = $data['query']['CpfUsuario'];
 
         $data['contatofuncionario'] = $this->Funcionario_model->lista_contatofuncionario($id, TRUE);
         /*
