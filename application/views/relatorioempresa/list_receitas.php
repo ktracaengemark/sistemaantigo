@@ -57,9 +57,9 @@
                     <?php
                     foreach ($report->result_array() as $row) {
                         #echo '<tr>';
-                        echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrataemp/alterar2/' . $row['idApp_OrcaTrataEmp'] . '">';
+                        echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatratacli/alterar2/' . $row['idApp_OrcaTrataCli'] . '">';
                             #echo '<td>' . $row['QuitadoRecebiveis'] . '</td>';
-							echo '<td>' . $row['idApp_OrcaTrataEmp'] . ' / ' . $row['NomeEmpresa'] . ' / Quit-' . $row['QuitadoOrca'] . '</td>';
+							echo '<td>' . $row['idApp_OrcaTrataCli'] . ' / ' . $row['NomeCliente'] . ' / Quit-' . $row['QuitadoOrca'] . '</td>';
 							echo '<td>' . $row['ParcelaRecebiveis'] . '</td>';
 							echo '<td>' . $row['DataVencimentoRecebiveis'] . ' R$' . $row['ValorParcelaRecebiveis'] . '</td>';
                             #echo '<td class="text-left">R$ ' . $row['ValorParcelaRecebiveis'] . '</td>';

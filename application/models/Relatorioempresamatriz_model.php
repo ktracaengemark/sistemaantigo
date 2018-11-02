@@ -194,11 +194,12 @@ class Relatorioempresamatriz_model extends CI_Model {
 		
         $query = $this->db->query('
             SELECT
-                C.Nome,
-                CONCAT(IFNULL(C.Nome,""), " / ", IFNULL(OT.Receitas,""), " / ", IFNULL(TR.TipoReceita,"")) AS Nome,
+                E.Nome,
+                CONCAT(IFNULL(E.Nome,""), " / ", IFNULL(OT.Receitas,""), " / ", IFNULL(TR.TipoReceita,"")) AS NomeEmpresa,
 				TR.TipoReceita,
 				OT.idApp_OrcaTrataEmp,
 				OT.idSis_UsuarioMatriz,
+				OT.idSis_Empresa,
 				OT.TipoRD,
                 OT.AprovadoOrca,
                 OT.DataOrca,
@@ -220,10 +221,11 @@ class Relatorioempresamatriz_model extends CI_Model {
 
                 App_OrcaTrataEmp AS OT
 					LEFT JOIN Sis_UsuarioMatriz AS C ON C.idSis_UsuarioMatriz = OT.idSis_UsuarioMatriz
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = OT.idSis_Empresa
                     LEFT JOIN App_ParcelasRecebiveisEmp AS PR ON OT.idApp_OrcaTrataEmp = PR.idApp_OrcaTrataEmp
 					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
             WHERE
-                OT.Empresa = ' . $_SESSION['log']['id'] . ' AND
+                
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				
 				' . $filtro2 . '

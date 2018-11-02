@@ -136,7 +136,7 @@ class Relatorioempresamatriz extends CI_Controller {
             'PR.DataVencimentoRecebiveis' => 'Data do Venc.',
 			'PR.DataPagoRecebiveis' => 'Data do Pagam.',
 			'PR.QuitadoRecebiveis' => 'Quit.Parc.',
-			'C.Nome' => 'Nome do Usuario',
+			'E.Nome' => 'Nome do Usuario',
 			'TR.TipoReceita' => 'Tipo de Receita',
 			'OT.Modalidade' => 'Modalidade',
             'OT.idApp_OrcaTrataEmp' => 'Número do Orçamento',

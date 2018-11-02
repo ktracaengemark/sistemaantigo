@@ -145,7 +145,7 @@
 									<span class="glyphicon glyphicon-pencil"></span> Cadastros <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
-									<li><a href="<?php echo base_url() ?>orcatrata2/cadastrar"><span class="glyphicon glyphicon-usd"></span> Orçamentos</a></li>
+									<li><a href="<?php echo base_url() ?>orcatratacli/cadastrar2"><span class="glyphicon glyphicon-usd"></span> Receitas</a></li>
 									<li role="separator" class="divider"></li>							
 									<li><a href="<?php echo base_url() ?>despesas/cadastrar"><span class="glyphicon glyphicon-usd"></span> Despesas</a></li>
 									<li role="separator" class="divider"></li>

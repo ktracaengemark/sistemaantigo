@@ -63,7 +63,7 @@
 															?>
 
 															<?php if ($metodo > 1) { ?>
-															<input type="hidden" name="idApp_ProdutoVendaEmp<?php echo $i ?>" value="<?php echo $produto[$i]['idApp_ProdutoVendaEmp']; ?>"/>
+															<input type="hidden" name="idApp_ProdutoVendaCli<?php echo $i ?>" value="<?php echo $produto[$i]['idApp_ProdutoVendaCli']; ?>"/>
 															<?php } ?>
 
 															<input type="hidden" name="ProdutoHidden" id="ProdutoHidden<?php echo $i ?>" value="<?php echo $i ?>">
@@ -202,7 +202,7 @@
 															?>
 
 															<?php if ($metodo > 1) { ?>
-															<input type="hidden" name="idApp_ServicoVendaEmp<?php echo $i ?>" value="<?php echo $servico[$i]['idApp_ServicoVendaEmp']; ?>"/>
+															<input type="hidden" name="idApp_ServicoVendaCli<?php echo $i ?>" value="<?php echo $servico[$i]['idApp_ServicoVendaCli']; ?>"/>
 															<?php } ?>
 
 															<input type="hidden" name="ServicoHidden" id="ServicoHidden<?php echo $i ?>" value="<?php echo $i ?>">
@@ -431,13 +431,13 @@
 																<!--
 																<div id="TipoReceita" <?php echo $div['TipoReceita']; ?>>
 																	<div class="col-md-2">
-																		<label for="idSis_Empresa">Usuario *</label>
+																		<label for="idApp_Cliente">Usuario *</label>
 																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
-																				id="idSis_Empresa" autofocus name="idSis_Empresa">
+																				id="idApp_Cliente" autofocus name="idApp_Cliente">
 																			<option value="">-- Sel. um Usuario --</option>
 																			<?php
-																			foreach ($select['idSis_Empresa'] as $key => $row) {
-																				if ($orcatrata['idSis_Empresa'] == $key) {
+																			foreach ($select['idApp_Cliente'] as $key => $row) {
+																				if ($orcatrata['idApp_Cliente'] == $key) {
 																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																				} else {
 																					echo '<option value="' . $key . '">' . $row . '</option>';
@@ -449,13 +449,13 @@
 																</div>
 																-->
 																<div class="col-md-2">
-																	<label for="idSis_Empresa">EmpresaCli</label>
+																	<label for="idApp_Cliente">EmpresaCli</label>
 																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
-																			id="idSis_Empresa" autofocus name="idSis_Empresa">
+																			id="idApp_Cliente" autofocus name="idApp_Cliente">
 																		<option value="">-- Sel. um Usuario --</option>
 																		<?php
-																		foreach ($select['idSis_Empresa'] as $key => $row) {
-																			if ($orcatrata['idSis_Empresa'] == $key) {
+																		foreach ($select['idApp_Cliente'] as $key => $row) {
+																			if ($orcatrata['idApp_Cliente'] == $key) {
 																				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																			} else {
 																				echo '<option value="' . $key . '">' . $row . '</option>';
@@ -598,7 +598,7 @@
 											?>
 
 												<?php if ($metodo > 1) { ?>
-												<input type="hidden" name="idApp_ParcelasRecebiveisEmp<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_ParcelasRecebiveisEmp']; ?>"/>
+												<input type="hidden" name="idApp_ParcelasRecebiveisCli<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_ParcelasRecebiveisCli']; ?>"/>
 												<?php } ?>
 
 
@@ -837,7 +837,7 @@
 											?>
 
 											<?php if ($metodo > 1) { ?>
-											<input type="hidden" name="idApp_ProcedimentoEmp<?php echo $i ?>" value="<?php echo $procedimento[$i]['idApp_ProcedimentoEmp']; ?>"/>
+											<input type="hidden" name="idApp_ProcedimentoCli<?php echo $i ?>" value="<?php echo $procedimento[$i]['idApp_ProcedimentoCli']; ?>"/>
 											<?php } ?>
 
 											<div class="form-group" id="3div<?php echo $i ?>">
@@ -922,10 +922,10 @@
 							-->
 							<div class="form-group">
 								<div class="row">
-									<!--<input type="hidden" name="idSis_Empresa" value="<?php echo $_SESSION['Usuario']['idSis_Empresa']; ?>">-->
-									<input type="hidden" name="idApp_OrcaTrataEmp" value="<?php echo $orcatrata['idApp_OrcaTrataEmp']; ?>">
+									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Usuario']['idApp_Cliente']; ?>">-->
+									<input type="hidden" name="idApp_OrcaTrataCli" value="<?php echo $orcatrata['idApp_OrcaTrataCli']; ?>">
 									<?php if ($metodo > 1) { ?>
-									<!--<input type="hidden" name="idApp_ProcedimentoEmp" value="<?php echo $procedimento['idApp_ProcedimentoEmp']; ?>">
+									<!--<input type="hidden" name="idApp_ProcedimentoCli" value="<?php echo $procedimento['idApp_ProcedimentoCli']; ?>">
 									<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 									<?php } ?>
 									<?php if ($metodo == 2) { ?>
@@ -959,7 +959,7 @@
 															</button>
 														</div>
 														<div class="col-md-6 text-right">
-															<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrataemp/excluir/' . $orcatrata['idApp_OrcaTrataEmp'] ?>" role="button">
+															<a class="btn btn-danger" href="<?php echo base_url() . 'orcatratacli/excluir/' . $orcatrata['idApp_OrcaTrataCli'] ?>" role="button">
 																<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 															</a>
 														</div>
