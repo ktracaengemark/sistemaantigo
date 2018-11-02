@@ -261,5 +261,42 @@ class Usuario_model extends CI_Model {
 
         return $array;
     }
+
+	public function select_usuarioemp($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+				idSis_Usuario,
+				Nome				
+            FROM
+                Sis_Usuario					
+            WHERE
+				Empresa = ' . $_SESSION['log']['id'] . '
+			ORDER BY 
+				Nome ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+				idSis_Usuario,
+				Nome
+            FROM
+                Sis_Usuario					
+            WHERE
+                Empresa = ' . $_SESSION['log']['id'] . '
+			ORDER BY 
+				Nome ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_Usuario] = $row->Nome;
+            }
+        }
+
+        return $array;
+    }	
 	
 }

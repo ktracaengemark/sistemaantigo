@@ -270,6 +270,33 @@ class Basico_model extends CI_Model {
             $this->db->insert_batch('Sis_AuditoriaItemEmpresa', $data['auditoriaitem']);
         }
     }
+
+    function set_auditoriaempresamatriz($auditoriaitem, $tabela, $operacao, $data, $id = NULL) {
+
+        if ($id == NULL)
+            $id = $_SESSION['log']['id'];
+
+        $auditoria = array(
+            'Tabela' => $tabela,
+            'idSis_EmpresaMatriz' => $id,
+            'DataAuditoria' => date('Y-m-d H:i:s', time()),
+            'Operacao' => $operacao,
+            'Ip' => $this->input->ip_address(),
+            'So' => $this->agent->platform(),
+            'Navegador' => $this->agent->browser(),
+            'NavegadorVersao' => $this->agent->version(),
+        );
+
+        if ($this->db->insert('Sis_AuditoriaEmpresaMatriz', $auditoria)) {
+            $i = 0;
+            while (isset($data['auditoriaitem'][$i])) {
+                $data['auditoriaitem'][$i]['idSis_AuditoriaEmpresaMatriz'] = $this->db->insert_id();
+                $i++;
+            }
+
+            $this->db->insert_batch('Sis_AuditoriaItemEmpresaMatriz', $data['auditoriaitem']);
+        }
+    }
 	
     public function get_municipio($data) {
 
@@ -1371,4 +1398,134 @@ class Basico_model extends CI_Model {
         return $array;
     }
 
+    public function select_tiporeceita($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+				SELECT 
+					TD.idTab_TipoReceita, 
+					CONCAT(TD.TipoReceita) AS TipoReceita
+				FROM 
+					Tab_TipoReceita AS TD
+				WHERE 
+					TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+				ORDER BY
+					TD.TipoReceita
+				');
+				   
+        } 
+		else {
+            $query = $this->db->query('
+				SELECT 
+					TD.idTab_TipoReceita, 
+					CONCAT(TD.TipoReceita) AS TipoReceita
+				FROM 
+					Tab_TipoReceita AS TD
+				WHERE 
+					TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+				ORDER BY
+					TD.TipoReceita
+				');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_TipoReceita] = $row->TipoReceita;
+            }
+        }
+
+        return $array;
+    }
+
+	public function select_modalidade($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('SELECT * FROM Tab_Modalidade');
+        } else {
+            $query = $this->db->query('SELECT * FROM Tab_Modalidade');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->Abrev] = $row->Modalidade;
+            }
+        }
+
+        return $array;
+    }
+
+	public function select_produtosemp($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(
+            'SELECT
+                V.idTab_Valor,
+                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - ", IFNULL(V.Convdesc,""), " - R$ ", IFNULL(V.ValorVendaProduto,"")) AS NomeProduto,
+                V.ValorVendaProduto,
+				P.Categoria
+            FROM
+                
+                Tab_Valor AS V
+					LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
+					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = P.Prodaux3
+					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
+					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = P.Prodaux1
+            WHERE
+				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND				
+				(P.Empresa = ' . $_SESSION['log']['id'] . ' OR P.Empresa = "0" ) AND
+				(P.ProdutoProprio = ' . $_SESSION['log']['id'] . ' OR P.ProdutoProprio = "0") AND
+				V.Convenio = "53" AND				
+                P.idTab_Produtos = V.idTab_Produtos
+			ORDER BY
+				V.idTab_Valor,
+				P.CodProd ASC,
+				P.Categoria ASC,
+				TP3.Prodaux3,				
+				P.Produtos ASC,
+				TP1.Prodaux1,
+				TP2.Prodaux2,
+				TFO.NomeFornecedor ASC'
+    );
+        } else {
+            $query = $this->db->query(
+            'SELECT
+                V.idTab_Valor,
+                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - ", IFNULL(V.Convdesc,""), " - R$ ", IFNULL(V.ValorVendaProduto,"")) AS NomeProduto,
+                V.ValorVendaProduto,
+				P.Categoria
+            FROM
+                
+                Tab_Valor AS V
+					LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
+					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = P.Prodaux3
+					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
+					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = P.Prodaux1
+            WHERE
+				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND				
+				(P.Empresa = ' . $_SESSION['log']['id'] . ' OR P.Empresa = "0" ) AND
+				(P.ProdutoProprio = ' . $_SESSION['log']['id'] . ' OR P.ProdutoProprio = "0") AND
+				V.Convenio = "53" AND				
+                P.idTab_Produtos = V.idTab_Produtos
+			ORDER BY
+				V.idTab_Valor,
+				P.CodProd ASC,
+				P.Categoria ASC,
+				TP3.Prodaux3,				
+				P.Produtos ASC,
+				TP1.Prodaux1,
+				TP2.Prodaux2,
+				TFO.NomeFornecedor ASC'
+    );
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Valor] = $row->NomeProduto;
+            }
+        }
+
+        return $array;
+    }
+	
 }
