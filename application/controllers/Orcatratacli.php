@@ -18,7 +18,7 @@ class Orcatratacli extends CI_Controller {
 
         #load header view
         $this->load->view('basico/header');
-        $this->load->view('basico/nav_principalempresa');
+        $this->load->view('basico/nav_principal');
 
         #$this->load->view('orcatratacli/nav_secundario');
     }
@@ -732,7 +732,7 @@ class Orcatratacli extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'orcatrata2/listar/' . $data['msg']);
-				redirect(base_url() . 'relatorioempresa/receitas/' . $data['msg']);
+				redirect(base_url() . 'relatorio/receitas/' . $data['msg']);
                 exit();
             }
         }
@@ -1777,7 +1777,7 @@ class Orcatratacli extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'orcatratacli/listar/' . $_SESSION['Usuario']['idApp_Cliente'] . $data['msg']);
-				redirect(base_url() . 'relatorioempresa/receitas/' . $data['msg']);
+				redirect(base_url() . 'relatorio/receitas/' . $data['msg']);
 
 				exit();
             }

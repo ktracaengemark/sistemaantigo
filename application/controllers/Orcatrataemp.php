@@ -18,7 +18,7 @@ class Orcatrataemp extends CI_Controller {
 
         #load header view
         $this->load->view('basico/header');
-        $this->load->view('basico/nav_principalempresamatriz');
+        $this->load->view('basico/nav_principalmatriz');
 
         #$this->load->view('orcatrataemp/nav_secundario');
     }
@@ -730,7 +730,7 @@ class Orcatrataemp extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'orcatrata2/listar/' . $data['msg']);
-				redirect(base_url() . 'relatorioempresamatriz/receitas/' . $data['msg']);
+				redirect(base_url() . 'relatoriomatriz/receitas/' . $data['msg']);
                 exit();
             }
         }
@@ -1773,7 +1773,7 @@ class Orcatrataemp extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'orcatrataemp/listar/' . $_SESSION['Usuario']['idSis_Empresa'] . $data['msg']);
-				redirect(base_url() . 'relatorioempresamatriz/receitas/' . $data['msg']);
+				redirect(base_url() . 'relatoriomatriz/receitas/' . $data['msg']);
 
 				exit();
             }
