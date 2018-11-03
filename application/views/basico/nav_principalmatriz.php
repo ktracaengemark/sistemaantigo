@@ -132,7 +132,7 @@
 							<div class="btn-group" role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatoriomatriz/clientes">
 									<button type="button" class="btn btn-md btn-success ">
-										<span class="glyphicon glyphicon-user"></span> Clientes
+										<span class="glyphicon glyphicon-user"></span> Empresas
 									</button>
 								</a>
 							</div>

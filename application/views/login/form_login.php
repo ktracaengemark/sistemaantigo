@@ -19,13 +19,15 @@
 	<label class="sr-only">Senha</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
     <input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Acesso dos Usuários</button>	
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Acesso dos Usuários das Emp.</button>	
     <p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('Usuario'); ?>">Esqueci usuário/senha!</a></p>
     <br>
 
-			<a class="btn btn btn-primary btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">Acesso dos Administradores</a>			
-			<a class="btn btn btn-primary btn-danger btn-block" href="<?php echo base_url(); ?>loginempresa/registrar" role="button">Cadastrar Nova Empresa</a>	
-			<!--<a class="btn btn btn-primary btn-danger" href="<?php echo base_url(); ?>login/registrar" role="button">Cadastrar Empresa</a>-->
+	<a class="btn btn btn-primary btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">Acesso dos Admin. das Empresas</a>
+	<a class="btn btn btn-primary btn-warning btn-block" href="<?php echo base_url(); ?>loginempresamatriz/index" role="button">Acesso do Admin. Ktraca</a>		
+	<a class="btn btn btn-primary btn-warning btn-block" href="<?php echo base_url(); ?>loginmatriz/index" role="button">Acesso dos Usuário Ktraca</a>
+	<a class="btn btn btn-primary btn-danger btn-block" href="<?php echo base_url(); ?>loginempresa/registrar" role="button">Cadastrar Nova Empresa</a>	
+	<!--<a class="btn btn btn-primary btn-danger" href="<?php echo base_url(); ?>login/registrar" role="button">Cadastrar Empresa</a>-->
 	
 </form>
 

@@ -1528,4 +1528,43 @@ class Basico_model extends CI_Model {
         return $array;
     }
 	
+	public function select_empresa($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+				idSis_Empresa,
+				idSis_EmpresaMatriz,
+				NomeEmpresa				
+            FROM
+                Sis_Empresa					
+            WHERE
+				idSis_EmpresaMatriz = ' . $_SESSION['log']['idSis_EmpresaMatriz'] . '
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+				idSis_Empresa,
+				idSis_EmpresaMatriz,
+				NomeEmpresa				
+            FROM
+                Sis_Empresa					
+            WHERE
+				idSis_EmpresaMatriz = ' . $_SESSION['log']['idSis_EmpresaMatriz'] . '
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_Empresa] = $row->NomeEmpresa;
+            }
+        }
+
+        return $array;
+    }	
+	
 }

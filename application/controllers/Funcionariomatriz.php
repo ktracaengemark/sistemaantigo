@@ -50,7 +50,7 @@ class Funcionariomatriz extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'idSis_UsuarioMatriz',
-			'Usuario',
+			'UsuarioMatriz',
             'Nome',
 			'Senha',
 			'Confirma',
@@ -77,7 +77,7 @@ class Funcionariomatriz extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
 		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email|is_unique[Sis_UsuarioMatriz.Email]');
-        $this->form_validation->set_rules('Usuario', 'Nome do Func./ Usuário', 'required|trim|is_unique[Sis_UsuarioMatriz.Usuario]');
+        $this->form_validation->set_rules('UsuarioMatriz', 'Nome do Func./ Usuário', 'required|trim|is_unique[Sis_UsuarioMatriz.UsuarioMatriz]');
 		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
@@ -124,7 +124,7 @@ class Funcionariomatriz extends CI_Controller {
 			$data['query']['Inativo'] = 0;
 			$data['query']['Nivel'] = 6;
 			$data['query']['Permissao'] = 3;
-			$data['query']['Funcao'] = 1;            
+			#$data['query']['Funcao'] = 1;            
 			unset($data['query']['Confirma']);
 
 
@@ -176,7 +176,7 @@ class Funcionariomatriz extends CI_Controller {
         $data['query'] = $this->input->post(array(
 
 			'idSis_UsuarioMatriz',
-			#'Usuario',
+			#'UsuarioMatriz',
             'Nome',
             'DataNascimento',
             'Celular',

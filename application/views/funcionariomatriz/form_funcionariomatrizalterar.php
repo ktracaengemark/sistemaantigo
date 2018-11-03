@@ -234,10 +234,10 @@
 													</div>
 													<!--
 													<div class="col-md-3">
-														<label for="Usuario">Usuário:</label>
-														<input type="text" class="form-control" id="Usuario" maxlength="45" 
-															   autofocus name="Usuario" value="<?php echo $query['Usuario']; ?>">
-														<?php echo form_error('Usuario'); ?>
+														<label for="UsuarioMatriz">Usuário:</label>
+														<input type="text" class="form-control" id="UsuarioMatriz" maxlength="45" 
+															   autofocus name="UsuarioMatriz" value="<?php echo $query['UsuarioMatriz']; ?>">
+														<?php echo form_error('UsuarioMatriz'); ?>
 													</div>						
 													<div class="col-md-3">
 														<label for="Senha">Senha:</label>

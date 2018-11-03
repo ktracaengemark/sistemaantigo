@@ -22,7 +22,7 @@
 								<li role="separator" class="divider"></li>
 								<li><a href="<?php echo base_url() ?>funcao/cadastrar"><span class="glyphicon glyphicon-pencil"></span> Cad Funçoes </a></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="<?php echo base_url() ?>relatorioempresamatriz/funcionario"><span class="glyphicon glyphicon-user"></span> Cad Usuários </a></li>
+								<li><a href="<?php echo base_url() ?>relatorioempresamatriz/funcionario"><span class="glyphicon glyphicon-user"></span> Funcionários </a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="<?php echo base_url() ?>relatorioempresamatriz/receitas"><span class="glyphicon glyphicon-user"></span> Receitas </a></li>
 								<li role="separator" class="divider"></li>
@@ -36,7 +36,7 @@
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 
 						<div class="btn-group" role="group" aria-label="...">
-							<a href="<?php echo base_url(); ?>login/index">
+							<a href="<?php echo base_url(); ?>loginmatriz/index">
 								<button type="button" class="btn btn-md btn-success ">
 									<span class="glyphicon glyphicon-log-in"></span> Acesso dos Usuários
 								</button>

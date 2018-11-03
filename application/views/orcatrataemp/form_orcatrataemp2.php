@@ -449,7 +449,7 @@
 																</div>
 																-->
 																<div class="col-md-2">
-																	<label for="idSis_Empresa">EmpresaCli</label>
+																	<label for="idSis_Empresa">Empresa</label>
 																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 																			id="idSis_Empresa" autofocus name="idSis_Empresa">
 																		<option value="">-- Sel. um Usuario --</option>
