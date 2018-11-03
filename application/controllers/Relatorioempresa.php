@@ -378,5 +378,68 @@ class Relatorioempresa extends CI_Controller {
 
 
     }
-			
+
+	public function empresas() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = quotes_to_entities($this->input->post(array(
+            'NomeEmpresa',
+			'Ordenamento',
+            'Campo',
+        ), TRUE));
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+
+
+        $data['select']['Campo'] = array(
+            'E.idSis_Empresa' => 'nº Empresa',
+			'E.NomeEmpresa' => 'Nome da Empresa',
+            'E.Bairro' => 'Bairro',
+            'E.Municipio' => 'Município',
+            'E.Email' => 'E-mail',
+
+
+        );
+
+        $data['select']['Ordenamento'] = array(
+            'ASC' => 'Crescente',
+            'DESC' => 'Decrescente',
+        );
+
+        $data['select']['NomeEmpresa'] = $this->Relatorioempresa_model->select_empresas();
+
+        $data['titulo'] = 'Relatório de Empresas';
+
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+			$data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
+            $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+
+            $data['report'] = $this->Relatorioempresa_model->list_empresas($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list'] = $this->load->view('relatorioempresa/list_empresas', $data, TRUE);
+            //$data['nav_secundario'] = $this->load->view('profissional/nav_secundario', $data, TRUE);
+        }
+
+        $this->load->view('relatorioempresa/tela_empresas', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+	
 }

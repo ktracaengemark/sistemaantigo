@@ -227,7 +227,7 @@ class Relatorio_model extends CI_Model {
             WHERE
                 
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				
+				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				' . $filtro2 . '
 				' . $filtro3 . '
 				' . $filtro4 . ' 
@@ -3212,7 +3212,7 @@ exit();*/
 				App_Despesa AS D
                     LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = D.TipoDespesa
                     LEFT JOIN Tab_FormaPag    AS FP ON FP.idTab_FormaPag    = D.FormaPag
-                    LEFT JOIN App_Empresa     AS E  ON E.idApp_Empresa      = D.Empresa
+                    LEFT JOIN Sis_Empresa     AS E  ON E.idSis_Empresa      = D.Empresa
 
             WHERE
 
@@ -3645,13 +3645,63 @@ exit();*/
 
 	public function list_empresas($data, $completo) {
 
-		$data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND E.idApp_Empresa = ' . $data['NomeEmpresa'] : FALSE;
+		$data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND E.idSis_Empresa = ' . $data['NomeEmpresa'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'E.NomeEmpresa' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 
         $query = $this->db->query('
             SELECT
-                E.idApp_Empresa,
+                E.idSis_Empresa,
+                E.NomeEmpresa,
+                E.Endereco,
+                E.Bairro,
+                CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
+                E.Email
+            FROM
+                Sis_Empresa AS E
+                    LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
+
+            WHERE
+				E.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+				' . $data['NomeEmpresa'] . '
+			ORDER BY
+                ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
+        ');
+
+        /*
+        #AND
+        #P.idApp_Profissional = OT.idApp_Cliente
+
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            foreach ($query->result() as $row) {
+
+
+            }
+
+            return $query;
+        }
+
+    }
+	
+	public function list_empresas1($data, $completo) {
+
+		$data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND E.idSis_Empresa = ' . $data['NomeEmpresa'] : FALSE;
+        $data['Campo'] = (!$data['Campo']) ? 'E.NomeEmpresa' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+
+        $query = $this->db->query('
+            SELECT
+                E.idSis_Empresa,
                 E.NomeEmpresa,
 				TF.TipoFornec,
 				TS.StatusSN,
@@ -3670,9 +3720,9 @@ exit();*/
 				TCE.RelaCom,
 				CE.Sexo
             FROM
-                App_Empresa AS E
+                Sis_Empresa AS E
                     LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
-					LEFT JOIN App_Contato AS CE ON E.idApp_Empresa = CE.idApp_Empresa
+					LEFT JOIN App_Contato AS CE ON E.idSis_Empresa = CE.idSis_Empresa
 					LEFT JOIN Tab_RelaCom AS TCE ON TCE.idTab_RelaCom = CE.RelaCom
 					LEFT JOIN Tab_TipoFornec AS TF ON TF.Abrev = E.TipoFornec
 					LEFT JOIN Tab_StatusSN AS TS ON TS.Abrev = E.VendaFornec
@@ -4330,12 +4380,12 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-                idApp_Empresa,
-				CONCAT(NomeEmpresa, " ", " --- ", Telefone1, " --- ", Telefone2) As NomeEmpresa
+                idSis_Empresa,
+				NomeEmpresa
             FROM
-                App_Empresa
+                Sis_Empresa
             WHERE
-                idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                
 				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 NomeEmpresa ASC
@@ -4344,7 +4394,7 @@ exit();*/
         $array = array();
         $array[0] = ':: Todos ::';
         foreach ($query->result() as $row) {
-			$array[$row->idApp_Empresa] = $row->NomeEmpresa;
+			$array[$row->idSis_Empresa] = $row->NomeEmpresa;
         }
 
         return $array;

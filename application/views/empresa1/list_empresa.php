@@ -3,7 +3,7 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Empresa</th>
+            <th>Fornecedor</th>
 
         </tr>
     </thead>

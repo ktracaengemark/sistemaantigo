@@ -23,12 +23,17 @@
 								<li><a href="<?php echo base_url() ?>funcao/cadastrar"><span class="glyphicon glyphicon-pencil"></span> Cad Funçoes </a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="<?php echo base_url() ?>relatorioempresa/funcionario"><span class="glyphicon glyphicon-user"></span> Cad Usuários </a></li>
+								<?php if ($_SESSION['log']['idSis_Empresa'] == 4 ) { ?>
 								<li role="separator" class="divider"></li>
-								<li><a href="<?php echo base_url() ?>relatorioempresa/empresafilial"><span class="glyphicon glyphicon-list"></span> Dados da Empresa </a></li>
+								<li><a href="<?php echo base_url() ?>relatorioempresa/empresas"><span class="glyphicon glyphicon-list"></span> Empresas </a></li>
+								<?php } ?>
+								<!--<li><a href="<?php echo base_url() ?>relatorioempresa/empresafilial"><span class="glyphicon glyphicon-list"></span> Dados da Empresa </a></li>
+								<li role="separator" class="divider"></li>-->
 							</ul>
 						</div>						
 						<div class="btn-group" role="group" aria-label="..."> </div>
 					</li>
+					
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 
 						<div class="btn-group" role="group" aria-label="...">
@@ -41,6 +46,7 @@
 
 						<div class="btn-group" role="group" aria-label="..."> </div>
 					</li>
+					
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 						<div class="btn-group" role="group" aria-label="...">
 							<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa">

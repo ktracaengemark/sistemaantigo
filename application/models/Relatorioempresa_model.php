@@ -3677,8 +3677,59 @@ exit();*/
         }
 
     }
-	
+
 	public function list_empresas($data, $completo) {
+
+		$data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND E.idSis_Empresa = ' . $data['NomeEmpresa'] : FALSE;
+        $data['Campo'] = (!$data['Campo']) ? 'E.NomeEmpresa' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+
+        $query = $this->db->query('
+            SELECT
+                E.idSis_Empresa,
+                E.NomeEmpresa,
+                E.Endereco,
+                E.Bairro,
+                CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
+                E.Email
+            FROM
+                Sis_Empresa AS E
+                    LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
+			WHERE
+                
+				E.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+				' . $data['NomeEmpresa'] . '
+
+			ORDER BY
+                ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
+        ');
+
+        /*
+        #AND
+        #P.idApp_Profissional = OT.idApp_Cliente
+
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            foreach ($query->result() as $row) {
+
+                
+            }
+
+            return $query;
+        }
+
+    }
+	
+	public function list_empresas1($data, $completo) {
 
 		$data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND E.idApp_Empresa = ' . $data['NomeEmpresa'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'E.NomeEmpresa' : $data['Campo'];
@@ -4365,13 +4416,12 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-                idApp_Empresa,
-				CONCAT(NomeEmpresa, " ", " --- ", Telefone1, " --- ", Telefone2) As NomeEmpresa
+                idSis_Empresa,
+				NomeEmpresa
             FROM
-                App_Empresa
-            WHERE
-                idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
-				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+                Sis_Empresa
+            
+                
             ORDER BY
                 NomeEmpresa ASC
         ');
@@ -4379,7 +4429,7 @@ exit();*/
         $array = array();
         $array[0] = ':: Todos ::';
         foreach ($query->result() as $row) {
-			$array[$row->idApp_Empresa] = $row->NomeEmpresa;
+			$array[$row->idSis_Empresa] = $row->NomeEmpresa;
         }
 
         return $array;

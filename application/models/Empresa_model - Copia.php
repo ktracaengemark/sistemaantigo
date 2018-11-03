@@ -14,7 +14,7 @@ class Empresa_model extends CI_Model {
     
     public function set_empresa($data) {
 
-        $query = $this->db->insert('Sis_Empresa', $data);
+        $query = $this->db->insert('App_Empresa', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -25,7 +25,7 @@ class Empresa_model extends CI_Model {
     }
 
     public function get_empresa($data) {
-        $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE idSis_Empresa = ' . $data);       
+        $query = $this->db->query('SELECT * FROM App_Empresa WHERE idApp_Empresa = ' . $data);       
         $query = $query->result_array();
 
         return $query[0];
@@ -34,7 +34,7 @@ class Empresa_model extends CI_Model {
     public function update_empresa($data, $id) {
 
         unset($data['Id']);
-        $query = $this->db->update('Sis_Empresa', $data, array('idSis_Empresa' => $id));
+        $query = $this->db->update('App_Empresa', $data, array('idApp_Empresa' => $id));
         /*
           echo $this->db->last_query();
           echo '<br>';
@@ -51,7 +51,7 @@ class Empresa_model extends CI_Model {
     }
 
     public function delete_empresa2($data) {
-        $query = $this->db->delete('Sis_Empresa', array('idSis_Empresa' => $data));
+        $query = $this->db->delete('App_Empresa', array('idApp_Empresa' => $data));
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -61,8 +61,8 @@ class Empresa_model extends CI_Model {
     }
 	
 	public function delete_empresa($id) {
-        $query = $this->db->delete('Sis_Usuario', array('idSis_Empresa' => $id));
-		$query = $this->db->delete('Sis_Empresa', array('idSis_Empresa' => $id));
+        $query = $this->db->delete('App_Contato', array('idApp_Empresa' => $id));
+		$query = $this->db->delete('App_Empresa', array('idApp_Empresa' => $id));
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -74,7 +74,7 @@ class Empresa_model extends CI_Model {
     public function lista_empresaORIG($data, $x) {
 
         $query = $this->db->query('SELECT * '
-                . 'FROM Sis_Empresa WHERE '
+                . 'FROM App_Empresa WHERE '
                 . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
                 . 'idTab_Modulo = 1 AND '
                 . '(NomeEmpresa like "%' . $data . '%" OR '
@@ -110,7 +110,7 @@ class Empresa_model extends CI_Model {
 
         $query = $this->db->query('
             SELECT
-                E.idSis_Empresa,
+                E.idApp_Empresa,
                 E.NomeEmpresa,
 				TF.TipoFornec,
 				TS.StatusSN,
@@ -124,19 +124,19 @@ class Empresa_model extends CI_Model {
                 E.Bairro,
                 CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
                 E.Email,
-				CE.Nome,
+				CE.NomeContato,
 				CE.RelaCom,
 				CE.Sexo
             FROM
-                Sis_Empresa AS E
+                App_Empresa AS E
                     LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
-					LEFT JOIN Sis_Usuario AS CE ON E.idSis_Empresa = CE.idSis_Empresa
+					LEFT JOIN App_Contato AS CE ON E.idApp_Empresa = CE.idApp_Empresa
 					LEFT JOIN Tab_TipoFornec AS TF ON TF.Abrev = E.TipoFornec
 					LEFT JOIN Tab_StatusSN AS TS ON TS.Abrev = E.VendaFornec
 					LEFT JOIN App_Atividade AS TA ON TA.idApp_Atividade = E.Atividade
+
             WHERE
-                E.Empresa = ' . $_SESSION['log']['Empresa'] . '
-				E.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+                E.idSis_Usuario = ' . $_SESSION['log']['id'] . '
 			ORDER BY
                 E.NomeEmpresa ASC
         ');
@@ -166,7 +166,7 @@ class Empresa_model extends CI_Model {
 
         $query = $this->db->query('
             SELECT
-                E.idSis_Empresa,
+                E.idApp_Empresa,
                 E.NomeEmpresa,
 				TF.TipoFornec,
 				TS.StatusSN,
@@ -181,13 +181,13 @@ class Empresa_model extends CI_Model {
                 E.Bairro,
                 CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
                 E.Email,
-				CE.Nome,
+				CE.NomeContato,
 				CE.RelaCom,
 				CE.Sexo
             FROM
-                Sis_Empresa AS E
+                App_Empresa AS E
                     LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
-					LEFT JOIN Sis_Usuario AS CE ON E.idSis_Empresa = CE.idSis_Empresa
+					LEFT JOIN App_Contato AS CE ON E.idApp_Empresa = CE.idApp_Empresa
 					LEFT JOIN Tab_TipoFornec AS TF ON TF.Abrev = E.TipoFornec
 					LEFT JOIN Tab_StatusSN AS TS ON TS.Abrev = E.VendaFornec
             WHERE
@@ -222,10 +222,10 @@ class Empresa_model extends CI_Model {
         if ($data === TRUE) {
             $array = $this->db->query(					
 				'SELECT                
-				idSis_Empresa,
+				idApp_Empresa,
 				CONCAT(TipoFornec, " --- ", NomeEmpresa) AS NomeEmpresa				
             FROM
-                Sis_Empresa
+                App_Empresa
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
@@ -235,19 +235,19 @@ class Empresa_model extends CI_Model {
         } else {
             $query = $this->db->query(
                 'SELECT                
-				idSis_Empresa,
+				idApp_Empresa,
 				CONCAT(TipoFornec, " --- ", NomeEmpresa) AS NomeEmpresa				
             FROM
-                Sis_Empresa
+                App_Empresa
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                Empresa = ' . $_SESSION['log']['Empresa'] . ' 
+                idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
 			ORDER BY NomeEmpresa ASC'
     );
             
             $array = array();
             foreach ($query->result() as $row) {
-                $array[$row->idSis_Empresa] = $row->NomeEmpresa;
+                $array[$row->idApp_Empresa] = $row->NomeEmpresa;
             }
         }
 
@@ -259,10 +259,10 @@ class Empresa_model extends CI_Model {
         if ($data === TRUE) {
             $array = $this->db->query(					
 				'SELECT                
-				idSis_Empresa,
+				idApp_Empresa,
 				CONCAT(TipoFornec, " --- ", NomeEmpresa) AS NomeEmpresa				
             FROM
-                Sis_Empresa
+                App_Empresa
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
@@ -278,10 +278,10 @@ class Empresa_model extends CI_Model {
         } else {
             $query = $this->db->query(
                 'SELECT                
-				idSis_Empresa,
+				idApp_Empresa,
 				CONCAT(TipoFornec, " --- ", NomeEmpresa) AS NomeEmpresa				
             FROM
-                Sis_Empresa
+                App_Empresa
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
@@ -296,7 +296,7 @@ class Empresa_model extends CI_Model {
             
             $array = array();
             foreach ($query->result() as $row) {
-                $array[$row->idSis_Empresa] = $row->NomeEmpresa;
+                $array[$row->idApp_Empresa] = $row->NomeEmpresa;
             }
         }
 
@@ -308,10 +308,10 @@ class Empresa_model extends CI_Model {
         if ($data === TRUE) {
             $array = $this->db->query(					
 				'SELECT                
-				idSis_Empresa,
+				idApp_Empresa,
 				CONCAT(TipoFornec, " --- ", NomeEmpresa) AS NomeEmpresa				
             FROM
-                Sis_Empresa
+                App_Empresa
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
@@ -327,10 +327,10 @@ class Empresa_model extends CI_Model {
         } else {
             $query = $this->db->query(
                 'SELECT                
-				idSis_Empresa,
+				idApp_Empresa,
 				CONCAT(TipoFornec, " --- ", NomeEmpresa) AS NomeEmpresa				
             FROM
-                Sis_Empresa
+                App_Empresa
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
@@ -345,7 +345,7 @@ class Empresa_model extends CI_Model {
             
             $array = array();
             foreach ($query->result() as $row) {
-                $array[$row->idSis_Empresa] = $row->NomeEmpresa;
+                $array[$row->idApp_Empresa] = $row->NomeEmpresa;
             }
         }
 

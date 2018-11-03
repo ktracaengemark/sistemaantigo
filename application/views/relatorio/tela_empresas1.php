@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-md-1"></div>
 							<div class="col-md-4">
-                                <label for="Ordenamento">Nome da Empresa:</label>
+                                <label for="Ordenamento">Nome do Fornecedor:</label>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -79,7 +79,7 @@
 								</div>
 								<div class="col-md-6 text-right">											
 									<a class="btn btn-lg btn-danger" href="<?php echo base_url() ?>empresa/cadastrar" role="button"> 
-										<span class="glyphicon glyphicon-plus"></span> Nova Empresa
+										<span class="glyphicon glyphicon-plus"></span> Novo Fornecedor
 									</a>
 								</div>
 							</div>

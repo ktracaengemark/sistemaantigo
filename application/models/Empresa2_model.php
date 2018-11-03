@@ -61,7 +61,7 @@ class Empresa_model extends CI_Model {
     }
 	
 	public function delete_empresa($id) {
-        $query = $this->db->delete('Sis_Usuario', array('idSis_Empresa' => $id));
+        $query = $this->db->delete('App_Contato', array('idSis_Empresa' => $id));
 		$query = $this->db->delete('Sis_Empresa', array('idSis_Empresa' => $id));
 
         if ($this->db->affected_rows() === 0) {
@@ -124,19 +124,19 @@ class Empresa_model extends CI_Model {
                 E.Bairro,
                 CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
                 E.Email,
-				CE.Nome,
+				CE.NomeContato,
 				CE.RelaCom,
 				CE.Sexo
             FROM
                 Sis_Empresa AS E
                     LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
-					LEFT JOIN Sis_Usuario AS CE ON E.idSis_Empresa = CE.idSis_Empresa
+					LEFT JOIN App_Contato AS CE ON E.idSis_Empresa = CE.idSis_Empresa
 					LEFT JOIN Tab_TipoFornec AS TF ON TF.Abrev = E.TipoFornec
 					LEFT JOIN Tab_StatusSN AS TS ON TS.Abrev = E.VendaFornec
 					LEFT JOIN App_Atividade AS TA ON TA.idApp_Atividade = E.Atividade
+
             WHERE
-                E.Empresa = ' . $_SESSION['log']['Empresa'] . '
-				E.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+                E.idSis_Usuario = ' . $_SESSION['log']['id'] . '
 			ORDER BY
                 E.NomeEmpresa ASC
         ');
@@ -181,13 +181,13 @@ class Empresa_model extends CI_Model {
                 E.Bairro,
                 CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
                 E.Email,
-				CE.Nome,
+				CE.NomeContato,
 				CE.RelaCom,
 				CE.Sexo
             FROM
                 Sis_Empresa AS E
                     LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
-					LEFT JOIN Sis_Usuario AS CE ON E.idSis_Empresa = CE.idSis_Empresa
+					LEFT JOIN App_Contato AS CE ON E.idSis_Empresa = CE.idSis_Empresa
 					LEFT JOIN Tab_TipoFornec AS TF ON TF.Abrev = E.TipoFornec
 					LEFT JOIN Tab_StatusSN AS TS ON TS.Abrev = E.VendaFornec
             WHERE
@@ -241,7 +241,7 @@ class Empresa_model extends CI_Model {
                 Sis_Empresa
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                Empresa = ' . $_SESSION['log']['Empresa'] . ' 
+                idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
 			ORDER BY NomeEmpresa ASC'
     );
             

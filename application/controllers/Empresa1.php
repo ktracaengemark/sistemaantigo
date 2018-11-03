@@ -13,7 +13,7 @@ class Empresa extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Empresa_model', 'Atividade_model', 'Contatoempresa_model'));
+        $this->load->model(array('Basico_model', 'Empresa_model', 'Atividade_model', 'Contato_model'));
         $this->load->driver('session');
 
         #load header view
@@ -28,7 +28,7 @@ class Empresa extends CI_Controller {
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
         elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contatoempresa com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
 
@@ -43,29 +43,34 @@ class Empresa extends CI_Controller {
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
         elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contatoempresa com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idSis_Empresa',
             'NomeEmpresa',
+          
             'Endereco',
             'Bairro',
             'Municipio',
+			
+            
 			'Email',
-            #'idSis_Usuario',
+            'idSis_Usuario',
 
         ), TRUE));
 
+		(!$data['query']['TipoFornec']) ? $data['query']['TipoFornec'] = 'P' : FALSE;
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #$this->form_validation->set_rules('NomeEmpresa', 'Nome do Responsável', 'required|trim|is_unique_duplo[Sis_Empresa.NomeEmpresa.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
         $this->form_validation->set_rules('NomeEmpresa', 'Nome do Responsável', 'required|trim');
-
+        #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
+        #$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
         #$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-
+		#$this->form_validation->set_rules('Atividade', 'Atividade', 'required|trim');
 		
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
 
@@ -95,7 +100,7 @@ class Empresa extends CI_Controller {
         } else {
 
             $data['query']['NomeEmpresa'] = trim(mb_strtoupper($data['query']['NomeEmpresa'], 'ISO-8859-1'));
-			#$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
+			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['campos'] = array_keys($data['query']);
@@ -104,7 +109,7 @@ class Empresa extends CI_Controller {
             $data['idSis_Empresa'] = $this->Empresa_model->set_empresa($data['query']);
 
             if ($data['idSis_Empresa'] === FALSE) {
-                $msg = "<strong>Erro no Banco de dados. Entre em contatoempresa com o administrador deste sistema.</strong>";
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
                 $this->load->view('empresa/form_empresa', $data);
@@ -127,7 +132,7 @@ class Empresa extends CI_Controller {
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
         elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contatoempresa com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
 
@@ -137,8 +142,9 @@ class Empresa extends CI_Controller {
             'Endereco',
             'Bairro',
             'Municipio',
-            #'idSis_Usuario',
+            'idSis_Usuario',
             'Email',
+
         ), TRUE);
 
         if ($id) {
@@ -146,17 +152,18 @@ class Empresa extends CI_Controller {
 
         }
 
+        #(!$data['query']['TipoFornec']) ? $data['query']['TipoFornec'] = 'P' : FALSE;
 		
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #$this->form_validation->set_rules('NomeEmpresa', 'Nome do Responsável', 'required|trim|is_unique_duplo[Sis_Empresa.NomeEmpresa.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
         $this->form_validation->set_rules('NomeEmpresa', 'Nome do Responsável', 'required|trim');
-
+        #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
+        #$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
         #$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-
+        #$this->form_validation->set_rules('Atividade', 'Atividade', 'required|trim'); 
 		
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
-
 
 		
         $data['titulo'] = 'Editar Dados';
@@ -183,7 +190,7 @@ class Empresa extends CI_Controller {
         } else {
 
             $data['query']['NomeEmpresa'] = trim(mb_strtoupper($data['query']['NomeEmpresa'], 'ISO-8859-1'));
-			#$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];          
+			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];          
 
             $data['anterior'] = $this->Empresa_model->get_empresa($data['query']['idSis_Empresa']);
             $data['campos'] = array_keys($data['query']);
@@ -210,13 +217,71 @@ class Empresa extends CI_Controller {
 
         $this->load->view('basico/footer');
     }
+
+    public function excluir2($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = $this->input->post(array(
+            'idSis_Empresa',
+            'submit'
+                ), TRUE);
+
+        if ($id) {
+            $data['query'] = $this->Empresa_model->get_empresa($id);
+
+        }
+
+        $data['select']['Municipio'] = $this->Basico_model->select_municipio();
+
+        $data['titulo'] = 'Tem certeza que deseja excluir o registro abaixo?';
+        $data['form_open_path'] = 'empresa/excluir';
+        $data['readonly'] = 'readonly';
+        $data['disabled'] = 'disabled';
+        $data['panel'] = 'danger';
+        $data['metodo'] = 3;
+
+        $data['tela'] = $this->load->view('empresa/form_empresa', $data, TRUE);
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('empresa/tela_empresa', $data); 
+        } else {
+
+            if ($data['query']['idSis_Empresa'] === FALSE) {
+                $data['msg'] = '?m=2';
+                $this->load->view('empresa/form_empresa', $data);
+            } else {
+
+                $data['anterior'] = $this->Empresa_model->get_empresa($data['query']['idSis_Empresa']);
+                $data['campos'] = array_keys($data['anterior']);
+
+                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], NULL, $data['campos'], $data['query']['idSis_Empresa'], FALSE, TRUE);
+                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'DELETE', $data['auditoriaitem']);
+
+                $this->Empresa_model->delete_empresa($data['query']['idSis_Empresa']);
+
+                $data['msg'] = '?m=1';
+
+                redirect(base_url() . 'empresa' . $data['msg']);
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
 	
 	public function excluir($id = FALSE) {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
         elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contatoempresa com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
 
@@ -237,7 +302,7 @@ class Empresa extends CI_Controller {
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
         elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contatoempresa com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
 
@@ -252,7 +317,7 @@ class Empresa extends CI_Controller {
             $_SESSION['agenda']['HoraFim'] = substr($this->input->get('end'),0,-3);            
         }
         
-        $data['titulo'] = "Pesquisar Empresa";
+        $data['titulo'] = "Pesquisar Fornecedor";
         
         $data['Pesquisa'] = $this->input->post('Pesquisa');
         //echo date('d/m/Y H:i:s', $data['start'],0,-3));
@@ -289,7 +354,7 @@ class Empresa extends CI_Controller {
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
         elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contatoempresa com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
 
@@ -299,10 +364,9 @@ class Empresa extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 4;
         
-        $_SESSION['Empresa2']['idSis_Empresa'] = $data['resumo']['idSis_Empresa'] = $data['query']['idSis_Empresa'];
+        $_SESSION['log']['idSis_Empresa'] = $data['resumo']['idSis_Empresa'] = $data['query']['idSis_Empresa'];
         $data['resumo']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 
-        
         if ($data['query']['Municipio']) {
             $mun = $this->Basico_model->get_municipio($data['query']['Municipio']);
             $data['query']['Municipio'] = $mun['NomeMunicipio'] . '/' . $mun['Uf'];
@@ -310,20 +374,21 @@ class Empresa extends CI_Controller {
             $data['query']['Municipio'] = $data['query']['Uf'] = $mun['Uf'] = '';
         }
 
-        $data['contatoempresa'] = $this->Contatoempresa_model->lista_contatoempresa(TRUE);
+        #$data['contato'] = $this->Contato_model->lista_contato(TRUE);
         /*
           echo "<pre>";
-          print_r($data['contatoempresa']);
+          print_r($data['contato']);
           echo "</pre>";
           exit();
-        */
-        if (!$data['contatoempresa'])
+        
+        if (!$data['contato'])
             $data['list'] = FALSE;
         else
-            $data['list'] = $this->load->view('contatoempresa/list_contatoempresa', $data, TRUE);
+            $data['list'] = $this->load->view('contato/list_contato', $data, TRUE);
         
         $data['nav_secundario'] = $this->load->view('empresa/nav_secundario', $data, TRUE);     
-        $this->load->view('empresa/tela_empresa', $data);
+        */
+		$this->load->view('empresa/tela_empresa', $data);
 
         $this->load->view('basico/footer');
     }
@@ -331,7 +396,7 @@ class Empresa extends CI_Controller {
     function get_empresa($data) {
 
         if ($this->Empresa_model->lista_empresa($data, FALSE) === FALSE) {
-            $this->form_validation->set_message('get_empresa', '<strong>Empresa</strong> não encontrado.');
+            $this->form_validation->set_message('get_empresa', '<strong>Fornecedor</strong> não encontrado.');
             return FALSE;
         } else {
             return TRUE;
