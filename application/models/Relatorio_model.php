@@ -180,6 +180,7 @@ class Relatorio_model extends CI_Model {
         }
 
 		$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
+		$data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND OT.idSis_EmpresaAss = ' . $data['NomeEmpresa'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimentoRecebiveis) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPagoRecebiveis) = ' . $data['Mespag'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimentoRecebiveis) = ' . $data['Ano'] : FALSE;
@@ -195,11 +196,13 @@ class Relatorio_model extends CI_Model {
         $query = $this->db->query('
             SELECT
                 C.NomeCliente,
-                CONCAT(IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,""), " / ", IFNULL(TR.TipoReceita,"")) AS NomeCliente,
+                CONCAT(IFNULL(C.NomeCliente,""), " / ", IFNULL(A.NomeEmpresa,""), " / ", IFNULL(OT.Receitas,""), " / ", IFNULL(TR.TipoReceita,"")) AS NomeCliente,
 				TR.TipoReceita,
 				OT.idApp_OrcaTrataCli,
 				OT.idSis_Usuario,
 				OT.idSis_Empresa,
+				OT.idSis_EmpresaAss,
+				A.NomeEmpresa,
 				OT.TipoRD,
                 OT.AprovadoOrca,
                 OT.DataOrca,
@@ -222,7 +225,8 @@ class Relatorio_model extends CI_Model {
                 App_OrcaTrataCli AS OT
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = OT.idSis_Empresa
-                    LEFT JOIN App_ParcelasRecebiveisCli AS PR ON OT.idApp_OrcaTrataCli = PR.idApp_OrcaTrataCli
+                    LEFT JOIN Sis_Empresa AS A ON A.idSis_Empresa = OT.idSis_EmpresaAss
+					LEFT JOIN App_ParcelasRecebiveisCli AS PR ON OT.idApp_OrcaTrataCli = PR.idApp_OrcaTrataCli
 					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
             WHERE
                 
@@ -234,6 +238,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro5 . '
 				OT.TipoRD = "R"
 				' . $data['NomeCliente'] . '
+				' . $data['NomeEmpresa'] . '
 				' . $data['Mesvenc'] . ' 
 				' . $data['Mespag'] . '
 				' . $data['Ano'] . ' 
@@ -4320,7 +4325,7 @@ exit();*/
         ');
 
         $array = array();
-        $array[0] = ':: Todos ::';
+        $array[0] = 'TODOS';
         foreach ($query->result() as $row) {
 			$array[$row->idApp_Cliente] = $row->NomeCliente;
         }
@@ -4392,7 +4397,7 @@ exit();*/
         ');
 
         $array = array();
-        $array[0] = ':: Todos ::';
+        $array[0] = 'TODOS';
         foreach ($query->result() as $row) {
 			$array[$row->idSis_Empresa] = $row->NomeEmpresa;
         }

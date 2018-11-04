@@ -164,6 +164,7 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'NomeCliente',
+			'NomeEmpresa',
 			'Ano',
 			'Mesvenc',
 			'Mespag',			
@@ -252,6 +253,7 @@ class Relatorio extends CI_Controller {
 			'PR.DataPagoRecebiveis' => 'Data do Pagam.',
 			'PR.QuitadoRecebiveis' => 'Quit.Parc.',
 			'C.NomeCliente' => 'Nome do Cliente',
+			'A.NomeEmpresa' => 'Nome da Empresa',
 			'TR.TipoReceita' => 'Tipo de Receita',
 			'OT.Modalidade' => 'Modalidade',
             'OT.idApp_OrcaTrataCli' => 'Número do Orçamento',
@@ -269,6 +271,7 @@ class Relatorio extends CI_Controller {
         );
 
 		$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+		$data['select']['NomeEmpresa'] = $this->Relatorio_model->select_empresas();
 		$data['select']['TipoReceita'] = $this->Relatorio_model->select_tiporeceita();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
 		$data['select']['Mespag'] = $this->Relatorio_model->select_mes();
@@ -287,7 +290,8 @@ class Relatorio extends CI_Controller {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
-            $data['bd']['TipoReceita'] = $data['query']['TipoReceita'];
+            $data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
+			$data['bd']['TipoReceita'] = $data['query']['TipoReceita'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
 			$data['bd']['Mespag'] = $data['query']['Mespag'];			

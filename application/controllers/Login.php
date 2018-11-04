@@ -109,8 +109,8 @@ class Login extends CI_Controller {
                 #$_SESSION['log']['Usuario'] = $query['Usuario'];
                 //se for necessário reduzir o tamanho do nome de usuário, que pode ser um email
                 $_SESSION['log']['Usuario'] = (strlen($query['Usuario']) > 15) ? substr($query['Usuario'], 0, 15) : $query['Usuario'];
-                #$_SESSION['log']['Nome'] = (strlen($query['Nome']) > 10) ? substr($query['Nome'], 0, 10) : $query['Nome'];
-				$_SESSION['log']['Nome'] = $query['Nome'];
+				$_SESSION['log']['Nome'] = (strlen($query['Nome']) > 6) ? substr($query['Nome'], 0, 6) : $query['Nome'];
+				#$_SESSION['log']['Nome'] = $query['Nome'];
 				$_SESSION['log']['id'] = $query['idSis_Usuario'];
 				$_SESSION['log']['Empresa'] = $query['Empresa'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];

@@ -221,28 +221,30 @@ class Empresa_model extends CI_Model {
 
         if ($data === TRUE) {
             $array = $this->db->query(					
-				'SELECT                
+			'SELECT                
 				idSis_Empresa,
-				CONCAT(TipoFornec, " --- ", NomeEmpresa) AS NomeEmpresa				
+				NomeEmpresa				
             FROM
                 Sis_Empresa
             WHERE
-                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
-			ORDER BY NomeEmpresa ASC'
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
+                 
+			ORDER BY 
+				NomeEmpresa ASC'
     );
 					
         } else {
             $query = $this->db->query(
-                'SELECT                
+			'SELECT                
 				idSis_Empresa,
-				CONCAT(TipoFornec, " --- ", NomeEmpresa) AS NomeEmpresa				
+				NomeEmpresa				
             FROM
                 Sis_Empresa
             WHERE
-                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                Empresa = ' . $_SESSION['log']['Empresa'] . ' 
-			ORDER BY NomeEmpresa ASC'
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
+                 
+			ORDER BY 
+				NomeEmpresa ASC'
     );
             
             $array = array();

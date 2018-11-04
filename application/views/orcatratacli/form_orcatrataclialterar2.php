@@ -388,6 +388,11 @@
 																</div>
 																-->
 																<div class="col-md-2">
+																	<label for="Receitas">Receita</label><br>
+																	<input type="text" class="form-control" maxlength="200"
+																			name="Receitas" value="<?php echo $orcatrata['Receitas'] ?>">
+																</div>
+																<div class="col-md-2">
 																	<label for="TipoReceita">Tipo de Receita</label>
 																	<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																			id="TipoReceita" name="TipoReceita">
@@ -420,12 +425,21 @@
 																		?>
 																	</select>
 																</div>
-																
-
 																<div class="col-md-2">
-																	<label for="Receitas">Receita</label><br>
-																	<input type="text" class="form-control" maxlength="200"
-																			name="Receitas" value="<?php echo $orcatrata['Receitas'] ?>">
+																	<label for="idSis_EmpresaAss">Empresas Ass.</label>
+																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																			id="idSis_EmpresaAss" autofocus name="idSis_EmpresaAss">
+																		<option value="">-- Sel. um Usuario --</option>
+																		<?php
+																		foreach ($select['idSis_EmpresaAss'] as $key => $row) {
+																			if ($orcatrata['idSis_EmpresaAss'] == $key) {
+																				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																			} else {
+																				echo '<option value="' . $key . '">' . $row . '</option>';
+																			}
+																		}
+																		?>
+																	</select>
 																</div>
 																<div class="col-md-2">
 																	<label for="ValorRestanteOrca">Valor Total:</label><br>
