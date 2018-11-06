@@ -16,14 +16,11 @@
 					
 					<?php echo form_open('relatorio/receitas', 'role="form"'); ?>
 					
-						<button class="btn btn-sm btn-info" name="pesquisar" value="0" type="submit">
-							<span class="glyphicon glyphicon-search"></span>Pesquise
-						</button>
-						<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-							<span class="glyphicon glyphicon-filter"></span> Filtro
+						<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+							<span class="glyphicon glyphicon-search"></span> Pesquisar
 						</button>											
 						<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-							<span class="glyphicon glyphicon-plus"></span>Receita
+							<span class="glyphicon glyphicon-plus"></span> Cad. Receita
 						</button>					
 										
 					</div>
@@ -34,9 +31,8 @@
 								<div class="modal-content">
 									<div class="modal-header bg-danger">
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-										<h4 class="modal-title">Antes de cadastrar uma<br>
-																Nova Receita, "Pesquise"<br>
-																as Receitas Cadastradas!</h4>
+										<h4 class="modal-title">Evite cadastrar Receitas REPETIDAS!<br>
+																"Pesquise"as Receitas Cadastradas!</h4>
 									</div>
 									<!--
 									<div class="modal-body">
@@ -45,17 +41,17 @@
 									</div>
 									-->
 									<div class="modal-footer">
-										<div class="form-group col-md-3 text-left">
+										<div class="form-group col-md-4 text-left">
 											<div class="form-footer">
-												<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
-													<span class="glyphicon glyphicon-search"></span> Pesquise
+												<button  class="btn btn-info btn-block"" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+													<span class="glyphicon glyphicon-search"></span> Pesquisar
 												</button>
 											</div>
 										</div>
-										<div class="form-group col-md-3 text-left">
+										<div class="form-group col-md-4 text-left">
 											<div class="form-footer">		
 												<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>orcatratacli/cadastrar2" role="button">
-													<span class="glyphicon glyphicon-plus"></span> Receita
+													<span class="glyphicon glyphicon-plus"></span> Cad. Receita
 												</a>
 											</div>	
 										</div>		
@@ -73,7 +69,7 @@
 									</div>
 									<div class="modal-footer">
 											<div class="row">
-												<div class="col-md-4 text-left" >
+												<div class="col-md-3 text-left" >
 													<label for="Ordenamento">Mês do Vencimento:</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 															id="Mesvenc" name="Mesvenc">
@@ -88,7 +84,7 @@
 														?>
 													</select>
 												</div>
-												<div class="col-md-4 text-left" >
+												<div class="col-md-3 text-left" >
 													<label for="Ordenamento">Mês do Pagamento:</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 															id="Mespag" name="Mespag">
@@ -103,7 +99,7 @@
 														?>
 													</select>
 												</div>
-												<div class="col-md-4 text-left" >
+												<div class="col-md-3 text-left" >
 													<label for="Ordenamento">Ano:</label>
 													<div>
 														<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
@@ -112,13 +108,13 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-md-4 text-left">
-													<label for="QuitadoOrca">Orçam. Quit?</label>
+												<div class="col-md-3 text-left">
+													<label for="AprovadoOrca">Aprovado</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " 
-															id="QuitadoOrca" name="QuitadoOrca">
+															id="AprovadoOrca" name="AprovadoOrca">
 														<?php
-														foreach ($select['QuitadoOrca'] as $key => $row) {
-															if ($query['QuitadoOrca'] == $key) {
+														foreach ($select['AprovadoOrca'] as $key => $row) {
+															if ($query['AprovadoOrca'] == $key) {
 																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 															} else {
 																echo '<option value="' . $key . '">' . $row . '</option>';
@@ -127,23 +123,8 @@
 														?>
 													</select>
 												</div>
-												<div class="col-md-4 text-left">
-													<label for="QuitadoRecebiveis">Parc. Quit.?</label>
-													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-															id="QuitadoRecebiveis" name="QuitadoRecebiveis">
-														<?php
-														foreach ($select['QuitadoRecebiveis'] as $key => $row) {
-															if ($query['QuitadoRecebiveis'] == $key) {
-																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-															} else {
-																echo '<option value="' . $key . '">' . $row . '</option>';
-															}
-														}
-														?>
-													</select>
-												</div>
-												<div class="col-md-4 text-left">
-													<label for="ServicoConcluido">Prod/Serv. Entr.?</label>
+												<div class="col-md-3 text-left">
+													<label for="ServicoConcluido">Entregue</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 															id="ServicoConcluido" name="ServicoConcluido">
 														<?php
@@ -157,17 +138,47 @@
 														?>
 													</select>
 												</div>
+												<div class="col-md-3 text-left">
+													<label for="QuitadoOrca">Quitado</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " 
+															id="QuitadoOrca" name="QuitadoOrca">
+														<?php
+														foreach ($select['QuitadoOrca'] as $key => $row) {
+															if ($query['QuitadoOrca'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+												</div>
+												<div class="col-md-3 text-left">
+													<label for="QuitadoRecebiveis">Parc. Quit.</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+															id="QuitadoRecebiveis" name="QuitadoRecebiveis">
+														<?php
+														foreach ($select['QuitadoRecebiveis'] as $key => $row) {
+															if ($query['QuitadoRecebiveis'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+												</div>
 											</div>
 											<div class="row">
 												<br>
-												<div class="form-group col-md-4 text-left">
+												<div class="form-group col-md-3 text-left">
 													<div class="form-footer ">
-														<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
-															<span class="glyphicon glyphicon-search"></span> Pesquisar
+														<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+															<span class="glyphicon glyphicon-filter"></span> Filtrar
 														</button>
 													</div>
 												</div>
-												<div class="form-group col-md-4 text-left">
+												<div class="form-group col-md-3 text-left">
 													<div class="form-footer ">
 														<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
 															<span class="glyphicon glyphicon-remove"> Fechar
@@ -177,7 +188,7 @@
 											</div>
 											
 											<div class="row">
-												<div class="col-md-4 text-left">
+												<div class="col-md-3 text-left">
 													<label for="Ordenamento">Nome do Cliente:</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 															id="NomeCliente" name="NomeCliente">
@@ -192,7 +203,7 @@
 														?>
 													</select>
 												</div>
-												<div class="col-md-4 text-left">
+												<div class="col-md-3 text-left">
 													<label for="Ordenamento">Nome da Empresa:</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 															id="NomeEmpresa" name="NomeEmpresa">
@@ -207,7 +218,7 @@
 														?>
 													</select>
 												</div>
-												<div class="col-md-4 text-left">
+												<div class="col-md-3 text-left">
 													<label for="Ordenamento">Tipo de Receita:</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 															id="TipoReceita" name="TipoReceita">
@@ -224,7 +235,7 @@
 												</div>
 											</div>
 											<div class="row">	
-												<div class="col-md-4 text-left">
+												<div class="col-md-3 text-left">
 													<label for="Modalidade">Modalidade</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " 
 															id="Modalidade" name="Modalidade">
@@ -239,7 +250,7 @@
 														?>
 													</select>
 												</div>
-												<div class="col-md-8 text-left">
+												<div class="col-md-6 text-left">
 													<label for="Ordenamento">Ordenamento:</label>
 													<div class="form-group">
 														<div class="row">
@@ -278,14 +289,14 @@
 											</div>
 											<div class="row">	
 												
-												<div class="form-group col-md-4 text-left">
+												<div class="form-group col-md-3 text-left">
 													<div class="form-footer ">
-														<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
-															<span class="glyphicon glyphicon-search"></span> Pesquisar
+														<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+															<span class="glyphicon glyphicon-filter"></span> Filtrar
 														</button>
 													</div>
 												</div>
-												<div class="form-group col-md-4 text-left">
+												<div class="form-group col-md-3 text-left">
 													<div class="form-footer ">
 														<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
 															<span class="glyphicon glyphicon-remove"> Fechar

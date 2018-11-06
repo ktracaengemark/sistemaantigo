@@ -30,45 +30,51 @@
 						-->
 						
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group " role="group" aria-label="...">
+								<a href="<?php echo base_url(); ?>agenda">
+									<button type="button" class="btn btn-md btn-info ">
+										<span class="glyphicon glyphicon-calendar"></span> Agenda
+									</button>
+								</a>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
-								<button type="button" class="btn btn-md btn-primary dropdown-toggle" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-book"></span> Agenda <span class="caret"></span>
+								<button type="button" class="btn btn-md btn-success dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-user"></span> <span class="glyphicon glyphicon-home"></span> Clientes <span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="<?php echo base_url(); ?>agenda"><span class="glyphicon glyphicon-calendar"></span> Calendário</a></li>
-									<li role="separator" class="divider"></li>
-									<li><a href="<?php echo base_url() ?>relatorio/tarefa"><span class="glyphicon glyphicon-pencil"></span> Anotações</a></li>
+								<ul class="dropdown-menu" role="menu">							
+									<li><a href="<?php echo base_url() ?>relatorio/clientes"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['log']['NomeEmpresa']; ?> </a></li>
+									<li role="separator" class="divider"></li>							
+									<li><a href="<?php echo base_url() ?>relatorio/despesaspag"><span class="glyphicon glyphicon-home"></span> Empresas Associadas</a></li>
 								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>
+						<!--
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group " role="group" aria-label="...">
+								<a href="<?php echo base_url(); ?>relatorio/clientes">
+									<button type="button" class="btn btn-md btn-success ">
+										<span class="glyphicon glyphicon-user"></span> Clientes
+									</button>
+								</a>
 							</div>
 							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
 						
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
-							<div class="btn-group">
-								<button type="button" class="btn btn-md btn-success dropdown-toggle" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-user"></span> Clientes <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu">							
-									<li><a href="<?php echo base_url() ?>relatorio/clientes"><span class="glyphicon glyphicon-user"></span> Clientes</a></li>							
-									<li role="separator" class="divider"></li>
-									<li><a href="<?php echo base_url() ?>relatorio/aniversariantes"><span class="glyphicon glyphicon-gift"></span> Aniver. Clientes</a></li>
-								</ul>
+							<div class="btn-group " role="group" aria-label="...">
+								<a href="<?php echo base_url(); ?>relatorio/empresas">
+									<button type="button" class="btn btn-md btn-success ">
+										<span class="glyphicon glyphicon-home"></span> Empresas
+									</button>
+								</a>
 							</div>
 							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
-						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
-							<div class="btn-group">
-								<button type="button" class="btn btn-md btn-info dropdown-toggle" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-home"></span> Empresas <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu">							
-									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Empresas</a></li>							
-									<li role="separator" class="divider"></li>
-									<li><a href="<?php echo base_url() ?>relatorio/aniversariantes"><span class="glyphicon glyphicon-gift"></span> Aniver. Usuarios</a></li>
-								</ul>
-							</div>
-							<div class="btn-group" role="group" aria-label="..."> </div>
-						</li>
+						-->
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
 								<button type="button" class="btn btn-md btn-warning dropdown-toggle" data-toggle="dropdown">

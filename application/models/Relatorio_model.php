@@ -232,6 +232,7 @@ class Relatorio_model extends CI_Model {
                 
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				' . $filtro1 . '
 				' . $filtro2 . '
 				' . $filtro3 . '
 				' . $filtro4 . ' 
@@ -4014,7 +4015,7 @@ exit();*/
                 App_OrcaTrata AS OT
 					LEFT JOIN App_ProdutoVenda AS PD ON OT.idApp_OrcaTrata = PD.idApp_OrcaTrata
 					LEFT JOIN Tab_Produto AS TPD ON TPD.idTab_Produto = PD.idTab_Produto
-					LEFT JOIN App_Procedimento AS PC ON OT.idApp_OrcaTrata = PC.idApp_OrcaTrata
+					LEFT JOIN App_ProcedimentoCli AS PC ON OT.idApp_OrcaTrata = PC.idApp_OrcaTrata
 					LEFT JOIN App_Profissional AS PR ON PR.idApp_Profissional = PC.Profissional
 			WHERE
                 C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
@@ -4148,6 +4149,65 @@ exit();*/
 
     }
 
+	public function list_procedimento($data, $completo) {
+
+		$data['Dia'] = ($data['Dia']) ? ' AND DAY(C.DataProcedimento) = ' . $data['Dia'] : FALSE;
+		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(C.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
+		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(C.DataProcedimento) = ' . $data['Ano'] : FALSE;
+        $data['Campo'] = (!$data['Campo']) ? 'C.DataProcedimento' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
+		$filtro10 = ($data['ConcluidoProcedimento'] != '#') ? 'C.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
+        
+		$query = $this->db->query('
+            SELECT
+				C.idApp_ProcedimentoCli,
+                C.Procedimento,
+				C.DataProcedimento,
+				C.ConcluidoProcedimento
+            FROM
+				App_ProcedimentoCli AS C
+            WHERE
+                C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				C.idApp_OrcaTrataCli = "0" AND
+				C.idApp_Cliente = "0" AND
+				' . $filtro10 . '
+				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
+                ' . $data['Dia'] . ' 
+				' . $data['Mesvenc'] . ' 
+				' . $data['Ano'] . ' 
+				
+            ORDER BY
+                ' . $data['Campo'] . ' 
+				' . $data['Ordenamento'] . '
+        ');
+        /*
+
+        #AND
+        #C.idApp_Cliente = OT.idApp_Cliente
+
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            foreach ($query->result() as $row) {
+				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+
+            }
+
+            return $query;
+        }
+
+    }
+	
 	public function list_clienteprod($data, $completo) {
 
         $data['Campo'] = (!$data['Campo']) ? 'C.NomeCliente' : $data['Campo'];
@@ -4169,7 +4229,7 @@ exit();*/
 				App_OrcaTrata AS OT
 				LEFT JOIN App_ProdutoVenda AS PD ON OT.idApp_OrcaTrata = PD.idApp_OrcaTrata
 				LEFT JOIN Tab_Produto AS TPD ON TPD.idTab_Produto = PD.idTab_Produto
-				LEFT JOIN App_Procedimento AS PC ON OT.idApp_OrcaTrata = PC.idApp_OrcaTrata
+				LEFT JOIN App_ProcedimentoCli AS PC ON OT.idApp_OrcaTrata = PC.idApp_OrcaTrata
             WHERE
                 C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
 				C.idApp_Cliente = OT.idApp_Cliente
@@ -4250,7 +4310,7 @@ exit();*/
                 App_OrcaTrata AS OT
 					LEFT JOIN App_ServicoVenda AS SV ON OT.idApp_OrcaTrata = SV.idApp_OrcaTrata
 					LEFT JOIN Tab_Servico AS TSV ON TSV.idTab_Servico = SV.idTab_Servico
-					LEFT JOIN App_Procedimento AS PC ON OT.idApp_OrcaTrata = PC.idApp_OrcaTrata
+					LEFT JOIN App_ProcedimentoCli AS PC ON OT.idApp_OrcaTrata = PC.idApp_OrcaTrata
 					LEFT JOIN App_Profissional AS PR ON PR.idApp_Profissional = PC.Profissional
 
 			WHERE

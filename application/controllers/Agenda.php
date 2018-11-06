@@ -47,6 +47,9 @@ class Agenda extends CI_Controller {
         $data['query']['contatocliente_aniversariantes'] = $this->Agenda_model->contatocliente_aniversariantes($_SESSION['log']['id']);
         #$data['query']['profissional_aniversariantes'] = $this->Agenda_model->profissional_aniversariantes($_SESSION['log']['id']);
 		#$data['query']['contatoprof_aniversariantes'] = $this->Agenda_model->contatoprof_aniversariantes($_SESSION['log']['id']);
+		$data['query']['procedimento'] = $this->Agenda_model->procedimento($_SESSION['log']['id']);
+		$data['query']['procedimentocli'] = $this->Agenda_model->procedimentocli($_SESSION['log']['id']);
+		$data['query']['procedimentoorc'] = $this->Agenda_model->procedimentoorc($_SESSION['log']['id']);
 		
 		$this->load->view('agenda/tela_agenda', $data);
 

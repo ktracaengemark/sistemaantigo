@@ -391,17 +391,7 @@ class Orcatratacli extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*		
-		$data['select']['Convenio'] = $this->Relatorio_model->select_convenio();
-
-        $data['query'] = quotes_to_entities($this->input->post(array(
-            'Convenio',
-        ), TRUE));
-
-        $_SESSION['log']['Convenio'] = ($data['query']['Convenio']) ?
-            $data['query']['Convenio'] : FALSE;        
-*/		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 		$data['orcatrata'] = quotes_to_entities($this->input->post(array(
             #### App_OrcaTrataCli ####
             'idApp_OrcaTrataCli',
@@ -486,10 +476,9 @@ class Orcatratacli extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('Profissional' . $i) ||
+            if ($this->input->post('DataProcedimento' . $i) || 
                     $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
                 $data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
 				
@@ -537,7 +526,7 @@ class Orcatratacli extends CI_Controller {
 		$data['select']['Modalidade'] = $this->Basico_model->select_modalidade();
 		$data['select']['QuitadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['QuitadoRecebiveis'] = $this->Basico_model->select_status_sn();
-        #$data['select']['Profissional'] = $this->Profissional_model->select_profissional();
+        $data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
 		$data['select']['idSis_EmpresaAss'] = $this->Empresa_model->select_empresa();
         #$data['select']['Servico'] = $this->Basico_model->select_servico();
@@ -575,13 +564,13 @@ class Orcatratacli extends CI_Controller {
         #Ver uma solução melhor para este campo
         (!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
 		
-		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
+		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'N' : FALSE;
 
         $data['radio'] = array(
             'AprovadoOrca' => $this->basico->radio_checked($data['orcatrata']['AprovadoOrca'], 'Orçamento Aprovado', 'NS'),
         );
 
-        ($data['orcatrata']['AprovadoOrca'] == 'S') ?
+        ($data['orcatrata']['AprovadoOrca'] == 'N') ?
             $data['div']['AprovadoOrca'] = '' : $data['div']['AprovadoOrca'] = 'style="display: none;"';
 
 			
@@ -651,7 +640,7 @@ class Orcatratacli extends CI_Controller {
                 $max = count($data['servico']);
                 for($j=1;$j<=$max;$j++) {
                     $data['servico'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-                    #$data['servico'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
+                    $data['servico'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
 					#$data['servico'][$j]['OrigemOrca'] = 'U/C';
 					$data['servico'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['servico'][$j]['idApp_OrcaTrataCli'] = $data['orcatrata']['idApp_OrcaTrataCli'];
@@ -667,7 +656,7 @@ class Orcatratacli extends CI_Controller {
                 $max = count($data['produto']);
                 for($j=1;$j<=$max;$j++) {
                     $data['produto'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-					#$data['produto'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
+					$data['produto'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
                     #$data['produto'][$j]['OrigemOrca'] = 'U/C';
 					$data['produto'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['produto'][$j]['idApp_OrcaTrataCli'] = $data['orcatrata']['idApp_OrcaTrataCli'];
@@ -683,7 +672,7 @@ class Orcatratacli extends CI_Controller {
                 $max = count($data['parcelasrec']);
                 for($j=1;$j<=$max;$j++) {
                     $data['parcelasrec'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-                    #$data['parcelasrec'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
+                    $data['parcelasrec'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
 					#$data['parcelasrec'][$j]['OrigemOrca'] = 'U/C';
 					$data['parcelasrec'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['parcelasrec'][$j]['idApp_OrcaTrataCli'] = $data['orcatrata']['idApp_OrcaTrataCli'];
@@ -702,8 +691,8 @@ class Orcatratacli extends CI_Controller {
                 $max = count($data['procedimento']);
                 for($j=1;$j<=$max;$j++) {
                     $data['procedimento'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-                    #$data['procedimento'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
-					#$data['procedimento'][$j]['OrigemOrca'] = 'U/C';
+                    $data['procedimento'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+					$data['procedimento'][$j]['idApp_Cliente'] = 0;
 					$data['procedimento'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['procedimento'][$j]['idApp_OrcaTrataCli'] = $data['orcatrata']['idApp_OrcaTrataCli'];
                     $data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'mysql');
@@ -1361,7 +1350,6 @@ class Orcatratacli extends CI_Controller {
                     $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_ProcedimentoCli'] = $this->input->post('idApp_ProcedimentoCli' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
                 $data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
 
@@ -1494,7 +1482,7 @@ class Orcatratacli extends CI_Controller {
 		$data['select']['Modalidade'] = $this->Basico_model->select_modalidade();
 		$data['select']['QuitadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['QuitadoRecebiveis'] = $this->Basico_model->select_status_sn();
-        #$data['select']['Profissional'] = $this->Profissional_model->select_profissional1();
+        $data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
 		$data['select']['idSis_EmpresaAss'] = $this->Empresa_model->select_empresa();
 		#$data['select']['Servico'] = $this->Basico_model->select_servico();
@@ -1512,6 +1500,11 @@ class Orcatratacli extends CI_Controller {
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';		
 		
+		if ($data['orcatrata']['Receitas'] )
+            $data['collapse3'] = 'class="collapse"';
+        else
+            $data['collapse3'] = '';
+
         //if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
         if ($data['count']['SCount'] > 0 || $data['count']['PCount'] > 0)
             $data['orcamentoin'] = 'in';
@@ -1531,13 +1524,13 @@ class Orcatratacli extends CI_Controller {
 
 
         #Ver uma solução melhor para este campo
-        (!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
+        (!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'N' : FALSE;
 
         $data['radio'] = array(
             'AprovadoOrca' => $this->basico->radio_checked($data['orcatrata']['AprovadoOrca'], 'Orçamento Aprovado', 'NS'),
         );
 
-        ($data['orcatrata']['AprovadoOrca'] == 'S') ?
+        ($data['orcatrata']['AprovadoOrca'] == 'N') ?
             $data['div']['AprovadoOrca'] = '' : $data['div']['AprovadoOrca'] = 'style="display: none;"';
 
 
@@ -1608,7 +1601,7 @@ class Orcatratacli extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
 
                     $data['update']['servico']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-                    #$data['update']['servico']['inserir'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
+                    $data['update']['servico']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
 					$data['update']['servico']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['servico']['inserir'][$j]['idApp_OrcaTrataCli'] = $data['orcatrata']['idApp_OrcaTrataCli'];
 					$data['update']['servico']['inserir'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeServico'], 'mysql');
@@ -1648,7 +1641,7 @@ class Orcatratacli extends CI_Controller {
                 $max = count($data['update']['produto']['inserir']);
                 for($j=0;$j<$max;$j++) {
                     $data['update']['produto']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-                    #$data['update']['produto']['inserir'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
+                    $data['update']['produto']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
 					$data['update']['produto']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['produto']['inserir'][$j]['idApp_OrcaTrataCli'] = $data['orcatrata']['idApp_OrcaTrataCli'];
 					$data['update']['produto']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['produto']['inserir'][$j]['DataValidadeProduto'], 'mysql');
@@ -1689,7 +1682,7 @@ class Orcatratacli extends CI_Controller {
                 $max = count($data['update']['parcelasrec']['inserir']);
                 for($j=0;$j<$max;$j++) {
                     $data['update']['parcelasrec']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-                    #$data['update']['parcelasrec']['inserir'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
+                    $data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
 					$data['update']['parcelasrec']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['parcelasrec']['inserir'][$j]['idApp_OrcaTrataCli'] = $data['orcatrata']['idApp_OrcaTrataCli'];
                     $data['update']['parcelasrec']['inserir'][$j]['ValorParcelaRecebiveis'] = str_replace(',', '.', str_replace('.', '', $data['update']['parcelasrec']['inserir'][$j]['ValorParcelaRecebiveis']));
@@ -1733,7 +1726,8 @@ class Orcatratacli extends CI_Controller {
                 $max = count($data['update']['procedimento']['inserir']);
                 for($j=0;$j<$max;$j++) {
                     $data['update']['procedimento']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-                    #$data['update']['procedimento']['inserir'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
+                    $data['update']['procedimento']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+					$data['update']['procedimento']['inserir'][$j]['idApp_Cliente'] = 0;
 					$data['update']['procedimento']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['procedimento']['inserir'][$j]['idApp_OrcaTrataCli'] = $data['orcatrata']['idApp_OrcaTrataCli'];
                     $data['update']['procedimento']['inserir'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimento'], 'mysql');
@@ -1829,7 +1823,7 @@ class Orcatratacli extends CI_Controller {
                 $data['msg'] = '?m=1';
 
 				#redirect(base_url() . 'orcatratacli/listar/' . $_SESSION['Usuario']['idApp_Cliente'] . $data['msg']);
-				redirect(base_url() . 'relatorioempresa/receitas/' . $data['msg']);
+				redirect(base_url() . 'relatorio/receitas/' . $data['msg']);
                 exit();
             //}
         //}

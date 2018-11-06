@@ -859,12 +859,12 @@ function adicionaProcedimento() {
 				<div class="panel-heading">\
 					<div class="row">\
 						<div class="col-md-4">\
-							<label for="Procedimento'+pc+'">Ação:</label>\
+							<label for="Procedimento'+pc+'">Procedimento:</label>\
 							<textarea class="form-control" id="Procedimento'+pc+'"\
 									  name="Procedimento'+pc+'"></textarea>\
 						</div>\
-						<div class="col-md-3">\
-							<label for="DataProcedimento'+pc+'">Data da Ação:</label>\
+						<div class="col-md-2">\
+							<label for="DataProcedimento'+pc+'">Data:</label>\
 							<div class="input-group DatePicker">\
 								<span class="input-group-addon" disabled>\
 									<span class="glyphicon glyphicon-calendar"></span>\
@@ -873,8 +873,8 @@ function adicionaProcedimento() {
 									   name="DataProcedimento'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 							</div>\
 						</div>\
-						<div class="col-md-3">\
-							<label for="ConcluidoProcedimento">Ação Concl.? </label><br>\
+						<div class="col-md-2">\
+							<label for="ConcluidoProcedimento">Concluído? </label><br>\
 							<div class="form-group">\
 								<div class="btn-group" data-toggle="buttons">\
 									<label class="btn btn-warning active" name="radio_ConcluidoProcedimento'+pc+'" id="radio_ConcluidoProcedimento'+pc+'N">\
@@ -888,7 +888,7 @@ function adicionaProcedimento() {
 								</div>\
 							</div>\
 						</div>\
-						<div class="col-md-2">\
+						<div class="col-md-1">\
 							<label><br></label><br>\
 							<button type="button" id="'+pc+'" class="remove_field3 btn btn-danger">\
 								<span class="glyphicon glyphicon-trash"></span>\

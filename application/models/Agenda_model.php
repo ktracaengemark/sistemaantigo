@@ -88,6 +88,115 @@ class Agenda_model extends CI_Model {
         }
     }
 
+	public function procedimento($data) {
+   
+		$query = $this->db->query('
+            SELECT
+				idApp_ProcedimentoCli,
+                idApp_OrcaTrataCli,
+				Procedimento,
+				DataProcedimento,
+				ConcluidoProcedimento
+            FROM
+				App_ProcedimentoCli
+            WHERE 
+                
+				idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				ConcluidoProcedimento = "N" AND
+				idApp_OrcaTrataCli = "0" AND
+				idApp_Cliente = "0"
+            ORDER BY
+                DataProcedimento DESC
+        ');
+
+        if ($query->num_rows() === FALSE) {
+            return TRUE;
+        }else {
+
+            foreach ($query->result() as $row) {
+				$row->Idade = $this->basico->calcula_idade($row->DataProcedimento);
+				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+            }
+            return $query;
+        }
+
+    }	
+
+	public function procedimentocli($data) {
+   
+		$query = $this->db->query('
+            SELECT
+				idApp_ProcedimentoCli,
+                idApp_OrcaTrataCli,
+				idApp_Cliente,
+				Procedimento,
+				DataProcedimento,
+				ConcluidoProcedimento
+            FROM
+				App_ProcedimentoCli
+            WHERE 
+                
+				idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				ConcluidoProcedimento = "N" AND
+				idApp_OrcaTrataCli = "0" AND
+				idApp_Cliente != "0"
+            ORDER BY
+                DataProcedimento DESC
+        ');
+
+        if ($query->num_rows() === FALSE) {
+            return TRUE;
+        }else {
+
+            foreach ($query->result() as $row) {
+				$row->Idade = $this->basico->calcula_idade($row->DataProcedimento);
+				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+            }
+            return $query;
+        }
+
+    }
+
+	public function procedimentoorc($data) {
+   
+		$query = $this->db->query('
+            SELECT
+				idApp_ProcedimentoCli,
+                idApp_OrcaTrataCli,
+				idApp_Cliente,
+				Procedimento,
+				DataProcedimento,
+				ConcluidoProcedimento
+            FROM
+				App_ProcedimentoCli
+            WHERE 
+                
+				idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				ConcluidoProcedimento = "N" AND
+				idApp_OrcaTrataCli != "0" AND
+				idApp_Cliente = "0"
+            ORDER BY
+                DataProcedimento DESC
+        ');
+
+        if ($query->num_rows() === FALSE) {
+            return TRUE;
+        }else {
+
+            foreach ($query->result() as $row) {
+				$row->Idade = $this->basico->calcula_idade($row->DataProcedimento);
+				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+            }
+            return $query;
+        }
+
+    }	
     public function contatocliente_aniversariantes($data) {
 
         $query = $this->db->query('
