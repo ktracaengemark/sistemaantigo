@@ -1,8 +1,8 @@
 <?php if (isset($msg)) echo $msg; ?>
 
 <!--<div id="dp" class="col-md-2"></div>
-<div id="datepickerinline" class="col-md-2"></div>
-<div id="calendar" class="col-md-8"></div>-->
+<div id="datepickerinline1" class="col-md-2"></div>
+<div id="calendarcli" class="col-md-8"></div>-->
 
 <div class="col-md-3">
 	<div class="panel panel-primary">
@@ -38,7 +38,7 @@
 						</form>
 						<?php } ?>
 
-						<div id="datepickerinline" class="col-md-12"></div>
+						<div id="datepickerinline1" class="col-md-12"></div>
 						
 					</div>
 				</div>
@@ -52,7 +52,7 @@
 		<div class="panel-body">
 			<div class="form-group">
 				<div class="row">
-					<div id="calendar" class="col-md-12"></div>
+					<div id="calendarcli" class="col-md-12"></div>
 				</div>
 			</div>
 		</div>
@@ -70,12 +70,12 @@
 								<label for="">Agendamento:</label>
 								<div class="form-group">
 									<div class="row">
-										<button type="button" id="MarcarConsulta" onclick="redirecionar(2)" class="btn btn-primary"> Com Cliente
+										<button type="button" id="MarcarConsulta" onclick="redirecionar5(2)" class="btn btn-primary"> Com Cliente
 										</button>
 									</div>
 									<br>
 									<div class="row">
-										<button type="button" id="AgendarEvento" onclick="redirecionar(1)" class="btn btn-info"> Outro Evento
+										<button type="button" id="AgendarEvento" onclick="redirecionar5(1)" class="btn btn-info"> Outro Evento
 										</button>
 									</div>
 										<input type="hidden" id="start" />

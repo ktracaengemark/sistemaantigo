@@ -1291,6 +1291,50 @@ class Basico_model extends CI_Model {
         return $array;
     }
 
+	public function select_agendacli($data = FALSE) {
+
+        $q = ($_SESSION['log']['Permissao'] > 2) ?
+            ' U.idSis_UsuarioCli = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+                SELECT
+                    A.idApp_Agenda,
+                    A.idSis_UsuarioCli,
+					U.Nome
+				FROM
+                    App_Agenda AS A
+						LEFT JOIN Sis_UsuarioCli AS U ON U.idSis_UsuarioCli = A.idSis_UsuarioCli
+				WHERE
+					U.idSis_UsuarioCli = ' . $_SESSION['log']['id'] . '
+				ORDER BY
+					U.Nome ASC
+			');
+
+        } else {
+            $query = $this->db->query('
+				SELECT
+                    A.idApp_Agenda,
+                    A.idSis_UsuarioCli,
+					U.Nome
+				FROM
+                    App_Agenda AS A
+						LEFT JOIN Sis_UsuarioCli AS U ON U.idSis_UsuarioCli = A.idSis_UsuarioCli
+				WHERE
+					U.idSis_UsuarioCli = ' . $_SESSION['log']['id'] . '
+				ORDER BY
+					U.Nome ASC
+			');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idApp_Agenda] = $row->Nome;
+            }
+        }
+
+        return $array;
+    }
+	
 	public function select_profissional2($data = FALSE) {
 
         $q = ($_SESSION['log']['Permissao'] > 2) ?

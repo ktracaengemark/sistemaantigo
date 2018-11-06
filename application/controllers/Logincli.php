@@ -201,9 +201,9 @@ class Logincli extends CI_Controller {
 			#$data['query']['Empresa'] = 0;
 			#$data['query']['Funcao'] = 95;
 			#$data['query']['UsuarioCliEmpresa'] = 1;
-			#$data['query']['idSis_EmpresaFilial'] = 33;
-			$data['query']['Associado'] = 33;
-			$data['query']['Permissao'] = 1;
+			#$data['query']['idSis_EmpresaMatriz'] = 1;
+			#$data['query']['Associado'] = 1;
+			$data['query']['Permissao'] = 3;
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
             $data['query']['Senha'] = md5($data['query']['Senha']);
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
