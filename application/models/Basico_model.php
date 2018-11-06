@@ -244,6 +244,33 @@ class Basico_model extends CI_Model {
         }
     }
 
+    function set_auditoriacli($auditoriaitem, $tabela, $operacao, $data, $id = NULL) {
+
+        if ($id == NULL)
+            $id = $_SESSION['log']['id'];
+
+        $auditoria = array(
+            'Tabela' => $tabela,
+            'idSis_UsuarioCli' => $id,
+            'DataAuditoria' => date('Y-m-d H:i:s', time()),
+            'Operacao' => $operacao,
+            'Ip' => $this->input->ip_address(),
+            'So' => $this->agent->platform(),
+            'Navegador' => $this->agent->browser(),
+            'NavegadorVersao' => $this->agent->version(),
+        );
+
+        if ($this->db->insert('Sis_AuditoriaCli', $auditoria)) {
+            $i = 0;
+            while (isset($data['auditoriaitem'][$i])) {
+                $data['auditoriaitem'][$i]['idSis_AuditoriaCli'] = $this->db->insert_id();
+                $i++;
+            }
+
+            $this->db->insert_batch('Sis_AuditoriaItemCli', $data['auditoriaitem']);
+        }
+    }
+	
     function set_auditoriaempresa($auditoriaitem, $tabela, $operacao, $data, $id = NULL) {
 
         if ($id == NULL)
