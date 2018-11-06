@@ -69,13 +69,15 @@
 							<div class="col-md-12 col-lg-12">
 								<label for="">Agendamento:</label>
 								<div class="form-group">
+									<!--
 									<div class="row">
 										<button type="button" id="MarcarConsulta" onclick="redirecionar5(2)" class="btn btn-primary"> Com Cliente
 										</button>
 									</div>
 									<br>
+									-->
 									<div class="row">
-										<button type="button" id="AgendarEvento" onclick="redirecionar5(1)" class="btn btn-info"> Outro Evento
+										<button type="button" id="AgendarEvento" onclick="redirecionar5(1)" class="btn btn-info"> Evento
 										</button>
 									</div>
 										<input type="hidden" id="start" />
@@ -114,10 +116,10 @@
 									<th class="active">Conc.</th>
 								</tr>
 								<?php
-								if ($query['procedimento'] != FALSE) {
+								if ($query['procedimentouscli'] != FALSE) {
 
-									foreach ($query['procedimento']->result_array() as $row) {
-										$url = base_url() . 'procedimento/alterar/' . $row['idApp_ProcedimentoCli'];
+									foreach ($query['procedimentouscli']->result_array() as $row) {
+										$url = base_url() . 'procedimentocli/alterar/' . $row['idApp_ProcedimentoCli'];
 
 										echo '<tr class="clickable-row" data-href="' . $url . '" data-original-title="' . $row['Idade'] . ' anos" data-container="body"
 												data-toggle="tooltip" data-placement="right" title="">';

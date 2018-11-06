@@ -47,7 +47,7 @@ class Agendacli extends CI_Controller {
         #$data['query']['contatocliente_aniversariantes'] = $this->Agendacli_model->contatocliente_aniversariantes($_SESSION['log']['id']);
         #$data['query']['profissional_aniversariantes'] = $this->Agendacli_model->profissional_aniversariantes($_SESSION['log']['id']);
 		#$data['query']['contatoprof_aniversariantes'] = $this->Agendacli_model->contatoprof_aniversariantes($_SESSION['log']['id']);
-		$data['query']['procedimento'] = $this->Agendacli_model->procedimento($_SESSION['log']['id']);
+		$data['query']['procedimentouscli'] = $this->Agendacli_model->procedimentouscli($_SESSION['log']['id']);
 		#$data['query']['procedimentocli'] = $this->Agendacli_model->procedimentocli($_SESSION['log']['id']);
 		#$data['query']['procedimentoorc'] = $this->Agendacli_model->procedimentoorc($_SESSION['log']['id']);
 		

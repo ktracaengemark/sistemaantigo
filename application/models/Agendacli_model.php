@@ -88,7 +88,7 @@ class Agendacli_model extends CI_Model {
         }
     }
 
-	public function procedimento($data) {
+	public function procedimentouscli($data) {
    
 		$query = $this->db->query('
             SELECT
@@ -103,6 +103,7 @@ class Agendacli_model extends CI_Model {
                 
 				idSis_UsuarioCli = ' . $_SESSION['log']['id'] . ' AND
 				ConcluidoProcedimento = "N" AND
+				idSis_Empresa = "0" AND
 				idApp_OrcaTrataCli = "0" AND
 				idApp_Cliente = "0"
             ORDER BY
@@ -197,7 +198,7 @@ class Agendacli_model extends CI_Model {
 
     }	
 
-public function select_usuario() {
+	public function select_usuario() {
 
         $query = $this->db->query('
             SELECT
