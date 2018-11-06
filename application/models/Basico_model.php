@@ -1259,7 +1259,7 @@ class Basico_model extends CI_Model {
 						LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = A.idSis_Usuario
 				WHERE
                     ' . $q . '
-					A.Empresa = ' . $_SESSION['log']['Empresa'] . '
+					A.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 				ORDER BY
 					U.Nome ASC
 			');
@@ -1277,7 +1277,7 @@ class Basico_model extends CI_Model {
 						LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = U.Funcao
 				WHERE
                     ' . $q . '
-					A.Empresa = ' . $_SESSION['log']['Empresa'] . '
+					A.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 				ORDER BY
 					F.Abrev ASC
 			');
@@ -1301,12 +1301,15 @@ class Basico_model extends CI_Model {
                 SELECT
                     A.idApp_Agenda,
                     A.idSis_UsuarioCli,
+					A.idSis_Usuario,
+					A.NomeAgenda,
 					U.Nome
 				FROM
                     App_Agenda AS A
 						LEFT JOIN Sis_UsuarioCli AS U ON U.idSis_UsuarioCli = A.idSis_UsuarioCli
 				WHERE
-					U.idSis_UsuarioCli = ' . $_SESSION['log']['id'] . '
+                    ' . $q . '
+					(A.NomeAgenda = "Cliente" OR A.NomeAgenda = "Padão")
 				ORDER BY
 					U.Nome ASC
 			');
@@ -1316,12 +1319,15 @@ class Basico_model extends CI_Model {
 				SELECT
                     A.idApp_Agenda,
                     A.idSis_UsuarioCli,
+					A.idSis_Usuario,
+					A.NomeAgenda,
 					U.Nome
 				FROM
                     App_Agenda AS A
 						LEFT JOIN Sis_UsuarioCli AS U ON U.idSis_UsuarioCli = A.idSis_UsuarioCli
 				WHERE
-					U.idSis_UsuarioCli = ' . $_SESSION['log']['id'] . '
+                    ' . $q . '
+					(A.NomeAgenda = "Cliente" OR A.NomeAgenda = "Padão")
 				ORDER BY
 					U.Nome ASC
 			');

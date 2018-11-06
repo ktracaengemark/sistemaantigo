@@ -33,7 +33,7 @@ class Agenda extends CI_Controller {
         else
             $data['msg'] = '';
 
-        $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
+        $data['select']['NomeUsuario'] = $this->Agenda_model->select_usuario();
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'NomeUsuario',

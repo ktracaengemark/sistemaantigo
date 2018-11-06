@@ -28,6 +28,7 @@ $result = mysql_query(
         'SELECT
             A.idApp_Agenda,
 			A.idSis_UsuarioCli,
+			A.idSis_Usuario,
             U.Nome AS NomeProfissional,
 			C.idApp_Consulta,
             C.idApp_Cliente,
@@ -46,8 +47,9 @@ $result = mysql_query(
             C.Evento
         FROM
             App_Agenda AS A
-                LEFT JOIN Sis_UsuarioCli AS U ON U.idSis_UsuarioCli = A.idSis_UsuarioCli,
-            App_Consulta AS C
+                LEFT JOIN Sis_UsuarioCli AS U ON U.idSis_UsuarioCli = A.idSis_UsuarioCli
+				LEFT JOIN Sis_Usuario AS SU ON SU.CpfUsuario = U.CpfUsuarioCli,
+			App_Consulta AS C
                 LEFT JOIN App_Cliente AS R ON R.idApp_Cliente = C.idApp_Cliente
                 LEFT JOIN App_ContatoCliente AS D ON D.idApp_ContatoCliente = C.idApp_ContatoCliente
                 LEFT JOIN Sis_UsuarioCli AS P ON P.idSis_UsuarioCli = C.idSis_UsuarioCli
@@ -55,10 +57,12 @@ $result = mysql_query(
 
         WHERE
 			C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+			
 			' . $query . '
             ' . $permissao . '
             A.idApp_Agenda = C.idApp_Agenda
-        ORDER BY C.DataInicio ASC'
+        ORDER BY 
+			C.DataInicio ASC'
 );
 
 while ($row = mysql_fetch_assoc($result)) {

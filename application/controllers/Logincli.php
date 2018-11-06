@@ -117,6 +117,7 @@ class Logincli extends CI_Controller {
 				#$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
 				#$_SESSION['log']['NomeEmpresa'] = (strlen($query['NomeEmpresa']) > 12) ? substr($query['NomeEmpresa'], 0, 12) : $query['NomeEmpresa'];
 				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
+				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
 
                 $this->load->database();
@@ -203,7 +204,7 @@ class Logincli extends CI_Controller {
 			#$data['query']['UsuarioCliEmpresa'] = 1;
 			#$data['query']['idSis_EmpresaMatriz'] = 1;
 			#$data['query']['Associado'] = 1;
-			$data['query']['Permissao'] = 3;
+			$data['query']['Permissao'] = 1;
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
             $data['query']['Senha'] = md5($data['query']['Senha']);
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');

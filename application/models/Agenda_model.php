@@ -197,6 +197,7 @@ class Agenda_model extends CI_Model {
         }
 
     }	
+
     public function contatocliente_aniversariantes($data) {
 
         $query = $this->db->query('
@@ -234,7 +235,32 @@ class Agenda_model extends CI_Model {
             return $query;
         }
     }
-/*	
+
+	public function select_usuario() {
+
+        $query = $this->db->query('
+            SELECT
+				P.idSis_Usuario,
+				CONCAT(IFNULL(F.Abrev,""), " --- ", IFNULL(P.Nome,"")) AS NomeUsuario
+            FROM
+                Sis_Usuario AS P
+					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                P.Empresa = ' . $_SESSION['log']['Empresa'] . '
+			ORDER BY F.Abrev ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idSis_Usuario] = $row->NomeUsuario;
+        }
+
+        return $array;
+    }
+	
+	/*	
 	public function profissional_aniversariantes($data) {
 
         $query = $this->db->query('
