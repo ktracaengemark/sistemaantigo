@@ -51,8 +51,8 @@
 		<div class="panel-heading"><strong></strong></div>
 		<div class="panel-body">
 			<div class="form-group">
-				<div class="row">
-					<div id="calendar" class="col-md-12"></div>
+				<div  style="overflow: auto; height: 680px; "> 
+						<table id="calendar" class="table table-condensed table-bordered table-striped "></table>
 				</div>
 			</div>
 		</div>
@@ -106,7 +106,7 @@
 			<div class="form-group">
 				<div class="row">
 					<div class="col-md-12">
-						<div style="overflow: auto; height: 150px; ">
+						<div style="overflow: auto; height: 140px; ">
 							<table class="table table-condensed table-bordered table-striped" >
 								<tr>
 									<th class="active">Tarefa</th>	
@@ -152,10 +152,10 @@
 			<div class="form-group">
 				<div class="row">
 					<div class="col-md-12">
-						<div style="overflow: auto; height: 150px; ">
+						<div style="overflow: auto; height: 140px; ">
 							<table class="table table-condensed table-bordered table-striped" >
 								<tr>
-									<th class="active">Cli</th>
+									<th class="active">Cliente</th>
 									<th class="active">Procedimento</th>	
 									<th class="active">Data</th>
 									<th class="active">Conc.</th>
@@ -164,11 +164,11 @@
 								if ($query['procedimentocli'] != FALSE) {
 
 									foreach ($query['procedimentocli']->result_array() as $row) {
-										$url = base_url() . 'cliente/prontuario/' . $row['idApp_Cliente'];
+										$url = base_url() . 'procedcli/alterar/' . $row['idApp_ProcedimentoCli'];
 
 										echo '<tr class="clickable-row" data-href="' . $url . '" data-original-title="' . $row['Idade'] . ' anos" data-container="body"
 												data-toggle="tooltip" data-placement="right" title="">';
-											echo '<td>' . $row['idApp_Cliente'] . '</td>';
+											echo '<td>' . $row['NomeCliente'] . '</td>';
 											echo '<td>' . $row['Procedimento'] . '</td>';
 											echo '<td>' . $row['DataProcedimento'] . '</td>';
 											echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
@@ -200,7 +200,7 @@
 			<div class="form-group">
 				<div class="row">
 					<div class="col-md-12">
-						<div style="overflow: auto; height: 150px; ">
+						<div style="overflow: auto; height: 140px; ">
 							<table class="table table-condensed table-bordered table-striped" >
 								<tr>
 									<th class="active">Orç.</th>

@@ -18,8 +18,8 @@ class Agenda_model extends CI_Model {
                 C.idTab_Status, 
                 COUNT(*) AS Total 
             FROM
-                app.App_Agenda AS A, 
-                app.App_Consulta AS C 
+                App_Agenda AS A, 
+                App_Consulta AS C 
             WHERE 
                 YEAR(DataInicio) = ' . date('Y', time()) . ' AND MONTH(DataInicio) = ' . date('m', time()) . ' AND
                 C.Evento IS NULL AND 
@@ -128,23 +128,25 @@ class Agenda_model extends CI_Model {
    
 		$query = $this->db->query('
             SELECT
-				idApp_ProcedimentoCli,
-                idApp_OrcaTrataCli,
-				idApp_Cliente,
-				Procedimento,
-				DataProcedimento,
-				ConcluidoProcedimento
+				C.NomeCliente,
+				P.idApp_ProcedimentoCli,
+                P.idApp_OrcaTrataCli,
+				P.idApp_Cliente,
+				P.Procedimento,
+				P.DataProcedimento,
+				P.ConcluidoProcedimento
             FROM
-				App_ProcedimentoCli
+				App_ProcedimentoCli AS P
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
             WHERE 
                 
-				idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				ConcluidoProcedimento = "N" AND
-				idApp_OrcaTrataCli = "0" AND
-				idApp_Cliente != "0"
+				P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.ConcluidoProcedimento = "N" AND
+				P.idApp_OrcaTrataCli = "0" AND
+				P.idApp_Cliente != "0"
             ORDER BY
-                DataProcedimento DESC
+                P.DataProcedimento DESC
         ');
 
         if ($query->num_rows() === FALSE) {
