@@ -112,7 +112,7 @@ $db['default'] = array(
 */
     #'database' => 'ci',
     #'database' => 'app',
-	'database' => 'app.sistemaantigo',
+	'database' => 'app.sistema.testes',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,

@@ -180,8 +180,7 @@ class Agenda_model extends CI_Model {
 				idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
 				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				ConcluidoProcedimento = "N" AND
-				idApp_OrcaTrataCli != "0" AND
-				idApp_Cliente = "0"
+				idApp_OrcaTrataCli != "0" 
             ORDER BY
                 DataProcedimento DESC
         ');
