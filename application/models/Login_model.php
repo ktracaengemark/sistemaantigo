@@ -75,39 +75,6 @@ class Login_model extends CI_Model {
 
     }
 
-	public function check_dados_usuario2($senha, $usuario, $empresa, $retorna = FALSE) {
-
-        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE '
-                . '(Usuario = "' . $usuario . '" AND '
-                . 'Senha = "' . $senha . '" AND '
-				. 'idSis_Empresa = "' . $empresa . '") OR '
-                . '(Email = "' . $usuario . '" AND '
-                . 'Senha = "' . $senha . '" AND '
-				. 'idSis_Empresa = "' . $empresa . '") '
-        );
-        #$query = $this->db->get_where('Sis_Usuario', $data);
-        /*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-         */
-        if ($query->num_rows() === 0) {
-            return FALSE;
-        }
-        else {
-            if ($retorna === FALSE) {
-                return TRUE;
-            }
-            else {
-                $query = $query->result_array();
-                return $query[0];
-            }
-        }
-
-    }
-
     public function check_usuario($data) {
 
         $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE Usuario = "' . $data . '" OR Email = "' . $data . '"');
@@ -304,5 +271,40 @@ class Login_model extends CI_Model {
         return $query[0]['idApp_Agenda'];
 
     }
+	
+	public function select_empresa($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+				idSis_Empresa,
+				CONCAT(idSis_Empresa, "--", NomeEmpresa) AS NomeEmpresa				
+            FROM
+                Sis_Empresa					
+
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+				idSis_Empresa,
+				CONCAT(idSis_Empresa, "--", NomeEmpresa) AS NomeEmpresa				
+            FROM
+                Sis_Empresa					
+
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_Empresa] = $row->NomeEmpresa;
+            }
+        }
+
+        return $array;
+    }	
 
 }

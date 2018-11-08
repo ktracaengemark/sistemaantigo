@@ -51,14 +51,16 @@ class Loginempresa extends CI_Controller {
 
         #Get GET or POST data
         $usuario = $this->input->get_post('UsuarioEmpresa');
-		#$nomeempresa = $this->input->get_post('NomeEmpresa');
+		$empresa = $this->input->get_post('idSis_Empresa');
         $senha = md5($this->input->get_post('Senha'));
 
         #set validation rules
         $this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|callback_valid_usuario');
-		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da Empresa', 'required|trim|callback_valid_nomeempresa[' . $usuario . ']');
+		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_valid_empresa[' . $usuario . ']');
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $usuario . ']');
 
+		$data['select']['idSis_Empresa'] = $this->Loginempresa_model->select_empresa();
+		
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
         elseif ($this->input->get('m') == 2)
@@ -90,7 +92,8 @@ class Loginempresa extends CI_Controller {
               exit();
              */
             $query = $this->Loginempresa_model->check_dados_usuario($senha, $usuario, TRUE);
-            #$_SESSION['log']['Agenda'] = $this->Loginempresa_model->get_agenda_padrao($query['idSis_Empresa']);
+			$query = $this->Loginempresa_model->check_dados_empresa($empresa, $usuario, TRUE);
+			#$_SESSION['log']['Agenda'] = $this->Loginempresa_model->get_agenda_padrao($query['idSis_Empresa']);
 
             #echo "<pre>".print_r($query)."</pre>";
             #exit();
@@ -483,7 +486,7 @@ class Loginempresa extends CI_Controller {
         #redirect('loginempresa');
     }
 
-    function valid_usuario($data) {
+	function valid_usuario($data) {
 
         if ($this->Loginempresa_model->check_usuario($data) == 1) {
             $this->form_validation->set_message('valid_usuario', '<strong>%s</strong> não existe.');
@@ -496,12 +499,20 @@ class Loginempresa extends CI_Controller {
         }
     }
 	
+	function valid_empresa($empresa, $usuario) {
 
-
+        if ($this->Loginempresa_model->check_dados_empresa($empresa, $usuario) == FALSE) {
+            $this->form_validation->set_message('valid_empresa', '<strong>%s</strong> incorreta!');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+    
     function valid_senha($senha, $usuario) {
 
         if ($this->Loginempresa_model->check_dados_usuario($senha, $usuario) == FALSE) {
-            $this->form_validation->set_message('valid_senha', '<strong>%s</strong> incorreta! Ou este não é o Módulo do seu Sistema.');
+            $this->form_validation->set_message('valid_senha', '<strong>%s</strong> incorreta!');
             return FALSE;
         } else {
             return TRUE;

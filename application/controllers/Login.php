@@ -61,7 +61,9 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_valid_empresa[' . $usuario . ']');
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $usuario . ']');
 
-        if ($this->input->get('m') == 1)
+        $data['select']['idSis_Empresa'] = $this->Login_model->select_empresa();
+		
+		if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
         elseif ($this->input->get('m') == 2)
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
@@ -571,19 +573,6 @@ class Login extends CI_Controller {
         }
     }
 	
-	function valid_empresa2($data) {
-
-        if ($this->Login_model->check_empresa($data) == 1) {
-            $this->form_validation->set_message('valid_empresa', '<strong>%s</strong> não existe.');
-            return FALSE;
-        } else if ($this->Login_model->check_empresa($data) == 2) {
-            $this->form_validation->set_message('valid_empresa', '<strong>%s</strong> inativo! Fale com o Administrador da sua Empresa!');
-            return FALSE;
-        } else {
-            return TRUE;
-        }
-    }
-
 	function valid_empresa($empresa, $usuario) {
 
         if ($this->Login_model->check_dados_empresa($empresa, $usuario) == FALSE) {
@@ -593,11 +582,11 @@ class Login extends CI_Controller {
             return TRUE;
         }
     }
-
+	
     function valid_senha($senha, $usuario) {
 
         if ($this->Login_model->check_dados_usuario($senha, $usuario) == FALSE) {
-            $this->form_validation->set_message('valid_senha', '<strong>%s</strong> incorreta! Ou este não é o Módulo do seu Sistema.');
+            $this->form_validation->set_message('valid_senha', '<strong>%s</strong> incorreta!');
             return FALSE;
         } else {
             return TRUE;

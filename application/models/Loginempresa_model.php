@@ -13,7 +13,7 @@ class Loginempresa_model extends CI_Model {
 
     }
 
-    public function check_dados_usuario1($senha, $usuario, $retorna = FALSE) {
+    public function check_dados_usuario($senha, $usuario, $retorna = FALSE) {
 
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE '
                 . '(UsuarioEmpresa = "' . $usuario . '" AND '
@@ -44,19 +44,15 @@ class Loginempresa_model extends CI_Model {
 
     }
 	
-	public function check_dados_usuario($senha, $usuario, $retorna = FALSE) {
+	public function check_dados_empresa($empresa, $usuario, $retorna = FALSE) {
 
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE '
                 . '(UsuarioEmpresa = "' . $usuario . '" AND '
-                . 'Senha = "' . $senha . '" AND '
-
-				. 'idTab_Modulo = "' . $_SESSION['log']['idTab_Modulo'] . '") OR '
+                . 'idSis_Empresa = "' . $empresa . '") OR '
                 . '(Email = "' . $usuario . '" AND '
-                . 'Senha = "' . $senha . '" AND '
-
-				. 'idTab_Modulo = "' . $_SESSION['log']['idTab_Modulo'] . '") '	
+                . 'idSis_Empresa = "' . $empresa . '")'
         );
-        #$query = $this->db->get_where('Sis_Empresa', $data);
+        #$query = $this->db->get_where('Sis_Usuario', $data);
         /*
           echo $this->db->last_query();
           echo "<pre>";
@@ -78,7 +74,7 @@ class Loginempresa_model extends CI_Model {
         }
 
     }
-
+	
     public function check_usuario($data) {
 
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE UsuarioEmpresa = "' . $data . '" OR Email = "' . $data . '"');
@@ -244,7 +240,42 @@ class Loginempresa_model extends CI_Model {
             return FALSE;
 
     }
-/*
+
+	public function select_empresa($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+				idSis_Empresa,
+				CONCAT(idSis_Empresa, "--", NomeEmpresa) AS NomeEmpresa				
+            FROM
+                Sis_Empresa					
+
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+				idSis_Empresa,
+				CONCAT(idSis_Empresa, "--", NomeEmpresa) AS NomeEmpresa				
+            FROM
+                Sis_Empresa					
+
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_Empresa] = $row->NomeEmpresa;
+            }
+        }
+
+        return $array;
+    }	
+	/*
     public function get_agenda_padrao($data) {
 
         $query = $this->db->query('SELECT idApp_Agenda FROM App_Agenda WHERE idSis_Empresa = ' . $data . ' ORDER BY idApp_Agenda ASC LIMIT 1');
