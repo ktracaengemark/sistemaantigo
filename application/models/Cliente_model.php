@@ -106,7 +106,7 @@ class Cliente_model extends CI_Model {
 
         $query = $this->db->query('SELECT * '
                 . 'FROM App_Cliente WHERE '
-                . 'Empresa = ' . $_SESSION['log']['Empresa'] . ' AND '
+                . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
                 . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND '
                 . '(NomeCliente like "%' . $data . '%" OR '
                 #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
@@ -147,7 +147,7 @@ class Cliente_model extends CI_Model {
                 App_Cliente					
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                Empresa = ' . $_SESSION['log']['Empresa'] . '
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
 				NomeCliente ASC'
     );
@@ -161,7 +161,7 @@ class Cliente_model extends CI_Model {
                 App_Cliente					
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                Empresa = ' . $_SESSION['log']['Empresa'] . '
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
 				NomeCliente ASC'
     );

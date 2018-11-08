@@ -127,7 +127,7 @@ class Cliente extends CI_Controller {
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');            
 			$data['query']['DataCadastroCliente'] = $this->basico->mascara_data($data['query']['DataCadastroCliente'], 'mysql');
 			$data['query']['Obs'] = nl2br($data['query']['Obs']);
-			$data['query']['Empresa'] = $_SESSION['log']['Empresa'];
+			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
@@ -189,7 +189,7 @@ class Cliente extends CI_Controller {
             'Email',
             'RegistroFicha',
 			'Associado',
-			'Profissional',
+			#'Profissional',
         ), TRUE);
 
         if ($id) {
@@ -205,7 +205,7 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-		$this->form_validation->set_rules('Profissional', 'Profissional', 'required|trim');
+		#$this->form_validation->set_rules('Profissional', 'Profissional', 'required|trim');
 		
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
@@ -237,14 +237,14 @@ class Cliente extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('cliente/form_cliente2', $data);
+            $this->load->view('cliente/form_cliente', $data);
         } else {
 
             $data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
             $data['query']['DataCadastroCliente'] = $this->basico->mascara_data($data['query']['DataCadastroCliente'], 'mysql');
 			$data['query']['Obs'] = nl2br($data['query']['Obs']);
-			$data['query']['Empresa'] = $_SESSION['log']['Empresa'];
+			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			#$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
 						
             $data['anterior'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
@@ -254,7 +254,7 @@ class Cliente extends CI_Controller {
 
             if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
                 $data['msg'] = '?m=2';
-                redirect(base_url() . 'cliente/form_cliente2/' . $data['query']['idApp_Cliente'] . $data['msg']);
+                redirect(base_url() . 'cliente/form_cliente/' . $data['query']['idApp_Cliente'] . $data['msg']);
                 exit();
             } else {
 
@@ -437,7 +437,7 @@ class Cliente extends CI_Controller {
 
         $data['query']['Sexo'] = $this->Basico_model->get_sexo($data['query']['Sexo']);
 		$data['query']['Ativo'] = $this->Basico_model->get_ativo($data['query']['Ativo']);
-		$data['query']['Empresa'] = $this->Basico_model->get_empresa($data['query']['Empresa']);
+		$data['query']['idSis_Empresa'] = $this->Basico_model->get_empresa($data['query']['idSis_Empresa']);
 		$data['query']['Profissional'] = $this->Basico_model->get_profissional($data['query']['Profissional']);
 		
         $data['query']['Telefone'] = $data['query']['Telefone1'];

@@ -158,7 +158,24 @@
 											</div>
 											<div class="form-group">
 												<div class="row">		
-													
+													<!--
+													<div class="col-md-3">
+														<label for="idSis_EmpresaMatriz">Empresa Matriz:</label>
+														<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+																id="idSis_EmpresaMatriz" name="idSis_EmpresaMatriz">
+															<option value="">--Selec. Empresa--</option>
+															<?php
+															foreach ($select['idSis_EmpresaMatriz'] as $key => $row) {
+																if ($query['idSis_EmpresaMatriz'] == $key) {
+																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																} else {
+																	echo '<option value="' . $key . '">' . $row . '</option>';
+																}
+															}
+															?>
+														</select>
+													</div>
+													-->
 													<div class="col-md-3">
 														<label for="UsuarioMatriz">Usuário:</label>
 														<input type="text" class="form-control" id="UsuarioMatriz" maxlength="45" 

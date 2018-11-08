@@ -50,6 +50,7 @@ class Funcionario extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'idSis_Usuario',
+			'idSis_Empresa',
 			'Usuario',
             'Nome',
 			'Senha',
@@ -76,16 +77,18 @@ class Funcionario extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email|is_unique[Sis_Usuario.Email]');
-        $this->form_validation->set_rules('Usuario', 'Nome do Func./ Usuário', 'required|trim|is_unique[Sis_Usuario.Usuario]');
+		$this->form_validation->set_rules('CpfUsuario', 'Cpf', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
+		$this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim');
 		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
-        $this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+		#$this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
+        #$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
 		$this->form_validation->set_rules('Permissao', 'Acesso Às Agendas', 'required|trim');
-		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
+		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
+		#$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
 
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		#$data['select']['Funcionario'] = $this->Basico_model->select_status_sn();
@@ -93,6 +96,7 @@ class Funcionario extends CI_Controller {
 		$data['select']['Permissao'] = $this->Basico_model->select_permissao();
 		$data['select']['Funcao'] = $this->Funcao_model->select_funcao();
 		$data['select']['CompAgenda'] = $this->Basico_model->select_status_sn();
+		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa2();
 		
         $data['titulo'] = 'Cadastrar Usuário';
         $data['form_open_path'] = 'funcionario/cadastrar';
@@ -112,7 +116,7 @@ class Funcionario extends CI_Controller {
         } else {
 
 
-			$data['query']['Empresa'] = $_SESSION['log']['id'];
+			$data['query']['idSis_Empresa'] = $_SESSION['log']['id'];
 			$data['query']['QuemCad'] = $_SESSION['log']['id'];
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['id'];
 			$data['query']['NomeEmpresa'] = $_SESSION['log']['NomeEmpresa'];
@@ -146,7 +150,7 @@ class Funcionario extends CI_Controller {
 
 				$data['agenda'] = array(
                     'NomeAgenda' => 'Padrão',
-					'Empresa' => $_SESSION['log']['id'],
+					'idSis_Empresa' => $_SESSION['log']['id'],
                     'idSis_Usuario' => $data['idSis_Usuario']
                 );
                 $data['campos'] = array_keys($data['agenda']);
@@ -207,13 +211,14 @@ class Funcionario extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #$this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim|is_unique_duplo[Sis_Usuario.Nome.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim');
+        $this->form_validation->set_rules('CpfUsuario', 'Cpf', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		$this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
-		$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+		#$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('Permissao', 'Nível', 'required|trim');
-		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
+		#$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
 
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();

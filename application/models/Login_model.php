@@ -13,7 +13,7 @@ class Login_model extends CI_Model {
 
     }
 
-    public function check_dados_usuario1($senha, $usuario, $retorna = FALSE) {
+    public function check_dados_usuario($senha, $usuario, $retorna = FALSE) {
 
         $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE '
                 . '(Usuario = "' . $usuario . '" AND '
@@ -43,18 +43,47 @@ class Login_model extends CI_Model {
         }
 
     }
+	
+	public function check_dados_empresa($empresa, $usuario, $retorna = FALSE) {
 
-	public function check_dados_usuario($senha, $usuario, $retorna = FALSE) {
+        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE '
+                . '(Usuario = "' . $usuario . '" AND '
+                . 'idSis_Empresa = "' . $empresa . '") OR '
+                . '(Email = "' . $usuario . '" AND '
+                . 'idSis_Empresa = "' . $empresa . '")'
+        );
+        #$query = $this->db->get_where('Sis_Usuario', $data);
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+         */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            if ($retorna === FALSE) {
+                return TRUE;
+            }
+            else {
+                $query = $query->result_array();
+                return $query[0];
+            }
+        }
+
+    }
+
+	public function check_dados_usuario2($senha, $usuario, $empresa, $retorna = FALSE) {
 
         $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE '
                 . '(Usuario = "' . $usuario . '" AND '
                 . 'Senha = "' . $senha . '" AND '
-
-				. 'idTab_Modulo = "' . $_SESSION['log']['idTab_Modulo'] . '") OR '
+				. 'idSis_Empresa = "' . $empresa . '") OR '
                 . '(Email = "' . $usuario . '" AND '
                 . 'Senha = "' . $senha . '" AND '
-
-				. 'idTab_Modulo = "' . $_SESSION['log']['idTab_Modulo'] . '") '
+				. 'idSis_Empresa = "' . $empresa . '") '
         );
         #$query = $this->db->get_where('Sis_Usuario', $data);
         /*
@@ -104,10 +133,10 @@ class Login_model extends CI_Model {
          */
 
     }
+	
+	public function check_empresa($data) {
 
-	public function check_nomeempresa($data) {
-
-        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE NomeEmpresa = "' . $data . '"');
+        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE idSis_Empresa = "' . $data . '"');
         if ($query->num_rows() === 0) {
             return 1;
         }

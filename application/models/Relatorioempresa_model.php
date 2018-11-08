@@ -3603,7 +3603,7 @@ exit();*/
 					LEFT JOIN Tab_Funcao AS FU ON FU.idTab_Funcao = F.Funcao
 					LEFT JOIN Sis_Permissao AS PE ON PE.idSis_Permissao = F.Permissao
             WHERE
-				F.Empresa = ' . $_SESSION['log']['id'] . ' AND
+				F.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				F.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
                 ' . $data['Nome'] . '
             ORDER BY
@@ -4468,7 +4468,7 @@ exit();*/
             FROM
                 Sis_Usuario AS F
             WHERE
-                F.Empresa = ' . $_SESSION['log']['id'] . ' AND
+                F.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				F.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 F.Nome ASC
@@ -5005,7 +5005,7 @@ exit();*/
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                P.Empresa = ' . $_SESSION['log']['Empresa'] . '
+                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY F.Abrev ASC
         ');
 

@@ -50,14 +50,16 @@ class Login extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #Get GET or POST data
-        $usuario = $this->input->get_post('Usuario');
-		#$nomeempresa = $this->input->get_post('NomeEmpresa');
-        $senha = md5($this->input->get_post('Senha'));
+        
+		$usuario = $this->input->get_post('Usuario');
+        $empresa = $this->input->get_post('idSis_Empresa');
+		$senha = md5($this->input->get_post('Senha'));
 
         #set validation rules
-        $this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim|callback_valid_usuario');
-		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da Empresa', 'required|trim|callback_valid_nomeempresa[' . $usuario . ']');
-        $this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $usuario . ']');
+        
+		$this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim|callback_valid_usuario');
+        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_valid_empresa[' . $usuario . ']');
+		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $usuario . ']');
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -89,7 +91,9 @@ class Login extends CI_Controller {
               echo "</pre>";
               exit();
              */
-            $query = $this->Login_model->check_dados_usuario($senha, $usuario, TRUE);
+            
+			$query = $this->Login_model->check_dados_usuario($senha, $usuario, TRUE);
+			$query = $this->Login_model->check_dados_empresa($empresa, $usuario, TRUE);
             $_SESSION['log']['Agenda'] = $this->Login_model->get_agenda_padrao($query['idSis_Usuario']);
 
             #echo "<pre>".print_r($query)."</pre>";
@@ -112,7 +116,6 @@ class Login extends CI_Controller {
 				$_SESSION['log']['Nome'] = (strlen($query['Nome']) > 8) ? substr($query['Nome'], 0, 8) : $query['Nome'];
 				#$_SESSION['log']['Nome'] = $query['Nome'];
 				$_SESSION['log']['id'] = $query['idSis_Usuario'];
-				$_SESSION['log']['Empresa'] = $query['Empresa'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
 				$_SESSION['log']['NomeEmpresa'] = (strlen($query['NomeEmpresa']) > 12) ? substr($query['NomeEmpresa'], 0, 12) : $query['NomeEmpresa'];
@@ -261,7 +264,7 @@ class Login extends CI_Controller {
 
                 $this->email->initialize($config);
 
-                $this->email->from('contato@ktracaengemark.com.br', 'KTRACA Engenharia & Marketing');
+                $this->email->from('contato@ktracaengenharia.com.br', 'KTRACA Engenharia');
                 $this->email->to($data['query']['Email']);
 
                 $this->email->subject('[KTRACA] Confirmação de registro - Usuário: ' . $data['query']['Usuario']);
@@ -567,8 +570,29 @@ class Login extends CI_Controller {
             return TRUE;
         }
     }
+	
+	function valid_empresa2($data) {
 
+        if ($this->Login_model->check_empresa($data) == 1) {
+            $this->form_validation->set_message('valid_empresa', '<strong>%s</strong> não existe.');
+            return FALSE;
+        } else if ($this->Login_model->check_empresa($data) == 2) {
+            $this->form_validation->set_message('valid_empresa', '<strong>%s</strong> inativo! Fale com o Administrador da sua Empresa!');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
 
+	function valid_empresa($empresa, $usuario) {
+
+        if ($this->Login_model->check_dados_empresa($empresa, $usuario) == FALSE) {
+            $this->form_validation->set_message('valid_empresa', '<strong>%s</strong> incorreta!');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
 
     function valid_senha($senha, $usuario) {
 

@@ -76,14 +76,15 @@ class Funcionariomatriz extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email|is_unique[Sis_UsuarioMatriz.Email]');
-        $this->form_validation->set_rules('UsuarioMatriz', 'Nome do Func./ Usuário', 'required|trim|is_unique[Sis_UsuarioMatriz.UsuarioMatriz]');
+		#$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email|is_unique[Sis_UsuarioMatriz.Email]');
+        $this->form_validation->set_rules('CpfUsuario', 'Cpf do Usuário', 'required|trim|is_unique_emp[Sis_UsuarioMatriz.CpfUsuario.idSis_EmpresaMatriz:idSis_EmpresaMatriz]');
+		$this->form_validation->set_rules('UsuarioMatriz', 'Nome do Func./ Usuário', 'required|trim|is_unique[Sis_UsuarioMatriz.UsuarioMatriz]');
 		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
 		$this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
-        $this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+        #$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
 		$this->form_validation->set_rules('Permissao', 'Acesso Às Agendas', 'required|trim');
 		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
 
@@ -93,6 +94,7 @@ class Funcionariomatriz extends CI_Controller {
 		$data['select']['Permissao'] = $this->Basico_model->select_permissao();
 		$data['select']['Funcao'] = $this->Funcao_model->select_funcao();
 		$data['select']['CompAgenda'] = $this->Basico_model->select_status_sn();
+		#$data['select']['idSis_EmpresaMatriz'] = $this->Basico_model->select_empresa_matriz();
 		
         $data['titulo'] = 'Cadastrar Usuário';
         $data['form_open_path'] = 'funcionariomatriz/cadastrar';
@@ -112,7 +114,6 @@ class Funcionariomatriz extends CI_Controller {
         } else {
 
 
-			$data['query']['Empresa'] = $_SESSION['log']['id'];
 			$data['query']['QuemCad'] = $_SESSION['log']['id'];
 			$data['query']['idSis_EmpresaMatriz'] = $_SESSION['log']['id'];
 			$data['query']['NomeEmpresa'] = $_SESSION['log']['NomeEmpresa'];
@@ -146,7 +147,7 @@ class Funcionariomatriz extends CI_Controller {
 
 				$data['agenda'] = array(
                     'NomeAgenda' => 'Matriz',
-					'EmpresaMatriz' => $_SESSION['log']['id'],
+					'idSis_EmpresaMatriz' => $_SESSION['log']['id'],
                     'idSis_UsuarioMatriz' => $data['idSis_UsuarioMatriz']
                 );
                 $data['campos'] = array_keys($data['agenda']);

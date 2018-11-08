@@ -1351,15 +1351,17 @@ class Basico_model extends CI_Model {
                 SELECT
 
                     U.idSis_Usuario,
-					U.Nome
+					CONCAT(IFNULL(F.Abrev,""), " --- ", IFNULL(U.Nome,"")) AS Nome
+
 				FROM
 
 					Sis_Usuario AS U 
+						LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = U.Funcao
 				WHERE
                     ' . $q . '
-					U.Empresa = ' . $_SESSION['log']['Empresa'] . '
+					U.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 				ORDER BY
-					U.Nome ASC
+					F.Abrev ASC
 			');
 
         } else {
@@ -1375,7 +1377,7 @@ class Basico_model extends CI_Model {
 						LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = U.Funcao
 				WHERE
                     ' . $q . '
-					U.Empresa = ' . $_SESSION['log']['Empresa'] . '
+					U.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 				ORDER BY
 					F.Abrev ASC
 			');
@@ -1638,6 +1640,78 @@ class Basico_model extends CI_Model {
             $array = array();
             foreach ($query->result() as $row) {
                 $array[$row->idSis_Empresa] = $row->NomeEmpresa;
+            }
+        }
+
+        return $array;
+    }
+
+	public function select_empresa2($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+				idSis_Empresa,
+				NomeEmpresa				
+            FROM
+                Sis_Empresa					
+            WHERE
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+				idSis_Empresa,
+				NomeEmpresa				
+            FROM
+                Sis_Empresa					
+            WHERE
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_Empresa] = $row->NomeEmpresa;
+            }
+        }
+
+        return $array;
+    }
+	
+	public function select_empresa_matriz($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+				idSis_EmpresaMatriz,
+				NomeEmpresa				
+            FROM
+                Sis_EmpresaMatriz					
+
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+				idSis_EmpresaMatriz,
+				NomeEmpresa				
+            FROM
+                Sis_EmpresaMatriz					
+
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_EmpresaMatriz] = $row->NomeEmpresa;
             }
         }
 

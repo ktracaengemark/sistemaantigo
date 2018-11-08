@@ -158,7 +158,22 @@
 											</div>
 											<div class="form-group">
 												<div class="row">		
-													
+													<div class="col-md-4">
+														<label for="idSis_Empresa">Empresa:*</label>
+														<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> readonly=""
+																id="idSis_Empresa" autofocus name="idSis_Empresa">
+
+															<?php
+															foreach ($select['idSis_Empresa'] as $key => $row) {
+																if ($query['idSis_Empresa'] == $key) {
+																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																} else {
+																	echo '<option value="' . $key . '">' . $row . '</option>';
+																}
+															}
+															?>
+														</select>
+													</div>
 													<div class="col-md-3">
 														<label for="Usuario">Usuário:</label>
 														<input type="text" class="form-control" id="Usuario" maxlength="45" 

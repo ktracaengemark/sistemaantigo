@@ -200,5 +200,85 @@ class MY_Form_validation extends CI_Form_validation {
                 ? ($this->CI->db->limit(1)->query('SELECT ' . $field . ' FROM ' . $table . ' WHERE '
                         . 'id' . $table . ' != "' . $id . '" AND ' . $field . ' = "' . $str . '"')->num_rows() === 0) : FALSE;
     }
+	
+	/**
+	 * Unique
+	 *
+	 * Verifica se o valor já está cadastrado no banco
+	 * unique[users.login] retorna FALSE se o valor postado já estiver no campo login da tabela users
+	 * unique[users.login.10] retorna FALSE se o valor postado já estiver no campo login da tabela users, desde que o id seja diferente de 10.
+	 * 						isso é útil quando for atualizar os dados
+	 * unique[users.city.10:id_cidade] retorna FALSE se o valor postado já estiver no campo city da tabela users, desde que o id_cidade seja diferente de 10.
+	 						se não for passado o valor após o : será usado o id.
+	 * @access	public
+	 * @param	string - dados que será buscado
+	 * @param	string - campo, tabela e id
+	 *
+	 * @return	bool
+	 */
+	
+	public function is_unique_emp($str = '', $field = '')	{
+		$CI =& get_instance();
+		
+		$res = explode('.', $field, 3);
+		
+		$table	= $res[0];
+		$column	= $res[1];
+		$CI->form_validation->set_message('is_unique_emp', 'O %s já está cadastrado nesta EMPRESA.');
+		
+		
+		$CI->db->select('COUNT(*) as total');
+		$CI->db->where($column, $str);
+		
+		if( isset($res[2]) )
+		{
+			$res2 = explode(':', $res[2], 2);
+			$ignore_value = $res2[0];
+			
+			if( isset($res2[1]) )
+				$ignore_field = $res2[1];
+			else
+				$ignore_field = 'id';
+			
+			$CI->db->where($ignore_field . ' !=', $ignore_value);
+		}
+		$total = $CI->db->get($table)->row()->total;
+		return ($total > 0) ? FALSE : TRUE;
+	}
+	
+	    /**
+     * valid_phone
+     *
+     * validação simples de telefone
+     *
+     * @access	public
+     * @param	string
+     * @return	bool
+     */
+    function valid_phone($fone)
+    {
+        $CI =& get_instance();
+        $CI->form_validation->set_message('valid_fone', 'O campo %s não contém um Telefone válido.');
+        $fone = preg_replace('/[^0-9]/','',$fone);
+        $fone = (string) $fone;
+        if( strlen($fone) >= 10)
+            return TRUE;
+        else
+            return FALSE;
+    }
+	
+	public function is_unique_duplo($str, $field) {
+        $CI = & get_instance();
+        $CI->form_validation->set_message('is_unique_duplo', '<b>%s</b> já cadastrado.');
+
+        sscanf($field, '%[^.].%[^.].%[^.].%[^.]', $table, $field1, $field2, $str2);
+
+        if ($field1 == "Cpf")
+            $str = ltrim(preg_replace("/[^0-9]/", "", $str), '0');
+
+        return isset($this->CI->db) ? ($this->CI->db->limit(1)->query('SELECT ' . $field1 . ' FROM ' . $table . ' WHERE '
+                        . $field1 . ' = "' . $str . '" AND ' . $field2 . ' = "' . $str2 . '"')->num_rows() === 0) : FALSE;
+
+    }	
 
 }

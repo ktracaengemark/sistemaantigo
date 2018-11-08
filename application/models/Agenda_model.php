@@ -58,14 +58,15 @@ class Agenda_model extends CI_Model {
                 idApp_Cliente, 
                 NomeCliente,
                 DataNascimento,
-				Empresa,
+
 				Telefone1				
             FROM 
-                app.App_Cliente
+                App_Cliente
             WHERE 
-                Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+
                 (MONTH(DataNascimento) = ' . date('m', time()) . ')
-            ORDER BY NomeCliente ASC');
+            ORDER BY 
+				NomeCliente ASC');
 
         /*
 		
@@ -209,10 +210,10 @@ class Agenda_model extends CI_Model {
                 D.DataNascimento,
 				D.Telefone1
             FROM 
-                app.App_ContatoCliente AS D,
-                app.App_Cliente AS R
+                App_ContatoCliente AS D,
+                App_Cliente AS R
             WHERE               
-				R.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+				R.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 (MONTH(D.DataNascimento) = ' . date('m', time()) . ') AND
                 R.idApp_Cliente = D.idApp_Cliente            
             ORDER BY NomeContatoCliente ASC');
@@ -248,7 +249,7 @@ class Agenda_model extends CI_Model {
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                P.Empresa = ' . $_SESSION['log']['Empresa'] . '
+                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY F.Abrev ASC
         ');
 

@@ -3454,10 +3454,9 @@ exit();*/
 					LEFT JOIN Tab_Funcao AS FU ON FU.idTab_Funcao = F.Funcao
 					LEFT JOIN Sis_Permissao AS PE ON PE.idSis_Permissao = F.Permissao
             WHERE
-				F.Empresa = ' . $_SESSION['log']['id'] . ' AND
+				F.idSis_EmpresaMatriz = ' . $_SESSION['log']['id'] . ' AND
 				F.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
-                ' . $data['Nome'] . ' AND
-				F.Nivel = "6"
+                ' . $data['Nome'] . ' 
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');
@@ -4897,7 +4896,7 @@ exit();*/
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                P.Empresa = ' . $_SESSION['log']['id'] . '
+                P.idSis_EmpresaMatriz = ' . $_SESSION['log']['id'] . '
 			ORDER BY P.Nome ASC
         ');
 

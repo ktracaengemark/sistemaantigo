@@ -114,12 +114,12 @@
 											
 											<?php 
 											
-											if ($query['Empresa']) {
+											if ($query['idSis_Empresa']) {
 												
 											echo ' 
 											<tr>
-												<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-home"></span> Empresa:</td>
-												<td>' . $query['Empresa'] . '</td>
+												<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-home"></span> idSis_Empresa:</td>
+												<td>' . $query['idSis_Empresa'] . '</td>
 											</tr>  
 											';
 											
