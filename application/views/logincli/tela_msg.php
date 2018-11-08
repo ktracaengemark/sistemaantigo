@@ -8,7 +8,7 @@
         </a>
     </p>
     -->
-    <h2 class="form-signin-heading text-center">Agenda <?php echo ucfirst($_SESSION['log']['nome_modulo']) ?></h2>
+    <h2 class="form-signin-heading text-center">Bem Vindo!! <?php #echo ucfirst($_SESSION['log']['nome_modulo']) ?></h2>
 
     <?php if ($aviso) echo $aviso; ?>
 

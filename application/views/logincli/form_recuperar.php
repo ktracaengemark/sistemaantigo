@@ -23,9 +23,9 @@
     <br>
 
     <label>Usuário ou E-mail:</label>
-    <input type="text" class="form-control" id="UsuarioCli" maxlength="100" autofocus="" placeholder="Usuário ou E-mail de cadastro"
-           name="UsuarioCli" value="<?php echo $query['UsuarioCli']; ?>">
-    <?php echo form_error('UsuarioCli'); ?>
+    <input type="text" class="form-control" id="Usuario" maxlength="100" autofocus="" placeholder="Usuário ou E-mail de cadastro"
+           name="Usuario" value="<?php echo $query['Usuario']; ?>">
+    <?php echo form_error('Usuario'); ?>
     <br>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar Link</button>

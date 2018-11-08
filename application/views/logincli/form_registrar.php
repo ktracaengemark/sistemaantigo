@@ -21,12 +21,34 @@
     </p>
     <h2 class="form-signin-heading text-center">Cad. Usuário Pessoal</h2>
 
-	<label for="Nome">Nome:</label>
+	<label for="idSis_Empresa">Empresa</label>
+	<select data-placeholder="Selecione uma opção..." class="form-control" id="idSis_Empresa" name="idSis_Empresa">			
+		
+		<?php
+		foreach ($select['idSis_Empresa'] as $key => $row) {
+			if ($query['idSis_Empresa'] == $key) {
+				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+			} else {
+				echo '<option value="' . $key . '">' . $row . '</option>';
+			}
+		}
+		?>   
+	</select>
+    <?php echo form_error('idSis_Empresa'); ?>
+	<br>
+	
+	<label for="Nome">Nome do Usuário:</label>
     <input type="text" class="form-control" id="Nome" maxlength="255"
            name="Nome" value="<?php echo $query['Nome']; ?>">
     <?php echo form_error('Nome'); ?>
     <br>
 
+	<label for="CpfUsuario">CPF do Usuário:</label>
+    <input type="text" class="form-control " id="CpfUsuario" maxlength="11"
+           name="CpfUsuario" placeholder="99999999999" value="<?php echo $query['CpfUsuario']; ?>">
+    <?php echo form_error('CpfUsuario'); ?>
+    <br>
+	
     <label for="Celular">Celular:</label>
     <input type="text" class="form-control Celular Celular" id="Celular" maxlength="11"
            name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
@@ -66,11 +88,11 @@
            name="ConfirmarEmail" value="<?php echo $query['ConfirmarEmail']; ?>">
     <?php echo form_error('ConfirmarEmail'); ?>
     <br>
-
-    <label for="UsuarioCli">Usuário:</label>
-    <input type="text" class="form-control" id="UsuarioCli" maxlength="45"
-           name="UsuarioCli" value="<?php echo $query['UsuarioCli']; ?>">
-    <?php echo form_error('UsuarioCli'); ?>
+	
+    <label for="Usuario">Usuário:</label>
+    <input type="text" class="form-control" id="Usuario" maxlength="45"
+           name="Usuario" value="<?php echo $query['Usuario']; ?>">
+    <?php echo form_error('Usuario'); ?>
     <br>
 
     <label for="Senha">Senha:</label>
@@ -86,6 +108,9 @@
     <br>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">REGISTRAR</button>
+	<br>
+	<a class="btn btn btn-primary btn-info btn-block" href="<?php echo base_url(); ?>login/index" role="button">Acesso dos Usuários das Empresas</a>
+	<a class="btn btn btn-primary btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">Acesso dos Admin. das Empresas</a>
 </form>
 
 </div>

@@ -15,12 +15,12 @@
     <h2 class="form-signin-heading text-center">Controle Pessoal</h2>	
 
 	<label class="sr-only">Usuário</label>
-    <input type="text" id="inputText" class="form-control" placeholder="Usuário ou E-mail" autofocus name="UsuarioCli" value="<?php echo set_value('UsuarioCli'); ?>">	   
+    <input type="text" id="inputText" class="form-control" placeholder="Usuário ou E-mail" autofocus name="Usuario" value="<?php echo set_value('Usuario'); ?>">	   
 	<label class="sr-only">Senha</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
     <input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
     <button class="btn btn-lg btn-primary btn-block" type="submit">Controle Pessoal</button>	
-    <p><a href="<?php echo base_url(); ?>logincli/recuperar/?usuario=<?php echo set_value('UsuarioCli'); ?>">Esqueci usuário/senha!</a></p>
+    <p><a href="<?php echo base_url(); ?>logincli/recuperar/?usuario=<?php echo set_value('Usuario'); ?>">Esqueci usuário/senha!</a></p>
     <br>
 
 	<a class="btn btn btn-primary btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">Acesso dos Admin. das Empresas</a>

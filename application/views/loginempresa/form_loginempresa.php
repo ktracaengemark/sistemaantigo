@@ -1,6 +1,6 @@
 <div class="container text-center" id="login">
 
-    <!--<?php echo validation_errors(); ?>-->
+    <?php #echo validation_errors(); ?>
 
     <?php if (isset($msg)) echo $msg; ?>
 

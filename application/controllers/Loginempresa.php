@@ -112,10 +112,9 @@ class Loginempresa extends CI_Controller {
                 #$_SESSION['log']['UsuarioEmpresa'] = $query['UsuarioEmpresa'];
                 //se for necessário reduzir o tamanho do nome de usuário, que pode ser um email
                 $_SESSION['log']['UsuarioEmpresa'] = (strlen($query['UsuarioEmpresa']) > 15) ? substr($query['UsuarioEmpresa'], 0, 15) : $query['UsuarioEmpresa'];
-                #$_SESSION['log']['Nome'] = (strlen($query['Nome']) > 10) ? substr($query['Nome'], 0, 10) : $query['Nome'];
-				$_SESSION['log']['Nome'] = $query['Nome'];
+                #$_SESSION['log']['Nome'] = (strlen($query['NomeAdmin']) > 10) ? substr($query['NomeAdmin'], 0, 10) : $query['NomeAdmin'];
+				$_SESSION['log']['Nome'] = $query['NomeAdmin'];
 				$_SESSION['log']['id'] = $query['idSis_Empresa'];
-				$_SESSION['log']['Empresa'] = $query['Empresa'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['Permissao'] = $query['Permissao'];
@@ -160,8 +159,9 @@ class Loginempresa extends CI_Controller {
             'Email',
             'UsuarioEmpresa',
 			'NomeEmpresa',
-            'Nome',
-            'Senha',
+            'NomeAdmin',
+            'CpfAdmin',
+			'Senha',
             'Confirma',
             'Celular',
 			'DataCriacao',
@@ -173,9 +173,10 @@ class Loginempresa extends CI_Controller {
 		$this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
 	
 		$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
-        $this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email|is_unique[Sis_Empresa.Email]');		
-        $this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
-		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');      	
+        $this->form_validation->set_rules('CpfAdmin', 'Cpf do Administrador', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CpfAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
+		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email');		
+        $this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim');
+		$this->form_validation->set_rules('NomeAdmin', 'Nome do Administrador', 'required|trim');      	
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
 		$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
@@ -189,9 +190,8 @@ class Loginempresa extends CI_Controller {
             $this->load->view('loginempresa/form_registrar', $data);
         } else {
 			
-			$data['query']['Empresa'] = 0;
 			$data['query']['idSis_EmpresaMatriz'] = 1;
-			$data['query']['Associado'] = 33;
+			$data['query']['Associado'] = 1;
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
             $data['query']['DataCriacao'] = $this->basico->mascara_data($data['query']['DataCriacao'], 'mysql');
 			$data['query']['Senha'] = md5($data['query']['Senha']);
@@ -246,7 +246,7 @@ class Loginempresa extends CI_Controller {
                         . '
                   <div class="alert alert-success" role="alert">
                   <h4>
-                  <p><b>Usuário cadastrado com sucesso!</b></p>
+                  <p><b>Empresa cadastrado com sucesso!</b></p>
                   <p>Clique no botão abaixo e retorne para a tela de login para entrar no sistema.</p>
                   </h4>
                   <br>

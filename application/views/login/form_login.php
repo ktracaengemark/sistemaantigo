@@ -22,6 +22,7 @@
 		<option value="">-- Selecione sua Empresa --</option>
 		<?php
 		foreach ($select['idSis_Empresa'] as $key => $row) {
+					(!$query['idSis_Empresa']) ? $query['idSis_Empresa'] = '5' : FALSE;	
 			if ($query['idSis_Empresa'] == $key) {
 				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 			} else {

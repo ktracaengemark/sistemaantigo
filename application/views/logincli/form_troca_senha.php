@@ -27,10 +27,10 @@
     <?php echo form_error('Email'); ?>
     <br>
 
-    <label for="UsuarioCli">Usuário:</label>
-    <input type="text" class="form-control" id="UsuarioCli" maxlength="45" readonly
-           name="UsuarioCli" value="<?php echo $query['UsuarioCli']; ?>">
-    <?php echo form_error('UsuarioCli'); ?>
+    <label for="Usuario">Usuário:</label>
+    <input type="text" class="form-control" id="Usuario" maxlength="45" readonly
+           name="Usuario" value="<?php echo $query['Usuario']; ?>">
+    <?php echo form_error('Usuario'); ?>
     <br>
 
     <label for="Senha">Senha:</label>
@@ -45,7 +45,7 @@
     <?php echo form_error('Confirma'); ?>
     <br>
 
-    <input type="hidden" id="idSis_UsuarioCli" name="idSis_UsuarioCli" value="<?php echo $query['idSis_UsuarioCli']; ?>">
+    <input type="hidden" id="idSis_Usuario" name="idSis_Usuario" value="<?php echo $query['idSis_Usuario']; ?>">
     <input type="hidden" id="Codigo" name="Codigo" value="<?php echo $query['Codigo']; ?>">
     <button class="btn btn-lg btn-primary btn-block" type="submit">TROCAR SENHA</button>
 </form>

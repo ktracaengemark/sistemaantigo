@@ -50,15 +50,17 @@ class Logincli extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #Get GET or POST data
-        $usuario = $this->input->get_post('UsuarioCli');
-		#$nomeempresa = $this->input->get_post('NomeEmpresa');
+        $usuario = $this->input->get_post('Usuario');
+		$empresa = $this->input->get_post('idSis_Empresa');
         $senha = md5($this->input->get_post('Senha'));
 
         #set validation rules
-        $this->form_validation->set_rules('UsuarioCli', 'Usuário', 'required|trim|callback_valid_usuario');
-		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da Empresa', 'required|trim|callback_valid_nomeempresa[' . $usuario . ']');
+        $this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim|callback_valid_usuario');
+		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_valid_empresa[' . $usuario . ']');
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $usuario . ']');
 
+		$data['select']['idSis_Empresa'] = $this->Logincli_model->select_empresa();
+		
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
         elseif ($this->input->get('m') == 2)
@@ -81,7 +83,7 @@ class Logincli extends CI_Controller {
             session_regenerate_id(true);
 
             #Get GET or POST data
-            #$usuario = $this->input->get_post('UsuarioCli');
+            #$usuario = $this->input->get_post('Usuario');
             #$senha = md5($this->input->get_post('Senha'));
             /*
               echo "<pre>";
@@ -90,7 +92,8 @@ class Logincli extends CI_Controller {
               exit();
              */
             $query = $this->Logincli_model->check_dados_usuario($senha, $usuario, TRUE);
-            $_SESSION['log']['Agenda'] = $this->Logincli_model->get_agenda_cliente($query['idSis_UsuarioCli']);
+            $query = $this->Logincli_model->check_dados_empresa($empresa, $usuario, TRUE);
+			$_SESSION['log']['Agenda'] = $this->Logincli_model->get_agenda_cliente($query['idSis_Usuario']);
 
             #echo "<pre>".print_r($query)."</pre>";
             #exit();
@@ -106,16 +109,15 @@ class Logincli extends CI_Controller {
                 #initialize session
                 $this->load->driver('session');
 
-                #$_SESSION['log']['UsuarioCli'] = $query['UsuarioCli'];
+                #$_SESSION['log']['Usuario'] = $query['Usuario'];
                 //se for necessário reduzir o tamanho do nome de usuário, que pode ser um email
-                $_SESSION['log']['UsuarioCli'] = (strlen($query['UsuarioCli']) > 15) ? substr($query['UsuarioCli'], 0, 15) : $query['UsuarioCli'];
-				#$_SESSION['log']['Nome'] = (strlen($query['Nome']) > 8) ? substr($query['Nome'], 0, 8) : $query['Nome'];
-				$_SESSION['log']['Nome'] = $query['Nome'];
-				$_SESSION['log']['id'] = $query['idSis_UsuarioCli'];
-				#$_SESSION['log']['Empresa'] = $query['Empresa'];
-				#$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
+                $_SESSION['log']['Usuario'] = (strlen($query['Usuario']) > 15) ? substr($query['Usuario'], 0, 15) : $query['Usuario'];
+				$_SESSION['log']['Nome'] = (strlen($query['Nome']) > 8) ? substr($query['Nome'], 0, 8) : $query['Nome'];
+				#$_SESSION['log']['Nome'] = $query['Nome'];
+				$_SESSION['log']['id'] = $query['idSis_Usuario'];
+				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
-				#$_SESSION['log']['NomeEmpresa'] = (strlen($query['NomeEmpresa']) > 12) ? substr($query['NomeEmpresa'], 0, 12) : $query['NomeEmpresa'];
+				$_SESSION['log']['NomeEmpresa'] = (strlen($query['NomeEmpresa']) > 12) ? substr($query['NomeEmpresa'], 0, 12) : $query['NomeEmpresa'];
 				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
@@ -157,11 +159,12 @@ class Logincli extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-            'Email',
+            'idSis_Empresa',
+			'Email',
             'ConfirmarEmail',
-            'UsuarioCli',
-			#'NomeEmpresa',
+            'Usuario',
             'Nome',
+			'CpfUsuario',
             'Senha',
             'Confirma',
             'DataNascimento',
@@ -170,7 +173,7 @@ class Logincli extends CI_Controller {
 			'Funcao',
 			'TipoProfissional',
 			'DataCriacao',
-			#'NumUsuarioClis',
+			
 
 
                 ), TRUE);
@@ -179,17 +182,19 @@ class Logincli extends CI_Controller {
 
 		$this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
 
-		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_UsuarioCli.NomeEmpresa]');
-        $this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email|is_unique[Sis_UsuarioCli.Email]');
+		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Usuario.NomeEmpresa]');
+        $this->form_validation->set_rules('CpfUsuario', 'Cpf do Usuário', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email');
         $this->form_validation->set_rules('ConfirmarEmail', 'Confirmar E-mail', 'required|trim|valid_email|matches[Email]');
-        $this->form_validation->set_rules('UsuarioCli', 'Usuário', 'required|trim|is_unique[Sis_UsuarioCli.UsuarioCli]');
+        $this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim');
 		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
 		$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
-		#$this->form_validation->set_rules('NumUsuarioClis', 'Nº de Usuários', 'required|trim');
+		#$this->form_validation->set_rules('NumUsuarios', 'Nº de Usuários', 'required|trim');
 
+		$data['select']['idSis_Empresa'] = $this->Logincli_model->select_empresacli();
 		$data['select']['TipoProfissional'] = $this->Basico_model->select_tipoprofissional();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 
@@ -199,11 +204,12 @@ class Logincli extends CI_Controller {
             $this->load->view('logincli/form_registrar', $data);
         } else {
 
-			#$data['query']['Empresa'] = 0;
-			#$data['query']['Funcao'] = 95;
-			#$data['query']['UsuarioCliEmpresa'] = 1;
-			#$data['query']['idSis_EmpresaMatriz'] = 1;
-			#$data['query']['Associado'] = 1;
+
+
+
+
+			$data['query']['idSis_Empresa'] = 5;
+			$data['query']['NomeEmpresa'] = "Controle Pessoal";
 			$data['query']['Permissao'] = 1;
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
             $data['query']['Senha'] = md5($data['query']['Senha']);
@@ -218,16 +224,16 @@ class Logincli extends CI_Controller {
             $data['anterior'] = array();
             $data['campos'] = array_keys($data['query']);
 
-            $data['idSis_UsuarioCli'] = $this->Logincli_model->set_usuario($data['query']);
+            $data['idSis_Usuario'] = $this->Logincli_model->set_usuario($data['query']);
             $_SESSION['log']['id'] = 1;
 
-            if ($data['idSis_UsuarioCli'] === FALSE) {
+            if ($data['idSis_Usuario'] === FALSE) {
                 $data['msg'] = '?m=2';
                 $this->load->view('logincli/form_logincli', $data);
             } else {
 
-                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idSis_UsuarioCli']);
-                $data['auditoria'] = $this->Basico_model->set_auditoriacli($data['auditoriaitem'], 'Sis_UsuarioCli', 'CREATE', $data['auditoriaitem'], $data['idSis_UsuarioCli']);
+                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idSis_Usuario']);
+                $data['auditoria'] = $this->Basico_model->set_auditoriacli($data['auditoriaitem'], 'Sis_Usuario', 'CREATE', $data['auditoriaitem'], $data['idSis_Usuario']);
                 /*
                   echo $this->db->last_query();
                   echo "<pre>";
@@ -237,13 +243,13 @@ class Logincli extends CI_Controller {
                  */
                 $data['agenda'] = array(
                     'NomeAgenda' => 'Cliente',
-                    'idSis_UsuarioCli' => $data['idSis_UsuarioCli']
+                    'idSis_Usuario' => $data['idSis_Usuario']
                 );
                 $data['campos'] = array_keys($data['agenda']);
 
                 $data['idApp_Agenda'] = $this->Logincli_model->set_agenda($data['agenda']);
-                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['agenda'], $data['campos'], $data['idSis_UsuarioCli']);
-                $data['auditoria'] = $this->Basico_model->set_auditoriacli($data['auditoriaitem'], 'App_Agenda', 'CREATE', $data['auditoriaitem'], $data['idSis_UsuarioCli']);
+                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['agenda'], $data['campos'], $data['idSis_Usuario']);
+                $data['auditoria'] = $this->Basico_model->set_auditoriacli($data['auditoriaitem'], 'App_Agenda', 'CREATE', $data['auditoriaitem'], $data['idSis_Usuario']);
 
                 #$this->load->library('email');
 
@@ -264,7 +270,7 @@ class Logincli extends CI_Controller {
                 $this->email->from('contato@ktracaengemark.com.br', 'KTRACA Engenharia & Marketing');
                 $this->email->to($data['query']['Email']);
 
-                $this->email->subject('[KTRACA] Confirmação de registro - Usuário: ' . $data['query']['UsuarioCli']);
+                $this->email->subject('[KTRACA] Confirmação de registro - Usuário: ' . $data['query']['Usuario']);
 
                 #$this->email->message('Por favor, clique no link a seguir para confirmar seu registro: '
                 #. 'http://www.romati.com.br/app/logincli/confirmar/' . $data['query']['Codigo']);
@@ -332,8 +338,8 @@ class Logincli extends CI_Controller {
 
         if ($this->Logincli_model->ativa_usuario($codigo, $data['confirmar']) === TRUE) {
 
-            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['confirmar'], $data['campos'], $id['idSis_UsuarioCli'], TRUE);
-            $data['auditoria'] = $this->Basico_model->set_auditoriacli($data['auditoriaitem'], 'Sis_UsuarioCli', 'UPDATE', $data['auditoriaitem'], $id['idSis_UsuarioCli']);
+            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['confirmar'], $data['campos'], $id['idSis_Usuario'], TRUE);
+            $data['auditoria'] = $this->Basico_model->set_auditoriacli($data['auditoriaitem'], 'Sis_Usuario', 'UPDATE', $data['auditoriaitem'], $id['idSis_Usuario']);
 
             $data['msg'] = '?m=4';
             redirect(base_url() . 'logincli/' . $data['msg']);
@@ -356,15 +362,15 @@ class Logincli extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-            'UsuarioCli',
+            'Usuario',
                 ), TRUE);
 
         if (isset($_GET['usuario']))
-            $data['query']['UsuarioCli'] = $_GET['usuario'];
+            $data['query']['Usuario'] = $_GET['usuario'];
 
         $this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
 
-        $this->form_validation->set_rules('UsuarioCli', 'UsuarioCli', 'required|trim|callback_valid_usuario');
+        $this->form_validation->set_rules('Usuario', 'Usuario', 'required|trim|callback_valid_usuario');
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -374,9 +380,9 @@ class Logincli extends CI_Controller {
 
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));
 
-            $id = $this->Logincli_model->get_data_by_usuario($data['query']['UsuarioCli']);
+            $id = $this->Logincli_model->get_data_by_usuario($data['query']['Usuario']);
 
-            if ($this->Logincli_model->troca_senha($id['idSis_UsuarioCli'], array('Codigo' => $data['query']['Codigo'])) === FALSE) {
+            if ($this->Logincli_model->troca_senha($id['idSis_Usuario'], array('Codigo' => $data['query']['Codigo'])) === FALSE) {
 
                 $data['anterior'] = array(
                     'Codigo' => 'NULL'
@@ -388,8 +394,8 @@ class Logincli extends CI_Controller {
 
                 $data['campos'] = array_keys($data['confirmar']);
 
-                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['confirmar'], $data['campos'], $id['idSis_UsuarioCli'], TRUE);
-                $data['auditoria'] = $this->Basico_model->set_auditoriacli($data['auditoriaitem'], 'Sis_UsuarioCli', 'UPDATE', $data['auditoriaitem'], $id['idSis_UsuarioCli']);
+                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['confirmar'], $data['campos'], $id['idSis_Usuario'], TRUE);
+                $data['auditoria'] = $this->Basico_model->set_auditoriacli($data['auditoriaitem'], 'Sis_Usuario', 'UPDATE', $data['auditoriaitem'], $id['idSis_Usuario']);
 
                 #$this->load->library('email');
 
@@ -411,7 +417,7 @@ class Logincli extends CI_Controller {
                 $this->email->from('contato@ktracaengemark.com.br', 'KTRACA Engenharia & Marketing');
                 $this->email->to($id['Email']);
 
-                $this->email->subject('[KTRACA] Alteração de Senha - Usuário: ' . $data['query']['UsuarioCli']);
+                $this->email->subject('[KTRACA] Alteração de Senha - Usuário: ' . $data['query']['Usuario']);
                 $this->email->message('Por favor, clique no link a seguir para alterar sua senha: '
                         //. 'http://www.romati.com.br/app/logincli/trocar_senha/' . $data['query']['Codigo']);
                     . base_url() . 'logincli/trocar_senha/' . $data['query']['Codigo']);
@@ -453,9 +459,9 @@ class Logincli extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-            'idSis_UsuarioCli',
+            'idSis_Usuario',
             'Email',
-            'UsuarioCli',
+            'Usuario',
             'Codigo',
                 ), TRUE);
 
@@ -493,15 +499,15 @@ class Logincli extends CI_Controller {
             $data['anterior'] = array();
             $data['campos'] = array_keys($data['query']);
 
-            if ($this->Logincli_model->troca_senha($data['query']['idSis_UsuarioCli'], $data['query']) === TRUE) {
+            if ($this->Logincli_model->troca_senha($data['query']['idSis_Usuario'], $data['query']) === TRUE) {
                 $data['msg'] = '?m=2';
                 $this->load->view('logincli/form_troca_senha', $data);
             } else {
 
                 ##### AUDITORIA DESABILITADA! TENHO QUE VER ISSO! ##########
 
-                #$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_UsuarioCli'], TRUE);
-                #$data['auditoria'] = $this->Basico_model->set_auditoriacli($data['auditoriaitem'], 'Sis_UsuarioCli', 'UPDATE', $data['auditoriaitem'], $data['query']['idSis_UsuarioCli']);
+                #$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Usuario'], TRUE);
+                #$data['auditoria'] = $this->Basico_model->set_auditoriacli($data['auditoriaitem'], 'Sis_Usuario', 'UPDATE', $data['auditoriaitem'], $data['query']['idSis_Usuario']);
                 /*
                   echo $this->db->last_query();
                   echo "<pre>";
@@ -568,7 +574,15 @@ class Logincli extends CI_Controller {
         }
     }
 
+	function valid_empresa($empresa, $usuario) {
 
+        if ($this->Logincli_model->check_dados_empresa($empresa, $usuario) == FALSE) {
+            $this->form_validation->set_message('valid_empresa', '<strong>%s</strong> incorreta!');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
 
     function valid_senha($senha, $usuario) {
 

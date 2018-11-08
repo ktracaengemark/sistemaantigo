@@ -13,15 +13,15 @@ class Logincli_model extends CI_Model {
 
     }
 
-    public function check_dados_usuario1($senha, $usuario, $retorna = FALSE) {
+    public function check_dados_usuario($senha, $usuario, $retorna = FALSE) {
 
-        $query = $this->db->query('SELECT * FROM Sis_UsuarioCli WHERE '
-                . '(UsuarioCli = "' . $usuario . '" AND '
+        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE '
+                . '(Usuario = "' . $usuario . '" AND '
                 . 'Senha = "' . $senha . '") OR '
                 . '(Email = "' . $usuario . '" AND '
                 . 'Senha = "' . $senha . '")'
         );
-        #$query = $this->db->get_where('Sis_UsuarioCli', $data);
+        #$query = $this->db->get_where('Sis_Usuario', $data);
         /*
           echo $this->db->last_query();
           echo "<pre>";
@@ -44,19 +44,15 @@ class Logincli_model extends CI_Model {
 
     }
 
-	public function check_dados_usuario($senha, $usuario, $retorna = FALSE) {
+	public function check_dados_empresa($empresa, $usuario, $retorna = FALSE) {
 
-        $query = $this->db->query('SELECT * FROM Sis_UsuarioCli WHERE '
-                . '(UsuarioCli = "' . $usuario . '" AND '
-                . 'Senha = "' . $senha . '" AND '
-
-				. 'idTab_Modulo = "' . $_SESSION['log']['idTab_Modulo'] . '") OR '
+        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE '
+                . '(Usuario = "' . $usuario . '" AND '
+                . 'idSis_Empresa = "' . $empresa . '") OR '
                 . '(Email = "' . $usuario . '" AND '
-                . 'Senha = "' . $senha . '" AND '
-
-				. 'idTab_Modulo = "' . $_SESSION['log']['idTab_Modulo'] . '") '
+                . 'idSis_Empresa = "' . $empresa . '")'
         );
-        #$query = $this->db->get_where('Sis_UsuarioCli', $data);
+        #$query = $this->db->get_where('Sis_Usuario', $data);
         /*
           echo $this->db->last_query();
           echo "<pre>";
@@ -81,7 +77,7 @@ class Logincli_model extends CI_Model {
 
     public function check_usuario($data) {
 
-        $query = $this->db->query('SELECT * FROM Sis_UsuarioCli WHERE UsuarioCli = "' . $data . '" OR Email = "' . $data . '"');
+        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE Usuario = "' . $data . '" OR Email = "' . $data . '"');
         if ($query->num_rows() === 0) {
             return 1;
         }
@@ -94,7 +90,7 @@ class Logincli_model extends CI_Model {
                 return FALSE;
         }
 
-        #$query = $this->db->get_where('Sis_UsuarioCli', $data);
+        #$query = $this->db->get_where('Sis_Usuario', $data);
         /*
           echo $this->db->last_query();
           echo "<pre>";
@@ -107,7 +103,7 @@ class Logincli_model extends CI_Model {
 
 	public function check_nomeempresa($data) {
 
-        $query = $this->db->query('SELECT * FROM Sis_UsuarioCli WHERE NomeEmpresa = "' . $data . '"');
+        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE NomeEmpresa = "' . $data . '"');
         if ($query->num_rows() === 0) {
             return 1;
         }
@@ -120,7 +116,7 @@ class Logincli_model extends CI_Model {
                 return FALSE;
         }
 
-        #$query = $this->db->get_where('Sis_UsuarioCli', $data);
+        #$query = $this->db->get_where('Sis_Usuario', $data);
         /*
           echo $this->db->last_query();
           echo "<pre>";
@@ -136,7 +132,7 @@ class Logincli_model extends CI_Model {
         $data = array(
             'Data' => date('Y-m-d H:i:s'),
             'Operacao' => $operacao,
-            'idSis_UsuarioCli' => $usuario,
+            'idSis_Usuario' => $usuario,
             'Ip' => $this->input->ip_address(),
             'So' => $this->agent->platform(),
             'Navegador' => $this->agent->browser(),
@@ -165,7 +161,7 @@ class Logincli_model extends CI_Model {
           echo "</pre>";
           exit();
          */
-        $query = $this->db->insert('Sis_UsuarioCli', $data);
+        $query = $this->db->insert('Sis_Usuario', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -201,12 +197,12 @@ class Logincli_model extends CI_Model {
 
     public function ativa_usuario($id, $data) {
 
-        $query = $this->db->query('SELECT * FROM Sis_UsuarioCli WHERE Codigo = "' . $id . '"');
+        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE Codigo = "' . $id . '"');
         if ($query->num_rows() === 0) {
             return FALSE;
         }
         else {
-            $query = $this->db->update('Sis_UsuarioCli', $data, array('Codigo' => $id));
+            $query = $this->db->update('Sis_Usuario', $data, array('Codigo' => $id));
 			
 			echo $this->db->last_query();
           echo "<pre>";
@@ -224,8 +220,8 @@ class Logincli_model extends CI_Model {
 
     public function get_data_by_usuario($data) {
 
-        $query = $this->db->query('SELECT idSis_UsuarioCli, UsuarioCli, Email FROM Sis_UsuarioCli WHERE '
-                . 'UsuarioCli = "' . $data . '" OR Email = "' . $data . '"');
+        $query = $this->db->query('SELECT idSis_Usuario, Usuario, Email FROM Sis_Usuario WHERE '
+                . 'Usuario = "' . $data . '" OR Email = "' . $data . '"');
         $query = $query->result_array();
         return $query[0];
 
@@ -234,9 +230,9 @@ class Logincli_model extends CI_Model {
     /*
     public function get_data_by_codigo($data) {
 
-        $query = $this->db->query('SELECT idSis_UsuarioCli, UsuarioCli, Email FROM Sis_UsuarioCli WHERE Codigo = "' . $data . '"');
+        $query = $this->db->query('SELECT idSis_Usuario, Usuario, Email FROM Sis_Usuario WHERE Codigo = "' . $data . '"');
         $query = $query->result_array();
-        #return $query[0]['idSis_UsuarioCli'];
+        #return $query[0]['idSis_Usuario'];
         return $query[0];
 
     }
@@ -244,7 +240,7 @@ class Logincli_model extends CI_Model {
 
     public function get_data_by_codigo($data) {
 
-        $query = $this->db->query('SELECT idSis_UsuarioCli, UsuarioCli, Email FROM Sis_UsuarioCli WHERE Codigo = "' . $data . '"');
+        $query = $this->db->query('SELECT idSis_Usuario, Usuario, Email FROM Sis_Usuario WHERE Codigo = "' . $data . '"');
         if ($query->num_rows() === 0) {
             return FALSE;
         }
@@ -258,7 +254,7 @@ class Logincli_model extends CI_Model {
 
     public function troca_senha($id, $data) {
 
-        $query = $this->db->update('Sis_UsuarioCli', $data, array('idSis_UsuarioCli' => $id));
+        $query = $this->db->update('Sis_Usuario', $data, array('idSis_Usuario' => $id));
 
         if ($this->db->affected_rows() === 0)
             return TRUE;
@@ -269,11 +265,48 @@ class Logincli_model extends CI_Model {
 
     public function get_agenda_cliente($data) {
 
-        $query = $this->db->query('SELECT idApp_Agenda FROM App_Agenda WHERE idSis_UsuarioCli = ' . $data . ' ORDER BY idApp_Agenda ASC LIMIT 1');
+        $query = $this->db->query('SELECT idApp_Agenda FROM App_Agenda WHERE idSis_Usuario = ' . $data . ' ORDER BY idApp_Agenda ASC LIMIT 1');
         $query = $query->result_array();
-        #return $query[0]['idSis_UsuarioCli'];
+        #return $query[0]['idSis_Usuario'];
         return $query[0]['idApp_Agenda'];
 
     }
 
+	public function select_empresacli($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+				idSis_Empresa,
+				CONCAT(idSis_Empresa, "--", NomeEmpresa) AS NomeEmpresa				
+            FROM
+                Sis_Empresa
+			WHERE
+				idSis_Empresa = "5"
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+				idSis_Empresa,
+				CONCAT(idSis_Empresa, "--", NomeEmpresa) AS NomeEmpresa				
+            FROM
+                Sis_Empresa
+			WHERE
+				idSis_Empresa = "5"
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_Empresa] = $row->NomeEmpresa;
+            }
+        }
+
+        return $array;
+    }	
+	
 }

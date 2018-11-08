@@ -33,7 +33,7 @@
 	<?php echo form_error('NumUsuarios'); ?>
 	<br>	
 -->
-	<label for="NumUsuarios">Nº de Usuários da Empresa:*</label>
+	<label for="NumUsuarios">Nº de Usuários:*</label>
 	<select data-placeholder="Selecione uma opção..." class="form-control" id="NumUsuarios" name="NumUsuarios">			
 		<option value="">-- Selecione uma NumUsuarios --</option>
 		<?php
@@ -49,10 +49,16 @@
     <?php echo form_error('NumUsuarios'); ?>
     <br>
 	
-	<label for="Nome">Nome do Administrador:</label>
-    <input type="text" class="form-control" id="Nome" maxlength="255"
-           name="Nome" value="<?php echo $query['Nome']; ?>">
-    <?php echo form_error('Nome'); ?>
+	<label for="NomeAdmin">Nome do Administrador:</label>
+    <input type="text" class="form-control" id="NomeAdmin" maxlength="255"
+           name="NomeAdmin" value="<?php echo $query['NomeAdmin']; ?>">
+    <?php echo form_error('NomeAdmin'); ?>
+    <br>
+	
+	<label for="CpfAdmin">CPF do Administrador:</label>
+    <input type="text" class="form-control " id="CpfAdmin" maxlength="11"
+           name="CpfAdmin" placeholder="99999999999" value="<?php echo $query['CpfAdmin']; ?>">
+    <?php echo form_error('CpfAdmin'); ?>
     <br>
 	
     <label for="Celular">Celular do Administrador:</label>
@@ -61,19 +67,19 @@
     <?php echo form_error('Celular'); ?>
     <br>
 	
-    <label class="text-">E-mail do Administrador:</label>
+    <label class="text-">E-mail:</label>
     <input type="text" class="form-control" id="Email" maxlength="100"
            name="Email" value="<?php echo $query['Email']; ?>">
     <?php echo form_error('Email'); ?>
     <br>
 	
-    <label for="UsuarioEmpresa">Usuário do Administrador:</label>
+    <label for="UsuarioEmpresa">Usuário Admin:</label>
     <input type="text" class="form-control" id="UsuarioEmpresa" maxlength="45"
            name="UsuarioEmpresa" value="<?php echo $query['UsuarioEmpresa']; ?>">
     <?php echo form_error('UsuarioEmpresa'); ?>
     <br>
 
-    <label for="Senha">Senha do Administrador:</label>
+    <label for="Senha">Senha:</label>
     <input type="password" class="form-control" id="Senha" maxlength="45"
            name="Senha" value="<?php echo $query['Senha']; ?>">
     <?php echo form_error('Senha'); ?>
@@ -87,8 +93,8 @@
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">REGISTRAR</button>
 	<br>
-	<a class="btn btn btn-primary btn-info btn-block" href="<?php echo base_url(); ?>login/index" role="button">Acesso dos Usuários da Empresa</a>
-	<a class="btn btn btn-primary btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">Acesso do Admin. da Empresa</a>		
+	<a class="btn btn btn-primary btn-info btn-block" href="<?php echo base_url(); ?>login/index" role="button">Acesso dos Usuários das Empresas</a>
+	<a class="btn btn btn-primary btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">Acesso dos Admin. das Empresas</a>		
 </form>
 
 </div>
