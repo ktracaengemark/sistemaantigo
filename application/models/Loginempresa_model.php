@@ -247,10 +247,11 @@ class Loginempresa_model extends CI_Model {
             $array = $this->db->query(					
 				'SELECT                
 				idSis_Empresa,
-				CONCAT(idSis_Empresa, "--", NomeEmpresa) AS NomeEmpresa				
+				CONCAT(NomeEmpresa, " ", "(", idSis_Empresa, ")") AS NomeEmpresa				
             FROM
                 Sis_Empresa					
-
+			WHERE
+				idSis_Empresa != "5"
 			ORDER BY 
 				NomeEmpresa ASC'
     );
@@ -259,10 +260,11 @@ class Loginempresa_model extends CI_Model {
             $query = $this->db->query(
                 'SELECT                
 				idSis_Empresa,
-				CONCAT(idSis_Empresa, "--", NomeEmpresa) AS NomeEmpresa				
+				CONCAT(NomeEmpresa, " ", "(", idSis_Empresa, ")") AS NomeEmpresa				
             FROM
                 Sis_Empresa					
-
+			WHERE
+				idSis_Empresa != "5"
 			ORDER BY 
 				NomeEmpresa ASC'
     );

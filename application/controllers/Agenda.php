@@ -37,6 +37,7 @@ class Agenda extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'NomeUsuario',
+
         ), TRUE));
 
         $_SESSION['log']['NomeUsuario'] = ($data['query']['NomeUsuario']) ?
@@ -50,7 +51,7 @@ class Agenda extends CI_Controller {
 		$data['query']['procedimento'] = $this->Agenda_model->procedimento($_SESSION['log']['id']);
 		$data['query']['procedimentocli'] = $this->Agenda_model->procedimentocli($_SESSION['log']['id']);
 		$data['query']['procedimentoorc'] = $this->Agenda_model->procedimentoorc($_SESSION['log']['id']);
-		
+	
 		$this->load->view('agenda/tela_agenda', $data);
 
         #load footer view

@@ -183,7 +183,7 @@ class Logincli extends CI_Controller {
 		$this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
 
 		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Usuario.NomeEmpresa]');
-        $this->form_validation->set_rules('CpfUsuario', 'Cpf do Usuário', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+        $this->form_validation->set_rules('CpfUsuario', 'Cpf do Usuário', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email');
         $this->form_validation->set_rules('ConfirmarEmail', 'Confirmar E-mail', 'required|trim|valid_email|matches[Email]');
         $this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim');
@@ -194,7 +194,7 @@ class Logincli extends CI_Controller {
 		$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
 		#$this->form_validation->set_rules('NumUsuarios', 'Nº de Usuários', 'required|trim');
 
-		$data['select']['idSis_Empresa'] = $this->Logincli_model->select_empresacli();
+		$data['select']['idSis_Empresa'] = $this->Logincli_model->select_empresa();
 		$data['select']['TipoProfissional'] = $this->Basico_model->select_tipoprofissional();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 
@@ -243,7 +243,8 @@ class Logincli extends CI_Controller {
                  */
                 $data['agenda'] = array(
                     'NomeAgenda' => 'Cliente',
-                    'idSis_Usuario' => $data['idSis_Usuario']
+                    'idSis_Usuario' => $data['idSis_Usuario'],
+					'idSis_Empresa' => "5"
                 );
                 $data['campos'] = array_keys($data['agenda']);
 

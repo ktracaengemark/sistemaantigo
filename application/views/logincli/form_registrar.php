@@ -19,9 +19,9 @@
             <img src="<?php echo base_url() . 'arquivos/imagens/' . $modulo . '.png'; ?>" />
         </a>
     </p>
-    <h2 class="form-signin-heading text-center">Cad. Usuário Pessoal</h2>
+    <h2 class="form-signin-heading text-center">Conta Pessoal</h2>
 
-	<label for="idSis_Empresa">Empresa</label>
+	<label class="sr-only">Empresa</label>
 	<select data-placeholder="Selecione uma opção..." class="form-control" id="idSis_Empresa" name="idSis_Empresa">			
 		
 		<?php
@@ -107,10 +107,10 @@
     <?php echo form_error('Confirma'); ?>
     <br>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit">REGISTRAR</button>
+    <button class="btn btn-lg btn-success btn-block" type="submit">REGISTRAR</button>
 	<br>
-	<a class="btn btn btn-primary btn-info btn-block" href="<?php echo base_url(); ?>login/index" role="button">Acesso dos Usuários das Empresas</a>
-	<a class="btn btn btn-primary btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">Acesso dos Admin. das Empresas</a>
+	<a class="btn btn btn-primary btn-block" href="<?php echo base_url(); ?>login/index" role="button">Acesso dos Usuários</a>
+	<a class="btn btn btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">Acesso dos Administradores</a>
 </form>
 
 </div>

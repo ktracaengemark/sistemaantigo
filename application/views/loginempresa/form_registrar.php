@@ -19,7 +19,7 @@
             <img src="<?php echo base_url() . 'arquivos/imagens/' . $modulo . '.png'; ?>" />
         </a>
     </p>
-    <h2 class="form-signin-heading text-center">Cadastrar Nova Empresa</h2>
+    <h2 class="form-signin-heading text-center">Nova Empresa</h2>
 
 	<label for="NomeEmpresa">Nome da Empresa:</label>
 	<input type="text" class="form-control" id="NomeEmpresa" maxlength="45" 
@@ -91,10 +91,10 @@
     <?php echo form_error('Confirma'); ?>
     <br>	
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit">REGISTRAR</button>
+    <button class="btn btn-lg btn-warning btn-block" type="submit">REGISTRAR</button>
 	<br>
-	<a class="btn btn btn-primary btn-info btn-block" href="<?php echo base_url(); ?>login/index" role="button">Acesso dos Usuários das Empresas</a>
-	<a class="btn btn btn-primary btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">Acesso dos Admin. das Empresas</a>		
+	<a class="btn btn btn-primary btn-block" href="<?php echo base_url(); ?>login/index" role="button">Acesso dos Usuários</a>
+	<a class="btn btn btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">Acesso dos Administradores</a>		
 </form>
 
 </div>

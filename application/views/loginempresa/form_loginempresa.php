@@ -17,7 +17,7 @@
 	<label class="sr-only">Empresa</label>
     <input type="text" id="inputText" class="form-control" placeholder="Empresa" autofocus name="idSis_Empresa" value="<?php echo set_value('idSis_Empresa'); ?>">
 	-->
-	<label for="idSis_Empresa">Empresa</label>
+	<label class="sr-only">Empresa</label>
 	<select data-placeholder="Selecione uma opção..." class="form-control" id="idSis_Empresa" name="idSis_Empresa">			
 		<option value="">-- Selecione sua Empresa --</option>
 		<?php
@@ -38,12 +38,13 @@
     <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
     <?php echo form_error('Senha'); ?>
 	<input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
-    <button class="btn btn-lg btn-warning btn-block" type="submit">Acesso dos Admin. das Empresas</button>
-    <p><a href="<?php echo base_url(); ?>loginempresa/recuperar/?usuario=<?php echo set_value('UsuarioEmpresa'); ?>">Esqueci Admin./senha!</a></p>
+    <button class="btn btn-lg btn-warning btn-block" type="submit">Acesso dos Administradores</button>
+    <br>
+	<p><a href="<?php echo base_url(); ?>loginempresa/recuperar/?usuario=<?php echo set_value('UsuarioEmpresa'); ?>">Esqueci Admin./senha!</a></p>
     <br>
 	<a class="btn btn  btn-primary btn-block" href="<?php echo base_url(); ?>login/index" role="button">Acesso dos Usuários</a>
-	<a class="btn btn  btn-primary btn-block" href="<?php echo base_url(); ?>loginempresamatriz/index" role="button">Acesso Ktraca</a>
-	<a class="btn btn  btn-danger btn-block" href="<?php echo base_url(); ?>loginempresa/registrar" role="button">Cadastrar Nova Empresa</a>
+	<a class="btn btn  btn-danger btn-block" href="<?php echo base_url(); ?>loginempresa/registrar" role="button">Cad. Nova Empresa</a>
+	<a class="btn btn  btn-danger btn-block" href="<?php echo base_url(); ?>logincli/registrar" role="button">Cad. Conta Pessoal</a>
 
 </form>
 

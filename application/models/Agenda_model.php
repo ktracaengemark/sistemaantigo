@@ -90,7 +90,7 @@ class Agenda_model extends CI_Model {
     }
 
 	public function procedimento($data) {
-   
+
 		$query = $this->db->query('
             SELECT
 				idApp_ProcedimentoCli,
@@ -108,7 +108,7 @@ class Agenda_model extends CI_Model {
 				idApp_OrcaTrataCli = "0" AND
 				idApp_Cliente = "0"
             ORDER BY
-                DataProcedimento DESC
+                DataProcedimento ASC
         ');
 
         if ($query->num_rows() === FALSE) {
@@ -147,7 +147,7 @@ class Agenda_model extends CI_Model {
 				P.idApp_OrcaTrataCli = "0" AND
 				P.idApp_Cliente != "0"
             ORDER BY
-                P.DataProcedimento DESC
+                P.DataProcedimento ASC
         ');
 
         if ($query->num_rows() === FALSE) {
@@ -183,7 +183,7 @@ class Agenda_model extends CI_Model {
 				ConcluidoProcedimento = "N" AND
 				idApp_OrcaTrataCli != "0" 
             ORDER BY
-                DataProcedimento DESC
+                DataProcedimento ASC
         ');
 
         if ($query->num_rows() === FALSE) {
@@ -216,7 +216,8 @@ class Agenda_model extends CI_Model {
 				R.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 (MONTH(D.DataNascimento) = ' . date('m', time()) . ') AND
                 R.idApp_Cliente = D.idApp_Cliente            
-            ORDER BY NomeContatoCliente ASC');
+            ORDER BY 
+				NomeContatoCliente ASC');
 
         /*
           echo $this->db->last_query();
@@ -262,7 +263,50 @@ class Agenda_model extends CI_Model {
         return $array;
     }
 	
-	/*	
+    public function select_status_sn1() {
+
+        $query = $this->db->query('
+            SELECT
+                C.idApp_Cliente,
+                CONCAT(IFNULL(C.NomeCliente, ""), " --- ", IFNULL(C.Telefone1, ""), " --- ", IFNULL(C.Telefone2, ""), " --- ", IFNULL(C.Telefone3, "")) As NomeCliente
+            FROM
+                App_Cliente AS C
+
+            WHERE
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+            ORDER BY
+                C.NomeCliente ASC
+        ');
+
+        $array = array();
+        $array[0] = 'TODOS';
+        foreach ($query->result() as $row) {
+			$array[$row->idApp_Cliente] = $row->NomeCliente;
+        }
+
+        return $array;
+    }
+	
+	public function select_status_sn($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('SELECT * FROM Tab_StatusSN');
+        } else {
+            $query = $this->db->query('SELECT * FROM Tab_StatusSN');
+
+            $array = array();
+			$array[0] = 'TODOS';
+			foreach ($query->result() as $row) {
+			$array[$row->Abrev] = $row->StatusSN;
+			
+            }
+        }
+
+        return $array;
+    }
+
+/*	
 	public function profissional_aniversariantes($data) {
 
         $query = $this->db->query('

@@ -272,13 +272,13 @@ class Logincli_model extends CI_Model {
 
     }
 
-	public function select_empresacli($data = FALSE) {
+	public function select_empresa($data = FALSE) {
 
         if ($data === TRUE) {
             $array = $this->db->query(					
 				'SELECT                
 				idSis_Empresa,
-				CONCAT(idSis_Empresa, "--", NomeEmpresa) AS NomeEmpresa				
+				NomeEmpresa				
             FROM
                 Sis_Empresa
 			WHERE
@@ -291,7 +291,7 @@ class Logincli_model extends CI_Model {
             $query = $this->db->query(
                 'SELECT                
 				idSis_Empresa,
-				CONCAT(idSis_Empresa, "--", NomeEmpresa) AS NomeEmpresa				
+				NomeEmpresa				
             FROM
                 Sis_Empresa
 			WHERE

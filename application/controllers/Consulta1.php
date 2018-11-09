@@ -172,7 +172,7 @@ class Consulta extends CI_Controller {
             $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
             //$data['query']['idTab_Status'] = 1;
             $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
-			$data['query']['Empresa'] = $_SESSION['log']['Empresa'];
+			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
@@ -325,7 +325,7 @@ class Consulta extends CI_Controller {
             $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
 			//$data['query']['idTab_Status'] = 1;
             $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
-			$data['query']['Empresa'] = $_SESSION['log']['Empresa'];
+			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
@@ -483,7 +483,7 @@ class Consulta extends CI_Controller {
             $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
             //$data['query']['idTab_Status'] = 1;
             $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
-			$data['query']['Empresa'] = $_SESSION['log']['Empresa'];
+			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
@@ -867,7 +867,7 @@ class Consulta extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-            #'idSis_Usuario',
+            'idSis_Usuario',
 			'idApp_Consulta',
             'idApp_Agenda',
 			#'idSis_EmpresaFilial',
@@ -939,7 +939,7 @@ class Consulta extends CI_Controller {
 			$data['query']['Tipo'] = 1;
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
             $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
-			#$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
+			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
             //exit();
 
@@ -1034,7 +1034,7 @@ class Consulta extends CI_Controller {
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
             $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
             $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
-			$data['query']['Empresa'] = $_SESSION['log']['Empresa'];
+			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');

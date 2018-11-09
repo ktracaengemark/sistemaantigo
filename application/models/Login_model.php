@@ -278,7 +278,7 @@ class Login_model extends CI_Model {
             $array = $this->db->query(					
 				'SELECT                
 				idSis_Empresa,
-				CONCAT(idSis_Empresa, "--", NomeEmpresa) AS NomeEmpresa				
+				CONCAT(NomeEmpresa, " ", "(", idSis_Empresa, ")") AS NomeEmpresa				
             FROM
                 Sis_Empresa					
 
@@ -290,7 +290,7 @@ class Login_model extends CI_Model {
             $query = $this->db->query(
                 'SELECT                
 				idSis_Empresa,
-				CONCAT(idSis_Empresa, "--", NomeEmpresa) AS NomeEmpresa				
+				CONCAT(NomeEmpresa, " ", "(", idSis_Empresa, ")") AS NomeEmpresa			
             FROM
                 Sis_Empresa					
 

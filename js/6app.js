@@ -859,12 +859,12 @@ function adicionaProcedimento() {
 				<div class="panel-heading">\
 					<div class="row">\
 						<div class="col-md-4">\
-							<label for="Procedimento'+pc+'">Ação:</label>\
+							<label for="Procedimento'+pc+'">Procedimento:</label>\
 							<textarea class="form-control" id="Procedimento'+pc+'"\
 									  name="Procedimento'+pc+'"></textarea>\
 						</div>\
-						<div class="col-md-3">\
-							<label for="DataProcedimento'+pc+'">Data da Ação:</label>\
+						<div class="col-md-2">\
+							<label for="DataProcedimento'+pc+'">Data:</label>\
 							<div class="input-group DatePicker">\
 								<span class="input-group-addon" disabled>\
 									<span class="glyphicon glyphicon-calendar"></span>\
@@ -873,8 +873,8 @@ function adicionaProcedimento() {
 									   name="DataProcedimento'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 							</div>\
 						</div>\
-						<div class="col-md-3">\
-							<label for="ConcluidoProcedimento">Ação Concl.? </label><br>\
+						<div class="col-md-2">\
+							<label for="ConcluidoProcedimento">Concluído? </label><br>\
 							<div class="form-group">\
 								<div class="btn-group" data-toggle="buttons">\
 									<label class="btn btn-warning active" name="radio_ConcluidoProcedimento'+pc+'" id="radio_ConcluidoProcedimento'+pc+'N">\
@@ -888,7 +888,7 @@ function adicionaProcedimento() {
 								</div>\
 							</div>\
 						</div>\
-						<div class="col-md-2">\
+						<div class="col-md-1">\
 							<label><br></label><br>\
 							<button type="button" id="'+pc+'" class="remove_field3 btn btn-danger">\
 								<span class="glyphicon glyphicon-trash"></span>\
@@ -3427,6 +3427,13 @@ $(document).ready(function () {
         alert(date);
     });
 	
+	$("button.fc-today-button").click(function () {
+        $('#datepickerinline1').datetimepicker({
+            today: '2011-01-01',
+        });
+        alert(date);
+    });
+	
     $("button.fc-today-button").click(function () {
         $('#datepickerinline2').datetimepicker({
             today: '2011-01-01',
@@ -3496,6 +3503,37 @@ $('#datepickerinline').datetimepicker({
     locale: 'pt-br'
 });
 
+$('#datepickerinline1').datetimepicker({
+    tooltips: {
+        today: 'Hoje',
+        clear: 'Limpar seleção',
+        close: 'Fechar este menu',
+        selectMonth: 'Selecione um mês',
+        prevMonth: 'Mês anterior',
+        nextMonth: 'Próximo mês',
+        selectYear: 'Selecione um ano',
+        prevYear: 'Ano anterior',
+        nextYear: 'Próximo ano',
+        selectDecade: 'Selecione uma década',
+        prevDecade: 'Década anterior',
+        nextDecade: 'Próxima década',
+        prevCentury: 'Centenário anterior',
+        nextCentury: 'Próximo centenário',
+        incrementHour: 'Aumentar hora',
+        decrementHour: 'Diminuir hora',
+        incrementMinute: 'Aumentar minutos',
+        decrementMinute: 'Diminuir minutos',
+        incrementSecond: 'Aumentar segundos',
+        decrementSecond: 'Diminuir segundos'
+    },
+    inline: true,
+    showTodayButton: true,
+    //showClear: true,
+    format: 'DD/MM/YYYY',
+    //defaultDate: '2015-01-01',
+    locale: 'pt-br'
+});
+
 $('#datepickerinline2').datetimepicker({
     tooltips: {
         today: 'Hoje',
@@ -3532,12 +3570,17 @@ $("#datepickerinline").on("dp.change", function (e) {
     $('#calendar').fullCalendar('gotoDate', d);
 });
 
+$("#datepickerinline1").on("dp.change", function (e) {
+    var d = new Date(e.date);
+    $('#calendarcli').fullCalendar('gotoDate', d);
+});
+
 $("#datepickerinline2").on("dp.change", function (e) {
     var d = new Date(e.date);
     $('#calendarconsultor').fullCalendar('gotoDate', d);
 });
 
-$("#datepickerinline2").on("dp.change", function (e) {
+$("#datepickerinline3").on("dp.change", function (e) {
     var d = new Date(e.date);
     $('#calendarfuncionario').fullCalendar('gotoDate', d);
 });
@@ -3769,7 +3812,7 @@ $('#calendar').fullCalendar({
     //aspectRatio: 2,
 
     firstDay: '1',
-	//minTime: '07:00',
+	//minTime: '08:00',
     //maxTime: '21:00',
     minTime: '00:00',
     maxTime: '24:00',
@@ -3783,6 +3826,82 @@ $('#calendar').fullCalendar({
 
         if (event.Evento == 1)
             var title = "<b>Evento Agendado</b><br><br><b>Obs:</b> " + event.Obs + "<br>\n\<b>Profissional:</b> " + event.Profissional;
+        else {
+
+            if (event.Paciente == 'D')
+                var title = "<b>" + event.title + "</b><br><b>Responsável:</b> " + event.subtitle + "<br><b>Tel.1:</b> " + event.Telefone1 + 
+							"<br>\n\<b>Profissional:</b> " + event.Profissional + "<br>\n\<b>Obs:</b> " + event.Obs + "<br>\n\<b>Tipo de Consulta:</b> " + event.TipoConsulta;
+            else
+                var title = "<b>" + event.title + "<b> " + "<br><b>Tel.1:</b> " + event.Telefone1 + 
+							"<br>\n\<b>Profissional:</b> " + event.Profissional + "<br>\n\<b>Obs:</b> " + event.Obs + "<br>\n\<b>Tipo de Consulta:</b> " + event.TipoConsulta;
+        }
+
+
+        $(element).tooltip({
+            title: title,
+            container: 'body',
+            position: {my: "left bottom-3", at: "center top"},
+            placement: 'auto top',
+            html: true,
+            delay: {"show": 500, "hide": 100},
+            template: '<div class="tooltip" role="tooltip" ><div class="tooltip-inner" \n\
+                    style="color: #000; border-radius: 4px; text-align: left; border-width: thin; border-style: solid; \n\
+                    border-color: #000; background-color: #fff; white-space:pre-wrap;"></div></div>'
+        });
+    },
+    /*
+    selectConstraint: {
+        start: agora,
+        end: '2099-12-31T23:59:00'
+    },*/
+    select: function (start, end, jsEvent, view) {
+        //var re = new RegExp(/^.*\//);
+        //window.location = re.exec(window.location.href) + 'cliente/pesquisar?start=' + start + '&end=' + end;
+
+        //alert(start + ' :: ' + end);
+
+        //endtime = $.fullCalendar.formatDate(end, 'HH:mm');
+        //starttime = $.fullCalendar.formatDate(start, 'DD/MM/YYYY, HH:mm');
+        //var slot = 'start=' + start + '&end=' + end;
+
+        $('#fluxo #start').val(start);
+        $('#fluxo #end').val(end);
+        //$('#fluxo #slot').text(slot);
+        $('#fluxo').modal('show');
+    },
+});
+
+$('#calendarcli').fullCalendar({
+    header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+    },
+    eventSources: [{
+            url: 'Consultacli_json.php', // use the `url` property
+        }],
+    //allDayDefault: true,
+    defaultView: 'agendaWeek',
+    //contentHeight: 700,
+    height: 'auto',
+    //handleWindowResize: false,
+    //aspectRatio: 2,
+
+    firstDay: '1',
+	//minTime: '07:00',
+    //maxTime: '21:00',
+    minTime: '00:00',
+    maxTime: '24:00',
+    nowIndicator: true,
+    selectable: true,
+    //selectHelper: true,
+    editable: false,
+    timezone: "local",
+    lang: 'pt-br',
+    eventAfterRender: function (event, element) {
+
+        if (event.Evento == 1)
+            var title = "<b>Evento Agendado</b><br><br><b>Obs:</b> " + event.Obs;
         else {
 
             if (event.Paciente == 'D')
@@ -3987,6 +4106,15 @@ function redirecionar(x) {
     var start = moment($("#start").val());
     var end = moment($("#end").val());
     (x == 1) ? url = 'consulta/cadastrar_evento' : url = 'consulta/cadastrar';
+    window.location = re.exec(window.location.href) + url + '?start=' + start + '&end=' + end
+}
+
+function redirecionar5(x) {
+
+    var re = new RegExp(/^.*\//);
+    var start = moment($("#start").val());
+    var end = moment($("#end").val());
+    (x == 1) ? url = 'consultacli/cadastrar_evento' : url = 'consultacli/cadastrar';
     window.location = re.exec(window.location.href) + url + '?start=' + start + '&end=' + end
 }
  

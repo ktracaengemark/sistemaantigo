@@ -1,6 +1,6 @@
 <div class="container text-center" id="login">
 
-    <!--<?php echo validation_errors(); ?>-->
+    <!--<?php #echo validation_errors(); ?>-->
 
     <?php if (isset($msg)) echo $msg; ?>
 
@@ -17,7 +17,7 @@
 	<label class="sr-only">Empresa</label>
     <input type="text" id="inputText" class="form-control" placeholder="Empresa" autofocus name="idSis_Empresa" value="<?php echo set_value('idSis_Empresa'); ?>">
 	-->
-	<label for="idSis_Empresa">Empresa</label>
+	<label class="sr-only">Empresa</label>
 	<select data-placeholder="Selecione uma opção..." class="form-control" id="idSis_Empresa" name="idSis_Empresa">			
 		<option value="">-- Selecione sua Empresa --</option>
 		<?php
@@ -39,17 +39,13 @@
     <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
     <?php echo form_error('Senha'); ?>
 	<input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Acesso dos Usuários das Emp.</button>	
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Acesso dos Usuários </button>	
     <br>
 	<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('Usuario'); ?>">Esqueci usuário/senha!</a></p>
-    
-	
-	<a class="btn btn btn-primary btn-warning btn-block" href="<?php echo base_url(); ?>logincli/index" role="button">Acesso Controle Pessoal</a>
-	<a class="btn btn btn-primary btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">Acesso dos Admin. das Empresas</a>
-	<a class="btn btn btn-primary btn-warning btn-block" href="<?php echo base_url(); ?>loginempresamatriz/index" role="button">Acesso do Admin. Ktraca</a>		
-	<a class="btn btn btn-primary btn-warning btn-block" href="<?php echo base_url(); ?>loginmatriz/index" role="button">Acesso dos Usuário Ktraca</a>
-	<a class="btn btn btn-primary btn-danger btn-block" href="<?php echo base_url(); ?>loginempresa/registrar" role="button">Cadastrar Nova Empresa</a>	
-	<a class="btn btn btn-primary btn-danger btn-block" href="<?php echo base_url(); ?>logincli/registrar" role="button">Cad. Controle Pessoal</a>
+    <br>
+	<a class="btn btn btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">Acesso dos Administradores</a>
+	<a class="btn btn btn-danger btn-block" href="<?php echo base_url(); ?>loginempresa/registrar" role="button">Cad. Nova Empresa</a>	
+	<a class="btn btn btn-danger  btn-block" href="<?php echo base_url(); ?>logincli/registrar" role="button">Cad. Conta Pessoal</a>
 	
 </form>
 
