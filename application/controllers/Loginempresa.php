@@ -114,6 +114,7 @@ class Loginempresa extends CI_Controller {
                 $_SESSION['log']['UsuarioEmpresa'] = (strlen($query['UsuarioEmpresa']) > 15) ? substr($query['UsuarioEmpresa'], 0, 15) : $query['UsuarioEmpresa'];
                 #$_SESSION['log']['Nome'] = (strlen($query['NomeAdmin']) > 10) ? substr($query['NomeAdmin'], 0, 10) : $query['NomeAdmin'];
 				$_SESSION['log']['Nome'] = $query['NomeAdmin'];
+				$_SESSION['log']['CpfAdmin'] = $query['CpfAdmin'];
 				$_SESSION['log']['id'] = $query['idSis_Empresa'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];

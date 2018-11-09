@@ -195,12 +195,12 @@
 											
 											}
 											
-											if ($query['Cpf']) {
+											if ($query['CpfCliente']) {
 												
 											echo '                                                 
 											<tr>
-												<td><span class="glyphicon glyphicon-pencil"></span> Cpf:</td>
-												<td>' . $query['Cpf'] . '</td>
+												<td><span class="glyphicon glyphicon-pencil"></span> CpfCliente:</td>
+												<td>' . $query['CpfCliente'] . '</td>
 											</tr>
 											';
 											

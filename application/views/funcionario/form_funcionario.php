@@ -158,7 +158,7 @@
 											</div>
 											<div class="form-group">
 												<div class="row">		
-													<div class="col-md-4">
+													<div class="col-md-3">
 														<label for="idSis_Empresa">Empresa:*</label>
 														<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> readonly=""
 																id="idSis_Empresa" autofocus name="idSis_Empresa">

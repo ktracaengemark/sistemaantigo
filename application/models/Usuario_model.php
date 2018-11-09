@@ -147,7 +147,7 @@ class Usuario_model extends CI_Model {
             FROM
                 Sis_Usuario					
             WHERE
-				Empresa = ' . $_SESSION['log']['Empresa'] . '
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
 				Nome ASC'
     );
@@ -160,7 +160,7 @@ class Usuario_model extends CI_Model {
             FROM
                 Sis_Usuario					
             WHERE
-                Empresa = ' . $_SESSION['log']['Empresa'] . '
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
 				Nome ASC'
     );

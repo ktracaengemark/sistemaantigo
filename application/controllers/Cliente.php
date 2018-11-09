@@ -49,12 +49,13 @@ class Cliente extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'idSis_Usuario',
+            'idSis_Empresa',
+			'idSis_Usuario',
 			'idApp_Cliente',
             'NomeCliente',
             'DataNascimento',
 			'DataCadastroCliente',
-			'Cpf',
+			'CpfCliente',
 			'Rg',
 			'OrgaoExp',
 			'Estado',
@@ -74,7 +75,7 @@ class Cliente extends CI_Controller {
 
             'RegistroFicha',
 			'Associado',
-			'Profissional',
+			#'Profissional',
         ), TRUE));
 
        
@@ -83,17 +84,18 @@ class Cliente extends CI_Controller {
 	   $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #$this->form_validation->set_rules('NomeCliente', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Cliente.NomeCliente.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('NomeCliente', 'Nome do Responsável', 'required|trim');
+        $this->form_validation->set_rules('CpfCliente', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[App_Cliente.CpfCliente.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		$this->form_validation->set_rules('NomeCliente', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        $this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
+        #$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-		$this->form_validation->set_rules('Profissional', 'Profissional', 'required|trim');
+		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
 		
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Associado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
-		$data['select']['Profissional'] = $this->Basico_model->select_profissional2();
+		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa2();
 		
 		$data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 		
@@ -106,7 +108,7 @@ class Cliente extends CI_Controller {
 
         if ($data['query']['Sexo'] || $data['query']['Endereco'] || $data['query']['Bairro'] ||
 			$data['query']['Municipio'] || $data['query']['Obs'] || $data['query']['Email'] || 
-			$data['query']['RegistroFicha'] || $data['query']['Cep'] || $data['query']['Cpf'] || 
+			$data['query']['RegistroFicha'] || $data['query']['Cep'] || $data['query']['CpfCliente'] || 
 			$data['query']['Rg']  || $data['query']['OrgaoExp'] || $data['query']['Estado']  || $data['query']['DataEmissao'])
             $data['collapse'] = '';
         else
@@ -165,11 +167,12 @@ class Cliente extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-            'idApp_Cliente',
+            'idSis_Empresa',
+			'idApp_Cliente',
             'NomeCliente',
             'DataNascimento',
 			'DataCadastroCliente',
-			'Cpf',
+			'CpfCliente',
 			'Rg',
 			'OrgaoExp',
 			'Estado',
@@ -201,17 +204,19 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #$this->form_validation->set_rules('NomeCliente', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Cliente.NomeCliente.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('NomeCliente', 'Nome do Responsável', 'required|trim');
+        $this->form_validation->set_rules('CpfCliente', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[App_Cliente.CpfCliente.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		$this->form_validation->set_rules('NomeCliente', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-		#$this->form_validation->set_rules('Profissional', 'Profissional', 'required|trim');
+		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
 		
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Associado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
 		$data['select']['Profissional'] = $this->Basico_model->select_profissional2();
+		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa2();
 		
 		$data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 		
@@ -224,7 +229,7 @@ class Cliente extends CI_Controller {
 
         if ($data['query']['Sexo'] || $data['query']['Endereco'] || $data['query']['Bairro'] ||
 			$data['query']['Municipio'] || $data['query']['Obs'] || $data['query']['Email'] || 
-			$data['query']['RegistroFicha'] || $data['query']['Cep'] || $data['query']['Cpf'] || 
+			$data['query']['RegistroFicha'] || $data['query']['Cep'] || $data['query']['CpfCliente'] || 
 			$data['query']['Rg']  || $data['query']['OrgaoExp'] || $data['query']['Estado']  || $data['query']['DataEmissao'])
             $data['collapse'] = '';
         else

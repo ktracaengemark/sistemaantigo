@@ -103,15 +103,32 @@
 					
 					<div class="row">
 						<div class="col-md-12 col-lg-12">	
-							
+							<?php echo form_open_multipart($form_open_path); ?>
 							<?php echo validation_errors(); ?>
 
 							<div class="panel panel-<?php echo $panel; ?>">
 
-								<div class="panel-heading"><strong>Cliente</strong></div>
+								<div class="panel-heading">
+									<strong>Cliente
+										<label for="idSis_Empresa" class="sr-only col-md-4">Empresa:</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> readonly=""
+												id="idSis_Empresa" autofocus name="idSis_Empresa">
+
+											<?php
+											foreach ($select['idSis_Empresa'] as $key => $row) {
+												if ($query['idSis_Empresa'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</strong>
+								</div>
 								<div class="panel-body">
 
-									<?php echo form_open_multipart($form_open_path); ?>
+									
 
 									<div class="form-group">
 										<div class="row">
@@ -194,9 +211,9 @@
 										<div class="form-group">
 											<div class="row">
 												<div class="col-md-3">
-													<label for="Cpf">CPF:</label>
+													<label for="CpfCliente">CPF:</label>
 													<input type="text" class="form-control" maxlength="11" <?php echo $readonly; ?>
-														   name="Cpf" value="<?php echo $query['Cpf']; ?>">
+														   name="CpfCliente" value="<?php echo $query['CpfCliente']; ?>">
 												</div>
 												<div class="col-md-3">
 													<label for="Telefone2">Tel.2 - Fixo ou Celular:</label>

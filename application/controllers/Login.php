@@ -117,6 +117,7 @@ class Login extends CI_Controller {
                 $_SESSION['log']['Usuario'] = (strlen($query['Usuario']) > 13) ? substr($query['Usuario'], 0, 13) : $query['Usuario'];
 				$_SESSION['log']['Nome'] = (strlen($query['Nome']) > 6) ? substr($query['Nome'], 0, 6) : $query['Nome'];
 				#$_SESSION['log']['Nome'] = $query['Nome'];
+				$_SESSION['log']['CpfUsuario'] = $query['CpfUsuario'];
 				$_SESSION['log']['id'] = $query['idSis_Usuario'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
@@ -137,8 +138,8 @@ class Login extends CI_Controller {
                     $this->basico->erro($msg);
                     $this->load->view('form_login');
                 } else {
-					redirect('acesso');
-					#redirect('agenda');
+					#redirect('acesso');
+					redirect('agenda');
 					#redirect('cliente');
                 }
             }

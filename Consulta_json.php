@@ -17,10 +17,9 @@ if (!$db) {
 #echo 'Conexão bem sucedida';
 
 //Acho que as próximas linhas são redundantes, verificar
-$query = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ?
-    #'P.idSis_Usuario = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;
-	'A.idSis_Usuario = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;
 
+$query = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'A.idSis_Usuario = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;
+																						#'P.idSis_Usuario = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;	
 $permissao = ($_SESSION['log']['Permissao'] > 2 ) ? 'A.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 
 $result = mysql_query(
@@ -29,7 +28,11 @@ $result = mysql_query(
 			A.idSis_Usuario,
             U.Nome AS NomeProfissional,
 			U.CompAgenda,
+			U.CpfUsuario,
+			U.idSis_Empresa,
 			C.idApp_Consulta,
+			C.idSis_Empresa AS Empresa,
+			E.NomeEmpresa,
             C.idApp_Cliente,
             R.NomeCliente,
 			R.Telefone1,
@@ -52,12 +55,10 @@ $result = mysql_query(
                 LEFT JOIN App_ContatoCliente AS D ON D.idApp_ContatoCliente = C.idApp_ContatoCliente
                 LEFT JOIN Sis_Usuario AS P ON P.idSis_Usuario = C.idSis_Usuario
                 LEFT JOIN Tab_TipoConsulta AS TC ON TC.idTab_TipoConsulta = C.idTab_TipoConsulta
-
+				LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = C.idSis_Empresa
         WHERE
-			C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-           	C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
-			' . $query . '
-            ' . $permissao . '
+			(U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' OR R.CpfCliente = ' . $_SESSION['log']['CpfUsuario'] . ') AND
+
             A.idApp_Agenda = C.idApp_Agenda
 			
 		ORDER BY 
@@ -170,7 +171,9 @@ while ($row = mysql_fetch_assoc($result)) {
         'Procedimento' => mb_convert_encoding($row['Procedimento'], "UTF-8", "ISO-8859-1"),
 		'Telefone1' => mb_convert_encoding($row['Telefone1'], "UTF-8", "ISO-8859-1"),
         'Obs' => mb_convert_encoding($row['Obs'], "UTF-8", "ISO-8859-1"),
-        'Evento' => $row['Evento'],
+		'CpfUsuario' => mb_convert_encoding($row['CpfUsuario'], "UTF-8", "ISO-8859-1"),
+        'NomeEmpresa' => mb_convert_encoding($row['NomeEmpresa'], "UTF-8", "ISO-8859-1"),
+		'Evento' => $row['Evento'],
         'Paciente' => $row['Paciente'],
         #   'ContatoCliente' => $contatocliente,
         'Profissional' => $profissional,

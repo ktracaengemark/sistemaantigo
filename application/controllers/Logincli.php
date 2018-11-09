@@ -209,7 +209,7 @@ class Logincli extends CI_Controller {
 
 
 			$data['query']['idSis_Empresa'] = 5;
-			$data['query']['NomeEmpresa'] = "Controle Pessoal";
+			$data['query']['NomeEmpresa'] = "Conta Pessoal";
 			$data['query']['Permissao'] = 1;
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
             $data['query']['Senha'] = md5($data['query']['Senha']);

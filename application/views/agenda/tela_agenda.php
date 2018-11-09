@@ -23,6 +23,7 @@
 						<div style="overflow: auto; height: 140px; ">
 							<table class="table table-condensed table-bordered table-striped" >
 								<tr>
+									<th class="active">Cpf</th>
 									<th class="active">Tarefa</th>	
 									<th class="active">Data</th>
 									<th class="active">Conc.</th>
@@ -36,6 +37,7 @@
 
 										echo '<tr class="clickable-row" data-href="' . $url . '" data-original-title="' . $row['Idade'] . ' anos" data-container="body"
 												data-toggle="tooltip" data-placement="right" title="">';
+											echo '<td>' . $row['NomeEmpresa'] . '</td>';
 											echo '<td>' . $row['Procedimento'] . '</td>';
 											echo '<td>' . $row['DataProcedimento'] . '</td>';
 											echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
@@ -48,31 +50,7 @@
 								?>
 							</table>
 						</div>
-						<?php if ($_SESSION['log']['Permissao'] == 1 || $_SESSION['log']['Permissao'] == 2) { ?>
 						<?php echo form_open('agenda', 'role="form"'); ?>
-							<div class="col-md-12">
-								<label for="Ordenamento">Agenda por Prof.:</label>
-								<div class="form-group">
-									<div class="row">
-										<div class="col-md-12">
-											<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-													id="NomeUsuario" name="NomeUsuario">
-												<?php
-												foreach ($select['NomeUsuario'] as $key => $row) {
-													if ($query['NomeUsuario'] == $key) {
-														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-													} else {
-														echo '<option value="' . $key . '">' . $row . '</option>';
-													}
-												}
-												?>
-											</select>
-										</div>
-									</div>
-								</div>
-							</div>
-						</form>
-						<?php } ?>
 
 						<div id="datepickerinline" class="col-md-12"></div>
 						
@@ -84,10 +62,34 @@
 </div>
 <div class="col-md-6">
 	<div class="panel panel-primary">
-		<div class="panel-heading"><strong></strong></div>
+		<div class="panel-heading">
+			<strong>
+				<?php if ($_SESSION['log']['Permissao'] == 1 || $_SESSION['log']['Permissao'] == 2) { ?>
+				<?php echo form_open('agenda', 'role="form"'); ?>
+					
+				<label class="sr-only" for="Ordenamento">Agenda dos Prof.:</label>
+				
+				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
+						id="NomeUsuario" name="NomeUsuario">
+					<?php
+					foreach ($select['NomeUsuario'] as $key => $row) {
+						if ($query['NomeUsuario'] == $key) {
+							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+						} else {
+							echo '<option value="' . $key . '">' . $row . '</option>';
+						}
+					}
+					?>
+				</select>
+					
+					
+				</form>
+				<?php } ?>
+			</strong>
+		</div>
 		<div class="panel-body">
 			<div class="form-group">
-				<div  style="overflow: auto; height: 530px; "> 
+				<div  style="overflow: auto; height: 456px; "> 
 						<table id="calendar" class="table table-condensed table-bordered table-striped "></table>
 				</div>
 			</div>
@@ -104,10 +106,12 @@
 							<div class="col-md-12 col-lg-12">
 								<label for="">Agendamento:</label>
 								<div class="form-group">
+									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>				
 									<div class="row">
 										<button type="button" id="MarcarConsulta" onclick="redirecionar(2)" class="btn btn-primary"> Com Cliente
 										</button>
 									</div>
+									<?php } ?>
 									<br>
 									<div class="row">
 										<button type="button" id="AgendarEvento" onclick="redirecionar(1)" class="btn btn-info"> Outro Evento
@@ -192,7 +196,7 @@
 			<div class="form-group">
 				<div class="row">
 					<div class="col-md-12">
-						<div style="overflow: auto; height: 180px; ">
+						<div style="overflow: auto; height: 155px; ">
 							<table class="table table-condensed table-bordered table-striped" >
 								<tr>
 									<th class="active">Cliente</th>
@@ -240,7 +244,7 @@
 			<div class="form-group">
 				<div class="row">
 					<div class="col-md-12">
-						<div style="overflow: auto; height: 180px; ">
+						<div style="overflow: auto; height: 155px; ">
 							<table class="table table-condensed table-bordered table-striped" >
 								<tr>
 									<th class="active">Orç.</th>

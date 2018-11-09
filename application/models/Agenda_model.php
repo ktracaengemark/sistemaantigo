@@ -93,22 +93,25 @@ class Agenda_model extends CI_Model {
 
 		$query = $this->db->query('
             SELECT
-				idApp_ProcedimentoCli,
-                idApp_OrcaTrataCli,
-				Procedimento,
-				DataProcedimento,
-				ConcluidoProcedimento
+				U.CpfUsuario,
+				U.idSis_Usuario,
+				U.Nome,
+				U.NomeEmpresa,
+				P.idApp_ProcedimentoCli,
+                P.idApp_OrcaTrataCli,
+				P.Procedimento,
+				P.DataProcedimento,
+				P.ConcluidoProcedimento
             FROM
-				App_ProcedimentoCli
+				Sis_Usuario AS U
+					LEFT JOIN App_ProcedimentoCli AS P ON P.idSis_Usuario = U.idSis_Usuario
             WHERE 
-                
-				idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				ConcluidoProcedimento = "N" AND
-				idApp_OrcaTrataCli = "0" AND
-				idApp_Cliente = "0"
+				
+				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' AND
+				P.idApp_OrcaTrataCli = "0" AND
+				P.idApp_Cliente = "0"
             ORDER BY
-                DataProcedimento ASC
+                P.DataProcedimento ASC
         ');
 
         if ($query->num_rows() === FALSE) {
@@ -240,7 +243,7 @@ class Agenda_model extends CI_Model {
     }
 
 	public function select_usuario() {
-
+		
         $query = $this->db->query('
             SELECT
 				P.idSis_Usuario,
@@ -249,8 +252,8 @@ class Agenda_model extends CI_Model {
                 Sis_Usuario AS P
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
             WHERE
-                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
+				
 			ORDER BY F.Abrev ASC
         ');
 
