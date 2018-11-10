@@ -1,4 +1,4 @@
-<?php if (isset($msg)) echo $msg; ?>
+<?php if ($msg) echo $msg; ?>
 <?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
 
 <div class="container-fluid">
@@ -6,7 +6,7 @@
 	
 		<div class="col-md-2"></div>
 		<div class="col-md-8 ">
-		
+
 			<nav class="navbar navbar-inverse">
 			  <div class="container-fluid">
 				<div class="navbar-header">
@@ -132,102 +132,36 @@
 			</nav>
 
 			<?php } ?>
+			
 			<div class="row">
 			
 				<div class="col-md-12 col-lg-12">
 
-					<div class="panel panel-<?php echo $panel; ?>">
+					<div class="panel panel-primary">
 
-						<div class="panel-heading"><strong>Agendamentos</strong></div>
-						<div class="panel-body">
+						<div class="panel-heading"><strong>Procedimentos</strong></div>
+						<div class="panel-body">				
+						
+							<?php
+							if (!$list) {
+							?>
+								<a class="btn btn-lg btn-warning" href="<?php echo base_url() ?>procedimento/cadastrarproc" role="button">
+									<span class="glyphicon glyphicon-plus"></span> Cadastrar Novo Procedimento
+								</a>
+								<br><br>
+								<div class="alert alert-info" role="alert"><b>Nenhum Procedimento cadastrado</b></div>
+							<?php
+							} else {
+								echo $list;
+							}
+							?>
 
-							<div>
-
-								<!-- Nav tabs -->
-								<ul class="nav nav-tabs" role="tablist">
-									<li role="presentation" ><a href="#anterior" aria-controls="anterior" role="tab" data-toggle="tab">Hist. de Agend.</a></li>
-									<li role="presentation" class="active"><a href="#proxima" aria-controls="proxima" role="tab" data-toggle="tab">Próx. Agend.</a></li>
-								   
-								</ul>
-
-								<!-- Tab panes -->
-								<div class="tab-content">
-									
-									<!-- Histórico de Consultas -->
-									<div role="tabpanel" class="tab-pane" id="anterior">
-
-										<?php
-										if ($anterior) {
-
-											foreach ($anterior->result_array() as $row) {
-
-												$row['DataInicio'] = explode(' ', $row['DataInicio']);
-												$row['DataFim'] = explode(' ', $row['DataFim']);
-
-												($row['Paciente'] == 'D') ? 
-													$row['NomePaciente'] = '<b>ContatoCliente</b> - ' . $row['NomeContatoCliente'] : 
-													$row['NomePaciente'] = 'O Próprio ';
-												
-												echo '<div data-href="' . base_url() . 'consulta/alterar/' . $row['idApp_Cliente'] . '/' . $row['idApp_Consulta'] . '" '
-												. 'class="clickable-row bs-callout bs-callout-' . $this->basico->tipo_status_cor($row['idTab_Status']) . '">';
-												echo '<h4><b>Status: ' . $row['Status'] . '</b></h4>';
-												echo '<p><b>Data:</b> ' . $this->basico->mascara_data($row['DataInicio'][0], 'barras') . ' '
-												. 'das ' . substr($row['DataInicio'][1], 0, 5) . ' às ' . substr($row['DataFim'][1], 0, 5) . '</p>';
-												#echo '<p><b>Fregues:</b> ' . $row['NomePaciente'] . '</p>';
-												echo '<p><b>Profissional:</b> ' . $row['Nome'] . '</p>';                                
-												echo '<p><b>Obs:</b><br> ' . nl2br($row['Obs']) . '</p>';
-												echo '</div>';                                
-											}
-										} else {
-											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhuma consulta registrada</b></div>';
-										}
-										?>            
-
-									</div>
-									
-									<!-- Próximas Consultas -->
-									<div role="tabpanel" class="tab-pane active" id="proxima">
-
-										<?php
-										if ($proxima) {
-
-											foreach ($proxima->result_array() as $row) {
-
-												$row['DataInicio'] = explode(' ', $row['DataInicio']);
-												$row['DataFim'] = explode(' ', $row['DataFim']);
-
-												($row['Paciente'] == 'D') ? 
-													$row['NomePaciente'] = '<b>ContatoCliente</b> - ' . $row['NomeContatoCliente'] : 
-													$row['NomePaciente'] = 'O Próprio ';
-												
-												echo '<div data-href="' . base_url() . 'consulta/alterar/' . $row['idApp_Cliente'] . '/' . $row['idApp_Consulta'] . '" '
-												. 'class="clickable-row bs-callout bs-callout-' . $this->basico->tipo_status_cor($row['idTab_Status']) . '">';
-												echo '<h4><b>Status: ' . $row['Status'] . '</b></h4>';
-												echo '<p><b>Data:</b> ' . $this->basico->mascara_data($row['DataInicio'][0], 'barras') . ' '
-												. 'das ' . substr($row['DataInicio'][1], 0, 5) . ' às ' . substr($row['DataFim'][1], 0, 5) . '</p>';
-												#echo '<p><b>Fregues:</b> ' . $row['NomePaciente'] . '</p>';
-												echo '<p><b>Profissional:</b> ' . $row['Nome'] . '</p>';                                
-												echo '<p><b>Obs:</b><br> ' . nl2br($row['Obs']) . '</p>';
-												echo '</div>';
-											}
-										} else {
-											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhuma consulta registrada</b></div>';
-										}
-										?>
-
-									</div>
-									
-								</div>
-
-							</div>
-						</div>			
+						</div>
 					</div>		
 				</div>
 			</div>									
-				
+
 		</div>
 		<div class="col-md-2"></div>
 	</div>	
 </div>
-
-	

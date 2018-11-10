@@ -7,128 +7,160 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8 ">
 		
-			<div class="panel panel-primary">
-				
-				<div class="panel-heading"><strong><?php echo '<strong>' . $_SESSION['Cliente']['NomeCliente'] . '</strong> - <small>Id.: ' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?></strong></div>
-				<div class="panel-body">
-			
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-1 "></div>
-							<div class="col-md-8 col-lg-10">
-								<div class="col-md-3 text-left">
-									<label for="">Cliente & Conts:</label>
-									<div class="form-group">
-										<div class="row">	
-											<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
-												<a class="btn btn-md btn-success" href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-													<span class="glyphicon glyphicon-file"> </span> Ver <span class="sr-only">(current)</span>
-												</a>
-											</a>				
-											<a <?php if (preg_match("/cliente\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
-												<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-													<span class="glyphicon glyphicon-edit"></span> Edit.
-												</a>
-											</a>
-										</div>
-									</div>	
-								</div>
-
-								<div class="col-md-3 text-left">
-									<label for="">Agendamentos:</label>
-									<div class="form-group">
-										<div class="row">
-											<a <?php if (preg_match("/consulta\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-success" href="<?php echo base_url() . 'consulta/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-													<span class="glyphicon glyphicon-calendar"></span> List.
-												</a>
-											</a>
-											<a <?php if (preg_match("/consulta\/(cadastrar|alterar)\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'consulta/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-													<span class="glyphicon glyphicon-plus"></span> Cad.
-												</a>
-											</a>
-										</div>	
-									</div>	
-								</div>
-
-								<div class="col-md-3 text-left">
-									<label for="">Orçamentos:</label>
-									<div class="form-group ">
-										<div class="row">
-											<a <?php if (preg_match("/orcatrata\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-success" href="<?php echo base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-													<span class="glyphicon glyphicon-usd"></span> List.
-												</a>
-											</a>
-											<a <?php if (preg_match("/orcatrata\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'orcatrata/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-													<span class="glyphicon glyphicon-plus"></span> Cad.
-												</a>
-											</a>
-										</div>		
-									</div>	
-								</div>
-								<div class="col-md-3 text-left">
-									<label for="">Devoluções:</label>
-									<div class="form-group ">
-										<div class="row">
-											<a <?php if (preg_match("/orcatrata4\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-success" href="<?php echo base_url() . 'orcatrata4/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-													<span class="glyphicon glyphicon-usd"></span> List.
-												</a>
-											</a>
-											<a <?php if (preg_match("/orcatrata4\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'orcatrata4/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-													<span class="glyphicon glyphicon-plus"></span> Cad.
-												</a>
-											</a>
-										</div>		
-									</div>	
-								</div>
-							</div>
-							<div class="col-md-1 "></div>
-						</div>	
-					</div>
+			<nav class="navbar navbar-inverse">
+			  <div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span> 
+					</button>
 					<!--
-					<div class="form-group">		
-						<div class="row">
-							<div class="text-center t">
-								<h3><?php echo '<strong>' . $_SESSION['Cliente']['NomeCliente'] . '</strong> - <small>Id.: ' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?></h3>
+					<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+						<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?> 
+					</a>
+					-->
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-center">
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-user"></span> <?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?> <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-calendar"></span> Ver
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/cliente\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Editar
+											</a>
+										</a>
+									</li>
+								</ul>
 							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-calendar"></span> Agendamentos <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/consulta\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'consulta/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-calendar"></span> Listar
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/consulta\/cadastrar1\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'consulta/cadastrar1/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Cadastrar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>
+						<?php if ($_SESSION['Cliente']['idSis_Empresa'] == $_SESSION['log']['idSis_Empresa'] ) { ?>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-usd"></span> Orçamentos <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/orcatrata\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-usd"></span> Listar
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/orcatrata\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'orcatrata/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Cadastrar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>
+						<?php } ?>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-pencil"></span> Procedimentos <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/procedimento\/listarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-pencil"></span> Listar
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/procedimento\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'procedimento/cadastrarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Cadastrar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>
+					</ul>
+
+				</div>
+			  </div>
+			</nav>
+
+			<?php } ?>
+					
+			<div class="row">
+			
+				<div class="col-md-12 col-lg-12">
+
+					<div class="panel panel-primary">
+
+						<div class="panel-heading"><strong>Contato</strong></div>
+						<div class="panel-body">
+
+								<?php
+								if (!$list) {
+								?>
+									<a class="btn btn-lg btn-warning" href="<?php echo base_url() ?>contatocliente/cadastrar" role="button">
+										<span class="glyphicon glyphicon-plus"></span> Cad.
+									</a>
+									<br><br>
+									<div class="alert alert-info" role="alert"><b>Nenhum Cad. </b></div>
+								<?php
+								} else {
+									echo $list;
+								}
+								?>
+							
 						</div>
 					</div>
-					-->
-					<?php } ?>
-					<div class="row">
-					
-						<div class="col-md-12 col-lg-12">
-
-							<div class="panel panel-primary">
-
-								<div class="panel-heading"><strong>Contato</strong></div>
-								<div class="panel-body">
-
-										<?php
-										if (!$list) {
-										?>
-											<a class="btn btn-lg btn-warning" href="<?php echo base_url() ?>contatocliente/cadastrar" role="button">
-												<span class="glyphicon glyphicon-plus"></span> Cad.
-											</a>
-											<br><br>
-											<div class="alert alert-info" role="alert"><b>Nenhum Cad. </b></div>
-										<?php
-										} else {
-											echo $list;
-										}
-										?>
-									
-								</div>
-							</div>
-						</div>	
-					</div>	
 				</div>	
-			</div>		
+			</div>	
+	
 		</div>
 		<div class="col-md-2"></div>
 	</div>	

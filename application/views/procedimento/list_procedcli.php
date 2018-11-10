@@ -6,7 +6,7 @@
 	
 		<div class="col-md-2"></div>
 		<div class="col-md-8 ">
-		
+
 			<nav class="navbar navbar-inverse">
 			  <div class="container-fluid">
 				<div class="navbar-header">
@@ -132,102 +132,141 @@
 			</nav>
 
 			<?php } ?>
-			<div class="row">
 			
+			<div class="row">
 				<div class="col-md-12 col-lg-12">
-
-					<div class="panel panel-<?php echo $panel; ?>">
-
-						<div class="panel-heading"><strong>Agendamentos</strong></div>
+					<div class="panel panel-primary">
+						<div class="panel-heading"><strong>Procedimentos</strong></div>
 						<div class="panel-body">
 
 							<div>
 
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs" role="tablist">
-									<li role="presentation" ><a href="#anterior" aria-controls="anterior" role="tab" data-toggle="tab">Hist. de Agend.</a></li>
-									<li role="presentation" class="active"><a href="#proxima" aria-controls="proxima" role="tab" data-toggle="tab">Próx. Agend.</a></li>
-								   
+									<li role="presentation" class="active" ><a href="#proxima" aria-controls="proxima" role="tab" data-toggle="tab">Aprovados</a></li>
+									<li role="presentation" ><a href="#anterior" aria-controls="anterior" role="tab" data-toggle="tab">Não Aprovados</a></li>
 								</ul>
 
 								<!-- Tab panes -->
 								<div class="tab-content">
-									
-									<!-- Histórico de Consultas -->
-									<div role="tabpanel" class="tab-pane" id="anterior">
 
-										<?php
-										if ($anterior) {
-
-											foreach ($anterior->result_array() as $row) {
-
-												$row['DataInicio'] = explode(' ', $row['DataInicio']);
-												$row['DataFim'] = explode(' ', $row['DataFim']);
-
-												($row['Paciente'] == 'D') ? 
-													$row['NomePaciente'] = '<b>ContatoCliente</b> - ' . $row['NomeContatoCliente'] : 
-													$row['NomePaciente'] = 'O Próprio ';
-												
-												echo '<div data-href="' . base_url() . 'consulta/alterar/' . $row['idApp_Cliente'] . '/' . $row['idApp_Consulta'] . '" '
-												. 'class="clickable-row bs-callout bs-callout-' . $this->basico->tipo_status_cor($row['idTab_Status']) . '">';
-												echo '<h4><b>Status: ' . $row['Status'] . '</b></h4>';
-												echo '<p><b>Data:</b> ' . $this->basico->mascara_data($row['DataInicio'][0], 'barras') . ' '
-												. 'das ' . substr($row['DataInicio'][1], 0, 5) . ' às ' . substr($row['DataFim'][1], 0, 5) . '</p>';
-												#echo '<p><b>Fregues:</b> ' . $row['NomePaciente'] . '</p>';
-												echo '<p><b>Profissional:</b> ' . $row['Nome'] . '</p>';                                
-												echo '<p><b>Obs:</b><br> ' . nl2br($row['Obs']) . '</p>';
-												echo '</div>';                                
-											}
-										} else {
-											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhuma consulta registrada</b></div>';
-										}
-										?>            
-
-									</div>
-									
 									<!-- Próximas Consultas -->
-									<div role="tabpanel" class="tab-pane active" id="proxima">
+									<div role="tabpanel" class="tab-pane active " id="proxima">
 
 										<?php
-										if ($proxima) {
+										if ($aprovado) {
 
-											foreach ($proxima->result_array() as $row) {
+											foreach ($aprovado->result_array() as $row) {
+										?>
 
-												$row['DataInicio'] = explode(' ', $row['DataInicio']);
-												$row['DataFim'] = explode(' ', $row['DataFim']);
+										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
 
-												($row['Paciente'] == 'D') ? 
-													$row['NomePaciente'] = '<b>ContatoCliente</b> - ' . $row['NomeContatoCliente'] : 
-													$row['NomePaciente'] = 'O Próprio ';
+											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Dados
+											</a>
+											
+											<!--	
+											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											</a>
+											-->
+
+											<br><br>
+
+											<h4>
+												<span class="glyphicon glyphicon-tags"></span> <b>Nº Orç.:</b> <?php echo $row['idApp_Procedimento']; ?>
+											</h4>
+											<br>
+											<p>
 												
-												echo '<div data-href="' . base_url() . 'consulta/alterar/' . $row['idApp_Cliente'] . '/' . $row['idApp_Consulta'] . '" '
-												. 'class="clickable-row bs-callout bs-callout-' . $this->basico->tipo_status_cor($row['idTab_Status']) . '">';
-												echo '<h4><b>Status: ' . $row['Status'] . '</b></h4>';
-												echo '<p><b>Data:</b> ' . $this->basico->mascara_data($row['DataInicio'][0], 'barras') . ' '
-												. 'das ' . substr($row['DataInicio'][1], 0, 5) . ' às ' . substr($row['DataFim'][1], 0, 5) . '</p>';
-												#echo '<p><b>Fregues:</b> ' . $row['NomePaciente'] . '</p>';
-												echo '<p><b>Profissional:</b> ' . $row['Nome'] . '</p>';                                
-												echo '<p><b>Obs:</b><br> ' . nl2br($row['Obs']) . '</p>';
-												echo '</div>';
+												<?php if ($row['DataProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Dt. Orç.</b> <?php echo $row['DataProcedimento']; ?>
+												<?php } ?>
+
+											</p>
+											<p>
+												<?php if ($row['ConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concl.?</b> <?php echo $row['ConcluidoProcedimento']; ?> -
+												<?php }?>
+											</p>
+											
+											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Obs:</b> <?php echo nl2br($row['Procedimento']); ?>
+											</p>
+
+										</div>
+
+										<?php
 											}
 										} else {
-											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhuma consulta registrada</b></div>';
+											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhum registro</b></div>';
 										}
 										?>
 
 									</div>
-									
+
+									<!-- Histórico de Consultas -->
+									<div role="tabpanel" class="tab-pane " id="anterior">
+
+										<?php
+										if ($naoaprovado) {
+
+											foreach ($naoaprovado->result_array() as $row) {
+										?>
+
+										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
+
+											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Dados
+											</a>
+											<!--
+											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											</a>
+											-->
+											<br><br>
+
+											<h4>
+												<span class="glyphicon glyphicon-tags"></span> <b>Nº Orç.:</b> <?php echo $row['idApp_Procedimento']; ?>
+											</h4>
+											<br>
+											<p>
+												
+												<?php if ($row['DataProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Dt. Orç.</b> <?php echo $row['DataProcedimento']; ?>
+												<?php } ?>
+
+											</p>
+											<p>
+												<?php if ($row['ConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concl.?</b> <?php echo $row['ConcluidoProcedimento']; ?> -
+												<?php }?>
+											</p>
+											
+											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Obs:</b> <?php echo nl2br($row['Procedimento']); ?>
+											</p>
+
+										</div>
+
+										<?php
+											}
+										} else {
+											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhum registro</b></div>';
+										}
+										?>
+
+									</div>
+
 								</div>
 
 							</div>
-						</div>			
-					</div>		
+						</div>
+					</div>
 				</div>
-			</div>									
-				
+			</div>
+
 		</div>
 		<div class="col-md-2"></div>
 	</div>	
 </div>
-
-	

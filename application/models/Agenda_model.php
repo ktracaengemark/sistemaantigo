@@ -97,18 +97,18 @@ class Agenda_model extends CI_Model {
 				U.idSis_Usuario,
 				U.Nome,
 				U.NomeEmpresa,
-				P.idApp_ProcedimentoCli,
-                P.idApp_OrcaTrataCli,
+				P.idApp_Procedimento,
+                P.idApp_OrcaTrata,
 				P.Procedimento,
 				P.DataProcedimento,
 				P.ConcluidoProcedimento
             FROM
 				Sis_Usuario AS U
-					LEFT JOIN App_ProcedimentoCli AS P ON P.idSis_Usuario = U.idSis_Usuario
+					LEFT JOIN App_Procedimento AS P ON P.idSis_Usuario = U.idSis_Usuario
             WHERE 
 				
 				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' AND
-				P.idApp_OrcaTrataCli = "0" AND
+				P.idApp_OrcaTrata = "0" AND
 				P.idApp_Cliente = "0"
             ORDER BY
                 P.DataProcedimento ASC
@@ -133,21 +133,21 @@ class Agenda_model extends CI_Model {
 		$query = $this->db->query('
             SELECT
 				C.NomeCliente,
-				P.idApp_ProcedimentoCli,
-                P.idApp_OrcaTrataCli,
+				P.idApp_Procedimento,
+                P.idApp_OrcaTrata,
 				P.idApp_Cliente,
 				P.Procedimento,
 				P.DataProcedimento,
 				P.ConcluidoProcedimento
             FROM
-				App_ProcedimentoCli AS P
+				App_Procedimento AS P
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
             WHERE 
                 
 				P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.ConcluidoProcedimento = "N" AND
-				P.idApp_OrcaTrataCli = "0" AND
+				P.idApp_OrcaTrata = "0" AND
 				P.idApp_Cliente != "0"
             ORDER BY
                 P.DataProcedimento ASC
@@ -171,20 +171,20 @@ class Agenda_model extends CI_Model {
    
 		$query = $this->db->query('
             SELECT
-				idApp_ProcedimentoCli,
-                idApp_OrcaTrataCli,
+				idApp_Procedimento,
+                idApp_OrcaTrata,
 				idApp_Cliente,
 				Procedimento,
 				DataProcedimento,
 				ConcluidoProcedimento
             FROM
-				App_ProcedimentoCli
+				App_Procedimento
             WHERE 
                 
 				idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
 				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				ConcluidoProcedimento = "N" AND
-				idApp_OrcaTrataCli != "0" 
+				idApp_OrcaTrata != "0" 
             ORDER BY
                 DataProcedimento ASC
         ');

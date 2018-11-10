@@ -5,6 +5,8 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8 ">
+			
+			
 			<nav class="navbar navbar-inverse">
 			  <div class="container-fluid">
 				<div class="navbar-header">
@@ -13,50 +15,115 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span> 
 					</button>
+					<!--
 					<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 						<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?> 
 					</a>
+					-->
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
-
 					<ul class="nav navbar-nav navbar-center">
-						<li>
-							<a href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-								<span class="glyphicon glyphicon-edit"></span> Edit. Cliente
-							</a>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-user"></span> <?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?> <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-calendar"></span> Ver
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/cliente\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Editar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
-						<li>
-							<a href="<?php echo base_url() . 'consulta/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-								<span class="glyphicon glyphicon-calendar"></span> List. Agends.
-							</a>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-calendar"></span> Agendamentos <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/consulta\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'consulta/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-calendar"></span> Listar
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/consulta\/cadastrar1\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'consulta/cadastrar1/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Cadastrar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
-						<li>
-							<a href="<?php echo base_url() . 'consulta/cadastrar1/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-								<span class="glyphicon glyphicon-plus"></span> Cad. Agend.
-							</a>
-						
-						</li>
-						<?php if ($_SESSION['Cliente']['Profissional'] == $_SESSION['log']['id'] ) { ?>
-						<li>
-							<a href="<?php echo base_url() . 'orcatratacli/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-								<span class="glyphicon glyphicon-usd"></span> List. Orçams.
-							</a>
-						</li>
-						<li>
-							<a href="<?php echo base_url() . 'orcatratacli/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-								<span class="glyphicon glyphicon-plus"></span> Cad. Orçam.
-							</a>
+						<?php if ($_SESSION['Cliente']['idSis_Empresa'] == $_SESSION['log']['idSis_Empresa'] ) { ?>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-usd"></span> Orçamentos <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/orcatrata\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-usd"></span> Listar
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/orcatrata\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'orcatrata/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Cadastrar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
 						<?php } ?>
-						<li>
-							<a href="<?php echo base_url() . 'procedcli/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-								<span class="glyphicon glyphicon-pencil"></span> List. Proced.
-							</a>
-						</li>
-						<li>
-							<a href="<?php echo base_url() . 'procedcli/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-								<span class="glyphicon glyphicon-plus"></span> Cad. Proced.
-							</a>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-pencil"></span> Procedimentos <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/procedimento\/listarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-pencil"></span> Listar
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/procedimento\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'procedimento/cadastrarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Cadastrar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
 					</ul>
 
@@ -65,6 +132,7 @@
 			</nav>
 
 			<?php } ?>
+			
 			<div class="row">
 
 				<div class="col-md-12 col-lg-12">
@@ -72,7 +140,7 @@
 
 					<div class="panel panel-<?php echo $panel; ?>">
 
-						<div class="panel-heading"><strong>Procedimento - </strong><?php echo $orcatrata['idApp_ProcedimentoCli'] ?></div>
+						<div class="panel-heading"><strong>Procedimento - </strong><?php echo $orcatrata['idApp_Procedimento'] ?></div>
 						<div class="panel-body">
 
 							<?php echo form_open_multipart($form_open_path); ?>
@@ -146,9 +214,9 @@
 							<div class="form-group">
 								<div class="row">
 									<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
-									<input type="hidden" name="idApp_ProcedimentoCli" value="<?php echo $orcatrata['idApp_ProcedimentoCli']; ?>">
+									<input type="hidden" name="idApp_Procedimento" value="<?php echo $orcatrata['idApp_Procedimento']; ?>">
 									<?php if ($metodo > 1) { ?>
-									<!--<input type="hidden" name="idApp_ProcedimentoCli" value="<?php echo $procedimento['idApp_ProcedimentoCli']; ?>">
+									<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
 									<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 									<?php } ?>
 									<?php if ($metodo == 2) { ?>
@@ -182,7 +250,7 @@
 															</button>
 														</div>
 														<div class="col-md-6 text-right">
-															<a class="btn btn-danger" href="<?php echo base_url() . 'procedcli/excluir/' . $orcatrata['idApp_ProcedimentoCli'] ?>" role="button">
+															<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/excluirproc/' . $orcatrata['idApp_Procedimento'] ?>" role="button">
 																<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 															</a>
 														</div>

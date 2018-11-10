@@ -1,5 +1,3 @@
-<!--"ODONTO"-->
-
 <?php
 
 #controlador de Login
@@ -527,7 +525,7 @@ class Consulta extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-            'idSis_Usuario',
+            #'idSis_Usuario',
 			'idApp_Consulta',
             'idApp_Agenda',
             'idApp_Cliente',
@@ -867,7 +865,7 @@ class Consulta extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-            'idSis_Usuario',
+            #'idSis_Usuario',
 			'idApp_Consulta',
             'idApp_Agenda',
 			#'idSis_EmpresaFilial',

@@ -33,7 +33,7 @@
 								if ($query['procedimento'] != FALSE) {
 
 									foreach ($query['procedimento']->result_array() as $row) {
-										$url = base_url() . 'procedimento/alterar/' . $row['idApp_ProcedimentoCli'];
+										$url = base_url() . 'procedimento/alterar/' . $row['idApp_Procedimento'];
 
 										echo '<tr class="clickable-row" data-href="' . $url . '" data-original-title="' . $row['Idade'] . ' anos" data-container="body"
 												data-toggle="tooltip" data-placement="right" title="">';
@@ -129,65 +129,12 @@
 		</div>
 	</div>
 </div>
-<!--
-<div class="col-md-3">
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<strong><span class="glyphicon glyphicon-pencil"></span> Tarefas  
-				<a class="btn btn-sm btn-info" href="<?php #echo base_url() ?>relatorio/procedimento" role="button">
-					<span class="glyphicon glyphicon-search"></span> Pesq.
-				</a>
-				<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>procedimento/cadastrar" role="button">
-					<span class="glyphicon glyphicon-plus"></span> Cad.
-				</a>
-			</strong>
-		</div>
-		<div class="panel-body">
-			<div class="form-group">
-				<div class="row">
-					<div class="col-md-12">
-						
-						<div style="overflow: auto; height: 140px; ">
-							<table class="table table-condensed table-bordered table-striped" >
-								<tr>
-									<th class="active">Tarefa</th>	
-									<th class="active">Data</th>
-									<th class="active">Conc.</th>
-								</tr>
-								
-								<?php
-								if ($query['procedimento'] != FALSE) {
-
-									foreach ($query['procedimento']->result_array() as $row) {
-										$url = base_url() . 'procedimento/alterar/' . $row['idApp_ProcedimentoCli'];
-
-										echo '<tr class="clickable-row" data-href="' . $url . '" data-original-title="' . $row['Idade'] . ' anos" data-container="body"
-												data-toggle="tooltip" data-placement="right" title="">';
-											echo '<td>' . $row['Procedimento'] . '</td>';
-											echo '<td>' . $row['DataProcedimento'] . '</td>';
-											echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
-											
-										echo '</tr>';
-
-									}
-
-								}
-								?>
-							</table>
-						</div>	
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
--->
 <?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 <div class="col-md-3">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<strong><span class="glyphicon glyphicon-pencil"></span> Proced. - Clientes 
-				<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/procedimentocli" role="button">
+				<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/procedimento" role="button">
 					<span class="glyphicon glyphicon-search"></span> Pesq.
 				</a>
 			</strong>
@@ -208,7 +155,7 @@
 								if ($query['procedimentocli'] != FALSE) {
 
 									foreach ($query['procedimentocli']->result_array() as $row) {
-										$url = base_url() . 'procedcli/alterar/' . $row['idApp_ProcedimentoCli'];
+										$url = base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'];
 
 										echo '<tr class="clickable-row" data-href="' . $url . '" data-original-title="' . $row['Idade'] . ' anos" data-container="body"
 												data-toggle="tooltip" data-placement="right" title="">';
@@ -256,11 +203,11 @@
 								if ($query['procedimentoorc'] != FALSE) {
 
 									foreach ($query['procedimentoorc']->result_array() as $row) {
-										$url = base_url() . 'orcatratacli/alterar2/' . $row['idApp_OrcaTrataCli'];
+										$url = base_url() . 'orcatratacli/alterar2/' . $row['idApp_OrcaTrata'];
 
 										echo '<tr class="clickable-row" data-href="' . $url . '" data-original-title="' . $row['Idade'] . ' anos" data-container="body"
 												data-toggle="tooltip" data-placement="right" title="">';
-											echo '<td>' . $row['idApp_OrcaTrataCli'] . '</td>';
+											echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 											echo '<td>' . $row['Procedimento'] . '</td>';
 											echo '<td>' . $row['DataProcedimento'] . '</td>';
 											echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';

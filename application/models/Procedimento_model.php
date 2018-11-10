@@ -10,16 +10,12 @@ class Procedimento_model extends CI_Model {
         parent::__construct();
         $this->load->database();
         $this->load->library('basico');
+        $this->load->model(array('Basico_model'));
     }
-
-
-    ##############
-    #RESPONSÁVEL
-    ##############
 
     public function set_procedimento($data) {
 
-        $query = $this->db->insert('App_ProcedimentoCli', $data);
+        $query = $this->db->insert('App_Procedimento', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -30,7 +26,7 @@ class Procedimento_model extends CI_Model {
     }
 
     public function get_procedimento($data) {
-        $query = $this->db->query('SELECT * FROM App_ProcedimentoCli WHERE idApp_ProcedimentoCli = ' . $data);
+        $query = $this->db->query('SELECT * FROM App_Procedimento WHERE idApp_Procedimento = ' . $data);
 
         $query = $query->result_array();
 
@@ -40,7 +36,7 @@ class Procedimento_model extends CI_Model {
     public function update_procedimento($data, $id) {
 
         unset($data['Id']);
-        $query = $this->db->update('App_ProcedimentoCli', $data, array('idApp_ProcedimentoCli' => $id));
+        $query = $this->db->update('App_Procedimento', $data, array('idApp_Procedimento' => $id));
         /*
           echo $this->db->last_query();
           echo '<br>';
@@ -58,7 +54,7 @@ class Procedimento_model extends CI_Model {
 
     public function delete_procedimento($data) {
 
-        $query = $this->db->query('SELECT* FROM App_ProcedimentoCli WHERE idApp_ProcedimentoCli = ' . $data);
+        $query = $this->db->query('SELECT* FROM App_Procedimento WHERE idApp_Procedimento = ' . $data);
         $query = $query->result_array();
 
         /*
@@ -82,7 +78,7 @@ class Procedimento_model extends CI_Model {
 
         */
 
-        $this->db->delete('App_ProcedimentoCli', array('idApp_ProcedimentoCli' => $data));
+        $this->db->delete('App_Procedimento', array('idApp_Procedimento' => $data));
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -94,7 +90,7 @@ class Procedimento_model extends CI_Model {
     public function lista_procedimento($data, $x) {
 
         $query = $this->db->query('SELECT * '
-                . 'FROM App_ProcedimentoCli WHERE '
+                . 'FROM App_Procedimento WHERE '
                 . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
 				. 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
                 . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND '
@@ -131,10 +127,10 @@ class Procedimento_model extends CI_Model {
         if ($data === TRUE) {
             $array = $this->db->query(					
 				'SELECT                
-				idApp_ProcedimentoCli,
+				idApp_Procedimento,
 				CONCAT(IFNULL(Procedimento, ""), " --- ", IFNULL(Telefone1, ""), " --- ", IFNULL(Telefone2, ""), " --- ", IFNULL(Telefone3, "")) As Procedimento				
             FROM
-                App_ProcedimentoCli					
+                App_Procedimento					
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -146,10 +142,10 @@ class Procedimento_model extends CI_Model {
         } else {
             $query = $this->db->query(
                 'SELECT                
-				idApp_ProcedimentoCli,
+				idApp_Procedimento,
 				CONCAT(IFNULL(Procedimento, ""), " --- ", IFNULL(Telefone1, ""), " --- ", IFNULL(Telefone2, ""), " --- ", IFNULL(Telefone3, "")) As Procedimento				
             FROM
-                App_ProcedimentoCli					
+                App_Procedimento					
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -160,11 +156,103 @@ class Procedimento_model extends CI_Model {
             
             $array = array();
             foreach ($query->result() as $row) {
-                $array[$row->idApp_ProcedimentoCli] = $row->Procedimento;
+                $array[$row->idApp_Procedimento] = $row->Procedimento;
             }
         }
 
         return $array;
     }	
 
+    public function set_orcatrata($data) {
+
+        $query = $this->db->insert('App_Procedimento', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+
+    public function get_orcatrata($data) {
+        $query = $this->db->query('SELECT * FROM App_Procedimento WHERE idApp_Procedimento = ' . $data);
+        $query = $query->result_array();
+
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query[0];
+    }
+
+    public function list_orcamento($id, $aprovado, $completo) {
+
+        $query = $this->db->query('SELECT '
+            . 'OT.idApp_Procedimento, '
+            . 'OT.DataProcedimento, '
+			. 'OT.ConcluidoProcedimento, '
+            . 'OT.Procedimento '
+            . 'FROM '
+            . 'App_Procedimento AS OT '
+            . 'WHERE '
+            . 'OT.idApp_Cliente = ' . $id . ' AND '
+            . 'OT.ConcluidoProcedimento = "' . $aprovado . '" '
+            . 'ORDER BY '
+			. 'OT.ConcluidoProcedimento ASC, '
+			. 'OT.DataProcedimento DESC ');
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+          */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($completo === FALSE) {
+                return TRUE;
+            } else {
+
+                foreach ($query->result() as $row) {
+					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+                }
+                return $query;
+            }
+        }
+    }
+
+    public function update_orcatrata($data, $id) {
+
+        unset($data['idApp_Procedimento']);
+        $query = $this->db->update('App_Procedimento', $data, array('idApp_Procedimento' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+
+    public function delete_orcatrata($id) {
+
+        $query = $this->db->delete('App_Procedimento', array('idApp_Procedimento' => $id));
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    public function get_profissional($data) {
+		$query = $this->db->query('SELECT NomeProfissional FROM App_Profissional WHERE idApp_Profissional = ' . $data);
+        $query = $query->result_array();
+
+        return (isset($query[0]['NomeProfissional'])) ? $query[0]['NomeProfissional'] : FALSE;
+    }
+	
 }
