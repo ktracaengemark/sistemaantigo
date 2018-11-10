@@ -247,14 +247,16 @@ class Agenda_model extends CI_Model {
         $query = $this->db->query('
             SELECT
 				P.idSis_Usuario,
+				P.CpfUsuario,
 				CONCAT(IFNULL(F.Abrev,""), " --- ", IFNULL(P.Nome,"")) AS NomeUsuario
             FROM
                 Sis_Usuario AS P
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
             WHERE
-                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
-				
-			ORDER BY F.Abrev ASC
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND 
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY 
+				F.Abrev ASC
         ');
 
         $array = array();

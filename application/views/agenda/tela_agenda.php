@@ -64,7 +64,7 @@
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<strong>
-				<?php if ($_SESSION['log']['Permissao'] == 1 || $_SESSION['log']['Permissao'] == 2) { ?>
+				<?php if ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) { ?>
 				<?php echo form_open('agenda', 'role="form"'); ?>
 					
 				<label class="sr-only" for="Ordenamento">Agenda dos Prof.:</label>

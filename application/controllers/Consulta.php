@@ -142,7 +142,7 @@ class Consulta extends CI_Controller {
         #exit();
         */
 
-        $data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
+        $data['select']['option'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 /*
         $data['select']['Paciente'] = array (
             'R' => 'O Próprio',
@@ -295,7 +295,7 @@ class Consulta extends CI_Controller {
         #exit();
         */
 
-        $data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
+        $data['select']['option'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 
         $data['select']['Paciente'] = array (
             'R' => 'O Próprio',
@@ -454,7 +454,7 @@ class Consulta extends CI_Controller {
         #exit();
         */
 
-        $data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
+        $data['select']['option'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 /*
         $data['select']['Paciente'] = array (
             'R' => 'O Próprio',
@@ -647,7 +647,7 @@ class Consulta extends CI_Controller {
 			$data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
             #$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
 			$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
-			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
+			#$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
             //exit();
 
@@ -799,7 +799,7 @@ class Consulta extends CI_Controller {
 		$data['select']['Status'] = $this->Basico_model->select_status();
         
 
-        $data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
+        $data['select']['option'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 
 		$data['titulo'] = 'Outros Eventos';
         $data['form_open_path'] = 'consulta/cadastrar_evento';
@@ -867,7 +867,7 @@ class Consulta extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-            #'idSis_Usuario',
+            'idSis_Usuario',
 			'idApp_Consulta',
             'idApp_Agenda',
 			#'idSis_EmpresaFilial',
@@ -1011,7 +1011,7 @@ class Consulta extends CI_Controller {
         $data['select']['Profissional'] = $this->Profissional_model->select_profissional();
         $data['select']['idApp_Agenda'] = $this->Basico_model->select_agenda();
 
-        $data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
+        $data['select']['option'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 
 		$data['titulo'] = 'Agenda Particular';
         $data['form_open_path'] = 'consulta/cadastrar_particular';

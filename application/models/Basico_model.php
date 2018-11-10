@@ -1245,7 +1245,7 @@ class Basico_model extends CI_Model {
 
 	public function select_agenda($data = FALSE) {
 
-        $q = ($_SESSION['log']['Permissao'] > 2) ?
+        $q = (($_SESSION['log']['idSis_Empresa'] == 5) || ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] >= 3)) ?
             ' U.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 
         if ($data === TRUE) {
@@ -1269,17 +1269,15 @@ class Basico_model extends CI_Model {
 				SELECT
                     A.idApp_Agenda,
                     A.idSis_Usuario,
-					CONCAT(IFNULL(F.Abrev,""), " --- ", IFNULL(U.Nome,"")) AS Nome
-
+					U.Nome
 				FROM
                     App_Agenda AS A
 						LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = A.idSis_Usuario
-						LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = U.Funcao
 				WHERE
                     ' . $q . '
 					A.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 				ORDER BY
-					F.Abrev ASC
+					U.Nome ASC
 			');
 
             $array = array();

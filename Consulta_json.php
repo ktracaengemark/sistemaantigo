@@ -18,9 +18,12 @@ if (!$db) {
 
 //Acho que as próximas linhas são redundantes, verificar
 
-$query = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'A.idSis_Usuario = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;
-																						#'P.idSis_Usuario = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;	
-$permissao = ($_SESSION['log']['Permissao'] > 2 ) ? 'A.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+$query = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'A.idSis_Usuario = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;	
+#$query2 = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'C.idApp_Cliente = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;
+																				
+$permissao = ($_SESSION['log']['Permissao'] <= 2 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+$permissao1 = (($_SESSION['log']['idSis_Empresa'] == 5) || ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] >= 3)) ? 'R.CpfCliente = ' . $_SESSION['log']['CpfUsuario'] . '  ' : FALSE;
+$permissao2 = (($_SESSION['log']['idSis_Empresa'] == 5) || ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] >= 3)) ? 'P.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . '  ' : FALSE;																																			
 
 $result = mysql_query(
         'SELECT
@@ -29,13 +32,16 @@ $result = mysql_query(
             U.Nome AS NomeProfissional,
 			U.CompAgenda,
 			U.CpfUsuario,
-			U.idSis_Empresa,
+			U.idSis_Empresa AS EmpresaUsu,
+			U.NomeEmpresa AS NomeEmpresaUsu,
 			C.idApp_Consulta,
-			C.idSis_Empresa AS Empresa,
-			E.NomeEmpresa,
+			C.idSis_Empresa AS EmpresaCon,
             C.idApp_Cliente,
-            R.NomeCliente,
+			C.idSis_Usuario,
+            E.NomeEmpresa AS NomeEmpresaEmp,
+			R.NomeCliente,
 			R.Telefone1,
+			R.CpfCliente,
             D.NomeContatoCliente,
             P.Nome AS NomeUsuario,
 			P.Permissao,
@@ -57,10 +63,11 @@ $result = mysql_query(
                 LEFT JOIN Tab_TipoConsulta AS TC ON TC.idTab_TipoConsulta = C.idTab_TipoConsulta
 				LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = C.idSis_Empresa
         WHERE
-			(U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' OR R.CpfCliente = ' . $_SESSION['log']['CpfUsuario'] . ') AND
+			C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+			' . $query . ' 
 
-            A.idApp_Agenda = C.idApp_Agenda
 			
+			A.idApp_Agenda = C.idApp_Agenda 
 		ORDER BY 
 			C.DataInicio ASC'
 );
@@ -172,7 +179,10 @@ while ($row = mysql_fetch_assoc($result)) {
 		'Telefone1' => mb_convert_encoding($row['Telefone1'], "UTF-8", "ISO-8859-1"),
         'Obs' => mb_convert_encoding($row['Obs'], "UTF-8", "ISO-8859-1"),
 		'CpfUsuario' => mb_convert_encoding($row['CpfUsuario'], "UTF-8", "ISO-8859-1"),
-        'NomeEmpresa' => mb_convert_encoding($row['NomeEmpresa'], "UTF-8", "ISO-8859-1"),
+		'CpfCliente' => mb_convert_encoding($row['CpfCliente'], "UTF-8", "ISO-8859-1"),
+		'EmpresaCon' => mb_convert_encoding($row['EmpresaCon'], "UTF-8", "ISO-8859-1"),
+		'EmpresaUsu' => mb_convert_encoding($row['EmpresaUsu'], "UTF-8", "ISO-8859-1"),
+        'NomeEmpresaEmp' => mb_convert_encoding($row['NomeEmpresaEmp'], "UTF-8", "ISO-8859-1"),
 		'Evento' => $row['Evento'],
         'Paciente' => $row['Paciente'],
         #   'ContatoCliente' => $contatocliente,
