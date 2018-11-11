@@ -203,7 +203,7 @@
 								if ($query['procedimentoorc'] != FALSE) {
 
 									foreach ($query['procedimentoorc']->result_array() as $row) {
-										$url = base_url() . 'orcatratacli/alterar2/' . $row['idApp_OrcaTrata'];
+										$url = base_url() . 'orcatrata/alterar2/' . $row['idApp_OrcaTrata'];
 
 										echo '<tr class="clickable-row" data-href="' . $url . '" data-original-title="' . $row['Idade'] . ' anos" data-container="body"
 												data-toggle="tooltip" data-placement="right" title="">';

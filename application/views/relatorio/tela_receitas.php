@@ -50,7 +50,7 @@
 										</div>
 										<div class="form-group col-md-4 text-left">
 											<div class="form-footer">		
-												<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>orcatratacli/cadastrar2" role="button">
+												<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>orcatrata/cadastrar2" role="button">
 													<span class="glyphicon glyphicon-plus"></span> Cad. Receita
 												</a>
 											</div>	

@@ -198,7 +198,7 @@ class Relatorio_model extends CI_Model {
                 C.NomeCliente,
                 CONCAT(IFNULL(C.NomeCliente,""), " / ", IFNULL(A.NomeEmpresa,""), " / ", IFNULL(OT.Receitas,""), " / ", IFNULL(TR.TipoReceita,"")) AS NomeCliente,
 				TR.TipoReceita,
-				OT.idApp_OrcaTrataCli,
+				OT.idApp_OrcaTrata,
 				OT.idSis_Usuario,
 				OT.idSis_Empresa,
 				OT.idSis_EmpresaAss,
@@ -222,11 +222,11 @@ class Relatorio_model extends CI_Model {
 				CONCAT(PR.ParcelaRecebiveis," ", OT.Modalidade,"/",PR.QuitadoRecebiveis) AS ParcelaRecebiveis
             FROM
 
-                App_OrcaTrataCli AS OT
+                App_OrcaTrata AS OT
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = OT.idSis_Empresa
                     LEFT JOIN Sis_Empresa AS A ON A.idSis_Empresa = OT.idSis_EmpresaAss
-					LEFT JOIN App_ParcelasRecebiveisCli AS PR ON OT.idApp_OrcaTrataCli = PR.idApp_OrcaTrataCli
+					LEFT JOIN App_ParcelasRecebiveis AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
             WHERE
                 
@@ -275,8 +275,8 @@ class Relatorio_model extends CI_Model {
 
                 #esse trecho pode ser melhorado, serve para somar apenas uma vez
                 #o valor da entrada que pode aparecer mais de uma vez
-                if ($ant != $row->idApp_OrcaTrataCli) {
-                    $ant = $row->idApp_OrcaTrataCli;
+                if ($ant != $row->idApp_OrcaTrata) {
+                    $ant = $row->idApp_OrcaTrata;
                     $somaentrada += $row->ValorEntradaOrca;
                 }
                 else {
@@ -4169,7 +4169,7 @@ exit();*/
             WHERE
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				C.idApp_OrcaTrataCli = "0" AND
+				C.idApp_OrcaTrata = "0" AND
 				C.idApp_Cliente = "0" AND
 				' . $filtro10 . '
 				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' 

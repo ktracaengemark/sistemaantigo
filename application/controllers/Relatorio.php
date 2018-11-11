@@ -256,7 +256,7 @@ class Relatorio extends CI_Controller {
 			'A.NomeEmpresa' => 'Nome da Empresa',
 			'TR.TipoReceita' => 'Tipo de Receita',
 			'OT.Modalidade' => 'Modalidade',
-            'OT.idApp_OrcaTrataCli' => 'Número do Orçamento',
+            'OT.idApp_OrcaTrata' => 'Número do Orçamento',
             'OT.DataOrca' => 'Data do Orçamento',
             'OT.ValorOrca' => 'Valor do Orçamento',
             'OT.AprovadoOrca' => 'Aprovado?',

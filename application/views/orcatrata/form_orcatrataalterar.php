@@ -46,12 +46,7 @@
 							</a>
 						</li>
 					</ul>
-					<!--
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-					</ul>
-					-->
+
 				</div>
 			  </div>
 			</nav>
@@ -420,7 +415,7 @@
 																</div>
 
 																<div class="col-md-2">
-																	<label for="ValorDev">Desconto:</label><br>
+																	<label for="ValorDev">Devol./ Desconto:</label><br>
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00"																	   
@@ -469,10 +464,9 @@
 																	</div>
 																</div>
 															</div>
-														</div>
-
+														</div>	
 														<div class="form-group">
-															<div class="row">																																		
+															<div class="row">																	
 																<div class="col-md-2">
 																	<label for="DataVencimentoOrca">1º Venc.</label>
 																	<div class="input-group <?php echo $datepicker; ?>">
@@ -480,8 +474,6 @@
 																			<span class="glyphicon glyphicon-calendar"></span>
 																		</span>
 																		<input type="text" class="form-control Date" id="DataVencimentoOrca" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																			   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()"
-																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																			   name="DataVencimentoOrca" value="<?php echo $orcatrata['DataVencimentoOrca']; ?>">
 																		
 																	</div>
@@ -502,14 +494,14 @@
 																		}
 																		?>
 																	</select>
-																</div>
+																</div>																																			
 																<div class="col-md-2">
 																	<label for="QtdParcelasOrca">Qtd. Parc.:</label><br>
 																	<input type="text" class="form-control Numero" id="QtdParcelasOrca" maxlength="3" placeholder="0"
 																		   data-toggle="collapse" onkeyup="calculaParcelas()"
 																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																		   name="QtdParcelasOrca" value="<?php echo $orcatrata['QtdParcelasOrca'] ?>">
-																</div>
+																</div>																		
 																<div class="col-md-3">
 																	<label for="Modalidade">Modalidade</label><br>
 																	<div class="form-group">
@@ -522,7 +514,7 @@
 																					echo ''
 																					. '<label class="btn btn-warning active" name="radiobutton_Modalidade" id="radiobutton_Modalidade' .  $key . '">'
 																					. '<input type="radio" name="Modalidade" id="radiobuttondinamico" '
-																					. 'onchange="calculaParcelas()" '
+																					
 																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																					. '</label>'
 																					;
@@ -530,7 +522,7 @@
 																					echo ''
 																					. '<label class="btn btn-default" name="radiobutton_Modalidade" id="radiobutton_Modalidade' .  $key . '">'
 																					. '<input type="radio" name="Modalidade" id="radiobuttondinamico" '
-																					. 'onchange="calculaParcelasMensais()" '
+																					
 																					. 'autocomplete="off" value="' . $key . '" >' . $row
 																					. '</label>'
 																					;
@@ -584,22 +576,23 @@
 									<div <?php echo $collapse; ?> id="Parcelas1">
 										<div class="panel-body">
 											<!--App_parcelasRec-->
-											<div class="input_fields_parcelas">
+											<input type="hidden" name="PRCount" id="PRCount" value="<?php echo $count['PRCount']; ?>"/>
+
+											<div class="input_fields_wrap21">
 
 											<?php
-											for ($i=1; $i <= $orcatrata['QtdParcelasOrca']; $i++) {
+											for ($i=1; $i <= $count['PRCount']; $i++) {
 											?>
 
 												<?php if ($metodo > 1) { ?>
 												<input type="hidden" name="idApp_ParcelasRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_ParcelasRecebiveis']; ?>"/>
 												<?php } ?>
 
-
-												<div class="form-group">
-													<div class="panel panel-info">
+												<div class="form-group" id="21div<?php echo $i ?>">
+													<div class="panel panel-warning">
 														<div class="panel-heading">
 															<div class="row">
-																<div class="col-md-2">
+																<div class="col-md-1">
 																	<label for="ParcelaRecebiveis">Parcela:</label><br>
 																	<input type="text" class="form-control" maxlength="6" readonly=""
 																		   name="ParcelaRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ParcelaRecebiveis'] ?>">
@@ -670,9 +663,13 @@
 																		</div>
 																	</div>
 																</div>
+																<div class="col-md-1">
+																	<label><br></label><br>
+																	<button type="button" id="<?php echo $i ?>" class="remove_field21 btn btn-danger">
+																		<span class="glyphicon glyphicon-trash"></span>
+																	</button>
+																</div>
 															</div>
-
-
 														</div>
 													</div>
 												</div>
@@ -682,6 +679,20 @@
 											?>
 											</div>
 
+											<div class="panel panel-warning">
+												<div class="panel-heading">										
+													<div class="form-group">	
+														<div class="row">	
+															<div class="col-md-2 text-left">
+																<button class="btn btn-warning" type="button" data-toggle="collapse" onclick="adicionaParcelasRecebiveis()"
+																		data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas">
+																	<span class="glyphicon glyphicon-plus"></span> Adicionar Parcelas
+																</button>
+															</div>
+														</div>
+													</div>	
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -714,8 +725,8 @@
 													<div class="panel-heading">												
 														<div class="form-group text-left">
 															<div class="row">
-																<div class="form-inline col-md-3">
-																	<label for="ServicoConcluido">Prod. Entr.?</label><br>
+																<div class="form-inline col-md-2">
+																	<label for="ServicoConcluido">Prod.Entr.?</label><br>
 																	<div class="form-group">
 																		<div class="btn-group" data-toggle="buttons">
 																			<?php
@@ -742,8 +753,8 @@
 																		</div>
 																	</div>
 																</div>
-																<div class="col-md-3 form-inline">
-																	<label for="QuitadoOrca">Quitado?</label><br>
+																<div class="col-md-2 form-inline">
+																	<label for="QuitadoOrca">Orçam.Quit.?</label><br>
 																	<div class="form-group">
 																		<div class="btn-group" data-toggle="buttons">
 																			<?php
@@ -770,8 +781,8 @@
 																		</div>
 																	</div>
 																</div>
-																<div class="col-md-3">
-																	<label for="DataOrca">Dt. do Orçam.:</label>
+																<div class="col-md-2">
+																	<label for="DataOrca">Dt. do Orçam</label>
 																	<div class="input-group <?php echo $datepicker; ?>">
 																		<span class="input-group-addon" disabled>
 																			<span class="glyphicon glyphicon-calendar"></span>
@@ -782,8 +793,8 @@
 																	</div>
 																</div>														
 																<!--
-																<div class="col-md-3">
-																	<label for="DataRetorno">Retornar em:</label>
+																<div class="col-md-2">
+																	<label for="DataRetorno">Retornar em</label>
 																	<div class="input-group <?php echo $datepicker; ?>">
 																		<span class="input-group-addon" disabled>
 																			<span class="glyphicon glyphicon-calendar"></span>
@@ -809,7 +820,7 @@
 								</div>
 							</div>
 
-							<!--
+							
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 
@@ -913,7 +924,7 @@
 									</div>
 								</div>
 							</div>
-							-->
+							
 							<div class="form-group">
 								<div class="row">
 									<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
