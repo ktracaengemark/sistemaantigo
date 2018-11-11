@@ -280,8 +280,9 @@ class Login_model extends CI_Model {
 				idSis_Empresa,
 				CONCAT(NomeEmpresa, " ", "(", idSis_Empresa, ")") AS NomeEmpresa				
             FROM
-                Sis_Empresa					
-
+                Sis_Empresa
+			WHERE 
+				idSis_Empresa != "1"
 			ORDER BY 
 				NomeEmpresa ASC'
     );
@@ -293,7 +294,8 @@ class Login_model extends CI_Model {
 				CONCAT(NomeEmpresa, " ", "(", idSis_Empresa, ")") AS NomeEmpresa			
             FROM
                 Sis_Empresa					
-
+			WHERE 
+				idSis_Empresa != "1"
 			ORDER BY 
 				NomeEmpresa ASC'
     );

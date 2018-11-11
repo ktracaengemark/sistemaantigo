@@ -46,13 +46,13 @@
 										<div class="row">
 											<div class="col-md-6">	
 												<label for="Data">Data Início : </label>												
-												<!--<div class="input-group <?php echo $datepicker; ?>">-->
-													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-														   name="Data" value="<?php echo $query['Data']; ?>">
-													<!--<span class="input-group-addon" disabled>
+												<div class="input-group <?php echo $datepicker; ?>">
+													<span class="input-group-addon" disabled>
 														<span class="glyphicon glyphicon-calendar"></span>
 													</span>
-												</div>-->
+													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+														   name="Data" value="<?php echo $query['Data']; ?>">
+												</div>
 											</div>	
 											
 											<div class="col-md-6">
@@ -68,13 +68,13 @@
 											
 											<div class="col-md-6">	
 												<label for="Data2">Data Fim : </label>												
-												<!--<div class="input-group <?php echo $datepicker; ?>">-->
-													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-														   name="Data2" value="<?php echo $query['Data2']; ?>">
-													<!--<span class="input-group-addon" disabled>
+												<div class="input-group <?php echo $datepicker; ?>">
+													<span class="input-group-addon" disabled>
 														<span class="glyphicon glyphicon-calendar"></span>
 													</span>
-												</div>-->
+													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+														   name="Data2" value="<?php echo $query['Data2']; ?>">
+												</div>
 											</div>
 										
 											<div class="col-md-6">		

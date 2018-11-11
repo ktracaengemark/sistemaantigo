@@ -13,7 +13,7 @@ class Orcatrata extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Orcatrata_model', 'Profissional_model', 'Cliente_model', 'Empresa_model', 'Relatorio_model', 'Formapag_model', 'Usuario_model'));
+        $this->load->model(array('Basico_model', 'Orcatrata_model', 'Cliente_model', 'Relatorio_model', 'Formapag_model', 'Usuario_model'));
         $this->load->driver('session');
 
         #load header view
@@ -191,8 +191,6 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Modalidade'] = $this->Basico_model->select_modalidade();
 		$data['select']['QuitadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['QuitadoRecebiveis'] = $this->Basico_model->select_status_sn();
-        #$data['select']['Profissional'] = $this->Profissional_model->select_profissional1();
-		#$data['select']['idSis_Empresa'] = $this->Empresa_model->select_consultor();
         #$data['select']['Servico'] = $this->Basico_model->select_servico();
         #$data['select']['Produto'] = $this->Basico_model->select_produto();
         $data['select']['Servico'] = $this->Basico_model->select_produtosemp();
@@ -527,7 +525,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['QuitadoRecebiveis'] = $this->Basico_model->select_status_sn();
         $data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
-		$data['select']['idSis_EmpresaAss'] = $this->Empresa_model->select_empresa();
+		$data['select']['idSis_EmpresaAss'] = $this->Basico_model->select_empresa3();
         #$data['select']['Servico'] = $this->Basico_model->select_servico();
         #$data['select']['Produto'] = $this->Basico_model->select_produto();
         #$data['select']['Servico'] = $this->Basico_model->select_servicos();
@@ -950,8 +948,6 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Modalidade'] = $this->Basico_model->select_modalidade();
 		$data['select']['QuitadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['QuitadoRecebiveis'] = $this->Basico_model->select_status_sn();
-        #$data['select']['Profissional'] = $this->Profissional_model->select_profissional1();
-        #$data['select']['idSis_Empresa'] = $this->Empresa_model->select_consultor();
 		#$data['select']['Servico'] = $this->Basico_model->select_servico();
         #$data['select']['Produto'] = $this->Basico_model->select_produto();
         $data['select']['Servico'] = $this->Basico_model->select_produtosemp();
@@ -1474,7 +1470,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['QuitadoRecebiveis'] = $this->Basico_model->select_status_sn();
         $data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
-		$data['select']['idSis_EmpresaAss'] = $this->Empresa_model->select_empresa();
+		$data['select']['idSis_EmpresaAss'] = $this->Basico_model->select_empresa3();
 		#$data['select']['Servico'] = $this->Basico_model->select_servico();
         #$data['select']['Produto'] = $this->Basico_model->select_produto();
         $data['select']['Servico'] = $this->Basico_model->select_produtosemp();

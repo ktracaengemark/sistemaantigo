@@ -8,7 +8,7 @@
 						<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="<?php echo base_url() ?>acesso/index"> 
-						<?php echo $_SESSION['log']['NomeEmpresa']; ?>/<?php echo $_SESSION['log']['Nome']; ?>
+						<?php echo $_SESSION['log']['NomeEmpresa2']; ?>./ <?php echo $_SESSION['log']['Nome2']; ?>.
 					</a>
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar1">

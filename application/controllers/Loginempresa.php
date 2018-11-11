@@ -111,13 +111,15 @@ class Loginempresa extends CI_Controller {
 
                 #$_SESSION['log']['UsuarioEmpresa'] = $query['UsuarioEmpresa'];
                 //se for necessário reduzir o tamanho do nome de usuário, que pode ser um email
-				$_SESSION['log']['UsuarioEmpresa'] = (strlen($query['UsuarioEmpresa']) > 15) ? substr($query['UsuarioEmpresa'], 0, 15) : $query['UsuarioEmpresa'];
-                $_SESSION['log']['Nome'] = (strlen($query['NomeAdmin']) > 10) ? substr($query['NomeAdmin'], 0, 10) : $query['NomeAdmin'];
-				$_SESSION['log']['Nome'] = $query['NomeAdmin'];
+				$_SESSION['log']['UsuarioEmpresa'] = (strlen($query['UsuarioEmpresa']) > 13) ? substr($query['UsuarioEmpresa'], 0, 13) : $query['UsuarioEmpresa'];
+                $_SESSION['log']['Nome'] = $query['NomeAdmin'];
+				$_SESSION['log']['Nome2'] = (strlen($query['NomeAdmin']) > 6) ? substr($query['NomeAdmin'], 0, 6) : $query['NomeAdmin'];
 				$_SESSION['log']['CpfAdmin'] = $query['CpfAdmin'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
+				$_SESSION['log']['NomeEmpresa2'] = (strlen($query['NomeEmpresa']) > 10) ? substr($query['NomeEmpresa'], 0, 10) : $query['NomeEmpresa'];
 				$_SESSION['log']['id'] = $query['idSis_Empresa'];
-				$_SESSION['log']['Permissao'] = $query['Permissao'];
+				$_SESSION['log']['PermissaoEmp'] = $query['PermissaoEmp'];
+				$_SESSION['log']['NivelEmp'] = $query['NivelEmp'];
 				
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
@@ -193,8 +195,10 @@ class Loginempresa extends CI_Controller {
             $this->load->view('loginempresa/form_registrar', $data);
         } else {
 			
-			$data['query']['idSis_EmpresaMatriz'] = 1;
-			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			$data['query']['idSis_EmpresaMatriz'] = 2;
+			$data['query']['PermissaoEmp'] = 1;
+			$data['query']['NivelEmp'] = 1;
+			$data['query']['idTab_Modulo'] = 1;
             $data['query']['DataCriacao'] = $this->basico->mascara_data($data['query']['DataCriacao'], 'mysql');
 			$data['query']['Senha'] = md5($data['query']['Senha']);
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));

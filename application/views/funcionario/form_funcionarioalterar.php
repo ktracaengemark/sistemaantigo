@@ -140,11 +140,13 @@
 											</div>
 											<div class="form-group">
 												<div class="row">
+													<!--
 													<div class="col-md-3">
 														<label for="CpfUsuario">Cpf:</label>
 														<input type="text" class="form-control" maxlength="11" <?php echo $readonly; ?>
 															   name="CpfUsuario" value="<?php echo $query['CpfUsuario']; ?>">
 													</div>
+													-->
 													<div class="col-md-3">
 														<label for="RgUsuario">RG:</label>
 														<input type="text" class="form-control" maxlength="9" <?php echo $readonly; ?>
@@ -233,6 +235,23 @@
 														</div>
 													</div>
 													<!--
+													<div class="col-md-3">
+														<label for="idSis_Empresa">Empresa:*</label>
+														<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> readonly=""
+																id="idSis_Empresa" autofocus name="idSis_Empresa">
+
+															<?php
+															foreach ($select['idSis_Empresa'] as $key => $row) {
+																if ($query['idSis_Empresa'] == $key) {
+																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																} else {
+																	echo '<option value="' . $key . '">' . $row . '</option>';
+																}
+															}
+															?>
+														</select>
+													</div>
+													
 													<div class="col-md-3">
 														<label for="Usuario">Usuário:</label>
 														<input type="text" class="form-control" id="Usuario" maxlength="45" 

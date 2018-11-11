@@ -84,7 +84,7 @@ class Cliente extends CI_Controller {
 	   $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #$this->form_validation->set_rules('NomeCliente', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Cliente.NomeCliente.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('CpfCliente', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[App_Cliente.CpfCliente.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+        $this->form_validation->set_rules('CpfCliente', 'Cpf', 'trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[App_Cliente.CpfCliente.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('NomeCliente', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         #$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
@@ -95,7 +95,7 @@ class Cliente extends CI_Controller {
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Associado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
-		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa2();
+		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresacli();
 		
 		$data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 		
@@ -129,7 +129,7 @@ class Cliente extends CI_Controller {
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');            
 			$data['query']['DataCadastroCliente'] = $this->basico->mascara_data($data['query']['DataCadastroCliente'], 'mysql');
 			$data['query']['Obs'] = nl2br($data['query']['Obs']);
-			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
@@ -204,7 +204,7 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #$this->form_validation->set_rules('NomeCliente', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Cliente.NomeCliente.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('CpfCliente', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[App_Cliente.CpfCliente.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+        $this->form_validation->set_rules('CpfCliente', 'Cpf', 'trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[App_Cliente.CpfCliente.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('NomeCliente', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
@@ -216,7 +216,7 @@ class Cliente extends CI_Controller {
 		$data['select']['Associado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
 		$data['select']['Profissional'] = $this->Basico_model->select_profissional2();
-		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa2();
+		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresacli();
 		
 		$data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 		
@@ -293,66 +293,6 @@ class Cliente extends CI_Controller {
 
 		redirect(base_url() . 'agenda' . $data['msg']);
 		exit();
-
-        $this->load->view('basico/footer');
-    }
-
-    public function excluirBKP($id = FALSE) {
-
-        if ($this->input->get('m') == 1)
-            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-        elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
-        else
-            $data['msg'] = '';
-
-        $data['query'] = $this->input->post(array(
-            'idApp_Cliente',
-            'submit'
-                ), TRUE);
-
-        if ($id) {
-            $data['query'] = $this->Cliente_model->get_cliente($id);
-            $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
-            $data['query']['ClienteDataNascimento'] = $this->basico->mascara_data($data['query']['ClienteDataNascimento'], 'barras');
-        }
-
-        $data['select']['Municipio'] = $this->Basico_model->select_municipio();
-        $data['select']['Sexo'] = $this->Basico_model->select_sexo();
-
-        $data['titulo'] = 'Tem certeza que deseja excluir o registro abaixo?';
-        $data['form_open_path'] = 'cliente/excluir';
-        $data['readonly'] = 'readonly';
-        $data['disabled'] = 'disabled';
-        $data['panel'] = 'danger';
-        $data['metodo'] = 3;
-
-        $data['tela'] = $this->load->view('cliente/form_cliente', $data, TRUE);
-
-        #run form validation
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('cliente/tela_cliente', $data);
-        } else {
-
-            if ($data['query']['idApp_Cliente'] === FALSE) {
-                $data['msg'] = '?m=2';
-                $this->load->view('cliente/form_cliente', $data);
-            } else {
-
-                $data['anterior'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
-                $data['campos'] = array_keys($data['anterior']);
-
-                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], NULL, $data['campos'], $data['query']['idApp_Cliente'], FALSE, TRUE);
-                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Cliente', 'DELETE', $data['auditoriaitem']);
-
-                $this->Cliente_model->delete_cliente($data['query']['idApp_Cliente']);
-
-                $data['msg'] = '?m=1';
-
-                redirect(base_url() . 'cliente' . $data['msg']);
-                exit();
-            }
-        }
 
         $this->load->view('basico/footer');
     }

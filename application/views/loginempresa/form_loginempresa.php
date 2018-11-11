@@ -44,7 +44,7 @@
     <br>
 	<a class="btn btn  btn-primary btn-block" href="<?php echo base_url(); ?>login/index" role="button">Acesso dos Usuários</a>
 	<a class="btn btn  btn-danger btn-block" href="<?php echo base_url(); ?>loginempresa/registrar" role="button">Cad. Nova Empresa</a>
-	<a class="btn btn  btn-danger btn-block" href="<?php echo base_url(); ?>logincli/registrar" role="button">Cad. Conta Pessoal</a>
+	<a class="btn btn  btn-danger btn-block" href="<?php echo base_url(); ?>login/registrar" role="button">Cad. Conta Pessoal</a>
 
 </form>
 

@@ -16,8 +16,7 @@
                         <th class="active">id</th>
                         <th class="active">Profissional</th>
 						<th class="active">Funcao</th>
-						<th class="active">Nivel</th>
-						<th class="active">Permissao</th>
+						<th class="active">Acesso</th>
                     </tr>
                 </thead>
 
@@ -31,7 +30,6 @@
                             echo '<td>' . $row['idSis_Usuario'] . '</td>';
                             echo '<td>' . $row['Nome'] . '</td>';
 							echo '<td>' . $row['Funcao'] . '</td>';
-							echo '<td>' . $row['Nivel'] . '</td>';
 							echo '<td>' . $row['Permissao'] . '</td>';
                         echo '</tr>';
                     }

@@ -117,7 +117,7 @@ class Funcionario extends CI_Controller {
 
 
 			$data['query']['QuemCad'] = $_SESSION['log']['id'];
-			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+			$data['query']['idSis_Empresa'] = $_SESSION['log']['id'];
 			$data['query']['NomeEmpresa'] = $_SESSION['log']['NomeEmpresa'];
             $data['query']['Senha'] = md5($data['query']['Senha']);
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
@@ -126,8 +126,7 @@ class Funcionario extends CI_Controller {
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['query']['Inativo'] = 0;
 			$data['query']['Nivel'] = 6;
-			$data['query']['Permissao'] = 3;
-			$data['query']['Funcao'] = 1;            
+            
 			unset($data['query']['Confirma']);
 
 
@@ -148,7 +147,7 @@ class Funcionario extends CI_Controller {
                 $data['msg'] = '?m=1';
 
 				$data['agenda'] = array(
-                    'NomeAgenda' => 'Padrão',
+                    'NomeAgenda' => 'Func',
 					'idSis_Empresa' => $_SESSION['log']['id'],
                     'idSis_Usuario' => $data['idSis_Usuario']
                 );
@@ -177,8 +176,8 @@ class Funcionario extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-			'idSis_Empresa',
-			#'idSis_Usuario',
+			#'idSis_Empresa',
+			'idSis_Usuario',
 			#'Usuario',
             'Nome',
             'DataNascimento',
@@ -188,7 +187,7 @@ class Funcionario extends CI_Controller {
 			'Permissao',
 			'Funcao',
 			'Inativo',
-			'CpfUsuario',
+			#'CpfUsuario',
 			'RgUsuario',
 			'OrgaoExpUsuario',
 			'EstadoEmUsuario',
@@ -210,14 +209,14 @@ class Funcionario extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #$this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim|is_unique_duplo[Sis_Usuario.Nome.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('CpfUsuario', 'Cpf', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+        #$this->form_validation->set_rules('CpfUsuario', 'Cpf', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
 		#$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('Permissao', 'Nível', 'required|trim');
-		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
+		#$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
 		#$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
 
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
@@ -227,7 +226,7 @@ class Funcionario extends CI_Controller {
 		$data['select']['Permissao'] = $this->Basico_model->select_permissao();
 		$data['select']['Funcao'] = $this->Funcao_model->select_funcao();
 		$data['select']['CompAgenda'] = $this->Basico_model->select_status_sn();
-		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa2();
+		#$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa2();
 		
         $data['titulo'] = 'Editar Usuário';
         $data['form_open_path'] = 'funcionario/alterar';
@@ -251,9 +250,9 @@ class Funcionario extends CI_Controller {
             $data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
 			$data['query']['DataEmUsuario'] = $this->basico->mascara_data($data['query']['DataEmUsuario'], 'mysql');
-            #$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+            #$data['query']['idSis_Empresa'] = $_SESSION['log']['id'];
 			#$data['query']['Obs'] = nl2br($data['query']['Obs']);
-            #$data['query']['Funcionario'] = $_SESSION['log']['id'];
+
 
             $data['anterior'] = $this->Funcionario_model->get_funcionario($data['query']['idSis_Usuario']);
             $data['campos'] = array_keys($data['query']);

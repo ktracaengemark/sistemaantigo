@@ -6,6 +6,9 @@
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
+				<a class="navbar-brand" href="<?php echo base_url() ?>acessoempresa/index"> 
+					<?php echo $_SESSION['log']['NomeEmpresa2']; ?>./ <?php echo $_SESSION['log']['Nome2']; ?>.
+				</a>
 				<!--<a class="navbar-brand" href="http://www.ktracaengemark.com.br"> Melhor loja</a>-->
 			</div>
 			<div class="collapse navbar-collapse">
@@ -15,31 +18,23 @@
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 						<div class="btn-group">
 							<button type="button" class="btn btn-primary  dropdown-toggle" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-user"></span> Administrador <span class="caret"></span>
+								<span class="glyphicon glyphicon-user"></span> Funcionários <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="<?php echo base_url() ?>acessoempresa/index"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['log']['UsuarioEmpresa']; ?></a></li>
+								<li><a href="<?php echo base_url() ?>funcao/cadastrar"><span class="glyphicon glyphicon-pencil"></span> Funções </a></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="<?php echo base_url() ?>funcao/cadastrar"><span class="glyphicon glyphicon-pencil"></span> Cad Funçoes </a></li>
-								<li role="separator" class="divider"></li>
-								<li><a href="<?php echo base_url() ?>relatorioempresa/funcionario"><span class="glyphicon glyphicon-user"></span> Cad Usuários </a></li>
-								<?php if ($_SESSION['log']['idSis_Empresa'] == 4 ) { ?>
-								<li role="separator" class="divider"></li>
-								<li><a href="<?php echo base_url() ?>relatorioempresa/empresas"><span class="glyphicon glyphicon-list"></span> Empresas </a></li>
-								<?php } ?>
-								<!--<li><a href="<?php echo base_url() ?>relatorioempresa/empresafilial"><span class="glyphicon glyphicon-list"></span> Dados da Empresa </a></li>
-								<li role="separator" class="divider"></li>-->
+								<li><a href="<?php echo base_url() ?>relatorioempresa/funcionario"><span class="glyphicon glyphicon-user"></span> Funcionários </a></li>
+
 							</ul>
 						</div>						
 						<div class="btn-group" role="group" aria-label="..."> </div>
 					</li>
-					
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 
 						<div class="btn-group" role="group" aria-label="...">
-							<a href="<?php echo base_url(); ?>login/index">
+							<a href="<?php echo base_url(); ?>relatorioempresa/empresas">
 								<button type="button" class="btn btn-md btn-success ">
-									<span class="glyphicon glyphicon-log-in"></span> Acesso dos Usuários
+									<span class="glyphicon glyphicon-log-in"></span> Empresas
 								</button>
 							</a>
 						</div>												

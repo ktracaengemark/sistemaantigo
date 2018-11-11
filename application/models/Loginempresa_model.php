@@ -251,6 +251,8 @@ class Loginempresa_model extends CI_Model {
             FROM
                 Sis_Empresa					
 			WHERE
+				
+				idSis_Empresa != "1" AND 
 				idSis_Empresa != "5"
 			ORDER BY 
 				NomeEmpresa ASC'
@@ -264,6 +266,7 @@ class Loginempresa_model extends CI_Model {
             FROM
                 Sis_Empresa					
 			WHERE
+				idSis_Empresa != "1" AND 
 				idSis_Empresa != "5"
 			ORDER BY 
 				NomeEmpresa ASC'
