@@ -26,18 +26,13 @@
 		   name="NomeEmpresa" value="<?php echo $query['NomeEmpresa']; ?>">
 	<?php echo form_error('NomeEmpresa'); ?>
 	<br>
-<!--	
-	<label for="NumUsuarios">Nº de Usuários da Empresa:</label>
-	<input type="text" class="form-control" id="NumUsuarios" maxlength="45" 
-		   name="NumUsuarios" value="<?php echo $query['NumUsuarios']; ?>">
-	<?php echo form_error('NumUsuarios'); ?>
-	<br>	
--->
+
 	<label for="NumUsuarios">Nº de Usuários:*</label>
 	<select data-placeholder="Selecione uma opção..." class="form-control" id="NumUsuarios" name="NumUsuarios">			
 		<option value="">-- Selecione uma NumUsuarios --</option>
 		<?php
 		foreach ($select['NumUsuarios'] as $key => $row) {
+			(!$query['NumUsuarios']) ? $query['NumUsuarios'] = '1' : FALSE;
 			if ($query['NumUsuarios'] == $key) {
 				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 			} else {
@@ -54,13 +49,13 @@
            name="NomeAdmin" value="<?php echo $query['NomeAdmin']; ?>">
     <?php echo form_error('NomeAdmin'); ?>
     <br>
-	
+
 	<label for="CpfAdmin">CPF do Administrador:</label>
     <input type="text" class="form-control " id="CpfAdmin" maxlength="11"
            name="CpfAdmin" placeholder="99999999999" value="<?php echo $query['CpfAdmin']; ?>">
     <?php echo form_error('CpfAdmin'); ?>
     <br>
-	
+
     <label for="Celular">Celular do Administrador:</label>
     <input type="text" class="form-control Celular Celular" id="Celular" maxlength="11"
            name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
@@ -89,6 +84,23 @@
     <input type="password" class="form-control" id="Confirma" maxlength="45"
            name="Confirma" value="<?php echo $query['Confirma']; ?>">
     <?php echo form_error('Confirma'); ?>
+    <br>
+
+	<label for="Associado">Indicado por:</label>
+	<select data-placeholder="Selecione uma opção..." class="form-control" id="Associado" name="Associado">			
+		<option value="">-- Selecione uma Empresa --</option>
+		<?php
+		foreach ($select['Associado'] as $key => $row) {
+			(!$query['Associado']) ? $query['Associado'] = '2' : FALSE;
+			if ($query['Associado'] == $key) {
+				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+			} else {
+				echo '<option value="' . $key . '">' . $row . '</option>';
+			}
+		}
+		?>   
+	</select> 
+    <?php echo form_error('Associado'); ?>
     <br>	
 
     <button class="btn btn-lg btn-warning btn-block" type="submit">REGISTRAR</button>

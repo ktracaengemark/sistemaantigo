@@ -174,8 +174,6 @@ class Logincli extends CI_Controller {
 			'TipoProfissional',
 			'DataCriacao',
 			
-
-
                 ), TRUE);
 
         (!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
@@ -186,7 +184,7 @@ class Logincli extends CI_Controller {
         $this->form_validation->set_rules('CpfUsuario', 'Cpf do Usuário', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email');
         $this->form_validation->set_rules('ConfirmarEmail', 'Confirmar E-mail', 'required|trim|valid_email|matches[Email]');
-        $this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim');
+        $this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim|is_unique[Sis_Usuario.Usuario]');
 		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');

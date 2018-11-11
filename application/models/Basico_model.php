@@ -1215,7 +1215,7 @@ class Basico_model extends CI_Model {
                 SELECT
                     idTab_NumUsuarios,
 					DescNumUsuarios,
-					CONCAT(NumUsuarios, " -- ", DescNumUsuarios) AS NumUsuarios
+					CONCAT(DescNumUsuarios) AS NumUsuarios
 				FROM
                     Tab_NumUsuarios
 				ORDER BY 
@@ -1227,7 +1227,7 @@ class Basico_model extends CI_Model {
                 SELECT
                     idTab_NumUsuarios,
 					DescNumUsuarios,
-					CONCAT(NumUsuarios, " -- ", DescNumUsuarios) AS NumUsuarios
+					CONCAT(DescNumUsuarios) AS NumUsuarios
 				FROM
                     Tab_NumUsuarios
 				ORDER BY 
@@ -1236,7 +1236,7 @@ class Basico_model extends CI_Model {
 
             $array = array();
             foreach ($query->result() as $row) {
-                $array[$row->NumUsuarios] = $row->NumUsuarios;
+                $array[$row->idTab_NumUsuarios] = $row->NumUsuarios;
             }
         }
 
@@ -1604,6 +1604,41 @@ class Basico_model extends CI_Model {
 
         return $array;
     }
+
+	public function select_empresa_matriz($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+				idSis_EmpresaMatriz,
+				NomeEmpresa				
+            FROM
+                Sis_EmpresaMatriz					
+
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+				idSis_EmpresaMatriz,
+				NomeEmpresa				
+            FROM
+                Sis_EmpresaMatriz					
+
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_EmpresaMatriz] = $row->NomeEmpresa;
+            }
+        }
+
+        return $array;
+    }
 	
 	public function select_empresa($data = FALSE) {
 
@@ -1680,17 +1715,19 @@ class Basico_model extends CI_Model {
 
         return $array;
     }
-	
-	public function select_empresa_matriz($data = FALSE) {
+		
+	public function select_empresa3($data = FALSE) {
 
         if ($data === TRUE) {
             $array = $this->db->query(					
 				'SELECT                
-				idSis_EmpresaMatriz,
-				NomeEmpresa				
+				idSis_Empresa,
+				CONCAT(NomeEmpresa, " ", "(", " ", idSis_Empresa, " ", ")" ) as NomeEmpresa				
             FROM
-                Sis_EmpresaMatriz					
-
+                Sis_Empresa					
+			WHERE
+				idSis_Empresa != "1" AND
+				idSis_Empresa != "5" 
 			ORDER BY 
 				NomeEmpresa ASC'
     );
@@ -1698,22 +1735,24 @@ class Basico_model extends CI_Model {
         } else {
             $query = $this->db->query(
                 'SELECT                
-				idSis_EmpresaMatriz,
-				NomeEmpresa				
+				idSis_Empresa,
+				CONCAT(NomeEmpresa, " ", "(", " ", idSis_Empresa, " ", ")" ) as NomeEmpresa					
             FROM
-                Sis_EmpresaMatriz					
-
+                Sis_Empresa					
+			WHERE
+				idSis_Empresa != "1" AND
+				idSis_Empresa != "5" 
 			ORDER BY 
 				NomeEmpresa ASC'
     );
             
             $array = array();
             foreach ($query->result() as $row) {
-                $array[$row->idSis_EmpresaMatriz] = $row->NomeEmpresa;
+                $array[$row->idSis_Empresa] = $row->NomeEmpresa;
             }
         }
 
         return $array;
-    }	
+    }
 	
 }

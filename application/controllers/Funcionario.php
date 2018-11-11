@@ -79,7 +79,7 @@ class Funcionario extends CI_Controller {
 
 		$this->form_validation->set_rules('CpfUsuario', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-		$this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim');
+		$this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim|is_unique[Sis_Usuario.Usuario]');
 		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
