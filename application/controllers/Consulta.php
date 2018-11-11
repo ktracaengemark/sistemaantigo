@@ -232,10 +232,18 @@ class Consulta extends CI_Controller {
             'Obs',
                 ), TRUE));
 
-        if ($idApp_Cliente) {
+        /*
+		if ($idApp_Cliente) {
             $data['query']['idApp_Cliente'] = $idApp_Cliente;
             $_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
-        }
+		}
+		*/
+		if ($idApp_Cliente) {
+            $data['query']['idApp_Cliente'] = $idApp_Cliente;
+			$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
+			$data['resumo'] = $this->Cliente_model->get_cliente($idApp_Cliente);
+			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 12) ? substr($data['resumo']['NomeCliente'], 0, 12) : $data['resumo']['NomeCliente'];
+		}
 
         if ($idApp_ContatoCliente) {
             $data['query']['idApp_ContatoCliente'] = $idApp_ContatoCliente;
@@ -388,7 +396,8 @@ class Consulta extends CI_Controller {
 		if ($idApp_Cliente) {
             $data['query']['idApp_Cliente'] = $idApp_Cliente;
             $_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
-        }
+			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['query']['NomeCliente']) > 12) ? substr($data['query']['NomeCliente'], 0, 12) : $data['query']['NomeCliente'];
+		}
 /*
         if ($idApp_ContatoCliente) {
             $data['query']['idApp_ContatoCliente'] = $idApp_ContatoCliente;
@@ -543,10 +552,18 @@ class Consulta extends CI_Controller {
 			'idTab_TipoConsulta',
                 ), TRUE);
 
-        if ($idApp_Cliente) {
+        /*
+		if ($idApp_Cliente) {
             $data['query']['idApp_Cliente'] = $idApp_Cliente;
             $_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
-        }
+		}
+		*/
+		if ($idApp_Cliente) {
+            $data['query']['idApp_Cliente'] = $idApp_Cliente;
+			$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
+			$data['resumo'] = $this->Cliente_model->get_cliente($idApp_Cliente);
+			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 12) ? substr($data['resumo']['NomeCliente'], 0, 12) : $data['resumo']['NomeCliente'];
+		}
 
         if ($idApp_Consulta) {
             $data['query']['idApp_Cliente'] = $idApp_Cliente;
@@ -693,8 +710,9 @@ class Consulta extends CI_Controller {
         if ($idApp_Cliente) {
             $data['resumo'] = $this->Cliente_model->get_cliente($idApp_Cliente);
             $_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
-        }
-
+			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 12) ? substr($data['resumo']['NomeCliente'], 0, 12) : $data['resumo']['NomeCliente'];
+		}
+		
         $data['titulo'] = 'Listar Consultas';
         $data['panel'] = 'primary';
         $data['novo'] = '';

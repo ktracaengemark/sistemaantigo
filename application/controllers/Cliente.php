@@ -419,11 +419,12 @@ class Cliente extends CI_Controller {
             $data['msg'] = '';
 
         $_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($id, TRUE);
-        #$data['query'] = $this->Paciente_model->get_paciente($prontuario, TRUE);
+        $_SESSION['Cliente']['NomeCliente'] = (strlen($data['query']['NomeCliente']) > 12) ? substr($data['query']['NomeCliente'], 0, 12) : $data['query']['NomeCliente'];
+		#$data['query'] = $this->Paciente_model->get_paciente($prontuario, TRUE);
         $data['titulo'] = 'Prontuário ' . $data['query']['NomeCliente'];
         $data['panel'] = 'primary';
         $data['metodo'] = 4;
-
+		
         $_SESSION['log']['idApp_Cliente'] = $data['resumo']['idApp_Cliente'] = $data['query']['idApp_Cliente'];
         $data['resumo']['NomeCliente'] = $data['query']['NomeCliente'];
 

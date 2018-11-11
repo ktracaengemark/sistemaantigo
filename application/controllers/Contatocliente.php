@@ -308,8 +308,8 @@ class Contatocliente extends CI_Controller {
             $_SESSION['agenda']['HoraFim'] = substr($this->input->get('end'), 0, -3);
         }
 
-        $_SESSION['Cliente'] = $this->Cliente_model->get_cliente($id, TRUE);
-
+        $_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($id, TRUE);
+		$_SESSION['Cliente']['NomeCliente'] = (strlen($data['query']['NomeCliente']) > 12) ? substr($data['query']['NomeCliente'], 0, 12) : $data['query']['NomeCliente'];
         //echo date('d/m/Y H:i:s', $data['start'],0,-3));
 
         $data['query'] = $this->Contatocliente_model->lista_contatocliente(TRUE);
