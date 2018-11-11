@@ -150,7 +150,7 @@ class Login extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-    public function registrar() {
+    public function registrar1() {
 
         $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'ktraca';
         $_SESSION['log']['idTab_Modulo'] = 1;
@@ -315,6 +315,170 @@ class Login extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
+    public function registrar() {
+
+        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'ktraca';
+        $_SESSION['log']['idTab_Modulo'] = 1;
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = $this->input->post(array(
+            'idSis_Empresa',
+			'Email',
+            'ConfirmarEmail',
+            'Usuario',
+            'Nome',
+			'CpfUsuario',
+            'Senha',
+            'Confirma',
+            'DataNascimento',
+            'Celular',
+            'Sexo',
+			'Funcao',
+			'TipoProfissional',
+			'DataCriacao',
+			
+                ), TRUE);
+
+        (!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
+
+		$this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
+
+		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Usuario.NomeEmpresa]');
+        $this->form_validation->set_rules('CpfUsuario', 'Cpf do Usuário', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email');
+        $this->form_validation->set_rules('ConfirmarEmail', 'Confirmar E-mail', 'required|trim|valid_email|matches[Email]');
+        $this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim|is_unique[Sis_Usuario.Usuario]');
+		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
+        $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
+        $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
+        $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
+		$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+		#$this->form_validation->set_rules('NumUsuarios', 'Nº de Usuários', 'required|trim');
+
+		$data['select']['idSis_Empresa'] = $this->Login_model->select_empresa1();
+		$data['select']['TipoProfissional'] = $this->Basico_model->select_tipoprofissional();
+        $data['select']['Sexo'] = $this->Basico_model->select_sexo();
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            #load login view
+            $this->load->view('login/form_registrar', $data);
+        } else {
+
+			$data['query']['idSis_Empresa'] = 5;
+			$data['query']['NomeEmpresa'] = "Conta Pessoal";
+			$data['query']['Permissao'] = 3;
+			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+            $data['query']['Senha'] = md5($data['query']['Senha']);
+			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
+			$data['query']['DataCriacao'] = $this->basico->mascara_data($data['query']['DataCriacao'], 'mysql');
+            $data['query']['Codigo'] = md5(uniqid(time() . rand()));
+            //$data['query']['Inativo'] = 1;
+            //ACESSO LIBERADO PRA QUEM REALIZAR O CADASTRO
+            $data['query']['Inativo'] = 0;
+            unset($data['query']['Confirma'], $data['query']['ConfirmarEmail']);
+
+            $data['anterior'] = array();
+            $data['campos'] = array_keys($data['query']);
+
+            $data['idSis_Usuario'] = $this->Login_model->set_usuario($data['query']);
+            $_SESSION['log']['id'] = 1;
+
+            if ($data['idSis_Usuario'] === FALSE) {
+                $data['msg'] = '?m=2';
+                $this->load->view('login/form_login', $data);
+            } else {
+
+                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idSis_Usuario']);
+                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Usuario', 'CREATE', $data['auditoriaitem'], $data['idSis_Usuario']);
+                /*
+                  echo $this->db->last_query();
+                  echo "<pre>";
+                  print_r($data);
+                  echo "</pre>";
+                  exit();
+                 */
+                $data['agenda'] = array(
+                    'NomeAgenda' => 'Cliente',
+                    'idSis_Usuario' => $data['idSis_Usuario'],
+					'idSis_Empresa' => "5"
+                );
+                $data['campos'] = array_keys($data['agenda']);
+
+                $data['idApp_Agenda'] = $this->Login_model->set_agenda($data['agenda']);
+                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['agenda'], $data['campos'], $data['idSis_Usuario']);
+                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Agenda', 'CREATE', $data['auditoriaitem'], $data['idSis_Usuario']);
+
+                #$this->load->library('email');
+
+                //DADOS PARA ENVIO DE E-MAIL DE CONFIRMAÇÃO DE INSCRIÇÃO
+                $config['protocol'] = 'smtp';
+                $config['smtp_host'] = 'smtplw.com.br';
+                $config['smtp_user'] = 'trial';
+                $config['smtp_pass'] = 'XzGyjtXI2256';
+                $config['charset'] = 'iso-8859-1';
+                $config['mailtype'] = 'html';
+                $config['wrapchars'] = '50';
+                $config['smtp_port'] = '587';
+                $config['smtp_crypto'] = 'tls';
+                $config['newline'] = "\r\n";
+
+                $this->email->initialize($config);
+
+                $this->email->from('contato@ktracaengemark.com.br', 'KTRACA Engenharia & Marketing');
+                $this->email->to($data['query']['Email']);
+
+                $this->email->subject('[KTRACA] Confirmação de registro - Usuário: ' . $data['query']['Usuario']);
+
+                #$this->email->message('Por favor, clique no link a seguir para confirmar seu registro: '
+                #. 'http://www.romati.com.br/app/login/confirmar/' . $data['query']['Codigo']);
+                $this->email->message('Por favor, clique no link a seguir para confirmar seu registro: '
+                    . base_url() . 'login/confirmar/' . $data['query']['Codigo']);
+
+                $this->email->send();
+                #echo ($this->email->send(FALSE)) ? "sim" : "não";
+                #echo $this->email->print_debugger(array('headers'));
+
+                $data['aviso'] = ''
+                    . '
+                    <div class="alert alert-success" role="alert">
+                    <h4>
+
+                        <p><b>Usuário cadastrado com sucesso!</b></p>
+                        <p>Entretanto, ele ainda encontra-se inativo no sistema. Um link de ativação foi gerado e enviado para
+                            o e-mail <b>' . $data['query']['Email'] . '</b></p>
+                        <p>Entre em sua caixa de e-mail e clique no link de ativação para habilitar seu acesso ao sistema.</p>
+                        <p>Caso o e-mail com o link não esteja na sua caixa de entrada <b>verifique também sua caixa de SPAM</b>.</p>
+
+                    </h4>
+                    <br>
+                    <a class="btn btn-primary" href="' . base_url() . '" role="button">Acessar o aplicativo</a>
+                    </div> '
+                . '';
+
+                /*
+                $this->email->message('Sua conta foi ativada com sucesso! Aproveite e teste todas as funcionalidades do sistema.'
+                        . 'Qualquer sugestão ou crítica será bem vinda. ');
+
+                $this->email->send();
+                */
+
+                $this->load->view('login/tela_msg', $data);
+                #redirect(base_url() . 'login' . $data['msg']);
+                #exit();
+            }
+        }
+
+        $this->load->view('basico/footerlogin');
+        $this->load->view('basico/footer');
+    }
+	
     public function confirmar($codigo) {
 
         $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'ktraca';
