@@ -6,7 +6,7 @@
 
 		<div class="col-md-2"></div>
 		<div class="col-md-8 ">
-
+			<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 			<nav class="navbar navbar-inverse">
 			  <div class="container-fluid">
 				<div class="navbar-header">
@@ -128,7 +128,7 @@
 				</div>
 			  </div>
 			</nav>
-
+			<?php } ?>
 			<?php } ?>
 
 			<div class="row">
@@ -328,7 +328,7 @@
 												</div>										
 											</div>
 										</div>
-										
+										<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 										<div class="form-group">
 											<div class="row">
 												<input type="hidden" name="idApp_Consulta" value="<?php echo $query['idApp_Consulta']; ?>">
@@ -383,7 +383,7 @@
 												<?php } ?>
 											</div>
 										</div>
-
+										<?php } ?>
 										</form>
 									</div>
 								</div>

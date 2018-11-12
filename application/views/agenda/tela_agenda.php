@@ -52,16 +52,7 @@
 						</div>
 						<?php echo form_open('agenda', 'role="form"'); ?>
 
-						<div id="datepickerinline" class="col-md-12"></div>
-						<!--
-						<div class="input-group <?php echo $datepicker; ?>">
-							<span class="input-group-addon" disabled>
-								<span class="glyphicon glyphicon-calendar"></span>
-							</span>
-							<input type="text" class="form-control Date" id="datepickerinline" maxlength="10" placeholder="DD/MM/AAAA"
-								   name="datepickerinline" value="">
-						</div>
-						-->
+						
 					</div>
 				</div>
 			</div>
@@ -70,32 +61,50 @@
 </div>
 <div class="col-md-6">
 	<div class="panel panel-primary">
+		
 		<div class="panel-heading">
-			<strong>
-				<?php if ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) { ?>
-				<?php echo form_open('agenda', 'role="form"'); ?>
+			<?php echo form_open('agenda', 'role="form"'); ?>		
+			<div class="form-group">
+				<div class="row">																																		
+						
+					<?php if ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) { ?>	
+						
+					<div class="col-md-6 text-left">
+						<label class="sr-only" for="Ordenamento">Agenda dos Prof.:</label>
+						<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
+								id="NomeUsuario" name="NomeUsuario">
+							<?php
+							foreach ($select['NomeUsuario'] as $key => $row) {
+								if ($query['NomeUsuario'] == $key) {
+									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+								} else {
+									echo '<option value="' . $key . '">' . $row . '</option>';
+								}
+							}
+							?>
+						</select>
+					</div>	
 					
-				<label class="sr-only" for="Ordenamento">Agenda dos Prof.:</label>
+					<?php } ?>
+					<div class="col-md-6 text-right">
+						<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#Produtos" aria-expanded="false" aria-controls="Produtos">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			</form>
 				
-				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-						id="NomeUsuario" name="NomeUsuario">
-					<?php
-					foreach ($select['NomeUsuario'] as $key => $row) {
-						if ($query['NomeUsuario'] == $key) {
-							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-						} else {
-							echo '<option value="' . $key . '">' . $row . '</option>';
-						}
-					}
-					?>
-				</select>
-					
-					
-				</form>
-				<?php } ?>
-			</strong>
+			
 		</div>
+		
 		<div class="panel-body">
+			<div class="text-right">
+				<a <?php echo $collapse1; ?> id="Produtos">
+						<div class="form-group" id="datepickerinline" class="col-md-12" >
+						</div>
+				</a>
+			</div>
 			<div class="form-group">
 				<div  style="overflow: auto; height: 456px; "> 
 						<table id="calendar" class="table table-condensed table-bordered table-striped "></table>

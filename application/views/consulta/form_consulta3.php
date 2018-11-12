@@ -6,7 +6,7 @@
 
 		<div class="col-md-2"></div>
 		<div class="col-md-8 ">
-
+			<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 			<nav class="navbar navbar-inverse">
 			  <div class="container-fluid">
 				<div class="navbar-header">
@@ -129,6 +129,7 @@
 			  </div>
 			</nav>
 
+			<?php } ?>
 			<?php } ?>
 
 			<div class="row">

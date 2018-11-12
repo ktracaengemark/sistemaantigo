@@ -533,7 +533,7 @@ class Consulta extends CI_Controller {
         $data['query'] = $this->input->post(array(
             #'idSis_Usuario',
 			'idApp_Consulta',
-            'idApp_Agenda',
+            #'idApp_Agenda',
             'idApp_Cliente',
 			#'idSis_EmpresaFilial',
             'Data',
@@ -880,7 +880,7 @@ class Consulta extends CI_Controller {
         $data['query'] = $this->input->post(array(
             #'idSis_Usuario',
 			'idApp_Consulta',
-            'idApp_Agenda',
+            #'idApp_Agenda',
 			#'idSis_EmpresaFilial',
             'Data2',
 			'Data',

@@ -6,7 +6,7 @@
 	
 		<div class="col-md-2"></div>
 		<div class="col-md-8 ">
-		
+			<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 			<nav class="navbar navbar-inverse">
 			  <div class="container-fluid">
 				<div class="navbar-header">
@@ -98,6 +98,7 @@
 							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
 						<?php } ?>
+						
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
@@ -129,6 +130,7 @@
 			  </div>
 			</nav>
 
+			<?php } ?>
 			<?php } ?>
 			<div class="row">
 			

@@ -37,7 +37,8 @@ class Agenda extends CI_Controller {
 
 		$data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
-		
+		$data['collapse'] = '';	
+		$data['collapse1'] = 'class="collapse"';
 		
         $data['query'] = quotes_to_entities($this->input->post(array(
             'NomeUsuario',
