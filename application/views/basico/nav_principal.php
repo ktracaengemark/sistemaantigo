@@ -41,19 +41,26 @@
 						</li>
 						<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
-							<div class="btn-group">
-								<button type="button" class="btn btn-md btn-success dropdown-toggle" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-user"></span> <span class="glyphicon glyphicon-home"></span> Clientes <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu">							
-									<li><a href="<?php echo base_url() ?>relatorio/clientes"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['log']['NomeEmpresa']; ?> </a></li>
-									<li role="separator" class="divider"></li>							
-									<li><a href="<?php echo base_url() ?>relatorio/despesaspag"><span class="glyphicon glyphicon-home"></span> Empresas Associadas</a></li>
-								</ul>
+							<div class="btn-group " role="group" aria-label="...">
+								<a href="<?php echo base_url(); ?>relatorio/clientes">
+									<button type="button" class="btn btn-md btn-success ">
+										<span class="glyphicon glyphicon-user"></span> Clientes
+									</button>
+								</a>
 							</div>
 							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
 						<?php } ?>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group " role="group" aria-label="...">
+								<a href="<?php echo base_url(); ?>relatorio/empresas">
+									<button type="button" class="btn btn-md btn-primary ">
+										<span class="glyphicon glyphicon-home"></span> Empresas
+									</button>
+								</a>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>
 						<!--
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group " role="group" aria-label="...">

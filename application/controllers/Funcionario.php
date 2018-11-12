@@ -117,7 +117,7 @@ class Funcionario extends CI_Controller {
 
 
 			$data['query']['QuemCad'] = $_SESSION['log']['id'];
-			$data['query']['idSis_Empresa'] = $_SESSION['log']['id'];
+			#$data['query']['idSis_Empresa'] = $_SESSION['log']['id'];
 			$data['query']['NomeEmpresa'] = $_SESSION['log']['NomeEmpresa'];
             $data['query']['Senha'] = md5($data['query']['Senha']);
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');

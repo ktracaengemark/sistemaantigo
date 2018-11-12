@@ -18,12 +18,12 @@ if (!$db) {
 
 //Acho que as próximas linhas são redundantes, verificar
 
-$query = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'A.idSis_Usuario = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;	
+$query = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'U.CpfUsuario = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;	
 #$query2 = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'C.idApp_Cliente = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;
 																				
 $permissao = ($_SESSION['log']['Permissao'] <= 2 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 $permissao1 = (($_SESSION['log']['idSis_Empresa'] == 5) || ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] >= 3)) ? 'R.CpfCliente = ' . $_SESSION['log']['CpfUsuario'] . '  ' : FALSE;
-$permissao2 = (($_SESSION['log']['idSis_Empresa'] == 5) || ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] >= 3)) ? 'P.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . '  ' : FALSE;																																			
+$permissao2 = (($_SESSION['log']['idSis_Empresa'] == 5) || ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] >= 3)) ? 'U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' AND ' : FALSE;																																			
 
 $result = mysql_query(
         'SELECT
@@ -65,7 +65,7 @@ $result = mysql_query(
         WHERE
 			C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 			' . $query . ' 
-
+			' . $permissao2 . '
 			
 			A.idApp_Agenda = C.idApp_Agenda 
 		ORDER BY 

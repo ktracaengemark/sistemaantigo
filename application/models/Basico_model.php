@@ -1289,6 +1289,54 @@ class Basico_model extends CI_Model {
         return $array;
     }
 
+	public function select_agenda1($data = FALSE) {
+
+        $q = (($_SESSION['log']['idSis_Empresa'] == 5) || ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] >= 3)) ?
+            ' U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' ' : FALSE;
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+                SELECT
+                    A.idApp_Agenda,
+                    A.idSis_Usuario,
+					U.CpfUsuario,
+					U.Nome
+				FROM
+                    App_Agenda AS A
+						LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = A.idSis_Usuario
+				WHERE
+                    ' . $q . '
+					
+				ORDER BY
+					U.Nome ASC
+			');
+
+        } else {
+            $query = $this->db->query('
+				SELECT
+                    A.idApp_Agenda,
+                    A.idSis_Usuario,
+					U.CpfUsuario,
+					U.Nome
+				FROM
+                    App_Agenda AS A
+						LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = A.idSis_Usuario
+				WHERE
+                    ' . $q . '
+					
+				ORDER BY
+					U.Nome ASC
+			');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->CpfUsuario] = $row->Nome;
+            }
+        }
+
+        return $array;
+    }
+	
 	public function select_agendacli($data = FALSE) {
 
         $q = ($_SESSION['log']['Permissao'] > 2) ?

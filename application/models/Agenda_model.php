@@ -262,7 +262,7 @@ class Agenda_model extends CI_Model {
         $array = array();
         $array[0] = ':: Todos ::';
         foreach ($query->result() as $row) {
-            $array[$row->idSis_Usuario] = $row->NomeUsuario;
+            $array[$row->CpfUsuario] = $row->NomeUsuario;
         }
 
         return $array;

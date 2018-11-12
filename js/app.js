@@ -3725,7 +3725,7 @@ $('#calendar').fullCalendar({
     firstDay: '0',
 	//minTime: '07:00',
     //maxTime: '21:00',
-    minTime: '00:00',
+    minTime: '06:00',
     maxTime: '24:00',
     nowIndicator: true,
     selectable: true,
