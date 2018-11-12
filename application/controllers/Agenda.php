@@ -35,6 +35,10 @@ class Agenda extends CI_Controller {
 
         $data['select']['NomeUsuario'] = $this->Agenda_model->select_usuario();
 
+		$data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+		
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
             'NomeUsuario',
 

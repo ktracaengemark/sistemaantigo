@@ -134,7 +134,7 @@
 			<div class="row">
 
 				<div class="col-md-12 col-lg-12">
-					<?php echo validation_errors(); ?>
+					<?php #echo validation_errors(); ?>
 
 					<div class="panel panel-<?php echo $panel; ?>">
 
@@ -168,6 +168,7 @@
 														?>
 													</select>
 												</div>
+												<?php# echo form_error('idApp_Cliente'); ?>
 												-->
 												<div class="col-md-4">
 													<label for="idApp_Agenda">Agenda do Profis.*</label>
@@ -184,7 +185,9 @@
 														}
 														?>
 													</select>
+													
 												</div>
+												<?php echo form_error('idApp_Agenda'); ?>
 												<!--
 												<div class="col-md-4">
 													<label for="idSis_EmpresaFilial">Unidade: *</label>

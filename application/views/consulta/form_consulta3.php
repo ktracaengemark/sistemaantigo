@@ -134,7 +134,7 @@
 			<div class="row">
 
 				<div class="col-md-12 col-lg-12">
-					<?php echo validation_errors(); ?>
+					<?php #echo validation_errors(); ?>
 
 					<div class="panel panel-<?php echo $panel; ?>">
 
@@ -160,7 +160,9 @@
 											}
 											?>
 										</select>
+										
 									</div>
+									<?php echo form_error('idApp_Agenda'); ?>
 									<div class="row">		
 										<div class="col-md-6">	
 											<label for="Data">Data Início : </label>												

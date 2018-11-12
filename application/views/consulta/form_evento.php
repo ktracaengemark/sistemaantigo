@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-sm-7 col-sm-offset-3 col-md-5 col-md-offset-4 main">
 
-			<?php echo validation_errors(); ?>
+			<?php #echo validation_errors(); ?>
 
 			<div class="panel panel-<?php echo $panel; ?>">
 				<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
@@ -30,6 +30,7 @@
 													}
 													?>
 												</select>
+												<?php echo form_error('idApp_Agenda'); ?>
 											</div>
 										</div>
 									</div>	
@@ -53,6 +54,7 @@
 													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
 														   name="Data" value="<?php echo $query['Data']; ?>">
 												</div>
+											<?php echo form_error('Data'); ?>	
 											</div>	
 											
 											<div class="col-md-6">
@@ -64,6 +66,7 @@
 														<span class="glyphicon glyphicon-time"></span>
 													</span>
 												</div>-->
+											<?php echo form_error('HoraInicio'); ?>
 											</div>
 											
 											<div class="col-md-6">	
@@ -75,6 +78,7 @@
 													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
 														   name="Data2" value="<?php echo $query['Data2']; ?>">
 												</div>
+											<?php echo form_error('Data2'); ?>
 											</div>
 										
 											<div class="col-md-6">		
@@ -86,6 +90,7 @@
 														<span class="glyphicon glyphicon-time"></span>
 													</span>
 												</div>-->
+											<?php echo form_error('HoraFim'); ?>
 											</div>
 											
 										</div>

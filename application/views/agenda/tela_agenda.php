@@ -53,7 +53,15 @@
 						<?php echo form_open('agenda', 'role="form"'); ?>
 
 						<div id="datepickerinline" class="col-md-12"></div>
-						
+						<!--
+						<div class="input-group <?php echo $datepicker; ?>">
+							<span class="input-group-addon" disabled>
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+							<input type="text" class="form-control Date" id="datepickerinline" maxlength="10" placeholder="DD/MM/AAAA"
+								   name="datepickerinline" value="">
+						</div>
+						-->
 					</div>
 				</div>
 			</div>
