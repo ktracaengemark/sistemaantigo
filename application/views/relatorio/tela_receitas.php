@@ -48,13 +48,20 @@
 												</button>
 											</div>
 										</div>
-										<div class="form-group col-md-4 text-left">
+										<div class="form-group col-md-4 text-center">
 											<div class="form-footer">		
-												<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>orcatrata/cadastrar2" role="button">
-													<span class="glyphicon glyphicon-plus"></span> Cad. Receita
+												<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>relatorio/clientes" role="button">
+													<span class="glyphicon glyphicon-plus"></span> Receita C/Cliente
 												</a>
 											</div>	
-										</div>		
+										</div>
+										<div class="form-group col-md-4 text-right">
+											<div class="form-footer">		
+												<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>orcatrata/cadastrar2" role="button">
+													<span class="glyphicon glyphicon-plus"></span> Outras Receitas
+												</a>
+											</div>	
+										</div>
 									</div>
 								</div>
 							</div>

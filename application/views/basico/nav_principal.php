@@ -39,7 +39,9 @@
 							</div>
 							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
+						
 						<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+						
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/clientes">

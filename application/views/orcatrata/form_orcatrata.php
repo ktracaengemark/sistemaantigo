@@ -7,6 +7,8 @@
 		<div class="col-md-1"></div>
 		<div class="col-md-10 ">
 
+			<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
+			
 			<nav class="navbar navbar-inverse">
 			  <div class="container-fluid">
 				<div class="navbar-header">
@@ -19,6 +21,7 @@
 							<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?> 
 						</a>
 				</div>
+				
 				<div class="collapse navbar-collapse" id="myNavbar">
 
 					<ul class="nav navbar-nav navbar-center">
@@ -27,6 +30,9 @@
 								<span class="glyphicon glyphicon-edit"></span> Edit. Cliente
 							</a>
 						</li>
+						
+						<?php if ($_SESSION['Empresa']['NivelEmp'] != 1 ) { ?>
+						
 						<li>
 							<a href="<?php echo base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 								<span class="glyphicon glyphicon-usd"></span> Listar Orçams.
@@ -37,6 +43,9 @@
 								<span class="glyphicon glyphicon-plus"></span> Cad. Orçam.
 							</a>
 						</li>
+						
+						<?php } ?>
+						
 					</ul>
 
 				</div>
@@ -44,6 +53,8 @@
 			</nav>
 
 			<?php } ?>
+			
+<?php } ?>
 			<div class="row">
 
 				<div class="col-md-12 col-lg-12">
@@ -56,7 +67,7 @@
 
 							<?php echo form_open_multipart($form_open_path); ?>
 
-
+								
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 
@@ -408,7 +419,7 @@
 									</div>
 								</div>
 							</div>
-					
+							
 
 							<div class="panel-group">	
 								<div class="panel panel-primary">
@@ -426,6 +437,31 @@
 													<div class="col-md-1"></div>
 													<div class="form-group">
 														<div class="row">
+														
+															<div class="col-md-2">
+																<label for="TipoReceita">Tipo de Receita</label>
+																<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+																		id="TipoReceita" name="TipoReceita">
+																	<option value="">-- Selecione uma opção --</option>
+																	<?php
+																	foreach ($select['TipoReceita'] as $key => $row) {
+																		(!$orcatrata['TipoReceita']) ? $orcatrata['TipoReceita'] = '1' : FALSE;
+																		if ($orcatrata['TipoReceita'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	?>
+																</select>
+															</div>
+															
+															<div class="col-md-2">
+																<label for="Receitas">Receita</label><br>
+																<input type="text" class="form-control" maxlength="200"
+																		name="Receitas" value="<?php echo $orcatrata['Receitas'] ?>">
+															</div>
+															
 															<div class="col-md-2">
 																<label for="ValorOrca">Orçamento:</label><br>
 																<div class="input-group" id="txtHint">
@@ -436,26 +472,16 @@
 															</div>
 															
 															<div class="col-md-2">
-																<label for="ValorDev">Devol./ Desc.:</label><br>
+																<label for="ValorDev">Desconto:</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
-																	<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00"
+																	<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00" readonly=""
 																		   onkeyup="calculaResta(this.value)" name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
 																</div>
 															</div>
-															<!--
-															<div class="col-md-3">
-																<label for="ValorEntradaOrca">Desconto</label><br>
-																<div class="input-group" id="txtHint">
-																	<span class="input-group-addon" id="basic-addon1">R$</span>
-																	<input type="text" class="form-control Valor" id="ValorEntradaOrca" maxlength="10" placeholder="0,00"
-																		onkeyup="calculaResta(this.value)"
-																		name="ValorEntradaOrca" value="<?php echo $orcatrata['ValorEntradaOrca'] ?>">
-																</div>
-															</div>
-															-->
+
 															<div class="col-md-2">
-																<label for="ValorRestanteOrca">Resta Pagar:</label><br>
+																<label for="ValorRestanteOrca">Total:</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorRestanteOrca" maxlength="10" placeholder="0,00" readonly=""
@@ -553,7 +579,7 @@
 									</div>
 								</div>
 							</div>
-
+							
 
 							<div class="panel-group">	
 								<div class="panel panel-primary">

@@ -130,6 +130,7 @@ class Orcatrata_model extends CI_Model {
 
         $query = $this->db->query('SELECT '
             . 'OT.idApp_OrcaTrata, '
+			. 'OT.idSis_Empresa, '
             . 'OT.DataOrca, '
 			. 'OT.DataPrazo, '
 			. 'OT.DataConclusao, '
@@ -142,7 +143,8 @@ class Orcatrata_model extends CI_Model {
             . 'FROM '
             . 'App_OrcaTrata AS OT '
             . 'WHERE '
-            . 'OT.idApp_Cliente = ' . $id . ' AND '
+			. 'OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
+			. 'OT.idApp_Cliente = ' . $id . ' AND '
 			. 'OT.TipoRD = "R" AND '
             . 'OT.AprovadoOrca = "' . $aprovado . '" '
             . 'ORDER BY '

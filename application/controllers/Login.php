@@ -126,6 +126,10 @@ class Login extends CI_Controller {
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
 
+				#### Carrega os dados da Empresa nas variáves de sessão ####
+				$this->load->model('Basico_model');
+				$_SESSION['Empresa'] = $this->Basico_model->get_empresa1($_SESSION['log']['idSis_Empresa'], TRUE);
+		
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
                 $_SESSION['db']['username'] = $this->db->username;
