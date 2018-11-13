@@ -666,7 +666,7 @@ class Orcatrata extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('orcatrata/form_orcatrataalterar', $data);
+            $this->load->view('orcatrata/form_orcatrataalterar2', $data);
         } else {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
@@ -881,7 +881,7 @@ class Orcatrata extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('orcatrata/form_orcatrataalterar', $data);
+                $this->load->view('orcatrata/form_orcatrataalterar2', $data);
             } else {
 
                 //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_OrcaTrata'], FALSE);
