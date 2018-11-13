@@ -118,8 +118,13 @@ class Loginempresa extends CI_Controller {
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
 				$_SESSION['log']['NomeEmpresa2'] = (strlen($query['NomeEmpresa']) > 10) ? substr($query['NomeEmpresa'], 0, 10) : $query['NomeEmpresa'];
 				$_SESSION['log']['id'] = $query['idSis_Empresa'];
-				$_SESSION['log']['PermissaoEmp'] = $query['PermissaoEmp'];
-				$_SESSION['log']['NivelEmp'] = $query['NivelEmp'];
+				$_SESSION['log']['PermissaoEmpresa'] = $query['PermissaoEmp'];
+				$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
+				
+				#### Carrega os dados da Empresa nas variáves de sessão ####
+				$this->load->model('Basico_model');
+				$_SESSION['Empresa'] = $this->Basico_model->get_empresa1($_SESSION['log']['id'], TRUE);
+				
 				
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
@@ -196,8 +201,8 @@ class Loginempresa extends CI_Controller {
         } else {
 			
 			$data['query']['idSis_EmpresaMatriz'] = 2;
-			$data['query']['PermissaoEmp'] = 1;
-			$data['query']['NivelEmp'] = 1;
+			$data['query']['PermissaoEmpresa'] = 1;
+			$data['query']['NivelEmpresa'] = 3;
 			$data['query']['idTab_Modulo'] = 1;
             $data['query']['DataCriacao'] = $this->basico->mascara_data($data['query']['DataCriacao'], 'mysql');
 			$data['query']['Senha'] = md5($data['query']['Senha']);

@@ -8,7 +8,6 @@
 		<div class="col-md-10 ">
 			
 			<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
-			
 			<nav class="navbar navbar-inverse">
 			  <div class="container-fluid">
 				<div class="navbar-header">
@@ -17,42 +16,121 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span> 
 					</button>
-						<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-							<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?> 
-						</a>
+					<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+						<?php echo '<small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '.</small>' ?> 
+					</a>
 				</div>
-				
 				<div class="collapse navbar-collapse" id="myNavbar">
-
 					<ul class="nav navbar-nav navbar-center">
-						<li>
-							<a href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-								<span class="glyphicon glyphicon-edit"></span> Edit. Cliente
-							</a>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-user"></span> Cliente <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-calendar"></span> Ver
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/cliente\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Editar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
-						<li>
-							<a href="<?php echo base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-								<span class="glyphicon glyphicon-usd"></span> Listar Orçams.
-							</a>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-calendar"></span> Agendamentos <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/consulta\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'consulta/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-calendar"></span> Listar
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/consulta\/cadastrar1\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'consulta/cadastrar1/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Cadastrar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
-						
-						<?php if ($_SESSION['Empresa']['NivelEmp'] != 1 ) { ?>
-						<li>
-							<a href="<?php echo base_url() . 'orcatrata/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-								<span class="glyphicon glyphicon-plus"></span> Cad. Orçam.
-							</a>
+						<?php if ($_SESSION['Cliente']['idSis_Empresa'] == $_SESSION['log']['idSis_Empresa'] ) { ?>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-usd"></span> Orçamentos <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/orcatrata\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-usd"></span> Listar
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/orcatrata\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'orcatrata/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Cadastrar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>
+						<?php } ?>
+						<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 4 ) { ?>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-pencil"></span> Procedimentos <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/procedimento\/listarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-pencil"></span> Listar
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/procedimento\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'procedimento/cadastrarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Cadastrar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
 						<?php } ?>
 					</ul>
 
 				</div>
-				
-				
-				
 			  </div>
-			  
 			</nav>
-			
 			<?php } ?>
 
 <?php } ?>
@@ -68,7 +146,7 @@
 
 							<?php echo form_open_multipart($form_open_path); ?>
 
-							
+							<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 3 ) { ?>
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 
@@ -139,7 +217,11 @@
 																					?>
 																				</select>
 																			</div>
-
+																			<div class="col-md-3">
+																				<label for="ObsProduto<?php echo $i ?>">Obs:</label><br>
+																				<input type="text" class="form-control" id="ObsProduto<?php echo $i ?>" maxlength="250"
+																					   name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>">
+																			</div>
 																			<div class="col-md-2">
 																				<label for="ValorVendaProduto">Valor do Produto:</label>
 																				<div class="input-group">
@@ -157,16 +239,18 @@
 																						   name="SubtotalProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalProduto'] ?>">
 																				</div>
 																			</div>
+																			<div class="col-md-1">
+																				<label><br></label><br>
+																				<button type="button" id="<?php echo $i ?>" class="remove_field9 btn btn-danger"
+																						onclick="calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',1,<?php echo $i ?>,'CountMax',0,'ProdutoHidden')">
+																					<span class="glyphicon glyphicon-trash"></span>
+																				</button>
+																			</div>
 																		</div>
 																		<div class="row">
-																			<div class="col-md-1"></div>
-																			<div class="col-md-7">
-																				<label for="ObsProduto<?php echo $i ?>">Obs:</label><br>
-																				<input type="text" class="form-control" id="ObsProduto<?php echo $i ?>" maxlength="250"
-																					   name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>">
-																			</div>
+																			<div class="col-md-9"></div>
 																			<div class="col-md-2">
-																				<label for="DataValidadeProduto<?php echo $i ?>">Val. do Produto:</label>
+																				<label for="DataValidadeProduto<?php echo $i ?>">Validade:</label>
 																				<div class="input-group <?php echo $datepicker; ?>">
 																					<span class="input-group-addon" disabled>
 																						<span class="glyphicon glyphicon-calendar"></span>
@@ -175,13 +259,6 @@
 																						   name="DataValidadeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['DataValidadeProduto']; ?>">
 																					
 																				</div>
-																			</div>
-																			<div class="col-md-1">
-																				<label><br></label><br>
-																				<button type="button" id="<?php echo $i ?>" class="remove_field9 btn btn-danger"
-																						onclick="calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',1,<?php echo $i ?>,'CountMax',0,'ProdutoHidden')">
-																					<span class="glyphicon glyphicon-trash"></span>
-																				</button>
 																			</div>
 																		</div>
 																	</div>
@@ -204,14 +281,14 @@
 																			<div class="col-md-3">
 																				<a class="add_field_button9 btn btn-success"
 																						onclick="calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
-																					<span class="glyphicon glyphicon-plus"></span> Adic. Prod. Entregues
+																					<span class="glyphicon glyphicon-plus"></span> Produtos
 																				</a>
 																			</div>
 																			<div class="col-md-2">	
 																				<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
 																			</div>
 																			<div class="col-md-3">	
-																				<b>Prod. Entregues: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
+																				<b>Quant. Entr.: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
 																			</div>
 																			<div class="col-md-3 text-left">																							
 																				<!--
@@ -235,6 +312,7 @@
 												</div>
 											</div>
 											
+											<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 4 ) { ?>
 											<div class="panel-group">	
 												<div class="panel panel-danger">
 
@@ -293,6 +371,11 @@
 																					?>
 																				</select>
 																			</div>
+																			<div class="col-md-3">
+																				<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
+																				<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
+																					   name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
+																			</div>
 																			<div class="col-md-2">
 																				<label for="ValorVendaServico">Valor do Produto:</label>
 																				<div class="input-group">
@@ -310,16 +393,18 @@
 																						   name="SubtotalServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalServico'] ?>">
 																				</div>
 																			</div>
+																			<div class="col-md-1">
+																				<label><br></label><br>
+																				<button type="button" id="<?php echo $i ?>" class="remove_field10 btn btn-danger"
+																					onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',1,<?php echo $i ?>,'CountMax2',0,'ServicoHidden')">
+																					<span class="glyphicon glyphicon-trash"></span>
+																				</button>
+																			</div>
 																		</div>
 																		<div class="row">
-																			<div class="col-md-1"></div>
-																			<div class="col-md-7">
-																				<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
-																				<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
-																					   name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
-																			</div>
+																			<div class="col-md-9"></div>
 																			<div class="col-md-2">
-																				<label for="DataValidadeServico<?php echo $i ?>">Valid. do Prod.:</label>
+																				<label for="DataValidadeServico<?php echo $i ?>">Validade:</label>
 																				<div class="input-group <?php echo $datepicker; ?>">
 																					<span class="input-group-addon" disabled>
 																						<span class="glyphicon glyphicon-calendar"></span>
@@ -358,13 +443,6 @@
 																				</div>
 																			</div>
 																			-->
-																			<div class="col-md-1">
-																				<label><br></label><br>
-																				<button type="button" id="<?php echo $i ?>" class="remove_field10 btn btn-danger"
-																					onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',1,<?php echo $i ?>,'CountMax2',0,'ServicoHidden')">
-																					<span class="glyphicon glyphicon-trash"></span>
-																				</button>
-																			</div>
 																		</div>
 																	</div>
 																</div>
@@ -386,14 +464,14 @@
 																			<div class="col-md-3 text-left">
 																				<a class="add_field_button10  btn btn-danger" 
 																						onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
-																					<span class="glyphicon glyphicon-minus"></span> Retr. Prod. Devolvidos
+																					<span class="glyphicon glyphicon-minus"></span> Produtos
 																				</a>
 																			</div>
 																			<div class="col-md-2">	
 																				<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
 																			</div>
 																			<div class="col-md-3">	
-																				<b>Prod. Devolvidos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
+																				<b>Quant. Dev.: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
 																			</div>
 																			<div class="col-md-3 text-left">																							
 																				<!--
@@ -415,19 +493,19 @@
 													</div>
 												</div>
 											</div>
-											
+											<?php } ?>
 										</div>
 									</div>
 								</div>
 							</div>
-							
+							<?php } ?>
 
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 
 									<div class="panel-heading text-left">
 										<a class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Orcamento" aria-expanded="false" aria-controls="Orcamento">
-											<span class="glyphicon glyphicon-menu-down"></span> Orçam. & Forma de Pagam.
+											<span class="glyphicon glyphicon-menu-down"></span> Receita & Forma de Pagam.
 										</a>
 									</div>
 									
@@ -456,19 +534,20 @@
 																	?>
 																</select>
 															</div>
-															
+															<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 3 ) { ?>
 															<div class="col-md-2">
 																<label for="Receitas">Receita</label><br>
 																<input type="text" class="form-control" maxlength="200"
 																		name="Receitas" value="<?php echo $orcatrata['Receitas'] ?>">
 															</div>
-															
+															<?php } ?>
 															<div class="col-md-2">
 																<label for="ValorOrca">Orçamento:</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorOrca" maxlength="10" placeholder="0,00"
-																		   onkeyup="calculaResta(this.value)" name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
+																		   onkeyup="calculaResta(this.value)"
+																		   name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
 																</div>
 															</div>
 															
@@ -476,8 +555,9 @@
 																<label for="ValorDev">Devol./ Desc.:</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
-																	<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00"
-																		   onkeyup="calculaResta(this.value)" name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
+																	<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00" readonly=""
+																		   onkeyup="calculaResta(this.value)"
+																		   name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
 																</div>
 															</div>
 
@@ -578,7 +658,6 @@
 									</div>
 								</div>
 							</div>
-
 
 							<div class="panel-group">	
 								<div class="panel panel-primary">
@@ -713,8 +792,7 @@
 									</div>
 								</div>
 							</div>
-
-
+							<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 5 ) { ?>
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 
@@ -919,8 +997,8 @@
 									</div>
 								</div>
 							</div>
-							
-
+							<?php } ?>
+							<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 5 ) { ?>
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 
@@ -1042,7 +1120,7 @@
 									</div>
 								</div>
 							</div>
-
+							<?php } ?>
 							<!--
 							<div class="form-group">
 								<div class="row">
