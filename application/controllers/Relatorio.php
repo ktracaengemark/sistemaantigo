@@ -253,7 +253,7 @@ class Relatorio extends CI_Controller {
 			'PR.DataPagoRecebiveis' => 'Data do Pagam.',
 			'PR.QuitadoRecebiveis' => 'Quit.Parc.',
 			'C.NomeCliente' => 'Nome do Cliente',
-			'A.NomeEmpresa' => 'Nome da Empresa',
+			'A.NomeEmpresa' => 'Nome da idSis_Empresa',
 			'TR.TipoReceita' => 'Tipo de Receita',
 			'OT.Modalidade' => 'Modalidade',
             'OT.idApp_OrcaTrata' => 'Número do Orçamento',
@@ -2651,7 +2651,7 @@ class Relatorio extends CI_Controller {
 
 
 		$data['select']['Campo'] = array(
-            'C.NomeEmpresa' => 'Empresa',
+            'C.NomeEmpresa' => 'idSis_Empresa',
             'C.Email' => 'E-mail',
         );
 
@@ -2839,8 +2839,8 @@ class Relatorio extends CI_Controller {
 
 
         $data['select']['Campo'] = array(
-            'E.idSis_Empresa' => 'nº Empresa',
-			'E.NomeEmpresa' => 'Nome da Empresa',
+            'E.idSis_Empresa' => 'nº idSis_Empresa',
+			'E.NomeEmpresa' => 'Nome da idSis_Empresa',
             'E.Bairro' => 'Bairro',
             'E.Municipio' => 'Município',
             'E.Email' => 'E-mail',
@@ -2902,7 +2902,7 @@ class Relatorio extends CI_Controller {
 
 
         $data['select']['Campo'] = array(
-            'E.idSis_Empresa' => 'nº Empresa',
+            'E.idSis_Empresa' => 'nº idSis_Empresa',
 			'E.NomeEmpresa' => 'Nome do Fornecedor',
 			'E.Atividade' => 'Atividade',
             #'E.DataNascimento' => 'Data de Nascimento',
@@ -2910,7 +2910,7 @@ class Relatorio extends CI_Controller {
             'E.Bairro' => 'Bairro',
             'E.Municipio' => 'Município',
             'E.Email' => 'E-mail',
-			'CE.NomeContato' => 'Contato da Empresa',
+			'CE.NomeContato' => 'Contato da idSis_Empresa',
 			'TCE.RelaCom' => 'Relação',
 			'CE.Sexo' => 'Sexo',
 
@@ -3621,7 +3621,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Campo'] = array(
 			'C.DataProcedimento' => 'Data',
 			'C.ConcluidoProcedimento' => 'Concl.',
-            'C.idApp_ProcedimentoCli' => 'id',
+            'C.idApp_Procedimento' => 'id',
         );
 
         $data['select']['Ordenamento'] = array(

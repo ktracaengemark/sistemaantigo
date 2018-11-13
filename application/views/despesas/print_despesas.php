@@ -7,7 +7,7 @@
 		<div class="col-md-12">
 
 			<div class="panel-heading text-center">
-				<h2><?php echo '<strong>' . $_SESSION['Despesas']['NomeEmpresa'] . '</strong> - <strong>DEVOLUÇÃO</strong> - <strong>Nº: ' . $_SESSION['Despesas']['idApp_Despesas'] . '</strong>' ?></h2>
+				<h2><?php echo '<strong>' . $_SESSION['Despesas']['NomeidSis_Empresa'] . '</strong> - <strong>DEVOLUÇÃO</strong> - <strong>Nº: ' . $_SESSION['Despesas']['idApp_Despesas'] . '</strong>' ?></h2>
 			</div>
 
 			<div class="panel-body">				

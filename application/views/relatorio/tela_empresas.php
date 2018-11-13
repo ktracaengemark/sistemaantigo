@@ -77,11 +77,6 @@
 										<span class="glyphicon glyphicon-search"></span> Pesquisar
 									</button>
 								</div>
-								<div class="col-md-6 text-right">											
-									<a class="btn btn-lg btn-danger" href="<?php echo base_url() ?>empresa/cadastrar" role="button"> 
-										<span class="glyphicon glyphicon-plus"></span> Nova Empresa
-									</a>
-								</div>
 							</div>
 						</div>
 					</div>

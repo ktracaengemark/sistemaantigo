@@ -66,7 +66,7 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN App_ParcelasRecebiveis AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 
             WHERE
-                C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
                 ' . $filtro1 . '
@@ -379,7 +379,7 @@ class Relatorio_model extends CI_Model {
                 App_OrcaTrata AS OT
                     LEFT JOIN App_ParcelasRecebiveis AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
             WHERE
-                C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
 				(' . $consulta2 . ') AND
@@ -527,7 +527,7 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN App_ParcelasPagaveis AS PP ON DS.idApp_Despesas = PP.idApp_Despesas
                     LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = DS.TipoDespesa
             WHERE
-                DS.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $filtro2 . '
 				' . $filtro4 . '
@@ -666,7 +666,7 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN App_ParcelasPagaveis AS PP ON DS.idApp_Despesas = PP.idApp_Despesas
                     LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = DS.TipoDespesa
             WHERE
-                DS.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $filtro2 . '
 				' . $filtro4 . '
@@ -805,7 +805,7 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN App_ParcelasPagaveis AS PP ON DS.idApp_Despesas = PP.idApp_Despesas
                     LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = DS.TipoDespesa
             WHERE
-                DS.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $filtro2 . '
 				' . $filtro4 . '
@@ -944,7 +944,7 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN App_ParcelasPagaveis AS PP ON DS.idApp_Despesas = PP.idApp_Despesas
                     LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = DS.TipoDespesa
             WHERE
-                DS.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $filtro2 . '
 				' . $filtro4 . '
@@ -1044,7 +1044,7 @@ class Relatorio_model extends CI_Model {
                 App_OrcaTrata AS OT
                     LEFT JOIN App_ParcelasRecebiveis AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
             WHERE
-                C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 C.idApp_Cliente = OT.idApp_Cliente AND
 				OT.TipoRD = "R" AND
@@ -1074,7 +1074,7 @@ class Relatorio_model extends CI_Model {
                 App_OrcaTrata AS OT
                     LEFT JOIN App_ParcelasRecebiveis AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
             WHERE
-                C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 C.idApp_Cliente = OT.idApp_Cliente AND
 				OT.TipoRD = "D" AND
@@ -1104,7 +1104,7 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN App_ParcelasPagaveis AS PP ON DS.idApp_Despesas = PP.idApp_Despesas
                     LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = DS.TipoDespesa
             WHERE
-                DS.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (DS.TipoProduto = "D") AND
             	YEAR(PP.DataPagoPagaveis) = ' . $data['Ano']
@@ -1182,7 +1182,7 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
-                TP.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
                 ' . $data['Produtos'] . '
                 ' . $data['Prodaux1'] . '
@@ -1205,7 +1205,7 @@ class Relatorio_model extends CI_Model {
                 Tab_Produtos AS TP
                     LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
             WHERE
-                TP.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
                 ' . $data['Prodaux1'] . '
             ORDER BY
@@ -1225,7 +1225,7 @@ class Relatorio_model extends CI_Model {
                 Tab_Produtos AS TP
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
             WHERE
-                TP.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
                 ' . $data['Prodaux2'] . '
             ORDER BY
@@ -1245,7 +1245,7 @@ class Relatorio_model extends CI_Model {
                 Tab_Produtos AS TP
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
-                TP.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
                 ' . $data['Prodaux3'] . '
             ORDER BY
@@ -1276,7 +1276,7 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
-                TCO.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['Produtos'] . ' AND
@@ -1316,7 +1316,7 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
-                C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
                 APV.idApp_ProdutoVenda != "0" AND
@@ -1357,7 +1357,7 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
-                C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
                 APV.idApp_ProdutoVenda != "0" AND
@@ -1395,7 +1395,7 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
-                TCO.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['Produtos'] . ' AND
@@ -1433,7 +1433,7 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
-                TCO.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
                 TCO.TipoProduto = "C"
@@ -1580,7 +1580,7 @@ exit();*/
                 App_Cliente AS TC
 				LEFT JOIN App_OrcaTrata AS TOT ON TOT.idApp_Cliente = TC.idApp_Cliente
             WHERE
-                TC.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TC.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TC.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
                 ' . $data['NomeCliente'] . '
             ORDER BY
@@ -1608,7 +1608,7 @@ exit();*/
                     LEFT JOIN App_Cliente AS TC ON TC.idApp_Cliente = TOT.idApp_Cliente
 
             WHERE
-                TOT.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TOT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TOT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['NomeCliente'] . ' AND
@@ -1642,7 +1642,7 @@ exit();*/
                     LEFT JOIN App_Cliente AS TC ON TC.idApp_Cliente = TOT.idApp_Cliente
 
             WHERE
-                TOT.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TOT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TOT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['NomeCliente'] . ' AND
@@ -1677,7 +1677,7 @@ exit();*/
 					LEFT JOIN App_ParcelasRecebiveis AS TPR ON TPR.idApp_OrcaTrata = TOT.idApp_OrcaTrata
 
             WHERE
-                TOT.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TOT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TOT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['NomeCliente'] . ' AND
@@ -1711,7 +1711,7 @@ exit();*/
                     LEFT JOIN App_Cliente AS TC ON TC.idApp_Cliente = TOT.idApp_Cliente
 
             WHERE
-                TOT.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TOT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TOT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['NomeCliente'] . ' AND
@@ -1843,7 +1843,7 @@ exit();*/
                 TP2.idTab_Prodaux2 = TP.Prodaux2 AND
                 TP3.idTab_Prodaux3 = TP.Prodaux3 AND
 
-            	TP.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+            	TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
             	TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				' . $data['Produtos'] . '
 				' . $data['Prodaux1'] . '
@@ -1874,7 +1874,7 @@ exit();*/
             		LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
             		LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = APC.idTab_Produto
             WHERE
-                TCO.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['Produtos'] . ' AND
@@ -1911,7 +1911,7 @@ exit();*/
             		LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Produto
             		LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = TVV.idTab_Produtos
             WHERE
-                C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
             	APV.idApp_ProdutoVenda != "0" AND
@@ -1949,7 +1949,7 @@ exit();*/
             		LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Produto
             		LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = TVV.idTab_Produtos
             WHERE
-                C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
             	APV.idApp_ProdutoVenda != "0" AND
@@ -1984,7 +1984,7 @@ exit();*/
             		LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
             		LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = APC.idTab_Produto
             WHERE
-                TCO.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['Produtos'] . ' AND
@@ -2017,7 +2017,7 @@ exit();*/
             		LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
             		LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = APC.idTab_Produto
             WHERE
-                TCO.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
                 TCO.TipoProduto = "C"
@@ -2132,7 +2132,7 @@ exit();*/
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPV.Prodaux2
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TPV.Prodaux1
 		   WHERE
-                C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				(' . $consulta . ') AND
 				' . $filtro1 . '
@@ -2232,7 +2232,7 @@ exit();*/
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TPV.Prodaux1
 					LEFT JOIN Tab_TipoDevolucao AS TD ON TD.idTab_TipoDevolucao = OT.TipoDevolucao
 		   WHERE
-                C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				(' . $consulta . ') AND
 				APV.idApp_ProdutoVenda != "0" AND
@@ -2371,7 +2371,7 @@ exit();*/
 					LEFT JOIN Sis_Usuario AS TSU ON TSU.idSis_Usuario = PV.idSis_Usuario
 					LEFT JOIN App_Profissional AS P ON P.idApp_Profissional = OT.ProfissionalOrca
             WHERE
-                C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				(' . $consulta . ') AND
 				PV.idApp_ServicoVenda != "0" AND
@@ -2439,7 +2439,7 @@ exit();*/
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPB.Prodaux2
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TPB.Prodaux1
             WHERE
-                TCO.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				(' . $consulta . ')
 				' . $data['TipoDespesa'] . '
@@ -2506,7 +2506,7 @@ exit();*/
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPB.Prodaux2
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TPB.Prodaux1
             WHERE
-                TCO.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				(' . $consulta . ')
 				' . $data['TipoDespesa'] . '
@@ -2591,7 +2591,7 @@ exit();*/
 					LEFT JOIN App_OrcaTrata AS TR ON TR.idApp_OrcaTrata = TCO.idApp_OrcaTrata
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = TR.idApp_Cliente
             WHERE
-                TCO.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				' . $data['NomeCliente'] . ' AND
 				(' . $consulta . ')
@@ -2705,7 +2705,7 @@ exit();*/
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 
             WHERE
-				C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
 				(' . $consulta2 . ') AND
@@ -2847,7 +2847,7 @@ exit();*/
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 				LEFT JOIN Tab_TipoDevolucao AS TD ON TD.idTab_TipoDevolucao = OT.TipoDevolucao
             WHERE
-				C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
 				(' . $consulta2 . ') AND
@@ -2977,7 +2977,7 @@ exit();*/
 				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = TR.idApp_Cliente
 
             WHERE
-				OT.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
                 ' . $data['NomeCliente'] . ' AND
 				' . $consulta . ' AND
@@ -3112,7 +3112,7 @@ exit();*/
 				LEFT JOIN Tab_Categoriadesp AS CD ON CD.idTab_Categoriadesp = TD.Categoriadesp
 
             WHERE
-				OT.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
                 ' . $data['NomeCliente'] . ' AND
 				' . $consulta . ' AND
@@ -3208,7 +3208,7 @@ exit();*/
                 D.DataDesp,
                 D.ValorTotalDesp,
 				FP.FormaPag,
-				E.NomeEmpresa AS Empresa,
+				E.NomeEmpresa AS idSis_Empresa,
 				OT.idApp_OrcaTrata,
                 OT.DataOrca,
 				OT.ValorOrca
@@ -3218,7 +3218,7 @@ exit();*/
 				App_Despesa AS D
                     LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = D.TipoDespesa
                     LEFT JOIN Tab_FormaPag    AS FP ON FP.idTab_FormaPag    = D.FormaPag
-                    LEFT JOIN Sis_Empresa     AS E  ON E.idSis_Empresa      = D.Empresa
+                    LEFT JOIN Sis_Empresa     AS E  ON E.idSis_Empresa      = D.idSis_Empresa
 
             WHERE
 
@@ -3299,7 +3299,7 @@ exit();*/
 					LEFT JOIN Tab_RelaCom AS TCC ON TCC.idTab_RelaCom = CC.RelaCom
 					LEFT JOIN Tab_RelaPes AS TCP ON TCP.idTab_RelaPes = CC.RelaPes
             WHERE
-				C.Empresa = ' . $_SESSION['log']['id'] . ' AND
+				C.idSis_Empresa = ' . $_SESSION['log']['id'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				' . $data['NomeCliente'] . '
 				OR
@@ -3375,7 +3375,7 @@ exit();*/
             WHERE
                 ' . $q . '
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				C.idSIs_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
 				' . $data['NomeCliente'] . '
 
             ORDER BY
@@ -3492,7 +3492,7 @@ exit();*/
 				C.Nome,
                 C.Celular,
                 C.Email,
-				C.UsuarioEmpresaFilial,
+				C.UsuarioidSis_EmpresaFilial,
 				SN.StatusSN,
 				C.Inativo
             FROM
@@ -3618,7 +3618,7 @@ exit();*/
 					LEFT JOIN Tab_Funcao AS FU ON FU.idTab_Funcao = F.Funcao
 					LEFT JOIN Sis_Permissao AS PE ON PE.idSis_Permissao = F.Permissao
             WHERE
-				F.Empresa = ' . $_SESSION['log']['id'] . ' AND
+				F.idSis_Empresa = ' . $_SESSION['log']['id'] . ' AND
 				F.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
                 ' . $data['Nome'] . '
             ORDER BY
@@ -3669,7 +3669,9 @@ exit();*/
 
             WHERE
 				E.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
-				' . $data['NomeEmpresa'] . '
+				' . $data['NomeEmpresa'] . ' AND
+				E.idSis_Empresa != "1" AND
+				E.idSis_Empresa != "5" 
 			ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');
@@ -3808,7 +3810,7 @@ exit();*/
 					LEFT JOIN Tab_StatusSN AS TS ON TS.Abrev = E.VendaFornec
 					LEFT JOIN App_Atividade AS TA ON TA.idApp_Atividade = E.Atividade
             WHERE
-                E.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                E.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				E.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				' . $data['NomeFornecedor'] . '
 			ORDER BY
@@ -3887,7 +3889,7 @@ exit();*/
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
-                TP.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				' . $data['Produtos'] . '
 				' . $data['Prodaux1'] . '
@@ -3945,7 +3947,7 @@ exit();*/
 					LEFT JOIN Tab_Convenio AS TC ON TC.idTab_Convenio = TV.Convenio
 					LEFT JOIN App_Fornecedor AS TF ON TF.idApp_Fornecedor = TP.Fornecedor
             WHERE
-                TP.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				' . $data['Servicos'] . '
 			ORDER BY
@@ -4015,10 +4017,10 @@ exit();*/
                 App_OrcaTrata AS OT
 					LEFT JOIN App_ProdutoVenda AS PD ON OT.idApp_OrcaTrata = PD.idApp_OrcaTrata
 					LEFT JOIN Tab_Produto AS TPD ON TPD.idTab_Produto = PD.idTab_Produto
-					LEFT JOIN App_ProcedimentoCli AS PC ON OT.idApp_OrcaTrata = PC.idApp_OrcaTrata
+					LEFT JOIN App_Procedimento AS PC ON OT.idApp_OrcaTrata = PC.idApp_OrcaTrata
 					LEFT JOIN App_Profissional AS PR ON PR.idApp_Profissional = PC.Profissional
 			WHERE
-                C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
                 ' . $filtro1 . '
@@ -4111,7 +4113,7 @@ exit();*/
                 App_Tarefa AS TF
 					LEFT JOIN App_Profissional AS P ON P.idApp_Profissional = TF.ProfissionalTarefa
             WHERE
-                TF.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                TF.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TF.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
 				TF.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $filtro5 . '
@@ -4160,12 +4162,12 @@ exit();*/
         
 		$query = $this->db->query('
             SELECT
-				C.idApp_ProcedimentoCli,
+				C.idApp_Procedimento,
                 C.Procedimento,
 				C.DataProcedimento,
 				C.ConcluidoProcedimento
             FROM
-				App_ProcedimentoCli AS C
+				App_Procedimento AS C
             WHERE
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -4229,9 +4231,9 @@ exit();*/
 				App_OrcaTrata AS OT
 				LEFT JOIN App_ProdutoVenda AS PD ON OT.idApp_OrcaTrata = PD.idApp_OrcaTrata
 				LEFT JOIN Tab_Produto AS TPD ON TPD.idTab_Produto = PD.idTab_Produto
-				LEFT JOIN App_ProcedimentoCli AS PC ON OT.idApp_OrcaTrata = PC.idApp_OrcaTrata
+				LEFT JOIN App_Procedimento AS PC ON OT.idApp_OrcaTrata = PC.idApp_OrcaTrata
             WHERE
-                C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idApp_Cliente = OT.idApp_Cliente
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
@@ -4310,11 +4312,11 @@ exit();*/
                 App_OrcaTrata AS OT
 					LEFT JOIN App_ServicoVenda AS SV ON OT.idApp_OrcaTrata = SV.idApp_OrcaTrata
 					LEFT JOIN Tab_Servico AS TSV ON TSV.idTab_Servico = SV.idTab_Servico
-					LEFT JOIN App_ProcedimentoCli AS PC ON OT.idApp_OrcaTrata = PC.idApp_OrcaTrata
+					LEFT JOIN App_Procedimento AS PC ON OT.idApp_OrcaTrata = PC.idApp_OrcaTrata
 					LEFT JOIN App_Profissional AS PR ON PR.idApp_Profissional = PC.Profissional
 
 			WHERE
-                C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
                 ' . $filtro1 . '
@@ -4450,8 +4452,9 @@ exit();*/
             FROM
                 Sis_Empresa
             WHERE
-                
-				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				idSis_Empresa != "1" AND
+				idSis_Empresa != "5"
             ORDER BY
                 NomeEmpresa ASC
         ');
@@ -4474,7 +4477,7 @@ exit();*/
             FROM
                 App_Fornecedor
             WHERE
-                Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 NomeFornecedor ASC
@@ -4594,7 +4597,7 @@ exit();*/
             FROM
                 Tab_Convenio AS P
             WHERE
-                P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 Convenio ASC
@@ -4618,7 +4621,7 @@ exit();*/
             FROM
                 Tab_FormaPag AS P
             WHERE
-                P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 FormaPag ASC
@@ -4712,7 +4715,7 @@ exit();*/
 				Tab_TipoDespesa AS TD
 					LEFT JOIN Tab_Categoriadesp AS CD ON CD.idTab_Categoriadesp = TD.Categoriadesp
 			WHERE
-				TD.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+				TD.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 			ORDER BY
 				CD.Abrevcategoriadesp,
@@ -4758,7 +4761,7 @@ exit();*/
             FROM
                 Tab_TipoConsumo AS TD
 			WHERE
-				TD.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+				TD.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 TipoConsumo ASC
@@ -4836,7 +4839,7 @@ exit();*/
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = OB.Prodaux2
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = OB.Prodaux3
             WHERE
-                OB.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                OB.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OB.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 OB.CodProd,
@@ -4864,7 +4867,7 @@ exit();*/
             FROM
                 Tab_Prodaux1 AS P
             WHERE
-                P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 Prodaux1 ASC
@@ -4888,7 +4891,7 @@ exit();*/
             FROM
                 Tab_Prodaux2 AS P
             WHERE
-                P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 Prodaux2 ASC
@@ -4912,7 +4915,7 @@ exit();*/
             FROM
                 Tab_Prodaux3 AS P
             WHERE
-                P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 Prodaux3 ASC
@@ -4938,7 +4941,7 @@ exit();*/
                 App_OrcaTrata AS P
 				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
             WHERE
-                P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 idApp_OrcaTrata ASC
@@ -4962,7 +4965,7 @@ exit();*/
             FROM
                 App_Servicos AS OB
             WHERE
-                OB.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+                OB.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OB.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 Servicos ASC

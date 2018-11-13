@@ -22,8 +22,8 @@ $query = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario
 #$query2 = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'C.idApp_Cliente = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;
 																				
 $permissao = ($_SESSION['log']['Permissao'] <= 2 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-$permissao1 = (($_SESSION['log']['idSis_Empresa'] == 5) || ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] >= 3)) ? 'R.CpfCliente = ' . $_SESSION['log']['CpfUsuario'] . '  ' : FALSE;
-$permissao2 = (($_SESSION['log']['idSis_Empresa'] == 5) || ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] >= 3)) ? 'U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' AND ' : FALSE;																																			
+$permissao1 = (($_SESSION['log']['idSis_Empresa'] == 5) || ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] >= 3)) ? 'R.CpfCliente = ' . $_SESSION['log']['CpfUsuario'] . ' OR ' : FALSE;
+$permissao2 = (($_SESSION['log']['idSis_Empresa'] == 5) || ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] >= 3)) ? 'U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' OR ' : FALSE;																																			
 
 $result = mysql_query(
         'SELECT
@@ -65,9 +65,12 @@ $result = mysql_query(
         WHERE
 			C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 			' . $query . ' 
-			' . $permissao2 . '
 			
-			A.idApp_Agenda = C.idApp_Agenda 
+			
+			' . $permissao1 . '
+			A.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+			A.idApp_Agenda = C.idApp_Agenda AND
+			C.idApp_Cliente = R.idApp_Cliente
 		ORDER BY 
 			C.DataInicio ASC'
 );

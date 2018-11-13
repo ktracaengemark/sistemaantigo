@@ -13,7 +13,7 @@ class Despesas extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Servico_model', 'Produto_model', 'Produtos_model', 'ServicoBase_model', 'ProdutoBase_model', 'Produtocompra_model', 'Servicocompra_model', 'Despesas_model', 'Tipodespesa_model', 'Profissional_model', 'Formapag_model', 'Cliente_model'));
+        $this->load->model(array('Basico_model', 'Servico_model', 'Produto_model', 'Produtos_model', 'Despesas_model', 'Tipodespesa_model', 'Formapag_model', 'Cliente_model'));
         $this->load->driver('session');
 
         #load header view
@@ -38,7 +38,7 @@ class Despesas extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-    public function cadastrar($idApp_Cliente = NULL) {
+    public function cadastrar() {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -50,8 +50,8 @@ class Despesas extends CI_Controller {
         $data['despesas'] = quotes_to_entities($this->input->post(array(
             #### App_Despesas ####
             'idApp_Despesas',
-			'idApp_Cliente',
-			'idApp_OrcaTrata',
+			#'idApp_Cliente',
+			#'idApp_OrcaTrata',
             'Despesa',			
             'DataDespesas',
 			'TipoDespesa',
@@ -71,6 +71,8 @@ class Despesas extends CI_Controller {
             'DataVencimentoDespesas',
             'ObsDespesas',
 			'TipoProduto',
+			'ModalidadeDespesas',
+			#'AVAPDespesas',
         ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -82,7 +84,7 @@ class Despesas extends CI_Controller {
 
         //Data de hoje como default
         (!$data['despesas']['DataDespesas']) ? $data['despesas']['DataDespesas'] = date('d/m/Y', time()) : FALSE;
-		(!$data['despesas']['DataConclusaoDespesas']) ? $data['despesas']['DataConclusaoDespesas'] = date('d/m/Y', time()) : FALSE;
+		#(!$data['despesas']['DataConclusaoDespesas']) ? $data['despesas']['DataConclusaoDespesas'] = date('d/m/Y', time()) : FALSE;
 		(!$data['despesas']['DataVencimentoDespesas']) ? $data['despesas']['DataVencimentoDespesas'] = date('d/m/Y', time()) : FALSE;
 		(!$data['despesas']['TipoProduto']) ? $data['despesas']['TipoProduto'] = 'D' : FALSE;
 		(!$data['despesas']['QtdParcelasDespesas']) ? $data['despesas']['QtdParcelasDespesas'] = '1' : FALSE;
@@ -145,22 +147,25 @@ class Despesas extends CI_Controller {
         $this->form_validation->set_rules('DataDespesas', 'Data da Despesa', 'required|trim|valid_date');
         #$this->form_validation->set_rules('Despesa', 'Despesa', 'required|trim');
         #$this->form_validation->set_rules('TipoDespesa', 'Tipo de Despesa', 'required|trim');
-        #$this->form_validation->set_rules('ProfissionalDespesas', 'Profissional', 'required|trim');
+        #$this->form_validation->set_rules('ProfissionalDespesas', 'Profissional', 'required|trim');		
+		#$this->form_validation->set_rules('AVAPDespesas', 'À Vista ou À Prazo', 'required|trim');
+		$this->form_validation->set_rules('ValorRestanteDespesas', 'Valor da Despesa', 'required|trim');
+		$this->form_validation->set_rules('ModalidadeDespesas', 'Tipo de Pagamento', 'required|trim');
 		$this->form_validation->set_rules('FormaPagamentoDespesas', 'Forma de Pagamento', 'required|trim');
 		$this->form_validation->set_rules('QtdParcelasDespesas', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoDespesas', 'Data do 1ºVenc.', 'required|trim|valid_date');
+		
 		$data['select']['TipoDespesa'] = $this->Tipodespesa_model->select_tipodespesa();
         $data['select']['AprovadoDespesas'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamentoDespesas'] = $this->Formapag_model->select_formapag();
 		$data['select']['ServicoConcluidoDespesas'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
-
+		$data['select']['ModalidadeDespesas'] = $this->Basico_model->select_modalidade();
 		$data['select']['QuitadoDespesas'] = $this->Basico_model->select_status_sn();
         $data['select']['QuitadoPagaveis'] = $this->Basico_model->select_status_sn();
-		$data['select']['Profissional'] = $this->Profissional_model->select_profissional();
-		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
-		$data['select']['idApp_OrcaTrata'] = $this->Basico_model->select_orcatrata();
-		$data['select']['Servico'] = $this->Servico_model->select_servico();
+		#$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
+		#$data['select']['idApp_OrcaTrata'] = $this->Basico_model->select_orcatrata();
+		#$data['select']['Servico'] = $this->Servico_model->select_servico();
         $data['select']['Produto'] = $this->Produtos_model->select_produtos();		
 		#$data['select']['Servico'] = $this->ServicoBase_model->select_servicobase();
         #$data['select']['Produto'] = $this->ProdutoBase_model->select_produtobase();
@@ -186,26 +191,28 @@ class Despesas extends CI_Controller {
 
       
 
+        (!$data['despesas']['ModalidadeDespesas']) ? $data['despesas']['ModalidadeDespesas'] = 'P' : FALSE;
 
         #Ver uma solução melhor para este campo
+			
         (!$data['despesas']['AprovadoDespesas']) ? $data['despesas']['AprovadoDespesas'] = 'S' : FALSE;
-
+		
+/*
         $data['radio'] = array(
             'AprovadoDespesas' => $this->basico->radio_checked($data['despesas']['AprovadoDespesas'], 'Despesa Quitada', 'NS'),
         );
-
+*/
         ($data['despesas']['AprovadoDespesas'] == 'S') ?
             $data['div']['AprovadoDespesas'] = '' : $data['div']['AprovadoDespesas'] = 'style="display: none;"';
 			
 			
 		(!$data['despesas']['QuitadoDespesas']) ? $data['despesas']['QuitadoDespesas'] = 'N' : FALSE;
-
         $data['radio'] = array(
             'QuitadoDespesas' => $this->basico->radio_checked($data['despesas']['QuitadoDespesas'], 'Despesa Quitada', 'NS'),
         );
-
         ($data['despesas']['QuitadoDespesas'] == 'S') ?
             $data['div']['QuitadoDespesas'] = '' : $data['div']['QuitadoDespesas'] = 'style="display: none;"';
+
 
 
         $data['sidebar'] = 'col-sm-3 col-md-2';
@@ -235,7 +242,7 @@ class Despesas extends CI_Controller {
             $data['despesas']['DataDespesas'] = $this->basico->mascara_data($data['despesas']['DataDespesas'], 'mysql');
 			$data['despesas']['Despesa'] = $data['despesas']['Despesa'];
 			$data['despesas']['TipoDespesa'] = $data['despesas']['TipoDespesa'];
-			$data['despesas']['idApp_OrcaTrata'] = $data['despesas']['idApp_OrcaTrata'];
+			#$data['despesas']['idApp_OrcaTrata'] = $data['despesas']['idApp_OrcaTrata'];
 			$data['despesas']['DataConclusaoDespesas'] = $this->basico->mascara_data($data['despesas']['DataConclusaoDespesas'], 'mysql');
             $data['despesas']['DataRetornoDespesas'] = $this->basico->mascara_data($data['despesas']['DataRetornoDespesas'], 'mysql');
             $data['despesas']['DataQuitadoDespesas'] = $this->basico->mascara_data($data['despesas']['DataQuitadoDespesas'], 'mysql');
@@ -245,7 +252,7 @@ class Despesas extends CI_Controller {
             $data['despesas']['DataEntradaDespesas'] = $this->basico->mascara_data($data['despesas']['DataEntradaDespesas'], 'mysql');
             $data['despesas']['ValorRestanteDespesas'] = str_replace(',', '.', str_replace('.', '', $data['despesas']['ValorRestanteDespesas']));
 			$data['despesas']['TipoProduto'] = $data['despesas']['TipoProduto'];
-			$data['despesas']['Empresa'] = $_SESSION['log']['Empresa'];
+			$data['despesas']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['despesas']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['despesas']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
             $data['despesas']['idApp_Despesas'] = $this->Despesas_model->set_despesas($data['despesas']);
@@ -263,7 +270,8 @@ class Despesas extends CI_Controller {
                 $max = count($data['servico']);
                 for($j=1;$j<=$max;$j++) {
                     $data['servico'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
-                    $data['servico'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['servico'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+					$data['servico'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['servico'][$j]['idApp_Despesas'] = $data['despesas']['idApp_Despesas'];
 
                     $data['servico'][$j]['ValorCompraServico'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorCompraServico']));
@@ -277,7 +285,8 @@ class Despesas extends CI_Controller {
                 $max = count($data['produto']);
                 for($j=1;$j<=$max;$j++) {
                     $data['produto'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
-                    $data['produto'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['produto'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+					$data['produto'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['produto'][$j]['idApp_Despesas'] = $data['despesas']['idApp_Despesas'];
 					$data['produto'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['produto'][$j]['DataValidadeProduto'], 'mysql');
                     $data['produto'][$j]['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produto'][$j]['ValorCompraProduto']));
@@ -291,7 +300,8 @@ class Despesas extends CI_Controller {
                 $max = count($data['parcelaspag']);
                 for($j=1;$j<=$max;$j++) {
                     $data['parcelaspag'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
-                    $data['parcelaspag'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['parcelaspag'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+					$data['parcelaspag'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['parcelaspag'][$j]['idApp_Despesas'] = $data['despesas']['idApp_Despesas'];
                     $data['parcelaspag'][$j]['ValorParcelaPagaveis'] = str_replace(',', '.', str_replace('.', '', $data['parcelaspag'][$j]['ValorParcelaPagaveis']));
                     $data['parcelaspag'][$j]['DataVencimentoPagaveis'] = $this->basico->mascara_data($data['parcelaspag'][$j]['DataVencimentoPagaveis'], 'mysql');
@@ -324,8 +334,8 @@ class Despesas extends CI_Controller {
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Despesas', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
-                redirect(base_url() . 'relatorio/despesas/'  . $data['msg']);
-				
+                #redirect(base_url() . 'relatorio/despesas/'  . $data['msg']);
+				redirect(base_url() . 'relatorio/despesaspag/'  . $data['msg']);
                 exit();
             }
         }
@@ -346,8 +356,8 @@ class Despesas extends CI_Controller {
         $data['despesas'] = quotes_to_entities($this->input->post(array(
             #### App_Despesas ####
             'idApp_Despesas',
-            'idApp_Cliente',
-			'idApp_OrcaTrata',
+            #'idApp_Cliente',
+			#'idApp_OrcaTrata',
             'DataDespesas',
 			'Despesa',
 			'TipoDespesa',
@@ -366,6 +376,7 @@ class Despesas extends CI_Controller {
             'QtdParcelasDespesas',
             'DataVencimentoDespesas',
             'ObsDespesas',
+			#'AVAPDespesas',
 			#'TipoProduto',
         ), TRUE));
 
@@ -374,7 +385,8 @@ class Despesas extends CI_Controller {
 
         (!$this->input->post('SCount')) ? $data['count']['SCount'] = 0 : $data['count']['SCount'] = $this->input->post('SCount');
         (!$this->input->post('PCount')) ? $data['count']['PCount'] = 0 : $data['count']['PCount'] = $this->input->post('PCount');
-
+		(!$this->input->post('PRCount')) ? $data['count']['PRCount'] = 0 : $data['count']['PRCount'] = $this->input->post('PRCount');
+		
 		#(!$data['despesas']['TipoProduto']) ? $data['despesas']['TipoProduto'] = 'D' : FALSE;
 		
         $j = 1;
@@ -412,23 +424,26 @@ class Despesas extends CI_Controller {
         }
         $data['count']['PCount'] = $j - 1;
       
+        $j = 1;
+        for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
 
-        if ($data['despesas']['QtdParcelasDespesas'] > 0) {
-
-            for ($i = 1; $i <= $data['despesas']['QtdParcelasDespesas']; $i++) {
-
-                $data['parcelaspag'][$i]['idApp_ParcelasPagaveis'] = $this->input->post('idApp_ParcelasPagaveis' . $i);
-                $data['parcelaspag'][$i]['ParcelaPagaveis'] = $this->input->post('ParcelaPagaveis' . $i);
-                $data['parcelaspag'][$i]['ValorParcelaPagaveis'] = $this->input->post('ValorParcelaPagaveis' . $i);
-                $data['parcelaspag'][$i]['DataVencimentoPagaveis'] = $this->input->post('DataVencimentoPagaveis' . $i);
-                $data['parcelaspag'][$i]['ValorPagoPagaveis'] = $this->input->post('ValorPagoPagaveis' . $i);
-                $data['parcelaspag'][$i]['DataPagoPagaveis'] = $this->input->post('DataPagoPagaveis' . $i);
-                $data['parcelaspag'][$i]['QuitadoPagaveis'] = $this->input->post('QuitadoPagaveis' . $i);
-
+            if ($this->input->post('ParcelaPagaveis' . $i) || $this->input->post('ValorParcelaPagaveis' . $i) || 
+					$this->input->post('DataVencimentoPagaveis' . $i) || $this->input->post('ValorPagoPagaveis' . $i) || 
+					$this->input->post('DataPagoPagaveis' . $i) || $this->input->post('QuitadoPagaveis' . $i)) {
+                $data['parcelaspag'][$j]['idApp_ParcelasPagaveis'] = $this->input->post('idApp_ParcelasPagaveis' . $i);
+                $data['parcelaspag'][$j]['ParcelaPagaveis'] = $this->input->post('ParcelaPagaveis' . $i);
+                $data['parcelaspag'][$j]['ValorParcelaPagaveis'] = $this->input->post('ValorParcelaPagaveis' . $i);
+                $data['parcelaspag'][$j]['DataVencimentoPagaveis'] = $this->input->post('DataVencimentoPagaveis' . $i);
+                $data['parcelaspag'][$j]['ValorPagoPagaveis'] = $this->input->post('ValorPagoPagaveis' . $i);
+                $data['parcelaspag'][$j]['DataPagoPagaveis'] = $this->input->post('DataPagoPagaveis' . $i);
+                $data['parcelaspag'][$j]['QuitadoPagaveis'] = $this->input->post('QuitadoPagaveis' . $i);
+				$j++;
+				
             }
 
         }
-
+		$data['count']['PRCount'] = $j - 1;
+		
         //Fim do trecho de código que dá pra melhorar
 
         if ($id) {
@@ -481,10 +496,11 @@ class Despesas extends CI_Controller {
             $data['parcelaspag'] = $this->Despesas_model->get_parcelaspag($id);
             if (count($data['parcelaspag']) > 0) {
                 $data['parcelaspag'] = array_combine(range(1, count($data['parcelaspag'])), array_values($data['parcelaspag']));
-
+				$data['count']['PRCount'] = count($data['parcelaspag']);
+				
                 if (isset($data['parcelaspag'])) {
 
-                    for($j=1; $j <= $data['despesas']['QtdParcelasDespesas']; $j++) {
+                    for($j=1; $j <= $data['count']['PRCount']; $j++) {
                         $data['parcelaspag'][$j]['DataVencimentoPagaveis'] = $this->basico->mascara_data($data['parcelaspag'][$j]['DataVencimentoPagaveis'], 'barras');
                         $data['parcelaspag'][$j]['DataPagoPagaveis'] = $this->basico->mascara_data($data['parcelaspag'][$j]['DataPagoPagaveis'], 'barras');
                     }
@@ -501,6 +517,7 @@ class Despesas extends CI_Controller {
         #$this->form_validation->set_rules('Despesa', 'Despesa', 'required|trim');
         #$this->form_validation->set_rules('TipoDespesa', 'Tipo de Despesa', 'required|trim');
         #$this->form_validation->set_rules('ProfissionalDespesas', 'Profissional', 'required|trim');
+		$this->form_validation->set_rules('ValorRestanteDespesas', 'Valor da Despesa', 'required|trim');
 		$this->form_validation->set_rules('FormaPagamentoDespesas', 'Forma de Pagamento', 'required|trim');
 		$this->form_validation->set_rules('QtdParcelasDespesas', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoDespesas', 'Data do 1ºVenc.', 'required|trim|valid_date');
@@ -511,12 +528,13 @@ class Despesas extends CI_Controller {
         $data['select']['ServicoConcluidoDespesas'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
+		$data['select']['ModalidadeDespesas'] = $this->Basico_model->select_modalidade();
+		#$data['select']['AVAPDespesas'] = $this->Basico_model->select_avap();
 		$data['select']['QuitadoDespesas'] = $this->Basico_model->select_status_sn();
         $data['select']['QuitadoPagaveis'] = $this->Basico_model->select_status_sn();
-		$data['select']['Profissional'] = $this->Profissional_model->select_profissional();
-		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
-		$data['select']['idApp_OrcaTrata'] = $this->Basico_model->select_orcatrata();
-		$data['select']['Servico'] = $this->Servico_model->select_servico();
+		#$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
+		#$data['select']['idApp_OrcaTrata'] = $this->Basico_model->select_orcatrata();
+		#$data['select']['Servico'] = $this->Servico_model->select_servico();
         $data['select']['Produto'] = $this->Produtos_model->select_produtos();		
 		#$data['select']['Servico'] = $this->ServicoBase_model->select_servicobase();
         #$data['select']['Produto'] = $this->ProdutoBase_model->select_produtobase();
@@ -535,21 +553,19 @@ class Despesas extends CI_Controller {
             $data['orcamentoin'] = 'in';
         else
             $data['orcamentoin'] = '';
-
+/*
         if ($data['despesas']['FormaPagamentoDespesas'] || $data['despesas']['QtdParcelasDespesas'] || $data['despesas']['DataVencimentoDespesas'])
             $data['parcelasin'] = 'in';
         else
             $data['parcelasin'] = '';
-
-
-
+*/
         #Ver uma solução melhor para este campo
         (!$data['despesas']['AprovadoDespesas']) ? $data['despesas']['AprovadoDespesas'] = 'S' : FALSE;
-
+/*
         $data['radio'] = array(
             'AprovadoDespesas' => $this->basico->radio_checked($data['despesas']['AprovadoDespesas'], 'Despesa Quitada', 'NS'),
         );
-
+*/
         ($data['despesas']['AprovadoDespesas'] == 'S') ?
             $data['div']['AprovadoDespesas'] = '' : $data['div']['AprovadoDespesas'] = 'style="display: none;"';
 			
@@ -563,7 +579,7 @@ class Despesas extends CI_Controller {
         ($data['despesas']['QuitadoDespesas'] == 'S') ?
             $data['div']['QuitadoDespesas'] = '' : $data['div']['QuitadoDespesas'] = 'style="display: none;"';
 
-
+			
         $data['sidebar'] = 'col-sm-3 col-md-2';
         $data['main'] = 'col-sm-7 col-md-8';
 
@@ -582,7 +598,7 @@ class Despesas extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('despesas/form_despesas', $data);
+            $this->load->view('despesas/form_despesasalterar', $data);
         } else {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
@@ -590,7 +606,7 @@ class Despesas extends CI_Controller {
             $data['despesas']['DataDespesas'] = $this->basico->mascara_data($data['despesas']['DataDespesas'], 'mysql');
 			$data['despesas']['Despesa'] = $data['despesas']['Despesa'];
 			$data['despesas']['TipoDespesa'] = $data['despesas']['TipoDespesa'];			
-			$data['despesas']['idApp_OrcaTrata'] = $data['despesas']['idApp_OrcaTrata'];
+			#$data['despesas']['idApp_OrcaTrata'] = $data['despesas']['idApp_OrcaTrata'];
 			$data['despesas']['DataConclusaoDespesas'] = $this->basico->mascara_data($data['despesas']['DataConclusaoDespesas'], 'mysql');
             $data['despesas']['DataRetornoDespesas'] = $this->basico->mascara_data($data['despesas']['DataRetornoDespesas'], 'mysql');
             $data['despesas']['DataQuitadoDespesas'] = $this->basico->mascara_data($data['despesas']['DataQuitadoDespesas'], 'mysql');
@@ -600,7 +616,7 @@ class Despesas extends CI_Controller {
             $data['despesas']['DataEntradaDespesas'] = $this->basico->mascara_data($data['despesas']['DataEntradaDespesas'], 'mysql');
             $data['despesas']['ValorRestanteDespesas'] = str_replace(',', '.', str_replace('.', '', $data['despesas']['ValorRestanteDespesas']));
 			#$data['despesas']['TipoProduto'] = $data['despesas']['TipoProduto'];
-			#$data['despesas']['Empresa'] = $_SESSION['log']['Empresa'];			
+			#$data['despesas']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];			
             $data['despesas']['idSis_Usuario'] = $_SESSION['log']['id'];
             #$data['despesas']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
@@ -629,7 +645,8 @@ class Despesas extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
 
                     $data['update']['servico']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
-                    $data['update']['servico']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['update']['servico']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+					$data['update']['servico']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['servico']['inserir'][$j]['idApp_Despesas'] = $data['despesas']['idApp_Despesas'];
 
                     $data['update']['servico']['inserir'][$j]['ValorCompraServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorCompraServico']));
@@ -667,7 +684,8 @@ class Despesas extends CI_Controller {
                 $max = count($data['update']['produto']['inserir']);
                 for($j=0;$j<$max;$j++) {
                     $data['update']['produto']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
-                    $data['update']['produto']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['update']['produto']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+					$data['update']['produto']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['produto']['inserir'][$j]['idApp_Despesas'] = $data['despesas']['idApp_Despesas'];
 					$data['update']['produto']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['produto']['inserir'][$j]['DataValidadeProduto'], 'mysql');
                     $data['update']['produto']['inserir'][$j]['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['produto']['inserir'][$j]['ValorCompraProduto']));
@@ -707,7 +725,8 @@ class Despesas extends CI_Controller {
                 $max = count($data['update']['parcelaspag']['inserir']);
                 for($j=0;$j<$max;$j++) {
                     $data['update']['parcelaspag']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
-                    $data['update']['parcelaspag']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['update']['parcelaspag']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+					$data['update']['parcelaspag']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['parcelaspag']['inserir'][$j]['idApp_Despesas'] = $data['despesas']['idApp_Despesas'];
                     $data['update']['parcelaspag']['inserir'][$j]['ValorParcelaPagaveis'] = str_replace(',', '.', str_replace('.', '', $data['update']['parcelaspag']['inserir'][$j]['ValorParcelaPagaveis']));
                     $data['update']['parcelaspag']['inserir'][$j]['DataVencimentoPagaveis'] = $this->basico->mascara_data($data['update']['parcelaspag']['inserir'][$j]['DataVencimentoPagaveis'], 'mysql');
@@ -752,14 +771,15 @@ class Despesas extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('despesas/form_despesas', $data);
+                $this->load->view('despesas/form_despesasalterar', $data);
             } else {
 
                 //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Despesas'], FALSE);
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Despesas', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
-                redirect(base_url() . 'relatorio/despesas/' . $data['msg']);
+                #redirect(base_url() . 'relatorio/despesas/' . $data['msg']);
+				redirect(base_url() . 'relatorio/despesaspag/'  . $data['msg']);
                 exit();
             }
         }
@@ -781,7 +801,7 @@ class Despesas extends CI_Controller {
 
                 $data['msg'] = '?m=1';
 
-                redirect(base_url() . 'relatorio/despesas/' . $data['msg']);
+                redirect(base_url() . 'relatorio/despesaspag/' . $data['msg']);
                 exit();
             //}
         //}

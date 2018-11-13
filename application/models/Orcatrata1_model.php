@@ -132,9 +132,6 @@ class Orcatrata_model extends CI_Model {
             . 'OT.idApp_OrcaTrata, '
             . 'OT.DataOrca, '
 			. 'OT.DataPrazo, '
-			. 'OT.DataConclusao, '
-			. 'OT.DataQuitado, '
-            . 'OT.ProfissionalOrca, '
             . 'OT.AprovadoOrca, '
 			. 'OT.ServicoConcluido, '
 			. 'OT.QuitadoOrca, '
@@ -147,9 +144,7 @@ class Orcatrata_model extends CI_Model {
             . 'OT.AprovadoOrca = "' . $aprovado . '" '
             . 'ORDER BY '
 			#. 'OT.DataOrca DESC, '
-			. 'OT.ServicoConcluido ASC, '
-			. 'OT.QuitadoOrca ASC, '
-			. 'OT.DataOrca DESC ');
+			. 'OT.ServicoConcluido ASC ');
         /*
           echo $this->db->last_query();
           echo "<pre>";
@@ -167,8 +162,6 @@ class Orcatrata_model extends CI_Model {
                 foreach ($query->result() as $row) {
 					$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
 					$row->DataPrazo = $this->basico->mascara_data($row->DataPrazo, 'barras');
-					$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
-					$row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
                     $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
 					$row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
 					$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
@@ -191,7 +184,7 @@ class Orcatrata_model extends CI_Model {
             . 'FROM '
             . 'App_OrcaTrata AS OT '
             . 'WHERE '
-            . 'OT.idApp_Cliente = ' . $_SESSION['OrcaTrataCons']['idApp_Cliente'] . ' '
+            . 'OT.idApp_Cliente = ' . $_SESSION['OrcaTrata']['idApp_Cliente'] . ' '
             . 'ORDER BY OT.DataOrca DESC ');
         /*
           echo $this->db->last_query();
@@ -211,7 +204,7 @@ class Orcatrata_model extends CI_Model {
 					$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
 					$row->DataPrazo = $this->basico->mascara_data($row->DataPrazo, 'barras');                   
 					$row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
-                    #$row->ProfissionalOrca = $this->get_profissional($row->ProfissionalOrca);
+                    $row->ProfissionalOrca = $this->get_profissional($row->ProfissionalOrca);
                 }
 
                 return $query;
@@ -332,5 +325,5 @@ class Orcatrata_model extends CI_Model {
 
         return (isset($query[0]['NomeProfissional'])) ? $query[0]['NomeProfissional'] : FALSE;
     }
-	
+
 }

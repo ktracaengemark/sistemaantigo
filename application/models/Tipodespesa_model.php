@@ -81,7 +81,7 @@ class Tipodespesa_model extends CI_Model {
                     Tab_TipoDespesa AS TD
 						LEFT JOIN Tab_Categoriadesp AS CD ON CD.idTab_Categoriadesp = TD.Categoriadesp
 				WHERE 
-                    TD.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND 
+                    TD.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
                     TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				ORDER BY
 					CD.Categoriadesp,
@@ -122,7 +122,7 @@ class Tipodespesa_model extends CI_Model {
                     . 'FROM '
                     . 'Tab_TipoDespesa '
 					. 'WHERE '
-                    . 'Empresa = ' . $_SESSION['log']['Empresa'] . ' AND '
+                    . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
                     . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] );				   
         } else {
             $query = $this->db->query(
@@ -132,7 +132,7 @@ class Tipodespesa_model extends CI_Model {
                     . 'FROM '
                     . 'Tab_TipoDespesa '
 					. 'WHERE '
-                    . 'Empresa = ' . $_SESSION['log']['Empresa'] . ' AND '
+                    . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
                     . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] );
 
             $array = array();
@@ -157,7 +157,7 @@ class Tipodespesa_model extends CI_Model {
 					Tab_TipoDespesa AS TD
 						LEFT JOIN Tab_Categoriadesp AS CD ON CD.idTab_Categoriadesp = TD.Categoriadesp
 				WHERE 
-					TD.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND 
+					TD.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 					TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				ORDER BY
 					CD.Abrevcategoriadesp,
@@ -176,7 +176,7 @@ class Tipodespesa_model extends CI_Model {
 					Tab_TipoDespesa AS TD
 						LEFT JOIN Tab_Categoriadesp AS CD ON CD.idTab_Categoriadesp = TD.Categoriadesp
 				WHERE 
-					TD.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND 
+					TD.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 					TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				ORDER BY
 					CD.Abrevcategoriadesp,

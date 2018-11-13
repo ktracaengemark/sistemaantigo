@@ -162,7 +162,7 @@ class Produtos_model extends CI_Model {
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TPV.Prodaux1
             WHERE
                 TPV.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				TPV.Empresa = ' . $_SESSION['log']['Empresa'] . '
+				TPV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY  
 				TPV.CodProd ASC,
 				TPV.Categoria ASC,
@@ -186,7 +186,7 @@ class Produtos_model extends CI_Model {
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TPV.Prodaux1
             WHERE
                 TPV.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				TPV.Empresa = ' . $_SESSION['log']['Empresa'] . '
+				TPV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY  
 				TPV.CodProd ASC,
 				TPV.Categoria ASC,
