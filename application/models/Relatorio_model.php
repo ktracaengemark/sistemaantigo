@@ -190,26 +190,26 @@ class Relatorio_model extends CI_Model {
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];		
 		
 		#$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
-        
-		$filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
+        $filtro1 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
+		$filtro2 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
+		$filtro3 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
 		$filtro4 = ($data['QuitadoRecebiveis'] != '#') ? 'PR.QuitadoRecebiveis = "' . $data['QuitadoRecebiveis'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Modalidade'] != '#') ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
 		
-		#$permissao = ($_SESSION['log']['Permissao'] <= 2 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-		$filtro1 = ($_SESSION['Empresa']['NivelEmpresa'] >= 4  && $data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		
 		
 		
         $query = $this->db->query('
             SELECT
-                C.NomeCliente,
-                CONCAT(IFNULL(C.NomeCliente,""), " / ", IFNULL(A.NomeEmpresa,""), " / ", IFNULL(OT.Receitas,""), " / ", IFNULL(TR.TipoReceita,"")) AS NomeCliente,
+                U.idSis_Empresa,
+				U.idSis_Usuario,
+				C.NomeCliente,
+                CONCAT(IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,""), " / ", IFNULL(TR.TipoReceita,"")) AS NomeCliente,
 				TR.TipoReceita,
 				OT.idApp_OrcaTrata,
 				OT.idSis_Usuario,
 				OT.idSis_Empresa,
-				OT.idSis_EmpresaAss,
-				A.NomeEmpresa,
 				OT.TipoRD,
                 OT.AprovadoOrca,
                 OT.DataOrca,
@@ -228,17 +228,17 @@ class Relatorio_model extends CI_Model {
                 PR.QuitadoRecebiveis,
 				CONCAT(PR.ParcelaRecebiveis," ", OT.Modalidade,"/",PR.QuitadoRecebiveis) AS ParcelaRecebiveis
             FROM
-
+				Sis_Usuario AS U,	
                 App_OrcaTrata AS OT
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = OT.idSis_Empresa
-                    LEFT JOIN Sis_Empresa AS A ON A.idSis_Empresa = OT.idSis_EmpresaAss
 					LEFT JOIN App_ParcelasRecebiveis AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
             WHERE
                 
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				' . $permissao . '
 				' . $filtro1 . '
 				' . $filtro2 . '
 				' . $filtro3 . '
@@ -246,12 +246,11 @@ class Relatorio_model extends CI_Model {
 				' . $filtro5 . '
 				OT.TipoRD = "R"
 				' . $data['NomeCliente'] . '
-
 				' . $data['Mesvenc'] . ' 
 				' . $data['Mespag'] . '
 				' . $data['Ano'] . ' 
-				' . $data['TipoReceita'] . ' 
-
+				' . $data['TipoReceita'] . ' AND
+				OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
             ');
@@ -3358,7 +3357,7 @@ exit();*/
         $data['Campo'] = (!$data['Campo']) ? 'C.NomeCliente' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$filtro10 = ($data['Ativo'] != '#') ? 'C.Ativo = "' . $data['Ativo'] . '" AND ' : FALSE;
-        $q = ($_SESSION['log']['Permissao'] > 2) ? ' C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+        #$q = ($_SESSION['log']['Permissao'] > 2) ? ' C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		
 		$query = $this->db->query('
             SELECT
@@ -3380,7 +3379,7 @@ exit();*/
                     LEFT JOIN Tab_Municipio AS M ON C.Municipio = M.idTab_Municipio
 
             WHERE
-                ' . $q . '
+
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
 				' . $data['NomeCliente'] . '

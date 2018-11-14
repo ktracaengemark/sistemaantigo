@@ -229,7 +229,7 @@ class Loginempresa_model extends CI_Model {
         return $query[0];
 
     }
-
+	
     public function troca_senha($id, $data) {
 
         $query = $this->db->update('Sis_Empresa', $data, array('idSis_Empresa' => $id));

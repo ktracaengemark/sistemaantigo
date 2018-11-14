@@ -8,7 +8,7 @@
 						<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="<?php echo base_url() ?>acesso/index"> 
-						<?php echo $_SESSION['log']['NomeEmpresa2']; ?>./ <?php echo $_SESSION['log']['Nome2']; ?>.
+						 <?php echo $_SESSION['log']['Nome2']; ?>./<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
 					</a>
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar1">
@@ -40,8 +40,8 @@
 							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
 						
-						<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 3 ) { ?>
-						
+
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/clientes">
@@ -57,7 +57,7 @@
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
 								<button type="button" class="btn btn-md btn-warning dropdown-toggle" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-usd"></span> Transações <span class="caret"></span>
+									<span class="glyphicon glyphicon-usd"></span> Finanças <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
 									<li><a href="<?php echo base_url() ?>relatorio/receitas"><span class="glyphicon glyphicon-pencil"></span> Receitas</a></li>

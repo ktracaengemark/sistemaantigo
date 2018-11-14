@@ -98,7 +98,13 @@ class Login extends CI_Controller {
 			$query = $this->Login_model->check_dados_empresa($empresa, $usuario, TRUE);
             $_SESSION['log']['Agenda'] = $this->Login_model->get_agenda_padrao($query['idSis_Usuario']);
 
-            #echo "<pre>".print_r($query)."</pre>";
+            
+			#### Carrega os dados da Empresa nas vari?ves de sess?o ####
+
+			$_SESSION['log']['NivelEmpresa'] = $this->Login_model->get_empresa($query['idSis_Usuario']);
+			
+			
+			#echo "<pre>".print_r($query)."</pre>";
             #exit();
 
             if ($query === FALSE) {
@@ -120,17 +126,13 @@ class Login extends CI_Controller {
 				$_SESSION['log']['CpfUsuario'] = $query['CpfUsuario'];
 				$_SESSION['log']['id'] = $query['idSis_Usuario'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
+				#$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
 				$_SESSION['log']['NomeEmpresa2'] = (strlen($query['NomeEmpresa']) > 10) ? substr($query['NomeEmpresa'], 0, 10) : $query['NomeEmpresa'];
 				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
 				
-				#### Carrega os dados da Empresa nas variáves de sessão ####
-				$this->load->model('Basico_model');
-				$_SESSION['Empresa'] = $this->Basico_model->get_empresa1($_SESSION['log']['idSis_Empresa'], TRUE);
-		
-		
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
                 $_SESSION['db']['username'] = $this->db->username;

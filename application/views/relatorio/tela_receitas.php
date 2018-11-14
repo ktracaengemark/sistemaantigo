@@ -48,7 +48,7 @@
 												</button>
 											</div>
 										</div>
-										<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 3 ) { ?>
+										<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 										<div class="form-group col-md-4 text-center">
 											<div class="form-footer">		
 												<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>relatorio/clientes" role="button">
@@ -60,7 +60,7 @@
 										<div class="form-group col-md-4 text-right">
 											<div class="form-footer">		
 												<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>orcatrata/cadastrar2" role="button">
-													<span class="glyphicon glyphicon-plus"></span> Outras Receitas
+													<span class="glyphicon glyphicon-plus"></span> Receitas
 												</a>
 											</div>	
 										</div>
@@ -133,7 +133,9 @@
 											</div>
 											
 											<div class="row">
-												<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 4 ) { ?>
+												
+												<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+												
 												<div class="col-md-3 text-left">
 													<label for="AprovadoOrca">Aprovado</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " 
@@ -179,7 +181,9 @@
 														?>
 													</select>
 												</div>
+												
 												<?php } ?>
+												
 												<div class="col-md-3 text-left">
 													<label for="QuitadoRecebiveis">Parc. Quit.</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 

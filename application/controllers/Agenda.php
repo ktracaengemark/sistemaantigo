@@ -45,6 +45,8 @@ class Agenda extends CI_Controller {
 
         ), TRUE));
 
+
+				
         $_SESSION['log']['NomeUsuario'] = ($data['query']['NomeUsuario']) ?
             $data['query']['NomeUsuario'] : FALSE;
 

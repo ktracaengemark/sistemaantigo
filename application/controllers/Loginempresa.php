@@ -94,7 +94,8 @@ class Loginempresa extends CI_Controller {
             $query = $this->Loginempresa_model->check_dados_usuario($senha, $usuario, TRUE);
 			$query = $this->Loginempresa_model->check_dados_empresa($empresa, $usuario, TRUE);
 			#$_SESSION['log']['Agenda'] = $this->Loginempresa_model->get_agenda_padrao($query['idSis_Empresa']);
-
+			
+			
             #echo "<pre>".print_r($query)."</pre>";
             #exit();
 
@@ -121,11 +122,7 @@ class Loginempresa extends CI_Controller {
 				$_SESSION['log']['PermissaoEmpresa'] = $query['PermissaoEmp'];
 				$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
 				
-				#### Carrega os dados da Empresa nas variáves de sessão ####
-				$this->load->model('Basico_model');
-				$_SESSION['Empresa'] = $this->Basico_model->get_empresa1($_SESSION['log']['id'], TRUE);
-				
-				
+
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
                 $_SESSION['db']['username'] = $this->db->username;

@@ -98,7 +98,7 @@
 							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
 						<?php } ?>
-						<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 4 ) { ?>
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">

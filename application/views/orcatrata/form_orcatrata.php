@@ -1,12 +1,12 @@
 <?php if (isset($msg)) echo $msg; ?>
-<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
+
 
 <div class="container-fluid">
 	<div class="row">
 
 		<div class="col-md-1"></div>
 		<div class="col-md-10 ">
-
+			<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
 			<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
 			<nav class="navbar navbar-inverse">
 			  <div class="container-fluid">
@@ -99,7 +99,7 @@
 							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
 						<?php } ?>
-						<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 4 ) { ?>
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
@@ -133,7 +133,7 @@
 			</nav>
 			<?php } ?>
 			
-<?php } ?>
+			<?php } ?>
 			<div class="row">
 
 				<div class="col-md-12 col-lg-12">
@@ -146,7 +146,7 @@
 
 							<?php echo form_open_multipart($form_open_path); ?>
 
-							<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 3 ) { ?>
+							<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 									
@@ -156,7 +156,7 @@
 										</a>
 									</div>
 									
-									<div <?php echo $collapse; ?> id="Produtos">
+									<div <?php echo $collapse1; ?> id="Produtos">
 										<div class="panel-body">
 
 												
@@ -312,7 +312,7 @@
 												</div>
 											</div>
 											
-											<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 4 ) { ?>		
+											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
 											<div class="panel-group">	
 												<div class="panel panel-danger">
 
@@ -513,10 +513,9 @@
 										<div class="panel-body">													
 											<div class="panel panel-info">
 												<div class="panel-heading">
-													<div class="col-md-1"></div>
+													
 													<div class="form-group">
 														<div class="row">
-														
 															<div class="col-md-2">
 																<label for="TipoReceita">Tipo de Receita</label>
 																<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -535,13 +534,15 @@
 																</select>
 															</div>
 															
-															<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 3 ) { ?>
+															<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 															<div class="col-md-2">
 																<label for="Receitas">Receita</label><br>
 																<input type="text" class="form-control" maxlength="200"
 																		name="Receitas" value="<?php echo $orcatrata['Receitas'] ?>">
 															</div>
 															<?php } ?>
+															
+															<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 															
 															<div class="col-md-2">
 																<label for="ValorOrca">Orçamento:</label><br>
@@ -563,7 +564,6 @@
 																</div>
 															</div>
 															
-															
 															<div class="col-md-2">
 																<label for="ValorRestanteOrca">Total:</label><br>
 																<div class="input-group" id="txtHint">
@@ -574,10 +574,24 @@
 																		   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
 																</div>
 															</div>
+															<?php } ?>
 															
+															<?php if ($_SESSION['log']['idSis_Empresa'] == 5 ) { ?>
+															<div class="col-md-2">
+																<label for="ValorRestanteOrca">Total:</label><br>
+																<div class="input-group" id="txtHint">
+																	<span class="input-group-addon" id="basic-addon1">R$</span>
+																	<input type="text" class="form-control Valor" id="ValorRestanteOrca" maxlength="10" placeholder="0,00" 
+																		   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()" onkeydown="calculaParcelas()"
+																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
+																		   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
+																</div>
+															</div>
+															<?php } ?>
+
 														</div>
 													</div>
-													<div class="col-md-1"></div>
+													
 													<div class="form-group">
 														<div class="row">
 															<div class="col-md-2">
@@ -598,23 +612,8 @@
 																	   data-toggle="collapse" onkeyup="calculaParcelas()"
 																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																	   name="QtdParcelasOrca" value="<?php echo $orcatrata['QtdParcelasOrca'] ?>">
+															<?php echo form_error('QtdParcelasOrca'); ?>		
 															</div>
-															<div class="col-md-2">
-																<label for="FormaPagamento">Forma de Pagam.:</label>
-																<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-																		id="FormaPagamento" name="FormaPagamento">
-																	<!--<option value="">-- Selecione uma opção --</option>-->
-																	<?php
-																	foreach ($select['FormaPagamento'] as $key => $row) {
-																		if ($orcatrata['FormaPagamento'] == $key) {
-																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																		} else {
-																			echo '<option value="' . $key . '">' . $row . '</option>';
-																		}
-																	}
-																	?>
-																</select>
-															</div>	
 															<div class="col-md-3">
 																<label for="Modalidade">Modalidade</label><br>
 																<div class="form-group">
@@ -644,6 +643,22 @@
 																		?>
 																	</div>
 																</div>
+															</div>
+															<div class="col-md-2">
+																<label for="FormaPagamento">Forma de Pagam.:</label>
+																<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+																		id="FormaPagamento" name="FormaPagamento">
+																	<!--<option value="">-- Selecione uma opção --</option>-->
+																	<?php
+																	foreach ($select['FormaPagamento'] as $key => $row) {
+																		if ($orcatrata['FormaPagamento'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	?>
+																</select>
 															</div>
 															<!--
 															<br>
@@ -780,7 +795,7 @@
 								</div>
 							</div>
 
-							<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 4 ) { ?>
+							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 
@@ -986,7 +1001,7 @@
 								</div>
 							</div>
 							<?php } ?>
-							<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 5 ) { ?>	
+							<?php if ($_SESSION['log']['NivelEmpresa'] >= 5 ) { ?>
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 
@@ -1141,7 +1156,7 @@
 
 							<div class="form-group">
 								<div class="row">
-									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
+									<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
 									<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
 									<?php if ($metodo > 1) { ?>
 									<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">

@@ -529,15 +529,6 @@ class Basico_model extends CI_Model {
             return '';
         }
     }
-
-    public function get_empresa1($data) {
-        
-		$query = $this->db->query('SELECT * FROM Sis_Empresa WHERE idSis_Empresa = ' . $data);
-
-        $query = $query->result_array();
-
-        return $query[0];
-    }
 	
 	public function get_empresa($data) {
 
