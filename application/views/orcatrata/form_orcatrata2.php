@@ -454,22 +454,6 @@
 													<div class="form-group">
 														<div class="row">
 															<div class="col-md-2">
-																<label for="FormaPagamento">Forma de Pagam.:</label>
-																<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-																		id="FormaPagamento" name="FormaPagamento">
-																	<!--<option value="">-- Selecione uma opção --</option>-->
-																	<?php
-																	foreach ($select['FormaPagamento'] as $key => $row) {
-																		if ($orcatrata['FormaPagamento'] == $key) {
-																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																		} else {
-																			echo '<option value="' . $key . '">' . $row . '</option>';
-																		}
-																	}
-																	?>
-																</select>
-															</div>	
-															<div class="col-md-2">
 																<label for="DataVencimentoOrca">1º Venc.</label>
 																<div class="input-group <?php echo $datepicker; ?>">
 																	<span class="input-group-addon" disabled>
@@ -487,7 +471,23 @@
 																	   data-toggle="collapse" onkeyup="calculaParcelas()"
 																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																	   name="QtdParcelasOrca" value="<?php echo $orcatrata['QtdParcelasOrca'] ?>">
-															</div>																																			
+															</div>
+															<div class="col-md-2">
+																<label for="FormaPagamento">Forma de Pagam.:</label>
+																<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+																		id="FormaPagamento" name="FormaPagamento">
+																	<!--<option value="">-- Selecione uma opção --</option>-->
+																	<?php
+																	foreach ($select['FormaPagamento'] as $key => $row) {
+																		if ($orcatrata['FormaPagamento'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	?>
+																</select>
+															</div>	
 															<div class="col-md-3">
 																<label for="Modalidade">Modalidade</label><br>
 																<div class="form-group">

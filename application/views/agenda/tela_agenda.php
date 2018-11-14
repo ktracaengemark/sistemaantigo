@@ -22,7 +22,7 @@
 				<div class="form-group">
 					<div class="row">
 						<div class="col-md-12">
-							<div style="overflow: auto; height: 140px; ">
+							<div style="overflow: auto; height: 155px; ">
 								<table class="table table-condensed table-bordered table-striped" >
 									<tr>
 										<th class="active">Cpf</th>
@@ -201,17 +201,18 @@
 		</div>	
 	</div>
 </div>
+<!--
 <div class="col-md-3">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<!--
+			
 			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/procedimentoorc" role="button">
 				<span class="glyphicon glyphicon-search"></span> Pesq.
 			</a>
 			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>procedimento/cadastrar" role="button">
 				<span class="glyphicon glyphicon-plus"></span> Cad.
 			</a>
-			-->
+			
 			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Orca" aria-expanded="false" aria-controls="Orca">
 				<span class="glyphicon glyphicon-pencil"> Procd.Orç.</span>
 			</div>
@@ -233,7 +234,7 @@
 									if ($query['procedimentoorc'] != FALSE) {
 
 										foreach ($query['procedimentoorc']->result_array() as $row) {
-											$url = base_url() . 'orcatrata/alterar2/' . $row['idApp_OrcaTrata'];
+											$url = base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'];
 
 											echo '<tr class="clickable-row" data-href="' . $url . '" data-original-title="' . $row['Idade'] . ' anos" data-container="body"
 													data-toggle="tooltip" data-placement="right" title="">';
@@ -249,8 +250,9 @@
 									}
 									?>
 								</table>
-							</div>	
-							<!--
+							</div>
+							
+							
 							<table class="table table-condensed table-bordered">
 								<tr class="active text-active">
 									<th colspan="2" class="col-md-12 text-center"><b>Estatísticas - <?php echo date('m/Y', time()) ?></b></th>
@@ -351,7 +353,7 @@
 								*/
 								?>
 							</table>
-							-->
+							
 						</div>
 					</div>
 				</div>
@@ -359,4 +361,5 @@
 		</div>
 	</div>
 </div>
+-->
 <?php } ?>

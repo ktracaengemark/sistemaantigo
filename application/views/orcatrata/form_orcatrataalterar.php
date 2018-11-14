@@ -196,7 +196,7 @@
 																						onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																						autofocus name="QtdVendaProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdVendaProduto'] ?>">
 																			</div>
-																			<div class="col-md-7">
+																			<div class="col-md-3">
 																				<label for="idTab_Produto">Produto:</label>
 																				<?php if ($i == 1) { ?>
 																				<!--<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>produto/cadastrar/produto" role="button">
@@ -350,7 +350,7 @@
 																						onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
 																						autofocus name="QtdVendaServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdVendaServico'] ?>">
 																			</div>
-																			<div class="col-md-7">
+																			<div class="col-md-3">
 																				<label for="idTab_Servico">Produto:</label>
 																				<?php if ($i == 1) { ?>
 																				<!--<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>servico/cadastrar/servico" role="button">
@@ -575,6 +575,18 @@
 													<div class="form-group">
 														<div class="row">
 															<div class="col-md-2">
+																<label for="DataVencimentoOrca">1º Venc.</label>
+																<div class="input-group <?php echo $datepicker; ?>">
+																	<span class="input-group-addon" disabled>
+																		<span class="glyphicon glyphicon-calendar"></span>
+																	</span>
+																	<input type="text" class="form-control Date" id="DataVencimentoOrca" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																		   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()"
+																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
+																		   name="DataVencimentoOrca" value="<?php echo $orcatrata['DataVencimentoOrca']; ?>">																			
+																</div>
+															</div>
+															<div class="col-md-2">
 																<label for="FormaPagamento">Forma de Pagam.:</label>
 																<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																		id="FormaPagamento" name="FormaPagamento">
@@ -590,18 +602,6 @@
 																	?>
 																</select>
 															</div>	
-															<div class="col-md-2">
-																<label for="DataVencimentoOrca">1º Venc.</label>
-																<div class="input-group <?php echo $datepicker; ?>">
-																	<span class="input-group-addon" disabled>
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																	<input type="text" class="form-control Date" id="DataVencimentoOrca" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																		   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()"
-																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
-																		   name="DataVencimentoOrca" value="<?php echo $orcatrata['DataVencimentoOrca']; ?>">																			
-																</div>
-															</div>
 															<div class="col-md-2">
 																<label for="QtdParcelasOrca">Qtd. Parc.:</label><br>
 																<input type="text" class="form-control Numero" id="QtdParcelasOrca" maxlength="3" placeholder="0"

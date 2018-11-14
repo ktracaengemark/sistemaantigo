@@ -74,7 +74,7 @@
 
 							<div class="form-group">
 								<div class="row">
-									<input type="hidden" name="idApp_ProcedimentoCli" value="<?php echo $query['idApp_ProcedimentoCli']; ?>">
+									<input type="hidden" name="idApp_Procedimento" value="<?php echo $query['idApp_Procedimento']; ?>">
 									<?php if ($metodo == 2) { ?>
 
 										<div class="col-md-6">

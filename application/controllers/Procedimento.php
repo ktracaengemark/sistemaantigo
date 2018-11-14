@@ -13,7 +13,7 @@ class Procedimento extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Procedimento_model', 'Profissional_model', 'Usuario_model', 'Relatorio_model', 'Formapag_model', 'Cliente_model'));
+        $this->load->model(array('Basico_model', 'Procedimento_model', 'Usuario_model', 'Relatorio_model', 'Formapag_model', 'Cliente_model'));
         $this->load->driver('session');
 
         #load header view
@@ -97,7 +97,7 @@ class Procedimento extends CI_Controller {
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
 			$data['query']['idApp_Cliente'] = 0;
-			$data['query']['idApp_OrcaTrataCli'] = 0;
+			$data['query']['idApp_OrcaTrata'] = 0;
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['campos'] = array_keys($data['query']);

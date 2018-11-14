@@ -360,6 +360,7 @@ class Cliente extends CI_Controller {
 
         $_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($id, TRUE);
         $_SESSION['Cliente']['NomeCliente'] = (strlen($data['query']['NomeCliente']) > 12) ? substr($data['query']['NomeCliente'], 0, 12) : $data['query']['NomeCliente'];
+		
 		#$data['query'] = $this->Paciente_model->get_paciente($prontuario, TRUE);
         $data['titulo'] = 'Prontuário ' . $data['query']['NomeCliente'];
         $data['panel'] = 'primary';

@@ -115,8 +115,25 @@
 															   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
 													</div>
 												</div>
+												<div class="col-md-3 text-left">
+													<label for="Ordenamento">Tipo de Receita:</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+															id="TipoReceita" name="TipoReceita">
+														<?php
+														foreach ($select['TipoReceita'] as $key => $row) {
+															if ($query['TipoReceita'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+												</div>
 											</div>
+											
 											<div class="row">
+												<?php if ($_SESSION['Empresa']['NivelEmpresa'] >= 4 ) { ?>
 												<div class="col-md-3 text-left">
 													<label for="AprovadoOrca">Aprovado</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " 
@@ -162,6 +179,7 @@
 														?>
 													</select>
 												</div>
+												<?php } ?>
 												<div class="col-md-3 text-left">
 													<label for="QuitadoRecebiveis">Parc. Quit.</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -211,39 +229,7 @@
 														}
 														?>
 													</select>
-												</div>
-												<div class="col-md-3 text-left">
-													<label for="Ordenamento">Nome da Empresa:</label>
-													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-															id="NomeEmpresa" name="NomeEmpresa">
-														<?php
-														foreach ($select['NomeEmpresa'] as $key => $row) {
-															if ($query['NomeEmpresa'] == $key) {
-																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-															} else {
-																echo '<option value="' . $key . '">' . $row . '</option>';
-															}
-														}
-														?>
-													</select>
-												</div>
-												<div class="col-md-3 text-left">
-													<label for="Ordenamento">Tipo de Receita:</label>
-													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-															id="TipoReceita" name="TipoReceita">
-														<?php
-														foreach ($select['TipoReceita'] as $key => $row) {
-															if ($query['TipoReceita'] == $key) {
-																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-															} else {
-																echo '<option value="' . $key . '">' . $row . '</option>';
-															}
-														}
-														?>
-													</select>
-												</div>
-											</div>
-											<div class="row">	
+												</div>	
 												<div class="col-md-3 text-left">
 													<label for="Modalidade">Modalidade</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " 
@@ -293,23 +279,6 @@
 																</select>
 															</div>
 														</div>
-													</div>
-												</div>
-											</div>
-											<div class="row">	
-												
-												<div class="form-group col-md-3 text-left">
-													<div class="form-footer ">
-														<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
-															<span class="glyphicon glyphicon-filter"></span> Filtrar
-														</button>
-													</div>
-												</div>
-												<div class="form-group col-md-3 text-left">
-													<div class="form-footer ">
-														<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-															<span class="glyphicon glyphicon-remove"> Fechar
-														</button>
 													</div>
 												</div>
 											</div>

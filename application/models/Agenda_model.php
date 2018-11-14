@@ -147,7 +147,7 @@ class Agenda_model extends CI_Model {
 				P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.ConcluidoProcedimento = "N" AND
-				P.idApp_OrcaTrata = "0" AND
+
 				P.idApp_Cliente != "0"
             ORDER BY
                 P.DataProcedimento ASC
