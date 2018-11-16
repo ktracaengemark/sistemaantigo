@@ -7,7 +7,7 @@
 					<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="<?php echo base_url() ?>acessoempresa/index"> 
-					<?php echo $_SESSION['log']['NomeEmpresa2']; ?>./ <?php echo $_SESSION['log']['Nome2']; ?>.
+					<?php echo $_SESSION['log']['Nome2']; ?>./ <?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
 				</a>
 				<!--<a class="navbar-brand" href="http://www.ktracaengemark.com.br"> Melhor loja</a>-->
 			</div>
@@ -18,12 +18,12 @@
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 						<div class="btn-group">
 							<button type="button" class="btn btn-primary  dropdown-toggle" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-user"></span> Funcionários <span class="caret"></span>
+								<span class="glyphicon glyphicon-user"></span> Usuarios <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="<?php echo base_url() ?>funcao/cadastrar"><span class="glyphicon glyphicon-pencil"></span> Funções </a></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="<?php echo base_url() ?>relatorioempresa/funcionario"><span class="glyphicon glyphicon-user"></span> Funcionários </a></li>
+								<li><a href="<?php echo base_url() ?>relatorioempresa/funcionario"><span class="glyphicon glyphicon-user"></span> Usuarios </a></li>
 
 							</ul>
 						</div>						
