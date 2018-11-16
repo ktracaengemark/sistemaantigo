@@ -103,7 +103,7 @@ class Login_model extends CI_Model {
 	
 	public function check_empresa($data) {
 
-        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE idSis_Empresa = "' . $data . '"');
+        $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE idSis_Empresa = "' . $data . '"');
         if ($query->num_rows() === 0) {
             return 1;
         }

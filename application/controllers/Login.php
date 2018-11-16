@@ -58,7 +58,7 @@ class Login extends CI_Controller {
         #set validation rules
         
 		$this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim|callback_valid_usuario');
-        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_valid_empresa[' . $usuario . ']');
+        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_check_empresa|callback_valid_empresa[' . $usuario . ']');
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $usuario . ']');
 
         $data['select']['idSis_Empresa'] = $this->Login_model->select_empresa();
@@ -744,6 +744,19 @@ class Login extends CI_Controller {
             return TRUE;
         }
     }
+	
+    function check_empresa($data) {
+
+        if ($this->Login_model->check_empresa($data) == 1) {
+            $this->form_validation->set_message('check_empresa', '<strong>%s</strong> não existe.');
+            return FALSE;
+        } else if ($this->Login_model->check_empresa($data) == 2) {
+            $this->form_validation->set_message('check_empresa', '<strong>%s</strong> inativa! Fale com o Administrador da sua Empresa!');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }	
 	
 	function valid_empresa($empresa, $usuario) {
 
