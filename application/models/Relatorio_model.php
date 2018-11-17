@@ -3665,6 +3665,7 @@ exit();*/
             SELECT
                 E.idSis_Empresa,
                 E.NomeEmpresa,
+				E.Site,
                 E.Endereco,
                 E.Bairro,
                 CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
@@ -3683,9 +3684,6 @@ exit();*/
         ');
 
         /*
-        #AND
-        #P.idApp_Profissional = OT.idApp_Cliente
-
           echo $this->db->last_query();
           echo "<pre>";
           print_r($query);
@@ -4459,8 +4457,8 @@ exit();*/
                 Sis_Empresa
             WHERE
 				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				idSis_Empresa != "1" AND
-				idSis_Empresa != "5"
+				idSis_Empresa != "1" AND 
+				idSis_Empresa != "5" 
             ORDER BY
                 NomeEmpresa ASC
         ');
