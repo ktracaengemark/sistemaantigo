@@ -138,9 +138,10 @@ class Despesas_model extends CI_Model {
 			FROM 
 				App_ParcelasPagaveis 
 			WHERE 
+				idSis_Empresa = ' . $data . ' AND
 				(MONTH(DataVencimentoPagaveis) = ' . date('m', time()) . ') AND
-
-				idSis_Empresa = ' . $data . '
+				QuitadoPagaveis = "N" 
+				
 			ORDER BY
 				DataVencimentoPagaveis
 		');

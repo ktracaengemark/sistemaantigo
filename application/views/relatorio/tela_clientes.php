@@ -6,25 +6,22 @@
 			<div class="main">
 				<?php echo validation_errors(); ?>
 				<div class="panel panel-primary">
-					<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
+					<div class="panel-heading">
+
+						<?php echo $titulo; ?>
+						<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+							<span class="glyphicon glyphicon-search"></span> Pesquisar
+						</button>
+																	
+						<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>cliente/cadastrar" role="button"> 
+							<span class="glyphicon glyphicon-plus"></span> Novo
+						</a>
+					</div>
 					<div class="panel-body">
 						<?php echo form_open('relatorio/clientes', 'role="form"'); ?>
 						
 						<div class="col-md-8" >
 							<div class="form-group">
-									
-								<button class="btn btn-sm btn-primary" name="pesquisar" value="0" type="submit">
-									<span class="glyphicon glyphicon-search"></span> Pesq.
-								</button>
-								
-								<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-									<span class="glyphicon glyphicon-filter"></span> Filtros
-								</button>
-																			
-								<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>cliente/cadastrar" role="button"> 
-									<span class="glyphicon glyphicon-plus"></span> Novo Cliente
-								</a>
-								
 								<div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
@@ -35,7 +32,7 @@
 											<div class="modal-footer">
 												<div class="form-group">
 													<div class="row">
-														<div class="col-md-3 btn-block text-left">
+														<div class="col-md-8 text-left">
 															<label for="Ordenamento">Nome do Cliente:</label>
 															<div class="form-group">
 																<div class="row">
@@ -55,8 +52,23 @@
 																	</div>
 																</div>
 															</div>
-														</div>					
-														<div class="col-md-3 btn-block text-left">
+														</div>
+														<div class="col-md-4 text-left">
+															<label for="Ativo">Ativo?</label>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
+																	id="Ativo" name="Ativo">
+																<?php
+																foreach ($select['Ativo'] as $key => $row) {
+																	if ($query['Ativo'] == $key) {
+																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																	} else {
+																		echo '<option value="' . $key . '">' . $row . '</option>';
+																	}
+																}
+																?>
+															</select>
+														</div>														
+														<div class="col-md-12 text-left">
 															<label for="Ordenamento">Ordenamento:</label>
 															<div class="form-group">
 																<div class="row">
@@ -91,26 +103,22 @@
 																</div>
 															</div>
 														</div>
-														<div class="col-md-4 text-left">
-															<label for="Ativo">Ativo?</label>
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
-																	id="Ativo" name="Ativo">
-																<?php
-																foreach ($select['Ativo'] as $key => $row) {
-																	if ($query['Ativo'] == $key) {
-																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																	} else {
-																		echo '<option value="' . $key . '">' . $row . '</option>';
-																	}
-																}
-																?>
-															</select>
-														</div>	
-														<div class="col-md-4 text-left">
-															<label for="Ordenamento">Pesquisar:</label>
-															<button class="btn btn-md btn-primary btn-block" name="pesquisar" value="0" type="submit">
-																<span class="glyphicon glyphicon-search"></span> Pesquisar
-															</button>
+													</div>
+													<div class="row">
+														<br>
+														<div class="form-group col-md-3 text-left">
+															<div class="form-footer ">
+																<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+																	<span class="glyphicon glyphicon-filter"></span> Filtrar
+																</button>
+															</div>
+														</div>
+														<div class="form-group col-md-3 text-left">
+															<div class="form-footer ">
+																<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+																	<span class="glyphicon glyphicon-remove"> Fechar
+																</button>
+															</div>
 														</div>
 													</div>
 												</div>
@@ -123,9 +131,8 @@
 							</div>
 						</div>
 						</form>
-						<br>
-						<?php echo (isset($list)) ? $list : FALSE ?>
 					</div>
+					<?php echo (isset($list)) ? $list : FALSE ?>
 				</div>
 			</div>
 		</div>
