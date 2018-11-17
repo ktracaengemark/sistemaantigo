@@ -75,9 +75,9 @@
 									<span class="glyphicon glyphicon-home"></span> Plataforma <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
-									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Empresas</a></li>
+									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Empresas</a></li>
 									<li role="separator" class="divider"></li>							
-									
+									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas</a></li>
 								</ul>
 							</div>
 							<div class="btn-group" role="group" aria-label="..."> </div>

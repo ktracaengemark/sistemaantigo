@@ -144,7 +144,7 @@
 	</div>
 </div>
 
-<?php if ($_SESSION['log']['idSis_Empresa'] == 29 ) { ?>
+<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 <div class="col-md-3">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
