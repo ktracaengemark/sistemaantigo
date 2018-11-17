@@ -790,7 +790,8 @@ class Relatorio_model extends CI_Model {
 
         $query = $this->db->query('
             SELECT
-                DS.idApp_Despesas,
+                DS.idSis_Empresa,
+				DS.idApp_Despesas,
 				DS.Despesa,
 				TD.TipoDespesa,
 				DS.TipoProduto,
@@ -800,7 +801,7 @@ class Relatorio_model extends CI_Model {
 				DS.AprovadoDespesas,
 				DS.ServicoConcluidoDespesas,
 				DS.QuitadoDespesas,
-                PP.ParcelaPagaveis,
+				PP.ParcelaPagaveis,
                 PP.DataVencimentoPagaveis,
                 PP.ValorParcelaPagaveis,
                 PP.DataPagoPagaveis,

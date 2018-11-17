@@ -70,6 +70,18 @@ class Despesas_model extends CI_Model {
         }
     }
 
+    public function set_parcelaspagalterar($data) {
+
+        $query = $this->db->insert_batch('App_ParcelasPagaveis', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+	
     public function set_procedimento($data) {
 
         $query = $this->db->insert_batch('App_Proceddespesas', $data);
@@ -118,6 +130,25 @@ class Despesas_model extends CI_Model {
 
         return $query;
     }
+	
+    public function get_parcelaspagalterar($data) {
+		$query = $this->db->query('
+			SELECT * 
+			
+			FROM 
+				App_ParcelasPagaveis 
+			WHERE 
+				(MONTH(DataVencimentoPagaveis) = ' . date('m', time()) . ') AND
+
+				idSis_Empresa = ' . $data . '
+			ORDER BY
+				DataVencimentoPagaveis
+		');
+        
+		$query = $query->result_array();
+
+        return $query;
+    }	
 
     public function get_procedimento($data) {
 		$query = $this->db->query('SELECT * FROM App_Proceddespesas WHERE idApp_Despesas = ' . $data);
@@ -235,6 +266,13 @@ class Despesas_model extends CI_Model {
 
     }
 
+    public function update_parcelaspagalterar($data) {
+
+        $query = $this->db->update_batch('App_ParcelasPagaveis', $data, 'idApp_ParcelasPagaveis');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+	
     public function update_procedimento($data) {
 
         $query = $this->db->update_batch('App_Proceddespesas', $data, 'idApp_Proceddespesas');
@@ -280,6 +318,18 @@ class Despesas_model extends CI_Model {
         }
     }
 
+    public function delete_parcelaspagalterar($data) {
+
+        $this->db->where_in('idApp_ParcelasPagaveis', $data);
+        $this->db->delete('App_ParcelasPagaveis');
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+	
     public function delete_procedimento($data) {
 
         $this->db->where_in('idApp_Proceddespesas', $data);

@@ -318,36 +318,21 @@
 															<input type="text" class="form-control Valor" id="ValorRestanteDespesas" maxlength="10" placeholder="0,00"
 																   name="ValorRestanteDespesas" value="<?php echo $despesas['ValorRestanteDespesas'] ?>">
 														</div>
-													</div>
+													</div>														
+												</div>
+												<div class="row">																																																										
 													<div class="col-md-2">
-														<label for="DataVencimentoDespesas">Dt.Desp./ 1º Venc.</label>
+														<label for="DataVencimentoDespesas">1º Venc.</label>
 														<div class="input-group <?php echo $datepicker; ?>">
 															<span class="input-group-addon" disabled>
 																<span class="glyphicon glyphicon-calendar"></span>
 															</span>
 															<input type="text" class="form-control Date" id="DataVencimentoDespesas" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																   data-toggle="collapse" onkeyup="calculaParcelasPagaveis()" onchange="calculaParcelasPagaveis()"
+																	data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																   name="DataVencimentoDespesas" value="<?php echo $despesas['DataVencimentoDespesas']; ?>">															
 														</div>
-													</div>														
-												</div>
-												<div class="row">																																																										
-													<div class="col-md-2">
-														<label for="FormaPagamentoDespesas">Forma de Pag.</label>
-														<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-																id="FormaPagamentoDespesas" name="FormaPagamentoDespesas">
-															<!--<option value="">-- Selecione uma opção --</option>-->
-															<?php
-															foreach ($select['FormaPagamentoDespesas'] as $key => $row) {
-																(!$despesas['FormaPagamentoDespesas']) ? $despesas['FormaPagamentoDespesas'] = '1' : FALSE;
-																if ($despesas['FormaPagamentoDespesas'] == $key) {
-																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																} else {
-																	echo '<option value="' . $key . '">' . $row . '</option>';
-																}
-															}
-															?>
-														</select>
-													</div>
+													</div>													
 													<div class="col-md-2">
 														<label for="QtdParcelasDespesas">Qtd.Prc.</label><br>
 														<input type="text" class="form-control Numero" id="QtdParcelasDespesas" maxlength="3" placeholder="0"
@@ -382,6 +367,23 @@
 																?>
 															</div>
 														</div>
+													</div>
+													<div class="col-md-2">
+														<label for="FormaPagamentoDespesas">Forma de Pag.</label>
+														<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+																id="FormaPagamentoDespesas" name="FormaPagamentoDespesas">
+															<!--<option value="">-- Selecione uma opção --</option>-->
+															<?php
+															foreach ($select['FormaPagamentoDespesas'] as $key => $row) {
+																(!$despesas['FormaPagamentoDespesas']) ? $despesas['FormaPagamentoDespesas'] = '1' : FALSE;
+																if ($despesas['FormaPagamentoDespesas'] == $key) {
+																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																} else {
+																	echo '<option value="' . $key . '">' . $row . '</option>';
+																}
+															}
+															?>
+														</select>
 													</div>
 												</div>
 											

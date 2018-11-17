@@ -697,11 +697,12 @@
 
 					<div class="form-group">
 						<div class="row">
-							<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
-							<input type="hidden" name="idApp_Despesas" value="<?php echo $despesas['idApp_Despesas']; ?>">
+							<!--<input type="hidden" name="idApp_Cliente" value="<?php #echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
+							<input type="hidden" name="idApp_Despesas" value="<?php #echo $despesas['idApp_Despesas']; ?>">-->
+							<input type="hidden" name="idSis_Empresa" value="<?php echo $despesas['idSis_Empresa']; ?>">
 							<?php if ($metodo > 1) { ?>
-							<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
-							<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelaspag['idApp_ParcelasRec']; ?>">-->
+							<!--<input type="hidden" name="idApp_Procedimento" value="<?php #echo $procedimento['idApp_Procedimento']; ?>">
+							<input type="hidden" name="idApp_ParcelasRec" value="<?php #echo $parcelaspag['idApp_ParcelasRec']; ?>">-->
 							<?php } ?>
 							<?php if ($metodo == 2) { ?>
 

@@ -2436,7 +2436,6 @@ function adicionaParcelasPagaveisAlterar() {
 	$('.DatePicker').datetimepicker(dateTimePickerOptions);
 }
 
-
 $("#first-choice").change(function () {
 
     var $dropdown = $(this);
@@ -3452,7 +3451,8 @@ $(document).ready(function () {
     //Remove as PARCELAS PAGÁVEIS dinamicamente
     $(".input_fields_wrap23").on("click",".remove_field23", function(e){ //user click on remove text
         $("#23div"+$(this).attr("id")).remove();
-    })		
+    })	
+	
     /*
      * Função para capturar o valor escolhido no campo select (Serviço e Produto, por exemplo)
      */
