@@ -133,17 +133,30 @@ class Despesas_model extends CI_Model {
 	
     public function get_parcelaspagalterar($data) {
 		$query = $this->db->query('
-			SELECT * 
-			
+			SELECT
+				DS.Despesa,
+				DS.TipoDespesa,
+				CONCAT(PP.idApp_Despesas, "-", DS.Despesa) AS idApp_Despesas,
+				E.NomeEmpresa,
+				CONCAT(PP.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
+				PP.idApp_ParcelasPagaveis,
+				PP.ParcelaPagaveis,
+				PP.ValorParcelaPagaveis,
+				PP.DataVencimentoPagaveis,
+				PP.ValorPagoPagaveis,
+				PP.DataPagoPagaveis,
+				PP.QuitadoPagaveis
 			FROM 
-				App_ParcelasPagaveis 
+				App_ParcelasPagaveis AS PP
+					LEFT JOIN App_Despesas AS DS ON DS.idApp_Despesas = PP.idApp_Despesas
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PP.idSis_Empresa
 			WHERE 
-				idSis_Empresa = ' . $data . ' AND
-				(MONTH(DataVencimentoPagaveis) = ' . date('m', time()) . ') AND
-				QuitadoPagaveis = "N" 
+				PP.idSis_Empresa = ' . $data . ' AND
+				(MONTH(PP.DataVencimentoPagaveis) = ' . date('m', time()) . ') AND
+				PP.QuitadoPagaveis = "N" 
 				
 			ORDER BY
-				DataVencimentoPagaveis
+				PP.DataVencimentoPagaveis
 		');
         
 		$query = $query->result_array();

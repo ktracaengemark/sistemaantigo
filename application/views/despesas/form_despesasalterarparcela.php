@@ -51,7 +51,7 @@
 															<input type="text" class="form-control" maxlength="6"
 																   name="idSis_Empresa<?php echo $i ?>" value="<?php echo $parcelaspag[$i]['idSis_Empresa'] ?>">
 														</div>
-														<div class="col-md-1">
+														<div class="col-md-2">
 															<label for="idApp_Despesas">Despesa:</label><br>
 															<input type="text" class="form-control" maxlength="6"
 																   name="idApp_Despesas<?php echo $i ?>" value="<?php echo $parcelaspag[$i]['idApp_Despesas'] ?>">
@@ -101,7 +101,7 @@
 														</div>
 													</div>	
 													<div class="row">
-														<div class="col-md-7"></div>
+														<div class="col-md-8"></div>
 														<div class="col-md-2 text-right">
 															<label for="QuitadoPagaveis">Quitado?</label><br>
 															<div class="form-group">
