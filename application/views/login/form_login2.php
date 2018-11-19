@@ -4,26 +4,25 @@
 
     <?php if (isset($msg)) echo $msg; ?>
 
-    <?php echo form_open('login', 'role="form"'); ?>
+    <?php echo form_open('login/index2', 'role="form"'); ?>
 
     <p class="text-center">
-        <a href="<?php echo base_url(); ?>login">
+        <a href="<?php echo base_url(); ?>login/index2">
             <img src="<?php echo base_url() . 'arquivos/imagens/' . $modulo . '.png'; ?>" />
         </a>
     </p>
     <!--<h2 class="form-signin-heading text-center">Agenda <?php echo ucfirst($nome_modulo) ?></h2><h4><b>***** versão alpha *****</b></h4>-->
-    <h2 class="form-signin-heading text-center">Empresas & Pessoas</h2>	
+    <h2 class="form-signin-heading text-center">Conta Empresa</h2>	
 	<!--
 	<label class="sr-only">Empresa</label>
     <input type="text" id="inputText" class="form-control" placeholder="Empresa" autofocus name="idSis_Empresa" value="<?php echo set_value('idSis_Empresa'); ?>">
 	-->
-	<!--
 	<label class="sr-only">Empresa</label>
 	<select data-placeholder="Selecione uma opção..." class="form-control" id="idSis_Empresa" name="idSis_Empresa">			
 		<option value="">-- Selecione sua Empresa --</option>
 		<?php
 		foreach ($select['idSis_Empresa'] as $key => $row) {
-					(!$query['idSis_Empresa']) ? $query['idSis_Empresa'] = '5' : FALSE;	
+						
 			if ($query['idSis_Empresa'] == $key) {
 				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 			} else {
@@ -32,22 +31,21 @@
 		}
 		?>   
 	</select> 
-    <?php #echo form_error('idSis_Empresa'); ?>
+    <?php echo form_error('idSis_Empresa'); ?>
 	<label class="sr-only">Usuário</label>
-    <input type="text" id="inputText" class="form-control" placeholder="Usuário ou E-mail" autofocus name="Usuario" value="<?php #echo set_value('Usuario'); ?>">	   
-	<?php #echo form_error('Usuario'); ?>
+    <input type="text" id="inputText" class="form-control" placeholder="Usuário ou E-mail" autofocus name="Usuario" value="<?php echo set_value('Usuario'); ?>">	   
+	<?php echo form_error('Usuario'); ?>
 	<label class="sr-only">Senha</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
-    <?php #echo form_error('Senha'); ?>
-	<input type="hidden" name="modulo" value="<?php #echo $modulo; ?>">
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Acesso dos Usuários </button>	
+    <?php echo form_error('Senha'); ?>
+	<input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
+    <button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Acesso dos Usuários </button>	
     <br>
-	<p><a href="<?php #echo base_url(); ?>login/recuperar/?usuario=<?php #echo set_value('Usuario'); ?>">Esqueci usuário/senha!</a></p>
+	<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('Usuario'); ?>">Esqueci usuário/senha!</a></p>
     <br>
-	-->
-	<a class="btn btn-lg btn-warning btn-block" href="<?php echo base_url(); ?>login/index2" role="button">Conta Empresa</a>
-	<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>login/index1" role="button">Conta Pessoal</a>	
-
+	<a class="btn btn btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button"><span class="glyphicon glyphicon-log-in"></span> Acesso dos Administradores</a>
+	<a class="btn btn btn-danger btn-block" href="<?php echo base_url(); ?>loginempresa/registrar" role="button"><span class="glyphicon glyphicon-plus"></span> Nova Empresa</a>	
+	<a class="btn btn btn-primary  btn-block" href="<?php echo base_url(); ?>login/index1" role="button"><span class="glyphicon glyphicon-log-in"></span> Conta Pessoal</a>
 	
 </form>
 

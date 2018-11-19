@@ -335,7 +335,7 @@ class Login_model extends CI_Model {
             $array = $this->db->query(					
 				'SELECT                
 				idSis_Empresa,
-				CONCAT(NomeEmpresa, " ", "(", idSis_Empresa, ")") AS NomeEmpresa				
+				NomeEmpresa				
             FROM
                 Sis_Empresa
 			WHERE
@@ -348,7 +348,7 @@ class Login_model extends CI_Model {
             $query = $this->db->query(
                 'SELECT                
 				idSis_Empresa,
-				CONCAT(NomeEmpresa, " ", "(", idSis_Empresa, ")") AS NomeEmpresa			
+				NomeEmpresa			
             FROM
                 Sis_Empresa					
 			WHERE
@@ -366,4 +366,43 @@ class Login_model extends CI_Model {
         return $array;
     }	
 
+	public function select_empresa2($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+				idSis_Empresa,
+				CONCAT(NomeEmpresa, " ", "(", idSis_Empresa, ")") AS NomeEmpresa				
+            FROM
+                Sis_Empresa
+			WHERE 
+				idSis_Empresa != "1" AND
+				idSis_Empresa != "5"
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+				idSis_Empresa,
+				CONCAT(NomeEmpresa, " ", "(", idSis_Empresa, ")") AS NomeEmpresa			
+            FROM
+                Sis_Empresa					
+			WHERE 
+				idSis_Empresa != "1" AND
+				idSis_Empresa != "5"
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_Empresa] = $row->NomeEmpresa;
+            }
+        }
+
+        return $array;
+    }
+	
 }
