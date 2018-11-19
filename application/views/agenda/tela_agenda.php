@@ -102,7 +102,7 @@
 				</div>
 				<div class="form-group">
 					<div  style="overflow: auto; height: 456px; "> 
-							<table id="calendar" class="table table-condensed table-bordered table-striped "></table>
+							<table id="calendar" class="table table-condensed table-striped "></table>
 					</div>
 				</div>
 			</div>

@@ -38,13 +38,13 @@
     <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
     <?php echo form_error('Senha'); ?>
 	<input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
-    <button class="btn btn-lg btn-warning btn-block" type="submit">Acesso dos Administradores</button>
+    <button class="btn btn-lg btn-warning btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Acesso dos Administradores</button>
     <br>
 	<p><a href="<?php echo base_url(); ?>loginempresa/recuperar/?usuario=<?php echo set_value('UsuarioEmpresa'); ?>">Esqueci Admin./senha!</a></p>
     <br>
-	<a class="btn btn  btn-primary btn-block" href="<?php echo base_url(); ?>login/index" role="button">Acesso dos Usuários</a>
-	<a class="btn btn  btn-danger btn-block" href="<?php echo base_url(); ?>loginempresa/registrar" role="button">Cad. Nova Empresa</a>
-	<a class="btn btn  btn-danger btn-block" href="<?php echo base_url(); ?>login/registrar" role="button">Cad. Conta Pessoal</a>
+	<a class="btn btn  btn-primary btn-block" href="<?php echo base_url(); ?>login/index2" role="button"><span class="glyphicon glyphicon-log-in"></span> Conta Empresa</a>
+	<a class="btn btn  btn-danger btn-block" href="<?php echo base_url(); ?>login/index1" role="button"><span class="glyphicon glyphicon-log-in"></span> Conta Pessoal</a>
+
 
 </form>
 

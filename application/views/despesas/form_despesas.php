@@ -15,6 +15,7 @@
 
 					<?php echo form_open_multipart($form_open_path); ?>
 
+					<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 					<div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
 						<div class="panel panel-primary">
 							<div class="panel-heading collapsed " role="tab" id="heading1" data-toggle="collapse" data-parent="#accordion1" data-target="#collapse1" aria-expanded="false">								<h4 class="panel-title">
@@ -264,7 +265,7 @@
 							</div>
 						</div>
 					</div>
-			
+					<?php } ?>
 					<div class="panel-group" id="accordion4" role="tablist" aria-multiselectable="true">
 						<div class="panel panel-primary">
 							<div class="panel-heading collapsed" role="tab" id="heading4" data-toggle="collapse" data-parent="#accordion4" data-target="#collapse4" aria-expanded="false">								<h4 class="panel-title">
@@ -525,6 +526,7 @@
 						</div>
 					</div>
 					
+					<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 					<div class="panel-group" id="accordion8" role="tablist" aria-multiselectable="true">
 						<div class="panel panel-primary">
 							<div class="panel-heading collapsed" role="tab" id="heading8" data-toggle="collapse" data-parent="#accordion8" data-target="#collapse8" aria-expanded="false">								<h4 class="panel-title">
@@ -694,7 +696,7 @@
 							</div>
 						</div>
 					</div>	
-
+					<?php } ?>
 					<div class="form-group">
 						<div class="row">
 							<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->

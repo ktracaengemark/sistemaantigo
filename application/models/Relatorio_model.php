@@ -210,7 +210,8 @@ class Relatorio_model extends CI_Model {
 				OT.ServicoConcluido,
 				OT.Modalidade,
 				MD.Modalidade,
-                PR.ParcelaRecebiveis,
+                OT.idSis_Empresa,
+				PR.ParcelaRecebiveis,
 				CONCAT(PR.ParcelaRecebiveis) AS ParcelaRecebiveis,
                 PR.DataVencimentoRecebiveis,
                 PR.ValorParcelaRecebiveis,
@@ -228,9 +229,7 @@ class Relatorio_model extends CI_Model {
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				' . $filtro1 . '
-				' . $filtro2 . '
-				' . $filtro3 . '
+
 				' . $filtro4 . '
 				' . $filtro5 . ' 
 				OT.TipoRD = "R"

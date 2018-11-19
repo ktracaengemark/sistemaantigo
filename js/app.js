@@ -2260,6 +2260,102 @@ function adicionaParcelasRecebiveis() {
 	$('.DatePicker').datetimepicker(dateTimePickerOptions);	
 }
 
+function adicionaParcelasRecebiveisAlterar() {
+
+	var pc = $("#PRCount").val(); //initlal text box count
+	pc++; //text box increment
+	$("#PRCount").val(pc);
+	
+    $(".input_fields_wrap24").append('\
+		<div class="form-group" id="24div'+pc+'">\
+			<div class="panel panel-warning">\
+				<div class="panel-heading">\
+					<div class="row">\
+						<div class="col-md-1">\
+							<label for="idSis_Empresa">Empresa:</label><br>\
+							<input type="text" class="form-control" maxlength="6"\
+								   name="idSis_Empresa'+pc+'" value="Ex.">\
+						</div>\
+						<div class="col-md-1">\
+							<label for="idApp_OrcaTrata">Receita:</label><br>\
+							<input type="text" class="form-control" maxlength="6"\
+								   name="idApp_OrcaTrata'+pc+'" value="Ex.">\
+						</div>\
+						<div class="col-md-1">\
+							<label for="ParcelaRecebiveis">Parcela:</label><br>\
+							<input type="text" class="form-control" maxlength="6"\
+								   name="ParcelaRecebiveis'+pc+'" value="Ex.">\
+						</div>\
+						<div class="col-md-2">\
+							<label for="ValorParcelaRecebiveis">Valor Parcela:</label><br>\
+							<div class="input-group" id="txtHint">\
+								<span class="input-group-addon" id="basic-addon1">R$</span>\
+								<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
+										id="ValorParcelaRecebiveis'+pc+'" name="ValorParcelaRecebiveis'+pc+'" value="">\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="DataVencimentoRecebiveis">Data Venc. Parc.</label>\
+							<div class="input-group DatePicker">\
+								<span class="input-group-addon" disabled>\
+									<span class="glyphicon glyphicon-calendar"></span>\
+								</span>\
+								<input type="text" class="form-control Date" id="DataVencimentoRecebiveis'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataVencimentoRecebiveis'+pc+'" value="">\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="ValorPagoRecebiveis">Valor Pago:</label><br>\
+							<div class="input-group" id="txtHint">\
+								<span class="input-group-addon" id="basic-addon1">R$</span>\
+								<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
+										id="ValorPagoRecebiveis'+pc+'" name="ValorPagoRecebiveis'+pc+'" value="">\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="DataPagoRecebiveis">Data Pag.</label>\
+							<div class="input-group DatePicker">\
+								<span class="input-group-addon" disabled>\
+									<span class="glyphicon glyphicon-calendar"></span>\
+								</span>\
+								<input type="text" class="form-control Date" id="DataPagoRecebiveis'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataPagoRecebiveis'+pc+'" value="">\
+							</div>\
+						</div>\
+					</div>\
+					<div class="row">\
+						<div class="col-md-8"></div>\
+						<div class="col-md-2">\
+							<label for="QuitadoRecebiveis">Quitado????</label><br>\
+							<div class="form-group">\
+								<div class="btn-group" data-toggle="buttons">\
+									<label class="btn btn-warning active" name="radio_QuitadoRecebiveis'+pc+'" id="radio_QuitadoRecebiveis'+pc+'N">\
+									<input type="radio" name="QuitadoRecebiveis'+pc+'" id="radiogeraldinamico"\
+										onchange="carregaQuitado(this.value,this.name,'+pc+',1)" autocomplete="off" value="N" checked>Não\
+									</label>\
+									<label class="btn btn-default" name="radio_QuitadoRecebiveis'+pc+'" id="radio_QuitadoRecebiveis'+pc+'S">\
+									<input type="radio" name="QuitadoRecebiveis'+pc+'" id="radiogeraldinamico"\
+										onchange="carregaQuitado(this.value,this.name,'+pc+',1)" autocomplete="off" value="S">Sim\
+									</label>\
+								</div>\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label><br></label><br>\
+							<a href="#" id="'+pc+'" class="remove_field24 btn btn-danger">\
+								<span class="glyphicon glyphicon-trash"></span>\
+							</a>\
+						</div>\
+					</div>\
+				</div>\
+			</div>\
+		</div>'
+	); //add input box
+
+	//habilita o botão de calendário após a geração dos campos dinâmicos
+	$('.DatePicker').datetimepicker(dateTimePickerOptions);	
+}
+
 function adicionaParcelasPagaveis() {
 
 	var pc = $("#PRCount").val(); //initlal text box count
@@ -3443,13 +3539,18 @@ $(document).ready(function () {
     $(".input_fields_wrap21").on("click",".remove_field21", function(e){ //user click on remove text
         $("#21div"+$(this).attr("id")).remove();
     })
+
+    //Remove as PARCELAS RECEBÍVEIS ALTERAR dinamicamente
+    $(".input_fields_wrap24").on("click",".remove_field24", function(e){ //user click on remove text
+        $("#24div"+$(this).attr("id")).remove();
+    })
 	
     //Remove as PARCELAS PAGÁVEIS dinamicamente
     $(".input_fields_wrap22").on("click",".remove_field22", function(e){ //user click on remove text
         $("#22div"+$(this).attr("id")).remove();
     })	
 
-    //Remove as PARCELAS PAGÁVEIS dinamicamente
+    //Remove as PARCELAS PAGÁVEIS ALTERAR dinamicamente
     $(".input_fields_wrap23").on("click",".remove_field23", function(e){ //user click on remove text
         $("#23div"+$(this).attr("id")).remove();
     })		
@@ -3814,7 +3915,7 @@ $('#calendar').fullCalendar({
             url: 'Consulta_json.php', // use the `url` property
         }],
     //allDayDefault: true,
-    defaultView: 'agendaWeek',
+    defaultView: 'month',
     //contentHeight: 700,
     height: 'auto',
     //handleWindowResize: false,
@@ -3823,7 +3924,7 @@ $('#calendar').fullCalendar({
     firstDay: '0',
 	//minTime: '07:00',
     //maxTime: '21:00',
-    minTime: '06:00',
+    minTime: '00:00',
     maxTime: '24:00',
     nowIndicator: true,
     selectable: true,

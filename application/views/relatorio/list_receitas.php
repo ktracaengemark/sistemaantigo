@@ -41,7 +41,7 @@
 				<table class="table table-bordered table-condensed table-striped">
 					<thead>
 						<tr>
-							<!--<th class="active">Parc. Quit.?</th>-->
+							<th class="active">Empresa</th>
 							<th class="active">Cli/ Rec</th>	
 							<th class="active">Parc</th>
 							<th class="active">Venc</th>
@@ -58,8 +58,8 @@
 						<?php
 						foreach ($report->result_array() as $row) {
 							#echo '<tr>';
-							echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] . '">';
-								#echo '<td>' . $row['QuitadoRecebiveis'] . '</td>';
+							echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarparcela/' . $row['idSis_Empresa'] . '">';
+								echo '<td>' . $row['idSis_Empresa'] . '</td>';
 								echo '<td>' . $row['idApp_OrcaTrata'] . ' / ' . $row['NomeCliente'] . ' / Aprv-' . $row['AprovadoOrca'] . '</td>';
 								echo '<td>' . $row['ParcelaRecebiveis'] . '</td>';
 								echo '<td>' . $row['DataVencimentoRecebiveis'] . ' R$' . $row['ValorParcelaRecebiveis'] . '</td>';

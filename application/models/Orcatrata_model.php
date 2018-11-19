@@ -70,6 +70,18 @@ class Orcatrata_model extends CI_Model {
         }
     }
 
+    public function set_parcelasrecalterar($data) {
+
+        $query = $this->db->insert_batch('App_ParcelasRecebiveis', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+	
     public function set_procedimento($data) {
 
         $query = $this->db->insert_batch('App_Procedimento', $data);
@@ -118,6 +130,73 @@ class Orcatrata_model extends CI_Model {
 
         return $query;
     }
+	
+    public function get_parcelasrecalterar($data) {
+		$query = $this->db->query('
+			SELECT
+				C.NomeCliente,
+				OT.Receitas,
+				OT.TipoReceita,
+				CONCAT(IFNULL(PR.idApp_Orcatrata,""), "-", IFNULL(C.NomeCliente,""), "-", IFNULL(OT.Receitas,"")) AS idApp_OrcaTrata,
+				E.NomeEmpresa,
+				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
+				PR.idApp_ParcelasRecebiveis,
+				PR.ParcelaRecebiveis,
+				PR.ValorParcelaRecebiveis,
+				PR.DataVencimentoRecebiveis,
+				PR.ValorPagoRecebiveis,
+				PR.DataPagoRecebiveis,
+				PR.QuitadoRecebiveis
+			FROM 
+				App_ParcelasRecebiveis AS PR
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
+			WHERE 
+				PR.idSis_Empresa = ' . $data . ' AND
+				(MONTH(PR.DataVencimentoRecebiveis) = "12") AND
+				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
+				PR.QuitadoRecebiveis = "N"
+			ORDER BY
+				PR.DataVencimentoRecebiveis
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }
+
+    public function get_parcelaspagalterar2($data) {
+		$query = $this->db->query('
+			SELECT
+				DS.Despesa,
+				DS.TipoDespesa,
+				CONCAT(PP.idApp_Despesas, "-", DS.Despesa) AS idApp_Despesas,
+				E.NomeEmpresa,
+				CONCAT(PP.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
+				PP.idApp_ParcelasPagaveis,
+				PP.ParcelaPagaveis,
+				PP.ValorParcelaPagaveis,
+				PP.DataVencimentoPagaveis,
+				PP.ValorPagoPagaveis,
+				PP.DataPagoPagaveis,
+				PP.QuitadoPagaveis
+			FROM 
+				App_ParcelasPagaveis AS PP
+					LEFT JOIN App_Despesas AS DS ON DS.idApp_Despesas = PP.idApp_Despesas
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PP.idSis_Empresa
+			WHERE 
+				PP.idSis_Empresa = ' . $data . ' AND
+				(MONTH(PP.DataVencimentoPagaveis) = ' . date('m', time()) . ') AND
+				PP.QuitadoPagaveis = "N" 
+				
+			ORDER BY
+				PP.DataVencimentoPagaveis
+		');
+        
+		$query = $query->result_array();
+
+        return $query;
+    }	
 
     public function get_procedimento($data) {
 		$query = $this->db->query('SELECT * FROM App_Procedimento WHERE idApp_OrcaTrata = ' . $data);
@@ -250,6 +329,13 @@ class Orcatrata_model extends CI_Model {
 
     }
 
+    public function update_parcelasrecalterar($data) {
+
+        $query = $this->db->update_batch('App_ParcelasRecebiveis', $data, 'idApp_ParcelasRecebiveis');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+	
     public function update_procedimento($data) {
 
         $query = $this->db->update_batch('App_Procedimento', $data, 'idApp_Procedimento');
@@ -295,6 +381,18 @@ class Orcatrata_model extends CI_Model {
         }
     }
 
+    public function delete_parcelasrecalterar($data) {
+
+        $this->db->where_in('idApp_ParcelasRecebiveis', $data);
+        $this->db->delete('App_ParcelasRecebiveis');
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+	
     public function delete_procedimento($data) {
 
         $this->db->where_in('idApp_Procedimento', $data);
