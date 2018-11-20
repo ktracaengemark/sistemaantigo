@@ -1774,8 +1774,7 @@ class Basico_model extends CI_Model {
             FROM
                 Sis_Empresa					
 			WHERE
-				idSis_Empresa != "1" AND
-				idSis_Empresa != "5" 
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
 				NomeEmpresa ASC'
     );
@@ -1788,8 +1787,7 @@ class Basico_model extends CI_Model {
             FROM
                 Sis_Empresa					
 			WHERE
-				idSis_Empresa != "1" AND
-				idSis_Empresa != "5" 
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
 			ORDER BY 
 				NomeEmpresa ASC'
     );
@@ -1802,7 +1800,7 @@ class Basico_model extends CI_Model {
 
         return $array;
     }
-
+	
 	public function select_empresacli($data = FALSE) {
 
         if ($data === TRUE) {

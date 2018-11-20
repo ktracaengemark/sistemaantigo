@@ -4,7 +4,7 @@
 
     <?php if (isset($msg)) echo $msg; ?>
 
-    <?php echo form_open('loginempresa/registrar', 'role="form"'); ?>
+    <?php echo form_open('loginempresa/registrar2', 'role="form"'); ?>
 
     <!--
     <p class="text-center">
@@ -15,7 +15,7 @@
     </p>
     -->
 	<p class="text-center">
-        <a href="<?php echo base_url(); ?>loginempresa/registrar">
+        <a href="<?php echo base_url(); ?>loginempresa/registrar2">
             <img src="<?php echo base_url() . 'arquivos/imagens/' . $modulo . '.png'; ?>" />
         </a>
     </p>
@@ -85,7 +85,24 @@
            name="Confirma" value="<?php echo $query['Confirma']; ?>">
     <?php echo form_error('Confirma'); ?>
     <br>
-	
+
+	<label for="Associado">Indicado por:</label>
+	<select data-placeholder="Selecione uma opção..." class="form-control" id="Associado" name="Associado">			
+		<!--<option value="">-- Selecione uma Empresa --</option>-->
+		<?php
+		foreach ($select['Associado'] as $key => $row) {
+			(!$query['Associado']) ? $query['Associado'] = $_SESSION['log']['idSis_Empresa'] : FALSE;
+			if ($query['Associado'] == $key) {
+				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+			} else {
+				echo '<option value="' . $key . '">' . $row . '</option>';
+			}
+		}
+		?>   
+	</select> 
+    <?php echo form_error('Associado'); ?>
+    <br>	
+
     <button class="btn btn-lg btn-warning btn-block" type="submit">REGISTRAR</button>
 	<br>
 	<a class="btn btn btn-primary btn-block" href="<?php echo base_url(); ?>login/index" role="button">Acesso dos Usuários</a>

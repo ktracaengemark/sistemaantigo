@@ -132,6 +132,9 @@ class Orcatrata_model extends CI_Model {
     }
 	
     public function get_parcelasrecalterar($data) {
+		
+		
+		
 		$query = $this->db->query('
 			SELECT
 				C.NomeCliente,
@@ -154,7 +157,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
 			WHERE 
 				PR.idSis_Empresa = ' . $data . ' AND
-				(MONTH(PR.DataVencimentoRecebiveis) = "12") AND
+				(MONTH(PR.DataVencimentoRecebiveis) = "11") AND
 				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
 				PR.QuitadoRecebiveis = "N"
 			ORDER BY
@@ -164,40 +167,7 @@ class Orcatrata_model extends CI_Model {
 
         return $query;
     }
-
-    public function get_parcelaspagalterar2($data) {
-		$query = $this->db->query('
-			SELECT
-				DS.Despesa,
-				DS.TipoDespesa,
-				CONCAT(PP.idApp_Despesas, "-", DS.Despesa) AS idApp_Despesas,
-				E.NomeEmpresa,
-				CONCAT(PP.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
-				PP.idApp_ParcelasPagaveis,
-				PP.ParcelaPagaveis,
-				PP.ValorParcelaPagaveis,
-				PP.DataVencimentoPagaveis,
-				PP.ValorPagoPagaveis,
-				PP.DataPagoPagaveis,
-				PP.QuitadoPagaveis
-			FROM 
-				App_ParcelasPagaveis AS PP
-					LEFT JOIN App_Despesas AS DS ON DS.idApp_Despesas = PP.idApp_Despesas
-					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PP.idSis_Empresa
-			WHERE 
-				PP.idSis_Empresa = ' . $data . ' AND
-				(MONTH(PP.DataVencimentoPagaveis) = ' . date('m', time()) . ') AND
-				PP.QuitadoPagaveis = "N" 
-				
-			ORDER BY
-				PP.DataVencimentoPagaveis
-		');
-        
-		$query = $query->result_array();
-
-        return $query;
-    }	
-
+	
     public function get_procedimento($data) {
 		$query = $this->db->query('SELECT * FROM App_Procedimento WHERE idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();

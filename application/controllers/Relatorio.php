@@ -2910,8 +2910,7 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'Nome',
-
+            'NomeEmpresa',
             'Ordenamento',
             'Campo',
         ), TRUE));
@@ -2922,10 +2921,7 @@ class Relatorio extends CI_Controller {
 
 
 		$data['select']['Campo'] = array(
-            'C.Nome' => 'Nome do Associado',
-            'C.DataNascimento' => 'Data de Nascimento',
-            'C.Sexo' => 'Sexo',
-            'C.Email' => 'E-mail',
+            'C.NomeEmpresa' => 'Nome da Empresa',
         );
 
         $data['select']['Ordenamento'] = array(
@@ -2933,14 +2929,14 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-        $data['select']['Nome'] = $this->Relatorio_model->select_associado();
+        $data['select']['NomeEmpresa'] = $this->Relatorio_model->select_associado();
 
-        $data['titulo'] = 'Relatório de Associados';
+        $data['titulo'] = 'Associados';
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
 
-            $data['bd']['Nome'] = $data['query']['Nome'];
+            $data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 
@@ -3187,7 +3183,7 @@ class Relatorio extends CI_Controller {
 
         $data['select']['NomeEmpresa'] = $this->Relatorio_model->select_empresas();
 
-        $data['titulo'] = 'Relatório de Fornecedores';
+        $data['titulo'] = 'Empresas';
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {

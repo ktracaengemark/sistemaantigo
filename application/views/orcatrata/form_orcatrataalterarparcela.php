@@ -15,7 +15,26 @@
 					<?php echo form_open_multipart($form_open_path); ?>
 
 					<div class="panel panel-<?php echo $panel; ?>">
-						<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
+						<div class="panel-heading">
+						
+							<?php echo $titulo; ?>
+							
+							<div class="col-md-3 text-left">
+								<!--<label for="QuitadoRecebiveis">Parc. Quit.</label>-->
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+										id="QuitadoRecebiveis" name="QuitadoRecebiveis">
+									<?php
+									foreach ($select['QuitadoRecebiveis'] as $key => $row) {
+										if ($query['QuitadoRecebiveis'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
+						</div>
 						<div class="panel-body">
 
 						

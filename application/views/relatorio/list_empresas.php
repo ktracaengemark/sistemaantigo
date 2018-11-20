@@ -1,4 +1,5 @@
-<div class="container-fluid">
+<div style="overflow: auto; height: 350px; ">
+	<div class="container-fluid">
     <div class="row">
 
         <div>
@@ -45,4 +46,5 @@
 
     </div>
 
+</div>
 </div>

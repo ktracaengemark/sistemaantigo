@@ -22,7 +22,9 @@
 						<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 							<span class="glyphicon glyphicon-plus"></span> Nova
 						</button>					
-										
+						<a class="btn btn-sm btn-danger " href="<?php echo base_url() ?>orcatrata/alterarparcela" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Baixa
+						</a>				
 					</div>
 					<div class="panel-body">
 						

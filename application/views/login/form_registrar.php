@@ -111,7 +111,7 @@
     <button class="btn btn-lg btn-success btn-block" type="submit">REGISTRAR</button>
 	<br>
 	<a class="btn btn btn-primary btn-block" href="<?php echo base_url(); ?>login/index" role="button">Acesso dos Usuários</a>
-	<a class="btn btn btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">Acesso dos Administradores</a>
+	<!--<a class="btn btn btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">Acesso dos Administradores</a>-->
 </form>
 
 </div>

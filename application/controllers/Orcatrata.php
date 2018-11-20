@@ -1446,7 +1446,7 @@ class Orcatrata extends CI_Controller {
             $data['update']['parcelasrec']['anterior'] = $this->Orcatrata_model->get_parcelasrec($data['orcatrata']['idApp_OrcaTrata']);
             if (isset($data['parcelasrec']) || (!isset($data['parcelasrec']) && isset($data['update']['parcelasrec']['anterior']) ) ) {
 
-                if (isset($data['servico']))
+                if (isset($data['parcelasrec']))
                     $data['parcelasrec'] = array_values($data['parcelasrec']);
                 else
                     $data['parcelasrec'] = array();
@@ -1491,7 +1491,7 @@ class Orcatrata extends CI_Controller {
             $data['update']['procedimento']['anterior'] = $this->Orcatrata_model->get_procedimento($data['orcatrata']['idApp_OrcaTrata']);
             if (isset($data['procedimento']) || (!isset($data['procedimento']) && isset($data['update']['procedimento']['anterior']) ) ) {
 
-                if (isset($data['servico']))
+                if (isset($data['procedimento']))
                     $data['procedimento'] = array_values($data['procedimento']);
                 else
                     $data['procedimento'] = array();
@@ -1998,7 +1998,7 @@ class Orcatrata extends CI_Controller {
             $data['update']['parcelasrec']['anterior'] = $this->Orcatrata_model->get_parcelasrec($data['orcatrata']['idApp_OrcaTrata']);
             if (isset($data['parcelasrec']) || (!isset($data['parcelasrec']) && isset($data['update']['parcelasrec']['anterior']) ) ) {
 
-                if (isset($data['servico']))
+                if (isset($data['parcelasrec']))
                     $data['parcelasrec'] = array_values($data['parcelasrec']);
                 else
                     $data['parcelasrec'] = array();
@@ -2043,7 +2043,7 @@ class Orcatrata extends CI_Controller {
             $data['update']['procedimento']['anterior'] = $this->Orcatrata_model->get_procedimento($data['orcatrata']['idApp_OrcaTrata']);
             if (isset($data['procedimento']) || (!isset($data['procedimento']) && isset($data['update']['procedimento']['anterior']) ) ) {
 
-                if (isset($data['servico']))
+                if (isset($data['procedimento']))
                     $data['procedimento'] = array_values($data['procedimento']);
                 else
                     $data['procedimento'] = array();
@@ -2113,7 +2113,7 @@ class Orcatrata extends CI_Controller {
 
     }
 
-    public function alterarparcela($id = FALSE) {
+    public function alterarparcela() {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -2123,7 +2123,10 @@ class Orcatrata extends CI_Controller {
             $data['msg'] = '';
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		$data['query'] = quotes_to_entities($this->input->post(array(
+			'QuitadoRecebiveis',
 
+        ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
         //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
@@ -2154,7 +2157,7 @@ class Orcatrata extends CI_Controller {
 
         //Fim do trecho de código que dá pra melhorar
 
-        if ($id) {
+        if ($_SESSION['log']['idSis_Empresa']) {
 
             #### Carrega os dados do cliente nas variáves de sessão ####
             #$this->load->model('Cliente_model');
@@ -2166,7 +2169,7 @@ class Orcatrata extends CI_Controller {
 
 
             #### App_ParcelasRecebiveis ####
-            $data['parcelasrec'] = $this->Orcatrata_model->get_parcelasrecalterar($id);
+            $data['parcelasrec'] = $this->Orcatrata_model->get_parcelasrecalterar($_SESSION['log']['idSis_Empresa']);
             if (count($data['parcelasrec']) > 0) {
                 $data['parcelasrec'] = array_combine(range(1, count($data['parcelasrec'])), array_values($data['parcelasrec']));
 				$data['count']['PRCount'] = count($data['parcelasrec']);
@@ -2187,8 +2190,7 @@ class Orcatrata extends CI_Controller {
 
         #### App_OrcaTrata ####
         #$this->form_validation->set_rules('DataOrca', 'Data do Orçamento', 'required|trim|valid_date');
-
-
+		
         $data['select']['QuitadoRecebiveis'] = $this->Basico_model->select_status_sn();
 
 
@@ -2219,17 +2221,19 @@ class Orcatrata extends CI_Controller {
         */
 
         #run form validation
-        if ($this->form_validation->run() === FALSE) {
+        #if ($this->form_validation->run() === FALSE) {
+		if ( 1 != 3 ) {	
             $this->load->view('orcatrata/form_orcatrataalterarparcela', $data);
         } else {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
-
-            #### App_ParcelasRec ####
-            $data['update']['parcelasrec']['anterior'] = $this->Orcatrata_model->get_parcelasrecalterar($data['parcelasrec']['idSis_Empresa']);
+			$data['query']['QuitadoRecebiveis'] = $data['query']['QuitadoRecebiveis'];
+            
+			#### App_ParcelasRec ####
+            $data['update']['parcelasrec']['anterior'] = $this->Orcatrata_model->get_parcelasrecalterar($_SESSION['log']['idSis_Empresa']);
             if (isset($data['parcelasrec']) || (!isset($data['parcelasrec']) && isset($data['update']['parcelasrec']['anterior']) ) ) {
 
-                if (isset($data['servico']))
+                if (isset($data['parcelasrec']))
                     $data['parcelasrec'] = array_values($data['parcelasrec']);
                 else
                     $data['parcelasrec'] = array();

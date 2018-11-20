@@ -3753,31 +3753,29 @@ exit();*/
 
 	public function list_associado($data, $completo) {
 
-        $data['Nome'] = ($data['Nome']) ? ' AND C.idSis_Usuario = ' . $data['Nome'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'C.Nome' : $data['Campo'];
+        $data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND C.idSis_Empresa = ' . $data['NomeEmpresa'] : FALSE;
+        $data['Campo'] = (!$data['Campo']) ? 'C.NomeEmpresa' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 
 
 
         $query = $this->db->query('
             SELECT
-				C.idSis_Usuario,
+				C.idSis_Empresa,
 				C.Associado,
-                C.Nome,
-                C.DataNascimento,
-                C.Celular,
-                C.Sexo,
-                C.Email,
-				C.Usuario,
+                C.NomeEmpresa,
+                C.DataCriacao,
+				C.Celular,
+				C.Site,
 				SN.StatusSN,
 				C.Inativo
             FROM
-                Sis_Usuario AS C
+                Sis_Empresa AS C
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Inativo = C.Inativo
             WHERE
-                C.Associado = ' . $_SESSION['log']['id'] . ' AND
+                C.Associado = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
-				' . $data['Nome'] . '
+				' . $data['NomeEmpresa'] . '
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');
@@ -3798,10 +3796,7 @@ exit();*/
         } else {
 
             foreach ($query->result() as $row) {
-				$row->DataNascimento = $this->basico->mascara_data($row->DataNascimento, 'barras');
-                $row->Sexo = $this->basico->get_sexo($row->Sexo);
-                #$row->Sexo = ($row->Sexo == 2) ? 'F' : 'M';
-
+				$row->DataCriacao = $this->basico->mascara_data($row->DataCriacao, 'barras');
                 $row->Celular = ($row->Celular) ? $row->Celular : FALSE;
             }
 
@@ -4731,21 +4726,21 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-                idSis_Usuario,
-                Nome
+                idSis_Empresa,
+                NomeEmpresa
             FROM
-                Sis_Usuario
+                Sis_Empresa
             WHERE
-                Associado = ' . $_SESSION['log']['id'] . ' AND
+                Associado = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
-                Nome ASC
+                NomeEmpresa ASC
         ');
 
         $array = array();
         $array[0] = ':: Todos ::';
         foreach ($query->result() as $row) {
-			$array[$row->idSis_Usuario] = $row->Nome;
+			$array[$row->idSis_Empresa] = $row->NomeEmpresa;
         }
 
         return $array;
