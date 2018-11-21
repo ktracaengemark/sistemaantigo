@@ -1,7 +1,8 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div>
+        <div style="overflow: auto; height: 220px;">
+		
             <table class="table table-bordered table-condensed table-striped">
 
                 <thead>
@@ -29,9 +30,9 @@
                         <?php
                         echo '<td><b>' . $report['Receitas'][0]->Balanco . '</b></td>';
                         for($i=1;$i<=12;$i++) {
-                            echo '<td class="text-right">R$ ' . $report['Receitas'][0]->{'M'.$i} . '</td>';
+                            echo '<td class="text-right">' . $report['Receitas'][0]->{'M'.$i} . '</td>';
                         }
-                        echo '<td class="text-right">R$ ' . $report['TotalGeral']->Receitas . '</td>';
+                        echo '<td class="text-right">' . $report['TotalGeral']->Receitas . '</td>';
                         ?>
                     </tr>
 					
@@ -39,9 +40,9 @@
                         <?php
                         echo '<td><b>' . $report['Devolucoes'][0]->Balanco . '</b></td>';
                         for($i=1;$i<=12;$i++) {
-                            echo '<td class="text-right">R$ ' . $report['Devolucoes'][0]->{'M'.$i} . '</td>';
+                            echo '<td class="text-right">' . $report['Devolucoes'][0]->{'M'.$i} . '</td>';
                         }
-                        echo '<td class="text-right">R$ ' . $report['TotalGeral']->Devolucoes . '</td>';
+                        echo '<td class="text-right">' . $report['TotalGeral']->Devolucoes . '</td>';
                         ?>
                     </tr>
 
@@ -49,9 +50,9 @@
                         <?php
                         echo '<td><b>' . $report['Despesas'][0]->Balanco . '</b></td>';
                         for($i=1;$i<=12;$i++) {
-							echo '<td class="text-right">R$ ' . $report['Despesas'][0]->{'M'.$i} . '</td>';
+							echo '<td class="text-right">' . $report['Despesas'][0]->{'M'.$i} . '</td>';
                         }
-                        echo '<td class="text-right">R$ ' . $report['TotalGeral']->Despesas . '</td>';
+                        echo '<td class="text-right">' . $report['TotalGeral']->Despesas . '</td>';
                         ?>
                     </tr>
 
@@ -60,10 +61,10 @@
                         echo '<td><b>' . $report['Total']->Balanco . '</b></td>';
                         for($i=1;$i<=12;$i++) {
                             $bgcolor = ($report['Total']->{'M'.$i} < 0) ? 'bg-danger' : 'bg-success';
-                            echo '<td class="text-right ' . $bgcolor . '">R$ ' . $report['Total']->{'M'.$i} . '</td>';
+                            echo '<td class="text-right ' . $bgcolor . '">' . $report['Total']->{'M'.$i} . '</td>';
                         }
                         $bgcolor = ($report['TotalGeral']->BalancoGeral < 0) ? 'bg-danger' : 'bg-success';
-                        echo '<td class="text-right ' . $bgcolor . '">R$ ' . $report['TotalGeral']->BalancoGeral . '</td>';
+                        echo '<td class="text-right ' . $bgcolor . '">' . $report['TotalGeral']->BalancoGeral . '</td>';
                         ?>
                     </tr>
 

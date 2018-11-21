@@ -1332,7 +1332,7 @@ class Relatorio extends CI_Controller {
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
         $this->form_validation->set_rules('Ano', 'Ano', 'required|trim|integer|greater_than[1900]');
 
-        $data['titulo'] = 'Relatório de Balanço';
+        $data['titulo'] = 'Balanço Anual';
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
