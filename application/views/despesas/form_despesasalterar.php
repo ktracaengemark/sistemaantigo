@@ -293,10 +293,10 @@
 														</a>-->
 														<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 																id="TipoDespesa" name="TipoDespesa">
-															<option value="">-- Sel. Tipo Despesa --</option>
+															<!--<option value="">-- Sel. Tipo Despesa --</option>-->
 															<?php
 															foreach ($select['TipoDespesa'] as $key => $row) {
-																(!$despesas['TipoDespesa']) ? $despesas['TipoDespesa'] = '12' : FALSE;
+																(!$despesas['TipoDespesa']) ? $despesas['TipoDespesa'] = '1' : FALSE;
 																if ($despesas['TipoDespesa'] == $key) {
 																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																} else {

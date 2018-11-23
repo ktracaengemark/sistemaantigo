@@ -88,6 +88,7 @@ class Despesas extends CI_Controller {
 		(!$data['despesas']['DataVencimentoDespesas']) ? $data['despesas']['DataVencimentoDespesas'] = date('d/m/Y', time()) : FALSE;
 		(!$data['despesas']['TipoProduto']) ? $data['despesas']['TipoProduto'] = 'D' : FALSE;
 		(!$data['despesas']['QtdParcelasDespesas']) ? $data['despesas']['QtdParcelasDespesas'] = '1' : FALSE;
+		(!$data['despesas']['TipoDespesa']) ? $data['despesas']['TipoDespesa'] = '1' : FALSE;
 
         $j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
@@ -144,7 +145,7 @@ class Despesas extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### App_Despesas ####
-        $this->form_validation->set_rules('DataDespesas', 'Data da Despesa', 'required|trim|valid_date');
+        #$this->form_validation->set_rules('DataDespesas', 'Data da Despesa', 'required|trim|valid_date');
         #$this->form_validation->set_rules('Despesa', 'Despesa', 'required|trim');
         #$this->form_validation->set_rules('TipoDespesa', 'Tipo de Despesa', 'required|trim');
         #$this->form_validation->set_rules('ProfissionalDespesas', 'Profissional', 'required|trim');		
@@ -155,7 +156,7 @@ class Despesas extends CI_Controller {
 		$this->form_validation->set_rules('QtdParcelasDespesas', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoDespesas', 'Data do 1ºVenc.', 'required|trim|valid_date');
 		
-		$data['select']['TipoDespesa'] = $this->Tipodespesa_model->select_tipodespesa();
+		$data['select']['TipoDespesa'] = $this->Basico_model->select_tipodespesa();
         $data['select']['AprovadoDespesas'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamentoDespesas'] = $this->Formapag_model->select_formapag();
 		$data['select']['ServicoConcluidoDespesas'] = $this->Basico_model->select_status_sn();
@@ -189,12 +190,12 @@ class Despesas extends CI_Controller {
         else
             $data['parcelasin'] = '';
 
-      
+		$data['collapse'] = '';	
 
-        (!$data['despesas']['ModalidadeDespesas']) ? $data['despesas']['ModalidadeDespesas'] = 'P' : FALSE;
+		$data['collapse1'] = 'class="collapse"';      
 
-        #Ver uma solução melhor para este campo
-			
+        #Ver uma solução melhor para este campo        
+		(!$data['despesas']['ModalidadeDespesas']) ? $data['despesas']['ModalidadeDespesas'] = 'P' : FALSE;			
         (!$data['despesas']['AprovadoDespesas']) ? $data['despesas']['AprovadoDespesas'] = 'S' : FALSE;
 		
 /*
@@ -388,6 +389,7 @@ class Despesas extends CI_Controller {
 		(!$this->input->post('PRCount')) ? $data['count']['PRCount'] = 0 : $data['count']['PRCount'] = $this->input->post('PRCount');
 		
 		#(!$data['despesas']['TipoProduto']) ? $data['despesas']['TipoProduto'] = 'D' : FALSE;
+		(!$data['despesas']['TipoDespesa']) ? $data['despesas']['TipoDespesa'] = '1' : FALSE;
 		
         $j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
@@ -513,7 +515,7 @@ class Despesas extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### App_Despesas ####
-        $this->form_validation->set_rules('DataDespesas', 'Data da Despesa', 'required|trim|valid_date');
+        #$this->form_validation->set_rules('DataDespesas', 'Data da Despesa', 'required|trim|valid_date');
         #$this->form_validation->set_rules('Despesa', 'Despesa', 'required|trim');
         #$this->form_validation->set_rules('TipoDespesa', 'Tipo de Despesa', 'required|trim');
         #$this->form_validation->set_rules('ProfissionalDespesas', 'Profissional', 'required|trim');
@@ -522,7 +524,7 @@ class Despesas extends CI_Controller {
 		$this->form_validation->set_rules('QtdParcelasDespesas', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoDespesas', 'Data do 1ºVenc.', 'required|trim|valid_date');
 		
-		$data['select']['TipoDespesa'] = $this->Tipodespesa_model->select_tipodespesa();
+		$data['select']['TipoDespesa'] = $this->Basico_model->select_tipodespesa();
         $data['select']['AprovadoDespesas'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamentoDespesas'] = $this->Formapag_model->select_formapag();
         $data['select']['ServicoConcluidoDespesas'] = $this->Basico_model->select_status_sn();
@@ -559,7 +561,11 @@ class Despesas extends CI_Controller {
         else
             $data['parcelasin'] = '';
 */
-        #Ver uma solução melhor para este campo
+		$data['collapse'] = '';	
+
+		$data['collapse1'] = 'class="collapse"';        
+		
+		#Ver uma solução melhor para este campo
         (!$data['despesas']['AprovadoDespesas']) ? $data['despesas']['AprovadoDespesas'] = 'S' : FALSE;
 /*
         $data['radio'] = array(

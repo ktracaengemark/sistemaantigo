@@ -1887,7 +1887,7 @@ function calculaDespesas() {
 
     //escreve o subtotal no campo do formulário
     $('#ValorRestanteDespesas').val(subtotal);
-    //calculaRestaDespesas($("#ValorEntradaDespesas").val());
+    calculaRestaDespesas($("#ValorEntradaDespesas").val());
 }
 
 function calculaConsumo() {
@@ -3292,8 +3292,8 @@ $(document).ready(function () {
                                 <label for="QtdCompraProduto">Qtd:</label><br>\
                                 <div class="input-group">\
                                     <input type="text" class="form-control Numero" maxlength="3" id="QtdCompraProduto'+pc+'" placeholder="0"\
-                                        onkeyup="calculaSubtotalCompra(this.value,this.name,'+pc+',\'QTD\',\'Produto\')"\
-                                        name="QtdCompraProduto'+pc+'" value="">\
+                                        onkeyup="calculaSubtotalCompra(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdCompraProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
+										name="QtdCompraProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
                             <div class="col-md-7">\
@@ -3339,8 +3339,9 @@ $(document).ready(function () {
 							</div>\
 							<div class="col-md-1">\
                                 <label><br></label><br>\
-                                <a href="#" id="'+pc+'" class="remove_field6 btn btn-danger">\
-                                    <span class="glyphicon glyphicon-trash"></span>\
+                                <a href="#" id="'+pc+'" class="remove_field6 btn btn-danger"\
+                                    onclick="calculaQtdSoma(\'QtdCompraProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
+									<span class="glyphicon glyphicon-trash"></span>\
                                 </a>\
                             </div>\
                         </div>\

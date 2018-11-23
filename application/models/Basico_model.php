@@ -1561,6 +1561,50 @@ class Basico_model extends CI_Model {
         return $array;
     }
 
+    public function select_tipodespesa($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+				SELECT 
+					TD.idTab_TipoDespesa, 
+					TD.TipoDespesa,
+					CD.Categoriadesp,
+					CD.Abrevcategoriadesp
+				FROM 
+					Tab_TipoDespesa AS TD
+						LEFT JOIN Tab_Categoriadesp AS CD ON CD.idTab_Categoriadesp = TD.Categoriadesp
+				WHERE 
+					TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+				ORDER BY
+					TD.TipoDespesa
+				');
+				   
+        } 
+		else {
+            $query = $this->db->query('
+				SELECT 
+					TD.idTab_TipoDespesa, 
+					TD.TipoDespesa,
+					CD.Categoriadesp,
+					CD.Abrevcategoriadesp
+				FROM 
+					Tab_TipoDespesa AS TD
+						LEFT JOIN Tab_Categoriadesp AS CD ON CD.idTab_Categoriadesp = TD.Categoriadesp
+				WHERE 
+					TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+				ORDER BY
+					TD.TipoDespesa
+				');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_TipoDespesa] = $row->TipoDespesa;
+            }
+        }
+
+        return $array;
+    }
+	
 	public function select_modalidade($data = FALSE) {
 
         if ($data === TRUE) {
