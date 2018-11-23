@@ -205,13 +205,6 @@
 												</button>
 											</div>
 										</div>
-										<div class="form-group col-md-3 text-left">
-											<div class="form-footer ">
-												<a type="button" class="btn btn-warning btn-block" href="<?php echo base_url() ?>orcatrata/alterarparcela" role="button">
-													<span class="glyphicon glyphicon-ok"> Baixa
-												</a>
-											</div>
-										</div>
 									</div>
 									
 									<div class="row">
