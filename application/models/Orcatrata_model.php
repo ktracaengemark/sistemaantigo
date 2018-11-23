@@ -110,6 +110,22 @@ class Orcatrata_model extends CI_Model {
         return $query[0];
     }
 
+    public function get_orcatrataalterar($data) {
+        $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE idSis_Empresa = ' . $data);
+        $query = $query->result_array();
+
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query[0];
+    }
+	
 	public function get_servico($data) {
 		$query = $this->db->query('SELECT * FROM App_ServicoVenda WHERE idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
@@ -130,8 +146,15 @@ class Orcatrata_model extends CI_Model {
 
         return $query;
     }
-	
+
     public function get_parcelasrecalterar($data) {
+		$query = $this->db->query('SELECT * FROM App_ParcelasRecebiveis WHERE idSis_Empresa = ' . $data);
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
+    public function get_parcelasrecalterar1($data) {
 		
 		
 		
@@ -278,6 +301,14 @@ class Orcatrata_model extends CI_Model {
 
     }
 
+    public function update_orcatrataalterar($data, $id) {
+
+        unset($data['idSis_Empresa']);
+        $query = $this->db->update('Sis_Empresa', $data, array('idSis_Empresa' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+	
     public function update_servico_venda($data) {
 
         $query = $this->db->update_batch('App_ServicoVenda', $data, 'idApp_ServicoVenda');

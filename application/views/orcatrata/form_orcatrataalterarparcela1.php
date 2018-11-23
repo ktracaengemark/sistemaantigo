@@ -15,9 +15,29 @@
 					<?php echo form_open_multipart($form_open_path); ?>
 
 					<div class="panel panel-<?php echo $panel; ?>">
-						<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
-						<div class="panel-body">
+						<div class="panel-heading">
+						
+							<?php echo $titulo; ?>
 							
+							<div class="col-md-3 text-left">
+								<!--<label for="QuitadoRecebiveis">Parc. Quit.</label>-->
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+										id="QuitadoRecebiveis" name="QuitadoRecebiveis">
+									<?php
+									foreach ($select['QuitadoRecebiveis'] as $key => $row) {
+										if ($query['QuitadoRecebiveis'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
+						</div>
+						<div class="panel-body">
+
+						
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 
@@ -32,7 +52,7 @@
 											<!--App_parcelasRec-->
 											<input type="hidden" name="PRCount" id="PRCount" value="<?php echo $count['PRCount']; ?>"/>
 
-											<div class="input_fields_wrap21">
+											<div class="input_fields_wrap24">
 
 											<?php
 											for ($i=1; $i <= $count['PRCount']; $i++) {
@@ -42,10 +62,20 @@
 												<input type="hidden" name="idApp_ParcelasRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_ParcelasRecebiveis']; ?>"/>
 												<?php } ?>
 
-												<div class="form-group" id="21div<?php echo $i ?>">
+												<div class="form-group" id="24div<?php echo $i ?>">
 													<div class="panel panel-warning">
 														<div class="panel-heading">
 															<div class="row">
+																<div class="col-md-1">
+																	<label for="idSis_Empresa">Empresa:</label><br>
+																	<input type="text" class="form-control" maxlength="6" readonly="" 
+																		   name="idSis_Empresa<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idSis_Empresa'] ?>">
+																</div>
+																<div class="col-md-2">
+																	<label for="idApp_OrcaTrata">Receita:</label><br>
+																	<input type="text" class="form-control" maxlength="6" readonly=""
+																		   name="idApp_OrcaTrata<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_OrcaTrata'] ?>">
+																</div>
 																<div class="col-md-1">
 																	<label for="ParcelaRecebiveis">Parcela:</label><br>
 																	<input type="text" class="form-control" maxlength="6" 
@@ -87,7 +117,10 @@
 																			   name="DataPagoRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataPagoRecebiveis'] ?>">																
 																	</div>
 																</div>
-																<div class="col-md-2">
+															</div>	
+															<div class="row">	
+																<div class="col-md-8"></div>
+																<div class="col-md-2 text-right">
 																	<label for="QuitadoRecebiveis">Quitado????</label><br>
 																	<div class="form-group">
 																		<div class="btn-group" data-toggle="buttons">
@@ -117,9 +150,9 @@
 																		</div>
 																	</div>
 																</div>
-																<div class="col-md-1">
+																<div class="col-md-2 text-right">
 																	<label><br></label><br>
-																	<button type="button" id="<?php echo $i ?>" class="remove_field21 btn btn-danger">
+																	<button type="button" id="<?php echo $i ?>" class="remove_field24 btn btn-danger">
 																		<span class="glyphicon glyphicon-trash"></span>
 																	</button>
 																</div>
@@ -132,7 +165,7 @@
 											}
 											?>
 											</div>
-
+											<!--
 											<div class="panel panel-warning">
 												<div class="panel-heading">										
 													<div class="form-group">	
@@ -147,54 +180,16 @@
 													</div>	
 												</div>
 											</div>
+											-->
 										</div>
 									</div>
 								</div>
 							</div>
-							
-							<div class="panel-group">	
-								<div class="panel panel-primary">
 
-									<div class="panel-heading text-left">
-										<a class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Statusorca" aria-expanded="false" aria-controls="Statusorca">
-											<span class="glyphicon glyphicon-menu-down"></span> Status do Orçam.
-										</a>
-									</div>
-									
-									<div <?php echo $collapse; ?> id="Statusorca">
-										<div class="panel-body">
-											<div class="form-group">
-												<div class="panel panel-info">
-													<div class="panel-heading">
-
-														<div class="col-md-1"></div>
-														<div class="form-group text-left">
-															<div class="row">
-																<div class="col-md-3">
-																	<label for="DataOrca">Orçado em:</label>
-																	<div class="input-group <?php echo $datepicker; ?>">
-																		<span class="input-group-addon" disabled>
-																			<span class="glyphicon glyphicon-calendar"></span>
-																		</span>
-																		<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																				name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							
 							<div class="form-group">
 								<div class="row">
-									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
-									<input type="hidden" name="idSis_Empresa" value="<?php echo $orcatrata['idSis_Empresa']; ?>">
+									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
+									<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">-->
 									<?php if ($metodo > 1) { ?>
 									<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
 									<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
@@ -206,12 +201,13 @@
 												<span class="glyphicon glyphicon-save"></span> Salvar
 											</button>
 										</div>
+										<!--
 										<div class="col-md-6 text-right">
 											<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 												<span class="glyphicon glyphicon-trash"></span> Excluir
 											</button>
 										</div>
-
+										-->
 										<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
