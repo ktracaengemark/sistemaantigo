@@ -160,7 +160,6 @@ class Despesas_model extends CI_Model {
 		
 		$query = $this->db->query('
 			SELECT
-
 				OT.Receitas,
 				OT.TipoReceita,
 				CONCAT(IFNULL(PR.idApp_Despesas,""), "-", IFNULL(C.NomeCliente,""), "-", IFNULL(OT.Receitas,"")) AS idApp_Despesas,

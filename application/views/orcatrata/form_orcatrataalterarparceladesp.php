@@ -46,9 +46,9 @@
 													<div class="panel panel-warning">
 														<div class="panel-heading">
 															<div class="row">
-																<div class="col-md-1">
+																<div class="col-md-2">
 																	<label for="ParcelaRecebiveis">Parcela:</label><br>
-																	<input type="text" class="form-control" maxlength="6" 
+																	<input type="text" class="form-control" maxlength="6" readonly=""
 																		   name="ParcelaRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ParcelaRecebiveis'] ?>">
 																</div>
 																<div class="col-md-2">
@@ -117,13 +117,18 @@
 																		</div>
 																	</div>
 																</div>
-																<div class="col-md-1">
+															</div>	
+															<!--
+															<div class="row">
+																<div class="col-md-10"></div>
+																<div class="col-md-2 text-right">
 																	<label><br></label><br>
 																	<button type="button" id="<?php echo $i ?>" class="remove_field21 btn btn-danger">
 																		<span class="glyphicon glyphicon-trash"></span>
 																	</button>
 																</div>
 															</div>
+															-->
 														</div>
 													</div>
 												</div>

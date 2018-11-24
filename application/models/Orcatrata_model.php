@@ -200,12 +200,55 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 
-    public function get_parcelasrecparceladesp($data) {
-		$query = $this->db->query('SELECT * FROM App_ParcelasRecebiveis WHERE TipoRD = "D" AND QuitadoRecebiveis = "N" AND idSis_Empresa = ' . $data);
+    public function get_parcelasrecparceladesp1($data) {
+		$query = $this->db->query('
+			SELECT * 
+			FROM 
+				App_ParcelasRecebiveis 
+			WHERE 
+				idSis_Empresa = ' . $data . ' AND
+				TipoRD = "D" AND
+				(MONTH(DataVencimentoRecebiveis) = "08") AND
+				(YEAR(DataVencimentoRecebiveis) = "2018") AND
+				QuitadoRecebiveis = "N"  
+			');
         $query = $query->result_array();
 
         return $query;
     }
+	
+    public function get_parcelasrecparceladesp($data) {
+		$query = $this->db->query('
+			SELECT
+				OT.Receitas,
+				OT.TipoReceita,
+				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "-", IFNULL(OT.Receitas,"")) AS idApp_OrcaTrata,
+				E.NomeEmpresa,
+				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
+				PR.idApp_ParcelasRecebiveis,
+				CONCAT(IFNULL(PR.ParcelaRecebiveis,""), "--", IFNULL(OT.Receitas,""), "-", IFNULL(PR.idApp_OrcaTrata,"")) AS ParcelaRecebiveis,
+				PR.ValorParcelaRecebiveis,
+				PR.DataVencimentoRecebiveis,
+				PR.ValorPagoRecebiveis,
+				PR.DataPagoRecebiveis,
+				PR.QuitadoRecebiveis
+			FROM 
+				App_ParcelasRecebiveis AS PR
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
+			WHERE 
+				PR.idSis_Empresa = ' . $data . ' AND
+				(MONTH(PR.DataVencimentoRecebiveis) = "10") AND
+				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
+				PR.QuitadoRecebiveis = "N"
+			ORDER BY
+				PR.DataVencimentoRecebiveis  
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }	
 		
     public function get_procedimento($data) {
 		$query = $this->db->query('SELECT * FROM App_Procedimento WHERE idApp_OrcaTrata = ' . $data);
