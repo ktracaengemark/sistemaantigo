@@ -17,7 +17,7 @@
 					<div class="panel panel-<?php echo $panel; ?>">
 						<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
 						<div class="panel-body">
-							
+
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 
@@ -189,7 +189,6 @@
 									</div>
 								</div>
 							</div>
-							
 							
 							<div class="form-group">
 								<div class="row">

@@ -124,6 +124,22 @@ class Orcatrata_model extends CI_Model {
         */
 
         return $query[0];
+    }
+
+    public function get_orcatrataparceladesp($data) {
+        $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE idSis_Empresa = ' . $data);
+        $query = $query->result_array();
+
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query[0];
     }	
 
     public function get_orcatrataalterar($data) {
@@ -183,51 +199,14 @@ class Orcatrata_model extends CI_Model {
 
         return $query;
     }
-	
-    public function get_parcelasrecalterar($data) {
-		$query = $this->db->query('SELECT * FROM App_ParcelasRecebiveis WHERE idSis_Empresa = ' . $data);
+
+    public function get_parcelasrecparceladesp($data) {
+		$query = $this->db->query('SELECT * FROM App_ParcelasRecebiveis WHERE TipoRD = "D" AND QuitadoRecebiveis = "N" AND idSis_Empresa = ' . $data);
         $query = $query->result_array();
 
         return $query;
     }
-	
-    public function get_parcelasrecalterar1($data) {
 		
-		
-		
-		$query = $this->db->query('
-			SELECT
-				C.NomeCliente,
-				OT.Receitas,
-				OT.TipoReceita,
-				CONCAT(IFNULL(PR.idApp_Orcatrata,""), "-", IFNULL(C.NomeCliente,""), "-", IFNULL(OT.Receitas,"")) AS idApp_OrcaTrata,
-				E.NomeEmpresa,
-				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
-				PR.idApp_ParcelasRecebiveis,
-				PR.ParcelaRecebiveis,
-				PR.ValorParcelaRecebiveis,
-				PR.DataVencimentoRecebiveis,
-				PR.ValorPagoRecebiveis,
-				PR.DataPagoRecebiveis,
-				PR.QuitadoRecebiveis
-			FROM 
-				App_ParcelasRecebiveis AS PR
-					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
-					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
-			WHERE 
-				PR.idSis_Empresa = ' . $data . ' AND
-				(MONTH(PR.DataVencimentoRecebiveis) = "11") AND
-				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
-				PR.QuitadoRecebiveis = "N"
-			ORDER BY
-				PR.DataVencimentoRecebiveis
-		');
-        $query = $query->result_array();
-
-        return $query;
-    }
-	
     public function get_procedimento($data) {
 		$query = $this->db->query('SELECT * FROM App_Procedimento WHERE idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
@@ -337,6 +316,14 @@ class Orcatrata_model extends CI_Model {
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }
+	
+    public function update_orcatrataparceladesp($data, $id) {
+
+        unset($data['idSis_Empresa']);
+        $query = $this->db->update('Sis_Empresa', $data, array('idSis_Empresa' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }	
 
     public function update_orcatrataalterar($data, $id) {
 

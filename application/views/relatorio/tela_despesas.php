@@ -17,7 +17,7 @@
 					<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 						<span class="glyphicon glyphicon-search"></span> Despesas
 					</button>											
-					<a type="button" class="btn btn-sm btn-warning " href="<?php echo base_url() ?>orcatrata/alterarparcela" role="button">
+					<a type="button" class="btn btn-sm btn-warning " href="<?php echo base_url() ?>orcatrata/alterarparceladesp" role="button">
 						<span class="glyphicon glyphicon-ok"> Baixa
 					</a>
 					<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
