@@ -324,14 +324,6 @@ class Orcatrata_model extends CI_Model {
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }	
-
-    public function update_orcatrataalterar($data, $id) {
-
-        unset($data['idSis_Empresa']);
-        $query = $this->db->update('Sis_Empresa', $data, array('idSis_Empresa' => $id));
-        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
-
-    }
 	
     public function update_servico_venda($data) {
 
@@ -348,13 +340,6 @@ class Orcatrata_model extends CI_Model {
     }
 
     public function update_parcelasrec($data) {
-
-        $query = $this->db->update_batch('App_ParcelasRecebiveis', $data, 'idApp_ParcelasRecebiveis');
-        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
-
-    }
-
-    public function update_parcelasrecalterar($data) {
 
         $query = $this->db->update_batch('App_ParcelasRecebiveis', $data, 'idApp_ParcelasRecebiveis');
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
@@ -395,18 +380,6 @@ class Orcatrata_model extends CI_Model {
     }
 
     public function delete_parcelasrec($data) {
-
-        $this->db->where_in('idApp_ParcelasRecebiveis', $data);
-        $this->db->delete('App_ParcelasRecebiveis');
-
-        if ($this->db->affected_rows() === 0) {
-            return FALSE;
-        } else {
-            return TRUE;
-        }
-    }
-
-    public function delete_parcelasrecalterar($data) {
 
         $this->db->where_in('idApp_ParcelasRecebiveis', $data);
         $this->db->delete('App_ParcelasRecebiveis');

@@ -11,11 +11,11 @@
 			<div class="panel panel-primary">
 
 				<div class="panel-heading">
-					<?php echo form_open('relatorio/despesas', 'role="form"'); ?>
+					<?php echo form_open('relatorio/despesasparc', 'role="form"'); ?>
 					<?php #echo $titulo; ?>
 
 					<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-						<span class="glyphicon glyphicon-search"></span> Despesas
+						<span class="glyphicon glyphicon-search"></span> Parcelas
 					</button>											
 					<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 						<span class="glyphicon glyphicon-plus"></span> Nova
@@ -204,8 +204,8 @@
 										</div>
 										<div class="form-group col-md-3 text-left">
 											<div class="form-footer">		
-												<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/despesasparc" role="button">
-													<span class="glyphicon glyphicon-plus"></span> Editar Parcelas
+												<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/despesas" role="button">
+													<span class="glyphicon glyphicon-plus"></span> Editar Despesas
 												</a>
 											</div>	
 										</div>
