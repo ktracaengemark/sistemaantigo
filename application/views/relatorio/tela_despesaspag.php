@@ -53,7 +53,7 @@
 									</div>
 									<div class="form-group col-md-4 text-left">
 										<div class="form-footer">		
-											<a class="btn btn-danger btn-block " href="<?php echo base_url() ?>despesas/cadastrar" role="button">
+											<a class="btn btn-danger btn-block " href="<?php echo base_url() ?>orcatrata/cadastrardesp" role="button">
 												<span class="glyphicon glyphicon-plus"></span> Nova Despesa
 											</a>
 										</div>

@@ -6,16 +6,145 @@
 
 		<div class="col-md-1"></div>
 		<div class="col-md-10 ">
+			<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
+			<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
+			<nav class="navbar navbar-inverse">
+			  <div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span> 
+					</button>
+					<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+						<?php echo '<small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '.</small>' ?> 
+					</a>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-center">
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-user"></span> Cliente <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-calendar"></span> Ver
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/cliente\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Editar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-calendar"></span> Agendamentos <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/consulta\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'consulta/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-calendar"></span> Listar
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/consulta\/cadastrar1\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'consulta/cadastrar1/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Cadastrar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>
+						<?php if ($_SESSION['Cliente']['idSis_Empresa'] == $_SESSION['log']['idSis_Empresa'] ) { ?>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-usd"></span> Orçamentos <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/orcatrata\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-usd"></span> Listar
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/orcatrata\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'orcatrata/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Cadastrar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>
+						<?php } ?>
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-pencil"></span> Procedimentos <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/procedimento\/listarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-pencil"></span> Listar
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/procedimento\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'procedimento/cadastrarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-plus"></span> Cadastrar
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>
+						<?php } ?>
+					</ul>
 
+				</div>
+			  </div>
+			</nav>
+			<?php } ?>
+			
+			<?php } ?>
 			<div class="row">
 
-				<div class="col-md-12 col-lg-12">			
+				<div class="col-md-12 col-lg-12">
 					<?php echo validation_errors(); ?>
-					<?php echo form_open_multipart($form_open_path); ?>
 
 					<div class="panel panel-<?php echo $panel; ?>">
-						<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
+
+						<div class="panel-heading"><strong>Orçamento - </strong><?php echo $orcatrata['idApp_OrcaTrata'] ?></div>
 						<div class="panel-body">
+
+							<?php echo form_open_multipart($form_open_path); ?>
 
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 							<div class="panel-group">	
@@ -206,7 +335,7 @@
 															?>
 
 															<?php if ($metodo > 1) { ?>
-															<input type="hidden" name="idApp_ServicoVenda<?php echo $i ?>" value="<?php echo $servico[$i]['idApp_ServicoVenda']; ?>"/>
+															<input type="hidden" name="idApp_ProdutoCompra<?php echo $i ?>" value="<?php echo $servico[$i]['idApp_ProdutoCompra']; ?>"/>
 															<?php } ?>
 
 															<input type="hidden" name="ServicoHidden" id="ServicoHidden<?php echo $i ?>" value="<?php echo $i ?>">
@@ -216,24 +345,24 @@
 																	<div class="panel-heading">
 																		<div class="row">
 																			<div class="col-md-1">
-																				<label for="QtdVendaServico">Qtd:</label>
-																				<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico<?php echo $i ?>" placeholder="0"
-																						onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
-																						autofocus name="QtdVendaServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdVendaServico'] ?>">
+																				<label for="QtdCompraProduto">Qtd:</label>
+																				<input type="text" class="form-control Numero" maxlength="3" id="QtdCompraProduto<?php echo $i ?>" placeholder="0"
+																						onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdCompraProduto','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
+																						autofocus name="QtdCompraProduto<?php echo $i ?>" value="<?php echo $servico[$i]['QtdCompraProduto'] ?>">
 																			</div>
 																			<div class="col-md-3">
-																				<label for="idTab_Servico">Produto:</label>
+																				<label for="idTab_Produto">Produto:</label>
 																				<?php if ($i == 1) { ?>
 																				<!--<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>servico/cadastrar/servico" role="button">
 																					<span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
 																				</a>-->
 																				<?php } ?>
 																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValorDevTabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
-																						id="listadinamica<?php echo $i ?>" name="idTab_Servico<?php echo $i ?>">																					
+																						id="listadinamica<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">																					
 																					<option value="">-- Selecione uma opção --</option>
 																					<?php
 																					foreach ($select['Servico'] as $key => $row) {
-																						if ($servico[$i]['idTab_Servico'] == $key) {
+																						if ($servico[$i]['idTab_Produto'] == $key) {
 																							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																						} else {
 																							echo '<option value="' . $key . '">' . $row . '</option>';
@@ -243,17 +372,17 @@
 																				</select>
 																			</div>
 																			<div class="col-md-3">
-																				<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
-																				<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
-																					   name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
+																				<label for="ObsProduto<?php echo $i ?>">Obs:</label><br>
+																				<input type="text" class="form-control" id="ObsProduto<?php echo $i ?>" maxlength="250"
+																					   name="ObsProduto<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
 																			</div>
 																			<div class="col-md-2">
-																				<label for="ValorVendaServico">Valor do Produto:</label>
+																				<label for="ValorCompraProduto">Valor do Produto:</label>
 																				<div class="input-group">
 																					<span class="input-group-addon" id="basic-addon1">R$</span>
-																					<input type="text" class="form-control Valor" id="idTab_Servico<?php echo $i ?>" maxlength="10" placeholder="0,00"
+																					<input type="text" class="form-control Valor" id="idTab_Produto<?php echo $i ?>" maxlength="10" placeholder="0,00"
 																						onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','VP','Servico')"
-																						name="ValorVendaServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorVendaServico'] ?>">
+																						name="ValorCompraProduto<?php echo $i ?>" value="<?php echo $servico[$i]['ValorCompraProduto'] ?>">
 																				</div>
 																			</div>
 																			<div class="col-md-2">
@@ -268,13 +397,13 @@
 																		<div class="row">
 																			<div class="col-md-9"></div>
 																			<div class="col-md-2">
-																				<label for="DataValidadeServico<?php echo $i ?>">Valid. do Prod.:</label>
+																				<label for="DataValidadeProduto<?php echo $i ?>">Valid. do Prod.:</label>
 																				<div class="input-group <?php echo $datepicker; ?>">
 																					<span class="input-group-addon" disabled>
 																						<span class="glyphicon glyphicon-calendar"></span>
 																					</span>
 																					<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																						   name="DataValidadeServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataValidadeServico']; ?>">																				
+																						   name="DataValidadeProduto<?php echo $i ?>" value="<?php echo $servico[$i]['DataValidadeProduto']; ?>">																				
 																				</div>
 																			</div>
 																			<!--
@@ -310,7 +439,7 @@
 																			<div class="col-md-1">
 																				<label><br></label><br>
 																				<button type="button" id="<?php echo $i ?>" class="remove_field10 btn btn-danger"
-																					onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',1,<?php echo $i ?>,'CountMax2',0,'ServicoHidden')">
+																					onclick="calculaQtdSomaDev('QtdCompraProduto','QtdSomaDev','ServicoSoma',1,<?php echo $i ?>,'CountMax2',0,'ServicoHidden')">
 																					<span class="glyphicon glyphicon-trash"></span>
 																				</button>
 																			</div>
@@ -320,7 +449,7 @@
 															</div>
 
 															<?php
-															$QtdSomaDev+=$servico[$i]['QtdVendaServico'];
+															$QtdSomaDev+=$servico[$i]['QtdCompraProduto'];
 															$ServicoSoma++;
 															}
 															?>
@@ -334,7 +463,7 @@
 																			<br>																
 																			<div class="col-md-3 text-left">
 																				<a class="add_field_button10  btn btn-danger" 
-																						onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
+																						onclick="calculaQtdSomaDev('QtdCompraProduto','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
 																					<span class="glyphicon glyphicon-minus"></span> Produtos
 																				</a>
 																			</div>
@@ -370,7 +499,7 @@
 								</div>
 							</div>
 							<?php } ?>
-							
+
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 
@@ -403,7 +532,8 @@
 																	}
 																	?>
 																</select>
-															</div>														
+															</div>
+															
 															<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 															<div class="col-md-2">
 																<label for="Receitas">Receita</label><br>
@@ -549,7 +679,7 @@
 									</div>
 								</div>
 							</div>
-
+							
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 
@@ -994,15 +1124,58 @@
 								</div>
 							</div>
 							<?php } ?>
+							<!--
 							<div class="form-group">
 								<div class="row">
-									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
-									<input type="hidden" name="idApp_Despesas" value="<?php echo $orcatrata['idApp_Despesas']; ?>">
+									<div class="col-md-3">
+										<label for="DataEntradaOrca">Validade do Orç.:</label>
+										<div class="input-group <?php echo $datepicker; ?>">
+											<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+												   name="DataEntradaOrca" value="<?php echo $orcatrata['DataEntradaOrca']; ?>">
+											<span class="input-group-addon" disabled>
+												<span class="glyphicon glyphicon-calendar"></span>
+											</span>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<label for="DataPrazo">Prazo de Entrega:</label>
+										<div class="input-group <?php echo $datepicker; ?>">
+											<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+													name="DataPrazo" value="<?php echo $orcatrata['DataPrazo']; ?>">
+											<span class="input-group-addon" disabled>
+												<span class="glyphicon glyphicon-calendar"></span>
+											</span>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+							<hr>
+							-->
+
+							<div class="form-group">
+								<div class="row">
+									<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
+									<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
 									<?php if ($metodo > 1) { ?>
 									<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
 									<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 									<?php } ?>
 									<?php if ($metodo == 2) { ?>
+										<!--
+										<div class="col-md-12 text-center">
+											<button class="btn btn-lg btn-danger" id="inputDb" data-loading-text="Aguarde..." name="submit" value="1" type="submit">
+												<span class="glyphicon glyphicon-trash"></span> Excluir
+											</button>
+											<button class="btn btn-lg btn-warning" id="inputDb" onClick="history.go(-1);
+														return true;">
+												<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+											</button>
+										</div>
+										<button type="button" class="btn btn-danger">
+											<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
+										</button>                        -->
 
 										<div class="col-md-6">
 											<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
@@ -1033,7 +1206,7 @@
 															</button>
 														</div>
 														<div class="col-md-6 text-right">
-															<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluir/' . $orcatrata['idApp_Despesas'] ?>" role="button">
+															<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluir/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
 																<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 															</a>
 														</div>
@@ -1057,7 +1230,10 @@
 						</div>
 					</div>
 				</div>
+
 			</div>
+
+
 		</div>
 		<div class="col-md-1"></div>
 	</div>

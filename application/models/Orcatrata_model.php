@@ -109,6 +109,22 @@ class Orcatrata_model extends CI_Model {
 
         return $query[0];
     }
+	
+    public function get_orcatratadesp($data) {
+        $query = $this->db->query('SELECT * FROM App_OrcaTrata WHERE TipoRD = "D" AND idApp_OrcaTrata = ' . $data);
+        $query = $query->result_array();
+
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query[0];
+    }	
 
     public function get_orcatrataalterar($data) {
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE idSis_Empresa = ' . $data);
@@ -133,6 +149,13 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 
+	public function get_servicodesp($data) {
+		$query = $this->db->query('SELECT * FROM App_ServicoVenda WHERE TipoProduto = "CONS" AND idApp_OrcaTrata = ' . $data);
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
     public function get_produto($data) {
 		$query = $this->db->query('SELECT * FROM App_ProdutoVenda WHERE idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
@@ -140,6 +163,13 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 
+    public function get_produtodesp($data) {
+		$query = $this->db->query('SELECT * FROM App_ProdutoVenda WHERE TipoProduto = "COMP" AND idApp_OrcaTrata = ' . $data);
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
     public function get_parcelasrec($data) {
 		$query = $this->db->query('SELECT * FROM App_ParcelasRecebiveis WHERE idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
@@ -147,6 +177,13 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 
+    public function get_parcelasrecdesp($data) {
+		$query = $this->db->query('SELECT * FROM App_ParcelasRecebiveis WHERE TipoRD = "D" AND idApp_OrcaTrata = ' . $data);
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
     public function get_parcelasrecalterar($data) {
 		$query = $this->db->query('SELECT * FROM App_ParcelasRecebiveis WHERE idSis_Empresa = ' . $data);
         $query = $query->result_array();

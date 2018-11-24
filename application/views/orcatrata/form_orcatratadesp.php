@@ -36,7 +36,7 @@
 													
 													<div class="panel-heading text-left">
 														<a class="btn btn-success" type="button" data-toggle="collapse" data-target="#Entregues" aria-expanded="false" aria-controls="Entregues">
-															<span class="glyphicon glyphicon-menu-down"></span> Entregues
+															<span class="glyphicon glyphicon-menu-down"></span> Comprados
 														</a>
 													</div>
 													
@@ -155,11 +155,11 @@
 																					<span class="glyphicon glyphicon-plus"></span> Produtos
 																				</a>
 																			</div>
+																			<div class="col-md-3">	
+																				<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
+																			</div>
 																			<div class="col-md-2">	
 																				<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
-																			</div>
-																			<div class="col-md-3">	
-																				<b>Prod. Entregues: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
 																			</div>
 																			<div class="col-md-3 text-left">																							
 																				<!--
@@ -169,7 +169,7 @@
 																				</a>
 																				-->
 																				<a class="btn btn-success" type="button" data-toggle="collapse" data-target="#Entregues" aria-expanded="false" aria-controls="Entregues">
-																					<span class="glyphicon glyphicon-menu-up"></span> Entregues
+																					<span class="glyphicon glyphicon-menu-up"></span> Comprados
 																				</a>																							
 																			</div>
 																		</div>
@@ -183,13 +183,13 @@
 												</div>
 											</div>
 											
-											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
+											<?php if ($_SESSION['log']['NivelEmpresa'] >= 1 ) { ?>	
 											<div class="panel-group">	
 												<div class="panel panel-danger">
 
 													<div class="panel-heading text-left">
 														<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
-															<span class="glyphicon glyphicon-menu-down"></span> Devolvidos
+															<span class="glyphicon glyphicon-menu-down"></span> Consumidos
 														</a>
 													</div>
 													
@@ -338,21 +338,15 @@
 																					<span class="glyphicon glyphicon-minus"></span> Produtos
 																				</a>
 																			</div>
+																			<div class="col-md-3">	
+																				<b>Produtos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
+																			</div>
 																			<div class="col-md-2">	
 																				<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
 																			</div>
-																			<div class="col-md-3">	
-																				<b>Prod. Devolvidos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
-																			</div>
 																			<div class="col-md-3 text-left">																							
-																				<!--
-																				<a class="accordion-toggle btn btn-heading  collapsed" role="tab" id="heading6" data-toggle="collapse" data-parent="#accordion6" data-target="#collapse6" aria-expanded="false">
-																					<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-																					Devolvidos
-																				</a>
-																				-->
 																				<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
-																					<span class="glyphicon glyphicon-menu-up"></span> Devolvidos
+																					<span class="glyphicon glyphicon-menu-up"></span> Consumidos
 																				</a>																							
 																			</div>
 																		</div>
@@ -376,7 +370,7 @@
 
 									<div class="panel-heading text-left">
 										<a class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Orcamento" aria-expanded="false" aria-controls="Orcamento">
-											<span class="glyphicon glyphicon-menu-down"></span> Receita & Forma de Pagam.
+											<span class="glyphicon glyphicon-menu-down"></span> Despesa & Forma de Pagam.
 										</a>
 									</div>
 									
@@ -388,7 +382,7 @@
 													<div class="form-group">
 														<div class="row">
 															<div class="col-md-2">
-																<label for="TipoReceita">Tipo de Receita</label>
+																<label for="TipoReceita">Tipo de Despesa</label>
 																<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																		id="TipoReceita" name="TipoReceita">
 																	<option value="">-- Selecione uma opção --</option>
@@ -403,10 +397,11 @@
 																	}
 																	?>
 																</select>
-															</div>														
+															</div>
+															
 															<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 															<div class="col-md-2">
-																<label for="Receitas">Receita</label><br>
+																<label for="Receitas">Despesa</label><br>
 																<input type="text" class="form-control" maxlength="200"
 																		name="Receitas" value="<?php echo $orcatrata['Receitas'] ?>">
 															</div>
@@ -997,7 +992,7 @@
 							<div class="form-group">
 								<div class="row">
 									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
-									<input type="hidden" name="idApp_Despesas" value="<?php echo $orcatrata['idApp_Despesas']; ?>">
+									<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
 									<?php if ($metodo > 1) { ?>
 									<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
 									<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
@@ -1033,7 +1028,7 @@
 															</button>
 														</div>
 														<div class="col-md-6 text-right">
-															<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluir/' . $orcatrata['idApp_Despesas'] ?>" role="button">
+															<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluir/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
 																<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 															</a>
 														</div>

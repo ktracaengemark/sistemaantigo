@@ -13,7 +13,6 @@ if (!$db) {
 }
 
 #echo 'Conexão bem sucedida';
-
 $result = mysql_query(
         'SELECT
             *
@@ -21,7 +20,7 @@ $result = mysql_query(
             Tab_' . $_GET['tabela'] . ' AS T
         WHERE
             T.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-			T.Empresa = ' . $_SESSION['log']['Empresa'] . ' 
+			T.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
         ORDER BY T.Nome' . $_GET['tabela'] . ' ASC'
 );
 
