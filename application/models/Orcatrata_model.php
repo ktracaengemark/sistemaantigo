@@ -218,6 +218,9 @@ class Orcatrata_model extends CI_Model {
     }
 	
     public function get_parcelasrecparceladesp($data) {
+		
+		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimentoRecebiveis) = ' . $data['Mesvenc'] : FALSE;
+		
 		$query = $this->db->query('
 			SELECT
 				OT.Receitas,

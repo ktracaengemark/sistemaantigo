@@ -2679,7 +2679,11 @@ class Orcatrata extends CI_Controller {
         else
             $data['msg'] = '';
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		$data['query'] = quotes_to_entities($this->input->post(array(
+			'Mesvenc',
+        ), TRUE));
+		
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $data['orcatrata'] = quotes_to_entities($this->input->post(array(
             #### Sis_Empresa ####
             'idSis_Empresa',
@@ -2746,7 +2750,8 @@ class Orcatrata extends CI_Controller {
 
 
         $data['select']['QuitadoRecebiveis'] = $this->Basico_model->select_status_sn();
-
+		$data['select']['Mesvenc'] = $this->Basico_model->select_mes();
+		
         $data['titulo'] = 'Editar Parcela';
         $data['form_open_path'] = 'orcatrata/alterarparceladesp';
         $data['readonly'] = '';
@@ -2790,7 +2795,9 @@ class Orcatrata extends CI_Controller {
             $this->load->view('orcatrata/form_orcatrataalterarparceladesp', $data);
         } else {
 
-            ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+            $data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
+			
+			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Sis_Empresa ####
 
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'mysql');
