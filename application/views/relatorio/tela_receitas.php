@@ -17,8 +17,8 @@
 					<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 						<span class="glyphicon glyphicon-search"></span> Receitas
 					</button>											
-					<a type="button" class="btn btn-sm btn-warning " href="<?php echo base_url() ?>orcatrata/alterarparcela" role="button">
-						<span class="glyphicon glyphicon-ok"> Baixa
+					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/receitasparc" role="button">
+						<span class="glyphicon glyphicon-ok"></span>Parcelas
 					</a>
 					<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 						<span class="glyphicon glyphicon-plus"></span> Nova
@@ -64,7 +64,7 @@
 							<div class="modal-content">
 								<div class="modal-header bg-danger">
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros</h4>
+									<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros da Receitas</h4>
 								</div>
 								<div class="modal-footer">
 									<div class="row">
@@ -204,6 +204,13 @@
 													<span class="glyphicon glyphicon-remove"> Fechar
 												</button>
 											</div>
+										</div>
+										<div class="form-group col-md-3 text-left">
+											<div class="form-footer">		
+												<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/receitasparc" role="button">
+													<span class="glyphicon glyphicon-plus"></span> Editar Parcelas
+												</a>
+											</div>	
 										</div>
 									</div>
 									

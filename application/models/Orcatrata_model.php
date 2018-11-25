@@ -69,18 +69,6 @@ class Orcatrata_model extends CI_Model {
             return $this->db->insert_id();
         }
     }
-
-    public function set_parcelasrecalterar($data) {
-
-        $query = $this->db->insert_batch('App_ParcelasRecebiveis', $data);
-
-        if ($this->db->affected_rows() === 0) {
-            return FALSE;
-        } else {
-            #return TRUE;
-            return $this->db->insert_id();
-        }
-    }
 	
     public function set_procedimento($data) {
 
@@ -142,7 +130,7 @@ class Orcatrata_model extends CI_Model {
         return $query[0];
     }	
 
-    public function get_orcatrataalterar($data) {
+    public function get_orcatrataparcela($data) {
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE idSis_Empresa = ' . $data);
         $query = $query->result_array();
 
@@ -225,11 +213,12 @@ class Orcatrata_model extends CI_Model {
 			SELECT
 				OT.Receitas,
 				OT.TipoReceita,
+				TD.TipoDespesa,
 				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "-", IFNULL(OT.Receitas,"")) AS idApp_OrcaTrata,
 				E.NomeEmpresa,
 				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
 				PR.idApp_ParcelasRecebiveis,
-				CONCAT(IFNULL(PR.ParcelaRecebiveis,""), "--", IFNULL(OT.Receitas,""), "-", IFNULL(PR.idApp_OrcaTrata,"")) AS ParcelaRecebiveis,
+				CONCAT(IFNULL(PR.ParcelaRecebiveis,""), "--", IFNULL(TD.TipoDespesa,""), "--", IFNULL(OT.Receitas,"")) AS ParcelaRecebiveis,
 				PR.ValorParcelaRecebiveis,
 				PR.DataVencimentoRecebiveis,
 				PR.ValorPagoRecebiveis,
@@ -238,11 +227,12 @@ class Orcatrata_model extends CI_Model {
 			FROM 
 				App_ParcelasRecebiveis AS PR
 					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-
+					LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = OT.TipoReceita
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
 			WHERE 
 				PR.idSis_Empresa = ' . $data . ' AND
-				(MONTH(PR.DataVencimentoRecebiveis) = "10") AND
+				PR.TipoRD = "D" AND
+				(MONTH(PR.DataVencimentoRecebiveis) = "11") AND
 				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
 				PR.QuitadoRecebiveis = "N"
 			ORDER BY
@@ -252,7 +242,45 @@ class Orcatrata_model extends CI_Model {
 
         return $query;
     }	
+
+    public function get_parcelasrecparcelarec($data) {
 		
+		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimentoRecebiveis) = ' . $data['Mesvenc'] : FALSE;
+		
+		$query = $this->db->query('
+			SELECT
+				OT.Receitas,
+				OT.TipoReceita,
+				TR.TipoReceita,
+				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "-", IFNULL(OT.Receitas,"")) AS idApp_OrcaTrata,
+				E.NomeEmpresa,
+				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
+				PR.idApp_ParcelasRecebiveis,
+				CONCAT(IFNULL(PR.ParcelaRecebiveis,""), "--", IFNULL(TR.TipoReceita,""), "--", IFNULL(OT.Receitas,"")) AS ParcelaRecebiveis,
+				PR.ValorParcelaRecebiveis,
+				PR.DataVencimentoRecebiveis,
+				PR.ValorPagoRecebiveis,
+				PR.DataPagoRecebiveis,
+				PR.QuitadoRecebiveis
+			FROM 
+				App_ParcelasRecebiveis AS PR
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
+			WHERE 
+				PR.idSis_Empresa = ' . $data . ' AND
+				PR.TipoRD = "R" AND
+				(MONTH(PR.DataVencimentoRecebiveis) = "12") AND
+				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
+				PR.QuitadoRecebiveis = "N"
+			ORDER BY
+				PR.DataVencimentoRecebiveis  
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }	
+	
     public function get_procedimento($data) {
 		$query = $this->db->query('SELECT * FROM App_Procedimento WHERE idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
@@ -363,13 +391,13 @@ class Orcatrata_model extends CI_Model {
 
     }
 	
-    public function update_orcatrataparceladesp($data, $id) {
+    public function update_orcatrataparcela($data, $id) {
 
         unset($data['idSis_Empresa']);
         $query = $this->db->update('Sis_Empresa', $data, array('idSis_Empresa' => $id));
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
-    }	
+    }
 	
     public function update_servico_venda($data) {
 

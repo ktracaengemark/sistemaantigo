@@ -42,7 +42,7 @@
 					<thead>
 						<tr>
 							<th class="active">Empresa</th>
-							<th class="active">Despesa</th>	
+							<th class="active">Receita</th>	
 							<th class="active">Parc</th>
 							<th class="active">Venc</th>
 							<!--<th class="active">Valor À Receber</th>-->
@@ -58,9 +58,9 @@
 						<?php
 						foreach ($report->result_array() as $row) {
 							#echo '<tr>';
-							echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterardesp/' . $row['idApp_OrcaTrata'] . '">';
-								echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
-								echo '<td>' . $row['TipoDespesa'] . '</td>';
+							echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarparcelarec/' . $row['idSis_Empresa'] . '">';
+								echo '<td>' . $row['idSis_Empresa'] . '</td>';
+								echo '<td>' . $row['TipoReceita'] . '</td>';
 								echo '<td>' . $row['ParcelaRecebiveis'] . '</td>';
 								echo '<td>' . $row['DataVencimentoRecebiveis'] . ' R$' . $row['ValorParcelaRecebiveis'] . '</td>';
 								#echo '<td class="text-left">R$ ' . $row['ValorParcelaRecebiveis'] . '</td>';

@@ -15,11 +15,15 @@
 					<?php #echo $titulo; ?>
 
 					<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-						<span class="glyphicon glyphicon-search"></span> Despesas
+						<span class="glyphicon glyphicon-search"></span>Despesas
 					</button>											
+					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/despesasparc" role="button">
+						<span class="glyphicon glyphicon-ok"></span>Parcelas
+					</a>
 					<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-						<span class="glyphicon glyphicon-plus"></span> Nova
-					</button>					
+						<span class="glyphicon glyphicon-plus"></span>Nova
+					</button>		
+					
 				</div>
 				<div class="panel-body">
 					<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">

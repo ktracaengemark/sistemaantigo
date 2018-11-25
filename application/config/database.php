@@ -112,7 +112,7 @@ $db['default'] = array(
 
     #'database' => 'ci',
     #'database' => 'app',
-	'database' => 'app.sistema.novoerro',
+	'database' => 'app.sistema.novo',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,

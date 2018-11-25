@@ -60,7 +60,7 @@
 							#echo '<tr>';
 							echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarparceladesp/' . $row['idSis_Empresa'] . '">';
 								echo '<td>' . $row['idSis_Empresa'] . '</td>';
-								echo '<td>' . $row['idApp_OrcaTrata'] . ' / Aprv-' . $row['AprovadoOrca'] . '</td>';
+								echo '<td>' . $row['TipoDespesa'] . '</td>';
 								echo '<td>' . $row['ParcelaRecebiveis'] . '</td>';
 								echo '<td>' . $row['DataVencimentoRecebiveis'] . ' R$' . $row['ValorParcelaRecebiveis'] . '</td>';
 								#echo '<td class="text-left">R$ ' . $row['ValorParcelaRecebiveis'] . '</td>';
