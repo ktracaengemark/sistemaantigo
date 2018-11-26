@@ -113,22 +113,6 @@ class Orcatrata_model extends CI_Model {
 
         return $query[0];
     }
-
-    public function get_orcatrataparcela($data) {
-        $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE idSis_Empresa = ' . $data);
-        $query = $query->result_array();
-
-        /*
-        //echo $this->db->last_query();
-        echo '<br>';
-        echo "<pre>";
-        print_r($query);
-        echo "</pre>";
-        exit ();
-        */
-
-        return $query[0];
-    }
 	
     public function get_orcatrataalterar($data) {
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE idSis_Empresa = ' . $data);
@@ -215,8 +199,8 @@ class Orcatrata_model extends CI_Model {
 			WHERE 
 				PR.idSis_Empresa = ' . $data . ' AND
 				PR.TipoRD = "D" AND
-				(MONTH(PR.DataVencimentoRecebiveis) = "01") AND
-				(YEAR(PR.DataVencimentoRecebiveis) = "2019") AND
+				(MONTH(PR.DataVencimentoRecebiveis) = "11") AND
+				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
 				PR.QuitadoRecebiveis = "N"
 			ORDER BY
 				PR.DataVencimentoRecebiveis  
@@ -253,7 +237,7 @@ class Orcatrata_model extends CI_Model {
 			WHERE 
 				PR.idSis_Empresa = ' . $data . ' AND
 				PR.TipoRD = "R" AND
-				(MONTH(PR.DataVencimentoRecebiveis) = "12") AND
+				(MONTH(PR.DataVencimentoRecebiveis) = "11") AND
 				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
 				PR.QuitadoRecebiveis = "N"
 			ORDER BY
@@ -397,15 +381,7 @@ class Orcatrata_model extends CI_Model {
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }
-	
-    public function update_orcatrataparcela($data, $id) {
-
-        unset($data['idSis_Empresa']);
-        $query = $this->db->update('Sis_Empresa', $data, array('idSis_Empresa' => $id));
-        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
-
-    }
-	
+		
     public function update_servico_venda($data) {
 
         $query = $this->db->update_batch('App_ServicoVenda', $data, 'idApp_ServicoVenda');

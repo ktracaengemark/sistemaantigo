@@ -2689,7 +2689,7 @@ class Orcatrata extends CI_Controller {
         $data['orcatrata'] = quotes_to_entities($this->input->post(array(
             #### Sis_Empresa ####
             'idSis_Empresa',
-            'DataOrca',
+
 
         ), TRUE));
 
@@ -2697,10 +2697,7 @@ class Orcatrata extends CI_Controller {
         //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
 
 		(!$this->input->post('PRCount')) ? $data['count']['PRCount'] = 0 : $data['count']['PRCount'] = $this->input->post('PRCount');
-		
-		(!$data['orcatrata']['DataOrca']) ? $data['orcatrata']['DataOrca'] = date('d/m/Y', time()) : FALSE;
-		
-
+				
         $j = 1;
         for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
 
@@ -2721,11 +2718,9 @@ class Orcatrata extends CI_Controller {
 
         //Fim do trecho de código que dá pra melhorar
 
-        if ($id) {
-            #### Sis_Empresa ####
+        if ($id) {   
+			#### Sis_Empresa ####
             $data['orcatrata'] = $this->Orcatrata_model->get_orcatrataalterar($id);
-			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
-
 
             #### App_ParcelasRecebiveis ####
             $data['parcelasrec'] = $this->Orcatrata_model->get_parcelasrecparceladesp($id);
@@ -2748,8 +2743,7 @@ class Orcatrata extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### Sis_Empresa ####
-        $this->form_validation->set_rules('DataOrca', 'Data do Orçamento', 'required|trim|valid_date');
-
+		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'trim');
 
         $data['select']['QuitadoRecebiveis'] = $this->Basico_model->select_status_sn();
 		$data['select']['Dia'] = $this->Basico_model->select_dia();
@@ -2765,13 +2759,7 @@ class Orcatrata extends CI_Controller {
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';		
 		
-        //if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
         if ($data['count']['PRCount'] > 0 )
-            $data['orcamentoin'] = 'in';
-        else
-            $data['orcamentoin'] = '';
-
-        if ($data['orcatrata']['DataOrca'] )
             $data['parcelasin'] = 'in';
         else
             $data['parcelasin'] = '';
@@ -2783,7 +2771,6 @@ class Orcatrata extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
-        #$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
 
         /*
           echo '<br>';
@@ -2795,7 +2782,7 @@ class Orcatrata extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('orcatrata/form_orcatrataalterarparcela', $data);
+            $this->load->view('orcatrata/form_alterarparcela', $data);
         } else {
 
             $data['bd']['Dia'] = $data['query']['Dia'];
@@ -2878,7 +2865,7 @@ class Orcatrata extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('orcatrata/form_orcatrataalterarparcela', $data);
+                $this->load->view('orcatrata/form_alterarparcela', $data);
             } else {
 
                 //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idSis_Empresa'], FALSE);
@@ -2915,7 +2902,6 @@ class Orcatrata extends CI_Controller {
         $data['orcatrata'] = quotes_to_entities($this->input->post(array(
             #### Sis_Empresa ####
             'idSis_Empresa',
-            'DataOrca',
 
         ), TRUE));
 
@@ -2924,7 +2910,6 @@ class Orcatrata extends CI_Controller {
 
 		(!$this->input->post('PRCount')) ? $data['count']['PRCount'] = 0 : $data['count']['PRCount'] = $this->input->post('PRCount');
 		
-		(!$data['orcatrata']['DataOrca']) ? $data['orcatrata']['DataOrca'] = date('d/m/Y', time()) : FALSE;
 		
 
         $j = 1;
@@ -2950,7 +2935,6 @@ class Orcatrata extends CI_Controller {
         if ($id) {
             #### Sis_Empresa ####
             $data['orcatrata'] = $this->Orcatrata_model->get_orcatrataalterar($id);
-			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
 
 
             #### App_ParcelasRecebiveis ####
@@ -2974,7 +2958,7 @@ class Orcatrata extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### Sis_Empresa ####
-        $this->form_validation->set_rules('DataOrca', 'Data do Orçamento', 'required|trim|valid_date');
+        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'trim');
 
 
         $data['select']['QuitadoRecebiveis'] = $this->Basico_model->select_status_sn();
@@ -2991,13 +2975,7 @@ class Orcatrata extends CI_Controller {
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';		
 		
-        //if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
         if ($data['count']['PRCount'] > 0 )
-            $data['orcamentoin'] = 'in';
-        else
-            $data['orcamentoin'] = '';
-
-        if ($data['orcatrata']['DataOrca'] )
             $data['parcelasin'] = 'in';
         else
             $data['parcelasin'] = '';
@@ -3009,8 +2987,6 @@ class Orcatrata extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
-        #$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
-
         /*
           echo '<br>';
           echo "<pre>";
@@ -3021,7 +2997,7 @@ class Orcatrata extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('orcatrata/form_orcatrataalterarparcela', $data);
+            $this->load->view('orcatrata/form_alterarparcela', $data);
         } else {
 
             $data['bd']['Dia'] = $data['query']['Dia'];
@@ -3105,7 +3081,7 @@ class Orcatrata extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('orcatrata/form_orcatrataalterarparcela', $data);
+                $this->load->view('orcatrata/form_alterarparcela', $data);
             } else {
 
                 //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idSis_Empresa'], FALSE);
@@ -3136,14 +3112,14 @@ class Orcatrata extends CI_Controller {
         $data['orcatrata'] = quotes_to_entities($this->input->post(array(
             #### Sis_Empresa ####
             'idSis_Empresa',
-            'DataOrca',
+
 
         ), TRUE));
 
 
         (!$this->input->post('PMCount')) ? $data['count']['PMCount'] = 0 : $data['count']['PMCount'] = $this->input->post('PMCount');
 
-		(!$data['orcatrata']['DataOrca']) ? $data['orcatrata']['DataOrca'] = date('d/m/Y', time()) : FALSE;
+
 
 
         $j = 1;
@@ -3169,7 +3145,7 @@ class Orcatrata extends CI_Controller {
         if ($id) {
             #### Sis_Empresa ####
             $data['orcatrata'] = $this->Orcatrata_model->get_orcatrataalterar($id);
-			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
+
 
 
             #### App_Procedimento ####
@@ -3192,7 +3168,7 @@ class Orcatrata extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### Sis_Empresa ####
-        $this->form_validation->set_rules('DataOrca', 'Data do Orçamento', 'required|trim|valid_date');
+        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'trim');
 
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
@@ -3236,13 +3212,13 @@ class Orcatrata extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('orcatrata/form_procedimentoalterar', $data);
+            $this->load->view('orcatrata/form_alterarprocedimento', $data);
         } else {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Sis_Empresa ####
+			
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'mysql');
-
 
             $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrataalterar($data['orcatrata']['idSis_Empresa']);
             $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
@@ -3309,7 +3285,7 @@ class Orcatrata extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('orcatrata/form_procedimentoalterar', $data);
+                $this->load->view('orcatrata/form_alterarprocedimento', $data);
             } else {
 
                 //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idSis_Empresa'], FALSE);
@@ -3317,7 +3293,7 @@ class Orcatrata extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
-				redirect(base_url() . 'relatorio/procedimento/' . $data['msg']);
+				redirect(base_url() . 'relatorio/procedimentoalterar/' . $data['msg']);
 
 				exit();
             }

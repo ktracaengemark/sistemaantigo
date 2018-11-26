@@ -253,45 +253,7 @@
 									</div>
 								</div>
 							</div>
-							
-							<div class="panel-group">	
-								<div class="panel panel-primary">
 
-									<div class="panel-heading text-left">
-										<a class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Statusorca" aria-expanded="false" aria-controls="Statusorca">
-											<span class="glyphicon glyphicon-menu-down"></span> Status
-										</a>
-									</div>
-									
-									<div <?php echo $collapse; ?> id="Statusorca">
-										<div class="panel-body">
-											<div class="form-group">
-												<div class="panel panel-info">
-													<div class="panel-heading">
-
-														<div class="col-md-1"></div>
-														<div class="form-group text-left">
-															<div class="row">
-																<div class="col-md-3">
-																	<label for="DataOrca">Data da Edição:</label>
-																	<div class="input-group <?php echo $datepicker; ?>">
-																		<span class="input-group-addon" disabled>
-																			<span class="glyphicon glyphicon-calendar"></span>
-																		</span>
-																		<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																				name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							
 							<div class="form-group">
 								<div class="row">
 									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
