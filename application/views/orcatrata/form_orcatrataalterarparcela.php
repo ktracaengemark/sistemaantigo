@@ -14,13 +14,109 @@
 					<?php echo validation_errors(); ?>
 					<?php echo form_open_multipart($form_open_path); ?>
 
-					<div class="panel panel-<?php echo $panel; ?>">
-						<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
+					<div class="panel panel-primary panel-<?php echo $panel; ?>">
+						<div class="panel-heading">
+							<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+								<span class="glyphicon glyphicon-search"></span> <?php echo $titulo; ?>
+							</button>
+						</div>
 						<div class="panel-body">
+							
+							<div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+								<div class="modal-dialog modal-md" role="document">
+									<div class="modal-content">
+										<div class="modal-header bg-danger">
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das Parcelas</h4>
+										</div>
+										<div class="modal-footer">
+											<div class="row">
+												<div class="col-md-3 text-left">
+													<label for="QuitadoRecebiveis">Parc. Quit.</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+															id="QuitadoRecebiveis" name="QuitadoRecebiveis">
+														<?php
+														foreach ($select['QuitadoRecebiveis'] as $key => $row) {
+															if ($query['QuitadoRecebiveis'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+												</div>
+												<div class="col-md-3 text-left" >
+													<label for="Ordenamento">Dia do Venc.:</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+															id="Dia" name="Dia">
+														<?php
+														foreach ($select['Dia'] as $key => $row) {
+															if ($query['Dia'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+												</div>
+												<div class="col-md-3 text-left" >
+													<label for="Ordenamento">Mês do Venc.:</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+															id="Mesvenc" name="Mesvenc">
+														<?php
+														foreach ($select['Mesvenc'] as $key => $row) {
+															if ($query['Mesvenc'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+												</div>
 
+												<div class="col-md-3 text-left" >
+													<label for="Ordenamento">Ano do Venc.:</label>
+													<div>
+														<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
+															   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<br>
+												<div class="form-group col-md-3 text-left">
+													<div class="form-footer ">
+														<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+															<span class="glyphicon glyphicon-filter"></span> Filtrar
+														</button>
+													</div>
+												</div>
+												<div class="form-group col-md-3 text-left">
+													<div class="form-footer ">
+														<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+															<span class="glyphicon glyphicon-remove"> Fechar
+														</button>
+													</div>
+												</div>
+												<div class="form-group col-md-3 text-left">
+													<div class="form-footer">		
+														<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/despesas" role="button">
+															<span class="glyphicon glyphicon-ok"></span> Despesas
+														</a>
+													</div>	
+												</div>
+											</div>
+										</div>									
+									</div>								
+								</div>
+							</div>	
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 
+									
 									<div class="panel-heading text-left">
 										<a class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Parcelas1" aria-expanded="false" aria-controls="Parcelas1">
 											<span class="glyphicon glyphicon-menu-down"></span> Parcelas
@@ -163,7 +259,7 @@
 
 									<div class="panel-heading text-left">
 										<a class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Statusorca" aria-expanded="false" aria-controls="Statusorca">
-											<span class="glyphicon glyphicon-menu-down"></span> Status do Orçam.
+											<span class="glyphicon glyphicon-menu-down"></span> Status
 										</a>
 									</div>
 									
@@ -177,7 +273,7 @@
 														<div class="form-group text-left">
 															<div class="row">
 																<div class="col-md-3">
-																	<label for="DataOrca">Orçado em:</label>
+																	<label for="DataOrca">Data da Edição:</label>
 																	<div class="input-group <?php echo $datepicker; ?>">
 																		<span class="input-group-addon" disabled>
 																			<span class="glyphicon glyphicon-calendar"></span>

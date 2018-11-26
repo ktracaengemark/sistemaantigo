@@ -8,7 +8,7 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 					
-						<?php echo form_open('relatorio/procedimento', 'role="form"'); ?>
+						<?php echo form_open('relatorio/procedimentoalterar', 'role="form"'); ?>
 						<!--	
 						<button class="btn btn-sm btn-info" name="pesquisar" value="0" type="submit">
 							<span class="glyphicon glyphicon-search"></span> Pesq.
@@ -17,8 +17,8 @@
 						<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 							<span class="glyphicon glyphicon-search"></span> <?php echo $titulo; ?>
 						</button>
-						<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/procedimentoalterar" role="button"> 
-							<span class="glyphicon glyphicon-ok"></span> Edit Todas
+						<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/procedimento" role="button"> 
+							<span class="glyphicon glyphicon-ok"></span> Edit Indiv.
 						</a>											
 						<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>procedimento/cadastrar" role="button"> 
 							<span class="glyphicon glyphicon-plus"></span> Nova
@@ -35,12 +35,11 @@
 										<div class="modal-content">
 											<div class="modal-header bg-danger">
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtrar Individual</h4>
+												<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtrar Todas</h4>
 											</div>
 											<div class="modal-footer">
 												<div class="form-group">	
-													<div class="row">	
-																												
+													<div class="row">														
 														<div class="col-md-3 text-left">
 															<label for="ConcluidoProcedimento">Concluido?</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
@@ -111,7 +110,7 @@
 															</div>
 														</div>
 													</div>
-													<div class="row">
+													<div class="row">	
 														<div class="col-md-9 text-left">
 															<label for="Ordenamento">Ordenamento:</label>
 															<div class="form-group btn-block">
@@ -146,8 +145,9 @@
 																	</div>
 																</div>
 															</div>
-														</div>
-													</div>	
+														</div>	
+													</div>
+													
 												</div>											
 											</div>
 										</div>

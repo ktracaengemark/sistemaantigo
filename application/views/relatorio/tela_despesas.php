@@ -20,6 +20,9 @@
 					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/despesasparc" role="button">
 						<span class="glyphicon glyphicon-ok"></span>Parcelas
 					</a>
+					<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>orcatrata/alterarparceladesp" role="button">
+						<span class="glyphicon glyphicon-ok"></span>Parcelas
+					</a>-->
 					<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 						<span class="glyphicon glyphicon-plus"></span>Nova
 					</button>		

@@ -97,6 +97,7 @@ class Agenda_model extends CI_Model {
 				U.idSis_Usuario,
 				U.Nome,
 				U.NomeEmpresa,
+				P.idSis_Empresa,
 				P.idApp_Procedimento,
                 P.idApp_OrcaTrata,
 				P.Procedimento,
@@ -106,8 +107,8 @@ class Agenda_model extends CI_Model {
 				Sis_Usuario AS U
 					LEFT JOIN App_Procedimento AS P ON P.idSis_Usuario = U.idSis_Usuario
             WHERE 
-				
 				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' AND
+				P.ConcluidoProcedimento = "N" AND
 				P.idApp_OrcaTrata = "0" AND
 				P.idApp_Cliente = "0"
             ORDER BY

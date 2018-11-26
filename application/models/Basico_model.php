@@ -1882,6 +1882,27 @@ class Basico_model extends CI_Model {
         return $array;
     }
 
+	public function select_dia() {
+
+        $query = $this->db->query('
+            SELECT
+				D.idTab_Dia,
+				D.Dia				
+			FROM
+				Tab_Dia AS D
+			ORDER BY
+				D.Dia
+        ');
+
+        $array = array();
+        $array[0] = 'TODOS';
+        foreach ($query->result() as $row) {
+            $array[$row->idTab_Dia] = $row->Dia;
+        }
+
+        return $array;
+    }	
+	
 	public function select_mes() {
 
         $query = $this->db->query('

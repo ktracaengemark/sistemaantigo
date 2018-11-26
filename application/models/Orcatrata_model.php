@@ -114,7 +114,7 @@ class Orcatrata_model extends CI_Model {
         return $query[0];
     }
 
-    public function get_orcatrataparceladesp($data) {
+    public function get_orcatrataparcela($data) {
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE idSis_Empresa = ' . $data);
         $query = $query->result_array();
 
@@ -128,9 +128,9 @@ class Orcatrata_model extends CI_Model {
         */
 
         return $query[0];
-    }	
-
-    public function get_orcatrataparcela($data) {
+    }
+	
+    public function get_orcatrataalterar($data) {
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE idSis_Empresa = ' . $data);
         $query = $query->result_array();
 
@@ -187,23 +187,6 @@ class Orcatrata_model extends CI_Model {
 
         return $query;
     }
-
-    public function get_parcelasrecparceladesp1($data) {
-		$query = $this->db->query('
-			SELECT * 
-			FROM 
-				App_ParcelasRecebiveis 
-			WHERE 
-				idSis_Empresa = ' . $data . ' AND
-				TipoRD = "D" AND
-				(MONTH(DataVencimentoRecebiveis) = "08") AND
-				(YEAR(DataVencimentoRecebiveis) = "2018") AND
-				QuitadoRecebiveis = "N"  
-			');
-        $query = $query->result_array();
-
-        return $query;
-    }
 	
     public function get_parcelasrecparceladesp($data) {
 		
@@ -232,8 +215,8 @@ class Orcatrata_model extends CI_Model {
 			WHERE 
 				PR.idSis_Empresa = ' . $data . ' AND
 				PR.TipoRD = "D" AND
-				(MONTH(PR.DataVencimentoRecebiveis) = "11") AND
-				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
+				(MONTH(PR.DataVencimentoRecebiveis) = "01") AND
+				(YEAR(PR.DataVencimentoRecebiveis) = "2019") AND
 				PR.QuitadoRecebiveis = "N"
 			ORDER BY
 				PR.DataVencimentoRecebiveis  
@@ -288,6 +271,22 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 
+    public function get_procedimentoalterar($data) {
+		$query = $this->db->query('
+			SELECT * 
+			FROM 
+				App_Procedimento 
+			WHERE 
+				idSis_Empresa = ' . $data . ' AND
+				ConcluidoProcedimento = "N" AND 
+				idApp_OrcaTrata = "0" AND
+				idApp_Cliente = "0" 
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
     public function list_orcamento($id, $aprovado, $completo) {
 
         $query = $this->db->query('SELECT '
@@ -387,6 +386,14 @@ class Orcatrata_model extends CI_Model {
 
         unset($data['idApp_OrcaTrata']);
         $query = $this->db->update('App_OrcaTrata', $data, array('idApp_OrcaTrata' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+	
+    public function update_orcatrataalterar($data, $id) {
+
+        unset($data['idSis_Empresa']);
+        $query = $this->db->update('Sis_Empresa', $data, array('idSis_Empresa' => $id));
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }
