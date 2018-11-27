@@ -201,7 +201,7 @@ class Relatorio_model extends CI_Model {
 				OT.TipoRD,
                 OT.AprovadoOrca,
 				OT.ObsOrca,
-				CONCAT(IFNULL(TD.TipoReceita,""), " / ", IFNULL(OT.Receitas,"")) AS Receitas,
+				CONCAT(IFNULL(TD.TipoReceita,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,"")) AS Receitas,
 				TD.TipoReceita,
                 OT.DataOrca,
                 OT.DataEntradaOrca,
@@ -362,13 +362,13 @@ class Relatorio_model extends CI_Model {
 		
         $query = $this->db->query(
             'SELECT
-                
+                C.NomeCliente,
                 OT.idApp_OrcaTrata,
 				OT.TipoRD,
                 OT.AprovadoOrca,
 				OT.ObsOrca,
 				OT.Receitas,
-				CONCAT(IFNULL(TR.TipoReceita,""), " / ", IFNULL(OT.Receitas,"")) AS TipoReceita,
+				CONCAT(IFNULL(TR.TipoReceita,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,"")) AS Receitas,
                 OT.DataOrca,
                 OT.DataEntradaOrca,
                 OT.ValorEntradaOrca,
@@ -388,7 +388,7 @@ class Relatorio_model extends CI_Model {
                 PR.QuitadoRecebiveis
             FROM
                 App_OrcaTrata AS OT
-
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN App_ParcelasRecebiveis AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade

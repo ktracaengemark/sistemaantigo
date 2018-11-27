@@ -59,7 +59,7 @@
 						foreach ($report->result_array() as $row) {
 							#echo '<tr>';
 							echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterardesp/' . $row['idApp_OrcaTrata'] . '">';
-								echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
+								echo '<td>' . $row['idSis_Empresa'] . '</td>';
 								echo '<td>' . $row['TipoDespesa'] . '</td>';
 								echo '<td>' . $row['ParcelaRecebiveis'] . '</td>';
 								echo '<td>' . $row['DataVencimentoRecebiveis'] . ' R$' . $row['ValorParcelaRecebiveis'] . '</td>';
