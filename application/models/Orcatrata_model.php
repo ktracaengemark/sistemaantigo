@@ -175,15 +175,18 @@ class Orcatrata_model extends CI_Model {
     public function get_alterarparceladesp($data) {
 		
 		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimentoRecebiveis) = ' . $data['Mesvenc'] : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		
 		$query = $this->db->query('
 			SELECT
+				
 				OT.Receitas,
 				OT.TipoReceita,
 				TD.TipoDespesa,
 				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "-", IFNULL(OT.Receitas,"")) AS idApp_OrcaTrata,
 				E.NomeEmpresa,
 				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
+				PR.idSis_Usuario,
 				PR.idApp_ParcelasRecebiveis,
 				CONCAT(IFNULL(PR.ParcelaRecebiveis,""), "--", IFNULL(TD.TipoDespesa,""), "--", IFNULL(OT.Receitas,"")) AS ParcelaRecebiveis,
 				PR.ValorParcelaRecebiveis,
@@ -197,6 +200,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = OT.TipoReceita
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
 			WHERE 
+				' . $permissao . '
 				PR.idSis_Empresa = ' . $data . ' AND
 				PR.TipoRD = "D" AND
 				(MONTH(PR.DataVencimentoRecebiveis) = "11") AND
@@ -213,17 +217,20 @@ class Orcatrata_model extends CI_Model {
     public function get_alterarparcelarec($data) {
 		
 		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimentoRecebiveis) = ' . $data['Mesvenc'] : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		
 		$query = $this->db->query('
 			SELECT
+				C.NomeCliente,
 				OT.Receitas,
 				OT.TipoReceita,
 				TR.TipoReceita,
 				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "-", IFNULL(OT.Receitas,"")) AS idApp_OrcaTrata,
 				E.NomeEmpresa,
+				PR.idSis_Usuario,
 				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
 				PR.idApp_ParcelasRecebiveis,
-				CONCAT(IFNULL(PR.ParcelaRecebiveis,""), "--", IFNULL(TR.TipoReceita,""), "--", IFNULL(OT.Receitas,"")) AS ParcelaRecebiveis,
+				CONCAT(IFNULL(PR.ParcelaRecebiveis,""), "--", IFNULL(TR.TipoReceita,""), "--", IFNULL(C.NomeCliente,""), "--", IFNULL(OT.Receitas,"")) AS ParcelaRecebiveis,
 				PR.ValorParcelaRecebiveis,
 				PR.DataVencimentoRecebiveis,
 				PR.ValorPagoRecebiveis,
@@ -232,9 +239,11 @@ class Orcatrata_model extends CI_Model {
 			FROM 
 				App_ParcelasRecebiveis AS PR
 					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
 			WHERE 
+				' . $permissao . '
 				PR.idSis_Empresa = ' . $data . ' AND
 				PR.TipoRD = "R" AND
 				(MONTH(PR.DataVencimentoRecebiveis) = "11") AND

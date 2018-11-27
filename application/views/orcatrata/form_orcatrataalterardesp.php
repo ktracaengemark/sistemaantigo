@@ -400,13 +400,13 @@
 																	?>
 																</select>
 															</div>														
-															<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+															
 															<div class="col-md-2">
 																<label for="Receitas">Despesa</label><br>
 																<input type="text" class="form-control" maxlength="200"
 																		name="Receitas" value="<?php echo $orcatrata['Receitas'] ?>">
 															</div>
-															<?php } ?>
+															
 															
 															<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 															<div class="col-md-2">

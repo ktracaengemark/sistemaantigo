@@ -179,7 +179,7 @@ class Relatorio_model extends CI_Model {
                 '(OT.DataOrca >= "' . $data['DataInicio3'] . '")';
         }
 
-		$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
+		$data['NomeCliente'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimentoRecebiveis) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimentoRecebiveis) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPagoRecebiveis) = ' . $data['Mespag'] : FALSE;
@@ -188,16 +188,18 @@ class Relatorio_model extends CI_Model {
 		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
-		$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
-        $filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
+		$filtro1 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
+        $filtro2 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
+		$filtro3 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
 		$filtro4 = ($data['QuitadoRecebiveis'] != '#') ? 'PR.QuitadoRecebiveis = "' . $data['QuitadoRecebiveis'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Modalidade'] != '#') ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		
         $query = $this->db->query(
             'SELECT
                 C.NomeCliente,
                 OT.idApp_OrcaTrata,
+				OT.idSis_Usuario,
 				OT.TipoRD,
                 OT.AprovadoOrca,
 				OT.ObsOrca,
@@ -223,24 +225,25 @@ class Relatorio_model extends CI_Model {
             FROM
                 App_OrcaTrata AS OT
                     LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_ParcelasRecebiveis AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoReceita AS TD ON TD.idTab_TipoReceita = OT.TipoReceita
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-
+				' . $permissao . '
+				' . $filtro1 . '
+				' . $filtro2 . '
+				' . $filtro3 . '
 				' . $filtro4 . '
-				' . $filtro5 . ' 
+				' . $filtro5 . '
 				OT.TipoRD = "R"
-                ' . $data['Dia'] . ' 
+				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
-
 				' . $data['Ano'] . ' 
 				' . $data['TipoReceita'] . ' 
-
-				
-
+				' . $data['NomeCliente'] . '
             ORDER BY
 				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
             ');
@@ -359,11 +362,13 @@ class Relatorio_model extends CI_Model {
 		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
 		$filtro4 = ($data['QuitadoRecebiveis'] != '#') ? 'PR.QuitadoRecebiveis = "' . $data['QuitadoRecebiveis'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Modalidade'] != '#') ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		
         $query = $this->db->query(
             'SELECT
                 C.NomeCliente,
                 OT.idApp_OrcaTrata,
+				OT.idSis_Usuario,
 				OT.TipoRD,
                 OT.AprovadoOrca,
 				OT.ObsOrca,
@@ -389,12 +394,14 @@ class Relatorio_model extends CI_Model {
             FROM
                 App_OrcaTrata AS OT
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_ParcelasRecebiveis AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $permissao . '
 				' . $filtro4 . '
 				OT.TipoRD = "R"
                 ' . $data['Dia'] . ' 
@@ -513,16 +520,18 @@ class Relatorio_model extends CI_Model {
 		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
-		$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
-        $filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
+		$filtro1 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
+        $filtro2 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
+		$filtro3 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
 		$filtro4 = ($data['QuitadoRecebiveis'] != '#') ? 'PR.QuitadoRecebiveis = "' . $data['QuitadoRecebiveis'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Modalidade'] != '#') ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		
         $query = $this->db->query(
             'SELECT
                 
                 OT.idApp_OrcaTrata,
+				OT.idSis_Usuario,
 				OT.TipoRD,
                 OT.AprovadoOrca,
 				OT.ObsOrca,
@@ -546,25 +555,24 @@ class Relatorio_model extends CI_Model {
                 PR.QuitadoRecebiveis
             FROM
                 App_OrcaTrata AS OT
-
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_ParcelasRecebiveis AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = OT.TipoReceita
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-
+				' . $permissao . '
+				' . $filtro1 . '
+				' . $filtro2 . '
+				' . $filtro3 . '
 				' . $filtro4 . '
 				' . $filtro5 . ' 
 				OT.TipoRD = "D"
                 ' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
-
 				' . $data['Ano'] . ' 
 				' . $data['TipoReceita'] . ' 
-
-				
-
             ORDER BY
 				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
             ');
@@ -683,11 +691,13 @@ class Relatorio_model extends CI_Model {
 		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
 		$filtro4 = ($data['QuitadoRecebiveis'] != '#') ? 'PR.QuitadoRecebiveis = "' . $data['QuitadoRecebiveis'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Modalidade'] != '#') ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		
         $query = $this->db->query(
             'SELECT
                 
                 OT.idApp_OrcaTrata,
+				OT.idSis_Usuario,
 				OT.TipoRD,
                 OT.AprovadoOrca,
 				OT.ObsOrca,
@@ -712,13 +722,14 @@ class Relatorio_model extends CI_Model {
                 PR.QuitadoRecebiveis
             FROM
                 App_OrcaTrata AS OT
-
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_ParcelasRecebiveis AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = OT.TipoReceita
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $permissao . '
 				' . $filtro4 . '
 				OT.TipoRD = "D"
                 ' . $data['Dia'] . ' 
@@ -1843,6 +1854,248 @@ class Relatorio_model extends CI_Model {
     }
 
     public function list_balanco($data) {
+
+        ####################################################################
+        #SOMATÓRIO DAS RECEITAS Pago DO ANO
+        $somareceitas='';
+        for ($i=1;$i<=12;$i++){
+            $somareceitas .= 'SUM(IF(PR.DataPagoRecebiveis BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorPagoRecebiveis, 0)) AS M' . $i . ', ';
+        }
+        $somareceitas = substr($somareceitas, 0 ,-2);
+		
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+        
+		$query['RecPago'] = $this->db->query(
+        #$receitas = $this->db->query(
+            'SELECT
+				' . $somareceitas . '
+            FROM
+
+                App_OrcaTrata AS OT
+                    LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
+					LEFT JOIN App_ParcelasRecebiveis AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+            WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $permissao . '
+				OT.TipoRD = "R" AND
+				PR.TipoRD = "R" AND
+				PR.QuitadoRecebiveis = "S" AND
+            	YEAR(PR.DataPagoRecebiveis) = ' . $data['Ano']
+        );
+
+        #$query['RecPago'] = $query['RecPago']->result_array();
+        $query['RecPago'] = $query['RecPago']->result();
+        $query['RecPago'][0]->Balancopago = 'Rec.Real';
+		
+        ####################################################################
+        #SOMATÓRIO DAS RECEITAS Venc. DO ANO
+        $somareceitasvenc='';
+        for ($i=1;$i<=12;$i++){
+            $somareceitasvenc .= 'SUM(IF(PR.DataVencimentoRecebiveis BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcelaRecebiveis, 0)) AS M' . $i . ', ';
+        }
+        $somareceitasvenc = substr($somareceitasvenc, 0 ,-2);
+
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		
+        $query['RecVenc'] = $this->db->query(
+        #$receitas = $this->db->query(
+            'SELECT
+                ' . $somareceitasvenc . '
+            FROM
+                App_OrcaTrata AS OT
+                    LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
+					LEFT JOIN App_ParcelasRecebiveis AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+            WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $permissao . '
+				OT.TipoRD = "R" AND
+				PR.TipoRD = "R" AND
+            	YEAR(PR.DataVencimentoRecebiveis) = ' . $data['Ano']
+        );
+
+        #$query['RecVenc'] = $query['RecVenc']->result_array();
+        $query['RecVenc'] = $query['RecVenc']->result();
+        $query['RecVenc'][0]->Balancovenc = 'Rec.Esp';
+
+
+        ####################################################################
+        #SOMATÓRIO DAS DESPESAS PAGAS DO ANO
+        $somadespesas='';
+        for ($i=1;$i<=12;$i++){
+            $somadespesas .= 'SUM(IF(PP.DataPagoRecebiveis BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PP.ValorPagoRecebiveis, 0)) AS M' . $i . ', ';
+        }
+        $somadespesas = substr($somadespesas, 0 ,-2);
+
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		
+        $query['DesPago'] = $this->db->query(
+        #$despesas = $this->db->query(
+            'SELECT
+                ' . $somadespesas . '
+            FROM
+                App_OrcaTrata AS OT
+                    LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
+					LEFT JOIN App_ParcelasRecebiveis AS PP ON OT.idApp_OrcaTrata = PP.idApp_OrcaTrata
+            WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $permissao . '
+				OT.TipoRD = "D" AND
+				PP.TipoRD = "D" AND
+            	YEAR(PP.DataPagoRecebiveis) = ' . $data['Ano']
+        );
+
+        #$query['DesPago'] = $query['DesPago']->result_array();
+        $query['DesPago'] = $query['DesPago']->result();
+        $query['DesPago'][0]->Balancopago = 'Desp.Real';
+
+        ####################################################################
+        #SOMATÓRIO DAS DESPESAS Venc DO ANO
+        $somadespesasvenc='';
+        for ($i=1;$i<=12;$i++){
+            $somadespesasvenc .= 'SUM(IF(PP.DataVencimentoRecebiveis BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PP.ValorParcelaRecebiveis, 0)) AS M' . $i . ', ';
+        }
+        $somadespesasvenc = substr($somadespesasvenc, 0 ,-2);
+
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		
+        $query['DesVenc'] = $this->db->query(
+        #$despesas = $this->db->query(
+            'SELECT
+                ' . $somadespesasvenc . '
+            FROM
+                App_OrcaTrata AS OT
+                    LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
+					LEFT JOIN App_ParcelasRecebiveis AS PP ON OT.idApp_OrcaTrata = PP.idApp_OrcaTrata
+            WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $permissao . '
+				OT.TipoRD = "D" AND
+				PP.TipoRD = "D" AND
+            	YEAR(PP.DataVencimentoRecebiveis) = ' . $data['Ano']
+        );
+
+        #$query['DesVenc'] = $query['DesVenc']->result_array();
+        $query['DesVenc'] = $query['DesVenc']->result();
+        $query['DesVenc'][0]->Balancovenc = 'Desp.Esp';
+		
+        /*
+        echo $this->db->last_query();
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit();
+        */
+		#$query['RecVenc'] = $query['RecVenc']->result();
+		$query['RecVenc'][0]->BalancoResRec = 'RecVenc';
+		#$query['RecPago'] = $query['RecPago']->result();
+		$query['RecPago'][0]->BalancoResRec = 'RecPago';
+		#$query['DesVenc'] = $query['DesVenc']->result();
+		$query['DesVenc'][0]->BalancoResDes = 'DesVenc';
+		#$query['DesPago'] = $query['DesPago']->result();
+		$query['DesPago'][0]->BalancoResDes = 'DesPago';
+		
+        $query['TotalPago'] = new stdClass();
+        $query['TotalGeralpago'] = new stdClass();
+        $query['TotalVenc'] = new stdClass();
+        $query['TotalGeralvenc'] = new stdClass();
+		$query['TotalResRec'] = new stdClass();
+        $query['TotalGeralResRec'] = new stdClass();
+		$query['TotalResDes'] = new stdClass();
+        $query['TotalGeralResDes'] = new stdClass();
+		
+        $query['TotalPago']->Balancopago = 'Bal.Real';
+        $query['TotalGeralpago']->RecPago = $query['TotalGeralpago']->DesPago = $query['TotalGeralpago']->BalancoGeralpago = 0;
+        $query['TotalVenc']->Balancovenc = 'Bal.Esp';
+        $query['TotalGeralvenc']->RecVenc = $query['TotalGeralvenc']->DesVenc = $query['TotalGeralvenc']->BalancoGeralvenc = 0;
+		$query['TotalResRec']->BalancoResRec = 'TotalResRec';
+        $query['TotalGeralResRec']->RecVenc = $query['TotalGeralResRec']->RecPago = $query['TotalGeralResRec']->BalancoGeralResRec = 0;
+		$query['TotalResDes']->BalancoResDes = 'TotalResDes';
+        $query['TotalGeralResDes']->DesVenc = $query['TotalGeralResDes']->DesPago = $query['TotalGeralResDes']->BatancoGeralResDes = 0;
+		
+        for ($i=1;$i<=12;$i++) {
+            $query['TotalVenc']->{'M'.$i} = $query['RecVenc'][0]->{'M'.$i} - $query['DesVenc'][0]->{'M'.$i};
+
+            $query['TotalGeralvenc']->RecVenc += $query['RecVenc'][0]->{'M'.$i};
+            $query['TotalGeralvenc']->DesVenc += $query['DesVenc'][0]->{'M'.$i};
+
+            $query['RecVenc'][0]->{'M'.$i} = number_format($query['RecVenc'][0]->{'M'.$i}, 2, ',', '.');
+			$query['DesVenc'][0]->{'M'.$i} = number_format($query['DesVenc'][0]->{'M'.$i}, 2, ',', '.');
+            $query['TotalVenc']->{'M'.$i} = number_format($query['TotalVenc']->{'M'.$i}, 2, ',', '.');
+        }		
+        $query['TotalGeralvenc']->BalancoGeralvenc = $query['TotalGeralvenc']->RecVenc - $query['TotalGeralvenc']->DesVenc;
+
+        $query['TotalGeralvenc']->RecVenc = number_format($query['TotalGeralvenc']->RecVenc, 2, ',', '.');
+		$query['TotalGeralvenc']->DesVenc = number_format($query['TotalGeralvenc']->DesVenc, 2, ',', '.');
+        $query['TotalGeralvenc']->BalancoGeralvenc = number_format($query['TotalGeralvenc']->BalancoGeralvenc, 2, ',', '.');
+
+        for ($i=1;$i<=12;$i++) {
+            $query['TotalPago']->{'M'.$i} = $query['RecPago'][0]->{'M'.$i} - $query['DesPago'][0]->{'M'.$i};
+
+            $query['TotalGeralpago']->RecPago += $query['RecPago'][0]->{'M'.$i};
+            $query['TotalGeralpago']->DesPago += $query['DesPago'][0]->{'M'.$i};
+
+            $query['RecPago'][0]->{'M'.$i} = number_format($query['RecPago'][0]->{'M'.$i}, 2, ',', '.');
+			$query['DesPago'][0]->{'M'.$i} = number_format($query['DesPago'][0]->{'M'.$i}, 2, ',', '.');
+            $query['TotalPago']->{'M'.$i} = number_format($query['TotalPago']->{'M'.$i}, 2, ',', '.');
+        }		
+        $query['TotalGeralpago']->BalancoGeralpago = $query['TotalGeralpago']->RecPago - $query['TotalGeralpago']->DesPago;
+
+        $query['TotalGeralpago']->RecPago = number_format($query['TotalGeralpago']->RecPago, 2, ',', '.');
+		$query['TotalGeralpago']->DesPago = number_format($query['TotalGeralpago']->DesPago, 2, ',', '.');
+        $query['TotalGeralpago']->BalancoGeralpago = number_format($query['TotalGeralpago']->BalancoGeralpago, 2, ',', '.');
+
+        for ($i=1;$i<=12;$i++) {
+            $query['TotalResRec']->{'M'.$i} = $query['RecVenc'][0]->{'M'.$i} - $query['RecPago'][0]->{'M'.$i};
+
+            $query['TotalGeralResRec']->RecVenc += $query['RecVenc'][0]->{'M'.$i};
+            $query['TotalGeralResRec']->RecPago += $query['RecPago'][0]->{'M'.$i};
+
+            #$query['RecVenc'][0]->{'M'.$i} = number_format($query['RecVenc'][0]->{'M'.$i}, 2, ',', '.');
+			#$query['RecPago'][0]->{'M'.$i} = number_format($query['RecPago'][0]->{'M'.$i}, 2, ',', '.');
+            #$query['TotalResRec']->{'M'.$i} = number_format($query['TotalResRec']->{'M'.$i}, 2, ',', '.');
+        }		
+        $query['TotalGeralResRec']->BalancoGeralResRec = $query['TotalGeralResRec']->RecVenc - $query['TotalGeralResRec']->RecPago;
+
+        #$query['TotalGeralResRec']->RecVenc = number_format($query['TotalGeralResRec']->RecVenc, 2, ',', '.');
+		#$query['TotalGeralResRec']->RecPago = number_format($query['TotalGeralResRec']->RecPago, 2, ',', '.');
+        $query['TotalGeralResRec']->BalancoGeralResRec = number_format($query['TotalGeralResRec']->BalancoGeralResRec, 2, ',', '.');
+		
+        for ($i=1;$i<=12;$i++) {
+            $query['TotalResDes']->{'M'.$i} = $query['DesVenc'][0]->{'M'.$i} - $query['DesPago'][0]->{'M'.$i};
+
+            $query['TotalGeralResDes']->DesVenc += $query['DesVenc'][0]->{'M'.$i};
+            $query['TotalGeralResDes']->DesPago += $query['DesPago'][0]->{'M'.$i};
+
+            #$query['DesVenc'][0]->{'M'.$i} = number_format($query['DesVenc'][0]->{'M'.$i}, 2, ',', '.');
+			#$query['DesPago'][0]->{'M'.$i} = number_format($query['DesPago'][0]->{'M'.$i}, 2, ',', '.');
+            #$query['TotalResDes']->{'M'.$i} = number_format($query['TotalResDes']->{'M'.$i}, 2, ',', '.');
+        }		
+        $query['TotalGeralResDes']->BalancoGeralResDes = $query['TotalGeralResDes']->DesVenc - $query['TotalGeralResDes']->DesPago;
+
+        #$query['TotalGeralResDes']->DesVenc = number_format($query['TotalGeralResDes']->DesVenc, 2, ',', '.');
+		#$query['TotalGeralResDes']->DesPago = number_format($query['TotalGeralResDes']->DesPago, 2, ',', '.');
+        $query['TotalGeralResDes']->BalancoGeralResDes = number_format($query['TotalGeralResDes']->BalancoGeralResDes, 2, ',', '.');
+		
+        /*
+        echo $this->db->last_query();
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit();
+        */
+        return $query;
+
+    }
+
+    public function list_balanco2($data) {
 
         ####################################################################
         #SOMATÓRIO DAS RECEITAS Pago DO ANO

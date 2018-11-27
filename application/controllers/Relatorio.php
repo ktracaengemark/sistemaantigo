@@ -203,10 +203,10 @@ class Relatorio extends CI_Controller {
 	   
 	   if (!$data['query']['Mespag'])
            $data['query']['Mespag'] = date('m', time());
-*/
+
 		if (!$data['query']['Ano'])
            $data['query']['Ano'] = date('Y', time());	   
-
+*/
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
 		#$this->form_validation->set_rules('Mesvenc', 'Mês do Vencimento', 'required|trim');
@@ -374,10 +374,10 @@ class Relatorio extends CI_Controller {
 	   
 	   if (!$data['query']['Mespag'])
            $data['query']['Mespag'] = date('m', time());
-*/
+
 		if (!$data['query']['Ano'])
            $data['query']['Ano'] = date('Y', time());	   
-
+*/
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
 		#$this->form_validation->set_rules('Mesvenc', 'Mês do Vencimento', 'required|trim');

@@ -404,6 +404,7 @@
 																	?>
 																</select>
 															</div>
+															<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 															<div class="col-md-2">
 																<label for="idApp_Cliente">Cliente *</label>
 																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
@@ -421,13 +422,13 @@
 																	?>
 																</select>
 															</div>															
-															<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+															<?php } ?>
 															<div class="col-md-2">
 																<label for="Receitas">Receita</label><br>
 																<input type="text" class="form-control" maxlength="200"
 																		name="Receitas" value="<?php echo $orcatrata['Receitas'] ?>">
 															</div>
-															<?php } ?>
+															
 															
 															<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 															

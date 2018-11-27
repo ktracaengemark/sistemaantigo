@@ -7,13 +7,13 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
 					<?php echo form_open('relatorio/empresas', 'role="form"'); ?>
-					
-					<?php echo $titulo; ?>
-					
+
 					<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-							<span class="glyphicon glyphicon-search"></span> Pesquisar
+							<span class="glyphicon glyphicon-search"></span> <?php echo $titulo; ?>
 					</button>											
-					
+					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/associado" role="button">
+						<span class="glyphicon glyphicon-search"></span> Associados
+					</a>
 				</div>
 				<div class="panel-body">
 					<div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -85,13 +85,6 @@
 													<span class="glyphicon glyphicon-filter"></span> Filtrar
 												</button>
 											</div>
-										</div>
-										<div class="form-group col-md-4 text-right">
-											<div class="form-footer">		
-												<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>relatorio/associado" role="button">
-													<span class="glyphicon glyphicon-plus"></span> Associados
-												</a>
-											</div>	
 										</div>
 										<div class="form-group col-md-4 text-left">
 											<div class="form-footer ">

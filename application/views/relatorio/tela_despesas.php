@@ -273,80 +273,8 @@
 											</div>
 										</div>
 									</div>
-									<!--
-									<div class="row">
-										
-										<div class="col-md-3">
-											<label for="DataInicio3">Orç.- Data Inc.</label>
-											<div class="input-group DatePicker btn-block">
-												<span class="input-group-addon" disabled>
-													<span class="glyphicon glyphicon-calendar"></span>
-												</span>
-												<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
-														name="DataInicio3" value="<?php echo set_value('DataInicio3', $query['DataInicio3']); ?>">
-												
-											</div>
-										</div>
-										<div class="col-md-3">
-											<label for="DataFim3">Orç.- Data Fim</label>
-											<div class="input-group DatePicker btn-block">
-												<span class="input-group-addon" disabled>
-													<span class="glyphicon glyphicon-calendar"></span>
-												</span>
-												<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
-														name="DataFim3" value="<?php echo set_value('DataFim3', $query['DataFim3']); ?>">
-												
-											</div>
-										</div>
-										
-										<div class="col-md-3">
-											<label for="DataInicio">Venc Dt Inc</label>
-											<div class="input-group DatePicker btn-block">
-												<span class="input-group-addon" disabled>
-													<span class="glyphicon glyphicon-calendar"></span>
-												</span>
-												<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
-														name="DataInicio" value="<?php echo set_value('DataInicio', $query['DataInicio']); ?>">
-												
-											</div>
-										</div>
-										<div class="col-md-3">
-											<label for="DataFim">Venc Dt Fim</label>
-											<div class="input-group DatePicker btn-block">
-												<span class="input-group-addon" disabled>
-													<span class="glyphicon glyphicon-calendar"></span>
-												</span>
-												<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
-														name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
-												
-											</div>
-										</div>
-										<div class="col-md-3">
-											<label for="DataInicio2">Pago Dt. Inc</label>
-											<div class="input-group DatePicker btn-block">
-												<span class="input-group-addon" disabled>
-													<span class="glyphicon glyphicon-calendar"></span>
-												</span>
-												<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
-														name="DataInicio2" value="<?php echo set_value('DataInicio2', $query['DataInicio2']); ?>">
-												
-											</div>
-										</div>
-										<div class="col-md-3">
-											<label for="DataFim2">Pago Dt. Fim</label>
-											<div class="input-group DatePicker btn-block">
-												<span class="input-group-addon" disabled>
-													<span class="glyphicon glyphicon-calendar"></span>
-												</span>
-												<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
-														name="DataFim2" value="<?php echo set_value('DataFim2', $query['DataFim2']); ?>">
-												
-											</div>
-										</div>
-									</div>
-									-->
-							</div>									
-						</div>								
+								</div>									
+							</div>								
 						</div>
 					</div>																				
 				</form>

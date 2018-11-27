@@ -8,9 +8,9 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<?php echo form_open('relatorio/clientes', 'role="form"'); ?>
-					<?php echo $titulo; ?>
+					
 					<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-						<span class="glyphicon glyphicon-search"></span> Pesquisar
+						<span class="glyphicon glyphicon-search"></span> <?php echo $titulo; ?>
 					</button>
 																
 					<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>cliente/cadastrar" role="button"> 

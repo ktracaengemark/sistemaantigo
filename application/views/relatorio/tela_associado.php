@@ -7,13 +7,16 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
 					<?php echo form_open('relatorio/associado', 'role="form"'); ?>
-					<?php echo $titulo; ?>
+					
 					
 					<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-							<span class="glyphicon glyphicon-search"></span> Pesquisar
-					</button>											
+							<span class="glyphicon glyphicon-search"></span><?php echo $titulo; ?>
+					</button>
+					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/empresas" role="button">
+						<span class="glyphicon glyphicon-search"></span>Empresas
+					</a>
 					<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-						<span class="glyphicon glyphicon-plus"></span> Nova
+						<span class="glyphicon glyphicon-plus"></span>
 					</button>
 				</div>
 
@@ -120,13 +123,6 @@
 													<span class="glyphicon glyphicon-filter"></span> Filtrar
 												</button>
 											</div>
-										</div>
-										<div class="form-group col-md-4 text-right">
-											<div class="form-footer">		
-												<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>relatorio/empresas" role="button">
-													<span class="glyphicon glyphicon-plus"></span> Empresas
-												</a>
-											</div>	
 										</div>
 										<div class="form-group col-md-4 text-left">
 											<div class="form-footer ">

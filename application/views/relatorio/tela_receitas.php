@@ -173,6 +173,7 @@
 										</div>
 										
 										<?php } ?>
+										
 										<div class="col-md-3 text-left">
 											<label for="Ordenamento">Tipo de Receita:</label>
 											<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -216,6 +217,7 @@
 									</div>
 									
 									<div class="row">
+										<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 										<div class="col-md-3 text-left">
 											<label for="Ordenamento">Nome do Cliente:</label>
 											<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -230,7 +232,8 @@
 												}
 												?>
 											</select>
-										</div>	
+										</div>
+										<?php } ?>
 										<div class="col-md-3 text-left">
 											<label for="Modalidade">Modalidade</label>
 											<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " 

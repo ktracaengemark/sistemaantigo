@@ -13,6 +13,7 @@
 				<table class="table table-bordered table-condensed table-striped">								
 					<thead>
 						<tr>
+							<th class="active">Nº</th>
 							<th class="active">Associado</th>				
 							<th class="active">Telefone</th>
 							<th class="active">Criação</th>
@@ -28,6 +29,7 @@
 
 							#echo '<tr>';
 							#echo '<tr class="clickable-row" data-href="' . base_url() . 'associado/prontuario/' . $row['idSis_Usuario'] . '">';
+								echo '<td>' . $row['idSis_Empresa'] . '</td>';
 								echo '<td>' . $row['NomeEmpresa'] . '</td>';							
 								echo '<td>' . $row['Celular'] . '</td>';
 								echo '<td>' . $row['DataCriacao'] . '</td>';
