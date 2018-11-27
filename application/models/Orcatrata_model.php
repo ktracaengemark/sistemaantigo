@@ -172,7 +172,7 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 	
-    public function get_parcelasrecparceladesp($data) {
+    public function get_alterarparceladesp($data) {
 		
 		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimentoRecebiveis) = ' . $data['Mesvenc'] : FALSE;
 		
@@ -199,7 +199,7 @@ class Orcatrata_model extends CI_Model {
 			WHERE 
 				PR.idSis_Empresa = ' . $data . ' AND
 				PR.TipoRD = "D" AND
-				(MONTH(PR.DataVencimentoRecebiveis) = "11") AND
+				(MONTH(PR.DataVencimentoRecebiveis) = "10") AND
 				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
 				PR.QuitadoRecebiveis = "N"
 			ORDER BY
@@ -210,7 +210,7 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }	
 
-    public function get_parcelasrecparcelarec($data) {
+    public function get_alterarparcelarec($data) {
 		
 		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimentoRecebiveis) = ' . $data['Mesvenc'] : FALSE;
 		

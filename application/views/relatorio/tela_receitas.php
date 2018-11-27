@@ -60,7 +60,7 @@
 					</div>
 
 					<div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-						<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-dialog modal-md" role="document">
 							<div class="modal-content">
 								<div class="modal-header bg-danger">
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -68,8 +68,23 @@
 								</div>
 								<div class="modal-footer">
 									<div class="row">
+										<div class="col-md-3 text-left">
+											<label for="QuitadoRecebiveis">Parc. Quit.</label>
+											<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+													id="QuitadoRecebiveis" name="QuitadoRecebiveis">
+												<?php
+												foreach ($select['QuitadoRecebiveis'] as $key => $row) {
+													if ($query['QuitadoRecebiveis'] == $key) {
+														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+													} else {
+														echo '<option value="' . $key . '">' . $row . '</option>';
+													}
+												}
+												?>
+											</select>
+										</div>
 										<div class="col-md-3 text-left" >
-											<label for="Ordenamento">Mês do Vencimento:</label>
+											<label for="Ordenamento">Mês do Venc.:</label>
 											<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 													id="Mesvenc" name="Mesvenc">
 												<?php
@@ -84,7 +99,7 @@
 											</select>
 										</div>
 										<div class="col-md-3 text-left" >
-											<label for="Ordenamento">Mês do Pagamento:</label>
+											<label for="Ordenamento">Mês do Pag.:</label>
 											<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 													id="Mespag" name="Mespag">
 												<?php
@@ -105,21 +120,7 @@
 													   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
 											</div>
 										</div>
-										<div class="col-md-3 text-left">
-											<label for="Ordenamento">Tipo de Receita:</label>
-											<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-													id="TipoReceita" name="TipoReceita">
-												<?php
-												foreach ($select['TipoReceita'] as $key => $row) {
-													if ($query['TipoReceita'] == $key) {
-														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-													} else {
-														echo '<option value="' . $key . '">' . $row . '</option>';
-													}
-												}
-												?>
-											</select>
-										</div>
+										
 									</div>
 									<div class="row">
 										
@@ -172,14 +173,13 @@
 										</div>
 										
 										<?php } ?>
-										
 										<div class="col-md-3 text-left">
-											<label for="QuitadoRecebiveis">Parc. Quit.</label>
+											<label for="Ordenamento">Tipo de Receita:</label>
 											<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-													id="QuitadoRecebiveis" name="QuitadoRecebiveis">
+													id="TipoReceita" name="TipoReceita">
 												<?php
-												foreach ($select['QuitadoRecebiveis'] as $key => $row) {
-													if ($query['QuitadoRecebiveis'] == $key) {
+												foreach ($select['TipoReceita'] as $key => $row) {
+													if ($query['TipoReceita'] == $key) {
 														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 													} else {
 														echo '<option value="' . $key . '">' . $row . '</option>';
@@ -188,6 +188,7 @@
 												?>
 											</select>
 										</div>
+										
 									</div>
 									<div class="row">
 										<br>
