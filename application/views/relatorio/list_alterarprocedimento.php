@@ -27,7 +27,7 @@
                     foreach ($report->result_array() as $row) {
 
                         #echo '<tr>';
-                        echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/procedimentoalterar/' . $row['idSis_Empresa'] . '">';
+                        echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarprocedimento/' . $row['idSis_Empresa'] . '">';
                             #echo '<td>' . $row['idSis_Empresa'] . '</td>';
                             echo '<td>' . $row['Procedimento'] . '</td>';
 							echo '<td>' . $row['DataProcedimento'] . '</td>';							

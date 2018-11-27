@@ -199,7 +199,7 @@ class Orcatrata_model extends CI_Model {
 			WHERE 
 				PR.idSis_Empresa = ' . $data . ' AND
 				PR.TipoRD = "D" AND
-				(MONTH(PR.DataVencimentoRecebiveis) = "10") AND
+				(MONTH(PR.DataVencimentoRecebiveis) = "11") AND
 				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
 				PR.QuitadoRecebiveis = "N"
 			ORDER BY
@@ -255,7 +255,7 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 
-    public function get_procedimentoalterar($data) {
+    public function get_alterarprocedimento($data) {
 		$query = $this->db->query('
 			SELECT * 
 			FROM 

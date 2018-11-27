@@ -5285,7 +5285,7 @@ exit();*/
 
     }
 
-	public function list_procedimentoalterar($data, $completo) {
+	public function list_alterarprocedimento($data, $completo) {
 
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(C.DataProcedimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(C.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;

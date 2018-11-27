@@ -4557,7 +4557,7 @@ class Relatorio extends CI_Controller {
 
     }
 
-    public function procedimentoalterar() {
+    public function alterarprocedimento() {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -4611,7 +4611,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 
-            $data['report'] = $this->Relatorio_model->list_procedimentoalterar($data['bd'],TRUE);
+            $data['report'] = $this->Relatorio_model->list_alterarprocedimento($data['bd'],TRUE);
 
             /*
               echo "<pre>";
@@ -4620,11 +4620,11 @@ class Relatorio extends CI_Controller {
               exit();
               */
 
-            $data['list'] = $this->load->view('relatorio/list_procedimentoalterar', $data, TRUE);
+            $data['list'] = $this->load->view('relatorio/list_alterarprocedimento', $data, TRUE);
             //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
         }
 
-        $this->load->view('relatorio/tela_procedimentoalterar', $data);
+        $this->load->view('relatorio/tela_alterarprocedimento', $data);
 
         $this->load->view('basico/footer');
 

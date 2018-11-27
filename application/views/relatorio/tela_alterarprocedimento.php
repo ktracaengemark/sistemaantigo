@@ -8,7 +8,7 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 					
-						<?php echo form_open('relatorio/procedimentoalterar', 'role="form"'); ?>
+						<?php echo form_open('relatorio/alterarprocedimento', 'role="form"'); ?>
 						<!--	
 						<button class="btn btn-sm btn-info" name="pesquisar" value="0" type="submit">
 							<span class="glyphicon glyphicon-search"></span> Pesq.

@@ -17,7 +17,7 @@
 						<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 							<span class="glyphicon glyphicon-search"></span> <?php echo $titulo; ?>
 						</button>
-						<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/procedimentoalterar" role="button"> 
+						<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/alterarprocedimento" role="button"> 
 							<span class="glyphicon glyphicon-ok"></span> Edit Todas
 						</a>											
 						<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>procedimento/cadastrar" role="button"> 

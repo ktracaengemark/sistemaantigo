@@ -3102,7 +3102,7 @@ class Orcatrata extends CI_Controller {
 
     }
 
-    public function procedimentoalterar($id = FALSE) {
+    public function alterarprocedimento($id = FALSE) {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -3152,7 +3152,7 @@ class Orcatrata extends CI_Controller {
 
 
             #### App_Procedimento ####
-            $data['procedimento'] = $this->Orcatrata_model->get_procedimentoalterar($id);
+            $data['procedimento'] = $this->Orcatrata_model->get_alterarprocedimento($id);
             if (count($data['procedimento']) > 0) {
                 $data['procedimento'] = array_combine(range(1, count($data['procedimento'])), array_values($data['procedimento']));
                 $data['count']['PMCount'] = count($data['procedimento']);
@@ -3177,7 +3177,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 
         $data['titulo'] = 'Editar Procedimento';
-        $data['form_open_path'] = 'orcatrata/procedimentoalterar';
+        $data['form_open_path'] = 'orcatrata/alterarprocedimento';
         $data['readonly'] = '';
         $data['disabled'] = '';
         $data['panel'] = 'primary';
@@ -3233,7 +3233,7 @@ class Orcatrata extends CI_Controller {
             $data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrataalterar($data['orcatrata'], $data['orcatrata']['idSis_Empresa']);
 			
             #### App_Procedimento ####
-            $data['update']['procedimento']['anterior'] = $this->Orcatrata_model->get_procedimentoalterar($data['orcatrata']['idSis_Empresa']);
+            $data['update']['procedimento']['anterior'] = $this->Orcatrata_model->get_alterarprocedimento($data['orcatrata']['idSis_Empresa']);
             if (isset($data['procedimento']) || (!isset($data['procedimento']) && isset($data['update']['procedimento']['anterior']) ) ) {
 
                 if (isset($data['procedimento']))
@@ -3296,7 +3296,7 @@ class Orcatrata extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
-				redirect(base_url() . 'relatorio/procedimentoalterar/' . $data['msg']);
+				redirect(base_url() . 'relatorio/alterarprocedimento/' . $data['msg']);
 
 				exit();
             }
