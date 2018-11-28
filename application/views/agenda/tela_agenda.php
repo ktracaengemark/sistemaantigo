@@ -7,17 +7,17 @@
 <div class="col-md-3">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<a class="btn btn-sm btn-info" href="<?php #echo base_url() ?>relatorio/procedimento" role="button">
-				<span class="glyphicon glyphicon-search"></span> Pesq.
+			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
+				<span class="glyphicon glyphicon-pencil"> Tarefas</span>
+			</div>
+			<a class="btn btn-sm btn-info" href="<?php #echo base_url() ?>relatorio/alterarprocedimento" role="button">
+				<span class="glyphicon glyphicon-search"></span> Todas
 			</a>
 			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>procedimento/cadastrar" role="button">
 				<span class="glyphicon glyphicon-plus"></span> Cad.
 			</a>
-			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
-				<span class="glyphicon glyphicon-pencil"> Tarefas</span>
-			</div>
 		</div>
-		<div <?php echo $collapse; ?> id="Tarefas">
+		<div <?php echo $collapse1; ?> id="Tarefas">
 			<div class="panel-body">
 				<div class="form-group">
 					<div class="row">
@@ -85,12 +85,13 @@
 				</select>
 			</div>	
 			<?php } ?>
-			<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#Calendario" aria-expanded="false" aria-controls="Calendario">
-				<span class="glyphicon glyphicon-calendar"></span>
-			</div>
 			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Agenda" aria-expanded="false" aria-controls="Agenda">
 				<span class="glyphicon glyphicon-pencil"> Agenda</span>
 			</div>
+			<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#Calendario" aria-expanded="false" aria-controls="Calendario">
+				<span class="glyphicon glyphicon-calendar"></span>
+			</div>
+			
 		</div>
 		<div <?php echo $collapse; ?> id="Agenda">
 			<div class="panel-body">
@@ -160,7 +161,7 @@
 				<span class="glyphicon glyphicon-pencil"> Procd.Cli.</span>
 			</div>
 		</div>		
-		<div <?php echo $collapse; ?> id="Cliente">
+		<div <?php echo $collapse1; ?> id="Cliente">
 			<div class="panel-body">
 				<div class="form-group">
 					<div class="row">

@@ -5489,6 +5489,8 @@ exit();*/
         
 		$query = $this->db->query('
             SELECT
+				U.idSis_Usuario,
+				U.CpfUsuario,
 				C.idSis_Empresa,
 				C.idApp_Procedimento,
                 C.Procedimento,
@@ -5496,13 +5498,13 @@ exit();*/
 				C.ConcluidoProcedimento
             FROM
 				App_Procedimento AS C
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = C.idSis_Usuario
             WHERE
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idApp_OrcaTrata = "0" AND
 				C.idApp_Cliente = "0" AND
 				' . $filtro10 . '
-				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
+				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' 
                 ' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 
@@ -5549,6 +5551,8 @@ exit();*/
         
 		$query = $this->db->query('
             SELECT
+				U.idSis_Usuario,
+				U.CpfUsuario,
 				C.idSis_Empresa,
 				C.idApp_Procedimento,
                 C.Procedimento,
@@ -5556,13 +5560,13 @@ exit();*/
 				C.ConcluidoProcedimento
             FROM
 				App_Procedimento AS C
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = C.idSis_Usuario
             WHERE
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idApp_OrcaTrata = "0" AND
 				C.idApp_Cliente = "0" AND
 				' . $filtro10 . '
-				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
+				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' 
                 ' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 

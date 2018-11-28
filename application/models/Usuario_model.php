@@ -195,7 +195,7 @@ class Usuario_model extends CI_Model {
 
         if ($data === TRUE) {
             $array = $this->db->query(					
-				'SELECT                
+			'SELECT                
 				idSis_Usuario,
 				Nome				
             FROM
@@ -208,7 +208,7 @@ class Usuario_model extends CI_Model {
 					
         } else {
             $query = $this->db->query(
-                'SELECT                
+			'SELECT                
 				idSis_Usuario,
 				Nome
             FROM

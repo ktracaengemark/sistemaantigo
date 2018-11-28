@@ -183,7 +183,7 @@ class Procedimento extends CI_Controller {
             $data['query']['DataProcedimento'] = $this->basico->mascara_data($data['query']['DataProcedimento'], 'mysql');
             $data['query']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['query']['DataProcedimentoLimite'], 'mysql');
 			$data['query']['Procedimento'] = nl2br($data['query']['Procedimento']);
-			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			#$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
 						
             $data['anterior'] = $this->Procedimento_model->get_procedimento($data['query']['idApp_Procedimento']);

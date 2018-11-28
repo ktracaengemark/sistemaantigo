@@ -265,15 +265,30 @@ class Orcatrata_model extends CI_Model {
     }
 
     public function get_alterarprocedimento($data) {
+		
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		
 		$query = $this->db->query('
-			SELECT * 
-			FROM 
-				App_Procedimento 
+			SELECT
+				
+				U.CpfUsuario,
+				P.idSis_Usuario,
+				P.idSis_Empresa,
+				P.idApp_Procedimento,
+                P.Procedimento,
+				P.DataProcedimento,
+				P.ConcluidoProcedimento
+            FROM
+				App_Procedimento AS P
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
 			WHERE 
-				idSis_Empresa = ' . $data . ' AND
-				ConcluidoProcedimento = "N" AND 
-				idApp_OrcaTrata = "0" AND
-				idApp_Cliente = "0" 
+
+				((P.idSis_Empresa = ' . $data . '  AND
+				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' ) OR
+				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' )AND
+				P.ConcluidoProcedimento = "N" AND 
+				P.idApp_OrcaTrata = "0" AND
+				P.idApp_Cliente = "0" 
 		');
         $query = $query->result_array();
 
