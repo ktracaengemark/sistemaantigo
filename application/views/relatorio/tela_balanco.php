@@ -10,11 +10,18 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<?php echo form_open('relatorio/balanco', 'role="form"'); ?>
-					<?php #echo $titulo; ?>						
+											
 					
 					<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-						<span class="glyphicon glyphicon-search"></span> Balanco Anual
-					</button>										
+						<span class="glyphicon glyphicon-search"></span> <?php echo $titulo; ?>
+					</button>
+					<a class="btn btn-sm btn-success" href="<?php echo base_url() ?>relatorio/receitasparc" role="button">
+						<span class="glyphicon glyphicon-search"></span>Pc.Rec.
+					</a>
+					<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>relatorio/despesasparc" role="button">
+						<span class="glyphicon glyphicon-search"></span>Pc.Des.
+					</a>
+					
 
 				</div>
 				<div class="panel-body">	

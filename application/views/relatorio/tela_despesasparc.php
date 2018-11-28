@@ -14,14 +14,14 @@
 					<?php echo form_open('relatorio/despesasparc', 'role="form"'); ?>
 					<?php #echo $titulo; ?>
 
-					<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-						<span class="glyphicon glyphicon-search"></span>Parcelas
+					<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+						<span class="glyphicon glyphicon-search"></span>Pc.Des
 					</button>											
-					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/despesas" role="button">
-						<span class="glyphicon glyphicon-ok"></span>Despesas
+					<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/balanco" role="button">
+						<span class="glyphicon glyphicon-search"></span>Balanço
 					</a>
 					<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-						<span class="glyphicon glyphicon-plus"></span>Nova
+						<span class="glyphicon glyphicon-plus"></span>Despesa
 					</button>
 					
 				</div>
@@ -142,7 +142,7 @@
 										<div class="form-group col-md-3 text-left">
 											<div class="form-footer">		
 												<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/despesas" role="button">
-													<span class="glyphicon glyphicon-ok"></span> Despesas
+													<span class="glyphicon glyphicon-search"></span> Despesas
 												</a>
 											</div>	
 										</div>

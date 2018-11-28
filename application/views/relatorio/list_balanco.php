@@ -39,9 +39,11 @@
 						<?php
 						echo '<td><b>' . $report['RecPago'][0]->Balancopago . '</b></td>';
 						for($i=1;$i<=12;$i++) {
-							echo '<td class="text-left">' . $report['RecPago'][0]->{'M'.$i} . '</td>';
+							$bgcolor = ($report['RecPago'][0]->{'M'.$i} <= 0) ? 'bg-success' : 'bg-success';
+							echo '<td class="text-left ' . $bgcolor . '">' . $report['RecPago'][0]->{'M'.$i} . '</td>';
 						}
-						echo '<td class="text-left">' . $report['TotalGeralpago']->RecPago . '</td>';
+						$bgcolor = ($report['TotalGeralpago']->RecPago <= 0) ? 'bg-success' : 'bg-success';
+						echo '<td class="text-left ' . $bgcolor . '">' . $report['TotalGeralpago']->RecPago . '</td>';
 						?>
 					</tr>
 					
@@ -58,9 +60,11 @@
 						<?php
 						echo '<td><b>' . $report['DesPago'][0]->Balancopago . '</b></td>';
 						for($i=1;$i<=12;$i++) {
-							echo '<td class="text-left">' . $report['DesPago'][0]->{'M'.$i} . '</td>';
+							$bgcolor = ($report['DesPago'][0]->{'M'.$i} <= 0) ? 'bg-danger' : 'bg-danger';
+							echo '<td class="text-left ' . $bgcolor . '">' . $report['DesPago'][0]->{'M'.$i} . '</td>';
 						}
-						echo '<td class="text-left">' . $report['TotalGeralpago']->DesPago . '</td>';
+						$bgcolor = ($report['TotalGeralpago']->DesPago <= 0) ? 'bg-danger' : 'bg-danger';
+						echo '<td class="text-left ' . $bgcolor . '">' . $report['TotalGeralpago']->DesPago . '</td>';
 						?>
 					</tr>
 					<!--

@@ -14,14 +14,14 @@
 					<?php echo form_open('relatorio/receitasparc', 'role="form"'); ?>
 					<?php #echo $titulo; ?>
 
-					<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-						<span class="glyphicon glyphicon-search"></span>Parcelas
+					<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+						<span class="glyphicon glyphicon-search"></span>Pc.Rec
 					</button>											
-					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/receitas" role="button">
-						<span class="glyphicon glyphicon-ok"></span>Receitas
+					<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/balanco" role="button">
+						<span class="glyphicon glyphicon-search"></span>Balanço
 					</a>
-					<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-						<span class="glyphicon glyphicon-plus"></span>Nova
+					<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+						<span class="glyphicon glyphicon-plus"></span>Receita
 					</button>
 					
 				</div>
@@ -50,7 +50,7 @@
 									</div>
 									<div class="form-group col-md-4 text-right">
 										<div class="form-footer">		
-											<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>orcatrata/cadastrar2" role="button">
+											<a class="btn btn-success btn-block" href="<?php echo base_url() ?>orcatrata/cadastrar2" role="button">
 												<span class="glyphicon glyphicon-plus"></span> Receitas
 											</a>
 										</div>	
@@ -141,7 +141,7 @@
 										<div class="form-group col-md-3 text-left">
 											<div class="form-footer">		
 												<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/receitas" role="button">
-													<span class="glyphicon glyphicon-ok"></span> Receitas
+													<span class="glyphicon glyphicon-search"></span> Receitas
 												</a>
 											</div>	
 										</div>
