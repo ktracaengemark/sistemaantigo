@@ -7,7 +7,8 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8 ">
 			
-			<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
+			<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 && $_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+			
 			<nav class="navbar navbar-inverse">
 			  <div class="container-fluid">
 				<div class="navbar-header">
@@ -22,6 +23,8 @@
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-center">
+						
+						
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
@@ -72,6 +75,8 @@
 							</div>
 							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
+						
+						
 						<?php if ($_SESSION['Cliente']['idSis_Empresa'] == $_SESSION['log']['idSis_Empresa'] ) { ?>
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
@@ -99,6 +104,7 @@
 							<div class="btn-group" role="group" aria-label="..."> </div>
 						</li>
 						<?php } ?>
+						
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
@@ -129,9 +135,12 @@
 					</ul>
 
 				</div>
+				
+				
 			  </div>
 			</nav>
 			<?php } ?>
+			
 <?php } ?>
 
 			<div class="row">
