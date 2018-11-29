@@ -76,8 +76,10 @@
 								</button>
 								<ul class="dropdown-menu" role="menu">							
 									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Empresas</a></li>
+									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 									<li role="separator" class="divider"></li>							
 									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas</a></li>
+									<?php } ?>
 								</ul>
 							</div>
 							<div class="btn-group" role="group" aria-label="..."> </div>
