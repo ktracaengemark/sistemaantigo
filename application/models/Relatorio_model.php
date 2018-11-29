@@ -200,7 +200,7 @@ class Relatorio_model extends CI_Model {
                 C.NomeCliente,
                 OT.idApp_OrcaTrata,
 				OT.idSis_Usuario,
-				OT.TipoRD,
+				OT.idTab_TipoRD,
                 OT.AprovadoOrca,
 				OT.ObsOrca,
 				CONCAT(IFNULL(TD.TipoReceita,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,"")) AS Receitas,
@@ -238,7 +238,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro3 . '
 				' . $filtro4 . '
 				' . $filtro5 . '
-				OT.TipoRD = "R"
+				OT.idTab_TipoRD = "2"
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 
@@ -369,7 +369,7 @@ class Relatorio_model extends CI_Model {
                 C.NomeCliente,
                 OT.idApp_OrcaTrata,
 				OT.idSis_Usuario,
-				OT.TipoRD,
+				OT.idTab_TipoRD,
                 OT.AprovadoOrca,
 				OT.ObsOrca,
 				OT.Receitas,
@@ -403,7 +403,7 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
-				OT.TipoRD = "R"
+				OT.idTab_TipoRD = "2"
                 ' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 
@@ -532,7 +532,7 @@ class Relatorio_model extends CI_Model {
                 
                 OT.idApp_OrcaTrata,
 				OT.idSis_Usuario,
-				OT.TipoRD,
+				OT.idTab_TipoRD,
                 OT.AprovadoOrca,
 				OT.ObsOrca,
 				CONCAT(IFNULL(TD.TipoDespesa,""), " / ", IFNULL(OT.Receitas,"")) AS TipoDespesa,
@@ -568,7 +568,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro3 . '
 				' . $filtro4 . '
 				' . $filtro5 . ' 
-				OT.TipoRD = "D"
+				OT.idTab_TipoRD = "1"
                 ' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 
@@ -698,7 +698,7 @@ class Relatorio_model extends CI_Model {
                 
                 OT.idApp_OrcaTrata,
 				OT.idSis_Usuario,
-				OT.TipoRD,
+				OT.idTab_TipoRD,
                 OT.AprovadoOrca,
 				OT.ObsOrca,
 				OT.Receitas,
@@ -731,7 +731,7 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
-				OT.TipoRD = "D"
+				OT.idTab_TipoRD = "1"
                 ' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 
@@ -871,7 +871,7 @@ class Relatorio_model extends CI_Model {
 				OT.idApp_OrcaTrata,
 				OT.idSis_Usuario,
 				OT.idSis_Empresa,
-				OT.TipoRD,
+				OT.idTab_TipoRD,
                 OT.AprovadoOrca,
                 OT.DataOrca,
                 OT.DataEntradaOrca,
@@ -905,7 +905,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro3 . '
 				' . $filtro4 . ' 
 				' . $filtro5 . '
-				OT.TipoRD = "R"
+				OT.idTab_TipoRD = "2"
 				' . $data['NomeCliente'] . '
 				' . $data['Mesvenc'] . ' 
 				' . $data['Mespag'] . '
@@ -1026,7 +1026,7 @@ class Relatorio_model extends CI_Model {
             'SELECT
                 C.NomeCliente,
                 OT.idApp_OrcaTrata,
-				OT.TipoRD,
+				OT.idTab_TipoRD,
                 OT.AprovadoOrca,
                 OT.DataOrca,
                 OT.DataEntradaOrca,
@@ -1057,7 +1057,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro4 . '
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['NomeCliente'] . ' AND
-				OT.TipoRD = "R"
+				OT.idTab_TipoRD = "2"
 
             ORDER BY
                 C.NomeCliente,
@@ -1202,7 +1202,7 @@ class Relatorio_model extends CI_Model {
 				(' . $consulta2 . ') AND
 				(' . $consulta3 . ')
 				' . $data['TipoDespesa'] . ' AND
-				(DS.TipoProduto = "D" OR DS.TipoProduto = "E")
+				(DS.TipoProduto = "1" OR DS.TipoProduto = "E")
             ORDER BY
 				PP.DataVencimentoPagaveis
         ');
@@ -1341,7 +1341,7 @@ class Relatorio_model extends CI_Model {
 				(' . $consulta2 . ') AND
 				(' . $consulta3 . ')
 				' . $data['TipoDespesa'] . ' AND
-				(DS.TipoProduto = "D" OR DS.TipoProduto = "E")
+				(DS.TipoProduto = "1" OR DS.TipoProduto = "E")
             ORDER BY
 				PP.DataVencimentoPagaveis
         ');
@@ -1492,7 +1492,7 @@ class Relatorio_model extends CI_Model {
 
 				' . $filtro4 . '
 				' . $filtro5 . ' 
-				(DS.TipoProduto = "D" OR DS.TipoProduto = "E")
+				(DS.TipoProduto = "1" OR DS.TipoProduto = "E")
 				' . $data['Dia'] . '
 				' . $data['Mesvenc'] . ' 
 
@@ -1642,7 +1642,7 @@ class Relatorio_model extends CI_Model {
 				(' . $consulta2 . ') AND
 				(' . $consulta3 . ')
 				' . $data['TipoDespesa'] . ' AND
-				(DS.TipoProduto = "D" OR DS.TipoProduto = "E")
+				(DS.TipoProduto = "1" OR DS.TipoProduto = "E")
             ORDER BY
 				PP.DataVencimentoPagaveis
         ');
@@ -1879,8 +1879,8 @@ class Relatorio_model extends CI_Model {
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $permissao . '
-				OT.TipoRD = "R" AND
-				PR.TipoRD = "R" AND
+				OT.idTab_TipoRD = "2" AND
+				PR.idTab_TipoRD = "2" AND
 				PR.QuitadoRecebiveis = "S" AND
             	YEAR(PR.DataPagoRecebiveis) = ' . $data['Ano']
         );
@@ -1912,8 +1912,8 @@ class Relatorio_model extends CI_Model {
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $permissao . '
-				OT.TipoRD = "R" AND
-				PR.TipoRD = "R" AND
+				OT.idTab_TipoRD = "2" AND
+				PR.idTab_TipoRD = "2" AND
             	YEAR(PR.DataVencimentoRecebiveis) = ' . $data['Ano']
         );
 
@@ -1945,8 +1945,8 @@ class Relatorio_model extends CI_Model {
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $permissao . '
-				OT.TipoRD = "D" AND
-				PP.TipoRD = "D" AND
+				OT.idTab_TipoRD = "1" AND
+				PP.idTab_TipoRD = "1" AND
             	YEAR(PP.DataPagoRecebiveis) = ' . $data['Ano']
         );
 
@@ -1977,8 +1977,8 @@ class Relatorio_model extends CI_Model {
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $permissao . '
-				OT.TipoRD = "D" AND
-				PP.TipoRD = "D" AND
+				OT.idTab_TipoRD = "1" AND
+				PP.idTab_TipoRD = "1" AND
             	YEAR(PP.DataVencimentoRecebiveis) = ' . $data['Ano']
         );
 
@@ -2118,7 +2118,7 @@ class Relatorio_model extends CI_Model {
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 
-				OT.TipoRD = "R" AND
+				OT.idTab_TipoRD = "2" AND
 				PR.QuitadoRecebiveis = "S" AND
             	YEAR(PR.DataVencimentoRecebiveis) = ' . $data['Ano']
         );
@@ -2149,7 +2149,7 @@ class Relatorio_model extends CI_Model {
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 
 
-				OT.TipoRD = "R" AND
+				OT.idTab_TipoRD = "2" AND
             	YEAR(PR.DataVencimentoRecebiveis) = ' . $data['Ano']
         );
 
@@ -2178,7 +2178,7 @@ class Relatorio_model extends CI_Model {
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 
-				OT.TipoRD = "D" AND
+				OT.idTab_TipoRD = "1" AND
             	YEAR(PR.DataPagoRecebiveis) = ' . $data['Ano']
         );
 
@@ -2208,7 +2208,7 @@ class Relatorio_model extends CI_Model {
                 DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 
-                (DS.TipoProduto = "D") AND
+                (DS.TipoProduto = "1") AND
 				PP.QuitadoPagaveis = "S" AND
             	YEAR(PP.DataVencimentoPagaveis) = ' . $data['Ano']
         );
@@ -2238,7 +2238,7 @@ class Relatorio_model extends CI_Model {
                 DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 
-                (DS.TipoProduto = "D") AND
+                (DS.TipoProduto = "1") AND
             	YEAR(PP.DataVencimentoPagaveis) = ' . $data['Ano']
         );
 
@@ -2381,7 +2381,7 @@ class Relatorio_model extends CI_Model {
                 C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 C.idApp_Cliente = OT.idApp_Cliente AND
-				OT.TipoRD = "R" AND
+				OT.idTab_TipoRD = "2" AND
             	YEAR(PR.DataPagoRecebiveis) = ' . $data['Ano']
         );
 
@@ -2411,7 +2411,7 @@ class Relatorio_model extends CI_Model {
                 C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 C.idApp_Cliente = OT.idApp_Cliente AND
-				OT.TipoRD = "D" AND
+				OT.idTab_TipoRD = "1" AND
             	YEAR(PR.DataPagoRecebiveis) = ' . $data['Ano']
         );
 
@@ -2440,7 +2440,7 @@ class Relatorio_model extends CI_Model {
             WHERE
                 DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                (DS.TipoProduto = "D") AND
+                (DS.TipoProduto = "1") AND
             	YEAR(PP.DataPagoPagaveis) = ' . $data['Ano']
         );
 
@@ -2614,7 +2614,7 @@ class Relatorio_model extends CI_Model {
                 TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['Produtos'] . ' AND
-                TCO.TipoProduto = "D" AND
+                TCO.TipoProduto = "1" AND
                 TP.idTab_Produtos != "0"
                 ' . $data['Produtos'] . '
             GROUP BY
@@ -2639,7 +2639,7 @@ class Relatorio_model extends CI_Model {
             'SELECT
                 SUM(APV.QtdVendaProduto) AS QtdVenda,
                 TP.idTab_Produtos,
-                OT.TipoRD
+                OT.idTab_TipoRD
             FROM
                 App_Cliente AS C,
                 App_OrcaTrata AS OT
@@ -2656,7 +2656,7 @@ class Relatorio_model extends CI_Model {
                 APV.idApp_ProdutoVenda != "0" AND
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['Produtos'] . ' AND
-                OT.TipoRD = "R"
+                OT.idTab_TipoRD = "2"
             GROUP BY
                 TP.idTab_Produtos
             ORDER BY
@@ -2680,7 +2680,7 @@ class Relatorio_model extends CI_Model {
             'SELECT
                 SUM(APV.QtdVendaProduto) AS QtdDevolve,
                 TP.idTab_Produtos,
-                OT.TipoRD
+                OT.idTab_TipoRD
             FROM
                 App_Cliente AS C,
                 App_OrcaTrata AS OT
@@ -2697,7 +2697,7 @@ class Relatorio_model extends CI_Model {
                 APV.idApp_ProdutoVenda != "0" AND
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['Produtos'] . ' AND
-                OT.TipoRD = "D"
+                OT.idTab_TipoRD = "1"
             GROUP BY
                 TP.idTab_Produtos
             ORDER BY
@@ -2946,7 +2946,7 @@ exit();*/
                 TOT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['NomeCliente'] . ' AND
-                TOT.TipoRD = "R" AND
+                TOT.idTab_TipoRD = "2" AND
                 TC.idApp_Cliente != "0"
                 ' . $data['NomeCliente'] . '
             GROUP BY
@@ -2980,7 +2980,7 @@ exit();*/
                 TOT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['NomeCliente'] . ' AND
-                TOT.TipoRD = "R" AND
+                TOT.idTab_TipoRD = "2" AND
                 TC.idApp_Cliente != "0"
                 ' . $data['NomeCliente'] . '
             GROUP BY
@@ -3015,7 +3015,7 @@ exit();*/
                 TOT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['NomeCliente'] . ' AND
-                TOT.TipoRD = "R" AND
+                TOT.idTab_TipoRD = "2" AND
                 TC.idApp_Cliente != "0"
                 ' . $data['NomeCliente'] . '
             GROUP BY
@@ -3049,7 +3049,7 @@ exit();*/
                 TOT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['NomeCliente'] . ' AND
-                TOT.TipoRD = "D" AND
+                TOT.idTab_TipoRD = "1" AND
                 TC.idApp_Cliente != "0"
                 ' . $data['NomeCliente'] . '
             GROUP BY
@@ -3212,7 +3212,7 @@ exit();*/
                 TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['Produtos'] . ' AND
-                TCO.TipoProduto = "D" AND
+                TCO.TipoProduto = "1" AND
                 TP.idTab_Produtos != "0"
                 ' . $data['Produtos'] . '
             GROUP BY
@@ -3237,7 +3237,7 @@ exit();*/
             'SELECT
             	SUM(APV.QtdVendaProduto) AS QtdVenda,
                 TP.idTab_Produtos,
-				OT.TipoRD
+				OT.idTab_TipoRD
             FROM
             	App_Cliente AS C,
             	App_OrcaTrata AS OT
@@ -3251,7 +3251,7 @@ exit();*/
             	APV.idApp_ProdutoVenda != "0" AND
             	C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['Produtos'] . ' AND
-				OT.TipoRD = "R"
+				OT.idTab_TipoRD = "2"
             GROUP BY
             	TP.idTab_Produtos
             ORDER BY
@@ -3275,7 +3275,7 @@ exit();*/
             'SELECT
             	SUM(APV.QtdVendaProduto) AS QtdDevolve,
                 TP.idTab_Produtos,
-				OT.TipoRD
+				OT.idTab_TipoRD
             FROM
             	App_Cliente AS C,
             	App_OrcaTrata AS OT
@@ -3289,7 +3289,7 @@ exit();*/
             	APV.idApp_ProdutoVenda != "0" AND
             	C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['Produtos'] . ' AND
-				OT.TipoRD = "D"
+				OT.idTab_TipoRD = "1"
             GROUP BY
             	TP.idTab_Produtos
             ORDER BY
@@ -3438,7 +3438,7 @@ exit();*/
                 OT.DataOrca,
 				OT.ValorOrca,
 				OT.FormaPagamento,
-				OT.TipoRD,
+				OT.idTab_TipoRD,
 				OT.AprovadoOrca,
 				TFP.FormaPag,
 				APV.QtdVendaProduto,
@@ -3477,7 +3477,7 @@ exit();*/
 				' . $data['Prodaux1'] . '
 				' . $data['Prodaux2'] . '
 				' . $data['Prodaux3'] . ' AND
-				OT.TipoRD = "R"
+				OT.idTab_TipoRD = "2"
             ORDER BY
 				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');
@@ -3536,7 +3536,7 @@ exit();*/
                 OT.DataOrca,
 				OT.ValorOrca,
 				OT.FormaPagamento,
-				OT.TipoRD,
+				OT.idTab_TipoRD,
 				TD.TipoDevolucao,
 				OT.Orcamento,
 				OT.AprovadoOrca,
@@ -3576,7 +3576,7 @@ exit();*/
 				' . $data['Prodaux1'] . '
 				' . $data['Prodaux2'] . '
 				' . $data['Prodaux3'] . ' AND
-				OT.TipoRD = "D"
+				OT.idTab_TipoRD = "1"
             ORDER BY
 				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');
@@ -3845,7 +3845,7 @@ exit();*/
 				(' . $consulta . ')
 				' . $data['TipoDespesa'] . '
 				' . $data['Produtos'] . ' AND
-				TCO.TipoProduto = "D" AND
+				TCO.TipoProduto = "1" AND
 				TPB.idTab_Produtos != "0"
 
             ORDER BY
@@ -4027,7 +4027,7 @@ exit();*/
                 OT.DataConclusao,
                 OT.DataQuitado,
 				OT.DataRetorno,
-				OT.TipoRD,
+				OT.idTab_TipoRD,
 				OT.FormaPagamento,
 				OT.ObsOrca,
 				TFP.FormaPag,
@@ -4051,7 +4051,7 @@ exit();*/
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['NomeCliente'] . '
 				' . $data['FormaPag'] . ' AND
-				OT.TipoRD = "R"
+				OT.idTab_TipoRD = "2"
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
 
@@ -4170,7 +4170,7 @@ exit();*/
 				OT.DataConclusao,
                 OT.DataRetorno,
 				OT.FormaPagamento,
-				OT.TipoRD,
+				OT.idTab_TipoRD,
 				TD.TipoDevolucao,
 				TFP.FormaPag,
 				TSU.Nome
@@ -4192,7 +4192,7 @@ exit();*/
 				' . $filtro3 . '
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['NomeCliente'] . ' AND
-				OT.TipoRD = "D"
+				OT.idTab_TipoRD = "1"
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
 

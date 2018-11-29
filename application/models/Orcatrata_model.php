@@ -99,7 +99,7 @@ class Orcatrata_model extends CI_Model {
     }
 	
     public function get_orcatratadesp($data) {
-        $query = $this->db->query('SELECT * FROM App_OrcaTrata WHERE TipoRD = "D" AND idApp_OrcaTrata = ' . $data);
+        $query = $this->db->query('SELECT * FROM App_OrcaTrata WHERE idTab_TipoRD = "1" AND idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
 
         /*
@@ -138,7 +138,7 @@ class Orcatrata_model extends CI_Model {
     }
 
 	public function get_servicodesp($data) {
-		$query = $this->db->query('SELECT * FROM App_ServicoVenda WHERE TipoProduto = "CONS" AND idApp_OrcaTrata = ' . $data);
+		$query = $this->db->query('SELECT * FROM App_ServicoVenda WHERE idTab_TipoRD = "3" AND idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
 
         return $query;
@@ -152,7 +152,7 @@ class Orcatrata_model extends CI_Model {
     }
 
     public function get_produtodesp($data) {
-		$query = $this->db->query('SELECT * FROM App_ProdutoVenda WHERE TipoProduto = "COMP" AND idApp_OrcaTrata = ' . $data);
+		$query = $this->db->query('SELECT * FROM App_ProdutoVenda WHERE idTab_TipoRD = "1" AND idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
 
         return $query;
@@ -166,7 +166,7 @@ class Orcatrata_model extends CI_Model {
     }
 
     public function get_parcelasrecdesp($data) {
-		$query = $this->db->query('SELECT * FROM App_ParcelasRecebiveis WHERE TipoRD = "D" AND idApp_OrcaTrata = ' . $data);
+		$query = $this->db->query('SELECT * FROM App_ParcelasRecebiveis WHERE idTab_TipoRD = "1" AND idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
 
         return $query;
@@ -202,7 +202,7 @@ class Orcatrata_model extends CI_Model {
 			WHERE 
 				' . $permissao . '
 				PR.idSis_Empresa = ' . $data . ' AND
-				PR.TipoRD = "D" AND
+				PR.idTab_TipoRD = "1" AND
 				(MONTH(PR.DataVencimentoRecebiveis) = "11") AND
 				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
 				PR.QuitadoRecebiveis = "N"
@@ -245,7 +245,7 @@ class Orcatrata_model extends CI_Model {
 			WHERE 
 				' . $permissao . '
 				PR.idSis_Empresa = ' . $data . ' AND
-				PR.TipoRD = "R" AND
+				PR.idTab_TipoRD = "2" AND
 				(MONTH(PR.DataVencimentoRecebiveis) = "11") AND
 				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
 				PR.QuitadoRecebiveis = "N"
@@ -314,7 +314,7 @@ class Orcatrata_model extends CI_Model {
             . 'WHERE '
 			. 'OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
 			. 'OT.idApp_Cliente = ' . $id . ' AND '
-			. 'OT.TipoRD = "R" AND '
+			. 'OT.idTab_TipoRD = "2" AND '
             . 'OT.AprovadoOrca = "' . $aprovado . '" '
             . 'ORDER BY '
 			#. 'OT.DataOrca DESC, '

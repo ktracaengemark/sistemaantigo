@@ -2342,7 +2342,7 @@ class Relatorio extends CI_Controller {
             'NomeCliente',
 			'CodProd',
 			'TipoDevolucao',
-			'TipoRD',
+			'idTab_TipoRD',
 			'Produtos',
 			'Prodaux1',
 			'Prodaux2',
@@ -3002,7 +3002,7 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'NomeCliente',
-			'TipoRD',
+			'idTab_TipoRD',
 			'TipoDevolucao',
             'DataInicio',
             'DataFim',
@@ -3089,8 +3089,8 @@ class Relatorio extends CI_Controller {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
-			$data['bd']['TipoRD'] = $data['query']['TipoDevolucao'];
-			$data['bd']['TipoDevolucao'] = $data['query']['TipoRD'];
+			$data['bd']['idTab_TipoRD'] = $data['query']['TipoDevolucao'];
+			$data['bd']['TipoDevolucao'] = $data['query']['idTab_TipoRD'];
             $data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
