@@ -93,9 +93,11 @@ class Produtos extends CI_Controller {
         #### Tab_Produtos ####
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
-		$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
-		$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produtos.CodProd]');
-
+		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
+		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produtos.CodProd]');
+		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produtos.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		
+		
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();		
@@ -145,7 +147,7 @@ class Produtos extends CI_Controller {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produtos ####
 
-			$data['produtos']['Empresa'] = $_SESSION['log']['Empresa'];            
+			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			#$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
@@ -165,7 +167,7 @@ class Produtos extends CI_Controller {
                 for($j=1;$j<=$max;$j++) {
                     $data['valor'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
                     $data['valor'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-					$data['valor'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
+					$data['valor'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['valor'][$j]['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor'][$j]['ValorVendaProduto']));
                     $data['valor'][$j]['idTab_Produtos'] = $data['produtos']['idTab_Produtos'];					
 
@@ -232,6 +234,10 @@ class Produtos extends CI_Controller {
 
         
         (!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
+		
+		(!$data['produtos']['TipoProduto']) ? $data['produtos']['TipoProduto'] = 'V' : FALSE;
+		(!$data['produtos']['Categoria']) ? $data['produtos']['Categoria'] = 'P' : FALSE;
+		(!$data['produtos']['UnidadeProduto']) ? $data['produtos']['UnidadeProduto'] = 'UNID' : FALSE;
 
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
@@ -280,7 +286,7 @@ class Produtos extends CI_Controller {
         #### Tab_Produtos ####
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim'); 		
-        $this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
+        #$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produtos.CodProd]');
      
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();		
@@ -331,7 +337,7 @@ class Produtos extends CI_Controller {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produtos ####
 
-			$data['produtos']['Empresa'] = $_SESSION['log']['Empresa'];             
+			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			#$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
@@ -361,7 +367,7 @@ class Produtos extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
                     $data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
                     $data['update']['valor']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-					$data['update']['valor']['inserir'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
+					$data['update']['valor']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['valor']['inserir'][$j]['idTab_Produtos'] = $data['produtos']['idTab_Produtos'];
 					$data['update']['valor']['inserir'][$j]['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ValorVendaProduto']));
 					

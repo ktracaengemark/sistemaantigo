@@ -89,7 +89,7 @@ class Prodaux3 extends CI_Controller {
            # $data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));
             $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-			$data['query']['Empresa'] = $_SESSION['log']['Empresa'];
+			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 
             $data['campos'] = array_keys($data['query']);
             $data['anterior'] = array();
@@ -171,7 +171,7 @@ class Prodaux3 extends CI_Controller {
 			$data['query']['Abrev3'] = trim(mb_strtoupper($data['query']['Abrev3'], 'ISO-8859-1'));
            # $data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));
             $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
-			$data['query']['Empresa'] = $_SESSION['log']['Empresa'];
+			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 
             $data['anterior'] = $this->Prodaux3_model->get_prodaux3($data['query']['idTab_Prodaux3']);
             $data['campos'] = array_keys($data['query']);

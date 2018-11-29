@@ -18,6 +18,7 @@
 							<div class="panel-heading">	
 								<div class="row">
 									<div class="col-md-2"></div>
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 									<div class="col-md-2">
 										<label for="TipoProduto">Venda/Cons:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -49,7 +50,8 @@
 											}
 											?>
 										</select>
-									</div>																	
+									</div>
+									
 									<div class="col-md-4">
 										<label for="Fornecedor">Fornecedor</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -82,7 +84,7 @@
 											?>
 										</select>
 									</div>
-									
+									<?php } ?>
 								</div>
 								<div class="row">									
 																		
@@ -91,6 +93,12 @@
 										<input type="text" class="form-control" maxlength="25"
 												name="CodProd" value="<?php echo $produtos['CodProd'] ?>">
 									</div>
+									<div class="col-md-4">
+										<label for="Produtos">Desc. Produto/Serviço:*</label><br>
+										<input type="text" class="form-control" maxlength="200"
+												name="Produtos" value="<?php echo $produtos['Produtos'] ?>">
+									</div>
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 									<div class="col-md-2">
 										<label for="Prodaux3">Categoria:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -107,6 +115,7 @@
 											?>
 										</select>
 									</div>
+									
 									<div class="col-md-2">
 										<label for="Prodaux1">Aux1:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -123,12 +132,6 @@
 											?>
 										</select>
 									</div>
-									<div class="col-md-4">
-										<label for="Produtos">Desc. Produto/Serviço:*</label><br>
-										<input type="text" class="form-control" maxlength="200"
-												name="Produtos" value="<?php echo $produtos['Produtos'] ?>">
-									</div>
-									
 									<div class="col-md-2">
 										<label for="Prodaux2">Aux2:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -145,6 +148,7 @@
 											?>
 										</select>
 									</div>
+									<?php } ?>
 									<!--
 									<div class="col-md-3">
 										<label for="ValorCompraProduto">Custo:</label><br>
@@ -161,14 +165,15 @@
 					</div>
 
 					<hr>
-											
+					
+					<?php if ($_SESSION['log']['NivelEmpresa'] <= 3 ) { ?>						
 					<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
 						<div class="panel panel-primary">
 							 <div class="panel-heading" role="tab" id="heading3" data-toggle="collapse" data-parent="#accordion3" data-target="#collapse3">
 								<h4 class="panel-title">
 									<a class="accordion-toggle">
 										<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-										Tabelas & Planos - Valor de Venda
+										Valor de Venda
 									</a>
 								</h4>
 							</div>
@@ -194,6 +199,85 @@
 												<div class="row">																					
 
 													<div class="col-md-4">
+														<label for="Convdesc<?php echo $i ?>">Descrição do Valor:</label>
+														<input type="text" class="form-control"  id="Convdesc<?php echo $i ?>" <?php echo $readonly; ?>
+																  name="Convdesc<?php echo $i ?>" value="<?php echo $valor[$i]['Convdesc']; ?>">
+													</div>													
+
+													<div class="col-md-3">
+														<label for="ValorVendaProduto">Valor Venda:</label>
+														<div class="input-group">
+															<span class="input-group-addon" id="basic-addon1">R$</span>
+															<input type="text" class="form-control Valor" id="ValorVendaProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
+																name="ValorVendaProduto<?php echo $i ?>" value="<?php echo $valor[$i]['ValorVendaProduto'] ?>">
+														</div>
+													</div>													
+													
+													<div class="col-md-1">
+														<label><br></label><br>
+														<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
+															<span class="glyphicon glyphicon-trash"></span>
+														</button>
+													</div>
+												</div>
+											</div>	
+										</div>		
+									</div>
+
+									<?php
+									}
+									?>
+
+									</div>
+
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-4">
+												<a class="btn btn-xs btn-danger" onclick="adicionaValor()">
+													<span class="glyphicon glyphicon-plus"></span> Adicionar Valor
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<?php } ?>
+					
+					<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>						
+					<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
+						<div class="panel panel-primary">
+							 <div class="panel-heading" role="tab" id="heading3" data-toggle="collapse" data-parent="#accordion3" data-target="#collapse3">
+								<h4 class="panel-title">
+									<a class="accordion-toggle">
+										<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+										Valor de Venda
+									</a>
+								</h4>
+							</div>
+
+							<div id="collapse3" class="panel-collapse" role="tabpanel" aria-labelledby="heading3" aria-expanded="false">
+								<div class="panel-body">
+
+									<input type="hidden" name="PTCount" id="PTCount" value="<?php echo $count['PTCount']; ?>"/>
+
+									<div class="input_fields_wrap3">
+
+									<?php
+									for ($i=1; $i <= $count['PTCount']; $i++) {
+									?>
+
+									<?php if ($metodo > 1) { ?>
+									<input type="hidden" name="idTab_Valor<?php echo $i ?>" value="<?php echo $valor[$i]['idTab_Valor']; ?>"/>
+									<?php } ?>
+
+									<div class="form-group" id="3div<?php echo $i ?>">
+										<div class="panel panel-info">
+											<div class="panel-heading">			
+												<div class="row">																					
+													
+													<div class="col-md-4">
 														<label for="Convenio<?php echo $i ?>">Tabelas & Planos:</label>
 														<?php if ($i == 1) { ?>
 														<?php } ?>
@@ -211,8 +295,9 @@
 															?>
 														</select>
 													</div>
+													
 													<div class="col-md-4">
-														<label for="Convdesc<?php echo $i ?>">Descrição:</label>
+														<label for="Convdesc<?php echo $i ?>">Descrição do Valor:</label>
 														<input type="text" class="form-control"  id="Convdesc<?php echo $i ?>" <?php echo $readonly; ?>
 																  name="Convdesc<?php echo $i ?>" value="<?php echo $valor[$i]['Convdesc']; ?>">
 													</div>													
@@ -252,18 +337,17 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-4">
-												<a class="add_field_button3 btn btn-xs btn-danger" onclick="adicionaValor()">
-													<span class="glyphicon glyphicon-plus"></span> Adicionar Tabelas & Planos
+												<a class="add_field_button3 btn btn-xs btn-danger" onclick="adicionaValor2()">
+													<span class="glyphicon glyphicon-plus"></span> Adicionar Valor
 												</a>
 											</div>
 										</div>
 									</div>
-
 								</div>
 							</div>
 						</div>
 					</div>
-
+					<?php } ?>
 					<hr>
 
 					<div class="form-group">

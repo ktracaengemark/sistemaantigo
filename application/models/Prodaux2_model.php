@@ -65,7 +65,7 @@ class Prodaux2_model extends CI_Model {
         $query = $this->db->query('SELECT * '
                 . 'FROM Tab_Prodaux2 '
                 . 'WHERE '
-                . 'Empresa = ' . $_SESSION['log']['Empresa'] . ' AND '
+                . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
                 . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' '
                 . 'ORDER BY Abrev2 ASC ');
 
@@ -171,7 +171,7 @@ class Prodaux2_model extends CI_Model {
                 Tab_Prodaux2
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                Empresa = ' . $_SESSION['log']['Empresa'] . '
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
                 ORDER BY Prodaux2 ASC'
     );
         } else {
@@ -184,7 +184,7 @@ class Prodaux2_model extends CI_Model {
                 Tab_Prodaux2
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                Empresa = ' . $_SESSION['log']['Empresa'] . '
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
                 ORDER BY Prodaux2 ASC'
     );
 
