@@ -21,8 +21,8 @@ $result = mysql_query(
         WHERE
 			T.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo']
 );
-#(T.Empresa = ' . $_SESSION['log']['id'] . ' OR
-#T.Empresa = ' . $_SESSION['log']['Empresa'] . ')'
+#(T.idSis_Empresa = ' . $_SESSION['log']['id'] . ' OR
+#T.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ')'
 #ORDER BY T.Nome' . $_GET['tabela'] . ' ASC
 if ($_GET['tabela']) {
 

@@ -25,7 +25,7 @@ if ($_GET['q']==1) {
                 Tab_Servico AS TSV
             WHERE
 				TSV.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				TSV.Empresa = ' . $_SESSION['log']['Empresa'] . '
+				TSV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY
 				TSV.NomeServico ASC
     ');
@@ -46,7 +46,7 @@ elseif ($_GET['q'] == 2) {
     $result = mysql_query(
             'SELECT
                 V.idTab_Valor,
-                CONCAT(IFNULL(P.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(P.Produtos,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(V.Convdesc,""), " --- ", V.ValorVendaProduto, " -- ", IFNULL(P.UnidadeProduto,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
+                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - R$ ", V.ValorVendaProduto, " -- ", IFNULL(V.Convdesc,""), " --- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
                 V.ValorVendaProduto,
 				P.Categoria
             FROM
@@ -60,7 +60,7 @@ elseif ($_GET['q'] == 2) {
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = P.Prodaux1
             WHERE
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 P.idTab_Produtos = V.idTab_Produtos
 			ORDER BY
 				P.CodProd ASC,
@@ -84,6 +84,7 @@ elseif ($_GET['q'] == 2) {
     }
 
 }
+
 elseif ($_GET['q'] == 3) {
 
     $result = mysql_query(
@@ -120,7 +121,7 @@ elseif ($_GET['q'] == 4) {
                 Tab_Convenio
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                Empresa = ' . $_SESSION['log']['Empresa'] . '
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
                 ORDER BY Convenio ASC'
     );
 

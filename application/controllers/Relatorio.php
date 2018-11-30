@@ -3956,7 +3956,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
 
-        $data['titulo'] = 'Produtos, Serviços e Valores';
+        $data['titulo'] = 'Produtos';
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {

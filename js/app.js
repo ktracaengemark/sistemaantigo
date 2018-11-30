@@ -1060,11 +1060,6 @@ function adicionaValor() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-4">\
-							<label for="Convdesc'+pt+'">Descrição:</label>\
-							<input type="text" class="form-control" id="Convdesc'+pt+'"\
-									  name="Convdesc'+pt+'" value="">\
-						</div>\
 						<div class="col-md-3">\
 							<label for="ValorVendaProduto'+pt+'">Valor Venda:</label><br>\
 							<div class="input-group id="ValorVendaProduto'+pt+'">\
@@ -3127,7 +3122,7 @@ $(document).ready(function () {
 
         //request the JSON data and parse into the select element
         $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=9',
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=2',
             dataType: 'JSON',
             type: "GET",
             success: function (data) {

@@ -34,10 +34,12 @@
 											<div class="panel-group">
 												<div class="panel panel-success">
 													
-													<div class="panel-heading text-left">
+													<div class="panel-heading text-right">
+														
 														<a class="btn btn-success" type="button" data-toggle="collapse" data-target="#Entregues" aria-expanded="false" aria-controls="Entregues">
 															<span class="glyphicon glyphicon-menu-down"></span> Entregues
 														</a>
+														
 													</div>
 													
 													<div <?php echo $collapse; ?> id="Entregues">
@@ -155,12 +157,13 @@
 																					<span class="glyphicon glyphicon-plus"></span> Produtos
 																				</a>
 																			</div>
+																			<div class="col-md-3">	
+																				<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
+																			</div>
 																			<div class="col-md-2">	
 																				<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
 																			</div>
-																			<div class="col-md-3">	
-																				<b>Prod. Entregues: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
-																			</div>
+																			
 																			<div class="col-md-3 text-left">																							
 																				<!--
 																				<a class="accordion-toggle btn btn-heading  collapsed" role="tab" id="heading5" data-toggle="collapse" data-parent="#accordion5" data-target="#collapse5" aria-expanded="false">
@@ -338,12 +341,13 @@
 																					<span class="glyphicon glyphicon-minus"></span> Produtos
 																				</a>
 																			</div>
+																			<div class="col-md-3">	
+																				<b>Produtos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
+																			</div>
 																			<div class="col-md-2">	
 																				<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
 																			</div>
-																			<div class="col-md-3">	
-																				<b>Prod. Devolvidos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
-																			</div>
+																			
 																			<div class="col-md-3 text-left">																							
 																				<!--
 																				<a class="accordion-toggle btn btn-heading  collapsed" role="tab" id="heading6" data-toggle="collapse" data-parent="#accordion6" data-target="#collapse6" aria-expanded="false">

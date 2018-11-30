@@ -107,7 +107,7 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 		
-        $data['titulo'] = 'Cadastar Produtos & Serviços';
+        $data['titulo'] = 'Cadastrar';
         $data['form_open_path'] = 'produtos/cadastrar';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -298,7 +298,7 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 
-        $data['titulo'] = 'Editar Produtos & Serviços';
+        $data['titulo'] = 'Editar';
         $data['form_open_path'] = 'produtos/alterar';
         $data['readonly'] = '';
         $data['disabled'] = '';

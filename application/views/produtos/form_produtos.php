@@ -6,7 +6,17 @@
 			<?php echo validation_errors(); ?>
 
 			<div class="panel panel-<?php echo $panel; ?>">
-				<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>			
+				<div class="panel-heading">
+					<?php echo $titulo; ?>
+					<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/produtos" role="button">
+						<span class="glyphicon glyphicon-search"></span> Produtos
+					</a>
+					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/estoque" role="button">
+						<span class="glyphicon glyphicon-search"></span> Estoque
+					</a>
+					
+				
+				</div>			
 				<div class="panel-body">
 
 					<?php echo form_open_multipart($form_open_path); ?>
@@ -94,7 +104,7 @@
 												name="CodProd" value="<?php echo $produtos['CodProd'] ?>">
 									</div>
 									<div class="col-md-4">
-										<label for="Produtos">Desc. Produto/Serviço:*</label><br>
+										<label for="Produtos">Produto:*</label><br>
 										<input type="text" class="form-control" maxlength="200"
 												name="Produtos" value="<?php echo $produtos['Produtos'] ?>">
 									</div>
@@ -197,13 +207,7 @@
 										<div class="panel panel-info">
 											<div class="panel-heading">			
 												<div class="row">																					
-
-													<div class="col-md-4">
-														<label for="Convdesc<?php echo $i ?>">Descrição do Valor:</label>
-														<input type="text" class="form-control"  id="Convdesc<?php echo $i ?>" <?php echo $readonly; ?>
-																  name="Convdesc<?php echo $i ?>" value="<?php echo $valor[$i]['Convdesc']; ?>">
-													</div>													
-
+													
 													<div class="col-md-3">
 														<label for="ValorVendaProduto">Valor Venda:</label>
 														<div class="input-group">
