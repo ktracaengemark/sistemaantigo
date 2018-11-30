@@ -28,7 +28,7 @@
 										</a>
 									</div>
 									
-									<div <?php echo $collapse1; ?> id="Produtos">
+									<div <?php echo $collapse; ?> id="Produtos">
 										<div class="panel-body">
 
 											
@@ -189,7 +189,7 @@
 											<div class="panel-group">	
 												<div class="panel panel-danger">
 
-													<div class="panel-heading text-left">
+													<div class="panel-heading text-right">
 														<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
 															<span class="glyphicon glyphicon-menu-down"></span> Devolvidos
 														</a>

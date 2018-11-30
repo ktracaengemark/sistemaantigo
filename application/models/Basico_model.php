@@ -885,7 +885,7 @@ class Basico_model extends CI_Model {
             $array = $this->db->query(
             'SELECT
                 V.idTab_Valor,
-                CONCAT(IFNULL(P.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(P.Produtos,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(V.Convdesc,""), " --- ", V.ValorVendaProduto, " -- ", IFNULL(P.UnidadeProduto,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
+                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - R$ ", V.ValorVendaProduto, " -- ", IFNULL(V.Convdesc,""), " --- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
                 V.ValorVendaProduto,
 				P.Categoria
             FROM
@@ -913,7 +913,7 @@ class Basico_model extends CI_Model {
             $query = $this->db->query(
             'SELECT
                 V.idTab_Valor,
-                CONCAT(IFNULL(P.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(P.Produtos,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(V.Convdesc,""), " --- ", V.ValorVendaProduto, " -- ", IFNULL(P.UnidadeProduto,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
+                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - R$ ", V.ValorVendaProduto, " -- ", IFNULL(V.Convdesc,""), " --- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
                 V.ValorVendaProduto,
 				P.Categoria
             FROM

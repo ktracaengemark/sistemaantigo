@@ -516,7 +516,7 @@ class Relatorio_model extends CI_Model {
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimentoRecebiveis) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPagoRecebiveis) = ' . $data['Mespag'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimentoRecebiveis) = ' . $data['Ano'] : FALSE;		
-		$data['TipoReceita'] = ($data['TipoReceita']) ? ' AND TD.idTab_TipoReceita = ' . $data['TipoReceita'] : FALSE;
+		$data['TipoReceita'] = ($data['TipoReceita']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoReceita'] : FALSE;
 		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];

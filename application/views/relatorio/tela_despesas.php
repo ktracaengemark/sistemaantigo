@@ -177,7 +177,7 @@
 										<?php } ?>
 										
 										<div class="col-md-3 text-left">
-											<label for="Ordenamento">Tipo de Receita:</label>
+											<label for="Ordenamento">Tipo de Despesa:</label>
 											<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 													id="TipoReceita" name="TipoReceita">
 												<?php

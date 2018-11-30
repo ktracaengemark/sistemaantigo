@@ -45,7 +45,7 @@
 														<div class="panel-body">
 															<input type="hidden" name="PCount" id="PCount" value="<?php echo $count['PCount']; ?>"/>
 
-															<div class="input_fields_wrap9">
+															<div class="input_fields_wrap11">
 
 															<?php
 															$QtdSoma = $ProdutoSoma = 0;
@@ -58,7 +58,7 @@
 
 															<input type="hidden" name="ProdutoHidden" id="ProdutoHidden<?php echo $i ?>" value="<?php echo $i ?>">
 
-															<div class="form-group" id="9div<?php echo $i ?>">
+															<div class="form-group" id="11div<?php echo $i ?>">
 																<div class="panel panel-success">
 																	<div class="panel-heading">
 																		<div class="row">
@@ -113,7 +113,7 @@
 																			</div>
 																			<div class="col-md-1">
 																				<label><br></label><br>
-																				<button type="button" id="<?php echo $i ?>" class="remove_field9 btn btn-danger"
+																				<button type="button" id="<?php echo $i ?>" class="remove_field11 btn btn-danger"
 																						onclick="calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',1,<?php echo $i ?>,'CountMax',0,'ProdutoHidden')">
 																					<span class="glyphicon glyphicon-trash"></span>
 																				</button>
@@ -151,7 +151,7 @@
 																		<div class="row">
 																			<br>
 																			<div class="col-md-3">
-																				<a class="add_field_button9 btn btn-success"
+																				<a class="add_field_button11 btn btn-success"
 																						onclick="calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
 																					<span class="glyphicon glyphicon-plus"></span> Produtos
 																				</a>
@@ -191,7 +191,7 @@
 
 													<div class="panel-heading text-left">
 														<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
-															<span class="glyphicon glyphicon-menu-down"></span> Consumidos
+															<span class="glyphicon glyphicon-menu-down"></span> Devolvidos
 														</a>
 													</div>
 													
@@ -200,7 +200,7 @@
 																													
 															<input type="hidden" name="SCount" id="SCount" value="<?php echo $count['SCount']; ?>"/>
 
-															<div class="input_fields_wrap10">
+															<div class="input_fields_wrap12">
 
 															<?php
 															$QtdSomaDev = $ServicoSoma = 0;
@@ -213,7 +213,7 @@
 
 															<input type="hidden" name="ServicoHidden" id="ServicoHidden<?php echo $i ?>" value="<?php echo $i ?>">
 															
-															<div class="form-group" id="10div<?php echo $i ?>">
+															<div class="form-group" id="12div<?php echo $i ?>">
 																<div class="panel panel-danger">
 																	<div class="panel-heading">
 																		<div class="row">
@@ -268,7 +268,7 @@
 																			</div>
 																			<div class="col-md-1">
 																				<label><br></label><br>
-																				<button type="button" id="<?php echo $i ?>" class="remove_field10 btn btn-danger"
+																				<button type="button" id="<?php echo $i ?>" class="remove_field12 btn btn-danger"
 																					onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',1,<?php echo $i ?>,'CountMax2',0,'ServicoHidden')">
 																					<span class="glyphicon glyphicon-trash"></span>
 																				</button>
@@ -335,7 +335,7 @@
 																		<div class="row">	
 																			<br>																
 																			<div class="col-md-3 text-left">
-																				<a class="add_field_button10  btn btn-danger" 
+																				<a class="add_field_button12  btn btn-danger" 
 																						onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
 																					<span class="glyphicon glyphicon-minus"></span> Produtos
 																				</a>
@@ -348,7 +348,7 @@
 																			</div>
 																			<div class="col-md-3 text-left">																							
 																				<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
-																					<span class="glyphicon glyphicon-menu-up"></span> Consumidos
+																					<span class="glyphicon glyphicon-menu-up"></span> Devolvidos
 																				</a>																							
 																			</div>
 																		</div>
