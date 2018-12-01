@@ -15,7 +15,7 @@ class Produtos_model extends CI_Model {
 
     public function set_produtos($data) {
 
-        $query = $this->db->insert('Tab_Produtos', $data);
+        $query = $this->db->insert('Tab_Produto', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -38,7 +38,7 @@ class Produtos_model extends CI_Model {
     }
 
     public function get_produtos($data) {
-        $query = $this->db->query('SELECT * FROM Tab_Produtos WHERE idTab_Produtos = ' . $data);
+        $query = $this->db->query('SELECT * FROM Tab_Produto WHERE idTab_Produto = ' . $data);
         $query = $query->result_array();
 
         /*
@@ -54,7 +54,7 @@ class Produtos_model extends CI_Model {
     }
 
     public function get_valor($data) {
-		$query = $this->db->query('SELECT * FROM Tab_Valor WHERE idTab_Produtos = ' . $data);
+		$query = $this->db->query('SELECT * FROM Tab_Valor WHERE idTab_Produto = ' . $data);
         $query = $query->result_array();
 
         return $query;
@@ -64,11 +64,11 @@ class Produtos_model extends CI_Model {
 
         $query = $this->db->query('
             SELECT
-                TF.idTab_Produtos,
+                TF.idTab_Produto,
                 TF.TipoProduto,
                 TF.Produtos
             FROM
-                Tab_Produtos AS TF
+                Tab_Produto AS TF
             WHERE
                 TF.idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
             ORDER BY
@@ -100,8 +100,8 @@ class Produtos_model extends CI_Model {
 
     public function update_produtos($data, $id) {
 
-        unset($data['idTab_Produtos']);
-        $query = $this->db->update('Tab_Produtos', $data, array('idTab_Produtos' => $id));
+        unset($data['idTab_Produto']);
+        $query = $this->db->update('Tab_Produto', $data, array('idTab_Produto' => $id));
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }
@@ -128,8 +128,8 @@ class Produtos_model extends CI_Model {
     public function delete_produtos($id) {
 
 
-        $query = $this->db->delete('Tab_Valor', array('idTab_Produtos' => $id));
-        $query = $this->db->delete('Tab_Produtos', array('idTab_Produtos' => $id));
+        $query = $this->db->delete('Tab_Valor', array('idTab_Produto' => $id));
+        $query = $this->db->delete('Tab_Produto', array('idTab_Produto' => $id));
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -150,12 +150,12 @@ class Produtos_model extends CI_Model {
         if ($data === TRUE) {
             $array = $this->db->query(
             'SELECT
-                TPV.idTab_Produtos,
+                TPV.idTab_Produto,
 				CONCAT(IFNULL(TPV.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TPV.Produtos,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TPV.UnidadeProduto,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
 				TPV.ValorCompraProduto,
 				TPV.Categoria
             FROM
-                Tab_Produtos AS TPV
+                Tab_Produto AS TPV
 					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = TPV.Fornecedor
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPV.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPV.Prodaux2
@@ -174,12 +174,12 @@ class Produtos_model extends CI_Model {
         } else {
             $query = $this->db->query(
             'SELECT
-                TPV.idTab_Produtos,
+                TPV.idTab_Produto,
 				CONCAT(IFNULL(TPV.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TPV.Produtos,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TPV.UnidadeProduto,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
 				TPV.ValorCompraProduto,
 				TPV.Categoria
             FROM
-                Tab_Produtos AS TPV
+                Tab_Produto AS TPV
 					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = TPV.Fornecedor
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPV.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPV.Prodaux2
@@ -198,7 +198,7 @@ class Produtos_model extends CI_Model {
 
             $array = array();
             foreach ($query->result() as $row) {
-                $array[$row->idTab_Produtos] = $row->NomeProduto;
+                $array[$row->idTab_Produto] = $row->NomeProduto;
             }
         }
 

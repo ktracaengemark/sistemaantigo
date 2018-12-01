@@ -21,7 +21,7 @@
 
 					<?php echo form_open_multipart($form_open_path); ?>
 
-					<!--Tab_Produtos-->
+					<!--Tab_Produto-->
 
 					<div class="form-group">
 						<div class="panel panel-info">
@@ -365,7 +365,7 @@
 					<div class="form-group">
 						<div class="row">
 							<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
-							<input type="hidden" name="idTab_Produtos" value="<?php echo $produtos['idTab_Produtos']; ?>">
+							<input type="hidden" name="idTab_Produto" value="<?php echo $produtos['idTab_Produto']; ?>">
 							<?php if ($metodo > 1) { ?>
 							<!--<input type="hidden" name="idTab_Valor" value="<?php echo $valor['idTab_Valor']; ?>">
 							<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
@@ -400,7 +400,7 @@
 													</button>
 												</div>
 												<div class="col-md-6 text-right">
-													<a class="btn btn-danger" href="<?php echo base_url() . 'produtos/excluir/' . $produtos['idTab_Produtos'] ?>" role="button">
+													<a class="btn btn-danger" href="<?php echo base_url() . 'produtos/excluir/' . $produtos['idTab_Produto'] ?>" role="button">
 														<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 													</a>
 												</div>

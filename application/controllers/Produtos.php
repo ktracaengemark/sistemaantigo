@@ -48,8 +48,8 @@ class Produtos extends CI_Controller {
             $data['msg'] = '';
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $data['produtos'] = quotes_to_entities($this->input->post(array(
-            #### Tab_Produtos ####
-            'idTab_Produtos',           
+            #### Tab_Produto ####
+            'idTab_Produto',           
             'TipoProduto',
 			'Categoria',
 			'UnidadeProduto',
@@ -91,12 +91,12 @@ class Produtos extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-        #### Tab_Produtos ####
+        #### Tab_Produto ####
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
 		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
-		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produtos.CodProd]');
-		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produtos.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
+		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		
 		
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
@@ -146,14 +146,14 @@ class Produtos extends CI_Controller {
         } else {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
-            #### Tab_Produtos ####
+            #### Tab_Produto ####
 
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
 			$data['produtos']['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorVendaProduto']));
-            $data['produtos']['idTab_Produtos'] = $this->Produtos_model->set_produtos($data['produtos']);
+            $data['produtos']['idTab_Produto'] = $this->Produtos_model->set_produtos($data['produtos']);
             /*
             echo count($data['servico']);
             echo '<br>';
@@ -171,7 +171,7 @@ class Produtos extends CI_Controller {
                     $data['valor'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['valor'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['valor'][$j]['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor'][$j]['ValorVendaProduto']));
-                    $data['valor'][$j]['idTab_Produtos'] = $data['produtos']['idTab_Produtos'];					
+                    $data['valor'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];					
 
                 }
                 $data['valor']['idTab_Valor'] = $this->Produtos_model->set_valor($data['valor']);
@@ -186,15 +186,15 @@ class Produtos extends CI_Controller {
 //////////////////////////////////////////////////Dados Basicos/////////////////////////////////////////////////////////////////////////
 */
 
-            if ($data['idTab_Produtos'] === FALSE) {
+            if ($data['idTab_Produto'] === FALSE) {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
                 $this->load->view('produtos/form_produtos', $data);
             } else {
 
-                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Produtos'], FALSE);
-                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produtos', 'CREATE', $data['auditoriaitem']);
+                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Produto'], FALSE);
+                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produto', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'produtos/listar/' . $data['msg']);
@@ -217,8 +217,8 @@ class Produtos extends CI_Controller {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $data['produtos'] = quotes_to_entities($this->input->post(array(
-            #### Tab_Produtos ####
-            'idTab_Produtos',			
+            #### Tab_Produto ####
+            'idTab_Produto',			
             'TipoProduto',
 			'Categoria',
 			'UnidadeProduto',
@@ -259,7 +259,7 @@ class Produtos extends CI_Controller {
         //Fim do trecho de código que dá pra melhorar
 
         if ($id) {
-            #### Tab_Produtos ####
+            #### Tab_Produto ####
             $data['produtos'] = $this->Produtos_model->get_produtos($id);
            
             #### Carrega os dados do cliente nas variáves de sessão ####
@@ -285,11 +285,11 @@ class Produtos extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-        #### Tab_Produtos ####
+        #### Tab_Produto ####
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim'); 		
         #$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
-		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produtos.CodProd]');
+		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
      
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();		
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
@@ -337,24 +337,24 @@ class Produtos extends CI_Controller {
         } else {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
-            #### Tab_Produtos ####
+            #### Tab_Produto ####
 
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			#$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
 
-            $data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produtos']);
+            $data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produto']);
             $data['update']['produtos']['campos'] = array_keys($data['produtos']);
             $data['update']['produtos']['auditoriaitem'] = $this->basico->set_log(
                 $data['update']['produtos']['anterior'],
                 $data['produtos'],
                 $data['update']['produtos']['campos'],
-                $data['produtos']['idTab_Produtos'], TRUE);
-            $data['update']['produtos']['bd'] = $this->Produtos_model->update_produtos($data['produtos'], $data['produtos']['idTab_Produtos']);
+                $data['produtos']['idTab_Produto'], TRUE);
+            $data['update']['produtos']['bd'] = $this->Produtos_model->update_produtos($data['produtos'], $data['produtos']['idTab_Produto']);
 
             #### Tab_Valor ####
-            $data['update']['valor']['anterior'] = $this->Produtos_model->get_valor($data['produtos']['idTab_Produtos']);
+            $data['update']['valor']['anterior'] = $this->Produtos_model->get_valor($data['produtos']['idTab_Produto']);
             if (isset($data['valor']) || (!isset($data['valor']) && isset($data['update']['valor']['anterior']) ) ) {
 
                 if (isset($data['valor']))
@@ -370,7 +370,7 @@ class Produtos extends CI_Controller {
                     $data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
                     $data['update']['valor']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['valor']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-                    $data['update']['valor']['inserir'][$j]['idTab_Produtos'] = $data['produtos']['idTab_Produtos'];
+                    $data['update']['valor']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['valor']['inserir'][$j]['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ValorVendaProduto']));
 					
                 }
@@ -400,7 +400,7 @@ class Produtos extends CI_Controller {
 //////////////////////////////////////////////////Dados Basicos/////////////////////////////////////////////////////////////////////////
 */
 
-            //if ($data['idTab_Produtos'] === FALSE) {
+            //if ($data['idTab_Produto'] === FALSE) {
             //if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
             if ($data['auditoriaitem'] && !$data['update']['produtos']['bd']) {
                 $data['msg'] = '?m=2';
@@ -410,8 +410,8 @@ class Produtos extends CI_Controller {
                 $this->load->view('produtos/form_produtos', $data);
             } else {
 
-                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Produtos'], FALSE);
-                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produtos', 'CREATE', $data['auditoriaitem']);
+                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Produto'], FALSE);
+                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produto', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'produtos/listar/' . $data['msg']);

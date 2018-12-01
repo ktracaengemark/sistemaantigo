@@ -891,7 +891,7 @@ class Basico_model extends CI_Model {
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
-					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Produto AS P ON P.idTab_Produto = V.idTab_Produto
 					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = P.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
@@ -899,7 +899,7 @@ class Basico_model extends CI_Model {
             WHERE
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                P.idTab_Produtos = V.idTab_Produtos
+                P.idTab_Produto = V.idTab_Produto
 			ORDER BY
 				P.CodProd ASC,
 				P.Categoria ASC,
@@ -919,7 +919,7 @@ class Basico_model extends CI_Model {
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
-					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Produto AS P ON P.idTab_Produto = V.idTab_Produto
 					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = P.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
@@ -927,7 +927,7 @@ class Basico_model extends CI_Model {
             WHERE
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                P.idTab_Produtos = V.idTab_Produtos
+                P.idTab_Produto = V.idTab_Produto
 			ORDER BY
 				P.CodProd ASC,
 				P.Categoria ASC,
@@ -1634,7 +1634,7 @@ class Basico_model extends CI_Model {
                 
                 Tab_Valor AS V
 					LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
-					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Produto AS P ON P.idTab_Produto = V.idTab_Produto
 					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = P.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
@@ -1644,7 +1644,7 @@ class Basico_model extends CI_Model {
 				(P.idSis_Empresa = ' . $_SESSION['log']['id'] . ' OR P.idSis_Empresa = "0" ) AND
 				(P.ProdutoProprio = ' . $_SESSION['log']['id'] . ' OR P.ProdutoProprio = "0") AND
 				V.Convenio = "53" AND				
-                P.idTab_Produtos = V.idTab_Produtos
+                P.idTab_Produto = V.idTab_Produto
 			ORDER BY
 				V.idTab_Valor,
 				P.CodProd ASC,
@@ -1666,7 +1666,7 @@ class Basico_model extends CI_Model {
                 
                 Tab_Valor AS V
 					LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
-					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Produto AS P ON P.idTab_Produto = V.idTab_Produto
 					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = P.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
@@ -1676,7 +1676,7 @@ class Basico_model extends CI_Model {
 				(P.idSis_Empresa = ' . $_SESSION['log']['id'] . ' OR P.idSis_Empresa = "0" ) AND
 				(P.ProdutoProprio = ' . $_SESSION['log']['id'] . ' OR P.ProdutoProprio = "0") AND
 				V.Convenio = "53" AND				
-                P.idTab_Produtos = V.idTab_Produtos
+                P.idTab_Produto = V.idTab_Produto
 			ORDER BY
 				V.idTab_Valor,
 				P.CodProd ASC,

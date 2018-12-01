@@ -2494,7 +2494,7 @@ class Relatorio_model extends CI_Model {
 
     public function list_estoque($data) {
 
-        $data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produtos = ' . $data['Produtos'] : FALSE;
+        $data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
         $data['Prodaux1'] = ($data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
         $data['Prodaux2'] = ($data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
         $data['Prodaux3'] = ($data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
@@ -2504,14 +2504,14 @@ class Relatorio_model extends CI_Model {
         #LISTA DE PRODUTOS
         $query['Produtos'] = $this->db->query(
             'SELECT
-                TP.idTab_Produtos,
+                TP.idTab_Produto,
                 TP.CodProd,
                 CONCAT(IFNULL(TP.CodProd,""), " - ", IFNULL(TP.Produtos,"")) AS Produtos,
                 TP1.Prodaux1,
                 TP2.Prodaux2,
                 TP3.Prodaux3
             FROM
-                Tab_Produtos AS TP
+                Tab_Produto AS TP
                     LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
@@ -2531,12 +2531,12 @@ class Relatorio_model extends CI_Model {
         #LISTA DE PRODAUX1
         $query['Prodaux1'] = $this->db->query(
             'SELECT
-                TP.idTab_Produtos,
+                TP.idTab_Produto,
                 TP.CodProd,
                 CONCAT(IFNULL(TP1.Prodaux1,"")) AS Prodaux1,
                 TP1.Prodaux1
             FROM
-                Tab_Produtos AS TP
+                Tab_Produto AS TP
                     LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
             WHERE
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -2551,12 +2551,12 @@ class Relatorio_model extends CI_Model {
         #LISTA DE PRODAUX2
         $query['Prodaux2'] = $this->db->query(
             'SELECT
-                TP.idTab_Produtos,
+                TP.idTab_Produto,
                 TP.CodProd,
                 CONCAT(IFNULL(TP2.Prodaux2,"")) AS Prodaux2,
                 TP2.Prodaux2
             FROM
-                Tab_Produtos AS TP
+                Tab_Produto AS TP
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
             WHERE
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -2571,12 +2571,12 @@ class Relatorio_model extends CI_Model {
         #LISTA DE PRODAUX3
         $query['Prodaux3'] = $this->db->query(
             'SELECT
-                TP.idTab_Produtos,
+                TP.idTab_Produto,
                 TP.CodProd,
                 CONCAT(IFNULL(TP3.Prodaux3,"")) AS Prodaux3,
                 TP3.Prodaux3
             FROM
-                Tab_Produtos AS TP
+                Tab_Produto AS TP
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -2601,11 +2601,11 @@ class Relatorio_model extends CI_Model {
         $query['Comprados'] = $this->db->query(
             'SELECT
                 SUM(APC.QtdCompraProduto) AS QtdCompra,
-                TP.idTab_Produtos
+                TP.idTab_Produto
             FROM
                 App_Despesas AS TCO
                     LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
-                    LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = APC.idTab_Produto
+                    LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = APC.idTab_Produto
                     LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
@@ -2615,10 +2615,10 @@ class Relatorio_model extends CI_Model {
                 (' . $consulta . ')
                 ' . $data['Produtos'] . ' AND
                 TCO.TipoProduto = "1" AND
-                TP.idTab_Produtos != "0"
+                TP.idTab_Produto != "0"
                 ' . $data['Produtos'] . '
             GROUP BY
-                TP.idTab_Produtos
+                TP.idTab_Produto
             ORDER BY
                 TP.Produtos ASC'
         );
@@ -2638,14 +2638,14 @@ class Relatorio_model extends CI_Model {
         $query['Vendidos'] = $this->db->query(
             'SELECT
                 SUM(APV.QtdVendaProduto) AS QtdVenda,
-                TP.idTab_Produtos,
+                TP.idTab_Produto,
                 OT.idTab_TipoRD
             FROM
                 App_Cliente AS C,
                 App_OrcaTrata AS OT
                     LEFT JOIN App_ProdutoVenda AS APV ON APV.idApp_OrcaTrata = OT.idApp_OrcaTrata
                     LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Produto
-                    LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = TVV.idTab_Produtos
+                    LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TVV.idTab_Produto
                     LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
@@ -2658,7 +2658,7 @@ class Relatorio_model extends CI_Model {
                 ' . $data['Produtos'] . ' AND
                 OT.idTab_TipoRD = "2"
             GROUP BY
-                TP.idTab_Produtos
+                TP.idTab_Produto
             ORDER BY
                 TP.Produtos ASC'
         );
@@ -2679,14 +2679,14 @@ class Relatorio_model extends CI_Model {
         $query['Devolvidos'] = $this->db->query(
             'SELECT
                 SUM(APV.QtdVendaProduto) AS QtdDevolve,
-                TP.idTab_Produtos,
+                TP.idTab_Produto,
                 OT.idTab_TipoRD
             FROM
                 App_Cliente AS C,
                 App_OrcaTrata AS OT
                     LEFT JOIN App_ProdutoVenda AS APV ON APV.idApp_OrcaTrata = OT.idApp_OrcaTrata
                     LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Produto
-                    LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = TVV.idTab_Produtos
+                    LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TVV.idTab_Produto
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
@@ -2699,7 +2699,7 @@ class Relatorio_model extends CI_Model {
                 ' . $data['Produtos'] . ' AND
                 OT.idTab_TipoRD = "1"
             GROUP BY
-                TP.idTab_Produtos
+                TP.idTab_Produto
             ORDER BY
                 TP.Produtos ASC'
         );
@@ -2720,11 +2720,11 @@ class Relatorio_model extends CI_Model {
         $query['Devolvidos'] = $this->db->query(
             'SELECT
                 SUM(APC.QtdCompraProduto) AS QtdDevolve,
-                TP.idTab_Produtos
+                TP.idTab_Produto
             FROM
                 App_Despesas AS TCO
                     LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
-                    LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = APC.idTab_Produto
+                    LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = APC.idTab_Produto
                     LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
@@ -2734,10 +2734,10 @@ class Relatorio_model extends CI_Model {
                 (' . $consulta . ')
                 ' . $data['Produtos'] . ' AND
                 TCO.TipoProduto = "E" AND
-                TP.idTab_Produtos != "0"
+                TP.idTab_Produto != "0"
                 ' . $data['Produtos'] . '
             GROUP BY
-                TP.idTab_Produtos
+                TP.idTab_Produto
             ORDER BY
                 TP.Produtos ASC'
         );
@@ -2758,11 +2758,11 @@ class Relatorio_model extends CI_Model {
         $query['Consumidos'] = $this->db->query(
             'SELECT
                 SUM(APC.QtdCompraProduto) AS QtdConsumo,
-                TP.idTab_Produtos
+                TP.idTab_Produto
             FROM
                 App_Despesas AS TCO
                     LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
-                    LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = APC.idTab_Produto
+                    LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = APC.idTab_Produto
                     LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
@@ -2773,7 +2773,7 @@ class Relatorio_model extends CI_Model {
                 TCO.TipoProduto = "C"
                 ' . $data['Produtos'] . '
             GROUP BY
-                TP.idTab_Produtos
+                TP.idTab_Produto
             ORDER BY
                 TP.Produtos ASC'
         );
@@ -2785,34 +2785,34 @@ class Relatorio_model extends CI_Model {
 
 		#$estoque = array();
         foreach ($query['Produtos'] as $row) {
-            #echo $row->idTab_Produtos . ' # ' . $row->Produtos . '<br />';
-            #$estoque[$row->idTab_Produtos] = $row->Produtos;
-            $estoque->{$row->idTab_Produtos} = new stdClass();
-            $estoque->{$row->idTab_Produtos}->Produtos = $row->Produtos;
+            #echo $row->idTab_Produto . ' # ' . $row->Produtos . '<br />';
+            #$estoque[$row->idTab_Produto] = $row->Produtos;
+            $estoque->{$row->idTab_Produto} = new stdClass();
+            $estoque->{$row->idTab_Produto}->Produtos = $row->Produtos;
         }
 
         foreach ($query['Prodaux1'] as $row) {
-            #echo $row->idTab_Produtos . ' # ' . $row->Produtos . '<br />';
-            #$estoque[$row->idTab_Produtos] = $row->Produtos;
-            #$estoque->{$row->idTab_Produtos} = new stdClass();
-            if (isset($estoque->{$row->idTab_Produtos}))
-                $estoque->{$row->idTab_Produtos}->Prodaux1 = $row->Prodaux1;
+            #echo $row->idTab_Produto . ' # ' . $row->Produtos . '<br />';
+            #$estoque[$row->idTab_Produto] = $row->Produtos;
+            #$estoque->{$row->idTab_Produto} = new stdClass();
+            if (isset($estoque->{$row->idTab_Produto}))
+                $estoque->{$row->idTab_Produto}->Prodaux1 = $row->Prodaux1;
         }
 
         foreach ($query['Prodaux2'] as $row) {
-            #echo $row->idTab_Produtos . ' # ' . $row->Produtos . '<br />';
-            #$estoque[$row->idTab_Produtos] = $row->Produtos;
-            #$estoque->{$row->idTab_Produtos} = new stdClass();
-            if (isset($estoque->{$row->idTab_Produtos}))
-                $estoque->{$row->idTab_Produtos}->Prodaux2 = $row->Prodaux2;
+            #echo $row->idTab_Produto . ' # ' . $row->Produtos . '<br />';
+            #$estoque[$row->idTab_Produto] = $row->Produtos;
+            #$estoque->{$row->idTab_Produto} = new stdClass();
+            if (isset($estoque->{$row->idTab_Produto}))
+                $estoque->{$row->idTab_Produto}->Prodaux2 = $row->Prodaux2;
         }
 
         foreach ($query['Prodaux3'] as $row) {
-            #echo $row->idTab_Produtos . ' # ' . $row->Produtos . '<br />';
-            #$estoque[$row->idTab_Produtos] = $row->Produtos;
-            #$estoque->{$row->idTab_Produtos} = new stdClass();
-            if (isset($estoque->{$row->idTab_Produtos}))
-                $estoque->{$row->idTab_Produtos}->Prodaux3 = $row->Prodaux3;
+            #echo $row->idTab_Produto . ' # ' . $row->Produtos . '<br />';
+            #$estoque[$row->idTab_Produto] = $row->Produtos;
+            #$estoque->{$row->idTab_Produto} = new stdClass();
+            if (isset($estoque->{$row->idTab_Produto}))
+                $estoque->{$row->idTab_Produto}->Prodaux3 = $row->Prodaux3;
         }
 
 		/*
@@ -2822,23 +2822,23 @@ echo "</pre>";
 exit();*/
 
         foreach ($query['Comprados'] as $row) {
-            if (isset($estoque->{$row->idTab_Produtos}))
-                $estoque->{$row->idTab_Produtos}->QtdCompra = $row->QtdCompra;
+            if (isset($estoque->{$row->idTab_Produto}))
+                $estoque->{$row->idTab_Produto}->QtdCompra = $row->QtdCompra;
 		}
 
         foreach ($query['Vendidos'] as $row) {
-            if (isset($estoque->{$row->idTab_Produtos}))
-                $estoque->{$row->idTab_Produtos}->QtdVenda = $row->QtdVenda;
+            if (isset($estoque->{$row->idTab_Produto}))
+                $estoque->{$row->idTab_Produto}->QtdVenda = $row->QtdVenda;
         }
 
         foreach ($query['Devolvidos'] as $row) {
-            if (isset($estoque->{$row->idTab_Produtos}))
-                $estoque->{$row->idTab_Produtos}->QtdDevolve = $row->QtdDevolve;
+            if (isset($estoque->{$row->idTab_Produto}))
+                $estoque->{$row->idTab_Produto}->QtdDevolve = $row->QtdDevolve;
         }
 
         foreach ($query['Consumidos'] as $row) {
-            if (isset($estoque->{$row->idTab_Produtos}))
-                $estoque->{$row->idTab_Produtos}->QtdConsumo = $row->QtdConsumo;
+            if (isset($estoque->{$row->idTab_Produto}))
+                $estoque->{$row->idTab_Produto}->QtdConsumo = $row->QtdConsumo;
         }
 
 		$estoque->soma = new stdClass();
@@ -3064,8 +3064,8 @@ exit();*/
 
 		#$estoque = array();
         foreach ($query['NomeCliente'] as $row) {
-            #echo $row->idTab_Produtos . ' # ' . $row->Produtos . '<br />';
-            #$estoque[$row->idTab_Produtos] = $row->Produtos;
+            #echo $row->idTab_Produto . ' # ' . $row->Produtos . '<br />';
+            #$estoque[$row->idTab_Produto] = $row->Produtos;
             $rankingvendas->{$row->idApp_Cliente} = new stdClass();
             $rankingvendas->{$row->idApp_Cliente}->NomeCliente = $row->NomeCliente;
         }
@@ -3151,7 +3151,7 @@ exit();*/
 	
     public function list_estoque21($data) {
 
-		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produtos = ' . $data['Produtos'] : FALSE;
+		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		$data['Prodaux1'] = ($data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
 		$data['Prodaux2'] = ($data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
         $data['Prodaux3'] = ($data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
@@ -3161,14 +3161,14 @@ exit();*/
         #LISTA DE PRODUTOS
         $query['Produtos'] = $this->db->query(
             'SELECT
-            	TP.idTab_Produtos,
+            	TP.idTab_Produto,
 				TP.CodProd,
             	CONCAT(IFNULL(TP.CodProd,""), " - ", IFNULL(TP3.Prodaux3,""), " - ", IFNULL(TP.Produtos,""), " - ", IFNULL(TP1.Prodaux1,""), " - ", IFNULL(TP2.Prodaux2,"")) AS Produtos,
 				TP1.Prodaux1,
 				TP2.Prodaux2,
 				TP3.Prodaux3
             FROM
-            	Tab_Produtos AS TP,
+            	Tab_Produto AS TP,
 				Tab_Prodaux1 AS TP1,
 				Tab_Prodaux2 AS TP2,
 				Tab_Prodaux3 AS TP3
@@ -3202,21 +3202,21 @@ exit();*/
         $query['Comprados'] = $this->db->query(
             'SELECT
             	SUM(APC.QtdCompraProduto) AS QtdCompra,
-            	TP.idTab_Produtos
+            	TP.idTab_Produto
             FROM
             	App_Despesas AS TCO
             		LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
-            		LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = APC.idTab_Produto
+            		LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = APC.idTab_Produto
             WHERE
                 TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['Produtos'] . ' AND
                 TCO.TipoProduto = "1" AND
-                TP.idTab_Produtos != "0"
+                TP.idTab_Produto != "0"
                 ' . $data['Produtos'] . '
             GROUP BY
-            	TP.idTab_Produtos
+            	TP.idTab_Produto
             ORDER BY
             	TP.Produtos ASC'
         );
@@ -3236,14 +3236,14 @@ exit();*/
         $query['Vendidos'] = $this->db->query(
             'SELECT
             	SUM(APV.QtdVendaProduto) AS QtdVenda,
-                TP.idTab_Produtos,
+                TP.idTab_Produto,
 				OT.idTab_TipoRD
             FROM
             	App_Cliente AS C,
             	App_OrcaTrata AS OT
             		LEFT JOIN App_ProdutoVenda AS APV ON APV.idApp_OrcaTrata = OT.idApp_OrcaTrata
             		LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Produto
-            		LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = TVV.idTab_Produtos
+            		LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TVV.idTab_Produto
             WHERE
                 C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
@@ -3253,7 +3253,7 @@ exit();*/
                 ' . $data['Produtos'] . ' AND
 				OT.idTab_TipoRD = "2"
             GROUP BY
-            	TP.idTab_Produtos
+            	TP.idTab_Produto
             ORDER BY
             	TP.Produtos ASC'
         );
@@ -3274,14 +3274,14 @@ exit();*/
         $query['Devolvidos'] = $this->db->query(
             'SELECT
             	SUM(APV.QtdVendaProduto) AS QtdDevolve,
-                TP.idTab_Produtos,
+                TP.idTab_Produto,
 				OT.idTab_TipoRD
             FROM
             	App_Cliente AS C,
             	App_OrcaTrata AS OT
             		LEFT JOIN App_ProdutoVenda AS APV ON APV.idApp_OrcaTrata = OT.idApp_OrcaTrata
             		LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Produto
-            		LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = TVV.idTab_Produtos
+            		LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TVV.idTab_Produto
             WHERE
                 C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
@@ -3291,7 +3291,7 @@ exit();*/
                 ' . $data['Produtos'] . ' AND
 				OT.idTab_TipoRD = "1"
             GROUP BY
-            	TP.idTab_Produtos
+            	TP.idTab_Produto
             ORDER BY
             	TP.Produtos ASC'
         );
@@ -3312,21 +3312,21 @@ exit();*/
         $query['Devolvidos'] = $this->db->query(
             'SELECT
             	SUM(APC.QtdCompraProduto) AS QtdDevolve,
-            	TP.idTab_Produtos
+            	TP.idTab_Produto
             FROM
             	App_Despesas AS TCO
             		LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
-            		LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = APC.idTab_Produto
+            		LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = APC.idTab_Produto
             WHERE
                 TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['Produtos'] . ' AND
                 TCO.TipoProduto = "E" AND
-                TP.idTab_Produtos != "0"
+                TP.idTab_Produto != "0"
                 ' . $data['Produtos'] . '
             GROUP BY
-            	TP.idTab_Produtos
+            	TP.idTab_Produto
             ORDER BY
             	TP.Produtos ASC'
         );
@@ -3345,11 +3345,11 @@ exit();*/
         $query['Consumidos'] = $this->db->query(
             'SELECT
             	SUM(APC.QtdCompraProduto) AS QtdConsumo,
-            	TP.idTab_Produtos
+            	TP.idTab_Produto
             FROM
             	App_Despesas AS TCO
             		LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
-            		LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = APC.idTab_Produto
+            		LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = APC.idTab_Produto
             WHERE
                 TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
@@ -3357,7 +3357,7 @@ exit();*/
                 TCO.TipoProduto = "C"
                 ' . $data['Produtos'] . '
             GROUP BY
-            	TP.idTab_Produtos
+            	TP.idTab_Produto
             ORDER BY
             	TP.Produtos ASC'
         );
@@ -3366,26 +3366,26 @@ exit();*/
         $estoque = new stdClass();
         #$estoque = array();
         foreach ($query['Produtos'] as $row) {
-            #echo $row->idTab_Produtos . ' # ' . $row->Produtos . '<br />';
-            #$estoque[$row->idTab_Produtos] = $row->Produtos;
-            $estoque->{$row->idTab_Produtos} = new stdClass();
-            $estoque->{$row->idTab_Produtos}->Produtos = $row->Produtos;
+            #echo $row->idTab_Produto . ' # ' . $row->Produtos . '<br />';
+            #$estoque[$row->idTab_Produto] = $row->Produtos;
+            $estoque->{$row->idTab_Produto} = new stdClass();
+            $estoque->{$row->idTab_Produto}->Produtos = $row->Produtos;
         }
 
         foreach ($query['Comprados'] as $row) {
-            $estoque->{$row->idTab_Produtos}->QtdCompra = $row->QtdCompra;
+            $estoque->{$row->idTab_Produto}->QtdCompra = $row->QtdCompra;
         }
 
         foreach ($query['Vendidos'] as $row) {
-            $estoque->{$row->idTab_Produtos}->QtdVenda = $row->QtdVenda;
+            $estoque->{$row->idTab_Produto}->QtdVenda = $row->QtdVenda;
         }
 
 		foreach ($query['Devolvidos'] as $row) {
-            $estoque->{$row->idTab_Produtos}->QtdDevolve = $row->QtdDevolve;
+            $estoque->{$row->idTab_Produto}->QtdDevolve = $row->QtdDevolve;
         }
 
         foreach ($query['Consumidos'] as $row) {
-            $estoque->{$row->idTab_Produtos}->QtdConsumo = $row->QtdConsumo;
+            $estoque->{$row->idTab_Produto}->QtdConsumo = $row->QtdConsumo;
         }
 
         foreach ($estoque as $row) {
@@ -3425,7 +3425,7 @@ exit();*/
         }
 
         $data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
-		$data['Produtos'] = ($data['Produtos']) ? ' AND TPV.idTab_Produtos = ' . $data['Produtos'] : FALSE;
+		$data['Produtos'] = ($data['Produtos']) ? ' AND TPV.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		$data['Prodaux1'] = ($data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
 		$data['Prodaux2'] = ($data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
         $data['Prodaux3'] = ($data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
@@ -3459,7 +3459,7 @@ exit();*/
 				App_OrcaTrata AS OT
 					LEFT JOIN App_ProdutoVenda AS APV ON APV.idApp_OrcaTrata = OT.idApp_OrcaTrata
 					LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Produto
-					LEFT JOIN Tab_Produtos AS TPV ON TPV.idTab_Produtos = TVV.idTab_Produtos
+					LEFT JOIN Tab_Produto AS TPV ON TPV.idTab_Produto = TVV.idTab_Produto
 					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = TPV.Fornecedor
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPV.Prodaux3
@@ -3523,7 +3523,7 @@ exit();*/
         }
 
         $data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
-		$data['Produtos'] = ($data['Produtos']) ? ' AND TPV.idTab_Produtos = ' . $data['Produtos'] : FALSE;
+		$data['Produtos'] = ($data['Produtos']) ? ' AND TPV.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		$data['Prodaux1'] = ($data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
 		$data['Prodaux2'] = ($data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
         $data['Prodaux3'] = ($data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
@@ -3558,7 +3558,7 @@ exit();*/
 				App_OrcaTrata AS OT
 					LEFT JOIN App_ProdutoVenda AS APV ON APV.idApp_OrcaTrata = OT.idApp_OrcaTrata
 					LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Produto
-					LEFT JOIN Tab_Produtos AS TPV ON TPV.idTab_Produtos = TVV.idTab_Produtos
+					LEFT JOIN Tab_Produto AS TPV ON TPV.idTab_Produto = TVV.idTab_Produto
 					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = TPV.Fornecedor
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPV.Prodaux3
@@ -3748,7 +3748,7 @@ exit();*/
         }
 
 		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TTC.idTab_TipoConsumo = ' . $data['TipoDespesa'] : FALSE;
-		$data['Produtos'] = ($data['Produtos']) ? ' AND TPB.idTab_Produtos = ' . $data['Produtos'] : FALSE;
+		$data['Produtos'] = ($data['Produtos']) ? ' AND TPB.idTab_Produto = ' . $data['Produtos'] : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -3768,7 +3768,7 @@ exit();*/
                 App_Despesas AS TCO
                     LEFT JOIN Tab_TipoConsumo AS TTC ON TTC.idTab_TipoConsumo = TCO.TipoDespesa
 					LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
-					LEFT JOIN Tab_Produtos AS TPB ON TPB.idTab_Produtos = APC.idTab_Produto
+					LEFT JOIN Tab_Produto AS TPB ON TPB.idTab_Produto = APC.idTab_Produto
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPB.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPB.Prodaux2
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TPB.Prodaux1
@@ -3816,7 +3816,7 @@ exit();*/
         }
 
 		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TTC.idTab_TipoConsumo = ' . $data['TipoDespesa'] : FALSE;
-		$data['Produtos'] = ($data['Produtos']) ? ' AND TPB.idTab_Produtos = ' . $data['Produtos'] : FALSE;
+		$data['Produtos'] = ($data['Produtos']) ? ' AND TPB.idTab_Produto = ' . $data['Produtos'] : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -3835,7 +3835,7 @@ exit();*/
                 App_Despesas AS TCO
                     LEFT JOIN Tab_TipoDespesa AS TTC ON TTC.idTab_TipoDespesa = TCO.TipoDespesa
 					LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
-					LEFT JOIN Tab_Produtos AS TPB ON TPB.idTab_Produtos = APC.idTab_Produto
+					LEFT JOIN Tab_Produto AS TPB ON TPB.idTab_Produto = APC.idTab_Produto
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPB.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPB.Prodaux2
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TPB.Prodaux1
@@ -3846,7 +3846,7 @@ exit();*/
 				' . $data['TipoDespesa'] . '
 				' . $data['Produtos'] . ' AND
 				TCO.TipoProduto = "1" AND
-				TPB.idTab_Produtos != "0"
+				TPB.idTab_Produto != "0"
 
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
@@ -3885,7 +3885,7 @@ exit();*/
         }
 
 		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TTC.idTab_TipoConsumo = ' . $data['TipoDespesa'] : FALSE;
-		$data['Produtos'] = ($data['Produtos']) ? ' AND TPB.idTab_Produtos = ' . $data['Produtos'] : FALSE;
+		$data['Produtos'] = ($data['Produtos']) ? ' AND TPB.idTab_Produto = ' . $data['Produtos'] : FALSE;
         $data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
 		$data['Prodaux1'] = ($data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
 		$data['Prodaux2'] = ($data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
@@ -3917,7 +3917,7 @@ exit();*/
                 App_Despesas AS TCO
                     LEFT JOIN Tab_TipoDespesa AS TTC ON TTC.idTab_TipoDespesa = TCO.TipoDespesa
 					LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
-					LEFT JOIN Tab_Produtos AS TPB ON TPB.idTab_Produtos = APC.idTab_Produto
+					LEFT JOIN Tab_Produto AS TPB ON TPB.idTab_Produto = APC.idTab_Produto
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = TCO.FormaPagamentoDespesas
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPB.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPB.Prodaux2
@@ -3935,7 +3935,7 @@ exit();*/
 				' . $data['Prodaux2'] . '
 				' . $data['Prodaux3'] . ' AND
 				TCO.TipoProduto = "E" AND
-				TPB.idTab_Produtos != "0"
+				TPB.idTab_Produto != "0"
 
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
@@ -5178,7 +5178,7 @@ exit();*/
 
 	public function list_produtos($data, $completo) {
 
-		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produtos = ' . $data['Produtos'] : FALSE;
+		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
 		$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
         $data['Prodaux3'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
@@ -5187,7 +5187,7 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-                TP.idTab_Produtos,
+                TP.idTab_Produto,
 				TP.TipoProduto,
 				TP.CodProd,
 				TP.Produtos,
@@ -5207,8 +5207,8 @@ exit();*/
 				TV.ValorVendaProduto,
 				TC.Convenio
             FROM
-                Tab_Produtos AS TP
-					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produtos = TP.idTab_Produtos
+                Tab_Produto AS TP
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produto = TP.idTab_Produto
 					LEFT JOIN Tab_Convenio AS TC ON TC.idTab_Convenio = TV.Convenio
 					LEFT JOIN App_Fornecedor AS TF ON TF.idApp_Fornecedor = TP.Fornecedor
 					LEFT JOIN Tab_Categoria AS TCA ON TCA.Abrev = TP.Categoria
@@ -6217,7 +6217,7 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-                OB.idTab_Produtos,
+                OB.idTab_Produto,
 				CONCAT(IFNULL(OB.CodProd,""), " - ", IFNULL(TP3.Prodaux3,""), " - ", IFNULL(OB.Produtos,""), " - ", IFNULL(TP1.Prodaux1,""), " - ", IFNULL(TP2.Prodaux2,"")) AS Produtos,
 				TP1.Prodaux1,
 				TP2.Prodaux2,
@@ -6226,7 +6226,7 @@ exit();*/
 				TP2.Abrev2,
                 OB.CodProd
             FROM
-                Tab_Produtos AS OB
+                Tab_Produto AS OB
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = OB.Prodaux1
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = OB.Prodaux2
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = OB.Prodaux3
@@ -6244,7 +6244,7 @@ exit();*/
         $array = array();
         $array[0] = ':: Todos ::';
         foreach ($query->result() as $row) {
-            $array[$row->idTab_Produtos] = $row->Produtos;
+            $array[$row->idTab_Produto] = $row->Produtos;
         }
 
         return $array;
