@@ -41,6 +41,78 @@ if ($_GET['q']==1) {
 
 }
 
+elseif ($_GET['q'] == 2) {
+
+    $result = mysql_query('
+            SELECT
+                idTab_Produtos,
+                CONCAT(IFNULL(CodProd,""), " - ", IFNULL(Produtos,""), " - ", IFNULL(UnidadeProduto,"")) AS NomeProduto,
+                ValorCompraProduto
+            FROM 
+                Tab_Produtos 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Produtos'],
+            'name' => utf8_encode($row['NomeProduto']),
+            'value' => $row['ValorCompraProduto'],
+        );
+    } 
+    
+}
+
+elseif ($_GET['q'] == 3) {
+
+    $result = mysql_query('
+            SELECT
+                idTab_Produtos,
+                CONCAT(IFNULL(CodProd,""), " - ", IFNULL(Produtos,""), " - ", IFNULL(UnidadeProduto,"")) AS NomeProduto,
+                ValorVendaProduto
+            FROM 
+                Tab_Produtos 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Produtos'],
+            'name' => utf8_encode($row['NomeProduto']),
+            'value' => $row['ValorVendaProduto'],
+        );
+    } 
+    
+}
+
+elseif ($_GET['q'] == 20) {
+
+    $result = mysql_query('
+            SELECT
+                idTab_Produto,
+                NomeProduto,
+                ValorCompraProduto
+            FROM 
+                Tab_Produto 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Produto'],
+            'name' => utf8_encode($row['NomeProduto']),
+            'value' => $row['ValorCompraProduto'],
+        );
+    } 
+    
+}
+
 elseif ($_GET['q'] == 22) {
 
     $result = mysql_query(
@@ -88,13 +160,13 @@ elseif ($_GET['q'] == 22) {
 
 }
 
-elseif ($_GET['q'] == 2) {
+elseif ($_GET['q'] == 23) {
 
     $result = mysql_query(
             'SELECT
                 TPV.idTab_Produtos,
-				CONCAT(IFNULL(TPV.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TPV.Produtos,""), " -- ", 
-						IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TPV.UnidadeProduto,""), " -- ", 
+				CONCAT(IFNULL(TPV.CodProd,""), " - ", IFNULL(TPV.Produtos,""), " - ", IFNULL(TPV.UnidadeProduto,""), " - ",   
+						IFNULL(TP3.Prodaux3,""), " - ", IFNULL(TP1.Prodaux1,""), " - ", IFNULL(TP2.Prodaux2,""), " - ",  
 						IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
 				TPV.ValorVendaProduto,
 				TPV.Categoria
@@ -120,6 +192,32 @@ elseif ($_GET['q'] == 2) {
 
         $event_array[] = array(
             'id' => $row['idTab_Produtos'],
+            'name' => utf8_encode($row['NomeProduto']),
+            'value' => $row['ValorVendaProduto'],
+        );
+    }
+
+}
+
+elseif ($_GET['q'] == 24) {
+
+    $result = mysql_query(
+            'SELECT
+                TPV.idTab_Produtos,
+				CONCAT(TPV.NomeProduto, " --- ", TPV.UnidadeProduto, " --- R$ ", TPV.ValorVendaProduto) AS NomeProduto,
+				TPV.ValorVendaProduto
+            FROM
+                Tab_Produto AS TPV																	
+            WHERE
+                TPV.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
+			ORDER BY  
+				TPV.NomeProduto ASC				
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Produto'],
             'name' => utf8_encode($row['NomeProduto']),
             'value' => $row['ValorVendaProduto'],
         );

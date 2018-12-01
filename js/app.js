@@ -1404,11 +1404,82 @@ function adicionaValorServ() {
  * @param {string} tabela
  * @returns {decimal}
  */
-function buscaValor(id, campo, tabela, num, campo2) {
+ 
+function buscaValor01(id, campo, tabela) {
+	
+    $.ajax({
+        // url para o arquivo json.php
+        url: window.location.origin + "/" + app + "/Valor_json.php?tabela=" + tabela,
+        // dataType json
+        dataType: "json",
+        // função para de sucesso
+        success: function (data) {
+
+            // executo este laço para ecessar os itens do objeto javaScript
+            for ($i = 0; $i < data.length; $i++) {
+                
+                if (data[$i].id == id) {
+                    
+                    //carrega o valor no campo de acordo com a opção selecionada
+                    $('#'+campo).val(data[$i].valor);
+                    
+                    //para cada valor carregado o orçamento é calculado/atualizado
+                    //através da chamada de sua função
+                    calculaOrcamento();
+                    break;
+                }                    
+                
+            }//fim do laço
+
+        }
+    });//termina o ajax
+    
+
+}
+
+ function buscaValor(id, campo, tabela, num) {
 
     $.ajax({
         // url para o arquivo json.php
         url: window.location.origin + "/" + app + "/Valor_json.php?tabela=" + tabela,
+        // dataType json
+        dataType: "json",
+        // função para de sucesso
+        success: function (data) {
+
+            // executo este laço para acessar os itens do objeto javaScript
+            for (i = 0; i < data.length; i++) {
+
+                if (data[i].id == id) {
+
+                    //carrega o valor no campo de acordo com a opção selecionada
+                    $('#'+campo).val(data[i].valor);
+
+                    //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
+                    if ($("#QtdVenda"+tabela+num).val()) {
+                        calculaSubtotal($("#idTab_Produto"+num).val(),$("#QtdVendaProduto"+num).val(),num,'OUTRO',tabela);
+                        break;
+                    }
+
+                    //para cada valor carregado o orçamento é calculado/atualizado
+                    //através da chamada de sua função
+                    calculaOrcamento();
+                    break;
+                }
+
+            }//fim do laço
+
+        }
+    });//termina o ajax
+
+
+}
+ 
+function buscaValor1(id, campo, tabela, num, campo2) {
+
+    $.ajax({
+        // url para o arquivo json.php
+        url: window.location.origin + "/" + app + "/Valor2_json.php?tabela=" + tabela,
         // dataType json
         dataType: "json",
         // função para de sucesso
@@ -1442,11 +1513,49 @@ function buscaValor(id, campo, tabela, num, campo2) {
 
 }
 
-function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
+function buscaValor2(id, campo, tabela, num, campo2) {
 
     $.ajax({
         // url para o arquivo json.php
         url: window.location.origin + "/" + app + "/Valor_json.php?tabela=" + tabela + "&campo2=" + campo2,
+        // dataType json
+        dataType: "json",
+        // função para de sucesso
+        success: function (data) {
+
+            // executo este laço para acessar os itens do objeto javaScript
+            for (i = 0; i < data.length; i++) {
+
+                if (data[i].id == id) {
+
+                    //carrega o valor no campo de acordo com a opção selecionada
+                    $('#'+campo).val(data[i].valor);
+
+                    //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
+                    if ($("#QtdVenda"+campo2+num).val()) {
+                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#QtdVenda"+campo2+num).val(),num,'OUTRO',campo2);
+                        break;
+                    }
+
+                    //para cada valor carregado o orçamento é calculado/atualizado
+                    //através da chamada de sua função
+                    calculaOrcamento();
+                    break;
+                }
+
+            }//fim do laço
+
+        }
+    });//termina o ajax
+
+
+}
+
+function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
+
+    $.ajax({
+        // url para o arquivo json.php
+        url: window.location.origin + "/" + app + "/Valor2_json.php?tabela=" + tabela + "&campo2=" + campo2,
         // dataType json
         dataType: "json",
         // função para de sucesso
@@ -3177,7 +3286,7 @@ $(document).ready(function () {
                             </div>\
                             <div class="col-md-3">\
                                 <label for="idTab_Produto">Produto:</label><br>\
-                                <select class="form-control Chosen" id="listadinamicab'+pc+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+pc+',\'Produto\')" name="idTab_Produto'+pc+'">\
+                                <select class="form-control" id="listadinamicab'+pc+'" onchange="buscaValor(this.value,this.name,\'Produtos\','+pc+')" name="idTab_Produto'+pc+'">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
@@ -3290,7 +3399,7 @@ $(document).ready(function () {
 							</div>\
 							<div class="col-md-3">\
 								<label for="idTab_Servico">Produto:</label><br>\
-								<select class="form-control Chosen" id="listadinamica'+ps+'" onchange="buscaValorDevTabelas(this.value,this.name,\'Valor\','+ps+',\'Produto\')" name="idTab_Servico'+ps+'">\
+								<select class="form-control Chosen" id="listadinamica'+ps+'" onchange="buscaValor2(this.value,this.name,\'Valor\','+ps+',\'Produto\')" name="idTab_Servico'+ps+'">\
 									<option value="">-- Selecione uma opção --</option>\
 								</select>\
 							</div>\

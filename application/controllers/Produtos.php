@@ -55,7 +55,8 @@ class Produtos extends CI_Controller {
 			'UnidadeProduto',
 			'CodProd',
 			'Fornecedor',
-			#'ValorCompraProduto',
+			'ValorCompraProduto',
+			'ValorVendaProduto',
             'Produtos',
 			'Prodaux1',
 			'Prodaux2',
@@ -150,7 +151,8 @@ class Produtos extends CI_Controller {
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-			#$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
+			$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
+			$data['produtos']['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorVendaProduto']));
             $data['produtos']['idTab_Produtos'] = $this->Produtos_model->set_produtos($data['produtos']);
             /*
             echo count($data['servico']);

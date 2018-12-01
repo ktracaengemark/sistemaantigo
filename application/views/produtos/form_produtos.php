@@ -27,7 +27,6 @@
 						<div class="panel panel-info">
 							<div class="panel-heading">	
 								<div class="row">
-									<div class="col-md-2"></div>
 									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 									<div class="col-md-2">
 										<label for="TipoProduto">Venda/Cons:</label>
@@ -62,7 +61,7 @@
 										</select>
 									</div>
 									
-									<div class="col-md-4">
+									<div class="col-md-2">
 										<label for="Fornecedor">Fornecedor</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 												id="Fornecedor" name="Fornecedor">
@@ -78,37 +77,7 @@
 											?>
 										</select>
 									</div>
-									<div class="col-md-2">
-										<label for="UnidadeProduto">Unidade:</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-												id="UnidadeProduto" name="UnidadeProduto">
-											<option value="">-- Selecione uma opção --</option>
-											<?php
-											foreach ($select['UnidadeProduto'] as $key => $row) {
-												if ($produtos['UnidadeProduto'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											?>
-										</select>
-									</div>
-									<?php } ?>
-								</div>
-								<div class="row">									
-																		
-									<div class="col-md-2">
-										<label for="CodProd">Código:</label><br>
-										<input type="text" class="form-control" maxlength="25"
-												name="CodProd" value="<?php echo $produtos['CodProd'] ?>">
-									</div>
-									<div class="col-md-4">
-										<label for="Produtos">Produto:*</label><br>
-										<input type="text" class="form-control" maxlength="200"
-												name="Produtos" value="<?php echo $produtos['Produtos'] ?>">
-									</div>
-									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+									
 									<div class="col-md-2">
 										<label for="Prodaux3">Categoria:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -158,9 +127,23 @@
 											?>
 										</select>
 									</div>
+									
 									<?php } ?>
-									<!--
-									<div class="col-md-3">
+								</div>
+								<div class="row">									
+																		
+									<div class="col-md-2">
+										<label for="CodProd">Código:</label><br>
+										<input type="text" class="form-control" maxlength="25"
+												name="CodProd" value="<?php echo $produtos['CodProd'] ?>">
+									</div>
+									<div class="col-md-4">
+										<label for="Produtos">Produto:*</label><br>
+										<input type="text" class="form-control" maxlength="200"
+												name="Produtos" value="<?php echo $produtos['Produtos'] ?>">
+									</div>
+									
+									<div class="col-md-2">
 										<label for="ValorCompraProduto">Custo:</label><br>
 										<div class="input-group">
 											<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -168,7 +151,32 @@
 													name="ValorCompraProduto" value="<?php echo $produtos['ValorCompraProduto'] ?>">
 										</div>
 									</div>
-									-->
+
+									<div class="col-md-2">
+										<label for="ValorVendaProduto">Venda:</label><br>
+										<div class="input-group">
+											<span class="input-group-addon" id="basic-addon1">R$</span>
+											<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
+													name="ValorVendaProduto" value="<?php echo $produtos['ValorVendaProduto'] ?>">
+										</div>
+									</div>
+									
+									<div class="col-md-2">
+										<label for="UnidadeProduto">Unidade:</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+												id="UnidadeProduto" name="UnidadeProduto">
+											<option value="">-- Selecione uma opção --</option>
+											<?php
+											foreach ($select['UnidadeProduto'] as $key => $row) {
+												if ($produtos['UnidadeProduto'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>
 								</div>
 							</div>	
 						</div>		
