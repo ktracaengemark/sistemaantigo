@@ -19,8 +19,9 @@ $result = mysql_query(
         FROM
             Tab_' . $_GET['tabela'] . ' AS T
         WHERE
-			T.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo']
-);
+			T.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+			T.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+');
 
 if ($_GET['tabela']) {
 

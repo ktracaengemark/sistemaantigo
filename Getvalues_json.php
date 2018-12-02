@@ -51,7 +51,8 @@ elseif ($_GET['q'] == 2) {
             FROM 
                 Tab_Produto 
             WHERE
-                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
     ');
 
     while ($row = mysql_fetch_assoc($result)) {

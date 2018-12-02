@@ -183,7 +183,7 @@
 												</div>
 											</div>
 											
-											<?php if ($_SESSION['log']['NivelEmpresa'] >= 1 ) { ?>	
+											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
 											<div class="panel-group">	
 												<div class="panel panel-danger">
 

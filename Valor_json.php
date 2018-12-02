@@ -19,12 +19,24 @@ $result = mysql_query(
         FROM 
             Tab_' . $_GET['tabela'] . ' AS T
         WHERE
-            T.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '         
-
+            T.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+			T.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 ');
 
 
 
+if ($_GET['tabela']) {
+	
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_' . $_GET['tabela']],
+            'valor' => str_replace(".", ",", $row['ValorCompraProduto']),
+        );
+    }
+}
+
+else {
 
     while ($row = mysql_fetch_assoc($result)) {
 
@@ -34,7 +46,7 @@ $result = mysql_query(
         );
     }
 
-
+}
 
 echo json_encode($event_array);
 mysql_close($link);
