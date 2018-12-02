@@ -23,13 +23,18 @@ $result = mysql_query(
 
 ');
 
-while ($row = mysql_fetch_assoc($result)) {
 
-    $event_array[] = array(
-        'id' => $row['idTab_' . $_GET['tabela']],
-        'valor' => str_replace(".", ",", $row['ValorCompraProduto']),
-    );
-}
+
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_' . $_GET['tabela']],
+            'valor' => str_replace(".", ",", $row['ValorCompraProduto']),
+        );
+    }
+
+
 
 echo json_encode($event_array);
 mysql_close($link);

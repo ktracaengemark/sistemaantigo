@@ -45,8 +45,56 @@ elseif ($_GET['q'] == 2) {
 
     $result = mysql_query('
             SELECT
-                idTab_Produto,
+                idTab_Produtos,
                 CONCAT(IFNULL(CodProd,""), " - ", IFNULL(Produtos,""), " - ", IFNULL(UnidadeProduto,"")) AS NomeProduto,
+                ValorCompraProduto
+            FROM 
+                Tab_Produtos 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Produtos'],
+            'name' => utf8_encode($row['NomeProduto']),
+            'value' => $row['ValorCompraProduto'],
+        );
+    } 
+    
+}
+
+elseif ($_GET['q'] == 3) {
+
+    $result = mysql_query('
+            SELECT
+                idTab_Produtos,
+                CONCAT(IFNULL(CodProd,""), " - ", IFNULL(Produtos,""), " - ", IFNULL(UnidadeProduto,"")) AS NomeProduto,
+                ValorVendaProduto
+            FROM 
+                Tab_Produtos 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Produtos'],
+            'name' => utf8_encode($row['NomeProduto']),
+            'value' => $row['ValorVendaProduto'],
+        );
+    } 
+    
+}
+
+elseif ($_GET['q'] == 20) {
+
+    $result = mysql_query('
+            SELECT
+                idTab_Produto,
+                NomeProduto,
                 ValorCompraProduto
             FROM 
                 Tab_Produto 
@@ -65,42 +113,65 @@ elseif ($_GET['q'] == 2) {
     
 }
 
-elseif ($_GET['q'] == 10) {
+elseif ($_GET['q'] == 22) {
 
-    $result = mysql_query('
-            SELECT
-                idTab_Produto,
-                CONCAT(IFNULL(CodProd,""), " - ", IFNULL(Produtos,""), " - ", IFNULL(UnidadeProduto,"")) AS NomeProduto,
-                ValorVendaProduto
-            FROM 
-                Tab_Produto 
+    $result = mysql_query(
+            'SELECT
+                V.idTab_Valor,
+                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - ", IFNULL(V.Convdesc,""), " - R$ ", IFNULL(V.ValorVendaProduto,"")) AS NomeProduto,
+                V.ValorVendaProduto,
+				P.Categoria
+            FROM
+                
+                Tab_Valor AS V
+					LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
+					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = P.Prodaux3
+					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
+					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = P.Prodaux1
             WHERE
-                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
-    ');
+				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND				
+				(P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' OR P.idSis_Empresa = "0" ) AND 
+				(P.ProdutoProprio = ' . $_SESSION['log']['id'] . ' OR P.ProdutoProprio = "0") AND
+				V.Convenio = "53" AND				
+                P.idTab_Produtos = V.idTab_Produtos
+			ORDER BY
+				V.idTab_Valor,
+				P.CodProd ASC,
+				P.Categoria ASC,
+				TP3.Prodaux3,				
+				P.Produtos ASC,
+				TP1.Prodaux1,
+				TP2.Prodaux2,
+				TFO.NomeFornecedor ASC'
+        );
 
     while ($row = mysql_fetch_assoc($result)) {
 
         $event_array[] = array(
-            'id' => $row['idTab_Produto'],
-            'name' => utf8_encode($row['NomeProduto']),
+            'id' => $row['idTab_Valor'],
+            #'name' => utf8_encode($row['NomeProduto']),
+            #'name' => $row['NomeProduto'],
+            'name' => mb_convert_encoding($row['NomeProduto'], "UTF-8", "ISO-8859-1"),
             'value' => $row['ValorVendaProduto'],
         );
-    } 
-    
+    }
+
 }
 
 elseif ($_GET['q'] == 23) {
 
     $result = mysql_query(
             'SELECT
-                TPV.idTab_Produto,
+                TPV.idTab_Produtos,
 				CONCAT(IFNULL(TPV.CodProd,""), " - ", IFNULL(TPV.Produtos,""), " - ", IFNULL(TPV.UnidadeProduto,""), " - ",   
 						IFNULL(TP3.Prodaux3,""), " - ", IFNULL(TP1.Prodaux1,""), " - ", IFNULL(TP2.Prodaux2,""), " - ",  
 						IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
 				TPV.ValorVendaProduto,
 				TPV.Categoria
             FROM
-                Tab_Produto AS TPV
+                Tab_Produtos AS TPV
 					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = TPV.Fornecedor
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPV.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPV.Prodaux2
@@ -115,6 +186,32 @@ elseif ($_GET['q'] == 23) {
 				TPV.Produtos ASC,
 				TP1.Prodaux1,
 				TP2.Prodaux2
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Produtos'],
+            'name' => utf8_encode($row['NomeProduto']),
+            'value' => $row['ValorVendaProduto'],
+        );
+    }
+
+}
+
+elseif ($_GET['q'] == 24) {
+
+    $result = mysql_query(
+            'SELECT
+                TPV.idTab_Produtos,
+				CONCAT(TPV.NomeProduto, " --- ", TPV.UnidadeProduto, " --- R$ ", TPV.ValorVendaProduto) AS NomeProduto,
+				TPV.ValorVendaProduto
+            FROM
+                Tab_Produto AS TPV																	
+            WHERE
+                TPV.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
+			ORDER BY  
+				TPV.NomeProduto ASC				
     ');
 
     while ($row = mysql_fetch_assoc($result)) {
@@ -142,7 +239,7 @@ elseif ($_GET['q'] == 9) {
                 
                 Tab_Valor AS V
 					LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
-					LEFT JOIN Tab_Produto AS P ON P.idTab_Produto = V.idTab_Produto
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
 					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = P.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
@@ -150,7 +247,7 @@ elseif ($_GET['q'] == 9) {
             WHERE
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-                P.idTab_Produto = V.idTab_Produto
+                P.idTab_Produtos = V.idTab_Produtos
 			ORDER BY
 				P.CodProd ASC,
 				P.Categoria ASC,

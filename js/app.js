@@ -1437,7 +1437,7 @@ function buscaValor01(id, campo, tabela) {
 
 }
 
- function buscaValor(id, campo, tabela, num) {
+function buscaValor(id, campo, tabela, num) {
 
     $.ajax({
         // url para o arquivo json.php
@@ -1456,7 +1456,7 @@ function buscaValor01(id, campo, tabela) {
                     $('#'+campo).val(data[i].valor);
 
                     //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
-                    if ($("#QtdVenda"+tabela+num).val()) {
+                    if ($("#QtdVendaProduto"+num).val()) {
                         calculaSubtotal($("#idTab_Produto"+num).val(),$("#QtdVendaProduto"+num).val(),num,'OUTRO',tabela);
                         break;
                     }
@@ -1464,6 +1464,44 @@ function buscaValor01(id, campo, tabela) {
                     //para cada valor carregado o orçamento é calculado/atualizado
                     //através da chamada de sua função
                     calculaOrcamento();
+                    break;
+                }
+
+            }//fim do laço
+
+        }
+    });//termina o ajax
+
+
+}
+
+function buscaValorDev(id, campo, tabela, num) {
+
+    $.ajax({
+        // url para o arquivo json.php
+        url: window.location.origin + "/" + app + "/Valor_json.php?tabela=" + tabela,
+        // dataType json
+        dataType: "json",
+        // função para de sucesso
+        success: function (data) {
+
+            // executo este laço para acessar os itens do objeto javaScript
+            for (i = 0; i < data.length; i++) {
+
+                if (data[i].id == id) {
+
+                    //carrega o valor no campo de acordo com a opção selecionada
+                    $('#'+campo).val(data[i].valor);
+
+                    //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
+                    if ($("#QtdVendaServico"+num).val()) {
+                        calculaSubtotalDev($("#idTab_Servico"+num).val(),$("#QtdVendaServico"+num).val(),num,'OUTRO',tabela);
+                        break;
+                    }
+
+                    //para cada valor carregado o orçamento é calculado/atualizado
+                    //através da chamada de sua função
+                    calculaDevolucao();
                     break;
                 }
 
@@ -1631,7 +1669,7 @@ function buscaValorDevTabelas(id, campo, tabela, num, campo2) {
 
     $.ajax({
         // url para o arquivo json.php
-        url: window.location.origin + "/" + app + "/Valor_json.php?tabela=" + tabela + "&campo2=" + campo2,
+        url: window.location.origin + "/" + app + "/Valor2_json.php?tabela=" + tabela + "&campo2=" + campo2,
         // dataType json
         dataType: "json",
         // função para de sucesso
@@ -1646,8 +1684,8 @@ function buscaValorDevTabelas(id, campo, tabela, num, campo2) {
                     $('#'+campo).val(data[i].valor);
 
                     //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
-                    if ($("#QtdVenda"+campo2+num).val()) {
-                        calculaSubtotalDev($("#idTab_"+campo2+num).val(),$("#QtdVenda"+campo2+num).val(),num,'OUTRO',campo2);
+                    if ($("#QtdVendaServico"+num).val()) {
+                        calculaSubtotalDev($("#idTab_Servico"+num).val(),$("#QtdVendaServico"+num).val(),num,'OUTRO',campo2);
                         break;
                     }
 
@@ -1813,14 +1851,14 @@ function calculaSubtotalDev(valor, campo, num, tipo, tabela) {
 
     if (tipo == 'VP') {
         //variável valor recebe o valor do produto selecionado
-        var data = $("#QtdVenda"+tabela+num).val();
+        var data = $("#QtdVendaServico"+num).val();
 
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (valor.replace(".","").replace(",",".") * data);
         //alert('>>>'+valor+' :: '+campo+' :: '+num+' :: '+tipo+'<<<');
     } else if (tipo == 'QTD') {
         //variável valor recebe o valor do produto selecionado
-        var data = $("#idTab_"+tabela+num).val();
+        var data = $("#idTab_Servico"+num).val();
 
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (valor * data.replace(".","").replace(",","."));
@@ -1831,7 +1869,7 @@ function calculaSubtotalDev(valor, campo, num, tipo, tabela) {
 
     subtotal = mascaraValorReal(subtotal);
     //o subtotal é escrito no seu campo no formulário
-    $('#Subtotal'+tabela+num).val(subtotal);
+    $('#SubtotalServico'+num).val(subtotal);
 
     //para cada vez que o subtotal for calculado o orçamento e o total restante
     //também serão atualizados
@@ -3286,7 +3324,7 @@ $(document).ready(function () {
                             </div>\
                             <div class="col-md-3">\
                                 <label for="idTab_Produto">Produto:</label><br>\
-                                <select class="form-control" id="listadinamicab'+pc+'" onchange="buscaValor(this.value,this.name,\'Produtos\','+pc+')" name="idTab_Produto'+pc+'">\
+                                <select class="form-control Chosen" id="listadinamicab'+pc+'" onchange="buscaValor(this.value,this.name,\'Produto\','+pc+')" name="idTab_Produto'+pc+'">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
@@ -3393,13 +3431,13 @@ $(document).ready(function () {
 								<label for="QtdVendaServico">Qtd:</label><br>\
 								<div class="input-group">\
 									<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico'+ps+'" placeholder="0"\
-										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
+										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'QTD\',\'Produto\'),calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
 										name="QtdVendaServico'+ps+'" value="">\
 								</div>\
 							</div>\
 							<div class="col-md-3">\
 								<label for="idTab_Servico">Produto:</label><br>\
-								<select class="form-control Chosen" id="listadinamica'+ps+'" onchange="buscaValor2(this.value,this.name,\'Valor\','+ps+',\'Produto\')" name="idTab_Servico'+ps+'">\
+								<select class="form-control Chosen" id="listadinamica'+ps+'" onchange="buscaValorDev(this.value,this.name,\'Produto\','+ps+')" name="idTab_Servico'+ps+'">\
 									<option value="">-- Selecione uma opção --</option>\
 								</select>\
 							</div>\
@@ -3413,7 +3451,7 @@ $(document).ready(function () {
 								<div class="input-group">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
-										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'VP\',\'Servico\')"\
+										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'VP\',\'Produto\')"\
 										name="ValorVendaServico'+ps+'" value="">\
 								</div>\
 							</div>\
