@@ -74,7 +74,7 @@
 																					<span class="glyphicon glyphicon-plus"></span> <b>Novo Produto</b>
 																				</a>-->
 																				<?php } ?>
-																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor2Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
+																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor(this.value,this.name,'Produto',<?php echo $i ?>,')" <?php echo $readonly; ?>
 																						 id="listadinamicab<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
 																					<option value="">-- Selecione uma opção --</option>
 																					<?php
@@ -228,7 +228,7 @@
 																					<span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
 																				</a>-->
 																				<?php } ?>
-																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValorDevTabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
+																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValorDev(this.value,this.name,'Produto',<?php echo $i ?>,')" <?php echo $readonly; ?>
 																						id="listadinamica<?php echo $i ?>" name="idTab_Servico<?php echo $i ?>">																					
 																					<option value="">-- Selecione uma opção --</option>
 																					<?php
