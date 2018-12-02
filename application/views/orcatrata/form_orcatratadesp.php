@@ -52,7 +52,7 @@
 															?>
 
 															<?php if ($metodo > 1) { ?>
-															<input type="hidden" name="idApp_ProdutoVenda<?php echo $i ?>" value="<?php echo $produto[$i]['idApp_ProdutoVenda']; ?>"/>
+															<input type="hidden" name="idApp_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idApp_Produto']; ?>"/>
 															<?php } ?>
 
 															<input type="hidden" name="ProdutoHidden" id="ProdutoHidden<?php echo $i ?>" value="<?php echo $i ?>">
@@ -62,10 +62,10 @@
 																	<div class="panel-heading">
 																		<div class="row">
 																			<div class="col-md-1">
-																				<label for="QtdVendaProduto">Qtd<?php echo $i ?>:</label>
-																				<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaProduto<?php echo $i ?>" placeholder="0"
-																						onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
-																						autofocus name="QtdVendaProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdVendaProduto'] ?>">
+																				<label for="QtdProduto">Qtd<?php echo $i ?>:</label>
+																				<input type="text" class="form-control Numero" maxlength="3" id="QtdProduto<?php echo $i ?>" placeholder="0"
+																						onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
+																						autofocus name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
 																			</div>
 																			<div class="col-md-3">
 																				<label for="idTab_Produto">Produto:</label>
@@ -94,12 +94,12 @@
 																					   name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>">
 																			</div>
 																			<div class="col-md-2">
-																				<label for="ValorVendaProduto">Valor do Produto:</label>
+																				<label for="ValorProduto">Valor do Produto:</label>
 																				<div class="input-group">
 																					<span class="input-group-addon" id="basic-addon1">R$</span>
 																					<input type="text" class="form-control Valor" id="idTab_Produto<?php echo $i ?>" maxlength="10" placeholder="0,00"
 																						onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','VP','Produto')"
-																						name="ValorVendaProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ValorVendaProduto'] ?>">
+																						name="ValorProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ValorProduto'] ?>">
 																				</div>
 																			</div>
 																			<div class="col-md-2">
@@ -113,7 +113,7 @@
 																			<div class="col-md-1">
 																				<label><br></label><br>
 																				<button type="button" id="<?php echo $i ?>" class="remove_field11 btn btn-danger"
-																						onclick="calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',1,<?php echo $i ?>,'CountMax',0,'ProdutoHidden')">
+																						onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',1,<?php echo $i ?>,'CountMax',0,'ProdutoHidden')">
 																					<span class="glyphicon glyphicon-trash"></span>
 																				</button>
 																			</div>
@@ -137,7 +137,7 @@
 															</div>
 
 															<?php
-															$QtdSoma+=$produto[$i]['QtdVendaProduto'];
+															$QtdSoma+=$produto[$i]['QtdProduto'];
 															$ProdutoSoma++;
 															}
 															?>
@@ -151,7 +151,7 @@
 																			<br>
 																			<div class="col-md-3">
 																				<a class="add_field_button11 btn btn-success"
-																						onclick="calculaQtdSoma('QtdVendaProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
+																						onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
 																					<span class="glyphicon glyphicon-plus"></span> Produtos
 																				</a>
 																			</div>
@@ -206,7 +206,7 @@
 															?>
 
 															<?php if ($metodo > 1) { ?>
-															<input type="hidden" name="idApp_ServicoVenda<?php echo $i ?>" value="<?php echo $servico[$i]['idApp_ServicoVenda']; ?>"/>
+															<input type="hidden" name="idApp_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idApp_Servico']; ?>"/>
 															<?php } ?>
 
 															<input type="hidden" name="ServicoHidden" id="ServicoHidden<?php echo $i ?>" value="<?php echo $i ?>">
@@ -216,10 +216,10 @@
 																	<div class="panel-heading">
 																		<div class="row">
 																			<div class="col-md-1">
-																				<label for="QtdVendaServico">Qtd:</label>
-																				<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico<?php echo $i ?>" placeholder="0"
-																						onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
-																						autofocus name="QtdVendaServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdVendaServico'] ?>">
+																				<label for="QtdServico">Qtd:</label>
+																				<input type="text" class="form-control Numero" maxlength="3" id="QtdServico<?php echo $i ?>" placeholder="0"
+																						onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
+																						autofocus name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
 																			</div>
 																			<div class="col-md-3">
 																				<label for="idTab_Servico">Produto:</label>
@@ -248,12 +248,12 @@
 																					   name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
 																			</div>
 																			<div class="col-md-2">
-																				<label for="ValorVendaServico">Valor do Produto:</label>
+																				<label for="ValorServico">Valor do Produto:</label>
 																				<div class="input-group">
 																					<span class="input-group-addon" id="basic-addon1">R$</span>
 																					<input type="text" class="form-control Valor" id="idTab_Servico<?php echo $i ?>" maxlength="10" placeholder="0,00"
 																						onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','VP','Servico')"
-																						name="ValorVendaServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorVendaServico'] ?>">
+																						name="ValorServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorServico'] ?>">
 																				</div>
 																			</div>
 																			<div class="col-md-2">
@@ -310,7 +310,7 @@
 																			<div class="col-md-1">
 																				<label><br></label><br>
 																				<button type="button" id="<?php echo $i ?>" class="remove_field12 btn btn-danger"
-																					onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',1,<?php echo $i ?>,'CountMax2',0,'ServicoHidden')">
+																					onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',1,<?php echo $i ?>,'CountMax2',0,'ServicoHidden')">
 																					<span class="glyphicon glyphicon-trash"></span>
 																				</button>
 																			</div>
@@ -320,7 +320,7 @@
 															</div>
 
 															<?php
-															$QtdSomaDev+=$servico[$i]['QtdVendaServico'];
+															$QtdSomaDev+=$servico[$i]['QtdServico'];
 															$ServicoSoma++;
 															}
 															?>
@@ -334,7 +334,7 @@
 																			<br>																
 																			<div class="col-md-3 text-left">
 																				<a class="add_field_button12  btn btn-danger" 
-																						onclick="calculaQtdSomaDev('QtdVendaServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
+																						onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
 																					<span class="glyphicon glyphicon-minus"></span> Produtos
 																				</a>
 																			</div>
@@ -564,7 +564,7 @@
 											?>
 
 												<?php if ($metodo > 1) { ?>
-												<input type="hidden" name="idApp_ParcelasRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_ParcelasRecebiveis']; ?>"/>
+												<input type="hidden" name="idApp_Parcelas<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_Parcelas']; ?>"/>
 												<?php } ?>
 
 
@@ -573,66 +573,66 @@
 														<div class="panel-heading">
 															<div class="row">
 																<div class="col-md-1">
-																	<label for="ParcelaRecebiveis">Parcela:</label><br>
+																	<label for="Parcela">Parcela:</label><br>
 																	<input type="text" class="form-control" maxlength="6" readonly=""
-																		   name="ParcelaRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ParcelaRecebiveis'] ?>">
+																		   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
 																</div>
 																<div class="col-md-2">
-																	<label for="ValorParcelaRecebiveis">Valor Parcela:</label><br>
+																	<label for="ValorParcela">Valor Parcela:</label><br>
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
-																		<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorParcelaRecebiveis<?php echo $i ?>"
-																			   name="ValorParcelaRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorParcelaRecebiveis'] ?>">
+																		<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorParcela<?php echo $i ?>"
+																			   name="ValorParcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorParcela'] ?>">
 																	</div>
 																</div>
 																<div class="col-md-2">
-																	<label for="DataVencimentoRecebiveis">Data Venc. Parc.</label>
+																	<label for="DataVencimento">Data Venc. Parc.</label>
 																	<div class="input-group DatePicker">
-																		<input type="text" class="form-control Date" id="DataVencimentoRecebiveis<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
-																			   name="DataVencimentoRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataVencimentoRecebiveis'] ?>">
+																		<input type="text" class="form-control Date" id="DataVencimento<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																			   name="DataVencimento<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataVencimento'] ?>">
 																		<span class="input-group-addon" disabled>
 																			<span class="glyphicon glyphicon-calendar"></span>
 																		</span>
 																	</div>
 																</div>
 																<div class="col-md-2">
-																	<label for="ValorPagoRecebiveis">Valor Pago:</label><br>
+																	<label for="ValorPago">Valor Pago:</label><br>
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
-																		<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorPagoRecebiveis<?php echo $i ?>"
-																			   name="ValorPagoRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorPagoRecebiveis'] ?>">
+																		<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorPago<?php echo $i ?>"
+																			   name="ValorPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorPago'] ?>">
 																	</div>
 																</div>
 																<div class="col-md-2">
-																	<label for="DataPagoRecebiveis">Data Pag.</label>
+																	<label for="DataPago">Data Pag.</label>
 																	<div class="input-group DatePicker">
-																		<input type="text" class="form-control Date" id="DataPagoRecebiveis<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
-																			   name="DataPagoRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataPagoRecebiveis'] ?>">
+																		<input type="text" class="form-control Date" id="DataPago<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																			   name="DataPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataPago'] ?>">
 																		<span class="input-group-addon" disabled>
 																			<span class="glyphicon glyphicon-calendar"></span>
 																		</span>
 																	</div>
 																</div>
 																<div class="col-md-2">
-																	<label for="QuitadoRecebiveis">Quitado????</label><br>
+																	<label for="Quitado">Quitado????</label><br>
 																	<div class="form-group">
 																		<div class="btn-group" data-toggle="buttons">
 																			<?php
-																			foreach ($select['QuitadoRecebiveis'] as $key => $row) {
-																				(!$parcelasrec[$i]['QuitadoRecebiveis']) ? $parcelasrec[$i]['QuitadoRecebiveis'] = 'N' : FALSE;
+																			foreach ($select['Quitado'] as $key => $row) {
+																				(!$parcelasrec[$i]['Quitado']) ? $parcelasrec[$i]['Quitado'] = 'N' : FALSE;
 
-																				if ($parcelasrec[$i]['QuitadoRecebiveis'] == $key) {
+																				if ($parcelasrec[$i]['Quitado'] == $key) {
 																					echo ''
-																					. '<label class="btn btn-warning active" name="radiobutton_QuitadoRecebiveis' . $i . '" id="radiobutton_QuitadoRecebiveis' . $i .  $key . '">'
-																					. '<input type="radio" name="QuitadoRecebiveis' . $i . '" id="radiobuttondinamico" '
+																					. '<label class="btn btn-warning active" name="radiobutton_Quitado' . $i . '" id="radiobutton_Quitado' . $i .  $key . '">'
+																					. '<input type="radio" name="Quitado' . $i . '" id="radiobuttondinamico" '
 																					. 'onchange="carregaQuitado(this.value,this.name,'.$i.')" '
 																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																					. '</label>'
 																					;
 																				} else {
 																					echo ''
-																					. '<label class="btn btn-default" name="radiobutton_QuitadoRecebiveis' . $i . '" id="radiobutton_QuitadoRecebiveis' . $i .  $key . '">'
-																					. '<input type="radio" name="QuitadoRecebiveis' . $i . '" id="radiobuttondinamico" '
+																					. '<label class="btn btn-default" name="radiobutton_Quitado' . $i . '" id="radiobutton_Quitado' . $i .  $key . '">'
+																					. '<input type="radio" name="Quitado' . $i . '" id="radiobuttondinamico" '
 																					. 'onchange="carregaQuitado(this.value,this.name,'.$i.')" '
 																					. 'autocomplete="off" value="' . $key . '" >' . $row
 																					. '</label>'

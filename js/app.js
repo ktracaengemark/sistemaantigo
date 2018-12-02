@@ -145,22 +145,22 @@ function carregaQuitado2(value, name, i, cadastrar = 0) {
 
     if (value == "S") {
 
-        if (!$("#ValorPagoRecebiveis"+i).val() || $("#ValorPagoRecebiveis"+i).val() == "0,00")
-            $("#ValorPagoRecebiveis"+i).val($("#ValorParcelaRecebiveis"+i).val())
+        if (!$("#ValorPago"+i).val() || $("#ValorPago"+i).val() == "0,00")
+            $("#ValorPago"+i).val($("#ValorParcela"+i).val())
 
-        if (!$("#DataPagoRecebiveis"+i).val()) {
+        if (!$("#DataPago"+i).val()) {
             if (cadastrar == 1)
-                $("#DataPagoRecebiveis"+i).val($("#DataVencimentoRecebiveis"+i).val())
+                $("#DataPago"+i).val($("#DataVencimento"+i).val())
             else
-                $("#DataPagoRecebiveis"+i).val(currentDate.format('DD/MM/YYYY'))
+                $("#DataPago"+i).val(currentDate.format('DD/MM/YYYY'))
         }
 
 
     }
     else {
 
-        $("#ValorPagoRecebiveis"+i).val("")
-        $("#DataPagoRecebiveis"+i).val("")
+        $("#ValorPago"+i).val("")
+        $("#DataPago"+i).val("")
 
     }
 
@@ -171,21 +171,21 @@ function carregaQuitado(value, name, i, cadastrar = 0) {
 
     if (value == "S") {
 
-        if (!$("#ValorPagoRecebiveis"+i).val() || $("#ValorPagoRecebiveis"+i).val() == "0,00")
-            $("#ValorPagoRecebiveis"+i).val($("#ValorParcelaRecebiveis"+i).val())
+        if (!$("#ValorPago"+i).val() || $("#ValorPago"+i).val() == "0,00")
+            $("#ValorPago"+i).val($("#ValorParcela"+i).val())
 
-		if (!$("#DataPagoRecebiveis"+i).val()) {
+		if (!$("#DataPago"+i).val()) {
             if (cadastrar == 1)
-                $("#DataPagoRecebiveis"+i).val($("#DataVencimentoRecebiveis"+i).val())
+                $("#DataPago"+i).val($("#DataVencimento"+i).val())
             else
-                $("#DataPagoRecebiveis"+i).val($("#DataVencimentoRecebiveis"+i).val())
+                $("#DataPago"+i).val($("#DataVencimento"+i).val())
         }
 
     }
     else {
 
-        $("#ValorPagoRecebiveis"+i).val("")
-        $("#DataPagoRecebiveis"+i).val("")
+        $("#ValorPago"+i).val("")
+        $("#DataPago"+i).val("")
 
     }
 
@@ -371,56 +371,56 @@ function calculaParcelas() {
 					<div class="panel-heading">\
 						<div class="row">\
 							<div class="col-md-1">\
-								<label for="ParcelaRecebiveis">Parcela:</label><br>\
+								<label for="Parcela">Parcela:</label><br>\
 								<input type="text" class="form-control" maxlength="6"\
-									   name="ParcelaRecebiveis'+i+'" value="'+i+'/'+parcelas+'">\
+									   name="Parcela'+i+'" value="'+i+'/'+parcelas+'">\
 							</div>\
 							<div class="col-md-2">\
-								<label for="ValorParcelaRecebiveis">Valor Parcela:</label><br>\
+								<label for="ValorParcela">Valor Parcela:</label><br>\
 								<div class="input-group" id="txtHint">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
-										    id="ValorParcelaRecebiveis'+i+'" name="ValorParcelaRecebiveis'+i+'" value="'+parcorca+'">\
+										    id="ValorParcela'+i+'" name="ValorParcela'+i+'" value="'+parcorca+'">\
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="DataVencimentoRecebiveis">Data Venc. Parc.</label>\
+								<label for="DataVencimento">Data Venc. Parc.</label>\
 								<div class="input-group DatePicker">\
 									<span class="input-group-addon" disabled>\
 										<span class="glyphicon glyphicon-calendar"></span>\
 									</span>\
-									<input type="text" class="form-control Date" id="DataVencimentoRecebiveis'+i+'" maxlength="10" placeholder="DD/MM/AAAA"\
-										   name="DataVencimentoRecebiveis'+i+'" value="'+futureMonth.format('DD/MM/YYYY')+'">\
+									<input type="text" class="form-control Date" id="DataVencimento'+i+'" maxlength="10" placeholder="DD/MM/AAAA"\
+										   name="DataVencimento'+i+'" value="'+futureMonth.format('DD/MM/YYYY')+'">\
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="ValorPagoRecebiveis">Valor Pago:</label><br>\
+								<label for="ValorPago">Valor Pago:</label><br>\
 								<div class="input-group" id="txtHint">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
-										    id="ValorPagoRecebiveis'+i+'" name="ValorPagoRecebiveis'+i+'" value="">\
+										    id="ValorPago'+i+'" name="ValorPago'+i+'" value="">\
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="DataPagoRecebiveis">Data Pag.</label>\
+								<label for="DataPago">Data Pag.</label>\
 								<div class="input-group DatePicker">\
 									<span class="input-group-addon" disabled>\
 										<span class="glyphicon glyphicon-calendar"></span>\
 									</span>\
-									<input type="text" class="form-control Date" id="DataPagoRecebiveis'+i+'" maxlength="10" placeholder="DD/MM/AAAA"\
-										   name="DataPagoRecebiveis'+i+'" value="">\
+									<input type="text" class="form-control Date" id="DataPago'+i+'" maxlength="10" placeholder="DD/MM/AAAA"\
+										   name="DataPago'+i+'" value="">\
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="QuitadoRecebiveis">Quitado????</label><br>\
+								<label for="Quitado">Quitado????</label><br>\
 								<div class="form-group">\
 									<div class="btn-group" data-toggle="buttons">\
-										<label class="btn btn-warning active" name="radio_QuitadoRecebiveis'+i+'" id="radio_QuitadoRecebiveis'+i+'N">\
-										<input type="radio" name="QuitadoRecebiveis'+i+'" id="radiogeraldinamico"\
+										<label class="btn btn-warning active" name="radio_Quitado'+i+'" id="radio_Quitado'+i+'N">\
+										<input type="radio" name="Quitado'+i+'" id="radiogeraldinamico"\
 											onchange="carregaQuitado(this.value,this.name,'+i+',1)" autocomplete="off" value="N" checked>Não\
 										</label>\
-										<label class="btn btn-default" name="radio_QuitadoRecebiveis'+i+'" id="radio_QuitadoRecebiveis'+i+'S">\
-										<input type="radio" name="QuitadoRecebiveis'+i+'" id="radiogeraldinamico"\
+										<label class="btn btn-default" name="radio_Quitado'+i+'" id="radio_Quitado'+i+'S">\
+										<input type="radio" name="Quitado'+i+'" id="radiogeraldinamico"\
 											onchange="carregaQuitado(this.value,this.name,'+i+',1)" autocomplete="off" value="S">Sim\
 										</label>\
 									</div>\
@@ -497,56 +497,56 @@ function calculaParcelasMensais() {
 					<div class="panel-heading">\
 						<div class="row">\
 							<div class="col-md-1">\
-								<label for="ParcelaRecebiveis">Parcela:</label><br>\
+								<label for="Parcela">Parcela:</label><br>\
 								<input type="text" class="form-control" maxlength="6"\
-									   name="ParcelaRecebiveis'+i+'" value="'+i+'/'+parcelas+'">\
+									   name="Parcela'+i+'" value="'+i+'/'+parcelas+'">\
 							</div>\
 							<div class="col-md-2">\
-								<label for="ValorParcelaRecebiveis">Valor Parcela:</label><br>\
+								<label for="ValorParcela">Valor Parcela:</label><br>\
 								<div class="input-group" id="txtHint">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
-										    id="ValorParcelaRecebiveis'+i+'" name="ValorParcelaRecebiveis'+i+'" value="'+parcorca+'">\
+										    id="ValorParcela'+i+'" name="ValorParcela'+i+'" value="'+parcorca+'">\
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="DataVencimentoRecebiveis">Data Venc. Parc.</label>\
+								<label for="DataVencimento">Data Venc. Parc.</label>\
 								<div class="input-group DatePicker">\
 									<span class="input-group-addon" disabled>\
 										<span class="glyphicon glyphicon-calendar"></span>\
 									</span>\
-									<input type="text" class="form-control Date" id="DataVencimentoRecebiveis'+i+'" maxlength="10" placeholder="DD/MM/AAAA"\
-										   name="DataVencimentoRecebiveis'+i+'" value="'+futureMonth.format('DD/MM/YYYY')+'">\
+									<input type="text" class="form-control Date" id="DataVencimento'+i+'" maxlength="10" placeholder="DD/MM/AAAA"\
+										   name="DataVencimento'+i+'" value="'+futureMonth.format('DD/MM/YYYY')+'">\
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="ValorPagoRecebiveis">Valor Pago:</label><br>\
+								<label for="ValorPago">Valor Pago:</label><br>\
 								<div class="input-group" id="txtHint">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
-										    id="ValorPagoRecebiveis'+i+'" name="ValorPagoRecebiveis'+i+'" value="">\
+										    id="ValorPago'+i+'" name="ValorPago'+i+'" value="">\
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="DataPagoRecebiveis">Data Pag.</label>\
+								<label for="DataPago">Data Pag.</label>\
 								<div class="input-group DatePicker">\
 									<span class="input-group-addon" disabled>\
 										<span class="glyphicon glyphicon-calendar"></span>\
 									</span>\
-									<input type="text" class="form-control Date" id="DataPagoRecebiveis'+i+'" maxlength="10" placeholder="DD/MM/AAAA"\
-										   name="DataPagoRecebiveis'+i+'" value="">\
+									<input type="text" class="form-control Date" id="DataPago'+i+'" maxlength="10" placeholder="DD/MM/AAAA"\
+										   name="DataPago'+i+'" value="">\
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="QuitadoRecebiveis">Quitado????</label><br>\
+								<label for="Quitado">Quitado????</label><br>\
 								<div class="form-group">\
 									<div class="btn-group" data-toggle="buttons">\
-										<label class="btn btn-warning active" name="radio_QuitadoRecebiveis'+i+'" id="radio_QuitadoRecebiveis'+i+'N">\
-										<input type="radio" name="QuitadoRecebiveis'+i+'" id="radiogeraldinamico"\
+										<label class="btn btn-warning active" name="radio_Quitado'+i+'" id="radio_Quitado'+i+'N">\
+										<input type="radio" name="Quitado'+i+'" id="radiogeraldinamico"\
 											onchange="carregaQuitado(this.value,this.name,'+i+',1)" autocomplete="off" value="N" checked>Não\
 										</label>\
-										<label class="btn btn-default" name="radio_QuitadoRecebiveis'+i+'" id="radio_QuitadoRecebiveis'+i+'S">\
-										<input type="radio" name="QuitadoRecebiveis'+i+'" id="radiogeraldinamico"\
+										<label class="btn btn-default" name="radio_Quitado'+i+'" id="radio_Quitado'+i+'S">\
+										<input type="radio" name="Quitado'+i+'" id="radiogeraldinamico"\
 											onchange="carregaQuitado(this.value,this.name,'+i+',1)" autocomplete="off" value="S">Sim\
 										</label>\
 									</div>\
@@ -1061,11 +1061,11 @@ function adicionaValor() {
 				<div class="panel-heading">\
 					<div class="row">\
 						<div class="col-md-3">\
-							<label for="ValorVendaProduto'+pt+'">Valor Venda:</label><br>\
-							<div class="input-group id="ValorVendaProduto'+pt+'">\
+							<label for="ValorProduto'+pt+'">Valor :</label><br>\
+							<div class="input-group id="ValorProduto'+pt+'">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
-								<input type="text" class="form-control Valor" id="ValorVendaProduto'+pt+'" maxlength="10" placeholder="0,00" \
-									name="ValorVendaProduto'+pt+'" value="">\
+								<input type="text" class="form-control Valor" id="ValorProduto'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ValorProduto'+pt+'" value="">\
 							</div>\
 						</div>\
 						<div class="col-md-1">\
@@ -1150,11 +1150,11 @@ function adicionaValor2() {
 									  name="Convdesc'+pt+'" value="">\
 						</div>\
 						<div class="col-md-3">\
-							<label for="ValorVendaProduto'+pt+'">Valor Venda:</label><br>\
-							<div class="input-group id="ValorVendaProduto'+pt+'">\
+							<label for="ValorProduto'+pt+'">Valor :</label><br>\
+							<div class="input-group id="ValorProduto'+pt+'">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
-								<input type="text" class="form-control Valor" id="ValorVendaProduto'+pt+'" maxlength="10" placeholder="0,00" \
-									name="ValorVendaProduto'+pt+'" value="">\
+								<input type="text" class="form-control Valor" id="ValorProduto'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ValorProduto'+pt+'" value="">\
 							</div>\
 						</div>\
 						<div class="col-md-1">\
@@ -1232,11 +1232,11 @@ function adicionaValorConsultor() {
 									  name="Convdesc'+pt+'" value="">\
 						</div>\
 						<div class="col-md-3">\
-							<label for="ValorVendaProduto'+pt+'">Valor Venda:</label><br>\
-							<div class="input-group id="ValorVendaProduto'+pt+'">\
+							<label for="ValorProduto'+pt+'">Valor :</label><br>\
+							<div class="input-group id="ValorProduto'+pt+'">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
-								<input type="text" class="form-control Valor" id="ValorVendaProduto'+pt+'" maxlength="10" placeholder="0,00" \
-									name="ValorVendaProduto'+pt+'" value="">\
+								<input type="text" class="form-control Valor" id="ValorProduto'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ValorProduto'+pt+'" value="">\
 							</div>\
 						</div>\
 						<div class="col-md-1">\
@@ -1316,11 +1316,11 @@ function adicionaValorServ() {
 							</select>\
 						</div>\
 						<div class="col-md-3">\
-							<label for="ValorVendaServico'+pt+'">Valor Venda:</label><br>\
-							<div class="input-group id="ValorVendaServico'+pt+'">\
+							<label for="ValorServico'+pt+'">Valor :</label><br>\
+							<div class="input-group id="ValorServico'+pt+'">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
-								<input type="text" class="form-control Valor" id="ValorVendaServico'+pt+'" maxlength="10" placeholder="0,00" \
-									name="ValorVendaServico'+pt+'" value="">\
+								<input type="text" class="form-control Valor" id="ValorServico'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ValorServico'+pt+'" value="">\
 							</div>\
 						</div>\
 						<div class="col-md-1">\
@@ -1455,9 +1455,9 @@ function buscaValor(id, campo, tabela, num) {
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
 
-                    //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
-                    if ($("#QtdVendaProduto"+num).val()) {
-                        calculaSubtotal($("#idTab_Produto"+num).val(),$("#QtdVendaProduto"+num).val(),num,'OUTRO',tabela);
+                    //if (tabela == area && $("#Qtd"+tabela+num).val()) {
+                    if ($("#QtdProduto"+num).val()) {
+                        calculaSubtotal($("#idTab_Produto"+num).val(),$("#QtdProduto"+num).val(),num,'OUTRO',tabela);
                         break;
                     }
 
@@ -1493,9 +1493,9 @@ function buscaValorDev(id, campo, tabela, num) {
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
 
-                    //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
-                    if ($("#QtdVendaServico"+num).val()) {
-                        calculaSubtotalDev($("#idTab_Servico"+num).val(),$("#QtdVendaServico"+num).val(),num,'OUTRO',tabela);
+                    //if (tabela == area && $("#Qtd"+tabela+num).val()) {
+                    if ($("#QtdServico"+num).val()) {
+                        calculaSubtotalDev($("#idTab_Servico"+num).val(),$("#QtdServico"+num).val(),num,'OUTRO',tabela);
                         break;
                     }
 
@@ -1531,9 +1531,9 @@ function buscaValor1(id, campo, tabela, num, campo2) {
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
 
-                    //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
-                    if ($("#QtdVenda"+tabela+num).val()) {
-                        calculaSubtotal($("#idTab_"+tabela+num).val(),$("#QtdVenda"+tabela+num).val(),num,'OUTRO',tabela);
+                    //if (tabela == area && $("#Qtd"+tabela+num).val()) {
+                    if ($("#Qtd"+tabela+num).val()) {
+                        calculaSubtotal($("#idTab_"+tabela+num).val(),$("#Qtd"+tabela+num).val(),num,'OUTRO',tabela);
                         break;
                     }
 
@@ -1569,9 +1569,9 @@ function buscaValor2(id, campo, tabela, num, campo2) {
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
 
-                    //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
-                    if ($("#QtdVenda"+campo2+num).val()) {
-                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#QtdVenda"+campo2+num).val(),num,'OUTRO',campo2);
+                    //if (tabela == area && $("#Qtd"+tabela+num).val()) {
+                    if ($("#Qtd"+campo2+num).val()) {
+                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2);
                         break;
                     }
 
@@ -1607,9 +1607,9 @@ function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
 
-                    //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
-                    if ($("#QtdVenda"+campo2+num).val()) {
-                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#QtdVenda"+campo2+num).val(),num,'OUTRO',campo2);
+                    //if (tabela == area && $("#Qtd"+tabela+num).val()) {
+                    if ($("#Qtd"+campo2+num).val()) {
+                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2);
                         break;
                     }
 
@@ -1645,9 +1645,9 @@ function buscaValor2TabelasCli(id, campo, tabela, num, campo2) {
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
 
-                    //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
-                    if ($("#QtdVenda"+campo2+num).val()) {
-                        calculaSubtotalCli($("#idTab_"+campo2+num).val(),$("#QtdVenda"+campo2+num).val(),num,'OUTRO',campo2);
+                    //if (tabela == area && $("#Qtd"+tabela+num).val()) {
+                    if ($("#Qtd"+campo2+num).val()) {
+                        calculaSubtotalCli($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2);
                         break;
                     }
 
@@ -1683,9 +1683,9 @@ function buscaValorDevTabelas(id, campo, tabela, num, campo2) {
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
 
-                    //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
-                    if ($("#QtdVendaServico"+num).val()) {
-                        calculaSubtotalDev($("#idTab_Servico"+num).val(),$("#QtdVendaServico"+num).val(),num,'OUTRO',campo2);
+                    //if (tabela == area && $("#Qtd"+tabela+num).val()) {
+                    if ($("#QtdServico"+num).val()) {
+                        calculaSubtotalDev($("#idTab_Servico"+num).val(),$("#QtdServico"+num).val(),num,'OUTRO',campo2);
                         break;
                     }
 
@@ -1791,7 +1791,7 @@ function calculaSubtotal(valor, campo, num, tipo, tabela) {
 
     if (tipo == 'VP') {
         //variável valor recebe o valor do produto selecionado
-        var data = $("#QtdVenda"+tabela+num).val();
+        var data = $("#Qtd"+tabela+num).val();
 
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (valor.replace(".","").replace(",",".") * data);
@@ -1821,7 +1821,7 @@ function calculaSubtotalCli(valor, campo, num, tipo, tabela) {
 
     if (tipo == 'VP') {
         //variável valor recebe o valor do produto selecionado
-        var data = $("#QtdVenda"+tabela+num).val();
+        var data = $("#Qtd"+tabela+num).val();
 
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (valor.replace(".","").replace(",",".") * data);
@@ -1851,7 +1851,7 @@ function calculaSubtotalDev(valor, campo, num, tipo, tabela) {
 
     if (tipo == 'VP') {
         //variável valor recebe o valor do produto selecionado
-        var data = $("#QtdVendaServico"+num).val();
+        var data = $("#QtdServico"+num).val();
 
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (valor.replace(".","").replace(",",".") * data);
@@ -2176,11 +2176,11 @@ function adicionaServico() {
                 <div class="panel-heading">\
                     <div class="row">\
 						<div class="col-md-2">\
-                            <label for="QtdVendaServico">Qtd:</label><br>\
+                            <label for="QtdServico">Qtd:</label><br>\
                             <div class="input-group">\
-                                <input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico'+ps+'" placeholder="0"\
+                                <input type="text" class="form-control Numero" maxlength="3" id="QtdServico'+ps+'" placeholder="0"\
                                     onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'QTD\',\'Servico\')"\
-                                    name="QtdVendaServico'+ps+'" value="">\
+                                    name="QtdServico'+ps+'" value="">\
                             </div>\
                         </div>\
 						<div class="col-md-4">\
@@ -2190,12 +2190,12 @@ function adicionaServico() {
                             </select>\
                         </div>\
                         <div class="col-md-3">\
-                            <label for="ValorVendaServico">Valor do Serviço:</label><br>\
+                            <label for="ValorServico">Valor do Serviço:</label><br>\
                             <div class="input-group" id="txtHint">\
                                 <span class="input-group-addon" id="basic-addon1">R$</span>\
                                 <input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
                                     onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'VP\',\'Servico\')"\
-                                    name="ValorVendaServico'+ps+'" value="">\
+                                    name="ValorServico'+ps+'" value="">\
                             </div>\
                         </div>\
                         <div class="col-md-3">\
@@ -2401,7 +2401,7 @@ function adicionaServicoCompra() {
     });
 }
 
-function adicionaParcelasRecebiveis() {
+function adicionaParcelas() {
 
 	var pc = $("#PRCount").val(); //initlal text box count
 	pc++; //text box increment
@@ -2413,56 +2413,56 @@ function adicionaParcelasRecebiveis() {
 				<div class="panel-heading">\
 					<div class="row">\
 						<div class="col-md-1">\
-							<label for="ParcelaRecebiveis">Parcela:</label><br>\
+							<label for="Parcela">Parcela:</label><br>\
 							<input type="text" class="form-control" maxlength="6"\
-								   name="ParcelaRecebiveis'+pc+'" value="Ex.">\
+								   name="Parcela'+pc+'" value="Ex.">\
 						</div>\
 						<div class="col-md-2">\
-							<label for="ValorParcelaRecebiveis">Valor Parcela:</label><br>\
+							<label for="ValorParcela">Valor Parcela:</label><br>\
 							<div class="input-group" id="txtHint">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
 								<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
-										id="ValorParcelaRecebiveis'+pc+'" name="ValorParcelaRecebiveis'+pc+'" value="">\
+										id="ValorParcela'+pc+'" name="ValorParcela'+pc+'" value="">\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="DataVencimentoRecebiveis">Data Venc. Parc.</label>\
+							<label for="DataVencimento">Data Venc. Parc.</label>\
 							<div class="input-group DatePicker">\
 								<span class="input-group-addon" disabled>\
 									<span class="glyphicon glyphicon-calendar"></span>\
 								</span>\
-								<input type="text" class="form-control Date" id="DataVencimentoRecebiveis'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
-									   name="DataVencimentoRecebiveis'+pc+'" value="">\
+								<input type="text" class="form-control Date" id="DataVencimento'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataVencimento'+pc+'" value="">\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="ValorPagoRecebiveis">Valor Pago:</label><br>\
+							<label for="ValorPago">Valor Pago:</label><br>\
 							<div class="input-group" id="txtHint">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
 								<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
-										id="ValorPagoRecebiveis'+pc+'" name="ValorPagoRecebiveis'+pc+'" value="">\
+										id="ValorPago'+pc+'" name="ValorPago'+pc+'" value="">\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="DataPagoRecebiveis">Data Pag.</label>\
+							<label for="DataPago">Data Pag.</label>\
 							<div class="input-group DatePicker">\
 								<span class="input-group-addon" disabled>\
 									<span class="glyphicon glyphicon-calendar"></span>\
 								</span>\
-								<input type="text" class="form-control Date" id="DataPagoRecebiveis'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
-									   name="DataPagoRecebiveis'+pc+'" value="">\
+								<input type="text" class="form-control Date" id="DataPago'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataPago'+pc+'" value="">\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="QuitadoRecebiveis">Quitado????</label><br>\
+							<label for="Quitado">Quitado????</label><br>\
 							<div class="form-group">\
 								<div class="btn-group" data-toggle="buttons">\
-									<label class="btn btn-warning active" name="radio_QuitadoRecebiveis'+pc+'" id="radio_QuitadoRecebiveis'+pc+'N">\
-									<input type="radio" name="QuitadoRecebiveis'+pc+'" id="radiogeraldinamico"\
+									<label class="btn btn-warning active" name="radio_Quitado'+pc+'" id="radio_Quitado'+pc+'N">\
+									<input type="radio" name="Quitado'+pc+'" id="radiogeraldinamico"\
 										onchange="carregaQuitado(this.value,this.name,'+pc+',1)" autocomplete="off" value="N" checked>Não\
 									</label>\
-									<label class="btn btn-default" name="radio_QuitadoRecebiveis'+pc+'" id="radio_QuitadoRecebiveis'+pc+'S">\
-									<input type="radio" name="QuitadoRecebiveis'+pc+'" id="radiogeraldinamico"\
+									<label class="btn btn-default" name="radio_Quitado'+pc+'" id="radio_Quitado'+pc+'S">\
+									<input type="radio" name="Quitado'+pc+'" id="radiogeraldinamico"\
 										onchange="carregaQuitado(this.value,this.name,'+pc+',1)" autocomplete="off" value="S">Sim\
 									</label>\
 								</div>\
@@ -2484,7 +2484,7 @@ function adicionaParcelasRecebiveis() {
 	$('.DatePicker').datetimepicker(dateTimePickerOptions);	
 }
 
-function adicionaParcelasRecebiveisAlterar() {
+function adicionaParcelasAlterar() {
 
 	var pc = $("#PRCount").val(); //initlal text box count
 	pc++; //text box increment
@@ -2506,59 +2506,59 @@ function adicionaParcelasRecebiveisAlterar() {
 								   name="idApp_OrcaTrata'+pc+'" value="Ex.">\
 						</div>\
 						<div class="col-md-1">\
-							<label for="ParcelaRecebiveis">Parcela:</label><br>\
+							<label for="Parcela">Parcela:</label><br>\
 							<input type="text" class="form-control" maxlength="6"\
-								   name="ParcelaRecebiveis'+pc+'" value="Ex.">\
+								   name="Parcela'+pc+'" value="Ex.">\
 						</div>\
 						<div class="col-md-2">\
-							<label for="ValorParcelaRecebiveis">Valor Parcela:</label><br>\
+							<label for="ValorParcela">Valor Parcela:</label><br>\
 							<div class="input-group" id="txtHint">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
 								<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
-										id="ValorParcelaRecebiveis'+pc+'" name="ValorParcelaRecebiveis'+pc+'" value="">\
+										id="ValorParcela'+pc+'" name="ValorParcela'+pc+'" value="">\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="DataVencimentoRecebiveis">Data Venc. Parc.</label>\
+							<label for="DataVencimento">Data Venc. Parc.</label>\
 							<div class="input-group DatePicker">\
 								<span class="input-group-addon" disabled>\
 									<span class="glyphicon glyphicon-calendar"></span>\
 								</span>\
-								<input type="text" class="form-control Date" id="DataVencimentoRecebiveis'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
-									   name="DataVencimentoRecebiveis'+pc+'" value="">\
+								<input type="text" class="form-control Date" id="DataVencimento'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataVencimento'+pc+'" value="">\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="ValorPagoRecebiveis">Valor Pago:</label><br>\
+							<label for="ValorPago">Valor Pago:</label><br>\
 							<div class="input-group" id="txtHint">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
 								<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
-										id="ValorPagoRecebiveis'+pc+'" name="ValorPagoRecebiveis'+pc+'" value="">\
+										id="ValorPago'+pc+'" name="ValorPago'+pc+'" value="">\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="DataPagoRecebiveis">Data Pag.</label>\
+							<label for="DataPago">Data Pag.</label>\
 							<div class="input-group DatePicker">\
 								<span class="input-group-addon" disabled>\
 									<span class="glyphicon glyphicon-calendar"></span>\
 								</span>\
-								<input type="text" class="form-control Date" id="DataPagoRecebiveis'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
-									   name="DataPagoRecebiveis'+pc+'" value="">\
+								<input type="text" class="form-control Date" id="DataPago'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataPago'+pc+'" value="">\
 							</div>\
 						</div>\
 					</div>\
 					<div class="row">\
 						<div class="col-md-8"></div>\
 						<div class="col-md-2">\
-							<label for="QuitadoRecebiveis">Quitado????</label><br>\
+							<label for="Quitado">Quitado????</label><br>\
 							<div class="form-group">\
 								<div class="btn-group" data-toggle="buttons">\
-									<label class="btn btn-warning active" name="radio_QuitadoRecebiveis'+pc+'" id="radio_QuitadoRecebiveis'+pc+'N">\
-									<input type="radio" name="QuitadoRecebiveis'+pc+'" id="radiogeraldinamico"\
+									<label class="btn btn-warning active" name="radio_Quitado'+pc+'" id="radio_Quitado'+pc+'N">\
+									<input type="radio" name="Quitado'+pc+'" id="radiogeraldinamico"\
 										onchange="carregaQuitado(this.value,this.name,'+pc+',1)" autocomplete="off" value="N" checked>Não\
 									</label>\
-									<label class="btn btn-default" name="radio_QuitadoRecebiveis'+pc+'" id="radio_QuitadoRecebiveis'+pc+'S">\
-									<input type="radio" name="QuitadoRecebiveis'+pc+'" id="radiogeraldinamico"\
+									<label class="btn btn-default" name="radio_Quitado'+pc+'" id="radio_Quitado'+pc+'S">\
+									<input type="radio" name="Quitado'+pc+'" id="radiogeraldinamico"\
 										onchange="carregaQuitado(this.value,this.name,'+pc+',1)" autocomplete="off" value="S">Sim\
 									</label>\
 								</div>\
@@ -2881,11 +2881,11 @@ $(document).ready(function () {
 					<div class="panel-heading">\
 						<div class="row">\
 							<div class="col-md-1">\
-								<label for="QtdVendaServico">Qtd:</label><br>\
+								<label for="QtdServico">Qtd:</label><br>\
 								<div class="input-group">\
-									<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico'+ps+'" placeholder="0"\
-										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
-										name="QtdVendaServico'+ps+'" value="">\
+									<input type="text" class="form-control Numero" maxlength="3" id="QtdServico'+ps+'" placeholder="0"\
+										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
+										name="QtdServico'+ps+'" value="">\
 								</div>\
 							</div>\
 							<div class="col-md-7">\
@@ -2895,12 +2895,12 @@ $(document).ready(function () {
 								</select>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="ValorVendaServico">Valor do Produto:</label><br>\
+								<label for="ValorServico">Valor do Produto:</label><br>\
 								<div class="input-group">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
 										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'VP\',\'Servico\')"\
-										name="ValorVendaServico'+ps+'" value="">\
+										name="ValorServico'+ps+'" value="">\
 								</div>\
 							</div>\
 							<div class="col-md-2">\
@@ -2932,7 +2932,7 @@ $(document).ready(function () {
 							<div class="col-md-1">\
 								<label><br></label><br>\
 								<a href="#" id="'+ps+'" class="remove_field btn btn-danger"\
-									onclick="calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
+									onclick="calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
 									<span class="glyphicon glyphicon-trash"></span>\
 								</a>\
 							</div>\
@@ -2991,10 +2991,10 @@ $(document).ready(function () {
                     <div class="panel-heading">\
                         <div class="row">\
                             <div class="col-md-1">\
-                                <label for="QtdVendaProduto">Qtd:</label><br>\
-                                    <input type="text" class="form-control Numero" maxlength="3" id="QtdVendaProduto'+pc+'" placeholder="0"\
-                                        onkeyup="calculaSubtotalCli(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdVendaProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
-                                        name="QtdVendaProduto'+pc+'" value="">\
+                                <label for="QtdProduto">Qtd:</label><br>\
+                                    <input type="text" class="form-control Numero" maxlength="3" id="QtdProduto'+pc+'" placeholder="0"\
+                                        onkeyup="calculaSubtotalCli(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
+                                        name="QtdProduto'+pc+'" value="">\
                             </div>\
 							<div class="col-md-3">\
                                 <label for="idTab_Produto">Produto:</label><br>\
@@ -3008,12 +3008,12 @@ $(document).ready(function () {
 									   name="ObsProduto'+pc+'" value="">\
 							</div>\
                             <div class="col-md-2">\
-                                <label for="ValorVendaProduto">Valor do Produto:</label><br>\
+                                <label for="ValorProduto">Valor do Produto:</label><br>\
                                 <div class="input-group id="txtHint">\
                                     <span class="input-group-addon" id="basic-addon1">R$</span>\
                                     <input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" \
                                         onkeyup="calculaSubtotalCli(this.value,this.name,'+pc+',\'VP\',\'Produto\')"\
-                                        name="ValorVendaProduto'+pc+'" value="">\
+                                        name="ValorProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
                             <div class="col-md-2">\
@@ -3027,7 +3027,7 @@ $(document).ready(function () {
 							<div class="col-md-1">\
                                 <label><br></label><br>\
                                 <a href="#" id="'+pc+'" class="remove_field2 btn btn-danger"\
-                                        onclick="calculaQtdSoma(\'QtdVendaProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
+                                        onclick="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
                                     <span class="glyphicon glyphicon-trash"></span>\
                                 </a>\
                             </div>\
@@ -3089,11 +3089,11 @@ $(document).ready(function () {
                     <div class="panel-heading">\
                         <div class="row">\
                             <div class="col-md-1">\
-                                <label for="QtdVendaProduto">Qtd:</label><br>\
+                                <label for="QtdProduto">Qtd:</label><br>\
                                 <div class="input-group">\
-                                    <input type="text" class="form-control Numero" maxlength="3" id="QtdVendaProduto'+pc+'" placeholder="0"\
-                                        onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdVendaProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
-                                        name="QtdVendaProduto'+pc+'" value="">\
+                                    <input type="text" class="form-control Numero" maxlength="3" id="QtdProduto'+pc+'" placeholder="0"\
+                                        onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
+                                        name="QtdProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
                             <div class="col-md-3">\
@@ -3108,12 +3108,12 @@ $(document).ready(function () {
 									   name="ObsProduto'+pc+'" value="">\
 							</div>\
                             <div class="col-md-2">\
-                                <label for="ValorVendaProduto">Valor do Produto:</label><br>\
+                                <label for="ValorProduto">Valor do Produto:</label><br>\
                                 <div class="input-group id="txtHint">\
                                     <span class="input-group-addon" id="basic-addon1">R$</span>\
                                     <input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" \
                                         onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'VP\',\'Produto\')"\
-                                        name="ValorVendaProduto'+pc+'" value="">\
+                                        name="ValorProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
                             <div class="col-md-2">\
@@ -3127,7 +3127,7 @@ $(document).ready(function () {
 							<div class="col-md-1">\
                                 <label><br></label><br>\
                                 <a href="#" id="'+pc+'" class="remove_field9 btn btn-danger"\
-                                        onclick="calculaQtdSoma(\'QtdVendaProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
+                                        onclick="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
                                     <span class="glyphicon glyphicon-trash"></span>\
                                 </a>\
                             </div>\
@@ -3202,11 +3202,11 @@ $(document).ready(function () {
 					<div class="panel-heading">\
 						<div class="row">\
 							<div class="col-md-1">\
-								<label for="QtdVendaServico">Qtd:</label><br>\
+								<label for="QtdServico">Qtd:</label><br>\
 								<div class="input-group">\
-									<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico'+ps+'" placeholder="0"\
-										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
-										name="QtdVendaServico'+ps+'" value="">\
+									<input type="text" class="form-control Numero" maxlength="3" id="QtdServico'+ps+'" placeholder="0"\
+										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
+										name="QtdServico'+ps+'" value="">\
 								</div>\
 							</div>\
 							<div class="col-md-3">\
@@ -3221,12 +3221,12 @@ $(document).ready(function () {
 									   name="ObsServico'+ps+'" value="">\
 							</div>\
 							<div class="col-md-2">\
-								<label for="ValorVendaServico">Valor do Produto:</label><br>\
+								<label for="ValorServico">Valor do Produto:</label><br>\
 								<div class="input-group">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
 										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'VP\',\'Servico\')"\
-										name="ValorVendaServico'+ps+'" value="">\
+										name="ValorServico'+ps+'" value="">\
 								</div>\
 							</div>\
 							<div class="col-md-2">\
@@ -3240,7 +3240,7 @@ $(document).ready(function () {
 							<div class="col-md-1">\
 								<label><br></label><br>\
 								<a href="#" id="'+ps+'" class="remove_field10 btn btn-danger"\
-									onclick="calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
+									onclick="calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
 									<span class="glyphicon glyphicon-trash"></span>\
 								</a>\
 							</div>\
@@ -3315,11 +3315,11 @@ $(document).ready(function () {
                     <div class="panel-heading">\
                         <div class="row">\
                             <div class="col-md-1">\
-                                <label for="QtdVendaProduto">Qtd:</label><br>\
+                                <label for="QtdProduto">Qtd:</label><br>\
                                 <div class="input-group">\
-                                    <input type="text" class="form-control Numero" maxlength="3" id="QtdVendaProduto'+pc+'" placeholder="0"\
-                                        onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdVendaProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
-                                        name="QtdVendaProduto'+pc+'" value="">\
+                                    <input type="text" class="form-control Numero" maxlength="3" id="QtdProduto'+pc+'" placeholder="0"\
+                                        onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
+                                        name="QtdProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
                             <div class="col-md-3">\
@@ -3334,12 +3334,12 @@ $(document).ready(function () {
 									   name="ObsProduto'+pc+'" value="">\
 							</div>\
                             <div class="col-md-2">\
-                                <label for="ValorVendaProduto">Valor do Produto:</label><br>\
+                                <label for="ValorProduto">Valor do Produto:</label><br>\
                                 <div class="input-group id="txtHint">\
                                     <span class="input-group-addon" id="basic-addon1">R$</span>\
                                     <input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" \
                                         onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'VP\',\'Produto\')"\
-                                        name="ValorVendaProduto'+pc+'" value="">\
+                                        name="ValorProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
                             <div class="col-md-2">\
@@ -3353,7 +3353,7 @@ $(document).ready(function () {
 							<div class="col-md-1">\
                                 <label><br></label><br>\
                                 <a href="#" id="'+pc+'" class="remove_field11 btn btn-danger"\
-                                        onclick="calculaQtdSoma(\'QtdVendaProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
+                                        onclick="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
                                     <span class="glyphicon glyphicon-trash"></span>\
                                 </a>\
                             </div>\
@@ -3428,11 +3428,11 @@ $(document).ready(function () {
 					<div class="panel-heading">\
 						<div class="row">\
 							<div class="col-md-1">\
-								<label for="QtdVendaServico">Qtd:</label><br>\
+								<label for="QtdServico">Qtd:</label><br>\
 								<div class="input-group">\
-									<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico'+ps+'" placeholder="0"\
-										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'QTD\',\'Produto\'),calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
-										name="QtdVendaServico'+ps+'" value="">\
+									<input type="text" class="form-control Numero" maxlength="3" id="QtdServico'+ps+'" placeholder="0"\
+										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'QTD\',\'Produto\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
+										name="QtdServico'+ps+'" value="">\
 								</div>\
 							</div>\
 							<div class="col-md-3">\
@@ -3447,12 +3447,12 @@ $(document).ready(function () {
 									   name="ObsServico'+ps+'" value="">\
 							</div>\
 							<div class="col-md-2">\
-								<label for="ValorVendaServico">Valor do Produto:</label><br>\
+								<label for="ValorServico">Valor do Produto:</label><br>\
 								<div class="input-group">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
 										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'VP\',\'Produto\')"\
-										name="ValorVendaServico'+ps+'" value="">\
+										name="ValorServico'+ps+'" value="">\
 								</div>\
 							</div>\
 							<div class="col-md-2">\
@@ -3466,7 +3466,7 @@ $(document).ready(function () {
 							<div class="col-md-1">\
 								<label><br></label><br>\
 								<a href="#" id="'+ps+'" class="remove_field12 btn btn-danger"\
-									onclick="calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
+									onclick="calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
 									<span class="glyphicon glyphicon-trash"></span>\
 								</a>\
 							</div>\
@@ -3541,11 +3541,11 @@ $(document).ready(function () {
                     <div class="panel-heading">\
                         <div class="row">\
                             <div class="col-md-1">\
-                                <label for="QtdVendaProduto">Qtd:</label><br>\
+                                <label for="QtdProduto">Qtd:</label><br>\
                                 <div class="input-group">\
-                                    <input type="text" class="form-control Numero" maxlength="3" id="QtdVendaProduto'+pc+'" placeholder="0"\
+                                    <input type="text" class="form-control Numero" maxlength="3" id="QtdProduto'+pc+'" placeholder="0"\
                                         onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\')"\
-                                        name="QtdVendaProduto'+pc+'" value="">\
+                                        name="QtdProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
                             <div class="col-md-7">\
@@ -3555,12 +3555,12 @@ $(document).ready(function () {
                                 </select>\
                             </div>\
                             <div class="col-md-2">\
-                                <label for="ValorVendaProduto">Valor do Produto:</label><br>\
+                                <label for="ValorProduto">Valor do Produto:</label><br>\
                                 <div class="input-group id="txtHint">\
                                     <span class="input-group-addon" id="basic-addon1">R$</span>\
                                     <input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" \
                                         onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'VP\',\'Produto\')"\
-                                        name="ValorVendaProduto'+pc+'" value="">\
+                                        name="ValorProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
                             <div class="col-md-2">\

@@ -1060,6 +1060,83 @@ function adicionaValor() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
+						<div class="col-md-3">\
+							<label for="ValorVendaProduto'+pt+'">Valor Venda:</label><br>\
+							<div class="input-group id="ValorVendaProduto'+pt+'">\
+								<span class="input-group-addon" id="basic-addon1">R$</span>\
+								<input type="text" class="form-control Valor" id="ValorVendaProduto'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ValorVendaProduto'+pt+'" value="">\
+							</div>\
+						</div>\
+						<div class="col-md-1">\
+							<label><br></label><br>\
+							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\
+								<span class="glyphicon glyphicon-trash"></span>\
+							</button>\
+						</div>\
+					</div>\
+				</div>\
+			</div>\
+        </div>'
+    ); //add input box
+    //habilita o botão de calendário após a geração dos campos dinâmicos
+    $('.DatePicker').datetimepicker(dateTimePickerOptions);
+
+    //get a reference to the select element
+    $select = $('#listadinamicad'+pt);
+
+    //request the JSON data and parse into the select element
+    $.ajax({
+        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=4',
+        dataType: 'JSON',
+        type: "GET",
+        success: function (data) {
+            //clear the current content of the select
+            $select.html('');
+            //iterate over the data and append a select option
+            $select.append('<option value="">-- Selecione uma opção --</option>');
+            $.each(data, function (key, val) {
+                //alert(val.id);
+                if (val.id == chosen)
+                    $select.append('<option value="' + val.id + '" selected="selected">' + val.name + '</option>');
+                else
+                    $select.append('<option value="' + val.id + '">' + val.name + '</option>');
+            })
+        },
+        error: function () {
+            //alert('erro listadinamicaB');
+            //if there is an error append a 'none available' option
+            $select.html('<option id="-1">ERRO</option>');
+        }
+
+    });
+
+}
+
+function adicionaValor2() {
+
+    var pt = $("#PTCount").val(); //initlal text box count
+
+    //alert( $("#SCount").val() );
+    pt++; //text box increment
+    $("#PTCount").val(pt);
+    //console.log(pt);
+
+    if (pt >= 2) {
+        //console.log( $("#listadinamicad"+(pt-1)).val() );
+        var chosen;
+        chosen = $("#listadinamicad"+(pt-1)).val();
+        //console.log( chosen + ' :: ' + pt );
+    }
+
+    //Captura a data do dia e carrega no campo correspondente
+    var currentDate = moment();
+
+    $(".input_fields_wrap3").append('\
+        <div class="form-group" id="3div'+pt+'">\
+			<div class="panel panel-info">\
+				<div class="panel-heading">\
+					<div class="row">\
 						<div class="col-md-4">\
 							<label for="Convenio'+pt+'">Tabelas & Planos:</label>\
 							<select data-placeholder="Selecione uma opção..." class="form-control"\
@@ -1327,11 +1404,120 @@ function adicionaValorServ() {
  * @param {string} tabela
  * @returns {decimal}
  */
-function buscaValor(id, campo, tabela, num, campo2) {
+ 
+function buscaValor01(id, campo, tabela) {
+	
+    $.ajax({
+        // url para o arquivo json.php
+        url: window.location.origin + "/" + app + "/Valor_json.php?tabela=" + tabela,
+        // dataType json
+        dataType: "json",
+        // função para de sucesso
+        success: function (data) {
+
+            // executo este laço para ecessar os itens do objeto javaScript
+            for ($i = 0; $i < data.length; $i++) {
+                
+                if (data[$i].id == id) {
+                    
+                    //carrega o valor no campo de acordo com a opção selecionada
+                    $('#'+campo).val(data[$i].valor);
+                    
+                    //para cada valor carregado o orçamento é calculado/atualizado
+                    //através da chamada de sua função
+                    calculaOrcamento();
+                    break;
+                }                    
+                
+            }//fim do laço
+
+        }
+    });//termina o ajax
+    
+
+}
+
+function buscaValor(id, campo, tabela, num) {
 
     $.ajax({
         // url para o arquivo json.php
         url: window.location.origin + "/" + app + "/Valor_json.php?tabela=" + tabela,
+        // dataType json
+        dataType: "json",
+        // função para de sucesso
+        success: function (data) {
+
+            // executo este laço para acessar os itens do objeto javaScript
+            for (i = 0; i < data.length; i++) {
+
+                if (data[i].id == id) {
+
+                    //carrega o valor no campo de acordo com a opção selecionada
+                    $('#'+campo).val(data[i].valor);
+
+                    //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
+                    if ($("#QtdVendaProduto"+num).val()) {
+                        calculaSubtotal($("#idTab_Produto"+num).val(),$("#QtdVendaProduto"+num).val(),num,'OUTRO',tabela);
+                        break;
+                    }
+
+                    //para cada valor carregado o orçamento é calculado/atualizado
+                    //através da chamada de sua função
+                    calculaOrcamento();
+                    break;
+                }
+
+            }//fim do laço
+
+        }
+    });//termina o ajax
+
+
+}
+
+function buscaValorDev(id, campo, tabela, num) {
+
+    $.ajax({
+        // url para o arquivo json.php
+        url: window.location.origin + "/" + app + "/Valor_json.php?tabela=" + tabela,
+        // dataType json
+        dataType: "json",
+        // função para de sucesso
+        success: function (data) {
+
+            // executo este laço para acessar os itens do objeto javaScript
+            for (i = 0; i < data.length; i++) {
+
+                if (data[i].id == id) {
+
+                    //carrega o valor no campo de acordo com a opção selecionada
+                    $('#'+campo).val(data[i].valor);
+
+                    //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
+                    if ($("#QtdVendaServico"+num).val()) {
+                        calculaSubtotalDev($("#idTab_Servico"+num).val(),$("#QtdVendaServico"+num).val(),num,'OUTRO',tabela);
+                        break;
+                    }
+
+                    //para cada valor carregado o orçamento é calculado/atualizado
+                    //através da chamada de sua função
+                    calculaDevolucao();
+                    break;
+                }
+
+            }//fim do laço
+
+        }
+    });//termina o ajax
+
+
+}
+ 
+function buscaValor1(id, campo, tabela, num, campo2) {
+
+    $.ajax({
+        // url para o arquivo json.php
+        url: window.location.origin + "/" + app + "/Valor2_json.php?tabela=" + tabela,
         // dataType json
         dataType: "json",
         // função para de sucesso
@@ -1365,11 +1551,49 @@ function buscaValor(id, campo, tabela, num, campo2) {
 
 }
 
-function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
+function buscaValor2(id, campo, tabela, num, campo2) {
 
     $.ajax({
         // url para o arquivo json.php
         url: window.location.origin + "/" + app + "/Valor_json.php?tabela=" + tabela + "&campo2=" + campo2,
+        // dataType json
+        dataType: "json",
+        // função para de sucesso
+        success: function (data) {
+
+            // executo este laço para acessar os itens do objeto javaScript
+            for (i = 0; i < data.length; i++) {
+
+                if (data[i].id == id) {
+
+                    //carrega o valor no campo de acordo com a opção selecionada
+                    $('#'+campo).val(data[i].valor);
+
+                    //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
+                    if ($("#QtdVenda"+campo2+num).val()) {
+                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#QtdVenda"+campo2+num).val(),num,'OUTRO',campo2);
+                        break;
+                    }
+
+                    //para cada valor carregado o orçamento é calculado/atualizado
+                    //através da chamada de sua função
+                    calculaOrcamento();
+                    break;
+                }
+
+            }//fim do laço
+
+        }
+    });//termina o ajax
+
+
+}
+
+function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
+
+    $.ajax({
+        // url para o arquivo json.php
+        url: window.location.origin + "/" + app + "/Valor2_json.php?tabela=" + tabela + "&campo2=" + campo2,
         // dataType json
         dataType: "json",
         // função para de sucesso
@@ -1445,7 +1669,7 @@ function buscaValorDevTabelas(id, campo, tabela, num, campo2) {
 
     $.ajax({
         // url para o arquivo json.php
-        url: window.location.origin + "/" + app + "/Valor_json.php?tabela=" + tabela + "&campo2=" + campo2,
+        url: window.location.origin + "/" + app + "/Valor2_json.php?tabela=" + tabela + "&campo2=" + campo2,
         // dataType json
         dataType: "json",
         // função para de sucesso
@@ -1460,8 +1684,8 @@ function buscaValorDevTabelas(id, campo, tabela, num, campo2) {
                     $('#'+campo).val(data[i].valor);
 
                     //if (tabela == area && $("#QtdVenda"+tabela+num).val()) {
-                    if ($("#QtdVenda"+campo2+num).val()) {
-                        calculaSubtotalDev($("#idTab_"+campo2+num).val(),$("#QtdVenda"+campo2+num).val(),num,'OUTRO',campo2);
+                    if ($("#QtdVendaServico"+num).val()) {
+                        calculaSubtotalDev($("#idTab_Servico"+num).val(),$("#QtdVendaServico"+num).val(),num,'OUTRO',campo2);
                         break;
                     }
 
@@ -1627,14 +1851,14 @@ function calculaSubtotalDev(valor, campo, num, tipo, tabela) {
 
     if (tipo == 'VP') {
         //variável valor recebe o valor do produto selecionado
-        var data = $("#QtdVenda"+tabela+num).val();
+        var data = $("#QtdVendaServico"+num).val();
 
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (valor.replace(".","").replace(",",".") * data);
         //alert('>>>'+valor+' :: '+campo+' :: '+num+' :: '+tipo+'<<<');
     } else if (tipo == 'QTD') {
         //variável valor recebe o valor do produto selecionado
-        var data = $("#idTab_"+tabela+num).val();
+        var data = $("#idTab_Servico"+num).val();
 
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (valor * data.replace(".","").replace(",","."));
@@ -1645,7 +1869,7 @@ function calculaSubtotalDev(valor, campo, num, tipo, tabela) {
 
     subtotal = mascaraValorReal(subtotal);
     //o subtotal é escrito no seu campo no formulário
-    $('#Subtotal'+tabela+num).val(subtotal);
+    $('#SubtotalServico'+num).val(subtotal);
 
     //para cada vez que o subtotal for calculado o orçamento e o total restante
     //também serão atualizados
@@ -1887,7 +2111,7 @@ function calculaDespesas() {
 
     //escreve o subtotal no campo do formulário
     $('#ValorRestanteDespesas').val(subtotal);
-    //calculaRestaDespesas($("#ValorEntradaDespesas").val());
+    calculaRestaDespesas($("#ValorEntradaDespesas").val());
 }
 
 function calculaConsumo() {
@@ -2260,6 +2484,102 @@ function adicionaParcelasRecebiveis() {
 	$('.DatePicker').datetimepicker(dateTimePickerOptions);	
 }
 
+function adicionaParcelasRecebiveisAlterar() {
+
+	var pc = $("#PRCount").val(); //initlal text box count
+	pc++; //text box increment
+	$("#PRCount").val(pc);
+	
+    $(".input_fields_wrap24").append('\
+		<div class="form-group" id="24div'+pc+'">\
+			<div class="panel panel-warning">\
+				<div class="panel-heading">\
+					<div class="row">\
+						<div class="col-md-1">\
+							<label for="idSis_Empresa">Empresa:</label><br>\
+							<input type="text" class="form-control" maxlength="6"\
+								   name="idSis_Empresa'+pc+'" value="Ex.">\
+						</div>\
+						<div class="col-md-1">\
+							<label for="idApp_OrcaTrata">Receita:</label><br>\
+							<input type="text" class="form-control" maxlength="6"\
+								   name="idApp_OrcaTrata'+pc+'" value="Ex.">\
+						</div>\
+						<div class="col-md-1">\
+							<label for="ParcelaRecebiveis">Parcela:</label><br>\
+							<input type="text" class="form-control" maxlength="6"\
+								   name="ParcelaRecebiveis'+pc+'" value="Ex.">\
+						</div>\
+						<div class="col-md-2">\
+							<label for="ValorParcelaRecebiveis">Valor Parcela:</label><br>\
+							<div class="input-group" id="txtHint">\
+								<span class="input-group-addon" id="basic-addon1">R$</span>\
+								<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
+										id="ValorParcelaRecebiveis'+pc+'" name="ValorParcelaRecebiveis'+pc+'" value="">\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="DataVencimentoRecebiveis">Data Venc. Parc.</label>\
+							<div class="input-group DatePicker">\
+								<span class="input-group-addon" disabled>\
+									<span class="glyphicon glyphicon-calendar"></span>\
+								</span>\
+								<input type="text" class="form-control Date" id="DataVencimentoRecebiveis'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataVencimentoRecebiveis'+pc+'" value="">\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="ValorPagoRecebiveis">Valor Pago:</label><br>\
+							<div class="input-group" id="txtHint">\
+								<span class="input-group-addon" id="basic-addon1">R$</span>\
+								<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
+										id="ValorPagoRecebiveis'+pc+'" name="ValorPagoRecebiveis'+pc+'" value="">\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="DataPagoRecebiveis">Data Pag.</label>\
+							<div class="input-group DatePicker">\
+								<span class="input-group-addon" disabled>\
+									<span class="glyphicon glyphicon-calendar"></span>\
+								</span>\
+								<input type="text" class="form-control Date" id="DataPagoRecebiveis'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataPagoRecebiveis'+pc+'" value="">\
+							</div>\
+						</div>\
+					</div>\
+					<div class="row">\
+						<div class="col-md-8"></div>\
+						<div class="col-md-2">\
+							<label for="QuitadoRecebiveis">Quitado????</label><br>\
+							<div class="form-group">\
+								<div class="btn-group" data-toggle="buttons">\
+									<label class="btn btn-warning active" name="radio_QuitadoRecebiveis'+pc+'" id="radio_QuitadoRecebiveis'+pc+'N">\
+									<input type="radio" name="QuitadoRecebiveis'+pc+'" id="radiogeraldinamico"\
+										onchange="carregaQuitado(this.value,this.name,'+pc+',1)" autocomplete="off" value="N" checked>Não\
+									</label>\
+									<label class="btn btn-default" name="radio_QuitadoRecebiveis'+pc+'" id="radio_QuitadoRecebiveis'+pc+'S">\
+									<input type="radio" name="QuitadoRecebiveis'+pc+'" id="radiogeraldinamico"\
+										onchange="carregaQuitado(this.value,this.name,'+pc+',1)" autocomplete="off" value="S">Sim\
+									</label>\
+								</div>\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label><br></label><br>\
+							<a href="#" id="'+pc+'" class="remove_field24 btn btn-danger">\
+								<span class="glyphicon glyphicon-trash"></span>\
+							</a>\
+						</div>\
+					</div>\
+				</div>\
+			</div>\
+		</div>'
+	); //add input box
+
+	//habilita o botão de calendário após a geração dos campos dinâmicos
+	$('.DatePicker').datetimepicker(dateTimePickerOptions);	
+}
+
 function adicionaParcelasPagaveis() {
 
 	var pc = $("#PRCount").val(); //initlal text box count
@@ -2436,6 +2756,7 @@ function adicionaParcelasPagaveisAlterar() {
 	$('.DatePicker').datetimepicker(dateTimePickerOptions);
 }
 
+
 $("#first-choice").change(function () {
 
     var $dropdown = $(this);
@@ -2544,6 +2865,8 @@ $(document).ready(function () {
 
     });
 
+
+
 	//adiciona campos dinamicamente Dos Produtos Devolvidos pelos CLIENTES
     var ps = $("#SCount").val(); //initlal text box count
 	$(".add_field_button").click(function(e){ //on add input button click
@@ -2625,119 +2948,6 @@ $(document).ready(function () {
 		//request the JSON data and parse into the select element
         $.ajax({
             url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=2',
-            dataType: 'JSON',
-            type: "GET",
-            success: function (data) {
-                //clear the current content of the select
-                $select.html('');
-                //iterate over the data and append a select option
-                $select.append('<option value="">-- Selecione uma opção --</option>');
-                $.each(data, function (key, val) {
-                    //alert(val.id);
-                    $select.append('<option value="' + val.id + '">' + val.name + '</option>');
-                })
-                $('.Chosen').chosen({
-                    disable_search_threshold: 10,
-                    multiple_text: "Selecione uma ou mais opções",
-                    single_text: "Selecione uma opção",
-                    no_results_text: "Nenhum resultado para",
-                    width: "100%"
-                });
-            },
-            error: function () {
-                //alert('erro listadinamicaB');
-                //if there is an error append a 'none available' option
-                $select.html('<option id="-1">ERRO</option>');
-            }
-
-        });
-		
-	});
-
-	//adiciona campos dinamicamente dos Produtos Devolvidos pelos CONSULTORES
-    var ps = $("#SCount").val(); //initlal text box count
-	$(".add_field_button10").click(function(e){ //on add input button click
-        e.preventDefault();
-    
-		ps++; //text box increment
-		$("#SCount").val(ps);
-		
-		$(".input_fields_wrap10").append('\
-			<div class="form-group" id="10div'+ps+'">\
-				<div class="panel panel-danger">\
-					<div class="panel-heading">\
-						<div class="row">\
-							<div class="col-md-1">\
-								<label for="QtdVendaServico">Qtd:</label><br>\
-								<div class="input-group">\
-									<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico'+ps+'" placeholder="0"\
-										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
-										name="QtdVendaServico'+ps+'" value="">\
-								</div>\
-							</div>\
-							<div class="col-md-3">\
-								<label for="idTab_Servico">Produto:</label><br>\
-								<select class="form-control Chosen" id="listadinamica'+ps+'" onchange="buscaValorDevTabelas(this.value,this.name,\'Valor\','+ps+',\'Produto\')" name="idTab_Servico'+ps+'">\
-									<option value="">-- Selecione uma opção --</option>\
-								</select>\
-							</div>\
-							<div class="col-md-3">\
-								<label for="ObsServico'+ps+'">Obs:</label><br>\
-								<input type="text" class="form-control" id="ObsServico'+ps+'" maxlength="250"\
-									   name="ObsServico'+ps+'" value="">\
-							</div>\
-							<div class="col-md-2">\
-								<label for="ValorVendaServico">Valor do Produto:</label><br>\
-								<div class="input-group">\
-									<span class="input-group-addon" id="basic-addon1">R$</span>\
-									<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
-										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'VP\',\'Servico\')"\
-										name="ValorVendaServico'+ps+'" value="">\
-								</div>\
-							</div>\
-							<div class="col-md-2">\
-								<label for="SubtotalServico">Subtotal:</label><br>\
-								<div class="input-group id="txtHint">\
-									<span class="input-group-addon" id="basic-addon1">R$</span>\
-									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalServico'+ps+'"\
-										   name="SubtotalServico'+ps+'" value="">\
-								</div>\
-							</div>\
-							<div class="col-md-1">\
-								<label><br></label><br>\
-								<a href="#" id="'+ps+'" class="remove_field10 btn btn-danger"\
-									onclick="calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
-									<span class="glyphicon glyphicon-trash"></span>\
-								</a>\
-							</div>\
-						</div>\
-						<div class="row">\
-							<div class="col-md-9"></div>\
-							<div class="col-md-2">\
-								<label for="DataValidadeServico'+ps+'">Validade:</label>\
-								<div class="input-group DatePicker">\
-									<span class="input-group-addon" disabled>\
-										<span class="glyphicon glyphicon-calendar"></span>\
-									</span>\
-									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
-										   name="DataValidadeServico'+ps+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
-								</div>\
-							</div>\
-						</div>\
-					</div>\
-				</div>\
-			</div>'
-		); //add input box
-
-		//habilita o botão de calendário após a geração dos campos dinâmicos
-		$('.DatePicker').datetimepicker(dateTimePickerOptions);
-		
-		//get a reference to the select element
-		$select = $('#listadinamica'+ps);
-
-		//request the JSON data and parse into the select element
-        $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=9',
             dataType: 'JSON',
             type: "GET",
             success: function (data) {
@@ -2865,7 +3075,7 @@ $(document).ready(function () {
 
     });
 
-    //adiciona campos dinamicamente dos Produtos Entregues aos CONSULTORES
+    //adiciona campos dinamicamente dos Produtos Vendidos 
     var pc = $("#PCount").val(); //initlal text box count
     $(".add_field_button9").click(function(e){ //on add input button click
         e.preventDefault();
@@ -2977,7 +3187,346 @@ $(document).ready(function () {
         });
 
     });
+
+	//adiciona campos dinamicamente dos Produtos Devolvidos (Vendidos)
+    var ps = $("#SCount").val(); //initlal text box count
+	$(".add_field_button10").click(function(e){ //on add input button click
+        e.preventDefault();
+    
+		ps++; //text box increment
+		$("#SCount").val(ps);
+		
+		$(".input_fields_wrap10").append('\
+			<div class="form-group" id="10div'+ps+'">\
+				<div class="panel panel-danger">\
+					<div class="panel-heading">\
+						<div class="row">\
+							<div class="col-md-1">\
+								<label for="QtdVendaServico">Qtd:</label><br>\
+								<div class="input-group">\
+									<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico'+ps+'" placeholder="0"\
+										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
+										name="QtdVendaServico'+ps+'" value="">\
+								</div>\
+							</div>\
+							<div class="col-md-3">\
+								<label for="idTab_Servico">Produto:</label><br>\
+								<select class="form-control Chosen" id="listadinamica'+ps+'" onchange="buscaValorDevTabelas(this.value,this.name,\'Valor\','+ps+',\'Produto\')" name="idTab_Servico'+ps+'">\
+									<option value="">-- Selecione uma opção --</option>\
+								</select>\
+							</div>\
+							<div class="col-md-3">\
+								<label for="ObsServico'+ps+'">Obs:</label><br>\
+								<input type="text" class="form-control" id="ObsServico'+ps+'" maxlength="250"\
+									   name="ObsServico'+ps+'" value="">\
+							</div>\
+							<div class="col-md-2">\
+								<label for="ValorVendaServico">Valor do Produto:</label><br>\
+								<div class="input-group">\
+									<span class="input-group-addon" id="basic-addon1">R$</span>\
+									<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
+										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'VP\',\'Servico\')"\
+										name="ValorVendaServico'+ps+'" value="">\
+								</div>\
+							</div>\
+							<div class="col-md-2">\
+								<label for="SubtotalServico">Subtotal:</label><br>\
+								<div class="input-group id="txtHint">\
+									<span class="input-group-addon" id="basic-addon1">R$</span>\
+									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalServico'+ps+'"\
+										   name="SubtotalServico'+ps+'" value="">\
+								</div>\
+							</div>\
+							<div class="col-md-1">\
+								<label><br></label><br>\
+								<a href="#" id="'+ps+'" class="remove_field10 btn btn-danger"\
+									onclick="calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
+									<span class="glyphicon glyphicon-trash"></span>\
+								</a>\
+							</div>\
+						</div>\
+						<div class="row">\
+							<div class="col-md-9"></div>\
+							<div class="col-md-2">\
+								<label for="DataValidadeServico'+ps+'">Validade:</label>\
+								<div class="input-group DatePicker">\
+									<span class="input-group-addon" disabled>\
+										<span class="glyphicon glyphicon-calendar"></span>\
+									</span>\
+									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
+										   name="DataValidadeServico'+ps+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
+								</div>\
+							</div>\
+						</div>\
+					</div>\
+				</div>\
+			</div>'
+		); //add input box
+
+		//habilita o botão de calendário após a geração dos campos dinâmicos
+		$('.DatePicker').datetimepicker(dateTimePickerOptions);
+		
+		//get a reference to the select element
+		$select = $('#listadinamica'+ps);
+
+		//request the JSON data and parse into the select element
+        $.ajax({
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=9',
+            dataType: 'JSON',
+            type: "GET",
+            success: function (data) {
+                //clear the current content of the select
+                $select.html('');
+                //iterate over the data and append a select option
+                $select.append('<option value="">-- Selecione uma opção --</option>');
+                $.each(data, function (key, val) {
+                    //alert(val.id);
+                    $select.append('<option value="' + val.id + '">' + val.name + '</option>');
+                })
+                $('.Chosen').chosen({
+                    disable_search_threshold: 10,
+                    multiple_text: "Selecione uma ou mais opções",
+                    single_text: "Selecione uma opção",
+                    no_results_text: "Nenhum resultado para",
+                    width: "100%"
+                });
+            },
+            error: function () {
+                //alert('erro listadinamicaB');
+                //if there is an error append a 'none available' option
+                $select.html('<option id="-1">ERRO</option>');
+            }
+
+        });
+		
+	});
 	
+    //adiciona campos dinamicamente dos Produtos Comprados 
+    var pc = $("#PCount").val(); //initlal text box count
+    $(".add_field_button11").click(function(e){ //on add input button click
+        e.preventDefault();
+
+        pc++; //text box increment
+        $("#PCount").val(pc);
+
+        $(".input_fields_wrap11").append('\
+            <div class="form-group" id="11div'+pc+'">\
+                <div class="panel panel-success">\
+                    <div class="panel-heading">\
+                        <div class="row">\
+                            <div class="col-md-1">\
+                                <label for="QtdVendaProduto">Qtd:</label><br>\
+                                <div class="input-group">\
+                                    <input type="text" class="form-control Numero" maxlength="3" id="QtdVendaProduto'+pc+'" placeholder="0"\
+                                        onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdVendaProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
+                                        name="QtdVendaProduto'+pc+'" value="">\
+                                </div>\
+                            </div>\
+                            <div class="col-md-3">\
+                                <label for="idTab_Produto">Produto:</label><br>\
+                                <select class="form-control Chosen" id="listadinamicab'+pc+'" onchange="buscaValor(this.value,this.name,\'Produto\','+pc+')" name="idTab_Produto'+pc+'">\
+                                    <option value="">-- Selecione uma opção --</option>\
+                                </select>\
+                            </div>\
+							<div class="col-md-3">\
+								<label for="ObsProduto'+pc+'">Obs:</label><br>\
+								<input type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
+									   name="ObsProduto'+pc+'" value="">\
+							</div>\
+                            <div class="col-md-2">\
+                                <label for="ValorVendaProduto">Valor do Produto:</label><br>\
+                                <div class="input-group id="txtHint">\
+                                    <span class="input-group-addon" id="basic-addon1">R$</span>\
+                                    <input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" \
+                                        onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'VP\',\'Produto\')"\
+                                        name="ValorVendaProduto'+pc+'" value="">\
+                                </div>\
+                            </div>\
+                            <div class="col-md-2">\
+                                <label for="SubtotalProduto">Subtotal:</label><br>\
+                                <div class="input-group id="txtHint">\
+                                    <span class="input-group-addon" id="basic-addon1">R$</span>\
+                                    <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto'+pc+'"\
+                                           name="SubtotalProduto'+pc+'" value="">\
+                                </div>\
+                            </div>\
+							<div class="col-md-1">\
+                                <label><br></label><br>\
+                                <a href="#" id="'+pc+'" class="remove_field11 btn btn-danger"\
+                                        onclick="calculaQtdSoma(\'QtdVendaProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
+                                    <span class="glyphicon glyphicon-trash"></span>\
+                                </a>\
+                            </div>\
+                        </div>\
+						<div class="row">\
+							<div class="col-md-9"></div>\
+							<div class="col-md-2">\
+								<label for="DataValidadeProduto'+pc+'">Validade:</label>\
+								<div class="input-group DatePicker">\
+									<span class="input-group-addon" disabled>\
+										<span class="glyphicon glyphicon-calendar"></span>\
+									</span>\
+									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
+										   name="DataValidadeProduto'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
+								</div>\
+							</div>\
+						</div>\
+                    </div>\
+                </div>\
+            </div>'
+        ); //add input box
+
+		//habilita o botão de calendário após a geração dos campos dinâmicos
+		$('.DatePicker').datetimepicker(dateTimePickerOptions);
+		
+		//get a reference to the select element
+        $select = $('#listadinamicab'+pc);
+
+        //request the JSON data and parse into the select element
+        $.ajax({
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=2',
+            dataType: 'JSON',
+            type: "GET",
+            success: function (data) {
+                //clear the current content of the select
+                $select.html('');
+                //iterate over the data and append a select option
+                $select.append('<option value="">-- Selecione uma opção --</option>');
+                $.each(data, function (key, val) {
+                    //alert(val.id);
+                    $select.append('<option value="' + val.id + '">' + val.name + '</option>');
+                })
+                $('.Chosen').chosen({
+                    disable_search_threshold: 10,
+                    multiple_text: "Selecione uma ou mais opções",
+                    single_text: "Selecione uma opção",
+                    no_results_text: "Nenhum resultado para",
+                    width: "100%"
+                });
+            },
+            error: function () {
+                //alert('erro listadinamicaB');
+                //if there is an error append a 'none available' option
+                $select.html('<option id="-1">ERRO</option>');
+            }
+
+        });
+
+    });
+
+	//adiciona campos dinamicamente dos Produtos Devolvidos (Comprados)
+    var ps = $("#SCount").val(); //initlal text box count
+	$(".add_field_button12").click(function(e){ //on add input button click
+        e.preventDefault();
+    
+		ps++; //text box increment
+		$("#SCount").val(ps);
+		
+		$(".input_fields_wrap12").append('\
+			<div class="form-group" id="12div'+ps+'">\
+				<div class="panel panel-danger">\
+					<div class="panel-heading">\
+						<div class="row">\
+							<div class="col-md-1">\
+								<label for="QtdVendaServico">Qtd:</label><br>\
+								<div class="input-group">\
+									<input type="text" class="form-control Numero" maxlength="3" id="QtdVendaServico'+ps+'" placeholder="0"\
+										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'QTD\',\'Produto\'),calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
+										name="QtdVendaServico'+ps+'" value="">\
+								</div>\
+							</div>\
+							<div class="col-md-3">\
+								<label for="idTab_Servico">Produto:</label><br>\
+								<select class="form-control Chosen" id="listadinamica'+ps+'" onchange="buscaValorDev(this.value,this.name,\'Produto\','+ps+')" name="idTab_Servico'+ps+'">\
+									<option value="">-- Selecione uma opção --</option>\
+								</select>\
+							</div>\
+							<div class="col-md-3">\
+								<label for="ObsServico'+ps+'">Obs:</label><br>\
+								<input type="text" class="form-control" id="ObsServico'+ps+'" maxlength="250"\
+									   name="ObsServico'+ps+'" value="">\
+							</div>\
+							<div class="col-md-2">\
+								<label for="ValorVendaServico">Valor do Produto:</label><br>\
+								<div class="input-group">\
+									<span class="input-group-addon" id="basic-addon1">R$</span>\
+									<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
+										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'VP\',\'Produto\')"\
+										name="ValorVendaServico'+ps+'" value="">\
+								</div>\
+							</div>\
+							<div class="col-md-2">\
+								<label for="SubtotalServico">Subtotal:</label><br>\
+								<div class="input-group id="txtHint">\
+									<span class="input-group-addon" id="basic-addon1">R$</span>\
+									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalServico'+ps+'"\
+										   name="SubtotalServico'+ps+'" value="">\
+								</div>\
+							</div>\
+							<div class="col-md-1">\
+								<label><br></label><br>\
+								<a href="#" id="'+ps+'" class="remove_field12 btn btn-danger"\
+									onclick="calculaQtdSomaDev(\'QtdVendaServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
+									<span class="glyphicon glyphicon-trash"></span>\
+								</a>\
+							</div>\
+						</div>\
+						<div class="row">\
+							<div class="col-md-9"></div>\
+							<div class="col-md-2">\
+								<label for="DataValidadeServico'+ps+'">Validade:</label>\
+								<div class="input-group DatePicker">\
+									<span class="input-group-addon" disabled>\
+										<span class="glyphicon glyphicon-calendar"></span>\
+									</span>\
+									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
+										   name="DataValidadeServico'+ps+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
+								</div>\
+							</div>\
+						</div>\
+					</div>\
+				</div>\
+			</div>'
+		); //add input box
+
+		//habilita o botão de calendário após a geração dos campos dinâmicos
+		$('.DatePicker').datetimepicker(dateTimePickerOptions);
+		
+		//get a reference to the select element
+		$select = $('#listadinamica'+ps);
+
+		//request the JSON data and parse into the select element
+        $.ajax({
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=2',
+            dataType: 'JSON',
+            type: "GET",
+            success: function (data) {
+                //clear the current content of the select
+                $select.html('');
+                //iterate over the data and append a select option
+                $select.append('<option value="">-- Selecione uma opção --</option>');
+                $.each(data, function (key, val) {
+                    //alert(val.id);
+                    $select.append('<option value="' + val.id + '">' + val.name + '</option>');
+                })
+                $('.Chosen').chosen({
+                    disable_search_threshold: 10,
+                    multiple_text: "Selecione uma ou mais opções",
+                    single_text: "Selecione uma opção",
+                    no_results_text: "Nenhum resultado para",
+                    width: "100%"
+                });
+            },
+            error: function () {
+                //alert('erro listadinamicaB');
+                //if there is an error append a 'none available' option
+                $select.html('<option id="-1">ERRO</option>');
+            }
+
+        });
+		
+	});
+		
     //adiciona campos dinamicamente
     var pc = $("#PCount").val(); //initlal text box count
     $(".add_field_button8").click(function(e){ //on add input button click
@@ -3195,8 +3744,8 @@ $(document).ready(function () {
                                 <label for="QtdCompraProduto">Qtd:</label><br>\
                                 <div class="input-group">\
                                     <input type="text" class="form-control Numero" maxlength="3" id="QtdCompraProduto'+pc+'" placeholder="0"\
-                                        onkeyup="calculaSubtotalCompra(this.value,this.name,'+pc+',\'QTD\',\'Produto\')"\
-                                        name="QtdCompraProduto'+pc+'" value="">\
+                                        onkeyup="calculaSubtotalCompra(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdCompraProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
+										name="QtdCompraProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
                             <div class="col-md-7">\
@@ -3242,8 +3791,9 @@ $(document).ready(function () {
 							</div>\
 							<div class="col-md-1">\
                                 <label><br></label><br>\
-                                <a href="#" id="'+pc+'" class="remove_field6 btn btn-danger">\
-                                    <span class="glyphicon glyphicon-trash"></span>\
+                                <a href="#" id="'+pc+'" class="remove_field6 btn btn-danger"\
+                                    onclick="calculaQtdSoma(\'QtdCompraProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
+									<span class="glyphicon glyphicon-trash"></span>\
                                 </a>\
                             </div>\
                         </div>\
@@ -3378,13 +3928,6 @@ $(document).ready(function () {
         //após remover o campo refaz o cálculo do orçamento e total restante
         calculaDevolucao();
     })
-
-    //Remove os campos adicionados dinamicamente
-    $(".input_fields_wrap10").on("click",".remove_field10", function(e){ //user click on remove text
-        $("#10div"+$(this).attr("id")).remove();
-        //após remover o campo refaz o cálculo do orçamento e total restante
-        calculaDevolucao();
-    })
 			
     //Remove os campos adicionados de Produtos No Orçamento do CLIENTE dinamicamente
     $(".input_fields_wrap2").on("click",".remove_field2", function(e){ //user click on remove text
@@ -3400,6 +3943,27 @@ $(document).ready(function () {
         calculaOrcamento();
     })	
 
+    //Remove os campos adicionados dinamicamente
+    $(".input_fields_wrap10").on("click",".remove_field10", function(e){ //user click on remove text
+        $("#10div"+$(this).attr("id")).remove();
+        //após remover o campo refaz o cálculo do orçamento e total restante
+        calculaDevolucao();
+    })
+
+    //Remove os campos adicionados de Produtos Comprados dinamicamente
+    $(".input_fields_wrap11").on("click",".remove_field11", function(e){ //user click on remove text
+        $("#11div"+$(this).attr("id")).remove();
+        //após remover o campo refaz o cálculo do orçamento e total restante
+        calculaOrcamento();
+    })	
+
+    //Remove os campos adicionados de Produtos Devolvidos (Comprados) dinamicamente
+    $(".input_fields_wrap12").on("click",".remove_field12", function(e){ //user click on remove text
+        $("#12div"+$(this).attr("id")).remove();
+        //após remover o campo refaz o cálculo do orçamento e total restante
+        calculaDevolucao();
+    })
+	
 	//Remove os campos adicionados dinamicamente
     $(".input_fields_wrap4").on("click",".remove_field4", function(e){ //user click on remove text
         $("#4div"+$(this).attr("id")).remove();
@@ -3442,17 +4006,21 @@ $(document).ready(function () {
     $(".input_fields_wrap21").on("click",".remove_field21", function(e){ //user click on remove text
         $("#21div"+$(this).attr("id")).remove();
     })
+
+    //Remove as PARCELAS RECEBÍVEIS ALTERAR dinamicamente
+    $(".input_fields_wrap24").on("click",".remove_field24", function(e){ //user click on remove text
+        $("#24div"+$(this).attr("id")).remove();
+    })
 	
     //Remove as PARCELAS PAGÁVEIS dinamicamente
     $(".input_fields_wrap22").on("click",".remove_field22", function(e){ //user click on remove text
         $("#22div"+$(this).attr("id")).remove();
     })	
 
-    //Remove as PARCELAS PAGÁVEIS dinamicamente
+    //Remove as PARCELAS PAGÁVEIS ALTERAR dinamicamente
     $(".input_fields_wrap23").on("click",".remove_field23", function(e){ //user click on remove text
         $("#23div"+$(this).attr("id")).remove();
-    })	
-	
+    })		
     /*
      * Função para capturar o valor escolhido no campo select (Serviço e Produto, por exemplo)
      */
@@ -3814,7 +4382,7 @@ $('#calendar').fullCalendar({
             url: 'Consulta_json.php', // use the `url` property
         }],
     //allDayDefault: true,
-    defaultView: 'agendaWeek',
+    defaultView: 'month',
     //contentHeight: 700,
     height: 'auto',
     //handleWindowResize: false,
@@ -3823,7 +4391,7 @@ $('#calendar').fullCalendar({
     firstDay: '0',
 	//minTime: '07:00',
     //maxTime: '21:00',
-    minTime: '06:00',
+    minTime: '00:00',
     maxTime: '24:00',
     nowIndicator: true,
     selectable: true,

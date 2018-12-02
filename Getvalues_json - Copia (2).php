@@ -19,8 +19,8 @@ if ($_GET['q']==1) {
     $result = mysql_query(
             'SELECT
                 TSV.idTab_Servico,
-                CONCAT(TSV.NomeServico, " --- R$ ", TSV.ValorServico) AS NomeServico,
-                TSV.ValorServico
+                CONCAT(TSV.NomeServico, " --- R$ ", TSV.ValorVendaServico) AS NomeServico,
+                TSV.ValorVendaServico
             FROM
                 Tab_Servico AS TSV
             WHERE
@@ -35,7 +35,7 @@ if ($_GET['q']==1) {
         $event_array[] = array(
             'id' => $row['idTab_Servico'],
             'name' => utf8_encode($row['NomeServico']),
-            'value' => $row['ValorServico'],
+            'value' => $row['ValorVendaServico'],
         );
     }
 
@@ -71,7 +71,7 @@ elseif ($_GET['q'] == 10) {
             SELECT
                 idTab_Produto,
                 CONCAT(IFNULL(CodProd,""), " - ", IFNULL(Produtos,""), " - ", IFNULL(UnidadeProduto,"")) AS NomeProduto,
-                ValorProduto
+                ValorVendaProduto
             FROM 
                 Tab_Produto 
             WHERE
@@ -83,7 +83,7 @@ elseif ($_GET['q'] == 10) {
         $event_array[] = array(
             'id' => $row['idTab_Produto'],
             'name' => utf8_encode($row['NomeProduto']),
-            'value' => $row['ValorProduto'],
+            'value' => $row['ValorVendaProduto'],
         );
     } 
     
@@ -97,7 +97,7 @@ elseif ($_GET['q'] == 23) {
 				CONCAT(IFNULL(TPV.CodProd,""), " - ", IFNULL(TPV.Produtos,""), " - ", IFNULL(TPV.UnidadeProduto,""), " - ",   
 						IFNULL(TP3.Prodaux3,""), " - ", IFNULL(TP1.Prodaux1,""), " - ", IFNULL(TP2.Prodaux2,""), " - ",  
 						IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
-				TPV.ValorProduto,
+				TPV.ValorVendaProduto,
 				TPV.Categoria
             FROM
                 Tab_Produto AS TPV
@@ -122,7 +122,7 @@ elseif ($_GET['q'] == 23) {
         $event_array[] = array(
             'id' => $row['idTab_Produto'],
             'name' => utf8_encode($row['NomeProduto']),
-            'value' => $row['ValorProduto'],
+            'value' => $row['ValorVendaProduto'],
         );
     }
 
@@ -133,10 +133,10 @@ elseif ($_GET['q'] == 9) {
     $result = mysql_query(
             'SELECT
                 V.idTab_Valor,
-                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - R$ ", V.ValorProduto, " -- ", 
+                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - R$ ", V.ValorVendaProduto, " -- ", 
 						IFNULL(V.Convdesc,""), " --- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", 
 						IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
-                V.ValorProduto,
+                V.ValorVendaProduto,
 				P.Categoria
             FROM
                 
@@ -168,7 +168,7 @@ elseif ($_GET['q'] == 9) {
             #'name' => utf8_encode($row['NomeProduto']),
             #'name' => $row['NomeProduto'],
             'name' => mb_convert_encoding($row['NomeProduto'], "UTF-8", "ISO-8859-1"),
-            'value' => $row['ValorProduto'],
+            'value' => $row['ValorVendaProduto'],
         );
     }
 

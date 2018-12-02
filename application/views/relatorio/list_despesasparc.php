@@ -62,12 +62,12 @@
 							echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarparceladesp/' . $row['idSis_Empresa'] . '">';
 								#echo '<td>' . $row['idSis_Empresa'] . '</td>';
 								echo '<td>' . $row['TipoDespesa'] . '</td>';
-								echo '<td>' . $row['ParcelaRecebiveis'] . '  ' . $row['QuitadoRecebiveis'] . '</td>';
-								echo '<td>' . $row['DataVencimentoRecebiveis'] . '</td>';
-								echo '<td class="text-left">' . $row['ValorParcelaRecebiveis'] . '</td>';
-								echo '<td>' . $row['DataPagoRecebiveis'] . '</td>';
-								echo '<td class="text-left">' . $row['ValorPagoRecebiveis'] . '</td>';
-								#echo '<td class="text-left">R$ ' . $row['ValorPagoRecebiveis'] . '</td>';
+								echo '<td>' . $row['Parcela'] . '  ' . $row['Quitado'] . '</td>';
+								echo '<td>' . $row['DataVencimento'] . '</td>';
+								echo '<td class="text-left">' . $row['ValorParcela'] . '</td>';
+								echo '<td>' . $row['DataPago'] . '</td>';
+								echo '<td class="text-left">' . $row['ValorPago'] . '</td>';
+								#echo '<td class="text-left">R$ ' . $row['ValorPago'] . '</td>';
 								#echo '<td>' . $row['DataOrca'] . '</td>';
 								#echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 								#echo '<td>' . $row['ServicoConcluido'] . '</td>';						

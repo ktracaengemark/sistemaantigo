@@ -56,7 +56,7 @@ class Produtos extends CI_Controller {
 			'CodProd',
 			'Fornecedor',
 			'ValorCompraProduto',
-			'ValorVendaProduto',
+			'ValorProduto',
             'Produtos',
 			'Prodaux1',
 			'Prodaux2',
@@ -75,11 +75,11 @@ class Produtos extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
-            if ($this->input->post('Convenio' . $i) || $this->input->post('Convdesc' . $i) || $this->input->post('ValorVendaProduto' . $i)) {
+            if ($this->input->post('Convenio' . $i) || $this->input->post('Convdesc' . $i) || $this->input->post('ValorProduto' . $i)) {
 
                 $data['valor'][$j]['Convenio'] = $this->input->post('Convenio' . $i);
 				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
-                $data['valor'][$j]['ValorVendaProduto'] = $this->input->post('ValorVendaProduto' . $i);
+                $data['valor'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 
                 $j++;
             }
@@ -152,7 +152,7 @@ class Produtos extends CI_Controller {
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
-			$data['produtos']['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorVendaProduto']));
+			$data['produtos']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProduto']));
             $data['produtos']['idTab_Produto'] = $this->Produtos_model->set_produtos($data['produtos']);
             /*
             echo count($data['servico']);
@@ -170,7 +170,7 @@ class Produtos extends CI_Controller {
                     $data['valor'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
                     $data['valor'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['valor'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-					$data['valor'][$j]['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor'][$j]['ValorVendaProduto']));
+					$data['valor'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor'][$j]['ValorProduto']));
                     $data['valor'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];					
 
                 }
@@ -244,11 +244,11 @@ class Produtos extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
-            if ($this->input->post('Convenio' . $i) || $this->input->post('Convdesc' . $i) || $this->input->post('ValorVendaProduto' . $i)) {
+            if ($this->input->post('Convenio' . $i) || $this->input->post('Convdesc' . $i) || $this->input->post('ValorProduto' . $i)) {
                 $data['valor'][$j]['idTab_Valor'] = $this->input->post('idTab_Valor' . $i);
                 $data['valor'][$j]['Convenio'] = $this->input->post('Convenio' . $i);
 				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
-                $data['valor'][$j]['ValorVendaProduto'] = $this->input->post('ValorVendaProduto' . $i);
+                $data['valor'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 
                 $j++;
             }
@@ -371,13 +371,13 @@ class Produtos extends CI_Controller {
                     $data['update']['valor']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['valor']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['valor']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
-					$data['update']['valor']['inserir'][$j]['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ValorVendaProduto']));
+					$data['update']['valor']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ValorProduto']));
 					
                 }
 
                 $max = count($data['update']['valor']['alterar']);
                 for($j=0;$j<$max;$j++) {
-					$data['update']['valor']['alterar'][$j]['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ValorVendaProduto']));
+					$data['update']['valor']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ValorProduto']));
                 }
 
                 if (count($data['update']['valor']['inserir']))

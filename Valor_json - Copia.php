@@ -16,34 +16,25 @@ if (!$db) {
 $result = mysql_query(
         'SELECT
             *
-        FROM
+        FROM 
             Tab_' . $_GET['tabela'] . ' AS T
         WHERE
-			T.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo']
-);
+            T.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '         
 
-if ($_GET['tabela']) {
+');
 
-    while ($row = mysql_fetch_assoc($result)) {
 
-        $event_array[] = array(
-            'id' => $row['idTab_' . $_GET['tabela']],
-            'valor' => str_replace(".", ",", $row['Valor' . $_GET['campo2']]),
-        );
-    }
 
-}
-else {
 
     while ($row = mysql_fetch_assoc($result)) {
 
         $event_array[] = array(
             'id' => $row['idTab_' . $_GET['tabela']],
-            'valor' => str_replace(".", ",", $row['Valor' . $_GET['tabela']]),
+            'valor' => str_replace(".", ",", $row['ValorCompraProduto']),
         );
     }
 
-}
+
 
 echo json_encode($event_array);
 mysql_close($link);

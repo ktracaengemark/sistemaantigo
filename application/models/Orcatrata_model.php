@@ -36,7 +36,7 @@ class Orcatrata_model extends CI_Model {
         //exit ();
         */
 
-        $query = $this->db->insert_batch('App_ServicoVenda', $data);
+        $query = $this->db->insert_batch('App_Servico', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -48,7 +48,7 @@ class Orcatrata_model extends CI_Model {
 
     public function set_produto_venda($data) {
 
-        $query = $this->db->insert_batch('App_ProdutoVenda', $data);
+        $query = $this->db->insert_batch('App_Produto', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -60,7 +60,7 @@ class Orcatrata_model extends CI_Model {
 
     public function set_parcelasrec($data) {
 
-        $query = $this->db->insert_batch('App_ParcelasRecebiveis', $data);
+        $query = $this->db->insert_batch('App_Parcelas', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -131,42 +131,42 @@ class Orcatrata_model extends CI_Model {
     }
 	
 	public function get_servico($data) {
-		$query = $this->db->query('SELECT * FROM App_ServicoVenda WHERE idApp_OrcaTrata = ' . $data);
+		$query = $this->db->query('SELECT * FROM App_Servico WHERE idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
 
         return $query;
     }
 
 	public function get_servicodesp($data) {
-		$query = $this->db->query('SELECT * FROM App_ServicoVenda WHERE idTab_TipoRD = "3" AND idApp_OrcaTrata = ' . $data);
+		$query = $this->db->query('SELECT * FROM App_Servico WHERE idTab_TipoRD = "3" AND idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
 
         return $query;
     }
 	
     public function get_produto($data) {
-		$query = $this->db->query('SELECT * FROM App_ProdutoVenda WHERE idApp_OrcaTrata = ' . $data);
+		$query = $this->db->query('SELECT * FROM App_Produto WHERE idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
 
         return $query;
     }
 
     public function get_produtodesp($data) {
-		$query = $this->db->query('SELECT * FROM App_ProdutoVenda WHERE idTab_TipoRD = "1" AND idApp_OrcaTrata = ' . $data);
+		$query = $this->db->query('SELECT * FROM App_Produto WHERE idTab_TipoRD = "1" AND idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
 
         return $query;
     }
 	
     public function get_parcelasrec($data) {
-		$query = $this->db->query('SELECT * FROM App_ParcelasRecebiveis WHERE idApp_OrcaTrata = ' . $data);
+		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
 
         return $query;
     }
 
     public function get_parcelasrecdesp($data) {
-		$query = $this->db->query('SELECT * FROM App_ParcelasRecebiveis WHERE idTab_TipoRD = "1" AND idApp_OrcaTrata = ' . $data);
+		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idTab_TipoRD = "1" AND idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
 
         return $query;
@@ -174,7 +174,7 @@ class Orcatrata_model extends CI_Model {
 	
     public function get_alterarparceladesp($data) {
 		
-		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimentoRecebiveis) = ' . $data['Mesvenc'] : FALSE;
+		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		
 		$query = $this->db->query('
@@ -187,15 +187,15 @@ class Orcatrata_model extends CI_Model {
 				E.NomeEmpresa,
 				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
 				PR.idSis_Usuario,
-				PR.idApp_ParcelasRecebiveis,
-				CONCAT(IFNULL(PR.ParcelaRecebiveis,""), "--", IFNULL(TD.TipoDespesa,""), "--", IFNULL(OT.Receitas,"")) AS ParcelaRecebiveis,
-				PR.ValorParcelaRecebiveis,
-				PR.DataVencimentoRecebiveis,
-				PR.ValorPagoRecebiveis,
-				PR.DataPagoRecebiveis,
-				PR.QuitadoRecebiveis
+				PR.idApp_Parcelas,
+				CONCAT(IFNULL(PR.Parcela,""), "--", IFNULL(TD.TipoDespesa,""), "--", IFNULL(OT.Receitas,"")) AS Parcela,
+				PR.ValorParcela,
+				PR.DataVencimento,
+				PR.ValorPago,
+				PR.DataPago,
+				PR.Quitado
 			FROM 
-				App_ParcelasRecebiveis AS PR
+				App_Parcelas AS PR
 					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = OT.TipoReceita
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
@@ -203,11 +203,11 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao . '
 				PR.idSis_Empresa = ' . $data . ' AND
 				PR.idTab_TipoRD = "1" AND
-				(MONTH(PR.DataVencimentoRecebiveis) = "11") AND
-				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
-				PR.QuitadoRecebiveis = "N"
+				(MONTH(PR.DataVencimento) = "11") AND
+				(YEAR(PR.DataVencimento) = "2018") AND
+				PR.Quitado = "N"
 			ORDER BY
-				PR.DataVencimentoRecebiveis  
+				PR.DataVencimento  
 		');
         $query = $query->result_array();
 
@@ -216,7 +216,7 @@ class Orcatrata_model extends CI_Model {
 
     public function get_alterarparcelarec($data) {
 		
-		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimentoRecebiveis) = ' . $data['Mesvenc'] : FALSE;
+		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		
 		$query = $this->db->query('
@@ -229,15 +229,15 @@ class Orcatrata_model extends CI_Model {
 				E.NomeEmpresa,
 				PR.idSis_Usuario,
 				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
-				PR.idApp_ParcelasRecebiveis,
-				CONCAT(IFNULL(PR.ParcelaRecebiveis,""), "--", IFNULL(TR.TipoReceita,""), "--", IFNULL(C.NomeCliente,""), "--", IFNULL(OT.Receitas,"")) AS ParcelaRecebiveis,
-				PR.ValorParcelaRecebiveis,
-				PR.DataVencimentoRecebiveis,
-				PR.ValorPagoRecebiveis,
-				PR.DataPagoRecebiveis,
-				PR.QuitadoRecebiveis
+				PR.idApp_Parcelas,
+				CONCAT(IFNULL(PR.Parcela,""), "--", IFNULL(TR.TipoReceita,""), "--", IFNULL(C.NomeCliente,""), "--", IFNULL(OT.Receitas,"")) AS Parcela,
+				PR.ValorParcela,
+				PR.DataVencimento,
+				PR.ValorPago,
+				PR.DataPago,
+				PR.Quitado
 			FROM 
-				App_ParcelasRecebiveis AS PR
+				App_Parcelas AS PR
 					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
@@ -246,11 +246,11 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao . '
 				PR.idSis_Empresa = ' . $data . ' AND
 				PR.idTab_TipoRD = "2" AND
-				(MONTH(PR.DataVencimentoRecebiveis) = "11") AND
-				(YEAR(PR.DataVencimentoRecebiveis) = "2018") AND
-				PR.QuitadoRecebiveis = "N"
+				(MONTH(PR.DataVencimento) = "11") AND
+				(YEAR(PR.DataVencimento) = "2018") AND
+				PR.Quitado = "N"
 			ORDER BY
-				PR.DataVencimentoRecebiveis  
+				PR.DataVencimento  
 		');
         $query = $query->result_array();
 
@@ -408,21 +408,21 @@ class Orcatrata_model extends CI_Model {
 		
     public function update_servico_venda($data) {
 
-        $query = $this->db->update_batch('App_ServicoVenda', $data, 'idApp_ServicoVenda');
+        $query = $this->db->update_batch('App_Servico', $data, 'idApp_Servico');
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }
 
     public function update_produto_venda($data) {
 
-        $query = $this->db->update_batch('App_ProdutoVenda', $data, 'idApp_ProdutoVenda');
+        $query = $this->db->update_batch('App_Produto', $data, 'idApp_Produto');
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }
 
     public function update_parcelasrec($data) {
 
-        $query = $this->db->update_batch('App_ParcelasRecebiveis', $data, 'idApp_ParcelasRecebiveis');
+        $query = $this->db->update_batch('App_Parcelas', $data, 'idApp_Parcelas');
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }
@@ -436,10 +436,10 @@ class Orcatrata_model extends CI_Model {
 
     public function delete_servico_venda($data) {
 
-        $this->db->where_in('idApp_ServicoVenda', $data);
-        $this->db->delete('App_ServicoVenda');
+        $this->db->where_in('idApp_Servico', $data);
+        $this->db->delete('App_Servico');
 
-        //$query = $this->db->delete('App_ServicoVenda', array('idApp_ServicoVenda' => $data));
+        //$query = $this->db->delete('App_Servico', array('idApp_Servico' => $data));
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -450,8 +450,8 @@ class Orcatrata_model extends CI_Model {
 
     public function delete_produto_venda($data) {
 
-        $this->db->where_in('idApp_ProdutoVenda', $data);
-        $this->db->delete('App_ProdutoVenda');
+        $this->db->where_in('idApp_Produto', $data);
+        $this->db->delete('App_Produto');
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -462,8 +462,8 @@ class Orcatrata_model extends CI_Model {
 
     public function delete_parcelasrec($data) {
 
-        $this->db->where_in('idApp_ParcelasRecebiveis', $data);
-        $this->db->delete('App_ParcelasRecebiveis');
+        $this->db->where_in('idApp_Parcelas', $data);
+        $this->db->delete('App_Parcelas');
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -487,14 +487,14 @@ class Orcatrata_model extends CI_Model {
     public function delete_orcatrata($id) {
 
         /*
-        $tables = array('App_ServicoVenda', 'App_ProdutoVenda', 'App_ParcelasRecebiveis', 'App_Procedimento', 'App_OrcaTrata');
+        $tables = array('App_Servico', 'App_Produto', 'App_Parcelas', 'App_Procedimento', 'App_OrcaTrata');
         $this->db->where('idApp_Orcatrata', $id);
         $this->db->delete($tables);
         */
 
-        $query = $this->db->delete('App_ServicoVenda', array('idApp_Orcatrata' => $id));
-        $query = $this->db->delete('App_ProdutoVenda', array('idApp_Orcatrata' => $id));
-        $query = $this->db->delete('App_ParcelasRecebiveis', array('idApp_Orcatrata' => $id));
+        $query = $this->db->delete('App_Servico', array('idApp_Orcatrata' => $id));
+        $query = $this->db->delete('App_Produto', array('idApp_Orcatrata' => $id));
+        $query = $this->db->delete('App_Parcelas', array('idApp_Orcatrata' => $id));
         $query = $this->db->delete('App_Procedimento', array('idApp_Orcatrata' => $id));
         $query = $this->db->delete('App_OrcaTrata', array('idApp_Orcatrata' => $id));
 

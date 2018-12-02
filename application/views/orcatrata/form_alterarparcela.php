@@ -32,12 +32,12 @@
 										<div class="modal-footer">
 											<div class="row">
 												<div class="col-md-3 text-left">
-													<label for="QuitadoRecebiveis">Parc. Quit.</label>
+													<label for="Quitado">Parc. Quit.</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-															id="QuitadoRecebiveis" name="QuitadoRecebiveis">
+															id="Quitado" name="Quitado">
 														<?php
-														foreach ($select['QuitadoRecebiveis'] as $key => $row) {
-															if ($query['QuitadoRecebiveis'] == $key) {
+														foreach ($select['Quitado'] as $key => $row) {
+															if ($query['Quitado'] == $key) {
 																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 															} else {
 																echo '<option value="' . $key . '">' . $row . '</option>';
@@ -135,7 +135,7 @@
 											?>
 
 												<?php if ($metodo > 1) { ?>
-												<input type="hidden" name="idApp_ParcelasRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_ParcelasRecebiveis']; ?>"/>
+												<input type="hidden" name="idApp_Parcelas<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_Parcelas']; ?>"/>
 												<?php } ?>
 
 												<div class="form-group" id="21div<?php echo $i ?>">
@@ -143,66 +143,66 @@
 														<div class="panel-heading">
 															<div class="row">
 																<div class="col-md-2">
-																	<label for="ParcelaRecebiveis">Parcela:</label><br>
+																	<label for="Parcela">Parcela:</label><br>
 																	<input type="text" class="form-control" maxlength="6" readonly=""
-																		   name="ParcelaRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ParcelaRecebiveis'] ?>">
+																		   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
 																</div>
 																<div class="col-md-2">
-																	<label for="ValorParcelaRecebiveis">Valor Parcela:</label><br>
+																	<label for="ValorParcela">Valor Parcela:</label><br>
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
-																		<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorParcelaRecebiveis<?php echo $i ?>"
-																			   name="ValorParcelaRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorParcelaRecebiveis'] ?>">
+																		<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorParcela<?php echo $i ?>"
+																			   name="ValorParcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorParcela'] ?>">
 																	</div>
 																</div>
 																<div class="col-md-2">
-																	<label for="DataVencimentoRecebiveis">Data Venc. Parc.</label>
+																	<label for="DataVencimento">Data Venc. Parc.</label>
 																	<div class="input-group DatePicker">
 																		<span class="input-group-addon" disabled>
 																			<span class="glyphicon glyphicon-calendar"></span>
 																		</span>
-																		<input type="text" class="form-control Date" id="DataVencimentoRecebiveis<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
-																			   name="DataVencimentoRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataVencimentoRecebiveis'] ?>">																
+																		<input type="text" class="form-control Date" id="DataVencimento<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																			   name="DataVencimento<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataVencimento'] ?>">																
 																	</div>
 																</div>
 																<div class="col-md-2">
-																	<label for="ValorPagoRecebiveis">Valor Pago:</label><br>
+																	<label for="ValorPago">Valor Pago:</label><br>
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
-																		<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorPagoRecebiveis<?php echo $i ?>"
-																			   name="ValorPagoRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorPagoRecebiveis'] ?>">
+																		<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorPago<?php echo $i ?>"
+																			   name="ValorPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorPago'] ?>">
 																	</div>
 																</div>
 																<div class="col-md-2">
-																	<label for="DataPagoRecebiveis">Data Pag.</label>
+																	<label for="DataPago">Data Pag.</label>
 																	<div class="input-group DatePicker">
 																		<span class="input-group-addon" disabled>
 																			<span class="glyphicon glyphicon-calendar"></span>
 																		</span>
-																		<input type="text" class="form-control Date" id="DataPagoRecebiveis<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
-																			   name="DataPagoRecebiveis<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataPagoRecebiveis'] ?>">																
+																		<input type="text" class="form-control Date" id="DataPago<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																			   name="DataPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataPago'] ?>">																
 																	</div>
 																</div>
 																<div class="col-md-2">
-																	<label for="QuitadoRecebiveis">Quitado????</label><br>
+																	<label for="Quitado">Quitado????</label><br>
 																	<div class="form-group">
 																		<div class="btn-group" data-toggle="buttons">
 																			<?php
-																			foreach ($select['QuitadoRecebiveis'] as $key => $row) {
-																				(!$parcelasrec[$i]['QuitadoRecebiveis']) ? $parcelasrec[$i]['QuitadoRecebiveis'] = 'N' : FALSE;
+																			foreach ($select['Quitado'] as $key => $row) {
+																				(!$parcelasrec[$i]['Quitado']) ? $parcelasrec[$i]['Quitado'] = 'N' : FALSE;
 
-																				if ($parcelasrec[$i]['QuitadoRecebiveis'] == $key) {
+																				if ($parcelasrec[$i]['Quitado'] == $key) {
 																					echo ''
-																					. '<label class="btn btn-warning active" name="radiobutton_QuitadoRecebiveis' . $i . '" id="radiobutton_QuitadoRecebiveis' . $i .  $key . '">'
-																					. '<input type="radio" name="QuitadoRecebiveis' . $i . '" id="radiobuttondinamico" '
+																					. '<label class="btn btn-warning active" name="radiobutton_Quitado' . $i . '" id="radiobutton_Quitado' . $i .  $key . '">'
+																					. '<input type="radio" name="Quitado' . $i . '" id="radiobuttondinamico" '
 																					. 'onchange="carregaQuitado(this.value,this.name,'.$i.')" '
 																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																					. '</label>'
 																					;
 																				} else {
 																					echo ''
-																					. '<label class="btn btn-default" name="radiobutton_QuitadoRecebiveis' . $i . '" id="radiobutton_QuitadoRecebiveis' . $i .  $key . '">'
-																					. '<input type="radio" name="QuitadoRecebiveis' . $i . '" id="radiobuttondinamico" '
+																					. '<label class="btn btn-default" name="radiobutton_Quitado' . $i . '" id="radiobutton_Quitado' . $i .  $key . '">'
+																					. '<input type="radio" name="Quitado' . $i . '" id="radiobuttondinamico" '
 																					. 'onchange="carregaQuitado(this.value,this.name,'.$i.')" '
 																					. 'autocomplete="off" value="' . $key . '" >' . $row
 																					. '</label>'
@@ -239,7 +239,7 @@
 													<div class="form-group">	
 														<div class="row">	
 															<div class="col-md-2 text-left">
-																<button class="btn btn-warning" type="button" data-toggle="collapse" onclick="adicionaParcelasRecebiveis()"
+																<button class="btn btn-warning" type="button" data-toggle="collapse" onclick="adicionaParcelas()"
 																		data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas">
 																	<span class="glyphicon glyphicon-plus"></span> Adicionar Parcelas
 																</button>

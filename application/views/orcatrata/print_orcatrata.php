@@ -35,8 +35,8 @@
 							<!--<th scope="col">Unidade</th>																				
 							<th scope="col">Aux1</th>
 							<th scope="col">Aux2</th>-->
-							<!--<th scope="col">Tipo Venda</th>
-							<th scope="col">Desc Venda</th>-->
+							<!--<th scope="col">Tipo </th>
+							<th scope="col">Desc </th>-->
 							<th class="col-md-1" scope="col"></th>							
 						</tr>
 					</thead>
@@ -45,21 +45,21 @@
 
 						<?php
 						for ($i=1; $i <= $count['PCount']; $i++) {
-							#echo $produto[$i]['QtdVendaProduto'];
+							#echo $produto[$i]['QtdProduto'];
 						?>
 
 						<tr>
 							<!--<td><?php echo $produto[$i]['idApp_OrcaTrata'] ?></td>-->
-							<td><?php echo $produto[$i]['QtdVendaProduto'] ?></td>														
+							<td><?php echo $produto[$i]['QtdProduto'] ?></td>														
 							<!--<td><?php echo $produto[$i]['CodProd'] ?></td>
 							<td><?php echo $produto[$i]['Prodaux3'] ?></td>-->					
 							<td><?php echo $produto[$i]['NomeProduto'] ?></td>							
-							<td><?php echo number_format($produto[$i]['ValorVendaProduto'], 2, ',', '.') ?></td>
+							<td><?php echo number_format($produto[$i]['ValorProduto'], 2, ',', '.') ?></td>
 							<td><?php echo $produto[$i]['SubtotalProduto'] ?></td>
 						</tr>						
 						<tr>
 							<td></td>
-							<td><?php echo $produto[$i]['idApp_ProdutoVenda'] ?></td>
+							<td><?php echo $produto[$i]['idApp_Produto'] ?></td>
 							<!--<td><?php echo $produto[$i]['UnidadeProduto'] ?></td>														
 							<td><?php echo $produto[$i]['Prodaux1'] ?></td>
 							<td><?php echo $produto[$i]['Prodaux2'] ?></td>-->
@@ -98,18 +98,18 @@
 
 						<?php
 						for ($i=1; $i <= $count['SCount']; $i++) {
-							#echo $produto[$i]['QtdVendaProduto'];
+							#echo $produto[$i]['QtdProduto'];
 						?>
 
 						<tr>
-							<td><?php echo $servico[$i]['QtdVendaServico'] ?></td>																			
+							<td><?php echo $servico[$i]['QtdServico'] ?></td>																			
 							<td><?php echo $servico[$i]['NomeServico'] ?></td>							
-							<td><?php echo number_format($servico[$i]['ValorVendaServico'], 2, ',', '.') ?></td>
+							<td><?php echo number_format($servico[$i]['ValorServico'], 2, ',', '.') ?></td>
 							<td><?php echo $servico[$i]['SubtotalServico'] ?></td>
 						</tr>						
 						<tr>
 							<td></td>
-							<td><?php echo $servico[$i]['idApp_ServicoVenda'] ?></td>
+							<td><?php echo $servico[$i]['idApp_Servico'] ?></td>
 							<td><?php echo $servico[$i]['DataValidadeServico'] ?></td>							
 						</tr>
 
@@ -178,16 +178,16 @@
 
 						<?php
 						for ($i=1; $i <= $orcatrata['QtdParcelasOrca']; $i++) {
-							#echo $produto[$i]['QtdVendaProduto'];
+							#echo $produto[$i]['QtdProduto'];
 						?>
 
 						<tr>
-							<td><?php echo $parcelasrec[$i]['ParcelaRecebiveis'] ?> Qt.<?php echo $this->basico->mascara_palavra_completa($parcelasrec[$i]['QuitadoRecebiveis'], 'NS') ?></td>
-							<td><?php echo $parcelasrec[$i]['DataVencimentoRecebiveis'] ?> R$<?php echo number_format($parcelasrec[$i]['ValorParcelaRecebiveis'], 2, ',', '.') ?></td>
-							<!--<td><?php echo $parcelasrec[$i]['DataVencimentoRecebiveis'] ?></td>-->
-							<td><?php echo $parcelasrec[$i]['DataPagoRecebiveis'] ?> R$<?php echo number_format($parcelasrec[$i]['ValorPagoRecebiveis'], 2, ',', '.') ?></td>
-							<!--<td><?php echo $parcelasrec[$i]['DataPagoRecebiveis'] ?></td>
-							<td><?php echo $this->basico->mascara_palavra_completa($parcelasrec[$i]['QuitadoRecebiveis'], 'NS') ?></td>-->
+							<td><?php echo $parcelasrec[$i]['Parcela'] ?> Qt.<?php echo $this->basico->mascara_palavra_completa($parcelasrec[$i]['Quitado'], 'NS') ?></td>
+							<td><?php echo $parcelasrec[$i]['DataVencimento'] ?> R$<?php echo number_format($parcelasrec[$i]['ValorParcela'], 2, ',', '.') ?></td>
+							<!--<td><?php echo $parcelasrec[$i]['DataVencimento'] ?></td>-->
+							<td><?php echo $parcelasrec[$i]['DataPago'] ?> R$<?php echo number_format($parcelasrec[$i]['ValorPago'], 2, ',', '.') ?></td>
+							<!--<td><?php echo $parcelasrec[$i]['DataPago'] ?></td>
+							<td><?php echo $this->basico->mascara_palavra_completa($parcelasrec[$i]['Quitado'], 'NS') ?></td>-->
 						</tr>
 
 						<?php

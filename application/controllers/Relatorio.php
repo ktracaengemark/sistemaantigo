@@ -98,8 +98,8 @@ class Relatorio extends CI_Controller {
             'OT.DataQuitado' => 'Data de Quitado',
 			'OT.DataRetorno' => 'Data de Retorno',
 			'OT.ProfissionalOrca' => 'Profissional',
-			'PR.DataVencimentoRecebiveis' => 'Data do Venc.',
-			'PR.DataPagoRecebiveis' => 'Data do Pagam.',
+			'PR.DataVencimento' => 'Data do Venc.',
+			'PR.DataPago' => 'Data do Pagam.',
 
         );
 
@@ -113,7 +113,7 @@ class Relatorio extends CI_Controller {
 		/*
         $data['select']['Pesquisa'] = array(
             'DataEntradaOrca' => 'Data de Entrada',
-            'DataVencimentoRecebiveis' => 'Data de Vencimento da Parcela',
+            'DataVencimento' => 'Data de Vencimento da Parcela',
         );
         */
 
@@ -181,7 +181,7 @@ class Relatorio extends CI_Controller {
             'AprovadoOrca',
             'QuitadoOrca',
 			'ServicoConcluido',
-			'QuitadoRecebiveis',
+			'Quitado',
 			'Modalidade',
         ), TRUE));
 
@@ -237,7 +237,7 @@ class Relatorio extends CI_Controller {
             'S' => 'Sim',
         );
 
-		$data['select']['QuitadoRecebiveis'] = array(
+		$data['select']['Quitado'] = array(
             '#' => 'TODOS',
 			'N' => 'Não',
             'S' => 'Sim',
@@ -250,8 +250,8 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['Campo'] = array(
-            'PR.DataVencimentoRecebiveis' => 'Data do Venc.',
-			'PR.QuitadoRecebiveis' => 'Quit.Parc.',
+            'PR.DataVencimento' => 'Data do Venc.',
+			'PR.Quitado' => 'Quit.Parc.',
 			'OT.Modalidade' => 'Modalidade',
             'OT.idApp_OrcaTrata' => 'Número da Receita',
             'OT.ValorOrca' => 'Valor da Receita',
@@ -274,7 +274,7 @@ class Relatorio extends CI_Controller {
 		/*
         $data['select']['Pesquisa'] = array(
             'DataEntradaOrca' => 'Data de Entrada',
-            'DataVencimentoRecebiveis' => 'Data de Vencimento da Parcela',
+            'DataVencimento' => 'Data de Vencimento da Parcela',
         );
         */
 
@@ -303,7 +303,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
             $data['bd']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
 			$data['bd']['ServicoConcluido'] = $data['query']['ServicoConcluido'];
-			$data['bd']['QuitadoRecebiveis'] = $data['query']['QuitadoRecebiveis'];
+			$data['bd']['Quitado'] = $data['query']['Quitado'];
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
             $data['report'] = $this->Relatorio_model->list_receitas($data['bd'],TRUE);
 
@@ -352,7 +352,7 @@ class Relatorio extends CI_Controller {
             'AprovadoOrca',
             'QuitadoOrca',
 			'ServicoConcluido',
-			'QuitadoRecebiveis',
+			'Quitado',
 			'Modalidade',
         ), TRUE));
 
@@ -408,7 +408,7 @@ class Relatorio extends CI_Controller {
             'S' => 'Sim',
         );
 
-		$data['select']['QuitadoRecebiveis'] = array(
+		$data['select']['Quitado'] = array(
             '#' => 'TODOS',
 			'N' => 'Não',
             'S' => 'Sim',
@@ -421,8 +421,8 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['Campo'] = array(
-            'PR.DataVencimentoRecebiveis' => 'Data do Venc.',
-			'PR.QuitadoRecebiveis' => 'Quit.Parc.',
+            'PR.DataVencimento' => 'Data do Venc.',
+			'PR.Quitado' => 'Quit.Parc.',
 			'OT.Modalidade' => 'Modalidade',
             'OT.idApp_OrcaTrata' => 'Número da Receita',
             'OT.ValorOrca' => 'Valor da Receita',
@@ -445,7 +445,7 @@ class Relatorio extends CI_Controller {
 		/*
         $data['select']['Pesquisa'] = array(
             'DataEntradaOrca' => 'Data de Entrada',
-            'DataVencimentoRecebiveis' => 'Data de Vencimento da Parcela',
+            'DataVencimento' => 'Data de Vencimento da Parcela',
         );
         */
 
@@ -474,7 +474,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
             $data['bd']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
 			$data['bd']['ServicoConcluido'] = $data['query']['ServicoConcluido'];
-			$data['bd']['QuitadoRecebiveis'] = $data['query']['QuitadoRecebiveis'];
+			$data['bd']['Quitado'] = $data['query']['Quitado'];
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
             
 			$data['report'] = $this->Relatorio_model->list_despesas($data['bd'],TRUE);
@@ -524,7 +524,7 @@ class Relatorio extends CI_Controller {
             'AprovadoOrca',
             'QuitadoOrca',
 			'ServicoConcluido',
-			'QuitadoRecebiveis',
+			'Quitado',
 			'Modalidade',
         ), TRUE));
 
@@ -580,7 +580,7 @@ class Relatorio extends CI_Controller {
             'S' => 'Sim',
         );
 
-		$data['select']['QuitadoRecebiveis'] = array(
+		$data['select']['Quitado'] = array(
             '#' => 'TODOS',
 			'N' => 'Não',
             'S' => 'Sim',
@@ -593,8 +593,8 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['Campo'] = array(
-            'PR.DataVencimentoRecebiveis' => 'Data do Venc.',
-			'PR.QuitadoRecebiveis' => 'Quit.Parc.',
+            'PR.DataVencimento' => 'Data do Venc.',
+			'PR.Quitado' => 'Quit.Parc.',
 			'OT.Modalidade' => 'Modalidade',
             'OT.idApp_OrcaTrata' => 'Número da Receita',
             'OT.ValorOrca' => 'Valor da Receita',
@@ -617,7 +617,7 @@ class Relatorio extends CI_Controller {
 		/*
         $data['select']['Pesquisa'] = array(
             'DataEntradaOrca' => 'Data de Entrada',
-            'DataVencimentoRecebiveis' => 'Data de Vencimento da Parcela',
+            'DataVencimento' => 'Data de Vencimento da Parcela',
         );
         */
 
@@ -646,7 +646,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
             $data['bd']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
 			$data['bd']['ServicoConcluido'] = $data['query']['ServicoConcluido'];
-			$data['bd']['QuitadoRecebiveis'] = $data['query']['QuitadoRecebiveis'];
+			$data['bd']['Quitado'] = $data['query']['Quitado'];
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
             
 			$data['report'] = $this->Relatorio_model->list_despesasparc($data['bd'],TRUE);
@@ -696,7 +696,7 @@ class Relatorio extends CI_Controller {
             'AprovadoOrca',
             'QuitadoOrca',
 			'ServicoConcluido',
-			'QuitadoRecebiveis',
+			'Quitado',
 			'Modalidade',
         ), TRUE));
 
@@ -752,7 +752,7 @@ class Relatorio extends CI_Controller {
             'S' => 'Sim',
         );
 
-		$data['select']['QuitadoRecebiveis'] = array(
+		$data['select']['Quitado'] = array(
             '#' => 'TODOS',
 			'N' => 'Não',
             'S' => 'Sim',
@@ -765,8 +765,8 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['Campo'] = array(
-            'PR.DataVencimentoRecebiveis' => 'Data do Venc.',
-			'PR.QuitadoRecebiveis' => 'Quit.Parc.',
+            'PR.DataVencimento' => 'Data do Venc.',
+			'PR.Quitado' => 'Quit.Parc.',
 			'OT.Modalidade' => 'Modalidade',
             'OT.idApp_OrcaTrata' => 'Número da Receita',
             'OT.ValorOrca' => 'Valor da Receita',
@@ -789,7 +789,7 @@ class Relatorio extends CI_Controller {
 		/*
         $data['select']['Pesquisa'] = array(
             'DataEntradaOrca' => 'Data de Entrada',
-            'DataVencimentoRecebiveis' => 'Data de Vencimento da Parcela',
+            'DataVencimento' => 'Data de Vencimento da Parcela',
         );
         */
 
@@ -818,7 +818,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
             $data['bd']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
 			$data['bd']['ServicoConcluido'] = $data['query']['ServicoConcluido'];
-			$data['bd']['QuitadoRecebiveis'] = $data['query']['QuitadoRecebiveis'];
+			$data['bd']['Quitado'] = $data['query']['Quitado'];
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
             
 			$data['report'] = $this->Relatorio_model->list_receitasparc($data['bd'],TRUE);
@@ -867,7 +867,7 @@ class Relatorio extends CI_Controller {
             'AprovadoOrca',
             'QuitadoOrca',
 			'ServicoConcluido',
-			'QuitadoRecebiveis',
+			'Quitado',
 			'Modalidade',
         ), TRUE));
 /*
@@ -923,7 +923,7 @@ class Relatorio extends CI_Controller {
             'S' => 'Sim',
         );
 
-		$data['select']['QuitadoRecebiveis'] = array(
+		$data['select']['Quitado'] = array(
             '#' => 'TODOS',
 			'N' => 'Não',
             'S' => 'Sim',
@@ -936,9 +936,9 @@ class Relatorio extends CI_Controller {
         );
 		
         $data['select']['Campo'] = array(
-            'PR.DataVencimentoRecebiveis' => 'Data do Venc.',
-			'PR.DataPagoRecebiveis' => 'Data do Pagam.',
-			'PR.QuitadoRecebiveis' => 'Quit.Parc.',
+            'PR.DataVencimento' => 'Data do Venc.',
+			'PR.DataPago' => 'Data do Pagam.',
+			'PR.Quitado' => 'Quit.Parc.',
 			'C.NomeCliente' => 'Nome do Cliente',
 			'A.NomeEmpresa' => 'Nome da idSis_Empresa',
 			'TR.TipoReceita' => 'Tipo de Receita',
@@ -966,7 +966,7 @@ class Relatorio extends CI_Controller {
 		/*
         $data['select']['Pesquisa'] = array(
             'DataEntradaOrca' => 'Data de Entrada',
-            'DataVencimentoRecebiveis' => 'Data de Vencimento da Parcela',
+            'DataVencimento' => 'Data de Vencimento da Parcela',
         );
         */
 
@@ -994,7 +994,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
             $data['bd']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
 			$data['bd']['ServicoConcluido'] = $data['query']['ServicoConcluido'];
-			$data['bd']['QuitadoRecebiveis'] = $data['query']['QuitadoRecebiveis'];
+			$data['bd']['Quitado'] = $data['query']['Quitado'];
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
             $data['report'] = $this->Relatorio_model->list_receitas($data['bd'],TRUE);
 
@@ -1037,7 +1037,7 @@ class Relatorio extends CI_Controller {
             'AprovadoOrca',
             'QuitadoOrca',
 			'ServicoConcluido',
-			'QuitadoRecebiveis',
+			'Quitado',
         ), TRUE));
 
 		/*
@@ -1079,16 +1079,16 @@ class Relatorio extends CI_Controller {
             'S' => 'Sim',
         );
 
-		$data['select']['QuitadoRecebiveis'] = array(
+		$data['select']['Quitado'] = array(
             '#' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
         );
 
         $data['select']['Campo'] = array(
-            'PR.DataVencimentoRecebiveis' => 'Data do Venc.',
-			'PR.DataPagoRecebiveis' => 'Data do Pagam.',
-			'PR.QuitadoRecebiveis' => 'Quit.Parc.',
+            'PR.DataVencimento' => 'Data do Venc.',
+			'PR.DataPago' => 'Data do Pagam.',
+			'PR.Quitado' => 'Quit.Parc.',
 			'C.NomeCliente' => 'Nome do Cliente',
             'OT.idApp_OrcaTrata' => 'Número do Orçamento',
             'OT.AprovadoOrca' => 'Orçamento Aprovado?',
@@ -1114,7 +1114,7 @@ class Relatorio extends CI_Controller {
 		/*
         $data['select']['Pesquisa'] = array(
             'DataEntradaOrca' => 'Data de Entrada',
-            'DataVencimentoRecebiveis' => 'Data de Vencimento da Parcela',
+            'DataVencimento' => 'Data de Vencimento da Parcela',
         );
         */
 
@@ -1137,7 +1137,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
             $data['bd']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
 			$data['bd']['ServicoConcluido'] = $data['query']['ServicoConcluido'];
-			$data['bd']['QuitadoRecebiveis'] = $data['query']['QuitadoRecebiveis'];
+			$data['bd']['Quitado'] = $data['query']['Quitado'];
 
             $data['report'] = $this->Relatorio_model->list_receitas($data['bd'],TRUE);
 
@@ -2372,7 +2372,7 @@ class Relatorio extends CI_Controller {
 			'OT.AprovadoDespesas' => 'Apr./Fech.',
 			'OT.CodProd' => 'Cd. Prod.',
 			'OT.TipoDevolucao' => 'Tipo de Devol.',
-			'TPV.QtdVendaProduto' => 'Qtd. do Produto',
+			'TPV.QtdProduto' => 'Qtd. do Produto',
 			'TPV.Produtos' => 'Produto',
 			'TPV.Prodaux1' => 'Aux1',
 			'TPV.Prodaux2' => 'Aux2',
@@ -4112,7 +4112,7 @@ class Relatorio extends CI_Controller {
 			'OT.ServicoConcluido' => 'Serviço Concluído?',
             'OT.DataConclusao' => 'Data de Conclusão',
             #'OT.DataRetorno' => 'Renovação',
-			#'PD.QtdVendaProduto' => 'Qtd. do Produto',
+			#'PD.QtdProduto' => 'Qtd. do Produto',
 			'PD.idTab_Produto' => 'Produto',
 			'PC.DataProcedimento' => 'Data do Procedimento',
 			'PC.Profissional' => 'Profissional',
@@ -4321,7 +4321,7 @@ class Relatorio extends CI_Controller {
 			'C.NomeCliente' => 'Nome do Cliente',
 			'OT.idApp_OrcaTrata' => 'Número do Orçamento',
 			'OT.AprovadoOrca' => 'Aprovado?',
-			'PD.QtdVendaProduto' => 'Qtd. do Produto',
+			'PD.QtdProduto' => 'Qtd. do Produto',
 			'PD.idTab_Produto' => 'Produto',
 			'PC.Procedimento' => 'Procedimento',
 			'PC.ConcluidoProcedimento' => 'Proc. Concl.?',
@@ -4425,7 +4425,7 @@ class Relatorio extends CI_Controller {
 			'OT.ServicoConcluido' => 'Serviço Concluído?',
             'OT.DataConclusao' => 'Data de Conclusão',
             #'OT.DataRetorno' => 'Renovação',
-			#'PD.QtdVendaProduto' => 'Qtd. do Produto',
+			#'PD.QtdProduto' => 'Qtd. do Produto',
 			#'PD.idTab_Produto' => 'Produto',
 			'SV.idTab_Servico' => 'Servico',
 			'PC.DataProcedimento' => 'Data do Procedimento',

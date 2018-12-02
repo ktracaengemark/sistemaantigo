@@ -801,7 +801,7 @@ class Basico_model extends CI_Model {
             $array = $this->db->query(
                 'SELECT
 				P.idTab_Produto,
-				CONCAT(CO.Abrev, " --- ", PB.ProdutoBase, " --- ", PB.UnidadeProdutoBase, " --- ", EM.NomeEmpresa, " ---R$", P.ValorVendaProduto) AS ProdutoBase
+				CONCAT(CO.Abrev, " --- ", PB.ProdutoBase, " --- ", PB.UnidadeProdutoBase, " --- ", EM.NomeEmpresa, " ---R$", P.ValorProduto) AS ProdutoBase
             FROM
                 Tab_Produto AS P
 				LEFT JOIN Tab_ProdutoBase AS PB ON PB.idTab_ProdutoBase = P.ProdutoBase
@@ -816,7 +816,7 @@ class Basico_model extends CI_Model {
             $query = $this->db->query(
                 'SELECT
 				P.idTab_Produto,
-				CONCAT(CO.Abrev, " --- ", PB.ProdutoBase, " --- ", PB.UnidadeProdutoBase, " --- ", EM.NomeEmpresa, " ---R$", P.ValorVendaProduto) AS ProdutoBase
+				CONCAT(CO.Abrev, " --- ", PB.ProdutoBase, " --- ", PB.UnidadeProdutoBase, " --- ", EM.NomeEmpresa, " ---R$", P.ValorProduto) AS ProdutoBase
             FROM
                 Tab_Produto AS P
 				LEFT JOIN Tab_ProdutoBase AS PB ON PB.idTab_ProdutoBase = P.ProdutoBase
@@ -843,8 +843,8 @@ class Basico_model extends CI_Model {
             $array = $this->db->query(
                 'SELECT
                 TPV.idTab_Produto,
-				CONCAT(TPV.NomeProduto, " --- ", TPV.UnidadeProduto, " --- R$ ", TPV.ValorVendaProduto) AS NomeProduto,
-				TPV.ValorVendaProduto
+				CONCAT(TPV.NomeProduto, " --- ", TPV.UnidadeProduto, " --- R$ ", TPV.ValorProduto) AS NomeProduto,
+				TPV.ValorProduto
             FROM
                 Tab_Produto AS TPV
             WHERE
@@ -858,8 +858,8 @@ class Basico_model extends CI_Model {
             $query = $this->db->query(
                 'SELECT
                 TPV.idTab_Produto,
-				CONCAT(TPV.NomeProduto, " --- ", TPV.UnidadeProduto, " --- R$ ", TPV.ValorVendaProduto) AS NomeProduto,
-				TPV.ValorVendaProduto
+				CONCAT(TPV.NomeProduto, " --- ", TPV.UnidadeProduto, " --- R$ ", TPV.ValorProduto) AS NomeProduto,
+				TPV.ValorProduto
             FROM
                 Tab_Produto AS TPV
             WHERE
@@ -885,8 +885,8 @@ class Basico_model extends CI_Model {
             $array = $this->db->query(
             'SELECT
                 V.idTab_Valor,
-                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - R$ ", V.ValorVendaProduto, " -- ", IFNULL(V.Convdesc,""), " --- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
-                V.ValorVendaProduto,
+                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - R$ ", V.ValorProduto, " -- ", IFNULL(V.Convdesc,""), " --- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
+                V.ValorProduto,
 				P.Categoria
             FROM
                 Tab_Valor AS V
@@ -913,8 +913,8 @@ class Basico_model extends CI_Model {
             $query = $this->db->query(
             'SELECT
                 V.idTab_Valor,
-                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - R$ ", V.ValorVendaProduto, " -- ", IFNULL(V.Convdesc,""), " --- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
-                V.ValorVendaProduto,
+                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - R$ ", V.ValorProduto, " -- ", IFNULL(V.Convdesc,""), " --- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
+                V.ValorProduto,
 				P.Categoria
             FROM
                 Tab_Valor AS V
@@ -953,8 +953,8 @@ class Basico_model extends CI_Model {
             $array = $this->db->query('
             SELECT
                 TSV.idTab_Servico,
-                CONCAT(TCO.Abrev, " --- ", TSB.ServicoBase, " --- R$ ", TSV.ValorVendaServico) AS ServicoBase,
-                TSV.ValorVendaServico
+                CONCAT(TCO.Abrev, " --- ", TSB.ServicoBase, " --- R$ ", TSV.ValorServico) AS ServicoBase,
+                TSV.ValorServico
             FROM
                 Tab_Servico AS TSV
 				LEFT JOIN Tab_Convenio AS TCO ON TCO.idTab_Convenio = TSV.Convenio
@@ -970,8 +970,8 @@ class Basico_model extends CI_Model {
             $query = $this->db->query('
             SELECT
                 TSV.idTab_Servico,
-                CONCAT(TCO.Abrev, " --- ", TSB.ServicoBase, " --- R$ ", TSV.ValorVendaServico) AS ServicoBase,
-                TSV.ValorVendaServico
+                CONCAT(TCO.Abrev, " --- ", TSB.ServicoBase, " --- R$ ", TSV.ValorServico) AS ServicoBase,
+                TSV.ValorServico
             FROM
                 Tab_Servico AS TSV
 				LEFT JOIN Tab_Convenio AS TCO ON TCO.idTab_Convenio = TSV.Convenio
@@ -999,8 +999,8 @@ class Basico_model extends CI_Model {
             $array = $this->db->query(
                 'SELECT
                 TSV.idTab_Servico,
-                CONCAT(TSV.NomeServico, " --- R$ ", TSV.ValorVendaServico) AS NomeServico,
-                TSV.ValorVendaServico
+                CONCAT(TSV.NomeServico, " --- R$ ", TSV.ValorServico) AS NomeServico,
+                TSV.ValorServico
             FROM
                 Tab_Servico AS TSV
             WHERE
@@ -1014,8 +1014,8 @@ class Basico_model extends CI_Model {
             $query = $this->db->query(
                 'SELECT
                 TSV.idTab_Servico,
-                CONCAT(TSV.NomeServico, " --- R$ ", TSV.ValorVendaServico) AS NomeServico,
-                TSV.ValorVendaServico
+                CONCAT(TSV.NomeServico, " --- R$ ", TSV.ValorServico) AS NomeServico,
+                TSV.ValorServico
             FROM
                 Tab_Servico AS TSV
             WHERE
@@ -1042,7 +1042,7 @@ class Basico_model extends CI_Model {
                 'SELECT '
                     . 'idTab_Servico, '
                     . 'NomeServico, '
-                    . 'ValorVendaServico, '
+                    . 'ValorServico, '
 					. 'ValorCompraServico '
                     . 'FROM '
                     . 'Tab_Servico '
@@ -1050,7 +1050,7 @@ class Basico_model extends CI_Model {
                     . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
                     . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] );
         } else {
-            $query = $this->db->query('SELECT idTab_Servico, NomeServico, ValorVendaServico, ValorCompraServico  FROM Tab_Servico WHERE idSis_Usuario = ' . $_SESSION['log']['id']);
+            $query = $this->db->query('SELECT idTab_Servico, NomeServico, ValorServico, ValorCompraServico  FROM Tab_Servico WHERE idSis_Usuario = ' . $_SESSION['log']['id']);
 
             $array = array();
             foreach ($query->result() as $row) {
@@ -1627,8 +1627,8 @@ class Basico_model extends CI_Model {
             $array = $this->db->query(
             'SELECT
                 V.idTab_Valor,
-                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - ", IFNULL(V.Convdesc,""), " - R$ ", IFNULL(V.ValorVendaProduto,"")) AS NomeProduto,
-                V.ValorVendaProduto,
+                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - ", IFNULL(V.Convdesc,""), " - R$ ", IFNULL(V.ValorProduto,"")) AS NomeProduto,
+                V.ValorProduto,
 				P.Categoria
             FROM
                 
@@ -1659,8 +1659,8 @@ class Basico_model extends CI_Model {
             $query = $this->db->query(
             'SELECT
                 V.idTab_Valor,
-                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - ", IFNULL(V.Convdesc,""), " - R$ ", IFNULL(V.ValorVendaProduto,"")) AS NomeProduto,
-                V.ValorVendaProduto,
+                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - ", IFNULL(V.Convdesc,""), " - R$ ", IFNULL(V.ValorProduto,"")) AS NomeProduto,
+                V.ValorProduto,
 				P.Categoria
             FROM
                 

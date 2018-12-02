@@ -70,12 +70,12 @@
 								<div class="modal-footer">
 									<div class="row">
 										<div class="col-md-3 text-left">
-											<label for="QuitadoRecebiveis">Parc. Quit.</label>
+											<label for="Quitado">Parc. Quit.</label>
 											<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-													id="QuitadoRecebiveis" name="QuitadoRecebiveis">
+													id="Quitado" name="Quitado">
 												<?php
-												foreach ($select['QuitadoRecebiveis'] as $key => $row) {
-													if ($query['QuitadoRecebiveis'] == $key) {
+												foreach ($select['Quitado'] as $key => $row) {
+													if ($query['Quitado'] == $key) {
 														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 													} else {
 														echo '<option value="' . $key . '">' . $row . '</option>';

@@ -32,7 +32,7 @@
 								#echo '<td>' . $row['idTab_Produto'] . '</td>';
 								echo '<td>' . $row['CodProd'] . '</td>';
 								echo '<td>' . $row['Produtos'] . '</td>';
-								echo '<td>' . $row['ValorVendaProduto'] . '</td>';	
+								echo '<td>' . $row['ValorProduto'] . '</td>';	
 							echo '</tr>';
 						}
 						?>
@@ -75,7 +75,7 @@
 								#echo '<td>' . $row['idTab_Produto'] . '</td>';
 								echo '<td>' . $row['CodProd'] . '</td>';
 								echo '<td>' . $row['Produtos'] . '</td>';
-								echo '<td>' . $row['ValorVendaProduto'] . '</td>';	
+								echo '<td>' . $row['ValorProduto'] . '</td>';	
 							
 								echo '<td>' . $row['TipoProduto'] . '</td>';													
 								echo '<td>' . $row['Categoria'] . '</td>'; 							

@@ -29,7 +29,7 @@
 								<div class="row">
 									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 									<div class="col-md-2">
-										<label for="TipoProduto">Venda/Cons:</label>
+										<label for="TipoProduto">/Cons:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 												id="TipoProduto" name="TipoProduto">
 											<option value="">-- Selecione uma opção --</option>
@@ -153,11 +153,11 @@
 									</div>
 
 									<div class="col-md-2">
-										<label for="ValorVendaProduto">Venda:</label><br>
+										<label for="ValorProduto">:</label><br>
 										<div class="input-group">
 											<span class="input-group-addon" id="basic-addon1">R$</span>
 											<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
-													name="ValorVendaProduto" value="<?php echo $produtos['ValorVendaProduto'] ?>">
+													name="ValorProduto" value="<?php echo $produtos['ValorProduto'] ?>">
 										</div>
 									</div>
 									
@@ -191,7 +191,7 @@
 								<h4 class="panel-title">
 									<a class="accordion-toggle">
 										<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-										Valor de Venda
+										Valor de 
 									</a>
 								</h4>
 							</div>
@@ -217,11 +217,11 @@
 												<div class="row">																					
 													
 													<div class="col-md-3">
-														<label for="ValorVendaProduto">Valor Venda:</label>
+														<label for="ValorProduto">Valor :</label>
 														<div class="input-group">
 															<span class="input-group-addon" id="basic-addon1">R$</span>
-															<input type="text" class="form-control Valor" id="ValorVendaProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
-																name="ValorVendaProduto<?php echo $i ?>" value="<?php echo $valor[$i]['ValorVendaProduto'] ?>">
+															<input type="text" class="form-control Valor" id="ValorProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
+																name="ValorProduto<?php echo $i ?>" value="<?php echo $valor[$i]['ValorProduto'] ?>">
 														</div>
 													</div>													
 													
@@ -264,7 +264,7 @@
 								<h4 class="panel-title">
 									<a class="accordion-toggle">
 										<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-										Valor de Venda
+										Valor de 
 									</a>
 								</h4>
 							</div>
@@ -315,17 +315,17 @@
 													</div>													
 													<!--
 													<div class="col-md-2">
-														<label for="ValorVendaProduto<?php echo $i ?>">Valor Venda:</label>
-														<textarea class="form-control" id="ValorVendaProduto<?php echo $i ?>" <?php echo $readonly; ?>
-																  name="ValorVendaProduto<?php echo $i ?>"><?php echo $valor[$i]['ValorVendaProduto']; ?></textarea>
+														<label for="ValorProduto<?php echo $i ?>">Valor :</label>
+														<textarea class="form-control" id="ValorProduto<?php echo $i ?>" <?php echo $readonly; ?>
+																  name="ValorProduto<?php echo $i ?>"><?php echo $valor[$i]['ValorProduto']; ?></textarea>
 													</div>
 													-->
 													<div class="col-md-3">
-														<label for="ValorVendaProduto">Valor Venda:</label>
+														<label for="ValorProduto">Valor :</label>
 														<div class="input-group">
 															<span class="input-group-addon" id="basic-addon1">R$</span>
-															<input type="text" class="form-control Valor" id="ValorVendaProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
-																name="ValorVendaProduto<?php echo $i ?>" value="<?php echo $valor[$i]['ValorVendaProduto'] ?>">
+															<input type="text" class="form-control Valor" id="ValorProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
+																name="ValorProduto<?php echo $i ?>" value="<?php echo $valor[$i]['ValorProduto'] ?>">
 														</div>
 													</div>													
 													
