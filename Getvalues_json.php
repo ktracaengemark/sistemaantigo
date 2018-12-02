@@ -65,30 +65,6 @@ elseif ($_GET['q'] == 2) {
     
 }
 
-elseif ($_GET['q'] == 10) {
-
-    $result = mysql_query('
-            SELECT
-                idTab_Produto,
-                CONCAT(IFNULL(CodProd,""), " - ", IFNULL(Produtos,""), " - ", IFNULL(UnidadeProduto,"")) AS NomeProduto,
-                ValorProduto
-            FROM 
-                Tab_Produto 
-            WHERE
-                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
-    ');
-
-    while ($row = mysql_fetch_assoc($result)) {
-
-        $event_array[] = array(
-            'id' => $row['idTab_Produto'],
-            'name' => utf8_encode($row['NomeProduto']),
-            'value' => $row['ValorProduto'],
-        );
-    } 
-    
-}
-
 elseif ($_GET['q'] == 23) {
 
     $result = mysql_query(
