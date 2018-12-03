@@ -2758,7 +2758,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Dia'] = $this->Basico_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Basico_model->select_mes();
 		
-        $data['titulo'] = 'Despesas';
+        $data['titulo'] = 'Parc.Despesas';
         $data['form_open_path'] = 'orcatrata/alterarparceladesp';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -2974,7 +2974,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Dia'] = $this->Basico_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Basico_model->select_mes();
 		
-        $data['titulo'] = 'Receitas';
+        $data['titulo'] = 'Parc.Receitas';
         $data['form_open_path'] = 'orcatrata/alterarparcelarec';
         $data['readonly'] = '';
         $data['disabled'] = '';

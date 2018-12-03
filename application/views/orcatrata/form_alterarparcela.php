@@ -119,148 +119,150 @@
 										</div>									
 									</div>								
 								</div>
-							</div>	
+							</div>
+						
 							<div class="panel-group">	
+								
 								<div class="panel panel-primary">
 
+									<div  style="overflow: auto; height: 456px; ">
+										
 									
-									<div class="panel-heading text-left">
-										<a class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Parcelas1" aria-expanded="false" aria-controls="Parcelas1">
-											<span class="glyphicon glyphicon-menu-down"></span> Parcelas
-										</a>
-									</div>
-									
-									<div <?php echo $collapse; ?> id="Parcelas1">
-										<div class="panel-body">
-											<!--App_parcelasRec-->
-											<input type="hidden" name="PRCount" id="PRCount" value="<?php echo $count['PRCount']; ?>"/>
+										
+											<div class="panel-body">
+												<!--App_parcelasRec-->
+												<input type="hidden" name="PRCount" id="PRCount" value="<?php echo $count['PRCount']; ?>"/>
 
-											<div class="input_fields_wrap21">
+												<div class="input_fields_wrap21">
 
-											<?php
-											for ($i=1; $i <= $count['PRCount']; $i++) {
-											?>
+												<?php
+												for ($i=1; $i <= $count['PRCount']; $i++) {
+												?>
 
-												<?php if ($metodo > 1) { ?>
-												<input type="hidden" name="idApp_Parcelas<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_Parcelas']; ?>"/>
-												<?php } ?>
+													<?php if ($metodo > 1) { ?>
+													<input type="hidden" name="idApp_Parcelas<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_Parcelas']; ?>"/>
+													<?php } ?>
 
-												<div class="form-group" id="21div<?php echo $i ?>">
-													<div class="panel panel-warning">
-														<div class="panel-heading">
-															<div class="row">
-																<div class="col-md-2">
-																	<label for="Parcela">Parcela:</label><br>
-																	<input type="text" class="form-control" maxlength="6" readonly=""
-																		   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
-																</div>
-																<div class="col-md-2">
-																	<label for="ValorParcela">Valor Parcela:</label><br>
-																	<div class="input-group" id="txtHint">
-																		<span class="input-group-addon" id="basic-addon1">R$</span>
-																		<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorParcela<?php echo $i ?>"
-																			   name="ValorParcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorParcela'] ?>">
+													<div class="form-group" id="21div<?php echo $i ?>">
+														<div class="panel panel-warning">
+															<div class="panel-heading">
+																<div class="row">
+																	<div class="col-md-2">
+																		<label for="Parcela">Parcela:</label><br>
+																		<input type="text" class="form-control" maxlength="6" readonly=""
+																			   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
 																	</div>
-																</div>
-																<div class="col-md-2">
-																	<label for="DataVencimento">Data Venc. Parc.</label>
-																	<div class="input-group DatePicker">
-																		<span class="input-group-addon" disabled>
-																			<span class="glyphicon glyphicon-calendar"></span>
-																		</span>
-																		<input type="text" class="form-control Date" id="DataVencimento<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
-																			   name="DataVencimento<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataVencimento'] ?>">																
-																	</div>
-																</div>
-																<div class="col-md-2">
-																	<label for="ValorPago">Valor Pago:</label><br>
-																	<div class="input-group" id="txtHint">
-																		<span class="input-group-addon" id="basic-addon1">R$</span>
-																		<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorPago<?php echo $i ?>"
-																			   name="ValorPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorPago'] ?>">
-																	</div>
-																</div>
-																<div class="col-md-2">
-																	<label for="DataPago">Data Pag.</label>
-																	<div class="input-group DatePicker">
-																		<span class="input-group-addon" disabled>
-																			<span class="glyphicon glyphicon-calendar"></span>
-																		</span>
-																		<input type="text" class="form-control Date" id="DataPago<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
-																			   name="DataPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataPago'] ?>">																
-																	</div>
-																</div>
-																<div class="col-md-2">
-																	<label for="Quitado">Quitado????</label><br>
-																	<div class="form-group">
-																		<div class="btn-group" data-toggle="buttons">
-																			<?php
-																			foreach ($select['Quitado'] as $key => $row) {
-																				(!$parcelasrec[$i]['Quitado']) ? $parcelasrec[$i]['Quitado'] = 'N' : FALSE;
-
-																				if ($parcelasrec[$i]['Quitado'] == $key) {
-																					echo ''
-																					. '<label class="btn btn-warning active" name="radiobutton_Quitado' . $i . '" id="radiobutton_Quitado' . $i .  $key . '">'
-																					. '<input type="radio" name="Quitado' . $i . '" id="radiobuttondinamico" '
-																					. 'onchange="carregaQuitado(this.value,this.name,'.$i.')" '
-																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																					. '</label>'
-																					;
-																				} else {
-																					echo ''
-																					. '<label class="btn btn-default" name="radiobutton_Quitado' . $i . '" id="radiobutton_Quitado' . $i .  $key . '">'
-																					. '<input type="radio" name="Quitado' . $i . '" id="radiobuttondinamico" '
-																					. 'onchange="carregaQuitado(this.value,this.name,'.$i.')" '
-																					. 'autocomplete="off" value="' . $key . '" >' . $row
-																					. '</label>'
-																					;
-																				}
-																			}
-																			?>
+																	<div class="col-md-2">
+																		<label for="ValorParcela">Valor Parcela:</label><br>
+																		<div class="input-group" id="txtHint">
+																			<span class="input-group-addon" id="basic-addon1">R$</span>
+																			<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorParcela<?php echo $i ?>"
+																				   name="ValorParcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorParcela'] ?>">
 																		</div>
 																	</div>
+																	<div class="col-md-2">
+																		<label for="DataVencimento">Data Venc. Parc.</label>
+																		<div class="input-group DatePicker">
+																			<span class="input-group-addon" disabled>
+																				<span class="glyphicon glyphicon-calendar"></span>
+																			</span>
+																			<input type="text" class="form-control Date" id="DataVencimento<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																				   name="DataVencimento<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataVencimento'] ?>">																
+																		</div>
+																	</div>
+																	<div class="col-md-2">
+																		<label for="ValorPago">Valor Pago:</label><br>
+																		<div class="input-group" id="txtHint">
+																			<span class="input-group-addon" id="basic-addon1">R$</span>
+																			<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorPago<?php echo $i ?>"
+																				   name="ValorPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorPago'] ?>">
+																		</div>
+																	</div>
+																	<div class="col-md-2">
+																		<label for="DataPago">Data Pag.</label>
+																		<div class="input-group DatePicker">
+																			<span class="input-group-addon" disabled>
+																				<span class="glyphicon glyphicon-calendar"></span>
+																			</span>
+																			<input type="text" class="form-control Date" id="DataPago<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																				   name="DataPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataPago'] ?>">																
+																		</div>
+																	</div>
+																	<div class="col-md-2">
+																		<label for="Quitado">Quitado????</label><br>
+																		<div class="form-group">
+																			<div class="btn-group" data-toggle="buttons">
+																				<?php
+																				foreach ($select['Quitado'] as $key => $row) {
+																					(!$parcelasrec[$i]['Quitado']) ? $parcelasrec[$i]['Quitado'] = 'N' : FALSE;
+
+																					if ($parcelasrec[$i]['Quitado'] == $key) {
+																						echo ''
+																						. '<label class="btn btn-warning active" name="radiobutton_Quitado' . $i . '" id="radiobutton_Quitado' . $i .  $key . '">'
+																						. '<input type="radio" name="Quitado' . $i . '" id="radiobuttondinamico" '
+																						. 'onchange="carregaQuitado(this.value,this.name,'.$i.')" '
+																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																						. '</label>'
+																						;
+																					} else {
+																						echo ''
+																						. '<label class="btn btn-default" name="radiobutton_Quitado' . $i . '" id="radiobutton_Quitado' . $i .  $key . '">'
+																						. '<input type="radio" name="Quitado' . $i . '" id="radiobuttondinamico" '
+																						. 'onchange="carregaQuitado(this.value,this.name,'.$i.')" '
+																						. 'autocomplete="off" value="' . $key . '" >' . $row
+																						. '</label>'
+																						;
+																					}
+																				}
+																				?>
+																			</div>
+																		</div>
+																	</div>
+																</div>	
+																<!--
+																<div class="row">
+																	<div class="col-md-10"></div>
+																	<div class="col-md-2 text-right">
+																		<label><br></label><br>
+																		<button type="button" id="<?php echo $i ?>" class="remove_field21 btn btn-danger">
+																			<span class="glyphicon glyphicon-trash"></span>
+																		</button>
+																	</div>
 																</div>
-															</div>	
-															<!--
-															<div class="row">
-																<div class="col-md-10"></div>
-																<div class="col-md-2 text-right">
-																	<label><br></label><br>
-																	<button type="button" id="<?php echo $i ?>" class="remove_field21 btn btn-danger">
-																		<span class="glyphicon glyphicon-trash"></span>
+																-->
+															</div>
+														</div>
+													</div>
+
+												<?php
+												}
+												?>
+												</div>
+												<!--
+												<div class="panel panel-warning">
+													<div class="panel-heading">										
+														<div class="form-group">	
+															<div class="row">	
+																<div class="col-md-2 text-left">
+																	<button class="btn btn-warning" type="button" data-toggle="collapse" onclick="adicionaParcelas()"
+																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas">
+																		<span class="glyphicon glyphicon-plus"></span> Adicionar Parcelas
 																	</button>
 																</div>
 															</div>
-															-->
-														</div>
+														</div>	
 													</div>
 												</div>
-
-											<?php
-											}
-											?>
+												-->
 											</div>
-											<!--
-											<div class="panel panel-warning">
-												<div class="panel-heading">										
-													<div class="form-group">	
-														<div class="row">	
-															<div class="col-md-2 text-left">
-																<button class="btn btn-warning" type="button" data-toggle="collapse" onclick="adicionaParcelas()"
-																		data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas">
-																	<span class="glyphicon glyphicon-plus"></span> Adicionar Parcelas
-																</button>
-															</div>
-														</div>
-													</div>	
-												</div>
-											</div>
-											-->
-										</div>
+										
+										
+									
+									
 									</div>
 								</div>
 							</div>
-
+						
 							<div class="form-group">
 								<div class="row">
 									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
