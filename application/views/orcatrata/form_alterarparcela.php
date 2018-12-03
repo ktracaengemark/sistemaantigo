@@ -24,7 +24,7 @@
 								<span class="glyphicon glyphicon-search"></span>PcRec
 							</a>
 							<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/despesasparc" role="button">
-								<span class="glyphicon glyphicon-search"></span>PcDess
+								<span class="glyphicon glyphicon-search"></span>PcDesp
 							</a>
 						</div>
 						<div class="panel-body">
