@@ -540,16 +540,16 @@ class Relatorio extends CI_Controller {
 		if (!$data['query']['DataFim'])
            $data['query']['DataFim'] = date("t/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
 	   
-	   
+/*	   
 		if (!$data['query']['Mesvenc'])
            $data['query']['Mesvenc'] = date('m', time());
-/*	   
+	   
 	   if (!$data['query']['Mespag'])
            $data['query']['Mespag'] = date('m', time());
-*/
+
 		if (!$data['query']['Ano'])
            $data['query']['Ano'] = date('Y', time());	   
-
+*/
         $_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
         $_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
         $_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];
@@ -717,16 +717,16 @@ class Relatorio extends CI_Controller {
 		
 		if (!$data['query']['DataFim'])
            $data['query']['DataFim'] = date("t/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
-	   
+/*		   
 		if (!$data['query']['Mesvenc'])
            $data['query']['Mesvenc'] = date('m', time());
-/*	   
+   
 	   if (!$data['query']['Mespag'])
            $data['query']['Mespag'] = date('m', time());
-*/
+
 		if (!$data['query']['Ano'])
            $data['query']['Ano'] = date('Y', time());	   
-
+*/
         $_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
         $_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
         $_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];

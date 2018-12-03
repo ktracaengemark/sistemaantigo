@@ -177,7 +177,9 @@ class Orcatrata_model extends CI_Model {
 		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		$permissao1 = ($_SESSION['FiltroAlteraParcela']['Quitado'] != "#" ) ? 'PR.Quitado = "' . $_SESSION['FiltroAlteraParcela']['Quitado'] . '" AND ' : FALSE;
-
+		$permissao2 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
+		$permissao3 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "" ) ? 'YEAR(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
+		
 		$query = $this->db->query('
 			SELECT
 
@@ -202,13 +204,11 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
 			WHERE
 				' . $permissao . '
-				
 				PR.idSis_Empresa = ' . $data . ' AND
-				PR.idTab_TipoRD = "1" AND
 				' . $permissao1 . '
-				(MONTH(PR.DataVencimento) = ' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . ') AND
-				(YEAR(PR.DataVencimento) = ' . $_SESSION['FiltroAlteraParcela']['Ano'] . ') 
-				
+				' . $permissao2 . '
+				' . $permissao3 . '
+				PR.idTab_TipoRD = "1"
 			ORDER BY
 				PR.DataVencimento
 		');
@@ -222,6 +222,8 @@ class Orcatrata_model extends CI_Model {
 		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		$permissao1 = ($_SESSION['FiltroAlteraParcela']['Quitado'] != "#" ) ? 'PR.Quitado = "' . $_SESSION['FiltroAlteraParcela']['Quitado'] . '" AND ' : FALSE;
+		$permissao2 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
+		$permissao3 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "" ) ? 'YEAR(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('
 			SELECT
@@ -249,10 +251,10 @@ class Orcatrata_model extends CI_Model {
 			WHERE 
 				' . $permissao . '
 				PR.idSis_Empresa = ' . $data . ' AND
-				PR.idTab_TipoRD = "2" AND
 				' . $permissao1 . '
-				(MONTH(PR.DataVencimento) = ' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . ') AND
-				(YEAR(PR.DataVencimento) = ' . $_SESSION['FiltroAlteraParcela']['Ano'] . ')
+				' . $permissao2 . '
+				' . $permissao3 . '
+				PR.idTab_TipoRD = "2" 
 			ORDER BY
 				PR.DataVencimento  
 		');
