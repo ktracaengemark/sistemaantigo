@@ -16,9 +16,16 @@
 
 					<div class="panel panel-primary panel-<?php echo $panel; ?>">
 						<div class="panel-heading">
-							<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-								<span class="glyphicon glyphicon-search"></span> <?php echo $titulo; ?>
-							</button>
+							<?php echo $titulo; ?>
+							<!--<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+								<span class="glyphicon glyphicon-search"></span> <?php #echo $titulo; ?>
+							</button>-->
+							<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/despesasparc" role="button">
+								<span class="glyphicon glyphicon-search"></span>Despesas
+							</a>
+							<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/receitasparc" role="button">
+								<span class="glyphicon glyphicon-search"></span>Receitas
+							</a>
 						</div>
 						<div class="panel-body">
 							

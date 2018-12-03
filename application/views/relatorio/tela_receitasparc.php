@@ -84,6 +84,7 @@
 												?>
 											</select>
 										</div>
+										<!--
 										<div class="col-md-3 text-left" >
 											<label for="Ordenamento">Dia do Venc.:</label>
 											<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -99,6 +100,7 @@
 												?>
 											</select>
 										</div>
+										-->
 										<div class="col-md-3 text-left" >
 											<label for="Ordenamento">Mês do Venc.:</label>
 											<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 

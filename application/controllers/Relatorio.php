@@ -540,17 +540,22 @@ class Relatorio extends CI_Controller {
 		if (!$data['query']['DataFim'])
            $data['query']['DataFim'] = date("t/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
 	   
-/*	   
+	   
 		if (!$data['query']['Mesvenc'])
            $data['query']['Mesvenc'] = date('m', time());
-	   
+/*	   
 	   if (!$data['query']['Mespag'])
            $data['query']['Mespag'] = date('m', time());
 */
 		if (!$data['query']['Ano'])
            $data['query']['Ano'] = date('Y', time());	   
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        $_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
+        $_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
+        $_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];
+		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];
+		
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
 		#$this->form_validation->set_rules('Mesvenc', 'Mês do Vencimento', 'required|trim');
 		#$this->form_validation->set_rules('Mespag', 'Mês do Pagamento', 'required|trim');
@@ -585,7 +590,7 @@ class Relatorio extends CI_Controller {
 			'N' => 'Não',
             'S' => 'Sim',
         );
-		
+	
 		$data['select']['Modalidade'] = array(
             '#' => 'TODOS',
             'P' => 'Parcelas',
@@ -614,6 +619,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
 		$data['select']['Mespag'] = $this->Relatorio_model->select_mes();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
+		#$data['select']['Quitado'] = $this->Basico_model->select_status_sn();
 		/*
         $data['select']['Pesquisa'] = array(
             'DataEntradaOrca' => 'Data de Entrada',
@@ -712,15 +718,19 @@ class Relatorio extends CI_Controller {
 		if (!$data['query']['DataFim'])
            $data['query']['DataFim'] = date("t/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
 	   
-/*	   
 		if (!$data['query']['Mesvenc'])
            $data['query']['Mesvenc'] = date('m', time());
-	   
+/*	   
 	   if (!$data['query']['Mespag'])
            $data['query']['Mespag'] = date('m', time());
 */
 		if (!$data['query']['Ano'])
            $data['query']['Ano'] = date('Y', time());	   
+
+        $_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
+        $_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
+        $_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];
+		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];	   
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
@@ -753,7 +763,7 @@ class Relatorio extends CI_Controller {
         );
 
 		$data['select']['Quitado'] = array(
-            '#' => 'TODOS',
+			'#' => 'TODOS',
 			'N' => 'Não',
             'S' => 'Sim',
         );

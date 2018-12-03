@@ -2691,6 +2691,7 @@ class Orcatrata extends CI_Controller {
 			'Dia',
 			'Mesvenc',
 			'Ano',
+			'Quitado',
         ), TRUE));
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2757,7 +2758,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Dia'] = $this->Basico_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Basico_model->select_mes();
 		
-        $data['titulo'] = 'Parcelas Despesas';
+        $data['titulo'] = 'Parc.Despesas';
         $data['form_open_path'] = 'orcatrata/alterarparceladesp';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -2973,7 +2974,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Dia'] = $this->Basico_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Basico_model->select_mes();
 		
-        $data['titulo'] = 'Parcelas Receitas';
+        $data['titulo'] = 'Parc.Receitas';
         $data['form_open_path'] = 'orcatrata/alterarparcelarec';
         $data['readonly'] = '';
         $data['disabled'] = '';
