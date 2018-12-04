@@ -41,11 +41,68 @@ class Agenda extends CI_Controller {
 		$data['collapse1'] = 'class="collapse"';
 		
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'NomeUsuario',
-
+			'NomeUsuario',
+			'Dia',
+			'Mesvenc',
+			'Ano',
+			'ConcluidoProcedimento',
+            'Ordenamento',
+            'Campo',
         ), TRUE));
 
+        $_SESSION['FiltroAlteraProcedimento']['Dia'] = $data['query']['Dia'];
+        $_SESSION['FiltroAlteraProcedimento']['Mesvenc'] = $data['query']['Mesvenc'];
+        $_SESSION['FiltroAlteraProcedimento']['Ano'] = $data['query']['Ano'];
+		$_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
 
+        $data['select']['ConcluidoProcedimento'] = array(
+			'N' => 'Não',
+            'S' => 'Sim',
+			'#' => 'TODOS',
+        );
+
+		$data['select']['Campo'] = array(
+			'C.DataProcedimento' => 'Data',
+			'C.ConcluidoProcedimento' => 'Concl.',
+            'C.idApp_Procedimento' => 'id',
+        );
+
+        $data['select']['Ordenamento'] = array(
+            'DESC' => 'Decrescente',
+			'ASC' => 'Crescente',
+        );
+
+        #$data['select']['NomeCliente'] = $this->Agenda_model->select_cliente();
+		$data['select']['Dia'] = $this->Agenda_model->select_dia();
+		$data['select']['Mesvenc'] = $this->Agenda_model->select_mes();
+		
+        $data['titulo1'] = 'Tarefas';
+
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+
+			$data['bd']['Dia'] = $data['query']['Dia'];
+			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
+			$data['bd']['Ano'] = $data['query']['Ano'];
+			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+
+            $data['report'] = $this->Agenda_model->list_procedimento($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list'] = $this->load->view('agenda/list_procedimento', $data, TRUE);
+            //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+        }
 				
         $_SESSION['log']['NomeUsuario'] = ($data['query']['NomeUsuario']) ?
             $data['query']['NomeUsuario'] : FALSE;
@@ -59,10 +116,12 @@ class Agenda extends CI_Controller {
 		$data['query']['procedimentocli'] = $this->Agenda_model->procedimentocli($_SESSION['log']['id']);
 		$data['query']['procedimentoorc'] = $this->Agenda_model->procedimentoorc($_SESSION['log']['id']);
 	
+	
 		$this->load->view('agenda/tela_agenda', $data);
 
         #load footer view
         $this->load->view('basico/footer');
-    }
+    
+	}
 
 }

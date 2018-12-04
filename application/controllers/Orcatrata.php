@@ -3182,7 +3182,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 
-        $data['titulo'] = 'Editar Procedimento';
+        $data['titulo'] = 'Procedimentos';
         $data['form_open_path'] = 'orcatrata/alterarprocedimento';
         $data['readonly'] = '';
         $data['disabled'] = '';

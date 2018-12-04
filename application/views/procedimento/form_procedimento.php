@@ -106,7 +106,7 @@
 															</button>
 														</div>
 														<div class="col-md-6 text-right">
-															<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/excluir/' . $query['idApp_ProcedimentoCli'] ?>" role="button">
+															<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/excluir/' . $query['idApp_Procedimento'] ?>" role="button">
 																<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 															</a>
 														</div>

@@ -273,6 +273,9 @@ class Orcatrata_model extends CI_Model {
     public function get_alterarprocedimento($data) {
 		
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		$permissao1 = ($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != "#" ) ? 'P.ConcluidoProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] . '" AND ' : FALSE;
+		$permissao2 = ($_SESSION['FiltroAlteraProcedimento']['Mesvenc'] != "0" ) ? 'MONTH(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Mesvenc'] . '" AND ' : FALSE;
+		$permissao3 = ($_SESSION['FiltroAlteraProcedimento']['Ano'] != "" ) ? 'YEAR(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Ano'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('
 			SELECT
@@ -292,7 +295,9 @@ class Orcatrata_model extends CI_Model {
 				((P.idSis_Empresa = ' . $data . '  AND
 				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' ) OR
 				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' )AND
-				P.ConcluidoProcedimento = "N" AND 
+				' . $permissao1 . '
+				' . $permissao2 . '
+				' . $permissao3 . '
 				P.idApp_OrcaTrata = "0" AND
 				P.idApp_Cliente = "0" 
 		');
