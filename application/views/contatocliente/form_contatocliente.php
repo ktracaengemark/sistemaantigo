@@ -31,7 +31,7 @@
 									<li>
 										<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
 											<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-												<span class="glyphicon glyphicon-calendar"></span> Ver
+												<span class="glyphicon glyphicon-user"></span> Contatos
 											</a>
 										</a>
 									</li>
