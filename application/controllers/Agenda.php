@@ -65,9 +65,9 @@ class Agenda extends CI_Controller {
         );
 
 		$data['select']['Campo'] = array(
-			'C.DataProcedimento' => 'Data',
-			'C.ConcluidoProcedimento' => 'Concl.',
-            'C.idApp_Procedimento' => 'id',
+			'P.DataProcedimento' => 'Data',
+			'P.ConcluidoProcedimento' => 'Concl.',
+            'P.idApp_Procedimento' => 'id',
         );
 
         $data['select']['Ordenamento'] = array(
@@ -91,7 +91,7 @@ class Agenda extends CI_Controller {
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 
-            $data['report'] = $this->Agenda_model->list_procedimento($data['bd'],TRUE);
+            $data['report'] = $this->Agenda_model->list1_procedimento($data['bd'],TRUE);
 
             /*
               echo "<pre>";
@@ -100,10 +100,34 @@ class Agenda extends CI_Controller {
               exit();
               */
 
-            $data['list'] = $this->load->view('agenda/list_procedimento', $data, TRUE);
+            $data['list1'] = $this->load->view('agenda/list1_procedimento', $data, TRUE);
             //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
         }
-				
+		
+		$data['titulo2'] = 'Procedimentos';
+
+        if ($this->form_validation->run() !== TRUE) {
+
+			$data['bd']['Dia'] = $data['query']['Dia'];
+			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
+			$data['bd']['Ano'] = $data['query']['Ano'];
+			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+
+            $data['report'] = $this->Agenda_model->list2_procedimentocli($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list2'] = $this->load->view('agenda/list2_procedimentocli', $data, TRUE);
+            //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+        }
+		
         $_SESSION['log']['NomeUsuario'] = ($data['query']['NomeUsuario']) ?
             $data['query']['NomeUsuario'] : FALSE;
 

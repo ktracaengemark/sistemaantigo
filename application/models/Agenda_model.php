@@ -146,7 +146,7 @@ class Agenda_model extends CI_Model {
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
             WHERE 
                 
-				P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.ConcluidoProcedimento = "N" AND
 
@@ -339,31 +339,31 @@ class Agenda_model extends CI_Model {
         return $array;
     }
 
-	public function list_procedimento($data, $completo) {
+	public function list1_procedimento($data, $completo) {
 
-		$data['Dia'] = ($data['Dia']) ? ' AND DAY(C.DataProcedimento) = ' . $data['Dia'] : FALSE;
-		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(C.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
-		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(C.DataProcedimento) = ' . $data['Ano'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'C.DataProcedimento' : $data['Campo'];
+		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
+		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
+		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
+        $data['Campo'] = (!$data['Campo']) ? 'P.DataProcedimento' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
-		$filtro10 = ($data['ConcluidoProcedimento'] != '#') ? 'C.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
+		$filtro10 = ($data['ConcluidoProcedimento'] != '#') ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
 
 		$query = $this->db->query('
             SELECT
 				U.idSis_Usuario,
 				U.CpfUsuario,
-				C.idSis_Empresa,
-				C.idApp_Procedimento,
-                C.Procedimento,
-				C.DataProcedimento,
-				C.ConcluidoProcedimento
+				P.idSis_Empresa,
+				P.idApp_Procedimento,
+                P.Procedimento,
+				P.DataProcedimento,
+				P.ConcluidoProcedimento
             FROM
-				App_Procedimento AS C
-					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = C.idSis_Usuario
+				App_Procedimento AS P
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
             WHERE
-                C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				C.idApp_OrcaTrata = "0" AND
-				C.idApp_Cliente = "0" AND
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idApp_OrcaTrata = "0" AND
+				P.idApp_Cliente = "0" AND
 				' . $filtro10 . '
 				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' 
                 ' . $data['Dia'] . ' 
@@ -401,6 +401,70 @@ class Agenda_model extends CI_Model {
 
     }
 
+	public function list2_procedimentocli($data, $completo) {
+
+		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
+		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
+		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
+        $data['Campo'] = (!$data['Campo']) ? 'P.DataProcedimento' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
+		$filtro10 = ($data['ConcluidoProcedimento'] != '#') ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
+
+		$query = $this->db->query('
+            SELECT
+				C.NomeCliente,
+				U.idSis_Usuario,
+				U.CpfUsuario,
+				P.idSis_Empresa,
+				P.idApp_Procedimento,
+                P.Procedimento,
+				P.DataProcedimento,
+				P.ConcluidoProcedimento
+            FROM
+				App_Procedimento AS P
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				
+				P.idApp_Cliente != "0" AND
+				' . $filtro10 . '
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+                ' . $data['Dia'] . ' 
+				' . $data['Mesvenc'] . ' 
+				' . $data['Ano'] . ' 
+				
+            ORDER BY
+                ' . $data['Campo'] . ' 
+				' . $data['Ordenamento'] . '
+        ');
+        /*
+
+        #AND
+        #C.idApp_Cliente = OT.idApp_Cliente
+
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            foreach ($query->result() as $row) {
+				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+
+            }
+
+            return $query;
+        }
+
+    }
+	
 	public function select_dia() {
 
         $query = $this->db->query('

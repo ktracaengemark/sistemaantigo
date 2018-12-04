@@ -3182,7 +3182,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 
-        $data['titulo'] = 'Procedimentos';
+        $data['titulo'] = 'Tarefas';
         $data['form_open_path'] = 'orcatrata/alterarprocedimento';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -3295,6 +3295,211 @@ class Orcatrata extends CI_Controller {
 
                 $this->basico->erro($msg);
                 $this->load->view('orcatrata/form_alterarprocedimento', $data);
+            } else {
+
+                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idSis_Empresa'], FALSE);
+                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'CREATE', $data['auditoriaitem']);
+                $data['msg'] = '?m=1';
+
+                #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
+				#redirect(base_url() . 'relatorio/alterarprocedimento/' . $data['msg']);
+				redirect(base_url() . 'agenda' . $data['msg']);
+
+				exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+
+    }
+
+    public function alterarprocedimentocli($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $data['orcatrata'] = quotes_to_entities($this->input->post(array(
+            #### Sis_Empresa ####
+            'idSis_Empresa',
+
+
+        ), TRUE));
+
+
+        (!$this->input->post('PMCount')) ? $data['count']['PMCount'] = 0 : $data['count']['PMCount'] = $this->input->post('PMCount');
+
+
+
+
+        $j = 1;
+        for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
+
+            if ($this->input->post('DataProcedimento' . $i) ||
+                    $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
+                $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
+                $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
+                #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
+                $data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
+				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
+
+                $j++;
+            }
+
+        }
+        $data['count']['PMCount'] = $j - 1;
+
+
+        //Fim do trecho de código que dá pra melhorar
+
+        if ($id) {
+            #### Sis_Empresa ####
+            $data['orcatrata'] = $this->Orcatrata_model->get_orcatrataalterar($id);
+
+
+
+            #### App_Procedimento ####
+            $data['procedimento'] = $this->Orcatrata_model->get_alterarprocedimentocli($id);
+            if (count($data['procedimento']) > 0) {
+                $data['procedimento'] = array_combine(range(1, count($data['procedimento'])), array_values($data['procedimento']));
+                $data['count']['PMCount'] = count($data['procedimento']);
+
+                if (isset($data['procedimento'])) {
+
+                    for($j=1; $j <= $data['count']['PMCount']; $j++) {
+                        $data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'barras');
+
+					}
+                }
+            }
+
+        }
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #### Sis_Empresa ####
+        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'trim');
+
+        $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
+		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
+
+        $data['titulo'] = 'Procedimentos';
+        $data['form_open_path'] = 'orcatrata/alterarprocedimentocli';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+		$data['collapse'] = '';	
+		$data['collapse1'] = 'class="collapse"';		
+		
+        //if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
+        if ($data['count']['PMCount'] > 0 )
+            $data['orcamentoin'] = 'in';
+        else
+            $data['orcamentoin'] = '';
+
+        if ($data['count']['PMCount'] > 0)
+            $data['tratamentosin'] = 'in';
+        else
+            $data['tratamentosin'] = '';
+		
+
+        $data['sidebar'] = 'col-sm-3 col-md-2';
+        $data['main'] = 'col-sm-7 col-md-8';
+
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+
+
+        /*
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit ();
+        */
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('orcatrata/form_alterarprocedimentocli', $data);
+        } else {
+
+            ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+            #### Sis_Empresa ####
+			
+			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'mysql');
+
+            $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrataalterar($data['orcatrata']['idSis_Empresa']);
+            $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
+            $data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
+                $data['update']['orcatrata']['anterior'],
+                $data['orcatrata'],
+                $data['update']['orcatrata']['campos'],
+                $data['orcatrata']['idSis_Empresa'], TRUE);
+            $data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrataalterar($data['orcatrata'], $data['orcatrata']['idSis_Empresa']);
+			
+            #### App_Procedimento ####
+            $data['update']['procedimento']['anterior'] = $this->Orcatrata_model->get_alterarprocedimentocli($data['orcatrata']['idSis_Empresa']);
+            if (isset($data['procedimento']) || (!isset($data['procedimento']) && isset($data['update']['procedimento']['anterior']) ) ) {
+
+                if (isset($data['procedimento']))
+                    $data['procedimento'] = array_values($data['procedimento']);
+                else
+                    $data['procedimento'] = array();
+
+                //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
+                $data['update']['procedimento'] = $this->basico->tratamento_array_multidimensional($data['procedimento'], $data['update']['procedimento']['anterior'], 'idApp_Procedimento');
+
+                $max = count($data['update']['procedimento']['inserir']);
+                for($j=0;$j<$max;$j++) {
+                    $data['update']['procedimento']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+                    $data['update']['procedimento']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+					$data['update']['procedimento']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    #$data['update']['procedimento']['inserir'][$j]['idSis_Empresa'] = $data['orcatrata']['idSis_Empresa'];
+                    #$data['update']['procedimento']['inserir'][$j]['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
+					$data['update']['procedimento']['inserir'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimento'], 'mysql');
+
+                }
+
+                $max = count($data['update']['procedimento']['alterar']);
+                for($j=0;$j<$max;$j++) {
+                    $data['update']['procedimento']['alterar'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimento'], 'mysql');
+
+                }
+
+                if (count($data['update']['procedimento']['inserir']))
+                    $data['update']['procedimento']['bd']['inserir'] = $this->Orcatrata_model->set_procedimento($data['update']['procedimento']['inserir']);
+
+                if (count($data['update']['procedimento']['alterar']))
+                    $data['update']['procedimento']['bd']['alterar'] =  $this->Orcatrata_model->update_procedimento($data['update']['procedimento']['alterar']);
+
+                if (count($data['update']['procedimento']['excluir']))
+                    $data['update']['procedimento']['bd']['excluir'] = $this->Orcatrata_model->delete_procedimento($data['update']['procedimento']['excluir']);
+
+            }
+
+/*
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //*******CORRIGIR -  ALTERAR PARA ENTRAR COM TODAS AS MUDANÇAS NA TABELA DE LOG*****
+            $data['campos'] = array_keys($data['query']);
+            $data['anterior'] = array();
+            //*******CORRIGIR -  ALTERAR PARA ENTRAR COM TODAS AS MUDANÇAS NA TABELA DE LOG*****
+//////////////////////////////////////////////////Dados Basicos/////////////////////////////////////////////////////////////////////////
+*/
+
+            //if ($data['idSis_Empresa'] === FALSE) {
+            //if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
+            if ($data['auditoriaitem'] && !$data['update']['orcatrata']['bd']) {
+                $data['msg'] = '?m=2';
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+                $this->load->view('orcatrata/form_alterarprocedimentocli', $data);
             } else {
 
                 //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idSis_Empresa'], FALSE);
