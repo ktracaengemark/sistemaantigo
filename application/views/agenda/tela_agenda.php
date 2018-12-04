@@ -331,8 +331,8 @@
 			<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/alterarprocedimento" role="button"> 
 				<span class="glyphicon glyphicon-ok"></span> Edit Todas
 			</a>-->											
-			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>procedimento/cadastrar" role="button"> 
-				<span class="glyphicon glyphicon-plus"></span> Nova
+			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>procedimento/cadastrarcli" role="button"> 
+				<span class="glyphicon glyphicon-plus"></span> Novo
 			</a>
 		
 		</div>
