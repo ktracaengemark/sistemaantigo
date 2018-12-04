@@ -312,10 +312,12 @@ class Orcatrata_model extends CI_Model {
 		$permissao1 = ($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != "#" ) ? 'P.ConcluidoProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] . '" AND ' : FALSE;
 		$permissao2 = ($_SESSION['FiltroAlteraProcedimento']['Mesvenc'] != "0" ) ? 'MONTH(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Mesvenc'] . '" AND ' : FALSE;
 		$permissao3 = ($_SESSION['FiltroAlteraProcedimento']['Ano'] != "" ) ? 'YEAR(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Ano'] . '" AND ' : FALSE;
+		$permissao4 = ($_SESSION['FiltroAlteraProcedimento']['NomeCliente'] != "0" ) ? 'C.idApp_Cliente = "' . $_SESSION['FiltroAlteraProcedimento']['NomeCliente'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('
 			SELECT
-				
+				C.idApp_Cliente,
+				C.NomeCliente,
 				U.CpfUsuario,
 				P.idSis_Usuario,
 				P.idSis_Empresa,
@@ -326,6 +328,7 @@ class Orcatrata_model extends CI_Model {
             FROM
 				App_Procedimento AS P
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
 			WHERE 
 
 				P.idSis_Empresa = ' . $data . '  AND
@@ -333,7 +336,7 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao1 . '
 				' . $permissao2 . '
 				' . $permissao3 . '
-
+				' . $permissao4 . '
 				P.idApp_Cliente != "0" 
 		');
         $query = $query->result_array();

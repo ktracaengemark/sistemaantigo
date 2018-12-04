@@ -403,6 +403,7 @@ class Agenda_model extends CI_Model {
 
 	public function list2_procedimentocli($data, $completo) {
 
+		$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
@@ -412,6 +413,7 @@ class Agenda_model extends CI_Model {
 
 		$query = $this->db->query('
             SELECT
+				C.idApp_Cliente,
 				C.NomeCliente,
 				U.idSis_Usuario,
 				U.CpfUsuario,
@@ -430,7 +432,8 @@ class Agenda_model extends CI_Model {
 				P.idApp_Cliente != "0" AND
 				' . $filtro10 . '
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
-                ' . $data['Dia'] . ' 
+                ' . $data['NomeCliente'] . '
+				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 
 				
@@ -508,6 +511,31 @@ class Agenda_model extends CI_Model {
 
         return $array;
     }	
+
+    public function select_cliente() {
+
+        $query = $this->db->query('
+            SELECT
+                C.idApp_Cliente,
+                CONCAT(IFNULL(C.NomeCliente, ""), " --- ", IFNULL(C.Telefone1, ""), " --- ", IFNULL(C.Telefone2, ""), " --- ", IFNULL(C.Telefone3, "")) As NomeCliente
+            FROM
+                App_Cliente AS C
+
+            WHERE
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+            ORDER BY
+                C.NomeCliente ASC
+        ');
+
+        $array = array();
+        $array[0] = 'TODOS';
+        foreach ($query->result() as $row) {
+			$array[$row->idApp_Cliente] = $row->NomeCliente;
+        }
+
+        return $array;
+    }
 	
 /*	
 	public function profissional_aniversariantes($data) {

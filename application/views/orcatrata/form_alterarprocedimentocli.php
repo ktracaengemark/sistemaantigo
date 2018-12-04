@@ -95,17 +95,17 @@
 																	<span class="glyphicon glyphicon-trash"></span>
 																</button>
 															</div>
-															<!--
+															
 															<div class="col-md-3">
-																<label for="idSis_Usuario<?php echo $i ?>">Profissional:</label>
+																<label for="idApp_Cliente<?php echo $i ?>">Cliente:</label>
 																<?php if ($i == 1) { ?>
 																<?php } ?>
 																<select data-placeholder="Selecione uma opção..." class="form-control" readonly=""
-																		 id="listadinamicac<?php echo $i ?>" name="idSis_Usuario<?php echo $i ?> readonly="" ">
+																		 id="listadinamicac<?php echo $i ?>" name="idApp_Cliente<?php echo $i ?> readonly="" ">
 																	<option value="">-- Selecione uma opção --</option>
 																	<?php
-																	foreach ($select['idSis_Usuario'] as $key => $row) {
-																		if ($procedimento[$i]['idSis_Usuario'] == $key) {
+																	foreach ($select['idApp_Cliente'] as $key => $row) {
+																		if ($procedimento[$i]['idApp_Cliente'] == $key) {
 																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																		} else {
 																			echo '<option value="' . $key . '">' . $row . '</option>';
@@ -114,7 +114,7 @@
 																	?>
 																</select>
 															</div>
-															-->
+															
 														</div>
 													</div>
 												</div>

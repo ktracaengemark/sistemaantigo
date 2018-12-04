@@ -42,6 +42,7 @@ class Agenda extends CI_Controller {
 		
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'NomeUsuario',
+			'NomeCliente',
 			'Dia',
 			'Mesvenc',
 			'Ano',
@@ -54,6 +55,7 @@ class Agenda extends CI_Controller {
         $_SESSION['FiltroAlteraProcedimento']['Mesvenc'] = $data['query']['Mesvenc'];
         $_SESSION['FiltroAlteraProcedimento']['Ano'] = $data['query']['Ano'];
 		$_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+		$_SESSION['FiltroAlteraProcedimento']['NomeCliente'] = $data['query']['NomeCliente'];
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
@@ -75,9 +77,11 @@ class Agenda extends CI_Controller {
 			'ASC' => 'Crescente',
         );
 
-        #$data['select']['NomeCliente'] = $this->Agenda_model->select_cliente();
+        
 		$data['select']['Dia'] = $this->Agenda_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Agenda_model->select_mes();
+		$data['select']['NomeCliente'] = $this->Agenda_model->select_cliente();
+		#$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
 		
         $data['titulo1'] = 'Tarefas';
 
@@ -108,6 +112,7 @@ class Agenda extends CI_Controller {
 
         if ($this->form_validation->run() !== TRUE) {
 
+			$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
