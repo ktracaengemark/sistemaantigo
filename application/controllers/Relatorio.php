@@ -3733,6 +3733,8 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'NomeEmpresa',
+			'CategoriaEmpresa',
+			'Atuacao',
 			'Ordenamento',
             'Campo',
         ), TRUE));
@@ -3742,8 +3744,8 @@ class Relatorio extends CI_Controller {
 
 
         $data['select']['Campo'] = array(
-            'E.idSis_Empresa' => 'nº idSis_Empresa',
-			'E.NomeEmpresa' => 'Nome da idSis_Empresa',
+            'E.NomeEmpresa' => 'Nome da Empresa',
+			'E.idSis_Empresa' => 'Nº da Empresa',
             'E.Bairro' => 'Bairro',
             'E.Municipio' => 'Município',
             'E.Email' => 'E-mail',
@@ -3757,12 +3759,16 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['NomeEmpresa'] = $this->Relatorio_model->select_empresas();
+		$data['select']['CategoriaEmpresa'] = $this->Relatorio_model->select_categoriaempresa();
+		$data['select']['Atuacao'] = $this->Relatorio_model->select_atuacao();
 
         $data['titulo'] = 'Empresas';
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
 			$data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
+			$data['bd']['CategoriaEmpresa'] = $data['query']['CategoriaEmpresa'];
+			$data['bd']['Atuacao'] = $data['query']['Atuacao'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 

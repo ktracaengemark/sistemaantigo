@@ -606,9 +606,9 @@ class Login extends CI_Controller {
 
 		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Usuario.NomeEmpresa]');
         $this->form_validation->set_rules('CpfUsuario', 'Cpf do Usuário', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email');
+		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email|is_unique_duplo[Sis_Usuario.Email.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
         $this->form_validation->set_rules('ConfirmarEmail', 'Confirmar E-mail', 'required|trim|valid_email|matches[Email]');
-        $this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim|is_unique[Sis_Usuario.Usuario]');
+        $this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim|is_unique_duplo[Sis_Usuario.Usuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
@@ -627,7 +627,7 @@ class Login extends CI_Controller {
         } else {
 
 			$data['query']['idSis_Empresa'] = 5;
-			$data['query']['NomeEmpresa'] = "Conta Pessoal";
+			$data['query']['NomeEmpresa'] = "CONTA PESSOAL";
 			$data['query']['Permissao'] = 3;
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
             $data['query']['Senha'] = md5($data['query']['Senha']);
