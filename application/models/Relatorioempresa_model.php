@@ -3463,7 +3463,7 @@ exit();*/
 
 	public function list_empresaassociado($data, $completo) {
 
-        $data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND C.idSis_EmpresaFilial = ' . $data['NomeEmpresa'] : FALSE;
+        $data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND C.idSis_Empresa = ' . $data['NomeEmpresa'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'C.NomeEmpresa' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 
@@ -3471,17 +3471,17 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-				C.idSis_EmpresaFilial,
+				C.idSis_Empresa,
 				C.Associado,
                 C.NomeEmpresa,
 				C.Nome,
                 C.Celular,
                 C.Email,
-				C.UsuarioEmpresaFilial,
+				C.UsuarioEmpresa,
 				SN.StatusSN,
 				C.Inativo
             FROM
-                Sis_EmpresaFilial AS C
+                Sis_Empresa AS C
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Inativo = C.Inativo
             WHERE
                 C.Associado = ' . $_SESSION['log']['id'] . ' AND
@@ -3642,13 +3642,13 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-                F.idSis_EmpresaFilial,
+                F.idSis_Empresa,
                 F.Nome
             FROM
-                Sis_EmpresaFilial AS F
+                Sis_Empresa AS F
 
             WHERE
-				F.idSis_EmpresaFilial = ' . $_SESSION['log']['id'] . ' 
+				F.idSis_Empresa = ' . $_SESSION['log']['id'] . ' 
                 ' . $data['Nome'] . '
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
@@ -3690,18 +3690,17 @@ exit();*/
                 E.NomeEmpresa,
                 E.Endereco,
                 E.Bairro,
+				E.Site,
+				E.Atuacao,
+				E.CategoriaEmpresa,
                 CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
                 E.Email
             FROM
                 Sis_Empresa AS E
                     LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
 			WHERE
-                
-				E.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
-				' . $data['NomeEmpresa'] . '
+				E.idSis_Empresa = ' . $_SESSION['log']['id'] . '
 
-			ORDER BY
-                ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');
 
         /*
@@ -4392,10 +4391,10 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-                idSis_EmpresaFilial,
+                idSis_Empresa,
                 NomeEmpresa
             FROM
-                Sis_EmpresaFilial
+                Sis_Empresa
             WHERE
                 Associado = ' . $_SESSION['log']['id'] . ' AND
 				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
@@ -4406,7 +4405,7 @@ exit();*/
         $array = array();
         $array[0] = ':: Todos ::';
         foreach ($query->result() as $row) {
-			$array[$row->idSis_EmpresaFilial] = $row->NomeEmpresa;
+			$array[$row->idSis_Empresa] = $row->NomeEmpresa;
         }
 
         return $array;
@@ -4487,12 +4486,12 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-                F.idSis_EmpresaFilial,
+                F.idSis_Empresa,
                 F.Nome
             FROM
-                Sis_EmpresaFilial AS F
+                Sis_Empresa AS F
             WHERE
-                F.idSis_EmpresaFilial = ' . $_SESSION['log']['id'] . '
+                F.idSis_Empresa = ' . $_SESSION['log']['id'] . '
             ORDER BY
                 F.Nome ASC
         ');
@@ -4500,7 +4499,7 @@ exit();*/
         $array = array();
         $array[0] = ':: Todos ::';
         foreach ($query->result() as $row) {
-            $array[$row->idSis_EmpresaFilial] = $row->Nome;
+            $array[$row->idSis_Empresa] = $row->Nome;
         }
 
         return $array;

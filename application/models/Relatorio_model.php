@@ -4991,6 +4991,8 @@ exit();*/
 				E.Site,
                 E.Endereco,
                 E.Bairro,
+				E.CategoriaEmpresa,
+				E.Atuacao,
                 CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
                 E.Email
             FROM

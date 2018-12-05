@@ -16,6 +16,16 @@
 				<ul class="nav navbar-nav navbar-center">
 
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
+						<div class="btn-group" role="group" aria-label="...">
+							<a href="<?php echo base_url(); ?>relatorioempresa/empresas">
+							<!--<a href="<?php #echo base_url(); ?>empresa/prontuario">-->
+								<button type="button" class="btn btn-md btn-success ">
+									<span class="glyphicon glyphicon-log-in"></span> Empresa
+								</button>
+							</a>
+						</div>												
+					</li>
+					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 						<div class="btn-group">
 							<button type="button" class="btn btn-primary  dropdown-toggle" data-toggle="dropdown">
 								<span class="glyphicon glyphicon-user"></span> Usuarios <span class="caret"></span>
@@ -27,21 +37,7 @@
 
 							</ul>
 						</div>						
-						<div class="btn-group" role="group" aria-label="..."> </div>
 					</li>
-					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
-
-						<div class="btn-group" role="group" aria-label="...">
-							<a href="<?php echo base_url(); ?>relatorioempresa/empresas">
-								<button type="button" class="btn btn-md btn-success ">
-									<span class="glyphicon glyphicon-log-in"></span> Empresas
-								</button>
-							</a>
-						</div>												
-
-						<div class="btn-group" role="group" aria-label="..."> </div>
-					</li>
-					
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 						<div class="btn-group" role="group" aria-label="...">
 							<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa">
@@ -50,7 +46,6 @@
 								</button>
 							</a>
 						</div>
-						<div class="btn-group" role="group" aria-label="..."> </div>
 					</li>
 					<li class="btn-toolbar navbar-form navbar-right" role="toolbar" aria-label="...">
 						<div class="btn-group" role="group" aria-label="...">
@@ -67,7 +62,6 @@
 								</button>
 							</a>
 						</div>
-						<div class="btn-group" role="group" aria-label="..."> </div>
 					</li>
 				</ul>
 

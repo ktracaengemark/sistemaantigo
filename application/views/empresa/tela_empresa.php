@@ -12,7 +12,29 @@
 				<div class="panel-heading"><strong><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?></strong></div>
 				<div class="panel-body">
 
-
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-12 col-lg-12">
+								<div class="col-md-4 text-left">
+									<label for="">Empresa:</label>
+									<div class="form-group">
+										<div class="row">							
+											<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
+												<a class="btn btn-lg btn-success" href="<?php echo base_url() . 'empresa/prontuario/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+													<span class="glyphicon glyphicon-file"> </span> Ver <span class="sr-only">(current)</span>
+												</a>
+											</a>
+											<a <?php if (preg_match("/empresa\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
+												<a class="btn btn-lg btn-warning" href="<?php echo base_url() . 'empresa/alterar/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+													<span class="glyphicon glyphicon-edit"></span> Edit.
+												</a>
+											</a>
+										</div>
+									</div>	
+								</div>
+							</div>	
+						</div>
+					</div>
 					<!--
 					<div class="form-group">
 						<div class="row">
@@ -89,6 +111,28 @@
 									<tr>
 										<td><span class="glyphicon glyphicon-envelope"></span> E-mail:</td>
 										<td>' . $query['Email'] . '</td>
+									</tr>
+									';
+
+									}
+									
+									if ($query['CategoriaEmpresa']) {
+
+									echo '
+									<tr>
+										<td><span class="glyphicon glyphicon-envelope"></span> Categoria:</td>
+										<td>' . $query['CategoriaEmpresa'] . '</td>
+									</tr>
+									';
+
+									}
+									
+									if ($query['Atuacao']) {
+
+									echo '
+									<tr>
+										<td><span class="glyphicon glyphicon-envelope"></span> Atuação:</td>
+										<td>' . $query['Atuacao'] . '</td>
 									</tr>
 									';
 

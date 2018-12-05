@@ -349,7 +349,7 @@ class Relatorioempresa extends CI_Controller {
 
         $data['select']['Nome'] = $this->Relatorioempresa_model->select_empresafilial();
 
-        $data['titulo'] = 'Relatório Empresa Filial';
+        $data['titulo'] = 'Relatório Empresa ';
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {

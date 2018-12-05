@@ -4,7 +4,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Empresa extends CI_Controller {
+class Empresacli extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -19,7 +19,7 @@ class Empresa extends CI_Controller {
 
         #load header view
         $this->load->view('basico/header');
-        $this->load->view('basico/nav_principalempresa');
+        $this->load->view('basico/nav_principal');
 
         #$this->load->view('empresa/nav_secundario');
     }
@@ -353,7 +353,7 @@ class Empresa extends CI_Controller {
             $data['list'] = $this->load->view('empresa/list_contatoempresa', $data, TRUE);
 
         $data['nav_secundario'] = $this->load->view('empresa/nav_secundario', $data, TRUE);
-        $this->load->view('empresa/tela_empresa', $data);
+        $this->load->view('empresa/tela_empresacli', $data);
 
         $this->load->view('basico/footer');
     }

@@ -62,48 +62,48 @@
 									<div class="form-group">
 										<div class="row">										
 											<div class="col-md-3">
-												<label for="CnpjFilial">Cnpj:</label>
+												<label for="Cnpj">Cnpj:</label>
 												<input type="text" class="form-control Cnpj" maxlength="18" <?php echo $readonly; ?>
-													   name="CnpjFilial" placeholder="99.999.999/9999-98" value="<?php echo $query['CnpjFilial']; ?>">
+													   name="Cnpj" placeholder="99.999.999/9999-98" value="<?php echo $query['Cnpj']; ?>">
 											</div>
 											<div class="col-md-3">
-												<label for="InscEstadualFilial">Insc.Estadual:</label>
+												<label for="InscEstadual">Insc.Estadual:</label>
 												<input type="text" class="form-control" maxlength="11" <?php echo $readonly; ?>
-													   name="InscEstadualFilial" value="<?php echo $query['InscEstadualFilial']; ?>">
+													   name="InscEstadual" value="<?php echo $query['InscEstadual']; ?>">
 											</div>
 											<div class="col-md-3">
-												<label for="TelefoneFilial">Tel.Empresa:</label>
-												<input type="text" class="form-control Celular CelularVariavel" id="TelefoneFilial" maxlength="11" <?php echo $readonly; ?>
-													   name="TelefoneFilial" placeholder="(XX)999999999" value="<?php echo $query['TelefoneFilial']; ?>">
+												<label for="Telefone">Tel.Empresa:</label>
+												<input type="text" class="form-control Celular CelularVariavel" id="Telefone" maxlength="11" <?php echo $readonly; ?>
+													   name="Telefone" placeholder="(XX)999999999" value="<?php echo $query['Telefone']; ?>">
 											</div>																				
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-3">
-												<label for="EnderecoFilial">Endreço:</label>
+												<label for="Endereco">Endreço:</label>
 												<input type="text" class="form-control" maxlength="200" <?php echo $readonly; ?>
-													   name="EnderecoFilial" value="<?php echo $query['EnderecoFilial']; ?>">
+													   name="Endereco" value="<?php echo $query['Endereco']; ?>">
 											</div>
 											<div class="col-md-3">
-												<label for="BairroFilial">Bairro:</label>
+												<label for="Bairro">Bairro:</label>
 												<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
-													   name="BairroFilial" value="<?php echo $query['BairroFilial']; ?>">
+													   name="Bairro" value="<?php echo $query['Bairro']; ?>">
 											</div>
 											<div class="col-md-3">
-												<label for="MunicipioFilial">Municipio:</label>
+												<label for="Municipio">Municipio:</label>
 												<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
-													   name="MunicipioFilial" value="<?php echo $query['MunicipioFilial']; ?>">
+													   name="Municipio" value="<?php echo $query['Municipio']; ?>">
 											</div>												
 											<div class="col-md-1">
-												<label for="EstadoFilial">Estado:</label>
+												<label for="Estado">Estado:</label>
 												<input type="text" class="form-control" maxlength="2" <?php echo $readonly; ?>
-													   name="EstadoFilial" value="<?php echo $query['EstadoFilial']; ?>">
+													   name="Estado" value="<?php echo $query['Estado']; ?>">
 											</div>
 											<div class="col-md-2">
-												<label for="CepFilial">Cep:</label>
+												<label for="Cep">Cep:</label>
 												<input type="text" class="form-control" maxlength="8" <?php echo $readonly; ?>
-													   name="CepFilial" value="<?php echo $query['CepFilial']; ?>">
+													   name="Cep" value="<?php echo $query['Cep']; ?>">
 											</div>
 										</div>
 									</div>
@@ -127,8 +127,16 @@
 													   name="Email" value="<?php echo $query['Email']; ?>">
 											</div>
 										</div>
-									</div>									
-									
+									</div>	
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-12">
+												<label for="Atuacao">Atuação:</label>
+												<textarea class="form-control" id="Atuacao" <?php echo $readonly; ?>
+														  name="Atuacao"><?php echo $query['Atuacao']; ?></textarea>
+											</div>
+										</div>
+									</div>
 									<br>
 
 									<div class="form-group">
