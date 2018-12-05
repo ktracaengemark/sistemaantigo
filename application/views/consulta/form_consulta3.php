@@ -189,7 +189,10 @@
 												</span>
 											</div>-->
 										</div>
-										
+									</div>
+								</div>		
+								<div class="form-group">
+									<div class="row">										
 										<div class="col-md-6">	
 											<label for="Data2">Data Fim : </label>												
 											<div class="input-group <?php echo $datepicker; ?>">
@@ -218,7 +221,6 @@
 
 							</div>
 
-							<hr>
 							<div class="form-group">
 								<div class="row">
 
@@ -229,12 +231,10 @@
 									</div>
 								</div>
 							</div>
-
-							<hr>									
-
+									
 							<div class="form-group">
 								<div class="row">
-									<div class="col-md-9 form-inline">
+									<div class="col-md-12 form-inline">
 										<label for="idTab_Status">Status:</label><br>
 										<div class="form-group">
 											<div class="btn-group" data-toggle="buttons">

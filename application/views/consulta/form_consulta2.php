@@ -144,8 +144,8 @@
 <?php } ?>
 
 			<div class="row">
-
-				<div class="col-md-12 col-lg-12">
+				
+				<div class="col-sm-offset-2 col-md-8">
 					<?php #echo validation_errors(); ?>
 
 					<div class="panel panel-<?php echo $panel; ?>">
@@ -159,7 +159,24 @@
 
 										<div class="form-group">
 											<div class="row">
-												<div class="col-md-4"></div>
+												<div class="col-md-6">
+													<label for="idApp_Agenda">Agenda do Profis.*</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+															id="idApp_Agenda" autofocus name="idApp_Agenda">
+														<?php echo $select['option']; ?>
+														<?php
+														foreach ($select['idApp_Agenda'] as $key => $row) {
+															if ($query['idApp_Agenda'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+													
+												</div>
+												<?php echo form_error('idApp_Agenda'); ?>
 												<!--
 												<div class="col-md-4">
 													<label for="idApp_Cliente">Cliente:*</label>
@@ -182,24 +199,6 @@
 												</div>
 												<?php# echo form_error('idApp_Cliente'); ?>
 												-->
-												<div class="col-md-4">
-													<label for="idApp_Agenda">Agenda do Profis.*</label>
-													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-															id="idApp_Agenda" autofocus name="idApp_Agenda">
-														<?php echo $select['option']; ?>
-														<?php
-														foreach ($select['idApp_Agenda'] as $key => $row) {
-															if ($query['idApp_Agenda'] == $key) {
-																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-															} else {
-																echo '<option value="' . $key . '">' . $row . '</option>';
-															}
-														}
-														?>
-													</select>
-													
-												</div>
-												<?php echo form_error('idApp_Agenda'); ?>
 												<!--
 												<div class="col-md-4">
 													<label for="idSis_EmpresaFilial">Unidade: *</label>
@@ -254,7 +253,10 @@
 														</span>
 													</div>-->
 												</div>
-												
+											</div>
+										</div>		
+										<div class="form-group">
+											<div class="row">												
 												<div class="col-md-6">	
 													<label for="Data2">Data Fim : </label>												
 													<div class="input-group <?php echo $datepicker; ?>">
@@ -281,7 +283,7 @@
 										
 										<div class="form-group">
 											<div class="row">
-												<div class="col-md-3 form-inline text-left">
+												<div class="col-md-6 form-inline text-left">
 													<label for="idTab_TipoConsulta">Tipo de Consulta:</label><br>
 													<div class="form-group">
 														<div class="btn-block" data-toggle="buttons">
@@ -309,35 +311,37 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-md-9 form-inline text-left">
-													<label for="idTab_Status">Status:</label><br>
-													<div class="form-group">
-														<div class="btn-block" data-toggle="buttons">
-															<?php
-															foreach ($select['Status'] as $key => $row) {
-																if (!$query['idTab_Status'])
-																	$query['idTab_Status'] = 1;
+											</div>
+										</div>															
+										<div class="form-group col-md-12">
+											<div class="row">
+												<label for="idTab_Status">Status:</label><br>
+												<div class="form-group">
+													<div class="btn-block" data-toggle="buttons">
+														<?php
+														foreach ($select['Status'] as $key => $row) {
+															if (!$query['idTab_Status'])
+																$query['idTab_Status'] = 1;
 
-																if ($query['idTab_Status'] == $key) {
-																	echo ''
-																	. '<label class="btn btn-' . $this->basico->tipo_status_cor($key) . ' active" name="radio" id="radio' . $key . '">'
-																	. '<input type="radio" name="idTab_Status" id="radio" '
-																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																	. '</label>'
-																	;
-																} else {
-																	echo ''
-																	. '<label class="btn btn-default" name="radio" id="radio' . $key . '">'
-																	. '<input type="radio" name="idTab_Status" id="radio" class="idTab_Status" '
-																		. 'autocomplete="off" value="' . $key . '" >' . $row
-																	. '</label>'
-																	;
-																}
+															if ($query['idTab_Status'] == $key) {
+																echo ''
+																. '<label class="btn btn-' . $this->basico->tipo_status_cor($key) . ' active" name="radio" id="radio' . $key . '">'
+																. '<input type="radio" name="idTab_Status" id="radio" '
+																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																. '</label>'
+																;
+															} else {
+																echo ''
+																. '<label class="btn btn-default" name="radio" id="radio' . $key . '">'
+																. '<input type="radio" name="idTab_Status" id="radio" class="idTab_Status" '
+																	. 'autocomplete="off" value="' . $key . '" >' . $row
+																. '</label>'
+																;
 															}
-															?>
-														</div>
+														}
+														?>
 													</div>
-												</div>										
+												</div>
 											</div>
 										</div>
 										<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
@@ -398,6 +402,7 @@
 										<?php } ?>
 										</form>
 									</div>
+									
 								</div>
 							</div>
 						</div>
