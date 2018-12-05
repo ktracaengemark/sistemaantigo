@@ -128,7 +128,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
-				$_SESSION['log']['NomeEmpresa2'] = (strlen($query['NomeEmpresa']) > 10) ? substr($query['NomeEmpresa'], 0, 10) : $query['NomeEmpresa'];
+				$_SESSION['log']['NomeEmpresa2'] = (strlen($query['NomeEmpresa']) > 6) ? substr($query['NomeEmpresa'], 0, 6) : $query['NomeEmpresa'];
 				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
@@ -252,7 +252,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
-				$_SESSION['log']['NomeEmpresa2'] = (strlen($query['NomeEmpresa']) > 10) ? substr($query['NomeEmpresa'], 0, 10) : $query['NomeEmpresa'];
+				$_SESSION['log']['NomeEmpresa2'] = (strlen($query['NomeEmpresa']) > 6) ? substr($query['NomeEmpresa'], 0, 6) : $query['NomeEmpresa'];
 				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
@@ -376,7 +376,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
-				$_SESSION['log']['NomeEmpresa2'] = (strlen($query['NomeEmpresa']) > 10) ? substr($query['NomeEmpresa'], 0, 10) : $query['NomeEmpresa'];
+				$_SESSION['log']['NomeEmpresa2'] = (strlen($query['NomeEmpresa']) > 6) ? substr($query['NomeEmpresa'], 0, 6) : $query['NomeEmpresa'];
 				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
