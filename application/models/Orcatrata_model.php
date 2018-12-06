@@ -347,6 +347,53 @@ class Orcatrata_model extends CI_Model {
 
         return $query;
     }
+
+    public function get_alterarprocedempresa($data) {
+		
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		$permissao1 = ($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != "#" ) ? 'P.ConcluidoProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] . '" AND ' : FALSE;
+		$permissao2 = ($_SESSION['FiltroAlteraProcedimento']['Mesvenc'] != "0" ) ? 'MONTH(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Mesvenc'] . '" AND ' : FALSE;
+		$permissao3 = ($_SESSION['FiltroAlteraProcedimento']['Ano'] != "" ) ? 'YEAR(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Ano'] . '" AND ' : FALSE;
+		$permissao5 = ($_SESSION['FiltroAlteraProcedimento']['Dia'] != "0" ) ? 'DAY(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Dia'] . '" AND ' : FALSE;
+		
+		$query = $this->db->query('
+			SELECT
+				
+				P.idApp_Procedimento,
+				
+				UR.Nome AS Nome,
+				P.idSis_Usuario,
+				ER.NomeEmpresa AS NomeEmpresa,
+				P.idSis_Empresa,
+                P.Procedimento,
+				P.DataProcedimento,
+				P.ConcluidoProcedimento,
+				
+				UE.Nome AS NomeCli,
+				P.idSis_UsuarioCli,
+				EE.NomeEmpresa AS NomeEmpresaCli,
+				P.idSis_EmpresaCli,
+                P.ProcedimentoCli,
+				P.DataProcedimentoCli,
+				P.ConcluidoProcedimentoCli
+            FROM
+				App_Procedimento AS P
+					LEFT JOIN Sis_Usuario AS UE ON UE.idSis_Usuario = P.idSis_UsuarioCli
+					LEFT JOIN Sis_Usuario AS UR ON UR.idSis_Usuario = P.idSis_Usuario
+					LEFT JOIN Sis_Empresa AS EE ON EE.idSis_Empresa = P.idSis_EmpresaCli
+					LEFT JOIN Sis_Empresa AS ER ON ER.idSis_Empresa = P.idSis_Empresa
+			WHERE 
+
+				' . $_SESSION['log']['idSis_Empresa'] . ' = ' . $data . '  AND
+				P.idSis_Empresa = ' . $data . '  AND
+				P.idSis_EmpresaCli != "0"  AND
+				P.idApp_OrcaTrata = "0" AND
+				P.idApp_Cliente = "0" 
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }
 	
     public function list_orcamento($id, $aprovado, $completo) {
 

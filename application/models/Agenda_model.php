@@ -130,14 +130,17 @@ class Agenda_model extends CI_Model {
 
     }	
 
-	public function procedimentoenv($data) {
-   
+	public function procedempresa($data) {
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_UsuarioCli = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		$query = $this->db->query('
             SELECT
 				C.NomeCliente,
-				E.NomeEmpresa,
-				UE.Nome AS NomeEnv,
-				UR.Nome AS NomeRes,
+				EE.NomeEmpresa AS NomeEmpresaCli,
+				ER.NomeEmpresa AS NomeEmpresa,
+				UE.Nome AS NomeCli,
+				UR.Nome AS Nome,
+				P.idSis_Empresa,
+				P.idSis_EmpresaCli,
 				P.idApp_Procedimento,
                 P.idApp_OrcaTrata,
 				P.idApp_Cliente,
@@ -151,14 +154,20 @@ class Agenda_model extends CI_Model {
             FROM
 				App_Procedimento AS P
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
-					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = P.idSis_Empresa
+					LEFT JOIN Sis_Empresa AS EE ON EE.idSis_Empresa = P.idSis_EmpresaCli
+					LEFT JOIN Sis_Empresa AS ER ON ER.idSis_Empresa = P.idSis_Empresa
 					LEFT JOIN Sis_Usuario AS UE ON UE.idSis_Usuario = P.idSis_UsuarioCli
 					LEFT JOIN Sis_Usuario AS UR ON UR.idSis_Usuario = P.idSis_Usuario
             WHERE 
-				P.idSis_EmpresaCli = ' . $_SESSION['log']['idSis_Empresa'] . ' 
-
+				(P.idSis_EmpresaCli = ' . $_SESSION['log']['idSis_Empresa'] . ' OR
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' ) AND
+				' . $permissao . '
+				P.idSis_EmpresaCli != "0" AND
+				P.idApp_OrcaTrata = "0" AND
+				P.idApp_Cliente = "0" 
             ORDER BY
-                P.DataProcedimentoCli ASC
+                P.DataProcedimentoCli ASC,
+				P.DataProcedimento ASC
         ');
 
         if ($query->num_rows() === FALSE) {
