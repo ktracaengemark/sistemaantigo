@@ -166,8 +166,7 @@ class Agenda_model extends CI_Model {
 				P.idApp_OrcaTrata = "0" AND
 				P.idApp_Cliente = "0" 
             ORDER BY
-                P.DataProcedimentoCli ASC,
-				P.DataProcedimento ASC
+				P.DataProcedimentoCli ASC
         ');
 
         if ($query->num_rows() === FALSE) {

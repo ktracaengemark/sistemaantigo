@@ -46,17 +46,17 @@
 													<div class="panel-heading">
 														<div class="row">
 															<div class="col-md-2">
-																<label for="NomeCli<?php echo $i ?>">Usuário:</label>
-																<div class="form-control" id="NomeCli<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
-																		  name="NomeCli<?php echo $i ?>"><?php echo $procedimento[$i]['NomeCli']; ?></div>
+																<label for="NomeCli<?php echo $i ?>">Emissor:</label>
+																<input class="form-control" id="NomeCli<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
+																		  name="NomeCli<?php echo $i ?>" value="<?php echo $procedimento[$i]['NomeCli']; ?>">
 															</div>
 															<div class="col-md-2">
 																<label for="NomeEmpresaCli<?php echo $i ?>">Empresa:</label>
-																<div class="form-control" id="NomeEmpresaCli<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
-																		  name="NomeEmpresaCli<?php echo $i ?>"><?php echo $procedimento[$i]['NomeEmpresaCli']; ?></div>
+																<input class="form-control" id="NomeEmpresaCli<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
+																		  name="NomeEmpresaCli<?php echo $i ?>" value="<?php echo $procedimento[$i]['NomeEmpresaCli']; ?>">
 															</div>
 															<div class="col-md-3">
-																<label for="ProcedimentoCli<?php echo $i ?>">Enviou:</label>
+																<label for="ProcedimentoCli<?php echo $i ?>">Perguntou:</label>
 																<textarea class="form-control" id="ProcedimentoCli<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
 																		  name="ProcedimentoCli<?php echo $i ?>"><?php echo $procedimento[$i]['ProcedimentoCli']; ?></textarea>
 															</div>
@@ -66,11 +66,11 @@
 																	<span class="input-group-addon" disabled>
 																		<span class="glyphicon glyphicon-calendar"></span>
 																	</span>
-																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA" readonly=""
 																		   name="DataProcedimentoCli<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimentoCli']; ?>">
 																</div>
 															</div>
-
+															<!--
 															<div class="col-md-2">
 																<label for="ConcluidoProcedimentoCli">Cl.Env? </label><br>
 																<div class="form-group">
@@ -99,21 +99,24 @@
 																	</div>
 																</div>
 															</div>
+															-->
 														</div>	
 														<div class="row">	
-															
+															<!--
 															<div class="col-md-2">
-																<label for="Nome<?php echo $i ?>">Usuário:</label>
-																<div class="form-control" id="Nome<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
-																		  name="Nome<?php echo $i ?>"><?php echo $procedimento[$i]['Nome']; ?></div>
+																<label for="Nome<?php echo $i ?>">Receptor:</label>
+																<textarea class="form-control" id="Nome<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
+																		  name="Nome<?php echo $i ?>"><?php echo $procedimento[$i]['Nome']; ?></textarea>
 															</div>
+															-->
+															<div class="col-md-2"></div>
 															<div class="col-md-2">
 																<label for="NomeEmpresa<?php echo $i ?>">Empresa:</label>
-																<div class="form-control" id="NomeEmpresa<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
-																		  name="NomeEmpresa<?php echo $i ?>"><?php echo $procedimento[$i]['NomeEmpresa']; ?></div>
+																<input class="form-control" id="NomeEmpresa<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
+																		  name="NomeEmpresa<?php echo $i ?>" value="<?php echo $procedimento[$i]['NomeEmpresa']; ?>">
 															</div>
 															<div class="col-md-3">
-																<label for="Procedimento<?php echo $i ?>">Mens.Resp:</label>
+																<label for="Procedimento<?php echo $i ?>">Respondeu:</label>
 																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 															</div>
@@ -123,13 +126,13 @@
 																	<span class="input-group-addon" disabled>
 																		<span class="glyphicon glyphicon-calendar"></span>
 																	</span>
-																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA" 
 																		   name="DataProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimento']; ?>">
 																</div>
 															</div>
 
 															<div class="col-md-2">
-																<label for="ConcluidoProcedimento">Cl.Resp? </label><br>
+																<label for="ConcluidoProcedimento">Respondido? </label><br>
 																<div class="form-group">
 																	<div class="btn-group" data-toggle="buttons">
 																		<?php

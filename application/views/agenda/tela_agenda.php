@@ -445,16 +445,16 @@
 								<table class="table table-condensed table-bordered table-striped" >
 									<tr>
 										<th class="active">id</th>
-										<th class="active">Usuário</th>
+										<th class="active">Emissor</th>
 										<th class="active">Empresa</th>
-										<th class="active">Mens.Env.</th>
+										<th class="active">Pergunta</th>
 										<th class="active">DtEnv</th>
-										<th class="active">Conc.</th>
+										<!--<th class="active">Conc.</th>-->
 										<th class="active">Empresa</th>
-										<th class="active">Usuário</th>
-										<th class="active">Mens.Res.</th>
+										<!--<th class="active">Recptor</th>-->
+										<th class="active">Resposta</th>
 										<th class="active">DtRes</th>
-										<th class="active">Conc.</th>
+										<th class="active">Resp.</th>
 									</tr>
 									<?php
 									if ($query['procedempresa'] != FALSE) {
@@ -469,9 +469,9 @@
 												echo '<td>' . $row['NomeEmpresaCli'] . '</td>';
 												echo '<td>' . $row['ProcedimentoCli'] . '</td>';
 												echo '<td>' . $row['DataProcedimentoCli'] . '</td>';
-												echo '<td>' . $row['ConcluidoProcedimentoCli'] . '</td>';
+												#echo '<td>' . $row['ConcluidoProcedimentoCli'] . '</td>';
 												echo '<td>' . $row['NomeEmpresa'] . '</td>';
-												echo '<td>' . $row['Nome'] . '</td>';
+												#echo '<td>' . $row['Nome'] . '</td>';
 												echo '<td>' . $row['Procedimento'] . '</td>';
 												echo '<td>' . $row['DataProcedimento'] . '</td>';
 												echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';

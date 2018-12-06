@@ -4,8 +4,8 @@
 <div class="container-fluid">
 	<div class="row">
 	
-		<div class="col-md-4"></div>
-		<div class="col-md-4">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
 		
 			<div class="row">
 				<div class="col-md-12 col-lg-12">	
@@ -28,7 +28,7 @@
 								<div class="panel panel-info">
 									<div class="panel-heading">
 										<div class="row">	
-											<div class="col-md-12">
+											<div class="col-md-6">
 												<label for="idSis_Empresa">Empresa:*</label>
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> readonly=""
 														id="idSis_Empresa" autofocus name="idSis_Empresa">
@@ -47,12 +47,13 @@
 										</div>	
 										<?php echo form_error('idSis_Empresa'); ?>
 										<div class="row">
-											<div class="col-md-10">
-												<label for="ProcedimentoCli">Procedimento:</label>
+											<div class="col-md-12">
+												<label for="ProcedimentoCli">Pergunta:</label>
 												<textarea class="form-control" id="ProcedimentoCli" <?php echo $readonly; ?>
 														  name="ProcedimentoCli"><?php echo $query['ProcedimentoCli']; ?></textarea>
 											</div>
 										</div>	
+										<!--
 										<div class="row">	
 											<div class="col-md-6">
 												<label for="DataProcedimentoCli">Data:</label>
@@ -60,6 +61,7 @@
 													   name="DataProcedimentoCli" placeholder="DD/MM/AAAA" value="<?php echo $query['DataProcedimentoCli']; ?>">
 											</div>
 										</div>	
+										
 										<div class="row">	
 											<div class="col-md-4">
 												<label for="ConcluidoProcedimentoCli">Concluída</label><br>
@@ -67,7 +69,7 @@
 													<div class="btn-group" data-toggle="buttons">
 														<?php
 														foreach ($select['ConcluidoProcedimentoCli'] as $key => $row) {
-															(!$query['ConcluidoProcedimentoCli']) ? $query['ConcluidoProcedimentoCli'] = 'N' : FALSE;
+															(!$query['ConcluidoProcedimentoCli']) ? $query['ConcluidoProcedimentoCli'] = 'S' : FALSE;
 
 															if ($query['ConcluidoProcedimentoCli'] == $key) {
 																echo ''
@@ -90,11 +92,10 @@
 												</div>
 											</div>
 										</div>
+										-->
 									</div>
 								</div>
 							</div>
-
-							<br>
 
 							<div class="form-group">
 								<div class="row">

@@ -388,7 +388,8 @@ class Orcatrata_model extends CI_Model {
 				P.idSis_Empresa = ' . $data . '  AND
 				P.idSis_EmpresaCli != "0"  AND
 				P.idApp_OrcaTrata = "0" AND
-				P.idApp_Cliente = "0" 
+				P.idApp_Cliente = "0" AND
+				P.ConcluidoProcedimento = "N" 
 		');
         $query = $query->result_array();
 

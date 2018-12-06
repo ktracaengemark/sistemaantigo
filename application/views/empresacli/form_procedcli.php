@@ -16,44 +16,11 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span> 
 					</button>
-					<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+					<a class="navbar-brand">
 						<?php echo '<small>' . $_SESSION['Empresa']['idSis_Empresa'] . '</small> - <small>' . $_SESSION['Empresa']['NomeEmpresa'] . '.</small>' ?> 
 					</a>
 				</div>
-				<div class="collapse navbar-collapse" id="myNavbar">
-					<ul class="nav navbar-nav navbar-center">
-						<?php if ($_SESSION['log']['NivelEmpresa'] >= 1 ) { ?>
-						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
-							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-pencil"></span> Procedimentos <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu">
-									<!--
-									<li>
-										<a <?php if (preg_match("/empresacli\/listarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
-											<a href="<?php echo base_url() . 'empresacli/listarproc/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-												<span class="glyphicon glyphicon-pencil"></span> Listar
-											</a>
-										</a>
-									</li>
-									<li role="separator" class="divider"></li>
-									-->
-									<li>
-										<a <?php if (preg_match("/empresacli\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-											<a href="<?php echo base_url() . 'empresacli/cadastrarproc/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-												<span class="glyphicon glyphicon-plus"></span> Cadastrar
-											</a>
-										</a>
-									</li>
-								</ul>
-							</div>
-							<div class="btn-group" role="group" aria-label="..."> </div>
-						</li>
-						<?php } ?>
-					</ul>
 
-				</div>
 			  </div>
 			</nav>
 			<?php } ?>
@@ -66,7 +33,7 @@
 
 					<div class="panel panel-<?php echo $panel; ?>">
 
-						<div class="panel-heading"><strong>Procedimento - </strong><?php echo $orcatrata['idApp_Procedimento'] ?></div>
+						<div class="panel-heading"><strong>Mensagem - </strong><?php echo $orcatrata['idApp_Procedimento'] ?></div>
 						<div class="panel-body">
 
 							<?php echo form_open_multipart($form_open_path); ?>
@@ -78,13 +45,14 @@
 										<div class="col-md-1"></div>
 										<div class="form-group text-left">
 											<div class="row">
-												<div class="col-md-6">
-													<label for="ProcedimentoCli">Procedimento:</label>
+												<div class="col-md-10">
+													<label for="ProcedimentoCli">Pergunta:</label>
 													<textarea class="form-control" id="ProcedimentoCli" <?php echo $readonly; ?>
 															  name="ProcedimentoCli"><?php echo $orcatrata['ProcedimentoCli']; ?></textarea>
 												</div>
 											</div>
 										</div>
+										<!--
 										<div class="col-md-1"></div>
 										<div class="form-group text-left">
 											<div class="row">
@@ -101,6 +69,7 @@
 											</div>
 										</div>
 										<div class="col-md-1"></div>
+										
 										<div class="form-group text-left">
 											<div class="row">
 												<div class="col-md-3 form-inline">
@@ -133,6 +102,7 @@
 												</div>
 											</div>
 										</div>
+										-->
 									</div>
 								</div>
 							</div>

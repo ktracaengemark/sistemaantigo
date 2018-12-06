@@ -90,7 +90,6 @@ class Empresacli extends CI_Controller {
 			'idApp_Procedimento',
 			'ProcedimentoCli',
             'DataProcedimentoCli',
-			'ConcluidoProcedimentoCli',
 
         ), TRUE));
 
@@ -106,7 +105,7 @@ class Empresacli extends CI_Controller {
 		$data['select']['ConcluidoProcedimentoCli'] = $this->Basico_model->select_status_sn();
 		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa1();
 		
-        $data['titulo'] = 'Procedimento';
+        $data['titulo'] = 'Mensagem';
         $data['form_open_path'] = 'empresacli/cadastrarproc2';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -131,6 +130,8 @@ class Empresacli extends CI_Controller {
 			$data['query']['idSis_EmpresaCli'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['idSis_UsuarioCli'] = $_SESSION['log']['id'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			$data['query']['ConcluidoProcedimentoCli'] = "S";
+			$data['query']['ConcluidoProcedimento'] = "N";
 
             $data['campos'] = array_keys($data['query']);
             $data['anterior'] = array();
@@ -173,7 +174,6 @@ class Empresacli extends CI_Controller {
             'idSis_Empresa',
             'DataProcedimentoCli',
 			'ProcedimentoCli',
-			'ConcluidoProcedimentoCli',
 
         ), TRUE));
 
@@ -194,7 +194,7 @@ class Empresacli extends CI_Controller {
         $data['select']['ConcluidoProcedimentoCli'] = $this->Basico_model->select_status_sn();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 
-        $data['titulo'] = 'Procedimento com Empresas';
+        $data['titulo'] = 'Mensagem';
         $data['form_open_path'] = 'empresacli/cadastrarproc';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -233,6 +233,8 @@ class Empresacli extends CI_Controller {
 			$data['orcatrata']['idSis_EmpresaCli'] = $_SESSION['log']['idSis_Empresa'];
             $data['orcatrata']['idSis_UsuarioCli'] = $_SESSION['log']['id'];
             $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			$data['query']['ConcluidoProcedimentoCli'] = "S";
+			$data['query']['ConcluidoProcedimento'] = "N";
             $data['orcatrata']['idApp_Procedimento'] = $this->Procedimento_model->set_orcatrata($data['orcatrata']);
 
 /*
