@@ -122,11 +122,11 @@
 															</div>
 															<div class="col-md-2">
 																<label for="DataProcedimento<?php echo $i ?>">Dt.Resp:</label>
-																<div class="input-group <?php echo $datepicker; ?>">
+																<div class="input-group DatePicker">
 																	<span class="input-group-addon" disabled>
 																		<span class="glyphicon glyphicon-calendar"></span>
 																	</span>
-																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA" 
+																	<input type="text" class="form-control Date" id="DataProcedimento<?php echo $i ?>"  maxlength="10" placeholder="DD/MM/AAAA" readonly=""
 																		   name="DataProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimento']; ?>">
 																</div>
 															</div>
@@ -143,6 +143,7 @@
 																				echo ''
 																				. '<label class="btn btn-warning active" name="radiobutton_ConcluidoProcedimento' . $i . '" id="radiobutton_ConcluidoProcedimento' . $i .  $key . '">'
 																				. '<input type="radio" name="ConcluidoProcedimento' . $i . '" id="radiobuttondinamico" '
+																				. 'onchange="carregaQuitado3(this.value,this.name,'.$i.')" '
 																				. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																				. '</label>'
 																				;
@@ -150,6 +151,7 @@
 																				echo ''
 																				. '<label class="btn btn-default" name="radiobutton_ConcluidoProcedimento' . $i . '" id="radiobutton_ConcluidoProcedimento' . $i .  $key . '">'
 																				. '<input type="radio" name="ConcluidoProcedimento' . $i . '" id="radiobuttondinamico" '
+																				. 'onchange="carregaQuitado3(this.value,this.name,'.$i.')" '
 																				. 'autocomplete="off" value="' . $key . '" >' . $row
 																				. '</label>'
 																				;

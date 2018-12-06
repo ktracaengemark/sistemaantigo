@@ -444,7 +444,8 @@
 							<div style="overflow: auto; height: 410px; ">
 								<table class="table table-condensed table-bordered table-striped" >
 									<tr>
-										<th class="active">id</th>
+										<th class="active">Resp.</th>
+										<!--<th class="active">id</th>-->
 										<th class="active">Emissor</th>
 										<th class="active">Empresa</th>
 										<th class="active">Pergunta</th>
@@ -454,7 +455,6 @@
 										<!--<th class="active">Recptor</th>-->
 										<th class="active">Resposta</th>
 										<th class="active">DtRes</th>
-										<th class="active">Resp.</th>
 									</tr>
 									<?php
 									if ($query['procedempresa'] != FALSE) {
@@ -464,7 +464,8 @@
 
 											echo '<tr class="clickable-row" data-href="' . $url . '" data-original-title="' . $row['Idade'] . ' anos" data-container="body"
 													data-toggle="tooltip" data-placement="right" title="">';
-												echo '<td>' . $row['idApp_Procedimento'] . '</td>';
+												echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
+												#echo '<td>' . $row['idApp_Procedimento'] . '</td>';
 												echo '<td>' . $row['NomeCli'] . '</td>';
 												echo '<td>' . $row['NomeEmpresaCli'] . '</td>';
 												echo '<td>' . $row['ProcedimentoCli'] . '</td>';
@@ -474,7 +475,7 @@
 												#echo '<td>' . $row['Nome'] . '</td>';
 												echo '<td>' . $row['Procedimento'] . '</td>';
 												echo '<td>' . $row['DataProcedimento'] . '</td>';
-												echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
+												
 											echo '</tr>';
 
 										}

@@ -141,7 +141,30 @@ function calculaQtdSomaDev(campo, soma, somaproduto, excluir, produtonum, countm
  */
 
  /*Carrega a Data do Dia do lançamento*/
-function carregaQuitado2(value, name, i, cadastrar = 0) {
+ function carregaQuitado3(value, name, i, cadastrar = 0) {
+
+    if (value == "S") {
+
+
+        if (!$("#DataProcedimento"+i).val()) {
+            if (cadastrar == 1)
+                $("#DataProcedimento"+i).val($("#DataProcedimentoCli"+i).val())
+            else
+                $("#DataProcedimento"+i).val(currentDate.format('DD/MM/YYYY'))
+        }
+
+
+    }
+    else {
+
+        $("#DataProcedimento"+i).val("")
+
+    }
+
+}
+
+ /*Carrega a Data do Dia do lançamento*/
+ function carregaQuitado2(value, name, i, cadastrar = 0) {
 
     if (value == "S") {
 
