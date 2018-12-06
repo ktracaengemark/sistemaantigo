@@ -89,7 +89,9 @@ class Empresacli extends CI_Controller {
 			'idSis_Empresa',
 			'idApp_Procedimento',
 			'ProcedimentoCli',
-            'DataProcedimentoCli',
+			'DataProcedimentoCli',
+			'ConcluidoProcedimentoCli',
+			'ConcluidoProcedimento',
 
         ), TRUE));
 
@@ -99,7 +101,7 @@ class Empresacli extends CI_Controller {
 
         #$this->form_validation->set_rules('Procedimento', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Procedimento.Procedimento.DataProcedimento.' . $this->basico->mascara_data($data['query']['DataProcedimento'], 'mysql') . ']');
 
-        $this->form_validation->set_rules('DataProcedimentoCli', 'Data de Nascimento', 'trim|valid_date');
+        $this->form_validation->set_rules('ProcedimentoCli', 'Mensagem', 'required|trim');
 		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
 		
 		$data['select']['ConcluidoProcedimentoCli'] = $this->Basico_model->select_status_sn();
@@ -145,8 +147,8 @@ class Empresacli extends CI_Controller {
                 $this->load->view('empresacli/form_procedcli2', $data);
             } else {
 
-                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Procedimento'], FALSE);
-                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Procedimento', 'CREATE', $data['auditoriaitem']);
+                #$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Procedimento'], FALSE);
+                #$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Procedimento', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
                 redirect(base_url() . 'agenda' . $data['msg']);
@@ -172,8 +174,10 @@ class Empresacli extends CI_Controller {
             #### App_Procedimento ####
             'idApp_Procedimento',
             'idSis_Empresa',
-            'DataProcedimentoCli',
 			'ProcedimentoCli',
+			'DataProcedimentoCli',
+			'ConcluidoProcedimentoCli',
+			'ConcluidoProcedimento',
 
         ), TRUE));
 
@@ -188,7 +192,7 @@ class Empresacli extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### App_Procedimento ####
-        $this->form_validation->set_rules('DataProcedimentoCli', 'Data do Procedimento', 'required|trim|valid_date');
+        $this->form_validation->set_rules('ProcedimentoCli', 'Mensagem', 'required|trim');
 
 
         $data['select']['ConcluidoProcedimentoCli'] = $this->Basico_model->select_status_sn();
@@ -233,8 +237,8 @@ class Empresacli extends CI_Controller {
 			$data['orcatrata']['idSis_EmpresaCli'] = $_SESSION['log']['idSis_Empresa'];
             $data['orcatrata']['idSis_UsuarioCli'] = $_SESSION['log']['id'];
             $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-			$data['query']['ConcluidoProcedimentoCli'] = "S";
-			$data['query']['ConcluidoProcedimento'] = "N";
+			$data['orcatrata']['ConcluidoProcedimentoCli'] = "S";
+			$data['orcatrata']['ConcluidoProcedimento'] = "N";
             $data['orcatrata']['idApp_Procedimento'] = $this->Procedimento_model->set_orcatrata($data['orcatrata']);
 
 /*

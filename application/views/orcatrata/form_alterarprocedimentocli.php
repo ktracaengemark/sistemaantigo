@@ -45,13 +45,18 @@
 												<div class="panel panel-info">
 													<div class="panel-heading">
 														<div class="row">
+															<div class="col-md-3">
+																<label for="NomeCliente<?php echo $i ?>">Cliente:</label>
+																<input class="form-control" id="NomeCliente<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
+																		  name="NomeCliente<?php echo $i ?>" value="<?php echo $procedimento[$i]['NomeCliente']; ?>">
+															</div>
 															<div class="col-md-4">
 																<label for="Procedimento<?php echo $i ?>">Procedimento:</label>
 																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 															</div>
 															<div class="col-md-2">
-																<label for="DataProcedimento<?php echo $i ?>">Data do Proced.:</label>
+																<label for="DataProcedimento<?php echo $i ?>">Data:</label>
 																<div class="input-group <?php echo $datepicker; ?>">
 																	<span class="input-group-addon" disabled>
 																		<span class="glyphicon glyphicon-calendar"></span>
@@ -62,7 +67,7 @@
 															</div>
 
 															<div class="col-md-2">
-																<label for="ConcluidoProcedimento">Proc. Concl.? </label><br>
+																<label for="ConcluidoProcedimento">Concluído? </label><br>
 																<div class="form-group">
 																	<div class="btn-group" data-toggle="buttons">
 																		<?php
@@ -95,7 +100,7 @@
 																	<span class="glyphicon glyphicon-trash"></span>
 																</button>
 															</div>
-															
+															<!--
 															<div class="col-md-3">
 																<label for="idApp_Cliente<?php echo $i ?>">Cliente:</label>
 																<?php if ($i == 1) { ?>
@@ -114,7 +119,7 @@
 																	?>
 																</select>
 															</div>
-															
+															-->
 														</div>
 													</div>
 												</div>

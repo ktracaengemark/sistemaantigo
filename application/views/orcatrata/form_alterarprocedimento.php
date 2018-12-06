@@ -51,7 +51,7 @@
 																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 															</div>
 															<div class="col-md-2">
-																<label for="DataProcedimento<?php echo $i ?>">Data do Proced.:</label>
+																<label for="DataProcedimento<?php echo $i ?>">Data:</label>
 																<div class="input-group <?php echo $datepicker; ?>">
 																	<span class="input-group-addon" disabled>
 																		<span class="glyphicon glyphicon-calendar"></span>
@@ -62,7 +62,7 @@
 															</div>
 
 															<div class="col-md-2">
-																<label for="ConcluidoProcedimento">Proc. Concl.? </label><br>
+																<label for="ConcluidoProcedimento">Concluído? </label><br>
 																<div class="form-group">
 																	<div class="btn-group" data-toggle="buttons">
 																		<?php

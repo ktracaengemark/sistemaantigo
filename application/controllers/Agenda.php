@@ -108,7 +108,7 @@ class Agenda extends CI_Controller {
             //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
         }
 		
-		$data['titulo2'] = 'Procedimentos';
+		$data['titulo2'] = 'Cliente';
 
         if ($this->form_validation->run() !== TRUE) {
 
@@ -132,6 +132,31 @@ class Agenda extends CI_Controller {
             $data['list2'] = $this->load->view('agenda/list2_procedimentocli', $data, TRUE);
             //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
         }
+		
+		$data['titulo3'] = 'Mensagem';
+
+        if ($this->form_validation->run() !== TRUE) {
+
+
+			$data['bd']['Dia'] = $data['query']['Dia'];
+			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
+			$data['bd']['Ano'] = $data['query']['Ano'];
+			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+
+            $data['report'] = $this->Agenda_model->list3_procedempresa($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list3'] = $this->load->view('agenda/list3_procedempresa', $data, TRUE);
+            //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+        }		
 		
         $_SESSION['log']['NomeUsuario'] = ($data['query']['NomeUsuario']) ?
             $data['query']['NomeUsuario'] : FALSE;

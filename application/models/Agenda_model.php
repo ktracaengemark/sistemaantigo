@@ -498,6 +498,77 @@ class Agenda_model extends CI_Model {
         }
 
     }
+
+	public function list3_procedempresa($data, $completo) {
+
+		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
+		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
+		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
+        $data['Campo'] = (!$data['Campo']) ? 'P.DataProcedimento' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
+		$filtro10 = ($data['ConcluidoProcedimento'] != '#') ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_UsuarioCli = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		$query = $this->db->query('
+            SELECT
+				EE.NomeEmpresa AS NomeEmpresaCli,
+				ER.NomeEmpresa AS NomeEmpresa,
+				UE.Nome AS NomeCli,
+				UR.Nome AS Nome,
+				P.idSis_Empresa,
+				P.idSis_EmpresaCli,
+				P.idApp_Procedimento,
+                P.idApp_OrcaTrata,
+				P.idApp_Cliente,
+				P.Procedimento,
+				P.DataProcedimento,
+				P.ConcluidoProcedimento,
+				P.idSis_EmpresaCli,
+				P.ProcedimentoCli,
+				P.DataProcedimentoCli,
+				P.ConcluidoProcedimentoCli
+            FROM
+				App_Procedimento AS P
+					LEFT JOIN Sis_Empresa AS EE ON EE.idSis_Empresa = P.idSis_EmpresaCli
+					LEFT JOIN Sis_Empresa AS ER ON ER.idSis_Empresa = P.idSis_Empresa
+					LEFT JOIN Sis_Usuario AS UE ON UE.idSis_Usuario = P.idSis_UsuarioCli
+					LEFT JOIN Sis_Usuario AS UR ON UR.idSis_Usuario = P.idSis_Usuario
+            WHERE 
+				(P.idSis_EmpresaCli = ' . $_SESSION['log']['idSis_Empresa'] . ' OR
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' ) AND
+				' . $permissao . '
+				' . $filtro10 . '
+				P.idSis_EmpresaCli != "0" AND
+				P.idApp_OrcaTrata = "0" AND
+				P.idApp_Cliente = "0" 
+				' . $data['Dia'] . ' 
+				' . $data['Mesvenc'] . ' 
+				' . $data['Ano'] . ' 
+            ORDER BY
+				P.DataProcedimentoCli ASC
+        ');
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            foreach ($query->result() as $row) {
+				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+				$row->DataProcedimentoCli = $this->basico->mascara_data($row->DataProcedimentoCli, 'barras');
+				$row->ConcluidoProcedimentoCli = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimentoCli, 'NS');
+            }
+
+            return $query;
+        }
+
+    }
 	
 	public function select_dia() {
 
