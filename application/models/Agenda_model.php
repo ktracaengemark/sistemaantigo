@@ -130,29 +130,35 @@ class Agenda_model extends CI_Model {
 
     }	
 
-	public function procedimentocli($data) {
+	public function procedimentoenv($data) {
    
 		$query = $this->db->query('
             SELECT
 				C.NomeCliente,
+				E.NomeEmpresa,
+				UE.Nome AS NomeEnv,
+				UR.Nome AS NomeRes,
 				P.idApp_Procedimento,
                 P.idApp_OrcaTrata,
 				P.idApp_Cliente,
 				P.Procedimento,
 				P.DataProcedimento,
-				P.ConcluidoProcedimento
+				P.ConcluidoProcedimento,
+				P.idSis_EmpresaCli,
+				P.ProcedimentoCli,
+				P.DataProcedimentoCli,
+				P.ConcluidoProcedimentoCli
             FROM
 				App_Procedimento AS P
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = P.idSis_Empresa
+					LEFT JOIN Sis_Usuario AS UE ON UE.idSis_Usuario = P.idSis_UsuarioCli
+					LEFT JOIN Sis_Usuario AS UR ON UR.idSis_Usuario = P.idSis_Usuario
             WHERE 
-                
+				P.idSis_EmpresaCli = ' . $_SESSION['log']['idSis_Empresa'] . ' 
 
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.ConcluidoProcedimento = "N" AND
-
-				P.idApp_Cliente != "0"
             ORDER BY
-                P.DataProcedimento ASC
+                P.DataProcedimentoCli ASC
         ');
 
         if ($query->num_rows() === FALSE) {
@@ -163,32 +169,44 @@ class Agenda_model extends CI_Model {
 				$row->Idade = $this->basico->calcula_idade($row->DataProcedimento);
 				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
 				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+				$row->DataProcedimentoCli = $this->basico->mascara_data($row->DataProcedimentoCli, 'barras');
+				$row->ConcluidoProcedimentoCli = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimentoCli, 'NS');
             }
             return $query;
         }
 
     }
 
-	public function procedimentoorc($data) {
+	public function procedimentorec($data) {
    
 		$query = $this->db->query('
             SELECT
-				idApp_Procedimento,
-                idApp_OrcaTrata,
-				idApp_Cliente,
-				Procedimento,
-				DataProcedimento,
-				ConcluidoProcedimento
+				C.NomeCliente,
+				E.NomeEmpresa,
+				UE.Nome AS NomeEnv,
+				UR.Nome AS NomeRes,
+				P.idApp_Procedimento,
+                P.idApp_OrcaTrata,
+				P.idApp_Cliente,
+				P.Procedimento,
+				P.DataProcedimento,
+				P.ConcluidoProcedimento,
+				P.idSis_EmpresaCli,
+				P.ProcedimentoCli,
+				P.DataProcedimentoCli,
+				P.ConcluidoProcedimentoCli
             FROM
-				App_Procedimento
+				App_Procedimento AS P
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = P.idSis_EmpresaCli
+					LEFT JOIN Sis_Usuario AS UE ON UE.idSis_Usuario = P.idSis_UsuarioCli
+					LEFT JOIN Sis_Usuario AS UR ON UR.idSis_Usuario = P.idSis_Usuario
             WHERE 
-                
-				idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				ConcluidoProcedimento = "N" AND
-				idApp_OrcaTrata != "0" 
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.idSis_EmpresaCli != "0"
+
             ORDER BY
-                DataProcedimento ASC
+                P.DataProcedimentoCli ASC
         ');
 
         if ($query->num_rows() === FALSE) {
@@ -199,6 +217,8 @@ class Agenda_model extends CI_Model {
 				$row->Idade = $this->basico->calcula_idade($row->DataProcedimento);
 				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
 				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+				$row->DataProcedimentoCli = $this->basico->mascara_data($row->DataProcedimentoCli, 'barras');
+				$row->ConcluidoProcedimentoCli = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimentoCli, 'NS');
             }
             return $query;
         }
@@ -350,6 +370,7 @@ class Agenda_model extends CI_Model {
 
 		$query = $this->db->query('
             SELECT
+				E.NomeEmpresa,
 				U.idSis_Usuario,
 				U.CpfUsuario,
 				P.idSis_Empresa,
@@ -360,10 +381,12 @@ class Agenda_model extends CI_Model {
             FROM
 				App_Procedimento AS P
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = P.idSis_Empresa
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idApp_OrcaTrata = "0" AND
 				P.idApp_Cliente = "0" AND
+				P.idSis_EmpresaCli = "0" AND
 				' . $filtro10 . '
 				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' 
                 ' . $data['Dia'] . ' 
@@ -428,7 +451,7 @@ class Agenda_model extends CI_Model {
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = P.idApp_Cliente
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				
+				P.idSis_EmpresaCli = "0" AND
 				P.idApp_Cliente != "0" AND
 				' . $filtro10 . '
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '

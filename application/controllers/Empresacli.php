@@ -11,10 +11,8 @@ class Empresacli extends CI_Controller {
 
         #load libraries
         $this->load->helper(array('form', 'url', 'date', 'string'));
-        #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Funcao_model', 'Empresa_model'));
-        #$this->load->model(array('Basico_model', 'Empresa_model'));
+        $this->load->model(array('Basico_model', 'Funcao_model', 'Empresacli_model', 'Cliente_model', 'Procedimento_model', 'Usuario_model'));
         $this->load->driver('session');
 
         #load header view
@@ -39,269 +37,6 @@ class Empresacli extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-    public function cadastrar() {
-
-        if ($this->input->get('m') == 1)
-            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-        elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
-        else
-            $data['msg'] = '';
-
-        $data['query'] = quotes_to_entities($this->input->post(array(
-			'idSis_Empresa',
-			'UsuarioEmpresa',
-            'NomeAdmin',
-			#'Senha',
-			#'Confirma',
-            #'DataNascimento',
-            'Celular',
-			'Email',
-            #'Sexo',
-			'Inativo',
-
-        ), TRUE));
-
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email|is_unique[Sis_Empresa.Email]');
-        $this->form_validation->set_rules('UsuarioEmpresa', 'NomeAdmin do Func./ Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
-		$this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Usuário', 'required|trim');
-		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
-        $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
-        #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        $this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
-
-		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
-
-        #$data['select']['Sexo'] = $this->Basico_model->select_sexo();
-		#$data['select']['Empresa'] = $this->Basico_model->select_status_sn();
-		$data['select']['Inativo'] = $this->Basico_model->select_inativo();
-
-
-        $data['titulo'] = 'Cadastrar Usuário';
-        $data['form_open_path'] = 'empresa/cadastrar';
-        $data['readonly'] = '';
-        $data['disabled'] = '';
-        $data['panel'] = 'primary';
-        $data['metodo'] = 1;
-
-        $data['sidebar'] = 'col-sm-3 col-md-2';
-        $data['main'] = 'col-sm-7 col-md-8';
-
-        $data['tela'] = $this->load->view('empresa/form_empresa', $data, TRUE);
-
-        #run form validation
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('empresa/form_empresa', $data);
-        } else {
-
-
-			$data['query']['Empresa'] = $_SESSION['log']['id'];
-            $data['query']['Senha'] = md5($data['query']['Senha']);
-			#$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
-            $data['query']['Codigo'] = md5(uniqid(time() . rand()));
-            $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-			$data['query']['Inativo'] = 0;
-            unset($data['query']['Confirma']);
-
-
-            $data['campos'] = array_keys($data['query']);
-            $data['anterior'] = array();
-
-            $data['idSis_Empresa'] = $this->Empresa_model->set_empresa($data['query']);
-
-            if ($data['idSis_Empresa'] === FALSE) {
-                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
-
-                $this->basico->erro($msg);
-                $this->load->view('empresa/form_empresa', $data);
-            } else {
-
-                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idSis_Empresa'], FALSE);
-                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'CREATE', $data['auditoriaitem']);
-                $data['msg'] = '?m=1';
-
-                redirect(base_url() . 'empresa/prontuario/' . $data['idSis_Empresa'] . $data['msg']);
-				#redirect(base_url() . 'relatorio/empresa/' .  $data['msg']);
-                exit();
-            }
-        }
-
-        $this->load->view('basico/footer');
-    }
-
-    public function alterar($id = FALSE) {
-
-        if ($this->input->get('m') == 1)
-            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-        elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
-        else
-            $data['msg'] = '';
-
-        $data['query'] = $this->input->post(array(
-
-			'idSis_Empresa',
-			#'UsuarioEmpresa',
-            'NomeAdmin',
-            #'DataNascimento',
-            'Celular',
-            'Email',
-			'Cnpj',
-			'InscEstadual',
-			'Endereco',
-			'Bairro',
-			'Municipio',
-			'Estado',
-			'Cep',
-			'Telefone',
-			'Atuacao',
-			#'Sexo',
-			#'Inativo',
-
-        ), TRUE);
-
-        if ($id) {
-            $data['query'] = $this->Empresa_model->get_empresa($id);
-            #$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
-        }
-
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        #$this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim|is_unique_duplo[Sis_Empresa.NomeAdmin.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim');
-        #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        $this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
-        $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-
-        $data['select']['Municipio'] = $this->Basico_model->select_municipio();
-        #$data['select']['Sexo'] = $this->Basico_model->select_sexo();
-		#$data['select']['Empresa'] = $this->Basico_model->select_status_sn();
-		#$data['select']['Inativo'] = $this->Basico_model->select_inativo();
-
-
-        $data['titulo'] = 'Editar Usuário';
-        $data['form_open_path'] = 'empresa/alterar';
-        $data['readonly'] = '';
-        $data['disabled'] = '';
-        $data['panel'] = 'primary';
-        $data['metodo'] = 2;
-
-
-
-        $data['nav_secundario'] = $this->load->view('empresa/nav_secundario', $data, TRUE);
-
-        $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
-        $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
-
-        #run form validation
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('empresa/form_empresa', $data);
-        } else {
-
-            $data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));
-            #$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
-            #$data['query']['Obs'] = nl2br($data['query']['Obs']);
-            #$data['query']['Empresa'] = $_SESSION['log']['id'];
-
-            $data['anterior'] = $this->Empresa_model->get_empresa($data['query']['idSis_Empresa']);
-            $data['campos'] = array_keys($data['query']);
-
-            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Empresa'], TRUE);
-
-            if ($data['auditoriaitem'] && $this->Empresa_model->update_empresa($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
-                $data['msg'] = '?m=2';
-                redirect(base_url() . 'empresa/form_empresa/' . $data['query']['idSis_Empresa'] . $data['msg']);
-                exit();
-            } else {
-
-                if ($data['auditoriaitem'] === FALSE) {
-                    $data['msg'] = '';
-                } else {
-                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'UPDATE', $data['auditoriaitem']);
-                    $data['msg'] = '?m=1';
-                }
-
-                redirect(base_url() . 'empresa/prontuario/' . $data['query']['idSis_Empresa'] . $data['msg']);
-                exit();
-            }
-        }
-
-        $this->load->view('basico/footer');
-    }
-
-    public function excluir($id = FALSE) {
-
-        if ($this->input->get('m') == 1)
-            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-        elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
-        else
-            $data['msg'] = '';
-
-        $this->Empresa_model->delete_empresa($id);
-
-        $data['msg'] = '?m=1';
-
-		redirect(base_url() . 'agenda' . $data['msg']);
-		exit();
-
-        $this->load->view('basico/footer');
-    }
-
-    public function pesquisar() {
-
-        if ($this->input->get('m') == 1)
-            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-        elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
-        else
-            $data['msg'] = '';
-
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        $this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim|callback_get_empresa');
-
-        if ($this->input->get('start') && $this->input->get('end')) {
-            //$data['start'] = substr($this->input->get('start'),0,-3);
-            //$data['end'] = substr($this->input->get('end'),0,-3);
-            $_SESSION['agenda']['HoraInicio'] = substr($this->input->get('start'),0,-3);
-            $_SESSION['agenda']['HoraFim'] = substr($this->input->get('end'),0,-3);
-        }
-
-        $data['titulo'] = "Pesquisar Empresa";
-
-        $data['Pesquisa'] = $this->input->post('Pesquisa');
-        //echo date('d/m/Y H:i:s', $data['start'],0,-3));
-
-        #run form validation
-        if ($this->form_validation->run() !== FALSE && $this->Empresa_model->lista_empresa($data['Pesquisa'], FALSE) === TRUE) {
-
-            $data['query'] = $this->Empresa_model->lista_empresa($data['Pesquisa'], TRUE);
-
-            if ($data['query']->num_rows() == 1) {
-                $info = $data['query']->result_array();
-
-                if ($_SESSION['agenda'])
-                    redirect('consulta/cadastrar/' . $info[0]['idSis_Empresa'] );
-                else
-                    redirect('empresa/prontuario/' . $info[0]['idSis_Empresa'] );
-
-                exit();
-            } else {
-                $data['list'] = $this->load->view('empresa/list_empresa', $data, TRUE);
-            }
-
-        }
-
-        ($data['Pesquisa']) ? $data['cadastrar'] = TRUE : $data['cadastrar'] = FALSE;
-
-        $this->load->view('empresa/pesq_empresa', $data);
-
-        $this->load->view('basico/footer');
-    }
-
     public function prontuario($id) {
 
         if ($this->input->get('m') == 1)
@@ -311,36 +46,19 @@ class Empresacli extends CI_Controller {
         else
             $data['msg'] = '';
 
-        $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
-        #$data['query'] = $this->Paciente_model->get_paciente($prontuario, TRUE);
+        $_SESSION['Empresa'] = $data['query'] = $this->Empresacli_model->get_empresa($id, TRUE);
+        
+		#$data['query'] = $this->Paciente_model->get_paciente($prontuario, TRUE);
         $data['titulo'] = 'Prontuário ' ;
         $data['panel'] = 'primary';
         $data['metodo'] = 4;
 
-        $_SESSION['log']['idSis_Empresa'] = $data['resumo']['idSis_Empresa'] = $data['query']['idSis_Empresa'];
-        $data['resumo']['NomeAdmin'] = $data['query']['NomeAdmin'];
-
-        #$data['query']['Idade'] = $this->basico->calcula_idade($data['query']['DataNascimento']);
-        #$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
-
-        /*
-        if ($data['query']['Sexo'] == 1)
-            $data['query']['profile'] = 'm';
-        elseif ($data['query']['Sexo'] == 2)
-            $data['query']['profile'] = 'f';
-        else
-            $data['query']['profile'] = 'o';
-        */
-        #$data['query']['profile'] = ($data['query']['Sexo']) ? strtolower($data['query']['Sexo']) : 'o';
-
-        #$data['query']['Sexo'] = $this->Basico_model->get_sexo($data['query']['Sexo']);
 		$data['query']['Inativo'] = $this->Basico_model->get_inativo($data['query']['Inativo']);
 		$data['query']['Empresa'] = $this->Basico_model->get_empresa($data['query']['NomeEmpresa']);
-		#$data['query']['Empresa'] = $data['query']['Empresa'];
 
         $data['query']['Telefone'] = $data['query']['Celular'];
 
-        $data['contatoempresa'] = $this->Empresa_model->lista_contatoempresa($id, TRUE);
+        $data['contatoempresa'] = $this->Empresacli_model->lista_contatoempresa($id, TRUE);
         /*
           echo "<pre>";
           print_r($data['contatoempresa']);
@@ -353,9 +71,375 @@ class Empresacli extends CI_Controller {
             $data['list'] = $this->load->view('empresa/list_contatoempresa', $data, TRUE);
 
         $data['nav_secundario'] = $this->load->view('empresa/nav_secundario', $data, TRUE);
-        $this->load->view('empresa/tela_empresacli', $data);
+        $this->load->view('empresacli/tela_empresacli', $data);
+
+        $this->load->view('basico/footer');
+    }
+
+    public function cadastrarproc2() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = quotes_to_entities($this->input->post(array(
+			'idSis_Empresa',
+			'idApp_Procedimento',
+			'ProcedimentoCli',
+            'DataProcedimentoCli',
+			'ConcluidoProcedimentoCli',
+
+        ), TRUE));
+
+		(!$data['query']['DataProcedimentoCli']) ? $data['query']['DataProcedimentoCli'] = date('d/m/Y', time()) : FALSE;
+		
+	   $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #$this->form_validation->set_rules('Procedimento', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Procedimento.Procedimento.DataProcedimento.' . $this->basico->mascara_data($data['query']['DataProcedimento'], 'mysql') . ']');
+
+        $this->form_validation->set_rules('DataProcedimentoCli', 'Data de Nascimento', 'trim|valid_date');
+		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
+		
+		$data['select']['ConcluidoProcedimentoCli'] = $this->Basico_model->select_status_sn();
+		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa1();
+		
+        $data['titulo'] = 'Procedimento';
+        $data['form_open_path'] = 'empresacli/cadastrarproc2';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 1;
+
+
+		$data['collapse'] = 'class="collapse"';
+
+        $data['sidebar'] = 'col-sm-3 col-md-2';
+        $data['main'] = 'col-sm-7 col-md-8';
+
+        $data['tela'] = $this->load->view('empresacli/form_procedcli2', $data, TRUE);
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('empresacli/form_procedcli2', $data);
+        } else {
+
+            $data['query']['DataProcedimentoCli'] = $this->basico->mascara_data($data['query']['DataProcedimentoCli'], 'mysql');            
+			$data['query']['ProcedimentoCli'] = nl2br($data['query']['ProcedimentoCli']);
+			$data['query']['idSis_EmpresaCli'] = $_SESSION['log']['idSis_Empresa'];
+			$data['query']['idSis_UsuarioCli'] = $_SESSION['log']['id'];
+            $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+
+            $data['campos'] = array_keys($data['query']);
+            $data['anterior'] = array();
+
+            $data['idApp_Procedimento'] = $this->Procedimento_model->set_procedimento($data['query']);
+
+            if ($data['idApp_Procedimento'] === FALSE) {
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+                $this->load->view('empresacli/form_procedcli2', $data);
+            } else {
+
+                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Procedimento'], FALSE);
+                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Procedimento', 'CREATE', $data['auditoriaitem']);
+                $data['msg'] = '?m=1';
+
+                redirect(base_url() . 'agenda' . $data['msg']);
+
+                exit();
+            }
+        }
 
         $this->load->view('basico/footer');
     }
 	
+    public function cadastrarproc($idSis_Empresa = NULL) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		$data['orcatrata'] = quotes_to_entities($this->input->post(array(
+            #### App_Procedimento ####
+            'idApp_Procedimento',
+            'idSis_Empresa',
+            'DataProcedimentoCli',
+			'ProcedimentoCli',
+			'ConcluidoProcedimentoCli',
+
+        ), TRUE));
+
+        //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
+        //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
+
+        //Data de hoje como default
+        (!$data['orcatrata']['DataProcedimentoCli']) ? $data['orcatrata']['DataProcedimentoCli'] = date('d/m/Y', time()) : FALSE;
+
+        //Fim do trecho de código que dá pra melhorar
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #### App_Procedimento ####
+        $this->form_validation->set_rules('DataProcedimentoCli', 'Data do Procedimento', 'required|trim|valid_date');
+
+
+        $data['select']['ConcluidoProcedimentoCli'] = $this->Basico_model->select_status_sn();
+		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
+
+        $data['titulo'] = 'Procedimento com Empresas';
+        $data['form_open_path'] = 'empresacli/cadastrarproc';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 1;
+
+		$data['collapse'] = '';	
+
+		$data['collapse1'] = 'class="collapse"';	
+		
+        $data['sidebar'] = 'col-sm-3 col-md-2';
+        $data['main'] = 'col-sm-7 col-md-8';
+
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+
+        $data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+
+        /*
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit ();
+          */
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            //if (1 == 1) {
+            $this->load->view('empresacli/form_procedcli', $data);
+        } else {
+
+            ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+            #### App_Procedimento ####
+            $data['orcatrata']['DataProcedimentoCli'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimentoCli'], 'mysql');
+			$data['orcatrata']['idSis_EmpresaCli'] = $_SESSION['log']['idSis_Empresa'];
+            $data['orcatrata']['idSis_UsuarioCli'] = $_SESSION['log']['id'];
+            $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+            $data['orcatrata']['idApp_Procedimento'] = $this->Procedimento_model->set_orcatrata($data['orcatrata']);
+
+/*
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //*******CORRIGIR -  ALTERAR PARA ENTRAR COM TODAS AS MUDANÇAS NA TABELA DE LOG*****
+            $data['campos'] = array_keys($data['query']);
+            $data['anterior'] = array();
+            //*******CORRIGIR -  ALTERAR PARA ENTRAR COM TODAS AS MUDANÇAS NA TABELA DE LOG*****
+//////////////////////////////////////////////////Dados Basicos/////////////////////////////////////////////////////////////////////////
+*/
+
+            if ($data['idApp_Procedimento'] === FALSE) {
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+                $this->load->view('empresacli/form_procedcli', $data);
+            } else {
+
+                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Procedimento'], FALSE);
+                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Procedimento', 'CREATE', $data['auditoriaitem']);
+                $data['msg'] = '?m=1';
+
+                redirect(base_url() . 'agenda' . $data['msg']);
+
+				exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+	
+    public function alterarproc($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $data['orcatrata'] = quotes_to_entities($this->input->post(array(
+            #### App_Procedimento ####
+            #'idSis_UsuarioCli',
+			'idApp_Procedimento',
+            #Não há a necessidade de atualizar o valor do campo a seguir
+            #'idSis_Empresa',
+            'DataProcedimentoCli',
+			'ProcedimentoCli',
+			'ConcluidoProcedimentoCli',
+
+        ), TRUE));
+
+
+        if ($id) {
+            #### App_Procedimento ####
+            $data['orcatrata'] = $this->Procedimento_model->get_orcatrata($id);
+            $data['orcatrata']['DataProcedimentoCli'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimentoCli'], 'barras');
+
+            #### Carrega os dados da empresa nas variáves de sessão ####
+            $this->load->model('Empresacli_model');
+            $_SESSION['Empresa'] = $data['query'] = $this->Empresacli_model->get_empresa($data['orcatrata']['idSis_Empresa'], TRUE);
+            $_SESSION['Empresa']['NomeEmpresa'] = (strlen($data['query']['NomeEmpresa']) > 12) ? substr($data['query']['NomeEmpresa'], 0, 12) : $data['query']['NomeEmpresa'];
+			#$_SESSION['log']['idSis_Empresa'] = $_SESSION['Empresa']['idSis_Empresa'];
+
+        }
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #### App_Procedimento ####
+        $this->form_validation->set_rules('DataProcedimentoCli', 'Data do Procedimento', 'required|trim|valid_date');
+
+        $data['select']['ConcluidoProcedimentoCli'] = $this->Basico_model->select_status_sn();
+        $data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
+
+        $data['titulo'] = 'Editar Procedimento com Empresa';
+        $data['form_open_path'] = 'empresacli/alterarproc';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+		$data['collapse'] = '';
+	
+		$data['collapse1'] = 'class="collapse"';
+
+
+        $data['sidebar'] = 'col-sm-3 col-md-2';
+        $data['main'] = 'col-sm-7 col-md-8';
+
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+
+        $data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+
+        /*
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit ();
+        */
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('empresacli/form_procedcli', $data);
+        } else {
+
+            ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+            #### App_Procedimento ####
+            $data['orcatrata']['DataProcedimentoCli'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimentoCli'], 'mysql');
+			#$data['orcatrata']['idSis_EmpresaCli'] = $_SESSION['log']['idSis_Empresa'];
+            #$data['orcatrata']['idSis_UsuarioCli'] = $_SESSION['log']['id'];
+            #$data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+
+            $data['update']['orcatrata']['anterior'] = $this->Procedimento_model->get_orcatrata($data['orcatrata']['idApp_Procedimento']);
+            $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
+            $data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
+                $data['update']['orcatrata']['anterior'],
+                $data['orcatrata'],
+                $data['update']['orcatrata']['campos'],
+                $data['orcatrata']['idApp_Procedimento'], TRUE);
+            $data['update']['orcatrata']['bd'] = $this->Procedimento_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_Procedimento']);
+
+
+/*
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //*******CORRIGIR -  ALTERAR PARA ENTRAR COM TODAS AS MUDANÇAS NA TABELA DE LOG*****
+            $data['campos'] = array_keys($data['query']);
+            $data['anterior'] = array();
+            //*******CORRIGIR -  ALTERAR PARA ENTRAR COM TODAS AS MUDANÇAS NA TABELA DE LOG*****
+//////////////////////////////////////////////////Dados Basicos/////////////////////////////////////////////////////////////////////////
+*/
+
+            //if ($data['idApp_Procedimento'] === FALSE) {
+            //if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
+            if ($data['auditoriaitem'] && !$data['update']['orcatrata']['bd']) {
+                $data['msg'] = '?m=2';
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+                $this->load->view('empresacli/form_procedcli', $data);
+            } else {
+
+                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Procedimento'], FALSE);
+                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Procedimento', 'CREATE', $data['auditoriaitem']);
+                $data['msg'] = '?m=1';
+
+                redirect(base_url() . 'agenda' . $data['msg']);
+
+				exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+
+    }
+	
+    public function excluirproc($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+                $this->Procedimento_model->delete_procedimento($id);
+
+                $data['msg'] = '?m=1';
+
+                redirect(base_url() . 'agenda' . $data['msg']);
+                exit();
+
+        $this->load->view('basico/footer');
+    }
+
+    public function listarproc($id = NULL) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+
+        //$_SESSION['OrcaTrata'] = $this->Procedimento_model->get_cliente($id, TRUE);
+        //$_SESSION['OrcaTrata']['idApp_Cliente'] = $id;
+        $data['aprovado'] = $this->Procedimento_model->list_orcamento($id, 'S', TRUE);
+        $data['naoaprovado'] = $this->Procedimento_model->list_orcamento($id, 'N', TRUE);
+
+        //$data['aprovado'] = array();
+        //$data['naoaprovado'] = array();
+        /*
+          echo "<pre>";
+          print_r($data['query']);
+          echo "</pre>";
+          exit();
+         */
+
+        $data['list'] = $this->load->view('procedimento/list_procedcli', $data, TRUE);
+        $data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+
+        $this->load->view('procedimento/list_procedcli', $data);
+
+        $this->load->view('basico/footer');
+    }
+		
 }

@@ -62,9 +62,8 @@
 </div>
 -->
 
-
-
-<div class="col-md-3">			
+<div class="col-md-3">
+			
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -224,92 +223,10 @@
 			</div>
 		</div>
 	</div>
-</div>
+	
 
-<div class="col-md-6">
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<?php echo form_open('agenda', 'role="form"'); ?>		
-			<?php if ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) { ?>	
-				
-			<div class="col-md-6 text-left">
-				<label class="sr-only" for="Ordenamento">Agenda dos Prof.:</label>
-				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-						id="NomeUsuario" name="NomeUsuario">
-					<?php
-					foreach ($select['NomeUsuario'] as $key => $row) {
-						if ($query['NomeUsuario'] == $key) {
-							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-						} else {
-							echo '<option value="' . $key . '">' . $row . '</option>';
-						}
-					}
-					?>
-				</select>
-			</div>	
-			<?php } ?>
-			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Agenda" aria-expanded="false" aria-controls="Agenda">
-				<span class="glyphicon glyphicon-pencil"> Agenda</span>
-			</div>
-			<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#Calendario" aria-expanded="false" aria-controls="Calendario">
-				<span class="glyphicon glyphicon-calendar"></span>
-			</div>
+	<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 			
-		</div>
-		<div <?php echo $collapse; ?> id="Agenda">
-			<div class="panel-body">
-				<div class="text-right">
-					<div <?php echo $collapse1; ?> id="Calendario">
-							<div class="form-group" id="datepickerinline" class="col-md-12" >
-							</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div  style="overflow: auto; height: 456px; "> 
-							<table id="calendar" class="table table-condensed table-striped "></table>
-					</div>
-				</div>
-			</div>
-		</div>	
-	</div>
-</div>
-
-<div id="fluxo" class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="fluxo" aria-hidden="true">
-	<div class="vertical-alignment-helper">
-		<div class="modal-dialog modal-sm vertical-align-center">
-			<div class="modal-content">
-				<div class="modal-body text-center">
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-12 col-lg-12">
-								<label for="">Agendamento:</label>
-								<div class="form-group">
-									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>				
-									<div class="row">
-										<button type="button" id="MarcarConsulta" onclick="redirecionar(2)" class="btn btn-primary"> Com Cliente
-										</button>
-									</div>
-									<?php } ?>
-									<br>
-									<div class="row">
-										<button type="button" id="AgendarEvento" onclick="redirecionar(1)" class="btn btn-info"> Outro Evento
-										</button>
-									</div>
-										<input type="hidden" id="start" />
-										<input type="hidden" id="end" />
-									
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-<div class="col-md-3">			
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -321,7 +238,7 @@
 			</button>
 			-->
 			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Procedimento" aria-expanded="false" aria-controls="Procedimento">
-				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo2; ?> 
+				<span class="glyphicon glyphicon-pencil"></span>Clientes<?php #echo $titulo2; ?> 
 			</div>
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal3-sm">
 				<span class="glyphicon glyphicon-search"></span>Pesquisar 
@@ -483,25 +400,107 @@
 			</div>
 		</div>
 	</div>
+	
+	<?php } ?>
 </div>
 
-<!--
-<div class="col-md-3">
+<div class="col-md-6">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
+			<?php echo form_open('agenda', 'role="form"'); ?>		
+			<?php if ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) { ?>	
+				
+			<div class="col-md-6 text-left">
+				<label class="sr-only" for="Ordenamento">Agenda dos Prof.:</label>
+				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
+						id="NomeUsuario" name="NomeUsuario">
+					<?php
+					foreach ($select['NomeUsuario'] as $key => $row) {
+						if ($query['NomeUsuario'] == $key) {
+							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+						} else {
+							echo '<option value="' . $key . '">' . $row . '</option>';
+						}
+					}
+					?>
+				</select>
+			</div>	
+			<?php } ?>
+			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Agenda" aria-expanded="false" aria-controls="Agenda">
+				<span class="glyphicon glyphicon-pencil"> Agenda</span>
+			</div>
+			<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#Calendario" aria-expanded="false" aria-controls="Calendario">
+				<span class="glyphicon glyphicon-calendar"></span>
+			</div>
 			
+		</div>
+		<div <?php echo $collapse; ?> id="Agenda">
+			<div class="panel-body">
+				<div class="text-right">
+					<div <?php echo $collapse1; ?> id="Calendario">
+							<div class="form-group" id="datepickerinline" class="col-md-12" >
+							</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div  style="overflow: auto; height: 456px; "> 
+							<table id="calendar" class="table table-condensed table-striped "></table>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+<div id="fluxo" class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="fluxo" aria-hidden="true">
+	<div class="vertical-alignment-helper">
+		<div class="modal-dialog modal-sm vertical-align-center">
+			<div class="modal-content">
+				<div class="modal-body text-center">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-12 col-lg-12">
+								<label for="">Agendamento:</label>
+								<div class="form-group">
+									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>				
+									<div class="row">
+										<button type="button" id="MarcarConsulta" onclick="redirecionar(2)" class="btn btn-primary"> Com Cliente
+										</button>
+									</div>
+									<?php } ?>
+									<br>
+									<div class="row">
+										<button type="button" id="AgendarEvento" onclick="redirecionar(1)" class="btn btn-info"> Outro Evento
+										</button>
+									</div>
+										<input type="hidden" id="start" />
+										<input type="hidden" id="end" />
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-3">
+	
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Empresa" aria-expanded="false" aria-controls="Empresa">
+				<span class="glyphicon glyphicon-pencil">Enviadas</span>
+			</div>
 			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/procedimentocli" role="button">
 				<span class="glyphicon glyphicon-search"></span> Pesq.
 			</a>
-			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>procedimento/cadastrar" role="button">
+			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>empresacli/cadastrarproc2" role="button">
 				<span class="glyphicon glyphicon-plus"></span> Cad.
 			</a>
-			
-			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Cliente" aria-expanded="false" aria-controls="Cliente">
-				<span class="glyphicon glyphicon-pencil"> Procd.Cli.</span>
-			</div>
 		</div>		
-		<div <?php echo $collapse; ?> id="Cliente">
+		<div <?php echo $collapse; ?> id="Empresa">
 			<div class="panel-body">
 				<div class="form-group">
 					<div class="row">
@@ -509,24 +508,31 @@
 							<div style="overflow: auto; height: 155px; ">
 								<table class="table table-condensed table-bordered table-striped" >
 									<tr>
-										<th class="active">Cliente</th>
-										<th class="active">Procedimento</th>	
-										<th class="active">Data</th>
+										<th class="active">Usuário</th>
+										<th class="active">Mens.Env.</th>
+										<th class="active">Empresa</th>
+										<th class="active">DtEnv</th>
 										<th class="active">Conc.</th>
+										<th class="active">Usuário</th>
+										<th class="active">Mens.Res.</th>
+										<th class="active">DtRes</th>
 									</tr>
 									<?php
-									if ($query['procedimentocli'] != FALSE) {
+									if ($query['procedimentoenv'] != FALSE) {
 
-										foreach ($query['procedimentocli']->result_array() as $row) {
-											$url = base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'];
+										foreach ($query['procedimentoenv']->result_array() as $row) {
+											$url = base_url() . 'empresacli/alterarproc/' . $row['idApp_Procedimento'];
 
 											echo '<tr class="clickable-row" data-href="' . $url . '" data-original-title="' . $row['Idade'] . ' anos" data-container="body"
 													data-toggle="tooltip" data-placement="right" title="">';
-												echo '<td>' . $row['NomeCliente'] . '</td>';
+												echo '<td>' . $row['NomeEnv'] . '</td>';
+												echo '<td>' . $row['ProcedimentoCli'] . '</td>';
+												echo '<td>' . $row['NomeEmpresa'] . '</td>';
+												echo '<td>' . $row['DataProcedimentoCli'] . '</td>';
+												echo '<td>' . $row['ConcluidoProcedimentoCli'] . '</td>';
+												echo '<td>' . $row['NomeRes'] . '</td>';
 												echo '<td>' . $row['Procedimento'] . '</td>';
 												echo '<td>' . $row['DataProcedimento'] . '</td>';
-												echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
-												
 											echo '</tr>';
 
 										}
@@ -541,8 +547,69 @@
 			</div>
 		</div>	
 	</div>
+	
+
+	<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+	
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Empresa" aria-expanded="false" aria-controls="Empresa">
+				<span class="glyphicon glyphicon-pencil">Recebidas</span>
+			</div>
+			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/procedimentocli" role="button">
+				<span class="glyphicon glyphicon-search"></span> Pesq.
+			</a>
+		</div>		
+		<div <?php echo $collapse; ?> id="Empresa">
+			<div class="panel-body">
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-12">
+							<div style="overflow: auto; height: 155px; ">
+								<table class="table table-condensed table-bordered table-striped" >
+									<tr>
+										<th class="active">Usuário</th>
+										<th class="active">Empresa</th>
+										<th class="active">Mens.Rec</th>	
+										<th class="active">Data</th>
+										<th class="active">Conc.</th>
+										<th class="active">Usuário</th>
+										<th class="active">Mens.Res</th>
+										<th class="active">DtRes</th>
+									</tr>
+									<?php
+									if ($query['procedimentorec'] != FALSE) {
+
+										foreach ($query['procedimentorec']->result_array() as $row) {
+											$url = base_url() . 'empresacli/alterarproc2/' . $row['idApp_Procedimento'];
+
+											echo '<tr class="clickable-row" data-href="' . $url . '" data-original-title="' . $row['Idade'] . ' anos" data-container="body"
+													data-toggle="tooltip" data-placement="right" title="">';
+												echo '<td>' . $row['NomeEnv'] . '</td>';
+												echo '<td>' . $row['NomeEmpresa'] . '</td>';
+												echo '<td>' . $row['ProcedimentoCli'] . '</td>';
+												echo '<td>' . $row['DataProcedimentoCli'] . '</td>';
+												echo '<td>' . $row['ConcluidoProcedimentoCli'] . '</td>';
+												echo '<td>' . $row['NomeRes'] . '</td>';
+												echo '<td>' . $row['Procedimento'] . '</td>';
+												echo '<td>' . $row['DataProcedimento'] . '</td>';
+											echo '</tr>';
+
+										}
+
+									}
+									?>
+								</table>
+							</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	
+	<?php } ?>
 </div>
--->
 <!--
 <div class="col-md-3">
 	<div class="panel panel-primary">
@@ -704,4 +771,3 @@
 	</div>
 </div>
 -->
-<?php } ?>

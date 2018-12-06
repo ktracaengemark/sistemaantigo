@@ -38,28 +38,26 @@
 								<div class="col-md-4 text-left">
 									<div class="form-group">
 										<div class="row">							
-
-											<a href="https://www.ktracaengenharia.com.br/<?php echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">
-												<button type="button" class="btn btn-info">
-													<strong>Fale Conosco</strong>
-													<h4>  <?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>' ?> </h4>
-												</button>
+											<a <?php if (preg_match("/empresacli\/cadastrarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+												<a href="<?php echo base_url() . 'empresacli/cadastrarproc/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+													<button type="button" class="btn btn-info">
+														<strong>Fale Conosco1</strong>
+														<h4>  <?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>' ?> </h4>
+													</button>
+												</a>
 											</a>
-
 										</div>
 									</div>	
 								</div>
 								<div class="col-md-4 text-left">
 									<div class="form-group">
 										<div class="row">							
-
 											<a href="https://www.ktracaengenharia.com.br/<?php echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">
 												<button type="button" class="btn btn-success">
-													<strong>yuyuuyuyu</strong>
+													<strong>Fale Conosco2</strong>
 													<h4>  <?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>' ?> </h4>
 												</button>
 											</a>
-
 										</div>
 									</div>	
 								</div>

@@ -1771,6 +1771,47 @@ class Basico_model extends CI_Model {
         return $array;
     }
 
+	public function select_empresa1($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+				idSis_Empresa,
+				CONCAT(NomeEmpresa, " ", "(", " ", idSis_Empresa, " ", ")" ) as NomeEmpresa				
+            FROM
+                Sis_Empresa					
+			WHERE
+				idSis_Empresa != ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				idSis_Empresa != "1" AND
+				idSis_Empresa != "5"
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+				idSis_Empresa,
+				CONCAT(NomeEmpresa, " ", "(", " ", idSis_Empresa, " ", ")" ) as NomeEmpresa					
+            FROM
+                Sis_Empresa					
+			WHERE
+				idSis_Empresa != ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				idSis_Empresa != "1" AND
+				idSis_Empresa != "5" 
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_Empresa] = $row->NomeEmpresa;
+            }
+        }
+
+        return $array;
+    }
+	
 	public function select_empresa2($data = FALSE) {
 
         if ($data === TRUE) {
