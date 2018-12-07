@@ -54,10 +54,10 @@ class Relatorio_model extends CI_Model {
                 PR.Parcela,
                 PR.DataVencimento,
                 PR.ValorParcela,
-				PR.ValorParcelaPagaveis,
+				
                 PR.DataPago,
                 PR.ValorPago,
-				PR.ValorPagoPagaveis,
+				
                 PR.Quitado
 
             FROM
@@ -116,14 +116,12 @@ class Relatorio_model extends CI_Model {
 
                 $somarecebido += $row->ValorPago;
                 $somareceber += $row->ValorParcela;
-				$somapago += $row->ValorPagoPagaveis;
-				$somapagar += $row->ValorParcelaPagaveis;
+
 
                 $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
                 $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
                 $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
-				$row->ValorParcelaPagaveis = number_format($row->ValorParcelaPagaveis, 2, ',', '.');
-				$row->ValorPagoPagaveis = number_format($row->ValorPagoPagaveis, 2, ',', '.');
+
             }
             $somareceber -= $somarecebido;
             $somareal = $somarecebido;
@@ -217,10 +215,10 @@ class Relatorio_model extends CI_Model {
 				CONCAT(PR.Parcela) AS Parcela,
                 PR.DataVencimento,
                 PR.ValorParcela,
-				PR.ValorParcelaPagaveis,
+				
                 PR.DataPago,
                 PR.ValorPago,
-				PR.ValorPagoPagaveis,
+				
                 PR.Quitado
             FROM
                 App_OrcaTrata AS OT
@@ -285,14 +283,12 @@ class Relatorio_model extends CI_Model {
 
                 $somarecebido += $row->ValorPago;
                 $somareceber += $row->ValorParcela;
-				$somapago += $row->ValorPagoPagaveis;
-				$somapagar += $row->ValorParcelaPagaveis;
+
 
                 $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
                 $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
                 $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
-				$row->ValorParcelaPagaveis = number_format($row->ValorParcelaPagaveis, 2, ',', '.');
-				$row->ValorPagoPagaveis = number_format($row->ValorPagoPagaveis, 2, ',', '.');
+
             }
             $somareceber -= $somarecebido;
             $somareal = $somarecebido;
@@ -318,6 +314,170 @@ class Relatorio_model extends CI_Model {
 
     }
 
+	public function list_despesas($data, $completo) {
+
+
+        if ($data['DataFim']) {
+            $consulta =
+                '(PR.DataVencimento >= "' . $data['DataInicio'] . '" AND PR.DataVencimento <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(PR.DataVencimento >= "' . $data['DataInicio'] . '")';
+        }
+
+        if ($data['DataFim2']) {
+            $consulta2 =
+                '(PR.DataPago >= "' . $data['DataInicio2'] . '" AND PR.DataPago <= "' . $data['DataFim2'] . '")';
+        }
+        else {
+            $consulta2 =
+                '(PR.DataPago >= "' . $data['DataInicio2'] . '")';
+        }
+
+        if ($data['DataFim3']) {
+            $consulta3 =
+                '(OT.DataOrca >= "' . $data['DataInicio3'] . '" AND OT.DataOrca <= "' . $data['DataFim3'] . '")';
+        }
+        else {
+            $consulta3 =
+                '(OT.DataOrca >= "' . $data['DataInicio3'] . '")';
+        }
+
+		#$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
+		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
+		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
+		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
+		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;		
+		$data['TipoReceita'] = ($data['TipoReceita']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoReceita'] : FALSE;
+		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
+		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$filtro1 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
+        $filtro2 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
+		$filtro3 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
+		$filtro4 = ($data['Quitado'] != '#') ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
+		$filtro5 = ($data['Modalidade'] != '#') ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		
+        $query = $this->db->query(
+            'SELECT
+                
+                OT.idApp_OrcaTrata,
+				OT.idSis_Usuario,
+				OT.idTab_TipoRD,
+                OT.AprovadoOrca,
+				OT.ObsOrca,
+				CONCAT(IFNULL(TD.TipoDespesa,""), " / ", IFNULL(OT.Receitas,"")) AS TipoReceita,
+                OT.DataOrca,
+                OT.DataEntradaOrca,
+                OT.ValorEntradaOrca,
+				OT.QuitadoOrca,
+				OT.ServicoConcluido,
+				OT.Modalidade,
+				MD.Modalidade,
+                PR.idSis_Empresa,
+				PR.Parcela,
+				CONCAT(PR.Parcela) AS Parcela,
+                PR.DataVencimento,
+                PR.ValorParcela,
+				
+                PR.DataPago,
+                PR.ValorPago,
+				
+                PR.Quitado
+            FROM
+                App_OrcaTrata AS OT
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
+					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+					LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = OT.TipoReceita
+					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
+            WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $permissao . '
+				' . $filtro1 . '
+				' . $filtro2 . '
+				' . $filtro3 . '
+				' . $filtro4 . '
+				' . $filtro5 . ' 
+				OT.idTab_TipoRD = "1"
+                ' . $data['Dia'] . ' 
+				' . $data['Mesvenc'] . ' 
+				' . $data['Ano'] . ' 
+				' . $data['TipoReceita'] . ' 
+            ORDER BY
+				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
+            ');
+
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+          */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            $somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somapago=$somapagar=$somareal=$balanco=$ant=0;
+            foreach ($query->result() as $row) {
+				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
+                $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
+                $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
+                $row->DataPago = $this->basico->mascara_data($row->DataPago, 'barras');
+
+                $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
+				$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
+				$row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
+                $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
+
+                #esse trecho pode ser melhorado, serve para somar apenas uma vez
+                #o valor da entrada que pode aparecer mais de uma vez
+                if ($ant != $row->idApp_OrcaTrata) {
+                    $ant = $row->idApp_OrcaTrata;
+                    $somaentrada += $row->ValorEntradaOrca;
+                }
+                else {
+                    $row->ValorEntradaOrca = FALSE;
+                    $row->DataEntradaOrca = FALSE;
+                }
+
+                $somarecebido += $row->ValorPago;
+                $somareceber += $row->ValorParcela;
+
+
+                $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
+                $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
+                $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
+
+            }
+            $somareceber -= $somarecebido;
+            $somareal = $somarecebido;
+            $balanco = $somarecebido + $somareceber;
+
+			$somapagar -= $somapago;
+			$somareal2 = $somapago;
+			$balanco2 = $somapago + $somapagar;
+
+            $query->soma = new stdClass();
+            $query->soma->somareceber = number_format($somareceber, 2, ',', '.');
+            $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
+            $query->soma->somareal = number_format($somareal, 2, ',', '.');
+            $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
+            $query->soma->balanco = number_format($balanco, 2, ',', '.');
+			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
+            $query->soma->somapago = number_format($somapago, 2, ',', '.');
+            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
+            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
+
+            return $query;
+        }
+
+    }
+		
 	public function list_receitasparc($data, $completo) {
 
 
@@ -386,10 +546,10 @@ class Relatorio_model extends CI_Model {
 				CONCAT(PR.Parcela) AS Parcela,
                 PR.DataVencimento,
                 PR.ValorParcela,
-				PR.ValorParcelaPagaveis,
+				
                 PR.DataPago,
                 PR.ValorPago,
-				PR.ValorPagoPagaveis,
+				
                 PR.Quitado
             FROM
                 App_OrcaTrata AS OT
@@ -448,343 +608,12 @@ class Relatorio_model extends CI_Model {
 
                 $somarecebido += $row->ValorPago;
                 $somareceber += $row->ValorParcela;
-				$somapago += $row->ValorPagoPagaveis;
-				$somapagar += $row->ValorParcelaPagaveis;
+
 
                 $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
                 $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
                 $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
-				$row->ValorParcelaPagaveis = number_format($row->ValorParcelaPagaveis, 2, ',', '.');
-				$row->ValorPagoPagaveis = number_format($row->ValorPagoPagaveis, 2, ',', '.');
-            }
-            $somareceber -= $somarecebido;
-            $somareal = $somarecebido;
-            $balanco = $somarecebido + $somareceber;
 
-			$somapagar -= $somapago;
-			$somareal2 = $somapago;
-			$balanco2 = $somapago + $somapagar;
-
-            $query->soma = new stdClass();
-            $query->soma->somareceber = number_format($somareceber, 2, ',', '.');
-            $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
-            $query->soma->somareal = number_format($somareal, 2, ',', '.');
-            $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
-            $query->soma->balanco = number_format($balanco, 2, ',', '.');
-			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
-            $query->soma->somapago = number_format($somapago, 2, ',', '.');
-            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
-            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
-
-            return $query;
-        }
-
-    }
-
-	public function list1_receitasparc($data, $completo) {
-
-
-        if ($data['DataFim']) {
-            $consulta =
-                '(PR.DataVencimento >= "' . $data['DataInicio'] . '" AND PR.DataVencimento <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(PR.DataVencimento >= "' . $data['DataInicio'] . '")';
-        }
-
-        if ($data['DataFim2']) {
-            $consulta2 =
-                '(PR.DataPago >= "' . $data['DataInicio2'] . '" AND PR.DataPago <= "' . $data['DataFim2'] . '")';
-        }
-        else {
-            $consulta2 =
-                '(PR.DataPago >= "' . $data['DataInicio2'] . '")';
-        }
-
-        if ($data['DataFim3']) {
-            $consulta3 =
-                '(OT.DataOrca >= "' . $data['DataInicio3'] . '" AND OT.DataOrca <= "' . $data['DataFim3'] . '")';
-        }
-        else {
-            $consulta3 =
-                '(OT.DataOrca >= "' . $data['DataInicio3'] . '")';
-        }
-
-		#$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
-		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
-		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
-		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
-		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;		
-		$data['TipoReceita'] = ($data['TipoReceita']) ? ' AND TR.idTab_TipoReceita = ' . $data['TipoReceita'] : FALSE;
-		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
-		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
-        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
-		$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
-        $filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
-		$filtro4 = ($data['Quitado'] != '#') ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
-		$filtro5 = ($data['Modalidade'] != '#') ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-		
-        $query = $this->db->query(
-            'SELECT
-                C.NomeCliente,
-                OT.idApp_OrcaTrata,
-				OT.idSis_Usuario,
-				OT.idTab_TipoRD,
-                OT.AprovadoOrca,
-				OT.ObsOrca,
-				OT.Receitas,
-				CONCAT(IFNULL(TR.TipoReceita,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,"")) AS Receitas,
-                OT.DataOrca,
-                OT.DataEntradaOrca,
-                OT.ValorEntradaOrca,
-				OT.QuitadoOrca,
-				OT.ServicoConcluido,
-				OT.Modalidade,
-				MD.Modalidade,
-                PR.idSis_Empresa,
-				PR.Parcela,
-				CONCAT(PR.Parcela) AS Parcela,
-                PR.DataVencimento,
-                PR.ValorParcela,
-				PR.ValorParcelaPagaveis,
-                PR.DataPago,
-                PR.ValorPago,
-				PR.ValorPagoPagaveis,
-                PR.Quitado
-            FROM
-                App_OrcaTrata AS OT
-					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
-					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
-					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
-					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-            WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				' . $permissao . '
-				' . $filtro4 . '
-				OT.idTab_TipoRD = "2"
-                ' . $data['Dia'] . ' 
-				' . $data['Mesvenc'] . ' 
-				' . $data['Ano'] . ' 
-            ORDER BY
-				PR.DataVencimento
-            ');
-
-        /*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-          */
-
-        if ($completo === FALSE) {
-            return TRUE;
-        } else {
-
-            $somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somapago=$somapagar=$somareal=$balanco=$ant=0;
-            foreach ($query->result() as $row) {
-				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
-                $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
-                $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
-                $row->DataPago = $this->basico->mascara_data($row->DataPago, 'barras');
-
-                $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
-				$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
-				$row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
-                $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
-
-                #esse trecho pode ser melhorado, serve para somar apenas uma vez
-                #o valor da entrada que pode aparecer mais de uma vez
-                if ($ant != $row->idApp_OrcaTrata) {
-                    $ant = $row->idApp_OrcaTrata;
-                    $somaentrada += $row->ValorEntradaOrca;
-                }
-                else {
-                    $row->ValorEntradaOrca = FALSE;
-                    $row->DataEntradaOrca = FALSE;
-                }
-
-                $somarecebido += $row->ValorPago;
-                $somareceber += $row->ValorParcela;
-				$somapago += $row->ValorPagoPagaveis;
-				$somapagar += $row->ValorParcelaPagaveis;
-
-                $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
-                $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
-                $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
-				$row->ValorParcelaPagaveis = number_format($row->ValorParcelaPagaveis, 2, ',', '.');
-				$row->ValorPagoPagaveis = number_format($row->ValorPagoPagaveis, 2, ',', '.');
-            }
-            $somareceber -= $somarecebido;
-            $somareal = $somarecebido;
-            $balanco = $somarecebido + $somareceber;
-
-			$somapagar -= $somapago;
-			$somareal2 = $somapago;
-			$balanco2 = $somapago + $somapagar;
-
-            $query->soma = new stdClass();
-            $query->soma->somareceber = number_format($somareceber, 2, ',', '.');
-            $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
-            $query->soma->somareal = number_format($somareal, 2, ',', '.');
-            $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
-            $query->soma->balanco = number_format($balanco, 2, ',', '.');
-			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
-            $query->soma->somapago = number_format($somapago, 2, ',', '.');
-            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
-            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
-
-            return $query;
-        }
-
-    }
-	
-	public function list_despesas($data, $completo) {
-
-
-        if ($data['DataFim']) {
-            $consulta =
-                '(PR.DataVencimento >= "' . $data['DataInicio'] . '" AND PR.DataVencimento <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(PR.DataVencimento >= "' . $data['DataInicio'] . '")';
-        }
-
-        if ($data['DataFim2']) {
-            $consulta2 =
-                '(PR.DataPago >= "' . $data['DataInicio2'] . '" AND PR.DataPago <= "' . $data['DataFim2'] . '")';
-        }
-        else {
-            $consulta2 =
-                '(PR.DataPago >= "' . $data['DataInicio2'] . '")';
-        }
-
-        if ($data['DataFim3']) {
-            $consulta3 =
-                '(OT.DataOrca >= "' . $data['DataInicio3'] . '" AND OT.DataOrca <= "' . $data['DataFim3'] . '")';
-        }
-        else {
-            $consulta3 =
-                '(OT.DataOrca >= "' . $data['DataInicio3'] . '")';
-        }
-
-		#$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
-		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
-		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
-		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
-		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;		
-		$data['TipoReceita'] = ($data['TipoReceita']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoReceita'] : FALSE;
-		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
-		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
-        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
-		$filtro1 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
-        $filtro2 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
-		$filtro4 = ($data['Quitado'] != '#') ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
-		$filtro5 = ($data['Modalidade'] != '#') ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-		
-        $query = $this->db->query(
-            'SELECT
-                
-                OT.idApp_OrcaTrata,
-				OT.idSis_Usuario,
-				OT.idTab_TipoRD,
-                OT.AprovadoOrca,
-				OT.ObsOrca,
-				CONCAT(IFNULL(TD.TipoDespesa,""), " / ", IFNULL(OT.Receitas,"")) AS TipoDespesa,
-                OT.DataOrca,
-                OT.DataEntradaOrca,
-                OT.ValorEntradaOrca,
-				OT.QuitadoOrca,
-				OT.ServicoConcluido,
-				OT.Modalidade,
-				MD.Modalidade,
-                PR.idSis_Empresa,
-				PR.Parcela,
-				CONCAT(PR.Parcela) AS Parcela,
-                PR.DataVencimento,
-                PR.ValorParcela,
-				PR.ValorParcelaPagaveis,
-                PR.DataPago,
-                PR.ValorPago,
-				PR.ValorPagoPagaveis,
-                PR.Quitado
-            FROM
-                App_OrcaTrata AS OT
-					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
-					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-					LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = OT.TipoReceita
-					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-            WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				' . $permissao . '
-				' . $filtro1 . '
-				' . $filtro2 . '
-				' . $filtro3 . '
-				' . $filtro4 . '
-				' . $filtro5 . ' 
-				OT.idTab_TipoRD = "1"
-                ' . $data['Dia'] . ' 
-				' . $data['Mesvenc'] . ' 
-				' . $data['Ano'] . ' 
-				' . $data['TipoReceita'] . ' 
-            ORDER BY
-				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
-            ');
-
-        /*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-          */
-
-        if ($completo === FALSE) {
-            return TRUE;
-        } else {
-
-            $somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somapago=$somapagar=$somareal=$balanco=$ant=0;
-            foreach ($query->result() as $row) {
-				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
-                $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
-                $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
-                $row->DataPago = $this->basico->mascara_data($row->DataPago, 'barras');
-
-                $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
-				$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
-				$row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
-                $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
-
-                #esse trecho pode ser melhorado, serve para somar apenas uma vez
-                #o valor da entrada que pode aparecer mais de uma vez
-                if ($ant != $row->idApp_OrcaTrata) {
-                    $ant = $row->idApp_OrcaTrata;
-                    $somaentrada += $row->ValorEntradaOrca;
-                }
-                else {
-                    $row->ValorEntradaOrca = FALSE;
-                    $row->DataEntradaOrca = FALSE;
-                }
-
-                $somarecebido += $row->ValorPago;
-                $somareceber += $row->ValorParcela;
-				$somapago += $row->ValorPagoPagaveis;
-				$somapagar += $row->ValorParcelaPagaveis;
-
-                $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
-                $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
-                $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
-				$row->ValorParcelaPagaveis = number_format($row->ValorParcelaPagaveis, 2, ',', '.');
-				$row->ValorPagoPagaveis = number_format($row->ValorPagoPagaveis, 2, ',', '.');
             }
             $somareceber -= $somarecebido;
             $somareal = $somarecebido;
@@ -878,10 +707,10 @@ class Relatorio_model extends CI_Model {
 				CONCAT(PR.Parcela) AS Parcela,
                 PR.DataVencimento,
                 PR.ValorParcela,
-				PR.ValorParcelaPagaveis,
+				
                 PR.DataPago,
                 PR.ValorPago,
-				PR.ValorPagoPagaveis,
+				
                 PR.Quitado
             FROM
                 App_OrcaTrata AS OT
@@ -940,14 +769,12 @@ class Relatorio_model extends CI_Model {
 
                 $somarecebido += $row->ValorPago;
                 $somareceber += $row->ValorParcela;
-				$somapago += $row->ValorPagoPagaveis;
-				$somapagar += $row->ValorParcelaPagaveis;
+
 
                 $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
                 $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
                 $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
-				$row->ValorParcelaPagaveis = number_format($row->ValorParcelaPagaveis, 2, ',', '.');
-				$row->ValorPagoPagaveis = number_format($row->ValorPagoPagaveis, 2, ',', '.');
+
             }
             $somareceber -= $somarecebido;
             $somareal = $somarecebido;
@@ -972,7 +799,168 @@ class Relatorio_model extends CI_Model {
         }
 
     }
+	
+	public function list1_receitasparc($data, $completo) {
 
+
+        if ($data['DataFim']) {
+            $consulta =
+                '(PR.DataVencimento >= "' . $data['DataInicio'] . '" AND PR.DataVencimento <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(PR.DataVencimento >= "' . $data['DataInicio'] . '")';
+        }
+
+        if ($data['DataFim2']) {
+            $consulta2 =
+                '(PR.DataPago >= "' . $data['DataInicio2'] . '" AND PR.DataPago <= "' . $data['DataFim2'] . '")';
+        }
+        else {
+            $consulta2 =
+                '(PR.DataPago >= "' . $data['DataInicio2'] . '")';
+        }
+
+        if ($data['DataFim3']) {
+            $consulta3 =
+                '(OT.DataOrca >= "' . $data['DataInicio3'] . '" AND OT.DataOrca <= "' . $data['DataFim3'] . '")';
+        }
+        else {
+            $consulta3 =
+                '(OT.DataOrca >= "' . $data['DataInicio3'] . '")';
+        }
+
+		#$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
+		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
+		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
+		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
+		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;		
+		$data['TipoReceita'] = ($data['TipoReceita']) ? ' AND TR.idTab_TipoReceita = ' . $data['TipoReceita'] : FALSE;
+		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
+		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
+        $filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
+		$filtro4 = ($data['Quitado'] != '#') ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
+		$filtro5 = ($data['Modalidade'] != '#') ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		
+        $query = $this->db->query(
+            'SELECT
+                C.NomeCliente,
+                OT.idApp_OrcaTrata,
+				OT.idSis_Usuario,
+				OT.idTab_TipoRD,
+                OT.AprovadoOrca,
+				OT.ObsOrca,
+				OT.Receitas,
+				CONCAT(IFNULL(TR.TipoReceita,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,"")) AS Receitas,
+                OT.DataOrca,
+                OT.DataEntradaOrca,
+                OT.ValorEntradaOrca,
+				OT.QuitadoOrca,
+				OT.ServicoConcluido,
+				OT.Modalidade,
+				MD.Modalidade,
+                PR.idSis_Empresa,
+				PR.Parcela,
+				CONCAT(PR.Parcela) AS Parcela,
+                PR.DataVencimento,
+                PR.ValorParcela,
+				
+                PR.DataPago,
+                PR.ValorPago,
+				
+                PR.Quitado
+            FROM
+                App_OrcaTrata AS OT
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
+					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
+					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
+            WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $permissao . '
+				' . $filtro4 . '
+				OT.idTab_TipoRD = "2"
+                ' . $data['Dia'] . ' 
+				' . $data['Mesvenc'] . ' 
+				' . $data['Ano'] . ' 
+            ORDER BY
+				PR.DataVencimento
+            ');
+
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+          */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            $somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somapago=$somapagar=$somareal=$balanco=$ant=0;
+            foreach ($query->result() as $row) {
+				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
+                $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
+                $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
+                $row->DataPago = $this->basico->mascara_data($row->DataPago, 'barras');
+
+                $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
+				$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
+				$row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
+                $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
+
+                #esse trecho pode ser melhorado, serve para somar apenas uma vez
+                #o valor da entrada que pode aparecer mais de uma vez
+                if ($ant != $row->idApp_OrcaTrata) {
+                    $ant = $row->idApp_OrcaTrata;
+                    $somaentrada += $row->ValorEntradaOrca;
+                }
+                else {
+                    $row->ValorEntradaOrca = FALSE;
+                    $row->DataEntradaOrca = FALSE;
+                }
+
+                $somarecebido += $row->ValorPago;
+                $somareceber += $row->ValorParcela;
+
+
+                $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
+                $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
+                $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
+
+            }
+            $somareceber -= $somarecebido;
+            $somareal = $somarecebido;
+            $balanco = $somarecebido + $somareceber;
+
+			$somapagar -= $somapago;
+			$somareal2 = $somapago;
+			$balanco2 = $somapago + $somapagar;
+
+            $query->soma = new stdClass();
+            $query->soma->somareceber = number_format($somareceber, 2, ',', '.');
+            $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
+            $query->soma->somareal = number_format($somareal, 2, ',', '.');
+            $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
+            $query->soma->balanco = number_format($balanco, 2, ',', '.');
+			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
+            $query->soma->somapago = number_format($somapago, 2, ',', '.');
+            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
+            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
+
+            return $query;
+        }
+
+    }
+	
 	public function list2_despesasparc($data, $completo) {
 
 
@@ -1041,10 +1029,10 @@ class Relatorio_model extends CI_Model {
 				CONCAT(PR.Parcela) AS Parcela,
                 PR.DataVencimento,
                 PR.ValorParcela,
-				PR.ValorParcelaPagaveis,
+				
                 PR.DataPago,
                 PR.ValorPago,
-				PR.ValorPagoPagaveis,
+				
                 PR.Quitado
             FROM
                 App_OrcaTrata AS OT
@@ -1103,14 +1091,12 @@ class Relatorio_model extends CI_Model {
 
                 $somarecebido += $row->ValorPago;
                 $somareceber += $row->ValorParcela;
-				$somapago += $row->ValorPagoPagaveis;
-				$somapagar += $row->ValorParcelaPagaveis;
+
 
                 $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
                 $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
                 $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
-				$row->ValorParcelaPagaveis = number_format($row->ValorParcelaPagaveis, 2, ',', '.');
-				$row->ValorPagoPagaveis = number_format($row->ValorPagoPagaveis, 2, ',', '.');
+
             }
             $somareceber -= $somarecebido;
             $somareal = $somarecebido;
@@ -1136,1049 +1122,6 @@ class Relatorio_model extends CI_Model {
 
     }
 	
-	public function list_receitas1($data, $completo) {
-
-
-        if ($data['DataFim']) {
-            $consulta =
-                '(PR.DataVencimento >= "' . $data['DataInicio'] . '" AND PR.DataVencimento <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(PR.DataVencimento >= "' . $data['DataInicio'] . '")';
-        }
-
-        if ($data['DataFim2']) {
-            $consulta2 =
-                '(PR.DataPago >= "' . $data['DataInicio2'] . '" AND PR.DataPago <= "' . $data['DataFim2'] . '")';
-        }
-        else {
-            $consulta2 =
-                '(PR.DataPago >= "' . $data['DataInicio2'] . '")';
-        }
-
-        if ($data['DataFim3']) {
-            $consulta3 =
-                '(OT.DataOrca >= "' . $data['DataInicio3'] . '" AND OT.DataOrca <= "' . $data['DataFim3'] . '")';
-        }
-        else {
-            $consulta3 =
-                '(OT.DataOrca >= "' . $data['DataInicio3'] . '")';
-        }
-
-		
-		$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
-		#$data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND OT.idSis_EmpresaAss = ' . $data['NomeEmpresa'] : FALSE;
-		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
-		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
-		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;
-		$data['TipoReceita'] = ($data['TipoReceita']) ? ' AND OT.TipoReceita = ' . $data['TipoReceita'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'PR.DataVencimento' : $data['Campo'];
-        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];		
-		
-		#$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
-        $filtro1 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
-		$filtro2 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
-		$filtro4 = ($data['Quitado'] != '#') ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
-		$filtro5 = ($data['Modalidade'] != '#') ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
-		
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-		
-		
-		
-        $query = $this->db->query('
-            SELECT
-                U.idSis_Empresa,
-				U.idSis_Usuario,
-				C.NomeCliente,
-                CONCAT(IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,""), " / ", IFNULL(TR.TipoReceita,"")) AS NomeCliente,
-				TR.TipoReceita,
-				OT.idApp_OrcaTrata,
-				OT.idSis_Usuario,
-				OT.idSis_Empresa,
-				OT.idTab_TipoRD,
-                OT.AprovadoOrca,
-                OT.DataOrca,
-                OT.DataEntradaOrca,
-                OT.ValorEntradaOrca,
-				OT.QuitadoOrca,
-				OT.ServicoConcluido,
-				OT.Modalidade,
-                PR.Parcela,
-                PR.DataVencimento,
-                PR.ValorParcela,
-				PR.ValorParcelaPagaveis,
-                PR.DataPago,
-                PR.ValorPago,
-				PR.ValorPagoPagaveis,
-                PR.Quitado,
-				CONCAT(PR.Parcela," ", OT.Modalidade,"/",PR.Quitado) AS Parcela
-            FROM
-				Sis_Usuario AS U,	
-                App_OrcaTrata AS OT
-					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
-					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = OT.idSis_Empresa
-					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
-            WHERE
-                
-				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				' . $permissao . '
-				' . $filtro1 . '
-				' . $filtro2 . '
-				' . $filtro3 . '
-				' . $filtro4 . ' 
-				' . $filtro5 . '
-				OT.idTab_TipoRD = "2"
-				' . $data['NomeCliente'] . '
-				' . $data['Mesvenc'] . ' 
-				' . $data['Mespag'] . '
-				' . $data['Ano'] . ' 
-				' . $data['TipoReceita'] . ' AND
-				OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-            ORDER BY
-                ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
-            ');
-
-        /*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-          */
-
-        if ($completo === FALSE) {
-            return TRUE;
-        } else {
-
-            $somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somapago=$somapagar=$somareal=$balanco=$ant=0;
-            foreach ($query->result() as $row) {
-				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
-                $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
-                $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
-                $row->DataPago = $this->basico->mascara_data($row->DataPago, 'barras');
-
-                $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
-				$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
-				$row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
-                $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
-
-                #esse trecho pode ser melhorado, serve para somar apenas uma vez
-                #o valor da entrada que pode aparecer mais de uma vez
-                if ($ant != $row->idApp_OrcaTrata) {
-                    $ant = $row->idApp_OrcaTrata;
-                    $somaentrada += $row->ValorEntradaOrca;
-                }
-                else {
-                    $row->ValorEntradaOrca = FALSE;
-                    $row->DataEntradaOrca = FALSE;
-                }
-
-                $somarecebido += $row->ValorPago;
-                $somareceber += $row->ValorParcela;
-				$somapago += $row->ValorPagoPagaveis;
-				$somapagar += $row->ValorParcelaPagaveis;
-
-                $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
-                $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
-                $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
-				$row->ValorParcelaPagaveis = number_format($row->ValorParcelaPagaveis, 2, ',', '.');
-				$row->ValorPagoPagaveis = number_format($row->ValorPagoPagaveis, 2, ',', '.');
-            }
-            $somareceber -= $somarecebido;
-            $somareal = $somarecebido;
-            $balanco = $somarecebido + $somareceber;
-
-			$somapagar -= $somapago;
-			$somareal2 = $somapago;
-			$balanco2 = $somapago + $somapagar;
-
-            $query->soma = new stdClass();
-            $query->soma->somareceber = number_format($somareceber, 2, ',', '.');
-            $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
-            $query->soma->somareal = number_format($somareal, 2, ',', '.');
-            $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
-            $query->soma->balanco = number_format($balanco, 2, ',', '.');
-			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
-            $query->soma->somapago = number_format($somapago, 2, ',', '.');
-            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
-            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
-
-            return $query;
-        }
-
-    }
-
-	public function list_receitas2($data, $completo) {
-
-
-        if ($data['DataFim']) {
-            $consulta =
-                '(PR.DataVencimento >= "' . $data['DataInicio'] . '" AND PR.DataVencimento <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(PR.DataVencimento >= "' . $data['DataInicio'] . '")';
-        }
-
-        if ($data['DataFim2']) {
-            $consulta2 =
-                '(PR.DataPago >= "' . $data['DataInicio2'] . '" AND PR.DataPago <= "' . $data['DataFim2'] . '")';
-        }
-        else {
-            $consulta2 =
-                '(PR.DataPago >= "' . $data['DataInicio2'] . '")';
-        }
-
-        if ($data['DataFim3']) {
-            $consulta3 =
-                '(OT.DataOrca >= "' . $data['DataInicio3'] . '" AND OT.DataOrca <= "' . $data['DataFim3'] . '")';
-        }
-        else {
-            $consulta3 =
-                '(OT.DataOrca >= "' . $data['DataInicio3'] . '")';
-        }
-
-		$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
-		$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
-        $filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
-		$filtro4 = ($data['Quitado'] != '#') ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
-
-        $query = $this->db->query(
-            'SELECT
-                C.NomeCliente,
-                OT.idApp_OrcaTrata,
-				OT.idTab_TipoRD,
-                OT.AprovadoOrca,
-                OT.DataOrca,
-                OT.DataEntradaOrca,
-                OT.ValorEntradaOrca,
-				OT.QuitadoOrca,
-				OT.ServicoConcluido,
-                PR.Parcela,
-                PR.DataVencimento,
-                PR.ValorParcela,
-				PR.ValorParcelaPagaveis,
-                PR.DataPago,
-                PR.ValorPago,
-				PR.ValorPagoPagaveis,
-                PR.Quitado
-            FROM
-                App_Cliente AS C,
-                App_OrcaTrata AS OT
-                    LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-            WHERE
-                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                (' . $consulta . ') AND
-				(' . $consulta2 . ') AND
-				(' . $consulta3 . ') AND
-                ' . $filtro1 . '
-                ' . $filtro2 . '
-                ' . $filtro3 . '
-				' . $filtro4 . '
-                C.idApp_Cliente = OT.idApp_Cliente
-                ' . $data['NomeCliente'] . ' AND
-				OT.idTab_TipoRD = "2"
-
-            ORDER BY
-                C.NomeCliente,
-				OT.AprovadoOrca DESC,
-				PR.DataVencimento'
-            );
-
-        /*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-          */
-
-        if ($completo === FALSE) {
-            return TRUE;
-        } else {
-
-            $somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somapago=$somapagar=$somareal=$balanco=$ant=0;
-            foreach ($query->result() as $row) {
-				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
-                $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
-                $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
-                $row->DataPago = $this->basico->mascara_data($row->DataPago, 'barras');
-
-                $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
-				$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
-				$row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
-                $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
-
-                #esse trecho pode ser melhorado, serve para somar apenas uma vez
-                #o valor da entrada que pode aparecer mais de uma vez
-                if ($ant != $row->idApp_OrcaTrata) {
-                    $ant = $row->idApp_OrcaTrata;
-                    $somaentrada += $row->ValorEntradaOrca;
-                }
-                else {
-                    $row->ValorEntradaOrca = FALSE;
-                    $row->DataEntradaOrca = FALSE;
-                }
-
-                $somarecebido += $row->ValorPago;
-                $somareceber += $row->ValorParcela;
-				$somapago += $row->ValorPagoPagaveis;
-				$somapagar += $row->ValorParcelaPagaveis;
-
-                $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
-                $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
-                $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
-				$row->ValorParcelaPagaveis = number_format($row->ValorParcelaPagaveis, 2, ',', '.');
-				$row->ValorPagoPagaveis = number_format($row->ValorPagoPagaveis, 2, ',', '.');
-            }
-            $somareceber -= $somarecebido;
-            $somareal = $somarecebido;
-            $balanco = $somarecebido + $somareceber;
-
-			$somapagar -= $somapago;
-			$somareal2 = $somapago;
-			$balanco2 = $somapago + $somapagar;
-
-            $query->soma = new stdClass();
-            $query->soma->somareceber = number_format($somareceber, 2, ',', '.');
-            $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
-            $query->soma->somareal = number_format($somareal, 2, ',', '.');
-            $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
-            $query->soma->balanco = number_format($balanco, 2, ',', '.');
-			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
-            $query->soma->somapago = number_format($somapago, 2, ',', '.');
-            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
-            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
-
-            return $query;
-        }
-
-    }
-
-	public function list_despesas1($data, $completo) {
-
-        if ($data['DataFim']) {
-            $consulta =
-                '(PP.DataVencimentoPagaveis >= "' . $data['DataInicio'] . '" AND PP.DataVencimentoPagaveis <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(PP.DataVencimentoPagaveis >= "' . $data['DataInicio'] . '")';
-        }
-
-		if ($data['DataFim2']) {
-            $consulta2 =
-                '(PP.DataPagoPagaveis >= "' . $data['DataInicio2'] . '" AND PP.DataPagoPagaveis <= "' . $data['DataFim2'] . '")';
-        }
-        else {
-            $consulta2 =
-                '(PP.DataPagoPagaveis >= "' . $data['DataInicio2'] . '")';
-        }
-
-        if ($data['DataFim3']) {
-            $consulta3 =
-                '(DS.DataDespesas >= "' . $data['DataInicio3'] . '" AND DS.DataDespesas <= "' . $data['DataFim3'] . '")';
-        }
-        else {
-            $consulta3 =
-                '(DS.DataDespesas >= "' . $data['DataInicio3'] . '")';
-        }
-
-
-		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoDespesa'] : FALSE;
-		$filtro1 = ($data['AprovadoDespesas'] != '#') ? 'DS.AprovadoDespesas = "' . $data['AprovadoDespesas'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluidoDespesas'] != '#') ? 'DS.ServicoConcluidoDespesas = "' . $data['ServicoConcluidoDespesas'] . '" AND ' : FALSE;
-        $filtro2 = ($data['QuitadoDespesas'] != '#') ? 'DS.QuitadoDespesas = "' . $data['QuitadoDespesas'] . '" AND ' : FALSE;
-		$filtro4 = ($data['QuitadoPagaveis'] != '#') ? 'PP.QuitadoPagaveis = "' . $data['QuitadoPagaveis'] . '" AND ' : FALSE;
-
-        $query = $this->db->query('
-            SELECT
-                DS.idApp_Despesas,
-				DS.Despesa,
-				TD.TipoDespesa,
-				DS.TipoProduto,
-                DS.DataDespesas,
-                DS.DataEntradaDespesas,
-                DS.ValorEntradaDespesas,
-				DS.AprovadoDespesas,
-				DS.ServicoConcluidoDespesas,
-				DS.QuitadoDespesas,
-                PP.ParcelaPagaveis,
-                PP.DataVencimentoPagaveis,
-                PP.ValorParcelaPagaveis,
-                PP.DataPagoPagaveis,
-				PP.ValorPagoPagaveis,
-                PP.QuitadoPagaveis
-            FROM
-                App_Despesas AS DS
-                    LEFT JOIN App_ParcelasPagaveis AS PP ON DS.idApp_Despesas = PP.idApp_Despesas
-                    LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = DS.TipoDespesa
-            WHERE
-                DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				' . $filtro2 . '
-				' . $filtro4 . '
-				(' . $consulta . ') AND
-				(' . $consulta2 . ') AND
-				(' . $consulta3 . ')
-				' . $data['TipoDespesa'] . ' AND
-				(DS.TipoProduto = "1" OR DS.TipoProduto = "E")
-            ORDER BY
-				PP.DataVencimentoPagaveis
-        ');
-
-        /*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-          */
-
-        if ($completo === FALSE) {
-            return TRUE;
-        } else {
-
-            $somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somareal=$balanco=$ant=0;
-            foreach ($query->result() as $row) {
-				$row->DataDespesas = $this->basico->mascara_data($row->DataDespesas, 'barras');
-                $row->DataEntradaDespesas = $this->basico->mascara_data($row->DataEntradaDespesas, 'barras');
-                $row->DataVencimentoPagaveis = $this->basico->mascara_data($row->DataVencimentoPagaveis, 'barras');
-                $row->DataPagoPagaveis = $this->basico->mascara_data($row->DataPagoPagaveis, 'barras');
-				$row->AprovadoDespesas = $this->basico->mascara_palavra_completa($row->AprovadoDespesas, 'NS');
-				$row->ServicoConcluidoDespesas = $this->basico->mascara_palavra_completa($row->ServicoConcluidoDespesas, 'NS');
-				$row->QuitadoDespesas = $this->basico->mascara_palavra_completa($row->QuitadoDespesas, 'NS');
-                $row->QuitadoPagaveis = $this->basico->mascara_palavra_completa($row->QuitadoPagaveis, 'NS');
-
-                #esse trecho pode ser melhorado, serve para somar apenas uma vez
-                #o valor da entrada que pode aparecer mais de uma vez
-                if ($ant != $row->idApp_Despesas) {
-                    $ant = $row->idApp_Despesas;
-                    $somaentrada += $row->ValorEntradaDespesas;
-                }
-                else {
-                    $row->ValorEntradaDespesas = FALSE;
-                    $row->DataEntradaDespesas = FALSE;
-                }
-
-                $somarecebido += $row->ValorPagoPagaveis;
-                $somareceber += $row->ValorParcelaPagaveis;
-				$somapago += $row->ValorPagoPagaveis;
-				$somapagar += $row->ValorParcelaPagaveis;
-
-                $row->ValorEntradaDespesas = number_format($row->ValorEntradaDespesas, 2, ',', '.');
-                $row->ValorParcelaPagaveis = number_format($row->ValorParcelaPagaveis, 2, ',', '.');
-                $row->ValorPagoPagaveis = number_format($row->ValorPagoPagaveis, 2, ',', '.');
-            }
-            $somareceber -= $somarecebido;
-            $somareal = $somarecebido;
-            $balanco = $somarecebido + $somareceber;
-
-			$somapagar -= $somapago;
-			$somareal2 = $somapago;
-			$balanco2 = $somapago + $somapagar;
-
-            $query->soma = new stdClass();
-            $query->soma->somareceber = number_format($somareceber, 2, ',', '.');
-            $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
-            $query->soma->somareal = number_format($somareal, 2, ',', '.');
-            $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
-            $query->soma->balanco = number_format($balanco, 2, ',', '.');
-			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
-            $query->soma->somapago = number_format($somapago, 2, ',', '.');
-            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
-            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
-
-            return $query;
-        }
-
-    }
-
-	public function list_despesasprod($data, $completo) {
-
-        if ($data['DataFim']) {
-            $consulta =
-                '(PP.DataVencimentoPagaveis >= "' . $data['DataInicio'] . '" AND PP.DataVencimentoPagaveis <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(PP.DataVencimentoPagaveis >= "' . $data['DataInicio'] . '")';
-        }
-
-		if ($data['DataFim2']) {
-            $consulta2 =
-                '(PP.DataPagoPagaveis >= "' . $data['DataInicio2'] . '" AND PP.DataPagoPagaveis <= "' . $data['DataFim2'] . '")';
-        }
-        else {
-            $consulta2 =
-                '(PP.DataPagoPagaveis >= "' . $data['DataInicio2'] . '")';
-        }
-
-        if ($data['DataFim3']) {
-            $consulta3 =
-                '(DS.DataDespesas >= "' . $data['DataInicio3'] . '" AND DS.DataDespesas <= "' . $data['DataFim3'] . '")';
-        }
-        else {
-            $consulta3 =
-                '(DS.DataDespesas >= "' . $data['DataInicio3'] . '")';
-        }
-
-
-		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoDespesa'] : FALSE;
-		$filtro1 = ($data['AprovadoDespesas'] != '#') ? 'DS.AprovadoDespesas = "' . $data['AprovadoDespesas'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluidoDespesas'] != '#') ? 'DS.ServicoConcluidoDespesas = "' . $data['ServicoConcluidoDespesas'] . '" AND ' : FALSE;
-        $filtro2 = ($data['QuitadoDespesas'] != '#') ? 'DS.QuitadoDespesas = "' . $data['QuitadoDespesas'] . '" AND ' : FALSE;
-		$filtro4 = ($data['QuitadoPagaveis'] != '#') ? 'PP.QuitadoPagaveis = "' . $data['QuitadoPagaveis'] . '" AND ' : FALSE;
-
-        $query = $this->db->query('
-            SELECT
-                DS.idApp_Despesas,
-				DS.Despesa,
-				TD.TipoDespesa,
-				DS.TipoProduto,
-                DS.DataDespesas,
-                DS.DataEntradaDespesas,
-                DS.ValorEntradaDespesas,
-				DS.AprovadoDespesas,
-				DS.ServicoConcluidoDespesas,
-				DS.QuitadoDespesas,
-                PP.ParcelaPagaveis,
-                PP.DataVencimentoPagaveis,
-                PP.ValorParcelaPagaveis,
-                PP.DataPagoPagaveis,
-				PP.ValorPagoPagaveis,
-                PP.QuitadoPagaveis
-            FROM
-                App_Despesas AS DS
-                    LEFT JOIN App_ParcelasPagaveis AS PP ON DS.idApp_Despesas = PP.idApp_Despesas
-                    LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = DS.TipoDespesa
-            WHERE
-                DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				' . $filtro2 . '
-				' . $filtro4 . '
-				(' . $consulta . ') AND
-				(' . $consulta2 . ') AND
-				(' . $consulta3 . ')
-				' . $data['TipoDespesa'] . ' AND
-				(DS.TipoProduto = "1" OR DS.TipoProduto = "E")
-            ORDER BY
-				PP.DataVencimentoPagaveis
-        ');
-
-        /*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-          */
-
-        if ($completo === FALSE) {
-            return TRUE;
-        } else {
-
-            $somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somareal=$balanco=$ant=0;
-            foreach ($query->result() as $row) {
-				$row->DataDespesas = $this->basico->mascara_data($row->DataDespesas, 'barras');
-                $row->DataEntradaDespesas = $this->basico->mascara_data($row->DataEntradaDespesas, 'barras');
-                $row->DataVencimentoPagaveis = $this->basico->mascara_data($row->DataVencimentoPagaveis, 'barras');
-                $row->DataPagoPagaveis = $this->basico->mascara_data($row->DataPagoPagaveis, 'barras');
-				$row->AprovadoDespesas = $this->basico->mascara_palavra_completa($row->AprovadoDespesas, 'NS');
-				$row->ServicoConcluidoDespesas = $this->basico->mascara_palavra_completa($row->ServicoConcluidoDespesas, 'NS');
-				$row->QuitadoDespesas = $this->basico->mascara_palavra_completa($row->QuitadoDespesas, 'NS');
-                $row->QuitadoPagaveis = $this->basico->mascara_palavra_completa($row->QuitadoPagaveis, 'NS');
-
-                #esse trecho pode ser melhorado, serve para somar apenas uma vez
-                #o valor da entrada que pode aparecer mais de uma vez
-                if ($ant != $row->idApp_Despesas) {
-                    $ant = $row->idApp_Despesas;
-                    $somaentrada += $row->ValorEntradaDespesas;
-                }
-                else {
-                    $row->ValorEntradaDespesas = FALSE;
-                    $row->DataEntradaDespesas = FALSE;
-                }
-
-                $somarecebido += $row->ValorPagoPagaveis;
-                $somareceber += $row->ValorParcelaPagaveis;
-				$somapago += $row->ValorPagoPagaveis;
-				$somapagar += $row->ValorParcelaPagaveis;
-
-                $row->ValorEntradaDespesas = number_format($row->ValorEntradaDespesas, 2, ',', '.');
-                $row->ValorParcelaPagaveis = number_format($row->ValorParcelaPagaveis, 2, ',', '.');
-                $row->ValorPagoPagaveis = number_format($row->ValorPagoPagaveis, 2, ',', '.');
-            }
-            $somareceber -= $somarecebido;
-            $somareal = $somarecebido;
-            $balanco = $somarecebido + $somareceber;
-
-			$somapagar -= $somapago;
-			$somareal2 = $somapago;
-			$balanco2 = $somapago + $somapagar;
-
-            $query->soma = new stdClass();
-            $query->soma->somareceber = number_format($somareceber, 2, ',', '.');
-            $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
-            $query->soma->somareal = number_format($somareal, 2, ',', '.');
-            $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
-            $query->soma->balanco = number_format($balanco, 2, ',', '.');
-			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
-            $query->soma->somapago = number_format($somapago, 2, ',', '.');
-            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
-            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
-
-            return $query;
-        }
-
-    }
-
-	public function list_despesaspag($data, $completo) {
-
-        if ($data['DataFim']) {
-            $consulta =
-                '(PP.DataVencimentoPagaveis >= "' . $data['DataInicio'] . '" AND PP.DataVencimentoPagaveis <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(PP.DataVencimentoPagaveis >= "' . $data['DataInicio'] . '")';
-        }
-
-		if ($data['DataFim2']) {
-            $consulta2 =
-                '(PP.DataPagoPagaveis >= "' . $data['DataInicio2'] . '" AND PP.DataPagoPagaveis <= "' . $data['DataFim2'] . '")';
-        }
-        else {
-            $consulta2 =
-                '(PP.DataPagoPagaveis >= "' . $data['DataInicio2'] . '")';
-        }
-
-        if ($data['DataFim3']) {
-            $consulta3 =
-                '(DS.DataDespesas >= "' . $data['DataInicio3'] . '" AND DS.DataDespesas <= "' . $data['DataFim3'] . '")';
-        }
-        else {
-            $consulta3 =
-                '(DS.DataDespesas >= "' . $data['DataInicio3'] . '")';
-        }
-
-		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PP.DataVencimentoPagaveis) = ' . $data['Dia'] : FALSE;
-		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PP.DataVencimentoPagaveis) = ' . $data['Mesvenc'] : FALSE;
-		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PP.DataPagoPagaveis) = ' . $data['Mespag'] : FALSE;
-		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PP.DataVencimentoPagaveis) = ' . $data['Ano'] : FALSE;
-		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoDespesa'] : FALSE;
-		$data['Campo'] = (!$data['Campo']) ? 'DS.idApp_Despesas' : $data['Campo'];
-        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
-		$filtro1 = ($data['AprovadoDespesas'] != '#') ? 'DS.AprovadoDespesas = "' . $data['AprovadoDespesas'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluidoDespesas'] != '#') ? 'DS.ServicoConcluidoDespesas = "' . $data['ServicoConcluidoDespesas'] . '" AND ' : FALSE;
-        $filtro2 = ($data['QuitadoDespesas'] != '#') ? 'DS.QuitadoDespesas = "' . $data['QuitadoDespesas'] . '" AND ' : FALSE;
-		$filtro4 = ($data['QuitadoPagaveis'] != '#') ? 'PP.QuitadoPagaveis = "' . $data['QuitadoPagaveis'] . '" AND ' : FALSE;	
-		$filtro5 = ($data['ModalidadeDespesas'] != '#') ? 'DS.ModalidadeDespesas = "' . $data['ModalidadeDespesas'] . '" AND ' : FALSE;
-		
-        $query = $this->db->query('
-            SELECT
-                DS.idSis_Empresa,
-				DS.idApp_Despesas,				
-				DS.Despesa,
-				CONCAT(IFNULL(DS.Despesa,""), " / ", IFNULL(TD.TipoDespesa,"")) AS Despesa,
-				TD.TipoDespesa,
-				CD.Categoriadesp,
-				DS.TipoProduto,
-                DS.DataDespesas,
-                DS.DataEntradaDespesas,
-                DS.ValorEntradaDespesas,
-				DS.AprovadoDespesas,
-				DS.ServicoConcluidoDespesas,
-				DS.QuitadoDespesas,
-				DS.ModalidadeDespesas,
-				MD.Modalidade,
-                PP.ParcelaPagaveis,
-				CONCAT(PP.ParcelaPagaveis) AS ParcelaPagaveis,
-                PP.DataVencimentoPagaveis,
-                PP.ValorParcelaPagaveis,
-                PP.DataPagoPagaveis,
-				PP.ValorPagoPagaveis,
-                PP.QuitadoPagaveis
-            FROM
-                App_Despesas AS DS
-                    LEFT JOIN App_ParcelasPagaveis AS PP ON DS.idApp_Despesas = PP.idApp_Despesas
-                    LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = DS.TipoDespesa
-					LEFT JOIN Tab_Categoriadesp AS CD ON CD.idTab_Categoriadesp = TD.Categoriadesp
-					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = DS.ModalidadeDespesas
-            WHERE
-                DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-
-
-				' . $filtro4 . '
-				' . $filtro5 . ' 
-				(DS.TipoProduto = "1" OR DS.TipoProduto = "E")
-				' . $data['Dia'] . '
-				' . $data['Mesvenc'] . ' 
-
-				' . $data['Ano'] . ' 
-				' . $data['TipoDespesa'] . ' 
-				
-            ORDER BY
-				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
-        ');
-
-        /*
-		(YEAR(DataVencimentoPagaveis) = ' . date('Y', time()) . ') 		
-		*/
-		
-		/*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-          */
-
-        if ($completo === FALSE) {
-            return TRUE;
-        } else {
-
-            $somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somareal=$balanco=$ant=0;
-            foreach ($query->result() as $row) {
-				$row->DataDespesas = $this->basico->mascara_data($row->DataDespesas, 'barras');
-                $row->DataEntradaDespesas = $this->basico->mascara_data($row->DataEntradaDespesas, 'barras');
-                $row->DataVencimentoPagaveis = $this->basico->mascara_data($row->DataVencimentoPagaveis, 'barras');
-                $row->DataPagoPagaveis = $this->basico->mascara_data($row->DataPagoPagaveis, 'barras');
-				$row->AprovadoDespesas = $this->basico->mascara_palavra_completa($row->AprovadoDespesas, 'NS');
-				$row->ServicoConcluidoDespesas = $this->basico->mascara_palavra_completa($row->ServicoConcluidoDespesas, 'NS');
-				$row->QuitadoDespesas = $this->basico->mascara_palavra_completa($row->QuitadoDespesas, 'NS');
-                $row->QuitadoPagaveis = $this->basico->mascara_palavra_completa($row->QuitadoPagaveis, 'NS');
-
-                #esse trecho pode ser melhorado, serve para somar apenas uma vez
-                #o valor da entrada que pode aparecer mais de uma vez
-                if ($ant != $row->idApp_Despesas) {
-                    $ant = $row->idApp_Despesas;
-                    $somaentrada += $row->ValorEntradaDespesas;
-                }
-                else {
-                    $row->ValorEntradaDespesas = FALSE;
-                    $row->DataEntradaDespesas = FALSE;
-                }
-
-                $somarecebido += $row->ValorPagoPagaveis;
-                $somareceber += $row->ValorParcelaPagaveis;
-				$somapago += $row->ValorPagoPagaveis;
-				$somapagar += $row->ValorParcelaPagaveis;
-
-                $row->ValorEntradaDespesas = number_format($row->ValorEntradaDespesas, 2, ',', '.');
-                $row->ValorParcelaPagaveis = number_format($row->ValorParcelaPagaveis, 2, ',', '.');
-                $row->ValorPagoPagaveis = number_format($row->ValorPagoPagaveis, 2, ',', '.');
-            }
-            $somareceber -= $somarecebido;
-            $somareal = $somarecebido;
-            $balanco = $somarecebido + $somareceber;
-
-			$somapagar -= $somapago;
-			$somareal2 = $somapago;
-			$balanco2 = $somapago + $somapagar;
-
-            $query->soma = new stdClass();
-            $query->soma->somareceber = number_format($somareceber, 2, ',', '.');
-            $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
-            $query->soma->somareal = number_format($somareal, 2, ',', '.');
-            $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
-            $query->soma->balanco = number_format($balanco, 2, ',', '.');
-			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
-            $query->soma->somapago = number_format($somapago, 2, ',', '.');
-            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
-            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
-
-            return $query;
-        }
-
-    }
-	
-	public function list_despesaspag1($data, $completo) {
-
-        if ($data['DataFim']) {
-            $consulta =
-                '(PP.DataVencimentoPagaveis >= "' . $data['DataInicio'] . '" AND PP.DataVencimentoPagaveis <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(PP.DataVencimentoPagaveis >= "' . $data['DataInicio'] . '")';
-        }
-
-		if ($data['DataFim2']) {
-            $consulta2 =
-                '(PP.DataPagoPagaveis >= "' . $data['DataInicio2'] . '" AND PP.DataPagoPagaveis <= "' . $data['DataFim2'] . '")';
-        }
-        else {
-            $consulta2 =
-                '(PP.DataPagoPagaveis >= "' . $data['DataInicio2'] . '")';
-        }
-
-        if ($data['DataFim3']) {
-            $consulta3 =
-                '(DS.DataDespesas >= "' . $data['DataInicio3'] . '" AND DS.DataDespesas <= "' . $data['DataFim3'] . '")';
-        }
-        else {
-            $consulta3 =
-                '(DS.DataDespesas >= "' . $data['DataInicio3'] . '")';
-        }
-
-
-		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoDespesa'] : FALSE;
-		$filtro1 = ($data['AprovadoDespesas'] != '#') ? 'DS.AprovadoDespesas = "' . $data['AprovadoDespesas'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluidoDespesas'] != '#') ? 'DS.ServicoConcluidoDespesas = "' . $data['ServicoConcluidoDespesas'] . '" AND ' : FALSE;
-        $filtro2 = ($data['QuitadoDespesas'] != '#') ? 'DS.QuitadoDespesas = "' . $data['QuitadoDespesas'] . '" AND ' : FALSE;
-		$filtro4 = ($data['QuitadoPagaveis'] != '#') ? 'PP.QuitadoPagaveis = "' . $data['QuitadoPagaveis'] . '" AND ' : FALSE;
-
-        $query = $this->db->query('
-            SELECT
-                DS.idSis_Empresa,
-				DS.idApp_Despesas,
-				DS.Despesa,
-				TD.TipoDespesa,
-				DS.TipoProduto,
-                DS.DataDespesas,
-                DS.DataEntradaDespesas,
-                DS.ValorEntradaDespesas,
-				DS.AprovadoDespesas,
-				DS.ServicoConcluidoDespesas,
-				DS.QuitadoDespesas,
-				PP.ParcelaPagaveis,
-                PP.DataVencimentoPagaveis,
-                PP.ValorParcelaPagaveis,
-                PP.DataPagoPagaveis,
-				PP.ValorPagoPagaveis,
-                PP.QuitadoPagaveis
-            FROM
-                App_Despesas AS DS
-                    LEFT JOIN App_ParcelasPagaveis AS PP ON DS.idApp_Despesas = PP.idApp_Despesas
-                    LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = DS.TipoDespesa
-            WHERE
-                DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				' . $filtro2 . '
-				' . $filtro4 . '
-				(' . $consulta . ') AND
-				(' . $consulta2 . ') AND
-				(' . $consulta3 . ')
-				' . $data['TipoDespesa'] . ' AND
-				(DS.TipoProduto = "1" OR DS.TipoProduto = "E")
-            ORDER BY
-				PP.DataVencimentoPagaveis
-        ');
-
-        /*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-          */
-
-        if ($completo === FALSE) {
-            return TRUE;
-        } else {
-
-            $somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somareal=$balanco=$ant=0;
-            foreach ($query->result() as $row) {
-				$row->DataDespesas = $this->basico->mascara_data($row->DataDespesas, 'barras');
-                $row->DataEntradaDespesas = $this->basico->mascara_data($row->DataEntradaDespesas, 'barras');
-                $row->DataVencimentoPagaveis = $this->basico->mascara_data($row->DataVencimentoPagaveis, 'barras');
-                $row->DataPagoPagaveis = $this->basico->mascara_data($row->DataPagoPagaveis, 'barras');
-				$row->AprovadoDespesas = $this->basico->mascara_palavra_completa($row->AprovadoDespesas, 'NS');
-				$row->ServicoConcluidoDespesas = $this->basico->mascara_palavra_completa($row->ServicoConcluidoDespesas, 'NS');
-				$row->QuitadoDespesas = $this->basico->mascara_palavra_completa($row->QuitadoDespesas, 'NS');
-                $row->QuitadoPagaveis = $this->basico->mascara_palavra_completa($row->QuitadoPagaveis, 'NS');
-
-                #esse trecho pode ser melhorado, serve para somar apenas uma vez
-                #o valor da entrada que pode aparecer mais de uma vez
-                if ($ant != $row->idApp_Despesas) {
-                    $ant = $row->idApp_Despesas;
-                    $somaentrada += $row->ValorEntradaDespesas;
-                }
-                else {
-                    $row->ValorEntradaDespesas = FALSE;
-                    $row->DataEntradaDespesas = FALSE;
-                }
-
-                $somarecebido += $row->ValorPagoPagaveis;
-                $somareceber += $row->ValorParcelaPagaveis;
-				$somapago += $row->ValorPagoPagaveis;
-				$somapagar += $row->ValorParcelaPagaveis;
-
-                $row->ValorEntradaDespesas = number_format($row->ValorEntradaDespesas, 2, ',', '.');
-                $row->ValorParcelaPagaveis = number_format($row->ValorParcelaPagaveis, 2, ',', '.');
-                $row->ValorPagoPagaveis = number_format($row->ValorPagoPagaveis, 2, ',', '.');
-            }
-            $somareceber -= $somarecebido;
-            $somareal = $somarecebido;
-            $balanco = $somarecebido + $somareceber;
-
-			$somapagar -= $somapago;
-			$somareal2 = $somapago;
-			$balanco2 = $somapago + $somapagar;
-
-            $query->soma = new stdClass();
-            $query->soma->somareceber = number_format($somareceber, 2, ',', '.');
-            $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
-            $query->soma->somareal = number_format($somareal, 2, ',', '.');
-            $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
-            $query->soma->balanco = number_format($balanco, 2, ',', '.');
-			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
-            $query->soma->somapago = number_format($somapago, 2, ',', '.');
-            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
-            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
-
-            return $query;
-        }
-
-    }
-
-	public function list_devolucao1DESPESAS($data, $completo) {
-
-        if ($data['DataFim']) {
-            $consulta =
-                '(PP.DataVencimentoPagaveis >= "' . $data['DataInicio'] . '" AND PP.DataVencimentoPagaveis <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(PP.DataVencimentoPagaveis >= "' . $data['DataInicio'] . '")';
-        }
-
-		if ($data['DataFim2']) {
-            $consulta2 =
-                '(PP.DataPagoPagaveis >= "' . $data['DataInicio2'] . '" AND PP.DataPagoPagaveis <= "' . $data['DataFim2'] . '")';
-        }
-        else {
-            $consulta2 =
-                '(PP.DataPagoPagaveis >= "' . $data['DataInicio2'] . '")';
-        }
-
-        if ($data['DataFim3']) {
-            $consulta3 =
-                '(DS.DataDespesas >= "' . $data['DataInicio3'] . '" AND DS.DataDespesas <= "' . $data['DataFim3'] . '")';
-        }
-        else {
-            $consulta3 =
-                '(DS.DataDespesas >= "' . $data['DataInicio3'] . '")';
-        }
-
-
-		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoDespesa'] : FALSE;
-		$filtro1 = ($data['AprovadoDespesas'] != '#') ? 'DS.AprovadoDespesas = "' . $data['AprovadoDespesas'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluidoDespesas'] != '#') ? 'DS.ServicoConcluidoDespesas = "' . $data['ServicoConcluidoDespesas'] . '" AND ' : FALSE;
-        $filtro2 = ($data['QuitadoDespesas'] != '#') ? 'DS.QuitadoDespesas = "' . $data['QuitadoDespesas'] . '" AND ' : FALSE;
-		$filtro4 = ($data['QuitadoPagaveis'] != '#') ? 'PP.QuitadoPagaveis = "' . $data['QuitadoPagaveis'] . '" AND ' : FALSE;
-
-        $query = $this->db->query('
-            SELECT
-                DS.idApp_Despesas,
-				DS.Despesa,
-				TD.TipoDespesa,
-				DS.TipoProduto,
-                DS.DataDespesas,
-                DS.DataEntradaDespesas,
-                DS.ValorEntradaDespesas,
-				DS.AprovadoDespesas,
-				DS.ServicoConcluidoDespesas,
-				DS.QuitadoDespesas,
-                PP.ParcelaPagaveis,
-                PP.DataVencimentoPagaveis,
-                PP.ValorParcelaPagaveis,
-                PP.DataPagoPagaveis,
-				PP.ValorPagoPagaveis,
-                PP.QuitadoPagaveis
-            FROM
-                App_Despesas AS DS
-                    LEFT JOIN App_ParcelasPagaveis AS PP ON DS.idApp_Despesas = PP.idApp_Despesas
-                    LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = DS.TipoDespesa
-            WHERE
-                DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				' . $filtro2 . '
-				' . $filtro4 . '
-				(' . $consulta . ') AND
-				(' . $consulta2 . ') AND
-				(' . $consulta3 . ')
-				' . $data['TipoDespesa'] . ' AND
-				DS.TipoProduto = "E"
-            ORDER BY
-				PP.DataVencimentoPagaveis
-        ');
-
-        /*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-          */
-
-        if ($completo === FALSE) {
-            return TRUE;
-        } else {
-
-            $somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somareal=$balanco=$ant=0;
-            foreach ($query->result() as $row) {
-				$row->DataDespesas = $this->basico->mascara_data($row->DataDespesas, 'barras');
-                $row->DataEntradaDespesas = $this->basico->mascara_data($row->DataEntradaDespesas, 'barras');
-                $row->DataVencimentoPagaveis = $this->basico->mascara_data($row->DataVencimentoPagaveis, 'barras');
-                $row->DataPagoPagaveis = $this->basico->mascara_data($row->DataPagoPagaveis, 'barras');
-				$row->AprovadoDespesas = $this->basico->mascara_palavra_completa($row->AprovadoDespesas, 'NS');
-				$row->ServicoConcluidoDespesas = $this->basico->mascara_palavra_completa($row->ServicoConcluidoDespesas, 'NS');
-				$row->QuitadoDespesas = $this->basico->mascara_palavra_completa($row->QuitadoDespesas, 'NS');
-                $row->QuitadoPagaveis = $this->basico->mascara_palavra_completa($row->QuitadoPagaveis, 'NS');
-
-                #esse trecho pode ser melhorado, serve para somar apenas uma vez
-                #o valor da entrada que pode aparecer mais de uma vez
-                if ($ant != $row->idApp_Despesas) {
-                    $ant = $row->idApp_Despesas;
-                    $somaentrada += $row->ValorEntradaDespesas;
-                }
-                else {
-                    $row->ValorEntradaDespesas = FALSE;
-                    $row->DataEntradaDespesas = FALSE;
-                }
-
-                $somarecebido += $row->ValorPagoPagaveis;
-                $somareceber += $row->ValorParcelaPagaveis;
-				$somapago += $row->ValorPagoPagaveis;
-				$somapagar += $row->ValorParcelaPagaveis;
-
-                $row->ValorEntradaDespesas = number_format($row->ValorEntradaDespesas, 2, ',', '.');
-                $row->ValorParcelaPagaveis = number_format($row->ValorParcelaPagaveis, 2, ',', '.');
-                $row->ValorPagoPagaveis = number_format($row->ValorPagoPagaveis, 2, ',', '.');
-            }
-            $somareceber -= $somarecebido;
-            $somareal = $somarecebido;
-            $balanco = $somarecebido + $somareceber;
-
-			$somapagar -= $somapago;
-			$somareal2 = $somapago;
-			$balanco2 = $somapago + $somapagar;
-
-            $query->soma = new stdClass();
-            $query->soma->somareceber = number_format($somareceber, 2, ',', '.');
-            $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
-            $query->soma->somareal = number_format($somareal, 2, ',', '.');
-            $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
-            $query->soma->balanco = number_format($balanco, 2, ',', '.');
-			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
-            $query->soma->somapago = number_format($somapago, 2, ',', '.');
-            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
-            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
-
-            return $query;
-        }
-
-    }
-
     public function list_balanco($data) {
 
         ####################################################################
@@ -2410,403 +1353,6 @@ class Relatorio_model extends CI_Model {
 		#$query['TotalGeralResDes']->DesPago = number_format($query['TotalGeralResDes']->DesPago, 2, ',', '.');
         $query['TotalGeralResDes']->BalancoGeralResDes = number_format($query['TotalGeralResDes']->BalancoGeralResDes, 2, ',', '.');
 		
-        /*
-        echo $this->db->last_query();
-        echo "<pre>";
-        print_r($query);
-        echo "</pre>";
-        exit();
-        */
-        return $query;
-
-    }
-
-    public function list_balanco2($data) {
-
-        ####################################################################
-        #SOMATÓRIO DAS RECEITAS Pago DO ANO
-        $somareceitas='';
-        for ($i=1;$i<=12;$i++){
-            $somareceitas .= 'SUM(IF(PR.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
-        }
-        $somareceitas = substr($somareceitas, 0 ,-2);
-
-        $query['RecPago'] = $this->db->query(
-        #$receitas = $this->db->query(
-            'SELECT
-                ' . $somareceitas . '
-            FROM
-
-                App_OrcaTrata AS OT
-                    LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-            WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-
-				OT.idTab_TipoRD = "2" AND
-				PR.Quitado = "S" AND
-            	YEAR(PR.DataVencimento) = ' . $data['Ano']
-        );
-
-        #$query['RecPago'] = $query['RecPago']->result_array();
-        $query['RecPago'] = $query['RecPago']->result();
-        $query['RecPago'][0]->Balancopago = 'Rec.Real';
-		
-        ####################################################################
-        #SOMATÓRIO DAS RECEITAS Venc. DO ANO
-        $somareceitasvenc='';
-        for ($i=1;$i<=12;$i++){
-            $somareceitasvenc .= 'SUM(IF(PR.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
-        }
-        $somareceitasvenc = substr($somareceitasvenc, 0 ,-2);
-
-        $query['RecVenc'] = $this->db->query(
-        #$receitas = $this->db->query(
-            'SELECT
-                ' . $somareceitasvenc . '
-            FROM
-
-                App_OrcaTrata AS OT
-                    LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-            WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-
-
-				OT.idTab_TipoRD = "2" AND
-            	YEAR(PR.DataVencimento) = ' . $data['Ano']
-        );
-
-        #$query['RecVenc'] = $query['RecVenc']->result_array();
-        $query['RecVenc'] = $query['RecVenc']->result();
-        $query['RecVenc'][0]->Balancovenc = 'Rec.Esp';
-
-
-		####################################################################
-        #SOMATÓRIO DAS DEVOLUÇÕES DO ANO
-        $somadevolucoes='';
-        for ($i=1;$i<=12;$i++){
-            $somadevolucoes .= 'SUM(IF(PR.DataPago BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorPago, 0)) AS M' . $i . ', ';
-        }
-        $somadevolucoes = substr($somadevolucoes, 0 ,-2);
-
-        $query['Devolucoes'] = $this->db->query(
-        #$devolucoes = $this->db->query(
-            'SELECT
-                ' . $somadevolucoes . '
-            FROM
-                App_OrcaTrata AS OT
-                    LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-            WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-
-				OT.idTab_TipoRD = "1" AND
-            	YEAR(PR.DataPago) = ' . $data['Ano']
-        );
-
-        #$query['Devolucoes'] = $query['Devolucoes']->result_array();
-        $query['Devolucoes'] = $query['Devolucoes']->result();
-        $query['Devolucoes'][0]->Balancopago = 'Devolucoes';
-
-
-        ####################################################################
-        #SOMATÓRIO DAS DESPESAS PAGAS DO ANO
-        $somadespesas='';
-        for ($i=1;$i<=12;$i++){
-            $somadespesas .= 'SUM(IF(PP.DataVencimentoPagaveis BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PP.ValorParcelaPagaveis, 0)) AS M' . $i . ', ';
-        }
-        $somadespesas = substr($somadespesas, 0 ,-2);
-
-        $query['DesPago'] = $this->db->query(
-        #$despesas = $this->db->query(
-            'SELECT
-                ' . $somadespesas . '
-            FROM
-                App_Despesas AS DS
-                    LEFT JOIN App_ParcelasPagaveis AS PP ON DS.idApp_Despesas = PP.idApp_Despesas
-                    LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = DS.TipoDespesa
-            WHERE
-                DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-
-                (DS.TipoProduto = "1") AND
-				PP.QuitadoPagaveis = "S" AND
-            	YEAR(PP.DataVencimentoPagaveis) = ' . $data['Ano']
-        );
-
-        #$query['DesPago'] = $query['DesPago']->result_array();
-        $query['DesPago'] = $query['DesPago']->result();
-        $query['DesPago'][0]->Balancopago = 'Desp.Real';
-
-        ####################################################################
-        #SOMATÓRIO DAS DESPESASVenc DO ANO
-        $somadespesasvenc='';
-        for ($i=1;$i<=12;$i++){
-            $somadespesasvenc .= 'SUM(IF(PP.DataVencimentoPagaveis BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PP.ValorParcelaPagaveis, 0)) AS M' . $i . ', ';
-        }
-        $somadespesasvenc = substr($somadespesasvenc, 0 ,-2);
-
-        $query['DesVenc'] = $this->db->query(
-        #$despesas = $this->db->query(
-            'SELECT
-                ' . $somadespesasvenc . '
-            FROM
-                App_Despesas AS DS
-                    LEFT JOIN App_ParcelasPagaveis AS PP ON DS.idApp_Despesas = PP.idApp_Despesas
-                    LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = DS.TipoDespesa
-            WHERE
-                DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-
-                (DS.TipoProduto = "1") AND
-            	YEAR(PP.DataVencimentoPagaveis) = ' . $data['Ano']
-        );
-
-        #$query['DesVenc'] = $query['DesVenc']->result_array();
-        $query['DesVenc'] = $query['DesVenc']->result();
-        $query['DesVenc'][0]->Balancovenc = 'Desp.Esp';
-		
-        /*
-        echo $this->db->last_query();
-        echo "<pre>";
-        print_r($query);
-        echo "</pre>";
-        exit();
-        */
-		#$query['RecVenc'] = $query['RecVenc']->result();
-		$query['RecVenc'][0]->BalancoResRec = 'RecVenc';
-		#$query['RecPago'] = $query['RecPago']->result();
-		$query['RecPago'][0]->BalancoResRec = 'RecPago';
-		#$query['DesVenc'] = $query['DesVenc']->result();
-		$query['DesVenc'][0]->BalancoResDes = 'DesVenc';
-		#$query['DesPago'] = $query['DesPago']->result();
-		$query['DesPago'][0]->BalancoResDes = 'DesPago';
-		
-        $query['TotalPago'] = new stdClass();
-        $query['TotalGeralpago'] = new stdClass();
-        $query['TotalVenc'] = new stdClass();
-        $query['TotalGeralvenc'] = new stdClass();
-		$query['TotalResRec'] = new stdClass();
-        $query['TotalGeralResRec'] = new stdClass();
-		$query['TotalResDes'] = new stdClass();
-        $query['TotalGeralResDes'] = new stdClass();
-		
-        $query['TotalPago']->Balancopago = 'Bal.Real';
-        $query['TotalGeralpago']->RecPago = $query['TotalGeralpago']->Devolucoes = $query['TotalGeralpago']->DesPago = $query['TotalGeralpago']->BalancoGeralpago = 0;
-        $query['TotalVenc']->Balancovenc = 'Bal.Esp';
-        $query['TotalGeralvenc']->RecVenc = $query['TotalGeralvenc']->DesVenc = $query['TotalGeralvenc']->BalancoGeralvenc = 0;
-		$query['TotalResRec']->BalancoResRec = 'TotalResRec';
-        $query['TotalGeralResRec']->RecVenc = $query['TotalGeralResRec']->RecPago = $query['TotalGeralResRec']->BalancoGeralResRec = 0;
-		$query['TotalResDes']->BalancoResDes = 'TotalResDes';
-        $query['TotalGeralResDes']->DesVenc = $query['TotalGeralResDes']->DesPago = $query['TotalGeralResDes']->BatancoGeralResDes = 0;
-		
-        for ($i=1;$i<=12;$i++) {
-            $query['TotalVenc']->{'M'.$i} = $query['RecVenc'][0]->{'M'.$i} - $query['DesVenc'][0]->{'M'.$i};
-
-            $query['TotalGeralvenc']->RecVenc += $query['RecVenc'][0]->{'M'.$i};
-            $query['TotalGeralvenc']->DesVenc += $query['DesVenc'][0]->{'M'.$i};
-
-            $query['RecVenc'][0]->{'M'.$i} = number_format($query['RecVenc'][0]->{'M'.$i}, 2, ',', '.');
-			$query['DesVenc'][0]->{'M'.$i} = number_format($query['DesVenc'][0]->{'M'.$i}, 2, ',', '.');
-            $query['TotalVenc']->{'M'.$i} = number_format($query['TotalVenc']->{'M'.$i}, 2, ',', '.');
-        }		
-        $query['TotalGeralvenc']->BalancoGeralvenc = $query['TotalGeralvenc']->RecVenc - $query['TotalGeralvenc']->DesVenc;
-
-        $query['TotalGeralvenc']->RecVenc = number_format($query['TotalGeralvenc']->RecVenc, 2, ',', '.');
-		$query['TotalGeralvenc']->DesVenc = number_format($query['TotalGeralvenc']->DesVenc, 2, ',', '.');
-        $query['TotalGeralvenc']->BalancoGeralvenc = number_format($query['TotalGeralvenc']->BalancoGeralvenc, 2, ',', '.');
-
-        for ($i=1;$i<=12;$i++) {
-            $query['TotalPago']->{'M'.$i} = $query['RecPago'][0]->{'M'.$i} - $query['Devolucoes'][0]->{'M'.$i} - $query['DesPago'][0]->{'M'.$i};
-
-            $query['TotalGeralpago']->RecPago += $query['RecPago'][0]->{'M'.$i};
-			$query['TotalGeralpago']->Devolucoes += $query['Devolucoes'][0]->{'M'.$i};
-            $query['TotalGeralpago']->DesPago += $query['DesPago'][0]->{'M'.$i};
-
-            $query['RecPago'][0]->{'M'.$i} = number_format($query['RecPago'][0]->{'M'.$i}, 2, ',', '.');
-            $query['Devolucoes'][0]->{'M'.$i} = number_format($query['Devolucoes'][0]->{'M'.$i}, 2, ',', '.');
-			$query['DesPago'][0]->{'M'.$i} = number_format($query['DesPago'][0]->{'M'.$i}, 2, ',', '.');
-            $query['TotalPago']->{'M'.$i} = number_format($query['TotalPago']->{'M'.$i}, 2, ',', '.');
-        }		
-        $query['TotalGeralpago']->BalancoGeralpago = $query['TotalGeralpago']->RecPago - $query['TotalGeralpago']->Devolucoes - $query['TotalGeralpago']->DesPago;
-
-        $query['TotalGeralpago']->RecPago = number_format($query['TotalGeralpago']->RecPago, 2, ',', '.');
-        $query['TotalGeralpago']->Devolucoes = number_format($query['TotalGeralpago']->Devolucoes, 2, ',', '.');
-		$query['TotalGeralpago']->DesPago = number_format($query['TotalGeralpago']->DesPago, 2, ',', '.');
-        $query['TotalGeralpago']->BalancoGeralpago = number_format($query['TotalGeralpago']->BalancoGeralpago, 2, ',', '.');
-
-        for ($i=1;$i<=12;$i++) {
-            $query['TotalResRec']->{'M'.$i} = $query['RecVenc'][0]->{'M'.$i} - $query['RecPago'][0]->{'M'.$i};
-
-            $query['TotalGeralResRec']->RecVenc += $query['RecVenc'][0]->{'M'.$i};
-            $query['TotalGeralResRec']->RecPago += $query['RecPago'][0]->{'M'.$i};
-
-            #$query['RecVenc'][0]->{'M'.$i} = number_format($query['RecVenc'][0]->{'M'.$i}, 2, ',', '.');
-			#$query['RecPago'][0]->{'M'.$i} = number_format($query['RecPago'][0]->{'M'.$i}, 2, ',', '.');
-            #$query['TotalResRec']->{'M'.$i} = number_format($query['TotalResRec']->{'M'.$i}, 2, ',', '.');
-        }		
-        $query['TotalGeralResRec']->BalancoGeralResRec = $query['TotalGeralResRec']->RecVenc - $query['TotalGeralResRec']->RecPago;
-
-        #$query['TotalGeralResRec']->RecVenc = number_format($query['TotalGeralResRec']->RecVenc, 2, ',', '.');
-		#$query['TotalGeralResRec']->RecPago = number_format($query['TotalGeralResRec']->RecPago, 2, ',', '.');
-        $query['TotalGeralResRec']->BalancoGeralResRec = number_format($query['TotalGeralResRec']->BalancoGeralResRec, 2, ',', '.');
-		
-        for ($i=1;$i<=12;$i++) {
-            $query['TotalResDes']->{'M'.$i} = $query['DesVenc'][0]->{'M'.$i} - $query['DesPago'][0]->{'M'.$i};
-
-            $query['TotalGeralResDes']->DesVenc += $query['DesVenc'][0]->{'M'.$i};
-            $query['TotalGeralResDes']->DesPago += $query['DesPago'][0]->{'M'.$i};
-
-            #$query['DesVenc'][0]->{'M'.$i} = number_format($query['DesVenc'][0]->{'M'.$i}, 2, ',', '.');
-			#$query['DesPago'][0]->{'M'.$i} = number_format($query['DesPago'][0]->{'M'.$i}, 2, ',', '.');
-            #$query['TotalResDes']->{'M'.$i} = number_format($query['TotalResDes']->{'M'.$i}, 2, ',', '.');
-        }		
-        $query['TotalGeralResDes']->BalancoGeralResDes = $query['TotalGeralResDes']->DesVenc - $query['TotalGeralResDes']->DesPago;
-
-        #$query['TotalGeralResDes']->DesVenc = number_format($query['TotalGeralResDes']->DesVenc, 2, ',', '.');
-		#$query['TotalGeralResDes']->DesPago = number_format($query['TotalGeralResDes']->DesPago, 2, ',', '.');
-        $query['TotalGeralResDes']->BalancoGeralResDes = number_format($query['TotalGeralResDes']->BalancoGeralResDes, 2, ',', '.');
-		
-        /*
-        echo $this->db->last_query();
-        echo "<pre>";
-        print_r($query);
-        echo "</pre>";
-        exit();
-        */
-        return $query;
-
-    }
-	
-    public function list_balanco1($data) {
-
-        ####################################################################
-        #SOMATÓRIO DAS RECEITAS DO ANO
-        $somareceitas='';
-        for ($i=1;$i<=12;$i++){
-            $somareceitas .= 'SUM(IF(PR.DataPago BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorPago, 0)) AS M' . $i . ', ';
-        }
-        $somareceitas = substr($somareceitas, 0 ,-2);
-
-        $query['Receitas'] = $this->db->query(
-        #$receitas = $this->db->query(
-            'SELECT
-                ' . $somareceitas . '
-            FROM
-                App_Cliente AS C,
-                App_OrcaTrata AS OT
-                    LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-            WHERE
-                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                C.idApp_Cliente = OT.idApp_Cliente AND
-				OT.idTab_TipoRD = "2" AND
-            	YEAR(PR.DataPago) = ' . $data['Ano']
-        );
-
-        #$query['Receitas'] = $query['Receitas']->result_array();
-        $query['Receitas'] = $query['Receitas']->result();
-        $query['Receitas'][0]->Balanco = 'Receitas';
-
-
-		####################################################################
-        #SOMATÓRIO DAS DEVOLUÇÕES DO ANO
-        $somadevolucoes='';
-        for ($i=1;$i<=12;$i++){
-            $somadevolucoes .= 'SUM(IF(PR.DataPago BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorPago, 0)) AS M' . $i . ', ';
-        }
-        $somadevolucoes = substr($somadevolucoes, 0 ,-2);
-
-        $query['Devolucoes'] = $this->db->query(
-        #$devolucoes = $this->db->query(
-            'SELECT
-                ' . $somadevolucoes . '
-            FROM
-                App_Cliente AS C,
-                App_OrcaTrata AS OT
-                    LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-            WHERE
-                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                C.idApp_Cliente = OT.idApp_Cliente AND
-				OT.idTab_TipoRD = "1" AND
-            	YEAR(PR.DataPago) = ' . $data['Ano']
-        );
-
-        #$query['Devolucoes'] = $query['Devolucoes']->result_array();
-        $query['Devolucoes'] = $query['Devolucoes']->result();
-        $query['Devolucoes'][0]->Balanco = 'Devolucoes';
-
-
-        ####################################################################
-        #SOMATÓRIO DAS DESPESAS DO ANO
-        $somadespesas='';
-        for ($i=1;$i<=12;$i++){
-            $somadespesas .= 'SUM(IF(PP.DataPagoPagaveis BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PP.ValorPagoPagaveis, 0)) AS M' . $i . ', ';
-        }
-        $somadespesas = substr($somadespesas, 0 ,-2);
-
-        $query['Despesas'] = $this->db->query(
-        #$despesas = $this->db->query(
-            'SELECT
-                ' . $somadespesas . '
-            FROM
-                App_Despesas AS DS
-                    LEFT JOIN App_ParcelasPagaveis AS PP ON DS.idApp_Despesas = PP.idApp_Despesas
-                    LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = DS.TipoDespesa
-            WHERE
-                DS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                DS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                (DS.TipoProduto = "1") AND
-            	YEAR(PP.DataPagoPagaveis) = ' . $data['Ano']
-        );
-
-        #$query['Despesas'] = $query['Despesas']->result_array();
-        $query['Despesas'] = $query['Despesas']->result();
-        $query['Despesas'][0]->Balanco = 'Despesas';
-
-        /*
-        echo $this->db->last_query();
-        echo "<pre>";
-        print_r($query);
-        echo "</pre>";
-        exit();
-        */
-
-        $query['Total'] = new stdClass();
-        $query['TotalGeral'] = new stdClass();
-
-        $query['Total']->Balanco = 'Total';
-        $query['TotalGeral']->Receitas = $query['TotalGeral']->Devolucoes = $query['TotalGeral']->Despesas = $query['TotalGeral']->BalancoGeral = 0;
-
-        for ($i=1;$i<=12;$i++) {
-            $query['Total']->{'M'.$i} = $query['Receitas'][0]->{'M'.$i} - $query['Devolucoes'][0]->{'M'.$i} - $query['Despesas'][0]->{'M'.$i};
-
-            $query['TotalGeral']->Receitas += $query['Receitas'][0]->{'M'.$i};
-			$query['TotalGeral']->Devolucoes += $query['Devolucoes'][0]->{'M'.$i};
-            $query['TotalGeral']->Despesas += $query['Despesas'][0]->{'M'.$i};
-
-            $query['Receitas'][0]->{'M'.$i} = number_format($query['Receitas'][0]->{'M'.$i}, 2, ',', '.');
-            $query['Devolucoes'][0]->{'M'.$i} = number_format($query['Devolucoes'][0]->{'M'.$i}, 2, ',', '.');
-			$query['Despesas'][0]->{'M'.$i} = number_format($query['Despesas'][0]->{'M'.$i}, 2, ',', '.');
-            $query['Total']->{'M'.$i} = number_format($query['Total']->{'M'.$i}, 2, ',', '.');
-        }
-        $query['TotalGeral']->BalancoGeral = $query['TotalGeral']->Receitas - $query['TotalGeral']->Devolucoes - $query['TotalGeral']->Despesas;
-
-        $query['TotalGeral']->Receitas = number_format($query['TotalGeral']->Receitas, 2, ',', '.');
-        $query['TotalGeral']->Devolucoes = number_format($query['TotalGeral']->Devolucoes, 2, ',', '.');
-		$query['TotalGeral']->Despesas = number_format($query['TotalGeral']->Despesas, 2, ',', '.');
-        $query['TotalGeral']->BalancoGeral = number_format($query['TotalGeral']->BalancoGeral, 2, ',', '.');
-
         /*
         echo $this->db->last_query();
         echo "<pre>";
@@ -4694,233 +3240,6 @@ exit();*/
             $query->soma->somaorcamento = number_format($somaorcamento, 2, ',', '.');
 			$query->soma->somadesconto = number_format($somadesconto, 2, ',', '.');
 			$query->soma->somarestante = number_format($somarestante, 2, ',', '.');
-
-            return $query;
-        }
-
-    }
-
-	public function list_despesas5($data, $completo) {
-
-        if ($data['DataFim']) {
-            $consulta =
-                '(OT.DataDespesas >= "' . $data['DataInicio'] . '" AND OT.DataDespesas <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(OT.DataDespesas >= "' . $data['DataInicio'] . '")';
-        }
-
-        if ($data['DataFim2']) {
-            $consulta2 =
-                '(OT.DataConclusaoDespesas >= "' . $data['DataInicio2'] . '" AND OT.DataConclusaoDespesas <= "' . $data['DataFim2'] . '")';
-        }
-        else {
-            $consulta2 =
-                '(OT.DataConclusaoDespesas >= "' . $data['DataInicio2'] . '")';
-        }
-
-        if ($data['DataFim3']) {
-            $consulta3 =
-                '(OT.DataRetornoDespesas >= "' . $data['DataInicio3'] . '" AND OT.DataRetornoDespesas <= "' . $data['DataFim3'] . '")';
-        }
-        else {
-            $consulta3 =
-                '(OT.DataRetornoDespesas >= "' . $data['DataInicio3'] . '")';
-        }
-
-        $data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
-		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoDespesa'] : FALSE;
-		$data['Categoriadesp'] = ($data['Categoriadesp']) ? ' AND CD.idTab_Categoriadesp = ' . $data['Categoriadesp'] : FALSE;
-        $filtro1 = ($data['AprovadoDespesas'] != '#') ? 'OT.AprovadoDespesas = "' . $data['AprovadoDespesas'] . '" AND ' : FALSE;
-        $filtro2 = ($data['QuitadoDespesas'] != '#') ? 'OT.QuitadoDespesas = "' . $data['QuitadoDespesas'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluidoDespesas'] != '#') ? 'OT.ServicoConcluidoDespesas = "' . $data['ServicoConcluidoDespesas'] . '" AND ' : FALSE;
-
-        $query = $this->db->query('
-            SELECT
-
-                OT.idApp_Despesas,
-				OT.idApp_OrcaTrata,
-                OT.AprovadoDespesas,
-                OT.DataDespesas,
-				TD.TipoDespesa,
-				CD.Categoriadesp,
-				OT.Despesa,
-				OT.DataEntradaDespesas,
-                OT.ValorDespesas,
-				OT.ValorEntradaDespesas,
-				OT.ValorRestanteDespesas,
-				OT.QtdParcelasDespesas,
-                OT.ServicoConcluidoDespesas,
-                OT.QuitadoDespesas,
-                OT.DataConclusaoDespesas,
-				OT.DataQuitadoDespesas,
-                OT.DataRetornoDespesas,
-				OT.FormaPagamentoDespesas,
-				C.NomeCliente,
-				OT.TipoProduto,
-				TFP.FormaPag,
-				TSU.Nome
-            FROM
-
-                App_Despesas AS OT
-				LEFT JOIN Sis_Usuario AS TSU ON TSU.idSis_Usuario = OT.idSis_Usuario
-				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamentoDespesas
-				LEFT JOIN App_OrcaTrata AS TR ON TR.idApp_OrcaTrata = OT.idApp_OrcaTrata
-				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = TR.idApp_Cliente
-				LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = OT.TipoDespesa
-				LEFT JOIN Tab_Categoriadesp AS CD ON CD.idTab_Categoriadesp = TD.Categoriadesp
-
-            WHERE
-				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
-                ' . $data['NomeCliente'] . ' AND
-				' . $consulta . ' AND
-				' . $consulta2 . ' AND
-				' . $consulta3 . '
-				' . $data['TipoDespesa'] . ' AND
-
-				OT.QtdParcelasDespesas != "0"
-
-            ORDER BY
-                OT.idApp_Despesas DESC,
-				OT.AprovadoDespesas ASC,
-				OT.DataDespesas
-
-        ');
-
-        /*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-          */
-
-        if ($completo === FALSE) {
-            return TRUE;
-        } else {
-
-            $somaorcamento=0;
-			$somadesconto=0;
-			$somarestante=0;
-            foreach ($query->result() as $row) {
-				$row->DataDespesas = $this->basico->mascara_data($row->DataDespesas, 'barras');
-				$row->DataEntradaDespesas = $this->basico->mascara_data($row->DataEntradaDespesas, 'barras');
-                $row->DataConclusaoDespesas = $this->basico->mascara_data($row->DataConclusaoDespesas, 'barras');
-                $row->DataRetornoDespesas = $this->basico->mascara_data($row->DataRetornoDespesas, 'barras');
-				$row->DataQuitadoDespesas = $this->basico->mascara_data($row->DataQuitadoDespesas, 'barras');
-                $row->AprovadoDespesas = $this->basico->mascara_palavra_completa($row->AprovadoDespesas, 'NS');
-                $row->ServicoConcluidoDespesas = $this->basico->mascara_palavra_completa($row->ServicoConcluidoDespesas, 'NS');
-                $row->QuitadoDespesas = $this->basico->mascara_palavra_completa($row->QuitadoDespesas, 'NS');
-
-                $somaorcamento += $row->ValorDespesas;
-                $row->ValorDespesas = number_format($row->ValorDespesas, 2, ',', '.');
-
-				$somadesconto += $row->ValorEntradaDespesas;
-                $row->ValorEntradaDespesas = number_format($row->ValorEntradaDespesas, 2, ',', '.');
-
-				$somarestante += $row->ValorRestanteDespesas;
-                $row->ValorRestanteDespesas = number_format($row->ValorRestanteDespesas, 2, ',', '.');
-
-
-
-            }
-            $query->soma = new stdClass();
-            $query->soma->somaorcamento = number_format($somaorcamento, 2, ',', '.');
-			$query->soma->somadesconto = number_format($somadesconto, 2, ',', '.');
-			$query->soma->somarestante = number_format($somarestante, 2, ',', '.');
-
-            return $query;
-        }
-
-    }
-
-	public function list_despesa($data, $completo) {
-
-        if ($data['DataFim']) {
-            $consulta =
-                '(D.DataDesp >= "' . $data['DataInicio'] . '" AND D.DataDesp <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(D.DataDesp >= "' . $data['DataInicio'] . '")';
-        }
-
-		if ($data['DataFim']) {
-            $consulta =
-                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
-        }
-
-        $data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoDespesa'] : FALSE;
-		#$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
-        #$filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-
-        $query = $this->db->query('
-            SELECT
-                D.Despesa,
-                D.idApp_Despesa,
-                TD.TipoDespesa,
-                D.DataDesp,
-                D.ValorTotalDesp,
-				FP.FormaPag,
-				E.NomeEmpresa AS idSis_Empresa,
-				OT.idApp_OrcaTrata,
-                OT.DataOrca,
-				OT.ValorOrca
-
-            FROM
-                App_OrcaTrata AS OT,
-				App_Despesa AS D
-                    LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = D.TipoDespesa
-                    LEFT JOIN Tab_FormaPag    AS FP ON FP.idTab_FormaPag    = D.FormaPag
-                    LEFT JOIN Sis_Empresa     AS E  ON E.idSis_Empresa      = D.idSis_Empresa
-
-            WHERE
-
-				D.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
-				OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
-				(' . $consulta . ')
-				' . $data['TipoDespesa'] . '
-
-            ORDER BY
-                ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
-        ');
-
-        /*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-          */
-
-        if ($completo === FALSE) {
-            return TRUE;
-        } else {
-
-            $somadespesa=0;
-            foreach ($query->result() as $row) {
-				$row->DataDesp = $this->basico->mascara_data($row->DataDesp, 'barras');
-				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
-                #$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
-                #$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
-
-                #$row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
-                #$row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
-                #$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
-
-                $somadespesa += $row->ValorTotalDesp;
-
-                $row->ValorTotalDesp = number_format($row->ValorTotalDesp, 2, ',', '.');
-
-            }
-            $query->soma = new stdClass();
-            $query->soma->somadespesa = number_format($somadespesa, 2, ',', '.');
 
             return $query;
         }
