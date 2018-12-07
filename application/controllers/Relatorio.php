@@ -339,7 +339,7 @@ class Relatorio extends CI_Controller {
 			'Ano',
 			'Mesvenc',
 			'Mespag',
-			'TipoReceita',
+			'TipoDespesa',
             'DataInicio',
             'DataFim',
 			'DataInicio2',
@@ -427,7 +427,7 @@ class Relatorio extends CI_Controller {
             'OT.idApp_OrcaTrata' => 'Número da Receita',
             'OT.ValorOrca' => 'Valor da Receita',
             'OT.ServicoConcluido' => 'Receita Concluída?',
-			'OT.TipoReceita' => 'Tipo de Receita',
+			'OT.TipoReceita' => 'Tipo de Despesa',
 
         );
 
@@ -438,7 +438,8 @@ class Relatorio extends CI_Controller {
 
 		#$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
 		$data['select']['ObsOrca'] = $this->Relatorio_model->select_obsorca();
-		$data['select']['TipoReceita'] = $this->Relatorio_model->select_tipodespesa();
+		$data['select']['TipoDespesa'] = $this->Relatorio_model->select_tipodespesa();
+		#$data['select']['TipoDespesa'] = $this->Relatorio_model->select_tiporeceita();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
 		$data['select']['Mespag'] = $this->Relatorio_model->select_mes();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
@@ -457,7 +458,7 @@ class Relatorio extends CI_Controller {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             #$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
-            $data['bd']['TipoReceita'] = $data['query']['TipoReceita'];
+            $data['bd']['TipoDespesa'] = $data['query']['TipoDespesa'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];

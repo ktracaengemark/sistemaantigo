@@ -125,6 +125,30 @@
 								
 							</div>
 							<div class="row">
+								<br>
+								<div class="form-group col-md-3 text-left">
+									<div class="form-footer ">
+										<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+											<span class="glyphicon glyphicon-filter"></span> Filtrar
+										</button>
+									</div>
+								</div>
+								<div class="form-group col-md-3 text-left">
+									<div class="form-footer ">
+										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+											<span class="glyphicon glyphicon-remove"> Fechar
+										</button>
+									</div>
+								</div>
+								<div class="form-group col-md-3 text-left">
+									<div class="form-footer">		
+										<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
+											<span class="glyphicon glyphicon-search"></span> Parcelas
+										</a>
+									</div>	
+								</div>
+							</div>
+							<div class="row">
 								
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 								
@@ -192,30 +216,6 @@
 									</select>
 								</div>
 								
-							</div>
-							<div class="row">
-								<br>
-								<div class="form-group col-md-3 text-left">
-									<div class="form-footer ">
-										<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
-											<span class="glyphicon glyphicon-filter"></span> Filtrar
-										</button>
-									</div>
-								</div>
-								<div class="form-group col-md-3 text-left">
-									<div class="form-footer ">
-										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-											<span class="glyphicon glyphicon-remove"> Fechar
-										</button>
-									</div>
-								</div>
-								<div class="form-group col-md-3 text-left">
-									<div class="form-footer">		
-										<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
-											<span class="glyphicon glyphicon-search"></span> Parcelas
-										</a>
-									</div>	
-								</div>
 							</div>
 							
 							<div class="row">

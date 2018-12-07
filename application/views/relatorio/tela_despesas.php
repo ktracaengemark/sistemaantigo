@@ -127,6 +127,30 @@
 								
 							</div>
 							<div class="row">
+								<br>
+								<div class="form-group col-md-3 text-left">
+									<div class="form-footer ">
+										<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+											<span class="glyphicon glyphicon-filter"></span> Filtrar
+										</button>
+									</div>
+								</div>
+								<div class="form-group col-md-3 text-left">
+									<div class="form-footer ">
+										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+											<span class="glyphicon glyphicon-remove"> Fechar
+										</button>
+									</div>
+								</div>
+								<div class="form-group col-md-3 text-left">
+									<div class="form-footer">		
+										<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
+											<span class="glyphicon glyphicon-search"></span> Parcelas
+										</a>
+									</div>	
+								</div>
+							</div>
+							<div class="row">
 								
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 								
@@ -181,10 +205,10 @@
 								<div class="col-md-3 text-left">
 									<label for="Ordenamento">Tipo de Despesa:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-											id="TipoReceita" name="TipoReceita">
+											id="TipoDespesa" name="TipoDespesa">
 										<?php
-										foreach ($select['TipoReceita'] as $key => $row) {
-											if ($query['TipoReceita'] == $key) {
+										foreach ($select['TipoDespesa'] as $key => $row) {
+											if ($query['TipoDespesa'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 											} else {
 												echo '<option value="' . $key . '">' . $row . '</option>';
@@ -192,30 +216,6 @@
 										}
 										?>
 									</select>
-								</div>
-							</div>
-							<div class="row">
-								<br>
-								<div class="form-group col-md-3 text-left">
-									<div class="form-footer ">
-										<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
-											<span class="glyphicon glyphicon-filter"></span> Filtrar
-										</button>
-									</div>
-								</div>
-								<div class="form-group col-md-3 text-left">
-									<div class="form-footer ">
-										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-											<span class="glyphicon glyphicon-remove"> Fechar
-										</button>
-									</div>
-								</div>
-								<div class="form-group col-md-3 text-left">
-									<div class="form-footer">		
-										<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
-											<span class="glyphicon glyphicon-search"></span> Parcelas
-										</a>
-									</div>	
 								</div>
 							</div>
 							
