@@ -111,7 +111,7 @@ class Agenda extends CI_Controller {
             //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
         }
 		
-		$data['titulo2'] = 'Cliente';
+		$data['titulo2'] = 'Clientes';
 
         if ($this->form_validation->run() !== TRUE) {
 
@@ -136,7 +136,7 @@ class Agenda extends CI_Controller {
             //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
         }
 		
-		$data['titulo3'] = 'Mensagem';
+		$data['titulo3'] = 'Mensagens';
 
         if ($this->form_validation->run() !== TRUE) {
 

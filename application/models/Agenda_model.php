@@ -502,7 +502,7 @@ class Agenda_model extends CI_Model {
 	public function list3_procedempresa($data, $completo) {
 
 		$data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND P.idSis_Empresa = ' . $data['NomeEmpresa'] : FALSE;
-		$data['NomeEmpresaCli'] = ($data['NomeEmpresaCli']) ? ' AND P.idSis_EmpresaCli = ' . $data['NomeEmpresaCli'] : FALSE;
+		$data['NomeEmpresaCli'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $data['NomeEmpresaCli']) ? ' AND P.idSis_EmpresaCli = ' . $data['NomeEmpresaCli'] : FALSE;
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;

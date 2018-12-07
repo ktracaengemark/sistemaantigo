@@ -49,7 +49,7 @@
 				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo1; ?> 
 			</div>
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-				<span class="glyphicon glyphicon-search"></span>Pesquisar 
+				<span class="glyphicon glyphicon-search"></span>Pesq. 
 			</button>
 			<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/alterarprocedimento" role="button"> 
 				<span class="glyphicon glyphicon-ok"></span> Edit Todas
@@ -209,10 +209,10 @@
 			</button>
 			-->
 			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Procedimento" aria-expanded="false" aria-controls="Procedimento">
-				<span class="glyphicon glyphicon-pencil"></span>Cliente<?php #echo $titulo2; ?> 
+				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo2; ?> 
 			</div>
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal3-sm">
-				<span class="glyphicon glyphicon-search"></span>Pesquisar 
+				<span class="glyphicon glyphicon-search"></span>Pesq. 
 			</button>
 			<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/alterarprocedimento" role="button"> 
 				<span class="glyphicon glyphicon-ok"></span> Edit Todas
@@ -234,22 +234,7 @@
 								</div>
 								<div class="modal-footer">
 									<div class="form-group">	
-										<div class="row">	
-											<div class="col-md-3 text-left">
-												<label for="Ordenamento">Cliente:</label>
-												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
-														id="NomeCliente" autofocus name="NomeCliente">
-													<?php
-													foreach ($select['NomeCliente'] as $key => $row) {
-														if ($query['NomeCliente'] == $key) {
-															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-														} else {
-															echo '<option value="' . $key . '">' . $row . '</option>';
-														}
-													}
-													?>
-												</select>
-											</div>														
+										<div class="row">														
 											<div class="col-md-3 text-left">
 												<label for="ConcluidoProcedimento">Concluido?</label>
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
@@ -302,6 +287,23 @@
 														   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
 												</div>
 											</div>
+										</div>	
+										<div class="row">	
+											<div class="col-md-3 text-left">
+												<label for="Ordenamento">Cliente:</label>
+												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+														id="NomeCliente" autofocus name="NomeCliente">
+													<?php
+													foreach ($select['NomeCliente'] as $key => $row) {
+														if ($query['NomeCliente'] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>
+												</select>
+											</div>	
 										</div>
 										<div class="row">
 											<br>
@@ -434,7 +436,7 @@
 				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo3; ?> 
 			</div>
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
-				<span class="glyphicon glyphicon-search"></span>Pesquisar 
+				<span class="glyphicon glyphicon-search"></span>Pesq. 
 			</button>
 			<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/alterarprocedempresa" role="button"> 
 				<span class="glyphicon glyphicon-ok"></span> Edit Todas
@@ -512,6 +514,7 @@
 											</div>
 										</div>
 										<div class="row">	
+											<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 											<div class="col-md-6 text-left">
 												<label for="Ordenamento">Emp. Enviou:</label>
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
@@ -527,6 +530,7 @@
 													?>
 												</select>
 											</div>
+											<?php } ?>
 											<div class="col-md-6 text-left">
 												<label for="Ordenamento">Emp. Recebeu:</label>
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
