@@ -40,11 +40,7 @@
 		<div class="panel-heading">
 			
 			<?php echo form_open('agenda', 'role="form"'); ?>
-			<!--	
-			<button class="btn btn-sm btn-info" name="pesquisar" value="0" type="submit">
-				<span class="glyphicon glyphicon-search"></span> Pesq.
-			</button>
-			-->
+
 			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
 				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo1; ?> 
 			</div>
@@ -74,7 +70,7 @@
 										<div class="row">	
 																									
 											<div class="col-md-3 text-left">
-												<label for="ConcluidoProcedimento">Concluido?</label>
+												<label for="ConcluidoProcedimento">Concluido</label>
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 														id="ConcluidoProcedimento" name="ConcluidoProcedimento">
 													<?php
@@ -126,6 +122,7 @@
 												</div>
 											</div>
 										</div>
+										
 										<div class="row">
 											<br>
 											<div class="form-group col-md-3 text-left">
@@ -143,43 +140,6 @@
 												</div>
 											</div>
 										</div>
-										<div class="row">
-											<div class="col-md-9 text-left">
-												<label for="Ordenamento">Ordenamento:</label>
-												<div class="form-group btn-block">
-													<div class="row">
-														<div class="col-md-8">
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-																	id="Campo" name="Campo">
-																<?php
-																foreach ($select['Campo'] as $key => $row) {
-																	if ($query['Campo'] == $key) {
-																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																	} else {
-																		echo '<option value="' . $key . '">' . $row . '</option>';
-																	}
-																}
-																?>
-															</select>
-														</div>
-														<div class="col-md-4">
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-																	id="Ordenamento" name="Ordenamento">
-																<?php
-																foreach ($select['Ordenamento'] as $key => $row) {
-																	if ($query['Ordenamento'] == $key) {
-																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																	} else {
-																		echo '<option value="' . $key . '">' . $row . '</option>';
-																	}
-																}
-																?>
-															</select>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>	
 									</div>											
 								</div>
 							</div>
@@ -203,11 +163,7 @@
 		<div class="panel-heading">
 			
 			<?php echo form_open('agenda', 'role="form"'); ?>
-			<!--	
-			<button class="btn btn-sm btn-info" name="pesquisar" value="0" type="submit">
-				<span class="glyphicon glyphicon-search"></span> Pesq.
-			</button>
-			-->
+
 			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Procedimento" aria-expanded="false" aria-controls="Procedimento">
 				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo2; ?> 
 			</div>
@@ -236,7 +192,7 @@
 									<div class="form-group">	
 										<div class="row">														
 											<div class="col-md-3 text-left">
-												<label for="ConcluidoProcedimento">Concluido?</label>
+												<label for="ConcluidoProcedimento">Concluido</label>
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 														id="ConcluidoProcedimento" name="ConcluidoProcedimento">
 													<?php
@@ -287,7 +243,26 @@
 														   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
 												</div>
 											</div>
+										</div>
+	
+										<div class="row">
+											<br>
+											<div class="form-group col-md-3 text-left">
+												<div class="form-footer ">
+													<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+														<span class="glyphicon glyphicon-filter"></span> Filtrar
+													</button>
+												</div>
+											</div>
+											<div class="form-group col-md-3 text-left">
+												<div class="form-footer ">
+													<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+														<span class="glyphicon glyphicon-remove"> Fechar
+													</button>
+												</div>
+											</div>
 										</div>	
+	
 										<div class="row">	
 											<div class="col-md-3 text-left">
 												<label for="Ordenamento">Cliente:</label>
@@ -305,61 +280,7 @@
 												</select>
 											</div>	
 										</div>
-										<div class="row">
-											<br>
-											<div class="form-group col-md-3 text-left">
-												<div class="form-footer ">
-													<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
-														<span class="glyphicon glyphicon-filter"></span> Filtrar
-													</button>
-												</div>
-											</div>
-											<div class="form-group col-md-3 text-left">
-												<div class="form-footer ">
-													<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-														<span class="glyphicon glyphicon-remove"> Fechar
-													</button>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-9 text-left">
-												<label for="Ordenamento">Ordenamento:</label>
-												<div class="form-group btn-block">
-													<div class="row">
-														<div class="col-md-8">
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-																	id="Campo" name="Campo">
-																<?php
-																foreach ($select['Campo'] as $key => $row) {
-																	if ($query['Campo'] == $key) {
-																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																	} else {
-																		echo '<option value="' . $key . '">' . $row . '</option>';
-																	}
-																}
-																?>
-															</select>
-														</div>
-														<div class="col-md-4">
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-																	id="Ordenamento" name="Ordenamento">
-																<?php
-																foreach ($select['Ordenamento'] as $key => $row) {
-																	if ($query['Ordenamento'] == $key) {
-																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																	} else {
-																		echo '<option value="' . $key . '">' . $row . '</option>';
-																	}
-																}
-																?>
-															</select>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>	
-									</div>											
+									</div>	
 								</div>
 							</div>
 						</div>
@@ -459,7 +380,6 @@
 								<div class="modal-footer">
 									<div class="form-group">	
 										<div class="row">	
-																									
 											<div class="col-md-3 text-left">
 												<label for="ConcluidoProcedimento">Respondido</label>
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
@@ -513,40 +433,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="row">	
-											<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
-											<div class="col-md-6 text-left">
-												<label for="Ordenamento">Emp. Enviou:</label>
-												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
-														id="NomeEmpresaCli" autofocus name="NomeEmpresaCli">
-													<?php
-													foreach ($select['NomeEmpresaCli'] as $key => $row) {
-														if ($query['NomeEmpresaCli'] == $key) {
-															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-														} else {
-															echo '<option value="' . $key . '">' . $row . '</option>';
-														}
-													}
-													?>
-												</select>
-											</div>
-											<?php } ?>
-											<div class="col-md-6 text-left">
-												<label for="Ordenamento">Emp. Recebeu:</label>
-												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
-														id="NomeEmpresa" autofocus name="NomeEmpresa">
-													<?php
-													foreach ($select['NomeEmpresa'] as $key => $row) {
-														if ($query['NomeEmpresa'] == $key) {
-															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-														} else {
-															echo '<option value="' . $key . '">' . $row . '</option>';
-														}
-													}
-													?>
-												</select>
-											</div>
-										</div>
+	
 										<div class="row">
 											<br>
 											<div class="form-group col-md-3 text-left">
@@ -564,46 +451,42 @@
 												</div>
 											</div>
 										</div>
-										<!--
-										<div class="row">
-											<div class="col-md-9 text-left">
-												<label for="Ordenamento">Ordenamento:</label>
-												<div class="form-group btn-block">
-													<div class="row">
-														<div class="col-md-8">
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-																	id="Campo" name="Campo">
-																<?php
-																foreach ($select['Campo'] as $key => $row) {
-																	if ($query['Campo'] == $key) {
-																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																	} else {
-																		echo '<option value="' . $key . '">' . $row . '</option>';
-																	}
-																}
-																?>
-															</select>
-														</div>
-														<div class="col-md-4">
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-																	id="Ordenamento" name="Ordenamento">
-																<?php
-																foreach ($select['Ordenamento'] as $key => $row) {
-																	if ($query['Ordenamento'] == $key) {
-																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																	} else {
-																		echo '<option value="' . $key . '">' . $row . '</option>';
-																	}
-																}
-																?>
-															</select>
-														</div>
-													</div>
-												</div>
+	
+										<div class="row">	
+											<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+											<div class="col-md-6 text-left">
+												<label for="Ordenamento">Enviado por:</label>
+												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+														id="NomeEmpresaCli" autofocus name="NomeEmpresaCli">
+													<?php
+													foreach ($select['NomeEmpresaCli'] as $key => $row) {
+														if ($query['NomeEmpresaCli'] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>
+												</select>
+											</div>
+											<?php } ?>
+											<div class="col-md-6 text-left">
+												<label for="Ordenamento">Recebido por:</label>
+												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+														id="NomeEmpresa" autofocus name="NomeEmpresa">
+													<?php
+													foreach ($select['NomeEmpresa'] as $key => $row) {
+														if ($query['NomeEmpresa'] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>
+												</select>
 											</div>
 										</div>
-										-->
-									</div>											
+									</div>	
 								</div>
 							</div>
 						</div>
@@ -618,74 +501,3 @@
 		</div>
 	</div>
 </div>
-
-<!--
-<div class="col-md-3">
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Empresa" aria-expanded="false" aria-controls="Empresa">
-				<span class="glyphicon glyphicon-pencil">Mensagens</span>
-			</div>
-			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/procedimentocli" role="button">
-				<span class="glyphicon glyphicon-search"></span>Pesq.
-			</a>
-			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>empresacli/cadastrarproc2" role="button">
-				<span class="glyphicon glyphicon-plus"></span>Nova
-			</a>
-		</div>		
-		<div <?php echo $collapse; ?> id="Empresa">
-			<div class="panel-body">
-				<div class="form-group">
-					<div class="row">
-						<div class="col-md-12">
-							<div style="overflow: auto; height: 410px; ">
-								<table class="table table-condensed table-bordered table-striped" >
-									<tr>
-										<th class="active">Resp.</th>
-										
-										<th class="active">Emissor</th>
-										<th class="active">Empresa</th>
-										<th class="active">Pergunta</th>
-										<th class="active">DtEnv</th>
-										
-										<th class="active">Empresa</th>
-										
-										<th class="active">Resposta</th>
-										<th class="active">DtRes</th>
-									</tr>
-									<?php
-									if ($query['procedempresa'] != FALSE) {
-
-										foreach ($query['procedempresa']->result_array() as $row) {
-											$url = base_url() . 'orcatrata/alterarprocedempresa/' . $row['idSis_Empresa'];
-
-											echo '<tr class="clickable-row" data-href="' . $url . '" data-original-title="' . $row['Idade'] . ' anos" data-container="body"
-													data-toggle="tooltip" data-placement="right" title="">';
-												echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
-												
-												echo '<td>' . $row['NomeCli'] . '</td>';
-												echo '<td>' . $row['NomeEmpresaCli'] . '</td>';
-												echo '<td>' . $row['ProcedimentoCli'] . '</td>';
-												echo '<td>' . $row['DataProcedimentoCli'] . '</td>';
-												
-												echo '<td>' . $row['NomeEmpresa'] . '</td>';
-												
-												echo '<td>' . $row['Procedimento'] . '</td>';
-												echo '<td>' . $row['DataProcedimento'] . '</td>';
-												
-											echo '</tr>';
-
-										}
-
-									}
-									?>
-								</table>
-							</div>	
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>	
-	</div>
-</div>
--->
