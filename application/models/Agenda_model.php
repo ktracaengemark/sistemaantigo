@@ -501,6 +501,8 @@ class Agenda_model extends CI_Model {
 
 	public function list3_procedempresa($data, $completo) {
 
+		$data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND P.idSis_Empresa = ' . $data['NomeEmpresa'] : FALSE;
+		$data['NomeEmpresaCli'] = ($data['NomeEmpresaCli']) ? ' AND P.idSis_EmpresaCli = ' . $data['NomeEmpresaCli'] : FALSE;
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
@@ -540,6 +542,8 @@ class Agenda_model extends CI_Model {
 				P.idSis_EmpresaCli != "0" AND
 				P.idApp_OrcaTrata = "0" AND
 				P.idApp_Cliente = "0" 
+				' . $data['NomeEmpresa'] . '
+				' . $data['NomeEmpresaCli'] . '
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 
@@ -638,7 +642,54 @@ class Agenda_model extends CI_Model {
 
         return $array;
     }
-	
+
+    public function select_empresarec() {
+
+        $query = $this->db->query('
+            SELECT
+                ER.idSis_Empresa,
+                ER.NomeEmpresa
+            FROM
+                Sis_Empresa AS ER
+
+            WHERE
+                ER.idSis_Empresa != "1"
+			ORDER BY	
+                ER.NomeEmpresa ASC
+        ');
+
+        $array = array();
+        $array[0] = 'TODOS';
+        foreach ($query->result() as $row) {
+			$array[$row->idSis_Empresa] = $row->NomeEmpresa;
+        }
+
+        return $array;
+    }
+
+    public function select_empresaenv() {
+
+        $query = $this->db->query('
+            SELECT
+                EE.idSis_Empresa,
+                EE.NomeEmpresa AS NomeEmpresaCli
+            FROM
+                Sis_Empresa AS EE
+
+            WHERE
+                EE.idSis_Empresa != "1"
+			ORDER BY	
+                EE.NomeEmpresa ASC
+        ');
+
+        $array = array();
+        $array[0] = 'TODOS';
+        foreach ($query->result() as $row) {
+			$array[$row->idSis_Empresa] = $row->NomeEmpresaCli;
+        }
+
+        return $array;
+    }	
 /*	
 	public function profissional_aniversariantes($data) {
 

@@ -43,6 +43,8 @@ class Agenda extends CI_Controller {
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'NomeUsuario',
 			'NomeCliente',
+			'NomeEmpresa',
+			'NomeEmpresaCli',
 			'Dia',
 			'Mesvenc',
 			'Ano',
@@ -81,7 +83,8 @@ class Agenda extends CI_Controller {
 		$data['select']['Dia'] = $this->Agenda_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Agenda_model->select_mes();
 		$data['select']['NomeCliente'] = $this->Agenda_model->select_cliente();
-		#$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+		$data['select']['NomeEmpresa'] = $this->Agenda_model->select_empresarec();
+		$data['select']['NomeEmpresaCli'] = $this->Agenda_model->select_empresaenv();
 		
         $data['titulo1'] = 'Tarefas';
 
@@ -137,7 +140,8 @@ class Agenda extends CI_Controller {
 
         if ($this->form_validation->run() !== TRUE) {
 
-
+			$data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
+			$data['bd']['NomeEmpresaCli'] = $data['query']['NomeEmpresaCli'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
 			$data['bd']['Ano'] = $data['query']['Ano'];

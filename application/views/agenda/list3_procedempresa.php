@@ -16,10 +16,10 @@
 							<th class="active">Resp.</th>
 							<!--<th class="active">id</th>-->
 							<th class="active">Emissor</th>
-							<th class="active">Empresa</th>
+							<th class="active">Emp.Env</th>
 							<th class="active">Pergunta</th>
 							<th class="active">DtEnv</th>
-							<th class="active">Empresa</th>
+							<th class="active">Emp.Rec</th>
 							<!--<th class="active">Recptor</th>-->
 							<th class="active">Resposta</th>
 							<th class="active">DtRes</th>

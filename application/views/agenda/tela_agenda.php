@@ -511,6 +511,38 @@
 												</div>
 											</div>
 										</div>
+										<div class="row">	
+											<div class="col-md-6 text-left">
+												<label for="Ordenamento">Emp. Enviou:</label>
+												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+														id="NomeEmpresaCli" autofocus name="NomeEmpresaCli">
+													<?php
+													foreach ($select['NomeEmpresaCli'] as $key => $row) {
+														if ($query['NomeEmpresaCli'] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>
+												</select>
+											</div>
+											<div class="col-md-6 text-left">
+												<label for="Ordenamento">Emp. Recebeu:</label>
+												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+														id="NomeEmpresa" autofocus name="NomeEmpresa">
+													<?php
+													foreach ($select['NomeEmpresa'] as $key => $row) {
+														if ($query['NomeEmpresa'] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>
+												</select>
+											</div>
+										</div>
 										<div class="row">
 											<br>
 											<div class="form-group col-md-3 text-left">
