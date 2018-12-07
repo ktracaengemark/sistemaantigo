@@ -15,12 +15,12 @@
 					<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 						<span class="glyphicon glyphicon-search"></span> <?php echo $titulo; ?>
 					</button>
-					<a class="btn btn-sm btn-success" href="<?php echo base_url() ?>relatorio/receitasparc" role="button">
-						<span class="glyphicon glyphicon-search"></span>Pc.Rec.
+					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
+						<span class="glyphicon glyphicon-search"></span>Parcelas
 					</a>
-					<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>relatorio/despesasparc" role="button">
+					<!--<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>relatorio/despesasparc" role="button">
 						<span class="glyphicon glyphicon-search"></span>Pc.Des.
-					</a>
+					</a>-->
 					
 
 				</div>
