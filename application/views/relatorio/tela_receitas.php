@@ -35,14 +35,21 @@
 						</div>
 						-->
 						<div class="modal-footer">
-							<div class="form-group col-md-4 text-left">
+							<div class="form-group col-md-3 text-left">
 								<div class="form-footer">
 									<button  class="btn btn-info btn-block"" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 										<span class="glyphicon glyphicon-search"></span> Pesquisar
 									</button>
 								</div>
 							</div>
-							<div class="form-group col-md-4 text-right">
+							<div class="form-group col-md-3 text-left">
+								<div class="form-footer ">
+									<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+										<span class="glyphicon glyphicon-remove"> Fechar
+									</button>
+								</div>
+							</div>
+							<div class="form-group col-md-3 text-right">
 								<div class="form-footer">		
 									<a class="btn btn-success btn-block" href="<?php echo base_url() ?>orcatrata/cadastrar2" role="button">
 										<span class="glyphicon glyphicon-plus"></span> Receitas
