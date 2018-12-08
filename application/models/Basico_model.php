@@ -1077,6 +1077,22 @@ class Basico_model extends CI_Model {
         return $array;
     }
 
+	public function select_status_sn2($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('SELECT * FROM Tab_StatusSN');
+        } else {
+            $query = $this->db->query('SELECT * FROM Tab_StatusSN');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_StatusSN] = $row->StatusSN;
+            }
+        }
+
+        return $array;
+    }
+	
 	public function select_inativo($data = FALSE) {
 
         if ($data === TRUE) {

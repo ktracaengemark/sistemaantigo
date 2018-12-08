@@ -45,7 +45,7 @@
 				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo1; ?> 
 			</div>
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-				<span class="glyphicon glyphicon-search"></span>Pesq. 
+				<span class="glyphicon glyphicon-filter"></span>Filtrar 
 			</button>
 			<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/alterarprocedimento" role="button"> 
 				<span class="glyphicon glyphicon-ok"></span> Edit Todas
@@ -168,7 +168,7 @@
 				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo2; ?> 
 			</div>
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal3-sm">
-				<span class="glyphicon glyphicon-search"></span>Pesq. 
+				<span class="glyphicon glyphicon-filter"></span>Filtrar 
 			</button>
 			<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/alterarprocedimento" role="button"> 
 				<span class="glyphicon glyphicon-ok"></span> Edit Todas
@@ -357,7 +357,7 @@
 				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo3; ?> 
 			</div>
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
-				<span class="glyphicon glyphicon-search"></span>Pesq. 
+				<span class="glyphicon glyphicon-filter"></span>Filtrar
 			</button>
 			<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/alterarprocedempresa" role="button"> 
 				<span class="glyphicon glyphicon-ok"></span> Edit Todas

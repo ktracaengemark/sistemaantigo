@@ -58,16 +58,19 @@ class Agenda extends CI_Controller {
         $_SESSION['FiltroAlteraProcedimento']['Ano'] = $data['query']['Ano'];
 		$_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
 		$_SESSION['FiltroAlteraProcedimento']['NomeCliente'] = $data['query']['NomeCliente'];
+		$_SESSION['FiltroAlteraProcedimento']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
+		$_SESSION['FiltroAlteraProcedimento']['NomeEmpresaCli'] = $data['query']['NomeEmpresaCli'];
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
-
+/*
         $data['select']['ConcluidoProcedimento'] = array(
+			'#' => 'TODOS',
 			'N' => 'Não',
             'S' => 'Sim',
 
         );
-
+*/
 		$data['select']['Campo'] = array(
 			'P.DataProcedimento' => 'Data',
 			'P.ConcluidoProcedimento' => 'Concl.',
@@ -85,6 +88,7 @@ class Agenda extends CI_Controller {
 		$data['select']['NomeCliente'] = $this->Agenda_model->select_cliente();
 		$data['select']['NomeEmpresa'] = $this->Agenda_model->select_empresarec();
 		$data['select']['NomeEmpresaCli'] = $this->Agenda_model->select_empresaenv();
+		$data['select']['ConcluidoProcedimento'] = $this->Agenda_model->select_status_sn2();
 		
         $data['titulo1'] = 'Tarefas';
 

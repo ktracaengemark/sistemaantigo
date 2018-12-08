@@ -137,7 +137,7 @@
 																	<div class="btn-group" data-toggle="buttons">
 																		<?php
 																		foreach ($select['ConcluidoProcedimento'] as $key => $row) {
-																			(!$procedimento[$i]['ConcluidoProcedimento']) ? $procedimento[$i]['ConcluidoProcedimento'] = 'N' : FALSE;
+																			(!$procedimento[$i]['ConcluidoProcedimento']) ? $procedimento[$i]['ConcluidoProcedimento'] = '1' : FALSE;
 
 																			if ($procedimento[$i]['ConcluidoProcedimento'] == $key) {
 																				echo ''
@@ -161,34 +161,14 @@
 																	</div>
 																</div>
 															</div>
-															<!--
+
 															<div class="col-md-1">
 																<label><br></label><br>
 																<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
 																	<span class="glyphicon glyphicon-trash"></span>
 																</button>
 															</div>
-															-->
-															<!--
-															<div class="col-md-3">
-																<label for="idSis_Usuario<?php echo $i ?>">Usuário:</label>
-																<?php if ($i == 1) { ?>
-																<?php } ?>
-																<select data-placeholder="Selecione uma opção..." class="form-control" readonly=""
-																		 id="listadinamicac<?php echo $i ?>" name="idSis_Usuario<?php echo $i ?> readonly="" ">
-																	<option value="">-- Selecione uma opção --</option>
-																	<?php
-																	foreach ($select['idSis_Usuario'] as $key => $row) {
-																		if ($procedimento[$i]['idSis_Usuario'] == $key) {
-																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																		} else {
-																			echo '<option value="' . $key . '">' . $row . '</option>';
-																		}
-																	}
-																	?>
-																</select>
-															</div>
-															-->
+															
 														</div>
 													</div>
 												</div>
@@ -199,7 +179,7 @@
 											?>
 
 											</div>
-											<!--
+											
 											<div class="form-group">
 												<div class="row">
 													<div class="col-md-4">
@@ -209,7 +189,7 @@
 													</div>
 												</div>
 											</div>
-											-->
+											
 										</div>
 									
 									</div>
@@ -225,12 +205,19 @@
 									<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 									<?php } ?>
 									<?php if ($metodo == 2) { ?>
-
-										<div class="col-md-6">
-											<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-												<span class="glyphicon glyphicon-save"></span> Salvar
-											</button>
-										</div>
+										
+												<div class="col-md-4">
+													<a class="add_field_button3 btn btn-lg btn-warning" onclick="adicionaProcedimento()">
+														<span class="glyphicon glyphicon-plus"></span> Adic. Procedimento
+													</a>
+												</div>
+										
+												<div class="col-md-6">
+													<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+														<span class="glyphicon glyphicon-save"></span> Salvar
+													</button>
+												</div>
+											
 										<!--
 										<div class="col-md-6 text-right">
 											<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
