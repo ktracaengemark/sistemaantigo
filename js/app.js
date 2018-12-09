@@ -143,7 +143,7 @@ function calculaQtdSomaDev(campo, soma, somaproduto, excluir, produtonum, countm
  /*Carrega a Data do Dia do lançamento*/
  function carregaQuitado3(value, name, i, cadastrar = 0) {
 
-    if (value == "2") {
+    if (value == "S") {
 
 
         if (!$("#DataProcedimento"+i).val()) {

@@ -51,7 +51,7 @@
 																		  name="NomeCli<?php echo $i ?>" value="<?php echo $procedimento[$i]['NomeCli']; ?>">
 															</div>
 															<div class="col-md-2">
-																<label for="NomeEmpresaCli<?php echo $i ?>">Empresa:</label>
+																<label for="NomeEmpresaCli<?php echo $i ?>">Enviou:</label>
 																<input class="form-control" id="NomeEmpresaCli<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
 																		  name="NomeEmpresaCli<?php echo $i ?>" value="<?php echo $procedimento[$i]['NomeEmpresaCli']; ?>">
 															</div>
@@ -70,36 +70,6 @@
 																		   name="DataProcedimentoCli<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimentoCli']; ?>">
 																</div>
 															</div>
-															<!--
-															<div class="col-md-2">
-																<label for="ConcluidoProcedimentoCli">Cl.Env? </label><br>
-																<div class="form-group">
-																	<div class="btn-group" data-toggle="buttons">
-																		<?php
-																		foreach ($select['ConcluidoProcedimentoCli'] as $key => $row) {
-																			(!$procedimento[$i]['ConcluidoProcedimentoCli']) ? $procedimento[$i]['ConcluidoProcedimentoCli'] = 'N' : FALSE;
-
-																			if ($procedimento[$i]['ConcluidoProcedimentoCli'] == $key) {
-																				echo ''
-																				. '<label class="btn btn-warning active" name="radiobutton_ConcluidoProcedimentoCli' . $i . '" id="radiobutton_ConcluidoProcedimentoCli' . $i .  $key . '">'
-																				. '<input type="radio" name="ConcluidoProcedimento' . $i . '" id="radiobuttondinamico" '
-																				. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																				. '</label>'
-																				;
-																			} else {
-																				echo ''
-																				. '<label class="btn btn-default" name="radiobutton_ConcluidoProcedimentoCli' . $i . '" id="radiobutton_ConcluidoProcedimentoCli' . $i .  $key . '">'
-																				. '<input type="radio" name="ConcluidoProcedimento' . $i . '" id="radiobuttondinamico" '
-																				. 'autocomplete="off" value="' . $key . '" >' . $row
-																				. '</label>'
-																				;
-																			}
-																		}
-																		?>
-																	</div>
-																</div>
-															</div>
-															-->
 														</div>	
 														<div class="row">	
 															<!--
@@ -111,7 +81,7 @@
 															-->
 															<div class="col-md-2"></div>
 															<div class="col-md-2">
-																<label for="NomeEmpresa<?php echo $i ?>">Empresa:</label>
+																<label for="NomeEmpresa<?php echo $i ?>">Recebeu:</label>
 																<input class="form-control" id="NomeEmpresa<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
 																		  name="NomeEmpresa<?php echo $i ?>" value="<?php echo $procedimento[$i]['NomeEmpresa']; ?>">
 															</div>
@@ -137,7 +107,7 @@
 																	<div class="btn-group" data-toggle="buttons">
 																		<?php
 																		foreach ($select['ConcluidoProcedimento'] as $key => $row) {
-																			(!$procedimento[$i]['ConcluidoProcedimento']) ? $procedimento[$i]['ConcluidoProcedimento'] = '1' : FALSE;
+																			(!$procedimento[$i]['ConcluidoProcedimento']) ? $procedimento[$i]['ConcluidoProcedimento'] = 'N' : FALSE;
 
 																			if ($procedimento[$i]['ConcluidoProcedimento'] == $key) {
 																				echo ''
@@ -161,7 +131,7 @@
 																	</div>
 																</div>
 															</div>
-
+															
 															<div class="col-md-1">
 																<label><br></label><br>
 																<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
@@ -205,18 +175,12 @@
 									<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 									<?php } ?>
 									<?php if ($metodo == 2) { ?>
-										
-												<div class="col-md-4">
-													<a class="add_field_button3 btn btn-lg btn-warning" onclick="adicionaProcedimento()">
-														<span class="glyphicon glyphicon-plus"></span> Adic. Procedimento
-													</a>
-												</div>
-										
-												<div class="col-md-6">
-													<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-														<span class="glyphicon glyphicon-save"></span> Salvar
-													</button>
-												</div>
+
+										<div class="col-md-6">
+											<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+												<span class="glyphicon glyphicon-save"></span> Salvar
+											</button>
+										</div>
 											
 										<!--
 										<div class="col-md-6 text-right">

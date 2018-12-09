@@ -63,14 +63,13 @@ class Agenda extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
-/*
+
         $data['select']['ConcluidoProcedimento'] = array(
 			'#' => 'TODOS',
+			'S' => 'Sim',
 			'N' => 'Não',
-            'S' => 'Sim',
-
         );
-*/
+
 		$data['select']['Campo'] = array(
 			'P.DataProcedimento' => 'Data',
 			'P.ConcluidoProcedimento' => 'Concl.',
@@ -88,7 +87,7 @@ class Agenda extends CI_Controller {
 		$data['select']['NomeCliente'] = $this->Agenda_model->select_cliente();
 		$data['select']['NomeEmpresa'] = $this->Agenda_model->select_empresarec();
 		$data['select']['NomeEmpresaCli'] = $this->Agenda_model->select_empresaenv();
-		$data['select']['ConcluidoProcedimento'] = $this->Agenda_model->select_status_sn2();
+		#$data['select']['ConcluidoProcedimento'] = $this->Agenda_model->select_status_sn2();
 		
         $data['titulo1'] = 'Tarefas';
 

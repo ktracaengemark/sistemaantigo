@@ -32,7 +32,7 @@
 							#echo '<tr class="clickable-row" data-href="' . base_url() . 'procedimento/alterar/' . $row['idApp_Procedimento'] . '">';
 							echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarprocedimento/' . $row['idSis_Empresa'] . '">';
 								#echo '<td>' . $row['NomeEmpresa'] . '</td>';
-								echo '<td>' . $row['StatusSN'] . '</td>';
+								echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
 								echo '<td>' . $row['Procedimento'] . '</td>';
 								echo '<td>' . $row['DataProcedimento'] . '</td>';							
 							echo '</tr>';

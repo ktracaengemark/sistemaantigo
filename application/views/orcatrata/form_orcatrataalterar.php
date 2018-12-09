@@ -1071,7 +1071,7 @@
 																	<div class="btn-group" data-toggle="buttons">
 																		<?php
 																		foreach ($select['ConcluidoProcedimento'] as $key => $row) {
-																			(!$procedimento[$i]['ConcluidoProcedimento']) ? $procedimento[$i]['ConcluidoProcedimento'] = '1' : FALSE;
+																			(!$procedimento[$i]['ConcluidoProcedimento']) ? $procedimento[$i]['ConcluidoProcedimento'] = 'N' : FALSE;
 
 																			if ($procedimento[$i]['ConcluidoProcedimento'] == $key) {
 																				echo ''

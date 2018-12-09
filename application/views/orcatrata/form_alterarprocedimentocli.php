@@ -17,7 +17,7 @@
 					<div class="panel panel-<?php echo $panel; ?>">
 						<div class="panel-heading">
 							<?php echo $titulo; ?>
-							<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>agenda" role="button">
+							<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>agenda" role="button">
 								<span class="glyphicon glyphicon-search"></span>Agenda
 							</a>
 						</div>
@@ -72,7 +72,7 @@
 																	<div class="btn-group" data-toggle="buttons">
 																		<?php
 																		foreach ($select['ConcluidoProcedimento'] as $key => $row) {
-																			(!$procedimento[$i]['ConcluidoProcedimento']) ? $procedimento[$i]['ConcluidoProcedimento'] = '1' : FALSE;
+																			(!$procedimento[$i]['ConcluidoProcedimento']) ? $procedimento[$i]['ConcluidoProcedimento'] = 'N' : FALSE;
 
 																			if ($procedimento[$i]['ConcluidoProcedimento'] == $key) {
 																				echo ''
