@@ -65,7 +65,7 @@ class Agenda extends CI_Controller {
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
 
         $data['select']['ConcluidoProcedimento'] = array(
-			'#' => 'TODOS',
+			'0' => 'TODOS',
 			'S' => 'Sim',
 			'N' => 'Não',
         );

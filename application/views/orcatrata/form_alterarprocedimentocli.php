@@ -18,7 +18,7 @@
 						<div class="panel-heading">
 							<?php echo $titulo; ?>
 							<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>agenda" role="button">
-								<span class="glyphicon glyphicon-search"></span>Agenda
+								<span class="glyphicon glyphicon-calendar"></span>Agenda
 							</a>
 						</div>
 						<div class="panel-body">
