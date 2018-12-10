@@ -48,7 +48,15 @@ class Agenda extends CI_Controller {
 			'Dia',
 			'Mesvenc',
 			'Ano',
+			'Diacli',
+			'Mesvenccli',
+			'Anocli',
+			'Diaemp',
+			'Mesvencemp',
+			'Anoemp',			
 			'ConcluidoProcedimento',
+			'Concluidocli',
+			'Concluidoemp',			
             'Ordenamento',
             'Campo',
         ), TRUE));
@@ -56,8 +64,16 @@ class Agenda extends CI_Controller {
         $_SESSION['FiltroAlteraProcedimento']['Dia'] = $data['query']['Dia'];
         $_SESSION['FiltroAlteraProcedimento']['Mesvenc'] = $data['query']['Mesvenc'];
         $_SESSION['FiltroAlteraProcedimento']['Ano'] = $data['query']['Ano'];
-		$_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
-		$_SESSION['FiltroAlteraProcedimento']['NomeCliente'] = $data['query']['NomeCliente'];
+		$_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];        
+		$_SESSION['FiltroAlteraProcedimento']['Diacli'] = $data['query']['Diacli'];
+        $_SESSION['FiltroAlteraProcedimento']['Mesvenccli'] = $data['query']['Mesvenccli'];
+        $_SESSION['FiltroAlteraProcedimento']['Anocli'] = $data['query']['Anocli'];		
+		$_SESSION['FiltroAlteraProcedimento']['Concluidocli'] = $data['query']['Concluidocli'];
+		$_SESSION['FiltroAlteraProcedimento']['NomeCliente'] = $data['query']['NomeCliente'];		
+        $_SESSION['FiltroAlteraProcedimento']['Diaemp'] = $data['query']['Diaemp'];
+        $_SESSION['FiltroAlteraProcedimento']['Mesvencemp'] = $data['query']['Mesvencemp'];
+        $_SESSION['FiltroAlteraProcedimento']['Anoemp'] = $data['query']['Anoemp'];		
+		$_SESSION['FiltroAlteraProcedimento']['Concluidoemp'] = $data['query']['Concluidoemp'];			
 		$_SESSION['FiltroAlteraProcedimento']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 		$_SESSION['FiltroAlteraProcedimento']['NomeEmpresaCli'] = $data['query']['NomeEmpresaCli'];
 
@@ -69,6 +85,18 @@ class Agenda extends CI_Controller {
 			'S' => 'Sim',
 			'N' => 'Não',
         );
+		
+        $data['select']['Concluidocli'] = array(
+			'0' => 'TODOS',
+			'S' => 'Sim',
+			'N' => 'Não',
+        );
+
+        $data['select']['Concluidoemp'] = array(
+			'0' => 'TODOS',
+			'S' => 'Sim',
+			'N' => 'Não',
+        );		
 
 		$data['select']['Campo'] = array(
 			'P.DataProcedimento' => 'Data',
@@ -84,10 +112,14 @@ class Agenda extends CI_Controller {
         
 		$data['select']['Dia'] = $this->Agenda_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Agenda_model->select_mes();
+		$data['select']['Diacli'] = $this->Agenda_model->select_dia();
+		$data['select']['Mesvenccli'] = $this->Agenda_model->select_mes();
+		$data['select']['Diaemp'] = $this->Agenda_model->select_dia();
+		$data['select']['Mesvencemp'] = $this->Agenda_model->select_mes();		
 		$data['select']['NomeCliente'] = $this->Agenda_model->select_cliente();
 		$data['select']['NomeEmpresa'] = $this->Agenda_model->select_empresarec();
 		$data['select']['NomeEmpresaCli'] = $this->Agenda_model->select_empresaenv();
-		#$data['select']['ConcluidoProcedimento'] = $this->Agenda_model->select_status_sn2();
+
 		
         $data['titulo1'] = 'Tarefas';
 
@@ -119,10 +151,10 @@ class Agenda extends CI_Controller {
         if ($this->form_validation->run() !== TRUE) {
 
 			$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
-			$data['bd']['Dia'] = $data['query']['Dia'];
-			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
-			$data['bd']['Ano'] = $data['query']['Ano'];
-			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+			$data['bd']['Diacli'] = $data['query']['Diacli'];
+			$data['bd']['Mesvenccli'] = $data['query']['Mesvenccli'];
+			$data['bd']['Anocli'] = $data['query']['Anocli'];
+			$data['bd']['Concluidocli'] = $data['query']['Concluidocli'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 
@@ -145,10 +177,10 @@ class Agenda extends CI_Controller {
 
 			$data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 			$data['bd']['NomeEmpresaCli'] = $data['query']['NomeEmpresaCli'];
-			$data['bd']['Dia'] = $data['query']['Dia'];
-			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
-			$data['bd']['Ano'] = $data['query']['Ano'];
-			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+			$data['bd']['Diaemp'] = $data['query']['Diaemp'];
+			$data['bd']['Mesvencemp'] = $data['query']['Mesvencemp'];
+			$data['bd']['Anoemp'] = $data['query']['Ano'];
+			$data['bd']['Concluidoemp'] = $data['query']['Concluidoemp'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 

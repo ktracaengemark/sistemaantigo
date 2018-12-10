@@ -555,14 +555,12 @@ class Agenda_model extends CI_Model {
 	public function list2_procedimentocli($data, $completo) {
 
 		$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
-
-		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
-		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
-		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
+		$data['Diacli'] = ($data['Diacli']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Diacli'] : FALSE;
+		$data['Mesvenccli'] = ($data['Mesvenccli']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenccli'] : FALSE;
+		$data['Anocli'] = ($data['Anocli']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Anocli'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'P.ConcluidoProcedimento' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
-		$filtro4 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
-		$data['ConcluidoProcedimento'] = ($data['ConcluidoProcedimento'] != '') ? ' AND P.ConcluidoProcedimento = ' . $data['ConcluidoProcedimento'] : FALSE;
+		$filtro4 = ($data['Concluidocli']) ? 'P.ConcluidoProcedimento = "' . $data['Concluidocli'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('
             SELECT
@@ -589,9 +587,9 @@ class Agenda_model extends CI_Model {
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
                 ' . $data['NomeCliente'] . '
 
-				' . $data['Dia'] . ' 
-				' . $data['Mesvenc'] . ' 
-				' . $data['Ano'] . ' 
+				' . $data['Diacli'] . ' 
+				' . $data['Mesvenccli'] . ' 
+				' . $data['Anocli'] . ' 
 				
             ORDER BY
                 P.ConcluidoProcedimento,
@@ -628,15 +626,13 @@ class Agenda_model extends CI_Model {
 
 		$data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND P.idSis_Empresa = ' . $data['NomeEmpresa'] : FALSE;
 		$data['NomeEmpresaCli'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $data['NomeEmpresaCli']) ? ' AND P.idSis_EmpresaCli = ' . $data['NomeEmpresaCli'] : FALSE;
-
-		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
-		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
-		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
+		$data['Diaemp'] = ($data['Diaemp']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Diaemp'] : FALSE;
+		$data['Mesvencemp'] = ($data['Mesvencemp']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvencemp'] : FALSE;
+		$data['Anoemp'] = ($data['Anoemp']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Anoemp'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'P.ConcluidoProcedimento' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];		
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_UsuarioCli = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-		$filtro4 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
-		$data['ConcluidoProcedimento'] = ($data['ConcluidoProcedimento'] != '') ? ' AND P.ConcluidoProcedimento = ' . $data['ConcluidoProcedimento'] : FALSE;
+		$filtro4 = ($data['Concluidoemp']) ? 'P.ConcluidoProcedimento = "' . $data['Concluidoemp'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('
             SELECT
@@ -675,9 +671,9 @@ class Agenda_model extends CI_Model {
 				' . $data['NomeEmpresa'] . '
 
 				' . $data['NomeEmpresaCli'] . '
-				' . $data['Dia'] . ' 
-				' . $data['Mesvenc'] . ' 
-				' . $data['Ano'] . ' 
+				' . $data['Diaemp'] . ' 
+				' . $data['Mesvencemp'] . ' 
+				' . $data['Anoemp'] . ' 
             ORDER BY
 				P.ConcluidoProcedimento,
 				P.DataProcedimentoCli ASC
