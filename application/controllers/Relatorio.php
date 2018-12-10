@@ -1093,6 +1093,10 @@ class Relatorio extends CI_Controller {
 			'Modalidade',
         ), TRUE));
 
+        $_SESSION['FiltroBalanco']['Diapag'] = $data['query']['Diapag'];
+        $_SESSION['FiltroBalanco']['Mespag'] = $data['query']['Mespag'];
+        $_SESSION['FiltroBalanco']['Ano'] = $data['query']['Ano'];
+		
         $data['select']['AprovadoOrca'] = array(
             'S' => 'Sim',
 			'N' => 'Não',

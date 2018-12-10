@@ -20,7 +20,7 @@
 			</div>
 			-->
 			<div class="col-md-10">
-				<label for="DataFim">Recebido:</label>
+				<label for="DataFim">Recebido dia: <?php echo '<small>' . $_SESSION['FiltroBalanco']['Diapag'] . '</small>' ?></label>
 				<div class="input-group">
 					<span class="input-group-addon">R$</span>
 					<input type="text" class="form-control" disabled aria-label="Total Pago" value="<?php echo $report->soma->somarecebido ?>">

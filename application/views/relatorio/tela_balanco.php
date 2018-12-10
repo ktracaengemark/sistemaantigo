@@ -134,6 +134,7 @@
 	</div>
 </div>
 </form>
+
 <div class="col-sm-offset-1 col-md-5">
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
