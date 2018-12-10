@@ -1,4 +1,4 @@
-<div style="overflow: auto; height: 410px; ">
+<div style="overflow: auto; height: 183px; ">
 	<div class="container-fluid">
 		<div class="row">
 			<table class="table table-bordered table-condensed table-striped">	

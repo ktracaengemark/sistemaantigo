@@ -34,6 +34,54 @@
 	</div>
 </div>
 
+<div class="col-md-6">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<?php echo form_open('agenda', 'role="form"'); ?>		
+			<?php if ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) { ?>	
+				
+			<div class="col-md-6 text-left">
+				<label class="sr-only" for="Ordenamento">Agenda dos Prof.:</label>
+				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
+						id="NomeUsuario" name="NomeUsuario">
+					<?php
+					foreach ($select['NomeUsuario'] as $key => $row) {
+						if ($query['NomeUsuario'] == $key) {
+							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+						} else {
+							echo '<option value="' . $key . '">' . $row . '</option>';
+						}
+					}
+					?>
+				</select>
+			</div>	
+			<?php } ?>
+			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Agenda" aria-expanded="false" aria-controls="Agenda">
+				<span class="glyphicon glyphicon-pencil"> Agenda</span>
+			</div>
+			<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#Calendario" aria-expanded="false" aria-controls="Calendario">
+				<span class="glyphicon glyphicon-calendar"></span>
+			</div>
+			
+		</div>
+		<div <?php echo $collapse; ?> id="Agenda">
+			<div class="panel-body">
+				<div class="text-right">
+					<div <?php echo $collapse1; ?> id="Calendario">
+							<div class="form-group" id="datepickerinline" class="col-md-12" >
+							</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div  style="overflow: auto; height: 456px; "> 
+							<table id="calendar" class="table table-condensed table-striped "></table>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+
 <div class="col-md-3">
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
@@ -292,53 +340,6 @@
 	<?php } ?>
 </div>
 
-<div class="col-md-6">
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<?php echo form_open('agenda', 'role="form"'); ?>		
-			<?php if ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) { ?>	
-				
-			<div class="col-md-6 text-left">
-				<label class="sr-only" for="Ordenamento">Agenda dos Prof.:</label>
-				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-						id="NomeUsuario" name="NomeUsuario">
-					<?php
-					foreach ($select['NomeUsuario'] as $key => $row) {
-						if ($query['NomeUsuario'] == $key) {
-							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-						} else {
-							echo '<option value="' . $key . '">' . $row . '</option>';
-						}
-					}
-					?>
-				</select>
-			</div>	
-			<?php } ?>
-			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Agenda" aria-expanded="false" aria-controls="Agenda">
-				<span class="glyphicon glyphicon-pencil"> Agenda</span>
-			</div>
-			<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#Calendario" aria-expanded="false" aria-controls="Calendario">
-				<span class="glyphicon glyphicon-calendar"></span>
-			</div>
-			
-		</div>
-		<div <?php echo $collapse; ?> id="Agenda">
-			<div class="panel-body">
-				<div class="text-right">
-					<div <?php echo $collapse1; ?> id="Calendario">
-							<div class="form-group" id="datepickerinline" class="col-md-12" >
-							</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div  style="overflow: auto; height: 456px; "> 
-							<table id="calendar" class="table table-condensed table-striped "></table>
-					</div>
-				</div>
-			</div>
-		</div>	
-	</div>
-</div>
 
 <div class="col-md-3">
 	<?php echo validation_errors(); ?>
