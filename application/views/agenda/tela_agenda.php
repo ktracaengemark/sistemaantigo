@@ -340,7 +340,6 @@
 	<?php } ?>
 </div>
 
-
 <div class="col-md-3">
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">

@@ -1,13 +1,12 @@
-<div class="container-fluid">
-    <div class="row">
-		
-		<div style="overflow: auto; height: 220px;"> 
-			
+<div style="overflow: auto; height: 190px;">
+	<div class="container-fluid">
+		<div class="row">
+
 			<table class="table table-bordered table-condensed table-striped">
 
 				<thead>
 					<tr>
-						<th class="active text-center"></th>
+						<th class="active text-center">Mensal</th>
 						<th class="active text-center">JAN</th>
 						<th class="active text-center">FEV</th>
 						<th class="active text-center">MAR</th>
@@ -98,6 +97,6 @@
 
 		</div>
 		
-    </div>
+	</div>
 
 </div>

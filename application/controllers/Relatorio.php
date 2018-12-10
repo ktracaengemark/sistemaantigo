@@ -1065,28 +1065,136 @@ class Relatorio extends CI_Controller {
         else
             $data['msg'] = '';
 
-        $data['query'] = quotes_to_entities($this->input->post(array(
-            'Ano',
+		$data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+		$data['collapse'] = '';	
+		$data['collapse1'] = 'class="collapse"';
+		
+		$data['query'] = quotes_to_entities($this->input->post(array(
+			'Ano',
+			'Mesvenc',
+			'Mespag',
+			'Diavenc',
+			'Diapag',
+			'TipoReceita',
+            'DataInicio',
+            'DataFim',
+			'DataInicio2',
+            'DataFim2',
+			'DataInicio3',
+            'DataFim3',
+			'Ordenamento',
+            'Campo',
+			'ObsOrca',
+            'AprovadoOrca',
+            'QuitadoOrca',
+			'ServicoConcluido',
+			'Quitado',
+			'Modalidade',
         ), TRUE));
 
+        $data['select']['AprovadoOrca'] = array(
+            'S' => 'Sim',
+			'N' => 'Não',
+			'#' => 'TODOS',
+        );
+
+        $data['select']['QuitadoOrca'] = array(
+            '#' => 'TODOS',
+            'N' => 'Não',
+            'S' => 'Sim',
+        );
+
+		$data['select']['ServicoConcluido'] = array(
+            '#' => 'TODOS',
+            'N' => 'Não',
+            'S' => 'Sim',
+        );
+
+		$data['select']['Quitado'] = array(
+			'#' => 'TODOS',
+			'N' => 'Não',
+            'S' => 'Sim',
+        );
 		
+		$data['select']['Modalidade'] = array(
+            '#' => 'TODOS',
+            'P' => 'Parcelas',
+            'M' => 'Mensal',
+        );
+
+        $data['select']['Campo'] = array(
+            'PR.DataVencimento' => 'Data do Venc.',
+			'PR.Quitado' => 'Quit.Parc.',
+			'OT.Modalidade' => 'Modalidade',
+            'OT.idApp_OrcaTrata' => 'Número da Receita',
+            'OT.ValorOrca' => 'Valor da Receita',
+            'OT.ServicoConcluido' => 'Receita Concluída?',
+			'OT.TipoReceita' => 'Tipo de Receita',
+
+        );
+
+        $data['select']['Ordenamento'] = array(
+            'ASC' => 'Crescente',
+            'DESC' => 'Decrescente',
+        );
+
+		#$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+		$data['select']['ObsOrca'] = $this->Relatorio_model->select_obsorca();
+		$data['select']['TipoReceita'] = $this->Relatorio_model->select_tipodespesa();
+		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
+		$data['select']['Mespag'] = $this->Relatorio_model->select_mes();
+		$data['select']['Diavenc'] = $this->Relatorio_model->select_dia();
+		$data['select']['Diapag'] = $this->Relatorio_model->select_dia();		
 		/*
 		if (!$data['query']['Ano'])
            $data['query']['Ano'] = '2018';
 		*/
+		
+		if (!$data['query']['Diapag'])
+           $data['query']['Diapag'] = date('d', time());
+/*	   
+		if (!$data['query']['Mesvenc'])
+           $data['query']['Mesvenc'] = date('m', time());
+*/	   
+		if (!$data['query']['Mespag'])
+           $data['query']['Mespag'] = date('m', time());	   
+	   
 		if (!$data['query']['Ano'])
            $data['query']['Ano'] = date('Y', time());
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
         $this->form_validation->set_rules('Ano', 'Ano', 'required|trim|integer|greater_than[1900]');
 
-        $data['titulo'] = 'Balanço';
+        $data['titulo1'] = 'Receita';
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
 
-            $data['report'] = $this->Relatorio_model->list_balanco($data['query']);
+            #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
+            #$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+            $data['bd']['TipoReceita'] = $data['query']['TipoReceita'];
+			$data['bd']['Ano'] = $data['query']['Ano'];
+			$data['bd']['Diavenc'] = $data['query']['Diavenc'];
+			$data['bd']['Diapag'] = $data['query']['Diapag'];
+			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
+			$data['bd']['Mespag'] = $data['query']['Mespag'];			
+			$data['bd']['ObsOrca'] = $data['query']['ObsOrca'];
+			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+            $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
+            $data['bd']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
+			$data['bd']['DataInicio3'] = $this->basico->mascara_data($data['query']['DataInicio3'], 'mysql');
+            $data['bd']['DataFim3'] = $this->basico->mascara_data($data['query']['DataFim3'], 'mysql');
+			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+            $data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
+            $data['bd']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
+			$data['bd']['ServicoConcluido'] = $data['query']['ServicoConcluido'];
+			$data['bd']['Quitado'] = $data['query']['Quitado'];
+			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
+            
+			$data['report'] = $this->Relatorio_model->list1_receitadiaria($data['bd'],TRUE);
 
             /*
               echo "<pre>";
@@ -1095,16 +1203,90 @@ class Relatorio extends CI_Controller {
               exit();
               */
 
-            $data['list'] = $this->load->view('relatorio/list_balanco', $data, TRUE);
-            //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+            $data['list1'] = $this->load->view('relatorio/list1_receitadiaria', $data, TRUE);
+
         }
+		
+        $data['titulo2'] = 'Despesa';
+        #run form validation
+        if ($this->form_validation->run() !== FALSE) {
+
+            #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
+            #$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+            $data['bd']['TipoReceita'] = $data['query']['TipoReceita'];
+			$data['bd']['Ano'] = $data['query']['Ano'];
+			$data['bd']['Diavenc'] = $data['query']['Diavenc'];
+			$data['bd']['Diapag'] = $data['query']['Diapag'];
+			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
+			$data['bd']['Mespag'] = $data['query']['Mespag'];			
+			$data['bd']['ObsOrca'] = $data['query']['ObsOrca'];
+			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+            $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
+            $data['bd']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
+			$data['bd']['DataInicio3'] = $this->basico->mascara_data($data['query']['DataInicio3'], 'mysql');
+            $data['bd']['DataFim3'] = $this->basico->mascara_data($data['query']['DataFim3'], 'mysql');
+			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+            $data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
+            $data['bd']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
+			$data['bd']['ServicoConcluido'] = $data['query']['ServicoConcluido'];
+			$data['bd']['Quitado'] = $data['query']['Quitado'];
+			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
+            
+			$data['report'] = $this->Relatorio_model->list2_despesadiaria($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list2'] = $this->load->view('relatorio/list2_despesadiaria', $data, TRUE);
+
+        }		
+				
+        $data['titulo3'] = 'Anual';
+        #run form validation
+        if ($this->form_validation->run() !== FALSE) {
+
+            $data['report'] = $this->Relatorio_model->list_balancoanual($data['query']);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list3'] = $this->load->view('relatorio/list_balancoanual', $data, TRUE);
+
+        }
+
+        $data['titulo4'] = 'Diario';
+        #run form validation
+        if ($this->form_validation->run() !== FALSE) {
+
+            $data['report'] = $this->Relatorio_model->list_balancodiario($data['query']);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list4'] = $this->load->view('relatorio/list_balancodiario', $data, TRUE);
+
+        }		
 
         $this->load->view('relatorio/tela_balanco', $data);
 
         $this->load->view('basico/footer');
 
     }
-	
+			
     public function estoque() {
 
         if ($this->input->get('m') == 1)
