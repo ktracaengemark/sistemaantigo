@@ -1139,7 +1139,6 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-		#$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
 		$data['select']['ObsOrca'] = $this->Relatorio_model->select_obsorca();
 		$data['select']['TipoReceita'] = $this->Relatorio_model->select_tipodespesa();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
@@ -1171,8 +1170,6 @@ class Relatorio extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
 
-            #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
-            #$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
             $data['bd']['TipoReceita'] = $data['query']['TipoReceita'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Diavenc'] = $data['query']['Diavenc'];
@@ -1180,12 +1177,6 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
 			$data['bd']['Mespag'] = $data['query']['Mespag'];			
 			$data['bd']['ObsOrca'] = $data['query']['ObsOrca'];
-			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
-            $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
-			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
-            $data['bd']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
-			$data['bd']['DataInicio3'] = $this->basico->mascara_data($data['query']['DataInicio3'], 'mysql');
-            $data['bd']['DataFim3'] = $this->basico->mascara_data($data['query']['DataFim3'], 'mysql');
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
             $data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
@@ -1220,12 +1211,6 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
 			$data['bd']['Mespag'] = $data['query']['Mespag'];			
 			$data['bd']['ObsOrca'] = $data['query']['ObsOrca'];
-			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
-            $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
-			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
-            $data['bd']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
-			$data['bd']['DataInicio3'] = $this->basico->mascara_data($data['query']['DataInicio3'], 'mysql');
-            $data['bd']['DataFim3'] = $this->basico->mascara_data($data['query']['DataFim3'], 'mysql');
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
             $data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
