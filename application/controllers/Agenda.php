@@ -33,8 +33,6 @@ class Agenda extends CI_Controller {
         else
             $data['msg'] = '';
 
-        $data['select']['NomeUsuario'] = $this->Agenda_model->select_usuario();
-
 		$data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 		$data['collapse'] = '';	
@@ -76,8 +74,9 @@ class Agenda extends CI_Controller {
 		$_SESSION['FiltroAlteraProcedimento']['Concluidoemp'] = $data['query']['Concluidoemp'];			
 		$_SESSION['FiltroAlteraProcedimento']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 		$_SESSION['FiltroAlteraProcedimento']['NomeEmpresaCli'] = $data['query']['NomeEmpresaCli'];
-
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        $_SESSION['log']['NomeUsuario'] = ($data['query']['NomeUsuario']) ? $data['query']['NomeUsuario'] : FALSE;
+        
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
 
         $data['select']['ConcluidoProcedimento'] = array(
@@ -119,7 +118,7 @@ class Agenda extends CI_Controller {
 		$data['select']['NomeCliente'] = $this->Agenda_model->select_cliente();
 		$data['select']['NomeEmpresa'] = $this->Agenda_model->select_empresarec();
 		$data['select']['NomeEmpresaCli'] = $this->Agenda_model->select_empresaenv();
-
+        $data['select']['NomeUsuario'] = $this->Agenda_model->select_usuario();
 		
         $data['titulo1'] = 'Tarefas';
 
@@ -197,8 +196,6 @@ class Agenda extends CI_Controller {
             //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
         }		
 		
-        $_SESSION['log']['NomeUsuario'] = ($data['query']['NomeUsuario']) ?
-            $data['query']['NomeUsuario'] : FALSE;
 
         $data['query']['estatisticas'] = $this->Agenda_model->resumo_estatisticas($_SESSION['log']['id']);
         $data['query']['cliente_aniversariantes'] = $this->Agenda_model->cliente_aniversariantes($_SESSION['log']['id']);
