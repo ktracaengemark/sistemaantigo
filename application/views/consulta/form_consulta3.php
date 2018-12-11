@@ -142,7 +142,12 @@
 
 					<div class="panel panel-<?php echo $panel; ?>">
 
-						<div class="panel-heading"><strong>Agendamentos</strong></div>
+						<div class="panel-heading">
+							<?php echo $titulo; ?>
+							<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>agenda" role="button">
+								<span class="glyphicon glyphicon-calendar"></span>Agenda
+							</a>
+						</div>
 						<div class="panel-body">
 
 							<?php echo form_open_multipart($form_open_path); ?>

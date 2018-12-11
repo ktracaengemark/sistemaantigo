@@ -18,13 +18,13 @@ if (!$db) {
 
 //Acho que as próximas linhas são redundantes, verificar
 
-$query = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'A.idSis_Usuario = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;	
+$query = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'AND A.idSis_Usuario = ' . $_SESSION['log']['NomeUsuario'] . '  ' : FALSE;	
 #$query2 = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'C.idApp_Cliente = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;
 																				
-$permissao = ($_SESSION['log']['Permissao'] >= 3 ) ? 'A.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-$permissao3 = ($_SESSION['log']['idSis_Empresa'] != 5 ) ? 'A.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND ' : FALSE;
+$permissao = ($_SESSION['log']['Permissao'] >= 3 ) ? 'AND A.idSis_Usuario = ' . $_SESSION['log']['id'] . '  ' : FALSE;
+$permissao3 = ($_SESSION['log']['idSis_Empresa'] != 5 ) ? 'AND A.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  ' : FALSE;
 
-$permissao1 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'R.CpfCliente = ' . $_SESSION['log']['CpfUsuario'] . ' OR ' : FALSE;
+$permissao1 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'OR R.CpfCliente = ' . $_SESSION['log']['CpfUsuario'] . '  ' : FALSE;
 $permissao2 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' OR ' : FALSE;																																			
 
 $result = mysql_query(
@@ -66,14 +66,12 @@ $result = mysql_query(
                 LEFT JOIN Tab_TipoConsulta AS TC ON TC.idTab_TipoConsulta = C.idTab_TipoConsulta
 				LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = C.idSis_Empresa
         WHERE
-			' . $permissao1 . '
-			
-			(C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-			' . $query . ' 
-			' . $permissao . '
-			' . $permissao3 . '
-			
-			A.idApp_Agenda = C.idApp_Agenda )
+			A.idApp_Agenda = C.idApp_Agenda AND
+			((C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
+				' . $query . ' 
+				' . $permissao . '
+				' . $permissao3 . ' ) 
+			' . $permissao1 . ')
 		ORDER BY 
 			C.DataInicio ASC'
 );

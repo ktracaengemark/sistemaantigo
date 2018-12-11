@@ -146,7 +146,7 @@ class Consulta extends CI_Controller {
             'D' => 'ContatoCliente',
         );
 */
-        $data['titulo'] = 'Agendamento C/ Cliente';
+        $data['titulo'] = 'Agendamento';
         $data['form_open_path'] = 'consulta/cadastrar';
         $data['panel'] = 'primary';
         $data['readonly'] = '';
@@ -465,7 +465,7 @@ class Consulta extends CI_Controller {
             'D' => 'ContatoCliente',
         );
 */
-        $data['titulo'] = 'Agendamento C/ Cliente';
+        $data['titulo'] = 'Agendamento';
         $data['form_open_path'] = 'consulta/cadastrar2';
         $data['panel'] = 'primary';
         $data['readonly'] = '';
@@ -637,7 +637,7 @@ class Consulta extends CI_Controller {
 
         //echo '<br><br><br><br>================================== '.$data['query']['idTab_Status'];
 
-        $data['titulo'] = 'Agendamento C/ Cliente';
+        $data['titulo'] = 'Editar Agendamento';
         $data['form_open_path'] = 'consulta/alterar';
         #$data['readonly'] = '';
         #$data['disabled'] = '';
@@ -812,7 +812,7 @@ class Consulta extends CI_Controller {
 
         $data['select']['option'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 
-		$data['titulo'] = 'Outros Eventos';
+		$data['titulo'] = 'Evento';
         $data['form_open_path'] = 'consulta/cadastrar_evento';
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
@@ -933,7 +933,7 @@ class Consulta extends CI_Controller {
 		$data['select']['idApp_Agenda'] = $this->Basico_model->select_agenda();
 		$data['select']['Status'] = $this->Basico_model->select_status();
 
-        $data['titulo'] = 'Outros Eventos';
+        $data['titulo'] = 'Editar Evento';
         $data['form_open_path'] = 'consulta/alterar_evento';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;

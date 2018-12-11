@@ -7,7 +7,12 @@
 			<?php #echo validation_errors(); ?>
 
 			<div class="panel panel-<?php echo $panel; ?>">
-				<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
+				<div class="panel-heading">
+					<?php echo $titulo; ?>
+					<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>agenda" role="button">
+						<span class="glyphicon glyphicon-calendar"></span>Agenda
+					</a>
+				</div>
 				<div class="panel-body">
 					<div class="form-group">
 						<div class="panel panel-info">

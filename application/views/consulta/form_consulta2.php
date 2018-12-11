@@ -150,7 +150,12 @@
 
 					<div class="panel panel-<?php echo $panel; ?>">
 
-						<div class="panel-heading"><strong>Agendamentos</strong></div>
+						<div class="panel-heading">
+							<?php echo $titulo; ?>
+							<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>agenda" role="button">
+								<span class="glyphicon glyphicon-calendar"></span>Agenda
+							</a>
+						</div>
 						<div class="panel-body">
 							<div class="form-group">
 								<div class="panel panel-info">
@@ -344,14 +349,14 @@
 												</div>
 											</div>
 										</div>
-										<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+										
 										<div class="form-group">
 											<div class="row">
 												<input type="hidden" name="idApp_Consulta" value="<?php echo $query['idApp_Consulta']; ?>">
 												<!--<input type="hidden" name="idApp_Agenda" value="<?php echo $_SESSION['log']['Agenda']; ?>">-->
 												<input type="hidden" name="idApp_Cliente" value="<?php echo $query['idApp_Cliente']; ?>">
 												<?php if ($metodo == 2) { ?>
-
+													<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 													<div class="col-md-6">
 														<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
 															<span class="glyphicon glyphicon-save"></span> Salvar
@@ -362,7 +367,7 @@
 															<span class="glyphicon glyphicon-trash"></span> Excluir
 														</button>
 													</div>
-
+													<?php } ?>
 													<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
@@ -398,8 +403,9 @@
 													</div>
 												<?php } ?>
 											</div>
+												
 										</div>
-										<?php } ?>
+										
 										</form>
 									</div>
 									
