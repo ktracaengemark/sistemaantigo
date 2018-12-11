@@ -23,7 +23,15 @@ class Consulta_model extends CI_Model {
     }
 
     public function get_consulta($data) {
-        $query = $this->db->query('SELECT * FROM App_Consulta WHERE idApp_Consulta = ' . $data);
+        $query = $this->db->query('
+			SELECT * 
+			FROM 
+				App_Consulta AS C
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = C.idSis_Empresa
+			WHERE 
+				C.idApp_Consulta = ' . $data
+		);
+		
         $query = $query->result_array();
 
         return $query[0];

@@ -535,7 +535,6 @@ class Consulta extends CI_Controller {
 			'idApp_Consulta',
             #'idApp_Agenda',
             'idApp_Cliente',
-			#'idSis_EmpresaFilial',
             'Data',
             'Data2',
 			'HoraInicio',
@@ -626,7 +625,7 @@ class Consulta extends CI_Controller {
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
         $data['select']['ContatoCliente'] = $this->Consulta_model->select_contatocliente_cliente($data['query']['idApp_Cliente']);
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
-		#$data['select']['idSis_EmpresaFilial'] = $this->Empresafilial_model->select_empresafilial();
+		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa4();
 		
         $data['select']['Paciente'] = array (
             'R' => 'O Próprio',

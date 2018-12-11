@@ -155,6 +155,11 @@
 							<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>agenda" role="button">
 								<span class="glyphicon glyphicon-calendar"></span>Agenda
 							</a>
+							<div class="col-md-4">
+								<label class="sr-only">Empresa</label>
+								<input class="form-control" id="NomeEmpresa" <?php echo $readonly; ?> readonly=""
+										  name="NomeEmpresa" value="<?php echo $query['NomeEmpresa']; ?>">
+							</div>
 						</div>
 						<div class="panel-body">
 							<div class="form-group">
@@ -165,7 +170,7 @@
 										<div class="form-group">
 											<div class="row">
 												<div class="col-md-6">
-													<label for="idApp_Agenda">Agenda do Profis.*</label>
+													<label for="idApp_Agenda">Agenda do Usuário*</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 															id="idApp_Agenda" autofocus name="idApp_Agenda">
 														<?php echo $select['option']; ?>
