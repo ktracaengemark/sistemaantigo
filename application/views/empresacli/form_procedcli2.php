@@ -29,10 +29,10 @@
 									<div class="panel-heading">
 										<div class="row">	
 											<div class="col-md-6">
-												<label for="idSis_Empresa">Empresa:*</label>
+												<label for="idSis_Empresa">para a Empresa:*</label>
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> readonly=""
 														id="idSis_Empresa" autofocus name="idSis_Empresa">
-													<option value="">-- Selecione uma opção --</option>
+													<option value="">-- Selec. uma Empresa --</option>
 													<?php
 													foreach ($select['idSis_Empresa'] as $key => $row) {
 														if ($query['idSis_Empresa'] == $key) {
@@ -48,7 +48,7 @@
 										<?php echo form_error('idSis_Empresa'); ?>
 										<div class="row">
 											<div class="col-md-12">
-												<label for="ProcedimentoCli">Pergunta:</label>
+												<label for="ProcedimentoCli">Mensagem:</label>
 												<textarea class="form-control" id="ProcedimentoCli" <?php echo $readonly; ?>
 														  name="ProcedimentoCli"><?php echo $query['ProcedimentoCli']; ?></textarea>
 											</div>

@@ -367,7 +367,160 @@
 				<div class="modal-content">
 					<div class="modal-header bg-danger">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtro de Mensagens</h4>
+						<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Mensagens Enviadas</h4>
+					</div>
+					<div class="modal-footer">
+						<div class="form-group">	
+							<div class="row">	
+								<div class="col-md-3 text-left">
+									<label for="Concluidoemp">Respondido</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
+											id="Concluidoemp" autofocus name="Concluidoemp">
+										<?php
+										foreach ($select['Concluidoemp'] as $key => $row) {
+											if ($query['Concluidoemp'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								<div class="col-md-3 text-left" >
+									<label for="Ordenamento">Dia:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="Diaemp" name="Diaemp">
+										<?php
+										foreach ($select['Diaemp'] as $key => $row) {
+											if ($query['Diaemp'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								<div class="col-md-3 text-left" >
+									<label for="Ordenamento">Mês:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="Mesvencemp" name="Mesvencemp">
+										<?php
+										foreach ($select['Mesvencemp'] as $key => $row) {
+											if ($query['Mesvencemp'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								<div class="col-md-3 text-left" >
+									<label for="Ordenamento">Ano:</label>
+									<div>
+										<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
+											   name="Anoemp" value="<?php echo set_value('Anoemp', $query['Anoemp']); ?>">
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<br>
+								<div class="form-group col-md-3 text-left">
+									<div class="form-footer ">
+										<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+											<span class="glyphicon glyphicon-filter"></span> Filtrar
+										</button>
+									</div>
+								</div>
+								<div class="form-group col-md-3 text-left">
+									<div class="form-footer ">
+										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+											<span class="glyphicon glyphicon-remove"> Fechar
+										</button>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">	
+								<!--
+								<div class="col-md-6 text-left">
+									<label for="Ordenamento">Enviado por:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+											id="NomeEmpresaCli" autofocus name="NomeEmpresaCli">
+										<?php
+										foreach ($select['NomeEmpresaCli'] as $key => $row) {
+											if ($query['NomeEmpresaCli'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								-->
+								<div class="col-md-6 text-left">
+									<label for="Ordenamento">Enviadas para:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+											id="NomeEmpresa" autofocus name="NomeEmpresa">
+										<?php
+										foreach ($select['NomeEmpresa'] as $key => $row) {
+											if ($query['NomeEmpresa'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		</form>
+
+		<div <?php echo $collapse; ?> id="Mensagem">	
+			<div class="panel-body">
+				<?php echo (isset($list3)) ? $list3 : FALSE ?>
+			</div>
+		</div>
+	</div>
+	
+	<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+	<?php echo validation_errors(); ?>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			
+			<?php echo form_open('agenda', 'role="form"'); ?>
+
+			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Mensagem" aria-expanded="false" aria-controls="Mensagem">
+				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo4; ?> 
+			</div>
+			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target="#bs-excluir-modal5-sm" aria-controls="bs-excluir-modal5-sm">
+				<span class="glyphicon glyphicon-filter"></span>Filtrar
+			</button>
+			<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/alterarprocedempresa" role="button"> 
+				<span class="glyphicon glyphicon-ok"></span> Edit Todas
+			</a>-->										
+			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>empresacli/cadastrarproc2" role="button"> 
+				<span class="glyphicon glyphicon-plus"></span> Nova
+			</a>	
+		
+		</div>
+
+		<div class="modal fade " id="bs-excluir-modal5-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog modal-md" role="document">
+				<div class="modal-content">
+					<div class="modal-header bg-danger">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Mensagens Recebidas</h4>
 					</div>
 					<div class="modal-footer">
 						<div class="form-group">	
@@ -447,7 +600,7 @@
 							<div class="row">	
 								<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 								<div class="col-md-6 text-left">
-									<label for="Ordenamento">Enviado por:</label>
+									<label for="Ordenamento">Enviadas por:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
 											id="NomeEmpresaCli" autofocus name="NomeEmpresaCli">
 										<?php
@@ -462,8 +615,9 @@
 									</select>
 								</div>
 								<?php } ?>
+								<!--
 								<div class="col-md-6 text-left">
-									<label for="Ordenamento">Recebido por:</label>
+									<label for="Ordenamento">Enviadas para:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
 											id="NomeEmpresa" autofocus name="NomeEmpresa">
 										<?php
@@ -477,6 +631,7 @@
 										?>
 									</select>
 								</div>
+								-->
 							</div>
 						</div>	
 					</div>
@@ -488,8 +643,10 @@
 
 		<div <?php echo $collapse; ?> id="Mensagem">	
 			<div class="panel-body">
-				<?php echo (isset($list3)) ? $list3 : FALSE ?>
+				<?php echo (isset($list4)) ? $list4 : FALSE ?>
 			</div>
 		</div>
-	</div>
+	</div>	
+
+	<?php } ?>
 </div>

@@ -46,12 +46,12 @@
 													<div class="panel-heading">
 														<div class="row">
 															<div class="col-md-2">
-																<label for="NomeCli<?php echo $i ?>">Emissor:</label>
+																<label for="NomeCli<?php echo $i ?>">Quem:</label>
 																<input class="form-control" id="NomeCli<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
 																		  name="NomeCli<?php echo $i ?>" value="<?php echo $procedimento[$i]['NomeCli']; ?>">
 															</div>
 															<div class="col-md-2">
-																<label for="NomeEmpresaCli<?php echo $i ?>">Enviou:</label>
+																<label for="NomeEmpresaCli<?php echo $i ?>">da Empresa:</label>
 																<input class="form-control" id="NomeEmpresaCli<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
 																		  name="NomeEmpresaCli<?php echo $i ?>" value="<?php echo $procedimento[$i]['NomeEmpresaCli']; ?>">
 															</div>
@@ -81,13 +81,13 @@
 															-->
 															<div class="col-md-2"></div>
 															<div class="col-md-2">
-																<label for="NomeEmpresa<?php echo $i ?>">Recebeu:</label>
+																<label for="NomeEmpresa<?php echo $i ?>">a Empresa:</label>
 																<input class="form-control" id="NomeEmpresa<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
 																		  name="NomeEmpresa<?php echo $i ?>" value="<?php echo $procedimento[$i]['NomeEmpresa']; ?>">
 															</div>
 															<div class="col-md-3">
 																<label for="Procedimento<?php echo $i ?>">Respondeu:</label>
-																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
+																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
 																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 															</div>
 															<div class="col-md-2">
@@ -100,11 +100,16 @@
 																		   name="DataProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimento']; ?>">
 																</div>
 															</div>
-
+															<div class="col-md-1">
+																<label for="ConcluidoProcedimento<?php echo $i ?>">Resp.:</label>
+																<input class="form-control" id="ConcluidoProcedimento<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
+																		  name="ConcluidoProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['ConcluidoProcedimento']; ?>">
+															</div>
+															<!--
 															<div class="col-md-2">
 																<label for="ConcluidoProcedimento">Respondido? </label><br>
-																<div class="form-group">
-																	<div class="btn-group" data-toggle="buttons">
+																<div class="form-group" readonly="">
+																	<div class="btn-group" data-toggle="buttons" readonly="">
 																		<?php
 																		foreach ($select['ConcluidoProcedimento'] as $key => $row) {
 																			(!$procedimento[$i]['ConcluidoProcedimento']) ? $procedimento[$i]['ConcluidoProcedimento'] = 'N' : FALSE;
@@ -127,11 +132,11 @@
 																				;
 																			}
 																		}
-																		?>
+																		?> 
 																	</div>
 																</div>
 															</div>
-															
+															-->
 															<div class="col-md-1">
 																<label><br></label><br>
 																<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
@@ -149,17 +154,17 @@
 											?>
 
 											</div>
-											
+											<!--
 											<div class="form-group">
 												<div class="row">
 													<div class="col-md-4">
 														<a class="add_field_button3 btn btn btn-warning" onclick="adicionaProcedimento()">
-															<span class="glyphicon glyphicon-plus"></span> Adic. Procedimento
+															<span class="glyphicon glyphicon-plus"></span> Adic. Mensagem
 														</a>
 													</div>
 												</div>
 											</div>
-											
+											-->
 										</div>
 									
 									</div>

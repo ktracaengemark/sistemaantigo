@@ -170,7 +170,7 @@ class Agenda extends CI_Controller {
             //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
         }
 		
-		$data['titulo3'] = 'Mensagens';
+		$data['titulo3'] = 'Mens. Env.';
 
         if ($this->form_validation->run() !== TRUE) {
 
@@ -183,7 +183,7 @@ class Agenda extends CI_Controller {
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 
-            $data['report'] = $this->Agenda_model->list3_procedempresa($data['bd'],TRUE);
+            $data['report'] = $this->Agenda_model->list3_mensagemenv($data['bd'],TRUE);
 
             /*
               echo "<pre>";
@@ -192,7 +192,33 @@ class Agenda extends CI_Controller {
               exit();
               */
 
-            $data['list3'] = $this->load->view('agenda/list3_procedempresa', $data, TRUE);
+            $data['list3'] = $this->load->view('agenda/list3_mensagemenv', $data, TRUE);
+            //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+        }
+
+		$data['titulo4'] = 'Mens. Rec.';
+
+        if ($this->form_validation->run() !== TRUE) {
+
+			$data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
+			$data['bd']['NomeEmpresaCli'] = $data['query']['NomeEmpresaCli'];
+			$data['bd']['Diaemp'] = $data['query']['Diaemp'];
+			$data['bd']['Mesvencemp'] = $data['query']['Mesvencemp'];
+			$data['bd']['Anoemp'] = $data['query']['Ano'];
+			$data['bd']['Concluidoemp'] = $data['query']['Concluidoemp'];
+			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+
+            $data['report'] = $this->Agenda_model->list4_mensagemrec($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list4'] = $this->load->view('agenda/list4_mensagemrec', $data, TRUE);
             //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
         }		
 		

@@ -348,7 +348,7 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 
-    public function get_alterarprocedempresa($data) {
+    public function get_alterarmensagemenv($data) {
 		
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_UsuarioCli = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		$permissao1 = ($_SESSION['FiltroAlteraProcedimento']['Concluidoemp'] != '0' ) ? 'P.ConcluidoProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['Concluidoemp'] . '" AND ' : FALSE;
@@ -386,10 +386,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Sis_Empresa AS ER ON ER.idSis_Empresa = P.idSis_Empresa
 			WHERE 
 
-				"0" != ' . $data . '  AND
-				(P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  OR
-				P.idSis_EmpresaCli = ' . $_SESSION['log']['idSis_Empresa'] . ')  AND
-				P.idSis_EmpresaCli != "0" AND
+				P.idSis_EmpresaCli = ' . $data . '  AND
 				P.idApp_OrcaTrata = "0" AND
 				' . $permissao . '
 				' . $permissao1 . '
@@ -397,6 +394,68 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao3 . '
 				' . $permissao5 . '
 				' . $permissao6 . '
+
+				P.idApp_Cliente = "0" 
+		');
+		/*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        $query = $query->result_array();
+
+        return $query;
+    }
+
+    public function get_alterarmensagemrec($data) {
+		
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_UsuarioCli = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		$permissao1 = ($_SESSION['FiltroAlteraProcedimento']['Concluidoemp'] != '0' ) ? 'P.ConcluidoProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['Concluidoemp'] . '" AND ' : FALSE;
+		$permissao2 = ($_SESSION['FiltroAlteraProcedimento']['Mesvencemp'] != "0" ) ? 'MONTH(P.DataProcedimentoCli) = "' . $_SESSION['FiltroAlteraProcedimento']['Mesvencemp'] . '" AND ' : FALSE;
+		$permissao3 = ($_SESSION['FiltroAlteraProcedimento']['Anoemp'] != "" ) ? 'YEAR(P.DataProcedimentoCli) = "' . $_SESSION['FiltroAlteraProcedimento']['Anoemp'] . '" AND ' : FALSE;
+		$permissao5 = ($_SESSION['FiltroAlteraProcedimento']['Diaemp'] != "0" ) ? 'DAY(P.DataProcedimentoCli) = "' . $_SESSION['FiltroAlteraProcedimento']['Diaemp'] . '" AND ' : FALSE;
+		$permissao6 = ($_SESSION['FiltroAlteraProcedimento']['NomeEmpresa'] != "0" ) ? 'P.idSis_Empresa = "' . $_SESSION['FiltroAlteraProcedimento']['NomeEmpresa'] . '" AND ' : FALSE;
+		$permissao7 = ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['FiltroAlteraProcedimento']['NomeEmpresaCli'] != "0" ) ? 'P.idSis_EmpresaCli = "' . $_SESSION['FiltroAlteraProcedimento']['NomeEmpresaCli'] . '" AND ' : FALSE;
+		
+		$query = $this->db->query('
+			SELECT
+				
+				P.idApp_Procedimento,
+				
+				UR.Nome AS Nome,
+				P.idSis_Usuario,
+				ER.NomeEmpresa AS NomeEmpresa,
+				P.idSis_Empresa,
+                P.Procedimento,
+				P.DataProcedimento,
+				P.ConcluidoProcedimento,
+				
+				UE.Nome AS NomeCli,
+				P.idSis_UsuarioCli,
+				EE.NomeEmpresa AS NomeEmpresaCli,
+				P.idSis_EmpresaCli,
+                P.ProcedimentoCli,
+				P.DataProcedimentoCli,
+				P.ConcluidoProcedimentoCli
+            FROM
+				App_Procedimento AS P
+					LEFT JOIN Sis_Usuario AS UE ON UE.idSis_Usuario = P.idSis_UsuarioCli
+					LEFT JOIN Sis_Usuario AS UR ON UR.idSis_Usuario = P.idSis_Usuario
+					LEFT JOIN Sis_Empresa AS EE ON EE.idSis_Empresa = P.idSis_EmpresaCli
+					LEFT JOIN Sis_Empresa AS ER ON ER.idSis_Empresa = P.idSis_Empresa
+			WHERE 
+
+				P.idSis_Empresa =  ' . $data . '  AND
+				P.idSis_EmpresaCli != "0" AND
+				P.idApp_OrcaTrata = "0" AND
+				' . $permissao . '
+				' . $permissao1 . '
+				' . $permissao2 . '
+				' . $permissao3 . '
+				' . $permissao5 . '
+
 				' . $permissao7 . '
 				P.idApp_Cliente = "0" 
 		');

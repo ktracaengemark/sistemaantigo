@@ -13,12 +13,15 @@
 				<thead>
 					<tr>
 						<th class="active">Resp.</th>
+						<!--<th class="active">id</th>
+						<th class="active">Quem</th>
+						<th class="active">da Empresa</th>-->
 						<th class="active">Perguntou</th>
-						<th class="active">Recebeu</th>						
-						<th class="active">Respondeu</th>
 						<th class="active">DtEnv</th>
-						<!--<th class="active">Recptor</th>-->
+						<th class="active">a Empresa</th>
+						<th class="active">Respondeu</th>
 						<th class="active">DtRes</th>
+						<!--<th class="active">Recptor</th>-->
 					</tr>
 				</thead>
 				<tbody>
@@ -26,16 +29,18 @@
 					<?php
 					foreach ($report->result_array() as $row) {
 
-						echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarprocedempresa/' . $row['idSis_Empresa'] . '">';
+						echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarmensagemenv/' . $row['idSis_EmpresaCli'] . '">';
 
 							echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
+							#echo '<td>' . $row['idApp_Procedimento'] . '</td>';
+							#echo '<td>' . $row['NomeCli'] . '</td>';
+							#echo '<td>' . $row['NomeEmpresaCli'] . '</td>';
 							echo '<td>' . $row['ProcedimentoCli'] . '</td>';
+							echo '<td>' . $row['DataProcedimentoCli'] . '</td>';
 							echo '<td>' . $row['NomeEmpresa'] . '</td>';
 							echo '<td>' . $row['Procedimento'] . '</td>';
-							echo '<td>' . $row['DataProcedimentoCli'] . '</td>';
-							#echo '<td>' . $row['Nome'] . '</td>';
 							echo '<td>' . $row['DataProcedimento'] . '</td>';
-
+							#echo '<td>' . $row['Nome'] . '</td>';
 						echo '</tr>';
 					}
 					?>
@@ -48,12 +53,12 @@
 					<tr>
 						<th class="active">Resp.</th>
 						<!--<th class="active">id</th>-->
-						<th class="active">Emissor</th>
-						<th class="active">Enviou</th>
-						<th class="active">Recebeu</th>
+						<th class="active">Quem</th>
+						<th class="active">Da</th>
 						<th class="active">Perguntou</th>
-						<th class="active">Respondeu</th>
 						<th class="active">DtEnv</th>
+						<th class="active">a Empresa</th>
+						<th class="active">Respondeu</th>
 						<th class="active">DtRes</th>
 						<!--<th class="active">Recptor</th>-->
 					</tr>
@@ -63,16 +68,16 @@
 					<?php
 					foreach ($report->result_array() as $row) {
 
-						echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarprocedempresa/' . $row['idSis_Empresa'] . '">';
+						echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarmensagemenv/' . $row['idSis_EmpresaCli'] . '">';
 
 							echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
 							#echo '<td>' . $row['idApp_Procedimento'] . '</td>';
 							echo '<td>' . $row['NomeCli'] . '</td>';
 							echo '<td>' . $row['NomeEmpresaCli'] . '</td>';
-							echo '<td>' . $row['NomeEmpresa'] . '</td>';
 							echo '<td>' . $row['ProcedimentoCli'] . '</td>';
-							echo '<td>' . $row['Procedimento'] . '</td>';
 							echo '<td>' . $row['DataProcedimentoCli'] . '</td>';
+							echo '<td>' . $row['NomeEmpresa'] . '</td>';
+							echo '<td>' . $row['Procedimento'] . '</td>';
 							echo '<td>' . $row['DataProcedimento'] . '</td>';
 							#echo '<td>' . $row['Nome'] . '</td>';
 						echo '</tr>';

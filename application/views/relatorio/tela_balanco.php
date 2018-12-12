@@ -207,27 +207,3 @@
 	</div>
 </div>
 
-<div class="col-sm-offset-1 col-md-10">
-	<?php echo validation_errors(); ?>
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<?php echo form_open('relatorio/balanco', 'role="form"'); ?>
-			
-			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Mensal" aria-expanded="false" aria-controls="Mensal">
-				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo4; ?> 
-			</div>					
-			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-				<span class="glyphicon glyphicon-filter"></span>Filtrar
-			</button>
-			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
-				<span class="glyphicon glyphicon-search"></span>Parcelas
-			</a>
-		</div>
-		<div <?php echo $collapse; ?> id="Mensal">
-			<div class="panel-body">	
-				<?php echo (isset($list4)) ? $list4 : FALSE ?>
-			</div>
-		</div>	
-	</div>
-</div>
-
