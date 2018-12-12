@@ -6,7 +6,7 @@
 
 				<thead>
 					<tr>
-						<th class="active text-center">Mensal</th>
+						<th class="active text-center"><?php echo '<small>' . $_SESSION['FiltroBalanco']['Ano'] . '</small>' ?></th>
 						<th class="active text-center">JAN</th>
 						<th class="active text-center">FEV</th>
 						<th class="active text-center">MAR</th>

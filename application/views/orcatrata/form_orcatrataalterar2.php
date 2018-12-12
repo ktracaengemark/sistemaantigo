@@ -18,7 +18,7 @@
 						<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
 						<div class="panel-body">
 
-							<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							<div class="panel-group">	
 								<div class="panel panel-primary">
 
@@ -185,7 +185,7 @@
 												</div>
 											</div>
 											
-											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+											<?php if ($_SESSION['log']['NivelEmpresa'] >= 5 ) { ?>
 											<div class="panel-group">	
 												<div class="panel panel-danger">
 

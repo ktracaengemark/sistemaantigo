@@ -9,7 +9,7 @@
 			<?php echo form_open('relatorio/parcelas', 'role="form"'); ?>
 			
 			<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-				<span class="glyphicon glyphicon-search"></span><?php echo $titulo1; ?>
+				<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo1; ?>
 			</button>											
 			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/balanco" role="button">
 				<span class="glyphicon glyphicon-search"></span>Balanço
@@ -129,7 +129,7 @@
 								<br>
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
-										<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+										<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
 											<span class="glyphicon glyphicon-filter"></span> Filtrar
 										</button>
 									</div>
@@ -143,7 +143,7 @@
 								</div>
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer">		
-										<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/receitas" role="button">
+										<a class="btn btn-success btn-block" href="<?php echo base_url() ?>relatorio/receitas" role="button">
 											<span class="glyphicon glyphicon-search"></span> Receitas
 										</a>
 									</div>	
@@ -168,7 +168,7 @@
 			<?php echo form_open('relatorio/parcelas', 'role="form"'); ?>
 
 			<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
-				<span class="glyphicon glyphicon-search"></span><?php echo $titulo2; ?>
+				<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo2; ?>
 			</button>											
 			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/balanco" role="button">
 				<span class="glyphicon glyphicon-search"></span>Balanço
@@ -288,7 +288,7 @@
 								<br>
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
-										<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+										<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
 											<span class="glyphicon glyphicon-filter"></span> Filtrar
 										</button>
 									</div>
@@ -302,7 +302,7 @@
 								</div>
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer">		
-										<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/despesas" role="button">
+										<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>relatorio/despesas" role="button">
 											<span class="glyphicon glyphicon-search"></span> Despesas
 										</a>
 									</div>	
