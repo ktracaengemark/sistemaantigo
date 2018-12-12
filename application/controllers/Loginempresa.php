@@ -143,7 +143,7 @@ class Loginempresa extends CI_Controller {
         }
 
         #load footer view
-        $this->load->view('basico/footerloginempresa');
+        #$this->load->view('basico/footerloginempresa');
         $this->load->view('basico/footer');
     }
 
@@ -266,7 +266,7 @@ class Loginempresa extends CI_Controller {
             }
         }
 
-        $this->load->view('basico/footerloginempresa');
+        #$this->load->view('basico/footerloginempresa');
         $this->load->view('basico/footer');
     }
 
