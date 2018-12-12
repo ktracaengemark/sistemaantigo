@@ -1,5 +1,4 @@
 <?php if ($msg) echo $msg; ?>
-<?php if ($msg) echo $msg; ?>
 <div class="col-md-1"></div>
 <div class="col-md-10">		
 	<div class="row">

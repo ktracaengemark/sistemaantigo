@@ -31,8 +31,10 @@
 								<span class="glyphicon glyphicon-user"></span> Usuarios <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
+								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 								<li><a href="<?php echo base_url() ?>funcao/cadastrar"><span class="glyphicon glyphicon-pencil"></span> Funções </a></li>
 								<li role="separator" class="divider"></li>
+								<?php } ?>
 								<li><a href="<?php echo base_url() ?>relatorioempresa/funcionario"><span class="glyphicon glyphicon-user"></span> Usuarios </a></li>
 
 							</ul>

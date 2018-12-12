@@ -288,8 +288,9 @@ class Relatorioempresa extends CI_Controller {
         );
 
         $data['select']['Nome'] = $this->Relatorioempresa_model->select_funcionario();
-
-        $data['titulo'] = 'Relatório de Funcionários';
+		$data['select']['Inativo'] = $this->Basico_model->select_inativo();
+        
+		$data['titulo'] = 'Usuários';
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {

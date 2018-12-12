@@ -200,9 +200,11 @@
 												<div class="row">
 													<div class="col-md-3">
 														<label for="Funcao">Funcao:*</label>
+														<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 														<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>funcao/cadastrar/funcao" role="button"> 
 															<span class="glyphicon glyphicon-plus"></span> <b>Nova Funcao</b>
 														</a>
+														<?php } ?>
 														<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																id="Funcao" name="Funcao">
 															<option value="">-- Selecione uma Funcao --</option>
