@@ -9,9 +9,19 @@
 
 			<div class="panel panel-primary">
 
-				<div class="panel-heading"><strong><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?></strong></div>
+				<div class="panel-heading">
+				
+				<?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?>
+				
+				<a class="btn btn-sm btn-success" href="<?php echo base_url() . 'empresa/prontuario/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+					<span class="glyphicon glyphicon-file"> </span> Ver <span class="sr-only">(current)</span>
+				</a>
+				<a class="btn btn-sm btn-warning" href="<?php echo base_url() . 'empresa/alterar/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+					<span class="glyphicon glyphicon-edit"></span> Edit.
+				</a>
+				</div>
 				<div class="panel-body">
-
+					<!--
 					<div class="form-group">
 						<div class="row">
 							<div class="col-md-12 col-lg-12">
@@ -35,7 +45,7 @@
 							</div>	
 						</div>
 					</div>
-					<!--
+					
 					<div class="form-group">
 						<div class="row">
 							<div class="text-center t">

@@ -9,9 +9,19 @@
 		
 			<div class="panel panel-primary">
 				
-				<div class="panel-heading"><strong><?php echo '<strong>' . $_SESSION['Empresa']['NomeAdmin'] . '</strong> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?></strong></div>
+				<div class="panel-heading">
+				
+				<?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?>
+				
+				<a class="btn btn-sm btn-success" href="<?php echo base_url() . 'empresa/prontuario/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+					<span class="glyphicon glyphicon-file"> </span> Ver <span class="sr-only">(current)</span>
+				</a>
+				<a class="btn btn-sm btn-warning" href="<?php echo base_url() . 'empresa/alterar/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+					<span class="glyphicon glyphicon-edit"></span> Edit.
+				</a>
+				</div>
 				<div class="panel-body">
-			
+					<!--
 					<div class="form-group">
 						<div class="row">
 							<div class="col-md-12 col-lg-12">
@@ -35,7 +45,7 @@
 							</div>	
 						</div>
 					</div>
-					<!--
+					
 					<div class="form-group">
 						<div class="row">
 							<div class="text-center t">
@@ -57,7 +67,27 @@
 								<div class="panel-body">
 
 									<?php echo form_open_multipart($form_open_path); ?>
-																		
+																		<h3 class="text-left">Dados do Administrador  </h3>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-3">
+												<label for="NomeAdmin">Nome do Admin.:</label>
+												<input type="text" class="form-control" id="NomeAdmin" maxlength="45" 
+														name="NomeAdmin" autofocus value="<?php echo $query['NomeAdmin']; ?>">
+											</div>																		
+											<div class="col-md-3">
+												<label for="Celular">Tel. Admin.</label>
+												<input type="text" class="form-control Celular CelularVariavel" id="Celular" maxlength="11" <?php echo $readonly; ?>
+													   name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
+											</div>
+											<div class="col-md-3">
+												<label for="Email">E-mail Admin.:</label>
+												<input type="text" class="form-control" id="Bairro" maxlength="100" <?php echo $readonly; ?>
+													   name="Email" value="<?php echo $query['Email']; ?>">
+											</div>
+										</div>
+									</div>
+
 									<h3 class="text-left">Dados da Empresa  </h3>									
 									<div class="form-group">
 										<div class="row">										
@@ -108,26 +138,6 @@
 										</div>
 									</div>
 									<br>
-									<h3 class="text-left">Dados do Administrador  </h3>
-									<div class="form-group">
-										<div class="row">
-											<div class="col-md-3">
-												<label for="NomeAdmin">NomeAdmin do Administrador:</label>
-												<input type="text" class="form-control" id="NomeAdmin" maxlength="45" 
-														name="NomeAdmin" autofocus value="<?php echo $query['NomeAdmin']; ?>">
-											</div>																		
-											<div class="col-md-3">
-												<label for="Celular">Tel. Administrador</label>
-												<input type="text" class="form-control Celular CelularVariavel" id="Celular" maxlength="11" <?php echo $readonly; ?>
-													   name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
-											</div>
-											<div class="col-md-3">
-												<label for="Email">E-mail Administrador:</label>
-												<input type="text" class="form-control" id="Bairro" maxlength="100" <?php echo $readonly; ?>
-													   name="Email" value="<?php echo $query['Email']; ?>">
-											</div>
-										</div>
-									</div>	
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-12">
@@ -138,7 +148,6 @@
 										</div>
 									</div>
 									<br>
-
 									<div class="form-group">
 										<div class="row">
 											<input type="hidden" name="idSis_Empresa" value="<?php echo $query['idSis_Empresa']; ?>">
