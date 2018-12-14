@@ -2,7 +2,7 @@
 
 	<div class="col-sm-offset-2 col-md-8">
 		<div class="navbar-header ">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar1">
 				<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="<?php echo base_url() ?>empresa/prontuario/<?php echo $_SESSION['log']['id']; ?>"> 
@@ -10,7 +10,7 @@
 			</a>
 			<!--<a class="navbar-brand" href="http://www.ktracaengemark.com.br"> Melhor loja</a>-->
 		</div>
-		<div class="collapse navbar-collapse">
+		<div class="collapse navbar-collapse" id="myNavbar1">
 
 			<ul class="nav navbar-nav navbar-center">				
 				<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">

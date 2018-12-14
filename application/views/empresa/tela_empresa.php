@@ -20,6 +20,7 @@
 						<span class="glyphicon glyphicon-edit"></span> Edit.
 					</a>
 					</div>
+					<?php } ?>					
 					<div class="panel-body">
 						<div style="overflow: auto; height: 600px; ">
 							<table class="table table-user-information">
@@ -168,4 +169,3 @@
 		</div>
 	</div>
 
-<?php } ?>

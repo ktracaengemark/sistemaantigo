@@ -74,32 +74,6 @@
 						</div>
 					  </div>
 					</nav>
-					
-					<!--
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-12 col-lg-12">
-								<div class="col-md-4 text-left">
-									<label for="">Funcionário:</label>
-									<div class="form-group">
-										<div class="row">							
-											<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
-												<a class="btn btn-lg btn-success" href="<?php echo base_url() . 'usuario/prontuario/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
-													<span class="glyphicon glyphicon-file"> </span> Ver <span class="sr-only">(current)</span>
-												</a>
-											</a>
-											<a <?php if (preg_match("/usuario\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
-												<a class="btn btn-lg btn-warning" href="<?php echo base_url() . 'usuario/alterar/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
-													<span class="glyphicon glyphicon-edit"></span> Edit.
-												</a>
-											</a>
-										</div>
-									</div>	
-								</div>
-							</div>	
-						</div>
-					</div>					
-					-->
 
 					<?php } ?>
 					
