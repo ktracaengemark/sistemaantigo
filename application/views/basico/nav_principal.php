@@ -72,7 +72,7 @@
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
 								<button type="button" class="btn btn-md btn-primary dropdown-toggle" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-home"></span>Encontre aqui<span class="caret"></span>
+									<span class="glyphicon glyphicon-home"></span> Encontre aqui<span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
 									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Empresas</a></li>
@@ -82,7 +82,7 @@
 									<?php } ?>
 									<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 									<li role="separator" class="divider"></li>
-									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas</a></li>
+									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas de Negócios</a></li>
 									<?php } ?>
 									<!--<li role="separator" class="divider"></li>
 									<li><a href="<?php echo base_url() ?>login/sair"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>-->

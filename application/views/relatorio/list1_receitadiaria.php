@@ -1,4 +1,4 @@
-<div style="overflow: auto; height: 100px; ">		
+<div style="overflow: auto; height: 95px; ">		
 	<div class="panel panel-default">
 		<div class="panel-body">
 

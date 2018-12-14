@@ -135,14 +135,14 @@
 </div>
 </form>
 
-<div class="col-sm-offset-1 col-md-5">
+<div class="col-sm-offset-1 col-md-10">
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<?php echo form_open('relatorio/balanco', 'role="form"'); ?>
 			
 			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Receita" aria-expanded="false" aria-controls="Receita">
-				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo1; ?> 
+				<span class="glyphicon glyphicon-pencil"></span>Diário <?php #echo $titulo1; ?> 
 			</div>					
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar
@@ -152,32 +152,19 @@
 			</a>
 		</div>
 		<div <?php echo $collapse; ?> id="Receita">
-			<div class="panel-body">	
-				<?php echo (isset($list1)) ? $list1 : FALSE ?>
-			</div>
-		</div>	
-	</div>
-</div>
-
-<div class="col-md-5">
-	<?php echo validation_errors(); ?>
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<?php echo form_open('relatorio/balanco', 'role="form"'); ?>
-			
-			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Diario" aria-expanded="false" aria-controls="Diario">
-				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo2; ?> 
-			</div>					
-			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-				<span class="glyphicon glyphicon-filter"></span>Filtrar
-			</button>
-			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
-				<span class="glyphicon glyphicon-search"></span>Parcelas
-			</a>
-		</div>
-		<div <?php echo $collapse; ?> id="Diario">
-			<div class="panel-body">	
-				<?php echo (isset($list2)) ? $list2 : FALSE ?>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-md-6 text-left">
+						<div class="panel-body">	
+							<?php echo (isset($list1)) ? $list1 : FALSE ?>
+						</div>
+					</div>
+					<div class="col-md-6 text-left">
+						<div class="panel-body">	
+							<?php echo (isset($list2)) ? $list2 : FALSE ?>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>	
 	</div>
@@ -190,7 +177,7 @@
 			<?php echo form_open('relatorio/balanco', 'role="form"'); ?>
 			
 			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Anual" aria-expanded="false" aria-controls="Anual">
-				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo3; ?> 
+				<span class="glyphicon glyphicon-pencil"></span>Mensal <?php #echo $titulo3; ?> 
 			</div>					
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar
