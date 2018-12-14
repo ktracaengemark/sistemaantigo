@@ -97,169 +97,171 @@
 
 								<div class="panel-heading"><strong>Usuário</strong></div>
 								<div class="panel-body">
-									<table class="table table-user-information">
-										<tbody>
+									<div style="overflow: auto; height: 600px; ">
+										<table class="table table-user-information">
+											<tbody>
 
-											<?php
+												<?php
 
-											if ($query['idSis_Empresa']) {
+												if ($query['idSis_Empresa']) {
 
-											echo '
-											<tr>
-												<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-user"></span> Empresa:</td>
-												<td>' . $query['idSis_Empresa'] . '</td>
-											</tr>
-											';
+												echo '
+												<tr>
+													<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-user"></span> Empresa:</td>
+													<td>' . $query['idSis_Empresa'] . '</td>
+												</tr>
+												';
 
-											}
+												}
 
-											if ($query['DataNascimento']) {
+												if ($query['DataNascimento']) {
 
-											echo '
-											<tr>
-												<td><span class="glyphicon glyphicon-gift"></span> Data de Nascimento:</td>
-													<td>' . $query['DataNascimento'] . '</td>
-											</tr>
-											<tr>
-												<td><span class="glyphicon glyphicon-gift"></span> Idade:</td>
-													<td>' . $query['Idade'] . ' anos</td>
-											</tr>
-											';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-gift"></span> Data de Nascimento:</td>
+														<td>' . $query['DataNascimento'] . '</td>
+												</tr>
+												<tr>
+													<td><span class="glyphicon glyphicon-gift"></span> Idade:</td>
+														<td>' . $query['Idade'] . ' anos</td>
+												</tr>
+												';
 
-											}
+												}
 
-											if ($query['Celular']) {
+												if ($query['Celular']) {
 
-											echo '
-											<tr>
-												<td><span class="glyphicon glyphicon-phone-alt"></span> Celular:</td>
-												<td>' . $query['Celular'] . '</td>
-											</tr>
-											';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-phone-alt"></span> Celular:</td>
+													<td>' . $query['Celular'] . '</td>
+												</tr>
+												';
 
-											}
+												}
 
-											if ($query['Sexo']) {
+												if ($query['Sexo']) {
 
-											echo '
-											<tr>
-												<td><span class="glyphicon glyphicon-heart"></span> Sexo:</td>
-												<td>' . $query['Sexo'] . '</td>
-											</tr>
-											';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-heart"></span> Sexo:</td>
+													<td>' . $query['Sexo'] . '</td>
+												</tr>
+												';
 
-											}
+												}
 
-											if ($query['Email']) {
+												if ($query['Email']) {
 
-											echo '
-											<tr>
-												<td><span class="glyphicon glyphicon-envelope"></span> E-mail:</td>
-												<td>' . $query['Email'] . '</td>
-											</tr>
-											';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-envelope"></span> E-mail:</td>
+													<td>' . $query['Email'] . '</td>
+												</tr>
+												';
 
-											}
-											
-											if ($query['CpfUsuario']) {
+												}
+												
+												if ($query['CpfUsuario']) {
 
-											echo '
-											<tr>
-												<td><span class="glyphicon glyphicon-envelope"></span> CPF:</td>
-												<td>' . $query['CpfUsuario'] . '</td>
-											</tr>
-											';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-envelope"></span> CPF:</td>
+													<td>' . $query['CpfUsuario'] . '</td>
+												</tr>
+												';
 
-											}
-											
-											if ($query['RgUsuario']) {
+												}
+												
+												if ($query['RgUsuario']) {
 
-											echo '
-											<tr>
-												<td><span class="glyphicon glyphicon-envelope"></span> RG:</td>
-												<td>' . $query['RgUsuario'] . '</td>
-											</tr>
-											';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-envelope"></span> RG:</td>
+													<td>' . $query['RgUsuario'] . '</td>
+												</tr>
+												';
 
-											}
+												}
 
 
-											if ($query['Permissao']) {
+												if ($query['Permissao']) {
 
-											echo '
-											<tr>
-												<td><span class="glyphicon glyphicon-alert"></span> Nível:</td>
-												<td>' . $query['Permissao'] . '</td>
-											</tr>
-											';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-alert"></span> Nível:</td>
+													<td>' . $query['Permissao'] . '</td>
+												</tr>
+												';
 
-											}
+												}
 
-											if ($query['Funcao']) {
+												if ($query['Funcao']) {
 
-											echo '
-											<tr>
-												<td><span class="glyphicon glyphicon-alert"></span> Função:</td>
-												<td>' . $query['Funcao'] . '</td>
-											</tr>
-											';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-alert"></span> Função:</td>
+													<td>' . $query['Funcao'] . '</td>
+												</tr>
+												';
 
-											}
+												}
 
-											if ($query['Inativo']) {
+												if ($query['Inativo']) {
 
-											echo '
-											<tr>
-												<td><span class="glyphicon glyphicon-alert"></span> Ativo?:</td>
-												<td>' . $query['Inativo'] . '</td>
-											</tr>
-											';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-alert"></span> Ativo?:</td>
+													<td>' . $query['Inativo'] . '</td>
+												</tr>
+												';
 
-											}
-											
-											if ($query['CompAgenda']) {
+												}
+												
+												if ($query['CompAgenda']) {
 
-											echo '
-											<tr>
-												<td><span class="glyphicon glyphicon-alert"></span> Comp. Agd.?</td>
-												<td>' . $query['CompAgenda'] . '</td>
-											</tr>
-											';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-alert"></span> Comp. Agd.?</td>
+													<td>' . $query['CompAgenda'] . '</td>
+												</tr>
+												';
 
-											}
+												}
 
-											?>
+												?>
 
-										</tbody>
-									</table>
+											</tbody>
+										</table>
 
-									<div class="row">
+										<div class="row">
 
-										<div class="col-md-12">
+											<div class="col-md-12">
 
-											<div class="panel panel-primary">
+												<div class="panel panel-primary">
 
-												<div class="panel-heading"><strong>Contatos</strong></div>
-												<div class="panel-body">
+													<div class="panel-heading"><strong>Contatos</strong></div>
+													<div class="panel-body">
 
-													<?php
-													if (!$list) {
-													?>
-														<a class="btn btn-lg btn-warning" href="<?php echo base_url() ?>contatousuario/cadastrar" role="button">
-															<span class="glyphicon glyphicon-plus"></span> Cad.
-														</a>
-														<br><br>
-														<div class="alert alert-info" role="alert"><b>Nenhum Cad.</b></div>
-													<?php
-													} else {
-														echo $list;
-													}
-													?>
+														<?php
+														if (!$list) {
+														?>
+															<a class="btn btn-lg btn-warning" href="<?php echo base_url() ?>contatousuario/cadastrar" role="button">
+																<span class="glyphicon glyphicon-plus"></span> Cad.
+															</a>
+															<br><br>
+															<div class="alert alert-info" role="alert"><b>Nenhum Cad.</b></div>
+														<?php
+														} else {
+															echo $list;
+														}
+														?>
 
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
+									</div>	
 								</div>
 							</div>
 						</div>
