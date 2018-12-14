@@ -31,8 +31,8 @@
 				<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 					<div class="btn-group" role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa">	
-							<button type="button" class="btn btn-md active " id="countdowndiv">
-								<span class="glyphicon glyphicon-hourglass" id="clock"></span>Manutenção
+							<button type="button" class="btn btn-md active " id="countdowndiv">Manutenção
+								<span class="glyphicon glyphicon-hourglass" id="clock"></span>
 							</button>
 						</a>	
 					</div>

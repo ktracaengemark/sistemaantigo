@@ -13,13 +13,12 @@ class Loginempresa_model extends CI_Model {
 
     }
 
-    public function check_dados_usuario($senha, $usuario, $retorna = FALSE) {
+    public function check_dados_cpfusuario($senha, $cpfusuario, $retorna = FALSE) {
 
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE '
-                . '(UsuarioEmpresa = "' . $usuario . '" AND '
-                . 'Senha = "' . $senha . '") OR '
-                . '(Email = "' . $usuario . '" AND '
+                . '(CpfAdmin = "' . $cpfusuario . '" AND '
                 . 'Senha = "' . $senha . '")'
+
         );
         #$query = $this->db->get_where('Sis_Empresa', $data);
         /*
@@ -44,12 +43,10 @@ class Loginempresa_model extends CI_Model {
 
     }
 	
-	public function check_dados_empresa($empresa, $usuario, $retorna = FALSE) {
+	public function check_dados_empresa($empresa, $cpfusuario, $retorna = FALSE) {
 
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE '
-                . '(UsuarioEmpresa = "' . $usuario . '" AND '
-                . 'idSis_Empresa = "' . $empresa . '") OR '
-                . '(Email = "' . $usuario . '" AND '
+                . '(CpfAdmin = "' . $cpfusuario . '" AND '
                 . 'idSis_Empresa = "' . $empresa . '")'
         );
         #$query = $this->db->get_where('Sis_Usuario', $data);
@@ -75,9 +72,11 @@ class Loginempresa_model extends CI_Model {
 
     }
 	
-    public function check_usuario($data) {
+    public function check_cpfusuario($cpfusuario) {
 
-        $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE UsuarioEmpresa = "' . $data . '" OR Email = "' . $data . '"');
+        $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE '
+                . '(CpfAdmin = "' . $cpfusuario . '" ) '
+        );
         if ($query->num_rows() === 0) {
             return 1;
         }
@@ -127,12 +126,12 @@ class Loginempresa_model extends CI_Model {
 
     }
 
-    public function set_acesso($usuario, $operacao) {
+    public function set_acesso($cpfusuario, $operacao) {
 
         $data = array(
             'Data' => date('Y-m-d H:i:s'),
             'Operacao' => $operacao,
-            'idSis_Empresa' => $usuario,
+            'idSis_Empresa' => $cpfusuario,
             'Ip' => $this->input->ip_address(),
             'So' => $this->agent->platform(),
             'Navegador' => $this->agent->browser(),
