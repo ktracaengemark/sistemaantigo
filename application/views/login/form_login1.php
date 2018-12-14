@@ -33,7 +33,7 @@
 	</select> 
     <?php echo form_error('idSis_Empresa'); ?>
 	<label class="sr-only">Cpf do Usuário</label>
-    <input type="text" id="inputText" class="form-control" placeholder="CPF do Usuário" autofocus name="CpfUsuario" value="<?php echo set_value('CpfUsuario'); ?>">	   
+    <input type="text" id="inputText" maxlength="11" class="form-control" placeholder="CPF do Usuário - 99999999999" autofocus name="CpfUsuario" value="<?php echo set_value('CpfUsuario'); ?>">	   
 	<?php echo form_error('CpfUsuario'); ?>
 	<label class="sr-only">Senha</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">

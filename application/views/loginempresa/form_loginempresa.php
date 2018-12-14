@@ -32,7 +32,7 @@
 	</select> 
     <?php echo form_error('idSis_Empresa'); ?>
 	<label class="sr-only">CPF do Admin</label>
-    <input type="text" id="inputText" class="form-control" placeholder="CPF do Admin" autofocus name="CpfAdmin" value="<?php echo set_value('CpfAdmin'); ?>">	   
+    <input type="text" id="inputText" maxlength="11" class="form-control" placeholder="CPF do Admin - 99999999999" autofocus name="CpfAdmin" value="<?php echo set_value('CpfAdmin'); ?>">	   
 	<?php echo form_error('CpfAdmin'); ?>
 	<label class="sr-only">Senha</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
