@@ -553,6 +553,29 @@ class Basico_model extends CI_Model {
         }
     }
 	
+	public function get_categoriaempresa($data) {
+
+        if (isset($data) && $data) {
+
+			$query = $this->db->query('
+				SELECT *
+					FROM
+						Tab_CategoriaEmpresa
+					WHERE
+						idTab_CategoriaEmpresa = "' . $data . '"
+				');
+
+            if ($query->num_rows() === 0) {
+                return '';
+            } else {
+                $query = $query->result_array();
+                return $query[0]['CategoriaEmpresa'];
+            }
+        } else {
+            return '';
+        }
+    }	
+	
 	public function get_profissional($data) {
 
         if (isset($data) && $data) {
@@ -1156,6 +1179,22 @@ class Basico_model extends CI_Model {
 
         return $array;
     }
+	
+	public function select_categoriaempresa($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('SELECT * FROM Tab_CategoriaEmpresa');
+        } else {
+            $query = $this->db->query('SELECT * FROM Tab_CategoriaEmpresa');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_CategoriaEmpresa] = $row->CategoriaEmpresa;
+            }
+        }
+
+        return $array;
+    }	
 	
 	public function select_categoriadesp($data = FALSE) {
 

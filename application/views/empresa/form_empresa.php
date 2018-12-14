@@ -140,10 +140,31 @@
 									<br>
 									<div class="form-group">
 										<div class="row">
-											<div class="col-md-12">
+											<div class="col-md-3">
+												<label for="CategoriaEmpresa">Categoria:*</label>
+												<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+														id="CategoriaEmpresa" name="CategoriaEmpresa">
+													<option value="">-- Selec. uma Categoria --</option>
+													<?php
+													foreach ($select['CategoriaEmpresa'] as $key => $row) {
+														if ($query['CategoriaEmpresa'] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>   
+												</select>          
+											</div>
+											<div class="col-md-6">
 												<label for="Atuacao">Atuação:</label>
 												<textarea class="form-control" id="Atuacao" <?php echo $readonly; ?>
 														  name="Atuacao"><?php echo $query['Atuacao']; ?></textarea>
+											</div>
+											<div class="col-md-3">
+												<label for="Site">Site:</label>
+												<input type="text" class="form-control" maxlength="50" <?php echo $readonly; ?>
+													   name="Site" value="<?php echo $query['Site']; ?>">
 											</div>
 										</div>
 									</div>

@@ -3,13 +3,26 @@
 
 <div class="container-fluid">
 	<div class="row">
-	
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
-		
+		<div class="col-sm-offset-2 col-md-8">
+		<?php echo form_open_multipart($form_open_path); ?>
 			<div class="panel panel-primary">
 				
-				<div class="panel-heading"><strong><?php echo '<strong>' . $_SESSION['Usuario']['Nome'] . '</strong> - <small>Id.: ' . $_SESSION['Usuario']['idSis_Usuario'] . '</small>' ?></strong></div>
+				<div class="panel-heading">
+					<label class="sr-only" for="idSis_Empresa">Empresa:*</label>
+					<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> readonly=""
+							id="idSis_Empresa" name="idSis_Empresa">
+
+						<?php
+						foreach ($select['idSis_Empresa'] as $key => $row) {
+							if ($query['idSis_Empresa'] == $key) {
+								echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+							} else {
+								echo '<option value="' . $key . '">' . $row . '</option>';
+							}
+						}
+						?>
+					</select>
+				</div>
 				<div class="panel-body">
 			
 					<nav class="navbar navbar-inverse">
@@ -90,25 +103,24 @@
 
 					<?php } ?>
 					
-					<div class="row">
-						<div class="col-md-12 col-lg-12">	
-							
+					<div class="panel-body">
+						
+						<div class="row">
+								
 							<?php echo validation_errors(); ?>
 
 							<div class="panel panel-<?php echo $panel; ?>">
 
-								<div class="panel-heading"><strong>Funcionário</strong></div>
+								<div class="panel-heading"><strong>Usuário</strong></div>
 								<div class="panel-body">
 									<div class="panel panel-info">
 										<div class="panel-heading">
-											<?php echo form_open_multipart($form_open_path); ?>
-
 											<div class="form-group">
 												<div class="row">
 													<div class="col-md-3">
-														<label for="Nome">Nome do Funcionário:</label>
+														<label for="Nome">Nome do Usuário:</label>
 														<input type="text" class="form-control" id="Nome" maxlength="45" 
-																name="Nome" autofocus value="<?php echo $query['Nome']; ?>">
+																autofocus name="Nome"  value="<?php echo $query['Nome']; ?>">
 													</div>																		
 													<div class="col-md-3">
 														<label for="Celular">Tel.- Fixo ou Celular*</label>
@@ -136,122 +148,6 @@
 															?>
 														</select>
 													</div>						
-												</div>
-											</div>
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-3">
-														<label for="CpfUsuario">Cpf:</label>
-														<input type="text" class="form-control" maxlength="11" <?php echo $readonly; ?>
-															   name="CpfUsuario" value="<?php echo $query['CpfUsuario']; ?>">
-													</div>
-													<div class="col-md-3">
-														<label for="RgUsuario">RG:</label>
-														<input type="text" class="form-control" maxlength="9" <?php echo $readonly; ?>
-															   name="RgUsuario" value="<?php echo $query['RgUsuario']; ?>">
-													</div>
-													<div class="col-md-2">
-														<label for="OrgaoExpUsuario">Orgão Exp.:</label>
-														<input type="text" class="form-control" maxlength="45" <?php echo $readonly; ?>
-															   name="OrgaoExpUsuario" value="<?php echo $query['OrgaoExpUsuario']; ?>">
-													</div>
-													<div class="col-md-1">
-														<label for="EstadoEmUsuario">Est. Exp:</label>
-														<input type="text" class="form-control" maxlength="2" <?php echo $readonly; ?>
-															   name="EstadoEmUsuario" value="<?php echo $query['EstadoEmUsuario']; ?>">
-													</div>
-													<div class="col-md-3">
-														<label for="DataEmUsuario">Data de Emissão:</label>
-														<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
-															   name="DataEmUsuario" placeholder="DD/MM/AAAA" value="<?php echo $query['DataEmUsuario']; ?>">
-													</div>
-												</div>
-											</div>
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-3">
-														<label for="EnderecoUsuario">Endreço:</label>
-														<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
-															   name="EnderecoUsuario" value="<?php echo $query['EnderecoUsuario']; ?>">
-													</div>
-													<div class="col-md-3">
-														<label for="BairroUsuario">Bairro:</label>
-														<input type="text" class="form-control"  maxlength="100" <?php echo $readonly; ?>
-															   name="BairroUsuario" value="<?php echo $query['BairroUsuario']; ?>">
-													</div>
-													<div class="col-md-3">
-														<label for="MunicipioUsuario">Municipio:</label>
-														<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
-															   name="MunicipioUsuario" value="<?php echo $query['MunicipioUsuario']; ?>">
-													</div>												
-													<div class="col-md-1">
-														<label for="EstadoUsuario">Estado:</label>
-														<input type="text" class="form-control" maxlength="2" <?php echo $readonly; ?>
-															   name="EstadoUsuario" value="<?php echo $query['EstadoUsuario']; ?>">
-													</div>
-													<div class="col-md-2">
-														<label for="CepUsuario">Cep:</label>
-														<input type="text" class="form-control" maxlength="8" <?php echo $readonly; ?>
-															   name="CepUsuario" value="<?php echo $query['CepUsuario']; ?>">
-													</div>
-												</div>
-											</div>
-											<div class="form-group">
-												<div class="row">
-												
-													<div class="col-md-3">
-														<label for="Email">E-mail:</label>
-														<input type="text" class="form-control" id="Bairro" maxlength="100" <?php echo $readonly; ?>
-															   name="Email" value="<?php echo $query['Email']; ?>">
-													</div>
-													<div class="col-md-2">
-														<label for="Inativo">Ativo?</label><br>
-														<div class="form-group">
-															<div class="btn-group" data-toggle="buttons">
-																<?php
-																foreach ($select['Inativo'] as $key => $row) {
-																	(!$query['Inativo']) ? $query['Inativo'] = '0' : FALSE;
-
-																	if ($query['Inativo'] == $key) {
-																		echo ''
-																		. '<label class="btn btn-warning active" name="radiobutton_Inativo" id="radiobutton_Inativo' . $key . '">'
-																		. '<input type="radio" name="Inativo" id="radiobutton" '
-																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																		. '</label>'
-																		;
-																	} else {
-																		echo ''
-																		. '<label class="btn btn-default" name="radiobutton_Inativo" id="radiobutton_Inativo' . $key . '">'
-																		. '<input type="radio" name="Inativo" id="radiobutton" '
-																		. 'autocomplete="off" value="' . $key . '" >' . $row
-																		. '</label>'
-																		;
-																	}
-																}
-																?>
-															</div>
-														</div>
-													</div>
-													<!--
-													<div class="col-md-3">
-														<label for="Usuario">Usuário:</label>
-														<input type="text" class="form-control" id="Usuario" maxlength="45" 
-															   autofocus name="Usuario" value="<?php echo $query['Usuario']; ?>">
-														<?php echo form_error('Usuario'); ?>
-													</div>						
-													<div class="col-md-3">
-														<label for="Senha">Senha:</label>
-														<input type="password" class="form-control" id="Senha" maxlength="45"
-															   name="Senha" value="<?php echo $query['Senha']; ?>">
-														<?php echo form_error('Senha'); ?>
-													</div>
-													<div class="col-md-3">
-														<label for="Senha">Confirmar Senha:</label>
-														<input type="password" class="form-control" id="Confirma" maxlength="45"
-															   name="Confirma" value="<?php echo $query['Confirma']; ?>">
-														<?php echo form_error('Confirma'); ?>
-													</div>
-													-->
 												</div>
 											</div>
 											<div class="form-group">
@@ -294,6 +190,35 @@
 														</select>          
 													</div>
 													<div class="col-md-2">
+														<label for="Inativo">Ativo?</label><br>
+														<div class="form-group">
+															<div class="btn-group" data-toggle="buttons">
+																<?php
+																foreach ($select['Inativo'] as $key => $row) {
+																	(!$query['Inativo']) ? $query['Inativo'] = '0' : FALSE;
+
+																	if ($query['Inativo'] == $key) {
+																		echo ''
+																		. '<label class="btn btn-warning active" name="radiobutton_Inativo" id="radiobutton_Inativo' . $key . '">'
+																		. '<input type="radio" name="Inativo" id="radiobutton" '
+																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																		. '</label>'
+																		;
+																	} else {
+																		echo ''
+																		. '<label class="btn btn-default" name="radiobutton_Inativo" id="radiobutton_Inativo' . $key . '">'
+																		. '<input type="radio" name="Inativo" id="radiobutton" '
+																		. 'autocomplete="off" value="' . $key . '" >' . $row
+																		. '</label>'
+																		;
+																	}
+																}
+																?>
+															</div>
+														</div>
+													</div>
+													<!--
+													<div class="col-md-2">
 														<label for="CompAgenda">Comp. Agenda?</label><br>
 														<div class="form-group">
 															<div class="btn-group" data-toggle="buttons">
@@ -321,8 +246,117 @@
 															</div>
 														</div>
 													</div>
+													-->
 												</div>
 											</div>
+											<div class="form-group">
+												<div class="row">
+													<div class="col-md-3">
+														<label for="CpfUsuario">Cpf:</label>
+														<input type="text" class="form-control" maxlength="11" <?php echo $readonly; ?>
+															   name="CpfUsuario" value="<?php echo $query['CpfUsuario']; ?>">
+													<?php echo form_error('CpfUsuario'); ?>
+													</div>
+													<!--
+													<div class="col-md-3">
+														<label for="Senha">Senha:</label>
+														<input type="password" class="form-control" id="Senha" maxlength="45"
+															   name="Senha" value="<?php #echo $query['Senha']; ?>">
+														<?php #echo form_error('Senha'); ?>
+													</div>
+													<div class="col-md-3">
+														<label for="Senha">Confirmar Senha:</label>
+														<input type="password" class="form-control" id="Confirma" maxlength="45"
+															   name="Confirma" value="<?php #echo $query['Confirma']; ?>">
+														<?php #echo form_error('Confirma'); ?>
+													</div>
+													-->
+													<div class="col-md-3">
+														<label for="Email">E-mail:</label>
+														<input type="text" class="form-control" id="Bairro" maxlength="100" <?php echo $readonly; ?>
+															   name="Email" value="<?php echo $query['Email']; ?>">
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="row">
+													<div class="col-md-12 text-center">
+														<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#DadosComplementares" aria-expanded="false" aria-controls="DadosComplementares">
+															<span class="glyphicon glyphicon-menu-down"></span> Completar Dados
+														</button>
+													</div>
+												</div>
+											</div>
+
+											<div <?php echo $collapse; ?> id="DadosComplementares">
+												<div class="form-group">
+													<div class="row">		
+														<div class="col-md-3">
+															<label for="RgUsuario">RG:</label>
+															<input type="text" class="form-control" maxlength="9" <?php echo $readonly; ?>
+																   name="RgUsuario" value="<?php echo $query['RgUsuario']; ?>">
+														</div>
+														<div class="col-md-3">
+															<label for="OrgaoExpUsuario">Orgão Exp.:</label>
+															<input type="text" class="form-control" maxlength="45" <?php echo $readonly; ?>
+																   name="OrgaoExpUsuario" value="<?php echo $query['OrgaoExpUsuario']; ?>">
+														</div>
+														<div class="col-md-3">
+															<label for="DataEmUsuario">Data de Emissão:</label>
+															<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
+																   name="DataEmUsuario" placeholder="DD/MM/AAAA" value="<?php echo $query['DataEmUsuario']; ?>">
+														</div>
+														<div class="col-md-1">
+															<label for="EstadoEmUsuario">Est.:</label>
+															<input type="text" class="form-control" maxlength="2" <?php echo $readonly; ?>
+																   name="EstadoEmUsuario" value="<?php echo $query['EstadoEmUsuario']; ?>">
+														</div>
+													</div>
+												</div>	
+												<div class="form-group">
+													<div class="row">
+														<div class="col-md-3">
+															<label for="EnderecoUsuario">Endreço:</label>
+															<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
+																   name="EnderecoUsuario" value="<?php echo $query['EnderecoUsuario']; ?>">
+														</div>
+														<div class="col-md-3">
+															<label for="BairroUsuario">Bairro:</label>
+															<input type="text" class="form-control"  maxlength="100" <?php echo $readonly; ?>
+																   name="BairroUsuario" value="<?php echo $query['BairroUsuario']; ?>">
+														</div>
+														<div class="col-md-3">
+															<label for="MunicipioUsuario">Municipio:</label>
+															<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
+																   name="MunicipioUsuario" value="<?php echo $query['MunicipioUsuario']; ?>">
+														</div>												
+														<div class="col-md-1">
+															<label for="EstadoUsuario">Estado:</label>
+															<input type="text" class="form-control" maxlength="2" <?php echo $readonly; ?>
+																   name="EstadoUsuario" value="<?php echo $query['EstadoUsuario']; ?>">
+														</div>
+														<div class="col-md-2">
+															<label for="CepUsuario">Cep:</label>
+															<input type="text" class="form-control" maxlength="8" <?php echo $readonly; ?>
+																   name="CepUsuario" value="<?php echo $query['CepUsuario']; ?>">
+														</div>
+													</div>
+												</div>
+												<!--
+												<div class="form-group">
+													<div class="row">		
+														
+														<div class="col-md-3">
+															<label for="Usuario">Usuário:</label>
+															<input type="text" class="form-control" id="Usuario" maxlength="45" 
+																   name="Usuario" value="<?php echo $query['Usuario']; ?>">
+															<?php #echo form_error('Usuario'); ?>
+														</div>
+														
+													</div>
+												</div>
+												-->
+											</div>	
 											<br>
 											<div class="form-group">
 												<div class="row">
@@ -387,16 +421,17 @@
 												</div>
 											</div>
 
-											</form>
+										</form>
+								
 										</div>
 									</div>
 								</div>
 							</div>							
+							
 						</div>
 					</div>
 				</div>	
 			</div>		
 		</div>
-		<div class="col-md-2"></div>
 	</div>	
 </div>

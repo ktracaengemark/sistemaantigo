@@ -220,12 +220,12 @@ class Loginempresa extends CI_Controller {
             } else {
 
                           
-                $this->load->library('email');
+                #$this->load->library('email');
 
-                $this->email->from('contato@ktracaengemark.com.br', 'KTRACA Engenharia & Marketing');
-                $this->email->to($data['query']['Email']);
+                #$this->email->from('contato@ktracaengemark.com.br', 'KTRACA Engenharia & Marketing');
+                #$this->email->to($data['query']['Email']);
 
-                $this->email->subject('[KTRACA] Confirmação de registro - Usuário: ' . $data['query']['UsuarioEmpresa']);
+                #$this->email->subject('[KTRACA] Confirmação de registro - Usuário: ' . $data['query']['UsuarioEmpresa']);
                 /*
                   $this->email->message('Por favor, clique no link a seguir para confirmar seu registro: '
                   . 'http://www.romati.com.br/app/loginempresa/confirmar/' . $data['query']['Codigo']);
@@ -244,10 +244,10 @@ class Loginempresa extends CI_Controller {
                   . '';
                  */
 
-                $this->email->message('Sua conta foi ativada com sucesso! Aproveite e teste todas as funcionalidades do sistema.'
-                        . 'Qualquer sugestão ou crítica será bem vinda. ');
+                #$this->email->message('Sua conta foi ativada com sucesso! Aproveite e teste todas as funcionalidades do sistema.'
+                        #. 'Qualquer sugestão ou crítica será bem vinda. ');
 
-                $this->email->send();
+                #$this->email->send();
 
                 $data['aviso'] = ''
                         . '

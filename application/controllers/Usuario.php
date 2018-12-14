@@ -78,8 +78,8 @@ class Usuario extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
 		$this->form_validation->set_rules('CpfUsuario', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		$this->form_validation->set_rules('Usuario', 'Usuario', 'required|trim|is_unique_duplo[Sis_Usuario.Usuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email|is_unique_duplo[Sis_Usuario.Email.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		#$this->form_validation->set_rules('Usuario', 'Usuario', 'required|trim|is_unique_duplo[Sis_Usuario.Usuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email|is_unique_duplo[Sis_Usuario.Email.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
@@ -103,6 +103,13 @@ class Usuario extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
 
+        if ($data['query']['EnderecoUsuario'] || $data['query']['BairroUsuario'] ||
+			$data['query']['MunicipioUsuario'] || $data['query']['CepUsuario'] || $data['query']['CpfUsuario'] || 
+			$data['query']['RgUsuario']  || $data['query']['OrgaoExpUsuario'] || $data['query']['EstadoEmUsuario']  || $data['query']['DataEmUsuario'])
+            $data['collapse'] = '';
+        else
+            $data['collapse'] = 'class="collapse"';
+		
         $data['sidebar'] = 'col-sm-3 col-md-2';
         $data['main'] = 'col-sm-7 col-md-8';
 
@@ -172,7 +179,7 @@ class Usuario extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-
+			
 			'idSis_Usuario',
 			#'Usuario',
             'Nome',
@@ -219,6 +226,7 @@ class Usuario extends CI_Controller {
 		$data['select']['Permissao'] = $this->Basico_model->select_permissao();
 		$data['select']['Funcao'] = $this->Funcao_model->select_funcao();
 		$data['select']['CompAgenda'] = $this->Basico_model->select_status_sn();
+		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa2();
 		
         $data['titulo'] = 'Editar Usuário';
         $data['form_open_path'] = 'usuario/alterar';
@@ -227,7 +235,12 @@ class Usuario extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
-
+        if ($data['query']['EnderecoUsuario'] || $data['query']['BairroUsuario'] ||
+			$data['query']['MunicipioUsuario'] || $data['query']['CepUsuario'] || $data['query']['RgUsuario']  || 
+			$data['query']['OrgaoExpUsuario'] || $data['query']['EstadoEmUsuario']  || $data['query']['DataEmUsuario'])
+            $data['collapse'] = '';
+        else
+            $data['collapse'] = 'class="collapse"';
 
         $data['nav_secundario'] = $this->load->view('usuario/nav_secundario', $data, TRUE);
 

@@ -23,7 +23,7 @@
 
 	<label for="NomeEmpresa">Nome da Empresa:</label>
 	<input type="text" class="form-control" id="NomeEmpresa" maxlength="45" 
-		   name="NomeEmpresa" value="<?php echo $query['NomeEmpresa']; ?>">
+		   autofocus name="NomeEmpresa" value="<?php echo $query['NomeEmpresa']; ?>">
 	<?php echo form_error('NomeEmpresa'); ?>
 	<br>
 <!--
@@ -50,12 +50,6 @@
     <?php echo form_error('NomeAdmin'); ?>
     <br>
 
-	<label for="CpfAdmin">CPF do Administrador:</label>
-    <input type="text" class="form-control " id="CpfAdmin" maxlength="11"
-           name="CpfAdmin" placeholder="99999999999" value="<?php echo $query['CpfAdmin']; ?>">
-    <?php echo form_error('CpfAdmin'); ?>
-    <br>
-
     <label for="Celular">Celular do Administrador:</label>
     <input type="text" class="form-control Celular Celular" id="Celular" maxlength="11"
            name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
@@ -73,7 +67,13 @@
            name="UsuarioEmpresa" value="<?php echo $query['UsuarioEmpresa']; ?>">
     <?php #echo form_error('UsuarioEmpresa'); ?>
     <br>
--->	
+-->
+	<label for="CpfAdmin">CPF do Administrador:</label>
+    <input type="text" class="form-control " id="CpfAdmin" maxlength="11"
+           name="CpfAdmin" placeholder="99999999999" value="<?php echo $query['CpfAdmin']; ?>">
+    <?php echo form_error('CpfAdmin'); ?>
+    <br>
+	
     <label for="Senha">Senha:</label>
     <input type="password" class="form-control" id="Senha" maxlength="45"
            name="Senha" value="<?php echo $query['Senha']; ?>">

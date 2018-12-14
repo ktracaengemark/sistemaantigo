@@ -159,6 +159,8 @@ class Empresa extends CI_Controller {
 			'Atuacao',
 			#'Sexo',
 			#'Inativo',
+			'CategoriaEmpresa',
+			'Site',
 
         ), TRUE);
 
@@ -176,6 +178,7 @@ class Empresa extends CI_Controller {
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
+		$data['select']['CategoriaEmpresa'] = $this->Basico_model->select_categoriaempresa();
         #$data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		#$data['select']['Empresa'] = $this->Basico_model->select_status_sn();
 		#$data['select']['Inativo'] = $this->Basico_model->select_inativo();
@@ -336,6 +339,7 @@ class Empresa extends CI_Controller {
         #$data['query']['Sexo'] = $this->Basico_model->get_sexo($data['query']['Sexo']);
 		$data['query']['Inativo'] = $this->Basico_model->get_inativo($data['query']['Inativo']);
 		$data['query']['Empresa'] = $this->Basico_model->get_empresa($data['query']['NomeEmpresa']);
+		$data['query']['CategoriaEmpresa'] = $this->Basico_model->get_categoriaempresa($data['query']['CategoriaEmpresa']);
 		#$data['query']['Empresa'] = $data['query']['Empresa'];
 
         $data['query']['Telefone'] = $data['query']['Celular'];

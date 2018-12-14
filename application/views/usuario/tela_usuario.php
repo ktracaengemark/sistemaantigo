@@ -4,8 +4,7 @@
 <div class="container-fluid">
 	<div class="row">
 
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-offset-2 col-md-8">
 
 			<div class="panel panel-primary">
 
@@ -92,7 +91,7 @@
 
 					<div class="row">
 
-						<div class="col-md-12 col-lg-12">
+						<div class="col-md-12">
 
 							<div class="panel panel-<?php echo $panel; ?>">
 
@@ -166,7 +165,7 @@
 
 											echo '
 											<tr>
-												<td><span class="glyphicon glyphicon-envelope"></span> E-mail:</td>
+												<td><span class="glyphicon glyphicon-envelope"></span> CPF:</td>
 												<td>' . $query['CpfUsuario'] . '</td>
 											</tr>
 											';
@@ -177,7 +176,7 @@
 
 											echo '
 											<tr>
-												<td><span class="glyphicon glyphicon-envelope"></span> E-mail:</td>
+												<td><span class="glyphicon glyphicon-envelope"></span> RG:</td>
 												<td>' . $query['RgUsuario'] . '</td>
 											</tr>
 											';
@@ -236,7 +235,7 @@
 
 									<div class="row">
 
-										<div class="col-md-12 col-lg-12">
+										<div class="col-md-12">
 
 											<div class="panel panel-primary">
 
@@ -268,6 +267,5 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-2"></div>
 	</div>
 </div>
