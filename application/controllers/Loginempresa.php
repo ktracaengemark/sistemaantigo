@@ -160,8 +160,8 @@ class Loginempresa extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-            'Email',
-            'UsuarioEmpresa',
+            #'Email',
+            #'UsuarioEmpresa',
 			'NomeEmpresa',
             'NomeAdmin',
             'CpfAdmin',
@@ -178,13 +178,13 @@ class Loginempresa extends CI_Controller {
 	
 		$this->form_validation->set_rules('CpfAdmin', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CpfAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
 		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
-		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email');		
-        $this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
+		#$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email');		
+        #$this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
 		$this->form_validation->set_rules('NomeAdmin', 'Nome do Administrador', 'required|trim');      	
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
 		$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
-		$this->form_validation->set_rules('NumUsuarios', 'Número de Usuários', 'required|trim');
+		#$this->form_validation->set_rules('NumUsuarios', 'Número de Usuários', 'required|trim');
 		
 		$data['select']['NumUsuarios'] = $this->Basico_model->select_numusuarios();
 		
@@ -199,6 +199,7 @@ class Loginempresa extends CI_Controller {
 			$data['query']['PermissaoEmpresa'] = 1;
 			$data['query']['NivelEmpresa'] = 3;
 			$data['query']['idTab_Modulo'] = 1;
+			$data['query']['NumUsuarios'] = 1;
             $data['query']['DataCriacao'] = $this->basico->mascara_data($data['query']['DataCriacao'], 'mysql');
 			$data['query']['Senha'] = md5($data['query']['Senha']);
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));
@@ -283,8 +284,8 @@ class Loginempresa extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-            'Email',
-            'UsuarioEmpresa',
+            #'Email',
+            #'UsuarioEmpresa',
 			'NomeEmpresa',
             'NomeAdmin',
             'CpfAdmin',
@@ -308,7 +309,7 @@ class Loginempresa extends CI_Controller {
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
 		$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
-		$this->form_validation->set_rules('NumUsuarios', 'Número de Usuários', 'required|trim');
+		#$this->form_validation->set_rules('NumUsuarios', 'Número de Usuários', 'required|trim');
 		
 		$data['select']['NumUsuarios'] = $this->Basico_model->select_numusuarios();
         $data['select']['Associado'] = $this->Basico_model->select_empresa3();
@@ -324,6 +325,7 @@ class Loginempresa extends CI_Controller {
 			$data['query']['PermissaoEmpresa'] = 1;
 			$data['query']['NivelEmpresa'] = 3;
 			$data['query']['idTab_Modulo'] = 1;
+			$data['query']['NumUsuarios'] = 1;
             $data['query']['DataCriacao'] = $this->basico->mascara_data($data['query']['DataCriacao'], 'mysql');
 			$data['query']['Senha'] = md5($data['query']['Senha']);
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));

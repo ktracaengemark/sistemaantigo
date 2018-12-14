@@ -584,9 +584,9 @@ class Login extends CI_Controller {
 
         $data['query'] = $this->input->post(array(
             'idSis_Empresa',
-			'Email',
-            'ConfirmarEmail',
-            'Usuario',
+			#'Email',
+            #'ConfirmarEmail',
+            #'Usuario',
             'Nome',
 			'CpfUsuario',
             'Senha',
@@ -606,9 +606,9 @@ class Login extends CI_Controller {
 
 		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Usuario.NomeEmpresa]');
         $this->form_validation->set_rules('CpfUsuario', 'Cpf do Usuário', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email|is_unique_duplo[Sis_Usuario.Email.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-        $this->form_validation->set_rules('ConfirmarEmail', 'Confirmar E-mail', 'required|trim|valid_email|matches[Email]');
-        $this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim|is_unique_duplo[Sis_Usuario.Usuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		#$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email|is_unique_duplo[Sis_Usuario.Email.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+        #$this->form_validation->set_rules('ConfirmarEmail', 'Confirmar E-mail', 'required|trim|valid_email|matches[Email]');
+        #$this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim|is_unique_duplo[Sis_Usuario.Usuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
@@ -684,19 +684,19 @@ class Login extends CI_Controller {
                 $config['smtp_crypto'] = 'tls';
                 $config['newline'] = "\r\n";
 
-                $this->email->initialize($config);
+                #$this->email->initialize($config);
 
-                $this->email->from('contato@ktracaengemark.com.br', 'KTRACA Engenharia & Marketing');
-                $this->email->to($data['query']['Email']);
+                #$this->email->from('contato@ktracaengemark.com.br', 'KTRACA Engenharia & Marketing');
+                #$this->email->to($data['query']['Email']);
 
-                $this->email->subject('[KTRACA] Confirmação de registro - Usuário: ' . $data['query']['Usuario']);
+                #$this->email->subject('[KTRACA] Confirmação de registro - Usuário: ' . $data['query']['Usuario']);
 
                 #$this->email->message('Por favor, clique no link a seguir para confirmar seu registro: '
                 #. 'http://www.romati.com.br/app/login/confirmar/' . $data['query']['Codigo']);
                 $this->email->message('Por favor, clique no link a seguir para confirmar seu registro: '
                     . base_url() . 'login/confirmar/' . $data['query']['Codigo']);
 
-                $this->email->send();
+                #$this->email->send();
                 #echo ($this->email->send(FALSE)) ? "sim" : "não";
                 #echo $this->email->print_debugger(array('headers'));
 
@@ -707,7 +707,9 @@ class Login extends CI_Controller {
 
                         <p><b>Usuário cadastrado com sucesso!</b></p>
                         <p>Entretanto, ele ainda encontra-se inativo no sistema. Um link de ativação foi gerado e enviado para
-                            o e-mail <b>' . $data['query']['Email'] . '</b></p>
+						
+                            o Celular <b>' . $data['query']['Celular'] . '</b></p>
+							
                         <p>Entre em sua caixa de e-mail e clique no link de ativação para habilitar seu acesso ao sistema.</p>
                         <p>Caso o e-mail com o link não esteja na sua caixa de entrada <b>verifique também sua caixa de SPAM</b>.</p>
 

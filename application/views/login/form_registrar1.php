@@ -26,13 +26,13 @@
 		   name="NomeEmpresa" value="<?php echo $query['NomeEmpresa']; ?>">
 	<?php echo form_error('NomeEmpresa'); ?>
 	<br>
-
+<!--
 	<label for="NumUsuarios">Nº de Usuários:</label>
 	<input type="text" class="form-control" id="NumUsuarios" maxlength="45"
 		   name="NumUsuarios" value="<?php echo $query['NumUsuarios']; ?>">
-	<?php echo form_error('NumUsuarios'); ?>
+	<?php echo #form_error('NumUsuarios'); ?>
 	<br>
-
+-->
 	<label for="Nome">Nome do Usuário Admin.:</label>
     <input type="text" class="form-control" id="Nome" maxlength="255"
            name="Nome" value="<?php echo $query['Nome']; ?>">

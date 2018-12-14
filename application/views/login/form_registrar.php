@@ -43,12 +43,6 @@
            name="Nome" value="<?php echo $query['Nome']; ?>">
     <?php echo form_error('Nome'); ?>
     <br>
-
-	<label for="CpfUsuario">CPF do Usuário:</label>
-    <input type="text" class="form-control " id="CpfUsuario" maxlength="11"
-           name="CpfUsuario" placeholder="99999999999" value="<?php echo $query['CpfUsuario']; ?>">
-    <?php echo form_error('CpfUsuario'); ?>
-    <br>
 	
     <label for="Celular">Celular:</label>
     <input type="text" class="form-control Celular Celular" id="Celular" maxlength="11"
@@ -77,25 +71,31 @@
     </select>
     <?php echo form_error('Sexo'); ?>
     <br>
-
+<!--
     <label class="text-">E-mail:</label>
     <input type="text" class="form-control" id="Email" maxlength="100"
-           name="Email" value="<?php echo $query['Email']; ?>">
-    <?php echo form_error('Email'); ?>
+           name="Email" value="<?php #echo $query['Email']; ?>">
+    <?php #echo form_error('Email'); ?>
     <br>
 
     <label class="text-">Confirmar E-mail:</label>
     <input type="text" class="form-control" id="ConfirmarEmail" maxlength="100"
-           name="ConfirmarEmail" value="<?php echo $query['ConfirmarEmail']; ?>">
-    <?php echo form_error('ConfirmarEmail'); ?>
+           name="ConfirmarEmail" value="<?php #echo $query['ConfirmarEmail']; ?>">
+    <?php #echo form_error('ConfirmarEmail'); ?>
     <br>
 	
     <label for="Usuario">Usuário:</label>
     <input type="text" class="form-control" id="Usuario" maxlength="45"
-           name="Usuario" value="<?php echo $query['Usuario']; ?>">
-    <?php echo form_error('Usuario'); ?>
+           name="Usuario" value="<?php #echo $query['Usuario']; ?>">
+    <?php #echo form_error('Usuario'); ?>
     <br>
-
+-->
+	<label for="CpfUsuario">CPF do Usuário:</label>
+    <input type="text" class="form-control " id="CpfUsuario" maxlength="11"
+           name="CpfUsuario" placeholder="99999999999" value="<?php echo $query['CpfUsuario']; ?>">
+    <?php echo form_error('CpfUsuario'); ?>
+    <br>
+	
     <label for="Senha">Senha:</label>
     <input type="password" class="form-control" id="Senha" maxlength="45"
            name="Senha" value="<?php echo $query['Senha']; ?>">
