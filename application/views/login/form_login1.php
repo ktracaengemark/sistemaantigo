@@ -32,17 +32,17 @@
 		?>   
 	</select> 
     <?php echo form_error('idSis_Empresa'); ?>
-	<label class="sr-only">Usuário</label>
-    <input type="text" id="inputText" class="form-control" placeholder="Usuário ou E-mail" autofocus name="Usuario" value="<?php echo set_value('Usuario'); ?>">	   
-	<?php echo form_error('Usuario'); ?>
+	<label class="sr-only">Cpf do Usuário</label>
+    <input type="text" id="inputText" class="form-control" placeholder="CPF do Usuário" autofocus name="CpfUsuario" value="<?php echo set_value('CpfUsuario'); ?>">	   
+	<?php echo form_error('CpfUsuario'); ?>
 	<label class="sr-only">Senha</label>
     <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
     <?php echo form_error('Senha'); ?>
 	<input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
     <button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Acesso dos Usuários </button>	
     <br>
-	<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('Usuario'); ?>">Esqueci usuário/senha!</a></p>
-    <br>
+	<!--<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('CpfUsuario'); ?>">Esqueci usuário/senha!</a></p>
+    <br>-->
 	<a class="btn btn btn-danger  btn-block" href="<?php echo base_url(); ?>login/registrar" role="button"><span class="glyphicon glyphicon-plus"></span> Nova Conta Pessoal</a>
 	<a class="btn btn btn-warning btn-block" href="<?php echo base_url(); ?>login/index2" role="button"><span class="glyphicon glyphicon-log-in"></span> Conta Empresa</a>
 	

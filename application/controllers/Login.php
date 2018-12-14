@@ -51,15 +51,15 @@ class Login extends CI_Controller {
 
         #Get GET or POST data
         
-		$usuario = $this->input->get_post('Usuario');
+		$cpfusuario = $this->input->get_post('CpfUsuario');
         $empresa = $this->input->get_post('idSis_Empresa');
 		$senha = md5($this->input->get_post('Senha'));
 
         #set validation rules
         
-		$this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim|callback_valid_usuario');
-        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_check_empresa|callback_valid_empresa[' . $usuario . ']');
-		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $usuario . ']');
+		$this->form_validation->set_rules('CpfUsuario', 'Cpf do Usuário', 'required|trim|callback_valid_cpfusuario');
+        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_check_empresa|callback_valid_empresa[' . $cpfusuario . ']');
+		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $cpfusuario . ']');
 
         $data['select']['idSis_Empresa'] = $this->Login_model->select_empresa();
 		
@@ -94,8 +94,8 @@ class Login extends CI_Controller {
               exit();
              */
             
-			$query = $this->Login_model->check_dados_usuario($senha, $usuario, TRUE);
-			$query = $this->Login_model->check_dados_empresa($empresa, $usuario, TRUE);
+			$query = $this->Login_model->check_dados_cpfusuario($senha, $cpfusuario, TRUE);
+			$query = $this->Login_model->check_dados_empresa($empresa, $cpfusuario, TRUE);
             $_SESSION['log']['Agenda'] = $this->Login_model->get_agenda_padrao($query['idSis_Usuario']);
 
             
@@ -175,15 +175,15 @@ class Login extends CI_Controller {
 
         #Get GET or POST data
         
-		$usuario = $this->input->get_post('Usuario');
+		$cpfusuario = $this->input->get_post('CpfUsuario');
         $empresa = $this->input->get_post('idSis_Empresa');
 		$senha = md5($this->input->get_post('Senha'));
 
         #set validation rules
         
-		$this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim|callback_valid_usuario');
-        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_check_empresa|callback_valid_empresa[' . $usuario . ']');
-		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $usuario . ']');
+		$this->form_validation->set_rules('CpfUsuario', 'Cpf do Usuário', 'required|trim|callback_valid_cpfusuario');
+        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_check_empresa|callback_valid_empresa[' . $cpfusuario . ']');
+		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $cpfusuario . ']');
 
         $data['select']['idSis_Empresa'] = $this->Login_model->select_empresa1();
 		
@@ -218,8 +218,8 @@ class Login extends CI_Controller {
               exit();
              */
             
-			$query = $this->Login_model->check_dados_usuario($senha, $usuario, TRUE);
-			$query = $this->Login_model->check_dados_empresa($empresa, $usuario, TRUE);
+			$query = $this->Login_model->check_dados_cpfusuario($senha, $cpfusuario, TRUE);
+			$query = $this->Login_model->check_dados_empresa($empresa, $cpfusuario, TRUE);
             $_SESSION['log']['Agenda'] = $this->Login_model->get_agenda_padrao($query['idSis_Usuario']);
 
             
@@ -299,15 +299,15 @@ class Login extends CI_Controller {
 
         #Get GET or POST data
         
-		$usuario = $this->input->get_post('Usuario');
+		$cpfusuario = $this->input->get_post('CpfUsuario');
         $empresa = $this->input->get_post('idSis_Empresa');
 		$senha = md5($this->input->get_post('Senha'));
 
         #set validation rules
         
-		$this->form_validation->set_rules('Usuario', 'Usuário', 'required|trim|callback_valid_usuario');
-        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_check_empresa|callback_valid_empresa[' . $usuario . ']');
-		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $usuario . ']');
+		$this->form_validation->set_rules('CpfUsuario', 'Cpf do Usuário', 'required|trim|callback_valid_cpfusuario');
+        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_check_empresa|callback_valid_empresa[' . $cpfusuario . ']');
+		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $cpfusuario . ']');
 
         $data['select']['idSis_Empresa'] = $this->Login_model->select_empresa2();
 		
@@ -342,8 +342,8 @@ class Login extends CI_Controller {
               exit();
              */
             
-			$query = $this->Login_model->check_dados_usuario($senha, $usuario, TRUE);
-			$query = $this->Login_model->check_dados_empresa($empresa, $usuario, TRUE);
+			$query = $this->Login_model->check_dados_cpfusuario($senha, $cpfusuario, TRUE);
+			$query = $this->Login_model->check_dados_empresa($empresa, $cpfusuario, TRUE);
             $_SESSION['log']['Agenda'] = $this->Login_model->get_agenda_padrao($query['idSis_Usuario']);
 
             
@@ -980,13 +980,13 @@ class Login extends CI_Controller {
         #redirect('login');
     }
 
-    function valid_usuario($data) {
+    function valid_cpfusuario($cpfusuario) {
 
-        if ($this->Login_model->check_usuario($data) == 1) {
-            $this->form_validation->set_message('valid_usuario', '<strong>%s</strong> não existe.');
+        if ($this->Login_model->check_cpfusuario($cpfusuario) == 1) {
+            $this->form_validation->set_message('valid_cpfusuario', '<strong>%s</strong> não existe.');
             return FALSE;
-        } else if ($this->Login_model->check_usuario($data) == 2) {
-            $this->form_validation->set_message('valid_usuario', '<strong>%s</strong> inativo! Fale com o Administrador da sua Empresa!');
+        } else if ($this->Login_model->check_cpfusuario($cpfusuario) == 2) {
+            $this->form_validation->set_message('valid_cpfusuario', '<strong>%s</strong> inativo! Fale com o Administrador da sua Empresa!');
             return FALSE;
         } else {
             return TRUE;
@@ -1006,9 +1006,9 @@ class Login extends CI_Controller {
         }
     }	
 	
-	function valid_empresa($empresa, $usuario) {
+	function valid_empresa($empresa, $cpfusuario) {
 
-        if ($this->Login_model->check_dados_empresa($empresa, $usuario) == FALSE) {
+        if ($this->Login_model->check_dados_empresa($empresa, $cpfusuario) == FALSE) {
             $this->form_validation->set_message('valid_empresa', '<strong>%s</strong> incorreta!');
             return FALSE;
         } else {
@@ -1016,9 +1016,9 @@ class Login extends CI_Controller {
         }
     }
 	
-    function valid_senha($senha, $usuario) {
+    function valid_senha($senha, $cpfusuario) {
 
-        if ($this->Login_model->check_dados_usuario($senha, $usuario) == FALSE) {
+        if ($this->Login_model->check_dados_cpfusuario($senha, $cpfusuario) == FALSE) {
             $this->form_validation->set_message('valid_senha', '<strong>%s</strong> incorreta!');
             return FALSE;
         } else {

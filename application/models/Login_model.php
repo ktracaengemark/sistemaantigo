@@ -13,12 +13,10 @@ class Login_model extends CI_Model {
 
     }
 
-    public function check_dados_usuario($senha, $usuario, $retorna = FALSE) {
+    public function check_dados_cpfusuario($senha, $cpfusuario, $retorna = FALSE) {
 
         $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE '
-                . '(Usuario = "' . $usuario . '" AND '
-                . 'Senha = "' . $senha . '") OR '
-                . '(Email = "' . $usuario . '" AND '
+                . '(CpfUsuario = "' . $cpfusuario . '" AND '
                 . 'Senha = "' . $senha . '")'
         );
         #$query = $this->db->get_where('Sis_Usuario', $data);
@@ -44,13 +42,12 @@ class Login_model extends CI_Model {
 
     }
 	
-	public function check_dados_empresa($empresa, $usuario, $retorna = FALSE) {
+	public function check_dados_empresa($empresa, $cpfusuario, $retorna = FALSE) {
 
         $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE '
-                . '(Usuario = "' . $usuario . '" AND '
-                . 'idSis_Empresa = "' . $empresa . '") OR '
-                . '(Email = "' . $usuario . '" AND '
+                . '(CpfUsuario = "' . $cpfusuario . '" AND '
                 . 'idSis_Empresa = "' . $empresa . '")'
+
         );
         #$query = $this->db->get_where('Sis_Usuario', $data);
         /*
@@ -74,10 +71,42 @@ class Login_model extends CI_Model {
         }
 
     }
+	
+	public function check_dados_senha($empresa, $senha, $retorna = FALSE) {
 
-    public function check_usuario($data) {
+        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE '
+                . '(Senha = "' . $senha . '" AND '
+                . 'idSis_Empresa = "' . $empresa . '")'
 
-        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE Usuario = "' . $data . '" OR Email = "' . $data . '"');
+        );
+        #$query = $this->db->get_where('Sis_Usuario', $data);
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+         */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            if ($retorna === FALSE) {
+                return TRUE;
+            }
+            else {
+                $query = $query->result_array();
+                return $query[0];
+            }
+        }
+
+    }	
+
+    public function check_cpfusuario($cpfusuario) {
+
+        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE '
+                . '(CpfUsuario = "' . $cpfusuario . '" ) '
+        );
         if ($query->num_rows() === 0) {
             return 1;
         }
@@ -127,12 +156,12 @@ class Login_model extends CI_Model {
 
     }
 
-    public function set_acesso($usuario, $operacao) {
+    public function set_acesso($cpfusuario, $operacao) {
 
         $data = array(
             'Data' => date('Y-m-d H:i:s'),
             'Operacao' => $operacao,
-            'idSis_Usuario' => $usuario,
+            'idSis_Usuario' => $cpfusuario,
             'Ip' => $this->input->ip_address(),
             'So' => $this->agent->platform(),
             'Navegador' => $this->agent->browser(),
