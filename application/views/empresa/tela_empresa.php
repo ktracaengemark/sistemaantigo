@@ -145,7 +145,7 @@
 
 									<div class="panel panel-primary">
 
-										<div class="panel-heading"><strong>Contatos</strong></div>
+										<div class="panel-heading"><strong>Usuários</strong></div>
 										<div class="panel-body">
 
 											<?php

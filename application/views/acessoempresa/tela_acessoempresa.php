@@ -12,15 +12,15 @@
 				<div class="panel-heading"></div>
 				<div class="panel-body">
 					<div class="col-md-12 text-center t">
-						<h1><?php echo '<small>Bem Vindo<br></small><strong>"' . $_SESSION['log']['Nome'] . '"</strong>'  ?></h1>
+						<h3><?php echo '<small>Bem Vindo<br></small><strong>"' . $_SESSION['log']['Nome'] . '"</strong>'  ?></h3>
 					</div>
 
 					<div class="col-md-12 text-center t">
-						<h1><?php echo '<small>Administrador da Empresa<br></small><strong> ' . $_SESSION['log']['NomeEmpresa'] . '</strong>.'  ?></h1>
+						<h3><?php echo '<small>Administrador da Empresa<br></small><strong> ' . $_SESSION['log']['NomeEmpresa'] . '</strong>.'  ?></h3>
 					</div>
 
 					<div class="col-md-12 text-center t">
-						<h1><?php echo '<small>Acesse o </small><strong> Menu </strong><small> acima <br>e tenha um bom trabalho! </small>'  ?></h1>
+						<h3><?php echo '<small>Acesse o </small><strong> Menu </strong><small> acima <br>e tenha um bom trabalho! </small>'  ?></h3>
 					</div>
 				</div>	
 			</div>		
