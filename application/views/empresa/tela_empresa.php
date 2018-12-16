@@ -17,7 +17,7 @@
 								<li>
 									<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
 										<a href="<?php echo base_url() . 'empresa/prontuario/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-											<span class="glyphicon glyphicon-file"> </span> Dados da Empresa
+											<span class="glyphicon glyphicon-file"> </span> Ver Dados da Empresa
 										</a>
 									</a>
 								</li>
