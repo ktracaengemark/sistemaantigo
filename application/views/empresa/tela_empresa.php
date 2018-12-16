@@ -9,20 +9,32 @@
 				<div class="panel panel-primary">
 
 					<div class="panel-heading">
-					
-					<?php echo '<small>' . $_SESSION['Empresa']['NomeEmpresa'] . '</small> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?>
-					
-					<a class="btn btn-sm btn-success" href="<?php echo base_url() . 'empresa/prontuario/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-						<span class="glyphicon glyphicon-file"> </span> Ver <span class="sr-only">(current)</span>
-					</a>
-					
-					<a class="btn btn-sm btn-warning" href="<?php echo base_url() . 'empresa/alterar/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-						<span class="glyphicon glyphicon-edit"></span> Edit.
-					</a>
+						<div class="btn-group">
+							<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-file"></span> <?php echo '<small>' . $_SESSION['Empresa']['NomeEmpresa'] . '</small> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?> <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
+										<a href="<?php echo base_url() . 'empresa/prontuario/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+											<span class="glyphicon glyphicon-file"> </span> Dados da Empresa
+										</a>
+									</a>
+								</li>
+								<li role="separator" class="divider"></li>
+								<li>
+									<a <?php if (preg_match("/empresa\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
+										<a href="<?php echo base_url() . 'empresa/alterar/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+											<span class="glyphicon glyphicon-edit"></span> Editar Dados da Empresa
+										</a>
+									</a>
+								</li>
+							</ul>
+						</div>
 					</div>
 					<?php } ?>					
 					<div class="panel-body">
-						<div style="overflow: auto; height: 600px; ">
+						<div style="overflow: auto; height: 500px; ">
 							<table class="table table-user-information">
 								<tbody>
 
@@ -38,29 +50,39 @@
 									';
 
 									}
-									/*
-									if ($query['DataNascimento']) {
+									
+									if ($query['CpfAdmin']) {
 
 									echo '
 									<tr>
-										<td><span class="glyphicon glyphicon-gift"></span> Data de Nascimento:</td>
-											<td>' . $query['DataNascimento'] . '</td>
-									</tr>
-									<tr>
-										<td><span class="glyphicon glyphicon-gift"></span> Idade:</td>
-											<td>' . $query['Idade'] . ' anos</td>
+										<td><span class="glyphicon glyphicon-phone-alt"></span> CPF:</td>
+										<td>' . $query['CpfAdmin'] . '</td>
 									</tr>
 									';
 
 									}
-									*/
-									
+
 									if ($query['Celular']) {
 
 									echo '
 									<tr>
 										<td><span class="glyphicon glyphicon-phone-alt"></span> Celular:</td>
 										<td>' . $query['Celular'] . '</td>
+									</tr>
+									';
+
+									}
+									
+									if ($query['DataCriacao']) {
+
+									echo '
+									<tr>
+										<td><span class="glyphicon glyphicon-gift"></span> Ingressou :</td>
+											<td>' . $query['DataCriacao'] . '</td>
+									</tr>
+									<tr>
+										<td><span class="glyphicon glyphicon-gift"></span> Tempo:</td>
+											<td>' . $query['Idade'] . ' anos</td>
 									</tr>
 									';
 
@@ -144,20 +166,34 @@
 								<div class="col-md-12">
 
 									<div class="panel panel-primary">
-
-										<div class="panel-heading"><strong>Usuários</strong></div>
+										<div class="panel-heading">
+											<div class="btn-group">
+												<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+													<span class="glyphicon glyphicon-file"></span> Usuarios <span class="caret"></span>
+												</button>
+												<ul class="dropdown-menu" role="menu">
+													<li>
+														<a <?php if (preg_match("/usuario\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar/    ?>>
+															<a href="<?php echo base_url() . 'usuario/cadastrar/' ?>">
+																<span class="glyphicon glyphicon-plus"></span> Cadastrar Usuario
+															</a>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>										
 										<div class="panel-body">
-
-											<?php
-											if (!$list) {
-											?>
-												<div class="alert alert-info" role="alert"><b>Nenhum Cad.</b></div>
-											<?php
-											} else {
-												echo $list;
-											}
-											?>
-
+											<div style="overflow: auto; height: 600px; ">
+												<?php
+												if (!$list) {
+												?>
+													<div class="alert alert-info" role="alert"><b>Nenhum Cad.</b></div>
+												<?php
+												} else {
+													echo $list;
+												}
+												?>
+											</div>
 										</div>
 									</div>
 								</div>

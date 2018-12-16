@@ -2,19 +2,18 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="btn-group" role="group">
-			<a class="btn btn-md btn-primary active"> 
+			<a class="btn btn-sm btn-primary active"> 
 				<span class="glyphicon glyphicon-sort-by-attributes"></span> <?php echo '<b>Total:</b> ' . $query->num_rows() ?>
 			</a>        
 		</div>
 
 		<div class="btn-group" role="group">
-			<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>contatousuario/cadastrar" role="button"> 
+			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>contatousuario/cadastrar" role="button"> 
 				<span class="glyphicon glyphicon-plus"></span> Novo Contato
 			</a>
 		</div>
 	</div>        
 </div>
-<br>
 
 <?php
 foreach ($query->result_array() as $row) {

@@ -8,47 +8,49 @@
 			<div class="panel panel-primary">
 				
 				<div class="panel-heading">
-					<label class="sr-only" for="idSis_Empresa">Empresa:*</label>
-					<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> readonly=""
-							id="idSis_Empresa" name="idSis_Empresa">
-
-						<?php
-						foreach ($select['idSis_Empresa'] as $key => $row) {
-							if ($query['idSis_Empresa'] == $key) {
-								echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-							} else {
-								echo '<option value="' . $key . '">' . $row . '</option>';
-							}
-						}
-						?>
-					</select>
+					<div class="btn-group">
+						<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-file"></span> <?php echo '<small>' . $_SESSION['Empresa']['NomeEmpresa'] . '</small> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?> <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
+									<a href="<?php echo base_url() . 'empresa/prontuario/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+										<span class="glyphicon glyphicon-file"> </span>Ver Dados da Empresa
+									</a>
+								</a>
+							</li>
+							<li role="separator" class="divider"></li>
+							<li>
+								<a <?php if (preg_match("/empresa\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
+									<a href="<?php echo base_url() . 'empresa/alterar/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+										<span class="glyphicon glyphicon-edit"></span> Editar Dados da Empresa
+									</a>
+								</a>
+							</li>
+						</ul>
+					</div>
 				</div>
+	
 				<div class="panel-body">
-			
-					<nav class="navbar navbar-inverse">
-					  <div class="container-fluid">
-						<div class="navbar-header">
-						  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span> 
-						  </button>
-						  <a class="navbar-brand" href="#">Menu </a>
-						</div>
-						<div class="collapse navbar-collapse" id="myNavbar">
-							<ul class="nav navbar-nav navbar-center">
-						
-								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+					
+					<div class="row">
+							
+						<div class="col-md-12">	
+							<?php echo validation_errors(); ?>
 
+							<div class="panel panel-<?php echo $panel; ?>">
+
+								<div class="panel-heading">
 									<div class="btn-group">
 										<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
-											<span class="glyphicon glyphicon-user"></span> Funcionário <span class="caret"></span>
+											<span class="glyphicon glyphicon-file"></span> <?php echo '<small>' . $_SESSION['Usuario']['Nome'] . '</small> - <small>Id.: ' . $_SESSION['Usuario']['idSis_Usuario'] . '</small>' ?> <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
 												<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
 													<a href="<?php echo base_url() . 'usuario/prontuario/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
-														<span class="glyphicon glyphicon-file"> </span> Ver <span class="sr-only">(current)</span>
+														<span class="glyphicon glyphicon-file"> </span> Ver Dados do Usuário
 													</a>
 												</a>
 											</li>
@@ -56,36 +58,13 @@
 											<li>
 												<a <?php if (preg_match("/usuario\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
 													<a href="<?php echo base_url() . 'usuario/alterar/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
-														<span class="glyphicon glyphicon-edit"></span> Edit.
+														<span class="glyphicon glyphicon-edit"></span> Editar Dados do Usuário
 													</a>
 												</a>
 											</li>
 										</ul>
 									</div>
-									<div class="btn-group" role="group" aria-label="..."> </div>
-								</li>
-							</ul>
-							<!--
-							<ul class="nav navbar-nav navbar-right">
-								<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-							</ul>
-							-->
-						</div>
-					  </div>
-					</nav>
-
-					<?php } ?>
-					
-					<div class="panel-body">
-						
-						<div class="row">
-								
-							<?php echo validation_errors(); ?>
-
-							<div class="panel panel-<?php echo $panel; ?>">
-
-								<div class="panel-heading"><strong>Usuário</strong></div>
+								</div>
 								<div class="panel-body">
 									<div class="panel panel-info">
 										<div class="panel-heading">
@@ -126,6 +105,22 @@
 											</div>
 											<div class="form-group">
 												<div class="row">
+													<div class="col-md-3">	
+														<label for="idSis_Empresa">Empresa:</label>
+														<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> readonly=""
+																id="idSis_Empresa" name="idSis_Empresa">
+
+															<?php
+															foreach ($select['idSis_Empresa'] as $key => $row) {
+																if ($query['idSis_Empresa'] == $key) {
+																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																} else {
+																	echo '<option value="' . $key . '">' . $row . '</option>';
+																}
+															}
+															?>
+														</select>
+													</div>
 													<div class="col-md-3">
 														<label for="Funcao">Funcao:*</label>
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
@@ -331,81 +326,80 @@
 												</div>
 												-->
 											</div>	
-											<br>
-											<div class="form-group">
-												<div class="row">
-													<input type="hidden" name="idSis_Usuario" value="<?php echo $query['idSis_Usuario']; ?>">
-													<?php if ($metodo == 2) { ?>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<input type="hidden" name="idSis_Usuario" value="<?php echo $query['idSis_Usuario']; ?>">
+											<?php if ($metodo == 2) { ?>
 
-														<div class="col-md-6">
-															<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-																<span class="glyphicon glyphicon-save"></span> Salvar
-															</button>
-														</div>
-														<div class="col-md-6 text-right">
-															<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-																<span class="glyphicon glyphicon-trash"></span> Excluir
-															</button>
-														</div>
+												<div class="col-md-6">
+													<button class="btn btn-sm btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+														<span class="glyphicon glyphicon-save"></span> Salvar
+													</button>
+												</div>
+												<div class="col-md-6 text-right">
+													<button  type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+														<span class="glyphicon glyphicon-trash"></span> Excluir
+													</button>
+												</div>
 
-														<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-															<div class="modal-dialog" role="document">
-																<div class="modal-content">
-																	<div class="modal-header bg-danger">
-																		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																		<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
-																	</div>
-																	<div class="modal-body">
-																		<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
-																			Esta operação é irreversível.</p>
-																	</div>
-																	<div class="modal-footer">
-																		<div class="col-md-6 text-left">
-																			<button type="button" class="btn btn-warning" data-dismiss="modal">
-																				<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
-																			</button>
-																		</div>
-																		<div class="col-md-6 text-right">
-																			<a class="btn btn-danger" href="<?php echo base_url() . 'usuario/excluir/' . $query['idSis_Usuario'] ?>" role="button">
-																				<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
-																			</a>
-																		</div>
-																	</div>
+												<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header bg-danger">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
+															</div>
+															<div class="modal-body">
+																<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
+																	Esta operação é irreversível.</p>
+															</div>
+															<div class="modal-footer">
+																<div class="col-md-6 text-left">
+																	<button type="button" class="btn btn-warning" data-dismiss="modal">
+																		<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+																	</button>
+																</div>
+																<div class="col-md-6 text-right">
+																	<a class="btn btn-danger" href="<?php echo base_url() . 'usuario/excluir/' . $query['idSis_Usuario'] ?>" role="button">
+																		<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
+																	</a>
 																</div>
 															</div>
 														</div>
-
-													<?php } elseif ($metodo == 3) { ?>
-														<div class="col-md-12 text-center">
-															<button class="btn btn-lg btn-danger" id="inputDb" data-loading-text="Aguarde..." name="submit" value="1" type="submit">
-																<span class="glyphicon glyphicon-trash"></span> Excluir
-															</button>
-															<button class="btn btn-lg btn-warning" id="inputDb" onClick="history.go(-1);
-																	return true;">
-																<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
-															</button>
-														</div>
-													<?php } else { ?>
-														<div class="col-md-6">
-															<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." name="submit" value="1" type="submit">
-																<span class="glyphicon glyphicon-save"></span> Salvar
-															</button>
-														</div>
-													<?php } ?>
+													</div>
 												</div>
-											</div>
 
-										</form>
-								
+											<?php } elseif ($metodo == 3) { ?>
+												<div class="col-md-12 text-center">
+													<button class="btn btn-sm btn-danger" id="inputDb" data-loading-text="Aguarde..." name="submit" value="1" type="submit">
+														<span class="glyphicon glyphicon-trash"></span> Excluir
+													</button>
+													<button class="btn btn-sm btn-warning" id="inputDb" onClick="history.go(-1);
+															return true;">
+														<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+													</button>
+												</div>
+											<?php } else { ?>
+												<div class="col-md-6">
+													<button class="btn btn-sm btn-primary" id="inputDb" data-loading-text="Aguarde..." name="submit" value="1" type="submit">
+														<span class="glyphicon glyphicon-save"></span> Salvar
+													</button>
+												</div>
+											<?php } ?>
 										</div>
 									</div>
+								
 								</div>
 							</div>							
-							
-						</div>
+						</div>	
 					</div>
-				</div>	
+				
+				</div>
+				
 			</div>		
 		</div>
 	</div>	
 </div>
+<?php } ?>

@@ -160,7 +160,8 @@ class Usuario extends CI_Controller {
                 $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['agenda'], $data['campos'], $data['idSis_Usuario']);
                 $data['auditoria'] = $this->Basico_model->set_auditoriaempresa($data['auditoriaitem'], 'App_Agenda', 'CREATE', $data['auditoriaitem'], $data['idSis_Usuario']);
 				
-                redirect(base_url() . 'usuario/prontuario/' . $data['idSis_Usuario'] . $data['msg']);
+                #redirect(base_url() . 'empresa/prontuario/' . $data['msg']);
+				redirect(base_url() . 'usuario/prontuario/' . $data['idSis_Usuario'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/usuario/' .  $data['msg']);
                 exit();
             }

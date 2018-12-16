@@ -10,53 +10,102 @@
 			<div class="panel panel-primary">
 				
 				<div class="panel-heading">
-				
-				<?php echo '<small>' . $_SESSION['Empresa']['NomeEmpresa'] . '</small> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?>
-				
-				<a class="btn btn-sm btn-success" href="<?php echo base_url() . 'empresa/prontuario/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-					<span class="glyphicon glyphicon-file"> </span> Ver <span class="sr-only">(current)</span>
-				</a>
-				<a class="btn btn-sm btn-warning" href="<?php echo base_url() . 'empresa/alterar/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-					<span class="glyphicon glyphicon-edit"></span> Edit.
-				</a>
+					<div class="btn-group">
+						<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-file"></span> <?php echo '<small>' . $_SESSION['Empresa']['NomeEmpresa'] . '</small> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?> <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
+									<a href="<?php echo base_url() . 'empresa/prontuario/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+										<span class="glyphicon glyphicon-file"> </span> Dados da Empresa
+									</a>
+								</a>
+							</li>
+							<li role="separator" class="divider"></li>
+							<li>
+								<a <?php if (preg_match("/empresa\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
+									<a href="<?php echo base_url() . 'empresa/alterar/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+										<span class="glyphicon glyphicon-edit"></span> Editar Dados da Empresa
+									</a>
+								</a>
+							</li>
+						</ul>
+					</div>
 				</div>
-<?php } ?>				
+				<?php } ?>				
 				<div class="panel-body">
-
-					<div class="row">
+					<div class="row">	
 						<div class="col-md-12">	
-							
+						
 							<?php echo validation_errors(); ?>
 
-							<div class="panel panel-<?php echo $panel; ?>">
-
-								<div class="panel-heading">Empresa</div>
-								
-								<div class="panel-body">
-									<div style="overflow: auto; height: 400px; ">
-										<?php echo form_open_multipart($form_open_path); ?>
-										<h4 class="text-left">Dados do Administrador  </h4>
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-3">
-													<label for="NomeAdmin">Nome do Admin.:</label>
-													<input type="text" class="form-control" id="NomeAdmin" maxlength="45" 
-															name="NomeAdmin" autofocus value="<?php echo $query['NomeAdmin']; ?>">
-												</div>																		
-												<div class="col-md-3">
-													<label for="Celular">Tel. Admin.</label>
-													<input type="text" class="form-control Celular CelularVariavel" id="Celular" maxlength="11" <?php echo $readonly; ?>
-														   name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
-												</div>
-												<div class="col-md-3">
-													<label for="Email">E-mail Admin.:</label>
-													<input type="text" class="form-control" id="Bairro" maxlength="100" <?php echo $readonly; ?>
-														   name="Email" value="<?php echo $query['Email']; ?>">
-												</div>
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<h3 class="text-left">Dados do Administrador  </h3>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-3">
+												<label for="NomeAdmin">Nome do Admin.:</label>
+												<input type="text" class="form-control" id="NomeAdmin" maxlength="45" 
+														name="NomeAdmin" autofocus value="<?php echo $query['NomeAdmin']; ?>">
+											</div>																		
+											<div class="col-md-3">
+												<label for="Celular">Tel. Admin.</label>
+												<input type="text" class="form-control Celular CelularVariavel" id="Celular" maxlength="11" <?php echo $readonly; ?>
+													   name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
+											</div>
+											<div class="col-md-3">
+												<label for="Email">E-mail Admin.:</label>
+												<input type="text" class="form-control" id="Bairro" maxlength="100" <?php echo $readonly; ?>
+													   name="Email" value="<?php echo $query['Email']; ?>">
 											</div>
 										</div>
+									</div>
 
-										<h4 class="text-left">Dados da Empresa  </h4>									
+									<h3 class="text-left">Dados da Empresa  </h3>									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-3">
+												<label for="CategoriaEmpresa">Categoria:*</label>
+												<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+														id="CategoriaEmpresa" name="CategoriaEmpresa">
+													<option value="">-- Selec. uma Categoria --</option>
+													<?php
+													foreach ($select['CategoriaEmpresa'] as $key => $row) {
+														if ($query['CategoriaEmpresa'] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>   
+												</select>          
+											</div>
+											<div class="col-md-6">
+												<label for="Atuacao">Atuação:</label>
+												<textarea class="form-control" id="Atuacao" <?php echo $readonly; ?>
+														  name="Atuacao"><?php echo $query['Atuacao']; ?></textarea>
+											</div>
+											<div class="col-md-3">
+												<label for="Site">Site:</label>
+												<input type="text" class="form-control" maxlength="50" <?php echo $readonly; ?>
+													   name="Site" value="<?php echo $query['Site']; ?>">
+											</div>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-12 text-center">
+												<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#DadosComplementares" aria-expanded="false" aria-controls="DadosComplementares">
+													<span class="glyphicon glyphicon-menu-down"></span> Completar Dados
+												</button>
+											</div>
+										</div>
+									</div>
+
+									<div <?php echo $collapse; ?> id="DadosComplementares">
 										<div class="form-group">
 											<div class="row">										
 												<div class="col-md-3">
@@ -106,51 +155,19 @@
 												</div>
 											</div>
 										</div>
-
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-3">
-													<label for="CategoriaEmpresa">Categoria:*</label>
-													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-															id="CategoriaEmpresa" name="CategoriaEmpresa">
-														<option value="">-- Selec. uma Categoria --</option>
-														<?php
-														foreach ($select['CategoriaEmpresa'] as $key => $row) {
-															if ($query['CategoriaEmpresa'] == $key) {
-																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-															} else {
-																echo '<option value="' . $key . '">' . $row . '</option>';
-															}
-														}
-														?>   
-													</select>          
-												</div>
-												<div class="col-md-6">
-													<label for="Atuacao">Atuação:</label>
-													<textarea class="form-control" id="Atuacao" <?php echo $readonly; ?>
-															  name="Atuacao"><?php echo $query['Atuacao']; ?></textarea>
-												</div>
-												<div class="col-md-3">
-													<label for="Site">Site:</label>
-													<input type="text" class="form-control" maxlength="50" <?php echo $readonly; ?>
-														   name="Site" value="<?php echo $query['Site']; ?>">
-												</div>
-											</div>
-										</div>
-										</form>
 									</div>
+									</form>
 								</div>
-							</div>							
+							</div>
 						</div>
-					</div>
-					
+					</div>		
 					<div class="form-group">
 						<div class="row">
 							<input type="hidden" name="idSis_Empresa" value="<?php echo $query['idSis_Empresa']; ?>">
 							<?php if ($metodo == 2) { ?>
 
 								<div class="col-md-6">
-									<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+									<button class="btn btn-sm btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
 										<span class="glyphicon glyphicon-save"></span> Salvar
 									</button>
 								</div>
@@ -195,14 +212,14 @@
 										<span class="glyphicon glyphicon-trash"></span> Excluir
 									</button>
 									-->
-									<button class="btn btn-lg btn-warning" id="inputDb" onClick="history.go(-1);
+									<button class="btn btn-sm btn-warning" id="inputDb" onClick="history.go(-1);
 											return true;">
 										<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
 									</button>
 								</div>
 							<?php } else { ?>
 								<div class="col-md-6">
-									<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." name="submit" value="1" type="submit">
+									<button class="btn btn-sm btn-primary" id="inputDb" data-loading-text="Aguarde..." name="submit" value="1" type="submit">
 										<span class="glyphicon glyphicon-save"></span> Salvar
 									</button>
 								</div>

@@ -111,8 +111,9 @@ class Contatousuario extends CI_Controller {
                 $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_ContatoUsuario', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
-                redirect(base_url() . 'contatousuario/pesquisar/' . $_SESSION['Usuario']['idSis_Usuario'] . $data['msg']);
-                exit();
+                #redirect(base_url() . 'contatousuario/pesquisar/' . $_SESSION['Usuario']['idSis_Usuario'] . $data['msg']);
+                redirect(base_url() . 'usuario/prontuario/' . $_SESSION['Usuario']['idSis_Usuario'] . $data['msg']);
+				exit();
             }
         }
 
@@ -197,7 +198,8 @@ class Contatousuario extends CI_Controller {
                     $data['msg'] = '?m=1';
                 }
 
-                redirect(base_url() . 'contatousuario/pesquisar/' . $_SESSION['Usuario']['idSis_Usuario'] . $data['msg']);
+                #redirect(base_url() . 'contatousuario/pesquisar/' . $_SESSION['Usuario']['idSis_Usuario'] . $data['msg']);
+				redirect(base_url() . 'usuario/prontuario/' . $_SESSION['Usuario']['idSis_Usuario'] . $data['msg']);
                 exit();
             }
         }

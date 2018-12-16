@@ -12,10 +12,8 @@
 				<span class="glyphicon glyphicon-plus"></span> Novo Usuário
 			</a>
 		</div>
-
 	</div>        
 </div>
-<br>
 
 <?php
 foreach ($query->result_array() as $row) {

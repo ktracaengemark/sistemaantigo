@@ -184,14 +184,18 @@ class Empresa extends CI_Controller {
 		#$data['select']['Inativo'] = $this->Basico_model->select_inativo();
 
 
-        $data['titulo'] = 'Editar Usuário';
+        $data['titulo'] = 'Editar Empresa';
         $data['form_open_path'] = 'empresa/alterar';
         $data['readonly'] = '';
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
-
+        if ($data['query']['Endereco'] || $data['query']['Bairro'] ||
+			$data['query']['Municipio'] || $data['query']['Cep'])
+            $data['collapse'] = '';
+        else
+            $data['collapse'] = 'class="collapse"';
 
         $data['nav_secundario'] = $this->load->view('empresa/nav_secundario', $data, TRUE);
 
@@ -323,8 +327,8 @@ class Empresa extends CI_Controller {
         $_SESSION['log']['idSis_Empresa'] = $data['resumo']['idSis_Empresa'] = $data['query']['idSis_Empresa'];
         $data['resumo']['NomeAdmin'] = $data['query']['NomeAdmin'];
 
-        #$data['query']['Idade'] = $this->basico->calcula_idade($data['query']['DataNascimento']);
-        #$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
+        $data['query']['Idade'] = $this->basico->calcula_idade($data['query']['DataCriacao']);
+        $data['query']['DataCriacao'] = $this->basico->mascara_data($data['query']['DataCriacao'], 'barras');
 
         /*
         if ($data['query']['Sexo'] == 1)
