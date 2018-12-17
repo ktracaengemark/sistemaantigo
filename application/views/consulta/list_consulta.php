@@ -50,7 +50,7 @@
 						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-calendar"></span> Agendamentos <span class="caret"></span>
+									<span class="glyphicon glyphicon-calendar"></span> Agenda <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">
 									<li>
@@ -139,7 +139,7 @@
 
 					<div class="panel panel-<?php echo $panel; ?>">
 
-						<div class="panel-heading"><strong>Agendamentos</strong></div>
+						<div class="panel-heading"><strong>Agenda</strong></div>
 						<div class="panel-body">
 
 							<div>

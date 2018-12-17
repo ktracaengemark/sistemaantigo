@@ -1,8 +1,8 @@
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-3"></div>
-			<div class="col-md-9 ">
+
+			<div class="col-sm-offset-2 col-md-9 ">
 				<div class="navbar-header ">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar1">
 						<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
@@ -28,10 +28,10 @@
 							</form>
 						</li>
 						-->
-						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>agenda">
-									<button type="button" class="btn btn-md btn-info ">
+									<button type="button" class="btn btn-sm btn-info ">
 										<span class="glyphicon glyphicon-calendar"></span> Agenda
 									</button>
 								</a>
@@ -41,10 +41,10 @@
 						
 
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
-						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/clientes">
-									<button type="button" class="btn btn-md btn-success ">
+									<button type="button" class="btn btn-sm btn-success ">
 										<span class="glyphicon glyphicon-user"></span> Clientes
 									</button>
 								</a>
@@ -53,9 +53,9 @@
 						</li>
 						<?php } ?>
 						
-						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
-								<button type="button" class="btn btn-md btn-warning dropdown-toggle" data-toggle="dropdown">
+								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
 									<span class="glyphicon glyphicon-usd"></span> Finanças <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
@@ -69,9 +69,9 @@
 							
 						</li>
 						
-						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
-								<button type="button" class="btn btn-md btn-primary dropdown-toggle" data-toggle="dropdown">
+								<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
 									<span class="glyphicon glyphicon-home"></span> Encontre aqui <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
@@ -91,10 +91,10 @@
 							
 						</li>
 						
-						<li class="btn-toolbar navbar-form navbar-right" role="toolbar" aria-label="...">
-							<div class="btn-group" role="group" aria-label="...">
+						<li class="btn-toolbar btn-sm navbar-form navbar-right" role="toolbar" aria-label="...">
+							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>login/sair">
-									<button type="button" class="btn btn-md btn-danger ">
+									<button type="button" class="btn btn-sm btn-danger ">
 										<span class="glyphicon glyphicon-log-out"></span> Sair
 									</button>
 								</a>

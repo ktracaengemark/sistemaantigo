@@ -155,11 +155,6 @@
 							<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>agenda" role="button">
 								<span class="glyphicon glyphicon-calendar"></span>Agenda
 							</a>
-							<div class="col-md-4">
-								<label class="sr-only">Empresa</label>
-								<input class="form-control" id="NomeEmpresa" <?php echo $readonly; ?> readonly=""
-										  name="NomeEmpresa" value="<?php echo $query['NomeEmpresa']; ?>">
-							</div>
 						</div>
 						<div class="panel-body">
 							<div class="form-group">

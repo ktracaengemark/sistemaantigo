@@ -214,7 +214,8 @@ class Consulta extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'idSis_Usuario',
+            'idSis_Empresa',
+			'idSis_Usuario',
 			'idApp_Consulta',
             'idApp_Agenda',
             'idApp_Cliente',
@@ -286,7 +287,7 @@ class Consulta extends CI_Controller {
 		$data['select']['Status'] = $this->Basico_model->select_status();
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
         $data['select']['ContatoCliente'] = $this->Consulta_model->select_contatocliente_cliente($data['query']['idApp_Cliente']);
-
+		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa3();
         #echo $data['query']['idApp_Agenda'] . ' ' . $_SESSION['log']['id'];
         #$data['query']['idApp_Agenda'] = ($_SESSION['log']['Permissao'] > 2) ? $_SESSION['log']['id'] : FALSE;
 
@@ -306,7 +307,7 @@ class Consulta extends CI_Controller {
             'D' => 'ContatoCliente',
         );
 
-        $data['titulo'] = 'Agenda Empresa C/ Cliente';
+        $data['titulo'] = 'Agendamento';
         $data['form_open_path'] = 'consulta/cadastrar1';
         $data['panel'] = 'primary';
         $data['readonly'] = '';
@@ -320,7 +321,7 @@ class Consulta extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('consulta/form_consulta2', $data);
+            $this->load->view('consulta/form_consulta1', $data);
         } else {
 
 			$data['query']['Tipo'] = 2;
@@ -348,7 +349,7 @@ class Consulta extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('consulta/form_consulta2', $data);
+                $this->load->view('consulta/form_consulta1', $data);
             } else {
 
                 $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Consulta'], FALSE);
