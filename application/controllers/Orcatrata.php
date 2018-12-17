@@ -73,6 +73,7 @@ class Orcatrata extends CI_Controller {
             'DataVencimentoOrca',
             'ObsOrca',
 			'idTab_TipoRD',
+			'AVAP',
         ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -88,6 +89,7 @@ class Orcatrata extends CI_Controller {
 		#(!$data['orcatrata']['DataPrazo']) ? $data['orcatrata']['DataPrazo'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['idTab_TipoRD']) ? $data['orcatrata']['idTab_TipoRD'] = "2" : FALSE;
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
+		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 
         $j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
@@ -167,6 +169,7 @@ class Orcatrata extends CI_Controller {
         #$this->form_validation->set_rules('DataProcedimento', 'DataProcedimento', 'required|trim');
         #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
         #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
+		$this->form_validation->set_rules('AVAP', 'À Vista ou À Prazo', 'required|trim');
 		$this->form_validation->set_rules('Modalidade', 'Tipo de Recebimento', 'required|trim');		
 		$this->form_validation->set_rules('ValorRestanteOrca', 'Valor da Receita', 'required|trim');		
 		$this->form_validation->set_rules('FormaPagamento', 'Forma de Pagamento', 'required|trim');
@@ -186,7 +189,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
         $data['select']['Produto'] = $this->Basico_model->select_produtos();
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
-
+		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 
         $data['titulo'] = 'Cadastar Orçamento do Cliente';
         $data['form_open_path'] = 'orcatrata/cadastrar';
@@ -221,6 +224,16 @@ class Orcatrata extends CI_Controller {
         #Ver uma solução melhor para este campo
         (!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
 		(!$data['orcatrata']['TipoReceita']) ? $data['orcatrata']['TipoReceita'] = '1' : FALSE;
+		
+		#(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
+
+        $data['radio'] = array(
+            'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
+        );
+
+        ($data['orcatrata']['AVAP'] == 'P') ?
+            $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
+		
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 
         $data['radio'] = array(
@@ -416,6 +429,7 @@ class Orcatrata extends CI_Controller {
             'DataVencimentoOrca',
             'ObsOrca',
 			'idTab_TipoRD',
+			'AVAP',
 
         ), TRUE));
 
@@ -433,6 +447,7 @@ class Orcatrata extends CI_Controller {
         (!$data['orcatrata']['idTab_TipoRD']) ? $data['orcatrata']['idTab_TipoRD'] = "2" : FALSE;
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
 		(!$data['orcatrata']['idApp_Cliente']) ? $data['orcatrata']['idApp_Cliente'] = '1' : FALSE;
+		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 		
 		$j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
@@ -509,6 +524,7 @@ class Orcatrata extends CI_Controller {
         #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
         #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
 		#$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
+		$this->form_validation->set_rules('AVAP', 'À Vista ou À Prazo', 'required|trim');
 		$this->form_validation->set_rules('FormaPagamento', 'Forma de Pagamento', 'required|trim');
 		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
@@ -528,7 +544,8 @@ class Orcatrata extends CI_Controller {
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
         $data['select']['Produto'] = $this->Basico_model->select_produtos();
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
-
+		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		
         $data['titulo'] = 'Cadastar Orçamento';
         $data['form_open_path'] = 'orcatrata/cadastrar2';
         $data['readonly'] = '';
@@ -558,6 +575,15 @@ class Orcatrata extends CI_Controller {
 
         #Ver uma solução melhor para este campo
         (!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
+
+		#(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
+
+        $data['radio'] = array(
+            'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
+        );
+
+        ($data['orcatrata']['AVAP'] == 'P') ?
+            $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
 		
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 
@@ -715,7 +741,8 @@ class Orcatrata extends CI_Controller {
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_OrcaTrata', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
-				redirect(base_url() . 'relatorio/receitasparc/' . $data['msg']);
+				redirect(base_url() . 'relatorio/receitas/' . $data['msg']);
+				#redirect(base_url() . 'relatorio/receitasparc/' . $data['msg']);
                 exit();
             }
         }
@@ -758,6 +785,7 @@ class Orcatrata extends CI_Controller {
             'DataVencimentoOrca',
             'ObsOrca',
 			'idTab_TipoRD',
+			'AVAP',
 
         ), TRUE));
 
@@ -774,7 +802,7 @@ class Orcatrata extends CI_Controller {
 		#(!$data['orcatrata']['DataPrazo']) ? $data['orcatrata']['DataPrazo'] = date('d/m/Y', time()) : FALSE;
         (!$data['orcatrata']['idTab_TipoRD']) ? $data['orcatrata']['idTab_TipoRD'] = "2" : FALSE;
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
-		#(!$data['orcatrata']['idApp_Cliente']) ? $data['orcatrata']['idApp_Cliente'] = '1' : FALSE;
+		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 		
 		$j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
@@ -851,6 +879,7 @@ class Orcatrata extends CI_Controller {
         #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
         #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
 		#$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
+		$this->form_validation->set_rules('AVAP', 'À Vista ou À Prazo', 'required|trim');
 		$this->form_validation->set_rules('FormaPagamento', 'Forma de Pagamento', 'required|trim');
 		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
@@ -870,6 +899,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
         $data['select']['Produto'] = $this->Basico_model->select_produtos();
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
+		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 
         $data['titulo'] = 'Cadastar Despesa';
         $data['form_open_path'] = 'orcatrata/cadastrardesp';
@@ -900,6 +930,18 @@ class Orcatrata extends CI_Controller {
 
         #Ver uma solução melhor para este campo
         (!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
+		
+		#(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
+
+        $data['radio'] = array(
+            'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
+        );
+
+        ($data['orcatrata']['AVAP'] == 'P') ?
+            $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
+
+		
+		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 		
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 
@@ -1057,7 +1099,8 @@ class Orcatrata extends CI_Controller {
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_OrcaTrata', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
-				redirect(base_url() . 'relatorio/despesasparc/' . $data['msg']);
+				redirect(base_url() . 'relatorio/despesas/' . $data['msg']);
+				#redirect(base_url() . 'relatorio/despesasparc/' . $data['msg']);
                 exit();
             }
         }
@@ -1102,6 +1145,7 @@ class Orcatrata extends CI_Controller {
 			'Modalidade',
             'ObsOrca',
 			#'idTab_TipoRD',
+			'AVAP',
         ), TRUE));
 
 
@@ -1119,6 +1163,7 @@ class Orcatrata extends CI_Controller {
 		#(!$data['orcatrata']['DataPrazo']) ? $data['orcatrata']['DataPrazo'] = date('d/m/Y', time()) : FALSE;
         #(!$data['orcatrata']['idTab_TipoRD']) ? $data['orcatrata']['idTab_TipoRD'] = "2" : FALSE;
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
+		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 
         $j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
@@ -1286,6 +1331,7 @@ class Orcatrata extends CI_Controller {
 		#$this->form_validation->set_rules('DataProcedimento', 'DataProcedimento', 'required|trim');
         #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
         #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
+		$this->form_validation->set_rules('AVAP', 'À Vista ou À Prazo', 'required|trim');
 		$this->form_validation->set_rules('FormaPagamento', 'Forma de Pagamento', 'required|trim');
 		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
@@ -1303,6 +1349,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
         $data['select']['Produto'] = $this->Basico_model->select_produtos();
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
+		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 
         $data['titulo'] = 'Editar Orçamento do Cliente';
         $data['form_open_path'] = 'orcatrata/alterar';
@@ -1335,7 +1382,17 @@ class Orcatrata extends CI_Controller {
 		
         #Ver uma solução melhor para este campo
 		(!$data['orcatrata']['TipoReceita']) ? $data['orcatrata']['TipoReceita'] = '1' : FALSE;
-        (!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
+ 
+		#(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
+
+        $data['radio'] = array(
+            'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
+        );
+
+        ($data['orcatrata']['AVAP'] == 'P') ?
+            $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"'; 
+		
+		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 
         $data['radio'] = array(
             'AprovadoOrca' => $this->basico->radio_checked($data['orcatrata']['AprovadoOrca'], 'Orçamento Aprovado', 'NS'),
@@ -1596,30 +1653,6 @@ class Orcatrata extends CI_Controller {
 
     }
 
-    public function excluir($id = FALSE) {
-
-        if ($this->input->get('m') == 1)
-            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-        elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
-        else
-            $data['msg'] = '';
-
-
-                $this->Orcatrata_model->delete_orcatrata($id);
-
-                $data['msg'] = '?m=1';
-
-                #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
-				redirect(base_url() . 'relatorio/orcamento/' . $data['msg']);
-				
-                exit();
-            //}
-        //}
-
-        $this->load->view('basico/footer');
-    }
-
     public function alterar2($id = FALSE) {
 
         if ($this->input->get('m') == 1)
@@ -1657,6 +1690,7 @@ class Orcatrata extends CI_Controller {
             'ObsOrca',
 			'Modalidade',
 			#'idTab_TipoRD',
+			'AVAP',
         ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -1670,6 +1704,7 @@ class Orcatrata extends CI_Controller {
 		#(!$data['orcatrata']['idTab_TipoRD']) ? $data['orcatrata']['idTab_TipoRD'] = "2" : FALSE;
 		(!$data['orcatrata']['DataOrca']) ? $data['orcatrata']['DataOrca'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['idApp_Cliente']) ? $data['orcatrata']['idApp_Cliente'] = '1' : FALSE;
+		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 		
         $j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
@@ -1838,6 +1873,7 @@ class Orcatrata extends CI_Controller {
 		#$this->form_validation->set_rules('DataProcedimento', 'DataProcedimento', 'required|trim');
         #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
         #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
+		$this->form_validation->set_rules('AVAP', 'À Vista ou À Prazo', 'required|trim');
 		$this->form_validation->set_rules('FormaPagamento', 'Forma de Pagamento', 'required|trim');
 		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
@@ -1856,6 +1892,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Produto'] = $this->Basico_model->select_produtos();
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
+		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 
         $data['titulo'] = 'Editar Orçamento';
         $data['form_open_path'] = 'orcatrata/alterar2';
@@ -1886,6 +1923,15 @@ class Orcatrata extends CI_Controller {
 
 
         #Ver uma solução melhor para este campo
+		#(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
+
+        $data['radio'] = array(
+            'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
+        );
+
+        ($data['orcatrata']['AVAP'] == 'P') ?
+            $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
+
         (!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 
         $data['radio'] = array(
@@ -2139,7 +2185,7 @@ class Orcatrata extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
-				redirect(base_url() . 'relatorio/receitasparc/' . $data['msg']);
+				redirect(base_url() . 'relatorio/receitas/' . $data['msg']);
 
 				exit();
             }
@@ -2186,6 +2232,7 @@ class Orcatrata extends CI_Controller {
             'ObsOrca',
 			'Modalidade',
 			#'idTab_TipoRD',
+			'AVAP',
         ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -2199,6 +2246,7 @@ class Orcatrata extends CI_Controller {
 		#(!$data['orcatrata']['idTab_TipoRD']) ? $data['orcatrata']['idTab_TipoRD'] = "2" : FALSE;
 		(!$data['orcatrata']['DataOrca']) ? $data['orcatrata']['DataOrca'] = date('d/m/Y', time()) : FALSE;
 		#(!$data['orcatrata']['idApp_Cliente']) ? $data['orcatrata']['idApp_Cliente'] = '1' : FALSE;
+		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 		
         $j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
@@ -2367,6 +2415,7 @@ class Orcatrata extends CI_Controller {
 		#$this->form_validation->set_rules('DataProcedimento', 'DataProcedimento', 'required|trim');
         #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
         #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
+		$this->form_validation->set_rules('AVAP', 'À Vista ou À Prazo', 'required|trim');
 		$this->form_validation->set_rules('FormaPagamento', 'Forma de Pagamento', 'required|trim');
 		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
@@ -2385,6 +2434,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Produto'] = $this->Basico_model->select_produtos();
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
+		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 
         $data['titulo'] = 'Editar Despesa';
         $data['form_open_path'] = 'orcatrata/alterardesp';
@@ -2415,6 +2465,16 @@ class Orcatrata extends CI_Controller {
 
 
         #Ver uma solução melhor para este campo
+		(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
+
+        $data['radio'] = array(
+            'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
+        );
+
+        ($data['orcatrata']['AVAP'] == 'P') ?
+            $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
+			
+
         (!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 
         $data['radio'] = array(
@@ -2667,8 +2727,9 @@ class Orcatrata extends CI_Controller {
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_OrcaTrata', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
-                #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
-				redirect(base_url() . 'relatorio/despesasparc/' . $data['msg']);
+                redirect(base_url() . 'relatorio/despesas/' . $data['msg']);
+				#redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
+				#redirect(base_url() . 'relatorio/despesasparc/' . $data['msg']);
 
 				exit();
             }
@@ -3951,6 +4012,30 @@ class Orcatrata extends CI_Controller {
 
         $this->load->view('basico/footer');
 
+    }
+
+    public function excluir($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+
+                $this->Orcatrata_model->delete_orcatrata($id);
+
+                $data['msg'] = '?m=1';
+
+                #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
+				redirect(base_url() . 'relatorio/orcamento/' . $data['msg']);
+				
+                exit();
+            //}
+        //}
+
+        $this->load->view('basico/footer');
     }
 	
     public function excluir2($id = FALSE) {

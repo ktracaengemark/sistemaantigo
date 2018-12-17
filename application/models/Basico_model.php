@@ -1087,9 +1087,9 @@ class Basico_model extends CI_Model {
 	public function select_status_sn($data = FALSE) {
 
         if ($data === TRUE) {
-            $array = $this->db->query('SELECT * FROM Tab_StatusSN');
+            $array = $this->db->query('SELECT * FROM Tab_StatusSN ORDER BY Abrev ASC');
         } else {
-            $query = $this->db->query('SELECT * FROM Tab_StatusSN');
+            $query = $this->db->query('SELECT * FROM Tab_StatusSN ORDER BY Abrev ASC');
 
             $array = array();
             foreach ($query->result() as $row) {
@@ -1099,6 +1099,22 @@ class Basico_model extends CI_Model {
 
         return $array;
     }
+	
+	public function select_status_sn1($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('SELECT * FROM Tab_StatusSN ORDER BY Abrev DESC');
+        } else {
+            $query = $this->db->query('SELECT * FROM Tab_StatusSN ORDER BY Abrev DESC');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->Abrev] = $row->StatusSN;
+            }
+        }
+
+        return $array;
+    }	
 
 	public function select_status_sn2($data = FALSE) {
 
@@ -1676,6 +1692,22 @@ class Basico_model extends CI_Model {
         return $array;
     }
 
+	public function select_modalidade2($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('SELECT * FROM Tab_Modalidade ORDER BY Abrev2 DESC');
+        } else {
+            $query = $this->db->query('SELECT * FROM Tab_Modalidade ORDER BY Abrev2 DESC');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->Abrev2] = $row->AVAP;
+            }
+        }
+
+        return $array;
+    }
+	
 	public function select_produtosemp($data = FALSE) {
 
         if ($data === TRUE) {
