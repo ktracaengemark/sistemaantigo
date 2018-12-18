@@ -225,6 +225,10 @@
 												<?php
 												if (!$list) {
 												?>
+													<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>contatousuario/cadastrar" role="button"> 
+														<span class="glyphicon glyphicon-plus"></span> Novo Contato
+													</a>
+													<br><br>
 													<div class="alert alert-info" role="alert"><b>Nenhum Cad.</b></div>
 												<?php
 												} else {
