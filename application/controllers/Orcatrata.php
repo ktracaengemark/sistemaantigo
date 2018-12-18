@@ -191,7 +191,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
 		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 
-        $data['titulo'] = 'Cadastar Orçamento do Cliente';
+        $data['titulo'] = 'Receita';
         $data['form_open_path'] = 'orcatrata/cadastrar';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -546,7 +546,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
 		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 		
-        $data['titulo'] = 'Cadastar Orçamento';
+        $data['titulo'] = 'Receita';
         $data['form_open_path'] = 'orcatrata/cadastrar2';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -901,7 +901,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
 		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 
-        $data['titulo'] = 'Cadastar Despesa';
+        $data['titulo'] = 'Despesa';
         $data['form_open_path'] = 'orcatrata/cadastrardesp';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -1351,7 +1351,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
 		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 
-        $data['titulo'] = 'Editar Orçamento do Cliente';
+        $data['titulo'] = 'Editar Receita';
         $data['form_open_path'] = 'orcatrata/alterar';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -1894,7 +1894,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
 		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 
-        $data['titulo'] = 'Editar Orçamento';
+        $data['titulo'] = 'Editar Receita';
         $data['form_open_path'] = 'orcatrata/alterar2';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -4028,8 +4028,8 @@ class Orcatrata extends CI_Controller {
 
                 $data['msg'] = '?m=1';
 
-                #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
-				redirect(base_url() . 'relatorio/orcamento/' . $data['msg']);
+                redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
+				#redirect(base_url() . 'relatorio/orcamento/' . $data['msg']);
 				
                 exit();
             //}
@@ -4054,6 +4054,29 @@ class Orcatrata extends CI_Controller {
 
 				#redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				redirect(base_url() . 'relatorio/receitas/' . $data['msg']);
+                exit();
+            //}
+        //}
+
+        $this->load->view('basico/footer');
+    }
+
+    public function excluirdesp($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+ 
+                $this->Orcatrata_model->delete_orcatrata($id);
+
+                $data['msg'] = '?m=1';
+
+				#redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
+				redirect(base_url() . 'relatorio/despesas/' . $data['msg']);
                 exit();
             //}
         //}

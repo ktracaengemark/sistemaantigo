@@ -5169,7 +5169,7 @@ exit();*/
             FROM
                 Tab_FormaPag AS P
             WHERE
-                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 FormaPag ASC

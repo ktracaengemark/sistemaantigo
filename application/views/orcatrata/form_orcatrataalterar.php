@@ -149,7 +149,7 @@
 					<?php echo form_open_multipart($form_open_path); ?>
 					<div class="panel panel-<?php echo $panel; ?>">
 
-						<div class="panel-heading"><strong>Orçamento - </strong><?php echo $orcatrata['idApp_OrcaTrata'] ?></div>
+						<div class="panel-heading"><strong><?php echo $titulo; ?> - </strong><?php echo $orcatrata['idApp_OrcaTrata'] ?></div>
 						<div class="panel-body">
 							<div style="overflow: auto; height: 450px; ">
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>

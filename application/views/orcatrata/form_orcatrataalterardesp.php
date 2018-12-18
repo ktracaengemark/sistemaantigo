@@ -15,7 +15,7 @@
 					<?php echo form_open_multipart($form_open_path); ?>
 
 					<div class="panel panel-<?php echo $panel; ?>">
-						<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
+						<div class="panel-heading"><strong><?php echo $titulo; ?> - </strong><?php echo $orcatrata['idApp_OrcaTrata'] ?></div>
 						<div class="panel-body">
 							<div style="overflow: auto; height: 450px; ">
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
@@ -1082,7 +1082,7 @@
 															</button>
 														</div>
 														<div class="col-md-6 text-right">
-															<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluir2/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
+															<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluirdesp/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
 																<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 															</a>
 														</div>
