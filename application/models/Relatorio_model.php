@@ -5328,7 +5328,7 @@ exit();*/
             SELECT
 				idSis_Empresa,
 				NomeEmpresa,
-				Atuacao
+				CONCAT(idSis_Empresa, " - ", NomeEmpresa, " ->>>>- ", Atuacao) AS Atuacao
 			FROM
 				Sis_Empresa
 
