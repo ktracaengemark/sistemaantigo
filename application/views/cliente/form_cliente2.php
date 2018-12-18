@@ -205,11 +205,13 @@
 										</div>
 										<div class="form-group">
 											<div class="row">											
+												<!--
 												<div class="col-md-3">
 													<label for="DataCadastroCliente">Cadastrado em:</label>													
-													<input type="text" class="form-control Date"  maxlength="10" <?php echo $readonly; ?>
-														   name="DataCadastroCliente" placeholder="DD/MM/AAAA" value="<?php echo $query['DataCadastroCliente']; ?>">													
+													<input type="text" class="form-control Date"  maxlength="10" <?php #echo $readonly; ?>
+														   name="DataCadastroCliente" placeholder="DD/MM/AAAA" value="<?php #echo $query['DataCadastroCliente']; ?>">													
 												</div>
+												-->
 												<div class="col-md-3">
 													<label for="RegistroFicha">Ficha Nº:</label>
 													<input type="text" class="form-control" maxlength="45" <?php echo $readonly; ?>
