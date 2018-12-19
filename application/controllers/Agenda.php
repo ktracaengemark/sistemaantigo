@@ -57,6 +57,7 @@ class Agenda extends CI_Controller {
 			'Concluidoemp',			
             'Ordenamento',
             'Campo',
+			'Prioridade',
         ), TRUE));
 
         $_SESSION['FiltroAlteraProcedimento']['Dia'] = $data['query']['Dia'];
@@ -107,6 +108,13 @@ class Agenda extends CI_Controller {
             'DESC' => 'Decrescente',
 			'ASC' => 'Crescente',
         );
+		
+        $data['select']['Prioridade'] = array (
+            '0' => 'TODOS',
+			'1' => 'Alta',
+            '2' => 'Media',
+			'3' => 'Baixa',
+        );		
 
         
 		$data['select']['Dia'] = $this->Agenda_model->select_dia();
@@ -131,6 +139,7 @@ class Agenda extends CI_Controller {
 			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
+			$data['bd']['Prioridade'] = $data['query']['Prioridade'];
 
             $data['report'] = $this->Agenda_model->list1_procedimento($data['bd'],TRUE);
 

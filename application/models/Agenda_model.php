@@ -491,7 +491,9 @@ class Agenda_model extends CI_Model {
         $data['Campo'] = (!$data['Campo']) ? 'P.ConcluidoProcedimento' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$filtro4 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
+		$filtro5 = ($data['Prioridade']) ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
 		$data['ConcluidoProcedimento'] = ($data['ConcluidoProcedimento'] != '') ? ' AND P.ConcluidoProcedimento = ' . $data['ConcluidoProcedimento'] : FALSE;
+		$data['Prioridade'] = ($data['Prioridade'] != '') ? ' AND P.Prioridade = ' . $data['Prioridade'] : FALSE;
 		
 		$query = $this->db->query('
             SELECT
@@ -503,6 +505,7 @@ class Agenda_model extends CI_Model {
                 P.Procedimento,
 				P.DataProcedimento,
 				P.ConcluidoProcedimento,
+				P.Prioridade,
 				SN.StatusSN
             FROM
 				App_Procedimento AS P
@@ -515,6 +518,7 @@ class Agenda_model extends CI_Model {
 				P.idApp_Cliente = "0" AND
 				P.idSis_EmpresaCli = "0" AND
 				' . $filtro4 . '
+				' . $filtro5 . '
 				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' 
 
 				' . $data['Dia'] . ' 
@@ -522,7 +526,8 @@ class Agenda_model extends CI_Model {
 				' . $data['Ano'] . ' 
 				
             ORDER BY
-                P.ConcluidoProcedimento,
+                P.Prioridade,
+				P.ConcluidoProcedimento,
 				P.DataProcedimento
         ');
         /*

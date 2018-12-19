@@ -22,46 +22,73 @@
 							<div class="form-group">
 								<div class="panel panel-info">
 									<div class="panel-heading">
-										<div class="row">
-											<div class="col-md-12">
-												<label for="Procedimento">Tarefa:</label>
-												<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?>
-														  name="Procedimento"><?php echo $query['Procedimento']; ?></textarea>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-12">
+													<label for="Procedimento">Tarefa:</label>
+													<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?>
+															  name="Procedimento"><?php echo $query['Procedimento']; ?></textarea>
+												</div>
 											</div>
 										</div>	
-										<div class="row">	
-											<div class="col-md-6">
-												<label for="DataProcedimento">Data:</label>
-												<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
-													   name="DataProcedimento" placeholder="DD/MM/AAAA" value="<?php echo $query['DataProcedimento']; ?>">
+										<div class="form-group">	
+											<div class="row">	
+												<div class="col-md-12 form-inline">
+													<label for="Prioridade">Prioridade:</label><br>
+													<div class="form-group">
+														<label class="radio-inline">
+															<input type="radio" 
+																   name="Prioridade" value="1" <?php echo $query['Prioridade']; ?>> Alta
+														</label>
+														<label class="radio-inline">
+															<input type="radio" 
+																   name="Prioridade" value="2" <?php echo $query['Prioridade']; ?>> Media
+														</label>
+														<label class="radio-inline">
+															<input type="radio" 
+																   name="Prioridade" value="3" <?php echo $query['Prioridade']; ?> CHECKED> Baixa
+														</label>
+													</div>
+												</div>
 											</div>
 										</div>	
-										<div class="row">	
-											<div class="col-md-4">
-												<label for="ConcluidoProcedimento">Concluída</label><br>
-												<div class="form-group">
-													<div class="btn-group" data-toggle="buttons">
-														<?php
-														foreach ($select['ConcluidoProcedimento'] as $key => $row) {
-															(!$query['ConcluidoProcedimento']) ? $query['ConcluidoProcedimento'] = 'N' : FALSE;
+										<div class="form-group">	
+											<div class="row">	
+												<div class="col-md-6">
+													<label for="DataProcedimento">Data:</label>
+													<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
+														   name="DataProcedimento" placeholder="DD/MM/AAAA" value="<?php echo $query['DataProcedimento']; ?>">
+												</div>
+											</div>
+										</div>	
+										<div class="form-group">	
+											<div class="row">	
+												<div class="col-md-4">
+													<label for="ConcluidoProcedimento">Concluída</label><br>
+													<div class="form-group">
+														<div class="btn-group" data-toggle="buttons">
+															<?php
+															foreach ($select['ConcluidoProcedimento'] as $key => $row) {
+																(!$query['ConcluidoProcedimento']) ? $query['ConcluidoProcedimento'] = 'N' : FALSE;
 
-															if ($query['ConcluidoProcedimento'] == $key) {
-																echo ''
-																. '<label class="btn btn-warning active" name="radiobutton_ConcluidoProcedimento" id="radiobutton_ConcluidoProcedimento' . $key . '">'
-																. '<input type="radio" name="ConcluidoProcedimento" id="radiobutton" '
-																. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																. '</label>'
-																;
-															} else {
-																echo ''
-																. '<label class="btn btn-default" name="radiobutton_ConcluidoProcedimento" id="radiobutton_ConcluidoProcedimento' . $key . '">'
-																. '<input type="radio" name="ConcluidoProcedimento" id="radiobutton" '
-																. 'autocomplete="off" value="' . $key . '" >' . $row
-																. '</label>'
-																;
+																if ($query['ConcluidoProcedimento'] == $key) {
+																	echo ''
+																	. '<label class="btn btn-warning active" name="radiobutton_ConcluidoProcedimento" id="radiobutton_ConcluidoProcedimento' . $key . '">'
+																	. '<input type="radio" name="ConcluidoProcedimento" id="radiobutton" '
+																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																	. '</label>'
+																	;
+																} else {
+																	echo ''
+																	. '<label class="btn btn-default" name="radiobutton_ConcluidoProcedimento" id="radiobutton_ConcluidoProcedimento' . $key . '">'
+																	. '<input type="radio" name="ConcluidoProcedimento" id="radiobutton" '
+																	. 'autocomplete="off" value="' . $key . '" >' . $row
+																	. '</label>'
+																	;
+																}
 															}
-														}
-														?>
+															?>
+														</div>
 													</div>
 												</div>
 											</div>
