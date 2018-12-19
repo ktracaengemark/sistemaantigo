@@ -160,7 +160,7 @@ class Loginempresa extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-            #'Email',
+            'Email',
             #'UsuarioEmpresa',
 			'NomeEmpresa',
             'NomeAdmin',
@@ -178,7 +178,7 @@ class Loginempresa extends CI_Controller {
 	
 		$this->form_validation->set_rules('CpfAdmin', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CpfAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
 		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
-		#$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email');		
+		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');		
         #$this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
 		$this->form_validation->set_rules('NomeAdmin', 'Nome do Administrador', 'required|trim');      	
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
@@ -284,7 +284,7 @@ class Loginempresa extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-            #'Email',
+            'Email',
             #'UsuarioEmpresa',
 			'NomeEmpresa',
             'NomeAdmin',
@@ -303,8 +303,8 @@ class Loginempresa extends CI_Controller {
 	
 		$this->form_validation->set_rules('CpfAdmin', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CpfAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
 		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
-		$this->form_validation->set_rules('Email', 'E-mail', 'required|trim|valid_email');		
-        $this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
+		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');		
+        #$this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
 		$this->form_validation->set_rules('NomeAdmin', 'Nome do Administrador', 'required|trim');      	
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
@@ -321,7 +321,7 @@ class Loginempresa extends CI_Controller {
         } else {
 			
 			$data['query']['idSis_EmpresaMatriz'] = 2;
-			$data['query']['Associado'] = $_SESSION['log']['idSis_Empresa'];
+			$data['query']['Associado'] = $_SESSION['log']['id'];
 			$data['query']['PermissaoEmpresa'] = 1;
 			$data['query']['NivelEmpresa'] = 3;
 			$data['query']['idTab_Modulo'] = 1;
@@ -345,14 +345,14 @@ class Loginempresa extends CI_Controller {
                 $this->load->view('loginempresa/form_loginempresa', $data);
             } else {
 
-                          
+                 /*          
                 $this->load->library('email');
 
                 $this->email->from('contato@ktracaengemark.com.br', 'KTRACA Engenharia & Marketing');
                 $this->email->to($data['query']['Email']);
 
                 $this->email->subject('[KTRACA] Confirmação de registro - Usuário: ' . $data['query']['UsuarioEmpresa']);
-                /*
+               
                   $this->email->message('Por favor, clique no link a seguir para confirmar seu registro: '
                   . 'http://www.romati.com.br/app/loginempresa/confirmar/' . $data['query']['Codigo']);
 
@@ -368,22 +368,21 @@ class Loginempresa extends CI_Controller {
                   </h4>
                   </div> '
                   . '';
-                 */
+                 
 
                 $this->email->message('Sua conta foi ativada com sucesso! Aproveite e teste todas as funcionalidades do sistema.'
                         . 'Qualquer sugestão ou crítica será bem vinda. ');
 
                 $this->email->send();
-
+				*/
                 $data['aviso'] = ''
                         . '
                   <div class="alert alert-success" role="alert">
                   <h4>
                   <p><b>Empresa cadastrado com sucesso!</b></p>
-                  <p>Clique no botão abaixo e retorne para a tela de login para entrar no sistema.</p>
+                  <p>Clique no botão abaixo e retorne para a tela de Login do Administrador, para entrar no sistema.</p>
                   </h4>
                   <br>
-                  <a class="btn btn-primary" href="' . base_url() . '" role="button">Acessar o aplicativo</a>
                   </div> '
                         . '';
 
@@ -393,7 +392,7 @@ class Loginempresa extends CI_Controller {
             }
         }
 
-        $this->load->view('basico/footerloginempresa');
+        #$this->load->view('basico/footerloginempresa');
         $this->load->view('basico/footer');
     }
 	

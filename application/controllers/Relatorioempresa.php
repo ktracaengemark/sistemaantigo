@@ -391,6 +391,133 @@ class Relatorioempresa extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'NomeEmpresa',
+			'CategoriaEmpresa',
+			'Atuacao',
+			'Ordenamento',
+            'Campo',
+        ), TRUE));
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+
+
+        $data['select']['Campo'] = array(
+            'E.NomeEmpresa' => 'Nome da Empresa',
+			'E.idSis_Empresa' => 'Nº da Empresa',
+            'E.Bairro' => 'Bairro',
+            'E.Municipio' => 'Município',
+            'E.Email' => 'E-mail',
+
+
+        );
+
+        $data['select']['Ordenamento'] = array(
+            'ASC' => 'Crescente',
+            'DESC' => 'Decrescente',
+        );
+
+        $data['select']['NomeEmpresa'] = $this->Relatorioempresa_model->select_empresas();
+		$data['select']['CategoriaEmpresa'] = $this->Relatorioempresa_model->select_categoriaempresa();
+		$data['select']['Atuacao'] = $this->Relatorioempresa_model->select_atuacao();
+
+        $data['titulo'] = 'Empresas';
+
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+			$data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
+			$data['bd']['CategoriaEmpresa'] = $data['query']['CategoriaEmpresa'];
+			$data['bd']['Atuacao'] = $data['query']['Atuacao'];
+            $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+
+            $data['report'] = $this->Relatorioempresa_model->list_empresas($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list'] = $this->load->view('relatorioempresa/list_empresas', $data, TRUE);
+            //$data['nav_secundario'] = $this->load->view('profissional/nav_secundario', $data, TRUE);
+        }
+
+        $this->load->view('relatorioempresa/tela_empresas', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+
+	public function associado() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = quotes_to_entities($this->input->post(array(
+            'NomeEmpresa',
+            'Ordenamento',
+            'Campo',
+        ), TRUE));
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+
+
+
+		$data['select']['Campo'] = array(
+            'C.NomeEmpresa' => 'Nome da Empresa',
+        );
+
+        $data['select']['Ordenamento'] = array(
+            'ASC' => 'Crescente',
+            'DESC' => 'Decrescente',
+        );
+
+        $data['select']['NomeEmpresa'] = $this->Relatorioempresa_model->select_associado();
+
+        $data['titulo'] = 'Associados';
+
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+
+            $data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
+			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+
+            $data['report'] = $this->Relatorioempresa_model->list_associado($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list'] = $this->load->view('relatorioempresa/list_associado', $data, TRUE);
+        }
+
+        $this->load->view('relatorioempresa/tela_associado', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+	
+	public function empresas2() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = quotes_to_entities($this->input->post(array(
+            'NomeEmpresa',
 			'Ordenamento',
             'Campo',
         ), TRUE));

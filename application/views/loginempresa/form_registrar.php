@@ -58,13 +58,13 @@
 <!--	
     <label class="text-">E-mail:</label>
     <input type="text" class="form-control" id="Email" maxlength="100"
-           name="Email" value="<?php echo $query['Email']; ?>">
+           name="Email" value="<?php #echo $query['Email']; ?>">
     <?php #echo form_error('Email'); ?>
     <br>
 
     <label for="UsuarioEmpresa">Usuário Admin:</label>
     <input type="text" class="form-control" id="UsuarioEmpresa" maxlength="45"
-           name="UsuarioEmpresa" value="<?php echo $query['UsuarioEmpresa']; ?>">
+           name="UsuarioEmpresa" value="<?php #echo $query['UsuarioEmpresa']; ?>">
     <?php #echo form_error('UsuarioEmpresa'); ?>
     <br>
 -->

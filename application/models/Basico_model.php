@@ -1946,7 +1946,7 @@ class Basico_model extends CI_Model {
             FROM
                 Sis_Empresa					
 			WHERE
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				idSis_Empresa = ' . $_SESSION['log']['id'] . '
 			ORDER BY 
 				NomeEmpresa ASC'
     );
@@ -1959,7 +1959,7 @@ class Basico_model extends CI_Model {
             FROM
                 Sis_Empresa					
 			WHERE
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+				idSis_Empresa = ' . $_SESSION['log']['id'] . ' 
 			ORDER BY 
 				NomeEmpresa ASC'
     );

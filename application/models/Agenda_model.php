@@ -535,12 +535,14 @@ class Agenda_model extends CI_Model {
 				P.DataProcedimento,
 				P.ConcluidoProcedimento,
 				P.Prioridade,
+				PR.Prioridade,
 				SN.StatusSN
             FROM
 				App_Procedimento AS P
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = P.idSis_Empresa
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
+					LEFT JOIN Tab_Prioridade AS PR ON PR.idTab_Prioridade = P.Prioridade
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idApp_OrcaTrata = "0" AND

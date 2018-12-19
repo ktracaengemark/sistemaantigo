@@ -173,10 +173,8 @@
 												</button>
 												<ul class="dropdown-menu" role="menu">
 													<li>
-														<a <?php if (preg_match("/usuario\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar/    ?>>
-															<a href="<?php echo base_url() . 'usuario/cadastrar/' ?>">
-																<span class="glyphicon glyphicon-plus"></span> Cadastrar Usuario
-															</a>
+														<a href="<?php echo base_url() . 'relatorioempresa/funcionario/' ?>">
+															<span class="glyphicon glyphicon-file"></span> Relatorio de Usuarios
 														</a>
 													</li>
 												</ul>
