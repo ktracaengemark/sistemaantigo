@@ -58,12 +58,15 @@ class Agenda extends CI_Controller {
             'Ordenamento',
             'Campo',
 			'Prioridade',
+			'Procedimento',
         ), TRUE));
 
         $_SESSION['FiltroAlteraProcedimento']['Dia'] = $data['query']['Dia'];
         $_SESSION['FiltroAlteraProcedimento']['Mesvenc'] = $data['query']['Mesvenc'];
         $_SESSION['FiltroAlteraProcedimento']['Ano'] = $data['query']['Ano'];
-		$_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];        
+		$_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+        $_SESSION['FiltroAlteraProcedimento']['Prioridade'] = $data['query']['Prioridade'];
+		$_SESSION['FiltroAlteraProcedimento']['Procedimento'] = $data['query']['Procedimento'];
 		$_SESSION['FiltroAlteraProcedimento']['Diacli'] = $data['query']['Diacli'];
         $_SESSION['FiltroAlteraProcedimento']['Mesvenccli'] = $data['query']['Mesvenccli'];
         $_SESSION['FiltroAlteraProcedimento']['Anocli'] = $data['query']['Anocli'];		
@@ -112,7 +115,7 @@ class Agenda extends CI_Controller {
         $data['select']['Prioridade'] = array (
             '0' => 'TODOS',
 			'1' => 'Alta',
-            '2' => 'Media',
+            '2' => 'Média',
 			'3' => 'Baixa',
         );		
 
@@ -127,6 +130,7 @@ class Agenda extends CI_Controller {
 		$data['select']['NomeEmpresa'] = $this->Agenda_model->select_empresarec();
 		$data['select']['NomeEmpresaCli'] = $this->Agenda_model->select_empresaenv();
         $data['select']['NomeUsuario'] = $this->Agenda_model->select_usuario();
+		$data['select']['Procedimento'] = $this->Agenda_model->select_procedimento();
 		
         $data['titulo1'] = 'Tarefas';
 
@@ -140,6 +144,7 @@ class Agenda extends CI_Controller {
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 			$data['bd']['Prioridade'] = $data['query']['Prioridade'];
+			$data['bd']['Procedimento'] = $data['query']['Procedimento'];
 
             $data['report'] = $this->Agenda_model->list1_procedimento($data['bd'],TRUE);
 

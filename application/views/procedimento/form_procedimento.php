@@ -38,15 +38,15 @@
 													<div class="form-group">
 														<label class="radio-inline">
 															<input type="radio" 
-																   name="Prioridade" value="1" <?php echo $query['Prioridade']; ?>> Alta
+																   name="Prioridade" value="1" <?php echo $query['Prioridade']; ?>> <strong>Alta</strong>
 														</label>
 														<label class="radio-inline">
 															<input type="radio" 
-																   name="Prioridade" value="2" <?php echo $query['Prioridade']; ?>> Media
+																   name="Prioridade" value="2" <?php echo $query['Prioridade']; ?>> <strong>Média</strong>
 														</label>
 														<label class="radio-inline">
 															<input type="radio" 
-																   name="Prioridade" value="3" <?php echo $query['Prioridade']; ?> CHECKED> Baixa
+																   name="Prioridade" value="3" <?php echo $query['Prioridade']; ?> CHECKED> <strong>Baixa</strong>
 														</label>
 													</div>
 												</div>

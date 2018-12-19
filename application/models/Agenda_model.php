@@ -481,6 +481,34 @@ class Agenda_model extends CI_Model {
 
         return $array;
     }	
+
+    public function select_procedimento() {
+
+        $query = $this->db->query('
+            SELECT
+                P.idApp_Procedimento,
+                P.Procedimento
+            FROM
+                App_Procedimento AS P
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idApp_OrcaTrata = "0" AND
+				P.idApp_Cliente = "0" AND
+				P.idSis_EmpresaCli = "0" AND
+				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' 
+            ORDER BY
+                P.idApp_Procedimento ASC
+        ');
+
+        $array = array();
+        $array[0] = 'TODOS';
+        foreach ($query->result() as $row) {
+			$array[$row->idApp_Procedimento] = $row->Procedimento;
+        }
+
+        return $array;
+    }
 	
 	public function list1_procedimento($data, $completo) {
 
@@ -494,6 +522,7 @@ class Agenda_model extends CI_Model {
 		$filtro5 = ($data['Prioridade']) ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
 		$data['ConcluidoProcedimento'] = ($data['ConcluidoProcedimento'] != '') ? ' AND P.ConcluidoProcedimento = ' . $data['ConcluidoProcedimento'] : FALSE;
 		$data['Prioridade'] = ($data['Prioridade'] != '') ? ' AND P.Prioridade = ' . $data['Prioridade'] : FALSE;
+		$data['Procedimento'] = ($data['Procedimento']) ? ' AND P.idApp_Procedimento = ' . $data['Procedimento'] : FALSE;
 		
 		$query = $this->db->query('
             SELECT
@@ -520,15 +549,12 @@ class Agenda_model extends CI_Model {
 				' . $filtro4 . '
 				' . $filtro5 . '
 				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' 
-
-				' . $data['Dia'] . ' 
-				' . $data['Mesvenc'] . ' 
-				' . $data['Ano'] . ' 
+				' . $data['Procedimento'] . '
 				
             ORDER BY
-                P.Prioridade,
-				P.ConcluidoProcedimento,
-				P.DataProcedimento
+                P.ConcluidoProcedimento,
+				P.Prioridade,
+				P.DataProcedimento DESC
         ');
         /*
 

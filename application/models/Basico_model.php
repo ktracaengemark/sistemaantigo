@@ -2091,4 +2091,39 @@ class Basico_model extends CI_Model {
         return $array;
     }	
 	
+	public function select_procedimento($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+				idApp_Procedimento,
+				Procedimento				
+            FROM
+                App_Procedimento					
+
+			ORDER BY 
+				Procedimento ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+				'SELECT                
+				idApp_Procedimento,
+				Procedimento				
+            FROM
+                App_Procedimento					
+
+			ORDER BY 
+				Procedimento ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idApp_Procedimento] = $row->Procedimento;
+            }
+        }
+
+        return $array;
+    }
+	
 }

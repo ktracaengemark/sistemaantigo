@@ -71,7 +71,7 @@ class Procedimento extends CI_Controller {
 		$data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['Prioridade'] = array (
             '1' => 'Alta',
-            '2' => 'Media',
+            '2' => 'Média',
 			'3' => 'Baixa',
         );		
 		

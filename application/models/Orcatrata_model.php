@@ -274,6 +274,8 @@ class Orcatrata_model extends CI_Model {
 		
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		$permissao1 = ($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != '0' ) ? 'P.ConcluidoProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] . '" AND ' : FALSE;
+		$permissao6 = ($_SESSION['FiltroAlteraProcedimento']['Prioridade'] != '0' ) ? 'P.Prioridade = "' . $_SESSION['FiltroAlteraProcedimento']['Prioridade'] . '" AND ' : FALSE;
+		$permissao7 = ($_SESSION['FiltroAlteraProcedimento']['Procedimento'] != '0' ) ? 'P.idApp_Procedimento = "' . $_SESSION['FiltroAlteraProcedimento']['Procedimento'] . '" AND ' : FALSE;
 		$permissao2 = ($_SESSION['FiltroAlteraProcedimento']['Mesvenc'] != "0" ) ? 'MONTH(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Mesvenc'] . '" AND ' : FALSE;
 		$permissao3 = ($_SESSION['FiltroAlteraProcedimento']['Ano'] != "" ) ? 'YEAR(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Ano'] . '" AND ' : FALSE;
 		$permissao5 = ($_SESSION['FiltroAlteraProcedimento']['Dia'] != "0" ) ? 'DAY(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Dia'] . '" AND ' : FALSE;
@@ -287,7 +289,8 @@ class Orcatrata_model extends CI_Model {
 				P.idApp_Procedimento,
                 P.Procedimento,
 				P.DataProcedimento,
-				P.ConcluidoProcedimento
+				P.ConcluidoProcedimento,
+				P.Prioridade
             FROM
 				App_Procedimento AS P
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
@@ -297,11 +300,14 @@ class Orcatrata_model extends CI_Model {
 				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' ) OR
 				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' )AND
 				' . $permissao1 . '
-				' . $permissao2 . '
-				' . $permissao3 . '
-				' . $permissao5 . '
+				' . $permissao6 . '
+				' . $permissao7 . '
 				P.idApp_OrcaTrata = "0" AND
 				P.idApp_Cliente = "0" 
+			ORDER BY
+				P.ConcluidoProcedimento,
+				P.Prioridade ASC,
+				P.DataProcedimento DESC
 		');
         $query = $query->result_array();
 

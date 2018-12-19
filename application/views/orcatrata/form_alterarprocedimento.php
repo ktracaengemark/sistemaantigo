@@ -51,6 +51,24 @@
 																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 															</div>
 															<div class="col-md-2">
+																<label for="Prioridade<?php echo $i ?>">Prioridade:</label>
+																<?php if ($i == 1) { ?>
+																<?php } ?>
+																<select data-placeholder="Selecione uma opção..." class="form-control" 
+																		 id="listadinamicac<?php echo $i ?>" name="Prioridade<?php echo $i ?>">
+																	<option value="">-- Selecione uma opção --</option>
+																	<?php
+																	foreach ($select['Prioridade'] as $key => $row) {
+																		if ($procedimento[$i]['Prioridade'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	?>
+																</select>
+															</div>
+															<div class="col-md-2">
 																<label for="DataProcedimento<?php echo $i ?>">Data:</label>
 																<div class="input-group <?php echo $datepicker; ?>">
 																	<span class="input-group-addon" disabled>

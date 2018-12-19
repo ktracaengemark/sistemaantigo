@@ -14,9 +14,9 @@
 					<thead>
 						<tr>
 							<th class="active">Concl.</th>
-							<th class="active">Prioridade</th>
+							<th class="active">Prior.</th>
 							<th class="active">Tarefa</th>
-							<th class="active">Data</th>
+							<!--<th class="active">Data</th>-->
 						</tr>
 					</thead>
 
@@ -31,7 +31,7 @@
 								echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
 								echo '<td>' . $row['Prioridade'] . '</td>';
 								echo '<td>' . $row['Procedimento'] . '</td>';
-								echo '<td>' . $row['DataProcedimento'] . '</td>';							
+								#echo '<td>' . $row['DataProcedimento'] . '</td>';							
 							echo '</tr>';
 						}
 						?>
