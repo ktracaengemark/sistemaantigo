@@ -254,10 +254,10 @@ class Loginempresa extends CI_Controller {
                   <div class="alert alert-success" role="alert">
                   <h4>
                   <p><b>Empresa cadastrado com sucesso!</b></p>
-                  <p>Clique no botão abaixo e retorne para a tela de login para entrar no sistema.</p>
+                  <p>Clique no botão abaixo e retorne para a tela de Login do Administrador, para entrar no sistema.</p>
                   </h4>
                   <br>
-                  <a class="btn btn-primary" href="' . base_url() . '" role="button">Acessar o aplicativo</a>
+                 
                   </div> '
                         . '';
 
