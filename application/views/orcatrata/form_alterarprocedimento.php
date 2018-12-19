@@ -56,7 +56,7 @@
 																<?php } ?>
 																<select data-placeholder="Selecione uma opção..." class="form-control" 
 																		 id="listadinamicac<?php echo $i ?>" name="Prioridade<?php echo $i ?>">
-																	<option value="">-- Selecione uma opção --</option>
+																	
 																	<?php
 																	foreach ($select['Prioridade'] as $key => $row) {
 																		if ($procedimento[$i]['Prioridade'] == $key) {

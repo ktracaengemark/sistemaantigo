@@ -207,6 +207,28 @@ elseif ($_GET['q'] == 4) {
 
 }
 
+elseif ($_GET['q'] == 7) {
+
+    $result = mysql_query(
+            'SELECT
+				idTab_Prioridade,
+				Prioridade
+            FROM
+                Tab_Prioridade
+			ORDER BY 
+				idTab_Prioridade DESC'
+    );
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Prioridade'],
+            'name' => utf8_encode($row['Prioridade']),
+        );
+    }
+
+}
+
 elseif ($_GET['q'] == 3) {
 
     $result = mysql_query(
