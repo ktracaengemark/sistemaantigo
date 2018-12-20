@@ -182,7 +182,7 @@ class Relatorio_model extends CI_Model {
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;		
-		$data['TipoReceita'] = ($data['TipoReceita']) ? ' AND TD.idTab_TipoReceita = ' . $data['TipoReceita'] : FALSE;
+		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TD.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
 		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
@@ -201,8 +201,8 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_TipoRD,
                 OT.AprovadoOrca,
 				OT.ObsOrca,
-				CONCAT(IFNULL(TD.TipoReceita,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,"")) AS Receitas,
-				TD.TipoReceita,
+				CONCAT(IFNULL(TD.TipoFinanceiro,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,"")) AS Receitas,
+				TD.TipoFinanceiro,
                 OT.DataOrca,
                 OT.DataEntradaOrca,
                 OT.ValorEntradaOrca,
@@ -225,7 +225,7 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-					LEFT JOIN Tab_TipoReceita AS TD ON TD.idTab_TipoReceita = OT.TipoReceita
+					LEFT JOIN Tab_TipoFinanceiro AS TD ON TD.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -240,7 +240,7 @@ class Relatorio_model extends CI_Model {
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 
-				' . $data['TipoReceita'] . ' 
+				' . $data['TipoFinanceiro'] . ' 
 				' . $data['NomeCliente'] . '
             ORDER BY
 				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
@@ -349,7 +349,7 @@ class Relatorio_model extends CI_Model {
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;		
-		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoDespesa'] : FALSE;
+		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TD.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
 		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
@@ -368,7 +368,7 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_TipoRD,
                 OT.AprovadoOrca,
 				OT.ObsOrca,
-				CONCAT(IFNULL(TD.TipoDespesa,""), " / ", IFNULL(OT.Receitas,"")) AS TipoReceita,
+				CONCAT(IFNULL(TD.TipoFinanceiro,""), " / ", IFNULL(OT.Receitas,"")) AS TipoFinanceiro,
                 OT.DataOrca,
                 OT.DataEntradaOrca,
                 OT.ValorEntradaOrca,
@@ -390,7 +390,7 @@ class Relatorio_model extends CI_Model {
                 App_OrcaTrata AS OT
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-					LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = OT.TipoReceita
+					LEFT JOIN Tab_TipoFinanceiro AS TD ON TD.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -405,7 +405,7 @@ class Relatorio_model extends CI_Model {
                 ' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 
-				' . $data['TipoDespesa'] . ' 
+				' . $data['TipoFinanceiro'] . ' 
             ORDER BY
 				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
             ');
@@ -513,7 +513,7 @@ class Relatorio_model extends CI_Model {
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;		
-		$data['TipoReceita'] = ($data['TipoReceita']) ? ' AND TR.idTab_TipoReceita = ' . $data['TipoReceita'] : FALSE;
+		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TR.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
 		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
@@ -533,7 +533,7 @@ class Relatorio_model extends CI_Model {
                 OT.AprovadoOrca,
 				OT.ObsOrca,
 				OT.Receitas,
-				CONCAT(IFNULL(TR.TipoReceita,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,"")) AS Receitas,
+				CONCAT(IFNULL(TR.TipoFinanceiro,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,"")) AS Receitas,
                 OT.DataOrca,
                 OT.DataEntradaOrca,
                 OT.ValorEntradaOrca,
@@ -556,7 +556,7 @@ class Relatorio_model extends CI_Model {
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
+					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -674,7 +674,7 @@ class Relatorio_model extends CI_Model {
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;		
-		$data['TipoReceita'] = ($data['TipoReceita']) ? ' AND TD.idTab_TipoReceita = ' . $data['TipoReceita'] : FALSE;
+		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TD.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
 		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
@@ -694,7 +694,7 @@ class Relatorio_model extends CI_Model {
                 OT.AprovadoOrca,
 				OT.ObsOrca,
 				OT.Receitas,
-				CONCAT(IFNULL(TD.TipoDespesa,""), " / ", IFNULL(OT.Receitas,"")) AS TipoDespesa,
+				CONCAT(IFNULL(TD.TipoFinanceiro,""), " / ", IFNULL(OT.Receitas,"")) AS TipoFinanceiro,
                 OT.DataOrca,
                 OT.DataEntradaOrca,
                 OT.ValorEntradaOrca,
@@ -716,7 +716,7 @@ class Relatorio_model extends CI_Model {
                 App_OrcaTrata AS OT
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-					LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = OT.TipoReceita
+					LEFT JOIN Tab_TipoFinanceiro AS TD ON TD.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -835,7 +835,7 @@ class Relatorio_model extends CI_Model {
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;		
-		$data['TipoReceita'] = ($data['TipoReceita']) ? ' AND TR.idTab_TipoReceita = ' . $data['TipoReceita'] : FALSE;
+		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TR.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
 		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
@@ -855,7 +855,7 @@ class Relatorio_model extends CI_Model {
                 OT.AprovadoOrca,
 				OT.ObsOrca,
 				OT.Receitas,
-				CONCAT(IFNULL(TR.TipoReceita,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,"")) AS Receitas,
+				CONCAT(IFNULL(TR.TipoFinanceiro,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,"")) AS Receitas,
                 OT.DataOrca,
                 OT.DataEntradaOrca,
                 OT.ValorEntradaOrca,
@@ -878,7 +878,7 @@ class Relatorio_model extends CI_Model {
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
+					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -996,7 +996,7 @@ class Relatorio_model extends CI_Model {
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;		
-		$data['TipoReceita'] = ($data['TipoReceita']) ? ' AND TD.idTab_TipoReceita = ' . $data['TipoReceita'] : FALSE;
+		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TD.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
 		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
@@ -1016,7 +1016,7 @@ class Relatorio_model extends CI_Model {
                 OT.AprovadoOrca,
 				OT.ObsOrca,
 				OT.Receitas,
-				CONCAT(IFNULL(TD.TipoDespesa,""), " / ", IFNULL(OT.Receitas,"")) AS TipoDespesa,
+				CONCAT(IFNULL(TD.TipoFinanceiro,""), " / ", IFNULL(OT.Receitas,"")) AS TipoFinanceiro,
                 OT.DataOrca,
                 OT.DataEntradaOrca,
                 OT.ValorEntradaOrca,
@@ -1038,7 +1038,7 @@ class Relatorio_model extends CI_Model {
                 App_OrcaTrata AS OT
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-					LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = OT.TipoReceita
+					LEFT JOIN Tab_TipoFinanceiro AS TD ON TD.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -1129,7 +1129,7 @@ class Relatorio_model extends CI_Model {
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;		
-		$data['TipoReceita'] = ($data['TipoReceita']) ? ' AND TR.idTab_TipoReceita = ' . $data['TipoReceita'] : FALSE;
+		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TR.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
 		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
@@ -1149,7 +1149,7 @@ class Relatorio_model extends CI_Model {
                 OT.AprovadoOrca,
 				OT.ObsOrca,
 				OT.Receitas,
-				CONCAT(IFNULL(TR.TipoReceita,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,"")) AS Receitas,
+				CONCAT(IFNULL(TR.TipoFinanceiro,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Receitas,"")) AS Receitas,
                 OT.DataOrca,
                 OT.DataEntradaOrca,
                 OT.ValorEntradaOrca,
@@ -1172,7 +1172,7 @@ class Relatorio_model extends CI_Model {
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
+					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -1263,7 +1263,7 @@ class Relatorio_model extends CI_Model {
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;		
-		$data['TipoReceita'] = ($data['TipoReceita']) ? ' AND TD.idTab_TipoReceita = ' . $data['TipoReceita'] : FALSE;
+		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TD.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
 		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
@@ -1283,7 +1283,7 @@ class Relatorio_model extends CI_Model {
                 OT.AprovadoOrca,
 				OT.ObsOrca,
 				OT.Receitas,
-				CONCAT(IFNULL(TD.TipoDespesa,""), " / ", IFNULL(OT.Receitas,"")) AS TipoDespesa,
+				CONCAT(IFNULL(TD.TipoFinanceiro,""), " / ", IFNULL(OT.Receitas,"")) AS TipoFinanceiro,
                 OT.DataOrca,
                 OT.DataEntradaOrca,
                 OT.ValorEntradaOrca,
@@ -1305,7 +1305,7 @@ class Relatorio_model extends CI_Model {
                 App_OrcaTrata AS OT
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-					LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = OT.TipoReceita
+					LEFT JOIN Tab_TipoFinanceiro AS TD ON TD.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -3122,7 +3122,7 @@ exit();*/
                 '(TCO.DataDespesas >= "' . $data['DataInicio'] . '")';
         }
 
-		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TTC.idTab_TipoConsumo = ' . $data['TipoDespesa'] : FALSE;
+		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TTC.idTab_TipoConsumo = ' . $data['TipoFinanceiro'] : FALSE;
 		$data['Produtos'] = ($data['Produtos']) ? ' AND TPB.idTab_Produto = ' . $data['Produtos'] : FALSE;
 
         $query = $this->db->query('
@@ -3141,7 +3141,7 @@ exit();*/
 				TP1.Prodaux1
             FROM
                 App_Despesas AS TCO
-                    LEFT JOIN Tab_TipoConsumo AS TTC ON TTC.idTab_TipoConsumo = TCO.TipoDespesa
+                    LEFT JOIN Tab_TipoConsumo AS TTC ON TTC.idTab_TipoConsumo = TCO.TipoFinanceiro
 					LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
 					LEFT JOIN Tab_Produto AS TPB ON TPB.idTab_Produto = APC.idTab_Produto
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPB.Prodaux3
@@ -3151,7 +3151,7 @@ exit();*/
                 TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				(' . $consulta . ')
-				' . $data['TipoDespesa'] . '
+				' . $data['TipoFinanceiro'] . '
 				' . $data['Produtos'] . ' AND
 				TCO.TipoProduto = "C"
             ORDER BY
@@ -3190,14 +3190,14 @@ exit();*/
                 '(TCO.DataDespesas >= "' . $data['DataInicio'] . '")';
         }
 
-		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TTC.idTab_TipoConsumo = ' . $data['TipoDespesa'] : FALSE;
+		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TTC.idTab_TipoConsumo = ' . $data['TipoFinanceiro'] : FALSE;
 		$data['Produtos'] = ($data['Produtos']) ? ' AND TPB.idTab_Produto = ' . $data['Produtos'] : FALSE;
 
         $query = $this->db->query('
             SELECT
                 TCO.idApp_Despesas,
 				TCO.Despesa,
-				TTC.TipoDespesa,
+				TTC.TipoFinanceiro,
 				TCO.TipoProduto,
                 TCO.DataDespesas,
 				APC.QtdCompraProduto,
@@ -3208,7 +3208,7 @@ exit();*/
 				TP1.Prodaux1
             FROM
                 App_Despesas AS TCO
-                    LEFT JOIN Tab_TipoDespesa AS TTC ON TTC.idTab_TipoDespesa = TCO.TipoDespesa
+                    LEFT JOIN Tab_TipoFinanceiro AS TTC ON TTC.idTab_TipoFinanceiro = TCO.TipoFinanceiro
 					LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
 					LEFT JOIN Tab_Produto AS TPB ON TPB.idTab_Produto = APC.idTab_Produto
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPB.Prodaux3
@@ -3218,7 +3218,7 @@ exit();*/
                 TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				(' . $consulta . ')
-				' . $data['TipoDespesa'] . '
+				' . $data['TipoFinanceiro'] . '
 				' . $data['Produtos'] . ' AND
 				TCO.TipoProduto = "1" AND
 				TPB.idTab_Produto != "0"
@@ -3259,7 +3259,7 @@ exit();*/
                 '(TCO.DataDespesas >= "' . $data['DataInicio'] . '")';
         }
 
-		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TTC.idTab_TipoConsumo = ' . $data['TipoDespesa'] : FALSE;
+		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TTC.idTab_TipoConsumo = ' . $data['TipoFinanceiro'] : FALSE;
 		$data['Produtos'] = ($data['Produtos']) ? ' AND TPB.idTab_Produto = ' . $data['Produtos'] : FALSE;
         $data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
 		$data['Prodaux1'] = ($data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
@@ -3272,7 +3272,7 @@ exit();*/
 				TCO.idApp_Despesas,
 				TCO.idApp_OrcaTrata,
 				TCO.Despesa,
-				TTC.TipoDespesa,
+				TTC.TipoFinanceiro,
 				TCO.TipoProduto,
                 TCO.DataDespesas,
 				TCO.ValorDespesas,
@@ -3290,7 +3290,7 @@ exit();*/
 
             FROM
                 App_Despesas AS TCO
-                    LEFT JOIN Tab_TipoDespesa AS TTC ON TTC.idTab_TipoDespesa = TCO.TipoDespesa
+                    LEFT JOIN Tab_TipoFinanceiro AS TTC ON TTC.idTab_TipoFinanceiro = TCO.TipoFinanceiro
 					LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
 					LEFT JOIN Tab_Produto AS TPB ON TPB.idTab_Produto = APC.idTab_Produto
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = TCO.FormaPagamentoDespesas
@@ -3304,7 +3304,7 @@ exit();*/
 				TCO.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				' . $data['NomeCliente'] . ' AND
 				(' . $consulta . ')
-				' . $data['TipoDespesa'] . '
+				' . $data['TipoFinanceiro'] . '
 				' . $data['Produtos'] . '
 				' . $data['Prodaux1'] . '
 				' . $data['Prodaux2'] . '
@@ -5227,25 +5227,98 @@ exit();*/
 
         return $array;
     }	
-	
-	public function select_tiporeceita() {
+
+	public function select_tipofinanceiro() {
 
         $query = $this->db->query('
             SELECT
-				TR.idTab_TipoReceita,
-				TR.TipoReceita
+				TR.idTab_TipoFinanceiro,
+				TR.TipoFinanceiro
 			FROM
-				Tab_TipoReceita AS TR
+				Tab_TipoFinanceiro AS TR
 			WHERE
 				TR.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 			ORDER BY
-				TR.TipoReceita
+				TR.TipoFinanceiro
         ');
 
         $array = array();
         $array[0] = 'TODOS';
         foreach ($query->result() as $row) {
-            $array[$row->idTab_TipoReceita] = $row->TipoReceita;
+            $array[$row->idTab_TipoFinanceiro] = $row->TipoFinanceiro;
+        }
+
+        return $array;
+    }
+	
+	public function select_tipofinanceiroR() {
+
+        $query = $this->db->query('
+            SELECT
+				TR.idTab_TipoFinanceiro,
+				TR.TipoFinanceiro,
+				TR.RD
+			FROM
+				Tab_TipoFinanceiro AS TR
+			WHERE
+				TR.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				(TR.RD = "R" OR TR.RD = "RD")
+			ORDER BY
+				TR.TipoFinanceiro
+        ');
+
+        $array = array();
+        $array[0] = 'TODOS';
+        foreach ($query->result() as $row) {
+            $array[$row->idTab_TipoFinanceiro] = $row->TipoFinanceiro;
+        }
+
+        return $array;
+    }
+
+	public function select_tipofinanceiroD() {
+
+        $query = $this->db->query('
+            SELECT
+				TR.idTab_TipoFinanceiro,
+				TR.TipoFinanceiro,
+				TR.RD
+			FROM
+				Tab_TipoFinanceiro AS TR
+			WHERE
+				TR.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				(TR.RD = "D" OR TR.RD = "RD")
+			ORDER BY
+				TR.TipoFinanceiro
+        ');
+
+        $array = array();
+        $array[0] = 'TODOS';
+        foreach ($query->result() as $row) {
+            $array[$row->idTab_TipoFinanceiro] = $row->TipoFinanceiro;
+        }
+
+        return $array;
+    }
+	
+	public function select_tiporeceita() {
+
+        $query = $this->db->query('
+            SELECT
+				TR.idTab_TipoFinanceiro,
+				TR.TipoFinanceiro
+			FROM
+				Tab_TipoFinanceiro AS TR
+			WHERE
+				TR.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+			ORDER BY
+				TR.TipoFinanceiro
+        ');
+
+        $array = array();
+        $array[0] = 'TODOS';
+        foreach ($query->result() as $row) {
+            $array[$row->idTab_TipoFinanceiro] = $row->TipoFinanceiro;
         }
 
         return $array;
@@ -5255,25 +5328,25 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-				TD.idTab_TipoDespesa,
-				CONCAT(CD.Abrevcategoriadesp, " " , "--" , " " , TD.TipoDespesa) AS TipoDespesa,
-				CD.Categoriadesp,
-				CD.Abrevcategoriadesp
+				TD.idTab_TipoFinanceiro,
+				CONCAT(TD.TipoFinanceiro) AS TipoFinanceiro
+
+
 			FROM
-				Tab_TipoDespesa AS TD
-					LEFT JOIN Tab_Categoriadesp AS CD ON CD.idTab_Categoriadesp = TD.Categoriadesp
+				Tab_TipoFinanceiro AS TD
+
 			WHERE
 				TD.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 			ORDER BY
-				CD.Abrevcategoriadesp,
-				TD.TipoDespesa
+
+				TD.TipoFinanceiro
         ');
 
         $array = array();
         $array[0] = ':: Todos ::';
         foreach ($query->result() as $row) {
-            $array[$row->idTab_TipoDespesa] = $row->TipoDespesa;
+            $array[$row->idTab_TipoFinanceiro] = $row->TipoFinanceiro;
         }
 
         return $array;

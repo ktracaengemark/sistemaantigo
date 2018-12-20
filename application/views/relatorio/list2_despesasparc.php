@@ -61,7 +61,7 @@
 							#echo '<tr>';
 							echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarparceladesp/' . $row['idSis_Empresa'] . '">';
 								#echo '<td>' . $row['idSis_Empresa'] . '</td>';
-								echo '<td>' . $row['TipoDespesa'] . '</td>';
+								echo '<td>' . $row['TipoFinanceiro'] . '</td>';
 								echo '<td>' . $row['Parcela'] . '  ' . $row['Quitado'] . '</td>';
 								echo '<td>' . $row['DataVencimento'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorParcela'] . '</td>';

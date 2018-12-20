@@ -203,10 +203,10 @@
 								<div class="col-md-3 text-left">
 									<label for="Ordenamento">Tipo de Receita:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-											id="TipoReceita" name="TipoReceita">
+											id="TipoFinanceiro" name="TipoFinanceiro">
 										<?php
-										foreach ($select['TipoReceita'] as $key => $row) {
-											if ($query['TipoReceita'] == $key) {
+										foreach ($select['TipoFinanceiro'] as $key => $row) {
+											if ($query['TipoFinanceiro'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 											} else {
 												echo '<option value="' . $key . '">' . $row . '</option>';
