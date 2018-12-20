@@ -61,7 +61,7 @@
 							#echo '<tr>';
 							echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">';
 								#echo '<td>' . $row['idSis_Empresa'] . '</td>';
-								echo '<td>' . $row['Receitas'] . '</td>';
+								echo '<td>' . $row['Descricao'] . '</td>';
 								echo '<td>' . $row['Parcela'] . '  ' . $row['Quitado'] . '</td>';
 								echo '<td>' . $row['DataVencimento'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorParcela'] . '</td>';

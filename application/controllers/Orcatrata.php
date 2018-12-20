@@ -54,7 +54,7 @@ class Orcatrata extends CI_Controller {
             'DataOrca',
 			'DataPrazo',
 			'TipoFinanceiro',
-			'Receitas',
+			'Descricao',
             'ProfissionalOrca',
             'AprovadoOrca',
             'ServicoConcluido',
@@ -410,7 +410,7 @@ class Orcatrata extends CI_Controller {
             'DataOrca',
 			'DataPrazo',
 			'TipoFinanceiro',
-			'Receitas',
+			'Descricao',
             'ProfissionalOrca',
             'AprovadoOrca',
             'ServicoConcluido',
@@ -766,7 +766,7 @@ class Orcatrata extends CI_Controller {
             'DataOrca',
 			'DataPrazo',
 			'TipoFinanceiro',
-			'Receitas',
+			'Descricao',
             'ProfissionalOrca',
             'AprovadoOrca',
             'ServicoConcluido',
@@ -1126,7 +1126,7 @@ class Orcatrata extends CI_Controller {
             'DataOrca',
 			'DataPrazo',
 			'TipoFinanceiro',
-			'Receitas',
+			'Descricao',
             'ProfissionalOrca',
             'AprovadoOrca',
             'ServicoConcluido',
@@ -1671,7 +1671,7 @@ class Orcatrata extends CI_Controller {
             'DataOrca',
 			'TipoFinanceiro',
 			'DataPrazo',
-			'Receitas',
+			'Descricao',
             'ProfissionalOrca',
             'AprovadoOrca',
             'ServicoConcluido',
@@ -1787,7 +1787,7 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata($id);
             $data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
-            $data['orcatrata']['Receitas'] = $data['orcatrata']['Receitas'];
+            $data['orcatrata']['Descricao'] = $data['orcatrata']['Descricao'];
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'barras');
 			$data['orcatrata']['DataConclusao'] = $this->basico->mascara_data($data['orcatrata']['DataConclusao'], 'barras');
             $data['orcatrata']['DataRetorno'] = $this->basico->mascara_data($data['orcatrata']['DataRetorno'], 'barras');
@@ -1967,7 +1967,7 @@ class Orcatrata extends CI_Controller {
             #### App_OrcaTrata ####
             $data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'mysql');
-            $data['orcatrata']['Receitas'] = $data['orcatrata']['Receitas'];
+            $data['orcatrata']['Descricao'] = $data['orcatrata']['Descricao'];
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'mysql');
 			$data['orcatrata']['DataConclusao'] = $this->basico->mascara_data($data['orcatrata']['DataConclusao'], 'mysql');
             $data['orcatrata']['DataRetorno'] = $this->basico->mascara_data($data['orcatrata']['DataRetorno'], 'mysql');
@@ -2213,7 +2213,7 @@ class Orcatrata extends CI_Controller {
             'DataOrca',
 			'TipoFinanceiro',
 			'DataPrazo',
-			'Receitas',
+			'Descricao',
             'ProfissionalOrca',
             'AprovadoOrca',
             'ServicoConcluido',
@@ -2329,7 +2329,7 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata'] = $this->Orcatrata_model->get_orcatratadesp($id);
             $data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
-            $data['orcatrata']['Receitas'] = $data['orcatrata']['Receitas'];
+            $data['orcatrata']['Descricao'] = $data['orcatrata']['Descricao'];
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'barras');
 			$data['orcatrata']['DataConclusao'] = $this->basico->mascara_data($data['orcatrata']['DataConclusao'], 'barras');
             $data['orcatrata']['DataRetorno'] = $this->basico->mascara_data($data['orcatrata']['DataRetorno'], 'barras');
@@ -2510,7 +2510,7 @@ class Orcatrata extends CI_Controller {
             #### App_OrcaTrata ####
             $data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'mysql');
-            $data['orcatrata']['Receitas'] = $data['orcatrata']['Receitas'];
+            $data['orcatrata']['Descricao'] = $data['orcatrata']['Descricao'];
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'mysql');
 			$data['orcatrata']['DataConclusao'] = $this->basico->mascara_data($data['orcatrata']['DataConclusao'], 'mysql');
             $data['orcatrata']['DataRetorno'] = $this->basico->mascara_data($data['orcatrata']['DataRetorno'], 'mysql');
@@ -3036,7 +3036,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Dia'] = $this->Basico_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Basico_model->select_mes();
 		
-        $data['titulo'] = 'Receitas ';
+        $data['titulo'] = 'Descricao ';
         $data['form_open_path'] = 'orcatrata/alterarparcelarec';
         $data['readonly'] = '';
         $data['disabled'] = '';

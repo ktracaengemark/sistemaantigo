@@ -428,9 +428,9 @@
 																</div>															
 																<?php } ?>
 																<div class="col-md-2">
-																	<label for="Receitas">Receita</label><br>
+																	<label for="Descricao">Receita</label><br>
 																	<input type="text" class="form-control" maxlength="200"
-																			name="Receitas" value="<?php echo $orcatrata['Receitas'] ?>">
+																			name="Descricao" value="<?php echo $orcatrata['Descricao'] ?>">
 																</div>
 																
 																
