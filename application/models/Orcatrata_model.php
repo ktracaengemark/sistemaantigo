@@ -184,14 +184,14 @@ class Orcatrata_model extends CI_Model {
 			SELECT
 
 				OT.Receitas,
-				OT.TipoReceita,
-				TD.TipoDespesa,
+				OT.TipoFinanceiro,
+				TD.TipoFinanceiro,
 				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "-", IFNULL(OT.Receitas,"")) AS idApp_OrcaTrata,
 				E.NomeEmpresa,
 				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
 				PR.idSis_Usuario,
 				PR.idApp_Parcelas,
-				CONCAT(IFNULL(PR.Parcela,""), "--", IFNULL(TD.TipoDespesa,""), "--", IFNULL(OT.Receitas,"")) AS Parcela,
+				CONCAT(IFNULL(PR.Parcela,""), "--", IFNULL(TD.TipoFinanceiro,""), "--", IFNULL(OT.Receitas,"")) AS Parcela,
 				PR.ValorParcela,
 				PR.DataVencimento,
 				PR.ValorPago,
@@ -200,7 +200,7 @@ class Orcatrata_model extends CI_Model {
 			FROM
 				App_Parcelas AS PR
 					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-					LEFT JOIN Tab_TipoDespesa AS TD ON TD.idTab_TipoDespesa = OT.TipoReceita
+					LEFT JOIN Tab_TipoFinanceiro AS TD ON TD.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
 			WHERE
 				' . $permissao . '
@@ -229,14 +229,14 @@ class Orcatrata_model extends CI_Model {
 			SELECT
 				C.NomeCliente,
 				OT.Receitas,
-				OT.TipoReceita,
-				TR.TipoReceita,
+				OT.TipoFinanceiro,
+				TR.TipoFinanceiro,
 				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "-", IFNULL(OT.Receitas,"")) AS idApp_OrcaTrata,
 				E.NomeEmpresa,
 				PR.idSis_Usuario,
 				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
 				PR.idApp_Parcelas,
-				CONCAT(IFNULL(PR.Parcela,""), "--", IFNULL(TR.TipoReceita,""), "--", IFNULL(C.NomeCliente,""), "--", IFNULL(OT.Receitas,"")) AS Parcela,
+				CONCAT(IFNULL(PR.Parcela,""), "--", IFNULL(TR.TipoFinanceiro,""), "--", IFNULL(C.NomeCliente,""), "--", IFNULL(OT.Receitas,"")) AS Parcela,
 				PR.ValorParcela,
 				PR.DataVencimento,
 				PR.ValorPago,
@@ -246,7 +246,7 @@ class Orcatrata_model extends CI_Model {
 				App_Parcelas AS PR
 					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
-					LEFT JOIN Tab_TipoReceita AS TR ON TR.idTab_TipoReceita = OT.TipoReceita
+					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
 			WHERE 
 				' . $permissao . '

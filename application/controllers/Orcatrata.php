@@ -53,7 +53,7 @@ class Orcatrata extends CI_Controller {
             'idApp_Cliente',
             'DataOrca',
 			'DataPrazo',
-			'TipoReceita',
+			'TipoFinanceiro',
 			'Receitas',
             'ProfissionalOrca',
             'AprovadoOrca',
@@ -176,7 +176,7 @@ class Orcatrata extends CI_Controller {
 		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
 
-        $data['select']['TipoReceita'] = $this->Basico_model->select_tiporeceita();
+        $data['select']['TipoFinanceiro'] = $this->Basico_model->select_tipofinanceiroR();
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
         $data['select']['ServicoConcluido'] = $this->Basico_model->select_status_sn();
@@ -223,7 +223,7 @@ class Orcatrata extends CI_Controller {
 	
         #Ver uma solução melhor para este campo
         (!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
-		(!$data['orcatrata']['TipoReceita']) ? $data['orcatrata']['TipoReceita'] = '1' : FALSE;
+		(!$data['orcatrata']['TipoFinanceiro']) ? $data['orcatrata']['TipoFinanceiro'] = '31' : FALSE;
 		
 		#(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
 
@@ -409,7 +409,7 @@ class Orcatrata extends CI_Controller {
             'idApp_Cliente',
             'DataOrca',
 			'DataPrazo',
-			'TipoReceita',
+			'TipoFinanceiro',
 			'Receitas',
             'ProfissionalOrca',
             'AprovadoOrca',
@@ -529,7 +529,7 @@ class Orcatrata extends CI_Controller {
 		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
 
-        $data['select']['TipoReceita'] = $this->Basico_model->select_tiporeceita();
+        $data['select']['TipoFinanceiro'] = $this->Basico_model->select_tipofinanceiroR();
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
         $data['select']['ServicoConcluido'] = $this->Basico_model->select_status_sn();
@@ -596,13 +596,13 @@ class Orcatrata extends CI_Controller {
 
 			
         #Ver uma solução melhor para este campo
-        (!$data['orcatrata']['TipoReceita']) ? $data['orcatrata']['TipoReceita'] = '1' : FALSE;
+        (!$data['orcatrata']['TipoFinanceiro']) ? $data['orcatrata']['TipoFinanceiro'] = '31' : FALSE;
 /*
         $data['radio'] = array(
-            'TipoReceita' => $this->basico->radio_checked($data['orcatrata']['TipoReceita'], 'Tarefa Aprovado', 'NS'),
+            'TipoFinanceiro' => $this->basico->radio_checked($data['orcatrata']['TipoFinanceiro'], 'Tarefa Aprovado', 'NS'),
         );
 
-        ($data['orcatrata']['TipoReceita'] == '1') ? $data['div']['TipoReceita'] = '' : $data['div']['TipoReceita'] = 'style="display: none;"';			
+        ($data['orcatrata']['TipoFinanceiro'] == '1') ? $data['div']['TipoFinanceiro'] = '' : $data['div']['TipoFinanceiro'] = 'style="display: none;"';			
 */
         $data['sidebar'] = 'col-sm-3 col-md-2';
         $data['main'] = 'col-sm-7 col-md-8';
@@ -628,7 +628,7 @@ class Orcatrata extends CI_Controller {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_OrcaTrata ####
-            $data['orcatrata']['TipoReceita'] = $data['orcatrata']['TipoReceita'];
+            $data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'mysql');            
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'mysql');
 			$data['orcatrata']['DataConclusao'] = $this->basico->mascara_data($data['orcatrata']['DataConclusao'], 'mysql');
@@ -765,7 +765,7 @@ class Orcatrata extends CI_Controller {
             #'idApp_Cliente',
             'DataOrca',
 			'DataPrazo',
-			'TipoReceita',
+			'TipoFinanceiro',
 			'Receitas',
             'ProfissionalOrca',
             'AprovadoOrca',
@@ -884,7 +884,7 @@ class Orcatrata extends CI_Controller {
 		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
 
-        $data['select']['TipoReceita'] = $this->Basico_model->select_tipodespesa();
+        $data['select']['TipoFinanceiro'] = $this->Basico_model->select_tipofinanceiroD();
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
         $data['select']['ServicoConcluido'] = $this->Basico_model->select_status_sn();
@@ -954,13 +954,13 @@ class Orcatrata extends CI_Controller {
 
 			
         #Ver uma solução melhor para este campo
-        (!$data['orcatrata']['TipoReceita']) ? $data['orcatrata']['TipoReceita'] = '1' : FALSE;
+        (!$data['orcatrata']['TipoFinanceiro']) ? $data['orcatrata']['TipoFinanceiro'] = '1' : FALSE;
 /*
         $data['radio'] = array(
-            'TipoReceita' => $this->basico->radio_checked($data['orcatrata']['TipoReceita'], 'Tarefa Aprovado', 'NS'),
+            'TipoFinanceiro' => $this->basico->radio_checked($data['orcatrata']['TipoFinanceiro'], 'Tarefa Aprovado', 'NS'),
         );
 
-        ($data['orcatrata']['TipoReceita'] == '1') ? $data['div']['TipoReceita'] = '' : $data['div']['TipoReceita'] = 'style="display: none;"';			
+        ($data['orcatrata']['TipoFinanceiro'] == '1') ? $data['div']['TipoFinanceiro'] = '' : $data['div']['TipoFinanceiro'] = 'style="display: none;"';			
 */
         $data['sidebar'] = 'col-sm-3 col-md-2';
         $data['main'] = 'col-sm-7 col-md-8';
@@ -986,7 +986,7 @@ class Orcatrata extends CI_Controller {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_OrcaTrata ####
-            $data['orcatrata']['TipoReceita'] = $data['orcatrata']['TipoReceita'];
+            $data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'mysql');            
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'mysql');
 			$data['orcatrata']['DataConclusao'] = $this->basico->mascara_data($data['orcatrata']['DataConclusao'], 'mysql');
@@ -1125,7 +1125,7 @@ class Orcatrata extends CI_Controller {
             'idApp_Cliente',
             'DataOrca',
 			'DataPrazo',
-			'TipoReceita',
+			'TipoFinanceiro',
 			'Receitas',
             'ProfissionalOrca',
             'AprovadoOrca',
@@ -1336,7 +1336,7 @@ class Orcatrata extends CI_Controller {
 		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
 
-        $data['select']['TipoReceita'] = $this->Basico_model->select_tiporeceita();
+        $data['select']['TipoFinanceiro'] = $this->Basico_model->select_tipofinanceiroR();
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
         $data['select']['ServicoConcluido'] = $this->Basico_model->select_status_sn();
@@ -1381,7 +1381,7 @@ class Orcatrata extends CI_Controller {
 		$data['collapse1'] = 'class="collapse"';
 		
         #Ver uma solução melhor para este campo
-		(!$data['orcatrata']['TipoReceita']) ? $data['orcatrata']['TipoReceita'] = '1' : FALSE;
+		(!$data['orcatrata']['TipoFinanceiro']) ? $data['orcatrata']['TipoFinanceiro'] = '31' : FALSE;
  
 		#(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
 
@@ -1669,7 +1669,7 @@ class Orcatrata extends CI_Controller {
             #Não há a necessidade de atualizar o valor do campo a seguir
             'idApp_Cliente',
             'DataOrca',
-			'TipoReceita',
+			'TipoFinanceiro',
 			'DataPrazo',
 			'Receitas',
             'ProfissionalOrca',
@@ -1785,7 +1785,7 @@ class Orcatrata extends CI_Controller {
         if ($id) {
             #### App_OrcaTrata ####
             $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata($id);
-            $data['orcatrata']['TipoReceita'] = $data['orcatrata']['TipoReceita'];
+            $data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
             $data['orcatrata']['Receitas'] = $data['orcatrata']['Receitas'];
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'barras');
@@ -1878,7 +1878,7 @@ class Orcatrata extends CI_Controller {
 		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
 
-        $data['select']['TipoReceita'] = $this->Basico_model->select_tiporeceita();
+        $data['select']['TipoFinanceiro'] = $this->Basico_model->select_tipofinanceiroR();
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
         $data['select']['ServicoConcluido'] = $this->Basico_model->select_status_sn();
@@ -1965,7 +1965,7 @@ class Orcatrata extends CI_Controller {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_OrcaTrata ####
-            $data['orcatrata']['TipoReceita'] = $data['orcatrata']['TipoReceita'];
+            $data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'mysql');
             $data['orcatrata']['Receitas'] = $data['orcatrata']['Receitas'];
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'mysql');
@@ -2211,7 +2211,7 @@ class Orcatrata extends CI_Controller {
             #Não há a necessidade de atualizar o valor do campo a seguir
             #'idApp_Cliente',
             'DataOrca',
-			'TipoReceita',
+			'TipoFinanceiro',
 			'DataPrazo',
 			'Receitas',
             'ProfissionalOrca',
@@ -2327,7 +2327,7 @@ class Orcatrata extends CI_Controller {
         if ($id) {
             #### App_OrcaTrata ####
             $data['orcatrata'] = $this->Orcatrata_model->get_orcatratadesp($id);
-            $data['orcatrata']['TipoReceita'] = $data['orcatrata']['TipoReceita'];
+            $data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
             $data['orcatrata']['Receitas'] = $data['orcatrata']['Receitas'];
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'barras');
@@ -2420,7 +2420,7 @@ class Orcatrata extends CI_Controller {
 		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
 
-        $data['select']['TipoReceita'] = $this->Basico_model->select_tipodespesa();
+        $data['select']['TipoFinanceiro'] = $this->Basico_model->select_tipofinanceiroD();
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
         $data['select']['ServicoConcluido'] = $this->Basico_model->select_status_sn();
@@ -2508,7 +2508,7 @@ class Orcatrata extends CI_Controller {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_OrcaTrata ####
-            $data['orcatrata']['TipoReceita'] = $data['orcatrata']['TipoReceita'];
+            $data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'mysql');
             $data['orcatrata']['Receitas'] = $data['orcatrata']['Receitas'];
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'mysql');

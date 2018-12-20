@@ -1594,6 +1594,90 @@ class Basico_model extends CI_Model {
         return $array;
     }
 
+    public function select_tipofinanceiroR($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+				SELECT 
+					TD.idTab_TipoFinanceiro,
+					TD.RD,
+					CONCAT(TD.TipoFinanceiro) AS TipoFinanceiro
+				FROM 
+					Tab_TipoFinanceiro AS TD
+				WHERE 
+					TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+					(TD.RD = "R" OR TD.RD = "RD")
+				ORDER BY
+					TD.TipoFinanceiro
+			');
+				   
+        } 
+		else {
+            $query = $this->db->query('
+				SELECT 
+					TD.idTab_TipoFinanceiro,
+					TD.RD,
+					CONCAT(TD.TipoFinanceiro) AS TipoFinanceiro
+				FROM 
+					Tab_TipoFinanceiro AS TD
+				WHERE 
+					TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+					(TD.RD = "R" OR TD.RD = "RD")
+				ORDER BY
+					TD.TipoFinanceiro
+			');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_TipoFinanceiro] = $row->TipoFinanceiro;
+            }
+        }
+
+        return $array;
+    }
+
+    public function select_tipofinanceiroD($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+				SELECT 
+					TD.idTab_TipoFinanceiro,
+					TD.RD,
+					CONCAT(TD.TipoFinanceiro) AS TipoFinanceiro
+				FROM 
+					Tab_TipoFinanceiro AS TD
+				WHERE 
+					TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+					(TD.RD = "D" OR TD.RD = "RD")
+				ORDER BY
+					TD.TipoFinanceiro
+			');
+				   
+        } 
+		else {
+            $query = $this->db->query('
+				SELECT 
+					TD.idTab_TipoFinanceiro,
+					TD.RD,
+					CONCAT(TD.TipoFinanceiro) AS TipoFinanceiro
+				FROM 
+					Tab_TipoFinanceiro AS TD
+				WHERE 
+					TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+					(TD.RD = "D" OR TD.RD = "RD")
+				ORDER BY
+					TD.TipoFinanceiro
+			');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_TipoFinanceiro] = $row->TipoFinanceiro;
+            }
+        }
+
+        return $array;
+    }
+	
     public function select_tiporeceita($data = FALSE) {
 
         if ($data === TRUE) {

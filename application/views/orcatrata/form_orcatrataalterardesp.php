@@ -384,14 +384,14 @@
 														<div class="form-group">
 															<div class="row">
 																<div class="col-md-2">
-																	<label for="TipoReceita">Tipo de Despesa</label>
+																	<label for="TipoFinanceiro">Tipo de Despesa</label>
 																	<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-																			id="TipoReceita" name="TipoReceita">
+																			id="TipoFinanceiro" name="TipoFinanceiro">
 																		<option value="">-- Selecione uma opção --</option>
 																		<?php
-																		foreach ($select['TipoReceita'] as $key => $row) {
-																			(!$orcatrata['TipoReceita']) ? $orcatrata['TipoReceita'] = '1' : FALSE;
-																			if ($orcatrata['TipoReceita'] == $key) {
+																		foreach ($select['TipoFinanceiro'] as $key => $row) {
+																			(!$orcatrata['TipoFinanceiro']) ? $orcatrata['TipoFinanceiro'] = '1' : FALSE;
+																			if ($orcatrata['TipoFinanceiro'] == $key) {
 																				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																			} else {
 																				echo '<option value="' . $key . '">' . $row . '</option>';
