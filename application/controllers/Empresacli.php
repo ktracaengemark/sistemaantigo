@@ -58,20 +58,22 @@ class Empresacli extends CI_Controller {
 
         $data['query']['Telefone'] = $data['query']['Celular'];
 
-        $data['contatoempresa'] = $this->Empresacli_model->lista_contatoempresa($id, TRUE);
+        #$data['contatoempresa'] = $this->Empresacli_model->lista_contatoempresa($id, TRUE);
         /*
           echo "<pre>";
           print_r($data['contatoempresa']);
           echo "</pre>";
           exit();
           */
-        if (!$data['contatoempresa'])
+        /*
+		if (!$data['contatoempresa'])
             $data['list'] = FALSE;
         else
             $data['list'] = $this->load->view('empresa/list_contatoempresa', $data, TRUE);
 
         $data['nav_secundario'] = $this->load->view('empresa/nav_secundario', $data, TRUE);
-        $this->load->view('empresacli/tela_empresacli', $data);
+        */
+		$this->load->view('empresacli/tela_empresacli', $data);
 
         $this->load->view('basico/footer');
     }
