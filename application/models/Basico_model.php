@@ -1596,6 +1596,9 @@ class Basico_model extends CI_Model {
 
     public function select_tipofinanceiroR($data = FALSE) {
 
+		$permissao1 = ($_SESSION['log']['idSis_Empresa'] != 5 ) ? ' AND (TD.EP = "E" OR TD.EP = "EP")' : FALSE;
+		$permissao2 = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? ' AND (TD.EP = "P" OR TD.EP = "EP" )' : FALSE;
+		
         if ($data === TRUE) {
             $array = $this->db->query('
 				SELECT 
@@ -1607,6 +1610,8 @@ class Basico_model extends CI_Model {
 				WHERE 
 					TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 					(TD.RD = "R" OR TD.RD = "RD")
+					' . $permissao1 . '
+					' . $permissao2 . '
 				ORDER BY
 					TD.TipoFinanceiro
 			');
@@ -1623,6 +1628,8 @@ class Basico_model extends CI_Model {
 				WHERE 
 					TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 					(TD.RD = "R" OR TD.RD = "RD")
+					' . $permissao1 . '
+					' . $permissao2 . '					
 				ORDER BY
 					TD.TipoFinanceiro
 			');
@@ -1638,6 +1645,9 @@ class Basico_model extends CI_Model {
 
     public function select_tipofinanceiroD($data = FALSE) {
 
+		$permissao1 = ($_SESSION['log']['idSis_Empresa'] != 5 ) ? ' AND (TD.EP = "E" OR TD.EP = "EP")' : FALSE;
+		$permissao2 = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? ' AND (TD.EP = "P" OR TD.EP = "EP" )' : FALSE;
+		
         if ($data === TRUE) {
             $array = $this->db->query('
 				SELECT 
@@ -1649,6 +1659,8 @@ class Basico_model extends CI_Model {
 				WHERE 
 					TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 					(TD.RD = "D" OR TD.RD = "RD")
+					' . $permissao1 . '
+					' . $permissao2 . '					
 				ORDER BY
 					TD.TipoFinanceiro
 			');
@@ -1665,6 +1677,8 @@ class Basico_model extends CI_Model {
 				WHERE 
 					TD.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 					(TD.RD = "D" OR TD.RD = "RD")
+					' . $permissao1 . '
+					' . $permissao2 . '					
 				ORDER BY
 					TD.TipoFinanceiro
 			');

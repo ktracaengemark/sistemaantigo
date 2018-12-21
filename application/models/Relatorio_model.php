@@ -5253,6 +5253,9 @@ exit();*/
 	
 	public function select_tipofinanceiroR() {
 
+		$permissao1 = ($_SESSION['log']['idSis_Empresa'] != 5 ) ? ' AND (TR.EP = "E" OR TR.EP = "EP")' : FALSE;
+		$permissao2 = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? ' AND (TR.EP = "P" OR TR.EP = "EP" )' : FALSE;
+		
         $query = $this->db->query('
             SELECT
 				TR.idTab_TipoFinanceiro,
@@ -5263,6 +5266,8 @@ exit();*/
 			WHERE
 				TR.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				(TR.RD = "R" OR TR.RD = "RD")
+					' . $permissao1 . '
+					' . $permissao2 . '				
 			ORDER BY
 				TR.TipoFinanceiro
         ');
@@ -5278,6 +5283,9 @@ exit();*/
 
 	public function select_tipofinanceiroD() {
 
+		$permissao1 = ($_SESSION['log']['idSis_Empresa'] != 5 ) ? ' AND (TR.EP = "E" OR TR.EP = "EP")' : FALSE;
+		$permissao2 = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? ' AND (TR.EP = "P" OR TR.EP = "EP" )' : FALSE;	
+	
         $query = $this->db->query('
             SELECT
 				TR.idTab_TipoFinanceiro,
@@ -5288,6 +5296,8 @@ exit();*/
 			WHERE
 				TR.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				(TR.RD = "D" OR TR.RD = "RD")
+					' . $permissao1 . '
+					' . $permissao2 . '				
 			ORDER BY
 				TR.TipoFinanceiro
         ');
