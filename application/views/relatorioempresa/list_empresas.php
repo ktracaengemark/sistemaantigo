@@ -14,30 +14,31 @@
 
 					<thead>
 						<tr>
-							<th class="active">Nº</th>
+							<th class="col-md-1" scope="col">Foto</th>
 							<th class="active">Empresa</th>
+							<th class="active">Nº</th>
 							<th class="active">Categoria</th>
-							<th class="active">Atuação</th>
-							<th class="active">Site</th>
 
+							<th class="active">Site</th>
 						</tr>
 					</thead>
-
+					
 					<tbody>
 
 						<?php
 						foreach ($report->result_array() as $row) {
+						?>
 
-							#echo '<tr>';
-							echo '<tr class="clickable-row" data-href="' . base_url() . 'empresacli2/prontuario/' . $row['idSis_Empresa'] . '">';
-	
-								echo '<td>' . $row['idSis_Empresa'] . '</td>';
-								echo '<td>' . $row['NomeEmpresa'] . '</td>';
-								echo '<td>' . $row['CategoriaEmpresa'] . '</td>';
-								echo '<td>' . $row['Atuacao'] . '</td>';
-								echo '<td>' . $row['Site'] . '</td>';
+						<tr class="clickable-row" data-href="<?php echo base_url() . 'empresacli2/prontuario/' . $row['idSis_Empresa'] . ''; ?>">
+							<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/profile-' . $row['idSis_Empresa'] . '.png'; ?> "class="img-circle img-responsive"></td>
+							<td><?php echo $row['NomeEmpresa'] ?></td>
+							<td><?php echo $row['idSis_Empresa'] ?></td>
+							<td><?php echo $row['CategoriaEmpresa'] ?></td>							
 
-							echo '</tr>';
+							<td><?php echo $row['Site'] ?></td>
+						</tr>						
+
+						<?php
 						}
 						?>
 
