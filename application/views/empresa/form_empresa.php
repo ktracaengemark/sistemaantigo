@@ -91,6 +91,7 @@
 												<label for="Site">Site:</label>
 												<input type="text" class="form-control" maxlength="50" <?php echo $readonly; ?>
 													   name="Site" value="<?php echo $query['Site']; ?>">
+											<?php echo form_error('Site'); ?>
 											</div>
 										</div>
 									</div>

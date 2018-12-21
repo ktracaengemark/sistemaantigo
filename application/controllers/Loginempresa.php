@@ -175,9 +175,9 @@ class Loginempresa extends CI_Controller {
                 (!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
 		
 		$this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
-	
-		$this->form_validation->set_rules('CpfAdmin', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CpfAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
 		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
+		$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim');	
+		$this->form_validation->set_rules('CpfAdmin', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CpfAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
 		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');		
         #$this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
 		$this->form_validation->set_rules('NomeAdmin', 'Nome do Administrador', 'required|trim');      	
@@ -300,9 +300,9 @@ class Loginempresa extends CI_Controller {
                 (!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
 		
 		$this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
-	
-		$this->form_validation->set_rules('CpfAdmin', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CpfAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
 		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
+		$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim');
+		$this->form_validation->set_rules('CpfAdmin', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CpfAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
 		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');		
         #$this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
 		$this->form_validation->set_rules('NomeAdmin', 'Nome do Administrador', 'required|trim');      	

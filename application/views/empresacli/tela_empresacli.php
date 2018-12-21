@@ -15,7 +15,7 @@
 							<div class="form-group">	
 								<div class="row">
 									<div class="col-sm-offset-1 col-lg-4 " align="left"> 
-										<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/profile-' . $query['profile'] . '.png'; ?>" 
+										<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/profile-' . $query['idSis_Empresa'] . '.png'; ?>" 
 											 class="img-circle img-responsive">
 									</div>
 									<div class=" col-md-6"> 

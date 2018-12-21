@@ -173,7 +173,8 @@ class Empresa extends CI_Controller {
 
         #$this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim|is_unique_duplo[Sis_Empresa.NomeAdmin.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
         $this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim');
-        #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
+        $this->form_validation->set_rules('Site', 'Site', 'trim|is_unique[Sis_Empresa.Site]');
+		#$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 
