@@ -75,7 +75,7 @@ class Procedimento extends CI_Controller {
 			'3' => 'Baixa',
         );		
 		
-        $data['titulo'] = 'Cadastrar Procedimento';
+        $data['titulo'] = 'Tarefa';
         $data['form_open_path'] = 'procedimento/cadastrar';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -166,7 +166,7 @@ class Procedimento extends CI_Controller {
 
 		$data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		
-        $data['titulo'] = 'Editar Dados';
+        $data['titulo'] = 'Editar Tarefa';
         $data['form_open_path'] = 'procedimento/alterar';
         $data['readonly'] = '';
         $data['disabled'] = '';

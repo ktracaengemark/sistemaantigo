@@ -1,4 +1,3 @@
-
 <div style="overflow: auto; height: 350px; ">
 	<div class="container-fluid">
 		<div class="row">
@@ -7,7 +6,7 @@
 				<table class="table table-bordered table-condensed table-striped">	
 					<tfoot>
 						<tr>
-							<th colspan="9" class="active">Total encontrado: <?php echo $report->num_rows(); ?> resultado(s)</th>
+							<th colspan="4" class="active">Total encontrado: <?php echo $report->num_rows(); ?> resultado(s)</th>
 						</tr>
 					</tfoot>
 				</table>
@@ -15,12 +14,10 @@
 
 					<thead>
 						<tr>
-							<th class="col-md-1" scope="col">Foto</th>
+							<th class="col-md-2" scope="col">LogoMarca</th>
 							<th class="active">Empresa</th>
 							<th class="active">Nº</th>
 							<th class="active">Categoria</th>
-
-							<th class="active">Site</th>
 						</tr>
 					</thead>
 					
@@ -35,8 +32,6 @@
 							<td><?php echo $row['NomeEmpresa'] ?></td>
 							<td><?php echo $row['idSis_Empresa'] ?></td>
 							<td><?php echo $row['CategoriaEmpresa'] ?></td>							
-
-							<td><?php echo $row['Site'] ?></td>
 						</tr>						
 
 						<?php

@@ -8,7 +8,12 @@
 
 			<div class="panel panel-primary">
 
-				<div class="panel-heading"><strong><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?></strong></div>
+				<div class="panel-heading">
+					<?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?>
+					<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorioempresa/empresas" role="button">
+						<span class="glyphicon glyphicon-search"></span> Empresas
+					</a>				
+				</div>
 				<div class="panel-body">
 					<div style="overflow: auto; height: 400px; ">
 						<div class="form-group">

@@ -403,11 +403,9 @@ class Relatorioempresa extends CI_Controller {
 
         $data['select']['Campo'] = array(
             'E.NomeEmpresa' => 'Nome da Empresa',
-			'E.idSis_Empresa' => 'Nº da Empresa',
+			'CE.CategoriaEmpresa' => 'Categoria',
             'E.Bairro' => 'Bairro',
             'E.Municipio' => 'Município',
-            'E.Email' => 'E-mail',
-
 
         );
 
