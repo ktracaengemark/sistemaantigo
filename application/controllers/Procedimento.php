@@ -160,7 +160,8 @@ class Procedimento extends CI_Controller {
 
         #$this->form_validation->set_rules('Procedimento', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Procedimento.Procedimento.DataProcedimento.' . $this->basico->mascara_data($data['query']['DataProcedimento'], 'mysql') . ']');
 
-        $this->form_validation->set_rules('DataProcedimento', 'Data do Procedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('Procedimento', 'Tarefa', 'required|trim');
+        #$this->form_validation->set_rules('DataProcedimento', 'Data do Procedimento', 'trim|valid_date');
 
 
 		$data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();

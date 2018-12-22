@@ -52,6 +52,7 @@
 												</div>
 											</div>
 										</div>	
+										<!--
 										<div class="form-group">	
 											<div class="row">	
 												<div class="col-md-6">
@@ -60,7 +61,8 @@
 														   name="DataProcedimento" placeholder="DD/MM/AAAA" value="<?php echo $query['DataProcedimento']; ?>">
 												</div>
 											</div>
-										</div>	
+										</div>
+										-->
 										<div class="form-group">	
 											<div class="row">	
 												<div class="col-md-4">
