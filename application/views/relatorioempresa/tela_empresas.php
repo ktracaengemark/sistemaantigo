@@ -74,9 +74,7 @@
 											?>
 										</select>
 									</div>
-								</div>	
-							</div>
-							<div class="form-group">									
+								</div>									
 								<div class="row">
 									<br>
 									<div class="form-group col-md-4 text-left">
@@ -93,9 +91,7 @@
 											</button>
 										</div>
 									</div>
-								</div>
-							</div>
-							<div class="form-group">	
+								</div>	
 								<div class="row">	
 									<div class="col-md-12 text-left">
 										<label for="Ordenamento">Ordenamento:</label>

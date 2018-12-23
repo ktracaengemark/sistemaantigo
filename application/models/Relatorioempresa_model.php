@@ -3404,29 +3404,36 @@ exit();*/
 
 	public function list_associado($data, $completo) {
 
-        $data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND C.idSis_Empresa = ' . $data['NomeEmpresa'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'C.NomeEmpresa' : $data['Campo'];
+        $data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND E.idSis_Empresa = ' . $data['NomeEmpresa'] : FALSE;
+		$data['CategoriaEmpresa'] = ($data['CategoriaEmpresa']) ? ' AND E.CategoriaEmpresa = ' . $data['CategoriaEmpresa'] : FALSE;
+		$data['Atuacao'] = ($data['Atuacao']) ? ' AND E.idSis_Empresa = ' . $data['Atuacao'] : FALSE;        
+		$data['Campo'] = (!$data['Campo']) ? 'E.NomeEmpresa' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
-
-
 
         $query = $this->db->query('
             SELECT
-				C.idSis_Empresa,
-				C.Associado,
-                C.NomeEmpresa,
-                C.DataCriacao,
-				C.Celular,
-				C.Site,
+				E.idSis_Empresa,
+				E.Associado,
+                E.NomeEmpresa,
+                E.DataCriacao,
+				E.Celular,
+				E.Site,
+				CE.CategoriaEmpresa,
+				E.Atuacao,				
 				SN.StatusSN,
-				C.Inativo
+				E.Inativo
             FROM
-                Sis_Empresa AS C
-					LEFT JOIN Tab_StatusSN AS SN ON SN.Inativo = C.Inativo
+                Sis_Empresa AS E
+					LEFT JOIN Tab_StatusSN AS SN ON SN.Inativo = E.Inativo
+					LEFT JOIN Tab_CategoriaEmpresa AS CE ON CE.idTab_CategoriaEmpresa = E.CategoriaEmpresa
             WHERE
-                C.Associado = ' . $_SESSION['log']['id'] . ' AND
-				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
-				' . $data['NomeEmpresa'] . '
+                E.Associado = ' . $_SESSION['log']['id'] . ' AND
+				E.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+				' . $data['Atuacao'] . ' 
+				' . $data['NomeEmpresa'] . ' 
+				' . $data['CategoriaEmpresa'] . ' AND
+				E.idSis_Empresa != "1" AND
+				E.idSis_Empresa != "5"
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');
@@ -3698,7 +3705,6 @@ exit();*/
 				' . $data['Atuacao'] . ' 
 				' . $data['NomeEmpresa'] . ' 
 				' . $data['CategoriaEmpresa'] . ' AND
-
 				E.idSis_Empresa != "1" AND
 				E.idSis_Empresa != "5" 
 			ORDER BY
