@@ -56,6 +56,15 @@ class Empresacli2 extends CI_Controller {
 		$data['query']['Inativo'] = $this->Basico_model->get_inativo($data['query']['Inativo']);
 		$data['query']['Empresa'] = $this->Basico_model->get_empresa($data['query']['NomeEmpresa']);
 
+        if ($data['query']['CategoriaEmpresa'] == 1)
+            $data['query']['profile'] = 'm';
+        elseif ($data['query']['CategoriaEmpresa'] == 2)
+            $data['query']['profile'] = 'f';
+        else
+            $data['query']['profile'] = 'o';
+        
+        $data['query']['CategoriaEmpresa'] = $this->Basico_model->get_categoriaempresa($data['query']['CategoriaEmpresa']);
+		
         $data['query']['Telefone'] = $data['query']['Celular'];
 
         /*

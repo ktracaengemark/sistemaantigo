@@ -56,23 +56,24 @@ class Empresacli extends CI_Controller {
 		$data['query']['Inativo'] = $this->Basico_model->get_inativo($data['query']['Inativo']);
 		$data['query']['Empresa'] = $this->Basico_model->get_empresa($data['query']['NomeEmpresa']);
 
+        if ($data['query']['CategoriaEmpresa'] == 1)
+            $data['query']['profile'] = 'm';
+        elseif ($data['query']['CategoriaEmpresa'] == 2)
+            $data['query']['profile'] = 'f';
+        else
+            $data['query']['profile'] = 'o';
+        
+        $data['query']['CategoriaEmpresa'] = $this->Basico_model->get_categoriaempresa($data['query']['CategoriaEmpresa']);
+		
         $data['query']['Telefone'] = $data['query']['Celular'];
 
-        #$data['contatoempresa'] = $this->Empresacli_model->lista_contatoempresa($id, TRUE);
         /*
           echo "<pre>";
           print_r($data['contatoempresa']);
           echo "</pre>";
           exit();
-          */
-        /*
-		if (!$data['contatoempresa'])
-            $data['list'] = FALSE;
-        else
-            $data['list'] = $this->load->view('empresa/list_contatoempresa', $data, TRUE);
+		*/
 
-        $data['nav_secundario'] = $this->load->view('empresa/nav_secundario', $data, TRUE);
-        */
 		$this->load->view('empresacli/tela_empresacli', $data);
 
         $this->load->view('basico/footer');
