@@ -601,18 +601,6 @@
 														<div class="form-group">
 															<div class="row">
 																<div class="col-md-2">
-																	<label for="DataVencimentoOrca">1º Venc.</label>
-																	<div class="input-group <?php echo $datepicker; ?>">
-																		<span class="input-group-addon" disabled>
-																			<span class="glyphicon glyphicon-calendar"></span>
-																		</span>
-																		<input type="text" class="form-control Date" id="DataVencimentoOrca" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																			   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()"
-																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
-																			   name="DataVencimentoOrca" value="<?php echo $orcatrata['DataVencimentoOrca']; ?>">																			
-																	</div>
-																</div>
-																<div class="col-md-2">
 																	<label for="FormaPagamento">Forma de Pagam.:</label>
 																	<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																			id="FormaPagamento" name="FormaPagamento">
@@ -670,7 +658,7 @@
 																			   name="QtdParcelasOrca" value="<?php echo $orcatrata['QtdParcelasOrca'] ?>">
 																	<?php echo form_error('QtdParcelasOrca'); ?>		
 																	</div>
-																	<div class="col-md-3">
+																	<div class="col-md-2">
 																		<label for="Modalidade">Modalidade</label><br>
 																		<div class="btn-block" data-toggle="buttons">
 																			<?php
@@ -699,6 +687,18 @@
 																		</div>
 																	</div>
 																</div>
+																<div class="col-md-2">
+																	<label for="DataVencimentoOrca">1º Venc.</label>
+																	<div class="input-group <?php echo $datepicker; ?>">
+																		<span class="input-group-addon" disabled>
+																			<span class="glyphicon glyphicon-calendar"></span>
+																		</span>
+																		<input type="text" class="form-control Date" id="DataVencimentoOrca" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																			   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()"
+																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
+																			   name="DataVencimentoOrca" value="<?php echo $orcatrata['DataVencimentoOrca']; ?>">																			
+																	</div>
+																</div>																
 																<!--
 																<br>
 																<div class="form-group">
