@@ -5,16 +5,28 @@
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<?php echo form_open('relatorioempresa/empresas', 'role="form"'); ?>
+			<div class="row">	
+				<?php echo form_open(base_url() . 'empresacli2/pesquisar', 'class="navbar-form navbar-left"'); ?>
+				<div class="input-group">
+					<span class="input-group-btn">
+						<button class="btn btn-info" type="submit">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+					<input type="text" placeholder="Pesquisar Empresas" class="form-control" name="Pesquisa" value="">
+				</div>
+			</div>
+			<!--
+			<?php #echo form_open('relatorioempresa/empresas', 'role="form"'); ?>
 
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 					<span class="glyphicon glyphicon-search"></span> <?php echo $titulo; ?>
 			</button>											
-
+			-->
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorioempresa/associado" role="button">
 				<span class="glyphicon glyphicon-search"></span> Associados
 			</a>
-
+			
 		</div>
 		<div class="panel-body">
 			<div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">

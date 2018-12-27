@@ -17,7 +17,7 @@
 				</div>
 			</div>
 			<!--
-			<?php echo form_open('relatorio/empresas', 'role="form"'); ?>
+			<?php #echo form_open('relatorio/empresas', 'role="form"'); ?>
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 					<span class="glyphicon glyphicon-search"></span> <?php echo $titulo; ?>
 			</button>	
