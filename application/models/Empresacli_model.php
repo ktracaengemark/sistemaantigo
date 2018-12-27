@@ -104,16 +104,25 @@ class Empresacli_model extends CI_Model {
 
     public function lista_empresa($data, $x) {
 
-        $query = $this->db->query('SELECT * '
-                . 'FROM Sis_Empresa WHERE '
-                . 'Empresa = ' . $_SESSION['log']['id'] . ' AND '
-				. 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND '
-                . '(NomeAdmin like "%' . $data . '%" OR '
-                #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
-                #. 'NomeAdmin like "%' . $data . '%" OR '
-                . 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
-                . 'Celular like "%' . $data . '%" OR Telefone2 like "%' . $data . '%" OR Telefone3 like "%' . $data . '%") '
-                . 'ORDER BY NomeAdmin ASC ');
+        $query = $this->db->query('
+			SELECT 
+				E.idSis_Empresa,
+				E.NomeEmpresa,
+				E.Atuacao,
+				E.DataCriacao,
+				CE.CategoriaEmpresa
+			FROM 
+				Sis_Empresa AS E
+					LEFT JOIN Tab_CategoriaEmpresa AS CE ON CE.idTab_CategoriaEmpresa = E.CategoriaEmpresa
+			WHERE 
+                E.idSis_Empresa != "1" AND 
+				E.idSis_Empresa != "5" AND 
+                (E.NomeEmpresa like "%' . $data . '%" OR 
+				E.Atuacao like "%' . $data . '%" OR 
+				CE.CategoriaEmpresa like "%' . $data . '%")
+		   ORDER BY 
+				E.NomeEmpresa ASC 
+	   ');
         /*
           echo $this->db->last_query();
           echo "<pre>";
@@ -128,7 +137,7 @@ class Empresacli_model extends CI_Model {
                 return TRUE;
             } else {
                 foreach ($query->result() as $row) {
-                    $row->DataNascimento = $this->basico->mascara_data($row->DataNascimento, 'barras');
+                    $row->DataCriacao = $this->basico->mascara_data($row->DataCriacao, 'barras');
                 }
 
                 return $query;

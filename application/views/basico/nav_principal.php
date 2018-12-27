@@ -16,7 +16,7 @@
 					<ul class="nav navbar-nav navbar-center">
 						<!--
 						<li>
-							<?php echo form_open(base_url() . 'consultor/pesquisar', 'class="navbar-form navbar-left"'); ?>
+							<?php echo form_open(base_url() . 'cliente/pesquisar', 'class="navbar-form navbar-left"'); ?>
 							<div class="input-group">
 								<span class="input-group-btn">
 									<button class="btn btn-info" type="submit">
@@ -24,6 +24,19 @@
 									</button>
 								</span>
 								<input type="text" placeholder="Pesquisar Cliente" class="form-control" name="Pesquisa" value="">
+							</div>
+							</form>
+						</li>
+						
+						<li>
+							<?php echo form_open(base_url() . 'empresacli/pesquisar', 'class="navbar-form navbar-left"'); ?>
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button class="btn btn-info" type="submit">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</span>
+								<input type="text" placeholder="Pesquisar Empresa" class="form-control" name="Pesquisa" value="">
 							</div>
 							</form>
 						</li>

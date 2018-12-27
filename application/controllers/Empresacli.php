@@ -450,5 +450,52 @@ class Empresacli extends CI_Controller {
 
         $this->load->view('basico/footer');
     }
-		
+
+    public function pesquisar() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        $this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim|callback_get_empresa');
+
+        $data['titulo'] = "Pesquisar Empresa";
+
+        $data['Pesquisa'] = $this->input->post('Pesquisa');
+        //echo date('d/m/Y H:i:s', $data['start'],0,-3));
+
+        #run form validation
+        if ($this->form_validation->run() !== FALSE && $this->Empresacli_model->lista_empresa($data['Pesquisa'], FALSE) === TRUE) {
+
+            $data['query'] = $this->Empresacli_model->lista_empresa($data['Pesquisa'], TRUE);
+
+			if (!$data['query'])
+				$data['list'] = FALSE;
+			else
+				$data['list'] = $this->load->view('empresacli/list_empresa', $data, TRUE);			
+
+        }
+
+        ($data['Pesquisa']) ? $data['cadastrar'] = TRUE : $data['cadastrar'] = FALSE;
+
+        $this->load->view('empresacli/pesq_empresa', $data);
+
+        $this->load->view('basico/footer');
+    }
+
+    function get_empresa($data) {
+
+        if ($this->Empresacli_model->lista_empresa($data, FALSE) === FALSE) {
+            $this->form_validation->set_message('get_empresa', '<strong>Empresa</strong> não encontrado.');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+	
 }

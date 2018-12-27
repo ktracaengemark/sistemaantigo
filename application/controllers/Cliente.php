@@ -329,7 +329,7 @@ class Cliente extends CI_Controller {
         if ($this->form_validation->run() !== FALSE && $this->Cliente_model->lista_cliente($data['Pesquisa'], FALSE) === TRUE) {
 
             $data['query'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], TRUE);
-
+			
             if ($data['query']->num_rows() == 1) {
                 $info = $data['query']->result_array();
 
@@ -342,7 +342,7 @@ class Cliente extends CI_Controller {
             } else {
                 $data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
             }
-
+			
         }
 
         ($data['Pesquisa']) ? $data['cadastrar'] = TRUE : $data['cadastrar'] = FALSE;

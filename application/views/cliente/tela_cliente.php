@@ -167,6 +167,17 @@
 										
 										}
 										
+										if ($query['NomeCliente']) {
+											
+										echo ' 
+										<tr>
+											<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-user"></span> Cliente:</td>
+											<td>' . $query['NomeCliente'] . '</td>
+										</tr>  
+										';
+										
+										}
+										
 										if ($query['RegistroFicha']) {
 											
 										echo ' 
