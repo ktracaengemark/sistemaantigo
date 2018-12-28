@@ -150,7 +150,7 @@ class Loginempresa_model extends CI_Model {
 
     }
 
-    public function set_usuario($data) {
+    public function set_empresa($data) {
         #unset($data['idSisgef_Fila']);
         /*
           echo $this->db->last_query();
@@ -161,6 +161,28 @@ class Loginempresa_model extends CI_Model {
           exit();
          */
         $query = $this->db->insert('Sis_Empresa', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+
+    public function set_usuario($data) {
+        #unset($data['idSisgef_Fila']);
+        /*
+          echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit();
+         */
+        $query = $this->db->insert('Sis_Usuario', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -193,7 +215,7 @@ class Loginempresa_model extends CI_Model {
         }
 
     }
-
+	
     public function ativa_usuario($id, $data) {
 
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE Codigo = "' . $id . '"');

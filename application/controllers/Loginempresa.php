@@ -164,6 +164,8 @@ class Loginempresa extends CI_Controller {
             #'UsuarioEmpresa',
 			'NomeEmpresa',
             'NomeAdmin',
+			'DataNascimento',
+			'Sexo',
             'CpfAdmin',
 			'Senha',
             'Confirma',
@@ -184,9 +186,11 @@ class Loginempresa extends CI_Controller {
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
 		$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+        $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');			
 		#$this->form_validation->set_rules('NumUsuarios', 'Número de Usuários', 'required|trim');
 		
 		$data['select']['NumUsuarios'] = $this->Basico_model->select_numusuarios();
+		$data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		
 		#run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -201,6 +205,7 @@ class Loginempresa extends CI_Controller {
 			$data['query']['idTab_Modulo'] = 1;
 			$data['query']['NumUsuarios'] = 1;
             $data['query']['DataCriacao'] = $this->basico->mascara_data($data['query']['DataCriacao'], 'mysql');
+			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');			
 			$data['query']['Senha'] = md5($data['query']['Senha']);
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));
             #$data['query']['Inativo'] = 1;
@@ -211,7 +216,7 @@ class Loginempresa extends CI_Controller {
             $data['anterior'] = array();
             $data['campos'] = array_keys($data['query']);
 
-            $data['idSis_Empresa'] = $this->Loginempresa_model->set_usuario($data['query']);
+            $data['idSis_Empresa'] = $this->Loginempresa_model->set_empresa($data['query']);
             $_SESSION['log']['id'] = 1;
 
             if ($data['idSis_Empresa'] === FALSE) {
@@ -219,8 +224,51 @@ class Loginempresa extends CI_Controller {
                 $this->load->view('loginempresa/form_loginempresa', $data);
             } else {
 
-                          
-                #$this->load->library('email');
+                $data['usuario'] = array(
+
+                    'idSis_Empresa' => $data['idSis_Empresa'],
+					'NomeEmpresa' => $data['query']['NomeEmpresa'],
+					'Nome' => $data['query']['NomeAdmin'],
+					'Celular' => $data['query']['Celular'],
+					'DataCriacao' => $data['query']['DataCriacao'],
+					'DataNascimento' => $data['query']['DataNascimento'],
+					'Sexo' => $data['query']['Sexo'],
+					'Senha' => $data['query']['Senha'],
+					'Codigo' => $data['query']['Codigo'],
+					'CpfUsuario' => $data['query']['CpfAdmin'],
+					'Inativo' => "0",
+					'Funcao' => "1",
+					'idTab_Modulo' => "1",
+					'Permissao' => "3"
+                );
+                $data['campos'] = array_keys($data['usuario']);
+
+                $data['idSis_Usuario'] = $this->Loginempresa_model->set_usuario($data['usuario']);
+				$_SESSION['log']['id'] = 1;
+                
+				if ($data['idSis_Usuario'] === FALSE) {
+					$data['msg'] = '?m=2';
+					$this->load->view('loginempresa/form_loginempresa', $data);
+				} else {
+
+					/*
+					  echo $this->db->last_query();
+					  echo "<pre>";
+					  print_r($data);
+					  echo "</pre>";
+					  exit();
+					 */
+					$data['agenda'] = array(
+						'NomeAgenda' => 'Usuario',
+						'idSis_Usuario' => $data['idSis_Usuario'],
+						'idSis_Empresa' => $data['idSis_Empresa']
+					);
+					$data['campos'] = array_keys($data['agenda']);
+
+					$data['idApp_Agenda'] = $this->Loginempresa_model->set_agenda($data['agenda']);				
+				
+				}
+				#$this->load->library('email');
 
                 #$this->email->from('contato@ktracaengemark.com.br', 'KTRACA Engenharia & Marketing');
                 #$this->email->to($data['query']['Email']);
@@ -288,6 +336,8 @@ class Loginempresa extends CI_Controller {
             #'UsuarioEmpresa',
 			'NomeEmpresa',
             'NomeAdmin',
+			'DataNascimento',
+			'Sexo',
             'CpfAdmin',
 			'Senha',
             'Confirma',
@@ -309,10 +359,12 @@ class Loginempresa extends CI_Controller {
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
 		$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+        $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');		
 		#$this->form_validation->set_rules('NumUsuarios', 'Número de Usuários', 'required|trim');
 		
 		$data['select']['NumUsuarios'] = $this->Basico_model->select_numusuarios();
         $data['select']['Associado'] = $this->Basico_model->select_empresa3();
+		$data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		
 		#run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -327,6 +379,7 @@ class Loginempresa extends CI_Controller {
 			$data['query']['idTab_Modulo'] = 1;
 			$data['query']['NumUsuarios'] = 1;
             $data['query']['DataCriacao'] = $this->basico->mascara_data($data['query']['DataCriacao'], 'mysql');
+			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');			
 			$data['query']['Senha'] = md5($data['query']['Senha']);
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));
             #$data['query']['Inativo'] = 1;
@@ -337,7 +390,7 @@ class Loginempresa extends CI_Controller {
             $data['anterior'] = array();
             $data['campos'] = array_keys($data['query']);
 
-            $data['idSis_Empresa'] = $this->Loginempresa_model->set_usuario($data['query']);
+            $data['idSis_Empresa'] = $this->Loginempresa_model->set_empresa($data['query']);
             $_SESSION['log']['id'] = 1;
 
             if ($data['idSis_Empresa'] === FALSE) {
@@ -345,6 +398,51 @@ class Loginempresa extends CI_Controller {
                 $this->load->view('loginempresa/form_loginempresa', $data);
             } else {
 
+                $data['usuario'] = array(
+
+                    'idSis_Empresa' => $data['idSis_Empresa'],
+					'NomeEmpresa' => $data['query']['NomeEmpresa'],
+					'Nome' => $data['query']['NomeAdmin'],
+					'Celular' => $data['query']['Celular'],
+					'DataCriacao' => $data['query']['DataCriacao'],
+					'DataNascimento' => $data['query']['DataNascimento'],
+					'Sexo' => $data['query']['Sexo'],
+					'Senha' => $data['query']['Senha'],
+					'Codigo' => $data['query']['Codigo'],
+					'CpfUsuario' => $data['query']['CpfAdmin'],
+					'Inativo' => "0",
+					'Funcao' => "1",
+					'idTab_Modulo' => "1",
+					'Permissao' => "3"
+                );
+                $data['campos'] = array_keys($data['usuario']);
+
+                $data['idSis_Usuario'] = $this->Loginempresa_model->set_usuario($data['usuario']);
+				$_SESSION['log']['id'] = 1;
+                
+				if ($data['idSis_Usuario'] === FALSE) {
+					$data['msg'] = '?m=2';
+					$this->load->view('loginempresa/form_loginempresa', $data);
+				} else {
+
+					/*
+					  echo $this->db->last_query();
+					  echo "<pre>";
+					  print_r($data);
+					  echo "</pre>";
+					  exit();
+					 */
+					$data['agenda'] = array(
+						'NomeAgenda' => 'Usuario',
+						'idSis_Usuario' => $data['idSis_Usuario'],
+						'idSis_Empresa' => $data['idSis_Empresa']
+					);
+					$data['campos'] = array_keys($data['agenda']);
+
+					$data['idApp_Agenda'] = $this->Loginempresa_model->set_agenda($data['agenda']);				
+				
+				}			
+			
                  /*          
                 $this->load->library('email');
 

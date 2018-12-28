@@ -55,6 +55,28 @@
            name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
     <?php echo form_error('Celular'); ?>
     <br>
+	
+    <label for="DataNascimento">Data de Nascimento:</label>
+    <input type="text" class="form-control Date" id="inputDate0" maxlength="10"
+           name="DataNascimento" placeholder="DD/MM/AAAA" value="<?php echo $query['DataNascimento']; ?>">
+    <?php echo form_error('DataNascimento'); ?>
+    <br>
+
+    <label for="Sexo">Sexo:</label>
+    <select data-placeholder="Selecione um TROCA..." class="form-control" id="Sexo" name="Sexo">
+        <option value=""></option>
+        <?php
+        foreach ($select['Sexo'] as $key => $row) {
+            if ($query['Sexo'] == $key) {
+                echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+            } else {
+                echo '<option value="' . $key . '">' . $row . '</option>';
+            }
+        }
+        ?>
+    </select>
+    <?php echo form_error('Sexo'); ?>
+    <br>	
 <!--	
     <label class="text-">E-mail:</label>
     <input type="text" class="form-control" id="Email" maxlength="100"
