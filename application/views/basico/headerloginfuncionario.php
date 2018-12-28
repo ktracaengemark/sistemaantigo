@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="../../favicon.ico">
+        <link rel="icon" href="arquivos/imagens/empresas/profile-<?php echo $_SESSION['log']['id'] ?>.png">
 
         <!-- <title>ROMATI - Agenda online de pacientes</title>-->
-        <title>KTRACA Sistemas</title>
+        <title>Eu Encontro Aqui</title>
 
         <!-- Bootstrap core CSS -->
         <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
