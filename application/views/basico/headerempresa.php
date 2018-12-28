@@ -23,10 +23,10 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="../../favicon.ico">
+        <link rel="icon" href="arquivos/imagens/empresas/profile-<?php echo $_SESSION['log']['id'] ?>.png">
 
         <!-- <title>ROMATI - Agenda online de pacientes</title>-->
-        <title><?php echo $_SESSION['log']['NomeEmpresa2'] ?> - KTRACA</title>        
+        <title><?php echo $_SESSION['log']['Nome2'] ?>/<?php echo $_SESSION['log']['NomeEmpresa2'] ?></title>        
 
         <!-- HUAP CSS Custom -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/huap.css">
