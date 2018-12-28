@@ -890,7 +890,7 @@ function adicionaProcedimento() {
 							<label for="Prioridade'+pc+'">Prioridade:</label>\
 							<select data-placeholder="Selecione uma opção..." class="form-control"\
 									 id="listadinamicac'+pc+'" name="Prioridade'+pc+'">\
-								<option value="" checked>Baixa</option>\
+								<option value="" checked>Alta</option>\
 							</select>\
 						</div>\
 						<div class="col-md-2">\

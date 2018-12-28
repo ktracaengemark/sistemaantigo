@@ -216,7 +216,7 @@ elseif ($_GET['q'] == 7) {
             FROM
                 Tab_Prioridade
 			ORDER BY 
-				idTab_Prioridade DESC'
+				idTab_Prioridade ASC'
     );
 
     while ($row = mysql_fetch_assoc($result)) {

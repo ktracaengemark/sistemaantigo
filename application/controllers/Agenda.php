@@ -114,9 +114,9 @@ class Agenda extends CI_Controller {
 		
         $data['select']['Prioridade'] = array (
             '0' => 'TODOS',
-			'3' => 'Baixa',
-			'2' => 'Média',
 			'1' => 'Alta',
+			'2' => 'Média',
+			'3' => 'Baixa',
         );		
 
         

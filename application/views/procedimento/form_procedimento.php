@@ -43,7 +43,7 @@
 													<div class="form-group">
 														<label class="radio-inline">
 															<input type="radio" 
-																   name="Prioridade" value="3" <?php echo $query['Prioridade']; ?> CHECKED> <strong>Baixa</strong>
+																   name="Prioridade" value="1" <?php echo $query['Prioridade']; ?>CHECKED> <strong>Alta</strong>
 														</label>
 														<label class="radio-inline">
 															<input type="radio" 
@@ -51,7 +51,7 @@
 														</label>
 														<label class="radio-inline">
 															<input type="radio" 
-																   name="Prioridade" value="1" <?php echo $query['Prioridade']; ?>> <strong>Alta</strong>
+																   name="Prioridade" value="3" <?php echo $query['Prioridade']; ?> > <strong>Baixa</strong>
 														</label>
 													</div>
 												</div>

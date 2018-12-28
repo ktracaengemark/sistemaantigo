@@ -3246,9 +3246,9 @@ class Orcatrata extends CI_Controller {
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Procedimento'] = $this->Basico_model->select_procedimento();
 		$data['select']['Prioridade'] = array (
-			'3' => 'Baixa',
-			'2' => 'Média',
 			'1' => 'Alta',
+			'2' => 'Média',
+			'3' => 'Baixa',
         );
 
         $data['titulo'] = 'Tarefas';
