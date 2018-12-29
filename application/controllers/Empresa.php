@@ -18,7 +18,7 @@ class Empresa extends CI_Controller {
         $this->load->driver('session');
 
         #load header view
-        $this->load->view('basico/header');
+        $this->load->view('basico/headerempresa');
         $this->load->view('basico/nav_principalempresa');
 
         #$this->load->view('empresa/nav_secundario');
