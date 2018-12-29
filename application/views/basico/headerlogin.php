@@ -9,7 +9,7 @@
         <link rel="icon" href="arquivos/imagens/empresas/profile-5.png">
 
         <!-- <title>ROMATI - Agenda online de pacientes</title>-->
-        <title>Eu Encontro Aqui</title>
+        <title>Eu Encontrei Aqui</title>
 
         <!-- Bootstrap core CSS -->
         <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
