@@ -85,7 +85,7 @@
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-home"></span> Eu Encontro Aqui <span class="caret"></span>
+									<span class="glyphicon glyphicon-home"></span> Eu Encontrei Aqui <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
 									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Empresas</a></li>

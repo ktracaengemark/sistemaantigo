@@ -177,6 +177,7 @@
 		</div>
 	
 		</form>		
+		
 		<div <?php echo $collapse; ?> id="Tarefas">	
 			<div class="panel-body">
 				<?php echo (isset($list1)) ? $list1 : FALSE ?>
@@ -193,7 +194,7 @@
 			
 			<?php echo form_open('agenda', 'role="form"'); ?>
 
-			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Procedimento" aria-expanded="false" aria-controls="Procedimento">
+			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Tarefas2" aria-expanded="false" aria-controls="Tarefas2">
 				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo2; ?> 
 			</div>
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal3-sm">
@@ -314,7 +315,8 @@
 		</div>
 		
 		</form>		
-		<div <?php echo $collapse; ?> id="Procedimento">	
+		
+		<div <?php echo $collapse; ?> id="Tarefas2">	
 			<div class="panel-body">
 				<?php echo (isset($list2)) ? $list2 : FALSE ?>
 			</div>
@@ -532,7 +534,7 @@
 			
 			<?php echo form_open('agenda', 'role="form"'); ?>
 
-			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Mensagem" aria-expanded="false" aria-controls="Mensagem">
+			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Mensagem2" aria-expanded="false" aria-controls="Mensagem2">
 				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo4; ?> 
 			</div>
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target="#bs-excluir-modal5-sm" aria-controls="bs-excluir-modal5-sm">
@@ -673,7 +675,7 @@
 	
 		</form>
 
-		<div <?php echo $collapse; ?> id="Mensagem">	
+		<div <?php echo $collapse; ?> id="Mensagem2">	
 			<div class="panel-body">
 				<?php echo (isset($list4)) ? $list4 : FALSE ?>
 			</div>
