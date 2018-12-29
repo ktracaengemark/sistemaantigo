@@ -350,7 +350,7 @@
 				<span class="glyphicon glyphicon-pencil"> Agenda</span>
 			</div>
 			<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#Calendario" aria-expanded="false" aria-controls="Calendario">
-				<span class="glyphicon glyphicon-calendar"></span>
+				<span class="glyphicon glyphicon-calendar"> Calendário</span>
 			</div>
 			
 		</div>
