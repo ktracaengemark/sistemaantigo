@@ -41,8 +41,9 @@
 	<input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
     <button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Acesso dos Usuários </button>	
     <br>
-	<!--<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('CpfUsuario'); ?>">Esqueci usuário/senha!</a></p>
-    <br>-->
+	<!--<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('CpfUsuario'); ?>">Esqueci usuário/senha!</a></p>-->
+	<a class="btn btn-lg btn-success btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">Empresas, Produtos e Serviços</a>
+	<br>	
 	<a class="btn btn btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button"><span class="glyphicon glyphicon-log-in"></span> Acesso dos Administradores</a>
 	<a class="btn btn btn-danger btn-block" href="<?php echo base_url(); ?>loginempresa/registrar" role="button"><span class="glyphicon glyphicon-plus"></span> Nova Empresa</a>	
 	<a class="btn btn btn-primary  btn-block" href="<?php echo base_url(); ?>login/index1" role="button"><span class="glyphicon glyphicon-log-in"></span> Conta Pessoal</a>
