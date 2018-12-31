@@ -85,14 +85,11 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="col-md-6 text-center">
-										<!--<label for="">Empresa:</label>-->
 										<div class="form-group">
 											<div class="row">							
 												<a href="https://www.ktracaengenharia.com.br/<?php echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">
 													<button type="button" class="btn btn-success">
-														<strong>Clic aqui e </strong>
-														<h3>Acesse o Site</h3>
-														
+														<h3><span class="glyphicon glyphicon-picture"></span> Acesse o Site</h3>
 													</button>
 												</a>
 											</div>
@@ -104,8 +101,7 @@
 												<a <?php if (preg_match("/empresacli\/cadastrarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
 													<a href="<?php echo base_url() . 'empresacli/cadastrarproc/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
 														<button type="button" class="btn btn-info">
-															<strong>Clic aqui e </strong>
-															<h3>Fale Conosco</h3>
+															<h3><span class="glyphicon glyphicon-comment"></span> Fale Conosco</h3>
 														</button>
 													</a>
 												</a>

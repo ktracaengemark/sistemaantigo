@@ -155,7 +155,7 @@ class Login extends CI_Controller {
         #load footer view
         #$this->load->view('basico/footerlogin');
         $this->load->view('basico/footer');
-    }
+    }	
 
     public function index1() {
 

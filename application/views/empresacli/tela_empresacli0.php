@@ -8,11 +8,11 @@
 
 			<div class="panel panel-primary">
 
-				<div class="panel-heading">
+				<div class="panel-heading">					
 					<?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?>
-					<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorioempresa/empresas" role="button">
+					<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>pesquisar/empresas" role="button">
 						<span class="glyphicon glyphicon-search"></span> Empresas
-					</a>				
+					</a>
 				</div>
 				<div class="panel-body">
 					<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -21,7 +21,7 @@
 								<div class="modal-header bg-danger">
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 									<h4 class="modal-title">"Para enviar uma Mensagem,<br>
-															Você precisa estar logado em uma Conta de Usuário!"</h4>
+															Você precisa estar logado em uma Conta!"</h4>
 								</div>
 								<!--
 								<div class="modal-body">
@@ -47,7 +47,7 @@
 								</div>
 							</div>
 						</div>
-					</div>				
+					</div>					
 					<div style="overflow: auto; height: 400px; ">
 						<div class="form-group">
 							<div class="form-group">	
@@ -118,6 +118,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="col-md-6 text-center">
+										<!--<label for="">Empresa:</label>-->
 										<div class="form-group">
 											<div class="row">							
 												<a href="https://www.ktracaengenharia.com.br/<?php echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">
@@ -137,13 +138,29 @@
 											</div>
 										</div>	
 									</div>
+									<!--
+									<div class="col-md-4 text-left">
+										<div class="form-group">
+											<div class="row">							
+												<a href="https://www.ktracaengenharia.com.br/<?php echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">
+													<button type="button" class="btn btn-success">
+														<strong>Fale Conosco2</strong>
+														<h4>  <?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>' ?> </h4>
+													</button>
+												</a>
+											</div>
+										</div>	
+									</div>
+									-->
 								</div>	
 							</div>
 						</div>
+						
 					</div>				
 				</div>
 			</div>
 		</div>
+
 	</div>
 </div>
 <?php } ?>

@@ -45,9 +45,9 @@
 	<p><a href="<?php #echo base_url(); ?>login/recuperar/?usuario=<?php #echo set_value('Usuario'); ?>">Esqueci usuário/senha!</a></p>
     <br>
 	-->
-	<a class="btn btn-lg btn-warning btn-block" href="<?php echo base_url(); ?>login/index2" role="button">Conta Empresa</a>
-	<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>login/index1" role="button">Conta Pessoal</a>	
-	<a class="btn btn-lg btn-success btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">Empresas, Produtos e Serviços</a>
+	<a class="btn btn-lg btn-warning btn-block" href="<?php echo base_url(); ?>login/index0" role="button">Acessar Contas</a>
+	<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar" role="button">Empresas, Produtos e Serviços</a>	
+
 	
 </form>
 
