@@ -36,7 +36,9 @@ class Pesquisar_model extends CI_Model {
                 Sis_Empresa AS E
                     LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
 					LEFT JOIN Tab_CategoriaEmpresa AS CE ON CE.idTab_CategoriaEmpresa = E.CategoriaEmpresa
-
+            WHERE
+				idSis_Empresa != "1" AND 
+				idSis_Empresa != "5"
 			ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');
@@ -72,7 +74,6 @@ class Pesquisar_model extends CI_Model {
             FROM
                 Sis_Empresa
             WHERE
-				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				idSis_Empresa != "1" AND 
 				idSis_Empresa != "5" 
             ORDER BY
