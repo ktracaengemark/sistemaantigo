@@ -12,7 +12,7 @@
         </a>
     </p>
     <!--<h2 class="form-signin-heading text-center">Agenda <?php echo ucfirst($nome_modulo) ?></h2><h4><b>***** versão alpha *****</b></h4>-->
-    <h2 class="form-signin-heading text-center">Eu Encontro Aqui</h2>	
+    <h2 class="form-signin-heading text-center">Eu Encontrei Aqui</h2>	
 	<!--
 	<label class="sr-only">Empresa</label>
     <input type="text" id="inputText" class="form-control" placeholder="Empresa" autofocus name="idSis_Empresa" value="<?php echo set_value('idSis_Empresa'); ?>">

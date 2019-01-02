@@ -13,7 +13,7 @@
 							<span class="glyphicon glyphicon-search"></span>
 						</button>
 					</span>
-					<input type="text" placeholder="Pesquisar Empresas" class="form-control" name="Pesquisa" value="">
+					<input type="text" placeholder="Ex.: barbeiro" class="form-control" name="Pesquisa" value="">
 				</div>
 			</div>
 			<!--

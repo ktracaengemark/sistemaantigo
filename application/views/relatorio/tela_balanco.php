@@ -135,6 +135,62 @@
 </div>
 </form>
 
+<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<?php echo form_open('relatorio/balanco', 'role="form"'); ?>	
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-danger">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros</h4>
+			</div>
+			<div class="modal-footer">
+				<div class="row">
+					<div class="col-md-3 text-left" >
+						<label for="Ordenamento">Ano.:</label>
+						<div>
+							<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
+								   name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<br>
+					<div class="form-group col-md-3 text-left">
+						<div class="form-footer ">
+							<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
+								<span class="glyphicon glyphicon-filter"></span> Filtrar
+							</button>
+						</div>
+					</div>
+					<div class="form-group col-md-3 text-left">
+						<div class="form-footer ">
+							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+								<span class="glyphicon glyphicon-remove"> Fechar
+							</button>
+						</div>
+					</div>
+					<div class="form-group col-md-3 text-left">
+						<div class="form-footer">		
+							<a class="btn btn-success btn-block" href="<?php echo base_url() ?>relatorio/receitas" role="button">
+								<span class="glyphicon glyphicon-search"></span> Receitas
+							</a>
+						</div>	
+					</div>
+					<div class="form-group col-md-3 text-left">
+						<div class="form-footer">		
+							<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>relatorio/despesas" role="button">
+								<span class="glyphicon glyphicon-search"></span> Despesas
+							</a>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>									
+									
+	</div>
+</div>
+</form>
+
 <div class="col-sm-offset-1 col-md-10">
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
@@ -179,7 +235,7 @@
 			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Anual" aria-expanded="false" aria-controls="Anual">
 				<span class="glyphicon glyphicon-pencil"></span>Mensal <?php #echo $titulo3; ?> 
 			</div>					
-			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar
 			</button>
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">

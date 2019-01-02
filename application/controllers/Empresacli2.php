@@ -491,7 +491,7 @@ class Empresacli2 extends CI_Controller {
     function get_empresa($data) {
 
         if ($this->Empresacli_model->lista_empresa($data, FALSE) === FALSE) {
-            $this->form_validation->set_message('get_empresa', '<strong>Empresa</strong> não encontrado.');
+            $this->form_validation->set_message('get_empresa', '<strong>Empresa, Produto ou Serviço</strong> não encontrado.');
             return FALSE;
         } else {
             return TRUE;
