@@ -5,12 +5,33 @@
     <?php if (isset($msg)) echo $msg; ?>
 
     <?php echo form_open('login', 'role="form"'); ?>
-
+<!--
     <p class="text-center">
         <a href="<?php echo base_url(); ?>login">
             <img src="<?php echo base_url() . 'arquivos/imagens/' . $modulo . '.png'; ?>" />
         </a>
     </p>
+-->
+		
+
+	<!--<div class="about_banner_wrap">
+	  <h1 class="m_11">Apresentação</h1>
+	</div>
+	
+	<div class="border"></div>-->
+	 
+	<center>
+		<figure>
+			<div class="boxVideo">
+				<!--<iframe width="270" height="270" src="https://www.youtube.com/embed/videoseries?list=PLPP9yl-2bfZFWltdqkqZ2WSazBo7dnDx1" frameborder="0" allowfullscreen></iframe>-->
+				<iframe width="270" height="270" src="<?php echo base_url() . 'arquivos/videos/apresentacao.mp4'; ?>" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</figure>
+	</center>
+	<script type="text/javascript">
+		$('#ca-container').contentcarousel();
+	</script>
+
     <!--<h2 class="form-signin-heading text-center">Agenda <?php echo ucfirst($nome_modulo) ?></h2><h4><b>***** versão alpha *****</b></h4>-->
     <h2 class="form-signin-heading text-center">Eu Encontrei Aqui</h2>	
 	<!--
