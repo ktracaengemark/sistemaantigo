@@ -171,10 +171,12 @@ class Loginempresa extends CI_Controller {
             'Confirma',
             'Celular',
 			'DataCriacao',
+			'DataDeValidade',
 			'NumUsuarios',
                 ), TRUE);
 
                 (!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
+				(!$data['query']['DataDeValidade']) ? $data['query']['DataDeValidade'] = date('d/m/Y', time()) : FALSE;
 		
 		$this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
 		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
@@ -205,6 +207,7 @@ class Loginempresa extends CI_Controller {
 			$data['query']['idTab_Modulo'] = 1;
 			$data['query']['NumUsuarios'] = 1;
             $data['query']['DataCriacao'] = $this->basico->mascara_data($data['query']['DataCriacao'], 'mysql');
+			$data['query']['DataDeValidade'] = $this->basico->mascara_data($data['query']['DataDeValidade'], 'mysql');
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');			
 			$data['query']['Senha'] = md5($data['query']['Senha']);
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));
@@ -343,11 +346,13 @@ class Loginempresa extends CI_Controller {
             'Confirma',
             'Celular',
 			'DataCriacao',
+			'DataDeValidade',
 			'NumUsuarios',
 			'Associado',
                 ), TRUE);
 
                 (!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
+				(!$data['query']['DataDeValidade']) ? $data['query']['DataDeValidade'] = date('d/m/Y', time()) : FALSE;
 		
 		$this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
 		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
@@ -379,6 +384,7 @@ class Loginempresa extends CI_Controller {
 			$data['query']['idTab_Modulo'] = 1;
 			$data['query']['NumUsuarios'] = 1;
             $data['query']['DataCriacao'] = $this->basico->mascara_data($data['query']['DataCriacao'], 'mysql');
+			$data['query']['DataDeValidade'] = $this->basico->mascara_data($data['query']['DataDeValidade'], 'mysql');
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');			
 			$data['query']['Senha'] = md5($data['query']['Senha']);
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));
