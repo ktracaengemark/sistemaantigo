@@ -9,7 +9,7 @@
         <link rel="icon" href="arquivos/imagens/empresas/profile-<?php echo $_SESSION['log']['idSis_Empresa'] ?>.png">
 
         <!-- <title>ROMATI - Agenda online de pacientes</title>-->
-        <title>Eu Encontrei Aqui</title>
+        <title>enkontraki</title>
 
         <!-- Bootstrap core CSS -->
         <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">

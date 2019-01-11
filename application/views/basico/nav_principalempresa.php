@@ -8,7 +8,7 @@
 			<a class="navbar-brand" href="<?php echo base_url() ?>empresa/prontuario/<?php echo $_SESSION['log']['id']; ?>"> 
 				<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
 			</a>
-			<!--<a class="navbar-brand" href="http://www.ktracaengemark.com.br"> Melhor loja</a>-->
+			<!--<a class="navbar-brand" href="https://www.enkontraki.com"> Melhor loja</a>-->
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar1">
 
@@ -36,7 +36,7 @@
 				<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group">
 						<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
-							<span class="glyphicon glyphicon-home"></span> Eu Encontrei Aqui <span class="caret"></span>
+							<span class="glyphicon glyphicon-home"></span> enkontraki <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">							
 							<li><a href="<?php echo base_url() ?>relatorioempresa/empresas"><span class="glyphicon glyphicon-home"></span> Empresas</a></li>

@@ -87,7 +87,7 @@
 									<div class="col-md-6 text-center">
 										<div class="form-group">
 											<div class="row">							
-												<a href="https://www.ktracaengenharia.com.br/<?php echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">
+												<a href="https://www.enkontraki.com/<?php echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">
 													<button type="button" class="btn btn-success">
 														<h3><span class="glyphicon glyphicon-picture"></span> Acesse o Site</h3>
 													</button>
