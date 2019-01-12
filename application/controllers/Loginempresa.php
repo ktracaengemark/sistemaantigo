@@ -121,7 +121,8 @@ class Loginempresa extends CI_Controller {
 				$_SESSION['log']['id'] = $query['idSis_Empresa'];
 				$_SESSION['log']['PermissaoEmpresa'] = $query['PermissaoEmp'];
 				$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
-				
+				$_SESSION['log']['DataCriacao'] = $query['DataCriacao'];
+				$_SESSION['log']['DataDeValidade'] = $query['DataDeValidade'];
 
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
@@ -176,7 +177,7 @@ class Loginempresa extends CI_Controller {
                 ), TRUE);
 
                 (!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
-				(!$data['query']['DataDeValidade']) ? $data['query']['DataDeValidade'] = date('d/m/Y', time()) : FALSE;
+				(!$data['query']['DataDeValidade']) ? $data['query']['DataDeValidade'] = date('d/m/Y', strtotime('+1 month')) : FALSE;
 		
 		$this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
 		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
@@ -352,7 +353,7 @@ class Loginempresa extends CI_Controller {
                 ), TRUE);
 
                 (!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
-				(!$data['query']['DataDeValidade']) ? $data['query']['DataDeValidade'] = date('d/m/Y', time()) : FALSE;
+				(!$data['query']['DataDeValidade']) ? $data['query']['DataDeValidade'] = date('d/m/Y', strtotime('+1 month')) : FALSE;
 		
 		$this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
 		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');

@@ -26,9 +26,9 @@
 				-->
 				<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 					<div class="btn-group" role="group" aria-label="...">
-						<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa">	
-							<button type="button" class="btn btn-md active " id="countdowndiv">Manutenção
-								<span class="glyphicon glyphicon-hourglass" id="clock"></span>
+						<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa"> 	
+							<button type="button" class="btn btn-md active "> Renovar em
+								<?php $data1 = new DateTime(); $data2 = new DateTime('2019-02-01'); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
 							</button>
 						</a>	
 					</div>
