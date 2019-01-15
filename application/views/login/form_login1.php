@@ -16,7 +16,7 @@
 	</script>
 
 	<center>
-		<div class="container col-sm-offset-2 col-md-8 ">
+		<div class="container col-sm-offset-1 col-md-10">
 			<label class="sr-only">Empresa</label>
 			<select data-placeholder="Selecione uma opção..." class="form-control" id="idSis_Empresa" name="idSis_Empresa">			
 				<!--<option value="">-- Selecione sua Empresa --</option>-->
@@ -39,7 +39,7 @@
 			<input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
 			<?php echo form_error('Senha'); ?>
 			<input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
-			<button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Pessoal</button>	
+			<button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Conta Pessoal</button>	
 			<br>
 			<!--<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('CpfUsuario'); ?>">Esqueci usuário/senha!</a></p>-->
 			<a class="btn btn-lg btn-success btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">

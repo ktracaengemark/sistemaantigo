@@ -65,7 +65,7 @@
 	<br>
 	-->
 	<center>
-		<div class="container col-sm-offset-2 col-md-8 ">
+		<div class="container col-sm-offset-1 col-md-10">
 			<a class="btn btn-lg btn-warning btn-block" href="<?php echo base_url(); ?>login/index2" role="button">Conta Empresa</a>
 			<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>login/index1" role="button">Conta Pessoal</a>	
 			<a class="btn btn-lg btn-success btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
