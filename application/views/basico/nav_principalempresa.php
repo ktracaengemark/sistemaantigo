@@ -24,15 +24,28 @@
 					</div>
 				</li>
 				-->
-				<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
-					<div class="btn-group" role="group" aria-label="...">
-						<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa"> 	
-							<button type="button" class="btn btn-md active "> Renovar em 
-								<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
-							</button>
-						</a>	
-					</div>
-				</li>
+				<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1)) { ?>
+					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
+						<div class="btn-group" role="group" aria-label="...">
+							<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa"> 	
+								<button type="button" class="btn btn-md active "> Renovar em 
+									<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
+								</button>
+							</a>	
+						</div>
+					</li>
+				<?php } else {?>
+					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
+						<div class="btn-group" role="group" aria-label="...">
+							<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa"> 	
+								<button type="button" class="btn btn-md active "> Renovar Assinatura 
+									
+								</button>
+							</a>	
+						</div>
+					</li>
+				<?php } ?>
+				
 				<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group">
 						<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
