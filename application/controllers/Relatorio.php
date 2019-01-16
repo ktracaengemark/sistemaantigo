@@ -184,7 +184,7 @@ class Relatorio extends CI_Controller {
 			'Quitado',
 			'Modalidade',
         ), TRUE));
-
+/*
 		if (!$data['query']['DataInicio2'])
            $data['query']['DataInicio2'] = date("d/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
 		
@@ -195,9 +195,8 @@ class Relatorio extends CI_Controller {
            $data['query']['DataInicio'] = '01/01/2018';
 		
 		if (!$data['query']['DataFim'])
-           $data['query']['DataFim'] = date("t/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
+           $data['query']['DataFim'] = date("t/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));		
 	   
-/*	   
 		if (!$data['query']['Mesvenc'])
            $data['query']['Mesvenc'] = date('m', time());
 	   
@@ -212,39 +211,39 @@ class Relatorio extends CI_Controller {
 		#$this->form_validation->set_rules('Mesvenc', 'Mês do Vencimento', 'required|trim');
 		#$this->form_validation->set_rules('Mespag', 'Mês do Pagamento', 'required|trim');
 		#$this->form_validation->set_rules('Ano', 'Ano', 'required|trim');
-        $this->form_validation->set_rules('DataInicio', 'Data Início do Vencimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim', 'Data Fim do Vencimento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio2', 'Data Início do Pagamento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim2', 'Data Fim do Pagamento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio3', 'Data Início do Orçamento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim3', 'Data Fim do Orçamento', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataInicio', 'Data In?cio do Vencimento', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataFim', 'Data Fim do Vencimento', 'trim|valid_date');
+		#$this->form_validation->set_rules('DataInicio2', 'Data In?cio do Pagamento', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataFim2', 'Data Fim do Pagamento', 'trim|valid_date');
+		#$this->form_validation->set_rules('DataInicio3', 'Data In?cio do Or?amento', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataFim3', 'Data Fim do Or?amento', 'trim|valid_date');
 
         $data['select']['AprovadoOrca'] = array(
             'S' => 'Sim',
 			'N' => 'Não',
-			'#' => 'TODOS',
+			'0' => 'TODOS',
         );
 
         $data['select']['QuitadoOrca'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
         );
 
 		$data['select']['ServicoConcluido'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
         );
 
 		$data['select']['Quitado'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
 			'N' => 'Não',
             'S' => 'Sim',
         );
 		
 		$data['select']['Modalidade'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'P' => 'Parcelas',
             'M' => 'Mensal',
         );
@@ -282,7 +281,7 @@ class Relatorio extends CI_Controller {
         $data['titulo'] = 'Receitas';
 
         #run form validation
-        if ($this->form_validation->run() !== FALSE) {
+        if ($this->form_validation->run() !== TRUE) {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
@@ -355,7 +354,7 @@ class Relatorio extends CI_Controller {
 			'Quitado',
 			'Modalidade',
         ), TRUE));
-
+/*
 		if (!$data['query']['DataInicio2'])
            $data['query']['DataInicio2'] = date("d/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
 		
@@ -368,7 +367,7 @@ class Relatorio extends CI_Controller {
 		if (!$data['query']['DataFim'])
            $data['query']['DataFim'] = date("t/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
 	   
-/*	   
+	   
 		if (!$data['query']['Mesvenc'])
            $data['query']['Mesvenc'] = date('m', time());
 	   
@@ -383,39 +382,39 @@ class Relatorio extends CI_Controller {
 		#$this->form_validation->set_rules('Mesvenc', 'Mês do Vencimento', 'required|trim');
 		#$this->form_validation->set_rules('Mespag', 'Mês do Pagamento', 'required|trim');
 		#$this->form_validation->set_rules('Ano', 'Ano', 'required|trim');
-        $this->form_validation->set_rules('DataInicio', 'Data Início do Vencimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim', 'Data Fim do Vencimento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio2', 'Data Início do Pagamento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim2', 'Data Fim do Pagamento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio3', 'Data Início do Orçamento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim3', 'Data Fim do Orçamento', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataInicio', 'Data Início do Vencimento', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataFim', 'Data Fim do Vencimento', 'trim|valid_date');
+		#$this->form_validation->set_rules('DataInicio2', 'Data Início do Pagamento', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataFim2', 'Data Fim do Pagamento', 'trim|valid_date');
+		#$this->form_validation->set_rules('DataInicio3', 'Data Início do Orçamento', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataFim3', 'Data Fim do Orçamento', 'trim|valid_date');
 
         $data['select']['AprovadoOrca'] = array(
             'S' => 'Sim',
 			'N' => 'Não',
-			'#' => 'TODOS',
+			'0' => 'TODOS',
         );
 
         $data['select']['QuitadoOrca'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
         );
 
 		$data['select']['ServicoConcluido'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
         );
 
 		$data['select']['Quitado'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
 			'N' => 'Não',
             'S' => 'Sim',
         );
 		
 		$data['select']['Modalidade'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'P' => 'Parcelas',
             'M' => 'Mensal',
         );
@@ -454,7 +453,7 @@ class Relatorio extends CI_Controller {
         $data['titulo'] = 'Despesas';
 
         #run form validation
-        if ($this->form_validation->run() !== FALSE) {
+        if ($this->form_validation->run() !== TRUE) {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             #$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
@@ -882,7 +881,7 @@ class Relatorio extends CI_Controller {
 			'Quitado',
 			'Modalidade',
         ), TRUE));
-
+/*
 		if (!$data['query']['DataInicio2'])
            $data['query']['DataInicio2'] = date("d/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
 		
@@ -894,7 +893,7 @@ class Relatorio extends CI_Controller {
 		
 		if (!$data['query']['DataFim'])
            $data['query']['DataFim'] = date("t/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
-/*		   
+		   
 		if (!$data['query']['Mesvenc'])
            $data['query']['Mesvenc'] = date('m', time());
    
@@ -910,39 +909,39 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];	   
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-        $this->form_validation->set_rules('DataInicio', 'Data Início do Vencimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim', 'Data Fim do Vencimento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio2', 'Data Início do Pagamento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim2', 'Data Fim do Pagamento', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio3', 'Data Início do Orçamento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim3', 'Data Fim do Orçamento', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataInicio', 'Data Início do Vencimento', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataFim', 'Data Fim do Vencimento', 'trim|valid_date');
+		#$this->form_validation->set_rules('DataInicio2', 'Data Início do Pagamento', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataFim2', 'Data Fim do Pagamento', 'trim|valid_date');
+		#$this->form_validation->set_rules('DataInicio3', 'Data Início do Orçamento', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataFim3', 'Data Fim do Orçamento', 'trim|valid_date');
 
         $data['select']['AprovadoOrca'] = array(
             'S' => 'Sim',
 			'N' => 'Não',
-			'#' => 'TODOS',
+			'0' => 'TODOS',
         );
 
         $data['select']['QuitadoOrca'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
         );
 
 		$data['select']['ServicoConcluido'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
         );
 
 		$data['select']['Quitado'] = array(
-			'#' => 'TODOS',
+			'0' => 'TODOS',
 			'N' => 'Não',
             'S' => 'Sim',
         );
 		
 		$data['select']['Modalidade'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'P' => 'Parcelas',
             'M' => 'Mensal',
         );
@@ -973,7 +972,7 @@ class Relatorio extends CI_Controller {
         $data['titulo1'] = 'Receita';
 
         #run form validation
-        if ($this->form_validation->run() !== FALSE) {
+        if ($this->form_validation->run() !== TRUE) {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             #$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
@@ -1013,7 +1012,7 @@ class Relatorio extends CI_Controller {
         $data['titulo2'] = 'Despesa';
 
         #run form validation
-        if ($this->form_validation->run() !== FALSE) {
+        if ($this->form_validation->run() !== TRUE) {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             #$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
@@ -1100,29 +1099,29 @@ class Relatorio extends CI_Controller {
         $data['select']['AprovadoOrca'] = array(
             'S' => 'Sim',
 			'N' => 'Não',
-			'#' => 'TODOS',
+			'0' => 'TODOS',
         );
 
         $data['select']['QuitadoOrca'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
         );
 
 		$data['select']['ServicoConcluido'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
         );
 
 		$data['select']['Quitado'] = array(
-			'#' => 'TODOS',
+			'0' => 'TODOS',
 			'N' => 'Não',
             'S' => 'Sim',
         );
 		
 		$data['select']['Modalidade'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'P' => 'Parcelas',
             'M' => 'Mensal',
         );
@@ -1167,12 +1166,12 @@ class Relatorio extends CI_Controller {
            $data['query']['Ano'] = date('Y', time());
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-        $this->form_validation->set_rules('Ano', 'Ano', 'required|trim|integer|greater_than[1900]');
+        #$this->form_validation->set_rules('Ano', 'Ano', 'required|trim|integer|greater_than[1900]');
 
         $data['titulo1'] = 'Receita';
 
         #run form validation
-        if ($this->form_validation->run() !== FALSE) {
+        if ($this->form_validation->run() !== TRUE) {
 
             $data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
@@ -1204,7 +1203,7 @@ class Relatorio extends CI_Controller {
 		
         $data['titulo2'] = 'Despesa';
         #run form validation
-        if ($this->form_validation->run() !== FALSE) {
+        if ($this->form_validation->run() !== TRUE) {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             #$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
@@ -1238,7 +1237,7 @@ class Relatorio extends CI_Controller {
 				
         $data['titulo3'] = 'Anual';
         #run form validation
-        if ($this->form_validation->run() !== FALSE) {
+        if ($this->form_validation->run() !== TRUE) {
 
             $data['report'] = $this->Relatorio_model->list_balancoanual($data['query']);
 
@@ -1255,7 +1254,7 @@ class Relatorio extends CI_Controller {
 
         $data['titulo4'] = 'Diario';
         #run form validation
-        if ($this->form_validation->run() !== FALSE) {
+        if ($this->form_validation->run() !== TRUE) {
 
             $data['report'] = $this->Relatorio_model->list_balancodiario($data['query']);
 
