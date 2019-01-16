@@ -24,11 +24,24 @@
 					</div>
 				</li>
 				-->
+				<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
+					<div class="btn-group">
+						<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-home"></span> enkontraki <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">							
+							<li><a href="<?php echo base_url() ?>relatorioempresa/empresas"><span class="glyphicon glyphicon-home"></span> Empresas, Produtos & Serviços</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>relatorioempresa/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas de Negócios</a></li>
+						</ul>
+					</div>
+				</li>
+				
 				<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1)) { ?>
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 						<div class="btn-group" role="group" aria-label="...">
 							<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa"> 	
-								<button type="button" class="btn btn-md active "> Renovar em 
+								<button type="button" class="btn btn-sm active "> Renovar em 
 									<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
 								</button>
 							</a>	
@@ -38,7 +51,7 @@
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 						<div class="btn-group" role="group" aria-label="...">
 							<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa"> 	
-								<button type="button" class="btn btn-md active "> Renovar Assinatura 
+								<button type="button" class="btn btn-sm active "> Renovar Assinatura 
 									
 								</button>
 							</a>	
@@ -46,22 +59,10 @@
 					</li>
 				<?php } ?>
 				
-				<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
-					<div class="btn-group">
-						<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
-							<span class="glyphicon glyphicon-home"></span> enkontraki <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">							
-							<li><a href="<?php echo base_url() ?>relatorioempresa/empresas"><span class="glyphicon glyphicon-home"></span> Empresas</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="<?php echo base_url() ?>relatorioempresa/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas de Negócios</a></li>
-						</ul>
-					</div>
-				</li>				
 				<li class="btn-toolbar navbar-form navbar-right" role="toolbar" aria-label="...">
 					<div class="btn-group" role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>login/sair">
-							<button type="button" class="btn btn-md btn-danger ">
+							<button type="button" class="btn btn-sm btn-danger ">
 								<span class="glyphicon glyphicon-log-out"></span> Sair
 							</button>
 						</a>

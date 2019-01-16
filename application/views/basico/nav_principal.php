@@ -88,7 +88,7 @@
 									<span class="glyphicon glyphicon-home"></span> enkontraki <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
-									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Empresas</a></li>
+									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Empresas, Produtos & Serviços</a></li>
 									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 									<li role="separator" class="divider"></li>							
 									<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-pencil"></span> Produtos</a></li>
@@ -103,6 +103,28 @@
 							</div>
 							
 						</li>
+						
+						<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) && ($_SESSION['log']['idSis_Empresa'] != 5))  { ?>
+							<li class="btn-toolbar btn-sm navbar-form navbar-left" role="toolbar" aria-label="...">
+								<div class="btn-group" role="group" aria-label="...">
+									<a href="<?php echo base_url(); ?>loginempresa/index"> 	
+										<button type="button" class="btn btn-sm active "> Renovar em 
+											<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
+										</button>
+									</a>	
+								</div>
+							</li>
+						<?php } else if ($_SESSION['log']['idSis_Empresa'] != 5){?>
+							<li class="btn-toolbar btn-sm navbar-form navbar-left" role="toolbar" aria-label="...">
+								<div class="btn-group" role="group" aria-label="...">
+									<a href="<?php echo base_url(); ?>loginempresa/index"> 	
+										<button type="button" class="btn btn-sm active "> Renovar Assinatura 
+											
+										</button>
+									</a>	
+								</div>
+							</li>
+						<?php } ?>	
 						
 						<li class="btn-toolbar btn-sm navbar-form navbar-right" role="toolbar" aria-label="...">
 							<div class="btn-group " role="group" aria-label="...">

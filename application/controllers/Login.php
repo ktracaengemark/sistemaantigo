@@ -102,6 +102,7 @@ class Login extends CI_Controller {
 			#### Carrega os dados da Empresa nas vari?ves de sess?o ####
 
 			$_SESSION['log']['NivelEmpresa'] = $this->Login_model->get_empresa($query['idSis_Usuario']);
+			$_SESSION['log']['DataDeValidade'] = $this->Login_model->get_empresa2($query['idSis_Usuario']);
 			
 			
 			#echo "<pre>".print_r($query)."</pre>";
@@ -226,7 +227,7 @@ class Login extends CI_Controller {
 			#### Carrega os dados da Empresa nas vari?ves de sess?o ####
 
 			$_SESSION['log']['NivelEmpresa'] = $this->Login_model->get_empresa($query['idSis_Usuario']);
-			
+			$_SESSION['log']['DataDeValidade'] = $this->Login_model->get_empresa2($query['idSis_Usuario']);
 			
 			#echo "<pre>".print_r($query)."</pre>";
             #exit();
@@ -350,7 +351,7 @@ class Login extends CI_Controller {
 			#### Carrega os dados da Empresa nas vari?ves de sess?o ####
 
 			$_SESSION['log']['NivelEmpresa'] = $this->Login_model->get_empresa($query['idSis_Usuario']);
-			
+			$_SESSION['log']['DataDeValidade'] = $this->Login_model->get_empresa2($query['idSis_Usuario']);			
 			
 			#echo "<pre>".print_r($query)."</pre>";
             #exit();
