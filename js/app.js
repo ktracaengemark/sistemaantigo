@@ -4412,7 +4412,7 @@ $('#calendar').fullCalendar({
             url: 'Consulta_json.php', // use the `url` property
         }],
     //allDayDefault: true,
-    defaultView: 'agendaDay',
+    defaultView: 'month',
     //contentHeight: 700,
     height: 'auto',
     //handleWindowResize: false,
