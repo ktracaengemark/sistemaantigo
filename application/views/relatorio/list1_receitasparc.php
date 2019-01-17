@@ -41,9 +41,9 @@
 				<table class="table table-bordered table-condensed table-striped">
 					<thead>
 						<tr>
-							<th class="active">Edit.</th>
+							<th class="active">EdtPrc</th>
 							<th class="active">Orç.</th>
-							<th class="active">Receita</th>	
+							<th class="col-md-3 active" scope="col">Receita</th>	
 							<th class="active">Pc/Qt</th>
 							<th class="active">Dt.Venc</th>
 							<th class="active">À Receber</th>
@@ -58,8 +58,8 @@
 					<tbody>
 						<?php
 						foreach ($report->result_array() as $row) {
-							#echo '<tr>';
-							echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarparcelarec/' . $row['idSis_Empresa'] . '">';
+							echo '<tr>';
+							#echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarparcelarec/' . $row['idSis_Empresa'] . '">';
 								echo '<td class="notclickable">
 										<a class="btn btn-md btn-success notclickable" href="' . base_url() . 'orcatrata/alterarparcelarec/' . $row['idSis_Empresa'] . '">
 											<span class="glyphicon glyphicon-edit notclickable"></span>

@@ -860,7 +860,7 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            #'NomeCliente',
+            'NomeCliente',
 			'Dia',
 			'Ano',
 			'Mesvenc',
@@ -874,6 +874,8 @@ class Relatorio extends CI_Controller {
 			'ServicoConcluido',
 			'Quitado',
 			'Modalidade',
+			'AVAP',
+			'FormaPag',			
         ), TRUE));
 /*
 		   
@@ -894,9 +896,9 @@ class Relatorio extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         $data['select']['AprovadoOrca'] = array(
-            'S' => 'Sim',
+            '0' => 'TODOS',
 			'N' => 'Não',
-			'0' => 'TODOS',
+			'S' => 'Sim',
         );
 
         $data['select']['QuitadoOrca'] = array(
@@ -922,12 +924,16 @@ class Relatorio extends CI_Controller {
             'P' => 'Parcelas',
             'M' => 'Mensal',
         );
+		
+		$data['select']['AVAP'] = array(
+            '0' => 'TODOS',
+            'V' => 'À Vista',
+            'P' => 'À Prazo',
+        );		
 
         $data['select']['Campo'] = array(
-            'PR.DataVencimento' => 'Data do Venc.',
-			'PR.Quitado' => 'Quit.Parc.',
+			'OT.idApp_OrcaTrata' => 'NºOrçam.',
 			'OT.Modalidade' => 'Modalidade',
-            'OT.idApp_OrcaTrata' => 'Número da Receita',
             'OT.ValorOrca' => 'Valor da Receita',
             'OT.ServicoConcluido' => 'Receita Concluída?',
 			'OT.TipoFinanceiro' => 'Tipo de Receita',
@@ -939,12 +945,13 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-		#$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+		$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
 		$data['select']['ObsOrca'] = $this->Relatorio_model->select_obsorca();
 		$data['select']['TipoFinanceiro'] = $this->Relatorio_model->select_tipofinanceiro();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
 		$data['select']['Mespag'] = $this->Relatorio_model->select_mes();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
+		$data['select']['FormaPag'] = $this->Relatorio_model->select_formapag();
 
         $data['titulo1'] = 'Receitas';
 
@@ -952,7 +959,7 @@ class Relatorio extends CI_Controller {
         if ($this->form_validation->run() !== TRUE) {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
-            #$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+            $data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
             $data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
@@ -966,6 +973,8 @@ class Relatorio extends CI_Controller {
 			$data['bd']['ServicoConcluido'] = $data['query']['ServicoConcluido'];
 			$data['bd']['Quitado'] = $data['query']['Quitado'];
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
+			$data['bd']['AVAP'] = $data['query']['AVAP'];
+			$data['bd']['FormaPag'] = $data['query']['FormaPag'];
             
 			$data['report'] = $this->Relatorio_model->list1_receitas($data['bd'],TRUE);
 
@@ -1000,6 +1009,8 @@ class Relatorio extends CI_Controller {
 			$data['bd']['ServicoConcluido'] = $data['query']['ServicoConcluido'];
 			$data['bd']['Quitado'] = $data['query']['Quitado'];
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
+			$data['bd']['AVAP'] = $data['query']['AVAP'];
+			$data['bd']['FormaPag'] = $data['query']['FormaPag'];
             
 			$data['report'] = $this->Relatorio_model->list2_despesas($data['bd'],TRUE);
 
