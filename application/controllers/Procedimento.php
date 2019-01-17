@@ -147,6 +147,7 @@ class Procedimento extends CI_Controller {
             'DataProcedimento',
 			'DataProcedimentoLimite',
 			'ConcluidoProcedimento',
+			'Prioridade',
 
         ), TRUE);
 
@@ -165,6 +166,11 @@ class Procedimento extends CI_Controller {
 
 
 		$data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
+        $data['select']['Prioridade'] = array (
+            '1' => 'Alta',
+            '2' => 'Média',
+			'3' => 'Baixa',
+        );		
 		
         $data['titulo'] = 'Editar Tarefa';
         $data['form_open_path'] = 'procedimento/alterar';
@@ -183,7 +189,7 @@ class Procedimento extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('procedimento/form_procedimento', $data);
+            $this->load->view('procedimento/form_procedimento2', $data);
         } else {
 
 
@@ -200,7 +206,7 @@ class Procedimento extends CI_Controller {
 
             if ($data['auditoriaitem'] && $this->Procedimento_model->update_procedimento($data['query'], $data['query']['idApp_Procedimento']) === FALSE) {
                 $data['msg'] = '?m=2';
-                redirect(base_url() . 'procedimento/form_procedimento/' . $data['query']['idApp_Procedimento'] . $data['msg']);
+                redirect(base_url() . 'procedimento/form_procedimento2/' . $data['query']['idApp_Procedimento'] . $data['msg']);
                 exit();
             } else {
 
