@@ -2223,5 +2223,55 @@ class Basico_model extends CI_Model {
 
         return $array;
     }
+
+	public function select_orcarec() {
+
+        $query = $this->db->query('
+            SELECT
+				idApp_OrcaTrata,
+				idSis_Empresa,
+				idTab_TipoRD
+			FROM
+				App_OrcaTrata
+			WHERE
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				idTab_TipoRD = "2"
+			ORDER BY
+				idApp_OrcaTrata
+        ');
+
+        $array = array();
+        $array[0] = 'TODOS';
+        foreach ($query->result() as $row) {
+            $array[$row->idApp_OrcaTrata] = $row->idApp_OrcaTrata;
+        }
+
+        return $array;
+    }	
+
+	public function select_orcades() {
+
+        $query = $this->db->query('
+            SELECT
+				idApp_OrcaTrata,
+				idSis_Empresa,
+				idTab_TipoRD
+			FROM
+				App_OrcaTrata
+			WHERE
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				idTab_TipoRD = "1"
+			ORDER BY
+				idApp_OrcaTrata
+        ');
+
+        $array = array();
+        $array[0] = 'TODOS';
+        foreach ($query->result() as $row) {
+            $array[$row->idApp_OrcaTrata] = $row->idApp_OrcaTrata;
+        }
+
+        return $array;
+    }	
 	
 }

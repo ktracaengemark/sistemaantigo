@@ -72,10 +72,10 @@
 									<span class="glyphicon glyphicon-usd"></span> Finanças <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
-									<li><a href="<?php echo base_url() ?>relatorio/receitas"><span class="glyphicon glyphicon-pencil"></span> Receitas</a></li>
+									<li><a href="<?php echo base_url() ?>relatorio/financeiro"><span class="glyphicon glyphicon-pencil"></span> Receitas & Despesas</a></li>
 									<li role="separator" class="divider"></li>							
-									<li><a href="<?php echo base_url() ?>relatorio/despesas"><span class="glyphicon glyphicon-pencil"></span> Despesas</a></li>
-									<li role="separator" class="divider"></li>
+									<!--<li><a href="<?php echo base_url() ?>relatorio/despesas"><span class="glyphicon glyphicon-pencil"></span> Despesas</a></li>
+									<li role="separator" class="divider"></li>-->
 									<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>
 								</ul>
 							</div>

@@ -2185,7 +2185,7 @@ class Orcatrata extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
-				redirect(base_url() . 'relatorio/receitas/' . $data['msg']);
+				redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
 
 				exit();
             }
@@ -2727,7 +2727,7 @@ class Orcatrata extends CI_Controller {
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_OrcaTrata', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
-                redirect(base_url() . 'relatorio/despesas/' . $data['msg']);
+                redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
 				#redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/despesasparc/' . $data['msg']);
 
@@ -2753,6 +2753,7 @@ class Orcatrata extends CI_Controller {
 			'Mesvenc',
 			'Ano',
 			'Quitado',
+			'Orcades',
         ), TRUE));
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2818,6 +2819,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['Quitado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Dia'] = $this->Basico_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Basico_model->select_mes();
+		$data['select']['Orcades'] = $this->Basico_model->select_orcades();
 		
         $data['titulo'] = 'Despesas ';
         $data['form_open_path'] = 'orcatrata/alterarparceladesp';
@@ -2858,6 +2860,7 @@ class Orcatrata extends CI_Controller {
             $data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
+			$data['bd']['Orcades'] = $data['query']['Orcades'];
 			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Sis_Empresa ####
 
@@ -2967,6 +2970,7 @@ class Orcatrata extends CI_Controller {
 			'Dia',
 			'Mesvenc',
 			'Ano',
+			'Orcarec',
         ), TRUE));
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3035,6 +3039,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['Quitado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Dia'] = $this->Basico_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Basico_model->select_mes();
+		$data['select']['Orcarec'] = $this->Basico_model->select_orcarec();
 		
         $data['titulo'] = 'Descricao ';
         $data['form_open_path'] = 'orcatrata/alterarparcelarec';
@@ -3074,6 +3079,7 @@ class Orcatrata extends CI_Controller {
             $data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
+			$data['bd']['Orcarec'] = $data['query']['Orcarec'];
 			
 			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Sis_Empresa ####

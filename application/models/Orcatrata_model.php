@@ -176,14 +176,16 @@ class Orcatrata_model extends CI_Model {
 
 		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-		$permissao1 = ($_SESSION['FiltroAlteraParcela']['Quitado'] != "#" ) ? 'PR.Quitado = "' . $_SESSION['FiltroAlteraParcela']['Quitado'] . '" AND ' : FALSE;
+		$permissao1 = ($_SESSION['FiltroAlteraParcela']['Quitado'] != "0" ) ? 'PR.Quitado = "' . $_SESSION['FiltroAlteraParcela']['Quitado'] . '" AND ' : FALSE;
 		$permissao2 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
 		$permissao3 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "" ) ? 'YEAR(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
+		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Orcades'] != "0" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcades'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('
 			SELECT
 
 				OT.Descricao,
+				OT.idApp_OrcaTrata,
 				OT.TipoFinanceiro,
 				TD.TipoFinanceiro,
 				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "-", IFNULL(OT.Descricao,"")) AS idApp_OrcaTrata,
@@ -191,7 +193,7 @@ class Orcatrata_model extends CI_Model {
 				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
 				PR.idSis_Usuario,
 				PR.idApp_Parcelas,
-				CONCAT(IFNULL(PR.Parcela,""), "--", IFNULL(TD.TipoFinanceiro,""), "--", IFNULL(OT.Descricao,"")) AS Parcela,
+				CONCAT(IFNULL(PR.Parcela,""), "--", IFNULL(PR.idApp_OrcaTrata,""), "--", IFNULL(TD.TipoFinanceiro,""), "--", IFNULL(OT.Descricao,"")) AS Parcela,
 				PR.ValorParcela,
 				PR.DataVencimento,
 				PR.ValorPago,
@@ -208,6 +210,7 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao1 . '
 				' . $permissao2 . '
 				' . $permissao3 . '
+				' . $permissao4 . '
 				PR.idTab_TipoRD = "1"
 			ORDER BY
 				PR.DataVencimento
@@ -221,13 +224,15 @@ class Orcatrata_model extends CI_Model {
 		
 		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-		$permissao1 = ($_SESSION['FiltroAlteraParcela']['Quitado'] != "#" ) ? 'PR.Quitado = "' . $_SESSION['FiltroAlteraParcela']['Quitado'] . '" AND ' : FALSE;
+		$permissao1 = ($_SESSION['FiltroAlteraParcela']['Quitado'] != "0" ) ? 'PR.Quitado = "' . $_SESSION['FiltroAlteraParcela']['Quitado'] . '" AND ' : FALSE;
 		$permissao2 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
 		$permissao3 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "" ) ? 'YEAR(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
+		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Orcarec'] != "0" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcarec'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('
 			SELECT
 				C.NomeCliente,
+				OT.idApp_OrcaTrata,
 				OT.Descricao,
 				OT.TipoFinanceiro,
 				TR.TipoFinanceiro,
@@ -236,7 +241,7 @@ class Orcatrata_model extends CI_Model {
 				PR.idSis_Usuario,
 				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
 				PR.idApp_Parcelas,
-				CONCAT(IFNULL(PR.Parcela,""), "--", IFNULL(TR.TipoFinanceiro,""), "--", IFNULL(C.NomeCliente,""), "--", IFNULL(OT.Descricao,"")) AS Parcela,
+				CONCAT(IFNULL(PR.Parcela,""), "--", IFNULL(PR.idApp_OrcaTrata,""), "--", IFNULL(TR.TipoFinanceiro,""), "--", IFNULL(C.NomeCliente,""), "--", IFNULL(OT.Descricao,"")) AS Parcela,
 				PR.ValorParcela,
 				PR.DataVencimento,
 				PR.ValorPago,
@@ -254,6 +259,7 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao1 . '
 				' . $permissao2 . '
 				' . $permissao3 . '
+				' . $permissao4 . '
 				PR.idTab_TipoRD = "2" 
 			ORDER BY
 				PR.DataVencimento  

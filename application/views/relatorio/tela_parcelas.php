@@ -8,16 +8,16 @@
 		<div class="panel-heading">
 			<?php echo form_open('relatorio/parcelas', 'role="form"'); ?>
 			
+			<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal11-sm">
+				<span class="glyphicon glyphicon-plus"></span><?php echo $titulo1; ?>
+			</button>			
 			<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo1; ?>
 			</button>											
-			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/balanco" role="button">
-				<span class="glyphicon glyphicon-search"></span>Balanço
+			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
+				<span class="glyphicon glyphicon-search"></span>Receitas
 			</a>
-			<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal11-sm">
-				<span class="glyphicon glyphicon-plus"></span><?php echo $titulo1; ?>
-			</button>
-			
+
 		</div>
 		<div class="panel-body">
 			<div class="modal fade bs-excluir-modal11-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -25,7 +25,7 @@
 					<div class="modal-content">
 						<div class="modal-header bg-danger">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title">Evite cadastrar Receitas REPETIDAS!<br>
+							<h4 class="modal-title">Evite cadastrar RECEITAS Repetidas!<br>
 													"Pesquise"as Receitas Cadastradas!</h4>
 						</div>
 						<!--
@@ -35,13 +35,20 @@
 						</div>
 						-->
 						<div class="modal-footer">
-							<div class="form-group col-md-3 text-left">
+							<!--<div class="form-group col-md-3 text-left">
 								<div class="form-footer">
-									<button  class="btn btn-info btn-block"" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+									<button  class="btn btn-warning btn-block"" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 										<span class="glyphicon glyphicon-search"></span> Pesquisar
 									</button>
 								</div>
-							</div>
+							</div>-->
+							<div class="form-group col-md-3 text-right">
+								<div class="form-footer">		
+									<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
+										<span class="glyphicon glyphicon-search"></span> Pesquisar
+									</a>
+								</div>	
+							</div>							
 							<div class="form-group col-md-3 text-left">
 								<div class="form-footer ">
 									<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
@@ -70,6 +77,21 @@
 						</div>
 						<div class="modal-footer">
 							<div class="row">
+								<div class="col-md-3 text-left" >
+									<label for="Ordenamento">Orçam.:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="Orcarec" name="Orcarec">
+										<?php
+										foreach ($select['Orcarec'] as $key => $row) {
+											if ($query['Orcarec'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>								
 								<div class="col-md-3 text-left">
 									<label for="Quitado">Parc. Quit.</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -167,16 +189,16 @@
 		<div class="panel-heading">
 			<?php echo form_open('relatorio/parcelas', 'role="form"'); ?>
 
+			<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal13-sm">
+				<span class="glyphicon glyphicon-plus"></span><?php echo $titulo2; ?>
+			</button>			
 			<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo2; ?>
 			</button>											
-			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/balanco" role="button">
-				<span class="glyphicon glyphicon-search"></span>Balanço
+			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
+				<span class="glyphicon glyphicon-search"></span>Despesas
 			</a>
-			<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal13-sm">
-				<span class="glyphicon glyphicon-plus"></span><?php echo $titulo2; ?>
-			</button>
-			
+
 		</div>
 		<div class="panel-body">
 			<div class="modal fade bs-excluir-modal13-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -184,8 +206,8 @@
 					<div class="modal-content">
 						<div class="modal-header bg-danger">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title">Evite cadastrar Despesas REPETIDAS!<br>
-													"Pesquise"as Despesas Cadastradas!</h4>
+							<h4 class="modal-title">Evite cadastrar DESPESAS Repetidas!<br>
+													"Pesquise" as Despesas Cadastradas!</h4>
 						</div>
 						<!--
 						<div class="modal-body">
@@ -194,13 +216,21 @@
 						</div>
 						-->
 						<div class="modal-footer">
-							<div class="form-group col-md-3 text-left">
+							
+							<!--<div class="form-group col-md-3 text-left">
 								<div class="form-footer">
-									<button  class="btn btn-info btn-block"" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
+									<button  class="btn btn-warning btn-block"" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
 										<span class="glyphicon glyphicon-search"></span> Pesquisar
 									</button>
 								</div>
-							</div>
+							</div>-->
+							<div class="form-group col-md-3 text-right">
+								<div class="form-footer">		
+									<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
+										<span class="glyphicon glyphicon-search"></span> Pesquisar
+									</a>
+								</div>	
+							</div>							
 							<div class="form-group col-md-3 text-left">
 								<div class="form-footer ">
 									<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
@@ -229,6 +259,21 @@
 						</div>
 						<div class="modal-footer">
 							<div class="row">
+								<div class="col-md-3 text-left" >
+									<label for="Ordenamento">Orçam.:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="Orcades" name="Orcades">
+										<?php
+										foreach ($select['Orcades'] as $key => $row) {
+											if ($query['Orcades'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>								
 								<div class="col-md-3 text-left">
 									<label for="Quitado">Parc. Quit.</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
