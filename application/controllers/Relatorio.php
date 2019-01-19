@@ -875,7 +875,9 @@ class Relatorio extends CI_Controller {
 			'Quitado',
 			'Modalidade',
 			'AVAP',
-			'FormaPag',			
+			'FormaPag',
+			'Orcarec',
+			'Orcades',			
         ), TRUE));
 /*
 		   
@@ -951,7 +953,10 @@ class Relatorio extends CI_Controller {
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
 		$data['select']['Mespag'] = $this->Relatorio_model->select_mes();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
+		$data['select']['Ano'] = $this->Relatorio_model->select_ano();
 		$data['select']['FormaPag'] = $this->Relatorio_model->select_formapag();
+		$data['select']['Orcarec'] = $this->Relatorio_model->select_orcarec();
+		$data['select']['Orcades'] = $this->Relatorio_model->select_orcades();		
 
         $data['titulo1'] = 'Receitas';
 
@@ -964,7 +969,8 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
-			$data['bd']['Mespag'] = $data['query']['Mespag'];			
+			$data['bd']['Mespag'] = $data['query']['Mespag'];
+			$data['bd']['Orcarec'] = $data['query']['Orcarec'];			
 			$data['bd']['ObsOrca'] = $data['query']['ObsOrca'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
@@ -1000,7 +1006,8 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
-			$data['bd']['Mespag'] = $data['query']['Mespag'];			
+			$data['bd']['Mespag'] = $data['query']['Mespag'];
+			$data['bd']['Orcades'] = $data['query']['Orcades'];			
 			$data['bd']['ObsOrca'] = $data['query']['ObsOrca'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
@@ -1154,6 +1161,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
 		$data['select']['Mespag'] = $this->Relatorio_model->select_mes();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
+		$data['select']['Ano'] = $this->Relatorio_model->select_ano();		
 
         $data['titulo1'] = 'Receita';
 
@@ -1335,7 +1343,8 @@ class Relatorio extends CI_Controller {
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
 		$data['select']['Mespag'] = $this->Relatorio_model->select_mes();
 		$data['select']['Diavenc'] = $this->Relatorio_model->select_dia();
-		$data['select']['Diapag'] = $this->Relatorio_model->select_dia();		
+		$data['select']['Diapag'] = $this->Relatorio_model->select_dia();
+		$data['select']['Ano'] = $this->Relatorio_model->select_ano();
 		/*
 		if (!$data['query']['Ano'])
            $data['query']['Ano'] = '2018';

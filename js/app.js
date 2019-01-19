@@ -417,24 +417,6 @@ function calculaParcelas() {
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="ValorPago">Valor Pago:</label><br>\
-								<div class="input-group" id="txtHint">\
-									<span class="input-group-addon" id="basic-addon1">R$</span>\
-									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
-										    id="ValorPago'+i+'" name="ValorPago'+i+'" value="">\
-								</div>\
-							</div>\
-							<div class="col-md-2">\
-								<label for="DataPago">Data Pag.</label>\
-								<div class="input-group DatePicker">\
-									<span class="input-group-addon" disabled>\
-										<span class="glyphicon glyphicon-calendar"></span>\
-									</span>\
-									<input type="text" class="form-control Date" id="DataPago'+i+'" maxlength="10" placeholder="DD/MM/AAAA"\
-										   name="DataPago'+i+'" value="">\
-								</div>\
-							</div>\
-							<div class="col-md-2">\
 								<label for="Quitado">Quitado????</label><br>\
 								<div class="form-group">\
 									<div class="btn-group" data-toggle="buttons">\
@@ -447,6 +429,24 @@ function calculaParcelas() {
 											onchange="carregaQuitado(this.value,this.name,'+i+',1)" autocomplete="off" value="S">Sim\
 										</label>\
 									</div>\
+								</div>\
+							</div>\
+							<div class="col-md-2">\
+								<label for="ValorPago">Valor Pago:</label><br>\
+								<div class="input-group" id="txtHint">\
+									<span class="input-group-addon" id="basic-addon1">R$</span>\
+									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""\
+										    id="ValorPago'+i+'" name="ValorPago'+i+'" value="">\
+								</div>\
+							</div>\
+							<div class="col-md-2">\
+								<label for="DataPago">Data Pag.</label>\
+								<div class="input-group DatePicker">\
+									<span class="input-group-addon" disabled>\
+										<span class="glyphicon glyphicon-calendar"></span>\
+									</span>\
+									<input type="text" class="form-control Date" id="DataPago'+i+'" maxlength="10" placeholder="DD/MM/AAAA" readonly=""\
+										   name="DataPago'+i+'" value="">\
 								</div>\
 							</div>\
 						</div>\
@@ -543,24 +543,6 @@ function calculaParcelasMensais() {
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="ValorPago">Valor Pago:</label><br>\
-								<div class="input-group" id="txtHint">\
-									<span class="input-group-addon" id="basic-addon1">R$</span>\
-									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
-										    id="ValorPago'+i+'" name="ValorPago'+i+'" value="">\
-								</div>\
-							</div>\
-							<div class="col-md-2">\
-								<label for="DataPago">Data Pag.</label>\
-								<div class="input-group DatePicker">\
-									<span class="input-group-addon" disabled>\
-										<span class="glyphicon glyphicon-calendar"></span>\
-									</span>\
-									<input type="text" class="form-control Date" id="DataPago'+i+'" maxlength="10" placeholder="DD/MM/AAAA"\
-										   name="DataPago'+i+'" value="">\
-								</div>\
-							</div>\
-							<div class="col-md-2">\
 								<label for="Quitado">Quitado????</label><br>\
 								<div class="form-group">\
 									<div class="btn-group" data-toggle="buttons">\
@@ -573,6 +555,24 @@ function calculaParcelasMensais() {
 											onchange="carregaQuitado(this.value,this.name,'+i+',1)" autocomplete="off" value="S">Sim\
 										</label>\
 									</div>\
+								</div>\
+							</div>\
+							<div class="col-md-2">\
+								<label for="ValorPago">Valor Pago:</label><br>\
+								<div class="input-group" id="txtHint">\
+									<span class="input-group-addon" id="basic-addon1">R$</span>\
+									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""\
+										    id="ValorPago'+i+'" name="ValorPago'+i+'" value="">\
+								</div>\
+							</div>\
+							<div class="col-md-2">\
+								<label for="DataPago">Data Pag.</label>\
+								<div class="input-group DatePicker">\
+									<span class="input-group-addon" disabled>\
+										<span class="glyphicon glyphicon-calendar"></span>\
+									</span>\
+									<input type="text" class="form-control Date" id="DataPago'+i+'" maxlength="10" placeholder="DD/MM/AAAA" readonly=""\
+										   name="DataPago'+i+'" value="">\
 								</div>\
 							</div>\
 						</div>\
@@ -2466,24 +2466,6 @@ function adicionaParcelas() {
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="ValorPago">Valor Pago:</label><br>\
-							<div class="input-group" id="txtHint">\
-								<span class="input-group-addon" id="basic-addon1">R$</span>\
-								<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
-										id="ValorPago'+pc+'" name="ValorPago'+pc+'" value="">\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="DataPago">Data Pag.</label>\
-							<div class="input-group DatePicker">\
-								<span class="input-group-addon" disabled>\
-									<span class="glyphicon glyphicon-calendar"></span>\
-								</span>\
-								<input type="text" class="form-control Date" id="DataPago'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
-									   name="DataPago'+pc+'" value="">\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
 							<label for="Quitado">Quitado????</label><br>\
 							<div class="form-group">\
 								<div class="btn-group" data-toggle="buttons">\
@@ -2496,6 +2478,24 @@ function adicionaParcelas() {
 										onchange="carregaQuitado(this.value,this.name,'+pc+',1)" autocomplete="off" value="S">Sim\
 									</label>\
 								</div>\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="ValorPago">Valor Pago:</label><br>\
+							<div class="input-group" id="txtHint">\
+								<span class="input-group-addon" id="basic-addon1">R$</span>\
+								<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""\
+										id="ValorPago'+pc+'" name="ValorPago'+pc+'" value="">\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="DataPago">Data Pag.</label>\
+							<div class="input-group DatePicker">\
+								<span class="input-group-addon" disabled>\
+									<span class="glyphicon glyphicon-calendar"></span>\
+								</span>\
+								<input type="text" class="form-control Date" id="DataPago'+pc+'" maxlength="10" placeholder="DD/MM/AAAA" readonly=""\
+									   name="DataPago'+pc+'" value="">\
 							</div>\
 						</div>\
 						<div class="col-md-1">\

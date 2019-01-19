@@ -502,9 +502,9 @@
 																		?>
 																	</select>
 																</div>
-																<div class="col-md-2 form-inline">
+																<div class="col-md-2">
 																	<label for="AVAP">ÀVista ou ÀPrazo?</label><br>
-																	<div class="btn-group" data-toggle="buttons">
+																	<div class="btn-block" data-toggle="buttons">
 																		<?php
 																		foreach ($select['AVAP'] as $key => $row) {
 																			if (!$orcatrata['AVAP'])
@@ -656,24 +656,6 @@
 																		</div>
 																	</div>
 																	<div class="col-md-2">
-																		<label for="ValorPago">Valor Pago:</label><br>
-																		<div class="input-group" id="txtHint">
-																			<span class="input-group-addon" id="basic-addon1">R$</span>
-																			<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorPago<?php echo $i ?>"
-																				   name="ValorPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorPago'] ?>">
-																		</div>
-																	</div>
-																	<div class="col-md-2">
-																		<label for="DataPago">Data Pag.</label>
-																		<div class="input-group DatePicker">
-																			<input type="text" class="form-control Date" id="DataPago<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
-																				   name="DataPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataPago'] ?>">
-																			<span class="input-group-addon" disabled>
-																				<span class="glyphicon glyphicon-calendar"></span>
-																			</span>
-																		</div>
-																	</div>
-																	<div class="col-md-2">
 																		<label for="Quitado">Quitado????</label><br>
 																		<div class="form-group">
 																			<div class="btn-group" data-toggle="buttons">
@@ -702,10 +684,27 @@
 																				?>
 																			</div>
 																		</div>
+																	</div>																	
+																	<div class="col-md-2">
+																		<label for="ValorPago">Valor Pago:</label><br>
+																		<div class="input-group" id="txtHint">
+																			<span class="input-group-addon" id="basic-addon1">R$</span>
+																			<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorPago<?php echo $i ?>" readonly=""
+																				   name="ValorPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorPago'] ?>">
+																		</div>
 																	</div>
+																	<div class="col-md-2">
+																		<label for="DataPago">Data Pag.</label>
+																		<div class="input-group DatePicker">
+																			<input type="text" class="form-control Date" id="DataPago<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA" readonly=""
+																				   name="DataPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataPago'] ?>">
+																			<span class="input-group-addon" disabled>
+																				<span class="glyphicon glyphicon-calendar"></span>
+																			</span>
+																		</div>
+																	</div>
+
 																</div>
-
-
 															</div>
 														</div>
 													</div>

@@ -141,11 +141,28 @@
 								</div>
 								<div class="col-md-3 text-left" >
 									<label for="Ordenamento">Ano do Venc.:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="Ano" name="Ano">
+										<?php
+										foreach ($select['Ano'] as $key => $row) {
+											if ($query['Ano'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>								
+								<!--
+								<div class="col-md-3 text-left" >
+									<label for="Ordenamento">Ano do Venc.:</label>
 									<div>
 										<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
 											   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
 									</div>
 								</div>
+								-->
 							</div>
 							<div class="row">
 								<br>
@@ -323,11 +340,28 @@
 								</div>
 								<div class="col-md-3 text-left" >
 									<label for="Ordenamento">Ano do Venc.:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="Ano" name="Ano">
+										<?php
+										foreach ($select['Ano'] as $key => $row) {
+											if ($query['Ano'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>								
+								<!--
+								<div class="col-md-3 text-left" >
+									<label for="Ordenamento">Ano do Venc.:</label>
 									<div>
 										<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
 											   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
 									</div>
 								</div>
+								-->
 							</div>
 							<div class="row">
 								<br>

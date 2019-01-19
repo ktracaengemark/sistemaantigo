@@ -60,7 +60,7 @@
 					</div>
 					-->
 					<div class="col-md-3 text-left" >
-						<label for="Ordenamento">Dia do Pag.:</label>
+						<label for="Ordenamento">Dia:</label>
 						<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 								id="Diapag" autofocus name="Diapag">
 							<?php
@@ -75,7 +75,7 @@
 						</select>
 					</div>
 					<div class="col-md-3 text-left" >
-						<label for="Ordenamento">Mes do Pag.:</label>
+						<label for="Ordenamento">Mes:</label>
 						<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 								id="Mespag" name="Mespag">
 							<?php
@@ -90,12 +90,29 @@
 						</select>
 					</div>
 					<div class="col-md-3 text-left" >
+						<label for="Ordenamento">Ano:</label>
+						<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+								id="Ano" name="Ano">
+							<?php
+							foreach ($select['Ano'] as $key => $row) {
+								if ($query['Ano'] == $key) {
+									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+								} else {
+									echo '<option value="' . $key . '">' . $row . '</option>';
+								}
+							}
+							?>
+						</select>
+					</div>					
+					<!--
+					<div class="col-md-3 text-left" >
 						<label for="Ordenamento">Ano.:</label>
 						<div>
 							<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
 								   name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
 						</div>
 					</div>
+					-->
 				</div>
 				<div class="row">
 					<br>
@@ -146,12 +163,29 @@
 			<div class="modal-footer">
 				<div class="row">
 					<div class="col-md-3 text-left" >
+						<label for="Ordenamento">Ano:</label>
+						<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+								id="Ano" name="Ano">
+							<?php
+							foreach ($select['Ano'] as $key => $row) {
+								if ($query['Ano'] == $key) {
+									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+								} else {
+									echo '<option value="' . $key . '">' . $row . '</option>';
+								}
+							}
+							?>
+						</select>
+					</div>					
+					<!--
+					<div class="col-md-3 text-left" >
 						<label for="Ordenamento">Ano.:</label>
 						<div>
 							<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
 								   name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
 						</div>
 					</div>
+					-->
 				</div>
 				<div class="row">
 					<br>
