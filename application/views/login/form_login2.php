@@ -1,21 +1,24 @@
 <?php if (isset($msg)) echo $msg; ?>
-<div class="container col-sm-offset-3 col-md-3 ">	
+<div class="container col-sm-offset-1 col-md-5 ">	
     <?php echo form_open('login/index2', 'role="form"'); ?>
 
 	<h2 class="form-signin-heading text-center">enkontraki</h2>		 
-	<center>
-		<figure>
-			<div class="boxVideo">
-				<!--<iframe width="270" height="270" src="https://www.youtube.com/embed/videoseries?list=PLPP9yl-2bfZFWltdqkqZ2WSazBo7dnDx1" frameborder="0" allowfullscreen></iframe>-->
-				<iframe width="255" height="255" src="<?php echo base_url() . 'arquivos/videos/apresentacao.mp4'; ?>" frameborder="0" allowfullscreen></iframe>
-			</div>
-		</figure>
-	</center>
-	<script type="text/javascript">
-		$('#ca-container').contentcarousel();
-	</script>	
-	<center>
-		<div class="container col-sm-offset-1 col-md-10">
+	<div class="col-md-5 ">		
+		<center>
+			<figure>
+				<div class="boxVideo">
+					<!--<iframe width="270" height="270" src="https://www.youtube.com/embed/videoseries?list=PLPP9yl-2bfZFWltdqkqZ2WSazBo7dnDx1" frameborder="0" allowfullscreen></iframe>-->
+					<iframe width="255" height="255" src="<?php echo base_url() . 'arquivos/videos/apresentacao.mp4'; ?>" frameborder="0" allowfullscreen></iframe>
+				</div>
+			</figure>
+		</center>
+		<script type="text/javascript">
+			$('#ca-container').contentcarousel();
+		</script>	
+	</div>
+	<div class="col-md-2 "></div>
+	<div class="col-md-5 ">
+		<div class="row">
 			<label class="sr-only">Empresa</label>
 			<select data-placeholder="Selecione uma opção..." class="form-control" id="idSis_Empresa" name="idSis_Empresa">			
 				<option value="">Selecione sua Empresa</option>
@@ -31,25 +34,27 @@
 				?>   
 			</select> 
 			<?php echo form_error('idSis_Empresa'); ?>
-			<label class="sr-only">Cpf do Usuário</label>
-			<input type="text" id="inputText" maxlength="11" class="form-control" placeholder="CPF do Usuário - 99999999999" autofocus name="CpfUsuario" value="<?php echo set_value('CpfUsuario'); ?>">	   
-			<?php echo form_error('CpfUsuario'); ?>
+			<label class="sr-only">Celular do Usuário</label>
+			<input type="text" id="inputText" maxlength="11" class="form-control" placeholder="Celular do Usuário - (xx)999999999" autofocus name="Celular" value="<?php echo set_value('Celular'); ?>">	   
+			<?php echo form_error('Celular'); ?>
 			<label class="sr-only">Senha</label>
 			<input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
 			<?php echo form_error('Senha'); ?>
 			<input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
-			<button class="btn btn-lg btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Conta Empresa</button>	
+			<button class="btn btn-md btn-info btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Usuário</button>	
 			<br>
-			<!--<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('CpfUsuario'); ?>">Esqueci usuário/senha!</a></p>-->
-			<a class="btn btn-lg btn-success btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
+			<!--<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('Celular'); ?>">Esqueci usuário/senha!</a></p>-->
+	
+			<a class="btn btn btn-warning  btn-block" href="<?php echo base_url(); ?>login/index1" role="button"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Pessoal</a>			
+			<a class="btn btn btn-primary btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button"><span class="glyphicon glyphicon-log-in"></span> Acesso Conta Admin.</a>	
+			<a class="btn btn-md btn-success  btn-block" href="<?php echo base_url(); ?>login/index3" role="button">
+				<span class="glyphicon glyphicon-plus"></span> Cad. Nova Conta
+			</a>			
+			<a class="btn btn-md btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
 				<span class="glyphicon glyphicon-search"></span> Produtos & Serviços
-			</a>
-			<br>	
-			<a class="btn btn btn-warning btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button"><span class="glyphicon glyphicon-log-in"></span> Acesso dos Administradores</a>
-			<a class="btn btn btn-danger btn-block" href="<?php echo base_url(); ?>loginempresa/registrar" role="button"><span class="glyphicon glyphicon-plus"></span> Nova Empresa</a>	
-			<a class="btn btn btn-primary  btn-block" href="<?php echo base_url(); ?>login/index1" role="button"><span class="glyphicon glyphicon-log-in"></span> Conta Pessoal</a>
+			</a>		
 		</div>	
-	</center>	
+	</div>	
 </div>
 <div class="container col-md-4 text-center">
 	<center>

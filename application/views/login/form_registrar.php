@@ -1,6 +1,6 @@
 <?php if (isset($msg)) echo $msg; ?>
 
-<div class="container col-sm-offset-2 col-md-4 ">
+<div class="container col-sm-offset-1 col-md-5 ">
 	<?php echo form_open('login/registrar', 'role="form"'); ?>
 	
 	<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -50,7 +50,7 @@
 				<figure>
 					<div class="boxVideo">
 						<!--<iframe width="270" height="270" src="https://www.youtube.com/embed/videoseries?list=PLPP9yl-2bfZFWltdqkqZ2WSazBo7dnDx1" frameborder="0" allowfullscreen></iframe>-->
-						<iframe width="230" height="230" src="<?php echo base_url() . 'arquivos/videos/apresentacao.mp4'; ?>" frameborder="0" allowfullscreen></iframe>
+						<iframe width="255" height="255" src="<?php echo base_url() . 'arquivos/videos/apresentacao.mp4'; ?>" frameborder="0" allowfullscreen></iframe>
 					</div>
 				</figure>
 			</center>
@@ -73,21 +73,18 @@
 				?>   
 			</select>
 			<?php echo form_error('idSis_Empresa'); ?>
-			<br>
-			
-			<label for="Nome">Nome do Usuário:</label>
+
+		</div>
+	</div>
+	<div class="col-md-2 "></div>
+	<div class="container col-md-5 ">	
+		<div class="row">			
+			<label for="Nome">Nome da Pessoa:</label>
 			<input type="text" class="form-control" id="Nome" maxlength="255"
 				   name="Nome" value="<?php echo $query['Nome']; ?>">
 			<?php echo form_error('Nome'); ?>
-			<br>
-			
-			<label for="Celular">Celular:</label>
-			<input type="text" class="form-control Celular Celular" id="Celular" maxlength="11"
-				   name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
-			<?php echo form_error('Celular'); ?>
-			<br>
 
-		<!--
+			<!--
 			<label class="text-">E-mail:</label>
 			<input type="text" class="form-control" id="Email" maxlength="100"
 				   name="Email" value="<?php #echo $query['Email']; ?>">
@@ -105,18 +102,14 @@
 				   name="Usuario" value="<?php #echo $query['Usuario']; ?>">
 			<?php #echo form_error('Usuario'); ?>
 			<br>
-		-->
-		</div>
-	</div>
-	<div class="col-md-1 "></div>
-	<div class="container col-md-5 ">	
-		<div class="row">			
-			<label for="DataNascimento">Data de Nascimento:</label>
+			-->			
+			
+			<label for="DataNascimento">Data de Aniver.:</label>
 			<input type="text" class="form-control Date" id="inputDate0" maxlength="10"
 				   name="DataNascimento" placeholder="DD/MM/AAAA" value="<?php echo $query['DataNascimento']; ?>">
 			<?php echo form_error('DataNascimento'); ?>
-			<br>
-
+			
+			<!--
 			<label for="Sexo">Sexo:</label>
 			<select data-placeholder="Selecione um TROCA..." class="form-control" id="Sexo" name="Sexo">
 				<option value=""></option>
@@ -138,12 +131,19 @@
 				   name="CpfUsuario" placeholder="99999999999" value="<?php echo $query['CpfUsuario']; ?>">
 			<?php echo form_error('CpfUsuario'); ?>
 			<br>
+			-->
+			
+			<label for="Celular">Celular / (Login):</label>
+			<input type="text" class="form-control Celular Celular" id="Celular" maxlength="11"
+				   name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
+			<?php echo form_error('Celular'); ?>
+
 			
 			<label for="Senha">Senha:</label>
 			<input type="password" class="form-control" id="Senha" maxlength="45"
 				   name="Senha" value="<?php echo $query['Senha']; ?>">
 			<?php echo form_error('Senha'); ?>
-			<br>
+
 
 			<label for="Senha">Confirmar Senha:</label>
 			<input type="password" class="form-control" id="Confirma" maxlength="45"
@@ -154,13 +154,13 @@
 			<button class="btn btn-lg btn-success btn-block" type="submit">REGISTRAR</button>
 			<br>
 		-->
-			<button  class="btn btn-lg btn-success btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+			<button  class="btn btn-md btn-success btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 				<span class="glyphicon glyphicon-floppy-saved"></span> Registrar
 			</button>
 
 			<br>
 			
-			<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>login/index" role="button">
+			<a class="btn btn-md btn-danger btn-block" href="<?php echo base_url(); ?>login/index" role="button">
 				<span class="glyphicon glyphicon-floppy-remove"></span>	Cancelar
 			</a>
 			<!--<a class="btn btn btn-warning btn-block" href="<?php #echo base_url(); ?>loginempresa/index" role="button">Acesso dos Administradores</a>-->
@@ -198,4 +198,4 @@
 		</div>			
 	</div>
 </div>
-<div class="container col-md-2 text-center"></div>	
+<div class="container col-md-1 text-center"></div>	

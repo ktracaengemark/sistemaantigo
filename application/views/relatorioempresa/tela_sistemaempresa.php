@@ -21,18 +21,19 @@
 												<div class="text-center t">
 													<h3><?php echo '<small></small><strong> PagSeguro </strong><small></small>'  ?></h3>
 												</div>		
-												<strong>R$ 50,00</strong> (Revista Eletrônica)
-												<!-- 50 reais -->
+												
+												<!-- 150 reais -->
+												<strong>R$ 150,00</strong> (Revista Eletrônica + Site Institucional + Sistema de Gestão)
 												<form action="https://pagseguro.uol.com.br/checkout/v2/cart.html?action=add" method="post" onsubmit="PagSeguroLightbox(this); return false;">
-												<input type="hidden" name="itemCode" value="9DA3EE4B5F5F2B300463BFA057CEA720" />
+												<input type="hidden" name="itemCode" value="577CBF6DBEBE7B4994641FB83D324D41" />
 												<input type="hidden" name="iot" value="button" />
 												<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/84x35-comprar.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
 												</form>
 												<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
-												<!-- -->
+												<!---->
 												<br>
-												<strong>R$ 100,00</strong> (Revista Eletrônica + Site)
 												<!-- 100 reais -->
+												<strong>R$ 100,00</strong> (Revista Eletrônica + Site Institucional)
 												<form action="https://pagseguro.uol.com.br/checkout/v2/cart.html?action=add" method="post" onsubmit="PagSeguroLightbox(this); return false;">										
 												<input type="hidden" name="itemCode" value="17612F32222247A5545A8F88DA96AC72" />
 												<input type="hidden" name="iot" value="button" />
@@ -41,10 +42,10 @@
 												<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
 												<!---->
 												<br>
-												<strong>R$ 150,00</strong> (Revista Eletrônica + Site + Sistema de Gestão)
-												<!-- 150 reais -->
+												<!-- 50 reais -->
+												<strong>R$ 50,00</strong> (Revista Eletrônica)
 												<form action="https://pagseguro.uol.com.br/checkout/v2/cart.html?action=add" method="post" onsubmit="PagSeguroLightbox(this); return false;">
-												<input type="hidden" name="itemCode" value="577CBF6DBEBE7B4994641FB83D324D41" />
+												<input type="hidden" name="itemCode" value="9DA3EE4B5F5F2B300463BFA057CEA720" />
 												<input type="hidden" name="iot" value="button" />
 												<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/84x35-comprar.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
 												</form>
@@ -56,7 +57,7 @@
 													<div class="text-center t">
 														<h3><?php echo '<small></small><strong> Promoção de Lançamento </strong><small></small>'  ?></h3>
 													</div>													
-													<strong>R$ 50,00</strong> (Revista Eletrônica + Site + Sistema de Gestão)
+													<strong>R$ 50,00</strong> (Revista Eletrônica + Site Institucional + Sistema de Gestão)
 													<!-- 50 reais -->
 													<form action="https://pagseguro.uol.com.br/checkout/v2/cart.html?action=add" method="post" onsubmit="PagSeguroLightbox(this); return false;">
 													<input type="hidden" name="itemCode" value="9DA3EE4B5F5F2B300463BFA057CEA720" />

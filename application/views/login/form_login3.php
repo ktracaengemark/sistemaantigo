@@ -18,7 +18,7 @@
 	
 	<div class="border"></div>-->
 	<h2 class="form-signin-heading text-center">enkontraki</h2>		 
-	<div class="container col-md-5 ">
+	<div class="col-md-5 ">
 		<center>
 			<figure>
 				<div class="boxVideo">
@@ -69,19 +69,16 @@
 	<div class="col-md-2 "></div>
 	<div class="col-md-5 ">
 		<div class="row">
-			<a class="btn btn-md btn-warning btn-block" href="<?php echo base_url(); ?>login/index1" role="button">
-				<span class="glyphicon glyphicon-log-in"></span> Acessar Conta Pessoal
+			<a class="btn btn-md btn-warning btn-block" href="<?php echo base_url(); ?>login/registrar" role="button">
+				<span class="glyphicon glyphicon-plus"></span> Nova Conta Pessoal
 			</a>
-			<a class="btn btn-md btn-info btn-block" href="<?php echo base_url(); ?>login/index2" role="button">
-				<span class="glyphicon glyphicon-log-in"></span> Acessar Conta Usuário
-			</a>
-			<a class="btn btn-md btn-primary btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">
-				<span class="glyphicon glyphicon-log-in"></span> Acessar Conta Admin.
+			<a class="btn btn-md btn-primary  btn-block" href="<?php echo base_url(); ?>loginempresa/registrar" role="button">
+				<span class="glyphicon glyphicon-plus"></span> Nova Conta Empresa
 			</a>
 			<br>
-			<a class="btn btn-md btn-success  btn-block" href="<?php echo base_url(); ?>login/index3" role="button">
-				<span class="glyphicon glyphicon-plus"></span> Cad. Nova Conta
-			</a>
+			<a class="btn btn-md btn-info btn-block" href="<?php echo base_url(); ?>login/index" role="button">
+				<span class="glyphicon glyphicon-log-in"></span> Acessar Contas Cad. 
+			</a>			
 			<a class="btn btn-md btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
 				<span class="glyphicon glyphicon-search"></span> Produtos & Serviços
 			</a>
@@ -118,5 +115,5 @@
 		</div>			
 	</div>
 </div>
-<div class="container col-md-1 text-center"></div>
+<div class="container col-md-2 text-center"></div>
 	
