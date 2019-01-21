@@ -112,7 +112,7 @@ class Cliente_model extends CI_Model {
                 #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
                 #. 'NomeCliente like "%' . $data . '%" OR '
                 . 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
-                . 'Telefone1 like "%' . $data . '%" OR Telefone2 like "%' . $data . '%" OR Telefone3 like "%' . $data . '%") '
+                . 'CelularCliente like "%' . $data . '%" OR Telefone2 like "%' . $data . '%" OR Telefone3 like "%' . $data . '%") '
                 . 'ORDER BY NomeCliente ASC ');
         /*
           echo $this->db->last_query();
@@ -142,7 +142,7 @@ class Cliente_model extends CI_Model {
             $array = $this->db->query(					
 				'SELECT                
 				idApp_Cliente,
-				CONCAT(IFNULL(NomeCliente, ""), " --- ", IFNULL(Telefone1, ""), " --- ", IFNULL(Telefone2, ""), " --- ", IFNULL(Telefone3, "")) As NomeCliente				
+				CONCAT(IFNULL(NomeCliente, ""), " --- ", IFNULL(CelularCliente, ""), " --- ", IFNULL(Telefone2, ""), " --- ", IFNULL(Telefone3, "")) As NomeCliente				
             FROM
                 App_Cliente					
             WHERE
@@ -156,7 +156,7 @@ class Cliente_model extends CI_Model {
             $query = $this->db->query(
                 'SELECT                
 				idApp_Cliente,
-				CONCAT(IFNULL(NomeCliente, ""), " --- ", IFNULL(Telefone1, ""), " --- ", IFNULL(Telefone2, ""), " --- ", IFNULL(Telefone3, "")) As NomeCliente				
+				CONCAT(IFNULL(NomeCliente, ""), " --- ", IFNULL(CelularCliente, ""), " --- ", IFNULL(Telefone2, ""), " --- ", IFNULL(Telefone3, "")) As NomeCliente				
             FROM
                 App_Cliente					
             WHERE

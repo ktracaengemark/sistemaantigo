@@ -36,8 +36,8 @@
 			</select> 
 			<?php echo form_error('idSis_Empresa'); ?>
 			<label class="sr-only">Celular</label>
-			<input type="text" id="inputText" maxlength="11" class="form-control" placeholder="Celular - (xx)999999999" autofocus name="Celular" value="<?php echo set_value('Celular'); ?>">	   
-			<?php echo form_error('Celular'); ?>
+			<input type="text" id="inputText" maxlength="11" class="form-control" placeholder="Celular - (xx)999999999" autofocus name="CelularUsuario" value="<?php echo set_value('CelularUsuario'); ?>">	   
+			<?php echo form_error('CelularUsuario'); ?>
 			<label class="sr-only">Senha</label>
 			<input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
 			<?php echo form_error('Senha'); ?>
@@ -46,7 +46,7 @@
 				</span> Acessar Conta Pessoal
 			</button>	
 			<br>
-			<!--<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('Celular'); ?>">Esqueci usuário/senha!</a></p>-->
+			<!--<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('CelularUsuario'); ?>">Esqueci usuário/senha!</a></p>-->
 			
 			<a class="btn btn-md btn-info btn-block" href="<?php echo base_url(); ?>login/index2" role="button">
 				<span class="glyphicon glyphicon-log-in"></span> Acessar Conta Usuário

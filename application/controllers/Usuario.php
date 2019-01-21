@@ -56,7 +56,7 @@ class Usuario extends CI_Controller {
 			'Senha',
 			'Confirma',
             'DataNascimento',
-            'Celular',
+            'CelularUsuario',
 			'Email',
             'Sexo',
 			'Permissao',
@@ -85,7 +85,7 @@ class Usuario extends CI_Controller {
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
 		$this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
-        $this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+        $this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
 		$this->form_validation->set_rules('Permissao', 'Acesso Às Agendas', 'required|trim');
 		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
 
@@ -185,7 +185,7 @@ class Usuario extends CI_Controller {
 			#'Usuario',
             'Nome',
             'DataNascimento',
-            'Celular',
+            'CelularUsuario',
             'Email',
 			'Sexo',
 			'Permissao',
@@ -216,7 +216,7 @@ class Usuario extends CI_Controller {
         $this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
-		$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+		$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('Permissao', 'Nível', 'required|trim');
 		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
@@ -394,7 +394,7 @@ class Usuario extends CI_Controller {
 		$data['query']['idSis_Empresa'] = $this->Basico_model->get_empresa($data['query']['idSis_Empresa']);
 		#$data['query']['Usuario'] = $data['query']['Usuario'];
 		$data['query']['CompAgenda'] = $this->Basico_model->get_compagenda($data['query']['CompAgenda']);
-        $data['query']['Telefone'] = $data['query']['Celular'];
+        $data['query']['Telefone'] = $data['query']['CelularUsuario'];
 		$data['query']['CpfUsuario'] = $data['query']['CpfUsuario'];
 
         $data['contatousuario'] = $this->Usuario_model->lista_contatousuario($id, TRUE);

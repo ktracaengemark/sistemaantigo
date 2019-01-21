@@ -16,7 +16,7 @@ class Loginempresa_model extends CI_Model {
     public function check_dados_celular($senha, $celular, $retorna = FALSE) {
 
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE '
-                . '(Celular = "' . $celular . '" AND '
+                . '(CelularAdmin = "' . $celular . '" AND '
                 . 'Senha = "' . $senha . '")'
 
         );
@@ -46,7 +46,7 @@ class Loginempresa_model extends CI_Model {
 	public function check_dados_empresa($empresa, $celular, $retorna = FALSE) {
 
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE '
-                . '(Celular = "' . $celular . '" AND '
+                . '(CelularAdmin = "' . $celular . '" AND '
                 . 'idSis_Empresa = "' . $empresa . '")'
         );
         #$query = $this->db->get_where('Sis_Usuario', $data);
@@ -75,7 +75,7 @@ class Loginempresa_model extends CI_Model {
     public function check_celular($celular) {
 
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE '
-                . '(Celular = "' . $celular . '" ) '
+                . '(CelularAdmin = "' . $celular . '" ) '
         );
         if ($query->num_rows() === 0) {
             return 1;

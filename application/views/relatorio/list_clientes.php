@@ -16,7 +16,7 @@
 							<th class="active">Cliente</th>
 							<!--<th class="active">Sexo</th>-->
 							
-							<th class="active">Telefone</th>
+							<th class="active">Celular</th>
 							<th class="active">Telefone2</th>
 							<th class="active">Telefone3</th>
 							<th class="active">Nascimento</th>
@@ -45,7 +45,7 @@
 								echo '<td>' . $row['NomeCliente'] . '</td>';
 								#echo '<td>' . $row['Sexo'] . '</td>';
 								
-								echo '<td>' . $row['Telefone1'] . '</td>';
+								echo '<td>' . $row['CelularCliente'] . '</td>';
 								echo '<td>' . $row['Telefone2'] . '</td>';
 								echo '<td>' . $row['Telefone3'] . '</td>';
 								echo '<td>' . $row['DataNascimento'] . '</td>';							

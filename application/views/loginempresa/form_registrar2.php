@@ -148,10 +148,10 @@
 			<?php #echo form_error('CpfAdmin'); ?>
 			<br>
 			-->
-			<label for="Celular">Celular / (Login):</label>
-			<input type="text" class="form-control Celular Celular" id="Celular" maxlength="11"
-				   name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
-			<?php echo form_error('Celular'); ?>
+			<label for="CelularAdmin">Celular / (Login):</label>
+			<input type="text" class="form-control Celular Celular" id="CelularAdmin" maxlength="11"
+				   name="CelularAdmin" placeholder="(XX)999999999" value="<?php echo $query['CelularAdmin']; ?>">
+			<?php echo form_error('CelularAdmin'); ?>
 			
 			
 			<label for="Senha">Senha:</label>

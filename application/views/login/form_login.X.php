@@ -1,6 +1,6 @@
 <?php if (isset($msg)) echo $msg; ?>
-<div class="container col-sm-offset-1 col-md-5 ">	
-    <?php echo form_open('login/index2', 'role="form"'); ?>
+<div class="container col-sm-offset-1 col-md-5 ">
+    <?php echo form_open('login', 'role="form"'); ?>
 
 	<h2 class="form-signin-heading text-center">enkontraki</h2>		 
 	<div class="col-md-5 ">		
@@ -14,17 +14,18 @@
 		</center>
 		<script type="text/javascript">
 			$('#ca-container').contentcarousel();
-		</script>	
+		</script>
+	
 	</div>
 	<div class="col-md-2 "></div>
 	<div class="col-md-5 ">
 		<div class="row">
 			<label class="sr-only">Empresa</label>
 			<select data-placeholder="Selecione uma opção..." class="form-control" id="idSis_Empresa" name="idSis_Empresa">			
-				<option value="">Selecione sua Empresa</option>
+				<!--<option value="">-- Selecione sua Empresa --</option>-->
 				<?php
 				foreach ($select['idSis_Empresa'] as $key => $row) {
-								
+							(!$query['idSis_Empresa']) ? $query['idSis_Empresa'] = '5' : FALSE;	
 					if ($query['idSis_Empresa'] == $key) {
 						echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 					} else {
@@ -34,26 +35,33 @@
 				?>   
 			</select> 
 			<?php echo form_error('idSis_Empresa'); ?>
-			<label class="sr-only">Celular do Usuário</label>
-			<input type="text" id="inputText" maxlength="11" class="form-control" placeholder="Celular do Usuário - (xx)999999999" autofocus name="CelularUsuario" value="<?php echo set_value('CelularUsuario'); ?>">	   
+			<label class="sr-only">Celular</label>
+			<input type="text" id="inputText" maxlength="11" class="form-control" placeholder="Celular - (xx)999999999" autofocus name="Celular" value="<?php echo set_value('CelularUsuario'); ?>">	   
 			<?php echo form_error('CelularUsuario'); ?>
 			<label class="sr-only">Senha</label>
 			<input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
 			<?php echo form_error('Senha'); ?>
 			<input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
-			<button class="btn btn-md btn-info btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Usuário</button>	
+			<button class="btn btn-md btn-warning btn-block" type="submit"><span class="glyphicon glyphicon-log-in">
+				</span> Acessar Conta Pessoal
+			</button>	
 			<br>
 			<!--<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('CelularUsuario'); ?>">Esqueci usuário/senha!</a></p>-->
-	
-			<a class="btn btn btn-warning  btn-block" href="<?php echo base_url(); ?>login/index1" role="button"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Pessoal</a>			
-			<a class="btn btn btn-primary btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button"><span class="glyphicon glyphicon-log-in"></span> Acesso Conta Admin.</a>	
+			
+			<a class="btn btn-md btn-info btn-block" href="<?php echo base_url(); ?>login/index2" role="button">
+				<span class="glyphicon glyphicon-log-in"></span> Acessar Conta Usuário
+			</a>
+			<a class="btn btn-md btn-primary  btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">
+				<span class="glyphicon glyphicon-log-in"></span> Acessar Conta Admin. 
+			</a>
 			<a class="btn btn-md btn-success  btn-block" href="<?php echo base_url(); ?>login/index3" role="button">
 				<span class="glyphicon glyphicon-plus"></span> Cad. Nova Conta
-			</a>			
+			</a>
 			<a class="btn btn-md btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
 				<span class="glyphicon glyphicon-search"></span> Produtos & Serviços
-			</a>		
-		</div>	
+			</a>
+
+		</div>
 	</div>	
 </div>
 <div class="container col-md-4 text-center">

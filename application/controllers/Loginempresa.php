@@ -50,12 +50,12 @@ class Loginempresa extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #Get GET or POST data
-        $celular = $this->input->get_post('Celular');
+        $celular = $this->input->get_post('CelularAdmin');
 		$empresa = $this->input->get_post('idSis_Empresa');
         $senha = md5($this->input->get_post('Senha'));
 
         #set validation rules
-        $this->form_validation->set_rules('Celular', 'Celular do Admin', 'required|trim|callback_valid_celular');
+        $this->form_validation->set_rules('CelularAdmin', 'Celular do Admin', 'required|trim|callback_valid_celular');
 		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_valid_empresa[' . $celular . ']');
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $celular . ']');
 
@@ -116,7 +116,7 @@ class Loginempresa extends CI_Controller {
                 $_SESSION['log']['Nome'] = $query['NomeAdmin'];
 				$_SESSION['log']['Nome2'] = (strlen($query['NomeAdmin']) > 6) ? substr($query['NomeAdmin'], 0, 6) : $query['NomeAdmin'];
 				$_SESSION['log']['CpfAdmin'] = $query['CpfAdmin'];
-				$_SESSION['log']['Celular'] = $query['Celular'];
+				$_SESSION['log']['CelularAdmin'] = $query['CelularAdmin'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
 				$_SESSION['log']['NomeEmpresa2'] = (strlen($query['NomeEmpresa']) > 15) ? substr($query['NomeEmpresa'], 0, 15) : $query['NomeEmpresa'];
 				$_SESSION['log']['id'] = $query['idSis_Empresa'];
@@ -171,7 +171,7 @@ class Loginempresa extends CI_Controller {
             'CpfAdmin',
 			'Senha',
             'Confirma',
-            'Celular',
+            'CelularAdmin',
 			'DataCriacao',
 			'DataDeValidade',
 			'NumUsuarios',
@@ -189,8 +189,8 @@ class Loginempresa extends CI_Controller {
 		$this->form_validation->set_rules('NomeAdmin', 'Nome do Administrador', 'required|trim');      	
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
-		$this->form_validation->set_rules('Celular', 'Celular', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.Celular.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
-		#$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+		$this->form_validation->set_rules('CelularAdmin', 'Celular', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CelularAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
+		#$this->form_validation->set_rules('CelularAdmin', 'CelularAdmin', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');			
 		#$this->form_validation->set_rules('NumUsuarios', 'Número de Usuários', 'required|trim');
 		
@@ -235,7 +235,7 @@ class Loginempresa extends CI_Controller {
                     'idSis_Empresa' => $data['idSis_Empresa'],
 					'NomeEmpresa' => $data['query']['NomeEmpresa'],
 					'Nome' => $data['query']['NomeAdmin'],
-					'Celular' => $data['query']['Celular'],
+					'CelularUsuario' => $data['query']['CelularAdmin'],
 					'DataCriacao' => $data['query']['DataCriacao'],
 					'DataNascimento' => $data['query']['DataNascimento'],
 					'Sexo' => $data['query']['Sexo'],
@@ -347,7 +347,7 @@ class Loginempresa extends CI_Controller {
             'CpfAdmin',
 			'Senha',
             'Confirma',
-            'Celular',
+            'CelularAdmin',
 			'DataCriacao',
 			'DataDeValidade',
 			'NumUsuarios',
@@ -366,8 +366,8 @@ class Loginempresa extends CI_Controller {
 		$this->form_validation->set_rules('NomeAdmin', 'Nome do Administrador', 'required|trim');      	
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
-		$this->form_validation->set_rules('Celular', 'Celular', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.Celular.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
-		#$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+		$this->form_validation->set_rules('CelularAdmin', 'CelularAdmin', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CelularAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
+		#$this->form_validation->set_rules('CelularAdmin', 'CelularAdmin', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');		
 		#$this->form_validation->set_rules('NumUsuarios', 'Número de Usuários', 'required|trim');
 		
@@ -413,7 +413,7 @@ class Loginempresa extends CI_Controller {
                     'idSis_Empresa' => $data['idSis_Empresa'],
 					'NomeEmpresa' => $data['query']['NomeEmpresa'],
 					'Nome' => $data['query']['NomeAdmin'],
-					'Celular' => $data['query']['Celular'],
+					'CelularUsuario' => $data['query']['CelularAdmin'],
 					'DataCriacao' => $data['query']['DataCriacao'],
 					'DataNascimento' => $data['query']['DataNascimento'],
 					'Sexo' => $data['query']['Sexo'],

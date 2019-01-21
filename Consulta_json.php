@@ -42,7 +42,7 @@ $result = mysql_query(
 			C.idSis_Usuario,
             E.NomeEmpresa AS NomeEmpresaEmp,
 			R.NomeCliente,
-			R.Telefone1,
+			R.CelularCliente,
 			R.CpfCliente,
             D.NomeContatoCliente,
             U.Nome AS NomeUsuario,
@@ -104,7 +104,7 @@ while ($row = mysql_fetch_assoc($result)) {
 			#$profissional = utf8_encode($row['idApp_Agenda']);
 			$profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
 
-			$telefone1 = mb_convert_encoding($row['Telefone1'], "UTF-8", "ISO-8859-1");
+			$telefone1 = mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1");
         }
         else {
 
@@ -122,8 +122,8 @@ while ($row = mysql_fetch_assoc($result)) {
 			#$profissional = utf8_encode($row['idSis_Usuario']);
             $profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
 
-			#$telefone1 = utf8_encode($row['Telefone1']);
-            $telefone1 = mb_convert_encoding($row['Telefone1'], "UTF-8", "ISO-8859-1");
+			#$telefone1 = utf8_encode($row['CelularCliente']);
+            $telefone1 = mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1");
 
         }
 
@@ -180,7 +180,7 @@ while ($row = mysql_fetch_assoc($result)) {
         'textColor' => $textColor,
         'TipoConsulta' => mb_convert_encoding($row['TipoConsulta'], "UTF-8", "ISO-8859-1"),
         'Procedimento' => mb_convert_encoding($row['Procedimento'], "UTF-8", "ISO-8859-1"),
-		'Telefone1' => mb_convert_encoding($row['Telefone1'], "UTF-8", "ISO-8859-1"),
+		'CelularCliente' => mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1"),
         'Obs' => mb_convert_encoding($row['Obs'], "UTF-8", "ISO-8859-1"),
 		'CpfUsuario' => mb_convert_encoding($row['CpfUsuario'], "UTF-8", "ISO-8859-1"),
 		'CpfCliente' => mb_convert_encoding($row['CpfCliente'], "UTF-8", "ISO-8859-1"),

@@ -41,8 +41,8 @@
 
     <label for="Celular">Celular do Usuário Admin.:</label>
     <input type="text" class="form-control Celular Celular" id="Celular" maxlength="11"
-           name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
-    <?php echo form_error('Celular'); ?>
+           name="Celular" placeholder="(XX)999999999" value="<?php echo $query['CelularUsuario']; ?>">
+    <?php echo form_error('CelularUsuario'); ?>
     <br>
 
     <label for="DataNascimento">Data de Nascimento do Usuário Admin.:</label>

@@ -3416,7 +3416,7 @@ exit();*/
 				E.Associado,
                 E.NomeEmpresa,
                 E.DataCriacao,
-				E.Celular,
+				E.CelularAdmin,
 				E.Site,
 				CE.CategoriaEmpresa,
 				E.Atuacao,				
@@ -3451,7 +3451,7 @@ exit();*/
 
             foreach ($query->result() as $row) {
 				$row->DataCriacao = $this->basico->mascara_data($row->DataCriacao, 'barras');
-                $row->Celular = ($row->Celular) ? $row->Celular : FALSE;
+                $row->CelularAdmin = ($row->CelularAdmin) ? $row->CelularAdmin : FALSE;
             }
 
             return $query;
@@ -3473,7 +3473,7 @@ exit();*/
 				C.Associado,
                 C.NomeEmpresa,
 				C.Nome,
-                C.Celular,
+                C.CelularAdmin,
                 C.Email,
 				C.UsuarioEmpresa,
 				SN.StatusSN,

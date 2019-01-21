@@ -51,13 +51,13 @@ class Login extends CI_Controller {
 
         #Get GET or POST data
         
-		$celular = $this->input->get_post('Celular');
+		$celular = $this->input->get_post('CelularUsuario');
         $empresa = $this->input->get_post('idSis_Empresa');
 		$senha = md5($this->input->get_post('Senha'));
 
         #set validation rules
         
-		$this->form_validation->set_rules('Celular', 'Celular do Usuário', 'required|trim|callback_valid_celular');
+		$this->form_validation->set_rules('CelularUsuario', 'Celular do Usuário', 'required|trim|callback_valid_celular');
         $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_check_empresa|callback_valid_empresa[' . $celular . ']');
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $celular . ']');
 
@@ -79,7 +79,7 @@ class Login extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             #load login view
-            $this->load->view('login/form_login', $data);
+            $this->load->view('login/form_login1', $data);
         } else {
 
             session_regenerate_id(true);
@@ -125,6 +125,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['Nome'] = $query['Nome'];
 				$_SESSION['log']['Nome2'] = (strlen($query['Nome']) > 6) ? substr($query['Nome'], 0, 6) : $query['Nome'];
 				$_SESSION['log']['CpfUsuario'] = $query['CpfUsuario'];
+				$_SESSION['log']['CelularUsuario'] = $query['CelularUsuario'];
 				$_SESSION['log']['id'] = $query['idSis_Usuario'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
@@ -144,10 +145,10 @@ class Login extends CI_Controller {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o Administrador.</strong>";
 
                     $this->basico->erro($msg);
-                    $this->load->view('form_login');
+                    $this->load->view('form_login1');
                 } else {
-					redirect('acesso');
-					#redirect('agenda');
+					#redirect('acesso');
+					redirect('agenda');
 					#redirect('cliente');
                 }
             }
@@ -176,13 +177,13 @@ class Login extends CI_Controller {
 
         #Get GET or POST data
         
-		$celular = $this->input->get_post('Celular');
+		$celular = $this->input->get_post('CelularUsuario');
         $empresa = $this->input->get_post('idSis_Empresa');
 		$senha = md5($this->input->get_post('Senha'));
 
         #set validation rules
         
-		$this->form_validation->set_rules('Celular', 'Celular do Usuário', 'required|trim|callback_valid_celular');
+		$this->form_validation->set_rules('CelularUsuario', 'Celular do Usuário', 'required|trim|callback_valid_celular');
         $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_check_empresa|callback_valid_empresa[' . $celular . ']');
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $celular . ']');
 
@@ -249,7 +250,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['Nome'] = $query['Nome'];
 				$_SESSION['log']['Nome2'] = (strlen($query['Nome']) > 6) ? substr($query['Nome'], 0, 6) : $query['Nome'];
 				$_SESSION['log']['CpfUsuario'] = $query['CpfUsuario'];
-				$_SESSION['log']['Celular'] = $query['Celular'];
+				$_SESSION['log']['CelularUsuario'] = $query['CelularUsuario'];
 				$_SESSION['log']['id'] = $query['idSis_Usuario'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
@@ -271,8 +272,8 @@ class Login extends CI_Controller {
                     $this->basico->erro($msg);
                     $this->load->view('form_login1');
                 } else {
-					redirect('acesso');
-					#redirect('agenda');
+					#redirect('acesso');
+					redirect('agenda');
 					#redirect('cliente');
                 }
             }
@@ -301,13 +302,13 @@ class Login extends CI_Controller {
 
         #Get GET or POST data
         
-		$celular = $this->input->get_post('Celular');
+		$celular = $this->input->get_post('CelularUsuario');
         $empresa = $this->input->get_post('idSis_Empresa');
 		$senha = md5($this->input->get_post('Senha'));
 
         #set validation rules
         
-		$this->form_validation->set_rules('Celular', 'Celular do Usuário', 'required|trim|callback_valid_celular');
+		$this->form_validation->set_rules('CelularUsuario', 'Celular do Usuário', 'required|trim|callback_valid_celular');
         $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_check_empresa|callback_valid_empresa[' . $celular . ']');
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $celular . ']');
 
@@ -374,7 +375,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['Nome'] = $query['Nome'];
 				$_SESSION['log']['Nome2'] = (strlen($query['Nome']) > 6) ? substr($query['Nome'], 0, 6) : $query['Nome'];
 				$_SESSION['log']['CpfUsuario'] = $query['CpfUsuario'];
-				$_SESSION['log']['Celular'] = $query['Celular'];
+				$_SESSION['log']['CelularUsuario'] = $query['CelularUsuario'];
 				$_SESSION['log']['id'] = $query['idSis_Usuario'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
@@ -396,8 +397,8 @@ class Login extends CI_Controller {
                     $this->basico->erro($msg);
                     $this->load->view('form_login2');
                 } else {
-					redirect('acesso');
-					#redirect('agenda');
+					#redirect('acesso');
+					redirect('agenda');
 					#redirect('cliente');
                 }
             }
@@ -426,13 +427,13 @@ class Login extends CI_Controller {
 
         #Get GET or POST data
         
-		$celular = $this->input->get_post('Celular');
+		$celular = $this->input->get_post('CelularUsuario');
         $empresa = $this->input->get_post('idSis_Empresa');
 		$senha = md5($this->input->get_post('Senha'));
 
         #set validation rules
         
-		$this->form_validation->set_rules('Celular', 'Celular do Usuário', 'required|trim|callback_valid_celular');
+		$this->form_validation->set_rules('CelularUsuario', 'Celular do Usuário', 'required|trim|callback_valid_celular');
         $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_check_empresa|callback_valid_empresa[' . $celular . ']');
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $celular . ']');
 
@@ -500,6 +501,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['Nome'] = $query['Nome'];
 				$_SESSION['log']['Nome2'] = (strlen($query['Nome']) > 6) ? substr($query['Nome'], 0, 6) : $query['Nome'];
 				$_SESSION['log']['CpfUsuario'] = $query['CpfUsuario'];
+				$_SESSION['log']['CelularUsuario'] = $query['CelularUsuario'];
 				$_SESSION['log']['id'] = $query['idSis_Usuario'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
@@ -554,7 +556,7 @@ class Login extends CI_Controller {
             'Senha',
             'Confirma',
             'DataNascimento',
-            'Celular',
+            'CelularUsuario',
             'Sexo',
 			'Funcao',
 			'TipoProfissional',
@@ -576,7 +578,7 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-		$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+		$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
 		$this->form_validation->set_rules('NumUsuarios', 'Nº de Usuários', 'required|trim');
 
 		$data['select']['TipoProfissional'] = $this->Basico_model->select_tipoprofissional();
@@ -720,7 +722,7 @@ class Login extends CI_Controller {
             'Senha',
             'Confirma',
             'DataNascimento',
-            'Celular',
+            'CelularUsuario',
             'Sexo',
 			'Funcao',
 			'TipoProfissional',
@@ -741,8 +743,8 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-		$this->form_validation->set_rules('Celular', 'Celular da Pessoa', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.Celular.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		#$this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+		$this->form_validation->set_rules('CelularUsuario', 'Celular da Pessoa', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CelularUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		#$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
 		#$this->form_validation->set_rules('NumUsuarios', 'Nº de Usuários', 'required|trim');
 
 		$data['select']['idSis_Empresa'] = $this->Login_model->select_empresa1();
@@ -837,7 +839,7 @@ class Login extends CI_Controller {
                         <p><b>Usuário cadastrado com sucesso!</b></p>
                         <p>Entretanto, ele ainda encontra-se inativo no sistema. Um link de ativação foi gerado e enviado para
 						
-                            o Celular <b>' . $data['query']['Celular'] . '</b></p>
+                            o Celular <b>' . $data['query']['CelularUsuario'] . '</b></p>
 							
                         <p>Entre em sua caixa de Mensagens e clique no link de ativação para habilitar seu acesso ao sistema.</p>
                         

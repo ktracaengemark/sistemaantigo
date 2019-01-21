@@ -134,7 +134,7 @@ class Usuario_model extends CI_Model {
                 #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
                 #. 'Nome like "%' . $data . '%" OR '
                 . 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
-                . 'Celular like "%' . $data . '%") '
+                . 'CelularUsuario like "%' . $data . '%") '
                 . 'ORDER BY Nome ASC ');
         /*
           echo $this->db->last_query();

@@ -50,9 +50,9 @@
 														autofocus name="Nome"  value="<?php echo $query['Nome']; ?>">
 											</div>																		
 											<div class="col-md-3">
-												<label for="Celular">Tel.- Fixo ou Celular*</label>
-												<input type="text" class="form-control Celular CelularVariavel" id="Celular" maxlength="11" <?php echo $readonly; ?>
-													   name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
+												<label for="CelularUsuario">Tel.- Fixo ou Celular*</label>
+												<input type="text" class="form-control Celular CelularVariavel" id="CelularUsuario" maxlength="11" <?php echo $readonly; ?>
+													   name="CelularUsuario" placeholder="(XX)999999999" value="<?php echo $query['CelularUsuario']; ?>">
 											</div>
 											<div class="col-md-3">
 												<label for="DataNascimento">Data de Nascimento:</label>

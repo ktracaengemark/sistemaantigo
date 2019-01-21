@@ -21,7 +21,7 @@
             echo '<tr class="clickable-row" data-href="' . $url . '">';
                 echo '<td>' . $row['NomeCliente'] . '</td>';
                 #echo '<td>' . $row['DataNascimento'] . '</td>';
-                echo '<td>' . $row['Telefone1'] . '</td>';
+                echo '<td>' . $row['CelularCliente'] . '</td>';
             echo '</tr>';            
         }
         ?>

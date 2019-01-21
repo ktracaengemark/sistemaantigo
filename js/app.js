@@ -4436,10 +4436,10 @@ $('#calendar').fullCalendar({
         else {
 
             if (event.Paciente == 'D')
-                var title = "<b>Cliente:</b>" + event.title + "</b><br><b>Responsável:</b> " + event.subtitle + "<br><b>CPF-Cli:</b> " + event.CpfCliente + "<br><b>Tel.1:</b> " + event.Telefone1 + 
+                var title = "<b>Cliente:</b>" + event.title + "</b><br><b>Responsável:</b> " + event.subtitle + "<br><b>CPF-Cli:</b> " + event.CpfCliente + "<br><b>Tel.1:</b> " + event.CelularCliente + 
 							"<br>\n\<b>Prof.:</b> " + event.Profissional + "<br><b>CPF-Usu:</b> " + event.CpfUsuario  + "<br>\n\<b>Obs:</b> " + event.Obs + "<br>\n\<b>Tipo de Consulta:</b> " + event.TipoConsulta  + "<br>\n\<b>EmpresaEmp:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>EmpresaCon:</b> " + event.EmpresaCon + "<br>\n\<b>EmpresaUsu:</b> " + event.EmpresaUsu;
             else
-                var title = "<b>Cliente:</b>" + event.title + "<b> " + "<br><b>CPF-Cli:</b> " + event.CpfCliente + "<br><b>Tel.1:</b> " + event.Telefone1 + 
+                var title = "<b>Cliente:</b>" + event.title + "<b> " + "<br><b>CPF-Cli:</b> " + event.CpfCliente + "<br><b>Tel.1:</b> " + event.CelularCliente + 
 							"<br>\n\<b>Prof.:</b> " + event.Profissional + "<br><b>CPF-Usu:</b> " + event.CpfUsuario + "<br>\n\<b>Obs:</b> " + event.Obs + "<br>\n\<b>Tipo de Consulta:</b> " + event.TipoConsulta  + "<br>\n\<b>EmpresaEmp:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>EmpresaCon:</b> " + event.EmpresaCon + "<br>\n\<b>EmpresaUsu:</b> " + event.EmpresaUsu;
         }
 

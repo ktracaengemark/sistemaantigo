@@ -820,7 +820,7 @@ class Relatorio_model extends CI_Model {
         $query = $this->db->query('
             SELECT
                 C.NomeCliente,
-				C.Telefone1,
+				C.CelularCliente,
 				CONCAT(IFNULL(TR.TipoFinanceiro,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Descricao,"")) AS Descricao,
 				OT.idApp_OrcaTrata,
                 OT.AprovadoOrca,
@@ -3627,8 +3627,8 @@ exit();*/
         $query = $this->db->query('
             SELECT
                 C.NomeCliente,
-				C.Telefone1,
-				CONCAT(IFNULL(C.NomeCliente,""), " --- ", IFNULL(C.Telefone1,"")) AS NomeCliente,
+				C.CelularCliente,
+				CONCAT(IFNULL(C.NomeCliente,""), " --- ", IFNULL(C.CelularCliente,"")) AS NomeCliente,
 				OT.idApp_OrcaTrata,
                 OT.AprovadoOrca,
                 OT.DataOrca,
@@ -4002,7 +4002,7 @@ exit();*/
                 C.NomeCliente,
 				C.Ativo,
                 C.DataNascimento,
-                C.Telefone1,
+                C.CelularCliente,
                 C.Telefone2,
                 C.Telefone3,
                 C.Sexo,
@@ -4054,7 +4054,7 @@ exit();*/
                 #$row->Sexo = $this->basico->get_sexo($row->Sexo);
                 #$row->Sexo = ($row->Sexo == 2) ? 'F' : 'M';
 
-                $row->Telefone1 = ($row->Telefone1) ? $row->Telefone1 : FALSE;
+                $row->CelularCliente = ($row->CelularCliente) ? $row->CelularCliente : FALSE;
 				$row->Telefone2 = ($row->Telefone2) ? $row->Telefone2 : FALSE;
 				$row->Telefone3 = ($row->Telefone3) ? $row->Telefone3 : FALSE;
 
@@ -4082,7 +4082,7 @@ exit();*/
                 C.NomeCliente,
 				C.Ativo,
                 C.DataNascimento,
-                C.Telefone1,
+                C.CelularCliente,
                 C.Telefone2,
                 C.Telefone3,
                 C.Sexo,
@@ -4126,7 +4126,7 @@ exit();*/
                 #$row->Sexo = $this->basico->get_sexo($row->Sexo);
                 #$row->Sexo = ($row->Sexo == 2) ? 'F' : 'M';
 
-                $row->Telefone1 = ($row->Telefone1) ? $row->Telefone1 : FALSE;
+                $row->CelularCliente = ($row->CelularCliente) ? $row->CelularCliente : FALSE;
 				$row->Telefone2 = ($row->Telefone2) ? $row->Telefone2 : FALSE;
 				$row->Telefone3 = ($row->Telefone3) ? $row->Telefone3 : FALSE;
 
@@ -4261,7 +4261,7 @@ exit();*/
                 P.NomeProfissional,
 				TF.Funcao,
                 P.DataNascimento,
-                P.Telefone1,
+                P.CelularCliente,
                 P.Telefone2,
                 P.Telefone3,
                 P.Sexo,
@@ -4307,7 +4307,7 @@ exit();*/
                 #$row->Sexo = $this->basico->get_sexo($row->Sexo);
                 #$row->Sexo = ($row->Sexo == 2) ? 'F' : 'M';
 
-                $row->Telefone = ($row->Telefone1) ? $row->Telefone1 : FALSE;
+                $row->Telefone = ($row->CelularCliente) ? $row->CelularCliente : FALSE;
                 $row->Telefone .= ($row->Telefone2) ? ' / ' . $row->Telefone2 : FALSE;
                 $row->Telefone .= ($row->Telefone3) ? ' / ' . $row->Telefone3 : FALSE;
 
@@ -4440,7 +4440,7 @@ exit();*/
 				E.Fornec,
 				TA.Atividade,
                 E.DataNascimento,
-                E.Telefone1,
+                E.CelularCliente,
                 E.Telefone2,
                 E.Telefone3,
                 E.Sexo,
@@ -4488,7 +4488,7 @@ exit();*/
                 #$row->Sexo = $this->basico->get_sexo($row->Sexo);
                 #$row->Sexo = ($row->Sexo == 2) ? 'F' : 'M';
 
-                $row->Telefone = ($row->Telefone1) ? $row->Telefone1 : FALSE;
+                $row->Telefone = ($row->CelularCliente) ? $row->CelularCliente : FALSE;
                 $row->Telefone .= ($row->Telefone2) ? ' / ' . $row->Telefone2 : FALSE;
                 $row->Telefone .= ($row->Telefone3) ? ' / ' . $row->Telefone3 : FALSE;
 
@@ -4514,7 +4514,7 @@ exit();*/
 				E.Fornec,
 				TA.Atividade,
                 E.DataNascimento,
-                E.Telefone1,
+                E.CelularCliente,
                 E.Telefone2,
                 E.Telefone3,
                 E.Sexo,
@@ -4562,7 +4562,7 @@ exit();*/
                 #$row->Sexo = $this->basico->get_sexo($row->Sexo);
                 #$row->Sexo = ($row->Sexo == 2) ? 'F' : 'M';
 
-                $row->Telefone = ($row->Telefone1) ? $row->Telefone1 : FALSE;
+                $row->Telefone = ($row->CelularCliente) ? $row->CelularCliente : FALSE;
                 $row->Telefone .= ($row->Telefone2) ? ' / ' . $row->Telefone2 : FALSE;
                 $row->Telefone .= ($row->Telefone3) ? ' / ' . $row->Telefone3 : FALSE;
 
@@ -5164,7 +5164,7 @@ exit();*/
         $query = $this->db->query('
             SELECT
                 C.idApp_Cliente,
-                CONCAT(IFNULL(C.NomeCliente, ""), " --- ", IFNULL(C.Telefone1, ""), " --- ", IFNULL(C.Telefone2, ""), " --- ", IFNULL(C.Telefone3, "")) As NomeCliente
+                CONCAT(IFNULL(C.NomeCliente, ""), " --- ", IFNULL(C.CelularCliente, ""), " --- ", IFNULL(C.Telefone2, ""), " --- ", IFNULL(C.Telefone3, "")) As NomeCliente
             FROM
                 App_Cliente AS C
 
@@ -5262,7 +5262,7 @@ exit();*/
         $query = $this->db->query('
             SELECT
                 idApp_Fornecedor,
-				CONCAT(NomeFornecedor, " ", " --- ", Telefone1, " --- ", Telefone2) As NomeFornecedor
+				CONCAT(NomeFornecedor, " ", " --- ", CelularCliente, " --- ", Telefone2) As NomeFornecedor
             FROM
                 App_Fornecedor
             WHERE
@@ -5310,7 +5310,7 @@ exit();*/
         $query = $this->db->query('
             SELECT
                 P.idApp_Profissional,
-                CONCAT(P.NomeProfissional, " ", "---", P.Telefone1) AS NomeProfissional
+                CONCAT(P.NomeProfissional, " ", "---", P.CelularCliente) AS NomeProfissional
             FROM
                 App_Profissional AS P
             WHERE

@@ -72,12 +72,12 @@
 												
 												}
 												
-												if ($query['Celular']) {
+												if ($query['CelularAdmin']) {
 													
 												echo '                                                 
 												<tr>
 													<td><span class="glyphicon glyphicon-phone-alt"></span> Telefone:</td>
-													<td>' . $query['Celular'] . '</td>
+													<td>' . $query['CelularAdmin'] . '</td>
 												</tr>
 												';
 												

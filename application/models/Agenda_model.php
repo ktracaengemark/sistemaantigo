@@ -60,7 +60,7 @@ class Agenda_model extends CI_Model {
                 NomeCliente,
                 DataNascimento,
 
-				Telefone1				
+				CelularCliente				
             FROM 
                 App_Cliente
             WHERE 
@@ -95,6 +95,7 @@ class Agenda_model extends CI_Model {
 		$query = $this->db->query('
             SELECT
 				U.CpfUsuario,
+				U.CelularUsuario,
 				U.idSis_Usuario,
 				U.Nome,
 				U.NomeEmpresa,
@@ -108,7 +109,7 @@ class Agenda_model extends CI_Model {
 				Sis_Usuario AS U
 					LEFT JOIN App_Procedimento AS P ON P.idSis_Usuario = U.idSis_Usuario
             WHERE 
-				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' AND
+				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' AND
 				P.ConcluidoProcedimento = "N" AND
 				P.idApp_OrcaTrata = "0" AND
 				P.idApp_Cliente = "0"
@@ -278,6 +279,7 @@ class Agenda_model extends CI_Model {
             SELECT
 				P.idSis_Usuario,
 				P.CpfUsuario,
+				P.CelularUsuario,
 				CONCAT(IFNULL(F.Abrev,""), " --- ", IFNULL(P.Nome,"")) AS NomeUsuario
             FROM
                 Sis_Usuario AS P
@@ -414,7 +416,7 @@ class Agenda_model extends CI_Model {
         $query = $this->db->query('
             SELECT
                 C.idApp_Cliente,
-                CONCAT(IFNULL(C.NomeCliente, ""), " --- ", IFNULL(C.Telefone1, ""), " --- ", IFNULL(C.Telefone2, ""), " --- ", IFNULL(C.Telefone3, "")) As NomeCliente
+                CONCAT(IFNULL(C.NomeCliente, ""), " --- ", IFNULL(C.CelularCliente, ""), " --- ", IFNULL(C.Telefone2, ""), " --- ", IFNULL(C.Telefone3, "")) As NomeCliente
             FROM
                 App_Cliente AS C
 

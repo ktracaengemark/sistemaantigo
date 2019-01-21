@@ -57,7 +57,11 @@
 			<script type="text/javascript">
 				$('#ca-container').contentcarousel();
 			</script>
-			
+		</div>
+	</div>
+	<div class="col-md-2 "></div>
+	<div class="container col-md-5 ">	
+		<div class="row">			
 			<label class="sr-only">Empresa</label>
 			<select data-placeholder="Selecione uma opção..." class="form-control" id="idSis_Empresa" name="idSis_Empresa">			
 				
@@ -74,11 +78,7 @@
 			</select>
 			<?php echo form_error('idSis_Empresa'); ?>
 
-		</div>
-	</div>
-	<div class="col-md-2 "></div>
-	<div class="container col-md-5 ">	
-		<div class="row">			
+			
 			<label for="Nome">Nome da Pessoa:</label>
 			<input type="text" class="form-control" id="Nome" maxlength="255"
 				   name="Nome" value="<?php echo $query['Nome']; ?>">
@@ -133,10 +133,10 @@
 			<br>
 			-->
 			
-			<label for="Celular">Celular / (Login):</label>
-			<input type="text" class="form-control Celular Celular" id="Celular" maxlength="11"
-				   name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
-			<?php echo form_error('Celular'); ?>
+			<label for="CelularUsuario">Celular / (Login):</label>
+			<input type="text" class="form-control Celular Celular" id="CelularUsuario" maxlength="11"
+				   name="CelularUsuario" placeholder="(XX)999999999" value="<?php echo $query['CelularUsuario']; ?>">
+			<?php echo form_error('CelularUsuario'); ?>
 
 			
 			<label for="Senha">Senha:</label>

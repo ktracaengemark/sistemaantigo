@@ -65,7 +65,7 @@ class Empresacli extends CI_Controller {
         
         $data['query']['CategoriaEmpresa'] = $this->Basico_model->get_categoriaempresa($data['query']['CategoriaEmpresa']);
 		
-        $data['query']['Telefone'] = $data['query']['Celular'];
+        $data['query']['Telefone'] = $data['query']['CelularAdmin'];
 
         /*
           echo "<pre>";

@@ -61,7 +61,7 @@ class Cliente extends CI_Controller {
 			'Estado',
 			'DataEmissao',			
 			'Cep',
-            'Telefone1',
+            'CelularCliente',
             'Telefone2',
             'Telefone3',
 			'Ativo',
@@ -87,7 +87,7 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('CpfCliente', 'Cpf', 'trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[App_Cliente.CpfCliente.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('NomeCliente', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        #$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
+        #$this->form_validation->set_rules('CelularCliente', 'CelularCliente', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
 		
@@ -179,7 +179,7 @@ class Cliente extends CI_Controller {
 			'Estado',
 			'DataEmissao',
 			'Cep',
-            'Telefone1',
+            'CelularCliente',
             'Telefone2',
             'Telefone3',
 			'Ativo',
@@ -210,7 +210,7 @@ class Cliente extends CI_Controller {
 		$this->form_validation->set_rules('CpfCliente', 'Cpf', 'trim|valid_cpf|alpha_numeric_spaces');
 		$this->form_validation->set_rules('NomeCliente', 'Nome do Cliente', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        $this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
+        $this->form_validation->set_rules('CelularCliente', 'CelularCliente', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
 		
@@ -390,7 +390,7 @@ class Cliente extends CI_Controller {
 		$data['query']['idSis_Empresa'] = $this->Basico_model->get_empresa($data['query']['idSis_Empresa']);
 		$data['query']['Profissional'] = $this->Basico_model->get_profissional($data['query']['Profissional']);
 		
-        $data['query']['Telefone'] = $data['query']['Telefone1'];
+        $data['query']['Telefone'] = $data['query']['CelularCliente'];
         ($data['query']['Telefone2']) ? $data['query']['Telefone'] = $data['query']['Telefone'] . ' - ' . $data['query']['Telefone2'] : FALSE;
         ($data['query']['Telefone3']) ? $data['query']['Telefone'] = $data['query']['Telefone'] . ' - ' . $data['query']['Telefone3'] : FALSE;
 
