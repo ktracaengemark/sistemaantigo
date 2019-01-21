@@ -21,7 +21,7 @@
 	<div class="col-md-5 ">
 		<div class="row">
 			<label class="sr-only">Empresa</label>
-			<select data-placeholder="Selecione uma opção..." class="form-control" id="idSis_Empresa" name="idSis_Empresa">			
+			<select data-placeholder="Selecione uma opção..." class="form-control" id="idSis_Empresa" name="idSis_Empresa" readonly="">			
 				<!--<option value="">-- Selecione sua Empresa --</option>-->
 				<?php
 				foreach ($select['idSis_Empresa'] as $key => $row) {

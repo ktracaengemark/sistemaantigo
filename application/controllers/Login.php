@@ -61,7 +61,7 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim|callback_check_empresa|callback_valid_empresa[' . $celular . ']');
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim|md5|callback_valid_senha[' . $celular . ']');
 
-        $data['select']['idSis_Empresa'] = $this->Login_model->select_empresa();
+        $data['select']['idSis_Empresa'] = $this->Login_model->select_empresa1();
 		
 		if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
