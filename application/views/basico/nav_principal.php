@@ -7,7 +7,7 @@
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar1">
 						<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?php echo base_url() ?>acesso/index"> 
+					<a class="navbar-brand" href="<?php echo base_url() ?>usuario2/prontuario/<?php echo $_SESSION['log']['id']; ?>"> 
 						 <?php echo $_SESSION['log']['Nome2']; ?>./<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
 					</a>
 				</div>

@@ -2033,7 +2033,7 @@ class Basico_model extends CI_Model {
 
         return $array;
     }
-		
+			
 	public function select_empresa3($data = FALSE) {
 
         if ($data === TRUE) {
@@ -2095,6 +2095,43 @@ class Basico_model extends CI_Model {
                 Sis_Empresa					
             WHERE
 				idSis_Empresa != "1" 
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_Empresa] = $row->NomeEmpresa;
+            }
+        }
+
+        return $array;
+    }
+
+	public function select_empresa5($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+				idSis_Empresa,
+				NomeEmpresa				
+            FROM
+                Sis_Empresa					
+            WHERE
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY 
+				NomeEmpresa ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+				idSis_Empresa,
+				NomeEmpresa				
+            FROM
+                Sis_Empresa					
+            WHERE
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
 				NomeEmpresa ASC'
     );

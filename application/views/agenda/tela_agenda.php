@@ -349,10 +349,10 @@
 			</div>	
 			<?php } ?>
 			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Agenda" aria-expanded="false" aria-controls="Agenda">
-				<span class="glyphicon glyphicon-pencil"> Agenda</span>
+				<span class="glyphicon glyphicon-pencil"></span> Agenda
 			</div>
 			<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#Calendario" aria-expanded="false" aria-controls="Calendario">
-				<span class="glyphicon glyphicon-calendar"> Calendário</span>
+				<span class="glyphicon glyphicon-calendar"></span> Calendário
 			</div>
 			
 		</div>
