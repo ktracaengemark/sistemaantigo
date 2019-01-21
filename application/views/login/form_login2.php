@@ -35,20 +35,21 @@
 			</select> 
 			<?php echo form_error('idSis_Empresa'); ?>
 			<label class="sr-only">Celular do Usuário</label>
-			<input type="text" id="inputText" maxlength="11" class="form-control" placeholder="Celular do Usuário - (xx)999999999" autofocus name="CelularUsuario" value="<?php echo set_value('CelularUsuario'); ?>">	   
+			<input type="text" id="inputText" maxlength="11" class="form-control" placeholder="Celular Usuário (xx)999999999" autofocus name="CelularUsuario" value="<?php echo set_value('CelularUsuario'); ?>">	   
 			<?php echo form_error('CelularUsuario'); ?>
 			<label class="sr-only">Senha</label>
 			<input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
 			<?php echo form_error('Senha'); ?>
 			<input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
 			<button class="btn btn-md btn-info btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Usuário</button>	
-			<br>
+			
 			<!--<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('CelularUsuario'); ?>">Esqueci usuário/senha!</a></p>-->
 	
 			<a class="btn btn btn-warning  btn-block" href="<?php echo base_url(); ?>login/index1" role="button"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Pessoal</a>			
 			<a class="btn btn btn-primary btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button"><span class="glyphicon glyphicon-log-in"></span> Acesso Conta Admin.</a>	
+			<br>
 			<a class="btn btn-md btn-success  btn-block" href="<?php echo base_url(); ?>login/index3" role="button">
-				<span class="glyphicon glyphicon-plus"></span> Cad. Nova Conta
+				<span class="glyphicon glyphicon-plus"></span> Cadastrar Nova Conta
 			</a>			
 			<a class="btn btn-md btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
 				<span class="glyphicon glyphicon-search"></span> Produtos & Serviços
