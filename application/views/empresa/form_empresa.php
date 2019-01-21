@@ -49,17 +49,33 @@
 												<label for="NomeAdmin">Nome do Admin.:</label>
 												<input type="text" class="form-control" id="NomeAdmin" maxlength="45" 
 														name="NomeAdmin" autofocus value="<?php echo $query['NomeAdmin']; ?>">
-											</div>																		
+											</div>
 											<div class="col-md-3">
-												<label for="CelularAdmin">Tel. Admin.</label>
+												<label for="DataNascimento">Data do Aniver.:</label>
+												<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
+													   name="DataNascimento" placeholder="DD/MM/AAAA" value="<?php echo $query['DataNascimento']; ?>">
+											</div>
+										</div>
+									</div>	
+									<div class="form-group">
+										<div class="row">											
+											<div class="col-md-3">
+												<label for="CelularAdmin">Celular /(Login)</label>
 												<input type="text" class="form-control Celular CelularVariavel" id="CelularAdmin" maxlength="11" <?php echo $readonly; ?>
 													   name="CelularAdmin" placeholder="(XX)999999999" value="<?php echo $query['CelularAdmin']; ?>">
 											</div>
 											<div class="col-md-3">
-												<label for="Email">E-mail Admin.:</label>
-												<input type="text" class="form-control" id="Bairro" maxlength="100" <?php echo $readonly; ?>
-													   name="Email" value="<?php echo $query['Email']; ?>">
+												<label for="Senha">Senha:</label>
+												<input type="password" class="form-control" id="Senha" maxlength="45"
+													   name="Senha" value="<?php #echo $query['Senha']; ?>">
+												<?php echo form_error('Senha'); ?>
 											</div>
+											<div class="col-md-3">
+												<label for="Senha">Confirmar Senha:</label>
+												<input type="password" class="form-control" id="Confirma" maxlength="45"
+													   name="Confirma" value="<?php #echo $query['Senha']; ?>">
+												<?php echo form_error('Confirma'); ?>
+											</div>											
 										</div>
 									</div>
 
@@ -109,6 +125,11 @@
 									<div <?php echo $collapse; ?> id="DadosComplementares">
 										<div class="form-group">
 											<div class="row">										
+												<div class="col-md-3">
+													<label for="Email">E-mail Admin.:</label>
+													<input type="text" class="form-control" id="Bairro" maxlength="100" <?php echo $readonly; ?>
+														   name="Email" value="<?php echo $query['Email']; ?>">
+												</div>												
 												<div class="col-md-3">
 													<label for="Cnpj">Cnpj:</label>
 													<input type="text" class="form-control Cnpj" maxlength="18" <?php echo $readonly; ?>

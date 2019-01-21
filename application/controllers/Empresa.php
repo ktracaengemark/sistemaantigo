@@ -145,7 +145,7 @@ class Empresa extends CI_Controller {
 			'idSis_Empresa',
 			#'UsuarioEmpresa',
             'NomeAdmin',
-            #'DataNascimento',
+            'DataNascimento',
             'CelularAdmin',
             'Email',
 			'Cnpj',
@@ -161,12 +161,13 @@ class Empresa extends CI_Controller {
 			#'Inativo',
 			'CategoriaEmpresa',
 			'Site',
+            'Senha',			
 
         ), TRUE);
 
         if ($id) {
             $data['query'] = $this->Empresa_model->get_empresa($id);
-            #$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
+            $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
         }
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -174,9 +175,11 @@ class Empresa extends CI_Controller {
         #$this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim|is_unique_duplo[Sis_Empresa.NomeAdmin.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
         $this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim');
         $this->form_validation->set_rules('Site', 'Site', 'trim|is_unique[Sis_Empresa.Site]');
-		#$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
+		$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('CelularAdmin', 'Celular', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
+        $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
+        $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');		
 
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
 		$data['select']['CategoriaEmpresa'] = $this->Basico_model->select_categoriaempresa();
@@ -209,7 +212,8 @@ class Empresa extends CI_Controller {
         } else {
 
             $data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));
-            #$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
+            $data['query']['Senha'] = md5($data['query']['Senha']);            
+			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
             #$data['query']['Obs'] = nl2br($data['query']['Obs']);
             #$data['query']['Empresa'] = $_SESSION['log']['id'];
 
