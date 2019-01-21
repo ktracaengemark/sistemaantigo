@@ -24,7 +24,7 @@ $query = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario
 $permissao = ($_SESSION['log']['Permissao'] >= 3 ) ? 'AND A.idSis_Usuario = ' . $_SESSION['log']['id'] . '  ' : FALSE;
 $permissao3 = ($_SESSION['log']['idSis_Empresa'] != 5 ) ? 'AND A.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  ' : FALSE;
 
-$permissao1 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'OR R.CpfCliente = ' . $_SESSION['log']['CpfUsuario'] . '  ' : FALSE;
+$permissao1 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'OR R.CelularCliente = ' . $_SESSION['log']['CelularUsuario'] . '  ' : FALSE;
 $permissao2 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' OR ' : FALSE;																																			
 
 $result = mysql_query(
@@ -34,6 +34,7 @@ $result = mysql_query(
             U.Nome AS NomeProfissional,
 			U.CompAgenda,
 			U.CpfUsuario,
+			U.CelularUsuario,
 			U.idSis_Empresa AS EmpresaUsu,
 			U.NomeEmpresa AS NomeEmpresaUsu,
 			C.idApp_Consulta,
@@ -181,6 +182,7 @@ while ($row = mysql_fetch_assoc($result)) {
         'TipoConsulta' => mb_convert_encoding($row['TipoConsulta'], "UTF-8", "ISO-8859-1"),
         'Procedimento' => mb_convert_encoding($row['Procedimento'], "UTF-8", "ISO-8859-1"),
 		'CelularCliente' => mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1"),
+		'CelularUsuario' => mb_convert_encoding($row['CelularUsuario'], "UTF-8", "ISO-8859-1"),
         'Obs' => mb_convert_encoding($row['Obs'], "UTF-8", "ISO-8859-1"),
 		'CpfUsuario' => mb_convert_encoding($row['CpfUsuario'], "UTF-8", "ISO-8859-1"),
 		'CpfCliente' => mb_convert_encoding($row['CpfCliente'], "UTF-8", "ISO-8859-1"),

@@ -290,6 +290,7 @@ class Orcatrata_model extends CI_Model {
 			SELECT
 				
 				U.CpfUsuario,
+				U.CelularUsuario,
 				P.idSis_Usuario,
 				P.idSis_Empresa,
 				P.idApp_Procedimento,
@@ -303,8 +304,8 @@ class Orcatrata_model extends CI_Model {
 			WHERE 
 
 				((P.idSis_Empresa = ' . $data . '  AND
-				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' ) OR
-				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' )AND
+				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' ) OR
+				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' )AND
 				' . $permissao1 . '
 				' . $permissao6 . '
 				' . $permissao7 . '

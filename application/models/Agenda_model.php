@@ -306,6 +306,7 @@ class Agenda_model extends CI_Model {
             SELECT
 				P.idSis_Usuario,
 				P.CpfUsuario,
+				P.CelularUsuario,
 				CONCAT(IFNULL(F.Abrev,""), " --- ", IFNULL(P.Nome,"")) AS NomeUsuario
             FROM
                 Sis_Usuario AS P
@@ -498,7 +499,7 @@ class Agenda_model extends CI_Model {
 				P.idApp_OrcaTrata = "0" AND
 				P.idApp_Cliente = "0" AND
 				P.idSis_EmpresaCli = "0" AND
-				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' 
+				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' 
             ORDER BY
                 P.idApp_Procedimento ASC
         ');
@@ -552,7 +553,7 @@ class Agenda_model extends CI_Model {
 				P.idSis_EmpresaCli = "0" AND
 				' . $filtro4 . '
 				' . $filtro5 . '
-				U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' 
+				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' 
 				' . $data['Procedimento'] . '
 				
             ORDER BY
