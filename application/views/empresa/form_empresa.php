@@ -51,9 +51,9 @@
 														name="NomeAdmin" autofocus value="<?php echo $query['NomeAdmin']; ?>">
 											</div>																		
 											<div class="col-md-3">
-												<label for="Celular">Tel. Admin.</label>
-												<input type="text" class="form-control Celular CelularVariavel" id="Celular" maxlength="11" <?php echo $readonly; ?>
-													   name="Celular" placeholder="(XX)999999999" value="<?php echo $query['Celular']; ?>">
+												<label for="CelularAdmin">Tel. Admin.</label>
+												<input type="text" class="form-control Celular CelularVariavel" id="CelularAdmin" maxlength="11" <?php echo $readonly; ?>
+													   name="CelularAdmin" placeholder="(XX)999999999" value="<?php echo $query['CelularAdmin']; ?>">
 											</div>
 											<div class="col-md-3">
 												<label for="Email">E-mail Admin.:</label>

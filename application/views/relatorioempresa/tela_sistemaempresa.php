@@ -18,8 +18,27 @@
 										<div class="col-md-1"></div>
 										<div class="col-md-10 text-center">
 											<div class="form-group">
+												<div class="row">																				
+													<div class="text-center t">
+														<h3><?php echo '<small></small><strong> Promoção de Lançamento </strong><small></small>'  ?></h3>
+													</div>													
+													<strong>R$ 50,00</strong> (Revista Eletrônica + Site Institucional + Sistema de Gestão)
+													<!-- 50 reais -->
+													<form action="https://pagseguro.uol.com.br/checkout/v2/cart.html?action=add" method="post" onsubmit="PagSeguroLightbox(this); return false;">
+													<input type="hidden" name="itemCode" value="9DA3EE4B5F5F2B300463BFA057CEA720" />
+													<input type="hidden" name="iot" value="button" />
+													<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/84x35-comprar.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+													</form>
+													<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>													
+													<!--<a class="btn btn-lg btn-info active" > 
+														<strong>Banco do Brasil</strong><br><strong>Ag.XXXX</strong><br><strong>Cc.:XXXX</strong>
+														<br><strong>Fav.:Marcio R. Dias</strong><br><strong>Cpf.:015146927-08</strong>
+													</a>-->
+												</div>	
+											</div>											
+											<div class="form-group">
 												<div class="text-center t">
-													<h3><?php echo '<small></small><strong> PagSeguro </strong><small></small>'  ?></h3>
+													<h3><?php echo '<small></small><strong> Tabela de Produtos </strong><small></small>'  ?></h3>
 												</div>		
 												
 												<!-- 150 reais -->
@@ -51,25 +70,6 @@
 												</form>
 												<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
 												<!--  -->	
-											</div>
-											<div class="form-group">
-												<div class="row">																				
-													<div class="text-center t">
-														<h3><?php echo '<small></small><strong> Promoção de Lançamento </strong><small></small>'  ?></h3>
-													</div>													
-													<strong>R$ 50,00</strong> (Revista Eletrônica + Site Institucional + Sistema de Gestão)
-													<!-- 50 reais -->
-													<form action="https://pagseguro.uol.com.br/checkout/v2/cart.html?action=add" method="post" onsubmit="PagSeguroLightbox(this); return false;">
-													<input type="hidden" name="itemCode" value="9DA3EE4B5F5F2B300463BFA057CEA720" />
-													<input type="hidden" name="iot" value="button" />
-													<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/84x35-comprar.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
-													</form>
-													<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>													
-													<!--<a class="btn btn-lg btn-info active" > 
-														<strong>Banco do Brasil</strong><br><strong>Ag.XXXX</strong><br><strong>Cc.:XXXX</strong>
-														<br><strong>Fav.:Marcio R. Dias</strong><br><strong>Cpf.:015146927-08</strong>
-													</a>-->
-												</div>	
 											</div>											
 										</div>
 										<div class="col-md-1"></div>

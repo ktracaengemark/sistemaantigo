@@ -75,8 +75,8 @@ foreach ($query->result_array() as $row) {
                 <?php } ?>
 			</p>
 			<p>
-				<?php if ($row['Celular']) { ?>
-				<span class="glyphicon glyphicon-phone-alt"></span> <b>Telefone:</b> <?php echo $row['Celular']; ?>
+				<?php if ($row['CelularUsuario']) { ?>
+				<span class="glyphicon glyphicon-phone-alt"></span> <b>Telefone:</b> <?php echo $row['CelularUsuario']; ?>
 				<?php } ?>
             </p>
 

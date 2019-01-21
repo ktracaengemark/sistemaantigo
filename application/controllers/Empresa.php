@@ -55,7 +55,7 @@ class Empresa extends CI_Controller {
 			#'Senha',
 			#'Confirma',
             #'DataNascimento',
-            'Celular',
+            'CelularAdmin',
 			'Email',
             #'Sexo',
 			'Inativo',
@@ -70,7 +70,7 @@ class Empresa extends CI_Controller {
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
         #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        $this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+        $this->form_validation->set_rules('CelularAdmin', 'Celular', 'required|trim');
 
 		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
 
@@ -146,7 +146,7 @@ class Empresa extends CI_Controller {
 			#'UsuarioEmpresa',
             'NomeAdmin',
             #'DataNascimento',
-            'Celular',
+            'CelularAdmin',
             'Email',
 			'Cnpj',
 			'InscEstadual',
@@ -175,7 +175,7 @@ class Empresa extends CI_Controller {
         $this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim');
         $this->form_validation->set_rules('Site', 'Site', 'trim|is_unique[Sis_Empresa.Site]');
 		#$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        $this->form_validation->set_rules('Celular', 'Celular', 'required|trim');
+        $this->form_validation->set_rules('CelularAdmin', 'Celular', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
@@ -347,7 +347,7 @@ class Empresa extends CI_Controller {
 		$data['query']['CategoriaEmpresa'] = $this->Basico_model->get_categoriaempresa($data['query']['CategoriaEmpresa']);
 		#$data['query']['Empresa'] = $data['query']['Empresa'];
 
-        $data['query']['Telefone'] = $data['query']['Celular'];
+        $data['query']['Telefone'] = $data['query']['CelularAdmin'];
 
         $data['contatoempresa'] = $this->Empresa_model->lista_contatoempresa($id, TRUE);
         /*
