@@ -44,7 +44,7 @@
 			<button class="btn btn-md btn-info btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Usuário</button>	
 			
 			<!--<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('CelularUsuario'); ?>">Esqueci usuário/senha!</a></p>-->
-	
+			<br>
 			<a class="btn btn btn-warning  btn-block" href="<?php echo base_url(); ?>login/index1" role="button"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Pessoal</a>			
 			<a class="btn btn btn-primary btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button"><span class="glyphicon glyphicon-log-in"></span> Acesso Conta Admin.</a>	
 			<br>
