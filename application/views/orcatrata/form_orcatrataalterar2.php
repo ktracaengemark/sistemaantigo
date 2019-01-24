@@ -695,24 +695,6 @@
 																			</div>
 																		</div>
 																	</div>
-																	<div class="col-md-2">
-																		<label for="ValorPago">Valor Pago:</label><br>
-																		<div class="input-group" id="txtHint">
-																			<span class="input-group-addon" id="basic-addon1">R$</span>
-																			<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorPago<?php echo $i ?>" readonly=""
-																				   name="ValorPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorPago'] ?>">
-																		</div>
-																	</div>
-																	<div class="col-md-2">
-																		<label for="DataPago">Data Pag.</label>
-																		<div class="input-group DatePicker">
-																			<span class="input-group-addon" disabled>
-																				<span class="glyphicon glyphicon-calendar"></span>
-																			</span>
-																			<input type="text" class="form-control Date" id="DataPago<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA" readonly=""
-																				   name="DataPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataPago'] ?>">																
-																		</div>
-																	</div>
 																	<div class="col-md-1">
 																		<label><br></label><br>
 																		<button type="button" id="<?php echo $i ?>" class="remove_field21 btn btn-danger">
