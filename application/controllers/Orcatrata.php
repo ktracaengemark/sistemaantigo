@@ -220,6 +220,10 @@ class Orcatrata extends CI_Controller {
 
 		$data['collapse1'] = 'class="collapse"';	
 		
+        if ($_SESSION['log']['NivelEmpresa'] >= '4' )
+            $data['visivel'] = '';
+        else
+            $data['visivel'] = 'style="display: none;"';		
 	
         #Ver uma solução melhor para este campo
         (!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
@@ -242,7 +246,6 @@ class Orcatrata extends CI_Controller {
 
         ($data['orcatrata']['AprovadoOrca'] == 'S') ?
             $data['div']['AprovadoOrca'] = '' : $data['div']['AprovadoOrca'] = 'style="display: none;"';
-
 
         $data['sidebar'] = 'col-sm-3 col-md-2';
         $data['main'] = 'col-sm-7 col-md-8';
@@ -280,6 +283,7 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
             $data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
 			$data['orcatrata']['idTab_TipoRD'] = "2";
+			if ($data['orcatrata']['AVAP'] == 'V') $data['orcatrata']['QuitadoOrca'] = 'S';
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -342,7 +346,7 @@ class Orcatrata extends CI_Controller {
                     $data['parcelasrec'][$j]['DataVencimento'] = $this->basico->mascara_data($data['parcelasrec'][$j]['DataVencimento'], 'mysql');
                     $data['parcelasrec'][$j]['ValorPago'] = str_replace(',', '.', str_replace('.', '', $data['parcelasrec'][$j]['ValorPago']));
                     $data['parcelasrec'][$j]['DataPago'] = $this->basico->mascara_data($data['parcelasrec'][$j]['DataPago'], 'mysql');
-
+					if ($data['orcatrata']['AVAP'] == 'V') $data['parcelasrec'][$j]['Quitado'] = 'S';
                 }
                 $data['parcelasrec']['idApp_Parcelas'] = $this->Orcatrata_model->set_parcelasrec($data['parcelasrec']);
             }
@@ -572,6 +576,10 @@ class Orcatrata extends CI_Controller {
         else
             $data['tratamentosin'] = '';
 
+        if ($_SESSION['log']['NivelEmpresa'] >= '4' )
+            $data['visivel'] = '';
+        else
+            $data['visivel'] = 'style="display: none;"';		
 
         #Ver uma solução melhor para este campo
         (!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
@@ -640,7 +648,8 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
             $data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
-			$data['orcatrata']['idTab_TipoRD'] = $data['orcatrata']['idTab_TipoRD'];
+			$data['orcatrata']['idTab_TipoRD'] = '2';
+			if ($data['orcatrata']['AVAP'] == 'V') $data['orcatrata']['QuitadoOrca'] = 'S';			
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa']; 
             $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['id'];
 			#$data['orcatrata']['idApp_Cliente'] = '1';
@@ -700,6 +709,7 @@ class Orcatrata extends CI_Controller {
                     $data['parcelasrec'][$j]['DataVencimento'] = $this->basico->mascara_data($data['parcelasrec'][$j]['DataVencimento'], 'mysql');
                     $data['parcelasrec'][$j]['ValorPago'] = str_replace(',', '.', str_replace('.', '', $data['parcelasrec'][$j]['ValorPago']));
                     $data['parcelasrec'][$j]['DataPago'] = $this->basico->mascara_data($data['parcelasrec'][$j]['DataPago'], 'mysql');
+					if ($data['orcatrata']['AVAP'] == 'V') $data['parcelasrec'][$j]['Quitado'] = 'S';
 
                 }
                 $data['parcelasrec']['idApp_Parcelas'] = $this->Orcatrata_model->set_parcelasrec($data['parcelasrec']);
@@ -1017,7 +1027,11 @@ class Orcatrata extends CI_Controller {
         else
             $data['tratamentosin'] = '';
 
-
+        if ($_SESSION['log']['NivelEmpresa'] >= '4' )
+            $data['visivel'] = '';
+        else
+            $data['visivel'] = 'style="display: none;"';
+		
 		$data['collapse'] = '';
 	
 		$data['collapse1'] = 'class="collapse"';
@@ -1563,7 +1577,11 @@ class Orcatrata extends CI_Controller {
         else
             $data['tratamentosin'] = '';
 
-
+        if ($_SESSION['log']['NivelEmpresa'] >= '4' )
+            $data['visivel'] = '';
+        else
+            $data['visivel'] = 'style="display: none;"';
+		
         #Ver uma solução melhor para este campo
 		#(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
 
@@ -1887,7 +1905,7 @@ class Orcatrata extends CI_Controller {
         (!$data['orcatrata']['DataOrca']) ? $data['orcatrata']['DataOrca'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['DataVencimentoOrca']) ? $data['orcatrata']['DataVencimentoOrca'] = date('d/m/Y', time()) : FALSE;
 		#(!$data['orcatrata']['DataPrazo']) ? $data['orcatrata']['DataPrazo'] = date('d/m/Y', time()) : FALSE;
-        (!$data['orcatrata']['idTab_TipoRD']) ? $data['orcatrata']['idTab_TipoRD'] = "2" : FALSE;
+        (!$data['orcatrata']['idTab_TipoRD']) ? $data['orcatrata']['idTab_TipoRD'] = "1" : FALSE;
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 		
@@ -1996,7 +2014,12 @@ class Orcatrata extends CI_Controller {
         $data['metodo'] = 1;
 
 		$data['collapse'] = '';	
-		$data['collapse1'] = 'class="collapse"';		
+		$data['collapse1'] = 'class="collapse"';
+
+
+		$data['tipofinan1'] = '1';
+
+		$data['tipofinan12'] = '12';			
 		
         if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorDev'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
             $data['orcamentoin'] = 'in';
@@ -2014,7 +2037,11 @@ class Orcatrata extends CI_Controller {
         else
             $data['tratamentosin'] = '';
 
-
+        if ($_SESSION['log']['NivelEmpresa'] >= '4' )
+            $data['visivel'] = '';
+        else
+            $data['visivel'] = 'style="display: none;"';
+	
         #Ver uma solução melhor para este campo
         (!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
 		
@@ -2041,7 +2068,7 @@ class Orcatrata extends CI_Controller {
 
 			
         #Ver uma solução melhor para este campo
-        (!$data['orcatrata']['TipoFinanceiro']) ? $data['orcatrata']['TipoFinanceiro'] = '1' : FALSE;
+        #(!$data['orcatrata']['TipoFinanceiro']) ? $data['orcatrata']['TipoFinanceiro'] = '1' : FALSE;
 /*
         $data['radio'] = array(
             'TipoFinanceiro' => $this->basico->radio_checked($data['orcatrata']['TipoFinanceiro'], 'Tarefa Aprovado', 'NS'),
@@ -2086,9 +2113,9 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
             $data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
 			$data['orcatrata']['idTab_TipoRD'] = "1";
+			if ($data['orcatrata']['AVAP'] == 'V') $data['orcatrata']['QuitadoOrca'] = 'S';	
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa']; 
             $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['id'];
-
             $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
             $data['orcatrata']['idApp_OrcaTrata'] = $this->Orcatrata_model->set_orcatrata($data['orcatrata']);
             /*
@@ -2145,6 +2172,7 @@ class Orcatrata extends CI_Controller {
                     $data['parcelasrec'][$j]['DataVencimento'] = $this->basico->mascara_data($data['parcelasrec'][$j]['DataVencimento'], 'mysql');
                     $data['parcelasrec'][$j]['ValorPago'] = str_replace(',', '.', str_replace('.', '', $data['parcelasrec'][$j]['ValorPago']));
                     $data['parcelasrec'][$j]['DataPago'] = $this->basico->mascara_data($data['parcelasrec'][$j]['DataPago'], 'mysql');
+					if ($data['orcatrata']['AVAP'] == 'V') $data['parcelasrec'][$j]['Quitado'] = 'S';
 
                 }
                 $data['parcelasrec']['idApp_Parcelas'] = $this->Orcatrata_model->set_parcelasrec($data['parcelasrec']);
@@ -2243,7 +2271,7 @@ class Orcatrata extends CI_Controller {
         (!$this->input->post('PMCount')) ? $data['count']['PMCount'] = 0 : $data['count']['PMCount'] = $this->input->post('PMCount');
 		(!$this->input->post('PRCount')) ? $data['count']['PRCount'] = 0 : $data['count']['PRCount'] = $this->input->post('PRCount');
 		
-		#(!$data['orcatrata']['idTab_TipoRD']) ? $data['orcatrata']['idTab_TipoRD'] = "2" : FALSE;
+		#(!$data['orcatrata']['idTab_TipoRD']) ? $data['orcatrata']['idTab_TipoRD'] = "1" : FALSE;
 		(!$data['orcatrata']['DataOrca']) ? $data['orcatrata']['DataOrca'] = date('d/m/Y', time()) : FALSE;
 		#(!$data['orcatrata']['idApp_Cliente']) ? $data['orcatrata']['idApp_Cliente'] = '1' : FALSE;
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
@@ -2463,6 +2491,10 @@ class Orcatrata extends CI_Controller {
         else
             $data['tratamentosin'] = '';
 
+        if ($_SESSION['log']['NivelEmpresa'] >= '4' )
+            $data['visivel'] = '';
+        else
+            $data['visivel'] = 'style="display: none;"';		
 
         #Ver uma solução melhor para este campo
 		(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
