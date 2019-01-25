@@ -68,7 +68,7 @@
                             #echo '<td class="text-left">R$ ' . $row['ValorPagoRecebiveis'] . '</td>';
                             #echo '<td>' . $row['DataOrca'] . '</td>';
 							#echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
-							#echo '<td>' . $row['ServicoConcluido'] . '</td>';						
+							#echo '<td>' . $row['ConcluidoOrca'] . '</td>';						
                         echo '</tr>';
                     }
                     ?>

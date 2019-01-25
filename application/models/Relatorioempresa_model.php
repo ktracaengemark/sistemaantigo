@@ -38,7 +38,7 @@ class Relatorioempresa_model extends CI_Model {
 		$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
 		$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrca'] != '#') ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -50,7 +50,7 @@ class Relatorioempresa_model extends CI_Model {
                 OT.DataEntradaOrca,
                 OT.ValorEntradaOrca,
 				OT.QuitadoOrca,
-				OT.ServicoConcluido,
+				OT.ConcluidoOrca,
                 PR.ParcelaRecebiveis,
                 PR.DataVencimentoRecebiveis,
                 PR.ValorParcelaRecebiveis,
@@ -100,7 +100,7 @@ class Relatorioempresa_model extends CI_Model {
 
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
 				$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
-				$row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
+				$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->QuitadoRecebiveis = $this->basico->mascara_palavra_completa($row->QuitadoRecebiveis, 'NS');
 
                 #esse trecho pode ser melhorado, serve para somar apenas uma vez
@@ -188,7 +188,7 @@ class Relatorioempresa_model extends CI_Model {
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];		
 		$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrca'] != '#') ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
 		$filtro4 = ($data['QuitadoRecebiveis'] != '#') ? 'PR.QuitadoRecebiveis = "' . $data['QuitadoRecebiveis'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Modalidade'] != '#') ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
 		
@@ -206,7 +206,7 @@ class Relatorioempresa_model extends CI_Model {
                 OT.DataEntradaOrca,
                 OT.ValorEntradaOrca,
 				OT.QuitadoOrca,
-				OT.ServicoConcluido,
+				OT.ConcluidoOrca,
 				OT.Modalidade,
                 PR.ParcelaRecebiveis,
                 PR.DataVencimentoRecebiveis,
@@ -264,7 +264,7 @@ class Relatorioempresa_model extends CI_Model {
 
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
 				$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
-				$row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
+				$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->QuitadoRecebiveis = $this->basico->mascara_palavra_completa($row->QuitadoRecebiveis, 'NS');
 
                 #esse trecho pode ser melhorado, serve para somar apenas uma vez
@@ -346,7 +346,7 @@ class Relatorioempresa_model extends CI_Model {
 		$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
 		$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrca'] != '#') ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
 		$filtro4 = ($data['QuitadoRecebiveis'] != '#') ? 'PR.QuitadoRecebiveis = "' . $data['QuitadoRecebiveis'] . '" AND ' : FALSE;
 
         $query = $this->db->query(
@@ -359,7 +359,7 @@ class Relatorioempresa_model extends CI_Model {
                 OT.DataEntradaOrca,
                 OT.ValorEntradaOrca,
 				OT.QuitadoOrca,
-				OT.ServicoConcluido,
+				OT.ConcluidoOrca,
                 PR.ParcelaRecebiveis,
                 PR.DataVencimentoRecebiveis,
                 PR.ValorParcelaRecebiveis,
@@ -413,7 +413,7 @@ class Relatorioempresa_model extends CI_Model {
 
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
 				$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
-				$row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
+				$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->QuitadoRecebiveis = $this->basico->mascara_palavra_completa($row->QuitadoRecebiveis, 'NS');
 
                 #esse trecho pode ser melhorado, serve para somar apenas uma vez
@@ -494,7 +494,7 @@ class Relatorioempresa_model extends CI_Model {
 
 		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoDespesa'] : FALSE;
 		$filtro1 = ($data['AprovadoDespesas'] != '#') ? 'DS.AprovadoDespesas = "' . $data['AprovadoDespesas'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluidoDespesas'] != '#') ? 'DS.ServicoConcluidoDespesas = "' . $data['ServicoConcluidoDespesas'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrcaDespesas'] != '#') ? 'DS.ConcluidoOrcaDespesas = "' . $data['ConcluidoOrcaDespesas'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoDespesas'] != '#') ? 'DS.QuitadoDespesas = "' . $data['QuitadoDespesas'] . '" AND ' : FALSE;
 		$filtro4 = ($data['QuitadoPagaveis'] != '#') ? 'PP.QuitadoPagaveis = "' . $data['QuitadoPagaveis'] . '" AND ' : FALSE;
 
@@ -508,7 +508,7 @@ class Relatorioempresa_model extends CI_Model {
                 DS.DataEntradaDespesas,
                 DS.ValorEntradaDespesas,
 				DS.AprovadoDespesas,
-				DS.ServicoConcluidoDespesas,
+				DS.ConcluidoOrcaDespesas,
 				DS.QuitadoDespesas,
                 PP.ParcelaPagaveis,
                 PP.DataVencimentoPagaveis,
@@ -553,7 +553,7 @@ class Relatorioempresa_model extends CI_Model {
                 $row->DataVencimentoPagaveis = $this->basico->mascara_data($row->DataVencimentoPagaveis, 'barras');
                 $row->DataPagoPagaveis = $this->basico->mascara_data($row->DataPagoPagaveis, 'barras');
 				$row->AprovadoDespesas = $this->basico->mascara_palavra_completa($row->AprovadoDespesas, 'NS');
-				$row->ServicoConcluidoDespesas = $this->basico->mascara_palavra_completa($row->ServicoConcluidoDespesas, 'NS');
+				$row->ConcluidoOrcaDespesas = $this->basico->mascara_palavra_completa($row->ConcluidoOrcaDespesas, 'NS');
 				$row->QuitadoDespesas = $this->basico->mascara_palavra_completa($row->QuitadoDespesas, 'NS');
                 $row->QuitadoPagaveis = $this->basico->mascara_palavra_completa($row->QuitadoPagaveis, 'NS');
 
@@ -633,7 +633,7 @@ class Relatorioempresa_model extends CI_Model {
 
 		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoDespesa'] : FALSE;
 		$filtro1 = ($data['AprovadoDespesas'] != '#') ? 'DS.AprovadoDespesas = "' . $data['AprovadoDespesas'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluidoDespesas'] != '#') ? 'DS.ServicoConcluidoDespesas = "' . $data['ServicoConcluidoDespesas'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrcaDespesas'] != '#') ? 'DS.ConcluidoOrcaDespesas = "' . $data['ConcluidoOrcaDespesas'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoDespesas'] != '#') ? 'DS.QuitadoDespesas = "' . $data['QuitadoDespesas'] . '" AND ' : FALSE;
 		$filtro4 = ($data['QuitadoPagaveis'] != '#') ? 'PP.QuitadoPagaveis = "' . $data['QuitadoPagaveis'] . '" AND ' : FALSE;
 
@@ -647,7 +647,7 @@ class Relatorioempresa_model extends CI_Model {
                 DS.DataEntradaDespesas,
                 DS.ValorEntradaDespesas,
 				DS.AprovadoDespesas,
-				DS.ServicoConcluidoDespesas,
+				DS.ConcluidoOrcaDespesas,
 				DS.QuitadoDespesas,
                 PP.ParcelaPagaveis,
                 PP.DataVencimentoPagaveis,
@@ -692,7 +692,7 @@ class Relatorioempresa_model extends CI_Model {
                 $row->DataVencimentoPagaveis = $this->basico->mascara_data($row->DataVencimentoPagaveis, 'barras');
                 $row->DataPagoPagaveis = $this->basico->mascara_data($row->DataPagoPagaveis, 'barras');
 				$row->AprovadoDespesas = $this->basico->mascara_palavra_completa($row->AprovadoDespesas, 'NS');
-				$row->ServicoConcluidoDespesas = $this->basico->mascara_palavra_completa($row->ServicoConcluidoDespesas, 'NS');
+				$row->ConcluidoOrcaDespesas = $this->basico->mascara_palavra_completa($row->ConcluidoOrcaDespesas, 'NS');
 				$row->QuitadoDespesas = $this->basico->mascara_palavra_completa($row->QuitadoDespesas, 'NS');
                 $row->QuitadoPagaveis = $this->basico->mascara_palavra_completa($row->QuitadoPagaveis, 'NS');
 
@@ -772,7 +772,7 @@ class Relatorioempresa_model extends CI_Model {
 
 		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoDespesa'] : FALSE;
 		$filtro1 = ($data['AprovadoDespesas'] != '#') ? 'DS.AprovadoDespesas = "' . $data['AprovadoDespesas'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluidoDespesas'] != '#') ? 'DS.ServicoConcluidoDespesas = "' . $data['ServicoConcluidoDespesas'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrcaDespesas'] != '#') ? 'DS.ConcluidoOrcaDespesas = "' . $data['ConcluidoOrcaDespesas'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoDespesas'] != '#') ? 'DS.QuitadoDespesas = "' . $data['QuitadoDespesas'] . '" AND ' : FALSE;
 		$filtro4 = ($data['QuitadoPagaveis'] != '#') ? 'PP.QuitadoPagaveis = "' . $data['QuitadoPagaveis'] . '" AND ' : FALSE;
 
@@ -786,7 +786,7 @@ class Relatorioempresa_model extends CI_Model {
                 DS.DataEntradaDespesas,
                 DS.ValorEntradaDespesas,
 				DS.AprovadoDespesas,
-				DS.ServicoConcluidoDespesas,
+				DS.ConcluidoOrcaDespesas,
 				DS.QuitadoDespesas,
                 PP.ParcelaPagaveis,
                 PP.DataVencimentoPagaveis,
@@ -831,7 +831,7 @@ class Relatorioempresa_model extends CI_Model {
                 $row->DataVencimentoPagaveis = $this->basico->mascara_data($row->DataVencimentoPagaveis, 'barras');
                 $row->DataPagoPagaveis = $this->basico->mascara_data($row->DataPagoPagaveis, 'barras');
 				$row->AprovadoDespesas = $this->basico->mascara_palavra_completa($row->AprovadoDespesas, 'NS');
-				$row->ServicoConcluidoDespesas = $this->basico->mascara_palavra_completa($row->ServicoConcluidoDespesas, 'NS');
+				$row->ConcluidoOrcaDespesas = $this->basico->mascara_palavra_completa($row->ConcluidoOrcaDespesas, 'NS');
 				$row->QuitadoDespesas = $this->basico->mascara_palavra_completa($row->QuitadoDespesas, 'NS');
                 $row->QuitadoPagaveis = $this->basico->mascara_palavra_completa($row->QuitadoPagaveis, 'NS');
 
@@ -911,7 +911,7 @@ class Relatorioempresa_model extends CI_Model {
 
 		$data['TipoDespesa'] = ($data['TipoDespesa']) ? ' AND TD.idTab_TipoDespesa = ' . $data['TipoDespesa'] : FALSE;
 		$filtro1 = ($data['AprovadoDespesas'] != '#') ? 'DS.AprovadoDespesas = "' . $data['AprovadoDespesas'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluidoDespesas'] != '#') ? 'DS.ServicoConcluidoDespesas = "' . $data['ServicoConcluidoDespesas'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrcaDespesas'] != '#') ? 'DS.ConcluidoOrcaDespesas = "' . $data['ConcluidoOrcaDespesas'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoDespesas'] != '#') ? 'DS.QuitadoDespesas = "' . $data['QuitadoDespesas'] . '" AND ' : FALSE;
 		$filtro4 = ($data['QuitadoPagaveis'] != '#') ? 'PP.QuitadoPagaveis = "' . $data['QuitadoPagaveis'] . '" AND ' : FALSE;
 
@@ -925,7 +925,7 @@ class Relatorioempresa_model extends CI_Model {
                 DS.DataEntradaDespesas,
                 DS.ValorEntradaDespesas,
 				DS.AprovadoDespesas,
-				DS.ServicoConcluidoDespesas,
+				DS.ConcluidoOrcaDespesas,
 				DS.QuitadoDespesas,
                 PP.ParcelaPagaveis,
                 PP.DataVencimentoPagaveis,
@@ -970,7 +970,7 @@ class Relatorioempresa_model extends CI_Model {
                 $row->DataVencimentoPagaveis = $this->basico->mascara_data($row->DataVencimentoPagaveis, 'barras');
                 $row->DataPagoPagaveis = $this->basico->mascara_data($row->DataPagoPagaveis, 'barras');
 				$row->AprovadoDespesas = $this->basico->mascara_palavra_completa($row->AprovadoDespesas, 'NS');
-				$row->ServicoConcluidoDespesas = $this->basico->mascara_palavra_completa($row->ServicoConcluidoDespesas, 'NS');
+				$row->ConcluidoOrcaDespesas = $this->basico->mascara_palavra_completa($row->ConcluidoOrcaDespesas, 'NS');
 				$row->QuitadoDespesas = $this->basico->mascara_palavra_completa($row->QuitadoDespesas, 'NS');
                 $row->QuitadoPagaveis = $this->basico->mascara_palavra_completa($row->QuitadoPagaveis, 'NS');
 
@@ -2666,7 +2666,7 @@ exit();*/
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrca'] != '#') ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -2679,7 +2679,7 @@ exit();*/
                 OT.ValorOrca,
 				OT.ValorEntradaOrca,
 				OT.ValorRestanteOrca,
-                OT.ServicoConcluido,
+                OT.ConcluidoOrca,
                 OT.QuitadoOrca,
                 OT.DataConclusao,
                 OT.DataQuitado,
@@ -2737,7 +2737,7 @@ exit();*/
 				$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
 
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
-                $row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
+                $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
 
                 $somaorcamento += $row->ValorOrca;
@@ -2804,7 +2804,7 @@ exit();*/
 
         $filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrca'] != '#') ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'C.NomeCliente' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
         $query = $this->db->query('
@@ -2819,7 +2819,7 @@ exit();*/
                 OT.ValorOrca,
 				OT.ValorEntradaOrca,
 				OT.ValorRestanteOrca,
-                OT.ServicoConcluido,
+                OT.ConcluidoOrca,
                 OT.QuitadoOrca,
                 OT.DataQuitado,
 				OT.DataConclusao,
@@ -2877,7 +2877,7 @@ exit();*/
 				$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
 
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
-                $row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
+                $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
 
                 $somaorcamento += $row->ValorOrca;
@@ -2935,7 +2935,7 @@ exit();*/
 
         $filtro1 = ($data['AprovadoDespesas'] != '#') ? 'OT.AprovadoDespesas = "' . $data['AprovadoDespesas'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoDespesas'] != '#') ? 'OT.QuitadoDespesas = "' . $data['QuitadoDespesas'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluidoDespesas'] != '#') ? 'OT.ServicoConcluidoDespesas = "' . $data['ServicoConcluidoDespesas'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrcaDespesas'] != '#') ? 'OT.ConcluidoOrcaDespesas = "' . $data['ConcluidoOrcaDespesas'] . '" AND ' : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -2948,7 +2948,7 @@ exit();*/
                 OT.ValorDespesas,
 				OT.ValorEntradaDespesas,
 				OT.ValorRestanteDespesas,
-                OT.ServicoConcluidoDespesas,
+                OT.ConcluidoOrcaDespesas,
                 OT.QuitadoDespesas,
                 OT.DataConclusaoDespesas,
                 OT.DataRetornoDespesas,
@@ -3004,7 +3004,7 @@ exit();*/
                 $row->DataRetornoDespesas = $this->basico->mascara_data($row->DataRetornoDespesas, 'barras');
 
                 $row->AprovadoDespesas = $this->basico->mascara_palavra_completa($row->AprovadoDespesas, 'NS');
-                $row->ServicoConcluidoDespesas = $this->basico->mascara_palavra_completa($row->ServicoConcluidoDespesas, 'NS');
+                $row->ConcluidoOrcaDespesas = $this->basico->mascara_palavra_completa($row->ConcluidoOrcaDespesas, 'NS');
                 $row->QuitadoDespesas = $this->basico->mascara_palavra_completa($row->QuitadoDespesas, 'NS');
 
                 $somaorcamento += $row->ValorDespesas;
@@ -3063,7 +3063,7 @@ exit();*/
 		$data['Categoriadesp'] = ($data['Categoriadesp']) ? ' AND CD.idTab_Categoriadesp = ' . $data['Categoriadesp'] : FALSE;
         $filtro1 = ($data['AprovadoDespesas'] != '#') ? 'OT.AprovadoDespesas = "' . $data['AprovadoDespesas'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoDespesas'] != '#') ? 'OT.QuitadoDespesas = "' . $data['QuitadoDespesas'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluidoDespesas'] != '#') ? 'OT.ServicoConcluidoDespesas = "' . $data['ServicoConcluidoDespesas'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrcaDespesas'] != '#') ? 'OT.ConcluidoOrcaDespesas = "' . $data['ConcluidoOrcaDespesas'] . '" AND ' : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -3080,7 +3080,7 @@ exit();*/
 				OT.ValorEntradaDespesas,
 				OT.ValorRestanteDespesas,
 				OT.QtdParcelasDespesas,
-                OT.ServicoConcluidoDespesas,
+                OT.ConcluidoOrcaDespesas,
                 OT.QuitadoDespesas,
                 OT.DataConclusaoDespesas,
 				OT.DataQuitadoDespesas,
@@ -3140,7 +3140,7 @@ exit();*/
                 $row->DataRetornoDespesas = $this->basico->mascara_data($row->DataRetornoDespesas, 'barras');
 				$row->DataQuitadoDespesas = $this->basico->mascara_data($row->DataQuitadoDespesas, 'barras');
                 $row->AprovadoDespesas = $this->basico->mascara_palavra_completa($row->AprovadoDespesas, 'NS');
-                $row->ServicoConcluidoDespesas = $this->basico->mascara_palavra_completa($row->ServicoConcluidoDespesas, 'NS');
+                $row->ConcluidoOrcaDespesas = $this->basico->mascara_palavra_completa($row->ConcluidoOrcaDespesas, 'NS');
                 $row->QuitadoDespesas = $this->basico->mascara_palavra_completa($row->QuitadoDespesas, 'NS');
 
                 $somaorcamento += $row->ValorDespesas;
@@ -3240,7 +3240,7 @@ exit();*/
                 #$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
 
                 #$row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
-                #$row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
+                #$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 #$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
 
                 $somadespesa += $row->ValorTotalDesp;
@@ -4075,7 +4075,7 @@ exit();*/
 		$data['NomeProfissional'] = ($data['NomeProfissional']) ? ' AND PR.idApp_Profissional = ' . $data['NomeProfissional'] : FALSE;
         $filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
         #$filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrca'] != '#') ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
 		$filtro4 = ($data['ConcluidoProcedimento'] != '#') ? 'PC.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
 
 
@@ -4087,7 +4087,7 @@ exit();*/
                 OT.DataOrca,
 				OT.DataPrazo,
                 OT.ValorOrca,
-                OT.ServicoConcluido,
+                OT.ConcluidoOrca,
                 OT.DataConclusao,
 				TPD.NomeProduto,
 				PC.DataProcedimento,
@@ -4114,7 +4114,7 @@ exit();*/
             ORDER BY
                 C.NomeCliente ASC,
 				OT.AprovadoOrca DESC,
-				OT.ServicoConcluido,
+				OT.ConcluidoOrca,
 				PC.DataProcedimento,
 				PC.ConcluidoProcedimento
         ');
@@ -4139,7 +4139,7 @@ exit();*/
                 #$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
 
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
-                $row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
+                $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 #$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
 
 				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
@@ -4305,7 +4305,7 @@ exit();*/
 
         $filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
         #$filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
-		$filtro3 = ($data['ServicoConcluido'] != '#') ? 'OT.ServicoConcluido = "' . $data['ServicoConcluido'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrca'] != '#') ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
 		$filtro4 = ($data['ConcluidoProcedimento'] != '#') ? 'PC.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
 
 
@@ -4319,7 +4319,7 @@ exit();*/
 				OT.DataPrazo,
                 OT.ValorOrca,
 
-                OT.ServicoConcluido,
+                OT.ConcluidoOrca,
 
                 OT.DataConclusao,
 
@@ -4373,7 +4373,7 @@ exit();*/
                 #$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
 
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
-                $row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
+                $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 #$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
 
 				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
