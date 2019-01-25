@@ -1636,8 +1636,8 @@ class Relatorio_model extends CI_Model {
         #SOMATÓRIO DAS RECEITAS Pago DO ANO
         $somareceitas='';
         for ($i=1;$i<=12;$i++){
-            $somareceitas .= 'SUM(IF(PR.DataPago BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorPago, 0)) AS M' . $i . ', ';
+            $somareceitas .= 'SUM(IF(PR.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
         }
         $somareceitas = substr($somareceitas, 0 ,-2);
 		
@@ -1659,7 +1659,7 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" AND
 				PR.Quitado = "S" AND
-            	YEAR(PR.DataPago) = ' . $data['Ano']
+            	YEAR(PR.DataVencimento) = ' . $data['Ano']
         );
 
         #$query['RecPago'] = $query['RecPago']->result_array();
@@ -1703,8 +1703,8 @@ class Relatorio_model extends CI_Model {
         #SOMATÓRIO DAS DESPESAS PAGAS DO ANO
         $somadespesas='';
         for ($i=1;$i<=12;$i++){
-            $somadespesas .= 'SUM(IF(PP.DataPago BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PP.ValorPago, 0)) AS M' . $i . ', ';
+            $somadespesas .= 'SUM(IF(PP.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PP.ValorParcela, 0)) AS M' . $i . ', ';
         }
         $somadespesas = substr($somadespesas, 0 ,-2);
 
@@ -1724,7 +1724,8 @@ class Relatorio_model extends CI_Model {
 				' . $permissao . '
 				OT.idTab_TipoRD = "1" AND
 				PP.idTab_TipoRD = "1" AND
-            	YEAR(PP.DataPago) = ' . $data['Ano']
+				PP.Quitado = "S" AND				
+            	YEAR(PP.DataVencimento) = ' . $data['Ano']
         );
 
         #$query['DesPago'] = $query['DesPago']->result_array();
