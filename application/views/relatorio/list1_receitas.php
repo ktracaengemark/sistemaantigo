@@ -1,5 +1,6 @@
 <div style="overflow: auto; height: 200px; ">	
 	<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+		<!--
 		<div class="panel panel-default">
 			<div class="panel-body">
 
@@ -28,7 +29,7 @@
 				<div class="col-md-1"></div>
 			</div>
 		</div>
-
+		-->
 		<div class="container-fluid">
 			<div class="row">
 				<div>
@@ -108,6 +109,7 @@
 		</div>
 		
 	<?php } else { ?>
+		<!--
 		<div class="panel panel-default">
 			<div class="panel-body">
 
@@ -122,7 +124,7 @@
 				<div class="col-md-1"></div>
 			</div>
 		</div>
-
+		-->
 		<div class="container-fluid">
 			<div class="row">
 				<div>
