@@ -90,7 +90,7 @@
 									#echo '<td>' . $row['QtdParcelasOrca'] . '</td>';
 									#echo '<td>' . $row['Modalidade'] . '</td>';
 									#echo '<td>' . $row['FormaPag'] . '</td>';
-									echo '<td>' . $row['AprovadoOrca'] . ' - ' . $row['QuitadoOrca'] . ' - ' . $row['ServicoConcluido'] . '</td>';
+									echo '<td>' . $row['AprovadoOrca'] . ' - ' . $row['QuitadoOrca'] . ' - ' . $row['ConcluidoOrca'] . '</td>';
 									echo '<td>' . $row['DataOrca'] . '</td>';							
 									echo '<td>' . $row['DataConclusao'] . '</td>';
 									echo '<td>' . $row['DataQuitado'] . '</td>';

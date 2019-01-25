@@ -745,24 +745,24 @@
 																		</div>
 																	</div>
 																	<div class="col-md-3 form-inline">
-																		<label for="ServicoConcluido">Concluído?</label><br>
+																		<label for="ConcluidoOrca">Concluído?</label><br>
 																		<div class="form-group">
 																			<div class="btn-group" data-toggle="buttons">
 																				<?php
-																				foreach ($select['ServicoConcluido'] as $key => $row) {
-																					(!$orcatrata['ServicoConcluido']) ? $orcatrata['ServicoConcluido'] = 'N' : FALSE;
+																				foreach ($select['ConcluidoOrca'] as $key => $row) {
+																					(!$orcatrata['ConcluidoOrca']) ? $orcatrata['ConcluidoOrca'] = 'N' : FALSE;
 
-																					if ($orcatrata['ServicoConcluido'] == $key) {
+																					if ($orcatrata['ConcluidoOrca'] == $key) {
 																						echo ''
-																						. '<label class="btn btn-warning active" name="radiobutton_ServicoConcluido" id="radiobutton_ServicoConcluido' . $key . '">'
-																						. '<input type="radio" name="ServicoConcluido" id="radiobutton" '
+																						. '<label class="btn btn-warning active" name="radiobutton_ConcluidoOrca" id="radiobutton_ConcluidoOrca' . $key . '">'
+																						. '<input type="radio" name="ConcluidoOrca" id="radiobutton" '
 																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																						. '</label>'
 																						;
 																					} else {
 																						echo ''
-																						. '<label class="btn btn-default" name="radiobutton_ServicoConcluido" id="radiobutton_ServicoConcluido' . $key . '">'
-																						. '<input type="radio" name="ServicoConcluido" id="radiobutton" '
+																						. '<label class="btn btn-default" name="radiobutton_ConcluidoOrca" id="radiobutton_ConcluidoOrca' . $key . '">'
+																						. '<input type="radio" name="ConcluidoOrca" id="radiobutton" '
 																						. 'autocomplete="off" value="' . $key . '" >' . $row
 																						. '</label>'
 																						;

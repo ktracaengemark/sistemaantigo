@@ -40,7 +40,7 @@
                             echo '<td>' . $row['DataPrazo'] . '</td>';
                            # echo '<td class="text-left">R$ ' . $row['ValorOrca'] . '</td>';
 							#echo '<td>' . $row['QuitadoOrca'] . '</td>';
-                            echo '<td>' . $row['ServicoConcluido'] . '</td>';
+                            echo '<td>' . $row['ConcluidoOrca'] . '</td>';
                             echo '<td>' . $row['DataConclusao'] . '</td>';
 							#echo '<td>' . $row['DataRetorno'] . '</td>';
 							echo '<td>' . $row['NomeServico'] . '</td>';

@@ -78,7 +78,7 @@
 							echo '<td class="text-left">R$ ' . $row['ValorRestanteDespesas'] . '</td>';
 							echo '<td>' . $row['FormaPag'] . '</td>';
 							echo '<td>' . $row['AprovadoDespesas'] . '</td>';
-							echo '<td>' . $row['ServicoConcluidoDespesas'] . '</td>';
+							echo '<td>' . $row['ConcluidoOrcaDespesas'] . '</td>';
 							echo '<td>' . $row['QuitadoDespesas'] . '</td>';                           
                             echo '<td>' . $row['DataConclusaoDespesas'] . '</td>';
                             echo '<td>' . $row['DataRetornoDespesas'] . '</td>';

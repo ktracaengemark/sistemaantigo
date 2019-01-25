@@ -57,7 +57,7 @@ class Orcatrata extends CI_Controller {
 			'Descricao',
             'ProfissionalOrca',
             'AprovadoOrca',
-            'ServicoConcluido',
+            'ConcluidoOrca',
             'QuitadoOrca',
             'DataConclusao',
             'DataRetorno',
@@ -179,7 +179,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['TipoFinanceiro'] = $this->Basico_model->select_tipofinanceiroR();
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
-        $data['select']['ServicoConcluido'] = $this->Basico_model->select_status_sn();
+        $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['Modalidade'] = $this->Basico_model->select_modalidade();
@@ -239,7 +239,7 @@ class Orcatrata extends CI_Controller {
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
 		
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
-		(!$data['orcatrata']['ServicoConcluido']) ? $data['orcatrata']['ServicoConcluido'] = 'N' : FALSE;
+		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 
         $data['radio'] = array(
@@ -419,7 +419,7 @@ class Orcatrata extends CI_Controller {
 			'Descricao',
             'ProfissionalOrca',
             'AprovadoOrca',
-            'ServicoConcluido',
+            'ConcluidoOrca',
             'QuitadoOrca',
             'DataConclusao',
             'DataRetorno',
@@ -538,7 +538,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['TipoFinanceiro'] = $this->Basico_model->select_tipofinanceiroR();
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
-        $data['select']['ServicoConcluido'] = $this->Basico_model->select_status_sn();
+        $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['Modalidade'] = $this->Basico_model->select_modalidade();
@@ -596,7 +596,7 @@ class Orcatrata extends CI_Controller {
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
 
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
-		(!$data['orcatrata']['ServicoConcluido']) ? $data['orcatrata']['ServicoConcluido'] = 'N' : FALSE;			
+		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;			
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 
         $data['radio'] = array(
@@ -785,7 +785,7 @@ class Orcatrata extends CI_Controller {
 			'Descricao',
             'ProfissionalOrca',
             'AprovadoOrca',
-            'ServicoConcluido',
+            'ConcluidoOrca',
             'QuitadoOrca',
             'DataConclusao',
             'DataRetorno',
@@ -995,7 +995,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['TipoFinanceiro'] = $this->Basico_model->select_tipofinanceiroR();
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
-        $data['select']['ServicoConcluido'] = $this->Basico_model->select_status_sn();
+        $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['Modalidade'] = $this->Basico_model->select_modalidade();
@@ -1053,7 +1053,7 @@ class Orcatrata extends CI_Controller {
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"'; 
 
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
-		(!$data['orcatrata']['ServicoConcluido']) ? $data['orcatrata']['ServicoConcluido'] = 'N' : FALSE;			
+		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;			
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 
         $data['radio'] = array(
@@ -1336,7 +1336,7 @@ class Orcatrata extends CI_Controller {
 			'Descricao',
             'ProfissionalOrca',
             'AprovadoOrca',
-            'ServicoConcluido',
+            'ConcluidoOrca',
             'QuitadoOrca',
             'DataConclusao',
             'DataRetorno',
@@ -1543,7 +1543,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['TipoFinanceiro'] = $this->Basico_model->select_tipofinanceiroR();
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
-        $data['select']['ServicoConcluido'] = $this->Basico_model->select_status_sn();
+        $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['Modalidade'] = $this->Basico_model->select_modalidade();
@@ -1599,7 +1599,7 @@ class Orcatrata extends CI_Controller {
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
 
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
-		(!$data['orcatrata']['ServicoConcluido']) ? $data['orcatrata']['ServicoConcluido'] = 'N' : FALSE;			
+		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;			
         (!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 
         $data['radio'] = array(
@@ -1882,7 +1882,7 @@ class Orcatrata extends CI_Controller {
 			'Descricao',
             'ProfissionalOrca',
             'AprovadoOrca',
-            'ServicoConcluido',
+            'ConcluidoOrca',
             'QuitadoOrca',
             'DataConclusao',
             'DataRetorno',
@@ -2000,7 +2000,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['TipoFinanceiro'] = $this->Basico_model->select_tipofinanceiroD();
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
-        $data['select']['ServicoConcluido'] = $this->Basico_model->select_status_sn();
+        $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['Modalidade'] = $this->Basico_model->select_modalidade();
@@ -2066,7 +2066,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
-		(!$data['orcatrata']['ServicoConcluido']) ? $data['orcatrata']['ServicoConcluido'] = 'N' : FALSE;		
+		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;		
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 
         $data['radio'] = array(
@@ -2254,7 +2254,7 @@ class Orcatrata extends CI_Controller {
 			'Descricao',
             'ProfissionalOrca',
             'AprovadoOrca',
-            'ServicoConcluido',
+            'ConcluidoOrca',
             'QuitadoOrca',
             'DataConclusao',
             'DataRetorno',
@@ -2461,7 +2461,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['TipoFinanceiro'] = $this->Basico_model->select_tipofinanceiroD();
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
-        $data['select']['ServicoConcluido'] = $this->Basico_model->select_status_sn();
+        $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['Modalidade'] = $this->Basico_model->select_modalidade();
@@ -2517,7 +2517,7 @@ class Orcatrata extends CI_Controller {
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
 			
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
-		(!$data['orcatrata']['ServicoConcluido']) ? $data['orcatrata']['ServicoConcluido'] = 'N' : FALSE;
+		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;
         (!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 
         $data['radio'] = array(

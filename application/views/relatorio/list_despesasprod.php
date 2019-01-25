@@ -95,7 +95,7 @@
                             #echo '<td>' . $row['DataEntradaOrca'] . '</td>';
                             #echo '<td class="text-right">R$ ' . $row['ValorEntradaOrca'] . '</td>';
 							#echo '<td>' . $row['AprovadoDespesas'] . '</td>';
-							#echo '<td>' . $row['ServicoConcluidoDespesas'] . '</td>';
+							#echo '<td>' . $row['ConcluidoOrcaDespesas'] . '</td>';
 							echo '<td>' . $row['QuitadoDespesas'] . '</td>';							
                             echo '<td>' . $row['ParcelaPagaveis'] . '</td>';
                             echo '<td>' . $row['DataVencimentoPagaveis'] . '</td>';

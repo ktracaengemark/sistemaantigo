@@ -66,12 +66,12 @@
 								<!--
 
 								<div class="col-md-1">
-									<label for="ServicoConcluidoDespesas">Desp. Concl.?</label>
+									<label for="ConcluidoOrcaDespesas">Desp. Concl.?</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-											id="ServicoConcluidoDespesas" name="ServicoConcluidoDespesas">
+											id="ConcluidoOrcaDespesas" name="ConcluidoOrcaDespesas">
 										<?php
-										foreach ($select['ServicoConcluidoDespesas'] as $key => $row) {
-											if ($query['ServicoConcluidoDespesas'] == $key) {
+										foreach ($select['ConcluidoOrcaDespesas'] as $key => $row) {
+											if ($query['ConcluidoOrcaDespesas'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 											} else {
 												echo '<option value="' . $key . '">' . $row . '</option>';

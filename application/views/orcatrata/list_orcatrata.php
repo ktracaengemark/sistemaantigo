@@ -199,8 +199,8 @@
 											</p>
 											-->
 											<p>
-												<?php if ($row['ServicoConcluido']) { ?>
-												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ServicoConcluido']; ?>
+												<?php if ($row['ConcluidoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
 												<?php } ?>
 											</p>
 											<!--
@@ -261,8 +261,8 @@
 												<?php } ?>
 											</p>
 											<p>
-												<?php if ($row['ServicoConcluido']) { ?>
-												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ServicoConcluido']; ?>
+												<?php if ($row['ConcluidoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
 												<?php } ?>
 											</p>
 											<p>

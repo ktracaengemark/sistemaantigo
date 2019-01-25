@@ -170,12 +170,12 @@
 									</select>
 								</div>
 								<div class="col-md-3 text-left">
-									<label for="ServicoConcluido">Entregue</label>
+									<label for="ConcluidoOrca">Entregue</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-											id="ServicoConcluido" name="ServicoConcluido">
+											id="ConcluidoOrca" name="ConcluidoOrca">
 										<?php
-										foreach ($select['ServicoConcluido'] as $key => $row) {
-											if ($query['ServicoConcluido'] == $key) {
+										foreach ($select['ConcluidoOrca'] as $key => $row) {
+											if ($query['ConcluidoOrca'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 											} else {
 												echo '<option value="' . $key . '">' . $row . '</option>';

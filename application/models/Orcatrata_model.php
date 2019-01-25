@@ -495,7 +495,7 @@ class Orcatrata_model extends CI_Model {
 			. 'OT.DataQuitado, '
             . 'OT.ProfissionalOrca, '
             . 'OT.AprovadoOrca, '
-			. 'OT.ServicoConcluido, '
+			. 'OT.ConcluidoOrca, '
 			. 'OT.QuitadoOrca, '
             . 'OT.ObsOrca '
             . 'FROM '
@@ -507,7 +507,7 @@ class Orcatrata_model extends CI_Model {
             . 'OT.AprovadoOrca = "' . $aprovado . '" '
             . 'ORDER BY '
 			#. 'OT.DataOrca DESC, '
-			. 'OT.ServicoConcluido ASC, '
+			. 'OT.ConcluidoOrca ASC, '
 			. 'OT.QuitadoOrca ASC, '
 			. 'OT.DataOrca DESC ');
         /*
@@ -530,7 +530,7 @@ class Orcatrata_model extends CI_Model {
 					$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
 					$row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
                     $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
-					$row->ServicoConcluido = $this->basico->mascara_palavra_completa($row->ServicoConcluido, 'NS');
+					$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
 					$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
                     #$row->ProfissionalOrca = $this->get_profissional($row->ProfissionalOrca);
                 }

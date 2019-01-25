@@ -211,7 +211,7 @@
 					<tbody>
 						<tr>
 							<!--<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['AprovadoOrca'], 'NS') ?></td>-->
-							<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['ServicoConcluido'], 'NS') ?></td>
+							<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['ConcluidoOrca'], 'NS') ?></td>
 							<!--<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['QuitadoOrca'], 'NS') ?></td>-->
 						</tr>
 					</tbody>
