@@ -1,11 +1,12 @@
 <?php
+/*
 #versão antiga do controle de sessão
-#if (!isset($_SESSION['log'])) redirect('login/sair');
+if (!isset($_SESSION['log'])) redirect('login/sair');
 
 #tempo de sessão = 5 horas
-#$tempo = 18000;
+$tempo = 18000;
 #$tempo = 5;
-/*
+
 #controle de sessão
 if ( (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $tempo)) || !isset($_SESSION['log'])) {
     redirect('login/sair/FALSE');

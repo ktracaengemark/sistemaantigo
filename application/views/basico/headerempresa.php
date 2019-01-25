@@ -1,4 +1,5 @@
 <?php
+/*
 #versão antiga do controle de sessão
 if (!isset($_SESSION['log'])) redirect('login/sair');
 
@@ -11,14 +12,14 @@ if ( (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] 
     redirect('login/sair/FALSE');
 }
 $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
-
+*/
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="refresh" content="<?php echo $tempo+1; ?>;<?php echo base_url(); ?>loginempresa/sair/FALSE"/>
+        <!--<meta http-equiv="refresh" content="<?php echo $tempo+1; ?>;<?php echo base_url(); ?>loginempresa/sair/FALSE"/>-->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
