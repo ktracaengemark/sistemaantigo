@@ -138,9 +138,10 @@
 								<th class="active">EdtOrç</th>
 								<th class="active">Orç.</th>
 								<th class="col-md-3 active" scope="col">Despesa</th>
-								<th class="col-md-2 active" scope="col">Pagar</th>					
+								<th class="col-md-2 active" scope="col">Valor</th>					
 								<th class="active">FormaPagm.</th>
 								<th class="active">Dt.Venc.</th>
+								<th class="active">Quitado</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -158,6 +159,7 @@
 									echo '<td class="text-right">' . $row['ValorRestanteOrca'] . '</td>';
 									echo '<td>' . $row['AVAP'] . ' - ' . $row['QtdParcelasOrca'] . ' X ' . $row['Modalidade'] . ' - ' . $row['FormaPag'] . '</td>';
 									echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
+									echo '<td>' . $row['QuitadoOrca'] . '</td>';
 								echo '</tr>';
 							}
 							?>
