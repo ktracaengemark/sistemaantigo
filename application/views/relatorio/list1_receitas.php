@@ -85,7 +85,7 @@
 									#echo '<td>' . $row['DataEntradaOrca'] . '</td>';
 									#echo '<td>' . $row['DataPrazo'] . '</td>';
 									echo '<td class="text-right">' . $row['ValorOrca'] . '</td>';
-									echo '<td class="text-right">' . $row['ValorEntradaOrca'] . '</td>';
+									echo '<td class="text-right">' . $row['ValorDev'] . '</td>';
 									echo '<td class="text-right">' . $row['ValorRestanteOrca'] . '</td>';
 									echo '<td>' . $row['AVAP'] . ' - ' . $row['QtdParcelasOrca'] . ' X ' . $row['Modalidade'] . ' - ' . $row['FormaPag'] . '</td>';
 									#echo '<td>' . $row['QtdParcelasOrca'] . '</td>';
