@@ -13,11 +13,12 @@
 				<table class="table table-bordered table-condensed table-striped">								
 					<thead>
 						<tr>
-							<th class="active">Ind.</th>
+							<th class="active">Edit</th>
 							<!--<th class="active">Filt.</th>-->
 							<th class="active">Pri.</th>
 							<th class="active">Cnl.</th>
 							<th class="active">Tarefa</th>
+							<th class="active">Excl</th>
 							<!--<th class="active">Data</th>-->
 						</tr>
 					</thead>
@@ -45,7 +46,12 @@
 								echo '<td>' . $row['Prioridade'] . '</td>';
 								echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
 								echo '<td>' . $row['Procedimento'] . '</td>';
-								#echo '<td>' . $row['DataProcedimento'] . '</td>';							
+								#echo '<td>' . $row['DataProcedimento'] . '</td>';
+								echo '<td class="notclickable">
+										<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'procedimento/excluir/' . $row['idApp_Procedimento'] . '">
+											<span class="glyphicon glyphicon-trash notclickable"></span>
+										</a>
+									</td>';								
 							echo '</tr>';
 						}
 						?>
