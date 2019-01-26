@@ -58,7 +58,7 @@
 																<input type="hidden" name="ProdutoHidden" id="ProdutoHidden<?php echo $i ?>" value="<?php echo $i ?>">
 
 																<div class="form-group" id="11div<?php echo $i ?>">
-																	<div class="panel panel-info">
+																	<div class="panel panel-success">
 																		<div class="panel-heading">
 																			<div class="row">
 																				<div class="col-md-1">
@@ -408,7 +408,7 @@
 																			<label for="ValorOrca">Orçamento:</label><br>
 																			<div class="input-group" id="txtHint">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
-																				<input type="text" class="form-control Valor" id="ValorOrca" maxlength="10" placeholder="0,00" 
+																				<input type="text" class="form-control Valor" id="ValorOrca" maxlength="10" placeholder="0,00" readonly=''
 																					   onkeyup="calculaResta(this.value)"
 																					   name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
 																			</div>
@@ -417,7 +417,7 @@
 																			<label for="ValorDev">Desconto:</label><br>
 																			<div class="input-group" id="txtHint">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
-																				<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00" 
+																				<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00" readonly=''
 																					   onkeyup="calculaResta(this.value)" 
 																					   name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
 																			</div>
@@ -464,6 +464,40 @@
 																			   name="DataVencimentoOrca" value="<?php echo $orcatrata['DataVencimentoOrca']; ?>">																			
 																	</div>
 																</div>
+																<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+																<div class="col-md-2">
+																	<label for="AVAP">À Vista/ Prazo</label><br>
+																	<div class="btn-block" data-toggle="buttons">
+																		<?php
+																		foreach ($select['AVAP'] as $key => $row) {
+																			#if (!$orcatrata['AVAP']) $orcatrata['AVAP'] = 'V';
+
+																			($key == 'P') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																			if ($orcatrata['AVAP'] == $key) {
+																				echo ''
+																				. '<label class="btn btn-warning active" name="AVAP_' . $hideshow . '">'
+																				. '<input type="radio" name="AVAP" id="' . $hideshow . '" '
+																				. 'onchange="calculaParcelas()" '
+																				. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																				. '</label>'
+																				;
+																			} else {
+																				echo ''
+																				. '<label class="btn btn-default" name="AVAP_' . $hideshow . '">'
+																				. '<input type="radio" name="AVAP" id="' . $hideshow . '" '
+																				. 'onchange="calculaParcelas()" '
+																				. 'autocomplete="off" value="' . $key . '" >' . $row
+																				. '</label>'
+																				;
+																			}
+																		}
+																		?>
+
+																	</div>
+																	<?php echo form_error('AVAP'); ?>
+																</div>
+																<?php } else { ?>
 																<div class="col-md-2">
 																	<label for="AVAP">À Vista/ Prazo</label><br>
 																	<div class="btn-block" data-toggle="buttons">
@@ -496,6 +530,7 @@
 																	</div>
 																	<?php echo form_error('AVAP'); ?>
 																</div>
+																<?php } ?>
 																<!--
 																<br>
 																<div class="form-group">
