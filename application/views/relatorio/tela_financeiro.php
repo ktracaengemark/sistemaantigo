@@ -182,10 +182,10 @@
 								<div class="col-md-3 text-left">
 									<label for="Ordenamento">Tipo de Receita:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-											id="TipoFinanceiro" name="TipoFinanceiro">
+											id="TipoFinanceiroR" name="TipoFinanceiroR">
 										<?php
-										foreach ($select['TipoFinanceiro'] as $key => $row) {
-											if ($query['TipoFinanceiro'] == $key) {
+										foreach ($select['TipoFinanceiroR'] as $key => $row) {
+											if ($query['TipoFinanceiroR'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 											} else {
 												echo '<option value="' . $key . '">' . $row . '</option>';
@@ -558,10 +558,10 @@
 								<div class="col-md-3 text-left">
 									<label for="Ordenamento">Tipo de Despesa:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-											id="TipoFinanceiro" name="TipoFinanceiro">
+											id="TipoFinanceiroD" name="TipoFinanceiroD">
 										<?php
-										foreach ($select['TipoFinanceiro'] as $key => $row) {
-											if ($query['TipoFinanceiro'] == $key) {
+										foreach ($select['TipoFinanceiroD'] as $key => $row) {
+											if ($query['TipoFinanceiroD'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 											} else {
 												echo '<option value="' . $key . '">' . $row . '</option>';

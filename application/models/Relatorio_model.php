@@ -809,6 +809,7 @@ class Relatorio_model extends CI_Model {
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(OT.DataVencimentoOrca) = ' . $data['Mesvenc'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(OT.DataVencimentoOrca) = ' . $data['Ano'] : FALSE;
 		$data['Orcarec'] = ($data['Orcarec']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcarec'] : FALSE;		
+		$data['TipoFinanceiroR'] = ($data['TipoFinanceiroR']) ? ' AND TR.idTab_TipoFinanceiro = ' . $data['TipoFinanceiroR'] : FALSE;
 		$filtro1 = ($data['AprovadoOrca']) ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoOrca']) ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
 		$filtro3 = ($data['ConcluidoOrca']) ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
@@ -862,7 +863,8 @@ class Relatorio_model extends CI_Model {
 				' . $filtro6 . '
 				' . $filtro7 . '
 				OT.idTab_TipoRD = "2"
-                ' . $data['Orcarec'] . '
+                ' . $data['TipoFinanceiroR'] . '
+				' . $data['Orcarec'] . '
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 				
@@ -930,6 +932,7 @@ class Relatorio_model extends CI_Model {
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(OT.DataVencimentoOrca) = ' . $data['Mesvenc'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(OT.DataVencimentoOrca) = ' . $data['Ano'] : FALSE;
 		$data['Orcades'] = ($data['Orcades']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcades'] : FALSE;		
+		$data['TipoFinanceiroD'] = ($data['TipoFinanceiroD']) ? ' AND TR.idTab_TipoFinanceiro = ' . $data['TipoFinanceiroD'] : FALSE;
 		$filtro1 = ($data['AprovadoOrca']) ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoOrca']) ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
 		$filtro3 = ($data['ConcluidoOrca']) ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
@@ -980,7 +983,8 @@ class Relatorio_model extends CI_Model {
 				' . $filtro6 . '
 				' . $filtro7 . '
 				OT.idTab_TipoRD = "1"
-                ' . $data['Orcades'] . '
+                ' . $data['TipoFinanceiroD'] . '
+				' . $data['Orcades'] . '
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 				
@@ -1074,7 +1078,7 @@ class Relatorio_model extends CI_Model {
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;		
-		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TR.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
+		$data['TipoFinanceiroR'] = ($data['TipoFinanceiroR']) ? ' AND TR.idTab_TipoFinanceiro = ' . $data['TipoFinanceiroR'] : FALSE;
 		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
 		$data['Orcarec'] = ($data['Orcarec']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcarec'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
@@ -1126,7 +1130,8 @@ class Relatorio_model extends CI_Model {
 				' . $permissao . '
 				' . $filtro4 . '
 				OT.idTab_TipoRD = "2"
-                ' . $data['Orcarec'] . '
+                ' . $data['TipoFinanceiroR'] . '
+				' . $data['Orcarec'] . '
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 
@@ -1237,7 +1242,7 @@ class Relatorio_model extends CI_Model {
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;		
-		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TD.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
+		$data['TipoFinanceiroD'] = ($data['TipoFinanceiroD']) ? ' AND TD.idTab_TipoFinanceiro = ' . $data['TipoFinanceiroD'] : FALSE;
 		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
 		$data['Orcades'] = ($data['Orcades']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcades'] : FALSE;		
 		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
@@ -1288,7 +1293,8 @@ class Relatorio_model extends CI_Model {
 				' . $permissao . '
 				' . $filtro4 . '
 				OT.idTab_TipoRD = "1"
-                ' . $data['Orcades'] . '                
+                ' . $data['TipoFinanceiroD'] . '
+				' . $data['Orcades'] . '                
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 
