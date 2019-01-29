@@ -21,8 +21,8 @@
 			-->
 			<div class="col-md-10">
 				<label for="DataFim">Recebido dia: 
-				<?php echo '<small>' . $_SESSION['FiltroBalanco']['Diapag'] . '</small>' ?> /
-				<?php echo '<small>' . $_SESSION['FiltroBalanco']['Mespag'] . '</small>' ?> /
+				<?php echo '<small>' . $_SESSION['FiltroBalanco']['Diavenc'] . '</small>' ?> /
+				<?php echo '<small>' . $_SESSION['FiltroBalanco']['Mesvenc'] . '</small>' ?> /
 				<?php echo '<small>' . $_SESSION['FiltroBalanco']['Ano'] . '</small>' ?>
 				</label>
 				<div class="input-group">

@@ -1296,8 +1296,8 @@ class Relatorio extends CI_Controller {
 			'Modalidade',
         ), TRUE));
 
-        $_SESSION['FiltroBalanco']['Diapag'] = $data['query']['Diapag'];
-        $_SESSION['FiltroBalanco']['Mespag'] = $data['query']['Mespag'];
+        $_SESSION['FiltroBalanco']['Diavenc'] = $data['query']['Diavenc'];
+        $_SESSION['FiltroBalanco']['Mesvenc'] = $data['query']['Mesvenc'];
         $_SESSION['FiltroBalanco']['Ano'] = $data['query']['Ano'];
 		
         $data['select']['AprovadoOrca'] = array(
@@ -1358,15 +1358,15 @@ class Relatorio extends CI_Controller {
            $data['query']['Ano'] = '2018';
 		*/
 		
-		if (!$data['query']['Diapag'])
-           $data['query']['Diapag'] = date('d', time());
-/*	   
+		if (!$data['query']['Diavenc'])
+           $data['query']['Diavenc'] = date('d', time());
+	   
 		if (!$data['query']['Mesvenc'])
            $data['query']['Mesvenc'] = date('m', time());
-*/	   
+/*	   
 		if (!$data['query']['Mespag'])
            $data['query']['Mespag'] = date('m', time());	   
-	   
+*/	   
 		if (!$data['query']['Ano'])
            $data['query']['Ano'] = date('Y', time());
 		
@@ -1456,23 +1456,7 @@ class Relatorio extends CI_Controller {
             $data['list3'] = $this->load->view('relatorio/list_balancoanual', $data, TRUE);
 
         }
-
-        $data['titulo4'] = 'Diario';
-        #run form validation
-        if ($this->form_validation->run() !== TRUE) {
-
-            $data['report'] = $this->Relatorio_model->list_balancodiario($data['query']);
-
-            /*
-              echo "<pre>";
-              print_r($data['report']);
-              echo "</pre>";
-              exit();
-              */
-
-            $data['list4'] = $this->load->view('relatorio/list_balancodiario', $data, TRUE);
-
-        }		
+		
 
         $this->load->view('relatorio/tela_balanco', $data);
 

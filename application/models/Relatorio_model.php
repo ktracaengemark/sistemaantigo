@@ -1488,8 +1488,8 @@ class Relatorio_model extends CI_Model {
 				' . $permissao . '
 
 				OT.idTab_TipoRD = "2"
-                ' . $data['Diapag'] . ' 
-				' . $data['Mespag'] . '
+                ' . $data['Diavenc'] . ' 
+				' . $data['Mesvenc'] . '
 				' . $data['Ano'] . ' 
             ORDER BY
 				PR.DataVencimento
@@ -1530,7 +1530,7 @@ class Relatorio_model extends CI_Model {
                     $row->DataEntradaOrca = FALSE;
                 }
 
-                $somarecebido += $row->ValorPago;
+                $somarecebido += $row->ValorParcela;
                 $somareceber += $row->ValorParcela;
 
 
@@ -1620,8 +1620,8 @@ class Relatorio_model extends CI_Model {
 				PR.Quitado = "S" AND
 				' . $permissao . '
 				OT.idTab_TipoRD = "1"
-                ' . $data['Diapag'] . ' 
-				' . $data['Mespag'] . '				
+                ' . $data['Diavenc'] . ' 
+				' . $data['Mesvenc'] . '				
 				' . $data['Ano'] . ' 
 
             ORDER BY
@@ -1663,7 +1663,7 @@ class Relatorio_model extends CI_Model {
                     $row->DataEntradaOrca = FALSE;
                 }
 
-                $somarecebido += $row->ValorPago;
+                $somarecebido += $row->ValorParcela;
                 $somareceber += $row->ValorParcela;
 
 
@@ -1938,243 +1938,7 @@ class Relatorio_model extends CI_Model {
         return $query;
 
     }
-	
-    public function list_balancodiario($data) {
-
-        ####################################################################
-        #SOMATÓRIO DAS RECEITAS Pago no Mês
-        $somareceitas='';
-        for ($i=1;$i<=31;$i++){
-            $somareceitas .= 'SUM(IF(PR.DataPago BETWEEN "' . $data['Mespag'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Mespag'] . '-' . $i . '-1"), PR.ValorPago, 0)) AS M' . $i . ', ';
-        }
-        $somareceitas = substr($somareceitas, 0 ,-2);
 		
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-        
-		$query['RecPago'] = $this->db->query(
-        #$receitas = $this->db->query(
-            'SELECT
-				' . $somareceitas . '
-            FROM
-
-                App_OrcaTrata AS OT
-                    LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
-					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-            WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				' . $permissao . '
-				OT.idTab_TipoRD = "2" AND
-				PR.idTab_TipoRD = "2" AND
-				PR.Quitado = "S" AND
-				YEAR(PR.DataPago) = ' . $data['Ano'] . ' AND
-            	MONTH(PR.DataPago) = ' . $data['Mespag']
-        );
-
-        #$query['RecPago'] = $query['RecPago']->result_array();
-        $query['RecPago'] = $query['RecPago']->result();
-        $query['RecPago'][0]->Balancopago = 'Rec.Real';
-		
-        ####################################################################
-        #SOMATÓRIO DAS RECEITAS Venc. No Mês
-        $somareceitasvenc='';
-        for ($i=1;$i<=31;$i++){
-            $somareceitasvenc .= 'SUM(IF(PR.DataVencimento BETWEEN "' . $data['Mespag'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Mespag'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
-        }
-        $somareceitasvenc = substr($somareceitasvenc, 0 ,-2);
-
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-		
-        $query['RecVenc'] = $this->db->query(
-        #$receitas = $this->db->query(
-            'SELECT
-                ' . $somareceitasvenc . '
-            FROM
-                App_OrcaTrata AS OT
-                    LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
-					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
-            WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				' . $permissao . '
-				OT.idTab_TipoRD = "2" AND
-				PR.idTab_TipoRD = "2" AND
-				YEAR(PR.DataVencimento) = ' . $data['Ano'] . ' AND
-            	MONTH(PR.DataVencimento) = ' . $data['Mespag']
-        );
-
-        #$query['RecVenc'] = $query['RecVenc']->result_array();
-        $query['RecVenc'] = $query['RecVenc']->result();
-        $query['RecVenc'][0]->Balancovenc = 'Rec.Esp';
-
-
-        ####################################################################
-        #SOMATÓRIO DAS DESPESAS PAGAS no Mês
-        $somadespesas='';
-        for ($i=1;$i<=31;$i++){
-            $somadespesas .= 'SUM(IF(PP.DataPago BETWEEN "' . $data['Mespag'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Mespag'] . '-' . $i . '-1"), PP.ValorPago, 0)) AS M' . $i . ', ';
-        }
-        $somadespesas = substr($somadespesas, 0 ,-2);
-
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-		
-        $query['DesPago'] = $this->db->query(
-        #$despesas = $this->db->query(
-            'SELECT
-                ' . $somadespesas . '
-            FROM
-                App_OrcaTrata AS OT
-                    LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
-					LEFT JOIN App_Parcelas AS PP ON OT.idApp_OrcaTrata = PP.idApp_OrcaTrata
-            WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				' . $permissao . '
-				OT.idTab_TipoRD = "1" AND
-				PP.idTab_TipoRD = "1" AND
-				YEAR(PP.DataPago) = ' . $data['Ano'] . ' AND
-            	MONTH(PP.DataPago) = ' . $data['Mespag']
-        );
-
-        #$query['DesPago'] = $query['DesPago']->result_array();
-        $query['DesPago'] = $query['DesPago']->result();
-        $query['DesPago'][0]->Balancopago = 'Desp.Real';
-
-        ####################################################################
-        #SOMATÓRIO DAS DESPESAS Venc no Mês
-        $somadespesasvenc='';
-        for ($i=1;$i<=31;$i++){
-            $somadespesasvenc .= 'SUM(IF(PP.DataVencimento BETWEEN "' . $data['Mespag'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Mespag'] . '-' . $i . '-1"), PP.ValorParcela, 0)) AS M' . $i . ', ';
-        }
-        $somadespesasvenc = substr($somadespesasvenc, 0 ,-2);
-
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-		
-        $query['DesVenc'] = $this->db->query(
-        #$despesas = $this->db->query(
-            'SELECT
-                ' . $somadespesasvenc . '
-            FROM
-                App_OrcaTrata AS OT
-                    LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
-					LEFT JOIN App_Parcelas AS PP ON OT.idApp_OrcaTrata = PP.idApp_OrcaTrata
-            WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				' . $permissao . '
-				OT.idTab_TipoRD = "1" AND
-				PP.idTab_TipoRD = "1" AND
-				YEAR(PP.DataVencimento) = ' . $data['Ano'] . ' AND
-            	MONTH(PP.DataVencimento) = ' . $data['Mespag']
-        );
-
-        #$query['DesVenc'] = $query['DesVenc']->result_array();
-        $query['DesVenc'] = $query['DesVenc']->result();
-        $query['DesVenc'][0]->Balancovenc = 'Desp.Esp';
-		
-        /*
-        echo $this->db->last_query();
-        echo "<pre>";
-        print_r($query);
-        echo "</pre>";
-        exit();
-        */
-
-		$query['RecVenc'][0]->BalancoResRec = 'RecVenc';
-
-		$query['RecPago'][0]->BalancoResRec = 'RecPago';
-
-		$query['DesVenc'][0]->BalancoResDes = 'DesVenc';
-
-		$query['DesPago'][0]->BalancoResDes = 'DesPago';
-		
-        $query['TotalPago'] = new stdClass();
-        $query['TotalGeralpago'] = new stdClass();
-        $query['TotalVenc'] = new stdClass();
-        $query['TotalGeralvenc'] = new stdClass();
-		$query['TotalResRec'] = new stdClass();
-        $query['TotalGeralResRec'] = new stdClass();
-		$query['TotalResDes'] = new stdClass();
-        $query['TotalGeralResDes'] = new stdClass();
-		
-        $query['TotalPago']->Balancopago = 'Bal.Real';
-        $query['TotalGeralpago']->RecPago = $query['TotalGeralpago']->DesPago = $query['TotalGeralpago']->BalancoGeralpago = 0;
-        $query['TotalVenc']->Balancovenc = 'Bal.Esp';
-        $query['TotalGeralvenc']->RecVenc = $query['TotalGeralvenc']->DesVenc = $query['TotalGeralvenc']->BalancoGeralvenc = 0;
-		$query['TotalResRec']->BalancoResRec = 'TotalResRec';
-        $query['TotalGeralResRec']->RecVenc = $query['TotalGeralResRec']->RecPago = $query['TotalGeralResRec']->BalancoGeralResRec = 0;
-		$query['TotalResDes']->BalancoResDes = 'TotalResDes';
-        $query['TotalGeralResDes']->DesVenc = $query['TotalGeralResDes']->DesPago = $query['TotalGeralResDes']->BatancoGeralResDes = 0;
-		
-        for ($i=1;$i<=31;$i++) {
-            $query['TotalVenc']->{'M'.$i} = $query['RecVenc'][0]->{'M'.$i} - $query['DesVenc'][0]->{'M'.$i};
-
-            $query['TotalGeralvenc']->RecVenc += $query['RecVenc'][0]->{'M'.$i};
-            $query['TotalGeralvenc']->DesVenc += $query['DesVenc'][0]->{'M'.$i};
-
-            $query['RecVenc'][0]->{'M'.$i} = number_format($query['RecVenc'][0]->{'M'.$i}, 2, ',', '.');
-			$query['DesVenc'][0]->{'M'.$i} = number_format($query['DesVenc'][0]->{'M'.$i}, 2, ',', '.');
-            $query['TotalVenc']->{'M'.$i} = number_format($query['TotalVenc']->{'M'.$i}, 2, ',', '.');
-        }		
-        $query['TotalGeralvenc']->BalancoGeralvenc = $query['TotalGeralvenc']->RecVenc - $query['TotalGeralvenc']->DesVenc;
-
-        $query['TotalGeralvenc']->RecVenc = number_format($query['TotalGeralvenc']->RecVenc, 2, ',', '.');
-		$query['TotalGeralvenc']->DesVenc = number_format($query['TotalGeralvenc']->DesVenc, 2, ',', '.');
-        $query['TotalGeralvenc']->BalancoGeralvenc = number_format($query['TotalGeralvenc']->BalancoGeralvenc, 2, ',', '.');
-
-        for ($i=1;$i<=31;$i++) {
-            $query['TotalPago']->{'M'.$i} = $query['RecPago'][0]->{'M'.$i} - $query['DesPago'][0]->{'M'.$i};
-
-            $query['TotalGeralpago']->RecPago += $query['RecPago'][0]->{'M'.$i};
-            $query['TotalGeralpago']->DesPago += $query['DesPago'][0]->{'M'.$i};
-
-            $query['RecPago'][0]->{'M'.$i} = number_format($query['RecPago'][0]->{'M'.$i}, 2, ',', '.');
-			$query['DesPago'][0]->{'M'.$i} = number_format($query['DesPago'][0]->{'M'.$i}, 2, ',', '.');
-            $query['TotalPago']->{'M'.$i} = number_format($query['TotalPago']->{'M'.$i}, 2, ',', '.');
-        }		
-        $query['TotalGeralpago']->BalancoGeralpago = $query['TotalGeralpago']->RecPago - $query['TotalGeralpago']->DesPago;
-
-        $query['TotalGeralpago']->RecPago = number_format($query['TotalGeralpago']->RecPago, 2, ',', '.');
-		$query['TotalGeralpago']->DesPago = number_format($query['TotalGeralpago']->DesPago, 2, ',', '.');
-        $query['TotalGeralpago']->BalancoGeralpago = number_format($query['TotalGeralpago']->BalancoGeralpago, 2, ',', '.');
-
-        for ($i=1;$i<=31;$i++) {
-            $query['TotalResRec']->{'M'.$i} = $query['RecVenc'][0]->{'M'.$i} - $query['RecPago'][0]->{'M'.$i};
-
-            $query['TotalGeralResRec']->RecVenc += $query['RecVenc'][0]->{'M'.$i};
-            $query['TotalGeralResRec']->RecPago += $query['RecPago'][0]->{'M'.$i};
-
-        }		
-        $query['TotalGeralResRec']->BalancoGeralResRec = $query['TotalGeralResRec']->RecVenc - $query['TotalGeralResRec']->RecPago;
-
-        $query['TotalGeralResRec']->BalancoGeralResRec = number_format($query['TotalGeralResRec']->BalancoGeralResRec, 2, ',', '.');
-		
-        for ($i=1;$i<=31;$i++) {
-            $query['TotalResDes']->{'M'.$i} = $query['DesVenc'][0]->{'M'.$i} - $query['DesPago'][0]->{'M'.$i};
-
-            $query['TotalGeralResDes']->DesVenc += $query['DesVenc'][0]->{'M'.$i};
-            $query['TotalGeralResDes']->DesPago += $query['DesPago'][0]->{'M'.$i};
-
-        }		
-        $query['TotalGeralResDes']->BalancoGeralResDes = $query['TotalGeralResDes']->DesVenc - $query['TotalGeralResDes']->DesPago;
-
-        $query['TotalGeralResDes']->BalancoGeralResDes = number_format($query['TotalGeralResDes']->BalancoGeralResDes, 2, ',', '.');
-		
-        /*
-        echo $this->db->last_query();
-        echo "<pre>";
-        print_r($query);
-        echo "</pre>";
-        exit();
-        */
-        return $query;
-
-    }
-	
     public function list_estoque($data) {
 
         $data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;

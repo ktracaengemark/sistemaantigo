@@ -77,22 +77,6 @@
 						</div>
 						<div class="modal-footer">
 							<div class="row">								
-								<div class="col-md-3 text-left">
-									<label for="Quitado">Parc. Quit.</label>
-									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-											id="Quitado" name="Quitado">
-										<?php
-										foreach ($select['Quitado'] as $key => $row) {
-											if ($query['Quitado'] == $key) {
-												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-												echo '<option value="' . $key . '">' . $row . '</option>';
-											}
-										}
-										?>
-									</select>
-								</div>
-								<!--
 								<div class="col-md-3 text-left" >
 									<label for="Ordenamento">Dia do Venc.:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -108,7 +92,6 @@
 										?>
 									</select>
 								</div>
-								-->
 								<div class="col-md-3 text-left" >
 									<label for="Ordenamento">Mês do Venc.:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -131,6 +114,21 @@
 										<?php
 										foreach ($select['Ano'] as $key => $row) {
 											if ($query['Ano'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								<div class="col-md-3 text-left">
+									<label for="Quitado">Parc. Quit.</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="Quitado" name="Quitado">
+										<?php
+										foreach ($select['Quitado'] as $key => $row) {
+											if ($query['Quitado'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 											} else {
 												echo '<option value="' . $key . '">' . $row . '</option>';
@@ -317,22 +315,6 @@
 						</div>
 						<div class="modal-footer">							
 							<div class="row">
-								<div class="col-md-3 text-left">
-									<label for="Quitado">Parc. Quit.</label>
-									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-											id="Quitado" name="Quitado">
-										<?php
-										foreach ($select['Quitado'] as $key => $row) {
-											if ($query['Quitado'] == $key) {
-												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-												echo '<option value="' . $key . '">' . $row . '</option>';
-											}
-										}
-										?>
-									</select>
-								</div>
-								<!--
 								<div class="col-md-3 text-left" >
 									<label for="Ordenamento">Dia do Venc.:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -348,7 +330,6 @@
 										?>
 									</select>
 								</div>
-								-->
 								<div class="col-md-3 text-left" >
 									<label for="Ordenamento">Mês do Venc.:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -371,6 +352,21 @@
 										<?php
 										foreach ($select['Ano'] as $key => $row) {
 											if ($query['Ano'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								<div class="col-md-3 text-left">
+									<label for="Quitado">Parc. Quit.</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="Quitado" name="Quitado">
+										<?php
+										foreach ($select['Quitado'] as $key => $row) {
+											if ($query['Quitado'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 											} else {
 												echo '<option value="' . $key . '">' . $row . '</option>';

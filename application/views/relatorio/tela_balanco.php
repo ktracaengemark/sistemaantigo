@@ -26,7 +26,7 @@
 							?>
 						</select>
 					</div>
-					
+					-->
 					<div class="col-md-3 text-left" >
 						<label for="Ordenamento">Dia do Venc.:</label>
 						<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -58,37 +58,7 @@
 							?>
 						</select>
 					</div>
-					-->
-					<div class="col-md-3 text-left" >
-						<label for="Ordenamento">Dia:</label>
-						<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-								id="Diapag" autofocus name="Diapag">
-							<?php
-							foreach ($select['Diapag'] as $key => $row) {
-								if ($query['Diapag'] == $key) {
-									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-								} else {
-									echo '<option value="' . $key . '">' . $row . '</option>';
-								}
-							}
-							?>
-						</select>
-					</div>
-					<div class="col-md-3 text-left" >
-						<label for="Ordenamento">Mes:</label>
-						<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-								id="Mespag" name="Mespag">
-							<?php
-							foreach ($select['Mespag'] as $key => $row) {
-								if ($query['Mespag'] == $key) {
-									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-								} else {
-									echo '<option value="' . $key . '">' . $row . '</option>';
-								}
-							}
-							?>
-						</select>
-					</div>
+
 					<div class="col-md-3 text-left" >
 						<label for="Ordenamento">Ano:</label>
 						<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -235,13 +205,12 @@
 				<span class="glyphicon glyphicon-pencil"></span>Diário <?php #echo $titulo1; ?> 
 			</div>
 			-->
-			
-			<button  class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-				<span class="glyphicon glyphicon-filter"></span>Filtrar
-			</button>
-			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
-				<span class="glyphicon glyphicon-search"></span>Financeiro
+			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
+				<span class="glyphicon glyphicon-search"></span>Rec/ Desp
 			</a>			
+			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+				<span class="glyphicon glyphicon-search"></span>Filtrar
+			</button>
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 				<span class="glyphicon glyphicon-search"></span>Parcelas
 			</a>
@@ -275,12 +244,12 @@
 				<span class="glyphicon glyphicon-pencil"></span>Mensal <?php #echo $titulo3; ?> 
 			</div>
 			-->			
-			<button  class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-				<span class="glyphicon glyphicon-filter"></span>Filtrar
-			</button>
-			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
-				<span class="glyphicon glyphicon-search"></span>Financeiro
+			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
+				<span class="glyphicon glyphicon-search"></span>Rec/ Desp
 			</a>			
+			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+				<span class="glyphicon glyphicon-search"></span>Filtrar
+			</button>
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 				<span class="glyphicon glyphicon-search"></span>Parcelas
 			</a>
