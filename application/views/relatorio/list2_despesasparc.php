@@ -7,14 +7,7 @@
 				<label for="DataFim"><?php echo $titulo2; ?> Total:</label>
 				<div class="input-group">
 					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total Entrada" value="<?php echo $report->soma->balanco ?>">
-				</div>
-			</div>		
-			<div class="col-md-3">
-				<label for="DataFim">Pagar:</label>
-				<div class="input-group">
-					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total a receber" value="<?php echo $report->soma->somareceber ?>">
+					<input type="text" class="form-control" disabled aria-label="Total de Saídas" value="<?php echo $report->soma->somareceber ?>">
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -24,7 +17,13 @@
 					<input type="text" class="form-control" disabled aria-label="Total Pago" value="<?php echo $report->soma->somarecebido ?>">
 				</div>
 			</div>
-			
+			<div class="col-md-3">
+				<label for="DataFim">à Pagar</label>
+				<div class="input-group">
+					<span class="input-group-addon">R$</span>
+					<input type="text" class="form-control" disabled aria-label="Total a Pagar" value="<?php echo $report->soma->balanco ?>">
+				</div>
+			</div>			
 			<div class="col-md-1"></div>
 		</div>		
 	</div>

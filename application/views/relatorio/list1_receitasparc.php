@@ -7,21 +7,21 @@
 				<label for="DataFim"><?php echo $titulo1; ?> Total:</label>
 				<div class="input-group">
 					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total Entrada" value="<?php echo $report->soma->balanco ?>">
-				</div>
-			</div>		
-			<div class="col-md-3">
-				<label for="DataFim">Receber:</label>
-				<div class="input-group">
-					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total a receber" value="<?php echo $report->soma->somareceber ?>">
+					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somareceber ?>">
 				</div>
 			</div>
 			<div class="col-md-3">
 				<label for="DataFim">Recebido:</label>
 				<div class="input-group">
 					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total Pago" value="<?php echo $report->soma->somarecebido ?>">
+					<input type="text" class="form-control" disabled aria-label="Total Recebido" value="<?php echo $report->soma->somarecebido ?>">
+				</div>
+			</div>
+			<div class="col-md-3">
+				<label for="DataFim">à Receber:</label>
+				<div class="input-group">
+					<span class="input-group-addon">R$</span>
+					<input type="text" class="form-control" disabled aria-label="Total a Receber" value="<?php echo $report->soma->balanco ?>">
 				</div>
 			</div>
 			<div class="col-md-1"></div>

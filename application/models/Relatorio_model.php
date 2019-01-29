@@ -1045,7 +1045,6 @@ class Relatorio_model extends CI_Model {
 		
 	public function list1_receitasparc($data, $completo) {
 
-
         if ($data['DataFim']) {
             $consulta =
                 '(PR.DataVencimento >= "' . $data['DataInicio'] . '" AND PR.DataVencimento <= "' . $data['DataFim'] . '")';
@@ -1072,7 +1071,7 @@ class Relatorio_model extends CI_Model {
             $consulta3 =
                 '(OT.DataOrca >= "' . $data['DataInicio3'] . '")';
         }
-
+		
 		#$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
@@ -1089,7 +1088,7 @@ class Relatorio_model extends CI_Model {
 		$filtro4 = ($data['Quitado']) ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-		
+
         $query = $this->db->query(
             'SELECT
                 C.NomeCliente,
@@ -1112,10 +1111,8 @@ class Relatorio_model extends CI_Model {
 				CONCAT(PR.Parcela) AS Parcela,
                 PR.DataVencimento,
                 PR.ValorParcela,
-				
                 PR.DataPago,
                 PR.ValorPago,
-				
                 PR.Quitado
             FROM
                 App_OrcaTrata AS OT
@@ -1129,7 +1126,8 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
-				OT.idTab_TipoRD = "2"
+				OT.idTab_TipoRD = "2" AND
+				PR.idTab_TipoRD = "2" 
                 ' . $data['TipoFinanceiroR'] . '
 				' . $data['Orcarec'] . '
 				' . $data['Dia'] . ' 
@@ -1137,15 +1135,42 @@ class Relatorio_model extends CI_Model {
 				' . $data['Ano'] . ' 
             ORDER BY
 				PR.DataVencimento
-            ');
+		');
 
-        /*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-          */
+        ####################################################################
+        #SOMATÓRIO DAS Parcelas Recebidas
+		
+        $parcelasrecebidas = $this->db->query(
+            'SELECT
+                PR.ValorParcela
+            FROM
+                App_OrcaTrata AS OT
+                    LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
+					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
+            WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $permissao . '
+				' . $filtro4 . '
+				OT.idTab_TipoRD = "2" AND
+				PR.idTab_TipoRD = "2" AND
+				PR.Quitado = "S"
+                ' . $data['TipoFinanceiroR'] . '
+				' . $data['Orcarec'] . '                
+				' . $data['Dia'] . ' 
+				' . $data['Mesvenc'] . ' 
+				' . $data['Ano'] . '				
+ 				
+        ');			
+		$parcelasrecebidas = $parcelasrecebidas->result();		
+			/*
+			  echo $this->db->last_query();
+			  echo "<pre>";
+			  print_r($query);
+			  echo "</pre>";
+			  exit();
+			  */
 
         if ($completo === FALSE) {
             return TRUE;
@@ -1163,9 +1188,10 @@ class Relatorio_model extends CI_Model {
 				$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
 
-                #esse trecho pode ser melhorado, serve para somar apenas uma vez
+				#esse trecho pode ser melhorado, serve para somar apenas uma vez
                 #o valor da entrada que pode aparecer mais de uma vez
-                if ($ant != $row->idApp_OrcaTrata) {
+                
+				if ($ant != $row->idApp_OrcaTrata) {
                     $ant = $row->idApp_OrcaTrata;
                     $somaentrada += $row->ValorEntradaOrca;
                 }
@@ -1174,34 +1200,41 @@ class Relatorio_model extends CI_Model {
                     $row->DataEntradaOrca = FALSE;
                 }
 
-                $somarecebido += $row->ValorPago;
                 $somareceber += $row->ValorParcela;
-
-
-                $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
-                $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
-                $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
-
+				$row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');				
+                $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.'); 			
+				/*
+				  echo $this->db->last_query();
+				  echo "<pre>";
+				  print_r($somaentrada);          
+				  echo "</pre>";
+				  exit();
+				*/	
+		  
             }
-            $somareceber -= $somarecebido;
-            $somareal = $somarecebido;
-            $balanco = $somarecebido + $somareceber;
 
-			$somapagar -= $somapago;
-			$somareal2 = $somapago;
-			$balanco2 = $somapago + $somapagar;
+            foreach ($parcelasrecebidas as $row) {
 
+                $somarecebido += $row->ValorParcela;
+				$row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
+            }			
+
+            $balanco =  $somareceber - $somarecebido;
+			
+			/*
+			echo $this->db->last_query();
+			echo "<pre>";
+			print_r($balanco);
+			echo "</pre>";
+			exit();			
+			*/
+			
             $query->soma = new stdClass();
             $query->soma->somareceber = number_format($somareceber, 2, ',', '.');
             $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
-            $query->soma->somareal = number_format($somareal, 2, ',', '.');
             $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
             $query->soma->balanco = number_format($balanco, 2, ',', '.');
-			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
-            $query->soma->somapago = number_format($somapago, 2, ',', '.');
-            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
-            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
-
+			
             return $query;
         }
 
@@ -1276,10 +1309,8 @@ class Relatorio_model extends CI_Model {
 				CONCAT(PR.Parcela) AS Parcela,
                 PR.DataVencimento,
                 PR.ValorParcela,
-				
                 PR.DataPago,
                 PR.ValorPago,
-				
                 PR.Quitado
             FROM
                 App_OrcaTrata AS OT
@@ -1292,30 +1323,57 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
-				OT.idTab_TipoRD = "1"
+				OT.idTab_TipoRD = "1" AND
+				PR.idTab_TipoRD = "1" 
                 ' . $data['TipoFinanceiroD'] . '
 				' . $data['Orcades'] . '                
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 
-
             ORDER BY
 				PR.DataVencimento
             ');
 
+        ####################################################################
+        #SOMATÓRIO DAS Parcelas Pagas
+		
+        $parcelaspagas = $this->db->query(
+            'SELECT
+                PR.ValorParcela
+            FROM
+                App_OrcaTrata AS OT
+                    LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
+					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+					LEFT JOIN Tab_TipoFinanceiro AS TD ON TD.idTab_TipoFinanceiro = OT.TipoFinanceiro
+            WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $permissao . '
+				' . $filtro4 . '
+				OT.idTab_TipoRD = "1" AND
+				PR.idTab_TipoRD = "1" AND
+				PR.Quitado = "S"
+                ' . $data['TipoFinanceiroD'] . '
+				' . $data['Orcades'] . '                
+				' . $data['Dia'] . ' 
+				' . $data['Mesvenc'] . ' 
+				' . $data['Ano'] . '				
+ 				
+        ');			
+		$parcelaspagas = $parcelaspagas->result();		
         /*
           echo $this->db->last_query();
           echo "<pre>";
           print_r($query);
           echo "</pre>";
           exit();
-          */
+         */ 
 
         if ($completo === FALSE) {
             return TRUE;
         } else {
 
-            $somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somapago=$somapagar=$somareal=$balanco=$ant=0;
+            $somaentrada=$somareceber=$somarecebido=$balanco=$ant=0;
             foreach ($query->result() as $row) {
 				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
                 $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
@@ -1327,7 +1385,8 @@ class Relatorio_model extends CI_Model {
 				$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
 
-                #esse trecho pode ser melhorado, serve para somar apenas uma vez
+                
+				#esse trecho pode ser melhorado, serve para somar apenas uma vez
                 #o valor da entrada que pode aparecer mais de uma vez
                 if ($ant != $row->idApp_OrcaTrata) {
                     $ant = $row->idApp_OrcaTrata;
@@ -1337,40 +1396,39 @@ class Relatorio_model extends CI_Model {
                     $row->ValorEntradaOrca = FALSE;
                     $row->DataEntradaOrca = FALSE;
                 }
-
-                $somarecebido += $row->ValorPago;
-                $somareceber += $row->ValorParcela;
-
-
-                $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
-                $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
-                $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
-
+				
+                $somareceber += $row->ValorParcela;				
+				$row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');				
+				$row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
             }
-            $somareceber -= $somarecebido;
-            $somareal = $somarecebido;
-            $balanco = $somarecebido + $somareceber;
 
-			$somapagar -= $somapago;
-			$somareal2 = $somapago;
-			$balanco2 = $somapago + $somapagar;
+            foreach ($parcelaspagas as $row) {
+
+                $somarecebido += $row->ValorParcela;
+				$row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
+            }			
+
+            $balanco =  $somareceber - $somarecebido;
+			
+			/*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($somareceberB);
+          echo "</pre>";
+          exit();
+			*/
 
             $query->soma = new stdClass();
             $query->soma->somareceber = number_format($somareceber, 2, ',', '.');
             $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
-            $query->soma->somareal = number_format($somareal, 2, ',', '.');
             $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
             $query->soma->balanco = number_format($balanco, 2, ',', '.');
-			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
-            $query->soma->somapago = number_format($somapago, 2, ',', '.');
-            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
-            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
 
             return $query;
         }
 
     }
-
+	
 	public function list1_receitadiaria($data, $completo) {
 
 		$data['Diavenc'] = ($data['Diavenc']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Diavenc'] : FALSE;
@@ -1880,7 +1938,7 @@ class Relatorio_model extends CI_Model {
         return $query;
 
     }
-
+	
     public function list_balancodiario($data) {
 
         ####################################################################

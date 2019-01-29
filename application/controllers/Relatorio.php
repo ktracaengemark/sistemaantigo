@@ -1041,7 +1041,7 @@ class Relatorio extends CI_Controller {
         $this->load->view('basico/footer');
 
     }
-	
+
 	public function parcelas() {
 
         if ($this->input->get('m') == 1)
@@ -1258,7 +1258,7 @@ class Relatorio extends CI_Controller {
         $this->load->view('basico/footer');
 
     }
-	
+
     public function balanco() {
 
         if ($this->input->get('m') == 1)
