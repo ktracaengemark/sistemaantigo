@@ -235,7 +235,7 @@
 									</select>
 								</div>
 								<div class="col-md-3 text-left" >
-									<label for="Ordenamento">Dia:</label>
+									<label for="Ordenamento">Dia Retorno:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 											id="Diacli" name="Diacli">
 										<?php
@@ -250,7 +250,7 @@
 									</select>
 								</div>
 								<div class="col-md-3 text-left" >
-									<label for="Ordenamento">Mês:</label>
+									<label for="Ordenamento">Mês Retorno:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 											id="Mesvenccli" name="Mesvenccli">
 										<?php
@@ -265,7 +265,7 @@
 									</select>
 								</div>
 								<div class="col-md-3 text-left" >
-									<label for="Ordenamento">Ano:</label>
+									<label for="Ordenamento">Ano Retorno:</label>
 									<div>
 										<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
 											   autofocus name="Anocli" value="<?php echo set_value('Anocli', $query['Anocli']); ?>">
@@ -306,7 +306,42 @@
 										}
 										?>
 									</select>
-								</div>	
+								</div>
+								<div class="col-md-6 text-left">
+									<label for="Ordenamento">Ordenamento:</label>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-8">
+												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+														id="Campo" name="Campo">
+													<?php
+													foreach ($select['Campo'] as $key => $row) {
+														if ($query['Campo'] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>
+												</select>
+											</div>
+											<div class="col-md-4">
+												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+														id="Ordenamento" name="Ordenamento">
+													<?php
+													foreach ($select['Ordenamento'] as $key => $row) {
+														if ($query['Ordenamento'] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>								
 							</div>
 						</div>	
 					</div>

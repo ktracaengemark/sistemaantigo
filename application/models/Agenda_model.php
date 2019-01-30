@@ -593,9 +593,9 @@ class Agenda_model extends CI_Model {
 	public function list2_procedimentocli($data, $completo) {
 
 		$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
-		$data['Diacli'] = ($data['Diacli']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Diacli'] : FALSE;
-		$data['Mesvenccli'] = ($data['Mesvenccli']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenccli'] : FALSE;
-		$data['Anocli'] = ($data['Anocli']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Anocli'] : FALSE;
+		$data['Diacli'] = ($data['Diacli']) ? ' AND DAY(P.DataProcedimentoLimite) = ' . $data['Diacli'] : FALSE;
+		$data['Mesvenccli'] = ($data['Mesvenccli']) ? ' AND MONTH(P.DataProcedimentoLimite) = ' . $data['Mesvenccli'] : FALSE;
+		$data['Anocli'] = ($data['Anocli']) ? ' AND YEAR(P.DataProcedimentoLimite) = ' . $data['Anocli'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'P.ConcluidoProcedimento' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$filtro4 = ($data['Concluidocli']) ? 'P.ConcluidoProcedimento = "' . $data['Concluidocli'] . '" AND ' : FALSE;
@@ -631,8 +631,8 @@ class Agenda_model extends CI_Model {
 				' . $data['Anocli'] . ' 
 				
             ORDER BY
-                P.ConcluidoProcedimento,
-				P.DataProcedimento
+                ' . $data['Campo'] . '
+				' . $data['Ordenamento'] . '
         ');
         /*
 
