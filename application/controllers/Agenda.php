@@ -102,6 +102,7 @@ class Agenda extends CI_Controller {
         );		
 
 		$data['select']['Campo'] = array(
+			'P.Prioridade' => 'Prioridade',			
 			'P.ConcluidoProcedimento' => 'Concl.',
 			'P.DataProcedimentoLimite' => 'Limite/ Retorno',
 			'P.DataProcedimento' => 'Cadastro',
@@ -109,8 +110,8 @@ class Agenda extends CI_Controller {
         );
 
         $data['select']['Ordenamento'] = array(
-            'DESC' => 'Decrescente',
-			'ASC' => 'Crescente',
+			'ASC' => 'Crescente',            
+			'DESC' => 'Decrescente',
         );
 		
         $data['select']['Prioridade'] = array (
