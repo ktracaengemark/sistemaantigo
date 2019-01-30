@@ -172,13 +172,13 @@
 										<div class="form-group text-left">
 											<div class="row">
 												<div class="col-md-3">
-													<label for="DataProcedimento">Data:</label>
+													<label for="DataProcedimentoLimite">Dt.Retorno</label>
 													<div class="input-group <?php echo $datepicker; ?>">
 														<span class="input-group-addon" disabled>
 															<span class="glyphicon glyphicon-calendar"></span>
 														</span>
 														<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																name="DataProcedimento" value="<?php echo $orcatrata['DataProcedimento']; ?>">
+																name="DataProcedimentoLimite" value="<?php echo $orcatrata['DataProcedimentoLimite']; ?>">
 													</div>
 												</div>
 											</div>

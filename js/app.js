@@ -845,17 +845,27 @@ function adicionaProcedimento() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-4">\
+						<div class="col-md-3">\
 							<label for="Procedimento'+pc+'">Procedimento:</label>\
 							<textarea class="form-control" id="Procedimento'+pc+'"\
 									  name="Procedimento'+pc+'"></textarea>\
 						</div>\
-						<div class="col-md-2">\
-							<label for="Prioridade'+pc+'">Prioridade:</label>\
+						<div class="col-md-1">\
+							<label for="Prioridade'+pc+'">Prd.:</label>\
 							<select data-placeholder="Selecione uma opção..." class="form-control"\
 									 id="listadinamicac'+pc+'" name="Prioridade'+pc+'">\
 								<option value="" checked>Alta</option>\
 							</select>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="DataProcedimentoLimite'+pc+'">Data do Proced.:</label>\
+							<div class="input-group DatePicker">\
+								<span class="input-group-addon" disabled>\
+									<span class="glyphicon glyphicon-calendar"></span>\
+								</span>\
+								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataProcedimentoLimite'+pc+'" value="">\
+							</div>\
 						</div>\
 						<div class="col-md-2">\
 							<label for="DataProcedimento'+pc+'">Data do Proced.:</label>\

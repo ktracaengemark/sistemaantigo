@@ -45,18 +45,28 @@
 												<div class="panel panel-info">
 													<div class="panel-heading">
 														<div class="row">
-															<div class="col-md-3">
+															<div class="col-md-2">
 																<label for="NomeCliente<?php echo $i ?>">Cliente:</label>
 																<input class="form-control" id="NomeCliente<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
 																		  name="NomeCliente<?php echo $i ?>" value="<?php echo $procedimento[$i]['NomeCliente']; ?>">
 															</div>
-															<div class="col-md-4">
+															<div class="col-md-3">
 																<label for="Procedimento<?php echo $i ?>">Procedimento:</label>
 																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 															</div>
 															<div class="col-md-2">
-																<label for="DataProcedimento<?php echo $i ?>">Data:</label>
+																<label for="DataProcedimentoLimite<?php echo $i ?>">Retorno:</label>
+																<div class="input-group <?php echo $datepicker; ?>">
+																	<span class="input-group-addon" disabled>
+																		<span class="glyphicon glyphicon-calendar"></span>
+																	</span>
+																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																		   name="DataProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimentoLimite']; ?>">
+																</div>
+															</div>															
+															<div class="col-md-2">
+																<label for="DataProcedimento<?php echo $i ?>">Cadatro:</label>
 																<div class="input-group <?php echo $datepicker; ?>">
 																	<span class="input-group-addon" disabled>
 																		<span class="glyphicon glyphicon-calendar"></span>

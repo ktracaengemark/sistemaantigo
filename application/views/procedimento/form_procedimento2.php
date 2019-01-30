@@ -58,7 +58,7 @@
 												</div>
 												-->
 												<div class="col-md-3 text-left">
-													<label for="Prioridade">Parc. Quit.</label>
+													<label for="Prioridade">Prioridade</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 															id="Prioridade" name="Prioridade">
 														<?php
@@ -74,6 +74,20 @@
 												</div>												
 											</div>
 										</div>	
+										<div class="form-group">	
+											<div class="row">	
+												<div class="col-md-6">
+													<label for="DataProcedimentoLimite">Limite</label>
+													<div class="input-group <?php echo $datepicker; ?>">
+														<span class="input-group-addon" disabled>
+															<span class="glyphicon glyphicon-calendar"></span>
+														</span>
+															<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
+																   name="DataProcedimentoLimite" placeholder="DD/MM/AAAA" value="<?php echo $query['DataProcedimentoLimite']; ?>">
+													</div>
+												</div>
+											</div>
+										</div>
 										<!--
 										<div class="form-group">	
 											<div class="row">	

@@ -59,7 +59,7 @@ class Procedimento extends CI_Controller {
         ), TRUE));
 
 		(!$data['query']['DataProcedimento']) ? $data['query']['DataProcedimento'] = date('d/m/Y', time()) : FALSE;
-		(!$data['query']['DataProcedimentoLimite']) ? $data['query']['DataProcedimentoLimite'] = date('d/m/Y', time()) : FALSE;
+		#(!$data['query']['DataProcedimentoLimite']) ? $data['query']['DataProcedimentoLimite'] = date('d/m/Y', time()) : FALSE;
 		
 	   $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
@@ -82,6 +82,8 @@ class Procedimento extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
 
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';			
 
 		$data['collapse'] = 'class="collapse"';
 
@@ -145,7 +147,7 @@ class Procedimento extends CI_Controller {
 			'idApp_Procedimento',
 			'Procedimento',
             #'DataProcedimento',
-			#'DataProcedimentoLimite',
+			'DataProcedimentoLimite',
 			'ConcluidoProcedimento',
 			'Prioridade',
 
@@ -179,6 +181,8 @@ class Procedimento extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';			
 
 		$data['collapse'] = 'class="collapse"';
 
@@ -194,7 +198,7 @@ class Procedimento extends CI_Controller {
 
 
             #$data['query']['DataProcedimento'] = $this->basico->mascara_data($data['query']['DataProcedimento'], 'mysql');
-            #$data['query']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['query']['DataProcedimentoLimite'], 'mysql');
+            $data['query']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['query']['DataProcedimentoLimite'], 'mysql');
 			$data['query']['Procedimento'] = nl2br($data['query']['Procedimento']);
 			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			#$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
@@ -247,13 +251,13 @@ class Procedimento extends CI_Controller {
         ), TRUE));
 
 		(!$data['query']['DataProcedimento']) ? $data['query']['DataProcedimento'] = date('d/m/Y', time()) : FALSE;
-		(!$data['query']['DataProcedimentoLimite']) ? $data['query']['DataProcedimentoLimite'] = date('d/m/Y', time()) : FALSE;
+		#(!$data['query']['DataProcedimentoLimite']) ? $data['query']['DataProcedimentoLimite'] = date('d/m/Y', time()) : FALSE;
 		
 	   $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #$this->form_validation->set_rules('Procedimento', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Procedimento.Procedimento.DataProcedimento.' . $this->basico->mascara_data($data['query']['DataProcedimento'], 'mysql') . ']');
-
-        $this->form_validation->set_rules('DataProcedimento', 'Data de Nascimento', 'trim|valid_date');
+		$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
+        $this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
 
 		
 		$data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
@@ -266,6 +270,8 @@ class Procedimento extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
 
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';		
 
 		$data['collapse'] = 'class="collapse"';
 
@@ -278,8 +284,6 @@ class Procedimento extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('procedimento/form_procedimentocli', $data);
         } else {
-
-			
 
             $data['query']['DataProcedimento'] = $this->basico->mascara_data($data['query']['DataProcedimento'], 'mysql');            
 			$data['query']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['query']['DataProcedimentoLimite'], 'mysql');
@@ -326,6 +330,7 @@ class Procedimento extends CI_Controller {
 
         $data['query'] = $this->input->post(array(
             #'idSis_Usuario',
+			'idApp_Cliente',
 			'idApp_Procedimento',
 			'Procedimento',
             'DataProcedimento',
@@ -357,7 +362,9 @@ class Procedimento extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
-
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+		
 		$data['collapse'] = 'class="collapse"';
 
         $data['nav_secundario'] = $this->load->view('procedimento/nav_secundario', $data, TRUE);
@@ -367,7 +374,7 @@ class Procedimento extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('procedimento/form_procedimento', $data);
+            $this->load->view('procedimento/form_procedimentocli', $data);
         } else {
 
 
@@ -384,7 +391,7 @@ class Procedimento extends CI_Controller {
 
             if ($data['auditoriaitem'] && $this->Procedimento_model->update_procedimento($data['query'], $data['query']['idApp_Procedimento']) === FALSE) {
                 $data['msg'] = '?m=2';
-                redirect(base_url() . 'procedimento/form_procedimento/' . $data['query']['idApp_Procedimento'] . $data['msg']);
+                redirect(base_url() . 'procedimento/form_procedimentocli/' . $data['query']['idApp_Procedimento'] . $data['msg']);
                 exit();
             } else {
 
@@ -439,6 +446,7 @@ class Procedimento extends CI_Controller {
             'idApp_Procedimento',
             'idApp_Cliente',
             'DataProcedimento',
+			'DataProcedimentoLimite',
 			'Procedimento',
 			'ConcluidoProcedimento',
 
@@ -455,7 +463,7 @@ class Procedimento extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### App_Procedimento ####
-        $this->form_validation->set_rules('DataProcedimento', 'Data do Procedimento', 'required|trim|valid_date');
+        $this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
 
 
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
@@ -518,6 +526,7 @@ class Procedimento extends CI_Controller {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_Procedimento ####
             $data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimento'], 'mysql');
+			$data['orcatrata']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimentoLimite'], 'mysql');
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -568,7 +577,8 @@ class Procedimento extends CI_Controller {
 			'idApp_Procedimento',
             #Não há a necessidade de atualizar o valor do campo a seguir
             #'idApp_Cliente',
-            'DataProcedimento',
+            #'DataProcedimento',
+			'DataProcedimentoLimite',
 			'Procedimento',
 			'ConcluidoProcedimento',
 
@@ -578,8 +588,8 @@ class Procedimento extends CI_Controller {
         if ($id) {
             #### App_Procedimento ####
             $data['orcatrata'] = $this->Procedimento_model->get_orcatrata($id);
-            $data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimento'], 'barras');
-
+            #$data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimento'], 'barras');
+			$data['orcatrata']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimentoLimite'], 'barras');
             #### Carrega os dados do cliente nas variáves de sessão ####
             $this->load->model('Cliente_model');
             $_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
@@ -591,7 +601,7 @@ class Procedimento extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### App_Procedimento ####
-        $this->form_validation->set_rules('DataProcedimento', 'Data do Procedimento', 'required|trim|valid_date');
+        $this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
 
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
@@ -649,7 +659,8 @@ class Procedimento extends CI_Controller {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_Procedimento ####
-            $data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimento'], 'mysql');
+            #$data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimento'], 'mysql');
+			$data['orcatrata']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimentoLimite'], 'mysql');
 			#$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             #$data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['id'];
             #$data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];

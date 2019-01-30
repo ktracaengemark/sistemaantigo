@@ -43,18 +43,32 @@
 										</div>
 										<div class="row">
 											<div class="col-md-10">
-												<label for="Procedimento">Tarefa:</label>
+												<label for="Procedimento">Procedimento:</label>
 												<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?>
 														  name="Procedimento"><?php echo $query['Procedimento']; ?></textarea>
 											</div>
 										</div>	
+										<!--
 										<div class="row">	
 											<div class="col-md-6">
-												<label for="DataProcedimento">Data:</label>
+												<label for="DataProcedimento">Dt.Cadastro</label>
 												<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
 													   name="DataProcedimento" placeholder="DD/MM/AAAA" value="<?php echo $query['DataProcedimento']; ?>">
 											</div>
-										</div>	
+										</div>
+										-->
+										<div class="row">	
+											<div class="col-md-6">
+												<label for="DataProcedimentoLimite">Dt.Retorno</label>
+												<div class="input-group <?php echo $datepicker; ?>">
+													<span class="input-group-addon" disabled>
+														<span class="glyphicon glyphicon-calendar"></span>
+													</span>
+													<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
+														   name="DataProcedimentoLimite" placeholder="DD/MM/AAAA" value="<?php echo $query['DataProcedimentoLimite']; ?>">
+												</div>
+											</div>
+										</div>										
 										<div class="row">	
 											<div class="col-md-4">
 												<label for="ConcluidoProcedimento">Concluída</label><br>

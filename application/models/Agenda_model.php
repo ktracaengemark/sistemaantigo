@@ -536,6 +536,7 @@ class Agenda_model extends CI_Model {
 				P.idApp_Procedimento,
                 P.Procedimento,
 				P.DataProcedimento,
+				P.DataProcedimentoLimite,
 				P.ConcluidoProcedimento,
 				P.Prioridade,
 				PR.Prioridade,
@@ -579,6 +580,7 @@ class Agenda_model extends CI_Model {
 
             foreach ($query->result() as $row) {
 				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+				$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
 				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
 
             }
@@ -608,6 +610,7 @@ class Agenda_model extends CI_Model {
 				P.idApp_Procedimento,
                 P.Procedimento,
 				P.DataProcedimento,
+				P.DataProcedimentoLimite,
 				P.ConcluidoProcedimento,
 				SN.StatusSN
             FROM
@@ -649,6 +652,7 @@ class Agenda_model extends CI_Model {
 
             foreach ($query->result() as $row) {
 				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+				$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
 				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
 
             }
