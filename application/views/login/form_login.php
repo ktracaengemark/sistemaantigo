@@ -73,7 +73,7 @@
 				<span class="glyphicon glyphicon-log-in"></span> Acessar Conta Pessoal
 			</a>
 			<a class="btn btn-md btn-info btn-block" href="<?php echo base_url(); ?>login/index2" role="button">
-				<span class="glyphicon glyphicon-log-in"></span> Acessar Conta Usuário
+				<span class="glyphicon glyphicon-log-in"></span> Acessar Conta Empresa
 			</a>
 			<a class="btn btn-md btn-primary btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button">
 				<span class="glyphicon glyphicon-log-in"></span> Acessar Conta Admin.

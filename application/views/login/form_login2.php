@@ -41,7 +41,7 @@
 			<input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
 			<?php echo form_error('Senha'); ?>
 			<input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
-			<button class="btn btn-md btn-info btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Usuário</button>	
+			<button class="btn btn-md btn-info btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Empresa</button>	
 			
 			<!--<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('CelularUsuario'); ?>">Esqueci usuário/senha!</a></p>-->
 			<br>

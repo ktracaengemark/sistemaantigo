@@ -46,7 +46,7 @@
 			<br>
 			<!--<p><a href="<?php echo base_url(); ?>loginempresa/recuperar/?usuario=<?php echo set_value('CelularAdmin'); ?>">Esqueci Admin./senha!</a></p>-->
 			<a class="btn btn  btn-warning btn-block" href="<?php echo base_url(); ?>login/index1" role="button"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Pessoal</a>				
-			<a class="btn btn  btn-info btn-block" href="<?php echo base_url(); ?>login/index2" role="button"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Usuário</a>
+			<a class="btn btn  btn-info btn-block" href="<?php echo base_url(); ?>login/index2" role="button"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Empresa</a>
 			<br>
 			<a class="btn btn-md btn-success btn-block" href="<?php echo base_url(); ?>login/index3" role="button">
 				<span class="glyphicon glyphicon-plus"></span> Cadastrar Nova Conta
