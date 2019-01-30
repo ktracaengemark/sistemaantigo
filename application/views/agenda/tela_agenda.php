@@ -617,11 +617,11 @@
 			</button>
 			<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/alterarprocedempresa" role="button"> 
 				<span class="glyphicon glyphicon-ok"></span> Edit Todas
-			</a>-->										
+			</a>										
 			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>empresacli/cadastrarproc2" role="button"> 
 				<span class="glyphicon glyphicon-plus"></span> Nova
 			</a>	
-		
+			-->
 		</div>
 
 		<div class="modal fade " id="bs-excluir-modal5-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
