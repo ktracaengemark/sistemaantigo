@@ -58,7 +58,7 @@ class Procedimento extends CI_Controller {
 
         ), TRUE));
 
-		(!$data['query']['DataProcedimento']) ? $data['query']['DataProcedimento'] = date('d/m/Y', time()) : FALSE;
+		(!$data['query']['DataProcedimento']) ? $data['query']['DataProcedimento'] = date('d/m/Y H:i:s', time()) : FALSE;
 		#(!$data['query']['DataProcedimentoLimite']) ? $data['query']['DataProcedimentoLimite'] = date('d/m/Y', time()) : FALSE;
 		
 	   $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -99,7 +99,7 @@ class Procedimento extends CI_Controller {
 
 			
 
-            $data['query']['DataProcedimento'] = $this->basico->mascara_data($data['query']['DataProcedimento'], 'mysql');            
+            $data['query']['DataProcedimento'] = $this->basico->mascara_data2($data['query']['DataProcedimento'], 'mysql');            
 			$data['query']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['query']['DataProcedimentoLimite'], 'mysql');
 			$data['query']['Procedimento'] = nl2br($data['query']['Procedimento']);
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -250,7 +250,7 @@ class Procedimento extends CI_Controller {
 
         ), TRUE));
 
-		(!$data['query']['DataProcedimento']) ? $data['query']['DataProcedimento'] = date('d/m/Y', time()) : FALSE;
+		(!$data['query']['DataProcedimento']) ? $data['query']['DataProcedimento'] = date('d/m/Y H:i:s', time()) : FALSE;
 		#(!$data['query']['DataProcedimentoLimite']) ? $data['query']['DataProcedimentoLimite'] = date('d/m/Y', time()) : FALSE;
 		
 	   $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -285,7 +285,7 @@ class Procedimento extends CI_Controller {
             $this->load->view('procedimento/form_procedimentocli', $data);
         } else {
 
-            $data['query']['DataProcedimento'] = $this->basico->mascara_data($data['query']['DataProcedimento'], 'mysql');            
+            $data['query']['DataProcedimento'] = $this->basico->mascara_data2($data['query']['DataProcedimento'], 'mysql');            
 			$data['query']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['query']['DataProcedimentoLimite'], 'mysql');
 			$data['query']['Procedimento'] = nl2br($data['query']['Procedimento']);
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -378,7 +378,7 @@ class Procedimento extends CI_Controller {
         } else {
 
 
-            $data['query']['DataProcedimento'] = $this->basico->mascara_data($data['query']['DataProcedimento'], 'mysql');
+            $data['query']['DataProcedimento'] = $this->basico->mascara_data2($data['query']['DataProcedimento'], 'mysql');
             $data['query']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['query']['DataProcedimentoLimite'], 'mysql');
 			$data['query']['Procedimento'] = nl2br($data['query']['Procedimento']);
 			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -456,7 +456,7 @@ class Procedimento extends CI_Controller {
         //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
 
         //Data de hoje como default
-        (!$data['orcatrata']['DataProcedimento']) ? $data['orcatrata']['DataProcedimento'] = date('d/m/Y', time()) : FALSE;
+        (!$data['orcatrata']['DataProcedimento']) ? $data['orcatrata']['DataProcedimento'] = date('d/m/Y H:i:s', time()) : FALSE;
 
         //Fim do trecho de código que dá pra melhorar
 

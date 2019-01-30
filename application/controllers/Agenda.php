@@ -103,7 +103,7 @@ class Agenda extends CI_Controller {
 
 		$data['select']['Campo'] = array(
 			'P.ConcluidoProcedimento' => 'Concl.',
-			'P.DataProcedimentoLimite' => 'Retorno',
+			'P.DataProcedimentoLimite' => 'Limite/ Retorno',
 			'P.DataProcedimento' => 'Cadastro',
             'P.idApp_Procedimento' => 'id',
         );

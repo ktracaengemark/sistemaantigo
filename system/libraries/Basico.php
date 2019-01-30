@@ -232,7 +232,30 @@ class Basico {
 		#exit($data);
         return $data;
     }
+	
+    function mascara_data2($data, $opcao) {
 
+        if (preg_match("/[0-9]{2,4}(\/|-)[0-9]{2,4}(\/|-)[0-9]{2,4}/", $data)) {
+			
+            if ($opcao == 'barras') {
+                if ($data && $data != '0000-00-00') {
+                    $data = nice_date($data, 'd/m/Y');
+                } else {
+                    $data = '';
+                }
+            } elseif ($opcao == 'mysql') {
+                if ($data) {
+                    $data = DateTime::createFromFormat('d/m/Y H:i:s', $data);
+                    $data = $data->format('Y-m-d H:i:s');
+                } else {
+                    $data = NULL;
+                }
+            }
+        }
+		#exit($data);
+        return $data;
+    }	
+	
     function apenas_numeros($data) {
 
         return preg_replace("/[^0-9]/", "", $data);

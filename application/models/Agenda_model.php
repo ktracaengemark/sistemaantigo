@@ -519,8 +519,8 @@ class Agenda_model extends CI_Model {
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'P.ConcluidoProcedimento' : $data['Campo'];
-        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+        $data['Campo'] = (!$data['Campo']) ? 'P.DataProcedimento' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
 		$filtro4 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Prioridade']) ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
 		$data['ConcluidoProcedimento'] = ($data['ConcluidoProcedimento'] != '') ? ' AND P.ConcluidoProcedimento = ' . $data['ConcluidoProcedimento'] : FALSE;
@@ -558,9 +558,8 @@ class Agenda_model extends CI_Model {
 				' . $data['Procedimento'] . '
 				
             ORDER BY
-                P.ConcluidoProcedimento,
-				P.Prioridade,
-				P.DataProcedimento DESC
+                ' . $data['Campo'] . '
+				' . $data['Ordenamento'] . '
         ');
         /*
 
@@ -596,8 +595,8 @@ class Agenda_model extends CI_Model {
 		$data['Diacli'] = ($data['Diacli']) ? ' AND DAY(P.DataProcedimentoLimite) = ' . $data['Diacli'] : FALSE;
 		$data['Mesvenccli'] = ($data['Mesvenccli']) ? ' AND MONTH(P.DataProcedimentoLimite) = ' . $data['Mesvenccli'] : FALSE;
 		$data['Anocli'] = ($data['Anocli']) ? ' AND YEAR(P.DataProcedimentoLimite) = ' . $data['Anocli'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'P.ConcluidoProcedimento' : $data['Campo'];
-        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+        $data['Campo'] = (!$data['Campo']) ? 'P.DataProcedimento' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
 		$filtro4 = ($data['Concluidocli']) ? 'P.ConcluidoProcedimento = "' . $data['Concluidocli'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('
