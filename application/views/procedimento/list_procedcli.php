@@ -107,7 +107,7 @@
 									<div class="btn-group" role="group" aria-label="..."> </div>
 								</li>
 								<?php } ?>
-								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
 										<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
@@ -152,15 +152,15 @@
 
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs" role="tablist">
-									<li role="presentation" class="active" ><a href="#proxima" aria-controls="proxima" role="tab" data-toggle="tab">Realizados</a></li>
-									<li role="presentation" ><a href="#anterior" aria-controls="anterior" role="tab" data-toggle="tab">Não Realizados</a></li>
+									<li role="presentation"><a href="#proxima" aria-controls="proxima" role="tab" data-toggle="tab">Realizados</a></li>
+									<li role="presentation" class="active"><a href="#anterior" aria-controls="anterior" role="tab" data-toggle="tab">Não Realizados</a></li>
 								</ul>
 
 								<!-- Tab panes -->
 								<div class="tab-content">
 
 									<!-- Próximas Consultas -->
-									<div role="tabpanel" class="tab-pane active " id="proxima">
+									<div role="tabpanel" class="tab-pane " id="proxima">
 
 										<?php
 										if ($aprovado) {
@@ -183,26 +183,31 @@
 											<br><br>
 
 											<h4>
-												<span class="glyphicon glyphicon-tags"></span> <b>Nº Orç.:</b> <?php echo $row['idApp_Procedimento']; ?>
+												<span class="glyphicon glyphicon-tags"></span> <b>Procd.:</b> <?php echo $row['idApp_Procedimento']; ?>
 											</h4>
 											<br>
 											<p>
 												
+												<?php if ($row['DataProcedimentoLimite']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Retorno</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php } ?>
+
+											</p>											
+											<p>
+												
 												<?php if ($row['DataProcedimento']) { ?>
-												<span class="glyphicon glyphicon-calendar"></span> <b>Dt. Orç.</b> <?php echo $row['DataProcedimento']; ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Cadastro</b> <?php echo $row['DataProcedimento']; ?>
 												<?php } ?>
 
 											</p>
 											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Procedimento:</b> <?php echo nl2br($row['Procedimento']); ?>
+											</p>
+											<p>
 												<?php if ($row['ConcluidoProcedimento']) { ?>
-												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concl.?</b> <?php echo $row['ConcluidoProcedimento']; ?> -
+												<span class="glyphicon glyphicon-ok"></span> <b>Concluído:</b> <?php echo $row['ConcluidoProcedimento']; ?>
 												<?php }?>
 											</p>
-											
-											<p>
-												<span class="glyphicon glyphicon-pencil"></span> <b>Obs:</b> <?php echo nl2br($row['Procedimento']); ?>
-											</p>
-
 										</div>
 
 										<?php
@@ -215,7 +220,7 @@
 									</div>
 
 									<!-- Histórico de Consultas -->
-									<div role="tabpanel" class="tab-pane " id="anterior">
+									<div role="tabpanel" class="tab-pane active" id="anterior">
 
 										<?php
 										if ($naoaprovado) {
@@ -236,26 +241,31 @@
 											<br><br>
 
 											<h4>
-												<span class="glyphicon glyphicon-tags"></span> <b>Nº Orç.:</b> <?php echo $row['idApp_Procedimento']; ?>
+												<span class="glyphicon glyphicon-tags"></span> <b>Procd.:</b> <?php echo $row['idApp_Procedimento']; ?>
 											</h4>
 											<br>
 											<p>
 												
+												<?php if ($row['DataProcedimentoLimite']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Retorno</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php } ?>
+
+											</p>											
+											<p>
+												
 												<?php if ($row['DataProcedimento']) { ?>
-												<span class="glyphicon glyphicon-calendar"></span> <b>Dt. Orç.</b> <?php echo $row['DataProcedimento']; ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Cadastro</b> <?php echo $row['DataProcedimento']; ?>
 												<?php } ?>
 
 											</p>
 											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Procedimento:</b> <?php echo nl2br($row['Procedimento']); ?>
+											</p>
+											<p>
 												<?php if ($row['ConcluidoProcedimento']) { ?>
-												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concl.?</b> <?php echo $row['ConcluidoProcedimento']; ?> -
+												<span class="glyphicon glyphicon-ok"></span> <b>Concluído:</b> <?php echo $row['ConcluidoProcedimento']; ?>
 												<?php }?>
 											</p>
-											
-											<p>
-												<span class="glyphicon glyphicon-pencil"></span> <b>Obs:</b> <?php echo nl2br($row['Procedimento']); ?>
-											</p>
-
 										</div>
 
 										<?php

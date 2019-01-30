@@ -98,6 +98,7 @@ class Procedimento_model extends CI_Model {
                 #. 'DataProcedimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
                 #. 'Procedimento like "%' . $data . '%" OR '
                 . 'DataProcedimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
+				. 'DataProcedimentoLimite = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
                 . 'Telefone1 like "%' . $data . '%" OR Telefone2 like "%' . $data . '%" OR Telefone3 like "%' . $data . '%") '
                 . 'ORDER BY Procedimento ASC ');
         /*
@@ -115,6 +116,7 @@ class Procedimento_model extends CI_Model {
             } else {
                 foreach ($query->result() as $row) {
                     $row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
                 }
 
                 return $query;
@@ -196,6 +198,7 @@ class Procedimento_model extends CI_Model {
         $query = $this->db->query('SELECT '
             . 'OT.idApp_Procedimento, '
             . 'OT.DataProcedimento, '
+			. 'OT.DataProcedimentoLimite, '
 			. 'OT.ConcluidoProcedimento, '
             . 'OT.Procedimento '
             . 'FROM '
@@ -222,6 +225,7 @@ class Procedimento_model extends CI_Model {
 
                 foreach ($query->result() as $row) {
 					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
 					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
                 }
                 return $query;

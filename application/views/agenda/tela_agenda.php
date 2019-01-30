@@ -224,7 +224,7 @@
 	</div>
 	
 
-	<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+	<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 			
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
