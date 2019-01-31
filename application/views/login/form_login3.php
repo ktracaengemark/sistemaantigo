@@ -78,8 +78,9 @@
 			<br>
 			<a class="btn btn-md btn-info btn-block" href="<?php echo base_url(); ?>login/index" role="button">
 				<span class="glyphicon glyphicon-log-in"></span> Acessar Contas Cad. 
-			</a>			
-			<a class="btn btn-md btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
+			</a>
+			<br>
+			<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
 				<span class="glyphicon glyphicon-search"></span> Produtos & Serviços
 			</a>
 		</div>

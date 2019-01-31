@@ -13,18 +13,16 @@
 		<div class="collapse navbar-collapse" id="myNavbar1">
 
 			<ul class="nav navbar-nav navbar-center">				
-				<!--
+				
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
-						<a href="<?php echo base_url(); ?>relatorioempresa/funcionario">
-							<button type="button" class="btn btn-md btn-primary ">
-								<span class="glyphicon glyphicon-user"></span> Usuarios
+						<a href="<?php echo base_url(); ?>relatorioempresa/login">
+							<button type="button" class="btn btn-sm btn-info ">
+								<span class="glyphicon glyphicon-log-in"></span> Acesso Empresa
 							</button>
 						</a>
 					</div>
-				</li>
-				-->
-				<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
+
 					<div class="btn-group">
 						<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
 							<span class="glyphicon glyphicon-home"></span> enkontraki <span class="caret"></span>
@@ -37,29 +35,27 @@
 					</div>
 				</li>
 				
-				<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1)) { ?>
-					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
-						<div class="btn-group" role="group" aria-label="...">
-							<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa"> 	
-								<button type="button" class="btn btn-sm active "> Renovar em 
-									<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
-								</button>
-							</a>	
-						</div>
-					</li>
-				<?php } else {?>
-					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
-						<div class="btn-group" role="group" aria-label="...">
-							<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa"> 	
-								<button type="button" class="btn btn-sm active "> Renovar Assinatura 
-									
-								</button>
-							</a>	
-						</div>
-					</li>
-				<?php } ?>
-				
-				<li class="btn-toolbar navbar-form navbar-right" role="toolbar" aria-label="...">
+				<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
+					
+					<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1)) { ?>
+					<div class="btn-group" role="group" aria-label="...">
+						<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa"> 	
+							<button type="button" class="btn btn-sm active "> Renovar em 
+								<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
+							</button>
+						</a>	
+					</div>
+
+					<?php } else {?>
+					<div class="btn-group" role="group" aria-label="...">
+						<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa"> 	
+							<button type="button" class="btn btn-sm active "> Renovar Assinatura 
+								
+							</button>
+						</a>	
+					</div>
+					<?php } ?>
+
 					<div class="btn-group" role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>login/sair">
 							<button type="button" class="btn btn-sm btn-danger ">

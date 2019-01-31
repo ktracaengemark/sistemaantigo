@@ -12,9 +12,9 @@
 
     <?php if ($aviso) echo $aviso; ?>
 
-    <a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>loginempresa/index" role="button">
+    <a class="btn btn-lg btn-primary" href="<?php echo base_url(); ?>login/index2" role="button">
     <!--<a class="btn btn-lg btn-primary" href="<?php echo base_url() . $_SESSION['log']['modulo']; ?>">-->
-        <span class="glyphicon glyphicon-home"></span> Login do Administrador
+        <span class="glyphicon glyphicon-home"></span> Acessar Empresa
     </a>
 
 </div>

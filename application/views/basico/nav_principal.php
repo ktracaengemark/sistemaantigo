@@ -50,11 +50,7 @@
 								</a>
 							</div>
 							
-						</li>
-						
-
-						<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
-						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
+							<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/clientes">
 									<button type="button" class="btn btn-sm btn-success ">
@@ -62,10 +58,8 @@
 									</button>
 								</a>
 							</div>
-							
+							<?php } ?>
 						</li>
-						<?php } ?>
-						
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
@@ -80,9 +74,7 @@
 								</ul>
 							</div>
 							
-						</li>
-						
-						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
+
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
 									<span class="glyphicon glyphicon-home"></span> enkontraki <span class="caret"></span>
@@ -103,30 +95,26 @@
 							</div>
 							
 						</li>
-						
-						<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) && ($_SESSION['log']['idSis_Empresa'] != 5))  { ?>
-							<li class="btn-toolbar btn-sm navbar-form navbar-left" role="toolbar" aria-label="...">
-								<div class="btn-group" role="group" aria-label="...">
-									<a href="<?php echo base_url(); ?>loginempresa/index"> 	
-										<button type="button" class="btn btn-sm active "> Renovar em 
-											<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
-										</button>
-									</a>	
-								</div>
-							</li>
-						<?php } else if ($_SESSION['log']['idSis_Empresa'] != 5){?>
-							<li class="btn-toolbar btn-sm navbar-form navbar-left" role="toolbar" aria-label="...">
-								<div class="btn-group" role="group" aria-label="...">
-									<a href="<?php echo base_url(); ?>loginempresa/index"> 	
-										<button type="button" class="btn btn-sm active "> Renovar Assinatura 
-											
-										</button>
-									</a>	
-								</div>
-							</li>
-						<?php } ?>	
-						
-						<li class="btn-toolbar btn-sm navbar-form navbar-right" role="toolbar" aria-label="...">
+						<li class="btn-toolbar btn-sm navbar-form navbar-left" role="toolbar" aria-label="...">
+							
+							<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) && ($_SESSION['log']['idSis_Empresa'] != 5))  { ?>
+							<div class="btn-group" role="group" aria-label="...">
+								<a href="<?php echo base_url(); ?>relatorio/loginempresa"> 	
+									<button type="button" class="btn btn-sm active ">Acesso Admin-Renovar em 
+										<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
+									</button>
+								</a>	
+							</div>
+							<?php } else if ($_SESSION['log']['idSis_Empresa'] != 5){?>
+							<div class="btn-group" role="group" aria-label="...">
+								<a href="<?php echo base_url(); ?>relatorio/loginempresa"> 	
+									<button type="button" class="btn btn-sm active ">Acesso Admin-Renovar Assinatura 
+										
+									</button>
+								</a>	
+							</div>
+							<?php } ?>
+							
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>login/sair">
 									<button type="button" class="btn btn-sm btn-danger ">
@@ -134,9 +122,7 @@
 									</button>
 								</a>
 							</div>
-							
 						</li>
-
 					</ul>
 				</div>			
 			</div>
