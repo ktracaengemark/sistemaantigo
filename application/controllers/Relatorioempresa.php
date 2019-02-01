@@ -260,7 +260,7 @@ class Relatorioempresa extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-        $data['titulo1'] = 'Manuteção';
+        $data['titulo1'] = 'Assinatura';
 		$data['titulo2'] = 'Comissão';
 
         #run form validation
