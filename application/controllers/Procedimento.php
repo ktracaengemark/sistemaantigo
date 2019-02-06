@@ -525,7 +525,7 @@ class Procedimento extends CI_Controller {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_Procedimento ####
-            $data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimento'], 'mysql');
+            $data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data2($data['orcatrata']['DataProcedimento'], 'mysql');
 			$data['orcatrata']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimentoLimite'], 'mysql');
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['id'];
