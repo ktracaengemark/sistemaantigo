@@ -558,8 +558,11 @@ class Agenda_model extends CI_Model {
 				' . $data['Procedimento'] . '
 				
             ORDER BY
-                ' . $data['Campo'] . '
+                P.ConcluidoProcedimento ASC,
+				' . $data['Campo'] . '
 				' . $data['Ordenamento'] . '
+				
+				
         ');
         /*
 
@@ -630,7 +633,8 @@ class Agenda_model extends CI_Model {
 				' . $data['Anocli'] . ' 
 				
             ORDER BY
-                ' . $data['Campo'] . '
+                P.ConcluidoProcedimento ASC,
+				' . $data['Campo'] . '
 				' . $data['Ordenamento'] . '
         ');
         /*

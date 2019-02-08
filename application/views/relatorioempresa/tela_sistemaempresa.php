@@ -25,7 +25,7 @@
 													<strong>R$ 150,00</strong> (Revista Eletrônica + Site Institucional + Sistema de Gestão)
 													<!-- 50 reais -->
 													<!-- INICIO FORMULARIO BOTAO PAGSEGURO: NAO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
-													<form action="https://pagseguro.uol.com.br/pre-approvals/request.html" method="post">
+													<form action="https://pagseguro.uol.com.br/pre-approvals/request.html" method="post" target="_blank">
 													<input type="hidden" name="code" value="328946EA6767207884D9EFAE1FD3D366" />
 													<input type="hidden" name="iot" value="button" />
 													<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/assinaturas/120x53-assinar.gif" name="submit" alt="Pague com PagSeguro - É rápido, grátis e seguro!" width="120" height="53" />

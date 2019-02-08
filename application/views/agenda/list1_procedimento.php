@@ -14,12 +14,13 @@
 					<thead>
 						<tr>
 							<!--<th class="active">Filt.</th>-->
+							<th class="active">Edit</th>
 							<th class="active">Pri.</th>
 							<th class="active">Cnl.</th>
 							<th class="active">Tarefa</th>
 							<th class="active">Limite</th>
-							<th class="active">Edit</th>
-							<!--<th class="active">Excl</th>
+							<!--
+							<th class="active">Excl</th>
 							<th class="active">Data</th>-->
 						</tr>
 					</thead>
@@ -31,7 +32,7 @@
 
 							#echo '<tr>';
 							#echo '<tr class="clickable-row" data-href="' . base_url() . 'procedimento/alterar/' . $row['idApp_Procedimento'] . '">';
-							echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarprocedimento/' . $row['idSis_Empresa'] . '">';
+							#echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarprocedimento/' . $row['idSis_Empresa'] . '">';
 
 								/*
 									echo '<td class="notclickable">
@@ -39,17 +40,17 @@
 											<span class="glyphicon glyphicon-edit notclickable"></span>
 										</a>
 									</td>';
-								*/	
-								echo '<td>' . $row['Prioridade'] . '</td>';
-								echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
-								echo '<td>' . $row['Procedimento'] . '</td>';
-								echo '<td>' . $row['DataProcedimentoLimite'] . '</td>';
-								#echo '<td>' . $row['DataProcedimento'] . '</td>';
+								*/
 								echo '<td class="notclickable">
 										<a class="btn btn-md btn-primary notclickable" href="' . base_url() . 'procedimento/alterar/' . $row['idApp_Procedimento'] . '">
 											<span class="glyphicon glyphicon-edit notclickable"></span>
 										</a>
 									</td>';								
+								echo '<td>' . $row['Prioridade'] . '</td>';
+								echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
+								echo '<td>' . $row['Procedimento'] . '</td>';
+								echo '<td>' . $row['DataProcedimentoLimite'] . '</td>';
+								#echo '<td>' . $row['DataProcedimento'] . '</td>';
 								/*
 								echo '<td class="notclickable">
 										<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'procedimento/excluir/' . $row['idApp_Procedimento'] . '">

@@ -599,40 +599,26 @@ class Basico_model extends CI_Model {
         }
     }	
 	
-	public function select_cliente($data = FALSE) {
+    public function select_cliente() {
 
-        if ($data === TRUE) {
-            $array = $this->db->query(					
-				'SELECT                
-				idApp_Cliente,
-				CONCAT(IFNULL(NomeCliente, ""), " --- ", IFNULL(Telefone1, ""), " --- ", IFNULL(Telefone2, ""), " --- ", IFNULL(Telefone3, "")) As NomeCliente				
+        $query = $this->db->query('
+            SELECT
+                C.idApp_Cliente,
+                CONCAT(IFNULL(C.NomeCliente, ""), " --- ", IFNULL(C.CelularCliente, ""), " --- ", IFNULL(C.Telefone2, ""), " --- ", IFNULL(C.Telefone3, "")) As NomeCliente
             FROM
-                App_Cliente					
+                App_Cliente AS C
+
             WHERE
-                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
-			ORDER BY 
-				NomeCliente ASC'
-    );
-					
-        } else {
-            $query = $this->db->query(
-                'SELECT                
-				idApp_Cliente,
-				CONCAT(IFNULL(NomeCliente, ""), " --- ", IFNULL(Telefone1, ""), " --- ", IFNULL(Telefone2, ""), " --- ", IFNULL(Telefone3, "")) As NomeCliente				
-            FROM
-                App_Cliente					
-            WHERE
-                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
-			ORDER BY 
-				NomeCliente ASC'
-    );
-            
-            $array = array();
-            foreach ($query->result() as $row) {
-                $array[$row->idApp_Cliente] = $row->NomeCliente;
-            }
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+            ORDER BY
+                C.NomeCliente ASC
+        ');
+
+        $array = array();
+        $array[0] = 'TODOS';
+        foreach ($query->result() as $row) {
+			$array[$row->idApp_Cliente] = $row->NomeCliente;
         }
 
         return $array;

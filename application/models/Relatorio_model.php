@@ -1073,6 +1073,7 @@ class Relatorio_model extends CI_Model {
         }
 		
 		#$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
+        $data['NomeCliente'] = (($_SESSION['log']['idSis_Empresa'] != 5) && ($data['NomeCliente'])) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;		
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
@@ -1132,7 +1133,8 @@ class Relatorio_model extends CI_Model {
 				' . $data['Orcarec'] . '
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
-				' . $data['Ano'] . ' 
+				' . $data['Ano'] . '
+				' . $data['NomeCliente'] . '				
             ORDER BY
 				PR.DataVencimento
 		');
@@ -1145,7 +1147,8 @@ class Relatorio_model extends CI_Model {
                 PR.ValorParcela
             FROM
                 App_OrcaTrata AS OT
-                    LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
             WHERE
@@ -1160,7 +1163,8 @@ class Relatorio_model extends CI_Model {
 				' . $data['Orcarec'] . '                
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
-				' . $data['Ano'] . '				
+				' . $data['Ano'] . '
+				' . $data['NomeCliente'] . '				
  				
         ');			
 		$parcelasrecebidas = $parcelasrecebidas->result();		

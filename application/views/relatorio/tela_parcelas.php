@@ -9,13 +9,19 @@
 			<?php echo form_open('relatorio/parcelas', 'role="form"'); ?>
 			
 			<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal11-sm">
-				<span class="glyphicon glyphicon-plus"></span><?php echo $titulo1; ?>
+				<span class="glyphicon glyphicon-plus"></span> Nova
 			</button>			
-			<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+			
+			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo1; ?>
-			</button>											
-			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
-				<span class="glyphicon glyphicon-search"></span>Receitas
+			</button>
+			<a href="<?php echo base_url() . 'orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa']; ?>">
+				<button type="button" class="btn btn-sm btn-info">
+					<span class="glyphicon glyphicon-edit"></span>
+				</button>
+			</a>			
+			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
+				<span class="glyphicon glyphicon-search"></span> <?php echo $titulo1; ?>
 			</a>
 
 		</div>
@@ -151,7 +157,7 @@
 							<div class="row">
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
-										<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
+										<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
 											<span class="glyphicon glyphicon-filter"></span> Filtrar
 										</button>
 									</div>
@@ -202,12 +208,29 @@
 										?>
 									</select>
 								</div>
+								<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+								<div class="col-md-3 text-left">
+									<label for="Ordenamento">Nome do Cliente:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="NomeCliente" name="NomeCliente">
+										<?php
+										foreach ($select['NomeCliente'] as $key => $row) {
+											if ($query['NomeCliente'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								<?php } ?>									
 							</div>
 							<br>
 							<div class="row">
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
-										<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
+										<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
 											<span class="glyphicon glyphicon-filter"></span> Filtrar
 										</button>
 									</div>
@@ -244,15 +267,19 @@
 
 		<div class="panel-heading">
 			<?php echo form_open('relatorio/parcelas', 'role="form"'); ?>
-
 			<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal13-sm">
-				<span class="glyphicon glyphicon-plus"></span><?php echo $titulo2; ?>
-			</button>			
-			<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
+				<span class="glyphicon glyphicon-plus"></span>Nova
+			</button>
+			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo2; ?>
-			</button>											
-			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
-				<span class="glyphicon glyphicon-search"></span>Despesas
+			</button>
+			<a href="<?php echo base_url() . 'orcatrata/alterarparceladesp/' . $_SESSION['log']['idSis_Empresa']; ?>">
+				<button type="button" class="btn btn-sm btn-info">
+					<span class="glyphicon glyphicon-edit"></span>
+				</button>
+			</a>			
+			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
+				<span class="glyphicon glyphicon-search"></span><?php echo $titulo2; ?>
 			</a>
 
 		</div>
@@ -389,7 +416,7 @@
 							<div class="row">
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
-										<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
+										<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
 											<span class="glyphicon glyphicon-filter"></span> Filtrar
 										</button>
 									</div>
@@ -445,7 +472,7 @@
 							<div class="row">
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
-										<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
+										<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
 											<span class="glyphicon glyphicon-filter"></span> Filtrar
 										</button>
 									</div>
