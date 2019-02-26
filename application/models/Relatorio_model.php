@@ -1734,7 +1734,41 @@ class Relatorio_model extends CI_Model {
 
         #$query['RecPago'] = $query['RecPago']->result_array();
         $query['RecPago'] = $query['RecPago']->result();
-        $query['RecPago'][0]->Balancopago = 'Rec.Real';
+        $query['RecPago'][0]->Balancopago = 'Recebeu';
+
+        ####################################################################
+        #SOMATÓRIO DAS RECEITAS À Pagar DO ANO
+        $somareceitaspagar='';
+        for ($i=1;$i<=12;$i++){
+            $somareceitaspagar .= 'SUM(IF(PR.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
+        }
+        $somareceitaspagar = substr($somareceitaspagar, 0 ,-2);
+		
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+        
+		$query['RecPagar'] = $this->db->query(
+        #$receitas = $this->db->query(
+            'SELECT
+				' . $somareceitaspagar . '
+            FROM
+
+                App_OrcaTrata AS OT
+                    LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
+					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+            WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $permissao . '
+				OT.idTab_TipoRD = "2" AND
+				PR.idTab_TipoRD = "2" AND
+				PR.Quitado = "N" AND
+            	YEAR(PR.DataVencimento) = ' . $data['Ano']
+        );
+
+        #$query['RecPagar'] = $query['RecPagar']->result_array();
+        $query['RecPagar'] = $query['RecPagar']->result();
+        $query['RecPagar'][0]->Balancopagar = 'Receber';
 		
         ####################################################################
         #SOMATÓRIO DAS RECEITAS Venc. DO ANO
@@ -1800,8 +1834,41 @@ class Relatorio_model extends CI_Model {
 
         #$query['DesPago'] = $query['DesPago']->result_array();
         $query['DesPago'] = $query['DesPago']->result();
-        $query['DesPago'][0]->Balancopago = 'Desp.Real';
+        $query['DesPago'][0]->Balancopago = 'Pagou';
 
+        ####################################################################
+        #SOMATÓRIO DAS DESPESAS À PAGAR DO ANO
+        $somadespesaspagar='';
+        for ($i=1;$i<=12;$i++){
+            $somadespesaspagar .= 'SUM(IF(PP.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PP.ValorParcela, 0)) AS M' . $i . ', ';
+        }
+        $somadespesaspagar = substr($somadespesaspagar, 0 ,-2);
+
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		
+        $query['DesPagar'] = $this->db->query(
+        #$despesas = $this->db->query(
+            'SELECT
+                ' . $somadespesaspagar . '
+            FROM
+                App_OrcaTrata AS OT
+                    LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
+					LEFT JOIN App_Parcelas AS PP ON OT.idApp_OrcaTrata = PP.idApp_OrcaTrata
+            WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $permissao . '
+				OT.idTab_TipoRD = "1" AND
+				PP.idTab_TipoRD = "1" AND
+				PP.Quitado = "N" AND				
+            	YEAR(PP.DataVencimento) = ' . $data['Ano']
+        );
+
+        #$query['DesPagar'] = $query['DesPagar']->result_array();
+        $query['DesPagar'] = $query['DesPagar']->result();
+        $query['DesPagar'][0]->Balancopagar = 'Pagar';
+		
         ####################################################################
         #SOMATÓRIO DAS DESPESAS Venc DO ANO
         $somadespesasvenc='';
@@ -1845,13 +1912,19 @@ class Relatorio_model extends CI_Model {
 		$query['RecVenc'][0]->BalancoResRec = 'RecVenc';
 		#$query['RecPago'] = $query['RecPago']->result();
 		$query['RecPago'][0]->BalancoResRec = 'RecPago';
+		#$query['RecPagar'] = $query['RecPagar']->result();
+		$query['RecPagar'][0]->BalancoResRec = 'RecPagar';		
 		#$query['DesVenc'] = $query['DesVenc']->result();
 		$query['DesVenc'][0]->BalancoResDes = 'DesVenc';
 		#$query['DesPago'] = $query['DesPago']->result();
 		$query['DesPago'][0]->BalancoResDes = 'DesPago';
+		#$query['DesPagar'] = $query['DesPagar']->result();
+		$query['DesPagar'][0]->BalancoResDes = 'DesPagar';		
 		
         $query['TotalPago'] = new stdClass();
         $query['TotalGeralpago'] = new stdClass();
+        $query['TotalPagar'] = new stdClass();
+        $query['TotalGeralpagar'] = new stdClass();		
         $query['TotalVenc'] = new stdClass();
         $query['TotalGeralvenc'] = new stdClass();
 		$query['TotalResRec'] = new stdClass();
@@ -1859,8 +1932,10 @@ class Relatorio_model extends CI_Model {
 		$query['TotalResDes'] = new stdClass();
         $query['TotalGeralResDes'] = new stdClass();
 		
-        $query['TotalPago']->Balancopago = 'Bal.Real';
+        $query['TotalPago']->Balancopago = 'Balanço';
         $query['TotalGeralpago']->RecPago = $query['TotalGeralpago']->DesPago = $query['TotalGeralpago']->BalancoGeralpago = 0;
+        $query['TotalPagar']->Balancopagar = 'Bal.Pagar';
+        $query['TotalGeralpagar']->RecPagar = $query['TotalGeralpagar']->DesPagar = $query['TotalGeralpagar']->BalancoGeralpagar = 0;		
         $query['TotalVenc']->Balancovenc = 'Bal.Esp';
         $query['TotalGeralvenc']->RecVenc = $query['TotalGeralvenc']->DesVenc = $query['TotalGeralvenc']->BalancoGeralvenc = 0;
 		$query['TotalResRec']->BalancoResRec = 'TotalResRec';
@@ -1899,6 +1974,22 @@ class Relatorio_model extends CI_Model {
         $query['TotalGeralpago']->RecPago = number_format($query['TotalGeralpago']->RecPago, 2, ',', '.');
 		$query['TotalGeralpago']->DesPago = number_format($query['TotalGeralpago']->DesPago, 2, ',', '.');
         $query['TotalGeralpago']->BalancoGeralpago = number_format($query['TotalGeralpago']->BalancoGeralpago, 2, ',', '.');
+		
+        for ($i=1;$i<=12;$i++) {
+            $query['TotalPagar']->{'M'.$i} = $query['RecPagar'][0]->{'M'.$i} - $query['DesPagar'][0]->{'M'.$i};
+
+            $query['TotalGeralpagar']->RecPagar += $query['RecPagar'][0]->{'M'.$i};
+            $query['TotalGeralpagar']->DesPagar += $query['DesPagar'][0]->{'M'.$i};
+
+            $query['RecPagar'][0]->{'M'.$i} = number_format($query['RecPagar'][0]->{'M'.$i}, 2, ',', '.');
+			$query['DesPagar'][0]->{'M'.$i} = number_format($query['DesPagar'][0]->{'M'.$i}, 2, ',', '.');
+            $query['TotalPagar']->{'M'.$i} = number_format($query['TotalPagar']->{'M'.$i}, 2, ',', '.');
+        }		
+        $query['TotalGeralpagar']->BalancoGeralpagar = $query['TotalGeralpagar']->RecPagar - $query['TotalGeralpagar']->DesPagar;
+
+        $query['TotalGeralpagar']->RecPagar = number_format($query['TotalGeralpagar']->RecPagar, 2, ',', '.');
+		$query['TotalGeralpagar']->DesPagar = number_format($query['TotalGeralpagar']->DesPagar, 2, ',', '.');
+        $query['TotalGeralpagar']->BalancoGeralpagar = number_format($query['TotalGeralpagar']->BalancoGeralpagar, 2, ',', '.');		
 
         for ($i=1;$i<=12;$i++) {
             $query['TotalResRec']->{'M'.$i} = $query['RecVenc'][0]->{'M'.$i} - $query['RecPago'][0]->{'M'.$i};
