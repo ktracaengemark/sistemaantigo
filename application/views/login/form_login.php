@@ -97,24 +97,24 @@
 	<div class="row">
 		<div class="col-md-6 col-sm-3 col-xs-6">
 		  <div class="thumbnail"> 
-			<a href="https://www.enkontraki.com/espmmoda" target="_blank"><img src="<?php echo base_url() . 'arquivos/imagens/patroc/profile-43.png'; ?>" alt="..." class="team-img"><h5>Mãos a Moda</h5></a>
+			<a href="https://www.enkontraki.com/passareladoslanches" target="_blank"><img src="<?php echo base_url() . 'arquivos/imagens/patroc/profile-37.jpg'; ?>" alt="..." class="team-img"><h5>Passarela dos Lanches</h5></a>
 		  </div>
 		</div>
 		<div class="col-md-6 col-sm-3 col-xs-6">
 		  <div class="thumbnail"> 
-			<a href="https://www.enkontraki.com/npastor" target="_blank"><img src="<?php echo base_url() . 'arquivos/imagens/patroc/profile-44.png'; ?>" alt="..." class="team-img"><h5>NPastor Advog.</h5></a>
+			<a href="https://www.enkontraki.com/npastor" target="_blank"><img src="<?php echo base_url() . 'arquivos/imagens/patroc/profile-44.jpg'; ?>" alt="..." class="team-img"><h5>NPastor Advogados</h5></a>
 		  </div>
 		</div>				
 	</div>
 	<div class="row">
 		<div class="col-md-6 col-sm-3 col-xs-6">
 		  <div class="thumbnail"> 
-			<a href="https://www.enkontraki.com/agevet" target="_blank"><img src="<?php echo base_url() . 'arquivos/imagens/patroc/profile-7.png'; ?>" alt="..." class="team-img"><h5>AgeVet</h5></a>
+			<a href="https://www.enkontraki.com/espmmoda" target="_blank"><img src="<?php echo base_url() . 'arquivos/imagens/patroc/profile-43.jpg'; ?>" alt="..." class="team-img"><h5>Mãos a Moda</h5></a>
 		  </div>
 		</div>
 		<div class="col-md-6 col-sm-3 col-xs-6">
 		  <div class="thumbnail"> 
-			<a href="https://www.enkontraki.com/elefantax" target="_blank"><img src="<?php echo base_url() . 'arquivos/imagens/patroc/profile-33.png'; ?>" alt="..." class="team-img"><h5>Elefantax</h5></a>
+			<a href="https://www.enkontraki.com/elefantax" target="_blank"><img src="<?php echo base_url() . 'arquivos/imagens/patroc/profile-33.jpg'; ?>" alt="..." class="team-img"><h5>Elefantax</h5></a>
 		  </div>
 		</div>			
 	</div>
