@@ -40,13 +40,13 @@
 		<div class="panel-heading">
 			
 			<?php echo form_open('agenda', 'role="form"'); ?>
-			<!--
+			
 			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
 				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo1; ?> 
 			</div>
-			-->
+			
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-				<span class="glyphicon glyphicon-filter"></span> Filtrar Tarefas
+				<span class="glyphicon glyphicon-filter"></span>Filtrar
 			</button>
 			<a href="<?php echo base_url() . 'orcatrata/alterarprocedimento/' . $_SESSION['log']['idSis_Empresa']; ?>">
 				<button type="button" class="btn btn-sm btn-info">
@@ -57,7 +57,7 @@
 				<span class="glyphicon glyphicon-ok"></span> Edit Todas
 			</a>-->											
 			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>procedimento/cadastrar" role="button"> 
-				<span class="glyphicon glyphicon-plus"></span> Nova Tarefa
+				<span class="glyphicon glyphicon-plus"></span>Nova
 			</a>
 		
 		</div>
@@ -246,7 +246,12 @@
 			</button>
 			<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/alterarprocedimento" role="button"> 
 				<span class="glyphicon glyphicon-ok"></span> Edit Todas
-			</a>-->											
+			</a>-->
+			<a href="<?php echo base_url() . 'orcatrata/alterarprocedimentocli/' . $_SESSION['log']['idSis_Empresa']; ?>">
+				<button type="button" class="btn btn-sm btn-info">
+					<span class="glyphicon glyphicon-edit"></span>
+				</button>
+			</a>			
 			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>procedimento/cadastrarcli" role="button"> 
 				<span class="glyphicon glyphicon-plus"></span> Novo
 			</a>
