@@ -102,7 +102,7 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 
-    'hostname' => '159.203.125.243',
+    'hostname' => '206.81.1.38',
 	'username' => 'usuario',
 	'password' => '20UtpJ15',
 /*
