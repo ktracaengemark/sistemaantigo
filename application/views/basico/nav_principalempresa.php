@@ -23,9 +23,9 @@
 						</a>
 					</div>
 					<div class="btn-group " role="group" aria-label="...">
-						<a href="<?php echo base_url(); ?>loginempresa/registrar2">
+						<a href="<?php echo base_url(); ?>relatorioempresa/associado">
 							<button type="button" class="btn btn-sm btn-warning ">
-								<span class="glyphicon glyphicon-plus"></span> Cad.Indicação
+								<span class="glyphicon glyphicon-plus"></span> Indicações
 							</button>
 						</a>
 					</div>
