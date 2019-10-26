@@ -61,18 +61,26 @@
 							<?php } ?>
 						</li>
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
-							<div class="btn-group">
+							
+							<div class="btn-group " role="group" aria-label="...">
+								<a href="<?php echo base_url(); ?>relatorio/parcelas">
+									<button type="button" class="btn btn-sm btn-warning ">
+										<span class="glyphicon glyphicon-usd"></span> Finanças
+									</button>
+								</a>
+							</div>							
+							<!--<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
 									<span class="glyphicon glyphicon-usd"></span> Finanças <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
 									<li><a href="<?php echo base_url() ?>relatorio/parcelas"><span class="glyphicon glyphicon-pencil"></span> Receitas & Despesas</a></li>
 									<li role="separator" class="divider"></li>							
-									<!--<li><a href="<?php echo base_url() ?>relatorio/despesas"><span class="glyphicon glyphicon-pencil"></span> Despesas</a></li>
-									<li role="separator" class="divider"></li>-->
+									<li><a href="<?php echo base_url() ?>relatorio/despesas"><span class="glyphicon glyphicon-pencil"></span> Despesas</a></li>
+									<li role="separator" class="divider"></li>
 									<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>
 								</ul>
-							</div>
+							</div>-->
 							
 
 							<div class="btn-group">
@@ -100,7 +108,7 @@
 							<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) && ($_SESSION['log']['idSis_Empresa'] != 5))  { ?>
 							<div class="btn-group" role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/loginempresa"> 	
-									<button type="button" class="btn btn-sm active ">Acesso Admin-Renovar em 
+									<button type="button" class="btn btn-sm active ">Cad.Ind/ Renovar em 
 										<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
 									</button>
 								</a>	
@@ -108,7 +116,7 @@
 							<?php } else if ($_SESSION['log']['idSis_Empresa'] != 5){?>
 							<div class="btn-group" role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/loginempresa"> 	
-									<button type="button" class="btn btn-sm active ">Acesso Admin-Renovar Assinatura 
+									<button type="button" class="btn btn-sm active ">Cad.Ind/ Renovar Assinatura 
 										
 									</button>
 								</a>	

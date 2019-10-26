@@ -57,6 +57,13 @@
 				$('#ca-container').contentcarousel();
 			</script>			
 		
+
+			
+		</div>
+	</div>
+	<div class="col-md-2 "></div>
+	<div class="container col-md-5 ">	
+		<div class="row">			
 			<label for="Associado">Indicado por:</label>
 			<select data-placeholder="Selecione uma opção..." class="form-control" id="Associado" name="Associado">			
 				<!--<option value="">-- Selecione uma Empresa --</option>-->
@@ -73,11 +80,6 @@
 			</select> 
 			<?php echo form_error('Associado'); ?>
 			
-		</div>
-	</div>
-	<div class="col-md-2 "></div>
-	<div class="container col-md-5 ">	
-		<div class="row">			
 			<label for="NomeEmpresa">Nome da Empresa:</label>
 			<input type="text" class="form-control" id="NomeEmpresa" maxlength="45" 
 				   autofocus name="NomeEmpresa" value="<?php echo $query['NomeEmpresa']; ?>">

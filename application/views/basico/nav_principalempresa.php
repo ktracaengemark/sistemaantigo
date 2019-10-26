@@ -22,7 +22,13 @@
 							</button>
 						</a>
 					</div>
-
+					<div class="btn-group " role="group" aria-label="...">
+						<a href="<?php echo base_url(); ?>loginempresa/registrar2">
+							<button type="button" class="btn btn-sm btn-warning ">
+								<span class="glyphicon glyphicon-plus"></span> Cad.Indicação
+							</button>
+						</a>
+					</div>
 					<div class="btn-group">
 						<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
 							<span class="glyphicon glyphicon-home"></span> enkontraki <span class="caret"></span>
