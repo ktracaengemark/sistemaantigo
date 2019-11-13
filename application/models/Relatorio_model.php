@@ -2128,7 +2128,7 @@ class Relatorio_model extends CI_Model {
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . ''
         );
         $query['Prodaux3'] = $query['Prodaux3']->result();
-
+/*
         ####################################################################
         #COMPRADOS
         if ($data['DataFim']) {
@@ -2142,11 +2142,11 @@ class Relatorio_model extends CI_Model {
 
         $query['Comprados'] = $this->db->query(
             'SELECT
-                SUM(APC.QtdCompraProduto) AS QtdCompra,
+                SUM(APC.QtdProduto) AS QtdCompra,
                 TP.idTab_Produto
             FROM
                 App_Despesas AS TCO
-                    LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
+                    LEFT JOIN App_Produto AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
                     LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = APC.idTab_Produto
                     LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
@@ -2165,7 +2165,47 @@ class Relatorio_model extends CI_Model {
                 TP.Produtos ASC'
         );
         $query['Comprados'] = $query['Comprados']->result();
+*/
+        ####################################################################
+        #COMPRADOS
+        if ($data['DataFim']) {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
+        }
 
+        $query['Comprados'] = $this->db->query(
+            'SELECT
+                SUM(APV.QtdProduto) AS QtdCompra,
+                TP.idTab_Produto,
+                OT.idTab_TipoRD
+            FROM
+                App_Cliente AS C,
+                App_OrcaTrata AS OT
+                    LEFT JOIN App_Produto AS APV ON APV.idApp_OrcaTrata = OT.idApp_OrcaTrata
+                    LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Produto
+                    LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TVV.idTab_Produto
+                    LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
+                    LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
+                    LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
+            WHERE
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                (' . $consulta . ') AND
+                APV.idApp_Produto != "0" 
+
+                ' . $data['Produtos'] . ' AND
+                OT.idTab_TipoRD = "1"
+            GROUP BY
+                TP.idTab_Produto
+            ORDER BY
+                TP.Produtos ASC'
+        );
+        $query['Comprados'] = $query['Comprados']->result();
+		
         ####################################################################
         #VENDIDOS
         if ($data['DataFim']) {
@@ -2195,8 +2235,8 @@ class Relatorio_model extends CI_Model {
                 C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
-                APV.idApp_Produto != "0" AND
-                C.idApp_Cliente = OT.idApp_Cliente
+                APV.idApp_Produto != "0" 
+
                 ' . $data['Produtos'] . ' AND
                 OT.idTab_TipoRD = "2"
             GROUP BY
@@ -2208,7 +2248,7 @@ class Relatorio_model extends CI_Model {
 
 
         ####################################################################
-        #DEVOLVIDOS(ORCATRATA)
+        #DEVOLVIDOS NA VENDA
         if ($data['DataFim']) {
             $consulta =
                 '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
@@ -2220,7 +2260,87 @@ class Relatorio_model extends CI_Model {
 
         $query['Devolvidos'] = $this->db->query(
             'SELECT
-                SUM(APV.QtdProduto) AS QtdDevolve,
+                SUM(APV.QtdServico) AS QtdDevolve,
+                TP.idTab_Produto,
+                OT.idTab_TipoRD
+            FROM
+                App_Cliente AS C,
+                App_OrcaTrata AS OT
+                    LEFT JOIN App_Servico AS APV ON APV.idApp_OrcaTrata = OT.idApp_OrcaTrata
+                    LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Servico
+                    LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TVV.idTab_Produto
+					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
+                    LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
+                    LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
+            WHERE
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                (' . $consulta . ') AND
+                APV.idApp_Servico != "0" AND
+                C.idApp_Cliente = OT.idApp_Cliente
+                ' . $data['Produtos'] . ' AND
+                OT.idTab_TipoRD = "4"
+            GROUP BY
+                TP.idTab_Produto
+            ORDER BY
+                TP.Produtos ASC'
+        );
+        $query['Devolvidos'] = $query['Devolvidos']->result();
+
+        ####################################################################
+        #DEVOLVIDOS NA COMPRA
+        if ($data['DataFim']) {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
+        }
+
+        $query['Devolvidos2'] = $this->db->query(
+            'SELECT
+                SUM(APV.QtdServico) AS QtdDevolve,
+                TP.idTab_Produto,
+                OT.idTab_TipoRD
+            FROM
+                App_Cliente AS C,
+                App_OrcaTrata AS OT
+                    LEFT JOIN App_Servico AS APV ON APV.idApp_OrcaTrata = OT.idApp_OrcaTrata
+                    LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Servico
+                    LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TVV.idTab_Produto
+					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
+                    LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
+                    LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
+            WHERE
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                (' . $consulta . ') AND
+                APV.idApp_Servico != "0" 
+
+                ' . $data['Produtos'] . ' AND
+                OT.idTab_TipoRD = "3"
+            GROUP BY
+                TP.idTab_Produto
+            ORDER BY
+                TP.Produtos ASC'
+        );
+        $query['Devolvidos2'] = $query['Devolvidos2']->result();		
+
+        ####################################################################
+        #CONSUMIDOS
+        if ($data['DataFim']) {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
+        }
+
+        $query['Consumidos'] = $this->db->query(
+            'SELECT
+                SUM(APV.QtdProduto) AS QtdConsumo,
                 TP.idTab_Produto,
                 OT.idTab_TipoRD
             FROM
@@ -2239,14 +2359,13 @@ class Relatorio_model extends CI_Model {
                 APV.idApp_Produto != "0" AND
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['Produtos'] . ' AND
-                OT.idTab_TipoRD = "1"
+                OT.idTab_TipoRD = "3"
             GROUP BY
                 TP.idTab_Produto
             ORDER BY
                 TP.Produtos ASC'
         );
-        $query['Devolvidos'] = $query['Devolvidos']->result();
-
+        $query['Consumidos'] = $query['Consumidos']->result();		
 /*
         ####################################################################
         #DEVOLVIDOS (DESPESAS)
@@ -2261,11 +2380,11 @@ class Relatorio_model extends CI_Model {
 
         $query['Devolvidos'] = $this->db->query(
             'SELECT
-                SUM(APC.QtdCompraProduto) AS QtdDevolve,
+                SUM(APC.QtdProduto) AS QtdDevolve,
                 TP.idTab_Produto
             FROM
                 App_Despesas AS TCO
-                    LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
+                    LEFT JOIN App_Produto AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
                     LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = APC.idTab_Produto
                     LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
@@ -2285,7 +2404,7 @@ class Relatorio_model extends CI_Model {
         );
         $query['Devolvidos'] = $query['Devolvidos']->result();
 
-*/
+*
         ####################################################################
         #CONSUMIDOS
         if ($data['DataFim']) {
@@ -2299,11 +2418,11 @@ class Relatorio_model extends CI_Model {
 
         $query['Consumidos'] = $this->db->query(
             'SELECT
-                SUM(APC.QtdCompraProduto) AS QtdConsumo,
+                SUM(APC.QtdProduto) AS QtdConsumo,
                 TP.idTab_Produto
             FROM
                 App_Despesas AS TCO
-                    LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
+                    LEFT JOIN App_Produto AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
                     LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = APC.idTab_Produto
                     LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
@@ -2320,7 +2439,7 @@ class Relatorio_model extends CI_Model {
                 TP.Produtos ASC'
         );
         $query['Consumidos'] = $query['Consumidos']->result();
-
+*/
 
 		$estoque = new stdClass();
 
@@ -2743,11 +2862,11 @@ exit();*/
 
         $query['Comprados'] = $this->db->query(
             'SELECT
-            	SUM(APC.QtdCompraProduto) AS QtdCompra,
+            	SUM(APC.QtdProduto) AS QtdCompra,
             	TP.idTab_Produto
             FROM
             	App_Despesas AS TCO
-            		LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
+            		LEFT JOIN App_Produto AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
             		LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = APC.idTab_Produto
             WHERE
                 TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -2853,11 +2972,11 @@ exit();*/
 
         $query['Devolvidos'] = $this->db->query(
             'SELECT
-            	SUM(APC.QtdCompraProduto) AS QtdDevolve,
+            	SUM(APC.QtdProduto) AS QtdDevolve,
             	TP.idTab_Produto
             FROM
             	App_Despesas AS TCO
-            		LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
+            		LEFT JOIN App_Produto AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
             		LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = APC.idTab_Produto
             WHERE
                 TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -2886,11 +3005,11 @@ exit();*/
 
         $query['Consumidos'] = $this->db->query(
             'SELECT
-            	SUM(APC.QtdCompraProduto) AS QtdConsumo,
+            	SUM(APC.QtdProduto) AS QtdConsumo,
             	TP.idTab_Produto
             FROM
             	App_Despesas AS TCO
-            		LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
+            		LEFT JOIN App_Produto AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
             		LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = APC.idTab_Produto
             WHERE
                 TCO.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -3299,7 +3418,7 @@ exit();*/
 				TTC.TipoConsumo,
 				TCO.TipoProduto,
                 TCO.DataDespesas,
-				APC.QtdCompraProduto,
+				APC.QtdProduto,
 				APC.idTab_Produto,
 				TPB.Produtos,
 				APC.ObsProduto,
@@ -3309,7 +3428,7 @@ exit();*/
             FROM
                 App_Despesas AS TCO
                     LEFT JOIN Tab_TipoConsumo AS TTC ON TTC.idTab_TipoConsumo = TCO.TipoFinanceiro
-					LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
+					LEFT JOIN App_Produto AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
 					LEFT JOIN Tab_Produto AS TPB ON TPB.idTab_Produto = APC.idTab_Produto
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPB.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPB.Prodaux2
@@ -3367,7 +3486,7 @@ exit();*/
 				TTC.TipoFinanceiro,
 				TCO.TipoProduto,
                 TCO.DataDespesas,
-				APC.QtdCompraProduto,
+				APC.QtdProduto,
 				APC.idTab_Produto,
 				TPB.Produtos,
 				TP3.Prodaux3,
@@ -3376,7 +3495,7 @@ exit();*/
             FROM
                 App_Despesas AS TCO
                     LEFT JOIN Tab_TipoFinanceiro AS TTC ON TTC.idTab_TipoFinanceiro = TCO.TipoFinanceiro
-					LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
+					LEFT JOIN App_Produto AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
 					LEFT JOIN Tab_Produto AS TPB ON TPB.idTab_Produto = APC.idTab_Produto
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPB.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPB.Prodaux2
@@ -3443,7 +3562,7 @@ exit();*/
 				TCO.TipoProduto,
                 TCO.DataDespesas,
 				TCO.ValorDespesas,
-				APC.QtdCompraProduto,
+				APC.QtdProduto,
 				APC.ValorCompraProduto,
 				APC.idTab_Produto,
 				TCO.AprovadoDespesas,
@@ -3458,7 +3577,7 @@ exit();*/
             FROM
                 App_Despesas AS TCO
                     LEFT JOIN Tab_TipoFinanceiro AS TTC ON TTC.idTab_TipoFinanceiro = TCO.TipoFinanceiro
-					LEFT JOIN App_ProdutoCompra AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
+					LEFT JOIN App_Produto AS APC ON APC.idApp_Despesas = TCO.idApp_Despesas
 					LEFT JOIN Tab_Produto AS TPB ON TPB.idTab_Produto = APC.idTab_Produto
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = TCO.FormaPagamentoDespesas
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPB.Prodaux3

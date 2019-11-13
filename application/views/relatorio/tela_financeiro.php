@@ -8,16 +8,18 @@
 		<div class="panel-heading">
 			<?php echo form_open('relatorio/financeiro', 'role="form"'); ?>
 			
-			<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal11-sm">
+			<!--<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal11-sm">
 				<span class="glyphicon glyphicon-plus"></span><?php echo $titulo1; ?>
-			</button>
+			</button>-->
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo1; ?>
 			</button>											
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 				<span class="glyphicon glyphicon-search"></span>Parcelas
 			</a>
-			
+			<a class="btn btn-sm btn-primary" href="<?php echo base_url() ?>relatorio/balanco" role="button">
+				<span class="glyphicon glyphicon-search"></span>Balanço
+			</a>			
 		</div>
 		<div class="panel-body">
 			<div class="modal fade bs-excluir-modal11-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -401,16 +403,18 @@
 		<div class="panel-heading">
 			<?php echo form_open('relatorio/financeiro', 'role="form"'); ?>
 
-			<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal13-sm">
+			<!--<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal13-sm">
 				<span class="glyphicon glyphicon-plus"></span><?php echo $titulo2; ?>
-			</button>			
+			</button>-->			
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo2; ?>
 			</button>											
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 				<span class="glyphicon glyphicon-search"></span>Parcelas
 			</a>
-
+			<a class="btn btn-sm btn-primary" href="<?php echo base_url() ?>relatorio/balanco" role="button">
+				<span class="glyphicon glyphicon-search"></span>Balanço
+			</a>
 		</div>
 		<div class="panel-body">
 			<div class="modal fade bs-excluir-modal13-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">

@@ -2180,7 +2180,7 @@ class Relatorio extends CI_Controller {
             'TCO.DataDespesas' => 'Data do Consumo',
 			'TCO.TipoFinanceiro' => 'Tipo de Consumo',
 			'TCO.Despesa' => 'Consumo',
-			'APC.QtdCompraProduto' => 'Qtd. do Produto',
+			'APC.QtdProduto' => 'Qtd. do Produto',
 			'TPB.Produtos' => 'Produto',
 
         );
@@ -2260,7 +2260,7 @@ class Relatorio extends CI_Controller {
             'TCO.DataDespesas' => 'Data da Despesa',
 			'TCO.TipoFinanceiro' => 'Tipo de Despesa',
 			'TCO.Despesa' => 'Descr. da Despesa',
-			'APC.QtdCompraProduto' => 'Qtd. do Produto',
+			'APC.QtdProduto' => 'Qtd. do Produto',
 			'TPB.Produtos' => 'Produto',
 
         );
@@ -2355,7 +2355,7 @@ class Relatorio extends CI_Controller {
 			'TCO.CodProd' => 'Código',
 			'TCO.TipoFinanceiro' => 'Tipo de Devol.',
 			'TCO.Despesa' => 'Descr. da Devol.',
-			'APC.QtdCompraProduto' => 'Qtd. do Produto',
+			'APC.QtdProduto' => 'Qtd. do Produto',
 			'TPB.Produtos' => 'Produto',
 			'TPB.Prodaux1' => 'Aux1',
 			'TPB.Prodaux2' => 'Aux2',

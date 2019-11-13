@@ -204,13 +204,16 @@
 			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Receita" aria-expanded="false" aria-controls="Receita">
 				<span class="glyphicon glyphicon-pencil"></span>Diário <?php #echo $titulo1; ?> 
 			</div>
-			-->
+			
 			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
 				<span class="glyphicon glyphicon-search"></span>Rec/ Desp
-			</a>			
+			</a>-->			
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-search"></span>Filtrar
 			</button>
+			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
+				<span class="glyphicon glyphicon-search"></span>Relatorio
+			</a>			
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 				<span class="glyphicon glyphicon-search"></span>Parcelas
 			</a>
@@ -243,13 +246,16 @@
 			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Anual" aria-expanded="false" aria-controls="Anual">
 				<span class="glyphicon glyphicon-pencil"></span>Mensal <?php #echo $titulo3; ?> 
 			</div>
-			-->			
+						
 			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
 				<span class="glyphicon glyphicon-search"></span>Rec/ Desp
-			</a>			
+			</a>-->			
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 				<span class="glyphicon glyphicon-search"></span>Filtrar
 			</button>
+			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
+				<span class="glyphicon glyphicon-search"></span>Relatorio
+			</a>			
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 				<span class="glyphicon glyphicon-search"></span>Parcelas
 			</a>

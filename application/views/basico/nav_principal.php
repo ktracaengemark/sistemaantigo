@@ -82,7 +82,7 @@
 								</a>
 							</div>							
 							<div class="btn-group " role="group" aria-label="...">
-								<a href="<?php echo base_url(); ?>relatorio/parcelas">
+								<a href="<?php echo base_url(); ?>relatorio/financeiro">
 									<button type="button" class="btn btn-sm btn-warning ">
 										<span class="glyphicon glyphicon-usd"></span>Relatório
 									</button>
