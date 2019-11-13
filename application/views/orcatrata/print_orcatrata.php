@@ -11,15 +11,31 @@
 					<div class="panel-heading text-left">
 						<h2><?php echo '<strong>Empresa: ' . $_SESSION['Orcatrata']['NomeEmpresa'] . '</strong> <br> 
 						<h3><strong>Cliente: ' . $_SESSION['Cliente']['NomeCliente'] . ' - Id: ' . $_SESSION['Cliente']['idApp_Cliente'] . '</strong></h3> <br>
-						<h4><strong>ORÇAMENTO Nº: ' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '</strong></h4>' ?></h2>
+						<h4>Atendente: ' . $_SESSION['Usuario']['Nome'] . ' - Id: ' . $_SESSION['Usuario']['idSis_Usuario'] . '</h4>' ?></h2>
 					</div>
 
 					<div class="panel-body">
 
 
-						<?php echo '<h4>Atendente: ' . $_SESSION['Usuario']['Nome'] . ' - Id: ' . $_SESSION['Usuario']['idSis_Usuario'] . '</h4>' ?>
+						<?php echo '<h4><strong>ORÇAMENTO Nº: ' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '</strong></h4>' ?>
 						<hr />
+						
+						<table class="table table-bordered table-condensed table-striped">
+							<thead>
+								<tr>
+									<!--<th class="col-md-3" scope="col">Observações</th>-->
+									<th class="col-md-12" scope="col">Descrição/Obs</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
 
+									<!--<td><?php echo $orcatrata['TipoFinanceiro'] ?></td>-->
+									<td><?php echo $orcatrata['Descricao'] ?></td>
+								</tr>
+							</tbody>
+						</table>
+						
 						<h3 class="text-center">Produtos / Serviços </h3>
 
 						<table class="table table-bordered table-condensed table-striped">
@@ -78,7 +94,7 @@
 
 							</tbody>
 						</table>
-						<hr />
+						<!--<hr />-->
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 						<h3 class="text-center">Produtos Devolvidos  </h3>
 
@@ -123,8 +139,6 @@
 
 							</tbody>
 						</table>
-
-						<hr />
 						
 						<?php } ?>
 						<h3 class="text-center">Pagamento</h3>
@@ -167,7 +181,6 @@
 							</tbody>
 						</table>
 						
-						<hr />
 						<h3 class="text-center">Parcelas</h3>
 
 						<table class="table table-bordered table-condensed table-striped">
@@ -201,7 +214,6 @@
 							</tbody>
 						</table>
 
-						<hr />
 						<h3 class="text-center">Status</h3>
 						
 						<table class="table table-bordered table-condensed table-striped">
@@ -237,7 +249,7 @@
 								</tr>
 							</tbody>
 						</table>
-
+						<!--
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
@@ -253,7 +265,7 @@
 								</tr>
 							</tbody>
 						</table>
-
+						-->
 					</div>
 				</div>
 			</div>

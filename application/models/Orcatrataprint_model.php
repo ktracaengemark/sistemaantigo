@@ -33,12 +33,36 @@ class Orcatrataprint_model extends CI_Model {
 
         $query = $this->db->query(
             'SELECT
-                *
+				OT.idApp_OrcaTrata,
+				OT.AprovadoOrca,
+				OT.ConcluidoOrca,
+				OT.QuitadoOrca,
+				OT.DataOrca,
+				OT.DataPrazo,
+				OT.DataConclusao,
+				OT.DataQuitado,				
+				OT.DataRetorno,
+				OT.DataEntradaOrca,
+				OT.idApp_Cliente,
+				OT.ValorOrca,
+				OT.ValorEntradaOrca,
+				OT.ValorRestanteOrca,
+				OT.QtdParcelasOrca,
+				OT.DataVencimentoOrca,
+				OT.idSis_Usuario,
+				OT.ObsOrca,
+				OT.Descricao,
+				OT.TipoFinanceiro,
+				FP.FormaPag,				
+				EF.NomeEmpresa,
+				MO.AVAP
+				
             FROM           	
                 Tab_FormaPag AS FP,
 				App_OrcaTrata AS OT
 				LEFT JOIN Sis_Empresa AS EF ON EF.idSis_Empresa = OT.idSis_Empresa
 				LEFT JOIN Tab_Modalidade AS MO ON MO.Abrev2 = OT.AVAP
+
             WHERE
             	OT.idApp_OrcaTrata = ' . $data . ' AND
                 OT.FormaPagamento = FP.idTab_FormaPag'
