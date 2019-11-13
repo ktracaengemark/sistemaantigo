@@ -4,8 +4,8 @@
 <div class="container-fluid">
 	<div class="row">
 
-		<div class="col-md-1"></div>
-		<div class="col-md-10 ">
+		<div class="col-md-2"></div>
+		<div class="col-md-8 ">
 
 			<div class="row">
 
@@ -89,7 +89,7 @@
 																	<?php } ?>
 																	
 																	<div class="col-md-4">
-																		<label for="Descricao">Receita</label><br>
+																		<label for="Descricao">Descrição/ Obs.:</label><br>
 																		<input type="text" class="form-control" maxlength="200"
 																				name="Descricao" value="<?php echo $orcatrata['Descricao'] ?>">
 																	</div>
@@ -1063,6 +1063,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
+		<div class="col-md-2"></div>
 	</div>
 </div>

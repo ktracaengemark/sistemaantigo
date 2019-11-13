@@ -416,7 +416,7 @@ function calculaParcelas() {
 										   name="DataVencimento'+i+'" value="'+futureMonth.format('DD/MM/YYYY')+'">\
 								</div>\
 							</div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
 								<label for="Quitado">Parc.Quitada?</label><br>\
 								<div class="form-group">\
 									<div class="btn-group" data-toggle="buttons">\
@@ -3082,7 +3082,7 @@ $(document).ready(function () {
                                         name="QtdProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
-                            <div class="col-md-3">\
+                            <div class="col-md-4">\
                                 <label for="idTab_Produto">Produto:</label><br>\
                                 <select class="form-control Chosen" id="listadinamicab'+pc+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+pc+',\'Produto\')" name="idTab_Produto'+pc+'">\
                                     <option value="">-- Selecione uma opção --</option>\
@@ -3094,7 +3094,7 @@ $(document).ready(function () {
 									   name="ObsProduto'+pc+'" value="">\
 							</div>\
                             <div class="col-md-2">\
-                                <label for="ValorProduto">Valor do Produto:</label><br>\
+                                <label for="ValorProduto">Valor:</label><br>\
                                 <div class="input-group id="txtHint">\
                                     <span class="input-group-addon" id="basic-addon1">R$</span>\
                                     <input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" \
@@ -3110,16 +3110,9 @@ $(document).ready(function () {
                                            name="SubtotalProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
-							<div class="col-md-1">\
-                                <label><br></label><br>\
-                                <a href="#" id="'+pc+'" class="remove_field9 btn btn-danger"\
-                                        onclick="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
-                                    <span class="glyphicon glyphicon-trash"></span>\
-                                </a>\
-                            </div>\
                         </div>\
 						<div class="row">\
-							<div class="col-md-9"></div>\
+							<div class="col-md-8"></div>\
 							<div class="col-md-2">\
 								<label for="DataValidadeProduto'+pc+'">Validade:</label>\
 								<div class="input-group DatePicker">\
@@ -3130,6 +3123,13 @@ $(document).ready(function () {
 										   name="DataValidadeProduto'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 								</div>\
 							</div>\
+							<div class="col-md-1">\
+                                <label><br></label><br>\
+                                <a href="#" id="'+pc+'" class="remove_field9 btn btn-danger"\
+                                        onclick="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
+                                    <span class="glyphicon glyphicon-trash"></span>\
+                                </a>\
+                            </div>\
 						</div>\
                     </div>\
                 </div>\
@@ -3308,7 +3308,7 @@ $(document).ready(function () {
                                         name="QtdProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
-                            <div class="col-md-3">\
+                            <div class="col-md-4">\
                                 <label for="idTab_Produto">Produto:</label><br>\
                                 <select class="form-control Chosen" id="listadinamicab'+pc+'" onchange="buscaValor(this.value,this.name,\'Produto\','+pc+')" name="idTab_Produto'+pc+'">\
                                     <option value="">-- Selecione uma opção --</option>\
@@ -3320,7 +3320,7 @@ $(document).ready(function () {
 									   name="ObsProduto'+pc+'" value="">\
 							</div>\
                             <div class="col-md-2">\
-                                <label for="ValorProduto">Valor do Produto:</label><br>\
+                                <label for="ValorProduto">Valor:</label><br>\
                                 <div class="input-group id="txtHint">\
                                     <span class="input-group-addon" id="basic-addon1">R$</span>\
                                     <input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" \
@@ -3336,16 +3336,9 @@ $(document).ready(function () {
                                            name="SubtotalProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
-							<div class="col-md-1">\
-                                <label><br></label><br>\
-                                <a href="#" id="'+pc+'" class="remove_field11 btn btn-danger"\
-                                        onclick="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
-                                    <span class="glyphicon glyphicon-trash"></span>\
-                                </a>\
-                            </div>\
                         </div>\
 						<div class="row">\
-							<div class="col-md-9"></div>\
+							<div class="col-md-8"></div>\
 							<div class="col-md-2">\
 								<label for="DataValidadeProduto'+pc+'">Validade:</label>\
 								<div class="input-group DatePicker">\
@@ -3356,6 +3349,13 @@ $(document).ready(function () {
 										   name="DataValidadeProduto'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 								</div>\
 							</div>\
+							<div class="col-md-1">\
+                                <label><br></label><br>\
+                                <a href="#" id="'+pc+'" class="remove_field11 btn btn-danger"\
+                                        onclick="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
+                                    <span class="glyphicon glyphicon-trash"></span>\
+                                </a>\
+                            </div>\
 						</div>\
                     </div>\
                 </div>\

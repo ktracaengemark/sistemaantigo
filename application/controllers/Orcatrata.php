@@ -917,7 +917,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
 		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 		
-        $data['titulo'] = 'Receita';
+        $data['titulo'] = 'Nova Receita';
         $data['form_open_path'] = 'orcatrata/cadastrar3';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -2391,7 +2391,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
 		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 
-        $data['titulo'] = 'Despesa';
+        $data['titulo'] = 'Nova Despesa';
         $data['form_open_path'] = 'orcatrata/cadastrardesp';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -2602,7 +2602,8 @@ class Orcatrata extends CI_Controller {
                 $data['msg'] = '?m=1';
 
 				#redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
-				redirect(base_url() . 'relatorio/parcelas/' . $data['msg']);
+				#redirect(base_url() . 'relatorio/parcelas/' . $data['msg']);
+				redirect(base_url() . 'orcatrata/cadastrardesp/' . $data['msg']);
                 exit();
             }
         }
