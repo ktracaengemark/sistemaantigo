@@ -393,12 +393,12 @@ function calculaParcelas() {
 				<div class="panel panel-warning">\
 					<div class="panel-heading">\
 						<div class="row">\
-							<div class="col-md-1">\
+							<div class="col-md-2">\
 								<label for="Parcela">Parcela:</label><br>\
 								<input type="text" class="form-control" maxlength="6"\
 									   name="Parcela'+i+'" value="'+i+'/'+parcelas+'">\
 							</div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
 								<label for="ValorParcela">Valor Parcela:</label><br>\
 								<div class="input-group" id="txtHint">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
@@ -406,7 +406,7 @@ function calculaParcelas() {
 										    id="ValorParcela'+i+'" name="ValorParcela'+i+'" value="'+parcorca+'">\
 								</div>\
 							</div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
 								<label for="DataVencimento">Data Venc. Parc.</label>\
 								<div class="input-group DatePicker">\
 									<span class="input-group-addon" disabled>\
@@ -417,7 +417,7 @@ function calculaParcelas() {
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="Quitado">Quitado????</label><br>\
+								<label for="Quitado">Parc.Quitada?</label><br>\
 								<div class="form-group">\
 									<div class="btn-group" data-toggle="buttons">\
 										<label class="btn btn-warning active" name="radio_Quitado'+i+'" id="radio_Quitado'+i+'N">\
@@ -501,12 +501,12 @@ function calculaParcelasMensais() {
 				<div class="panel panel-warning">\
 					<div class="panel-heading">\
 						<div class="row">\
-							<div class="col-md-1">\
+							<div class="col-md-2">\
 								<label for="Parcela">Parcela:</label><br>\
 								<input type="text" class="form-control" maxlength="6"\
 									   name="Parcela'+i+'" value="'+i+'/'+parcelas+'">\
 							</div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
 								<label for="ValorParcela">Valor Parcela:</label><br>\
 								<div class="input-group" id="txtHint">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
@@ -514,7 +514,7 @@ function calculaParcelasMensais() {
 										    id="ValorParcela'+i+'" name="ValorParcela'+i+'" value="'+parcorca+'">\
 								</div>\
 							</div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
 								<label for="DataVencimento">Data Venc. Parc.</label>\
 								<div class="input-group DatePicker">\
 									<span class="input-group-addon" disabled>\
@@ -525,7 +525,7 @@ function calculaParcelasMensais() {
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="Quitado">Quitado????</label><br>\
+								<label for="Quitado">Parc.Quitada?</label><br>\
 								<div class="form-group">\
 									<div class="btn-group" data-toggle="buttons">\
 										<label class="btn btn-warning active" name="radio_Quitado'+i+'" id="radio_Quitado'+i+'N">\
@@ -609,12 +609,12 @@ function calculaParcelasPagaveis() {
 				<div class="panel panel-warning">\
 					<div class="panel-heading">\
 						<div class="row">\
-							<div class="col-md-1">\
+							<div class="col-md-2">\
 								<label for="ParcelaPagaveis">Parcela:</label><br>\
 								<input type="text" class="form-control" maxlength="6" readonly=""\
 									   name="ParcelaPagaveis'+i+'" value="'+i+'/'+parcelas+'">\
 							</div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
 								<label for="ValorParcelaPagaveis">Valor Parcela:</label><br>\
 								<div class="input-group" id="txtHint">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
@@ -622,7 +622,7 @@ function calculaParcelasPagaveis() {
 										    id="ValorParcelaPagaveis'+i+'" name="ValorParcelaPagaveis'+i+'" value="'+parcdesp+'">\
 								</div>\
 							</div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
 								<label for="DataVencimentoPagaveis">Data Venc. Parc.</label>\
 								<div class="input-group DatePicker">\
 									<span class="input-group-addon" disabled>\
@@ -651,7 +651,7 @@ function calculaParcelasPagaveis() {
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="QuitadoPagaveis">Quitado?</label><br>\
+								<label for="QuitadoPagaveis">Parc.Quitada?</label><br>\
 								<div class="form-group">\
 									<div class="btn-group" data-toggle="buttons">\
 										<label class="btn btn-warning active" name="radio_QuitadoPagaveis'+i+'" id="radio_QuitadoPagaveis'+i+'N">\
@@ -735,12 +735,12 @@ function calculaParcelasPagaveisMensais() {
 				<div class="panel panel-warning">\
 					<div class="panel-heading">\
 						<div class="row">\
-							<div class="col-md-1">\
+							<div class="col-md-2">\
 								<label for="ParcelaPagaveis">Parcela:</label><br>\
 								<input type="text" class="form-control" maxlength="6" readonly=""\
 									   name="ParcelaPagaveis'+i+'" value="'+i+'/'+parcelas+'">\
 							</div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
 								<label for="ValorParcelaPagaveis">Valor Parcela:</label><br>\
 								<div class="input-group" id="txtHint">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
@@ -748,7 +748,7 @@ function calculaParcelasPagaveisMensais() {
 										    id="ValorParcelaPagaveis'+i+'" name="ValorParcelaPagaveis'+i+'" value="'+parcdesp+'">\
 								</div>\
 							</div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
 								<label for="DataVencimentoPagaveis">Data Venc. Parc.</label>\
 								<div class="input-group DatePicker">\
 									<span class="input-group-addon" disabled>\
@@ -777,7 +777,7 @@ function calculaParcelasPagaveisMensais() {
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="QuitadoPagaveis">Quitado?</label><br>\
+								<label for="QuitadoPagaveis">Parc.Quitada?</label><br>\
 								<div class="form-group">\
 									<div class="btn-group" data-toggle="buttons">\
 										<label class="btn btn-warning active" name="radio_QuitadoPagaveis'+i+'" id="radio_QuitadoPagaveis'+i+'N">\

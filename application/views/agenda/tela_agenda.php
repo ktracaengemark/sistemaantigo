@@ -33,8 +33,8 @@
 		</div>
 	</div>
 </div>
-
-<div class="col-md-3">
+<div class="col-md-1"></div>
+<div class="col-md-4">
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -461,6 +461,7 @@
 </div>
 
 <div class="col-md-3">
+		<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -613,7 +614,7 @@
 		</div>
 	</div>
 	
-	<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">

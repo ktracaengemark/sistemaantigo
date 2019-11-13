@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<div class="row">
 
-			<div class="col-sm-offset-2 col-md-9 ">
+			<div class=" col-md-12 ">
 				<div class="navbar-header ">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar1">
 						<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
@@ -49,26 +49,47 @@
 									</button>
 								</a>
 							</div>
-							
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/clientes">
-									<button type="button" class="btn btn-sm btn-success ">
+									<button type="button" class="btn btn-sm btn-primary ">
 										<span class="glyphicon glyphicon-user"></span> Clientes
 									</button>
 								</a>
 							</div>
+							<div class="btn-group " role="group" aria-label="...">
+								<a href="<?php echo base_url(); ?>relatorio/produtos">
+									<button type="button" class="btn btn-sm btn-warning ">
+										<span class="glyphicon glyphicon-pencil"></span> Produtos
+									</button>
+								</a>
+							</div>													
 							<?php } ?>
 						</li>
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
-							
 							<div class="btn-group " role="group" aria-label="...">
-								<a href="<?php echo base_url(); ?>relatorio/parcelas">
-									<button type="button" class="btn btn-sm btn-warning ">
-										<span class="glyphicon glyphicon-usd"></span> Finanças
+								<a href="<?php echo base_url(); ?>orcatrata/cadastrar3">
+									<button type="button" class="btn btn-sm btn-success ">
+										<span class="glyphicon glyphicon-pencil"></span>Receitas
+									</button>
+								</a>
+							</div>
+							<div class="btn-group " role="group" aria-label="...">
+								<a href="<?php echo base_url(); ?>orcatrata/cadastrardesp">
+									<button type="button" class="btn btn-sm btn-danger ">
+										<span class="glyphicon glyphicon-pencil"></span>Despesas
 									</button>
 								</a>
 							</div>							
+							<div class="btn-group " role="group" aria-label="...">
+								<a href="<?php echo base_url(); ?>relatorio/parcelas">
+									<button type="button" class="btn btn-sm btn-warning ">
+										<span class="glyphicon glyphicon-usd"></span>Relatório
+									</button>
+								</a>
+							</div>							
+						</li>						
+						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">						
 							<!--<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
 									<span class="glyphicon glyphicon-usd"></span> Finanças <span class="caret"></span>
@@ -81,22 +102,16 @@
 									<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>
 								</ul>
 							</div>-->
-							
-
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
 									<span class="glyphicon glyphicon-home"></span> enkontraki <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
-									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Empresas, Produtos & Serviços</a></li>
-									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-									<li role="separator" class="divider"></li>							
-									<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-pencil"></span> Produtos</a></li>
-									<?php } ?>
 									<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
-									<li role="separator" class="divider"></li>
 									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas de Negócios</a></li>
+									<li role="separator" class="divider"></li>									
 									<?php } ?>
+									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Outras Empresas</a></li>									
 									<!--<li role="separator" class="divider"></li>
 									<li><a href="<?php echo base_url() ?>login/sair"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>-->
 								</ul>
