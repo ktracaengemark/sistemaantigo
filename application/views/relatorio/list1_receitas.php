@@ -76,12 +76,20 @@
 												<span class="glyphicon glyphicon-edit notclickable"></span>
 											</a>
 										</td>';
-									*/	
+										
 									echo '<td class="notclickable">
 											<a class="btn btn-md btn-info notclickable" target="_blank" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
 												<span class="glyphicon glyphicon-print notclickable"></span>
 											</a>
-										</td>';								
+											
+										</td>';
+									*/	
+									echo '<td class="notclickable">
+											<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
+												<span class="glyphicon glyphicon-print notclickable"></span>
+											</a>
+											
+										</td>';										
 									echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 									echo '<td>' . $row['Descricao'] . '</td>';
 									#echo '<td>' . $row['DataEntradaOrca'] . '</td>';

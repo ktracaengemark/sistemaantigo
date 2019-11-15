@@ -1118,6 +1118,7 @@ class Orcatrata extends CI_Controller {
             //*******CORRIGIR -  ALTERAR PARA ENTRAR COM TODAS AS MUDANÇAS NA TABELA DE LOG*****
 //////////////////////////////////////////////////Dados Basicos/////////////////////////////////////////////////////////////////////////
 */
+			#$data['idApp_OrcaTrata'] = $this->Orcatrata_model->set_orcatrata($data['orcatrata']);
 
             if ($data['idApp_OrcaTrata'] === FALSE) {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
@@ -1131,7 +1132,9 @@ class Orcatrata extends CI_Controller {
                 $data['msg'] = '?m=1';
 
 				#redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
-				redirect(base_url() . 'orcatrata/cadastrar3/' . $data['msg']);
+				#redirect(base_url() . 'orcatrata/cadastrar3/' . $data['msg']);
+				redirect(base_url() . 'OrcatrataPrint/imprimir/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
+				#redirect(base_url() . 'orcatrata/alterar2/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
                 exit();
             }
         }
@@ -1838,7 +1841,7 @@ class Orcatrata extends CI_Controller {
             $_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
             $_SESSION['Cliente']['NomeCliente'] = (strlen($data['query']['NomeCliente']) > 12) ? substr($data['query']['NomeCliente'], 0, 12) : $data['query']['NomeCliente'];
 			#$_SESSION['log']['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
-
+			$_SESSION['Orcatrata'] = $data['query'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);
             #### App_Servico ####
             $data['servico'] = $this->Orcatrata_model->get_servico($id);
             if (count($data['servico']) > 0) {
@@ -2230,7 +2233,8 @@ class Orcatrata extends CI_Controller {
 
                 #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
-				redirect(base_url() . 'relatorio/parcelas/' . $data['msg']);
+				#redirect(base_url() . 'relatorio/parcelas/' . $data['msg']);
+				redirect(base_url() . 'OrcatrataPrint/imprimir/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
 
 				exit();
             }
