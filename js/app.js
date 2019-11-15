@@ -2416,12 +2416,12 @@ function adicionaParcelas() {
 			<div class="panel panel-warning">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-1">\
+						<div class="col-md-2">\
 							<label for="Parcela">Parcela:</label><br>\
 							<input type="text" class="form-control" maxlength="6"\
 								   name="Parcela'+pc+'" value="Ex.">\
 						</div>\
-						<div class="col-md-2">\
+						<div class="col-md-3">\
 							<label for="ValorParcela">Valor Parcela:</label><br>\
 							<div class="input-group" id="txtHint">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
@@ -2429,7 +2429,7 @@ function adicionaParcelas() {
 										id="ValorParcela'+pc+'" name="ValorParcela'+pc+'" value="">\
 							</div>\
 						</div>\
-						<div class="col-md-2">\
+						<div class="col-md-3">\
 							<label for="DataVencimento">Data Venc. Parc.</label>\
 							<div class="input-group DatePicker">\
 								<span class="input-group-addon" disabled>\
@@ -2439,7 +2439,7 @@ function adicionaParcelas() {
 									   name="DataVencimento'+pc+'" value="">\
 							</div>\
 						</div>\
-						<div class="col-md-2">\
+						<div class="col-md-3">\
 							<label for="Quitado">Quitado????</label><br>\
 							<div class="form-group">\
 								<div class="btn-group" data-toggle="buttons">\

@@ -52,7 +52,7 @@
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/clientes">
-									<button type="button" class="btn btn-sm btn-primary ">
+									<button type="button" class="btn btn-sm btn-success ">
 										<span class="glyphicon glyphicon-user"></span> Clientes
 									</button>
 								</a>
@@ -72,7 +72,7 @@
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>orcatrata/cadastrar3">
-									<button type="button" class="btn btn-sm btn-success ">
+									<button type="button" class="btn btn-sm btn-primary ">
 										<span class="glyphicon glyphicon-pencil"></span>Receitas
 									</button>
 								</a>

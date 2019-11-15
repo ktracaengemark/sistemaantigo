@@ -50,10 +50,10 @@
 						<?php
 						echo '<td><b>' . $report['RecPagar'][0]->Balancopagar . '</b></td>';
 						for($i=1;$i<=12;$i++) {
-							$bgcolor = ($report['RecPagar'][0]->{'M'.$i} <= 0) ? 'bg-success' : 'bg-success';
+							$bgcolor = ($report['RecPagar'][0]->{'M'.$i} <= 0) ? 'bg-primary' : 'bg-primary';
 							echo '<td class="text-right ' . $bgcolor . '">' . $report['RecPagar'][0]->{'M'.$i} . '</td>';
 						}
-						$bgcolor = ($report['TotalGeralpagar']->RecPagar <= 0) ? 'bg-success' : 'bg-success';
+						$bgcolor = ($report['TotalGeralpagar']->RecPagar <= 0) ? 'bg-primary' : 'bg-primary';
 						echo '<td class="text-right ' . $bgcolor . '">' . $report['TotalGeralpagar']->RecPagar . '</td>';
 						?>
 					</tr>
@@ -72,10 +72,10 @@
 						<?php
 						echo '<td><b>' . $report['RecPago'][0]->Balancopago . '</b></td>';
 						for($i=1;$i<=12;$i++) {
-							$bgcolor = ($report['RecPago'][0]->{'M'.$i} <= 0) ? 'bg-success' : 'bg-success';
+							$bgcolor = ($report['RecPago'][0]->{'M'.$i} <= 0) ? 'bg-primary' : 'bg-primary';
 							echo '<td class="text-right ' . $bgcolor . '">' . $report['RecPago'][0]->{'M'.$i} . '</td>';
 						}
-						$bgcolor = ($report['TotalGeralpago']->RecPago <= 0) ? 'bg-success' : 'bg-success';
+						$bgcolor = ($report['TotalGeralpago']->RecPago <= 0) ? 'bg-primary' : 'bg-primary';
 						echo '<td class="text-right ' . $bgcolor . '">' . $report['TotalGeralpago']->RecPago . '</td>';
 						?>
 					</tr>
@@ -98,10 +98,10 @@
 						<?php
 						echo '<td><b>' . $report['TotalVenc']->Balancovenc . '</b></td>';
 						for($i=1;$i<=12;$i++) {
-							$bgcolor = ($report['TotalVenc']->{'M'.$i} < 0) ? 'bg-danger' : 'bg-success';
+							$bgcolor = ($report['TotalVenc']->{'M'.$i} < 0) ? 'bg-danger' : 'bg-primary';
 							echo '<td class="text-right ' . $bgcolor . '">' . $report['TotalVenc']->{'M'.$i} . '</td>';
 						}
-						$bgcolor = ($report['TotalGeralvenc']->BalancoGeralvenc < 0) ? 'bg-danger' : 'bg-info';
+						$bgcolor = ($report['TotalGeralvenc']->BalancoGeralvenc < 0) ? 'bg-danger' : 'bg-primary';
 						echo '<td class="text-right ' . $bgcolor . '">' . $report['TotalGeralvenc']->BalancoGeralvenc . '</td>';
 						?>
 					</tr>
@@ -110,10 +110,10 @@
 						<?php
 						echo '<td><b>' . $report['TotalPago']->Balancopago . '</b></td>';
 						for($i=1;$i<=12;$i++) {
-							$bgcolor = ($report['TotalPago']->{'M'.$i} < 0) ? 'bg-danger' : 'bg-info';
+							$bgcolor = ($report['TotalPago']->{'M'.$i} < 0) ? 'bg-danger' : 'bg-primary';
 							echo '<td class="text-right ' . $bgcolor . '">' . $report['TotalPago']->{'M'.$i} . '</td>';
 						}
-						$bgcolor = ($report['TotalGeralpago']->BalancoGeralpago < 0) ? 'bg-danger' : 'bg-info';
+						$bgcolor = ($report['TotalGeralpago']->BalancoGeralpago < 0) ? 'bg-danger' : 'bg-primary';
 						echo '<td class="text-right ' . $bgcolor . '">' . $report['TotalGeralpago']->BalancoGeralpago . '</td>';
 						?>
 					</tr>

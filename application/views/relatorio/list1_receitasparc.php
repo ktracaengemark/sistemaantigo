@@ -1,5 +1,5 @@
 <div style="overflow: auto; height: 200px; ">		
-	<div class="panel panel-success">
+	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<div class="row">	
 				<div class="col-md-1"></div>

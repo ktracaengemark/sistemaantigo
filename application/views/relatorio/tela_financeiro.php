@@ -3,7 +3,7 @@
 <div class="col-sm-offset-2 col-md-8 ">		
 	
 	<?php echo validation_errors(); ?>
-	<div class="panel panel-success">
+	<div class="panel panel-primary">
 
 		<div class="panel-heading">
 			<?php echo form_open('relatorio/financeiro', 'role="form"'); ?>
@@ -11,13 +11,13 @@
 			<!--<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal11-sm">
 				<span class="glyphicon glyphicon-plus"></span><?php echo $titulo1; ?>
 			</button>-->
-			<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+			<button  class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span>Receita<?php #echo $titulo1; ?>
 			</button>											
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 				<span class="glyphicon glyphicon-search"></span>Parcelas
 			</a>
-			<a class="btn btn-sm btn-primary" href="<?php echo base_url() ?>relatorio/balanco" role="button">
+			<a class="btn btn-sm btn-success" href="<?php echo base_url() ?>relatorio/balanco" role="button">
 				<span class="glyphicon glyphicon-search"></span>Balanço
 			</a>			
 		</div>
@@ -412,7 +412,7 @@
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 				<span class="glyphicon glyphicon-search"></span>Parcelas
 			</a>
-			<a class="btn btn-sm btn-primary" href="<?php echo base_url() ?>relatorio/balanco" role="button">
+			<a class="btn btn-sm btn-success" href="<?php echo base_url() ?>relatorio/balanco" role="button">
 				<span class="glyphicon glyphicon-search"></span>Balanço
 			</a>
 		</div>
