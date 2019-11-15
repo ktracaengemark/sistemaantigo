@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<div class="row">
 
-			<div class=" col-md-12 ">
+			<div class="col-sm-offset-1 col-md-11 ">
 				<div class="navbar-header ">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar1">
 						<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
@@ -57,13 +57,16 @@
 									</button>
 								</a>
 							</div>
-							<div class="btn-group " role="group" aria-label="...">
-								<a href="<?php echo base_url(); ?>relatorio/produtos">
-									<button type="button" class="btn btn-sm btn-warning ">
-										<span class="glyphicon glyphicon-pencil"></span> Produtos
-									</button>
-								</a>
-							</div>													
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-gift"></span> Produtos <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">							
+									<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-list-alt"></span> Lista</a></li>
+									<li role="separator" class="divider"></li>							
+									<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-list-alt"></span> Estoque</a></li>
+								</ul>
+							</div>																				
 							<?php } ?>
 						</li>
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
@@ -90,18 +93,6 @@
 							</div>							
 						</li>						
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">						
-							<!--<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-usd"></span> Finanças <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu">							
-									<li><a href="<?php echo base_url() ?>relatorio/parcelas"><span class="glyphicon glyphicon-pencil"></span> Receitas & Despesas</a></li>
-									<li role="separator" class="divider"></li>							
-									<li><a href="<?php echo base_url() ?>relatorio/despesas"><span class="glyphicon glyphicon-pencil"></span> Despesas</a></li>
-									<li role="separator" class="divider"></li>
-									<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>
-								</ul>
-							</div>-->
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
 									<span class="glyphicon glyphicon-home"></span> enkontraki <span class="caret"></span>
@@ -111,19 +102,13 @@
 									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas de Negócios</a></li>
 									<li role="separator" class="divider"></li>									
 									<?php } ?>
-									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Outras Empresas</a></li>									
-									<!--<li role="separator" class="divider"></li>
-									<li><a href="<?php echo base_url() ?>login/sair"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>-->
+									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Outras Empresas</a></li>
 								</ul>
 							</div>
-							
-						</li>
-						<li class="btn-toolbar btn-sm navbar-form navbar-left" role="toolbar" aria-label="...">
-							
 							<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) && ($_SESSION['log']['idSis_Empresa'] != 5))  { ?>
 							<div class="btn-group" role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/loginempresa"> 	
-									<button type="button" class="btn btn-sm active ">Cad.Ind/ Renovar em 
+									<button type="button" class="btn btn-sm active ">Renovar em: 
 										<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
 									</button>
 								</a>	
@@ -131,21 +116,21 @@
 							<?php } else if ($_SESSION['log']['idSis_Empresa'] != 5){?>
 							<div class="btn-group" role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/loginempresa"> 	
-									<button type="button" class="btn btn-sm active ">Cad.Ind/ Renovar Assinatura 
+									<button type="button" class="btn btn-sm active ">Renovar Assinatura 
 										
 									</button>
 								</a>	
 							</div>
 							<?php } ?>
-							
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>login/sair">
 									<button type="button" class="btn btn-sm btn-danger ">
 										<span class="glyphicon glyphicon-log-out"></span> Sair
 									</button>
 								</a>
-							</div>
+							</div>							
 						</li>
+
 					</ul>
 				</div>			
 			</div>

@@ -3071,10 +3071,10 @@ $(document).ready(function () {
 
         $(".input_fields_wrap9").append('\
             <div class="form-group" id="9div'+pc+'">\
-                <div class="panel panel-success">\
+                <div class="panel panel-info">\
                     <div class="panel-heading">\
                         <div class="row">\
-                            <div class="col-md-1">\
+                            <div class="col-md-2">\
                                 <label for="QtdProduto">Qtd:</label><br>\
                                 <div class="input-group">\
                                     <input type="text" class="form-control Numero" maxlength="3" id="QtdProduto'+pc+'" placeholder="0"\
@@ -3082,17 +3082,12 @@ $(document).ready(function () {
                                         name="QtdProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
-                            <div class="col-md-4">\
+                            <div class="col-md-6">\
                                 <label for="idTab_Produto">Produto:</label><br>\
                                 <select class="form-control Chosen" id="listadinamicab'+pc+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+pc+',\'Produto\')" name="idTab_Produto'+pc+'">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
-							<div class="col-md-3">\
-								<label for="ObsProduto'+pc+'">Obs:</label><br>\
-								<input type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
-									   name="ObsProduto'+pc+'" value="">\
-							</div>\
                             <div class="col-md-2">\
                                 <label for="ValorProduto">Valor:</label><br>\
                                 <div class="input-group id="txtHint">\
@@ -3112,7 +3107,12 @@ $(document).ready(function () {
                             </div>\
                         </div>\
 						<div class="row">\
-							<div class="col-md-8"></div>\
+							<div class="col-md-5"></div>\
+							<div class="col-md-3">\
+								<label for="ObsProduto'+pc+'">Obs:</label><br>\
+								<input type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
+									   name="ObsProduto'+pc+'" value="">\
+							</div>\
 							<div class="col-md-2">\
 								<label for="DataValidadeProduto'+pc+'">Validade:</label>\
 								<div class="input-group DatePicker">\
@@ -3184,10 +3184,10 @@ $(document).ready(function () {
 		
 		$(".input_fields_wrap10").append('\
 			<div class="form-group" id="10div'+ps+'">\
-				<div class="panel panel-danger">\
+				<div class="panel panel-warning">\
 					<div class="panel-heading">\
 						<div class="row">\
-							<div class="col-md-1">\
+							<div class="col-md-2">\
 								<label for="QtdServico">Qtd:</label><br>\
 								<div class="input-group">\
 									<input type="text" class="form-control Numero" maxlength="3" id="QtdServico'+ps+'" placeholder="0"\
@@ -3195,19 +3195,14 @@ $(document).ready(function () {
 										name="QtdServico'+ps+'" value="">\
 								</div>\
 							</div>\
-							<div class="col-md-3">\
+							<div class="col-md-6">\
 								<label for="idTab_Servico">Produto:</label><br>\
 								<select class="form-control Chosen" id="listadinamica'+ps+'" onchange="buscaValorDevTabelas(this.value,this.name,\'Valor\','+ps+',\'Produto\')" name="idTab_Servico'+ps+'">\
 									<option value="">-- Selecione uma opção --</option>\
 								</select>\
 							</div>\
-							<div class="col-md-3">\
-								<label for="ObsServico'+ps+'">Obs:</label><br>\
-								<input type="text" class="form-control" id="ObsServico'+ps+'" maxlength="250"\
-									   name="ObsServico'+ps+'" value="">\
-							</div>\
 							<div class="col-md-2">\
-								<label for="ValorServico">Valor do Produto:</label><br>\
+								<label for="ValorServico">Valor:</label><br>\
 								<div class="input-group">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
@@ -3223,16 +3218,14 @@ $(document).ready(function () {
 										   name="SubtotalServico'+ps+'" value="">\
 								</div>\
 							</div>\
-							<div class="col-md-1">\
-								<label><br></label><br>\
-								<a href="#" id="'+ps+'" class="remove_field10 btn btn-danger"\
-									onclick="calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
-									<span class="glyphicon glyphicon-trash"></span>\
-								</a>\
-							</div>\
 						</div>\
 						<div class="row">\
-							<div class="col-md-9"></div>\
+							<div class="col-md-5"></div>\
+							<div class="col-md-3">\
+								<label for="ObsServico'+ps+'">Obs:</label><br>\
+								<input type="text" class="form-control" id="ObsServico'+ps+'" maxlength="250"\
+									   name="ObsServico'+ps+'" value="">\
+							</div>\
 							<div class="col-md-2">\
 								<label for="DataValidadeServico'+ps+'">Validade:</label>\
 								<div class="input-group DatePicker">\
@@ -3242,6 +3235,13 @@ $(document).ready(function () {
 									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
 										   name="DataValidadeServico'+ps+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 								</div>\
+							</div>\
+							<div class="col-md-1">\
+								<label><br></label><br>\
+								<a href="#" id="'+ps+'" class="remove_field10 btn btn-danger"\
+									onclick="calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
+									<span class="glyphicon glyphicon-trash"></span>\
+								</a>\
 							</div>\
 						</div>\
 					</div>\

@@ -917,11 +917,11 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
 		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 		
-        $data['titulo'] = 'Nova Receita';
+        $data['titulo'] = 'NOVA RECEITA';
         $data['form_open_path'] = 'orcatrata/cadastrar3';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'primary';
+        $data['panel'] = 'success';
         $data['metodo'] = 1;
 
 		$data['collapse'] = '';	
@@ -1932,11 +1932,11 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
 		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 
-        $data['titulo'] = 'Editar Receita';
+        $data['titulo'] = 'EDITAR RECEITA';
         $data['form_open_path'] = 'orcatrata/alterar2';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'primary';
+        $data['panel'] = 'success';
         $data['metodo'] = 2;
 
 		$data['collapse'] = '';	
@@ -2391,11 +2391,11 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
 		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 
-        $data['titulo'] = 'Nova Despesa';
+        $data['titulo'] = 'NOVA DESPESA';
         $data['form_open_path'] = 'orcatrata/cadastrardesp';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'primary';
+        $data['panel'] = 'danger';
         $data['metodo'] = 1;
 
 		$data['collapse'] = '';	
@@ -2453,6 +2453,17 @@ class Orcatrata extends CI_Controller {
         ($data['orcatrata']['AprovadoOrca'] == 'S') ?
             $data['div']['AprovadoOrca'] = '' : $data['div']['AprovadoOrca'] = 'style="display: none;"';
 
+        $data['radio'] = array(
+            'ConcluidoOrca' => $this->basico->radio_checked($data['orcatrata']['ConcluidoOrca'], 'Orçamento Concluido', 'NS'),
+        );
+        ($data['orcatrata']['ConcluidoOrca'] == 'S') ?
+            $data['div']['ConcluidoOrca'] = '' : $data['div']['ConcluidoOrca'] = 'style="display: none;"';
+
+        $data['radio'] = array(
+            'QuitadoOrca' => $this->basico->radio_checked($data['orcatrata']['QuitadoOrca'], 'Orçamento Quitado', 'NS'),
+        );
+        ($data['orcatrata']['QuitadoOrca'] == 'S') ?
+            $data['div']['QuitadoOrca'] = '' : $data['div']['QuitadoOrca'] = 'style="display: none;"';
 			
         #Ver uma solução melhor para este campo
         #(!$data['orcatrata']['TipoFinanceiro']) ? $data['orcatrata']['TipoFinanceiro'] = '1' : FALSE;

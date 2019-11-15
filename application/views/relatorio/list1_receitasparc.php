@@ -1,40 +1,43 @@
 <div style="overflow: auto; height: 200px; ">		
-	<div class="panel panel-default">
-		<div class="panel-body">
-
-			<div class="col-md-1"></div>
-			<div class="col-md-3">
-				<label for="DataFim"><?php echo $titulo1; ?> Total:</label>
-				<div class="input-group">
-					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somareceber ?>">
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			<div class="row">	
+				<div class="col-md-1"></div>
+				<div class="col-md-3">
+					<label for="DataFim"><?php echo $titulo1; ?> Total:</label>
+					<div class="input-group">
+						<span class="input-group-addon">R$</span>
+						<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somareceber ?>">
+					</div>
 				</div>
-			</div>
-			<div class="col-md-3">
-				<label for="DataFim">Recebido:</label>
-				<div class="input-group">
-					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total Recebido" value="<?php echo $report->soma->somarecebido ?>">
+				<div class="col-md-3">
+					<label for="DataFim">Recebido:</label>
+					<div class="input-group">
+						<span class="input-group-addon">R$</span>
+						<input type="text" class="form-control" disabled aria-label="Total Recebido" value="<?php echo $report->soma->somarecebido ?>">
+					</div>
 				</div>
-			</div>
-			<div class="col-md-3">
-				<label for="DataFim">à Receber:</label>
-				<div class="input-group">
-					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total a Receber" value="<?php echo $report->soma->balanco ?>">
+				<div class="col-md-3">
+					<label for="DataFim">à Receber:</label>
+					<div class="input-group">
+						<span class="input-group-addon">R$</span>
+						<input type="text" class="form-control" disabled aria-label="Total a Receber" value="<?php echo $report->soma->balanco ?>">
+					</div>
 				</div>
-			</div>
-			<div class="col-md-1"></div>
-		</div>		
-	</div>
-
+				<div class="col-md-1"></div>
+			</div>	
+		</div>
+	</div>		
+			
+		
+		
 	<div class="container-fluid">
 		<div class="row">
 			<div>
 				<table class="table table-bordered table-condensed table-striped">	
 					<tfoot>
 						<tr>
-							<th colspan="3" class="active">Total encontrado: <?php echo $report->num_rows(); ?> resultado(s)</th>
+							<th colspan="3" class="active">Total de Parcelas: <?php echo $report->num_rows(); ?> resultado(s)</th>
 						</tr>
 					</tfoot>
 				</table>            

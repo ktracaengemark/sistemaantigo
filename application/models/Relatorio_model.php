@@ -2181,7 +2181,7 @@ class Relatorio_model extends CI_Model {
             'SELECT
                 SUM(APV.QtdProduto) AS QtdCompra,
                 TP.idTab_Produto,
-                OT.idTab_TipoRD
+				APV.idTab_TipoRD
             FROM
                 App_Cliente AS C,
                 App_OrcaTrata AS OT
@@ -2196,9 +2196,8 @@ class Relatorio_model extends CI_Model {
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
                 APV.idApp_Produto != "0" 
-
                 ' . $data['Produtos'] . ' AND
-                OT.idTab_TipoRD = "1"
+                APV.idTab_TipoRD = "1"
             GROUP BY
                 TP.idTab_Produto
             ORDER BY
@@ -2221,7 +2220,7 @@ class Relatorio_model extends CI_Model {
             'SELECT
                 SUM(APV.QtdProduto) AS Qtd,
                 TP.idTab_Produto,
-                OT.idTab_TipoRD
+				APV.idTab_TipoRD
             FROM
                 App_Cliente AS C,
                 App_OrcaTrata AS OT
@@ -2236,9 +2235,8 @@ class Relatorio_model extends CI_Model {
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
                 APV.idApp_Produto != "0" 
-
                 ' . $data['Produtos'] . ' AND
-                OT.idTab_TipoRD = "2"
+                APV.idTab_TipoRD = "2"
             GROUP BY
                 TP.idTab_Produto
             ORDER BY
@@ -2262,7 +2260,7 @@ class Relatorio_model extends CI_Model {
             'SELECT
                 SUM(APV.QtdServico) AS QtdDevolve,
                 TP.idTab_Produto,
-                OT.idTab_TipoRD
+                APV.idTab_TipoRD
             FROM
                 App_Cliente AS C,
                 App_OrcaTrata AS OT
@@ -2276,10 +2274,9 @@ class Relatorio_model extends CI_Model {
                 C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
-                APV.idApp_Servico != "0" AND
-                C.idApp_Cliente = OT.idApp_Cliente
+                APV.idApp_Servico != "0" 
                 ' . $data['Produtos'] . ' AND
-                OT.idTab_TipoRD = "4"
+                APV.idTab_TipoRD = "4"
             GROUP BY
                 TP.idTab_Produto
             ORDER BY
@@ -2300,9 +2297,9 @@ class Relatorio_model extends CI_Model {
 
         $query['Devolvidos2'] = $this->db->query(
             'SELECT
-                SUM(APV.QtdServico) AS QtdDevolve,
+                SUM(APV.QtdServico) AS QtdDevolve2,
                 TP.idTab_Produto,
-                OT.idTab_TipoRD
+                APV.idTab_TipoRD
             FROM
                 App_Cliente AS C,
                 App_OrcaTrata AS OT
@@ -2317,9 +2314,8 @@ class Relatorio_model extends CI_Model {
                 C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
                 APV.idApp_Servico != "0" 
-
                 ' . $data['Produtos'] . ' AND
-                OT.idTab_TipoRD = "3"
+                APV.idTab_TipoRD = "3"
             GROUP BY
                 TP.idTab_Produto
             ORDER BY
@@ -2342,7 +2338,7 @@ class Relatorio_model extends CI_Model {
             'SELECT
                 SUM(APV.QtdProduto) AS QtdConsumo,
                 TP.idTab_Produto,
-                OT.idTab_TipoRD
+                APV.idTab_TipoRD
             FROM
                 App_Cliente AS C,
                 App_OrcaTrata AS OT
@@ -2359,7 +2355,7 @@ class Relatorio_model extends CI_Model {
                 APV.idApp_Produto != "0" AND
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['Produtos'] . ' AND
-                OT.idTab_TipoRD = "3"
+                APV.idTab_TipoRD = "3"
             GROUP BY
                 TP.idTab_Produto
             ORDER BY
@@ -2496,6 +2492,11 @@ exit();*/
             if (isset($estoque->{$row->idTab_Produto}))
                 $estoque->{$row->idTab_Produto}->QtdDevolve = $row->QtdDevolve;
         }
+		
+        foreach ($query['Devolvidos2'] as $row) {
+            if (isset($estoque->{$row->idTab_Produto}))
+                $estoque->{$row->idTab_Produto}->QtdDevolve2 = $row->QtdDevolve2;
+        }		
 
         foreach ($query['Consumidos'] as $row) {
             if (isset($estoque->{$row->idTab_Produto}))
@@ -2503,16 +2504,17 @@ exit();*/
         }
 
 		$estoque->soma = new stdClass();
-		$somaqtdcompra= $somaqtdvenda= $somaqtddevolve= $somaqtdconsumo= $somaqtdvendida= $somaqtdestoque= 0;
+		$somaqtdcompra= $somaqtdvenda= $somaqtddevolve= $somaqtddevolve2= $somaqtdconsumo= $somaqtdvendida= $somaqtdestoque= 0;
 
 		foreach ($estoque as $row) {
 
 			$row->QtdCompra = (!isset($row->QtdCompra)) ? 0 : $row->QtdCompra;
             $row->Qtd = (!isset($row->Qtd)) ? 0 : $row->Qtd;
             $row->QtdDevolve = (!isset($row->QtdDevolve)) ? 0 : $row->QtdDevolve;
+            $row->QtdDevolve2 = (!isset($row->QtdDevolve2)) ? 0 : $row->QtdDevolve2;			
             $row->QtdConsumo = (!isset($row->QtdConsumo)) ? 0 : $row->QtdConsumo;
 
-            $row->QtdEstoque = $row->QtdCompra - $row->Qtd + $row->QtdDevolve - $row->QtdConsumo;
+            $row->QtdEstoque = $row->QtdCompra - $row->Qtd + $row->QtdDevolve - $row->QtdConsumo - $row->QtdDevolve2;
             $row->QtdVendida = $row->Qtd - $row->QtdDevolve;
 
 			$somaqtdcompra += $row->QtdCompra;
@@ -2523,6 +2525,9 @@ exit();*/
 
 			$somaqtddevolve += $row->QtdDevolve;
 			$row->QtdDevolve = ($row->QtdDevolve);
+			
+			$somaqtddevolve2 += $row->QtdDevolve2;
+			$row->QtdDevolve2 = ($row->QtdDevolve2);			
 
 			$somaqtdconsumo += $row->QtdConsumo;
 			$row->QtdConsumo = ($row->QtdConsumo);
@@ -2540,6 +2545,7 @@ exit();*/
 		$estoque->soma->somaqtdcompra = ($somaqtdcompra);
 		$estoque->soma->somaqtdvenda = ($somaqtdvenda);
 		$estoque->soma->somaqtddevolve = ($somaqtddevolve);
+		$estoque->soma->somaqtddevolve2 = ($somaqtddevolve2);		
 		$estoque->soma->somaqtdconsumo = ($somaqtdconsumo);
 		$estoque->soma->somaqtdvendida = ($somaqtdvendida);
 		$estoque->soma->somaqtdestoque = ($somaqtdestoque);

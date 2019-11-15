@@ -3,7 +3,7 @@
 <div class="col-sm-offset-2 col-md-8 ">		
 	
 	<?php echo validation_errors(); ?>
-	<div class="panel panel-primary">
+	<div class="panel panel-success">
 
 		<div class="panel-heading">
 			<?php echo form_open('relatorio/financeiro', 'role="form"'); ?>
@@ -11,8 +11,8 @@
 			<!--<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal11-sm">
 				<span class="glyphicon glyphicon-plus"></span><?php echo $titulo1; ?>
 			</button>-->
-			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-				<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo1; ?>
+			<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+				<span class="glyphicon glyphicon-filter"></span>Receita<?php #echo $titulo1; ?>
 			</button>											
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 				<span class="glyphicon glyphicon-search"></span>Parcelas
@@ -398,7 +398,7 @@
 	</div>
 
 	<?php echo validation_errors(); ?>
-	<div class="panel panel-primary">
+	<div class="panel panel-danger">
 
 		<div class="panel-heading">
 			<?php echo form_open('relatorio/financeiro', 'role="form"'); ?>
@@ -406,8 +406,8 @@
 			<!--<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal13-sm">
 				<span class="glyphicon glyphicon-plus"></span><?php echo $titulo2; ?>
 			</button>-->			
-			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
-				<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo2; ?>
+			<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
+				<span class="glyphicon glyphicon-filter"></span>Despesa<?php #echo $titulo2; ?>
 			</button>											
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 				<span class="glyphicon glyphicon-search"></span>Parcelas

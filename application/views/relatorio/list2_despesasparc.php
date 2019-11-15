@@ -1,30 +1,31 @@
 <div style="overflow: auto; height: 200px; ">		
-	<div class="panel panel-default">
-		<div class="panel-body">
-
-			<div class="col-md-1"></div>
-			<div class="col-md-3">
-				<label for="DataFim"><?php echo $titulo2; ?> Total:</label>
-				<div class="input-group">
-					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total de Saídas" value="<?php echo $report->soma->somareceber ?>">
+	<div class="panel panel-danger">
+		<div class="panel-heading">
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-3">
+					<label for="DataFim"><?php echo $titulo2; ?> Total:</label>
+					<div class="input-group">
+						<span class="input-group-addon">R$</span>
+						<input type="text" class="form-control" disabled aria-label="Total de Saídas" value="<?php echo $report->soma->somareceber ?>">
+					</div>
 				</div>
+				<div class="col-md-3">
+					<label for="DataFim">Pago:</label>
+					<div class="input-group">
+						<span class="input-group-addon">R$</span>
+						<input type="text" class="form-control" disabled aria-label="Total Pago" value="<?php echo $report->soma->somarecebido ?>">
+					</div>
+				</div>
+				<div class="col-md-3">
+					<label for="DataFim">à Pagar</label>
+					<div class="input-group">
+						<span class="input-group-addon">R$</span>
+						<input type="text" class="form-control" disabled aria-label="Total a Pagar" value="<?php echo $report->soma->balanco ?>">
+					</div>
+				</div>			
+				<div class="col-md-1"></div>
 			</div>
-			<div class="col-md-3">
-				<label for="DataFim">Pago:</label>
-				<div class="input-group">
-					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total Pago" value="<?php echo $report->soma->somarecebido ?>">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<label for="DataFim">à Pagar</label>
-				<div class="input-group">
-					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total a Pagar" value="<?php echo $report->soma->balanco ?>">
-				</div>
-			</div>			
-			<div class="col-md-1"></div>
 		</div>		
 	</div>
 
@@ -34,7 +35,7 @@
 				<table class="table table-bordered table-condensed table-striped">	
 					<tfoot>
 						<tr>
-							<th colspan="3" class="active">Total encontrado: <?php echo $report->num_rows(); ?> resultado(s)</th>
+							<th colspan="3" class="active">Total de Parcelas: <?php echo $report->num_rows(); ?> resultado(s)</th>
 						</tr>
 					</tfoot>
 				</table>            
