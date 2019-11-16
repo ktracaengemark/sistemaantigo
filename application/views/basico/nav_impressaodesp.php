@@ -23,7 +23,7 @@
 								</a>
 							</div>
 							<div class="btn-group " role="group" aria-label="...">
-								<a class=" text-left" href="<?php echo base_url() . 'orcatrata/alterar2/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
+								<a class=" text-left" href="<?php echo base_url() . 'orcatrata/alterardesp/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
 									<button type="button" class="btn btn-warning">
 										<span class="glyphicon glyphicon-edit"></span>
 									</button>
@@ -37,8 +37,8 @@
 								</a>
 							</div>							
 							<div class="btn-group " role="group" aria-label="...">
-								<a class=" text-left" href="<?php echo base_url() . 'orcatrata/cadastrar3/'; ?>">
-									<button type="button" class=" btn btn-primary">
+								<a class=" text-left" href="<?php echo base_url() . 'orcatrata/cadastrardesp/'; ?>">
+									<button type="button" class=" btn btn-danger">
 										<span class="glyphicon glyphicon-plus"></span>
 									</button>
 								</a>

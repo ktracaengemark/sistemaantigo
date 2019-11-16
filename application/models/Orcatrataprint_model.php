@@ -14,23 +14,6 @@ class Orcatrataprint_model extends CI_Model {
     }
 
     public function get_orcatrata($data) {
-
-        /*
-        OT.DataOrca,
-        OT.DataPrazo,
-        OT.DataConclusao,
-        OT.DataRetorno,
-        OT.DataEntradaOrca,
-        OT.idApp_Cliente,
-
-        OT.ValorOrca,
-        OT.ValorEntradaOrca,
-        OT.ValorRestanteOrca,
-        FP.FormaPag,
-        OT.QtdParcelasOrca,
-        OT.DataVencimentoOrca
-        */        
-
         $query = $this->db->query(
             'SELECT
 				OT.idApp_OrcaTrata,
@@ -44,6 +27,7 @@ class Orcatrataprint_model extends CI_Model {
 				OT.DataRetorno,
 				OT.DataEntradaOrca,
 				OT.idApp_Cliente,
+				OT.idApp_Fornecedor,
 				OT.ValorOrca,
 				OT.ValorEntradaOrca,
 				OT.ValorRestanteOrca,
@@ -55,14 +39,18 @@ class Orcatrataprint_model extends CI_Model {
 				OT.TipoFinanceiro,
 				FP.FormaPag,				
 				EF.NomeEmpresa,
-				MO.AVAP
-				
+				MO.AVAP,
+				MO.Abrev3,
+				MO.Modalidade,
+				TP.TipoFinanceiro,
+				FO.NomeFornecedor
             FROM           	
                 Tab_FormaPag AS FP,
 				App_OrcaTrata AS OT
 				LEFT JOIN Sis_Empresa AS EF ON EF.idSis_Empresa = OT.idSis_Empresa
 				LEFT JOIN Tab_Modalidade AS MO ON MO.Abrev2 = OT.AVAP
-
+				LEFT JOIN Tab_TipoFinanceiro AS TP ON TP.idTab_TipoFinanceiro = OT.TipoFinanceiro
+				LEFT JOIN App_Fornecedor AS FO ON FO.idApp_Fornecedor = OT.idApp_Fornecedor
             WHERE
             	OT.idApp_OrcaTrata = ' . $data . ' AND
                 OT.FormaPagamento = FP.idTab_FormaPag'

@@ -843,6 +843,7 @@ class Relatorio_model extends CI_Model {
 				OT.ObsOrca,
 				OT.QtdParcelasOrca,
 				MD.Modalidade,
+				VP.Abrev3,
 				VP.AVAP,
 				TFP.FormaPag
             FROM
@@ -964,6 +965,7 @@ class Relatorio_model extends CI_Model {
 				OT.ObsOrca,
 				OT.QtdParcelasOrca,
 				MD.Modalidade,
+				VP.Abrev3,				
 				VP.AVAP,
 				TFP.FormaPag
             FROM
@@ -4562,10 +4564,10 @@ exit();*/
                 E.NomeFornecedor,
 				TF.TipoFornec,
 				TS.StatusSN,
-				E.Fornec,
+				E.Ativo,
 				TA.Atividade,
                 E.DataNascimento,
-                E.CelularCliente,
+                E.Telefone1,
                 E.Telefone2,
                 E.Telefone3,
                 E.Sexo,
@@ -4582,7 +4584,7 @@ exit();*/
 					LEFT JOIN App_Contatofornec AS CE ON E.idApp_Fornecedor = CE.idApp_Fornecedor
 					LEFT JOIN Tab_RelaCom AS TCE ON TCE.idTab_RelaCom = CE.RelaCom
 					LEFT JOIN Tab_TipoFornec AS TF ON TF.Abrev = E.TipoFornec
-					LEFT JOIN Tab_StatusSN AS TS ON TS.Abrev = E.Fornec
+					LEFT JOIN Tab_StatusSN AS TS ON TS.Abrev = E.Ativo
 					LEFT JOIN App_Atividade AS TA ON TA.idApp_Atividade = E.Atividade
             WHERE
                 E.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -4613,7 +4615,7 @@ exit();*/
                 #$row->Sexo = $this->basico->get_sexo($row->Sexo);
                 #$row->Sexo = ($row->Sexo == 2) ? 'F' : 'M';
 
-                $row->Telefone = ($row->CelularCliente) ? $row->CelularCliente : FALSE;
+                $row->Telefone = ($row->Telefone1) ? $row->Telefone1 : FALSE;
                 $row->Telefone .= ($row->Telefone2) ? ' / ' . $row->Telefone2 : FALSE;
                 $row->Telefone .= ($row->Telefone3) ? ' / ' . $row->Telefone3 : FALSE;
 
@@ -5313,7 +5315,7 @@ exit();*/
         $query = $this->db->query('
             SELECT
                 idApp_Fornecedor,
-				CONCAT(NomeFornecedor, " ", " --- ", CelularCliente, " --- ", Telefone2) As NomeFornecedor
+				CONCAT(NomeFornecedor, " ", " --- ", Telefone1, " --- ", Telefone2) As NomeFornecedor
             FROM
                 App_Fornecedor
             WHERE

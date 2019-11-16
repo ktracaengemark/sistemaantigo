@@ -399,7 +399,28 @@
 																			}
 																			?>
 																		</select>
-																	</div>														
+																	</div>
+																	<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+																	<div class="col-md-4">
+																		<label for="idApp_Fornecedor">Fornecedor</label>
+																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																				id="idApp_Fornecedor" autofocus name="idApp_Fornecedor">
+																			<option value="">-- Sel. Fornecedor --</option>
+																			<?php
+																			foreach ($select['idApp_Fornecedor'] as $key => $row) {
+																					(!$orcatrata['idApp_Fornecedor']) ? $orcatrata['idApp_Fornecedor'] = '1' : FALSE;
+																				if ($orcatrata['idApp_Fornecedor'] == $key) {
+																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																				} else {
+																					echo '<option value="' . $key . '">' . $row . '</option>';
+																				}
+																			}
+																			?>
+																		</select>
+																	</div>
+																	<?php } else { ?>
+																	<div class="col-md-4"></div>																	
+																	<?php } ?>																	
 																	<div class="col-md-2">
 																		<label for="Descricao">Despesa</label><br>
 																		<input type="text" class="form-control" maxlength="200"

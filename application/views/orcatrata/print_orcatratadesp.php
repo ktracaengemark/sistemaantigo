@@ -35,13 +35,13 @@
 			
 			<div class="row">	
 				
-					<div class="panel panel-info">
+					<div class="panel panel-danger">
 						<div class="panel-heading">
 							
 							<div class="panel-heading text-left">
 								<h2><?php echo '<strong>' . $_SESSION['Orcatrata']['NomeEmpresa'] . '</strong><small> - ' . $_SESSION['Usuario']['Nome'] . '</small>' ?></h2>
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>								
-								<h3><?php echo '' . $_SESSION['Cliente']['NomeCliente'] . ' - ' . $_SESSION['Cliente']['idApp_Cliente'] . '' ?></h3>
+								<h3><?php echo '' . $_SESSION['Fornecedor']['NomeFornecedor'] . ' - ' . $_SESSION['Fornecedor']['idApp_Fornecedor'] . '' ?></h3>
 								<?php } ?>							
 															
 							</div>

@@ -4,7 +4,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class OrcatrataPrint extends CI_Controller {
+class OrcatrataPrintDesp extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -19,7 +19,7 @@ class OrcatrataPrint extends CI_Controller {
         #load header view
         $this->load->view('basico/header');
         #$this->load->view('basico/nav_principal');
-        $this->load->view('basico/nav_impressao');
+        $this->load->view('basico/nav_impressaodesp');
         #$this->load->view('orcatrata/nav_secundario');
     }
 

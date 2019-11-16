@@ -911,7 +911,7 @@ class Relatorio extends CI_Controller {
         $_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
         $_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];
 		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];
-		#$_SESSION['Orcatrata2']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];		
+		$_SESSION['Imprimir']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];		
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
