@@ -18,8 +18,8 @@ class OrcatrataPrint extends CI_Controller {
 
         #load header view
         $this->load->view('basico/header');
-        $this->load->view('basico/nav_principal');
-
+        #$this->load->view('basico/nav_principal');
+        $this->load->view('basico/nav_impressao');
         #$this->load->view('orcatrata/nav_secundario');
     }
 
@@ -64,6 +64,7 @@ class OrcatrataPrint extends CI_Controller {
 			$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
 			$_SESSION['Usuario'] = $this->Usuario_model->get_usuario($data['orcatrata']['idSis_Usuario'], TRUE);
 			$_SESSION['Orcatrata'] = $this->OrcatrataPrint_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);
+			#$_SESSION['Orcatrata'] = $data['query'] = $this->OrcatrataPrint_model->get_orcatrata($id, TRUE);
             #$_SESSION['log']['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
 
             

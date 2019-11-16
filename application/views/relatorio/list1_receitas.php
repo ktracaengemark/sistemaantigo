@@ -97,7 +97,7 @@
 									echo '<td class="text-right">' . $row['ValorOrca'] . '</td>';
 									echo '<td class="text-right">' . $row['ValorDev'] . '</td>';
 									echo '<td class="text-right">' . $row['ValorRestanteOrca'] . '</td>';
-									echo '<td>' . $row['AVAP'] . ' - ' . $row['QtdParcelasOrca'] . ' X ' . $row['Modalidade'] . ' - ' . $row['FormaPag'] . '</td>';
+									echo '<td>' . $row['AVAP'] . ' - ' . $row['Modalidade'] . ' - ' . $row['QtdParcelasOrca'] . ' X - ' . $row['FormaPag'] . '</td>';
 									#echo '<td>' . $row['QtdParcelasOrca'] . '</td>';
 									#echo '<td>' . $row['Modalidade'] . '</td>';
 									#echo '<td>' . $row['FormaPag'] . '</td>';
@@ -149,6 +149,7 @@
 						<thead>
 							<tr>
 								<!--<th class="active">EdtOrç</th>-->							
+								<th class="active">Imp.</th>								
 								<th class="active">Orç.</th>
 								<th class="col-md-3 active" scope="col">Receita</th>
 								<th class="col-md-2 active" scope="col">Valor</th>					
@@ -168,11 +169,17 @@
 												<span class="glyphicon glyphicon-edit notclickable"></span>
 											</a>
 										</td>';
-									*/	
+									*/
+									echo '<td class="notclickable">
+											<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
+												<span class="glyphicon glyphicon-print notclickable"></span>
+											</a>
+											
+										</td>';									
 									echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 									echo '<td>' . $row['Descricao'] . '</td>';
 									echo '<td class="text-right">' . $row['ValorRestanteOrca'] . '</td>';
-									echo '<td>' . $row['AVAP'] . ' - ' . $row['QtdParcelasOrca'] . ' X ' . $row['Modalidade'] . ' - ' . $row['FormaPag'] . '</td>';
+									echo '<td>' . $row['AVAP'] . ' - ' . $row['Modalidade'] . ' - ' . $row['QtdParcelasOrca'] . ' X ' . $row['FormaPag'] . '</td>';
 									echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
 									echo '<td>' . $row['QuitadoOrca'] . '</td>';
 								echo '</tr>';

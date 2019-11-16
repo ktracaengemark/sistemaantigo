@@ -3,8 +3,8 @@
 <div class="col-sm-offset-3 col-md-6 ">		
 	
 	<?php echo validation_errors(); ?>
-	<div class="panel panel-primary">
-
+	
+		<!--
 		<div class="panel-heading">
 			
 			<a class=" text-left" href="javascript:window.print()">
@@ -29,8 +29,8 @@
 			</a>			
 			
 		</div>
-	
-		<div style="overflow: auto; height: auto; ">
+		-->
+		
 
 			
 			<div class="row">	
@@ -39,16 +39,17 @@
 						<div class="panel-heading">
 							
 							<div class="panel-heading text-left">
-								<h2><?php echo '<strong>' . $_SESSION['Orcatrata']['NomeEmpresa'] . '</strong><small> - Atendente: ' . $_SESSION['Usuario']['Nome'] . '</small>' ?></h2>
+								<h2><?php echo '<strong>' . $_SESSION['Orcatrata']['NomeEmpresa'] . '</strong><small> - ' . $_SESSION['Usuario']['Nome'] . '</small>' ?></h2>
+								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>								
 								<h3><?php echo '' . $_SESSION['Cliente']['NomeCliente'] . ' - ' . $_SESSION['Cliente']['idApp_Cliente'] . '' ?></h3>
+								<?php } ?>							
+															
 							</div>
 
 							<div class="panel-body">
 
-
-								<?php echo '<h3><strong>Orçamento - ' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '</strong></h3>' ?>
 								<!--<hr />-->
-								
+								<h3 class="text-left">Orçamento<?php echo '<strong> - ' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '</strong>' ?> </h3>								
 								<table class="table table-bordered table-condensed table-striped">
 									<thead>
 										<tr>
@@ -64,7 +65,7 @@
 										</tr>
 									</tbody>
 								</table>
-								
+								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>								
 								<h3 class="text-left">Produtos / Serviços </h3>
 
 								<table class="table table-bordered table-condensed table-striped">
@@ -123,6 +124,7 @@
 
 									</tbody>
 								</table>
+								<?php } ?>								
 								<!--<hr />-->
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 								<h3 class="text-left">Produtos Devolvidos  </h3>
@@ -301,6 +303,6 @@
 				
 			</div>
 
-		</div>
-	</div>	
+		
+		
 </div>

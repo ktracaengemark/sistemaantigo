@@ -1042,7 +1042,8 @@ class Orcatrata extends CI_Controller {
             echo "</pre>";
             exit ();
             */
-
+			$_SESSION['Orcatrata'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);
+			#$_SESSION['Orcatrata2'] = $data['query'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);
             #### App_Servico ####
             if (isset($data['servico'])) {
                 $max = count($data['servico']);
@@ -1841,7 +1842,7 @@ class Orcatrata extends CI_Controller {
             $_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
             $_SESSION['Cliente']['NomeCliente'] = (strlen($data['query']['NomeCliente']) > 12) ? substr($data['query']['NomeCliente'], 0, 12) : $data['query']['NomeCliente'];
 			#$_SESSION['log']['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
-			$_SESSION['Orcatrata'] = $data['query'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);
+			$_SESSION['Orcatrata'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);
             #### App_Servico ####
             $data['servico'] = $this->Orcatrata_model->get_servico($id);
             if (count($data['servico']) > 0) {
