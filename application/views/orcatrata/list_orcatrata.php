@@ -175,7 +175,7 @@
 											</a>
 											
 												
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrintcons/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
 											

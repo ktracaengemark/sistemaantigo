@@ -845,30 +845,20 @@ function adicionaProcedimento() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-3">\
+						<div class="col-md-4">\
 							<label for="Procedimento'+pc+'">Procedimento:</label>\
 							<textarea class="form-control" id="Procedimento'+pc+'"\
 									  name="Procedimento'+pc+'"></textarea>\
 						</div>\
-						<div class="col-md-1">\
-							<label for="Prioridade'+pc+'">Prd.:</label>\
+						<div class="col-md-2">\
+							<label for="Prioridade'+pc+'">Prioridade:</label>\
 							<select data-placeholder="Selecione uma opção..." class="form-control"\
 									 id="listadinamicac'+pc+'" name="Prioridade'+pc+'">\
 								<option value="" checked>Alta</option>\
 							</select>\
 						</div>\
-						<div class="col-md-2">\
-							<label for="DataProcedimentoLimite'+pc+'">Data do Proced.:</label>\
-							<div class="input-group DatePicker">\
-								<span class="input-group-addon" disabled>\
-									<span class="glyphicon glyphicon-calendar"></span>\
-								</span>\
-								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
-									   name="DataProcedimentoLimite'+pc+'" value="">\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="DataProcedimento'+pc+'">Data do Proced.:</label>\
+						<div class="col-md-3">\
+							<label for="DataProcedimento'+pc+'">Feito em:</label>\
 							<div class="input-group DatePicker">\
 								<span class="input-group-addon" disabled>\
 									<span class="glyphicon glyphicon-calendar"></span>\
@@ -877,6 +867,19 @@ function adicionaProcedimento() {
 									   name="DataProcedimento'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 							</div>\
 						</div>\
+						<div class="col-md-3">\
+							<label for="DataProcedimentoLimite'+pc+'">Limite:</label>\
+							<div class="input-group DatePicker">\
+								<span class="input-group-addon" disabled>\
+									<span class="glyphicon glyphicon-calendar"></span>\
+								</span>\
+								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataProcedimentoLimite'+pc+'" value="">\
+							</div>\
+						</div>\
+					</div>\
+					<div class="row">\
+						<div class="col-md-9"></div>\
 						<div class="col-md-2">\
 							<label for="ConcluidoProcedimento">Proc. Concl.? </label><br>\
 							<div class="form-group">\
@@ -892,7 +895,7 @@ function adicionaProcedimento() {
 								</div>\
 							</div>\
 						</div>\
-						<div class="col-md-2">\
+						<div class="col-md-1">\
 							<label><br></label><br>\
 							<button type="button" id="'+pc+'" class="remove_field3 btn btn-danger">\
 								<span class="glyphicon glyphicon-trash"></span>\
@@ -3410,7 +3413,7 @@ $(document).ready(function () {
 		
 		$(".input_fields_wrap12").append('\
 			<div class="form-group" id="12div'+ps+'">\
-				<div class="panel panel-danger">\
+				<div class="panel panel-warning">\
 					<div class="panel-heading">\
 						<div class="row">\
 							<div class="col-md-1">\
@@ -3433,7 +3436,7 @@ $(document).ready(function () {
 									   name="ObsServico'+ps+'" value="">\
 							</div>\
 							<div class="col-md-2">\
-								<label for="ValorServico">Valor do Produto:</label><br>\
+								<label for="ValorServico">Valor:</label><br>\
 								<div class="input-group">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \

@@ -31,7 +31,8 @@
 		</div>
 		-->
 		
-
+	<?php if ( !isset($evento) && isset($_SESSION['Orcatrata'])) { ?>
+		<?php if ($_SESSION['Orcatrata']['idApp_OrcaTrata'] != 1 ) { ?>
 			
 			<div class="row">	
 				
@@ -311,6 +312,7 @@
 				
 			</div>
 
-		
+		<?php } ?>
+	<?php } ?>	
 		
 </div>

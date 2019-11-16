@@ -45,13 +45,13 @@
 												<div class="panel panel-info">
 													<div class="panel-heading">
 														<div class="row">
-															<div class="col-md-3">
+															<div class="col-md-4">
 																<label for="Procedimento<?php echo $i ?>">Procedimento:</label>
 																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 															</div>
-															<div class="col-md-1">
-																<label for="Prioridade<?php echo $i ?>">Prd.:</label>
+															<div class="col-md-2">
+																<label for="Prioridade<?php echo $i ?>">Prioridade:</label>
 																<?php if ($i == 1) { ?>
 																<?php } ?>
 																<select data-placeholder="Selecione uma opção..." class="form-control" 
@@ -68,7 +68,17 @@
 																	?>
 																</select>
 															</div>
-															<div class="col-md-2">
+															<div class="col-md-3">
+																<label for="DataProcedimento<?php echo $i ?>">Feito em:</label>
+																<div class="input-group <?php echo $datepicker; ?>">
+																	<span class="input-group-addon" disabled>
+																		<span class="glyphicon glyphicon-calendar"></span>
+																	</span>
+																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																		   name="DataProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimento']; ?>">
+																</div>
+															</div>															
+															<div class="col-md-3">
 																<label for="DataProcedimentoLimite<?php echo $i ?>">Limite</label>
 																<div class="input-group <?php echo $datepicker; ?>">
 																	<span class="input-group-addon" disabled>
@@ -78,17 +88,9 @@
 																		   name="DataProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimentoLimite']; ?>">
 																</div>
 															</div>															
-															<div class="col-md-2">
-																<label for="DataProcedimento<?php echo $i ?>">Cadastro</label>
-																<div class="input-group <?php echo $datepicker; ?>">
-																	<span class="input-group-addon" disabled>
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																		   name="DataProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimento']; ?>">
-																</div>
-															</div>
-
+														</div>
+														<div class="row">
+															<div class="col-md-9"></div>
 															<div class="col-md-2">
 																<label for="ConcluidoProcedimento">Concluído? </label><br>
 																<div class="form-group">

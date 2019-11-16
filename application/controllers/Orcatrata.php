@@ -857,10 +857,13 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('Profissional' . $i) ||
+            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) || 
+					$this->input->post('Profissional' . $i) || $this->input->post('Prioridade' . $i) ||
                     $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
+				$data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
+				#$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
                 $data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
 				
@@ -916,6 +919,11 @@ class Orcatrata extends CI_Controller {
         $data['select']['Produto'] = $this->Basico_model->select_produtos();
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
 		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		$data['select']['Prioridade'] = array (
+			'1' => 'Alta',
+			'2' => 'Média',
+			'3' => 'Baixa',
+        );		
 		
         $data['titulo'] = 'NOVA RECEITA';
         $data['form_open_path'] = 'orcatrata/cadastrar3';
@@ -1105,7 +1113,7 @@ class Orcatrata extends CI_Controller {
                     $data['procedimento'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     #$data['procedimento'][$j]['idApp_Cliente'] = '1';
 					$data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'mysql');
-					
+					$data['procedimento'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimentoLimite'], 'mysql');
 
                 }
                 $data['procedimento']['idApp_Procedimento'] = $this->Orcatrata_model->set_procedimento($data['procedimento']);
@@ -1790,12 +1798,15 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) ||
+            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
+				$this->input->post('Profissional' . $i) || $this->input->post('Prioridade' . $i) ||
                     $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
+                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
-                $data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
+                $data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
+				$data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
 
                 $j++;
@@ -1901,7 +1912,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1; $j <= $data['count']['PMCount']; $j++) {
                         $data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'barras');
-
+						$data['procedimento'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimentoLimite'], 'barras');
 					}
                 }
             }
@@ -1935,7 +1946,12 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Produto'] = $this->Basico_model->select_produtos();
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
 		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
-
+		$data['select']['Prioridade'] = array (
+			'1' => 'Alta',
+			'2' => 'Média',
+			'3' => 'Baixa',
+        );
+		
         $data['titulo'] = 'EDITAR RECEITA';
         $data['form_open_path'] = 'orcatrata/alterar2';
         $data['readonly'] = '';
