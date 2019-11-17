@@ -12,7 +12,7 @@
 					<span class="glyphicon glyphicon-print"></span>
 				</button>			
 			</a>
-			<a class=" text-left" href="<?php echo base_url() . 'orcatrata/alterar2/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
+			<a class=" text-left" href="<?php echo base_url() . 'orcatrata/alterar2/'; ?>">
 				<button type="button" class="btn btn-warning">
 					<span class="glyphicon glyphicon-edit"></span>
 				</button>
@@ -76,13 +76,13 @@
 											<th class="col-md-1" scope="col">Qtd</th>																				
 											<!--<th scope="col">CodProd.</th>
 											<th scope="col">CategProd.</th>-->												
-											<th class="col-md-8" scope="col">DescProd.</th>							
+											<th class="col-md-8" scope="col">Produto</th>							
 											<th class="col-md-1" scope="col">Valor</th>
 											<th class="col-md-1" scope="col">Subtotal</th>
 										</tr>	
 										<tr>
 											<th class="col-md-1" scope="col"></th>
-											<th class="col-md-8" scope="col">id</th>	
+											<th class="col-md-8" scope="col">id-Obs</th>	
 											<!--<th scope="col">Unidade</th>																				
 											<th scope="col">Aux1</th>
 											<th scope="col">Aux2</th>-->
@@ -134,13 +134,13 @@
 									<thead>
 										<tr>
 											<th class="col-md-1" scope="col">Qtd</th>																															
-											<th class="col-md-9" scope="col">DescProd.</th>							
+											<th class="col-md-9" scope="col">Produto</th>							
 											<th class="col-md-1" scope="col">Valor</th>
 											<th class="col-md-1" scope="col">Subtotal</th>
 										</tr>	
 										<tr>
 											<th class="col-md-1" scope="col"></th>
-											<th class="col-md-9" scope="col">id</th>	
+											<th class="col-md-9" scope="col">id-Obs</th>	
 
 											<th class="col-md-1" scope="col">Data</th>							
 										</tr>

@@ -2425,7 +2425,7 @@ function adicionaParcelas() {
 								   name="Parcela'+pc+'" value="Ex.">\
 						</div>\
 						<div class="col-md-3">\
-							<label for="ValorParcela">Valor Parcela:</label><br>\
+							<label for="ValorParcela">Valor:</label><br>\
 							<div class="input-group" id="txtHint">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
 								<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"\
@@ -2433,7 +2433,7 @@ function adicionaParcelas() {
 							</div>\
 						</div>\
 						<div class="col-md-3">\
-							<label for="DataVencimento">Data Venc. Parc.</label>\
+							<label for="DataVencimento">Vencimento:</label>\
 							<div class="input-group DatePicker">\
 								<span class="input-group-addon" disabled>\
 									<span class="glyphicon glyphicon-calendar"></span>\
@@ -2443,7 +2443,7 @@ function adicionaParcelas() {
 							</div>\
 						</div>\
 						<div class="col-md-3">\
-							<label for="Quitado">Quitado????</label><br>\
+							<label for="Quitado">Parc.Quitado?</label><br>\
 							<div class="form-group">\
 								<div class="btn-group" data-toggle="buttons">\
 									<label class="btn btn-warning active" name="radio_Quitado'+pc+'" id="radio_Quitado'+pc+'N">\
@@ -3303,7 +3303,7 @@ $(document).ready(function () {
                 <div class="panel panel-success">\
                     <div class="panel-heading">\
                         <div class="row">\
-                            <div class="col-md-1">\
+                            <div class="col-md-2">\
                                 <label for="QtdProduto">Qtd:</label><br>\
                                 <div class="input-group">\
                                     <input type="text" class="form-control Numero" maxlength="3" id="QtdProduto'+pc+'" placeholder="0"\
@@ -3317,12 +3317,7 @@ $(document).ready(function () {
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
-							<div class="col-md-3">\
-								<label for="ObsProduto'+pc+'">Obs:</label><br>\
-								<input type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
-									   name="ObsProduto'+pc+'" value="">\
-							</div>\
-                            <div class="col-md-2">\
+                            <div class="col-md-3">\
                                 <label for="ValorProduto">Valor:</label><br>\
                                 <div class="input-group id="txtHint">\
                                     <span class="input-group-addon" id="basic-addon1">R$</span>\
@@ -3331,7 +3326,7 @@ $(document).ready(function () {
                                         name="ValorProduto'+pc+'" value="">\
                                 </div>\
                             </div>\
-                            <div class="col-md-2">\
+                            <div class="col-md-3">\
                                 <label for="SubtotalProduto">Subtotal:</label><br>\
                                 <div class="input-group id="txtHint">\
                                     <span class="input-group-addon" id="basic-addon1">R$</span>\
@@ -3341,7 +3336,12 @@ $(document).ready(function () {
                             </div>\
                         </div>\
 						<div class="row">\
-							<div class="col-md-8"></div>\
+							<div class="col-md-6"></div>\
+							<div class="col-md-3">\
+								<label for="ObsProduto'+pc+'">Obs:</label><br>\
+								<input type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
+									   name="ObsProduto'+pc+'" value="">\
+							</div>\
 							<div class="col-md-2">\
 								<label for="DataValidadeProduto'+pc+'">Validade:</label>\
 								<div class="input-group DatePicker">\

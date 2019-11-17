@@ -118,7 +118,7 @@
 																					<input type="hidden" name="ProdutoHidden" id="ProdutoHidden<?php echo $i ?>" value="<?php echo $i ?>">
 
 																					<div class="form-group" id="9div<?php echo $i ?>">
-																						<div class="panel panel-success">
+																						<div class="panel panel-info">
 																							<div class="panel-heading">
 																								<div class="row">
 																									<div class="col-md-2">
@@ -273,16 +273,16 @@
 																					<input type="hidden" name="ServicoHidden" id="ServicoHidden<?php echo $i ?>" value="<?php echo $i ?>">
 																					
 																					<div class="form-group" id="10div<?php echo $i ?>">
-																						<div class="panel panel-danger">
+																						<div class="panel panel-warning">
 																							<div class="panel-heading">
 																								<div class="row">
-																									<div class="col-md-1">
+																									<div class="col-md-2">
 																										<label for="QtdServico">Qtd:</label>
 																										<input type="text" class="form-control Numero" maxlength="3" id="QtdServico<?php echo $i ?>" placeholder="0"
 																												onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
 																												autofocus name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
 																									</div>
-																									<div class="col-md-3">
+																									<div class="col-md-6">
 																										<label for="idTab_Servico">Produto:</label>
 																										<?php if ($i == 1) { ?>
 																										<!--<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>servico/cadastrar/servico" role="button">
@@ -303,11 +303,7 @@
 																											?>
 																										</select>
 																									</div>
-																									<div class="col-md-3">
-																										<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
-																										<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
-																											   name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
-																									</div>
+																									
 																									<div class="col-md-2">
 																										<label for="ValorServico">Valor do Produto:</label>
 																										<div class="input-group">
@@ -327,9 +323,14 @@
 																									</div>
 																								</div>
 																								<div class="row">
-																									<div class="col-md-9"></div>
+																									<div class="col-md-5"></div>
+																									<div class="col-md-3">
+																										<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
+																										<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
+																											   name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
+																									</div>
 																									<div class="col-md-2">
-																										<label for="DataValidadeServico<?php echo $i ?>">Valid. do Prod.:</label>
+																										<label for="DataValidadeServico<?php echo $i ?>">Validade:</label>
 																										<div class="input-group <?php echo $datepicker; ?>">
 																											<span class="input-group-addon" disabled>
 																												<span class="glyphicon glyphicon-calendar"></span>

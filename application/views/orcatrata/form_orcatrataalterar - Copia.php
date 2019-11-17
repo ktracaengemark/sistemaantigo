@@ -4,8 +4,8 @@
 <div class="container-fluid">
 	<div class="row">
 
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 ">
 			<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
 				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
 					<nav class="navbar navbar-inverse">
@@ -522,7 +522,7 @@
 														<div class="panel-heading">
 															<div class="form-group">
 																<div class="row">
-																	<div class="col-md-4">
+																	<div class="col-md-2">
 																		<label for="TipoFinanceiro">Tipo de Receita</label>
 																		<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																				id="TipoFinanceiro" name="TipoFinanceiro">
@@ -539,19 +539,16 @@
 																			?>
 																		</select>
 																	</div>
-																	<div class="col-md-4"></div>
 																	<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
-																	<div class="col-md-4">
-																		<label for="Descricao">Descrição</label><br>
+																	<div class="col-md-2">
+																		<label for="Descricao">Receita</label><br>
 																		<input type="text" class="form-control" maxlength="200"
 																				name="Descricao" value="<?php echo $orcatrata['Descricao'] ?>">
 																	</div>
 																	<?php } ?>
-																</div>
-																
-																<div class="row">	
+																	
 																	<div <?php echo $visivel; ?>>	
-																		<div class="col-md-4">
+																		<div class="col-md-2">
 																			<label for="ValorOrca">Orçamento:</label><br>
 																			<div class="input-group" id="txtHint">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -560,7 +557,7 @@
 																					   name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
 																			</div>
 																		</div>
-																		<div class="col-md-4">
+																		<div class="col-md-2">
 																			<label for="ValorDev">Desconto:</label><br>
 																			<div class="input-group" id="txtHint">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -570,7 +567,7 @@
 																			</div>
 																		</div>
 																	</div>
-																	<div class="col-md-4">
+																	<div class="col-md-2">
 																		<label for="ValorRestanteOrca">Total:</label><br>
 																		<div class="input-group" id="txtHint">
 																			<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -583,7 +580,7 @@
 																</div>
 															</div>
 															<div class="row">
-																<div class="col-md-4">
+																<div class="col-md-2">
 																	<label for="FormaPagamento">Forma de Pagam.:</label>
 																	<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																			id="FormaPagamento" name="FormaPagamento">
@@ -599,7 +596,7 @@
 																		?>
 																	</select>
 																</div>
-																<div class="col-md-4">
+																<div class="col-md-2">
 																	<label for="DataVencimentoOrca">1º Venc.</label>
 																	<div class="input-group <?php echo $datepicker; ?>">
 																		<span class="input-group-addon" disabled>
@@ -611,7 +608,7 @@
 																			   name="DataVencimentoOrca" value="<?php echo $orcatrata['DataVencimentoOrca']; ?>">																			
 																	</div>
 																</div>																
-																<div class="col-md-4">
+																<div class="col-md-2">
 																	<label for="AVAP">À Vista/ Prazo</label><br>
 																	<div class="btn-block" data-toggle="buttons">
 																		<?php
@@ -1019,110 +1016,114 @@
 								</div>
 								<?php } ?>
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 5 ) { ?>
-									
+								<div class="panel-group">	
 									<div class="panel panel-primary">
 
-										<div class="panel-heading">
-
+										<div class="panel-heading text-left">
+											<a class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Procedimentos" aria-expanded="false" aria-controls="Procedimentos">
+												<span class="glyphicon glyphicon-menu-down"></span> Procedimentos
+											</a>
+										</div>
 										
-										
-											<div <?php echo $collapse; ?> id="Procedimentos">
-												<div class="panel-body">
+										<div <?php echo $collapse; ?> id="Procedimentos">
+											<div class="panel-body">
 
-													<input type="hidden" name="PMCount" id="PMCount" value="<?php echo $count['PMCount']; ?>"/>
+												<input type="hidden" name="PMCount" id="PMCount" value="<?php echo $count['PMCount']; ?>"/>
 
-													<div class="input_fields_wrap3">
+												<div class="input_fields_wrap3">
 
-													<?php
-													for ($i=1; $i <= $count['PMCount']; $i++) {
-													?>
+												<?php
+												for ($i=1; $i <= $count['PMCount']; $i++) {
+												?>
 
-													<?php if ($metodo > 1) { ?>
-													<input type="hidden" name="idApp_Procedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['idApp_Procedimento']; ?>"/>
-													<?php } ?>
+												<?php if ($metodo > 1) { ?>
+												<input type="hidden" name="idApp_Procedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['idApp_Procedimento']; ?>"/>
+												<?php } ?>
 
-													<div class="form-group" id="3div<?php echo $i ?>">
-														<div class="panel panel-info">
-															<div class="panel-heading">
-																<div class="row">
-																	<div class="col-md-4">
-																		<label for="Procedimento<?php echo $i ?>">Procedimento:</label>
-																		<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
-																				  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
+												<div class="form-group" id="3div<?php echo $i ?>">
+													<div class="panel panel-info">
+														<div class="panel-heading">
+															<div class="row">
+																<div class="col-md-4">
+																	<label for="Procedimento<?php echo $i ?>">Procedimento:</label>
+																	<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
+																			  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
+																</div>
+																<div class="col-md-2">
+																	<label for="DataProcedimento<?php echo $i ?>">Data do Proced.:</label>
+																	<div class="input-group <?php echo $datepicker; ?>">
+																		<span class="input-group-addon" disabled>
+																			<span class="glyphicon glyphicon-calendar"></span>
+																		</span>
+																		<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																			   name="DataProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimento']; ?>">
 																	</div>
-																	<div class="col-md-2">
-																		<label for="DataProcedimento<?php echo $i ?>">Data do Proced.:</label>
-																		<div class="input-group <?php echo $datepicker; ?>">
-																			<span class="input-group-addon" disabled>
-																				<span class="glyphicon glyphicon-calendar"></span>
-																			</span>
-																			<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																				   name="DataProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimento']; ?>">
-																		</div>
-																	</div>
+																</div>
 
-																	<div class="col-md-2">
-																		<label for="ConcluidoProcedimento">Proc. Concl.? </label><br>
-																		<div class="form-group">
-																			<div class="btn-group" data-toggle="buttons">
-																				<?php
-																				foreach ($select['ConcluidoProcedimento'] as $key => $row) {
-																					(!$procedimento[$i]['ConcluidoProcedimento']) ? $procedimento[$i]['ConcluidoProcedimento'] = 'N' : FALSE;
-
-																					if ($procedimento[$i]['ConcluidoProcedimento'] == $key) {
-																						echo ''
-																						. '<label class="btn btn-warning active" name="radiobutton_ConcluidoProcedimento' . $i . '" id="radiobutton_ConcluidoProcedimento' . $i .  $key . '">'
-																						. '<input type="radio" name="ConcluidoProcedimento' . $i . '" id="radiobuttondinamico" '
-																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																						. '</label>'
-																						;
-																					} else {
-																						echo ''
-																						. '<label class="btn btn-default" name="radiobutton_ConcluidoProcedimento' . $i . '" id="radiobutton_ConcluidoProcedimento' . $i .  $key . '">'
-																						. '<input type="radio" name="ConcluidoProcedimento' . $i . '" id="radiobuttondinamico" '
-																						. 'autocomplete="off" value="' . $key . '" >' . $row
-																						. '</label>'
-																						;
-																					}
-																				}
-																				?>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="col-md-1">
-																		<label><br></label><br>
-																		<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
-																			<span class="glyphicon glyphicon-trash"></span>
-																		</button>
-																	</div>
-																	<div class="col-md-3">
-																		<label for="idSis_Usuario<?php echo $i ?>">Profissional:</label>
-																		<?php if ($i == 1) { ?>
-																		<?php } ?>
-																		<select data-placeholder="Selecione uma opção..." class="form-control" readonly=""
-																				 id="listadinamicac<?php echo $i ?>" name="idSis_Usuario<?php echo $i ?> readonly="" ">
-																			<!--<option value="">-- Selecione uma opção --</option>-->
+																<div class="col-md-2">
+																	<label for="ConcluidoProcedimento">Proc. Concl.? </label><br>
+																	<div class="form-group">
+																		<div class="btn-group" data-toggle="buttons">
 																			<?php
-																			foreach ($select['idSis_Usuario'] as $key => $row) {
-																				if ($procedimento[$i]['idSis_Usuario'] == $key) {
-																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																			foreach ($select['ConcluidoProcedimento'] as $key => $row) {
+																				(!$procedimento[$i]['ConcluidoProcedimento']) ? $procedimento[$i]['ConcluidoProcedimento'] = 'N' : FALSE;
+
+																				if ($procedimento[$i]['ConcluidoProcedimento'] == $key) {
+																					echo ''
+																					. '<label class="btn btn-warning active" name="radiobutton_ConcluidoProcedimento' . $i . '" id="radiobutton_ConcluidoProcedimento' . $i .  $key . '">'
+																					. '<input type="radio" name="ConcluidoProcedimento' . $i . '" id="radiobuttondinamico" '
+																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																					. '</label>'
+																					;
 																				} else {
-																					echo '<option value="' . $key . '">' . $row . '</option>';
+																					echo ''
+																					. '<label class="btn btn-default" name="radiobutton_ConcluidoProcedimento' . $i . '" id="radiobutton_ConcluidoProcedimento' . $i .  $key . '">'
+																					. '<input type="radio" name="ConcluidoProcedimento' . $i . '" id="radiobuttondinamico" '
+																					. 'autocomplete="off" value="' . $key . '" >' . $row
+																					. '</label>'
+																					;
 																				}
 																			}
 																			?>
-																		</select>
+																		</div>
 																	</div>
+																</div>
+																<div class="col-md-1">
+																	<label><br></label><br>
+																	<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
+																		<span class="glyphicon glyphicon-trash"></span>
+																	</button>
+																</div>
+																<div class="col-md-3">
+																	<label for="idSis_Usuario<?php echo $i ?>">Profissional:</label>
+																	<?php if ($i == 1) { ?>
+																	<?php } ?>
+																	<select data-placeholder="Selecione uma opção..." class="form-control" readonly=""
+																			 id="listadinamicac<?php echo $i ?>" name="idSis_Usuario<?php echo $i ?> readonly="" ">
+																		<!--<option value="">-- Selecione uma opção --</option>-->
+																		<?php
+																		foreach ($select['idSis_Usuario'] as $key => $row) {
+																			if ($procedimento[$i]['idSis_Usuario'] == $key) {
+																				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																			} else {
+																				echo '<option value="' . $key . '">' . $row . '</option>';
+																			}
+																		}
+																		?>
+																	</select>
 																</div>
 															</div>
 														</div>
 													</div>
+												</div>
 
-													<?php
-													}
-													?>
+												<?php
+												}
+												?>
 
-													</div>
+												</div>
+
+												<div class="form-group">
 													<div class="row">
 														<div class="col-md-4">
 															<a class="add_field_button3 btn btn btn-warning" onclick="adicionaProcedimento()">
@@ -1131,10 +1132,11 @@
 														</div>
 													</div>
 												</div>
+
 											</div>
 										</div>
 									</div>
-								
+								</div>
 								<?php } ?>
 								
 								<!--
@@ -1244,8 +1246,11 @@
 						</div>
 					</div>
 				</div>
+
 			</div>
+
+
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-1"></div>
 	</div>
 </div>
