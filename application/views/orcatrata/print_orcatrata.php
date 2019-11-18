@@ -66,7 +66,7 @@
 										</tr>
 									</tbody>
 								</table>
-								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>								
+								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 								<h3 class="text-left">Produtos / Serviços </h3>
 
 								<table class="table table-bordered table-condensed table-striped">
@@ -118,7 +118,8 @@
 											<td><?php echo $produto[$i]['Convdesc'] ?></td>-->
 											<td><?php echo $produto[$i]['DataValidadeProduto'] ?></td>							
 										</tr>
-
+										
+										
 										<?php
 										}
 										?>
