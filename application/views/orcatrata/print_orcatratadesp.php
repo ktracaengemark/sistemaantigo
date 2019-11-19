@@ -1,40 +1,122 @@
 <?php if (isset($msg)) echo $msg; ?>
-
+			
 <div class="col-sm-offset-3 col-md-6 ">		
 	
 	<?php echo validation_errors(); ?>
-	
-		<!--
-		<div class="panel-heading">
 			
-			<a class=" text-left" href="javascript:window.print()">
-				<button type="button" class="btn btn-primary">
-					<span class="glyphicon glyphicon-print"></span>
-				</button>			
-			</a>
-			<a class=" text-left" href="<?php echo base_url() . 'orcatrata/alterar2/'; ?>">
-				<button type="button" class="btn btn-warning">
-					<span class="glyphicon glyphicon-edit"></span>
-				</button>
-			</a>
-			<a class=" text-left" href="<?php echo base_url() . 'orcatrata/cadastrar3/'; ?>">
-				<button type="button" class=" btn btn-danger">
-					<span class="glyphicon glyphicon-plus"></span>
-				</button>
-			</a>
-			<a class=" text-right" href="<?php echo base_url() . 'agenda/'; ?>">
-				<button type="button" class=" btn btn-info">
-					<span class="glyphicon glyphicon-remove"></span>
-				</button>
-			</a>			
-			
-		</div>
-		-->
-		
 	<?php if ( !isset($evento) && isset($_SESSION['Orcatrata'])) { ?>
 		<?php if ($_SESSION['Orcatrata']['idApp_OrcaTrata'] != 1 ) { ?>
-			
-			<div class="row">	
+		
+			<nav class="navbar navbar-center navbar-inverse navbar-fixed-top ">
+			  <div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span> 
+					</button>
+					<a class="navbar-brand" href="<?php echo base_url() ?>orcatrata/cadastrardesp/"> 
+						 <span class="glyphicon glyphicon-plus"></span> Nova Despesa
+					</a>
+					<!--
+					<a class="navbar-brand" href="<?php echo base_url() ?>orcatrata/cadastrardesp/"> 
+						 <button type="button" class="btn btn-sm btn-danger ">
+							<span class="glyphicon glyphicon-remove"></span> Fechar / <span class="glyphicon glyphicon-plus"></span> Nova Despesa
+						</button>
+					</a>
+					-->
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-center">
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group " role="group" aria-label="...">
+								<a href="javascript:window.print()">
+									<button type="button" class="btn btn-sm btn-info ">
+										<span class="glyphicon glyphicon-print"></span> Imprimir
+									</button>
+								</a>
+							</div>							
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group " role="group" aria-label="...">
+								<a <?php if (preg_match("/orcatrata\/alterardesp\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+									<a href="<?php echo base_url() . 'orcatrata/alterardesp/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
+										<button type="button" class="btn btn-sm btn-warning ">
+											<span class="glyphicon glyphicon-edit"></span> Editar
+										</button>										
+									</a>
+								</a>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group " role="group" aria-label="...">
+								<a <?php if (preg_match("/orcatrata\/cadastrar3\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+									<a href="<?php echo base_url() . 'orcatrata/cadastrar3/'; ?>">
+										<button type="button" class="btn btn-sm btn-primary ">
+											<span class="glyphicon glyphicon-plus"></span> Receita
+										</button>										
+									</a>
+								</a>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>
+						</li>						
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group " role="group" aria-label="...">
+								<a <?php if (preg_match("/orcatrata\/cadastrardesp\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+									<a href="<?php echo base_url() . 'orcatrata/cadastrardesp/'; ?>">
+										<button type="button" class="btn btn-sm btn-danger ">
+											<span class="glyphicon glyphicon-plus"></span> Despesa
+										</button>										
+									</a>
+								</a>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>							
+						</li>
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group " role="group" aria-label="...">
+								<a <?php if (preg_match("/relatorio\/financeiro\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+									<a href="<?php echo base_url() . 'relatorio/financeiro/'; ?>">
+										<button type="button" class="btn btn-sm btn-success ">
+											<span class="glyphicon glyphicon-list"></span> Relatório
+										</button>										
+									</a>
+								</a>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>							
+						</li>						
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">				
+							<div class="col-md-6 text-right">
+								<button  type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+									<span class="glyphicon glyphicon-trash"></span> Excluir
+								</button>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>							
+						</li>										
+						<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group " role="group" aria-label="...">
+								<a <?php if (preg_match("/agenda/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+									<a href="<?php echo base_url() . 'agenda/'; ?>">
+										<button type="button" class="btn btn-sm btn-active ">
+											<span class="glyphicon glyphicon-remove"></span> Fechar
+										</button>										
+									</a>
+								</a>
+							</div>
+							<div class="btn-group" role="group" aria-label="..."> </div>							
+						</li>						
+					</ul>
+
+				</div>
+				
+			  </div>
+			</nav>
+		
+		<?php } ?>
+	<?php } ?>			
+	<div style="overflow: auto; height: auto; ">
+		<div class="row">	
 				
 					<div class="panel panel-danger">
 						<div class="panel-heading">
@@ -311,8 +393,37 @@
 					</div>
 				
 			</div>
-
-		<?php } ?>
-	<?php } ?>			
-		
+	</div>
+				
 </div>
+<?php if ( !isset($evento) && isset($_SESSION['Orcatrata'])) { ?>
+	<?php if ($_SESSION['Orcatrata']['idApp_OrcaTrata'] != 1 ) { ?>		
+	<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header bg-danger">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
+				</div>
+				<div class="modal-body">
+					<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
+						Esta operação é irreversível.</p>
+				</div>
+				<div class="modal-footer">
+					<div class="col-md-6 text-left">
+						<button type="button" class="btn btn-warning" data-dismiss="modal">
+							<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+						</button>
+					</div>
+					<div class="col-md-6 text-right">
+						<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluirdesp/' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] ?>" role="button">
+							<span class="glyphicon glyphicon-trash"></span>Confirmar Exclusão do Orç:
+							<?php echo $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php } ?>
+<?php } ?>		

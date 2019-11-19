@@ -81,7 +81,7 @@
 									*/	
 									echo '<td class="notclickable">
 											<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrintDesp/imprimirdesp/' . $row['idApp_OrcaTrata'] . '">
-												<span class="glyphicon glyphicon-eye-open notclickable"></span>
+												<span class="glyphicon glyphicon-print notclickable"></span>
 											</a>
 										</td>';								
 									echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
@@ -104,7 +104,7 @@
 									echo '<td>' . $row['ObsOrca'] . '</td>';
 									echo '<td class="notclickable">
 											<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'orcatrata/excluirdesp/' . $row['idApp_OrcaTrata'] . '">
-												<span class="glyphicon glyphicon-remove notclickable"></span>
+												<span class="glyphicon glyphicon-trash notclickable"></span>
 											</a>
 										</td>';									
 								echo '</tr>';
@@ -171,7 +171,7 @@
 									*/
 									echo '<td class="notclickable">
 											<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrintDesp/imprimirdesp/' . $row['idApp_OrcaTrata'] . '">
-												<span class="glyphicon glyphicon-eye-open notclickable"></span>
+												<span class="glyphicon glyphicon-print notclickable"></span>
 											</a>
 										</td>';									
 									echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
@@ -182,8 +182,9 @@
 									echo '<td>' . $row['QuitadoOrca'] . '</td>';
 									echo '<td class="notclickable">
 											<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'orcatrata/excluirdesp/' . $row['idApp_OrcaTrata'] . '">
-												<span class="glyphicon glyphicon-remove notclickable"></span>
+												<span class="glyphicon glyphicon-trash notclickable"></span>
 											</a>
+											
 										</td>';									
 								echo '</tr>';
 							}

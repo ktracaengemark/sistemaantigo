@@ -72,7 +72,10 @@
 																	</div>
 																	<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 																	<div class="col-md-4">
-																		<label for="idApp_Fornecedor">Fornecedor</label>
+																		<label for="idApp_Fornecedor">Fornecedor:</label>
+																		<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>fornecedor/cadastrar/" role="button"> 
+																			<span class="glyphicon glyphicon-plus"></span> <b>Fornec.</b>
+																		</a>
 																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 																				id="idApp_Fornecedor" autofocus name="idApp_Fornecedor">
 																			<option value="">-- Sel. Fornecedor --</option>

@@ -62,7 +62,7 @@
                 </tbody>
 				<tfoot>
                     <tr>
-						<th colspan="2" class="active"></th>
+						<!--<th colspan="2" class="active"></th>-->
 						<th colspan="2" class="active text-right">Total de Produtos:</th>
 						<th colspan="1" class="active"><?php echo $report->soma->somaqtdcompra ?></th>
 						<!--<th colspan="1" class="active"><?php echo $report->soma->somaqtdvendida ?></th>-->			

@@ -73,20 +73,20 @@
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>orcatrata/cadastrar3">
 									<button type="button" class="btn btn-sm btn-primary ">
-										<span class="glyphicon glyphicon-pencil"></span>Receitas
+										<span class="glyphicon glyphicon-plus"></span>Receitas
 									</button>
 								</a>
 							</div>
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>orcatrata/cadastrardesp">
 									<button type="button" class="btn btn-sm btn-danger ">
-										<span class="glyphicon glyphicon-pencil"></span>Despesas
+										<span class="glyphicon glyphicon-plus"></span>Despesas
 									</button>
 								</a>
 							</div>							
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/financeiro">
-									<button type="button" class="btn btn-sm btn-warning ">
+									<button type="button" class="btn btn-sm btn-success ">
 										<span class="glyphicon glyphicon-usd"></span>Relatório
 									</button>
 								</a>
