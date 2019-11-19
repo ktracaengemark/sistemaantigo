@@ -148,9 +148,9 @@
 										</tr>
 									</tbody>
 								</table>
-								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>								
-								<h3 class="text-left">Produtos / Serviços </h3>
-
+								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+								<?php if( isset($count['PCount']) ) { ?>								
+								<h3 class="text-left">Produtos Entregues </h3>
 								<table class="table table-bordered table-condensed table-striped">
 									<thead>
 										<tr>
@@ -207,9 +207,12 @@
 
 									</tbody>
 								</table>
+								<?php } else echo '<h3 class="text-left">Produtos Entregues </h3>';{?>
+								<?php } ?>								
 								<?php } ?>								
 								<!--<hr />-->
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+								<?php if( isset($count['SCount']) ) { ?>								
 								<h3 class="text-left">Produtos Devolvidos  </h3>
 
 								<table class="table table-bordered table-condensed table-striped">
@@ -253,7 +256,8 @@
 
 									</tbody>
 								</table>
-								
+								<?php } else echo '<h3 class="text-left">Produtos Devolvidos </h3>';{?>
+								<?php } ?>								
 								<?php } ?>
 								<h3 class="text-left">Pagamento</h3>
 								<!--
