@@ -29,7 +29,7 @@
 								<div class="row">
 									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 									<div class="col-md-2">
-										<label for="TipoProduto">/Cons:</label>
+										<label for="TipoProduto">Venda/Cons:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 												id="TipoProduto" name="TipoProduto">
 											<option value="">-- Selecione uma opção --</option>
@@ -60,7 +60,23 @@
 											?>
 										</select>
 									</div>
-									
+									<div class="col-md-2">
+										<label for="UnidadeProduto">Unidade:</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+												id="UnidadeProduto" name="UnidadeProduto">
+											<option value="">-- Selecione uma opção --</option>
+											<?php
+											foreach ($select['UnidadeProduto'] as $key => $row) {
+												if ($produtos['UnidadeProduto'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>									
+									<!--
 									<div class="col-md-2">
 										<label for="Fornecedor">Fornecedor</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -77,24 +93,6 @@
 											?>
 										</select>
 									</div>
-									
-									<div class="col-md-2">
-										<label for="Prodaux3">Categoria:</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-												id="Prodaux3" name="Prodaux3">
-											<option value="">-- Selecione uma opção --</option>
-											<?php
-											foreach ($select['Prodaux3'] as $key => $row) {
-												if ($produtos['Prodaux3'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											?>
-										</select>
-									</div>
-									
 									<div class="col-md-2">
 										<label for="Prodaux1">Aux1:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -127,11 +125,29 @@
 											?>
 										</select>
 									</div>
-									
+									-->
 									<?php } ?>
 								</div>
 								<div class="row">									
-																		
+									<div class="col-md-2">
+										<label for="Prodaux3">Categoria</label>
+											<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>prodaux3/cadastrar" role="button"> 
+												<span class="glyphicon glyphicon-plus"></span> <b>Cat.</b>
+											</a>
+										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+												id="Prodaux3" name="Prodaux3">
+											<option value="">-- Selecione uma opção --</option>
+											<?php
+											foreach ($select['Prodaux3'] as $key => $row) {
+												if ($produtos['Prodaux3'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>																		
 									<div class="col-md-2">
 										<label for="CodProd">Código:</label><br>
 										<input type="text" class="form-control" maxlength="25"
@@ -142,7 +158,7 @@
 										<input type="text" class="form-control" maxlength="200"
 												name="Produtos" value="<?php echo $produtos['Produtos'] ?>">
 									</div>
-									
+									<!--
 									<div class="col-md-2">
 										<label for="ValorCompraProduto">Custo:</label><br>
 										<div class="input-group">
@@ -153,30 +169,14 @@
 									</div>
 
 									<div class="col-md-2">
-										<label for="ValorProduto">:</label><br>
+										<label for="ValorProduto">Venda:</label><br>
 										<div class="input-group">
 											<span class="input-group-addon" id="basic-addon1">R$</span>
 											<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
 													name="ValorProduto" value="<?php echo $produtos['ValorProduto'] ?>">
 										</div>
 									</div>
-									
-									<div class="col-md-2">
-										<label for="UnidadeProduto">Unidade:</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-												id="UnidadeProduto" name="UnidadeProduto">
-											<option value="">-- Selecione uma opção --</option>
-											<?php
-											foreach ($select['UnidadeProduto'] as $key => $row) {
-												if ($produtos['UnidadeProduto'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											?>
-										</select>
-									</div>
+									-->
 								</div>
 							</div>	
 						</div>		
@@ -184,14 +184,14 @@
 
 					<hr>
 					
-					<?php if ($_SESSION['log']['NivelEmpresa'] <= 3 ) { ?>						
+					<?php if ($_SESSION['log']['NivelEmpresa'] <= 4 ) { ?>						
 					<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
 						<div class="panel panel-primary">
 							 <div class="panel-heading" role="tab" id="heading3" data-toggle="collapse" data-parent="#accordion3" data-target="#collapse3">
 								<h4 class="panel-title">
 									<a class="accordion-toggle">
 										<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-										Valor de 
+										Valor 
 									</a>
 								</h4>
 							</div>
@@ -257,14 +257,14 @@
 					</div>
 					<?php } ?>
 					
-					<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>						
+					<?php if (($_SESSION['log']['NivelEmpresa'] >= 5) AND ($_SESSION['log']['NivelEmpresa'] <= 7 )) { ?>						
 					<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
 						<div class="panel panel-primary">
 							 <div class="panel-heading" role="tab" id="heading3" data-toggle="collapse" data-parent="#accordion3" data-target="#collapse3">
 								<h4 class="panel-title">
 									<a class="accordion-toggle">
 										<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-										Valor de 
+										Valor 
 									</a>
 								</h4>
 							</div>
@@ -288,7 +288,6 @@
 										<div class="panel panel-info">
 											<div class="panel-heading">			
 												<div class="row">																					
-													
 													<div class="col-md-4">
 														<label for="Convenio<?php echo $i ?>">Tabelas & Planos:</label>
 														<?php if ($i == 1) { ?>
@@ -307,7 +306,6 @@
 															?>
 														</select>
 													</div>
-													
 													<div class="col-md-4">
 														<label for="Convdesc<?php echo $i ?>">Descrição do Valor:</label>
 														<input type="text" class="form-control"  id="Convdesc<?php echo $i ?>" <?php echo $readonly; ?>

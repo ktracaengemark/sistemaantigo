@@ -63,6 +63,7 @@
 								<th class="active">Dt.Retor.</th>
 								<th class="active">Dt.Venc.</th>
 								<th class="active">Obs.</th>
+								<th class="active">Remover</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -108,6 +109,11 @@
 									echo '<td>' . $row['DataRetorno'] . '</td>';
 									echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
 									echo '<td>' . $row['ObsOrca'] . '</td>';
+									echo '<td class="notclickable">
+											<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'orcatrata/excluir2/' . $row['idApp_OrcaTrata'] . '">
+												<span class="glyphicon glyphicon-remove notclickable"></span>
+											</a>
+										</td>';									
 								echo '</tr>';
 							}
 							?>
@@ -156,6 +162,7 @@
 								<th class="active">FormaPagm.</th>
 								<th class="active">Dt.Venc.</th>
 								<th class="active">Quitado</th>
+								<th class="active">Remover</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -182,6 +189,11 @@
 									echo '<td>' . $row['Modalidade'] . ' - ' . $row['Abrev3'] . ' - ' . $row['QtdParcelasOrca'] . ' X ' . $row['FormaPag'] . '</td>';
 									echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
 									echo '<td>' . $row['QuitadoOrca'] . '</td>';
+									echo '<td class="notclickable">
+											<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'orcatrata/excluir2/' . $row['idApp_OrcaTrata'] . '">
+												<span class="glyphicon glyphicon-remove notclickable"></span>
+											</a>
+										</td>';									
 								echo '</tr>';
 							}
 							?>

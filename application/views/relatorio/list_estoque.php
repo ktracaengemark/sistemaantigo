@@ -8,8 +8,8 @@
                     <tr>
 						<th class="active text-left">Categoria</th>
 						<th class="active text-left">Produto</th>
-						<th class="active text-left">Aux1</th>
-						<th class="active text-left">Aux2</th>
+						<!--<th class="active text-left">Aux1</th>
+						<th class="active text-left">Aux2</th>-->
                         <th class="active text-center">QTD COMPRA</th>
 						<th class="active text-center">QTD VENDIDA</th>						
                         <!--<th class="active text-center">QTD ENTREGUE</th>-->
@@ -45,8 +45,8 @@
                         echo '<tr>';
 							echo '<td>' . $row->Prodaux3 . '</td>';
 							echo '<td>' . $row->Produtos . '</td>';
-							echo '<td>' . $row->Prodaux1 . '</td>';
-							echo '<td>' . $row->Prodaux2 . '</td>';
+							#echo '<td>' . $row->Prodaux1 . '</td>';
+							#echo '<td>' . $row->Prodaux2 . '</td>';
 							echo '<td>' . $row->QtdCompra . '</td>';
 							#echo '<td>' . $row->QtdVendida . '</td>';							
 							echo '<td>' . $row->Qtd . '</td>';

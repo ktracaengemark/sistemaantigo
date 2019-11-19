@@ -169,10 +169,9 @@ class Prodaux1_model extends CI_Model {
 				Abrev1
             FROM
                 Tab_Prodaux1
-            WHERE
-                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
-                ORDER BY Prodaux1 ASC'
+
+			ORDER BY 
+				Prodaux1 ASC'
     );
         } else {
             $query = $this->db->query(
@@ -182,10 +181,9 @@ class Prodaux1_model extends CI_Model {
 				Abrev1
             FROM
                 Tab_Prodaux1
-            WHERE
-                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
-                ORDER BY Prodaux1 ASC'
+
+			ORDER BY 
+				Prodaux1 ASC'
     );
 
             $array = array();

@@ -52,7 +52,7 @@ class Prodaux1 extends CI_Controller {
 			'idTab_Prodaux1',
             'Prodaux1',
 			'Abrev1',
-			'Empresa',
+			'idSis_Empresa',
                 ), TRUE));
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -129,7 +129,7 @@ class Prodaux1 extends CI_Controller {
 			'idTab_Prodaux1',
             'Prodaux1',
             'Abrev1',
-			'Empresa',
+			'idSis_Empresa',
                 ), TRUE));
 
 

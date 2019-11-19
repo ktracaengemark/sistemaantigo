@@ -18,7 +18,7 @@
 					<div class="panel panel-<?php echo $panel; ?>">
 						<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
 						<div class="panel-body">
-							<div style="overflow: auto; height: 450px; ">
+							<div style="overflow: auto; height: 500px; ">
 
 								<div class="panel-group">	
 

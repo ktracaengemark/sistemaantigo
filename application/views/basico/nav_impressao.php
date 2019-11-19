@@ -22,6 +22,7 @@
 									</button>			
 								</a>
 							</div>
+							<!--
 							<div class="btn-group " role="group" aria-label="...">
 								<a class=" text-left" href="<?php echo base_url() . 'orcatrata/alterar2/'; ?>">
 									<button type="button" class="btn btn-warning">
@@ -29,6 +30,7 @@
 									</button>
 								</a>
 							</div>
+							-->
 							<div class="btn-group " role="group" aria-label="...">
 								<a class=" text-right" href="<?php echo base_url() . 'relatorio/financeiro/'; ?>">
 									<button type="button" class=" btn btn-success">
