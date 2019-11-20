@@ -57,13 +57,29 @@
 													</div>
 												</div>
 												-->
-												<div class="col-md-3 text-left">
-													<label for="Prioridade">Prioridade</label>
-													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+												<div class="col-md-6 ">
+													<label for="Prioridade">Prioridade:</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 															id="Prioridade" name="Prioridade">
+														<!--<option value="">-- Selecione uma opção --</option>-->
 														<?php
 														foreach ($select['Prioridade'] as $key => $row) {
-															if ($query['Prioridade'] == $key) {
+															if ($orcatrata['Prioridade'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+												</div>												
+												<div class="col-md-6 " >
+													<label for="Compartilhar">Compartilhar:</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+															id="Compartilhar" name="Compartilhar">
+														<?php
+														foreach ($select['Compartilhar'] as $key => $row) {
+															if ($query['Compartilhar'] == $key) {
 																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 															} else {
 																echo '<option value="' . $key . '">' . $row . '</option>';

@@ -55,6 +55,7 @@ class Procedimento extends CI_Controller {
 			'DataProcedimentoLimite',
 			'ConcluidoProcedimento',
 			'Prioridade',
+			'Compartilhar',
 
         ), TRUE));
 
@@ -67,7 +68,7 @@ class Procedimento extends CI_Controller {
 		$this->form_validation->set_rules('Procedimento', 'Tarefa', 'required|trim');
         #$this->form_validation->set_rules('DataProcedimento', 'Data do Procedimento', 'trim|valid_date');
 
-		
+		$data['select']['Compartilhar'] = $this->Procedimento_model->select_compartilhar();
 		$data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['Prioridade'] = array (
             '1' => 'Alta',
@@ -150,6 +151,7 @@ class Procedimento extends CI_Controller {
 			'DataProcedimentoLimite',
 			'ConcluidoProcedimento',
 			'Prioridade',
+			'Compartilhar',
 
         ), TRUE);
 
@@ -166,7 +168,7 @@ class Procedimento extends CI_Controller {
         $this->form_validation->set_rules('Procedimento', 'Tarefa', 'required|trim');
         #$this->form_validation->set_rules('DataProcedimento', 'Data do Procedimento', 'trim|valid_date');
 
-
+		$data['select']['Compartilhar'] = $this->Procedimento_model->select_compartilhar();
 		$data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['Prioridade'] = array (
             '1' => 'Alta',
@@ -208,9 +210,11 @@ class Procedimento extends CI_Controller {
 
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_Procedimento'], TRUE);
 
+			unset($_SESSION['Agenda']);
+			
             if ($data['auditoriaitem'] && $this->Procedimento_model->update_procedimento($data['query'], $data['query']['idApp_Procedimento']) === FALSE) {
-                $data['msg'] = '?m=2';
-                redirect(base_url() . 'procedimento/form_procedimento2/' . $data['query']['idApp_Procedimento'] . $data['msg']);
+                $data['msg'] = '?m=1';
+                redirect(base_url() . 'agenda');
                 exit();
             } else {
 

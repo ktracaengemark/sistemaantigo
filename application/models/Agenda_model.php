@@ -121,7 +121,7 @@ class Agenda_model extends CI_Model {
             return TRUE;
         }else {
 
-            foreach ($query->result() as $row) {
+			foreach ($query->result() as $row) {
 				$row->Idade = $this->basico->calcula_idade($row->DataProcedimento);
 				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
 				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
@@ -293,6 +293,32 @@ class Agenda_model extends CI_Model {
 
         $array = array();
         $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idSis_Usuario] = $row->NomeUsuario;
+        }
+
+        return $array;
+    }
+
+	public function select_compartilhar() {
+
+        $query = $this->db->query('
+            SELECT
+				P.idSis_Usuario,
+				CONCAT(IFNULL(F.Abrev,""), " --- ", IFNULL(P.Nome,"")) AS NomeUsuario
+            FROM
+                Sis_Usuario AS P
+					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY 
+				F.Abrev ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Ninguém ::';
+        $array[1] = ':: Todos ::';
         foreach ($query->result() as $row) {
             $array[$row->idSis_Usuario] = $row->NomeUsuario;
         }
@@ -526,12 +552,14 @@ class Agenda_model extends CI_Model {
 		$data['ConcluidoProcedimento'] = ($data['ConcluidoProcedimento'] != '') ? ' AND P.ConcluidoProcedimento = ' . $data['ConcluidoProcedimento'] : FALSE;
 		$data['Prioridade'] = ($data['Prioridade'] != '') ? ' AND P.Prioridade = ' . $data['Prioridade'] : FALSE;
 		$data['Procedimento'] = ($data['Procedimento']) ? ' AND P.idApp_Procedimento = ' . $data['Procedimento'] : FALSE;
+
 		
 		$query = $this->db->query('
             SELECT
 				E.NomeEmpresa,
 				U.idSis_Usuario,
 				U.CpfUsuario,
+				AU.Nome,
 				P.idSis_Empresa,
 				P.idApp_Procedimento,
                 P.Procedimento,
@@ -539,11 +567,13 @@ class Agenda_model extends CI_Model {
 				P.DataProcedimentoLimite,
 				P.ConcluidoProcedimento,
 				P.Prioridade,
+				P.Compartilhar,
 				PR.Prioridade,
 				SN.StatusSN
             FROM
 				App_Procedimento AS P
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
+					LEFT JOIN Sis_Usuario AS AU ON AU.idSis_Usuario = P.Compartilhar
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = P.idSis_Empresa
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
 					LEFT JOIN Tab_Prioridade AS PR ON PR.idTab_Prioridade = P.Prioridade
@@ -556,12 +586,10 @@ class Agenda_model extends CI_Model {
 				' . $filtro5 . '
 				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' 
 				' . $data['Procedimento'] . '
-				
             ORDER BY
                 P.ConcluidoProcedimento ASC,
 				' . $data['Campo'] . '
 				' . $data['Ordenamento'] . '
-				
 				
         ');
         /*

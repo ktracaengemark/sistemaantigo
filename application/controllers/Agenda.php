@@ -59,6 +59,8 @@ class Agenda extends CI_Controller {
             'Campo',
 			'Prioridade',
 			'Procedimento',
+			'Compartilhar',
+			
         ), TRUE));
 
         $_SESSION['FiltroAlteraProcedimento']['Dia'] = $data['query']['Dia'];
@@ -119,9 +121,8 @@ class Agenda extends CI_Controller {
 			'1' => 'Alta',
 			'2' => 'Média',
 			'3' => 'Baixa',
-        );		
-
-        
+        );
+		        
 		$data['select']['Dia'] = $this->Agenda_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Agenda_model->select_mes();
 		$data['select']['Diacli'] = $this->Agenda_model->select_dia();
@@ -133,6 +134,7 @@ class Agenda extends CI_Controller {
 		$data['select']['NomeEmpresaCli'] = $this->Agenda_model->select_empresaenv();
         $data['select']['NomeUsuario'] = $this->Agenda_model->select_usuario();
 		$data['select']['Procedimento'] = $this->Agenda_model->select_procedimento();
+		$data['select']['Compartilhar'] = $this->Agenda_model->select_compartilhar();
 		
         $data['titulo1'] = 'Tarefas';
 
@@ -147,6 +149,7 @@ class Agenda extends CI_Controller {
             $data['bd']['Campo'] = $data['query']['Campo'];
 			$data['bd']['Prioridade'] = $data['query']['Prioridade'];
 			$data['bd']['Procedimento'] = $data['query']['Procedimento'];
+			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
 
             $data['report'] = $this->Agenda_model->list1_procedimento($data['bd'],TRUE);
 
@@ -246,8 +249,7 @@ class Agenda extends CI_Controller {
 		#$data['query']['contatoprof_aniversariantes'] = $this->Agenda_model->contatoprof_aniversariantes($_SESSION['log']['id']);
 		$data['query']['procedimento'] = $this->Agenda_model->procedimento($_SESSION['log']['id']);
 		$data['query']['procedempresa'] = $this->Agenda_model->procedempresa($_SESSION['log']['id']);
-		$data['query']['procedimentorec'] = $this->Agenda_model->procedimentorec($_SESSION['log']['id']);
-	
+		$data['query']['procedimentorec'] = $this->Agenda_model->procedimentorec($_SESSION['log']['id']);	
 	
 		$this->load->view('agenda/tela_agenda', $data);
 

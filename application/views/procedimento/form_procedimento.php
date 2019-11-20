@@ -38,7 +38,8 @@
 										</div>	
 										<div class="form-group">	
 											<div class="row">	
-												<div class="col-md-12 form-inline">
+												<!--
+												<div class="col-md-6 form-inline">
 													<label for="Prioridade">Prioridade:</label><br>
 													<div class="form-group">
 														<label class="radio-inline">
@@ -55,6 +56,38 @@
 														</label>
 													</div>
 												</div>
+												-->
+												<div class="col-md-6 ">
+													<label for="Prioridade">Prioridade:</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+															id="Prioridade" name="Prioridade">
+														<!--<option value="">-- Selecione uma opção --</option>-->
+														<?php
+														foreach ($select['Prioridade'] as $key => $row) {
+															if ($orcatrata['Prioridade'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+												</div>												
+												<div class="col-md-6 " >
+													<label for="Compartilhar">Compartilhar:</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+															id="Compartilhar" name="Compartilhar">
+														<?php
+														foreach ($select['Compartilhar'] as $key => $row) {
+															if ($query['Compartilhar'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+												</div>												
 											</div>
 										</div>	
 										<div class="form-group">	

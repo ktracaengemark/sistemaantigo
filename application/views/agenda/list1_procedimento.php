@@ -19,9 +19,9 @@
 							<th class="active">Cnl.</th>
 							<th class="active">Tarefa</th>
 							<th class="active">Limite</th>
-							<!--
+							<th class="active">Comp.</th>
 							<th class="active">Excl</th>
-							<th class="active">Data</th>-->
+							<!--<th class="active">Data</th>-->
 						</tr>
 					</thead>
 
@@ -52,14 +52,14 @@
 								echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
 								echo '<td>' . $row['Procedimento'] . '</td>';
 								echo '<td>' . $row['DataProcedimentoLimite'] . '</td>';
+								echo '<td>' . $row['Nome'] . '</td>';
 								#echo '<td>' . $row['DataProcedimento'] . '</td>';
-								/*
 								echo '<td class="notclickable">
-										<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'procedimento/excluir/' . $row['idApp_Procedimento'] . '">
+										<a class="btn btn-sm btn-danger notclickable" href="' . base_url() . 'procedimento/excluir/' . $row['idApp_Procedimento'] . '">
 											<span class="glyphicon glyphicon-trash notclickable"></span>
 										</a>
 									</td>';
-								*/	
+									
 							echo '</tr>';
 						}
 						?>
