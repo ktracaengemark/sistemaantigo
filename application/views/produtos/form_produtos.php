@@ -257,7 +257,7 @@
 					</div>
 					<?php } ?>
 					
-					<?php if (($_SESSION['log']['NivelEmpresa'] >= 5) AND ($_SESSION['log']['NivelEmpresa'] <= 7 )) { ?>						
+					<?php if (($_SESSION['log']['NivelEmpresa'] >= 5) AND ($_SESSION['log']['NivelEmpresa'] <= 10 )) { ?>						
 					<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
 						<div class="panel panel-primary">
 							 <div class="panel-heading" role="tab" id="heading3" data-toggle="collapse" data-parent="#accordion3" data-target="#collapse3">

@@ -7,8 +7,8 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8 ">
 			<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
-				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 && $_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
-					<nav class="navbar navbar-inverse">
+				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
+					<nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
 					  <div class="container-fluid">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -22,6 +22,57 @@
 						</div>
 						<div class="collapse navbar-collapse" id="myNavbar">
 							<ul class="nav navbar-nav navbar-center">
+								<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group " role="group" aria-label="...">
+										<a href="<?php echo base_url(); ?>agenda">
+											<button type="button" class="btn btn-sm btn-info ">
+												<span class="glyphicon glyphicon-calendar"></span> Agenda
+											</button>
+										</a>
+									</div>
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+									<div class="btn-group " role="group" aria-label="...">
+										<a href="<?php echo base_url(); ?>relatorio/clientes">
+											<button type="button" class="btn btn-sm btn-success ">
+												<span class="glyphicon glyphicon-user"></span> Clientes
+											</button>
+										</a>
+									</div>
+									<div class="btn-group">
+										<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+											<span class="glyphicon glyphicon-gift"></span> Produtos <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">							
+											<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-gift"></span> Produtos</a></li>
+											<li role="separator" class="divider"></li>							
+											<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-list-alt"></span> Estoque</a></li>
+										</ul>
+									</div>																				
+									<?php } ?>																	
+								</li>
+								<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group " role="group" aria-label="...">
+										<a href="<?php echo base_url(); ?>orcatrata/cadastrar3">
+											<button type="button" class="btn btn-sm btn-primary ">
+												<span class="glyphicon glyphicon-plus"></span>Receitas
+											</button>
+										</a>
+									</div>
+									<div class="btn-group " role="group" aria-label="...">
+										<a href="<?php echo base_url(); ?>orcatrata/cadastrardesp">
+											<button type="button" class="btn btn-sm btn-danger ">
+												<span class="glyphicon glyphicon-plus"></span>Despesas
+											</button>
+										</a>
+									</div>							
+									<div class="btn-group " role="group" aria-label="...">
+										<a href="<?php echo base_url(); ?>relatorio/financeiro">
+											<button type="button" class="btn btn-sm btn-success ">
+												<span class="glyphicon glyphicon-usd"></span>Relatório
+											</button>
+										</a>
+									</div>																		
+								</li>								
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
 										<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
@@ -53,9 +104,6 @@
 											</li>
 										</ul>
 									</div>
-									<div class="btn-group" role="group" aria-label="..."> </div>
-								</li>
-								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
 										<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
 											<span class="glyphicon glyphicon-calendar"></span> Agenda <span class="caret"></span>
@@ -78,13 +126,11 @@
 											</li>
 										</ul>
 									</div>
-									<div class="btn-group" role="group" aria-label="..."> </div>
-								</li>
-								<?php if ($_SESSION['Cliente']['idSis_Empresa'] == $_SESSION['log']['idSis_Empresa'] ) { ?>
-								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+
+									<?php if ($_SESSION['Cliente']['idSis_Empresa'] == $_SESSION['log']['idSis_Empresa'] ) { ?>
 									<div class="btn-group">
 										<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
-											<span class="glyphicon glyphicon-usd"></span> Orçamentos <span class="caret"></span>
+											<span class="glyphicon glyphicon-usd"></span> Orçs. <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
@@ -104,14 +150,14 @@
 											</li>
 										</ul>
 									</div>
-									<div class="btn-group" role="group" aria-label="..."> </div>
+									<?php } ?>									
 								</li>
-								<?php } ?>
+									
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
 										<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
-											<span class="glyphicon glyphicon-pencil"></span> Procedimentos <span class="caret"></span>
+											<span class="glyphicon glyphicon-pencil"></span> Proced. <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
@@ -131,7 +177,16 @@
 											</li>
 										</ul>
 									</div>
-									<div class="btn-group" role="group" aria-label="..."> </div>
+									<div class="btn-group " role="group" aria-label="...">
+										<a <?php if (preg_match("/agenda/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'agenda/'; ?>">
+												<button type="button" class="btn btn-sm btn-active ">
+													<span class="glyphicon glyphicon-remove"></span> Fechar
+												</button>										
+											</a>
+										</a>
+									</div>
+
 								</li>
 								<?php } ?>
 							</ul>

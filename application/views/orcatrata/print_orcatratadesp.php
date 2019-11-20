@@ -81,7 +81,7 @@
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="javascript:window.print()">
-									<button type="button" class="btn btn-sm btn-info ">
+									<button type="button" class="btn btn-sm btn-default ">
 										<span class="glyphicon glyphicon-print"></span> Imprimir
 									</button>
 								</a>
@@ -89,14 +89,14 @@
 							<div class="btn-group " role="group" aria-label="...">
 								<a <?php if (preg_match("/orcatrata\/alterardesp\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
 									<a href="<?php echo base_url() . 'orcatrata/alterardesp/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
-										<button type="button" class="btn btn-sm btn-warning ">
+										<button type="button" class="btn btn-sm btn-default ">
 											<span class="glyphicon glyphicon-edit"></span> Editar
 										</button>										
 									</a>
 								</a>
 							</div>
 							<div class="btn-group " role="group" aria-label="...">
-								<button  type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+								<button  type="button" class="btn btn-sm btn-default" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 									<span class="glyphicon glyphicon-trash"></span> Excluir
 								</button>
 							</div>																				
