@@ -182,8 +182,8 @@ class Procedimento_model extends CI_Model {
         ');
 
         $array = array();
-        $array[0] = ':: Ninguém ::';
-        $array[1] = ':: Todos ::';		
+        $array[50] = ':: Ninguém ::';
+        $array[51] = ':: Todos ::';		
         foreach ($query->result() as $row) {
             $array[$row->idSis_Usuario] = $row->NomeUsuario;
         }

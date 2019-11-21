@@ -110,7 +110,7 @@
 							<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) && ($_SESSION['log']['idSis_Empresa'] != 5))  { ?>
 							<div class="btn-group" role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/loginempresa"> 	
-									<button type="button" class="btn btn-sm active ">Renovar em: 
+									<button type="button" class="btn btn-sm btn-default ">Renovar em: 
 										<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
 									</button>
 								</a>	
@@ -118,7 +118,7 @@
 							<?php } else if ($_SESSION['log']['idSis_Empresa'] != 5){?>
 							<div class="btn-group" role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/loginempresa"> 	
-									<button type="button" class="btn btn-sm active ">Renovar Assinatura 
+									<button type="button" class="btn btn-sm btn-default ">Renovar Assinatura 
 										
 									</button>
 								</a>	
@@ -126,7 +126,7 @@
 							<?php } ?>
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>login/sair">
-									<button type="button" class="btn btn-sm btn-danger ">
+									<button type="button" class="btn btn-sm btn-active ">
 										<span class="glyphicon glyphicon-log-out"></span> Sair
 									</button>
 								</a>

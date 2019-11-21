@@ -317,8 +317,8 @@ class Agenda_model extends CI_Model {
         ');
 
         $array = array();
-        $array[0] = ':: Ninguém ::';
-        $array[1] = ':: Todos ::';
+        $array[50] = ':: Ninguém ::';
+        $array[51] = ':: Todos ::';
         foreach ($query->result() as $row) {
             $array[$row->idSis_Usuario] = $row->NomeUsuario;
         }
@@ -559,7 +559,8 @@ class Agenda_model extends CI_Model {
 				E.NomeEmpresa,
 				U.idSis_Usuario,
 				U.CpfUsuario,
-				AU.Nome,
+				U.Nome AS NomeUsuario,
+				AU.Nome AS Comp,
 				P.idSis_Empresa,
 				P.idApp_Procedimento,
                 P.Procedimento,
@@ -578,14 +579,17 @@ class Agenda_model extends CI_Model {
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
 					LEFT JOIN Tab_Prioridade AS PR ON PR.idTab_Prioridade = P.Prioridade
             WHERE
-                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                (P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idApp_OrcaTrata = "0" AND
 				P.idApp_Cliente = "0" AND
 				P.idSis_EmpresaCli = "0" AND
 				' . $filtro4 . '
 				' . $filtro5 . '
-				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' 
-				' . $data['Procedimento'] . '
+				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . '				
+				' . $data['Procedimento'] . ') OR
+				P.Compartilhar = ' . $_SESSION['log']['id'] . ' OR
+				(P.Compartilhar = 47 AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ')
             ORDER BY
                 P.ConcluidoProcedimento ASC,
 				' . $data['Campo'] . '
