@@ -73,6 +73,7 @@
 														?>
 													</select>
 												</div>												
+												
 												<div class="col-md-6 " >
 													<label for="Compartilhar">Compartilhar:</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -87,7 +88,8 @@
 														}
 														?>
 													</select>
-												</div>												
+												</div>
+												
 											</div>
 										</div>	
 										<div class="form-group">	

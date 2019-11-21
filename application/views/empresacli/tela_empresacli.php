@@ -87,7 +87,8 @@
 									<div class="col-md-6 text-center">
 										<div class="form-group">
 											<div class="row">							
-												<a href="https://www.enkontraki.com/<?php echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">
+												<!--<a href="https://www.enkontraki.com/<?php #echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">-->
+												<a href="http://159.89.138.173/<?php echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">
 													<button type="button" class="btn btn-success">
 														<h3><span class="glyphicon glyphicon-picture"></span> Acesse o Site</h3>
 													</button>
