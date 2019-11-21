@@ -84,7 +84,7 @@
 							</div>	
 							<div class="row">
 								<div class="col-md-12">
-									<div class="col-md-6 text-center">
+									<div class="col-md-12 text-center">
 										<div class="form-group">
 											<div class="row">							
 												<!--<a href="https://www.enkontraki.com/<?php #echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">-->
@@ -96,6 +96,7 @@
 											</div>
 										</div>	
 									</div>
+									<!--
 									<div class="col-md-6 text-center">
 										<div class="form-group">
 											<div class="row">							
@@ -109,6 +110,7 @@
 											</div>
 										</div>	
 									</div>
+									-->
 									<!--
 									<div class="col-md-4 text-left">
 										<div class="form-group">
