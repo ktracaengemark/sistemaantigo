@@ -152,9 +152,8 @@
 									</div>
 									<?php } ?>									
 								</li>
-									
-								<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 									<div class="btn-group">
 										<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
 											<span class="glyphicon glyphicon-pencil"></span> Proced. <span class="caret"></span>
@@ -177,6 +176,7 @@
 											</li>
 										</ul>
 									</div>
+									<?php } ?>
 									<div class="btn-group " role="group" aria-label="...">
 										<a <?php if (preg_match("/agenda/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
 											<a href="<?php echo base_url() . 'agenda/'; ?>">
@@ -186,11 +186,8 @@
 											</a>
 										</a>
 									</div>
-
 								</li>
-								<?php } ?>
 							</ul>
-
 						</div>
 					  </div>
 					</nav>
