@@ -73,6 +73,7 @@
 														?>
 													</select>
 												</div>												
+												<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 												<div class="col-md-6 " >
 													<label for="Compartilhar">Compartilhar:</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -87,7 +88,8 @@
 														}
 														?>
 													</select>
-												</div>												
+												</div>
+												<?php } ?>
 											</div>
 										</div>	
 										<div class="form-group">	
@@ -117,7 +119,7 @@
 										-->
 										<div class="form-group">	
 											<div class="row">	
-												<div class="col-md-4">
+												<div class="col-md-6">
 													<label for="ConcluidoProcedimento">Concluída</label><br>
 													<div class="form-group">
 														<div class="btn-group" data-toggle="buttons">

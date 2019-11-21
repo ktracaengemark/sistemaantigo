@@ -817,7 +817,7 @@
 										</div>																									
 									</div>
 									<br>
-									<?php if ($_SESSION['log']['NivelEmpresa'] >= 5 ) { ?>
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 									<div class="panel-group">	
 										<div class="panel panel-danger">
 

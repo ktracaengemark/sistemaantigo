@@ -60,6 +60,7 @@ class Procedimento extends CI_Controller {
         ), TRUE));
 
 		(!$data['query']['DataProcedimento']) ? $data['query']['DataProcedimento'] = date('d/m/Y H:i:s', time()) : FALSE;
+		(!$data['query']['Compartilhar']) ? $data['query']['Compartilhar'] = '50' : FALSE;
 		#(!$data['query']['DataProcedimentoLimite']) ? $data['query']['DataProcedimentoLimite'] = date('d/m/Y', time()) : FALSE;
 		
 	   $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -75,6 +76,9 @@ class Procedimento extends CI_Controller {
             '2' => 'Média',
 			'3' => 'Baixa',
         );		
+
+        #$data['select']['option'] = ($_SESSION['log']['idSis_Empresa'] != 5) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
+
 		
         $data['titulo'] = 'Tarefa';
         $data['form_open_path'] = 'procedimento/cadastrar';
@@ -108,7 +112,6 @@ class Procedimento extends CI_Controller {
 			$data['query']['idApp_Cliente'] = 0;
 			$data['query']['idApp_OrcaTrata'] = 0;
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-
             $data['campos'] = array_keys($data['query']);
             $data['anterior'] = array();
 
@@ -143,6 +146,18 @@ class Procedimento extends CI_Controller {
         else
             $data['msg'] = '';
 
+        if ($_SESSION['log']['idSis_Empresa'] != 5)
+		$data['query'] = $this->input->post(array(
+            #'idSis_Usuario',
+			'idApp_Procedimento',
+			'Procedimento',
+            #'DataProcedimento',
+			'DataProcedimentoLimite',
+			'ConcluidoProcedimento',
+			'Prioridade',
+			'Compartilhar', 
+        ), TRUE);
+		 else
         $data['query'] = $this->input->post(array(
             #'idSis_Usuario',
 			'idApp_Procedimento',
@@ -151,9 +166,7 @@ class Procedimento extends CI_Controller {
 			'DataProcedimentoLimite',
 			'ConcluidoProcedimento',
 			'Prioridade',
-			'Compartilhar',
-
-        ), TRUE);
+        ), TRUE);		
 
         if ($id) {
             $data['query'] = $this->Procedimento_model->get_procedimento($id);
@@ -203,14 +216,13 @@ class Procedimento extends CI_Controller {
             $data['query']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['query']['DataProcedimentoLimite'], 'mysql');
 			$data['query']['Procedimento'] = nl2br($data['query']['Procedimento']);
 			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-			#$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
-						
+			#$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];						
             $data['anterior'] = $this->Procedimento_model->get_procedimento($data['query']['idApp_Procedimento']);
             $data['campos'] = array_keys($data['query']);
 
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_Procedimento'], TRUE);
 
-			unset($_SESSION['Agenda']);
+
 			
             if ($data['auditoriaitem'] && $this->Procedimento_model->update_procedimento($data['query'], $data['query']['idApp_Procedimento']) === FALSE) {
                 $data['msg'] = '?m=1';

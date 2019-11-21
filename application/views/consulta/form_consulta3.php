@@ -153,7 +153,7 @@
 									<?php } ?>									
 								</li>
 									
-								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+								<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
 										<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">

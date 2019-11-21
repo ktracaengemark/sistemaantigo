@@ -230,7 +230,7 @@
 	</div>
 	
 
-	<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+	<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 			
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
