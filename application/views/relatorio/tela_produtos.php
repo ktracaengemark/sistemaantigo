@@ -2,8 +2,8 @@
 
 <div class="container-fluid">
     <div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-10 ">
+		<div class="col-md-2"></div>
+		<div class="col-md-8 ">
 
 
 			<?php echo validation_errors(); ?>
@@ -15,7 +15,7 @@
 					<?php echo form_open('relatorio/produtos', 'role="form"'); ?>
 				
 					<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-						<span class="glyphicon glyphicon-search"></span><?php echo $titulo; ?>
+						<span class="glyphicon glyphicon-filter"></span>Filtro <!--<?php #echo $titulo; ?>-->
 					</button>											
 					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/estoque" role="button">
 						<span class="glyphicon glyphicon-search"></span>Estoque
@@ -65,6 +65,13 @@
 										</div>	
 									</div>
 									<?php } ?>
+									<div class="form-group col-md-4">
+										<div class="form-footer ">
+											<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+												<span class="glyphicon glyphicon-remove"> Fechar
+											</button>
+										</div>
+									</div>									
 								</div>
 							</div>
 						</div>
@@ -187,42 +194,40 @@
 									<?php } ?>
 									<div class="row text-left">
 										<br>
-										<div class="form-group col-md-3">
+										<div class="form-group col-md-4">
 											<div class="form-footer ">
 												<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
 													<span class="glyphicon glyphicon-filter"></span> Filtrar
 												</button>
 											</div>
 										</div>
-										<div class="form-group col-md-3">
-											<div class="form-footer ">
-												<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-													<span class="glyphicon glyphicon-remove"> Fechar
-												</button>
-											</div>
-										</div>
-										<div class="form-group col-md-3">
+										<div class="form-group col-md-4">
 											<div class="form-footer">		
 												<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/estoque" role="button">
 													<span class="glyphicon glyphicon-search"></span> Estoque
 												</a>
 											</div>	
 										</div>
+										<div class="form-group col-md-4">
+											<div class="form-footer ">
+												<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+													<span class="glyphicon glyphicon-remove"> Fechar
+												</button>
+											</div>
+										</div>
 									</div>
-									
-									
 								</div>									
 							</div>								
 						</div>
 					</div>																				
 
-				</form>
+					</form>
 
 				<?php echo (isset($list)) ? $list : FALSE ?>
 				</div>
 			</div>
 
 		</div>	
-		<div class="col-md-1"></div>			
+		<div class="col-md-2"></div>			
     </div>
 </div>

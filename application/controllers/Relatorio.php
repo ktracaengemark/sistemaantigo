@@ -1493,8 +1493,8 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'Produtos',
-            'DataInicio',
-            'DataFim',
+            #'DataInicio',
+            #'DataFim',
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
@@ -1504,8 +1504,8 @@ class Relatorio extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
-        $this->form_validation->set_rules('DataInicio', 'Data Inicio', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataInicio', 'Data Inicio', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
 
         $data['select']['Campo'] = array(
 			'TP.CodProd' => 'Código',
@@ -1534,10 +1534,10 @@ class Relatorio extends CI_Controller {
         $data['titulo'] = 'Relatório de Estoque';
 
         #run form validation
-        if ($this->form_validation->run() !== FALSE) {
+        if ($this->form_validation->run() !== TRUE) {
 
-            $data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
-            $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+            #$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+            #$data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
@@ -1545,7 +1545,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 
-            $data['report'] = $this->Relatorio_model->list_estoque($data['bd']);
+            $data['report'] = $this->Relatorio_model->list_estoque($data['bd'],TRUE);
 
             /*
               echo "<pre>";

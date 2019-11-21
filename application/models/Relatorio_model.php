@@ -2133,14 +2133,7 @@ class Relatorio_model extends CI_Model {
 		
         ####################################################################
         #COMPRADOS
-        if ($data['DataFim']) {
-            $consulta =
-                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
-        }
+
 		
         $query['Comprados'] = $this->db->query('
             SELECT
@@ -2173,14 +2166,7 @@ exit();
 */		
         ####################################################################
         #VENDIDOS
-        if ($data['DataFim']) {
-            $consulta =
-                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
-        }
+
 
         $query['Vendidos'] = $this->db->query(
             'SELECT
@@ -2206,14 +2192,7 @@ exit();
 
         ####################################################################
         #DEVOLVIDOS NA VENDA
-        if ($data['DataFim']) {
-            $consulta =
-                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
-        }
+
 
         $query['Devolvidos'] = $this->db->query(
             'SELECT
@@ -2239,14 +2218,7 @@ exit();
 
         ####################################################################
         #DEVOLVIDOS NA COMPRA
-        if ($data['DataFim']) {
-            $consulta =
-                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
-        }
+
 
         $query['Devolvidos2'] = $this->db->query(
             'SELECT
@@ -2273,14 +2245,7 @@ exit();
 
         ####################################################################
         #CONSUMIDOS
-        if ($data['DataFim']) {
-            $consulta =
-                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
-        }
+
 
         $query['Consumidos'] = $this->db->query(
             'SELECT
