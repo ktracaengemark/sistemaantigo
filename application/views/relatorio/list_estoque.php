@@ -1,4 +1,4 @@
-<div style="overflow: auto; height: 500px; ">	
+<div style="overflow: auto; height: auto; ">	
 	<div class="container-fluid">
 		<div class="row">
 
