@@ -206,6 +206,170 @@ class Produtos extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
+    public function cadastrar1() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $data['produtos'] = quotes_to_entities($this->input->post(array(
+            #### Tab_Produto ####
+            'idTab_Produto',           
+            'TipoProduto',
+			'Categoria',
+			'UnidadeProduto',
+			'CodProd',
+			'Fornecedor',
+			'ValorCompraProduto',
+			#'ValorProduto',
+            'Produtos',
+			'Prodaux1',
+			'Prodaux2',
+			'Prodaux3',
+        ), TRUE));
+
+
+		(!$data['produtos']['TipoProduto']) ? $data['produtos']['TipoProduto'] = 'V' : FALSE;
+		(!$data['produtos']['Categoria']) ? $data['produtos']['Categoria'] = 'P' : FALSE;
+		(!$data['produtos']['UnidadeProduto']) ? $data['produtos']['UnidadeProduto'] = 'UNID' : FALSE;
+		
+
+        $data['valor'] = quotes_to_entities($this->input->post(array(
+            #### Tab_Valor ####
+            #'idTab_Produto',           
+			'ValorProduto',
+
+        ), TRUE));
+		
+            if ($this->input->post('ValorProduto')) {
+
+                $data['valor']['ValorProduto'] = $this->input->post('ValorProduto');
+
+            }
+
+
+
+        //Fim do trecho de código que dá pra melhorar
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #### Tab_Produto ####
+
+		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
+		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
+		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
+		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		
+		
+		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
+		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
+		$data['select']['Categoria'] = $this->Basico_model->select_categoria();		
+        #$data['select']['Convenio'] = $this->Convenio_model->select_convenio();
+		$data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
+		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
+		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
+		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
+		
+        $data['titulo'] = 'Cadastrar';
+        $data['form_open_path'] = 'produtos/cadastrar1';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 1;
+	
+		//if ($data['valor'][0]['DataValor'] || $data['valor'][0]['Convenio'])
+        if (isset($data['valor']))
+            $data['tratamentosin'] = 'in';
+        else
+            $data['tratamentosin'] = '';
+
+
+        #Ver uma solução melhor para este campo
+
+        $data['sidebar'] = 'col-sm-3 col-md-2';
+        $data['main'] = 'col-sm-7 col-md-8';
+
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+
+
+        /*
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit ();
+          */
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            //if (1 == 1) {
+            $this->load->view('produtos/form_produtos1', $data);
+        } else {
+
+            ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+            #### Tab_Produto ####
+
+			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
+            $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
+            $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
+			#$data['produtos']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProduto']));
+            $data['produtos']['idTab_Produto'] = $this->Produtos_model->set_produtos($data['produtos']);
+            /*
+            echo count($data['servico']);
+            echo '<br>';
+            echo "<pre>";
+            print_r($data['servico']);
+            echo "</pre>";
+            exit ();
+            */
+
+            #### Tab_Valor ####
+            if (isset($data['valor'])) { {
+
+                    $data['valor']['idSis_Usuario'] = $_SESSION['log']['id'];
+                    $data['valor']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+					$data['valor']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+					$data['valor']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ValorProduto']));
+                    $data['valor']['idTab_Produto'] = $data['produtos']['idTab_Produto'];					
+
+                }
+                $data['valor']['idTab_Valor'] = $this->Produtos_model->set_valor1($data['valor']);
+            }
+
+/*
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //*******CORRIGIR -  ALTERAR PARA ENTRAR COM TODAS AS MUDANÇAS NA TABELA DE LOG*****
+            $data['campos'] = array_keys($data['query']);
+            $data['anterior'] = array();
+            //*******CORRIGIR -  ALTERAR PARA ENTRAR COM TODAS AS MUDANÇAS NA TABELA DE LOG*****
+//////////////////////////////////////////////////Dados Basicos/////////////////////////////////////////////////////////////////////////
+*/
+
+            if ($data['idTab_Produto'] === FALSE) {
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+                $this->load->view('produtos/form_produtos1', $data);
+            } else {
+
+                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Produto'], FALSE);
+                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produto', 'CREATE', $data['auditoriaitem']);
+                $data['msg'] = '?m=1';
+
+                #redirect(base_url() . 'produtos/listar/' . $data['msg']);
+				redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+	
     public function alterar($id = FALSE) {
 
         if ($this->input->get('m') == 1)
@@ -423,7 +587,7 @@ class Produtos extends CI_Controller {
         $this->load->view('basico/footer');
 
     }
-
+	
     public function excluir($id = FALSE) {
 
         if ($this->input->get('m') == 1)

@@ -184,177 +184,33 @@
 						</div>		
 					</div>
 
-
-					
-					<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 6 )) { ?>						
+											
 					<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
 						<div class="panel panel-primary">
 
 
 							<div id="collapse3" class="panel-collapse" role="tabpanel" aria-labelledby="heading3" aria-expanded="false">
 								<div class="panel-body">
-
-									<input type="hidden" name="PTCount" id="PTCount" value="<?php echo $count['PTCount']; ?>"/>
-
-									<div class="input_fields_wrap3">
-
-									<?php
-									for ($i=1; $i <= $count['PTCount']; $i++) {
-									?>
-
-									<?php if ($metodo > 1) { ?>
-									<input type="hidden" name="idTab_Valor<?php echo $i ?>" value="<?php echo $valor[$i]['idTab_Valor']; ?>"/>
-									<?php } ?>
-
-									<div class="form-group" id="3div<?php echo $i ?>">
+									<div class="form-group">
 										<div class="panel panel-info">
 											<div class="panel-heading">			
-												<div class="row">																					
-													
+												<div class="row">									
 													<div class="col-md-3">
-														<label for="ValorProduto">Valor :</label>
+														<label for="ValorProduto">Valor:</label><br>
 														<div class="input-group">
 															<span class="input-group-addon" id="basic-addon1">R$</span>
-															<input type="text" class="form-control Valor" id="ValorProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
-																name="ValorProduto<?php echo $i ?>" value="<?php echo $valor[$i]['ValorProduto'] ?>">
+															<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
+																	name="ValorProduto" value="<?php echo $valor['ValorProduto'] ?>">
 														</div>
-													</div>													
-													<!--
-													<div class="col-md-1">
-														<label><br></label><br>
-														<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
-															<span class="glyphicon glyphicon-trash"></span>
-														</button>
 													</div>
-													-->
-												</div>
-											</div>	
-										</div>		
-									</div>
-
-									<?php
-									}
-									?>
-
-									</div>
-									<!--
-									<div class="form-group">
-										<div class="row">
-											<div class="col-md-4">
-												<a class="btn btn-xs btn-danger" onclick="adicionaValor()">
-													<span class="glyphicon glyphicon-plus"></span> Adicionar Valor
-												</a>
-											</div>
-										</div>
-									</div>
-									-->
-								</div>
-							</div>
-						</div>
-					</div>
-					<?php } ?>
-					
-					<?php if (($_SESSION['log']['NivelEmpresa'] >= 7) AND ($_SESSION['log']['NivelEmpresa'] <= 10 )) { ?>						
-					<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
-						<div class="panel panel-primary">
-							 <div class="panel-heading" role="tab" id="heading3" data-toggle="collapse" data-parent="#accordion3" data-target="#collapse3">
-								<h4 class="panel-title">
-									<a class="accordion-toggle">
-										<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-										Valor 
-									</a>
-								</h4>
-							</div>
-
-							<div id="collapse3" class="panel-collapse" role="tabpanel" aria-labelledby="heading3" aria-expanded="false">
-								<div class="panel-body">
-
-									<input type="hidden" name="PTCount" id="PTCount" value="<?php echo $count['PTCount']; ?>"/>
-
-									<div class="input_fields_wrap3">
-
-									<?php
-									for ($i=1; $i <= $count['PTCount']; $i++) {
-									?>
-
-									<?php if ($metodo > 1) { ?>
-									<input type="hidden" name="idTab_Valor<?php echo $i ?>" value="<?php echo $valor[$i]['idTab_Valor']; ?>"/>
-									<?php } ?>
-
-									<div class="form-group" id="3div<?php echo $i ?>">
-										<div class="panel panel-info">
-											<div class="panel-heading">			
-												<div class="row">																					
-													<div class="col-md-4">
-														<label for="Convenio<?php echo $i ?>">Tabelas & Planos:</label>
-														<?php if ($i == 1) { ?>
-														<?php } ?>
-														<select data-placeholder="Selecione uma opção..." class="form-control"
-																 id="listadinamicac<?php echo $i ?>" name="Convenio<?php echo $i ?>">
-															<option value="">-- Selecione uma opção --</option>
-															<?php
-															foreach ($select['Convenio'] as $key => $row) {
-																if ($valor[$i]['Convenio'] == $key) {
-																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																} else {
-																	echo '<option value="' . $key . '">' . $row . '</option>';
-																}
-															}
-															?>
-														</select>
-													</div>
-													<div class="col-md-4">
-														<label for="Convdesc<?php echo $i ?>">Descrição do Valor:</label>
-														<input type="text" class="form-control"  id="Convdesc<?php echo $i ?>" <?php echo $readonly; ?>
-																  name="Convdesc<?php echo $i ?>" value="<?php echo $valor[$i]['Convdesc']; ?>">
-													</div>													
-													<!--
-													<div class="col-md-2">
-														<label for="ValorProduto<?php echo $i ?>">Valor :</label>
-														<textarea class="form-control" id="ValorProduto<?php echo $i ?>" <?php echo $readonly; ?>
-																  name="ValorProduto<?php echo $i ?>"><?php echo $valor[$i]['ValorProduto']; ?></textarea>
-													</div>
-													-->
-													<div class="col-md-3">
-														<label for="ValorProduto">Valor :</label>
-														<div class="input-group">
-															<span class="input-group-addon" id="basic-addon1">R$</span>
-															<input type="text" class="form-control Valor" id="ValorProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
-																name="ValorProduto<?php echo $i ?>" value="<?php echo $valor[$i]['ValorProduto'] ?>">
-														</div>
-													</div>													
-													
-													<div class="col-md-1">
-														<label><br></label><br>
-														<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
-															<span class="glyphicon glyphicon-trash"></span>
-														</button>
-													</div>
-												</div>
-											</div>	
-										</div>		
-									</div>
-
-									<?php
-									}
-									?>
-
-									</div>
-
-									<div class="form-group">
-										<div class="row">
-											<div class="col-md-4">
-												<a class="add_field_button3 btn btn-xs btn-danger" onclick="adicionaValor2()">
-													<span class="glyphicon glyphicon-plus"></span> Adicionar Valor
-												</a>
-											</div>
-										</div>
+												</div>	
+											</div>		
+										</div>			
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<?php } ?>
 					<hr>
 
 					<div class="form-group">

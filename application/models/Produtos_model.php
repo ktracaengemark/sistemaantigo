@@ -36,6 +36,18 @@ class Produtos_model extends CI_Model {
             return $this->db->insert_id();
         }
     }
+	
+    public function set_valor1($data) {
+
+        $query = $this->db->insert('Tab_Valor', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }	
 
     public function get_produtos($data) {
         $query = $this->db->query('SELECT * FROM Tab_Produto WHERE idTab_Produto = ' . $data);
@@ -111,7 +123,7 @@ class Produtos_model extends CI_Model {
         $query = $this->db->update_batch('Tab_Valor', $data, 'idTab_Valor');
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
-    }
+    }	
 
     public function delete_valor($data) {
 
