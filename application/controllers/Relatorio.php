@@ -1509,13 +1509,12 @@ class Relatorio extends CI_Controller {
 
         $data['select']['Campo'] = array(
 			'TP.CodProd' => 'Código',
-			'TP.idTab_Produto' => 'Id',
+			#'TP.idTab_Produto' => 'Id',
 			'TP.Produtos' => 'Produto',
-			'TP.Categoria' => 'Prod/Serv',
+			#'TP.Categoria' => 'Prod/Serv',
+			'TP.Prodaux3' => 'Categoria',			
 			'TP.Prodaux1' => 'Aux1',
 			'TP.Prodaux2' => 'Aux2',
-			'TP.Prodaux3' => 'Categoria',
-
         );
 
         $data['select']['Ordenamento'] = array(
@@ -3377,13 +3376,12 @@ class Relatorio extends CI_Controller {
 
         $data['select']['Campo'] = array(
 			'TP.CodProd' => 'Código',
-			'TP.idTab_Produto' => 'Id',
+			#'TP.idTab_Produto' => 'Id',
 			'TP.Produtos' => 'Descrição',
-			'TP.Categoria' => 'Prod/Serv',
+			#'TP.Categoria' => 'Prod/Serv',
+			'TP.Prodaux3' => 'Categoria',			
 			'TP.Prodaux1' => 'Aux1',
 			'TP.Prodaux2' => 'Aux2',
-			'TP.Prodaux3' => 'Categoria',
-
         );
 
         $data['select']['Ordenamento'] = array(
