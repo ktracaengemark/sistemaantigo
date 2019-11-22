@@ -1,4 +1,4 @@
-<div style="overflow: auto; height: 200px; ">		
+<div style="overflow: auto; height: auto; ">		
 	<div class="panel panel-danger">
 		<div class="panel-heading">
 			<div class="row">

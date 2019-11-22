@@ -1,4 +1,4 @@
-<div style="overflow: auto; height: 200px; ">	
+<div style="overflow: auto; height: auto; ">	
 	<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
 		<!--
 		<div class="panel panel-default">
@@ -37,7 +37,7 @@
 					<table class="table table-bordered table-condensed table-striped">
 						<tfoot>
 							<tr>
-								<th colspan="3" class="active">Total encontrado: <?php echo $report->num_rows(); ?> resultado(s)</th>
+								<th colspan="3" class="active">Despesas: <?php echo $report->num_rows(); ?> resultado(s)</th>
 							</tr>
 						</tfoot>
 					</table>
@@ -139,7 +139,7 @@
 					<table class="table table-bordered table-condensed table-striped">
 						<tfoot>
 							<tr>
-								<th colspan="3" class="active">Total encontrado: <?php echo $report->num_rows(); ?> resultado(s)</th>
+								<th colspan="3" class="active">Despesas: <?php echo $report->num_rows(); ?> resultado(s)</th>
 							</tr>
 						</tfoot>
 					</table>
