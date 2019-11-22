@@ -11,7 +11,7 @@
 						<h4><?php echo '<small>a(o)<br></small><strong> ' . $_SESSION['log']['NomeEmpresa'] . '</strong>.'  ?></h4>
 					</div>
 					<div class="col-sm-offset-4 col-lg-4 " align="center"> 
-						<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/profile-' . $_SESSION['log']['idSis_Empresa'] . '.png'; ?>" class="img-circle img-responsive">
+						<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/profile-' . $_SESSION['log']['idSis_Empresa'] . '.jpg'; ?>" class="img-circle img-responsive">
 					</div>
 					<div class="col-md-12 text-center t">
 						<h4><?php echo '<small>Acesse o </small><strong> Menu </strong><small> acima <br>e tenha um bom trabalho! </small>'  ?></h4>

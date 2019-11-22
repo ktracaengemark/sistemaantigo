@@ -124,6 +124,8 @@
 								</a>	
 							</div>
 							<?php } ?>
+						</li>	
+						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">		
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>login/sair">
 									<button type="button" class="btn btn-sm btn-active ">
@@ -132,7 +134,6 @@
 								</a>
 							</div>							
 						</li>
-
 					</ul>
 				</div>			
 			</div>
