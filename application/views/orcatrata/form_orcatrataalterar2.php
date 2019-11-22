@@ -99,7 +99,7 @@
 																				<div class="row">
 																					<div class="col-md-2">
 																						<label for="QtdProduto">Qtd<?php echo $i ?>:</label>
-																						<input type="text" class="form-control Numero" maxlength="3" id="QtdProduto<?php echo $i ?>" placeholder="0"
+																						<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
 																								onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																								autofocus name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
 																					</div>
@@ -244,7 +244,7 @@
 																				<div class="row">
 																					<div class="col-md-2">
 																						<label for="QtdServico">Qtd:</label>
-																						<input type="text" class="form-control Numero" maxlength="3" id="QtdServico<?php echo $i ?>" placeholder="0"
+																						<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0"
 																								onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
 																								autofocus name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
 																					</div>
