@@ -357,23 +357,24 @@
 																	<div class="col-md-3">	
 																		<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
 																	</div>
+																	<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 																	<div class="col-md-3 text-left">																							
-																	<div class="col-md-3">	
 																		<a class="btn btn-sm btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
 																			<span class="glyphicon glyphicon-menu-down"></span> Devolução
 																		</a>
-																	</div>	
-																		<!--
+																	</div>
+																	<?php } ?>
+																	<!--
+																	<div class="col-md-3 text-left">	
 																		<a class="accordion-toggle btn btn-heading  collapsed" role="tab" id="heading5" data-toggle="collapse" data-parent="#accordion5" data-target="#collapse5" aria-expanded="false">
 																			<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
 																			Entregues
 																		</a>
-																		
 																		<a class="btn btn-success" type="button" data-toggle="collapse" data-target="#Entregues" aria-expanded="false" aria-controls="Entregues">
 																			<span class="glyphicon glyphicon-menu-up"></span> Entregues
 																		</a>
-																		-->
 																	</div>
+																	-->
 																</div>
 															</div>
 														</div>

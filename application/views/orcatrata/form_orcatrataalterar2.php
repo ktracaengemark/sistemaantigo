@@ -179,42 +179,41 @@
 																	?>
 
 																	</div>
-
+																	
 																	<div class="panel panel-info">
 																		<div class="panel-heading text-left">
-
-																				<div class="row">
-
-																					<div class="col-md-3">
-																						<a class="add_field_button9 btn btn-info"
-																								onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
-																							<span class="glyphicon glyphicon-plus"></span> Produtos
-																						</a>
-																					</div>
-																					<div class="col-md-3">	
-																						<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
-																					</div>
-																					<div class="col-md-3">	
-																						<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
-																					</div>
-																					<div class="col-md-3 text-right">
-																						<a class="btn btn-sm btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
-																							<span class="glyphicon glyphicon-menu-down"></span> Devolução
-																						</a>
-																					</div>																				
-																					<!--
-																					<div class="col-md-3 text-left">																							
-																						<a class="accordion-toggle btn btn-heading  collapsed" role="tab" id="heading5" data-toggle="collapse" data-parent="#accordion5" data-target="#collapse5" aria-expanded="false">
-																							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-																							Entregues
-																						</a>
-																						<a class="btn btn-success" type="button" data-toggle="collapse" data-target="#Entregues" aria-expanded="false" aria-controls="Entregues">
-																							<span class="glyphicon glyphicon-menu-up"></span> Entregues
-																						</a>
-																					</div>
-																					-->
+																			<div class="row">
+																				<div class="col-md-3">
+																					<a class="add_field_button9 btn btn-info"
+																							onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
+																						<span class="glyphicon glyphicon-plus"></span> Produtos
+																					</a>
 																				</div>
-																	
+																				<div class="col-md-3">	
+																					<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
+																				</div>
+																				<div class="col-md-3">	
+																					<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
+																				</div>
+																				<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+																				<div class="col-md-3 text-right">
+																					<a class="btn btn-sm btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
+																						<span class="glyphicon glyphicon-menu-down"></span> Devolução
+																					</a>
+																				</div>																				
+																				<?php } ?>
+																				<!--
+																				<div class="col-md-3 text-left">																							
+																					<a class="accordion-toggle btn btn-heading  collapsed" role="tab" id="heading5" data-toggle="collapse" data-parent="#accordion5" data-target="#collapse5" aria-expanded="false">
+																						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+																						Entregues
+																					</a>
+																					<a class="btn btn-success" type="button" data-toggle="collapse" data-target="#Entregues" aria-expanded="false" aria-controls="Entregues">
+																						<span class="glyphicon glyphicon-menu-up"></span> Entregues
+																					</a>
+																				</div>
+																				-->
+																			</div>
 																		</div>
 																	</div>
 																	<input type="hidden" name="CountMax" id="CountMax" value="<?php echo $ProdutoSoma ?>">
