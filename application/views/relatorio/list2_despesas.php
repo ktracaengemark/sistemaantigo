@@ -1,35 +1,5 @@
 <div style="overflow: auto; height: auto; ">	
 	<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
-		<!--
-		<div class="panel panel-default">
-			<div class="panel-body">
-
-				<div class="col-md-1"></div>
-				<div class="col-md-3">
-					<label for="DataFim">Total das Despesas:</label>
-					<div class="input-group">
-						<span class="input-group-addon">R$</span>
-						<input type="text" class="form-control" disabled aria-label="Total Orcamentos" value="<?php echo $report->soma->somaorcamento ?>">
-					</div>
-				</div>
-				<div class="col-md-3">
-					<label for="DataFim">Total dos Descontos:</label>
-					<div class="input-group">
-						<span class="input-group-addon">R$</span>
-						<input type="text" class="form-control" disabled aria-label="Total Descontos" value="<?php echo $report->soma->somadesconto ?>">
-					</div>
-				</div>
-				<div class="col-md-3">
-					<label for="DataFim">Total A Pagar:</label>
-					<div class="input-group">
-						<span class="input-group-addon">R$</span>
-						<input type="text" class="form-control" disabled aria-label="Total Restante" value="<?php echo $report->soma->somarestante ?>">
-					</div>
-				</div>
-				<div class="col-md-1"></div>
-			</div>
-		</div>
-		-->
 
 		<div class="container-fluid">
 			<div class="row">

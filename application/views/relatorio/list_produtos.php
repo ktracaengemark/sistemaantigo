@@ -1,6 +1,6 @@
 <div style="overflow: auto; height: auto; ">	
 	<div class="container-fluid">
-		<div class="row">
+		
 
 			<div>
 				<table class="table table-bordered table-condensed table-striped">	
@@ -153,7 +153,7 @@
 				<?php } ?>				
 			</div>
 
-		</div>
+		
 
 	</div>
 </div>

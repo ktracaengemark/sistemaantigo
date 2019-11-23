@@ -14,11 +14,11 @@
 		<a class="navbar-brand" href="<?php echo base_url() ?>orcatrata/cadastrar3/"> 
 			 <span class="glyphicon glyphicon-plus"></span> Nova Produto
 		</a>
-		-->
+		
 		<a class="navbar-brand" href="<?php echo base_url() ?>relatorio/parcelas/">
 			<span class="glyphicon glyphicon-usd"></span> Parcelas
 		</a>
-		
+		-->
 	</div>
 	<div class="collapse navbar-collapse" id="myNavbar">
 		<ul class="nav navbar-nav navbar-center">
@@ -87,31 +87,31 @@
 						</button>
 					</a>
 				</div>
-				<!--
-				<div class="btn-group " role="group" aria-label="...">
-					<a <?php if (preg_match("/relatorio\/parcelas\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-						<a href="<?php echo base_url() . 'relatorio/parcelas/'; ?>">
-							<button type="button" class="btn btn-sm btn-default ">
-								<span class="glyphicon glyphicon-edit"></span> Parcelas
-							</button>										
-						</a>
-					</a>
-				</div>
-				-->
-				<div class="btn-group " role="group" aria-label="...">
-					<a <?php if (preg_match("/relatorio\/balanco\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-						<a href="<?php echo base_url() . 'relatorio/balanco/'; ?>">
-							<button type="button" class="btn btn-sm btn-default ">
-								<span class="glyphicon glyphicon-edit"></span> Balanco
-							</button>										
-						</a>
-					</a>
-				</div>							
 				<div class="btn-group " role="group" aria-label="...">
 					<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 						<span class="glyphicon glyphicon-filter"></span>Filtros <!--<?php #echo $titulo; ?>-->
 					</button>
-				</div>																											
+				</div>				
+			</li>						
+			<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+				<div class="btn-group " role="group" aria-label="...">
+					<a <?php if (preg_match("/relatorio\/parcelas\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+						<a href="<?php echo base_url() . 'relatorio/parcelas/'; ?>">
+							<button type="button" class="btn btn-sm btn-default ">
+								<span class="glyphicon glyphicon-pencil"></span> Parcelas
+							</button>										
+						</a>
+					</a>
+				</div>
+				<div class="btn-group " role="group" aria-label="...">
+					<a <?php if (preg_match("/relatorio\/balanco\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+						<a href="<?php echo base_url() . 'relatorio/balanco/'; ?>">
+							<button type="button" class="btn btn-sm btn-default ">
+								<span class="glyphicon glyphicon-pencil"></span> Balanco
+							</button>										
+						</a>
+					</a>
+				</div>							
 			</li>						
 			<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 				<div class="btn-group " role="group" aria-label="...">
