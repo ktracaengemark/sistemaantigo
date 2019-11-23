@@ -10,20 +10,17 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span> 
 		</button>
-		
-		<a class="navbar-brand" href="<?php echo base_url() ?>procedimento/cadastrar/"> 
+		<!--
+		<a class="navbar-brand" href="<?php #echo base_url() ?>procedimento/cadastrar/"> 
 			 <span class="glyphicon glyphicon-plus"></span>Tarefa
 		</a>
-		
 		<a  class="navbar-brand" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 			<span class="glyphicon glyphicon-filter"></span>Filtrar
 		</a>
-		<a  class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterarprocedimento/' . $_SESSION['log']['idSis_Empresa']; ?>">
-			
-				<span class="glyphicon glyphicon-edit"></span>
-			
+		<a  class="navbar-brand" href="<?php #echo base_url() . 'orcatrata/alterarprocedimento/' . $_SESSION['log']['idSis_Empresa']; ?>">
+			<span class="glyphicon glyphicon-edit"></span>Editar
 		</a>					
-		
+		-->
 	</div>
 	<div class="collapse navbar-collapse" id="myNavbar">
 		<ul class="nav navbar-nav navbar-center">
@@ -144,14 +141,23 @@
 <div class="col-md-6 ">		
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-		<span class="glyphicon glyphicon-pencil"> Tarefas</span>
+			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>procedimento/cadastrar" role="button"> 
+				<span class="glyphicon glyphicon-plus"></span>Nova
+			</a>				
+			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+				<span class="glyphicon glyphicon-filter"></span>Filtrar
+			</button>
+			<a href="<?php echo base_url() . 'orcatrata/alterarprocedimento/' . $_SESSION['log']['idSis_Empresa']; ?>">
+				<button type="button" class="btn btn-sm btn-info">
+					<span class="glyphicon glyphicon-edit"></span>Editar
+				</button>
+			</a>			
 		</div>	
-			<div <?php echo $collapse; ?> id="Tarefas">	
-				<div class="panel-body">
-					<?php echo (isset($list1)) ? $list1 : FALSE ?>
-				</div>
+		<div <?php echo $collapse; ?> id="Tarefas">	
+			<div class="panel-body">
+				<?php echo (isset($list1)) ? $list1 : FALSE ?>
 			</div>
-		
+		</div>
 	</div>
 </div>	
 <div class="col-md-6 ">	
@@ -181,7 +187,7 @@
 				<span class="glyphicon glyphicon-pencil"> Agenda</span>
 			</div>
 			-->
-			<span class="glyphicon glyphicon-pencil"> Agenda</span>
+			<span class="glyphicon glyphicon-pencil"></span> Agenda
 			<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#Calendario" aria-expanded="false" aria-controls="Calendario">
 				<span class="glyphicon glyphicon-calendar"> Calendario</span>
 			</div>	
