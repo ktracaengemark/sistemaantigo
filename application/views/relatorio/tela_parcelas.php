@@ -16,16 +16,17 @@
 			</button>
 			<a href="<?php echo base_url() . 'orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa']; ?>">
 				<button type="button" class="btn btn-sm btn-info">
-					<span class="glyphicon glyphicon-edit"></span>
+					<span class="glyphicon glyphicon-edit"></span> Editar
 				</button>
 			</a>
+			<!--
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
 				<span class="glyphicon glyphicon-search"></span>Relatório
 			</a>			
 			<a class="btn btn-sm btn-success" href="<?php echo base_url() ?>relatorio/balanco" role="button">
 				<span class="glyphicon glyphicon-search"></span>Balanço 
 			</a>
-
+			-->
 		</div>
 		<div class="panel-body">
 			<div class="modal fade bs-excluir-modal11-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -184,7 +185,7 @@
 									</select>
 								</div>
 								<div class="col-md-3 text-left">
-									<label for="Ordenamento">Tipo de Receita:</label>
+									<label for="Ordenamento">Tipo Receita:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 											id="TipoFinanceiroR" name="TipoFinanceiroR">
 										<?php
@@ -200,7 +201,7 @@
 								</div>
 								<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 								<div class="col-md-3 text-left">
-									<label for="Ordenamento">Nome do Cliente:</label>
+									<label for="Ordenamento">Cliente:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 											id="NomeCliente" name="NomeCliente">
 										<?php
@@ -260,16 +261,17 @@
 			</button>
 			<a href="<?php echo base_url() . 'orcatrata/alterarparceladesp/' . $_SESSION['log']['idSis_Empresa']; ?>">
 				<button type="button" class="btn btn-sm btn-info">
-					<span class="glyphicon glyphicon-edit"></span>
+					<span class="glyphicon glyphicon-edit"></span> Editar
 				</button>
 			</a>
+			<!--
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
 				<span class="glyphicon glyphicon-search"></span>Relatório
 			</a>			
 			<a class="btn btn-sm btn-success" href="<?php echo base_url() ?>relatorio/balanco" role="button">
 				<span class="glyphicon glyphicon-search"></span>Balanço
 			</a>
-
+			-->
 		</div>
 		<div class="panel-body">
 			<div class="modal fade bs-excluir-modal13-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -429,7 +431,7 @@
 									</select>
 								</div>
 								<div class="col-md-3 text-left">
-									<label for="Ordenamento">Tipo de Despesa:</label>
+									<label for="Ordenamento">Tipo Despesa:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 											id="TipoFinanceiroD" name="TipoFinanceiroD">
 										<?php
@@ -443,6 +445,23 @@
 										?>
 									</select>
 								</div>
+								<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+								<div class="col-md-3 text-left">
+									<label for="Ordenamento">Fornecedor:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="NomeFornecedor" name="NomeFornecedor">
+										<?php
+										foreach ($select['NomeFornecedor'] as $key => $row) {
+											if ($query['NomeFornecedor'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								<?php } ?>								
 							</div>
 							<br>
 							<div class="row">

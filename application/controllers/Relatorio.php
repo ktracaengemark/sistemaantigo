@@ -876,6 +876,7 @@ class Relatorio extends CI_Controller {
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idApp_OrcaTrata',
 			'NomeCliente',
+			'NomeFornecedor',
 			'Dia',
 			'Ano',
 			'Mesvenc',
@@ -966,6 +967,7 @@ class Relatorio extends CI_Controller {
         );
 
 		$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+		$data['select']['NomeFornecedor'] = $this->Relatorio_model->select_fornecedor();
 		$data['select']['ObsOrca'] = $this->Relatorio_model->select_obsorca();
 		$data['select']['TipoFinanceiro'] = $this->Relatorio_model->select_tipofinanceiro();
 		$data['select']['TipoFinanceiroR'] = $this->Relatorio_model->select_tipofinanceiroR();
@@ -1021,7 +1023,7 @@ class Relatorio extends CI_Controller {
         if ($this->form_validation->run() !== TRUE) {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
-            #$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+            $data['bd']['NomeFornecedor'] = $data['query']['NomeFornecedor'];
             $data['bd']['TipoFinanceiroD'] = $data['query']['TipoFinanceiroD'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
@@ -1069,6 +1071,7 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'NomeCliente',
+			'NomeFornecedor',
 			'Dia',
 			'Ano',
 			'Mesvenc',
@@ -1121,7 +1124,8 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];
 		$_SESSION['FiltroAlteraParcela']['Orcarec'] = $data['query']['Orcarec'];
 		$_SESSION['FiltroAlteraParcela']['Orcades'] = $data['query']['Orcades'];
-		$_SESSION['FiltroAlteraParcela']['NomeCliente'] = $data['query']['NomeCliente'];		
+		$_SESSION['FiltroAlteraParcela']['NomeCliente'] = $data['query']['NomeCliente'];
+		$_SESSION['FiltroAlteraParcela']['NomeFornecedor'] = $data['query']['NomeFornecedor'];		
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('DataInicio', 'Data Início do Vencimento', 'trim|valid_date');
@@ -1177,7 +1181,8 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-		$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();		
+		$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+		$data['select']['NomeFornecedor'] = $this->Relatorio_model->select_fornecedor();
 		$data['select']['Orcarec'] = $this->Relatorio_model->select_orcarec();
 		$data['select']['Orcades'] = $this->Relatorio_model->select_orcades();
 		$data['select']['ObsOrca'] = $this->Relatorio_model->select_obsorca();
@@ -1236,7 +1241,7 @@ class Relatorio extends CI_Controller {
         if ($this->form_validation->run() !== TRUE) {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
-            #$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+            $data['bd']['NomeFornecedor'] = $data['query']['NomeFornecedor'];
             $data['bd']['TipoFinanceiroD'] = $data['query']['TipoFinanceiroD'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];

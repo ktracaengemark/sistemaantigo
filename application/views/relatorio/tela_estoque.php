@@ -12,10 +12,11 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span> 
 			</button>
-			<!--
-			<a class="navbar-brand" href="<?php echo base_url() ?>orcatrata/cadastrar3/"> 
-				 <span class="glyphicon glyphicon-plus"></span> Nova Produto
+			
+			<a class="navbar-brand"> 
+				 <span class="glyphicon glyphicon-list"></span> Estoque
 			</a>
+			<!--
 			<a  class="navbar-brand" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 				<span class="glyphicon glyphicon-plus"></span>Produto
 			</a>
@@ -44,9 +45,11 @@
 							<span class="glyphicon glyphicon-gift"></span> Produtos <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">							
-							<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-gift"></span> Produtos</a></li>
+							<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-usd"></span> Produtos</a></li>
 							<li role="separator" class="divider"></li>							
 							<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-list-alt"></span> Estoque</a></li>
+							<li role="separator" class="divider"></li>							
+							<li><a data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm"><span class="glyphicon glyphicon-plus"></span> Novo Produto</a></li>
 						</ul>
 					</div>																				
 					<?php } ?>
@@ -70,14 +73,17 @@
 							</a>
 						</a>
 					</div>
-					<div class="btn-group " role="group" aria-label="...">
-						<a <?php if (preg_match("/relatorio\/financeiro\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-							<a href="<?php echo base_url() . 'relatorio/financeiro/'; ?>">
-								<button type="button" class="btn btn-sm btn-success ">
-									<span class="glyphicon glyphicon-list"></span> Relatório
-								</button>										
-							</a>
-						</a>
+					<div class="btn-group">
+						<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-usd"></span> Financeiro <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">							
+							<li><a href="<?php echo base_url() ?>relatorio/financeiro"><span class="glyphicon glyphicon-usd"></span> Receitas & Despesas</a></li>
+							<li role="separator" class="divider"></li>							
+							<li><a href="<?php echo base_url() ?>relatorio/parcelas"><span class="glyphicon glyphicon-usd"></span> Parcelas</a></li>
+							<li role="separator" class="divider"></li>							
+							<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>									
+						</ul>
 					</div>																				
 				</li>
 				<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
@@ -103,12 +109,7 @@
 						<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 							<span class="glyphicon glyphicon-filter"></span>Filtros
 						</button>
-					</div>					
-					<div class="btn-group " role="group" aria-label="...">
-						<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-							<span class="glyphicon glyphicon-plus"></span>Produtos
-						</button>
-					</div>																											
+					</div>																																
 				</li>						
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
@@ -159,7 +160,7 @@
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
 						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar1" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Produtos1
+							<span class="glyphicon glyphicon-plus"></span> Novo Produto
 						</a>
 					</div>	
 				</div>
@@ -167,7 +168,7 @@
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
 						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Produtos
+							<span class="glyphicon glyphicon-plus"></span> Novo Produto
 						</a>
 					</div>	
 				</div>

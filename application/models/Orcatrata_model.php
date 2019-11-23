@@ -180,10 +180,11 @@ class Orcatrata_model extends CI_Model {
 		$permissao2 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
 		$permissao3 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "0" ) ? 'YEAR(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
 		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Orcades'] != "0" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcades'] . '" AND ' : FALSE;
+		$permissao5 = (($_SESSION['log']['idSis_Empresa'] != 5) && ($_SESSION['FiltroAlteraParcela']['NomeFornecedor'] != "0" )) ? 'OT.idApp_Fornecedor = "' . $_SESSION['FiltroAlteraParcela']['NomeFornecedor'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('
 			SELECT
-
+				C.NomeFornecedor,
 				OT.Descricao,
 				OT.idApp_OrcaTrata,
 				OT.TipoFinanceiro,
@@ -204,6 +205,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoFinanceiro AS TD ON TD.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
+					LEFT JOIN App_Fornecedor AS C ON C.idApp_Fornecedor = OT.idApp_Fornecedor
 			WHERE
 				' . $permissao . '
 				PR.idSis_Empresa = ' . $data . ' AND
@@ -211,6 +213,7 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao2 . '
 				' . $permissao3 . '
 				' . $permissao4 . '
+				' . $permissao5 . '
 				PR.idTab_TipoRD = "1"
 			ORDER BY
 				PR.DataVencimento

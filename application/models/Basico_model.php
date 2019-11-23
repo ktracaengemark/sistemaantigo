@@ -624,6 +624,31 @@ class Basico_model extends CI_Model {
         return $array;
     }
 
+    public function select_fornecedor() {
+
+        $query = $this->db->query('
+            SELECT
+                C.idApp_Fornecedor,
+                CONCAT(IFNULL(C.NomeFornecedor, ""), " --- ", IFNULL(C.Telefone1, "")) As NomeFornecedor
+            FROM
+                App_Fornecedor AS C
+
+            WHERE
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+            ORDER BY
+                C.NomeFornecedor ASC
+        ');
+
+        $array = array();
+        $array[0] = 'TODOS';
+        foreach ($query->result() as $row) {
+			$array[$row->idApp_Fornecedor] = $row->NomeFornecedor;
+        }
+
+        return $array;
+    }
+	
 	public function select_orcatrata($data = FALSE) {
 
         if ($data === TRUE) {

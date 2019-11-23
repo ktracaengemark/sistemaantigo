@@ -927,7 +927,8 @@ class Relatorio_model extends CI_Model {
 
     public function list2_despesas($data, $completo) {
 
-        $data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
+        $data['NomeFornecedor'] = (($_SESSION['log']['idSis_Empresa'] != 5) && ($data['NomeFornecedor'])) ? ' AND F.idApp_Fornecedor = ' . $data['NomeFornecedor'] : FALSE;
+		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(OT.DataVencimentoOrca) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(OT.DataVencimentoOrca) = ' . $data['Mesvenc'] : FALSE;
@@ -945,6 +946,7 @@ class Relatorio_model extends CI_Model {
         $query = $this->db->query('
             SELECT
 				CONCAT(IFNULL(TR.TipoFinanceiro,""), " / ", IFNULL(OT.Descricao,"")) AS Descricao,
+				F.NomeFornecedor,
 				OT.idApp_OrcaTrata,
                 OT.AprovadoOrca,
                 OT.DataOrca,
@@ -974,6 +976,7 @@ class Relatorio_model extends CI_Model {
 				LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 				LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
 				LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+				LEFT JOIN App_Fornecedor AS F ON F.idApp_Fornecedor = OT.idApp_Fornecedor
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
@@ -989,7 +992,8 @@ class Relatorio_model extends CI_Model {
 				' . $data['Orcades'] . '
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
-				' . $data['Ano'] . ' 				
+				' . $data['Ano'] . '
+				' . $data['NomeFornecedor'] . '
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
 
@@ -1276,7 +1280,7 @@ class Relatorio_model extends CI_Model {
                 '(OT.DataOrca >= "' . $data['DataInicio3'] . '")';
         }
 
-		#$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
+		$data['NomeFornecedor'] = (($_SESSION['log']['idSis_Empresa'] != 5) && ($data['NomeFornecedor'])) ? ' AND F.idApp_Fornecedor = ' . $data['NomeFornecedor'] : FALSE;
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
@@ -1295,7 +1299,7 @@ class Relatorio_model extends CI_Model {
 		
         $query = $this->db->query(
             'SELECT
-                
+                F.NomeFornecedor,
                 OT.idApp_OrcaTrata,
 				OT.idSis_Usuario,
 				OT.idTab_TipoRD,
@@ -1324,6 +1328,7 @@ class Relatorio_model extends CI_Model {
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoFinanceiro AS TD ON TD.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
+					LEFT JOIN App_Fornecedor AS F ON F.idApp_Fornecedor = OT.idApp_Fornecedor
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
@@ -1336,6 +1341,7 @@ class Relatorio_model extends CI_Model {
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 
+				' . $data['NomeFornecedor'] . '
             ORDER BY
 				PR.DataVencimento
             ');
@@ -1351,6 +1357,7 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoFinanceiro AS TD ON TD.idTab_TipoFinanceiro = OT.TipoFinanceiro
+					LEFT JOIN App_Fornecedor AS F ON F.idApp_Fornecedor = OT.idApp_Fornecedor
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
@@ -1363,7 +1370,8 @@ class Relatorio_model extends CI_Model {
 				' . $data['Orcades'] . '                
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
-				' . $data['Ano'] . '				
+				' . $data['Ano'] . '
+				' . $data['NomeFornecedor'] . '
  				
         ');			
 		$parcelaspagas = $parcelaspagas->result();		

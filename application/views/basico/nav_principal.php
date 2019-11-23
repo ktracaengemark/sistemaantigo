@@ -62,9 +62,9 @@
 									<span class="glyphicon glyphicon-gift"></span> Produtos <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
-									<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-gift"></span> Produtos</a></li>
+									<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-usd"></span> Produtos</a></li>
 									<li role="separator" class="divider"></li>							
-									<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-list-alt"></span> Estoque</a></li>
+									<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-list-alt"></span> Estoque</a></li>								
 								</ul>
 							</div>																				
 							<?php } ?>
@@ -83,14 +83,19 @@
 										<span class="glyphicon glyphicon-plus"></span>Despesas
 									</button>
 								</a>
-							</div>							
-							<div class="btn-group " role="group" aria-label="...">
-								<a href="<?php echo base_url(); ?>relatorio/financeiro">
-									<button type="button" class="btn btn-sm btn-success ">
-										<span class="glyphicon glyphicon-usd"></span>Relatório
-									</button>
-								</a>
-							</div>							
+							</div>
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-usd"></span> Financeiro <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">							
+									<li><a href="<?php echo base_url() ?>relatorio/financeiro"><span class="glyphicon glyphicon-usd"></span> Receitas & Despesas</a></li>
+									<li role="separator" class="divider"></li>							
+									<li><a href="<?php echo base_url() ?>relatorio/parcelas"><span class="glyphicon glyphicon-usd"></span> Parcelas</a></li>
+									<li role="separator" class="divider"></li>							
+									<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>									
+								</ul>
+							</div>														
 						</li>						
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">						
 							<div class="btn-group">
