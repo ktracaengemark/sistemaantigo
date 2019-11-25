@@ -13,7 +13,7 @@
 				<span class="icon-bar"></span> 
 			</button>
 			
-			<a class="navbar-brand"> 
+			<a class="navbar-brand" data-toggle="collapse" data-target="#myNavbar"> 
 				 <span class="glyphicon glyphicon-list"></span> Estoque
 			</a>
 			<!--

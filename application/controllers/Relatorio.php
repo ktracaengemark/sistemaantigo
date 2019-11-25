@@ -916,6 +916,11 @@ class Relatorio extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
+		$data['collapse'] = '';	
+
+		$data['collapse1'] = 'class="collapse"';
+		
+		
         $data['select']['AprovadoOrca'] = array(
             '0' => 'TODOS',
 			'N' => 'Não',
@@ -1135,6 +1140,10 @@ class Relatorio extends CI_Controller {
 		#$this->form_validation->set_rules('DataInicio3', 'Data Início do Orçamento', 'trim|valid_date');
         #$this->form_validation->set_rules('DataFim3', 'Data Fim do Orçamento', 'trim|valid_date');
 
+		$data['collapse'] = '';	
+
+		$data['collapse1'] = 'class="collapse"';
+		
         $data['select']['AprovadoOrca'] = array(
             'S' => 'Sim',
 			'N' => 'Não',
@@ -1237,6 +1246,7 @@ class Relatorio extends CI_Controller {
 		
         $data['titulo2'] = 'Despesa';
 
+		
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
 

@@ -589,6 +589,18 @@
 											</div>
 											<!--Forma de Pagamento -->	
 											<div class="row">
+												<div id="AprovadoOrca" <?php echo $div['AprovadoOrca']; ?>>
+													<div class="col-md-4">
+														<label for="DataOrca">Dta Orçam:</label>
+														<div class="input-group <?php echo $datepicker; ?>">
+															<span class="input-group-addon" disabled>
+																<span class="glyphicon glyphicon-calendar"></span>
+															</span>
+															<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																	name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
+														</div>
+													</div>
+												</div>												
 												<div class="col-md-4">
 													<label for="FormaPagamento">Pago Com:</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -604,18 +616,6 @@
 														}
 														?>
 													</select>
-												</div>
-												<div class="col-md-4">
-													<label for="DataVencimentoOrca">1º Venc.</label>
-													<div class="input-group <?php echo $datepicker; ?>">
-														<span class="input-group-addon" disabled>
-															<span class="glyphicon glyphicon-calendar"></span>
-														</span>
-														<input type="text" class="form-control Date" id="DataVencimentoOrca" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-															   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()"
-																data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
-															   name="DataVencimentoOrca" value="<?php echo $orcatrata['DataVencimentoOrca']; ?>">																			
-													</div>
 												</div>																
 												<div class="col-md-4">
 													<label for="AVAP">Forma de Pagam.</label><br>
@@ -703,7 +703,19 @@
 														}
 														?>
 													</div>
-												</div>																	
+												</div>
+												<div class="col-md-4">
+													<label for="DataVencimentoOrca">Venc.</label>
+													<div class="input-group <?php echo $datepicker; ?>">
+														<span class="input-group-addon" disabled>
+															<span class="glyphicon glyphicon-calendar"></span>
+														</span>
+														<input type="text" class="form-control Date" id="DataVencimentoOrca" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+															   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()"
+																data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
+															   name="DataVencimentoOrca" value="<?php echo $orcatrata['DataVencimentoOrca']; ?>">																			
+													</div>
+												</div>												
 											</div>
 											<input type="hidden" name="PRCount" id="PRCount" value="<?php echo $count['PRCount']; ?>"/>
 											<div class="panel-body">
@@ -911,18 +923,6 @@
 											<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 											<div class="form-group ">
 												<div class="row">
-													<div id="AprovadoOrca" <?php echo $div['AprovadoOrca']; ?>>
-														<div class="col-md-4">
-															<label for="DataOrca">Orçado em:</label>
-															<div class="input-group <?php echo $datepicker; ?>">
-																<span class="input-group-addon" disabled>
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-																<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																		name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
-															</div>
-														</div>
-													</div>
 													<div id="ConcluidoOrca" <?php echo $div['ConcluidoOrca']; ?>>
 														<div class="col-md-4">
 															<label for="DataConclusao">Concluído em:</label>

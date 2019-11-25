@@ -6,27 +6,31 @@
 
 		<div class="panel-heading">
 			<?php echo form_open('relatorio/parcelas', 'role="form"'); ?>
-			
-			<!--<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal11-sm">
-				<span class="glyphicon glyphicon-plus"></span>Rec.<?php #echo $titulo1; ?>
-			</button>-->			
-			
-			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-				<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo1; ?>
-			</button>
-			<a href="<?php echo base_url() . 'orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa']; ?>">
-				<button type="button" class="btn btn-sm btn-info">
-					<span class="glyphicon glyphicon-edit"></span> Editar
+
+				<!--<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal11-sm">
+					<span class="glyphicon glyphicon-plus"></span>Rec.<?php #echo $titulo1; ?>
+				</button>-->			
+				
+				<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+					<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo1; ?>
 				</button>
-			</a>
-			<!--
-			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
-				<span class="glyphicon glyphicon-search"></span>Relatório
-			</a>			
-			<a class="btn btn-sm btn-success" href="<?php echo base_url() ?>relatorio/balanco" role="button">
-				<span class="glyphicon glyphicon-search"></span>Balanço 
-			</a>
-			-->
+				<a href="<?php echo base_url() . 'orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa']; ?>">
+					<button type="button" class="btn btn-sm btn-info">
+						<span class="glyphicon glyphicon-edit"></span> Editar
+					</button>
+				</a>
+				<button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#Receitas" aria-expanded="false" aria-controls="Receitas">
+					<span class="glyphicon glyphicon-menu-up"></span> Receitas
+				</button>																							
+				<!--
+				<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
+					<span class="glyphicon glyphicon-search"></span>Relatório
+				</a>			
+				<a class="btn btn-sm btn-success" href="<?php echo base_url() ?>relatorio/balanco" role="button">
+					<span class="glyphicon glyphicon-search"></span>Balanço 
+				</a>
+				-->
+	
 		</div>
 		<div class="panel-body">
 			<div class="modal fade bs-excluir-modal11-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -241,9 +245,9 @@
 				</div>
 			</div>																				
 			</form>
-
-			<?php echo (isset($list1)) ? $list1 : FALSE ?>
-
+			<div <?php echo $collapse; ?> id="Receitas">
+				<?php echo (isset($list1)) ? $list1 : FALSE ?>
+			</div>
 		</div>
 	</div>
 </div>	
@@ -253,25 +257,30 @@
 
 		<div class="panel-heading">
 			<?php echo form_open('relatorio/parcelas', 'role="form"'); ?>
-			<!--<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal13-sm">
-				<span class="glyphicon glyphicon-plus"></span>Des.<?php #echo $titulo2; ?>
-			</button>-->
-			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
-				<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo2; ?>
-			</button>
-			<a href="<?php echo base_url() . 'orcatrata/alterarparceladesp/' . $_SESSION['log']['idSis_Empresa']; ?>">
-				<button type="button" class="btn btn-sm btn-info">
-					<span class="glyphicon glyphicon-edit"></span> Editar
+
+				<!--<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal13-sm">
+					<span class="glyphicon glyphicon-plus"></span>Des.<?php #echo $titulo2; ?>
+				</button>-->
+				<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
+					<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo2; ?>
 				</button>
-			</a>
-			<!--
-			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
-				<span class="glyphicon glyphicon-search"></span>Relatório
-			</a>			
-			<a class="btn btn-sm btn-success" href="<?php echo base_url() ?>relatorio/balanco" role="button">
-				<span class="glyphicon glyphicon-search"></span>Balanço
-			</a>
-			-->
+				<a href="<?php echo base_url() . 'orcatrata/alterarparceladesp/' . $_SESSION['log']['idSis_Empresa']; ?>">
+					<button type="button" class="btn btn-sm btn-info">
+						<span class="glyphicon glyphicon-edit"></span> Editar
+					</button>
+				</a>
+				<button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#Despesas" aria-expanded="false" aria-controls="Despesas">
+					<span class="glyphicon glyphicon-menu-up"></span> Despesas
+				</button>			
+				<!--
+				<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
+					<span class="glyphicon glyphicon-search"></span>Relatório
+				</a>			
+				<a class="btn btn-sm btn-success" href="<?php echo base_url() ?>relatorio/balanco" role="button">
+					<span class="glyphicon glyphicon-search"></span>Balanço
+				</a>
+				-->
+	
 		</div>
 		<div class="panel-body">
 			<div class="modal fade bs-excluir-modal13-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -487,9 +496,9 @@
 				</div>
 			</div>																				
 			</form>
-
-			<?php echo (isset($list2)) ? $list2 : FALSE ?>
-
+			<div <?php echo $collapse; ?> id="Despesas">
+				<?php echo (isset($list2)) ? $list2 : FALSE ?>
+			</div>
 		</div>
 	</div>
 </div>

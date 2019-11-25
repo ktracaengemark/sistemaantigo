@@ -86,7 +86,7 @@
 							</div>
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-usd"></span> Financeiro <span class="caret"></span>
+									<span class="glyphicon glyphicon-usd"></span> Finanças <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
 									<li><a href="<?php echo base_url() ?>relatorio/financeiro"><span class="glyphicon glyphicon-usd"></span> Receitas & Despesas</a></li>

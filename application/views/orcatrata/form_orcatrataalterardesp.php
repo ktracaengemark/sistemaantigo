@@ -41,6 +41,11 @@
 																?>
 															</select>
 														</div>
+														<div class="col-md-4">
+															<label for="Descricao">Descrição</label><br>
+															<input type="text" class="form-control" maxlength="200"
+																	name="Descricao" value="<?php echo $orcatrata['Descricao'] ?>">
+														</div>														
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 														<div class="col-md-4">
 															<label for="idApp_Fornecedor">Fornecedor</label>
@@ -59,14 +64,20 @@
 																?>
 															</select>
 														</div>
-														<?php } else { ?>
-														<div class="col-md-4"></div>																	
-														<?php } ?>																	
+														<?php } ?>
+														<?php if ($_SESSION['log']['NivelEmpresa'] < 3 ) { ?>
 														<div class="col-md-4">
-															<label for="Descricao">Descrição/Obs</label><br>
-															<input type="text" class="form-control" maxlength="200"
-																	name="Descricao" value="<?php echo $orcatrata['Descricao'] ?>">
-														</div>
+															<label for="ValorRestanteOrca">Total:</label><br>
+															<div class="input-group" id="txtHint">
+																<span class="input-group-addon" id="basic-addon1">R$</span>
+																<input type="text" class="form-control Valor" id="ValorRestanteOrca" maxlength="10" placeholder="0,00" readonly=""
+																	   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()" onkeydown="calculaParcelas()"
+																		data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
+																	   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
+															</div>
+														</div>																	
+														<?php } ?>																	
+
 													</div>	
 													<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 													<div class="row">														
@@ -411,6 +422,7 @@
 																</div>
 															</div>
 														</div>
+														<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 														<div class="col-md-4">
 															<label for="ValorRestanteOrca">Total:</label><br>
 															<div class="input-group" id="txtHint">
@@ -420,12 +432,25 @@
 																		data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																	   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
 															</div>
-														</div>
+														</div>																	
+														<?php } ?>	
 													</div>
 												</div>
 												<div class="row">
+													<div id="AprovadoOrca" <?php echo $div['AprovadoOrca']; ?>>
+														<div class="col-md-4">
+															<label for="DataOrca">Dta Orçam:</label>
+															<div class="input-group <?php echo $datepicker; ?>">
+																<span class="input-group-addon" disabled>
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+																<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																		name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
+															</div>
+														</div>
+													</div>													
 													<div class="col-md-4">
-														<label for="FormaPagamento">Forma de Pagam.:</label>
+														<label for="FormaPagamento">Pago com:</label>
 														<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																id="FormaPagamento" name="FormaPagamento">
 															<!--<option value="">-- Selecione uma opção --</option>-->
@@ -439,18 +464,6 @@
 															}
 															?>
 														</select>
-													</div>
-													<div class="col-md-4">
-														<label for="DataVencimentoOrca">1º Venc.</label>
-														<div class="input-group <?php echo $datepicker; ?>">
-															<span class="input-group-addon" disabled>
-																<span class="glyphicon glyphicon-calendar"></span>
-															</span>
-															<input type="text" class="form-control Date" id="DataVencimentoOrca" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()"
-																	data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
-																   name="DataVencimentoOrca" value="<?php echo $orcatrata['DataVencimentoOrca']; ?>">																			
-														</div>
 													</div>																
 													<div class="col-md-4">
 														<label for="AVAP">ÀVista/ ÀPrazo</label><br>
@@ -539,7 +552,19 @@
 																	}
 																	?>
 																</div>
-															</div>																	
+															</div>
+															<div class="col-md-4">
+																<label for="DataVencimentoOrca">Venc.</label>
+																<div class="input-group <?php echo $datepicker; ?>">
+																	<span class="input-group-addon" disabled>
+																		<span class="glyphicon glyphicon-calendar"></span>
+																	</span>
+																	<input type="text" class="form-control Date" id="DataVencimentoOrca" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																		   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()"
+																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
+																		   name="DataVencimentoOrca" value="<?php echo $orcatrata['DataVencimentoOrca']; ?>">																			
+																</div>
+															</div>															
 														</div>
 													</div>
 													<!--App_parcelasRec-->
@@ -751,14 +776,7 @@
 													<div class="row">
 														<div id="AprovadoOrca" <?php echo $div['AprovadoOrca']; ?>>
 															<div class="col-md-4">
-																<label for="DataOrca">Orçado em:</label>
-																<div class="input-group <?php echo $datepicker; ?>">
-																	<span class="input-group-addon" disabled>
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>
-																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																			name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
-																</div>
+
 															</div>
 														</div>
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>

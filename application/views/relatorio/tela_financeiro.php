@@ -13,7 +13,10 @@
 			</button>-->
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar Receita<?php #echo $titulo1; ?>
-			</button>											
+			</button>
+			<button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#Receitas" aria-expanded="false" aria-controls="Receitas">
+				<span class="glyphicon glyphicon-menu-up"></span> Receitas
+			</button>			
 			<!--
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 				<span class="glyphicon glyphicon-search"></span>Parcelas
@@ -351,9 +354,9 @@
 				</div>
 			</div>																				
 			</form>
-
-			<?php echo (isset($list1)) ? $list1 : FALSE ?>
-
+			<div <?php echo $collapse; ?> id="Receitas">
+				<?php echo (isset($list1)) ? $list1 : FALSE ?>
+			</div>
 		</div>
 	</div>
 </div>	
@@ -370,6 +373,9 @@
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar Despesa<?php #echo $titulo2; ?>
 			</button>
+			<button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#Despesas" aria-expanded="false" aria-controls="Despesas">
+				<span class="glyphicon glyphicon-menu-up"></span> Despesas
+			</button>			
 			<!--
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 				<span class="glyphicon glyphicon-search"></span>Parcelas
@@ -708,9 +714,9 @@
 				</div>
 			</div>																				
 			</form>
-
-			<?php echo (isset($list2)) ? $list2 : FALSE ?>
-
+			<div <?php echo $collapse; ?> id="Despesas">
+				<?php echo (isset($list2)) ? $list2 : FALSE ?>
+			</div>
 		</div>
 	</div>
 </div>

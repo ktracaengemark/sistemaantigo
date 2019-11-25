@@ -10,10 +10,10 @@
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
-				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
 			</button>
 			
-			<a class="navbar-brand"> 
+			<a class="navbar-brand" data-toggle="collapse" data-target="#myNavbar"> 
 				 <span class="glyphicon glyphicon-list"></span> Produtos
 			</a>
 			<!--
