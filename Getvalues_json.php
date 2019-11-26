@@ -110,8 +110,8 @@ elseif ($_GET['q'] == 9) {
     $result = mysql_query(
             'SELECT
                 V.idTab_Valor,
-                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - R$ ", V.ValorProduto, " -- ", 
-						IFNULL(V.Convdesc,""), " --- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", 
+                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(TP3.Prodaux3,""), " - ", IFNULL(P.Produtos,""), " - R$ ", V.ValorProduto, " -- ", 
+						IFNULL(V.Convdesc,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", 
 						IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
                 V.ValorProduto,
 				P.Categoria

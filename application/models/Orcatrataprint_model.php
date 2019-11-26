@@ -29,6 +29,7 @@ class Orcatrataprint_model extends CI_Model {
 				OT.idApp_Cliente,
 				OT.idApp_Fornecedor,
 				OT.ValorOrca,
+				OT.ValorDev,
 				OT.ValorEntradaOrca,
 				OT.ValorRestanteOrca,
 				OT.QtdParcelasOrca,
@@ -41,6 +42,7 @@ class Orcatrataprint_model extends CI_Model {
 				EF.NomeEmpresa,
 				MO.AVAP,
 				MO.Abrev3,
+				OT.Modalidade,
 				MO.Modalidade,
 				TP.TipoFinanceiro
 
@@ -48,8 +50,9 @@ class Orcatrataprint_model extends CI_Model {
                 Tab_FormaPag AS FP,
 				App_OrcaTrata AS OT
 				LEFT JOIN Sis_Empresa AS EF ON EF.idSis_Empresa = OT.idSis_Empresa
-				LEFT JOIN Tab_Modalidade AS MO ON MO.Abrev2 = OT.AVAP
-				LEFT JOIN Tab_TipoFinanceiro AS TP ON TP.idTab_TipoFinanceiro = OT.TipoFinanceiro
+				LEFT JOIN Tab_TipoFinanceiro AS TP ON TP.idTab_TipoFinanceiro = OT.TipoFinanceiro				
+				LEFT JOIN Tab_Modalidade AS MO ON MO.Abrev = OT.Modalidade
+
 
             WHERE
             	OT.idApp_OrcaTrata = ' . $data . ' AND

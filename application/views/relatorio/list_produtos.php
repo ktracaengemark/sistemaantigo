@@ -47,8 +47,9 @@
 					<thead>
 						<tr>                       																	
 							<!--<th class="active">Id.</th>-->
-							<th class="active">Categoria</th>							
 							<th class="active">Cod.</th>
+							<th class="active">Categoria</th>							
+							
 							<th class="active">Produto</th>
 							<th class="active">Unid.</th>							
 							<th class="active">Valor</th>
@@ -73,8 +74,9 @@
 							#echo '<tr>';
 							echo '<tr class="clickable-row" data-href="' . base_url() . 'produtos/alterar/' . $row['idTab_Produto'] . '">';
 								#echo '<td>' . $row['idTab_Produto'] . '</td>';
-								echo '<td>' . $row['Prodaux3'] . '</td>';								
 								echo '<td>' . $row['CodProd'] . '</td>';
+								echo '<td>' . $row['Prodaux3'] . '</td>';								
+								
 								echo '<td>' . $row['Produtos'] . '</td>';
 								echo '<td>' . $row['UnidadeProduto'] . '</td>';								
 								echo '<td>' . $row['ValorProduto'] . '</td>';	
@@ -103,12 +105,13 @@
 						<tr>                       																	
 							<!--<th class="active">Id.</th>-->
 							<th class="active">Cod.</th>
+							<th class="active">Categoria</th>
 							<th class="active">Produto</th>
 							<th class="active">Valor</th>
 							<th class="active">V/C</th>
 							<th class="active">Prod/Serv</th>
 							<th class="active">Unid.</th>
-							<th class="active">Categoria</th>
+							
 							<th class="active">Aux1</th>
 							<th class="active">Aux2</th>
 							<!--<th class="active">Custo</th>-->						
@@ -129,13 +132,14 @@
 							echo '<tr class="clickable-row" data-href="' . base_url() . 'produtos/alterar/' . $row['idTab_Produto'] . '">';
 								#echo '<td>' . $row['idTab_Produto'] . '</td>';
 								echo '<td>' . $row['CodProd'] . '</td>';
+								echo '<td>' . $row['Prodaux3'] . '</td>';
 								echo '<td>' . $row['Produtos'] . '</td>';
 								echo '<td>' . $row['ValorProduto'] . '</td>';	
 							
 								echo '<td>' . $row['TipoProduto'] . '</td>';													
 								echo '<td>' . $row['Categoria'] . '</td>'; 							
 								echo '<td>' . $row['UnidadeProduto'] . '</td>';
-								echo '<td>' . $row['Prodaux3'] . '</td>';
+								
 								echo '<td>' . $row['Prodaux1'] . '</td>';
 								echo '<td>' . $row['Prodaux2'] . '</td>';
 								#echo '<td>' . $row['ValorCompraProduto'] . '</td>';								

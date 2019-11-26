@@ -149,7 +149,7 @@
 																										<?php } ?>
 																										<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor2Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
 																												 id="listadinamicab<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
-																											<option value="">-- Selecione uma opção --</option>
+																											<!--<option value="">-- Selecione uma opção --</option>-->
 																											<?php
 																											foreach ($select['Produto'] as $key => $row) {
 																												if ($produto[$i]['idTab_Produto'] == $key) {
@@ -301,7 +301,7 @@
 																										<?php } ?>
 																										<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValorDevTabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
 																												id="listadinamica<?php echo $i ?>" name="idTab_Servico<?php echo $i ?>">																					
-																											<option value="">-- Selecione uma opção --</option>
+																											<!--<option value="">-- Selecione uma opção --</option>-->
 																											<?php
 																											foreach ($select['Servico'] as $key => $row) {
 																												if ($servico[$i]['idTab_Servico'] == $key) {
@@ -437,7 +437,7 @@
 																			<label for="ValorOrca">Orçamento:</label><br>
 																			<div class="input-group" id="txtHint">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
-																				<input type="text" class="form-control Valor" id="ValorOrca" maxlength="10" placeholder="0,00" readonly=''
+																				<input type="text" class="form-control Valor" id="ValorOrca" maxlength="10" placeholder="0,00" 
 																					   onkeyup="calculaResta(this.value)"
 																					   name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
 																			</div>
@@ -446,7 +446,7 @@
 																			<label for="ValorDev">Desconto:</label><br>
 																			<div class="input-group" id="txtHint">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
-																				<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00" readonly=''
+																				<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00" 
 																					   onkeyup="calculaResta(this.value)" 
 																					   name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
 																			</div>
@@ -457,7 +457,7 @@
 																		<label for="ValorRestanteOrca">Total:</label><br>
 																		<div class="input-group" id="txtHint">
 																			<span class="input-group-addon" id="basic-addon1">R$</span>
-																			<input type="text" class="form-control Valor" id="ValorRestanteOrca" maxlength="10" placeholder="0,00" 
+																			<input type="text" class="form-control Valor" id="ValorRestanteOrca" maxlength="10" placeholder="0,00" readonly=''
 																				   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()" onkeydown="calculaParcelas()"
 																					data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																				   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">

@@ -224,29 +224,27 @@
 						</table>
 						<?php } else echo '<h3 class="text-left">S/Produtos Entregues </h3>';{?>
 						<?php } ?>
-						
 						<?php } ?>
+						
 						<!--<hr />-->
+						
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 						<?php if( isset($count['SCount']) ) { ?>							
 						<h3 class="text-left">Produtos Devolvidos  </h3>
-
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-1" scope="col">Qtd</th>																															
-									<th class="col-md-9" scope="col">DescProd.</th>							
+									<th class="col-md-2" scope="col">Qtd</th>																															
+									<th class="col-md-8" scope="col">DescProd.</th>							
 									<th class="col-md-1" scope="col">Valor</th>
 									<th class="col-md-1" scope="col">Subtotal</th>
 								</tr>	
 								<tr>
-									<th class="col-md-1" scope="col"></th>
-									<th class="col-md-9" scope="col">id</th>	
-
+									<th class="col-md-2" scope="col"></th>
+									<th class="col-md-8" scope="col">id</th>	
 									<th class="col-md-1" scope="col">Data</th>							
 								</tr>
 							</thead>
-
 							<tbody>
 
 								<?php
@@ -275,13 +273,15 @@
 						<?php } else echo '<h3 class="text-left">S/Produtos Devolvidos </h3>';{?>
 						<?php } ?>							
 						<?php } ?>
+						
 						<h3 class="text-left">Pagamento</h3>
-						<!--
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-4" scope="col">Orçamento</th>
-									<th class="col-md-4" scope="col">Desconto</th>
+									<th class="col-md-4" scope="col">Orçam. R$</th>
+									<th class="col-md-4" scope="col">Desc. R$</th>
+									<th class="col-md-4" scope="col">Total R$</th>
 									
 								</tr>
 							</thead>
@@ -289,17 +289,32 @@
 								<tr>
 									<td><?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
 									<td><?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
-									
+									<td><?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
 								</tr>
 							</tbody>
 						</table>
-						-->
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-3" scope="col">R$</th>
+									<th class="col-md-4" scope="col">Forma</th>
+									<th class="col-md-4" scope="col">Pago</th>
+									<th class="col-md-4" scope="col">Venc.</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><?php echo $orcatrata['Modalidade'] ?></td>
+									<td><?php echo $orcatrata['QtdParcelasOrca'] ?>X<?php echo $orcatrata['FormaPag'] ?></td>
+									<td><?php echo $orcatrata['DataVencimentoOrca'] ?></td>
+								</tr>
+							</tbody>
+						</table>
+						<?php } else {?>
+						<table class="table table-bordered table-condensed table-striped">
+							<thead>
+								<tr>
+									<th class="col-md-3" scope="col">Total R$</th>
 									<th class="col-md-3" scope="col">Forma</th>
-									<!--<th class="col-md-3" scope="col">Qtd Parc.</th>-->
 									<th class="col-md-3" scope="col">Pago</th>
 									<th class="col-md-3" scope="col">Venc.</th>
 								</tr>
@@ -308,15 +323,14 @@
 								<tr>
 									<td><?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
 									<td><?php echo $orcatrata['Modalidade'] ?></td>
-									<!--<td><?php echo $orcatrata['QtdParcelasOrca'] ?></td>-->
 									<td><?php echo $orcatrata['QtdParcelasOrca'] ?>X<?php echo $orcatrata['FormaPag'] ?></td>
 									<td><?php echo $orcatrata['DataVencimentoOrca'] ?></td>
 								</tr>
 							</tbody>
-						</table>
+						</table>						
+						<?php } ?>
 						
 						<h3 class="text-left">Parcelas</h3>
-
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
