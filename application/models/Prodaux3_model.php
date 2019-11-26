@@ -165,7 +165,7 @@ class Prodaux3_model extends CI_Model {
             $array = $this->db->query(
                 'SELECT                
 				idTab_Prodaux3,
-				CONCAT(Abrev3, " - " , Prodaux3) AS Prodaux3,
+				CONCAT(idTab_Prodaux3, " - " , Abrev3, " - " , Prodaux3) AS Prodaux3,
 				Abrev3
             FROM
                 Tab_Prodaux3
@@ -178,7 +178,7 @@ class Prodaux3_model extends CI_Model {
             $query = $this->db->query(
                 'SELECT                
 				idTab_Prodaux3,
-				CONCAT(Abrev3, " - " , Prodaux3) AS Prodaux3,
+				CONCAT(idTab_Prodaux3, " - " , Abrev3, " - " , Prodaux3) AS Prodaux3,
 				Abrev3
             FROM
                 Tab_Prodaux3

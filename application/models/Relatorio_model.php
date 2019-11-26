@@ -4981,8 +4981,7 @@ exit();*/
 				' . $data['Prodaux2'] . '
 				' . $data['Prodaux3'] . '
 			ORDER BY
-                TP3.Prodaux3,
-				TP.Produtos				
+				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '	, TP.Produtos		
         ');
 
         /*
