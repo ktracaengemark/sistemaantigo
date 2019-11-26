@@ -10,14 +10,11 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<?php echo base_url() ?>usuario2/prontuario/<?php echo $_SESSION['log']['id']; ?>"> 
-				 <?php echo $_SESSION['log']['Nome2']; ?>./<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
-			</a>			
-			<!--
+			
 			<a class="navbar-brand" data-toggle="collapse" data-target="#myNavbar"> 
 				 <span class="glyphicon glyphicon-list"></span> Produtos
 			</a>
-			
+			<!--
 			<a  class="navbar-brand" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 				<span class="glyphicon glyphicon-plus"></span>Produto
 			</a>
@@ -46,9 +43,9 @@
 							<span class="glyphicon glyphicon-gift"></span> Produtos <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">							
-							<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-usd"></span> Lista de Produtos</a></li>
+							<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-usd"></span> Produtos</a></li>
 							<li role="separator" class="divider"></li>							
-							<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-list-alt"></span> Estoque de Produtos</a></li>
+							<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-list-alt"></span> Estoque</a></li>
 							<li role="separator" class="divider"></li>							
 							<li><a data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm"><span class="glyphicon glyphicon-plus"></span> Novo Produto</a></li>
 							<li role="separator" class="divider"></li>							
@@ -89,9 +86,7 @@
 						</ul>
 					</div>																				
 				</li>
-				<!--
 				<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
-					
 					<div class="btn-group " role="group" aria-label="...">
 						<a href="javascript:window.print()">
 							<button type="button" class="btn btn-sm btn-default ">
@@ -99,7 +94,7 @@
 							</button>
 						</a>
 					</div>
-					
+					<!--
 					<div class="btn-group " role="group" aria-label="...">
 						<a <?php if (preg_match("/relatorio\/estoque\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
 							<a href="<?php echo base_url() . 'relatorio/estoque/'; ?>">
@@ -109,15 +104,13 @@
 							</a>
 						</a>
 					</div>
-					
+					-->
 					<div class="btn-group " role="group" aria-label="...">
 						<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal5-sm">
 							<span class="glyphicon glyphicon-filter"></span>Filtros
 						</button>
-					</div>
-					
-				</li>
-				-->
+					</div>							
+				</li>						
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
 						<a <?php if (preg_match("/agenda/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
@@ -401,7 +394,7 @@
 			</div>
 
 			</form>
-
+			<?php if (isset($list)) echo $list; ?>
 		</div>
 
 	</div>

@@ -72,7 +72,7 @@ class Produtos_model extends CI_Model {
         return $query;
     }
 
-    public function list_produtos($id, $aprovado, $completo) {
+    public function list_produtos1($id, $aprovado, $completo) {
 
         $query = $this->db->query('
             SELECT
@@ -110,6 +110,54 @@ class Produtos_model extends CI_Model {
         }
     }
 
+    public function lista_produtos($x) {
+
+		#$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
+		
+        $query = $this->db->query('
+			SELECT 
+				TP.idTab_Produto,
+				TP.Produtos,
+				T3.Prodaux3,
+				TV.ValorProduto
+			FROM 
+				Tab_Produto AS TP
+				 LEFT JOIN Tab_Prodaux3 AS T3 ON T3.idTab_Prodaux3 = TP.Prodaux3
+				 LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produto = TP.idTab_Produto
+				 
+			WHERE 
+                TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				TV.idTab_Produto = TP.idTab_Produto
+			ORDER BY 
+				T3.Prodaux3 ASC, 
+				TP.Produtos ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+	
     public function update_produtos($data, $id) {
 
         unset($data['idTab_Produto']);
@@ -217,4 +265,27 @@ class Produtos_model extends CI_Model {
         return $array;
     }	
 
+	public function select_prodaux33() {
+
+        $query = $this->db->query('
+            SELECT
+                P.idTab_Prodaux3,
+                P.Prodaux3
+            FROM
+                Tab_Prodaux3 AS P
+            WHERE
+                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+            ORDER BY
+                Prodaux3 ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idTab_Prodaux3] = $row->Prodaux3;
+        }
+
+        return $array;
+    }
 }

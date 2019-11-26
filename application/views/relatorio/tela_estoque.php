@@ -12,11 +12,14 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span> 
 			</button>
-			
+			<a class="navbar-brand" href="<?php echo base_url() ?>usuario2/prontuario/<?php echo $_SESSION['log']['id']; ?>"> 
+				 <?php echo $_SESSION['log']['Nome2']; ?>./<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
+			</a>			
+			<!--
 			<a class="navbar-brand" data-toggle="collapse" data-target="#myNavbar"> 
 				 <span class="glyphicon glyphicon-list"></span> Estoque
 			</a>
-			<!--
+			
 			<a  class="navbar-brand" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 				<span class="glyphicon glyphicon-plus"></span>Produto
 			</a>
@@ -50,6 +53,8 @@
 							<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-list-alt"></span> Estoque</a></li>
 							<li role="separator" class="divider"></li>							
 							<li><a data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm"><span class="glyphicon glyphicon-plus"></span> Novo Produto</a></li>
+							<li role="separator" class="divider"></li>							
+							<li><a href="<?php echo base_url() ?>Prodaux3/cadastrar"><span class="glyphicon glyphicon-list-alt"></span> Lista de Categorias</a></li>						
 						</ul>
 					</div>																				
 					<?php } ?>

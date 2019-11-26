@@ -62,9 +62,13 @@
 									<span class="glyphicon glyphicon-gift"></span> Produtos <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
-									<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-usd"></span> Produtos</a></li>
+									<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-usd"></span> Lista de Produtos</a></li>
 									<li role="separator" class="divider"></li>							
-									<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-list-alt"></span> Estoque</a></li>								
+									<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-list-alt"></span> Estoque de Produtos</a></li>
+									<li role="separator" class="divider"></li>							
+									<li><a data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal3-sm"><span class="glyphicon glyphicon-plus"></span> Novo Produto</a></li>
+									<li role="separator" class="divider"></li>							
+									<li><a href="<?php echo base_url() ?>Prodaux3/cadastrar"><span class="glyphicon glyphicon-list"></span> Lista de Categoria</a></li>									
 								</ul>
 							</div>																				
 							<?php } ?>
@@ -146,3 +150,62 @@
 	</div>
 </nav>
 <br>
+
+<div class="modal fade bs-excluir-modal3-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-danger">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Evite cadastrar Produtos REPETIDOS!<br>
+										"Pesquise" os Produtos Cadastradas!</h4>
+			</div>
+			<!--
+			<div class="modal-body">
+				<p>Pesquise os Produtos Cadastrados!!</p>
+			</div>
+			-->
+			<div class="modal-footer">
+				<!--
+				<div class="form-group col-md-4 text-left">
+					<div class="form-footer">
+						<button  class="btn btn-info btn-block"" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+							<span class="glyphicon glyphicon-search"></span> Pesquisar
+						</button>
+					</div>
+				</div>
+				-->
+				<div class="form-group col-md-4 text-right">
+					<div class="form-footer">		
+						<a class="btn btn-info btn-block" href="<?php echo base_url() ?>relatorio/produtos" role="button">
+							<span class="glyphicon glyphicon-search"></span> Pesquisar
+						</a>
+					</div>	
+				</div>				
+				<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 6 )) { ?>
+				<div class="form-group col-md-4 text-right">
+					<div class="form-footer">		
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar1" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Produtos
+						</a>
+					</div>	
+				</div>
+				<?php } else {?>
+				<div class="form-group col-md-4 text-right">
+					<div class="form-footer">		
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Produtos
+						</a>
+					</div>	
+				</div>
+				<?php } ?>
+				<div class="form-group col-md-4">
+					<div class="form-footer ">
+						<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove"></span> Fechar
+						</button>
+					</div>
+				</div>									
+			</div>
+		</div>
+	</div>
+</div>
