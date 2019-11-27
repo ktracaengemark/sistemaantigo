@@ -2058,7 +2058,7 @@ class Relatorio_model extends CI_Model {
             'SELECT
                 TP.idTab_Produto,
                 TP.CodProd,
-                CONCAT(IFNULL(TP.CodProd,""), " - ", IFNULL(TP.Produtos,"")) AS Produtos,
+                CONCAT(IFNULL(TP.Produtos,"")) AS Produtos,
                 TP1.Prodaux1,
                 TP2.Prodaux2,
                 TP3.Prodaux3
@@ -2142,20 +2142,30 @@ class Relatorio_model extends CI_Model {
         ####################################################################
         #COMPRADOS
 
+        if ($data['DataFim']) {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
+        }
 		
         $query['Comprados'] = $this->db->query('
             SELECT
                 SUM(APV.QtdProduto) AS QtdCompra,
-                TP.idTab_Produto				
+                TP.idTab_Produto
             FROM
 				App_Produto AS APV
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = APV.idApp_OrcaTrata
 					LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Produto
                     LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TVV.idTab_Produto
                     LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3					
             WHERE
-                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                (' . $consulta . ')  
                 ' . $data['Produtos'] . ' AND                
 				APV.idTab_TipoRD = "1"
 			GROUP BY
@@ -2175,20 +2185,30 @@ exit();
         ####################################################################
         #VENDIDOS
 
-
+        if ($data['DataFim']) {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
+        }
+		
         $query['Vendidos'] = $this->db->query(
             'SELECT
                 (APV.QtdProduto) AS Qtd,
                 TP.idTab_Produto
             FROM
                 App_Produto AS APV 
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = APV.idApp_OrcaTrata				
                     LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Produto
                     LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TVV.idTab_Produto
                     LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
-                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                (' . $consulta . ') 
                 ' . $data['Produtos'] . ' AND
                 APV.idTab_TipoRD = "2"
             GROUP BY
@@ -2201,20 +2221,30 @@ exit();
         ####################################################################
         #DEVOLVIDOS NA VENDA
 
-
+        if ($data['DataFim']) {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
+        }
+		
         $query['Devolvidos'] = $this->db->query(
             'SELECT
                 (APV.QtdServico) AS QtdDevolve,
                 TP.idTab_Produto
             FROM
 				App_Servico AS APV 
-                    LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Servico
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = APV.idApp_OrcaTrata                    
+					LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Servico
                     LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TVV.idTab_Produto
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
-                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                (' . $consulta . ') 
                 ' . $data['Produtos'] . ' AND
                 APV.idTab_TipoRD = "4"
             GROUP BY
@@ -2227,21 +2257,30 @@ exit();
         ####################################################################
         #DEVOLVIDOS NA COMPRA
 
-
+        if ($data['DataFim']) {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
+        }
+		
         $query['Devolvidos2'] = $this->db->query(
             'SELECT
                 (APV.QtdServico) AS QtdDevolve2,
                 TP.idTab_Produto
             FROM
-
 				App_Servico AS APV 
-                    LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Servico
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = APV.idApp_OrcaTrata                    
+					LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Servico
                     LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TVV.idTab_Produto
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
-                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                (' . $consulta . ')  
                 ' . $data['Produtos'] . ' AND
                 APV.idTab_TipoRD = "3"
             GROUP BY
@@ -2253,7 +2292,15 @@ exit();
 
         ####################################################################
         #CONSUMIDOS
-
+ 
+		if ($data['DataFim']) {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
+        }
 
         $query['Consumidos'] = $this->db->query(
             'SELECT
@@ -2261,15 +2308,18 @@ exit();
                 TP.idTab_Produto
             FROM
 				App_Produto AS APV 
-                    LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Produto
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = APV.idApp_OrcaTrata                   
+					LEFT JOIN Tab_Valor AS TVV ON TVV.idTab_Valor = APV.idTab_Produto
                     LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TVV.idTab_Produto
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
-                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                (' . $consulta . ') 			
                 ' . $data['Produtos'] . ' AND
                 APV.idTab_TipoRD = "5"
+								
             GROUP BY
                 TP.idTab_Produto
             ORDER BY

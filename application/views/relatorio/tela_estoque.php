@@ -198,31 +198,46 @@
 				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Produtos</h4>
 			</div>
 			<div class="modal-footer">
-				
-				<div class="row text-left">
-					
-					<div class="col-md-6">
-						<label for="Ordenamento">Desccrição</label>
-						<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-								id="Produtos" name="Produtos">
-							<?php
-							foreach ($select['Produtos'] as $key => $row) {
-								if ($query['Produtos'] == $key) {
-									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-								} else {
-									echo '<option value="' . $key . '">' . $row . '</option>';
+				<div class="form-group">
+					<div class="row text-left">
+						<div class="col-md-4">
+							<label for="Ordenamento">Categoria</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="Prodaux3" name="Prodaux3">
+								<?php
+								foreach ($select['Prodaux3'] as $key => $row) {
+									if ($query['Prodaux3'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
 								}
-							}
-							?>
-						</select>
+								?>
+							</select>
+						</div>					
+						<div class="col-md-8">
+							<label for="Ordenamento">Desccrição</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="Produtos" name="Produtos">
+								<?php
+								foreach ($select['Produtos'] as $key => $row) {
+									if ($query['Produtos'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
 					</div>
-
-					<div class="col-md-6">
-						<label for="Ordenamento">Ordenamento:</label>
-
-						<div class="form-group">
+				</div>
+				<div class="form-group">
+					<div class="row text-left">
+						<div class="col-md-12">
+							<label for="Ordenamento">Ordenamento:</label>
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 											id="Campo" name="Campo">
 										<?php
@@ -237,7 +252,7 @@
 									</select>
 								</div>
 
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 											id="Ordenamento" name="Ordenamento">
 										<?php
@@ -253,60 +268,70 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div>	
 				</div>
 
 				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-				<div class="row text-left">
-					<div class="col-md-4">
-						<label for="Ordenamento">Categoria</label>
-						<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-								id="Prodaux3" name="Prodaux3">
-							<?php
-							foreach ($select['Prodaux3'] as $key => $row) {
-								if ($query['Prodaux3'] == $key) {
-									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-								} else {
-									echo '<option value="' . $key . '">' . $row . '</option>';
+				<div class="form-group">	
+					<div class="row text-left">
+						<div class="col-md-4">
+							<label for="DataInicio">Data Início: *</label>
+							<div class="input-group DatePicker">
+								<span class="input-group-addon" disabled>
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+									   autofocus name="DataInicio" value="<?php echo set_value('DataInicio', $query['DataInicio']); ?>">
+								
+							</div>
+						</div>
+						<div class="col-md-4">
+							<label for="DataFim">Data Fim: (opc.)</label>
+							<div class="input-group DatePicker">
+								<span class="input-group-addon" disabled>
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+									   autofocus name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
+								
+							</div>
+						</div>					
+						<!--
+						<div class="col-md-4">
+							<label for="Ordenamento">Aux1</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="Prodaux1" name="Prodaux1">
+								<?php
+								foreach ($select['Prodaux1'] as $key => $row) {
+									if ($query['Prodaux1'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
 								}
-							}
-							?>
-						</select>
-					</div>
-					<div class="col-md-4">
-						<label for="Ordenamento">Aux1</label>
-						<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-								id="Prodaux1" name="Prodaux1">
-							<?php
-							foreach ($select['Prodaux1'] as $key => $row) {
-								if ($query['Prodaux1'] == $key) {
-									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-								} else {
-									echo '<option value="' . $key . '">' . $row . '</option>';
+								?>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<label for="Ordenamento">Aux2</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="Prodaux2" name="Prodaux2">
+								<?php
+								foreach ($select['Prodaux2'] as $key => $row) {
+									if ($query['Prodaux2'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
 								}
-							}
-							?>
-						</select>
+								?>
+							</select>
+						</div>
+						-->
 					</div>
-					<div class="col-md-4">
-						<label for="Ordenamento">Aux2</label>
-						<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-								id="Prodaux2" name="Prodaux2">
-							<?php
-							foreach ($select['Prodaux2'] as $key => $row) {
-								if ($query['Prodaux2'] == $key) {
-									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-								} else {
-									echo '<option value="' . $key . '">' . $row . '</option>';
-								}
-							}
-							?>
-						</select>
-					</div>
-				</div>
+				</div>	
 				<?php } ?>
 				<div class="row text-left">
-					<br>
 					<div class="form-group col-md-4">
 						<div class="form-footer ">
 							<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">

@@ -109,6 +109,10 @@
 								<ul class="dropdown-menu" role="menu">							
 									<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 									<li><a href="<?php echo base_url() ?>relatorio/fornecedor"><span class="glyphicon glyphicon-pencil"></span> Fornecedor</a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="<?php echo base_url() ?>atividade/cadastrar"><span class="glyphicon glyphicon-pencil"></span>Ativ./ Fornec.</a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="<?php echo base_url() ?>relatorio/rankingvendas"><span class="glyphicon glyphicon-pencil"></span>Ranking de vendas</a></li>
 									<li role="separator" class="divider"></li>									
 									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas de Negócios</a></li>
 									<li role="separator" class="divider"></li>									
