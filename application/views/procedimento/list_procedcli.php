@@ -235,7 +235,8 @@
 											<br><br>
 
 											<h4>
-												<span class="glyphicon glyphicon-tags"></span> <b>Procd.:</b> <?php echo $row['idApp_Procedimento']; ?>
+												<span class="glyphicon glyphicon-tags"></span> <b>Procd.:</b> <?php echo $row['idApp_Procedimento']; ?> -
+												<span class="glyphicon glyphicon-tags"></span> <b>Orçam.:</b> <?php echo $row['idApp_OrcaTrata']; ?>
 											</h4>
 											<br>
 											<p>
@@ -293,7 +294,8 @@
 											<br><br>
 
 											<h4>
-												<span class="glyphicon glyphicon-tags"></span> <b>Procd.:</b> <?php echo $row['idApp_Procedimento']; ?>
+												<span class="glyphicon glyphicon-tags"></span> <b>Procd.:</b> <?php echo $row['idApp_Procedimento']; ?> -
+												<span class="glyphicon glyphicon-tags"></span> <b>Orçam.:</b> <?php echo $row['idApp_OrcaTrata']; ?>
 											</h4>
 											<br>
 											<p>

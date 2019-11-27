@@ -222,6 +222,7 @@ class Procedimento_model extends CI_Model {
 
         $query = $this->db->query('SELECT '
             . 'OT.idApp_Procedimento, '
+			. 'OT.idApp_OrcaTrata, '
             . 'OT.DataProcedimento, '
 			. 'OT.DataProcedimentoLimite, '
 			. 'OT.ConcluidoProcedimento, '
