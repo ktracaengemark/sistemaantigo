@@ -889,16 +889,6 @@
 																			</select>
 																		</div>
 																		<div class="col-md-3">
-																			<label for="DataProcedimento<?php echo $i ?>">Proced.:</label>
-																			<div class="input-group <?php echo $datepicker; ?>">
-																				<span class="input-group-addon" disabled>
-																					<span class="glyphicon glyphicon-calendar"></span>
-																				</span>
-																				<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																					   name="DataProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimento']; ?>">
-																			</div>
-																		</div>																
-																		<div class="col-md-3">
 																			<label for="DataProcedimentoLimite<?php echo $i ?>">Limite</label>
 																			<div class="input-group <?php echo $datepicker; ?>">
 																				<span class="input-group-addon" disabled>
@@ -908,6 +898,16 @@
 																					   name="DataProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimentoLimite']; ?>">
 																			</div>
 																		</div>
+																		<div class="col-md-3">
+																			<label for="DataProcedimento<?php echo $i ?>">Data do Proced.:</label>
+																			<div class="input-group <?php echo $datepicker; ?>">
+																				<span class="input-group-addon" disabled>
+																					<span class="glyphicon glyphicon-calendar"></span>
+																				</span>
+																				<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																					   name="DataProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimento']; ?>">
+																			</div>
+																		</div>																
 																	</div>	
 																	<div class="row">
 																		<div class="col-md-6"></div>

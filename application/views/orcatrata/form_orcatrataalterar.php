@@ -1007,7 +1007,7 @@
 																		<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																				  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 																	</div>
-																	<div class="col-md-1">
+																	<div class="col-md-2">
 																		<label for="Prioridade<?php echo $i ?>">Prioridade:</label>
 																		<?php if ($i == 1) { ?>
 																		<?php } ?>
@@ -1025,7 +1025,7 @@
 																			?>
 																		</select>
 																	</div>
-																	<div class="col-md-2">
+																	<div class="col-md-3">
 																		<label for="DataProcedimentoLimite<?php echo $i ?>">Limite</label>
 																		<div class="input-group <?php echo $datepicker; ?>">
 																			<span class="input-group-addon" disabled>
@@ -1035,7 +1035,7 @@
 																				   name="DataProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimentoLimite']; ?>">
 																		</div>
 																	</div>																	
-																	<div class="col-md-2">
+																	<div class="col-md-3">
 																		<label for="DataProcedimento<?php echo $i ?>">Data do Proced.:</label>
 																		<div class="input-group <?php echo $datepicker; ?>">
 																			<span class="input-group-addon" disabled>
@@ -1047,7 +1047,7 @@
 																	</div>
 																</div>	
 																<div class="row">
-																	<div class="col-md-3"></div>	
+																	<div class="col-md-6"></div>	
 																	<div class="col-md-3">
 																		<label for="idSis_Usuario<?php echo $i ?>">Profissional:</label>
 																		<?php if ($i == 1) { ?>

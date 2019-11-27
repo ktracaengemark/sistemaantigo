@@ -858,16 +858,6 @@ function adicionaProcedimento() {
 							</select>\
 						</div>\
 						<div class="col-md-3">\
-							<label for="DataProcedimento'+pc+'">Feito em:</label>\
-							<div class="input-group DatePicker">\
-								<span class="input-group-addon" disabled>\
-									<span class="glyphicon glyphicon-calendar"></span>\
-								</span>\
-								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
-									   name="DataProcedimento'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
-							</div>\
-						</div>\
-						<div class="col-md-3">\
 							<label for="DataProcedimentoLimite'+pc+'">Limite:</label>\
 							<div class="input-group DatePicker">\
 								<span class="input-group-addon" disabled>\
@@ -875,6 +865,16 @@ function adicionaProcedimento() {
 								</span>\
 								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
 									   name="DataProcedimentoLimite'+pc+'" value="">\
+							</div>\
+						</div>\
+						<div class="col-md-3">\
+							<label for="DataProcedimento'+pc+'">Data do Proced.:</label>\
+							<div class="input-group DatePicker">\
+								<span class="input-group-addon" disabled>\
+									<span class="glyphicon glyphicon-calendar"></span>\
+								</span>\
+								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataProcedimento'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 							</div>\
 						</div>\
 					</div>\
