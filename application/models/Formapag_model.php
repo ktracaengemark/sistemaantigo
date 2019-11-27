@@ -154,7 +154,7 @@ class Formapag_model extends CI_Model {
                     . 'WHERE '
                     
                     . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo']. ' '
-					. 'ORDER BY FormaPag ASC ');		
+					. 'ORDER BY FormaPag DESC ');		
 					
         } else {
             $query = $this->db->query(
@@ -166,7 +166,7 @@ class Formapag_model extends CI_Model {
                     . 'WHERE '
                     
                     . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo']. ' '
-					. 'ORDER BY FormaPag ASC ');
+					. 'ORDER BY FormaPag DESC ');
             
             $array = array();
             foreach ($query->result() as $row) {

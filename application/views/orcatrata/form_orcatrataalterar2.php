@@ -108,12 +108,7 @@
 																		<div class="panel panel-info">
 																			<div class="panel-heading">
 																				<div class="row">
-																					<div class="col-md-2">
-																						<label for="QtdProduto">Qtd<?php echo $i ?>:</label>
-																						<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
-																								onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
-																								autofocus name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
-																					</div>
+																					
 																					<div class="col-md-6">
 																						<label for="idTab_Produto">Produto:</label>
 																						<?php if ($i == 1) { ?>
@@ -136,6 +131,12 @@
 																						</select>
 																					</div>
 																					<div class="col-md-2">
+																						<label for="QtdProduto">Qtd<?php echo $i ?>:</label>
+																						<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
+																								onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
+																								autofocus name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
+																					</div>
+																					<div class="col-md-2">
 																						<label for="ValorProduto">Valor:</label>
 																						<div class="input-group">
 																							<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -154,12 +155,13 @@
 																					</div>
 																				</div>
 																				<div class="row">
-																					<div class="col-md-5"></div>
+																					<div class="col-md-3"></div>
 																					<div class="col-md-3">
 																						<label for="ObsProduto<?php echo $i ?>">Obs:</label><br>
 																						<input type="text" class="form-control" id="ObsProduto<?php echo $i ?>" maxlength="250"
 																							   name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>">
 																					</div>																				
+																					<div class="col-md-2"></div>
 																					<div class="col-md-2">
 																						<label for="DataValidadeProduto<?php echo $i ?>">Validade:</label>
 																						<div class="input-group <?php echo $datepicker; ?>">
@@ -201,10 +203,10 @@
 																					</a>
 																				</div>
 																				<div class="col-md-3">	
-																					<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
+																					<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
 																				</div>
 																				<div class="col-md-3">	
-																					<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
+																					<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
 																				</div>
 																				<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 																				<div class="col-md-3 text-right">
@@ -253,12 +255,6 @@
 																		<div class="panel panel-danger">
 																			<div class="panel-heading">
 																				<div class="row">
-																					<div class="col-md-2">
-																						<label for="QtdServico">Qtd:</label>
-																						<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0"
-																								onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
-																								autofocus name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
-																					</div>
 																					<div class="col-md-6">
 																						<label for="idTab_Servico">Produto:</label>
 																						<?php if ($i == 1) { ?>
@@ -281,6 +277,12 @@
 																						</select>
 																					</div>
 																					<div class="col-md-2">
+																						<label for="QtdServico">Qtd:</label>
+																						<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0"
+																								onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
+																								autofocus name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
+																					</div>
+																					<div class="col-md-2">
 																						<label for="ValorServico">Valor:</label>
 																						<div class="input-group">
 																							<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -299,12 +301,13 @@
 																					</div>
 																				</div>
 																				<div class="row">
-																					<div class="col-md-5"></div>
+																					<div class="col-md-3"></div>
 																					<div class="col-md-3">
 																						<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
 																						<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
 																							   name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
-																					</div>																				
+																					</div>
+																					<div class="col-md-2"></div>
 																					<div class="col-md-2">
 																						<label for="DataValidadeServico<?php echo $i ?>">Validade:</label>
 																						<div class="input-group <?php echo $datepicker; ?>">
@@ -377,12 +380,11 @@
 																						</a>
 																					</div>
 																					<div class="col-md-3">	
-																						<b>Produtos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
-																					</div>
-																					<div class="col-md-3">	
 																						<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
 																					</div>
-																					
+																					<div class="col-md-3">	
+																						<b>Produtos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
+																					</div>
 																					<div class="col-md-3 text-left">																							
 																						<!--
 																						<a class="accordion-toggle btn btn-heading  collapsed" role="tab" id="heading6" data-toggle="collapse" data-parent="#accordion6" data-target="#collapse6" aria-expanded="false">
