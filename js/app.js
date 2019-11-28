@@ -318,6 +318,20 @@ function calculaResta(entrada) {
 
 }
 
+function calculaTroco(entrada) {
+
+    //recebe o valor do orçamento
+    var orcamento = $("#ValorRestanteOrca").val();
+	var devolucao = $("#ValorDinheiro").val();
+    var resta = (devolucao.replace(".","").replace(",",".") - orcamento.replace(".","").replace(",","."));
+
+    resta = mascaraValorReal(resta);
+
+    //o valor é escrito no seu campo no formulário
+    $('#ValorTroco').val(resta);
+
+}
+
 function calculaRestaDespesas(entrada) {
 
     //recebe o valor da despesa
@@ -3117,7 +3131,7 @@ $(document).ready(function () {
 									   name="ObsProduto'+pc+'" value="">\
 							</div>\
 							<div class="col-md-2"></div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
 								<label for="DataValidadeProduto'+pc+'">Validade:</label>\
 								<div class="input-group DatePicker">\
 									<span class="input-group-addon" disabled>\
@@ -3231,7 +3245,7 @@ $(document).ready(function () {
 									   name="ObsServico'+ps+'" value="">\
 							</div>\
 							<div class="col-md-2"></div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
 								<label for="DataValidadeServico'+ps+'">Validade:</label>\
 								<div class="input-group DatePicker">\
 									<span class="input-group-addon" disabled>\

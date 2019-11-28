@@ -65,6 +65,8 @@ class Orcatrata extends CI_Controller {
             'ValorOrca',
 			'ValorDev',
             'ValorEntradaOrca',
+			'ValorDinheiro',
+			'ValorTroco',
             'DataEntradaOrca',
             'ValorRestanteOrca',
             'FormaPagamento',
@@ -303,6 +305,8 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
             $data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
+			$data['orcatrata']['ValorDinheiro'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDinheiro']));
+			$data['orcatrata']['ValorTroco'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTroco']));
 			$data['orcatrata']['idTab_TipoRD'] = "2";
 			if ($data['orcatrata']['AVAP'] == 'V') $data['orcatrata']['QuitadoOrca'] = 'S';
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -811,6 +815,8 @@ class Orcatrata extends CI_Controller {
             'ValorOrca',
 			'ValorDev',
             'ValorEntradaOrca',
+			'ValorDinheiro',
+			'ValorTroco',
             'DataEntradaOrca',
             'ValorRestanteOrca',
             'FormaPagamento',
@@ -1053,6 +1059,8 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
             $data['orcatrata']['ValorDev'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDev']));
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
+            $data['orcatrata']['ValorDinheiro'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDinheiro']));
+            $data['orcatrata']['ValorTroco'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTroco']));			
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
             $data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
 			$data['orcatrata']['idTab_TipoRD'] = '2';
@@ -1203,6 +1211,8 @@ class Orcatrata extends CI_Controller {
             'ValorOrca',
 			'ValorDev',
             'ValorEntradaOrca',
+			'ValorDinheiro',
+			'ValorTroco',
             'DataEntradaOrca',
             'ValorRestanteOrca',
             'FormaPagamento',
@@ -1531,6 +1541,8 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
             $data['orcatrata']['ValorDev'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDev']));
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
+            $data['orcatrata']['ValorDinheiro'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDinheiro']));
+            $data['orcatrata']['ValorTroco'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTroco']));			
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
             $data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
 			if ($data['orcatrata']['AVAP'] == 'V') $data['orcatrata']['QuitadoOrca'] = 'S';
@@ -1789,6 +1801,8 @@ class Orcatrata extends CI_Controller {
             'ValorOrca',
 			'ValorDev',
             'ValorEntradaOrca',
+            'ValorDinheiro',
+            'ValorTroco',			
             'DataEntradaOrca',
             'ValorRestanteOrca',
             'FormaPagamento',
@@ -2115,6 +2129,8 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
             $data['orcatrata']['ValorDev'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDev']));
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
+            $data['orcatrata']['ValorDinheiro'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDinheiro']));
+            $data['orcatrata']['ValorTroco'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTroco']));			
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
             $data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
 			if ($data['orcatrata']['AVAP'] == 'V') $data['orcatrata']['QuitadoOrca'] = 'S';			
@@ -2373,6 +2389,8 @@ class Orcatrata extends CI_Controller {
             'ValorOrca',
 			'ValorDev',
             'ValorEntradaOrca',
+			'ValorDinheiro',
+			'ValorTroco',
             'DataEntradaOrca',
             'ValorRestanteOrca',
             'FormaPagamento',
@@ -2628,6 +2646,8 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
             $data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
+			$data['orcatrata']['ValorDinheiro'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDinheiro']));
+			$data['orcatrata']['ValorTroco'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTroco']));
 			$data['orcatrata']['idTab_TipoRD'] = "1";
 			if ($data['orcatrata']['AVAP'] == 'V') $data['orcatrata']['QuitadoOrca'] = 'S';	
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa']; 
@@ -2774,6 +2794,8 @@ class Orcatrata extends CI_Controller {
             'ValorOrca',
 			'ValorDev',
             'ValorEntradaOrca',
+			'ValorDinheiro',
+			'ValorTroco',
             'DataEntradaOrca',
             'ValorRestanteOrca',
             'FormaPagamento',
@@ -3102,6 +3124,8 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
             $data['orcatrata']['ValorDev'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDev']));
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
+			$data['orcatrata']['ValorDinheiro'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDinheiro']));
+			$data['orcatrata']['ValorTroco'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTroco']));
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
             $data['orcatrata']['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorRestanteOrca']));
 			if ($data['orcatrata']['AVAP'] == 'V') $data['orcatrata']['QuitadoOrca'] = 'S';			

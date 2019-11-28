@@ -129,10 +129,9 @@ elseif ($_GET['q'] == 9) {
 				P.idTab_Produto = V.idTab_Produto
 			ORDER BY
 				P.TipoProduto DESC,
-				P.CodProd ASC,
-				P.Categoria ASC,
 				TP3.Prodaux3,				
-				P.Produtos ASC,
+				P.Produtos ASC,				
+				P.Categoria ASC,
 				TP1.Prodaux1,
 				TP2.Prodaux2,
 				TFO.NomeFornecedor ASC'

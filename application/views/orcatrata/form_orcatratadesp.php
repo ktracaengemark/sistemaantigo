@@ -17,7 +17,7 @@
 					<div class="panel panel-<?php echo $panel; ?>">
 						<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
 						<div class="panel-body">
-							<div style="overflow: auto; height: 450px; ">
+							<div style="overflow: auto; height: 550px; ">
 								<!--
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 								<div class="panel-group">	
@@ -221,17 +221,17 @@
 																				<div class="panel panel-info">
 																					<div class="panel-heading text-left">
 																						<div class="row">
+																							<div class="col-md-3">	
+																								<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
+																							</div>
+																							<div class="col-md-3">	
+																								<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
+																							</div>
 																							<div class="col-md-3">
 																								<a class="add_field_button9 btn btn-info"
 																										onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
 																									<span class="glyphicon glyphicon-plus"></span> Produtos
 																								</a>
-																							</div>
-																							<div class="col-md-3">	
-																								<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
-																							</div>
-																							<div class="col-md-3">	
-																								<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
 																							</div>
 																							<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 																							<div class="col-md-3 text-right">
@@ -402,17 +402,17 @@
 																				<div class="panel panel-warning">
 																					<div class="panel-heading text-left">
 																						<div class="row">	
+																							<div class="col-md-3">	
+																								<b>Produtos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
+																							</div>
+																							<div class="col-md-3">	
+																								<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
+																							</div>
 																							<div class="col-md-3 text-left">
 																								<a class="add_field_button10  btn btn-warning" 
 																										onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
 																									<span class="glyphicon glyphicon-minus"></span> Produtos
 																								</a>
-																							</div>
-																							<div class="col-md-3">	
-																								<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
-																							</div>
-																							<div class="col-md-3">	
-																								<b>Produtos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
 																							</div>
 																							<!--
 																							<div class="col-md-3 text-left">																							
@@ -434,39 +434,82 @@
 																<?php } ?>
 																<div class="row">	
 																	<div <?php echo $visivel; ?>>
-																		<div class="col-md-4">
-																			<label for="ValorOrca">Orçamento:</label><br>
-																			<div class="input-group" id="txtHint">
-																				<span class="input-group-addon" id="basic-addon1">R$</span>
-																				<input type="text" class="form-control Valor" id="ValorOrca" maxlength="10" placeholder="0,00" 
-																					   onkeyup="calculaResta(this.value)"
-																					   name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
+																		<div class="col-md-4 panel-body">
+																			<div class="panel panel-info">
+																				<div class="panel-heading">
+																					<div class="row">				
+																						<div class="col-md-6">
+																							<label for="ValorOrca">Orçamento:</label><br>
+																							<div class="input-group" id="txtHint">
+																								<span class="input-group-addon" id="basic-addon1">R$</span>
+																								<input type="text" class="form-control Valor" id="ValorOrca" maxlength="10" placeholder="0,00" 
+																									   onkeyup="calculaResta(this.value)"
+																									   name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
+																							</div>
+																						</div>
+																						<div class="col-md-6">
+																							<label for="ValorDev">Desconto:</label><br>
+																							<div class="input-group" id="txtHint">
+																								<span class="input-group-addon" id="basic-addon1">R$</span>
+																								<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00" 
+																									   onkeyup="calculaResta(this.value)" 
+																									   name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
+																							</div>
+																						</div>
+																					</div>
+																				</div>
 																			</div>
 																		</div>
-																		<div class="col-md-4">
-																			<label for="ValorDev">Desconto:</label><br>
-																			<div class="input-group" id="txtHint">
-																				<span class="input-group-addon" id="basic-addon1">R$</span>
-																				<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00" 
-																					   onkeyup="calculaResta(this.value)" 
-																					   name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
+																	</div>	
+																	<div class="col-md-4 panel-body">
+																		<div class="panel panel-primary">
+																			<div class="panel-heading">
+																				<div class="row">			
+																					<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+																					<div class="col-md-12">
+																						<label for="ValorRestanteOrca">Total:</label><br>
+																						<div class="input-group" id="txtHint">
+																							<span class="input-group-addon" id="basic-addon1">R$</span>
+																							<input type="text" class="form-control Valor" id="ValorRestanteOrca" maxlength="10" placeholder="0,00" readonly=''
+																								   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()" onkeydown="calculaParcelas()"
+																									data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
+																								   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
+																						</div>
+																					</div>
+																					<?php } ?>
+																				</div>	
 																			</div>
 																		</div>
 																	</div>
-																	<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
-																	<div class="col-md-4">
-																		<label for="ValorRestanteOrca">Total:</label><br>
-																		<div class="input-group" id="txtHint">
-																			<span class="input-group-addon" id="basic-addon1">R$</span>
-																			<input type="text" class="form-control Valor" id="ValorRestanteOrca" maxlength="10" placeholder="0,00" readonly=''
-																				   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()" onkeydown="calculaParcelas()"
-																					data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
-																				   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
+																	<div <?php echo $visivel; ?>>
+																		<div class="col-md-4 panel-body">
+																			<div class="panel panel-success">
+																				<div class="panel-heading">
+																					<div class="row">	
+																						<div class="col-md-6">
+																							<label for="ValorDinheiro">Dinheiro:</label><br>
+																							<div class="input-group" id="txtHint">
+																								<span class="input-group-addon" id="basic-addon1">R$</span>
+																								<input type="text" class="form-control Valor" id="ValorDinheiro" maxlength="10" placeholder="0,00" 
+																									   onkeyup="calculaTroco(this.value)"
+																									   name="ValorDinheiro" value="<?php echo $orcatrata['ValorDinheiro'] ?>">
+																							</div>
+																						</div>
+																						<div class="col-md-6">
+																							<label for="ValorTroco">Troco:</label><br>
+																							<div class="input-group" id="txtHint">
+																								<span class="input-group-addon" id="basic-addon1">R$</span>
+																								<input type="text" class="form-control Valor" id="ValorTroco" maxlength="10" placeholder="0,00" 
+				 
+																									   name="ValorTroco" value="<?php echo $orcatrata['ValorTroco'] ?>">
+																							</div>
+																						</div>
+																					</div>	
+																				</div>
+																			</div>
 																		</div>
-																	</div>																	
-																	<?php } ?>
+																	</div>
 																</div>
-																<br>
 																<div class="row">
 																	<div class="col-md-4">
 																		<label for="DataOrca">Dta Orçam:</label>

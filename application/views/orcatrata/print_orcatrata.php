@@ -58,7 +58,7 @@
 							<div class="btn-group " role="group" aria-label="...">
 								<a <?php if (preg_match("/orcatrata\/cadastrar3\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
 									<a href="<?php echo base_url() . 'orcatrata/cadastrar3/'; ?>">
-										<button type="button" class="btn btn-sm btn-primary ">
+										<button type="button" class="btn btn-bg btn-primary ">
 											<span class="glyphicon glyphicon-plus"></span> Receita
 										</button>										
 									</a>
@@ -169,16 +169,16 @@
 							<thead>
 								<tr>
 									<!--<th scope="col">Nº</th>-->
-									<th class="col-md-1" scope="col">Qtd</th>																				
+									<th class="col-md-2" scope="col">Qtd</th>																				
 									<!--<th scope="col">CodProd.</th>
 									<th scope="col">CategProd.</th>-->												
-									<th class="col-md-8" scope="col">DescProd.</th>							
+									<th class="col-md-7" scope="col">DescProd.</th>							
 									<th class="col-md-1" scope="col">Valor</th>
 									<th class="col-md-1" scope="col">Subtotal</th>
 								</tr>	
 								<tr>
-									<th class="col-md-1" scope="col"></th>
-									<th class="col-md-8" scope="col">id</th>	
+									<th class="col-md-2" scope="col"></th>
+									<th class="col-md-7" scope="col">id</th>	
 									<!--<th scope="col">Unidade</th>																				
 									<th scope="col">Aux1</th>
 									<th scope="col">Aux2</th>-->
@@ -235,13 +235,13 @@
 							<thead>
 								<tr>
 									<th class="col-md-2" scope="col">Qtd</th>																															
-									<th class="col-md-8" scope="col">DescProd.</th>							
+									<th class="col-md-7" scope="col">DescProd.</th>							
 									<th class="col-md-1" scope="col">Valor</th>
 									<th class="col-md-1" scope="col">Subtotal</th>
 								</tr>	
 								<tr>
 									<th class="col-md-2" scope="col"></th>
-									<th class="col-md-8" scope="col">id</th>	
+									<th class="col-md-7" scope="col">id</th>	
 									<th class="col-md-1" scope="col">Data</th>							
 								</tr>
 							</thead>
@@ -279,10 +279,11 @@
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-4" scope="col">Orçam. R$</th>
-									<th class="col-md-4" scope="col">Desc. R$</th>
+									<th class="col-md-2" scope="col">Orçam. R$</th>
+									<th class="col-md-2" scope="col">Desc. R$</th>
 									<th class="col-md-4" scope="col">Total R$</th>
-									
+									<th class="col-md-2" scope="col">Dinheiro R$</th>
+									<th class="col-md-2" scope="col">Troco R$</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -290,6 +291,8 @@
 									<td><?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
 									<td><?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
 									<td><?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
+									<td><?php echo number_format($orcatrata['ValorDinheiro'], 2, ',', '.') ?></td>
+									<td><?php echo number_format($orcatrata['ValorTroco'], 2, ',', '.') ?></td>
 								</tr>
 							</tbody>
 						</table>

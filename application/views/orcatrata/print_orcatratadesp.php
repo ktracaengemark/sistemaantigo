@@ -67,7 +67,7 @@
 							<div class="btn-group " role="group" aria-label="...">
 								<a <?php if (preg_match("/orcatrata\/cadastrardesp\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
 									<a href="<?php echo base_url() . 'orcatrata/cadastrardesp/'; ?>">
-										<button type="button" class="btn btn-sm btn-danger ">
+										<button type="button" class="btn btn-bg btn-danger ">
 											<span class="glyphicon glyphicon-plus"></span> Despesa
 										</button>										
 									</a>
@@ -279,10 +279,11 @@
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-4" scope="col">Orçam. R$</th>
-									<th class="col-md-4" scope="col">Desc. R$</th>
+									<th class="col-md-2" scope="col">Orçam. R$</th>
+									<th class="col-md-2" scope="col">Desc. R$</th>
 									<th class="col-md-4" scope="col">Total R$</th>
-									
+									<th class="col-md-2" scope="col">Dinheiro R$</th>
+									<th class="col-md-2" scope="col">Troco R$</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -290,6 +291,8 @@
 									<td><?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
 									<td><?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
 									<td><?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
+									<td><?php echo number_format($orcatrata['ValorDinheiro'], 2, ',', '.') ?></td>
+									<td><?php echo number_format($orcatrata['ValorTroco'], 2, ',', '.') ?></td>
 								</tr>
 							</tbody>
 						</table>
