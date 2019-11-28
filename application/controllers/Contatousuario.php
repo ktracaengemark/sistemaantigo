@@ -13,7 +13,7 @@ class Contatousuario extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Contatousuario_model', 'Relapes_model', 'Usuario_model'));
+        $this->load->model(array('Basico_model', 'Contatousuario_model', 'Relacao_model', 'Usuario_model'));
         $this->load->driver('session');
 
         #load header view
@@ -55,7 +55,7 @@ class Contatousuario extends CI_Controller {
 			'Ativo',
             'DataNascimento',
             'Sexo',
-			'RelaPes',
+			'Relacao',
 			'TelefoneContatoUsuario',
             'Obs',
             'idSis_Usuario',
@@ -69,10 +69,10 @@ class Contatousuario extends CI_Controller {
         $this->form_validation->set_rules('NomeContatoUsuario', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
 		$this->form_validation->set_rules('TelefoneContatoUsuario', 'TelefoneContatoUsuario', 'required|trim');
-        $this->form_validation->set_rules('RelaPes', 'RelaPes', 'required|trim');
+        $this->form_validation->set_rules('Relacao', 'Relacao', 'required|trim');
 		$data['select']['Sexo'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVida'] = $this->Contatousuario_model->select_status_vida();
-		$data['select']['RelaPes'] = $this->Relapes_model->select_relapes();
+		$data['select']['Relacao'] = $this->Relacao_model->select_relacao();
         $data['select']['Ativo'] = $this->Basico_model->select_status_sn();
 		
 		$data['titulo'] = 'Cadastrar Contatousuario';
@@ -136,7 +136,7 @@ class Contatousuario extends CI_Controller {
             'StatusVida',
             'DataNascimento',
             'Sexo',
-			'RelaPes',
+			'Relacao',
             'TelefoneContatoUsuario',
             'Obs',
             'idSis_Usuario',
@@ -154,10 +154,10 @@ class Contatousuario extends CI_Controller {
         $this->form_validation->set_rules('NomeContatoUsuario', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
 		$this->form_validation->set_rules('TelefoneContatoUsuario', 'TelefoneContatoUsuario', 'required|trim');
-        $this->form_validation->set_rules('RelaPes', 'RelaPes', 'required|trim');
+        $this->form_validation->set_rules('Relacao', 'Relacao', 'required|trim');
 		$data['select']['Sexo'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVida'] = $this->Contatousuario_model->select_status_vida();
-        $data['select']['RelaPes'] = $this->Relapes_model->select_relapes();
+        $data['select']['Relacao'] = $this->Relacao_model->select_relacao();
         $data['select']['Ativo'] = $this->Basico_model->select_status_sn();
 		
 		$data['titulo'] = 'Editar Dados';
@@ -186,8 +186,8 @@ class Contatousuario extends CI_Controller {
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_ContatoUsuario'], TRUE);
 
             if ($data['auditoriaitem'] && $this->Contatousuario_model->update_contatousuario($data['query'], $data['query']['idApp_ContatoUsuario']) === FALSE) {
-                $data['msg'] = '?m=2';
-                redirect(base_url() . 'contatousuario/form_contatousuario/' . $data['query']['idApp_ContatoUsuario'] . $data['msg']);
+                $data['msg'] = '?m=1';
+                redirect(base_url() . 'usuario/prontuario/' . $_SESSION['Usuario']['idSis_Usuario'] . $data['msg']);
                 exit();
             } else {
 

@@ -57,8 +57,8 @@ foreach ($query->result_array() as $row) {
                 <?php echo $row['vida']; ?>				
 			</h4>	
 			<h5>
-				<?php if ($row['RelaPes']) { ?>
-				<span class="glyphicon glyphicon-user"></span> <b>Relação:</b> <?php echo $row['RelaPes']; ?>
+				<?php if ($row['Relacao']) { ?>
+				<span class="glyphicon glyphicon-user"></span> <b>Relação:</b> <?php echo $row['Relacao']; ?>
 				<?php } ?>
             </h5> 
          

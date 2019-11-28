@@ -58,13 +58,8 @@ foreach ($query->result_array() as $row) {
 
 			</h4>
 			<h5>
-				<?php if ($row['RelaPes']) { ?>
-				<span class="glyphicon glyphicon-user"></span> <b>Relação:</b> <?php echo $row['RelaPes']; ?>
-				<?php } ?>
-			</h5>
-			<h5>
-				<?php if ($row['RelaPes2']) { ?>
-				<span class="glyphicon glyphicon-user"></span> <b>Relação:</b> <?php echo $row['RelaPes2']; ?>
+				<?php if ($row['Relacao']) { ?>
+				<span class="glyphicon glyphicon-user"></span> <b>Relação:</b> <?php echo $row['Relacao']; ?>
 				<?php } ?>
 			</h5>
 
