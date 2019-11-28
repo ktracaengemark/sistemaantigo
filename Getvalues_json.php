@@ -116,7 +116,6 @@ elseif ($_GET['q'] == 9) {
                 V.ValorProduto,
 				P.Categoria
             FROM
-                
                 Tab_Valor AS V
 					LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
 					LEFT JOIN Tab_Produto AS P ON P.idTab_Produto = V.idTab_Produto
@@ -127,8 +126,9 @@ elseif ($_GET['q'] == 9) {
             WHERE
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-                P.idTab_Produto = V.idTab_Produto
+				P.idTab_Produto = V.idTab_Produto
 			ORDER BY
+				P.TipoProduto DESC,
 				P.CodProd ASC,
 				P.Categoria ASC,
 				TP3.Prodaux3,				
