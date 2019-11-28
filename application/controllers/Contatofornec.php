@@ -13,7 +13,7 @@ class Contatofornec extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Contatofornec_model', 'Relacom_model', 'Fornecedor_model'));
+        $this->load->model(array('Basico_model', 'Contatofornec_model', 'Relacao_model', 'Fornecedor_model'));
         $this->load->driver('session');
 
         #load header view
@@ -55,7 +55,7 @@ class Contatofornec extends CI_Controller {
 			'Ativo',
             'DataNascimento',
             'Sexo',
-			'RelaCom',
+			'Relacao',
 			'TelefoneContatofornec',
             'Obs',
             'idApp_Fornecedor',
@@ -68,10 +68,10 @@ class Contatofornec extends CI_Controller {
         $this->form_validation->set_rules('NomeContatofornec', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
 		$this->form_validation->set_rules('TelefoneContatofornec', 'TelefoneContatofornec', 'required|trim');
-        $this->form_validation->set_rules('RelaCom', 'RelaCom', 'required|trim');
+        $this->form_validation->set_rules('Relacao', 'Relacao', 'required|trim');
 		$data['select']['Sexo'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVida'] = $this->Contatofornec_model->select_status_vida();
-		$data['select']['RelaCom'] = $this->Relacom_model->select_relacom();
+		$data['select']['Relacao'] = $this->Relacao_model->select_relacao();
         $data['select']['Ativo'] = $this->Basico_model->select_status_sn();
 		
 		$data['titulo'] = 'Cadastrar Contatofornec';
@@ -133,7 +133,7 @@ class Contatofornec extends CI_Controller {
             'StatusVida',
             'DataNascimento',
             'Sexo',
-			'RelaCom',
+			'Relacao',
 			'Ativo',
             'TelefoneContatofornec',
             'Obs',
@@ -151,10 +151,10 @@ class Contatofornec extends CI_Controller {
         $this->form_validation->set_rules('NomeContatofornec', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
 		$this->form_validation->set_rules('TelefoneContatofornec', 'TelefoneContatofornec', 'required|trim');
-        $this->form_validation->set_rules('RelaCom', 'RelaCom', 'required|trim');
+        $this->form_validation->set_rules('Relacao', 'Relacao', 'required|trim');
 		$data['select']['Sexo'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVida'] = $this->Contatofornec_model->select_status_vida();
-        $data['select']['RelaCom'] = $this->Relacom_model->select_relacom();       
+        $data['select']['Relacao'] = $this->Relacao_model->select_relacao();       
         $data['select']['Ativo'] = $this->Basico_model->select_status_sn();
 		
 		$data['titulo'] = 'Editar Dados';

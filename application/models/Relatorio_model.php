@@ -4934,13 +4934,13 @@ exit();*/
                 CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
                 E.Email,
 				CE.NomeContatofornec,
-				TCE.RelaCom,
+				TCE.Relacao,
 				CE.Sexo
             FROM
                 App_Fornecedor AS E
                     LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
 					LEFT JOIN App_Contatofornec AS CE ON E.idApp_Fornecedor = CE.idApp_Fornecedor
-					LEFT JOIN Tab_RelaCom AS TCE ON TCE.idTab_RelaCom = CE.RelaCom
+					LEFT JOIN Tab_Relacao AS TCE ON TCE.idTab_Relacao = CE.Relacao
 					LEFT JOIN Tab_TipoFornec AS TF ON TF.Abrev = E.TipoFornec
 					LEFT JOIN Tab_StatusSN AS TS ON TS.Abrev = E.Ativo
 					LEFT JOIN App_Atividade AS TA ON TA.idApp_Atividade = E.Atividade

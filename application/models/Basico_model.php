@@ -360,6 +360,23 @@ class Basico_model extends CI_Model {
         }
     }
 
+	public function get_relacao($data) {
+
+        if (isset($data) && $data) {
+
+			$query = $this->db->query('SELECT * FROM Tab_Relacao WHERE idTab_Relacao = "' . $data . '"');
+
+            if ($query->num_rows() === 0) {
+                return '';
+            } else {
+                $query = $query->result_array();
+                return $query[0]['Relacao'];
+            }
+        } else {
+            return '';
+        }
+    }
+	
 	public function get_relacom($data) {
 
         if (isset($data) && $data) {

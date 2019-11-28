@@ -49,7 +49,7 @@
                            # echo '<td>' . $row['Email'] . '</td>';
 							echo '<td>' . $row['NomeContatofornec'] . '</td>';
 							#echo '<td>' . $row['Sexo'] . '</td>';
-							echo '<td>' . $row['RelaCom'] . '</td>';
+							echo '<td>' . $row['Relacao'] . '</td>';
                         echo '</tr>';
                     }
                     ?>
