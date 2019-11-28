@@ -6175,18 +6175,20 @@ exit();*/
         $query = $this->db->query('
             SELECT
                 OB.idTab_Produto,
-				CONCAT(IFNULL(OB.CodProd,""), " - ", IFNULL(TP3.Prodaux3,""), " - ", IFNULL(OB.Produtos,""), " - ", IFNULL(TP1.Prodaux1,""), " - ", IFNULL(TP2.Prodaux2,"")) AS Produtos,
+				CONCAT(IFNULL(OB.CodProd,""), " - ", IFNULL(TP3.Prodaux3,""), " - ", IFNULL(OB.Produtos,""), " - ", IFNULL(TP1.Prodaux1,""), " - ", IFNULL(TP2.Prodaux2,""), " -R$ ", IFNULL(TV.ValorProduto,"")) AS Produtos,
 				TP1.Prodaux1,
 				TP2.Prodaux2,
 				TP3.Prodaux3,
 				TP1.Abrev1,
 				TP2.Abrev2,
-                OB.CodProd
+                OB.CodProd,
+				TV.ValorProduto
             FROM
                 Tab_Produto AS OB
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = OB.Prodaux1
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = OB.Prodaux2
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = OB.Prodaux3
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produto = OB.idTab_Produto
             WHERE
                 OB.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OB.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
