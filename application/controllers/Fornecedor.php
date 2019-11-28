@@ -232,8 +232,8 @@ class Fornecedor extends CI_Controller {
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_Fornecedor'], TRUE);
 
             if ($data['auditoriaitem'] && $this->Fornecedor_model->update_fornecedor($data['query'], $data['query']['idApp_Fornecedor']) === FALSE) {
-                $data['msg'] = '?m=2';
-                redirect(base_url() . 'fornecedor/form_fornecedor/' . $data['query']['idApp_Fornecedor'] . $data['msg']);
+                $data['msg'] = '?m=1';
+                redirect(base_url() . 'fornecedor/prontuario/' . $data['query']['idApp_Fornecedor'] . $data['msg']);
                 exit();
             } else {
 

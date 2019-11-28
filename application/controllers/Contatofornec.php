@@ -183,8 +183,8 @@ class Contatofornec extends CI_Controller {
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_Contatofornec'], TRUE);
 
             if ($data['auditoriaitem'] && $this->Contatofornec_model->update_contatofornec($data['query'], $data['query']['idApp_Contatofornec']) === FALSE) {
-                $data['msg'] = '?m=2';
-                redirect(base_url() . 'contatofornec/form_contatofornec/' . $data['query']['idApp_Contatofornec'] . $data['msg']);
+                $data['msg'] = '?m=1';
+                redirect(base_url() . 'contatofornec/pesquisar/' . $_SESSION['Fornecedor']['idApp_Fornecedor'] . $data['msg']);
                 exit();
             } else {
 
