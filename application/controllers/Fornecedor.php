@@ -105,11 +105,11 @@ class Fornecedor extends CI_Controller {
         $data['sidebar'] = 'col-sm-3 col-md-2';
         $data['main'] = 'col-sm-7 col-md-8';        
 
-        $data['tela'] = $this->load->view('fornecedor/form_fornecedor', $data, TRUE);
+        $data['tela'] = $this->load->view('fornecedor/form_fornecedor1', $data, TRUE);
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('fornecedor/form_fornecedor', $data);        
+            $this->load->view('fornecedor/form_fornecedor1', $data);        
         } else {
 
             $data['query']['NomeFornecedor'] = trim(mb_strtoupper($data['query']['NomeFornecedor'], 'ISO-8859-1'));
@@ -128,7 +128,7 @@ class Fornecedor extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contatofornec com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('fornecedor/form_fornecedor', $data);
+                $this->load->view('fornecedor/form_fornecedor1', $data);
             } else {
 
                 $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Fornecedor'], FALSE);
