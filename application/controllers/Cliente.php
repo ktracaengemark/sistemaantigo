@@ -261,8 +261,8 @@ class Cliente extends CI_Controller {
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_Cliente'], TRUE);
 
             if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
-                $data['msg'] = '?m=2';
-                redirect(base_url() . 'cliente/form_cliente/' . $data['query']['idApp_Cliente'] . $data['msg']);
+                $data['msg'] = '?m=1';
+                redirect(base_url() . 'cliente/prontuario/' . $data['query']['idApp_Cliente'] . $data['msg']);
                 exit();
             } else {
 
