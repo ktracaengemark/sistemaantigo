@@ -109,7 +109,7 @@ class Contatocliente_model extends CI_Model {
                     $row->DataNascimento = $this->basico->mascara_data($row->DataNascimento, 'barras');
                     $row->Sexo = $this->Basico_model->get_sexo($row->Sexo);
 					$row->RelaCom = $this->Basico_model->get_relacom($row->RelaCom);
-					$row->RelaPes = $this->Basico_model->get_relapes($row->RelaPes);
+					$row->Relacao = $this->Basico_model->get_relacao($row->Relacao);
                 }
 
                 return $query;

@@ -13,7 +13,7 @@ class Contatocliente extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Contatocliente_model', 'Relapes_model', 'Relacom_model', 'Cliente_model'));
+        $this->load->model(array('Basico_model', 'Contatocliente_model', 'Relacao_model', 'Relacom_model', 'Cliente_model'));
         $this->load->driver('session');
 
         #load header view
@@ -55,7 +55,7 @@ class Contatocliente extends CI_Controller {
             'DataNascimento',
 			'Ativo',
             'Sexo',
-			'RelaPes',
+			'Relacao',
 			'RelaCom',
             'Telefone1',
             'Obs',
@@ -69,11 +69,11 @@ class Contatocliente extends CI_Controller {
         $this->form_validation->set_rules('NomeContatoCliente', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
 		$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
-		#$this->form_validation->set_rules('RelaPes', 'RelaPes', 'required|trim');
+		#$this->form_validation->set_rules('Relacao', 'Relacao', 'required|trim');
         #$this->form_validation->set_rules('RelaCom', 'RelaCom', 'required|trim');
 		$data['select']['Sexo'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVida'] = $this->Contatocliente_model->select_status_vida();
-		$data['select']['RelaPes'] = $this->Relapes_model->select_relapes();
+		$data['select']['Relacao'] = $this->Relacao_model->select_relacao();
         $data['select']['RelaCom'] = $this->Relacom_model->select_relacom();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
 		
@@ -140,7 +140,7 @@ class Contatocliente extends CI_Controller {
             'idSis_Usuario',
             'Obs',
             'idApp_Cliente',
-			'RelaPes',
+			'Relacao',
 			'RelaCom',
             'Telefone1',
 			'Ativo',
@@ -157,11 +157,11 @@ class Contatocliente extends CI_Controller {
         $this->form_validation->set_rules('NomeContatoCliente', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
 		$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
-		#$this->form_validation->set_rules('RelaPes', 'RelaPes', 'required|trim');
+		#$this->form_validation->set_rules('Relacao', 'Relacao', 'required|trim');
         #$this->form_validation->set_rules('RelaCom', 'RelaCom', 'required|trim');
 		$data['select']['Sexo'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVida'] = $this->Contatocliente_model->select_status_vida();
-        $data['select']['RelaPes'] = $this->Relapes_model->select_relapes();
+        $data['select']['Relacao'] = $this->Relacao_model->select_relacao();
         $data['select']['RelaCom'] = $this->Relacom_model->select_relacom();       
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
 		
@@ -191,8 +191,8 @@ class Contatocliente extends CI_Controller {
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_ContatoCliente'], TRUE);
 
             if ($data['auditoriaitem'] && $this->Contatocliente_model->update_contatocliente($data['query'], $data['query']['idApp_ContatoCliente']) === FALSE) {
-                $data['msg'] = '?m=2';
-                redirect(base_url() . 'contatocliente/form_contatocliente/' . $data['query']['idApp_ContatoCliente'] . $data['msg']);
+                $data['msg'] = '?m=1';
+                redirect(base_url() . 'contatocliente/pesquisar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
                 exit();
             } else {
 
