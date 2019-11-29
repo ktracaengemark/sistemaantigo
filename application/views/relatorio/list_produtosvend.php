@@ -35,19 +35,19 @@
                     foreach ($report->result_array() as $row) {
 
                         #echo '<tr>';
-                        echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] . '">';
+                        echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">';
 							echo '<td>' . $row['NomeCliente'] . '</td>';
 							echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
                             echo '<td>' . $row['DataOrca'] . '</td>';
 							echo '<td>' . $row['AprovadoOrca'] . '</td>';
 							echo '<td>' . $row['NomeFornecedor'] . '</td>';
 							echo '<td>' . $row['CodProd'] . '</td>';
-							echo '<td>' . $row['QtdVendaProduto'] . '</td>';
+							echo '<td>' . $row['QtdProduto'] . '</td>';
 							echo '<td>' . $row['Prodaux3'] . '</td>';
 							echo '<td>' . $row['Produtos'] . '</td>';							
 							echo '<td>' . $row['Prodaux1'] . '</td>';
 							echo '<td>' . $row['Prodaux2'] . '</td>';
-							echo '<td>' . $row['ValorVendaProduto'] . '</td>';
+							echo '<td>' . $row['ValorProduto'] . '</td>';
 							#echo '<td>' . $row['ValorOrca'] . '</td>';
 							#echo '<td>' . $row['ObsProduto'] . '</td>';
 							echo '<td>' . $row['DataValidadeProduto'] . '</td>';							

@@ -52,10 +52,10 @@
 														</div>														
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 														<div class="col-md-4">
-															<label for="idApp_Cliente">Cliente *</label>
+															<label for="idApp_Cliente">Cliente </label>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 																	id="idApp_Cliente" autofocus name="idApp_Cliente">
-																<option value="">-- Sel. um Cliente --</option>
+																<!--<option value="">-- Sel. um Cliente --</option>-->
 																<?php
 																foreach ($select['idApp_Cliente'] as $key => $row) {
 																		(!$orcatrata['idApp_Cliente']) ? $orcatrata['idApp_Cliente'] = '1' : FALSE;

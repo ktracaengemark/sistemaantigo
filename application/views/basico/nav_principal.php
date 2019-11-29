@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<div class="row">
 
-			<div class="col-sm-offset-1 col-md-11 ">
+			<div class="col-md-12 ">
 				<div class="navbar-header ">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar1">
 						<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
@@ -41,66 +41,91 @@
 							</form>
 						</li>
 						-->
-						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
+						<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>agenda">
-									<button type="button" class="btn btn-sm btn-info ">
+									<button type="button" class="btn btn-lg btn-info ">
 										<span class="glyphicon glyphicon-calendar"></span> Agenda
 									</button>
 								</a>
 							</div>
-							<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+						</li>
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
+							
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/clientes">
-									<button type="button" class="btn btn-sm btn-success ">
+									<button type="button" class="btn btn-sm btn-warning ">
 										<span class="glyphicon glyphicon-user"></span> Clientes
 									</button>
 								</a>
 							</div>
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-gift"></span> Produtos <span class="caret"></span>
+									<span class="glyphicon glyphicon-user"></span> Fornecedores <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
-									<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-usd"></span> Lista de Produtos</a></li>
+									<li><a href="<?php echo base_url() ?>relatorio/fornecedor"><span class="glyphicon glyphicon-user"></span> Lista de Fornecedores</a></li>
 									<li role="separator" class="divider"></li>							
-									<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-list-alt"></span> Estoque de Produtos</a></li>
-									<li role="separator" class="divider"></li>							
-									<li><a data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal3-sm"><span class="glyphicon glyphicon-plus"></span> Novo Produto</a></li>
-									<li role="separator" class="divider"></li>							
-									<li><a href="<?php echo base_url() ?>Prodaux3/cadastrar"><span class="glyphicon glyphicon-list"></span> Lista de Categoria</a></li>									
+									<li><a href="<?php echo base_url() ?>atividade/cadastrar"><span class="glyphicon glyphicon-list-alt"></span> Atividade dos Fornecedores</a></li>									
 								</ul>
 							</div>																				
-							<?php } ?>
+							
 						</li>
+						<?php } ?>
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>orcatrata/cadastrar3">
-									<button type="button" class="btn btn-sm btn-primary ">
+									<button type="button" class="btn btn-lg btn-primary ">
 										<span class="glyphicon glyphicon-plus"></span>Receitas
 									</button>
 								</a>
 							</div>
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>orcatrata/cadastrardesp">
-									<button type="button" class="btn btn-sm btn-danger ">
+									<button type="button" class="btn btn-lg btn-danger ">
 										<span class="glyphicon glyphicon-plus"></span>Despesas
 									</button>
 								</a>
-							</div>
+							</div>														
+						</li>
+						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
-									<span class="glyphicon glyphicon-usd"></span> Finanças <span class="caret"></span>
+									<span class="glyphicon glyphicon-usd"></span> Financeiro <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
-									<li><a href="<?php echo base_url() ?>relatorio/financeiro"><span class="glyphicon glyphicon-usd"></span> Receitas & Despesas</a></li>
+									<li><a href="<?php echo base_url() ?>relatorio/financeiro"><span class="glyphicon glyphicon-usd"></span> Orçamentos</a></li>
 									<li role="separator" class="divider"></li>							
-									<li><a href="<?php echo base_url() ?>relatorio/parcelas"><span class="glyphicon glyphicon-usd"></span> Parcelas</a></li>
+									<li><a href="<?php echo base_url() ?>relatorio/parcelas"><span class="glyphicon glyphicon-usd"></span> Receber X Pagar</a></li>
 									<li role="separator" class="divider"></li>							
-									<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>									
+									<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+									<li role="separator" class="divider"></li>
+									<li><a href="<?php echo base_url() ?>relatorio/rankingvendas"><span class="glyphicon glyphicon-pencil"></span> Ranking de Vendas</a></li>
+									<?php } ?>
 								</ul>
-							</div>														
-						</li>						
+							</div>							
+							<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-gift"></span> Produtos <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">							
+									<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-usd"></span> Produtos & Valores</a></li>
+									<li role="separator" class="divider"></li>							
+									<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-list-alt"></span> Estoque de Produtos</a></li>
+									<li role="separator" class="divider"></li>							
+									<li><a href="<?php echo base_url() ?>Prodaux3/cadastrar"><span class="glyphicon glyphicon-list"></span> Lista de Categoria</a></li>										
+									<li role="separator" class="divider"></li>										
+									<li><a href="<?php echo base_url() ?>relatorio/produtosvend"><span class="glyphicon glyphicon-pencil"></span> Produtos & Cliente</a></li>
+									<li role="separator" class="divider"></li>									
+									<li><a data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal3-sm"><span class="glyphicon glyphicon-plus"></span> Novo Produto</a></li>
+								</ul>
+							</div>																				
+							<?php } ?>
+						</li>
+						
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">						
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -108,12 +133,7 @@
 								</button>
 								<ul class="dropdown-menu" role="menu">							
 									<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
-									<li><a href="<?php echo base_url() ?>relatorio/fornecedor"><span class="glyphicon glyphicon-pencil"></span> Fornecedor</a></li>
-									<li role="separator" class="divider"></li>
-									<li><a href="<?php echo base_url() ?>atividade/cadastrar"><span class="glyphicon glyphicon-pencil"></span>Ativ./ Fornec.</a></li>
-									<li role="separator" class="divider"></li>
-									<li><a href="<?php echo base_url() ?>relatorio/rankingvendas"><span class="glyphicon glyphicon-pencil"></span>Ranking de vendas</a></li>
-									<li role="separator" class="divider"></li>									
+									
 									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas de Negócios</a></li>
 									<li role="separator" class="divider"></li>									
 									<?php } ?>
@@ -131,7 +151,7 @@
 							<?php } else if ($_SESSION['log']['idSis_Empresa'] != 5){?>
 							<div class="btn-group" role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/loginempresa"> 	
-									<button type="button" class="btn btn-sm btn-default ">Renovar Assinatura 
+									<button type="button" class="btn btn-sm btn-default ">Renovar !!! 
 										
 									</button>
 								</a>	

@@ -1620,7 +1620,7 @@ class Relatorio extends CI_Controller {
 	$data['select']['idApp_Cliente'] = $this->Relatorio_model->select_cliente();
 
 
-	$data['titulo'] = 'Relatório de Estoque';
+	$data['titulo'] = 'Ranking de Vendas';
 
 	#run form validation
 	if ($this->form_validation->run() !== FALSE) {

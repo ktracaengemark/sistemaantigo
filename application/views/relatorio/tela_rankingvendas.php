@@ -11,7 +11,7 @@
 
 				<div class="panel panel-primary">
 
-					<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
+					<div class="panel-heading"><span class="glyphicon glyphicon-pencil"></span><strong> Ranking de Vendas<?php #echo $titulo; ?></strong></div>
 					<div class="panel-body">
 
 						<?php echo form_open('relatorio/rankingvendas', 'role="form"'); ?>

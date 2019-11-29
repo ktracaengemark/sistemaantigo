@@ -82,7 +82,7 @@
 															</a>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 																	id="idApp_Fornecedor" autofocus name="idApp_Fornecedor">
-																<option value="">-- Sel. Fornecedor --</option>
+																<!--<option value="">-- Sel. Fornecedor --</option>-->
 																<?php
 																foreach ($select['idApp_Fornecedor'] as $key => $row) {
 																		(!$orcatrata['idApp_Fornecedor']) ? $orcatrata['idApp_Fornecedor'] = '1' : FALSE;
@@ -234,7 +234,7 @@
 																						<span class="glyphicon glyphicon-plus"></span> Produtos
 																					</a>
 																				</div>
-																				<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+																				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 																				<div class="col-md-3 text-right">
 																					<a class="btn btn-sm btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
 																						<span class="glyphicon glyphicon-menu-down"></span> Devolução
@@ -258,7 +258,7 @@
 																	<input type="hidden" name="CountMax" id="CountMax" value="<?php echo $ProdutoSoma ?>">
 																</div>
 															</div>
-															<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>	
+															<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
 															<!--
 															<div class="panel-heading text-right">
 																<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">

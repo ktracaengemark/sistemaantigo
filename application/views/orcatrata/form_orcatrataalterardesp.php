@@ -51,7 +51,7 @@
 															<label for="idApp_Fornecedor">Fornecedor</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 																	id="idApp_Fornecedor" autofocus name="idApp_Fornecedor">
-																<option value="">-- Sel. Fornecedor --</option>
+																<!--<option value="">-- Sel. Fornecedor --</option>-->
 																<?php
 																foreach ($select['idApp_Fornecedor'] as $key => $row) {
 																		(!$orcatrata['idApp_Fornecedor']) ? $orcatrata['idApp_Fornecedor'] = '1' : FALSE;
