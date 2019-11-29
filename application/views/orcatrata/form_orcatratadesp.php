@@ -222,20 +222,38 @@
 																	<div class="panel panel-info">
 																		<div class="panel-heading text-left">
 																			<div class="row">
-																				<div class="col-md-3">	
+																				<div class="col-md-2">	
 																					<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
 																				</div>
-																				<div class="col-md-3">	
+																				<div class="col-md-2">	
 																					<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
 																				</div>
-																				<div class="col-md-3">
-																					<a class="add_field_button9 btn btn-info"
+																				<div class="col-md-2">
+																					<button class="btn btn-md btn-info" id="inputDb" data-loading-text="Aguarde..." type="submit">
+																						<span class="glyphicon glyphicon-save"></span> Recarregar
+																					</button>
+																				</div>																				
+																				<div class="col-md-2">
+																					<a class="add_field_button9 btn btn-primary"
 																							onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
-																						<span class="glyphicon glyphicon-plus"></span> Produtos
+																						<span class="glyphicon glyphicon-arrow-up"></span> Adic. Produtos
 																					</a>
 																				</div>
+																				<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 6 )) { ?>
+																				<div class="col-md-2 text-right">
+																					<a class="btn btn-sm btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar3/" role="button"> 
+																						<span class="glyphicon glyphicon-plus"></span> <b>Novo</b>
+																					</a>
+																				</div>	
+																				<?php } else {?>
+																				<div class="col-md-1 text-right">
+																					<a class="btn btn-sm btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar2/" role="button"> 
+																						<span class="glyphicon glyphicon-plus"></span> <b>Novo</b>
+																					</a>
+																				</div>	
+																				<?php } ?>																				
 																				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-																				<div class="col-md-3 text-right">
+																				<div class="col-md-2 text-right">
 																					<a class="btn btn-sm btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
 																						<span class="glyphicon glyphicon-menu-down"></span> Devolução
 																					</a>
