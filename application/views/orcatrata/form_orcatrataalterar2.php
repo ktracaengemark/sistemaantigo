@@ -208,7 +208,7 @@
 																						<span class="glyphicon glyphicon-plus"></span> Produtos
 																					</a>
 																				</div>
-																				<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+																				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 																				<div class="col-md-3 text-right">
 																					<a class="btn btn-sm btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
 																						<span class="glyphicon glyphicon-menu-down"></span> Devolução
@@ -232,7 +232,7 @@
 																	<input type="hidden" name="CountMax" id="CountMax" value="<?php echo $ProdutoSoma ?>">
 																</div>
 															</div>
-															<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>	
+															<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
 															<div <?php echo $collapse; ?> id="Devolvidos">
 																<div class="panel-body">
 																															
