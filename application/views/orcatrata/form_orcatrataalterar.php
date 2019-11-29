@@ -202,7 +202,7 @@
 					<div class="panel panel-<?php echo $panel; ?>">
 						<div class="panel-heading"><strong><?php echo $titulo; ?> - </strong><?php echo $orcatrata['idApp_OrcaTrata'] ?></div>
 						<div class="panel-body">
-							<div style="overflow: auto; height: 550px; ">
+							<div style="overflow: auto; height: auto; ">
 								<div class="panel-group">	
 									<div class="panel panel-primary">
 										<div class="panel-heading">
@@ -1060,7 +1060,8 @@
 											-->
 										</div>
 									</div>
-									<br>
+								</div>	
+									
 									<!-- Procedimentos -->
 									<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 									<div class="panel panel-primary">
@@ -1234,11 +1235,10 @@
 									-->
 									<?php } ?>
 									</form>
-								</div>
-							</div>
-							<br>							
+								
+							</div>							
 							<!--Botão Salvar  -->
-							<div class="form-group">
+							
 								<div class="row">
 									<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
 									<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
@@ -1307,7 +1307,7 @@
 
 									<?php } ?>
 								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>

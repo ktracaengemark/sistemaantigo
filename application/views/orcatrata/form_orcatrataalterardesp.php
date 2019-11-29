@@ -17,7 +17,7 @@
 					<div class="panel panel-<?php echo $panel; ?>">
 						<div class="panel-heading"><strong><?php echo $titulo; ?> - </strong><?php echo $orcatrata['idApp_OrcaTrata'] ?></div>
 						<div class="panel-body">
-							<div style="overflow: auto; height: 550px; ">
+							<div style="overflow: auto; height: auto; ">
 								<div class="panel-group">	
 									<div <?php echo $collapse; ?> id="Orcamento">
 										<div class="panel panel-danger">
@@ -78,7 +78,8 @@
 														</div>																	
 														<?php } ?>																	
 
-													</div>	
+													</div>
+													<br>
 													<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 													<div class="row">														
 														<div class="panel-body">	
@@ -432,11 +433,12 @@
 																</div>
 															</div>
 														</div>	
+														<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 														<div class="col-md-4 panel-body">
 															<div class="panel panel-primary">
 																<div class="panel-heading">
 																	<div class="row">			
-																		<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+																		
 																		<div class="col-md-12">
 																			<label for="ValorRestanteOrca">Total:</label><br>
 																			<div class="input-group" id="txtHint">
@@ -447,11 +449,12 @@
 																					   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
 																			</div>
 																		</div>
-																		<?php } ?>
+																		
 																	</div>	
 																</div>
 															</div>
 														</div>
+														<?php } ?>
 														<div <?php echo $visivel; ?>>
 															<div class="col-md-4 panel-body">
 																<div class="panel panel-success">
