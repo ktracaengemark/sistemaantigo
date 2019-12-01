@@ -77,9 +77,12 @@
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 														<div class="col-md-4">
 															<label for="idApp_Fornecedor">Fornecedor:</label>
-															<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>fornecedor/cadastrar/" role="button"> 
-																<span class="glyphicon glyphicon-plus"></span> <b>Fornec.</b>
+															<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>fornecedor/cadastrar3/" role="button"> 
+																<span class="glyphicon glyphicon-plus"></span> Fornec.
 															</a>
+															<button class="btn btn-xs btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+																<span class="glyphicon glyphicon-refresh"></span> Recarregar
+															</button>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 																	id="idApp_Fornecedor" autofocus name="idApp_Fornecedor">
 																<!--<option value="">-- Sel. Fornecedor --</option>-->
@@ -135,6 +138,12 @@
 																			<div class="panel panel-info">
 																				<div class="panel-heading">
 																					<div class="row">
+																						<div class="col-md-2">
+																							<label for="QtdProduto">Qtd <?php echo $i ?>:</label>
+																							<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
+																									onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
+																									autofocus name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
+																						</div>
 																						<div class="col-md-6">
 																							<label for="idTab_Produto">Produto:</label>
 																							<?php if ($i == 1) { ?>
@@ -157,12 +166,6 @@
 																							</select>
 																						</div>
 																						<div class="col-md-2">
-																							<label for="QtdProduto">Qtd<?php echo $i ?>:</label>
-																							<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
-																									onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
-																									autofocus name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
-																						</div>
-																						<div class="col-md-2">
 																							<label for="ValorProduto">Valor:</label>
 																							<div class="input-group">
 																								<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -181,14 +184,13 @@
 																						</div>
 																					</div>
 																					<div class="row">
-																						<div class="col-md-3"></div>
+																						<div class="col-md-5"></div>
 																						<div class="col-md-3">
 																							<label for="ObsProduto<?php echo $i ?>">Obs:</label><br>
 																							<input type="text" class="form-control" id="ObsProduto<?php echo $i ?>" maxlength="250"
 																								   name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>">
 																						</div>
-																						<div class="col-md-2"></div>
-																						<div class="col-md-2">
+																						<div class="col-md-3">
 																							<label for="DataValidadeProduto<?php echo $i ?>">Validade:</label>
 																							<div class="input-group <?php echo $datepicker; ?>">
 																								<span class="input-group-addon" disabled>
@@ -222,39 +224,40 @@
 																	<div class="panel panel-info">
 																		<div class="panel-heading text-left">
 																			<div class="row">
+																				<div class="col-md-2">
+																					<a class="add_field_button9 btn btn-info"
+																							onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
+																						<span class="glyphicon glyphicon-arrow-up"></span> Adic. Produtos
+																					</a>
+																				</div>
 																				<div class="col-md-2">	
 																					<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
 																				</div>
 																				<div class="col-md-2">	
 																					<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
 																				</div>
-																				<div class="col-md-2">
-																					<button class="btn btn-md btn-info" id="inputDb" data-loading-text="Aguarde..." type="submit">
-																						<span class="glyphicon glyphicon-save"></span> Recarregar
+																				<div class="col-md-2 text-right">
+																					<button class="btn btn-md btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+																						<span class="glyphicon glyphicon-refresh"></span> Recarregar
 																					</button>
 																				</div>																				
-																				<div class="col-md-2">
-																					<a class="add_field_button9 btn btn-primary"
-																							onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
-																						<span class="glyphicon glyphicon-arrow-up"></span> Adic. Produtos
-																					</a>
-																				</div>
+																				
 																				<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 6 )) { ?>
 																				<div class="col-md-2 text-right">
-																					<a class="btn btn-sm btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar3/" role="button"> 
-																						<span class="glyphicon glyphicon-plus"></span> <b>Novo</b>
+																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar3/" role="button"> 
+																						<span class="glyphicon glyphicon-plus"></span> Novo/Editar
 																					</a>
 																				</div>	
 																				<?php } else {?>
 																				<div class="col-md-1 text-right">
-																					<a class="btn btn-sm btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar2/" role="button"> 
-																						<span class="glyphicon glyphicon-plus"></span> <b>Novo</b>
+																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar2/" role="button"> 
+																						<span class="glyphicon glyphicon-plus"></span> Novo/Editar
 																					</a>
 																				</div>	
 																				<?php } ?>																				
 																				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 																				<div class="col-md-2 text-right">
-																					<a class="btn btn-sm btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
+																					<a class="btn btn-xs btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
 																						<span class="glyphicon glyphicon-menu-down"></span> Devolução
 																					</a>
 																				</div>
@@ -421,18 +424,19 @@
 																	<div class="panel panel-warning">
 																		<div class="panel-heading text-left">
 																			<div class="row">	
-																				<div class="col-md-3">	
-																					<b>Produtos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
-																				</div>
-																				<div class="col-md-3">	
-																					<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
-																				</div>
-																				<div class="col-md-3 text-left">
+																				<div class="col-md-2 text-left">
 																					<a class="add_field_button10  btn btn-warning" 
 																							onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
-																						<span class="glyphicon glyphicon-minus"></span> Produtos
+																						<span class="glyphicon glyphicon-arrow-down"></span> Rem.Produtos
 																					</a>
 																				</div>
+																				<div class="col-md-2">	
+																					<b>Produtos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
+																				</div>
+																				<div class="col-md-2">	
+																					<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
+																				</div>
+																				
 																				<!--
 																				<div class="col-md-3 text-left">																							
 																					<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">

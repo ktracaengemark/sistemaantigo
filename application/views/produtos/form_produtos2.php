@@ -1,7 +1,3 @@
-<?php if (isset($msg)) echo $msg; ?>
-			
-<div class="col-sm-offset-2 col-md-8 ">	
-
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
   <div class="container-fluid">
 	<div class="navbar-header">
@@ -35,6 +31,9 @@
 	</div>
   </div>
 </nav>
+<?php if (isset($msg)) echo $msg; ?>			
+
+<div class="col-sm-offset-2 col-md-8 ">	
 
 <?php echo validation_errors(); ?>
 
@@ -167,9 +166,12 @@
 						<div class="row">									
 							<div class="col-md-3">
 								<label for="Prodaux3">Categoria</label>
-									<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>prodaux3/cadastrar" role="button"> 
+									<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>prodaux3/cadastrar3" role="button"> 
 										<span class="glyphicon glyphicon-plus"></span> <b>Cat.</b>
 									</a>
+									<button class="btn btn-xs btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+										<span class="glyphicon glyphicon-refresh"></span> Recarregar
+									</button>
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Prodaux3" name="Prodaux3">
 									<option value="">-- Selecione uma opção --</option>
@@ -253,14 +255,14 @@
 														name="ValorProduto<?php echo $i ?>" value="<?php echo $valor[$i]['ValorProduto'] ?>">
 												</div>
 											</div>													
-											<!--
+											
 											<div class="col-md-1">
 												<label><br></label><br>
 												<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
 													<span class="glyphicon glyphicon-trash"></span>
 												</button>
 											</div>
-											-->
+											
 										</div>
 									</div>	
 								</div>		

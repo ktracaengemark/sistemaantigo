@@ -1,7 +1,3 @@
-<?php if (isset($msg)) echo $msg; ?>
-
-<div class="col-sm-offset-2 col-md-8 ">		
-
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
   <div class="container-fluid">
 	<div class="navbar-header">
@@ -15,8 +11,8 @@
 		<ul class="nav navbar-nav navbar-center">
 			<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 				<div class="btn-group " role="group" aria-label="...">
-					<button  class="btn btn-lg btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-						<span class="glyphicon glyphicon-search"></span> Pesquisar
+					<button  class="btn btn-lg btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+						<span class="glyphicon glyphicon-filter"></span> Filtros
 					</button>
 				</div>				
 				<div class="btn-group " role="group" aria-label="...">
@@ -36,8 +32,11 @@
 	</div>
   </div>
 </nav>	
+
+<?php if (isset($msg)) echo $msg; ?>
+
+<div class="col-sm-offset-2 col-md-8 ">		
 	<?php echo validation_errors(); ?>
-		
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<span class="glyphicon glyphicon-usd"></span> Produtos & Valores
@@ -62,8 +61,8 @@
 				<div class="form-group">	
 					<div class="row text-left">
 						<div class="col-md-12">
-							<label for="Ordenamento">Desccrição</label>
-							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+							<label for="Ordenamento">Produto</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
 									id="Produtos" name="Produtos">
 								<?php
 								foreach ($select['Produtos'] as $key => $row) {
@@ -226,7 +225,7 @@
 						</button>
 					</div>
 				</div>
-				<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 6 )) { ?>
+				<?php if ($_SESSION['log']['NivelEmpresa'] <= 4) { ?>
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
 						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar3" role="button">

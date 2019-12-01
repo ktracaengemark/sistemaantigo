@@ -28,8 +28,8 @@
 				<div class="form-group">	
 					<div class="row text-left">
 						<div class="col-md-12">
-							<label for="Ordenamento">Desccrição</label>
-							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+							<label for="Ordenamento">Produto</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
 									id="Produtos" name="Produtos">
 								<?php
 								foreach ($select['Produtos'] as $key => $row) {
@@ -192,7 +192,7 @@
 						</button>
 					</div>
 				</div>
-				<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 6 )) { ?>
+				<?php if ($_SESSION['log']['NivelEmpresa'] <= 3) { ?>
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
 						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar1" role="button">

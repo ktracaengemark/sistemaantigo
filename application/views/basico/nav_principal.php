@@ -125,7 +125,7 @@
 							</div>																				
 							<?php } ?>
 						</li>
-						
+						<!--
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">						
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -140,6 +140,7 @@
 									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Outras Empresas</a></li>
 								</ul>
 							</div>
+							
 							<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) && ($_SESSION['log']['idSis_Empresa'] != 5))  { ?>
 							<div class="btn-group" role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/loginempresa"> 	
@@ -148,6 +149,7 @@
 									</button>
 								</a>	
 							</div>
+							
 							<?php } else if ($_SESSION['log']['idSis_Empresa'] != 5){?>
 							<div class="btn-group" role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/loginempresa"> 	
@@ -157,6 +159,29 @@
 								</a>	
 							</div>
 							<?php } ?>
+						</li>
+						-->
+						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">								
+							<div class="btn-group">
+								<button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-home"></span> enkontraki
+									<span class="caret"></span>
+									<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) && ($_SESSION['log']['idSis_Empresa'] != 5))  { ?>
+										<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
+									<?php } else if ($_SESSION['log']['idSis_Empresa'] != 5){?>
+										Renovar !!!
+									<?php } ?>
+								</button>
+								<ul class="dropdown-menu" role="menu">							
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+									<li><a href="<?php echo base_url() ?>relatorio/loginempresa"><span class="glyphicon glyphicon-pencil"></span> Renovar Assinatura</a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas de Negócios</a></li>
+									<li role="separator" class="divider"></li>									
+									<?php } ?>
+									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Outras Empresas</a></li>
+								</ul>
+							</div>
 						</li>	
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">		
 							<div class="btn-group " role="group" aria-label="...">

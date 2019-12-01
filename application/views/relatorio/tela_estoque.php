@@ -75,6 +75,7 @@
 				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Produtos</h4>
 			</div>
 			<div class="modal-footer">
+
 				<div class="form-group">
 					<div class="row text-left">
 						<div class="col-md-4">
@@ -91,9 +92,28 @@
 								}
 								?>
 							</select>
-						</div>					
-						<div class="col-md-8">
-							<label for="Ordenamento">Desccrição</label>
+						</div>
+						<div class="col-md-4">
+							<label for="Ordenamento">Tipo</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="Prodaux2" name="Prodaux2">
+								<?php
+								foreach ($select['Prodaux2'] as $key => $row) {
+									if ($query['Prodaux2'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row text-left">
+						<div class="col-md-12">
+							<label for="Ordenamento">Produto</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 									id="Produtos" name="Produtos">
 								<?php
@@ -108,13 +128,13 @@
 							</select>
 						</div>
 					</div>
-				</div>
+				</div>				
 				<div class="form-group">
-					<div class="row text-left">
-						<div class="col-md-12">
+					<div class="row text-left">						
+						<div class="col-md-8">
 							<label for="Ordenamento">Ordenamento:</label>
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 											id="Campo" name="Campo">
 										<?php
@@ -129,7 +149,7 @@
 									</select>
 								</div>
 
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 											id="Ordenamento" name="Ordenamento">
 										<?php
@@ -181,21 +201,6 @@
 								<?php
 								foreach ($select['Prodaux1'] as $key => $row) {
 									if ($query['Prodaux1'] == $key) {
-										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-									} else {
-										echo '<option value="' . $key . '">' . $row . '</option>';
-									}
-								}
-								?>
-							</select>
-						</div>
-						<div class="col-md-4">
-							<label for="Ordenamento">Aux2</label>
-							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-									id="Prodaux2" name="Prodaux2">
-								<?php
-								foreach ($select['Prodaux2'] as $key => $row) {
-									if ($query['Prodaux2'] == $key) {
 										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 									} else {
 										echo '<option value="' . $key . '">' . $row . '</option>';

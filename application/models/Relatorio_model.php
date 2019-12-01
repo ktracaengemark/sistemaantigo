@@ -2058,12 +2058,14 @@ class Relatorio_model extends CI_Model {
             'SELECT
                 TP.idTab_Produto,
                 TP.CodProd,
-                CONCAT(IFNULL(TP.Produtos,"")) AS Produtos,
-                TP1.Prodaux1,
+                CONCAT(IFNULL(TP.Produtos,""), " -- ", IFNULL(TV.Convdesc,"")) AS Produtos,
+                TV.Convdesc,
+				TP1.Prodaux1,
                 TP2.Prodaux2,
                 TP3.Prodaux3
             FROM
                 Tab_Produto AS TP
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produto = TP.idTab_Produto
                     LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
@@ -2073,7 +2075,8 @@ class Relatorio_model extends CI_Model {
                 ' . $data['Produtos'] . '
                 ' . $data['Prodaux1'] . '
                 ' . $data['Prodaux2'] . '
-                ' . $data['Prodaux3'] . '
+                ' . $data['Prodaux3'] . ' AND
+				TV.idTab_Produto = TP.idTab_Produto
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . ''
         );

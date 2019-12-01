@@ -48,7 +48,7 @@
 											</button>
 										</div>
 									</div>
-									<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 6 )) { ?>
+									<?php if ($_SESSION['log']['NivelEmpresa'] <= 3) { ?>
 									<div class="form-group col-md-4 text-right">
 										<div class="form-footer">		
 											<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar1" role="button">

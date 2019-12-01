@@ -3091,12 +3091,6 @@ $(document).ready(function () {
                 <div class="panel panel-info">\
                     <div class="panel-heading">\
                         <div class="row">\
-                            <div class="col-md-6">\
-                                <label for="idTab_Produto">Produto:</label><br>\
-                                <select class="form-control Chosen" id="listadinamicab'+pc+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+pc+',\'Produto\')" name="idTab_Produto'+pc+'">\
-                                    <option value="">-- Selecione uma opção --</option>\
-                                </select>\
-                            </div>\
                             <div class="col-md-2">\
                                 <label for="QtdProduto">Qtd:</label><br>\
                                 <div class="input-group">\
@@ -3104,6 +3098,12 @@ $(document).ready(function () {
                                         onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
                                         name="QtdProduto'+pc+'" value="">\
                                 </div>\
+                            </div>\
+							<div class="col-md-6">\
+                                <label for="idTab_Produto">Produto:</label><br>\
+                                <select class="form-control Chosen" id="listadinamicab'+pc+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+pc+',\'Produto\')" name="idTab_Produto'+pc+'">\
+                                    <option value="">-- Selecione uma opção --</option>\
+                                </select>\
                             </div>\
 							<div class="col-md-2">\
                                 <label for="ValorProduto">Valor:</label><br>\
@@ -3124,13 +3124,12 @@ $(document).ready(function () {
                             </div>\
                         </div>\
 						<div class="row">\
-							<div class="col-md-3"></div>\
+							<div class="col-md-5"></div>\
 							<div class="col-md-3">\
 								<label for="ObsProduto'+pc+'">Obs:</label><br>\
 								<input type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
 									   name="ObsProduto'+pc+'" value="">\
 							</div>\
-							<div class="col-md-2"></div>\
 							<div class="col-md-3">\
 								<label for="DataValidadeProduto'+pc+'">Validade:</label>\
 								<div class="input-group DatePicker">\

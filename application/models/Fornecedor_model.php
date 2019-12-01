@@ -223,7 +223,7 @@ class Fornecedor_model extends CI_Model {
             $array = $this->db->query(					
 				'SELECT                
 				idApp_Fornecedor,
-				CONCAT(TipoFornec, " --- ", NomeFornecedor) AS NomeFornecedor				
+				CONCAT(NomeFornecedor) AS NomeFornecedor				
             FROM
                 App_Fornecedor
             WHERE
@@ -236,7 +236,7 @@ class Fornecedor_model extends CI_Model {
             $query = $this->db->query(
                 'SELECT                
 				idApp_Fornecedor,
-				CONCAT(TipoFornec, " --- ", NomeFornecedor) AS NomeFornecedor				
+				CONCAT(NomeFornecedor) AS NomeFornecedor				
             FROM
                 App_Fornecedor
             WHERE

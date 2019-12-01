@@ -165,28 +165,32 @@ class Prodaux2_model extends CI_Model {
             $array = $this->db->query(
                 'SELECT                
 				idTab_Prodaux2,
-				CONCAT(Abrev2, " - " , Prodaux2) AS Prodaux2,
+				CONCAT(Prodaux2, " - " , idTab_Prodaux2) AS Prodaux2,
 				Abrev2
             FROM
                 Tab_Prodaux2
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
-                ORDER BY Prodaux2 ASC'
-    );
+			ORDER BY 
+				Prodaux2 ASC,
+				idTab_Prodaux2
+    ');
         } else {
             $query = $this->db->query(
                 'SELECT                
 				idTab_Prodaux2,
-				CONCAT(Abrev2, " - " , Prodaux2) AS Prodaux2,
+				CONCAT(Prodaux2, " - " , idTab_Prodaux2) AS Prodaux2,
 				Abrev2
             FROM
                 Tab_Prodaux2
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
-                ORDER BY Prodaux2 ASC'
-    );
+			ORDER BY 
+				Prodaux2 ASC,
+				idTab_Prodaux2
+    ');
 
             $array = array();
             foreach ($query->result() as $row) {

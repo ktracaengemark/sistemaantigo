@@ -40,12 +40,15 @@
 										</div>
 										<div class="col-md-6">
 											<label for="idApp_Cliente">Cliente:*</label>
-											<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>cliente/cadastrar/cliente" role="button">
+											<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>cliente/cadastrar3" role="button">
 												<span class="glyphicon glyphicon-plus"></span> <b>Cliente</b>
 											</a>
+											<button class="btn btn-xs btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+												<span class="glyphicon glyphicon-refresh"></span> Recarregar
+											</button>
 											<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 													id="idApp_Cliente" autofocus name="idApp_Cliente">
-												<!--<option value="">-- Selecione um Cliente --</option>-->
+												<option value="">-- Selecione um Cliente --</option>
 												<?php
 												foreach ($select['idApp_Cliente'] as $key => $row) {
 													if ($query['idApp_Cliente'] == $key) {

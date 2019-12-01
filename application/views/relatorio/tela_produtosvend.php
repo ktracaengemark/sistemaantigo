@@ -242,7 +242,7 @@
 									</button>
 								</div>
 								<div class="col-md-2 text-right">											
-										<a class="btn btn-lg btn-danger" href="<?php echo base_url() ?>relatorio/clientes" role="button"> 
+										<a class="btn btn-lg btn-danger" href="<?php echo base_url() ?>orcatrata/cadastrar3" role="button"> 
 											<span class="glyphicon glyphicon-plus"></span> Nova Venda
 										</a>
 								</div>								
