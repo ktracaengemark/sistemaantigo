@@ -1044,8 +1044,7 @@
 								</div>
 								</form>
 							</div>
-							<br>
-							<div class="form-group">
+
 								<div class="row">
 									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
 									<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
@@ -1101,7 +1100,7 @@
 
 									<?php } ?>
 								</div>
-							</div>
+
 						</div>
 					</div>
 				</div>

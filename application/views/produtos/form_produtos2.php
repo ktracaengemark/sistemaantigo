@@ -149,7 +149,7 @@
 						</div>
 						<div class="row">									
 							<div class="col-md-3">
-								<label for="Prodaux3">Categoria</label>
+								<label for="Prodaux3">Categ.</label>
 								<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>prodaux3/cadastrar3" role="button"> 
 									<span class="glyphicon glyphicon-plus"></span> <b>Cat.</b>
 								</a>

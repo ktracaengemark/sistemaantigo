@@ -3088,7 +3088,7 @@ $(document).ready(function () {
 
         $(".input_fields_wrap9").append('\
             <div class="form-group" id="9div'+pc+'">\
-                <div class="panel panel-info">\
+                <div class="panel panel-success">\
                     <div class="panel-heading">\
                         <div class="row">\
                             <div class="col-md-2">\
@@ -3204,12 +3204,6 @@ $(document).ready(function () {
 				<div class="panel panel-warning">\
 					<div class="panel-heading">\
 						<div class="row">\
-							<div class="col-md-6">\
-								<label for="idTab_Servico">Produto:</label><br>\
-								<select class="form-control Chosen" id="listadinamica'+ps+'" onchange="buscaValorDevTabelas(this.value,this.name,\'Valor\','+ps+',\'Produto\')" name="idTab_Servico'+ps+'">\
-									<option value="">-- Selecione uma opção --</option>\
-								</select>\
-							</div>\
 							<div class="col-md-2">\
 								<label for="QtdServico">Qtd:</label><br>\
 								<div class="input-group">\
@@ -3217,6 +3211,12 @@ $(document).ready(function () {
 										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
 										name="QtdServico'+ps+'" value="">\
 								</div>\
+							</div>\
+							<div class="col-md-6">\
+								<label for="idTab_Servico">Produto:</label><br>\
+								<select class="form-control Chosen" id="listadinamica'+ps+'" onchange="buscaValorDevTabelas(this.value,this.name,\'Valor\','+ps+',\'Produto\')" name="idTab_Servico'+ps+'">\
+									<option value="">-- Selecione uma opção --</option>\
+								</select>\
 							</div>\
 							<div class="col-md-2">\
 								<label for="ValorServico">Valor:</label><br>\
@@ -3237,13 +3237,12 @@ $(document).ready(function () {
 							</div>\
 						</div>\
 						<div class="row">\
-							<div class="col-md-3"></div>\
+							<div class="col-md-5"></div>\
 							<div class="col-md-3">\
 								<label for="ObsServico'+ps+'">Obs:</label><br>\
 								<input type="text" class="form-control" id="ObsServico'+ps+'" maxlength="250"\
 									   name="ObsServico'+ps+'" value="">\
 							</div>\
-							<div class="col-md-2"></div>\
 							<div class="col-md-3">\
 								<label for="DataValidadeServico'+ps+'">Validade:</label>\
 								<div class="input-group DatePicker">\
