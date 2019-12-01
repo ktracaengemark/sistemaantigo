@@ -72,7 +72,7 @@
 							</div>
 							<div class="col-md-2 text-left">
 								<label for="Atividade">Ativ.: *</label>
-								<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>atividade/cadastrar/atividade" role="button"> 
+								<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>atividade/cadastrar3" role="button"> 
 									<span class="glyphicon glyphicon-plus"></span> <b>Ativ.</b>
 								</a>
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
