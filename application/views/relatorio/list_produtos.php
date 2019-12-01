@@ -46,8 +46,8 @@
 
 					<thead>
 						<tr>                       																	
-							<!--<th class="active">Id.</th>-->
-							<th class="active">Cod.</th>
+							<!--<th class="active">Id.</th>
+							<th class="active">Cod.</th>-->
 							<th class="active">Categoria</th>							
 							<th class="active">Tipo</th>
 							<th class="active">Produto</th>
@@ -74,7 +74,7 @@
 							#echo '<tr>';
 							echo '<tr class="clickable-row" data-href="' . base_url() . 'produtos/alterar/' . $row['idTab_Produto'] . '">';
 								#echo '<td>' . $row['idTab_Produto'] . '</td>';
-								echo '<td>' . $row['CodProd'] . '</td>';
+								#echo '<td>' . $row['CodProd'] . '</td>';
 								echo '<td>' . $row['Prodaux3'] . '</td>';								
 								echo '<td>' . $row['Prodaux2'] . '</td>';
 								echo '<td>' . $row['Produtos'] . '</td>';

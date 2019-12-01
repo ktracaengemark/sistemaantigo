@@ -142,22 +142,6 @@
 										?>
 									</select>
 								</div>
-								<div class="col-md-2">
-									<label for="Prodaux2">Aux2:</label>
-									<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-											id="Prodaux2" name="Prodaux2">
-										<option value="">-- Selecione uma opção --</option>
-										<?php
-										foreach ($select['Prodaux2'] as $key => $row) {
-											if ($produtos['Prodaux2'] == $key) {
-												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-												echo '<option value="' . $key . '">' . $row . '</option>';
-											}
-										}
-										?>
-									</select>
-								</div>
 								-->
 								<?php } ?>
 							</div>
@@ -184,7 +168,26 @@
 									}
 									?>
 								</select>
-							</div>																		
+							</div>
+							<div class="col-md-2">
+								<label for="Prodaux2">Tipo:</label>
+									<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>prodaux2/cadastrar3" role="button"> 
+										<span class="glyphicon glyphicon-plus"></span> <b>Tipo</b>
+									</a>								
+								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+										id="Prodaux2" name="Prodaux2">
+									<option value="">-- Selecione uma opção --</option>
+									<?php
+									foreach ($select['Prodaux2'] as $key => $row) {
+										if ($produtos['Prodaux2'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>							
 							<div class="col-md-4">
 								<label for="Produtos">Produto:*</label><br>
 								<input type="text" class="form-control" maxlength="200"
@@ -219,12 +222,8 @@
 					</div>	
 				</div>		
 			</div>
-
-									
 			<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
 				<div class="panel panel-primary">
-
-
 					<div id="collapse3" class="panel-collapse" role="tabpanel" aria-labelledby="heading3" aria-expanded="false">
 						<div class="panel-body">
 							<div class="form-group">
@@ -248,7 +247,6 @@
 				</div>
 			</div>
 			<hr>
-
 			<div class="form-group">
 				<div class="row">
 					<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->

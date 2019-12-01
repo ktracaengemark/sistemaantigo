@@ -1508,6 +1508,7 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'Produtos',
+            'CodProd',			
             'DataInicio',
             'DataFim',
 			'Prodaux1',
@@ -1553,6 +1554,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
+			$data['bd']['CodProd'] = $data['query']['CodProd'];			
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
 			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];

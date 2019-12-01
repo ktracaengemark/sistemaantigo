@@ -308,8 +308,8 @@ class Produtos extends CI_Controller {
           exit ();
           */
 
-        $data['q'] = $this->Produtos_model->lista_produtos(TRUE);
-        $data['list'] = $this->load->view('produtos/list_produtos', $data, TRUE);
+        #$data['q'] = $this->Produtos_model->lista_produtos(TRUE);
+        #$data['list'] = $this->load->view('produtos/list_produtos', $data, TRUE);
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {

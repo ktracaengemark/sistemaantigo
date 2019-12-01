@@ -4,7 +4,7 @@
 
 			<div>
 				<table class="table table-bordered table-condensed table-striped">
-					
+										
 					<thead>
 						<tr>
 							<!--<th class="active text-left">Código</th>-->
@@ -19,19 +19,7 @@
 							<th class="active text-center">QTD ESTOQUE</th>
 						</tr>
 					</thead>
-					<!--
-					<thead>
-						<tr>
-							<th colspan="2" class="active"></th>
-							<th colspan="2" class="active text-right">Total de Produtos:</th>
-							<th colspan="1" class="active"><?php #echo $report->soma->somaqtdcompra ?></th>
-							<th colspan="1" class="active"><?php #echo $report->soma->somaqtdvenda ?></th>
-							<th colspan="1" class="active"><?php #echo $report->soma->somaqtddevvenda ?></th>
-							<th colspan="1" class="active"><?php #echo $report->soma->somaqtddevcompra ?></th>							
-							<th colspan="1" class="active"><?php #echo $report->soma->somaqtdestoque ?></th>
-						</tr>
-					</thead>
-					-->
+
 					<tbody>
 
 						<?php
@@ -59,8 +47,8 @@
 					</tbody>
 					<tfoot>
 						<tr>
-							<th colspan="1" class="active"></th>
-							<th colspan="2" class="active text-right">Total de Produtos:</th>
+							<!--<th colspan="1" class="active"></th>-->
+							<th colspan="3" class="active text-right">Total de Produtos:</th>
 							<th colspan="1" class="active"><?php echo $report->soma->somaqtdcompra ?></th>
 							<th colspan="1" class="active"><?php echo $report->soma->somaqtdvenda ?></th>
 							<th colspan="1" class="active"><?php echo $report->soma->somaqtddevvenda ?></th>

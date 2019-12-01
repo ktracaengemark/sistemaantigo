@@ -117,9 +117,9 @@
 						<div class="row">									
 							<div class="col-md-3">
 								<label for="Prodaux3">Categoria</label>
-									<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>prodaux3/cadastrar3" role="button"> 
-										<span class="glyphicon glyphicon-plus"></span> <b>Categoria</b>
-									</a>
+								<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>prodaux3/cadastrar3" role="button"> 
+									<span class="glyphicon glyphicon-plus"></span> <b>Categoria</b>
+								</a>									
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Prodaux3" name="Prodaux3">
 									<option value="">-- Selecione uma opção --</option>
@@ -240,7 +240,7 @@
 							?>
 
 							</div>
-							
+							<!--
 							<div class="form-group">
 								<div class="row">
 									<div class="col-md-4">
@@ -250,7 +250,7 @@
 									</div>
 								</div>
 							</div>
-							
+							-->
 						</div>
 					</div>
 				</div>

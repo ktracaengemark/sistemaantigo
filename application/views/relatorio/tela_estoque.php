@@ -6,11 +6,14 @@
 	
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<span class="glyphicon glyphicon-pencil"></span> Estoque de Produtos
 			<div class="btn-group " role="group" aria-label="...">
-				<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-					<span class="glyphicon glyphicon-filter"></span>Filtros
-				</button>
+				<div class="row text-left">	
+					<div class="col-md-12">
+						<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+							<span class="glyphicon glyphicon-filter"></span>Filtro de Estoque
+						</button>
+					</div>
+				</div>
 			</div>		
 		</div>		
 		<?php echo (isset($list)) ? $list : FALSE ?>	

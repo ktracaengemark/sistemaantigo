@@ -95,7 +95,7 @@
 														</button>
 													</div>
 													<div class="col-md-6 text-right">
-														<a class="btn btn-danger" href="<?php echo base_url() . 'prodaux2/excluir/' . $query['idTab_Prodaux2'] ?>" role="button">
+														<a class="btn btn-danger" href="<?php echo base_url() . 'prodaux2/excluir3/' . $query['idTab_Prodaux2'] ?>" role="button">
 															<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 														</a>
 													</div>

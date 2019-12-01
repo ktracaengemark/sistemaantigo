@@ -381,5 +381,25 @@ class Prodaux3 extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
+	public function excluir3($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+                $this->Prodaux3_model->delete_prodaux3($id);
+
+                $data['msg'] = '?m=1';
+
+				redirect(base_url() . 'prodaux3/cadastrar3/' . $data['msg']);
+				exit();
+            //}
+        //}
+
+        $this->load->view('basico/footer');
+    }
 
 }
