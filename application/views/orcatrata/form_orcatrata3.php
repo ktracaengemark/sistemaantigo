@@ -626,7 +626,7 @@
 															</div>
 															<?php echo form_error('AVAP'); ?>
 														</div>
-														<?php } ?>
+														<?php } ?>														
 														<!--
 														<br>
 														<div class="form-group">
@@ -788,8 +788,7 @@
 													<div class="panel-heading">
 														<div class="form-group">
 															<div class="row">
-																<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-																<div class="col-md-4 form-inline">
+																<div class="col-md-3 form-inline">
 																	<label for="AprovadoOrca">Aprovado?</label><br>
 																	<div class="form-group">
 																		<div class="btn-group" data-toggle="buttons">
@@ -819,8 +818,10 @@
 																			?>
 
 																		</div>
+																		<?php echo form_error('AprovadoOrca'); ?>
 																	</div>
 																</div>
+																<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 																<div class="col-md-4 form-inline">
 																	<label for="ConcluidoOrca">Concluído?</label><br>
 																	<div class="form-group">

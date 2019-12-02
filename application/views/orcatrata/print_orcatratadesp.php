@@ -431,8 +431,9 @@
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+									
 									<th class="col-md-4" scope="col">Orç.Aprovado?</th>
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 									<th class="col-md-4" scope="col">Prod. Entregue?</th>
 									<?php } ?>
 									<th class="col-md-4" scope="col">Orç.Quitado?</th>
@@ -440,8 +441,9 @@
 							</thead>
 							<tbody>
 								<tr>
-									<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+									
 									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['AprovadoOrca'], 'NS') ?></td>
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['ConcluidoOrca'], 'NS') ?></td>
 									<?php } ?>
 									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['QuitadoOrca'], 'NS') ?></td>
@@ -453,7 +455,7 @@
 							<thead>
 								<tr>
 
-									<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 									<th class="col-md-4" scope="col">Data da Entrega</th>
 									<th class="col-md-4" scope="col">Data do Quitação</th>
 									<?php } ?>
@@ -462,7 +464,7 @@
 							<tbody>
 								<tr>
 
-									<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 									<td><?php echo $orcatrata['DataConclusao'] ?></td>
 									<td><?php echo $orcatrata['DataQuitado'] ?></td>
 									<?php } ?>

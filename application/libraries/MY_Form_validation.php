@@ -75,7 +75,18 @@ class MY_Form_validation extends CI_Form_validation {
             return $digit[9] == ((int) $cpf[9]) && $digit[10] == ((int) $cpf[10]);
         }
     }
+	
+    function valid_aprovado($data) {
+        $CI = & get_instance();
 
+        $CI->form_validation->set_message('valid_aprovado', 'O <b>%s</b> Nao está Aprovado.');
+
+		if (($data) != "S") {
+			return FALSE;
+		}
+       
+    }
+	
     /**
      * valid_date
      *

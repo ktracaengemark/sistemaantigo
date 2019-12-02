@@ -789,7 +789,7 @@
 													<div class="panel-heading">
 														<div class="form-group">
 															<div class="row">
-																<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+																
 																<div class="col-md-4 form-inline">
 																	<label for="AprovadoOrca">Aprovado?</label><br>
 																	<div class="form-group">
@@ -820,8 +820,10 @@
 																			?>
 
 																		</div>
+																		<?php echo form_error('AprovadoOrca'); ?>
 																	</div>
 																</div>
+																<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 																<div class="col-md-4 form-inline">
 																	<label for="ConcluidoOrca">Concluído?</label><br>
 																	<div class="form-group">

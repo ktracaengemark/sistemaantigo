@@ -397,8 +397,24 @@
 																				<div class="col-md-2">	
 																					<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
 																				</div>
-																				
-																				<div class="col-md-4"></div>
+																				<div class="col-md-2 text-right">
+																					<button class="btn btn-md btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+																						<span class="glyphicon glyphicon-refresh"></span> Recarregar
+																					</button>
+																				</div>																																								
+																				<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 6 )) { ?>
+																				<div class="col-md-2 text-right">
+																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar3/" role="button"> 
+																						<span class="glyphicon glyphicon-plus"></span> Novo/Editar
+																					</a>
+																				</div>	
+																				<?php } else {?>
+																				<div class="col-md-2 text-right">
+																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar2/" role="button"> 
+																						<span class="glyphicon glyphicon-plus"></span> Novo/Editar
+																					</a>
+																				</div>	
+																				<?php } ?>
 																				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 																				<div class="col-md-2 text-right">
 																					<a class="btn btn-xs btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
@@ -919,7 +935,7 @@
 											<div class="panel-heading">
 												<div class="form-group">
 													<div class="row">
-														<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+														
 														<div class="col-md-4 form-inline">
 															<label for="AprovadoOrca">Aprovado?</label><br>
 															<div class="form-group">
@@ -950,8 +966,10 @@
 																	?>
 
 																</div>
+															<?php echo form_error('AprovadoOrca'); ?>	
 															</div>
 														</div>
+														<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 														<div class="col-md-4 form-inline">
 															<label for="ConcluidoOrca">Concluído?</label><br>
 															<div class="form-group">
