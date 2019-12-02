@@ -325,15 +325,15 @@
 									<div class="panel-heading">			
 										<div class="row">																					
 											<div class="col-md-4">
-												<label for="Convenio<?php echo $i ?>">Tabelas & Planos:</label>
+												<label for="Fornecedor<?php echo $i ?>">Fornecedor:</label>
 												<?php if ($i == 1) { ?>
 												<?php } ?>
 												<select data-placeholder="Selecione uma opção..." class="form-control"
-														 id="listadinamicac<?php echo $i ?>" name="Convenio<?php echo $i ?>">
+														 id="listadinamicad<?php echo $i ?>" name="Fornecedor<?php echo $i ?>">
 													<option value="">-- Selecione uma opção --</option>
 													<?php
-													foreach ($select['Convenio'] as $key => $row) {
-														if ($valor[$i]['Convenio'] == $key) {
+													foreach ($select['Fornecedor'] as $key => $row) {
+														if ($valor[$i]['Fornecedor'] == $key) {
 															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 														} else {
 															echo '<option value="' . $key . '">' . $row . '</option>';

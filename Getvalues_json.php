@@ -206,6 +206,31 @@ elseif ($_GET['q'] == 4) {
 
 }
 
+elseif ($_GET['q'] == 5) {
+
+    $result = mysql_query(
+            'SELECT
+				idApp_Fornecedor,
+				NomeFornecedor
+            FROM
+                App_Fornecedor
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY 
+				NomeFornecedor ASC'
+    );
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idApp_Fornecedor'],
+            'name' => utf8_encode($row['NomeFornecedor']),
+        );
+    }
+
+}
+
 elseif ($_GET['q'] == 7) {
 
     $result = mysql_query(

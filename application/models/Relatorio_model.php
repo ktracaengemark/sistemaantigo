@@ -5417,7 +5417,7 @@ exit();*/
 				TP3.Abrev3,
 				TP.UnidadeProduto,
 				TP.ValorCompraProduto,
-				TP.Fornecedor,
+				TV.Fornecedor,
 				TF.NomeFornecedor,
 				TCA.Categoria,
 				TCA.Abrev,
@@ -5428,7 +5428,7 @@ exit();*/
                 Tab_Produto AS TP
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produto = TP.idTab_Produto
 					LEFT JOIN Tab_Convenio AS TC ON TC.idTab_Convenio = TV.Convenio
-					LEFT JOIN App_Fornecedor AS TF ON TF.idApp_Fornecedor = TP.Fornecedor
+					LEFT JOIN App_Fornecedor AS TF ON TF.idApp_Fornecedor = TV.Fornecedor
 					LEFT JOIN Tab_Categoria AS TCA ON TCA.Abrev = TP.Categoria
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2

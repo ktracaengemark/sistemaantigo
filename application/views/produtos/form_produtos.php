@@ -92,6 +92,7 @@
 										?>
 									</select>
 								</div>
+								
 								<div class="col-md-2">
 									<label for="Prodaux1">Aux1:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -289,15 +290,15 @@
 									<div class="panel-heading">			
 										<div class="row">																					
 											<div class="col-md-4">
-												<label for="Convenio<?php echo $i ?>">Tabelas & Planos:</label>
+												<label for="Fornecedor<?php echo $i ?>">Fornecedor:</label>
 												<?php if ($i == 1) { ?>
 												<?php } ?>
 												<select data-placeholder="Selecione uma opção..." class="form-control"
-														 id="listadinamicac<?php echo $i ?>" name="Convenio<?php echo $i ?>">
+														 id="listadinamicad<?php echo $i ?>" name="Fornecedor<?php echo $i ?>">
 													<option value="">-- Selecione uma opção --</option>
 													<?php
-													foreach ($select['Convenio'] as $key => $row) {
-														if ($valor[$i]['Convenio'] == $key) {
+													foreach ($select['Fornecedor'] as $key => $row) {
+														if ($valor[$i]['Fornecedor'] == $key) {
 															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 														} else {
 															echo '<option value="' . $key . '">' . $row . '</option>';
@@ -346,11 +347,16 @@
 
 							<div class="form-group">
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-md-3">
 										<a class="add_field_button3 btn btn-xs btn-danger" onclick="adicionaValor2()">
 											<span class="glyphicon glyphicon-plus"></span> Adicionar Valor
 										</a>
 									</div>
+									<div class="col-md-3">
+										<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>fornecedor/cadastrar3" role="button"> 
+											<span class="glyphicon glyphicon-plus"></span><b> Cad.Fornecedor</b>
+										</a>
+									</div>	
 								</div>
 							</div>
 						</div>

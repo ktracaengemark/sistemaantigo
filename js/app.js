@@ -1108,7 +1108,7 @@ function adicionaValor() {
 
     //request the JSON data and parse into the select element
     $.ajax({
-        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=4',
+        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=5',
         dataType: 'JSON',
         type: "GET",
         success: function (data) {
@@ -1159,9 +1159,9 @@ function adicionaValor2() {
 				<div class="panel-heading">\
 					<div class="row">\
 						<div class="col-md-4">\
-							<label for="Convenio'+pt+'">Tabelas & Planos:</label>\
+							<label for="Fornecedor'+pt+'">Fornecedor:</label>\
 							<select data-placeholder="Selecione uma opção..." class="form-control"\
-									 id="listadinamicad'+pt+'" name="Convenio'+pt+'">\
+									 id="listadinamicad'+pt+'" name="Fornecedor'+pt+'">\
 								<option value="">-- Selecione uma opção --</option>\
 							</select>\
 						</div>\
@@ -1197,7 +1197,7 @@ function adicionaValor2() {
 
     //request the JSON data and parse into the select element
     $.ajax({
-        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=4',
+        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=5',
         dataType: 'JSON',
         type: "GET",
         success: function (data) {
@@ -1279,7 +1279,7 @@ function adicionaValorConsultor() {
 
     //request the JSON data and parse into the select element
     $.ajax({
-        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=4',
+        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=5',
         dataType: 'JSON',
         type: "GET",
         success: function (data) {
@@ -1330,9 +1330,9 @@ function adicionaValorServ() {
 				<div class="panel-heading">\
 					<div class="row">\
 						<div class="col-md-4">\
-							<label for="Convenio'+pt+'">Plano:</label>\
+							<label for="Fornecedor'+pt+'">Fornecedor:</label>\
 							<select data-placeholder="Selecione uma opção..." class="form-control"\
-									 id="listadinamicad'+pt+'" name="Convenio'+pt+'">\
+									 id="listadinamicad'+pt+'" name="Fornecedor'+pt+'">\
 								<option value="">-- Selecione uma opção --</option>\
 							</select>\
 						</div>\
@@ -1363,7 +1363,7 @@ function adicionaValorServ() {
 
     //request the JSON data and parse into the select element
     $.ajax({
-        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=4',
+        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=5',
         dataType: 'JSON',
         type: "GET",
         success: function (data) {

@@ -13,7 +13,7 @@ class Produtos extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
       
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Produtos_model', 'Prodaux1_model', 'Prodaux2_model', 'Prodaux3_model', 'Convenio_model', 'Fornecedor_model', 'Formapag_model', 'Relatorio_model'));
+        $this->load->model(array('Basico_model', 'Produtos_model', 'Prodaux1_model', 'Prodaux2_model', 'Prodaux3_model', 'Fornecedor_model', 'Fornecedor_model', 'Formapag_model', 'Relatorio_model'));
         $this->load->driver('session');
 
         
@@ -54,7 +54,7 @@ class Produtos extends CI_Controller {
 			'Categoria',
 			'UnidadeProduto',
 			'CodProd',
-			'Fornecedor',
+			#'Fornecedor',
 			'ValorCompraProduto',
 			'ValorProduto',
             'Produtos',
@@ -75,9 +75,9 @@ class Produtos extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
-            if ($this->input->post('Convenio' . $i) || $this->input->post('Convdesc' . $i) || $this->input->post('ValorProduto' . $i)) {
+            if ($this->input->post('Fornecedor' . $i) || $this->input->post('Convdesc' . $i) || $this->input->post('ValorProduto' . $i)) {
 
-                $data['valor'][$j]['Convenio'] = $this->input->post('Convenio' . $i);
+                $data['valor'][$j]['Fornecedor'] = $this->input->post('Fornecedor' . $i);
 				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['valor'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 
@@ -102,7 +102,7 @@ class Produtos extends CI_Controller {
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();		
-        $data['select']['Convenio'] = $this->Convenio_model->select_convenio();
+        #$data['select']['Fornecedor'] = $this->Fornecedor_model->select_Fornecedor();
 		$data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
@@ -117,7 +117,7 @@ class Produtos extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
 	
-		//if ($data['valor'][0]['DataValor'] || $data['valor'][0]['Convenio'])
+		//if ($data['valor'][0]['DataValor'] || $data['valor'][0]['Fornecedor'])
         if (isset($data['valor']))
             $data['tratamentosin'] = 'in';
         else
@@ -270,7 +270,7 @@ class Produtos extends CI_Controller {
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();		
-        #$data['select']['Convenio'] = $this->Convenio_model->select_convenio();
+        #$data['select']['Fornecedor'] = $this->Fornecedor_model->select_Fornecedor();
 		$data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
@@ -285,7 +285,7 @@ class Produtos extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
 	
-		//if ($data['valor'][0]['DataValor'] || $data['valor'][0]['Convenio'])
+		//if ($data['valor'][0]['DataValor'] || $data['valor'][0]['Fornecedor'])
         if (isset($data['valor']))
             $data['tratamentosin'] = 'in';
         else
@@ -414,9 +414,9 @@ class Produtos extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
-            if ($this->input->post('Convenio' . $i) || $this->input->post('Convdesc' . $i) || $this->input->post('ValorProduto' . $i)) {
+            if ($this->input->post('Fornecedor' . $i) || $this->input->post('Convdesc' . $i) || $this->input->post('ValorProduto' . $i)) {
 
-                $data['valor'][$j]['Convenio'] = $this->input->post('Convenio' . $i);
+                $data['valor'][$j]['Fornecedor'] = $this->input->post('Fornecedor' . $i);
 				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['valor'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 
@@ -441,7 +441,7 @@ class Produtos extends CI_Controller {
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();		
-        $data['select']['Convenio'] = $this->Convenio_model->select_convenio();
+        #$data['select']['Fornecedor'] = $this->Fornecedor_model->select_Fornecedor();
 		$data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
@@ -456,7 +456,7 @@ class Produtos extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
 	
-		//if ($data['valor'][0]['DataValor'] || $data['valor'][0]['Convenio'])
+		//if ($data['valor'][0]['DataValor'] || $data['valor'][0]['Fornecedor'])
         if (isset($data['valor']))
             $data['tratamentosin'] = 'in';
         else
@@ -609,7 +609,7 @@ class Produtos extends CI_Controller {
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();		
-        #$data['select']['Convenio'] = $this->Convenio_model->select_convenio();
+        #$data['select']['Fornecedor'] = $this->Fornecedor_model->select_Fornecedor();
 		$data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
@@ -624,7 +624,7 @@ class Produtos extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
 	
-		//if ($data['valor'][0]['DataValor'] || $data['valor'][0]['Convenio'])
+		//if ($data['valor'][0]['DataValor'] || $data['valor'][0]['Fornecedor'])
         if (isset($data['valor']))
             $data['tratamentosin'] = 'in';
         else
@@ -754,9 +754,9 @@ class Produtos extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
-            if ($this->input->post('Convenio' . $i) || $this->input->post('Convdesc' . $i) || $this->input->post('ValorProduto' . $i)) {
+            if ($this->input->post('Fornecedor' . $i) || $this->input->post('Convdesc' . $i) || $this->input->post('ValorProduto' . $i)) {
                 $data['valor'][$j]['idTab_Valor'] = $this->input->post('idTab_Valor' . $i);
-                $data['valor'][$j]['Convenio'] = $this->input->post('Convenio' . $i);
+                $data['valor'][$j]['Fornecedor'] = $this->input->post('Fornecedor' . $i);
 				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['valor'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 
@@ -804,7 +804,7 @@ class Produtos extends CI_Controller {
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();		
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();
-		$data['select']['Convenio'] = $this->Convenio_model->select_convenio();
+		#$data['select']['Fornecedor'] = $this->Fornecedor_model->select_Fornecedor();
         $data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
@@ -817,7 +817,7 @@ class Produtos extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
-        //if (isset($data['valor']) && ($data['valor'][0]['DataValor'] || $data['valor'][0]['Convenio']))
+        //if (isset($data['valor']) && ($data['valor'][0]['DataValor'] || $data['valor'][0]['Fornecedor']))
         if ($data['count']['PTCount'] > 0)
             $data['tratamentosin'] = 'in';
         else
@@ -889,7 +889,8 @@ class Produtos extends CI_Controller {
                 $max = count($data['update']['valor']['alterar']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['valor']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ValorProduto']));
-                }
+					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
+				}
 
                 if (count($data['update']['valor']['inserir']))
                     $data['update']['valor']['bd']['inserir'] = $this->Produtos_model->set_valor($data['update']['valor']['inserir']);
@@ -973,9 +974,9 @@ class Produtos extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
-            if ($this->input->post('Convenio' . $i) || $this->input->post('Convdesc' . $i) || $this->input->post('ValorProduto' . $i)) {
+            if ($this->input->post('Fornecedor' . $i) || $this->input->post('Convdesc' . $i) || $this->input->post('ValorProduto' . $i)) {
                 $data['valor'][$j]['idTab_Valor'] = $this->input->post('idTab_Valor' . $i);
-                $data['valor'][$j]['Convenio'] = $this->input->post('Convenio' . $i);
+                $data['valor'][$j]['Fornecedor'] = $this->input->post('Fornecedor' . $i);
 				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['valor'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 
@@ -1023,7 +1024,7 @@ class Produtos extends CI_Controller {
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();		
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();
-		$data['select']['Convenio'] = $this->Convenio_model->select_convenio();
+		#$data['select']['Fornecedor'] = $this->Fornecedor_model->select_Fornecedor();
         $data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
@@ -1036,7 +1037,7 @@ class Produtos extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
-        //if (isset($data['valor']) && ($data['valor'][0]['DataValor'] || $data['valor'][0]['Convenio']))
+        //if (isset($data['valor']) && ($data['valor'][0]['DataValor'] || $data['valor'][0]['Fornecedor']))
         if ($data['count']['PTCount'] > 0)
             $data['tratamentosin'] = 'in';
         else
@@ -1108,7 +1109,8 @@ class Produtos extends CI_Controller {
                 $max = count($data['update']['valor']['alterar']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['valor']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ValorProduto']));
-                }
+					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
+				}
 
                 if (count($data['update']['valor']['inserir']))
                     $data['update']['valor']['bd']['inserir'] = $this->Produtos_model->set_valor($data['update']['valor']['inserir']);
