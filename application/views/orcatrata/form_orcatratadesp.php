@@ -76,7 +76,7 @@
 														</div>																	
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 														<div class="col-md-4">
-															<label for="idApp_Fornecedor">Fornecedor:</label>
+															<label for="idApp_Fornecedor">Fornec.</label>
 															<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>fornecedor/cadastrar3/" role="button"> 
 																<span class="glyphicon glyphicon-plus"></span> Fornec.
 															</a>
@@ -242,14 +242,14 @@
 																					</button>
 																				</div>																				
 																				
-																				<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 6 )) { ?>
+																				<?php if (($_SESSION['log']['NivelEmpresa'] <= 3)) { ?>
 																				<div class="col-md-2 text-right">
 																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar3/" role="button"> 
 																						<span class="glyphicon glyphicon-plus"></span> Novo/Editar
 																					</a>
 																				</div>	
 																				<?php } else {?>
-																				<div class="col-md-1 text-right">
+																				<div class="col-md-2 text-right">
 																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar2/" role="button"> 
 																						<span class="glyphicon glyphicon-plus"></span> Novo/Editar
 																					</a>

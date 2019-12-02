@@ -48,7 +48,7 @@
 														</div>														
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 														<div class="col-md-4">
-															<label for="idApp_Fornecedor">Fornecedor</label>
+															<label for="idApp_Fornecedor">Fornec.</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 																	id="idApp_Fornecedor" autofocus name="idApp_Fornecedor">
 																<!--<option value="">-- Sel. Fornecedor --</option>-->
@@ -207,7 +207,7 @@
 																						<span class="glyphicon glyphicon-refresh"></span> Recarregar
 																					</button>
 																				</div>																																								
-																				<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 6 )) { ?>
+																				<?php if (($_SESSION['log']['NivelEmpresa'] <= 3)) { ?>
 																				<div class="col-md-2 text-right">
 																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar3/" role="button"> 
 																						<span class="glyphicon glyphicon-plus"></span> Novo/Editar
@@ -220,7 +220,7 @@
 																					</a>
 																				</div>	
 																				<?php } ?>
-																				<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+																				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 																				<div class="col-md-2 text-right">
 																					<a class="btn btn-sm btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
 																						<span class="glyphicon glyphicon-menu-down"></span> Devolução
@@ -245,7 +245,7 @@
 																	<input type="hidden" name="CountMax" id="CountMax" value="<?php echo $ProdutoSoma ?>">
 																</div>
 															</div>
-															<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>	
+															<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
 															<!--
 															<div class="panel-heading text-right">
 																<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">

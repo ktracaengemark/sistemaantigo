@@ -52,7 +52,7 @@
 									<div class="form-group col-md-4 text-right">
 										<div class="form-footer">		
 											<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar1" role="button">
-												<span class="glyphicon glyphicon-plus"></span> Produtos1
+												<span class="glyphicon glyphicon-plus"></span> Produtos
 											</a>
 										</div>	
 									</div>
