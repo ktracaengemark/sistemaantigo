@@ -297,6 +297,7 @@
 		</nav>
 	<?php } ?>
 <?php } ?>
+
 <?php if ($msg) echo $msg; ?>
 
 <div class="container-fluid">

@@ -8,6 +8,85 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
 				</button>
+				<li class="navbar-form">
+					<div class="btn-group">
+						<button type="button" class="btn btn-xs btn-default  dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-user"></span> Cliente <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a <?php if (preg_match("/cliente\/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+									<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<span class="glyphicon glyphicon-file"></span> Ver Dados do Cliente
+									</a>
+								</a>
+							</li>
+							<li role="separator" class="divider"></li>
+							<li>
+								<a <?php if (preg_match("/cliente\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+									<a href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<span class="glyphicon glyphicon-edit"></span> Editar Dados do Cliente
+									</a>
+								</a>
+							</li>
+							<li role="separator" class="divider"></li>
+							<li>
+								<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+									<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<span class="glyphicon glyphicon-user"></span> Contatos do Cliente
+									</a>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="btn-group">
+						<button type="button" class="btn btn-xs btn-default  dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-calendar"></span> Agenda <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a <?php if (preg_match("/consulta\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+									<a href="<?php echo base_url() . 'consulta/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<span class="glyphicon glyphicon-calendar"></span> Lista de Agendamentos
+									</a>
+								</a>
+							</li>
+							<li role="separator" class="divider"></li>
+							<li>
+								<a <?php if (preg_match("/consulta\/cadastrar1\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+									<a href="<?php echo base_url() . 'consulta/cadastrar1/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<span class="glyphicon glyphicon-plus"></span> Novo Agendamento
+									</a>
+								</a>
+							</li>
+						</ul>
+					</div>
+
+					<?php if ($_SESSION['Cliente']['idSis_Empresa'] == $_SESSION['log']['idSis_Empresa'] ) { ?>
+					<div class="btn-group">
+						<button type="button" class="btn btn-xs btn-default  dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-usd"></span> Orçs. <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a <?php if (preg_match("/orcatrata\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+									<a href="<?php echo base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<span class="glyphicon glyphicon-usd"></span> Lista de Orçamentos
+									</a>
+								</a>
+							</li>
+							<li role="separator" class="divider"></li>
+							<li>
+								<a <?php if (preg_match("/orcatrata\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+									<a href="<?php echo base_url() . 'orcatrata/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<span class="glyphicon glyphicon-plus"></span> Novo Orçamento
+									</a>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<?php } ?>									
+				</li>				
 				<!--
 				<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 					<?php echo '<small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '.</small>' ?> 
@@ -99,7 +178,8 @@
 							</ul>
 						</div>																				
 						<?php } ?>
-					</li>								
+					</li>
+					<!--
 					<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 						<div class="btn-group">
 							<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
@@ -179,40 +259,37 @@
 						</div>
 						<?php } ?>									
 					</li>
-					<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
-						<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+					-->
+					<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">								
 						<div class="btn-group">
-							<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-pencil"></span> Proced. <span class="caret"></span>
+							<button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-home"></span> enkontraki
+								<span class="caret"></span>
+								<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) && ($_SESSION['log']['idSis_Empresa'] != 5))  { ?>
+									<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
+								<?php } else if ($_SESSION['log']['idSis_Empresa'] != 5){?>
+									Renovar !!!
+								<?php } ?>
 							</button>
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<a <?php if (preg_match("/procedimento\/listarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
-										<a href="<?php echo base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-											<span class="glyphicon glyphicon-pencil"></span> Lista de Procedimentos
-										</a>
-									</a>
-								</li>
+							<ul class="dropdown-menu" role="menu">							
+								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+								<li><a href="<?php echo base_url() ?>relatorio/loginempresa"><span class="glyphicon glyphicon-pencil"></span> Renovar Assinatura</a></li>
 								<li role="separator" class="divider"></li>
-								<li>
-									<a <?php if (preg_match("/procedimento\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-										<a href="<?php echo base_url() . 'procedimento/cadastrarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-											<span class="glyphicon glyphicon-plus"></span> Novo Procedimento
-										</a>
-									</a>
-								</li>
+								<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas de Negócios</a></li>
+								<li role="separator" class="divider"></li>									
+								<?php } ?>
+								<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Outras Empresas</a></li>
 							</ul>
 						</div>
-						<?php } ?>
+					</li>	
+					<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">		
 						<div class="btn-group " role="group" aria-label="...">
-							<a <?php if (preg_match("/agenda/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-								<a href="<?php echo base_url() . 'agenda/'; ?>">
-									<button type="button" class="btn btn-lg btn-active ">
-										<span class="glyphicon glyphicon-remove"></span> Fechar
-									</button>										
-								</a>
+							<a href="<?php echo base_url(); ?>login/sair">
+								<button type="button" class="btn btn-sm btn-active ">
+									<span class="glyphicon glyphicon-log-out"></span> Sair
+								</button>
 							</a>
-						</div>
+						</div>							
 					</li>
 				</ul>
 			</div>
