@@ -120,7 +120,7 @@ class Usuario extends CI_Controller {
             $this->load->view('usuario/form_usuario', $data);
         } else {
 
-
+			$data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
 			$data['query']['QuemCad'] = $_SESSION['log']['id'];
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['id'];
 			$data['query']['NomeEmpresa'] = $_SESSION['log']['NomeEmpresa'];
