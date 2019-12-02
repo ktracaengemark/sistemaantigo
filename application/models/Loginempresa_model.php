@@ -216,6 +216,94 @@ class Loginempresa_model extends CI_Model {
 
     }
 	
+    public function set_cliente($data) {
+        #unset($data['idSisgef_Fila']);
+        /*
+          echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit();
+         */
+        $query = $this->db->insert('App_Cliente', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+
+    public function set_fornecedor($data) {
+        #unset($data['idSisgef_Fila']);
+        /*
+          echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit();
+         */
+        $query = $this->db->insert('App_Fornecedor', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+
+    public function set_produto($data) {
+        #unset($data['idSisgef_Fila']);
+        /*
+          echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit();
+         */
+        $query = $this->db->insert('Tab_Produto', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+
+    public function set_valor($data) {
+        #unset($data['idSisgef_Fila']);
+        /*
+          echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit();
+         */
+        $query = $this->db->insert('Tab_Valor', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }	
+	
     public function ativa_usuario($id, $data) {
 
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE Codigo = "' . $id . '"');

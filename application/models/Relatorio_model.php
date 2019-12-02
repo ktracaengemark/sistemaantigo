@@ -6083,7 +6083,7 @@ exit();*/
         $query = $this->db->query('
             SELECT
                 idApp_Fornecedor,
-				CONCAT(NomeFornecedor, " ", " --- ", Telefone1, " --- ", Telefone2) As NomeFornecedor
+				CONCAT(IFNULL(NomeFornecedor, ""), " --- ", IFNULL(Telefone1, "")) As NomeFornecedor
             FROM
                 App_Fornecedor
             WHERE

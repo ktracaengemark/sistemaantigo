@@ -591,6 +591,8 @@ class Login extends CI_Controller {
         } else {
 
 			#$data['query']['Empresa'] = 0;
+			$data['query']['NomeEmpresa'] = trim(mb_strtoupper($data['query']['NomeEmpresa'], 'ISO-8859-1'));
+			$data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
 			$data['query']['Funcao'] = 95;
 			$data['query']['UsuarioEmpresa'] = 1;
 			$data['query']['idSis_EmpresaFilial'] = 33;
@@ -757,6 +759,7 @@ class Login extends CI_Controller {
             $this->load->view('login/form_registrar', $data);
         } else {
 
+			$data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
 			$data['query']['idSis_Empresa'] = 5;
 			$data['query']['NomeEmpresa'] = "CONTA PESSOAL";
 			$data['query']['Permissao'] = 3;

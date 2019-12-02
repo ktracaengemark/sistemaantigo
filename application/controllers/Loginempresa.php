@@ -203,10 +203,12 @@ class Loginempresa extends CI_Controller {
             $this->load->view('loginempresa/form_registrar', $data);
         } else {
 			
+			$data['query']['NomeEmpresa'] = trim(mb_strtoupper($data['query']['NomeEmpresa'], 'ISO-8859-1'));
+			$data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));
 			$data['query']['idSis_EmpresaMatriz'] = 2;
 			$data['query']['Associado'] = 2;
 			$data['query']['PermissaoEmpresa'] = 1;
-			$data['query']['NivelEmpresa'] = 3;
+			$data['query']['NivelEmpresa'] = 4;
 			$data['query']['idTab_Modulo'] = 1;
 			$data['query']['NumUsuarios'] = 1;
             $data['query']['DataCriacao'] = $this->basico->mascara_data($data['query']['DataCriacao'], 'mysql');
@@ -271,7 +273,55 @@ class Loginempresa extends CI_Controller {
 					);
 					$data['campos'] = array_keys($data['agenda']);
 
-					$data['idApp_Agenda'] = $this->Loginempresa_model->set_agenda($data['agenda']);				
+					$data['idApp_Agenda'] = $this->Loginempresa_model->set_agenda($data['agenda']);
+
+					$data['cliente'] = array(
+						'NomeCliente' => 'AAANÔNIMO',
+						'idTab_Modulo' => "1",
+						'idSis_Usuario' => $data['idSis_Usuario'],
+						'idSis_Empresa' => $data['idSis_Empresa']
+					);
+					$data['campos'] = array_keys($data['cliente']);
+
+					$data['idApp_Cliente'] = $this->Loginempresa_model->set_cliente($data['cliente']);
+
+					$data['fornecedor'] = array(
+						'NomeFornecedor' => 'AAANÔNIMO',
+						'idTab_Modulo' => "1",
+						'idSis_Usuario' => $data['idSis_Usuario'],
+						'idSis_Empresa' => $data['idSis_Empresa']
+					);
+					$data['campos'] = array_keys($data['fornecedor']);
+
+					$data['idApp_Fornecedor'] = $this->Loginempresa_model->set_fornecedor($data['fornecedor']);
+					
+					$data['produto'] = array(
+						'Produtos' => 'Produto Nao Cadastrado',
+						'idTab_Modulo' => "1",
+						'idSis_Usuario' => $data['idSis_Usuario'],
+						'idSis_Empresa' => $data['idSis_Empresa']
+					);
+					$data['campos'] = array_keys($data['produto']);
+
+					$data['idTab_Produto'] = $this->Loginempresa_model->set_produto($data['produto']);					
+
+					if ($data['idTab_Produto'] === FALSE) {
+						$data['msg'] = '?m=2';
+						$this->load->view('loginempresa/form_loginempresa', $data);
+					} else {
+						
+							$data['valor'] = array(
+								'idTab_Produto' => $data['idTab_Produto'],
+								'idSis_Usuario' => $data['idSis_Usuario'],
+								'idSis_Empresa' => $data['idSis_Empresa'],
+								'idTab_Modulo' => "1",
+								'ValorProduto' => '0.00'
+							);
+							$data['campos'] = array_keys($data['valor']);
+
+							$data['idTab_Valor'] = $this->Loginempresa_model->set_valor($data['valor']);					
+					
+					}	
 				
 				}
 				#$this->load->library('email');
@@ -381,10 +431,12 @@ class Loginempresa extends CI_Controller {
             $this->load->view('loginempresa/form_registrar2', $data);
         } else {
 			
+			$data['query']['NomeEmpresa'] = trim(mb_strtoupper($data['query']['NomeEmpresa'], 'ISO-8859-1'));
+			$data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));			
 			$data['query']['idSis_EmpresaMatriz'] = 2;
 			$data['query']['Associado'] = $_SESSION['log']['id'];
 			$data['query']['PermissaoEmpresa'] = 1;
-			$data['query']['NivelEmpresa'] = 3;
+			$data['query']['NivelEmpresa'] = 4;
 			$data['query']['idTab_Modulo'] = 1;
 			$data['query']['NumUsuarios'] = 1;
             $data['query']['DataCriacao'] = $this->basico->mascara_data($data['query']['DataCriacao'], 'mysql');
@@ -450,6 +502,55 @@ class Loginempresa extends CI_Controller {
 					$data['campos'] = array_keys($data['agenda']);
 
 					$data['idApp_Agenda'] = $this->Loginempresa_model->set_agenda($data['agenda']);				
+				
+					$data['cliente'] = array(
+						'NomeCliente' => 'AAANÔNIMO',
+						'idTab_Modulo' => "1",
+						'idSis_Usuario' => $data['idSis_Usuario'],
+						'idSis_Empresa' => $data['idSis_Empresa']
+					);
+					$data['campos'] = array_keys($data['cliente']);
+
+					$data['idApp_Cliente'] = $this->Loginempresa_model->set_cliente($data['cliente']);
+
+					$data['fornecedor'] = array(
+						'NomeFornecedor' => 'AAANÔNIMO',
+						'idTab_Modulo' => "1",
+						'idSis_Usuario' => $data['idSis_Usuario'],
+						'idSis_Empresa' => $data['idSis_Empresa']
+					);
+					$data['campos'] = array_keys($data['fornecedor']);
+
+					$data['idApp_Fornecedor'] = $this->Loginempresa_model->set_fornecedor($data['fornecedor']);
+					
+					$data['produto'] = array(
+						'Produtos' => 'Produto Nao Cadastrado',
+						'idTab_Modulo' => "1",
+						'idSis_Usuario' => $data['idSis_Usuario'],
+						'idSis_Empresa' => $data['idSis_Empresa']
+					);
+					$data['campos'] = array_keys($data['produto']);
+
+					$data['idTab_Produto'] = $this->Loginempresa_model->set_produto($data['produto']);					
+
+					if ($data['idTab_Produto'] === FALSE) {
+						$data['msg'] = '?m=2';
+						$this->load->view('loginempresa/form_loginempresa', $data);
+					} else {
+						
+							$data['valor'] = array(
+								'idTab_Produto' => $data['idTab_Produto'],
+								'idSis_Usuario' => $data['idSis_Usuario'],
+								'idSis_Empresa' => $data['idSis_Empresa'],
+								'idTab_Modulo' => "1",
+								'ValorProduto' => '0.00'
+							);
+							$data['campos'] = array_keys($data['valor']);
+
+							$data['idTab_Valor'] = $this->Loginempresa_model->set_valor($data['valor']);					
+					
+					}				
+				
 				
 				}			
 			
