@@ -412,10 +412,11 @@
 																	<div class="panel panel-success">
 																		<div class="panel-heading text-left">
 																			<div class="row">
-																				<div class="col-md-2 text-right">
-																					<button class="btn btn-md btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-																						<span class="glyphicon glyphicon-refresh"></span> Recarregar
-																					</button>
+																				<div class="col-md-2">
+																					<a class="add_field_button9 btn btn-success"
+																							onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
+																						<span class="glyphicon glyphicon-arrow-up"></span> Adic. Produtos
+																					</a>
 																				</div>
 																				<div class="col-md-2">	
 																					<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
@@ -423,12 +424,11 @@
 																				<div class="col-md-2">	
 																					<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
 																				</div>
-																				<div class="col-md-2">
-																					<a class="add_field_button9 btn btn-success"
-																							onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
-																						<span class="glyphicon glyphicon-arrow-up"></span> Adic. Produtos
-																					</a>
-																				</div>																																								
+																				<div class="col-md-2 text-right">
+																					<button class="btn btn-md btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+																						<span class="glyphicon glyphicon-refresh"></span> Recarregar
+																					</button>
+																				</div>
 																				<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 6 )) { ?>
 																				<div class="col-md-2 text-right">
 																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar3/" role="button"> 
@@ -436,7 +436,7 @@
 																					</a>
 																				</div>	
 																				<?php } else {?>
-																				<div class="col-md-1 text-right">
+																				<div class="col-md-2 text-right">
 																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar2/" role="button"> 
 																						<span class="glyphicon glyphicon-plus"></span> Novo/Editar
 																					</a>
@@ -610,19 +610,19 @@
 																	<div class="panel panel-warning">
 																		<div class="panel-heading text-left">
 																			<div class="row">	
-																				<div class="col-md-2"></div>
+																				<div class="col-md-2 text-left">
+																					<a class="add_field_button10  btn btn-warning" 
+																							onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
+																						<span class="glyphicon glyphicon-arrow-down"></span> Rem.Produtos
+																					</a>
+																				</div>
 																				<div class="col-md-2">	
 																					<b>Produtos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
 																				</div>
 																				<div class="col-md-2">	
 																					<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
 																				</div>
-																				<div class="col-md-2 text-left">
-																					<a class="add_field_button10  btn btn-warning" 
-																							onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
-																						<span class="glyphicon glyphicon-arrow-down"></span> Rem.Produtos
-																					</a>
-																				</div>																				
+																																								
 																				<!--
 																				<div class="col-md-3 text-left">																							
 																					<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
@@ -723,16 +723,6 @@
 													</div>
 													<div class="row">
 														<div class="col-md-4">
-															<label for="DataOrca">Dta Orçam:</label>
-															<div class="input-group <?php echo $datepicker; ?>">
-																<span class="input-group-addon" disabled>
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-																<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																		name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
-															</div>
-														</div>																	
-														<div class="col-md-4">
 															<label for="FormaPagamento">Pago com:</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																	id="FormaPagamento" name="FormaPagamento">
@@ -748,7 +738,16 @@
 																?>
 															</select>
 														</div>
-
+														<div class="col-md-4">
+															<label for="DataOrca">Dta Orçam:</label>
+															<div class="input-group <?php echo $datepicker; ?>">
+																<span class="input-group-addon" disabled>
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+																<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																		name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
+															</div>
+														</div>
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 														<div class="col-md-4">
 															<label for="AVAP">Forma de Pagam.</label><br>

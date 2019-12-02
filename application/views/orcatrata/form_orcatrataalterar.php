@@ -385,20 +385,20 @@
 																	<div class="panel panel-success">
 																		<div class="panel-heading text-left">
 																			<div class="row">
-																				<div class="col-md-2"></div>
-																				<div class="col-md-2">	
-																					<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
-																				</div>
-																				<div class="col-md-2">	
-																					<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
-																				</div>
 																				<div class="col-md-2">
 																					<a class="add_field_button9 btn btn-success"
 																							onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
 																						<span class="glyphicon glyphicon-arrow-up"></span> Adic. Produtos
 																					</a>
 																				</div>
-																				<div class="col-md-2"></div>
+																				<div class="col-md-2">	
+																					<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
+																				</div>
+																				<div class="col-md-2">	
+																					<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
+																				</div>
+																				
+																				<div class="col-md-4"></div>
 																				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 																				<div class="col-md-2 text-right">
 																					<a class="btn btn-xs btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
@@ -568,19 +568,19 @@
 																	<div class="panel panel-warning">
 																		<div class="panel-heading text-left">
 																			<div class="row">	
-																				<div class="col-md-2"></div>
-																				<div class="col-md-2">	
-																					<b>Produtos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
-																				</div>
-																				<div class="col-md-2">	
-																					<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
-																				</div>
 																				<div class="col-md-2 text-left">
 																					<a class="add_field_button10  btn btn-warning" 
 																							onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
 																						<span class="glyphicon glyphicon-arrow-down"></span> Rem.Produtos
 																					</a>
 																				</div>
+																				<div class="col-md-2">	
+																					<b>Produtos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
+																				</div>
+																				<div class="col-md-2">	
+																					<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
+																				</div>
+																				
 																				<!--
 																				<div class="col-md-3 text-left">																							
 																					<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
@@ -682,16 +682,6 @@
 													</div>
 													<div class="row">
 														<div class="col-md-4">
-															<label for="DataOrca">Dta Orçam:</label>
-															<div class="input-group <?php echo $datepicker; ?>">
-																<span class="input-group-addon" disabled>
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-																<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																		name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
-															</div>
-														</div>
-														<div class="col-md-4">
 															<label for="FormaPagamento">Pago com:</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																	id="FormaPagamento" name="FormaPagamento">
@@ -706,7 +696,17 @@
 																}
 																?>
 															</select>
-														</div>																
+														</div>
+														<div class="col-md-4">
+															<label for="DataOrca">Dta Orçam:</label>
+															<div class="input-group <?php echo $datepicker; ?>">
+																<span class="input-group-addon" disabled>
+																	<span class="glyphicon glyphicon-calendar"></span>
+																</span>
+																<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																		name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
+															</div>
+														</div>
 														<div class="col-md-4">
 															<label for="AVAP">ÀVista/ ÀPrazo</label><br>
 															<div class="btn-block" data-toggle="buttons">
