@@ -1,36 +1,25 @@
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
   <div class="container-fluid">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span> 
-		</button>
-	</div>
-	<div class="collapse navbar-collapse" id="myNavbar">
-		<ul class="nav navbar-nav navbar-center">
-			<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
-				<div class="btn-group " role="group" aria-label="...">
-					<a <?php if (preg_match("/relatorio\/produtos2\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-						<a href="<?php echo base_url() . 'relatorio/produtos2/'; ?>">
-							<button type="button" class="btn btn-lg btn-info ">
-								<span class="glyphicon glyphicon-search"></span> Pesquisar
-							</button>										
-						</a>
+		<li class="navbar-form">
+
+				<a <?php if (preg_match("/relatorio\/produtos2\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+					<a href="<?php echo base_url() . 'relatorio/produtos2/'; ?>">
+						<button type="button" class="btn btn-lg btn-info ">
+							<span class="glyphicon glyphicon-search"></span> Pesquisar
+						</button>										
 					</a>
-				</div>
-				<div class="btn-group " role="group" aria-label="...">
-					<a href="javascript:window.close()">
-						<button type="button" class="btn btn-lg btn-default ">
-							<span class="glyphicon glyphicon-remove"></span> Fechar
-						</button>
-					</a>
-				</div>				
-			</li>
-		</ul>
-	</div>
+				</a>
+
+				<a href="javascript:window.close()">
+					<button type="button" class="btn btn-lg btn-default ">
+						<span class="glyphicon glyphicon-remove"></span> Fechar
+					</button>
+				</a>
+							
+		</li>
   </div>
 </nav>
+<br>
 <?php if (isset($msg)) echo $msg; ?>			
 
 <div class="col-sm-offset-2 col-md-8 ">	
@@ -381,13 +370,12 @@
 							</div>
 
 							<div class="form-group">
-								<div class="row">
-									<div class="col-md-4">
-										<a class="add_field_button3 btn btn-xs btn-danger" onclick="adicionaValor2()">
-											<span class="glyphicon glyphicon-plus"></span> Adicionar Valor
-										</a>
-									</div>
-								</div>
+								<a class="add_field_button3 btn btn-xs btn-danger" onclick="adicionaValor2()">
+									<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Valor
+								</a>
+								<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>fornecedor/cadastrar3" role="button"> 
+									<span class="glyphicon glyphicon-plus"></span><b> Cad.Forn.</b>
+								</a>
 							</div>
 						</div>
 					</div>

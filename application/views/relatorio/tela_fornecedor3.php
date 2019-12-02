@@ -1,38 +1,23 @@
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
   <div class="container-fluid">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span> 
-		</button>
-	</div>
-	<div class="collapse navbar-collapse" id="myNavbar">
-		<ul class="nav navbar-nav navbar-center">
-			<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
-				<div class="btn-group " role="group" aria-label="...">
-					<button  class="btn btn-lg btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-						<span class="glyphicon glyphicon-filter"></span> Filtros
-					</button>
-				</div>				
-				<div class="btn-group " role="group" aria-label="...">
-					<button  class="btn btn-danger btn-lg" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-						<span class="glyphicon glyphicon-plus"></span> Novo Produto
-					</button>
-				</div>
-				<div class="btn-group " role="group" aria-label="...">
-					<a href="javascript:window.close()">
-						<button type="button" class="btn btn-lg btn-default ">
-							<span class="glyphicon glyphicon-remove"></span> Fechar
-						</button>
-					</a>
-				</div>				
-			</li>
-		</ul>
-	</div>
+		<li class="navbar-form">
+			<!--
+			<button  class="btn btn-lg btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+				<span class="glyphicon glyphicon-filter"></span> Filtros
+			</button>
+			-->
+			<a  class="btn btn-danger btn-lg" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+				<span class="glyphicon glyphicon-plus"></span> Novo 
+			</a>
+			<a href="javascript:window.close()">
+				<button type="button" class="btn btn-lg btn-default ">
+					<span class="glyphicon glyphicon-remove"></span> Fechar
+				</button>
+			</a>
+		</li>
   </div>
 </nav>
-
+<br>
 <?php if ($msg) echo $msg; ?>
 <div class="col-sm-offset-1 col-md-10">				
 	<?php echo validation_errors(); ?>

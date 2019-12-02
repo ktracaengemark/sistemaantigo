@@ -346,18 +346,12 @@
 							</div>
 
 							<div class="form-group">
-								<div class="row">
-									<div class="col-md-3">
-										<a class="add_field_button3 btn btn-xs btn-danger" onclick="adicionaValor2()">
-											<span class="glyphicon glyphicon-plus"></span> Adicionar Valor
-										</a>
-									</div>
-									<div class="col-md-3">
-										<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>fornecedor/cadastrar3" role="button"> 
-											<span class="glyphicon glyphicon-plus"></span><b> Cad.Fornecedor</b>
-										</a>
-									</div>	
-								</div>
+								<a class="add_field_button3 btn btn-xs btn-danger" onclick="adicionaValor2()">
+									<span class="glyphicon glyphicon-arrow-up"></span> Adic.Valor
+								</a>
+								<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>fornecedor/cadastrar3" role="button"> 
+									<span class="glyphicon glyphicon-plus"></span><b> Cad.Forn.</b>
+								</a>
 							</div>
 						</div>
 					</div>

@@ -8,6 +8,32 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
 				</button>
+				<li class="navbar-form">
+					<a href="javascript:window.print()">
+						<button type="button" class="btn btn-sm btn-default ">
+							<span class="glyphicon glyphicon-print"></span> Imprimir
+						</button>
+					</a>
+					<a <?php if (preg_match("/orcatrata\/alterar2\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+						<a href="<?php echo base_url() . 'orcatrata/alterar2/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
+							<button type="button" class="btn btn-sm btn-default">
+								<span class="glyphicon glyphicon-edit"></span> Editar
+							</button>										
+						</a>
+					</a>
+					<a <?php if (preg_match("/orcatrata\/cadastrar3\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+						<a href="<?php echo base_url() . 'orcatrata/cadastrar3/'; ?>">
+							<button type="button" class="btn btn-sm btn-active ">
+								<span class="glyphicon glyphicon-plus"></span> Novo
+							</button>										
+						</a>
+					</a>
+					<!--
+					<button  type="button" class="btn btn-sm btn-default" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+						<span class="glyphicon glyphicon-trash"></span> Excluir
+					</button>
+					-->
+				</li>
 				<!--
 				<a class="navbar-brand" href="<?php echo base_url() ?>usuario2/prontuario/<?php echo $_SESSION['log']['id']; ?>"> 
 					 <?php echo $_SESSION['log']['Nome2']; ?>./<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
@@ -34,13 +60,13 @@
 						
 						<div class="btn-group " role="group" aria-label="...">
 							<a href="<?php echo base_url(); ?>relatorio/clientes">
-								<button type="button" class="btn btn-sm btn-primary ">
+								<button type="button" class="btn btn-sm btn-warning ">
 									<span class="glyphicon glyphicon-user"></span> Clientes
 								</button>
 							</a>
 						</div>
 						<div class="btn-group">
-							<button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown">
+							<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
 								<span class="glyphicon glyphicon-user"></span> Fornecedores <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">							
@@ -104,40 +130,29 @@
 						</div>																				
 						<?php } ?>
 					</li>
-					<!--
-					<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">						
+					<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">								
 						<div class="btn-group">
-							<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-home"></span> enkontraki <span class="caret"></span>
+							<button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-home"></span> enkontraki
+								<span class="caret"></span>
+								<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) && ($_SESSION['log']['idSis_Empresa'] != 5))  { ?>
+									<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
+								<?php } else if ($_SESSION['log']['idSis_Empresa'] != 5){?>
+									Renovar !!!
+								<?php } ?>
 							</button>
 							<ul class="dropdown-menu" role="menu">							
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
-								
+								<li><a href="<?php echo base_url() ?>relatorio/loginempresa"><span class="glyphicon glyphicon-pencil"></span> Renovar Assinatura</a></li>
+								<li role="separator" class="divider"></li>
 								<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas de Negócios</a></li>
 								<li role="separator" class="divider"></li>									
 								<?php } ?>
 								<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Outras Empresas</a></li>
 							</ul>
 						</div>
-						<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) && ($_SESSION['log']['idSis_Empresa'] != 5))  { ?>
-						<div class="btn-group" role="group" aria-label="...">
-							<a href="<?php echo base_url(); ?>relatorio/loginempresa"> 	
-								<button type="button" class="btn btn-sm btn-default ">Renovar em: 
-									<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
-								</button>
-							</a>	
-						</div>
-						<?php } else if ($_SESSION['log']['idSis_Empresa'] != 5){?>
-						<div class="btn-group" role="group" aria-label="...">
-							<a href="<?php echo base_url(); ?>relatorio/loginempresa"> 	
-								<button type="button" class="btn btn-sm btn-default ">Renovar !!! 
-									
-								</button>
-							</a>	
-						</div>
-						<?php } ?>
 					</li>
-					-->
+					<!--
 					<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 						<div class="btn-group " role="group" aria-label="...">
 							<a href="javascript:window.print()">
@@ -160,19 +175,17 @@
 								<span class="glyphicon glyphicon-trash"></span> Excluir
 							</button>
 						</div>																				
-					</li>						
-					<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+					</li>
+					-->
+					<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">		
 						<div class="btn-group " role="group" aria-label="...">
-							<a <?php if (preg_match("/orcatrata\/cadastrar3\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-								<a href="<?php echo base_url() . 'orcatrata/cadastrar3/'; ?>">
-									<button type="button" class="btn btn-lg btn-active ">
-										<span class="glyphicon glyphicon-remove"></span> Fechar
-									</button>										
-								</a>
+							<a href="<?php echo base_url(); ?>login/sair">
+								<button type="button" class="btn btn-sm btn-active ">
+									<span class="glyphicon glyphicon-log-out"></span> Sair
+								</button>
 							</a>
-						</div>
-						<div class="btn-group" role="group" aria-label="..."> </div>							
-					</li>						
+						</div>							
+					</li>
 				</ul>
 			</div>
 		  </div>

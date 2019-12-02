@@ -1,36 +1,22 @@
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
   <div class="container-fluid">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span> 
-		</button>
-	</div>
-	<div class="collapse navbar-collapse" id="myNavbar">
-		<ul class="nav navbar-nav navbar-center">
-			<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
-				<div class="btn-group " role="group" aria-label="...">
-					<a <?php if (preg_match("/relatorio\/clientes3\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-						<a href="<?php echo base_url() . 'relatorio/clientes3/'; ?>">
-							<button type="button" class="btn btn-lg btn-info ">
-								<span class="glyphicon glyphicon-search"></span> Pesquisar
-							</button>										
-						</a>
-					</a>
-				</div>
-				<div class="btn-group " role="group" aria-label="...">
-					<a href="javascript:window.close()">
-						<button type="button" class="btn btn-lg btn-default ">
-							<span class="glyphicon glyphicon-remove"></span> Fechar
-						</button>
-					</a>
-				</div>				
-			</li>
-		</ul>
-	</div>
+		<li class="navbar-form">
+			<a <?php if (preg_match("/relatorio\/clientes3\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+				<a href="<?php echo base_url() . 'relatorio/clientes3/'; ?>">
+					<button type="button" class="btn btn-lg btn-info ">
+						<span class="glyphicon glyphicon-search"></span> Pesquisar
+					</button>										
+				</a>
+			</a>
+			<a href="javascript:window.close()">
+				<button type="button" class="btn btn-lg btn-default ">
+					<span class="glyphicon glyphicon-remove"></span> Fechar
+				</button>
+			</a>				
+		</li>
   </div>
 </nav>
+<br>
 <?php if (isset($msg)) echo $msg; ?>
 
 <div class="container-fluid">
