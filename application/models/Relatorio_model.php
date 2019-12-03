@@ -925,6 +925,132 @@ class Relatorio_model extends CI_Model {
 
     }
 
+    public function list1_receitasfiado($data, $completo) {
+
+        $data['NomeCliente'] = (($_SESSION['log']['idSis_Empresa'] != 5) && ($data['NomeCliente'])) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
+        $data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$data['Dia'] = ($data['Dia']) ? ' AND DAY(OT.DataVencimentoOrca) = ' . $data['Dia'] : FALSE;
+		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(OT.DataVencimentoOrca) = ' . $data['Mesvenc'] : FALSE;
+		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(OT.DataVencimentoOrca) = ' . $data['Ano'] : FALSE;
+		$data['Orcarec'] = ($data['Orcarec']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcarec'] : FALSE;		
+		$data['TipoFinanceiroR'] = ($data['TipoFinanceiroR']) ? ' AND TR.idTab_TipoFinanceiro = ' . $data['TipoFinanceiroR'] : FALSE;
+		$filtro1 = ($data['AprovadoOrca']) ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
+        $filtro2 = ($data['QuitadoOrca']) ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrca']) ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
+		$filtro5 = ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
+		$filtro6 = ($data['AVAP']) ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
+		$filtro7 = ($data['FormaPag']) ? 'OT.FormaPagamento = "' . $data['FormaPag'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		
+        $query = $this->db->query('
+            SELECT
+                C.NomeCliente,
+				C.CelularCliente,
+				CONCAT(IFNULL(TR.TipoFinanceiro,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Descricao,"")) AS Descricao,
+				OT.idApp_OrcaTrata,
+                OT.AprovadoOrca,
+                OT.DataOrca,
+				OT.DataEntradaOrca,
+				OT.DataPrazo,
+                OT.ValorOrca,
+				OT.ValorDev,				
+				OT.ValorEntradaOrca,
+				OT.ValorRestanteOrca,
+				OT.DataVencimentoOrca,
+                OT.ConcluidoOrca,
+                OT.QuitadoOrca,
+                OT.DataConclusao,
+                OT.DataQuitado,
+				OT.DataRetorno,
+				OT.idTab_TipoRD,
+				OT.FormaPagamento,
+				OT.ObsOrca,
+				OT.QtdParcelasOrca,
+				MD.Modalidade,
+				VP.Abrev3,
+				VP.AVAP,
+				TFP.FormaPag
+            FROM
+                App_OrcaTrata AS OT
+				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
+				LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
+				LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
+				LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+            WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				OT.QuitadoOrca = "N" AND
+				' . $permissao . '
+				' . $filtro1 . '
+
+				' . $filtro3 . '
+				' . $filtro5 . '
+				' . $filtro6 . '
+				' . $filtro7 . '
+				OT.idTab_TipoRD = "2"
+                ' . $data['TipoFinanceiroR'] . '
+				' . $data['Orcarec'] . '
+				' . $data['Dia'] . ' 
+				' . $data['Mesvenc'] . ' 
+				' . $data['Ano'] . ' 				
+				' . $data['NomeCliente'] . '
+            ORDER BY
+                ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
+
+        ');
+
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+          */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            $somaorcamento=0;
+			$somadesconto=0;
+			$somarestante=0;
+            foreach ($query->result() as $row) {
+				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
+				$row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
+				$row->DataPrazo = $this->basico->mascara_data($row->DataPrazo, 'barras');
+                $row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
+				$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
+                $row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
+				$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
+
+                $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
+                $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
+                $row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
+
+                $somaorcamento += $row->ValorOrca;
+                $row->ValorOrca = number_format($row->ValorOrca, 2, ',', '.');
+
+				$somadesconto += $row->ValorEntradaOrca;
+                $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
+
+				$somarestante += $row->ValorRestanteOrca;
+                $row->ValorRestanteOrca = number_format($row->ValorRestanteOrca, 2, ',', '.');
+
+
+
+            }
+            $query->soma = new stdClass();
+            $query->soma->somaorcamento = number_format($somaorcamento, 2, ',', '.');
+			$query->soma->somadesconto = number_format($somadesconto, 2, ',', '.');
+			$query->soma->somarestante = number_format($somarestante, 2, ',', '.');
+
+            return $query;
+        }
+
+    }
+
     public function list2_despesas($data, $completo) {
 
         $data['NomeFornecedor'] = (($_SESSION['log']['idSis_Empresa'] != 5) && ($data['NomeFornecedor'])) ? ' AND F.idApp_Fornecedor = ' . $data['NomeFornecedor'] : FALSE;
@@ -983,6 +1109,131 @@ class Relatorio_model extends CI_Model {
 				' . $permissao . '
 				' . $filtro1 . '
 				' . $filtro2 . '
+				' . $filtro3 . '
+				' . $filtro5 . '
+				' . $filtro6 . '
+				' . $filtro7 . '
+				OT.idTab_TipoRD = "1"
+                ' . $data['TipoFinanceiroD'] . '
+				' . $data['Orcades'] . '
+				' . $data['Dia'] . ' 
+				' . $data['Mesvenc'] . ' 
+				' . $data['Ano'] . '
+				' . $data['NomeFornecedor'] . '
+            ORDER BY
+                ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
+
+        ');
+
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+          */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            $somaorcamento=0;
+			$somadesconto=0;
+			$somarestante=0;
+            foreach ($query->result() as $row) {
+				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
+				$row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
+				$row->DataPrazo = $this->basico->mascara_data($row->DataPrazo, 'barras');
+                $row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
+				$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
+                $row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
+				$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
+
+                $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
+                $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
+                $row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
+
+                $somaorcamento += $row->ValorOrca;
+                $row->ValorOrca = number_format($row->ValorOrca, 2, ',', '.');
+
+				$somadesconto += $row->ValorEntradaOrca;
+                $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
+
+				$somarestante += $row->ValorRestanteOrca;
+                $row->ValorRestanteOrca = number_format($row->ValorRestanteOrca, 2, ',', '.');
+
+
+
+            }
+            $query->soma = new stdClass();
+            $query->soma->somaorcamento = number_format($somaorcamento, 2, ',', '.');
+			$query->soma->somadesconto = number_format($somadesconto, 2, ',', '.');
+			$query->soma->somarestante = number_format($somarestante, 2, ',', '.');
+
+            return $query;
+        }
+
+    }
+
+    public function list2_despesasfiado($data, $completo) {
+
+        $data['NomeFornecedor'] = (($_SESSION['log']['idSis_Empresa'] != 5) && ($data['NomeFornecedor'])) ? ' AND F.idApp_Fornecedor = ' . $data['NomeFornecedor'] : FALSE;
+		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$data['Dia'] = ($data['Dia']) ? ' AND DAY(OT.DataVencimentoOrca) = ' . $data['Dia'] : FALSE;
+		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(OT.DataVencimentoOrca) = ' . $data['Mesvenc'] : FALSE;
+		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(OT.DataVencimentoOrca) = ' . $data['Ano'] : FALSE;
+		$data['Orcades'] = ($data['Orcades']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcades'] : FALSE;		
+		$data['TipoFinanceiroD'] = ($data['TipoFinanceiroD']) ? ' AND TR.idTab_TipoFinanceiro = ' . $data['TipoFinanceiroD'] : FALSE;
+		$filtro1 = ($data['AprovadoOrca']) ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
+        $filtro2 = ($data['QuitadoOrca']) ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrca']) ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
+		$filtro5 = ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
+		$filtro6 = ($data['AVAP']) ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
+		$filtro7 = ($data['FormaPag']) ? 'OT.FormaPagamento = "' . $data['FormaPag'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		
+        $query = $this->db->query('
+            SELECT
+				CONCAT(IFNULL(TR.TipoFinanceiro,""), " / ", IFNULL(OT.Descricao,"")) AS Descricao,
+				F.NomeFornecedor,
+				OT.idApp_OrcaTrata,
+                OT.AprovadoOrca,
+                OT.DataOrca,
+				OT.DataEntradaOrca,
+				OT.DataPrazo,
+                OT.ValorOrca,
+				OT.ValorDev,
+				OT.ValorEntradaOrca,
+				OT.ValorRestanteOrca,
+				OT.DataVencimentoOrca,
+                OT.ConcluidoOrca,
+                OT.QuitadoOrca,
+                OT.DataConclusao,
+                OT.DataQuitado,
+				OT.DataRetorno,
+				OT.idTab_TipoRD,
+				OT.FormaPagamento,
+				OT.ObsOrca,
+				OT.QtdParcelasOrca,
+				MD.Modalidade,
+				VP.Abrev3,				
+				VP.AVAP,
+				TFP.FormaPag
+            FROM
+                App_OrcaTrata AS OT
+				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
+				LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
+				LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
+				LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+				LEFT JOIN App_Fornecedor AS F ON F.idApp_Fornecedor = OT.idApp_Fornecedor
+            WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				OT.QuitadoOrca = "N" AND
+				' . $permissao . '
+				' . $filtro1 . '
+
 				' . $filtro3 . '
 				' . $filtro5 . '
 				' . $filtro6 . '
@@ -4961,6 +5212,78 @@ exit();*/
 
     }
 
+	public function list_clenkontraki($data, $completo) {
+
+        $data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND C.idSis_Empresa = ' . $data['NomeEmpresa'] : FALSE;
+        $data['Campo'] = (!$data['Campo']) ? 'C.NomeEmpresa' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$filtro10 = ($data['Inativo'] != '#') ? 'C.Ativo = "' . $data['Inativo'] . '" AND ' : FALSE;
+        #$q = ($_SESSION['log']['Permissao'] > 2) ? ' C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		
+		$query = $this->db->query('
+            SELECT
+				C.idSis_Empresa,
+                C.NomeEmpresa,
+				C.NomeAdmin,
+				C.Inativo,
+				SN.StatusSN,
+                C.DataCriacao,
+				C.DataDeValidade,
+				C.NivelEmpresa,
+                C.CelularAdmin,
+                C.Endereco,
+                C.Bairro,
+                CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
+                C.Email
+            FROM
+				Sis_Empresa AS C
+                    LEFT JOIN Tab_Municipio AS M ON C.Municipio = M.idTab_Municipio
+					LEFT JOIN Tab_StatusSN AS SN ON SN.Inativo = C.Inativo
+            WHERE
+				C.idSis_Empresa != 1 AND
+				C.idSis_Empresa != 2 AND
+				C.idSis_Empresa != 5 
+				' . $data['NomeEmpresa'] . '
+            ORDER BY
+                ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
+        ');
+        /*
+
+        #AND
+        #C.idApp_Cliente = OT.idApp_Cliente
+
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            foreach ($query->result() as $row) {
+				$row->DataCriacao = $this->basico->mascara_data($row->DataCriacao, 'barras');
+				$row->DataDeValidade = $this->basico->mascara_data($row->DataDeValidade, 'barras');
+				#$row->Inativo = $this->basico->mascara_palavra_completa($row->Inativo, 'NS');
+                #$row->Sexo = $this->basico->get_sexo($row->Sexo);
+                #$row->Sexo = ($row->Sexo == 2) ? 'F' : 'M';
+
+                $row->CelularAdmin = ($row->CelularAdmin) ? $row->CelularAdmin : FALSE;
+				#$row->Telefone2 = ($row->Telefone2) ? $row->Telefone2 : FALSE;
+				#$row->Telefone3 = ($row->Telefone3) ? $row->Telefone3 : FALSE;
+
+                #$row->Telefone .= ($row->Telefone2) ? ' / ' . $row->Telefone2 : FALSE;
+                #$row->Telefone .= ($row->Telefone3) ? ' / ' . $row->Telefone3 : FALSE;
+
+            }
+
+            return $query;
+        }
+
+    }
+
 	public function list_associado($data, $completo) {
 
         $data['NomeEmpresa'] = ($data['NomeEmpresa']) ? ' AND C.idSis_Empresa = ' . $data['NomeEmpresa'] : FALSE;
@@ -6000,6 +6323,29 @@ exit();*/
         $array[0] = 'TODOS';
         foreach ($query->result() as $row) {
 			$array[$row->idApp_Cliente] = $row->NomeCliente;
+        }
+
+        return $array;
+    }
+
+    public function select_clenkontraki() {
+
+        $query = $this->db->query('
+            SELECT
+                C.idSis_Empresa,
+                CONCAT(IFNULL(C.NomeEmpresa, ""), " --- ", IFNULL(C.NomeAdmin, "")) As NomeEmpresa
+            FROM
+                Sis_Empresa AS C
+            WHERE
+                C.idSis_Empresa != ' . $_SESSION['log']['idSis_Empresa'] . '
+            ORDER BY
+                C.NomeEmpresa ASC
+        ');
+
+        $array = array();
+        $array[0] = 'TODOS';
+        foreach ($query->result() as $row) {
+			$array[$row->idSis_Empresa] = $row->NomeEmpresa;
         }
 
         return $array;

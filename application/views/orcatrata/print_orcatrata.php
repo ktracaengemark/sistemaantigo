@@ -104,6 +104,8 @@
 								<li role="separator" class="divider"></li>							
 								<li><a href="<?php echo base_url() ?>relatorio/parcelas"><span class="glyphicon glyphicon-usd"></span> Receber X Pagar</a></li>
 								<li role="separator" class="divider"></li>							
+									<li><a href="<?php echo base_url() ?>relatorio/fiado"><span class="glyphicon glyphicon-usd"></span> Fiado</a></li>									
+									<li role="separator" class="divider"></li>									
 								<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 								<li role="separator" class="divider"></li>

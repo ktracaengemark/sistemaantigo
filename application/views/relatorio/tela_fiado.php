@@ -74,7 +74,7 @@
 								<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 								<div class="col-md-12 text-left">
 									<label for="Ordenamento">Cliente:</label>
-									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" onchange="this.form.submit()"
 											id="NomeCliente" name="NomeCliente">
 										<?php
 										foreach ($select['NomeCliente'] as $key => $row) {
@@ -90,6 +90,7 @@
 								<?php } ?>
 							</div>
 							<br>
+							<!--
 							<div class="form-group text-left">	
 								<div class="row">
 									<div class="col-md-3 text-left">
@@ -158,6 +159,7 @@
 									<?php } ?>
 								</div>
 							</div>
+							
 							<br>
 							<div class="row">
 								<div class="form-group col-md-3 text-left">
@@ -168,7 +170,7 @@
 									</div>
 								</div>
 
-							</div>							
+							</div>
 							<div class="row">
 								<div class="col-md-3 text-left" >
 									<label for="Ordenamento">Orçam.:</label>
@@ -243,6 +245,8 @@
 
 
 							</div>
+							-->
+							<!--
 							<div class="row">								
 								<div class="col-md-3 text-left" >
 									<label for="Ordenamento">Dia do Venc.:</label>
@@ -274,6 +278,8 @@
 										?>
 									</select>
 								</div>
+								
+								
 								<div class="col-md-3 text-left" >
 									<label for="Ordenamento">Ano do Venc.:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -289,7 +295,7 @@
 										?>
 									</select>
 								</div>								
-								<!--
+								
 								<div class="col-md-3 text-left" >
 									<label for="Ordenamento">Ano do Venc.:</label>
 									<div>
@@ -297,22 +303,12 @@
 											   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
 									</div>
 								</div>
-								-->
+								
 							</div>
 							<br>
-							<div class="row">
-								<div class="form-group col-md-3 text-left">
-									<div class="form-footer ">
-										<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
-											<span class="glyphicon glyphicon-filter"></span> Filtrar
-										</button>
-									</div>
-								</div>
-
-							</div>
-
+							-->
 							<div class="row">								
-								<div class="col-md-6 text-left">
+								<div class="col-md-12 text-left">
 									<label for="Ordenamento">Ordenamento:</label>
 									<div class="form-group">
 										<div class="row">
@@ -349,6 +345,16 @@
 									</div>
 								</div>
 							</div>
+							<div class="row">
+								<div class="form-group col-md-3 text-left">
+									<div class="form-footer ">
+										<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
+											<span class="glyphicon glyphicon-filter"></span> Filtrar
+										</button>
+									</div>
+								</div>
+
+							</div>							
 						</div>
 					</div>									
 												
@@ -430,6 +436,26 @@
 							<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das Despesas</h4>
 						</div>
 						<div class="modal-footer">
+							<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+							<div class="row">	
+								<div class="col-md-12 text-left">
+									<label for="Ordenamento">Fornecedor:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="NomeFornecedor" name="NomeFornecedor">
+										<?php
+										foreach ($select['NomeFornecedor'] as $key => $row) {
+											if ($query['NomeFornecedor'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+							</div>
+							<?php } ?>
+							<!--
 							<div class="row">
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 2 ) { ?>	
 								<div class="col-md-3 text-left" >
@@ -498,25 +524,6 @@
 								</div>
 								<?php } ?>
 							</div>
-							<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
-							<div class="row">	
-								<div class="col-md-3 text-left">
-									<label for="Ordenamento">Fornecedor:</label>
-									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-											id="NomeFornecedor" name="NomeFornecedor">
-										<?php
-										foreach ($select['NomeFornecedor'] as $key => $row) {
-											if ($query['NomeFornecedor'] == $key) {
-												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-												echo '<option value="' . $key . '">' . $row . '</option>';
-											}
-										}
-										?>
-									</select>
-								</div>
-							</div>
-							<?php } ?>
 							<br>
 							<div class="row">
 								<div class="form-group col-md-3 text-left">
@@ -648,7 +655,7 @@
 										?>
 									</select>
 								</div>								
-								<!--
+								
 								<div class="col-md-3 text-left" >
 									<label for="Ordenamento">Ano do Venc.:</label>
 									<div>
@@ -656,23 +663,13 @@
 											   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
 									</div>
 								</div>
-								-->
-							</div>							
-							<br>
-							<div class="row">
 								
-								<div class="form-group col-md-3 text-left">
-									<div class="form-footer ">
-										<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
-											<span class="glyphicon glyphicon-filter"></span> Filtrar
-										</button>
-									</div>
-								</div>
-
 							</div>
-
+							-->
+							<br>
+							
 							<div class="row">
-								<div class="col-md-6 text-left">
+								<div class="col-md-12 text-left">
 									<label for="Ordenamento">Ordenamento:</label>
 									<div class="form-group">
 										<div class="row">
@@ -709,9 +706,17 @@
 									</div>
 								</div>
 							</div>
+							<div class="row">
+								<div class="form-group col-md-3 text-left">
+									<div class="form-footer ">
+										<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
+											<span class="glyphicon glyphicon-filter"></span> Filtrar
+										</button>
+									</div>
+								</div>
+							</div>							
 						</div>
 					</div>									
-												
 				</div>
 			</div>																				
 			</form>

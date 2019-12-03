@@ -424,7 +424,7 @@
 													<div class="row">	
 														<div <?php echo $visivel; ?>>
 															<div class="col-md-4 panel-body">
-																<div class="panel panel-info">
+																<div class="panel panel-success">
 																	<div class="panel-heading">
 																		<div class="row">				
 																			<div class="col-md-6">
@@ -452,10 +452,9 @@
 														</div>	
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 														<div class="col-md-4 panel-body">
-															<div class="panel panel-primary">
+															<div class="panel panel-info">
 																<div class="panel-heading">
 																	<div class="row">			
-																		
 																		<div class="col-md-12">
 																			<label for="ValorRestanteOrca">Total:</label><br>
 																			<div class="input-group" id="txtHint">
@@ -466,7 +465,6 @@
 																					   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
 																			</div>
 																		</div>
-																		
 																	</div>	
 																</div>
 															</div>
@@ -502,7 +500,7 @@
 														</div>
 													</div>
 													<div class="row">
-														<div class="col-md-4">
+														<div class="col-md-3">
 															<label for="FormaPagamento">Pago com:</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																	id="FormaPagamento" name="FormaPagamento">
@@ -518,7 +516,7 @@
 																?>
 															</select>
 														</div>
-														<div class="col-md-4">
+														<div class="col-md-3">
 															<label for="DataOrca">Dta Orçam:</label>
 															<div class="input-group <?php echo $datepicker; ?>">
 																<span class="input-group-addon" disabled>
@@ -528,7 +526,7 @@
 																		name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
 															</div>
 														</div>
-														<div class="col-md-4">
+														<div class="col-md-3">
 															<label for="AVAP">Forma de Pagam.</label><br>
 															<div class="btn-block" data-toggle="buttons">
 																<?php
@@ -560,7 +558,42 @@
 
 															</div>
 															<?php echo form_error('AVAP'); ?>
-														</div>																
+														</div>
+														<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+														<div class="col-md-3 form-inline">
+															<label for="AprovadoOrca">Aprovado?</label><br>
+															<div class="form-group">
+																<div class="btn-group" data-toggle="buttons">
+																	<?php
+																	foreach ($select['AprovadoOrca'] as $key => $row) {
+																		if (!$orcatrata['AprovadoOrca'])
+																			$orcatrata['AprovadoOrca'] = 'N';
+
+																		($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																		if ($orcatrata['AprovadoOrca'] == $key) {
+																			echo ''
+																			. '<label class="btn btn-warning active" name="AprovadoOrca_' . $hideshow . '">'
+																			. '<input type="radio" name="AprovadoOrca" id="' . $hideshow . '" '
+																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																			. '</label>'
+																			;
+																		} else {
+																			echo ''
+																			. '<label class="btn btn-default" name="AprovadoOrca_' . $hideshow . '">'
+																			. '<input type="radio" name="AprovadoOrca" id="' . $hideshow . '" '
+																			. 'autocomplete="off" value="' . $key . '" >' . $row
+																			. '</label>'
+																			;
+																		}
+																	}
+																	?>
+
+																</div>
+																<?php echo form_error('AprovadoOrca'); ?>
+															</div>
+														</div>
+														<?php } ?>
 														<!--
 														<br>
 														<div class="form-group">
@@ -578,7 +611,7 @@
 										</div>
 										<div class="form-group"> <!-- Gatilho deslidado - id="AVAP" <?php #echo $div['AVAP']; ?> -  -->															
 											<br>	
-											<div class="panel panel-danger">
+											<div class="panel panel-info">
 												<div class="panel-heading">
 													<div class="form-group">	
 														<div class="row">
@@ -740,40 +773,6 @@
 											<div class="panel-heading">
 												<div class="form-group">
 													<div class="row">
-														
-														<div class="col-md-4 form-inline">
-															<label for="AprovadoOrca">Aprovado?</label><br>
-															<div class="form-group">
-																<div class="btn-group" data-toggle="buttons">
-																	<?php
-																	foreach ($select['AprovadoOrca'] as $key => $row) {
-																		if (!$orcatrata['AprovadoOrca'])
-																			$orcatrata['AprovadoOrca'] = 'N';
-
-																		($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																		if ($orcatrata['AprovadoOrca'] == $key) {
-																			echo ''
-																			. '<label class="btn btn-warning active" name="AprovadoOrca_' . $hideshow . '">'
-																			. '<input type="radio" name="AprovadoOrca" id="' . $hideshow . '" '
-																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																			. '</label>'
-																			;
-																		} else {
-																			echo ''
-																			. '<label class="btn btn-default" name="AprovadoOrca_' . $hideshow . '">'
-																			. '<input type="radio" name="AprovadoOrca" id="' . $hideshow . '" '
-																			. 'autocomplete="off" value="' . $key . '" >' . $row
-																			. '</label>'
-																			;
-																		}
-																	}
-																	?>
-
-																</div>
-																<?php echo form_error('AprovadoOrca'); ?>
-															</div>
-														</div>
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 														<div class="col-md-4 form-inline">
 															<label for="ConcluidoOrca">Concluído?</label><br>
@@ -843,14 +842,9 @@
 												
 												<div class="form-group ">
 													<div class="row">
-														
+														<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 														<div class="col-md-4">
-															<div id="AprovadoOrca" <?php echo $div['AprovadoOrca']; ?>>
-															</div>
-														</div>
-														<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
-														<div id="ConcluidoOrca" <?php echo $div['ConcluidoOrca']; ?>>
-															<div class="col-md-4">
+															<div id="ConcluidoOrca" <?php echo $div['ConcluidoOrca']; ?>>	
 																<label for="DataConclusao">Concluído em:</label>
 																<div class="input-group <?php echo $datepicker; ?>">
 																	<span class="input-group-addon" disabled>
@@ -859,10 +853,12 @@
 																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
 																		   name="DataConclusao" value="<?php echo $orcatrata['DataConclusao']; ?>">
 																</div>
+																
 															</div>
 														</div>
-														<div id="QuitadoOrca" <?php echo $div['QuitadoOrca']; ?>>
-															<div class="col-md-4">
+														
+														<div class="col-md-4">
+															<div id="QuitadoOrca" <?php echo $div['QuitadoOrca']; ?>>	
 																<label for="DataQuitado">Quitado em:</label>
 																<div class="input-group <?php echo $datepicker; ?>">
 																	<span class="input-group-addon" disabled>

@@ -52,7 +52,7 @@
 						</li>
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
-							
+							<?php if ($_SESSION['log']['idSis_Empresa'] != 2 ) { ?>
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/clientes">
 									<button type="button" class="btn btn-sm btn-warning ">
@@ -60,6 +60,18 @@
 									</button>
 								</a>
 							</div>
+							<?php } else { ?>
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-user"></span> Clientes <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">							
+									<li><a href="<?php echo base_url() ?>relatorio/clientes"><span class="glyphicon glyphicon-user"></span> Clientes Ktraca</a></li>
+									<li role="separator" class="divider"></li>							
+									<li><a href="<?php echo base_url() ?>relatorio/clenkontraki"><span class="glyphicon glyphicon-list-alt"></span> Clientes Enkontraki</a></li>									
+								</ul>
+							</div>
+							<?php } ?>
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
 									<span class="glyphicon glyphicon-user"></span> Fornecedores <span class="caret"></span>
@@ -98,6 +110,8 @@
 									<li><a href="<?php echo base_url() ?>relatorio/financeiro"><span class="glyphicon glyphicon-usd"></span> Orçamentos</a></li>
 									<li role="separator" class="divider"></li>							
 									<li><a href="<?php echo base_url() ?>relatorio/parcelas"><span class="glyphicon glyphicon-usd"></span> Receber X Pagar</a></li>
+									<li role="separator" class="divider"></li>							
+									<li><a href="<?php echo base_url() ?>relatorio/fiado"><span class="glyphicon glyphicon-usd"></span> Fiado</a></li>									
 									<li role="separator" class="divider"></li>							
 									<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>
 									<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>

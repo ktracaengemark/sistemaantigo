@@ -592,7 +592,7 @@ class Orcatrata extends CI_Controller {
         $data['form_open_path'] = 'orcatrata/cadastrar3';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'info';
+        $data['panel'] = 'primary';
         $data['metodo'] = 1;
 
 		$data['collapse'] = '';	
