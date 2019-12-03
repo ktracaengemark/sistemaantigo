@@ -697,7 +697,7 @@
 													<div class="row">	
 														<div <?php echo $visivel; ?>>
 															<div class="col-md-4 panel-body">
-																<div class="panel panel-success">
+																<div class="panel panel-info">
 																	<div class="panel-heading">
 																		<div class="row">				
 																			<div class="col-md-6">
@@ -725,7 +725,7 @@
 														</div>	
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 														<div class="col-md-4 panel-body">
-															<div class="panel panel-info">
+															<div class="panel panel-success">
 																<div class="panel-heading">
 																	<div class="row">			
 																		<div class="col-md-12">
@@ -745,7 +745,7 @@
 														<?php } ?>
 														<div <?php echo $visivel; ?>>
 															<div class="col-md-4 panel-body">
-																<div class="panel panel-success">
+																<div class="panel panel-info">
 																	<div class="panel-heading">
 																		<div class="row">	
 																			<div class="col-md-6">
@@ -884,7 +884,7 @@
 										</div>
 										<div class="form-group"> <!-- Gatilho deslidado - id="AVAP" <?php #echo $div['AVAP']; ?> -  -->															
 											<br>	
-											<div class="panel panel-info">
+											<div class="panel panel-success">
 												<div class="panel-heading">
 													<div class="form-group">	
 														<div class="row">
