@@ -325,7 +325,7 @@
 							<div style="overflow: auto; height: auto; ">
 								<div class="panel-group">	
 									<div <?php echo $collapse; ?> id="Orcamento">
-										<div class="panel panel-primary">
+										<div class="panel panel-info">
 											<div class="panel-heading">
 												<div class="form-group">
 													<div class="row">
@@ -697,7 +697,7 @@
 													<div class="row">	
 														<div <?php echo $visivel; ?>>
 															<div class="col-md-4 panel-body">
-																<div class="panel panel-info">
+																<div class="panel panel-primary">
 																	<div class="panel-heading">
 																		<div class="row">				
 																			<div class="col-md-6">
@@ -745,7 +745,7 @@
 														<?php } ?>
 														<div <?php echo $visivel; ?>>
 															<div class="col-md-4 panel-body">
-																<div class="panel panel-info">
+																<div class="panel panel-primary">
 																	<div class="panel-heading">
 																		<div class="row">	
 																			<div class="col-md-6">
@@ -1042,13 +1042,13 @@
 												</div>
 											</div>
 										</div>	
-										<div class="panel panel-primary">
+										<div class="panel panel-info">
 											<div class="panel-heading">
 												<div class="form-group">
 													<div class="row">
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 														<div class="col-md-4 form-inline">
-															<label for="ConcluidoOrca">Concluído?</label><br>
+															<label for="ConcluidoOrca">Prod. Entr.?</label><br>
 															<div class="form-group">
 																<div class="btn-group" data-toggle="buttons">
 																	<?php
@@ -1171,7 +1171,7 @@
 									<br>
 									<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 									<div class="panel-group">	
-										<div class="panel panel-primary">
+										<div class="panel panel-info">
 
 											<div class="panel-heading text-left">
 												<!--

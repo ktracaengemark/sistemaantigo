@@ -201,11 +201,11 @@ class Orcatrata extends CI_Controller {
 			'3' => 'Baixa',
         );
 		
-        $data['titulo'] = 'Receita';
+        $data['titulo'] = 'Nova Receita';
         $data['form_open_path'] = 'orcatrata/cadastrar';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'primary';
+        $data['panel'] = 'info';
         $data['metodo'] = 1;
 
 		
@@ -249,7 +249,7 @@ class Orcatrata extends CI_Controller {
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
 		
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;		
-		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;		
+		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'S' : FALSE;		
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
 			
         $data['radio'] = array(
@@ -592,7 +592,7 @@ class Orcatrata extends CI_Controller {
         $data['form_open_path'] = 'orcatrata/cadastrar3';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'primary';
+        $data['panel'] = 'info';
         $data['metodo'] = 1;
 
 		$data['collapse'] = '';	
@@ -640,7 +640,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
-		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;				
+		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'S' : FALSE;				
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
         $data['radio'] = array(
             'AprovadoOrca' => $this->basico->radio_checked($data['orcatrata']['AprovadoOrca'], 'Orçamento Aprovado', 'NS'),
@@ -1085,7 +1085,7 @@ class Orcatrata extends CI_Controller {
         $data['form_open_path'] = 'orcatrata/alterar';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'primary';
+        $data['panel'] = 'info';
         $data['metodo'] = 2;
 
         //if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
@@ -1127,7 +1127,7 @@ class Orcatrata extends CI_Controller {
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"'; 
 
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;		
-		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;		
+		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'S' : FALSE;		
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;		
 			
@@ -1675,7 +1675,7 @@ class Orcatrata extends CI_Controller {
         $data['form_open_path'] = 'orcatrata/alterar2';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'primary';
+        $data['panel'] = 'info';
         $data['metodo'] = 2;
 
 		$data['collapse'] = '';	
@@ -1714,7 +1714,7 @@ class Orcatrata extends CI_Controller {
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
 
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;		
-		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;		
+		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'S' : FALSE;		
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;		
 			
@@ -2226,7 +2226,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
-		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;				
+		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'S' : FALSE;				
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
         $data['radio'] = array(
             'AprovadoOrca' => $this->basico->radio_checked($data['orcatrata']['AprovadoOrca'], 'Orçamento Aprovado', 'NS'),
@@ -2710,7 +2710,7 @@ class Orcatrata extends CI_Controller {
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
 			
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
-		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;				
+		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'S' : FALSE;				
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;		
 			
