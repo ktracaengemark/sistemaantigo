@@ -981,13 +981,14 @@ class Relatorio_model extends CI_Model {
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				OT.AVAP = "P" AND				
 				OT.QuitadoOrca = "N" AND
 				' . $permissao . '
 				' . $filtro1 . '
 
 				' . $filtro3 . '
 				' . $filtro5 . '
-				' . $filtro6 . '
+
 				' . $filtro7 . '
 				OT.idTab_TipoRD = "2"
                 ' . $data['TipoFinanceiroR'] . '
@@ -1195,7 +1196,7 @@ class Relatorio_model extends CI_Model {
 		
         $query = $this->db->query('
             SELECT
-				CONCAT(IFNULL(TR.TipoFinanceiro,""), " / ", IFNULL(OT.Descricao,"")) AS Descricao,
+				CONCAT(IFNULL(TR.TipoFinanceiro,""), " / ", IFNULL(F.NomeFornecedor,""), " / ", IFNULL(OT.Descricao,"")) AS Descricao,
 				F.NomeFornecedor,
 				OT.idApp_OrcaTrata,
                 OT.AprovadoOrca,
@@ -1230,13 +1231,14 @@ class Relatorio_model extends CI_Model {
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				OT.AVAP = "P" AND				
 				OT.QuitadoOrca = "N" AND
 				' . $permissao . '
 				' . $filtro1 . '
 
 				' . $filtro3 . '
 				' . $filtro5 . '
-				' . $filtro6 . '
+
 				' . $filtro7 . '
 				OT.idTab_TipoRD = "1"
                 ' . $data['TipoFinanceiroD'] . '
