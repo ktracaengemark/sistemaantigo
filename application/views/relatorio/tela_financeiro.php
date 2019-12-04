@@ -12,7 +12,7 @@
 				<span class="glyphicon glyphicon-plus"></span><?php echo $titulo1; ?>
 			</button>-->
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-				<span class="glyphicon glyphicon-filter"></span>Filtrar Receita<?php #echo $titulo1; ?>
+				<span class="glyphicon glyphicon-filter"></span>Filtrar Vendas<?php #echo $titulo1; ?>
 			</button>
 			<button class="btn btn-sm btn-info" type="button" data-toggle="collapse" data-target="#Receitas" aria-expanded="false" aria-controls="Receitas">
 				<span class="glyphicon glyphicon-menu-up"></span> Receitas
@@ -372,7 +372,7 @@
 				<span class="glyphicon glyphicon-plus"></span><?php echo $titulo2; ?>
 			</button>-->			
 			<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
-				<span class="glyphicon glyphicon-filter"></span>Filtrar Despesa<?php #echo $titulo2; ?>
+				<span class="glyphicon glyphicon-filter"></span>Filtrar Compras<?php #echo $titulo2; ?>
 			</button>
 			<button class="btn btn-sm btn-danger" type="button" data-toggle="collapse" data-target="#Despesas" aria-expanded="false" aria-controls="Despesas">
 				<span class="glyphicon glyphicon-menu-up"></span> Despesas

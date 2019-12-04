@@ -359,7 +359,6 @@ class Prodaux2 extends CI_Controller {
 
         $this->load->view('basico/footer');
     }
-
 	
 	public function excluir($id = FALSE) {
 
@@ -402,6 +401,5 @@ class Prodaux2 extends CI_Controller {
 
         $this->load->view('basico/footer');
     }	
-
 
 }

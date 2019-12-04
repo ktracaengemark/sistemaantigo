@@ -12,7 +12,7 @@
 				</button>-->			
 				
 				<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-					<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo1; ?>
+					<span class="glyphicon glyphicon-filter"></span>Filtrar Dinheiro Que Enta<?php #echo $titulo1; ?>
 				</button>
 				<a href="<?php echo base_url() . 'orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa']; ?>">
 					<button type="button" class="btn btn-sm btn-info">
@@ -262,7 +262,7 @@
 					<span class="glyphicon glyphicon-plus"></span>Des.<?php #echo $titulo2; ?>
 				</button>-->
 				<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
-					<span class="glyphicon glyphicon-filter"></span>Filtrar<?php #echo $titulo2; ?>
+					<span class="glyphicon glyphicon-filter"></span>Filtrar Dinheiro Que Sái<?php #echo $titulo2; ?>
 				</button>
 				<a href="<?php echo base_url() . 'orcatrata/alterarparceladesp/' . $_SESSION['log']['idSis_Empresa']; ?>">
 					<button type="button" class="btn btn-sm btn-info">

@@ -46,6 +46,7 @@
 						<tr>
 							<!--<th class="active">Ed.Orç</th>
 							<th class="active">Ed.Prc</th>-->
+							<th class="active">Imp.</th>
 							<th class="active">Orç.</th>
 							<th class="col-md-3 active" scope="col">Receita</th>	
 							<th class="active">Pc</th>
@@ -64,7 +65,7 @@
 						<?php
 						foreach ($report->result_array() as $row) {
 							echo '<tr>';
-							echo '<tr class="clickable-row" data-href="' . base_url() . 'Orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">';
+							#echo '<tr class="clickable-row" data-href="' . base_url() . 'Orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">';
 							#echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarparcelarec/' . $row['idSis_Empresa'] . '">';
 								
 								/*echo '<td class="notclickable">
@@ -79,6 +80,12 @@
 										</a>
 									</td>';
 								*/
+								echo '<td class="notclickable">
+										<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
+											<span class="glyphicon glyphicon-print notclickable"></span>
+										</a>
+										
+									</td>';									
 								echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 								echo '<td>' . $row['Descricao'] . '</td>';
 								echo '<td>' . $row['Parcela'] . '</td>';

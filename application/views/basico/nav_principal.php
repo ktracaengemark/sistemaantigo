@@ -132,8 +132,8 @@
 									<li role="separator" class="divider"></li>							
 									<li><a href="<?php echo base_url() ?>Prodaux3/cadastrar"><span class="glyphicon glyphicon-list"></span> Lista de Categoria</a></li>										
 									<li role="separator" class="divider"></li>										
-									<li><a href="<?php echo base_url() ?>relatorio/produtosvend"><span class="glyphicon glyphicon-pencil"></span> Produtos & Cliente</a></li>
-									<li role="separator" class="divider"></li>									
+									<li><a href="<?php echo base_url() ?>relatorio/compvend"><span class="glyphicon glyphicon-pencil"></span> Compras & Vendas</a></li>
+									<li role="separator" class="divider"></li>
 									<li><a data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal3-sm"><span class="glyphicon glyphicon-plus"></span> Novo Produto</a></li>
 								</ul>
 							</div>																				

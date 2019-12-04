@@ -159,32 +159,38 @@ class Prodaux1_model extends CI_Model {
         return $array;
     }
 	
-	public function select_prodaux1($data = FALSE) {
+	public function select_Prodaux1($data = FALSE) {
 
         if ($data === TRUE) {
             $array = $this->db->query(
                 'SELECT                
 				idTab_Prodaux1,
-				CONCAT(Abrev1, " - " , Prodaux1) AS Prodaux1,
+				CONCAT(Prodaux1, " - " , idTab_Prodaux1) AS Prodaux1,
 				Abrev1
             FROM
                 Tab_Prodaux1
-
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
-				Prodaux1 ASC'
-    );
+				Prodaux1 ASC,
+				idTab_Prodaux1
+    ');
         } else {
             $query = $this->db->query(
                 'SELECT                
 				idTab_Prodaux1,
-				CONCAT(Abrev1, " - " , Prodaux1) AS Prodaux1,
+				CONCAT(Prodaux1, " - " , idTab_Prodaux1) AS Prodaux1,
 				Abrev1
             FROM
                 Tab_Prodaux1
-
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
-				Prodaux1 ASC'
-    );
+				Prodaux1 ASC,
+				idTab_Prodaux1
+    ');
 
             $array = array();
             foreach ($query->result() as $row) {

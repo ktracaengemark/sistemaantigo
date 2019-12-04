@@ -3,7 +3,7 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Aux2</th>
+            <th>Tipo</th>
 			<th>Abrev2</th>
             
             <th></th>

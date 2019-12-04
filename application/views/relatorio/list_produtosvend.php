@@ -11,11 +11,11 @@
 				</thead>
 				<thead>
                     <tr>
-						<th class="active">Cliente</th>
 						<th class="active">Id do Orçam.</th>
+						<th class="active">Cliente</th>
                         <th class="active">Data do Orçam.</th>
-						<th class="active">Orç. Apv.?</th>
-						<th class="active">Fornec</th>
+						<th class="active">Prd.Ent?</th>
+						<th class="active">Prd.Pago?</th>
 						<th class="active">Código</th>
 						<th class="active">Qtd.</th>
 						<th class="active">Categoria</th>
@@ -36,11 +36,11 @@
 
                         #echo '<tr>';
                         echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">';
-							echo '<td>' . $row['NomeCliente'] . '</td>';
 							echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
+							echo '<td>' . $row['NomeCliente'] . '</td>';
                             echo '<td>' . $row['DataOrca'] . '</td>';
-							echo '<td>' . $row['AprovadoOrca'] . '</td>';
-							echo '<td>' . $row['NomeFornecedor'] . '</td>';
+							echo '<td>' . $row['ConcluidoOrca'] . '</td>';
+							echo '<td>' . $row['QuitadoOrca'] . '</td>';
 							echo '<td>' . $row['CodProd'] . '</td>';
 							echo '<td>' . $row['QtdProduto'] . '</td>';
 							echo '<td>' . $row['Prodaux3'] . '</td>';

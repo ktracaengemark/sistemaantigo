@@ -107,7 +107,6 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
-		$data['select']['Prodaux33'] = $this->Produtos_model->select_prodaux33();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		
         $data['titulo'] = 'Cadastrar';

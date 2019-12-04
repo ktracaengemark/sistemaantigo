@@ -1,6 +1,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
 	<div class="container-fluid">
 		<li class="navbar-form">
+			<!--
 			<a <?php if (preg_match("/relatorio\/produtos2\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
 				<a href="<?php echo base_url() . 'relatorio/produtos2/'; ?>">
 					<button type="button" class="btn btn-lg btn-info ">
@@ -8,6 +9,7 @@
 					</button>										
 				</a>
 			</a>
+			-->
 			<a href="javascript:window.close()">
 				<button type="button" class="btn btn-lg btn-default ">
 					<span class="glyphicon glyphicon-remove"></span> Fechar

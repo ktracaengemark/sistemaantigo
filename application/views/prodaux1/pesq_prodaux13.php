@@ -36,21 +36,21 @@
 					<?php echo form_open($form_open_path, 'role="form"'); ?>
 						<div class="row">
 							<div class="col-md-4">
-								<label for="Prodaux2">Tipo:</label><br>
+								<label for="Prodaux1">Aux1:</label><br>
 								<input type="text" class="form-control" maxlength="30"
-									   autofocus name="Prodaux2" value="<?php echo $query['Prodaux2'] ?>">
+									   autofocus name="Prodaux1" value="<?php echo $query['Prodaux1'] ?>">
 							</div>
 							
 							<div class="col-md-3">
-								<label for="Abrev2">Abrev.:</label><br>
+								<label for="Abrev1">Abrev1.:</label><br>
 								<input type="text" class="form-control" maxlength="4"
-										name="Abrev2" value="<?php echo $query['Abrev2'] ?>">
+										name="Abrev1" value="<?php echo $query['Abrev1'] ?>">
 							</div>
 						</div>
 						<br>
 						<div class="form-group">
 							<div class="row">
-								<input type="hidden" name="idTab_Prodaux2" value="<?php echo $query['idTab_Prodaux2']; ?>">
+								<input type="hidden" name="idTab_Prodaux1" value="<?php echo $query['idTab_Prodaux1']; ?>">
 								<?php if ($metodo == 2) { ?>
 
 									<div class="col-md-6">
@@ -82,7 +82,7 @@
 														</button>
 													</div>
 													<div class="col-md-6 text-right">
-														<a class="btn btn-danger" href="<?php echo base_url() . 'prodaux2/excluir3/' . $query['idTab_Prodaux2'] ?>" role="button">
+														<a class="btn btn-danger" href="<?php echo base_url() . 'prodaux1/excluir3/' . $query['idTab_Prodaux1'] ?>" role="button">
 															<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 														</a>
 													</div>
