@@ -1752,11 +1752,10 @@ class Relatorio extends CI_Controller {
 
         $data['select']['Campo'] = array(
             'PR.DataVencimento' => 'Data do Venc.',
-			'PR.Quitado' => 'Quit.Parc.',
+			'PR.Quitado' => 'Parc.Quit.',
 			'OT.Modalidade' => 'Modalidade',
             'OT.idApp_OrcaTrata' => 'Orçamento',
             'OT.ValorOrca' => 'Valor da Receita',
-            'OT.ConcluidoOrca' => 'Receita Concluída?',
 			'OT.TipoFinanceiro' => 'Tipo de Receita',
 
         );
