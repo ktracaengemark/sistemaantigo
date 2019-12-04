@@ -2428,6 +2428,9 @@ function adicionaParcelas() {
 	pc++; //text box increment
 	$("#PRCount").val(pc);
 	
+    //Captura a data do dia e carrega no campo correspondente
+    var currentDate = moment();
+	
     $(".input_fields_wrap21").append('\
 		<div class="form-group" id="21div'+pc+'">\
 			<div class="panel panel-warning">\
@@ -2453,7 +2456,7 @@ function adicionaParcelas() {
 									<span class="glyphicon glyphicon-calendar"></span>\
 								</span>\
 								<input type="text" class="form-control Date" id="DataVencimento'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
-									   name="DataVencimento'+pc+'" value="">\
+									   name="DataVencimento'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 							</div>\
 						</div>\
 						<div class="col-md-3">\
