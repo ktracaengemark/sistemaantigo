@@ -100,10 +100,13 @@
 						</div>
 						<div class="row">									
 							<div class="col-md-2">
-								<label for="Prodaux3">Categ.</label>
+								<label for="Prodaux3">Cat.</label>
 								<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>prodaux3/cadastrar3" role="button"> 
-									<span class="glyphicon glyphicon-plus"></span> <b>Categoria</b>
-								</a>									
+									<span class="glyphicon glyphicon-plus"></span> <b>Cat.</b>
+								</a>
+								<button class="btn btn-xs btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+									<span class="glyphicon glyphicon-refresh"></span> Recar.
+								</button>								
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Prodaux3" name="Prodaux3">
 									<option value="">-- Selecione uma opção --</option>
@@ -338,7 +341,7 @@
 
 							<div class="form-group">
 								<a class="add_field_button3 btn btn-xs btn-danger" onclick="adicionaValor2()">
-									<span class="glyphicon glyphicon-arrow-up"></span> Adic.Valor
+									<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Valor
 								</a>
 								<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>fornecedor/cadastrar3" role="button"> 
 									<span class="glyphicon glyphicon-plus"></span><b> Cad.Forn.</b>
