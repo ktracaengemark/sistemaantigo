@@ -100,6 +100,7 @@
 											?>
 										</select>
 									</div>
+									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 									<div class="col-md-6 text-left">
 										<label for="Ordenamento">Cliente:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -115,6 +116,7 @@
 											?>
 										</select>
 									</div>
+									<?php } ?>
 								</div>
 							</div>	
 							<div class="form-group">								
@@ -410,6 +412,7 @@
 											?>
 										</select>
 									</div>
+									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 									<div class="col-md-6 text-left">
 										<label for="Ordenamento">Fornecedor:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -424,7 +427,8 @@
 											}
 											?>
 										</select>
-									</div>									
+									</div>
+									<?php } ?>
 								</div>
 							</div>	
 							<div class="form-group">
