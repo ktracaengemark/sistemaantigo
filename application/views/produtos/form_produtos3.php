@@ -50,7 +50,7 @@
 						<div class="form-group">	
 							<div class="row">
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-								<div class="col-md-3">
+								<div class="col-md-2">
 									<label for="TipoProduto">Venda/Cons:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 											id="TipoProduto" name="TipoProduto">
@@ -66,7 +66,7 @@
 										?>
 									</select>
 								</div>									
-								<div class="col-md-3">
+								<div class="col-md-2">
 									<label for="Categoria">Prod/Serv:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 											id="Categoria" autofocus name="Categoria">
@@ -82,7 +82,7 @@
 										?>
 									</select>
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-2">
 									<label for="UnidadeProduto">Unidade:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 											id="UnidadeProduto" name="UnidadeProduto">
@@ -97,7 +97,34 @@
 										}
 										?>
 									</select>
-								</div>									
+								</div>
+								<div class="col-md-3">
+									<label for="Aprovado">Cadastrar?</label><br>
+									<div class="btn-group" data-toggle="buttons">
+										<?php
+										foreach ($select['Aprovado'] as $key => $row) {
+											(!$produtos['Aprovado']) ? $produtos['Aprovado'] = 'S' : FALSE;
+
+											if ($produtos['Aprovado'] == $key) {
+												echo ''
+												. '<label class="btn btn-warning active" name="radiobutton_Aprovado' . '" id="radiobutton_Aprovado' .  $key . '">'
+												. '<input type="radio" name="Aprovado' . '" id="radiobuttondinamico" '
+												. 'autocomplete="off" value="' . $key . '" checked>' . $row
+												. '</label>'
+												;
+											} else {
+												echo ''
+												. '<label class="btn btn-default" name="radiobutton_Aprovado' .  '" id="radiobutton_Aprovado' .  $key . '">'
+												. '<input type="radio" name="Aprovado' . '" id="radiobuttondinamico" '
+												. 'autocomplete="off" value="' . $key . '" >' . $row
+												. '</label>'
+												;
+											}
+										}
+										?>
+									</div>
+									<?php echo form_error('Aprovado'); ?>
+								</div>								
 								<!--
 								<div class="col-md-2">
 									<label for="Fornecedor">Fornecedor</label>

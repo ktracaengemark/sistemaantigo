@@ -61,6 +61,7 @@ class Produtos extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
+			'Aprovado',
         ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -94,11 +95,12 @@ class Produtos extends CI_Controller {
         #### Tab_Produto ####
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
+		$this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
 		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		
-		
+		$data['select']['Aprovado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();		
@@ -130,8 +132,14 @@ class Produtos extends CI_Controller {
 
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
+		
+		(!$data['produtos']['Aprovado']) ? $data['produtos']['Aprovado'] = 'S' : FALSE;
+        $data['radio'] = array(
+            'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
+        );
 
-
+        ($data['produtos']['Aprovado'] == 'S') ?
+            $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';
         /*
           echo '<br>';
           echo "<pre>";
@@ -231,6 +239,7 @@ class Produtos extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
+			'Aprovado',
         ), TRUE));
 
 
@@ -261,11 +270,12 @@ class Produtos extends CI_Controller {
         #### Tab_Produto ####
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
+		$this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
 		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		
-		
+		$data['select']['Aprovado'] = $this->Basico_model->select_status_sn();	
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();		
@@ -299,7 +309,13 @@ class Produtos extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
+		(!$data['produtos']['Aprovado']) ? $data['produtos']['Aprovado'] = 'S' : FALSE;
+        $data['radio'] = array(
+            'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
+        );
 
+        ($data['produtos']['Aprovado'] == 'S') ?
+            $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';
         /*
           echo '<br>';
           echo "<pre>";
@@ -399,6 +415,7 @@ class Produtos extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
+			'Aprovado',
         ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -432,11 +449,12 @@ class Produtos extends CI_Controller {
         #### Tab_Produto ####
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
+		$this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
 		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		
-		
+		$data['select']['Aprovado'] = $this->Basico_model->select_status_sn();		
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();		
@@ -470,7 +488,13 @@ class Produtos extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
+		(!$data['produtos']['Aprovado']) ? $data['produtos']['Aprovado'] = 'S' : FALSE;
+        $data['radio'] = array(
+            'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
+        );
 
+        ($data['produtos']['Aprovado'] == 'S') ?
+            $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';
         /*
           echo '<br>';
           echo "<pre>";
@@ -570,6 +594,7 @@ class Produtos extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
+			'Aprovado',
         ), TRUE));
 
 
@@ -600,11 +625,12 @@ class Produtos extends CI_Controller {
         #### Tab_Produto ####
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
+		$this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
 		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		
-		
+		$data['select']['Aprovado'] = $this->Basico_model->select_status_sn();		
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();		
@@ -638,7 +664,13 @@ class Produtos extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
+		(!$data['produtos']['Aprovado']) ? $data['produtos']['Aprovado'] = 'S' : FALSE;
+        $data['radio'] = array(
+            'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
+        );
 
+        ($data['produtos']['Aprovado'] == 'S') ?
+            $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';
         /*
           echo '<br>';
           echo "<pre>";
@@ -738,6 +770,7 @@ class Produtos extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
+			'Aprovado',
         ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -793,13 +826,15 @@ class Produtos extends CI_Controller {
         }
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
+		
         #### Tab_Produto ####
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim'); 		
-        #$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
+        $this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
+		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
      
+		$data['select']['Aprovado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();		
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();
@@ -831,7 +866,13 @@ class Produtos extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
-        
+		(!$data['produtos']['Aprovado']) ? $data['produtos']['Aprovado'] = 'S' : FALSE;
+        $data['radio'] = array(
+            'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
+        );
+
+        ($data['produtos']['Aprovado'] == 'S') ?
+            $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';        
         /*
           echo '<br>';
           echo "<pre>";
@@ -958,6 +999,7 @@ class Produtos extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
+			'Aprovado',
         ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -1017,9 +1059,11 @@ class Produtos extends CI_Controller {
         #### Tab_Produto ####
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim'); 		
-        #$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
+        $this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
+		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
      
+		$data['select']['Aprovado'] = $this->Basico_model->select_status_sn();    
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();		
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();
@@ -1051,7 +1095,13 @@ class Produtos extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
-        
+		(!$data['produtos']['Aprovado']) ? $data['produtos']['Aprovado'] = 'S' : FALSE;
+        $data['radio'] = array(
+            'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
+        );
+
+        ($data['produtos']['Aprovado'] == 'S') ?
+            $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';         
         /*
           echo '<br>';
           echo "<pre>";
@@ -1170,6 +1220,28 @@ class Produtos extends CI_Controller {
 
                 #redirect(base_url() . 'produtos/listar/' . $data['msg']);
 				redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
+                exit();
+            //}
+        //}
+
+        $this->load->view('basico/footer');
+    }
+
+    public function excluir2($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+        
+                $this->Produtos_model->delete_produtos($id);
+
+                $data['msg'] = '?m=1';
+
+                #redirect(base_url() . 'produtos/listar/' . $data['msg']);
+				redirect(base_url() . 'relatorio/produtos2/' . $data['msg']);
                 exit();
             //}
         //}
