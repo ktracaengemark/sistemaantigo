@@ -184,7 +184,7 @@
 																						</div>
 																					</div>
 																					<div class="row">
-																						<div class="col-md-5"></div>
+																						<div class="col-md-3"></div>
 																						<div class="col-md-3">
 																							<label for="ObsProduto<?php echo $i ?>">Obs:</label><br>
 																							<input type="text" class="form-control" id="ObsProduto<?php echo $i ?>" maxlength="250"
@@ -201,6 +201,34 @@
 																								
 																							</div>
 																						</div>
+																						<div class="col-md-2">
+																							<label for="ConcluidoProduto">Concluído? </label><br>
+																							<div class="form-group">
+																								<div class="btn-group" data-toggle="buttons">
+																									<?php
+																									foreach ($select['ConcluidoProduto'] as $key => $row) {
+																										(!$produto[$i]['ConcluidoProduto']) ? $produto[$i]['ConcluidoProduto'] = 'S' : FALSE;
+
+																										if ($produto[$i]['ConcluidoProduto'] == $key) {
+																											echo ''
+																											. '<label class="btn btn-warning active" name="radiobutton_ConcluidoProduto' . $i . '" id="radiobutton_ConcluidoProduto' . $i .  $key . '">'
+																											. '<input type="radio" name="ConcluidoProduto' . $i . '" id="radiobuttondinamico" '
+																											. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																											. '</label>'
+																											;
+																										} else {
+																											echo ''
+																											. '<label class="btn btn-default" name="radiobutton_ConcluidoProduto' . $i . '" id="radiobutton_ConcluidoProduto' . $i .  $key . '">'
+																											. '<input type="radio" name="ConcluidoProduto' . $i . '" id="radiobuttondinamico" '
+																											. 'autocomplete="off" value="' . $key . '" >' . $row
+																											. '</label>'
+																											;
+																										}
+																									}
+																									?>
+																								</div>
+																							</div>
+																						</div>																						
 																						<div class="col-md-1">
 																							<label><br></label><br>
 																							<button type="button" id="<?php echo $i ?>" class="remove_field9 btn btn-danger"
@@ -355,7 +383,8 @@
 																						</div>
 																					</div>
 																					<div class="row">
-																						<div class="col-md-5"></div>
+																						<div class="col-md-3"></div>
+																						
 																						<div class="col-md-3">
 																							<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
 																							<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
@@ -371,14 +400,13 @@
 																									   name="DataValidadeServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataValidadeServico']; ?>">																				
 																							</div>
 																						</div>
-																						<!--
-																						<div class="col-md-3">
+																						<div class="col-md-2">
 																							<label for="ConcluidoServico">Concluído? </label><br>
 																							<div class="form-group">
 																								<div class="btn-group" data-toggle="buttons">
 																									<?php
 																									foreach ($select['ConcluidoServico'] as $key => $row) {
-																										(!$servico[$i]['ConcluidoServico']) ? $servico[$i]['ConcluidoServico'] = 'N' : FALSE;
+																										(!$servico[$i]['ConcluidoServico']) ? $servico[$i]['ConcluidoServico'] = 'S' : FALSE;
 
 																										if ($servico[$i]['ConcluidoServico'] == $key) {
 																											echo ''
@@ -399,8 +427,7 @@
 																									?>
 																								</div>
 																							</div>
-																						</div>
-																						-->
+																						</div>																						
 																						<div class="col-md-1">
 																							<label><br></label><br>
 																							<button type="button" id="<?php echo $i ?>" class="remove_field10 btn btn-danger"
@@ -980,7 +1007,7 @@
 								
 									<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 									<div class="panel-group">	
-										<div class="panel panel-danger">
+										<div class="panel panel-info">
 
 											<div class="panel-heading text-left">
 												<!--

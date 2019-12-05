@@ -3155,7 +3155,7 @@ $(document).ready(function () {
                             </div>\
                         </div>\
 						<div class="row">\
-							<div class="col-md-5"></div>\
+							<div class="col-md-2"></div>\
 							<div class="col-md-3">\
 								<label for="ObsProduto'+pc+'">Obs:</label><br>\
 								<input type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
@@ -3169,6 +3169,21 @@ $(document).ready(function () {
 									</span>\
 									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
 										   name="DataValidadeProduto'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
+								</div>\
+							</div>\
+							<div class="col-md-2">\
+								<label for="ConcluidoProduto">Concluído? </label><br>\
+								<div class="form-group">\
+									<div class="btn-group" data-toggle="buttons">\
+										<label class="btn btn-default" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
+										<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
+											autocomplete="off" value="N" >Não\
+										</label>\
+										<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'S">\
+										<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
+											autocomplete="off" value="S" checked>Sim\
+										</label>\
+									</div>\
 								</div>\
 							</div>\
 							<div class="col-md-1">\
@@ -3220,6 +3235,20 @@ $(document).ready(function () {
 
         });
 
+		//permite o uso de radio buttons nesse bloco dinâmico
+		$('input:radio[id="radiogeraldinamico"]').change(function() {
+
+			var value = $(this).val();
+			var name = $(this).attr("name");
+
+			//console.log(value + ' <<>> ' + name);
+
+			$('label[name="radio_' + name + '"]').removeClass();
+			$('label[name="radio_' + name + '"]').addClass("btn btn-default");
+			$('#radio_' + name + value).addClass("btn btn-warning active");
+
+		});
+
     });
 
 	//adiciona campos dinamicamente dos Produtos Devolvidos (Vendidos)
@@ -3268,7 +3297,7 @@ $(document).ready(function () {
 							</div>\
 						</div>\
 						<div class="row">\
-							<div class="col-md-5"></div>\
+							<div class="col-md-2"></div>\
 							<div class="col-md-3">\
 								<label for="ObsServico'+ps+'">Obs:</label><br>\
 								<input type="text" class="form-control" id="ObsServico'+ps+'" maxlength="250"\
@@ -3282,6 +3311,21 @@ $(document).ready(function () {
 									</span>\
 									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
 										   name="DataValidadeServico'+ps+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
+								</div>\
+							</div>\
+							<div class="col-md-2">\
+								<label for="ConcluidoServico">Concluído? </label><br>\
+								<div class="form-group">\
+									<div class="btn-group" data-toggle="buttons">\
+										<label class="btn btn-default" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'N">\
+										<input type="radio" name="ConcluidoServico'+ps+'" id="radiogeraldinamico"\
+											autocomplete="off" value="N" >Não\
+										</label>\
+										<label class="btn btn-warning active" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'S">\
+										<input type="radio" name="ConcluidoServico'+ps+'" id="radiogeraldinamico"\
+											autocomplete="off" value="S" checked>Sim\
+										</label>\
+									</div>\
 								</div>\
 							</div>\
 							<div class="col-md-1">\
@@ -3332,6 +3376,20 @@ $(document).ready(function () {
             }
 
         });
+
+		//permite o uso de radio buttons nesse bloco dinâmico
+		$('input:radio[id="radiogeraldinamico"]').change(function() {
+
+			var value = $(this).val();
+			var name = $(this).attr("name");
+
+			//console.log(value + ' <<>> ' + name);
+
+			$('label[name="radio_' + name + '"]').removeClass();
+			$('label[name="radio_' + name + '"]').addClass("btn btn-default");
+			$('#radio_' + name + value).addClass("btn btn-warning active");
+
+		});
 		
 	});
 	

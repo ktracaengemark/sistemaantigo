@@ -252,7 +252,7 @@
 								</tr>	
 								<tr>
 									<th class="col-md-2" scope="col"></th>
-									<th class="col-md-7" scope="col">id</th>	
+									<th class="col-md-7" scope="col">id-Ent-Obs.:</th>	
 									<!--<th scope="col">Unidade</th>																				
 									<th scope="col">Aux1</th>
 									<th scope="col">Aux2</th>-->
@@ -315,7 +315,7 @@
 								</tr>	
 								<tr>
 									<th class="col-md-2" scope="col"></th>
-									<th class="col-md-7" scope="col">id</th>	
+									<th class="col-md-7" scope="col">id-Ent-Obs.:</th>	
 									<th class="col-md-1" scope="col">Data</th>							
 								</tr>
 							</thead>
