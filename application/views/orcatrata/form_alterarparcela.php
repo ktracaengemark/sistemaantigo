@@ -242,6 +242,33 @@
 									
 									
 									</div>
+									<div class="col-md-3">
+										<label for="QuitadoParcelas">Quitar Tds as Parcelas?</label><br>
+										<div class="btn-group" data-toggle="buttons">
+											<?php
+											foreach ($select['QuitadoParcelas'] as $key => $row) {
+												(!$query['QuitadoParcelas']) ? $query['QuitadoParcelas'] = 'N' : FALSE;
+
+												if ($query['QuitadoParcelas'] == $key) {
+													echo ''
+													. '<label class="btn btn-warning active" name="radiobutton_QuitadoParcelas' . '" id="radiobutton_QuitadoParcelas' .  $key . '">'
+													. '<input type="radio" name="QuitadoParcelas' . '" id="radiobuttondinamico" '
+													. 'autocomplete="off" value="' . $key . '" checked>' . $row
+													. '</label>'
+													;
+												} else {
+													echo ''
+													. '<label class="btn btn-default" name="radiobutton_QuitadoParcelas' .  '" id="radiobutton_QuitadoParcelas' .  $key . '">'
+													. '<input type="radio" name="QuitadoParcelas' . '" id="radiobuttondinamico" '
+													. 'autocomplete="off" value="' . $key . '" >' . $row
+													. '</label>'
+													;
+												}
+											}
+											?>
+										</div>
+										<?php #echo form_error('QuitadoParcelas'); ?>
+									</div>									
 								</div>
 							</div>
 						

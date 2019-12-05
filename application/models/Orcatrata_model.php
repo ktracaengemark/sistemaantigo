@@ -58,6 +58,51 @@ class Orcatrata_model extends CI_Model {
         }
     }
 
+    public function set_servico($data) {
+
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+        //exit ();
+        */
+
+        $query = $this->db->insert_batch('App_Servico', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+
+    public function set_produto($data) {
+
+        $query = $this->db->insert_batch('App_Produto', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+
+    public function set_parcelas($data) {
+
+        $query = $this->db->insert_batch('App_Parcelas', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+
     public function set_parcelasrec($data) {
 
         $query = $this->db->insert_batch('App_Parcelas', $data);
@@ -113,6 +158,22 @@ class Orcatrata_model extends CI_Model {
 
         return $query[0];
     }
+
+    public function get_orcatratarec($data) {
+        $query = $this->db->query('SELECT * FROM App_OrcaTrata WHERE idTab_TipoRD = "2" AND idApp_OrcaTrata = ' . $data);
+        $query = $query->result_array();
+
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query[0];
+    }
 	
     public function get_orcatrataalterar($data) {
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE idSis_Empresa = ' . $data);
@@ -153,6 +214,13 @@ class Orcatrata_model extends CI_Model {
 
     public function get_produtodesp($data) {
 		$query = $this->db->query('SELECT * FROM App_Produto WHERE idTab_TipoRD = "1" AND idApp_OrcaTrata = ' . $data);
+        $query = $query->result_array();
+
+        return $query;
+    }
+
+    public function get_parcelas($data) {
+		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
 
         return $query;
@@ -616,6 +684,27 @@ class Orcatrata_model extends CI_Model {
 
     }
 
+    public function update_servico($data) {
+
+        $query = $this->db->update_batch('App_Servico', $data, 'idApp_Servico');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+
+    public function update_produto($data) {
+
+        $query = $this->db->update_batch('App_Produto', $data, 'idApp_Produto');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+
+    public function update_parcelas($data) {
+
+        $query = $this->db->update_batch('App_Parcelas', $data, 'idApp_Parcelas');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+
     public function update_parcelasrec($data) {
 
         $query = $this->db->update_batch('App_Parcelas', $data, 'idApp_Parcelas');
@@ -648,6 +737,44 @@ class Orcatrata_model extends CI_Model {
 
         $this->db->where_in('idApp_Produto', $data);
         $this->db->delete('App_Produto');
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    public function delete_servico($data) {
+
+        $this->db->where_in('idApp_Servico', $data);
+        $this->db->delete('App_Servico');
+
+        //$query = $this->db->delete('App_Servico', array('idApp_Servico' => $data));
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    public function delete_produto($data) {
+
+        $this->db->where_in('idApp_Produto', $data);
+        $this->db->delete('App_Produto');
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    public function delete_parcelas($data) {
+
+        $this->db->where_in('idApp_Parcelas', $data);
+        $this->db->delete('App_Parcelas');
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;

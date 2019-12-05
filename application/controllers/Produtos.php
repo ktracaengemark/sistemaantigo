@@ -96,7 +96,7 @@ class Produtos extends CI_Controller {
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
 		$this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
-		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		
@@ -271,7 +271,7 @@ class Produtos extends CI_Controller {
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
 		$this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
-		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		
@@ -450,7 +450,7 @@ class Produtos extends CI_Controller {
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
 		$this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
-		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		
@@ -626,7 +626,7 @@ class Produtos extends CI_Controller {
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
 		$this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
-		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		
@@ -831,7 +831,7 @@ class Produtos extends CI_Controller {
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim'); 		
         $this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
-		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
      
 		$data['select']['Aprovado'] = $this->Basico_model->select_status_sn();
@@ -1060,7 +1060,7 @@ class Produtos extends CI_Controller {
 
 		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim'); 		
         $this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
-		#$this->form_validation->set_rules('TipoProduto', 'TipoProduto', 'required|trim');
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
      
 		$data['select']['Aprovado'] = $this->Basico_model->select_status_sn();    

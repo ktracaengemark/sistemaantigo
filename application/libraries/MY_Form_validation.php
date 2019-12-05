@@ -79,7 +79,7 @@ class MY_Form_validation extends CI_Form_validation {
     function valid_aprovado($data) {
         $CI = & get_instance();
 
-        $CI->form_validation->set_message('valid_aprovado', 'O <b>%s</b> Nao está Aprovado.');
+        $CI->form_validation->set_message('valid_aprovado', 'O <b>%s</b> Nao está Autorizado.');
 
 		if (($data) != "S") {
 			return FALSE;

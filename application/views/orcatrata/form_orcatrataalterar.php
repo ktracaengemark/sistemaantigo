@@ -300,6 +300,7 @@
 	<?php } ?>
 <?php } ?>
 
+
 <?php if (isset($msg)) echo $msg; ?>
 
 <div class="container-fluid">
@@ -336,7 +337,7 @@
 																<option value="">-- Selecione uma opção --</option>
 																<?php
 																foreach ($select['TipoFinanceiro'] as $key => $row) {
-																	(!$orcatrata['TipoFinanceiro']) ? $orcatrata['TipoFinanceiro'] = '31' : FALSE;
+																	(!$orcatrata['TipoFinanceiro']) ? $orcatrata['TipoFinanceiro'] = '12' : FALSE;
 																	if ($orcatrata['TipoFinanceiro'] == $key) {
 																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																	} else {
@@ -351,8 +352,42 @@
 															<input type="text" class="form-control" maxlength="200"
 																	name="Descricao" value="<?php echo $orcatrata['Descricao'] ?>">
 														</div>														
-													</div>
+														<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+														<!--
+														<div class="col-md-4">
+															<label for="idApp_Cliente">Cliente</label>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																	id="idApp_Cliente" autofocus name="idApp_Cliente">
+																<option value="">-- Sel. Fornecedor --</option>
+																<?php
+																foreach ($select['idApp_Cliente'] as $key => $row) {
+																		(!$orcatrata['idApp_Cliente']) ? $orcatrata['idApp_Cliente'] = '1' : FALSE;
+																	if ($orcatrata['idApp_Cliente'] == $key) {
+																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																	} else {
+																		echo '<option value="' . $key . '">' . $row . '</option>';
+																	}
+																}
+																?>
+															</select>
+														</div>
+														-->
+														<?php } ?>
+														<?php if ($_SESSION['log']['NivelEmpresa'] < 3 ) { ?>
+														<div class="col-md-4">
+															<label for="ValorRestanteOrca">Total:</label><br>
+															<div class="input-group" id="txtHint">
+																<span class="input-group-addon" id="basic-addon1">R$</span>
+																<input type="text" class="form-control Valor" id="ValorRestanteOrca" maxlength="10" placeholder="0,00" readonly=""
+																	   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()" onkeydown="calculaParcelas()"
+																		data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
+																	   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
+															</div>
+														</div>																	
+														<?php } ?>																	
 
+													</div>
+													<br>
 													<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 													<div class="row">														
 														<div class="panel-body">	
@@ -495,7 +530,7 @@
 																				<?php } ?>
 																				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 																				<div class="col-md-2 text-right">
-																					<a class="btn btn-xs btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
+																					<a class="btn btn-sm btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
 																						<span class="glyphicon glyphicon-menu-down"></span> Devolução
 																					</a>
 																				</div>
@@ -575,6 +610,7 @@
 																								?>
 																							</select>
 																						</div>
+																						
 																						<div class="col-md-2">
 																							<label for="ValorServico">Valor:</label>
 																							<div class="input-group">
@@ -665,7 +701,7 @@
 																				<div class="col-md-2 text-left">
 																					<a class="add_field_button10  btn btn-warning" 
 																							onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
-																						<span class="glyphicon glyphicon-arrow-down"></span> Rem.Produtos
+																						<span class="glyphicon glyphicon-arrow-down"></span> Rem. Produtos
 																					</a>
 																				</div>
 																				<div class="col-md-2">	
@@ -674,7 +710,6 @@
 																				<div class="col-md-2">	
 																					<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
 																				</div>
-																				
 																				<!--
 																				<div class="col-md-3 text-left">																							
 																					<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
@@ -773,7 +808,7 @@
 														</div>
 													</div>
 													<div class="row">
-														<div class="col-md-3">
+														<div class="col-md-2">
 															<label for="FormaPagamento">Pago com:</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																	id="FormaPagamento" name="FormaPagamento">
@@ -789,7 +824,7 @@
 																?>
 															</select>
 														</div>
-														<div class="col-md-3">
+														<div class="col-md-2">
 															<label for="DataOrca">Dta Orçam:</label>
 															<div class="input-group <?php echo $datepicker; ?>">
 																<span class="input-group-addon" disabled>
@@ -833,7 +868,7 @@
 															<?php echo form_error('AVAP'); ?>
 														</div>
 														<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
-														<div class="col-md-3 form-inline">
+														<div class="col-md-2 form-inline">
 															<label for="AprovadoOrca">Aprovado?</label><br>
 															<div class="form-group">
 																<div class="btn-group" data-toggle="buttons">
@@ -865,8 +900,35 @@
 																</div>
 																<?php echo form_error('AprovadoOrca'); ?>
 															</div>
+														</div>
+														<div class="col-md-2 form-inline">
+															<label for="Cadastrar">Cadastrar?</label><br>
+															<div class="btn-group" data-toggle="buttons">
+																<?php
+																foreach ($select['Cadastrar'] as $key => $row) {
+																	(!$orcatrata['Cadastrar']) ? $orcatrata['Cadastrar'] = 'S' : FALSE;
+
+																	if ($orcatrata['Cadastrar'] == $key) {
+																		echo ''
+																		. '<label class="btn btn-warning active" name="radiobutton_Cadastrar' . '" id="radiobutton_Cadastrar' .  $key . '">'
+																		. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
+																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																		. '</label>'
+																		;
+																	} else {
+																		echo ''
+																		. '<label class="btn btn-default" name="radiobutton_Cadastrar' .  '" id="radiobutton_Cadastrar' .  $key . '">'
+																		. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
+																		. 'autocomplete="off" value="' . $key . '" >' . $row
+																		. '</label>'
+																		;
+																	}
+																}
+																?>
+															</div>
+															<?php echo form_error('Cadastrar'); ?>
 														</div>														
-														<?php } ?>														
+														<?php } ?>
 														<!--
 														<br>
 														<div class="form-group">
@@ -926,7 +988,7 @@
 																	</div>
 																</div>
 															</div>
-															<div class="col-md-4">
+															<div class="col-md-3">
 																<label for="DataVencimentoOrca">Venc.</label>
 																<div class="input-group <?php echo $datepicker; ?>">
 																	<span class="input-group-addon" disabled>
@@ -958,7 +1020,7 @@
 																	<div class="panel-heading">
 																		<div class="row">
 																			<div class="col-md-2">
-																				<label for="Parcela">Parcela:</label><br>
+																				<label for="Parcela">Parcela <?php echo $i ?>:</label><br>
 																				<input type="text" class="form-control" maxlength="6" 
 																					   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
 																			</div>
@@ -1112,6 +1174,7 @@
 														</div>																	
 													</div>
 												</div>																														
+												
 												<div class="form-group ">
 													<div class="row">
 														<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
@@ -1144,6 +1207,7 @@
 														<?php } ?>
 													</div>
 												</div>
+												
 												<!--
 												<div class="form-group">
 													<div class="row">
@@ -1195,11 +1259,11 @@
 														<?php } ?>
 
 														<div class="form-group" id="3div<?php echo $i ?>">
-															<div class="panel panel-info">
+															<div class="panel panel-success">
 																<div class="panel-heading">
 																	<div class="row">
 																		<div class="col-md-4">
-																			<label for="Procedimento<?php echo $i ?>">Procedimento:</label>
+																			<label for="Procedimento<?php echo $i ?>">Procedimento <?php echo $i ?>:</label>
 																			<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																					  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 																		</div>

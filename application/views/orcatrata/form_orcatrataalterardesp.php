@@ -105,7 +105,7 @@
 																				<div class="panel-heading">
 																					<div class="row">
 																						<div class="col-md-2">
-																							<label for="QtdProduto">Qtd<?php echo $i ?>:</label>
+																							<label for="QtdProduto">Qtd <?php echo $i ?>:</label>
 																							<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
 																									onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																									autofocus name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
@@ -156,7 +156,7 @@
 																							<input type="text" class="form-control" id="ObsProduto<?php echo $i ?>" maxlength="250"
 																								   name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>">
 																						</div>
-																						<div class="col-md-2">
+																						<div class="col-md-3">
 																							<label for="DataValidadeProduto<?php echo $i ?>">Validade:</label>
 																							<div class="input-group <?php echo $datepicker; ?>">
 																								<span class="input-group-addon" disabled>
@@ -275,6 +275,12 @@
 																			<div class="panel panel-warning">
 																				<div class="panel-heading">
 																					<div class="row">
+																						<div class="col-md-2">
+																							<label for="QtdServico">Qtd <?php echo $i ?>:</label>
+																							<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0"
+																									onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
+																									autofocus name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
+																						</div>
 																						<div class="col-md-6">
 																							<label for="idTab_Servico">Produto:</label>
 																							<?php if ($i == 1) { ?>
@@ -297,12 +303,6 @@
 																							</select>
 																						</div>
 																						<div class="col-md-2">
-																							<label for="QtdServico">Qtd:</label>
-																							<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0"
-																									onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
-																									autofocus name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
-																						</div>
-																						<div class="col-md-2">
 																							<label for="ValorServico">Valor:</label>
 																							<div class="input-group">
 																								<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -321,14 +321,13 @@
 																						</div>
 																					</div>
 																					<div class="row">
-																						<div class="col-md-3"></div>
+																						<div class="col-md-5"></div>
 																						<div class="col-md-3">
 																							<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
 																							<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
 																								   name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
 																						</div>
-																						<div class="col-md-2"></div>
-																						<div class="col-md-2">
+																						<div class="col-md-3">
 																							<label for="DataValidadeServico<?php echo $i ?>">Validade:</label>
 																							<div class="input-group <?php echo $datepicker; ?>">
 																								<span class="input-group-addon" disabled>
@@ -500,7 +499,7 @@
 														</div>
 													</div>
 													<div class="row">
-														<div class="col-md-3">
+														<div class="col-md-2">
 															<label for="FormaPagamento">Pago com:</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																	id="FormaPagamento" name="FormaPagamento">
@@ -516,7 +515,7 @@
 																?>
 															</select>
 														</div>
-														<div class="col-md-3">
+														<div class="col-md-2">
 															<label for="DataOrca">Dta Orçam:</label>
 															<div class="input-group <?php echo $datepicker; ?>">
 																<span class="input-group-addon" disabled>
@@ -560,7 +559,7 @@
 															<?php echo form_error('AVAP'); ?>
 														</div>
 														<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
-														<div class="col-md-3 form-inline">
+														<div class="col-md-2 form-inline">
 															<label for="AprovadoOrca">Aprovado?</label><br>
 															<div class="form-group">
 																<div class="btn-group" data-toggle="buttons">
@@ -593,6 +592,33 @@
 																<?php echo form_error('AprovadoOrca'); ?>
 															</div>
 														</div>
+														<div class="col-md-2 form-inline">
+															<label for="Cadastrar">Cadastrar?</label><br>
+															<div class="btn-group" data-toggle="buttons">
+																<?php
+																foreach ($select['Cadastrar'] as $key => $row) {
+																	(!$query['Cadastrar']) ? $query['Cadastrar'] = 'S' : FALSE;
+
+																	if ($query['Cadastrar'] == $key) {
+																		echo ''
+																		. '<label class="btn btn-warning active" name="radiobutton_Cadastrar' . '" id="radiobutton_Cadastrar' .  $key . '">'
+																		. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
+																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																		. '</label>'
+																		;
+																	} else {
+																		echo ''
+																		. '<label class="btn btn-default" name="radiobutton_Cadastrar' .  '" id="radiobutton_Cadastrar' .  $key . '">'
+																		. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
+																		. 'autocomplete="off" value="' . $key . '" >' . $row
+																		. '</label>'
+																		;
+																	}
+																}
+																?>
+															</div>
+															<?php echo form_error('Cadastrar'); ?>
+														</div>														
 														<?php } ?>
 														<!--
 														<br>
@@ -653,7 +679,7 @@
 																	</div>
 																</div>
 															</div>
-															<div class="col-md-4">
+															<div class="col-md-3">
 																<label for="DataVencimentoOrca">Venc.</label>
 																<div class="input-group <?php echo $datepicker; ?>">
 																	<span class="input-group-addon" disabled>
@@ -685,7 +711,7 @@
 																	<div class="panel-heading">
 																		<div class="row">
 																			<div class="col-md-2">
-																				<label for="Parcela">Parcela:</label><br>
+																				<label for="Parcela">Parcela <?php echo $i ?>:</label><br>
 																				<input type="text" class="form-control" maxlength="6" 
 																					   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
 																			</div>
@@ -928,7 +954,7 @@
 																<div class="panel-heading">
 																	<div class="row">
 																		<div class="col-md-4">
-																			<label for="Procedimento<?php echo $i ?>">Procedimento:</label>
+																			<label for="Procedimento<?php echo $i ?>">Procedimento <?php echo $i ?>:</label>
 																			<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																					  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 																		</div>

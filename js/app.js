@@ -856,7 +856,7 @@ function adicionaProcedimento() {
 
     $(".input_fields_wrap3").append('\
         <div class="form-group" id="3div'+pc+'">\
-			<div class="panel panel-info">\
+			<div class="panel panel-success">\
 				<div class="panel-heading">\
 					<div class="row">\
 						<div class="col-md-4">\
@@ -949,6 +949,20 @@ function adicionaProcedimento() {
             //if there is an error append a 'none available' option
             $select.html('<option id="-1">ERRO</option>');
         }
+
+    });
+    //permite o uso de radio buttons nesse bloco dinâmico
+    $('input:radio[id="radiogeraldinamico"]').change(function() {
+
+        var value = $(this).val();
+        var name = $(this).attr("name");
+
+        //console.log(value + ' <<>> ' + name);
+
+        $('label[name="radio_' + name + '"]').removeClass();
+        $('label[name="radio_' + name + '"]').addClass("btn btn-default");
+        $('#radio_' + name + value).addClass("btn btn-warning active");
+        //$('#radiogeral'+ value).addClass("btn btn-warning active");
 
     });
 
@@ -2488,6 +2502,20 @@ function adicionaParcelas() {
 
 	//habilita o botão de calendário após a geração dos campos dinâmicos
 	$('.DatePicker').datetimepicker(dateTimePickerOptions);	
+	
+    //permite o uso de radio buttons nesse bloco dinâmico
+    $('input:radio[id="radiogeraldinamico"]').change(function() {
+
+        var value = $(this).val();
+        var name = $(this).attr("name");
+
+        //console.log(value + ' <<>> ' + name);
+
+        $('label[name="radio_' + name + '"]').removeClass();
+        $('label[name="radio_' + name + '"]').addClass("btn btn-default");
+        $('#radio_' + name + value).addClass("btn btn-warning active");
+
+    });	
 }
 
 function adicionaParcelasAlterar() {
