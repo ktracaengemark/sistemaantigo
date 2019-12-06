@@ -822,7 +822,7 @@ class Relatorio_model extends CI_Model {
             SELECT
                 C.NomeCliente,
 				C.CelularCliente,
-				CONCAT(IFNULL(TR.TipoFinanceiro,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Descricao,"")) AS Descricao,
+				OT.Descricao,
 				OT.idApp_OrcaTrata,
                 OT.AprovadoOrca,
                 OT.DataOrca,
@@ -845,7 +845,8 @@ class Relatorio_model extends CI_Model {
 				MD.Modalidade,
 				VP.Abrev3,
 				VP.AVAP,
-				TFP.FormaPag
+				TFP.FormaPag,
+				TR.TipoFinanceiro
             FROM
                 App_OrcaTrata AS OT
 				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
@@ -945,7 +946,7 @@ class Relatorio_model extends CI_Model {
 		
         $query = $this->db->query('
             SELECT
-				CONCAT(IFNULL(TR.TipoFinanceiro,""), " / ", IFNULL(OT.Descricao,"")) AS Descricao,
+				OT.Descricao,
 				F.NomeFornecedor,
 				OT.idApp_OrcaTrata,
                 OT.AprovadoOrca,
@@ -969,7 +970,8 @@ class Relatorio_model extends CI_Model {
 				MD.Modalidade,
 				VP.Abrev3,				
 				VP.AVAP,
-				TFP.FormaPag
+				TFP.FormaPag,
+				TR.TipoFinanceiro
             FROM
                 App_OrcaTrata AS OT
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
@@ -1084,9 +1086,9 @@ class Relatorio_model extends CI_Model {
             SELECT
                 C.NomeCliente,
 				C.CelularCliente,
-				CONCAT(IFNULL(TR.TipoFinanceiro,""), " / ", IFNULL(C.NomeCliente,""), " / ", IFNULL(OT.Descricao,"")) AS Descricao,
+				OT.Descricao,
 				OT.idApp_OrcaTrata,
-                OT.AprovadoOrca,
+				OT.AprovadoOrca,
                 OT.DataOrca,
 				OT.DataEntradaOrca,
 				OT.DataPrazo,
@@ -1115,7 +1117,8 @@ class Relatorio_model extends CI_Model {
 				AP.ValorProduto,
 				TP3.Prodaux3,
 				TP2.Prodaux2,
-				TP1.Prodaux1
+				TP1.Prodaux1,
+				TR.TipoFinanceiro
             FROM
                 App_OrcaTrata AS OT
 				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
@@ -1141,7 +1144,8 @@ class Relatorio_model extends CI_Model {
 				' . $filtro6 . '
 				' . $filtro7 . '
 				OT.AprovadoOrca = "S" AND
-				OT.idTab_TipoRD = "2"
+				OT.idTab_TipoRD = "2" AND
+				AP.idTab_TipoRD = "2"
                 ' . $data['TipoFinanceiroR'] . '
 				' . $data['Orcarec'] . '
 				' . $data['Dia'] . ' 
@@ -1252,7 +1256,7 @@ class Relatorio_model extends CI_Model {
 		
         $query = $this->db->query('
             SELECT
-				CONCAT(IFNULL(TR.TipoFinanceiro,""), " / ", IFNULL(F.NomeFornecedor,""), " / ", IFNULL(OT.Descricao,"")) AS Descricao,
+				OT.Descricao,
 				F.NomeFornecedor,
 				OT.idApp_OrcaTrata,
                 OT.AprovadoOrca,
@@ -1284,7 +1288,8 @@ class Relatorio_model extends CI_Model {
 				AP.ValorProduto,
 				TP3.Prodaux3,
 				TP2.Prodaux2,
-				TP1.Prodaux1				
+				TP1.Prodaux1,
+				TR.TipoFinanceiro
             FROM
                 App_OrcaTrata AS OT
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
@@ -1310,7 +1315,8 @@ class Relatorio_model extends CI_Model {
 				' . $filtro6 . '
 				' . $filtro7 . '
 				OT.AprovadoOrca = "S" AND
-				OT.idTab_TipoRD = "1"
+				OT.idTab_TipoRD = "1" AND
+				AP.idTab_TipoRD = "1"
                 ' . $data['TipoFinanceiroD'] . '
 				' . $data['Orcades'] . '
 				' . $data['Dia'] . ' 
@@ -1459,7 +1465,8 @@ class Relatorio_model extends CI_Model {
                 PR.ValorParcela,
                 PR.DataPago,
                 PR.ValorPago,
-                PR.Quitado
+                PR.Quitado,
+				TR.TipoFinanceiro
             FROM
                 App_OrcaTrata AS OT
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
@@ -1474,7 +1481,7 @@ class Relatorio_model extends CI_Model {
 				' . $permissao . '
 				' . $filtro4 . '
 				OT.AprovadoOrca = "S" AND
-				PR.idTab_TipoRD = "2" AND
+				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" 
                 ' . $data['TipoFinanceiroR'] . '
 				' . $data['Orcarec'] . '
@@ -1505,8 +1512,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro4 . '
 				OT.idTab_TipoRD = "2" AND
 				OT.AprovadoOrca = "S" AND
-				PR.idTab_TipoRD = "2" AND
-				PR.Quitado = "S"
+				PR.idTab_TipoRD = "2" 
                 ' . $data['TipoFinanceiroR'] . '
 				' . $data['Orcarec'] . '                
 				' . $data['Dia'] . ' 
@@ -1663,7 +1669,8 @@ class Relatorio_model extends CI_Model {
                 PR.ValorParcela,
                 PR.DataPago,
                 PR.ValorPago,
-                PR.Quitado
+                PR.Quitado,
+				TD.TipoFinanceiro
             FROM
                 App_OrcaTrata AS OT
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = OT.idSis_Usuario
@@ -1678,7 +1685,7 @@ class Relatorio_model extends CI_Model {
 				' . $permissao . '
 				' . $filtro4 . '
 				OT.AprovadoOrca = "S" AND
-				PR.idTab_TipoRD = "1" AND
+				OT.idTab_TipoRD = "1" AND
 				PR.idTab_TipoRD = "1" 
                 ' . $data['TipoFinanceiroD'] . '
 				' . $data['Orcades'] . '                
@@ -1709,8 +1716,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro4 . '
 				OT.idTab_TipoRD = "1" AND
 				OT.AprovadoOrca = "S" AND
-				PR.idTab_TipoRD = "1" AND
-				PR.Quitado = "S"
+				PR.idTab_TipoRD = "1" 
                 ' . $data['TipoFinanceiroD'] . '
 				' . $data['Orcades'] . '                
 				' . $data['Dia'] . ' 
@@ -2911,7 +2917,8 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3					
             WHERE
-                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                OT.AprovadoOrca ="S" AND
+				APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 (' . $consulta . ')  
                 ' . $data['Produtos'] . ' AND                
 				APV.idTab_TipoRD = "1" 
@@ -2948,7 +2955,8 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3					
             WHERE
-                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                OT.AprovadoOrca ="S" AND
+				APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 (' . $consulta . ')  
                 ' . $data['Produtos'] . ' AND                
 				APV.idTab_TipoRD = "2" 
@@ -2985,7 +2993,8 @@ class Relatorio_model extends CI_Model {
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3					
             WHERE
-                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                OT.AprovadoOrca ="S" AND
+				APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 (' . $consulta . ')  
                 ' . $data['Produtos'] . ' AND                
 				APV.idTab_TipoRD = "3" 
@@ -3029,7 +3038,8 @@ exit();
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3					
             WHERE
-                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                OT.AprovadoOrca ="S" AND
+				APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 (' . $consulta . ')  
                 ' . $data['Produtos'] . ' AND                
 				APV.idTab_TipoRD = "4" 
@@ -3066,7 +3076,8 @@ exit();
                     LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
                     LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
-                APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                OT.AprovadoOrca ="S" AND
+				APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 (' . $consulta . ') 			
                 ' . $data['Produtos'] . ' AND
                 APV.idTab_TipoRD = "5"
@@ -7147,7 +7158,7 @@ exit();*/
         ');
 
         $array = array();
-        $array[0] = ':: Todos Os Clientes ::';
+        $array[0] = ':: Todos os Clientes ::';
         foreach ($query->result() as $row) {
 			$array[$row->idApp_Cliente] = $row->NomeCliente;
         }

@@ -17,23 +17,20 @@
 								<!--<th class="active">EdtOrç</th>-->
 								<th class="active">Imp.</th>							
 								<th class="active">Orç.</th>
+								<th class="active">Cliente</th>
 								<th class="active">Receita</th>
 								<!--<th class="active">Valid. do Orçam.</th>
 								<th class="active">Prazo de Entrega</th>-->
-								<th class="active">Orçamento</th>
+								<th class="active">Orçam.</th>
 								<th class="active">Desconto</th>
-								<th class="active">Receb</th>					
+								<th class="active">Receber</th>					
 								<th class="active">FormaPagm.</th>
 								<!--<th class="active">Qtd.Prc.</th>
 								<th class="active">Mod.</th>
 								<th class="active">Forma de Pag.</th>-->
-								<th class="active">Apv.Quit.Concl.</th>
+								<th class="active">Apv.</th>
 								<th class="active">Dt.Orç.</th>
-								<th class="active">Dt.Concl.</th>
-								<th class="active">Dt.Quit.</th>
-								<th class="active">Dt.Retor.</th>
 								<th class="active">Dt.Venc.</th>
-								<th class="active">Obs.</th>
 								<th class="active">Remover</th>
 							</tr>
 						</thead>
@@ -41,7 +38,7 @@
 							<?php
 							foreach ($report->result_array() as $row) {
 								echo '<tr>';
-								echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">';
+								#echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">';
 									/*
 									echo '<td class="notclickable">
 											<a class="btn btn-md btn-success notclickable" href="' . base_url() . 'Orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">
@@ -62,7 +59,8 @@
 											</a>
 											
 										</td>';										
-									echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
+									echo '<td>' . $row['idApp_OrcaTrata'] . '- ' . $row['TipoFinanceiro'] . '</td>';
+									echo '<td>' . $row['NomeCliente'] . '</td>';
 									echo '<td>' . $row['Descricao'] . '</td>';
 									#echo '<td>' . $row['DataEntradaOrca'] . '</td>';
 									#echo '<td>' . $row['DataPrazo'] . '</td>';
@@ -73,13 +71,9 @@
 									#echo '<td>' . $row['QtdParcelasOrca'] . '</td>';
 									#echo '<td>' . $row['Modalidade'] . '</td>';
 									#echo '<td>' . $row['FormaPag'] . '</td>';
-									echo '<td>' . $row['AprovadoOrca'] . ' - ' . $row['QuitadoOrca'] . ' - ' . $row['ConcluidoOrca'] . '</td>';
+									echo '<td>' . $row['AprovadoOrca'] . '</td>';
 									echo '<td>' . $row['DataOrca'] . '</td>';							
-									echo '<td>' . $row['DataConclusao'] . '</td>';
-									echo '<td>' . $row['DataQuitado'] . '</td>';
-									echo '<td>' . $row['DataRetorno'] . '</td>';
 									echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
-									echo '<td>' . $row['ObsOrca'] . '</td>';
 									echo '<td class="notclickable">
 											<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'orcatrata/excluir2/' . $row['idApp_OrcaTrata'] . '">
 												<span class="glyphicon glyphicon-trash notclickable"></span>

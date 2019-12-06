@@ -16,7 +16,7 @@
 					<table class="table table-bordered table-condensed table-striped">
 						<thead>
 							<tr>
-								<th colspan="4" class="active">Vendas: <?php echo $report->num_rows(); ?> resultado(s)</th>
+								<th colspan="3" class="active">Vendas: <?php echo $report->num_rows(); ?> resultado(s)</th>
 								<th colspan="7" class="active"> <?php echo $report->soma->quantidade ?> Produtos Vendidos</th>
 								<!--<th colspan="1" class="active">Total: <?php echo $report->soma->somasubtotal ?> </th>-->
 							</tr>
@@ -26,8 +26,9 @@
 								<!--<th class="active">EdtOrç</th>-->
 								<th class="active">Imp.</th>							
 								<th class="active">Orç.</th>
-								<th class="active">Receita</th>
-								<!--<th class="active">Valid. do Orçam.</th>
+								<th class="active">Cliente</th>
+								<!--<th class="active">Receita</th>
+								<th class="active">Valid. do Orçam.</th>
 								<th class="active">Prazo de Entrega</th>
 								<th class="active">Orçamento</th>
 								<th class="active">Desconto</th>
@@ -36,7 +37,6 @@
 								<th class="active">Qtd.Prc.</th>
 								<th class="active">Mod.</th>
 								<th class="active">Forma de Pag.</th>-->
-								<th class="active">Concl/Quit</th>
 								<!--<th class="active">Dt.Concl.</th>
 								<th class="active">Dt.Quit.</th>
 								<th class="active">Dt.Retor.</th>
@@ -77,8 +77,9 @@
 											</a>
 											
 										</td>';										
-									echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
-									echo '<td>' . $row['Descricao'] . '</td>';
+									echo '<td>' . $row['idApp_OrcaTrata'] . '- ' . $row['TipoFinanceiro'] . '</td>';
+									echo '<td>' . $row['NomeCliente'] . '</td>';
+									#echo '<td>' . $row['Descricao'] . '</td>';
 									#echo '<td>' . $row['DataEntradaOrca'] . '</td>';
 									#echo '<td>' . $row['DataPrazo'] . '</td>';
 									#echo '<td class="text-right">' . $row['ValorOrca'] . '</td>';
@@ -88,8 +89,6 @@
 									#echo '<td>' . $row['QtdParcelasOrca'] . '</td>';
 									#echo '<td>' . $row['Modalidade'] . '</td>';
 									#echo '<td>' . $row['FormaPag'] . '</td>';
-									echo '<td>' . $row['ConcluidoOrca'] . ' - ' . $row['QuitadoOrca'] . '</td>';
-																
 									#echo '<td>' . $row['DataConclusao'] . '</td>';
 									#echo '<td>' . $row['DataQuitado'] . '</td>';
 									#echo '<td>' . $row['DataRetorno'] . '</td>';
