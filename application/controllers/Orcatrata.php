@@ -357,7 +357,8 @@ class Orcatrata extends CI_Controller {
 					$data['servico'][$j]['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
 					$data['servico'][$j]['idTab_TipoRD'] = "4";
 					$data['servico'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeServico'], 'mysql');
-                    $data['servico'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorServico']));
+                    if ($data['orcatrata']['ConcluidoOrca'] == 'S') $data['servico'][$j]['ConcluidoServico'] = 'S';
+					$data['servico'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorServico']));
                     unset($data['servico'][$j]['SubtotalServico']);
                 }
                 $data['servico']['idApp_Servico'] = $this->Orcatrata_model->set_servico_venda($data['servico']);
@@ -374,7 +375,8 @@ class Orcatrata extends CI_Controller {
 					$data['produto'][$j]['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
 					$data['produto'][$j]['idTab_TipoRD'] = "2";
 					$data['produto'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['produto'][$j]['DataValidadeProduto'], 'mysql');
-                    $data['produto'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produto'][$j]['ValorProduto']));
+                    if ($data['orcatrata']['ConcluidoOrca'] == 'S') $data['produto'][$j]['ConcluidoProduto'] = 'S';
+					$data['produto'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produto'][$j]['ValorProduto']));
                     unset($data['produto'][$j]['SubtotalProduto']);
                 }
                 $data['produto']['idApp_Produto'] = $this->Orcatrata_model->set_produto_venda($data['produto']);
@@ -620,7 +622,7 @@ class Orcatrata extends CI_Controller {
 			'3' => 'Baixa',
         );
 		
-        $data['titulo'] = 'Novo Orçamento';
+        $data['titulo'] = 'Nova Receita';
         $data['form_open_path'] = 'orcatrata/cadastrar3';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -670,6 +672,7 @@ class Orcatrata extends CI_Controller {
 
 		
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
+
 
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'S' : FALSE;				
@@ -1748,7 +1751,7 @@ class Orcatrata extends CI_Controller {
 			'3' => 'Baixa',
         );
 		
-        $data['titulo'] = 'Editar Orçamento';
+        $data['titulo'] = 'Editar Receita';
         $data['form_open_path'] = 'orcatrata/alterar';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -2361,7 +2364,7 @@ class Orcatrata extends CI_Controller {
 			'3' => 'Baixa',
         );
 		
-        $data['titulo'] = 'EDITAR DESPESA';
+        $data['titulo'] = 'Edirar Receita';
         $data['form_open_path'] = 'orcatrata/alterar2';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -2521,7 +2524,8 @@ class Orcatrata extends CI_Controller {
                     $data['update']['servico']['inserir'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
 					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "4";
 					$data['update']['servico']['inserir'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeServico'], 'mysql');
-                    $data['update']['servico']['inserir'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorServico']));
+                    if ($data['orcatrata']['ConcluidoOrca'] == 'S') $data['update']['servico']['inserir'][$j]['ConcluidoServico'] = 'S';
+					$data['update']['servico']['inserir'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorServico']));
                     unset($data['update']['servico']['inserir'][$j]['SubtotalServico']);
                 }
 
@@ -2530,6 +2534,7 @@ class Orcatrata extends CI_Controller {
                     $data['update']['servico']['alterar'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeServico'], 'mysql');
 					$data['update']['servico']['alterar'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['alterar'][$j]['ValorServico']));
                     unset($data['update']['servico']['alterar'][$j]['SubtotalServico']);
+					if ($data['orcatrata']['ConcluidoOrca'] == 'S') $data['update']['servico']['alterar'][$j]['ConcluidoServico'] = 'S';
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['servico']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
                 }
 
@@ -2564,7 +2569,8 @@ class Orcatrata extends CI_Controller {
                     $data['update']['produto']['inserir'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
 					$data['update']['produto']['inserir'][$j]['idTab_TipoRD'] = "2";
 					$data['update']['produto']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['produto']['inserir'][$j]['DataValidadeProduto'], 'mysql');
-                    $data['update']['produto']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['produto']['inserir'][$j]['ValorProduto']));
+                    if ($data['orcatrata']['ConcluidoOrca'] == 'S') $data['update']['produto']['inserir'][$j]['ConcluidoProduto'] = 'S';
+					$data['update']['produto']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['produto']['inserir'][$j]['ValorProduto']));
                     unset($data['update']['produto']['inserir'][$j]['SubtotalProduto']);
                 }
 
@@ -2573,6 +2579,7 @@ class Orcatrata extends CI_Controller {
                     $data['update']['produto']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['produto']['alterar'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['produto']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['produto']['alterar'][$j]['ValorProduto']));
                     unset($data['update']['produto']['alterar'][$j]['SubtotalProduto']);
+					if ($data['orcatrata']['ConcluidoOrca'] == 'S') $data['update']['produto']['alterar'][$j]['ConcluidoProduto'] = 'S';
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['produto']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
                 }
 
@@ -2884,7 +2891,7 @@ class Orcatrata extends CI_Controller {
 			'3' => 'Baixa',
         );
 		
-        $data['titulo'] = 'NOVA DESPESA';
+        $data['titulo'] = 'Nova Despesa';
         $data['form_open_path'] = 'orcatrata/cadastrardesp';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -3400,7 +3407,7 @@ class Orcatrata extends CI_Controller {
 			'3' => 'Baixa',
         );
 		
-        $data['titulo'] = 'EDITAR DESPESA';
+        $data['titulo'] = 'Editar Despesa';
         $data['form_open_path'] = 'orcatrata/alterardesp';
         $data['readonly'] = '';
         $data['disabled'] = '';
