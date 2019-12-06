@@ -295,7 +295,8 @@ class Orcatrata_model extends CI_Model {
 				PR.idTab_TipoRD = "1" AND
 				PR.Quitado = "N" 				
 			ORDER BY
-				C.NomeFornecedor
+				C.NomeFornecedor,
+				PR.DataVencimento
 		');
         $query = $query->result_array();
 
@@ -347,7 +348,8 @@ class Orcatrata_model extends CI_Model {
 				PR.idTab_TipoRD = "2" AND			
 				PR.Quitado = "N"
 			ORDER BY
-				C.NomeCliente  
+				C.NomeCliente,
+				PR.DataVencimento
 		');
         $query = $query->result_array();
 

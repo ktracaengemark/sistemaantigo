@@ -905,7 +905,7 @@
 														</div>
 													</div>
 													<div class="col-md-3">
-														<label for="Cadastrar">Cadastrar no BD?</label><br>
+														<label for="Cadastrar">Pronto Para Salvar?</label><br>
 														<div class="btn-group" data-toggle="buttons">
 															<?php
 															foreach ($select['Cadastrar'] as $key => $row) {
@@ -915,6 +915,7 @@
 																	echo ''
 																	. '<label class="btn btn-warning active" name="radiobutton_Cadastrar' . '" id="radiobutton_Cadastrar' .  $key . '">'
 																	. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
+																	. 'onchange="this.form.submit()" '
 																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																	. '</label>'
 																	;
@@ -922,6 +923,7 @@
 																	echo ''
 																	. '<label class="btn btn-default" name="radiobutton_Cadastrar' .  '" id="radiobutton_Cadastrar' .  $key . '">'
 																	. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
+																	. 'onchange="this.form.submit()" '
 																	. 'autocomplete="off" value="' . $key . '" >' . $row
 																	. '</label>'
 																	;

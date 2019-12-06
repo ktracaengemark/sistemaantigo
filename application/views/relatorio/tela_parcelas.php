@@ -86,6 +86,23 @@
 						<div class="modal-footer">
 							<div class="form-group">	
 								<div class="row">								
+									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+									<div class="col-md-9 text-left">
+										<label for="Ordenamento">Cliente:</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+												id="NomeCliente" name="NomeCliente">
+											<?php
+											foreach ($select['NomeCliente'] as $key => $row) {
+												if ($query['NomeCliente'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>
+									<?php } ?>									
 									<div class="col-md-3 text-left">
 										<label for="Quitado">Parc. Quit.</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -101,23 +118,7 @@
 											?>
 										</select>
 									</div>
-									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
-									<div class="col-md-6 text-left">
-										<label for="Ordenamento">Cliente:</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-												id="NomeCliente" name="NomeCliente">
-											<?php
-											foreach ($select['NomeCliente'] as $key => $row) {
-												if ($query['NomeCliente'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											?>
-										</select>
-									</div>
-									<?php } ?>
+
 								</div>
 							</div>	
 							<div class="form-group">								
@@ -399,6 +400,23 @@
 						<div class="modal-footer">							
 							<div class="form-group">	
 								<div class="row">
+									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+									<div class="col-md-9 text-left">
+										<label for="Ordenamento">Fornecedor:</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+												id="NomeFornecedor" name="NomeFornecedor">
+											<?php
+											foreach ($select['NomeFornecedor'] as $key => $row) {
+												if ($query['NomeFornecedor'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>
+									<?php } ?>									
 									<div class="col-md-3 text-left">
 										<label for="Quitado">Parc. Quit.</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -414,23 +432,6 @@
 											?>
 										</select>
 									</div>
-									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
-									<div class="col-md-6 text-left">
-										<label for="Ordenamento">Fornecedor:</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-												id="NomeFornecedor" name="NomeFornecedor">
-											<?php
-											foreach ($select['NomeFornecedor'] as $key => $row) {
-												if ($query['NomeFornecedor'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											?>
-										</select>
-									</div>
-									<?php } ?>
 								</div>
 							</div>	
 							<div class="form-group">

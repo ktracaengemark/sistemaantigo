@@ -23,9 +23,11 @@
 							<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 								<span class="glyphicon glyphicon-search"></span> Parcelas
 							</a>
+							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/fiado" role="button">
 								<span class="glyphicon glyphicon-search"></span> Fiado
-							</a>							
+							</a>
+							<?php } ?>
 							<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/despesasparc" role="button">
 								<span class="glyphicon glyphicon-search"></span>PcDesp
 							</a>-->
