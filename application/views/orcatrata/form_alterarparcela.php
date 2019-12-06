@@ -21,8 +21,11 @@
 								<span class="glyphicon glyphicon-search"></span> <?php #echo $titulo; ?>
 							</button>-->
 							<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
-								<span class="glyphicon glyphicon-search"></span>Parcelas
+								<span class="glyphicon glyphicon-search"></span> Parcelas
 							</a>
+							<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/fiado" role="button">
+								<span class="glyphicon glyphicon-search"></span> Fiado
+							</a>							
 							<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/despesasparc" role="button">
 								<span class="glyphicon glyphicon-search"></span>PcDesp
 							</a>-->
@@ -148,7 +151,7 @@
 															<div class="panel-heading">
 																<div class="row">
 																	<div class="col-md-4">
-																		<label for="Parcela">Parcela:</label><br>
+																		<label for="Parcela">Parcela <?php echo $i ?>:</label><br>
 																		<input type="text" class="form-control" maxlength="6" readonly=""
 																			   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
 																	</div>

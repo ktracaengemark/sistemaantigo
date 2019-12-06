@@ -250,6 +250,109 @@ class Orcatrata_model extends CI_Model {
 
         return $query;
     }	
+
+	public function get_alterarparceladespfiado($data) {
+
+		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		$permissao1 = ($_SESSION['FiltroAlteraParcela']['Quitado'] != "0" ) ? 'PR.Quitado = "' . $_SESSION['FiltroAlteraParcela']['Quitado'] . '" AND ' : FALSE;
+		$permissao2 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
+		$permissao3 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "0" ) ? 'YEAR(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
+		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Orcades'] != "0" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcades'] . '" AND ' : FALSE;
+		$permissao5 = (($_SESSION['log']['idSis_Empresa'] != 5) && ($_SESSION['FiltroAlteraParcela']['NomeFornecedor'] != "0" )) ? 'OT.idApp_Fornecedor = "' . $_SESSION['FiltroAlteraParcela']['NomeFornecedor'] . '" AND ' : FALSE;
+		
+		$query = $this->db->query('
+			SELECT
+				C.NomeFornecedor,
+				OT.Descricao,
+				OT.idApp_OrcaTrata,
+				OT.TipoFinanceiro,
+				TD.TipoFinanceiro,
+				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "-", IFNULL(OT.Descricao,"")) AS idApp_OrcaTrata,
+				E.NomeEmpresa,
+				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
+				PR.idSis_Usuario,
+				PR.idApp_Parcelas,
+				CONCAT(IFNULL(PR.Parcela,""), "--", IFNULL(PR.idApp_OrcaTrata,""), "--", IFNULL(TD.TipoFinanceiro,""), "--", IFNULL(OT.Descricao,"")) AS Parcela,
+				PR.ValorParcela,
+				PR.DataVencimento,
+				PR.ValorPago,
+				PR.DataPago,
+				PR.Quitado
+			FROM
+				App_Parcelas AS PR
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+					LEFT JOIN Tab_TipoFinanceiro AS TD ON TD.idTab_TipoFinanceiro = OT.TipoFinanceiro
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
+					LEFT JOIN App_Fornecedor AS C ON C.idApp_Fornecedor = OT.idApp_Fornecedor
+			WHERE
+				' . $permissao . '
+				' . $permissao5 . '				
+				OT.idSis_Empresa = ' . $data . ' AND
+				OT.AprovadoOrca = "S" AND
+				PR.idSis_Empresa = ' . $data . ' AND			
+				PR.idTab_TipoRD = "1" AND
+				PR.idTab_TipoRD = "1" AND
+				PR.Quitado = "N" 				
+			ORDER BY
+				C.NomeFornecedor
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
+    public function get_alterarparcelarecfiado($data) {
+		
+		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		$permissao1 = ($_SESSION['FiltroAlteraParcela']['Quitado'] != "0" ) ? 'PR.Quitado = "' . $_SESSION['FiltroAlteraParcela']['Quitado'] . '" AND ' : FALSE;
+		$permissao2 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
+		$permissao3 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "0" ) ? 'YEAR(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
+		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Orcarec'] != "0" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcarec'] . '" AND ' : FALSE;
+		$permissao5 = (($_SESSION['log']['idSis_Empresa'] != 5) && ($_SESSION['FiltroAlteraParcela']['NomeCliente'] != "0" )) ? 'OT.idApp_Cliente = "' . $_SESSION['FiltroAlteraParcela']['NomeCliente'] . '" AND ' : FALSE;
+		
+		$query = $this->db->query('
+			SELECT
+				C.NomeCliente,
+				OT.idApp_OrcaTrata,
+				OT.Descricao,
+				OT.TipoFinanceiro,
+				TR.TipoFinanceiro,
+				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "-", IFNULL(OT.Descricao,"")) AS idApp_OrcaTrata,
+				E.NomeEmpresa,
+				PR.idSis_Usuario,
+				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
+				PR.idApp_Parcelas,
+				CONCAT(IFNULL(PR.Parcela,""), "--", IFNULL(PR.idApp_OrcaTrata,""), "--", IFNULL(TR.TipoFinanceiro,""), "--", IFNULL(C.NomeCliente,""), "--", IFNULL(OT.Descricao,"")) AS Parcela,
+				PR.ValorParcela,
+				PR.DataVencimento,
+				PR.ValorPago,
+				PR.DataPago,
+				PR.Quitado
+			FROM 
+				App_Parcelas AS PR
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
+			WHERE 
+				' . $permissao . '
+				' . $permissao5 . '					
+				OT.idSis_Empresa = ' . $data . ' AND
+				OT.idTab_TipoRD = "2" AND				
+				OT.AprovadoOrca = "S" AND
+				OT.TipoFinanceiro = "31" AND
+				PR.idSis_Empresa = ' . $data . ' AND
+				PR.idTab_TipoRD = "2" AND			
+				PR.Quitado = "N"
+			ORDER BY
+				C.NomeCliente  
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }	
 	
     public function get_procedimento($data) {
 		$query = $this->db->query('SELECT * FROM App_Procedimento WHERE idApp_OrcaTrata = ' . $data);

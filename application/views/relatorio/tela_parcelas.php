@@ -19,10 +19,11 @@
 						<span class="glyphicon glyphicon-edit"></span> Editar
 					</button>
 				</a>
+				<!--
 				<button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#Receitas" aria-expanded="false" aria-controls="Receitas">
 					<span class="glyphicon glyphicon-menu-up"></span> Receitas
 				</button>																							
-				<!--
+				
 				<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
 					<span class="glyphicon glyphicon-search"></span>Relatório
 				</a>			
@@ -330,10 +331,11 @@
 						<span class="glyphicon glyphicon-edit"></span> Editar
 					</button>
 				</a>
+				<!--
 				<button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#Despesas" aria-expanded="false" aria-controls="Despesas">
 					<span class="glyphicon glyphicon-menu-up"></span> Despesas
 				</button>			
-				<!--
+				
 				<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
 					<span class="glyphicon glyphicon-search"></span>Relatório
 				</a>			

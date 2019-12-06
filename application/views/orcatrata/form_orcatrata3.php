@@ -59,7 +59,7 @@
 																<option value="">-- Selecione uma opção --</option>
 																<?php
 																foreach ($select['TipoFinanceiro'] as $key => $row) {
-																	(!$orcatrata['TipoFinanceiro']) ? $orcatrata['TipoFinanceiro'] = '12' : FALSE;
+																	(!$orcatrata['TipoFinanceiro']) ? $orcatrata['TipoFinanceiro'] = '31' : FALSE;
 																	if ($orcatrata['TipoFinanceiro'] == $key) {
 																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																	} else {
