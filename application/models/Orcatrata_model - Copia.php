@@ -25,6 +25,39 @@ class Orcatrata_model extends CI_Model {
         }
     }	
 
+    public function set_servico_venda($data) {
+
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+        //exit ();
+        */
+
+        $query = $this->db->insert_batch('App_Servico', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+
+    public function set_produto_venda($data) {
+
+        $query = $this->db->insert_batch('App_Produto', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+
     public function set_servico($data) {
 
         /*
@@ -69,6 +102,18 @@ class Orcatrata_model extends CI_Model {
             return $this->db->insert_id();
         }
     }
+
+    public function set_parcelasrec($data) {
+
+        $query = $this->db->insert_batch('App_Parcelas', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
 	
     public function set_procedimento($data) {
 
@@ -84,6 +129,38 @@ class Orcatrata_model extends CI_Model {
 
     public function get_orcatrata($data) {
         $query = $this->db->query('SELECT * FROM App_OrcaTrata WHERE idApp_OrcaTrata = ' . $data);
+        $query = $query->result_array();
+
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query[0];
+    }
+	
+    public function get_orcatratadesp($data) {
+        $query = $this->db->query('SELECT * FROM App_OrcaTrata WHERE idTab_TipoRD = "1" AND idApp_OrcaTrata = ' . $data);
+        $query = $query->result_array();
+
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query[0];
+    }
+
+    public function get_orcatratarec($data) {
+        $query = $this->db->query('SELECT * FROM App_OrcaTrata WHERE idTab_TipoRD = "2" AND idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
 
         /*
@@ -144,6 +221,20 @@ class Orcatrata_model extends CI_Model {
 
     public function get_parcelas($data) {
 		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data);
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
+    public function get_parcelasrec($data) {
+		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data);
+        $query = $query->result_array();
+
+        return $query;
+    }
+
+    public function get_parcelasrecdesp($data) {
+		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idTab_TipoRD = "1" AND idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
 
         return $query;
@@ -579,6 +670,20 @@ class Orcatrata_model extends CI_Model {
 
     }
 		
+    public function update_servico_venda($data) {
+
+        $query = $this->db->update_batch('App_Servico', $data, 'idApp_Servico');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+
+    public function update_produto_venda($data) {
+
+        $query = $this->db->update_batch('App_Produto', $data, 'idApp_Produto');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+
     public function update_servico($data) {
 
         $query = $this->db->update_batch('App_Servico', $data, 'idApp_Servico');
@@ -599,12 +704,45 @@ class Orcatrata_model extends CI_Model {
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }
+
+    public function update_parcelasrec($data) {
+
+        $query = $this->db->update_batch('App_Parcelas', $data, 'idApp_Parcelas');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
 	
     public function update_procedimento($data) {
 
         $query = $this->db->update_batch('App_Procedimento', $data, 'idApp_Procedimento');
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
+    }
+
+    public function delete_servico_venda($data) {
+
+        $this->db->where_in('idApp_Servico', $data);
+        $this->db->delete('App_Servico');
+
+        //$query = $this->db->delete('App_Servico', array('idApp_Servico' => $data));
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    public function delete_produto_venda($data) {
+
+        $this->db->where_in('idApp_Produto', $data);
+        $this->db->delete('App_Produto');
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
     }
 
     public function delete_servico($data) {
@@ -634,6 +772,18 @@ class Orcatrata_model extends CI_Model {
     }
 
     public function delete_parcelas($data) {
+
+        $this->db->where_in('idApp_Parcelas', $data);
+        $this->db->delete('App_Parcelas');
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    public function delete_parcelasrec($data) {
 
         $this->db->where_in('idApp_Parcelas', $data);
         $this->db->delete('App_Parcelas');

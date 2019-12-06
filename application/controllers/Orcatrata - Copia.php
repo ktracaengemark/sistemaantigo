@@ -361,7 +361,7 @@ class Orcatrata extends CI_Controller {
 					$data['servico'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorServico']));
                     unset($data['servico'][$j]['SubtotalServico']);
                 }
-                $data['servico']['idApp_Servico'] = $this->Orcatrata_model->set_servico($data['servico']);
+                $data['servico']['idApp_Servico'] = $this->Orcatrata_model->set_servico_venda($data['servico']);
             }
 
             #### App_Produto ####
@@ -379,7 +379,7 @@ class Orcatrata extends CI_Controller {
 					$data['produto'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produto'][$j]['ValorProduto']));
                     unset($data['produto'][$j]['SubtotalProduto']);
                 }
-                $data['produto']['idApp_Produto'] = $this->Orcatrata_model->set_produto($data['produto']);
+                $data['produto']['idApp_Produto'] = $this->Orcatrata_model->set_produto_venda($data['produto']);
             }
 
             #### App_ParcelasRec ####
@@ -398,7 +398,7 @@ class Orcatrata extends CI_Controller {
                     $data['parcelasrec'][$j]['DataPago'] = $this->basico->mascara_data($data['parcelasrec'][$j]['DataPago'], 'mysql');
 					if ($data['orcatrata']['QuitadoOrca'] == 'S') $data['parcelasrec'][$j]['Quitado'] = 'S';
                 }
-                $data['parcelasrec']['idApp_Parcelas'] = $this->Orcatrata_model->set_parcelas($data['parcelasrec']);
+                $data['parcelasrec']['idApp_Parcelas'] = $this->Orcatrata_model->set_parcelasrec($data['parcelasrec']);
             }
 
             #### App_Procedimento ####
@@ -788,7 +788,7 @@ class Orcatrata extends CI_Controller {
                     $data['servico'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorServico']));
                     unset($data['servico'][$j]['SubtotalServico']);
                 }
-                $data['servico']['idApp_Servico'] = $this->Orcatrata_model->set_servico($data['servico']);
+                $data['servico']['idApp_Servico'] = $this->Orcatrata_model->set_servico_venda($data['servico']);
             }
 
             #### App_Produto ####
@@ -805,7 +805,7 @@ class Orcatrata extends CI_Controller {
                     $data['produto'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produto'][$j]['ValorProduto']));
                     unset($data['produto'][$j]['SubtotalProduto']);
                 }
-                $data['produto']['idApp_Produto'] = $this->Orcatrata_model->set_produto($data['produto']);
+                $data['produto']['idApp_Produto'] = $this->Orcatrata_model->set_produto_venda($data['produto']);
             }
 
             #### App_ParcelasRec ####
@@ -826,7 +826,7 @@ class Orcatrata extends CI_Controller {
 					if ($data['orcatrata']['QuitadoOrca'] == 'S') $data['parcelasrec'][$j]['Quitado'] = 'S';
 
                 }
-                $data['parcelasrec']['idApp_Parcelas'] = $this->Orcatrata_model->set_parcelas($data['parcelasrec']);
+                $data['parcelasrec']['idApp_Parcelas'] = $this->Orcatrata_model->set_parcelasrec($data['parcelasrec']);
             }
 
             #### App_Procedimento ####
@@ -1070,7 +1070,7 @@ class Orcatrata extends CI_Controller {
             }
 
             #### App_Parcelas ####
-            $data['parcelasrec'] = $this->Orcatrata_model->get_parcelas($id);
+            $data['parcelasrec'] = $this->Orcatrata_model->get_parcelasrec($id);
             if (count($data['parcelasrec']) > 0) {
                 $data['parcelasrec'] = array_combine(range(1, count($data['parcelasrec'])), array_values($data['parcelasrec']));
 				$data['count']['PRCount'] = count($data['parcelasrec']);
@@ -1310,13 +1310,13 @@ class Orcatrata extends CI_Controller {
                 }
 
                 if (count($data['update']['servico']['inserir']))
-                    $data['update']['servico']['bd']['inserir'] = $this->Orcatrata_model->set_servico($data['update']['servico']['inserir']);
+                    $data['update']['servico']['bd']['inserir'] = $this->Orcatrata_model->set_servico_venda($data['update']['servico']['inserir']);
 
                 if (count($data['update']['servico']['alterar']))
-                    $data['update']['servico']['bd']['alterar'] = $this->Orcatrata_model->update_servico($data['update']['servico']['alterar']);
+                    $data['update']['servico']['bd']['alterar'] = $this->Orcatrata_model->update_servico_venda($data['update']['servico']['alterar']);
 
                 if (count($data['update']['servico']['excluir']))
-                    $data['update']['servico']['bd']['excluir'] = $this->Orcatrata_model->delete_servico($data['update']['servico']['excluir']);
+                    $data['update']['servico']['bd']['excluir'] = $this->Orcatrata_model->delete_servico_venda($data['update']['servico']['excluir']);
             }
 
             #### App_Produto ####
@@ -1353,18 +1353,18 @@ class Orcatrata extends CI_Controller {
 				}
 
                 if (count($data['update']['produto']['inserir']))
-                    $data['update']['produto']['bd']['inserir'] = $this->Orcatrata_model->set_produto($data['update']['produto']['inserir']);
+                    $data['update']['produto']['bd']['inserir'] = $this->Orcatrata_model->set_produto_venda($data['update']['produto']['inserir']);
 
                 if (count($data['update']['produto']['alterar']))
-                    $data['update']['produto']['bd']['alterar'] =  $this->Orcatrata_model->update_produto($data['update']['produto']['alterar']);
+                    $data['update']['produto']['bd']['alterar'] =  $this->Orcatrata_model->update_produto_venda($data['update']['produto']['alterar']);
 
                 if (count($data['update']['produto']['excluir']))
-                    $data['update']['produto']['bd']['excluir'] = $this->Orcatrata_model->delete_produto($data['update']['produto']['excluir']);
+                    $data['update']['produto']['bd']['excluir'] = $this->Orcatrata_model->delete_produto_venda($data['update']['produto']['excluir']);
 
             }
 
             #### App_ParcelasRec ####
-            $data['update']['parcelasrec']['anterior'] = $this->Orcatrata_model->get_parcelas($data['orcatrata']['idApp_OrcaTrata']);
+            $data['update']['parcelasrec']['anterior'] = $this->Orcatrata_model->get_parcelasrec($data['orcatrata']['idApp_OrcaTrata']);
             if (isset($data['parcelasrec']) || (!isset($data['parcelasrec']) && isset($data['update']['parcelasrec']['anterior']) ) ) {
 
                 if (isset($data['parcelasrec']))
@@ -1401,13 +1401,13 @@ class Orcatrata extends CI_Controller {
 				}
 
                 if (count($data['update']['parcelasrec']['inserir']))
-                    $data['update']['parcelasrec']['bd']['inserir'] = $this->Orcatrata_model->set_parcelas($data['update']['parcelasrec']['inserir']);
+                    $data['update']['parcelasrec']['bd']['inserir'] = $this->Orcatrata_model->set_parcelasrec($data['update']['parcelasrec']['inserir']);
 
                 if (count($data['update']['parcelasrec']['alterar']))
-                    $data['update']['parcelasrec']['bd']['alterar'] =  $this->Orcatrata_model->update_parcelas($data['update']['parcelasrec']['alterar']);
+                    $data['update']['parcelasrec']['bd']['alterar'] =  $this->Orcatrata_model->update_parcelasrec($data['update']['parcelasrec']['alterar']);
 
                 if (count($data['update']['parcelasrec']['excluir']))
-                    $data['update']['parcelasrec']['bd']['excluir'] = $this->Orcatrata_model->delete_parcelas($data['update']['parcelasrec']['excluir']);
+                    $data['update']['parcelasrec']['bd']['excluir'] = $this->Orcatrata_model->delete_parcelasrec($data['update']['parcelasrec']['excluir']);
 
             }
 
@@ -3056,7 +3056,7 @@ class Orcatrata extends CI_Controller {
                     $data['servico'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorServico']));
                     unset($data['servico'][$j]['SubtotalServico']);
                 }
-                $data['servico']['idApp_Servico'] = $this->Orcatrata_model->set_servico($data['servico']);
+                $data['servico']['idApp_Servico'] = $this->Orcatrata_model->set_servico_venda($data['servico']);
             }
 
             #### App_Produto ####
@@ -3073,7 +3073,7 @@ class Orcatrata extends CI_Controller {
                     $data['produto'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produto'][$j]['ValorProduto']));
                     unset($data['produto'][$j]['SubtotalProduto']);
                 }
-                $data['produto']['idApp_Produto'] = $this->Orcatrata_model->set_produto($data['produto']);
+                $data['produto']['idApp_Produto'] = $this->Orcatrata_model->set_produto_venda($data['produto']);
             }
 
             #### App_ParcelasRec ####
@@ -3094,7 +3094,7 @@ class Orcatrata extends CI_Controller {
 					if ($data['orcatrata']['QuitadoOrca'] == 'S') $data['parcelasrec'][$j]['Quitado'] = 'S';
 
                 }
-                $data['parcelasrec']['idApp_Parcelas'] = $this->Orcatrata_model->set_parcelas($data['parcelasrec']);
+                $data['parcelasrec']['idApp_Parcelas'] = $this->Orcatrata_model->set_parcelasrec($data['parcelasrec']);
             }
 
             #### App_Procedimento ####
@@ -3289,7 +3289,7 @@ class Orcatrata extends CI_Controller {
 
         if ($id) {
             #### App_OrcaTrata ####
-            $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata($id);
+            $data['orcatrata'] = $this->Orcatrata_model->get_orcatratadesp($id);
             $data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
             $data['orcatrata']['Descricao'] = $data['orcatrata']['Descricao'];
@@ -3339,7 +3339,7 @@ class Orcatrata extends CI_Controller {
             }
 
             #### App_Parcelas ####
-            $data['parcelasrec'] = $this->Orcatrata_model->get_parcelas($id);
+            $data['parcelasrec'] = $this->Orcatrata_model->get_parcelasrecdesp($id);
             if (count($data['parcelasrec']) > 0) {
                 $data['parcelasrec'] = array_combine(range(1, count($data['parcelasrec'])), array_values($data['parcelasrec']));
 				$data['count']['PRCount'] = count($data['parcelasrec']);
@@ -3536,7 +3536,7 @@ class Orcatrata extends CI_Controller {
             #$data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['id'];
             #$data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
-            $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
+            $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatratadesp($data['orcatrata']['idApp_OrcaTrata']);
             $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
             $data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
                 $data['update']['orcatrata']['anterior'],
@@ -3580,13 +3580,13 @@ class Orcatrata extends CI_Controller {
                 }
 
                 if (count($data['update']['servico']['inserir']))
-                    $data['update']['servico']['bd']['inserir'] = $this->Orcatrata_model->set_servico($data['update']['servico']['inserir']);
+                    $data['update']['servico']['bd']['inserir'] = $this->Orcatrata_model->set_servico_venda($data['update']['servico']['inserir']);
 
                 if (count($data['update']['servico']['alterar']))
-                    $data['update']['servico']['bd']['alterar'] = $this->Orcatrata_model->update_servico($data['update']['servico']['alterar']);
+                    $data['update']['servico']['bd']['alterar'] = $this->Orcatrata_model->update_servico_venda($data['update']['servico']['alterar']);
 
                 if (count($data['update']['servico']['excluir']))
-                    $data['update']['servico']['bd']['excluir'] = $this->Orcatrata_model->delete_servico($data['update']['servico']['excluir']);
+                    $data['update']['servico']['bd']['excluir'] = $this->Orcatrata_model->delete_servico_venda($data['update']['servico']['excluir']);
             }
 
             #### App_Produto ####
@@ -3623,18 +3623,18 @@ class Orcatrata extends CI_Controller {
                 }
 
                 if (count($data['update']['produto']['inserir']))
-                    $data['update']['produto']['bd']['inserir'] = $this->Orcatrata_model->set_produto($data['update']['produto']['inserir']);
+                    $data['update']['produto']['bd']['inserir'] = $this->Orcatrata_model->set_produto_venda($data['update']['produto']['inserir']);
 
                 if (count($data['update']['produto']['alterar']))
-                    $data['update']['produto']['bd']['alterar'] =  $this->Orcatrata_model->update_produto($data['update']['produto']['alterar']);
+                    $data['update']['produto']['bd']['alterar'] =  $this->Orcatrata_model->update_produto_venda($data['update']['produto']['alterar']);
 
                 if (count($data['update']['produto']['excluir']))
-                    $data['update']['produto']['bd']['excluir'] = $this->Orcatrata_model->delete_produto($data['update']['produto']['excluir']);
+                    $data['update']['produto']['bd']['excluir'] = $this->Orcatrata_model->delete_produto_venda($data['update']['produto']['excluir']);
 
             }
 
             #### App_ParcelasRec ####
-            $data['update']['parcelasrec']['anterior'] = $this->Orcatrata_model->get_parcelas($data['orcatrata']['idApp_OrcaTrata']);
+            $data['update']['parcelasrec']['anterior'] = $this->Orcatrata_model->get_parcelasrecdesp($data['orcatrata']['idApp_OrcaTrata']);
             if (isset($data['parcelasrec']) || (!isset($data['parcelasrec']) && isset($data['update']['parcelasrec']['anterior']) ) ) {
 
                 if (isset($data['parcelasrec']))
@@ -3671,13 +3671,13 @@ class Orcatrata extends CI_Controller {
 				}
 
                 if (count($data['update']['parcelasrec']['inserir']))
-                    $data['update']['parcelasrec']['bd']['inserir'] = $this->Orcatrata_model->set_parcelas($data['update']['parcelasrec']['inserir']);
+                    $data['update']['parcelasrec']['bd']['inserir'] = $this->Orcatrata_model->set_parcelasrec($data['update']['parcelasrec']['inserir']);
 
                 if (count($data['update']['parcelasrec']['alterar']))
-                    $data['update']['parcelasrec']['bd']['alterar'] =  $this->Orcatrata_model->update_parcelas($data['update']['parcelasrec']['alterar']);
+                    $data['update']['parcelasrec']['bd']['alterar'] =  $this->Orcatrata_model->update_parcelasrec($data['update']['parcelasrec']['alterar']);
 
                 if (count($data['update']['parcelasrec']['excluir']))
-                    $data['update']['parcelasrec']['bd']['excluir'] = $this->Orcatrata_model->delete_parcelas($data['update']['parcelasrec']['excluir']);
+                    $data['update']['parcelasrec']['bd']['excluir'] = $this->Orcatrata_model->delete_parcelasrec($data['update']['parcelasrec']['excluir']);
 
             }
 			
@@ -4010,13 +4010,13 @@ class Orcatrata extends CI_Controller {
 				}
 
                 if (count($data['update']['parcelasrec']['inserir']))
-                    $data['update']['parcelasrec']['bd']['inserir'] = $this->Orcatrata_model->set_parcelas($data['update']['parcelasrec']['inserir']);
+                    $data['update']['parcelasrec']['bd']['inserir'] = $this->Orcatrata_model->set_parcelasrec($data['update']['parcelasrec']['inserir']);
 
                 if (count($data['update']['parcelasrec']['alterar']))
-                    $data['update']['parcelasrec']['bd']['alterar'] =  $this->Orcatrata_model->update_parcelas($data['update']['parcelasrec']['alterar']);
+                    $data['update']['parcelasrec']['bd']['alterar'] =  $this->Orcatrata_model->update_parcelasrec($data['update']['parcelasrec']['alterar']);
 
                 if (count($data['update']['parcelasrec']['excluir']))
-                    $data['update']['parcelasrec']['bd']['excluir'] = $this->Orcatrata_model->delete_parcelas($data['update']['parcelasrec']['excluir']);
+                    $data['update']['parcelasrec']['bd']['excluir'] = $this->Orcatrata_model->delete_parcelasrec($data['update']['parcelasrec']['excluir']);
 
             }
 			
@@ -4236,13 +4236,13 @@ class Orcatrata extends CI_Controller {
 				}
 
                 if (count($data['update']['parcelasrec']['inserir']))
-                    $data['update']['parcelasrec']['bd']['inserir'] = $this->Orcatrata_model->set_parcelas($data['update']['parcelasrec']['inserir']);
+                    $data['update']['parcelasrec']['bd']['inserir'] = $this->Orcatrata_model->set_parcelasrec($data['update']['parcelasrec']['inserir']);
 
                 if (count($data['update']['parcelasrec']['alterar']))
-                    $data['update']['parcelasrec']['bd']['alterar'] =  $this->Orcatrata_model->update_parcelas($data['update']['parcelasrec']['alterar']);
+                    $data['update']['parcelasrec']['bd']['alterar'] =  $this->Orcatrata_model->update_parcelasrec($data['update']['parcelasrec']['alterar']);
 
                 if (count($data['update']['parcelasrec']['excluir']))
-                    $data['update']['parcelasrec']['bd']['excluir'] = $this->Orcatrata_model->delete_parcelas($data['update']['parcelasrec']['excluir']);
+                    $data['update']['parcelasrec']['bd']['excluir'] = $this->Orcatrata_model->delete_parcelasrec($data['update']['parcelasrec']['excluir']);
 
             }
 			
