@@ -531,6 +531,7 @@
 																			<div class="col-md-2">	
 																				<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
 																			</div>
+																			<div class="col-md-2"></div>
 																			<?php if (($_SESSION['log']['NivelEmpresa'] <= 3)) { ?>
 																			<div class="col-md-2 text-right">
 																				<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar3/" role="button"> 
@@ -544,14 +545,14 @@
 																				</a>
 																			</div>	
 																			<?php } ?>																				
-																			<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+																			<!--
 																			<div class="col-md-2 text-right">
 																				<a class="btn btn-xs btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
 																					<span class="glyphicon glyphicon-menu-down"></span> Devolução
 																				</a>
 																			</div>
-																			<?php } ?>
-																			<!--
+																			
+																			
 																			<div class="col-md-3 text-left">																							
 																				<a class="accordion-toggle btn btn-heading  collapsed" role="tab" id="heading5" data-toggle="collapse" data-parent="#accordion5" data-target="#collapse5" aria-expanded="false">
 																					<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
@@ -934,6 +935,7 @@
 														</div>
 													</div>
 													-->
+													<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 													<div class="col-md-2">
 														<label for="Cadastrar">Cad.no BD?</label><br>
 														<div class="btn-group" data-toggle="buttons">
@@ -968,7 +970,8 @@
 														<button class="btn btn-md btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
 															<span class="glyphicon glyphicon-refresh"></span> Recarregar
 														</button>
-													</div>													
+													</div>
+													<?php } ?>
 												</div>
 											</div>
 											
