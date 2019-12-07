@@ -2,14 +2,6 @@
 	<div class="panel panel-info">
 		<div class="panel-heading">
 			<div class="row">	
-				
-				<div class="col-md-4">
-					<label for="DataFim"><?php echo $titulo1; ?> Total:</label>
-					<div class="input-group">
-						<span class="input-group-addon">R$</span>
-						<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somareceber ?>">
-					</div>
-				</div>
 				<div class="col-md-4">
 					<label for="DataFim">Recebido:</label>
 					<div class="input-group">
@@ -24,7 +16,13 @@
 						<input type="text" class="form-control" disabled aria-label="Total a Receber" value="<?php echo $report->soma->balanco ?>">
 					</div>
 				</div>
-				
+				<div class="col-md-4">
+					<label for="DataFim"><?php echo $titulo1; ?> Total:</label>
+					<div class="input-group">
+						<span class="input-group-addon">R$</span>
+						<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somareceber ?>">
+					</div>
+				</div>				
 			</div>	
 		</div>
 	</div>		

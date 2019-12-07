@@ -2,14 +2,6 @@
 	<div class="panel panel-danger">
 		<div class="panel-heading">
 			<div class="row">
-				
-				<div class="col-md-4">
-					<label for="DataFim"><?php echo $titulo2; ?> Total:</label>
-					<div class="input-group">
-						<span class="input-group-addon">R$</span>
-						<input type="text" class="form-control" disabled aria-label="Total de Saídas" value="<?php echo $report->soma->somareceber ?>">
-					</div>
-				</div>
 				<div class="col-md-4">
 					<label for="DataFim">Pago:</label>
 					<div class="input-group">
@@ -24,7 +16,13 @@
 						<input type="text" class="form-control" disabled aria-label="Total a Pagar" value="<?php echo $report->soma->balanco ?>">
 					</div>
 				</div>			
-				
+				<div class="col-md-4">
+					<label for="DataFim"><?php echo $titulo2; ?> Total:</label>
+					<div class="input-group">
+						<span class="input-group-addon">R$</span>
+						<input type="text" class="form-control" disabled aria-label="Total de Saídas" value="<?php echo $report->soma->somareceber ?>">
+					</div>
+				</div>				
 			</div>
 		</div>		
 	</div>

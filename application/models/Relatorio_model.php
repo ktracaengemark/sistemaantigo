@@ -1508,11 +1508,13 @@ class Relatorio_model extends CI_Model {
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $consulta . ' AND				
 				' . $permissao . '
 				' . $filtro4 . '
 				OT.idTab_TipoRD = "2" AND
 				OT.AprovadoOrca = "S" AND
-				PR.idTab_TipoRD = "2" 
+				PR.idTab_TipoRD = "2" AND
+				PR.Quitado = "S"
                 ' . $data['TipoFinanceiroR'] . '
 				' . $data['Orcarec'] . '                
 				' . $data['Dia'] . ' 
@@ -1712,11 +1714,13 @@ class Relatorio_model extends CI_Model {
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $consulta . ' AND				
 				' . $permissao . '
 				' . $filtro4 . '
 				OT.idTab_TipoRD = "1" AND
 				OT.AprovadoOrca = "S" AND
-				PR.idTab_TipoRD = "1" 
+				PR.idTab_TipoRD = "1" AND
+				PR.Quitado = "S"
                 ' . $data['TipoFinanceiroD'] . '
 				' . $data['Orcades'] . '                
 				' . $data['Dia'] . ' 
@@ -1907,11 +1911,13 @@ class Relatorio_model extends CI_Model {
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $consulta . ' AND				
 				' . $permissao . '
 				OT.idTab_TipoRD = "2" AND
 				OT.AprovadoOrca = "S" AND
 				PR.idTab_TipoRD = "2" AND
 				OT.TipoFinanceiro = "31" AND
+				PR.Quitado = "S" AND
 				PR.Quitado = "N"
 				' . $data['Orcarec'] . '                
 				' . $data['Dia'] . ' 
@@ -2110,12 +2116,13 @@ class Relatorio_model extends CI_Model {
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $consulta . ' AND				
 				' . $permissao . '
-				' . $filtro4 . '
 				OT.idTab_TipoRD = "1" AND
 				OT.AprovadoOrca = "S" AND
 				PR.idTab_TipoRD = "1" AND
-				PR.Quitado = "N"
+				PR.Quitado = "S" AND
+				PR.Quitado = "N"				
                 ' . $data['TipoFinanceiroD'] . '
 				' . $data['Orcades'] . '                
 				' . $data['Dia'] . ' 
