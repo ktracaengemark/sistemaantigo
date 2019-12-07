@@ -185,6 +185,9 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN App_Fornecedor AS C ON C.idApp_Fornecedor = OT.idApp_Fornecedor
 			WHERE
 				' . $permissao . '
+				OT.idSis_Empresa = ' . $data . ' AND
+				OT.idTab_TipoRD = "1" AND				
+				OT.AprovadoOrca = "S" AND				
 				PR.idSis_Empresa = ' . $data . ' AND
 				' . $permissao1 . '
 				' . $permissao2 . '
@@ -236,6 +239,9 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
 			WHERE 
 				' . $permissao . '
+				OT.idSis_Empresa = ' . $data . ' AND
+				OT.idTab_TipoRD = "2" AND				
+				OT.AprovadoOrca = "S" AND				
 				PR.idSis_Empresa = ' . $data . ' AND
 				' . $permissao1 . '
 				' . $permissao2 . '
@@ -244,6 +250,7 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao5 . '				
 				PR.idTab_TipoRD = "2" 
 			ORDER BY
+				C.NomeCliente,
 				PR.DataVencimento  
 		');
         $query = $query->result_array();
