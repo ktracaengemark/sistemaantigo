@@ -13,10 +13,16 @@
 			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar Produtos Vendidos<?php #echo $titulo1; ?>
 			</button>
+			<a href="<?php echo base_url() . 'orcatrata/alterarprodservrec/' . $_SESSION['log']['idSis_Empresa']; ?>">
+				<button type="button" class="btn btn-sm btn-info">
+					<span class="glyphicon glyphicon-edit"></span> Editar Filtrados
+				</button>
+			</a>			
+			<!--
 			<button class="btn btn-sm btn-info" type="button" data-toggle="collapse" data-target="#Receitas" aria-expanded="false" aria-controls="Receitas">
 				<span class="glyphicon glyphicon-menu-up"></span> Vendas
 			</button>			
-			<!--
+			
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 				<span class="glyphicon glyphicon-search"></span>Parcelas
 			</a>
@@ -46,10 +52,16 @@
 			<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar Produtos Compras<?php #echo $titulo2; ?>
 			</button>
+			<a href="<?php echo base_url() . 'orcatrata/alterarprodservdesp/' . $_SESSION['log']['idSis_Empresa']; ?>">
+				<button type="button" class="btn btn-sm btn-info">
+					<span class="glyphicon glyphicon-edit"></span> Editar Filtrados
+				</button>
+			</a>			
+			<!--
 			<button class="btn btn-sm btn-danger" type="button" data-toggle="collapse" data-target="#Despesas" aria-expanded="false" aria-controls="Despesas">
 				<span class="glyphicon glyphicon-menu-up"></span> Compras
 			</button>			
-			<!--
+			
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 				<span class="glyphicon glyphicon-search"></span>Parcelas
 			</a>

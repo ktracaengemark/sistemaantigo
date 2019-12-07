@@ -1076,6 +1076,8 @@ class Relatorio_model extends CI_Model {
 		$filtro5 = ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
 		$filtro6 = ($data['AVAP']) ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
 		$filtro7 = ($data['FormaPag']) ? 'OT.FormaPagamento = "' . $data['FormaPag'] . '" AND ' : FALSE;
+		$filtro8 = ($data['ConcluidoProduto']) ? 'AP.ConcluidoProduto = "' . $data['ConcluidoProduto'] . '" AND ' : FALSE;		
+		$filtro9 = ($data['ConcluidoServico']) ? 'TS.ConcluidoServico = "' . $data['ConcluidoServico'] . '" AND ' : FALSE;		
 		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
 		$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
@@ -1113,8 +1115,14 @@ class Relatorio_model extends CI_Model {
 				AP.idApp_Produto,
 				AP.QtdProduto,
 				AP.DataValidadeProduto,
+				AP.ConcluidoProduto,
+				AP.ValorProduto,				
+				TS.idApp_Servico,
+				TS.QtdServico,
+				TS.DataValidadeServico,
+				TS.ConcluidoServico,
+				TS.ValorServico,				
 				TP.Produtos,
-				AP.ValorProduto,
 				TP3.Prodaux3,
 				TP2.Prodaux2,
 				TP1.Prodaux1,
@@ -1127,6 +1135,7 @@ class Relatorio_model extends CI_Model {
 				LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
 				LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
 				LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
+				LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
 				LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
 				LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto
 				LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
@@ -1192,7 +1201,8 @@ class Relatorio_model extends CI_Model {
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
                 $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
-
+				$row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
+				$row->ConcluidoServico = $this->basico->mascara_palavra_completa($row->ConcluidoServico, 'NS');
 				$row->ValorProduto = number_format($row->ValorProduto, 2, ',', '.');
 				
                 $somaorcamento += $row->ValorOrca;
@@ -1248,6 +1258,8 @@ class Relatorio_model extends CI_Model {
 		$filtro5 = ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
 		$filtro6 = ($data['AVAP']) ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
 		$filtro7 = ($data['FormaPag']) ? 'OT.FormaPagamento = "' . $data['FormaPag'] . '" AND ' : FALSE;
+		$filtro8 = ($data['ConcluidoProduto']) ? 'AP.ConcluidoProduto = "' . $data['ConcluidoProduto'] . '" AND ' : FALSE;		
+		$filtro9 = ($data['ConcluidoServico']) ? 'TS.ConcluidoServico = "' . $data['ConcluidoServico'] . '" AND ' : FALSE;		
 		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
 		$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
@@ -1284,8 +1296,14 @@ class Relatorio_model extends CI_Model {
 				AP.idApp_Produto,
 				AP.QtdProduto,
 				AP.DataValidadeProduto,
-				TP.Produtos,
+				AP.ConcluidoProduto,
 				AP.ValorProduto,
+				TS.idApp_Servico,
+				TS.QtdServico,
+				TS.DataValidadeServico,
+				TS.ConcluidoServico,
+				TS.ValorServico,
+				TP.Produtos,
 				TP3.Prodaux3,
 				TP2.Prodaux2,
 				TP1.Prodaux1,
@@ -1298,6 +1316,7 @@ class Relatorio_model extends CI_Model {
 				LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
 				LEFT JOIN App_Fornecedor AS F ON F.idApp_Fornecedor = OT.idApp_Fornecedor
 				LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
+				LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
 				LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
 				LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto
 				LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
@@ -1363,7 +1382,8 @@ class Relatorio_model extends CI_Model {
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
                 $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
-
+				$row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
+				$row->ConcluidoServico = $this->basico->mascara_palavra_completa($row->ConcluidoServico, 'NS');
 				$row->ValorProduto = number_format($row->ValorProduto, 2, ',', '.');
 				
                 $somaorcamento += $row->ValorOrca;

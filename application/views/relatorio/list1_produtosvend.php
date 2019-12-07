@@ -17,7 +17,7 @@
 						<thead>
 							<tr>
 								<th colspan="3" class="active">Vendas: <?php echo $report->num_rows(); ?> resultado(s)</th>
-								<th colspan="7" class="active"> <?php echo $report->soma->quantidade ?> Produtos Vendidos</th>
+								<th colspan="8" class="active"> <?php echo $report->soma->quantidade ?> Produtos Vendidos</th>
 								<!--<th colspan="1" class="active">Total: <?php echo $report->soma->somasubtotal ?> </th>-->
 							</tr>
 						</thead>						
@@ -48,8 +48,8 @@
 								<th class="active">Esp</th>
 								<th class="active">Produto</th>
 								<th class="active">Valor</th>
-								<th class="active">Dt.Prd.</th>
-								<!--<th class="active">Remover</th>-->
+								<th class="active">Valid.</th>
+								<th class="active">Entr.?</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -101,6 +101,7 @@
 									echo '<td>' . $row['Produtos'] . '</td>';
 									echo '<td>' . $row['ValorProduto'] . '</td>';
 									echo '<td>' . $row['DataValidadeProduto'] . '</td>';
+									echo '<td>' . $row['ConcluidoProduto'] . '</td>';
 									/*
 									echo '<td class="notclickable">
 											<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'orcatrata/excluir2/' . $row['idApp_OrcaTrata'] . '">
