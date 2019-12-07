@@ -4107,8 +4107,8 @@ exit();
         $query['NomeCliente'] = $this->db->query(
             'SELECT
                 TC.idApp_Cliente,
-                CONCAT(IFNULL(TC.NomeCliente,"")) AS NomeCliente,
-				TOT.ValorOrca
+                CONCAT(IFNULL(TC.NomeCliente,"")) AS NomeCliente
+				
             FROM
                 App_Cliente AS TC
 				LEFT JOIN App_OrcaTrata AS TOT ON TOT.idApp_Cliente = TC.idApp_Cliente
@@ -4122,7 +4122,7 @@ exit();
         $query['NomeCliente'] = $query['NomeCliente']->result();
 
         ####################################################################
-        #Orçamentos 
+/*        #Orçamentos 
         if ($data['DataFim']) {
             $consulta =
                 '(TOT.DataOrca >= "' . $data['DataInicio'] . '" AND TOT.DataOrca <= "' . $data['DataFim'] . '")';
@@ -4188,21 +4188,21 @@ exit();
                 TC.NomeCliente ASC'
         );
         $query['Descontos'] = $query['Descontos']->result();		
-
+*/
         ####################################################################
         #Parcelas 
         if ($data['DataFim']) {
             $consulta =
-                '(TPR.DataPago >= "' . $data['DataInicio'] . '" AND TPR.DataPago <= "' . $data['DataFim'] . '")';
+                '(TPR.DataVencimento >= "' . $data['DataInicio'] . '" AND TPR.DataVencimento <= "' . $data['DataFim'] . '")';
         }
         else {
             $consulta =
-                '(TPR.DataPago >= "' . $data['DataInicio'] . '")';
+                '(TPR.DataVencimento >= "' . $data['DataInicio'] . '")';
         }
 
         $query['Parcelas'] = $this->db->query(
             'SELECT
-                SUM(TPR.ValorPago) AS QtdParc,
+                SUM(TPR.ValorParcela) AS QtdParc,
                 TC.idApp_Cliente
             FROM
                 App_OrcaTrata AS TOT
@@ -4210,13 +4210,14 @@ exit();
 					LEFT JOIN App_Parcelas AS TPR ON TPR.idApp_OrcaTrata = TOT.idApp_OrcaTrata
 
             WHERE
-                TOT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                TOT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                TPR.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                TPR.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['NomeCliente'] . ' AND
-                TOT.idTab_TipoRD = "2" AND
+                TOT.AprovadoOrca = "S" AND
+				TPR.Quitado = "S" AND
+				TPR.idTab_TipoRD = "2" AND
                 TC.idApp_Cliente != "0"
-                ' . $data['NomeCliente'] . '
             GROUP BY
                 TC.idApp_Cliente
             ORDER BY
@@ -4225,7 +4226,7 @@ exit();
         $query['Parcelas'] = $query['Parcelas']->result();
 
         ####################################################################
-        #Devoluçoes 
+/*        #Devoluçoes 
         if ($data['DataFim']) {
             $consulta =
                 '(TOT.DataOrca >= "' . $data['DataInicio'] . '" AND TOT.DataOrca <= "' . $data['DataFim'] . '")';
@@ -4257,7 +4258,7 @@ exit();
                 TC.NomeCliente ASC'
         );
         $query['Devolucoes'] = $query['Devolucoes']->result();		
-		
+*/		
 		$rankingvendas = new stdClass();
 
 
@@ -4277,7 +4278,7 @@ echo "</pre>";
 exit();*/
 
 
-
+/*
         foreach ($query['Orcamentos'] as $row) {
             if (isset($rankingvendas->{$row->idApp_Cliente}))
                 $rankingvendas->{$row->idApp_Cliente}->QtdOrcam = $row->QtdOrcam;
@@ -4287,28 +4288,28 @@ exit();*/
             if (isset($rankingvendas->{$row->idApp_Cliente}))
                 $rankingvendas->{$row->idApp_Cliente}->QtdDescon = $row->QtdDescon;
         }
-		
+*/		
 		foreach ($query['Parcelas'] as $row) {
             if (isset($rankingvendas->{$row->idApp_Cliente}))
                 $rankingvendas->{$row->idApp_Cliente}->QtdParc = $row->QtdParc;
         }
-		
+/*		
 		foreach ($query['Devolucoes'] as $row) {
             if (isset($rankingvendas->{$row->idApp_Cliente}))
                 $rankingvendas->{$row->idApp_Cliente}->QtdDevol = $row->QtdDevol;
         }
-
+*/
 		$rankingvendas->soma = new stdClass();
 		$somaqtdorcam = $somaqtddescon = $somaqtdvendida = $somaqtdparc = $somaqtddevol = 0;
 
 		foreach ($rankingvendas as $row) {
 
-            $row->QtdOrcam = (!isset($row->QtdOrcam)) ? 0 : $row->QtdOrcam;
-			$row->QtdDescon = (!isset($row->QtdDescon)) ? 0 : $row->QtdDescon;
-			$row->QtdVendida = $row->QtdOrcam - $row->QtdDescon;	
+            #$row->QtdOrcam = (!isset($row->QtdOrcam)) ? 0 : $row->QtdOrcam;
+			#$row->QtdDescon = (!isset($row->QtdDescon)) ? 0 : $row->QtdDescon;
+			#$row->QtdVendida = $row->QtdOrcam - $row->QtdDescon;	
 			$row->QtdParc = (!isset($row->QtdParc)) ? 0 : $row->QtdParc;
-			$row->QtdDevol = (!isset($row->QtdDevol)) ? 0 : $row->QtdDevol;
-			
+			#$row->QtdDevol = (!isset($row->QtdDevol)) ? 0 : $row->QtdDevol;
+/*			
 			$somaqtdorcam += $row->QtdOrcam;
 			$row->QtdOrcam = number_format($row->QtdOrcam, 2, ',', '.');
 						
@@ -4318,19 +4319,18 @@ exit();*/
 			$somaqtdvendida += $row->QtdVendida;
 			$row->QtdVendida = number_format($row->QtdVendida, 2, ',', '.');
 			
-			$somaqtdparc += $row->QtdParc;
-			$row->QtdParc = number_format($row->QtdParc, 2, ',', '.');
-						
 			$somaqtddevol += $row->QtdDevol;
 			$row->QtdDevol = number_format($row->QtdDevol, 2, ',', '.');
-																
+*/			
+			$somaqtdparc += $row->QtdParc;
+			$row->QtdParc = number_format($row->QtdParc, 2, ',', '.');																
         }
 
-		$rankingvendas->soma->somaqtdorcam = number_format($somaqtdorcam, 2, ',', '.');
-		$rankingvendas->soma->somaqtddescon = number_format($somaqtddescon, 2, ',', '.');		
-		$rankingvendas->soma->somaqtdvendida = number_format($somaqtdvendida, 2, ',', '.');
+		#$rankingvendas->soma->somaqtdorcam = number_format($somaqtdorcam, 2, ',', '.');
+		#$rankingvendas->soma->somaqtddescon = number_format($somaqtddescon, 2, ',', '.');		
+		#$rankingvendas->soma->somaqtdvendida = number_format($somaqtdvendida, 2, ',', '.');
 		$rankingvendas->soma->somaqtdparc = number_format($somaqtdparc, 2, ',', '.');
-		$rankingvendas->soma->somaqtddevol = number_format($somaqtddevol, 2, ',', '.');
+		#$rankingvendas->soma->somaqtddevol = number_format($somaqtddevol, 2, ',', '.');
 		
 
         /*
