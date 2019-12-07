@@ -184,7 +184,7 @@
 																						</div>
 																					</div>
 																					<div class="row">
-																						<div class="col-md-3"></div>
+																						<div class="col-md-2"></div>
 																						<div class="col-md-3">
 																							<label for="ObsProduto<?php echo $i ?>">Obs:</label><br>
 																							<input type="text" class="form-control" id="ObsProduto<?php echo $i ?>" maxlength="250"
@@ -379,8 +379,7 @@
 																						</div>
 																					</div>
 																					<div class="row">
-																						<div class="col-md-3"></div>
-																						
+																						<div class="col-md-2"></div>
 																						<div class="col-md-3">
 																							<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
 																							<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"

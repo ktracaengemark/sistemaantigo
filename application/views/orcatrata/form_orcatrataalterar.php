@@ -653,7 +653,7 @@
 																					</div>
 																				</div>
 																				<div class="row">
-																					<div class="col-md-5"></div>
+																					<div class="col-md-2"></div>
 																					<div class="col-md-3">
 																						<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
 																						<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
@@ -669,7 +669,7 @@
 																								   name="DataValidadeServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataValidadeServico']; ?>">																				
 																						</div>
 																					</div>
-																					<div class="col-md-3">
+																					<div class="col-md-2">
 																						<label for="ConcluidoServico">Concluído? </label><br>
 																						<div class="form-group">
 																							<div class="btn-group" data-toggle="buttons">
