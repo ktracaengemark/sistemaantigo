@@ -1152,6 +1152,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
+				' . $filtro8 . '
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "2" AND
 				AP.idTab_TipoRD = "2"
@@ -1333,6 +1334,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
+				' . $filtro8 . '
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "1" AND
 				AP.idTab_TipoRD = "1"

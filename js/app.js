@@ -3175,13 +3175,13 @@ $(document).ready(function () {
 								<label for="ConcluidoProduto">Concluído? </label><br>\
 								<div class="form-group">\
 									<div class="btn-group" data-toggle="buttons">\
-										<label class="btn btn-default" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
+										<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
 										<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
-											autocomplete="off" value="N" >Não\
+											autocomplete="off" value="N" checked>Não\
 										</label>\
-										<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'S">\
+										<label class="btn btn-default" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'S">\
 										<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
-											autocomplete="off" value="S" checked>Sim\
+											autocomplete="off" value="S" >Sim\
 										</label>\
 									</div>\
 								</div>\
@@ -3317,13 +3317,13 @@ $(document).ready(function () {
 								<label for="ConcluidoServico">Concluído? </label><br>\
 								<div class="form-group">\
 									<div class="btn-group" data-toggle="buttons">\
-										<label class="btn btn-default" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'N">\
+										<label class="btn btn-warning active" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'N">\
 										<input type="radio" name="ConcluidoServico'+ps+'" id="radiogeraldinamico"\
-											autocomplete="off" value="N" >Não\
+											autocomplete="off" value="N" checked>Não\
 										</label>\
-										<label class="btn btn-warning active" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'S">\
+										<label class="btn btn-default" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'S">\
 										<input type="radio" name="ConcluidoServico'+ps+'" id="radiogeraldinamico"\
-											autocomplete="off" value="S" checked>Sim\
+											autocomplete="off" value="S" >Sim\
 										</label>\
 									</div>\
 								</div>\

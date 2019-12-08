@@ -91,7 +91,7 @@
 					<div class="panel-heading">
 						<div class="form-group text-left">	
 							<div class="row">	
-								<div class="col-md-12 text-left">
+								<div class="col-md-9 text-left">
 									<label for="Ordenamento">Produtos:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 											id="Produtos" name="Produtos">
@@ -106,6 +106,21 @@
 										?>
 									</select>
 								</div>
+								<div class="col-md-3 text-left">
+									<label for="Ordenamento">Prod. Entrege?:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="ConcluidoProduto" name="ConcluidoProduto">
+										<?php
+										foreach ($select['ConcluidoProduto'] as $key => $row) {
+											if ($query['ConcluidoProduto'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>								
 							</div>	
 						</div>
 						
