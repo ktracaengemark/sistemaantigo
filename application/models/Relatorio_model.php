@@ -1510,8 +1510,8 @@ class Relatorio_model extends CI_Model {
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . '
-				' . $data['NomeCliente'] . '				
-            ORDER BY
+				' . $data['NomeCliente'] . '				           
+			ORDER BY
 				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
 		');
 

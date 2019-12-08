@@ -1,15 +1,10 @@
 <?php if (isset($msg)) echo $msg; ?>
 
-
-<div class="container-fluid">
-	
+<div class="container-fluid">	
 	<div class="row">
-
-		<div class="col-md-2"></div>
+		<div class="col-md-4"></div>
 		<div class="col-md-8 ">
-
 			<div class="row">
-
 				<div class="col-md-12 col-lg-12">			
 					<?php echo validation_errors(); ?>
 					<?php echo form_open_multipart($form_open_path); ?>
@@ -1267,19 +1262,12 @@
 									</div>
 								</div>
 								<?php } ?>
-								
 								</form>
 							</div>
-									
-							
-
-							
-
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-2"></div>
 	</div>
 </div>

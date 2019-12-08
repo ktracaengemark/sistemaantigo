@@ -1654,8 +1654,8 @@ class Relatorio extends CI_Controller {
             'M' => 'Mensal',
         );
 
-        $data['select']['Campo'] = array(
-            'PR.DataVencimento' => 'Data do Venc.',
+		$data['select']['Campo'] = array(
+			'PR.DataVencimento' => 'Data do Venc.',
 			'PR.Quitado' => 'Parc.Quit.',
 			'OT.Modalidade' => 'Modalidade',
             'OT.idApp_OrcaTrata' => 'Orçamento',
