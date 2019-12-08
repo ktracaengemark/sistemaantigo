@@ -3172,7 +3172,7 @@ $(document).ready(function () {
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="ConcluidoProduto">Concluído? </label><br>\
+								<label for="ConcluidoProduto">Prd.Ent? </label><br>\
 								<div class="form-group">\
 									<div class="btn-group" data-toggle="buttons">\
 										<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
@@ -3314,7 +3314,7 @@ $(document).ready(function () {
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="ConcluidoServico">Concluído? </label><br>\
+								<label for="ConcluidoServico">Prd.Ent? </label><br>\
 								<div class="form-group">\
 									<div class="btn-group" data-toggle="buttons">\
 										<label class="btn btn-warning active" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'N">\

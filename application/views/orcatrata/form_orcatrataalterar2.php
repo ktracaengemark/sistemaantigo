@@ -166,7 +166,7 @@
 																						</div>
 																					</div>
 																					<div class="col-md-2">
-																						<label for="ConcluidoProduto">Concluído? </label><br>
+																						<label for="ConcluidoProduto">Prd.Ent? </label><br>
 																						<div class="form-group">
 																							<div class="btn-group" data-toggle="buttons">
 																								<?php
@@ -361,7 +361,7 @@
 																						</div>
 																					</div>
 																					<div class="col-md-2">
-																						<label for="ConcluidoServico">Concluído? </label><br>
+																						<label for="ConcluidoServico">Prd.Ent? </label><br>
 																						<div class="form-group">
 																							<div class="btn-group" data-toggle="buttons">
 																								<?php
@@ -445,6 +445,43 @@
 												<div class="row">	
 													<div <?php echo $visivel; ?>>
 														<div class="col-md-4 panel-body">
+															<div class="panel panel-warning">
+																<div class="panel-heading">
+																	<div class="row">														
+																		<div class="col-md-12 text-center">
+																			<label for="ConcluidoOrca">Todos os Produtos Entregues?</label><br>
+																			<div class="btn-group" data-toggle="buttons">
+																				<?php
+																				foreach ($select['ConcluidoOrca'] as $key => $row) {
+																					if (!$orcatrata['ConcluidoOrca'])
+																						$orcatrata['ConcluidoOrca'] = 'S';
+
+																					($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																					if ($orcatrata['ConcluidoOrca'] == $key) {
+																						echo ''
+																						. '<label class="btn btn-warning active" name="ConcluidoOrca_' . $hideshow . '">'
+																						. '<input type="radio" name="ConcluidoOrca" id="' . $hideshow . '" '
+																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																						. '</label>'
+																						;
+																					} else {
+																						echo ''
+																						. '<label class="btn btn-default" name="ConcluidoOrca_' . $hideshow . '">'
+																						. '<input type="radio" name="ConcluidoOrca" id="' . $hideshow . '" '
+																						. 'autocomplete="off" value="' . $key . '" >' . $row
+																						. '</label>'
+																						;
+																					}
+																				}
+																				?>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="col-md-4 panel-body">
 															<div class="panel panel-success">
 																<div class="panel-heading">
 																	<div class="row">				
@@ -491,60 +528,40 @@
 														</div>
 													</div>
 													<?php } ?>
-													<div <?php echo $visivel; ?>>
-														<div class="col-md-4 panel-body">
-															<div class="panel panel-success">
-																<div class="panel-heading">
-																	<div class="row">	
-																		<div class="col-md-6">
-																			<label for="ValorDinheiro">Dinheiro:</label><br>
-																			<div class="input-group" id="txtHint">
-																				<span class="input-group-addon" id="basic-addon1">R$</span>
-																				<input type="text" class="form-control Valor" id="ValorDinheiro" maxlength="10" placeholder="0,00" 
-																					   onkeyup="calculaTroco(this.value)"
-																					   name="ValorDinheiro" value="<?php echo $orcatrata['ValorDinheiro'] ?>">
-																			</div>
-																		</div>
-																		<div class="col-md-6">
-																			<label for="ValorTroco">Troco:</label><br>
-																			<div class="input-group" id="txtHint">
-																				<span class="input-group-addon" id="basic-addon1">R$</span>
-																				<input type="text" class="form-control Valor" id="ValorTroco" maxlength="10" placeholder="0,00" 
- 
-																					   name="ValorTroco" value="<?php echo $orcatrata['ValorTroco'] ?>">
-																			</div>
-																		</div>
-																	</div>	
-																</div>
-															</div>
-														</div>
-													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-2">
-														<label for="FormaPagamento">Pago com:</label>
-														<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-																id="FormaPagamento" name="FormaPagamento">
-															<!--<option value="">-- Selecione uma opção --</option>-->
-															<?php
-															foreach ($select['FormaPagamento'] as $key => $row) {
-																if ($orcatrata['FormaPagamento'] == $key) {
-																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																} else {
-																	echo '<option value="' . $key . '">' . $row . '</option>';
-																}
-															}
-															?>
-														</select>
-													</div>
-													<div class="col-md-2">
-														<label for="DataOrca">Dta Orçam:</label>
-														<div class="input-group <?php echo $datepicker; ?>">
-															<span class="input-group-addon" disabled>
-																<span class="glyphicon glyphicon-calendar"></span>
-															</span>
-															<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																	name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
+													<div class="col-md-4 panel-body">
+														<div class="panel panel-warning">
+															<div class="panel-heading">
+																<div class="row">
+																	<div class="col-md-6">
+																		<label for="FormaPagamento">Pago com:</label>
+																		<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+																				id="FormaPagamento" name="FormaPagamento">
+																			<!--<option value="">-- Selecione uma opção --</option>-->
+																			<?php
+																			foreach ($select['FormaPagamento'] as $key => $row) {
+																				if ($orcatrata['FormaPagamento'] == $key) {
+																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																				} else {
+																					echo '<option value="' . $key . '">' . $row . '</option>';
+																				}
+																			}
+																			?>
+																		</select>
+																	</div>														
+																	<div class="col-md-6">
+																		<label for="DataOrca">Dta Orçam:</label>
+																		<div class="input-group <?php echo $datepicker; ?>">
+																			<span class="input-group-addon" disabled>
+																				<span class="glyphicon glyphicon-calendar"></span>
+																			</span>
+																			<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																					name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
+																		</div>
+																	</div>
+																</div>
+															</div>
 														</div>
 													</div>
 													<div class="col-md-4 panel-body">
@@ -587,7 +604,35 @@
 																</div>	
 															</div>
 														</div>
-													</div>	
+													</div>
+													<div <?php echo $visivel; ?>>
+														<div class="col-md-4 panel-body">
+															<div class="panel panel-success">
+																<div class="panel-heading">
+																	<div class="row">	
+																		<div class="col-md-6">
+																			<label for="ValorDinheiro">Dinheiro:</label><br>
+																			<div class="input-group" id="txtHint">
+																				<span class="input-group-addon" id="basic-addon1">R$</span>
+																				<input type="text" class="form-control Valor" id="ValorDinheiro" maxlength="10" placeholder="0,00" 
+																					   onkeyup="calculaTroco(this.value)"
+																					   name="ValorDinheiro" value="<?php echo $orcatrata['ValorDinheiro'] ?>">
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<label for="ValorTroco">Troco:</label><br>
+																			<div class="input-group" id="txtHint">
+																				<span class="input-group-addon" id="basic-addon1">R$</span>
+																				<input type="text" class="form-control Valor" id="ValorTroco" maxlength="10" placeholder="0,00" 
+ 
+																					   name="ValorTroco" value="<?php echo $orcatrata['ValorTroco'] ?>">
+																			</div>
+																		</div>
+																	</div>	
+																</div>
+															</div>
+														</div>
+													</div>													
 													<!--
 													<br>
 													<div class="form-group">
@@ -599,43 +644,6 @@
 														</div>
 													</div>
 													-->
-													<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-													<div class="col-md-2">
-														<label for="Cadastrar">Cad.no BD?</label><br>
-														<div class="btn-group" data-toggle="buttons">
-															<?php
-															foreach ($select['Cadastrar'] as $key => $row) {
-																(!$query['Cadastrar']) ? $query['Cadastrar'] = 'S' : FALSE;
-
-																if ($query['Cadastrar'] == $key) {
-																	echo ''
-																	. '<label class="btn btn-warning active" name="radiobutton_Cadastrar' . '" id="radiobutton_Cadastrar' .  $key . '">'
-																	. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
-																	. 'onchange="this.form.submit()" '
-																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																	. '</label>'
-																	;
-																} else {
-																	echo ''
-																	. '<label class="btn btn-default" name="radiobutton_Cadastrar' .  '" id="radiobutton_Cadastrar' .  $key . '">'
-																	. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
-																	. 'onchange="this.form.submit()" '
-																	. 'autocomplete="off" value="' . $key . '" >' . $row
-																	. '</label>'
-																	;
-																}
-															}
-															?>
-														</div>
-														<?php echo form_error('Cadastrar'); ?>
-													</div>																
-													<div class="col-md-2">
-														<label></label><br>
-														<button class="btn btn-md btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-															<span class="glyphicon glyphicon-refresh"></span> Recarregar
-														</button>
-													</div>
-													<?php } ?>
 												</div>
 											</div>
 										</div>
@@ -691,6 +699,43 @@
 																		   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()"
 																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																		   name="DataVencimentoOrca" value="<?php echo $orcatrata['DataVencimentoOrca']; ?>">																			
+																</div>
+															</div>
+															<div class="col-md-4 panel-body">
+																<div class="panel panel-warning">
+																	<div class="panel-heading">
+																		<div class="row">
+																			<div class="col-md-12 text-center">
+																				<label for="QuitadoOrca">Todas as Parcelas Quitadas?</label><br>
+																				<div class="btn-group" data-toggle="buttons">
+																					<?php
+																					foreach ($select['QuitadoOrca'] as $key => $row) {
+																						if (!$orcatrata['QuitadoOrca'])
+																							$orcatrata['QuitadoOrca'] = 'N';
+
+																						($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																						if ($orcatrata['QuitadoOrca'] == $key) {
+																							echo ''
+																							. '<label class="btn btn-warning active" name="QuitadoOrca_' . $hideshow . '">'
+																							. '<input type="radio" name="QuitadoOrca" id="' . $hideshow . '" '
+																							. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																							. '</label>'
+																							;
+																						} else {
+																							echo ''
+																							. '<label class="btn btn-default" name="QuitadoOrca_' . $hideshow . '">'
+																							. '<input type="radio" name="QuitadoOrca" id="' . $hideshow . '" '
+																							. 'autocomplete="off" value="' . $key . '" >' . $row
+																							. '</label>'
+																							;
+																						}
+																					}
+																					?>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
 																</div>
 															</div>															
 														</div>
@@ -830,69 +875,36 @@
 															?>
 
 														</div>
-													</div>														
-													<!--
-													<div id="AprovadoOrca" <?php echo $div['AprovadoOrca']; ?>>
-														<div class="col-md-3">
-															<label for="ConcluidoOrca">Produtos Entregues?</label><br>
-															<div class="btn-group" data-toggle="buttons">
-																<?php
-																foreach ($select['ConcluidoOrca'] as $key => $row) {
-																	if (!$orcatrata['ConcluidoOrca'])
-																		$orcatrata['ConcluidoOrca'] = 'S';
-
-																	($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																	if ($orcatrata['ConcluidoOrca'] == $key) {
-																		echo ''
-																		. '<label class="btn btn-warning active" name="ConcluidoOrca_' . $hideshow . '">'
-																		. '<input type="radio" name="ConcluidoOrca" id="' . $hideshow . '" '
-																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																		. '</label>'
-																		;
-																	} else {
-																		echo ''
-																		. '<label class="btn btn-default" name="ConcluidoOrca_' . $hideshow . '">'
-																		. '<input type="radio" name="ConcluidoOrca" id="' . $hideshow . '" '
-																		. 'autocomplete="off" value="' . $key . '" >' . $row
-																		. '</label>'
-																		;
-																	}
-																}
-																?>
-															</div>
-														</div>
-														<div class="col-md-3">
-															<label for="QuitadoOrca">Parcelas Quitadas?</label><br>
-															<div class="btn-group" data-toggle="buttons">
-																<?php
-																foreach ($select['QuitadoOrca'] as $key => $row) {
-																	if (!$orcatrata['QuitadoOrca'])
-																		$orcatrata['QuitadoOrca'] = 'N';
-
-																	($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																	if ($orcatrata['QuitadoOrca'] == $key) {
-																		echo ''
-																		. '<label class="btn btn-warning active" name="QuitadoOrca_' . $hideshow . '">'
-																		. '<input type="radio" name="QuitadoOrca" id="' . $hideshow . '" '
-																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																		. '</label>'
-																		;
-																	} else {
-																		echo ''
-																		. '<label class="btn btn-default" name="QuitadoOrca_' . $hideshow . '">'
-																		. '<input type="radio" name="QuitadoOrca" id="' . $hideshow . '" '
-																		. 'autocomplete="off" value="' . $key . '" >' . $row
-																		. '</label>'
-																		;
-																	}
-																}
-																?>
-															</div>
-														</div>														
 													</div>
-													-->
+													<div class="col-md-2">
+														<label for="Cadastrar">Cad.no BD?</label><br>
+														<div class="btn-group" data-toggle="buttons">
+															<?php
+															foreach ($select['Cadastrar'] as $key => $row) {
+																(!$query['Cadastrar']) ? $query['Cadastrar'] = 'S' : FALSE;
+
+																if ($query['Cadastrar'] == $key) {
+																	echo ''
+																	. '<label class="btn btn-warning active" name="radiobutton_Cadastrar' . '" id="radiobutton_Cadastrar' .  $key . '">'
+																	. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
+																	. 'onchange="this.form.submit()" '
+																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																	. '</label>'
+																	;
+																} else {
+																	echo ''
+																	. '<label class="btn btn-default" name="radiobutton_Cadastrar' .  '" id="radiobutton_Cadastrar' .  $key . '">'
+																	. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
+																	. 'onchange="this.form.submit()" '
+																	. 'autocomplete="off" value="' . $key . '" >' . $row
+																	. '</label>'
+																	;
+																}
+															}
+															?>
+														</div>
+														<?php echo form_error('Cadastrar'); ?>
+													</div>													
 												</div>
 												<!--
 												<div class="form-group ">

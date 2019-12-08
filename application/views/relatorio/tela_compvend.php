@@ -107,7 +107,7 @@
 									</select>
 								</div>
 								<div class="col-md-3 text-left">
-									<label for="Ordenamento">Prod. Entrege?:</label>
+									<label for="Ordenamento">Prod.Ent?:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 											id="ConcluidoProduto" name="ConcluidoProduto">
 										<?php
@@ -403,7 +403,7 @@
 							</div>
 						</div>
 					</div>
-					<!--
+					
 					<div class="col-md-3 text-left">
 						<label for="AprovadoOrca">Aprovado</label>
 						<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " 
@@ -419,7 +419,7 @@
 							?>
 						</select>
 					</div>
-					-->
+					<!--
 					<div class="col-md-3 text-left">
 						<label for="ConcluidoOrca">Concluído</label>
 						<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -449,7 +449,8 @@
 							}
 							?>
 						</select>
-					</div>								
+					</div>
+					-->
 				</div>
 				<div class="row">
 					<div class="form-group col-md-3 text-left">

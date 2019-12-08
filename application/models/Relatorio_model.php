@@ -4134,9 +4134,12 @@ exit();
             FROM
                 App_Cliente AS TC
 				LEFT JOIN App_OrcaTrata AS TOT ON TOT.idApp_Cliente = TC.idApp_Cliente
+				LEFT JOIN App_Parcelas AS AP ON AP.idApp_OrcaTrata = TOT.idApp_OrcaTrata
             WHERE
                 TC.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                TC.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+                TC.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				AP.Quitado = "N" AND
+				TOT.TipoFinanceiro = "31" 
                 ' . $data['NomeCliente'] . '
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . ''
@@ -4237,7 +4240,8 @@ exit();
                 (' . $consulta . ')
                 ' . $data['NomeCliente'] . ' AND
                 TOT.AprovadoOrca = "S" AND
-				TPR.Quitado = "S" AND
+				TOT.TipoFinanceiro = "31" AND
+				TPR.Quitado = "N" AND
 				TPR.idTab_TipoRD = "2" AND
                 TC.idApp_Cliente != "0"
             GROUP BY

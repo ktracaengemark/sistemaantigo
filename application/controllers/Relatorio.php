@@ -2080,8 +2080,8 @@ class Relatorio extends CI_Controller {
 
 	$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 	#$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
-	$this->form_validation->set_rules('DataInicio', 'Data Inicio', 'trim|valid_date');
-	$this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
+	#$this->form_validation->set_rules('DataInicio', 'Data Inicio', 'trim|valid_date');
+	#$this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
 
 	$data['select']['Campo'] = array(
 
@@ -2104,7 +2104,7 @@ class Relatorio extends CI_Controller {
 	$data['titulo'] = 'Ranking de Vendas';
 
 	#run form validation
-	if ($this->form_validation->run() !== FALSE) {
+	if ($this->form_validation->run() !== TRUE) {
 
 		$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
 		$data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
@@ -2113,7 +2113,7 @@ class Relatorio extends CI_Controller {
 		$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
 		$data['bd']['Campo'] = $data['query']['Campo'];
 
-		$data['report'] = $this->Relatorio_model->list_rankingvendas($data['bd']);
+		$data['report'] = $this->Relatorio_model->list_rankingvendas($data['bd'],TRUE);
 
 		/*
 		  echo "<pre>";

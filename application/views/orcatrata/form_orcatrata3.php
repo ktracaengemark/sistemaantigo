@@ -197,7 +197,7 @@
 																							</div>
 																						</div>
 																						<div class="col-md-2">
-																							<label for="ConcluidoProduto">Concluído? </label><br>
+																							<label for="ConcluidoProduto">Prd.Ent? </label><br>
 																							<div class="form-group">
 																								<div class="btn-group" data-toggle="buttons">
 																									<?php
@@ -400,7 +400,7 @@
 																							</div>
 																						</div>
 																						<div class="col-md-2">
-																							<label for="ConcluidoServico">Concluído? </label><br>
+																							<label for="ConcluidoServico">Prd.Ent? </label><br>
 																							<div class="form-group">
 																								<div class="btn-group" data-toggle="buttons">
 																									<?php
@@ -482,6 +482,43 @@
 													</div>
 													<?php } ?>
 													<div class="row">	
+														<div class="col-md-4 panel-body">
+															<div class="panel panel-warning">
+																<div class="panel-heading">
+																	<div class="row">														
+																		<div class="col-md-12 text-center">
+																			<label for="ConcluidoOrca">Todos os Produtos Entregues?</label><br>
+																			<div class="btn-group" data-toggle="buttons">
+																				<?php
+																				foreach ($select['ConcluidoOrca'] as $key => $row) {
+																					if (!$orcatrata['ConcluidoOrca'])
+																						$orcatrata['ConcluidoOrca'] = 'S';
+
+																					($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																					if ($orcatrata['ConcluidoOrca'] == $key) {
+																						echo ''
+																						. '<label class="btn btn-warning active" name="ConcluidoOrca_' . $hideshow . '">'
+																						. '<input type="radio" name="ConcluidoOrca" id="' . $hideshow . '" '
+																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																						. '</label>'
+																						;
+																					} else {
+																						echo ''
+																						. '<label class="btn btn-default" name="ConcluidoOrca_' . $hideshow . '">'
+																						. '<input type="radio" name="ConcluidoOrca" id="' . $hideshow . '" '
+																						. 'autocomplete="off" value="' . $key . '" >' . $row
+																						. '</label>'
+																						;
+																					}
+																				}
+																				?>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
 														<div <?php echo $visivel; ?>>
 															<div class="col-md-4 panel-body">
 																<div class="panel panel-success">
@@ -529,45 +566,6 @@
 																</div>
 															</div>
 														</div>
-														
-														
-														<div class="col-md-4 panel-body">
-															<div class="panel panel-warning">
-																<div class="panel-heading">
-																	<div class="row">														
-																		<div class="col-md-12 text-center">
-																			<label for="ConcluidoOrca">Todos os Produtos Entregues?</label><br>
-																			<div class="btn-group" data-toggle="buttons">
-																				<?php
-																				foreach ($select['ConcluidoOrca'] as $key => $row) {
-																					if (!$orcatrata['ConcluidoOrca'])
-																						$orcatrata['ConcluidoOrca'] = 'S';
-
-																					($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																					if ($orcatrata['ConcluidoOrca'] == $key) {
-																						echo ''
-																						. '<label class="btn btn-warning active" name="ConcluidoOrca_' . $hideshow . '">'
-																						. '<input type="radio" name="ConcluidoOrca" id="' . $hideshow . '" '
-																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																						. '</label>'
-																						;
-																					} else {
-																						echo ''
-																						. '<label class="btn btn-default" name="ConcluidoOrca_' . $hideshow . '">'
-																						. '<input type="radio" name="ConcluidoOrca" id="' . $hideshow . '" '
-																						. 'autocomplete="off" value="' . $key . '" >' . $row
-																						. '</label>'
-																						;
-																					}
-																				}
-																				?>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
 														<?php } ?>
 													</div>
 													<div class="row">
@@ -606,7 +604,7 @@
 															</div>
 														</div>															
 														<div class="col-md-4 panel-body">
-															<div class="panel panel-primary">
+															<div class="panel panel-success">
 																<div class="panel-heading">														
 																	<div class="row">	
 																		<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
@@ -682,7 +680,7 @@
 														</div>
 														<div <?php echo $visivel; ?>>
 															<div class="col-md-4 panel-body">
-																<div class="panel panel-success">
+																<div class="panel panel-primary">
 																	<div class="panel-heading">
 																		<div class="row">	
 																			<div class="col-md-6">
