@@ -270,7 +270,7 @@
 																<input type="hidden" name="CountMax" id="CountMax" value="<?php echo $ProdutoSoma ?>">
 															</div>
 														</div>
-														<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
+														<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>	
 														<!--
 														<div class="panel-heading text-right">
 															<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
@@ -408,7 +408,7 @@
 																	}
 																	?>
 																</div>
-																																			
+																<!--																			
 																<div class="panel panel-warning">
 																	<div class="panel-heading text-left">
 																		<div class="row">	
@@ -425,17 +425,17 @@
 																			<div class="col-md-2">	
 																				<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
 																			</div>
-																			<!--
+																			
 																			<div class="col-md-3 text-left">																							
 																				<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
 																					<span class="glyphicon glyphicon-menu-up"></span> Devolvidos
 																				</a>
 																			</div>
-																			-->
+																			
 																		</div>
 																	</div>
 																</div>
-																
+																-->
 																<input type="hidden" name="CountMax2" id="CountMax2" value="<?php echo $ServicoSoma ?>">
 															</div>
 														</div>

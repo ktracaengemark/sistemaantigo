@@ -35,7 +35,7 @@
 						<div class="panel-body">						
 							<div class="panel-group">	
 								<div class="panel panel-primary">
-									<div  style="overflow: auto; height: 456px; ">
+									<div  style="overflow: auto; height: 550px; ">
 										<div class="panel-body">	
 											<div <?php echo $collapse; ?> id="Entregues">
 												<div class="panel-body">
@@ -60,7 +60,7 @@
 																	<div class="row">
 																		<div class="col-md-2">
 																			<label for="QtdProduto">Qtd <?php echo $i ?>:</label>
-																			<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
+																			<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0" readonly=""
 																					onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																					autofocus name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
 																		</div>
@@ -93,16 +93,16 @@
 																				   name="idTab_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produto'] ?>">
 																		</div>
 																		<div class="col-md-5">
-																			<label for="Produto">Produto <?php echo $i ?>:</label><br>
+																			<label for="Produtos">Produto <?php echo $i ?>:</label><br>
 																			<input type="text" class="form-control" maxlength="6" readonly=""
-																				   name="Produto<?php echo $i ?>" value="<?php echo $produto[$i]['Produto'] ?>">
+																				   name="Produtos<?php echo $i ?>" value="<?php echo $produto[$i]['Produtos'] ?>">
 																		</div>
 																																				
 																		<div class="col-md-2">
 																			<label for="ValorProduto">Valor:</label>
 																			<div class="input-group">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
-																				<input type="text" class="form-control Valor" id="idTab_Produto<?php echo $i ?>" maxlength="10" placeholder="0,00"
+																				<input type="text" class="form-control Valor" id="idTab_Produto<?php echo $i ?>" maxlength="10" placeholder="0,00" readonly=""
 																					onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','VP','Produto')"
 																					name="ValorProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ValorProduto'] ?>">
 																			</div>
@@ -117,7 +117,11 @@
 																		</div>
 																	</div>
 																	<div class="row">
-																		<div class="col-md-2"></div>
+																		<div class="col-md-2">
+																			<label for="Produto">Orcamento <?php echo $i ?>:</label><br>
+																			<input type="text" class="form-control" maxlength="6" readonly=""
+																				   name="Produto<?php echo $i ?>" value="<?php echo $produto[$i]['Produto'] ?>">
+																		</div>
 																		<div class="col-md-3">
 																			<label for="ObsProduto<?php echo $i ?>">Obs:</label><br>
 																			<input type="text" class="form-control" id="ObsProduto<?php echo $i ?>" maxlength="250"
@@ -135,7 +139,7 @@
 																			</div>
 																		</div>
 																		<div class="col-md-2">
-																			<label for="ConcluidoProduto">Concluído? </label><br>
+																			<label for="ConcluidoProduto">Entregue? </label><br>
 																			<div class="form-group">
 																				<div class="btn-group" data-toggle="buttons">
 																					<?php
@@ -162,13 +166,15 @@
 																				</div>
 																			</div>
 																		</div>																						
+																		<!--
 																		<div class="col-md-1">
 																			<label><br></label><br>
 																			<button type="button" id="<?php echo $i ?>" class="remove_field9 btn btn-danger"
 																					onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',1,<?php echo $i ?>,'CountMax',0,'ProdutoHidden')">
 																				<span class="glyphicon glyphicon-trash"></span>
 																			</button>
-																		</div>																								
+																		</div>
+																		-->
 																	</div>
 																</div>
 															</div>
@@ -238,7 +244,7 @@
 													<input type="hidden" name="CountMax" id="CountMax" value="<?php echo $ProdutoSoma ?>">
 												</div>
 											</div>
-											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
+											<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>	
 											<!--
 											<div class="panel-heading text-right">
 												<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
@@ -270,7 +276,7 @@
 																	<div class="row">
 																		<div class="col-md-2">
 																			<label for="QtdServico">Qtd <?php echo $i ?>:</label>
-																			<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0"
+																			<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0" readonly=""
 																					onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
 																					autofocus name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
 																		</div>
@@ -303,15 +309,15 @@
 																				   name="idTab_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Servico'] ?>">
 																		</div>
 																		<div class="col-md-5">
-																			<label for="Servico">Produto <?php echo $i ?>:</label><br>
+																			<label for="Produtos">Produto <?php echo $i ?>:</label><br>
 																			<input type="text" class="form-control" maxlength="6" readonly=""
-																				   name="Servico<?php echo $i ?>" value="<?php echo $servico[$i]['Servico'] ?>">
+																				   name="Produtos<?php echo $i ?>" value="<?php echo $servico[$i]['Produtos'] ?>">
 																		</div>
 																		<div class="col-md-2">
 																			<label for="ValorServico">Valor:</label>
 																			<div class="input-group">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
-																				<input type="text" class="form-control Valor" id="idTab_Servico<?php echo $i ?>" maxlength="10" placeholder="0,00"
+																				<input type="text" class="form-control Valor" id="idTab_Servico<?php echo $i ?>" maxlength="10" placeholder="0,00" readonly=""
 																					onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','VP','Servico')"
 																					name="ValorServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorServico'] ?>">
 																			</div>
@@ -326,7 +332,11 @@
 																		</div>
 																	</div>
 																	<div class="row">
-																		<div class="col-md-2"></div>
+																		<div class="col-md-2">
+																			<label for="Servico">Orcamento <?php echo $i ?>:</label><br>
+																			<input type="text" class="form-control" maxlength="6" readonly=""
+																				   name="Servico<?php echo $i ?>" value="<?php echo $servico[$i]['Servico'] ?>">
+																		</div>
 																		<div class="col-md-3">
 																			<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
 																			<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
@@ -343,7 +353,7 @@
 																			</div>
 																		</div>
 																		<div class="col-md-2">
-																			<label for="ConcluidoServico">Concluído? </label><br>
+																			<label for="ConcluidoServico">Entregue? </label><br>
 																			<div class="form-group">
 																				<div class="btn-group" data-toggle="buttons">
 																					<?php
@@ -370,6 +380,7 @@
 																				</div>
 																			</div>
 																		</div>
+																		<!--
 																		<div class="col-md-1">
 																			<label><br></label><br>
 																			<button type="button" id="<?php echo $i ?>" class="remove_field10 btn btn-danger"
@@ -377,6 +388,7 @@
 																				<span class="glyphicon glyphicon-trash"></span>
 																			</button>
 																		</div>
+																		-->
 																	</div>
 																</div>
 															</div>
@@ -470,12 +482,13 @@
 												<span class="glyphicon glyphicon-save"></span> Salvar
 											</button>
 										</div>
+										<!--
 										<div class="col-md-6 text-right">
 											<button  type="button" class="btn btn-md btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 												<span class="glyphicon glyphicon-trash"></span> Excluir
 											</button>
 										</div>
-
+										-->
 										<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">

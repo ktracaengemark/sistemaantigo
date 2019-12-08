@@ -621,7 +621,7 @@ class Basico_model extends CI_Model {
         $query = $this->db->query('
             SELECT
                 C.idApp_Cliente,
-                CONCAT(IFNULL(C.NomeCliente, ""), " --- ", IFNULL(C.CelularCliente, ""), " --- ", IFNULL(C.Telefone2, ""), " --- ", IFNULL(C.Telefone3, "")) As NomeCliente
+                CONCAT(IFNULL(C.NomeCliente, ""), " --- ", IFNULL(C.CelularCliente, "")) As NomeCliente
             FROM
                 App_Cliente AS C
 
@@ -646,7 +646,7 @@ class Basico_model extends CI_Model {
         $query = $this->db->query('
             SELECT
                 C.idApp_Fornecedor,
-                CONCAT(IFNULL(C.NomeFornecedor, ""), " --- ", IFNULL(C.Telefone1, "")) As NomeFornecedor
+                CONCAT(IFNULL(C.NomeFornecedor, "")) As NomeFornecedor
             FROM
                 App_Fornecedor AS C
 

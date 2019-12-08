@@ -383,22 +383,26 @@ class Orcatrata_model extends CI_Model {
 				E.NomeEmpresa,
 				PR.idSis_Usuario,
 				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
-				CONCAT(C.NomeCliente, "-", E.NomeEmpresa) AS Servico,
+				CONCAT(OT.idApp_OrcaTrata,"-",C.NomeCliente) AS Servico,
 				PR.idTab_Servico,
 				PR.idApp_Servico,
 				PR.DataValidadeServico,
 				PR.ValorServico,
 				PR.ConcluidoServico,
 				PR.QtdServico,
-				PR.ObsServico
+				PR.ObsServico,
+				TP.Produtos
 			FROM 
 				App_Servico AS PR
 					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = PR.idTab_Servico
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto
 			WHERE 
 				' . $permissao . '
+				' . $permissao5 . '
 				OT.idSis_Empresa = ' . $data . ' AND
 				OT.idTab_TipoRD = "2" AND				
 				OT.AprovadoOrca = "S" AND				
@@ -434,22 +438,26 @@ class Orcatrata_model extends CI_Model {
 				E.NomeEmpresa,
 				PR.idSis_Usuario,
 				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
-				CONCAT(C.NomeCliente, "-", E.NomeEmpresa) AS Produto,
+				CONCAT(OT.idApp_OrcaTrata,"-",C.NomeCliente) AS Produto,
 				PR.idTab_Produto,
 				PR.idApp_Produto,
 				PR.DataValidadeProduto,
 				PR.ValorProduto,
 				PR.ConcluidoProduto,
 				PR.QtdProduto,
-				PR.ObsProduto				
+				PR.ObsProduto,
+				TP.Produtos
 			FROM 
 				App_Produto AS PR
 					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = PR.idTab_Produto
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto					
 			WHERE 
 				' . $permissao . '
+				' . $permissao5 . '
 				OT.idSis_Empresa = ' . $data . ' AND
 				OT.idTab_TipoRD = "2" AND				
 				OT.AprovadoOrca = "S" AND				
@@ -458,6 +466,116 @@ class Orcatrata_model extends CI_Model {
 				PR.idTab_TipoRD = "2" 
 			ORDER BY
 				C.NomeCliente,
+				PR.DataValidadeProduto  
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }	
+
+    public function get_alterarservicodesp($data) {
+		
+		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataValidadeServico) = ' . $data['Mesvenc'] : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		$permissao1 = ($_SESSION['FiltroAlteraParcela']['ConcluidoServico'] != "0" ) ? 'PR.ConcluidoServico = "' . $_SESSION['FiltroAlteraParcela']['ConcluidoServico'] . '" AND ' : FALSE;
+		$permissao2 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataValidadeServico) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
+		$permissao3 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "0" ) ? 'YEAR(PR.DataValidadeServico) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
+		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Orcades'] != "0" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcades'] . '" AND ' : FALSE;
+		$permissao5 = (($_SESSION['log']['idSis_Empresa'] != 5) && ($_SESSION['FiltroAlteraParcela']['NomeFornecedor'] != "0" )) ? 'OT.idApp_Fornecedor = "' . $_SESSION['FiltroAlteraParcela']['NomeFornecedor'] . '" AND ' : FALSE;
+		
+		$query = $this->db->query('
+			SELECT
+				C.NomeFornecedor,
+				OT.idApp_OrcaTrata,
+				OT.Descricao,
+				OT.TipoFinanceiro,
+				TR.TipoFinanceiro,
+				E.NomeEmpresa,
+				PR.idSis_Usuario,
+				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
+				CONCAT(OT.idApp_OrcaTrata,"-",C.NomeFornecedor) AS Servico,
+				PR.idTab_Servico,
+				PR.idApp_Servico,
+				PR.DataValidadeServico,
+				PR.ValorServico,
+				PR.ConcluidoServico,
+				PR.QtdServico,
+				PR.ObsServico,
+				TP.Produtos
+			FROM 
+				App_Servico AS PR
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+					LEFT JOIN App_Fornecedor AS C ON C.idApp_Fornecedor = OT.idApp_Fornecedor
+					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = PR.idTab_Servico
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto
+			WHERE 
+				' . $permissao . '
+				' . $permissao5 . '
+				OT.idSis_Empresa = ' . $data . ' AND
+				OT.idTab_TipoRD = "1" AND				
+				OT.AprovadoOrca = "S" AND				
+				PR.idSis_Empresa = ' . $data . ' AND
+				
+				PR.idTab_TipoRD = "3" 
+			ORDER BY
+				C.NomeFornecedor,
+				PR.DataValidadeServico  
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }	
+
+    public function get_alterarprodutodesp($data) {
+		
+		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataValidadeProduto) = ' . $data['Mesvenc'] : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		$permissao1 = ($_SESSION['FiltroAlteraParcela']['ConcluidoProduto'] != "0" ) ? 'PR.ConcluidoProduto = "' . $_SESSION['FiltroAlteraParcela']['ConcluidoProduto'] . '" AND ' : FALSE;
+		$permissao2 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataValidadeProduto) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
+		$permissao3 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "0" ) ? 'YEAR(PR.DataValidadeProduto) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
+		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Orcades'] != "0" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcades'] . '" AND ' : FALSE;
+		$permissao5 = (($_SESSION['log']['idSis_Empresa'] != 5) && ($_SESSION['FiltroAlteraParcela']['NomeFornecedor'] != "0" )) ? 'OT.idApp_Fornecedor = "' . $_SESSION['FiltroAlteraParcela']['NomeFornecedor'] . '" AND ' : FALSE;
+		
+		$query = $this->db->query('
+			SELECT
+				C.NomeFornecedor,
+				OT.idApp_OrcaTrata,
+				OT.Descricao,
+				OT.TipoFinanceiro,
+				TR.TipoFinanceiro,
+				E.NomeEmpresa,
+				PR.idSis_Usuario,
+				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
+				CONCAT(OT.idApp_OrcaTrata,"-",C.NomeFornecedor) AS Produto,
+				PR.idTab_Produto,
+				PR.idApp_Produto,
+				PR.DataValidadeProduto,
+				PR.ValorProduto,
+				PR.ConcluidoProduto,
+				PR.QtdProduto,
+				PR.ObsProduto,
+				TP.Produtos
+			FROM 
+				App_Produto AS PR
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+					LEFT JOIN App_Fornecedor AS C ON C.idApp_Fornecedor = OT.idApp_Fornecedor
+					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = PR.idTab_Produto
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto					
+			WHERE 
+				' . $permissao . '
+				' . $permissao5 . '
+				OT.idSis_Empresa = ' . $data . ' AND
+				OT.idTab_TipoRD = "1" AND				
+				OT.AprovadoOrca = "S" AND				
+				PR.idSis_Empresa = ' . $data . ' AND
+
+				PR.idTab_TipoRD = "1" 
+			ORDER BY
+				C.NomeFornecedor,
 				PR.DataValidadeProduto  
 		');
         $query = $query->result_array();
