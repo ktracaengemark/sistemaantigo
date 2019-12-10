@@ -3137,25 +3137,32 @@ $(document).ready(function () {
                                 </select>\
                             </div>\
 							<div class="col-md-2">\
-                                <label for="ValorProduto">Valor:</label><br>\
-                                <div class="input-group id="txtHint">\
-                                    <span class="input-group-addon" id="basic-addon1">R$</span>\
-                                    <input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" \
-                                        onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'VP\',\'Produto\')"\
-                                        name="ValorProduto'+pc+'" value="">\
-                                </div>\
-                            </div>\
-                            <div class="col-md-2">\
-                                <label for="SubtotalProduto">Subtotal:</label><br>\
-                                <div class="input-group id="txtHint">\
-                                    <span class="input-group-addon" id="basic-addon1">R$</span>\
-                                    <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto'+pc+'"\
-                                           name="SubtotalProduto'+pc+'" value="">\
-                                </div>\
-                            </div>\
-                        </div>\
+								<label for="ValorProduto">Valor:</label><br>\
+								<div class="input-group id="txtHint">\
+									<span class="input-group-addon" id="basic-addon1">R$</span>\
+									<input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" \
+										onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'VP\',\'Produto\')"\
+										name="ValorProduto'+pc+'" value="">\
+								</div>\
+							</div>\
+							<div class="col-md-2">\
+								<label for="SubtotalProduto">Subtotal:</label><br>\
+								<div class="input-group id="txtHint">\
+									<span class="input-group-addon" id="basic-addon1">R$</span>\
+									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto'+pc+'"\
+										   name="SubtotalProduto'+pc+'" value="">\
+								</div>\
+							</div>\
+						</div>\
 						<div class="row">\
-							<div class="col-md-2"></div>\
+							<div class="col-md-1"></div>\
+							<div class="col-md-1">\
+                                <label><br></label><br>\
+                                <a href="#" id="'+pc+'" class="remove_field9 btn btn-danger"\
+                                        onclick="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
+                                    <span class="glyphicon glyphicon-trash"></span>\
+                                </a>\
+                            </div>\
 							<div class="col-md-3">\
 								<label for="ObsProduto'+pc+'">Obs:</label><br>\
 								<input type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
@@ -3171,28 +3178,48 @@ $(document).ready(function () {
 										   name="DataValidadeProduto'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 								</div>\
 							</div>\
-							<div class="col-md-2">\
-								<label for="ConcluidoProduto">Prd.Ent? </label><br>\
-								<div class="form-group">\
-									<div class="btn-group" data-toggle="buttons">\
-										<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
-										<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
-											autocomplete="off" value="N" checked>Não\
-										</label>\
-										<label class="btn btn-default" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'S">\
-										<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
-											autocomplete="off" value="S" >Sim\
-										</label>\
+							<div class="col-md-2 panel-body">\
+								<div class="panel panel-warning">\
+									<div class="panel-heading">\
+										<div class="row">\
+											<div class="col-md-12">\
+												<label for="ConcluidoProduto">Prd.Ent? </label><br>\
+												<div class="btn-group" data-toggle="buttons">\
+													<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
+													<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
+														autocomplete="off" value="N" checked>Não\
+													</label>\
+													<label class="btn btn-default" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'S">\
+													<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
+														autocomplete="off" value="S" >Sim\
+													</label>\
+												</div>\
+											</div>\
+										</div>\
 									</div>\
 								</div>\
 							</div>\
-							<div class="col-md-1">\
-                                <label><br></label><br>\
-                                <a href="#" id="'+pc+'" class="remove_field9 btn btn-danger"\
-                                        onclick="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
-                                    <span class="glyphicon glyphicon-trash"></span>\
-                                </a>\
-                            </div>\
+							<div class="col-md-2 panel-body">\
+								<div class="panel panel-danger">\
+									<div class="panel-heading">\
+										<div class="row">\
+											<div class="col-md-12">\
+												<label for="DevolvidoProduto">Prd.Dev? </label><br>\
+												<div class="btn-group" data-toggle="buttons">\
+													<label class="btn btn-warning active" name="radio_DevolvidoProduto'+pc+'" id="radio_DevolvidoProduto'+pc+'N">\
+													<input type="radio" name="DevolvidoProduto'+pc+'" id="radiogeraldinamico"\
+														autocomplete="off" value="N" checked>Não\
+													</label>\
+													<label class="btn btn-default" name="radio_DevolvidoProduto'+pc+'" id="radio_DevolvidoProduto'+pc+'S">\
+													<input type="radio" name="DevolvidoProduto'+pc+'" id="radiogeraldinamico"\
+														autocomplete="off" value="S" >Sim\
+													</label>\
+												</div>\
+											</div>\
+										</div>\
+									</div>\
+								</div>\
+							</div>\
 						</div>\
                     </div>\
                 </div>\

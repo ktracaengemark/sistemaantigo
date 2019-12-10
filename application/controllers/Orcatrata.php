@@ -501,6 +501,7 @@ class Orcatrata extends CI_Controller {
             'ProfissionalOrca',
             'AprovadoOrca',
             'ConcluidoOrca',
+			'DevolvidoOrca',
             'QuitadoOrca',
             'DataConclusao',
             'DataRetorno',
@@ -557,7 +558,7 @@ class Orcatrata extends CI_Controller {
 
         $j = 1;
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
-
+			
             if ($this->input->post('idTab_Produto' . $i) || $this->input->post('ValorProduto' . $i) ||
 					$this->input->post('QtdProduto' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('DataValidadeProduto' . $i)) {
@@ -568,6 +569,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
+				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$j++;
             }
         }
@@ -629,8 +631,10 @@ class Orcatrata extends CI_Controller {
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
+		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
 		$data['select']['ConcluidoProduto'] = $this->Basico_model->select_status_sn();
+		$data['select']['DevolvidoProduto'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['Modalidade'] = $this->Basico_model->select_modalidade();
 		$data['select']['QuitadoOrca'] = $this->Basico_model->select_status_sn();
@@ -702,7 +706,8 @@ class Orcatrata extends CI_Controller {
 
 
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
-		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;				
+		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;
+		(!$data['orcatrata']['DevolvidoOrca']) ? $data['orcatrata']['DevolvidoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
  		(!$data['query']['Cadastrar']) ? $data['query']['Cadastrar'] = 'S' : FALSE;       
 		
@@ -721,10 +726,16 @@ class Orcatrata extends CI_Controller {
             $data['div']['AprovadoOrca'] = '' : $data['div']['AprovadoOrca'] = 'style="display: none;"';
 
         $data['radio'] = array(
-            'ConcluidoOrca' => $this->basico->radio_checked($data['orcatrata']['ConcluidoOrca'], 'Orçamento Concluido', 'NS'),
+            'ConcluidoOrca' => $this->basico->radio_checked($data['orcatrata']['ConcluidoOrca'], 'Produtos Entregues', 'NS'),
         );
         ($data['orcatrata']['ConcluidoOrca'] == 'S') ?
             $data['div']['ConcluidoOrca'] = '' : $data['div']['ConcluidoOrca'] = 'style="display: none;"';
+
+        $data['radio'] = array(
+            'DevolvidoOrca' => $this->basico->radio_checked($data['orcatrata']['DevolvidoOrca'], 'Produtos Devolvidos', 'NS'),
+        );
+        ($data['orcatrata']['DevolvidoOrca'] == 'S') ?
+            $data['div']['DevolvidoOrca'] = '' : $data['div']['DevolvidoOrca'] = 'style="display: none;"';
 
         $data['radio'] = array(
             'QuitadoOrca' => $this->basico->radio_checked($data['orcatrata']['QuitadoOrca'], 'Orçamento Quitado', 'NS'),
@@ -784,6 +795,7 @@ class Orcatrata extends CI_Controller {
             }
 			else {	$data['orcatrata']['QuitadoOrca'] = "N";
 					$data['orcatrata']['ConcluidoOrca'] = "N";
+					$data['orcatrata']['DevolvidoOrca'] = "N";
 			}
 			$data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
             $data['orcatrata']['ValorDev'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDev']));
@@ -845,8 +857,11 @@ class Orcatrata extends CI_Controller {
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
 						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['produto'][$j]['ConcluidoProduto'] = 'S';
 						}
+						if ($data['orcatrata']['DedolvidoOrca'] == 'S') { $data['produto'][$j]['DevolvidoProduto'] = 'S';
+						}						
 					}
-					else {$data['produto'][$j]['ConcluidoProduto'] = 'N';
+					else {	$data['produto'][$j]['ConcluidoProduto'] = 'N';
+							$data['produto'][$j]['DevolvidoProduto'] = 'N';
 					}
 				}
                 $data['produto']['idApp_Produto'] = $this->Orcatrata_model->set_produto($data['produto']);
@@ -1609,6 +1624,7 @@ class Orcatrata extends CI_Controller {
             'ProfissionalOrca',
             'AprovadoOrca',
             'ConcluidoOrca',
+			'DevolvidoOrca',
             'QuitadoOrca',
             'DataConclusao',
             'DataRetorno',
@@ -1670,7 +1686,7 @@ class Orcatrata extends CI_Controller {
             if ($this->input->post('idTab_Produto' . $i) || $this->input->post('ValorProduto' . $i) ||
 					$this->input->post('QtdProduto' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('DataValidadeProduto' . $i)|| 
-					$this->input->post('ConcluidoProduto' . $i)) {
+					$this->input->post('ConcluidoProduto' . $i) || $this->input->post('DevolvidoProduto' . $i)) {
                 $data['produto'][$j]['idApp_Produto'] = $this->input->post('idApp_Produto' . $i);
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
@@ -1679,6 +1695,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
+				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$j++;
             }
         }
@@ -1826,8 +1843,10 @@ class Orcatrata extends CI_Controller {
 		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
+		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
 		$data['select']['ConcluidoProduto'] = $this->Basico_model->select_status_sn();
+		$data['select']['DevolvidoProduto'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['Modalidade'] = $this->Basico_model->select_modalidade();
 		$data['select']['QuitadoOrca'] = $this->Basico_model->select_status_sn();
@@ -1887,7 +1906,8 @@ class Orcatrata extends CI_Controller {
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
 			
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
-		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'S' : FALSE;				
+		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;
+		(!$data['orcatrata']['DevolvidoOrca']) ? $data['orcatrata']['DevolvidoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;		
 
@@ -1913,10 +1933,16 @@ class Orcatrata extends CI_Controller {
             $data['div']['AprovadoOrca'] = '' : $data['div']['AprovadoOrca'] = 'style="display: none;"';
 
         $data['radio'] = array(
-            'ConcluidoOrca' => $this->basico->radio_checked($data['orcatrata']['ConcluidoOrca'], 'Orçamento Concluido', 'NS'),
+            'ConcluidoOrca' => $this->basico->radio_checked($data['orcatrata']['ConcluidoOrca'], 'Produtos Entregues', 'NS'),
         );
         ($data['orcatrata']['ConcluidoOrca'] == 'S') ?
             $data['div']['ConcluidoOrca'] = '' : $data['div']['ConcluidoOrca'] = 'style="display: none;"';
+
+        $data['radio'] = array(
+            'DevolvidoOrca' => $this->basico->radio_checked($data['orcatrata']['DevolvidoOrca'], 'Produtos Devolvidos', 'NS'),
+        );
+        ($data['orcatrata']['DevolvidoOrca'] == 'S') ?
+            $data['div']['DevolvidoOrca'] = '' : $data['div']['DevolvidoOrca'] = 'style="display: none;"';
 
         $data['radio'] = array(
             'QuitadoOrca' => $this->basico->radio_checked($data['orcatrata']['QuitadoOrca'], 'Orçamento Quitado', 'NS'),
@@ -2009,6 +2035,7 @@ class Orcatrata extends CI_Controller {
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
 						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['update']['servico']['inserir'][$j]['ConcluidoServico'] = 'S';
 						}
+						
 					}
 					else {$data['update']['servico']['inserir'][$j]['ConcluidoServico'] = 'N';
 					}
@@ -2059,14 +2086,16 @@ class Orcatrata extends CI_Controller {
                     $data['update']['produto']['inserir'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
 					$data['update']['produto']['inserir'][$j]['idTab_TipoRD'] = "2";
 					$data['update']['produto']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['produto']['inserir'][$j]['DataValidadeProduto'], 'mysql');
-                    if ($data['orcatrata']['AprovadoOrca'] == 'N') $data['update']['produto']['inserir'][$j]['ConcluidoProduto'] = 'N';
 					$data['update']['produto']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['produto']['inserir'][$j]['ValorProduto']));
                     unset($data['update']['produto']['inserir'][$j]['SubtotalProduto']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
 						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['update']['produto']['inserir'][$j]['ConcluidoProduto'] = 'S';
 						}
+						if ($data['orcatrata']['DevolvidoOrca'] == 'S') { $data['update']['produto']['inserir'][$j]['DevolvidoProduto'] = 'S';
+						}
 					}
-					else {$data['update']['produto']['inserir'][$j]['ConcluidoProduto'] = 'N';
+					else {	$data['update']['produto']['inserir'][$j]['ConcluidoProduto'] = 'N';
+							$data['update']['produto']['inserir'][$j]['DevolvidoProduto'] = 'N';
 					}                
 				}
 
@@ -2078,8 +2107,12 @@ class Orcatrata extends CI_Controller {
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
 						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['update']['produto']['alterar'][$j]['ConcluidoProduto'] = 'S';
 						}
+						if ($data['orcatrata']['DevolvidoOrca'] == 'S') { $data['update']['produto']['alterar'][$j]['DevolvidoProduto'] = 'S';
+						}
 					}
-					else {$data['update']['produto']['alterar'][$j]['ConcluidoProduto'] = 'N';}
+					else {	$data['update']['produto']['alterar'][$j]['ConcluidoProduto'] = 'N';
+							$data['update']['produto']['alterar'][$j]['DevolvidoProduto'] = 'N';
+					}
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['produto']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
                 }
 

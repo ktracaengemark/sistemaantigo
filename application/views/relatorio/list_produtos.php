@@ -54,7 +54,7 @@
 							<th class="active">Produto</th>
 							<th class="active">Unid.</th>							
 							<th class="active">Valor</th>
-							<th class="active">V/C</th>
+							<th class="active">V/C/A</th>
 							<!--<th class="active">Prod/Serv</th>
 							<th class="active">Custo</th>						
 							<th class="active">Tabelas & Planos</th>
@@ -105,7 +105,7 @@
 							<th class="active">Fornecedor</th>
 							<th class="active">Descricao</th>							
 							<th class="active">Valor</th>
-							<th class="active">V/C</th>
+							<th class="active">V/C/A</th>
 							<th class="active">Prod/Serv</th>
 							<th class="active">Unid.</th>
 							
