@@ -132,6 +132,7 @@ class Orcatrataprint_model extends CI_Model {
 				PV.idApp_Produto,
 				PV.idApp_OrcaTrata,
 				PV.ConcluidoProduto,
+				PV.DevolvidoProduto,
 				P.UnidadeProduto,
 				P.CodProd,
 				TP3.Prodaux3,
@@ -140,7 +141,7 @@ class Orcatrataprint_model extends CI_Model {
 				TCO.Convenio,
 				V.Convdesc,
 				TFO.NomeFornecedor,
-				CONCAT(IFNULL(PV.idApp_Produto,""), " - " , IFNULL(PV.ConcluidoProduto,""), " - Obs.: " , IFNULL(PV.ObsProduto,"")) AS idApp_Produto,
+				CONCAT(IFNULL(PV.idApp_Produto,""), " - " , IFNULL(PV.ConcluidoProduto,""), " - " , IFNULL(PV.DevolvidoProduto,""), " - Obs.: " , IFNULL(PV.ObsProduto,"")) AS idApp_Produto,
 				CONCAT(IFNULL(PV.QtdProduto,""), " - " , IFNULL(P.UnidadeProduto,"")) AS QtdProduto,
             	CONCAT(IFNULL(P.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(P.Produtos,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,"")) AS NomeProduto,
             	PV.ValorProduto

@@ -58,7 +58,7 @@ class Prodaux3 extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         $this->form_validation->set_rules('Prodaux3', 'Nome do Convênio', 'required|trim');
-		$this->form_validation->set_rules('Abrev3', 'Abrev3iação', 'required|trim');
+		$this->form_validation->set_rules('Abrev3', 'Abreviação', 'required|trim');
 
         $data['titulo'] = 'Cadastrar Categoria';
         $data['form_open_path'] = 'prodaux3/cadastrar';

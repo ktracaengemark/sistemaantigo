@@ -767,6 +767,8 @@ class Orcatrata extends CI_Controller {
           echo "</pre>";
           exit ();
           */
+        $data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
+        $data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -1966,7 +1968,9 @@ class Orcatrata extends CI_Controller {
           echo "</pre>";
           exit ();
         */
-
+        $data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
+        $data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('orcatrata/form_orcatrataalterar2', $data);
