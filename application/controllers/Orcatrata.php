@@ -656,7 +656,7 @@ class Orcatrata extends CI_Controller {
         $data['form_open_path'] = 'orcatrata/cadastrar3';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'info';
+        $data['panel'] = 'primary';
         $data['metodo'] = 1;
 
 		$data['collapse'] = '';	
@@ -770,6 +770,9 @@ class Orcatrata extends CI_Controller {
         $data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
         $data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
 
+        $data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
+        $data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             //if (1 == 1) {
@@ -1869,7 +1872,7 @@ class Orcatrata extends CI_Controller {
         $data['form_open_path'] = 'orcatrata/alterar2';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'info';
+        $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
 		$data['collapse'] = '';	
@@ -1970,6 +1973,9 @@ class Orcatrata extends CI_Controller {
         */
         $data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
         $data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
+
+        $data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
+        $data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
 		
         #run form validation
         if ($this->form_validation->run() === FALSE) {

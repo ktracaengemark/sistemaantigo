@@ -1,24 +1,51 @@
 <?php if (isset($msg)) echo $msg; ?>
-<div class="col-md-4">
-	<?php echo validation_errors(); ?>
-
-	<div class="panel panel-primary">
-
-		<div class="panel-heading"><strong>Produtos NÂO Entregues<?php #echo $titulo; ?></strong></div>
-		<div class="panel-body">
-
-			<?php echo form_open($form_open_path, 'role="form"'); ?>
-
-			</form>
 		
-			
-			<?php if (isset($list1)) echo $list1; ?>
+<div class="col-md-4 ">
+	<div class="row">		
+		
+		<div class="col-md-12">
+			<?php echo validation_errors(); ?>
+
+			<div class="panel panel-primary">
+
+				<div class="panel-heading"><strong>Produtos NÂO Entregues<?php #echo $titulo; ?></strong></div>
+				<div class="panel-body">
+
+					<?php echo form_open($form_open_path, 'role="form"'); ?>
+
+					</form>
+				
+					
+					<?php if (isset($list1)) echo $list1; ?>
+
+				</div>
+
+			</div>
 
 		</div>
 
-	</div>
+		<div class="col-md-12">
+			<?php echo validation_errors(); ?>
 
-</div>
+			<div class="panel panel-primary">
+
+				<div class="panel-heading"><strong>Pagamentos NÂO Recebidos<?php #echo $titulo; ?></strong></div>
+				<div class="panel-body">
+
+					<?php echo form_open($form_open_path, 'role="form"'); ?>
+
+					</form>
+				
+					
+					<?php if (isset($list2)) echo $list2; ?>
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>	
 
 <div class="col-md-8 ">
 	<div class="row">
