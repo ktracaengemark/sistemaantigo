@@ -4,7 +4,7 @@
 	<div class="row">		
 		
 		<div class="col-md-12">
-			<?php echo validation_errors(); ?>
+			<?php #echo validation_errors(); ?>
 
 			<div class="panel panel-primary">
 
@@ -25,7 +25,7 @@
 		</div>
 
 		<div class="col-md-12">
-			<?php echo validation_errors(); ?>
+			<?php #echo validation_errors(); ?>
 
 			<div class="panel panel-primary">
 
@@ -252,7 +252,7 @@
 																						<div class="panel-heading">
 																							<div class="row">				
 																								<div class="col-md-12">
-																									<label for="ConcluidoProduto">Prd.Ent? </label><br>
+																									<label for="ConcluidoProduto">Entregue? </label><br>
 																									<div class="btn-group" data-toggle="buttons">
 																										<?php
 																										foreach ($select['ConcluidoProduto'] as $key => $row) {
@@ -286,7 +286,7 @@
 																						<div class="panel-heading">
 																							<div class="row">				
 																								<div class="col-md-12">
-																									<label for="DevolvidoProduto">Prd.Dev? </label><br>
+																									<label for="DevolvidoProduto">Devolvido? </label><br>
 																									<div class="btn-group" data-toggle="buttons">
 																										<?php
 																										foreach ($select['DevolvidoProduto'] as $key => $row) {
@@ -325,151 +325,153 @@
 																$ProdutoSoma++;
 																}
 																?>
-
+																<input type="hidden" name="CountMax" id="CountMax" value="<?php echo $ProdutoSoma ?>">
 															</div>
-															
-															<div class="col-md-8 panel-body ">
-																<div class="panel panel-success">
-																	<div class="panel-heading text-left">
-																		<div class="row">
-																			<div class="col-md-3">
-																				<label></label><br>
-																				<a class="add_field_button9 btn btn-success"
-																						onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
-																					<span class="glyphicon glyphicon-arrow-up"></span> Adic. Produtos
-																				</a>
-																			</div>
-																			
-																			<div class="col-md-3 text-center">	
-																				<label></label><br>
-																				<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
-																			</div>
-																			<div class="col-md-3 text-center">	
-																				<label></label><br>
-																				<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
-																			</div>
-																			
-																			<!--
-																			<div class="col-md-2">
-																				<label></label><br>
-																				<button class="btn btn-md btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-																					<span class="glyphicon glyphicon-refresh"></span> Recarregar
-																				</button>
-																			</div>
-																			-->
-																			
-																			<?php if (($_SESSION['log']['NivelEmpresa'] <= 3)) { ?>
-																			<div class="col-md-3 text-right">
-																				<label></label><br>
-																				<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar3/" role="button"> 
-																					<span class="glyphicon glyphicon-plus"></span> Novo/Editar
-																				</a>
-																			</div>	
-																			<?php } else {?>
-																			<div class="col-md-3 text-right">
-																				<label></label><br>
-																				<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar2/" role="button"> 
-																					<span class="glyphicon glyphicon-plus"></span> Novo/Editar
-																				</a>
-																			</div>	
-																			<?php } ?>																				
-																			<!--
-																			<div class="col-md-2 text-right">
-																				<a class="btn btn-xs btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
-																					<span class="glyphicon glyphicon-menu-down"></span> Devolução
-																				</a>
-																			</div>
-																			
-																			
-																			<div class="col-md-3 text-left">																							
-																				<a class="accordion-toggle btn btn-heading  collapsed" role="tab" id="heading5" data-toggle="collapse" data-parent="#accordion5" data-target="#collapse5" aria-expanded="false">
-																					<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-																					Entregues
-																				</a>
-																				<a class="btn btn-success" type="button" data-toggle="collapse" data-target="#Entregues" aria-expanded="false" aria-controls="Entregues">
-																					<span class="glyphicon glyphicon-menu-up"></span> Comprados
-																				</a>
-																			</div>
-																			-->
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<div class="col-md-2 panel-body">
-																<div class="panel panel-warning">
-																	<div class="panel-heading">
-																		<div class="row">														
-																			<div class="col-md-12 text-center">
-																				<label for="ConcluidoOrca">Prd.Entregues?</label><br>
-																				<div class="btn-group" data-toggle="buttons">
-																					<?php
-																					foreach ($select['ConcluidoOrca'] as $key => $row) {
-																						if (!$orcatrata['ConcluidoOrca'])
-																							$orcatrata['ConcluidoOrca'] = 'N';
-
-																						($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																						if ($orcatrata['ConcluidoOrca'] == $key) {
-																							echo ''
-																							. '<label class="btn btn-warning active" name="ConcluidoOrca_' . $hideshow . '">'
-																							. '<input type="radio" name="ConcluidoOrca" id="' . $hideshow . '" '
-																							. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																							. '</label>'
-																							;
-																						} else {
-																							echo ''
-																							. '<label class="btn btn-default" name="ConcluidoOrca_' . $hideshow . '">'
-																							. '<input type="radio" name="ConcluidoOrca" id="' . $hideshow . '" '
-																							. 'autocomplete="off" value="' . $key . '" >' . $row
-																							. '</label>'
-																							;
-																						}
-																					}
-																					?>
+															<div class="row">
+																<div class="col-md-12 panel-body ">
+																	<div class="panel panel-success">
+																		<div class="panel-heading text-left">
+																			<div class="row">
+																				<div class="col-md-2">
+																					<label></label><br>
+																					<a class="add_field_button9 btn btn-success"
+																							onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
+																						<span class="glyphicon glyphicon-arrow-up"></span> Adic. Produtos
+																					</a>
 																				</div>
+																				
+																				
+																				<!--
+																				<div class="col-md-2">
+																					<label></label><br>
+																					<button class="btn btn-md btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+																						<span class="glyphicon glyphicon-refresh"></span> Recarregar
+																					</button>
+																				</div>
+																				-->
+																																							
+																				<!--
+																				<div class="col-md-2 text-right">
+																					<a class="btn btn-xs btn-warning" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
+																						<span class="glyphicon glyphicon-menu-down"></span> Devolução
+																					</a>
+																				</div>
+																				
+																				
+																				<div class="col-md-3 text-left">																							
+																					<a class="accordion-toggle btn btn-heading  collapsed" role="tab" id="heading5" data-toggle="collapse" data-parent="#accordion5" data-target="#collapse5" aria-expanded="false">
+																						<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+																						Entregues
+																					</a>
+																					<a class="btn btn-success" type="button" data-toggle="collapse" data-target="#Entregues" aria-expanded="false" aria-controls="Entregues">
+																						<span class="glyphicon glyphicon-menu-up"></span> Comprados
+																					</a>
+																				</div>
+																				-->
+																		
+																
+																				<div class="col-md-3 panel-body">
+																					<div class="panel panel-warning">
+																						<div class="panel-heading">
+																							<div class="row">														
+																								<div class="col-md-12 text-center">
+																									<label for="ConcluidoOrca">Todos Prd. Entregues?</label><br>
+																									<div class="btn-group" data-toggle="buttons">
+																										<?php
+																										foreach ($select['ConcluidoOrca'] as $key => $row) {
+																											if (!$orcatrata['ConcluidoOrca'])
+																												$orcatrata['ConcluidoOrca'] = 'N';
+
+																											($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																											if ($orcatrata['ConcluidoOrca'] == $key) {
+																												echo ''
+																												. '<label class="btn btn-warning active" name="ConcluidoOrca_' . $hideshow . '">'
+																												. '<input type="radio" name="ConcluidoOrca" id="' . $hideshow . '" '
+																												. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																												. '</label>'
+																												;
+																											} else {
+																												echo ''
+																												. '<label class="btn btn-default" name="ConcluidoOrca_' . $hideshow . '">'
+																												. '<input type="radio" name="ConcluidoOrca" id="' . $hideshow . '" '
+																												. 'autocomplete="off" value="' . $key . '" >' . $row
+																												. '</label>'
+																												;
+																											}
+																										}
+																										?>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="col-md-3 panel-body">
+																					<div class="panel panel-danger">
+																						<div class="panel-heading">
+																							<div class="row">														
+																								<div class="col-md-12 text-center">
+																									<label for="DevolvidoOrca">Todos Prd. Devolvidos?</label><br>
+																									<div class="btn-group" data-toggle="buttons">
+																										<?php
+																										foreach ($select['DevolvidoOrca'] as $key => $row) {
+																											if (!$orcatrata['DevolvidoOrca'])
+																												$orcatrata['DevolvidoOrca'] = 'N';
+
+																											($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																											if ($orcatrata['DevolvidoOrca'] == $key) {
+																												echo ''
+																												. '<label class="btn btn-warning active" name="DevolvidoOrca_' . $hideshow . '">'
+																												. '<input type="radio" name="DevolvidoOrca" id="' . $hideshow . '" '
+																												. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																												. '</label>'
+																												;
+																											} else {
+																												echo ''
+																												. '<label class="btn btn-default" name="DevolvidoOrca_' . $hideshow . '">'
+																												. '<input type="radio" name="DevolvidoOrca" id="' . $hideshow . '" '
+																												. 'autocomplete="off" value="' . $key . '" >' . $row
+																												. '</label>'
+																												;
+																											}
+																										}
+																										?>
+																									</div>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																				<div class="col-md-1 text-center">	
+																					<label></label><br>
+																					<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
+																				</div>
+																				<div class="col-md-1 text-center">	
+																					<label></label><br>
+																					<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
+																				</div>
+																				<?php if (($_SESSION['log']['NivelEmpresa'] <= 3)) { ?>
+																				<div class="col-md-2 text-right">
+																					<label></label><br>
+																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar3/" role="button"> 
+																						<span class="glyphicon glyphicon-plus"></span> Novo/Editar
+																					</a>
+																				</div>	
+																				<?php } else {?>
+																				<div class="col-md-2 text-right">
+																					<label></label><br>
+																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar2/" role="button"> 
+																						<span class="glyphicon glyphicon-plus"></span> Novo/Editar
+																					</a>
+																				</div>	
+																				<?php } ?>																				
 																			</div>
 																		</div>
 																	</div>
 																</div>
 															</div>
-															<div class="col-md-2 panel-body">
-																<div class="panel panel-danger">
-																	<div class="panel-heading">
-																		<div class="row">														
-																			<div class="col-md-12 text-center">
-																				<label for="DevolvidoOrca">Prd.Devolvidos?</label><br>
-																				<div class="btn-group" data-toggle="buttons">
-																					<?php
-																					foreach ($select['DevolvidoOrca'] as $key => $row) {
-																						if (!$orcatrata['DevolvidoOrca'])
-																							$orcatrata['DevolvidoOrca'] = 'N';
-
-																						($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																						if ($orcatrata['DevolvidoOrca'] == $key) {
-																							echo ''
-																							. '<label class="btn btn-warning active" name="DevolvidoOrca_' . $hideshow . '">'
-																							. '<input type="radio" name="DevolvidoOrca" id="' . $hideshow . '" '
-																							. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																							. '</label>'
-																							;
-																						} else {
-																							echo ''
-																							. '<label class="btn btn-default" name="DevolvidoOrca_' . $hideshow . '">'
-																							. '<input type="radio" name="DevolvidoOrca" id="' . $hideshow . '" '
-																							. 'autocomplete="off" value="' . $key . '" >' . $row
-																							. '</label>'
-																							;
-																						}
-																					}
-																					?>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>																	
-															<input type="hidden" name="CountMax" id="CountMax" value="<?php echo $ProdutoSoma ?>">
 														</div>
 													</div>
 													<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>	
@@ -656,9 +658,9 @@
 																	<div class="btn-group" data-toggle="buttons">
 																		<?php
 																		foreach ($select['Cadastrar'] as $key => $row) {
-																			(!$query['Cadastrar']) ? $query['Cadastrar'] = 'S' : FALSE;
+																			(!$cadastrar['Cadastrar']) ? $cadastrar['Cadastrar'] = 'S' : FALSE;
 
-																			if ($query['Cadastrar'] == $key) {
+																			if ($cadastrar['Cadastrar'] == $key) {
 																				echo ''
 																				. '<label class="btn btn-warning active" name="radiobutton_Cadastrar' . '" id="radiobutton_Cadastrar' .  $key . '">'
 																				. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
@@ -1022,61 +1024,54 @@
 													?>
 												</div>
 												<div class="row">	
-													<div class="col-md-8 panel-body">
+													<div class="col-md-12 panel-body">
 														<div class="panel panel-warning">
 															<div class="panel-heading">										
 																<div class="row">	
-																	<div class="col-md-6 form-inline">
-																		<label></label><br><br><br>
-																		<!--
-																		<button class="btn btn-warning" type="button" data-toggle="collapse" onclick="adicionaParcelas()"
-																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas">
-																			<span class="glyphicon glyphicon-plus"></span> Adicionar Parcelas
-																		</button>
-																		-->
+																	<div class="col-md-2 form-inline">
 																	</div>
-																</div>
-															</div>
-														</div>
-													</div>	
-													<div class="col-md-4 panel-body">
-														<div class="panel panel-warning">
-															<div class="panel-heading">
-																<div class="row">
-																	<div class="col-md-12 text-center">
-																		<label for="QuitadoOrca">Todas as Parcelas Quitadas?</label><br>
-																		<div class="btn-group" data-toggle="buttons">
-																			<?php
-																			foreach ($select['QuitadoOrca'] as $key => $row) {
-																				if (!$orcatrata['QuitadoOrca'])
-																					$orcatrata['QuitadoOrca'] = 'N';
+																	<div class="col-md-3 panel-body">
+																		<div class="panel panel-success">
+																			<div class="panel-heading">
+																				<div class="row">
+																					<div class="col-md-12 text-center">
+																						<label for="QuitadoOrca">Todas Prc. Pagas?</label><br>
+																						<div class="btn-group" data-toggle="buttons">
+																							<?php
+																							foreach ($select['QuitadoOrca'] as $key => $row) {
+																								if (!$orcatrata['QuitadoOrca'])
+																									$orcatrata['QuitadoOrca'] = 'N';
 
-																				($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																								($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
-																				if ($orcatrata['QuitadoOrca'] == $key) {
-																					echo ''
-																					. '<label class="btn btn-warning active" name="QuitadoOrca_' . $hideshow . '">'
-																					. '<input type="radio" name="QuitadoOrca" id="' . $hideshow . '" '
-																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																					. '</label>'
-																					;
-																				} else {
-																					echo ''
-																					. '<label class="btn btn-default" name="QuitadoOrca_' . $hideshow . '">'
-																					. '<input type="radio" name="QuitadoOrca" id="' . $hideshow . '" '
-																					. 'autocomplete="off" value="' . $key . '" >' . $row
-																					. '</label>'
-																					;
-																				}
-																			}
-																			?>
+																								if ($orcatrata['QuitadoOrca'] == $key) {
+																									echo ''
+																									. '<label class="btn btn-warning active" name="QuitadoOrca_' . $hideshow . '">'
+																									. '<input type="radio" name="QuitadoOrca" id="' . $hideshow . '" '
+																									. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																									. '</label>'
+																									;
+																								} else {
+																									echo ''
+																									. '<label class="btn btn-default" name="QuitadoOrca_' . $hideshow . '">'
+																									. '<input type="radio" name="QuitadoOrca" id="' . $hideshow . '" '
+																									. 'autocomplete="off" value="' . $key . '" >' . $row
+																									. '</label>'
+																									;
+																								}
+																							}
+																							?>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
 																		</div>
 																	</div>
 																</div>
 															</div>
 														</div>
-													</div>														
-												</div>														
+													</div>															
+												</div>											
 											</div>
 										</div>
 									</div>
@@ -1132,7 +1127,7 @@
 
 													<div class="col-md-6">
 														<label></label><br>
-														<button class="btn btn-md btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+														<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
 															<span class="glyphicon glyphicon-save"></span> Salvar
 														</button>
 													</div>
@@ -1172,7 +1167,7 @@
 												<?php } else { ?>
 													<div class="col-md-6 text-left">
 														<label></label><br>
-														<button class="btn btn-md btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+														<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
 															<span class="glyphicon glyphicon-save"></span> Salvar
 														</button>
 													</div>

@@ -1008,6 +1008,7 @@ class Orcatrata_model extends CI_Model {
             WHERE
                 TC.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TC.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				TOT.AprovadoOrca = "S" AND
 				AP.Quitado = "N" AND
 				TOT.TipoFinanceiro = "31" 
 

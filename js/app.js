@@ -3127,7 +3127,7 @@ $(document).ready(function () {
                                 <div class="input-group">\
                                     <input type="text" class="form-control Numero" maxlength="10" id="QtdProduto'+pc+'" placeholder="0"\
                                         onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
-                                        name="QtdProduto'+pc+'" value="">\
+                                        name="QtdProduto'+pc+'" value="1">\
                                 </div>\
                             </div>\
 							<div class="col-md-6">\
@@ -3183,7 +3183,7 @@ $(document).ready(function () {
 									<div class="panel-heading">\
 										<div class="row">\
 											<div class="col-md-12">\
-												<label for="ConcluidoProduto">Prd.Ent? </label><br>\
+												<label for="ConcluidoProduto">Entregue? </label><br>\
 												<div class="btn-group" data-toggle="buttons">\
 													<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
 													<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
@@ -3204,7 +3204,7 @@ $(document).ready(function () {
 									<div class="panel-heading">\
 										<div class="row">\
 											<div class="col-md-12">\
-												<label for="DevolvidoProduto">Prd.Dev? </label><br>\
+												<label for="DevolvidoProduto">Devolvido? </label><br>\
 												<div class="btn-group" data-toggle="buttons">\
 													<label class="btn btn-warning active" name="radio_DevolvidoProduto'+pc+'" id="radio_DevolvidoProduto'+pc+'N">\
 													<input type="radio" name="DevolvidoProduto'+pc+'" id="radiogeraldinamico"\
@@ -3296,7 +3296,7 @@ $(document).ready(function () {
 								<div class="input-group">\
 									<input type="text" class="form-control Numero" maxlength="10" id="QtdServico'+ps+'" placeholder="0"\
 										onkeyup="calculaSubtotalDev(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
-										name="QtdServico'+ps+'" value="">\
+										name="QtdServico'+ps+'" value="1">\
 								</div>\
 							</div>\
 							<div class="col-md-6">\

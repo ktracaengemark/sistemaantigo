@@ -60,13 +60,13 @@
 						
 						<div class="btn-group " role="group" aria-label="...">
 							<a href="<?php echo base_url(); ?>relatorio/clientes">
-								<button type="button" class="btn btn-sm btn-primary ">
+								<button type="button" class="btn btn-sm btn-warning ">
 									<span class="glyphicon glyphicon-user"></span> Clientes
 								</button>
 							</a>
 						</div>
 						<div class="btn-group">
-							<button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown">
+							<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
 								<span class="glyphicon glyphicon-user"></span> Fornecedores <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">							
