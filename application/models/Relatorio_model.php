@@ -4121,6 +4121,14 @@ exit();
 	
 	public function list_rankingvendas($data) {
 
+        if ($data['DataFim']) {
+            $consulta =
+                '(TPR.DataVencimento >= "' . $data['DataInicio'] . '" AND TPR.DataVencimento <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(TPR.DataVencimento >= "' . $data['DataInicio'] . '")';
+        }
         $data['NomeCliente'] = ($data['NomeCliente']) ? ' AND TC.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'TC.NomeCliente' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
@@ -4134,12 +4142,12 @@ exit();
             FROM
                 App_Cliente AS TC
 				LEFT JOIN App_OrcaTrata AS TOT ON TOT.idApp_Cliente = TC.idApp_Cliente
-				LEFT JOIN App_Parcelas AS AP ON AP.idApp_OrcaTrata = TOT.idApp_OrcaTrata
+				LEFT JOIN App_Parcelas AS TPR ON TPR.idApp_OrcaTrata = TOT.idApp_OrcaTrata
             WHERE
                 TC.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TC.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				AP.Quitado = "N" AND
-				TOT.TipoFinanceiro = "31" 
+				TPR.Quitado = "S" AND
+				' . $consulta . '
                 ' . $data['NomeCliente'] . '
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . ''
@@ -4240,8 +4248,8 @@ exit();
                 (' . $consulta . ')
                 ' . $data['NomeCliente'] . ' AND
                 TOT.AprovadoOrca = "S" AND
-				TOT.TipoFinanceiro = "31" AND
-				TPR.Quitado = "N" AND
+
+				TPR.Quitado = "S" AND
 				TPR.idTab_TipoRD = "2" AND
                 TC.idApp_Cliente != "0"
             GROUP BY

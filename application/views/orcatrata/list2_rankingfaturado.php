@@ -2,8 +2,8 @@
 	<thead>
 		<tr>
 			<!--<th class="active text-center">id</th>-->
-			<th class="active text-left">Cliente</th>
-			<th class="active text-left">A Receber</th>
+			<th class="active text-left">Fornecedor</th>
+			<th class="active text-left">A Pagar</th>
 		</tr>
 	</thead>
 	<thead>
@@ -25,12 +25,12 @@
 
                 #echo '<tr class="clickable-row" data-href="' . $url . '">';
 
-							if(isset($row->NomeCliente)) {
+							if(isset($row->NomeFornecedor)) {
 							#echo '<tr>';
 							#echo '<tr class="clickable-row" data-href="' . base_url() . 'cliente/prontuario/' . $row->idApp_Cliente . '">';
 							#echo '<tr class="clickable-row" data-href="' . base_url() . 'cliente/prontuario/' . $row->NomeCliente . '">';
 								#echo '<td>' . $row->idApp_Cliente . '</td>';
-								echo '<td>' . $row->NomeCliente . '</td>';
+								echo '<td>' . $row->NomeFornecedor . '</td>';
 								echo '<td>' . $row->QtdParc . '</td>';							
 
 							echo '</tr>';

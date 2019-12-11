@@ -8,7 +8,9 @@
 
 			<div class="panel panel-primary">
 
-				<div class="panel-heading"><strong>Produtos NÂO Entregues<?php #echo $titulo; ?></strong></div>
+				<div class="panel-heading">
+					<strong>Produtos NÂO Entregues<?php #echo $titulo; ?></strong>
+				</div>
 				<div class="panel-body">
 
 					<?php echo form_open($form_open_path, 'role="form"'); ?>
@@ -29,7 +31,12 @@
 
 			<div class="panel panel-primary">
 
-				<div class="panel-heading"><strong>Pagamentos NÂO Recebidos<?php #echo $titulo; ?></strong></div>
+				<div class="panel-heading">
+					<strong>Pagamentos NÂO Recebidos<?php #echo $titulo; ?></strong>
+					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/fiado" role="button">
+						<span class="glyphicon glyphicon-search"></span> Fiado
+					</a>				
+				</div>
 				<div class="panel-body">
 
 					<?php echo form_open($form_open_path, 'role="form"'); ?>
