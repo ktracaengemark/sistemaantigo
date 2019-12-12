@@ -33,7 +33,7 @@
 			<div class="modal-footer">
 				<div class="form-group">	
 					<div class="row text-left">
-						<div class="col-md-12">
+						<div class="col-md-8">
 							<label for="Ordenamento">Produto</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
 									id="Produtos" name="Produtos">
@@ -48,6 +48,21 @@
 								?>
 							</select>
 						</div>
+						<div class="col-md-4">
+							<label for="Ordenamento">V/C/A</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="TipoProduto" name="TipoProduto">
+								<?php
+								foreach ($select['TipoProduto'] as $key => $row) {
+									if ($query['TipoProduto'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>						
 					</div>
 				</div>
 				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
@@ -83,9 +98,8 @@
 								?>
 							</select>
 						</div>						
-						<!--
 						<div class="col-md-4">
-							<label for="Ordenamento">Aux1</label>
+							<label for="Ordenamento">Esp.</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 									id="Prodaux1" name="Prodaux1">
 								<?php
@@ -99,7 +113,6 @@
 								?>
 							</select>
 						</div>
-						-->
 					</div>
 				</div>	
 				<div class="form-group">	

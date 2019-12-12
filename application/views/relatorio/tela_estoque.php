@@ -78,7 +78,25 @@
 				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Produtos</h4>
 			</div>
 			<div class="modal-footer">
-
+				<div class="form-group">
+					<div class="row text-left">
+						<div class="col-md-12">
+							<label for="Ordenamento">Produto</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="Produtos" name="Produtos">
+								<?php
+								foreach ($select['Produtos'] as $key => $row) {
+									if ($query['Produtos'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+					</div>
+				</div>
 				<div class="form-group">
 					<div class="row text-left">
 						<div class="col-md-4">
@@ -111,17 +129,13 @@
 								?>
 							</select>
 						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="row text-left">
-						<div class="col-md-12">
-							<label for="Ordenamento">Produto</label>
+						<div class="col-md-4">
+							<label for="Ordenamento">Esp.</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-									id="Produtos" name="Produtos">
+									id="Prodaux1" name="Prodaux1">
 								<?php
-								foreach ($select['Produtos'] as $key => $row) {
-									if ($query['Produtos'] == $key) {
+								foreach ($select['Prodaux1'] as $key => $row) {
+									if ($query['Prodaux1'] == $key) {
 										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 									} else {
 										echo '<option value="' . $key . '">' . $row . '</option>';
@@ -129,7 +143,7 @@
 								}
 								?>
 							</select>
-						</div>
+						</div>						
 					</div>
 				</div>				
 				<div class="form-group">

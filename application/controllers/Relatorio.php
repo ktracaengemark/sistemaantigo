@@ -2011,11 +2011,12 @@ class Relatorio extends CI_Controller {
         #$this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
 
         $data['select']['Campo'] = array(
+			'TP.Produtos' => 'Produto',	
 			'TP.Prodaux3' => 'Categoria',
 			'TP.Prodaux2' => 'Tipo',
-			'TP.Produtos' => 'Produto',			
+			'TP.Prodaux1' => 'Esp.',
 			'TP.CodProd' => 'Código',
-			#'TP.idTab_Produto' => 'Id',
+			'TP.TipoProduto' => 'V/C/A',
 			#'TP.Categoria' => 'Prod/Serv',
 			#'TP.Prodaux1' => 'Aux1',
         );
@@ -2024,7 +2025,6 @@ class Relatorio extends CI_Controller {
             'ASC' => 'Crescente',
             'DESC' => 'Decrescente',
         );
-
 
 
         $data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
@@ -4186,6 +4186,7 @@ class Relatorio extends CI_Controller {
         $data['query'] = quotes_to_entities($this->input->post(array(
             'Produtos',
 			'CodProd',
+			'TipoProduto',
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
@@ -4199,12 +4200,12 @@ class Relatorio extends CI_Controller {
 
 
         $data['select']['Campo'] = array(
+			'TP.Produtos' => 'Produto',			
 			'TP3.Prodaux3' => 'Categoria',
 			'TP.Prodaux2' => 'Tipo',			
-			'TP.Produtos' => 'Produto',			
-			'TP.CodProd' => 'Código',
-			#'TP.Prodaux1' => 'Aux1',
-			#'TP.idTab_Produto' => 'Id',
+			'TP.Prodaux1' => 'Esp.',
+			'TP.TipoProduto' => 'V/C/A',
+			'TP.CodProd' => 'Código',			
 			#'TP.Categoria' => 'Prod/Serv',
         );
 
@@ -4217,6 +4218,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['TipoProduto'] = $this->Relatorio_model->select_tipoproduto();
 
         $data['titulo'] = 'Produtos';
 
@@ -4228,6 +4230,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
 			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['TipoProduto'] = $data['query']['TipoProduto'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 
