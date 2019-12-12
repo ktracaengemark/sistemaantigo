@@ -111,8 +111,8 @@ $db['default'] = array(
 	'password' => '',
 
     #'database' => 'ci',
-    'database' => 'app2',	
-	#'database' => 'app.testes',
+    #'database' => 'app',	
+	'database' => 'app.testes',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,
