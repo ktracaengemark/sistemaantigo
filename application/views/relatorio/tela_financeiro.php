@@ -246,6 +246,40 @@
 								-->
 							</div>
 							<br>
+							<div class="row">
+								<div class="col-md-4 text-left">
+									<label for="DataInicio">Data Início: *</label>
+									<div class="input-group DatePicker">
+										<span class="input-group-addon" disabled>
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+											   autofocus name="DataInicio" value="<?php echo set_value('DataInicio', $query['DataInicio']); ?>">
+										
+									</div>
+								</div>
+								<div class="col-md-4 text-left">
+									<label for="DataFim">Data Fim: (opcional)</label>
+									<div class="input-group DatePicker">
+										<span class="input-group-addon" disabled>
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+												name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
+										
+									</div>
+								</div>											
+								<!--
+								<div class="col-md-3 text-left" >
+									<label for="Ordenamento">Ano do Venc.:</label>
+									<div>
+										<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
+											   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
+									</div>
+								</div>
+								-->
+							</div>
+							<br>							
 							<div class="row">								
 								<div class="col-md-8 text-left">
 									<label for="Ordenamento">Ordenamento:</label>
@@ -549,6 +583,40 @@
 								-->
 							</div>							
 							<br>
+							<div class="row">
+								<div class="col-md-4 text-left">
+									<label for="DataInicio">Data Início: *</label>
+									<div class="input-group DatePicker">
+										<span class="input-group-addon" disabled>
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+											   autofocus name="DataInicio" value="<?php echo set_value('DataInicio', $query['DataInicio']); ?>">
+										
+									</div>
+								</div>
+								<div class="col-md-4 text-left">
+									<label for="DataFim">Data Fim: (opcional)</label>
+									<div class="input-group DatePicker">
+										<span class="input-group-addon" disabled>
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+												name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
+										
+									</div>
+								</div>											
+								<!--
+								<div class="col-md-3 text-left" >
+									<label for="Ordenamento">Ano do Venc.:</label>
+									<div>
+										<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
+											   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
+									</div>
+								</div>
+								-->
+							</div>
+							<br>							
 							<div class="row">
 								<div class="col-md-8 text-left">
 									<label for="Ordenamento">Ordenamento:</label>

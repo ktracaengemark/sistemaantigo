@@ -895,7 +895,9 @@ class Relatorio extends CI_Controller {
 			'AVAP',
 			'FormaPag',
 			'Orcarec',
-			'Orcades',			
+			'Orcades',
+            'DataInicio',
+            'DataFim',				
         ), TRUE));
 /*
 		   
@@ -915,7 +917,9 @@ class Relatorio extends CI_Controller {
 		$_SESSION['Imprimir']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];		
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
+        $this->form_validation->set_rules('DataInicio', 'Data Início do Vencimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim', 'Data Fim do Vencimento', 'trim|valid_date');
+		
 		$data['collapse'] = '';	
 
 		$data['collapse1'] = 'class="collapse"';
@@ -988,11 +992,13 @@ class Relatorio extends CI_Controller {
         $data['titulo1'] = 'Receitas';
 
         #run form validation
-        if ($this->form_validation->run() !== TRUE) {
+        if ($this->form_validation->run() !== FALSE) {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
             $data['bd']['TipoFinanceiroR'] = $data['query']['TipoFinanceiroR'];
+			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+            $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');			
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
@@ -1025,11 +1031,13 @@ class Relatorio extends CI_Controller {
         $data['titulo2'] = 'Despesas';
 
         #run form validation
-        if ($this->form_validation->run() !== TRUE) {
+        if ($this->form_validation->run() !== FALSE) {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['NomeFornecedor'] = $data['query']['NomeFornecedor'];
             $data['bd']['TipoFinanceiroD'] = $data['query']['TipoFinanceiroD'];
+			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+            $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');			
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];

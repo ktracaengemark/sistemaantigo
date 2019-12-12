@@ -802,6 +802,14 @@ class Relatorio_model extends CI_Model {
 
     public function list1_receitas($data, $completo) {
 
+        if ($data['DataFim']) {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
+        }
         $data['NomeCliente'] = (($_SESSION['log']['idSis_Empresa'] != 5) && ($data['NomeCliente'])) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
@@ -857,6 +865,7 @@ class Relatorio_model extends CI_Model {
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $consulta . ' AND
 				' . $permissao . '
 				' . $filtro1 . '
 				' . $filtro2 . '
@@ -928,7 +937,15 @@ class Relatorio_model extends CI_Model {
 
     public function list2_despesas($data, $completo) {
 
-        $data['NomeFornecedor'] = (($_SESSION['log']['idSis_Empresa'] != 5) && ($data['NomeFornecedor'])) ? ' AND F.idApp_Fornecedor = ' . $data['NomeFornecedor'] : FALSE;
+        if ($data['DataFim']) {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
+        }        
+		$data['NomeFornecedor'] = (($_SESSION['log']['idSis_Empresa'] != 5) && ($data['NomeFornecedor'])) ? ' AND F.idApp_Fornecedor = ' . $data['NomeFornecedor'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(OT.DataVencimentoOrca) = ' . $data['Dia'] : FALSE;
@@ -982,6 +999,7 @@ class Relatorio_model extends CI_Model {
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $consulta . ' AND
 				' . $permissao . '
 				' . $filtro1 . '
 				' . $filtro2 . '
