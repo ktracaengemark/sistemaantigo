@@ -4,9 +4,7 @@
 	<div class="row">		
 		<div class="col-md-12">
 			<?php #echo validation_errors(); ?>
-
 			<div class="panel panel-primary">
-
 				<div class="panel-heading">
 					<strong>Produtos NÂO Entregues<?php #echo $titulo; ?></strong>
 				</div>
@@ -20,16 +18,28 @@
 					<?php if (isset($list1)) echo $list1; ?>
 
 				</div>
-
 			</div>
-
 		</div>
-
 		<div class="col-md-12">
 			<?php #echo validation_errors(); ?>
-
 			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<strong>Aluguel - Prod. NÂO Devolvidos<?php #echo $titulo; ?></strong>				
+				</div>
+				<div class="panel-body">
 
+					<?php echo form_open($form_open_path, 'role="form"'); ?>
+
+					</form>
+				
+					<?php if (isset($list3)) echo $list3; ?>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<?php #echo validation_errors(); ?>
+			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<strong>Pagamentos NÂO Recebidos<?php #echo $titulo; ?></strong>
 					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/fiado" role="button">
@@ -46,32 +56,9 @@
 					<?php if (isset($list2)) echo $list2; ?>
 
 				</div>
-
 			</div>
-
 		</div>
-		<div class="col-md-12">
-			<?php #echo validation_errors(); ?>
-
-			<div class="panel panel-primary">
-
-				<div class="panel-heading">
-					<strong>Aluguel-Prod. NÂO Devol.<?php #echo $titulo; ?></strong>				
-				</div>
-				<div class="panel-body">
-
-					<?php echo form_open($form_open_path, 'role="form"'); ?>
-
-					</form>
-				
-					
-					<?php if (isset($list3)) echo $list3; ?>
-
-				</div>
-
-			</div>
-
-		</div>		
+		
 	</div>
 </div>	
 <?php } ?>
