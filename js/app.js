@@ -3179,7 +3179,7 @@ $(document).ready(function () {
 								</div>\
 							</div>\
 							<div class="col-md-2 panel-body">\
-								<div class="panel panel-warning">\
+								<div class="panel panel-danger">\
 									<div class="panel-heading">\
 										<div class="row">\
 											<div class="col-md-12">\
@@ -3200,7 +3200,7 @@ $(document).ready(function () {
 								</div>\
 							</div>\
 							<div class="col-md-2 panel-body">\
-								<div class="panel panel-danger">\
+								<div class="panel panel-warning">\
 									<div class="panel-heading">\
 										<div class="row">\
 											<div class="col-md-12">\

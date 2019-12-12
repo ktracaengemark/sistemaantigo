@@ -263,7 +263,7 @@
 																					</div>
 																				</div>
 																				<div class="col-md-2 panel-body">
-																					<div class="panel panel-warning">
+																					<div class="panel panel-danger">
 																						<div class="panel-heading">
 																							<div class="row">				
 																								<div class="col-md-12">
@@ -297,7 +297,7 @@
 																					</div>
 																				</div>	
 																				<div class="col-md-2 panel-body">
-																					<div class="panel panel-danger">
+																					<div class="panel panel-warning">
 																						<div class="panel-heading">
 																							<div class="row">				
 																								<div class="col-md-12">
@@ -386,7 +386,7 @@
 																		
 																
 																				<div class="col-md-3 panel-body">
-																					<div class="panel panel-warning">
+																					<div class="panel panel-danger">
 																						<div class="panel-heading">
 																							<div class="row">														
 																								<div class="col-md-12 text-center">
@@ -423,7 +423,7 @@
 																					</div>
 																				</div>
 																				<div class="col-md-3 panel-body">
-																					<div class="panel panel-danger">
+																					<div class="panel panel-warning">
 																						<div class="panel-heading">
 																							<div class="row">														
 																								<div class="col-md-12 text-center">
@@ -1044,7 +1044,7 @@
 																	<div class="col-md-2 form-inline">
 																	</div>
 																	<div class="col-md-3 panel-body">
-																		<div class="panel panel-success">
+																		<div class="panel panel-danger">
 																			<div class="panel-heading">
 																				<div class="row">
 																					<div class="col-md-12 text-center">

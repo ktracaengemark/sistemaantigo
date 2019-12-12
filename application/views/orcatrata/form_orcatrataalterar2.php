@@ -239,11 +239,11 @@
 																				</div>
 																			</div>
 																			<div class="col-md-2 panel-body">
-																				<div class="panel panel-warning">
+																				<div class="panel panel-danger">
 																					<div class="panel-heading">
 																						<div class="row">				
 																							<div class="col-md-12">
-																								<label for="ConcluidoProduto">Entregues? </label><br>
+																								<label for="ConcluidoProduto">Entregue? </label><br>
 																								<div class="btn-group" data-toggle="buttons">
 																									<?php
 																									foreach ($select['ConcluidoProduto'] as $key => $row) {
@@ -273,11 +273,11 @@
 																				</div>
 																			</div>	
 																			<div class="col-md-2 panel-body">
-																				<div class="panel panel-danger">
+																				<div class="panel panel-warning">
 																					<div class="panel-heading">
 																						<div class="row">				
 																							<div class="col-md-12">
-																								<label for="DevolvidoProduto">Devolvidos? </label><br>
+																								<label for="DevolvidoProduto">Devolvido? </label><br>
 																								<div class="btn-group" data-toggle="buttons">
 																									<?php
 																									foreach ($select['DevolvidoProduto'] as $key => $row) {
@@ -362,7 +362,7 @@
 																	
 															
 																			<div class="col-md-3 panel-body">
-																				<div class="panel panel-warning">
+																				<div class="panel panel-danger">
 																					<div class="panel-heading">
 																						<div class="row">														
 																							<div class="col-md-12 text-center">
@@ -399,7 +399,7 @@
 																				</div>
 																			</div>
 																			<div class="col-md-3 panel-body">
-																				<div class="panel panel-danger">
+																				<div class="panel panel-warning">
 																					<div class="panel-heading">
 																						<div class="row">														
 																							<div class="col-md-12 text-center">
@@ -1031,7 +1031,7 @@
 																		</button>
 																	</div>
 																	<div class="col-md-3 panel-body">
-																		<div class="panel panel-success">
+																		<div class="panel panel-danger">
 																			<div class="panel-heading">
 																				<div class="row">
 																					<div class="col-md-12 text-center">
