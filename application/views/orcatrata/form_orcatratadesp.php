@@ -1,5 +1,5 @@
 <?php if (isset($msg)) echo $msg; ?>
-
+<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 <div class="col-md-4 ">
 	<div class="row">		
 		
@@ -53,7 +53,7 @@
 		</div>
 	</div>
 </div>	
-
+<?php } ?>
 <div class="col-md-8 ">
 
 	<div class="row">
@@ -658,45 +658,45 @@
 												</div>	
 											</div>
 											<?php } ?>
-											<div class="row">	
-												<div class="col-md-4 panel-body">
-													<div class="panel panel-warning">
-														<div class="panel-heading">
-															<div class="row">														
-																<div class="col-md-12 text-center">
-																	<label for="Cadastrar">Cadastrar no BD?</label><br>
-																	<div class="btn-group" data-toggle="buttons">
-																		<?php
-																		foreach ($select['Cadastrar'] as $key => $row) {
-																			(!$cadastrar['Cadastrar']) ? $cadastrar['Cadastrar'] = 'S' : FALSE;
+											<div <?php echo $visivel; ?>>
+												<div class="row">	
+													<div class="col-md-4 panel-body">
+														<div class="panel panel-warning">
+															<div class="panel-heading">
+																<div class="row">														
+																	<div class="col-md-12 text-center">
+																		<label for="Cadastrar">Cadastrar no BD?</label><br>
+																		<div class="btn-group" data-toggle="buttons">
+																			<?php
+																			foreach ($select['Cadastrar'] as $key => $row) {
+																				(!$cadastrar['Cadastrar']) ? $cadastrar['Cadastrar'] = 'S' : FALSE;
 
-																			if ($cadastrar['Cadastrar'] == $key) {
-																				echo ''
-																				. '<label class="btn btn-warning active" name="radiobutton_Cadastrar' . '" id="radiobutton_Cadastrar' .  $key . '">'
-																				. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
-																				. 'onchange="this.form.submit()" '
-																				. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																				. '</label>'
-																				;
-																			} else {
-																				echo ''
-																				. '<label class="btn btn-default" name="radiobutton_Cadastrar' .  '" id="radiobutton_Cadastrar' .  $key . '">'
-																				. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
-																				. 'onchange="this.form.submit()" '
-																				. 'autocomplete="off" value="' . $key . '" >' . $row
-																				. '</label>'
-																				;
+																				if ($cadastrar['Cadastrar'] == $key) {
+																					echo ''
+																					. '<label class="btn btn-warning active" name="radiobutton_Cadastrar' . '" id="radiobutton_Cadastrar' .  $key . '">'
+																					. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
+																					. 'onchange="this.form.submit()" '
+																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																					. '</label>'
+																					;
+																				} else {
+																					echo ''
+																					. '<label class="btn btn-default" name="radiobutton_Cadastrar' .  '" id="radiobutton_Cadastrar' .  $key . '">'
+																					. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
+																					. 'onchange="this.form.submit()" '
+																					. 'autocomplete="off" value="' . $key . '" >' . $row
+																					. '</label>'
+																					;
+																				}
 																			}
-																		}
-																		?>
+																			?>
+																		</div>
+																		<?php echo form_error('Cadastrar'); ?>
 																	</div>
-																	<?php echo form_error('Cadastrar'); ?>
 																</div>
 															</div>
 														</div>
 													</div>
-												</div>
-												<div <?php echo $visivel; ?>>
 													<div class="col-md-4 panel-body">
 														<div class="panel panel-success">
 															<div class="panel-heading">
@@ -723,27 +723,25 @@
 															</div>
 														</div>
 													</div>
-												</div>	
-												<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
-												<div class="col-md-4 panel-body">
-													<div class="panel panel-primary">
-														<div class="panel-heading">
-															<div class="row">			
-																<div class="col-md-12">
-																	<label for="ValorRestanteOrca">Total:</label><br>
-																	<div class="input-group" id="txtHint">
-																		<span class="input-group-addon" id="basic-addon1">R$</span>
-																		<input type="text" class="form-control Valor" id="ValorRestanteOrca" maxlength="10" placeholder="0,00" readonly=''
-																			   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()" onkeydown="calculaParcelas()"
-																				data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
-																			   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
+													<div class="col-md-4 panel-body">
+														<div class="panel panel-primary">
+															<div class="panel-heading">
+																<div class="row">			
+																	<div class="col-md-12">
+																		<label for="ValorRestanteOrca">Total:</label><br>
+																		<div class="input-group" id="txtHint">
+																			<span class="input-group-addon" id="basic-addon1">R$</span>
+																			<input type="text" class="form-control Valor" id="ValorRestanteOrca" maxlength="10" placeholder="0,00" readonly=''
+																				   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()" onkeydown="calculaParcelas()"
+																					data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
+																				   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
+																		</div>
 																	</div>
-																</div>
-															</div>	
+																</div>	
+															</div>
 														</div>
 													</div>
 												</div>
-												<?php } ?>
 											</div>
 											<div class="row">
 												<div class="col-md-4 panel-body">
@@ -1088,11 +1086,11 @@
 										</div>
 									</div>
 								</div>	
-								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 								<br>
 								<div class="panel panel-danger">
 									<div class="panel-heading">
 										<div class="row">
+											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 											<div class="col-md-2">
 												<label for="AprovadoOrca">Orçam. Aprovado?</label><br>
 												<div class="btn-group" data-toggle="buttons">
@@ -1122,13 +1120,13 @@
 													?>
 
 												</div>
-												
 											</div>
 											<div class="col-md-3">
 												<label for="ObsOrca">OBS:</label>
 												<textarea class="form-control" id="ObsOrca" <?php echo $readonly; ?>
 														  name="ObsOrca"><?php echo $orcatrata['ObsOrca']; ?></textarea>
-											</div>													
+											</div>
+											<?php } ?>
 											<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
 											<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
 											<?php if ($metodo > 1) { ?>
@@ -1307,8 +1305,6 @@
 										
 									</div>
 								</div>
-								
-								<?php } ?>
 							</div>
 						</div>
 						
