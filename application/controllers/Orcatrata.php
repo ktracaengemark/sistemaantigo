@@ -898,7 +898,7 @@ class Orcatrata extends CI_Controller {
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
 						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['produto'][$j]['ConcluidoProduto'] = 'S';
 						}
-						if ($data['orcatrata']['DedolvidoOrca'] == 'S') { $data['produto'][$j]['DevolvidoProduto'] = 'S';
+						if ($data['orcatrata']['DevolvidoOrca'] == 'S') { $data['produto'][$j]['DevolvidoProduto'] = 'S';
 						}						
 					}
 					else {	$data['produto'][$j]['ConcluidoProduto'] = 'N';
@@ -2747,7 +2747,7 @@ class Orcatrata extends CI_Controller {
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
 						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['produto'][$j]['ConcluidoProduto'] = 'S';
 						}
-						if ($data['orcatrata']['DedolvidoOrca'] == 'S') { $data['produto'][$j]['DevolvidoProduto'] = 'S';
+						if ($data['orcatrata']['DevolvidoOrca'] == 'S') { $data['produto'][$j]['DevolvidoProduto'] = 'S';
 						}						
 					}
 					else {	$data['produto'][$j]['ConcluidoProduto'] = 'N';
