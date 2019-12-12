@@ -799,6 +799,9 @@ class Orcatrata extends CI_Controller {
 
         $data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
         $data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
+
+        $data['q3'] = $this->Orcatrata_model->list3_produtosaluguel(TRUE);
+        $data['list3'] = $this->load->view('orcatrata/list3_produtosaluguel', $data, TRUE);
 		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -2043,6 +2046,9 @@ class Orcatrata extends CI_Controller {
 
         $data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
         $data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
+		
+        $data['q3'] = $this->Orcatrata_model->list3_produtosaluguel(TRUE);
+        $data['list3'] = $this->load->view('orcatrata/list3_produtosaluguel', $data, TRUE);
 		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
