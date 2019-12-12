@@ -55,7 +55,7 @@
 							</a>
 						</div>
 					</li>
-					<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+					<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 					<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 						
 						<div class="btn-group " role="group" aria-label="...">
@@ -107,13 +107,13 @@
 								<li><a href="<?php echo base_url() ?>relatorio/fiado"><span class="glyphicon glyphicon-usd"></span> Fiado</a></li>									
 								<li role="separator" class="divider"></li>									
 								<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>
-								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 								<li role="separator" class="divider"></li>
 								<li><a href="<?php echo base_url() ?>relatorio/rankingvendas"><span class="glyphicon glyphicon-pencil"></span> Ranking de Vendas</a></li>
 								<?php } ?>
 							</ul>
 						</div>							
-						<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<div class="btn-group">
 							<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
 								<span class="glyphicon glyphicon-gift"></span> Produtos <span class="caret"></span>
@@ -144,7 +144,7 @@
 								<?php } ?>
 							</button>
 							<ul class="dropdown-menu" role="menu">							
-								<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 								<li><a href="<?php echo base_url() ?>relatorio/loginempresa"><span class="glyphicon glyphicon-pencil"></span> Renovar Assinatura</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas de Negócios</a></li>
@@ -235,7 +235,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<?php if( isset($count['PCount']) ) { ?>								
 						<h3 class="text-left">Produtos Entregues </h3>
 						<table class="table table-bordered table-condensed table-striped">
@@ -348,7 +348,7 @@
 						<?php } ?>
 						
 						<h3 class="text-left">Pagamento</h3>
-						<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
@@ -437,7 +437,7 @@
 
 							</tbody>
 						</table>
-
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<h3 class="text-left">Status</h3>
 						
 						<table class="table table-bordered table-condensed table-striped">
@@ -452,6 +452,7 @@
 								</tr>
 							</tbody>
 						</table>
+						<?php } ?>
 						<!--
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
