@@ -586,7 +586,7 @@
 										<div <?php echo $visivel; ?>>
 											<div class="row">	
 												<div class="col-md-4 panel-body">
-													<div class="panel panel-success">
+													<div class="panel panel-primary">
 														<div class="panel-heading">
 															<div class="row">				
 																<div class="col-md-6">
@@ -612,7 +612,7 @@
 													</div>
 												</div>
 												<div class="col-md-4 panel-body">
-													<div class="panel panel-primary">
+													<div class="panel panel-success">
 														<div class="panel-heading">
 															<div class="row">			
 																<div class="col-md-12">
@@ -686,7 +686,7 @@
 										
 										<div class="row">
 											<div class="col-md-4 panel-body">
-												<div class="panel panel-success">
+												<div class="panel panel-primary">
 													<div class="panel-heading">														
 														<div class="row">	
 															<div class="col-md-12 text-center">
@@ -726,7 +726,7 @@
 												</div>
 											</div>
 											<div class="col-md-4 panel-body">
-												<div class="panel panel-primary">
+												<div class="panel panel-success">
 													<div class="panel-heading">
 														<div class="row">
 															<div class="col-md-6">
