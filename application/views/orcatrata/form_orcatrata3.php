@@ -5,7 +5,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<strong>Produtos NÂO Entregues</strong>
+					<strong>Produtos NÃO Entregues</strong>
 				</div>
 				<div class="panel-body">
 
@@ -17,7 +17,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<strong>Aluguel - Prod. NÂO Devolvidos</strong>				
+					<strong>Aluguel - Prod. NÃO Devolvidos</strong>				
 				</div>
 				<div class="panel-body">
 
@@ -29,7 +29,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<strong>Pagamentos NÂO Recebidos</strong>
+					<strong>Pagamentos NÃO Recebidos</strong>
 					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/fiado" role="button">
 						<span class="glyphicon glyphicon-search"></span> Fiado
 					</a>				
