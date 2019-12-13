@@ -185,7 +185,8 @@
 									?>
 								</select>
 							</div>
-							<div class="col-md-2">									
+							<div class="col-md-2">
+								<label for="Prodaux1">Esp.:</label>	
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Prodaux1" name="Prodaux1">
 									<option value="">-- Selecione uma opção --</option>

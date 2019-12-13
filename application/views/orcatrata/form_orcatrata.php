@@ -598,7 +598,7 @@
 																							</div>
 																						</div>
 																						-->
-																						<?php if (($_SESSION['log']['NivelEmpresa'] <= 3)) { ?>
+																						<?php if (($_SESSION['log']['TabelasEmpresa'] == 1)) { ?>
 																						<div class="col-md-4 text-right">
 																							<label></label>
 																							<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar3/" role="button"> 

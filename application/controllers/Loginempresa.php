@@ -122,6 +122,7 @@ class Loginempresa extends CI_Controller {
 				$_SESSION['log']['id'] = $query['idSis_Empresa'];
 				$_SESSION['log']['PermissaoEmpresa'] = $query['PermissaoEmp'];
 				$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
+				$_SESSION['log']['TabelasEmpresa'] = $query['TabelasEmpresa'];
 				$_SESSION['log']['DataCriacao'] = $query['DataCriacao'];
 				$_SESSION['log']['DataDeValidade'] = $query['DataDeValidade'];
 

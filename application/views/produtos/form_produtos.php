@@ -270,7 +270,7 @@
 
 
 			
-			<?php if (($_SESSION['log']['NivelEmpresa'] <= 3)) { ?>						
+			<?php if (($_SESSION['log']['TabelasEmpresa'] == 1)) { ?>						
 			<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
 				<div class="panel panel-primary">
 					<div id="collapse3" class="panel-collapse" role="tabpanel" aria-labelledby="heading3" aria-expanded="false">
@@ -389,7 +389,7 @@
 														  name="Convdesc<?php echo $i ?>" value="<?php echo $valor[$i]['Convdesc']; ?>">
 											</div>													
 											<div class="col-md-3">
-												<label for="ValorProduto">Valor :</label>
+												<label for="ValorProduto">Valor <?php echo $i ?>:</label>
 												<div class="input-group">
 													<span class="input-group-addon" id="basic-addon1">R$</span>
 													<input type="text" class="form-control Valor" id="ValorProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
