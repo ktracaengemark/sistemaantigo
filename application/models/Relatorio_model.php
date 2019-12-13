@@ -1094,7 +1094,8 @@ class Relatorio_model extends CI_Model {
 		$filtro5 = ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
 		$filtro6 = ($data['AVAP']) ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
 		$filtro7 = ($data['FormaPag']) ? 'OT.FormaPagamento = "' . $data['FormaPag'] . '" AND ' : FALSE;
-		$filtro8 = ($data['ConcluidoProduto']) ? 'AP.ConcluidoProduto = "' . $data['ConcluidoProduto'] . '" AND ' : FALSE;		
+		$filtro8 = ($data['ConcluidoProduto']) ? 'AP.ConcluidoProduto = "' . $data['ConcluidoProduto'] . '" AND ' : FALSE;
+		$filtro10 = ($data['DevolvidoProduto']) ? 'AP.DevolvidoProduto = "' . $data['DevolvidoProduto'] . '" AND ' : FALSE;
 		$filtro9 = ($data['ConcluidoServico']) ? 'TS.ConcluidoServico = "' . $data['ConcluidoServico'] . '" AND ' : FALSE;		
 		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
@@ -1134,6 +1135,7 @@ class Relatorio_model extends CI_Model {
 				AP.QtdProduto,
 				AP.DataValidadeProduto,
 				AP.ConcluidoProduto,
+				AP.DevolvidoProduto,
 				AP.ValorProduto,				
 				TS.idApp_Servico,
 				TS.QtdServico,
@@ -1171,6 +1173,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
+				' . $filtro10 . '
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "2" AND
 				AP.idTab_TipoRD = "2"
@@ -1221,6 +1224,7 @@ class Relatorio_model extends CI_Model {
                 $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
 				$row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
+				$row->DevolvidoProduto = $this->basico->mascara_palavra_completa($row->DevolvidoProduto, 'NS');
 				$row->ConcluidoServico = $this->basico->mascara_palavra_completa($row->ConcluidoServico, 'NS');
 				$row->ValorProduto = number_format($row->ValorProduto, 2, ',', '.');
 				
@@ -1277,7 +1281,8 @@ class Relatorio_model extends CI_Model {
 		$filtro5 = ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
 		$filtro6 = ($data['AVAP']) ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
 		$filtro7 = ($data['FormaPag']) ? 'OT.FormaPagamento = "' . $data['FormaPag'] . '" AND ' : FALSE;
-		$filtro8 = ($data['ConcluidoProduto']) ? 'AP.ConcluidoProduto = "' . $data['ConcluidoProduto'] . '" AND ' : FALSE;		
+		$filtro8 = ($data['ConcluidoProduto']) ? 'AP.ConcluidoProduto = "' . $data['ConcluidoProduto'] . '" AND ' : FALSE;
+		$filtro10 = ($data['DevolvidoProduto']) ? 'AP.DevolvidoProduto = "' . $data['DevolvidoProduto'] . '" AND ' : FALSE;
 		$filtro9 = ($data['ConcluidoServico']) ? 'TS.ConcluidoServico = "' . $data['ConcluidoServico'] . '" AND ' : FALSE;		
 		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
@@ -1316,6 +1321,7 @@ class Relatorio_model extends CI_Model {
 				AP.QtdProduto,
 				AP.DataValidadeProduto,
 				AP.ConcluidoProduto,
+				AP.DevolvidoProduto,
 				AP.ValorProduto,
 				TS.idApp_Servico,
 				TS.QtdServico,
@@ -1353,6 +1359,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
+				' . $filtro10 . '
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "1" AND
 				AP.idTab_TipoRD = "1"
@@ -1403,6 +1410,7 @@ class Relatorio_model extends CI_Model {
                 $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
 				$row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
+				$row->DevolvidoProduto = $this->basico->mascara_palavra_completa($row->DevolvidoProduto, 'NS');
 				$row->ConcluidoServico = $this->basico->mascara_palavra_completa($row->ConcluidoServico, 'NS');
 				$row->ValorProduto = number_format($row->ValorProduto, 2, ',', '.');
 				

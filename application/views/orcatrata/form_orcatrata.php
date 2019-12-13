@@ -736,7 +736,7 @@
 																						<label for="QtdServico">Qtd <?php echo $i ?>:</label>
 																						<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0"
 																								onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
-																								autofocus name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
+																								name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
 																					</div>
 																					<div class="col-md-6">
 																						<label for="idTab_Servico">Produto:</label>
@@ -881,34 +881,9 @@
 														<div class="panel panel-warning">
 															<div class="panel-heading">
 																<div class="row">														
-																	<div class="col-md-12 text-center">
-																		<label for="Cadastrar">Cadastrar no BD?</label><br>
-																		<div class="btn-group" data-toggle="buttons">
-																			<?php
-																			foreach ($select['Cadastrar'] as $key => $row) {
-																				(!$cadastrar['Cadastrar']) ? $cadastrar['Cadastrar'] = 'S' : FALSE;
-
-																				if ($cadastrar['Cadastrar'] == $key) {
-																					echo ''
-																					. '<label class="btn btn-warning active" name="radiobutton_Cadastrar' . '" id="radiobutton_Cadastrar' .  $key . '">'
-																					. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
-																					. 'onchange="this.form.submit()" '
-																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																					. '</label>'
-																					;
-																				} else {
-																					echo ''
-																					. '<label class="btn btn-default" name="radiobutton_Cadastrar' .  '" id="radiobutton_Cadastrar' .  $key . '">'
-																					. '<input type="radio" name="Cadastrar' . '" id="radiobuttondinamico" '
-																					. 'onchange="this.form.submit()" '
-																					. 'autocomplete="off" value="' . $key . '" >' . $row
-																					. '</label>'
-																					;
-																				}
-																			}
-																			?>
-																		</div>
-																		<?php echo form_error('Cadastrar'); ?>
+																	<div class="col-md-12">
+																		<strong> Cliente: </strong>
+																		<?php echo '<strong>' . $_SESSION['Cliente']['NomeCliente'] . '</strong> - <strong>' . $_SESSION['Cliente']['idApp_Cliente'] . '.</strong>' ?>
 																	</div>
 																</div>
 															</div>
@@ -1002,40 +977,6 @@
 														<div class="panel panel-success">
 															<div class="panel-heading">														
 																<div class="row">	
-																	<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-																	<div class="col-md-12 text-center">
-																		<label for="AVAP">Forma de Pagam.</label><br>
-																		<div class="btn-block" data-toggle="buttons">
-																			<?php
-																			foreach ($select['AVAP'] as $key => $row) {
-																				#if (!$orcatrata['AVAP']) $orcatrata['AVAP'] = 'V';
-
-																				($key == 'P') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																				if ($orcatrata['AVAP'] == $key) {
-																					echo ''
-																					. '<label class="btn btn-warning active" name="AVAP_' . $hideshow . '">'
-																					. '<input type="radio" name="AVAP" id="' . $hideshow . '" '
-																					. 'onchange="calculaParcelas()" '
-																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																					. '</label>'
-																					;
-																				} else {
-																					echo ''
-																					. '<label class="btn btn-default" name="AVAP_' . $hideshow . '">'
-																					. '<input type="radio" name="AVAP" id="' . $hideshow . '" '
-																					. 'onchange="calculaParcelas()" '
-																					. 'autocomplete="off" value="' . $key . '" >' . $row
-																					. '</label>'
-																					;
-																				}
-																			}
-																			?>
-
-																		</div>
-																		<?php echo form_error('AVAP'); ?>
-																	</div>
-																	<?php } else { ?>
 																	<div class="col-md-12 text-center">
 																		<label for="AVAP">Forma de Pagam.</label><br>
 																		<div class="btn-block" data-toggle="buttons">
@@ -1068,7 +1009,6 @@
 																		</div>
 																		<?php echo form_error('AVAP'); ?>
 																	</div>
-																	<?php } ?>
 																</div>	
 															</div>
 														</div>

@@ -315,7 +315,7 @@ function calculaResta(entrada) {
 
     //o valor é escrito no seu campo no formulário
     $('#ValorRestanteOrca').val(resta);
-
+	calculaParcelas();
 }
 
 function calculaTroco(entrada) {
@@ -3127,7 +3127,7 @@ $(document).ready(function () {
                                 <div class="input-group">\
                                     <input type="text" class="form-control Numero" maxlength="10" id="QtdProduto'+pc+'" placeholder="0"\
                                         onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
-                                        name="QtdProduto'+pc+'" value="1">\
+                                       autofocus name="QtdProduto'+pc+'" value="1">\
                                 </div>\
                             </div>\
 							<div class="col-md-6">\

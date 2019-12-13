@@ -1113,6 +1113,7 @@ class Relatorio extends CI_Controller {
 			'Prodaux3',
 			'DataValidadeProduto',
 			'ConcluidoProduto',
+			'DevolvidoProduto',
 			'ConcluidoServico',
         ), TRUE));
 
@@ -1127,6 +1128,7 @@ class Relatorio extends CI_Controller {
            $data['query']['Ano'] = date('Y', time());	   
 */
         
+		$_SESSION['FiltroAlteraParcela']['Produtos'] = $data['query']['Produtos'];
 		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];
 		$_SESSION['FiltroAlteraParcela']['Orcarec'] = $data['query']['Orcarec'];
 		$_SESSION['FiltroAlteraParcela']['Orcades'] = $data['query']['Orcades'];
@@ -1137,6 +1139,7 @@ class Relatorio extends CI_Controller {
         $_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];
 		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];
 		$_SESSION['FiltroAlteraParcela']['ConcluidoProduto'] = $data['query']['ConcluidoProduto'];
+		$_SESSION['FiltroAlteraParcela']['DevolvidoProduto'] = $data['query']['DevolvidoProduto'];
 		$_SESSION['FiltroAlteraParcela']['ConcluidoServico'] = $data['query']['ConcluidoServico'];		
 		$_SESSION['Imprimir']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];		
 
@@ -1174,6 +1177,12 @@ class Relatorio extends CI_Controller {
         );
 
 		$data['select']['ConcluidoProduto'] = array(
+            '0' => 'TODOS',
+            'N' => 'Não',
+            'S' => 'Sim',
+        );
+
+		$data['select']['DevolvidoProduto'] = array(
             '0' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
@@ -1254,6 +1263,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
 			$data['bd']['Quitado'] = $data['query']['Quitado'];
 			$data['bd']['ConcluidoProduto'] = $data['query']['ConcluidoProduto'];
+			$data['bd']['DevolvidoProduto'] = $data['query']['DevolvidoProduto'];
 			$data['bd']['ConcluidoServico'] = $data['query']['ConcluidoServico'];
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
 			$data['bd']['AVAP'] = $data['query']['AVAP'];
@@ -1298,6 +1308,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
 			$data['bd']['Quitado'] = $data['query']['Quitado'];
 			$data['bd']['ConcluidoProduto'] = $data['query']['ConcluidoProduto'];
+			$data['bd']['DevolvidoProduto'] = $data['query']['DevolvidoProduto'];
 			$data['bd']['ConcluidoServico'] = $data['query']['ConcluidoServico'];			
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
 			$data['bd']['AVAP'] = $data['query']['AVAP'];
