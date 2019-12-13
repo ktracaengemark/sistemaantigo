@@ -43,6 +43,7 @@
 										?>
 									</select>
 								</div>									
+								<!--
 								<div class="col-md-2">
 									<label for="Categoria">Prod/Serv:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -59,6 +60,7 @@
 										?>
 									</select>
 								</div>
+								-->
 								<div class="col-md-2">
 									<label for="UnidadeProduto">Unidade:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -75,6 +77,7 @@
 										?>
 									</select>
 								</div>
+								<!--
 								<div class="col-md-3">
 									<label for="Aprovado">Cadastrar?</label><br>
 									<div class="btn-group" data-toggle="buttons">
@@ -102,6 +105,63 @@
 									</div>
 									<?php echo form_error('Aprovado'); ?>
 								</div>
+								-->
+								
+								<div class="col-md-2 text-left">
+									<label for="Aprovado">Cat/Tipo/Esp/Forn</label><br>
+									<div class="btn-group" data-toggle="buttons">
+										<?php
+										foreach ($select['Aprovado'] as $key => $row) {
+											if (!$produtos['Aprovado']) $produtos['Aprovado'] = 'S';
+
+											($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+											if ($produtos['Aprovado'] == $key) {
+												echo ''
+												. '<label class="btn btn-warning active" name="Aprovado_' . $hideshow . '">'
+												. '<input type="radio" name="Aprovado" id="' . $hideshow . '" '
+												. 'autocomplete="off" value="' . $key . '" checked>' . $row
+												. '</label>'
+												;
+											} else {
+												echo ''
+												. '<label class="btn btn-default" name="Aprovado_' . $hideshow . '">'
+												. '<input type="radio" name="Aprovado" id="' . $hideshow . '" '
+												. 'autocomplete="off" value="' . $key . '" >' . $row
+												. '</label>'
+												;
+											}
+										}
+										?>
+
+									</div>
+									
+								</div>
+																					
+								<div class="col-md-6 text-left" id="Aprovado" <?php echo $div['Aprovado']; ?>>
+									<label></label><br>
+									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux3/cadastrar3" role="button"> 
+										<span class="glyphicon glyphicon-plus"></span> Cat.
+									</a>
+									<label></label>
+									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux2/cadastrar3/" role="button"> 
+										<span class="glyphicon glyphicon-plus"></span> Tipo
+									</a>
+									<label></label>
+									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux1/cadastrar3/" role="button"> 
+										<span class="glyphicon glyphicon-plus"></span> Esp
+									</a>
+									<label></label>
+									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>fornecedor/cadastrar3/" role="button"> 
+										<span class="glyphicon glyphicon-plus"></span> Fornec
+									</a>
+									<label></label>									
+									<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+											<span class="glyphicon glyphicon-refresh"></span> Ref.
+									</button>
+									<?php echo form_error('Aprovado'); ?>
+								</div>
+																
 								<!--
 								<div class="col-md-2">
 									<label for="Fornecedor">Fornecedor</label>
@@ -127,13 +187,7 @@
 						</div>
 						<div class="row">									
 							<div class="col-md-2">
-								<label for="Prodaux3">Cat.</label>
-								<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>prodaux3/cadastrar3" role="button"> 
-									<span class="glyphicon glyphicon-plus"></span> <b>Cat.</b>
-								</a>
-								<button class="btn btn-xs btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-									<span class="glyphicon glyphicon-refresh"></span> Recar.
-								</button>								
+								<label for="Prodaux3">Categoria</label>								
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Prodaux3" name="Prodaux3">
 									<option value="">-- Selecione uma opção --</option>
@@ -149,10 +203,7 @@
 								</select>
 							</div>
 							<div class="col-md-2">
-								<label for="Prodaux2">Tipo:</label>
-									<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>prodaux2/cadastrar3" role="button"> 
-										<span class="glyphicon glyphicon-plus"></span> <b>Tipo</b>
-									</a>								
+								<label for="Prodaux2">Tipo:</label>								
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Prodaux2" name="Prodaux2">
 									<option value="">-- Selecione uma opção --</option>
@@ -168,10 +219,7 @@
 								</select>
 							</div>
 							<div class="col-md-2">
-								<label for="Prodaux1">Esp:</label>
-									<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>prodaux1/cadastrar3" role="button"> 
-										<span class="glyphicon glyphicon-plus"></span> <b>Esp</b>
-									</a>									
+								<label for="Prodaux1">Esp.:</label>									
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Prodaux1" name="Prodaux1">
 									<option value="">-- Selecione uma opção --</option>
@@ -369,9 +417,6 @@
 							<div class="form-group">
 								<a class="add_field_button3 btn btn-xs btn-danger" onclick="adicionaValor2()">
 									<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Valor
-								</a>
-								<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>fornecedor/cadastrar3" role="button"> 
-									<span class="glyphicon glyphicon-plus"></span><b> Cad.Forn.</b>
 								</a>
 							</div>
 						</div>

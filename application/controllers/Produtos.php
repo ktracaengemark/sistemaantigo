@@ -94,9 +94,9 @@ class Produtos extends CI_Controller {
 
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
-		$this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
+		$this->form_validation->set_rules('Aprovado', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
 		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim');		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		
@@ -138,7 +138,7 @@ class Produtos extends CI_Controller {
             'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
         );
 
-        ($data['produtos']['Aprovado'] == 'S') ?
+        ($data['produtos']['Aprovado'] == 'N') ?
             $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';
         /*
           echo '<br>';
@@ -269,9 +269,9 @@ class Produtos extends CI_Controller {
 
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
-		$this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
+		$this->form_validation->set_rules('Aprovado', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
 		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		
@@ -314,7 +314,7 @@ class Produtos extends CI_Controller {
             'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
         );
 
-        ($data['produtos']['Aprovado'] == 'S') ?
+        ($data['produtos']['Aprovado'] == 'N') ?
             $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';
         /*
           echo '<br>';
@@ -448,9 +448,9 @@ class Produtos extends CI_Controller {
 
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
-		$this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
+		$this->form_validation->set_rules('Aprovado', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
 		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		
@@ -493,7 +493,7 @@ class Produtos extends CI_Controller {
             'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
         );
 
-        ($data['produtos']['Aprovado'] == 'S') ?
+        ($data['produtos']['Aprovado'] == 'N') ?
             $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';
         /*
           echo '<br>';
@@ -624,9 +624,9 @@ class Produtos extends CI_Controller {
 
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim');        
-		$this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
+		$this->form_validation->set_rules('Aprovado', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
 		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim');		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		
@@ -669,7 +669,7 @@ class Produtos extends CI_Controller {
             'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
         );
 
-        ($data['produtos']['Aprovado'] == 'S') ?
+        ($data['produtos']['Aprovado'] == 'N') ?
             $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';
         /*
           echo '<br>';
@@ -829,9 +829,9 @@ class Produtos extends CI_Controller {
 		
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim'); 		
-        $this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
+        $this->form_validation->set_rules('Aprovado', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
 		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
      
 		$data['select']['Aprovado'] = $this->Basico_model->select_status_sn();
@@ -871,7 +871,7 @@ class Produtos extends CI_Controller {
             'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
         );
 
-        ($data['produtos']['Aprovado'] == 'S') ?
+        ($data['produtos']['Aprovado'] == 'N') ?
             $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';        
         /*
           echo '<br>';
@@ -1058,9 +1058,9 @@ class Produtos extends CI_Controller {
 
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Produtos', 'Produto ou Serviço', 'required|trim'); 		
-        $this->form_validation->set_rules('Aprovado', 'Cadastro', 'trim|valid_aprovado');
+        $this->form_validation->set_rules('Aprovado', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
      
 		$data['select']['Aprovado'] = $this->Basico_model->select_status_sn();    
@@ -1100,7 +1100,7 @@ class Produtos extends CI_Controller {
             'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
         );
 
-        ($data['produtos']['Aprovado'] == 'S') ?
+        ($data['produtos']['Aprovado'] == 'N') ?
             $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';         
         /*
           echo '<br>';
