@@ -3126,13 +3126,13 @@ $(document).ready(function () {
                                 <label for="QtdProduto">Qtd:</label><br>\
                                 <div class="input-group">\
                                     <input type="text" class="form-control Numero" maxlength="10" id="QtdProduto'+pc+'" placeholder="0"\
-                                        onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
+                                        onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
                                        autofocus name="QtdProduto'+pc+'" value="1">\
                                 </div>\
                             </div>\
 							<div class="col-md-6">\
                                 <label for="idTab_Produto">Produto:</label><br>\
-                                <select class="form-control Chosen" id="listadinamicab'+pc+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+pc+',\'Produto\')" name="idTab_Produto'+pc+'">\
+                                <select class="form-control Chosen" id="listadinamicab'+pc+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+pc+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" name="idTab_Produto'+pc+'">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
@@ -3141,7 +3141,7 @@ $(document).ready(function () {
 								<div class="input-group id="txtHint">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" \
-										onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'VP\',\'Produto\')"\
+										onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'VP\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
 										name="ValorProduto'+pc+'" value="">\
 								</div>\
 							</div>\
@@ -3166,7 +3166,7 @@ $(document).ready(function () {
 							<div class="col-md-3">\
 								<label for="ObsProduto'+pc+'">Obs:</label><br>\
 								<input type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
-									   name="ObsProduto'+pc+'" value="">\
+									  onfocus="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" name="ObsProduto'+pc+'" value="">\
 							</div>\
 							<div class="col-md-3">\
 								<label for="DataValidadeProduto'+pc+'">Validade:</label>\
@@ -3179,7 +3179,7 @@ $(document).ready(function () {
 								</div>\
 							</div>\
 							<div class="col-md-2 panel-body">\
-								<div class="panel panel-danger">\
+								<div class="panel panel-warning">\
 									<div class="panel-heading">\
 										<div class="row">\
 											<div class="col-md-12">\
@@ -3200,7 +3200,7 @@ $(document).ready(function () {
 								</div>\
 							</div>\
 							<div class="col-md-2 panel-body">\
-								<div class="panel panel-warning">\
+								<div class="panel panel-danger">\
 									<div class="panel-heading">\
 										<div class="row">\
 											<div class="col-md-12">\

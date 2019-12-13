@@ -143,7 +143,7 @@ class Orcatrataprint_model extends CI_Model {
 				TFO.NomeFornecedor,
 				CONCAT(IFNULL(PV.idApp_Produto,""), " - " , IFNULL(PV.ConcluidoProduto,""), " - " , IFNULL(PV.DevolvidoProduto,""), " - Obs.: " , IFNULL(PV.ObsProduto,"")) AS idApp_Produto,
 				CONCAT(IFNULL(PV.QtdProduto,""), " - " , IFNULL(P.UnidadeProduto,"")) AS QtdProduto,
-            	CONCAT(IFNULL(P.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(P.Produtos,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,"")) AS NomeProduto,
+            	CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,"")) AS NomeProduto,
             	PV.ValorProduto
             FROM
             	App_Produto AS PV,
