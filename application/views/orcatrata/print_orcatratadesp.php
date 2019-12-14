@@ -98,15 +98,15 @@
 							<ul class="dropdown-menu" role="menu">							
 								<li><a href="<?php echo base_url() ?>relatorio/financeiro"><span class="glyphicon glyphicon-usd"></span> Orçamentos</a></li>
 								<li role="separator" class="divider"></li>							
-								<li><a href="<?php echo base_url() ?>relatorio/parcelas"><span class="glyphicon glyphicon-usd"></span> Receber X Pagar</a></li>
-								<li role="separator" class="divider"></li>							
-								<li><a href="<?php echo base_url() ?>relatorio/fiado"><span class="glyphicon glyphicon-usd"></span> Fiado</a></li>									
-								<li role="separator" class="divider"></li>									
-								<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>
+								<li><a href="<?php echo base_url() ?>relatorio/parcelas"><span class="glyphicon glyphicon-usd"></span> Receitas X Despesas</a></li>
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+								<li role="separator" class="divider"></li>							
+								<li><a href="<?php echo base_url() ?>relatorio/fiado"><span class="glyphicon glyphicon-usd"></span> Fiado X Faturado</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="<?php echo base_url() ?>relatorio/rankingvendas"><span class="glyphicon glyphicon-pencil"></span> Ranking de Vendas</a></li>
 								<?php } ?>
+								<li role="separator" class="divider"></li>							
+								<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>									
 							</ul>
 						</div>							
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
