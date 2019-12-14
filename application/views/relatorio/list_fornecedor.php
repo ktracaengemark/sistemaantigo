@@ -16,8 +16,8 @@
 						<tr>
 							<th class="active">N. Forn.</th>
 							<th class="active">Fornecedor</th>
-							<th class="active">Serv./Prod.</th>
-							<th class="active">For.P/Venda</th>
+							<!--<th class="active">Serv./Prod.</th>
+							<th class="active">For.P/Venda</th>-->
 							<th class="active">Atividade</th>
 							<th class="active">Telefone</th>						                      
 							<!--<th class="active">Endereço</th>
@@ -38,10 +38,9 @@
 							#echo '<tr>';
 							echo '<tr class="clickable-row" data-href="' . base_url() . 'fornecedor/prontuario/' . $row['idApp_Fornecedor'] . '">';
 								echo '<td>' . $row['idApp_Fornecedor'] . '</td>';
-
 								echo '<td>' . $row['NomeFornecedor'] . '</td>';
-								echo '<td>' . $row['TipoFornec'] . '</td>';
-								echo '<td>' . $row['StatusSN'] . '</td>';
+								#echo '<td>' . $row['TipoFornec'] . '</td>';
+								#echo '<td>' . $row['StatusSN'] . '</td>';
 								echo '<td>' . $row['Atividade'] . '</td>';                           
 								echo '<td>' . $row['Telefone'] . '</td>';							
 								#echo '<td>' . $row['Endereco'] . '</td>';
