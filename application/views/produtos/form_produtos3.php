@@ -51,7 +51,7 @@
 							<div class="row">
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 								<div class="col-md-2">
-									<label for="TipoProduto">Venda/Cons:</label>
+									<label for="TipoProduto">Venda/Cons/Alug:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 											id="TipoProduto" name="TipoProduto">
 										<option value="">-- Selecione uma opção --</option>
