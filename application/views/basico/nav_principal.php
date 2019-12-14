@@ -55,14 +55,14 @@
 							<?php if ($_SESSION['log']['idSis_Empresa'] != 2 ) { ?>
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="<?php echo base_url(); ?>relatorio/clientes">
-									<button type="button" class="btn btn-sm btn-warning ">
+									<button type="button" class="btn btn-lg btn-warning ">
 										<span class="glyphicon glyphicon-user"></span> Clientes
 									</button>
 								</a>
 							</div>
 							<?php } else { ?>
 							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+								<button type="button" class="btn btn-lg btn-warning dropdown-toggle" data-toggle="dropdown">
 									<span class="glyphicon glyphicon-user"></span> Clientes <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
@@ -73,7 +73,7 @@
 							</div>
 							<?php } ?>
 							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+								<button type="button" class="btn btn-lg btn-warning dropdown-toggle" data-toggle="dropdown">
 									<span class="glyphicon glyphicon-user"></span> Fornecedores <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
@@ -103,7 +103,7 @@
 						</li>
 						<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
+								<button type="button" class="btn btn-lg btn-success dropdown-toggle" data-toggle="dropdown">
 									<span class="glyphicon glyphicon-usd"></span> Financeiro <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
@@ -122,7 +122,7 @@
 							</div>							
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
 							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
+								<button type="button" class="btn btn-lg btn-success dropdown-toggle" data-toggle="dropdown">
 									<span class="glyphicon glyphicon-gift"></span> Produtos <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
