@@ -25,6 +25,7 @@
 								<input type="text" class="form-control Celular CelularVariavel" id="Telefone1" maxlength="14" <?php echo $readonly; ?>
 									   name="Telefone1" placeholder="(XX)999999999" value="<?php echo $query['Telefone1']; ?>">
 							</div>
+							<!--
 							<div class="col-md-2">
 								<label for="TipoFornec">Serv. ou Prod.</label>								
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -70,26 +71,68 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-2 text-left">
-								<label for="Atividade">Ativ.: *</label>
-								<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>atividade/cadastrar3" role="button"> 
-									<span class="glyphicon glyphicon-plus"></span> <b>Ativ.</b>
-								</a>
-								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-										id="Atividade" name="Atividade">
-									<option value="">-- Sel. Ativ. --</option>
-									<?php
-									foreach ($select['Atividade'] as $key => $row) {
-										if ($query['Atividade'] == $key) {
-											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-										} else {
-											echo '<option value="' . $key . '">' . $row . '</option>';
-										}
-									}
-									?>   
-								</select>          
-							</div>
-							
+							-->
+							<div class="col-md-4">
+								<div class="row">
+									<div class="col-md-12 text-left">
+										<label for="Atividade">Ativ.:</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+												id="Atividade" name="Atividade">
+											<option value="">-- Sel. Atividade --</option>
+											<?php
+											foreach ($select['Atividade'] as $key => $row) {
+												if ($query['Atividade'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>   
+										</select>          
+									</div>
+								</div>	
+								<div class="row">
+									<div class="col-md-5 text-left">
+										<label class="sr-only" for="Cadastrar">Cadastrar no BD</label>
+										<div class="btn-group" data-toggle="buttons">
+											<?php
+											foreach ($select['Cadastrar'] as $key => $row) {
+												if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
+
+												($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+												if ($cadastrar['Cadastrar'] == $key) {
+													echo ''
+													. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
+													. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+													. 'autocomplete="off" value="' . $key . '" checked>' . $row
+													. '</label>'
+													;
+												} else {
+													echo ''
+													. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
+													. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+													. 'autocomplete="off" value="' . $key . '" >' . $row
+													. '</label>'
+													;
+												}
+											}
+											?>
+
+										</div>
+									</div>
+									<div class="col-md-7 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+										<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>atividade/cadastrar3/" role="button"> 
+											<span class="glyphicon glyphicon-plus"></span>Ativ.
+										</a>
+										
+										<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+												<span class="glyphicon glyphicon-refresh"></span>Ref.
+										</button>
+										<?php echo form_error('Cadastrar'); ?>
+									</div>
+								</div>
+							</div>							
 						</div>	
 					</div>		
 												   

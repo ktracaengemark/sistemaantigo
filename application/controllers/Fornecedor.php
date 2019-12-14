@@ -47,6 +47,10 @@ class Fornecedor extends CI_Controller {
         else
             $data['msg'] = '';
 
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idApp_Fornecedor',
             'NomeFornecedor',
@@ -60,27 +64,28 @@ class Fornecedor extends CI_Controller {
             'Endereco',
             'Bairro',
             'Municipio',
-			
             'Obs',
 			'Email',
             'idSis_Usuario',
-            
             'Cnpj',
 			'TipoFornec',
 			'VendaFornec',
         ), TRUE));
 
 		(!$data['query']['TipoFornec']) ? $data['query']['TipoFornec'] = 'P' : FALSE;
+		(!$data['query']['VendaFornec']) ? $data['query']['VendaFornec'] = 'S' : FALSE;
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #$this->form_validation->set_rules('NomeFornecedor', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Fornecedor.NomeFornecedor.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('NomeFornecedor', 'Nome do Responsável', 'required|trim');
+        $this->form_validation->set_rules('NomeFornecedor', 'Fornecedor', 'required|trim');
         #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         #$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
         #$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		#$this->form_validation->set_rules('Atividade', 'Atividade', 'required|trim');
-		
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
+
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();		
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Atividade'] = $this->Atividade_model->select_atividade();
@@ -95,6 +100,13 @@ class Fornecedor extends CI_Controller {
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
+
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
         
         if ($data['query']['Sexo'] || $data['query']['Endereco'] || $data['query']['Bairro'] || 
                 $data['query']['Municipio'] || $data['query']['Obs'] || $data['query']['Email'] || $data['query']['Cnpj'])
@@ -111,6 +123,8 @@ class Fornecedor extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('fornecedor/form_fornecedor1', $data);        
         } else {
+
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
 
             $data['query']['NomeFornecedor'] = trim(mb_strtoupper($data['query']['NomeFornecedor'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
@@ -151,6 +165,10 @@ class Fornecedor extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contatofornec com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));		
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idApp_Fornecedor',
@@ -176,16 +194,19 @@ class Fornecedor extends CI_Controller {
         ), TRUE));
 
 		(!$data['query']['TipoFornec']) ? $data['query']['TipoFornec'] = 'P' : FALSE;
+		(!$data['query']['VendaFornec']) ? $data['query']['VendaFornec'] = 'S' : FALSE;
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #$this->form_validation->set_rules('NomeFornecedor', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Fornecedor.NomeFornecedor.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('NomeFornecedor', 'Nome do Responsável', 'required|trim');
+        $this->form_validation->set_rules('NomeFornecedor', 'Fornecedor', 'required|trim');
         #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         #$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
         #$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		#$this->form_validation->set_rules('Atividade', 'Atividade', 'required|trim');
-		
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
+
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();		
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Atividade'] = $this->Atividade_model->select_atividade();
@@ -200,7 +221,14 @@ class Fornecedor extends CI_Controller {
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
-        
+
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+
         if ($data['query']['Sexo'] || $data['query']['Endereco'] || $data['query']['Bairro'] || 
                 $data['query']['Municipio'] || $data['query']['Obs'] || $data['query']['Email'] || $data['query']['Cnpj'])
             $data['collapse'] = '';
@@ -216,6 +244,8 @@ class Fornecedor extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('fornecedor/form_fornecedor3', $data);        
         } else {
+
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
 
             $data['query']['NomeFornecedor'] = trim(mb_strtoupper($data['query']['NomeFornecedor'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
@@ -257,6 +287,10 @@ class Fornecedor extends CI_Controller {
         else
             $data['msg'] = '';
 
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+
         $data['query'] = $this->input->post(array(
             'idApp_Fornecedor',
             'NomeFornecedor',
@@ -285,16 +319,19 @@ class Fornecedor extends CI_Controller {
         }
 
         #(!$data['query']['TipoFornec']) ? $data['query']['TipoFornec'] = 'P' : FALSE;
+		#(!$data['query']['VendaFornec']) ? $data['query']['VendaFornec'] = 'S' : FALSE;
 		
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #$this->form_validation->set_rules('NomeFornecedor', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Fornecedor.NomeFornecedor.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('NomeFornecedor', 'Nome do Responsável', 'required|trim');
+        $this->form_validation->set_rules('NomeFornecedor', 'Fornecedor', 'required|trim');
         #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         #$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
         #$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
         #$this->form_validation->set_rules('Atividade', 'Atividade', 'required|trim'); 
-		
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
+
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();		
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Atividade'] = $this->Atividade_model->select_atividade();
@@ -309,6 +346,13 @@ class Fornecedor extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
         
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+		
         if ($data['query']['Sexo'] || $data['query']['Endereco'] || $data['query']['Bairro'] || 
                 $data['query']['Municipio'] || $data['query']['Obs'] || $data['query']['Email'] || $data['query']['Cnpj'])
             $data['collapse'] = '';
@@ -324,6 +368,8 @@ class Fornecedor extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('fornecedor/form_fornecedor', $data);
         } else {
+
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
 
             $data['query']['NomeFornecedor'] = trim(mb_strtoupper($data['query']['NomeFornecedor'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
@@ -366,6 +412,10 @@ class Fornecedor extends CI_Controller {
         else
             $data['msg'] = '';
 
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+
         $data['query'] = $this->input->post(array(
             'idApp_Fornecedor',
             'NomeFornecedor',
@@ -394,16 +444,19 @@ class Fornecedor extends CI_Controller {
         }
 
         #(!$data['query']['TipoFornec']) ? $data['query']['TipoFornec'] = 'P' : FALSE;
+		#(!$data['query']['VendaFornec']) ? $data['query']['VendaFornec'] = 'S' : FALSE;
 		
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #$this->form_validation->set_rules('NomeFornecedor', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Fornecedor.NomeFornecedor.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('NomeFornecedor', 'Nome do Responsável', 'required|trim');
+        $this->form_validation->set_rules('NomeFornecedor', 'Fornecedor', 'required|trim');
         #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         #$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
         #$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
         #$this->form_validation->set_rules('Atividade', 'Atividade', 'required|trim'); 
-		
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
+
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();		
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Atividade'] = $this->Atividade_model->select_atividade();
@@ -418,6 +471,13 @@ class Fornecedor extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
         
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
+		
         if ($data['query']['Sexo'] || $data['query']['Endereco'] || $data['query']['Bairro'] || 
                 $data['query']['Municipio'] || $data['query']['Obs'] || $data['query']['Email'] || $data['query']['Cnpj'])
             $data['collapse'] = '';
@@ -433,6 +493,8 @@ class Fornecedor extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('fornecedor/form_fornecedor3', $data);
         } else {
+
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
 
             $data['query']['NomeFornecedor'] = trim(mb_strtoupper($data['query']['NomeFornecedor'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
@@ -474,6 +536,10 @@ class Fornecedor extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contatofornec com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
+
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
 
         $data['query'] = $this->input->post(array(
             'idApp_Fornecedor',
