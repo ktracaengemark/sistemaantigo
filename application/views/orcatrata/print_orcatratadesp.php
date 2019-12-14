@@ -60,43 +60,39 @@
 						
 						<div class="btn-group " role="group" aria-label="...">
 							<a href="<?php echo base_url(); ?>relatorio/clientes">
-								<button type="button" class="btn btn-sm btn-warning ">
-									<span class="glyphicon glyphicon-user"></span> Clientes
+								<button type="button" class="btn btn-lg btn-warning ">
+									<span class="glyphicon glyphicon-user"></span> Cliente
 								</button>
 							</a>
 						</div>
-						<div class="btn-group">
-							<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-user"></span> Fornecedores <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" role="menu">							
-								<li><a href="<?php echo base_url() ?>relatorio/fornecedor"><span class="glyphicon glyphicon-user"></span> Lista de Fornecedores</a></li>
-								<li role="separator" class="divider"></li>							
-								<li><a href="<?php echo base_url() ?>atividade/cadastrar"><span class="glyphicon glyphicon-list-alt"></span> Atividade dos Fornecedores</a></li>									
-							</ul>
-						</div>																				
-						
+						<div class="btn-group " role="group" aria-label="...">
+							<a href="<?php echo base_url(); ?>relatorio/fornecedor">
+								<button type="button" class="btn btn-lg btn-warning ">
+									<span class="glyphicon glyphicon-user"></span> Fornecedor
+								</button>
+							</a>
+						</div>
 					</li>
 					<?php } ?>
 					<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 						<div class="btn-group " role="group" aria-label="...">
 							<a href="<?php echo base_url(); ?>orcatrata/cadastrar3">
 								<button type="button" class="btn btn-lg btn-primary ">
-									<span class="glyphicon glyphicon-plus"></span>Receitas
+									<span class="glyphicon glyphicon-plus"></span> Receita
 								</button>
 							</a>
 						</div>
 						<div class="btn-group " role="group" aria-label="...">
 							<a href="<?php echo base_url(); ?>orcatrata/cadastrardesp">
 								<button type="button" class="btn btn-lg btn-danger ">
-									<span class="glyphicon glyphicon-plus"></span>Despesas
+									<span class="glyphicon glyphicon-plus"></span> Despesa
 								</button>
 							</a>
 						</div>														
 					</li>
-					<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
+					<li class="btn-toolbar btn-xs navbar-form" role="toolbar" aria-label="...">
 						<div class="btn-group">
-							<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
+							<button type="button" class="btn btn-lg btn-success dropdown-toggle" data-toggle="dropdown">
 								<span class="glyphicon glyphicon-usd"></span> Financeiro <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">							
@@ -115,8 +111,8 @@
 						</div>							
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<div class="btn-group">
-							<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-gift"></span> Produtos <span class="caret"></span>
+							<button type="button" class="btn btn-lg btn-success dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-gift"></span> Produto <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">							
 								<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-usd"></span> Produtos & Valores</a></li>
