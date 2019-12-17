@@ -112,7 +112,7 @@ $db['default'] = array(
 
     #'database' => 'ci',
     #'database' => 'app',	
-	'database' => 'app.testes',
+	'database' => 'app.testes2',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,

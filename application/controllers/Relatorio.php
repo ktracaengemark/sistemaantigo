@@ -1606,12 +1606,12 @@ class Relatorio extends CI_Controller {
 		
 		if (!$data['query']['DataFim2'])
            $data['query']['DataFim2'] = date("t/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
-						
+					
 		if (!$data['query']['DataInicio'])
            $data['query']['DataInicio'] = date("d/m/Y", mktime(0,0,0,date('m'),date('d'),date('Y')));
 		
 		if (!$data['query']['DataFim'])
-          $data['query']['DataFim'] = date("d/m/Y", mktime(0,0,0,date('m'),date('d'),date('Y')));
+          $data['query']['DataFim'] = date("t/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
 		   
 		if (!$data['query']['Mesvenc'])
            $data['query']['Mesvenc'] = date('m', time());

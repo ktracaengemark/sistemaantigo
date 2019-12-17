@@ -300,7 +300,8 @@ class Orcatrata_model extends CI_Model {
 				PR.idSis_Empresa = ' . $data . ' AND			
 				PR.idTab_TipoRD = "1" AND
 				PR.idTab_TipoRD = "1" AND
-				PR.Quitado = "N" 				
+				PR.Quitado = "N" AND
+				PR.DataVencimento <= "' . date("Y-m-t", mktime(0,0,0,date('m'),'01',date('Y'))) . '"				
 			ORDER BY
 				C.NomeFornecedor,
 				PR.DataVencimento
@@ -350,10 +351,11 @@ class Orcatrata_model extends CI_Model {
 				OT.idSis_Empresa = ' . $data . ' AND
 				OT.idTab_TipoRD = "2" AND				
 				OT.AprovadoOrca = "S" AND
-				OT.TipoFinanceiro = "31" AND
+
 				PR.idSis_Empresa = ' . $data . ' AND
 				PR.idTab_TipoRD = "2" AND			
-				PR.Quitado = "N"
+				PR.Quitado = "N" AND
+				PR.DataVencimento <= "' . date("Y-m-t", mktime(0,0,0,date('m'),'01',date('Y'))) . '"
 			ORDER BY
 				C.NomeCliente,
 				PR.DataVencimento
@@ -1197,6 +1199,7 @@ class Orcatrata_model extends CI_Model {
         #$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND TC.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
         #$data['Campo'] = (!$data['Campo']) ? 'TC.NomeCliente' : $data['Campo'];
         #$data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+				
         ####################################################################
         #LISTA DE CLIENTES
         $query['NomeCliente'] = $this->db->query('
@@ -1213,7 +1216,7 @@ class Orcatrata_model extends CI_Model {
                 TC.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				TOT.AprovadoOrca = "S" AND
 				TPR.Quitado = "N" AND
-				TOT.TipoFinanceiro = "31" 
+				TPR.DataVencimento <= "' . date("Y-m-t", mktime(0,0,0,date('m'),'01',date('Y'))) . '"  
 
             ORDER BY
                 TC.NomeCliente ASC
@@ -1245,10 +1248,10 @@ class Orcatrata_model extends CI_Model {
                 TPR.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TPR.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 TOT.AprovadoOrca = "S" AND
-				TOT.TipoFinanceiro = "31" AND
 				TPR.Quitado = "N" AND
 				TPR.idTab_TipoRD = "2" AND
-                TC.idApp_Cliente != "0"
+                TC.idApp_Cliente != "0" AND
+				TPR.DataVencimento <= "' . date("Y-m-t", mktime(0,0,0,date('m'),'01',date('Y'))) . '"
             GROUP BY
                 TC.idApp_Cliente
             ORDER BY
@@ -1329,8 +1332,8 @@ exit();*/
                 TC.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TC.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				TOT.AprovadoOrca = "S" AND
-				TPR.Quitado = "N"  
-
+				TPR.Quitado = "N" AND
+				TPR.DataVencimento <= "' . date("Y-m-t", mktime(0,0,0,date('m'),'01',date('Y'))) . '"
             ORDER BY
                 TC.NomeFornecedor ASC
         ');
@@ -1363,7 +1366,8 @@ exit();*/
                 TOT.AprovadoOrca = "S" AND
 				TPR.Quitado = "N" AND
 				TPR.idTab_TipoRD = "1" AND
-                TC.idApp_Fornecedor != "0"
+                TC.idApp_Fornecedor != "0" AND
+				TPR.DataVencimento <= "' . date("Y-m-t", mktime(0,0,0,date('m'),'01',date('Y'))) . '"
             GROUP BY
                 TC.idApp_Fornecedor
             ORDER BY
