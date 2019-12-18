@@ -39,6 +39,69 @@
 											<?php echo form_error('idApp_Agenda'); ?>
 										</div>
 										<div class="col-md-6">
+											<div class="row">
+												<div class="col-md-12 text-left">	
+													<label  for="idApp_Cliente">Cliente:</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+															id="idApp_Cliente" name="idApp_Cliente">
+														<option value="">-- Sel. Cliente --</option>
+														<?php
+														foreach ($select['idApp_Cliente'] as $key => $row) {
+															if ($query['idApp_Cliente'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+												</div>
+											</div>	
+											<div class="row">
+												<div class="col-md-5 text-left">
+													<label class="sr-only" for="Cadastrar">Cadastrar no BD</label>
+													<div class="btn-group" data-toggle="buttons">
+														<?php
+														foreach ($select['Cadastrar'] as $key => $row) {
+															if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
+
+															($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+															if ($cadastrar['Cadastrar'] == $key) {
+																echo ''
+																. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
+																. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																. '</label>'
+																;
+															} else {
+																echo ''
+																. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
+																. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																. 'autocomplete="off" value="' . $key . '" >' . $row
+																. '</label>'
+																;
+															}
+														}
+														?>
+
+													</div>
+												</div>
+																									
+												<div class="col-md-7 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+													<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>cliente/cadastrar3/" role="button"> 
+														<span class="glyphicon glyphicon-plus"></span>Cliente
+													</a>
+													
+													<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+															<span class="glyphicon glyphicon-refresh"></span>Ref.
+													</button>
+													<?php echo form_error('Cadastrar'); ?>
+												</div>
+											</div>
+										</div>										
+										<!--
+										<div class="col-md-6">
 											<label for="idApp_Cliente">Cliente:*</label>
 											<a class="btn btn-xs btn-info" target="_blank" href="<?php echo base_url() ?>cliente/cadastrar3" role="button">
 												<span class="glyphicon glyphicon-plus"></span> <b>Cliente</b>
@@ -61,7 +124,7 @@
 											</select>
 											<?php echo form_error('idApp_Cliente'); ?>
 										</div>
-										<!--
+										
 										<div class="col-md-6">
 											<label for="idSis_EmpresaFilial">Unidade: *</label>
 											<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>

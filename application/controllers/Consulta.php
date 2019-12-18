@@ -44,6 +44,10 @@ class Consulta extends CI_Controller {
         else
             $data['msg'] = '';
 
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idSis_Usuario',
 			'idApp_Consulta',
@@ -120,7 +124,9 @@ class Consulta extends CI_Controller {
 */
         #$data['resumo'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
 		#$data['resumo'] = $this->Clienteusuario_model->get_clienteusuario($data['query']['idApp_Cliente']);
-		
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();		
 		$data['select']['idApp_Agenda'] = $this->Basico_model->select_agenda();
 		$data['select']['Status'] = $this->Basico_model->select_status();
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
@@ -154,6 +160,14 @@ class Consulta extends CI_Controller {
         $data['disabled'] = '';
         $data['metodo'] = 1;
 
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+			
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
@@ -164,6 +178,8 @@ class Consulta extends CI_Controller {
             $this->load->view('consulta/form_consulta', $data);
         } else {
 
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
+			
 			$data['query']['Tipo'] = 2;
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
             #$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
@@ -534,6 +550,10 @@ class Consulta extends CI_Controller {
         else
             $data['msg'] = '';
 
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+
         $data['query'] = $this->input->post(array(
             #'idSis_Usuario',
 			'idApp_Consulta',
@@ -620,11 +640,12 @@ class Consulta extends CI_Controller {
 		$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
 		$this->form_validation->set_rules('idApp_Agenda', 'Profissional', 'required|trim');
 		#$this->form_validation->set_rules('idSis_EmpresaFilial', 'Unidade', 'required|trim');
-
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');	
 
         if ($data['query']['Paciente'] == 'D')
             $this->form_validation->set_rules('idApp_ContatoCliente', 'ContatoCliente', 'required|trim');
-
+	
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['idApp_Agenda'] = $this->Basico_model->select_agenda();
         $data['select']['Status'] = $this->Basico_model->select_status();
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
@@ -648,6 +669,14 @@ class Consulta extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+
         $data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
 
         #run form validation
@@ -657,7 +686,8 @@ class Consulta extends CI_Controller {
 
             #echo '<br><br><br><br>================================== '.$data['query']['idTab_Status'];
             #exit();
-
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
+			
             $data['query']['Tipo'] = 2;
 			$data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
             #$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
