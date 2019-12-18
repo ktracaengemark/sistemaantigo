@@ -540,8 +540,8 @@ class Consulta extends CI_Controller {
 
         $this->load->view('basico/footer');
     }
-	
-    public function alterar($idApp_Cliente = FALSE, $idApp_Consulta = FALSE) {
+
+    public function alterar($idApp_Cliente = NULL, $idApp_Consulta = FALSE) {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -577,16 +577,16 @@ class Consulta extends CI_Controller {
             $data['query']['idApp_Cliente'] = $idApp_Cliente;
             $_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
 		}
-		*/
+		
 		if ($idApp_Cliente) {
             $data['query']['idApp_Cliente'] = $idApp_Cliente;
 			$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
 			$data['resumo'] = $this->Cliente_model->get_cliente($idApp_Cliente);
 			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 12) ? substr($data['resumo']['NomeCliente'], 0, 12) : $data['resumo']['NomeCliente'];
 		}
-
+		*/
         if ($idApp_Consulta) {
-            $data['query']['idApp_Cliente'] = $idApp_Cliente;
+            #$data['query']['idApp_Cliente'] = $idApp_Cliente;
             $data['query'] = $this->Consulta_model->get_consulta($idApp_Consulta);
 
             $dataini = explode(' ', $data['query']['DataInicio']);
