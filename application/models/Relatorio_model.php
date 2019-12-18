@@ -1746,7 +1746,9 @@ class Relatorio_model extends CI_Model {
             ORDER BY
 				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
             ');
+		
 
+          
         ####################################################################
         #SOMATÓRIO DAS Parcelas Pagas
 		
@@ -1784,7 +1786,14 @@ class Relatorio_model extends CI_Model {
           print_r($query);
           echo "</pre>";
           exit();
-         */ 
+         
+		  echo $this->db->last_query();
+          echo "<pre>";
+          print_r($data['DataFim']);
+          echo "</pre>";
+          exit();		 
+		 
+		 */ 
 
         if ($completo === FALSE) {
             return TRUE;
@@ -1796,7 +1805,6 @@ class Relatorio_model extends CI_Model {
                 $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
                 $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
                 $row->DataPago = $this->basico->mascara_data($row->DataPago, 'barras');
-
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
 				$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
 				$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');

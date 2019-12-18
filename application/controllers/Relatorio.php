@@ -1622,7 +1622,9 @@ class Relatorio extends CI_Controller {
 		if (!$data['query']['Ano'])
            $data['query']['Ano'] = date('Y', time());	   
 */
-        $_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
+        $_SESSION['FiltroAlteraParcela']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+		$_SESSION['FiltroAlteraParcela']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+		$_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
         $_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
         $_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];
 		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];
@@ -1733,10 +1735,10 @@ class Relatorio extends CI_Controller {
 
             /*
               echo "<pre>";
-              print_r($data['report']);
+              print_r($_SESSION['FiltroAlteraParcela']['DataFim']);
               echo "</pre>";
               exit();
-              */
+             */ 
 
             $data['list1'] = $this->load->view('relatorio/list1_receitasparc', $data, TRUE);
             //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);

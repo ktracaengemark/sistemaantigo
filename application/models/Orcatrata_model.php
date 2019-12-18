@@ -151,6 +151,14 @@ class Orcatrata_model extends CI_Model {
 	
 	public function get_alterarparceladesp($data) {
 
+        if ($_SESSION['FiltroAlteraParcela']['DataFim']) {
+            $consulta =
+                '(PR.DataVencimento >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND PR.DataVencimento <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(PR.DataVencimento >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '")';
+        }
 		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		$permissao1 = ($_SESSION['FiltroAlteraParcela']['Quitado'] != "0" ) ? 'PR.Quitado = "' . $_SESSION['FiltroAlteraParcela']['Quitado'] . '" AND ' : FALSE;
@@ -158,6 +166,15 @@ class Orcatrata_model extends CI_Model {
 		$permissao3 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "0" ) ? 'YEAR(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
 		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Orcades'] != "0" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcades'] . '" AND ' : FALSE;
 		$permissao5 = (($_SESSION['log']['idSis_Empresa'] != 5) && ($_SESSION['FiltroAlteraParcela']['NomeFornecedor'] != "0" )) ? 'OT.idApp_Fornecedor = "' . $_SESSION['FiltroAlteraParcela']['NomeFornecedor'] . '" AND ' : FALSE;
+		#$permissao6 = ($_SESSION['FiltroAlteraParcela']['DataFim'] != "0000-00-00" ) ? 'PR.DataVencimento <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '" AND ' : FALSE;
+		
+		/*
+		  echo $this->db->last_query();
+          echo "<pre>";
+          print_r($consulta);
+          echo "</pre>";
+          exit();		
+		*/
 		
 		$query = $this->db->query('
 			SELECT
@@ -189,11 +206,13 @@ class Orcatrata_model extends CI_Model {
 				OT.idTab_TipoRD = "1" AND				
 				OT.AprovadoOrca = "S" AND				
 				PR.idSis_Empresa = ' . $data . ' AND
+				' . $consulta . ' AND
 				' . $permissao1 . '
 				' . $permissao2 . '
 				' . $permissao3 . '
 				' . $permissao4 . '
 				' . $permissao5 . '
+
 				PR.idTab_TipoRD = "1"
 			ORDER BY
 				PR.DataVencimento
@@ -204,7 +223,15 @@ class Orcatrata_model extends CI_Model {
     }
 	
     public function get_alterarparcelarec($data) {
-		
+
+        if ($_SESSION['FiltroAlteraParcela']['DataFim']) {
+            $consulta =
+                '(PR.DataVencimento >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND PR.DataVencimento <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(PR.DataVencimento >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '")';
+        }		
 		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		$permissao1 = ($_SESSION['FiltroAlteraParcela']['Quitado'] != "0" ) ? 'PR.Quitado = "' . $_SESSION['FiltroAlteraParcela']['Quitado'] . '" AND ' : FALSE;
@@ -243,6 +270,7 @@ class Orcatrata_model extends CI_Model {
 				OT.idTab_TipoRD = "2" AND				
 				OT.AprovadoOrca = "S" AND				
 				PR.idSis_Empresa = ' . $data . ' AND
+				' . $consulta . ' AND				
 				' . $permissao1 . '
 				' . $permissao2 . '
 				' . $permissao3 . '
