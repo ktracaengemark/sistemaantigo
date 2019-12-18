@@ -1,5 +1,5 @@
 <?php if (isset($msg)) echo $msg; ?>
-<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>		
+<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
 <div class="col-md-4 ">
 	<div class="row">		
 		<div class="col-md-12">
@@ -43,6 +43,26 @@
 		</div>
 	</div>
 </div>	
+<?php } else { ?>
+<div class="col-md-4 ">
+	<div class="row">		
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<strong>Pagamentos NÃO Recebidos</strong>
+					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
+						<span class="glyphicon glyphicon-search"></span> Receitas X Despesas
+					</a>				
+				</div>
+				<div class="panel-body">
+
+					<?php if (isset($list4)) echo $list4; ?>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <?php } ?>
 <div class="col-md-8 ">
 	<div class="row">
@@ -145,6 +165,7 @@
 												<input type="text" class="form-control" maxlength="200"
 														name="Descricao" value="<?php echo $orcatrata['Descricao'] ?>">
 											</div>																	
+											
 											<?php if ($_SESSION['log']['NivelEmpresa'] <= 3 ) { ?>
 											<div class="col-md-4">
 												<label for="ValorRestanteOrca">Total:</label><br>
@@ -158,6 +179,7 @@
 											</div>
 											<br>
 											<?php } ?>
+											
 										</div>											
 										<div <?php echo $visivel; ?>>
 											<div class="row">														
@@ -583,7 +605,7 @@
 												</div>	
 											</div>
 										</div>	
-										<div <?php echo $visivel; ?>>
+										<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 											<div class="row">	
 												<div class="col-md-4 panel-body">
 													<div class="panel panel-primary">
@@ -682,7 +704,7 @@
 												</div>
 												-->
 											</div>	
-										</div>
+										<?php } ?>
 										
 										<div class="row">
 											<div class="col-md-4 panel-body">

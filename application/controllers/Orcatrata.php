@@ -794,15 +794,19 @@ class Orcatrata extends CI_Controller {
           echo "</pre>";
           exit ();
           */
-        $data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
-        $data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
 
-        $data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
-        $data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
+		$data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
+		$data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
 
-        $data['q3'] = $this->Orcatrata_model->list3_produtosaluguel(TRUE);
-        $data['list3'] = $this->load->view('orcatrata/list3_produtosaluguel', $data, TRUE);
-		
+		$data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
+		$data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
+
+		$data['q3'] = $this->Orcatrata_model->list3_produtosaluguel(TRUE);
+		$data['list3'] = $this->load->view('orcatrata/list3_produtosaluguel', $data, TRUE);
+
+		$data['q4'] = $this->Orcatrata_model->list4_receitasparc(TRUE);
+		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);		
+
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             //if (1 == 1) {
@@ -2050,6 +2054,9 @@ class Orcatrata extends CI_Controller {
         $data['q3'] = $this->Orcatrata_model->list3_produtosaluguel(TRUE);
         $data['list3'] = $this->load->view('orcatrata/list3_produtosaluguel', $data, TRUE);
 		
+		$data['q4'] = $this->Orcatrata_model->list4_receitasparc(TRUE);
+		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);		
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('orcatrata/form_orcatrataalterar2', $data);
@@ -2656,6 +2663,9 @@ class Orcatrata extends CI_Controller {
 
         $data['q2'] = $this->Orcatrata_model->list2_rankingfaturado(TRUE);
         $data['list2'] = $this->load->view('orcatrata/list2_rankingfaturado', $data, TRUE);
+		
+		$data['q4'] = $this->Orcatrata_model->list4_despesasparc(TRUE);
+		$data['list4'] = $this->load->view('orcatrata/list4_despesasparc', $data, TRUE);		
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -3214,6 +3224,9 @@ class Orcatrata extends CI_Controller {
 
         $data['q2'] = $this->Orcatrata_model->list2_rankingfaturado(TRUE);
         $data['list2'] = $this->load->view('orcatrata/list2_rankingfaturado', $data, TRUE);
+		
+		$data['q4'] = $this->Orcatrata_model->list4_despesasparc(TRUE);
+		$data['list4'] = $this->load->view('orcatrata/list4_despesasparc', $data, TRUE);		
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {

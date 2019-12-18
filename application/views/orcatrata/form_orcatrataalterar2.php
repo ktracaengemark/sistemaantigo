@@ -43,16 +43,32 @@
 		</div>
 	</div>
 </div>
+<?php } else { ?>
+<div class="col-md-4 ">
+	<div class="row">		
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<strong>Pagamentos NÃO Recebidos</strong>
+					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
+						<span class="glyphicon glyphicon-search"></span> Receitas X Despesas
+					</a>				
+				</div>
+				<div class="panel-body">
+
+					<?php if (isset($list4)) echo $list4; ?>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 <?php } ?>
 <div class="col-md-8 ">
-
 	<div class="row">
-
 		<div class="col-md-12 col-lg-12">
-		
 			<?php echo validation_errors(); ?>
 			<?php echo form_open_multipart($form_open_path); ?>
-
 			<div class="panel panel-<?php echo $panel; ?>">
 				<div class="panel-heading"><strong><?php echo $titulo; ?> - </strong><?php echo $orcatrata['idApp_OrcaTrata'] ?></div>
 				<div class="panel-body">
@@ -594,7 +610,7 @@
 												</div>	
 											</div>
 										</div>										
-										<div <?php echo $visivel; ?>>
+										<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 											<div class="row">	
 												<div class="col-md-4 panel-body">
 													<div class="panel panel-primary">
@@ -693,7 +709,7 @@
 												</div>
 												-->
 											</div>	
-										</div>											
+										<?php } ?>											
 										<div class="row">
 											<div class="col-md-4 panel-body">
 												<div class="panel panel-primary">

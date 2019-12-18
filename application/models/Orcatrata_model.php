@@ -1428,14 +1428,11 @@ exit();*/
 
     }
     
-	public function list1_produtosvend2($data, $completo) {
+    public function list4_receitasparc($x) {
 
-		
         $query = $this->db->query('
-            SELECT
-                C.NomeCliente,
-				C.CelularCliente,
-				OT.Descricao,
+			SELECT 
+				CONCAT(IFNULL(TR.TipoFinanceiro,""), " - ", IFNULL(OT.Descricao,"")) AS Descricao,
 				OT.idApp_OrcaTrata,
 				OT.AprovadoOrca,
                 OT.DataOrca,
@@ -1455,110 +1452,136 @@ exit();*/
 				OT.FormaPagamento,
 				OT.ObsOrca,
 				OT.QtdParcelasOrca,
+				OT.idSis_Usuario,
 				MD.Modalidade,
 				VP.Abrev3,
 				VP.AVAP,
 				TFP.FormaPag,
-				AP.idApp_Produto,
-				AP.QtdProduto,
-				AP.DataValidadeProduto,
-				AP.ConcluidoProduto,
-				AP.ValorProduto,				
-				TS.idApp_Servico,
-				TS.QtdServico,
-				TS.DataValidadeServico,
-				TS.ConcluidoServico,
-				TS.ValorServico,				
-				TP.Produtos,
-				TP3.Prodaux3,
-				TP2.Prodaux2,
-				TP1.Prodaux1,
-				TR.TipoFinanceiro
-            FROM
+				TR.TipoFinanceiro,
+				PR.Quitado,
+				PR.DataVencimento,
+				PR.Parcela,
+				PR.ValorParcela
+			FROM 
                 App_OrcaTrata AS OT
-				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
-				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
-				LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
-				LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-				LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
-				LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
-				LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
-				LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
-				LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto
-				LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
-				LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
-				LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3				
-            WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
+					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
+					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
+					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN App_Parcelas AS PR ON PR.idApp_Orcatrata = OT.idApp_OrcaTrata
+			WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
+                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "2" AND
-				AP.idTab_TipoRD = "2				
-            ORDER BY
-                C.NomeCliente
-
-        ');
+				PR.idTab_TipoRD = "2" AND
+				PR.Quitado = "N" AND
+				PR.DataVencimento <= "' . date("Y-m-t", mktime(0,0,0,date('m'),'01',date('Y'))) . '"
+			ORDER BY 
+				PR.DataVencimento ASC 
+		');
 
         /*
           echo $this->db->last_query();
+          $query = $query->result_array();
           echo "<pre>";
           print_r($query);
           echo "</pre>";
           exit();
-          */
-
-        if ($completo === FALSE) {
-            return TRUE;
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
         } else {
-
-            $somasubtotal=0;
-			$subtotal=0;
-			$quantidade=0;
-			$somaorcamento=0;
-			$somadesconto=0;
-			$somarestante=0;
-            foreach ($query->result() as $row) {
-				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
-				$row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
-				$row->DataPrazo = $this->basico->mascara_data($row->DataPrazo, 'barras');
-                $row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
-				$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
-                $row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
-				$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
-				$row->DataValidadeProduto = $this->basico->mascara_data($row->DataValidadeProduto, 'barras');
-                $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
-                $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
-                $row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
-				$row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
-				$row->ConcluidoServico = $this->basico->mascara_palavra_completa($row->ConcluidoServico, 'NS');
-				$row->ValorProduto = number_format($row->ValorProduto, 2, ',', '.');
-				
-                $somaorcamento += $row->ValorOrca;
-                $row->ValorOrca = number_format($row->ValorOrca, 2, ',', '.');
-
-				$somadesconto += $row->ValorEntradaOrca;
-                $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
-
-				$somarestante += $row->ValorRestanteOrca;
-                $row->ValorRestanteOrca = number_format($row->ValorRestanteOrca, 2, ',', '.');
-
-				$quantidade += $row->QtdProduto;
-                $row->QtdProduto = number_format($row->QtdProduto);
-				
-				$subtotal = number_format(($row->ValorProduto * $row->QtdProduto), 2, ',', '.');
-				$somasubtotal += $subtotal;
-				
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
             }
-            $query->soma = new stdClass();
-            $query->soma->somaorcamento = number_format($somaorcamento, 2, ',', '.');
-			$query->soma->somadesconto = number_format($somadesconto, 2, ',', '.');
-			$query->soma->somarestante = number_format($somarestante, 2, ',', '.');
-			$query->soma->quantidade = number_format($quantidade);
-			$query->soma->somasubtotal = number_format($somasubtotal, 2, ',', '.');
-			
-            return $query;
         }
+    }
 
+    public function list4_despesasparc($x) {
+
+        $query = $this->db->query('
+			SELECT 
+				CONCAT(IFNULL(TR.TipoFinanceiro,""), " - ", IFNULL(OT.Descricao,"")) AS Descricao,
+				OT.idApp_OrcaTrata,
+				OT.AprovadoOrca,
+                OT.DataOrca,
+				OT.DataEntradaOrca,
+				OT.DataPrazo,
+                OT.ValorOrca,
+				OT.ValorDev,				
+				OT.ValorEntradaOrca,
+				OT.ValorRestanteOrca,
+				OT.DataVencimentoOrca,
+                OT.ConcluidoOrca,
+                OT.QuitadoOrca,
+                OT.DataConclusao,
+                OT.DataQuitado,
+				OT.DataRetorno,
+				OT.idTab_TipoRD,
+				OT.FormaPagamento,
+				OT.ObsOrca,
+				OT.QtdParcelasOrca,
+				OT.idSis_Usuario,
+				MD.Modalidade,
+				VP.Abrev3,
+				VP.AVAP,
+				TFP.FormaPag,
+				TR.TipoFinanceiro,
+				PR.Quitado,
+				PR.DataVencimento,
+				PR.Parcela,
+				PR.ValorParcela
+			FROM 
+                App_OrcaTrata AS OT
+					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
+					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
+					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
+					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN App_Parcelas AS PR ON PR.idApp_Orcatrata = OT.idApp_OrcaTrata
+			WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
+                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+				OT.AprovadoOrca = "S" AND
+				OT.idTab_TipoRD = "1" AND
+				PR.idTab_TipoRD = "1" AND
+				PR.Quitado = "N" AND
+				PR.DataVencimento <= "' . date("Y-m-t", mktime(0,0,0,date('m'),'01',date('Y'))) . '"
+			ORDER BY 
+				PR.DataVencimento ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
     }
 
     public function update_orcatrata($data, $id) {
