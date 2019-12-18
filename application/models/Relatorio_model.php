@@ -1189,7 +1189,8 @@ class Relatorio_model extends CI_Model {
 				' . $data['Prodaux3'] . '
 				
             ORDER BY
-                ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
+                AP.DataValidadeProduto DESC,
+				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
 
         ');
 
@@ -1375,6 +1376,7 @@ class Relatorio_model extends CI_Model {
 				' . $data['Prodaux3'] . '
 
             ORDER BY
+                AP.DataValidadeProduto DESC,			
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
 
         ');

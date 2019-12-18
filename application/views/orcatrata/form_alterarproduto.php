@@ -27,6 +27,9 @@
 							<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/fiado" role="button">
 								<span class="glyphicon glyphicon-search"></span> Fiado
 							</a>
+							<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/compvend" role="button">
+								<span class="glyphicon glyphicon-search"></span> Produtos
+							</a>							
 							<?php } ?>
 							<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/despesasparc" role="button">
 								<span class="glyphicon glyphicon-search"></span>PcDesp
@@ -34,7 +37,7 @@
 						</div>
 						<div class="panel-body">						
 							<div class="panel-group">	
-								<div class="panel panel-primary">
+								
 									<div  style="overflow: auto; height: 550px; ">
 										<div class="panel-body">	
 											<div <?php echo $collapse; ?> id="Entregues">
@@ -463,9 +466,8 @@
 											</div>
 											<?php } ?>
 										</div>	
-												
-												
 									</div>
+									
 									<div class="col-md-3">
 										<label for="Entregues">Todos Entregues?</label><br>
 										<div class="btn-group" data-toggle="buttons">
@@ -520,7 +522,7 @@
 										</div>
 										<?php #echo form_error('Devolvidos'); ?>
 									</div>									
-								</div>												
+																				
 							</div>
 
 								<div class="row">

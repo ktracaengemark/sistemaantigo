@@ -1127,7 +1127,8 @@ class Relatorio extends CI_Controller {
 		if (!$data['query']['Ano'])
            $data['query']['Ano'] = date('Y', time());	   
 */
-        
+        $_SESSION['FiltroAlteraParcela']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+		$_SESSION['FiltroAlteraParcela']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');        
 		$_SESSION['FiltroAlteraParcela']['Produtos'] = $data['query']['Produtos'];
 		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];
 		$_SESSION['FiltroAlteraParcela']['Orcarec'] = $data['query']['Orcarec'];
@@ -1211,12 +1212,7 @@ class Relatorio extends CI_Controller {
 			'TP3.Prodaux3' => 'Categoria',
 			'TP2.Prodaux2' => 'Tipo',
 			'TP1.Prodaux1' => 'Esp',
-			'OT.idApp_OrcaTrata' => 'NºOrçam.',
 			'OT.Modalidade' => 'Modalidade',
-            'OT.ValorOrca' => 'Valor da Receita',
-            'OT.ConcluidoOrca' => 'Receita Concluída?',
-			'OT.TipoFinanceiro' => 'Tipo de Receita',
-
         );
 
         $data['select']['Ordenamento'] = array(
@@ -1278,7 +1274,7 @@ class Relatorio extends CI_Controller {
 
             /*
               echo "<pre>";
-              print_r($data['report']);
+              print_r($data['query']['Produtos']);
               echo "</pre>";
               exit();
               */

@@ -449,17 +449,30 @@ class Orcatrata_model extends CI_Model {
     }	
 
     public function get_alterarprodutorec($data) {
-		
+
+        if ($_SESSION['FiltroAlteraParcela']['DataFim']) {
+            $consulta =
+                '(PR.DataValidadeProduto >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND PR.DataValidadeProduto <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(PR.DataValidadeProduto >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '")';
+        }		
 		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataValidadeProduto) = ' . $data['Mesvenc'] : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Produtos'] != "0" ) ? 'TP.idTab_Produto = "' . $_SESSION['FiltroAlteraParcela']['Produtos'] . '" AND ' : FALSE;		
+		$permissao7 = ($_SESSION['FiltroAlteraParcela']['Produtos'] != "0" ) ? 'TP.idTab_Produto = "' . $_SESSION['FiltroAlteraParcela']['Produtos'] . '" AND ' : FALSE;		
 		$permissao1 = ($_SESSION['FiltroAlteraParcela']['ConcluidoProduto'] != "0" ) ? 'PR.ConcluidoProduto = "' . $_SESSION['FiltroAlteraParcela']['ConcluidoProduto'] . '" AND ' : FALSE;
 		$permissao6 = ($_SESSION['FiltroAlteraParcela']['DevolvidoProduto'] != "0" ) ? 'PR.DevolvidoProduto = "' . $_SESSION['FiltroAlteraParcela']['DevolvidoProduto'] . '" AND ' : FALSE;
 		$permissao2 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataValidadeProduto) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
 		$permissao3 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "0" ) ? 'YEAR(PR.DataValidadeProduto) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
 		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Orcarec'] != "0" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcarec'] . '" AND ' : FALSE;
 		$permissao5 = (($_SESSION['log']['idSis_Empresa'] != 5) && ($_SESSION['FiltroAlteraParcela']['NomeCliente'] != "0" )) ? 'OT.idApp_Cliente = "' . $_SESSION['FiltroAlteraParcela']['NomeCliente'] . '" AND ' : FALSE;
-		
+			/*
+              echo "<pre>";
+              print_r($_SESSION['FiltroAlteraParcela']['Produtos']);
+              echo "</pre>";
+              exit();
+			*/
 		$query = $this->db->query('
 			SELECT
 				C.NomeCliente,
@@ -494,15 +507,17 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao1 . '
 				' . $permissao6 . '
 				' . $permissao4 . '
+				' . $permissao7 . '				
 				OT.idSis_Empresa = ' . $data . ' AND
 				OT.idTab_TipoRD = "2" AND				
 				OT.AprovadoOrca = "S" AND				
 				PR.idSis_Empresa = ' . $data . ' AND
-			
+				' . $consulta . ' AND
 				PR.idTab_TipoRD = "2" 
 			ORDER BY
-				C.NomeCliente,
-				PR.DataValidadeProduto  
+				PR.DataValidadeProduto  DESC,
+				C.NomeCliente
+				
 		');
         $query = $query->result_array();
 
@@ -566,10 +581,18 @@ class Orcatrata_model extends CI_Model {
     }	
 
     public function get_alterarprodutodesp($data) {
-		
+
+        if ($_SESSION['FiltroAlteraParcela']['DataFim']) {
+            $consulta =
+                '(PR.DataValidadeProduto >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND PR.DataValidadeProduto <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(PR.DataValidadeProduto >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '")';
+        }		
 		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataValidadeProduto) = ' . $data['Mesvenc'] : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Produtos'] != "0" ) ? 'TP.idTab_Produto = "' . $_SESSION['FiltroAlteraParcela']['Produtos'] . '" AND ' : FALSE;
+		$permissao7 = ($_SESSION['FiltroAlteraParcela']['Produtos'] != "0" ) ? 'TP.idTab_Produto = "' . $_SESSION['FiltroAlteraParcela']['Produtos'] . '" AND ' : FALSE;
 		$permissao1 = ($_SESSION['FiltroAlteraParcela']['ConcluidoProduto'] != "0" ) ? 'PR.ConcluidoProduto = "' . $_SESSION['FiltroAlteraParcela']['ConcluidoProduto'] . '" AND ' : FALSE;
 		$permissao6 = ($_SESSION['FiltroAlteraParcela']['DevolvidoProduto'] != "0" ) ? 'PR.DevolvidoProduto = "' . $_SESSION['FiltroAlteraParcela']['DevolvidoProduto'] . '" AND ' : FALSE;		
 		$permissao2 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataValidadeProduto) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
@@ -611,15 +634,17 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao1 . '
 				' . $permissao6 . '
 				' . $permissao4 . '
+				' . $permissao7 . '				
 				OT.idSis_Empresa = ' . $data . ' AND
 				OT.idTab_TipoRD = "1" AND				
 				OT.AprovadoOrca = "S" AND				
 				PR.idSis_Empresa = ' . $data . ' AND
-
+				' . $consulta . ' AND
 				PR.idTab_TipoRD = "1" 
 			ORDER BY
-				C.NomeFornecedor,
-				PR.DataValidadeProduto  
+				PR.DataValidadeProduto DESC,
+				C.NomeFornecedor
+				
 		');
         $query = $query->result_array();
 
