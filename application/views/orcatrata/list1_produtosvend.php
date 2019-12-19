@@ -30,9 +30,9 @@
 						echo '<td>' . $row['NomeCliente'] . '</td>';
 						echo '<td>' . $row['QtdProduto'] . '</td>';
 						echo '<td>' . $row['Produtos'] . '</td>';
-						echo '<td>' . $row['ValorProduto'] . '</td>';
+						echo '<td>R$' . number_format($row['ValorProduto'], 2, ',', '.') . '</td>';
 						echo '<td>' . $row['DataValidadeProduto'] . '</td>';
-						echo '<td>' . $row['ConcluidoProduto'] . '</td>';
+						echo '<td>' . $this->basico->mascara_palavra_completa($row['ConcluidoProduto'], 'NS') . '</td>';
 						echo '<td></td>';
 					echo '</tr>';            
 

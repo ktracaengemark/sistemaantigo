@@ -10,7 +10,7 @@
 		<thead>
 			<tr>						
 				<th colspan="1" class="active">Total :</th>
-				<th colspan="1" class="active"><?php echo $q2->soma->somaqtdparc ?></th>												
+				<th colspan="1" class="active">R$ <?php echo $q2->soma->somaqtdparc ?></th>												
 			</tr>
 		</thead>
 		<tbody>
@@ -32,7 +32,7 @@
 								#echo '<tr class="clickable-row" data-href="' . base_url() . 'cliente/prontuario/' . $row->NomeCliente . '">';
 									#echo '<td>' . $row->idApp_Cliente . '</td>';
 									echo '<td>' . $row->NomeCliente . '</td>';
-									echo '<td>' . $row->QtdParc . '</td>';							
+									echo '<td>R$ ' . $row->QtdParc . '</td>';							
 
 								echo '</tr>';
 								}            
