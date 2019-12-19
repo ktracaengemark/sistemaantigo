@@ -238,22 +238,23 @@
 							<thead>
 								<tr>
 									<!--<th scope="col">Nº</th>-->
-									<th class="col-md-1" scope="col">Qtd</th>																				
+									<th class="col-md-2" scope="col">Qtd</th>																				
 									<!--<th scope="col">CodProd.</th>
 									<th scope="col">CategProd.</th>-->												
-									<th class="col-md-8" scope="col">Produto</th>							
+									<th class="col-md-6" scope="col">Produto</th>							
 									<th class="col-md-1" scope="col">Valor</th>
 									<th class="col-md-1" scope="col">Subtotal</th>
 								</tr>	
 								<tr>
-									<th class="col-md-1" scope="col"></th>
-									<th class="col-md-8" scope="col">id-Ent-Dev-Obs.:</th>	
+									<th class="col-md-2" scope="col"></th>
+									<th class="col-md-6" scope="col">Data / Obs.:</th>	
 									<!--<th scope="col">Unidade</th>																				
 									<th scope="col">Aux1</th>
 									<th scope="col">Aux2</th>-->
 									<!--<th scope="col">Tipo </th>
 									<th scope="col">Desc </th>-->
-									<th class="col-md-1" scope="col"></th>							
+									<th class="col-md-1" scope="col"></th>
+									<th class="col-md-1" scope="col"></th>
 								</tr>
 							</thead>
 
@@ -275,13 +276,14 @@
 								</tr>						
 								<tr>
 									<td></td>
-									<td><?php echo $produto[$i]['idApp_Produto'] ?></td>
+									<td>Data: <?php echo $produto[$i]['DataValidadeProduto'] ?> - Obs: <?php echo $produto[$i]['ObsProduto'] ?></td>
 									<!--<td><?php echo $produto[$i]['UnidadeProduto'] ?></td>														
 									<td><?php echo $produto[$i]['Prodaux1'] ?></td>
 									<td><?php echo $produto[$i]['Prodaux2'] ?></td>-->
 									<!--<td><?php echo $produto[$i]['Convenio'] ?></td>
 									<td><?php echo $produto[$i]['Convdesc'] ?></td>-->
-									<td><?php echo $produto[$i]['DataValidadeProduto'] ?></td>							
+									<td>Ent: <?php echo $produto[$i]['ConcluidoProduto'] ?></td>
+									<td>Dev: <?php echo $produto[$i]['DevolvidoProduto'] ?></td>							
 								</tr>
 
 								<?php

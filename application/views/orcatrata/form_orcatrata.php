@@ -458,7 +458,7 @@
 																							</div>
 																						</div>
 																						<div class="col-md-2 panel-body">
-																							<div class="panel panel-warning">
+																							<div class="panel panel-primary">
 																								<div class="panel-heading">
 																									<div class="row">				
 																										<div class="col-md-12">
