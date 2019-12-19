@@ -34,9 +34,9 @@
 						echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 						echo '<td>' . $row['Parcela'] . '</td>';
 						echo '<td>' . $row['Descricao'] . '</td>';
-						echo '<td>' . $row['ValorParcela'] . '</td>';
+						echo '<td>R$' . number_format($row['ValorParcela'], 2, ',', '.') . '</td>';
 						echo '<td>' . $row['DataVencimento'] . '</td>';
-						echo '<td>' . $row['Quitado'] . '</td>';
+						echo '<td>' . $this->basico->mascara_palavra_completa($row['Quitado'], 'NS') . '</td>';
 						echo '<td></td>';
 					echo '</tr>';            
 

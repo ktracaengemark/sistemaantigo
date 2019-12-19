@@ -1512,7 +1512,7 @@ exit();*/
 				TFP.FormaPag,
 				TR.TipoFinanceiro,
 				PR.Quitado,
-				PR.DataVencimento,
+				DATE_FORMAT(PR.DataVencimento, "%d/%m/%Y") AS DataVencimento,
 				PR.Parcela,
 				PR.ValorParcela
 			FROM 
@@ -1590,7 +1590,7 @@ exit();*/
 				TFP.FormaPag,
 				TR.TipoFinanceiro,
 				PR.Quitado,
-				PR.DataVencimento,
+				DATE_FORMAT(PR.DataVencimento, "%d/%m/%Y") AS DataVencimento,
 				PR.Parcela,
 				PR.ValorParcela
 			FROM 
