@@ -263,9 +263,9 @@ elseif ($_GET['q'] == 3) {
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
-                ORDER BY P.Nome ASC'
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+			ORDER BY 
+				P.Nome ASC'
     );
 
     while ($row = mysql_fetch_assoc($result)) {

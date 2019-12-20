@@ -3163,12 +3163,19 @@ $(document).ready(function () {
                                     <span class="glyphicon glyphicon-trash"></span>\
                                 </a>\
                             </div>\
-							<div class="col-md-3">\
+							<div class="col-md-2">\
+								<label for="idSis_Usuario'+pc+'">Profissional:</label>\
+								<select data-placeholder="Selecione uma opção..." class="form-control"\
+										 id="listadinamicac'+pc+'" name="idSis_Usuario'+pc+'">\
+									<option value=""></option>\
+								</select>\
+							</div>\
+							<div class="col-md-2">\
 								<label for="ObsProduto'+pc+'">Obs:</label><br>\
 								<input type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
 									  onfocus="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" name="ObsProduto'+pc+'" value="">\
 							</div>\
-							<div class="col-md-3">\
+							<div class="col-md-2">\
 								<label for="DataValidadeProduto'+pc+'">Validade:</label>\
 								<div class="input-group DatePicker">\
 									<span class="input-group-addon" disabled>\
@@ -3261,6 +3268,39 @@ $(document).ready(function () {
             }
 
         });
+		
+		//get a reference to the select element
+        $select2 = $('#listadinamicac'+pc);
+
+        //request the JSON data and parse into the select element
+        $.ajax({
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=3',
+            dataType: 'JSON',
+            type: "GET",
+            success: function (data) {
+                //clear the current content of the select
+                $select2.html('');
+                //iterate over the data and append a select option
+                $select2.append('<option value="">-- Sel. Profis. --</option>');
+                $.each(data, function (key, val) {
+                    //alert(val.id);
+                    $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
+                })
+                $('.Chosen').chosen({
+                    disable_search_threshold: 10,
+                    multiple_text: "Selecione uma ou mais opções",
+                    single_text: "Selecione uma opção",
+                    no_results_text: "Nenhum resultado para",
+                    width: "100%"
+                });
+            },
+            error: function () {
+                //alert('erro listadinamicaB');
+                //if there is an error append a 'none available' option
+                $select2.html('<option id="-1">ERRO</option>');
+            }
+
+        });		
 
 		//permite o uso de radio buttons nesse bloco dinâmico
 		$('input:radio[id="radiogeraldinamico"]').change(function() {
