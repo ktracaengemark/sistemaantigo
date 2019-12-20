@@ -13,7 +13,7 @@ class Relatorio extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Cliente_model', 'Relatorio_model', 'Loginempresa_model'));
+        $this->load->model(array('Basico_model', 'Cliente_model', 'Relatorio_model', 'Empresa_model', 'Loginempresa_model'));
         $this->load->driver('session');
 
         #load header view
@@ -4989,6 +4989,7 @@ class Relatorio extends CI_Controller {
         $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'profliberal';
         $_SESSION['log']['idTab_Modulo'] = 1;
 
+		$_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($_SESSION['log']['idSis_Empresa'], TRUE);
         ###################################################
         #só pra eu saber quando estou no banco de testes ou de produção
         #$CI = & get_instance();
@@ -5045,7 +5046,6 @@ class Relatorio extends CI_Controller {
             $query = $this->Loginempresa_model->check_dados_celular($senha, $celular, TRUE);
 			$query = $this->Loginempresa_model->check_dados_empresa($empresa, $celular, TRUE);
 			#$_SESSION['log']['Agenda'] = $this->Loginempresa_model->get_agenda_padrao($query['idSis_Empresa']);
-			
 			
             #echo "<pre>".print_r($query)."</pre>";
             #exit();

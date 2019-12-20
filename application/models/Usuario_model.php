@@ -194,30 +194,36 @@ class Usuario_model extends CI_Model {
 	public function select_usuario($data = FALSE) {
 
         if ($data === TRUE) {
-            $array = $this->db->query(					
-			'SELECT                
-				idSis_Usuario,
-				Nome				
+            $array = $this->db->query('					
+            SELECT
+				P.idSis_Usuario,
+				CONCAT(IFNULL(F.Funcao,""), " -- ", IFNULL(P.Nome,"")) AS Nome
             FROM
-                Sis_Usuario					
+                Sis_Usuario AS P
+					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
             WHERE
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
 			ORDER BY 
-				Nome ASC'
-    );
+				F.Funcao ASC,
+				P.Nome ASC
+    ');
 					
         } else {
-            $query = $this->db->query(
-			'SELECT                
-				idSis_Usuario,
-				Nome
+            $query = $this->db->query('
+            SELECT
+				P.idSis_Usuario,
+				CONCAT(IFNULL(F.Funcao,""), " -- ", IFNULL(P.Nome,"")) AS Nome
             FROM
-                Sis_Usuario					
+                Sis_Usuario AS P
+					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
             WHERE
-                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
 			ORDER BY 
-				Nome ASC'
-    );
+				F.Funcao ASC,
+				P.Nome ASC
+    ');
             
             $array = array();
             foreach ($query->result() as $row) {

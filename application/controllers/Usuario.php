@@ -13,7 +13,7 @@ class Usuario extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Funcao_model', 'Usuario_model'));
+        $this->load->model(array('Basico_model', 'Funcao_model', 'Empresa_model', 'Usuario_model'));
         #$this->load->model(array('Basico_model', 'Usuario_model'));
         $this->load->driver('session');
 
@@ -75,6 +75,11 @@ class Usuario extends CI_Controller {
 			'CompAgenda',
         ), TRUE));
 
+		#$this->load->model('Empresa_model');
+		#$_SESSION['Empresa'] = $this->Empresa_model->get_empresa($idSis_Empresa, TRUE);
+		#$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
+			
+			
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
 		#$this->form_validation->set_rules('CpfUsuario', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');

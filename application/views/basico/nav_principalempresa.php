@@ -16,6 +16,13 @@
 				
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
+						<a href="<?php echo base_url(); ?>relatorioempresa/funcionario">
+							<button type="button" class="btn btn-sm btn-warning ">
+								<span class="glyphicon glyphicon-plus"></span> Funcionários
+							</button>
+						</a>
+					</div>					
+					<div class="btn-group " role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>relatorioempresa/login">
 							<button type="button" class="btn btn-sm btn-info ">
 								<span class="glyphicon glyphicon-log-in"></span> Acesso Empresa

@@ -254,10 +254,10 @@ elseif ($_GET['q'] == 7) {
 
 elseif ($_GET['q'] == 3) {
 
-    $result = mysql_query(
-            'SELECT
+    $result = mysql_query('
+            SELECT
 				P.idSis_Usuario,
-				CONCAT(P.Nome) AS Nome
+				CONCAT(IFNULL(F.Funcao,""), " -- ", IFNULL(P.Nome,"")) AS Nome
             FROM
                 Sis_Usuario AS P
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
@@ -265,8 +265,9 @@ elseif ($_GET['q'] == 3) {
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
 			ORDER BY 
-				P.Nome ASC'
-    );
+				F.Funcao ASC,
+				P.Nome ASC
+    ');
 
     while ($row = mysql_fetch_assoc($result)) {
 
