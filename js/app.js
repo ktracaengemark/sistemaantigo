@@ -3171,11 +3171,6 @@ $(document).ready(function () {
 								</select>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="ObsProduto'+pc+'">Obs:</label><br>\
-								<input type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
-									  onfocus="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" name="ObsProduto'+pc+'" value="">\
-							</div>\
-							<div class="col-md-2">\
 								<label for="DataValidadeProduto'+pc+'">Validade:</label>\
 								<div class="input-group DatePicker">\
 									<span class="input-group-addon" disabled>\
@@ -3184,6 +3179,11 @@ $(document).ready(function () {
 									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
 										   name="DataValidadeProduto'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 								</div>\
+							</div>\
+							<div class="col-md-2">\
+								<label for="ObsProduto'+pc+'">Obs:</label><br>\
+								<textarea type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
+									  onfocus="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" name="ObsProduto'+pc+'" value=""></textarea>\
 							</div>\
 							<div class="col-md-2 panel-body">\
 								<div class="panel panel-primary">\

@@ -279,11 +279,6 @@
 																					</select>
 																				</div>																				
 																				<div class="col-md-2">
-																					<label for="ObsProduto<?php echo $i ?>">Obs:</label><br>
-																					<input type="text" class="form-control" id="ObsProduto<?php echo $i ?>" maxlength="250"
-																						   name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>">
-																				</div>
-																				<div class="col-md-2">
 																					<label for="DataValidadeProduto<?php echo $i ?>">Validade:</label>
 																					<div class="input-group <?php echo $datepicker; ?>">
 																						<span class="input-group-addon" disabled>
@@ -294,6 +289,11 @@
 																						
 																					</div>
 																				</div>
+																				<div class="col-md-2">
+																					<label for="ObsProduto<?php echo $i ?>">Obs: <?php echo $i ?>:</label>
+																					<textarea class="form-control" id="ObsProduto<?php echo $i ?>" <?php echo $readonly; ?>
+																							  name="ObsProduto<?php echo $i ?>"><?php echo $produto[$i]['ObsProduto']; ?></textarea>
+																				</div>																				
 																				<div class="col-md-2 panel-body">
 																					<div class="panel panel-primary">
 																						<div class="panel-heading">

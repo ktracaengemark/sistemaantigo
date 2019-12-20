@@ -125,12 +125,26 @@
 																			<input type="text" class="form-control" maxlength="6" readonly=""
 																				   name="Produto<?php echo $i ?>" value="<?php echo $produto[$i]['Produto'] ?>">
 																		</div>
-																		<div class="col-md-3">
-																			<label for="ObsProduto<?php echo $i ?>">Obs:</label><br>
-																			<input type="text" class="form-control" id="ObsProduto<?php echo $i ?>" maxlength="250"
-																				   name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>">
-																		</div>
-																		<div class="col-md-3">
+																		<div class="col-md-2">
+																			<label for="idSis_Usuario<?php echo $i ?>">Profissional:</label>
+																			<?php if ($i == 1) { ?>
+																			<?php } ?>
+																			<select data-placeholder="Selecione uma opção..." class="form-control"
+																					 id="listadinamicac<?php echo $i ?>" name="idSis_Usuario<?php echo $i ?>">
+																				<option value="">-- Sel.Profis. --</option>
+																				<?php
+																				foreach ($select['idSis_Usuario'] as $key => $row) {
+																					(!$produto['idSis_Usuario']) ? $produto['idSis_Usuario'] = $_SESSION['log']['id']: FALSE;
+																					if ($produto[$i]['idSis_Usuario'] == $key) {
+																						echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																					} else {
+																						echo '<option value="' . $key . '">' . $row . '</option>';
+																					}
+																				}
+																				?>
+																			</select>
+																		</div>																				
+																		<div class="col-md-2">
 																			<label for="DataValidadeProduto<?php echo $i ?>">Validade:</label>
 																			<div class="input-group <?php echo $datepicker; ?>">
 																				<span class="input-group-addon" disabled>
@@ -140,6 +154,11 @@
 																					   name="DataValidadeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['DataValidadeProduto']; ?>">
 																				
 																			</div>
+																		</div>
+																		<div class="col-md-2">
+																			<label for="ObsProduto<?php echo $i ?>">Obs: <?php echo $i ?>:</label>
+																			<textarea class="form-control" id="ObsProduto<?php echo $i ?>" <?php echo $readonly; ?>
+																					  name="ObsProduto<?php echo $i ?>"><?php echo $produto[$i]['ObsProduto']; ?></textarea>
 																		</div>
 																		<div class="col-md-2">
 																			<label for="ConcluidoProduto">Entregue? </label><br>
