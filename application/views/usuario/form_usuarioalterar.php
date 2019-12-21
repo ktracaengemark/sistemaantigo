@@ -6,7 +6,7 @@
 		<div class="col-sm-offset-2 col-md-8">
 		<?php echo form_open_multipart($form_open_path); ?>
 			<div class="panel panel-primary">
-				
+				<?php if ( !isset($evento) && isset($_SESSION['Empresa'])) { ?>
 				<div class="panel-heading">
 					<div class="btn-group">
 						<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
@@ -31,7 +31,7 @@
 						</ul>
 					</div>
 				</div>
-	
+				<?php } ?>
 				<div class="panel-body">
 					
 					<div class="row">
@@ -62,6 +62,14 @@
 													</a>
 												</a>
 											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a <?php if (preg_match("/usuario\/alterar2\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
+													<a href="<?php echo base_url() . 'usuario/alterar2/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
+														<span class="glyphicon glyphicon-edit"></span> Alterar Senha do Usuário
+													</a>
+												</a>
+											</li>											
 										</ul>
 									</div>
 								</div>

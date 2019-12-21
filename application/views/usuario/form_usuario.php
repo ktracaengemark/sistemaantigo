@@ -6,7 +6,7 @@
 				<?php echo form_open_multipart($form_open_path); ?>
 				
 			<div class="panel panel-primary">
-				
+				<?php if ( !isset($evento) && isset($_SESSION['Empresa'])) { ?>
 				<div class="panel-heading">
 					<div class="btn-group">
 						<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
@@ -31,6 +31,7 @@
 						</ul>
 					</div>
 				</div>
+				<?php } ?>
 				<div class="panel-body">
 					
 					<div class="row">

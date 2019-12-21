@@ -17,27 +17,27 @@
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>relatorioempresa/funcionario">
-							<button type="button" class="btn btn-sm btn-warning ">
+							<button type="button" class="btn btn-lg btn-warning ">
 								<span class="glyphicon glyphicon-plus"></span> Funcionários
 							</button>
 						</a>
 					</div>					
 					<div class="btn-group " role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>relatorioempresa/login">
-							<button type="button" class="btn btn-sm btn-info ">
+							<button type="button" class="btn btn-lg btn-info ">
 								<span class="glyphicon glyphicon-log-in"></span> Acesso Empresa
 							</button>
 						</a>
 					</div>
 					<div class="btn-group " role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>relatorioempresa/associado">
-							<button type="button" class="btn btn-sm btn-warning ">
+							<button type="button" class="btn btn-lg btn-warning ">
 								<span class="glyphicon glyphicon-plus"></span> Indicações
 							</button>
 						</a>
 					</div>
 					<div class="btn-group">
-						<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+						<button type="button" class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown">
 							<span class="glyphicon glyphicon-home"></span> enkontraki <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">							
@@ -53,7 +53,7 @@
 					<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1)) { ?>
 					<div class="btn-group" role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa"> 	
-							<button type="button" class="btn btn-sm active "> Renovar em 
+							<button type="button" class="btn btn-lg active "> Renovar em 
 								<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
 							</button>
 						</a>	
@@ -62,7 +62,7 @@
 					<?php } else {?>
 					<div class="btn-group" role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa"> 	
-							<button type="button" class="btn btn-sm active "> Renovar Assinatura 
+							<button type="button" class="btn btn-lg active "> Renovar Assinatura 
 								
 							</button>
 						</a>	

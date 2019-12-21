@@ -183,7 +183,11 @@
 									<?php } ?>
 								</button>
 								<ul class="dropdown-menu" role="menu">							
-									<?php if ($_SESSION['log']['NivelEmpresa'] >= 3 ) { ?>
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+									<li><a href="<?php echo base_url() ?>relatorio/loginempresa"><span class="glyphicon glyphicon-pencil"></span> Acessar dados da Empresa</a></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="<?php echo base_url() ?>relatorio/loginempresa"><span class="glyphicon glyphicon-pencil"></span> Cadastrar/ Editar Funcionários</a></li>
+									<li role="separator" class="divider"></li>
 									<li><a href="<?php echo base_url() ?>relatorio/loginempresa"><span class="glyphicon glyphicon-pencil"></span> Renovar Assinatura</a></li>
 									<li role="separator" class="divider"></li>
 									<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas de Negócios</a></li>
