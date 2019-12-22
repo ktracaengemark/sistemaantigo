@@ -48,11 +48,13 @@
 														<input type="text" class="form-control" id="Nome" maxlength="45" 
 																autofocus name="Nome"  value="<?php echo $query['Nome']; ?>">
 													</div>																		
+													<!--
 													<div class="col-md-3">
 														<label for="DataNascimento">Data de Nascimento:</label>
 														<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
 															   name="DataNascimento" placeholder="DD/MM/AAAA" value="<?php echo $query['DataNascimento']; ?>">
-													</div>												
+													</div>
+													-->
 												</div>
 											</div>
 											<div class="form-group">
@@ -76,6 +78,7 @@
 													</div>													
 												</div>
 											</div>
+											<!--
 											<div class="form-group">
 												<div class="row">
 													<div class="col-md-12 text-center">
@@ -187,7 +190,7 @@
 														</div>
 													</div>
 												</div>
-												<!--
+												
 												<div class="form-group">
 													<div class="row">		
 														
@@ -200,10 +203,12 @@
 														
 													</div>
 												</div>
-												-->
-											</div>	
+												
+											</div>
+											-->
 										</div>
 									</div>
+									
 									<div class="form-group">
 										<div class="row">
 											<input type="hidden" name="idSis_Usuario" value="<?php echo $query['idSis_Usuario']; ?>">

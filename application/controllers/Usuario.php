@@ -300,30 +300,30 @@ class Usuario extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-			
+
 			'idSis_Usuario',
 			#'Usuario',
             'Nome',
-            'DataNascimento',
+            #'DataNascimento',
             'CelularUsuario',
-            'Email',
-			'Sexo',
+            #'Email',
+			#'Sexo',
 			#'Permissao',
 			#'Funcao',
 			#'Inativo',
-			'CpfUsuario',
+			#'CpfUsuario',
 			'Senha',
 			'Confirma',			
-			'RgUsuario',
-			'OrgaoExpUsuario',
-			'EstadoEmUsuario',
-			'DataEmUsuario',
-			'EnderecoUsuario',
-			'BairroUsuario',
-			'MunicipioUsuario',
-			'EstadoUsuario',
-			'CepUsuario',
-			'CompAgenda',
+			#'RgUsuario',
+			#'OrgaoExpUsuario',
+			#'EstadoEmUsuario',
+			#'DataEmUsuario',
+			#'EnderecoUsuario',
+			#'BairroUsuario',
+			#'MunicipioUsuario',
+			#'EstadoUsuario',
+			#'CepUsuario',
+			#'CompAgenda',
         ), TRUE);
 
         if ($id) {
