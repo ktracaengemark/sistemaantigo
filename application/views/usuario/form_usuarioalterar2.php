@@ -47,6 +47,7 @@
 														<label for="Nome">Nome do Usuário:</label>
 														<input type="text" class="form-control" id="Nome" maxlength="45" 
 																autofocus name="Nome"  value="<?php echo $query['Nome']; ?>">
+														<?php echo form_error('Nome'); ?>
 													</div>																		
 													<!--
 													<div class="col-md-3">
@@ -63,6 +64,7 @@
 														<label for="CelularUsuario">Celular / (Login)*</label>
 														<input type="text" class="form-control Celular CelularVariavel" id="CelularUsuario" maxlength="11" <?php echo $readonly; ?>
 															   name="CelularUsuario" placeholder="(XX)999999999" value="<?php echo $query['CelularUsuario']; ?>">
+														<?php echo form_error('CelularUsuario'); ?>
 													</div>													
 													<div class="col-md-3">
 														<label for="Senha">Senha:</label>

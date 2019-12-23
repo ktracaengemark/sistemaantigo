@@ -48,6 +48,10 @@ class Usuario extends CI_Controller {
         else
             $data['msg'] = '';
 
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+		
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'idSis_Empresa',
 			'idSis_Usuario',
@@ -84,16 +88,18 @@ class Usuario extends CI_Controller {
 
 		#$this->form_validation->set_rules('CpfUsuario', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		#$this->form_validation->set_rules('Usuario', 'Usuario', 'required|trim|is_unique_duplo[Sis_Usuario.Usuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email|is_unique_duplo[Sis_Usuario.Email.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
+        $this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');		
+		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');		
+		$this->form_validation->set_rules('Permissao', 'Acesso Ás Agendas', 'required|trim');		
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
-        $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
+        $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');		
+		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email|is_unique_duplo[Sis_Usuario.Email.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
 		$this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
-        $this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
-		$this->form_validation->set_rules('Permissao', 'Acesso Às Agendas', 'required|trim');
-		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
 
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();	
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Inativo'] = $this->Basico_model->select_inativo();
 		$data['select']['Permissao'] = $this->Basico_model->select_permissao();
@@ -114,6 +120,14 @@ class Usuario extends CI_Controller {
             $data['collapse'] = '';
         else
             $data['collapse'] = 'class="collapse"';
+
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
 		
         $data['sidebar'] = 'col-sm-3 col-md-2';
         $data['main'] = 'col-sm-7 col-md-8';
@@ -124,6 +138,8 @@ class Usuario extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('usuario/form_usuario', $data);
         } else {
+
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
 
 			$data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
 			$data['query']['QuemCad'] = $_SESSION['log']['id'];
@@ -184,7 +200,11 @@ class Usuario extends CI_Controller {
         else
             $data['msg'] = '';
 
-        $data['query'] = $this->input->post(array(
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+       
+		$data['query'] = $this->input->post(array(
 			
 			'idSis_Usuario',
 			#'Usuario',
@@ -225,7 +245,9 @@ class Usuario extends CI_Controller {
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('Permissao', 'Nível', 'required|trim');
 		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
 
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();	
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Inativo'] = $this->Basico_model->select_inativo();
@@ -250,6 +272,14 @@ class Usuario extends CI_Controller {
 
         $data['nav_secundario'] = $this->load->view('usuario/nav_secundario', $data, TRUE);
 
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+
         $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
         $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
 
@@ -257,6 +287,8 @@ class Usuario extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('usuario/form_usuarioalterar', $data);
         } else {
+
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
 
             $data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
@@ -270,8 +302,8 @@ class Usuario extends CI_Controller {
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Usuario'], TRUE);
 
             if ($data['auditoriaitem'] && $this->Usuario_model->update_usuario($data['query'], $data['query']['idSis_Usuario']) === FALSE) {
-                $data['msg'] = '?m=2';
-                redirect(base_url() . 'usuario/form_usuarioalterar/' . $data['query']['idSis_Usuario'] . $data['msg']);
+                $data['msg'] = '?m=1';
+                redirect(base_url() . 'usuario/prontuario/' . $data['query']['idSis_Usuario'] . $data['msg']);
                 exit();
             } else {
 
@@ -359,14 +391,14 @@ class Usuario extends CI_Controller {
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
-
+/*
         if ($data['query']['EnderecoUsuario'] || $data['query']['BairroUsuario'] ||
 			$data['query']['MunicipioUsuario'] || $data['query']['CepUsuario'] || $data['query']['RgUsuario']  || 
 			$data['query']['OrgaoExpUsuario'] || $data['query']['EstadoEmUsuario']  || $data['query']['DataEmUsuario'])
             $data['collapse'] = '';
         else
             $data['collapse'] = 'class="collapse"';
-
+*/		
         $data['nav_secundario'] = $this->load->view('usuario/nav_secundario', $data, TRUE);
 
         $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';

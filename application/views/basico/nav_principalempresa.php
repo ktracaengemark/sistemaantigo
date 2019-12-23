@@ -13,7 +13,6 @@
 		<div class="collapse navbar-collapse" id="myNavbar1">
 
 			<ul class="nav navbar-nav navbar-center">				
-				
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>relatorioempresa/funcionario">
@@ -22,6 +21,8 @@
 							</button>
 						</a>
 					</div>					
+				</li>
+				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">				
 					<div class="btn-group " role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>relatorioempresa/login">
 							<button type="button" class="btn btn-lg btn-info ">
@@ -29,6 +30,8 @@
 							</button>
 						</a>
 					</div>
+				</li>
+				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>relatorioempresa/associado">
 							<button type="button" class="btn btn-lg btn-warning ">
@@ -36,39 +39,30 @@
 							</button>
 						</a>
 					</div>
+				</li>				
+				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">								
 					<div class="btn-group">
-						<button type="button" class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown">
-							<span class="glyphicon glyphicon-home"></span> enkontraki <span class="caret"></span>
+						<button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-home"></span> enkontraki
+							<span class="caret"></span>
+							<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) && ($_SESSION['log']['idSis_Empresa'] != 5))  { ?>
+								<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
+							<?php } else if ($_SESSION['log']['idSis_Empresa'] != 5){?>
+								Renovar !!!
+							<?php } ?>
 						</button>
 						<ul class="dropdown-menu" role="menu">							
-							<li><a href="<?php echo base_url() ?>relatorioempresa/empresas"><span class="glyphicon glyphicon-home"></span> Empresas, Produtos & Serviços</a></li>
+							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+							<li><a href="<?php echo base_url() ?>relatorioempresa/sistemaempresa"><span class="glyphicon glyphicon-pencil"></span> Renovar Assinatura</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="<?php echo base_url() ?>relatorioempresa/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas de Negócios</a></li>
+							<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-pencil"></span> Dicas de Negócios</a></li>
+							<li role="separator" class="divider"></li>									
+							<?php } ?>
+							<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Outras Empresas</a></li>
 						</ul>
 					</div>
-				</li>
-				
+				</li>				
 				<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
-					
-					<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1)) { ?>
-					<div class="btn-group" role="group" aria-label="...">
-						<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa"> 	
-							<button type="button" class="btn btn-lg active "> Renovar em 
-								<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); $intervalo = $data1->diff($data2); echo $intervalo->format('%a dias'); ?>
-							</button>
-						</a>	
-					</div>
-
-					<?php } else {?>
-					<div class="btn-group" role="group" aria-label="...">
-						<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa"> 	
-							<button type="button" class="btn btn-lg active "> Renovar Assinatura 
-								
-							</button>
-						</a>	
-					</div>
-					<?php } ?>
-
 					<div class="btn-group" role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>login/sair">
 							<button type="button" class="btn btn-sm btn-danger ">

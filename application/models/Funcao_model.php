@@ -92,6 +92,39 @@ class Funcao_model extends CI_Model {
             }
         }
     }
+
+    public function lista_funcao3($x) {
+
+        $query = $this->db->query('SELECT * '
+                . 'FROM Tab_Funcao '
+                . 'WHERE '
+                . 'idSis_Empresa = ' . $_SESSION['log']['id'] . ' AND '
+                . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' '
+                . 'ORDER BY Funcao ASC ');
+        
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idTab_Funcao = $row->idTab_Funcao;
+                #    $row->Funcao = $row->Funcao;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
 	
 	public function select_funcao($data = FALSE) {
 
@@ -103,8 +136,8 @@ class Funcao_model extends CI_Model {
                     . 'FROM '
                     . 'Tab_Funcao '					
 					. 'WHERE '
-                    . 'idSis_Empresa = ' . $_SESSION['log']['id'] . ' OR '
-					. 'idSis_Empresa = "2" '
+                    . 'idSis_Empresa = ' . $_SESSION['log']['id'] . ' '
+
 					. 'ORDER BY Funcao ASC ');		
 					
         } else {
@@ -115,8 +148,8 @@ class Funcao_model extends CI_Model {
                     . 'FROM '
                     . 'Tab_Funcao '					
 					. 'WHERE '
-                    . 'idSis_Empresa = ' . $_SESSION['log']['id'] . ' OR '
-                    . 'idSis_Empresa = "2" '
+                    . 'idSis_Empresa = ' . $_SESSION['log']['id'] . ' '
+
 					. 'ORDER BY Funcao ASC ');
             
             $array = array();

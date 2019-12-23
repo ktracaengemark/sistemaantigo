@@ -37,7 +37,7 @@
 					<div class="row">
 							
 						<div class="col-md-12">	
-							<?php echo validation_errors(); ?>
+							<?php #echo validation_errors(); ?>
 
 							<div class="panel panel-<?php echo $panel; ?>">
 
@@ -82,11 +82,13 @@
 														<label for="Nome">Nome do Usuário:</label>
 														<input type="text" class="form-control" id="Nome" maxlength="45" 
 																autofocus name="Nome"  value="<?php echo $query['Nome']; ?>">
+														<?php echo form_error('Nome'); ?>
 													</div>																		
 													<div class="col-md-3">
 														<label for="CelularUsuario">Tel.- Fixo ou Celular*</label>
 														<input type="text" class="form-control Celular CelularVariavel" id="CelularUsuario" maxlength="11" <?php echo $readonly; ?>
 															   name="CelularUsuario" placeholder="(XX)999999999" value="<?php echo $query['CelularUsuario']; ?>">
+														<?php echo form_error('CelularUsuario'); ?>
 													</div>
 													<div class="col-md-3">
 														<label for="DataNascimento">Data de Nascimento:</label>
@@ -130,25 +132,68 @@
 														</select>
 													</div>
 													<div class="col-md-3">
-														<label for="Funcao">Funcao:*</label>
-														<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-														<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>funcao/cadastrar/funcao" role="button"> 
-															<span class="glyphicon glyphicon-plus"></span> <b>Nova Funcao</b>
-														</a>
-														<?php } ?>
-														<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-																id="Funcao" name="Funcao">
-															<option value="">-- Selecione uma Funcao --</option>
-															<?php
-															foreach ($select['Funcao'] as $key => $row) {
-																if ($query['Funcao'] == $key) {
-																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																} else {
-																	echo '<option value="' . $key . '">' . $row . '</option>';
-																}
-															}
-															?>   
-														</select>          
+														<div class="row">
+															<div class="col-md-12 text-left">	
+																<label  for="Funcao">Funçao:</label>
+																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																		id="Funcao" name="Funcao">
+																	<option value="">-- Sel. Função --</option>
+																	<?php
+																	foreach ($select['Funcao'] as $key => $row) {
+																		if ($query['Funcao'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	?>
+																</select>
+															</div>
+														</div>	
+														<div class="row">
+															<div class="col-md-6 text-left">
+																<label class="sr-only" for="Cadastrar">Cadastrar no BD</label>
+																<div class="btn-group" data-toggle="buttons">
+																	<?php
+																	foreach ($select['Cadastrar'] as $key => $row) {
+																		if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
+
+																		($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																		if ($cadastrar['Cadastrar'] == $key) {
+																			echo ''
+																			. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
+																			. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																			. '</label>'
+																			;
+																		} else {
+																			echo ''
+																			. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
+																			. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																			. 'autocomplete="off" value="' . $key . '" >' . $row
+																			. '</label>'
+																			;
+																		}
+																	}
+																	?>
+																
+																</div>
+																
+															</div>
+																												
+															<div class="col-md-6 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+																<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>funcao/cadastrar3/" role="button"> 
+																	<span class="glyphicon glyphicon-plus"></span>Fu
+																</a>
+																
+																<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+																		<span class="glyphicon glyphicon-refresh"></span>
+																</button>
+																<?php echo form_error('Cadastrar'); ?>
+															</div>
+														</div>
+														<?php echo form_error('Funcao'); ?>
 													</div>
 													<div class="col-md-3">
 														<label for="Permissao">Acesso às Agendas:*</label>
@@ -165,6 +210,7 @@
 															}
 															?>   
 														</select>          
+														<?php echo form_error('Permissao'); ?>
 													</div>
 													<div class="col-md-2">
 														<label for="Inativo">Ativo?</label><br>
@@ -252,6 +298,7 @@
 														<label for="Email">E-mail:</label>
 														<input type="text" class="form-control" id="Bairro" maxlength="100" <?php echo $readonly; ?>
 															   name="Email" value="<?php echo $query['Email']; ?>">
+														<?php echo form_error('Email'); ?>
 													</div>
 												</div>
 											</div>
