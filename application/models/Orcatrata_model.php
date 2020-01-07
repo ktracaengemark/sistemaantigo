@@ -1546,9 +1546,7 @@ exit();*/
           echo "</pre>";
           exit();
         */
-        if ($query->num_rows() === 0) {
-            return FALSE;
-        } else {
+
             if ($x === FALSE) {
                 return TRUE;
             } else {
@@ -1565,7 +1563,7 @@ exit();*/
 				
                 return $query;
             }
-        }
+        
     }
 
     public function list4_despesasparc($x) {
@@ -1630,9 +1628,7 @@ exit();*/
           echo "</pre>";
           exit();
         */
-        if ($query->num_rows() === 0) {
-            return FALSE;
-        } else {
+
             if ($x === FALSE) {
                 return TRUE;
             } else {
@@ -1647,7 +1643,7 @@ exit();*/
                 #$query = $query->result_array();
                 return $query;
             }
-        }
+        
     }
 
     public function update_orcatrata($data, $id) {
