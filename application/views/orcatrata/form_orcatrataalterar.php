@@ -340,7 +340,7 @@
 														</div>
 													</div>
 													<div class="col-md-4">
-														<label for="TipoFinanceiro">Tipo de Despesa</label>
+														<label for="TipoFinanceiro">Tipo de Receita</label>
 														<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																id="TipoFinanceiro" name="TipoFinanceiro">
 															<option value="">-- Selecione uma opção --</option>

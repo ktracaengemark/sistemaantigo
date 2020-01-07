@@ -11,7 +11,7 @@
 				<th class="active">Obs.</th>
 				<th class="active">Valid.</th>
 				<th class="active">Entr.?</th>
-				<th></th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -34,7 +34,7 @@
 						echo '<td>' . $row['ObsProduto'] . '</td>';
 						echo '<td>' . $row['DataValidadeProduto'] . '</td>';
 						echo '<td>' . $this->basico->mascara_palavra_completa($row['ConcluidoProduto'], 'NS') . '</td>';
-						echo '<td></td>';
+						
 					echo '</tr>';            
 
 					$i++;

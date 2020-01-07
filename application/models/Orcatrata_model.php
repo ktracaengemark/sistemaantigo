@@ -1552,11 +1552,17 @@ exit();*/
             if ($x === FALSE) {
                 return TRUE;
             } else {
-                #foreach ($query->result_array() as $row) {
-                #    $row->idApp_Profissional = $row->idApp_Profissional;
-                #    $row->NomeProfissional = $row->NomeProfissional;
-                #}
-                $query = $query->result_array();
+                $somareceber=0;
+				foreach ($query->result() as $row) {
+					$somareceber += $row->ValorParcela;				
+					$row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');                
+				}
+				
+				$query->soma = new stdClass();
+				$query->soma->somareceber = number_format($somareceber, 2, ',', '.');
+			
+                #$query = $query->result_array();
+				
                 return $query;
             }
         }
@@ -1630,11 +1636,15 @@ exit();*/
             if ($x === FALSE) {
                 return TRUE;
             } else {
-                #foreach ($query->result_array() as $row) {
-                #    $row->idApp_Profissional = $row->idApp_Profissional;
-                #    $row->NomeProfissional = $row->NomeProfissional;
-                #}
-                $query = $query->result_array();
+                $somareceber=0;
+				foreach ($query->result() as $row) {
+					$somareceber += $row->ValorParcela;				
+					$row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');                
+				}
+				
+				$query->soma = new stdClass();
+				$query->soma->somareceber = number_format($somareceber, 2, ',', '.');
+                #$query = $query->result_array();
                 return $query;
             }
         }

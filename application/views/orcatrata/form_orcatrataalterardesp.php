@@ -5,48 +5,62 @@
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<strong>Produtos NÃO Entregues<?php #echo $titulo; ?></strong>
+					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoEntregues" aria-expanded="false" aria-controls="NaoEntregues">
+						<span class="glyphicon glyphicon-pencil"></span> Não Entregues
+					</div>
 				</div>
-				<div class="panel-body">
-					
-					<?php if (isset($list1)) echo $list1; ?>
+				<div <?php echo $collapse; ?> id="NaoEntregues">	
+					<div class="panel-body">
+						
+						<?php if (isset($list1)) echo $list1; ?>
 
-				</div>
+					</div>
+				</div>	
 			</div>
 		</div>
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<strong>Pagamentos NÃO Realizados<?php #echo $titulo; ?></strong>
 					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/fiado" role="button">
 						<span class="glyphicon glyphicon-search"></span> Faturado
-					</a>				
+					</a>
+					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoPagos" aria-expanded="false" aria-controls="NaoPagos">
+						<span class="glyphicon glyphicon-pencil"></span> Não Pagos
+					</div>					
 				</div>
-				<div class="panel-body">
+				<div <?php echo $collapse; ?> id="NaoPagos">	
+					<div class="panel-body">
 
-					<?php if (isset($list2)) echo $list2; ?>
+						<?php if (isset($list2)) echo $list2; ?>
 
-				</div>
+					</div>
+				</div>	
 			</div>
 		</div>
 	</div>
-</div>
+</div>	
 <?php } else { ?>
 <div class="col-md-4 ">
 	<div class="row">		
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<strong>Pagamentos NÃO Realizados</strong>
-					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
-						<span class="glyphicon glyphicon-search"></span> Receitas X Despesas
-					</a>				
+					<!--<strong>Pagamentos NÃO Realizados</strong>-->
+					<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
+						<span class="glyphicon glyphicon-search"></span> Despesas
+					</a>					
+					<div class=" btn btn-danger" type="button" data-toggle="collapse" data-target="#NaoPagos" aria-expanded="false" aria-controls="NaoPagos">
+						<span class="glyphicon glyphicon-pencil"></span> Não Pagos
+					</div>					
+				
 				</div>
-				<div class="panel-body">
+				<div <?php echo $collapse; ?> id="NaoPagos">
+					<div class="panel-body">
 
-					<?php if (isset($list4)) echo $list4; ?>
+						<?php if (isset($list4)) echo $list4; ?>
 
-				</div>
+					</div>
+				</div>	
 			</div>
 		</div>
 	</div>
