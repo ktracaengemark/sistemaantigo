@@ -62,14 +62,14 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<!--<strong>NÃO Recebidos</strong>-->
+					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoRecebidos" aria-expanded="false" aria-controls="NaoRecebidos">
+						<span class="glyphicon glyphicon-usd"></span> Não Recebidos
+					</div>					
 					<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
 						<span class="glyphicon glyphicon-search"></span> Receitas
 					</a>					
-					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoRecebidos" aria-expanded="false" aria-controls="NaoRecebidos">
-						<span class="glyphicon glyphicon-pencil"></span> Não Recebidos
-					</div>					
 				</div>
-				<div <?php echo $collapse; ?> id="NaoRecebidos">
+				<div <?php echo $collapse1; ?> id="NaoRecebidos">
 					<div class="panel-body">
 
 						<?php if (isset($list4)) echo $list4; ?>
@@ -1101,13 +1101,13 @@
 												<?php } ?>
 												<?php if ($metodo == 2) { ?>
 													<div class="col-md-6">
-														<label></label><br>
+														<label></label>
 														<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
 															<span class="glyphicon glyphicon-save"></span> Salvar
 														</button>
 													</div>
 													<div class="col-md-6 text-right">
-														<label></label><br>
+														<label></label>
 														<button  type="button" class="btn btn-md btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 															<span class="glyphicon glyphicon-trash"></span> Excluir
 														</button>
@@ -1141,7 +1141,7 @@
 													</div>
 												<?php } else { ?>
 													<div class="col-md-6">
-														<label></label><br>
+														<label></label>
 														<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
 															<span class="glyphicon glyphicon-save"></span> Salvar
 														</button>

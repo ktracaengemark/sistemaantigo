@@ -2151,7 +2151,7 @@ class Relatorio_model extends CI_Model {
 				OT.AprovadoOrca = "S" AND
 				PR.idTab_TipoRD = "1" AND
 				PR.Quitado = "N" AND
-				PR.DataVencimento <= "2019-12-31"
+				PR.DataVencimento <= "' . date("Y-m-t", mktime(0,0,0,date('m'),'01',date('Y'))) . '"
                 ' . $data['TipoFinanceiroD'] . '
 				' . $data['Orcades'] . '                
 				' . $data['Dia'] . ' 
@@ -2184,7 +2184,7 @@ class Relatorio_model extends CI_Model {
 				PR.idTab_TipoRD = "1" AND
 				PR.Quitado = "S" AND
 				PR.Quitado = "N" AND
-				PR.DataVencimento <= "2019-12-31"
+				PR.DataVencimento <= "' . date("Y-m-t", mktime(0,0,0,date('m'),'01',date('Y'))) . '"
                 ' . $data['TipoFinanceiroD'] . '
 				' . $data['Orcades'] . '                
 				' . $data['Dia'] . ' 
