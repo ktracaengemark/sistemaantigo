@@ -2794,9 +2794,9 @@ class Relatorio_model extends CI_Model {
             $query['TotalGeralpago']->RecPago += $query['RecPago'][0]->{'M'.$i};
             $query['TotalGeralpago']->DesPago += $query['DesPago'][0]->{'M'.$i};
 
-            $query['RecPago'][0]->{'M'.$i} = number_format($query['RecPago'][0]->{'M'.$i}, 2, ',', '.');
-			$query['DesPago'][0]->{'M'.$i} = number_format($query['DesPago'][0]->{'M'.$i}, 2, ',', '.');
-            $query['TotalPago']->{'M'.$i} = number_format($query['TotalPago']->{'M'.$i}, 2, ',', '.');
+            #$query['RecPago'][0]->{'M'.$i} = number_format($query['RecPago'][0]->{'M'.$i}, 2, ',', '.');
+			#$query['DesPago'][0]->{'M'.$i} = number_format($query['DesPago'][0]->{'M'.$i}, 2, ',', '.');
+            #$query['TotalPago']->{'M'.$i} = number_format($query['TotalPago']->{'M'.$i}, 2, ',', '.');
         }		
         $query['TotalGeralpago']->BalancoGeralpago = $query['TotalGeralpago']->RecPago - $query['TotalGeralpago']->DesPago;
 
@@ -2810,8 +2810,8 @@ class Relatorio_model extends CI_Model {
             $query['TotalGeralpagar']->RecPagar += $query['RecPagar'][0]->{'M'.$i};
             $query['TotalGeralpagar']->DesPagar += $query['DesPagar'][0]->{'M'.$i};
 
-            $query['RecPagar'][0]->{'M'.$i} = number_format($query['RecPagar'][0]->{'M'.$i}, 2, ',', '.');
-			$query['DesPagar'][0]->{'M'.$i} = number_format($query['DesPagar'][0]->{'M'.$i}, 2, ',', '.');
+            #$query['RecPagar'][0]->{'M'.$i} = number_format($query['RecPagar'][0]->{'M'.$i}, 2, ',', '.');
+			#$query['DesPagar'][0]->{'M'.$i} = number_format($query['DesPagar'][0]->{'M'.$i}, 2, ',', '.');
             $query['TotalPagar']->{'M'.$i} = number_format($query['TotalPagar']->{'M'.$i}, 2, ',', '.');
         }		
         $query['TotalGeralpagar']->BalancoGeralpagar = $query['TotalGeralpagar']->RecPagar - $query['TotalGeralpagar']->DesPagar;
@@ -4784,7 +4784,7 @@ exit();*/
 			$row->QtdDevol = number_format($row->QtdDevol, 2, ',', '.');
 */			
 			$somaqtdparc += $row->QtdParc;
-			$row->QtdParc = number_format($row->QtdParc, 2, ',', '.');																
+			#$row->QtdParc = number_format($row->QtdParc, 2, ',', '.');																
         }
 
 		#$rankingvendas->soma->somaqtdorcam = number_format($somaqtdorcam, 2, ',', '.');
