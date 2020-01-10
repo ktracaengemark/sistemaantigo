@@ -2149,6 +2149,164 @@ class Relatorio extends CI_Controller {
 
 }
 
+	public function rankingreceitas() {
+
+	if ($this->input->get('m') == 1)
+		$data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+	elseif ($this->input->get('m') == 2)
+		$data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+	else
+		$data['msg'] = '';
+
+	$data['query'] = quotes_to_entities($this->input->post(array(
+		'ValorOrca',
+		'TipoFinanceiro',
+		'idTab_TipoFinanceiro',
+		'DataInicio',
+		'DataFim',
+		'Ordenamento',
+		'Campo',
+		'Quitado',
+	), TRUE));
+
+	$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+	#$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+	#$this->form_validation->set_rules('DataInicio', 'Data Inicio', 'trim|valid_date');
+	#$this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
+
+	$data['select']['Campo'] = array(
+
+		'TC.TipoFinanceiro' => 'Tipo',
+		'TC.idTab_TipoFinanceiro' => 'Id',
+
+	);
+
+	$data['select']['Ordenamento'] = array(
+		'ASC' => 'Crescente',
+		'DESC' => 'Decrescente',
+	);
+
+	$data['select']['Quitado'] = array(
+		'0' => ':: TODOS ::',
+		'N' => 'Não',
+		'S' => 'Sim',
+	);
+
+	$data['select']['TipoFinanceiro'] = $this->Relatorio_model->select_tipofinanceiroR();
+	$data['select']['idTab_TipoFinanceiro'] = $this->Relatorio_model->select_tipofinanceiroR();
+
+
+	$data['titulo'] = 'Ranking de Receitas';
+
+	#run form validation
+	if ($this->form_validation->run() !== TRUE) {
+
+		$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+		$data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+		$data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
+		$data['bd']['idTab_TipoFinanceiro'] = $data['query']['idTab_TipoFinanceiro'];
+		$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+		$data['bd']['Campo'] = $data['query']['Campo'];
+		$data['bd']['Quitado'] = $data['query']['Quitado'];
+
+		$data['report'] = $this->Relatorio_model->list_rankingreceitas($data['bd'],TRUE);
+
+		/*
+		  echo "<pre>";
+		  print_r($data['report']);
+		  echo "</pre>";
+		  #exit();
+		  #*/
+
+		$data['list'] = $this->load->view('relatorio/list_rankingreceitas', $data, TRUE);
+		//$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+	}
+
+	$this->load->view('relatorio/tela_rankingreceitas', $data);
+
+	$this->load->view('basico/footer');
+
+}
+
+	public function rankingdespesas() {
+
+	if ($this->input->get('m') == 1)
+		$data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+	elseif ($this->input->get('m') == 2)
+		$data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+	else
+		$data['msg'] = '';
+
+	$data['query'] = quotes_to_entities($this->input->post(array(
+		'ValorOrca',
+		'TipoFinanceiro',
+		'idTab_TipoFinanceiro',
+		'DataInicio',
+		'DataFim',
+		'Ordenamento',
+		'Campo',
+		'Quitado',
+	), TRUE));
+
+	$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+	#$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+	#$this->form_validation->set_rules('DataInicio', 'Data Inicio', 'trim|valid_date');
+	#$this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
+
+	$data['select']['Campo'] = array(
+
+		'TC.TipoFinanceiro' => 'Tipo',
+		'TC.idTab_TipoFinanceiro' => 'Id',
+
+	);
+
+	$data['select']['Ordenamento'] = array(
+		'ASC' => 'Crescente',
+		'DESC' => 'Decrescente',
+	);
+
+	$data['select']['Quitado'] = array(
+		'0' => ':: TODOS ::',
+		'N' => 'Não',
+		'S' => 'Sim',
+	);
+
+	$data['select']['TipoFinanceiro'] = $this->Relatorio_model->select_tipofinanceiroD();
+	$data['select']['idTab_TipoFinanceiro'] = $this->Relatorio_model->select_tipofinanceiroD();
+
+
+	$data['titulo'] = 'Ranking de Despesas';
+
+	#run form validation
+	if ($this->form_validation->run() !== TRUE) {
+
+		$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+		$data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+		$data['bd']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
+		$data['bd']['idTab_TipoFinanceiro'] = $data['query']['idTab_TipoFinanceiro'];
+		$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+		$data['bd']['Campo'] = $data['query']['Campo'];
+		$data['bd']['Quitado'] = $data['query']['Quitado'];
+
+		$data['report'] = $this->Relatorio_model->list_rankingdespesas($data['bd'],TRUE);
+
+		/*
+		  echo "<pre>";
+		  print_r($data['report']);
+		  echo "</pre>";
+		  #exit();
+		  #*/
+
+		$data['list'] = $this->load->view('relatorio/list_rankingdespesas', $data, TRUE);
+		//$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+	}
+
+	$this->load->view('relatorio/tela_rankingdespesas', $data);
+
+	$this->load->view('basico/footer');
+
+}
+
     public function estoque2() {
 
         if ($this->input->get('m') == 1)

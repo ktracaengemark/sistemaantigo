@@ -4808,6 +4808,252 @@ exit();*/
         return $rankingvendas;
 
     }
+
+	public function list_rankingreceitas($data) {
+
+        if ($data['DataFim']) {
+            $consulta =
+                '(TPR.DataVencimento >= "' . $data['DataInicio'] . '" AND TPR.DataVencimento <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(TPR.DataVencimento >= "' . $data['DataInicio'] . '")';
+        }
+        $data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TC.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
+        $data['Campo'] = (!$data['Campo']) ? 'TC.TipoFinanceiro' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$filtro4 = ($data['Quitado']) ? 'TPR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'TOT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+        ####################################################################
+        #LISTA DE CLIENTES
+        $query['TipoFinanceiro'] = $this->db->query(
+            'SELECT
+                TC.idTab_TipoFinanceiro,
+                CONCAT(IFNULL(TC.TipoFinanceiro,"")) AS TipoFinanceiro
+            FROM
+                Tab_TipoFinanceiro AS TC
+				LEFT JOIN App_OrcaTrata AS TOT ON TOT.TipoFinanceiro = TC.idTab_TipoFinanceiro
+				LEFT JOIN App_Parcelas AS TPR ON TPR.idApp_OrcaTrata = TOT.idApp_OrcaTrata
+            WHERE
+                ' . $permissao . '
+				' . $filtro4 . '
+				TPR.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                TPR.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                (' . $consulta . ')
+                ' . $data['TipoFinanceiro'] . ' AND
+                TOT.idTab_TipoRD = "2" AND
+				TOT.AprovadoOrca = "S" AND
+				TPR.idTab_TipoRD = "2"
+				
+            ORDER BY
+                ' . $data['Campo'] . ' ' . $data['Ordenamento'] . ''
+        );
+        $query['TipoFinanceiro'] = $query['TipoFinanceiro']->result();
+
+        ####################################################################
+        #Parcelas 
+
+        $query['Parcelas'] = $this->db->query(
+            'SELECT
+                SUM(TPR.ValorParcela) AS QtdParc,
+                TC.idTab_TipoFinanceiro
+            FROM
+                App_OrcaTrata AS TOT
+                    LEFT JOIN Tab_TipoFinanceiro AS TC ON TC.idTab_TipoFinanceiro = TOT.TipoFinanceiro
+					LEFT JOIN App_Parcelas AS TPR ON TPR.idApp_OrcaTrata = TOT.idApp_OrcaTrata
+
+            WHERE
+                ' . $permissao . '
+				' . $filtro4 . '
+				TPR.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                TPR.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                (' . $consulta . ')
+                ' . $data['TipoFinanceiro'] . ' AND
+                TOT.idTab_TipoRD = "2" AND
+				TOT.AprovadoOrca = "S" AND
+				TPR.idTab_TipoRD = "2" 
+            GROUP BY
+                TC.idTab_TipoFinanceiro
+            ORDER BY
+                TC.TipoFinanceiro ASC'
+        );
+        $query['Parcelas'] = $query['Parcelas']->result();
+		
+		$rankingvendas = new stdClass();
+
+
+		#$estoque = array();
+        foreach ($query['TipoFinanceiro'] as $row) {
+            #echo $row->idTab_Produto . ' # ' . $row->Produtos . '<br />';
+            #$estoque[$row->idTab_Produto] = $row->Produtos;
+            $rankingvendas->{$row->idTab_TipoFinanceiro} = new stdClass();
+            $rankingvendas->{$row->idTab_TipoFinanceiro}->TipoFinanceiro = $row->TipoFinanceiro;
+        }
+
+
+		/*
+echo "<pre>";
+print_r($query['Comprados']);
+echo "</pre>";
+exit();*/
+
+		
+		foreach ($query['Parcelas'] as $row) {
+            if (isset($rankingvendas->{$row->idTab_TipoFinanceiro}))
+                $rankingvendas->{$row->idTab_TipoFinanceiro}->QtdParc = $row->QtdParc;
+        }
+
+		$rankingvendas->soma = new stdClass();
+		$somaqtdorcam = $somaqtddescon = $somaqtdvendida = $somaqtdparc = $somaqtddevol = 0;
+
+		foreach ($rankingvendas as $row) {
+
+			$row->QtdParc = (!isset($row->QtdParc)) ? 0 : $row->QtdParc;
+			
+			$somaqtdparc += $row->QtdParc;
+			#$row->QtdParc = number_format($row->QtdParc, 2, ',', '.');																
+        }
+
+		$rankingvendas->soma->somaqtdparc = number_format($somaqtdparc, 2, ',', '.');
+
+        /*
+        echo $this->db->last_query();
+        echo "<pre>";
+        print_r($estoque);
+        echo "</pre>";
+        #echo "<pre>";
+        #print_r($query);
+        #echo "</pre>";
+        exit();
+        #*/
+
+        return $rankingvendas;
+
+    }
+
+	public function list_rankingdespesas($data) {
+
+        if ($data['DataFim']) {
+            $consulta =
+                '(TPR.DataVencimento >= "' . $data['DataInicio'] . '" AND TPR.DataVencimento <= "' . $data['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(TPR.DataVencimento >= "' . $data['DataInicio'] . '")';
+        }
+        $data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TC.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
+        $data['Campo'] = (!$data['Campo']) ? 'TC.TipoFinanceiro' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$filtro4 = ($data['Quitado']) ? 'TPR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'TOT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+        ####################################################################
+        #LISTA DE CLIENTES
+        $query['TipoFinanceiro'] = $this->db->query(
+            'SELECT
+                TC.idTab_TipoFinanceiro,
+                CONCAT(IFNULL(TC.TipoFinanceiro,"")) AS TipoFinanceiro
+            FROM
+                Tab_TipoFinanceiro AS TC
+				LEFT JOIN App_OrcaTrata AS TOT ON TOT.TipoFinanceiro = TC.idTab_TipoFinanceiro
+				LEFT JOIN App_Parcelas AS TPR ON TPR.idApp_OrcaTrata = TOT.idApp_OrcaTrata
+            WHERE
+                ' . $permissao . '
+				' . $filtro4 . '
+				TPR.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                TPR.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                (' . $consulta . ')
+                ' . $data['TipoFinanceiro'] . ' AND
+                TOT.idTab_TipoRD = "1" AND
+				TOT.AprovadoOrca = "S" AND
+
+				TPR.idTab_TipoRD = "1"
+				
+            ORDER BY
+                ' . $data['Campo'] . ' ' . $data['Ordenamento'] . ''
+        );
+        $query['TipoFinanceiro'] = $query['TipoFinanceiro']->result();
+
+        ####################################################################
+        #Parcelas 
+
+        $query['Parcelas'] = $this->db->query(
+            'SELECT
+                SUM(TPR.ValorParcela) AS QtdParc,
+                TC.idTab_TipoFinanceiro
+            FROM
+                App_OrcaTrata AS TOT
+                    LEFT JOIN Tab_TipoFinanceiro AS TC ON TC.idTab_TipoFinanceiro = TOT.TipoFinanceiro
+					LEFT JOIN App_Parcelas AS TPR ON TPR.idApp_OrcaTrata = TOT.idApp_OrcaTrata
+
+            WHERE
+                ' . $permissao . '
+				' . $filtro4 . '
+				TPR.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                TPR.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                (' . $consulta . ')
+                ' . $data['TipoFinanceiro'] . ' AND
+                TOT.idTab_TipoRD = "1" AND
+				TOT.AprovadoOrca = "S" AND
+
+				TPR.idTab_TipoRD = "1" 
+            GROUP BY
+                TC.idTab_TipoFinanceiro
+            ORDER BY
+                TC.TipoFinanceiro ASC'
+        );
+        $query['Parcelas'] = $query['Parcelas']->result();
+		
+		$rankingvendas = new stdClass();
+
+
+		#$estoque = array();
+        foreach ($query['TipoFinanceiro'] as $row) {
+            #echo $row->idTab_Produto . ' # ' . $row->Produtos . '<br />';
+            #$estoque[$row->idTab_Produto] = $row->Produtos;
+            $rankingvendas->{$row->idTab_TipoFinanceiro} = new stdClass();
+            $rankingvendas->{$row->idTab_TipoFinanceiro}->TipoFinanceiro = $row->TipoFinanceiro;
+        }
+
+
+		/*
+echo "<pre>";
+print_r($query['Comprados']);
+echo "</pre>";
+exit();*/
+
+		
+		foreach ($query['Parcelas'] as $row) {
+            if (isset($rankingvendas->{$row->idTab_TipoFinanceiro}))
+                $rankingvendas->{$row->idTab_TipoFinanceiro}->QtdParc = $row->QtdParc;
+        }
+
+		$rankingvendas->soma = new stdClass();
+		$somaqtdorcam = $somaqtddescon = $somaqtdvendida = $somaqtdparc = $somaqtddevol = 0;
+
+		foreach ($rankingvendas as $row) {
+
+			$row->QtdParc = (!isset($row->QtdParc)) ? 0 : $row->QtdParc;
+			
+			$somaqtdparc += $row->QtdParc;
+			#$row->QtdParc = number_format($row->QtdParc, 2, ',', '.');																
+        }
+
+		$rankingvendas->soma->somaqtdparc = number_format($somaqtdparc, 2, ',', '.');
+
+        /*
+        echo $this->db->last_query();
+        echo "<pre>";
+        print_r($estoque);
+        echo "</pre>";
+        #echo "<pre>";
+        #print_r($query);
+        #echo "</pre>";
+        exit();
+        #*/
+
+        return $rankingvendas;
+
+    }
 	
     public function list_estoque21($data) {
 
@@ -7982,7 +8228,7 @@ exit();*/
         ');
 
         $array = array();
-        $array[0] = 'TODOS';
+        $array[0] = ':: TODOS ::';
         foreach ($query->result() as $row) {
             $array[$row->idTab_TipoFinanceiro] = $row->TipoFinanceiro;
         }
@@ -8012,7 +8258,7 @@ exit();*/
         ');
 
         $array = array();
-        $array[0] = 'TODOS';
+        $array[0] = ':: TODOS ::';
         foreach ($query->result() as $row) {
             $array[$row->idTab_TipoFinanceiro] = $row->TipoFinanceiro;
         }
@@ -8042,7 +8288,7 @@ exit();*/
         ');
 
         $array = array();
-        $array[0] = 'TODOS';
+        $array[0] = ':: TODOS ::';
         foreach ($query->result() as $row) {
             $array[$row->idTab_TipoFinanceiro] = $row->TipoFinanceiro;
         }
