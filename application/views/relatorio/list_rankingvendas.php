@@ -1,8 +1,7 @@
-<div style="overflow: auto; height: 550px; ">	
+<div style="overflow: auto;  height: 550px; ">	
 	<div class="container-fluid">
 		<div class="row">
-
-			<div>
+			
 				<table class="table table-bordered table-condensed table-striped">
 					
 					<thead>
@@ -52,50 +51,79 @@
 					</tfoot>
 
 				</table>
-				
-				<div id="columnchart_values" style=" height: 300px;"></div>
-				
-			</div>
-			
-	  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	  <script type="text/javascript">
-		google.charts.load("current", {packages:['corechart']});
-		google.charts.setOnLoadCallback(drawChart);
-		
-		function drawChart() {
-		  var data = google.visualization.arrayToDataTable([
-			["Cliente", "Receita", { role: "style" } ],
-			
-			<?php 
-			$k = $i;
-			for ($i = 0; $i < $k; $i++){?>
+				  
+				  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+				  <script type="text/javascript">
+					google.charts.load("current", {packages:['corechart']});
+					google.charts.setOnLoadCallback(drawChart);
 					
-			['<?php echo $cliente[$i] ?>', ( <?php echo $valor[$i] ?> ), "#b87333"],
+					function drawChart() {
+					  var data = google.visualization.arrayToDataTable([
+						["Cliente", "Receita", { role: "style" } ],
+						
+						<?php 
+						$k = $i;
+						for ($i = 0; $i < $k; $i++){?>
+								
+						['<?php echo $cliente[$i] ?>', ( <?php echo $valor[$i] ?> ), "#b87333"],
 
-			<?php } ?>		
-		  ]);
+						<?php } ?>		
+					  ]);
 
-		  var view = new google.visualization.DataView(data);
-		  view.setColumns([0, 1,
-						   { calc: "stringify",
-							 sourceColumn: 1,
-							 type: "string",
-							 role: "annotation" },
-						   2]);
+					  var view = new google.visualization.DataView(data);
+					  view.setColumns([0, 1,
+									   { calc: "stringify",
+										 sourceColumn: 1,
+										 type: "string",
+										 role: "annotation" },
+									   2]);
 
-		  var options = {
-			title: "Cliente X Receita",
-			vAxis: {format: 'decimal'},
-			height: 400,
-			bar: {groupWidth: "95%"},
-			legend: { position: "none" },
-		  };
-		  var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-		  chart.draw(view, options);
-	  }
-	  </script>
+					  var options = {
+						title: "Cliente X Receita",
+						vAxis: {format: 'decimal'},
+						height: 400,
+						bar: {groupWidth: "95%"},
+						legend: { position: "none" },
+					  };
+					  var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+					  chart.draw(view, options);
+				  }
+				  </script>	
+				  
+				<div id="columnchart_values"></div>
+				
+				<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+				<script type="text/javascript">
+				  google.charts.load('current', {'packages':['corechart']});
+				  google.charts.setOnLoadCallback(drawChart);
 
+				  function drawChart() {
+
+					var data = google.visualization.arrayToDataTable([
+					  ['Cliente', 'Receita'],
+						
+						<?php 
+						$k = $i;
+						for ($i = 0; $i < $k; $i++){?>
+								
+						['<?php echo $cliente[$i] ?>', ( <?php echo $valor[$i] ?> )],
+
+						<?php } ?>
+					]);
+
+					var options = {
+					  title: 'Ranking de Vendas'
+					};
+
+					var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+					chart.draw(data, options);
+				  }
+				</script>
+				
+				<div id="piechart"></div>
+				
+			
 		</div>
-
 	</div>
 </div>
