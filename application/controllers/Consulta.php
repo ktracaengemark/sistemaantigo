@@ -12,7 +12,7 @@ class Consulta extends CI_Controller {
         #load libraries
         $this->load->helper(array('form', 'url', 'date', 'string'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Consulta_model', 'Empresafilial_model', 'Cliente_model'));
+        $this->load->model(array('Basico_model', 'Consulta_model', 'Empresafilial_model', 'Cliente_model', 'Agenda_model'));
         $this->load->driver('session');
 
         #load header view
@@ -577,14 +577,8 @@ class Consulta extends CI_Controller {
             $data['query']['idApp_Cliente'] = $idApp_Cliente;
             $_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
 		}
-		
-		if ($idApp_Cliente) {
-            $data['query']['idApp_Cliente'] = $idApp_Cliente;
-			$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
-			$data['resumo'] = $this->Cliente_model->get_cliente($idApp_Cliente);
-			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 12) ? substr($data['resumo']['NomeCliente'], 0, 12) : $data['resumo']['NomeCliente'];
-		}
 		*/
+		
         if ($idApp_Consulta) {
             #$data['query']['idApp_Cliente'] = $idApp_Cliente;
             $data['query'] = $this->Consulta_model->get_consulta($idApp_Consulta);
@@ -647,19 +641,33 @@ class Consulta extends CI_Controller {
 	
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['idApp_Agenda'] = $this->Basico_model->select_agenda();
-        $data['select']['Status'] = $this->Basico_model->select_status();
+		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();	
+		$data['select']['Status'] = $this->Basico_model->select_status();
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
         $data['select']['ContatoCliente'] = $this->Consulta_model->select_contatocliente_cliente($data['query']['idApp_Cliente']);
-		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
 		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa4();
-		
         $data['select']['Paciente'] = array (
             'R' => 'O Próprio',
             'D' => 'ContatoCliente',
         );
 
-        $data['resumo'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
-
+        #$data['resumo'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
+		
+		if ($_SESSION['log']['idSis_Empresa'] == 5) {
+			$data['resumo1'] = $this->Agenda_model->get_agenda($data['query']['idApp_Agenda']);
+			$_SESSION['Agenda']['Nome'] = (strlen($data['resumo1']['Nome']) > 30) ? substr($data['resumo1']['Nome'], 0, 30) : $data['resumo1']['Nome'];
+		}		
+		
+		if ($idApp_Cliente) {
+            $data['query']['idApp_Cliente'] = $idApp_Cliente;
+			$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
+			$data['resumo'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
+			#$data['resumo'] = $this->Cliente_model->get_cliente($idApp_Cliente);
+			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 30) ? substr($data['resumo']['NomeCliente'], 0, 30) : $data['resumo']['NomeCliente'];
+		
+		
+		
+		}
         //echo '<br><br><br><br>================================== '.$data['query']['idTab_Status'];
 
         $data['titulo'] = 'Editar Agendamento';
@@ -681,7 +689,11 @@ class Consulta extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('consulta/form_consulta', $data);
+            if ($_SESSION['log']['idSis_Empresa'] == 5) {
+				$this->load->view('consulta/form_consulta0', $data);
+			} else {
+				$this->load->view('consulta/form_consulta', $data);
+			}	
         } else {
 
             #echo '<br><br><br><br>================================== '.$data['query']['idTab_Status'];

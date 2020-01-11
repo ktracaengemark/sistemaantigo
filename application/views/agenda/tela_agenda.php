@@ -40,22 +40,22 @@
 		<div class="panel-heading">
 			
 			<?php echo form_open('agenda', 'role="form"'); ?>
-			<!--
-			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
-				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo1; ?> 
-			</div>
-			-->
-			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>procedimento/cadastrar" role="button"> 
-				<span class="glyphicon glyphicon-plus"></span>Nova Tarefa
+
+			<a class="btn btn-md btn-danger" href="<?php echo base_url() ?>procedimento/cadastrar" role="button"> 
+				<span class="glyphicon glyphicon-plus"></span>Nova
 			</a>			
-			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+			<button  class="btn btn-md btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar
 			</button>
 			<a href="<?php echo base_url() . 'orcatrata/alterarprocedimento/' . $_SESSION['log']['idSis_Empresa']; ?>">
-				<button type="button" class="btn btn-sm btn-info">
+				<button type="button" class="btn btn-md btn-info">
 					<span class="glyphicon glyphicon-edit"></span> Editar
 				</button>
-			</a>			
+			</a>
+			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
+				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo1; ?> 
+			</div>
+						
 			<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/alterarprocedimento" role="button"> 
 				<span class="glyphicon glyphicon-ok"></span> Edit Todas
 			</a>-->											
@@ -223,7 +223,7 @@
 	
 		</form>		
 		
-		<div <?php echo $collapse; ?> id="Tarefas">	
+		<div <?php echo $collapse1; ?> id="Tarefas">	
 			<div class="panel-body">
 				<?php echo (isset($list1)) ? $list1 : FALSE ?>
 			</div>

@@ -273,6 +273,21 @@ class Agenda_model extends CI_Model {
         }
     }
 
+    public function get_agenda($data) {
+        $query = $this->db->query('
+			SELECT 
+				U.Nome
+			FROM 
+				Sis_Usuario AS U
+					LEFT JOIN App_Agenda AS A ON A.idSis_Usuario = U.idSis_Usuario
+			WHERE 
+				A.idApp_Agenda = ' . $data);
+
+        $query = $query->result_array();
+
+        return $query[0];
+    }
+	
 	public function select_usuario() {
 		
         $query = $this->db->query('
