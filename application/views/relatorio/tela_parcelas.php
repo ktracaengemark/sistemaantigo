@@ -12,18 +12,18 @@
 				</button>-->			
 				
 				<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-					<span class="glyphicon glyphicon-filter"></span>Filtrar Dinheiro Que Enta<?php #echo $titulo1; ?>
+					<span class="glyphicon glyphicon-filter"></span>Filtrar <?php #echo $titulo1; ?>
 				</button>
 				<a href="<?php echo base_url() . 'orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa']; ?>">
 					<button type="button" class="btn btn-sm btn-info">
 						<span class="glyphicon glyphicon-edit"></span> Editar
 					</button>
 				</a>
-				<!--
-				<button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#Receitas" aria-expanded="false" aria-controls="Receitas">
-					<span class="glyphicon glyphicon-menu-up"></span> Receitas
-				</button>																							
 				
+				<button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#Receitas" aria-expanded="false" aria-controls="Receitas">
+					<span class="glyphicon glyphicon-menu-up"></span> Fechar
+				</button>																							
+				<!--
 				<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
 					<span class="glyphicon glyphicon-search"></span>Relatório
 				</a>			
@@ -84,9 +84,9 @@
 							<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das Receitas</h4>
 						</div>
 						<div class="modal-footer">
+							<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 							<div class="form-group">	
 								<div class="row">								
-									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 									<div class="col-md-9 text-left">
 										<label for="Ordenamento">Cliente:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -102,25 +102,10 @@
 											?>
 										</select>
 									</div>
-									<?php } ?>									
-									<div class="col-md-3 text-left">
-										<label for="Quitado">Parc. Quit.</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-												id="Quitado" name="Quitado">
-											<?php
-											foreach ($select['Quitado'] as $key => $row) {
-												if ($query['Quitado'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											?>
-										</select>
-									</div>
-
 								</div>
-							</div>	
+							</div>
+							<?php } ?>
+							<!--
 							<div class="form-group">								
 								<div class="row">	
 									<div class="col-md-3 text-left" >
@@ -168,19 +153,26 @@
 											?>
 										</select>
 									</div>								
-									<!--
-									<div class="col-md-3 text-left" >
-										<label for="Ordenamento">Ano do Venc.:</label>
-										<div>
-											<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
-												   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
-										</div>
-									</div>
-									-->
 								</div>								
 							</div>
+							-->
 							<div class="form-group">
 								<div class="row">
+									<div class="col-md-3 text-left">
+										<label for="Quitado">Parc. Quit.</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+												id="Quitado" name="Quitado">
+											<?php
+											foreach ($select['Quitado'] as $key => $row) {
+												if ($query['Quitado'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>
 									<div class="col-md-4 text-left">
 										<label for="DataInicio">Data Início: *</label>
 										<div class="input-group DatePicker">
@@ -203,19 +195,11 @@
 											
 										</div>
 									</div>											
-									<!--
-									<div class="col-md-3 text-left" >
-										<label for="Ordenamento">Ano do Venc.:</label>
-										<div>
-											<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
-												   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
-										</div>
-									</div>
-									-->
 								</div>
 							</div>								
 							<div class="form-group">
 								<div class="row">
+									<!--
 									<div class="col-md-3 text-left" >
 										<label for="Ordenamento">Orçam.Rec.:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -231,7 +215,23 @@
 											?>
 										</select>
 									</div>
-									<div class="col-md-3 text-left">
+									-->
+									<div class="col-md-4 text-left">
+										<label for="Ordenamento">Forma Pag.:</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+												id="FormaPagamento" name="FormaPagamento">
+											<?php
+											foreach ($select['FormaPagamento'] as $key => $row) {
+												if ($query['FormaPagamento'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>
+									<div class="col-md-4 text-left">
 										<label for="Ordenamento">Tipo Receita:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 												id="TipoFinanceiroR" name="TipoFinanceiroR">
@@ -248,6 +248,7 @@
 									</div>
 								</div>
 							</div>
+							<!--
 							<div class="row">	
 								<div class="col-md-6 text-left">
 									<label for="Ordenamento">Ordenamento:</label>
@@ -285,6 +286,7 @@
 									</div>
 								</div>
 							</div>
+							-->
 							<div class="row">
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
@@ -324,19 +326,19 @@
 				<!--<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal13-sm">
 					<span class="glyphicon glyphicon-plus"></span>Des.<?php #echo $titulo2; ?>
 				</button>-->
-				<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
-					<span class="glyphicon glyphicon-filter"></span>Filtrar Dinheiro Que Sái<?php #echo $titulo2; ?>
+				<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
+					<span class="glyphicon glyphicon-filter"></span>Filtrar <?php #echo $titulo2; ?>
 				</button>
 				<a href="<?php echo base_url() . 'orcatrata/alterarparceladesp/' . $_SESSION['log']['idSis_Empresa']; ?>">
-					<button type="button" class="btn btn-sm btn-info">
+					<button type="button" class="btn btn-sm btn-danger">
 						<span class="glyphicon glyphicon-edit"></span> Editar
 					</button>
 				</a>
-				<!--
-				<button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#Despesas" aria-expanded="false" aria-controls="Despesas">
-					<span class="glyphicon glyphicon-menu-up"></span> Despesas
-				</button>			
 				
+				<button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#Despesas" aria-expanded="false" aria-controls="Despesas">
+					<span class="glyphicon glyphicon-menu-up"></span> Fechar
+				</button>			
+				<!--
 				<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
 					<span class="glyphicon glyphicon-search"></span>Relatório
 				</a>			
@@ -398,9 +400,9 @@
 							<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das Despesas</h4>
 						</div>
 						<div class="modal-footer">							
+							<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 							<div class="form-group">	
 								<div class="row">
-									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 									<div class="col-md-9 text-left">
 										<label for="Ordenamento">Fornecedor:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -416,24 +418,10 @@
 											?>
 										</select>
 									</div>
-									<?php } ?>									
-									<div class="col-md-3 text-left">
-										<label for="Quitado">Parc. Quit.</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-												id="Quitado" name="Quitado">
-											<?php
-											foreach ($select['Quitado'] as $key => $row) {
-												if ($query['Quitado'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											?>
-										</select>
-									</div>
 								</div>
-							</div>	
+							</div>
+							<?php } ?>
+							<!--
 							<div class="form-group">
 								<div class="row">
 									<div class="col-md-3 text-left" >
@@ -481,19 +469,26 @@
 											?>
 										</select>
 									</div>								
-									<!--
-									<div class="col-md-3 text-left" >
-										<label for="Ordenamento">Ano do Venc.:</label>
-										<div>
-											<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
-												   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
-										</div>
-									</div>
-									-->
 								</div>
 							</div>
+							-->
 							<div class="form-group">
 								<div class="row">
+									<div class="col-md-3 text-left">
+										<label for="Quitado">Parc. Quit.</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+												id="Quitado" name="Quitado">
+											<?php
+											foreach ($select['Quitado'] as $key => $row) {
+												if ($query['Quitado'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>
 									<div class="col-md-4 text-left">
 										<label for="DataInicio">Data Início: *</label>
 										<div class="input-group DatePicker">
@@ -529,6 +524,7 @@
 							</div>	
 							<div class="form-group">
 								<div class="row">
+									<!--
 									<div class="col-md-3 text-left" >
 										<label for="Ordenamento">Orçam.Desp.:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -544,7 +540,23 @@
 											?>
 										</select>
 									</div>
-									<div class="col-md-3 text-left">
+									-->
+									<div class="col-md-4 text-left">
+										<label for="Ordenamento">Forma Pag.:</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+												id="FormaPagamento" name="FormaPagamento">
+											<?php
+											foreach ($select['FormaPagamento'] as $key => $row) {
+												if ($query['FormaPagamento'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>
+									<div class="col-md-4 text-left">
 										<label for="Ordenamento">Tipo Despesa:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 												id="TipoFinanceiroD" name="TipoFinanceiroD">
@@ -561,6 +573,7 @@
 									</div>
 								</div>
 							</div>	
+							<!--
 							<div class="row">	
 								<div class="col-md-6 text-left">
 									<label for="Ordenamento">Ordenamento:</label>
@@ -597,7 +610,8 @@
 										</div>
 									</div>
 								</div>
-							</div>	
+							</div>
+							-->
 							<div class="row">
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">

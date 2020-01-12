@@ -1489,6 +1489,7 @@ class Relatorio_model extends CI_Model {
 		$filtro3 = ($data['ConcluidoOrca']) ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
 		$filtro4 = ($data['Quitado']) ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
+		$filtro6 = ($data['FormaPagamento']) ? 'OT.FormaPagamento = "' . $data['FormaPagamento'] . '" AND ' : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 
         $query = $this->db->query(
@@ -1506,6 +1507,7 @@ class Relatorio_model extends CI_Model {
 				OT.QuitadoOrca,
 				OT.ConcluidoOrca,
 				OT.Modalidade,
+				OT.FormaPagamento,
 				TR.TipoFinanceiro,
 				MD.Modalidade,
                 PR.idSis_Empresa,
@@ -1530,6 +1532,7 @@ class Relatorio_model extends CI_Model {
 				' . $consulta . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
+				' . $filtro6 . '
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" 
@@ -1561,6 +1564,7 @@ class Relatorio_model extends CI_Model {
 				' . $consulta . ' AND				
 				' . $permissao . '
 				' . $filtro4 . '
+				' . $filtro6 . '
 				OT.idTab_TipoRD = "2" AND
 				OT.AprovadoOrca = "S" AND
 				PR.idTab_TipoRD = "2" AND
@@ -1695,6 +1699,7 @@ class Relatorio_model extends CI_Model {
 		$filtro3 = ($data['ConcluidoOrca']) ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
 		$filtro4 = ($data['Quitado']) ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
+		$filtro6 = ($data['FormaPagamento']) ? 'OT.FormaPagamento = "' . $data['FormaPagamento'] . '" AND ' : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		
         $query = $this->db->query(
@@ -1712,6 +1717,7 @@ class Relatorio_model extends CI_Model {
 				OT.QuitadoOrca,
 				OT.ConcluidoOrca,
 				OT.Modalidade,
+				OT.FormaPagamento,
 				TD.TipoFinanceiro,
 				MD.Modalidade,
                 PR.idSis_Empresa,
@@ -1736,6 +1742,7 @@ class Relatorio_model extends CI_Model {
 				' . $consulta . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
+				' . $filtro6 . '
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "1" AND
 				PR.idTab_TipoRD = "1" 
@@ -1769,6 +1776,7 @@ class Relatorio_model extends CI_Model {
 				' . $consulta . ' AND				
 				' . $permissao . '
 				' . $filtro4 . '
+				' . $filtro6 . '
 				OT.idTab_TipoRD = "1" AND
 				OT.AprovadoOrca = "S" AND
 				PR.idTab_TipoRD = "1" AND

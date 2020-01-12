@@ -165,8 +165,8 @@ class Orcatrata_model extends CI_Model {
 		$permissao2 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
 		$permissao3 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "0" ) ? 'YEAR(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
 		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Orcades'] != "0" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcades'] . '" AND ' : FALSE;
+		$permissao6 = ($_SESSION['FiltroAlteraParcela']['FormaPagamento'] != "0" ) ? 'OT.FormaPagamento = "' . $_SESSION['FiltroAlteraParcela']['FormaPagamento'] . '" AND ' : FALSE;
 		$permissao5 = (($_SESSION['log']['idSis_Empresa'] != 5) && ($_SESSION['FiltroAlteraParcela']['NomeFornecedor'] != "0" )) ? 'OT.idApp_Fornecedor = "' . $_SESSION['FiltroAlteraParcela']['NomeFornecedor'] . '" AND ' : FALSE;
-		#$permissao6 = ($_SESSION['FiltroAlteraParcela']['DataFim'] != "0000-00-00" ) ? 'PR.DataVencimento <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '" AND ' : FALSE;
 		
 		/*
 		  echo $this->db->last_query();
@@ -208,11 +208,8 @@ class Orcatrata_model extends CI_Model {
 				PR.idSis_Empresa = ' . $data . ' AND
 				' . $consulta . ' AND
 				' . $permissao1 . '
-				' . $permissao2 . '
-				' . $permissao3 . '
-				' . $permissao4 . '
 				' . $permissao5 . '
-
+				' . $permissao6 . '
 				PR.idTab_TipoRD = "1"
 			ORDER BY
 				PR.DataVencimento
@@ -238,6 +235,7 @@ class Orcatrata_model extends CI_Model {
 		$permissao2 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
 		$permissao3 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "0" ) ? 'YEAR(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
 		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Orcarec'] != "0" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcarec'] . '" AND ' : FALSE;
+		$permissao6 = ($_SESSION['FiltroAlteraParcela']['FormaPagamento'] != "0" ) ? 'OT.FormaPagamento = "' . $_SESSION['FiltroAlteraParcela']['FormaPagamento'] . '" AND ' : FALSE;
 		$permissao5 = (($_SESSION['log']['idSis_Empresa'] != 5) && ($_SESSION['FiltroAlteraParcela']['NomeCliente'] != "0" )) ? 'OT.idApp_Cliente = "' . $_SESSION['FiltroAlteraParcela']['NomeCliente'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('
@@ -272,10 +270,8 @@ class Orcatrata_model extends CI_Model {
 				PR.idSis_Empresa = ' . $data . ' AND
 				' . $consulta . ' AND				
 				' . $permissao1 . '
-				' . $permissao2 . '
-				' . $permissao3 . '
-				' . $permissao4 . '
-				' . $permissao5 . '				
+				' . $permissao5 . '
+				' . $permissao6 . '
 				PR.idTab_TipoRD = "2" 
 			ORDER BY
 				C.NomeCliente,

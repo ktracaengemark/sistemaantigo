@@ -1595,6 +1595,7 @@ class Relatorio extends CI_Controller {
 			'Modalidade',
 			'Orcarec',
 			'Orcades',
+			'FormaPagamento',
         ), TRUE));
 /*
 		if (!$data['query']['DataInicio2'])
@@ -1627,7 +1628,8 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Orcarec'] = $data['query']['Orcarec'];
 		$_SESSION['FiltroAlteraParcela']['Orcades'] = $data['query']['Orcades'];
 		$_SESSION['FiltroAlteraParcela']['NomeCliente'] = $data['query']['NomeCliente'];
-		$_SESSION['FiltroAlteraParcela']['NomeFornecedor'] = $data['query']['NomeFornecedor'];		
+		$_SESSION['FiltroAlteraParcela']['NomeFornecedor'] = $data['query']['NomeFornecedor'];
+		$_SESSION['FiltroAlteraParcela']['FormaPagamento'] = $data['query']['FormaPagamento'];
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         $this->form_validation->set_rules('DataInicio', 'Data Início do Vencimento', 'trim|valid_date');
@@ -1698,7 +1700,8 @@ class Relatorio extends CI_Controller {
 		$data['select']['Mespag'] = $this->Relatorio_model->select_mes();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
 		$data['select']['Ano'] = $this->Relatorio_model->select_ano();		
-
+		$data['select']['FormaPagamento'] = $this->Relatorio_model->select_formapag();
+		
         $data['titulo1'] = 'Receita';
 
         #run form validation
@@ -1726,7 +1729,8 @@ class Relatorio extends CI_Controller {
 			$data['bd']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
 			$data['bd']['Quitado'] = $data['query']['Quitado'];
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
-            
+            $data['bd']['FormaPagamento'] = $data['query']['FormaPagamento'];
+			
 			$data['report'] = $this->Relatorio_model->list1_receitasparc($data['bd'],TRUE);
 
             /*
@@ -1768,6 +1772,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
 			$data['bd']['Quitado'] = $data['query']['Quitado'];
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
+			$data['bd']['FormaPagamento'] = $data['query']['FormaPagamento'];
             
 			$data['report'] = $this->Relatorio_model->list2_despesasparc($data['bd'],TRUE);
 
