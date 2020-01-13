@@ -16,116 +16,32 @@
 
 					<div class="panel panel-primary panel-<?php echo $panel; ?>">
 						<div class="panel-heading">
-							<?php echo $titulo; ?>
-							<!--<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-								<span class="glyphicon glyphicon-search"></span> <?php #echo $titulo; ?>
-							</button>-->
-							<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
-								<span class="glyphicon glyphicon-search"></span> Parcelas
+							<?php if ($titulo == "Receitas" ) { ?>
+							<a class="btn btn-md btn-primary" href="<?php echo base_url() ?>relatorio/parcelasrec" role="button">
+								<span class="glyphicon glyphicon-pencil"></span> Rel. das <?php echo $titulo; ?>
+							</a>							
+							<?php } else { ?>
+							<a class="btn btn-md btn-primary" href="<?php echo base_url() ?>relatorio/parcelasdesp" role="button">
+								<span class="glyphicon glyphicon-pencil"></span> Rel. das <?php echo $titulo; ?>
 							</a>
+							<?php } ?>
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-							<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/fiado" role="button">
-								<span class="glyphicon glyphicon-search"></span> Fiado
-							</a>
+								<?php if ($titulo == "Receitas" ) { ?>
+									<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/fiadorec" role="button">
+										<span class="glyphicon glyphicon-search"></span> Fiados 
+									</a>
+								<?php } else { ?>	
+									<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/fiadodesp" role="button">
+										<span class="glyphicon glyphicon-search"></span> Fiados 
+									</a>
+								<?php } ?>
 							<?php } ?>
 							<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/despesasparc" role="button">
 								<span class="glyphicon glyphicon-search"></span>PcDesp
 							</a>-->
 						</div>
 						<div class="panel-body">
-							
-							<div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-								<div class="modal-dialog modal-md" role="document">
-									<div class="modal-content">
-										<div class="modal-header bg-danger">
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-											<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das Parcelas</h4>
-										</div>
-										<div class="modal-footer">
-											<div class="row">
-												<div class="col-md-3 text-left">
-													<label for="Quitado">Parc. Quit.</label>
-													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-															id="Quitado" name="Quitado">
-														<?php
-														foreach ($select['Quitado'] as $key => $row) {
-															if ($query['Quitado'] == $key) {
-																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-															} else {
-																echo '<option value="' . $key . '">' . $row . '</option>';
-															}
-														}
-														?>
-													</select>
-												</div>
-												<div class="col-md-3 text-left" >
-													<label for="Ordenamento">Dia do Venc.:</label>
-													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-															id="Dia" name="Dia">
-														<?php
-														foreach ($select['Dia'] as $key => $row) {
-															if ($query['Dia'] == $key) {
-																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-															} else {
-																echo '<option value="' . $key . '">' . $row . '</option>';
-															}
-														}
-														?>
-													</select>
-												</div>
-												<div class="col-md-3 text-left" >
-													<label for="Ordenamento">Mês do Venc.:</label>
-													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-															id="Mesvenc" name="Mesvenc">
-														<?php
-														foreach ($select['Mesvenc'] as $key => $row) {
-															if ($query['Mesvenc'] == $key) {
-																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-															} else {
-																echo '<option value="' . $key . '">' . $row . '</option>';
-															}
-														}
-														?>
-													</select>
-												</div>
 
-												<div class="col-md-3 text-left" >
-													<label for="Ordenamento">Ano do Venc.:</label>
-													<div>
-														<input type="text" class="form-control Numero" maxlength="4" placeholder="AAAA"
-															   autofocus name="Ano" value="<?php echo set_value('Ano', $query['Ano']); ?>">
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<br>
-												<div class="form-group col-md-3 text-left">
-													<div class="form-footer ">
-														<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
-															<span class="glyphicon glyphicon-filter"></span> Filtrar
-														</button>
-													</div>
-												</div>
-												<div class="form-group col-md-3 text-left">
-													<div class="form-footer ">
-														<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-															<span class="glyphicon glyphicon-remove"> Fechar
-														</button>
-													</div>
-												</div>
-												<div class="form-group col-md-3 text-left">
-													<div class="form-footer">		
-														<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/despesas" role="button">
-															<span class="glyphicon glyphicon-ok"></span> Despesas
-														</a>
-													</div>	
-												</div>
-											</div>
-										</div>									
-									</div>								
-								</div>
-							</div>
-						
 							<div class="panel-group">	
 								
 								<div class="panel panel-primary">
@@ -242,10 +158,6 @@
 												</div>
 												-->
 											</div>
-										
-										
-									
-									
 									</div>									
 								</div>
 							</div>
@@ -260,7 +172,7 @@
 									<?php } ?>
 									<?php if ($metodo == 2) { ?>
 										<div class="col-md-6 text-left">
-											<label for="QuitadoParcelas">Quitar Tds as Parcelas?</label><br>
+											<label for="QuitadoParcelas">Todas as Parcelas Quitadas?</label><br>
 											<div class="btn-group" data-toggle="buttons">
 												<?php
 												foreach ($select['QuitadoParcelas'] as $key => $row) {

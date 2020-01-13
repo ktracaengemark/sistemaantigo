@@ -42,8 +42,24 @@
 			<?php echo form_open('agenda', 'role="form"'); ?>
 
 			<a class="btn btn-md btn-danger" href="<?php echo base_url() ?>procedimento/cadastrar" role="button"> 
-				<span class="glyphicon glyphicon-plus"></span>Nova
+				<span class="glyphicon glyphicon-plus"></span> Nova 
 			</a>			
+			<div class="btn-group">
+				<a type="button" class="btn btn-md btn-primary" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+					<span class="glyphicon glyphicon-filter"></span> Filtrar 
+				</a>
+				<button type="button" class="btn btn-md btn-primary dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">							
+					<li>
+						<a class="dropdown-item" href="<?php echo base_url() . 'orcatrata/alterarprocedimento/' . $_SESSION['log']['idSis_Empresa']; ?>">
+							<span class="glyphicon glyphicon-pencil"></span> Editar Tarefas Filtradas
+						</a>
+					</li>
+				</ul>
+			</div>			
+			<!--
 			<button  class="btn btn-md btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar
 			</button>
@@ -52,15 +68,14 @@
 					<span class="glyphicon glyphicon-edit"></span> Editar
 				</button>
 			</a>
+			
 			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
 				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo1; ?> 
 			</div>
-						
+			-->			
 			<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/alterarprocedimento" role="button"> 
 				<span class="glyphicon glyphicon-ok"></span> Edit Todas
 			</a>-->											
-
-		
 		</div>
 															
 		<div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -223,7 +238,7 @@
 	
 		</form>		
 		
-		<div <?php echo $collapse1; ?> id="Tarefas">	
+		<div <?php echo $collapse; ?> id="Tarefas">	
 			<div class="panel-body">
 				<?php echo (isset($list1)) ? $list1 : FALSE ?>
 			</div>

@@ -37,7 +37,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/fiado" role="button">
+					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/fiadorec" role="button">
 						<span class="glyphicon glyphicon-search"></span> Fiado
 					</a>
 					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoRecebidos" aria-expanded="false" aria-controls="NaoRecebidos">
@@ -63,10 +63,10 @@
 				<div class="panel-heading">
 					<!--<strong>NÃO Recebidos</strong>-->
 					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoRecebidos" aria-expanded="false" aria-controls="NaoRecebidos">
-						<span class="glyphicon glyphicon-usd"></span> Não Recebidos
+						Resumo <span class="glyphicon glyphicon-chevron-down"></span>
 					</div>					
-					<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
-						<span class="glyphicon glyphicon-search"></span> Receitas
+					<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/parcelasrec" role="button">
+						<span class="glyphicon glyphicon-search"></span> Rel. das Receitas
 					</a>					
 				</div>
 				<div <?php echo $collapse1; ?> id="NaoRecebidos">

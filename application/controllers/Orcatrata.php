@@ -3712,11 +3712,11 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Orcades'] = $this->Basico_model->select_orcades();
 		$data['select']['NomeFornecedor'] = $this->Basico_model->select_fornecedor();
 		
-        $data['titulo'] = 'Despesas ';
+        $data['titulo'] = 'Despesas';
         $data['form_open_path'] = 'orcatrata/alterarparceladesp';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'primary';
+        $data['panel'] = 'danger';
         $data['metodo'] = 2;
 
 		$data['collapse'] = '';	
@@ -3944,11 +3944,11 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Orcarec'] = $this->Basico_model->select_orcarec();
 		$data['select']['NomeCliente'] = $this->Basico_model->select_cliente();		
 		
-        $data['titulo'] = 'Receitas ';
+        $data['titulo'] = 'Receitas';
         $data['form_open_path'] = 'orcatrata/alterarparcelarec';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'primary';
+        $data['panel'] = 'info';
         $data['metodo'] = 2;
 
 		$data['collapse'] = '';	

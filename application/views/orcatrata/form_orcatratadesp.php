@@ -21,12 +21,12 @@
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
+					<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/fiadodesp" role="button">
+						<span class="glyphicon glyphicon-search"></span> Fiado
+					</a>					
 					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoPagos" aria-expanded="false" aria-controls="NaoPagos">
 						<span class="glyphicon glyphicon-usd"></span> Não Pagos
 					</div>
-					<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/fiado" role="button">
-						<span class="glyphicon glyphicon-search"></span> Faturado
-					</a>
 				</div>
 				<div <?php echo $collapse; ?> id="NaoPagos">	
 					<div class="panel-body">
@@ -46,10 +46,10 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<!--<strong>Pagamentos NÃO Realizados</strong>-->
-					<div class=" btn btn-danger" type="button" data-toggle="collapse" data-target="#NaoPagos" aria-expanded="false" aria-controls="NaoPagos">
-						<span class="glyphicon glyphicon-usd"></span> Não Pagos
-					</div>					
-					<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/parcelas" role="button">
+					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoPagos" aria-expanded="false" aria-controls="NaoPagos">
+						Resumo <span class="glyphicon glyphicon-chevron-down"></span>
+					</div>
+					<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/parcelasdesp" role="button">
 						<span class="glyphicon glyphicon-search"></span> Despesas
 					</a>
 				</div>
