@@ -32,7 +32,8 @@
 						foreach ($report->result_array() as $row) {
 
 							#echo '<tr>';
-							echo '<tr class="clickable-row" data-href="' . base_url() . 'procedimento/alterar/' . $row['idApp_Procedimento'] . '">';
+							echo '<tr class="clickable-row" data-href="' . base_url() . 'tarefa/alterar/' . $row['idApp_Procedimento'] . '">';
+							#echo '<tr class="clickable-row" data-href="' . base_url() . 'procedimento/alterar/' . $row['idApp_Procedimento'] . '">';
 							#echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarprocedimento/' . $row['idSis_Empresa'] . '">';
 
 								/*
@@ -57,7 +58,7 @@
 								echo '<td>' . $row['NomeUsuario'] . '</td>';
 								#echo '<td>' . $row['DataProcedimento'] . '</td>';
 								echo '<td class="notclickable">
-										<a class="btn btn-sm btn-danger notclickable" href="' . base_url() . 'procedimento/excluir/' . $row['idApp_Procedimento'] . '">
+										<a class="btn btn-sm btn-danger notclickable" href="' . base_url() . 'tarefa/excluir/' . $row['idApp_Procedimento'] . '">
 											<span class="glyphicon glyphicon-trash notclickable"></span>
 										</a>
 									</td>';

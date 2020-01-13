@@ -41,7 +41,7 @@
 			
 			<?php echo form_open('agenda', 'role="form"'); ?>
 
-			<a class="btn btn-md btn-danger" href="<?php echo base_url() ?>procedimento/cadastrar" role="button"> 
+			<a class="btn btn-md btn-danger" href="<?php echo base_url() ?>tarefa/cadastrar" role="button"> 
 				<span class="glyphicon glyphicon-plus"></span> Nova 
 			</a>			
 			<div class="btn-group">
@@ -89,21 +89,6 @@
 						<div class="form-group">	
 							<div class="row">	
 								<div class="col-md-3 text-left">
-									<label for="ConcluidoProcedimento">Concluido</label>
-									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
-											id="ConcluidoProcedimento" name="ConcluidoProcedimento">
-										<?php
-										foreach ($select['ConcluidoProcedimento'] as $key => $row) {
-											if ($query['ConcluidoProcedimento'] == $key) {
-												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-												echo '<option value="' . $key . '">' . $row . '</option>';
-											}
-										}
-										?>
-									</select>
-								</div>								
-								<div class="col-md-3 text-left">
 									<label for="Prioridade">Prioridade</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 											id="Prioridade" name="Prioridade">
@@ -117,8 +102,22 @@
 										}
 										?>
 									</select>
+								</div>								
+								<div class="col-md-3 text-left">
+									<label for="ConcluidoProcedimento">Concluido</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
+											id="ConcluidoProcedimento" name="ConcluidoProcedimento">
+										<?php
+										foreach ($select['ConcluidoProcedimento'] as $key => $row) {
+											if ($query['ConcluidoProcedimento'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
 								</div>
-
 								<div class="col-md-4 text-left">
 									<label for="Ordenamento">Tarefa:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 

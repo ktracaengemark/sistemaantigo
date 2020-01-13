@@ -12,10 +12,10 @@
             if (!$list) {
             ?>
                 <a class="btn btn-lg btn-warning" href="<?php echo base_url() ?>tarefa/cadastrar" role="button">
-                    <span class="glyphicon glyphicon-plus"></span> Cadastrar Novo Procedimento
+                    <span class="glyphicon glyphicon-plus"></span> Cadastrar Novo Tarefa
                 </a>
                 <br><br>
-                <div class="alert alert-info" role="alert"><b>Nenhum Procedimento cadastrado</b></div>
+                <div class="alert alert-info" role="alert"><b>Nenhum Tarefa cadastrado</b></div>
             <?php
             } else {
                 echo $list;

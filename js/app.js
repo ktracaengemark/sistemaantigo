@@ -972,7 +972,7 @@ function adicionaProcedimento() {
  * Função responsável por adicionar novos campos de Procedtarefa dinamicamente no
  * formulário de tarefa
  */
-function adicionaProcedtarefa() {
+function adicionaSubProcedimento() {
 
     var pt = $("#PTCount").val(); //initlal text box count
 
@@ -997,30 +997,30 @@ function adicionaProcedtarefa() {
 				<div class="panel-heading">\
 					<div class="row">\
 						<div class="col-md-4">\
-							<label for="Procedtarefa'+pt+'">Ação:</label>\
-							<textarea class="form-control" id="Procedtarefa'+pt+'"\
-									  name="Procedtarefa'+pt+'"></textarea>\
+							<label for="SubProcedimento'+pt+'">Ação:</label>\
+							<textarea class="form-control" id="SubProcedimento'+pt+'"\
+									  name="SubProcedimento'+pt+'"></textarea>\
 						</div>\
 						<div class="col-md-3">\
-							<label for="DataProcedtarefa'+pt+'">Data da Ação:</label>\
+							<label for="DataSubProcedimento'+pt+'">Data da Ação:</label>\
 							<div class="input-group DatePicker">\
 								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
-									   name="DataProcedtarefa'+pt+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
+									   name="DataSubProcedimento'+pt+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 								<span class="input-group-addon" disabled>\
 									<span class="glyphicon glyphicon-calendar"></span>\
 								</span>\
 							</div>\
 						</div>\
 						<div class="col-md-3">\
-							<label for="ConcluidoProcedtarefa">Ação Concl.? </label><br>\
+							<label for="ConcluidoSubProcedimento">Ação Concl.? </label><br>\
 							<div class="form-group">\
 								<div class="btn-group" data-toggle="buttons">\
-									<label class="btn btn-warning active" name="radio_ConcluidoProcedtarefa'+pt+'" id="radio_ConcluidoProcedtarefa'+pt+'N">\
-									<input type="radio" name="ConcluidoProcedtarefa'+pt+'" id="radiogeraldinamico"\
+									<label class="btn btn-warning active" name="radio_ConcluidoSubProcedimento'+pt+'" id="radio_ConcluidoSubProcedimento'+pt+'N">\
+									<input type="radio" name="ConcluidoSubProcedimento'+pt+'" id="radiogeraldinamico"\
 										autocomplete="off" value="N" checked>Não\
 									</label>\
-									<label class="btn btn-default" name="radio_ConcluidoProcedtarefa'+pt+'" id="radio_ConcluidoProcedtarefa'+pt+'S">\
-									<input type="radio" name="ConcluidoProcedtarefa'+pt+'" id="radiogeraldinamico"\
+									<label class="btn btn-default" name="radio_ConcluidoSubProcedimento'+pt+'" id="radio_ConcluidoSubProcedimento'+pt+'S">\
+									<input type="radio" name="ConcluidoSubProcedimento'+pt+'" id="radiogeraldinamico"\
 										autocomplete="off" value="S">Sim\
 									</label>\
 								</div>\
@@ -1068,6 +1068,21 @@ function adicionaProcedtarefa() {
         }
 
     });
+	
+    //permite o uso de radio buttons nesse bloco dinâmico
+    $('input:radio[id="radiogeraldinamico"]').change(function() {
+
+        var value = $(this).val();
+        var name = $(this).attr("name");
+
+        //console.log(value + ' <<>> ' + name);
+
+        $('label[name="radio_' + name + '"]').removeClass();
+        $('label[name="radio_' + name + '"]').addClass("btn btn-default");
+        $('#radio_' + name + value).addClass("btn btn-warning active");
+        //$('#radiogeral'+ value).addClass("btn btn-warning active");
+
+    });	
 
 }
 
