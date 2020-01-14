@@ -325,6 +325,32 @@ class Basico {
 
         }
     }
+	
+    function mascara_palavra_completa2($data, $opcao) {
+
+        if ($opcao == 'NS') {
+
+            if ($data == 'S')
+                return 'Sim';
+            else if ($data == 'N')
+                return 'Não';
+
+        }
+    }
+
+    function prioridade($data, $opcao) {
+
+        if ($opcao == '123') {
+
+            if ($data == '1')
+                return 'Alta';
+            else if ($data == '2')
+                return 'Media';
+			else if ($data == '3')
+                return 'Baixa';
+
+        }
+    }	
 
     function tratamento_array_multidimensional($data, $anterior, $campo) {
 

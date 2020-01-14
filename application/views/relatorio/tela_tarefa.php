@@ -33,14 +33,13 @@
                                     ?>
                                 </select>
                             </div>
-							
 							<div class="col-md-2">
                                 <label for="Ordenamento">Tarefa / Missão</label>
                                 <select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-                                        id="ObsTarefa" name="ObsTarefa">
+                                        id="Procedimento" name="Procedimento">
                                     <?php
-                                    foreach ($select['ObsTarefa'] as $key => $row) {
-                                        if ($query['ObsTarefa'] == $key) {
+                                    foreach ($select['Procedimento'] as $key => $row) {
+                                        if ($query['Procedimento'] == $key) {
                                             echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
                                         } else {
                                             echo '<option value="' . $key . '">' . $row . '</option>';
@@ -50,13 +49,28 @@
                                 </select>
                             </div>
 							-->
-							<div class="col-md-2">
-                                <label for="TarefaConcluida">Trf. Concl.?</label>
+                            <div class="col-md-2">
+                                <label for="Prioridade">Prioridade</label>
                                 <select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-                                        id="TarefaConcluida" name="TarefaConcluida">
+                                        id="Prioridade" name="Prioridade">
                                     <?php
-                                    foreach ($select['TarefaConcluida'] as $key => $row) {
-                                        if ($query['TarefaConcluida'] == $key) {
+                                    foreach ($select['Prioridade'] as $key => $row) {
+                                        if ($query['Prioridade'] == $key) {
+                                            echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+                                        } else {
+                                            echo '<option value="' . $key . '">' . $row . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>							
+							<div class="col-md-2">
+                                <label for="ConcluidoProcedimento">Trf. Concl.?</label>
+                                <select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+                                        id="ConcluidoProcedimento" name="ConcluidoProcedimento">
+                                    <?php
+                                    foreach ($select['ConcluidoProcedimento'] as $key => $row) {
+                                        if ($query['ConcluidoProcedimento'] == $key) {
                                             echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
                                         } else {
                                             echo '<option value="' . $key . '">' . $row . '</option>';
@@ -65,6 +79,26 @@
                                     ?>
                                 </select>
                             </div>
+							<div class="col-md-2">
+                                <label for="DataInicio">Data Início</label>
+                                <div class="input-group DatePicker">
+                                    <input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+                                           autofocus name="DataInicio" value="<?php echo set_value('DataInicio', $query['DataInicio']); ?>">
+                                    <span class="input-group-addon" disabled>
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="DataFim">Data Fim</label>
+                                <div class="input-group DatePicker">
+                                    <input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+                                           autofocus name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
+                                    <span class="input-group-addon" disabled>
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>							
 							<!--
 							<div class="col-md-2">
                                 <label for="Ordenamento">Profissional:</label>
@@ -85,10 +119,10 @@
 							<div class="col-md-2">
                                 <label for="Ordenamento">Ação</label>
                                 <select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-                                        id="Procedtarefa" name="Procedtarefa">
+                                        id="SubProcedimento" name="SubProcedimento">
                                     <?php
-                                    foreach ($select['Procedtarefa'] as $key => $row) {
-                                        if ($query['Procedtarefa'] == $key) {
+                                    foreach ($select['SubProcedimento'] as $key => $row) {
+                                        if ($query['SubProcedimento'] == $key) {
                                             echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
                                         } else {
                                             echo '<option value="' . $key . '">' . $row . '</option>';
@@ -98,21 +132,6 @@
                                 </select>
                             </div>
 							
-							<div class="col-md-2">
-                                <label for="ConcluidoProcedtarefa">Ação Concl.?</label>
-                                <select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-                                        id="ConcluidoProcedtarefa" name="ConcluidoProcedtarefa">
-                                    <?php
-                                    foreach ($select['ConcluidoProcedtarefa'] as $key => $row) {
-                                        if ($query['ConcluidoProcedtarefa'] == $key) {
-                                            echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-                                        } else {
-                                            echo '<option value="' . $key . '">' . $row . '</option>';
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                            </div>
 																					                           						                            							
 							<div class="col-md-2">
                                 <label for="Rotina">Rotina</label>
@@ -129,14 +148,14 @@
                                     ?>
                                 </select>
                             </div>
-							
-                            <div class="col-md-2">
-                                <label for="Prioridade">Prioridade</label>
+							-->
+							<div class="col-md-2">
+                                <label for="ConcluidoSubProcedimento">Ação Concl.?</label>
                                 <select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-                                        id="Prioridade" name="Prioridade">
+                                        id="ConcluidoSubProcedimento" name="ConcluidoSubProcedimento">
                                     <?php
-                                    foreach ($select['Prioridade'] as $key => $row) {
-                                        if ($query['Prioridade'] == $key) {
+                                    foreach ($select['ConcluidoSubProcedimento'] as $key => $row) {
+                                        if ($query['ConcluidoSubProcedimento'] == $key) {
                                             echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
                                         } else {
                                             echo '<option value="' . $key . '">' . $row . '</option>';
@@ -144,9 +163,7 @@
                                     }
                                     ?>
                                 </select>
-                            </div>
-							-->
-							
+                            </div>							
                             <div class="col-md-6">
                                 <label for="Ordenamento">Ordenamento:</label>
 
@@ -189,29 +206,6 @@
 					
 					<div class="form-group">
                         <div class="row">		
-							<!--
-							<div class="col-md-2">
-                                <label for="DataInicio">Data - Início: *</label>
-                                <div class="input-group DatePicker">
-                                    <input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
-                                           autofocus name="DataInicio" value="<?php echo set_value('DataInicio', $query['DataInicio']); ?>">
-                                    <span class="input-group-addon" disabled>
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <label for="DataFim">Data - Fim: (opcional)</label>
-                                <div class="input-group DatePicker">
-                                    <input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
-                                           autofocus name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
-                                    <span class="input-group-addon" disabled>
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                            </div>
-							-->
-							<br>
 							<div class="col-md-4 text-left">
                                 <button class="btn btn-lg btn-primary " name="pesquisar" value="0" type="submit">
                                     <span class="glyphicon glyphicon-search"></span> Pesquisar

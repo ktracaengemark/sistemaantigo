@@ -7513,42 +7513,45 @@ exit();*/
 
         if ($data['DataFim']) {
             $consulta =
-                '(TF.DataTarefa >= "' . $data['DataInicio'] . '" AND TF.DataTarefa <= "' . $data['DataFim'] . '")';
+                '(TF.DataProcedimento >= "' . $data['DataInicio'] . '" AND TF.DataProcedimento <= "' . $data['DataFim'] . '")';
         }
         else {
             $consulta =
-                '(TF.DataTarefa >= "' . $data['DataInicio'] . '")';
+                '(TF.DataProcedimento >= "' . $data['DataInicio'] . '")';
         }
 
 		#$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'TF.DataPrazoTarefa' : $data['Campo'];
+        $data['Campo'] = (!$data['Campo']) ? 'TF.DataProcedimentoLimite' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
-		$data['NomeProfissional'] = ($data['NomeProfissional']) ? ' AND P.idApp_Profissional = ' . $data['NomeProfissional'] : FALSE;
-		$data['Profissional'] = ($data['Profissional']) ? ' AND P2.idApp_Profissional = ' . $data['Profissional'] : FALSE;
-		$data['ObsTarefa'] = ($data['ObsTarefa']) ? ' AND TF.idApp_Tarefa = ' . $data['ObsTarefa'] : FALSE;
-		$filtro5 = ($data['TarefaConcluida'] != '#') ? 'TF.TarefaConcluida = "' . $data['TarefaConcluida'] . '" AND ' : FALSE;
+		#$data['NomeProfissional'] = ($data['NomeProfissional']) ? ' AND P.idApp_Profissional = ' . $data['NomeProfissional'] : FALSE;
+		#$data['Profissional'] = ($data['Profissional']) ? ' AND P2.idApp_Profissional = ' . $data['Profissional'] : FALSE;
+		$data['Procedimento'] = ($data['Procedimento']) ? ' AND TF.idApp_Procedimento = ' . $data['Procedimento'] : FALSE;
+		$filtro5 = ($data['ConcluidoProcedimento'] != '#') ? 'TF.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
         $filtro6 = ($data['Prioridade'] != '#') ? 'TF.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
-		$filtro7 = ($data['Rotina'] != '#') ? 'TF.Rotina = "' . $data['Rotina'] . '" AND ' : FALSE;
+		$filtro8 = ($data['ConcluidoSubProcedimento'] != '#') ? 'SP.ConcluidoSubProcedimento = "' . $data['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
+		#$filtro7 = ($data['Rotina'] != '#') ? 'TF.Rotina = "' . $data['Rotina'] . '" AND ' : FALSE;
 
         $query = $this->db->query('
             SELECT
-				P.NomeProfissional,
-                TF.idApp_Tarefa,
-				TF.ObsTarefa,
-                TF.TarefaConcluida,
-                TF.DataTarefa,
+				
+                TF.idApp_Procedimento,
+				TF.Procedimento,
+                TF.ConcluidoProcedimento,
+                TF.DataProcedimento,
 				TF.Prioridade,
-				TF.Rotina,
-				TF.DataPrazoTarefa,
-				TF.DataConclusao
+				TF.DataProcedimentoLimite,
+				SP.SubProcedimento,
+				SP.ConcluidoSubProcedimento
             FROM
-                App_Tarefa AS TF
-					LEFT JOIN App_Profissional AS P ON P.idApp_Profissional = TF.ProfissionalTarefa
+                App_Procedimento AS TF
+				LEFT JOIN App_SubProcedimento AS SP ON SP.idApp_Procedimento = TF.idApp_Procedimento	
             WHERE
                 TF.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TF.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
 				TF.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $filtro5 . '
+				' . $filtro6 . '
+				' . $filtro8 . '
 				(' . $consulta . ')
             ORDER BY
 				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
@@ -7568,12 +7571,13 @@ exit();*/
 
             $somatarefa=0;
             foreach ($query->result() as $row) {
-				$row->DataTarefa = $this->basico->mascara_data($row->DataTarefa, 'barras');
-				$row->DataPrazoTarefa = $this->basico->mascara_data($row->DataPrazoTarefa, 'barras');
-				$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
-				$row->TarefaConcluida = $this->basico->mascara_palavra_completa($row->TarefaConcluida, 'NS');
-                $row->Prioridade = $this->basico->mascara_palavra_completa($row->Prioridade, 'NS');
-				$row->Rotina = $this->basico->mascara_palavra_completa($row->Rotina, 'NS');
+				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+				$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+				#$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
+				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+                $row->ConcluidoSubProcedimento = $this->basico->mascara_palavra_completa2($row->ConcluidoSubProcedimento, 'NS');
+				$row->Prioridade = $this->basico->prioridade($row->Prioridade, '123');
+				#$row->Rotina = $this->basico->mascara_palavra_completa($row->Rotina, 'NS');
             }
             $query->soma = new stdClass();
             $query->soma->somatarefa = number_format($somatarefa, 2, ',', '.');
@@ -8493,21 +8497,21 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-                OB.idApp_Tarefa,
-                OB.ObsTarefa
+                OB.idApp_Procedimento,
+                OB.Procedimento
             FROM
-                App_Tarefa AS OB
+                App_Procedimento AS OB
             WHERE
                 OB.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
 				OB.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
-                ObsTarefa ASC
+                Procedimento ASC
         ');
 
         $array = array();
         $array[0] = ':: Todos ::';
         foreach ($query->result() as $row) {
-            $array[$row->idApp_Tarefa] = $row->ObsTarefa;
+            $array[$row->idApp_Procedimento] = $row->Procedimento;
         }
 
         return $array;
@@ -8703,21 +8707,21 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-                OB.idApp_Procedtarefa,
-                OB.Procedtarefa
+                OB.idApp_SubProcedimento,
+                OB.SubProcedimento
             FROM
-                App_Procedtarefa AS OB
+                App_SubProcedimento AS OB
             WHERE
                 OB.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
 				OB.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
-                Procedtarefa ASC
+                SubProcedimento ASC
         ');
 
         $array = array();
         $array[0] = ':: Todos ::';
         foreach ($query->result() as $row) {
-            $array[$row->idApp_Procedtarefa] = $row->Procedtarefa;
+            $array[$row->idApp_SubProcedimento] = $row->SubProcedimento;
         }
 
         return $array;
