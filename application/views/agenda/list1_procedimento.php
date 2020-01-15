@@ -18,7 +18,8 @@
 							<th class="active">Pri.</th>
 							<th class="active">Cnl.</th>
 							<th class="active">Tarefa</th>
-							<th class="active">Limite</th>
+							<th class="active">Iniciar</th>
+							<th class="active">Concluir</th>
 							<th class="active">Comp.</th>
 							<th class="active">Usuario</th>
 							<th class="active">Excl</th>
@@ -53,6 +54,7 @@
 								echo '<td>' . $row['Prioridade'] . '</td>';
 								echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
 								echo '<td>' . $row['Procedimento'] . '</td>';
+								echo '<td>' . $row['DataProcedimento'] . '</td>';
 								echo '<td>' . $row['DataProcedimentoLimite'] . '</td>';
 								echo '<td>' . $row['Comp'] . '</td>';
 								echo '<td>' . $row['NomeUsuario'] . '</td>';

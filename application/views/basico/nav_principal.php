@@ -67,8 +67,6 @@
 								</button>
 								<ul class="dropdown-menu" role="menu">							
 									<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/tarefa"><span class="glyphicon glyphicon-pencil"></span> Estatística das Tarefas </a></li>
-									<li role="separator" class="divider"></li>
-									<li><a href="<?php echo base_url() ?>relatorio/rankingreceitas"><span class="glyphicon glyphicon-equalizer"></span> Estatística da Agenda</a></li>
 								</ul>
 							</div>							
 						</li>						

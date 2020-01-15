@@ -46,7 +46,7 @@
 			</a>			
 			<div class="btn-group">
 				<a type="button" class="btn btn-md btn-primary" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-					<span class="glyphicon glyphicon-filter"></span> Filtrar 
+					<span class="glyphicon glyphicon-filter"></span> Filtrar Tarefas
 				</a>
 				<button type="button" class="btn btn-md btn-primary dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<span class="caret"></span>

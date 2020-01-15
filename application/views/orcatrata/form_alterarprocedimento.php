@@ -17,8 +17,8 @@
 					<div class="panel panel-<?php echo $panel; ?>">
 						<div class="panel-heading">
 							<?php echo $titulo; ?>
-							<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>agenda" role="button">
-								<span class="glyphicon glyphicon-calendar"></span>Agenda
+							<a class="btn btn-md btn-info" href="<?php echo base_url() ?>agenda" role="button">
+								<span class="glyphicon glyphicon-calendar"></span> Agenda & Tarefas
 							</a>
 						</div>
 						<div class="panel-body">
@@ -45,8 +45,8 @@
 												<div class="panel panel-info">
 													<div class="panel-heading">
 														<div class="row">
-															<div class="col-md-4">
-																<label for="Procedimento<?php echo $i ?>">Procedimento:</label>
+															<div class="col-md-3">
+																<label for="Procedimento<?php echo $i ?>">Tarefa <?php echo $i ?>:</label>
 																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 															</div>
@@ -68,8 +68,8 @@
 																	?>
 																</select>
 															</div>
-															<div class="col-md-3">
-																<label for="DataProcedimento<?php echo $i ?>">Feito em:</label>
+															<div class="col-md-2">
+																<label for="DataProcedimento<?php echo $i ?>">Iniciar em:</label>
 																<div class="input-group <?php echo $datepicker; ?>">
 																	<span class="input-group-addon" disabled>
 																		<span class="glyphicon glyphicon-calendar"></span>
@@ -78,8 +78,8 @@
 																		   name="DataProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimento']; ?>">
 																</div>
 															</div>															
-															<div class="col-md-3">
-																<label for="DataProcedimentoLimite<?php echo $i ?>">Limite</label>
+															<div class="col-md-2">
+																<label for="DataProcedimentoLimite<?php echo $i ?>">Concluir em:</label>
 																<div class="input-group <?php echo $datepicker; ?>">
 																	<span class="input-group-addon" disabled>
 																		<span class="glyphicon glyphicon-calendar"></span>
@@ -87,10 +87,7 @@
 																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
 																		   name="DataProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimentoLimite']; ?>">
 																</div>
-															</div>															
-														</div>
-														<div class="row">
-															<div class="col-md-9"></div>
+															</div>
 															<div class="col-md-2">
 																<label for="ConcluidoProcedimento">Concluído? </label><br>
 																<div class="form-group">
@@ -119,13 +116,19 @@
 																	</div>
 																</div>
 															</div>
+															<!--
 															<div class="col-md-1">
 																<label><br></label><br>
 																<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
 																	<span class="glyphicon glyphicon-trash"></span>
 																</button>
 															</div>
-															<!--
+															-->
+														</div>
+														<!--
+														<div class="row">
+															<div class="col-md-9"></div>
+															
 															<div class="col-md-3">
 																<label for="idSis_Usuario<?php echo $i ?>">Profissional:</label>
 																<?php if ($i == 1) { ?>
@@ -144,8 +147,9 @@
 																	?>
 																</select>
 															</div>
-															-->
+															
 														</div>
+														-->
 													</div>
 												</div>
 											</div>
@@ -155,7 +159,7 @@
 											?>
 
 											</div>
-
+											<!--
 											<div class="form-group">
 												<div class="row">
 													<div class="col-md-4">
@@ -165,71 +169,70 @@
 													</div>
 												</div>
 											</div>
-
+											-->
 										</div>
 									
 									</div>
 								</div>
 							</div>
 														
-							<div class="form-group">
-								<div class="row">
-									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
-									<input type="hidden" name="idSis_Empresa" value="<?php echo $orcatrata['idSis_Empresa']; ?>">
-									<?php if ($metodo > 1) { ?>
-									<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
-									<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
-									<?php } ?>
-									<?php if ($metodo == 2) { ?>
+							<div class="row">
+								<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
+								<input type="hidden" name="idSis_Empresa" value="<?php echo $orcatrata['idSis_Empresa']; ?>">
+								<?php if ($metodo > 1) { ?>
+								<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
+								<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
+								<?php } ?>
+								<?php if ($metodo == 2) { ?>
 
-										<div class="col-md-6">
-											<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-												<span class="glyphicon glyphicon-save"></span> Salvar
-											</button>
-										</div>
-										<!--
-										<div class="col-md-6 text-right">
-											<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-												<span class="glyphicon glyphicon-trash"></span> Excluir
-											</button>
-										</div>
-										-->
-										<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header bg-danger">
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-														<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
+									<div class="col-md-6">
+										<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+											<span class="glyphicon glyphicon-save"></span> Salvar
+										</button>
+									</div>
+									<!--
+									<div class="col-md-6 text-right">
+										<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+											<span class="glyphicon glyphicon-trash"></span> Excluir
+										</button>
+									</div>
+									-->
+									<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header bg-danger">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
+												</div>
+												<div class="modal-body">
+													<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
+														Esta operação é irreversível.</p>
+												</div>
+												<div class="modal-footer">
+													<div class="col-md-6 text-left">
+														<button type="button" class="btn btn-warning" data-dismiss="modal">
+															<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+														</button>
 													</div>
-													<div class="modal-body">
-														<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
-															Esta operação é irreversível.</p>
-													</div>
-													<div class="modal-footer">
-														<div class="col-md-6 text-left">
-															<button type="button" class="btn btn-warning" data-dismiss="modal">
-																<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
-															</button>
-														</div>
-														<div class="col-md-6 text-right">
-															<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluir2/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
-																<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
-															</a>
-														</div>
+													<div class="col-md-6 text-right">
+														<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluir2/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
+															<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
+														</a>
 													</div>
 												</div>
 											</div>
 										</div>
-									<?php } else { ?>
-										<div class="col-md-6">
-											<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-												<span class="glyphicon glyphicon-save"></span> Salvar
-											</button>
-										</div>
+									</div>
+								<?php } else { ?>
+									<div class="col-md-6">
+										<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+											<span class="glyphicon glyphicon-save"></span> Salvar
+										</button>
+									</div>
 
-									<?php } ?>
-								</div>
+								<?php } ?>
 							</div>
+							
 
 							</form>
 

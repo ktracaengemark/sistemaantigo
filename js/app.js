@@ -996,22 +996,39 @@ function adicionaSubProcedimento() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-4">\
+						<div class="col-md-3">\
 							<label for="SubProcedimento'+pt+'">Ação:</label>\
 							<textarea class="form-control" id="SubProcedimento'+pt+'"\
 									  name="SubProcedimento'+pt+'"></textarea>\
 						</div>\
-						<div class="col-md-3">\
-							<label for="DataSubProcedimento'+pt+'">Data da Ação:</label>\
+						<div class="col-md-2">\
+							<label for="Prioridade'+pt+'">Prioridade:</label>\
+							<select data-placeholder="Selecione uma opção..." class="form-control"\
+									 id="listadinamicad'+pt+'" name="Prioridade'+pt+'">\
+								<option value="" checked>Alta</option>\
+							</select>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="DataSubProcedimento'+pt+'">Iniciar em:</label>\
 							<div class="input-group DatePicker">\
-								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
-									   name="DataSubProcedimento'+pt+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 								<span class="input-group-addon" disabled>\
 									<span class="glyphicon glyphicon-calendar"></span>\
 								</span>\
+								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataSubProcedimento'+pt+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 							</div>\
 						</div>\
-						<div class="col-md-3">\
+						<div class="col-md-2">\
+							<label for="DataSubProcedimentoLimite'+pt+'">Concluir em:</label>\
+							<div class="input-group DatePicker">\
+								<span class="input-group-addon" disabled>\
+									<span class="glyphicon glyphicon-calendar"></span>\
+								</span>\
+								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataSubProcedimentoLimite'+pt+'" value="">\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
 							<label for="ConcluidoSubProcedimento">Ação Concl.? </label><br>\
 							<div class="form-group">\
 								<div class="btn-group" data-toggle="buttons">\
@@ -1026,7 +1043,7 @@ function adicionaSubProcedimento() {
 								</div>\
 							</div>\
 						</div>\
-						<div class="col-md-2">\
+						<div class="col-md-1">\
 							<label><br></label><br>\
 							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\
 								<span class="glyphicon glyphicon-trash"></span>\
@@ -1045,14 +1062,14 @@ function adicionaSubProcedimento() {
 
     //request the JSON data and parse into the select element
     $.ajax({
-        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=3',
+        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=7',
         dataType: 'JSON',
         type: "GET",
         success: function (data) {
             //clear the current content of the select
             $select.html('');
             //iterate over the data and append a select option
-            $select.append('<option value="">-- Selecione uma opção --</option>');
+            //$select.append('<option value="">-- Selecione uma opção --</option>');
             $.each(data, function (key, val) {
                 //alert(val.id);
                 if (val.id == chosen)

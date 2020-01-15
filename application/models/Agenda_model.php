@@ -600,10 +600,11 @@ class Agenda_model extends CI_Model {
 				P.idSis_EmpresaCli = "0" AND
 				' . $filtro4 . '
 				' . $filtro5 . '
-				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . '				
+				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
+				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ')	
 				' . $data['Procedimento'] . ') OR
 				P.Compartilhar = ' . $_SESSION['log']['id'] . ' OR
-				(P.Compartilhar = 47 AND
+				(P.Compartilhar = 51 AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ')
             ORDER BY
                 P.ConcluidoProcedimento ASC,

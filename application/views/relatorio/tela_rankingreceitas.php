@@ -2,13 +2,13 @@
 
 <div class="col-sm-offset-2 col-md-8 ">	
 	<?php echo validation_errors(); ?>
-	<div class="panel panel-primary">
+	<div class="panel panel-info">
 		<div class="panel-heading">
 			<div class="btn-group " role="group" aria-label="...">
 				<div class="row text-left">	
 					<div class="col-md-12">
-						<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-							<span class="glyphicon glyphicon-filter"></span> Receitas
+						<button  class="btn btn-md btn-primary" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+							<span class="glyphicon glyphicon-filter"></span> Filtrar Receitas
 						</button>
 					</div>
 				</div>	
