@@ -62,7 +62,7 @@
 			</a>
 			<br>
 			<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
-				<span class="glyphicon glyphicon-search"></span> Produtos & Serviços
+				<span class="glyphicon glyphicon-home"></span> Empresas
 			</a>
 
 		</div>
