@@ -25,6 +25,7 @@ $permissao = ($_SESSION['log']['Permissao'] >= 3 ) ? 'AND A.idSis_Usuario = ' . 
 $permissao3 = ($_SESSION['log']['idSis_Empresa'] != 5 ) ? 'AND A.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  ' : FALSE;
 
 $permissao1 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'OR R.CelularCliente = ' . $_SESSION['log']['CelularUsuario'] . '  ' : FALSE;
+$permissao4 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'OR U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . '  ' : FALSE;
 $permissao2 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'U.CpfUsuario = ' . $_SESSION['log']['CpfUsuario'] . ' OR ' : FALSE;																																			
 
 $result = mysql_query(
@@ -60,7 +61,7 @@ $result = mysql_query(
             Sis_Usuario AS U 
 				LEFT JOIN App_Agenda AS A ON A.idSis_Usuario = U.idSis_Usuario,
 				
-            App_Consulta AS C
+			App_Consulta AS C
                 LEFT JOIN App_Cliente AS R ON R.idApp_Cliente = C.idApp_Cliente
                 LEFT JOIN App_ContatoCliente AS D ON D.idApp_ContatoCliente = C.idApp_ContatoCliente
                 
@@ -68,11 +69,14 @@ $result = mysql_query(
 				LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = C.idSis_Empresa
         WHERE
 			A.idApp_Agenda = C.idApp_Agenda AND
-			((C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
+			((
+				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
 				' . $query . ' 
 				' . $permissao . '
 				' . $permissao3 . ' ) 
-			' . $permissao1 . ')
+				' . $permissao1 . '
+				' . $permissao4 . '
+				)
 		ORDER BY 
 			C.DataInicio ASC'
 );
