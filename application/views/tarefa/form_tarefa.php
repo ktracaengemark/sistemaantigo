@@ -47,8 +47,8 @@
 								<div class="row">
 									<div class="col-md-4">
 										<label for="Procedimento">Tarefa:</label>
-										<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?>
-											autofocus name="Procedimento"><?php echo $tarefa['Procedimento']; ?></textarea>
+										<input type="text" class="form-control" id="Procedimento" <?php echo $readonly; ?> maxlength="20"
+											autofocus name="Procedimento" value="<?php echo $tarefa['Procedimento'] ?>">
 									</div>								
 									<!--
 									<div class="col-md-3">
@@ -150,9 +150,6 @@
 							</div>	
 						</div>		
 					</div>
-
-						<hr>
-						
 					
 					<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
 						<div class="panel panel-primary">
@@ -279,8 +276,6 @@
 						</div>
 					</div>
 
-					<hr>
-
 					<div class="form-group">
 						<div class="row">
 							<!--
@@ -370,8 +365,6 @@
 							-->
 						</div>					
 					</div>
-
-					<hr>
 
 					<div class="form-group">
 						<div class="row">

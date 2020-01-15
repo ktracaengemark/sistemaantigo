@@ -33,8 +33,9 @@
                                     ?>
                                 </select>
                             </div>
+							-->
 							<div class="col-md-2">
-                                <label for="Ordenamento">Tarefa / Missão</label>
+                                <label for="Ordenamento">Tarefa</label>
                                 <select data-placeholder="Selecione uma opção..." class="form-control Chosen"
                                         id="Procedimento" name="Procedimento">
                                     <?php
@@ -48,7 +49,7 @@
                                     ?>
                                 </select>
                             </div>
-							-->
+							
                             <div class="col-md-2">
                                 <label for="Prioridade">Prioridade</label>
                                 <select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -204,7 +205,7 @@
 						</div>	
 					</div>
 					
-					<div class="form-group">
+					
                         <div class="row">		
 							<div class="col-md-4 text-left">
                                 <button class="btn btn-lg btn-primary " name="pesquisar" value="0" type="submit">
@@ -222,7 +223,7 @@
 									</a>															
 							</div>
                         </div>						
-                    </div>
+                    
                     </form>
                     <br>
                     <?php echo (isset($list)) ? $list : FALSE ?>

@@ -7531,7 +7531,8 @@ exit();*/
 		$filtro8 = ($data['ConcluidoSubProcedimento'] != '#') ? 'SP.ConcluidoSubProcedimento = "' . $data['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
 		#$filtro7 = ($data['Rotina'] != '#') ? 'TF.Rotina = "' . $data['Rotina'] . '" AND ' : FALSE;
 
-        $query = $this->db->query('
+        
+		$query = $this->db->query('
             SELECT
 				
                 TF.idApp_Procedimento,
@@ -7553,6 +7554,7 @@ exit();*/
 				' . $filtro6 . '
 				' . $filtro8 . '
 				(' . $consulta . ')
+				' . $data['Procedimento'] . ' 
             ORDER BY
 				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');
@@ -8495,17 +8497,20 @@ exit();*/
 
 	public function select_obstarefa() {
 
-        $query = $this->db->query('
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OB.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+        
+		$query = $this->db->query('
             SELECT
                 OB.idApp_Procedimento,
                 OB.Procedimento
             FROM
                 App_Procedimento AS OB
             WHERE
-                OB.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                ' . $permissao . '
+				OB.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
 				OB.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
-                Procedimento ASC
+                OB.Procedimento ASC
         ');
 
         $array = array();

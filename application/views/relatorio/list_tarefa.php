@@ -36,6 +36,9 @@
 					<tbody>
 
 						<?php
+						$cont_sim = 0;
+						$cont_nao = 0;
+						$cont_nao_infor = 0;
 						foreach ($report->result_array() as $row) {
 
 							#echo '<tr>';
@@ -55,15 +58,46 @@
 								#echo '<td>' . $row['Profissional'] . '</td>';							
 								#echo '<td>' . $row['DataSubProcedimento'] . '</td>';
 							echo '</tr>';
+							
+							if($row['ConcluidoSubProcedimento'] == 'Sim')
+								$cont_sim++;
+							else if ($row['ConcluidoSubProcedimento'] == 'Não')
+								$cont_nao++;
+							else 
+								$cont_nao_infor++;
 						}
 						?>
 
 					</tbody>
 
 				</table>
+				
+				<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+				<script type="text/javascript">
+				  google.charts.load('current', {'packages':['corechart']});
+				  google.charts.setOnLoadCallback(drawChart);
 
+				  function drawChart() {
+
+					var data = google.visualization.arrayToDataTable([
+
+					["Concluido", "Quantidade", { role: "style" } ],
+					["Sim", <?php echo $cont_sim; ?>, "#b87333"],
+					["Não", <?php echo $cont_nao; ?>, "silver"],
+					["Nao Inform", <?php echo $cont_nao_infor; ?>, "color: #e5e4e2"]
+					]);
+
+					var options = {
+					  title: 'Teste de Concluido'
+					};
+
+					var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+					chart.draw(data, options);
+				  }
+				</script>
+				<div id="piechart" style="width: 900px; height: 500px;"></div>
 			</div>
-
 		</div>
 	</div>
 </div>
