@@ -680,16 +680,18 @@ class Orcatrata_model extends CI_Model {
             FROM
 				App_Procedimento AS P
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
+					LEFT JOIN Sis_Usuario AS AU ON AU.idSis_Usuario = P.Compartilhar
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = P.idSis_Empresa
+					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
 			WHERE 
 
-				((P.idSis_Empresa = ' . $data . '  AND
-				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' ) OR
-				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' )AND
 				' . $permissao1 . '
 				' . $permissao6 . '
 				' . $permissao7 . '
-				P.idApp_OrcaTrata = "0" AND
-				P.idApp_Cliente = "0" 
+				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
+				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR	
+				P.Compartilhar = ' . $_SESSION['log']['id'] . ' OR
+				(P.Compartilhar = 51 AND P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '))
 			ORDER BY
 				P.ConcluidoProcedimento,
 				P.Prioridade ASC,

@@ -23,7 +23,6 @@
 							<th class="active">Comp.</th>
 							<th class="active">Usuario</th>
 							<th class="active">Excl</th>
-							<!--<th class="active">Data</th>-->
 						</tr>
 					</thead>
 
@@ -58,7 +57,6 @@
 								echo '<td>' . $row['DataProcedimentoLimite'] . '</td>';
 								echo '<td>' . $row['Comp'] . '</td>';
 								echo '<td>' . $row['NomeUsuario'] . '</td>';
-								#echo '<td>' . $row['DataProcedimento'] . '</td>';
 								echo '<td class="notclickable">
 										<a class="btn btn-sm btn-danger notclickable" href="' . base_url() . 'tarefa/excluir/' . $row['idApp_Procedimento'] . '">
 											<span class="glyphicon glyphicon-trash notclickable"></span>

@@ -106,9 +106,9 @@ class Agenda extends CI_Controller {
 		$data['select']['Campo'] = array(
 			'P.Prioridade' => 'Prioridade',			
 			'P.ConcluidoProcedimento' => 'Concl.',
-			'P.DataProcedimentoLimite' => 'Limite/ Retorno',
-			'P.DataProcedimento' => 'Cadastro',
-            'P.idApp_Procedimento' => 'id',
+			'P.DataProcedimento' => 'Iniciar em',
+			'P.DataProcedimentoLimite' => 'Concluir em',
+
         );
 
         $data['select']['Ordenamento'] = array(
@@ -133,7 +133,8 @@ class Agenda extends CI_Controller {
 		$data['select']['NomeEmpresa'] = $this->Agenda_model->select_empresarec();
 		$data['select']['NomeEmpresaCli'] = $this->Agenda_model->select_empresaenv();
         $data['select']['NomeUsuario'] = $this->Agenda_model->select_usuario();
-		$data['select']['Procedimento'] = $this->Agenda_model->select_procedimento();
+		$data['select']['Procedimento'] = $this->Agenda_model->select_tarefa();
+		#$data['select']['Procedimento'] = $this->Agenda_model->select_procedimento();
 		$data['select']['Compartilhar'] = $this->Agenda_model->select_compartilhar();
 		
         $data['titulo1'] = 'Tarefas';

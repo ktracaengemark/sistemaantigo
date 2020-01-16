@@ -553,6 +553,40 @@ class Agenda_model extends CI_Model {
 
         return $array;
     }
+
+	public function select_tarefa() {
+
+		$query = $this->db->query('
+            SELECT
+                P.idApp_Procedimento,
+                P.Procedimento
+            FROM
+				App_Procedimento AS P
+					LEFT JOIN App_SubProcedimento AS SP ON SP.idApp_Procedimento = P.idApp_Procedimento
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
+					LEFT JOIN Sis_Usuario AS AU ON AU.idSis_Usuario = P.Compartilhar
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = P.idSis_Empresa
+					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
+					LEFT JOIN Tab_Prioridade AS PR ON PR.idTab_Prioridade = P.Prioridade
+            WHERE
+
+				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
+				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
+				P.Compartilhar = ' . $_SESSION['log']['id'] . ' OR
+				(P.idSis_Usuario = ' . $_SESSION['log']['id'] . ') OR
+				(P.Compartilhar = 51 AND P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '))
+            ORDER BY
+                P.Procedimento ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idApp_Procedimento] = $row->Procedimento;
+        }
+
+        return $array;
+    }
 	
 	public function list1_procedimento($data, $completo) {
 
@@ -560,8 +594,8 @@ class Agenda_model extends CI_Model {
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'P.DataProcedimento' : $data['Campo'];
-        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
+        $data['Campo'] = (!$data['Campo']) ? 'P.Prioridade' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$filtro4 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Prioridade']) ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
 		$data['ConcluidoProcedimento'] = ($data['ConcluidoProcedimento'] != '') ? ' AND P.ConcluidoProcedimento = ' . $data['ConcluidoProcedimento'] : FALSE;
@@ -594,20 +628,17 @@ class Agenda_model extends CI_Model {
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
 					LEFT JOIN Tab_Prioridade AS PR ON PR.idTab_Prioridade = P.Prioridade
             WHERE
-                (P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.idApp_OrcaTrata = "0" AND
-				P.idApp_Cliente = "0" AND
-				P.idSis_EmpresaCli = "0" AND
+
 				' . $filtro4 . '
 				' . $filtro5 . '
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
-				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ')	
-				' . $data['Procedimento'] . ') OR
+				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR	
 				P.Compartilhar = ' . $_SESSION['log']['id'] . ' OR
-				(P.Compartilhar = 51 AND
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ')
+				(P.Compartilhar = 51 AND P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '))
+				' . $data['Procedimento'] . '
             ORDER BY
-                P.ConcluidoProcedimento ASC,
+				P.ConcluidoProcedimento ASC,
+				P.DataProcedimento DESC,
 				' . $data['Campo'] . '
 				' . $data['Ordenamento'] . '
 				

@@ -5188,13 +5188,13 @@ class Relatorio extends CI_Controller {
         $this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
 
         $data['select']['ConcluidoProcedimento'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
 			'N' => 'Não',
             'S' => 'Sim',
         );
 
         $data['select']['Prioridade'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
 			'1' => 'Alta',
             '2' => 'Media',
             '3' => 'Baixa',
@@ -5207,22 +5207,17 @@ class Relatorio extends CI_Controller {
         );
 */
 		$data['select']['ConcluidoSubProcedimento'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
         );
 
         $data['select']['Campo'] = array(
-           # 'C.NomeCliente' => 'Nome do Cliente',
-			'TF.DataProcedimentoLimite' => 'Prazo da Tarefa',
-			'TF.DataProcedimento' => 'Data do Tarefa',
-			#'TF.ProfissionalTarefa' => 'Responsável',
-			'TF.idApp_Procedimento' => 'Número do Tarefas',
-			'TF.Procedimento' => 'Tarefa',
-			#'TF.Rotina' => 'Rotina',
-			'TF.Prioridade' => 'Prioridade',
-			'TF.ConcluidoProcedimento' => 'Tarefa Concl.?',
-			'TF.DataConclusao' => 'Data da Concl.',
+			'P.DataProcedimento' => 'Iniciar em:',
+			'P.DataProcedimentoLimite' => 'Concluir em:',
+			'P.Prioridade' => 'Prioridade',
+			'P.ConcluidoProcedimento' => 'Tarefa Concl.?',			
+			'P.Procedimento' => 'Tarefa',
         );
 
         $data['select']['Ordenamento'] = array(
@@ -5232,10 +5227,10 @@ class Relatorio extends CI_Controller {
 
         #$data['select']['NomeProfissional'] = $this->Relatorio_model->select_profissional3();
 		#$data['select']['Profissional'] = $this->Relatorio_model->select_profissional2();
-		$data['select']['Procedimento'] = $this->Relatorio_model->select_obstarefa();
+		$data['select']['Procedimento'] = $this->Relatorio_model->select_tarefa();
 		$data['select']['SubProcedimento'] = $this->Relatorio_model->select_procedtarefa();
 
-        $data['titulo'] = 'Funcionários & Tarefas';
+        $data['titulo'] = 'Tarefas';
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
