@@ -19,6 +19,7 @@
 	<div class="col-md-2 "></div>
 	<div class="col-md-5 ">
 		<div class="row">
+			<!--
 			<label class="sr-only">Empresa</label>
 			<select data-placeholder="Selecione uma opção..." class="form-control" id="idSis_Empresa" name="idSis_Empresa">			
 				<option value="">Selecione sua Empresa</option>
@@ -32,8 +33,12 @@
 					}
 				}
 				?>   
-			</select> 
+			</select>
 			<?php echo form_error('idSis_Empresa'); ?>
+			-->
+			<label class="sr-only">Empresa</label>
+			<input type="text" id="inputText" class="form-control" placeholder=" XXX  'Número da Empresa'" autofocus name="idSis_Empresa" value="<?php echo set_value('idSis_Empresa'); ?>">	   
+			<?php echo form_error('idSis_Empresa'); ?>			
 			<label class="sr-only">Celular do Usuário</label>
 			<input type="text" id="inputText" maxlength="11" class="form-control" placeholder="Celular Usuário (xx)999999999" autofocus name="CelularUsuario" value="<?php echo set_value('CelularUsuario'); ?>">	   
 			<?php echo form_error('CelularUsuario'); ?>
@@ -49,14 +54,14 @@
 			<!--
 			<a class="btn btn btn-primary btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button"><span class="glyphicon glyphicon-log-in"></span> Acesso Conta Admin.</a>	
 			-->
+			<br>			
+			<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
+				<span class="glyphicon glyphicon-home"></span> Empresas
+			</a>			
 			<br>
 			<a class="btn btn-md btn-success  btn-block" href="<?php echo base_url(); ?>login/index3" role="button">
 				<span class="glyphicon glyphicon-plus"></span> Cadastrar Nova Conta
 			</a>
-			<br>			
-			<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
-				<span class="glyphicon glyphicon-home"></span> Empresas
-			</a>		
 		</div>	
 	</div>	
 </div>

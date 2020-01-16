@@ -57,14 +57,13 @@
 			</a>
 			-->
 			<br>
+			<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
+				<span class="glyphicon glyphicon-home"></span> Empresas
+			</a>			
+			<br>
 			<a class="btn btn-md btn-success  btn-block" href="<?php echo base_url(); ?>login/index3" role="button">
 				<span class="glyphicon glyphicon-plus"></span> Cadastrar Nova Conta
 			</a>
-			<br>
-			<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
-				<span class="glyphicon glyphicon-home"></span> Empresas
-			</a>
-
 		</div>
 	</div>	
 </div>
