@@ -2538,8 +2538,9 @@ class Relatorio_model extends CI_Model {
     }
 	
     public function list_balancoanual($data) {
-
-        ####################################################################
+		$filtro4 = ($data['Quitado']) ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
+        $permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		####################################################################
         #SOMATÓRIO DAS RECEITAS Pago DO ANO
         $somareceitas='';
         for ($i=1;$i<=12;$i++){
@@ -2547,9 +2548,7 @@ class Relatorio_model extends CI_Model {
                 LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
         }
         $somareceitas = substr($somareceitas, 0 ,-2);
-		
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-        
+
 		$query['RecPago'] = $this->db->query(
         #$receitas = $this->db->query(
             'SELECT
@@ -2565,13 +2564,13 @@ class Relatorio_model extends CI_Model {
 				' . $permissao . '
 				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" AND
-				PR.Quitado = "S" AND
+				' . $filtro4 . '
             	YEAR(PR.DataVencimento) = ' . $data['Ano']
         );
 
         #$query['RecPago'] = $query['RecPago']->result_array();
         $query['RecPago'] = $query['RecPago']->result();
-        $query['RecPago'][0]->Balancopago = 'Recebeu';
+        $query['RecPago'][0]->Balancopago = 'Receitas';
 
         ####################################################################
         #SOMATÓRIO DAS RECEITAS À Pagar DO ANO
@@ -2581,9 +2580,7 @@ class Relatorio_model extends CI_Model {
                 LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
         }
         $somareceitaspagar = substr($somareceitaspagar, 0 ,-2);
-		
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-        
+       
 		$query['RecPagar'] = $this->db->query(
         #$receitas = $this->db->query(
             'SELECT
@@ -2599,7 +2596,7 @@ class Relatorio_model extends CI_Model {
 				' . $permissao . '
 				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" AND
-				PR.Quitado = "N" AND
+				' . $filtro4 . '
             	YEAR(PR.DataVencimento) = ' . $data['Ano']
         );
 
@@ -2615,8 +2612,6 @@ class Relatorio_model extends CI_Model {
                 LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
         }
         $somareceitasvenc = substr($somareceitasvenc, 0 ,-2);
-
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		
         $query['RecVenc'] = $this->db->query(
         #$receitas = $this->db->query(
@@ -2632,6 +2627,7 @@ class Relatorio_model extends CI_Model {
 				' . $permissao . '
 				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" AND
+				' . $filtro4 . '
             	YEAR(PR.DataVencimento) = ' . $data['Ano']
         );
 
@@ -2644,12 +2640,10 @@ class Relatorio_model extends CI_Model {
         #SOMATÓRIO DAS DESPESAS PAGAS DO ANO
         $somadespesas='';
         for ($i=1;$i<=12;$i++){
-            $somadespesas .= 'SUM(IF(PP.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PP.ValorParcela, 0)) AS M' . $i . ', ';
+            $somadespesas .= 'SUM(IF(PR.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
         }
         $somadespesas = substr($somadespesas, 0 ,-2);
-
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		
         $query['DesPago'] = $this->db->query(
         #$despesas = $this->db->query(
@@ -2658,31 +2652,29 @@ class Relatorio_model extends CI_Model {
             FROM
                 App_OrcaTrata AS OT
                     LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
-					LEFT JOIN App_Parcelas AS PP ON OT.idApp_OrcaTrata = PP.idApp_OrcaTrata
+					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $permissao . '
 				OT.idTab_TipoRD = "1" AND
-				PP.idTab_TipoRD = "1" AND
-				PP.Quitado = "S" AND				
-            	YEAR(PP.DataVencimento) = ' . $data['Ano']
+				PR.idTab_TipoRD = "1" AND
+				' . $filtro4 . '				
+            	YEAR(PR.DataVencimento) = ' . $data['Ano']
         );
 
         #$query['DesPago'] = $query['DesPago']->result_array();
         $query['DesPago'] = $query['DesPago']->result();
-        $query['DesPago'][0]->Balancopago = 'Pagou';
+        $query['DesPago'][0]->Balancopago = 'Despesas';
 
         ####################################################################
         #SOMATÓRIO DAS DESPESAS À PAGAR DO ANO
         $somadespesaspagar='';
         for ($i=1;$i<=12;$i++){
-            $somadespesaspagar .= 'SUM(IF(PP.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PP.ValorParcela, 0)) AS M' . $i . ', ';
+            $somadespesaspagar .= 'SUM(IF(PR.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
         }
         $somadespesaspagar = substr($somadespesaspagar, 0 ,-2);
-
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
 		
         $query['DesPagar'] = $this->db->query(
         #$despesas = $this->db->query(
@@ -2691,15 +2683,15 @@ class Relatorio_model extends CI_Model {
             FROM
                 App_OrcaTrata AS OT
                     LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
-					LEFT JOIN App_Parcelas AS PP ON OT.idApp_OrcaTrata = PP.idApp_OrcaTrata
+					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $permissao . '
 				OT.idTab_TipoRD = "1" AND
-				PP.idTab_TipoRD = "1" AND
-				PP.Quitado = "N" AND				
-            	YEAR(PP.DataVencimento) = ' . $data['Ano']
+				PR.idTab_TipoRD = "1" AND
+				' . $filtro4 . '				
+            	YEAR(PR.DataVencimento) = ' . $data['Ano']
         );
 
         #$query['DesPagar'] = $query['DesPagar']->result_array();
@@ -2710,13 +2702,11 @@ class Relatorio_model extends CI_Model {
         #SOMATÓRIO DAS DESPESAS Venc DO ANO
         $somadespesasvenc='';
         for ($i=1;$i<=12;$i++){
-            $somadespesasvenc .= 'SUM(IF(PP.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
-                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PP.ValorParcela, 0)) AS M' . $i . ', ';
+            $somadespesasvenc .= 'SUM(IF(PR.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+                LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
         }
         $somadespesasvenc = substr($somadespesasvenc, 0 ,-2);
 
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
-		
         $query['DesVenc'] = $this->db->query(
         #$despesas = $this->db->query(
             'SELECT
@@ -2724,14 +2714,15 @@ class Relatorio_model extends CI_Model {
             FROM
                 App_OrcaTrata AS OT
                     LEFT JOIN Sis_Usuario AS C ON C.idSis_Usuario = OT.idSis_Usuario
-					LEFT JOIN App_Parcelas AS PP ON OT.idApp_OrcaTrata = PP.idApp_OrcaTrata
+					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $permissao . '
 				OT.idTab_TipoRD = "1" AND
-				PP.idTab_TipoRD = "1" AND
-            	YEAR(PP.DataVencimento) = ' . $data['Ano']
+				PR.idTab_TipoRD = "1" AND
+				' . $filtro4 . '
+            	YEAR(PR.DataVencimento) = ' . $data['Ano']
         );
 
         #$query['DesVenc'] = $query['DesVenc']->result_array();

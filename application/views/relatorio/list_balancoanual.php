@@ -39,7 +39,18 @@
 							$mes[11] = "Nov";
 							$mes[12] = "Dez";
 							$i = 1;
+							
+							if($_SESSION['FiltroBalanco']['Quitado'] == 'S')
+								$status = 'Todas as Receitas e Despesas "Pagas"';
+							else if ($_SESSION['FiltroBalanco']['Quitado'] == 'N')
+								$status = 'Todas as Receitas e Despesas "NAO Pagas"';
+							else if ($_SESSION['FiltroBalanco']['Quitado'] == '0')
+								$status = 'Todas as Receitas e Despesas "Pagas & Nao Pagas"';
+							else 
+								$status = 'Todas as Receitas e Despesas "Pagas & Nao Pagas"';
+							
 							?>
+						<!--
 						<tr>
 							<?php
 							echo '<td><b>' . $report['RecPagar'][0]->Balancopagar . '</b></td>';
@@ -62,7 +73,7 @@
 							echo '<td class="text-right ' . $bgcolor . '">' . $report['TotalGeralpagar']->DesPagar . '</td>';
 							?>
 						</tr>
-						
+						-->
 						<tr>
 							<?php
 							echo '<td><b>' . $report['RecPago'][0]->Balancopago . '</b></td>';
@@ -121,7 +132,7 @@
 					var options = {
 					  chart: {
 						title: 'Performance - <?php echo '' . $_SESSION['FiltroBalanco']['Ano'] . '' ?>',
-						//subtitle: 'Receitas, Despesas, e Lucro: <?php echo '' . $_SESSION['FiltroBalanco']['Ano'] . '' ?>',
+						subtitle: '<?php echo $status ?>',
 					  },
 					  vAxis: {format: 'decimal'},
 							width: 700,

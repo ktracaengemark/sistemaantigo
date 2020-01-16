@@ -2295,7 +2295,8 @@ class Relatorio extends CI_Controller {
 			'Quitado',
 			'Modalidade',
         ), TRUE));
-
+		
+		$_SESSION['FiltroBalanco']['Quitado'] = $data['query']['Quitado'];
         $_SESSION['FiltroBalanco']['Diavenc'] = $data['query']['Diavenc'];
         $_SESSION['FiltroBalanco']['Mesvenc'] = $data['query']['Mesvenc'];
         $_SESSION['FiltroBalanco']['Ano'] = $data['query']['Ano'];
@@ -2319,9 +2320,9 @@ class Relatorio extends CI_Controller {
         );
 
 		$data['select']['Quitado'] = array(
-			'0' => 'TODOS',
-			'N' => 'Não',
-            'S' => 'Sim',
+			'0' => 'TODAS',
+			'S' => 'Pagas',
+			'N' => 'Não Pagas',
         );
 		
 		$data['select']['Modalidade'] = array(
