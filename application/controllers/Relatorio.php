@@ -1895,9 +1895,9 @@ class Relatorio extends CI_Controller {
         );
 
 		$data['select']['Quitado'] = array(
-			'0' => 'TODAS as Receitas',
-			'N' => 'Receitas NÃO Pagas',
-            'S' => 'Receitas Pagas',
+			'0' => 'TODAS',
+			'S' => 'Pagas',
+			'N' => 'NÃO Pagas',
         );
 		
 		$data['select']['Modalidade'] = array(
@@ -2128,9 +2128,9 @@ class Relatorio extends CI_Controller {
         );
 
 		$data['select']['Quitado'] = array(
-			'0' => 'TODAS as Despesas',
-			'N' => 'Despesas NÃO Pagas',
-            'S' => 'Despesas Pagas',
+			'0' => 'TODAS',
+			'S' => 'Pagas',
+			'N' => 'NÃO Pagas',
         );
 		
 		$data['select']['Modalidade'] = array(
