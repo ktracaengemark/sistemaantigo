@@ -1,10 +1,13 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="col-md-6">	
+			<div class="col-md-4">	
 				<div id="piechart" style="width: auto; height: 300px;"></div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-4">
+				<div id="piechart3" style="width: auto; height: 300px;"></div>
+			</div>			
+			<div class="col-md-4">
 				<div id="piechart2" style="width: auto; height: 300px;"></div>
 			</div>
 		</div>		
@@ -44,6 +47,9 @@
 					$cont_sim = 0;
 					$cont_nao = 0;
 					$cont_nao_infor = 0;
+					$cont_sim2 = 0;
+					$cont_nao2 = 0;
+					$cont_nao_infor2 = 0;
 					foreach ($report->result_array() as $row) {
 						
 						#echo '<tr>';
@@ -73,6 +79,13 @@
 							$cont_nao++;
 						else 
 							$cont_nao_infor++;
+						
+						if($row['ConcluidoProcedimento'] == 'Sim')
+							$cont_sim2++;
+						else if ($row['ConcluidoProcedimento'] == 'Não')
+							$cont_nao2++;
+						else 
+							$cont_nao_infor2++;
 					}
 					?>
 
@@ -107,9 +120,6 @@
 				chart.draw(data, options);
 			  }
 			</script>
-				
-			
-			<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 			<script type="text/javascript">
 			  google.charts.load('current', {'packages':['corechart']});
 			  google.charts.setOnLoadCallback(drawChart);
@@ -125,7 +135,7 @@
 				]);
 
 				var options = {
-				  title: 'Porcentagem da Conclusão'
+				  title: 'Porcentagem das Sub-Tarefas Concluidas'
 				};
 
 				var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
@@ -133,6 +143,30 @@
 				chart.draw(data, options);
 			  }
 			</script>
+			<script type="text/javascript">
+			  google.charts.load('current', {'packages':['corechart']});
+			  google.charts.setOnLoadCallback(drawChart);
+
+			  function drawChart() {
+
+				var data = google.visualization.arrayToDataTable([
+
+				["Concluido", "Quantidade", { role: "style" } ],
+				["Sim", <?php echo $cont_sim2; ?>, "#b87333"],
+				["Não", <?php echo $cont_nao2; ?>, "silver"],
+				["Nao Inform", <?php echo $cont_nao_infor2; ?>, "color: #e5e4e2"]
+				]);
+
+				var options = {
+				  title: 'Porcentagem das Tarefas Concluidas'
+				};
+
+				var chart = new google.visualization.PieChart(document.getElementById('piechart3'));
+
+				chart.draw(data, options);
+			  }
+			</script>			
+			
 		</div>
 	</div>
 </div>

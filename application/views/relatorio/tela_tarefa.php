@@ -35,7 +35,22 @@
 			<div class="modal-footer">
 				<div class="form-group">	
 					<div class="row text-left">
-						<div class="col-md-3">
+						<div class="col-md-4 text-left">
+							<label for="Ordenamento">Categoria:</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+									id="Categoria" name="Categoria">
+								<?php
+								foreach ($select['Categoria'] as $key => $row) {
+									if ($query['Categoria'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+						<div class="col-md-4">
 							<label for="Ordenamento">Tarefa</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 									id="Procedimento" name="Procedimento">
@@ -50,7 +65,7 @@
 								?>
 							</select>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<label for="Prioridade">Prioridade</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 									id="Prioridade" name="Prioridade">
@@ -65,7 +80,7 @@
 								?>
 							</select>
 						</div>						
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<label for="ConcluidoProcedimento">Tarefa Concluída</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 									id="ConcluidoProcedimento" name="ConcluidoProcedimento">
@@ -80,7 +95,7 @@
 								?>
 							</select>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<label for="ConcluidoSubProcedimento">Ação Concluída</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 									id="ConcluidoSubProcedimento" name="ConcluidoSubProcedimento">
@@ -96,6 +111,7 @@
 							</select>
 						</div>
 					</div>
+					
 					<div class="row text-left">
 						<br>
 						<div class="form-group col-md-4">
@@ -114,7 +130,7 @@
 						</div>
 					</div>					
 					<div class="row text-left">
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<label for="DataInicio">Data Início:</label>
 							<div class="input-group DatePicker">
 								<span class="input-group-addon" disabled>
@@ -125,7 +141,7 @@
 								
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-4">
 							<label for="DataFim">Data Fim:</label>
 							<div class="input-group DatePicker">
 								<span class="input-group-addon" disabled>

@@ -7601,6 +7601,7 @@ exit();*/
 		$filtro5 = ($data['ConcluidoProcedimento'] != '0') ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
         $filtro6 = ($data['Prioridade'] != '0') ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;		
 		$filtro8 = ($data['ConcluidoSubProcedimento'] != '0') ? 'SP.ConcluidoSubProcedimento = "' . $data['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
+		$filtro9 = ($data['Categoria'] != '0') ? 'P.Categoria = "' . $data['Categoria'] . '" AND ' : FALSE;
 		#$data['ConcluidoProcedimento'] = ($data['ConcluidoProcedimento'] != '') ? ' AND P.ConcluidoProcedimento = ' . $data['ConcluidoProcedimento'] : FALSE;
 		#$data['Prioridade'] = ($data['Prioridade'] != '') ? ' AND P.Prioridade = ' . $data['Prioridade'] : FALSE;
 		$data['Procedimento'] = ($data['Procedimento']) ? ' AND P.idApp_Procedimento = ' . $data['Procedimento'] : FALSE;
@@ -7639,6 +7640,7 @@ exit();*/
 				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro8 . '
+				' . $filtro9 . '
 				(' . $consulta . ') AND
 				((U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ') OR
@@ -8647,6 +8649,34 @@ exit();*/
         $array[0] = ':: Todos ::';
         foreach ($query->result() as $row) {
             $array[$row->idApp_Procedimento] = $row->Procedimento;
+        }
+
+        return $array;
+    }
+
+    public function select_categoria() {
+		
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+        
+		$query = $this->db->query('
+            SELECT
+                C.idTab_Categoria,
+                C.Categoria
+            FROM
+                Tab_Categoria AS C
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = C.idSis_Usuario
+            WHERE
+				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
+				(C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' )
+            ORDER BY
+                C.Categoria ASC
+        ');
+
+        $array = array();
+        $array[0] = '::Todos::';
+        foreach ($query->result() as $row) {
+			$array[$row->idTab_Categoria] = $row->Categoria;
         }
 
         return $array;

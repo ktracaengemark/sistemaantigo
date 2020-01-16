@@ -5173,6 +5173,7 @@ class Relatorio extends CI_Controller {
             'Campo',
             'ConcluidoProcedimento',
             'Prioridade',
+			'Categoria',
 			#'Rotina',
 			'ConcluidoSubProcedimento',
 			'Procedimento',
@@ -5195,7 +5196,7 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['Prioridade'] = array(
-            '0' => 'TODOS',
+            '0' => '::Todos::',
 			'1' => 'Alta',
             '2' => 'Media',
             '3' => 'Baixa',
@@ -5228,6 +5229,7 @@ class Relatorio extends CI_Controller {
 
         #$data['select']['NomeProfissional'] = $this->Relatorio_model->select_profissional3();
 		#$data['select']['Profissional'] = $this->Relatorio_model->select_profissional2();
+		$data['select']['Categoria'] = $this->Relatorio_model->select_categoria();
 		$data['select']['Procedimento'] = $this->Relatorio_model->select_tarefa();
 		$data['select']['SubProcedimento'] = $this->Relatorio_model->select_procedtarefa();
 
@@ -5245,6 +5247,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['Campo'] = $data['query']['Campo'];
             $data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
             $data['bd']['Prioridade'] = $data['query']['Prioridade'];
+			$data['bd']['Categoria'] = $data['query']['Categoria'];
 			#$data['bd']['Rotina'] = $data['query']['Rotina'];
 			$data['bd']['ConcluidoSubProcedimento'] = $data['query']['ConcluidoSubProcedimento'];
 			$data['bd']['Procedimento'] = $data['query']['Procedimento'];
