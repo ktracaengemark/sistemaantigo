@@ -206,4 +206,26 @@ class Tarefa_model extends CI_Model {
         return (isset($query[0]['NomeProfissional'])) ? $query[0]['NomeProfissional'] : FALSE;
     }
 
+	public function select_categoria() {
+		$query = $this->db->query('
+            SELECT
+				CP.idTab_Categoria,
+				CP.Categoria
+            FROM
+				Tab_Categoria AS CP
+					
+            WHERE
+                CP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				CP.idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
+			ORDER BY 
+				CP.Categoria ASC
+        ');
+
+        $array = array();	
+        foreach ($query->result() as $row) {
+            $array[$row->idTab_Categoria] = $row->Categoria;
+        }
+
+        return $array;
+    }
 }

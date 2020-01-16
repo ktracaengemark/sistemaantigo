@@ -46,6 +46,10 @@ class Tarefa extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
+
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $data['tarefa'] = quotes_to_entities($this->input->post(array(
             #### App_Procedimento ####
@@ -56,6 +60,7 @@ class Tarefa extends CI_Controller {
             'ConcluidoProcedimento',
 			'Prioridade',
 			'Compartilhar',
+			'Categoria',
 			#'ProfissionalProcedimento',
             #'Rotina',
             #'DataConclusao',
@@ -96,14 +101,18 @@ class Tarefa extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### App_Procedimento ####
-        $this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'required|trim|valid_date');
+        $this->form_validation->set_rules('Procedimento', 'Tarefa', 'required|trim');
+		$this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'trim|valid_date');
         $this->form_validation->set_rules('DataProcedimentoLimite', 'Concluir em', 'trim|valid_date');
-        #$this->form_validation->set_rules('ProfissionalProcedimento', 'Profissional', 'required|trim');
+        $this->form_validation->set_rules('Categoria', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         #$data['select']['Rotina'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['Compartilhar'] = $this->Procedimento_model->select_compartilhar();
+		$data['select']['Categoria'] = $this->Tarefa_model->select_categoria();
 		$data['select']['Prioridade'] = array (
             '1' => 'Alta',
             '2' => 'Média',
@@ -124,7 +133,14 @@ class Tarefa extends CI_Controller {
         else
             $data['tratamentosin'] = '';
 
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+			
         #Ver uma solução melhor para este campo
         (!$data['tarefa']['ConcluidoProcedimento']) ? $data['tarefa']['ConcluidoProcedimento'] = 'N' : FALSE;
 
@@ -157,6 +173,8 @@ class Tarefa extends CI_Controller {
             $this->load->view('tarefa/form_tarefa', $data);
         } else {
 
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
+			
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_Procedimento ####
             $data['tarefa']['DataProcedimento'] = $this->basico->mascara_data($data['tarefa']['DataProcedimento'], 'mysql');
@@ -228,6 +246,10 @@ class Tarefa extends CI_Controller {
         else
             $data['msg'] = '';
 
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+		
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if ($_SESSION['log']['idSis_Empresa'] != 5)
 			$data['tarefa'] = quotes_to_entities($this->input->post(array(
@@ -238,6 +260,7 @@ class Tarefa extends CI_Controller {
 				'DataProcedimentoLimite',
 				'ConcluidoProcedimento',
 				'Prioridade',
+				'Categoria',				
 				'Compartilhar',
 				#'ProfissionalProcedimento',
 				#'Rotina',
@@ -253,6 +276,7 @@ class Tarefa extends CI_Controller {
 				'DataProcedimentoLimite',
 				'ConcluidoProcedimento',
 				'Prioridade',
+				'Categoria',
 				#'ProfissionalProcedimento',
 				#'Rotina',
 				#'DataConclusao',
@@ -319,14 +343,18 @@ class Tarefa extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### App_Procedimento ####
-        $this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'required|trim|valid_date');        
+        $this->form_validation->set_rules('Procedimento', 'Tarefa', 'required|trim');
+		$this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'trim|valid_date');        
 		$this->form_validation->set_rules('DataProcedimentoLimite', 'Concluir em', 'trim|valid_date');      
-        #$this->form_validation->set_rules('ProfissionalProcedimento', 'Profissional', 'required|trim');
+        $this->form_validation->set_rules('Categoria', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();        
         #$data['select']['Rotina'] = $this->Basico_model->select_status_sn();        
         $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['Compartilhar'] = $this->Procedimento_model->select_compartilhar();
+		$data['select']['Categoria'] = $this->Tarefa_model->select_categoria();
 		$data['select']['Prioridade'] = array (
             '1' => 'Alta',
             '2' => 'Média',
@@ -348,7 +376,14 @@ class Tarefa extends CI_Controller {
         else
             $data['tratamentosin'] = '';
 
-
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+			
         #Ver uma solução melhor para este campo
         (!$data['tarefa']['ConcluidoProcedimento']) ? $data['tarefa']['ConcluidoProcedimento'] = 'N' : FALSE;
 
@@ -380,6 +415,8 @@ class Tarefa extends CI_Controller {
             $this->load->view('tarefa/form_tarefa', $data);
         } else {
 
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
+			
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_Procedimento ####
             $data['tarefa']['DataProcedimento'] = $this->basico->mascara_data($data['tarefa']['DataProcedimento'], 'mysql');
@@ -388,7 +425,7 @@ class Tarefa extends CI_Controller {
             #$data['tarefa']['DataRetorno'] = $this->basico->mascara_data($data['tarefa']['DataRetorno'], 'mysql');
 			#$data['tarefa']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             #$data['tarefa']['idSis_Usuario'] = $_SESSION['log']['id'];
-            $data['tarefa']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+            #$data['tarefa']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['update']['tarefa']['anterior'] = $this->Tarefa_model->get_tarefa($data['tarefa']['idApp_Procedimento']);
             $data['update']['tarefa']['campos'] = array_keys($data['tarefa']);
