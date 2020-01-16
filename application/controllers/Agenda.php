@@ -60,6 +60,7 @@ class Agenda extends CI_Controller {
 			'Prioridade',
 			'Procedimento',
 			'Compartilhar',
+			'Categoria',
 			
         ), TRUE));
 
@@ -68,6 +69,7 @@ class Agenda extends CI_Controller {
         $_SESSION['FiltroAlteraProcedimento']['Ano'] = $data['query']['Ano'];
 		$_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
         $_SESSION['FiltroAlteraProcedimento']['Prioridade'] = $data['query']['Prioridade'];
+		$_SESSION['FiltroAlteraProcedimento']['Categoria'] = $data['query']['Categoria'];
 		$_SESSION['FiltroAlteraProcedimento']['Procedimento'] = $data['query']['Procedimento'];
 		$_SESSION['FiltroAlteraProcedimento']['Diacli'] = $data['query']['Diacli'];
         $_SESSION['FiltroAlteraProcedimento']['Mesvenccli'] = $data['query']['Mesvenccli'];
@@ -134,7 +136,7 @@ class Agenda extends CI_Controller {
 		$data['select']['NomeEmpresaCli'] = $this->Agenda_model->select_empresaenv();
         $data['select']['NomeUsuario'] = $this->Agenda_model->select_usuario();
 		$data['select']['Procedimento'] = $this->Agenda_model->select_tarefa();
-		#$data['select']['Procedimento'] = $this->Agenda_model->select_procedimento();
+		$data['select']['Categoria'] = $this->Agenda_model->select_categoria();
 		$data['select']['Compartilhar'] = $this->Agenda_model->select_compartilhar();
 		
         $data['titulo1'] = 'Tarefas';
@@ -151,7 +153,8 @@ class Agenda extends CI_Controller {
 			$data['bd']['Prioridade'] = $data['query']['Prioridade'];
 			$data['bd']['Procedimento'] = $data['query']['Procedimento'];
 			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
-
+			$data['bd']['Categoria'] = $data['query']['Categoria'];
+			
             $data['report'] = $this->Agenda_model->list1_procedimento($data['bd'],TRUE);
 
             /*

@@ -209,16 +209,17 @@ class Tarefa_model extends CI_Model {
 	public function select_categoria() {
 		$query = $this->db->query('
             SELECT
-				CP.idTab_Categoria,
-				CP.Categoria
+                C.idTab_Categoria,
+                C.Categoria
             FROM
-				Tab_Categoria AS CP
-					
+                Tab_Categoria AS C
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = C.idSis_Usuario
             WHERE
-                CP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				CP.idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
-			ORDER BY 
-				CP.Categoria ASC
+				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
+				(C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' )
+            ORDER BY
+                C.Categoria ASC
         ');
 
         $array = array();	

@@ -62,12 +62,20 @@ class Categoria_model extends CI_Model {
 
     public function lista_categoria($x) {
 
-        $query = $this->db->query('SELECT * '
-                . 'FROM Tab_Categoria '
-                . 'WHERE '
-                . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
-                . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' '
-                . 'ORDER BY Abrev ASC ');
+        $query = $this->db->query('
+            SELECT
+                C.idTab_Categoria,
+                C.Categoria
+            FROM
+                Tab_Categoria AS C
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = C.idSis_Usuario
+            WHERE
+				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
+				(C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' )
+            ORDER BY
+                C.Categoria ASC 
+		');
 
         /*
           echo $this->db->last_query();

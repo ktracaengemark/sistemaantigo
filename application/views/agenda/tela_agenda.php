@@ -88,7 +88,22 @@
 					<div class="modal-footer">
 						<div class="form-group">	
 							<div class="row">	
-								<div class="col-md-4 text-left">
+								<div class="col-md-3 text-left">
+									<label for="Ordenamento">Categoria:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="Categoria" name="Categoria">
+										<?php
+										foreach ($select['Categoria'] as $key => $row) {
+											if ($query['Categoria'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								<div class="col-md-3 text-left">
 									<label for="Ordenamento">Tarefa:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 											id="Procedimento" name="Procedimento">

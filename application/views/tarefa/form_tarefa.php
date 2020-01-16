@@ -213,6 +213,7 @@
 											</div>
 										</div>
 									</div>									
+									<!--
 									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 									<div class="col-md-3 " >
 										<label for="Compartilhar">Compartilhar:</label>
@@ -231,6 +232,7 @@
 										</select>
 									</div>
 									<?php } ?>
+									-->
 								</div>
 							</div>	
 						</div>		
