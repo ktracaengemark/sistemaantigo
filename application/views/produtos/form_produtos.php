@@ -140,19 +140,19 @@
 																					
 								<div class="col-md-6 text-left" id="Aprovado" <?php echo $div['Aprovado']; ?>>
 									<label></label><br>
-									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux3/cadastrar3" role="button"> 
+									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux32/cadastrar3" role="button"> 
 										<span class="glyphicon glyphicon-plus"></span> Cat.
 									</a>
 									<label></label>
-									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux2/cadastrar3/" role="button"> 
+									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux22/cadastrar3/" role="button"> 
 										<span class="glyphicon glyphicon-plus"></span> Tipo
 									</a>
 									<label></label>
-									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux1/cadastrar3/" role="button"> 
+									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux12/cadastrar3/" role="button"> 
 										<span class="glyphicon glyphicon-plus"></span> Esp
 									</a>
 									<label></label>
-									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>fornecedor/cadastrar3/" role="button"> 
+									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>fornecedor2/cadastrar3/" role="button"> 
 										<span class="glyphicon glyphicon-plus"></span> Fornec
 									</a>
 									<label></label>									
