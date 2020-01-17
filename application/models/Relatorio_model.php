@@ -8154,6 +8154,7 @@ exit();*/
 				P.ConcluidoProcedimento,
 				P.Prioridade,
 				P.Compartilhar,
+				CT.Categoria,
 				SP.SubProcedimento,
 				SP.ConcluidoSubProcedimento,				
 				SP.DataSubProcedimento,
@@ -8166,7 +8167,7 @@ exit();*/
 					LEFT JOIN Sis_Usuario AS AU ON AU.idSis_Usuario = P.Compartilhar
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = P.idSis_Empresa
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
-
+					LEFT JOIN Tab_Categoria AS CT ON CT.idTab_Categoria = P.Categoria
             WHERE
 
 				' . $filtro5 . '

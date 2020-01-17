@@ -25,6 +25,7 @@
 					
 					<tr>                       											
 						<th class="active">Nº</th>
+						<th class="active">Categoria</th>
 						<th class="active">Tarefa</th>																	                       
 						<th class="active">Prioridade</th>
 						<th class="active">Tarefa Concl.?</th>
@@ -54,8 +55,9 @@
 						
 						#echo '<tr>';
 						echo '<tr class="clickable-row" data-href="' . base_url() . 'tarefa/alterar/' . $row['idApp_Procedimento'] . '">';
-						   
+							
 							echo '<td>' . $row['idApp_Procedimento'] . '</td>';
+							echo '<td>' . $row['Categoria'] . '</td>';
 							echo '<td>' . $row['Procedimento'] . '</td>';
 							echo '<td>' . $row['Prioridade'] . '</td>';
 							echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';

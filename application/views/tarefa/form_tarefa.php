@@ -112,12 +112,19 @@
 										
 									</div>
 									<div class="col-md-2">
+										<label  for="Procedimento">Tarefa:</label>
+										<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?> maxlength="40"
+												  name="Procedimento"><?php echo $tarefa['Procedimento']; ?></textarea>
+									<?php echo form_error('Procedimento'); ?>
+									</div>									
+									<!--
+									<div class="col-md-2">
 										<label for="Procedimento">Tarefa:</label>
 										<input type="text" class="form-control" id="Procedimento" <?php echo $readonly; ?> maxlength="20"
 											autofocus name="Procedimento" value="<?php echo $tarefa['Procedimento'] ?>">
-									<?php echo form_error('Procedimento'); ?>
+									
 									</div>								
-									<!--
+									
 									<div class="col-md-3">
 										<label for="ProfissionalProcedimento">Responsável da Procedimento:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
