@@ -18,7 +18,7 @@ class OrcatrataPrintDesp extends CI_Controller {
 
         #load header view
         $this->load->view('basico/header');
-        #$this->load->view('basico/nav_principal');
+        $this->load->view('basico/nav_principal');
         #$this->load->view('basico/nav_impressaodesp');
         #$this->load->view('orcatrata/nav_secundario');
     }

@@ -1,7 +1,6 @@
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
 	<div class="container-fluid">
 		<div class="row">
-
 			<div class="col-md-12 ">
 				<div class="navbar-header ">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar1">
