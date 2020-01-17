@@ -1,8 +1,8 @@
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
   <div class="container-fluid">
 		<li class="navbar-form">
-			<a <?php if (preg_match("/relatorio\/fornecedor3\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-				<a href="<?php echo base_url() . 'relatorio/fornecedor3/'; ?>">
+			<a <?php if (preg_match("/relatorio2\/fornecedor3\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+				<a href="<?php echo base_url() . 'relatorio2/fornecedor3/'; ?>">
 					<button type="button" class="btn btn-lg btn-info ">
 						<span class="glyphicon glyphicon-search"></span> Pesquisar
 					</button>										
@@ -294,7 +294,7 @@
 													</button>
 												</div>
 												<div class="col-md-6 text-right">
-													<a class="btn btn-danger" href="<?php echo base_url() . 'fornecedor/excluir/' . $query['idApp_Fornecedor'] ?>" role="button">
+													<a class="btn btn-danger" href="<?php echo base_url() . 'fornecedor2/excluir/' . $query['idApp_Fornecedor'] ?>" role="button">
 														<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 													</a>
 												</div>

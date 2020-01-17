@@ -2919,6 +2919,89 @@ class Relatorio extends CI_Controller {
 
     }
 
+    public function estoque2() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = quotes_to_entities($this->input->post(array(
+            'Produtos',
+            'CodProd',			
+            'DataInicio',
+            'DataFim',
+			'Prodaux1',
+			'Prodaux2',
+			'Prodaux3',
+			'Ordenamento',
+            'Campo',
+        ), TRUE));
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+        #$this->form_validation->set_rules('DataInicio', 'Data Inicio', 'trim|valid_date');
+        #$this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
+
+        $data['select']['Campo'] = array(
+			'TP.Produtos' => 'Produto',	
+			'TP.Prodaux3' => 'Categoria',
+			'TP.Prodaux2' => 'Tipo',
+			'TP.Prodaux1' => 'Esp.',
+			'TP.CodProd' => 'Código',
+			'TP.TipoProduto' => 'V/C/A',
+			#'TP.Categoria' => 'Prod/Serv',
+			#'TP.Prodaux1' => 'Aux1',
+        );
+
+        $data['select']['Ordenamento'] = array(
+            'ASC' => 'Crescente',
+            'DESC' => 'Decrescente',
+        );
+
+
+        $data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
+		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
+		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
+		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+
+
+        $data['titulo'] = 'Relatório de Estoque';
+
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+
+            $data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+            $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+			$data['bd']['Produtos'] = $data['query']['Produtos'];
+			$data['bd']['CodProd'] = $data['query']['CodProd'];			
+			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
+			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
+			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+            $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+
+            $data['report'] = $this->Relatorio_model->list_estoque($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              #exit();
+              #*/
+
+            $data['list'] = $this->load->view('relatorio/list_estoque2', $data, TRUE);
+            //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+        }
+
+        $this->load->view('relatorio/tela_estoque2', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+
 	public function rankingvendas() {
 
 	if ($this->input->get('m') == 1)
@@ -3223,7 +3306,7 @@ class Relatorio extends CI_Controller {
 
 }
 
-    public function estoque2() {
+    public function estoque_BKP() {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);

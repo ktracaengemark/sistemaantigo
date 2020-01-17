@@ -28,7 +28,7 @@
 						foreach ($report->result_array() as $row) {
 
 							#echo '<tr>';
-							echo '<tr class="clickable-row" data-href="' . base_url() . 'produtos/alterar2/' . $row['idTab_Produto'] . '">';
+							echo '<tr class="clickable-row" data-href="' . base_url() . 'produtos2/alterar2/' . $row['idTab_Produto'] . '">';
 								#echo '<td>' . $row['idTab_Produto'] . '</td>';
 								echo '<td>' . $row['CodProd'] . '</td>';
 								echo '<td>' . $row['Produtos'] . '</td>';
@@ -69,7 +69,7 @@
 						foreach ($report->result_array() as $row) {
 
 							#echo '<tr>';
-							echo '<tr class="clickable-row" data-href="' . base_url() . 'produtos/alterar2/' . $row['idTab_Produto'] . '">';
+							echo '<tr class="clickable-row" data-href="' . base_url() . 'produtos2/alterar2/' . $row['idTab_Produto'] . '">';
 								#echo '<td>' . $row['idTab_Produto'] . '</td>';
 								echo '<td>' . $row['CodProd'] . '</td>';
 								echo '<td>' . $row['Prodaux3'] . '</td>';								
@@ -123,7 +123,7 @@
 						foreach ($report->result_array() as $row) {
 
 							#echo '<tr>';
-							echo '<tr class="clickable-row" data-href="' . base_url() . 'produtos/alterar2/' . $row['idTab_Produto'] . '">';
+							echo '<tr class="clickable-row" data-href="' . base_url() . 'produtos2/alterar2/' . $row['idTab_Produto'] . '">';
 								#echo '<td>' . $row['idTab_Produto'] . '</td>';
 								echo '<td>' . $row['CodProd'] . '</td>';
 								echo '<td>' . $row['Prodaux3'] . '</td>';

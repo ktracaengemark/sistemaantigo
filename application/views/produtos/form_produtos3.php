@@ -1,21 +1,17 @@
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
 	<div class="container-fluid">
 		<li class="navbar-form">
-
-				<a <?php if (preg_match("/relatorio\/produtos2\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-					<a href="<?php echo base_url() . 'relatorio/produtos2/'; ?>">
-						<button type="button" class="btn btn-lg btn-info ">
-							<span class="glyphicon glyphicon-search"></span> Pesquisar
-						</button>										
-					</a>
+			<div class="btn-group " role="group" aria-label="...">
+				<a type="button" class="btn btn-warning btn-lg" href="<?php echo base_url() ?>relatorio2/produtos2" role="button">
+					<span class="glyphicon glyphicon-usd"></span>Valores
 				</a>
-
-				<a href="javascript:window.close()">
-					<button type="button" class="btn btn-lg btn-default ">
-						<span class="glyphicon glyphicon-remove"></span> Fechar
-					</button>
+				<a type="button" class="btn btn-success btn-lg" href="<?php echo base_url() ?>relatorio2/estoque2" role="button">
+					<span class="glyphicon glyphicon-gift"></span>Estoque
+				</a>				
+				<a type="button" class="btn btn-lg btn-default " href="javascript:window.close()">
+					<span class="glyphicon glyphicon-remove"></span>Fechar
 				</a>
-						
+			</div>
 		</li>		
 	</div>
 </nav>
@@ -29,7 +25,7 @@
 	<div class="panel panel-<?php echo $panel; ?>">
 		<div class="panel-heading">
 			<?php echo $titulo; ?> Produtos
-			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/produtos2" role="button">
+			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio2/produtos2" role="button">
 				<span class="glyphicon glyphicon-search"></span> Produtos Cadastrados
 			</a>
 			<!--
@@ -133,19 +129,19 @@
 																					
 								<div class="col-md-6 text-left" id="Aprovado" <?php echo $div['Aprovado']; ?>>
 									<label></label><br>
-									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux3/cadastrar3" role="button"> 
+									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux32/cadastrar3" role="button"> 
 										<span class="glyphicon glyphicon-plus"></span> Cat.
 									</a>
 									<label></label>
-									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux2/cadastrar3/" role="button"> 
+									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux22/cadastrar3/" role="button"> 
 										<span class="glyphicon glyphicon-plus"></span> Tipo
 									</a>
 									<label></label>
-									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux1/cadastrar3/" role="button"> 
+									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux12/cadastrar3/" role="button"> 
 										<span class="glyphicon glyphicon-plus"></span> Esp
 									</a>
 									<label></label>
-									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>fornecedor/cadastrar3/" role="button"> 
+									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>fornecedor2/cadastrar3/" role="button"> 
 										<span class="glyphicon glyphicon-plus"></span> Fornec
 									</a>
 									<label></label>									
@@ -321,7 +317,7 @@
 											</button>
 										</div>
 										<div class="col-md-6 text-right">
-											<a class="btn btn-danger" href="<?php echo base_url() . 'produtos/excluir/' . $produtos['idTab_Produto'] ?>" role="button">
+											<a class="btn btn-danger" href="<?php echo base_url() . 'produtos2/excluir/' . $produtos['idTab_Produto'] ?>" role="button">
 												<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 											</a>
 										</div>
@@ -346,207 +342,3 @@
 	</div>
 
 </div>	
-
-<?php echo form_open('relatorio/produtos', 'role="form"'); ?>
-<div class="modal fade bs-excluir-modal5-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-	<div class="modal-dialog modal-md" role="document">
-		<div class="modal-content">
-			<div class="modal-header bg-danger">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Produtos</h4>
-			</div>
-			<div class="modal-footer">
-				
-				<div class="row text-left">
-					
-					<div class="col-md-6">
-						<label for="Ordenamento">Desccrição</label>
-						<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-								id="Produtos" name="Produtos">
-							<?php
-							foreach ($select['Produtos'] as $key => $row) {
-								if ($query['Produtos'] == $key) {
-									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-								} else {
-									echo '<option value="' . $key . '">' . $row . '</option>';
-								}
-							}
-							?>
-						</select>
-					</div>
-
-					<div class="col-md-6">
-						<label for="Ordenamento">Ordenamento:</label>
-
-						<div class="form-group">
-							<div class="row">
-								<div class="col-md-6">
-									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-											id="Campo" name="Campo">
-										<?php
-										foreach ($select['Campo'] as $key => $row) {
-											if ($query['Campo'] == $key) {
-												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-												echo '<option value="' . $key . '">' . $row . '</option>';
-											}
-										}
-										?>
-									</select>
-								</div>
-
-								<div class="col-md-6">
-									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-											id="Ordenamento" name="Ordenamento">
-										<?php
-										foreach ($select['Ordenamento'] as $key => $row) {
-											if ($query['Ordenamento'] == $key) {
-												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-												echo '<option value="' . $key . '">' . $row . '</option>';
-											}
-										}
-										?>
-									</select>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-				<div class="row text-left">
-					<div class="col-md-4">
-						<label for="Ordenamento">Categoria</label>
-						<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-								id="Prodaux33" name="Prodaux33">
-							<?php
-							foreach ($select['Prodaux33'] as $key => $row) {
-								if ($query['Prodaux33'] == $key) {
-									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-								} else {
-									echo '<option value="' . $key . '">' . $row . '</option>';
-								}
-							}
-							?>
-						</select>
-					</div>
-					<div class="col-md-4">
-						<label for="Ordenamento">Aux1</label>
-						<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-								id="Prodaux1" name="Prodaux1">
-							<?php
-							foreach ($select['Prodaux1'] as $key => $row) {
-								if ($query['Prodaux1'] == $key) {
-									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-								} else {
-									echo '<option value="' . $key . '">' . $row . '</option>';
-								}
-							}
-							?>
-						</select>
-					</div>
-					<div class="col-md-4">
-						<label for="Ordenamento">Aux2</label>
-						<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-								id="Prodaux2" name="Prodaux2">
-							<?php
-							foreach ($select['Prodaux2'] as $key => $row) {
-								if ($query['Prodaux2'] == $key) {
-									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-								} else {
-									echo '<option value="' . $key . '">' . $row . '</option>';
-								}
-							}
-							?>
-						</select>
-					</div>
-				</div>
-				<?php } ?>
-				<div class="row text-left">
-					<br>
-					<div class="form-group col-md-4">
-						<div class="form-footer ">
-							<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
-								<span class="glyphicon glyphicon-filter"></span> Filtrar
-							</button>
-						</div>
-					</div>
-					<!--
-					<div class="form-group col-md-4">
-						<div class="form-footer">		
-							<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/estoque" role="button">
-								<span class="glyphicon glyphicon-search"></span> Estoque
-							</a>
-						</div>	
-					</div>
-					-->
-					<div class="form-group col-md-4">
-						<div class="form-footer">		
-							<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm">
-								<span class="glyphicon glyphicon-plus"></span> Novo Produto
-							</button>							
-						</div>	
-					</div>					
-					<div class="form-group col-md-4">
-						<div class="form-footer ">
-							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-								<span class="glyphicon glyphicon-remove"></span> Fechar
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>									
-		</div>								
-	</div>
-</div>
-
-<div class="modal fade bs-excluir-modal4-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header bg-danger">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Evite cadastrar Produtos REPETIDOS!<br>
-										"Pesquise" os Produtos Cadastradas!</h4>
-			</div>
-			<!--
-			<div class="modal-body">
-				<p>Pesquise os Produtos Cadastrados!!</p>
-			</div>
-			-->
-			<div class="modal-footer">
-				<div class="form-group col-md-4 text-left">
-					<div class="form-footer">
-						<button  class="btn btn-info btn-block"" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-							<span class="glyphicon glyphicon-search"></span> Pesquisar
-						</button>
-					</div>
-				</div>
-				<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 6 )) { ?>
-				<div class="form-group col-md-4 text-right">
-					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar1" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Produtos
-						</a>
-					</div>	
-				</div>
-				<?php } else {?>
-				<div class="form-group col-md-4 text-right">
-					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Produtos
-						</a>
-					</div>	
-				</div>
-				<?php } ?>
-				<div class="form-group col-md-4">
-					<div class="form-footer ">
-						<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-							<span class="glyphicon glyphicon-remove"></span> Fechar
-						</button>
-					</div>
-				</div>									
-			</div>
-		</div>
-	</div>
-</div>

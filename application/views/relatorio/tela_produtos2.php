@@ -1,19 +1,65 @@
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
 	<div class="container-fluid">
-		<li class="navbar-form" >
-			<div class="btn-group " role="group" aria-label="...">
-				<a>
-					<button  class="btn btn-danger btn-lg" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-						<span class="glyphicon glyphicon-plus"></span> Novo Produto
-					</button>
-				</a>
-				<a href="javascript:window.close()">
-					<button type="button" class="btn btn-lg btn-default ">
-						<span class="glyphicon glyphicon-remove"></span> Fechar
-					</button>
-				</a>
-			</div>				
-		</li>
+		<div class="navbar-header ">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+			</button>
+			<a type="button" class="navbar-toggle btn btn-lg btn-primary  " href="javascript:window.close()">
+				<span class="glyphicon glyphicon-remove"></span> Fechar
+			</a>			
+			<!--
+			<a class="navbar-brand" href="<?php echo base_url() ?>usuario2/prontuario/<?php echo $_SESSION['log']['id']; ?>"> 
+				 <?php echo $_SESSION['log']['Nome2']; ?>./<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
+			</a>
+			-->
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">		
+			<!--
+			<li class="navbar-form" >
+				
+					<a  type="button" class="btn btn-danger btn-lg" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+						<span class="glyphicon glyphicon-plus"></span>Novo
+					</a>
+					<a type="button" class="btn btn-success btn-lg" href="<?php echo base_url() ?>relatorio/estoque2" role="button">
+						<span class="glyphicon glyphicon-gift"></span>Estoque
+					</a>
+					<a type="button" class="btn btn-lg btn-default " href="javascript:window.close()">
+						<span class="glyphicon glyphicon-remove"></span>Fechar
+					</a>
+								
+			</li>
+			-->
+			<ul class="nav navbar-nav navbar-center">
+				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
+					<div class="btn-group " role="group" aria-label="...">
+						<a  type="button" class="btn btn-danger btn-lg" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+							<span class="glyphicon glyphicon-plus"></span>Novo
+						</a>						
+						<!--
+						<a href="<?php echo base_url(); ?>agenda">
+							<button type="button" class="btn btn-lg btn-info ">
+								<span class="glyphicon glyphicon-calendar"></span>Agendas
+							</button>
+						</a>
+						-->
+					</div>					
+				</li>
+				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
+					<div class="btn-group " role="group" aria-label="...">
+						<a type="button" class="btn btn-success btn-lg" href="<?php echo base_url() ?>relatorio2/estoque2" role="button">
+							<span class="glyphicon glyphicon-gift"></span>Estoque
+						</a>						
+					</div>					
+				</li>
+				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
+					<div class="btn-group " role="group" aria-label="...">
+						<a type="button" class="btn btn-lg btn-default " href="javascript:window.close()">
+							<span class="glyphicon glyphicon-remove"></span>Fechar
+						</a>
+					</div>					
+				</li>				
+			</ul>			
+		</div>
 	</div>
 </nav>	
 <br>
@@ -23,17 +69,17 @@
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<span class="glyphicon glyphicon-usd"></span> Produtos & Valores
+			<!--<span class="glyphicon glyphicon-usd"></span> Produtos & Valores-->
 			<div class="btn-group " role="group" aria-label="...">
 				<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-					<span class="glyphicon glyphicon-filter"></span>Filtros
+					<span class="glyphicon glyphicon-filter"></span>Filtrar Valores
 				</button>
 			</div>			
 		</div>		
 		<?php echo (isset($list)) ? $list : FALSE ?>	
 	</div>
 </div>
-<?php echo form_open('relatorio/produtos2', 'role="form"'); ?>
+<?php echo form_open('relatorio2/produtos2', 'role="form"'); ?>
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content">
@@ -47,7 +93,7 @@
 						<div class="col-md-12">
 							<label for="Ordenamento">Produto</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-									id="Produtos" name="Produtos">
+									id="Produtos" autofocus name="Produtos">
 								<?php
 								foreach ($select['Produtos'] as $key => $row) {
 									if ($query['Produtos'] == $key) {
@@ -154,27 +200,18 @@
 					<br>
 					<div class="form-group col-md-4">
 						<div class="form-footer ">
-							<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+							<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
 								<span class="glyphicon glyphicon-filter"></span> Filtrar
 							</button>
 						</div>
 					</div>
-					<!--
 					<div class="form-group col-md-4">
 						<div class="form-footer">		
-							<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/estoque" role="button">
-								<span class="glyphicon glyphicon-search"></span> Estoque
+							<a class="btn btn-success btn-block" href="<?php echo base_url() ?>relatorio2/estoque2" role="button">
+								<span class="glyphicon glyphicon-gift"></span> Estoque
 							</a>
 						</div>	
 					</div>
-					-->
-					<div class="form-group col-md-4">
-						<div class="form-footer">		
-							<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-								<span class="glyphicon glyphicon-plus"></span> Novo Produto
-							</button>							
-						</div>	
-					</div>					
 					<div class="form-group col-md-4">
 						<div class="form-footer ">
 							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
@@ -212,16 +249,16 @@
 				<?php if ($_SESSION['log']['TabelasEmpresa'] == 1) { ?>
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar3" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Produtos
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos2/cadastrar3" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Novo
 						</a>
 					</div>	
 				</div>
 				<?php } else {?>
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar2" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Produtos
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos2/cadastrar2" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Novo
 						</a>
 					</div>	
 				</div>

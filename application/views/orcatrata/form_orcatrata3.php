@@ -148,7 +148,7 @@
 														</div>
 																											
 														<div class="col-md-7 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-															<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>cliente/cadastrar3/" role="button"> 
+															<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>cliente2/cadastrar3/" role="button"> 
 																<span class="glyphicon glyphicon-plus"></span>Cliente
 															</a>
 															
@@ -180,7 +180,7 @@
 											<div class="col-md-4">
 												<label for="Descricao">Descrição:</label><br>
 												<input type="text" class="form-control" maxlength="200"
-														name="Descricao" value="<?php echo $orcatrata['Descricao'] ?>">
+														autofocus name="Descricao" value="<?php echo $orcatrata['Descricao'] ?>">
 											</div>																	
 											
 											<?php if ($_SESSION['log']['NivelEmpresa'] <= 3 ) { ?>
@@ -226,7 +226,7 @@
 																					<label for="QtdProduto">Qtd <?php echo $i ?>:</label>
 																					<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
 																							onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
-																							autofocus name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
+																							name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
 																				</div>
 																				<div class="col-md-6">
 																					<label for="idTab_Produto">Produto:</label>
@@ -452,21 +452,12 @@
 																					</div>
 																				</div>
 																				-->
-																				<?php if (($_SESSION['log']['TabelasEmpresa'] == 1)) { ?>
 																				<div class="col-md-4 text-right">
 																					<label></label>
-																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar3/" role="button"> 
-																						<span class="glyphicon glyphicon-plus"></span> NovoProduto / Editar
+																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>relatorio2/produtos2" role="button"> 
+																						<span class="glyphicon glyphicon-plus"></span> Novo/ Editar/ Estoque
 																					</a>
 																				</div>	
-																				<?php } else {?>
-																				<div class="col-md-4 text-right">
-																					<label></label>
-																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar2/" role="button"> 
-																						<span class="glyphicon glyphicon-plus"></span> Novo Produto / Editar
-																					</a>
-																				</div>	
-																				<?php } ?>																				
 																			</div>
 																		</div>
 																	</div>
