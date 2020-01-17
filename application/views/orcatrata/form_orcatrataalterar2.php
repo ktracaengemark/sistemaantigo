@@ -148,7 +148,7 @@
 														</div>
 																											
 														<div class="col-md-7 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-															<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>cliente/cadastrar3/" role="button"> 
+															<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>cliente2/cadastrar3/" role="button"> 
 																<span class="glyphicon glyphicon-plus"></span>Cliente
 															</a>
 															
@@ -450,21 +450,12 @@
 																					</div>
 																				</div>
 																				-->
-																				<?php if (($_SESSION['log']['TabelasEmpresa'] == 1)) { ?>
 																				<div class="col-md-4 text-right">
 																					<label></label>
-																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar3/" role="button"> 
-																						<span class="glyphicon glyphicon-plus"></span> NovoProduto / Editar
+																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>relatorio2/produtos2" role="button"> 
+																						<span class="glyphicon glyphicon-plus"></span> Novo/ Editar/ Estoque
 																					</a>
-																				</div>	
-																				<?php } else {?>
-																				<div class="col-md-4 text-right">
-																					<label></label>
-																					<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>produtos/cadastrar2/" role="button"> 
-																						<span class="glyphicon glyphicon-plus"></span> Novo Produto / Editar
-																					</a>
-																				</div>	
-																				<?php } ?>																				
+																				</div>																				
 																			</div>
 																		</div>
 																	</div>
