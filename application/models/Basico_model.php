@@ -1223,7 +1223,49 @@ class Basico_model extends CI_Model {
 
         return $array;
     }
-	
+
+	public function select_categoriatarefa($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+                C.idTab_Categoria,
+                C.Categoria
+            FROM
+                Tab_Categoria AS C
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = C.idSis_Usuario
+            WHERE
+				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
+				(C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' )
+            ORDER BY
+                C.Categoria ASC
+			');
+        } else {
+            $query = $this->db->query('
+            SELECT
+                C.idTab_Categoria,
+                C.Categoria
+            FROM
+                Tab_Categoria AS C
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = C.idSis_Usuario
+            WHERE
+				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
+				(C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' )
+            ORDER BY
+                C.Categoria ASC
+			');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Categoria] = $row->Categoria;
+            }
+        }
+
+        return $array;
+    }
+		
 	public function select_categoriaempresa($data = FALSE) {
 
         if ($data === TRUE) {

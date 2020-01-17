@@ -498,7 +498,7 @@ class Agenda_model extends CI_Model {
         ');
 
         $array = array();
-        $array[0] = '::Todos::';
+		$array[0] = '::Todos::';
         foreach ($query->result() as $row) {
 			$array[$row->idTab_Categoria] = $row->Categoria;
         }
@@ -707,12 +707,14 @@ class Agenda_model extends CI_Model {
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'P.Prioridade' : $data['Campo'];
+        $data['Campo'] = (!$data['Campo']) ? 'P.DataProcedimento' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$filtro4 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
+		$filtro7 = ($data['ConcluidoSubProcedimento']) ? 'SP.ConcluidoSubProcedimento = "' . $data['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Prioridade']) ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
 		$filtro6 = ($data['Categoria']) ? 'P.Categoria = "' . $data['Categoria'] . '" AND ' : FALSE;
 		$data['ConcluidoProcedimento'] = ($data['ConcluidoProcedimento'] != '') ? ' AND P.ConcluidoProcedimento = ' . $data['ConcluidoProcedimento'] : FALSE;
+		$data['ConcluidoSubProcedimento'] = ($data['ConcluidoSubProcedimento'] != '') ? ' AND SP.ConcluidoSubProcedimento = ' . $data['ConcluidoSubProcedimento'] : FALSE;
 		$data['Prioridade'] = ($data['Prioridade'] != '') ? ' AND P.Prioridade = ' . $data['Prioridade'] : FALSE;
 		$data['Procedimento'] = ($data['Procedimento']) ? ' AND P.idApp_Procedimento = ' . $data['Procedimento'] : FALSE;
 
@@ -733,9 +735,14 @@ class Agenda_model extends CI_Model {
 				P.Prioridade,
 				P.Compartilhar,
 				CT.Categoria,
+				SP.SubProcedimento,
+				SP.ConcluidoSubProcedimento,				
+				SP.DataSubProcedimento,
+				SP.DataSubProcedimentoLimite,				
 				SN.StatusSN
             FROM
 				App_Procedimento AS P
+					LEFT JOIN App_SubProcedimento AS SP ON SP.idApp_Procedimento = P.idApp_Procedimento
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
 					LEFT JOIN Sis_Usuario AS AU ON AU.idSis_Usuario = P.Compartilhar
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = P.idSis_Empresa
@@ -746,15 +753,18 @@ class Agenda_model extends CI_Model {
 				' . $filtro4 . '
 				' . $filtro5 . '
 				' . $filtro6 . '
+				' . $filtro7 . '
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				(P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.idSis_Usuario = ' . $_SESSION['log']['id'] . '))
 				' . $data['Procedimento'] . '
             ORDER BY
+				P.Categoria DESC,
+				P.Prioridade ASC,
 				P.ConcluidoProcedimento ASC,
-				P.DataProcedimento DESC,
 				' . $data['Campo'] . '
 				' . $data['Ordenamento'] . '
+				
 				
         ');
         /*
@@ -777,6 +787,7 @@ class Agenda_model extends CI_Model {
 				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
 				$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
 				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+				$row->ConcluidoSubProcedimento = $this->basico->mascara_palavra_completa2($row->ConcluidoSubProcedimento, 'NS');
 				$row->Prioridade = $this->basico->prioridade($row->Prioridade, '123');
             }
 

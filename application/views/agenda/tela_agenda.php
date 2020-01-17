@@ -57,13 +57,13 @@
 							<span class="glyphicon glyphicon-pencil"></span> Estatística das Tarefas
 						</a>
 					</li>					
-					<!--
+					
 					<li>
 						<a class="dropdown-item" href="<?php echo base_url() . 'orcatrata/alterarprocedimento/' . $_SESSION['log']['idSis_Empresa']; ?>">
 							<span class="glyphicon glyphicon-pencil"></span> Editar Tarefas Filtradas
 						</a>
 					</li>
-					-->
+					
 				</ul>
 			</div>			
 			<!--
@@ -139,9 +139,11 @@
 										}
 										?>
 									</select>
-								</div>								
+								</div>
+							</div>
+							<div class="row">								
 								<div class="col-md-3 text-left">
-									<label for="ConcluidoProcedimento">Concluido</label>
+									<label for="ConcluidoProcedimento">Ccl. Tarefa:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 											id="ConcluidoProcedimento" name="ConcluidoProcedimento">
 										<?php
@@ -155,6 +157,21 @@
 										?>
 									</select>
 								</div>
+								<div class="col-md-3 text-left">
+									<label for="ConcluidoSubProcedimento">Ccl. SubTarefa</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
+											id="ConcluidoSubProcedimento" name="ConcluidoSubProcedimento">
+										<?php
+										foreach ($select['ConcluidoSubProcedimento'] as $key => $row) {
+											if ($query['ConcluidoSubProcedimento'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>								
 							</div>
 							<br>
 							<div class="row">

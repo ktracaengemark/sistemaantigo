@@ -53,6 +53,7 @@ class Agenda extends CI_Controller {
 			'Mesvencemp',
 			'Anoemp',			
 			'ConcluidoProcedimento',
+			'ConcluidoSubProcedimento',
 			'Concluidocli',
 			'Concluidoemp',			
             'Ordenamento',
@@ -68,6 +69,7 @@ class Agenda extends CI_Controller {
         $_SESSION['FiltroAlteraProcedimento']['Mesvenc'] = $data['query']['Mesvenc'];
         $_SESSION['FiltroAlteraProcedimento']['Ano'] = $data['query']['Ano'];
 		$_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+		$_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] = $data['query']['ConcluidoSubProcedimento'];
         $_SESSION['FiltroAlteraProcedimento']['Prioridade'] = $data['query']['Prioridade'];
 		$_SESSION['FiltroAlteraProcedimento']['Categoria'] = $data['query']['Categoria'];
 		$_SESSION['FiltroAlteraProcedimento']['Procedimento'] = $data['query']['Procedimento'];
@@ -88,10 +90,16 @@ class Agenda extends CI_Controller {
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
 
         $data['select']['ConcluidoProcedimento'] = array(
-			'0' => 'TODOS',
+			'0' => '::Todos::',
 			'S' => 'Sim',
 			'N' => 'Não',
         );
+		
+        $data['select']['ConcluidoSubProcedimento'] = array(
+			'0' => '::Todos::',
+			'S' => 'Sim',
+			'N' => 'Não',
+        );		
 		
         $data['select']['Concluidocli'] = array(
 			'0' => 'TODOS',
@@ -108,6 +116,7 @@ class Agenda extends CI_Controller {
 		$data['select']['Campo'] = array(
 			'P.Prioridade' => 'Prioridade',			
 			'P.ConcluidoProcedimento' => 'Concl.',
+			'SP.ConcluidoSubProcedimento' => 'Concl.',
 			'P.DataProcedimento' => 'Iniciar em',
 			'P.DataProcedimentoLimite' => 'Concluir em',
 
@@ -119,7 +128,7 @@ class Agenda extends CI_Controller {
         );
 		
         $data['select']['Prioridade'] = array (
-            '0' => 'TODOS',
+            '0' => '::Todos::',
 			'1' => 'Alta',
 			'2' => 'Média',
 			'3' => 'Baixa',
@@ -148,6 +157,7 @@ class Agenda extends CI_Controller {
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+			$data['bd']['ConcluidoSubProcedimento'] = $data['query']['ConcluidoSubProcedimento'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 			$data['bd']['Prioridade'] = $data['query']['Prioridade'];

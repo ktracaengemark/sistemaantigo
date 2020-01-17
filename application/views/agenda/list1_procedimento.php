@@ -1,4 +1,4 @@
-<div style="overflow: auto; height: 183px; ">
+<div style="overflow: auto; height: 455px; ">
 	<div class="container-fluid">
 		<div class="row">
 
@@ -18,8 +18,10 @@
 							<th class="active">Empresa</th>-->
 							<th class="active">Categoria</th>
 							<th class="active">Pri.</th>
-							<th class="active">Cnl.</th>
 							<th class="active">Tarefa</th>
+							<th class="active">Cnl.TF</th>
+							<th class="active">SubTarefa</th>
+							<th class="active">Cnl.SbTF</th>
 							<th class="active">Iniciar</th>
 							<th class="active">Concluir</th>
 							<!--<th class="active">Comp.</th>
@@ -55,8 +57,10 @@
 								#echo '<td>' . $row['NomeEmpresa'] . '</td>';
 								echo '<td>' . $row['Categoria'] . '</td>';
 								echo '<td>' . $row['Prioridade'] . '</td>';
-								echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
 								echo '<td>' . $row['Procedimento'] . '</td>';
+								echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
+								echo '<td>' . $row['SubProcedimento'] . '</td>';
+								echo '<td>' . $row['ConcluidoSubProcedimento'] . '</td>';
 								echo '<td>' . $row['DataProcedimento'] . '</td>';
 								echo '<td>' . $row['DataProcedimentoLimite'] . '</td>';
 								#echo '<td>' . $row['Comp'] . '</td>';

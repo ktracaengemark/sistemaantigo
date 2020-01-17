@@ -663,6 +663,7 @@ class Orcatrata_model extends CI_Model {
 		$permissao2 = ($_SESSION['FiltroAlteraProcedimento']['Mesvenc'] != "0" ) ? 'MONTH(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Mesvenc'] . '" AND ' : FALSE;
 		$permissao3 = ($_SESSION['FiltroAlteraProcedimento']['Ano'] != "" ) ? 'YEAR(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Ano'] . '" AND ' : FALSE;
 		$permissao5 = ($_SESSION['FiltroAlteraProcedimento']['Dia'] != "0" ) ? 'DAY(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Dia'] . '" AND ' : FALSE;
+		$permissao8 = ($_SESSION['FiltroAlteraProcedimento']['Categoria'] != '0' ) ? 'P.Categoria = "' . $_SESSION['FiltroAlteraProcedimento']['Categoria'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('
 			SELECT
@@ -676,6 +677,7 @@ class Orcatrata_model extends CI_Model {
 				P.DataProcedimento,
 				P.DataProcedimentoLimite,
 				P.ConcluidoProcedimento,
+				P.Categoria,
 				P.Prioridade
             FROM
 				App_Procedimento AS P
@@ -683,16 +685,19 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Sis_Usuario AS AU ON AU.idSis_Usuario = P.Compartilhar
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = P.idSis_Empresa
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
+					LEFT JOIN Tab_Categoria AS CT ON CT.idTab_Categoria = P.Categoria
 			WHERE 
 
 				' . $permissao1 . '
 				' . $permissao6 . '
 				' . $permissao7 . '
+				' . $permissao8 . '
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR	
 				P.Compartilhar = ' . $_SESSION['log']['id'] . ' OR
 				(P.Compartilhar = 51 AND P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '))
 			ORDER BY
+				P.Categoria DESC,
 				P.ConcluidoProcedimento,
 				P.Prioridade ASC,
 				P.DataProcedimento DESC

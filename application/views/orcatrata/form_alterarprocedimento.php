@@ -45,11 +45,29 @@
 												<div class="panel panel-info">
 													<div class="panel-heading">
 														<div class="row">
-															<div class="col-md-3">
+															<div class="col-md-2">
+																<label for="Categoria<?php echo $i ?>">Categoria:</label>
+
+																<select data-placeholder="Selecione uma opção..." class="form-control" 
+																		 id="listadinamicac<?php echo $i ?>" name="Categoria<?php echo $i ?>">
+																	<option value="">-- Selecione uma Categoria --</option>
+																	<?php
+																	foreach ($select['Categoria'] as $key => $row) {
+																		if ($procedimento[$i]['Categoria'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	?>
+																</select>
+															</div>															
+															<div class="col-md-2">
 																<label for="Procedimento<?php echo $i ?>">Tarefa <?php echo $i ?>:</label>
 																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 															</div>
+															
 															<div class="col-md-2">
 																<label for="Prioridade<?php echo $i ?>">Prioridade:</label>
 																<?php if ($i == 1) { ?>

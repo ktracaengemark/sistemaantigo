@@ -5250,12 +5250,13 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
             if ($this->input->post('DataProcedimento' . $i) ||	$this->input->post('Prioridade' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
-                    $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
+                    $this->input->post('Procedimento' . $i) || $this->input->post('Categoria' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
 				$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
                 $data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
+				$data['procedimento'][$j]['Categoria'] = $this->input->post('Categoria' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
 
                 $j++;
@@ -5298,6 +5299,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Procedimento'] = $this->Basico_model->select_procedimento();
+		$data['select']['Categoria'] = $this->Basico_model->select_categoriatarefa();		
 		$data['select']['Prioridade'] = array (
 			'1' => 'Alta',
 			'2' => 'Média',
