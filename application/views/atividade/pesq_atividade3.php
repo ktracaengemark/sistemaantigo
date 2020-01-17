@@ -2,10 +2,14 @@
   <div class="container-fluid">
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<span class="sr-only">MENU</span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span> 
 		</button>
+			<a type="button" class="navbar-toggle btn btn-lg btn-primary  " href="javascript:window.close()">
+				<span class="glyphicon glyphicon-remove"></span> Fechar
+			</a>		
 	</div>
 	<div class="collapse navbar-collapse" id="myNavbar">
 		<ul class="nav navbar-nav navbar-center">
@@ -22,9 +26,8 @@
 	</div>
   </div>
 </nav>
-
+<br>
 <?php if (isset($msg)) echo $msg; ?>
-
 <div class="container-fluid">
 	<div class="row">
 

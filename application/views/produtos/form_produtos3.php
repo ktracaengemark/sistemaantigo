@@ -1,18 +1,45 @@
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
 	<div class="container-fluid">
-		<li class="navbar-form">
-			<div class="btn-group " role="group" aria-label="...">
-				<a type="button" class="btn btn-warning btn-lg" href="<?php echo base_url() ?>relatorio2/produtos2" role="button">
-					<span class="glyphicon glyphicon-usd"></span>Valores
-				</a>
-				<a type="button" class="btn btn-success btn-lg" href="<?php echo base_url() ?>relatorio2/estoque2" role="button">
-					<span class="glyphicon glyphicon-gift"></span>Estoque
-				</a>				
-				<a type="button" class="btn btn-lg btn-default " href="javascript:window.close()">
-					<span class="glyphicon glyphicon-remove"></span>Fechar
-				</a>
-			</div>
-		</li>		
+		<div class="navbar-header ">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				<span class="sr-only">MENU</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a type="button" class="navbar-toggle btn btn-lg btn-primary  " href="javascript:window.close()">
+				<span class="glyphicon glyphicon-remove"></span> Fechar
+			</a>			
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">		
+			<ul class="nav navbar-nav navbar-center">
+				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
+					<div class="btn-group " role="group" aria-label="...">
+						<a href="<?php echo base_url(); ?>relatorio2/produtos2" role="button">
+							<button type="button" class="btn btn-lg btn-warning ">
+								<span class="glyphicon glyphicon-calendar"></span>Valores
+							</button>
+						</a>						
+					</div>					
+				</li>
+				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
+					<div class="btn-group " role="group" aria-label="...">
+						<a href="<?php echo base_url(); ?>relatorio2/estoque2" role="button">
+							<button type="button" class="btn btn-lg btn-success ">
+								<span class="glyphicon glyphicon-calendar"></span>Estoque
+							</button>
+						</a>						
+					</div>					
+				</li>				
+				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
+					<div class="btn-group " role="group" aria-label="...">
+						<a type="button" class="btn btn-lg btn-default " href="javascript:window.close()">
+							<span class="glyphicon glyphicon-remove"></span>Fechar
+						</a>
+					</div>					
+				</li>				
+			</ul>			
+		</div>
 	</div>
 </nav>
 <br>

@@ -2,52 +2,30 @@
 	<div class="container-fluid">
 		<div class="navbar-header ">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-				<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				<span class="sr-only">MENU</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
 			</button>
 			<a type="button" class="navbar-toggle btn btn-lg btn-primary  " href="javascript:window.close()">
 				<span class="glyphicon glyphicon-remove"></span> Fechar
 			</a>			
-			<!--
-			<a class="navbar-brand" href="<?php echo base_url() ?>usuario2/prontuario/<?php echo $_SESSION['log']['id']; ?>"> 
-				 <?php echo $_SESSION['log']['Nome2']; ?>./<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
-			</a>
-			-->
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">		
-			<!--
-			<li class="navbar-form" >
-				
-					<a  type="button" class="btn btn-danger btn-lg" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-						<span class="glyphicon glyphicon-plus"></span>Novo
-					</a>
-					<a type="button" class="btn btn-success btn-lg" href="<?php echo base_url() ?>relatorio/estoque2" role="button">
-						<span class="glyphicon glyphicon-gift"></span>Estoque
-					</a>
-					<a type="button" class="btn btn-lg btn-default " href="javascript:window.close()">
-						<span class="glyphicon glyphicon-remove"></span>Fechar
-					</a>
-								
-			</li>
-			-->
 			<ul class="nav navbar-nav navbar-center">
 				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
 						<a  type="button" class="btn btn-danger btn-lg" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 							<span class="glyphicon glyphicon-plus"></span>Novo
 						</a>						
-						<!--
-						<a href="<?php echo base_url(); ?>agenda">
-							<button type="button" class="btn btn-lg btn-info ">
-								<span class="glyphicon glyphicon-calendar"></span>Agendas
-							</button>
-						</a>
-						-->
 					</div>					
 				</li>
 				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
-						<a type="button" class="btn btn-success btn-lg" href="<?php echo base_url() ?>relatorio2/estoque2" role="button">
-							<span class="glyphicon glyphicon-gift"></span>Estoque
+						<a href="<?php echo base_url(); ?>relatorio2/estoque2" role="button">
+							<button type="button" class="btn btn-lg btn-success ">
+								<span class="glyphicon glyphicon-calendar"></span>Estoque
+							</button>
 						</a>						
 					</div>					
 				</li>
