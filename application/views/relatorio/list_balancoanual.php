@@ -101,10 +101,10 @@
 							<?php
 							echo '<td><b>' . $report['TotalPago']->Balancopago . '</b></td>';
 							for($i=1;$i<=12;$i++) {
-								$bgcolor = ($report['TotalPago']->{'M'.$i} < 0) ? 'bg-danger' : 'bg-info';
+								$bgcolor = ($report['TotalPago']->{'M'.$i} < 0) ? 'bg-warning' : 'bg-warning';
 								echo '<td class="text-right ' . $bgcolor . '">' . $report['TotalPago']->{'M'.$i} . '</td>';
 							}
-							$bgcolor = ($report['TotalGeralpago']->BalancoGeralpago < 0) ? 'bg-danger' : 'bg-info';
+							$bgcolor = ($report['TotalGeralpago']->BalancoGeralpago < 0) ? 'bg-warning' : 'bg-warning';
 							echo '<td class="text-right ' . $bgcolor . '">' . $report['TotalGeralpago']->BalancoGeralpago . '</td>';
 							?>
 						</tr>
