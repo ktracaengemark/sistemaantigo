@@ -1,8 +1,8 @@
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
   <div class="container-fluid">
 		<li class="navbar-form">
-			<a <?php if (preg_match("/relatorio\/clientes3\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-				<a href="<?php echo base_url() . 'relatorio/clientes3/'; ?>">
+			<a <?php if (preg_match("/relatorio2\/clientes3\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+				<a href="<?php echo base_url() . 'relatorio2/clientes3/'; ?>">
 					<button type="button" class="btn btn-lg btn-info ">
 						<span class="glyphicon glyphicon-search"></span> Pesquisar
 					</button>										
@@ -281,13 +281,13 @@
 														<span class="glyphicon glyphicon-save"></span> Salvar
 													</button>
 												</div>
-												<!--
+												
 												<div class="col-md-6 text-right">
 													<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 														<span class="glyphicon glyphicon-trash"></span> Excluir
 													</button>
 												</div>
-												-->
+												
 												<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 													<div class="modal-dialog" role="document">
 														<div class="modal-content">
@@ -306,7 +306,7 @@
 																	</button>
 																</div>
 																<div class="col-md-6 text-right">
-																	<a class="btn btn-danger" href="<?php echo base_url() . 'cliente/excluir/' . $query['idApp_Cliente'] ?>" role="button">
+																	<a class="btn btn-danger" href="<?php echo base_url() . 'cliente2/excluir3/' . $query['idApp_Cliente'] ?>" role="button">
 																		<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 																	</a>
 																</div>

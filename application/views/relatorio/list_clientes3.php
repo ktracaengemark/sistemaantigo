@@ -39,7 +39,7 @@
 						foreach ($report->result_array() as $row) {
 
 							#echo '<tr>';
-							echo '<tr class="clickable-row" data-href="' . base_url() . 'cliente/alterar3/' . $row['idApp_Cliente'] . '">';
+							echo '<tr class="clickable-row" data-href="' . base_url() . 'cliente2/alterar3/' . $row['idApp_Cliente'] . '">';
 								echo '<td>' . $row['idApp_Cliente'] . '</td>';
 
 								echo '<td>' . $row['NomeCliente'] . '</td>';

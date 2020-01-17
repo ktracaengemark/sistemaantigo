@@ -23,7 +23,7 @@
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<?php echo form_open('relatorio/clientes3', 'role="form"'); ?>
+			<?php echo form_open('relatorio2/clientes3', 'role="form"'); ?>
 			<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span> Filtro <?php echo $titulo; ?>
 			</button>
@@ -39,7 +39,7 @@
 		</div>
 	</div>
 </div>
-<?php echo form_open('relatorio/clientes3', 'role="form"'); ?>
+<?php echo form_open('relatorio2/clientes3', 'role="form"'); ?>
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -169,7 +169,7 @@
 				</div>
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>cliente/cadastrar3" role="button">
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>cliente2/cadastrar3" role="button">
 							<span class="glyphicon glyphicon-plus"></span> Novo Cliente
 						</a>
 					</div>	

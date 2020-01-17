@@ -523,72 +523,8 @@ class Fornecedor2 extends CI_Controller {
 
         $this->load->view('basico/footer');
     }
-
-    public function excluir2($id = FALSE) {
-
-        if ($this->input->get('m') == 1)
-            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-        elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contatofornec com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
-        else
-            $data['msg'] = '';
-
-		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
-			'Cadastrar',
-        ), TRUE));
-
-        $data['query'] = $this->input->post(array(
-            'idApp_Fornecedor',
-            'submit'
-                ), TRUE);
-
-        if ($id) {
-            $data['query'] = $this->Fornecedor_model->get_fornecedor($id);
-            $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
-            $data['query']['FornecedorDataNascimento'] = $this->basico->mascara_data($data['query']['FornecedorDataNascimento'], 'barras');
-        }
-
-        $data['select']['Municipio'] = $this->Basico_model->select_municipio();
-        $data['select']['Sexo'] = $this->Basico_model->select_sexo();
-
-        $data['titulo'] = 'Tem certeza que deseja excluir o registro abaixo?';
-        $data['form_open_path'] = 'fornecedor/excluir';
-        $data['readonly'] = 'readonly';
-        $data['disabled'] = 'disabled';
-        $data['panel'] = 'danger';
-        $data['metodo'] = 3;
-
-        $data['tela'] = $this->load->view('fornecedor/form_fornecedor', $data, TRUE);
-
-        #run form validation
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('fornecedor/tela_fornecedor', $data); 
-        } else {
-
-            if ($data['query']['idApp_Fornecedor'] === FALSE) {
-                $data['msg'] = '?m=2';
-                $this->load->view('fornecedor/form_fornecedor', $data);
-            } else {
-
-                $data['anterior'] = $this->Fornecedor_model->get_fornecedor($data['query']['idApp_Fornecedor']);
-                $data['campos'] = array_keys($data['anterior']);
-
-                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], NULL, $data['campos'], $data['query']['idApp_Fornecedor'], FALSE, TRUE);
-                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Fornecedor', 'DELETE', $data['auditoriaitem']);
-
-                $this->Fornecedor_model->delete_fornecedor($data['query']['idApp_Fornecedor']);
-
-                $data['msg'] = '?m=1';
-
-                redirect(base_url() . 'fornecedor' . $data['msg']);
-                exit();
-            }
-        }
-
-        $this->load->view('basico/footer');
-    }
 	
-	public function excluir($id = FALSE) {
+	public function excluir3($id = FALSE) {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -601,7 +537,8 @@ class Fornecedor2 extends CI_Controller {
 
                 $data['msg'] = '?m=1';
 
-				redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+				//redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+				redirect(base_url() . 'relatorio2/fornecedor3');
 				exit();
             //}
         //}

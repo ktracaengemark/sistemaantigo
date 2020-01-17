@@ -98,7 +98,7 @@
 											</div>
 											
 											<div class="col-md-7 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-												<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>categoria/cadastrar3/" role="button"> 
+												<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>categoria2/cadastrar3/" role="button"> 
 													<span class="glyphicon glyphicon-plus"></span>Categoria
 												</a>
 												
