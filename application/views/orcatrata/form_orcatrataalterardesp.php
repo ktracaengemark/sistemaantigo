@@ -1066,6 +1066,7 @@
 												</div>
 											</div>
 											<?php } ?>
+											<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 											<div class="col-md-6">
 												<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
 												<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
@@ -1123,7 +1124,8 @@
 													</div>
 
 												<?php } ?>
-											</div>											
+											</div>
+											<?php } ?>
 										</div>
 										<!--
 										<div class="row">

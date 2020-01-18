@@ -447,9 +447,9 @@
 				</div>
 			</div>
 			<?php } ?>
-			<hr>
-
+			<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 			<div class="form-group">
+				
 				<div class="row">
 					<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
 					<input type="hidden" name="idTab_Produto" value="<?php echo $produtos['idTab_Produto']; ?>">
@@ -503,8 +503,9 @@
 						</div>
 					<?php } ?>
 				</div>
+				
 			</div>
-
+			<?php } ?>
 			</form>
 
 		</div>

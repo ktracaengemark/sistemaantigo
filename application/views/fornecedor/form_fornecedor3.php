@@ -277,6 +277,7 @@
 						</div>                 
 					</div>                                    
 					<br>               
+					<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 					<div class="form-group">
 						<div class="row">
 							<input type="hidden" name="idApp_Fornecedor" value="<?php echo $query['idApp_Fornecedor']; ?>">
@@ -327,6 +328,7 @@
 							<?php } ?>
 						</div>
 					</div>
+					<?php } ?>
 					</form>
 				</div>
 			</div>							
