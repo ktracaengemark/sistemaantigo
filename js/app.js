@@ -4593,15 +4593,15 @@ $('#calendar').fullCalendar({
     eventAfterRender: function (event, element) {
 
         if (event.Evento == 1)
-            var title = "<b>Evento Agendado</b><br><br><b>Obs:</b> " + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br><b>CPF-Usu:</b> " + event.CpfUsuario + "<br>\n\<b>EmpresaEmp:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>EmpresaCon:</b> " + event.EmpresaCon + "<br>\n\<b>EmpresaUsu:</b> " + event.EmpresaUsu;
+            var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b>" + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional;
         else {
 
             if (event.Paciente == 'D')
-                var title = "<b>Cliente:</b>" + event.title + "</b><br><b>Responsável:</b> " + event.subtitle + "<br><b>CPF-Cli:</b> " + event.CpfCliente + "<br><b>Tel.1:</b> " + event.CelularCliente + 
-							"<br>\n\<b>Prof.:</b> " + event.Profissional + "<br><b>CPF-Usu:</b> " + event.CpfUsuario  + "<br>\n\<b>Obs:</b> " + event.Obs + "<br>\n\<b>Tipo de Consulta:</b> " + event.TipoConsulta  + "<br>\n\<b>EmpresaEmp:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>EmpresaCon:</b> " + event.EmpresaCon + "<br>\n\<b>EmpresaUsu:</b> " + event.EmpresaUsu;
+                var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b> " + event.Obs  + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Cliente:</b>" + event.title + "</b><br><b>Responsável:</b> " + event.subtitle + "<br><b>Tel.:</b> " + event.CelularCliente + 
+							"<br>\n\<b>Tipo: </b> " + event.TipoConsulta;
             else
-                var title = "<b>Cliente:</b>" + event.title + "<b> " + "<br><b>CPF-Cli:</b> " + event.CpfCliente + "<br><b>Tel.1:</b> " + event.CelularCliente + 
-							"<br>\n\<b>Prof.:</b> " + event.Profissional + "<br><b>CPF-Usu:</b> " + event.CpfUsuario + "<br>\n\<b>Obs:</b> " + event.Obs + "<br>\n\<b>Tipo de Consulta:</b> " + event.TipoConsulta  + "<br>\n\<b>EmpresaEmp:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>EmpresaCon:</b> " + event.EmpresaCon + "<br>\n\<b>EmpresaUsu:</b> " + event.EmpresaUsu;
+                var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b> " + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Cliente:</b>" + event.title + "<b> " + "<br><b>Tel.:</b> " + event.CelularCliente + 
+							"<br>\n\<b>Tipo: </b> " + event.TipoConsulta;
         }
 
 
