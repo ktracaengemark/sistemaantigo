@@ -5742,8 +5742,8 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['Campo'] = array(
-			'P.DataProcedimento' => 'Iniciar em:',
-			'P.DataProcedimentoLimite' => 'Concluir em:',
+			'P.DataProcedimento' => 'Data Inicio',
+			'P.DataProcedimentoLimite' => 'Data Fim',
 			'P.Prioridade' => 'Prioridade',
 			'P.ConcluidoProcedimento' => 'Tarefa Concl.?',			
 			'P.Procedimento' => 'Tarefa',

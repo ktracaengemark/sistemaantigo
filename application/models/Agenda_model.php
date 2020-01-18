@@ -616,91 +616,6 @@ class Agenda_model extends CI_Model {
         return $array;
     }
 	
-	public function list1_procedimento1($data, $completo) {
-
-
-		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
-		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
-		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'P.Prioridade' : $data['Campo'];
-        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
-		$filtro4 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
-		$filtro5 = ($data['Prioridade']) ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
-		$filtro6 = ($data['Categoria']) ? 'P.Categoria = "' . $data['Categoria'] . '" AND ' : FALSE;
-		$data['ConcluidoProcedimento'] = ($data['ConcluidoProcedimento'] != '') ? ' AND P.ConcluidoProcedimento = ' . $data['ConcluidoProcedimento'] : FALSE;
-		$data['Prioridade'] = ($data['Prioridade'] != '') ? ' AND P.Prioridade = ' . $data['Prioridade'] : FALSE;
-		$data['Procedimento'] = ($data['Procedimento']) ? ' AND P.idApp_Procedimento = ' . $data['Procedimento'] : FALSE;
-
-		
-		$query = $this->db->query('
-            SELECT
-				E.NomeEmpresa,
-				U.idSis_Usuario,
-				U.CpfUsuario,
-				U.Nome AS NomeUsuario,
-				AU.Nome AS Comp,
-				P.idSis_Empresa,
-				P.idApp_Procedimento,
-                P.Procedimento,
-				P.DataProcedimento,
-				P.DataProcedimentoLimite,
-				P.ConcluidoProcedimento,
-				P.Prioridade,
-				P.Compartilhar,
-				CT.Categoria,
-				SN.StatusSN
-            FROM
-				App_Procedimento AS P
-					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
-					LEFT JOIN Sis_Usuario AS AU ON AU.idSis_Usuario = P.Compartilhar
-					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = P.idSis_Empresa
-					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
-					LEFT JOIN Tab_Categoria AS CT ON CT.idTab_Categoria = P.Categoria
-            WHERE
-
-				' . $filtro4 . '
-				' . $filtro5 . '
-				' . $filtro6 . '
-				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
-				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR	
-				P.Compartilhar = ' . $_SESSION['log']['id'] . ' OR
-				(P.Compartilhar = 51 AND P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '))
-				' . $data['Procedimento'] . '
-            ORDER BY
-				P.ConcluidoProcedimento ASC,
-				P.DataProcedimento DESC,
-				' . $data['Campo'] . '
-				' . $data['Ordenamento'] . '
-				
-        ');
-        /*
-
-        #AND
-        #C.idApp_Cliente = OT.idApp_Cliente
-
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-        */
-
-        if ($completo === FALSE) {
-            return TRUE;
-        } else {
-
-            foreach ($query->result() as $row) {
-				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
-				$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
-				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
-				$row->Prioridade = $this->basico->prioridade($row->Prioridade, '123');
-            }
-
-            return $query;
-        }
-
-    }
-
 	public function list1_procedimento($data, $completo) {
 
 
@@ -708,7 +623,7 @@ class Agenda_model extends CI_Model {
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'P.DataProcedimento' : $data['Campo'];
-        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
 		$filtro4 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
 		$filtro7 = ($data['ConcluidoSubProcedimento']) ? 'SP.ConcluidoSubProcedimento = "' . $data['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Prioridade']) ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;

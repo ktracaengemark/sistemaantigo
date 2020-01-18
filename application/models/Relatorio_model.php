@@ -8032,89 +8032,6 @@ exit();*/
 
     }
 
-	public function list_tarefa0($data, $completo) {
-
-        if ($data['DataFim']) {
-            $consulta =
-                '(TF.DataProcedimento >= "' . $data['DataInicio'] . '" AND TF.DataProcedimento <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(TF.DataProcedimento >= "' . $data['DataInicio'] . '")';
-        }
-
-		#$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'TF.DataProcedimento' : $data['Campo'];
-        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
-		#$data['NomeProfissional'] = ($data['NomeProfissional']) ? ' AND P.idApp_Profissional = ' . $data['NomeProfissional'] : FALSE;
-		#$data['Profissional'] = ($data['Profissional']) ? ' AND P2.idApp_Profissional = ' . $data['Profissional'] : FALSE;
-		$data['Procedimento'] = ($data['Procedimento']) ? ' AND TF.idApp_Procedimento = ' . $data['Procedimento'] : FALSE;
-		$filtro5 = ($data['ConcluidoProcedimento'] != '#') ? 'TF.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
-        $filtro6 = ($data['Prioridade'] != '#') ? 'TF.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
-		$filtro8 = ($data['ConcluidoSubProcedimento'] != '#') ? 'SP.ConcluidoSubProcedimento = "' . $data['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
-		#$filtro7 = ($data['Rotina'] != '#') ? 'TF.Rotina = "' . $data['Rotina'] . '" AND ' : FALSE;
-
-        
-		$query = $this->db->query('
-            SELECT
-				
-                TF.idApp_Procedimento,
-				TF.Procedimento,
-                TF.ConcluidoProcedimento,
-                TF.DataProcedimento,
-				TF.Prioridade,
-				TF.DataProcedimentoLimite,
-				SP.SubProcedimento,
-				SP.ConcluidoSubProcedimento
-            FROM
-                App_Procedimento AS TF
-				LEFT JOIN App_SubProcedimento AS SP ON SP.idApp_Procedimento = TF.idApp_Procedimento
-            WHERE
-                TF.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				TF.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
-				TF.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				TF.idApp_OrcaTrata = "0" AND
-				TF.idApp_Cliente = "0" AND
-				TF.idSis_EmpresaCli = "0" AND
-				' . $filtro5 . '
-				' . $filtro6 . '
-				' . $filtro8 . '
-				(' . $consulta . ')
- 
-			ORDER BY
-				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
-        ');
-
-        /*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-          */
-
-        if ($completo === FALSE) {
-            return TRUE;
-        } else {
-
-            $somatarefa=0;
-            foreach ($query->result() as $row) {
-				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
-				$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
-				#$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
-				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
-                $row->ConcluidoSubProcedimento = $this->basico->mascara_palavra_completa2($row->ConcluidoSubProcedimento, 'NS');
-				$row->Prioridade = $this->basico->prioridade($row->Prioridade, '123');
-				#$row->Rotina = $this->basico->mascara_palavra_completa($row->Rotina, 'NS');
-            }
-            $query->soma = new stdClass();
-            $query->soma->somatarefa = number_format($somatarefa, 2, ',', '.');
-
-            return $query;
-        }
-
-    }
-
 	public function list_tarefa($data, $completo) {
 
         if ($data['DataFim']) {
@@ -8126,8 +8043,8 @@ exit();*/
                 '(P.DataProcedimento >= "' . $data['DataInicio'] . '")';
         }
 		
-        $data['Campo'] = (!$data['Campo']) ? 'P.Prioridade' : $data['Campo'];
-        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+        $data['Campo'] = (!$data['Campo']) ? 'P.DataProcedimento' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
 		#$filtro4 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
 		#$filtro5 = ($data['Prioridade']) ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
 		$filtro5 = ($data['ConcluidoProcedimento'] != '0') ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
@@ -8181,6 +8098,7 @@ exit();*/
 				(P.Compartilhar = 51 AND P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '))
 				' . $data['Procedimento'] . '
             ORDER BY
+				CT.Categoria DESC,
 				P.ConcluidoProcedimento ASC,
 				P.DataProcedimento DESC,
 				' . $data['Campo'] . '
