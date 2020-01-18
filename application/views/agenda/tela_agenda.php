@@ -112,12 +112,12 @@
 									</select>
 								</div>
 								<div class="col-md-3 text-left">
-									<label for="Ordenamento">Tarefa:</label>
-									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-											id="Procedimento" name="Procedimento">
+									<label for="Prioridade">Prioridade</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
+											id="Prioridade" name="Prioridade">
 										<?php
-										foreach ($select['Procedimento'] as $key => $row) {
-											if ($query['Procedimento'] == $key) {
+										foreach ($select['Prioridade'] as $key => $row) {
+											if ($query['Prioridade'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 											} else {
 												echo '<option value="' . $key . '">' . $row . '</option>';
@@ -125,14 +125,14 @@
 										}
 										?>
 									</select>
-								</div>
-								<div class="col-md-3 text-left">
-									<label for="Prioridade">Prioridade</label>
-									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
-											id="Prioridade" name="Prioridade">
+								</div>								
+								<div class="col-md-6 text-left">
+									<label for="Ordenamento">Tarefa:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="Procedimento" name="Procedimento">
 										<?php
-										foreach ($select['Prioridade'] as $key => $row) {
-											if ($query['Prioridade'] == $key) {
+										foreach ($select['Procedimento'] as $key => $row) {
+											if ($query['Procedimento'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 											} else {
 												echo '<option value="' . $key . '">' . $row . '</option>';
