@@ -180,7 +180,7 @@
 											<div class="col-md-4">
 												<label for="Descricao">Descrição</label><br>
 												<input type="text" class="form-control" maxlength="200"
-														name="Descricao" value="<?php echo $orcatrata['Descricao'] ?>">
+														autofocus name="Descricao" value="<?php echo $orcatrata['Descricao'] ?>">
 											</div>														
 											<?php if ($_SESSION['log']['NivelEmpresa'] <= 3 ) { ?>
 											<div class="col-md-4">
@@ -224,7 +224,7 @@
 																					<label for="QtdProduto">Qtd <?php echo $i ?>:</label>
 																					<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
 																							onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
-																							autofocus name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
+																							 name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
 																				</div>
 																				<div class="col-md-6">
 																					<label for="idTab_Produto">Produto:</label>
