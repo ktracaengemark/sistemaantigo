@@ -9,7 +9,7 @@
 			<div class="panel panel-primary">
 
 				<div class="panel-heading">					
-					<?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?>
+					<h4><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong> - <strong>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</strong>' ?></h4>
 					<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>pesquisar/empresas" role="button">
 						<span class="glyphicon glyphicon-search"></span> Empresas
 					</a>
@@ -39,7 +39,7 @@
 										</div>
 									<div class="form-group col-md-6 text-right">
 										<div class="form-footer">		
-											<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>login/index" role="button">
+											<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>login/index4" role="button">
 												<span class="glyphicon glyphicon-plus"></span> Acessar sua Conta
 											</a>
 										</div>	
@@ -117,19 +117,26 @@
 							</div>	
 							<div class="row">
 								<div class="col-md-12">
-									<div class="col-md-12 text-center">
+									<div class="col-md-6 text-center">
 										<!--<label for="">Empresa:</label>-->
 										<div class="form-group">
 											<div class="row">							
 												<!--<a href="https://www.enkontraki.com/<?php #echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">-->
 												<a href="http://159.89.138.173/<?php echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">
-													<button type="button" class="btn btn-success">
-														<h3><span class="glyphicon glyphicon-picture"></span> Acesse o Site</h3>
+													<button type="button" class="btn btn-info">
+														<h4><span class="glyphicon glyphicon-picture"></span> Acesse o Site</h4>
 													</button>
 												</a>
 											</div>
 										</div>	
 									</div>
+									<div class="form-group col-md-6 text-center">
+										<div class="form-footer">		
+											<a type="button" class="btn btn-success " href="<?php echo base_url() ?>login/index4" role="button">
+												<h4><span class="glyphicon glyphicon-log-in"></span> Acessar Empresa</h4>
+											</a>
+										</div>	
+									</div>									
 									<!--
 									<div class="col-md-6 text-center">
 										<div class="form-group">
@@ -140,8 +147,6 @@
 											</div>
 										</div>	
 									</div>
-									-->
-									<!--
 									<div class="col-md-4 text-left">
 										<div class="form-group">
 											<div class="row">							

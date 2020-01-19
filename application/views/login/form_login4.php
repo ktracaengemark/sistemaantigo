@@ -19,10 +19,8 @@
 	<div class="col-md-2 "></div>
 	<div class="col-md-5 ">
 		<div class="row">
-			<!--
 			<label class="sr-only">Empresa</label>
 			<select data-placeholder="Selecione uma opção..." class="form-control" id="idSis_Empresa" name="idSis_Empresa">			
-				<option value="">Selecione sua Empresa</option>
 				<?php
 				foreach ($select['idSis_Empresa'] as $key => $row) {
 					if ($query['idSis_Empresa'] == $key) {
@@ -35,11 +33,6 @@
 				?>   
 			</select>
 			<?php echo form_error('idSis_Empresa'); ?>
-			-->
-			
-			<label class="sr-only">Empresa</label>
-			<input type="text" id="inputText" class="form-control" placeholder=" XXX  'Número da Empresa'" autofocus name="idSis_Empresa" value="<?php echo set_value('idSis_Empresa'); ?>">	   
-			<?php echo form_error('idSis_Empresa'); ?>			
 			<label class="sr-only">Celular do Usuário</label>
 			<input type="text" id="inputText" maxlength="11" class="form-control" placeholder="Celular Usuário (xx)999999999" name="CelularUsuario" value="<?php echo set_value('CelularUsuario'); ?>">	   
 			<?php echo form_error('CelularUsuario'); ?>

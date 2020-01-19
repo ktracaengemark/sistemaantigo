@@ -9,7 +9,7 @@
 			<div class="panel panel-primary">
 
 				<div class="panel-heading">
-					<?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong> - <small>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</small>' ?>
+					<h4><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong> - <strong>Id.: ' . $_SESSION['Empresa']['idSis_Empresa'] . '</strong>' ?></h4>
 					<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorioempresa/empresas" role="button">
 						<span class="glyphicon glyphicon-search"></span> Empresas
 					</a>				
@@ -117,17 +117,19 @@
 							</div>	
 							<div class="row">
 								<div class="col-md-12">
-									<div class="col-md-6 text-center">
+									<div class="col-md-12 text-center">
 										<div class="form-group">
 											<div class="row">							
-												<a href="https://www.enkontraki.com/<?php echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">
+												<!--<a href="https://www.enkontraki.com/<?php echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">-->
+												<a href="http://159.89.138.173/<?php echo '' . $_SESSION['Empresa']['Site'] . '' ?> "target="_blank">	
 													<button type="button" class="btn btn-success">
-														<h3><span class="glyphicon glyphicon-picture"></span> Acesse o Site</h3>
+														<h4><span class="glyphicon glyphicon-picture"></span> Acesse o Site</h4>
 													</button>
 												</a>
 											</div>
 										</div>	
 									</div>
+									<!--
 									<div class="col-md-6 text-center">
 										<div class="form-group">
 											<div class="row">							
@@ -137,6 +139,7 @@
 											</div>
 										</div>	
 									</div>
+									-->
 								</div>	
 							</div>
 						</div>

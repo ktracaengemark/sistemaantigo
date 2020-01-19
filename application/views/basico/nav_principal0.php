@@ -7,7 +7,7 @@
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar1">
 						<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="<?php echo base_url() ?>login/index"> 
+					<a class="navbar-brand" href="<?php echo base_url() ?>login/index2"> 
 						 Acesse a Sua Conta
 					</a>
 				</div>
