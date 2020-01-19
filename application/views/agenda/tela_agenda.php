@@ -285,7 +285,7 @@
 	</div>
 	
 
-	<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+	<?php if ($_SESSION['log']['NivelEmpresa'] >= 20 ) { ?>
 			
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
@@ -514,9 +514,9 @@
 		</div>	
 	</div>
 </div>
-
+<?php if ($_SESSION['log']['NivelEmpresa'] >= 20 ) { ?>
 <div class="col-md-3">
-		<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+		
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -824,5 +824,5 @@
 		</div>
 	</div>	
 
-	<?php } ?>
 </div>
+<?php } ?>

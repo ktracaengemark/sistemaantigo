@@ -697,9 +697,9 @@ class Orcatrata_model extends CI_Model {
 				P.Compartilhar = ' . $_SESSION['log']['id'] . ' OR
 				(P.Compartilhar = 51 AND P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '))
 			ORDER BY
-				P.Categoria DESC,
-				P.ConcluidoProcedimento,
+				CT.Categoria DESC,
 				P.Prioridade ASC,
+				P.ConcluidoProcedimento,
 				P.DataProcedimento DESC
 		');
         $query = $query->result_array();

@@ -5232,19 +5232,16 @@ class Orcatrata extends CI_Controller {
         else
             $data['msg'] = '';
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+		
 		$data['orcatrata'] = quotes_to_entities($this->input->post(array(
             #### Sis_Empresa ####
             'idSis_Empresa',
-
-
         ), TRUE));
 
-
         (!$this->input->post('PMCount')) ? $data['count']['PMCount'] = 0 : $data['count']['PMCount'] = $this->input->post('PMCount');
-
-
-
 
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
@@ -5295,7 +5292,9 @@ class Orcatrata extends CI_Controller {
 
         #### Sis_Empresa ####
         $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'trim');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Procedimento'] = $this->Basico_model->select_procedimento();
@@ -5327,7 +5326,14 @@ class Orcatrata extends CI_Controller {
         else
             $data['tratamentosin'] = '';
 		
-
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+			
         $data['sidebar'] = 'col-sm-3 col-md-2';
         $data['main'] = 'col-sm-7 col-md-8';
 
@@ -5348,6 +5354,7 @@ class Orcatrata extends CI_Controller {
             $this->load->view('orcatrata/form_alterarprocedimento', $data);
         } else {
 
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Sis_Empresa ####
 
