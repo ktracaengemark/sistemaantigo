@@ -619,7 +619,7 @@ class Login extends CI_Controller {
                 #$this->basico->erro($msg);
                 $data['msg'] = $this->basico->msg('<strong>Senha</strong> incorreta.', 'erro', FALSE, FALSE, FALSE);
 				#$data['msg'] = $this->basico->msg('<strong>NomeEmpresa</strong> incorreta.', 'erro', FALSE, FALSE, FALSE);
-                $this->load->view('form_login', $data);
+                $this->load->view('form_login4', $data);
 
             } else {
                 #initialize session
@@ -651,7 +651,7 @@ class Login extends CI_Controller {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o Administrador.</strong>";
 
                     $this->basico->erro($msg);
-                    $this->load->view('form_login2');
+                    $this->load->view('form_login4');
                 } else {
 					redirect('acesso');
 					#redirect('agenda');

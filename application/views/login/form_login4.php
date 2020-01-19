@@ -1,6 +1,6 @@
 <?php if (isset($msg)) echo $msg; ?>
 <div class="container col-sm-offset-1 col-md-5 ">	
-    <?php echo form_open('login/index2', 'role="form"'); ?>
+    <?php echo form_open('login/index4', 'role="form"'); ?>
 
 	<h2 class="form-signin-heading text-center">enkontraki</h2>		 
 	<div class="col-md-5 ">		
