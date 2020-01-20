@@ -67,7 +67,7 @@
 				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros</h4>
 			</div>
 			<div class="modal-footer">
-				<div class="panel panel-info">
+				<div class="panel panel-danger">
 					<div class="panel-heading">							
 						<div class="form-group text-left">	
 							<div class="row">		
@@ -122,7 +122,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel panel-info">
+				<div class="panel panel-danger">
 					<div class="panel-heading">
 						<div class="form-group text-left">	
 							<div class="row">	
