@@ -31,10 +31,12 @@
 						<th class="active">Tarefa Concl.?</th>
 						<th class="active">Inicia em:</th>
 						<th class="active">Conc. em:</th>
+						
 						<th class="active">Ação</th>
 						<th class="active">Ação Concl.?</th>
 						<th class="active">Inicio em:</th>
 						<th class="active">Fim em:</th>
+						
 					</tr>
 					
 				</thead>
@@ -63,10 +65,12 @@
 							echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
 							echo '<td>' . $row['DataProcedimento'] . '</td>';
 							echo '<td>' . $row['DataProcedimentoLimite'] . '</td>';
+							
 							echo '<td>' . $row['SubProcedimento'] . '</td>';
 							echo '<td>' . $row['ConcluidoSubProcedimento'] . '</td>';
 							echo '<td>' . $row['DataSubProcedimento'] . '</td>';
 							echo '<td>' . $row['DataSubProcedimentoLimite'] . '</td>';
+							
 						echo '</tr>';
 						
 						$nomecliente = $row['Procedimento'];

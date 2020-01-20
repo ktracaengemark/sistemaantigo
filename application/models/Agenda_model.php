@@ -584,6 +584,12 @@ class Agenda_model extends CI_Model {
 
 	public function select_tarefa() {
 
+		$permissao1 = (($_SESSION['FiltroAlteraProcedimento']['Categoria'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Categoria'] != '' )) ? 'P.Categoria = "' . $_SESSION['FiltroAlteraProcedimento']['Categoria'] . '" AND ' : FALSE;
+		$permissao2 = (($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != '' )) ? 'P.ConcluidoProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] . '" AND ' : FALSE;
+		$permissao3 = (($_SESSION['FiltroAlteraProcedimento']['Prioridade'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Prioridade'] != '' )) ? 'P.Prioridade = "' . $_SESSION['FiltroAlteraProcedimento']['Prioridade'] . '" AND ' : FALSE;
+		$permissao4 = ((($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != "0")&& ($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != 'M') ) && ($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != '' )) ? 'SP.ConcluidoSubProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
+		$permissao5 = (($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] == 'M') && ($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != '' )) ? '((SP.ConcluidoSubProcedimento = "S") OR (SP.ConcluidoSubProcedimento = "N")) AND ' : FALSE;		
+		
 		$query = $this->db->query('
             SELECT
                 P.idApp_Procedimento,
@@ -597,7 +603,11 @@ class Agenda_model extends CI_Model {
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
 					LEFT JOIN Tab_Prioridade AS PR ON PR.idTab_Prioridade = P.Prioridade
             WHERE
-
+				' . $permissao1 . '
+				' . $permissao2 . '
+				' . $permissao3 . '
+				' . $permissao4 . '
+				' . $permissao5 . '
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				P.Compartilhar = ' . $_SESSION['log']['id'] . ' OR
@@ -617,17 +627,21 @@ class Agenda_model extends CI_Model {
     }
 	
 	public function list1_procedimento($data, $completo) {
-
-
+	
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'P.DataProcedimento' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
-		$filtro4 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
-		$filtro7 = ($data['ConcluidoSubProcedimento']) ? 'SP.ConcluidoSubProcedimento = "' . $data['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
-		$filtro5 = ($data['Prioridade']) ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
-		$filtro6 = ($data['Categoria']) ? 'P.Categoria = "' . $data['Categoria'] . '" AND ' : FALSE;
+		$filtro5 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
+		$filtro8 = ($data['ConcluidoSubProcedimento']) ? 'SP.ConcluidoSubProcedimento = "' . $data['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
+		$filtro6 = ($data['Prioridade']) ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
+		$filtro9 = ($data['Categoria']) ? 'P.Categoria = "' . $data['Categoria'] . '" AND ' : FALSE;
+		#$filtro5 = ($data['ConcluidoProcedimento'] != '0') ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
+        #$filtro6 = ($data['Prioridade'] != '0') ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;		
+		#$filtro9 = ($data['Categoria'] != '0') ? 'P.Categoria = "' . $data['Categoria'] . '" AND ' : FALSE;		
+		#$filtro8 = (($data['ConcluidoSubProcedimento'] != '0') && ($data['ConcluidoSubProcedimento'] != 'M')) ? 'SP.ConcluidoSubProcedimento = "' . $data['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoSubProcedimento'] == 'M') ? '((SP.ConcluidoSubProcedimento = "S") OR (SP.ConcluidoSubProcedimento = "N")) AND ' : FALSE;		
 		$data['ConcluidoProcedimento'] = ($data['ConcluidoProcedimento'] != '') ? ' AND P.ConcluidoProcedimento = ' . $data['ConcluidoProcedimento'] : FALSE;
 		$data['ConcluidoSubProcedimento'] = ($data['ConcluidoSubProcedimento'] != '') ? ' AND SP.ConcluidoSubProcedimento = ' . $data['ConcluidoSubProcedimento'] : FALSE;
 		$data['Prioridade'] = ($data['Prioridade'] != '') ? ' AND P.Prioridade = ' . $data['Prioridade'] : FALSE;
@@ -665,10 +679,13 @@ class Agenda_model extends CI_Model {
 					LEFT JOIN Tab_Categoria AS CT ON CT.idTab_Categoria = P.Categoria
             WHERE
 
-				' . $filtro4 . '
 				' . $filtro5 . '
+				' . $filtro8 . '
 				' . $filtro6 . '
-				' . $filtro7 . '
+				' . $filtro9 . '
+				
+				
+				
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				(P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.idSis_Usuario = ' . $_SESSION['log']['id'] . '))

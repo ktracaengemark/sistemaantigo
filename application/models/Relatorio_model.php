@@ -8049,12 +8049,15 @@ exit();*/
 		#$filtro5 = ($data['Prioridade']) ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
 		$filtro5 = ($data['ConcluidoProcedimento'] != '0') ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
         $filtro6 = ($data['Prioridade'] != '0') ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;		
-		$filtro8 = ($data['ConcluidoSubProcedimento'] != '0') ? 'SP.ConcluidoSubProcedimento = "' . $data['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
 		$filtro9 = ($data['Categoria'] != '0') ? 'P.Categoria = "' . $data['Categoria'] . '" AND ' : FALSE;
+		$filtro8 = (($data['ConcluidoSubProcedimento'] != '0') && ($data['ConcluidoSubProcedimento'] != 'M')) ? 'SP.ConcluidoSubProcedimento = "' . $data['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoSubProcedimento'] == 'M') ? '((SP.ConcluidoSubProcedimento = "S") OR (SP.ConcluidoSubProcedimento = "N")) AND ' : FALSE;
+		$data['Procedimento'] = ($data['Procedimento']) ? ' AND P.idApp_Procedimento = ' . $data['Procedimento'] : FALSE;
 		#$data['ConcluidoProcedimento'] = ($data['ConcluidoProcedimento'] != '') ? ' AND P.ConcluidoProcedimento = ' . $data['ConcluidoProcedimento'] : FALSE;
 		#$data['Prioridade'] = ($data['Prioridade'] != '') ? ' AND P.Prioridade = ' . $data['Prioridade'] : FALSE;
-		$data['Procedimento'] = ($data['Procedimento']) ? ' AND P.idApp_Procedimento = ' . $data['Procedimento'] : FALSE;
-
+		#$permissao1 = (($_SESSION['FiltroAlteraProcedimento']['Categoria'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Categoria'] != '' )) ? 'P.Categoria = "' . $_SESSION['FiltroAlteraProcedimento']['Categoria'] . '" AND ' : FALSE;
+		#$permissao2 = (($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != '' )) ? 'P.ConcluidoProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] . '" AND ' : FALSE;
+		#$permissao3 = (($_SESSION['FiltroAlteraProcedimento']['Prioridade'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Prioridade'] != '' )) ? 'P.Prioridade = "' . $_SESSION['FiltroAlteraProcedimento']['Prioridade'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('
             SELECT
@@ -8073,9 +8076,9 @@ exit();*/
 				P.Compartilhar,
 				CT.Categoria,
 				SP.SubProcedimento,
-				SP.ConcluidoSubProcedimento,				
+				SP.ConcluidoSubProcedimento,
 				SP.DataSubProcedimento,
-				SP.DataSubProcedimentoLimite,				
+				SP.DataSubProcedimentoLimite,
 				SN.StatusSN
             FROM
 				App_Procedimento AS P
@@ -8086,11 +8089,12 @@ exit();*/
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
 					LEFT JOIN Tab_Categoria AS CT ON CT.idTab_Categoria = P.Categoria
             WHERE
-
+				
 				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro8 . '
 				' . $filtro9 . '
+				' . $filtro3 . '
 				(' . $consulta . ') AND
 				((U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ') OR
@@ -9073,6 +9077,12 @@ exit();*/
 
 	public function select_tarefa() {
 
+		$permissao1 = (($_SESSION['FiltroAlteraProcedimento']['Categoria'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Categoria'] != '' )) ? 'P.Categoria = "' . $_SESSION['FiltroAlteraProcedimento']['Categoria'] . '" AND ' : FALSE;
+		$permissao2 = (($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != '' )) ? 'P.ConcluidoProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] . '" AND ' : FALSE;
+		$permissao3 = (($_SESSION['FiltroAlteraProcedimento']['Prioridade'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Prioridade'] != '' )) ? 'P.Prioridade = "' . $_SESSION['FiltroAlteraProcedimento']['Prioridade'] . '" AND ' : FALSE;
+		$permissao4 = ((($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != "0")&& ($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != 'M') ) && ($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != '' )) ? 'SP.ConcluidoSubProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
+		$permissao5 = (($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] == 'M') && ($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != '' )) ? '((SP.ConcluidoSubProcedimento = "S") OR (SP.ConcluidoSubProcedimento = "N")) AND ' : FALSE;
+		
 		$query = $this->db->query('
             SELECT
                 P.idApp_Procedimento,
@@ -9086,7 +9096,11 @@ exit();*/
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
 					LEFT JOIN Tab_Prioridade AS PR ON PR.idTab_Prioridade = P.Prioridade
             WHERE
-
+				' . $permissao1 . '
+				' . $permissao2 . '
+				' . $permissao3 . '
+				' . $permissao4 . '
+				' . $permissao5 . '
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				P.Compartilhar = ' . $_SESSION['log']['id'] . ' OR
@@ -9160,7 +9174,7 @@ exit();*/
     }
 
 	public function select_produtos() {
-
+	
         $query = $this->db->query('
             SELECT
                 OB.idTab_Produto,
@@ -9179,7 +9193,7 @@ exit();*/
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = OB.Prodaux3
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produto = OB.idTab_Produto
             WHERE
-                OB.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				OB.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OB.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 OB.CodProd,

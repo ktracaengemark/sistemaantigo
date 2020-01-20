@@ -1141,7 +1141,10 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];
 		$_SESSION['FiltroAlteraParcela']['ConcluidoProduto'] = $data['query']['ConcluidoProduto'];
 		$_SESSION['FiltroAlteraParcela']['DevolvidoProduto'] = $data['query']['DevolvidoProduto'];
-		$_SESSION['FiltroAlteraParcela']['ConcluidoServico'] = $data['query']['ConcluidoServico'];		
+		$_SESSION['FiltroAlteraParcela']['ConcluidoServico'] = $data['query']['ConcluidoServico'];
+		$_SESSION['FiltroAlteraParcela']['Prodaux1'] = $data['query']['Prodaux1'];
+		$_SESSION['FiltroAlteraParcela']['Prodaux2'] = $data['query']['Prodaux2'];
+		$_SESSION['FiltroAlteraParcela']['Prodaux3'] = $data['query']['Prodaux3'];
 		$_SESSION['Imprimir']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];		
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -5711,15 +5714,21 @@ class Relatorio extends CI_Controller {
 		if (!$data['query']['DataInicio'])
            $data['query']['DataInicio'] = '01/01/2017';
 		*/
+		
+		$_SESSION['FiltroAlteraProcedimento']['Categoria'] = $data['query']['Categoria'];
+		$_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+		$_SESSION['FiltroAlteraProcedimento']['Prioridade'] = $data['query']['Prioridade'];
+		$_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] = $data['query']['ConcluidoSubProcedimento'];
+		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
         $this->form_validation->set_rules('DataInicio', 'Data Início', 'trim|valid_date');
         $this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
 
         $data['select']['ConcluidoProcedimento'] = array(
-            '0' => 'TODOS',
+            '0' => '::Todos::',
+			'S' => 'Sim',
 			'N' => 'Não',
-            'S' => 'Sim',
         );
 
         $data['select']['Prioridade'] = array(
@@ -5736,9 +5745,10 @@ class Relatorio extends CI_Controller {
         );
 */
 		$data['select']['ConcluidoSubProcedimento'] = array(
-            '0' => 'TODOS',
-            'N' => 'Não',
-            'S' => 'Sim',
+            '0' => '::Todos::',
+			'S' => 'Sim',
+			'N' => 'Não',
+			'M' => 'Com SubTarefa',
         );
 
         $data['select']['Campo'] = array(
