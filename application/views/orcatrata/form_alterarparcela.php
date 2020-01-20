@@ -141,22 +141,6 @@
 												}
 												?>
 												</div>
-												<!--
-												<div class="panel panel-warning">
-													<div class="panel-heading">										
-														<div class="form-group">	
-															<div class="row">	
-																<div class="col-md-2 text-left">
-																	<button class="btn btn-warning" type="button" data-toggle="collapse" onclick="adicionaParcelas()"
-																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas">
-																		<span class="glyphicon glyphicon-plus"></span> Adicionar Parcelas
-																	</button>
-																</div>
-															</div>
-														</div>	
-													</div>
-												</div>
-												-->
 											</div>
 									</div>									
 								</div>

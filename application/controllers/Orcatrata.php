@@ -4689,7 +4689,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['NomeFornecedor'] = $this->Basico_model->select_fornecedor();		
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		
-        $data['titulo'] = 'Edirar Produtos';
+        $data['titulo'] = 'Compras';
         $data['form_open_path'] = 'orcatrata/alterarprodutodesp';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -4877,7 +4877,7 @@ class Orcatrata extends CI_Controller {
                 #redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
 				#redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/parcelas/' . $data['msg']);
-				redirect(base_url() . 'relatorio/compvend/' . $data['msg']);
+				redirect(base_url() . 'relatorio/produtosvend/' . $data['msg']);
 				exit();
             }
         }
@@ -5025,7 +5025,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['NomeCliente'] = $this->Basico_model->select_cliente();		
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		
-        $data['titulo'] = 'Edirar Produtos';
+        $data['titulo'] = 'Vendas';
         $data['form_open_path'] = 'orcatrata/alterarprodutorec';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -5214,7 +5214,7 @@ class Orcatrata extends CI_Controller {
                 #redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
 				#redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/parcelas/' . $data['msg']);
-				redirect(base_url() . 'relatorio/compvend/' . $data['msg']);
+				redirect(base_url() . 'relatorio/produtosvend/' . $data['msg']);
 				exit();
             }
         }
