@@ -40,16 +40,19 @@
 		<div class="panel-heading">
 			
 			<?php echo form_open('agenda', 'role="form"'); ?>
+			<div class=" btn btn-success" type="button" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
+				<span class="glyphicon glyphicon-chevron-up"></span>Tarefas 
+			</div>			
 			<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 			<a class="btn btn-md btn-danger" href="<?php echo base_url() ?>tarefa/cadastrar" role="button"> 
 				<span class="glyphicon glyphicon-plus"></span> Nova 
 			</a>
 			<?php } ?>
 			<div class="btn-group">
-				<a type="button" class="btn btn-md btn-primary" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+				<a type="button" class="btn btn-md btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 					<span class="glyphicon glyphicon-filter"></span> Filtrar Tarefas
 				</a>
-				<button type="button" class="btn btn-md btn-primary dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<button type="button" class="btn btn-md btn-warning dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" role="menu">							
@@ -66,7 +69,8 @@
 					</li>
 					
 				</ul>
-			</div>			
+			</div>
+			
 			<!--
 			<button  class="btn btn-md btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar
@@ -76,11 +80,7 @@
 					<span class="glyphicon glyphicon-edit"></span> Editar
 				</button>
 			</a>
-			
-			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
-				<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo1; ?> 
-			</div>
-			-->			
+			-->
 			<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/alterarprocedimento" role="button"> 
 				<span class="glyphicon glyphicon-ok"></span> Edit Todas
 			</a>-->											
@@ -489,8 +489,8 @@
 				</select>
 			</div>	
 			<?php } ?>
-			<div class=" btn btn-primary" type="button" data-toggle="collapse" data-target="#Agenda" aria-expanded="false" aria-controls="Agenda">
-				<span class="glyphicon glyphicon-pencil"></span> Agenda
+			<div class=" btn btn-success" type="button" data-toggle="collapse" data-target="#Agenda" aria-expanded="false" aria-controls="Agenda">
+				<span class="glyphicon glyphicon-chevron-up"></span> Agenda
 			</div>
 			<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#Calendario" aria-expanded="false" aria-controls="Calendario">
 				<span class="glyphicon glyphicon-calendar"></span> Calendário

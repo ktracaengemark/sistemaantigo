@@ -23,7 +23,7 @@
 				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>relatorio2/produtos2" role="button">
-							<button type="button" class="btn btn-lg btn-warning ">
+							<button type="button" class="btn btn-lg btn-default ">
 								<span class="glyphicon glyphicon-calendar"></span>Valores
 							</button>
 						</a>						
@@ -52,7 +52,7 @@
 			<div class="btn-group " role="group" aria-label="...">
 				<div class="row text-left">	
 					<div class="col-md-12">
-						<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+						<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 							<span class="glyphicon glyphicon-filter"></span>Filtrar Estoque
 						</button>
 					</div>
@@ -259,7 +259,7 @@
 				<div class="row text-left">
 					<div class="form-group col-md-4">
 						<div class="form-footer ">
-							<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
+							<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
 								<span class="glyphicon glyphicon-filter"></span> Filtrar
 							</button>
 						</div>
@@ -267,7 +267,7 @@
 					
 					<div class="form-group col-md-4">
 						<div class="form-footer">		
-							<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio2/produtos2" role="button">
+							<a class="btn btn-default btn-block" href="<?php echo base_url() ?>relatorio2/produtos2" role="button">
 								<span class="glyphicon glyphicon-usd"></span> Valores
 							</a>
 						</div>	

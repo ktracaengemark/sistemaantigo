@@ -6,11 +6,11 @@
 			<div class="btn-group " role="group" aria-label="...">
 				<div class="row text-left">	
 					<div class="col-md-12">
-						<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-							<span class="glyphicon glyphicon-filter"></span>Filtro 
+						<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+							<span class="glyphicon glyphicon-filter"></span>Filtrar Fornec 
 						</button>
 						<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-							<span class="glyphicon glyphicon-plus"></span> Novo Fornecedor
+							<span class="glyphicon glyphicon-plus"></span> Novo Fornec
 						</button>
 					</div>
 				</div>	
@@ -25,7 +25,7 @@
 		<div class="modal-content">
 			<div class="modal-header bg-danger">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Produtos</h4>
+				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros do Fornecedor</h4>
 			</div>
 			<div class="modal-footer">
 				<div class="form-group">	
@@ -91,7 +91,7 @@
 					<br>
 					<div class="form-group col-md-4">
 						<div class="form-footer ">
-							<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+							<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
 								<span class="glyphicon glyphicon-filter"></span> Filtrar
 							</button>
 						</div>

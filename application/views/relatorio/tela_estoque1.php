@@ -14,13 +14,13 @@
 				
 					<?php echo form_open('relatorio/estoque', 'role="form"'); ?>
 				
-					<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+					<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 						<span class="glyphicon glyphicon-filter"></span> Filtro <!--<?php #echo $titulo; ?>-->
 					</button>											
-					<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/produtos" role="button">
+					<a class="btn btn-sm btn-default" href="<?php echo base_url() ?>relatorio/produtos" role="button">
 						<span class="glyphicon glyphicon-search"></span>Produtos
 					</a>
-					<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+					<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 						<span class="glyphicon glyphicon-plus"></span>Produto
 					</button>
 
@@ -191,14 +191,14 @@
 										<br>
 										<div class="form-group col-md-4">
 											<div class="form-footer ">
-												<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+												<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
 													<span class="glyphicon glyphicon-filter"></span> Filtrar
 												</button>
 											</div>
 										</div>
 										<div class="form-group col-md-4">
 											<div class="form-footer">		
-												<a class="btn btn-warning btn-block" href="<?php echo base_url() ?>relatorio/Produtos" role="button">
+												<a class="btn btn-default btn-block" href="<?php echo base_url() ?>relatorio/Produtos" role="button">
 													<span class="glyphicon glyphicon-search"></span> Produtos
 												</a>
 											</div>	

@@ -81,7 +81,9 @@
 							
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							<li role="separator" class="divider"></li>							
-							<li><a href="<?php echo base_url() ?>relatorio/fiadorec"><span class="glyphicon glyphicon-usd"></span> Fiado</a></li>
+							<li><a href="<?php echo base_url() ?>relatorio/fiadorec"><span class="glyphicon glyphicon-usd"></span> Fiado das Vendas</a></li>
+							<li role="separator" class="divider"></li>							
+							<li><a href="<?php echo base_url() ?>relatorio/produtosvend"><span class="glyphicon glyphicon-pencil"></span> Produtos Vendidos</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/rankingvendas"><span class="glyphicon glyphicon-pencil"></span> Ranking de Vendas</a></li>
 							<?php } ?>
@@ -110,7 +112,9 @@
 							<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							<li role="separator" class="divider"></li>							
-							<li><a href="<?php echo base_url() ?>relatorio/fiadodesp"><span class="glyphicon glyphicon-usd"></span> Fiado</a></li>
+							<li><a href="<?php echo base_url() ?>relatorio/fiadodesp"><span class="glyphicon glyphicon-usd"></span> Fiado das Compras</a></li>
+							<li role="separator" class="divider"></li>							
+							<li><a href="<?php echo base_url() ?>relatorio/produtoscomp"><span class="glyphicon glyphicon-pencil"></span> Produtos Comprados </a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/rankingcompras"><span class="glyphicon glyphicon-pencil"></span> Ranking de Compras</a></li>
 							<?php } ?>									

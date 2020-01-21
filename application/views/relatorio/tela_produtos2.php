@@ -23,7 +23,7 @@
 				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>relatorio2/estoque2" role="button">
-							<button type="button" class="btn btn-lg btn-success ">
+							<button type="button" class="btn btn-lg btn-default ">
 								<span class="glyphicon glyphicon-calendar"></span>Estoque
 							</button>
 						</a>						
@@ -178,14 +178,14 @@
 					<br>
 					<div class="form-group col-md-4">
 						<div class="form-footer ">
-							<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
+							<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
 								<span class="glyphicon glyphicon-filter"></span> Filtrar
 							</button>
 						</div>
 					</div>
 					<div class="form-group col-md-4">
 						<div class="form-footer">		
-							<a class="btn btn-success btn-block" href="<?php echo base_url() ?>relatorio2/estoque2" role="button">
+							<a class="btn btn-default btn-block" href="<?php echo base_url() ?>relatorio2/estoque2" role="button">
 								<span class="glyphicon glyphicon-gift"></span> Estoque
 							</a>
 						</div>	

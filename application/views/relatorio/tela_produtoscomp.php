@@ -22,10 +22,10 @@
 			</a>
 			-->
 			<div class="btn-group">
-				<a type="button" class="btn btn-md btn-primary" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+				<a type="button" class="btn btn-md btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 					<span class="glyphicon glyphicon-filter"></span> Filtrar Produtos
 				</a>
-				<button type="button" class="btn btn-md btn-primary dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<button type="button" class="btn btn-md btn-warning dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" role="menu">							
@@ -362,7 +362,7 @@
 				<div class="row">
 					<div class="form-group col-md-3 text-left">
 						<div class="form-footer ">
-							<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
+							<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
 								<span class="glyphicon glyphicon-filter"></span> Filtrar
 							</button>
 						</div>

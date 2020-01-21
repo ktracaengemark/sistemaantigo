@@ -9,7 +9,7 @@
 			<div class="btn-group " role="group" aria-label="...">
 				<div class="row text-left">	
 					<div class="col-md-12">
-						<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+						<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 							<span class="glyphicon glyphicon-filter"></span>Filtro de Produtos
 						</button>
 						<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
@@ -158,7 +158,7 @@
 					<br>
 					<div class="form-group col-md-4">
 						<div class="form-footer ">
-							<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+							<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
 								<span class="glyphicon glyphicon-filter"></span> Filtrar
 							</button>
 						</div>
