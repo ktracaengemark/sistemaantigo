@@ -108,25 +108,25 @@
 								-->
 								
 								<div class="col-md-2 text-left">
-									<label for="Aprovado">Cat/Tipo/Esp/Forn</label><br>
+									<label for="Cadastrar">Cat/Tipo/Esp/Forn</label><br>
 									<div class="btn-group" data-toggle="buttons">
 										<?php
-										foreach ($select['Aprovado'] as $key => $row) {
-											if (!$produtos['Aprovado']) $produtos['Aprovado'] = 'S';
+										foreach ($select['Cadastrar'] as $key => $row) {
+											if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
 
 											($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
-											if ($produtos['Aprovado'] == $key) {
+											if ($cadastrar['Cadastrar'] == $key) {
 												echo ''
-												. '<label class="btn btn-warning active" name="Aprovado_' . $hideshow . '">'
-												. '<input type="radio" name="Aprovado" id="' . $hideshow . '" '
+												. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
+												. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
 												. 'autocomplete="off" value="' . $key . '" checked>' . $row
 												. '</label>'
 												;
 											} else {
 												echo ''
-												. '<label class="btn btn-default" name="Aprovado_' . $hideshow . '">'
-												. '<input type="radio" name="Aprovado" id="' . $hideshow . '" '
+												. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
+												. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
 												. 'autocomplete="off" value="' . $key . '" >' . $row
 												. '</label>'
 												;
@@ -138,7 +138,7 @@
 									
 								</div>
 																					
-								<div class="col-md-6 text-left" id="Aprovado" <?php echo $div['Aprovado']; ?>>
+								<div class="col-md-6 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
 									<label></label><br>
 									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux32/cadastrar3" role="button"> 
 										<span class="glyphicon glyphicon-plus"></span> Cat.
@@ -159,7 +159,7 @@
 									<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
 											<span class="glyphicon glyphicon-refresh"></span> Ref.
 									</button>
-									<?php echo form_error('Aprovado'); ?>
+									<?php echo form_error('Cadastrar'); ?>
 								</div>
 																
 								<!--

@@ -46,6 +46,10 @@ class Produtos2 extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));		
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $data['produtos'] = quotes_to_entities($this->input->post(array(
             #### Tab_Produto ####
@@ -61,7 +65,7 @@ class Produtos2 extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
-			'Aprovado',
+			#'Aprovado',
         ), TRUE));
 
 
@@ -91,13 +95,13 @@ class Produtos2 extends CI_Controller {
 
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Aprovado', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
 		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		
-		$data['select']['Aprovado'] = $this->Basico_model->select_status_sn();	
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();			
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();		
@@ -131,13 +135,13 @@ class Produtos2 extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
-		(!$data['produtos']['Aprovado']) ? $data['produtos']['Aprovado'] = 'S' : FALSE;
-        $data['radio'] = array(
-            'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
-
-        ($data['produtos']['Aprovado'] == 'N') ?
-            $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
         /*
           echo '<br>';
           echo "<pre>";
@@ -153,7 +157,8 @@ class Produtos2 extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('produtos/form_produtos1', $data);
         } else {
-
+			
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produto ####
 			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
@@ -222,6 +227,10 @@ class Produtos2 extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));		
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $data['produtos'] = quotes_to_entities($this->input->post(array(
             #### Tab_Produto ####
@@ -237,7 +246,7 @@ class Produtos2 extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
-			'Aprovado',
+			#'Aprovado',
         ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -270,13 +279,13 @@ class Produtos2 extends CI_Controller {
 
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Aprovado', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
 		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		
-		$data['select']['Aprovado'] = $this->Basico_model->select_status_sn();		
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();			
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();		
@@ -310,13 +319,13 @@ class Produtos2 extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
-		(!$data['produtos']['Aprovado']) ? $data['produtos']['Aprovado'] = 'S' : FALSE;
-        $data['radio'] = array(
-            'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
-
-        ($data['produtos']['Aprovado'] == 'N') ?
-            $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';  
         /*
           echo '<br>';
           echo "<pre>";
@@ -330,6 +339,8 @@ class Produtos2 extends CI_Controller {
             //if (1 == 1) {
             $this->load->view('produtos/form_produtos2', $data);
         } else {
+			
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];			
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produto ####
@@ -401,6 +412,10 @@ class Produtos2 extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));		
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $data['produtos'] = quotes_to_entities($this->input->post(array(
             #### Tab_Produto ####
@@ -416,7 +431,7 @@ class Produtos2 extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
-			'Aprovado',
+			#'Aprovado',
         ), TRUE));
 
 
@@ -446,13 +461,13 @@ class Produtos2 extends CI_Controller {
 
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Aprovado', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
 		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim');		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		
-		$data['select']['Aprovado'] = $this->Basico_model->select_status_sn();		
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();		
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();		
@@ -486,13 +501,13 @@ class Produtos2 extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
-		(!$data['produtos']['Aprovado']) ? $data['produtos']['Aprovado'] = 'S' : FALSE;
-        $data['radio'] = array(
-            'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
-
-        ($data['produtos']['Aprovado'] == 'N') ?
-            $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
         /*
           echo '<br>';
           echo "<pre>";
@@ -508,6 +523,8 @@ class Produtos2 extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('produtos/form_produtos3', $data);
         } else {
+			
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];			
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produto ####
@@ -577,7 +594,10 @@ class Produtos2 extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $data['produtos'] = quotes_to_entities($this->input->post(array(
             #### Tab_Produto ####
@@ -592,7 +612,7 @@ class Produtos2 extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
-			'Aprovado',
+			#'Aprovado',
         ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -648,15 +668,15 @@ class Produtos2 extends CI_Controller {
         }
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
+		
         #### Tab_Produto ####
 
-        $this->form_validation->set_rules('Aprovado', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
-     
-		$data['select']['Aprovado'] = $this->Basico_model->select_status_sn();    
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['Fornecedor'] = $this->Fornecedor_model->select_fornecedor();		
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();
@@ -688,13 +708,13 @@ class Produtos2 extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
-		(!$data['produtos']['Aprovado']) ? $data['produtos']['Aprovado'] = 'S' : FALSE;
-        $data['radio'] = array(
-            'Aprovado' => $this->basico->radio_checked($data['produtos']['Aprovado'], 'Aprovado', 'NS'),
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
-
-        ($data['produtos']['Aprovado'] == 'N') ?
-            $data['div']['Aprovado'] = '' : $data['div']['Aprovado'] = 'style="display: none;"';         
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';       
         /*
           echo '<br>';
           echo "<pre>";
@@ -707,6 +727,8 @@ class Produtos2 extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('produtos/form_produtos2', $data);
         } else {
+			
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];			
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produto ####

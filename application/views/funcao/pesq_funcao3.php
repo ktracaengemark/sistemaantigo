@@ -1,24 +1,32 @@
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
-	<div class="container-fluid">
-		<li class="navbar-form">
-			<!--
-			<a <?php if (preg_match("/relatorio\/produtos2\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-				<a href="<?php echo base_url() . 'relatorio/produtos2/'; ?>">
-					<button type="button" class="btn btn-lg btn-info ">
-						<span class="glyphicon glyphicon-search"></span> Pesquisar
-					</button>										
-				</a>
-			</a>
-			-->
-			<a href="javascript:window.close()">
-				<button type="button" class="btn btn-lg btn-default ">
-					<span class="glyphicon glyphicon-remove"></span> Fechar
-				</button>
-			</a>
-		</li>
+  <div class="container-fluid">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<span class="sr-only">MENU</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span> 
+		</button>
+			<a type="button" class="navbar-toggle btn btn-lg btn-primary  " href="javascript:window.close()">
+				<span class="glyphicon glyphicon-remove"></span> Fechar
+			</a>		
 	</div>
+	<div class="collapse navbar-collapse" id="myNavbar">
+		<ul class="nav navbar-nav navbar-center">
+			<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+				<div class="btn-group " role="group" aria-label="...">
+					<a href="javascript:window.close()">
+						<button type="button" class="btn btn-lg btn-default ">
+							<span class="glyphicon glyphicon-remove"></span> Fechar
+						</button>
+					</a>
+				</div>				
+			</li>
+		</ul>
+	</div>
+  </div>
 </nav>
-
+<br>
 <?php if (isset($msg)) echo $msg; ?>
 
 <div class="container-fluid">
@@ -83,7 +91,7 @@
 														</button>
 													</div>
 													<div class="col-md-6 text-right">
-														<a class="btn btn-danger" href="<?php echo base_url() . 'funcao/excluir3/' . $query['idTab_Funcao'] ?>" role="button">
+														<a class="btn btn-danger" href="<?php echo base_url() . 'funcao2/excluir3/' . $query['idTab_Funcao'] ?>" role="button">
 															<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 														</a>
 													</div>
