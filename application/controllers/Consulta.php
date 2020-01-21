@@ -656,6 +656,7 @@ class Consulta extends CI_Controller {
 		if ($_SESSION['log']['idSis_Empresa'] == 5) {
 			$data['resumo1'] = $this->Agenda_model->get_agenda($data['query']['idApp_Agenda']);
 			$_SESSION['Agenda']['Nome'] = (strlen($data['resumo1']['Nome']) > 30) ? substr($data['resumo1']['Nome'], 0, 30) : $data['resumo1']['Nome'];
+			$_SESSION['Agenda']['NomeEmpresa'] = (strlen($data['resumo1']['NomeEmpresa']) > 30) ? substr($data['resumo1']['NomeEmpresa'], 0, 30) : $data['resumo1']['NomeEmpresa'];
 		}		
 		
 		if ($idApp_Cliente) {

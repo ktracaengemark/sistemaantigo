@@ -20,8 +20,20 @@
 							<?php echo form_open_multipart($form_open_path); ?>
 								<div class="form-group">
 									<div class="row">
-										<div class="col-md-6 panel-body">
-											<label  for="idApp_Cliente">Profissional:</label>
+										<div class="col-md-4 panel-body">
+											<label>Empresa:</label>
+											<div class="panel panel-warning">
+												<div class="panel-heading">
+													<div class="row">														
+														<div class="col-md-12">
+															<?php echo '<strong>' . $_SESSION['Agenda']['NomeEmpresa'] . '</strong>' ?>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4 panel-body">
+											<label>Profissional:</label>
 											<div class="panel panel-warning">
 												<div class="panel-heading">
 													<div class="row">														
@@ -32,7 +44,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-md-6 panel-body">
+										<div class="col-md-4 panel-body">
 											<label  for="idApp_Cliente">Cliente:</label>
 											<div class="panel panel-warning">
 												<div class="panel-heading">

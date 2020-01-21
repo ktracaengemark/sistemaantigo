@@ -276,10 +276,12 @@ class Agenda_model extends CI_Model {
     public function get_agenda($data) {
         $query = $this->db->query('
 			SELECT 
-				U.Nome
+				U.Nome,
+				E.NomeEmpresa
 			FROM 
-				Sis_Usuario AS U
-					LEFT JOIN App_Agenda AS A ON A.idSis_Usuario = U.idSis_Usuario
+				App_Agenda AS A
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = A.idSis_Usuario
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = A.idSis_Empresa
 			WHERE 
 				A.idApp_Agenda = ' . $data);
 
