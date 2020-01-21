@@ -9,7 +9,7 @@
 
 				<?php echo validation_errors(); ?>
 
-				<div class="panel panel-primary">
+				<div class="panel panel-danger">
 
 					<div class="panel-heading"><span class="glyphicon glyphicon-pencil"></span><strong> Ranking de Compras<?php #echo $titulo; ?></strong></div>
 					<div class="panel-body">
@@ -93,7 +93,7 @@
 							</div>												
 							<div class="row">	
 								<div class="col-md-2 text-left"><br />
-									<button class="btn btn-lg btn-primary" name="pesquisar" value="0" type="submit">
+									<button class="btn btn-lg btn-warning" name="pesquisar" value="0" type="submit">
 										<span class="glyphicon glyphicon-search"></span> Pesquisar
 									</button>
 								</div>

@@ -49,7 +49,7 @@
 		<div class="panel-heading">
 			<!--<span class="glyphicon glyphicon-usd"></span> Produtos & Valores-->
 			<div class="btn-group " role="group" aria-label="...">
-				<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+				<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 					<span class="glyphicon glyphicon-filter"></span>Filtrar Valores
 				</button>
 			</div>			

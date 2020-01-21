@@ -140,7 +140,7 @@
 			<div class="modal-footer">
 				<div class="form-group col-md-4 text-left">
 					<div class="form-footer">
-						<button  class="btn btn-info btn-block"" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+						<button  class="btn btn-warning btn-block"" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 							<span class="glyphicon glyphicon-search"></span> Pesquisar
 						</button>
 					</div>

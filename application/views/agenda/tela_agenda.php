@@ -178,7 +178,7 @@
 							<div class="row">
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
-										<button class="btn btn-info btn-block" name="pesquisar" value="0" type="submit">
+										<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
 											<span class="glyphicon glyphicon-filter"></span> Filtrar
 										</button>
 									</div>

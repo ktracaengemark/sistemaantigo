@@ -8,7 +8,7 @@
 			<?php echo form_open('relatorioempresa/associado', 'role="form"'); ?>
 			
 			
-			<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+			<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 					<span class="glyphicon glyphicon-search"></span><?php echo $titulo; ?>
 			</button>
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorioempresa/empresas" role="button">
@@ -37,7 +37,7 @@
 						<div class="modal-footer">
 							<div class="form-group col-md-4 text-left">
 								<div class="form-footer">
-									<button  class="btn btn-info btn-block"" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+									<button  class="btn btn-warning btn-block"" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 										<span class="glyphicon glyphicon-search"></span> Pesquisar
 									</button>
 								</div>
@@ -115,7 +115,7 @@
 									<br>
 									<div class="form-group col-md-4 text-left">
 										<div class="form-footer ">
-											<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+											<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
 												<span class="glyphicon glyphicon-filter"></span> Filtrar
 											</button>
 										</div>

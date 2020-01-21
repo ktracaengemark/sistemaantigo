@@ -31,7 +31,7 @@
 				</select>
 			</div>			
 			<a href="<?php echo base_url() . 'orcatrata/alterarparceladespfiado/' . $_SESSION['log']['idSis_Empresa']; ?>">
-				<button type="button" class="btn btn-sm btn-info">
+				<button type="button" class="btn btn-sm btn-warning">
 					<span class="glyphicon glyphicon-edit"></span> Editar Parcelas Filtradas
 				</button>
 			</a>

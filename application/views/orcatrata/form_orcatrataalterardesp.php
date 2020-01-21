@@ -6,7 +6,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoEntregues" aria-expanded="false" aria-controls="NaoEntregues">
-						<span class="glyphicon glyphicon-pencil"></span> Não Entregues
+						<span class="glyphicon glyphicon-chevron-up"></span> Não Entregues
 					</div>
 				</div>
 				<div <?php echo $collapse; ?> id="NaoEntregues">	
@@ -22,7 +22,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoPagos" aria-expanded="false" aria-controls="NaoPagos">
-						<span class="glyphicon glyphicon-pencil"></span> Não Pagos
+						<span class="glyphicon glyphicon-chevron-up"></span> Não Pagos
 					</div>					
 					<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/fiadodesp" role="button">
 						<span class="glyphicon glyphicon-search"></span> Fiado

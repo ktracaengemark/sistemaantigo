@@ -38,7 +38,7 @@
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<?php echo form_open('relatorio2/clientes3', 'role="form"'); ?>
-			<button  class="btn btn-sm btn-default" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+			<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span> Filtro <?php echo $titulo; ?>
 			</button>
 			<!--											
@@ -140,7 +140,7 @@
 						<br>
 						<div class="form-group col-md-3 text-left">
 							<div class="form-footer ">
-								<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+								<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
 									<span class="glyphicon glyphicon-filter"></span> Filtrar
 								</button>
 							</div>
@@ -176,7 +176,7 @@
 			<div class="modal-footer">
 				<div class="form-group col-md-4 text-left">
 					<div class="form-footer">
-						<button  class="btn btn-info btn-block"" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+						<button  class="btn btn-warning btn-block"" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 							<span class="glyphicon glyphicon-search"></span> Pesquisar
 						</button>
 					</div>

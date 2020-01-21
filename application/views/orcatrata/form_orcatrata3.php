@@ -6,7 +6,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoEntregues" aria-expanded="false" aria-controls="NaoEntregues">
-						<span class="glyphicon glyphicon-gift"></span> Não Entregues
+						<span class="glyphicon glyphicon-chevron-up"></span> Não Entregues
 					</div>					
 				</div>
 				<div <?php echo $collapse; ?> id="NaoEntregues">
@@ -22,7 +22,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoDevolvidos" aria-expanded="false" aria-controls="NaoDevolvidos">
-						<span class="glyphicon glyphicon-gift"></span> Não Devolvidos
+						<span class="glyphicon glyphicon-chevron-up"></span> Não Devolvidos
 					</div>			
 				</div>
 				<div <?php echo $collapse; ?> id="NaoDevolvidos">				
@@ -38,7 +38,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoRecebidos" aria-expanded="false" aria-controls="NaoRecebidos">
-						<span class="glyphicon glyphicon-usd"></span> Não Recebidos
+						<span class="glyphicon glyphicon-chevron-up"></span> Não Recebidos
 					</div>
 					<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/fiadorec" role="button">
 						<span class="glyphicon glyphicon-search"></span> Fiado
