@@ -4178,7 +4178,7 @@ class Orcatrata extends CI_Controller {
         $data['form_open_path'] = 'orcatrata/alterarparceladespfiado';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'primary';
+        $data['panel'] = 'danger';
         $data['metodo'] = 2;
 
 		$data['collapse'] = '';	
@@ -4309,7 +4309,7 @@ class Orcatrata extends CI_Controller {
 
                 #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/despesasparc/' . $data['msg']);
-				redirect(base_url() . 'relatorio/fiado/' . $data['msg']);
+				redirect(base_url() . 'relatorio/fiadodesp/' . $data['msg']);
 
 				exit();
             }
@@ -4406,11 +4406,11 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Orcarec'] = $this->Basico_model->select_orcarec();
 		$data['select']['NomeCliente'] = $this->Basico_model->select_cliente();		
 		
-        $data['titulo'] = 'Receitas ';
+        $data['titulo'] = 'Receitas';
         $data['form_open_path'] = 'orcatrata/alterarparcelarecfiado';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'primary';
+        $data['panel'] = 'info';
         $data['metodo'] = 2;
 
 		$data['collapse'] = '';	
@@ -4540,7 +4540,7 @@ class Orcatrata extends CI_Controller {
 
                 #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/receitasparc/' . $data['msg']);
-				redirect(base_url() . 'relatorio/fiado/' . $data['msg']);
+				redirect(base_url() . 'relatorio/fiadorec/' . $data['msg']);
 
 				exit();
             }

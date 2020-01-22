@@ -14,14 +14,14 @@
 					<?php echo validation_errors(); ?>
 					<?php echo form_open_multipart($form_open_path); ?>
 
-					<div class="panel panel-primary panel-<?php echo $panel; ?>">
+					<div class="panel panel-<?php echo $panel; ?>">
 						<div class="panel-heading">
 							<?php if ($titulo == "Receitas" ) { ?>
-							<a class="btn btn-md btn-primary" href="<?php echo base_url() ?>relatorio/parcelasrec" role="button">
+							<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/parcelasrec" role="button">
 								<span class="glyphicon glyphicon-pencil"></span> Rel. das <?php echo $titulo; ?>
 							</a>							
 							<?php } else { ?>
-							<a class="btn btn-md btn-primary" href="<?php echo base_url() ?>relatorio/parcelasdesp" role="button">
+							<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/parcelasdesp" role="button">
 								<span class="glyphicon glyphicon-pencil"></span> Rel. das <?php echo $titulo; ?>
 							</a>
 							<?php } ?>
@@ -68,11 +68,24 @@
 														<div class="panel panel-warning">
 															<div class="panel-heading">
 																<div class="row">
-																	<div class="col-md-4">
+																	<div class="col-md-2">
 																		<label for="Parcela">Parcela <?php echo $i ?>:</label><br>
-																		<input type="text" class="form-control" maxlength="6" readonly=""
+																		<input type="text" class="form-control" readonly=""
 																			   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
+																	</div>																	
+																	<?php if ($titulo == "Receitas" ) { ?>
+																	<div class="col-md-4">
+																		<label for="Receita">Receita:</label><br>
+																		<input type="text" class="form-control" readonly=""
+																			   name="Receita<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Receita'] ?>">
+																	</div>							
+																	<?php } else { ?>
+																	<div class="col-md-4">
+																		<label for="Despesa">Despesa:</label><br>
+																		<input type="text" class="form-control" readonly=""
+																			   name="Despesa<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Despesa'] ?>">
 																	</div>
+																	<?php } ?>
 																	<div class="col-md-2">
 																		<label for="ValorParcela">Valor Parcela:</label><br>
 																		<div class="input-group" id="txtHint">
@@ -82,7 +95,7 @@
 																		</div>
 																	</div>
 																	<div class="col-md-2">
-																		<label for="DataVencimento">Data Venc. Parc.</label>
+																		<label for="DataVencimento">Data Venc:</label>
 																		<div class="input-group DatePicker">
 																			<span class="input-group-addon" disabled>
 																				<span class="glyphicon glyphicon-calendar"></span>
@@ -92,7 +105,7 @@
 																		</div>
 																	</div>
 																	<div class="col-md-2">
-																		<label for="Quitado">Quitado????</label><br>
+																		<label for="Quitado">Quitado?</label><br>
 																		<div class="form-group">
 																			<div class="btn-group" data-toggle="buttons">
 																				<?php

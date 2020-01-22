@@ -61,13 +61,13 @@
 							<span class="glyphicon glyphicon-pencil"></span> Estatística das Tarefas
 						</a>
 					</li>					
-					
+					<!--
 					<li>
 						<a class="dropdown-item" href="<?php echo base_url() . 'orcatrata/alterarprocedimento/' . $_SESSION['log']['idSis_Empresa']; ?>">
 							<span class="glyphicon glyphicon-pencil"></span> Editar Tarefas Filtradas
 						</a>
 					</li>
-					
+					-->
 				</ul>
 			</div>
 			
