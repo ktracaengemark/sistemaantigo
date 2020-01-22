@@ -16,7 +16,7 @@
 				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>relatorio2/clientes3" role="button">
-							<button type="button" class="btn btn-lg btn-info ">
+							<button type="button" class="btn btn-lg btn-warning ">
 								<span class="glyphicon glyphicon-search"></span> Clientes
 							</button>
 						</a>						
