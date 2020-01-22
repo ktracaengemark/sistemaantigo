@@ -170,7 +170,7 @@
 						
 						<!--<hr />-->
 						
-						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
 						<?php if( isset($count['SCount']) ) { ?>							
 						<h3 class="text-left">Produtos Devolvidos  </h3>
 						<table class="table table-bordered table-condensed table-striped">
