@@ -29,138 +29,157 @@
 										</a>
 									</a>
 								</li>
+								<li role="separator" class="divider"></li>
+								<li>
+									<a <?php if (preg_match("/empresa\/alterarlogo\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
+										<a href="<?php echo base_url() . 'empresa/alterarlogo/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+											<span class="glyphicon glyphicon-edit"></span> Alterar Logo
+									</a>
+								</li>								
 							</ul>
 						</div>
 					</div>
-					<?php } ?>					
 					<div class="panel-body">
 						<div style="overflow: auto; height: 500px; ">
-							<table class="table table-user-information">
-								<tbody>
+							<div class="form-group">	
+								<div class="row">
+									<div class=" col-md-6">	
+										<div class="row">	
+											<div class="col-sm-offset-2 col-md-10 " align="left"> 
+												<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/profile-' . $query['idSis_Empresa'] . '.jpg'; ?>" 
+												class="img-circle img-responsive">
+											</div>
+										</div>		
+									</div>	
+									<div class=" col-md-6">							
+										<table class="table table-user-information">
+											<tbody>
 
-									<?php
-									
-									if ($query['NomeAdmin']) {
+												<?php
+												
+												if ($query['NomeAdmin']) {
 
-									echo '
-									<tr>
-										<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-user"></span> Admin:</td>
-										<td>' . $query['NomeAdmin'] . '</td>
-									</tr>
-									';
+												echo '
+												<tr>
+													<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-user"></span> Admin:</td>
+													<td>' . $query['NomeAdmin'] . '</td>
+												</tr>
+												';
 
-									}
-									
-									if ($query['CpfAdmin']) {
+												}
+												
+												if ($query['CpfAdmin']) {
 
-									echo '
-									<tr>
-										<td><span class="glyphicon glyphicon-phone-alt"></span> CPF:</td>
-										<td>' . $query['CpfAdmin'] . '</td>
-									</tr>
-									';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-phone-alt"></span> CPF:</td>
+													<td>' . $query['CpfAdmin'] . '</td>
+												</tr>
+												';
 
-									}
+												}
 
-									if ($query['CelularAdmin']) {
+												if ($query['CelularAdmin']) {
 
-									echo '
-									<tr>
-										<td><span class="glyphicon glyphicon-phone-alt"></span> Celular:</td>
-										<td>' . $query['CelularAdmin'] . '</td>
-									</tr>
-									';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-phone-alt"></span> Celular:</td>
+													<td>' . $query['CelularAdmin'] . '</td>
+												</tr>
+												';
 
-									}
-									
-									if ($query['DataCriacao']) {
+												}
+												
+												if ($query['DataCriacao']) {
 
-									echo '
-									<tr>
-										<td><span class="glyphicon glyphicon-gift"></span> Ingressou :</td>
-											<td>' . $query['DataCriacao'] . '</td>
-									</tr>
-									<tr>
-										<td><span class="glyphicon glyphicon-gift"></span> Tempo:</td>
-											<td>' . $query['Idade'] . ' anos</td>
-									</tr>
-									';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-gift"></span> Ingressou :</td>
+														<td>' . $query['DataCriacao'] . '</td>
+												</tr>
+												<tr>
+													<td><span class="glyphicon glyphicon-gift"></span> Tempo:</td>
+														<td>' . $query['Idade'] . ' anos</td>
+												</tr>
+												';
 
-									}
+												}
 
-									/*
-									if ($query['Sexo']) {
+												/*
+												if ($query['Sexo']) {
 
-									echo '
-									<tr>
-										<td><span class="glyphicon glyphicon-heart"></span> Sexo:</td>
-										<td>' . $query['Sexo'] . '</td>
-									</tr>
-									';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-heart"></span> Sexo:</td>
+													<td>' . $query['Sexo'] . '</td>
+												</tr>
+												';
 
-									}
-									*/
-									
-									if ($query['Email']) {
+												}
+												*/
+												
+												if ($query['Email']) {
 
-									echo '
-									<tr>
-										<td><span class="glyphicon glyphicon-envelope"></span> E-mail:</td>
-										<td>' . $query['Email'] . '</td>
-									</tr>
-									';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-envelope"></span> E-mail:</td>
+													<td>' . $query['Email'] . '</td>
+												</tr>
+												';
 
-									}
-									
-									if ($query['CategoriaEmpresa']) {
+												}
+												
+												if ($query['CategoriaEmpresa']) {
 
-									echo '
-									<tr>
-										<td><span class="glyphicon glyphicon-envelope"></span> Categoria:</td>
-										<td>' . $query['CategoriaEmpresa'] . '</td>
-									</tr>
-									';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-envelope"></span> Categoria:</td>
+													<td>' . $query['CategoriaEmpresa'] . '</td>
+												</tr>
+												';
 
-									}
-									
-									if ($query['Atuacao']) {
+												}
+												
+												if ($query['Atuacao']) {
 
-									echo '
-									<tr>
-										<td><span class="glyphicon glyphicon-envelope"></span> Atuação:</td>
-										<td>' . $query['Atuacao'] . '</td>
-									</tr>
-									';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-envelope"></span> Atuação:</td>
+													<td>' . $query['Atuacao'] . '</td>
+												</tr>
+												';
 
-									}
+												}
 
-									if ($query['Site']) {
+												if ($query['Site']) {
 
-									echo '
-									<tr>
-										<td><span class="glyphicon glyphicon-envelope"></span> Site:</td>
-										<td>' . $query['Site'] . '</td>
-									</tr>
-									';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-envelope"></span> Site:</td>
+													<td>' . $query['Site'] . '</td>
+												</tr>
+												';
 
-									}
-									
-									if ($query['Inativo']) {
+												}
+												
+												if ($query['Inativo']) {
 
-									echo '
-									<tr>
-										<td><span class="glyphicon glyphicon-alert"></span> Ativo?:</td>
-										<td>' . $query['Inativo'] . '</td>
-									</tr>
-									';
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-alert"></span> Ativo?:</td>
+													<td>' . $query['Inativo'] . '</td>
+												</tr>
+												';
 
-									}
+												}
 
-									?>
+												?>
 
-								</tbody>
-							</table>
-						
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>		
 							<div class="row">
 
 								<div class="col-md-12">
@@ -206,4 +225,4 @@
 			</div>
 		</div>
 	</div>
-
+<?php } ?>

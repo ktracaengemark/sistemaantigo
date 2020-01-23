@@ -30,17 +30,9 @@
 									</a>
 								</a>
 							</li>
-							<li role="separator" class="divider"></li>
-							<li>
-								<a <?php if (preg_match("/empresa\/alterarlogo\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
-									<a href="<?php echo base_url() . 'empresa/alterarlogo/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-										<span class="glyphicon glyphicon-edit"></span> Alterar Logo
-								</a>
-							</li>							
 						</ul>
 					</div>
 				</div>
-								
 				<div class="panel-body">
 					<div class="row">	
 						<div class="col-md-12">	
@@ -49,9 +41,10 @@
 
 							<div class="panel panel-info">
 								<div class="panel-heading">
-									<h3 class="text-left">Dados do Administrador  </h3>
+									<h3 class="text-left">Logo da Empresa  </h3>
 									<div class="form-group">
 										<div class="row">
+											<!--
 											<div class="col-md-3">
 												<label for="NomeAdmin">Nome do Admin.:</label>
 												<input type="text" class="form-control" id="NomeAdmin" maxlength="45" 
@@ -61,9 +54,59 @@
 												<label for="DataNascimento">Data do Aniver.:</label>
 												<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
 													   name="DataNascimento" placeholder="DD/MM/AAAA" value="<?php echo $query['DataNascimento']; ?>">
+											</div>
+											-->
+											<div class="col-md-3">	
+												<body>	
+													<label>(Ext: .jpg / Tam Max: 50K):</label>
+													<form method="post" action="sistematestes" enctype="multipart/form-data"> <!--não sei se precisa colocar "sistemaantigo" -->
+														<input type="file" required name="arquivo"> <!--não coloquei o "" required "" -->
+														<input type="submit">
+													</form>
+													<div class="col-sm-offset-2 col-md-10 " align="left"> 
+														<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/profile-' . $query['idSis_Empresa'] . '.jpg'; ?>" 
+														class="img-circle img-responsive">
+													</div>
+													<?php
+													
+													$arquivo = isset ($_FILES['arquivo'])?$_FILES['arquivo']:"";
+
+													if(isset($_FILES['arquivo'])){
+														$nome 				= $arquivo['name'];
+														$tiposPermitidos 	= ['jpg'];
+														$tamanho			= $arquivo['size'];
+														
+														$extensao			= explode('.', $nome);
+														$extensao			= end($extensao);
+														$novoNome			= 'profile' . '-' . $_SESSION['Empresa']['idSis_Empresa'] . '.' . $extensao;
+														
+														//$novoNome			= 'VERIFICAR-' . 'profile' . '-' . $_SESSION['Empresa']['idSis_Empresa'] . '.' . $extensao; 
+														//Essa linha será para, a Ktraca, verificar a logo, antes de ser exibida, 
+														//pois a imagem pode não ser permitida. Depois criarei um método de verificação.
+														//por enquanto a logo selhecionada, pelu usuário, entrará direto. 
+														
+														if(in_array($extensao, $tiposPermitidos)){
+															if($tamanho > 60000){
+																print "O Tamanho do Arquivo excede o limite permitido!";
+															}else{
+																$mover = move_uploaded_file($_FILES['arquivo']['tmp_name'], 'arquivos/imagens/empresas/' . $novoNome);
+																print "Arquivo enviado com Sucesso!";
+															}
+														}else{
+															print "O Tipo de Arquivo não é Permitido!";
+														}
+														
+														//print_r($novoNome);
+													}
+													
+													?>
+												</body>
 											</div>	
 										</div>
 									</div>
+									
+
+									<!--
 									<div class="form-group">
 										<div class="row">											
 											<div class="col-md-3">
@@ -85,7 +128,8 @@
 											</div>											
 										</div>
 									</div>
-
+									
+									
 									<h3 class="text-left">Dados da Empresa  </h3>									
 									<div class="form-group">
 										<div class="row">
@@ -185,76 +229,19 @@
 											</div>
 										</div>
 									</div>
+									-->
 									</form>
 								</div>
 							</div>
 						</div>
 					</div>		
+					
 					<div class="form-group">
 						<div class="row">
 							<input type="hidden" name="idSis_Empresa" value="<?php echo $query['idSis_Empresa']; ?>">
-							<?php if ($metodo == 2) { ?>
-
-								<div class="col-md-6">
-									<button class="btn btn-sm btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-										<span class="glyphicon glyphicon-save"></span> Salvar
-									</button>
-								</div>
-								<!--
-								<div class="col-md-6 text-right">
-									<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-										<span class="glyphicon glyphicon-trash"></span> Excluir
-									</button>
-								</div>
-								-->
-								<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header bg-danger">
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
-											</div>
-											<div class="modal-body">
-												<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
-													Esta operação é irreversível.</p>
-											</div>
-											<div class="modal-footer">
-												<div class="col-md-6 text-left">
-													<button type="button" class="btn btn-warning" data-dismiss="modal">
-														<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
-													</button>
-												</div>
-												<div class="col-md-6 text-right">
-													<a class="btn btn-danger" href="<?php echo base_url() . 'empresa/excluir/' . $query['idSis_Empresa'] ?>" role="button">
-														<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
-													</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-							<?php } elseif ($metodo == 3) { ?>
-								<div class="col-md-12 text-center">
-									<!--
-									<button class="btn btn-lg btn-danger" id="inputDb" data-loading-text="Aguarde..." name="submit" value="1" type="submit">
-										<span class="glyphicon glyphicon-trash"></span> Excluir
-									</button>
-									-->
-									<button class="btn btn-sm btn-warning" id="inputDb" onClick="history.go(-1);
-											return true;">
-										<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
-									</button>
-								</div>
-							<?php } else { ?>
-								<div class="col-md-6">
-									<button class="btn btn-sm btn-primary" id="inputDb" data-loading-text="Aguarde..." name="submit" value="1" type="submit">
-										<span class="glyphicon glyphicon-save"></span> Salvar
-									</button>
-								</div>
-							<?php } ?>
 						</div>
 					</div>
+					
 				</div>	
 			</div>		
 		</div>
