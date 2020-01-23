@@ -55,8 +55,48 @@
 												<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
 													   name="DataNascimento" placeholder="DD/MM/AAAA" value="<?php echo $query['DataNascimento']; ?>">
 											</div>
+											<div class="col-md-3">	
+												<body>	
+													<label>Logo (ext: .jpg / Tam Max: 50K):</label>
+													<form method="post" action="sistemaantigo.php" enctype="multipart/form-data"> <!--não sei se precisa colocar "sistemaantigo" -->
+														<input type="file" name="arquivo" > <!--não coloquei o "" required "" -->
+													</form>
+													
+													<?php
+													
+													$arquivo = isset ($_FILES['arquivo'])?$_FILES['arquivo']:"";
+
+													if(isset($_FILES['arquivo'])){
+														$nome 				= $arquivo['name'];
+														$tiposPermitidos 	= ['jpg'];
+														$tamanho			= $arquivo['size'];
+														
+														$extensao			= explode('.', $nome);
+														$extensao			= end($extensao);
+														$novoNome			= 'profile' . '-' . $_SESSION['Empresa']['idSis_Empresa'];
+														
+														if(in_array($extensao, $tiposPermitidos)){
+															if($tamanho > 60000){
+																print "O Tamanho do Arquivo excede o limite permitido!";
+															}else{
+																$mover = move_uploaded_file($_FILES['arquivo']['tmp_name'], 'arquivos/imagens/empresas/' . $novoNome);
+																//print "<img src='arquivos/imagens/empresas/$novoNome' width='200'>";
+															}
+														}else{
+															print "O Tipo de Arquivo não é Permitido!";
+														}
+														
+														//print_r($novoNome);
+													}
+													
+													?>
+												</body>
+											</div>	
 										</div>
-									</div>	
+									</div>
+									
+
+									
 									<div class="form-group">
 										<div class="row">											
 											<div class="col-md-3">

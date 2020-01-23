@@ -166,7 +166,8 @@ class Empresa extends CI_Controller {
         ), TRUE);
 
         if ($id) {
-            $data['query'] = $this->Empresa_model->get_empresa($id);
+            $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
+			//$data['query'] = $this->Empresa_model->get_empresa($id);
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
         }
 
