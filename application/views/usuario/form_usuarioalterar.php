@@ -132,6 +132,23 @@
 														</select>
 													</div>
 													<div class="col-md-3">
+														<label for="Permissao">Acesso às Agendas:*</label>
+														<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+																id="Permissao" name="Permissao">
+															<option value="">-- Selecione uma Permissao --</option>
+															<?php
+															foreach ($select['Permissao'] as $key => $row) {
+																if ($query['Permissao'] == $key) {
+																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																} else {
+																	echo '<option value="' . $key . '">' . $row . '</option>';
+																}
+															}
+															?>   
+														</select>          
+														<?php echo form_error('Permissao'); ?>
+													</div>													
+													<div class="col-md-6">
 														<div class="row">
 															<div class="col-md-12 text-left">	
 																<label  for="Funcao">Funçao:</label>
@@ -179,7 +196,7 @@
 																	?>
 																
 																</div>
-																
+																<?php echo form_error('Funcao'); ?>
 															</div>
 																												
 															<div class="col-md-6 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
@@ -193,52 +210,7 @@
 																<?php echo form_error('Cadastrar'); ?>
 															</div>
 														</div>
-														<?php echo form_error('Funcao'); ?>
-													</div>
-													<div class="col-md-3">
-														<label for="Permissao">Acesso às Agendas:*</label>
-														<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-																id="Permissao" name="Permissao">
-															<option value="">-- Selecione uma Permissao --</option>
-															<?php
-															foreach ($select['Permissao'] as $key => $row) {
-																if ($query['Permissao'] == $key) {
-																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																} else {
-																	echo '<option value="' . $key . '">' . $row . '</option>';
-																}
-															}
-															?>   
-														</select>          
-														<?php echo form_error('Permissao'); ?>
-													</div>
-													<div class="col-md-2">
-														<label for="Inativo">Ativo?</label><br>
-														<div class="form-group">
-															<div class="btn-group" data-toggle="buttons">
-																<?php
-																foreach ($select['Inativo'] as $key => $row) {
-																	(!$query['Inativo']) ? $query['Inativo'] = '0' : FALSE;
-
-																	if ($query['Inativo'] == $key) {
-																		echo ''
-																		. '<label class="btn btn-warning active" name="radiobutton_Inativo" id="radiobutton_Inativo' . $key . '">'
-																		. '<input type="radio" name="Inativo" id="radiobutton" '
-																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																		. '</label>'
-																		;
-																	} else {
-																		echo ''
-																		. '<label class="btn btn-default" name="radiobutton_Inativo" id="radiobutton_Inativo' . $key . '">'
-																		. '<input type="radio" name="Inativo" id="radiobutton" '
-																		. 'autocomplete="off" value="' . $key . '" >' . $row
-																		. '</label>'
-																		;
-																	}
-																}
-																?>
-															</div>
-														</div>
+														
 													</div>
 													<!--
 													<div class="col-md-2">
@@ -300,6 +272,34 @@
 															   name="Email" value="<?php echo $query['Email']; ?>">
 														<?php echo form_error('Email'); ?>
 													</div>
+													<div class="col-md-3">
+														<label for="Inativo">Ativo?</label><br>
+														<div class="form-group">
+															<div class="btn-group" data-toggle="buttons">
+																<?php
+																foreach ($select['Inativo'] as $key => $row) {
+																	(!$query['Inativo']) ? $query['Inativo'] = '0' : FALSE;
+
+																	if ($query['Inativo'] == $key) {
+																		echo ''
+																		. '<label class="btn btn-warning active" name="radiobutton_Inativo" id="radiobutton_Inativo' . $key . '">'
+																		. '<input type="radio" name="Inativo" id="radiobutton" '
+																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																		. '</label>'
+																		;
+																	} else {
+																		echo ''
+																		. '<label class="btn btn-default" name="radiobutton_Inativo" id="radiobutton_Inativo' . $key . '">'
+																		. '<input type="radio" name="Inativo" id="radiobutton" '
+																		. 'autocomplete="off" value="' . $key . '" >' . $row
+																		. '</label>'
+																		;
+																	}
+																}
+																?>
+															</div>
+														</div>
+													</div>													
 												</div>
 											</div>
 											<div class="form-group">
