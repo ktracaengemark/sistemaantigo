@@ -64,6 +64,7 @@
 											</div>	
 										</div>
 									</div>
+									<!--
 									<div class="form-group">
 										<div class="row">											
 											<div class="col-md-3">
@@ -85,10 +86,17 @@
 											</div>											
 										</div>
 									</div>
-
+									-->
 									<h3 class="text-left">Dados da Empresa  </h3>									
 									<div class="form-group">
 										<div class="row">
+
+											<div class="col-md-3 "> 
+												<label>Logo Marca</label>
+												<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $query['Arquivo'] . ''; ?>" 
+												class="img-circle img-responsive">
+											</div>
+
 											<div class="col-md-3">
 												<label for="CategoriaEmpresa">Categoria:*</label>
 												<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -110,12 +118,14 @@
 												<textarea class="form-control" id="Atuacao" <?php echo $readonly; ?>
 														  name="Atuacao"><?php echo $query['Atuacao']; ?></textarea>
 											</div>
+											<!--
 											<div class="col-md-3">
 												<label for="Site">Site:</label>
 												<input type="text" class="form-control" maxlength="50" <?php echo $readonly; ?>
 													   name="Site" value="<?php echo $query['Site']; ?>">
 											<?php echo form_error('Site'); ?>
 											</div>
+											-->
 										</div>
 									</div>
 									

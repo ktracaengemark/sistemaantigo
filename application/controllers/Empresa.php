@@ -146,7 +146,7 @@ class Empresa extends CI_Controller {
 			#'UsuarioEmpresa',
             'NomeAdmin',
             'DataNascimento',
-            'CelularAdmin',
+            #'CelularAdmin',
             'Email',
 			'Cnpj',
 			'InscEstadual',
@@ -160,10 +160,10 @@ class Empresa extends CI_Controller {
 			#'Sexo',
 			#'Inativo',
 			'CategoriaEmpresa',
-			'Site',
-            'Senha',			
-
+			#'Site',
+            #'Senha',			
         ), TRUE);
+				
 
         if ($id) {
             $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
@@ -175,19 +175,18 @@ class Empresa extends CI_Controller {
 
         #$this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim|is_unique_duplo[Sis_Empresa.NomeAdmin.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
         $this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim');
-        $this->form_validation->set_rules('Site', 'Site', 'trim|is_unique[Sis_Empresa.Site]');
+        #$this->form_validation->set_rules('Site', 'Site', 'trim|is_unique[Sis_Empresa.Site]');
 		$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        $this->form_validation->set_rules('CelularAdmin', 'Celular', 'required|trim');
+        #$this->form_validation->set_rules('CelularAdmin', 'Celular', 'required|trim');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-        $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
-        $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');		
+        #$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
+        #$this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');		
 
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
 		$data['select']['CategoriaEmpresa'] = $this->Basico_model->select_categoriaempresa();
         #$data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		#$data['select']['Empresa'] = $this->Basico_model->select_status_sn();
 		#$data['select']['Inativo'] = $this->Basico_model->select_inativo();
-
 
         $data['titulo'] = 'Editar Empresa';
         $data['form_open_path'] = 'empresa/alterar';
@@ -213,7 +212,7 @@ class Empresa extends CI_Controller {
         } else {
 
             $data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));
-            $data['query']['Senha'] = md5($data['query']['Senha']);            
+            #$data['query']['Senha'] = md5($data['query']['Senha']);            
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
             #$data['query']['Obs'] = nl2br($data['query']['Obs']);
             #$data['query']['Empresa'] = $_SESSION['log']['id'];
@@ -254,19 +253,44 @@ class Empresa extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-
 			'idSis_Empresa',
+			'NomeAdmin',
 			
         ), TRUE);
+		
+        $data['file'] = $this->input->post(array(
+            'idSis_Empresa',
+            #'Tipo',
+            'Arquivo',
+                ), TRUE);		
 
         if ($id) {
             $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
 			//$data['query'] = $this->Empresa_model->get_empresa($id);
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
         }
+		
+        if ($id)
+            $data['file']['idSis_Empresa'] = $id;		
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim');
+		
 
+        if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
+            
+			$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
+            
+			if (file_exists('arquivos/imagens/empresas/' . $data['file']['Arquivo'])) {
+
+				$data['file']['Arquivo'] = $this->basico->renomeia($data['file']['Arquivo'], 'arquivos/imagens/empresas/');
+            }
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg]|file_size_max[60000]');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
+        }
+		
         $data['titulo'] = 'Editar Empresa';
         $data['form_open_path'] = 'empresa/alterarlogo';
         $data['readonly'] = '';
@@ -283,7 +307,32 @@ class Empresa extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('empresa/form_empresalogo', $data);
         } else {
+			
+            $config['upload_path'] = 'arquivos/imagens/empresas/';
+            $config['max_size'] = 60000;
+            $config['allowed_types'] = 'jpg';
+            $config['file_name'] = $data['file']['Arquivo'];
 
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('Arquivo')) {
+                $data['msg'] = $this->basico->msg($this->upload->display_errors(), 'erro', FALSE, FALSE, FALSE);
+                $this->load->view('empresa/form_empresalogo', $data);
+            }
+            else {
+
+                $data['camposfile'] = array_keys($data['file']);
+                $data['idSis_Arquivo'] = $this->Empresa_model->set_arquivo($data['file']);
+
+                if ($data['idSis_Arquivo'] === FALSE) {
+                    $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                    $this->basico->erro($msg);
+                    $this->load->view('empresa/form_empresalogo', $data);
+                }			
+			}
+			
+			$data['query']['Arquivo'] = $data['file']['Arquivo'];
+			$data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));
             $data['anterior'] = $this->Empresa_model->get_empresa($data['query']['idSis_Empresa']);
             $data['campos'] = array_keys($data['query']);
 
@@ -309,7 +358,7 @@ class Empresa extends CI_Controller {
 
         $this->load->view('basico/footer');
     }
-
+	
     public function excluir($id = FALSE) {
 
         if ($this->input->get('m') == 1)

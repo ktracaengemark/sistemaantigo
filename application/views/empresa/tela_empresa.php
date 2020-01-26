@@ -46,11 +46,11 @@
 									<div class=" col-md-6">	
 										<div class="row">	
 											<div class="col-sm-offset-2 col-md-10 " align="left"> 
-												<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/profile-' . $query['idSis_Empresa'] . '.jpg'; ?>" 
-												class="img-circle img-responsive">
+												<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $query['Arquivo'] . ''; ?>" 
+												class="img-circle img-responsive" width='200'>
 											</div>
 										</div>		
-									</div>	
+									</div>
 									<div class=" col-md-6">							
 										<table class="table table-user-information">
 											<tbody>
@@ -144,7 +144,7 @@
 
 												echo '
 												<tr>
-													<td><span class="glyphicon glyphicon-envelope"></span> Atuação:</td>
+													<td><span class="glyphicon glyphicon-envelope"></span> Atuacao:</td>
 													<td>' . $query['Atuacao'] . '</td>
 												</tr>
 												';
@@ -161,6 +161,17 @@
 												';
 
 												}
+												
+												if ($query['Arquivo']) {
+
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-pencil"></span> Arquivo:</td>
+													<td>' . $query['Arquivo'] . '</td>
+												</tr>
+												';
+
+												}												
 												
 												if ($query['Inativo']) {
 

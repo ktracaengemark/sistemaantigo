@@ -6596,6 +6596,7 @@ exit();*/
                 E.Bairro,
 				CE.CategoriaEmpresa,
 				E.Atuacao,
+				E.Arquivo,
                 CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
                 E.Email
             FROM

@@ -109,6 +109,7 @@ class Empresacli_model extends CI_Model {
 				E.idSis_Empresa,
 				E.NomeEmpresa,
 				E.Atuacao,
+				E.Arquivo,
 				E.DataCriacao,
 				CE.CategoriaEmpresa
 			FROM 

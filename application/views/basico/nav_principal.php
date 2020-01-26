@@ -46,9 +46,9 @@
 						<a type="button" class="btn btn-lg btn-info" role="button" href="<?php echo base_url(); ?>agenda">
 							<span class="glyphicon glyphicon-calendar"></span> 
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-							Agendas & Tarefas
+							Agendas
 							<?php } else {?>
-							Agenda & Tarefas
+							Agenda
 							<?php } ?>
 						</a>
 						<button type="button" class="btn btn-lg btn-info dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -64,7 +64,7 @@
 						<a type="button" class="btn btn-lg btn-primary" role="button" href="<?php echo base_url(); ?>orcatrata/cadastrar3">
 							<span class="glyphicon glyphicon-plus"></span> 
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-							Receitas & Vendas
+							Receitas
 							<?php } else {?>
 							Receitas
 							<?php } ?>
@@ -94,7 +94,7 @@
 						<a type="button" class="btn btn-lg btn-danger" role="button" href="<?php echo base_url(); ?>orcatrata/cadastrardesp">
 							<span class="glyphicon glyphicon-plus"></span> 
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-							Despesas & Compras
+							Despesas
 							<?php } else {?>
 							Despesas
 							<?php } ?>
@@ -164,6 +164,12 @@
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">							
+							<li>
+								<a href="<?php echo base_url() ?>acesso"> 
+									<span class="glyphicon glyphicon-user"></span> Perfil
+								</a>
+							</li>
+							<li role="separator" class="divider"></li>
 							<li>
 								<a href="<?php echo base_url() ?>usuario2/prontuario/<?php echo $_SESSION['log']['id']; ?>"> 
 									<span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['log']['Nome2']; ?>./<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.

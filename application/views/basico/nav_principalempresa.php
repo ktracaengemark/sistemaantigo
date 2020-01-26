@@ -50,6 +50,14 @@
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">							
+							<li><a href="<?php echo base_url() ?>acessoempresa"><span class="glyphicon glyphicon-user"></span> Perfil</a></li>
+							<li role="separator" class="divider"></li>
+							<li>
+								<a href="<?php echo base_url() ?>empresa/prontuario/<?php echo $_SESSION['log']['id']; ?>"> 
+									<span class="glyphicon glyphicon-pencil"></span> <?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
+								</a>
+							</li>
+							<li role="separator" class="divider"></li>
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							<li><a href="<?php echo base_url() ?>relatorioempresa/sistemaempresa"><span class="glyphicon glyphicon-pencil"></span> Renovar Assinatura</a></li>
 							<li role="separator" class="divider"></li>									

@@ -28,7 +28,7 @@
 					?>
 
 					<tr class="clickable-row" data-href="<?php echo base_url() . 'empresacli2/prontuario/' . $row['idSis_Empresa'] . ''; ?>">
-						<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/profile-' . $row['idSis_Empresa'] . '.jpg'; ?> "class="img-circle img-responsive"></td>
+						<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>
 						<td><?php echo $row['NomeEmpresa'] ?></td>
 						<td><?php echo $row['idSis_Empresa'] ?></td>
 						<td><?php echo $row['CategoriaEmpresa'] ?></td>							

@@ -29,6 +29,20 @@ class Empresa_model extends CI_Model {
         }
     }
 
+    public function set_arquivo($data) {
+
+        $query = $this->db->insert('Sis_Arquivo', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+
     public function get_empresa($data) {
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE idSis_Empresa = ' . $data);
 
@@ -36,6 +50,14 @@ class Empresa_model extends CI_Model {
 
         return $query[0];
     }
+
+    public function get_arquivo($data) {
+        $query = $this->db->query('SELECT * FROM Sis_Arquivo WHERE idSis_Arquivo = ' . $data);
+        $query = $query->result_array();
+
+        return $query[0];
+
+    }    
 
     public function update_empresa($data, $id) {
 
@@ -101,6 +123,18 @@ class Empresa_model extends CI_Model {
             return TRUE;
         }
     }
+
+    public function delete_arquivo($data) {
+        $query = $this->db->delete('Sis_Arquivo', array('idSis_Arquivo' => $data));
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            return TRUE;
+        }
+
+    }    
 
     public function lista_empresa($data, $x) {
 

@@ -265,14 +265,58 @@ class Basico {
         return preg_replace("/([^\w.]+)|(\.(?=.*\.))/", "_", $data);
     }
 
+    function renomeia($data, $path) {
+		$data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
+		$data = rand() . 'profile' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . '.jpg';
+		
+        if (file_exists(APPPATH . 'arquivos/imagens/empresas/' . $data))
+            $data = $this->renomeia($data, $path . $data);
+
+        return $data;
+    }
+	
     function renomeia_arquivo($data, $path) {
 
         $data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
 
-        if (file_exists(APPPATH . 'upload/sisbedam/be/' . $data))
+        if (file_exists(APPPATH . 'arquivos/imagens/empresas/' . $data))
             $data = $this->renomeia_arquivo($data, $path . $data);
 
         return $data;
+    }
+
+    function renomeia_arquivo1($data, $path) {
+        #$data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
+        #$data = "img01_2a_.pdf";
+        #echo '<br>=> ' . $data;
+
+        $pos2 = strrpos($data, "_.");
+        $subs = substr($data, 0, $pos2);
+        $pos1 = strrpos($subs, "_");
+        $i = substr($subs, $pos1 + 1);
+
+        #echo '<br>0 - ' . $data;
+        #echo '<br>path - ' . $path . ' ' . $data;
+
+        if (is_numeric($i))
+            $data = substr($data, 0, $pos1) . '_' . ($i + 1) . substr($data, $pos2);
+        else
+            $data = preg_replace("/\.[a-z]{1,9}$/", "_1_$0", $data);
+
+        #echo '<br>1 - ' . $data;
+        #echo '<br>path - ' . $path . ' ' . $data;
+
+        if (file_exists($path . $data)) {
+            #echo '<br>oi - ' . $data;
+            $data = $this->renomeia_arquivo($data, $path);
+        }
+
+        #echo '<br>2 - ' . $data;
+        #echo '<br>path - ' . $path . ' ' . $data;
+        #exit();
+
+        return $data;
+
     }
 
     function tipo_status_cor($data) {

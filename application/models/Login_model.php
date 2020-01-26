@@ -301,7 +301,26 @@ class Login_model extends CI_Model {
 
     }
 	
-    public function get_empresa($data) {
+    public function get_empresa0($data) {
+
+        $query = $this->db->query('
+			SELECT*
+				 
+			FROM 
+				Sis_Usuario AS U 
+					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = U.idSis_Empresa 
+			WHERE 
+				U.idSis_Usuario = ' . $data . ' 
+			ORDER BY 
+				E.NivelEmpresa ASC 
+			');
+        $query = $query->result_array();
+        return $query[0]['idSis_Empresa'];
+        #return $query[0]['NivelEmpresa'];
+
+    }
+    
+	public function get_empresa($data) {
 
         $query = $this->db->query('
 			SELECT 

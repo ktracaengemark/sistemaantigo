@@ -135,6 +135,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
+				$_SESSION['log']['Arquivo'] = $query['Arquivo'];
 				
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
@@ -261,6 +262,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
+				$_SESSION['log']['Arquivo'] = $query['Arquivo'];
 				
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
@@ -387,6 +389,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
+				$_SESSION['log']['Arquivo'] = $query['Arquivo'];
 				
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
@@ -514,6 +517,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
+				$_SESSION['log']['Arquivo'] = $query['Arquivo'];
 				
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
@@ -606,7 +610,7 @@ class Login extends CI_Controller {
 
             
 			#### Carrega os dados da Empresa nas vari?ves de sess?o ####
-
+			$_SESSION['log']['Empresa'] = $this->Login_model->get_empresa0($query['idSis_Usuario']);
 			$_SESSION['log']['NivelEmpresa'] = $this->Login_model->get_empresa($query['idSis_Usuario']);
 			$_SESSION['log']['TabelasEmpresa'] = $this->Login_model->get_empresa1($query['idSis_Usuario']);
 			$_SESSION['log']['DataDeValidade'] = $this->Login_model->get_empresa2($query['idSis_Usuario']);			
@@ -640,6 +644,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
+				$_SESSION['log']['Arquivo'] = $query['Arquivo'];
 				
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
