@@ -274,6 +274,26 @@ class Basico {
 
         return $data;
     }
+
+    function renomeiausuario($data, $path) {
+		$data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
+		$data = rand() . 'profile' . '_' . $_SESSION['Usuario']['idSis_Usuario'] . '.jpg';
+		
+        if (file_exists(APPPATH . 'arquivos/imagens/usuarios/' . $data))
+            $data = $this->renomeia($data, $path . $data);
+
+        return $data;
+    }
+	
+    function renomeiacliente($data, $path) {
+		$data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
+		$data = rand() . 'profile' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '.jpg';
+		
+        if (file_exists(APPPATH . 'arquivos/imagens/clientes/' . $data))
+            $data = $this->renomeia($data, $path . $data);
+
+        return $data;
+    }	
 	
     function renomeia_arquivo($data, $path) {
 
