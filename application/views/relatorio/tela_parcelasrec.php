@@ -177,21 +177,6 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-4 text-left">
-												<label for="Quitado">Status da Receita:</label>
-												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-														id="Quitado" name="Quitado">
-													<?php
-													foreach ($select['Quitado'] as $key => $row) {
-														if ($query['Quitado'] == $key) {
-															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-														} else {
-															echo '<option value="' . $key . '">' . $row . '</option>';
-														}
-													}
-													?>
-												</select>
-											</div>
-											<div class="col-md-4 text-left">
 												<label for="DataInicio">De: "Data Início"</label>
 												<div class="input-group DatePicker">
 													<span class="input-group-addon" disabled>
@@ -212,6 +197,21 @@
 															name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
 													
 												</div>
+											</div>
+											<div class="col-md-4 text-left">
+												<label for="Quitado">Status da Receita:</label>
+												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+														id="Quitado" name="Quitado">
+													<?php
+													foreach ($select['Quitado'] as $key => $row) {
+														if ($query['Quitado'] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>
+												</select>
 											</div>											
 										</div>
 									</div>

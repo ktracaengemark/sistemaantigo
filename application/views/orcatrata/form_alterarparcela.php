@@ -68,32 +68,29 @@
 														<div class="panel panel-warning">
 															<div class="panel-heading">
 																<div class="row">
-																	<div class="col-md-2">
-																		<label for="Parcela">Parcela <?php echo $i ?>:</label><br>
+																	<div class="col-md-1">
+																		<label for="Parcela">Prcl <?php echo $i ?>:</label><br>
 																		<input type="text" class="form-control" readonly=""
 																			   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
 																	</div>																	
 																	<?php if ($titulo == "Receitas" ) { ?>
-																	<div class="col-md-4">
+																	<div class="col-md-3">
 																		<label for="Receita">Receita:</label><br>
 																		<input type="text" class="form-control" readonly=""
 																			   name="Receita<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Receita'] ?>">
 																	</div>							
 																	<?php } else { ?>
-																	<div class="col-md-4">
+																	<div class="col-md-3">
 																		<label for="Despesa">Despesa:</label><br>
 																		<input type="text" class="form-control" readonly=""
 																			   name="Despesa<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Despesa'] ?>">
 																	</div>
 																	<?php } ?>
 																	<div class="col-md-2">
-																		<label for="ValorParcela">Valor Parcela:</label><br>
-																		<div class="input-group" id="txtHint">
-																			<span class="input-group-addon" id="basic-addon1">R$</span>
-																			<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorParcela<?php echo $i ?>"
-																				   name="ValorParcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorParcela'] ?>">
-																		</div>
-																	</div>
+																		<label for="DataOrca">Dta Orç.:</label><br>
+																		<input type="text" class="form-control" readonly=""
+																			   name="DataOrca<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataOrca'] ?>">
+																	</div>																	
 																	<div class="col-md-2">
 																		<label for="DataVencimento">Data Venc:</label>
 																		<div class="input-group DatePicker">
@@ -102,6 +99,14 @@
 																			</span>
 																			<input type="text" class="form-control Date" id="DataVencimento<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
 																				   name="DataVencimento<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataVencimento'] ?>">																
+																		</div>
+																	</div>																	
+																	<div class="col-md-2">
+																		<label for="ValorParcela">Valor Parcela:</label><br>
+																		<div class="input-group" id="txtHint">
+																			<span class="input-group-addon" id="basic-addon1">R$</span>
+																			<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorParcela<?php echo $i ?>"
+																				   name="ValorParcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorParcela'] ?>">
 																		</div>
 																	</div>
 																	<div class="col-md-2">

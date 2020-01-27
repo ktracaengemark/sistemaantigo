@@ -49,7 +49,8 @@
 							<th class="active">Orç.</th>
 							<th class="col-md-3 active">Cliente</th>
 							<th class="active" scope="col">Receita</th>	
-							<th class="active">Dt.Venc</th>
+							<th class="active">Dt Orca</th>
+							<th class="active">Dt Venc</th>
 							<th class="active">Receber</th>
 							<th class="active">Qt</th>
 							<!--<th class="active">Dt.Pag</th>
@@ -89,6 +90,7 @@
 								echo '<td>' . $row['idApp_OrcaTrata'] . '- ' . $row['TipoFinanceiro'] . '</td>';
 								echo '<td>' . $row['NomeCliente'] . '</td>';
 								echo '<td>' . $row['Descricao'] . '</td>';
+								echo '<td>' . $row['DataOrca'] . '</td>';
 								echo '<td>' . $row['DataVencimento'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorParcela'] . '</td>';
 								echo '<td>' . $row['Quitado'] . '</td>';
