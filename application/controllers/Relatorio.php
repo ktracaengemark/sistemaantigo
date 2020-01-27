@@ -5443,7 +5443,7 @@ class Relatorio extends CI_Controller {
 			'P.DataProcedimento' => 'Data Inicio',
 			'P.DataProcedimentoLimite' => 'Data Fim',
 			'P.Prioridade' => 'Sts Tarefa',			
-			'P.Procedimento' => 'Tarefa',
+			'P.Categoria' => 'Categoria',
         );
 
         $data['select']['Ordenamento'] = array(

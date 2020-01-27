@@ -172,6 +172,43 @@
 								
 							</div>
 						</div>								
+					</div>
+					<div class="row">	
+						<div class="col-md-12 text-left">
+							<label for="Ordenamento">Ordenamento:</label>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-4">
+										<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+												id="Campo" name="Campo">
+											<?php
+											foreach ($select['Campo'] as $key => $row) {
+												if ($query['Campo'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>
+									<div class="col-md-4">
+										<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+												id="Ordenamento" name="Ordenamento">
+											<?php
+											foreach ($select['Ordenamento'] as $key => $row) {
+												if ($query['Ordenamento'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>								
 					</div>					
 				</div>					
 			</div>									

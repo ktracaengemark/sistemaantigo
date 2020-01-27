@@ -7087,11 +7087,10 @@ exit();*/
 				(P.Compartilhar = 51 AND P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '))
 				' . $data['Procedimento'] . '
 			ORDER BY
-				CT.Categoria DESC,
-				P.ConcluidoProcedimento ASC,
-				P.DataProcedimento DESC,
 				' . $data['Campo'] . '
-				' . $data['Ordenamento'] . '
+				' . $data['Ordenamento'] . ',				
+				P.DataProcedimento DESC,
+				P.Prioridade ASC
 				
         ');
 
