@@ -5300,9 +5300,9 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Procedimento'] = $this->Basico_model->select_procedimento();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoriatarefa();		
 		$data['select']['Prioridade'] = array (
-			'1' => 'Alta',
-			'2' => 'Média',
-			'3' => 'Baixa',
+			'1' => 'Fazer',
+			'2' => 'Fazendo',
+			'3' => 'Feito',
         );
 
         $data['titulo'] = 'Tarefas';

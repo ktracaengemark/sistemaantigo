@@ -61,13 +61,13 @@
 							<span class="glyphicon glyphicon-pencil"></span> Estatística das Tarefas
 						</a>
 					</li>					
-					<!--
+					
 					<li>
 						<a class="dropdown-item" href="<?php echo base_url() . 'orcatrata/alterarprocedimento/' . $_SESSION['log']['idSis_Empresa']; ?>">
 							<span class="glyphicon glyphicon-pencil"></span> Editar Tarefas Filtradas
 						</a>
 					</li>
-					-->
+					
 				</ul>
 			</div>
 			
@@ -112,7 +112,7 @@
 									</select>
 								</div>
 								<div class="col-md-3 text-left">
-									<label for="Prioridade">Prioridade</label>
+									<label for="Prioridade">Sts.Tarefa</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 											id="Prioridade" name="Prioridade">
 										<?php
@@ -125,7 +125,23 @@
 										}
 										?>
 									</select>
-								</div>	
+								</div>
+								<div class="col-md-3 text-left">
+									<label for="SubPrioridade">Sts.SubTarefa</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
+											id="SubPrioridade" name="SubPrioridade">
+										<?php
+										foreach ($select['SubPrioridade'] as $key => $row) {
+											if ($query['SubPrioridade'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>								
+								<!--
 								<div class="col-md-3 text-left">
 									<label for="ConcluidoProcedimento">St Tarefa</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
@@ -141,6 +157,7 @@
 										?>
 									</select>
 								</div>
+								
 								<div class="col-md-3 text-left">
 									<label for="ConcluidoSubProcedimento">St SubTarefa</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
@@ -156,6 +173,7 @@
 										?>
 									</select>
 								</div>
+								-->
 							</div>
 							<div class="row">								
 								<div class="col-md-12 text-left">

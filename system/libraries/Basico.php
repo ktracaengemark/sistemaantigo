@@ -394,6 +394,20 @@ class Basico {
                 return 'Baixa';
 
         }
+    }
+
+    function statustrf($data, $opcao) {
+
+        if ($opcao == '123') {
+
+            if ($data == '1')
+                return 'Fazer';
+            else if ($data == '2')
+                return 'Fazendo';
+			else if ($data == '3')
+                return 'Feito';
+
+        }
     }	
 
     function tratamento_array_multidimensional($data, $anterior, $campo) {

@@ -996,16 +996,16 @@ function adicionaSubProcedimento() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-3">\
+						<div class="col-md-4">\
 							<label for="SubProcedimento'+pt+'">Ação:</label>\
 							<textarea class="form-control" id="SubProcedimento'+pt+'"\
 									  name="SubProcedimento'+pt+'"></textarea>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="Prioridade'+pt+'">Prioridade:</label>\
+							<label for="Prioridade'+pt+'">Sts.SubTrf:</label>\
 							<select data-placeholder="Selecione uma opção..." class="form-control"\
 									 id="listadinamicad'+pt+'" name="Prioridade'+pt+'">\
-								<option value="" checked>Alta</option>\
+								<option value="" checked>Fazer</option>\
 							</select>\
 						</div>\
 						<div class="col-md-2">\
@@ -1026,21 +1026,6 @@ function adicionaSubProcedimento() {
 								</span>\
 								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
 									   name="DataSubProcedimentoLimite'+pt+'" value="">\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="ConcluidoSubProcedimento">Ação Concl.? </label><br>\
-							<div class="form-group">\
-								<div class="btn-group" data-toggle="buttons">\
-									<label class="btn btn-warning active" name="radio_ConcluidoSubProcedimento'+pt+'" id="radio_ConcluidoSubProcedimento'+pt+'N">\
-									<input type="radio" name="ConcluidoSubProcedimento'+pt+'" id="radiogeraldinamico"\
-										autocomplete="off" value="N" checked>Não\
-									</label>\
-									<label class="btn btn-default" name="radio_ConcluidoSubProcedimento'+pt+'" id="radio_ConcluidoSubProcedimento'+pt+'S">\
-									<input type="radio" name="ConcluidoSubProcedimento'+pt+'" id="radiogeraldinamico"\
-										autocomplete="off" value="S">Sim\
-									</label>\
-								</div>\
 							</div>\
 						</div>\
 						<div class="col-md-1">\

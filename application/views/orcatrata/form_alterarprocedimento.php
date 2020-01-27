@@ -63,13 +63,7 @@
 																</select>
 															</div>															
 															<div class="col-md-2">
-																<label for="Procedimento<?php echo $i ?>">Tarefa <?php echo $i ?>:</label>
-																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
-																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
-															</div>
-															
-															<div class="col-md-2">
-																<label for="Prioridade<?php echo $i ?>">Prioridade:</label>
+																<label for="Prioridade<?php echo $i ?>">Sts.Trf:</label>
 																<?php if ($i == 1) { ?>
 																<?php } ?>
 																<select data-placeholder="Selecione uma opção..." class="form-control" 
@@ -85,6 +79,11 @@
 																	}
 																	?>
 																</select>
+															</div>															
+															<div class="col-md-4">
+																<label for="Procedimento<?php echo $i ?>">Tarefa <?php echo $i ?>:</label>
+																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
+																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 															</div>
 															<div class="col-md-2">
 																<label for="DataProcedimento<?php echo $i ?>">Iniciar em:</label>
@@ -106,6 +105,7 @@
 																		   name="DataProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimentoLimite']; ?>">
 																</div>
 															</div>
+															<!--
 															<div class="col-md-2">
 																<label for="ConcluidoProcedimento">Concluído? </label><br>
 																<div class="form-group">
@@ -134,7 +134,7 @@
 																	</div>
 																</div>
 															</div>
-															<!--
+															
 															<div class="col-md-1">
 																<label><br></label><br>
 																<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">

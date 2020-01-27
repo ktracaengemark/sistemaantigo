@@ -66,7 +66,7 @@
 											</div>
 										</div>	
 										<div class="row">
-											<div class="col-md-5 text-left">
+											<div class="col-md-6 text-left">
 												<label class="sr-only" for="Cadastrar">Cadastrar no BD</label>
 												<div class="btn-group" data-toggle="buttons">
 													<?php
@@ -97,7 +97,7 @@
 												<?php echo form_error('Categoria'); ?>
 											</div>
 											
-											<div class="col-md-7 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+											<div class="col-md-6 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
 												<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>categoria2/cadastrar3/" role="button"> 
 													<span class="glyphicon glyphicon-plus"></span>Categoria
 												</a>
@@ -143,7 +143,7 @@
 									</div>
 									-->
 									<div class="col-md-2 ">
-										<label for="Prioridade">Prioridade:</label>
+										<label for="Prioridade">Sts.Trf:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 												id="Prioridade" name="Prioridade">
 											<!--<option value="">-- Selecione uma opção --</option>-->
@@ -188,6 +188,7 @@
 											</div>
 										</div>
 									</div>
+									<!--
 									<div class="col-md-2 form-inline">
 										<label for="ConcluidoProcedimento">Tarefa Concl.?</label><br>
 										<div class="form-group">
@@ -219,7 +220,8 @@
 
 											</div>
 										</div>
-									</div>									
+									</div>
+									-->
 									<!--
 									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 									<div class="col-md-3 " >
@@ -295,13 +297,13 @@
 														</select>
 													</div>
 													-->
-													<div class="col-md-3">
+													<div class="col-md-4">
 														<label for="SubProcedimento<?php echo $i ?>">Ação:</label>
 														<textarea class="form-control" id="SubProcedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																  name="SubProcedimento<?php echo $i ?>"><?php echo $procedtarefa[$i]['SubProcedimento']; ?></textarea>
 													</div>
 													<div class="col-md-2">
-														<label for="Prioridade<?php echo $i ?>">Prioridade:</label>
+														<label for="Prioridade<?php echo $i ?>">Sts.SubTrf:</label>
 														<?php if ($i == 1) { ?>
 														<?php } ?>
 														<select data-placeholder="Selecione uma opção..." class="form-control" 
@@ -338,6 +340,7 @@
 																   name="DataSubProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataSubProcedimentoLimite']; ?>">
 														</div>
 													</div>													
+													<!--
 													<div class="col-md-2">
 														<label for="ConcluidoSubProcedimento">Ação. Concl.? </label><br>
 														<div class="form-group">
@@ -366,6 +369,7 @@
 															</div>
 														</div>
 													</div>
+													-->
 													<div class="col-md-1">
 														<label><br></label><br>
 														<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
