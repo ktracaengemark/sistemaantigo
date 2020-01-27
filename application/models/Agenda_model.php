@@ -692,10 +692,11 @@ class Agenda_model extends CI_Model {
 				P.idSis_Usuario = ' . $_SESSION['log']['id'] . '))
 				' . $data['Procedimento'] . '
             ORDER BY
-				CT.Categoria DESC,
-				P.Prioridade ASC,
 				' . $data['Campo'] . '
-				' . $data['Ordenamento'] . '
+				' . $data['Ordenamento'] . ',				
+				P.DataProcedimento DESC,
+				P.Prioridade ASC
+
         ');
         /*
 
