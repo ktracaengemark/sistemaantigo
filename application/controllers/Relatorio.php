@@ -5388,7 +5388,7 @@ class Relatorio extends CI_Controller {
 			'ConcluidoSubProcedimento',
 			'Procedimento',
 			'SubProcedimento',
-
+			'SubPrioridade',
         ), TRUE));
 		/*
 		if (!$data['query']['DataInicio'])
@@ -5399,6 +5399,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
 		$_SESSION['FiltroAlteraProcedimento']['Prioridade'] = $data['query']['Prioridade'];
 		$_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] = $data['query']['ConcluidoSubProcedimento'];
+		$_SESSION['FiltroAlteraProcedimento']['SubPrioridade'] = $data['query']['SubPrioridade'];
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
@@ -5413,10 +5414,17 @@ class Relatorio extends CI_Controller {
 
         $data['select']['Prioridade'] = array(
             '0' => '::Todos::',
-			'1' => 'Alta',
-            '2' => 'Media',
-            '3' => 'Baixa',
+			'1' => 'Fazer',
+            '2' => 'Fazendo',
+            '3' => 'Feito',
         );
+		
+        $data['select']['SubPrioridade'] = array(
+            '0' => '::Todos::',
+			'1' => 'Fazer',
+            '2' => 'Fazendo',
+            '3' => 'Feito',
+        );		
 /*
 		$data['select']['Rotina'] = array(
             '#' => 'TODOS',
@@ -5469,7 +5477,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['ConcluidoSubProcedimento'] = $data['query']['ConcluidoSubProcedimento'];
 			$data['bd']['Procedimento'] = $data['query']['Procedimento'];
 			$data['bd']['SubProcedimento'] = $data['query']['SubProcedimento'];
-
+			$data['bd']['SubPrioridade'] = $data['query']['SubPrioridade'];
 
             $data['report'] = $this->Relatorio_model->list_tarefa($data['bd'],TRUE);
 

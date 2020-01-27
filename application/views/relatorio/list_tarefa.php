@@ -26,14 +26,14 @@
 					<tr>                       											
 						<th class="active">Nº</th>
 						<th class="active">Categoria</th>
-						<th class="active">Tarefa</th>																	                       
-						<th class="active">Prioridade</th>
-						<th class="active">Tarefa Concl.?</th>
+						<th class="active">Sts.Trf</th>
+						<th class="active">Tarefa</th>
+						<!--<th class="active">Tarefa Concl.?</th>-->
 						<th class="active">Inicia em:</th>
 						<th class="active">Conc. em:</th>
-						
-						<th class="active">Ação</th>
-						<th class="active">Ação Concl.?</th>
+						<th class="active">Sts.SubTrf</th>
+						<th class="active">SubTarefa</th>
+						<!--<th class="active">Ação Concl.?</th>-->
 						<th class="active">Inicio em:</th>
 						<th class="active">Fim em:</th>
 						
@@ -47,11 +47,13 @@
 					$cliente = array ();
 					$valor = array();
 					$i = 0;
-					$cont_sim = 0;
-					$cont_nao = 0;
+					$cont_fazer = 0;
+					$cont_fazendo = 0;
+					$cont_feito = 0;
 					$cont_nao_infor = 0;
-					$cont_sim2 = 0;
-					$cont_nao2 = 0;
+					$cont_fazer2 = 0;
+					$cont_fazendo2 = 0;
+					$cont_feito2 = 0;
 					$cont_nao_infor2 = 0;
 					foreach ($report->result_array() as $row) {
 						
@@ -60,14 +62,14 @@
 							
 							echo '<td>' . $row['idApp_Procedimento'] . '</td>';
 							echo '<td>' . $row['Categoria'] . '</td>';
-							echo '<td>' . $row['Procedimento'] . '</td>';
 							echo '<td>' . $row['Prioridade'] . '</td>';
-							echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
+							echo '<td>' . $row['Procedimento'] . '</td>';
+							#echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
 							echo '<td>' . $row['DataProcedimento'] . '</td>';
 							echo '<td>' . $row['DataProcedimentoLimite'] . '</td>';
-							
+							echo '<td>' . $row['SubPrioridade'] . '</td>';
 							echo '<td>' . $row['SubProcedimento'] . '</td>';
-							echo '<td>' . $row['ConcluidoSubProcedimento'] . '</td>';
+							#echo '<td>' . $row['ConcluidoSubProcedimento'] . '</td>';
 							echo '<td>' . $row['DataSubProcedimento'] . '</td>';
 							echo '<td>' . $row['DataSubProcedimentoLimite'] . '</td>';
 							
@@ -79,17 +81,21 @@
 						$valor[$i] = $valorcliente;
 						$i = $i + 1;
 						
-						if($row['ConcluidoSubProcedimento'] == 'Sim')
-							$cont_sim++;
-						else if ($row['ConcluidoSubProcedimento'] == 'Não')
-							$cont_nao++;
+						if($row['SubPrioridade'] == 'Fazer')
+							$cont_fazer++;
+						else if ($row['SubPrioridade'] == 'Fazendo')
+							$cont_fazendo++;
+						else if ($row['SubPrioridade'] == 'Feito')
+							$cont_feito++;
 						else 
 							$cont_nao_infor++;
 						
-						if($row['ConcluidoProcedimento'] == 'Sim')
-							$cont_sim2++;
-						else if ($row['ConcluidoProcedimento'] == 'Não')
-							$cont_nao2++;
+						if($row['Prioridade'] == 'Fazer')
+							$cont_fazer2++;
+						else if ($row['Prioridade'] == 'Fazendo')
+							$cont_fazendo2++;
+						else if ($row['Prioridade'] == 'Feito')
+							$cont_feito2++;
 						else 
 							$cont_nao_infor2++;
 					}
@@ -134,21 +140,22 @@
 
 				var data = google.visualization.arrayToDataTable([
 
-				["Concluido", "Quantidade", { role: "style" } ],
-				["Sim", <?php echo $cont_sim; ?>, "#b87333"],
-				["Não", <?php echo $cont_nao; ?>, "silver"],
-				["Nao Inform", <?php echo $cont_nao_infor; ?>, "color: #e5e4e2"]
+				["StsTrf", "Quantidade", { role: "style" } ],
+				["Fazer", <?php echo $cont_fazer2; ?>, "#b87333"],
+				["Fazendo", <?php echo $cont_fazendo2; ?>, "silver"],
+				["Feito", <?php echo $cont_feito2; ?>, "silver"],
+				["Nao Inform", <?php echo $cont_nao_infor2; ?>, "color: #e5e4e2"]
 				]);
 
 				var options = {
-				  title: 'Porcentagem das Sub-Tarefas Concluidas'
+				  title: 'Porcentagem do Status das Tarefas'
 				};
 
-				var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+				var chart = new google.visualization.PieChart(document.getElementById('piechart3'));
 
 				chart.draw(data, options);
 			  }
-			</script>
+			</script>						
 			<script type="text/javascript">
 			  google.charts.load('current', {'packages':['corechart']});
 			  google.charts.setOnLoadCallback(drawChart);
@@ -157,22 +164,22 @@
 
 				var data = google.visualization.arrayToDataTable([
 
-				["Concluido", "Quantidade", { role: "style" } ],
-				["Sim", <?php echo $cont_sim2; ?>, "#b87333"],
-				["Não", <?php echo $cont_nao2; ?>, "silver"],
-				["Nao Inform", <?php echo $cont_nao_infor2; ?>, "color: #e5e4e2"]
+				["StsSubTrf", "Quantidade", { role: "style" } ],
+				["Fazer", <?php echo $cont_fazer; ?>, "#b87333"],
+				["Fazendo", <?php echo $cont_fazendo; ?>, "silver"],
+				["Feito", <?php echo $cont_feito; ?>, "silver"],
+				["Nao Inform", <?php echo $cont_nao_infor; ?>, "color: #e5e4e2"]
 				]);
 
 				var options = {
-				  title: 'Porcentagem das Tarefas Concluidas'
+				  title: 'Porcentagem do Status das Sub-Tarefas'
 				};
 
-				var chart = new google.visualization.PieChart(document.getElementById('piechart3'));
+				var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
 
 				chart.draw(data, options);
 			  }
 			</script>			
-			
 		</div>
 	</div>
 </div>

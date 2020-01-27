@@ -35,7 +35,7 @@
 			<div class="modal-footer">
 				<div class="form-group">	
 					<div class="row text-left">
-						<div class="col-md-3 text-left">
+						<div class="col-md-4 text-left">
 							<label for="Ordenamento">Categoria:</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 									id="Categoria" name="Categoria">
@@ -51,8 +51,8 @@
 							</select>
 						</div>
 						
-						<div class="col-md-3">
-							<label for="Prioridade">Prioridade</label>
+						<div class="col-md-4">
+							<label for="Prioridade">Sts.Tarefa</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 									id="Prioridade" name="Prioridade">
 								<?php
@@ -65,7 +65,23 @@
 								}
 								?>
 							</select>
+						</div>
+						<div class="col-md-4">
+							<label for="SubPrioridade">Sts.SubTarefa</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="SubPrioridade" name="SubPrioridade">
+								<?php
+								foreach ($select['SubPrioridade'] as $key => $row) {
+									if ($query['SubPrioridade'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
 						</div>						
+						<!--
 						<div class="col-md-3">
 							<label for="ConcluidoProcedimento">St Tarefa</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -96,6 +112,7 @@
 								?>
 							</select>
 						</div>
+						-->
 					</div>
 					<div class="row">						
 						<div class="col-md-12 text-left">
