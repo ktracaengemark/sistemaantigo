@@ -14,7 +14,7 @@
 								</button>
 								<ul class="dropdown-menu" role="menu">
 									<li>
-										<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
+										<a <?php if (preg_match("/usuario2\/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
 											<a href="<?php echo base_url() . 'usuario2/prontuario/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
 												<span class="glyphicon glyphicon-file"> </span>Ver Dados do Usuário
 											</a>
@@ -24,7 +24,7 @@
 									<li>
 										<a <?php if (preg_match("/usuario2\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
 											<a href="<?php echo base_url() . 'usuario2/alterar/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados do Usuário
+												<span class="glyphicon glyphicon-edit"></span> Editar Senha do Usuário
 											</a>
 										</a>
 									</li>
@@ -32,7 +32,7 @@
 									<li>
 										<a <?php if (preg_match("/usuario2\/alterarlogo\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
 											<a href="<?php echo base_url() . 'usuario2/alterarlogo/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
-												<span class="glyphicon glyphicon-edit"></span> Alterar Logo
+												<span class="glyphicon glyphicon-edit"></span> Alterar Foto
 										</a>
 									</li>									
 								</ul>

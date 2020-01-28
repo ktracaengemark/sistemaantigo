@@ -220,7 +220,7 @@ class Usuario2 extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('usuario/form_empresalogo', $data);
+            $this->load->view('usuario/form_empresalogo2', $data);
         } else {
 			
             $config['upload_path'] = 'arquivos/imagens/usuarios/';
@@ -231,7 +231,7 @@ class Usuario2 extends CI_Controller {
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('Arquivo')) {
                 $data['msg'] = $this->basico->msg($this->upload->display_errors(), 'erro', FALSE, FALSE, FALSE);
-                $this->load->view('usuario/form_empresalogo', $data);
+                $this->load->view('usuario/form_empresalogo2', $data);
             }
             else {
 
@@ -242,7 +242,7 @@ class Usuario2 extends CI_Controller {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                     $this->basico->erro($msg);
-                    $this->load->view('usuario/form_empresalogo', $data);
+                    $this->load->view('usuario/form_empresalogo2', $data);
                 }			
 			}
 			
@@ -255,7 +255,7 @@ class Usuario2 extends CI_Controller {
 
             if ($data['auditoriaitem'] && $this->Usuario_model->update_usuario($data['query'], $data['query']['idSis_Usuario']) === FALSE) {
                 $data['msg'] = '?m=2';
-                redirect(base_url() . 'usuario/form_empresalogo/' . $data['query']['idSis_Usuario'] . $data['msg']);
+                redirect(base_url() . 'usuario/alterarlogo2/' . $data['query']['idSis_Usuario'] . $data['msg']);
                 exit();
             } else {
 

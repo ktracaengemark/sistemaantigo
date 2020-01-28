@@ -540,7 +540,7 @@ class Usuario extends CI_Controller {
 
             if ($data['auditoriaitem'] && $this->Usuario_model->update_usuario($data['query'], $data['query']['idSis_Usuario']) === FALSE) {
                 $data['msg'] = '?m=2';
-                redirect(base_url() . 'usuario/form_empresalogo/' . $data['query']['idSis_Usuario'] . $data['msg']);
+                redirect(base_url() . 'usuario/alterarlogo/' . $data['query']['idSis_Usuario'] . $data['msg']);
                 exit();
             } else {
 

@@ -16,24 +16,24 @@
 						</button>
 						<ul class="dropdown-menu" role="menu">
 							<li>
-								<a <?php if (preg_match("/usuario\/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
-									<a href="<?php echo base_url() . 'usuario/prontuario/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
+								<a <?php if (preg_match("/usuario2\/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
+									<a href="<?php echo base_url() . 'usuario2/prontuario/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
 										<span class="glyphicon glyphicon-file"> </span>Ver Dados do Usuario
 									</a>
 								</a>
 							</li>
 							<li role="separator" class="divider"></li>
 							<li>
-								<a <?php if (preg_match("/usuario\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
-									<a href="<?php echo base_url() . 'usuario/alterar/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
-										<span class="glyphicon glyphicon-edit"></span> Editar Dados do Usuario
+								<a <?php if (preg_match("/usuario2\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
+									<a href="<?php echo base_url() . 'usuario2/alterar/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
+										<span class="glyphicon glyphicon-edit"></span> Editar Senha do Usuario
 									</a>
 								</a>
 							</li>
 							<li role="separator" class="divider"></li>
 							<li>
-								<a <?php if (preg_match("/usuario\/alterarlogo\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
-									<a href="<?php echo base_url() . 'usuario/alterarlogo/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
+								<a <?php if (preg_match("/usuario2\/alterarlogo\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
+									<a href="<?php echo base_url() . 'usuario2/alterarlogo/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
 										<span class="glyphicon glyphicon-edit"></span> Alterar Foto
 								</a>
 							</li>							
@@ -136,7 +136,7 @@
 													</button>
 												</div>
 												<div class="col-md-6 text-right">
-													<a class="btn btn-danger" href="<?php echo base_url() . 'usuario/excluir/' . $query['idSis_Usuario'] ?>" role="button">
+													<a class="btn btn-danger" href="<?php echo base_url() . 'usuario2/excluir/' . $query['idSis_Usuario'] ?>" role="button">
 														<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 													</a>
 												</div>
