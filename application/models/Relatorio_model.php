@@ -7029,12 +7029,14 @@ exit();*/
                 '(P.DataProcedimento >= "' . $data['DataInicio'] . '")';
         }
 		
-        $data['Campo'] = (!$data['Campo']) ? 'P.DataProcedimento' : $data['Campo'];
+        $data['Campo'] = (!$data['Campo']) ? 'P.Categoria' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
 		#$filtro4 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
 		#$filtro5 = ($data['Prioridade']) ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
 		#$filtro5 = ($data['ConcluidoProcedimento'] != '0') ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
         $filtro6 = ($data['Prioridade'] != '0') ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;		
+		$filtro11 = ($data['Statustarefa'] != '0') ? 'P.Statustarefa = "' . $data['Statustarefa'] . '" AND ' : FALSE;
+		$filtro12 = ($data['Statussubtarefa'] != '0') ? 'SP.Statussubtarefa = "' . $data['Statussubtarefa'] . '" AND ' : FALSE;
 		$filtro9 = ($data['Categoria'] != '0') ? 'P.Categoria = "' . $data['Categoria'] . '" AND ' : FALSE;
 		#$filtro8 = (($data['ConcluidoSubProcedimento'] != '0') && ($data['ConcluidoSubProcedimento'] != 'M')) ? 'SP.ConcluidoSubProcedimento = "' . $data['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
 		#$filtro3 = ($data['ConcluidoSubProcedimento'] == 'M') ? '((SP.ConcluidoSubProcedimento = "S") OR (SP.ConcluidoSubProcedimento = "N")) AND ' : FALSE;
@@ -7060,9 +7062,11 @@ exit();*/
 				P.DataProcedimentoLimite,
 				P.ConcluidoProcedimento,
 				P.Prioridade,
+				P.Statustarefa,
 				P.Compartilhar,
 				CT.Categoria,
 				SP.SubProcedimento,
+				SP.Statussubtarefa,
 				SP.ConcluidoSubProcedimento,
 				SP.DataSubProcedimento,
 				SP.DataSubProcedimentoLimite,
@@ -7080,6 +7084,8 @@ exit();*/
 				' . $filtro6 . '
 				' . $filtro9 . '
 				' . $filtro10 . '
+				' . $filtro11 . '
+				' . $filtro12 . '
 				(' . $consulta . ') AND
 				((U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ') OR
@@ -7087,10 +7093,11 @@ exit();*/
 				(P.Compartilhar = 51 AND P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '))
 				' . $data['Procedimento'] . '
 			ORDER BY
+				P.Statustarefa,
+				P.Prioridade,
 				' . $data['Campo'] . '
-				' . $data['Ordenamento'] . ',				
-				P.DataProcedimento DESC,
-				P.Prioridade ASC
+				' . $data['Ordenamento'] . '
+				
 				
         ');
 
@@ -7115,9 +7122,10 @@ exit();*/
 				#$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
 				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
                 $row->ConcluidoSubProcedimento = $this->basico->mascara_palavra_completa2($row->ConcluidoSubProcedimento, 'NS');
-				#$row->Prioridade = $this->basico->prioridade($row->Prioridade, '123');
-				$row->Prioridade = $this->basico->statustrf($row->Prioridade, '123');
-				$row->SubPrioridade = $this->basico->statustrf($row->SubPrioridade, '123');
+				$row->Prioridade = $this->basico->prioridade($row->Prioridade, '123');
+				$row->SubPrioridade = $this->basico->prioridade($row->SubPrioridade, '123');
+				$row->Statustarefa = $this->basico->statustrf($row->Statustarefa, '123');
+				$row->Statussubtarefa = $this->basico->statustrf($row->Statussubtarefa, '123');
 				#$row->Rotina = $this->basico->mascara_palavra_completa($row->Rotina, 'NS');
             }
             $query->soma = new stdClass();
@@ -8066,6 +8074,8 @@ exit();*/
 		$permissao1 = (($_SESSION['FiltroAlteraProcedimento']['Categoria'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Categoria'] != '' )) ? 'P.Categoria = "' . $_SESSION['FiltroAlteraProcedimento']['Categoria'] . '" AND ' : FALSE;
 		#$permissao2 = (($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != '' )) ? 'P.ConcluidoProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] . '" AND ' : FALSE;
 		$permissao3 = (($_SESSION['FiltroAlteraProcedimento']['Prioridade'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Prioridade'] != '' )) ? 'P.Prioridade = "' . $_SESSION['FiltroAlteraProcedimento']['Prioridade'] . '" AND ' : FALSE;
+		$permissao7 = (($_SESSION['FiltroAlteraProcedimento']['Statustarefa'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Statustarefa'] != '' )) ? 'P.Statustarefa = "' . $_SESSION['FiltroAlteraProcedimento']['Statustarefa'] . '" AND ' : FALSE;
+		$permissao8 = (($_SESSION['FiltroAlteraProcedimento']['Statussubtarefa'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Statussubtarefa'] != '' )) ? 'SP.Statussubtarefa = "' . $_SESSION['FiltroAlteraProcedimento']['Statussubtarefa'] . '" AND ' : FALSE;
 		$permissao6 = (($_SESSION['FiltroAlteraProcedimento']['SubPrioridade'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['SubPrioridade'] != '' )) ? 'SP.Prioridade = "' . $_SESSION['FiltroAlteraProcedimento']['SubPrioridade'] . '" AND ' : FALSE;
 		#$permissao4 = ((($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != "0")&& ($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != 'M') ) && ($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != '' )) ? 'SP.ConcluidoSubProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
 		#$permissao5 = (($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] == 'M') && ($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != '' )) ? '((SP.ConcluidoSubProcedimento = "S") OR (SP.ConcluidoSubProcedimento = "N")) AND ' : FALSE;
@@ -8086,6 +8096,8 @@ exit();*/
 				' . $permissao1 . '
 				' . $permissao3 . '
 				' . $permissao6 . '
+				' . $permissao7 . '
+				' . $permissao8 . '
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				P.Compartilhar = ' . $_SESSION['log']['idSis_Usuario'] . ' OR

@@ -5389,6 +5389,8 @@ class Relatorio extends CI_Controller {
 			'Procedimento',
 			'SubProcedimento',
 			'SubPrioridade',
+			'Statustarefa',
+			'Statussubtarefa',
         ), TRUE));
 		/*
 		if (!$data['query']['DataInicio'])
@@ -5400,6 +5402,8 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraProcedimento']['Prioridade'] = $data['query']['Prioridade'];
 		$_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] = $data['query']['ConcluidoSubProcedimento'];
 		$_SESSION['FiltroAlteraProcedimento']['SubPrioridade'] = $data['query']['SubPrioridade'];
+		$_SESSION['FiltroAlteraProcedimento']['Statustarefa'] = $data['query']['Statustarefa'];
+		$_SESSION['FiltroAlteraProcedimento']['Statussubtarefa'] = $data['query']['Statussubtarefa'];
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
@@ -5414,12 +5418,24 @@ class Relatorio extends CI_Controller {
 
         $data['select']['Prioridade'] = array(
             '0' => '::Todos::',
+			'1' => 'Alta',
+            '2' => 'Media',
+            '3' => 'Baixa',
+        );
+		
+        $data['select']['SubPrioridade'] = array(
+            '0' => '::Todos::',
+			'1' => 'Alta',
+            '2' => 'Media',
+            '3' => 'Baixa',
+        );
+        $data['select']['Statustarefa'] = array(
+            '0' => '::Todos::',
 			'1' => 'Fazer',
             '2' => 'Fazendo',
             '3' => 'Feito',
         );
-		
-        $data['select']['SubPrioridade'] = array(
+        $data['select']['Statussubtarefa'] = array(
             '0' => '::Todos::',
 			'1' => 'Fazer',
             '2' => 'Fazendo',
@@ -5441,9 +5457,10 @@ class Relatorio extends CI_Controller {
 
         $data['select']['Campo'] = array(
 			'P.DataProcedimento' => 'Data Inicio',
-			'P.DataProcedimentoLimite' => 'Data Fim',
-			'P.Prioridade' => 'Sts Tarefa',			
+			'P.DataProcedimentoLimite' => 'Data Fim',			
 			'P.Categoria' => 'Categoria',
+			'P.Prioridade' => 'Prioridade',
+			'P.Statustarefa' => 'Status TRF',
         );
 
         $data['select']['Ordenamento'] = array(
@@ -5477,6 +5494,8 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Procedimento'] = $data['query']['Procedimento'];
 			$data['bd']['SubProcedimento'] = $data['query']['SubProcedimento'];
 			$data['bd']['SubPrioridade'] = $data['query']['SubPrioridade'];
+			$data['bd']['Statustarefa'] = $data['query']['Statustarefa'];
+			$data['bd']['Statussubtarefa'] = $data['query']['Statussubtarefa'];
 
             $data['report'] = $this->Relatorio_model->list_tarefa($data['bd'],TRUE);
 
@@ -5494,8 +5513,6 @@ class Relatorio extends CI_Controller {
         $this->load->view('relatorio/tela_tarefa', $data);
 
         $this->load->view('basico/footer');
-
-
 
     }
 

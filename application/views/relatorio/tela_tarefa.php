@@ -52,7 +52,7 @@
 						</div>
 						
 						<div class="col-md-4">
-							<label for="Prioridade">Sts.Tarefa</label>
+							<label for="Prioridade">Prior</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 									id="Prioridade" name="Prioridade">
 								<?php
@@ -67,12 +67,42 @@
 							</select>
 						</div>
 						<div class="col-md-4">
-							<label for="SubPrioridade">Sts.SubTarefa</label>
+							<label for="Statustarefa">StatusTRF</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="Statustarefa" name="Statustarefa">
+								<?php
+								foreach ($select['Statustarefa'] as $key => $row) {
+									if ($query['Statustarefa'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>						
+						<div class="col-md-4">
+							<label for="SubPrioridade">SubPri</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 									id="SubPrioridade" name="SubPrioridade">
 								<?php
 								foreach ($select['SubPrioridade'] as $key => $row) {
 									if ($query['SubPrioridade'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<label for="Statussubtarefa">SubSts</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="Statussubtarefa" name="Statussubtarefa">
+								<?php
+								foreach ($select['Statussubtarefa'] as $key => $row) {
+									if ($query['Statussubtarefa'] == $key) {
 										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 									} else {
 										echo '<option value="' . $key . '">' . $row . '</option>';

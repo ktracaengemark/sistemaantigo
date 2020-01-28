@@ -26,12 +26,14 @@
 					<tr>                       											
 						<th class="active">Nº</th>
 						<th class="active">Categoria</th>
-						<th class="active">Sts.Trf</th>
+						<th class="active">Prior</th>
+						<th class="active">StatusTRF</th>
 						<th class="active">Tarefa</th>
 						<!--<th class="active">Tarefa Concl.?</th>-->
 						<th class="active">Inicia em:</th>
 						<th class="active">Conc. em:</th>
-						<th class="active">Sts.SubTrf</th>
+						<th class="active">SubPri</th>
+						<th class="active">SubSts</th>
 						<th class="active">SubTarefa</th>
 						<!--<th class="active">Ação Concl.?</th>-->
 						<th class="active">Inicio em:</th>
@@ -58,16 +60,18 @@
 					foreach ($report->result_array() as $row) {
 						
 						#echo '<tr>';
-						echo '<tr class="clickable-row" data-href="' . base_url() . 'tarefa/alterar/' . $row['idApp_Procedimento'] . '">';
+						echo '<tr class="clickable-row" data-href="' . base_url() . 'tarefa/alterar2/' . $row['idApp_Procedimento'] . '">';
 							
 							echo '<td>' . $row['idApp_Procedimento'] . '</td>';
 							echo '<td>' . $row['Categoria'] . '</td>';
 							echo '<td>' . $row['Prioridade'] . '</td>';
+							echo '<td>' . $row['Statustarefa'] . '</td>';
 							echo '<td>' . $row['Procedimento'] . '</td>';
 							#echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
 							echo '<td>' . $row['DataProcedimento'] . '</td>';
 							echo '<td>' . $row['DataProcedimentoLimite'] . '</td>';
 							echo '<td>' . $row['SubPrioridade'] . '</td>';
+							echo '<td>' . $row['Statussubtarefa'] . '</td>';
 							echo '<td>' . $row['SubProcedimento'] . '</td>';
 							#echo '<td>' . $row['ConcluidoSubProcedimento'] . '</td>';
 							echo '<td>' . $row['DataSubProcedimento'] . '</td>';
@@ -81,20 +85,20 @@
 						$valor[$i] = $valorcliente;
 						$i = $i + 1;
 						
-						if($row['SubPrioridade'] == 'Fazer')
+						if($row['Statussubtarefa'] == 'Fazer')
 							$cont_fazer++;
-						else if ($row['SubPrioridade'] == 'Fazendo')
+						else if ($row['Statussubtarefa'] == 'Fazendo')
 							$cont_fazendo++;
-						else if ($row['SubPrioridade'] == 'Feito')
+						else if ($row['Statussubtarefa'] == 'Feito')
 							$cont_feito++;
 						else 
 							$cont_nao_infor++;
 						
-						if($row['Prioridade'] == 'Fazer')
+						if($row['Statustarefa'] == 'Fazer')
 							$cont_fazer2++;
-						else if ($row['Prioridade'] == 'Fazendo')
+						else if ($row['Statustarefa'] == 'Fazendo')
 							$cont_fazendo2++;
-						else if ($row['Prioridade'] == 'Feito')
+						else if ($row['Statustarefa'] == 'Feito')
 							$cont_feito2++;
 						else 
 							$cont_nao_infor2++;
