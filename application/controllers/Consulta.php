@@ -134,8 +134,8 @@ class Consulta extends CI_Controller {
 		#$data['select']['idSis_EmpresaFilial'] = $this->Empresafilial_model->select_empresafilial();
 		#$data['select']['ContatoCliente'] = $this->Consulta_model->select_contatocliente_cliente($data['query']['idApp_Cliente']);
 
-        #echo $data['query']['idApp_Agenda'] . ' ' . $_SESSION['log']['id'];
-        #$data['query']['idApp_Agenda'] = ($_SESSION['log']['Permissao'] > 2) ? $_SESSION['log']['id'] : FALSE;
+        #echo $data['query']['idApp_Agenda'] . ' ' . $_SESSION['log']['idSis_Usuario'];
+        #$data['query']['idApp_Agenda'] = ($_SESSION['log']['Permissao'] > 2) ? $_SESSION['log']['idSis_Usuario'] : FALSE;
 
         /*
         echo count($data['select']['idApp_Agenda']);
@@ -306,8 +306,8 @@ class Consulta extends CI_Controller {
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
         $data['select']['ContatoCliente'] = $this->Consulta_model->select_contatocliente_cliente($data['query']['idApp_Cliente']);
 		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa3();
-        #echo $data['query']['idApp_Agenda'] . ' ' . $_SESSION['log']['id'];
-        #$data['query']['idApp_Agenda'] = ($_SESSION['log']['Permissao'] > 2) ? $_SESSION['log']['id'] : FALSE;
+        #echo $data['query']['idApp_Agenda'] . ' ' . $_SESSION['log']['idSis_Usuario'];
+        #$data['query']['idApp_Agenda'] = ($_SESSION['log']['Permissao'] > 2) ? $_SESSION['log']['idSis_Usuario'] : FALSE;
 
         /*
         echo count($data['select']['idApp_Agenda']);
@@ -466,8 +466,8 @@ class Consulta extends CI_Controller {
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
 		#$data['select']['idSis_EmpresaFilial'] = $this->Empresafilial_model->select_empresafilial();
 		
-        #echo $data['query']['idApp_Agenda'] . ' ' . $_SESSION['log']['id'];
-        #$data['query']['idApp_Agenda'] = ($_SESSION['log']['Permissao'] > 2) ? $_SESSION['log']['id'] : FALSE;
+        #echo $data['query']['idApp_Agenda'] . ' ' . $_SESSION['log']['idSis_Usuario'];
+        #$data['query']['idApp_Agenda'] = ($_SESSION['log']['Permissao'] > 2) ? $_SESSION['log']['idSis_Usuario'] : FALSE;
 
         /*
         echo count($data['select']['idApp_Agenda']);

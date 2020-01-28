@@ -466,7 +466,7 @@ class Orcatrata extends CI_Controller {
 					$data['procedimento'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['procedimento'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
 					$data['procedimento'][$j]['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
-					$data['procedimento'][$j]['Profissional'] = $_SESSION['log']['id'];
+					$data['procedimento'][$j]['Profissional'] = $_SESSION['log']['idSis_Usuario'];
                     $data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'mysql');
                     $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimentoLimite'], 'mysql');
 

@@ -111,7 +111,7 @@ class Loginmatriz extends CI_Controller {
                 $_SESSION['log']['UsuarioMatriz'] = (strlen($query['UsuarioMatriz']) > 15) ? substr($query['UsuarioMatriz'], 0, 15) : $query['UsuarioMatriz'];
                 #$_SESSION['log']['Nome'] = (strlen($query['Nome']) > 10) ? substr($query['Nome'], 0, 10) : $query['Nome'];
 				$_SESSION['log']['Nome'] = $query['Nome'];
-				$_SESSION['log']['id'] = $query['idSis_UsuarioMatriz'];
+				$_SESSION['log']['idSis_UsuarioMatriz'] = $query['idSis_UsuarioMatriz'];
 				$_SESSION['log']['Empresa'] = $query['Empresa'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
 				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
@@ -123,7 +123,7 @@ class Loginmatriz extends CI_Controller {
                 $_SESSION['db']['password'] = $this->db->password;
                 $_SESSION['db']['database'] = $this->db->database;
 
-                if ($this->Loginmatriz_model->set_acesso($_SESSION['log']['id'], 'LOGIN') === FALSE) {
+                if ($this->Loginmatriz_model->set_acesso($_SESSION['log']['idSis_UsuarioMatriz'], 'LOGIN') === FALSE) {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o Administrador.</strong>";
 
                     $this->basico->erro($msg);
@@ -216,7 +216,7 @@ class Loginmatriz extends CI_Controller {
             $data['campos'] = array_keys($data['query']);
 
             $data['idSis_UsuarioMatriz'] = $this->Loginmatriz_model->set_usuario($data['query']);
-            $_SESSION['log']['id'] = 1;
+            $_SESSION['log']['idSis_UsuarioMatriz'] = 1;
 
             if ($data['idSis_UsuarioMatriz'] === FALSE) {
                 $data['msg'] = '?m=2';
@@ -522,12 +522,12 @@ class Loginmatriz extends CI_Controller {
 
         #set logout in database
         if ($_SESSION['log'] && $m === TRUE) {
-            $this->Loginmatriz_model->set_acesso($_SESSION['log']['id'], 'LOGOUT');
+            $this->Loginmatriz_model->set_acesso($_SESSION['log']['idSis_UsuarioMatriz'], 'LOGOUT');
         } else {
-            if (!isset($_SESSION['log']['id'])) {
-                $_SESSION['log']['id'] = 1;
+            if (!isset($_SESSION['log']['idSis_UsuarioMatriz'])) {
+                $_SESSION['log']['idSis_UsuarioMatriz'] = 1;
             }
-            $this->Loginmatriz_model->set_acesso($_SESSION['log']['id'], 'TIMEOUT');
+            $this->Loginmatriz_model->set_acesso($_SESSION['log']['idSis_UsuarioMatriz'], 'TIMEOUT');
             $data['msg'] = '?m=2';
         }
 

@@ -5923,7 +5923,7 @@ class Relatorio extends CI_Controller {
 				$_SESSION['log']['CelularAdmin'] = $query['CelularAdmin'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
 				$_SESSION['log']['NomeEmpresa2'] = (strlen($query['NomeEmpresa']) > 15) ? substr($query['NomeEmpresa'], 0, 15) : $query['NomeEmpresa'];
-				$_SESSION['log']['id'] = $query['idSis_Empresa'];
+				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				$_SESSION['log']['PermissaoEmpresa'] = $query['PermissaoEmp'];
 				$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
 				$_SESSION['log']['DataCriacao'] = $query['DataCriacao'];
@@ -5935,7 +5935,7 @@ class Relatorio extends CI_Controller {
                 $_SESSION['db']['password'] = $this->db->password;
                 $_SESSION['db']['database'] = $this->db->database;
 
-                if ($this->Loginempresa_model->set_acesso($_SESSION['log']['id'], 'LOGIN') === FALSE) {
+                if ($this->Loginempresa_model->set_acesso($_SESSION['log']['idSis_Empresa'], 'LOGIN') === FALSE) {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o Administrador.</strong>";
 
                     $this->basico->erro($msg);

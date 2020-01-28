@@ -114,8 +114,8 @@ class Funcionariomatriz extends CI_Controller {
         } else {
 
 
-			$data['query']['QuemCad'] = $_SESSION['log']['id'];
-			$data['query']['idSis_EmpresaMatriz'] = $_SESSION['log']['id'];
+			$data['query']['QuemCad'] = $_SESSION['log']['idSis_UsuarioMatriz'];
+			$data['query']['idSis_EmpresaMatriz'] = $_SESSION['log']['idSis_EmpresaMatriz'];
 			$data['query']['NomeEmpresa'] = $_SESSION['log']['NomeEmpresa'];
             $data['query']['Senha'] = md5($data['query']['Senha']);
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
@@ -147,7 +147,7 @@ class Funcionariomatriz extends CI_Controller {
 
 				$data['agenda'] = array(
                     'NomeAgenda' => 'Matriz',
-					'idSis_EmpresaMatriz' => $_SESSION['log']['id'],
+					'idSis_EmpresaMatriz' => $_SESSION['log']['idSis_EmpresaMatriz'],
                     'idSis_UsuarioMatriz' => $data['idSis_UsuarioMatriz']
                 );
                 $data['campos'] = array_keys($data['agenda']);
@@ -247,7 +247,7 @@ class Funcionariomatriz extends CI_Controller {
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
 			$data['query']['DataEmUsuario'] = $this->basico->mascara_data($data['query']['DataEmUsuario'], 'mysql');
             #$data['query']['Obs'] = nl2br($data['query']['Obs']);
-            #$data['query']['Funcionariomatriz'] = $_SESSION['log']['id'];
+            #$data['query']['Funcionariomatriz'] = $_SESSION['log']['idSis_UsuarioMatriz'];
 
             $data['anterior'] = $this->Funcionariomatriz_model->get_funcionariomatriz($data['query']['idSis_UsuarioMatriz']);
             $data['campos'] = array_keys($data['query']);

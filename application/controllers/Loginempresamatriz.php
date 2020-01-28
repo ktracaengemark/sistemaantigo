@@ -112,7 +112,7 @@ class Loginempresamatriz extends CI_Controller {
                 $_SESSION['log']['Nome2'] = (strlen($query['Nome']) > 6) ? substr($query['Nome'], 0, 6) : $query['Nome'];
 				$_SESSION['log']['Nome'] = $query['Nome'];
 				#$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
-				$_SESSION['log']['id'] = $query['idSis_EmpresaMatriz'];				
+				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];				
 				#$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
 				$_SESSION['log']['NomeEmpresa2'] = (strlen($query['NomeEmpresa']) > 12) ? substr($query['NomeEmpresa'], 0, 12) : $query['NomeEmpresa'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];				
@@ -125,7 +125,7 @@ class Loginempresamatriz extends CI_Controller {
                 $_SESSION['db']['password'] = $this->db->password;
                 $_SESSION['db']['database'] = $this->db->database;
 
-                if ($this->Loginempresamatriz_model->set_acesso($_SESSION['log']['id'], 'LOGIN') === FALSE) {
+                if ($this->Loginempresamatriz_model->set_acesso($_SESSION['log']['idSis_EmpresaMatriz'], 'LOGIN') === FALSE) {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o Administrador.</strong>";
 
                     $this->basico->erro($msg);
@@ -205,7 +205,7 @@ class Loginempresamatriz extends CI_Controller {
             $data['campos'] = array_keys($data['query']);
 
             $data['idSis_EmpresaMatriz'] = $this->Loginempresamatriz_model->set_usuario($data['query']);
-            $_SESSION['log']['id'] = 1;
+            $_SESSION['log']['idSis_EmpresaMatriz'] = 1;
 
             if ($data['idSis_EmpresaMatriz'] === FALSE) {
                 $data['msg'] = '?m=2';
@@ -456,12 +456,12 @@ class Loginempresamatriz extends CI_Controller {
 
         #set logout in database
         if ($_SESSION['log'] && $m === TRUE) {
-            $this->Loginempresamatriz_model->set_acesso($_SESSION['log']['id'], 'LOGOUT');
+            $this->Loginempresamatriz_model->set_acesso($_SESSION['log']['idSis_EmpresaMatriz'], 'LOGOUT');
         } else {
-            if (!isset($_SESSION['log']['id'])) {
-                $_SESSION['log']['id'] = 1;
+            if (!isset($_SESSION['log']['idSis_EmpresaMatriz'])) {
+                $_SESSION['log']['idSis_EmpresaMatriz'] = 1;
             }
-            $this->Loginempresamatriz_model->set_acesso($_SESSION['log']['id'], 'TIMEOUT');
+            $this->Loginempresamatriz_model->set_acesso($_SESSION['log']['idSis_EmpresaMatriz'], 'TIMEOUT');
             $data['msg'] = '?m=2';
         }
 

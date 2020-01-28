@@ -133,7 +133,7 @@ class Empresacli2 extends CI_Controller {
             $data['query']['DataProcedimentoCli'] = $this->basico->mascara_data($data['query']['DataProcedimentoCli'], 'mysql');            
 			$data['query']['ProcedimentoCli'] = nl2br($data['query']['ProcedimentoCli']);
 			$data['query']['idSis_EmpresaCli'] = $_SESSION['log']['idSis_Empresa'];
-			$data['query']['idSis_UsuarioCli'] = $_SESSION['log']['id'];
+			$data['query']['idSis_UsuarioCli'] = $_SESSION['log']['idSis_UsuarioCli'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['query']['ConcluidoProcedimentoCli'] = "S";
 			$data['query']['ConcluidoProcedimento'] = "N";
@@ -238,7 +238,7 @@ class Empresacli2 extends CI_Controller {
             #### App_Procedimento ####
             $data['orcatrata']['DataProcedimentoCli'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimentoCli'], 'mysql');
 			$data['orcatrata']['idSis_EmpresaCli'] = $_SESSION['log']['idSis_Empresa'];
-            $data['orcatrata']['idSis_UsuarioCli'] = $_SESSION['log']['id'];
+            $data['orcatrata']['idSis_UsuarioCli'] = $_SESSION['log']['idSis_UsuarioCli'];
             $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['orcatrata']['ConcluidoProcedimentoCli'] = "S";
 			$data['orcatrata']['ConcluidoProcedimento'] = "N";
@@ -354,7 +354,7 @@ class Empresacli2 extends CI_Controller {
             #### App_Procedimento ####
             $data['orcatrata']['DataProcedimentoCli'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimentoCli'], 'mysql');
 			#$data['orcatrata']['idSis_EmpresaCli'] = $_SESSION['log']['idSis_Empresa'];
-            #$data['orcatrata']['idSis_UsuarioCli'] = $_SESSION['log']['id'];
+            #$data['orcatrata']['idSis_UsuarioCli'] = $_SESSION['log']['idSis_UsuarioCli'];
             #$data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['update']['orcatrata']['anterior'] = $this->Procedimento_model->get_orcatrata($data['orcatrata']['idApp_Procedimento']);

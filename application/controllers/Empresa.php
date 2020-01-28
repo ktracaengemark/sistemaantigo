@@ -97,7 +97,7 @@ class Empresa extends CI_Controller {
         } else {
 
 
-			$data['query']['Empresa'] = $_SESSION['log']['id'];
+			$data['query']['Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['query']['Senha'] = md5($data['query']['Senha']);
 			#$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));
@@ -215,7 +215,7 @@ class Empresa extends CI_Controller {
             #$data['query']['Senha'] = md5($data['query']['Senha']);            
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
             #$data['query']['Obs'] = nl2br($data['query']['Obs']);
-            #$data['query']['Empresa'] = $_SESSION['log']['id'];
+            #$data['query']['Empresa'] = $_SESSION['log']['idSis_Empresa'];
 
             $data['anterior'] = $this->Empresa_model->get_empresa($data['query']['idSis_Empresa']);
             $data['campos'] = array_keys($data['query']);

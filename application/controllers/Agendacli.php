@@ -42,14 +42,14 @@ class Agendacli extends CI_Controller {
         $_SESSION['log']['NomeUsuario'] = ($data['query']['NomeUsuario']) ?
             $data['query']['NomeUsuario'] : FALSE;
 
-        #$data['query']['estatisticas'] = $this->Agendacli_model->resumo_estatisticas($_SESSION['log']['id']);
-        #$data['query']['cliente_aniversariantes'] = $this->Agendacli_model->cliente_aniversariantes($_SESSION['log']['id']);
-        #$data['query']['contatocliente_aniversariantes'] = $this->Agendacli_model->contatocliente_aniversariantes($_SESSION['log']['id']);
-        #$data['query']['profissional_aniversariantes'] = $this->Agendacli_model->profissional_aniversariantes($_SESSION['log']['id']);
-		#$data['query']['contatoprof_aniversariantes'] = $this->Agendacli_model->contatoprof_aniversariantes($_SESSION['log']['id']);
-		$data['query']['procedimentouscli'] = $this->Agendacli_model->procedimentouscli($_SESSION['log']['id']);
-		#$data['query']['procedimentocli'] = $this->Agendacli_model->procedimentocli($_SESSION['log']['id']);
-		#$data['query']['procedimentoorc'] = $this->Agendacli_model->procedimentoorc($_SESSION['log']['id']);
+        #$data['query']['estatisticas'] = $this->Agendacli_model->resumo_estatisticas($_SESSION['log']['idSis_UsuarioCli']);
+        #$data['query']['cliente_aniversariantes'] = $this->Agendacli_model->cliente_aniversariantes($_SESSION['log']['idSis_UsuarioCli']);
+        #$data['query']['contatocliente_aniversariantes'] = $this->Agendacli_model->contatocliente_aniversariantes($_SESSION['log']['idSis_UsuarioCli']);
+        #$data['query']['profissional_aniversariantes'] = $this->Agendacli_model->profissional_aniversariantes($_SESSION['log']['idSis_UsuarioCli']);
+		#$data['query']['contatoprof_aniversariantes'] = $this->Agendacli_model->contatoprof_aniversariantes($_SESSION['log']['idSis_UsuarioCli']);
+		$data['query']['procedimentouscli'] = $this->Agendacli_model->procedimentouscli($_SESSION['log']['idSis_UsuarioCli']);
+		#$data['query']['procedimentocli'] = $this->Agendacli_model->procedimentocli($_SESSION['log']['idSis_UsuarioCli']);
+		#$data['query']['procedimentoorc'] = $this->Agendacli_model->procedimentoorc($_SESSION['log']['idSis_UsuarioCli']);
 		
 		$this->load->view('agendacli/tela_agendacli', $data);
 

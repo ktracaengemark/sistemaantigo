@@ -142,7 +142,7 @@ class Usuario extends CI_Controller {
 			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
 
 			$data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
-			$data['query']['QuemCad'] = $_SESSION['log']['id'];
+			$data['query']['QuemCad'] = $_SESSION['log']['idSis_Usuario'];
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['NomeEmpresa'] = $_SESSION['log']['NomeEmpresa'];
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
@@ -172,7 +172,7 @@ class Usuario extends CI_Controller {
 
 				$data['agenda'] = array(
                     'NomeAgenda' => 'Usuario',
-					'idSis_Empresa' => $_SESSION['log']['id'],
+					'idSis_Empresa' => $_SESSION['log']['idSis_Empresa'],
                     'idSis_Usuario' => $data['idSis_Usuario']
                 );
                 $data['campos'] = array_keys($data['agenda']);

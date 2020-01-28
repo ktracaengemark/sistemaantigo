@@ -97,7 +97,7 @@ class Empresafilial extends CI_Controller {
         } else {
 
 
-			$data['query']['Empresa'] = $_SESSION['log']['id'];
+			$data['query']['Empresa'] = $_SESSION['log']['idSis_EmpresaFilial'];
             $data['query']['Senha'] = md5($data['query']['Senha']);
 			#$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));
@@ -203,7 +203,7 @@ class Empresafilial extends CI_Controller {
             $data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
             #$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
             #$data['query']['Obs'] = nl2br($data['query']['Obs']);
-            #$data['query']['Empresafilial'] = $_SESSION['log']['id'];
+            #$data['query']['Empresafilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
 
             $data['anterior'] = $this->Empresafilial_model->get_empresafilial($data['query']['idSis_EmpresaFilial']);
             $data['campos'] = array_keys($data['query']);

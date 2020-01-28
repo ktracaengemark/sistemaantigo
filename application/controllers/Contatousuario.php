@@ -94,7 +94,7 @@ class Contatousuario extends CI_Controller {
             $data['query']['Obs'] = nl2br($data['query']['Obs']);
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-            $data['query']['QuemCad'] = $_SESSION['log']['id'];
+            $data['query']['QuemCad'] = $_SESSION['log']['idSis_Usuario'];
 			$data['campos'] = array_keys($data['query']);
             $data['anterior'] = array();
 
