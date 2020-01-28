@@ -181,7 +181,7 @@ class Tarefa extends CI_Controller {
 			#$data['tarefa']['DataConclusao'] = $this->basico->mascara_data($data['tarefa']['DataConclusao'], 'mysql');
             #$data['tarefa']['DataRetorno'] = $this->basico->mascara_data($data['tarefa']['DataRetorno'], 'mysql');
 			$data['tarefa']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
-			$data['tarefa']['idSis_Usuario'] = $_SESSION['log']['id'];
+			$data['tarefa']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['tarefa']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
             $data['tarefa']['idApp_Procedimento'] = $this->Tarefa_model->set_tarefa($data['tarefa']);
             /*
@@ -197,7 +197,7 @@ class Tarefa extends CI_Controller {
             if (isset($data['procedtarefa'])) {
                 $max = count($data['procedtarefa']);
                 for($j=1;$j<=$max;$j++) {
-                    $data['procedtarefa'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+                    $data['procedtarefa'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['procedtarefa'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['procedtarefa'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['procedtarefa'][$j]['idApp_Procedimento'] = $data['tarefa']['idApp_Procedimento'];
@@ -422,7 +422,7 @@ class Tarefa extends CI_Controller {
 			#$data['tarefa']['DataConclusao'] = $this->basico->mascara_data($data['tarefa']['DataConclusao'], 'mysql');
             #$data['tarefa']['DataRetorno'] = $this->basico->mascara_data($data['tarefa']['DataRetorno'], 'mysql');
 			#$data['tarefa']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
-            #$data['tarefa']['idSis_Usuario'] = $_SESSION['log']['id'];
+            #$data['tarefa']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             #$data['tarefa']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['update']['tarefa']['anterior'] = $this->Tarefa_model->get_tarefa($data['tarefa']['idApp_Procedimento']);
@@ -448,7 +448,7 @@ class Tarefa extends CI_Controller {
 
                 $max = count($data['update']['procedtarefa']['inserir']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['procedtarefa']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+                    $data['update']['procedtarefa']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedtarefa']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['update']['procedtarefa']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['procedtarefa']['inserir'][$j]['idApp_Procedimento'] = $data['tarefa']['idApp_Procedimento'];

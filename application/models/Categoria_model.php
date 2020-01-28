@@ -72,7 +72,7 @@ class Categoria_model extends CI_Model {
             WHERE
 				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				(C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' )
+				C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' )
             ORDER BY
                 C.Categoria ASC 
 		');
@@ -113,11 +113,11 @@ class Categoria_model extends CI_Model {
                     . 'Tab_Categoria '
 					. 'ORDER BY idTab_Categoria ASC ');
 					#. 'WHERE '
-                   # . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
+                   # . 'idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND '
                    # . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] ) . ' '
 					
         } else {
-            #$query = $this->db->query('SELECT idTab_Categoria, Categoria, Abrev FROM Tab_Categoria WHERE idSis_Usuario = ' . $_SESSION['log']['id']);
+            #$query = $this->db->query('SELECT idTab_Categoria, Categoria, Abrev FROM Tab_Categoria WHERE idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario']);
 			$query = $this->db->query('SELECT idTab_Categoria FROM Tab_Categoria ORDER BY Categoria ASC ');
 
             $array = array();
@@ -141,7 +141,7 @@ class Categoria_model extends CI_Model {
                 Tab_Categoria
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Usuario = ' . $_SESSION['log']['id'] . '
+                idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '
                 ORDER BY Categoria ASC'
     );
         } else {
@@ -154,7 +154,7 @@ class Categoria_model extends CI_Model {
                 Tab_Categoria
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Usuario = ' . $_SESSION['log']['id'] . '
+                idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '
                 ORDER BY Categoria ASC'
     );
 

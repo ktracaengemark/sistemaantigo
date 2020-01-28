@@ -82,7 +82,7 @@ class Produtos_model extends CI_Model {
             FROM
                 Tab_Produto AS TF
             WHERE
-                TF.idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
+                TF.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' 
             ORDER BY
                 TF.TipoProduto ASC
 				

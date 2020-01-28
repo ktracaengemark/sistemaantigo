@@ -87,7 +87,7 @@ class Prodaux3 extends CI_Controller {
             $data['query']['Prodaux3'] = trim(mb_strtoupper($data['query']['Prodaux3'], 'ISO-8859-1'));
 			$data['query']['Abrev3'] = trim(mb_strtoupper($data['query']['Abrev3'], 'ISO-8859-1'));
            # $data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));
-            $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
+            $data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 
@@ -170,7 +170,7 @@ class Prodaux3 extends CI_Controller {
             $data['query']['Prodaux3'] = trim(mb_strtoupper($data['query']['Prodaux3'], 'ISO-8859-1'));
 			$data['query']['Abrev3'] = trim(mb_strtoupper($data['query']['Abrev3'], 'ISO-8859-1'));
            # $data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));
-            $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
+            $data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 
             $data['anterior'] = $this->Prodaux3_model->get_prodaux3($data['query']['idTab_Prodaux3']);

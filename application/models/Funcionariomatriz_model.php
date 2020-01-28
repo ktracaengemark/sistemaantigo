@@ -128,7 +128,7 @@ class Funcionariomatriz_model extends CI_Model {
 
         $query = $this->db->query('SELECT * '
                 . 'FROM Sis_UsuarioMatriz WHERE '
-                #. 'Funcionariomatriz = ' . $_SESSION['log']['id'] . ' AND '
+                #. 'Funcionariomatriz = ' . $_SESSION['log']['idSis_UsuarioMatriz'] . ' AND '
 				. 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND '
                 . '(Nome like "%' . $data . '%" OR '
                 #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '

@@ -264,14 +264,14 @@ class Agenda extends CI_Controller {
         }		
 		
 
-        $data['query']['estatisticas'] = $this->Agenda_model->resumo_estatisticas($_SESSION['log']['id']);
-        $data['query']['cliente_aniversariantes'] = $this->Agenda_model->cliente_aniversariantes($_SESSION['log']['id']);
-        $data['query']['contatocliente_aniversariantes'] = $this->Agenda_model->contatocliente_aniversariantes($_SESSION['log']['id']);
-        #$data['query']['profissional_aniversariantes'] = $this->Agenda_model->profissional_aniversariantes($_SESSION['log']['id']);
-		#$data['query']['contatoprof_aniversariantes'] = $this->Agenda_model->contatoprof_aniversariantes($_SESSION['log']['id']);
-		$data['query']['procedimento'] = $this->Agenda_model->procedimento($_SESSION['log']['id']);
-		$data['query']['procedempresa'] = $this->Agenda_model->procedempresa($_SESSION['log']['id']);
-		$data['query']['procedimentorec'] = $this->Agenda_model->procedimentorec($_SESSION['log']['id']);	
+        $data['query']['estatisticas'] = $this->Agenda_model->resumo_estatisticas($_SESSION['log']['idSis_Usuario']);
+        $data['query']['cliente_aniversariantes'] = $this->Agenda_model->cliente_aniversariantes($_SESSION['log']['idSis_Usuario']);
+        $data['query']['contatocliente_aniversariantes'] = $this->Agenda_model->contatocliente_aniversariantes($_SESSION['log']['idSis_Usuario']);
+        #$data['query']['profissional_aniversariantes'] = $this->Agenda_model->profissional_aniversariantes($_SESSION['log']['idSis_Usuario']);
+		#$data['query']['contatoprof_aniversariantes'] = $this->Agenda_model->contatoprof_aniversariantes($_SESSION['log']['idSis_Usuario']);
+		$data['query']['procedimento'] = $this->Agenda_model->procedimento($_SESSION['log']['idSis_Usuario']);
+		$data['query']['procedempresa'] = $this->Agenda_model->procedempresa($_SESSION['log']['idSis_Usuario']);
+		$data['query']['procedimentorec'] = $this->Agenda_model->procedimentorec($_SESSION['log']['idSis_Usuario']);	
 	
 		$this->load->view('agenda/tela_agenda', $data);
 

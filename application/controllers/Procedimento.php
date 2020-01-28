@@ -108,7 +108,7 @@ class Procedimento extends CI_Controller {
 			$data['query']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['query']['DataProcedimentoLimite'], 'mysql');
 			$data['query']['Procedimento'] = nl2br($data['query']['Procedimento']);
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
+			$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 			$data['query']['idApp_Cliente'] = 0;
 			$data['query']['idApp_OrcaTrata'] = 0;
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -216,7 +216,7 @@ class Procedimento extends CI_Controller {
             $data['query']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['query']['DataProcedimentoLimite'], 'mysql');
 			$data['query']['Procedimento'] = nl2br($data['query']['Procedimento']);
 			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-			#$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];						
+			#$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];						
             $data['anterior'] = $this->Procedimento_model->get_procedimento($data['query']['idApp_Procedimento']);
             $data['campos'] = array_keys($data['query']);
 
@@ -305,7 +305,7 @@ class Procedimento extends CI_Controller {
 			$data['query']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['query']['DataProcedimentoLimite'], 'mysql');
 			$data['query']['Procedimento'] = nl2br($data['query']['Procedimento']);
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
+			$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 			#$data['query']['idApp_Cliente'] = 0;
 			$data['query']['idApp_OrcaTrata'] = 0;
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -398,7 +398,7 @@ class Procedimento extends CI_Controller {
             $data['query']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['query']['DataProcedimentoLimite'], 'mysql');
 			$data['query']['Procedimento'] = nl2br($data['query']['Procedimento']);
 			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-			#$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
+			#$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 						
             $data['anterior'] = $this->Procedimento_model->get_procedimento($data['query']['idApp_Procedimento']);
             $data['campos'] = array_keys($data['query']);
@@ -544,7 +544,7 @@ class Procedimento extends CI_Controller {
             $data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data2($data['orcatrata']['DataProcedimento'], 'mysql');
 			$data['orcatrata']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimentoLimite'], 'mysql');
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-            $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['id'];
+            $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
             $data['orcatrata']['idApp_Procedimento'] = $this->Procedimento_model->set_orcatrata($data['orcatrata']);
 
@@ -678,7 +678,7 @@ class Procedimento extends CI_Controller {
             #$data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimento'], 'mysql');
 			$data['orcatrata']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimentoLimite'], 'mysql');
 			#$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-            #$data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['id'];
+            #$data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             #$data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['update']['orcatrata']['anterior'] = $this->Procedimento_model->get_orcatrata($data['orcatrata']['idApp_Procedimento']);

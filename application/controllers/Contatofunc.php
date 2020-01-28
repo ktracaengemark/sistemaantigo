@@ -91,7 +91,7 @@ class Contatofunc extends CI_Controller {
             $data['query']['NomeContatoUsuario'] = trim(mb_strtoupper($data['query']['NomeContatoUsuario'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
             $data['query']['Obs'] = nl2br($data['query']['Obs']);
-			$data['query']['idSis_Empresa'] = $_SESSION['log']['id'];
+			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
             $data['campos'] = array_keys($data['query']);
             $data['anterior'] = array();
@@ -174,7 +174,7 @@ class Contatofunc extends CI_Controller {
             $data['query']['NomeContatoUsuario'] = trim(mb_strtoupper($data['query']['NomeContatoUsuario'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
             $data['query']['Obs'] = nl2br($data['query']['Obs']);
-            $data['query']['idSis_Empresa'] = $_SESSION['log']['id']; 
+            $data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa']; 
 			$data['query']['idApp_ContatoUsuario'] = $_SESSION['log']['idApp_ContatoUsuario'];
 
             $data['anterior'] = $this->Contatofunc_model->get_contatofunc($data['query']['idApp_ContatoUsuario']);

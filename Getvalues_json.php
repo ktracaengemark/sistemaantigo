@@ -159,7 +159,7 @@ elseif ($_GET['q'] == 6) {
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                P.idSis_Usuario = ' . $_SESSION['log']['id'] . '
+                P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '
                 ORDER BY F.Abrev ASC, P.NomeProfissional ASC'
     );
 

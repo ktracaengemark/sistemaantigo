@@ -65,7 +65,7 @@ class Funcao_model extends CI_Model {
         $query = $this->db->query('SELECT * '
                 . 'FROM Tab_Funcao '
                 . 'WHERE '
-                . 'idSis_Empresa = ' . $_SESSION['log']['id'] . ' AND '
+                . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
                 . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' '
                 . 'ORDER BY Funcao ASC ');
         
@@ -98,7 +98,7 @@ class Funcao_model extends CI_Model {
         $query = $this->db->query('SELECT * '
                 . 'FROM Tab_Funcao '
                 . 'WHERE '
-                . 'idSis_Empresa = ' . $_SESSION['log']['id'] . ' AND '
+                . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
                 . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' '
                 . 'ORDER BY Funcao ASC ');
         
@@ -136,7 +136,7 @@ class Funcao_model extends CI_Model {
                     . 'FROM '
                     . 'Tab_Funcao '					
 					. 'WHERE '
-                    . 'idSis_Empresa = ' . $_SESSION['log']['id'] . ' '
+                    . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' '
 
 					. 'ORDER BY Funcao ASC ');		
 					
@@ -148,7 +148,7 @@ class Funcao_model extends CI_Model {
                     . 'FROM '
                     . 'Tab_Funcao '					
 					. 'WHERE '
-                    . 'idSis_Empresa = ' . $_SESSION['log']['id'] . ' '
+                    . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' '
 
 					. 'ORDER BY Funcao ASC ');
             

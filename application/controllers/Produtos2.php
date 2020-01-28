@@ -163,7 +163,7 @@ class Produtos2 extends CI_Controller {
             #### Tab_Produto ####
 			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
-            $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
+            $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
 			#$data['produtos']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProduto']));
@@ -180,7 +180,7 @@ class Produtos2 extends CI_Controller {
             #### Tab_Valor ####
             if (isset($data['valor'])) { {
 					$data['valor']['Convdesc'] = trim(mb_strtoupper($data['valor']['Convdesc'], 'ISO-8859-1'));
-                    $data['valor']['idSis_Usuario'] = $_SESSION['log']['id'];
+                    $data['valor']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['valor']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['valor']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['valor']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ValorProduto']));
@@ -346,7 +346,7 @@ class Produtos2 extends CI_Controller {
             #### Tab_Produto ####
 			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
-            $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
+            $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
 			$data['produtos']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProduto']));
@@ -365,7 +365,7 @@ class Produtos2 extends CI_Controller {
                 $max = count($data['valor']);
                 for($j=1;$j<=$max;$j++) {
                     $data['valor'][$j]['Convdesc'] = trim(mb_strtoupper($data['valor'][$j]['Convdesc'], 'ISO-8859-1'));
-					$data['valor'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+					$data['valor'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['valor'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['valor'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['valor'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor'][$j]['ValorProduto']));
@@ -530,7 +530,7 @@ class Produtos2 extends CI_Controller {
             #### Tab_Produto ####
 			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
-            $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
+            $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
 			#$data['produtos']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProduto']));
@@ -547,7 +547,7 @@ class Produtos2 extends CI_Controller {
             #### Tab_Valor ####
             if (isset($data['valor'])) { {
 					$data['valor']['Convdesc'] = trim(mb_strtoupper($data['valor']['Convdesc'], 'ISO-8859-1'));
-                    $data['valor']['idSis_Usuario'] = $_SESSION['log']['id'];
+                    $data['valor']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['valor']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['valor']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['valor']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ValorProduto']));
@@ -734,7 +734,7 @@ class Produtos2 extends CI_Controller {
             #### Tab_Produto ####
 			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
-            $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
+            $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			#$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
 
@@ -762,7 +762,7 @@ class Produtos2 extends CI_Controller {
                 $max = count($data['update']['valor']['inserir']);
                 for($j=0;$j<$max;$j++) {
                     $data['update']['valor']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['inserir'][$j]['Convdesc'], 'ISO-8859-1'));
-					$data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+					$data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['valor']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['valor']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['valor']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];

@@ -132,7 +132,7 @@ class Agenda_model extends CI_Model {
     }	
 
 	public function procedempresa($data) {
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_UsuarioCli = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_UsuarioCli = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 		$query = $this->db->query('
             SELECT
 				C.NomeCliente,
@@ -482,7 +482,7 @@ class Agenda_model extends CI_Model {
 
     public function select_categoria() {
 		
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
         
 		$query = $this->db->query('
             SELECT
@@ -494,7 +494,7 @@ class Agenda_model extends CI_Model {
             WHERE
 				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				(C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' )
+				C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' )
             ORDER BY
                 C.Categoria ASC
         ');
@@ -612,8 +612,8 @@ class Agenda_model extends CI_Model {
 				' . $permissao5 . '
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
-				P.Compartilhar = ' . $_SESSION['log']['id'] . ' OR
-				(P.idSis_Usuario = ' . $_SESSION['log']['id'] . ') OR
+				P.Compartilhar = ' . $_SESSION['log']['idSis_Usuario'] . ' OR
+				(P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ') OR
 				(P.Compartilhar = 51 AND P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '))
             ORDER BY
                 P.Procedimento ASC
@@ -689,7 +689,7 @@ class Agenda_model extends CI_Model {
 				' . $filtro10 . '
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				(P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idSis_Usuario = ' . $_SESSION['log']['id'] . '))
+				P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '))
 				' . $data['Procedimento'] . '
             ORDER BY
 				' . $data['Campo'] . '
@@ -811,7 +811,7 @@ class Agenda_model extends CI_Model {
 		$data['Anoemp'] = ($data['Anoemp']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Anoemp'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'P.ConcluidoProcedimento' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];		
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_UsuarioCli = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_UsuarioCli = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 		$filtro4 = ($data['Concluidoemp']) ? 'P.ConcluidoProcedimento = "' . $data['Concluidoemp'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('
@@ -888,7 +888,7 @@ class Agenda_model extends CI_Model {
 		$data['Anoemp'] = ($data['Anoemp']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Anoemp'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'P.ConcluidoProcedimento' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];		
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_UsuarioCli = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_UsuarioCli = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 		$filtro4 = ($data['Concluidoemp']) ? 'P.ConcluidoProcedimento = "' . $data['Concluidoemp'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('

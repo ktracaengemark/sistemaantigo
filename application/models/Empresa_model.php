@@ -140,7 +140,7 @@ class Empresa_model extends CI_Model {
 
         $query = $this->db->query('SELECT * '
                 . 'FROM Sis_Empresa WHERE '
-                . 'Empresa = ' . $_SESSION['log']['id'] . ' AND '
+                . 'Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
 				. 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND '
                 . '(NomeAdmin like "%' . $data . '%" OR '
                 #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '

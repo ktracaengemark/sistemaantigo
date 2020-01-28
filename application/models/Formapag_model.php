@@ -55,7 +55,7 @@ class Formapag_model extends CI_Model {
         $query = $this->db->query('SELECT * '
                 . 'FROM Tab_FormaPag '
                 . 'WHERE '
-                . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
+                . 'idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND '
                 . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' '
                 . 'ORDER BY FormaPag ASC ');
 
@@ -127,7 +127,7 @@ class Formapag_model extends CI_Model {
                     . 'FROM '
                     . 'Tab_FormaPag '
                     . 'WHERE '
-                    #. 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
+                    #. 'idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND '
                     . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ''
 					. 'ORDER BY idTab_FormaPag ASC ');
         } else {

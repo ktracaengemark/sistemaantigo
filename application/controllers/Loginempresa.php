@@ -119,7 +119,7 @@ class Loginempresa extends CI_Controller {
 				$_SESSION['log']['CelularAdmin'] = $query['CelularAdmin'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
 				$_SESSION['log']['NomeEmpresa2'] = (strlen($query['NomeEmpresa']) > 15) ? substr($query['NomeEmpresa'], 0, 15) : $query['NomeEmpresa'];
-				$_SESSION['log']['id'] = $query['idSis_Empresa'];
+				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				$_SESSION['log']['PermissaoEmpresa'] = $query['PermissaoEmp'];
 				$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
 				$_SESSION['log']['TabelasEmpresa'] = $query['TabelasEmpresa'];
@@ -132,7 +132,7 @@ class Loginempresa extends CI_Controller {
                 $_SESSION['db']['password'] = $this->db->password;
                 $_SESSION['db']['database'] = $this->db->database;
 
-                if ($this->Loginempresa_model->set_acesso($_SESSION['log']['id'], 'LOGIN') === FALSE) {
+                if ($this->Loginempresa_model->set_acesso($_SESSION['log']['idSis_Empresa'], 'LOGIN') === FALSE) {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o Administrador.</strong>";
 
                     $this->basico->erro($msg);
@@ -226,7 +226,7 @@ class Loginempresa extends CI_Controller {
             $data['campos'] = array_keys($data['query']);
 
             $data['idSis_Empresa'] = $this->Loginempresa_model->set_empresa($data['query']);
-            $_SESSION['log']['id'] = 1;
+            $_SESSION['log']['idSis_Empresa'] = 1;
 
             if ($data['idSis_Empresa'] === FALSE) {
                 $data['msg'] = '?m=2';
@@ -253,7 +253,7 @@ class Loginempresa extends CI_Controller {
                 $data['campos'] = array_keys($data['usuario']);
 
                 $data['idSis_Usuario'] = $this->Loginempresa_model->set_usuario($data['usuario']);
-				$_SESSION['log']['id'] = 1;
+				$_SESSION['log']['idSis_Empresa'] = 1;
                 
 				if ($data['idSis_Usuario'] === FALSE) {
 					$data['msg'] = '?m=2';
@@ -435,7 +435,7 @@ class Loginempresa extends CI_Controller {
 			$data['query']['NomeEmpresa'] = trim(mb_strtoupper($data['query']['NomeEmpresa'], 'ISO-8859-1'));
 			$data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));			
 			$data['query']['idSis_EmpresaMatriz'] = 2;
-			$data['query']['Associado'] = $_SESSION['log']['id'];
+			$data['query']['Associado'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['PermissaoEmpresa'] = 1;
 			$data['query']['NivelEmpresa'] = 4;
 			$data['query']['idTab_Modulo'] = 1;
@@ -454,7 +454,7 @@ class Loginempresa extends CI_Controller {
             $data['campos'] = array_keys($data['query']);
 
             $data['idSis_Empresa'] = $this->Loginempresa_model->set_empresa($data['query']);
-            $_SESSION['log']['id'] = 1;
+            $_SESSION['log']['idSis_Empresa'] = 1;
 
             if ($data['idSis_Empresa'] === FALSE) {
                 $data['msg'] = '?m=2';
@@ -481,7 +481,7 @@ class Loginempresa extends CI_Controller {
                 $data['campos'] = array_keys($data['usuario']);
 
                 $data['idSis_Usuario'] = $this->Loginempresa_model->set_usuario($data['usuario']);
-				$_SESSION['log']['id'] = 1;
+				$_SESSION['log']['idSis_Empresa'] = 1;
                 
 				if ($data['idSis_Usuario'] === FALSE) {
 					$data['msg'] = '?m=2';
@@ -798,12 +798,12 @@ class Loginempresa extends CI_Controller {
 
         #set logout in database
         if ($_SESSION['log'] && $m === TRUE) {
-            $this->Loginempresa_model->set_acesso($_SESSION['log']['id'], 'LOGOUT');
+            $this->Loginempresa_model->set_acesso($_SESSION['log']['idSis_Empresa'], 'LOGOUT');
         } else {
-            if (!isset($_SESSION['log']['id'])) {
-                $_SESSION['log']['id'] = 1;
+            if (!isset($_SESSION['log']['idSis_Empresa'])) {
+                $_SESSION['log']['idSis_Empresa'] = 1;
             }
-            $this->Loginempresa_model->set_acesso($_SESSION['log']['id'], 'TIMEOUT');
+            $this->Loginempresa_model->set_acesso($_SESSION['log']['idSis_Empresa'], 'TIMEOUT');
             $data['msg'] = '?m=2';
         }
 

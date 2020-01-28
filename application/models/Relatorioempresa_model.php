@@ -2301,7 +2301,7 @@ exit();*/
 					LEFT JOIN Tab_ServicoBase AS TPB ON TPB.idTab_ServicoBase = TSC.ServicoBase
 					LEFT JOIN App_Profissional AS P ON P.idApp_Profissional = OT.ProfissionalOrca
             WHERE
-                C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				(' . $consulta . ') AND
 				PV.idApp_ServicoVenda != "0" AND
@@ -3211,8 +3211,8 @@ exit();*/
 
             WHERE
 
-				D.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
-				OT.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+				D.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
+				OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				(' . $consulta . ')
 				' . $data['TipoDespesa'] . '
 
@@ -3288,11 +3288,11 @@ exit();*/
 					LEFT JOIN Tab_RelaCom AS TCC ON TCC.idTab_RelaCom = CC.RelaCom
 					LEFT JOIN Tab_RelaPes AS TCP ON TCP.idTab_RelaPes = CC.RelaPes
             WHERE
-				C.Empresa = ' . $_SESSION['log']['id'] . ' AND
+				C.Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				' . $data['NomeCliente'] . '
 				OR
-				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+				C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				' . $data['NomeCliente'] . '
             ORDER BY
@@ -3428,7 +3428,7 @@ exit();*/
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Inativo = E.Inativo
 					LEFT JOIN Tab_CategoriaEmpresa AS CE ON CE.idTab_CategoriaEmpresa = E.CategoriaEmpresa
             WHERE
-                E.Associado = ' . $_SESSION['log']['id'] . ' AND
+                E.Associado = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				E.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				' . $data['Atuacao'] . ' 
 				' . $data['NomeEmpresa'] . ' 
@@ -3483,7 +3483,7 @@ exit();*/
                 Sis_Empresa AS C
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Inativo = C.Inativo
             WHERE
-                C.Associado = ' . $_SESSION['log']['id'] . ' AND
+                C.Associado = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				' . $data['NomeEmpresa'] . '
             ORDER BY
@@ -3545,7 +3545,7 @@ exit();*/
 					LEFT JOIN Tab_RelaPes AS TRP ON TRP.idTab_RelaPes = CP.RelaPes
 					LEFT JOIN Tab_Funcao AS TF ON TF.idTab_Funcao= P.Funcao
             WHERE
-                P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
                 ' . $data['NomeProfissional'] . '
             ORDER BY
@@ -3602,7 +3602,7 @@ exit();*/
 					LEFT JOIN Tab_Funcao AS FU ON FU.idTab_Funcao = F.Funcao
 					LEFT JOIN Sis_Permissao AS PE ON PE.idSis_Permissao = F.Permissao
             WHERE
-				F.idSis_Empresa = ' . $_SESSION['log']['id'] . ' AND
+				F.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				F.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
                 ' . $data['Nome'] . '
             ORDER BY
@@ -3647,7 +3647,7 @@ exit();*/
                 Sis_Empresa AS F
 
             WHERE
-				F.idSis_Empresa = ' . $_SESSION['log']['id'] . ' 
+				F.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
                 ' . $data['Nome'] . '
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
@@ -3756,7 +3756,7 @@ exit();*/
                 Sis_Empresa AS E
                     LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
 			WHERE
-				E.idSis_Empresa = ' . $_SESSION['log']['id'] . '
+				E.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 
         ');
 
@@ -3820,7 +3820,7 @@ exit();*/
 					LEFT JOIN Tab_StatusSN AS TS ON TS.Abrev = E.VendaFornec
 					LEFT JOIN App_Atividade AS TA ON TA.idApp_Atividade = E.Atividade
             WHERE
-                E.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                E.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				E.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				' . $data['NomeEmpresa'] . '
 			ORDER BY
@@ -4198,7 +4198,7 @@ exit();*/
 					LEFT JOIN App_Profissional AS P ON P.idApp_Profissional = TF.ProfissionalTarefa
             WHERE
                 TF.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
-				TF.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+				TF.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				TF.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $filtro5 . '
 				(' . $consulta . ')
@@ -4429,7 +4429,7 @@ exit();*/
             FROM
                 Sis_Empresa
             WHERE
-                Associado = ' . $_SESSION['log']['id'] . ' AND
+                Associado = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 NomeEmpresa ASC
@@ -4453,7 +4453,7 @@ exit();*/
             FROM
                 Sis_Empresa
             WHERE
-                Associado = ' . $_SESSION['log']['id'] . ' AND
+                Associado = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 NomeEmpresa ASC
@@ -4594,7 +4594,7 @@ exit();*/
             FROM
                 Sis_Usuario AS F
             WHERE
-                F.idSis_Empresa = ' . $_SESSION['log']['id'] . ' AND
+                F.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				F.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 F.Nome ASC
@@ -4618,7 +4618,7 @@ exit();*/
             FROM
                 Sis_Empresa AS F
             WHERE
-                F.idSis_Empresa = ' . $_SESSION['log']['id'] . '
+                F.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
             ORDER BY
                 F.Nome ASC
         ');
@@ -4641,7 +4641,7 @@ exit();*/
             FROM
                 App_Profissional AS P
             WHERE
-                P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 NomeProfissional ASC
@@ -4665,7 +4665,7 @@ exit();*/
             FROM
                 App_Profissional AS P2
             WHERE
-                P2.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                P2.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				P2.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 NomeProfissional ASC
@@ -4691,7 +4691,7 @@ exit();*/
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                P.idSis_Usuario = ' . $_SESSION['log']['id'] . '
+                P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '
                 ORDER BY F.Abrev ASC
         ');
 
@@ -4922,7 +4922,7 @@ exit();*/
             FROM
                 App_Tarefa AS OB
             WHERE
-                OB.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                OB.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				OB.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 ObsTarefa ASC
@@ -5105,7 +5105,7 @@ exit();*/
             FROM
                 App_Procedtarefa AS OB
             WHERE
-                OB.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                OB.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				OB.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 Procedtarefa ASC

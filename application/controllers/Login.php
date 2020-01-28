@@ -127,7 +127,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['Nome2'] = (strlen($query['Nome']) > 6) ? substr($query['Nome'], 0, 6) : $query['Nome'];
 				$_SESSION['log']['CpfUsuario'] = $query['CpfUsuario'];
 				$_SESSION['log']['CelularUsuario'] = $query['CelularUsuario'];
-				$_SESSION['log']['id'] = $query['idSis_Usuario'];
+				$_SESSION['log']['idSis_Usuario'] = $query['idSis_Usuario'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
@@ -143,7 +143,7 @@ class Login extends CI_Controller {
                 $_SESSION['db']['password'] = $this->db->password;
                 $_SESSION['db']['database'] = $this->db->database;
 
-                if ($this->Login_model->set_acesso($_SESSION['log']['id'], 'LOGIN') === FALSE) {
+                if ($this->Login_model->set_acesso($_SESSION['log']['idSis_Usuario'], 'LOGIN') === FALSE) {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o Administrador.</strong>";
 
                     $this->basico->erro($msg);
@@ -254,7 +254,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['Nome2'] = (strlen($query['Nome']) > 6) ? substr($query['Nome'], 0, 6) : $query['Nome'];
 				$_SESSION['log']['CpfUsuario'] = $query['CpfUsuario'];
 				$_SESSION['log']['CelularUsuario'] = $query['CelularUsuario'];
-				$_SESSION['log']['id'] = $query['idSis_Usuario'];
+				$_SESSION['log']['idSis_Usuario'] = $query['idSis_Usuario'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
@@ -270,7 +270,7 @@ class Login extends CI_Controller {
                 $_SESSION['db']['password'] = $this->db->password;
                 $_SESSION['db']['database'] = $this->db->database;
 
-                if ($this->Login_model->set_acesso($_SESSION['log']['id'], 'LOGIN') === FALSE) {
+                if ($this->Login_model->set_acesso($_SESSION['log']['idSis_Usuario'], 'LOGIN') === FALSE) {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o Administrador.</strong>";
 
                     $this->basico->erro($msg);
@@ -381,7 +381,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['Nome2'] = (strlen($query['Nome']) > 6) ? substr($query['Nome'], 0, 6) : $query['Nome'];
 				$_SESSION['log']['CpfUsuario'] = $query['CpfUsuario'];
 				$_SESSION['log']['CelularUsuario'] = $query['CelularUsuario'];
-				$_SESSION['log']['id'] = $query['idSis_Usuario'];
+				$_SESSION['log']['idSis_Usuario'] = $query['idSis_Usuario'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
@@ -397,7 +397,7 @@ class Login extends CI_Controller {
                 $_SESSION['db']['password'] = $this->db->password;
                 $_SESSION['db']['database'] = $this->db->database;
 
-                if ($this->Login_model->set_acesso($_SESSION['log']['id'], 'LOGIN') === FALSE) {
+                if ($this->Login_model->set_acesso($_SESSION['log']['idSis_Usuario'], 'LOGIN') === FALSE) {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o Administrador.</strong>";
 
                     $this->basico->erro($msg);
@@ -509,7 +509,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['Nome2'] = (strlen($query['Nome']) > 6) ? substr($query['Nome'], 0, 6) : $query['Nome'];
 				$_SESSION['log']['CpfUsuario'] = $query['CpfUsuario'];
 				$_SESSION['log']['CelularUsuario'] = $query['CelularUsuario'];
-				$_SESSION['log']['id'] = $query['idSis_Usuario'];
+				$_SESSION['log']['idSis_Usuario'] = $query['idSis_Usuario'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
@@ -525,7 +525,7 @@ class Login extends CI_Controller {
                 $_SESSION['db']['password'] = $this->db->password;
                 $_SESSION['db']['database'] = $this->db->database;
 
-                if ($this->Login_model->set_acesso($_SESSION['log']['id'], 'LOGIN') === FALSE) {
+                if ($this->Login_model->set_acesso($_SESSION['log']['idSis_Usuario'], 'LOGIN') === FALSE) {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o Administrador.</strong>";
 
                     $this->basico->erro($msg);
@@ -636,7 +636,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['Nome2'] = (strlen($query['Nome']) > 6) ? substr($query['Nome'], 0, 6) : $query['Nome'];
 				$_SESSION['log']['CpfUsuario'] = $query['CpfUsuario'];
 				$_SESSION['log']['CelularUsuario'] = $query['CelularUsuario'];
-				$_SESSION['log']['id'] = $query['idSis_Usuario'];
+				$_SESSION['log']['idSis_Usuario'] = $query['idSis_Usuario'];
 				$_SESSION['log']['idSis_Empresa'] = $query['idSis_Empresa'];
 				#$_SESSION['log']['NivelEmpresa'] = $query['NivelEmpresa'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
@@ -652,7 +652,7 @@ class Login extends CI_Controller {
                 $_SESSION['db']['password'] = $this->db->password;
                 $_SESSION['db']['database'] = $this->db->database;
 
-                if ($this->Login_model->set_acesso($_SESSION['log']['id'], 'LOGIN') === FALSE) {
+                if ($this->Login_model->set_acesso($_SESSION['log']['idSis_Usuario'], 'LOGIN') === FALSE) {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o Administrador.</strong>";
 
                     $this->basico->erro($msg);
@@ -747,7 +747,7 @@ class Login extends CI_Controller {
             $data['campos'] = array_keys($data['query']);
 
             $data['idSis_Usuario'] = $this->Login_model->set_usuario($data['query']);
-            $_SESSION['log']['id'] = 1;
+            $_SESSION['log']['idSis_Usuario'] = 1;
 
             if ($data['idSis_Usuario'] === FALSE) {
                 $data['msg'] = '?m=2';
@@ -913,7 +913,7 @@ class Login extends CI_Controller {
             $data['campos'] = array_keys($data['query']);
 
             $data['idSis_Usuario'] = $this->Login_model->set_usuario($data['query']);
-            $_SESSION['log']['id'] = 1;
+            $_SESSION['log']['idSis_Usuario'] = 1;
 
             if ($data['idSis_Usuario'] === FALSE) {
                 $data['msg'] = '?m=2';
@@ -1084,7 +1084,7 @@ class Login extends CI_Controller {
             $data['campos'] = array_keys($data['query']);
 
             $data['idSis_Usuario'] = $this->Login_model->set_usuario($data['query']);
-            $_SESSION['log']['id'] = 1;
+            $_SESSION['log']['idSis_Usuario'] = 1;
 
             if ($data['idSis_Usuario'] === FALSE) {
                 $data['msg'] = '?m=2';
@@ -1393,12 +1393,12 @@ class Login extends CI_Controller {
 
         #set logout in database
         if ($_SESSION['log'] && $m === TRUE) {
-            $this->Login_model->set_acesso($_SESSION['log']['id'], 'LOGOUT');
+            $this->Login_model->set_acesso($_SESSION['log']['idSis_Usuario'], 'LOGOUT');
         } else {
-            if (!isset($_SESSION['log']['id'])) {
-                $_SESSION['log']['id'] = 1;
+            if (!isset($_SESSION['log']['idSis_Usuario'])) {
+                $_SESSION['log']['idSis_Usuario'] = 1;
             }
-            $this->Login_model->set_acesso($_SESSION['log']['id'], 'TIMEOUT');
+            $this->Login_model->set_acesso($_SESSION['log']['idSis_Usuario'], 'TIMEOUT');
             $data['msg'] = '?m=2';
         }
 

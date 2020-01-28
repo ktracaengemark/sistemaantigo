@@ -143,7 +143,7 @@ class Usuario extends CI_Controller {
 
 			$data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
 			$data['query']['QuemCad'] = $_SESSION['log']['id'];
-			$data['query']['idSis_Empresa'] = $_SESSION['log']['id'];
+			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['NomeEmpresa'] = $_SESSION['log']['NomeEmpresa'];
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
 			$data['query']['DataEmUsuario'] = $this->basico->mascara_data($data['query']['DataEmUsuario'], 'mysql');

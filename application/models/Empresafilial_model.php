@@ -106,7 +106,7 @@ class Empresafilial_model extends CI_Model {
 
         $query = $this->db->query('SELECT * '
                 . 'FROM Sis_EmpresaFilial WHERE '
-                . 'Empresafilial = ' . $_SESSION['log']['id'] . ' AND '
+                . 'Empresafilial = ' . $_SESSION['log']['idSis_EmpresaFilial'] . ' AND '
 				. 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND '
                 . '(Nome like "%' . $data . '%" OR '
                 #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '

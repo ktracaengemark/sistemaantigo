@@ -267,7 +267,7 @@
 																						<option value="">-- Sel.Profis. --</option>
 																						<?php
 																						foreach ($select['idSis_Usuario'] as $key => $row) {
-																							(!$produto['idSis_Usuario']) ? $produto['idSis_Usuario'] = $_SESSION['log']['id']: FALSE;
+																							(!$produto['idSis_Usuario']) ? $produto['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario']: FALSE;
 																							if ($produto[$i]['idSis_Usuario'] == $key) {
 																								echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																							} else {

@@ -84,8 +84,8 @@ class Funcao extends CI_Controller {
 
             $data['query']['Funcao'] = trim(mb_strtoupper($data['query']['Funcao'], 'ISO-8859-1'));
 			$data['query']['Abrev'] = trim(mb_strtoupper($data['query']['Abrev'], 'ISO-8859-1'));
-			$data['query']['idSis_Empresa'] = $_SESSION['log']['id'];
-			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
+			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+			$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['campos'] = array_keys($data['query']);
@@ -161,7 +161,7 @@ class Funcao extends CI_Controller {
 
             $data['query']['Funcao'] = trim(mb_strtoupper($data['query']['Funcao'], 'ISO-8859-1'));
             $data['query']['Abrev'] = trim(mb_strtoupper($data['query']['Abrev'], 'ISO-8859-1'));
-			$data['query']['idSis_Empresa'] = $_SESSION['log']['id'];
+			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 
             $data['anterior'] = $this->Funcao_model->get_funcao($data['query']['idTab_Funcao']);
             $data['campos'] = array_keys($data['query']);

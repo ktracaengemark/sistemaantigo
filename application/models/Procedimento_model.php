@@ -92,7 +92,7 @@ class Procedimento_model extends CI_Model {
         $query = $this->db->query('SELECT * '
                 . 'FROM App_Procedimento WHERE '
                 . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
-				. 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
+				. 'idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND '
                 . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND '
                 . '(Procedimento like "%' . $data . '%" OR '
                 #. 'DataProcedimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
@@ -136,7 +136,7 @@ class Procedimento_model extends CI_Model {
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				idSis_Usuario = ' . $_SESSION['log']['id'] . '
+				idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '
 			ORDER BY 
 				Procedimento ASC'
     );
@@ -151,7 +151,7 @@ class Procedimento_model extends CI_Model {
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				idSis_Usuario = ' . $_SESSION['log']['id'] . '
+				idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '
 			ORDER BY 
 				Procedimento ASC'
     );

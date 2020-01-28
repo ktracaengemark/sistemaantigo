@@ -75,7 +75,7 @@ class Tarefa_model extends CI_Model {
             FROM
                 App_Procedimento AS TF
             WHERE
-                TF.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                TF.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
                 TF.ConcluidoProcedimento = "' . $aprovado . '"
             ORDER BY
                 TF.ProfissionalProcedimento ASC,
@@ -217,7 +217,7 @@ class Tarefa_model extends CI_Model {
             WHERE
 				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				(C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' )
+				C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' )
             ORDER BY
                 C.Categoria ASC
         ');

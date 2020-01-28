@@ -220,7 +220,7 @@ class Basico_model extends CI_Model {
     function set_auditoria($auditoriaitem, $tabela, $operacao, $data, $id = NULL) {
 
         if ($id == NULL)
-            $id = $_SESSION['log']['id'];
+            $id = $_SESSION['log']['idSis_Usuario'];
 
         $auditoria = array(
             'Tabela' => $tabela,
@@ -247,7 +247,7 @@ class Basico_model extends CI_Model {
     function set_auditoriacli($auditoriaitem, $tabela, $operacao, $data, $id = NULL) {
 
         if ($id == NULL)
-            $id = $_SESSION['log']['id'];
+            $id = $_SESSION['log']['idSis_UsuarioCli'];
 
         $auditoria = array(
             'Tabela' => $tabela,
@@ -274,7 +274,7 @@ class Basico_model extends CI_Model {
     function set_auditoriaempresa($auditoriaitem, $tabela, $operacao, $data, $id = NULL) {
 
         if ($id == NULL)
-            $id = $_SESSION['log']['id'];
+            $id = $_SESSION['log']['idSis_Empresa'];
 
         $auditoria = array(
             'Tabela' => $tabela,
@@ -301,7 +301,7 @@ class Basico_model extends CI_Model {
     function set_auditoriaempresamatriz($auditoriaitem, $tabela, $operacao, $data, $id = NULL) {
 
         if ($id == NULL)
-            $id = $_SESSION['log']['id'];
+            $id = $_SESSION['log']['idSis_EmpresaMatriz'];
 
         $auditoria = array(
             'Tabela' => $tabela,
@@ -860,7 +860,7 @@ class Basico_model extends CI_Model {
 				LEFT JOIN Sis_Empresa AS EM ON EM.idSis_Empresa = P.idSis_Empresa
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                P.idSis_Usuario = ' . $_SESSION['log']['id'] . '
+                P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '
 			ORDER BY CO.Convenio DESC, PB.ProdutoBase ASC'
     );
         } else {
@@ -875,7 +875,7 @@ class Basico_model extends CI_Model {
 				LEFT JOIN Sis_Empresa AS EM ON EM.idSis_Empresa = P.idSis_Empresa
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                P.idSis_Usuario = ' . $_SESSION['log']['id'] . '
+                P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '
 			ORDER BY CO.Convenio DESC, PB.ProdutoBase ASC'
     );
 
@@ -900,7 +900,7 @@ class Basico_model extends CI_Model {
                 Tab_Produto AS TPV
             WHERE
 				TPV.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				(TPV.Empresa = ' . $_SESSION['log']['id'] . ' OR
+				(TPV.Empresa = ' . $_SESSION['log']['idSis_Usuario'] . ' OR
 				 TPV.Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ')
 			ORDER BY
 				TPV.NomeProduto ASC
@@ -915,7 +915,7 @@ class Basico_model extends CI_Model {
                 Tab_Produto AS TPV
             WHERE
 				TPV.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				(TPV.Empresa = ' . $_SESSION['log']['id'] . ' OR
+				(TPV.Empresa = ' . $_SESSION['log']['idSis_Usuario'] . ' OR
 				 TPV.Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ')
 			ORDER BY
 				TPV.NomeProduto ASC
@@ -1012,7 +1012,7 @@ class Basico_model extends CI_Model {
 				LEFT JOIN Tab_ServicoBase AS TSB ON TSB.idTab_ServicoBase = TSV.ServicoBase
             WHERE
                 TSV.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                TSV.idSis_Usuario = ' . $_SESSION['log']['id'] . '
+                TSV.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '
 			ORDER BY
 				TCO.Convenio DESC,
 				TSB.ServicoBase ASC
@@ -1029,7 +1029,7 @@ class Basico_model extends CI_Model {
 				LEFT JOIN Tab_ServicoBase AS TSB ON TSB.idTab_ServicoBase = TSV.ServicoBase
             WHERE
                 TSV.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                TSV.idSis_Usuario = ' . $_SESSION['log']['id'] . '
+                TSV.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '
 			ORDER BY
 				TCO.Convenio DESC,
 				TSB.ServicoBase ASC
@@ -1056,7 +1056,7 @@ class Basico_model extends CI_Model {
                 Tab_Servico AS TSV
             WHERE
 				TSV.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				(TSV.Empresa = ' . $_SESSION['log']['id'] . ' OR
+				(TSV.Empresa = ' . $_SESSION['log']['idSis_Usuario'] . ' OR
 				 TSV.Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ')
 			ORDER BY
 				TSV.NomeServico ASC
@@ -1071,7 +1071,7 @@ class Basico_model extends CI_Model {
                 Tab_Servico AS TSV
             WHERE
 				TSV.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				(TSV.Empresa = ' . $_SESSION['log']['id'] . ' OR
+				(TSV.Empresa = ' . $_SESSION['log']['idSis_Usuario'] . ' OR
 				 TSV.Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ')
 			ORDER BY
 				TSV.NomeServico ASC
@@ -1098,10 +1098,10 @@ class Basico_model extends CI_Model {
                     . 'FROM '
                     . 'Tab_Servico '
                     . 'WHERE '
-                    . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
+                    . 'idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND '
                     . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] );
         } else {
-            $query = $this->db->query('SELECT idTab_Servico, NomeServico, ValorServico, ValorCompraServico  FROM Tab_Servico WHERE idSis_Usuario = ' . $_SESSION['log']['id']);
+            $query = $this->db->query('SELECT idTab_Servico, NomeServico, ValorServico, ValorCompraServico  FROM Tab_Servico WHERE idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario']);
 
             $array = array();
             foreach ($query->result() as $row) {
@@ -1237,7 +1237,7 @@ class Basico_model extends CI_Model {
             WHERE
 				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				(C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' )
+				C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' )
             ORDER BY
                 C.Categoria ASC
 			');
@@ -1252,7 +1252,7 @@ class Basico_model extends CI_Model {
             WHERE
 				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				(C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				C.idSis_Usuario = ' . $_SESSION['log']['id'] . ' )
+				C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' )
             ORDER BY
                 C.Categoria ASC
 			');
@@ -1387,7 +1387,7 @@ class Basico_model extends CI_Model {
 	public function select_agenda($data = FALSE) {
 
         $q = (($_SESSION['log']['idSis_Empresa'] == 5) || ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] >= 3)) ?
-            ' U.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+            ' U.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 
         if ($data === TRUE) {
             $array = $this->db->query('
@@ -1481,7 +1481,7 @@ class Basico_model extends CI_Model {
 	public function select_agendacli($data = FALSE) {
 
         $q = ($_SESSION['log']['Permissao'] > 2) ?
-            ' U.idSis_UsuarioCli = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+            ' U.idSis_UsuarioCli = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 
         if ($data === TRUE) {
             $array = $this->db->query('
@@ -1531,7 +1531,7 @@ class Basico_model extends CI_Model {
 	public function select_profissional2($data = FALSE) {
 
         $q = ($_SESSION['log']['Permissao'] > 2) ?
-            ' U.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+            ' U.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 
         if ($data === TRUE) {
             $array = $this->db->query('
@@ -1581,7 +1581,7 @@ class Basico_model extends CI_Model {
 	public function select_profissional3($data = FALSE) {
 
         $q = ($_SESSION['log']['Permissao'] > 2) ?
-            ' U.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND ' : FALSE;
+            ' U.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 
         if ($data === TRUE) {
             $array = $this->db->query('
@@ -1896,8 +1896,8 @@ class Basico_model extends CI_Model {
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = P.Prodaux1
             WHERE
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND				
-				(P.idSis_Empresa = ' . $_SESSION['log']['id'] . ' OR P.idSis_Empresa = "0" ) AND
-				(P.ProdutoProprio = ' . $_SESSION['log']['id'] . ' OR P.ProdutoProprio = "0") AND
+				(P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' OR P.idSis_Empresa = "0" ) AND
+				(P.ProdutoProprio = ' . $_SESSION['log']['idSis_Usuario'] . ' OR P.ProdutoProprio = "0") AND
 				V.Convenio = "53" AND				
                 P.idTab_Produto = V.idTab_Produto
 			ORDER BY
@@ -1928,8 +1928,8 @@ class Basico_model extends CI_Model {
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = P.Prodaux1
             WHERE
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND				
-				(P.idSis_Empresa = ' . $_SESSION['log']['id'] . ' OR P.idSis_Empresa = "0" ) AND
-				(P.ProdutoProprio = ' . $_SESSION['log']['id'] . ' OR P.ProdutoProprio = "0") AND
+				(P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' OR P.idSis_Empresa = "0" ) AND
+				(P.ProdutoProprio = ' . $_SESSION['log']['idSis_Usuario'] . ' OR P.ProdutoProprio = "0") AND
 				V.Convenio = "53" AND				
                 P.idTab_Produto = V.idTab_Produto
 			ORDER BY
@@ -2077,7 +2077,7 @@ class Basico_model extends CI_Model {
             FROM
                 Sis_Empresa					
             WHERE
-				idSis_Empresa = ' . $_SESSION['log']['id'] . '
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
 				NomeEmpresa ASC'
     );
@@ -2090,7 +2090,7 @@ class Basico_model extends CI_Model {
             FROM
                 Sis_Empresa					
             WHERE
-				idSis_Empresa = ' . $_SESSION['log']['id'] . '
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
 				NomeEmpresa ASC'
     );
@@ -2114,7 +2114,7 @@ class Basico_model extends CI_Model {
             FROM
                 Sis_Empresa					
 			WHERE
-				idSis_Empresa = ' . $_SESSION['log']['id'] . '
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
 				NomeEmpresa ASC'
     );
@@ -2127,7 +2127,7 @@ class Basico_model extends CI_Model {
             FROM
                 Sis_Empresa					
 			WHERE
-				idSis_Empresa = ' . $_SESSION['log']['id'] . ' 
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
 			ORDER BY 
 				NomeEmpresa ASC'
     );

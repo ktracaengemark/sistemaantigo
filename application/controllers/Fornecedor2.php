@@ -130,7 +130,7 @@ class Fornecedor2 extends CI_Controller {
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
             $data['query']['Obs'] = nl2br($data['query']['Obs']);
             #$data['query']['TipoFornec'] = $data['query']['TipoFornec'];
-			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
+			$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['campos'] = array_keys($data['query']);
@@ -253,7 +253,7 @@ class Fornecedor2 extends CI_Controller {
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
             $data['query']['Obs'] = nl2br($data['query']['Obs']);
             #$data['query']['TipoFornec'] = $data['query']['TipoFornec'];
-			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];          
+			$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];          
 
             $data['anterior'] = $this->Fornecedor_model->get_fornecedor($data['query']['idApp_Fornecedor']);
             $data['campos'] = array_keys($data['query']);

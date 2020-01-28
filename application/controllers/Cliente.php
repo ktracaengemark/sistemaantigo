@@ -131,7 +131,7 @@ class Cliente extends CI_Controller {
 			$data['query']['DataEmissao'] = $this->basico->mascara_data($data['query']['DataEmissao'], 'mysql');
 			$data['query']['Obs'] = nl2br($data['query']['Obs']);
 			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-			$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
+			$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['campos'] = array_keys($data['query']);
@@ -253,7 +253,7 @@ class Cliente extends CI_Controller {
             $data['query']['DataEmissao'] = $this->basico->mascara_data($data['query']['DataEmissao'], 'mysql');
 			$data['query']['Obs'] = nl2br($data['query']['Obs']);
 			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-			#$data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
+			#$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 						
             $data['anterior'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
             $data['campos'] = array_keys($data['query']);

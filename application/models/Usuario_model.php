@@ -162,7 +162,7 @@ class Usuario_model extends CI_Model {
 
         $query = $this->db->query('SELECT * '
                 . 'FROM Sis_Usuario WHERE '
-                #. 'Usuario = ' . $_SESSION['log']['id'] . ' AND '
+                #. 'Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND '
 				. 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND '
                 . '(Nome like "%' . $data . '%" OR '
                 #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
@@ -281,7 +281,7 @@ class Usuario_model extends CI_Model {
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
-				P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+				P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				(P.Nivel = "3" OR P.Nivel = "4")
   
 			ORDER BY P.Nome ASC'
@@ -298,7 +298,7 @@ class Usuario_model extends CI_Model {
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
-				P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+				P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				(P.Nivel = "3" OR P.Nivel = "4")
  
 			ORDER BY P.Nome ASC'
@@ -366,7 +366,7 @@ class Usuario_model extends CI_Model {
             FROM
                 Sis_Usuario					
             WHERE
-				Empresa = ' . $_SESSION['log']['id'] . '
+				Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
 				Nome ASC'
     );
@@ -379,7 +379,7 @@ class Usuario_model extends CI_Model {
             FROM
                 Sis_Usuario					
             WHERE
-                Empresa = ' . $_SESSION['log']['id'] . '
+                Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
 				Nome ASC'
     );

@@ -5,7 +5,7 @@
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar1">
 				<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<?php echo base_url() ?>empresa/prontuario/<?php echo $_SESSION['log']['id']; ?>"> 
+			<a class="navbar-brand" href="<?php echo base_url() ?>empresa/prontuario/<?php echo $_SESSION['log']['idSis_Empresa']; ?>"> 
 				<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
 			</a>
 			<!--<a class="navbar-brand" href="https://www.enkontraki.com"> Melhor loja</a>-->
@@ -53,7 +53,7 @@
 							<li><a href="<?php echo base_url() ?>acessoempresa"><span class="glyphicon glyphicon-user"></span> Perfil</a></li>
 							<li role="separator" class="divider"></li>
 							<li>
-								<a href="<?php echo base_url() ?>empresa/prontuario/<?php echo $_SESSION['log']['id']; ?>"> 
+								<a href="<?php echo base_url() ?>empresa/prontuario/<?php echo $_SESSION['log']['idSis_Empresa']; ?>"> 
 									<span class="glyphicon glyphicon-pencil"></span> <?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
 								</a>
 							</li>

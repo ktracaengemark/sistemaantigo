@@ -21,7 +21,7 @@ if (!$db) {
 $query = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'AND A.idSis_Usuario = ' . $_SESSION['log']['NomeUsuario'] . '  ' : FALSE;	
 #$query2 = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'C.idApp_Cliente = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;
 																				
-$permissao = ($_SESSION['log']['Permissao'] >= 3 ) ? 'AND A.idSis_Usuario = ' . $_SESSION['log']['id'] . '  ' : FALSE;
+$permissao = ($_SESSION['log']['Permissao'] >= 3 ) ? 'AND A.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
 $permissao3 = ($_SESSION['log']['idSis_Empresa'] != 5 ) ? 'AND A.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  ' : FALSE;
 
 $permissao1 = ($_SESSION['log']['idSis_Empresa'] == 5)  ? 'OR R.CelularCliente = ' . $_SESSION['log']['CelularUsuario'] . '  ' : FALSE;

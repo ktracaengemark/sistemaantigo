@@ -240,10 +240,10 @@ class Tipodespesa_model extends CI_Model {
                     . 'Tab_TipoConsumo '
                     . 'ORDER BY TipoConsumo ASC ');
 					#. 'WHERE '
-                    #. 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
+                    #. 'idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND '
                    # . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] );
         } else {
-            #$query = $this->db->query('SELECT idTab_TipoConsumo, TipoConsumo FROM Tab_TipoConsumo WHERE idSis_Usuario = ' . $_SESSION['log']['id']);
+            #$query = $this->db->query('SELECT idTab_TipoConsumo, TipoConsumo FROM Tab_TipoConsumo WHERE idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario']);
 			$query = $this->db->query('SELECT idTab_TipoConsumo, TipoConsumo FROM Tab_TipoConsumo ORDER BY TipoConsumo ASC ');
 
             $array = array();

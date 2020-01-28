@@ -75,7 +75,7 @@ class Fornecedor_model extends CI_Model {
 
         $query = $this->db->query('SELECT * '
                 . 'FROM App_Fornecedor WHERE '
-                . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
+                . 'idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND '
                 . 'idTab_Modulo = 1 AND '
                 . '(NomeFornecedor like "%' . $data . '%" OR '
                 #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
@@ -191,7 +191,7 @@ class Fornecedor_model extends CI_Model {
 					LEFT JOIN Tab_TipoFornec AS TF ON TF.Abrev = E.TipoFornec
 					LEFT JOIN Tab_StatusSN AS TS ON TS.Abrev = E.VendaFornec
             WHERE
-                E.idSis_Usuario = ' . $_SESSION['log']['id'] . '
+                E.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '
 			ORDER BY
                 E.NomeFornecedor ASC
         ');
@@ -228,7 +228,7 @@ class Fornecedor_model extends CI_Model {
                 App_Fornecedor
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
+                idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' 
 			ORDER BY NomeFornecedor ASC'
     );
 					
@@ -265,11 +265,11 @@ class Fornecedor_model extends CI_Model {
                 App_Fornecedor
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				VendaFornec = "S" AND
 				TipoFornec = "P" OR
 				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				VendaFornec = "S" AND
 				TipoFornec = "P&S"
 			ORDER BY NomeFornecedor ASC'
@@ -284,11 +284,11 @@ class Fornecedor_model extends CI_Model {
                 App_Fornecedor
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				VendaFornec = "S" AND
 				TipoFornec = "P" OR
 				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				VendaFornec = "S" AND
 				TipoFornec = "P&S"
 			ORDER BY NomeFornecedor ASC'
@@ -314,11 +314,11 @@ class Fornecedor_model extends CI_Model {
                 App_Fornecedor
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				VendaFornec = "S" AND
 				TipoFornec = "S" OR
 				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				VendaFornec = "S" AND
 				TipoFornec = "P&S"
 			ORDER BY NomeFornecedor ASC'
@@ -333,11 +333,11 @@ class Fornecedor_model extends CI_Model {
                 App_Fornecedor
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				VendaFornec = "S" AND
 				TipoFornec = "S" OR
 				idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
 				VendaFornec = "S" AND
 				TipoFornec = "P&S"
 			ORDER BY NomeFornecedor ASC'

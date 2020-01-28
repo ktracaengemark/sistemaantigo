@@ -105,11 +105,11 @@ class Prodaux3_model extends CI_Model {
                     . 'Tab_Prodaux3 '
 					. 'ORDER BY idTab_Prodaux3 ASC ');
 					#. 'WHERE '
-                   # . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
+                   # . 'idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND '
                    # . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] ) . ' '
 					
         } else {
-            #$query = $this->db->query('SELECT idTab_Prodaux3, Prodaux3, Abrev3 FROM Tab_Prodaux3 WHERE idSis_Usuario = ' . $_SESSION['log']['id']);
+            #$query = $this->db->query('SELECT idTab_Prodaux3, Prodaux3, Abrev3 FROM Tab_Prodaux3 WHERE idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario']);
 			$query = $this->db->query('SELECT idTab_Prodaux3 FROM Tab_Prodaux3 ORDER BY Prodaux3 ASC ');
 
             $array = array();
@@ -133,7 +133,7 @@ class Prodaux3_model extends CI_Model {
                 Tab_Prodaux3
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Usuario = ' . $_SESSION['log']['id'] . '
+                idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '
                 ORDER BY Prodaux3 ASC'
     );
         } else {
@@ -146,7 +146,7 @@ class Prodaux3_model extends CI_Model {
                 Tab_Prodaux3
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                idSis_Usuario = ' . $_SESSION['log']['id'] . '
+                idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '
                 ORDER BY Prodaux3 ASC'
     );
 
