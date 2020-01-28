@@ -59,6 +59,8 @@ class Agenda extends CI_Controller {
             'Ordenamento',
             'Campo',
 			'Prioridade',
+			'Statustarefa',
+			'Statussubtarefa',
 			'Procedimento',
 			'Compartilhar',
 			'Categoria',
@@ -72,6 +74,8 @@ class Agenda extends CI_Controller {
 		$_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
 		$_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] = $data['query']['ConcluidoSubProcedimento'];
         $_SESSION['FiltroAlteraProcedimento']['Prioridade'] = $data['query']['Prioridade'];
+		$_SESSION['FiltroAlteraProcedimento']['Statustarefa'] = $data['query']['Statustarefa'];
+		$_SESSION['FiltroAlteraProcedimento']['Statussubtarefa'] = $data['query']['Statussubtarefa'];
 		$_SESSION['FiltroAlteraProcedimento']['SubPrioridade'] = $data['query']['SubPrioridade'];
 		$_SESSION['FiltroAlteraProcedimento']['Categoria'] = $data['query']['Categoria'];
 		$_SESSION['FiltroAlteraProcedimento']['Procedimento'] = $data['query']['Procedimento'];
@@ -129,12 +133,26 @@ class Agenda extends CI_Controller {
 		
         $data['select']['Prioridade'] = array (
             '0' => '::Todos::',
+			'1' => 'Alta',
+			'2' => 'Media',
+			'3' => 'Baixa',
+        );
+		
+        $data['select']['Statustarefa'] = array (
+            '0' => '::Todos::',
 			'1' => 'Fazer',
 			'2' => 'Fazendo',
 			'3' => 'Feito',
-        );
+        );		
 		
         $data['select']['SubPrioridade'] = array (
+            '0' => '::Todos::',
+			'1' => 'Alta',
+			'2' => 'Media',
+			'3' => 'Baixa',
+        );
+
+        $data['select']['Statussubtarefa'] = array (
             '0' => '::Todos::',
 			'1' => 'Fazer',
 			'2' => 'Fazendo',
@@ -168,6 +186,8 @@ class Agenda extends CI_Controller {
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 			$data['bd']['Prioridade'] = $data['query']['Prioridade'];
+			$data['bd']['Statustarefa'] = $data['query']['Statustarefa'];
+			$data['bd']['Statussubtarefa'] = $data['query']['Statussubtarefa'];
 			$data['bd']['SubPrioridade'] = $data['query']['SubPrioridade'];			
 			$data['bd']['Procedimento'] = $data['query']['Procedimento'];
 			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];

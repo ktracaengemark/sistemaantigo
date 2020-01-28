@@ -589,6 +589,9 @@ class Agenda_model extends CI_Model {
 		$permissao1 = (($_SESSION['FiltroAlteraProcedimento']['Categoria'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Categoria'] != '' )) ? 'P.Categoria = "' . $_SESSION['FiltroAlteraProcedimento']['Categoria'] . '" AND ' : FALSE;
 		$permissao2 = (($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != '' )) ? 'P.ConcluidoProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] . '" AND ' : FALSE;
 		$permissao3 = (($_SESSION['FiltroAlteraProcedimento']['Prioridade'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Prioridade'] != '' )) ? 'P.Prioridade = "' . $_SESSION['FiltroAlteraProcedimento']['Prioridade'] . '" AND ' : FALSE;
+		$permissao6 = (($_SESSION['FiltroAlteraProcedimento']['Statustarefa'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Statustarefa'] != '' )) ? 'P.Statustarefa = "' . $_SESSION['FiltroAlteraProcedimento']['Statustarefa'] . '" AND ' : FALSE;
+		$permissao7 = (($_SESSION['FiltroAlteraProcedimento']['Statussubtarefa'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Statussubtarefa'] != '' )) ? 'SP.Statussubtarefa = "' . $_SESSION['FiltroAlteraProcedimento']['Statussubtarefa'] . '" AND ' : FALSE;
+		$permissao8 = (($_SESSION['FiltroAlteraProcedimento']['SubPrioridade'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['SubPrioridade'] != '' )) ? 'SP.SubPrioridade = "' . $_SESSION['FiltroAlteraProcedimento']['SubPrioridade'] . '" AND ' : FALSE;
 		$permissao4 = ((($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != "0")&& ($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != 'M') ) && ($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != '' )) ? 'SP.ConcluidoSubProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
 		$permissao5 = (($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] == 'M') && ($_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] != '' )) ? '((SP.ConcluidoSubProcedimento = "S") OR (SP.ConcluidoSubProcedimento = "N")) AND ' : FALSE;		
 		
@@ -606,10 +609,10 @@ class Agenda_model extends CI_Model {
 					LEFT JOIN Tab_Prioridade AS PR ON PR.idTab_Prioridade = P.Prioridade
             WHERE
 				' . $permissao1 . '
-				' . $permissao2 . '
 				' . $permissao3 . '
-				' . $permissao4 . '
-				' . $permissao5 . '
+				' . $permissao6 . '
+				' . $permissao7 . '
+				' . $permissao8 . '
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				P.Compartilhar = ' . $_SESSION['log']['idSis_Usuario'] . ' OR
@@ -640,6 +643,8 @@ class Agenda_model extends CI_Model {
 		$filtro6 = ($data['Prioridade']) ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
 		$filtro10 = ($data['SubPrioridade']) ? 'SP.Prioridade = "' . $data['SubPrioridade'] . '" AND ' : FALSE;
 		$filtro9 = ($data['Categoria']) ? 'P.Categoria = "' . $data['Categoria'] . '" AND ' : FALSE;
+		$filtro11 = ($data['Statustarefa']) ? 'P.Statustarefa = "' . $data['Statustarefa'] . '" AND ' : FALSE;
+		$filtro12 = ($data['Statussubtarefa']) ? 'SP.Statussubtarefa = "' . $data['Statussubtarefa'] . '" AND ' : FALSE;
 		#$filtro5 = ($data['ConcluidoProcedimento'] != '0') ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
         #$filtro6 = ($data['Prioridade'] != '0') ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;		
 		#$filtro9 = ($data['Categoria'] != '0') ? 'P.Categoria = "' . $data['Categoria'] . '" AND ' : FALSE;		
@@ -665,9 +670,11 @@ class Agenda_model extends CI_Model {
 				P.DataProcedimentoLimite,
 				P.ConcluidoProcedimento,
 				P.Prioridade,
+				P.Statustarefa,
 				P.Compartilhar,
 				CT.Categoria,
 				SP.SubProcedimento,
+				SP.Statussubtarefa,
 				SP.ConcluidoSubProcedimento,				
 				SP.DataSubProcedimento,
 				SP.DataSubProcedimentoLimite,
@@ -682,11 +689,11 @@ class Agenda_model extends CI_Model {
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
 					LEFT JOIN Tab_Categoria AS CT ON CT.idTab_Categoria = P.Categoria
             WHERE
-				' . $filtro5 . '
-				' . $filtro8 . '
 				' . $filtro6 . '
 				' . $filtro9 . '
 				' . $filtro10 . '
+				' . $filtro11 . '
+				' . $filtro12 . '
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				(P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '))
@@ -719,9 +726,11 @@ class Agenda_model extends CI_Model {
 				$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
 				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
 				$row->ConcluidoSubProcedimento = $this->basico->mascara_palavra_completa2($row->ConcluidoSubProcedimento, 'NS');
-				#$row->Prioridade = $this->basico->prioridade($row->Prioridade, '123');
-				$row->Prioridade = $this->basico->statustrf($row->Prioridade, '123');
-				$row->SubPrioridade = $this->basico->statustrf($row->SubPrioridade, '123');
+				$row->Prioridade = $this->basico->prioridade($row->Prioridade, '123');
+				$row->SubPrioridade = $this->basico->prioridade($row->SubPrioridade, '123');
+				$row->Statustarefa = $this->basico->statustrf($row->Statustarefa, '123');
+				$row->Statussubtarefa = $this->basico->statustrf($row->Statussubtarefa, '123');
+				
             }
 
             return $query;

@@ -17,10 +17,11 @@
 							<th class="active">Edit</th>
 							<th class="active">Empresa</th>-->
 							<th class="active">Categoria</th>
+							<th class="active">Prior.</th>
 							<th class="active">Sts.Trf</th>
 							<th class="active">Tarefa</th>
-							<!--<th class="active">Cnl.TF</th>-->
-							<th class="active">Sts.Sub</th>
+							<th class="active">SubPri.</th>
+							<th class="active">SubSts</th>
 							<th class="active">SubTarefa</th>
 							<!--<th class="active">Cnl.SbTF</th>-->
 							<th class="active">Iniciar</th>
@@ -58,9 +59,11 @@
 								#echo '<td>' . $row['NomeEmpresa'] . '</td>';
 								echo '<td>' . $row['Categoria'] . '</td>';
 								echo '<td>' . $row['Prioridade'] . '</td>';
+								echo '<td>' . $row['Statustarefa'] . '</td>';
 								echo '<td>' . $row['Procedimento'] . '</td>';
 								#echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
 								echo '<td>' . $row['SubPrioridade'] . '</td>';
+								echo '<td>' . $row['Statussubtarefa'] . '</td>';
 								echo '<td>' . $row['SubProcedimento'] . '</td>';
 								#echo '<td>' . $row['ConcluidoSubProcedimento'] . '</td>';
 								echo '<td>' . $row['DataProcedimento'] . '</td>';

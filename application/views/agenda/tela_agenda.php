@@ -87,7 +87,7 @@
 		</div>
 															
 		<div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-			<div class="modal-dialog modal-md" role="document">
+			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header bg-danger">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -111,8 +111,8 @@
 										?>
 									</select>
 								</div>
-								<div class="col-md-3 text-left">
-									<label for="Prioridade">Sts.Tarefa</label>
+								<div class="col-md-2 text-left">
+									<label for="Prioridade">Prioridade</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 											id="Prioridade" name="Prioridade">
 										<?php
@@ -126,8 +126,24 @@
 										?>
 									</select>
 								</div>
-								<div class="col-md-3 text-left">
-									<label for="SubPrioridade">Sts.SubTarefa</label>
+								<div class="col-md-2 text-left">
+									<label for="Statustarefa">StsTarefa</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
+											id="Statustarefa" name="Statustarefa">
+										<?php
+										foreach ($select['Statustarefa'] as $key => $row) {
+											if ($query['Statustarefa'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								
+								<div class="col-md-2 text-left">
+									<label for="SubPrioridade">SubPri</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 											id="SubPrioridade" name="SubPrioridade">
 										<?php
@@ -140,7 +156,22 @@
 										}
 										?>
 									</select>
-								</div>								
+								</div>
+								<div class="col-md-2 text-left">
+									<label for="Statussubtarefa">SubSts</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
+											id="Statussubtarefa" name="Statussubtarefa">
+										<?php
+										foreach ($select['Statussubtarefa'] as $key => $row) {
+											if ($query['Statussubtarefa'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
 								<!--
 								<div class="col-md-3 text-left">
 									<label for="ConcluidoProcedimento">St Tarefa</label>
@@ -176,7 +207,7 @@
 								-->
 							</div>
 							<div class="row">								
-								<div class="col-md-12 text-left">
+								<div class="col-md-10 text-left">
 									<label for="Ordenamento">Tarefa:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 											id="Procedimento" name="Procedimento">
