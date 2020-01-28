@@ -281,6 +281,120 @@ class Cliente extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
+    public function alterarlogo($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = $this->input->post(array(
+			'idApp_Cliente',
+			'NomeCliente',
+			
+        ), TRUE);
+		
+        $data['file'] = $this->input->post(array(
+            'idApp_Cliente',
+            #'Tipo',
+            'Arquivo',
+                ), TRUE);		
+
+        if ($id) {
+            $_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($id, TRUE);
+
+            $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
+        }
+		
+        if ($id)
+            $data['file']['idApp_Cliente'] = $id;		
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$this->form_validation->set_rules('NomeCliente', 'Nome do Cliente', 'required|trim');
+		
+
+        if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
+            
+			$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
+
+			$data['file']['Arquivo'] = $this->basico->renomeiacliente($data['file']['Arquivo'], 'arquivos/imagens/clientes/');
+            
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg]|file_size_max[60000]');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
+        }
+		
+        $data['titulo'] = 'Editar Perfil';
+        $data['form_open_path'] = 'cliente/alterarlogo';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+
+
+        $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
+        $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('cliente/form_perfil', $data);
+        } else {
+			
+            $config['upload_path'] = 'arquivos/imagens/clientes/';
+            $config['max_size'] = 60000;
+            $config['allowed_types'] = 'jpg';
+            $config['file_name'] = $data['file']['Arquivo'];
+
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('Arquivo')) {
+                $data['msg'] = $this->basico->msg($this->upload->display_errors(), 'erro', FALSE, FALSE, FALSE);
+                $this->load->view('cliente/form_perfil', $data);
+            }
+            else {
+
+                $data['camposfile'] = array_keys($data['file']);
+                $data['idSis_Arquivo'] = $this->Cliente_model->set_arquivo($data['file']);
+
+                if ($data['idSis_Arquivo'] === FALSE) {
+                    $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                    $this->basico->erro($msg);
+                    $this->load->view('cliente/form_perfil', $data);
+                }			
+			}
+			
+			$data['query']['Arquivo'] = $data['file']['Arquivo'];
+			$data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
+            $data['anterior'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
+            $data['campos'] = array_keys($data['query']);
+
+            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_Cliente'], TRUE);
+
+            if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
+                $data['msg'] = '?m=2';
+                redirect(base_url() . 'cliente/form_perfil/' . $data['query']['idApp_Cliente'] . $data['msg']);
+                exit();
+            } else {
+
+                if ($data['auditoriaitem'] === FALSE) {
+                    $data['msg'] = '';
+                } else {
+                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Cliente', 'UPDATE', $data['auditoriaitem']);
+                    $data['msg'] = '?m=1';
+                }
+
+                redirect(base_url() . 'cliente/prontuario/' . $data['query']['idApp_Cliente'] . $data['msg']);
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+
     public function excluir($id = FALSE) {
 
         if ($this->input->get('m') == 1)

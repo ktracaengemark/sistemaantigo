@@ -49,6 +49,13 @@
 													</a>
 												</a>
 											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a <?php if (preg_match("/cliente\/alterarlogo\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
+													<a href="<?php echo base_url() . 'cliente/alterarlogo/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-edit"></span> Alterar Foto
+												</a>
+											</li>											
 										</ul>
 									</div>									
 								</li>
@@ -120,173 +127,185 @@
 						</div>
 						<div class="panel-body">				
 							<div style="overflow: auto; height: 500px; ">																											 
-								<table class="table table-user-information">
-									<tbody>
-										
-										<?php 
-										
-										if ($query['idSis_Empresa']) {
-											
-										echo ' 
-										<tr>
-											<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-home"></span> idSis_Empresa:</td>
-											<td>' . $query['idSis_Empresa'] . '</td>
-										</tr>  
-										';
-										
-										}
-										
-										if ($query['NomeCliente']) {
-											
-										echo ' 
-										<tr>
-											<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-user"></span> Cliente:</td>
-											<td>' . $query['NomeCliente'] . '</td>
-										</tr>  
-										';
-										
-										}
-										
-										if ($query['RegistroFicha']) {
-											
-										echo ' 
-										<tr>
-											<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-user"></span> Ficha N°:</td>
-											<td>' . $query['RegistroFicha'] . '</td>
-										</tr>  
-										';
-										
-										}
-										
-										if ($query['DataNascimento']) {
-											
-										echo '                         
-										<tr>
-											<td><span class="glyphicon glyphicon-gift"></span> Data de Nascimento:</td>
-												<td>' . $query['DataNascimento'] . '</td>
-										</tr>
-										<tr>
-											<td><span class="glyphicon glyphicon-gift"></span> Idade:</td>
-												<td>' . $query['Idade'] . ' anos</td>
-										</tr>                        
-										';
-										
-										}
-										
-										if ($query['Telefone']) {
-											
-										echo '                                                 
-										<tr>
-											<td><span class="glyphicon glyphicon-phone-alt"></span> Telefone:</td>
-											<td>' . $query['Telefone'] . '</td>
-										</tr>
-										';
-										
-										}
-										
-										if ($query['Sexo']) {
-											
-										echo '                                                 
-										<tr>
-											<td><span class="glyphicon glyphicon-heart"></span> Sexo:</td>
-											<td>' . $query['Sexo'] . '</td>
-										</tr>
-										';
-										
-										}
-										
-										if ($query['Endereco'] || $query['Bairro'] || $query['Municipio']) {
-											
-										echo '                                                 
-										<tr>
-											<td><span class="glyphicon glyphicon-home"></span> Endereço:</td>
-											<td>' . $query['Endereco'] . ' - ' . $query['Bairro'] . ' - ' . $query['Municipio'] . '</td>
-										</tr>
-										';
-										
-										}
-										
-										if ($query['Cep']) {
-											
-										echo '                                                 
-										<tr>
-											<td><span class="glyphicon glyphicon-envelope"></span> Cep:</td>
-											<td>' . $query['Cep'] . '</td>
-										</tr>
-										';
-										
-										}
-										
-										if ($query['CpfCliente']) {
-											
-										echo '                                                 
-										<tr>
-											<td><span class="glyphicon glyphicon-pencil"></span> CpfCliente:</td>
-											<td>' . $query['CpfCliente'] . '</td>
-										</tr>
-										';
-										
-										}
-										
-										if ($query['Rg'] || $query['OrgaoExp'] || $query['Estado'] || $query['DataEmissao']) {
-											
-										echo '                                                 
-										<tr>
-											<td><span class="glyphicon glyphicon-pencil"></span> Rg:</td>
-											<td>' . $query['Rg'] . ' - ' . $query['OrgaoExp'] . ' - ' . $query['Estado'] . ' - ' . $query['DataEmissao'] . '</td>
-										</tr>
-										';
-										
-										}
-										
-										if ($query['Email']) {
-											
-										echo '                                                 
-										<tr>
-											<td><span class="glyphicon glyphicon-envelope"></span> E-mail:</td>
-											<td>' . $query['Email'] . '</td>
-										</tr>
-										';
-										
-										}
-										
-										if ($query['Obs']) {
-											
-										echo '                                                 
-										<tr>
-											<td><span class="glyphicon glyphicon-file"></span> Obs:</td>
-											<td>' . nl2br($query['Obs']) . '</td>
-										</tr>
-										';
-										
-										}
-										
-										if ($query['Profissional']) {
-											
-										echo '                                                 
-										<tr>
-											<td><span class="glyphicon glyphicon-user"></span> Profissional:</td>
-											<td>' . $query['Profissional'] . '</td>
-										</tr>
-										';
-										
-										}
-										
-										if ($query['Ativo']) {
-											
-										echo '                                                 
-										<tr>
-											<td><span class="glyphicon glyphicon-alert"></span> Ativo:</td>
-											<td>' . $query['Ativo'] . '</td>
-										</tr>
-										';
-										
-										}
-										?>
-										
-									</tbody>
-								</table>
-
+								<div class="form-group">	
+									<div class="row">
+										<div class=" col-md-6">	
+											<div class="row">	
+												<div class="col-sm-offset-2 col-md-10 " align="left"> 
+													<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/clientes/' . $query['Arquivo'] . ''; ?>" class="img-circle img-responsive" width='200'>
+												</div>
+											</div>		
+										</div>
+										<div class=" col-md-6">								
+											<table class="table table-user-information">
+												<tbody>
+													
+													<?php 
+													
+													if ($query['idSis_Empresa']) {
+														
+													echo ' 
+													<tr>
+														<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-home"></span> idSis_Empresa:</td>
+														<td>' . $query['idSis_Empresa'] . '</td>
+													</tr>  
+													';
+													
+													}
+													
+													if ($query['NomeCliente']) {
+														
+													echo ' 
+													<tr>
+														<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-user"></span> Cliente:</td>
+														<td>' . $query['NomeCliente'] . '</td>
+													</tr>  
+													';
+													
+													}
+													
+													if ($query['RegistroFicha']) {
+														
+													echo ' 
+													<tr>
+														<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-user"></span> Ficha N°:</td>
+														<td>' . $query['RegistroFicha'] . '</td>
+													</tr>  
+													';
+													
+													}
+													
+													if ($query['DataNascimento']) {
+														
+													echo '                         
+													<tr>
+														<td><span class="glyphicon glyphicon-gift"></span> Data de Nascimento:</td>
+															<td>' . $query['DataNascimento'] . '</td>
+													</tr>
+													<tr>
+														<td><span class="glyphicon glyphicon-gift"></span> Idade:</td>
+															<td>' . $query['Idade'] . ' anos</td>
+													</tr>                        
+													';
+													
+													}
+													
+													if ($query['Telefone']) {
+														
+													echo '                                                 
+													<tr>
+														<td><span class="glyphicon glyphicon-phone-alt"></span> Telefone:</td>
+														<td>' . $query['Telefone'] . '</td>
+													</tr>
+													';
+													
+													}
+													
+													if ($query['Sexo']) {
+														
+													echo '                                                 
+													<tr>
+														<td><span class="glyphicon glyphicon-heart"></span> Sexo:</td>
+														<td>' . $query['Sexo'] . '</td>
+													</tr>
+													';
+													
+													}
+													
+													if ($query['Endereco'] || $query['Bairro'] || $query['Municipio']) {
+														
+													echo '                                                 
+													<tr>
+														<td><span class="glyphicon glyphicon-home"></span> Endereço:</td>
+														<td>' . $query['Endereco'] . ' - ' . $query['Bairro'] . ' - ' . $query['Municipio'] . '</td>
+													</tr>
+													';
+													
+													}
+													
+													if ($query['Cep']) {
+														
+													echo '                                                 
+													<tr>
+														<td><span class="glyphicon glyphicon-envelope"></span> Cep:</td>
+														<td>' . $query['Cep'] . '</td>
+													</tr>
+													';
+													
+													}
+													
+													if ($query['CpfCliente']) {
+														
+													echo '                                                 
+													<tr>
+														<td><span class="glyphicon glyphicon-pencil"></span> CpfCliente:</td>
+														<td>' . $query['CpfCliente'] . '</td>
+													</tr>
+													';
+													
+													}
+													
+													if ($query['Rg'] || $query['OrgaoExp'] || $query['Estado'] || $query['DataEmissao']) {
+														
+													echo '                                                 
+													<tr>
+														<td><span class="glyphicon glyphicon-pencil"></span> Rg:</td>
+														<td>' . $query['Rg'] . ' - ' . $query['OrgaoExp'] . ' - ' . $query['Estado'] . ' - ' . $query['DataEmissao'] . '</td>
+													</tr>
+													';
+													
+													}
+													
+													if ($query['Email']) {
+														
+													echo '                                                 
+													<tr>
+														<td><span class="glyphicon glyphicon-envelope"></span> E-mail:</td>
+														<td>' . $query['Email'] . '</td>
+													</tr>
+													';
+													
+													}
+													
+													if ($query['Obs']) {
+														
+													echo '                                                 
+													<tr>
+														<td><span class="glyphicon glyphicon-file"></span> Obs:</td>
+														<td>' . nl2br($query['Obs']) . '</td>
+													</tr>
+													';
+													
+													}
+													
+													if ($query['Profissional']) {
+														
+													echo '                                                 
+													<tr>
+														<td><span class="glyphicon glyphicon-user"></span> Profissional:</td>
+														<td>' . $query['Profissional'] . '</td>
+													</tr>
+													';
+													
+													}
+													
+													if ($query['Ativo']) {
+														
+													echo '                                                 
+													<tr>
+														<td><span class="glyphicon glyphicon-alert"></span> Ativo:</td>
+														<td>' . $query['Ativo'] . '</td>
+													</tr>
+													';
+													
+													}
+													?>
+													
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
 								<div class="row">
 				
 									<div class="col-md-12 col-lg-12">

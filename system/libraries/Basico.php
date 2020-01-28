@@ -265,9 +265,9 @@ class Basico {
         return preg_replace("/([^\w.]+)|(\.(?=.*\.))/", "_", $data);
     }
 
-    function renomeia($data, $path) {
+    function renomeiaempresa($data, $path) {
 		$data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
-		$data = rand() . 'profile' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . '.jpg';
+		$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . '.jpg';
 		
         if (file_exists(APPPATH . 'arquivos/imagens/empresas/' . $data))
             $data = $this->renomeia($data, $path . $data);
@@ -277,7 +277,7 @@ class Basico {
 
     function renomeiausuario($data, $path) {
 		$data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
-		$data = rand() . 'profile' . '_' . $_SESSION['Usuario']['idSis_Usuario'] . '.jpg';
+		$data = rand() . '_' . 'usuario' . '_' . $_SESSION['Usuario']['idSis_Usuario'] . '.jpg';
 		
         if (file_exists(APPPATH . 'arquivos/imagens/usuarios/' . $data))
             $data = $this->renomeia($data, $path . $data);
@@ -287,7 +287,7 @@ class Basico {
 	
     function renomeiacliente($data, $path) {
 		$data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
-		$data = rand() . 'profile' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '.jpg';
+		$data = rand() . '_' . 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '.jpg';
 		
         if (file_exists(APPPATH . 'arquivos/imagens/clientes/' . $data))
             $data = $this->renomeia($data, $path . $data);

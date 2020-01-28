@@ -196,10 +196,8 @@ class Usuario2 extends CI_Controller {
             
 			$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
             
-			if (file_exists('arquivos/imagens/usuarios/' . $data['file']['Arquivo'])) {
-
-				$data['file']['Arquivo'] = $this->basico->renomeiausuario($data['file']['Arquivo'], 'arquivos/imagens/usuarios/');
-            }
+			$data['file']['Arquivo'] = $this->basico->renomeiausuario($data['file']['Arquivo'], 'arquivos/imagens/usuarios/');
+            
             $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg]|file_size_max[60000]');
         }
         else {

@@ -290,6 +290,125 @@ class MY_Form_validation extends CI_Form_validation {
         return isset($this->CI->db) ? ($this->CI->db->limit(1)->query('SELECT ' . $field1 . ' FROM ' . $table . ' WHERE '
                         . $field1 . ' = "' . $str . '" AND ' . $field2 . ' = "' . $str2 . '"')->num_rows() === 0) : FALSE;
 
+    }
+
+    function file_allowed_type($file, $type) {
+
+        //is type of format a,b,c,d? -> convert to array
+        $exts = explode(',', $type);
+
+        //is $type array? run self recursively
+        if (count($exts) > 1) {
+            foreach ($exts as $v) {
+                $rc = $this->file_allowed_type($file, $v);
+                if ($rc === TRUE) {
+                    return TRUE;
+                }
+            }
+        }
+
+        //is type a group type? image, application, word_document, code, zip .... -> load proper array
+        $ext_groups = array();
+        $ext_groups['image'] = array('jpg', 'jpeg', 'gif', 'png');
+        $ext_groups['image_icon'] = array('jpg', 'jpeg', 'gif', 'png', 'ico', 'image/x-icon');
+        $ext_groups['application'] = array('exe', 'dll', 'so', 'cgi');
+        $ext_groups['php_code'] = array('php', 'php4', 'php5', 'inc', 'phtml');
+        $ext_groups['word_document'] = array('rtf', 'doc', 'docx');
+        $ext_groups['compressed'] = array('zip', 'gzip', 'tar', 'gz');
+        $ext_groups['document'] = array('txt', 'text', 'doc', 'docx', 'dot', 'dotx', 'word', 'rtf', 'rtx');
+
+        //if there is a group type in the $type var and not a ext alone, we get it
+        if (array_key_exists($exts[0], $ext_groups)) {
+            $exts = $ext_groups[$exts[0]];
+        }
+
+        $this->load_mimes();
+
+
+        $exts_types = array_flip($exts);
+        $intersection = array_intersect_key(array($this->mime_types), $exts_types);
+
+        //if we can use the finfo function to check the mime AND the mime
+        //exists in the mime file of codeigniter...
+        if (function_exists('finfo_open') and ! empty($intersection)) {
+            $exts = array();
+
+            foreach ($intersection as $in) {
+                if (is_array($in)) {
+                    $exts = array_merge($exts, $in);
+                }
+                else {
+                    $exts[] = $in;
+                }
+            }
+
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $file_type = finfo_file($finfo, $file['tmp_name']);
+        }
+        else {
+            //get file ext
+            $file_type = strtolower(strrchr($file['name'], '.'));
+            $file_type = substr($file_type, 1);
+        }
+
+        if (!in_array($file_type, $exts)) {
+            return FALSE;
+        }
+        else {
+            return TRUE;
+        }
+
+    }
+
+    function file_required($file) {
+        if ($file['size'] === 0) {
+            return FALSE;
+        }
+
+        return TRUE;
+
+    }
+
+    // --------------------------------------------------------------------
+
+    /**
+     * Returns FALSE if the file is bigger than the given size
+     *
+     * @access	public
+     * @param	mixed $file
+     * @param	string
+     * @return	bool
+     */
+    function file_size_max($file, $max_size) {
+        $max_size_bit = $this->let_to_bit($max_size);
+        if ($file['size'] > $max_size_bit) {
+            return FALSE;
+        }
+        return TRUE;
+
+    }
+
+    function file_upload_error_message($field, $error_code) {
+        switch ($error_code) {
+            case UPLOAD_ERR_INI_SIZE:
+                return $this->CI->lang->line('error_max_filesize_phpini');
+            case UPLOAD_ERR_FORM_SIZE:
+                return $this->CI->lang->line('error_max_filesize_form');
+            case UPLOAD_ERR_PARTIAL:
+                return $this->CI->lang->line('error_partial_upload');
+            case UPLOAD_ERR_NO_FILE:
+                $line = $this->CI->lang->line('file_required');
+                return sprintf($line, $this->_translate_fieldname($field));
+            case UPLOAD_ERR_NO_TMP_DIR:
+                return $this->CI->lang->line('error_temp_dir');
+            case UPLOAD_ERR_CANT_WRITE:
+                return $this->CI->lang->line('error_disk_write');
+            case UPLOAD_ERR_EXTENSION:
+                return $this->CI->lang->line('error_stopped');
+            default:
+                return $this->CI->lang->line('error_unexpected') . $error_code;
+        }
+
     }	
 
 }
