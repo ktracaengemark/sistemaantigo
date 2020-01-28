@@ -5246,12 +5246,13 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) ||	$this->input->post('Prioridade' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
+            if ($this->input->post('DataProcedimento' . $i) ||	$this->input->post('Prioridade' . $i) ||	$this->input->post('Statustarefa' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
                     $this->input->post('Procedimento' . $i) || $this->input->post('Categoria' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
 				$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
+				$data['procedimento'][$j]['Statustarefa'] = $this->input->post('Statustarefa' . $i);
                 $data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['Categoria'] = $this->input->post('Categoria' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
@@ -5300,10 +5301,15 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Procedimento'] = $this->Basico_model->select_procedimento();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoriatarefa();		
 		$data['select']['Prioridade'] = array (
+			'1' => 'Alta',
+			'2' => 'Media',
+			'3' => 'Baixa',
+        );
+		$data['select']['Statustarefa'] = array (
 			'1' => 'Fazer',
 			'2' => 'Fazendo',
 			'3' => 'Feito',
-        );
+        );		
 
         $data['titulo'] = 'Tarefas';
         $data['form_open_path'] = 'orcatrata/alterarprocedimento';

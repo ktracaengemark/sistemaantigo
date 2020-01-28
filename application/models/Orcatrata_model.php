@@ -672,6 +672,7 @@ class Orcatrata_model extends CI_Model {
 		$permissao3 = ($_SESSION['FiltroAlteraProcedimento']['Ano'] != "" ) ? 'YEAR(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Ano'] . '" AND ' : FALSE;
 		$permissao5 = ($_SESSION['FiltroAlteraProcedimento']['Dia'] != "0" ) ? 'DAY(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Dia'] . '" AND ' : FALSE;
 		$permissao8 = ($_SESSION['FiltroAlteraProcedimento']['Categoria'] != '0' ) ? 'P.Categoria = "' . $_SESSION['FiltroAlteraProcedimento']['Categoria'] . '" AND ' : FALSE;
+		$permissao9 = ($_SESSION['FiltroAlteraProcedimento']['Statustarefa'] != '0' ) ? 'P.Statustarefa = "' . $_SESSION['FiltroAlteraProcedimento']['Statustarefa'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query('
 			SELECT
@@ -686,7 +687,8 @@ class Orcatrata_model extends CI_Model {
 				P.DataProcedimentoLimite,
 				P.ConcluidoProcedimento,
 				P.Categoria,
-				P.Prioridade
+				P.Prioridade,
+				P.Statustarefa
             FROM
 				App_Procedimento AS P
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
@@ -698,15 +700,15 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao6 . '
 				' . $permissao7 . '
 				' . $permissao8 . '
+				' . $permissao9 . '
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR	
 				P.Compartilhar = ' . $_SESSION['log']['idSis_Usuario'] . ' OR
 				(P.Compartilhar = 51 AND P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '))
 			ORDER BY
-				CT.Categoria DESC,
+				P.DataProcedimento DESC,
 				P.Prioridade ASC,
-				P.ConcluidoProcedimento,
-				P.DataProcedimento DESC
+				CT.Categoria DESC
 		');
         $query = $query->result_array();
 

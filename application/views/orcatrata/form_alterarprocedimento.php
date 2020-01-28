@@ -61,9 +61,14 @@
 																	}
 																	?>
 																</select>
+															</div>
+															<div class="col-md-2">
+																<label for="Procedimento<?php echo $i ?>">Tarefa <?php echo $i ?>:</label>
+																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
+																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 															</div>															
 															<div class="col-md-2">
-																<label for="Prioridade<?php echo $i ?>">Sts.Trf:</label>
+																<label for="Prioridade<?php echo $i ?>">Prioridade:</label>
 																<?php if ($i == 1) { ?>
 																<?php } ?>
 																<select data-placeholder="Selecione uma opção..." class="form-control" 
@@ -79,12 +84,25 @@
 																	}
 																	?>
 																</select>
-															</div>															
-															<div class="col-md-4">
-																<label for="Procedimento<?php echo $i ?>">Tarefa <?php echo $i ?>:</label>
-																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
-																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 															</div>
+															<div class="col-md-2">
+																<label for="Statustarefa<?php echo $i ?>">StatusTRF:</label>
+																<?php if ($i == 1) { ?>
+																<?php } ?>
+																<select data-placeholder="Selecione uma opção..." class="form-control" 
+																		 id="listadinamicac<?php echo $i ?>" name="Statustarefa<?php echo $i ?>">
+																	
+																	<?php
+																	foreach ($select['Statustarefa'] as $key => $row) {
+																		if ($procedimento[$i]['Statustarefa'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	?>
+																</select>
+															</div>															
 															<div class="col-md-2">
 																<label for="DataProcedimento<?php echo $i ?>">Iniciar em:</label>
 																<div class="input-group <?php echo $datepicker; ?>">
