@@ -3171,6 +3171,23 @@ $(document).ready(function () {
     //adiciona campos dinamicamente dos Produtos Vendidos 
     var pc = $("#PCount").val(); //initlal text box count
     $(".add_field_button9").click(function(e){ //on add input button click
+        
+//////// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
+		if (pc >= 2) {
+			//console.log( $("#listadinamicab"+(pc-1)).val() );
+			var chosen;
+			chosen = $("#listadinamicab"+(pc-1)).val();
+			//console.log( chosen + ' :: ' + pc );
+		}
+		
+		if (pc >= 2) {
+			//console.log( $("#listadinamicac"+(pc-1)).val() );
+			var chosen2;
+			chosen2 = $("#listadinamicac"+(pc-1)).val();
+			//console.log( chosen + ' :: ' + pc );
+		}
+/////// Termina aqui!!! ////
+		
 		e.preventDefault();
 		
         pc++; //text box increment
