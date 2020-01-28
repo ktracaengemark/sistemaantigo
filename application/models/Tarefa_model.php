@@ -68,6 +68,7 @@ class Tarefa_model extends CI_Model {
                 TF.DataProcedimento,
     			TF.DataProcedimentoLimite,
 				TF.Prioridade,
+				TF.Statustarefa,
 				TF.Rotina,
                 TF.ProfissionalProcedimento,
                 TF.ConcluidoProcedimento,

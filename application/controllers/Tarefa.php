@@ -59,6 +59,7 @@ class Tarefa extends CI_Controller {
 			'DataProcedimentoLimite',
             'ConcluidoProcedimento',
 			'Prioridade',
+			'Statustarefa',
 			'Compartilhar',
 			'Categoria',
 			#'ProfissionalProcedimento',
@@ -83,11 +84,12 @@ class Tarefa extends CI_Controller {
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
             if ($this->input->post('DataSubProcedimento' . $i) || $this->input->post('DataSubProcedimentoLimite' . $i) ||
-                    $this->input->post('Prioridade' . $i) || $this->input->post('SubProcedimento' . $i)) {
+                    $this->input->post('Prioridade' . $i) || $this->input->post('Statussubtarefa' . $i) || $this->input->post('SubProcedimento' . $i)) {
                 $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->input->post('DataSubProcedimento' . $i);
                 $data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->input->post('DataSubProcedimentoLimite' . $i);
 				$data['procedtarefa'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
-                $data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
+                $data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
+				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
 				#$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
                 $j++;
             }
@@ -113,10 +115,20 @@ class Tarefa extends CI_Controller {
         $data['select']['Compartilhar'] = $this->Procedimento_model->select_compartilhar();
 		$data['select']['Categoria'] = $this->Tarefa_model->select_categoria();
 		$data['select']['Prioridade'] = array (
+            '1' => 'Alta',
+            '2' => 'Media',
+			'3' => 'Baixa',
+        );
+		$data['select']['Statustarefa'] = array (
             '1' => 'Fazer',
             '2' => 'Fazendo',
 			'3' => 'Feito',
         );
+		$data['select']['Statussubtarefa'] = array (
+            '1' => 'Fazer',
+            '2' => 'Fazendo',
+			'3' => 'Feito',
+        );		
         #$data['select']['Profissional'] = $this->Profissional_model->select_profissional();
 
         $data['titulo'] = 'Cadastar Tarefa';
@@ -259,7 +271,8 @@ class Tarefa extends CI_Controller {
 				'DataProcedimentoLimite',
 				'ConcluidoProcedimento',
 				'Prioridade',
-				'Categoria',				
+				'Statustarefa',
+				'Categoria',
 				'Compartilhar',
 				#'ProfissionalProcedimento',
 				#'Rotina',
@@ -275,6 +288,7 @@ class Tarefa extends CI_Controller {
 				'DataProcedimentoLimite',
 				'ConcluidoProcedimento',
 				'Prioridade',
+				'Statustarefa',
 				'Categoria',
 				#'ProfissionalProcedimento',
 				#'Rotina',
@@ -292,12 +306,13 @@ class Tarefa extends CI_Controller {
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
             if ($this->input->post('DataSubProcedimento' . $i) || $this->input->post('DataSubProcedimentoLimite' . $i) ||
-                    $this->input->post('Prioridade' . $i) || $this->input->post('SubProcedimento' . $i)) {
+                    $this->input->post('Prioridade' . $i) || $this->input->post('Statussubtarefa' . $i) || $this->input->post('SubProcedimento' . $i)) {
                 $data['procedtarefa'][$j]['idApp_SubProcedimento'] = $this->input->post('idApp_SubProcedimento' . $i);
                 $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->input->post('DataSubProcedimento' . $i);
                 $data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->input->post('DataSubProcedimentoLimite' . $i);
 				$data['procedtarefa'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
-                $data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
+                $data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
+				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
 				#$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
                 $j++;
             }
@@ -354,10 +369,20 @@ class Tarefa extends CI_Controller {
         $data['select']['Compartilhar'] = $this->Procedimento_model->select_compartilhar();
 		$data['select']['Categoria'] = $this->Tarefa_model->select_categoria();
 		$data['select']['Prioridade'] = array (
+            '1' => 'Alta',
+            '2' => 'Media',
+			'3' => 'Baixa',
+        );
+		$data['select']['Statustarefa'] = array (
             '1' => 'Fazer',
             '2' => 'Fazendo',
 			'3' => 'Feito',
-        );       
+        );
+		$data['select']['Statussubtarefa'] = array (
+            '1' => 'Fazer',
+            '2' => 'Fazendo',
+			'3' => 'Feito',
+        );		
         #$data['select']['Profissional'] = $this->Profissional_model->select_profissional();
         
 

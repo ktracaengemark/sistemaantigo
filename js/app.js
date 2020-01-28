@@ -987,6 +987,13 @@ function adicionaSubProcedimento() {
         chosen = $("#listadinamicad"+(pt-1)).val();
         //console.log( chosen + ' :: ' + pt );
     }
+	
+    if (pt >= 2) {
+        //console.log( $("#listadinamicae"+(pt-1)).val() );
+        var chosen2;
+        chosen2 = $("#listadinamicae"+(pt-1)).val();
+        //console.log( chosen + ' :: ' + pt );
+    }	
 
     //Captura a data do dia e carrega no campo correspondente
     var currentDate = moment();
@@ -996,16 +1003,16 @@ function adicionaSubProcedimento() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-4">\
+						<div class="col-md-3">\
 							<label for="SubProcedimento'+pt+'">Ação:</label>\
 							<textarea class="form-control" id="SubProcedimento'+pt+'"\
 									  name="SubProcedimento'+pt+'"></textarea>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="Prioridade'+pt+'">Sts.SubTrf:</label>\
+							<label for="Prioridade'+pt+'">Prioridade:</label>\
 							<select data-placeholder="Selecione uma opção..." class="form-control"\
 									 id="listadinamicad'+pt+'" name="Prioridade'+pt+'">\
-								<option value="" checked>Fazer</option>\
+								<option value="" checked>Baixa</option>\
 							</select>\
 						</div>\
 						<div class="col-md-2">\
@@ -1027,6 +1034,13 @@ function adicionaSubProcedimento() {
 								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
 									   name="DataSubProcedimentoLimite'+pt+'" value="">\
 							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="Statussubtarefa'+pt+'">Sts.SubTrf:</label>\
+							<select data-placeholder="Selecione uma opção..." class="form-control"\
+									 id="listadinamicae'+pt+'" name="Statussubtarefa'+pt+'">\
+								<option value="" checked>Fazer</option>\
+							</select>\
 						</div>\
 						<div class="col-md-1">\
 							<label><br></label><br>\
@@ -1070,6 +1084,34 @@ function adicionaSubProcedimento() {
         }
 
     });
+	
+    //get a reference to the select2 element
+    $select2 = $('#listadinamicae'+pt);	
+	
+    $.ajax({
+        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=10',
+        dataType: 'JSON',
+        type: "GET",
+        success: function (data) {
+            //clear the current content of the select2
+            $select2.html('');
+            //iterate over the data and append a select2 option
+            //$select2.append('<option value="">-- Selecione uma opção --</option>');
+            $.each(data, function (key, val) {
+                //alert(val.id);
+                if (val.id == chosen2)
+                    $select2.append('<option value="' + val.id + '" selected="selected">' + val.name + '</option>');
+                else
+                    $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
+            })
+        },
+        error: function () {
+            //alert('erro listadinamicaB');
+            //if there is an error append a 'none available' option
+            $select2.html('<option id="-1">ERRO</option>');
+        }
+
+    });	
 	
     //permite o uso de radio buttons nesse bloco dinâmico
     $('input:radio[id="radiogeraldinamico"]').change(function() {
@@ -3129,8 +3171,8 @@ $(document).ready(function () {
     //adiciona campos dinamicamente dos Produtos Vendidos 
     var pc = $("#PCount").val(); //initlal text box count
     $(".add_field_button9").click(function(e){ //on add input button click
-        e.preventDefault();
-
+		e.preventDefault();
+		
         pc++; //text box increment
         $("#PCount").val(pc);
 
@@ -3303,7 +3345,7 @@ $(document).ready(function () {
                     //alert(val.id);
                     $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
                 })
-                $('.Chosen').chosen({
+                $('.Chosen').chosen2({
                     disable_search_threshold: 10,
                     multiple_text: "Selecione uma ou mais opções",
                     single_text: "Selecione uma opção",

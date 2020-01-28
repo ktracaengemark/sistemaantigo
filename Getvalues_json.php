@@ -252,6 +252,28 @@ elseif ($_GET['q'] == 7) {
 
 }
 
+elseif ($_GET['q'] == 10) {
+
+    $result = mysql_query(
+            'SELECT
+				idTab_Statustarefa,
+				Statustarefa
+            FROM
+                Tab_Statustarefa
+			ORDER BY 
+				idTab_Statustarefa ASC'
+    );
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Statustarefa'],
+            'name' => utf8_encode($row['Statustarefa']),
+        );
+    }
+
+}
+
 elseif ($_GET['q'] == 3) {
 
     $result = mysql_query('

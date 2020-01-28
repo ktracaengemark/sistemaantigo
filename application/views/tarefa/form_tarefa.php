@@ -45,7 +45,13 @@
 						<div class="panel panel-info">
 							<div class="panel-heading">	
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-md-2">
+										<label  for="Procedimento">Tarefa:</label>
+										<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?> maxlength="40"
+												  name="Procedimento"><?php echo $tarefa['Procedimento']; ?></textarea>
+									<?php echo form_error('Procedimento'); ?>
+									</div>									
+									<div class="col-md-2">
 										<div class="row">
 											<div class="col-md-12 " >
 												<label for="Categoria">Categoria:</label>
@@ -66,7 +72,7 @@
 											</div>
 										</div>	
 										<div class="row">
-											<div class="col-md-6 text-left">
+											<div class="col-md-12 text-left">
 												<label class="sr-only" for="Cadastrar">Cadastrar no BD</label>
 												<div class="btn-group" data-toggle="buttons">
 													<?php
@@ -96,26 +102,24 @@
 												</div>
 												<?php echo form_error('Categoria'); ?>
 											</div>
-											
-											<div class="col-md-6 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-												<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>categoria2/cadastrar3/" role="button"> 
-													<span class="glyphicon glyphicon-plus"></span>Categoria
-												</a>
-												
-												<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
-														<span class="glyphicon glyphicon-refresh"></span>Ref.
-												</button>
-												<?php echo form_error('Cadastrar'); ?>
+										</div>	
+										<div id="Cadastrar" <?php echo $div['Cadastrar']; ?>>	
+											<div class="row">											
+												<div class="col-md-12 text-left">
+													<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>categoria2/cadastrar3/" role="button"> 
+														<span class="glyphicon glyphicon-plus"></span>Categoria
+													</a>
+												</div>
 											</div>
-											
-										</div>
-										
-									</div>
-									<div class="col-md-2">
-										<label  for="Procedimento">Tarefa:</label>
-										<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?> maxlength="40"
-												  name="Procedimento"><?php echo $tarefa['Procedimento']; ?></textarea>
-									<?php echo form_error('Procedimento'); ?>
+											<div class="row">
+												<div class="col-md-12 text-left">
+													<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+															<span class="glyphicon glyphicon-refresh"></span>Ref.
+													</button>
+													<?php echo form_error('Cadastrar'); ?>
+												</div>											
+											</div>
+										</div>	
 									</div>									
 									<!--
 									<div class="col-md-2">
@@ -143,7 +147,7 @@
 									</div>
 									-->
 									<div class="col-md-2 ">
-										<label for="Prioridade">Sts.Trf:</label>
+										<label for="Prioridade">Prioridade:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 												id="Prioridade" name="Prioridade">
 											<!--<option value="">-- Selecione uma opção --</option>-->
@@ -188,6 +192,22 @@
 											</div>
 										</div>
 									</div>
+									<div class="col-md-2 ">
+										<label for="Statustarefa">StatusTRF:</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+												id="Statustarefa" name="Statustarefa">
+											<!--<option value="">-- Selecione uma opção --</option>-->
+											<?php
+											foreach ($select['Statustarefa'] as $key => $row) {
+												if ($tarefa['Statustarefa'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>									
 									<!--
 									<div class="col-md-2 form-inline">
 										<label for="ConcluidoProcedimento">Tarefa Concl.?</label><br>
@@ -297,13 +317,13 @@
 														</select>
 													</div>
 													-->
-													<div class="col-md-4">
+													<div class="col-md-3">
 														<label for="SubProcedimento<?php echo $i ?>">Ação:</label>
 														<textarea class="form-control" id="SubProcedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																  name="SubProcedimento<?php echo $i ?>"><?php echo $procedtarefa[$i]['SubProcedimento']; ?></textarea>
 													</div>
 													<div class="col-md-2">
-														<label for="Prioridade<?php echo $i ?>">Sts.SubTrf:</label>
+														<label for="Prioridade<?php echo $i ?>">Prioridade:</label>
 														<?php if ($i == 1) { ?>
 														<?php } ?>
 														<select data-placeholder="Selecione uma opção..." class="form-control" 
@@ -339,6 +359,24 @@
 															<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
 																   name="DataSubProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataSubProcedimentoLimite']; ?>">
 														</div>
+													</div>
+													<div class="col-md-2">
+														<label for="Statussubtarefa<?php echo $i ?>">StatusAção:</label>
+														<?php if ($i == 1) { ?>
+														<?php } ?>
+														<select data-placeholder="Selecione uma opção..." class="form-control" 
+																 id="listadinamicad<?php echo $i ?>" name="Statussubtarefa<?php echo $i ?>">
+															
+															<?php
+															foreach ($select['Statussubtarefa'] as $key => $row) {
+																if ($procedtarefa[$i]['Statussubtarefa'] == $key) {
+																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																} else {
+																	echo '<option value="' . $key . '">' . $row . '</option>';
+																}
+															}
+															?>
+														</select>
 													</div>													
 													<!--
 													<div class="col-md-2">
