@@ -270,7 +270,7 @@ class Basico {
 		$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . '.jpg';
 		
         if (file_exists(APPPATH . 'arquivos/imagens/empresas/' . $data))
-            $data = $this->renomeia($data, $path . $data);
+            $data = $this->renomeiaempresa($data, $path . $data);
 
         return $data;
     }
@@ -280,7 +280,7 @@ class Basico {
 		$data = rand() . '_' . 'usuario' . '_' . $_SESSION['Usuario']['idSis_Usuario'] . '.jpg';
 		
         if (file_exists(APPPATH . 'arquivos/imagens/usuarios/' . $data))
-            $data = $this->renomeia($data, $path . $data);
+            $data = $this->renomeiausuario($data, $path . $data);
 
         return $data;
     }
@@ -290,7 +290,7 @@ class Basico {
 		$data = rand() . '_' . 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '.jpg';
 		
         if (file_exists(APPPATH . 'arquivos/imagens/clientes/' . $data))
-            $data = $this->renomeia($data, $path . $data);
+            $data = $this->renomeiacliente($data, $path . $data);
 
         return $data;
     }	
