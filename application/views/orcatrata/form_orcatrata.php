@@ -205,7 +205,7 @@
 																							<?php } ?>
 																							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor2Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
 																									 id="listadinamicab<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
-																								<!--<option value="">-- Selecione uma opção --</option>-->
+																								<option value="">-- Selecione uma opção --</option>
 																								<?php
 																								foreach ($select['Produto'] as $key => $row) {
 																									if ($produto[$i]['idTab_Produto'] == $key) {
