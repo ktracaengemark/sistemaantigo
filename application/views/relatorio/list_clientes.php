@@ -12,6 +12,7 @@
 			<table class="table table-bordered table-condensed table-striped">								
 				<thead>
 					<tr>
+						<th class=" col-md-1" scope="col">Foto</th>
 						<th class="active">id</th>
 						<th class="active">Cliente</th>
 						<th class="active">Sexo</th>
@@ -40,27 +41,23 @@
 					$cont_outros = 0;
 					$cont_nao_infor = 0;
 					foreach ($report->result_array() as $row) {
-
-						#echo '<tr>';
-						echo '<tr class="clickable-row" data-href="' . base_url() . 'cliente/prontuario/' . $row['idApp_Cliente'] . '">';
-							echo '<td>' . $row['idApp_Cliente'] . '</td>';
-							echo '<td>' . $row['NomeCliente'] . '</td>';
-							echo '<td>' . $row['Sexo'] . '</td>';
-							echo '<td>' . $row['CelularCliente'] . '</td>';
-							echo '<td>' . $row['Telefone2'] . '</td>';
-							echo '<td>' . $row['Telefone3'] . '</td>';
-							echo '<td>' . $row['DataNascimento'] . '</td>';							
-							echo '<td>' . $row['Endereco'] . '</td>';
-							echo '<td>' . $row['Bairro'] . '</td>';
-							echo '<td>' . $row['Municipio'] . '</td>';
-							echo '<td>' . $row['Email'] . '</td>';
-							echo '<td>' . $row['Ativo'] . '</td>';
-							#echo '<td>' . $row['NomeContatoCliente'] . '</td>';
-							#echo '<td>' . $row['Sexo'] . '</td>';
-							#echo '<td>' . $row['RelaCom'] . '</td>';
-							#echo '<td>' . $row['RelaPes'] . '</td>';
-						echo '</tr>';
-						
+					?>
+					<tr class="clickable-row" data-href="<?php echo base_url() . 'cliente/prontuario/' . $row['idApp_Cliente'] . ''; ?>">
+						<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/clientes/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>
+						<td><?php echo $row['idApp_Cliente'] ?></td>
+						<td><?php echo $row['NomeCliente'] ?></td>
+						<td><?php echo $row['Sexo'] ?></td>
+						<td><?php echo $row['CelularCliente'] ?></td>
+						<td><?php echo $row['Telefone2'] ?></td>
+						<td><?php echo $row['Telefone3'] ?></td>
+						<td><?php echo $row['DataNascimento'] ?></td>
+						<td><?php echo $row['Endereco'] ?></td>
+						<td><?php echo $row['Bairro'] ?></td>
+						<td><?php echo $row['Municipio'] ?></td>
+						<td><?php echo $row['Email'] ?></td>
+						<td><?php echo $row['Ativo'] ?></td>
+					</tr>						
+					<?php	
 						if($row['Sexo'] == 'F')
 							$cont_feminino++;
 						else if ($row['Sexo'] == 'M')
@@ -69,6 +66,7 @@
 							$cont_outros++;
 						else 
 							$cont_nao_infor++;
+					
 					}
 					?>
 

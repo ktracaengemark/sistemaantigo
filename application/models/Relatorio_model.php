@@ -6220,6 +6220,7 @@ exit();*/
             SELECT
 				C.idApp_Cliente,
                 C.NomeCliente,
+				C.Arquivo,
 				C.Ativo,
                 C.DataNascimento,
                 C.CelularCliente,
