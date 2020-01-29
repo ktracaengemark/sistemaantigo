@@ -63,14 +63,16 @@
 
 									<h3 class="text-left">Foto do Perfil  </h3>									
 									<?php if ($metodo != 3) { ?>
+
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-12 "> 
-												<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/clientes/' . $query['Arquivo'] . ''; ?>" 
+												<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/clientes/' . $_SESSION['Cliente']['Arquivo'] . ''; ?>" 
 												class="img-circle img-responsive" width='200'>
 											</div>
 										</div>
 									</div>
+									
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-12">
