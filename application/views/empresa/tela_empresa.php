@@ -34,6 +34,7 @@
 									<a <?php if (preg_match("/empresa\/alterarlogo\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
 										<a href="<?php echo base_url() . 'empresa/alterarlogo/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
 											<span class="glyphicon glyphicon-edit"></span> Alterar Logo
+										</a>
 									</a>
 								</li>								
 							</ul>
@@ -46,8 +47,10 @@
 									<div class=" col-md-6">	
 										<div class="row">	
 											<div class="col-sm-offset-2 col-md-10 " align="left"> 
-												<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $query['Arquivo'] . ''; ?>" 
-												class="img-circle img-responsive" width='200'>
+												<a href="<?php echo base_url() . 'empresa/alterarlogo/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">	
+													<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $query['Arquivo'] . ''; ?>" 
+													class="img-circle img-responsive" width='200'>
+												</a>
 											</div>
 										</div>		
 									</div>

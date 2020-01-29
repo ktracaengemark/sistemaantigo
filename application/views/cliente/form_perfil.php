@@ -35,6 +35,7 @@
 								<a <?php if (preg_match("/cliente\/alterarlogo\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
 									<a href="<?php echo base_url() . 'cliente/alterarlogo/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 										<span class="glyphicon glyphicon-edit"></span> Alterar Logo
+									</a>
 								</a>
 							</li>							
 						</ul>
@@ -67,8 +68,10 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-12 "> 
-												<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/clientes/' . $_SESSION['Cliente']['Arquivo'] . ''; ?>" 
-												class="img-circle img-responsive" width='200'>
+												<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+													<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/clientes/' . $_SESSION['Cliente']['Arquivo'] . ''; ?>" 
+													class="img-circle img-responsive" width='200'>
+												</a>												
 											</div>
 										</div>
 									</div>

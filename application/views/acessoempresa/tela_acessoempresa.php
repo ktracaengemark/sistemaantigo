@@ -11,7 +11,9 @@
 						<h4><?php echo '<small>Administrador da(o)<br></small><strong> ' . $_SESSION['AdminEmpresa']['NomeEmpresa'] . '</strong>.'  ?></h4>
 					</div>
 					<div class="col-sm-offset-4 col-lg-4 " align="center"> 
-						<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['AdminEmpresa']['Arquivo'] . ''; ?>" class="img-circle img-responsive">
+						<a href="<?php echo base_url() . 'empresa/alterarlogo/' . $_SESSION['AdminEmpresa']['idSis_Empresa']; ?>">
+							<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['AdminEmpresa']['Arquivo'] . ''; ?>" class="img-circle img-responsive">
+						</a>
 					</div>
 					<div class="col-md-12 text-center t">
 						<h4><?php echo '<small>Acesse o </small><strong> Menu </strong><small> acima <br>e tenha um bom trabalho! </small>'  ?></h4>

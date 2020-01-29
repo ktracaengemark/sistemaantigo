@@ -35,6 +35,7 @@
 								<a <?php if (preg_match("/usuario\/alterarlogo\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
 									<a href="<?php echo base_url() . 'usuario/alterarlogo/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
 										<span class="glyphicon glyphicon-edit"></span> Alterar Foto
+									</a>
 								</a>
 							</li>							
 						</ul>
@@ -66,8 +67,10 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-12 "> 
-												<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/usuarios/' . $_SESSION['Usuario']['Arquivo'] . ''; ?>" 
-												class="img-circle img-responsive" width='200'>
+												<a href="<?php echo base_url() . 'usuario/prontuario/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">	
+													<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/usuarios/' . $_SESSION['Usuario']['Arquivo'] . ''; ?>" 
+													class="img-circle img-responsive" width='200'>
+												</a>
 											</div>
 										</div>
 									</div>

@@ -9,9 +9,9 @@
 					<div class="row">	
 						<div class="col-md-6 " align="center">
 							<h4><?php echo '<small>Bem Vindo<br> </small><strong>"' . $_SESSION['Usuario']['Nome'] . '"</strong>'  ?></h4>
-							
+							<a href="<?php echo base_url() . 'usuario2/alterarlogo/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">	
 								<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/usuarios/' . $_SESSION['Usuario']['Arquivo'] . ''; ?>" class="img-circle img-responsive" width='200'>
-														
+							</a>							
 						</div>
 						<div class="col-md-6 " align="center">
 							<h4><?php echo '<small>a(o)<br></small><strong> ' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>.'  ?></h4>
