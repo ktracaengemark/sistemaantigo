@@ -106,6 +106,7 @@ class Tarefa extends CI_Controller {
 		$this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'trim|valid_date');
         $this->form_validation->set_rules('DataProcedimentoLimite', 'Concluir em', 'trim|valid_date');
         $this->form_validation->set_rules('Categoria', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Prioridade', 'Prioridade', 'required|trim');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
@@ -360,6 +361,7 @@ class Tarefa extends CI_Controller {
 		$this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'trim|valid_date');        
 		$this->form_validation->set_rules('DataProcedimentoLimite', 'Concluir em', 'trim|valid_date');      
         $this->form_validation->set_rules('Categoria', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Prioridade', 'Prioridade', 'required|trim');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();

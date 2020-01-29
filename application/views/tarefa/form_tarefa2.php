@@ -150,7 +150,7 @@
 										<label for="Prioridade">Prioridade:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 												id="Prioridade" name="Prioridade">
-											<!--<option value="">-- Selecione uma opção --</option>-->
+											<option value="">-- Selecione uma opção --</option>
 											<?php
 											foreach ($select['Prioridade'] as $key => $row) {
 												if ($tarefa['Prioridade'] == $key) {
@@ -161,6 +161,7 @@
 											}
 											?>
 										</select>
+										<?php echo form_error('Prioridade'); ?>
 									</div>
 									<div class="col-md-4" >
 										<div class="form-group">
