@@ -317,7 +317,7 @@ class Cliente extends CI_Controller {
 
         if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
             
-			$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
+			#$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
 
 			$data['file']['Arquivo'] = $this->basico->renomeiacliente($data['file']['Arquivo'], 'arquivos/imagens/clientes/');
             
