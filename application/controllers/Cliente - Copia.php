@@ -304,6 +304,8 @@ class Cliente extends CI_Controller {
 
         if ($id) {
             $_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($id, TRUE);
+
+            $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
         }
 		
         if ($id)
@@ -311,21 +313,19 @@ class Cliente extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 		$this->form_validation->set_rules('NomeCliente', 'Nome do Cliente', 'required|trim');
-		#$this->form_validation->set_rules('$extensao', 'Tipo de Arquivo não Permitido', 'trim|valid_extensao');
-
 		
+
         if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
             
 			#$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
 
 			$data['file']['Arquivo'] = $this->basico->renomeiacliente($data['file']['Arquivo'], 'arquivos/imagens/clientes/');
-
-			$this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg]|file_size_max[60000]');
+            
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg]|file_size_max[60000]');
         }
         else {
             $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
         }
-
 		
         $data['titulo'] = 'Editar Perfil';
         $data['form_open_path'] = 'cliente/alterarlogo';

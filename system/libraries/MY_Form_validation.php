@@ -1028,5 +1028,16 @@ class MY_Form_validation extends CI_Form_validation {
         return ($email != $confirmacao) ? FALSE : TRUE;
 
     }
+	
+    function valid_extensao($data) {
+        $CI = & get_instance();
+
+        $CI->form_validation->set_message('valid_extensao', '<b>%s</b>');
+
+		if (($data) == "jpg") {
+			return FALSE;
+		}
+       
+    }	
 
 }

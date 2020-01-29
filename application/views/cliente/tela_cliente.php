@@ -151,7 +151,7 @@
 														
 													echo ' 
 													<tr>
-														<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-home"></span> idSis_Empresa:</td>
+														<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-home"></span> Empresa:</td>
 														<td>' . $query['idSis_Empresa'] . '</td>
 													</tr>  
 													';

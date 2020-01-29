@@ -466,8 +466,6 @@ class Usuario extends CI_Controller {
 
         if ($id) {
             $_SESSION['Usuario'] = $data['query'] = $this->Usuario_model->get_usuario($id, TRUE);
-			//$data['query'] = $this->Empresa_model->get_empresa($id);
-            $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
         }
 		
         if ($id)
@@ -482,7 +480,7 @@ class Usuario extends CI_Controller {
 			#$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
 
 			$data['file']['Arquivo'] = $this->basico->renomeiausuario($data['file']['Arquivo'], 'arquivos/imagens/usuarios/');
-            
+
             $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg]|file_size_max[60000]');
         }
         else {
