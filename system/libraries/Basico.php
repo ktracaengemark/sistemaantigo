@@ -295,7 +295,7 @@ class Basico {
         return $data;
     }	
 	
-    function renomeia_arquivo($data, $path) {
+    function renomeia_arquivo1($data, $path) {
 
         $data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
 
@@ -305,7 +305,7 @@ class Basico {
         return $data;
     }
 
-    function renomeia_arquivo1($data, $path) {
+    function renomeia_arquivo($data, $path) {
         #$data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
         #$data = "img01_2a_.pdf";
         #echo '<br>=> ' . $data;
