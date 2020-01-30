@@ -296,7 +296,6 @@ class Cliente extends CI_Controller {
 		
         $data['file'] = $this->input->post(array(
             'idApp_Cliente',
-            #'Tipo',
             'Arquivo',
 		), TRUE);
 
@@ -307,18 +306,12 @@ class Cliente extends CI_Controller {
         if ($id)
             $data['file']['idApp_Cliente'] = $id;
 
-        #$data['default']['R'] = '';
-        #$data['default']['C'] = '';
-
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-        #$this->form_validation->set_rules('Tipo', 'Tipo', 'required|trim');
-
         if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
-            $data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
-			if (file_exists('arquivos/imagens/clientes/' . $data['file']['Arquivo'])) {	
-				$data['file']['Arquivo'] = $this->basico->renomeia_arquivo($data['file']['Arquivo'], 'arquivos/imagens/clientes/');
-			}
+            
+			$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
+			$data['file']['Arquivo'] = $this->basico->renomeiacliente($data['file']['Arquivo'], 'arquivos/imagens/clientes/');
             $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[200]');
         }
         else {
@@ -327,7 +320,6 @@ class Cliente extends CI_Controller {
 
         $data['titulo'] = 'Alterar Foto';
         $data['form_open_path'] = 'cliente/alterarlogo';
-        #($_SESSION['log']['nivel'] < 3) ? $data['readonly'] = '' : $data['readonly'] = 'readonly';
         $data['readonly'] = 'readonly';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
@@ -352,11 +344,10 @@ class Cliente extends CI_Controller {
             else {
 
                 $data['camposfile'] = array_keys($data['file']);
-                $data['idSis_Arquivo'] = $this->Cliente_model->set_arquivo($data['file']);
+				$data['idSis_Arquivo'] = $this->Cliente_model->set_arquivo($data['file']);
 
                 if ($data['idSis_Arquivo'] === FALSE) {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
-
                     $this->basico->erro($msg);
                     $this->load->view('cliente/form_perfil', $data);
                 }
@@ -364,7 +355,7 @@ class Cliente extends CI_Controller {
 
 					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
 					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
-
+					
 					$data['query']['Arquivo'] = $data['file']['Arquivo'];
 					$data['anterior'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
 					$data['campos'] = array_keys($data['query']);

@@ -264,34 +264,28 @@ class Basico {
     function limpa_nome_arquivo($data) {
         return preg_replace("/([^\w.]+)|(\.(?=.*\.))/", "_", $data);
     }
-
-    function renomeiaempresa($data, $path) {
-		#$data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
-		$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . '.jpg';
 		
-        if (file_exists(APPPATH . 'arquivos/imagens/empresas/' . $data))
-            $data = $this->renomeiaempresa($data, $path . $data);
-
+    function renomeiaempresa($data, $path) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+		$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
         return $data;
     }
 
     function renomeiausuario($data, $path) {
-		#$data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
-		$data = rand() . '_' . 'usuario' . '_' . $_SESSION['Usuario']['idSis_Usuario'] . '.jpg';
-		
-        if (file_exists(APPPATH . 'arquivos/imagens/usuarios/' . $data))
-            $data = $this->renomeiausuario($data, $path . $data);
-
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+		$data = rand() . '_' . 'usuario' . '_' . $_SESSION['Usuario']['idSis_Usuario'] . $extensao;
         return $data;
     }
 	
     function renomeiacliente($data, $path) {
-		#$data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
-		$data = rand() . '_' . 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '.jpg';
-
-        if (file_exists('arquivos/imagens/clientes/' . $data))
-            $data = $this->renomeiacliente($data, $path . $data);
-
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+		$data = rand() . '_' . 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . $extensao;
         return $data;
     }	
 	
