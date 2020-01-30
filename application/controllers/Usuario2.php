@@ -169,101 +169,93 @@ class Usuario2 extends CI_Controller {
 
         $data['query'] = $this->input->post(array(
 			'idSis_Usuario',
-			'Nome',
-			
         ), TRUE);
 		
         $data['file'] = $this->input->post(array(
             'idSis_Usuario',
-            #'Tipo',
             'Arquivo',
-                ), TRUE);		
+		), TRUE);
 
         if ($id) {
             $_SESSION['Usuario'] = $data['query'] = $this->Usuario_model->get_usuario($id, TRUE);
         }
 		
         if ($id)
-            $data['file']['idSis_Usuario'] = $id;		
+            $data['file']['idSis_Usuario'] = $id;
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
-		
 
         if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
             
-			#$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
-            
+			$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
 			$data['file']['Arquivo'] = $this->basico->renomeiausuario($data['file']['Arquivo'], 'arquivos/imagens/usuarios/');
-			
-            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg]|file_size_max[60000]');
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[200]');
         }
         else {
             $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
         }
-		
-        $data['titulo'] = 'Editar Perfil';
+
+        $data['titulo'] = 'Alterar Foto';
         $data['form_open_path'] = 'usuario2/alterarlogo';
-        $data['readonly'] = '';
-        $data['disabled'] = '';
+        $data['readonly'] = 'readonly';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
-        #$data['nav_secundario'] = $this->load->view('empresa/nav_secundario', $data, TRUE);
-
-        $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
-        $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
-
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('usuario/form_empresalogo2', $data);
-        } else {
-			
+            #load login view
+            $this->load->view('usuario/form_perfil2', $data);
+        }
+        else {
+
             $config['upload_path'] = 'arquivos/imagens/usuarios/';
-            $config['max_size'] = 60000;
-            $config['allowed_types'] = 'jpg';
+            $config['max_size'] = 200;
+            $config['allowed_types'] = ['jpg', 'jpeg', 'gif', 'png'];
             $config['file_name'] = $data['file']['Arquivo'];
 
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('Arquivo')) {
                 $data['msg'] = $this->basico->msg($this->upload->display_errors(), 'erro', FALSE, FALSE, FALSE);
-                $this->load->view('usuario/form_empresalogo2', $data);
+                $this->load->view('usuario/form_perfil2', $data);
             }
             else {
 
                 $data['camposfile'] = array_keys($data['file']);
-                $data['idSis_Arquivo'] = $this->Usuario_model->set_arquivo($data['file']);
+				$data['idSis_Arquivo'] = $this->Usuario_model->set_arquivo($data['file']);
 
                 if ($data['idSis_Arquivo'] === FALSE) {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
-
                     $this->basico->erro($msg);
-                    $this->load->view('usuario/form_empresalogo2', $data);
-                }			
-			}
-			
-			$data['query']['Arquivo'] = $data['file']['Arquivo'];
-			$data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
-            $data['anterior'] = $this->Usuario_model->get_usuario($data['query']['idSis_Usuario']);
-            $data['campos'] = array_keys($data['query']);
-
-            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Usuario'], TRUE);
-
-            if ($data['auditoriaitem'] && $this->Usuario_model->update_usuario($data['query'], $data['query']['idSis_Usuario']) === FALSE) {
-                $data['msg'] = '?m=2';
-                redirect(base_url() . 'usuario/alterarlogo2/' . $data['query']['idSis_Usuario'] . $data['msg']);
-                exit();
-            } else {
-
-                if ($data['auditoriaitem'] === FALSE) {
-                    $data['msg'] = '';
-                } else {
-                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Usuario', 'UPDATE', $data['auditoriaitem']);
-                    $data['msg'] = '?m=1';
+                    $this->load->view('usuario/form_perfil2', $data);
                 }
+				else {
 
-                redirect(base_url() . 'usuario2/prontuario/' . $data['query']['idSis_Usuario'] . $data['msg']);
-                exit();
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
+					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
+					
+					$data['query']['Arquivo'] = $data['file']['Arquivo'];
+					$data['anterior'] = $this->Usuario_model->get_usuario($data['query']['idSis_Usuario']);
+					$data['campos'] = array_keys($data['query']);
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Usuario'], TRUE);
+
+					if ($data['auditoriaitem'] && $this->Usuario_model->update_usuario($data['query'], $data['query']['idSis_Usuario']) === FALSE) {
+						$data['msg'] = '?m=2';
+						redirect(base_url() . 'usuario/form_perfil2/' . $data['query']['idSis_Usuario'] . $data['msg']);
+						exit();
+					} else {
+
+						if ($data['auditoriaitem'] === FALSE) {
+							$data['msg'] = '';
+						} else {
+							$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Usuario', 'UPDATE', $data['auditoriaitem']);
+							$data['msg'] = '?m=1';
+						}
+
+						redirect(base_url() . 'usuario2/prontuario/' . $data['file']['idSis_Usuario'] . $data['msg']);
+						exit();
+					}				
+				}
             }
         }
 
