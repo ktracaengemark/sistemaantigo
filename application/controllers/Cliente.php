@@ -312,7 +312,7 @@ class Cliente extends CI_Controller {
             
 			$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
 			$data['file']['Arquivo'] = $this->basico->renomeiacliente($data['file']['Arquivo'], 'arquivos/imagens/clientes/');
-            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[200]');
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
         }
         else {
             $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
@@ -332,7 +332,7 @@ class Cliente extends CI_Controller {
         else {
 
             $config['upload_path'] = 'arquivos/imagens/clientes/';
-            $config['max_size'] = 200;
+            $config['max_size'] = 1000;
             $config['allowed_types'] = ['jpg', 'jpeg', 'gif', 'png'];
             $config['file_name'] = $data['file']['Arquivo'];
 
