@@ -289,7 +289,7 @@ class Basico {
 		#$data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
 		$data = rand() . '_' . 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '.jpg';
 
-        if (file_exists(APPPATH . 'arquivos/imagens/clientes/' . $data))
+        if (file_exists('arquivos/imagens/clientes/' . $data))
             $data = $this->renomeiacliente($data, $path . $data);
 
         return $data;
