@@ -102,7 +102,7 @@
 															<label  for="idApp_Cliente">Cliente:</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 																	id="idApp_Cliente" name="idApp_Cliente">
-																<!--<option value="">-- Sel. Cliente --</option>-->
+																<option value="">-- Sel. Cliente --</option>
 																<?php
 																foreach ($select['idApp_Cliente'] as $key => $row) {
 																		(!$orcatrata['idApp_Cliente']) ? $orcatrata['idApp_Cliente'] = '1' : FALSE;
@@ -158,6 +158,7 @@
 															<?php echo form_error('Cadastrar'); ?>
 														</div>
 													</div>
+													<?php echo form_error('idApp_Cliente'); ?>
 												</div>
 											</div>											
 											<div class="col-md-4">
