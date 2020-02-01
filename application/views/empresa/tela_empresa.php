@@ -54,7 +54,19 @@
 											</div>
 										</div>		
 									</div>
-									<div class=" col-md-6">							
+									<div class=" col-md-6">	
+										<div class="row">	
+											<div class="col-sm-offset-2 col-md-10 " align="left"> 
+												<a href="<?php echo base_url() . 'empresa/alterarlogo/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">	
+													<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $query['Arquivo1'] . ''; ?>" 
+													class="img-circle img-responsive" width='200'>
+												</a>
+											</div>
+										</div>		
+									</div>
+								</div>	
+								<div class="row">	
+									<div class=" col-md-12">							
 										<table class="table table-user-information">
 											<tbody>
 
