@@ -114,7 +114,7 @@ class Login extends CI_Controller {
                 #$this->basico->erro($msg);
                 $data['msg'] = $this->basico->msg('<strong>Senha</strong> incorreta.', 'erro', FALSE, FALSE, FALSE);
 				#$data['msg'] = $this->basico->msg('<strong>NomeEmpresa</strong> incorreta.', 'erro', FALSE, FALSE, FALSE);
-                $this->load->view('form_login', $data);
+                $this->load->view('form_login1', $data);
 
             } else {
                 #initialize session

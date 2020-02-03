@@ -217,6 +217,7 @@ class Loginempresa extends CI_Controller {
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');			
 			$data['query']['Senha'] = md5($data['query']['Senha']);
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));
+			$data['query']['Site'] = "sitedaempresa";
             #$data['query']['Inativo'] = 1;
             //ACESSO LIBERADO PRA QUEM REALIZAR O CADASTRO
             $data['query']['Inativo'] = 0;
@@ -255,6 +256,42 @@ class Loginempresa extends CI_Controller {
                 $data['idSis_Usuario'] = $this->Loginempresa_model->set_usuario($data['usuario']);
 				$_SESSION['log']['idSis_Empresa'] = 1;
                 
+				
+                $data['documentos'] = array(
+                    'idSis_Empresa' => $data['idSis_Empresa'],
+                );
+                $data['campos'] = array_keys($data['documentos']);
+                
+				$data['idApp_Documentos'] = $this->Loginempresa_model->set_documentos($data['documentos']);
+				$_SESSION['log']['idSis_Empresa'] = 1;
+				
+				$pasta1 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/';
+				mkdir($pasta1, 0777);
+				
+				$pasta2 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/';
+				mkdir($pasta2, 0777);				
+				
+				$arquivo_origem = 'arquivos/imagens/empresas/1/documentos/SuaLogo.jpg';
+				$arquivo_destino = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/SuaLogo.jpg';
+				
+				copy($arquivo_origem, $arquivo_destino);
+				
+				$pasta3 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/usuarios/';
+				mkdir($pasta3, 0777);
+
+				$arquivo_origem3 = 'arquivos/imagens/empresas/1/usuarios/Perfil.jpg';
+				$arquivo_destino3 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/usuarios/Perfil.jpg';
+				
+				copy($arquivo_origem3, $arquivo_destino3);				
+				
+				$pasta4 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/clientes/';
+				mkdir($pasta4, 0777);
+				
+				$arquivo_origem4 = 'arquivos/imagens/empresas/1/clientes/Foto.jpg';
+				$arquivo_destino4 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/clientes/Foto.jpg';
+				
+				copy($arquivo_origem4, $arquivo_destino4);					
+				
 				if ($data['idSis_Usuario'] === FALSE) {
 					$data['msg'] = '?m=2';
 					$this->load->view('loginempresa/form_loginempresa', $data);
@@ -445,6 +482,7 @@ class Loginempresa extends CI_Controller {
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');			
 			$data['query']['Senha'] = md5($data['query']['Senha']);
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));
+			$data['query']['Site'] = "sitedaempresa";
             #$data['query']['Inativo'] = 1;
             //ACESSO LIBERADO PRA QUEM REALIZAR O CADASTRO
             $data['query']['Inativo'] = 0;
@@ -482,7 +520,41 @@ class Loginempresa extends CI_Controller {
 
                 $data['idSis_Usuario'] = $this->Loginempresa_model->set_usuario($data['usuario']);
 				$_SESSION['log']['idSis_Empresa'] = 1;
+				
+                $data['documentos'] = array(
+                    'idSis_Empresa' => $data['idSis_Empresa'],
+                );
+                $data['campos'] = array_keys($data['documentos']);
+                $data['idApp_Documentos'] = $this->Loginempresa_model->set_documentos($data['documentos']);
+				$_SESSION['log']['idSis_Empresa'] = 1;				
                 
+				$pasta1 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/';
+				mkdir($pasta1, 0777);
+				
+				$pasta2 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/';
+				mkdir($pasta2, 0777);				
+				
+				$arquivo_origem = 'arquivos/imagens/empresas/1/documentos/SuaLogo.jpg';
+				$arquivo_destino = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/SuaLogo.jpg';
+				
+				copy($arquivo_origem, $arquivo_destino);
+				
+				$pasta3 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/usuarios/';
+				mkdir($pasta3, 0777);
+
+				$arquivo_origem3 = 'arquivos/imagens/empresas/1/usuarios/Perfil.jpg';
+				$arquivo_destino3 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/usuarios/Perfil.jpg';
+				
+				copy($arquivo_origem3, $arquivo_destino3);				
+				
+				$pasta4 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/clientes/';
+				mkdir($pasta4, 0777);
+				
+				$arquivo_origem4 = 'arquivos/imagens/empresas/1/clientes/Foto.jpg';
+				$arquivo_destino4 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/clientes/Foto.jpg';
+				
+				copy($arquivo_origem4, $arquivo_destino4);				
+				
 				if ($data['idSis_Usuario'] === FALSE) {
 					$data['msg'] = '?m=2';
 					$this->load->view('loginempresa/form_loginempresa', $data);

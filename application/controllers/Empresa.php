@@ -512,7 +512,7 @@ class Empresa extends CI_Controller {
         if (isset($_FILES['Arquivo1']) && $_FILES['Arquivo1']['name']) {
             
 			$data['file']['Arquivo1'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo1']['name']);
-			$data['file']['Arquivo1'] = $this->basico->renomeiaempresa1($data['file']['Arquivo1'], 'arquivos/imagens/empresas/');
+			$data['file']['Arquivo1'] = $this->basico->renomeiaempresa1($data['file']['Arquivo1'], 'arquivos/imagens/paginas/');
             $this->form_validation->set_rules('Arquivo1', 'Arquivo1', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
         }
         else {
@@ -520,6 +520,7 @@ class Empresa extends CI_Controller {
         }		
 
 		$diretorio = "arquivos/imagens/empresas/";
+		$diretorio1 = "arquivos/imagens/paginas/";
 		
 		$arquivo = isset($_FILES['Arquivo']) ? $_FILES['Arquivo'] : FALSE;	
 			$destino = $diretorio."/".$data['file']['Arquivo'];
@@ -529,7 +530,7 @@ class Empresa extends CI_Controller {
 				echo "Erro ao realizar upload";
 			}
 		$arquivo1 = isset($_FILES['Arquivo1']) ? $_FILES['Arquivo1'] : FALSE;	
-			$destino1 = $diretorio."/".$data['file']['Arquivo1'];
+			$destino1 = $diretorio1."/".$data['file']['Arquivo1'];
 			if(move_uploaded_file($arquivo1['tmp_name'], $destino1)){
 				echo "Upload realizado com sucesso<br>";
 			}else{

@@ -269,16 +269,18 @@ class Basico {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;
-		$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
-        return $data;
+		#$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
+        $data = 'Logo_empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
+		return $data;
     }
 	
     function renomeiaempresa1($data, $path) {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;
-		$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
-        return $data;
+		#$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
+        $data = 'Imagem1_empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
+		return $data;
     }	
 
     function renomeiausuario($data, $path) {
