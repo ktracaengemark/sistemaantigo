@@ -1029,7 +1029,7 @@ class MY_Form_validation extends CI_Form_validation {
 
     }
 	
-    function valid_extensao($data) {
+    function valid_extensaoBKP($data) {
         $CI = & get_instance();
 
         $CI->form_validation->set_message('valid_extensao', '<b>%s</b>');
@@ -1040,4 +1040,23 @@ class MY_Form_validation extends CI_Form_validation {
        
     }	
 
+    function valid_extensao($data) {
+        $CI = & get_instance();
+
+        $CI->form_validation->set_message('valid_extensao', '<b>%s</b>');
+		$tiposPermitidos	= ['png','gif'];
+		$tamanho			= $arquivo['size'];
+		
+		$extensao			= explode('.', $data);
+		$extensao			= end($extensao);
+				
+        if (in_array($extensao, $tiposPermitidos)) {
+            return FALSE;
+        }
+        else {
+            return TRUE;
+        }		
+
+    }	
+	
 }

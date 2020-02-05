@@ -43,7 +43,7 @@
 					foreach ($report->result_array() as $row) {
 					?>
 					<tr class="clickable-row" data-href="<?php echo base_url() . 'cliente/prontuario/' . $row['idApp_Cliente'] . ''; ?>">
-						<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/clientes/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>
+						<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>
 						<td><?php echo $row['idApp_Cliente'] ?></td>
 						<td><?php echo $row['NomeCliente'] ?></td>
 						<td><?php echo $row['Sexo'] ?></td>

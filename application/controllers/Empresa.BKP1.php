@@ -97,7 +97,7 @@ class Empresa extends CI_Controller {
         } else {
 
 
-			$data['query']['Empresa'] = $_SESSION['log']['idSis_Empresa'];
+			$data['query']['Empresa'] = $_SESSION['log']['id'];
             $data['query']['Senha'] = md5($data['query']['Senha']);
 			#$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));
@@ -257,348 +257,106 @@ class Empresa extends CI_Controller {
 
         $data['query'] = $this->input->post(array(
 			'idSis_Empresa',
+			'NomeAdmin',
+			
         ), TRUE);
 		
         $data['file'] = $this->input->post(array(
             'idSis_Empresa',
+            #'Tipo',
             'Arquivo',
-		), TRUE);
+                ), TRUE);		
 
         if ($id) {
             $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
+			//$data['query'] = $this->Empresa_model->get_empresa($id);
+            $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
         }
 		
         if ($id)
-            $data['file']['idSis_Empresa'] = $id;
+            $data['file']['idSis_Empresa'] = $id;		
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim');
+		
 
         if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
             
 			$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
-			$data['file']['Arquivo'] = $this->basico->renomeiaempresa($data['file']['Arquivo'], 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/');
-            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+            
+			if (file_exists('arquivos/imagens/empresas/' . $data['file']['Arquivo'])) {
+
+				$data['file']['Arquivo'] = $this->basico->renomeia($data['file']['Arquivo'], 'arquivos/imagens/empresas/');
+            }
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg]|file_size_max[60000]');
         }
         else {
             $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
         }
-
-        $data['titulo'] = 'Alterar Foto';
+		
+        $data['titulo'] = 'Editar Empresa';
         $data['form_open_path'] = 'empresa/alterarlogo';
-        $data['readonly'] = 'readonly';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
+        $data['nav_secundario'] = $this->load->view('empresa/nav_secundario', $data, TRUE);
+
+        $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
+        $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
+
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            #load login view
-            $this->load->view('empresa/form_logo', $data);
-        }
-        else {
+            $this->load->view('empresa/form_empresalogo', $data);
+        } else {
 			
-            $config['upload_path'] = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/';
-            $config['max_size'] = 1000;
-            $config['allowed_types'] = ['jpg', 'jpeg', 'gif', 'png'];
+            $config['upload_path'] = 'arquivos/imagens/empresas/';
+            $config['max_size'] = 60000;
+            $config['allowed_types'] = 'jpg';
             $config['file_name'] = $data['file']['Arquivo'];
 
             $this->load->library('upload', $config);
-			
             if (!$this->upload->do_upload('Arquivo')) {
                 $data['msg'] = $this->basico->msg($this->upload->display_errors(), 'erro', FALSE, FALSE, FALSE);
-                $this->load->view('empresa/form_logo', $data);
+                $this->load->view('empresa/form_empresalogo', $data);
             }
             else {
 
                 $data['camposfile'] = array_keys($data['file']);
-				$data['idSis_Arquivo'] = $this->Empresa_model->set_arquivo($data['file']);
+                $data['idSis_Arquivo'] = $this->Empresa_model->set_arquivo($data['file']);
 
                 if ($data['idSis_Arquivo'] === FALSE) {
                     $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
                     $this->basico->erro($msg);
-                    $this->load->view('empresa/form_logo', $data);
+                    $this->load->view('empresa/form_empresalogo', $data);
+                }			
+			}
+			
+			$data['query']['Arquivo'] = $data['file']['Arquivo'];
+			$data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));
+            $data['anterior'] = $this->Empresa_model->get_empresa($data['query']['idSis_Empresa']);
+            $data['campos'] = array_keys($data['query']);
+
+            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Empresa'], TRUE);
+
+            if ($data['auditoriaitem'] && $this->Empresa_model->update_empresa($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
+                $data['msg'] = '?m=2';
+                redirect(base_url() . 'empresa/form_empresalogo/' . $data['query']['idSis_Empresa'] . $data['msg']);
+                exit();
+            } else {
+
+                if ($data['auditoriaitem'] === FALSE) {
+                    $data['msg'] = '';
+                } else {
+                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'UPDATE', $data['auditoriaitem']);
+                    $data['msg'] = '?m=1';
                 }
-				else {
 
-					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
-					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
-					
-					$data['query']['Arquivo'] = $data['file']['Arquivo'];
-					$data['anterior'] = $this->Empresa_model->get_empresa($data['query']['idSis_Empresa']);
-					$data['campos'] = array_keys($data['query']);
-
-					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Empresa'], TRUE);
-
-					if ($data['auditoriaitem'] && $this->Empresa_model->update_empresa($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
-						$data['msg'] = '?m=2';
-						redirect(base_url() . 'empresa/form_logo/' . $data['query']['idSis_Empresa'] . $data['msg']);
-						exit();
-					} else {
-
-						if ($data['auditoriaitem'] === FALSE) {
-							$data['msg'] = '';
-						} else {
-							$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'UPDATE', $data['auditoriaitem']);
-							$data['msg'] = '?m=1';
-						}
-
-						redirect(base_url() . 'empresa/prontuario/' . $data['file']['idSis_Empresa'] . $data['msg']);
-						exit();
-					}				
-				}
+                redirect(base_url() . 'empresa/prontuario/' . $data['query']['idSis_Empresa'] . $data['msg']);
+                exit();
             }
-        }
-
-        $this->load->view('basico/footer');
-    }
-
-    public function alterarlogo555($id = FALSE) {
-
-        if ($this->input->get('m') == 1)
-            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-        elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
-        else
-            $data['msg'] = '';
-
-        $data['query'] = $this->input->post(array(
-			'idSis_Empresa',
-        ), TRUE);
-		
-        $data['file'] = $this->input->post(array(
-            'idSis_Empresa',
-            'Arquivo',
-			'Arquivo1',
-		), TRUE);
-
-        if ($id) {
-            $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
-        }
-		
-        if ($id)
-            $data['file']['idSis_Empresa'] = $id;
-
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
-            
-			$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
-			$data['file']['Arquivo'] = $this->basico->renomeiaempresa($data['file']['Arquivo'], 'arquivos/imagens/empresas/');
-            #$this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
-			$this->form_validation->set_rules('Arquivo', 'Tipo de Arquivo não é permitido', 'trim|valid_extensao');
-        }
-        else {
-            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
-        }
-		
-        if (isset($_FILES['Arquivo1']) && $_FILES['Arquivo1']['name']) {
-            
-			$data['file']['Arquivo1'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo1']['name']);
-			$data['file']['Arquivo1'] = $this->basico->renomeiaempresa1($data['file']['Arquivo1'], 'arquivos/imagens/empresas/1/');
-            #$this->form_validation->set_rules('Arquivo1', 'Arquivo1', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
-			$this->form_validation->set_rules('Arquivo1', 'Tipo de Arquivo não é permitido', 'trim|valid_extensao');
-        }
-        else {
-            $this->form_validation->set_rules('Arquivo1', 'Arquivo1', 'required');
-        }		
-
-        $data['titulo'] = 'Alterar Foto';
-        $data['form_open_path'] = 'empresa/alterarlogo';
-        $data['readonly'] = 'readonly';
-        $data['panel'] = 'primary';
-        $data['metodo'] = 2;
-
-        #run form validation
-        if ($this->form_validation->run() === FALSE) {
-            #load login view
-            $this->load->view('empresa/form_perfil2', $data);
-        }
-        else {
-
-            $config['upload_path'] = 'arquivos/imagens/empresas/';
-            $config['max_size'] = 1000;
-            $config['allowed_types'] = ['jpg', 'jpeg', 'gif', 'png'];
-            $config['file_name'] = $data['file']['Arquivo'];
-
-			$this->load->library('upload', $config);
-			
-            if (!$this->upload->do_upload('Arquivo')) {
-                $data['msg'] = $this->basico->msg($this->upload->display_errors(), 'erro', FALSE, FALSE, FALSE);
-                $this->load->view('empresa/form_perfil2', $data);
-				
-            } else{
-			
-				$config['upload_path'] = 'arquivos/imagens/empresas/1/';
-				$config['max_size'] = 1000;
-				$config['allowed_types'] = ['jpg', 'jpeg', 'gif', 'png'];
-				$config['file_name'] = $data['file']['Arquivo1'];			
-			
-				$this->load->library('upload', $config);
-				
-				if (!$this->upload->do_upload('Arquivo1')) {
-					$data['msg'] = $this->basico->msg($this->upload->display_errors(), 'erro', FALSE, FALSE, FALSE);
-					$this->load->view('empresa/form_perfil2', $data);
-					
-				}
-				else {
-
-					$data['camposfile'] = array_keys($data['file']);
-					$data['idSis_Arquivo'] = $this->Empresa_model->set_arquivo($data['file']);
-
-					if ($data['idSis_Arquivo'] === FALSE) {
-						$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
-						$this->basico->erro($msg);
-						$this->load->view('empresa/form_perfil2', $data);
-					}
-					else {
-
-						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
-						$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
-						
-						$data['query']['Arquivo'] = $data['file']['Arquivo'];
-						$data['query']['Arquivo1'] = $data['file']['Arquivo1'];
-						$data['anterior'] = $this->Empresa_model->get_empresa($data['query']['idSis_Empresa']);
-						$data['campos'] = array_keys($data['query']);
-
-						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Empresa'], TRUE);
-
-						if ($data['auditoriaitem'] && $this->Empresa_model->update_empresa($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
-							$data['msg'] = '?m=2';
-							redirect(base_url() . 'empresa/form_perfil2/' . $data['query']['idSis_Empresa'] . $data['msg']);
-							exit();
-						} else {
-
-							if ($data['auditoriaitem'] === FALSE) {
-								$data['msg'] = '';
-							} else {
-								$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'UPDATE', $data['auditoriaitem']);
-								$data['msg'] = '?m=1';
-							}
-
-							redirect(base_url() . 'empresa/prontuario/' . $data['file']['idSis_Empresa'] . $data['msg']);
-							exit();
-						}				
-					}
-				}
-			}	
-        }
-
-        $this->load->view('basico/footer');
-    }
-
-    public function alterar_pagina($id = FALSE) {
-
-        if ($this->input->get('m') == 1)
-            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-        elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
-        else
-            $data['msg'] = '';
-
-        $data['query'] = $this->input->post(array(
-			'idSis_Empresa',
-        ), TRUE);
-		
-        $data['file'] = $this->input->post(array(
-            'idSis_Empresa',
-            'Arquivo',
-			'Arquivo1',
-		), TRUE);
-
-        if ($id) {
-            $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
-        }
-		
-        if ($id)
-            $data['file']['idSis_Empresa'] = $id;
-
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-		
-        if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
-            
-			$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
-			$data['file']['Arquivo'] = $this->basico->renomeia_logo($data['file']['Arquivo'], 'arquivos/imagens/empresas/');
-            #$this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
-			$this->form_validation->set_rules($data['file']['Arquivo'], 'Tipo de Arquivo não é permitido', 'trim|valid_extensao');
-        }
-        else {
-            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
-        }
-		
-        if (isset($_FILES['Arquivo1']) && $_FILES['Arquivo1']['name']) {
-            
-			$data['file']['Arquivo1'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo1']['name']);
-			$data['file']['Arquivo1'] = $this->basico->renomeia_imagem_1($data['file']['Arquivo1'], 'arquivos/imagens/empresas/');
-            #$this->form_validation->set_rules('Arquivo1', 'Arquivo1', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
-			$this->form_validation->set_rules($data['file']['Arquivo1'], 'Tipo de Arquivo não é permitido', 'trim|valid_extensao');
-        }
-        else {
-            $this->form_validation->set_rules('Arquivo1', 'Arquivo1', 'required');
-        }		
-
-        $data['titulo'] = 'Alterar Foto';
-        $data['form_open_path'] = 'empresa/alterarlogo';
-        $data['readonly'] = 'readonly';
-        $data['panel'] = 'primary';
-        $data['metodo'] = 2;
-
-        #run form validation
-        if ($this->form_validation->run() === FALSE) {
-            #load login view
-            $this->load->view('empresa/form_perfil2', $data);
-        }
-        else {
-			
-			
-			$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/';
-
-			$arquivo = isset($_FILES['Arquivo']) ? $_FILES['Arquivo'] : FALSE;	
-			$destino = $diretorio."/".$data['file']['Arquivo'];
-			$mover_logo = move_uploaded_file($arquivo['tmp_name'], $destino);
-
-			$arquivo1 = isset($_FILES['Arquivo1']) ? $_FILES['Arquivo1'] : FALSE;		
-			$destino1 = $diretorio."/".$data['file']['Arquivo1'];
-			$mover_arquivo_1 = move_uploaded_file($arquivo1['tmp_name'], $destino1);		
-		
-
-
-				$data['camposfile'] = array_keys($data['file']);
-				$data['idSis_Arquivo'] = $this->Empresa_model->set_arquivo($data['file']);
-				
-				if ($data['idSis_Arquivo'] === FALSE) {
-					$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
-					$this->basico->erro($msg);
-					$this->load->view('empresa/form_perfil2', $data);
-				}
-				else {
-
-					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
-					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
-					
-					$data['query']['Arquivo'] = $data['file']['Arquivo'];
-					$data['query']['Arquivo1'] = $data['file']['Arquivo1'];
-					$data['anterior'] = $this->Empresa_model->get_empresa($data['query']['idSis_Empresa']);
-					$data['campos'] = array_keys($data['query']);
-
-					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Empresa'], TRUE);
-
-					if ($data['auditoriaitem'] && $this->Empresa_model->update_empresa($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
-						$data['msg'] = '?m=2';
-						redirect(base_url() . 'empresa/form_perfil/' . $data['query']['idSis_Empresa'] . $data['msg']);
-						exit();
-					} else {
-
-						if ($data['auditoriaitem'] === FALSE) {
-							$data['msg'] = '';
-						} else {
-							$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'UPDATE', $data['auditoriaitem']);
-							$data['msg'] = '?m=1';
-						}
-
-						redirect(base_url() . 'empresa/prontuario/' . $data['file']['idSis_Empresa'] . $data['msg']);
-						exit();
-					}				
-				}
-				
         }
 
         $this->load->view('basico/footer');

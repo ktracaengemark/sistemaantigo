@@ -264,39 +264,86 @@ class Basico {
     function limpa_nome_arquivo($data) {
         return preg_replace("/([^\w.]+)|(\.(?=.*\.))/", "_", $data);
     }
-		
+
     function renomeiaempresa($data, $path) {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
-		$extensao	= '.' . $extensao;
-		#$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
-        $data = 'Logo_empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
+		$extensao	= '.' . $extensao;		
+        #$data = 'Logo_empresa' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = rand() . '_' . 'Logo_empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
 		return $data;
     }
 	
-    function renomeiaempresa1($data, $path) {
-		$extensao	= explode('.', $data);
-		$extensao	= end($extensao);
-		$extensao	= '.' . $extensao;
-		#$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
-        $data = 'Imagem1_empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
-		return $data;
-    }	
-
     function renomeiausuario($data, $path) {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;
-		$data = rand() . '_' . 'usuario' . '_' . $_SESSION['Usuario']['idSis_Usuario'] . $extensao;
-        return $data;
+        #$data = 'usuario' . '_' . $_SESSION['Usuario']['idSis_Usuario'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = rand() . '_' . 'usuario' . '_' . $_SESSION['Usuario']['idSis_Usuario'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		return $data;
     }
 	
     function renomeiacliente($data, $path) {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;
-		$data = rand() . '_' . 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . $extensao;
-        return $data;
+        #$data = 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = rand() . '_' . 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		return $data;
+    }	
+	
+    function renomeiaempresa1($data, $path) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+		$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
+        #$data = 'Logo_empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
+		return $data;
+    }	
+	
+    function renomeia_logo($data, $path) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		
+		$tiposPermitidos	= ['png','gif'];
+		
+        if (in_array($extensao, $tiposPermitidos)) {
+			$extensao	= '.' . $extensao;
+			$data = 'Logo_empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
+			return $data;
+			
+		}else {
+            return FALSE;
+        }		
+		
+    }
+	
+    function valid_extensao($data) {
+        $CI = & get_instance();
+
+        $CI->form_validation->set_message('valid_extensao', '<b>%s</b>');
+		$tiposPermitidos	= ['png','gif'];
+		$tamanho			= $arquivo['size'];
+		
+		$extensao			= explode('.', $data);
+		$extensao			= end($extensao);
+		
+        if (in_array($extensao, $tiposPermitidos)) {
+            return FALSE;
+        }
+        else {
+            return TRUE;
+        }
+
+    }	
+	
+    function renomeia_imagem_1($data, $path) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+		#$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
+        $data = 'Imagem1_empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
+		return $data;
     }	
 	
     function renomeia_arquivo1($data, $path) {
@@ -355,7 +402,6 @@ class Basico {
             return 'danger';
 
     }
-
 
     function radio_checked($data, $campo, $tipo = NULL) {
 
@@ -500,5 +546,5 @@ class Basico {
         return $array;
 
     }
-
+		
 }

@@ -17,7 +17,7 @@
 	</div>
 	
 	<div class="border"></div>-->
-	<h2 class="form-signin-heading text-center">enkontraki000</h2>		 
+	<h2 class="form-signin-heading text-center">enkontraki</h2>		 
 	<div class="container col-md-5 ">
 		<center>
 			<figure>

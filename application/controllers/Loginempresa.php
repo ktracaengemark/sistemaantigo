@@ -279,8 +279,8 @@ class Loginempresa extends CI_Controller {
 				$pasta3 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/usuarios/';
 				mkdir($pasta3, 0777);
 
-				$arquivo_origem3 = 'arquivos/imagens/empresas/1/usuarios/Perfil.jpg';
-				$arquivo_destino3 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/usuarios/Perfil.jpg';
+				$arquivo_origem3 = 'arquivos/imagens/empresas/1/usuarios/SuaFoto.jpg';
+				$arquivo_destino3 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/usuarios/SuaFoto.jpg';
 				
 				copy($arquivo_origem3, $arquivo_destino3);				
 				
@@ -542,8 +542,8 @@ class Loginempresa extends CI_Controller {
 				$pasta3 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/usuarios/';
 				mkdir($pasta3, 0777);
 
-				$arquivo_origem3 = 'arquivos/imagens/empresas/1/usuarios/Perfil.jpg';
-				$arquivo_destino3 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/usuarios/Perfil.jpg';
+				$arquivo_origem3 = 'arquivos/imagens/empresas/1/usuarios/SuaFoto.jpg';
+				$arquivo_destino3 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/usuarios/SuaFoto.jpg';
 				
 				copy($arquivo_origem3, $arquivo_destino3);				
 				

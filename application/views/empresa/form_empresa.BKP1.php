@@ -90,11 +90,12 @@
 									<h3 class="text-left">Dados da Empresa  </h3>									
 									<div class="form-group">
 										<div class="row">
+
 											<div class="col-md-3 "> 
 												<label>Logo Marca</label>
-												<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['AdminEmpresa']['idSis_Empresa'] . '/documentos/' . $_SESSION['AdminEmpresa']['Arquivo'] . ''; ?>" 
+												<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $query['Arquivo'] . ''; ?>" 
 												class="img-circle img-responsive">
-											</div>											
+											</div>
 											<div class="col-md-3">
 												<label for="NomeEmpresa">Nome da Empresa:</label>
 												<input type="text" class="form-control" id="NomeEmpresa" maxlength="45" 

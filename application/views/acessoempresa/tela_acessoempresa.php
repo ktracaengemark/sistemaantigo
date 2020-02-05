@@ -12,7 +12,7 @@
 					</div>
 					<div class="col-sm-offset-4 col-lg-4 " align="center"> 
 						<a href="<?php echo base_url() . 'empresa/alterarlogo/' . $_SESSION['AdminEmpresa']['idSis_Empresa']; ?>">
-							<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['AdminEmpresa']['Arquivo'] . ''; ?>" class="img-circle img-responsive">
+							<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['AdminEmpresa']['idSis_Empresa'] . '/documentos/' . $_SESSION['AdminEmpresa']['Arquivo'] . ''; ?>" class="img-circle img-responsive">
 						</a>
 					</div>
 					<div class="col-md-12 text-center t">

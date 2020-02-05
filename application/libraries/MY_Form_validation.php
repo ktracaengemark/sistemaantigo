@@ -87,7 +87,7 @@ class MY_Form_validation extends CI_Form_validation {
        
     }
 	
-    function valid_extensao($data) {
+    function valid_extensaoBKP($data) {
         $CI = & get_instance();
 
         $CI->form_validation->set_message('valid_extensao', '<b>%s</b>');
@@ -96,6 +96,25 @@ class MY_Form_validation extends CI_Form_validation {
 			return FALSE;
 		}
        
+    }
+	
+    function valid_extensao($data) {
+        $CI = & get_instance();
+
+        $CI->form_validation->set_message('valid_extensao', '<b>%s</b>');
+		$tiposPermitidos	= ['png','gif'];
+		$tamanho			= $arquivo['size'];
+		
+		$extensao			= explode('.', $data);
+		$extensao			= end($extensao);
+		
+        if (in_array($extensao, $tiposPermitidos)) {
+            return FALSE;
+        }
+        else {
+            return TRUE;
+        }
+
     }	
 	
     /**
@@ -399,6 +418,42 @@ class MY_Form_validation extends CI_Form_validation {
 
     }
 
+    function let_to_bit($sValue) {
+        // Split value from name
+        if (!preg_match('/([0-9]+)([ptgmkb]{1,2}|)/ui', $sValue, $aMatches)) { // Invalid input
+            return FALSE;
+        }
+
+        if (empty($aMatches[2])) { // No name -> Enter default value
+            $aMatches[2] = 'KB';
+        }
+
+        if (strlen($aMatches[2]) == 1) { // Shorted name -> full name
+            $aMatches[2] .= 'B';
+        }
+
+        $iBit = (substr($aMatches[2], -1) == 'B') ? 1024 : 1000;
+        // Calculate bits:
+
+        switch (strtoupper(substr($aMatches[2], 0, 1))) {
+            case 'P':
+                $aMatches[1] *= $iBit;
+            case 'T':
+                $aMatches[1] *= $iBit;
+            case 'G':
+                $aMatches[1] *= $iBit;
+            case 'M':
+                $aMatches[1] *= $iBit;
+            case 'K':
+                $aMatches[1] *= $iBit;
+                break;
+        }
+
+        // Return the value in bits
+        return $aMatches[1];
+
+    }
+	
     function file_upload_error_message($field, $error_code) {
         switch ($error_code) {
             case UPLOAD_ERR_INI_SIZE:

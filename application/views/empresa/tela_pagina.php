@@ -48,7 +48,17 @@
 										<div class="row">	
 											<div class="col-sm-offset-2 col-md-10 " align="left"> 
 												<a href="<?php echo base_url() . 'empresa/alterarlogo/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">	
-													<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>"
+													<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>" 
+													class="img-circle img-responsive" width='200'>
+												</a>
+											</div>
+										</div>		
+									</div>
+									<div class=" col-md-6">	
+										<div class="row">	
+											<div class="col-sm-offset-2 col-md-10 " align="left"> 
+												<a href="<?php echo base_url() . 'empresa/alterarlogo/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">	
+													<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $_SESSION['Empresa']['Arquivo1'] . ''; ?>" 
 													class="img-circle img-responsive" width='200'>
 												</a>
 											</div>

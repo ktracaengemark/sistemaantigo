@@ -272,7 +272,7 @@ class Cliente extends CI_Controller {
                     $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Cliente', 'UPDATE', $data['auditoriaitem']);
                     $data['msg'] = '?m=1';
                 }
-
+				
                 redirect(base_url() . 'cliente/prontuario/' . $data['query']['idApp_Cliente'] . $data['msg']);
                 exit();
             }
@@ -311,7 +311,7 @@ class Cliente extends CI_Controller {
         if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
             
 			$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
-			$data['file']['Arquivo'] = $this->basico->renomeiacliente($data['file']['Arquivo'], 'arquivos/imagens/clientes/');
+			$data['file']['Arquivo'] = $this->basico->renomeiacliente($data['file']['Arquivo'], 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/');
             $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
         }
         else {
@@ -331,7 +331,7 @@ class Cliente extends CI_Controller {
         }
         else {
 
-            $config['upload_path'] = 'arquivos/imagens/clientes/';
+            $config['upload_path'] = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/';
             $config['max_size'] = 1000;
             $config['allowed_types'] = ['jpg', 'jpeg', 'gif', 'png'];
             $config['file_name'] = $data['file']['Arquivo'];
