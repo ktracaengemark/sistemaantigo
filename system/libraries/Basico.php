@@ -265,7 +265,7 @@ class Basico {
         return preg_replace("/([^\w.]+)|(\.(?=.*\.))/", "_", $data);
     }
 
-    function renomeiaempresa($data, $path) {
+    function renomeiaempresa($data) {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;		
