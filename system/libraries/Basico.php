@@ -337,7 +337,7 @@ class Basico {
 
     }	
 	
-    function renomeia_imagem_1($data, $path) {
+    function renomeia_imagem_1($data) {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;
@@ -346,7 +346,7 @@ class Basico {
 		return $data;
     }	
 
-    function renomeia_imagem_2($data, $path) {
+    function renomeia_imagem_2($data) {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;
@@ -354,6 +354,24 @@ class Basico {
         $data = 'Imagem_2_empresa' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
 		return $data;
     }	
+
+    function renomeia_imagem_3($data) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+		#$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
+        $data = 'Imagem_3_empresa' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		return $data;
+    }	
+
+    function renomeia_imagem_4($data) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+		#$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
+        $data = 'Imagem_4_empresa' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		return $data;
+    }
 	
     function renomeia_arquivo1($data, $path) {
 

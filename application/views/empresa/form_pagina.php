@@ -1,8 +1,8 @@
 <?php if ( !isset($evento) && isset($_SESSION['Empresa']) && isset($_SESSION['Documentos'])) { ?>
 <div class="container-fluid">	
 	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
 			<div class="panel panel-<?php echo $panel; ?>">
 
 				<div class="panel-heading">
@@ -55,47 +55,79 @@
 								</div>
 							</div>				
 							<?php if ($metodo != 3) { ?>
-							<div class="form-group">
-								<div class="row">
-									<div class="col-md-12 "> 
-										<a href="<?php echo base_url() . 'empresa/pagina/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo2'] . ''; ?>" 
-											class="img-circle img-responsive" width='200'>
-										</a>												
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="row">
-									<div class="col-md-12">
-										<label for="Arquivo2">Arquivo0: *</label>
-										<input type="file" class="file" multiple="false" data-show-upload="false" data-show-caption="true" 
-											   name="Arquivo2" value="<?php echo $file['Arquivo2']; ?>">
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="row">
-									<div class="col-md-12 "> 
+							<div class="row">
+								<div class="col-md-6 ">
+									<div class="col-md-6 "> 
 										<a href="<?php echo base_url() . 'empresa/pagina/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
 											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo1'] . ''; ?>" 
 											class="img-circle img-responsive" width='200'>
 										</a>												
 									</div>
-								</div>
-							</div>							
-							<div class="form-group">
-								<div class="row">
-									<div class="col-md-12">
-										<label for="Arquivo1">Arquivo1: *</label>
-										<input type="file" class="file" multiple="false" data-show-upload="false" data-show-caption="true" 
-											   name="Arquivo1" value="<?php echo $file['Arquivo1']; ?>">
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-6">
+												<label for="Arquivo1">Arquivo1: *</label>
+												<input type="file" class="file" multiple="false" data-show-upload="false" data-show-caption="true" 
+													   name="Arquivo1" value="<?php echo $file['Arquivo1']; ?>">
+											</div>
+										</div>
+									</div>
+								</div>								
+								<div class="col-md-6 ">
+									<div class="col-md-6 "> 
+										<a href="<?php echo base_url() . 'empresa/pagina/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo2'] . ''; ?>" 
+											class="img-circle img-responsive" width='200'>
+										</a>												
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-6">
+												<label for="Arquivo2">Arquivo2: *</label>
+												<input type="file" class="file" multiple="false" data-show-upload="false" data-show-caption="true" 
+													   name="Arquivo2" value="<?php echo $file['Arquivo2']; ?>">
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>							
-
+							</div>
+							<div class="row">
+								<div class="col-md-6 ">	
+									<div class="col-md-6 "> 
+										<a href="<?php echo base_url() . 'empresa/pagina/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo3'] . ''; ?>" 
+											class="img-circle img-responsive" width='200'>
+										</a>												
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-6">
+												<label for="Arquivo3">Arquivo3: *</label>
+												<input type="file" class="file" multiple="false" data-show-upload="false" data-show-caption="true" 
+													   name="Arquivo3" value="<?php echo $file['Arquivo3']; ?>">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6 ">	
+									<div class="col-md-6 "> 
+										<a href="<?php echo base_url() . 'empresa/pagina/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo4'] . ''; ?>" 
+											class="img-circle img-responsive" width='200'>
+										</a>												
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-6">
+												<label for="Arquivo4">Arquivo4: *</label>
+												<input type="file" class="file" multiple="false" data-show-upload="false" data-show-caption="true" 
+													   name="Arquivo4" value="<?php echo $file['Arquivo4']; ?>">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 							<?php } else { ?>
-
 							<div class="form-group">
 								<div class="row">
 									<div class="col-md-12">
@@ -144,7 +176,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-1"></div>
 	</div>
 </div>
 <?php } ?>

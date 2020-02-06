@@ -15,9 +15,9 @@
 						</div>
 						<div class="col-md-6 " align="center">
 							<h4><?php echo '<small>a(o)<br></small><strong> ' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>.'  ?></h4>
-							
+							<a href="<?php echo base_url() . 'relatorio/loginempresa/'; ?>">
 								<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>" class="img-circle img-responsive" width='200'>
-							
+							</a>
 						</div>	
 					</div>	
 					<div class="col-md-12 text-center t">

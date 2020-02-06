@@ -500,7 +500,9 @@ class Empresa extends CI_Controller {
 		
         $data['file'] = $this->input->post(array(
             'idSis_Empresa',
-            'Arquivo2',
+            'Arquivo4',
+			'Arquivo3',			
+			'Arquivo2',
 			'Arquivo1',
 		), TRUE);
 
@@ -514,22 +516,40 @@ class Empresa extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 		
+        if (isset($_FILES['Arquivo4']) && $_FILES['Arquivo4']['name']) {
+            
+			$data['file']['Arquivo4'] = $this->basico->renomeia_imagem_4($_FILES['Arquivo4']['name']);
+            #$this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+			$this->form_validation->set_rules($data['file']['Arquivo4'], 'Tipo de Arquivo não é permitido', 'trim|valid_extensao');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo4', 'Arquivo 4', 'required');
+        }
+		
+        if (isset($_FILES['Arquivo3']) && $_FILES['Arquivo3']['name']) {
+            
+			$data['file']['Arquivo3'] = $this->basico->renomeia_imagem_3($_FILES['Arquivo3']['name']);
+            #$this->form_validation->set_rules('Arquivo3', 'Arquivo3', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+			$this->form_validation->set_rules($data['file']['Arquivo3'], 'Tipo de Arquivo não é permitido', 'trim|valid_extensao');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo3', 'Arquivo 3', 'required');
+        }		
+		
         if (isset($_FILES['Arquivo2']) && $_FILES['Arquivo2']['name']) {
             
-			$data['file']['Arquivo2'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo2']['name']);
-			$data['file']['Arquivo2'] = $this->basico->renomeia_imagem_2($data['file']['Arquivo2'], 'arquivos/imagens/empresas/');
+			$data['file']['Arquivo2'] = $this->basico->renomeia_imagem_2($_FILES['Arquivo2']['name']);
             #$this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
 			$this->form_validation->set_rules($data['file']['Arquivo2'], 'Tipo de Arquivo não é permitido', 'trim|valid_extensao');
         }
         else {
-            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
+            $this->form_validation->set_rules('Arquivo2', 'Arquivo 2', 'required');
         }
 		
         if (isset($_FILES['Arquivo1']) && $_FILES['Arquivo1']['name']) {
             
-			$data['file']['Arquivo1'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo1']['name']);
-			$data['file']['Arquivo1'] = $this->basico->renomeia_imagem_1($data['file']['Arquivo1'], 'arquivos/imagens/empresas/');
-            #$this->form_validation->set_rules('Arquivo1', 'Arquivo1', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+			$data['file']['Arquivo1'] = $this->basico->renomeia_imagem_1($_FILES['Arquivo1']['name']);
+			#$this->form_validation->set_rules('Arquivo1', 'Arquivo1', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
 			$this->form_validation->set_rules($data['file']['Arquivo1'], 'Tipo de Arquivo não é permitido', 'trim|valid_extensao');
         }
         else {
@@ -545,21 +565,124 @@ class Empresa extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             #load login view
-            $this->load->view('empresa/form_perfil2', $data);
+            $this->load->view('empresa/form_pagina', $data);
         }
         else {
-			
-			
-			$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/';
 
+			/*
+			$arquivo4 = isset($_FILES['Arquivo4']) ? $_FILES['Arquivo4'] : FALSE;	
+			$destino4 = $diretorio."/".$data['file']['Arquivo4'];
+			$mover_logo = move_uploaded_file($arquivo4['tmp_name'], $destino4);
+			
+			$arquivo3 = isset($_FILES['Arquivo3']) ? $_FILES['Arquivo3'] : FALSE;	
+			$destino3 = $diretorio."/".$data['file']['Arquivo3'];
+			$mover_logo = move_uploaded_file($arquivo3['tmp_name'], $destino3);
+			
 			$arquivo2 = isset($_FILES['Arquivo2']) ? $_FILES['Arquivo2'] : FALSE;	
 			$destino2 = $diretorio."/".$data['file']['Arquivo2'];
 			$mover_logo = move_uploaded_file($arquivo2['tmp_name'], $destino2);
 
+			
 			$arquivo1 = isset($_FILES['Arquivo1']) ? $_FILES['Arquivo1'] : FALSE;		
 			$destino1 = $diretorio."/".$data['file']['Arquivo1'];
 			$mover_arquivo_1 = move_uploaded_file($arquivo1['tmp_name'], $destino1);		
-		
+			*/
+			
+			$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/';
+			$altura = "200";
+			$largura = "200";
+			
+			switch($_FILES['Arquivo1']['type']):
+				case 'image/jpeg';
+				case 'image/pjpeg';
+					$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo1']['tmp_name']);
+					
+					$largura_original = imagesx($imagem_temporaria);
+					
+					$altura_original = imagesy($imagem_temporaria);
+					
+					//echo "largura original: $largura_original - Altura original: $altura_original <br>";
+					
+					$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
+					
+					$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
+					
+					$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+					imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+					
+					imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo1']);
+
+				break;
+			endswitch;
+			
+			switch($_FILES['Arquivo2']['type']):
+				case 'image/jpeg';
+				case 'image/pjpeg';
+					$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo2']['tmp_name']);
+					
+					$largura_original = imagesx($imagem_temporaria);
+					
+					$altura_original = imagesy($imagem_temporaria);
+					
+					//echo "largura original: $largura_original - Altura original: $altura_original <br>";
+					
+					$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
+					
+					$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
+					
+					$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+					imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+					
+					imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo2']);
+
+				break;
+			endswitch;
+			
+			switch($_FILES['Arquivo3']['type']):
+				case 'image/jpeg';
+				case 'image/pjpeg';
+					$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo3']['tmp_name']);
+					
+					$largura_original = imagesx($imagem_temporaria);
+					
+					$altura_original = imagesy($imagem_temporaria);
+					
+					//echo "largura original: $largura_original - Altura original: $altura_original <br>";
+					
+					$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
+					
+					$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
+					
+					$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+					imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+					
+					imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo3']);
+					
+				break;
+			endswitch;
+			
+			switch($_FILES['Arquivo4']['type']):
+				case 'image/jpeg';
+				case 'image/pjpeg';
+					$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo4']['tmp_name']);
+					
+					$largura_original = imagesx($imagem_temporaria);
+					
+					$altura_original = imagesy($imagem_temporaria);
+					
+					//echo "largura original: $largura_original - Altura original: $altura_original <br>";
+					
+					$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
+					
+					$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
+					
+					$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+					imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+					
+					imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo4']);
+
+				break;
+			endswitch;			
 
 
 				$data['camposfile'] = array_keys($data['file']);
@@ -568,13 +691,15 @@ class Empresa extends CI_Controller {
 				if ($data['idSis_Arquivo'] === FALSE) {
 					$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 					$this->basico->erro($msg);
-					$this->load->view('empresa/form_perfil2', $data);
+					$this->load->view('empresa/form_pagina', $data);
 				}
 				else {
 
 					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
 					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
 					
+					$data['query']['Arquivo4'] = $data['file']['Arquivo4'];
+					$data['query']['Arquivo3'] = $data['file']['Arquivo3'];
 					$data['query']['Arquivo2'] = $data['file']['Arquivo2'];
 					$data['query']['Arquivo1'] = $data['file']['Arquivo1'];
 					$data['anterior'] = $this->Empresa_model->get_pagina($data['query']['idSis_Empresa']);
