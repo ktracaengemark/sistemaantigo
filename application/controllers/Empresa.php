@@ -500,12 +500,13 @@ class Empresa extends CI_Controller {
 		
         $data['file'] = $this->input->post(array(
             'idSis_Empresa',
-            'Arquivo',
+            'Arquivo2',
 			'Arquivo1',
 		), TRUE);
 
         if ($id) {
             $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
+			$_SESSION['Documentos'] = $data['documentos'] = $this->Empresa_model->get_pagina($id, TRUE);
         }
 		
         if ($id)
@@ -513,12 +514,12 @@ class Empresa extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 		
-        if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
+        if (isset($_FILES['Arquivo2']) && $_FILES['Arquivo2']['name']) {
             
-			$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
-			$data['file']['Arquivo'] = $this->basico->renomeia_logo($data['file']['Arquivo'], 'arquivos/imagens/empresas/');
+			$data['file']['Arquivo2'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo2']['name']);
+			$data['file']['Arquivo2'] = $this->basico->renomeia_imagem_2($data['file']['Arquivo2'], 'arquivos/imagens/empresas/');
             #$this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
-			$this->form_validation->set_rules($data['file']['Arquivo'], 'Tipo de Arquivo não é permitido', 'trim|valid_extensao');
+			$this->form_validation->set_rules($data['file']['Arquivo2'], 'Tipo de Arquivo não é permitido', 'trim|valid_extensao');
         }
         else {
             $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
@@ -536,7 +537,7 @@ class Empresa extends CI_Controller {
         }		
 
         $data['titulo'] = 'Alterar Foto';
-        $data['form_open_path'] = 'empresa/alterarlogo';
+        $data['form_open_path'] = 'empresa/alterar_pagina';
         $data['readonly'] = 'readonly';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
@@ -551,9 +552,9 @@ class Empresa extends CI_Controller {
 			
 			$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/';
 
-			$arquivo = isset($_FILES['Arquivo']) ? $_FILES['Arquivo'] : FALSE;	
-			$destino = $diretorio."/".$data['file']['Arquivo'];
-			$mover_logo = move_uploaded_file($arquivo['tmp_name'], $destino);
+			$arquivo2 = isset($_FILES['Arquivo2']) ? $_FILES['Arquivo2'] : FALSE;	
+			$destino2 = $diretorio."/".$data['file']['Arquivo2'];
+			$mover_logo = move_uploaded_file($arquivo2['tmp_name'], $destino2);
 
 			$arquivo1 = isset($_FILES['Arquivo1']) ? $_FILES['Arquivo1'] : FALSE;		
 			$destino1 = $diretorio."/".$data['file']['Arquivo1'];
@@ -574,16 +575,16 @@ class Empresa extends CI_Controller {
 					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
 					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
 					
-					$data['query']['Arquivo'] = $data['file']['Arquivo'];
+					$data['query']['Arquivo2'] = $data['file']['Arquivo2'];
 					$data['query']['Arquivo1'] = $data['file']['Arquivo1'];
-					$data['anterior'] = $this->Empresa_model->get_empresa($data['query']['idSis_Empresa']);
+					$data['anterior'] = $this->Empresa_model->get_pagina($data['query']['idSis_Empresa']);
 					$data['campos'] = array_keys($data['query']);
 
 					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Empresa'], TRUE);
 
-					if ($data['auditoriaitem'] && $this->Empresa_model->update_empresa($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
+					if ($data['auditoriaitem'] && $this->Empresa_model->update_pagina($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
 						$data['msg'] = '?m=2';
-						redirect(base_url() . 'empresa/form_perfil/' . $data['query']['idSis_Empresa'] . $data['msg']);
+						redirect(base_url() . 'empresa/pagina/' . $data['query']['idSis_Empresa'] . $data['msg']);
 						exit();
 					} else {
 
@@ -594,7 +595,7 @@ class Empresa extends CI_Controller {
 							$data['msg'] = '?m=1';
 						}
 
-						redirect(base_url() . 'empresa/prontuario/' . $data['file']['idSis_Empresa'] . $data['msg']);
+						redirect(base_url() . 'empresa/pagina/' . $data['file']['idSis_Empresa'] . $data['msg']);
 						exit();
 					}				
 				}
@@ -728,6 +729,44 @@ class Empresa extends CI_Controller {
 
         $data['nav_secundario'] = $this->load->view('empresa/nav_secundario', $data, TRUE);
         $this->load->view('empresa/tela_empresa', $data);
+
+        $this->load->view('basico/footer');
+    }
+
+    public function pagina($id) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+		$_SESSION['Documentos'] = $data['documentos'] = $this->Empresa_model->get_pagina($id, TRUE);
+		$_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
+        #$data['query'] = $this->Paciente_model->get_paciente($prontuario, TRUE);
+        $data['titulo'] = 'Prontuário ' ;
+        $data['panel'] = 'primary';
+        $data['metodo'] = 4;
+
+        $_SESSION['log']['idSis_Empresa'] = $data['resumo']['idSis_Empresa'] = $data['documentos']['idSis_Empresa'] = $data['query']['idSis_Empresa'];
+
+        #$data['query']['Sexo'] = $this->Basico_model->get_sexo($data['query']['Sexo']);
+		#$data['documentos']['Arquivo1'] = $this->Empresa_model->get_pagina($data['documentos']['Arquivo1']);
+		#$data['documentos']['Arquivo2'] = $this->Empresa_model->get_pagina($data['documentos']['Arquivo2']);
+		$data['query']['Empresa'] = $this->Basico_model->get_empresa($data['query']['NomeEmpresa']);
+		$data['query']['CategoriaEmpresa'] = $this->Basico_model->get_categoriaempresa($data['query']['CategoriaEmpresa']);
+		#$data['query']['Empresa'] = $data['query']['Empresa'];
+
+
+        /*
+          echo "<pre>";
+          print_r($data['contatoempresa']);
+          echo "</pre>";
+          exit();
+          */
+
+        $this->load->view('empresa/tela_pagina', $data);
 
         $this->load->view('basico/footer');
     }

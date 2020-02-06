@@ -58,6 +58,12 @@
 								</a>
 							</li>
 							<li role="separator" class="divider"></li>
+							<li>
+								<a href="<?php echo base_url() ?>empresa/pagina/<?php echo $_SESSION['log']['idSis_Empresa']; ?>">
+									<span class="glyphicon glyphicon-user"></span> Página
+								</a>
+							</li>
+							<li role="separator" class="divider"></li>							
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							<li><a href="<?php echo base_url() ?>relatorioempresa/sistemaempresa"><span class="glyphicon glyphicon-pencil"></span> Renovar Assinatura</a></li>
 							<li role="separator" class="divider"></li>									

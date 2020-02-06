@@ -1,4 +1,4 @@
-<?php if ( !isset($evento) && isset($_SESSION['Empresa'])) { ?>
+<?php if ( !isset($evento) && isset($_SESSION['Empresa']) && isset($_SESSION['Documentos'])) { ?>
 <div class="container-fluid">	
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -58,8 +58,8 @@
 							<div class="form-group">
 								<div class="row">
 									<div class="col-md-12 "> 
-										<a href="<?php echo base_url() . 'empresa/prontuario/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>" 
+										<a href="<?php echo base_url() . 'empresa/pagina/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo2'] . ''; ?>" 
 											class="img-circle img-responsive" width='200'>
 										</a>												
 									</div>
@@ -68,17 +68,17 @@
 							<div class="form-group">
 								<div class="row">
 									<div class="col-md-12">
-										<label for="Arquivo">Arquivo0: *</label>
+										<label for="Arquivo2">Arquivo0: *</label>
 										<input type="file" class="file" multiple="false" data-show-upload="false" data-show-caption="true" 
-											   name="Arquivo" value="<?php echo $file['Arquivo']; ?>">
+											   name="Arquivo2" value="<?php echo $file['Arquivo2']; ?>">
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="row">
 									<div class="col-md-12 "> 
-										<a href="<?php echo base_url() . 'empresa/prontuario/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $_SESSION['Empresa']['Arquivo1'] . ''; ?>" 
+										<a href="<?php echo base_url() . 'empresa/pagina/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo1'] . ''; ?>" 
 											class="img-circle img-responsive" width='200'>
 										</a>												
 									</div>

@@ -51,6 +51,14 @@ class Empresa_model extends CI_Model {
         return $query[0];
     }
 
+    public function get_pagina($data) {
+        $query = $this->db->query('SELECT * FROM App_Documentos WHERE idSis_Empresa = ' . $data);
+
+        $query = $query->result_array();
+
+        return $query[0];
+    }
+	
     public function get_arquivo($data) {
         $query = $this->db->query('SELECT * FROM Sis_Arquivo WHERE idSis_Arquivo = ' . $data);
         $query = $query->result_array();
@@ -77,6 +85,25 @@ class Empresa_model extends CI_Model {
             return TRUE;
         }
     }
+	
+    public function update_pagina($data, $id) {
+
+        unset($data['Id']);
+        $query = $this->db->update('App_Documentos', $data, array('idSis_Empresa' => $id));
+        /*
+          echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit ();
+         */
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }	
 
     public function delete_empresa($data) {
 

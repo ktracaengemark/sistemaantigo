@@ -342,7 +342,16 @@ class Basico {
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;
 		#$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
-        $data = 'Imagem1_empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
+        $data = 'Imagem_1_empresa' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		return $data;
+    }	
+
+    function renomeia_imagem_2($data, $path) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+		#$data = rand() . '_' . 'empresa' . '_' . $_SESSION['Usuario']['idSis_Empresa'] . $extensao;
+        $data = 'Imagem_2_empresa' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
 		return $data;
     }	
 	
