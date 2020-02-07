@@ -158,7 +158,7 @@ class Usuario2 extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-    public function alterarlogo($id = FALSE) {
+    public function alterarlogo1($id = FALSE) {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -262,6 +262,164 @@ class Usuario2 extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
+    public function alterarlogo($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = $this->input->post(array(
+			'idSis_Usuario',
+        ), TRUE);
+		
+        $data['file'] = $this->input->post(array(
+            'idSis_Usuario',
+            'Arquivo',
+		), TRUE);
+
+        if ($id) {
+            $_SESSION['Usuario'] = $data['query'] = $this->Usuario_model->get_usuario($id, TRUE);
+        }
+		
+        if ($id)
+            $data['file']['idSis_Usuario'] = $id;
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
+            
+			$data['file']['Arquivo'] = $this->basico->renomeiausuario($_FILES['Arquivo']['name']);
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
+        }
+
+        $data['titulo'] = 'Alterar Foto';
+        $data['form_open_path'] = 'usuario2/alterarlogo';
+        $data['readonly'] = 'readonly';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            #load login view
+            $this->load->view('usuario/form_perfil2', $data);
+        }
+        else {
+
+            $config['upload_path'] = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/usuarios/original/';
+            $config['max_size'] = 1000;
+            $config['allowed_types'] = ['jpg','jpeg','pjpeg','png','x-png'];
+            $config['file_name'] = $data['file']['Arquivo'];
+
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('Arquivo')) {
+                $data['msg'] = $this->basico->msg($this->upload->display_errors(), 'erro', FALSE, FALSE, FALSE);
+                $this->load->view('usuario/form_perfil2', $data);
+            }
+            else {
+
+				$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/usuarios/';
+				$altura = "200";
+				$largura = "200";
+
+				switch($_FILES['Arquivo']['type']):
+					case 'image/jpg';
+					case 'image/jpeg';
+					case 'image/pjpeg';
+						$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo']['tmp_name']);
+						
+						$largura_original = imagesx($imagem_temporaria);
+						
+						$altura_original = imagesy($imagem_temporaria);
+						
+						$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
+						
+						$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
+						
+						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+						
+						imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo']);
+
+					break;
+
+					//Caso a imagem seja extensão PNG cai nesse CASE
+					case 'image/png':
+					case 'image/x-png';
+						$imagem_temporaria = imagecreatefrompng($_FILES['Arquivo']['tmp_name']);
+						
+						$largura_original = imagesx($imagem_temporaria);
+						$altura_original = imagesy($imagem_temporaria);
+
+						
+						/* Configura a nova largura */
+						$nova_largura = $largura ? $largura : floor(( $largura_original / $altura_original ) * $altura);
+
+						/* Configura a nova altura */
+						$nova_altura = $altura ? $altura : floor(( $altura_original / $largura_original ) * $largura);
+						
+						/* Retorna a nova imagem criada */
+						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+						
+						/* Copia a nova imagem da imagem antiga com o tamanho correto */
+						//imagealphablending($imagem_redimensionada, false);
+						//imagesavealpha($imagem_redimensionada, true);
+
+						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+						
+						//função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
+						imagepng($imagem_redimensionada, $diretorio . $data['file']['Arquivo']);
+						
+					break;					
+					
+				endswitch;			
+                $data['camposfile'] = array_keys($data['file']);
+				$data['idSis_Arquivo'] = $this->Usuario_model->set_arquivo($data['file']);
+
+                if ($data['idSis_Arquivo'] === FALSE) {
+                    $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+                    $this->basico->erro($msg);
+                    $this->load->view('usuario/form_perfil2', $data);
+                }
+				else {
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
+					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
+					
+					$data['query']['Arquivo'] = $data['file']['Arquivo'];
+					$data['anterior'] = $this->Usuario_model->get_usuario($data['query']['idSis_Usuario']);
+					$data['campos'] = array_keys($data['query']);
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Usuario'], TRUE);
+
+					if ($data['auditoriaitem'] && $this->Usuario_model->update_usuario($data['query'], $data['query']['idSis_Usuario']) === FALSE) {
+						$data['msg'] = '?m=2';
+						redirect(base_url() . 'usuario/form_perfil2/' . $data['query']['idSis_Usuario'] . $data['msg']);
+						exit();
+					} else {
+
+						if ($data['auditoriaitem'] === FALSE) {
+							$data['msg'] = '';
+						} else {
+							$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Usuario', 'UPDATE', $data['auditoriaitem']);
+							$data['msg'] = '?m=1';
+						}
+
+						redirect(base_url() . 'usuario2/prontuario/' . $data['file']['idSis_Usuario'] . $data['msg']);
+						exit();
+					}				
+				}
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+	
     public function pesquisar() {
 
         if ($this->input->get('m') == 1)
