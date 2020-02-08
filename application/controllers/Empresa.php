@@ -246,7 +246,7 @@ class Empresa extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-    public function alterarlogo($id = FALSE) {
+    public function alterarlogo1($id = FALSE) {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -520,7 +520,7 @@ class Empresa extends CI_Controller {
         $this->load->view('basico/footer');
     }
 	
-    public function alterarlogo1($id = FALSE) {
+    public function alterarlogo($id = FALSE) {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -582,7 +582,7 @@ class Empresa extends CI_Controller {
             }
             else {
 
-				$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/';
+				$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
 				$altura = "200";
 				$largura = "200";
 
@@ -715,7 +715,6 @@ class Empresa extends CI_Controller {
         if (isset($_FILES['Arquivo4']) && $_FILES['Arquivo4']['name']) {
             
 			$data['file']['Arquivo4'] = $this->basico->renomeia_imagem_4($_FILES['Arquivo4']['name']);
-            #$this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
 			$this->form_validation->set_rules($data['file']['Arquivo4'], 'Tipo de Arquivo não é permitido', 'trim|valid_extensao');
         }
         else {
@@ -725,7 +724,6 @@ class Empresa extends CI_Controller {
         if (isset($_FILES['Arquivo3']) && $_FILES['Arquivo3']['name']) {
             
 			$data['file']['Arquivo3'] = $this->basico->renomeia_imagem_3($_FILES['Arquivo3']['name']);
-            #$this->form_validation->set_rules('Arquivo3', 'Arquivo3', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
 			$this->form_validation->set_rules($data['file']['Arquivo3'], 'Tipo de Arquivo não é permitido', 'trim|valid_extensao');
         }
         else {
@@ -735,7 +733,6 @@ class Empresa extends CI_Controller {
         if (isset($_FILES['Arquivo2']) && $_FILES['Arquivo2']['name']) {
             
 			$data['file']['Arquivo2'] = $this->basico->renomeia_imagem_2($_FILES['Arquivo2']['name']);
-            #$this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
 			$this->form_validation->set_rules($data['file']['Arquivo2'], 'Tipo de Arquivo não é permitido', 'trim|valid_extensao');
         }
         else {
@@ -745,7 +742,6 @@ class Empresa extends CI_Controller {
         if (isset($_FILES['Arquivo1']) && $_FILES['Arquivo1']['name']) {
             
 			$data['file']['Arquivo1'] = $this->basico->renomeia_imagem_1($_FILES['Arquivo1']['name']);
-			#$this->form_validation->set_rules('Arquivo1', 'Arquivo1', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
 			$this->form_validation->set_rules($data['file']['Arquivo1'], 'Tipo de Arquivo não é permitido', 'trim|valid_extensao');
         }
         else {
@@ -783,102 +779,242 @@ class Empresa extends CI_Controller {
 			$destino1 = $diretorio."/".$data['file']['Arquivo1'];
 			$mover_arquivo_1 = move_uploaded_file($arquivo1['tmp_name'], $destino1);		
 			*/
+			$tiposPermitidos	= ['jpg','jpeg','pjpeg','png','x-png'];
+			$tamanho			= $_FILES['Arquivo']['size'];
+			$extensao			= explode('.', $data['file']['Arquivo']);
+			$extensao			= end($extensao);
 			
-			$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/';
-			$altura = "200";
-			$largura = "200";
+			if (!in_array($extensao, $tiposPermitidos)) {
+				$data['msg'] = $this->basico->msg('<strong>O Tipo de Arquivo não é Permitido.</strong>', 'erro', TRUE, TRUE, TRUE);
+				$this->load->view('empresa/form_logo', $data);
+				
+			} elseif(!($tamanho > 1000)){
+				$data['msg'] = $this->basico->msg('<strong>O Tamanho do Arquivo ultrapassa o máximo Permitido</strong>', 'erro', TRUE, TRUE, TRUE);
+				$this->load->view('empresa/form_logo', $data);
+			}
 			
-			switch($_FILES['Arquivo1']['type']):
-				case 'image/jpeg';
-				case 'image/pjpeg';
-					$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo1']['tmp_name']);
-					
-					$largura_original = imagesx($imagem_temporaria);
-					
-					$altura_original = imagesy($imagem_temporaria);
-					
-					//echo "largura original: $largura_original - Altura original: $altura_original <br>";
-					
-					$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
-					
-					$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
-					
-					$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
-					imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
-					
-					imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo1']);
+			else {
+				
+				$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/';
+				$altura = "200";
+				$largura = "200";
 
-				break;
-			endswitch;
-			
-			switch($_FILES['Arquivo2']['type']):
-				case 'image/jpeg';
-				case 'image/pjpeg';
-					$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo2']['tmp_name']);
-					
-					$largura_original = imagesx($imagem_temporaria);
-					
-					$altura_original = imagesy($imagem_temporaria);
-					
-					//echo "largura original: $largura_original - Altura original: $altura_original <br>";
-					
-					$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
-					
-					$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
-					
-					$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
-					imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
-					
-					imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo2']);
+				switch($_FILES['Arquivo1']['type']):
+					case 'image/jpg';
+					case 'image/jpeg';
+					case 'image/pjpeg';
+						$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo1']['tmp_name']);
+						
+						$largura_original = imagesx($imagem_temporaria);
+						
+						$altura_original = imagesy($imagem_temporaria);
+						
+						//echo "largura original: $largura_original - Altura original: $altura_original <br>";
+						
+						$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
+						
+						$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
+						
+						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+						
+						imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo1']);
 
-				break;
-			endswitch;
-			
-			switch($_FILES['Arquivo3']['type']):
-				case 'image/jpeg';
-				case 'image/pjpeg';
-					$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo3']['tmp_name']);
-					
-					$largura_original = imagesx($imagem_temporaria);
-					
-					$altura_original = imagesy($imagem_temporaria);
-					
-					//echo "largura original: $largura_original - Altura original: $altura_original <br>";
-					
-					$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
-					
-					$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
-					
-					$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
-					imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
-					
-					imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo3']);
-					
-				break;
-			endswitch;
-			
-			switch($_FILES['Arquivo4']['type']):
-				case 'image/jpeg';
-				case 'image/pjpeg';
-					$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo4']['tmp_name']);
-					
-					$largura_original = imagesx($imagem_temporaria);
-					
-					$altura_original = imagesy($imagem_temporaria);
-					
-					//echo "largura original: $largura_original - Altura original: $altura_original <br>";
-					
-					$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
-					
-					$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
-					
-					$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
-					imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
-					
-					imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo4']);
+					break;
 
-				break;
-			endswitch;			
+					//Caso a imagem seja extensão PNG cai nesse CASE
+					case 'image/png':
+					case 'image/x-png';
+						$imagem_temporaria = imagecreatefrompng($_FILES['Arquivo1']['tmp_name']);
+						
+						$largura_original = imagesx($imagem_temporaria);
+						$altura_original = imagesy($imagem_temporaria);
+
+						
+						/* Configura a nova largura */
+						$nova_largura = $largura ? $largura : floor(( $largura_original / $altura_original ) * $altura);
+
+						/* Configura a nova altura */
+						$nova_altura = $altura ? $altura : floor(( $altura_original / $largura_original ) * $largura);
+						
+						/* Retorna a nova imagem criada */
+						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+						
+						/* Copia a nova imagem da imagem antiga com o tamanho correto */
+						//imagealphablending($imagem_redimensionada, false);
+						//imagesavealpha($imagem_redimensionada, true);
+
+						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+						
+						//função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
+						imagepng($imagem_redimensionada, $diretorio . $data['file']['Arquivo1']);
+						
+					break;					
+					
+				endswitch;
+				
+				switch($_FILES['Arquivo2']['type']):
+					case 'image/jpg';
+					case 'image/jpeg';
+					case 'image/pjpeg';
+						$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo2']['tmp_name']);
+						
+						$largura_original = imagesx($imagem_temporaria);
+						
+						$altura_original = imagesy($imagem_temporaria);
+						
+						//echo "largura original: $largura_original - Altura original: $altura_original <br>";
+						
+						$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
+						
+						$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
+						
+						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+						
+						imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo2']);
+
+					break;
+
+					//Caso a imagem seja extensão PNG cai nesse CASE
+					case 'image/png':
+					case 'image/x-png';
+						$imagem_temporaria = imagecreatefrompng($_FILES['Arquivo2']['tmp_name']);
+						
+						$largura_original = imagesx($imagem_temporaria);
+						$altura_original = imagesy($imagem_temporaria);
+
+						
+						/* Configura a nova largura */
+						$nova_largura = $largura ? $largura : floor(( $largura_original / $altura_original ) * $altura);
+
+						/* Configura a nova altura */
+						$nova_altura = $altura ? $altura : floor(( $altura_original / $largura_original ) * $largura);
+						
+						/* Retorna a nova imagem criada */
+						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+						
+						/* Copia a nova imagem da imagem antiga com o tamanho correto */
+						//imagealphablending($imagem_redimensionada, false);
+						//imagesavealpha($imagem_redimensionada, true);
+
+						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+						
+						//função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
+						imagepng($imagem_redimensionada, $diretorio . $data['file']['Arquivo2']);
+						
+					break;					
+					
+				endswitch;
+				
+				switch($_FILES['Arquivo3']['type']):
+					case 'image/jpg';
+					case 'image/jpeg';
+					case 'image/pjpeg';
+						$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo3']['tmp_name']);
+						
+						$largura_original = imagesx($imagem_temporaria);
+						
+						$altura_original = imagesy($imagem_temporaria);
+						
+						//echo "largura original: $largura_original - Altura original: $altura_original <br>";
+						
+						$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
+						
+						$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
+						
+						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+						
+						imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo3']);
+
+					break;
+
+					//Caso a imagem seja extensão PNG cai nesse CASE
+					case 'image/png':
+					case 'image/x-png';
+						$imagem_temporaria = imagecreatefrompng($_FILES['Arquivo3']['tmp_name']);
+						
+						$largura_original = imagesx($imagem_temporaria);
+						$altura_original = imagesy($imagem_temporaria);
+
+						
+						/* Configura a nova largura */
+						$nova_largura = $largura ? $largura : floor(( $largura_original / $altura_original ) * $altura);
+
+						/* Configura a nova altura */
+						$nova_altura = $altura ? $altura : floor(( $altura_original / $largura_original ) * $largura);
+						
+						/* Retorna a nova imagem criada */
+						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+						
+						/* Copia a nova imagem da imagem antiga com o tamanho correto */
+						//imagealphablending($imagem_redimensionada, false);
+						//imagesavealpha($imagem_redimensionada, true);
+
+						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+						
+						//função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
+						imagepng($imagem_redimensionada, $diretorio . $data['file']['Arquivo3']);
+						
+					break;					
+					
+				endswitch;
+				
+				switch($_FILES['Arquivo4']['type']):
+					case 'image/jpg';
+					case 'image/jpeg';
+					case 'image/pjpeg';
+						$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo4']['tmp_name']);
+						
+						$largura_original = imagesx($imagem_temporaria);
+						
+						$altura_original = imagesy($imagem_temporaria);
+						
+						//echo "largura original: $largura_original - Altura original: $altura_original <br>";
+						
+						$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
+						
+						$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
+						
+						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+						
+						imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo4']);
+
+					break;
+
+					//Caso a imagem seja extensão PNG cai nesse CASE
+					case 'image/png':
+					case 'image/x-png';
+						$imagem_temporaria = imagecreatefrompng($_FILES['Arquivo4']['tmp_name']);
+						
+						$largura_original = imagesx($imagem_temporaria);
+						$altura_original = imagesy($imagem_temporaria);
+
+						
+						/* Configura a nova largura */
+						$nova_largura = $largura ? $largura : floor(( $largura_original / $altura_original ) * $altura);
+
+						/* Configura a nova altura */
+						$nova_altura = $altura ? $altura : floor(( $altura_original / $largura_original ) * $largura);
+						
+						/* Retorna a nova imagem criada */
+						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+						
+						/* Copia a nova imagem da imagem antiga com o tamanho correto */
+						//imagealphablending($imagem_redimensionada, false);
+						//imagesavealpha($imagem_redimensionada, true);
+
+						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+						
+						//função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
+						imagepng($imagem_redimensionada, $diretorio . $data['file']['Arquivo4']);
+						
+					break;					
+					
+				endswitch;				
+			
 
 
 				$data['camposfile'] = array_keys($data['file']);
@@ -920,6 +1056,7 @@ class Empresa extends CI_Controller {
 						exit();
 					}				
 				}
+			}
 				
         }
 
@@ -1088,6 +1225,1192 @@ class Empresa extends CI_Controller {
           */
 
         $this->load->view('empresa/tela_pagina', $data);
+
+        $this->load->view('basico/footer');
+    }
+
+    public function alterar_imagem_1($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = $this->input->post(array(
+			'idSis_Empresa',
+			'Texto_Arquivo1',
+        ), TRUE);
+		
+        $data['file'] = $this->input->post(array(
+            'idSis_Empresa',
+            'Arquivo1',
+		), TRUE);
+
+        if ($id) {
+            $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
+			$_SESSION['Documentos'] = $data['documentos'] = $this->Empresa_model->get_pagina($id, TRUE);
+        }
+		
+        if ($id)
+            $data['file']['idSis_Empresa'] = $id;
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$this->form_validation->set_rules('Texto_Arquivo1', 'Texto 1', 'required');
+		
+        if (isset($_FILES['Arquivo1']) && $_FILES['Arquivo1']['name']) {
+            
+			$data['file']['Arquivo1'] = $this->basico->renomeia_imagem_1($_FILES['Arquivo1']['name']);
+            $this->form_validation->set_rules('Arquivo1', 'Arquivo1', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo1', 'Arquivo1', 'required');
+        }
+
+        $data['titulo'] = 'Alterar Foto';
+        $data['form_open_path'] = 'empresa/alterar_imagem_1';
+        $data['readonly'] = 'readonly';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+		#run form validation
+		if ($this->form_validation->run() === FALSE) {
+			#load login view
+			$this->load->view('empresa/form_imagem_1', $data);
+		}
+	
+		else {
+			
+			$tiposPermitidos	= ['jpg','jpeg','pjpeg'];
+			$tamanho			= $_FILES['Arquivo1']['size'];
+			$extensao			= explode('.', $data['file']['Arquivo1']);
+			$extensao			= end($extensao);
+			
+			if (!in_array($extensao, $tiposPermitidos)) {
+				$data['msg'] = $this->basico->msg('<strong>O Tipo de Arquivo não é Permitido.</strong>', 'erro', TRUE, TRUE, TRUE);
+				$this->load->view('empresa/form_imagem_1', $data);
+				
+			} elseif(!($tamanho > 1000)){
+				$data['msg'] = $this->basico->msg('<strong>O Tamanho do Arquivo ultrapassa o máximo Permitido</strong>', 'erro', TRUE, TRUE, TRUE);
+				$this->load->view('empresa/form_imagem_1', $data);
+			}
+			else {
+					$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+					//$foto = $_FILES['Arquivo1']['name'];		
+					$foto = $data['file']['Arquivo1'];
+					$diretorio = $dir.$foto;
+
+				if (!move_uploaded_file($_FILES['Arquivo1']['tmp_name'], $diretorio)) {
+					$data['msg'] = $this->basico->msg('<strong>Arquivo não pode ser enviado</strong>', 'erro', TRUE, TRUE, TRUE);
+					$this->load->view('empresa/form_imagem_1', $data);
+					
+				} 
+				else {					
+					
+					$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+
+					switch($_FILES['Arquivo1']['type']):
+						case 'image/jpg';
+						case 'image/jpeg';
+						case 'image/pjpeg';
+					
+							list($largura, $altura, $tipo) = getimagesize($diretorio);
+							
+							$img = imagecreatefromjpeg($diretorio);
+
+							$thumb = imagecreatetruecolor(200, 200);
+							
+							imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
+							
+							imagejpeg($thumb, $dir2 . $foto);
+							imagedestroy($img);
+							imagedestroy($thumb);				      
+						
+						break;					
+
+						case 'image/png':
+						case 'image/x-png';
+							
+							list($largura, $altura, $tipo) = getimagesize($diretorio);
+							
+							$img = imagecreatefrompng($diretorio);
+
+							$thumb = imagecreatetruecolor(200, 200);
+							
+							imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
+							
+							imagejpeg($thumb, $dir2 . $foto);
+							imagedestroy($img);
+							imagedestroy($thumb);				      
+						
+						break;
+						
+					endswitch;					
+					
+					
+					$data['camposfile'] = array_keys($data['file']);
+					$data['idSis_Arquivo'] = $this->Empresa_model->set_arquivo($data['file']);
+
+					if ($data['idSis_Arquivo'] === FALSE) {
+						$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+						$this->basico->erro($msg);
+						$this->load->view('empresa/form_imagem_1', $data);
+					}
+					else {
+	
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
+						$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
+						
+						$data['query']['Arquivo1'] = $data['file']['Arquivo1'];
+						$data['anterior'] = $this->Empresa_model->get_pagina($data['query']['idSis_Empresa']);
+						$data['campos'] = array_keys($data['query']);
+
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Empresa'], TRUE);
+
+						if ($data['auditoriaitem'] && $this->Empresa_model->update_pagina($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
+							$data['msg'] = '?m=2';
+							redirect(base_url() . 'empresa/form_imagem_1/' . $data['file']['idSis_Empresa'] . $data['msg']);
+							exit();
+						} else {
+						
+							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo1'] . '');
+							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo1'] . '');						
+
+							if ($data['auditoriaitem'] === FALSE) {
+								$data['msg'] = '';
+							} else {
+								$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'UPDATE', $data['auditoriaitem']);
+								$data['msg'] = '?m=1';
+							}
+
+							redirect(base_url() . 'empresa/pagina/' . $data['file']['idSis_Empresa'] . $data['msg']);
+							exit();
+						}
+	
+					}
+				}	
+			}
+			
+		}
+			
+        $this->load->view('basico/footer');
+    }
+
+    public function alterar_imagem_2($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = $this->input->post(array(
+			'idSis_Empresa',
+			'Texto_Arquivo2',
+        ), TRUE);
+		
+        $data['file'] = $this->input->post(array(
+            'idSis_Empresa',
+            'Arquivo2',
+		), TRUE);
+
+        if ($id) {
+            $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
+			$_SESSION['Documentos'] = $data['documentos'] = $this->Empresa_model->get_pagina($id, TRUE);
+        }
+		
+        if ($id)
+            $data['file']['idSis_Empresa'] = $id;
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$this->form_validation->set_rules('Texto_Arquivo2', 'Texto 2', 'required');
+		
+        if (isset($_FILES['Arquivo2']) && $_FILES['Arquivo2']['name']) {
+            
+			$data['file']['Arquivo2'] = $this->basico->renomeia_imagem_2($_FILES['Arquivo2']['name']);
+            $this->form_validation->set_rules('Arquivo2', 'Arquivo2', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo2', 'Arquivo2', 'required');
+        }
+
+        $data['titulo'] = 'Alterar Foto';
+        $data['form_open_path'] = 'empresa/alterar_imagem_2';
+        $data['readonly'] = 'readonly';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            #load login view
+            $this->load->view('empresa/form_imagem_2', $data);
+        }
+        else {
+			
+			$tiposPermitidos	= ['jpg','jpeg','pjpeg'];
+			$tamanho			= $_FILES['Arquivo2']['size'];
+			$extensao			= explode('.', $data['file']['Arquivo2']);
+			$extensao			= end($extensao);
+			
+			if (!in_array($extensao, $tiposPermitidos)) {
+				$data['msg'] = $this->basico->msg('<strong>O Tipo de Arquivo não é Permitido.</strong>', 'erro', TRUE, TRUE, TRUE);
+				$this->load->view('empresa/form_imagem_2', $data);
+				
+			} elseif(!($tamanho > 1000)){
+				$data['msg'] = $this->basico->msg('<strong>O Tamanho do Arquivo ultrapassa o máximo Permitido</strong>', 'erro', TRUE, TRUE, TRUE);
+				$this->load->view('empresa/form_imagem_2', $data);
+			}
+            else {
+					$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+					//$foto = $_FILES['Arquivo2']['name'];		
+					$foto = $data['file']['Arquivo2'];
+					$diretorio = $dir.$foto;
+
+				if (!move_uploaded_file($_FILES['Arquivo2']['tmp_name'], $diretorio)) {
+					$data['msg'] = $this->basico->msg('<strong>Arquivo não pode ser enviado</strong>', 'erro', TRUE, TRUE, TRUE);
+					$this->load->view('empresa/form_imagem_2', $data);
+					
+				} 
+				else {					
+					
+					$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+
+					switch($_FILES['Arquivo2']['type']):
+						case 'image/jpg';
+						case 'image/jpeg';
+						case 'image/pjpeg';
+					
+							list($largura, $altura, $tipo) = getimagesize($diretorio);
+							
+							$img = imagecreatefromjpeg($diretorio);
+
+							$thumb = imagecreatetruecolor(200, 200);
+							
+							imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
+							
+							imagejpeg($thumb, $dir2 . $foto);
+							imagedestroy($img);
+							imagedestroy($thumb);				      
+						
+						break;					
+
+						case 'image/png':
+						case 'image/x-png';
+							
+							list($largura, $altura, $tipo) = getimagesize($diretorio);
+							
+							$img = imagecreatefrompng($diretorio);
+
+							$thumb = imagecreatetruecolor(200, 200);
+							
+							imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
+							
+							imagejpeg($thumb, $dir2 . $foto);
+							imagedestroy($img);
+							imagedestroy($thumb);				      
+						
+						break;
+						
+					endswitch;					
+					
+					
+					$data['camposfile'] = array_keys($data['file']);
+					$data['idSis_Arquivo'] = $this->Empresa_model->set_arquivo($data['file']);
+
+					if ($data['idSis_Arquivo'] === FALSE) {
+						$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+						$this->basico->erro($msg);
+						$this->load->view('empresa/form_imagem_2', $data);
+					}
+					else {
+
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
+						$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
+						
+						$data['query']['Arquivo2'] = $data['file']['Arquivo2'];
+						$data['anterior'] = $this->Empresa_model->get_pagina($data['query']['idSis_Empresa']);
+						$data['campos'] = array_keys($data['query']);
+
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Empresa'], TRUE);
+
+						if ($data['auditoriaitem'] && $this->Empresa_model->update_pagina($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
+							$data['msg'] = '?m=2';
+							redirect(base_url() . 'empresa/form_imagem_2/' . $data['file']['idSis_Empresa'] . $data['msg']);
+							exit();
+						} else {
+						
+							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo2'] . '');
+							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo2'] . '');							
+
+							if ($data['auditoriaitem'] === FALSE) {
+								$data['msg'] = '';
+							} else {
+								$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'UPDATE', $data['auditoriaitem']);
+								$data['msg'] = '?m=1';
+							}
+
+							redirect(base_url() . 'empresa/pagina/' . $data['file']['idSis_Empresa'] . $data['msg']);
+							exit();
+						}				
+					}
+				}	
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+
+    public function alterar_imagem_3($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = $this->input->post(array(
+			'idSis_Empresa',
+			'Texto_Arquivo3',
+        ), TRUE);
+		
+        $data['file'] = $this->input->post(array(
+            'idSis_Empresa',
+            'Arquivo3',
+		), TRUE);
+
+        if ($id) {
+            $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
+			$_SESSION['Documentos'] = $data['documentos'] = $this->Empresa_model->get_pagina($id, TRUE);
+        }
+		
+        if ($id)
+            $data['file']['idSis_Empresa'] = $id;
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$this->form_validation->set_rules('Texto_Arquivo3', 'Texto 1', 'required');
+		
+        if (isset($_FILES['Arquivo3']) && $_FILES['Arquivo3']['name']) {
+            
+			$data['file']['Arquivo3'] = $this->basico->renomeia_imagem_3($_FILES['Arquivo3']['name']);
+            $this->form_validation->set_rules('Arquivo3', 'Arquivo3', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo3', 'Arquivo3', 'required');
+        }
+
+        $data['titulo'] = 'Alterar Foto';
+        $data['form_open_path'] = 'empresa/alterar_imagem_3';
+        $data['readonly'] = 'readonly';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            #load login view
+            $this->load->view('empresa/form_imagem_3', $data);
+        }
+        else {
+			
+			$tiposPermitidos	= ['jpg','jpeg','pjpeg'];
+			$tamanho			= $_FILES['Arquivo3']['size'];
+			$extensao			= explode('.', $data['file']['Arquivo3']);
+			$extensao			= end($extensao);
+			
+			if (!in_array($extensao, $tiposPermitidos)) {
+				$data['msg'] = $this->basico->msg('<strong>O Tipo de Arquivo não é Permitido.</strong>', 'erro', TRUE, TRUE, TRUE);
+				$this->load->view('empresa/form_imagem_3', $data);
+				
+			} elseif(!($tamanho > 1000)){
+				$data['msg'] = $this->basico->msg('<strong>O Tamanho do Arquivo ultrapassa o máximo Permitido</strong>', 'erro', TRUE, TRUE, TRUE);
+				$this->load->view('empresa/form_imagem_3', $data);
+			}
+            else {
+					$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+					//$foto = $_FILES['Arquivo3']['name'];		
+					$foto = $data['file']['Arquivo3'];
+					$diretorio = $dir.$foto;
+
+				if (!move_uploaded_file($_FILES['Arquivo3']['tmp_name'], $diretorio)) {
+					$data['msg'] = $this->basico->msg('<strong>Arquivo não pode ser enviado</strong>', 'erro', TRUE, TRUE, TRUE);
+					$this->load->view('empresa/form_imagem_3', $data);
+					
+				} 
+				else {					
+					
+					$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+
+					switch($_FILES['Arquivo3']['type']):
+						case 'image/jpg';
+						case 'image/jpeg';
+						case 'image/pjpeg';
+					
+							list($largura, $altura, $tipo) = getimagesize($diretorio);
+							
+							$img = imagecreatefromjpeg($diretorio);
+
+							$thumb = imagecreatetruecolor(200, 200);
+							
+							imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
+							
+							imagejpeg($thumb, $dir2 . $foto);
+							imagedestroy($img);
+							imagedestroy($thumb);				      
+						
+						break;					
+
+						case 'image/png':
+						case 'image/x-png';
+							
+							list($largura, $altura, $tipo) = getimagesize($diretorio);
+							
+							$img = imagecreatefrompng($diretorio);
+
+							$thumb = imagecreatetruecolor(200, 200);
+							
+							imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
+							
+							imagejpeg($thumb, $dir2 . $foto);
+							imagedestroy($img);
+							imagedestroy($thumb);				      
+						
+						break;
+						
+					endswitch;					
+					
+					
+					$data['camposfile'] = array_keys($data['file']);
+					$data['idSis_Arquivo'] = $this->Empresa_model->set_arquivo($data['file']);
+
+					if ($data['idSis_Arquivo'] === FALSE) {
+						$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+						$this->basico->erro($msg);
+						$this->load->view('empresa/form_imagem_3', $data);
+					}
+					else {
+
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
+						$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
+						
+						$data['query']['Arquivo3'] = $data['file']['Arquivo3'];
+						$data['anterior'] = $this->Empresa_model->get_pagina($data['query']['idSis_Empresa']);
+						$data['campos'] = array_keys($data['query']);
+
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Empresa'], TRUE);
+
+						if ($data['auditoriaitem'] && $this->Empresa_model->update_pagina($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
+							$data['msg'] = '?m=2';
+							redirect(base_url() . 'empresa/form_imagem_3/' . $data['file']['idSis_Empresa'] . $data['msg']);
+							exit();
+						} else {
+						
+							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo3'] . '');
+							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo3'] . '');							
+
+							if ($data['auditoriaitem'] === FALSE) {
+								$data['msg'] = '';
+							} else {
+								$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'UPDATE', $data['auditoriaitem']);
+								$data['msg'] = '?m=1';
+							}
+
+							redirect(base_url() . 'empresa/pagina/' . $data['file']['idSis_Empresa'] . $data['msg']);
+							exit();
+						}				
+					}
+				}	
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+
+    public function alterar_imagem_4($id = FALSE) {
+		
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = $this->input->post(array(
+			'idSis_Empresa',
+			'Texto_Arquivo4',
+        ), TRUE);
+		
+        $data['file'] = $this->input->post(array(
+            'idSis_Empresa',
+            'Arquivo4',
+		), TRUE);
+
+        if ($id) {
+            $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
+			$_SESSION['Documentos'] = $data['documentos'] = $this->Empresa_model->get_pagina($id, TRUE);
+        }
+		
+        if ($id)
+            $data['file']['idSis_Empresa'] = $id;
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$this->form_validation->set_rules('Texto_Arquivo4', 'Texto 1', 'required');
+		
+        if (isset($_FILES['Arquivo4']) && $_FILES['Arquivo4']['name']) {
+            
+			$data['file']['Arquivo4'] = $this->basico->renomeia_imagem_4($_FILES['Arquivo4']['name']);
+            $this->form_validation->set_rules('Arquivo4', 'Arquivo4', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo4', 'Arquivo4', 'required');
+        }
+
+        $data['titulo'] = 'Alterar Foto';
+        $data['form_open_path'] = 'empresa/alterar_imagem_4';
+        $data['readonly'] = 'readonly';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            #load login view
+            $this->load->view('empresa/form_imagem_4', $data);
+        }
+        else {
+			
+			$tiposPermitidos	= ['jpg','jpeg','pjpeg'];
+			$tamanho			= $_FILES['Arquivo4']['size'];
+			$extensao			= explode('.', $data['file']['Arquivo4']);
+			$extensao			= end($extensao);
+			
+			if (!in_array($extensao, $tiposPermitidos)) {
+				$data['msg'] = $this->basico->msg('<strong>O Tipo de Arquivo não é Permitido.</strong>', 'erro', TRUE, TRUE, TRUE);
+				$this->load->view('empresa/form_imagem_4', $data);
+				
+			} elseif(!($tamanho > 1000)){
+				$data['msg'] = $this->basico->msg('<strong>O Tamanho do Arquivo ultrapassa o máximo Permitido</strong>', 'erro', TRUE, TRUE, TRUE);
+				$this->load->view('empresa/form_imagem_4', $data);
+			}
+            else {
+					$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+					//$foto = $_FILES['Arquivo4']['name'];		
+					$foto = $data['file']['Arquivo4'];
+					$diretorio = $dir.$foto;
+
+				if (!move_uploaded_file($_FILES['Arquivo4']['tmp_name'], $diretorio)) {
+					$data['msg'] = $this->basico->msg('<strong>Arquivo não pode ser enviado</strong>', 'erro', TRUE, TRUE, TRUE);
+					$this->load->view('empresa/form_imagem_4', $data);
+					
+				} 
+				else {					
+					
+					$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+
+					switch($_FILES['Arquivo4']['type']):
+						case 'image/jpg';
+						case 'image/jpeg';
+						case 'image/pjpeg';
+					
+							list($largura, $altura, $tipo) = getimagesize($diretorio);
+							
+							$img = imagecreatefromjpeg($diretorio);
+
+							$thumb = imagecreatetruecolor(200, 200);
+							
+							imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
+							
+							imagejpeg($thumb, $dir2 . $foto);
+							imagedestroy($img);
+							imagedestroy($thumb);				      
+						
+						break;					
+
+						case 'image/png':
+						case 'image/x-png';
+							
+							list($largura, $altura, $tipo) = getimagesize($diretorio);
+							
+							$img = imagecreatefrompng($diretorio);
+
+							$thumb = imagecreatetruecolor(200, 200);
+							
+							imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
+							
+							imagejpeg($thumb, $dir2 . $foto);
+							imagedestroy($img);
+							imagedestroy($thumb);				      
+						
+						break;
+						
+					endswitch;					
+					
+					
+					$data['camposfile'] = array_keys($data['file']);
+					$data['idSis_Arquivo'] = $this->Empresa_model->set_arquivo($data['file']);
+
+					if ($data['idSis_Arquivo'] === FALSE) {
+						$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+						$this->basico->erro($msg);
+						$this->load->view('empresa/form_imagem_4', $data);
+					}
+					else {
+
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
+						$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
+						
+						$data['query']['Arquivo4'] = $data['file']['Arquivo4'];
+						$data['anterior'] = $this->Empresa_model->get_pagina($data['query']['idSis_Empresa']);
+						$data['campos'] = array_keys($data['query']);
+
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Empresa'], TRUE);
+
+						if ($data['auditoriaitem'] && $this->Empresa_model->update_pagina($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
+							$data['msg'] = '?m=2';
+							redirect(base_url() . 'empresa/form_imagem_4/' . $data['file']['idSis_Empresa'] . $data['msg']);
+							exit();
+						} else {
+						
+							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo4'] . '');
+							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo4'] . '');							
+
+							if ($data['auditoriaitem'] === FALSE) {
+								$data['msg'] = '';
+							} else {
+								$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'UPDATE', $data['auditoriaitem']);
+								$data['msg'] = '?m=1';
+							}
+
+							redirect(base_url() . 'empresa/pagina/' . $data['file']['idSis_Empresa'] . $data['msg']);
+							exit();
+						}				
+					}
+				}	
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+	
+	public function alterar_slide_1($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = $this->input->post(array(
+			'idSis_Empresa',
+        ), TRUE);
+		
+        $data['file'] = $this->input->post(array(
+            'idSis_Empresa',
+            'Slide1',
+		), TRUE);
+
+        if ($id) {
+            $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
+			$_SESSION['Documentos'] = $data['documentos'] = $this->Empresa_model->get_pagina($id, TRUE);
+        }
+		
+        if ($id)
+            $data['file']['idSis_Empresa'] = $id;
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        if (isset($_FILES['Slide1']) && $_FILES['Slide1']['name']) {
+            
+			$data['file']['Slide1'] = $this->basico->renomeia_slide_1($_FILES['Slide1']['name']);
+            $this->form_validation->set_rules('Slide1', 'Slide1', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+        }
+        else {
+            $this->form_validation->set_rules('Slide1', 'Slide1', 'required');
+        }
+
+        $data['titulo'] = 'Alterar Foto';
+        $data['form_open_path'] = 'empresa/alterar_slide_1';
+        $data['readonly'] = 'readonly';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            #load login view
+            $this->load->view('empresa/form_slide_1', $data);
+        }
+        else {
+			
+			$tiposPermitidos	= ['jpg','jpeg','pjpeg'];
+			$tamanho			= $_FILES['Slide1']['size'];
+			$extensao			= explode('.', $data['file']['Slide1']);
+			$extensao			= end($extensao);
+			
+			if (!in_array($extensao, $tiposPermitidos)) {
+				$data['msg'] = $this->basico->msg('<strong>O Tipo de Arquivo não é Permitido.</strong>', 'erro', TRUE, TRUE, TRUE);
+				$this->load->view('empresa/form_slide_1', $data);
+				
+			} elseif(!($tamanho > 1000)){
+				$data['msg'] = $this->basico->msg('<strong>O Tamanho do Arquivo ultrapassa o máximo Permitido</strong>', 'erro', TRUE, TRUE, TRUE);
+				$this->load->view('empresa/form_slide_1', $data);
+			}
+            else {
+					$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+					//$foto = $_FILES['Slide1']['name'];		
+					$foto = $data['file']['Slide1'];
+					$diretorio = $dir.$foto;
+
+				if (!move_uploaded_file($_FILES['Slide1']['tmp_name'], $diretorio)) {
+					$data['msg'] = $this->basico->msg('<strong>Arquivo não pode ser enviado</strong>', 'erro', TRUE, TRUE, TRUE);
+					$this->load->view('empresa/form_slide_1', $data);
+					
+				} 
+				else {					
+					
+					$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+
+					switch($_FILES['Slide1']['type']):
+						case 'image/jpg';
+						case 'image/jpeg';
+						case 'image/pjpeg';
+					
+							list($largura, $altura, $tipo) = getimagesize($diretorio);
+							
+							$img = imagecreatefromjpeg($diretorio);
+
+							$thumb = imagecreatetruecolor(1902, 448);
+							
+							imagecopyresampled($thumb, $img, 0, 0, 0, 0, 1902, 448, $largura, $altura);
+							
+							imagejpeg($thumb, $dir2 . $foto);
+							imagedestroy($img);
+							imagedestroy($thumb);				      
+						
+						break;					
+						
+					endswitch;					
+					
+					
+					$data['camposfile'] = array_keys($data['file']);
+					$data['idSis_Arquivo'] = $this->Empresa_model->set_arquivo($data['file']);
+
+					if ($data['idSis_Arquivo'] === FALSE) {
+						$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+						$this->basico->erro($msg);
+						$this->load->view('empresa/form_slide_1', $data);
+					}
+					else {
+
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
+						$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
+						
+						$data['query']['Slide1'] = $data['file']['Slide1'];
+						$data['anterior'] = $this->Empresa_model->get_pagina($data['query']['idSis_Empresa']);
+						$data['campos'] = array_keys($data['query']);
+
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Empresa'], TRUE);
+
+						if ($data['auditoriaitem'] && $this->Empresa_model->update_pagina($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
+							$data['msg'] = '?m=2';
+							redirect(base_url() . 'empresa/form_slide_1/' . $data['file']['idSis_Empresa'] . $data['msg']);
+							exit();
+						} else {
+
+							if ($data['auditoriaitem'] === FALSE) {
+								$data['msg'] = '';
+							} else {
+								$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'UPDATE', $data['auditoriaitem']);
+								$data['msg'] = '?m=1';
+							}
+
+							redirect(base_url() . 'empresa/pagina/' . $data['file']['idSis_Empresa'] . $data['msg']);
+							exit();
+						}				
+					}
+				}	
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+
+    public function alterar_slide_2($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = $this->input->post(array(
+			'idSis_Empresa',
+        ), TRUE);
+		
+        $data['file'] = $this->input->post(array(
+            'idSis_Empresa',
+            'Slide2',
+		), TRUE);
+
+        if ($id) {
+            $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
+			$_SESSION['Documentos'] = $data['documentos'] = $this->Empresa_model->get_pagina($id, TRUE);
+        }
+		
+        if ($id)
+            $data['file']['idSis_Empresa'] = $id;
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        if (isset($_FILES['Slide2']) && $_FILES['Slide2']['name']) {
+            
+			$data['file']['Slide2'] = $this->basico->renomeia_slide_2($_FILES['Slide2']['name']);
+            $this->form_validation->set_rules('Slide2', 'Slide2', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+        }
+        else {
+            $this->form_validation->set_rules('Slide2', 'Slide2', 'required');
+        }
+
+        $data['titulo'] = 'Alterar Foto';
+        $data['form_open_path'] = 'empresa/alterar_slide_2';
+        $data['readonly'] = 'readonly';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            #load login view
+            $this->load->view('empresa/form_slide_2', $data);
+        }
+        else {
+			
+			$tiposPermitidos	= ['jpg','jpeg','pjpeg'];
+			$tamanho			= $_FILES['Slide2']['size'];
+			$extensao			= explode('.', $data['file']['Slide2']);
+			$extensao			= end($extensao);
+			
+			if (!in_array($extensao, $tiposPermitidos)) {
+				$data['msg'] = $this->basico->msg('<strong>O Tipo de Arquivo não é Permitido.</strong>', 'erro', TRUE, TRUE, TRUE);
+				$this->load->view('empresa/form_slide_2', $data);
+				
+			} elseif(!($tamanho > 1000)){
+				$data['msg'] = $this->basico->msg('<strong>O Tamanho do Arquivo ultrapassa o máximo Permitido</strong>', 'erro', TRUE, TRUE, TRUE);
+				$this->load->view('empresa/form_slide_2', $data);
+			}
+            else {
+					$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+					//$foto = $_FILES['Slide2']['name'];		
+					$foto = $data['file']['Slide2'];
+					$diretorio = $dir.$foto;
+
+				if (!move_uploaded_file($_FILES['Slide2']['tmp_name'], $diretorio)) {
+					$data['msg'] = $this->basico->msg('<strong>Arquivo não pode ser enviado</strong>', 'erro', TRUE, TRUE, TRUE);
+					$this->load->view('empresa/form_slide_2', $data);
+					
+				} 
+				else {					
+					
+					$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+
+					switch($_FILES['Slide2']['type']):
+						case 'image/jpg';
+						case 'image/jpeg';
+						case 'image/pjpeg';
+					
+							list($largura, $altura, $tipo) = getimagesize($diretorio);
+							
+							$img = imagecreatefromjpeg($diretorio);
+
+							$thumb = imagecreatetruecolor(1902, 448);
+							
+							imagecopyresampled($thumb, $img, 0, 0, 0, 0, 1902, 448, $largura, $altura);
+							
+							imagejpeg($thumb, $dir2 . $foto);
+							imagedestroy($img);
+							imagedestroy($thumb);				      
+						
+						break;
+						
+					endswitch;					
+					
+					
+					$data['camposfile'] = array_keys($data['file']);
+					$data['idSis_Arquivo'] = $this->Empresa_model->set_arquivo($data['file']);
+
+					if ($data['idSis_Arquivo'] === FALSE) {
+						$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+						$this->basico->erro($msg);
+						$this->load->view('empresa/form_slide_2', $data);
+					}
+					else {
+
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
+						$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
+						
+						$data['query']['Slide2'] = $data['file']['Slide2'];
+						$data['anterior'] = $this->Empresa_model->get_pagina($data['query']['idSis_Empresa']);
+						$data['campos'] = array_keys($data['query']);
+
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Empresa'], TRUE);
+
+						if ($data['auditoriaitem'] && $this->Empresa_model->update_pagina($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
+							$data['msg'] = '?m=2';
+							redirect(base_url() . 'empresa/form_slide_2/' . $data['file']['idSis_Empresa'] . $data['msg']);
+							exit();
+						} else {
+
+							if ($data['auditoriaitem'] === FALSE) {
+								$data['msg'] = '';
+							} else {
+								$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'UPDATE', $data['auditoriaitem']);
+								$data['msg'] = '?m=1';
+							}
+
+							redirect(base_url() . 'empresa/pagina/' . $data['file']['idSis_Empresa'] . $data['msg']);
+							exit();
+						}				
+					}
+				}	
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+	
+    public function alterar_texto_1($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = $this->input->post(array(
+			'idSis_Empresa',
+			'Texto_Arquivo1',
+			'Texto_Arquivo2',
+			'Texto_Arquivo3',
+			'Texto_Arquivo4',
+        ), TRUE);
+
+        if ($id) {
+            $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
+			$_SESSION['Documentos'] = $data['documentos'] = $this->Empresa_model->get_pagina($id, TRUE);
+        }
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$this->form_validation->set_rules('Texto_Arquivo1', 'Texto 1', 'required');
+		$this->form_validation->set_rules('Texto_Arquivo2', 'Texto 2', 'required');
+		$this->form_validation->set_rules('Texto_Arquivo3', 'Texto 3', 'required');
+		$this->form_validation->set_rules('Texto_Arquivo4', 'Texto 4', 'required');
+        
+        $data['titulo'] = 'Alterar Texto';
+        $data['form_open_path'] = 'empresa/alterar_texto_1';
+        $data['readonly'] = 'readonly';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            #load login view
+            $this->load->view('empresa/form_texto_1', $data);
+        }
+
+		else {
+
+			$data['query']['Texto_Arquivo1'] = $data['query']['Texto_Arquivo1'];
+			$data['query']['Texto_Arquivo2'] = $data['query']['Texto_Arquivo2'];
+			$data['query']['Texto_Arquivo3'] = $data['query']['Texto_Arquivo3'];
+			$data['query']['Texto_Arquivo4'] = $data['query']['Texto_Arquivo4'];
+			
+			$data['anterior'] = $this->Empresa_model->get_pagina($data['query']['idSis_Empresa']);
+			$data['campos'] = array_keys($data['query']);
+
+			$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Empresa'], TRUE);
+
+			if ($data['auditoriaitem'] && $this->Empresa_model->update_pagina($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
+				$data['msg'] = '?m=2';
+				redirect(base_url() . 'empresa/form_texto_1/' . $data['query']['idSis_Empresa'] . $data['msg']);
+				exit();
+			} else {
+
+				if ($data['auditoriaitem'] === FALSE) {
+					$data['msg'] = '';
+				} else {
+					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'UPDATE', $data['auditoriaitem']);
+					$data['msg'] = '?m=1';
+				}
+
+				redirect(base_url() . 'empresa/pagina/' . $data['query']['idSis_Empresa'] . $data['msg']);
+				exit();
+			}				
+		}
+         
+        $this->load->view('basico/footer');
+    }
+
+    public function alterar_imagem_1_BKP($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = $this->input->post(array(
+			'idSis_Empresa',
+			'Texto_Arquivo1',
+        ), TRUE);
+		
+        $data['file'] = $this->input->post(array(
+            'idSis_Empresa',
+            'Arquivo1',
+
+		), TRUE);
+
+        if ($id) {
+            $_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
+			$_SESSION['Documentos'] = $data['documentos'] = $this->Empresa_model->get_pagina($id, TRUE);
+        }
+		
+        if ($id)
+            $data['file']['idSis_Empresa'] = $id;
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        if (isset($_FILES['Arquivo1']) && $_FILES['Arquivo1']['name']) {
+            
+			$data['file']['Arquivo1'] = $this->basico->renomeia_imagem_1($_FILES['Arquivo1']['name']);
+            $this->form_validation->set_rules('Arquivo1', 'Arquivo1', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo1', 'Arquivo1', 'required');
+        }
+
+        $data['titulo'] = 'Alterar Foto';
+        $data['form_open_path'] = 'empresa/alterar_imagem_1';
+        $data['readonly'] = 'readonly';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            #load login view
+            $this->load->view('empresa/form_imagem_1', $data);
+        }
+        else {
+			
+            $config['upload_path'] = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+            $config['max_size'] = 1000;
+            $config['allowed_types'] = ['jpg','jpeg','pjpeg','png','x-png'];
+            $config['file_name'] = $data['file']['Arquivo1'];
+
+            $this->load->library('upload', $config);
+			
+            if (!$this->upload->do_upload('Arquivo1')) {
+                $data['msg'] = $this->basico->msg($this->upload->display_errors(), 'erro', FALSE, FALSE, FALSE);
+                $this->load->view('empresa/form_imagem_1', $data);
+            }
+            else {
+
+				$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+				$altura = "200";
+				$largura = "200";
+
+				switch($_FILES['Arquivo1']['type']):
+					case 'image/jpg';
+					case 'image/jpeg';
+					case 'image/pjpeg';
+						$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo1']['tmp_name']);
+						
+						$largura_original = imagesx($imagem_temporaria);
+						
+						$altura_original = imagesy($imagem_temporaria);
+						
+						
+						$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
+						
+						$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
+						
+						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+						
+						imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo1']);
+
+					break;
+
+					//Caso a imagem seja extensão PNG cai nesse CASE
+					case 'image/png':
+					case 'image/x-png';
+						$imagem_temporaria = imagecreatefrompng($_FILES['Arquivo1']['tmp_name']);
+						
+						$largura_original = imagesx($imagem_temporaria);
+						$altura_original = imagesy($imagem_temporaria);
+
+						
+						/* Configura a nova largura */
+						$nova_largura = $largura ? $largura : floor(( $largura_original / $altura_original ) * $altura);
+
+						/* Configura a nova altura */
+						$nova_altura = $altura ? $altura : floor(( $altura_original / $largura_original ) * $largura);
+						
+						/* Retorna a nova imagem criada */
+						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
+						
+						/* Copia a nova imagem da imagem antiga com o tamanho correto */
+						//imagealphablending($imagem_redimensionada, false);
+						//imagesavealpha($imagem_redimensionada, true);
+
+						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
+						
+						//função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
+						imagepng($imagem_redimensionada, $diretorio . $data['file']['Arquivo1']);
+						
+					break;					
+					
+				endswitch;                
+				
+				$data['camposfile'] = array_keys($data['file']);
+				$data['idSis_Arquivo'] = $this->Empresa_model->set_arquivo($data['file']);
+
+                if ($data['idSis_Arquivo'] === FALSE) {
+                    $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+                    $this->basico->erro($msg);
+                    $this->load->view('empresa/form_imagem_1', $data);
+                }
+				else {
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
+					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
+					
+					$data['query']['Arquivo1'] = $data['file']['Arquivo1'];
+					$data['anterior'] = $this->Empresa_model->get_pagina($data['query']['idSis_Empresa']);
+					$data['campos'] = array_keys($data['query']);
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Empresa'], TRUE);
+
+					if ($data['auditoriaitem'] && $this->Empresa_model->update_pagina($data['query'], $data['query']['idSis_Empresa']) === FALSE) {
+						$data['msg'] = '?m=2';
+						redirect(base_url() . 'empresa/form_imagem_1/' . $data['query']['idSis_Empresa'] . $data['msg']);
+						exit();
+					} else {
+
+						if ($data['auditoriaitem'] === FALSE) {
+							$data['msg'] = '';
+						} else {
+							$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'UPDATE', $data['auditoriaitem']);
+							$data['msg'] = '?m=1';
+						}
+
+						redirect(base_url() . 'empresa/pagina/' . $data['file']['idSis_Empresa'] . $data['msg']);
+						exit();
+					}				
+				}
+            }
+        }
 
         $this->load->view('basico/footer');
     }
