@@ -269,8 +269,8 @@ class Basico {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;		
-        $data = 'Logo_empresa' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
-		//$data = rand() . '_' . 'Logo_empresa' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+        //$data = 'Logo_empresa' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = rand() . '_' . 'Logo_empresa' . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
 		return $data;
     }
 	
@@ -278,8 +278,8 @@ class Basico {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;
-        $data = 'usuario' . '_' . $_SESSION['Usuario']['idSis_Usuario'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
-		//$data = rand() . '_' . 'usuario' . '_' . $_SESSION['Usuario']['idSis_Usuario'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+        //$data = 'usuario' . '_' . $_SESSION['Usuario']['idSis_Usuario'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = rand() . '_' . 'usuario' . '_' . $_SESSION['Usuario']['idSis_Usuario'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
 		return $data;
     }
 	
@@ -287,8 +287,8 @@ class Basico {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;
-        $data = 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
-		//$data = rand() . '_' . 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+        //$data = 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = rand() . '_' . 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
 		return $data;
     }	
 	

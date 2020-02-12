@@ -446,61 +446,46 @@ class Cliente extends CI_Controller {
             }
             else {
 
-				$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/';
-				$altura = "200";
-				$largura = "200";
+				$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/';		
+				$foto = $data['file']['Arquivo'];
+				$diretorio = $dir.$foto;					
+				$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/';
 
 				switch($_FILES['Arquivo']['type']):
 					case 'image/jpg';
 					case 'image/jpeg';
 					case 'image/pjpeg';
-						$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo']['tmp_name']);
+				
+						list($largura, $altura, $tipo) = getimagesize($diretorio);
 						
-						$largura_original = imagesx($imagem_temporaria);
-						
-						$altura_original = imagesy($imagem_temporaria);
-						
-						//echo "largura original: $largura_original - Altura original: $altura_original <br>";
-						
-						$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
-						
-						$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
-						
-						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
-						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
-						
-						imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo']);
+						$img = imagecreatefromjpeg($diretorio);
 
-					break;
+						$thumb = imagecreatetruecolor(200, 200);
+						
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
+						
+						imagejpeg($thumb, $dir2 . $foto);
+						imagedestroy($img);
+						imagedestroy($thumb);				      
+					
+					break;					
 
-					//Caso a imagem seja extensão PNG cai nesse CASE
 					case 'image/png':
 					case 'image/x-png';
-						$imagem_temporaria = imagecreatefrompng($_FILES['Arquivo']['tmp_name']);
 						
-						$largura_original = imagesx($imagem_temporaria);
-						$altura_original = imagesy($imagem_temporaria);
+						list($largura, $altura, $tipo) = getimagesize($diretorio);
+						
+						$img = imagecreatefrompng($diretorio);
 
+						$thumb = imagecreatetruecolor(200, 200);
 						
-						/* Configura a nova largura */
-						$nova_largura = $largura ? $largura : floor(( $largura_original / $altura_original ) * $altura);
-
-						/* Configura a nova altura */
-						$nova_altura = $altura ? $altura : floor(( $altura_original / $largura_original ) * $largura);
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
 						
-						/* Retorna a nova imagem criada */
-						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
-						
-						/* Copia a nova imagem da imagem antiga com o tamanho correto */
-						//imagealphablending($imagem_redimensionada, false);
-						//imagesavealpha($imagem_redimensionada, true);
-
-						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
-						
-						//função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
-						imagepng($imagem_redimensionada, $diretorio . $data['file']['Arquivo']);
-						
-					break;					
+						imagejpeg($thumb, $dir2 . $foto);
+						imagedestroy($img);
+						imagedestroy($thumb);				      
+					
+					break;
 					
 				endswitch;			
 			
@@ -528,6 +513,13 @@ class Cliente extends CI_Controller {
 						redirect(base_url() . 'cliente/form_perfil/' . $data['query']['idApp_Cliente'] . $data['msg']);
 						exit();
 					} else {
+					
+						if(null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/' . $_SESSION['Cliente']['Arquivo'] . '')){
+							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/' . $_SESSION['Cliente']['Arquivo'] . '');						
+						}
+						if(null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/' . $_SESSION['Cliente']['Arquivo'] . '')){
+							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/' . $_SESSION['Cliente']['Arquivo'] . '');						
+						}					
 
 						if ($data['auditoriaitem'] === FALSE) {
 							$data['msg'] = '';

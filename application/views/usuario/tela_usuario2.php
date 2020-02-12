@@ -49,7 +49,7 @@
 											<div class="row">	
 												<div class="col-sm-offset-2 col-md-10 " align="left"> 
 													<a href="<?php echo base_url() . 'usuario2/alterarlogo/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
-														<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/usuarios/' . $_SESSION['Usuario']['Arquivo'] . ''; ?>" 
+														<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/usuarios/miniatura/' . $_SESSION['Usuario']['Arquivo'] . ''; ?>" 
 														class="img-circle img-responsive" width='200'>
 													</a>	
 												</div>

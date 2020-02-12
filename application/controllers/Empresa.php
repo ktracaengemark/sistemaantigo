@@ -568,8 +568,8 @@ class Empresa extends CI_Controller {
             $this->load->view('empresa/form_logo', $data);
         }
         else {
-			
-            $config['upload_path'] = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+            
+			$config['upload_path'] = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
             $config['max_size'] = 1000;
             $config['allowed_types'] = ['jpg','jpeg','pjpeg','png','x-png'];
             $config['file_name'] = $data['file']['Arquivo'];
@@ -582,60 +582,47 @@ class Empresa extends CI_Controller {
             }
             else {
 
-				$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
-				$altura = "200";
-				$largura = "200";
+				//$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+				$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';		
+				$foto = $data['file']['Arquivo'];
+				$diretorio = $dir.$foto;					
+				$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
 
 				switch($_FILES['Arquivo']['type']):
 					case 'image/jpg';
 					case 'image/jpeg';
 					case 'image/pjpeg';
-						$imagem_temporaria = imagecreatefromjpeg($_FILES['Arquivo']['tmp_name']);
+				
+						list($largura, $altura, $tipo) = getimagesize($diretorio);
 						
-						$largura_original = imagesx($imagem_temporaria);
-						
-						$altura_original = imagesy($imagem_temporaria);
-						
-						
-						$nova_largura = $largura ? $largura : floor (($largura_original / $altura_original) * $altura);
-						
-						$nova_altura = $altura ? $altura : floor (($altura_original / $largura_original) * $largura);
-						
-						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
-						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
-						
-						imagejpeg($imagem_redimensionada, $diretorio . $data['file']['Arquivo']);
+						$img = imagecreatefromjpeg($diretorio);
 
-					break;
+						$thumb = imagecreatetruecolor(200, 200);
+						
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
+						
+						imagejpeg($thumb, $dir2 . $foto);
+						imagedestroy($img);
+						imagedestroy($thumb);				      
+					
+					break;					
 
-					//Caso a imagem seja extensão PNG cai nesse CASE
 					case 'image/png':
 					case 'image/x-png';
-						$imagem_temporaria = imagecreatefrompng($_FILES['Arquivo']['tmp_name']);
 						
-						$largura_original = imagesx($imagem_temporaria);
-						$altura_original = imagesy($imagem_temporaria);
+						list($largura, $altura, $tipo) = getimagesize($diretorio);
+						
+						$img = imagecreatefrompng($diretorio);
 
+						$thumb = imagecreatetruecolor(200, 200);
 						
-						/* Configura a nova largura */
-						$nova_largura = $largura ? $largura : floor(( $largura_original / $altura_original ) * $altura);
-
-						/* Configura a nova altura */
-						$nova_altura = $altura ? $altura : floor(( $altura_original / $largura_original ) * $largura);
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
 						
-						/* Retorna a nova imagem criada */
-						$imagem_redimensionada = imagecreatetruecolor($nova_largura, $nova_altura);
-						
-						/* Copia a nova imagem da imagem antiga com o tamanho correto */
-						//imagealphablending($imagem_redimensionada, false);
-						//imagesavealpha($imagem_redimensionada, true);
-
-						imagecopyresampled($imagem_redimensionada, $imagem_temporaria, 0, 0, 0, 0, $nova_largura, $nova_altura, $largura_original, $altura_original);
-						
-						//função imagejpeg que envia para o browser a imagem armazenada no parâmetro passado
-						imagepng($imagem_redimensionada, $diretorio . $data['file']['Arquivo']);
-						
-					break;					
+						imagejpeg($thumb, $dir2 . $foto);
+						imagedestroy($img);
+						imagedestroy($thumb);				      
+					
+					break;
 					
 				endswitch;                
 				
@@ -664,6 +651,13 @@ class Empresa extends CI_Controller {
 						exit();
 					} else {
 
+						if(null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Empresa']['Arquivo'] . '')){
+							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Empresa']['Arquivo'] . '');						
+						}
+						if(null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . '')){
+							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . '');						
+						}					
+					
 						if ($data['auditoriaitem'] === FALSE) {
 							$data['msg'] = '';
 						} else {
@@ -1358,7 +1352,7 @@ class Empresa extends CI_Controller {
 						$this->load->view('empresa/form_imagem_1', $data);
 					}
 					else {
-	
+
 						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
 						$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
 						
@@ -1374,9 +1368,13 @@ class Empresa extends CI_Controller {
 							exit();
 						} else {
 						
-							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo1'] . '');
-							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo1'] . '');						
-
+							if(null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo1'] . '')){
+									unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo1'] . '');						
+							}
+							if(null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo1'] . '')){
+									unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo1'] . '');						
+							}							
+							
 							if ($data['auditoriaitem'] === FALSE) {
 								$data['msg'] = '';
 							} else {
@@ -1387,7 +1385,6 @@ class Empresa extends CI_Controller {
 							redirect(base_url() . 'empresa/pagina/' . $data['file']['idSis_Empresa'] . $data['msg']);
 							exit();
 						}
-	
 					}
 				}	
 			}
