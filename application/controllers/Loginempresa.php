@@ -273,17 +273,14 @@ class Loginempresa extends CI_Controller {
 				
 				$pasta21 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/original/';
 				mkdir($pasta21, 0777);
+								
+				$pasta22 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/miniatura/';
+				mkdir($pasta22, 0777);				
 				
-				$pasta22 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/grande/';
-				mkdir($pasta22, 0777);
+				$arquivo_origem2 = 'arquivos/imagens/empresas/1/documentos/miniatura/SuaLogo.jpg';
+				$arquivo_destino2 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/miniatura/SuaLogo.jpg';
 				
-				$pasta23 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/miniatura/';
-				mkdir($pasta23, 0777);				
-				
-				$arquivo_origem = 'arquivos/imagens/empresas/1/documentos/miniatura/SuaLogo.jpg';
-				$arquivo_destino = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/miniatura/SuaLogo.jpg';
-				
-				copy($arquivo_origem, $arquivo_destino);
+				copy($arquivo_origem2, $arquivo_destino2);
 				
 				$pasta3 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/usuarios/';
 				mkdir($pasta3, 0777);
@@ -311,7 +308,21 @@ class Loginempresa extends CI_Controller {
 				$arquivo_origem4 = 'arquivos/imagens/empresas/1/clientes/miniatura/Foto.jpg';
 				$arquivo_destino4 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/clientes/miniatura/Foto.jpg';
 				
-				copy($arquivo_origem4, $arquivo_destino4);					
+				copy($arquivo_origem4, $arquivo_destino4);
+				
+				$pasta5 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/produtos/';
+				mkdir($pasta5, 0777);
+				
+				$pasta51 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/produtos/original/';
+				mkdir($pasta51, 0777);
+				
+				$pasta52 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/produtos/miniatura/';
+				mkdir($pasta52, 0777);				
+				
+				$arquivo_origem5 = 'arquivos/imagens/empresas/1/produtos/miniatura/fotoproduto.jpg';
+				$arquivo_destino5 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/produtos/miniatura/fotoproduto.jpg';
+				
+				copy($arquivo_origem5, $arquivo_destino5);				
 				
 				if ($data['idSis_Usuario'] === FALSE) {
 					$data['msg'] = '?m=2';
@@ -558,16 +569,13 @@ class Loginempresa extends CI_Controller {
 				$pasta21 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/original/';
 				mkdir($pasta21, 0777);
 				
-				$pasta22 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/grande/';
-				mkdir($pasta22, 0777);
+				$pasta22 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/miniatura/';
+				mkdir($pasta22, 0777);				
 				
-				$pasta23 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/miniatura/';
-				mkdir($pasta23, 0777);				
+				$arquivo_origem2 = 'arquivos/imagens/empresas/1/documentos/miniatura/SuaLogo.jpg';
+				$arquivo_destino2 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/miniatura/SuaLogo.jpg';
 				
-				$arquivo_origem = 'arquivos/imagens/empresas/1/documentos/miniatura/SuaLogo.jpg';
-				$arquivo_destino = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/documentos/miniatura/SuaLogo.jpg';
-				
-				copy($arquivo_origem, $arquivo_destino);
+				copy($arquivo_origem2, $arquivo_destino2);
 				
 				$pasta3 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/usuarios/';
 				mkdir($pasta3, 0777);
@@ -595,7 +603,21 @@ class Loginempresa extends CI_Controller {
 				$arquivo_origem4 = 'arquivos/imagens/empresas/1/clientes/miniatura/Foto.jpg';
 				$arquivo_destino4 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/clientes/miniatura/Foto.jpg';
 				
-				copy($arquivo_origem4, $arquivo_destino4);				
+				copy($arquivo_origem4, $arquivo_destino4);
+				
+				$pasta5 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/produtos/';
+				mkdir($pasta5, 0777);
+				
+				$pasta51 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/produtos/original/';
+				mkdir($pasta51, 0777);
+				
+				$pasta52 = $_UP['pasta'] = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/produtos/miniatura/';
+				mkdir($pasta52, 0777);				
+				
+				$arquivo_origem5 = 'arquivos/imagens/empresas/1/produtos/miniatura/fotoproduto.jpg';
+				$arquivo_destino5 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/produtos/miniatura/fotoproduto.jpg';
+				
+				copy($arquivo_origem5, $arquivo_destino5);					
 				
 				if ($data['idSis_Usuario'] === FALSE) {
 					$data['msg'] = '?m=2';

@@ -47,7 +47,7 @@
 					</div>
 					<div class="form-group">
 						<div class="row">
-							<!--<input type="hidden" name="idSis_Empresa" value="<?php echo $file['idSis_Empresa']; ?>">-->
+							<input type="hidden" name="idSis_Empresa" value="<?php echo $file['idSis_Empresa']; ?>">
 							<input type="hidden" name="idTab_Produto" value="<?php echo $file['idTab_Produto']; ?>">
 							<div class="col-md-6">                            
 								<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
