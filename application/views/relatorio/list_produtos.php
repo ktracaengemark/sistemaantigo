@@ -46,7 +46,8 @@
 
 					<thead>
 						<tr>                       																	
-							<!--<th class="active">Id.</th>-->
+							<th class="active" scope="col">Foto</th>
+							<th class="active">Id.</th>
 							<th class="active">Cod.</th>
 							<th class="active">Categoria</th>							
 							<th class="active">Tipo</th>
@@ -66,28 +67,22 @@
 					<tbody>
 						
 						<?php
-						foreach ($report->result_array() as $row) {
+						foreach ($report->result_array() as $row) {?>
 
-							#echo '<tr>';
-							echo '<tr class="clickable-row" data-href="' . base_url() . 'produtos/alterar/' . $row['idTab_Produto'] . '">';
-								#echo '<td>' . $row['idTab_Produto'] . '</td>';
-								echo '<td>' . $row['CodProd'] . '</td>';
-								echo '<td>' . $row['Prodaux3'] . '</td>';								
-								echo '<td>' . $row['Prodaux2'] . '</td>';
-								echo '<td>' . $row['Prodaux1'] . '</td>';
-								echo '<td>' . $row['Produtos'] . '</td>';
-								echo '<td>' . $row['UnidadeProduto'] . '</td>';								
-								echo '<td>' . $row['ValorProduto'] . '</td>';	
-								echo '<td>' . $row['TipoProduto'] . '</td>';													
-								#echo '<td>' . $row['Categoria'] . '</td>'; 							
-								#echo '<td>' . $row['ValorCompraProduto'] . '</td>';								
-								#echo '<td>' . $row['Convenio'] . '</td>';
-								#echo '<td>' . $row['Convdesc'] . '</td>';							
-								#echo '<td>' . $row['NomeFornecedor'] . '</td>';
-							echo '</tr>';
-						}
-						?>
 						
+					<tr class="clickable-row" data-href="<?php echo base_url() . 'produtos/alterar/' . $row['idTab_Produto'] . ''; ?>">
+						<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>
+						<td><?php echo $row['idTab_Produto'] ?></td>
+						<td><?php echo $row['CodProd'] ?></td>
+						<td><?php echo $row['Prodaux3'] ?></td>
+						<td><?php echo $row['Prodaux2'] ?></td>
+						<td><?php echo $row['Prodaux1'] ?></td>
+						<td><?php echo $row['Produtos'] ?></td>
+						<td><?php echo $row['UnidadeProduto'] ?></td>
+						<td><?php echo $row['ValorProduto'] ?></td>
+						<td><?php echo $row['TipoProduto'] ?></td>						
+						<?php } ?>
+
 					</tbody>
 
 				</table>
@@ -98,7 +93,8 @@
 
 					<thead>
 						<tr>                       																	
-							<!--<th class="active">Id.</th>-->
+							<th class="active" scope="col">Foto</th>
+							<th class="active">Id.</th>
 							<th class="active">Cod.</th>
 							<th class="active">Categoria</th>
 							<th class="active">Produto</th>
@@ -108,46 +104,32 @@
 							<th class="active">V/C/A</th>
 							<th class="active">Prod/Serv</th>
 							<th class="active">Unid.</th>
-							
 							<th class="active">Aux1</th>
 							<th class="active">Aux2</th>
 							<!--<th class="active">Custo</th>-->						
-						
 							<!--<th class="active">Fornec.</th>-->
-													
-																																								
 						</tr>
 					</thead>
 
 					<tbody>
-						
 						<?php
-						foreach ($report->result_array() as $row) {
+						foreach ($report->result_array() as $row) {?>
 
-							#echo '<tr>';
-							echo '<tr class="clickable-row" data-href="' . base_url() . 'produtos/alterar/' . $row['idTab_Produto'] . '">';
-								#echo '<td>' . $row['idTab_Produto'] . '</td>';
-								echo '<td>' . $row['CodProd'] . '</td>';
-								echo '<td>' . $row['Prodaux3'] . '</td>';
-								echo '<td>' . $row['Produtos'] . '</td>';
-								echo '<td>' . $row['NomeFornecedor'] . '</td>';
-								echo '<td>' . $row['Convdesc'] . '</td>';								
-								echo '<td>' . $row['ValorProduto'] . '</td>';	
-							
-								echo '<td>' . $row['TipoProduto'] . '</td>';													
-								echo '<td>' . $row['Categoria'] . '</td>'; 							
-								echo '<td>' . $row['UnidadeProduto'] . '</td>';
-								
-								echo '<td>' . $row['Prodaux1'] . '</td>';
-								echo '<td>' . $row['Prodaux2'] . '</td>';
-								#echo '<td>' . $row['ValorCompraProduto'] . '</td>';								
-							
-								#echo '<td>' . $row['NomeFornecedor'] . '</td>';	
-							
-							echo '</tr>';
-						}
-						?>
-						
+					<tr class="clickable-row" data-href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produto'] . ''; ?>">
+						<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>
+						<td><?php echo $row['idTab_Produto'] ?></td>
+						<td><?php echo $row['CodProd'] ?></td>
+						<td><?php echo $row['Prodaux3'] ?></td>
+						<td><?php echo $row['Produtos'] ?></td>
+						<td><?php echo $row['NomeFornecedor'] ?></td>
+						<td><?php echo $row['Convdesc'] ?></td>
+						<td><?php echo $row['ValorProduto'] ?></td>
+						<td><?php echo $row['TipoProduto'] ?></td>
+						<td><?php echo $row['Categoria'] ?></td>
+						<td><?php echo $row['UnidadeProduto'] ?></td>
+						<td><?php echo $row['Prodaux1'] ?></td>
+						<td><?php echo $row['Prodaux2'] ?></td>					
+						<?php } ?>						
 					</tbody>
 
 				</table>

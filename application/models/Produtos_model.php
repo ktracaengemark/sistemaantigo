@@ -25,6 +25,20 @@ class Produtos_model extends CI_Model {
         }
     }
 
+    public function set_arquivo($data) {
+
+        $query = $this->db->insert('Sis_Arquivo', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+	
     public function set_valor($data) {
 
         $query = $this->db->insert_batch('Tab_Valor', $data);

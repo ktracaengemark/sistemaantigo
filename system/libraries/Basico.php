@@ -265,6 +265,15 @@ class Basico {
         return preg_replace("/([^\w.]+)|(\.(?=.*\.))/", "_", $data);
     }
 
+    function renomeiaprodutos($data) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+        //$data = 'produto' . '_' . $_SESSION['Produtos']['idTab_Produto'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = rand() . '_' . 'produto' . '_' . $_SESSION['Produtos']['idTab_Produto'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		return $data;
+    }	
+	
     function renomeiaempresa($data) {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
