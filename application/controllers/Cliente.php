@@ -513,13 +513,17 @@ class Cliente extends CI_Controller {
 						redirect(base_url() . 'cliente/form_perfil/' . $data['query']['idApp_Cliente'] . $data['msg']);
 						exit();
 					} else {
-					
-						if(null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/' . $_SESSION['Cliente']['Arquivo'] . '')){
+						
+						if((null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/' . $_SESSION['Cliente']['Arquivo'] . ''))
+							&& (('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/' . $_SESSION['Cliente']['Arquivo'] . '')
+							!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/Foto.jpg'))){
 							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/' . $_SESSION['Cliente']['Arquivo'] . '');						
 						}
-						if(null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/' . $_SESSION['Cliente']['Arquivo'] . '')){
+						if((null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/' . $_SESSION['Cliente']['Arquivo'] . ''))
+							&& (('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/' . $_SESSION['Cliente']['Arquivo'] . '')
+							!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/Foto.jpg'))){
 							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/' . $_SESSION['Cliente']['Arquivo'] . '');						
-						}					
+						}						
 
 						if ($data['auditoriaitem'] === FALSE) {
 							$data['msg'] = '';
@@ -683,7 +687,7 @@ class Cliente extends CI_Controller {
             $this->form_validation->set_message('get_cliente', '<strong>Cliente</strong> não encontrado.');
             return FALSE;
         } else {
-            return TRUE;
+		return TRUE;
         }
     }
 

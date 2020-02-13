@@ -67,6 +67,22 @@ class Empresa_model extends CI_Model {
 
     }    
 
+    public function get_produtos($data) {
+        $query = $this->db->query('SELECT * FROM Tab_Produto WHERE idSis_Empresa = ' . $data);
+        $query = $query->result_array();
+
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query[0];
+    }
+	
     public function update_empresa($data, $id) {
 
         unset($data['Id']);

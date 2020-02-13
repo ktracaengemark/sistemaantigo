@@ -675,11 +675,15 @@ class Usuario extends CI_Controller {
 						redirect(base_url() . 'usuario/form_perfil/' . $data['query']['idSis_Usuario'] . $data['msg']);
 						exit();
 					} else {
-
-						if(null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/usuarios/original/' . $_SESSION['Usuario']['Arquivo'] . '')){
+						
+						if((null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/usuarios/original/' . $_SESSION['Usuario']['Arquivo'] . ''))
+							&& (('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/usuarios/original/' . $_SESSION['Usuario']['Arquivo'] . '')
+							!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/usuarios/original/SuaFoto.jpg'))){
 							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/usuarios/original/' . $_SESSION['Usuario']['Arquivo'] . '');						
 						}
-						if(null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/usuarios/miniatura/' . $_SESSION['Usuario']['Arquivo'] . '')){
+						if((null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/usuarios/miniatura/' . $_SESSION['Usuario']['Arquivo'] . ''))
+							&& (('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/usuarios/miniatura/' . $_SESSION['Usuario']['Arquivo'] . '')
+							!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/usuarios/miniatura/SuaFoto.jpg'))){
 							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/usuarios/miniatura/' . $_SESSION['Usuario']['Arquivo'] . '');						
 						}						
 						

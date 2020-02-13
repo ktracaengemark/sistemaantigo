@@ -1195,6 +1195,7 @@ class Empresa extends CI_Controller {
             $data['msg'] = '';
 
 		$_SESSION['Documentos'] = $data['documentos'] = $this->Empresa_model->get_pagina($id, TRUE);
+		$_SESSION['Produtos'] = $data['produtos'] = $this->Empresa_model->get_produtos($id, TRUE);
 		$_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
         #$data['query'] = $this->Paciente_model->get_paciente($prontuario, TRUE);
         $data['titulo'] = 'Prontuário ' ;

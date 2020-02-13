@@ -1,5 +1,5 @@
 <?php if ($msg) echo $msg; ?>
-<?php if ( !isset($evento) && isset($_SESSION['Empresa'] ) && isset($_SESSION['Documentos'] )) { ?>
+<?php if ( !isset($evento) && isset($_SESSION['Empresa'] ) && isset($_SESSION['Documentos'] ) && isset($_SESSION['Produtos'] )) { ?>
 
 	<div class="panel-body">
 		<div class="espaco-topo">
@@ -94,6 +94,62 @@
 				</div>
 			</div>								
 		</div>
+		
+		<div class="espaco-topo">
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<?php
+						$controle_ativo = 2;		
+						$controle_num_slide = 1;					//////////////// Mudar o "id da Empresa" //////////////////////////////////
+						require("database.php");
+						$result_carousel = "SELECT * FROM App_Carrossel WHERE idSis_Empresa = $idSis_Empresa ORDER BY idApp_Carrossel ASC";
+						$resultado_carousel = mysqli_query($conn, $result_carousel);
+						while($row_carousel = mysqli_fetch_assoc($resultado_carousel)){ 
+							if($controle_ativo == 2){ ?>
+								<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li><?php
+								$controle_ativo = 1;
+							}else{ ?>
+								<li data-target="#carousel-example-generic" data-slide-to="<?php echo $controle_num_slide; ?>"></li><?php
+								$controle_num_slide++;
+							}
+						}
+					?>						
+				</ol>
+
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+					<?php
+						$controle_ativo = 2;						////////// Mudar o "id da Empresa" //////////////////////////////////
+						
+						$result_carousel = "SELECT * FROM App_Carrossel WHERE idSis_Empresa = $idSis_Empresa ORDER BY idApp_Carrossel ASC";
+						$resultado_carousel = mysqli_query($conn, $result_carousel);
+						while($row_carousel = mysqli_fetch_assoc($resultado_carousel)){ 
+							if($controle_ativo == 2){ ?>
+								<div class="item active">						<!--///////////// Mudar ""Número da Empresa"" //////////////////////////////////-->
+									<img src="http://159.89.138.173/sistematestes3/arquivos/imagens/empresas/<?php echo $idSis_Empresa ?>/documentos/carrossel/<?php echo $row_carousel['Imagem']; ?>" alt="<?php echo $row_carousel['Texto']; ?>">
+								</div><?php
+								$controle_ativo = 1;
+							}else{ ?>
+								<div class="item">								<!--///////////////Mudar ""Número da Empresa"" //////////////////////////////////-->
+									<img src="http://159.89.138.173/sistematestes3/arquivos/imagens/empresas/<?php echo $idSis_Empresa ?>/documentos/carrossel/<?php echo $row_carousel['Imagem']; ?>" alt="<?php echo $row_carousel['Texto']; ?>">
+								</div> <?php
+							}
+						}
+					?>					
+				</div>
+
+				<!-- Controls -->
+				<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+			</div>
+		</div>	
 	</div>
 				
 
