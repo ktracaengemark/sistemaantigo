@@ -12,11 +12,6 @@ class Empresa_model extends CI_Model {
         $this->load->library('basico');
     }
 
-
-    ##############
-    #RESPONSÁVEL
-    ##############
-
     public function set_empresa($data) {
 
         $query = $this->db->insert('Sis_Empresa', $data);
@@ -245,4 +240,47 @@ class Empresa_model extends CI_Model {
         }
     }
 
+    public function list1_produtos($x) {
+
+        $query = $this->db->query('
+			SELECT 
+				TP.idTab_Produto,
+				TP.Produtos,
+				TP.Arquivo,
+				TP.VendaSite,
+				TV.ValorProduto
+			FROM 
+				Tab_Produto AS TP
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produto = TP.idTab_Produto
+			WHERE
+				TP.idSis_Empresa = ' . $_SESSION['Empresa']['idSis_Empresa'] . ' AND
+				TP.VendaSite = "S"
+			ORDER BY 
+				TP.Produtos ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+	
 }

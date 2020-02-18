@@ -1198,10 +1198,14 @@ class Empresa extends CI_Controller {
 		$_SESSION['Produtos'] = $data['produtos'] = $this->Empresa_model->get_produtos($id, TRUE);
 		$_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
         #$data['query'] = $this->Paciente_model->get_paciente($prontuario, TRUE);
-        $data['titulo'] = 'Prontuário ' ;
+
+		$data['titulo'] = 'Prontuário ' ;
         $data['panel'] = 'primary';
         $data['metodo'] = 4;
 
+		$data['q'] = $this->Empresa_model->list1_produtos(TRUE);
+		$data['list1'] = $this->load->view('empresa/list1_produtos', $data, TRUE);
+		
         $_SESSION['log']['idSis_Empresa'] = $data['resumo']['idSis_Empresa'] = $data['documentos']['idSis_Empresa'] = $data['query']['idSis_Empresa'];
 
         #$data['query']['Sexo'] = $this->Basico_model->get_sexo($data['query']['Sexo']);

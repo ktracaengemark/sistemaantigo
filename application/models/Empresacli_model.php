@@ -56,7 +56,7 @@ class Empresacli_model extends CI_Model {
         }
     }
 
-    public function delete_empresa($data) {
+public function delete_empresa($data) {
 
         $query = $this->db->query('SELECT idApp_OrcaTrata FROM App_OrcaTrata WHERE idSis_Empresa = ' . $data);
         $query = $query->result_array();

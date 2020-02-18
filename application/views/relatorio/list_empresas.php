@@ -17,6 +17,7 @@
 						<th class="active">Empresa</th>
 						<th class="active">Nº</th>
 						<th class="active">Categoria</th>
+						<th class="active">Site</th>
 					</tr>
 				</thead>
 				
@@ -25,12 +26,19 @@
 					<?php
 					foreach ($report->result_array() as $row) {
 					?>
-
-					<tr class="clickable-row" data-href="<?php echo base_url() . 'empresacli/prontuario/' . $row['idSis_Empresa'] . ''; ?>">
-						<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='50'></td>
+					<tr>	
+					<!--<tr class="clickable-row" data-href="<?php echo base_url() . 'empresacli/prontuario/' . $row['idSis_Empresa'] . ''; ?>">-->
+						<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $row['idSis_Empresa'] . '/documentos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>
 						<td><?php echo $row['NomeEmpresa'] ?></td>
 						<td><?php echo $row['idSis_Empresa'] ?></td>
-						<td><?php echo $row['CategoriaEmpresa'] ?></td>							
+						<td><?php echo $row['CategoriaEmpresa'] ?></td>
+						<td class="notclickable">
+							<a href="http://159.89.138.173/<?php echo '' . $row['Site'] . '' ?> "target="_blank">
+								<button type="button" class="btn btn-info">
+									<h4><span class="glyphicon glyphicon-picture"></span> Site </h4>
+								</button>
+							</a>
+						</td>						
 					</tr>						
 
 					<?php

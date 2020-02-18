@@ -18,7 +18,7 @@ class Login extends CI_Controller {
         $this->load->view('basico/headerlogin');
 
         if ($this->agent->is_browser()) {
-
+			
             if (
                     (preg_match("/(chrome|Firefox)/i", $this->agent->browser()) && $this->agent->version() < 30) ||
                     (preg_match("/(safari)/i", $this->agent->browser()) && $this->agent->version() < 6) ||
