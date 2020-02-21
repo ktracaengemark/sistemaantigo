@@ -24,7 +24,7 @@ class Produtos extends CI_Controller {
     }
 
     public function index() {
-
+		
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
         elseif ($this->input->get('m') == 2)
