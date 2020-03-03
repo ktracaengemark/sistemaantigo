@@ -5853,6 +5853,55 @@ class Relatorio extends CI_Controller {
 
     }
 
+    public function site($id) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+		$_SESSION['Documentos'] = $data['documentos'] = $this->Empresa_model->get_pagina($id, TRUE);
+		$_SESSION['Produtos'] = $data['produtos'] = $this->Empresa_model->get_produtos($id, TRUE);
+		$_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
+        #$data['query'] = $this->Paciente_model->get_paciente($prontuario, TRUE);
+
+		$data['titulo'] = 'Prontuário ' ;
+        $data['panel'] = 'primary';
+        $data['metodo'] = 4;
+
+		$data['prod'] = $this->Empresa_model->list1_produtos(TRUE);
+		$data['slides'] = $this->Empresa_model->list2_slides(TRUE);
+		$data['doc'] = $this->Empresa_model->list3_documentos(TRUE);
+		
+		$data['list1'] = $this->load->view('empresa/list1_produtos', $data, TRUE);
+		$data['list2'] = $this->load->view('empresa/list2_slides', $data, TRUE);		
+		$data['list3'] = $this->load->view('empresa/list3_logo_nav', $data, TRUE);
+		$data['list4'] = $this->load->view('empresa/list4_icone', $data, TRUE);		
+		
+        $_SESSION['log']['idSis_Empresa'] = $data['resumo']['idSis_Empresa'] = $data['documentos']['idSis_Empresa'] = $data['query']['idSis_Empresa'];
+
+        #$data['query']['Sexo'] = $this->Basico_model->get_sexo($data['query']['Sexo']);
+		#$data['documentos']['Arquivo1'] = $this->Empresa_model->get_pagina($data['documentos']['Arquivo1']);
+		#$data['documentos']['Arquivo2'] = $this->Empresa_model->get_pagina($data['documentos']['Arquivo2']);
+		$data['query']['Empresa'] = $this->Basico_model->get_empresa($data['query']['NomeEmpresa']);
+		$data['query']['CategoriaEmpresa'] = $this->Basico_model->get_categoriaempresa($data['query']['CategoriaEmpresa']);
+		#$data['query']['Empresa'] = $data['query']['Empresa'];
+
+
+        /*
+          echo "<pre>";
+          print_r($data['contatoempresa']);
+          echo "</pre>";
+          exit();
+          */
+
+        $this->load->view('relatorio/tela_site', $data);
+
+        $this->load->view('basico/footer');
+    }
+	
     public function loginempresa() {
 
         #$_SESSION['log']['cliente'] = $_SESSION['log']['nome_modulo'] =

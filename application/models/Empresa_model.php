@@ -282,5 +282,59 @@ class Empresa_model extends CI_Model {
             }
         }
     }
+
+    public function list2_slides($x) {
+
+        $query = $this->db->query('
+			SELECT 
+				TS.idApp_Slides,
+				TS.Slide1,
+				TS.Texto_Slide1
+			FROM 
+				App_Slides AS TS
+			WHERE
+				TS.idSis_Empresa = ' . $_SESSION['Empresa']['idSis_Empresa'] . '
+			ORDER BY 
+				TS.idApp_Slides ASC 
+		');
+
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+
+    public function list3_documentos($x) {
+
+        $query = $this->db->query('
+			SELECT 
+				TD.idApp_Documentos,
+				TD.Logo_Nav,
+				TD.Icone
+			FROM 
+				App_Documentos AS TD
+			WHERE
+				TD.idSis_Empresa = ' . $_SESSION['Empresa']['idSis_Empresa'] . '
+			ORDER BY 
+				TD.idApp_Documentos ASC 
+		');
+
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
 	
 }

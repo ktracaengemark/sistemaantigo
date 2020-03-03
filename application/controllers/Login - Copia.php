@@ -101,30 +101,12 @@ class Login extends CI_Controller {
             
 			#### Carrega os dados da Empresa nas vari?ves de sess?o ####
 
-			$query2 = $this->Login_model->check_documentos_log($empresa, TRUE);			
-			$_SESSION['log']['Icone'] = $query2['Icone'];
-            
-			$query3 = $this->Login_model->dados_empresa_log($empresa);			
-			$_SESSION['log']['NivelEmpresa'] = $query3['NivelEmpresa'];
-			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
-			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
-			/*  
-			  echo "<pre>";
-              print_r($_SESSION['log']['NivelEmpresa']);
-              echo "</pre>";
-			  echo "<pre>";
-			  print_r($_SESSION['log']['TabelasEmpresa']);
-              echo "</pre>";
-			  echo "<pre>";
-			  print_r($_SESSION['log']['DataDeValidade']);
-              echo "</pre>";
-              exit();
-			
 			$_SESSION['log']['NivelEmpresa'] = $this->Login_model->get_empresa($query['idSis_Usuario']);
 			$_SESSION['log']['TabelasEmpresa'] = $this->Login_model->get_empresa1($query['idSis_Usuario']);
 			$_SESSION['log']['DataDeValidade'] = $this->Login_model->get_empresa2($query['idSis_Usuario']);
-			*/
-			#echo "<pre>".print_r($query2)."</pre>";
+			
+			
+			#echo "<pre>".print_r($query)."</pre>";
             #exit();
 
             if ($query === FALSE) {
@@ -246,30 +228,11 @@ class Login extends CI_Controller {
 
             
 			#### Carrega os dados da Empresa nas vari?ves de sess?o ####
-			
-			$query2 = $this->Login_model->check_documentos_log($empresa, TRUE);
-			$_SESSION['log']['Icone'] = $query2['Icone'];
-			
-			$query3 = $this->Login_model->dados_empresa_log($empresa);			
-			$_SESSION['log']['NivelEmpresa'] = $query3['NivelEmpresa'];
-			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
-			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
-			/*  
-			  echo "<pre>";
-              print_r($_SESSION['log']['NivelEmpresa']);
-              echo "</pre>";
-			  echo "<pre>";
-			  print_r($_SESSION['log']['TabelasEmpresa']);
-              echo "</pre>";
-			  echo "<pre>";
-			  print_r($_SESSION['log']['DataDeValidade']);
-              echo "</pre>";
-              exit();
-			
+
 			$_SESSION['log']['NivelEmpresa'] = $this->Login_model->get_empresa($query['idSis_Usuario']);
 			$_SESSION['log']['TabelasEmpresa'] = $this->Login_model->get_empresa1($query['idSis_Usuario']);
 			$_SESSION['log']['DataDeValidade'] = $this->Login_model->get_empresa2($query['idSis_Usuario']);
-			*/
+			
 			#echo "<pre>".print_r($query)."</pre>";
             #exit();
 
@@ -392,30 +355,11 @@ class Login extends CI_Controller {
 
             
 			#### Carrega os dados da Empresa nas vari?ves de sess?o ####
-			
-			$query2 = $this->Login_model->check_documentos_log($empresa, TRUE);
-			$_SESSION['log']['Icone'] = $query2['Icone'];
 
-			$query3 = $this->Login_model->dados_empresa_log($empresa);			
-			$_SESSION['log']['NivelEmpresa'] = $query3['NivelEmpresa'];
-			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
-			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
-			/*  
-			  echo "<pre>";
-              print_r($_SESSION['log']['NivelEmpresa']);
-              echo "</pre>";
-			  echo "<pre>";
-			  print_r($_SESSION['log']['TabelasEmpresa']);
-              echo "</pre>";
-			  echo "<pre>";
-			  print_r($_SESSION['log']['DataDeValidade']);
-              echo "</pre>";
-              exit();
-						
 			$_SESSION['log']['NivelEmpresa'] = $this->Login_model->get_empresa($query['idSis_Usuario']);
 			$_SESSION['log']['TabelasEmpresa'] = $this->Login_model->get_empresa1($query['idSis_Usuario']);
 			$_SESSION['log']['DataDeValidade'] = $this->Login_model->get_empresa2($query['idSis_Usuario']);			
-			*/
+			
 			#echo "<pre>".print_r($query)."</pre>";
             #exit();
 
@@ -539,29 +483,11 @@ class Login extends CI_Controller {
             
 			#### Carrega os dados da Empresa nas vari?ves de sess?o ####
 
-			$query2 = $this->Login_model->check_documentos_log($empresa, TRUE);
-			$_SESSION['log']['Icone'] = $query2['Icone'];
-		
-			$query3 = $this->Login_model->dados_empresa_log($empresa);			
-			$_SESSION['log']['NivelEmpresa'] = $query3['NivelEmpresa'];
-			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
-			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
-			/*  
-			  echo "<pre>";
-              print_r($_SESSION['log']['NivelEmpresa']);
-              echo "</pre>";
-			  echo "<pre>";
-			  print_r($_SESSION['log']['TabelasEmpresa']);
-              echo "</pre>";
-			  echo "<pre>";
-			  print_r($_SESSION['log']['DataDeValidade']);
-              echo "</pre>";
-              exit();
-						
 			$_SESSION['log']['NivelEmpresa'] = $this->Login_model->get_empresa($query['idSis_Usuario']);
 			$_SESSION['log']['TabelasEmpresa'] = $this->Login_model->get_empresa1($query['idSis_Usuario']);
 			$_SESSION['log']['DataDeValidade'] = $this->Login_model->get_empresa2($query['idSis_Usuario']);
-			*/
+			
+			
 			#echo "<pre>".print_r($query)."</pre>";
             #exit();
 
@@ -684,35 +610,11 @@ class Login extends CI_Controller {
 
             
 			#### Carrega os dados da Empresa nas vari?ves de sess?o ####
-			
-			$query2 = $this->Login_model->check_documentos_log($empresa, TRUE);	
-			$_SESSION['log']['Icone'] = $query2['Icone'];
-		
-			$query3 = $this->Login_model->dados_empresa_log($empresa);			
-			$_SESSION['log']['NivelEmpresa'] = $query3['NivelEmpresa'];
-			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
-			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
-			$_SESSION['log']['Empresa'] = $query3['idSis_Empresa'];
-			/*  
-			  echo "<pre>";
-              print_r($_SESSION['log']['NivelEmpresa']);
-              echo "</pre>";
-			  echo "<pre>";
-			  print_r($_SESSION['log']['TabelasEmpresa']);
-              echo "</pre>";
-			  echo "<pre>";
-			  print_r($_SESSION['log']['DataDeValidade']);
-              echo "</pre>";
-			  echo "<pre>";
-			  print_r($_SESSION['log']['Empresa']);
-              echo "</pre>";			  
-              exit();
-						
 			$_SESSION['log']['Empresa'] = $this->Login_model->get_empresa0($query['idSis_Usuario']);
 			$_SESSION['log']['NivelEmpresa'] = $this->Login_model->get_empresa($query['idSis_Usuario']);
 			$_SESSION['log']['TabelasEmpresa'] = $this->Login_model->get_empresa1($query['idSis_Usuario']);
 			$_SESSION['log']['DataDeValidade'] = $this->Login_model->get_empresa2($query['idSis_Usuario']);			
-			*/
+			
 			#echo "<pre>".print_r($query)."</pre>";
             #exit();
 

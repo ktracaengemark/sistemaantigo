@@ -185,6 +185,12 @@
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/loginempresa"><span class="glyphicon glyphicon-pencil"></span> Cadastrar Empresa</a></li>
 							<li role="separator" class="divider"></li>
+							<li>
+								<a href="<?php echo base_url() ?>relatorio/site/<?php echo $_SESSION['log']['idSis_Empresa']; ?>">
+									<span class="glyphicon glyphicon-user"></span> Site
+								</a>
+							</li>
+							<li role="separator" class="divider"></li>							
 							<?php } ?>
 							<li><a href="<?php echo base_url() ?>relatorio/empresas"><span class="glyphicon glyphicon-home"></span> Empresas</a></li>
 							<li role="separator" class="divider"></li>

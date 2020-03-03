@@ -216,7 +216,8 @@ class Loginempresa extends CI_Controller {
 			$data['query']['DataDeValidade'] = $this->basico->mascara_data($data['query']['DataDeValidade'], 'mysql');
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');			
 			$data['query']['Senha'] = md5($data['query']['Senha']);
-            $data['query']['Codigo'] = md5(uniqid(time() . rand()));
+            //$data['query']['Senha'] = password_hash($data['query']['Senha'], PASSWORD_DEFAULT);
+			$data['query']['Codigo'] = md5(uniqid(time() . rand()));
 			$data['query']['Site'] = "sitedaempresa";
             #$data['query']['Inativo'] = 1;
             //ACESSO LIBERADO PRA QUEM REALIZAR O CADASTRO
@@ -513,6 +514,7 @@ class Loginempresa extends CI_Controller {
 			$data['query']['DataDeValidade'] = $this->basico->mascara_data($data['query']['DataDeValidade'], 'mysql');
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');			
 			$data['query']['Senha'] = md5($data['query']['Senha']);
+            //$data['query']['Senha'] = password_hash($data['query']['Senha'], PASSWORD_DEFAULT);
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));
 			$data['query']['Site'] = "sitedaempresa";
             #$data['query']['Inativo'] = 1;

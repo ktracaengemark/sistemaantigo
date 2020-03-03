@@ -94,6 +94,7 @@
 					<thead>
 						<tr>                       																	
 							<th class="active" scope="col">Foto</th>
+							<th class="active" scope="col">Editar</th>
 							<th class="active">Id.</th>
 							<th class="active">Cod.</th>
 							<th class="active">Categoria</th>
@@ -115,15 +116,26 @@
 						<?php
 						foreach ($report->result_array() as $row) {?>
 
-					<tr class="clickable-row" data-href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produto'] . ''; ?>">
-						<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>
+					<!--<tr class="clickable-row" data-href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produto'] . ''; ?>">-->
+					<tr>	
+						<td class="notclickable">
+							<a class="notclickable" href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produto'] . ''; ?>">
+								<img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'>
+							</a>
+						</td>
+						<td class="notclickable">
+							<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'produtos/alterar/' . $row['idTab_Produto'] . ''; ?>">
+								<span class="glyphicon glyphicon-edit notclickable"></span>
+							</a>
+						</td>						
+						<!--<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>-->
 						<td><?php echo $row['idTab_Produto'] ?></td>
 						<td><?php echo $row['CodProd'] ?></td>
 						<td><?php echo $row['Prodaux3'] ?></td>
 						<td><?php echo $row['Produtos'] ?></td>
 						<td><?php echo $row['NomeFornecedor'] ?></td>
 						<td><?php echo $row['Convdesc'] ?></td>
-						<td><?php echo $row['ValorProduto'] ?></td>
+						<td><?php echo number_format($row['ValorProduto'], 2, ',','.') ?></td>
 						<td><?php echo $row['TipoProduto'] ?></td>
 						<td><?php echo $row['Categoria'] ?></td>
 						<td><?php echo $row['UnidadeProduto'] ?></td>

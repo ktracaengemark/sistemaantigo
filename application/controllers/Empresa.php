@@ -1203,8 +1203,14 @@ class Empresa extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 4;
 
-		$data['q'] = $this->Empresa_model->list1_produtos(TRUE);
+		$data['prod'] = $this->Empresa_model->list1_produtos(TRUE);
+		$data['slides'] = $this->Empresa_model->list2_slides(TRUE);
+		$data['doc'] = $this->Empresa_model->list3_documentos(TRUE);
+		
 		$data['list1'] = $this->load->view('empresa/list1_produtos', $data, TRUE);
+		$data['list2'] = $this->load->view('empresa/list2_slides', $data, TRUE);		
+		$data['list3'] = $this->load->view('empresa/list3_logo_nav', $data, TRUE);
+		$data['list4'] = $this->load->view('empresa/list4_icone', $data, TRUE);		
 		
         $_SESSION['log']['idSis_Empresa'] = $data['resumo']['idSis_Empresa'] = $data['documentos']['idSis_Empresa'] = $data['query']['idSis_Empresa'];
 

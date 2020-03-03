@@ -72,6 +72,53 @@ class Login_model extends CI_Model {
 
     }
 	
+	public function check_documentos_log($empresa, $retorna = FALSE) {
+
+        $query2 = $this->db->query('SELECT * FROM App_Documentos WHERE '
+                . 'idSis_Empresa = "' . $empresa . '"'
+        );
+        #$query2 = $this->db->get_where('Sis_Usuario', $data);
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query2);
+          echo "</pre>";
+          exit();
+         */
+        if ($query2->num_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            if ($retorna === FALSE) {
+                return TRUE;
+            }
+            else {
+                $query2 = $query2->result_array();
+                return $query2[0];
+            }
+        }
+
+    }
+	
+	public function dados_empresa_log($empresa) {
+
+        $query3 = $this->db->query('SELECT * FROM Sis_Empresa WHERE '
+                . 'idSis_Empresa = "' . $empresa . '"'
+        );
+        #$query3 = $this->db->get_where('Sis_Usuario', $data);
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query3);
+          echo "</pre>";
+          exit();
+         */
+
+		$query3 = $query3->result_array();
+		return $query3[0];
+
+    }	
+	
 	public function check_dados_senha($empresa, $senha, $retorna = FALSE) {
 
         $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE '
