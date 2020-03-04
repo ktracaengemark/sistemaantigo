@@ -248,6 +248,7 @@ class Empresa_model extends CI_Model {
 				TP.Produtos,
 				TP.Arquivo,
 				TP.VendaSite,
+				TP.ValorProdutoSite,
 				TV.ValorProduto
 			FROM 
 				Tab_Produto AS TP
