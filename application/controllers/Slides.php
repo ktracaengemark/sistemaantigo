@@ -13,7 +13,7 @@ class Slides extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
       
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Slides_model', 'Prodaux1_model', 'Prodaux2_model', 'Fornecedor_model', 'Formapag_model', 'Relatorio_model'));
+        $this->load->model(array('Basico_model', 'Slides_model', 'Relatorio_model'));
         $this->load->driver('session');
 
         
@@ -48,67 +48,147 @@ class Slides extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'idSis_Usuario',
 			'idApp_Slides',
-			'Texto_Slide1',
+            'Slide1',
+			'Texto_Slide1',			
+			'idSis_Usuario',
 			'idSis_Empresa',
                 ), TRUE));
+		
+        $data['file'] = $this->input->post(array(
+			'idApp_Slides',
+			'idSis_Empresa',
+            'Arquivo',
+		), TRUE);
+
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-		$this->form_validation->set_rules('Texto_Slide1', 'Texto', 'required|trim');
+        if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
+            
+			$data['file']['Arquivo'] = $this->basico->nomeia_slides($_FILES['Arquivo']['name']);
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
+        }
 
-        $data['titulo'] = 'Slide';
+        $data['titulo'] = 'Alterar Foto';
         $data['form_open_path'] = 'slides/cadastrar';
-        $data['readonly'] = '';
-        $data['disabled'] = '';
+        $data['readonly'] = 'readonly';
         $data['panel'] = 'primary';
-        $data['metodo'] = 1;
-        $data['button'] =
-                '
-                <button class="btn btn-sm btn-primary" name="pesquisar" value="0" type="submit">
-                    <span class="glyphicon glyphicon-plus"></span> Cadastrar
-                </button>
-        ';
-
-        $data['sidebar'] = 'col-sm-3 col-md-2';
-        $data['main'] = 'col-sm-7 col-md-8';
+        $data['metodo'] = 2;
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('slides/form_texto_slides', $data);
-        } else {
+            #load login view
+            $this->load->view('slides/form_cad_slides', $data);
+        }
+        else {
 
-			#$data['query']['Texto_Slide1'] = trim(mb_strtoupper($data['query']['Texto_Slide1'], 'ISO-8859-1'));
-			$data['query']['Texto_Slide1'] = $data['query']['Texto_Slide1'];
-           # $data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));
-            $data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+            $config['upload_path'] = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+            $config['max_size'] = 1000;
+            $config['allowed_types'] = ['jpg','jpeg','pjpeg','png','x-png'];
+            $config['file_name'] = $data['file']['Arquivo'];
 
-            $data['campos'] = array_keys($data['query']);
-            $data['anterior'] = array();
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('Arquivo')) {
+                $data['msg'] = $this->basico->msg($this->upload->display_errors(), 'erro', FALSE, FALSE, FALSE);
+                $this->load->view('slides/form_cad_slides', $data);
+            }
+            else {
+			
+				$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';		
+				$foto = $data['file']['Arquivo'];
+				$diretorio = $dir.$foto;					
+				$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
 
-            $data['idApp_Slides'] = $this->Slides_model->set_slides($data['query']);
+				switch($_FILES['Arquivo']['type']):
+					case 'image/jpg';
+					case 'image/jpeg';
+					case 'image/pjpeg';
+				
+						list($largura, $altura, $tipo) = getimagesize($diretorio);
+						
+						$img = imagecreatefromjpeg($diretorio);
 
-            if ($data['idApp_Slides'] === FALSE) {
-                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+						$thumb = imagecreatetruecolor(1902, 448);
+						
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 1902, 448, $largura, $altura);
+						
+						imagejpeg($thumb, $dir2 . $foto);
+						imagedestroy($img);
+						imagedestroy($thumb);				      
+					
+					break;					
 
-                $this->basico->erro($msg);
-                $this->load->view('slides/form_texto_slides', $data);
-            } else {
+					case 'image/png':
+					case 'image/x-png';
+						
+						list($largura, $altura, $tipo) = getimagesize($diretorio);
+						
+						$img = imagecreatefrompng($diretorio);
 
-                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Slides'], FALSE);
-                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Slides', 'CREATE', $data['auditoriaitem']);
-                $data['msg'] = '?m=1';
+						$thumb = imagecreatetruecolor(1902, 448);
+						
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 1902, 448, $largura, $altura);
+						
+						imagejpeg($thumb, $dir2 . $foto);
+						imagedestroy($img);
+						imagedestroy($thumb);				      
+					
+					break;
+					
+				endswitch;			
+				
+				$data['query']['Slide1'] = $data['file']['Arquivo'];
+				$data['query']['Texto_Slide1'] = $data['query']['Texto_Slide1'];
+				$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+				$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 
-                redirect(base_url() . 'relatorio/slides' . $data['msg']);
-                exit();
+				$data['campos'] = array_keys($data['query']);
+				$data['anterior'] = array();
+
+				$data['idApp_Slides'] = $this->Slides_model->set_slides($data['query']);
+
+				if ($data['idApp_Slides'] === FALSE) {
+					$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+					$this->basico->erro($msg);
+					$this->load->view('slides/form_cad_slides', $data);
+				}				
+
+				else {
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Slides'], FALSE);
+					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Slides', 'CREATE', $data['auditoriaitem']);
+					
+					$data['file']['idApp_Slides'] = $data['idApp_Slides'];					
+					$data['file']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+					$data['camposfile'] = array_keys($data['file']);
+					$data['idSis_Arquivo'] = $this->Slides_model->set_arquivo($data['file']);
+
+					if ($data['idSis_Arquivo'] === FALSE) {
+						$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+						$this->basico->erro($msg);
+						$this->load->view('slides/form_cad_slides', $data);
+					} 
+					else {
+
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
+						$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);						
+
+						$data['msg'] = '?m=1';
+
+						redirect(base_url() . 'relatorio/slides' . $data['msg']);
+						exit();
+					}				
+				}
             }
         }
 
         $this->load->view('basico/footer');
     }
-
+	
     public function alterar($id = FALSE) {
 
         if ($this->input->get('m') == 1)
@@ -353,12 +433,12 @@ class Slides extends CI_Controller {
 
 						if((null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Slides']['Slide1'] . ''))
 							&& (('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Slides']['Slide1'] . '')
-							!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/fotoproduto.jpg'))){
+							!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/slide.jpg'))){
 							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Slides']['Slide1'] . '');						
 						}
 						if((null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Slides']['Slide1'] . ''))
 							&& (('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Slides']['Slide1'] . '')
-							!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/fotoproduto.jpg'))){
+							!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/slide.jpg'))){
 							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Slides']['Slide1'] . '');						
 						}						
 						

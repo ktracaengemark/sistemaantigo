@@ -280,6 +280,30 @@ class Basico {
 		$extensao	= '.' . $extensao;
 		$data = rand() . '_' . 'slides' . '_' . $_SESSION['Slides']['idApp_Slides'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
 		return $data;
+    }
+
+    function nomeia_slides($data) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+		$data = rand() . '_' . 'slides' . '_' . $_SESSION['log']['idSis_Empresa'] . $extensao;
+		return $data;
+    }
+	
+    function renomeia_logo_nav($data) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+		$data = rand() . '_' . 'logo_nav' . '_' . $_SESSION['Documentos']['idApp_Documentos'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		return $data;
+    }
+	
+    function renomeia_icone($data) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+		$data = rand() . '_' . 'icone' . '_' . $_SESSION['Documentos']['idApp_Documentos'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		return $data;
     }	
 	
     function renomeiaempresa($data) {
