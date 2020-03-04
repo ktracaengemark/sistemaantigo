@@ -6803,6 +6803,7 @@ exit();*/
 				TP.TipoProduto,
 				TP.CodProd,
 				TP.Produtos,
+				TP.ValorProdutoSite,
 				TP.Arquivo,
 				TP1.Prodaux1,
 				TP2.Prodaux2,

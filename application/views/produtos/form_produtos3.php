@@ -258,16 +258,16 @@
 										name="CodProd" value="<?php echo $produtos['CodProd'] ?>">
 							</div>
 
-							<!--
+							
 							<div class="col-md-2">
-								<label for="ValorCompraProduto">Custo:</label><br>
+								<label for="ValorProdutoSite">Valor Site:</label><br>
 								<div class="input-group">
 									<span class="input-group-addon" id="basic-addon1">R$</span>
 									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
-											name="ValorCompraProduto" value="<?php echo $produtos['ValorCompraProduto'] ?>">
+											name="ValorProdutoSite" value="<?php echo $produtos['ValorProdutoSite'] ?>">
 								</div>
 							</div>
-
+							<!--
 							<div class="col-md-2">
 								<label for="ValorProduto">Venda:</label><br>
 								<div class="input-group">
@@ -290,7 +290,7 @@
 									<div class="panel-heading">			
 										<div class="row">									
 											<div class="col-md-3">
-												<label for="ValorProduto">Valor:</label><br>
+												<label for="ValorProduto">Valor Balcao:</label><br>
 												<div class="input-group">
 													<span class="input-group-addon" id="basic-addon1">R$</span>
 													<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"

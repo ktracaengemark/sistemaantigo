@@ -53,7 +53,8 @@
 							<th class="active">Esp</th>
 							<th class="active">Produto</th>
 							<th class="active">Unid.</th>							
-							<th class="active">Valor</th>
+							<th class="active">Valor Site</th>
+							<th class="active">Valor Balcao</th>
 							<th class="active">V/C/A</th>
 							<!--<th class="active">Prod/Serv</th>
 							<th class="active">Custo</th>						
@@ -77,7 +78,8 @@
 								echo '<td>' . $row['Prodaux1'] . '</td>';
 								echo '<td>' . $row['Produtos'] . '</td>';
 								echo '<td>' . $row['UnidadeProduto'] . '</td>';								
-								echo '<td>' . $row['ValorProduto'] . '</td>';	
+								echo '<td>' . $row['ValorProdutoSite'] . '</td>';
+								echo '<td>' . $row['ValorProduto'] . '</td>';
 								echo '<td>' . $row['TipoProduto'] . '</td>';													
 								#echo '<td>' . $row['Categoria'] . '</td>'; 							
 								#echo '<td>' . $row['ValorCompraProduto'] . '</td>';								
@@ -104,7 +106,8 @@
 							<th class="active">Produto</th>
 							<th class="active">Fornecedor</th>
 							<th class="active">Descrição</th>
-							<th class="active">Valor</th>
+							<th class="active">Valor Site</th>
+							<th class="active">Valor Balcao</th>
 							<th class="active">V/C/A</th>
 							<th class="active">Prod/Serv</th>
 							<th class="active">Unid.</th>
@@ -129,7 +132,8 @@
 								echo '<td>' . $row['Prodaux3'] . '</td>';
 								echo '<td>' . $row['Produtos'] . '</td>';
 								echo '<td>' . $row['NomeFornecedor'] . '</td>';
-								echo '<td>' . $row['Convdesc'] . '</td>';									
+								echo '<td>' . $row['Convdesc'] . '</td>';
+								echo '<td>' . $row['ValorProdutoSite'] . '</td>';
 								echo '<td>' . $row['ValorProduto'] . '</td>';	
 								echo '<td>' . $row['TipoProduto'] . '</td>';													
 								echo '<td>' . $row['Categoria'] . '</td>'; 							

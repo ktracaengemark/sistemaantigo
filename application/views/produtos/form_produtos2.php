@@ -258,16 +258,16 @@
 								<input type="text" class="form-control" maxlength="25"
 										name="CodProd" value="<?php echo $produtos['CodProd'] ?>">
 							</div>
-							<!--
+							
 							<div class="col-md-2">
-								<label for="ValorCompraProduto">Custo:</label><br>
+								<label for="ValorProdutoSite">Valor Site:</label><br>
 								<div class="input-group">
 									<span class="input-group-addon" id="basic-addon1">R$</span>
 									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
-											name="ValorCompraProduto" value="<?php echo $produtos['ValorCompraProduto'] ?>">
+											name="ValorProdutoSite" value="<?php echo $produtos['ValorProdutoSite'] ?>">
 								</div>
 							</div>
-
+							<!--
 							<div class="col-md-2">
 								<label for="ValorProduto">Venda:</label><br>
 								<div class="input-group">
@@ -310,7 +310,7 @@
 										<div class="row">																					
 											
 											<div class="col-md-3">
-												<label for="ValorProduto">Valor :</label>
+												<label for="ValorProduto">Valor Balcao:</label>
 												<div class="input-group">
 													<span class="input-group-addon" id="basic-addon1">R$</span>
 													<input type="text" class="form-control Valor" id="ValorProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
@@ -357,7 +357,7 @@
 						<h4 class="panel-title">
 							<a class="accordion-toggle">
 								<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-								Valor 
+								Valor Balcao
 							</a>
 						</h4>
 					</div>
@@ -412,7 +412,7 @@
 											</div>
 											-->
 											<div class="col-md-3">
-												<label for="ValorProduto">Valor <?php echo $i ?>:</label>
+												<label for="ValorProduto">Valor Balcao <?php echo $i ?>:</label>
 												<div class="input-group">
 													<span class="input-group-addon" id="basic-addon1">R$</span>
 													<input type="text" class="form-control Valor" id="ValorProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
