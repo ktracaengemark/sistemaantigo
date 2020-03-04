@@ -273,6 +273,14 @@ class Basico {
 		$data = rand() . '_' . 'produto' . '_' . $_SESSION['Produtos']['idTab_Produto'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
 		return $data;
     }	
+
+    function renomeiaslides($data) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+		$data = rand() . '_' . 'slides' . '_' . $_SESSION['Slides']['idApp_Slides'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		return $data;
+    }	
 	
     function renomeiaempresa($data) {
 		$extensao	= explode('.', $data);

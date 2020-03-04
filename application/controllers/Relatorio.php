@@ -5101,7 +5101,7 @@ class Relatorio extends CI_Controller {
         $this->load->view('basico/footer');
 
     }
-
+	
 	public function produtos2() {
 
         if ($this->input->get('m') == 1)
@@ -5853,7 +5853,53 @@ class Relatorio extends CI_Controller {
 
     }
 
-    public function site($id) {
+	public function slides() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contatofornec com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = quotes_to_entities($this->input->post(array(
+            'idApp_Slides',
+			'Slide1',
+			'Texto_Slide1',
+
+        ), TRUE));
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+
+        $data['titulo'] = 'Slides';
+
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+			$data['bd']['idApp_Slides'] = $data['query']['idApp_Slides'];
+			$data['bd']['Slide1'] = $data['query']['Slide1'];
+			$data['bd']['Texto_Slide1'] = $data['query']['Texto_Slide1'];
+
+            $data['report'] = $this->Relatorio_model->list_slides($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list'] = $this->load->view('relatorio/list_slides', $data, TRUE);
+
+        }
+
+        $this->load->view('relatorio/tela_slides', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+	
+    public function site() {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -5862,9 +5908,9 @@ class Relatorio extends CI_Controller {
         else
             $data['msg'] = '';
 
-		$_SESSION['Documentos'] = $data['documentos'] = $this->Empresa_model->get_pagina($id, TRUE);
-		$_SESSION['Produtos'] = $data['produtos'] = $this->Empresa_model->get_produtos($id, TRUE);
-		$_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($id, TRUE);
+		$_SESSION['Documentos'] = $data['documentos'] = $this->Empresa_model->get_pagina($_SESSION['log']['idSis_Empresa'], TRUE);
+		$_SESSION['Produtos'] = $data['produtos'] = $this->Empresa_model->get_produtos($_SESSION['log']['idSis_Empresa'], TRUE);
+		$_SESSION['Empresa'] = $data['query'] = $this->Empresa_model->get_empresa($_SESSION['log']['idSis_Empresa'], TRUE);
         #$data['query'] = $this->Paciente_model->get_paciente($prontuario, TRUE);
 
 		$data['titulo'] = 'Prontuário ' ;
@@ -5875,10 +5921,10 @@ class Relatorio extends CI_Controller {
 		$data['slides'] = $this->Empresa_model->list2_slides(TRUE);
 		$data['doc'] = $this->Empresa_model->list3_documentos(TRUE);
 		
-		$data['list1'] = $this->load->view('empresa/list1_produtos', $data, TRUE);
-		$data['list2'] = $this->load->view('empresa/list2_slides', $data, TRUE);		
-		$data['list3'] = $this->load->view('empresa/list3_logo_nav', $data, TRUE);
-		$data['list4'] = $this->load->view('empresa/list4_icone', $data, TRUE);		
+		$data['list1'] = $this->load->view('relatorio/list1_produtos', $data, TRUE);
+		$data['list2'] = $this->load->view('relatorio/list2_slides', $data, TRUE);		
+		$data['list3'] = $this->load->view('relatorio/list3_logo_nav', $data, TRUE);
+		$data['list4'] = $this->load->view('relatorio/list4_icone', $data, TRUE);		
 		
         $_SESSION['log']['idSis_Empresa'] = $data['resumo']['idSis_Empresa'] = $data['documentos']['idSis_Empresa'] = $data['query']['idSis_Empresa'];
 

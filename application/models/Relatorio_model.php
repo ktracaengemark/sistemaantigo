@@ -7422,6 +7422,42 @@ exit();*/
 
     }
 
+	public function list_slides($data, $completo) {
+
+        $query = $this->db->query('
+            SELECT
+                idApp_Slides,
+				Slide1,
+				Texto_Slide1
+            FROM
+                App_Slides
+            WHERE
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY
+				idApp_Slides		
+        ');
+
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            foreach ($query->result() as $row) {
+
+            }
+
+            return $query;
+        }
+
+    }
+	
     public function select_cliente() {
 
         $query = $this->db->query('
