@@ -65,6 +65,8 @@ class Produtos2 extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
+			'Ativo',
+			'VendaSite',			
 			#'Aprovado',
         ), TRUE));
 
@@ -112,6 +114,8 @@ class Produtos2 extends CI_Controller {
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Prodaux33'] = $this->Produtos_model->select_prodaux33();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Cadastrar';
         $data['form_open_path'] = 'produtos/cadastrar1';
@@ -142,7 +146,23 @@ class Produtos2 extends CI_Controller {
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
-        /*
+        
+ 		(!$data['produtos']['Ativo']) ? $data['produtos']['Ativo'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
+        );
+        ($data['produtos']['Ativo'] == 'S') ?
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"'; 
+
+ 		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'VendaSite' => $this->basico->radio_checked($data['produtos']['VendaSite'], 'VendaSite', 'NS'),
+        );
+        ($data['produtos']['VendaSite'] == 'S') ?
+            $data['div']['VendaSite'] = '' : $data['div']['VendaSite'] = 'style="display: none;"';		
+		/*
           echo '<br>';
           echo "<pre>";
           print_r($data);
@@ -246,6 +266,8 @@ class Produtos2 extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
+			'Ativo',
+			'VendaSite',			
 			#'Aprovado',
         ), TRUE));
 
@@ -296,6 +318,8 @@ class Produtos2 extends CI_Controller {
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Prodaux33'] = $this->Produtos_model->select_prodaux33();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Cadastrar';
         $data['form_open_path'] = 'produtos2/cadastrar2';
@@ -326,7 +350,23 @@ class Produtos2 extends CI_Controller {
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';  
-        /*
+        
+ 		(!$data['produtos']['Ativo']) ? $data['produtos']['Ativo'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
+        );
+        ($data['produtos']['Ativo'] == 'S') ?
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"'; 
+
+ 		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'VendaSite' => $this->basico->radio_checked($data['produtos']['VendaSite'], 'VendaSite', 'NS'),
+        );
+        ($data['produtos']['VendaSite'] == 'S') ?
+            $data['div']['VendaSite'] = '' : $data['div']['VendaSite'] = 'style="display: none;"';		
+		/*
           echo '<br>';
           echo "<pre>";
           print_r($data);
@@ -431,6 +471,8 @@ class Produtos2 extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
+			'Ativo',
+			'VendaSite',			
 			#'Aprovado',
         ), TRUE));
 
@@ -478,6 +520,8 @@ class Produtos2 extends CI_Controller {
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Prodaux33'] = $this->Produtos_model->select_prodaux33();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Cadastrar';
         $data['form_open_path'] = 'produtos2/cadastrar3';
@@ -508,7 +552,23 @@ class Produtos2 extends CI_Controller {
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
-        /*
+        
+ 		(!$data['produtos']['Ativo']) ? $data['produtos']['Ativo'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
+        );
+        ($data['produtos']['Ativo'] == 'S') ?
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"'; 
+
+ 		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'VendaSite' => $this->basico->radio_checked($data['produtos']['VendaSite'], 'VendaSite', 'NS'),
+        );
+        ($data['produtos']['VendaSite'] == 'S') ?
+            $data['div']['VendaSite'] = '' : $data['div']['VendaSite'] = 'style="display: none;"';		
+		/*
           echo '<br>';
           echo "<pre>";
           print_r($data);
@@ -612,6 +672,8 @@ class Produtos2 extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
+			'Ativo',
+			'VendaSite',			
 			#'Aprovado',
         ), TRUE));
 
@@ -685,7 +747,9 @@ class Produtos2 extends CI_Controller {
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
-
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
+		
         $data['titulo'] = 'Editar';
         $data['form_open_path'] = 'produtos2/alterar2';
         $data['readonly'] = '';
@@ -715,7 +779,23 @@ class Produtos2 extends CI_Controller {
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';       
-        /*
+        
+ 		(!$data['produtos']['Ativo']) ? $data['produtos']['Ativo'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
+        );
+        ($data['produtos']['Ativo'] == 'S') ?
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"'; 
+
+ 		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'VendaSite' => $this->basico->radio_checked($data['produtos']['VendaSite'], 'VendaSite', 'NS'),
+        );
+        ($data['produtos']['VendaSite'] == 'S') ?
+            $data['div']['VendaSite'] = '' : $data['div']['VendaSite'] = 'style="display: none;"';		
+		/*
           echo '<br>';
           echo "<pre>";
           print_r($data);

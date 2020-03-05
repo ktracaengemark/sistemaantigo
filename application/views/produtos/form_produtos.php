@@ -76,37 +76,7 @@
 										}
 										?>
 									</select>
-								</div>
-								<!--
-								<div class="col-md-3">
-									<label for="Aprovado">Cadastrar?</label><br>
-									<div class="btn-group" data-toggle="buttons">
-										<?php
-										foreach ($select['Aprovado'] as $key => $row) {
-											(!$produtos['Aprovado']) ? $produtos['Aprovado'] = 'S' : FALSE;
-
-											if ($produtos['Aprovado'] == $key) {
-												echo ''
-												. '<label class="btn btn-warning active" name="radiobutton_Aprovado' . '" id="radiobutton_Aprovado' .  $key . '">'
-												. '<input type="radio" name="Aprovado' . '" id="radiobuttondinamico" '
-												. 'autocomplete="off" value="' . $key . '" checked>' . $row
-												. '</label>'
-												;
-											} else {
-												echo ''
-												. '<label class="btn btn-default" name="radiobutton_Aprovado' .  '" id="radiobutton_Aprovado' .  $key . '">'
-												. '<input type="radio" name="Aprovado' . '" id="radiobuttondinamico" '
-												. 'autocomplete="off" value="' . $key . '" >' . $row
-												. '</label>'
-												;
-											}
-										}
-										?>
-									</div>
-									<?php echo form_error('Aprovado'); ?>
-								</div>
-								-->
-								
+								</div>								
 								<div class="col-md-2 text-left">
 									<label for="Cadastrar">Cat/Tipo/Esp/Forn</label><br>
 									<div class="btn-group" data-toggle="buttons">
@@ -246,33 +216,83 @@
 								<input type="text" class="form-control" maxlength="25"
 										name="CodProd" value="<?php echo $produtos['CodProd'] ?>">
 							</div>
-							<!--
-							<div class="col-md-2">
-								<label for="ValorProdutoSite">Custo:</label><br>
-								<div class="input-group">
-									<span class="input-group-addon" id="basic-addon1">R$</span>
-									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
-											name="ValorProdutoSite" value="<?php echo $produtos['ValorProdutoSite'] ?>">
-								</div>
-							</div>
-							-->
 						</div>
-						<div class="row">	
-							<div class="col-md-3">
-								<label for="ValorProdutoSite">Valor no Site:</label><br>
-								<div class="input-group">
-									<span class="input-group-addon" id="basic-addon1">R$</span>
-									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
-											name="ValorProdutoSite" value="<?php echo $produtos['ValorProdutoSite'] ?>">
+						<div class="row">
+							<div class="col-md-2 text-left">
+								<label for="Ativo">Produto Ativo?</label><br>
+								<div class="btn-group" data-toggle="buttons">
+									<?php
+									foreach ($select['Ativo'] as $key => $row) {
+										if (!$produtos['Ativo']) $produtos['Ativo'] = 'N';
+
+										($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+										if ($produtos['Ativo'] == $key) {
+											echo ''
+											. '<label class="btn btn-warning active" name="Ativo_' . $hideshow . '">'
+											. '<input type="radio" name="Ativo" id="' . $hideshow . '" '
+											. 'autocomplete="off" value="' . $key . '" checked>' . $row
+											. '</label>'
+											;
+										} else {
+											echo ''
+											. '<label class="btn btn-default" name="Ativo_' . $hideshow . '">'
+											. '<input type="radio" name="Ativo" id="' . $hideshow . '" '
+											. 'autocomplete="off" value="' . $key . '" >' . $row
+											. '</label>'
+											;
+										}
+									}
+									?>
+
 								</div>
+								
 							</div>
+							<div id="Ativo" <?php echo $div['Ativo']; ?>>	
+								<div class="col-md-2 text-left">
+									<label for="VendaSite">Vender no Site?</label><br>
+									<div class="btn-group" data-toggle="buttons">
+										<?php
+										foreach ($select['VendaSite'] as $key => $row) {
+											if (!$produtos['VendaSite']) $produtos['VendaSite'] = 'N';
+
+											($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+											if ($produtos['VendaSite'] == $key) {
+												echo ''
+												. '<label class="btn btn-warning active" name="VendaSite_' . $hideshow . '">'
+												. '<input type="radio" name="VendaSite" id="' . $hideshow . '" '
+												. 'autocomplete="off" value="' . $key . '" checked>' . $row
+												. '</label>'
+												;
+											} else {
+												echo ''
+												. '<label class="btn btn-default" name="VendaSite_' . $hideshow . '">'
+												. '<input type="radio" name="VendaSite" id="' . $hideshow . '" '
+												. 'autocomplete="off" value="' . $key . '" >' . $row
+												. '</label>'
+												;
+											}
+										}
+										?>
+									</div>
+								</div>								
+								<div id="VendaSite" <?php echo $div['VendaSite']; ?>>	
+									<div class="col-md-3">
+										<label for="ValorProdutoSite">Valor no Site:</label><br>
+										<div class="input-group">
+											<span class="input-group-addon" id="basic-addon1">R$</span>
+											<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
+													name="ValorProdutoSite" value="<?php echo $produtos['ValorProdutoSite'] ?>">
+										</div>
+									</div>
+								</div>
+							</div>	
 						</div>
 					</div>	
 				</div>		
 			</div>
 
-
-			
 			<?php if (($_SESSION['log']['TabelasEmpresa'] == 1)) { ?>						
 			<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
 				<div class="panel panel-primary">

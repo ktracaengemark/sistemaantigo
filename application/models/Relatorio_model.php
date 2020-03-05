@@ -6805,6 +6805,8 @@ exit();*/
 				TP.Produtos,
 				TP.ValorProdutoSite,
 				TP.Arquivo,
+				TP.Ativo,
+				TP.VendaSite,
 				TP1.Prodaux1,
 				TP2.Prodaux2,
 				TP3.Prodaux3,

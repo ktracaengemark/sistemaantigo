@@ -53,7 +53,9 @@
 							<th class="active">Tipo</th>
 							<th class="active">Esp</th>
 							<th class="active">Produto</th>
-							<th class="active">Unid.</th>							
+							<th class="active">Unid.</th>
+							<th class="active">Ativo</th>
+							<th class="active">Vender no Site</th>
 							<th class="active">Valor Site</th>
 							<th class="active">Valor Balcao</th>
 							<th class="active">V/C/A</th>
@@ -80,6 +82,8 @@
 						<td><?php echo $row['Prodaux1'] ?></td>
 						<td><?php echo $row['Produtos'] ?></td>
 						<td><?php echo $row['UnidadeProduto'] ?></td>
+						<td><?php echo $row['Ativo'] ?></td>
+						<td><?php echo $row['VendaSite'] ?></td>
 						<td><?php echo number_format($row['ValorProdutoSite'], 2, ',','.') ?></td>
 						<td><?php echo number_format($row['ValorProduto'], 2, ',','.') ?></td>
 						<td><?php echo $row['TipoProduto'] ?></td>						
@@ -103,6 +107,8 @@
 							<th class="active">Produto</th>
 							<th class="active">Fornecedor</th>
 							<th class="active">Descricao</th>
+							<th class="active">Ativo</th>
+							<th class="active">Vender no Site</th>
 							<th class="active">Valor Site</th>
 							<th class="active">Valor Balcao</th>
 							<th class="active">V/C/A</th>
@@ -138,6 +144,8 @@
 						<td><?php echo $row['Produtos'] ?></td>
 						<td><?php echo $row['NomeFornecedor'] ?></td>
 						<td><?php echo $row['Convdesc'] ?></td>
+						<td><?php echo $row['Ativo'] ?></td>
+						<td><?php echo $row['VendaSite'] ?></td>
 						<td><?php echo number_format($row['ValorProdutoSite'], 2, ',','.') ?></td>
 						<td><?php echo number_format($row['ValorProduto'], 2, ',','.') ?></td>
 						<td><?php echo $row['TipoProduto'] ?></td>
