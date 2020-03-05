@@ -247,6 +247,7 @@ class Empresa_model extends CI_Model {
 				TP.idTab_Produto,
 				TP.Produtos,
 				TP.Arquivo,
+				TP.Ativo,
 				TP.VendaSite,
 				TP.ValorProdutoSite,
 				TV.ValorProduto
@@ -255,6 +256,7 @@ class Empresa_model extends CI_Model {
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produto = TP.idTab_Produto
 			WHERE
 				TP.idSis_Empresa = ' . $_SESSION['Empresa']['idSis_Empresa'] . ' AND
+				TP.Ativo = "S" AND
 				TP.VendaSite = "S"
 			ORDER BY 
 				TP.Produtos ASC 
