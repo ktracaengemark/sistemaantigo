@@ -5866,6 +5866,7 @@ class Relatorio extends CI_Controller {
             'idApp_Slides',
 			'Slide1',
 			'Texto_Slide1',
+			'Ativo',
 
         ), TRUE));
 
@@ -5879,6 +5880,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['idApp_Slides'] = $data['query']['idApp_Slides'];
 			$data['bd']['Slide1'] = $data['query']['Slide1'];
 			$data['bd']['Texto_Slide1'] = $data['query']['Texto_Slide1'];
+			$data['bd']['Ativo'] = $data['query']['Ativo'];
 
             $data['report'] = $this->Relatorio_model->list_slides($data['bd'],TRUE);
 
@@ -5917,9 +5919,9 @@ class Relatorio extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 4;
 
-		$data['prod'] = $this->Empresa_model->list1_produtos(TRUE);
-		$data['slides'] = $this->Empresa_model->list2_slides(TRUE);
-		$data['doc'] = $this->Empresa_model->list3_documentos(TRUE);
+		$data['prod'] = $this->Relatorio_model->list1_produtos(TRUE);
+		$data['slides'] = $this->Relatorio_model->list2_slides(TRUE);
+		$data['doc'] = $this->Relatorio_model->list3_documentos(TRUE);
 		
 		$data['list1'] = $this->load->view('relatorio/list1_produtos', $data, TRUE);
 		$data['list2'] = $this->load->view('relatorio/list2_slides', $data, TRUE);		
@@ -5928,13 +5930,8 @@ class Relatorio extends CI_Controller {
 		
         $_SESSION['log']['idSis_Empresa'] = $data['resumo']['idSis_Empresa'] = $data['documentos']['idSis_Empresa'] = $data['query']['idSis_Empresa'];
 
-        #$data['query']['Sexo'] = $this->Basico_model->get_sexo($data['query']['Sexo']);
-		#$data['documentos']['Arquivo1'] = $this->Empresa_model->get_pagina($data['documentos']['Arquivo1']);
-		#$data['documentos']['Arquivo2'] = $this->Empresa_model->get_pagina($data['documentos']['Arquivo2']);
 		$data['query']['Empresa'] = $this->Basico_model->get_empresa($data['query']['NomeEmpresa']);
 		$data['query']['CategoriaEmpresa'] = $this->Basico_model->get_categoriaempresa($data['query']['CategoriaEmpresa']);
-		#$data['query']['Empresa'] = $data['query']['Empresa'];
-
 
         /*
           echo "<pre>";

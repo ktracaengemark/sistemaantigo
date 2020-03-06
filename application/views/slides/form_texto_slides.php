@@ -24,6 +24,34 @@
 								<label for="Texto_Slide1">Texto:*</label><br>
 								<input type="text" class="form-control" maxlength="200"
 										name="Texto_Slide1" value="<?php echo $query['Texto_Slide1'] ?>">
+							</div>
+							<div class="col-md-2 text-left">
+								<label for="Ativo">Slide Ativo?</label><br>
+								<div class="btn-group" data-toggle="buttons">
+									<?php
+									foreach ($select['Ativo'] as $key => $row) {
+										if (!$query['Ativo']) $query['Ativo'] = 'N';
+
+										($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+										if ($query['Ativo'] == $key) {
+											echo ''
+											. '<label class="btn btn-warning active" name="Ativo_' . $hideshow . '">'
+											. '<input type="radio" name="Ativo" id="' . $hideshow . '" '
+											. 'autocomplete="off" value="' . $key . '" checked>' . $row
+											. '</label>'
+											;
+										} else {
+											echo ''
+											. '<label class="btn btn-default" name="Ativo_' . $hideshow . '">'
+											. '<input type="radio" name="Ativo" id="' . $hideshow . '" '
+											. 'autocomplete="off" value="' . $key . '" >' . $row
+											. '</label>'
+											;
+										}
+									}
+									?>
+								</div>
 							</div>							
 						</div>
 					</div>	

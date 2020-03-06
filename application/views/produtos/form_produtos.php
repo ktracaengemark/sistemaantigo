@@ -244,9 +244,7 @@
 										}
 									}
 									?>
-
 								</div>
-								
 							</div>
 							<div id="Ativo" <?php echo $div['Ativo']; ?>>	
 								<div class="col-md-2 text-left">

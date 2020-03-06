@@ -7431,7 +7431,8 @@ exit();*/
             SELECT
                 idApp_Slides,
 				Slide1,
-				Texto_Slide1
+				Texto_Slide1,
+				Ativo
             FROM
                 App_Slides
             WHERE
@@ -7459,6 +7460,108 @@ exit();*/
             return $query;
         }
 
+    }
+
+    public function list1_produtos($x) {
+
+        $query = $this->db->query('
+			SELECT 
+				TP.idTab_Produto,
+				TP.Produtos,
+				TP.Arquivo,
+				TP.Ativo,
+				TP.VendaSite,
+				TP.ValorProdutoSite,
+				TV.ValorProduto
+			FROM 
+				Tab_Produto AS TP
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produto = TP.idTab_Produto
+			WHERE
+				TP.idSis_Empresa = ' . $_SESSION['Empresa']['idSis_Empresa'] . ' AND
+				TP.Ativo = "S" AND
+				TP.VendaSite = "S"
+			ORDER BY 
+				TP.Produtos ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+
+    public function list2_slides($x) {
+
+        $query = $this->db->query('
+			SELECT 
+				TS.idApp_Slides,
+				TS.Slide1,
+				TS.Texto_Slide1,
+				TS.Ativo
+			FROM 
+				App_Slides AS TS
+			WHERE
+				TS.idSis_Empresa = ' . $_SESSION['Empresa']['idSis_Empresa'] . ' AND
+				TS.Ativo = "S"
+			ORDER BY 
+				TS.idApp_Slides ASC 
+		');
+
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+
+    public function list3_documentos($x) {
+
+        $query = $this->db->query('
+			SELECT 
+				TD.idApp_Documentos,
+				TD.Logo_Nav,
+				TD.Icone
+			FROM 
+				App_Documentos AS TD
+			WHERE
+				TD.idSis_Empresa = ' . $_SESSION['Empresa']['idSis_Empresa'] . '
+			ORDER BY 
+				TD.idApp_Documentos ASC 
+		');
+
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                $query = $query->result_array();
+                return $query;
+            }
+        }
     }
 	
     public function select_cliente() {

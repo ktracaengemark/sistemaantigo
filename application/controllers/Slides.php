@@ -50,7 +50,8 @@ class Slides extends CI_Controller {
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'idApp_Slides',
             'Slide1',
-			'Texto_Slide1',			
+			'Texto_Slide1',
+			'Ativo',
 			'idSis_Usuario',
 			'idSis_Empresa',
                 ), TRUE));
@@ -64,6 +65,8 @@ class Slides extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		
         if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
             
 			$data['file']['Arquivo'] = $this->basico->nomeia_slides($_FILES['Arquivo']['name']);
@@ -79,6 +82,14 @@ class Slides extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
+ 		(!$data['query']['Ativo']) ? $data['query']['Ativo'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Ativo' => $this->basico->radio_checked($data['query']['Ativo'], 'Ativo', 'NS'),
+        );
+        ($data['query']['Ativo'] == 'S') ?
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';		
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             #load login view
@@ -143,6 +154,7 @@ class Slides extends CI_Controller {
 				
 				$data['query']['Slide1'] = $data['file']['Arquivo'];
 				$data['query']['Texto_Slide1'] = $data['query']['Texto_Slide1'];
+				$data['query']['Ativo'] = $data['query']['Ativo'];
 				$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 				$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 
@@ -202,6 +214,7 @@ class Slides extends CI_Controller {
             'idSis_Usuario',
 			'idApp_Slides',
             'Texto_Slide1',
+			'Ativo',
 			'idSis_Empresa',
                 ), TRUE));
 
@@ -213,7 +226,8 @@ class Slides extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
 		$this->form_validation->set_rules('Texto_Slide1', 'Texto do Slide', 'trim');
-
+		
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
 
         $data['titulo'] = 'Editar Slide';
         $data['form_open_path'] = 'slides/alterar';
@@ -231,14 +245,23 @@ class Slides extends CI_Controller {
         $data['sidebar'] = 'col-sm-3 col-md-2';
         $data['main'] = 'col-sm-7 col-md-8';
 
+ 		(!$data['query']['Ativo']) ? $data['query']['Ativo'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Ativo' => $this->basico->radio_checked($data['query']['Ativo'], 'Ativo', 'NS'),
+        );
+        ($data['query']['Ativo'] == 'S') ?
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
+			
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('slides/form_texto_slides', $data);
         } else {
 
+           # $data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));			
 			$data['query']['Texto_Slide1'] = $data['query']['Texto_Slide1'];
-           # $data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));
-            $data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+            $data['query']['Ativo'] = $data['query']['Ativo'];
+			$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 
             $data['anterior'] = $this->Slides_model->get_slides($data['query']['idApp_Slides']);
@@ -284,6 +307,7 @@ class Slides extends CI_Controller {
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'idApp_Slides',
             'Texto_Slide1',
+			'Ativo',
 		), TRUE));
 				
         $data['file'] = $this->input->post(array(
@@ -299,6 +323,8 @@ class Slides extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		
         if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
             
 			$data['file']['Arquivo'] = $this->basico->renomeiaslides($_FILES['Arquivo']['name']);
@@ -314,6 +340,14 @@ class Slides extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
+ 		(!$data['query']['Ativo']) ? $data['query']['Ativo'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Ativo' => $this->basico->radio_checked($data['query']['Ativo'], 'Ativo', 'NS'),
+        );
+        ($data['query']['Ativo'] == 'S') ?
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             #load login view
@@ -392,6 +426,7 @@ class Slides extends CI_Controller {
 					
 					$data['query']['Slide1'] = $data['file']['Arquivo'];
 					$data['query']['Texto_Slide1'] = $data['query']['Texto_Slide1'];
+					$data['query']['Ativo'] = $data['query']['Ativo'];
 					$data['anterior'] = $this->Slides_model->get_slides($data['query']['idApp_Slides']);
 					$data['campos'] = array_keys($data['query']);
 
