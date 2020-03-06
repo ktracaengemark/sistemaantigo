@@ -206,13 +206,13 @@ class Slides extends CI_Controller {
                 ), TRUE));
 
 
-        if ($id)
-            $data['query'] = $this->Slides_model->get_slides($id);
-
+        if ($id){
+			$data['query'] = $this->Slides_model->get_slides($id);
+		}
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-		$this->form_validation->set_rules('Texto_Slide1', 'Texto_Slide1iação', 'required|trim');
+		$this->form_validation->set_rules('Texto_Slide1', 'Texto do Slide', 'trim');
 
 
         $data['titulo'] = 'Editar Slide';
@@ -266,40 +266,7 @@ class Slides extends CI_Controller {
 
         $this->load->view('basico/footer');
     }
-	
-	public function excluir($id = FALSE) {
-
-        if ($this->input->get('m') == 1)
-            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-        elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
-        else
-            $data['msg'] = '';
-
-			if ($id) {
-				$_SESSION['Slides'] = $this->Slides_model->get_slides($id, TRUE);
-			}		
-			$this->Slides_model->delete_slides($id);
-
-			$data['msg'] = '?m=1';
-			
-			if((null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Slides']['Slide1'] . ''))
-				&& (('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Slides']['Slide1'] . '')
-				!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/slide.jpg'))){
-				unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Slides']['Slide1'] . '');						
-			}
-			if((null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Slides']['Slide1'] . ''))
-				&& (('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Slides']['Slide1'] . '')
-				!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/slide.jpg'))){
-				unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Slides']['Slide1'] . '');						
-			}
-			
-			redirect(base_url() . 'relatorio/slides/' . $data['msg']);
-			exit();
-
-        $this->load->view('basico/footer');
-    }
-	
+		
     public function alterar_slide($id = FALSE) {
 
         if ($this->input->get('m') == 1)
@@ -308,11 +275,17 @@ class Slides extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-
+		/*
         $data['query'] = $this->input->post(array(
 			'idApp_Slides',
+			//'Texto_Slide1',
         ), TRUE);
-		
+		*/
+        $data['query'] = quotes_to_entities($this->input->post(array(
+			'idApp_Slides',
+            'Texto_Slide1',
+		), TRUE));
+				
         $data['file'] = $this->input->post(array(
             'idApp_Slides',
 			'idSis_Empresa',
@@ -321,10 +294,8 @@ class Slides extends CI_Controller {
 
         if ($id) {
             $_SESSION['Slides'] = $data['query'] = $this->Slides_model->get_slides($id, TRUE);
-        }
-		
-        if ($id)
-            $data['file']['idApp_Slides'] = $id;
+			$data['file']['idApp_Slides'] = $id;
+		}
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
@@ -420,6 +391,7 @@ class Slides extends CI_Controller {
 					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
 					
 					$data['query']['Slide1'] = $data['file']['Arquivo'];
+					$data['query']['Texto_Slide1'] = $data['query']['Texto_Slide1'];
 					$data['anterior'] = $this->Slides_model->get_slides($data['query']['idApp_Slides']);
 					$data['campos'] = array_keys($data['query']);
 
@@ -455,6 +427,39 @@ class Slides extends CI_Controller {
 				}
             }
         }
+
+        $this->load->view('basico/footer');
+    }
+
+	public function excluir($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+			if ($id) {
+				$_SESSION['Slides'] = $this->Slides_model->get_slides($id, TRUE);
+			}		
+			$this->Slides_model->delete_slides($id);
+
+			$data['msg'] = '?m=1';
+			
+			if((null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Slides']['Slide1'] . ''))
+				&& (('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Slides']['Slide1'] . '')
+				!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/slide.jpg'))){
+				unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Slides']['Slide1'] . '');						
+			}
+			if((null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Slides']['Slide1'] . ''))
+				&& (('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Slides']['Slide1'] . '')
+				!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/slide.jpg'))){
+				unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Slides']['Slide1'] . '');						
+			}
+			
+			redirect(base_url() . 'relatorio/slides/' . $data['msg']);
+			exit();
 
         $this->load->view('basico/footer');
     }

@@ -24,9 +24,9 @@
 										<div class="col-md-10">
 											<div class="row">	
 												<label for="Texto_Slide1">Texto:</label>
-												<input type="text" class="form-control" id="Texto_Slide1" maxlength="45" 
-														name="Texto_Slide1" value="<?php echo $_SESSION['Slides']['Texto_Slide1']; ?>">
-											</div>
+												<input type="text" class="form-control"  maxlength="200" 
+														name="Texto_Slide1" value="<?php echo $query['Texto_Slide1'] ?>">
+											</div>											
 										</div>
 									</div>	
 									<div class="col-md-6 ">	
