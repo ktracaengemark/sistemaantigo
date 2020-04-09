@@ -5,11 +5,11 @@
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoEntregues" aria-expanded="false" aria-controls="NaoEntregues">
-						<span class="glyphicon glyphicon-chevron-up"></span> Não Entregues
+					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoEntreguesBalcao" aria-expanded="false" aria-controls="NaoEntreguesBalcao">
+						<span class="glyphicon glyphicon-chevron-up"></span> Não Entregues - Venda No Balcão
 					</div>					
 				</div>
-				<div <?php echo $collapse; ?> id="NaoEntregues">
+				<div <?php echo $collapse; ?> id="NaoEntreguesBalcao">
 					<div class="panel-body">
 
 						<?php if (isset($list1)) echo $list1; ?>
@@ -18,6 +18,22 @@
 				</div>	
 			</div>
 		</div>
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoEntreguesOnline" aria-expanded="false" aria-controls="NaoEntreguesOnline">
+						<span class="glyphicon glyphicon-chevron-up"></span> Não Entregues - Venda Online
+					</div>					
+				</div>
+				<div <?php echo $collapse; ?> id="NaoEntreguesOnline">
+					<div class="panel-body">
+
+						<?php if (isset($list5)) echo $list5; ?>
+
+					</div>
+				</div>	
+			</div>
+		</div>		
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">

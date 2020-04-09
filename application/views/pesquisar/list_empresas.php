@@ -39,7 +39,7 @@
 							</a>
 						</td>						
 						<td class="notclickable">
-							<a href="http://159.89.138.173/<?php echo '' . $row['Site'] . '' ?> "target="_blank">
+							<a href="https://www.enkontraki.com.br/<?php echo '' . $row['Site'] . '' ?> "target="_blank">
 								<button type="button" class="btn btn-info">
 									<h4><span class="glyphicon glyphicon-picture"></span> Site</h4>
 								</button>

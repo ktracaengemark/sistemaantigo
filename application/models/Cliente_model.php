@@ -207,6 +207,43 @@ class Cliente_model extends CI_Model {
         }
 
         return $array;
+    }
+	
+	public function select_clienteonline($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+				idApp_Cliente,
+				CONCAT(NomeCliente) As NomeCliente				
+            FROM
+                App_Cliente					
+            WHERE
+                idSis_Empresa = "5"
+			ORDER BY 
+				NomeCliente ASC'
+    );
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+				idApp_Cliente,
+				CONCAT(NomeCliente) As NomeCliente			
+            FROM
+                App_Cliente					
+            WHERE
+                idSis_Empresa = "5"
+			ORDER BY 
+				NomeCliente ASC'
+    );
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idApp_Cliente] = $row->NomeCliente;
+            }
+        }
+
+        return $array;
     }	
 
 }

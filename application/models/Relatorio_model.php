@@ -6238,7 +6238,7 @@ exit();*/
 
             WHERE
 
-				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
 				' . $data['NomeCliente'] . '
 

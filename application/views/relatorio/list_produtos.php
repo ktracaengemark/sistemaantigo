@@ -41,9 +41,9 @@
 
 				</table>
 				<?php } ?>
+				<!--
 				<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 7) ) { ?>
 				<table class="table table-bordered table-condensed table-striped">
-
 					<thead>
 						<tr>                       																	
 							<th class="active" scope="col">Foto</th>
@@ -58,12 +58,7 @@
 							<th class="active">Vender no Site</th>
 							<th class="active">Valor Site</th>
 							<th class="active">Valor Balcao</th>
-							<th class="active">V/C/A</th>
-							<!--<th class="active">Prod/Serv</th>
-							<th class="active">Custo</th>						
-							<th class="active">Tabelas & Planos</th>
-							<th class="active">Descrição</th>						
-							<th class="active">Fornec.</th>-->																																
+							<th class="active">V/C/A</th>																																
 						</tr>
 					</thead>
 
@@ -93,8 +88,8 @@
 
 				</table>
 				<?php } ?>
-				
-				<?php if (($_SESSION['log']['NivelEmpresa'] >= 8) AND ($_SESSION['log']['NivelEmpresa'] <= 10) ) { ?>
+				-->
+				<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 10) ) { ?>
 				<table class="table table-bordered table-condensed table-striped">
 
 					<thead>

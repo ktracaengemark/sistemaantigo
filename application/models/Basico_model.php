@@ -570,6 +570,52 @@ class Basico_model extends CI_Model {
         }
     }
 	
+	public function get_tipofinanceiro($data) {
+
+        if (isset($data) && $data) {
+
+			$query = $this->db->query('
+				SELECT *
+					FROM
+						Tab_TipoFinanceiro
+					WHERE
+						idTab_TipoFinanceiro = "' . $data . '"
+				');
+
+            if ($query->num_rows() === 0) {
+                return '';
+            } else {
+                $query = $query->result_array();
+                return $query[0]['TipoFinanceiro'];
+            }
+        } else {
+            return '';
+        }
+    }
+	
+	public function get_cliente($data) {
+
+        if (isset($data) && $data) {
+
+			$query = $this->db->query('
+				SELECT *
+					FROM
+						App_Cliente
+					WHERE
+						idApp_Cliente = "' . $data . '"
+				');
+
+            if ($query->num_rows() === 0) {
+                return '';
+            } else {
+                $query = $query->result_array();
+                return $query[0]['NomeCliente'];
+            }
+        } else {
+            return '';
+        }
+    }	
+	
 	public function get_categoriaempresa($data) {
 
         if (isset($data) && $data) {
