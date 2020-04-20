@@ -3633,6 +3633,62 @@ exit();*/
 
     }
 
+	public function list_colaboradoronline($data, $completo) {
+		
+		$filtro1 = ($data['Inativo'] != '#') ? 'UOL.Inativo = "' . $data['Inativo'] . '" AND ' : FALSE;
+        $data['Nome'] = ($data['Nome']) ? ' AND U.idSis_Usuario = ' . $data['Nome'] : FALSE;
+		$data['Inativo'] = ($data['Inativo']) ? ' AND UOL.Inativo = ' . $data['Inativo'] : FALSE;
+        $data['Campo'] = (!$data['Campo']) ? 'U.Nome' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+
+        $query = $this->db->query('
+            SELECT
+                UOL.idSis_Usuario_Online,
+				UOL.idSis_Empresa,
+				UOL.idSis_Usuario,
+				UOL.Inativo,
+				UOL.Codigo,
+				UOL.DataCriacao,
+                U.Nome,
+				TSN.StatusSN
+            FROM
+                Sis_Usuario_Online AS UOL
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = UOL.idSis_Usuario
+					LEFT JOIN Tab_StatusSN AS TSN ON TSN.idTab_StatusSN = UOL.Inativo
+            WHERE
+
+				UOL.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				' . $data['Nome'] . '
+				' . $data['Inativo'] . '
+
+            ORDER BY
+                ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
+        ');
+
+        /*
+        #AND
+        #P.idApp_Profissional = OT.idApp_Cliente
+
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            foreach ($query->result() as $row) {
+				$row->DataCriacao = $this->basico->mascara_data($row->DataCriacao, 'barras');
+            }
+
+            return $query;
+        }
+
+    }
+		
 	public function list_empresafilial($data, $completo) {
 
         $data['Nome'] = ($data['Nome']) ? ' AND F.idSis_Usuario = ' . $data['Nome'] : FALSE;
@@ -4608,6 +4664,30 @@ exit();*/
 
         return $array;
     }
+	
+    public function select_colaboradoronline() {
+
+        $query = $this->db->query('
+            SELECT
+                UOL.idSis_Usuario,
+                U.Nome
+            FROM
+                Sis_Usuario_Online AS UOL
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = UOL.idSis_Usuario
+            WHERE
+                UOL.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+            ORDER BY
+                U.Nome ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idSis_Usuario] = $row->Nome;
+        }
+
+        return $array;
+    }	
 
     public function select_empresafilial() {
 

@@ -9,7 +9,7 @@
 						<span class="glyphicon glyphicon-chevron-up"></span> Não Entregues - Venda No Balcão
 					</div>					
 				</div>
-				<div <?php echo $collapse; ?> id="NaoEntreguesBalcao">
+				<div <?php echo $collapse1; ?> id="NaoEntreguesBalcao">
 					<div class="panel-body">
 
 						<?php if (isset($list1)) echo $list1; ?>
@@ -21,14 +21,14 @@
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoEntreguesOnline" aria-expanded="false" aria-controls="NaoEntreguesOnline">
-						<span class="glyphicon glyphicon-chevron-up"></span> Não Entregues - Venda Online
-					</div>					
+					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoDevolvidos" aria-expanded="false" aria-controls="NaoDevolvidos">
+						<span class="glyphicon glyphicon-chevron-up"></span> Não Devolvidos - Aluguel Online
+					</div>			
 				</div>
-				<div <?php echo $collapse; ?> id="NaoEntreguesOnline">
+				<div <?php echo $collapse1; ?> id="NaoDevolvidos">				
 					<div class="panel-body">
 
-						<?php if (isset($list5)) echo $list5; ?>
+						<?php if (isset($list3)) echo $list3; ?>
 
 					</div>
 				</div>	
@@ -37,19 +37,35 @@
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoDevolvidos" aria-expanded="false" aria-controls="NaoDevolvidos">
-						<span class="glyphicon glyphicon-chevron-up"></span> Não Devolvidos
-					</div>			
+					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoEntreguesOnline" aria-expanded="false" aria-controls="NaoEntreguesOnline">
+						<span class="glyphicon glyphicon-chevron-up"></span> Não Entregues - Venda Online
+					</div>					
 				</div>
-				<div <?php echo $collapse; ?> id="NaoDevolvidos">				
+				<div <?php echo $collapse1; ?> id="NaoEntreguesOnline">
 					<div class="panel-body">
 
-						<?php if (isset($list3)) echo $list3; ?>
+						<?php if (isset($list5)) echo $list5; ?>
 
 					</div>
 				</div>	
 			</div>
 		</div>
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoDevolvidosOnline" aria-expanded="false" aria-controls="NaoDevolvidosOnline">
+						<span class="glyphicon glyphicon-chevron-up"></span> Não Devolvidos - Aluguel Online
+					</div>			
+				</div>
+				<div <?php echo $collapse1; ?> id="NaoDevolvidosOnline">				
+					<div class="panel-body">
+
+						<?php if (isset($list6)) echo $list6; ?>
+
+					</div>
+				</div>	
+			</div>
+		</div>		
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -60,7 +76,7 @@
 						<span class="glyphicon glyphicon-search"></span> Fiado
 					</a>
 				</div>
-				<div <?php echo $collapse; ?> id="NaoRecebidos">	
+				<div <?php echo $collapse1; ?> id="NaoRecebidos">	
 					<div class="panel-body">
 
 						<?php if (isset($list2)) echo $list2; ?>

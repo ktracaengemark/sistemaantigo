@@ -1,5 +1,5 @@
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
-	<div class="col-md-12 ">
+	<div class="col-lg-12 col-md-12 col-sm-12 ">
 		<div class="navbar-header ">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar1">
 				<span class="sr-only">MENU</span>
@@ -7,7 +7,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a type="button" class="navbar-toggle btn btn-lg btn-primary  " href="<?php echo base_url() ?>usuario2/prontuario/<?php echo $_SESSION['log']['idSis_Usuario']; ?>"> 
+			<a type="button" class="navbar-brand btn btn-sm" href="<?php echo base_url() ?>usuario2/prontuario/<?php echo $_SESSION['log']['idSis_Usuario']; ?>"> 
 				 <?php echo $_SESSION['log']['Nome2']; ?>./<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
 			</a>
 		</div>
@@ -43,7 +43,7 @@
 				-->
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group">
-						<a type="button" class="btn btn-lg btn-info" role="button" href="<?php echo base_url(); ?>agenda">
+						<a type="button" class="btn btn-sm btn-info" role="button" href="<?php echo base_url(); ?>agenda">
 							<span class="glyphicon glyphicon-calendar"></span> 
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							Agendas
@@ -51,7 +51,7 @@
 							Agenda
 							<?php } ?>
 						</a>
-						<button type="button" class="btn btn-lg btn-info dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<button type="button" class="btn btn-sm btn-info dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">							
@@ -61,15 +61,15 @@
 				</li>						
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group">
-						<a type="button" class="btn btn-lg btn-primary" role="button" href="<?php echo base_url(); ?>orcatrata/cadastrar3">
+						<a type="button" class="btn btn-sm btn-primary" role="button" href="<?php echo base_url(); ?>orcatrata/cadastrar3">
 							<span class="glyphicon glyphicon-plus"></span> 
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-							Receitas
+							Receitas/Vendas
 							<?php } else {?>
 							Receitas
 							<?php } ?>
 						</a>
-						<button type="button" class="btn btn-lg btn-primary dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">							
@@ -91,15 +91,15 @@
 				</li>
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group">
-						<a type="button" class="btn btn-lg btn-danger" role="button" href="<?php echo base_url(); ?>orcatrata/cadastrardesp">
+						<a type="button" class="btn btn-sm btn-danger" role="button" href="<?php echo base_url(); ?>orcatrata/cadastrardesp">
 							<span class="glyphicon glyphicon-plus"></span> 
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-							Despesas
+							Despesas/Compras
 							<?php } else {?>
 							Despesas
 							<?php } ?>
 						</a>
-						<button type="button" class="btn btn-lg btn-danger dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<button type="button" class="btn btn-sm btn-danger dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">							
@@ -122,7 +122,7 @@
 				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 				<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group">
-						<button type="button" class="btn btn-lg btn-warning dropdown-toggle" data-toggle="dropdown">
+						<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
 							<span class="glyphicon glyphicon-pencil"></span> Cadastros & Relatórios  <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">							
@@ -149,7 +149,7 @@
 				<?php } ?>
 				<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">								
 					<div class="btn-group">
-						<button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown">
+						<button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
 							
 							<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) && ($_SESSION['log']['idSis_Empresa'] != 5))  { ?>
 								<span class="glyphicon glyphicon-hand-right"></span>

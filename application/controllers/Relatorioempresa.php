@@ -334,6 +334,77 @@ class Relatorioempresa extends CI_Controller {
 
 
     }
+
+	public function colaboradoronline() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = quotes_to_entities($this->input->post(array(
+            'Nome',
+			'Inativo',
+			'DataCriacao',
+            'Ordenamento',
+            'Campo',
+        ), TRUE));
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+
+
+        $data['select']['Campo'] = array(
+            'U.Nome' => 'Nome do Colaborador',
+			'UOL.DataCriacao' => 'Data do Cadastro',
+			'UOL.Inativo' => 'Ativo',
+        );
+		
+        $data['select']['Inativo'] = array(
+			'0' => 'TODOS',            
+			'2' => 'Sim',
+			'1' => 'Não',
+        );
+		
+        $data['select']['Ordenamento'] = array(
+            'ASC' => 'Crescente',
+            'DESC' => 'Decrescente',
+        );
+
+        $data['select']['Nome'] = $this->Relatorioempresa_model->select_colaboradoronline();
+		#$data['select']['Inativo'] = $this->Basico_model->select_inativo();
+        
+		$data['titulo'] = 'Colaboradores Online';
+
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+
+            $data['bd']['Nome'] = $data['query']['Nome'];
+			$data['bd']['DataCriacao'] = $data['query']['DataCriacao'];
+			$data['bd']['Inativo'] = $data['query']['Inativo'];
+            $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+
+            $data['report'] = $this->Relatorioempresa_model->list_colaboradoronline($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list'] = $this->load->view('relatorioempresa/list_colaboradoronline', $data, TRUE);
+            //$data['nav_secundario'] = $this->load->view('profissional/nav_secundario', $data, TRUE);
+        }
+
+        $this->load->view('relatorioempresa/tela_colaboradoronline', $data);
+
+        $this->load->view('basico/footer');
+
+    }
 	
 	public function empresafilial() {
 

@@ -352,7 +352,7 @@ class Basico_model extends CI_Model {
             if ($query->num_rows() === 0) {
                 return '';
             } else {
-                $query = $query->result_array();
+			$query = $query->result_array();
                 return $query[0]['Sexo'];
             }
         } else {
@@ -592,6 +592,75 @@ class Basico_model extends CI_Model {
             return '';
         }
     }
+
+	public function get_avap($data) {
+
+        if (isset($data) && $data) {
+
+			$query = $this->db->query('
+				SELECT *
+					FROM
+						Tab_Modalidade
+					WHERE
+						Abrev2 = "' . $data . '"
+				');
+
+            if ($query->num_rows() === 0) {
+                return '';
+            } else {
+                $query = $query->result_array();
+                return $query[0]['Abrev3'];
+            }
+        } else {
+            return '';
+        }
+    }
+	
+	public function get_modalidade($data) {
+
+        if (isset($data) && $data) {
+
+			$query = $this->db->query('
+				SELECT *
+					FROM
+						Tab_Modalidade
+					WHERE
+						Abrev = "' . $data . '"
+				');
+
+            if ($query->num_rows() === 0) {
+                return '';
+            } else {
+                $query = $query->result_array();
+                return $query[0]['Modalidade'];
+            }
+        } else {
+            return '';
+        }
+    }	
+
+	public function get_formapagamento($data) {
+
+        if (isset($data) && $data) {
+
+			$query = $this->db->query('
+				SELECT *
+					FROM
+						Tab_FormaPag
+					WHERE
+						idTab_FormaPag = "' . $data . '"
+				');
+
+            if ($query->num_rows() === 0) {
+                return '';
+            } else {
+                $query = $query->result_array();
+                return $query[0]['FormaPag'];
+            }
+        } else {
+            return '';
+        }
+    }
 	
 	public function get_cliente($data) {
 
@@ -610,6 +679,29 @@ class Basico_model extends CI_Model {
             } else {
                 $query = $query->result_array();
                 return $query[0]['NomeCliente'];
+            }
+        } else {
+            return '';
+        }
+    }
+	
+	public function get_usuario_online($data) {
+
+        if (isset($data) && $data) {
+
+			$query = $this->db->query('
+				SELECT *
+					FROM
+						Sis_Usuario
+					WHERE
+						idSis_Usuario = "' . $data . '"
+				');
+
+            if ($query->num_rows() === 0) {
+                return '';
+            } else {
+                $query = $query->result_array();
+                return $query[0]['Nome'];
             }
         } else {
             return '';
@@ -1221,6 +1313,22 @@ class Basico_model extends CI_Model {
 
         return $array;
     }
+	
+	public function select_inativo2($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('SELECT * FROM Tab_StatusSN');
+        } else {
+            $query = $this->db->query('SELECT * FROM Tab_StatusSN');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_StatusSN] = $row->StatusSN;
+            }
+        }
+
+        return $array;
+    }	
 
 	public function select_tipoproduto($data = FALSE) {
 

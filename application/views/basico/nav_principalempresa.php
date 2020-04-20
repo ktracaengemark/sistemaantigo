@@ -1,11 +1,14 @@
 <nav class="navbar navbar-inverse navbar-fixed-top " role="banner">
 
-	<div class="col-sm-offset-2 col-md-10">
+	<div class=" col-lg-12 col-md-12 col-sm-12">
 		<div class="navbar-header ">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar1">
-				<span class="sr-only">MENU</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+			<button type="button" class="navbar-toggle " data-toggle="collapse" data-target="#myNavbar1">
+				<span class="sr-only">MENU</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<?php echo base_url() ?>empresa/prontuario/<?php echo $_SESSION['log']['idSis_Empresa']; ?>"> 
+			<a type="button" class="navbar-brand btn btn-sm" href="<?php echo base_url() ?>empresa/prontuario/<?php echo $_SESSION['log']['idSis_Empresa']; ?>"> 
 				<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
 			</a>
 			<!--<a class="navbar-brand" href="https://www.enkontraki.com"> Melhor loja</a>-->
@@ -15,7 +18,7 @@
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">				
 					<div class="btn-group " role="group" aria-label="...">
 						<a href="<?php echo base_url(); ?>relatorioempresa/login">
-							<button type="button" class="btn btn-lg btn-success ">
+							<button type="button" class="btn btn-sm btn-success ">
 								<span class="glyphicon glyphicon-log-in"></span> Acessar Empresa
 							</button>
 						</a>
@@ -23,19 +26,21 @@
 				</li>
 				<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group">
-						<button type="button" class="btn btn-lg btn-warning dropdown-toggle" data-toggle="dropdown">
+						<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
 							<span class="glyphicon glyphicon-pencil"></span> Cadastros & Relatórios  <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">							
 							<li><a href="<?php echo base_url() ?>relatorioempresa/funcionario"><span class="glyphicon glyphicon-user"></span> Funcionários </a></li>
 							<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>relatorioempresa/colaboradoronline"><span class="glyphicon glyphicon-user"></span> Colaboradores Online </a></li>
+							<li role="separator" class="divider"></li>							
 							<li><a href="<?php echo base_url() ?>relatorioempresa/associado"><span class="glyphicon glyphicon-home"></span> Empresas Associadas </a></li>
 						</ul>
 					</div>
 				</li>				
 				<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">								
 					<div class="btn-group">
-						<button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown">
+						<button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown">
 							
 							<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) && ($_SESSION['log']['idSis_Empresa'] != 5))  { ?>
 								<span class="glyphicon glyphicon-hand-right"></span>

@@ -14,9 +14,15 @@
 					<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/cadastrar3/'; ?>">
 						<span class="glyphicon glyphicon-plus"></span> Novo
 					</a>
-					<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterar2/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
-						<span class="glyphicon glyphicon-edit"></span> Editar										
-					</a>					
+					<?php if ($_SESSION['Orcatrata']['Tipo_Orca'] == "B" ) { ?>
+						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterar2/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
+							<span class="glyphicon glyphicon-edit"></span> Editar "B"										
+						</a>
+					<?php } else if ($_SESSION['Orcatrata']['Tipo_Orca'] == "O" ) { ?>
+						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alteraronline/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
+							<span class="glyphicon glyphicon-edit"></span> Editar "O"										
+						</a>					
+					<?php } ?>
 					<!--
 					<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 						<?php echo '<small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '.</small>' ?> 

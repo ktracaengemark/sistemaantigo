@@ -322,6 +322,85 @@ class Usuario extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
+    public function alteraronline($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+       
+		$data['query'] = $this->input->post(array(
+			
+			'idSis_Usuario_Online',
+			'Inativo',
+
+        ), TRUE);
+
+        if ($id) {
+            $data['query'] = $this->Usuario_model->get_usuario_online($id);
+			$data['online']['Nome'] = $this->Basico_model->get_usuario_online($data['query']['idSis_Usuario'], TRUE);
+		}
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #$this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim|is_unique_duplo[Sis_Usuario.Nome.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
+        $this->form_validation->set_rules('Inativo', 'Ativo', 'required|trim');
+		
+		$data['select']['Inativo'] = $this->Basico_model->select_inativo2();
+		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa2();
+		
+        $data['titulo'] = 'Editar Colaborador';
+        $data['form_open_path'] = 'usuario/alteraronline';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+        if ($data['query']['Inativo'])
+            $data['collapse'] = '';
+        else
+            $data['collapse'] = 'class="collapse"';
+
+        $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
+        $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('usuario/form_usuarioalteraronline', $data);
+        } else {
+
+            $data['anterior'] = $this->Usuario_model->get_usuario_online($data['query']['idSis_Usuario_Online']);
+            $data['campos'] = array_keys($data['query']);
+
+            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Usuario_Online'], TRUE);
+
+            if ($data['auditoriaitem'] && $this->Usuario_model->update_usuario_online($data['query'], $data['query']['idSis_Usuario_Online']) === FALSE) {
+                $data['msg'] = '?m=1';
+                redirect(base_url() . 'relatorioempresa/colaboradoronline/' . $data['msg']);
+                exit();
+            } else {
+
+                if ($data['auditoriaitem'] === FALSE) {
+                    $data['msg'] = '';
+                } else {
+                    //$data['auditoria'] = $this->Basico_model->set_auditoriaempresa($data['auditoriaitem'], 'Sis_Usuario_Online', 'UPDATE', $data['auditoriaitem']);
+                    $data['msg'] = '?m=1';
+                }
+
+                redirect(base_url() . 'relatorioempresa/colaboradoronline/' . $data['msg']);
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+	
     public function alterar2($id = FALSE) {
 
         if ($this->input->get('m') == 1)
