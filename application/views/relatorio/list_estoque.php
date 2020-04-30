@@ -2,9 +2,10 @@
 	<div class="container-fluid">
 		<div>
 			<table class="table table-bordered table-condensed table-striped">
+				<!--
 				<thead>
 					<tr>
-						<!--<th colspan="1" class="active"></th>-->
+						<th colspan="1" class="active"></th>
 						<th colspan="4" class="active text-right">Total de Produtos:</th>
 						<th colspan="1" class="active"><?php echo $report->soma->somaqtdcompra ?></th>
 						<th colspan="1" class="active"><?php echo $report->soma->somaqtdvenda ?></th>
@@ -12,7 +13,8 @@
 						<th colspan="1" class="active"><?php echo $report->soma->somaqtddevcompra ?></th>							
 						<th colspan="1" class="active"><?php echo $report->soma->somaqtdestoque ?></th>
 					</tr>
-				</thead>										
+				</thead>
+				-->
 				<thead>
 					<tr>
 						<!--<th class="active text-left">Código</th>-->

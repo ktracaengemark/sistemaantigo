@@ -60,6 +60,8 @@ class Produtos extends CI_Controller {
 			'CodProd',
 			#'Fornecedor',
 			'ValorProdutoSite',
+			'Comissao',
+			'PesoProduto',
             'Produtos',
 			'Prodaux1',
 			'Prodaux2',
@@ -186,6 +188,8 @@ class Produtos extends CI_Controller {
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['produtos']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProdutoSite']));
+			$data['produtos']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['Comissao']));
+			$data['produtos']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['PesoProduto']));			
 			//$data['produtos']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProduto']));
             $data['produtos']['idTab_Produto'] = $this->Produtos_model->set_produtos($data['produtos']);
             /*
@@ -263,6 +267,8 @@ class Produtos extends CI_Controller {
 			'CodProd',
 			'Fornecedor',
 			'ValorProdutoSite',
+			'Comissao',
+			'PesoProduto',
 			#'ValorProduto',
             'Produtos',
 			'Prodaux1',
@@ -389,6 +395,8 @@ class Produtos extends CI_Controller {
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['produtos']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProdutoSite']));
+			$data['produtos']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['Comissao']));
+			$data['produtos']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['PesoProduto']));			
 			#$data['produtos']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProduto']));
             $data['produtos']['idTab_Produto'] = $this->Produtos_model->set_produtos($data['produtos']);
             /*
@@ -464,6 +472,8 @@ class Produtos extends CI_Controller {
 			'CodProd',
 			'Fornecedor',
 			'ValorProdutoSite',
+			'Comissao',
+			'PesoProduto',
 			'ValorProduto',
             'Produtos',
 			'Prodaux1',
@@ -592,6 +602,8 @@ class Produtos extends CI_Controller {
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['produtos']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProdutoSite']));
+			$data['produtos']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['Comissao']));
+			$data['produtos']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['PesoProduto']));			
 			//$data['produtos']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProduto']));
             $data['produtos']['idTab_Produto'] = $this->Produtos_model->set_produtos($data['produtos']);
             /*
@@ -669,6 +681,8 @@ class Produtos extends CI_Controller {
 			'CodProd',
 			'Fornecedor',
 			'ValorProdutoSite',
+			'Comissao',
+			'PesoProduto',
 			#'ValorProduto',
             'Produtos',
 			'Prodaux1',
@@ -794,6 +808,8 @@ class Produtos extends CI_Controller {
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['produtos']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProdutoSite']));
+			$data['produtos']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['Comissao']));
+			$data['produtos']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['PesoProduto']));
 			#$data['produtos']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProduto']));
             $data['produtos']['idTab_Produto'] = $this->Produtos_model->set_produtos($data['produtos']);
             /*
@@ -868,7 +884,9 @@ class Produtos extends CI_Controller {
 			'UnidadeProduto',
 			'CodProd',
 			'Fornecedor',
-			'ValorProdutoSite',            
+			'ValorProdutoSite',
+            'Comissao',
+			'PesoProduto',
             'Produtos',
 			'Prodaux1',
 			'Prodaux2',
@@ -1018,8 +1036,9 @@ class Produtos extends CI_Controller {
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['produtos']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProdutoSite']));
-
-            $data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produto']);
+			$data['produtos']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['Comissao']));
+			$data['produtos']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['PesoProduto']));
+			$data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produto']);
             $data['update']['produtos']['campos'] = array_keys($data['produtos']);
             $data['update']['produtos']['auditoriaitem'] = $this->basico->set_log(
                 $data['update']['produtos']['anterior'],
@@ -1122,7 +1141,9 @@ class Produtos extends CI_Controller {
 			'UnidadeProduto',
 			'CodProd',
 			'Fornecedor',
-			'ValorProdutoSite',            
+			'ValorProdutoSite',
+            'Comissao',
+			'PesoProduto',
             'Produtos',
 			'Prodaux1',
 			'Prodaux2',
@@ -1252,8 +1273,9 @@ class Produtos extends CI_Controller {
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['produtos']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProdutoSite']));
-
-            $data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produto']);
+			$data['produtos']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['Comissao']));
+			$data['produtos']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['PesoProduto']));            
+			$data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produto']);
             $data['update']['produtos']['campos'] = array_keys($data['produtos']);
             $data['update']['produtos']['auditoriaitem'] = $this->basico->set_log(
                 $data['update']['produtos']['anterior'],

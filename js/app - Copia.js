@@ -3169,275 +3169,6 @@ $(document).ready(function () {
 
     });
 
-    //adiciona campos dinamicamente dos Produtos Entregues da Empresa 42
-    $(".add_field_button42").click(function(e){ //on add input button click
-        
-//////// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
-		if (pc >= 2) {
-			//console.log( $("#listadinamicab"+(pc-1)).val() );
-			var chosen;
-			chosen = $("#listadinamicab"+(pc-1)).val();
-			//console.log( chosen + ' :: ' + pc );
-		}
-		
-		if (pc >= 2) {
-			//console.log( $("#listadinamicac"+(pc-1)).val() );
-			var chosen2;
-			chosen2 = $("#listadinamicac"+(pc-1)).val();
-			//console.log( chosen + ' :: ' + pc );
-		}
-/////// Termina aqui!!! ////
-		
-		e.preventDefault();
-		
-        pc++; //text box increment
-        $("#PCount").val(pc);
-
-        $(".input_fields_wrap42").append('\
-            <div class="form-group" id="42div'+pc+'">\
-                <div class="panel panel-success">\
-                    <div class="panel-heading">\
-                        <div class="row">\
-                            <div class="col-md-2">\
-                                <label for="QtdProduto">Qtd:</label><br>\
-                                <div class="input-group">\
-                                    <input type="text" class="form-control Numero" maxlength="10" id="QtdProduto'+pc+'" placeholder="0"\
-                                        onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
-                                       autofocus name="QtdProduto'+pc+'" value="1">\
-                                </div>\
-                            </div>\
-							<div class="col-md-6">\
-                                <label for="idTab_Produto">Produto:</label><br>\
-                                <select class="form-control Chosen" id="listadinamicab'+pc+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+pc+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" name="idTab_Produto'+pc+'">\
-                                    <option value="">-- Selecione uma opção --</option>\
-                                </select>\
-                            </div>\
-							<div class="col-md-2">\
-								<label for="ValorProduto">Valor:</label><br>\
-								<div class="input-group id="txtHint">\
-									<span class="input-group-addon" id="basic-addon1">R$</span>\
-									<input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" \
-										onfocus="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'VP\',\'Produto\')"\
-										name="ValorProduto'+pc+'" value="">\
-								</div>\
-							</div>\
-							<div class="col-md-2">\
-								<label for="SubtotalProduto">Subtotal:</label><br>\
-								<div class="input-group id="txtHint">\
-									<span class="input-group-addon" id="basic-addon1">R$</span>\
-									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto'+pc+'"\
-										   name="SubtotalProduto'+pc+'" value="">\
-								</div>\
-							</div>\
-						</div>\
-						<div class="row">\
-							<div class="col-md-2">\
-								<div class="row">\
-									<div class="col-md-12">\
-										<label for="idSis_Usuario'+pc+'">Profissional:</label>\
-										<select data-placeholder="Selecione uma opção..." class="form-control"\
-												 id="listadinamicac'+pc+'" name="idSis_Usuario'+pc+'">\
-											<option value=""></option>\
-										</select>\
-									</div>\
-								</div>\
-								<div class="row">\
-									<div class="col-md-12">\
-										<label><br></label><br>\
-										<a href="#" id="'+pc+'" class="remove_field42 btn btn-danger"\
-												onclick="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
-											<span class="glyphicon glyphicon-trash"></span>\
-										</a>\
-									</div>\
-								</div>\
-							</div>\
-							<div class="col-md-2">\
-								<div class="row">\
-									<div class="col-md-12">\
-										<label for="DataValidadeProduto'+pc+'">Validade:</label>\
-										<div class="input-group DatePicker">\
-											<span class="input-group-addon" disabled>\
-												<span class="glyphicon glyphicon-calendar"></span>\
-											</span>\
-											<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
-												   name="DataValidadeProduto'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
-										</div>\
-									</div>\
-								</div>\
-								<div class="row">\
-									<div class="col-md-12">\
-										<label for="CD'+pc+'">CD:</label>\
-											<input type="text" class="form-control" maxlength="10"\
-												   name="CD'+pc+'" value="">\
-									</div>\
-								</div>\
-							</div>\
-							<div class="col-md-2">\
-								<div class="row">\
-									<div class="col-md-12">\
-										<label for="TelefoneRec'+pc+'">Tel. Rec.:</label>\
-											<input type="text" class="form-control Celular CelularVariavel" maxlength="11" placeholder="(XX)999999999"\
-												   name="TelefoneRec'+pc+'" value="">\
-									</div>\
-								</div>\
-								<div class="row">\
-									<div class="col-md-12">\
-										<label for="Mensagem'+pc+'">Nº Mens.:</label>\
-											<input type="text" class="form-control" maxlength="10"\
-												   name="Mensagem'+pc+'" value="">\
-									</div>\
-								</div>\
-							</div>\
-							<div class="col-md-2">\
-								<div class="row">\
-									<div class="col-md-12">\
-										<label for="Parente'+pc+'">Parentesco:</label>\
-											<input type="text" class="form-control" maxlength="200"\
-												   name="Parente'+pc+'" value="">\
-									</div>\
-								</div>\
-								<div class="row">\
-									<div class="col-md-12">\
-										<label for="ObsProduto'+pc+'">Obs:</label><br>\
-										<textarea type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
-											  onfocus="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" name="ObsProduto'+pc+'" value=""></textarea>\
-									</div>\
-								</div>\
-							</div>\
-							<div class="col-md-2 panel-body">\
-								<div class="panel panel-primary">\
-									<div class="panel-heading">\
-										<div class="row">\
-											<div class="col-md-12">\
-												<label for="ConcluidoProduto">Entregue? </label><br>\
-												<div class="btn-group" data-toggle="buttons">\
-													<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
-													<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
-														autocomplete="off" value="N" checked>Não\
-													</label>\
-													<label class="btn btn-default" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'S">\
-													<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
-														autocomplete="off" value="S" >Sim\
-													</label>\
-												</div>\
-											</div>\
-										</div>\
-									</div>\
-								</div>\
-							</div>\
-							<div class="col-md-2 panel-body">\
-								<div class="panel panel-danger">\
-									<div class="panel-heading">\
-										<div class="row">\
-											<div class="col-md-12">\
-												<label for="DevolvidoProduto">Devolvido? </label><br>\
-												<div class="btn-group" data-toggle="buttons">\
-													<label class="btn btn-warning active" name="radio_DevolvidoProduto'+pc+'" id="radio_DevolvidoProduto'+pc+'N">\
-													<input type="radio" name="DevolvidoProduto'+pc+'" id="radiogeraldinamico"\
-														autocomplete="off" value="N" checked>Não\
-													</label>\
-													<label class="btn btn-default" name="radio_DevolvidoProduto'+pc+'" id="radio_DevolvidoProduto'+pc+'S">\
-													<input type="radio" name="DevolvidoProduto'+pc+'" id="radiogeraldinamico"\
-														autocomplete="off" value="S" >Sim\
-													</label>\
-												</div>\
-											</div>\
-										</div>\
-									</div>\
-								</div>\
-							</div>\
-						</div>\
-                    </div>\
-                </div>\
-            </div>'
-        ); //add input box
-
-		//habilita o botão de calendário após a geração dos campos dinâmicos
-		$('.DatePicker').datetimepicker(dateTimePickerOptions);
-		
-		//get a reference to the select element
-        $select = $('#listadinamicab'+pc);
-
-        //request the JSON data and parse into the select element
-        $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=9',
-            dataType: 'JSON',
-            type: "GET",
-            success: function (data) {
-                //clear the current content of the select
-                $select.html('');
-                //iterate over the data and append a select option
-                $select.append('<option value="">-- Selecione uma opção --</option>');
-                $.each(data, function (key, val) {
-                    //alert(val.id);
-                    $select.append('<option value="' + val.id + '">' + val.name + '</option>');
-                })
-                $('.Chosen').chosen({
-                    disable_search_threshold: 10,
-                    multiple_text: "Selecione uma ou mais opções",
-                    single_text: "Selecione uma opção",
-                    no_results_text: "Nenhum resultado para",
-                    width: "100%"
-                });
-            },
-            error: function () {
-                //alert('erro listadinamicaB');
-                //if there is an error append a 'none available' option
-                $select.html('<option id="-1">ERRO</option>');
-            }
-
-        });
-		
-		//get a reference to the select element
-        $select2 = $('#listadinamicac'+pc);
-
-        //request the JSON data and parse into the select element
-        $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=3',
-            dataType: 'JSON',
-            type: "GET",
-            success: function (data) {
-                //clear the current content of the select
-                $select2.html('');
-                //iterate over the data and append a select option
-                $select2.append('<option value="">-- Sel. Profis. --</option>');
-                $.each(data, function (key, val) {
-                    //alert(val.id);
-                    $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
-                })
-                $('.Chosen').chosen2({
-                    disable_search_threshold: 10,
-                    multiple_text: "Selecione uma ou mais opções",
-                    single_text: "Selecione uma opção",
-                    no_results_text: "Nenhum resultado para",
-                    width: "100%"
-                });
-            },
-            error: function () {
-                //alert('erro listadinamicaB');
-                //if there is an error append a 'none available' option
-                $select2.html('<option id="-1">ERRO</option>');
-            }
-
-        });		
-
-		//permite o uso de radio buttons nesse bloco dinâmico
-		$('input:radio[id="radiogeraldinamico"]').change(function() {
-
-			var value = $(this).val();
-			var name = $(this).attr("name");
-
-			//console.log(value + ' <<>> ' + name);
-
-			$('label[name="radio_' + name + '"]').removeClass();
-			$('label[name="radio_' + name + '"]').addClass("btn btn-default");
-			$('#radio_' + name + value).addClass("btn btn-warning active");
-
-		});
-
-    });
-	
-	
     //adiciona campos dinamicamente dos Produtos Vendidos 
     var pc = $("#PCount").val(); //initlal text box count
     $(".add_field_button9").click(function(e){ //on add input button click
@@ -3501,20 +3232,25 @@ $(document).ready(function () {
 							</div>\
 						</div>\
 						<div class="row">\
-							<div class="col-md-1"></div>\
-							<div class="col-md-1">\
-								<label><br></label><br>\
-								<a href="#" id="'+pc+'" class="remove_field9 btn btn-danger"\
-										onclick="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
-									<span class="glyphicon glyphicon-trash"></span>\
-								</a>\
-							</div>\
 							<div class="col-md-2">\
-								<label for="idSis_Usuario'+pc+'">Profissional:</label>\
-								<select data-placeholder="Selecione uma opção..." class="form-control"\
-										 id="listadinamicac'+pc+'" name="idSis_Usuario'+pc+'">\
-									<option value=""></option>\
-								</select>\
+								<div class="row">\
+									<div class="col-md-12">\
+										<label for="idSis_Usuario'+pc+'">Profissional:</label>\
+										<select data-placeholder="Selecione uma opção..." class="form-control"\
+												 id="listadinamicac'+pc+'" name="idSis_Usuario'+pc+'">\
+											<option value=""></option>\
+										</select>\
+									</div>\
+								</div>\
+								<div class="row">\
+									<div class="col-md-12">\
+										<label><br></label><br>\
+										<a href="#" id="'+pc+'" class="remove_field9 btn btn-danger"\
+												onclick="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
+											<span class="glyphicon glyphicon-trash"></span>\
+										</a>\
+									</div>\
+								</div>\
 							</div>\
 							<div class="col-md-2">\
 								<label for="DataValidadeProduto'+pc+'">Validade:</label>\
@@ -3526,6 +3262,7 @@ $(document).ready(function () {
 										   name="DataValidadeProduto'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 								</div>\
 							</div>\
+							<div class="col-md-2"></div>\
 							<div class="col-md-2">\
 								<label for="ObsProduto'+pc+'">Obs:</label><br>\
 								<textarea type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
@@ -4439,13 +4176,6 @@ $(document).ready(function () {
         $("#2div"+$(this).attr("id")).remove();
         //após remover o campo refaz o cálculo do orçamento e total restante
         calculaOrcamentoCli();
-    })
-
-    //Remove os campos adicionados de Produtos No Orçamento do CONSULTOR dinamicamente
-    $(".input_fields_wrap42").on("click",".remove_field42", function(e){ //user click on remove text
-        $("#42div"+$(this).attr("id")).remove();
-        //após remover o campo refaz o cálculo do orçamento e total restante
-        calculaOrcamento();
     })
 	
     //Remove os campos adicionados de Produtos No Orçamento do CONSULTOR dinamicamente

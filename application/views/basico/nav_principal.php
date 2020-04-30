@@ -66,7 +66,7 @@
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							Receitas/Vendas
 							<?php } else {?>
-							Receitas
+							Receitas/Vendas
 							<?php } ?>
 						</a>
 						<button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -75,6 +75,17 @@
 						<ul class="dropdown-menu" role="menu">							
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasrec"><span class="glyphicon glyphicon-pencil"></span> Relatório das Receitas</a></li>
 							<li role="separator" class="divider"></li>
+							<?php if ($_SESSION['log']['idSis_Empresa'] == 5 ) { ?>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/orcamentoonline"><span class="glyphicon glyphicon-pencil"></span> Orçamentos Online</a></li>
+							<li role="separator" class="divider"></li>							
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/produtosvendaonline"><span class="glyphicon glyphicon-pencil"></span> Produtos Vendidos Online</a></li>
+							<li role="separator" class="divider"></li>
+							<?php } else {?>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/orcamentoonlineempresa"><span class="glyphicon glyphicon-pencil"></span> Orçamentos Online</a></li>
+							<li role="separator" class="divider"></li>							
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/comissao"><span class="glyphicon glyphicon-pencil"></span> Relatório de Vendas Online</a></li>
+							<li role="separator" class="divider"></li>							
+							<?php } ?>
 							<li><a href="<?php echo base_url() ?>relatorio/rankingreceitas"><span class="glyphicon glyphicon-equalizer"></span> Estatística das Receitas</a></li>
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							<li role="separator" class="divider"></li>							
@@ -96,7 +107,7 @@
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							Despesas/Compras
 							<?php } else {?>
-							Despesas
+							Despesas/Compras
 							<?php } ?>
 						</a>
 						<button type="button" class="btn btn-sm btn-danger dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

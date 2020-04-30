@@ -202,8 +202,8 @@
 																	<div class="panel panel-success">
 																		<div class="panel-heading">
 																			<div class="row">
-																				<div class="col-md-2">
-																					<label for="QtdProduto">Qtd <?php echo $i ?>:</label>
+																				<div class="col-md-1">
+																					<label for="QtdProduto">Qt<?php echo $i ?>:</label>
 																					<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0" readonly=''
 																							onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																							 name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">

@@ -322,13 +322,21 @@
 								</div>								
 								<div id="VendaSite" <?php echo $div['VendaSite']; ?>>	
 									<div class="col-md-3">
-										<label for="ValorProdutoSite">Valor no Site:</label><br>
+										<label for="Comissao">Comissão:</label><br>
 										<div class="input-group">
-											<span class="input-group-addon" id="basic-addon1">R$</span>
+											<span class="input-group-addon" id="basic-addon1">(%)</span>
 											<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
-													name="ValorProdutoSite" value="<?php echo $produtos['ValorProdutoSite'] ?>">
+													name="Comissao" value="<?php echo $produtos['Comissao'] ?>">
 										</div>
 									</div>
+									<div class="col-md-3">
+										<label for="PesoProduto">Peso:</label><br>
+										<div class="input-group">
+											<span class="input-group-addon" id="basic-addon1">(kg)</span>
+											<input type="text" class="form-control Peso" maxlength="10" placeholder="0,000"
+													name="PesoProduto" value="<?php echo $produtos['PesoProduto'] ?>">
+										</div>
+									</div>									
 								</div>
 							</div>	
 						</div>						

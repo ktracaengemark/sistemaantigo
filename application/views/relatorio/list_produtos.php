@@ -55,7 +55,7 @@
 							<th class="active">Produto</th>
 							<th class="active">Unid.</th>
 							<th class="active">Ativo</th>
-							<th class="active">Vender no Site</th>
+							<th class="active">Comissão</th>
 							<th class="active">Valor Site</th>
 							<th class="active">Valor Balcao</th>
 							<th class="active">V/C/A</th>																																
@@ -79,7 +79,7 @@
 						<td><?php echo $row['UnidadeProduto'] ?></td>
 						<td><?php echo $row['Ativo'] ?></td>
 						<td><?php echo $row['VendaSite'] ?></td>
-						<td><?php echo number_format($row['ValorProdutoSite'], 2, ',','.') ?></td>
+						<td><?php echo number_format($row['Comissao'], 2, ',','.') ?></td>
 						<td><?php echo number_format($row['ValorProduto'], 2, ',','.') ?></td>
 						<td><?php echo $row['TipoProduto'] ?></td>						
 						<?php } ?>
@@ -104,7 +104,8 @@
 							<th class="active">Descricao</th>
 							<th class="active">Ativo</th>
 							<th class="active">Vender no Site</th>
-							<th class="active">Valor Site</th>
+							<th class="active">Peso(kg)</th>
+							<th class="active">Comissao(%)</th>
 							<th class="active">Valor Balcao</th>
 							<th class="active">V/C/A</th>
 							<th class="active">Prod/Serv</th>
@@ -141,7 +142,8 @@
 						<td><?php echo $row['Convdesc'] ?></td>
 						<td><?php echo $row['Ativo'] ?></td>
 						<td><?php echo $row['VendaSite'] ?></td>
-						<td><?php echo number_format($row['ValorProdutoSite'], 2, ',','.') ?></td>
+						<td><?php echo number_format($row['PesoProduto'], 3, ',','.') ?></td>
+						<td><?php echo number_format($row['Comissao'], 2, ',','.') ?></td>
 						<td><?php echo number_format($row['ValorProduto'], 2, ',','.') ?></td>
 						<td><?php echo $row['TipoProduto'] ?></td>
 						<td><?php echo $row['Categoria'] ?></td>
