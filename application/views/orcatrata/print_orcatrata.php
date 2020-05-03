@@ -158,7 +158,7 @@
 								</tr>						
 								<tr>
 									<td></td>
-									<td>Data: <?php echo $produto[$i]['DataValidadeProduto'] ?> - Obs: <?php echo $produto[$i]['ObsProduto'] ?></td>
+									<td>Data: <?php echo $produto[$i]['DataValidadeProduto'] ?> - Obs: <?php if ($_SESSION['log']['idSis_Empresa'] != 42 ) echo $produto[$i]['ObsProduto'] ?></td>
 									<!--<td><?php echo $produto[$i]['ConcluidoProduto'] ?></td>														
 									<td><?php echo $produto[$i]['Prodaux1'] ?></td>
 									<td><?php echo $produto[$i]['Prodaux2'] ?></td>-->

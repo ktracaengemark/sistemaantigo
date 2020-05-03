@@ -357,7 +357,12 @@
 									<?php if ($metodo == 2) { ?>
 
 										<div class="col-md-6">
+											<!--
 											<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+												<span class="glyphicon glyphicon-save"></span> Salvar
+											</button>
+											-->
+											<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
 												<span class="glyphicon glyphicon-save"></span> Salvar
 											</button>
 										</div>
@@ -406,9 +411,14 @@
 										</div>
 									<?php } else { ?>
 										<div class="col-md-6">
+											<!--
 											<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." name="submit" value="1" type="submit">
 												<span class="glyphicon glyphicon-save"></span> Salvar
 											</button>
+											-->
+											<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
+												<span class="glyphicon glyphicon-save"></span> Salvar
+											</button>											
 										</div>
 									<?php } ?>
 								</div>

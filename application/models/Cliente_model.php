@@ -176,28 +176,28 @@ class Cliente_model extends CI_Model {
             $array = $this->db->query(					
 				'SELECT                
 				idApp_Cliente,
-				CONCAT(NomeCliente) As NomeCliente				
+				CONCAT(idApp_Cliente, " - ", NomeCliente) As NomeCliente				
             FROM
                 App_Cliente					
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
-				NomeCliente ASC'
+				idApp_Cliente DESC'
     );
 					
         } else {
             $query = $this->db->query(
                 'SELECT                
 				idApp_Cliente,
-				CONCAT(NomeCliente) As NomeCliente			
+				CONCAT(idApp_Cliente, " - ",NomeCliente) As NomeCliente			
             FROM
                 App_Cliente					
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
-				NomeCliente ASC'
+				idApp_Cliente DESC'
     );
             
             $array = array();

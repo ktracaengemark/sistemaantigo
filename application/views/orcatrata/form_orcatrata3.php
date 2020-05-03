@@ -143,7 +143,7 @@
 																	} else {
 																		echo '<option value="' . $key . '">' . $row . '</option>';
 																	}
-																}
+																	}
 																?>
 															</select>
 														</div>
@@ -330,6 +330,20 @@
 																		</div>																						
 																	</div>
 																	<div class="col-md-2">
+																		<div class="row">
+																			<div class="col-md-12">
+																				<label for="NomeRecebedor<?php echo $i ?>">Nome Rec.:</label>
+																					<input type="text" class="form-control" <?php echo $readonly; ?> maxlength="100"
+																						   name="NomeRecebedor<?php echo $i ?>" value="<?php echo $produto[$i]['NomeRecebedor']; ?>">
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-md-12">
+																				<label for="CD<?php echo $i ?>">CD:</label>
+																					<input type="text" class="form-control" <?php echo $readonly; ?> maxlength="100"
+																						   name="CD<?php echo $i ?>" value="<?php echo $produto[$i]['CD']; ?>">
+																			</div>
+																		</div>
 																		<div class="row">	
 																			<div class="col-md-12">
 																				<label for="DataValidadeProduto<?php echo $i ?>">Validade:</label>
@@ -339,17 +353,9 @@
 																					</span>
 																					<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
 																						   name="DataValidadeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['DataValidadeProduto']; ?>">
-																					
 																				</div>
 																			</div>
 																		</div>
-																		<div class="row">
-																			<div class="col-md-12">
-																				<label for="CD<?php echo $i ?>">CD:</label>
-																					<input type="text" class="form-control" <?php echo $readonly; ?> maxlength="10"
-																						   name="CD<?php echo $i ?>" value="<?php echo $produto[$i]['CD']; ?>">
-																			</div>
-																		</div>																						
 																	</div>
 																	<div class="col-md-2">		
 																		<div class="row">
@@ -362,10 +368,17 @@
 																		<div class="row">	
 																			<div class="col-md-12">
 																				<label for="Mensagem<?php echo $i ?>">Nº Mens.:</label>
-																					<input type="text" class="form-control" <?php echo $readonly; ?> maxlength="10"
+																					<input type="text" class="form-control" <?php echo $readonly; ?> maxlength="100"
 																						   name="Mensagem<?php echo $i ?>" value="<?php echo $produto[$i]['Mensagem']; ?>">
 																			</div>
 																		</div>
+																		<div class="row">
+																			<div class="col-md-12">
+																				<label for="HoraEnvio<?php echo $i ?>">Hora Envio:</label>
+																					<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5"  placeholder="HH:MM"
+																						   name="HoraEnvio<?php echo $i ?>" value="<?php echo $produto[$i]['HoraEnvio']; ?>">
+																			</div>
+																		</div>																		
 																	</div>
 																	<div class="col-md-2">		
 																		<div class="row">	
@@ -1337,9 +1350,14 @@
 
 													<div class="col-md-6">
 														<label></label><br>
+														<!--
 														<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
 															<span class="glyphicon glyphicon-save"></span> Salvar
 														</button>
+														-->
+														<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
+															<span class="glyphicon glyphicon-save"></span> Salvar
+														</button>														
 													</div>
 													<div class="col-md-6 text-right">
 														<label></label><br>
@@ -1377,9 +1395,14 @@
 												<?php } else { ?>
 													<div class="col-md-6 text-left">
 														<label></label><br>
+														<!--
 														<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
 															<span class="glyphicon glyphicon-save"></span> Salvar
 														</button>
+														-->
+														<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
+															<span class="glyphicon glyphicon-save"></span> Salvar
+														</button>														
 													</div>
 												<?php } ?>
 											</div>

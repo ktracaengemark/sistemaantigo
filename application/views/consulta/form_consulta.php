@@ -169,13 +169,13 @@
 										
 										<div class="col-md-6">
 											<label for="Hora">Dàs :</label>
-											<!--<div class="input-group <?php echo $timepicker; ?>">-->
+											<div class="input-group <?php echo $timepicker; ?>">
 												<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5"  placeholder="HH:MM"
 													   accept=""name="HoraInicio" value="<?php echo $query['HoraInicio']; ?>">
-												<!--<span class="input-group-addon">
+												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-time"></span>
 												</span>
-											</div>-->
+											</div>
 										<?php echo form_error('HoraInicio'); ?>
 										</div>
 									</div>

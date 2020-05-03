@@ -50,20 +50,6 @@ var dateTimePickerOptions = {
     locale: 'pt-br'
 }
 
-//Função que desabilita o botão submit após 1 click, evitando mais de um envio de formulário.
-function DesabilitaBotao (valor) {
-
-    if (valor) {
-        document.getElementById('submeter').style.display = "none";
-        document.getElementById('aguardar').style.display = "";
-    }
-    else {
-        document.getElementById('submeter').style.display = "";
-        document.getElementById('aguardar').style.display = "none";
-    }
-
-}
-
 /*Atualiza o somatório do Qtd no Orcatrata*/
 function calculaQtdSoma(campo, soma, somaproduto, excluir, produtonum, countmax, adicionar, hidden) {
 
@@ -3268,20 +3254,6 @@ $(document).ready(function () {
 							<div class="col-md-2">\
 								<div class="row">\
 									<div class="col-md-12">\
-										<label for="NomeRecebedor'+pc+'">Nome Rec.:</label>\
-											<input type="text" class="form-control" maxlength="100"\
-												   name="NomeRecebedor'+pc+'" value="">\
-									</div>\
-								</div>\
-								<div class="row">\
-									<div class="col-md-12">\
-										<label for="CD'+pc+'">CD:</label>\
-											<input type="text" class="form-control" maxlength="100"\
-												   name="CD'+pc+'" value="">\
-									</div>\
-								</div>\
-								<div class="row">\
-									<div class="col-md-12">\
 										<label for="DataValidadeProduto'+pc+'">Validade:</label>\
 										<div class="input-group DatePicker">\
 											<span class="input-group-addon" disabled>\
@@ -3290,6 +3262,13 @@ $(document).ready(function () {
 											<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
 												   name="DataValidadeProduto'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 										</div>\
+									</div>\
+								</div>\
+								<div class="row">\
+									<div class="col-md-12">\
+										<label for="CD'+pc+'">CD:</label>\
+											<input type="text" class="form-control" maxlength="10"\
+												   name="CD'+pc+'" value="">\
 									</div>\
 								</div>\
 							</div>\
@@ -3304,15 +3283,8 @@ $(document).ready(function () {
 								<div class="row">\
 									<div class="col-md-12">\
 										<label for="Mensagem'+pc+'">Nº Mens.:</label>\
-											<input type="text" class="form-control" maxlength="100"\
+											<input type="text" class="form-control" maxlength="10"\
 												   name="Mensagem'+pc+'" value="">\
-									</div>\
-								</div>\
-								<div class="row">\
-									<div class="col-md-12">\
-										<label for="HoraEnvio'+pc+'">Hora Envio:</label>\
-											<input type="text" class="form-control Time" maxlength="5"  placeholder="HH:MM"\
-												   name="HoraEnvio'+pc+'" value="">\
 									</div>\
 								</div>\
 							</div>\

@@ -8,8 +8,9 @@
 				<th class="active">Cliente</th>
 				<th class="active">Qtd</th>								
 				<th class="active">Produto</th>
-				<th class="active">Obs.</th>
+				<!--<th class="active">Obs.</th>-->
 				<th class="active">Valid.</th>
+				<th class="active">Hora.</th>
 				<th class="active">Entr.?</th>
 				
 			</tr>
@@ -31,8 +32,9 @@
 						echo '<td>' . $row['QtdProduto'] . '</td>';
 						echo '<td>' . $row['Produtos'] . '</td>';
 						#echo '<td>R$' . number_format($row['ValorProduto'], 2, ',', '.') . '</td>';
-						echo '<td>' . $row['ObsProduto'] . '</td>';
+						#echo '<td>' . $row['ObsProduto'] . '</td>';
 						echo '<td>' . $row['DataValidadeProduto'] . '</td>';
+						echo '<td>' . $row['HoraEnvio'] . '</td>';
 						echo '<td>' . $this->basico->mascara_palavra_completa($row['ConcluidoProduto'], 'NS') . '</td>';
 						
 					echo '</tr>';            

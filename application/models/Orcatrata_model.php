@@ -1211,6 +1211,7 @@ class Orcatrata_model extends CI_Model {
 				AP.ConcluidoProduto,
 				AP.ValorProduto,
 				AP.ObsProduto,
+				AP.HoraEnvio,
 				TS.idApp_Servico,
 				TS.QtdServico,
 				TS.DataValidadeServico,
@@ -1245,7 +1246,8 @@ class Orcatrata_model extends CI_Model {
 				(TP.TipoProduto = "V" OR TP.TipoProduto = "D")
 				
 			ORDER BY 
-				OT.idApp_OrcaTrata ASC 
+				AP.DataValidadeProduto ASC,
+				AP.HoraEnvio ASC
 		');
 
         /*
