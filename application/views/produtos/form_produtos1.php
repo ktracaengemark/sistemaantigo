@@ -337,12 +337,12 @@
 					<?php if ($metodo == 2) { ?>
 
 						<div class="col-md-6">
-							<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+							<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
 								<span class="glyphicon glyphicon-save"></span> Salvar
 							</button>
 						</div>
 						<div class="col-md-6 text-right">
-							<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+							<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 								<span class="glyphicon glyphicon-trash"></span> Excluir
 							</button>
 						</div>
@@ -374,7 +374,7 @@
 						</div>
 					<?php } else { ?>
 						<div class="col-md-6">
-							<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+							<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
 								<span class="glyphicon glyphicon-save"></span> Salvar
 							</button>
 						</div>

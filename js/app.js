@@ -55,10 +55,27 @@ function DesabilitaBotao (valor) {
 
     if (valor) {
         document.getElementById('submeter').style.display = "none";
+		document.getElementById('submeter2').style.display = "none";
         document.getElementById('aguardar').style.display = "";
     }
     else {
         document.getElementById('submeter').style.display = "";
+		document.getElementById('submeter2').style.display = "";
+        document.getElementById('aguardar').style.display = "none";
+    }
+
+}
+
+function DesabilitaBotaoExcluir (valor) {
+
+    if (valor) {
+		document.getElementById('submeter3').style.display = "none";
+		document.getElementById('submeter4').style.display = "none";
+        document.getElementById('aguardar').style.display = "";
+    }
+    else {
+		document.getElementById('submeter3').style.display = "";
+		document.getElementById('submeter4').style.display = "";
         document.getElementById('aguardar').style.display = "none";
     }
 

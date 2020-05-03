@@ -293,8 +293,8 @@ class Fornecedor extends CI_Controller {
                 $this->Fornecedor_model->delete_fornecedor($id);
 
                 $data['msg'] = '?m=1';
-
-				redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+				//redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+				redirect(base_url() . 'relatorio/fornecedor');
 				exit();
             //}
         //}
