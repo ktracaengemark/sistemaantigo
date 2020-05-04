@@ -2940,6 +2940,7 @@ class Relatorio extends CI_Controller {
 			'Ano',
 			'Mesvenc',
 			'Mespag',
+			'Tipo_Orca',
 			'TipoFinanceiro',
 			'TipoFinanceiroR',
 			'TipoFinanceiroD',
@@ -2994,6 +2995,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['NomeCliente'] = $data['query']['NomeCliente'];
 		$_SESSION['FiltroAlteraParcela']['NomeFornecedor'] = $data['query']['NomeFornecedor'];
 		$_SESSION['FiltroAlteraParcela']['FormaPagamento'] = $data['query']['FormaPagamento'];
+		$_SESSION['FiltroAlteraParcela']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         $this->form_validation->set_rules('DataInicio', 'Data Início do Vencimento', 'trim|valid_date');
@@ -3006,10 +3008,16 @@ class Relatorio extends CI_Controller {
 		$data['collapse'] = '';	
 
 		$data['collapse1'] = 'class="collapse"';
+
+        $data['select']['Tipo_Orca'] = array(
+			'B' => 'Balcão',
+			'O' => 'Online',
+			'0' => 'TODOS',
+        );
 		
         $data['select']['AprovadoOrca'] = array(
-            'S' => 'Sim',
-			'N' => 'Não',
+			'S' => 'Aprovado',
+			'N' => 'Não Aprovado',
 			'0' => 'TODOS',
         );
 
@@ -3026,9 +3034,9 @@ class Relatorio extends CI_Controller {
         );
 
 		$data['select']['Quitado'] = array(
-			'0' => 'TODAS',
 			'S' => 'Pagas',
 			'N' => 'NÃO Pagas',
+			'0' => 'TODAS',
         );
 		
 		$data['select']['Modalidade'] = array(
@@ -3044,6 +3052,7 @@ class Relatorio extends CI_Controller {
             'OT.idApp_OrcaTrata' => 'Orçamento',
             'OT.ValorOrca' => 'Valor da Receita',
 			'OT.TipoFinanceiro' => 'Tipo de Receita',
+			'OT.Tipo_Orca' => 'Tipo de Pedido',
 
         );
 
@@ -3094,6 +3103,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Quitado'] = $data['query']['Quitado'];
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
             $data['bd']['FormaPagamento'] = $data['query']['FormaPagamento'];
+			$data['bd']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
 			
 			$data['report'] = $this->Relatorio_model->list1_receitasparc($data['bd'],TRUE);
 

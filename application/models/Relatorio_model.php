@@ -1865,12 +1865,14 @@ class Relatorio_model extends CI_Model {
 		$filtro4 = ($data['Quitado']) ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
 		$filtro6 = ($data['FormaPagamento']) ? 'OT.FormaPagamento = "' . $data['FormaPagamento'] . '" AND ' : FALSE;
+		$filtro7 = ($data['Tipo_Orca']) ? 'OT.Tipo_Orca = "' . $data['Tipo_Orca'] . '" AND ' : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 
         $query = $this->db->query(
             'SELECT
                 C.NomeCliente,
                 OT.idApp_OrcaTrata,
+				OT.Tipo_Orca,
 				OT.idSis_Usuario,
 				OT.idTab_TipoRD,
                 OT.AprovadoOrca,
@@ -1906,8 +1908,10 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $consulta . ' AND
 				' . $permissao . '
+				' . $filtro1 . '
 				' . $filtro4 . '
 				' . $filtro6 . '
+				' . $filtro7 . '
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" 
@@ -1938,8 +1942,10 @@ class Relatorio_model extends CI_Model {
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				' . $consulta . ' AND				
 				' . $permissao . '
+				' . $filtro1 . '
 				' . $filtro4 . '
 				' . $filtro6 . '
+				' . $filtro7 . '
 				OT.idTab_TipoRD = "2" AND
 				OT.AprovadoOrca = "S" AND
 				PR.idTab_TipoRD = "2" AND
@@ -8142,7 +8148,7 @@ exit();*/
         $query = $this->db->query('
             SELECT
                 C.idApp_Cliente,
-                CONCAT(IFNULL(C.NomeCliente, ""), " --- ", IFNULL(C.CelularCliente, ""), " --- ", IFNULL(C.Telefone2, ""), " --- ", IFNULL(C.Telefone3, "")) As NomeCliente
+                CONCAT(IFNULL(C.idApp_Cliente, ""), " --- ", IFNULL(C.NomeCliente, ""), " --- ", IFNULL(C.CelularCliente, ""), " --- ", IFNULL(C.Telefone2, ""), " --- ", IFNULL(C.Telefone3, "")) As NomeCliente
             FROM
                 App_Cliente AS C
 
