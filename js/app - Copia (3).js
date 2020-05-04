@@ -3285,16 +3285,16 @@ $(document).ready(function () {
 							<div class="col-md-2">\
 								<div class="row">\
 									<div class="col-md-12">\
-										<label for="Aux_App_Produto_5'+pc+'">Nome Rec.:</label>\
+										<label for="NomeRecebedor'+pc+'">Nome Rec.:</label>\
 											<input type="text" class="form-control" maxlength="100"\
-												   name="Aux_App_Produto_5'+pc+'" value="">\
+												   name="NomeRecebedor'+pc+'" value="">\
 									</div>\
 								</div>\
 								<div class="row">\
 									<div class="col-md-12">\
-										<label for="Aux_App_Produto_2'+pc+'">CD:</label>\
+										<label for="CD'+pc+'">CD:</label>\
 											<input type="text" class="form-control" maxlength="100"\
-												   name="Aux_App_Produto_2'+pc+'" value="">\
+												   name="CD'+pc+'" value="">\
 									</div>\
 								</div>\
 								<div class="row">\
@@ -3313,32 +3313,32 @@ $(document).ready(function () {
 							<div class="col-md-2">\
 								<div class="row">\
 									<div class="col-md-12">\
-										<label for="Aux_App_Produto_1'+pc+'">Tel. Rec.:</label>\
+										<label for="TelefoneRec'+pc+'">Tel. Rec.:</label>\
 											<input type="text" class="form-control Celular CelularVariavel" maxlength="11" placeholder="(XX)999999999"\
-												   name="Aux_App_Produto_1'+pc+'" value="">\
+												   name="TelefoneRec'+pc+'" value="">\
 									</div>\
 								</div>\
 								<div class="row">\
 									<div class="col-md-12">\
-										<label for="Aux_App_Produto_3'+pc+'">Nº Mens.:</label>\
+										<label for="Mensagem'+pc+'">Nº Mens.:</label>\
 											<input type="text" class="form-control" maxlength="100"\
-												   name="Aux_App_Produto_3'+pc+'" value="">\
+												   name="Mensagem'+pc+'" value="">\
 									</div>\
 								</div>\
 								<div class="row">\
 									<div class="col-md-12">\
-										<label for="HoraValidadeProduto'+pc+'">Hora Envio:</label>\
+										<label for="HoraEnvio'+pc+'">Hora Envio:</label>\
 											<input type="text" class="form-control Time" maxlength="5"  placeholder="HH:MM"\
-												   name="HoraValidadeProduto'+pc+'" value="">\
+												   name="HoraEnvio'+pc+'" value="">\
 									</div>\
 								</div>\
 							</div>\
 							<div class="col-md-2">\
 								<div class="row">\
 									<div class="col-md-12">\
-										<label for="Aux_App_Produto_4'+pc+'">Parentesco:</label>\
+										<label for="Parente'+pc+'">Parentesco:</label>\
 											<input type="text" class="form-control" maxlength="200"\
-												   name="Aux_App_Produto_4'+pc+'" value="">\
+												   name="Parente'+pc+'" value="">\
 									</div>\
 								</div>\
 								<div class="row">\

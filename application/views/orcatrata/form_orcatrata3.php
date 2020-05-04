@@ -332,16 +332,16 @@
 																	<div class="col-md-2">
 																		<div class="row">
 																			<div class="col-md-12">
-																				<label for="NomeRecebedor<?php echo $i ?>">Nome Rec.:</label>
+																				<label for="Aux_App_Produto_5<?php echo $i ?>">Nome Rec.:</label>
 																					<input type="text" class="form-control" <?php echo $readonly; ?> maxlength="100"
-																						   name="NomeRecebedor<?php echo $i ?>" value="<?php echo $produto[$i]['NomeRecebedor']; ?>">
+																						   name="Aux_App_Produto_5<?php echo $i ?>" value="<?php echo $produto[$i]['Aux_App_Produto_5']; ?>">
 																			</div>
 																		</div>
 																		<div class="row">
 																			<div class="col-md-12">
-																				<label for="CD<?php echo $i ?>">CD:</label>
+																				<label for="Aux_App_Produto_2<?php echo $i ?>">CD:</label>
 																					<input type="text" class="form-control" <?php echo $readonly; ?> maxlength="100"
-																						   name="CD<?php echo $i ?>" value="<?php echo $produto[$i]['CD']; ?>">
+																						   name="Aux_App_Produto_2<?php echo $i ?>" value="<?php echo $produto[$i]['Aux_App_Produto_2']; ?>">
 																			</div>
 																		</div>
 																		<div class="row">	
@@ -360,32 +360,32 @@
 																	<div class="col-md-2">		
 																		<div class="row">
 																			<div class="col-md-12">
-																				<label for="TelefoneRec<?php echo $i ?>">Tel. Rec.:</label>
+																				<label for="Aux_App_Produto_1<?php echo $i ?>">Tel. Rec.:</label>
 																					<input type="text" class="form-control Celular CelularVariavel" <?php echo $readonly; ?> maxlength="11" placeholder="(XX)999999999"
-																						   name="TelefoneRec<?php echo $i ?>" value="<?php echo $produto[$i]['TelefoneRec']; ?>">
+																						   name="Aux_App_Produto_1<?php echo $i ?>" value="<?php echo $produto[$i]['Aux_App_Produto_1']; ?>">
 																			</div>
 																		</div>																						
 																		<div class="row">	
 																			<div class="col-md-12">
-																				<label for="Mensagem<?php echo $i ?>">Nº Mens.:</label>
+																				<label for="Aux_App_Produto_3<?php echo $i ?>">Nº Mens.:</label>
 																					<input type="text" class="form-control" <?php echo $readonly; ?> maxlength="100"
-																						   name="Mensagem<?php echo $i ?>" value="<?php echo $produto[$i]['Mensagem']; ?>">
+																						   name="Aux_App_Produto_3<?php echo $i ?>" value="<?php echo $produto[$i]['Aux_App_Produto_3']; ?>">
 																			</div>
 																		</div>
 																		<div class="row">
 																			<div class="col-md-12">
-																				<label for="HoraEnvio<?php echo $i ?>">Hora Envio:</label>
+																				<label for="HoraValidadeProduto<?php echo $i ?>">Hora Envio:</label>
 																					<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5"  placeholder="HH:MM"
-																						   name="HoraEnvio<?php echo $i ?>" value="<?php echo $produto[$i]['HoraEnvio']; ?>">
+																						   name="HoraValidadeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['HoraValidadeProduto']; ?>">
 																			</div>
 																		</div>																		
 																	</div>
 																	<div class="col-md-2">		
 																		<div class="row">	
 																			<div class="col-md-12">
-																				<label for="Parente<?php echo $i ?>">Parentesco:</label>
+																				<label for="Aux_App_Produto_4<?php echo $i ?>">Parentesco:</label>
 																					<input type="text" class="form-control" <?php echo $readonly; ?> maxlength="200"
-																						   name="Parente<?php echo $i ?>" value="<?php echo $produto[$i]['Parente']; ?>">
+																						   name="Aux_App_Produto_4<?php echo $i ?>" value="<?php echo $produto[$i]['Aux_App_Produto_4']; ?>">
 																			</div>
 																		</div>
 																		<div class="row">

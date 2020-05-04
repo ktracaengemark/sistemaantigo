@@ -128,22 +128,22 @@ class Orcatrata extends CI_Controller {
 					$this->input->post('QtdProduto' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('DataValidadeProduto' . $i) || 
 					$this->input->post('idSis_Usuario' . $i) || $this->input->post('ConcluidoProduto' . $i) || 
-					$this->input->post('DevolvidoProduto' . $i) || $this->input->post('CD' . $i) || 
-					$this->input->post('Mensagem' . $i) || $this->input->post('Parente' . $i) || 
-					$this->input->post('TelefoneRec' . $i) || $this->input->post('NomeRecebedor' . $i) || 
-					$this->input->post('HoraEnvio' . $i)) {
+					$this->input->post('DevolvidoProduto' . $i) || $this->input->post('Aux_App_Produto_2' . $i) || 
+					$this->input->post('Aux_App_Produto_3' . $i) || $this->input->post('Aux_App_Produto_4' . $i) || 
+					$this->input->post('Aux_App_Produto_1' . $i) || $this->input->post('Aux_App_Produto_5' . $i) || 
+					$this->input->post('HoraValidadeProduto' . $i)) {
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
                 $data['produto'][$j]['SubtotalProduto'] = $this->input->post('SubtotalProduto' . $i);
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
-				$data['produto'][$j]['TelefoneRec'] = $this->input->post('TelefoneRec' . $i);
-				$data['produto'][$j]['CD'] = $this->input->post('CD' . $i);
-				$data['produto'][$j]['Mensagem'] = $this->input->post('Mensagem' . $i);
-				$data['produto'][$j]['Parente'] = $this->input->post('Parente' . $i);
-				$data['produto'][$j]['NomeRecebedor'] = $this->input->post('NomeRecebedor' . $i);
-				$data['produto'][$j]['HoraEnvio'] = $this->input->post('HoraEnvio' . $i);
+				$data['produto'][$j]['Aux_App_Produto_1'] = $this->input->post('Aux_App_Produto_1' . $i);
+				$data['produto'][$j]['Aux_App_Produto_2'] = $this->input->post('Aux_App_Produto_2' . $i);
+				$data['produto'][$j]['Aux_App_Produto_3'] = $this->input->post('Aux_App_Produto_3' . $i);
+				$data['produto'][$j]['Aux_App_Produto_4'] = $this->input->post('Aux_App_Produto_4' . $i);
+				$data['produto'][$j]['Aux_App_Produto_5'] = $this->input->post('Aux_App_Produto_5' . $i);
+				$data['produto'][$j]['HoraValidadeProduto'] = $this->input->post('HoraValidadeProduto' . $i);
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -601,21 +601,21 @@ class Orcatrata extends CI_Controller {
             if ($this->input->post('idTab_Produto' . $i) || $this->input->post('ValorProduto' . $i) ||
 					$this->input->post('QtdProduto' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('idSis_Usuario' . $i) ||
-					$this->input->post('CD' . $i) || $this->input->post('Mensagem' . $i) || $this->input->post('Parente' . $i) ||
-					$this->input->post('DataValidadeProduto' . $i) || $this->input->post('TelefoneRec' . $i)  || 
-					$this->input->post('NomeRecebedor' . $i) || $this->input->post('HoraEnvio' . $i)) {
+					$this->input->post('Aux_App_Produto_2' . $i) || $this->input->post('Aux_App_Produto_3' . $i) || $this->input->post('Aux_App_Produto_4' . $i) ||
+					$this->input->post('DataValidadeProduto' . $i) || $this->input->post('Aux_App_Produto_1' . $i)  || 
+					$this->input->post('Aux_App_Produto_5' . $i) || $this->input->post('HoraValidadeProduto' . $i)) {
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
                 $data['produto'][$j]['SubtotalProduto'] = $this->input->post('SubtotalProduto' . $i);
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
-				$data['produto'][$j]['TelefoneRec'] = $this->input->post('TelefoneRec' . $i);
-				$data['produto'][$j]['CD'] = $this->input->post('CD' . $i);
-				$data['produto'][$j]['Mensagem'] = $this->input->post('Mensagem' . $i);
-				$data['produto'][$j]['Parente'] = $this->input->post('Parente' . $i);
-				$data['produto'][$j]['NomeRecebedor'] = $this->input->post('NomeRecebedor' . $i);
-				$data['produto'][$j]['HoraEnvio'] = $this->input->post('HoraEnvio' . $i);				
+				$data['produto'][$j]['Aux_App_Produto_1'] = $this->input->post('Aux_App_Produto_1' . $i);
+				$data['produto'][$j]['Aux_App_Produto_2'] = $this->input->post('Aux_App_Produto_2' . $i);
+				$data['produto'][$j]['Aux_App_Produto_3'] = $this->input->post('Aux_App_Produto_3' . $i);
+				$data['produto'][$j]['Aux_App_Produto_4'] = $this->input->post('Aux_App_Produto_4' . $i);
+				$data['produto'][$j]['Aux_App_Produto_5'] = $this->input->post('Aux_App_Produto_5' . $i);
+				$data['produto'][$j]['HoraValidadeProduto'] = $this->input->post('HoraValidadeProduto' . $i);				
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -1113,11 +1113,11 @@ class Orcatrata extends CI_Controller {
             if ($this->input->post('idTab_Produto' . $i) || $this->input->post('ValorProduto' . $i) ||
 					$this->input->post('QtdProduto' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('DataValidadeProduto' . $i) || 
-					$this->input->post('CD' . $i) || $this->input->post('Mensagem' . $i) || 
-					$this->input->post('Parente' . $i) ||$this->input->post('TelefoneRec' . $i)	||				
+					$this->input->post('Aux_App_Produto_2' . $i) || $this->input->post('Aux_App_Produto_3' . $i) || 
+					$this->input->post('Aux_App_Produto_4' . $i) ||$this->input->post('Aux_App_Produto_1' . $i)	||				
 					$this->input->post('ConcluidoProduto' . $i) || $this->input->post('idSis_Usuario' . $i) || 
 					$this->input->post('DevolvidoProduto' . $i)  || 
-					$this->input->post('NomeRecebedor' . $i) || $this->input->post('HoraEnvio' . $i)) {
+					$this->input->post('Aux_App_Produto_5' . $i) || $this->input->post('HoraValidadeProduto' . $i)) {
                 $data['produto'][$j]['idApp_Produto'] = $this->input->post('idApp_Produto' . $i);
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
@@ -1125,12 +1125,12 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['SubtotalProduto'] = $this->input->post('SubtotalProduto' . $i);
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
-				$data['produto'][$j]['TelefoneRec'] = $this->input->post('TelefoneRec' . $i);
-				$data['produto'][$j]['CD'] = $this->input->post('CD' . $i);
-				$data['produto'][$j]['Mensagem'] = $this->input->post('Mensagem' . $i);
-				$data['produto'][$j]['Parente'] = $this->input->post('Parente' . $i);
-				$data['produto'][$j]['NomeRecebedor'] = $this->input->post('NomeRecebedor' . $i);
-				$data['produto'][$j]['HoraEnvio'] = $this->input->post('HoraEnvio' . $i);
+				$data['produto'][$j]['Aux_App_Produto_1'] = $this->input->post('Aux_App_Produto_1' . $i);
+				$data['produto'][$j]['Aux_App_Produto_2'] = $this->input->post('Aux_App_Produto_2' . $i);
+				$data['produto'][$j]['Aux_App_Produto_3'] = $this->input->post('Aux_App_Produto_3' . $i);
+				$data['produto'][$j]['Aux_App_Produto_4'] = $this->input->post('Aux_App_Produto_4' . $i);
+				$data['produto'][$j]['Aux_App_Produto_5'] = $this->input->post('Aux_App_Produto_5' . $i);
+				$data['produto'][$j]['HoraValidadeProduto'] = $this->input->post('HoraValidadeProduto' . $i);
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -1808,10 +1808,10 @@ class Orcatrata extends CI_Controller {
             if ($this->input->post('idTab_Produto' . $i) || $this->input->post('ValorProduto' . $i) ||
 					$this->input->post('QtdProduto' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('DataValidadeProduto' . $i)||
-					$this->input->post('CD' . $i) || $this->input->post('Mensagem' . $i) || $this->input->post('Parente' . $i) ||
+					$this->input->post('Aux_App_Produto_2' . $i) || $this->input->post('Aux_App_Produto_3' . $i) || $this->input->post('Aux_App_Produto_4' . $i) ||
 					$this->input->post('idSis_Usuario' . $i) || $this->input->post('ConcluidoProduto' . $i) || 
-					$this->input->post('DevolvidoProduto' . $i) || $this->input->post('TelefoneRec' . $i)  || 
-					$this->input->post('NomeRecebedor' . $i) || $this->input->post('HoraEnvio' . $i)) {
+					$this->input->post('DevolvidoProduto' . $i) || $this->input->post('Aux_App_Produto_1' . $i)  || 
+					$this->input->post('Aux_App_Produto_5' . $i) || $this->input->post('HoraValidadeProduto' . $i)) {
                 $data['produto'][$j]['idApp_Produto'] = $this->input->post('idApp_Produto' . $i);
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
@@ -1819,12 +1819,12 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['SubtotalProduto'] = $this->input->post('SubtotalProduto' . $i);
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
-				$data['produto'][$j]['TelefoneRec'] = $this->input->post('TelefoneRec' . $i);
-				$data['produto'][$j]['CD'] = $this->input->post('CD' . $i);
-				$data['produto'][$j]['Mensagem'] = $this->input->post('Mensagem' . $i);
-				$data['produto'][$j]['Parente'] = $this->input->post('Parente' . $i);
-				$data['produto'][$j]['NomeRecebedor'] = $this->input->post('NomeRecebedor' . $i);
-				$data['produto'][$j]['HoraEnvio'] = $this->input->post('HoraEnvio' . $i);
+				$data['produto'][$j]['Aux_App_Produto_1'] = $this->input->post('Aux_App_Produto_1' . $i);
+				$data['produto'][$j]['Aux_App_Produto_2'] = $this->input->post('Aux_App_Produto_2' . $i);
+				$data['produto'][$j]['Aux_App_Produto_3'] = $this->input->post('Aux_App_Produto_3' . $i);
+				$data['produto'][$j]['Aux_App_Produto_4'] = $this->input->post('Aux_App_Produto_4' . $i);
+				$data['produto'][$j]['Aux_App_Produto_5'] = $this->input->post('Aux_App_Produto_5' . $i);
+				$data['produto'][$j]['HoraValidadeProduto'] = $this->input->post('HoraValidadeProduto' . $i);
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -2536,10 +2536,10 @@ class Orcatrata extends CI_Controller {
             if ($this->input->post('idTab_Produto' . $i) || $this->input->post('ValorProduto' . $i) ||
 					$this->input->post('QtdProduto' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('DataValidadeProduto' . $i) ||
-					$this->input->post('CD' . $i) || $this->input->post('Mensagem' . $i) || 
-					$this->input->post('Parente' . $i) || $this->input->post('TelefoneRec' . $i) ||					
+					$this->input->post('Aux_App_Produto_2' . $i) || $this->input->post('Aux_App_Produto_3' . $i) || 
+					$this->input->post('Aux_App_Produto_4' . $i) || $this->input->post('Aux_App_Produto_1' . $i) ||					
 					$this->input->post('ConcluidoProduto' . $i) || $this->input->post('DevolvidoProduto' . $i)  || 
-					$this->input->post('NomeRecebedor' . $i) || $this->input->post('HoraEnvio' . $i)) {
+					$this->input->post('Aux_App_Produto_5' . $i) || $this->input->post('HoraValidadeProduto' . $i)) {
                 $data['produto'][$j]['idApp_Produto'] = $this->input->post('idApp_Produto' . $i);
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
@@ -2547,12 +2547,12 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['SubtotalProduto'] = $this->input->post('SubtotalProduto' . $i);
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
-				$data['produto'][$j]['TelefoneRec'] = $this->input->post('TelefoneRec' . $i);
-				$data['produto'][$j]['CD'] = $this->input->post('CD' . $i);
-				$data['produto'][$j]['Mensagem'] = $this->input->post('Mensagem' . $i);
-				$data['produto'][$j]['Parente'] = $this->input->post('Parente' . $i);
-				$data['produto'][$j]['NomeRecebedor'] = $this->input->post('NomeRecebedor' . $i);
-				$data['produto'][$j]['HoraEnvio'] = $this->input->post('HoraEnvio' . $i);
+				$data['produto'][$j]['Aux_App_Produto_1'] = $this->input->post('Aux_App_Produto_1' . $i);
+				$data['produto'][$j]['Aux_App_Produto_2'] = $this->input->post('Aux_App_Produto_2' . $i);
+				$data['produto'][$j]['Aux_App_Produto_3'] = $this->input->post('Aux_App_Produto_3' . $i);
+				$data['produto'][$j]['Aux_App_Produto_4'] = $this->input->post('Aux_App_Produto_4' . $i);
+				$data['produto'][$j]['Aux_App_Produto_5'] = $this->input->post('Aux_App_Produto_5' . $i);
+				$data['produto'][$j]['HoraValidadeProduto'] = $this->input->post('HoraValidadeProduto' . $i);
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				
@@ -3280,23 +3280,23 @@ class Orcatrata extends CI_Controller {
             if ($this->input->post('idTab_Produto' . $i) || $this->input->post('ValorProduto' . $i) ||
 					$this->input->post('QtdProduto' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('DataValidadeProduto' . $i) ||
-					$this->input->post('CD' . $i) || $this->input->post('Mensagem' . $i) || 
-					$this->input->post('Parente' . $i) || $this->input->post('TelefoneRec' . $i) ||					
+					$this->input->post('Aux_App_Produto_2' . $i) || $this->input->post('Aux_App_Produto_3' . $i) || 
+					$this->input->post('Aux_App_Produto_4' . $i) || $this->input->post('Aux_App_Produto_1' . $i) ||					
 					$this->input->post('idSis_Usuario' . $i) || $this->input->post('ConcluidoProduto' . $i) || 
 					$this->input->post('DevolvidoProduto' . $i)  || 
-					$this->input->post('NomeRecebedor' . $i) || $this->input->post('HoraEnvio' . $i)) {
+					$this->input->post('Aux_App_Produto_5' . $i) || $this->input->post('HoraValidadeProduto' . $i)) {
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
                 $data['produto'][$j]['SubtotalProduto'] = $this->input->post('SubtotalProduto' . $i);
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
-				$data['produto'][$j]['TelefoneRec'] = $this->input->post('TelefoneRec' . $i);
-				$data['produto'][$j]['CD'] = $this->input->post('CD' . $i);
-				$data['produto'][$j]['Mensagem'] = $this->input->post('Mensagem' . $i);
-				$data['produto'][$j]['Parente'] = $this->input->post('Parente' . $i);
-				$data['produto'][$j]['NomeRecebedor'] = $this->input->post('NomeRecebedor' . $i);
-				$data['produto'][$j]['HoraEnvio'] = $this->input->post('HoraEnvio' . $i);
+				$data['produto'][$j]['Aux_App_Produto_1'] = $this->input->post('Aux_App_Produto_1' . $i);
+				$data['produto'][$j]['Aux_App_Produto_2'] = $this->input->post('Aux_App_Produto_2' . $i);
+				$data['produto'][$j]['Aux_App_Produto_3'] = $this->input->post('Aux_App_Produto_3' . $i);
+				$data['produto'][$j]['Aux_App_Produto_4'] = $this->input->post('Aux_App_Produto_4' . $i);
+				$data['produto'][$j]['Aux_App_Produto_5'] = $this->input->post('Aux_App_Produto_5' . $i);
+				$data['produto'][$j]['HoraValidadeProduto'] = $this->input->post('HoraValidadeProduto' . $i);
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -3780,11 +3780,11 @@ class Orcatrata extends CI_Controller {
             if ($this->input->post('idTab_Produto' . $i) || $this->input->post('ValorProduto' . $i) ||
 					$this->input->post('QtdProduto' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('DataValidadeProduto' . $i) || 
-					$this->input->post('CD' . $i) || $this->input->post('Mensagem' . $i) || 
-					$this->input->post('Parente' . $i) || $this->input->post('TelefoneRec' . $i) ||					
+					$this->input->post('Aux_App_Produto_2' . $i) || $this->input->post('Aux_App_Produto_3' . $i) || 
+					$this->input->post('Aux_App_Produto_4' . $i) || $this->input->post('Aux_App_Produto_1' . $i) ||					
 					$this->input->post('idSis_Usuario' . $i) || $this->input->post('ConcluidoProduto' . $i) || 
 					$this->input->post('DevolvidoProduto' . $i)  || 
-					$this->input->post('NomeRecebedor' . $i) || $this->input->post('HoraEnvio' . $i)) {
+					$this->input->post('Aux_App_Produto_5' . $i) || $this->input->post('HoraValidadeProduto' . $i)) {
                 $data['produto'][$j]['idApp_Produto'] = $this->input->post('idApp_Produto' . $i);
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
@@ -3792,12 +3792,12 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['SubtotalProduto'] = $this->input->post('SubtotalProduto' . $i);
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
-				$data['produto'][$j]['TelefoneRec'] = $this->input->post('TelefoneRec' . $i);
-				$data['produto'][$j]['CD'] = $this->input->post('CD' . $i);
-				$data['produto'][$j]['Mensagem'] = $this->input->post('Mensagem' . $i);
-				$data['produto'][$j]['Parente'] = $this->input->post('Parente' . $i);
-				$data['produto'][$j]['NomeRecebedor'] = $this->input->post('NomeRecebedor' . $i);
-				$data['produto'][$j]['HoraEnvio'] = $this->input->post('HoraEnvio' . $i);
+				$data['produto'][$j]['Aux_App_Produto_1'] = $this->input->post('Aux_App_Produto_1' . $i);
+				$data['produto'][$j]['Aux_App_Produto_2'] = $this->input->post('Aux_App_Produto_2' . $i);
+				$data['produto'][$j]['Aux_App_Produto_3'] = $this->input->post('Aux_App_Produto_3' . $i);
+				$data['produto'][$j]['Aux_App_Produto_4'] = $this->input->post('Aux_App_Produto_4' . $i);
+				$data['produto'][$j]['Aux_App_Produto_5'] = $this->input->post('Aux_App_Produto_5' . $i);
+				$data['produto'][$j]['HoraValidadeProduto'] = $this->input->post('HoraValidadeProduto' . $i);
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -5453,11 +5453,11 @@ class Orcatrata extends CI_Controller {
             if ($this->input->post('idTab_Produto' . $i) || $this->input->post('ValorProduto' . $i) ||
 					$this->input->post('QtdProduto' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('DataValidadeProduto' . $i)|| 
-					$this->input->post('CD' . $i) || $this->input->post('Mensagem' . $i) || 
-					$this->input->post('Parente' . $i) || $this->input->post('TelefoneRec' . $i) ||					
+					$this->input->post('Aux_App_Produto_2' . $i) || $this->input->post('Aux_App_Produto_3' . $i) || 
+					$this->input->post('Aux_App_Produto_4' . $i) || $this->input->post('Aux_App_Produto_1' . $i) ||					
 					$this->input->post('idSis_Usuario' . $i) || $this->input->post('ConcluidoProduto' . $i) || 
 					$this->input->post('DevolvidoProduto' . $i)  || 
-					$this->input->post('NomeRecebedor' . $i) || $this->input->post('HoraEnvio' . $i)) {
+					$this->input->post('Aux_App_Produto_5' . $i) || $this->input->post('HoraValidadeProduto' . $i)) {
                 $data['produto'][$j]['idApp_Produto'] = $this->input->post('idApp_Produto' . $i);
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
@@ -5465,12 +5465,12 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['SubtotalProduto'] = $this->input->post('SubtotalProduto' . $i);
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
-				$data['produto'][$j]['TelefoneRec'] = $this->input->post('TelefoneRec' . $i);
-				$data['produto'][$j]['CD'] = $this->input->post('CD' . $i);
-				$data['produto'][$j]['Mensagem'] = $this->input->post('Mensagem' . $i);
-				$data['produto'][$j]['Parente'] = $this->input->post('Parente' . $i);
-				$data['produto'][$j]['NomeRecebedor'] = $this->input->post('NomeRecebedor' . $i);
-				$data['produto'][$j]['HoraEnvio'] = $this->input->post('HoraEnvio' . $i);
+				$data['produto'][$j]['Aux_App_Produto_1'] = $this->input->post('Aux_App_Produto_1' . $i);
+				$data['produto'][$j]['Aux_App_Produto_2'] = $this->input->post('Aux_App_Produto_2' . $i);
+				$data['produto'][$j]['Aux_App_Produto_3'] = $this->input->post('Aux_App_Produto_3' . $i);
+				$data['produto'][$j]['Aux_App_Produto_4'] = $this->input->post('Aux_App_Produto_4' . $i);
+				$data['produto'][$j]['Aux_App_Produto_5'] = $this->input->post('Aux_App_Produto_5' . $i);
+				$data['produto'][$j]['HoraValidadeProduto'] = $this->input->post('HoraValidadeProduto' . $i);
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -5798,11 +5798,11 @@ class Orcatrata extends CI_Controller {
             if ($this->input->post('idTab_Produto' . $i) || $this->input->post('ValorProduto' . $i) ||
 					$this->input->post('QtdProduto' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('DataValidadeProduto' . $i)|| 
-					$this->input->post('CD' . $i) || $this->input->post('Mensagem' . $i) || 
-					$this->input->post('Parente' . $i) || $this->input->post('TelefoneRec' . $i) ||					
+					$this->input->post('Aux_App_Produto_2' . $i) || $this->input->post('Aux_App_Produto_3' . $i) || 
+					$this->input->post('Aux_App_Produto_4' . $i) || $this->input->post('Aux_App_Produto_1' . $i) ||					
 					$this->input->post('idSis_Usuario' . $i) || $this->input->post('ConcluidoProduto' . $i) || 
 					$this->input->post('DevolvidoProduto' . $i)  || 
-					$this->input->post('NomeRecebedor' . $i) || $this->input->post('HoraEnvio' . $i)) {
+					$this->input->post('Aux_App_Produto_5' . $i) || $this->input->post('HoraValidadeProduto' . $i)) {
                 $data['produto'][$j]['idApp_Produto'] = $this->input->post('idApp_Produto' . $i);
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
@@ -5810,12 +5810,12 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['SubtotalProduto'] = $this->input->post('SubtotalProduto' . $i);
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
-				$data['produto'][$j]['TelefoneRec'] = $this->input->post('TelefoneRec' . $i);
-				$data['produto'][$j]['CD'] = $this->input->post('CD' . $i);
-				$data['produto'][$j]['Mensagem'] = $this->input->post('Mensagem' . $i);
-				$data['produto'][$j]['Parente'] = $this->input->post('Parente' . $i);
-				$data['produto'][$j]['NomeRecebedor'] = $this->input->post('NomeRecebedor' . $i);
-				$data['produto'][$j]['HoraEnvio'] = $this->input->post('HoraEnvio' . $i);
+				$data['produto'][$j]['Aux_App_Produto_1'] = $this->input->post('Aux_App_Produto_1' . $i);
+				$data['produto'][$j]['Aux_App_Produto_2'] = $this->input->post('Aux_App_Produto_2' . $i);
+				$data['produto'][$j]['Aux_App_Produto_3'] = $this->input->post('Aux_App_Produto_3' . $i);
+				$data['produto'][$j]['Aux_App_Produto_4'] = $this->input->post('Aux_App_Produto_4' . $i);
+				$data['produto'][$j]['Aux_App_Produto_5'] = $this->input->post('Aux_App_Produto_5' . $i);
+				$data['produto'][$j]['HoraValidadeProduto'] = $this->input->post('HoraValidadeProduto' . $i);
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -6144,11 +6144,11 @@ class Orcatrata extends CI_Controller {
             if ($this->input->post('idTab_Produto' . $i) || $this->input->post('ValorProduto' . $i) ||
 					$this->input->post('QtdProduto' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('DataValidadeProduto' . $i)|| 
-					$this->input->post('CD' . $i) || $this->input->post('Mensagem' . $i) || 
-					$this->input->post('Parente' . $i) ||$this->input->post('TelefoneRec' . $i)	||				
+					$this->input->post('Aux_App_Produto_2' . $i) || $this->input->post('Aux_App_Produto_3' . $i) || 
+					$this->input->post('Aux_App_Produto_4' . $i) ||$this->input->post('Aux_App_Produto_1' . $i)	||				
 					$this->input->post('idSis_Usuario' . $i) || $this->input->post('ConcluidoProduto' . $i) || 
 					$this->input->post('DevolvidoProduto' . $i) || $this->input->post('StatusComissao' . $i)  || 
-					$this->input->post('NomeRecebedor' . $i) || $this->input->post('HoraEnvio' . $i)) {
+					$this->input->post('Aux_App_Produto_5' . $i) || $this->input->post('HoraValidadeProduto' . $i)) {
                 $data['produto'][$j]['idApp_Produto'] = $this->input->post('idApp_Produto' . $i);
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
@@ -6156,12 +6156,12 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['SubtotalProduto'] = $this->input->post('SubtotalProduto' . $i);
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
-				$data['produto'][$j]['TelefoneRec'] = $this->input->post('TelefoneRec' . $i);
-				$data['produto'][$j]['CD'] = $this->input->post('CD' . $i);
-				$data['produto'][$j]['Mensagem'] = $this->input->post('Mensagem' . $i);
-				$data['produto'][$j]['Parente'] = $this->input->post('Parente' . $i);
-				$data['produto'][$j]['NomeRecebedor'] = $this->input->post('NomeRecebedor' . $i);
-				$data['produto'][$j]['HoraEnvio'] = $this->input->post('HoraEnvio' . $i);				
+				$data['produto'][$j]['Aux_App_Produto_1'] = $this->input->post('Aux_App_Produto_1' . $i);
+				$data['produto'][$j]['Aux_App_Produto_2'] = $this->input->post('Aux_App_Produto_2' . $i);
+				$data['produto'][$j]['Aux_App_Produto_3'] = $this->input->post('Aux_App_Produto_3' . $i);
+				$data['produto'][$j]['Aux_App_Produto_4'] = $this->input->post('Aux_App_Produto_4' . $i);
+				$data['produto'][$j]['Aux_App_Produto_5'] = $this->input->post('Aux_App_Produto_5' . $i);
+				$data['produto'][$j]['HoraValidadeProduto'] = $this->input->post('HoraValidadeProduto' . $i);				
                 $data['produto'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoProduto' . $i);
 				$data['produto'][$j]['DevolvidoProduto'] = $this->input->post('DevolvidoProduto' . $i);
 				$data['produto'][$j]['StatusComissao'] = $this->input->post('StatusComissao' . $i);

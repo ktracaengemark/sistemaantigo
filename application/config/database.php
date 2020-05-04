@@ -6,15 +6,15 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-/*
+
     'hostname' => '159.89.138.173',
 	'username' => 'usuario',
 	'password' => '20UtpJ15',
-*/
+/*
     'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',
-
+*/
     #'database' => 'ci',
     #'database' => 'app',	
 	'database' => 'app.testes3',

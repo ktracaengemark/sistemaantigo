@@ -34,7 +34,7 @@
 						#echo '<td>R$' . number_format($row['ValorProduto'], 2, ',', '.') . '</td>';
 						#echo '<td>' . $row['ObsProduto'] . '</td>';
 						echo '<td>' . $row['DataValidadeProduto'] . '</td>';
-						echo '<td>' . $row['HoraEnvio'] . '</td>';
+						echo '<td>' . $row['HoraValidadeProduto'] . '</td>';
 						echo '<td>' . $this->basico->mascara_palavra_completa($row['ConcluidoProduto'], 'NS') . '</td>';
 						
 					echo '</tr>';            
