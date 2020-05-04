@@ -1353,7 +1353,7 @@
 													</div>
 													<div class="col-md-6 text-right">
 														<label></label><br>
-														<button  type="button" class="btn btn-md btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+														<button  type="button" class="btn btn-md btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 															<span class="glyphicon glyphicon-trash"></span> Excluir
 														</button>
 													</div>
@@ -1371,12 +1371,12 @@
 																</div>
 																<div class="modal-footer">
 																	<div class="col-md-6 text-left">
-																		<button type="button" class="btn btn-warning" data-dismiss="modal">
+																		<button type="button" class="btn btn-warning" name="submeter4" id="submeter4" onclick="DesabilitaBotao()" data-dismiss="modal">
 																			<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
 																		</button>
 																	</div>
 																	<div class="col-md-6 text-right">
-																		<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluir2/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
+																		<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluir2/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
 																			<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 																		</a>
 																	</div>
