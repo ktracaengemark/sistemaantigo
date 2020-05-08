@@ -136,7 +136,9 @@
 						<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
 							<span class="glyphicon glyphicon-pencil"></span> Cadastros & Relatórios  <span class="caret"></span>
 						</button>
-						<ul class="dropdown-menu" role="menu">							
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>"><span class="glyphicon glyphicon-user"></span> Cobranca</a></li>
+							<li role="separator" class="divider"></li>							
 							<li><a href="<?php echo base_url() ?>relatorio/clientes"><span class="glyphicon glyphicon-user"></span> Clientes </a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/fornecedor"><span class="glyphicon glyphicon-user"></span> Fornecedores </a></li>

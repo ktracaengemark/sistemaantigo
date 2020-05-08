@@ -50,7 +50,8 @@
 							<th class="active">Dt Orca</th>
 							<th class="active">Dt Venc</th>
 							<th class="active">Receber</th>
-							<th class="active">Qt</th>
+							<th class="active">Produtos</th>
+							<th class="active">Parcelas</th>
 							<!--<th class="active">Dt.Pag</th>
 							<th class="active">Recebido</th>
 							<th class="active">Valor Recebido</th>
@@ -91,12 +92,12 @@
 								echo '<td>' . $row['DataOrca'] . '</td>';
 								echo '<td>' . $row['DataVencimento'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorParcela'] . '</td>';
-								echo '<td>' . $row['Quitado'] . '</td>';
+								echo '<td>' . $row['ConcluidoOrca'] . '</td>';									
+								echo '<td>' . $row['QuitadoOrca'] . '</td>';
 								#echo '<td>' . $row['DataPago'] . '</td>';
 								#echo '<td class="text-left">' . $row['ValorPago'] . '</td>';
 								#echo '<td class="text-left">R$ ' . $row['ValorPago'] . '</td>';
 								#echo '<td>' . $row['DataOrca'] . '</td>';
-								#echo '<td>' . $row['ConcluidoOrca'] . '</td>';						
 							echo '</tr>';
 						}
 						?>

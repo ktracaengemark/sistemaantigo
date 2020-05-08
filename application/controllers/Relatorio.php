@@ -2990,6 +2990,9 @@ class Relatorio extends CI_Controller {
         $_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
         $_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];
 		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];
+		$_SESSION['FiltroAlteraParcela']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
+		$_SESSION['FiltroAlteraParcela']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
+		$_SESSION['FiltroAlteraParcela']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
 		$_SESSION['FiltroAlteraParcela']['Orcarec'] = $data['query']['Orcarec'];
 		$_SESSION['FiltroAlteraParcela']['Orcades'] = $data['query']['Orcades'];
 		$_SESSION['FiltroAlteraParcela']['NomeCliente'] = $data['query']['NomeCliente'];
@@ -3010,33 +3013,33 @@ class Relatorio extends CI_Controller {
 		$data['collapse1'] = 'class="collapse"';
 
         $data['select']['Tipo_Orca'] = array(
+			'0' => 'TODOS',			
 			'B' => 'Balcão',
 			'O' => 'Online',
-			'0' => 'TODOS',
         );
 		
         $data['select']['AprovadoOrca'] = array(
+			'0' => 'TODOS',			
 			'S' => 'Aprovado',
 			'N' => 'Não Aprovado',
-			'0' => 'TODOS',
         );
 
         $data['select']['QuitadoOrca'] = array(
-            '0' => 'TODOS',
-            'N' => 'Não',
-            'S' => 'Sim',
+			'0' => 'TODOS',            
+			'S' => 'Quitadas',
+            'N' => 'Não Quitadas',
         );
 
 		$data['select']['ConcluidoOrca'] = array(
-            '0' => 'TODOS',
-            'N' => 'Não',
-            'S' => 'Sim',
+			'0' => 'TODOS',            
+			'S' => 'Entregues',
+            'N' => 'Não Entregues',
         );
 
 		$data['select']['Quitado'] = array(
+			'0' => 'TODAS',			
 			'S' => 'Pagas',
 			'N' => 'NÃO Pagas',
-			'0' => 'TODAS',
         );
 		
 		$data['select']['Modalidade'] = array(

@@ -1909,6 +1909,8 @@ class Relatorio_model extends CI_Model {
 				' . $consulta . ' AND
 				' . $permissao . '
 				' . $filtro1 . '
+				' . $filtro2 . '
+				' . $filtro3 . '
 				' . $filtro4 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
@@ -1920,7 +1922,7 @@ class Relatorio_model extends CI_Model {
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . '
-				' . $data['NomeCliente'] . '				           
+				' . $data['NomeCliente'] . '
 			ORDER BY
 				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
 		');
@@ -1943,6 +1945,8 @@ class Relatorio_model extends CI_Model {
 				' . $consulta . ' AND				
 				' . $permissao . '
 				' . $filtro1 . '
+				' . $filtro2 . '
+				' . $filtro3 . '
 				' . $filtro4 . '
 				' . $filtro6 . '
 				' . $filtro7 . '

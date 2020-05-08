@@ -4714,6 +4714,9 @@ class Orcatrata extends CI_Controller {
 			'Orcarec',
 			'NomeCliente',
 			'QuitadoParcelas',
+			'AprovadoOrca',
+			'ConcluidoOrca',
+			'QuitadoOrca',
         ), TRUE));
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4780,6 +4783,9 @@ class Orcatrata extends CI_Controller {
 
 		$data['select']['QuitadoParcelas'] = $this->Basico_model->select_status_sn();
         $data['select']['Quitado'] = $this->Basico_model->select_status_sn();
+		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
+		$data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
+		$data['select']['QuitadoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['Dia'] = $this->Basico_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Basico_model->select_mes();
 		$data['select']['Orcarec'] = $this->Basico_model->select_orcarec();
@@ -4826,6 +4832,9 @@ class Orcatrata extends CI_Controller {
 			$data['bd']['Orcarec'] = $data['query']['Orcarec'];
 			$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
 			$data['bd']['QuitadoParcelas'] = $data['query']['QuitadoParcelas'];
+			$data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
+			$data['bd']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
+			$data['bd']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
 			
 			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Sis_Empresa ####
@@ -6081,7 +6090,7 @@ class Orcatrata extends CI_Controller {
         $this->load->view('basico/footer');
 
     }
-
+	
     public function alterarstatuscomissao($id = FALSE) {
 
         if ($this->input->get('m') == 1)

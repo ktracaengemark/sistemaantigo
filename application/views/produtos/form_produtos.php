@@ -216,7 +216,24 @@
 								<input type="text" class="form-control" maxlength="25"
 										name="CodProd" value="<?php echo $produtos['CodProd'] ?>">
 							</div>
+							<div class="col-md-3">
+								<label for="Comissao">Comissão:</label><br>
+								<div class="input-group">
+									<span class="input-group-addon" id="basic-addon1">(%)</span>
+									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
+											name="Comissao" value="<?php echo $produtos['Comissao'] ?>">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<label for="PesoProduto">Peso:</label><br>
+								<div class="input-group">
+									<span class="input-group-addon" id="basic-addon1">(kg)</span>
+									<input type="text" class="form-control Peso" maxlength="10" placeholder="0,000"
+											name="PesoProduto" value="<?php echo $produtos['PesoProduto'] ?>">
+								</div>
+							</div>							
 						</div>
+						
 						<div class="row">
 							<div class="col-md-2 text-left">
 								<label for="Ativo">Produto Ativo?</label><br>
@@ -276,22 +293,7 @@
 									</div>
 								</div>								
 								<div id="VendaSite" <?php echo $div['VendaSite']; ?>>	
-									<div class="col-md-3">
-										<label for="Comissao">Comissão:</label><br>
-										<div class="input-group">
-											<span class="input-group-addon" id="basic-addon1">(%)</span>
-											<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
-													name="Comissao" value="<?php echo $produtos['Comissao'] ?>">
-										</div>
-									</div>
-									<div class="col-md-3">
-										<label for="PesoProduto">Peso:</label><br>
-										<div class="input-group">
-											<span class="input-group-addon" id="basic-addon1">(kg)</span>
-											<input type="text" class="form-control Peso" maxlength="10" placeholder="0,000"
-													name="PesoProduto" value="<?php echo $produtos['PesoProduto'] ?>">
-										</div>
-									</div>									
+									
 								</div>
 							</div>	
 						</div>
