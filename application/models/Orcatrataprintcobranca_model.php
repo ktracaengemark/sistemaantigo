@@ -12,7 +12,20 @@ class Orcatrataprintcobranca_model extends CI_Model {
     }
 
     public function get_orcatrata($data) {
-        $query = $this->db->query(
+		
+		if ($_SESSION['FiltroAlteraParcela']['DataFim']) {
+            $consulta =
+				'(PR.DataVencimento >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND PR.DataVencimento <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(PR.DataVencimento >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '")';
+        }
+		
+		$permissao1 = ($_SESSION['FiltroAlteraParcela']['Quitado'] != "0" ) ? 'PR.Quitado = "' . $_SESSION['FiltroAlteraParcela']['Quitado'] . '" AND ' : FALSE;
+		//$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
+		$permissao2 = ($_SESSION['FiltroAlteraParcela']['NomeCliente'] != "0" ) ? 'C.idApp_Cliente = "' . $_SESSION['FiltroAlteraParcela']['NomeCliente'] . '" AND ' : FALSE;
+		$query = $this->db->query(
             'SELECT
 				C.NomeCliente,
 				OT.idSis_Empresa,
@@ -47,7 +60,8 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				MO.Abrev3,
 				OT.Modalidade,
 				MO.Modalidade,
-				TP.TipoFinanceiro
+				TP.TipoFinanceiro,
+				PR.DataVencimento
             FROM           	
                 Tab_FormaPag AS FP,
 				App_OrcaTrata AS OT
@@ -55,13 +69,19 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				LEFT JOIN Tab_TipoFinanceiro AS TP ON TP.idTab_TipoFinanceiro = OT.TipoFinanceiro				
 				LEFT JOIN Tab_Modalidade AS MO ON MO.Abrev = OT.Modalidade
 				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+				LEFT JOIN App_Parcelas AS PR ON PR.idApp_OrcaTrata = OT.idApp_OrcaTrata
             WHERE
-            	OT.idSis_Empresa = ' . $data . ' AND
+            	' . $permissao1 . '
+				' . $permissao2 . '
+				OT.idSis_Empresa = ' . $data . ' AND
                 OT.idApp_Cliente = C.idApp_Cliente AND
 				OT.FormaPagamento = FP.idTab_FormaPag AND
-				OT.Tipo_Orca = "B"
+				OT.AprovadoOrca = "S" AND
+				OT.Tipo_Orca = "B" AND
+				' . $consulta . '
+
             ORDER BY
-            	OT.idApp_OrcaTrata 	ASC		
+            	PR.DataVencimento 	ASC		
         ');
         $query = $query->result_array();
 
@@ -132,6 +152,16 @@ class Orcatrataprintcobranca_model extends CI_Model {
     }
 	
     public function get_parcelasrec($data) {
+		
+        if ($_SESSION['FiltroAlteraParcela']['DataFim']) {
+            $consulta =
+				'(PR.DataVencimento >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND PR.DataVencimento <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '")';
+        }
+        else {
+            $consulta =
+                '(PR.DataVencimento >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '")';
+        }		
+		
 		$query = $this->db->query('
 			SELECT  
 				PR.idSis_Empresa,
@@ -147,9 +177,9 @@ class Orcatrataprintcobranca_model extends CI_Model {
 
 			WHERE 
 				PR.idApp_OrcaTrata = OT.idApp_OrcaTrata AND
-				PR.idSis_Empresa = ' . $data . '
+				PR.idSis_Empresa = ' . $data . ' 
             ORDER BY
-            	PR.idApp_OrcaTrata DESC				
+            	PR.DataVencimento ASC				
 		
 		');
         $query = $query->result_array();
