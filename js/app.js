@@ -887,7 +887,7 @@ function adicionaProcedimento() {
 
     $(".input_fields_wrap3").append('\
         <div class="form-group" id="3div'+pc+'">\
-			<div class="panel panel-success">\
+			<div class="panel panel-warning">\
 				<div class="panel-heading">\
 					<div class="row">\
 						<div class="col-md-4">\
@@ -2531,6 +2531,13 @@ function adicionaParcelas() {
 	var pc = $("#PRCount").val(); //initlal text box count
 	pc++; //text box increment
 	$("#PRCount").val(pc);
+
+	if (pc >= 2) {
+		//console.log( $("#listadinamicac"+(pc-1)).val() );
+		var chosen2;
+		chosen2 = $("#listadinamicac"+(pc-1)).val();
+		//console.log( chosen + ' :: ' + pc );
+	}	
 	
     //Captura a data do dia e carrega no campo correspondente
     var currentDate = moment();
@@ -2545,7 +2552,7 @@ function adicionaParcelas() {
 							<input type="text" class="form-control" maxlength="6"\
 								   name="Parcela'+pc+'" value="Ex.">\
 						</div>\
-						<div class="col-md-3">\
+						<div class="col-md-2">\
 							<label for="ValorParcela">Valor:</label><br>\
 							<div class="input-group" id="txtHint">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
@@ -2563,7 +2570,7 @@ function adicionaParcelas() {
 									   name="DataVencimento'+pc+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 							</div>\
 						</div>\
-						<div class="col-md-3">\
+						<div class="col-md-2">\
 							<label for="Quitado">Parc.Quitado?</label><br>\
 							<div class="form-group">\
 								<div class="btn-group" data-toggle="buttons">\
@@ -2578,6 +2585,13 @@ function adicionaParcelas() {
 								</div>\
 							</div>\
 						</div>\
+						<div class="col-md-2">\
+							<label for="idSis_Usuario'+pc+'">Profissional:</label>\
+							<select data-placeholder="Selecione uma opção..." class="form-control"\
+									 id="listadinamicac'+pc+'" name="idSis_Usuario'+pc+'">\
+								<option value=""></option>\
+							</select>\
+						</div>\
 						<div class="col-md-1">\
 							<label><br></label><br>\
 							<a href="#" id="'+pc+'" class="remove_field21 btn btn-danger">\
@@ -2590,6 +2604,39 @@ function adicionaParcelas() {
 		</div>'
 	); //add input box
 
+	//get a reference to the select element
+	$select2 = $('#listadinamicac'+pc);
+
+	//request the JSON data and parse into the select element
+	$.ajax({
+		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=3',
+		dataType: 'JSON',
+		type: "GET",
+		success: function (data) {
+			//clear the current content of the select
+			$select2.html('');
+			//iterate over the data and append a select option
+			$select2.append('<option value="">-- Sel. Profis. --</option>');
+			$.each(data, function (key, val) {
+				//alert(val.id);
+				$select2.append('<option value="' + val.id + '">' + val.name + '</option>');
+			})
+			$('.Chosen').chosen2({
+				disable_search_threshold: 10,
+				multiple_text: "Selecione uma ou mais opções",
+				single_text: "Selecione uma opção",
+				no_results_text: "Nenhum resultado para",
+				width: "100%"
+			});
+		},
+		error: function () {
+			//alert('erro listadinamicaB');
+			//if there is an error append a 'none available' option
+			$select2.html('<option id="-1">ERRO</option>');
+		}
+
+	});	
+	
 	//habilita o botão de calendário após a geração dos campos dinâmicos
 	$('.DatePicker').datetimepicker(dateTimePickerOptions);	
 	
@@ -2990,8 +3037,6 @@ $(document).ready(function () {
 
     });
 
-
-
 	//adiciona campos dinamicamente Dos Produtos Devolvidos pelos CLIENTES
     var ps = $("#SCount").val(); //initlal text box count
 	$(".add_field_button").click(function(e){ //on add input button click
@@ -3349,21 +3394,48 @@ $(document).ready(function () {
 									</div>\
 								</div>\
 							</div>\
-							<div class="col-md-2 panel-body">\
-								<div class="panel panel-primary">\
-									<div class="panel-heading">\
-										<div class="row">\
-											<div class="col-md-12">\
-												<label for="ConcluidoProduto">Entregue? </label><br>\
-												<div class="btn-group" data-toggle="buttons">\
-													<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
-													<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
-														autocomplete="off" value="N" checked>Não\
-													</label>\
-													<label class="btn btn-default" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'S">\
-													<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
-														autocomplete="off" value="S" >Sim\
-													</label>\
+							<div class="col-md-2">\
+								<div class="row">\
+									<div class="col-md-12 panel-body">\
+										<div class="panel panel-primary">\
+											<div class="panel-heading">\
+												<div class="row">\
+													<div class="col-md-12">\
+														<label for="ConcluidoProduto">Entregue? </label><br>\
+														<div class="btn-group" data-toggle="buttons">\
+															<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
+															<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
+																autocomplete="off" value="N" checked>Não\
+															</label>\
+															<label class="btn btn-default" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'S">\
+															<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
+																autocomplete="off" value="S" >Sim\
+															</label>\
+														</div>\
+													</div>\
+												</div>\
+											</div>\
+										</div>\
+									</div>\
+								</div>\
+								<div class="row">\
+									<div class="col-md-12 panel-body">\
+										<div class="panel panel-danger">\
+											<div class="panel-heading">\
+												<div class="row">\
+													<div class="col-md-12">\
+														<label for="CanceladoProduto">Cancelado? </label><br>\
+														<div class="btn-group" data-toggle="buttons">\
+															<label class="btn btn-warning active" name="radio_CanceladoProduto'+pc+'" id="radio_CanceladoProduto'+pc+'N">\
+															<input type="radio" name="CanceladoProduto'+pc+'" id="radiogeraldinamico"\
+																autocomplete="off" value="N" checked>Não\
+															</label>\
+															<label class="btn btn-default" name="radio_CanceladoProduto'+pc+'" id="radio_CanceladoProduto'+pc+'S">\
+															<input type="radio" name="CanceladoProduto'+pc+'" id="radiogeraldinamico"\
+																autocomplete="off" value="S" >Sim\
+															</label>\
+														</div>\
+													</div>\
 												</div>\
 											</div>\
 										</div>\
@@ -3371,7 +3443,7 @@ $(document).ready(function () {
 								</div>\
 							</div>\
 							<div class="col-md-2 panel-body">\
-								<div class="panel panel-danger">\
+								<div class="panel panel-success">\
 									<div class="panel-heading">\
 										<div class="row">\
 											<div class="col-md-12">\
