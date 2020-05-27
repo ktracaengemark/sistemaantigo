@@ -67,6 +67,11 @@
 				   autofocus name="NomeEmpresa" value="<?php echo $query['NomeEmpresa']; ?>">
 			<?php echo form_error('NomeEmpresa'); ?>
 			
+			<label for="Site">Site:</label>
+			<input type="text" class="form-control" id="Site" maxlength="45" 
+				   autofocus name="Site" value="<?php echo $query['Site']; ?>">
+			<?php echo form_error('Site'); ?>
+			
 			<!--
 			<label for="NumUsuarios">Nº de Usuários:*</label>
 			<select data-placeholder="Selecione uma opção..." class="form-control" id="NumUsuarios" name="NumUsuarios">			

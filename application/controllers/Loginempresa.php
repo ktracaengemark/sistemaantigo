@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Loginempresa extends CI_Controller {
 
-    public function __construct() {
+public function __construct() {
         parent::__construct();
 
         $this->load->model(array('Loginempresa_model', 'Basico_model'));
@@ -176,6 +176,7 @@ class Loginempresa extends CI_Controller {
 			'DataCriacao',
 			'DataDeValidade',
 			'NumUsuarios',
+			'Site',
                 ), TRUE);
 
                 (!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
@@ -184,6 +185,7 @@ class Loginempresa extends CI_Controller {
 		$this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
 		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
 		$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim');	
+		$this->form_validation->set_rules('Site', 'Nome do Site', 'required|trim|is_unique[Sis_Empresa.Site]');
 		#$this->form_validation->set_rules('CpfAdmin', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CpfAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
 		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');		
         #$this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
@@ -218,7 +220,7 @@ class Loginempresa extends CI_Controller {
 			$data['query']['Senha'] = md5($data['query']['Senha']);
             //$data['query']['Senha'] = password_hash($data['query']['Senha'], PASSWORD_DEFAULT);
 			$data['query']['Codigo'] = md5(uniqid(time() . rand()));
-			$data['query']['Site'] = "sitedaempresa";
+			#$data['query']['Site'] = "sitedaempresa";
             #$data['query']['Inativo'] = 1;
             //ACESSO LIBERADO PRA QUEM REALIZAR O CADASTRO
             $data['query']['Inativo'] = 0;
@@ -323,7 +325,41 @@ class Loginempresa extends CI_Controller {
 				$arquivo_origem5 = 'arquivos/imagens/empresas/1/produtos/miniatura/fotoproduto.jpg';
 				$arquivo_destino5 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/produtos/miniatura/fotoproduto.jpg';
 				
-				copy($arquivo_origem5, $arquivo_destino5);				
+				copy($arquivo_origem5, $arquivo_destino5);
+				
+				//início da criação o site da Empresa///
+				//este é o TAMPLATE do site escolhido na hora da criação da empresa!!
+				$tamplate = '../site2';
+
+				//este é o NOME do site escolhido na hora da criação da empresa!!
+				//////$pasta = '../nomedosite';
+				$pasta = '../' .$data['query']['Site']. '';
+				// checar se o nome da pasta existe
+				if (!is_dir($pasta)){
+					mkdir($pasta, 0777);
+				}
+
+				if (is_dir($tamplate)){
+					foreach(scandir($tamplate) as $arquivo){
+						$caminho_arquivo = "$tamplate/$arquivo";
+						if(is_file($caminho_arquivo)){
+							//echo $caminho_arquivo . PHP_EOL;
+							/////copy($caminho_arquivo, "../nomedosite/$arquivo");
+							copy($caminho_arquivo, "../" .$data['query']['Site']. "/$arquivo");
+						}
+					}
+				}
+
+				/////$nome_arquivo = "../nomedosite/configuracao.php";
+				$nome_arquivo = "../" .$data['query']['Site']. "/configuracao.php";
+				//echo $nome_arquivo;
+				$arquivo = fopen($nome_arquivo, 'r+');
+				fwrite($arquivo, '<?php' . PHP_EOL);
+				fwrite($arquivo, '//Dados da Empresa' . PHP_EOL);
+				fwrite($arquivo, '$idSis_Empresa = ' . $data['idSis_Empresa'] . ';' . PHP_EOL);
+				fclose($arquivo);				
+				//Fim da criação do site da empresa///
+				
 				
 				if ($data['idSis_Usuario'] === FALSE) {
 					$data['msg'] = '?m=2';
@@ -473,6 +509,7 @@ class Loginempresa extends CI_Controller {
 			'DataDeValidade',
 			'NumUsuarios',
 			'Associado',
+			'Site',
                 ), TRUE);
 
                 (!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
@@ -481,6 +518,7 @@ class Loginempresa extends CI_Controller {
 		$this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
 		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
 		$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim');
+		$this->form_validation->set_rules('Site', 'Site da empresa', 'required|trim|is_unique[Sis_Empresa.Site]');
 		#$this->form_validation->set_rules('CpfAdmin', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CpfAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
 		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');		
         #$this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
@@ -516,7 +554,7 @@ class Loginempresa extends CI_Controller {
 			$data['query']['Senha'] = md5($data['query']['Senha']);
             //$data['query']['Senha'] = password_hash($data['query']['Senha'], PASSWORD_DEFAULT);
             $data['query']['Codigo'] = md5(uniqid(time() . rand()));
-			$data['query']['Site'] = "sitedaempresa";
+			#$data['query']['Site'] = "sitedaempresa";
             #$data['query']['Inativo'] = 1;
             //ACESSO LIBERADO PRA QUEM REALIZAR O CADASTRO
             $data['query']['Inativo'] = 0;
@@ -619,7 +657,40 @@ class Loginempresa extends CI_Controller {
 				$arquivo_origem5 = 'arquivos/imagens/empresas/1/produtos/miniatura/fotoproduto.jpg';
 				$arquivo_destino5 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/produtos/miniatura/fotoproduto.jpg';
 				
-				copy($arquivo_origem5, $arquivo_destino5);					
+				copy($arquivo_origem5, $arquivo_destino5);
+				
+				//início da criação o site da Empresa///
+				//este é o TAMPLATE do site escolhido na hora da criação da empresa!!
+				$tamplate = '../site2';
+
+				//este é o NOME do site escolhido na hora da criação da empresa!!
+				//////$pasta = '../nomedosite';
+				$pasta = '../' .$data['query']['Site']. '';
+				// checar se o nome da pasta existe
+				if (!is_dir($pasta)){
+					mkdir($pasta, 0777);
+				}
+
+				if (is_dir($tamplate)){
+					foreach(scandir($tamplate) as $arquivo){
+						$caminho_arquivo = "$tamplate/$arquivo";
+						if(is_file($caminho_arquivo)){
+							//echo $caminho_arquivo . PHP_EOL;
+							/////copy($caminho_arquivo, "../nomedosite/$arquivo");
+							copy($caminho_arquivo, "../" .$data['query']['Site']. "/$arquivo");
+						}
+					}
+				}
+
+				/////$nome_arquivo = "../nomedosite/configuracao.php";
+				$nome_arquivo = "../" .$data['query']['Site']. "/configuracao.php";
+				//echo $nome_arquivo;
+				$arquivo = fopen($nome_arquivo, 'r+');
+				fwrite($arquivo, '<?php' . PHP_EOL);
+				fwrite($arquivo, '//Dados da Empresa' . PHP_EOL);
+				fwrite($arquivo, '$idSis_Empresa = ' . $data['idSis_Empresa'] . ';' . PHP_EOL);
+				fclose($arquivo);				
+				//Fim da criação do site da empresa///				
 				
 				if ($data['idSis_Usuario'] === FALSE) {
 					$data['msg'] = '?m=2';
