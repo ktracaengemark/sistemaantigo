@@ -238,8 +238,7 @@ class MY_Form_validation extends CI_Form_validation {
         if ($field == "Cpf")
             $str = ltrim(preg_replace("/[^0-9]/", "", $str), '0');
 		*/
-		$str = preg_replace("/([^\w.]+)|(\.(?=.*\.))/", "", $str);
-		
+
 		$palavra = strtr($str, "ŠŒšœŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖØÙÚÛÜİßàáâãäåæçèéêëìíîïğñòóôõöøùúûüıÿ", "SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy");
 		$palavranova = str_replace("_", " ", $palavra);
 		$pattern = '|[^a-zA-Z0-9\-]|';    
@@ -247,6 +246,7 @@ class MY_Form_validation extends CI_Form_validation {
 		$str = str_replace(' ', '', $palavranova);
 		$str = str_replace('---', '', $str);
 		$str = str_replace('--', '', $str);
+		$str = preg_replace("/([^\w.]+)|(\.(?=.*\.))/", "", $str);		
 		$str = strtolower($str);		
 
 		$pasta = '../' .$str. '';

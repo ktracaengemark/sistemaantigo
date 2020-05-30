@@ -304,14 +304,15 @@ class Basico {
 	}
 	
 	function url_amigavel($string) {
-		$str = preg_replace("/([^\w.]+)|(\.(?=.*\.))/", "", $string);
-		$palavra = strtr($str, "ŠŒšœŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖØÙÚÛÜİßàáâãäåæçèéêëìíîïğñòóôõöøùúûüıÿ", "SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy");
+
+		$palavra = strtr($string, "ŠŒšœŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖØÙÚÛÜİßàáâãäåæçèéêëìíîïğñòóôõöøùúûüıÿ", "SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy");
 		$palavranova = str_replace("_", " ", $palavra);
 		$pattern = '|[^a-zA-Z0-9\-]|';    
 		$palavranova = preg_replace($pattern, ' ', $palavranova);
 		$string = str_replace(' ', '', $palavranova);
 		$string = str_replace('---', '', $string);
 		$string = str_replace('--', '', $string);
+		$string = preg_replace("/([^\w.]+)|(\.(?=.*\.))/", "", $string);		
 		return strtolower($string);
 	}	
 
