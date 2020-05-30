@@ -209,6 +209,74 @@ class MY_Form_validation extends CI_Form_validation {
         return isset($this->CI->db) ? ($this->CI->db->limit(1)->get_where($table, array($field => $str))->num_rows() === 0) : FALSE;
     }
 
+    public function is_unique_site_BKP($str, $field) {
+        $CI = & get_instance();
+        $CI->form_validation->set_message('is_unique_site', '<b>%s</b> já cadastrado.');
+		/*
+        if ($field == "Cpf")
+            $str = ltrim(preg_replace("/[^0-9]/", "", $str), '0');
+		*/
+		$str = preg_replace("/([^\w.]+)|(\.(?=.*\.))/", "", $str);
+		
+		$palavra = strtr($str, "ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ", "SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy");
+		$palavranova = str_replace("_", " ", $palavra);
+		$pattern = '|[^a-zA-Z0-9\-]|';    
+		$palavranova = preg_replace($pattern, ' ', $palavranova);
+		$str = str_replace(' ', '', $palavranova);
+		$str = str_replace('---', '', $str);
+		$str = str_replace('--', '', $str);
+		$str = strtolower($str);		
+		
+        sscanf($field, '%[^.].%[^.]', $table, $field);
+        return isset($this->CI->db) ? ($this->CI->db->limit(1)->get_where($table, array($field => $str))->num_rows() === 0) : FALSE;
+    }	
+	
+    public function is_unique_site($str, $field) {
+        $CI = & get_instance();
+        $CI->form_validation->set_message('is_unique_site', '<b>%s</b> já cadastrado.');
+		/*
+        if ($field == "Cpf")
+            $str = ltrim(preg_replace("/[^0-9]/", "", $str), '0');
+		*/
+		$str = preg_replace("/([^\w.]+)|(\.(?=.*\.))/", "", $str);
+		
+		$palavra = strtr($str, "ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ", "SOZsozYYuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy");
+		$palavranova = str_replace("_", " ", $palavra);
+		$pattern = '|[^a-zA-Z0-9\-]|';    
+		$palavranova = preg_replace($pattern, ' ', $palavranova);
+		$str = str_replace(' ', '', $palavranova);
+		$str = str_replace('---', '', $str);
+		$str = str_replace('--', '', $str);
+		$str = strtolower($str);		
+
+		$pasta = '../' .$str. '';
+			
+        if (isset($pasta) && is_dir($pasta)) {
+            return FALSE;
+        }
+        else {
+			sscanf($field, '%[^.].%[^.]', $table, $field);
+			return isset($this->CI->db) ? ($this->CI->db->limit(1)->get_where($table, array($field => $str))->num_rows() === 0) : FALSE;
+        }
+		
+    }
+	
+    function valid_diretorio($data) {
+        $CI = & get_instance();
+
+        $CI->form_validation->set_message('valid_diretorio', 'O <b>%s</b> já Existe.');
+		
+		$pasta = '../' .$data. '';
+			
+        if (is_dir($pasta)) {
+            return FALSE;
+        }
+        else {
+            return TRUE;
+        }		
+
+    }	
+
     public function is_unique_cpf($str, $field) {
         $CI = & get_instance();
         $CI->form_validation->set_message('is_unique_cpf', '<b>%s</b> já cadastrado.');
@@ -476,5 +544,5 @@ class MY_Form_validation extends CI_Form_validation {
         }
 
     }	
-
+	
 }

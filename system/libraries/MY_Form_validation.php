@@ -1057,6 +1057,22 @@ class MY_Form_validation extends CI_Form_validation {
             return TRUE;
         }		
 
+    }
+	
+    function valid_diretorio($data) {
+        $CI = & get_instance();
+
+        $CI->form_validation->set_message('valid_diretorio', '<b>%s</b> inválido. Este Nome de Site já Existe.');
+		
+		$pasta = '../' .$data. '';
+			
+        if (!is_dir($pasta)) {
+            return FALSE;
+        }
+        else {
+            return TRUE;
+        }		
+
     }	
 	
 }

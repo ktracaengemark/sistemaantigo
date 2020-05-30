@@ -179,13 +179,17 @@ public function __construct() {
 			'Site',
                 ), TRUE);
 
-                (!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
-				(!$data['query']['DataDeValidade']) ? $data['query']['DataDeValidade'] = date('d/m/Y', strtotime('+1 month')) : FALSE;
+		(!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
+		(!$data['query']['DataDeValidade']) ? $data['query']['DataDeValidade'] = date('d/m/Y', strtotime('+1 month')) : FALSE;
+        
+		if (isset($data['query']['Site'])) {
+			$data['query']['Site'] = $this->basico->url_amigavel($data['query']['Site']);
+		}
 		
 		$this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
-		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
-		$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim');	
-		$this->form_validation->set_rules('Site', 'Nome do Site', 'required|trim|is_unique[Sis_Empresa.Site]');
+		$this->form_validation->set_rules('Site', 'Nome do Site', 'required|trim|is_unique_site[Sis_Empresa.Site]');		
+		$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
+		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim');	
 		#$this->form_validation->set_rules('CpfAdmin', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CpfAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
 		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');		
         #$this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
@@ -196,7 +200,7 @@ public function __construct() {
 		#$this->form_validation->set_rules('CelularAdmin', 'CelularAdmin', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');			
 		#$this->form_validation->set_rules('NumUsuarios', 'Número de Usuários', 'required|trim');
-		
+
 		$data['select']['NumUsuarios'] = $this->Basico_model->select_numusuarios();
 		$data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		
@@ -208,6 +212,7 @@ public function __construct() {
 			
 			$data['query']['NomeEmpresa'] = trim(mb_strtoupper($data['query']['NomeEmpresa'], 'ISO-8859-1'));
 			$data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));
+			//$data['query']['Site'] = trim(mb_strtoupper($data['query']['Site'], 'UTF-8'));
 			$data['query']['idSis_EmpresaMatriz'] = 2;
 			$data['query']['Associado'] = 2;
 			$data['query']['PermissaoEmpresa'] = 1;
@@ -234,12 +239,46 @@ public function __construct() {
 
             if ($data['idSis_Empresa'] === FALSE) {
                 $data['msg'] = '?m=2';
-                $this->load->view('loginempresa/form_loginempresa', $data);
+                $this->load->view('loginempresa/form_registrar', $data);
             } else {
 
-                $data['usuario'] = array(
+				//início da criação o site da Empresa///
+				//este é o NOME do site escolhido na hora da criação da empresa!!
+				
+				$pasta = '../' .$data['query']['Site']. '';
 
-                    'idSis_Empresa' => $data['idSis_Empresa'],
+				// checar se a pasta existe
+				if (!is_dir($pasta)){
+					//cria a pasta
+					mkdir($pasta, 0777);
+				
+					//este é o TAMPLATE do site escolhido na hora da criação da empresa!!
+					$tamplate = '../site2';				
+					if (is_dir($tamplate)){
+						foreach(scandir($tamplate) as $arquivo){
+							$caminho_arquivo = "$tamplate/$arquivo";
+							if(is_file($caminho_arquivo)){
+								//echo $caminho_arquivo . PHP_EOL;
+								/////copy($caminho_arquivo, "../nomedosite/$arquivo");
+								copy($caminho_arquivo, "../" .$data['query']['Site']. "/$arquivo");
+							}
+						}
+					}
+
+					/////$nome_arquivo = "../nomedosite/configuracao.php";
+					$nome_arquivo = "../" .$data['query']['Site']. "/configuracao.php";
+					//echo $nome_arquivo;
+					$arquivo = fopen($nome_arquivo, 'r+');
+					fwrite($arquivo, '<?php' . PHP_EOL);
+					fwrite($arquivo, '//Dados da Empresa' . PHP_EOL);
+					fwrite($arquivo, '$idSis_Empresa = ' . $data['idSis_Empresa'] . ';' . PHP_EOL);
+					fclose($arquivo);
+				}
+				//Fim da criação do site da empresa///
+				
+				$data['usuario'] = array(
+
+					'idSis_Empresa' => $data['idSis_Empresa'],
 					'NomeEmpresa' => $data['query']['NomeEmpresa'],
 					'Nome' => $data['query']['NomeAdmin'],
 					'CelularUsuario' => $data['query']['CelularAdmin'],
@@ -253,18 +292,18 @@ public function __construct() {
 					'Funcao' => "1",
 					'idTab_Modulo' => "1",
 					'Permissao' => "3"
-                );
-                $data['campos'] = array_keys($data['usuario']);
+				);
+				$data['campos'] = array_keys($data['usuario']);
 
-                $data['idSis_Usuario'] = $this->Loginempresa_model->set_usuario($data['usuario']);
+				$data['idSis_Usuario'] = $this->Loginempresa_model->set_usuario($data['usuario']);
 				$_SESSION['log']['idSis_Empresa'] = 1;
-                
 				
-                $data['documentos'] = array(
-                    'idSis_Empresa' => $data['idSis_Empresa'],
-                );
-                $data['campos'] = array_keys($data['documentos']);
-                
+				
+				$data['documentos'] = array(
+					'idSis_Empresa' => $data['idSis_Empresa'],
+				);
+				$data['campos'] = array_keys($data['documentos']);
+				
 				$data['idApp_Documentos'] = $this->Loginempresa_model->set_documentos($data['documentos']);
 				$_SESSION['log']['idSis_Empresa'] = 1;
 				
@@ -327,43 +366,9 @@ public function __construct() {
 				
 				copy($arquivo_origem5, $arquivo_destino5);
 				
-				//início da criação o site da Empresa///
-				//este é o TAMPLATE do site escolhido na hora da criação da empresa!!
-				$tamplate = '../site2';
-
-				//este é o NOME do site escolhido na hora da criação da empresa!!
-				//////$pasta = '../nomedosite';
-				$pasta = '../' .$data['query']['Site']. '';
-				// checar se o nome da pasta existe
-				if (!is_dir($pasta)){
-					mkdir($pasta, 0777);
-				}
-
-				if (is_dir($tamplate)){
-					foreach(scandir($tamplate) as $arquivo){
-						$caminho_arquivo = "$tamplate/$arquivo";
-						if(is_file($caminho_arquivo)){
-							//echo $caminho_arquivo . PHP_EOL;
-							/////copy($caminho_arquivo, "../nomedosite/$arquivo");
-							copy($caminho_arquivo, "../" .$data['query']['Site']. "/$arquivo");
-						}
-					}
-				}
-
-				/////$nome_arquivo = "../nomedosite/configuracao.php";
-				$nome_arquivo = "../" .$data['query']['Site']. "/configuracao.php";
-				//echo $nome_arquivo;
-				$arquivo = fopen($nome_arquivo, 'r+');
-				fwrite($arquivo, '<?php' . PHP_EOL);
-				fwrite($arquivo, '//Dados da Empresa' . PHP_EOL);
-				fwrite($arquivo, '$idSis_Empresa = ' . $data['idSis_Empresa'] . ';' . PHP_EOL);
-				fclose($arquivo);				
-				//Fim da criação do site da empresa///
-				
-				
 				if ($data['idSis_Usuario'] === FALSE) {
 					$data['msg'] = '?m=2';
-					$this->load->view('loginempresa/form_loginempresa', $data);
+					$this->load->view('loginempresa/form_registrar', $data);
 				} else {
 
 					/*
@@ -414,7 +419,7 @@ public function __construct() {
 
 					if ($data['idTab_Produto'] === FALSE) {
 						$data['msg'] = '?m=2';
-						$this->load->view('loginempresa/form_loginempresa', $data);
+						$this->load->view('loginempresa/form_registrar', $data);
 					} else {
 						
 							$data['valor'] = array(
@@ -433,48 +438,49 @@ public function __construct() {
 				}
 				#$this->load->library('email');
 
-                #$this->email->from('contato@ktracaengemark.com.br', 'KTRACA Engenharia & Marketing');
-                #$this->email->to($data['query']['Email']);
+				#$this->email->from('contato@ktracaengemark.com.br', 'KTRACA Engenharia & Marketing');
+				#$this->email->to($data['query']['Email']);
 
-                #$this->email->subject('[KTRACA] Confirmação de registro - Usuário: ' . $data['query']['UsuarioEmpresa']);
-                /*
-                  $this->email->message('Por favor, clique no link a seguir para confirmar seu registro: '
-                  . 'http://www.romati.com.br/app/loginempresa/confirmar/' . $data['query']['Codigo']);
+				#$this->email->subject('[KTRACA] Confirmação de registro - Usuário: ' . $data['query']['UsuarioEmpresa']);
+				/*
+				  $this->email->message('Por favor, clique no link a seguir para confirmar seu registro: '
+				  . 'http://www.romati.com.br/app/loginempresa/confirmar/' . $data['query']['Codigo']);
 
-                  $this->email->send();
+				  $this->email->send();
 
-                  $data['aviso'] = ''
-                  . '
-                  <div class="alert alert-success" role="alert">
-                  <h4>
-                  <p><b>Usuário cadastrado com sucesso!</b></p>
-                  <p>O link para ativação foi enviado para seu e-mail cadastrado.</p>
-                  <p>Caso o e-mail com o link não esteja na sua caixa de entrada <b>verifique também sua caixa de SPAM</b>.</p>
-                  </h4>
-                  </div> '
-                  . '';
-                 */
+				  $data['aviso'] = ''
+				  . '
+				  <div class="alert alert-success" role="alert">
+				  <h4>
+				  <p><b>Usuário cadastrado com sucesso!</b></p>
+				  <p>O link para ativação foi enviado para seu e-mail cadastrado.</p>
+				  <p>Caso o e-mail com o link não esteja na sua caixa de entrada <b>verifique também sua caixa de SPAM</b>.</p>
+				  </h4>
+				  </div> '
+				  . '';
+				 */
 
-                #$this->email->message('Sua conta foi ativada com sucesso! Aproveite e teste todas as funcionalidades do sistema.'
-                        #. 'Qualquer sugestão ou crítica será bem vinda. ');
+				#$this->email->message('Sua conta foi ativada com sucesso! Aproveite e teste todas as funcionalidades do sistema.'
+						#. 'Qualquer sugestão ou crítica será bem vinda. ');
 
-                #$this->email->send();
+				#$this->email->send();
 
-                $data['aviso'] = ''
-                        . '
-                  <div class="alert alert-success" role="alert">
-                  <h4>
-                  <p><b>Empresa cadastrado com sucesso!</b></p>
-                  <p>Clique no botão abaixo e retorne para a tela de Login do Administrador, para entrar no sistema.</p>
-                  </h4>
-                  <br>
-                 
-                  </div> '
-                        . '';
+				$data['aviso'] = ''
+						. '
+				  <div class="alert alert-success" role="alert">
+				  <h4>
+				  <p><b>Empresa cadastrado com sucesso!</b></p>
+				  <p>Clique no botão abaixo e retorne para a tela de Login do Administrador, para entrar no sistema.</p>
+				  </h4>
+				  <br>
+				 
+				  </div> '
+						. '';
 
-                $this->load->view('loginempresa/tela_msg', $data);
-                #redirect(base_url() . 'loginempresa' . $data['msg']);
-                #exit();
+				$this->load->view('loginempresa/tela_msg', $data);
+				#redirect(base_url() . 'loginempresa' . $data['msg']);
+				#exit();
+				
             }
         }
 
@@ -512,13 +518,17 @@ public function __construct() {
 			'Site',
                 ), TRUE);
 
-                (!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
-				(!$data['query']['DataDeValidade']) ? $data['query']['DataDeValidade'] = date('d/m/Y', strtotime('+1 month')) : FALSE;
+		(!$data['query']['DataCriacao']) ? $data['query']['DataCriacao'] = date('d/m/Y', time()) : FALSE;
+		(!$data['query']['DataDeValidade']) ? $data['query']['DataDeValidade'] = date('d/m/Y', strtotime('+1 month')) : FALSE;
+		
+		if (isset($data['query']['Site'])) {
+			$data['query']['Site'] = $this->basico->url_amigavel($data['query']['Site']);
+		}		
 		
 		$this->form_validation->set_error_delimiters('<h5 style="color: red;">', '</h5>');
-		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
-		$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim');
-		$this->form_validation->set_rules('Site', 'Site da empresa', 'required|trim|is_unique[Sis_Empresa.Site]');
+		$this->form_validation->set_rules('Site', 'Nome do Site', 'required|trim|is_unique_site[Sis_Empresa.Site]');		
+		$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim|is_unique[Sis_Empresa.NomeEmpresa]');
+		#$this->form_validation->set_rules('NomeEmpresa', 'Nome da empresa', 'required|trim');
 		#$this->form_validation->set_rules('CpfAdmin', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CpfAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
 		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');		
         #$this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
@@ -571,6 +581,40 @@ public function __construct() {
                 $this->load->view('loginempresa/form_loginempresa', $data);
             } else {
 
+				//início da criação o site da Empresa///
+				//este é o NOME do site escolhido na hora da criação da empresa!!
+				
+				$pasta = '../' .$data['query']['Site']. '';
+
+				// checar se a pasta existe
+				if (!is_dir($pasta)){
+					//cria a pasta
+					mkdir($pasta, 0777);
+				
+					//este é o TAMPLATE do site escolhido na hora da criação da empresa!!
+					$tamplate = '../site2';				
+					if (is_dir($tamplate)){
+						foreach(scandir($tamplate) as $arquivo){
+							$caminho_arquivo = "$tamplate/$arquivo";
+							if(is_file($caminho_arquivo)){
+								//echo $caminho_arquivo . PHP_EOL;
+								/////copy($caminho_arquivo, "../nomedosite/$arquivo");
+								copy($caminho_arquivo, "../" .$data['query']['Site']. "/$arquivo");
+							}
+						}
+					}
+
+					/////$nome_arquivo = "../nomedosite/configuracao.php";
+					$nome_arquivo = "../" .$data['query']['Site']. "/configuracao.php";
+					//echo $nome_arquivo;
+					$arquivo = fopen($nome_arquivo, 'r+');
+					fwrite($arquivo, '<?php' . PHP_EOL);
+					fwrite($arquivo, '//Dados da Empresa' . PHP_EOL);
+					fwrite($arquivo, '$idSis_Empresa = ' . $data['idSis_Empresa'] . ';' . PHP_EOL);
+					fclose($arquivo);
+				}
+				//Fim da criação do site da empresa///			
+			
                 $data['usuario'] = array(
 
                     'idSis_Empresa' => $data['idSis_Empresa'],
@@ -658,39 +702,6 @@ public function __construct() {
 				$arquivo_destino5 = 'arquivos/imagens/empresas/' .$data['idSis_Empresa'].'/produtos/miniatura/fotoproduto.jpg';
 				
 				copy($arquivo_origem5, $arquivo_destino5);
-				
-				//início da criação o site da Empresa///
-				//este é o TAMPLATE do site escolhido na hora da criação da empresa!!
-				$tamplate = '../site2';
-
-				//este é o NOME do site escolhido na hora da criação da empresa!!
-				//////$pasta = '../nomedosite';
-				$pasta = '../' .$data['query']['Site']. '';
-				// checar se o nome da pasta existe
-				if (!is_dir($pasta)){
-					mkdir($pasta, 0777);
-				}
-
-				if (is_dir($tamplate)){
-					foreach(scandir($tamplate) as $arquivo){
-						$caminho_arquivo = "$tamplate/$arquivo";
-						if(is_file($caminho_arquivo)){
-							//echo $caminho_arquivo . PHP_EOL;
-							/////copy($caminho_arquivo, "../nomedosite/$arquivo");
-							copy($caminho_arquivo, "../" .$data['query']['Site']. "/$arquivo");
-						}
-					}
-				}
-
-				/////$nome_arquivo = "../nomedosite/configuracao.php";
-				$nome_arquivo = "../" .$data['query']['Site']. "/configuracao.php";
-				//echo $nome_arquivo;
-				$arquivo = fopen($nome_arquivo, 'r+');
-				fwrite($arquivo, '<?php' . PHP_EOL);
-				fwrite($arquivo, '//Dados da Empresa' . PHP_EOL);
-				fwrite($arquivo, '$idSis_Empresa = ' . $data['idSis_Empresa'] . ';' . PHP_EOL);
-				fclose($arquivo);				
-				//Fim da criação do site da empresa///				
 				
 				if ($data['idSis_Usuario'] === FALSE) {
 					$data['msg'] = '?m=2';
