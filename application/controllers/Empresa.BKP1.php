@@ -284,9 +284,9 @@ class Empresa extends CI_Controller {
             
 			$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
             
-			if (file_exists('arquivos/imagens/empresas/' . $data['file']['Arquivo'])) {
+			if (file_exists('../'.$_SESSION['log']['Site'].'/' . $data['file']['Arquivo'])) {
 
-				$data['file']['Arquivo'] = $this->basico->renomeia($data['file']['Arquivo'], 'arquivos/imagens/empresas/');
+				$data['file']['Arquivo'] = $this->basico->renomeia($data['file']['Arquivo'], '../'.$_SESSION['log']['Site'].'/');
             }
             $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg]|file_size_max[60000]');
         }
@@ -311,7 +311,7 @@ class Empresa extends CI_Controller {
             $this->load->view('empresa/form_empresalogo', $data);
         } else {
 			
-            $config['upload_path'] = 'arquivos/imagens/empresas/';
+            $config['upload_path'] = '../'.$_SESSION['log']['Site'].'/';
             $config['max_size'] = 60000;
             $config['allowed_types'] = 'jpg';
             $config['file_name'] = $data['file']['Arquivo'];
