@@ -160,6 +160,10 @@
 										<span class="glyphicon glyphicon-plus"></span> Cat.
 									</a>
 									<label></label>
+									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux42/cadastrar3/" role="button"> 
+										<span class="glyphicon glyphicon-plus"></span> Mod
+									</a>									
+									<label></label>
 									<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux22/cadastrar3/" role="button"> 
 										<span class="glyphicon glyphicon-plus"></span> Tipo
 									</a>
@@ -199,7 +203,7 @@
 							</div>
 						</div>
 						<div class="row">									
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<label for="Prodaux3">Categoria:</label>								
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Prodaux3" name="Prodaux3">
@@ -215,7 +219,23 @@
 									?>
 								</select>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-3">
+								<label for="Prodaux4">Modelo</label>								
+								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+										id="Prodaux4" name="Prodaux4">
+									<option value="">-- Selecione uma opção --</option>
+									<?php
+									foreach ($select['Prodaux4'] as $key => $row) {
+										if ($produtos['Prodaux4'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>							
+							<div class="col-md-3">
 								<label for="Prodaux2">Tipo:</label>								
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Prodaux2" name="Prodaux2">
@@ -231,7 +251,7 @@
 									?>
 								</select>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-3">
 								<label for="Prodaux1">Esp.:</label>									
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Prodaux1" name="Prodaux1">

@@ -296,6 +296,62 @@ class Loginempresa_model extends CI_Model {
 
     }
 
+    public function set_prodaux4($data) {
+
+        $query = $this->db->insert('Tab_Prodaux4', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }    
+	
+	public function set_prodaux3($data) {
+
+        $query = $this->db->insert('Tab_Prodaux3', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+	
+    public function set_prodaux2($data) {
+
+        $query = $this->db->insert('Tab_Prodaux2', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+	
+    public function set_prodaux1($data) {
+
+        $query = $this->db->insert('Tab_Prodaux1', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }	
+	
     public function set_produto($data) {
         #unset($data['idSisgef_Fila']);
         /*
