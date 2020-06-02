@@ -64,7 +64,7 @@
 				$this->load->view('empresa/form_imagem_4', $data);
 			}
             else {
-					$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+					$dir = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
 					//$foto = $_FILES['Arquivo4']['name'];		
 					$foto = $data['file']['Arquivo4'];
 					$diretorio = $dir.$foto;
@@ -76,7 +76,7 @@
 				} 
 				else {					
 					
-					$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+					$dir2 = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
 
 					switch($_FILES['Arquivo4']['type']):
 						case 'image/jpg';

@@ -59,7 +59,7 @@
 								<div class="col-md-12 ">
 									<div class="col-md-6 "> 
 										<a href="<?php echo base_url() . 'empresa/pagina/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Slide2'] . ''; ?>" 
+											<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Slide2'] . ''; ?>" 
 											class="img-responsive" width='600'>
 										</a>												
 									</div>
@@ -79,7 +79,7 @@
 								<div class="row">
 									<div class="col-md-12">
 										<label for="Arquivo">Arquivo: *</label><br>
-										<a href="<?php echo base_url() . 'arquivos/imagens/empresas/' . $file['Arquivo']?>" target="_blank" class="btn btn-info">
+										<a href="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $file['Arquivo']?>" target="_blank" class="btn btn-info">
 											<span class="glyphicon glyphicon-file"></span> Visualizar
 										</a>
 										<?php echo $file['Arquivo']; ?>

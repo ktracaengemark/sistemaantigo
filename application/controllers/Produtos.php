@@ -1407,7 +1407,7 @@ class Produtos extends CI_Controller {
         }
         else {
 
-            $config['upload_path'] = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/';
+            $config['upload_path'] = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/';
             $config['max_size'] = 1000;
             $config['allowed_types'] = ['jpg','jpeg','pjpeg','png','x-png'];
             $config['file_name'] = $data['file']['Arquivo'];
@@ -1419,10 +1419,10 @@ class Produtos extends CI_Controller {
             }
             else {
 			
-				$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/';		
+				$dir = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/';		
 				$foto = $data['file']['Arquivo'];
 				$diretorio = $dir.$foto;					
-				$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/';
+				$dir2 = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/';
 
 				switch($_FILES['Arquivo']['type']):
 					case 'image/jpg';
@@ -1488,15 +1488,15 @@ class Produtos extends CI_Controller {
 						exit();
 					} else {
 
-						if((null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/' . $_SESSION['Produtos']['Arquivo'] . ''))
-							&& (('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/' . $_SESSION['Produtos']['Arquivo'] . '')
-							!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/fotoproduto.jpg'))){
-							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/' . $_SESSION['Produtos']['Arquivo'] . '');						
+						if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/' . $_SESSION['Produtos']['Arquivo'] . ''))
+							&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/' . $_SESSION['Produtos']['Arquivo'] . '')
+							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/fotoproduto.jpg'))){
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/' . $_SESSION['Produtos']['Arquivo'] . '');						
 						}
-						if((null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Produtos']['Arquivo'] . ''))
-							&& (('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Produtos']['Arquivo'] . '')
-							!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/fotoproduto.jpg'))){
-							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Produtos']['Arquivo'] . '');						
+						if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Produtos']['Arquivo'] . ''))
+							&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Produtos']['Arquivo'] . '')
+							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/fotoproduto.jpg'))){
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Produtos']['Arquivo'] . '');						
 						}						
 						
 						if ($data['auditoriaitem'] === FALSE) {

@@ -30,7 +30,7 @@
 						<td><?php echo $row['idApp_Slides'] ?></td>						
 						<td class="notclickable">
 							<a class="notclickable" href="<?php echo base_url() . 'slides/alterar_slide/' . $row['idApp_Slides'] . ''; ?>">
-								<img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $row['Slide1'] . ''; ?> "class="img-responsive" width='400'>
+								<img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $row['Slide1'] . ''; ?> "class="img-responsive" width='400'>
 							</a>
 						</td>
 						<td><?php echo $row['Texto_Slide1'] ?></td>
@@ -40,7 +40,7 @@
 								<span class="glyphicon glyphicon-edit notclickable"></span>
 							</a>
 						</td>						
-						<!--<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $row['Slide1'] . ''; ?> "class="img-circle img-responsive" width='100'></td>-->
+						<!--<td><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $row['Slide1'] . ''; ?> "class="img-circle img-responsive" width='100'></td>-->
 
 						<?php } ?>						
 					</tbody>

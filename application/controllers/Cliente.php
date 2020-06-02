@@ -311,7 +311,7 @@ class Cliente extends CI_Controller {
         if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
             
 			$data['file']['Arquivo'] = $this->basico->limpa_nome_arquivo($_FILES['Arquivo']['name']);
-			$data['file']['Arquivo'] = $this->basico->renomeiacliente($data['file']['Arquivo'], 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/');
+			$data['file']['Arquivo'] = $this->basico->renomeiacliente($data['file']['Arquivo'], '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/');
             $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
         }
         else {
@@ -331,7 +331,7 @@ class Cliente extends CI_Controller {
         }
         else {
 
-            $config['upload_path'] = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/';
+            $config['upload_path'] = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/';
             $config['max_size'] = 1000;
             $config['allowed_types'] = ['jpg', 'jpeg', 'gif', 'png'];
             $config['file_name'] = $data['file']['Arquivo'];
@@ -434,7 +434,7 @@ class Cliente extends CI_Controller {
         }
         else {
 
-            $config['upload_path'] = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/';
+            $config['upload_path'] = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/';
             $config['max_size'] = 1000;
             $config['allowed_types'] = ['jpg','jpeg','pjpeg','png','x-png'];
             $config['file_name'] = $data['file']['Arquivo'];
@@ -446,10 +446,10 @@ class Cliente extends CI_Controller {
             }
             else {
 
-				$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/';		
+				$dir = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/';		
 				$foto = $data['file']['Arquivo'];
 				$diretorio = $dir.$foto;					
-				$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/';
+				$dir2 = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/';
 
 				switch($_FILES['Arquivo']['type']):
 					case 'image/jpg';
@@ -514,15 +514,15 @@ class Cliente extends CI_Controller {
 						exit();
 					} else {
 						
-						if((null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/' . $_SESSION['Cliente']['Arquivo'] . ''))
-							&& (('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/' . $_SESSION['Cliente']['Arquivo'] . '')
-							!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/Foto.jpg'))){
-							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/' . $_SESSION['Cliente']['Arquivo'] . '');						
+						if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/' . $_SESSION['Cliente']['Arquivo'] . ''))
+							&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/' . $_SESSION['Cliente']['Arquivo'] . '')
+							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/Foto.jpg'))){
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/original/' . $_SESSION['Cliente']['Arquivo'] . '');						
 						}
-						if((null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/' . $_SESSION['Cliente']['Arquivo'] . ''))
-							&& (('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/' . $_SESSION['Cliente']['Arquivo'] . '')
-							!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/Foto.jpg'))){
-							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/' . $_SESSION['Cliente']['Arquivo'] . '');						
+						if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/' . $_SESSION['Cliente']['Arquivo'] . ''))
+							&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/' . $_SESSION['Cliente']['Arquivo'] . '')
+							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/Foto.jpg'))){
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/' . $_SESSION['Cliente']['Arquivo'] . '');						
 						}						
 
 						if ($data['auditoriaitem'] === FALSE) {

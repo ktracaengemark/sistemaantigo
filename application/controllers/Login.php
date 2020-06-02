@@ -108,6 +108,8 @@ class Login extends CI_Controller {
 			$_SESSION['log']['NivelEmpresa'] = $query3['NivelEmpresa'];
 			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
 			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
+			$_SESSION['log']['Site'] = $query3['Site'];
+			
 			/*  
 			  echo "<pre>";
               print_r($_SESSION['log']['NivelEmpresa']);
@@ -154,6 +156,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
 				$_SESSION['log']['Arquivo'] = $query['Arquivo'];
+
 				
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
@@ -254,6 +257,7 @@ class Login extends CI_Controller {
 			$_SESSION['log']['NivelEmpresa'] = $query3['NivelEmpresa'];
 			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
 			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
+			$_SESSION['log']['Site'] = $query3['Site'];
 			/*  
 			  echo "<pre>";
               print_r($_SESSION['log']['NivelEmpresa']);
@@ -300,6 +304,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
 				$_SESSION['log']['Arquivo'] = $query['Arquivo'];
+
 				
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
@@ -400,6 +405,7 @@ class Login extends CI_Controller {
 			$_SESSION['log']['NivelEmpresa'] = $query3['NivelEmpresa'];
 			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
 			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
+			$_SESSION['log']['Site'] = $query3['Site'];
 			/*  
 			  echo "<pre>";
               print_r($_SESSION['log']['NivelEmpresa']);
@@ -446,6 +452,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
 				$_SESSION['log']['Arquivo'] = $query['Arquivo'];
+
 				
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
@@ -546,6 +553,7 @@ class Login extends CI_Controller {
 			$_SESSION['log']['NivelEmpresa'] = $query3['NivelEmpresa'];
 			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
 			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
+			$_SESSION['log']['Site'] = $query3['Site'];
 			/*  
 			  echo "<pre>";
               print_r($_SESSION['log']['NivelEmpresa']);
@@ -592,6 +600,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
 				$_SESSION['log']['Arquivo'] = $query['Arquivo'];
+
 				
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;
@@ -692,6 +701,7 @@ class Login extends CI_Controller {
 			$_SESSION['log']['NivelEmpresa'] = $query3['NivelEmpresa'];
 			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
 			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
+			$_SESSION['log']['Site'] = $query3['Site'];
 			$_SESSION['log']['Empresa'] = $query3['idSis_Empresa'];
 			/*  
 			  echo "<pre>";
@@ -743,6 +753,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['idTab_Modulo'] = $query['idTab_Modulo'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
 				$_SESSION['log']['Arquivo'] = $query['Arquivo'];
+
 				
                 $this->load->database();
                 $_SESSION['db']['hostname'] = $this->db->hostname;

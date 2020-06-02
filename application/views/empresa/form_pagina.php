@@ -59,7 +59,7 @@
 								<div class="col-md-6 ">
 									<div class="col-md-6 "> 
 										<a href="<?php echo base_url() . 'empresa/pagina/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo1'] . ''; ?>" 
+											<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo1'] . ''; ?>" 
 											class="img-circle img-responsive" width='200'>
 										</a>												
 									</div>
@@ -76,7 +76,7 @@
 								<div class="col-md-6 ">
 									<div class="col-md-6 "> 
 										<a href="<?php echo base_url() . 'empresa/pagina/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo2'] . ''; ?>" 
+											<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo2'] . ''; ?>" 
 											class="img-circle img-responsive" width='200'>
 										</a>												
 									</div>
@@ -95,7 +95,7 @@
 								<div class="col-md-6 ">	
 									<div class="col-md-6 "> 
 										<a href="<?php echo base_url() . 'empresa/pagina/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo3'] . ''; ?>" 
+											<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo3'] . ''; ?>" 
 											class="img-circle img-responsive" width='200'>
 										</a>												
 									</div>
@@ -112,7 +112,7 @@
 								<div class="col-md-6 ">	
 									<div class="col-md-6 "> 
 										<a href="<?php echo base_url() . 'empresa/pagina/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo4'] . ''; ?>" 
+											<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/' . $documentos['Arquivo4'] . ''; ?>" 
 											class="img-circle img-responsive" width='200'>
 										</a>												
 									</div>
@@ -132,7 +132,7 @@
 								<div class="row">
 									<div class="col-md-12">
 										<label for="Arquivo">Arquivo: *</label><br>
-										<a href="<?php echo base_url() . 'arquivos/imagens/empresas/' . $file['Arquivo']?>" target="_blank" class="btn btn-info">
+										<a href="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $file['Arquivo']?>" target="_blank" class="btn btn-info">
 											<span class="glyphicon glyphicon-file"></span> Visualizar
 										</a>
 										<?php echo $file['Arquivo']; ?>

@@ -58,7 +58,7 @@
 								<div class="col-md-12 ">
 									<div class="col-md-6 "> 
 										<a href="<?php echo base_url() . 'empresa/pagina/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-											<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Slide1'] . ''; ?>" 
+											<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Slide1'] . ''; ?>" 
 											class="img-responsive" width='600'>
 										</a>												
 									</div>

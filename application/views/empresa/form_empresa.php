@@ -92,7 +92,7 @@
 										<div class="row">
 											<div class="col-md-3 "> 
 												<label>Logo Marca</label>
-												<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['AdminEmpresa']['idSis_Empresa'] . '/documentos/' . $_SESSION['AdminEmpresa']['Arquivo'] . ''; ?>" 
+												<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['AdminEmpresa']['idSis_Empresa'] . '/documentos/' . $_SESSION['AdminEmpresa']['Arquivo'] . ''; ?>" 
 												class="img-circle img-responsive">
 											</div>											
 											<div class="col-md-3">

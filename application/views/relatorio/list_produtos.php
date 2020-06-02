@@ -69,7 +69,7 @@
 
 						
 					<tr class="clickable-row" data-href="<?php echo base_url() . 'produtos/alterar/' . $row['idTab_Produto'] . ''; ?>">
-						<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>
+						<td><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>
 						<td><?php echo $row['idTab_Produto'] ?></td>
 						<td><?php echo $row['CodProd'] ?></td>
 						<td><?php echo $row['Prodaux3'] ?></td>
@@ -125,7 +125,7 @@
 					<tr>	
 						<td class="notclickable">
 							<a class="notclickable" href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produto'] . ''; ?>">
-								<img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'>
+								<img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'>
 							</a>
 						</td>
 						<td class="notclickable">
@@ -133,7 +133,7 @@
 								<span class="glyphicon glyphicon-edit notclickable"></span>
 							</a>
 						</td>						
-						<!--<td><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>-->
+						<!--<td><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>-->
 						<td><?php echo $row['idTab_Produto'] ?></td>
 						<td><?php echo $row['CodProd'] ?></td>
 						<td><?php echo $row['Prodaux3'] ?></td>

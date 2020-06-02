@@ -15,7 +15,7 @@
 									<div class="col-md-6 ">	
 										<div class="col-md-12 ">
 											<div class="row">	
-												<a href="<?php echo base_url() . 'relatorio/slides/'; ?>">
+												<a href="<?php echo base_url() . 'relatorio/site/'; ?>">
 													<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Logo_Nav'] . ''; ?>" 
 													class="img-responsive" width='300'>
 												</a>												

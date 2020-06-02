@@ -66,7 +66,7 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-12 "> 
-												<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $query['Arquivo'] . ''; ?>" 
+												<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $query['Arquivo'] . ''; ?>" 
 												class="img-circle img-responsive" width='200'>
 											</div>
 										</div>
@@ -87,7 +87,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<label for="Arquivo">Arquivo: *</label><br>
-												<a href="<?php echo base_url() . 'arquivos/imagens/empresas/' . $file['Arquivo']?>" target="_blank" class="btn btn-info">
+												<a href="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $file['Arquivo']?>" target="_blank" class="btn btn-info">
 													<span class="glyphicon glyphicon-file"></span> Visualizar
 												</a>
 												<?php echo $file['Arquivo']; ?>

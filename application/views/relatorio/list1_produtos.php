@@ -1,13 +1,12 @@
-<div class="container">
-	<div class="row">
+
 		<?php
 			if($prod){
 				foreach ($prod as $row){
 				?>		
-				<div class="col-lg-3 col-md-6 mb-4">
+				<div class="col-lg-4 col-md-4 mb-4">
 					<div class="card h-100">
-						<!--<img class="img-responsive" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?>">-->
-						<a href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produto'] . ''; ?>"><img class="img-responsive" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?>"></a>					 
+						<!--<img class="img-responsive" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?>">-->
+						<a href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produto'] . ''; ?>"><img class="img-responsive" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?>"></a>					 
 						<!--<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>-->
 						
 						<div class="card-body">
@@ -29,5 +28,3 @@
 				}
 			}
 		?>
-	</div>
-</div>

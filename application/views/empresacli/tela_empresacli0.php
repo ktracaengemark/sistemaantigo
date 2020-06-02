@@ -53,7 +53,7 @@
 							<div class="form-group">	
 								<div class="row">
 									<div class="col-sm-offset-1 col-lg-4 " align="left"> 
-										<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $query['idSis_Empresa'] . '/documentos/miniatura/' . $query['Arquivo'] . ''; ?> " class="img-circle img-responsive" width='200'>
+										<img alt="User Pic" src="<?php echo base_url() . '../'.$query['Site'].'/' . $query['idSis_Empresa'] . '/documentos/miniatura/' . $query['Arquivo'] . ''; ?> " class="img-circle img-responsive" width='200'>
 									</div>
 									<div class=" col-md-6"> 
 										<table class="table table-user-information">

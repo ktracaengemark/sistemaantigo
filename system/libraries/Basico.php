@@ -487,7 +487,7 @@ class Basico {
 
         $data = preg_replace("/\.[a-z]{1,9}/", "-copia$0", $data);
 
-        if (file_exists(APPPATH . 'arquivos/imagens/empresas/' . $data))
+        if (file_exists(APPPATH . '../'.$_SESSION['log']['Site'].'/' . $data))
             $data = $this->renomeia_arquivo($data, $path . $data);
 
         return $data;

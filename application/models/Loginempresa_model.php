@@ -215,6 +215,20 @@ class Loginempresa_model extends CI_Model {
         }
 
     }
+
+    public function set_slide($data) {
+
+        $query = $this->db->insert('App_Slides', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
 	
     public function set_agenda($data) {
         #unset($data['idSisgef_Fila']);

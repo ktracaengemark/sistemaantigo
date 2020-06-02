@@ -93,7 +93,7 @@
 
 											<div class="col-md-3 "> 
 												<label>Logo Marca</label>
-												<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $query['Arquivo'] . ''; ?>" 
+												<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $query['Arquivo'] . ''; ?>" 
 												class="img-circle img-responsive">
 											</div>
 											<div class="col-md-3">

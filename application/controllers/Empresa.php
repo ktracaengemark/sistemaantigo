@@ -311,7 +311,7 @@ class Empresa extends CI_Controller {
 			
 			else {
 				
-				$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/';
+				$diretorio = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/';
 				$altura = "200";
 				$largura = "200";
 
@@ -465,7 +465,7 @@ class Empresa extends CI_Controller {
         }
         else {
 			
-            $config['upload_path'] = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/';
+            $config['upload_path'] = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/';
             $config['max_size'] = 1000;
             $config['allowed_types'] = ['jpg', 'jpeg', 'gif', 'png'];
             $config['file_name'] = $data['file']['Arquivo'];
@@ -569,7 +569,7 @@ class Empresa extends CI_Controller {
         }
         else {
             
-			$config['upload_path'] = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+			$config['upload_path'] = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
             $config['max_size'] = 1000;
             $config['allowed_types'] = ['jpg','jpeg','pjpeg','png','x-png'];
             $config['file_name'] = $data['file']['Arquivo'];
@@ -582,11 +582,11 @@ class Empresa extends CI_Controller {
             }
             else {
 
-				//$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
-				$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';		
+				//$diretorio = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+				$dir = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';		
 				$foto = $data['file']['Arquivo'];
 				$diretorio = $dir.$foto;					
-				$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+				$dir2 = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
 
 				switch($_FILES['Arquivo']['type']):
 					case 'image/jpg';
@@ -651,11 +651,11 @@ class Empresa extends CI_Controller {
 						exit();
 					} else {
 
-						if(null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Empresa']['Arquivo'] . '')){
-							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Empresa']['Arquivo'] . '');						
+						if(null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Empresa']['Arquivo'] . '')){
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Empresa']['Arquivo'] . '');						
 						}
-						if(null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . '')){
-							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . '');						
+						if(null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . '')){
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . '');						
 						}					
 					
 						if ($data['auditoriaitem'] === FALSE) {
@@ -789,7 +789,7 @@ class Empresa extends CI_Controller {
 			
 			else {
 				
-				$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/';
+				$diretorio = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/';
 				$altura = "200";
 				$largura = "200";
 
@@ -1301,7 +1301,7 @@ class Empresa extends CI_Controller {
 				$this->load->view('empresa/form_imagem_1', $data);
 			}
 			else {
-					$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+					$dir = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
 					//$foto = $_FILES['Arquivo1']['name'];		
 					$foto = $data['file']['Arquivo1'];
 					$diretorio = $dir.$foto;
@@ -1313,7 +1313,7 @@ class Empresa extends CI_Controller {
 				} 
 				else {					
 					
-					$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+					$dir2 = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
 
 					switch($_FILES['Arquivo1']['type']):
 						case 'image/jpg';
@@ -1379,11 +1379,11 @@ class Empresa extends CI_Controller {
 							exit();
 						} else {
 						
-							if(null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo1'] . '')){
-									unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo1'] . '');						
+							if(null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo1'] . '')){
+									unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo1'] . '');						
 							}
-							if(null!==('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo1'] . '')){
-									unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo1'] . '');						
+							if(null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo1'] . '')){
+									unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo1'] . '');						
 							}							
 							
 							if ($data['auditoriaitem'] === FALSE) {
@@ -1471,7 +1471,7 @@ class Empresa extends CI_Controller {
 				$this->load->view('empresa/form_imagem_2', $data);
 			}
             else {
-					$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+					$dir = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
 					//$foto = $_FILES['Arquivo2']['name'];		
 					$foto = $data['file']['Arquivo2'];
 					$diretorio = $dir.$foto;
@@ -1483,7 +1483,7 @@ class Empresa extends CI_Controller {
 				} 
 				else {					
 					
-					$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+					$dir2 = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
 
 					switch($_FILES['Arquivo2']['type']):
 						case 'image/jpg';
@@ -1549,8 +1549,8 @@ class Empresa extends CI_Controller {
 							exit();
 						} else {
 						
-							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo2'] . '');
-							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo2'] . '');							
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo2'] . '');
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo2'] . '');							
 
 							if ($data['auditoriaitem'] === FALSE) {
 								$data['msg'] = '';
@@ -1636,7 +1636,7 @@ class Empresa extends CI_Controller {
 				$this->load->view('empresa/form_imagem_3', $data);
 			}
             else {
-					$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+					$dir = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
 					//$foto = $_FILES['Arquivo3']['name'];		
 					$foto = $data['file']['Arquivo3'];
 					$diretorio = $dir.$foto;
@@ -1648,7 +1648,7 @@ class Empresa extends CI_Controller {
 				} 
 				else {					
 					
-					$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+					$dir2 = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
 
 					switch($_FILES['Arquivo3']['type']):
 						case 'image/jpg';
@@ -1714,8 +1714,8 @@ class Empresa extends CI_Controller {
 							exit();
 						} else {
 						
-							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo3'] . '');
-							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo3'] . '');							
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo3'] . '');
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo3'] . '');							
 
 							if ($data['auditoriaitem'] === FALSE) {
 								$data['msg'] = '';
@@ -1801,7 +1801,7 @@ class Empresa extends CI_Controller {
 				$this->load->view('empresa/form_imagem_4', $data);
 			}
             else {
-					$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+					$dir = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
 					//$foto = $_FILES['Arquivo4']['name'];		
 					$foto = $data['file']['Arquivo4'];
 					$diretorio = $dir.$foto;
@@ -1813,7 +1813,7 @@ class Empresa extends CI_Controller {
 				} 
 				else {					
 					
-					$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+					$dir2 = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
 
 					switch($_FILES['Arquivo4']['type']):
 						case 'image/jpg';
@@ -1879,8 +1879,8 @@ class Empresa extends CI_Controller {
 							exit();
 						} else {
 						
-							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo4'] . '');
-							unlink('arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo4'] . '');							
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Documentos']['Arquivo4'] . '');
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Documentos']['Arquivo4'] . '');							
 
 							if ($data['auditoriaitem'] === FALSE) {
 								$data['msg'] = '';
@@ -1964,7 +1964,7 @@ class Empresa extends CI_Controller {
 				$this->load->view('empresa/form_slide_1', $data);
 			}
             else {
-					$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+					$dir = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
 					//$foto = $_FILES['Slide1']['name'];		
 					$foto = $data['file']['Slide1'];
 					$diretorio = $dir.$foto;
@@ -1976,7 +1976,7 @@ class Empresa extends CI_Controller {
 				} 
 				else {					
 					
-					$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+					$dir2 = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
 
 					switch($_FILES['Slide1']['type']):
 						case 'image/jpg';
@@ -2107,7 +2107,7 @@ class Empresa extends CI_Controller {
 				$this->load->view('empresa/form_slide_2', $data);
 			}
             else {
-					$dir = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+					$dir = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
 					//$foto = $_FILES['Slide2']['name'];		
 					$foto = $data['file']['Slide2'];
 					$diretorio = $dir.$foto;
@@ -2119,7 +2119,7 @@ class Empresa extends CI_Controller {
 				} 
 				else {					
 					
-					$dir2 = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+					$dir2 = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
 
 					switch($_FILES['Slide2']['type']):
 						case 'image/jpg';
@@ -2311,7 +2311,7 @@ class Empresa extends CI_Controller {
         }
         else {
 			
-            $config['upload_path'] = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+            $config['upload_path'] = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
             $config['max_size'] = 1000;
             $config['allowed_types'] = ['jpg','jpeg','pjpeg','png','x-png'];
             $config['file_name'] = $data['file']['Arquivo1'];
@@ -2324,7 +2324,7 @@ class Empresa extends CI_Controller {
             }
             else {
 
-				$diretorio = 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+				$diretorio = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
 				$altura = "200";
 				$largura = "200";
 
