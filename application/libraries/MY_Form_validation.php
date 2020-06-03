@@ -325,6 +325,19 @@ class MY_Form_validation extends CI_Form_validation {
 	 *
 	 * @return	bool
 	 */
+	public function is_unique_duplo($str, $field) {
+        $CI = & get_instance();
+        $CI->form_validation->set_message('is_unique_duplo', '<b>%s</b> já cadastrado.');
+
+        sscanf($field, '%[^.].%[^.].%[^.].%[^.]', $table, $field1, $field2, $str2);
+
+        if ($field1 == "Cpf")
+            $str = ltrim(preg_replace("/[^0-9]/", "", $str), '0');
+
+        return isset($this->CI->db) ? ($this->CI->db->limit(1)->query('SELECT ' . $field1 . ' FROM ' . $table . ' WHERE '
+                        . $field1 . ' = "' . $str . '" AND ' . $field2 . ' = "' . $str2 . '"')->num_rows() === 0) : FALSE;
+
+    }
 	
 	public function is_unique_emp($str = '', $field = '')	{
 		$CI =& get_instance();
@@ -364,8 +377,7 @@ class MY_Form_validation extends CI_Form_validation {
      * @param	string
      * @return	bool
      */
-    function valid_phone($fone)
-    {
+    function valid_phone($fone){
         $CI =& get_instance();
         $CI->form_validation->set_message('valid_fone', 'O campo %s não contém um Telefone válido.');
         $fone = preg_replace('/[^0-9]/','',$fone);
@@ -376,20 +388,6 @@ class MY_Form_validation extends CI_Form_validation {
             return FALSE;
     }
 	
-	public function is_unique_duplo($str, $field) {
-        $CI = & get_instance();
-        $CI->form_validation->set_message('is_unique_duplo', '<b>%s</b> já cadastrado.');
-
-        sscanf($field, '%[^.].%[^.].%[^.].%[^.]', $table, $field1, $field2, $str2);
-
-        if ($field1 == "Cpf")
-            $str = ltrim(preg_replace("/[^0-9]/", "", $str), '0');
-
-        return isset($this->CI->db) ? ($this->CI->db->limit(1)->query('SELECT ' . $field1 . ' FROM ' . $table . ' WHERE '
-                        . $field1 . ' = "' . $str . '" AND ' . $field2 . ' = "' . $str2 . '"')->num_rows() === 0) : FALSE;
-
-    }
-
     function file_allowed_type($file, $type) {
 
         //is type of format a,b,c,d? -> convert to array

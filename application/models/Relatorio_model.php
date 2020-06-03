@@ -1188,7 +1188,7 @@ class Relatorio_model extends CI_Model {
         ');
 
         /*
-          echo $this->db->last_query();
+			echo $this->db->last_query();
           echo "<pre>";
           print_r($query);
           echo "</pre>";
@@ -7207,11 +7207,15 @@ exit();*/
 				TCA.Abrev,
 				TV.Convdesc,
 				TV.ValorProduto,
+				TV.Desconto,
+				TV.QtdProdutoDesconto,
 				TC.Convenio,
-				TTP.Abrev
+				TTP.Abrev,
+				TDSC.Desconto
             FROM
                 Tab_Produto AS TP
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produto = TP.idTab_Produto
+					LEFT JOIN Tab_Desconto AS TDSC ON TDSC.idTab_Desconto = TV.Desconto
 					LEFT JOIN Tab_Convenio AS TC ON TC.idTab_Convenio = TV.Convenio
 					LEFT JOIN App_Fornecedor AS TF ON TF.idApp_Fornecedor = TV.Fornecedor
 					LEFT JOIN Tab_Categoria AS TCA ON TCA.Abrev = TP.Categoria
@@ -7310,6 +7314,67 @@ exit();*/
 
     }
 
+	public function list_promocao($data, $completo) {
+
+		$data['Promocao'] = ($data['Promocao']) ? ' AND TPM.idTab_Promocao = ' . $data['Promocao'] : FALSE;
+		#$data['TipoProduto'] = ($data['TipoProduto']) ? ' AND TTP.idTab_TipoProduto = ' . $data['TipoProduto'] : FALSE;
+		#$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
+		#$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
+        #$data['Prodaux3'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
+		$data['Campo'] = (!$data['Campo']) ? 'TPD.Produtos' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+
+        $query = $this->db->query('
+            SELECT
+                TPM.idTab_Promocao,
+				TPM.Promocao,
+				TPM.Arquivo,
+				TPM.Ativo,
+				TIP.idTab_Item_Promocao,
+				TIP.Item_Promocao,
+				TV.Convdesc,
+				TV.ValorProduto,
+				TV.QtdProdutoDesconto,
+				TPD.Produtos,
+				TDC.Desconto
+            FROM
+                Tab_Promocao AS TPM
+					LEFT JOIN Tab_Desconto AS TDC ON TDC.idTab_Desconto = TPM.Desconto
+					LEFT JOIN Tab_Item_Promocao AS TIP ON TIP.idTab_Promocao = TPM.idTab_Promocao
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = TIP.Item_Promocao
+					LEFT JOIN Tab_Produto AS TPD ON TPD.idTab_Produto = TV.idTab_Produto
+            WHERE
+                TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY
+				TDC.Desconto ASC,
+				TPM.idTab_Promocao ASC		
+        ');
+
+        /*
+        ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '	, TPM.Promocao ASC
+		#AND
+        #P.idApp_Profissional = OT.idApp_Cliente
+
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            foreach ($query->result() as $row) {
+
+            }
+
+            return $query;
+        }
+
+    }
+	
 	public function list_orcamentoonline($data, $completo) {
 		
         if ($data['DataFim']) {

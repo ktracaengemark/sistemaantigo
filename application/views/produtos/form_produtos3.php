@@ -45,7 +45,7 @@
 <br>
 <?php if (isset($msg)) echo $msg; ?>
 
-<div class="col-sm-offset-2 col-md-8 ">	
+<div class="col-sm-offset-1 col-md-10 ">
 				
 <?php echo validation_errors(); ?>
 

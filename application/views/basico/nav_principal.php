@@ -146,7 +146,9 @@
 							<li><a href="<?php echo base_url() ?>login/registrar2"><span class="glyphicon glyphicon-user"></span> Conta Pessoal</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-usd"></span> Produtos & Valores </a></li>
-							<li role="separator" class="divider"></li>							
+							<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>relatorio/promocao"><span class="glyphicon glyphicon-usd"></span> Promoções </a></li>
+							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-gift"></span> Produtos & Estoque</a></li>							
 							<li role="separator" class="divider"></li>							
 							<li><a href="<?php echo base_url() ?>relatorio/produtosvend"><span class="glyphicon glyphicon-pencil"></span> Produtos Vendidos</a></li>

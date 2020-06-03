@@ -45,7 +45,7 @@
 <br>
 <?php if (isset($msg)) echo $msg; ?>			
 
-<div class="col-sm-offset-2 col-md-8 ">	
+<div class="col-sm-offset-1 col-md-10 ">	
 
 <?php echo validation_errors(); ?>
 
@@ -465,6 +465,7 @@
 								<div class="panel panel-info">
 									<div class="panel-heading">			
 										<div class="row">																					
+											<!--
 											<div class="col-md-4">
 												<label for="Fornecedor<?php echo $i ?>">Fornecedor:</label>
 												<?php if ($i == 1) { ?>
@@ -483,20 +484,37 @@
 													?>
 												</select>
 											</div>
+											-->
+											<div class="col-md-3">
+												<label for="Desconto">Tipo de Desconto <?php echo $i ?></label>
+												<?php if ($i == 1) { ?>
+												<?php } ?>
+												<select data-placeholder="Selecione uma opção..." class="form-control"
+														 id="listadinamicad<?php echo $i ?>" name="Desconto<?php echo $i ?>">
+													<option value="">-- Selecione uma opção --</option>
+													<?php
+													foreach ($select['Desconto'] as $key => $row) {
+														if ($valor[$i]['Desconto'] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>
+												</select>
+											</div>
 											<div class="col-md-4">
-												<label for="Convdesc<?php echo $i ?>">Descrição do Valor:</label>
+												<label for="Convdesc">Descrição <?php echo $i ?></label>
 												<input type="text" class="form-control"  id="Convdesc<?php echo $i ?>" <?php echo $readonly; ?>
 														  name="Convdesc<?php echo $i ?>" value="<?php echo $valor[$i]['Convdesc']; ?>">
 											</div>													
-											<!--
 											<div class="col-md-2">
-												<label for="ValorProduto<?php echo $i ?>">Valor :</label>
-												<textarea class="form-control" id="ValorProduto<?php echo $i ?>" <?php echo $readonly; ?>
-														  name="ValorProduto<?php echo $i ?>"><?php echo $valor[$i]['ValorProduto']; ?></textarea>
+												<label for="QtdProdutoDesconto">Qtd <?php echo $i ?>:</label>
+												<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto<?php echo $i ?>" placeholder="0"
+														name="QtdProdutoDesconto<?php echo $i ?>" value="<?php echo $valor[$i]['QtdProdutoDesconto'] ?>">
 											</div>
-											-->
-											<div class="col-md-3">
-												<label for="ValorProduto">Valor Balcao <?php echo $i ?>:</label>
+											<div class="col-md-2">
+												<label for="ValorProduto">Valor <?php echo $i ?></label>
 												<div class="input-group">
 													<span class="input-group-addon" id="basic-addon1">R$</span>
 													<input type="text" class="form-control Valor" id="ValorProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
@@ -522,7 +540,7 @@
 							</div>
 
 							<div class="form-group">
-								<a class="add_field_button3 btn btn-xs btn-danger" onclick="adicionaValor2()">
+								<a class="add_field_button3 btn btn-xs btn-danger" onclick="adicionaValorDesconto()">
 									<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Valor
 								</a>
 							</div>

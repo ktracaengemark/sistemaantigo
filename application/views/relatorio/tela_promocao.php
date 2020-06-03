@@ -10,10 +10,10 @@
 				<div class="row text-left">	
 					<div class="col-md-12">
 						<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-							<span class="glyphicon glyphicon-filter"></span>Filtro de Produtos
+							<span class="glyphicon glyphicon-filter"></span>Filtro de Promoções
 						</button>
 						<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-							<span class="glyphicon glyphicon-plus"></span> Novo Produto
+							<span class="glyphicon glyphicon-plus"></span> Nova Promoção
 						</button>
 					</div>
 				</div>	
@@ -22,7 +22,7 @@
 		<?php echo (isset($list)) ? $list : FALSE ?>	
 	</div>
 </div>
-<?php echo form_open('relatorio/produtos', 'role="form"'); ?>
+<?php echo form_open('relatorio/promocao', 'role="form"'); ?>
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content">
@@ -216,16 +216,16 @@
 				<?php if (($_SESSION['log']['TabelasEmpresa'] == 1)) { ?>
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar1" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Produtos
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar1" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Nova Promocao
 						</a>
 					</div>	
 				</div>
 				<?php } else {?>
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar4" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Produtos
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar4" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Nova Promocao4
 						</a>
 					</div>	
 				</div>

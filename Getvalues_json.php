@@ -252,6 +252,28 @@ elseif ($_GET['q'] == 7) {
 
 }
 
+elseif ($_GET['q'] == 8) {
+	
+    $result = mysql_query(
+            'SELECT
+				idTab_Desconto,
+				Desconto
+            FROM
+                Tab_Desconto
+			ORDER BY 
+				idTab_Desconto ASC'
+    );
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Desconto'],
+            'name' => utf8_encode($row['Desconto']),
+        );
+    }
+
+}
+
 elseif ($_GET['q'] == 10) {
 
     $result = mysql_query(

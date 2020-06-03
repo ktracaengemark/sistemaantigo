@@ -110,8 +110,9 @@
 							<th class="active">Cod.</th>
 							<th class="active">Categoria</th>
 							<th class="active">Produto</th>
-							<th class="active">Fornecedor</th>
+							<th class="active">TipoDesc.</th>
 							<th class="active">Descrição</th>
+							<th class="active">Qtd</th>
 							<th class="active">Ativo</th>
 							<th class="active">Vender no Site</th>
 							<th class="active">Peso(kg)</th>
@@ -140,8 +141,9 @@
 								echo '<td>' . $row['CodProd'] . '</td>';
 								echo '<td>' . $row['Prodaux3'] . '</td>';
 								echo '<td>' . $row['Produtos'] . '</td>';
-								echo '<td>' . $row['NomeFornecedor'] . '</td>';
+								echo '<td>' . $row['Desconto'] . '</td>';
 								echo '<td>' . $row['Convdesc'] . '</td>';
+								echo '<td>' . $row['QtdProdutoDesconto'] . '</td>';
 								echo '<td>' . $row['Ativo'] . '</td>';
 								echo '<td>' . $row['VendaSite'] . '</td>';
 								echo '<td>' . $row['PesoProduto'] . '</td>';

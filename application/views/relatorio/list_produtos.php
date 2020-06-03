@@ -100,8 +100,9 @@
 							<th class="active">Cod.</th>
 							<th class="active">Categoria</th>
 							<th class="active">Produto</th>
-							<th class="active">Fornecedor</th>
+							<th class="active">TipoDesc</th>
 							<th class="active">Descricao</th>
+							<th class="active">Qtd</th>
 							<th class="active">Ativo</th>
 							<th class="active">Vender no Site</th>
 							<th class="active">Peso(kg)</th>
@@ -138,8 +139,9 @@
 						<td><?php echo $row['CodProd'] ?></td>
 						<td><?php echo $row['Prodaux3'] ?></td>
 						<td><?php echo $row['Produtos'] ?></td>
-						<td><?php echo $row['NomeFornecedor'] ?></td>
+						<td><?php echo $row['Desconto'] ?></td>
 						<td><?php echo $row['Convdesc'] ?></td>
+						<td><?php echo $row['QtdProdutoDesconto'] ?></td>
 						<td><?php echo $row['Ativo'] ?></td>
 						<td><?php echo $row['VendaSite'] ?></td>
 						<td><?php echo number_format($row['PesoProduto'], 3, ',','.') ?></td>

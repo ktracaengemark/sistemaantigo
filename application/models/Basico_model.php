@@ -2013,6 +2013,22 @@ class Basico_model extends CI_Model {
 
         return $array;
     }
+	
+	public function select_desconto($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('SELECT * FROM Tab_Desconto');
+        } else {
+            $query = $this->db->query('SELECT * FROM Tab_Desconto');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Desconto] = $row->Desconto;
+            }
+        }
+
+        return $array;
+    }	
 
 	public function select_modalidade2($data = FALSE) {
 
