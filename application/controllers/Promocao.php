@@ -51,7 +51,7 @@ class Promocao extends CI_Controller {
 			'Cadastrar',
         ), TRUE));		
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        $data['promocao'] = quotes_to_entities($this->input->post(array(
+$data['promocao'] = quotes_to_entities($this->input->post(array(
             #### Tab_Promocao ####
             'idTab_Promocao',           
             'TipoProduto',
@@ -1976,12 +1976,12 @@ class Promocao extends CI_Controller {
 
 						if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/original/' . $_SESSION['Promocao']['Arquivo'] . ''))
 							&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/original/' . $_SESSION['Promocao']['Arquivo'] . '')
-							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/original/fotoproduto.jpg'))){
+							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/original/fotopromocao.jpg'))){
 							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/original/' . $_SESSION['Promocao']['Arquivo'] . '');						
 						}
 						if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/' . $_SESSION['Promocao']['Arquivo'] . ''))
 							&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/' . $_SESSION['Promocao']['Arquivo'] . '')
-							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/fotoproduto.jpg'))){
+							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/fotopromocao.jpg'))){
 							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/' . $_SESSION['Promocao']['Arquivo'] . '');						
 						}						
 						

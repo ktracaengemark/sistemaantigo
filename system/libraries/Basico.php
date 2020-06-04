@@ -323,6 +323,15 @@ class Basico {
         //$data = 'produto' . '_' . $_SESSION['Produtos']['idTab_Produto'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
 		$data = rand() . '_' . 'produto' . '_' . $_SESSION['Produtos']['idTab_Produto'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
 		return $data;
+    }
+	
+    function renomeiapromocao($data) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+        //$data = 'promocao' . '_' . $_SESSION['Promocao']['idTab_Promocao'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = rand() . '_' . 'promocao' . '_' . $_SESSION['Promocao']['idTab_Promocao'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		return $data;
     }	
 
     function renomeiaslides($data) {

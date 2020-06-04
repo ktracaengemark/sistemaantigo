@@ -21,9 +21,9 @@
 												</a>												
 											</div>
 										</div>										
-										<div class="col-md-10">
+										<div class="col-md-12">
 											<div class="row">	
-												<label for="Promocao">Produto:</label>
+												<label for="Promocao">Promocao:</label>
 												<input type="text" class="form-control" id="Promocao" maxlength="45" 
 														name="Promocao" value="<?php echo $_SESSION['Promocao']['Promocao']; ?>">
 											</div>
