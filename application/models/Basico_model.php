@@ -1136,6 +1136,46 @@ class Basico_model extends CI_Model {
         return $array;
     }
 
+	public function select_produto2($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+                idTab_Produto,
+                CONCAT(IFNULL(CodProd,""), " - ", IFNULL(Produtos,""), " - ", IFNULL(UnidadeProduto,""), " - ", IFNULL(ValorProdutoSite,"")) AS NomeProduto,
+                ValorProdutoSite
+            FROM 
+                Tab_Produto 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY
+				NomeProduto ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+                idTab_Produto,
+                CONCAT(IFNULL(CodProd,""), " - ", IFNULL(Produtos,""), " - ", IFNULL(UnidadeProduto,""), " - ", IFNULL(ValorProdutoSite,"")) AS NomeProduto,
+                ValorProdutoSite
+            FROM 
+                Tab_Produto 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY
+				NomeProduto ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Produto] = $row->NomeProduto;
+            }
+        }
+
+        return $array;
+    }
+	
 	public function select_servico4($data = FALSE) {
 
         if ($data === TRUE) {

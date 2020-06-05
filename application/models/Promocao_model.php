@@ -41,7 +41,7 @@ class Promocao_model extends CI_Model {
 	
     public function set_item_promocao($data) {
 
-        $query = $this->db->insert_batch('Tab_Item_Promocao', $data);
+        $query = $this->db->insert_batch('Tab_Valor', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -53,7 +53,7 @@ class Promocao_model extends CI_Model {
 	
     public function set_item_promocao1($data) {
 
-        $query = $this->db->insert('Tab_Item_Promocao', $data);
+        $query = $this->db->insert('Tab_Valor', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -80,7 +80,7 @@ class Promocao_model extends CI_Model {
     }
 
     public function get_item_promocao($data) {
-		$query = $this->db->query('SELECT * FROM Tab_Item_Promocao WHERE idTab_Promocao = ' . $data);
+		$query = $this->db->query('SELECT * FROM Tab_Valor WHERE idTab_Promocao = ' . $data);
         $query = $query->result_array();
 
         return $query;
@@ -137,7 +137,7 @@ class Promocao_model extends CI_Model {
 			FROM 
 				Tab_Promocao AS TP
 				 LEFT JOIN Tab_Prodaux3 AS T3 ON T3.idTab_Prodaux3 = TP.Prodaux3
-				 LEFT JOIN Tab_Item_Promocao AS TV ON TV.idTab_Promocao = TP.idTab_Promocao
+				 LEFT JOIN Tab_Valor AS TV ON TV.idTab_Promocao = TP.idTab_Promocao
 				 
 			WHERE 
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -182,15 +182,15 @@ class Promocao_model extends CI_Model {
 
     public function update_item_promocao($data) {
 
-        $query = $this->db->update_batch('Tab_Item_Promocao', $data, 'idTab_Item_Promocao');
+        $query = $this->db->update_batch('Tab_Valor', $data, 'idTab_Valor');
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }	
 
     public function delete_item_promocao($data) {
 
-        $this->db->where_in('idTab_Item_Promocao', $data);
-        $this->db->delete('Tab_Item_Promocao');
+        $this->db->where_in('idTab_Valor', $data);
+        $this->db->delete('Tab_Valor');
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -202,7 +202,7 @@ class Promocao_model extends CI_Model {
     public function delete_promocao($id) {
 
 
-        $query = $this->db->delete('Tab_Item_Promocao', array('idTab_Promocao' => $id));
+        $query = $this->db->delete('Tab_Valor', array('idTab_Promocao' => $id));
         $query = $this->db->delete('Tab_Promocao', array('idTab_Promocao' => $id));
 
         if ($this->db->affected_rows() === 0) {

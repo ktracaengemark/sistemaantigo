@@ -303,13 +303,30 @@ class MY_Form_validation extends CI_Form_validation {
 
         if ($field == "Cpf")
             $str = ltrim(preg_replace("/[^0-9]/", "", $str), '0');
-
-        return isset($this->CI->db)
+		/*
+		echo "<pre>";
+			print_r($str);
+		echo "<br>";
+			print_r($field);
+		echo "<br>";
+			print_r($table);
+		echo "<br>";	  
+			print_r($field);
+		echo "<br>";	  
+			print_r($id);
+		echo "</pre>";
+		exit();
+		*/
+		return isset($this->CI->db)
                 #? ($this->CI->db->limit(1)->get_where($table, array($field => $str))->num_rows() === 0)
                 ? ($this->CI->db->limit(1)->query('SELECT ' . $field . ' FROM ' . $table . ' WHERE '
                         . 'id' . $table . ' != "' . $id . '" AND ' . $field . ' = "' . $str . '"')->num_rows() === 0) : FALSE;
-    }
-	
+    
+	}
+	            
+              
+               
+              
 	/**
 	 * Unique
 	 *

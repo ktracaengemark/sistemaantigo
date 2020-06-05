@@ -23,8 +23,6 @@ $result = mysql_query(
 			T.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 ');
 
-
-
 if ($_GET['tabela']) {
 	
     while ($row = mysql_fetch_assoc($result)) {
@@ -35,7 +33,6 @@ if ($_GET['tabela']) {
         );
     }
 }
-
 else {
 
     while ($row = mysql_fetch_assoc($result)) {

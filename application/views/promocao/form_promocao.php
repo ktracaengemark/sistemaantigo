@@ -212,7 +212,8 @@
 						</div>
 						-->
 						<div class="row">
-							<div class="col-md-3">
+							<!--
+							<div class="col-md-2">
 								<label for="Desconto">Tipo de Desconto</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Desconto" name="Desconto">
@@ -227,13 +228,19 @@
 									}
 									?>
 								</select>
-							</div>							
-							<div class="col-md-6">
+							</div>
+							-->
+							<div class="col-md-3">
 								<label for="Promocao">Promoção:*</label><br>
 								<input type="text" class="form-control" maxlength="200"
 										name="Promocao" value="<?php echo $promocao['Promocao'] ?>">
 							</div>
-							<div class="col-md-3 text-left">
+							<div class="col-md-5">
+								<label for="Descricao">Descrição:*</label><br>
+								<input type="text" class="form-control" maxlength="200"
+										name="Descricao" value="<?php echo $promocao['Descricao'] ?>">
+							</div>							
+							<div class="col-md-2 text-left">
 								<label for="Ativo">Produto Ativo?</label><br>
 								<div class="btn-group" data-toggle="buttons">
 									<?php
@@ -369,7 +376,7 @@
 							?>
 
 							<?php if ($metodo > 1) { ?>
-							<input type="hidden" name="idTab_Item_Promocao<?php echo $i ?>" value="<?php echo $item_promocao[$i]['idTab_Item_Promocao']; ?>"/>
+							<input type="hidden" name="idTab_Valor<?php echo $i ?>" value="<?php echo $item_promocao[$i]['idTab_Valor']; ?>"/>
 							<?php } ?>
 
 							<div class="form-group" id="3div<?php echo $i ?>">
@@ -442,21 +449,26 @@
 							?>
 
 							<?php if ($metodo > 1) { ?>
-							<input type="hidden" name="idTab_Item_Promocao<?php echo $i ?>" value="<?php echo $item_promocao[$i]['idTab_Item_Promocao']; ?>"/>
+							<input type="hidden" name="idTab_Valor<?php echo $i ?>" value="<?php echo $item_promocao[$i]['idTab_Valor']; ?>"/>
 							<?php } ?>
 
 							<div class="form-group" id="3div<?php echo $i ?>">
 								<div class="panel panel-info">
 									<div class="panel-heading">			
 										<div class="row">																					
-											<div class="col-md-9">
-												<label for="Item_Promocao<?php echo $i ?>">Item <?php echo $i ?></label>
+											<div class="col-md-2">
+												<label for="QtdProdutoDesconto">Qtd <?php echo $i ?>:</label>
+												<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto<?php echo $i ?>" placeholder="0"
+														name="QtdProdutoDesconto<?php echo $i ?>" value="<?php echo $item_promocao[$i]['QtdProdutoDesconto'] ?>">
+											</div>											
+											<div class="col-md-5">
+												<label for="idTab_Produto<?php echo $i ?>">Item <?php echo $i ?></label>
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
-														 id="listadinamicad<?php echo $i ?>" name="Item_Promocao<?php echo $i ?>">
+														 id="listadinamicad<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
 													<option value="">-- Selecione uma opção --</option>
 													<?php
-													foreach ($select['Item_Promocao'] as $key => $row) {
-														if ($item_promocao[$i]['Item_Promocao'] == $key) {
+													foreach ($select['idTab_Produto'] as $key => $row) {
+														if ($item_promocao[$i]['idTab_Produto'] == $key) {
 															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 														} else {
 															echo '<option value="' . $key . '">' . $row . '</option>';
@@ -465,6 +477,14 @@
 													?>
 												</select>
 											</div>
+											<div class="col-md-2">
+												<label for="ValorProduto">Valor <?php echo $i ?></label>
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1">R$</span>
+													<input type="text" class="form-control Valor" id="ValorProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
+														name="ValorProduto<?php echo $i ?>" value="<?php echo $item_promocao[$i]['ValorProduto'] ?>">
+												</div>
+											</div>											
 											<div class="col-md-1">
 												<label><br></label><br>
 												<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
@@ -498,7 +518,7 @@
 					<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
 					<input type="hidden" name="idTab_Promocao" value="<?php echo $promocao['idTab_Promocao']; ?>">
 					<?php if ($metodo > 1) { ?>
-					<!--<input type="hidden" name="idTab_Item_Promocao" value="<?php echo $item_promocao['idTab_Item_Promocao']; ?>">
+					<!--<input type="hidden" name="idTab_Valor" value="<?php echo $item_promocao['idTab_Valor']; ?>">
 					<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 					<?php } ?>
 					<?php if ($metodo == 2) { ?>

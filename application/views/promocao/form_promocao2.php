@@ -385,7 +385,7 @@
 							?>
 
 							<?php if ($metodo > 1) { ?>
-							<input type="hidden" name="idTab_Item_Promocao<?php echo $i ?>" value="<?php echo $item_promocao[$i]['idTab_Item_Promocao']; ?>"/>
+							<input type="hidden" name="idTab_Valor<?php echo $i ?>" value="<?php echo $item_promocao[$i]['idTab_Valor']; ?>"/>
 							<?php } ?>
 
 							<div class="form-group" id="3div<?php echo $i ?>">
@@ -458,7 +458,7 @@
 							?>
 
 							<?php if ($metodo > 1) { ?>
-							<input type="hidden" name="idTab_Item_Promocao<?php echo $i ?>" value="<?php echo $item_promocao[$i]['idTab_Item_Promocao']; ?>"/>
+							<input type="hidden" name="idTab_Valor<?php echo $i ?>" value="<?php echo $item_promocao[$i]['idTab_Valor']; ?>"/>
 							<?php } ?>
 
 							<div class="form-group" id="3div<?php echo $i ?>">
@@ -556,7 +556,7 @@
 					<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
 					<input type="hidden" name="idTab_Promocao" value="<?php echo $promocao['idTab_Promocao']; ?>">
 					<?php if ($metodo > 1) { ?>
-					<!--<input type="hidden" name="idTab_Item_Promocao" value="<?php echo $item_promocao['idTab_Item_Promocao']; ?>">
+					<!--<input type="hidden" name="idTab_Valor" value="<?php echo $item_promocao['idTab_Valor']; ?>">
 					<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 					<?php } ?>
 					<?php if ($metodo == 2) { ?>

@@ -7178,6 +7178,7 @@ exit();*/
 		$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
 		$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
         $data['Prodaux3'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
+		$data['Prodaux4'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux4']) ? ' AND TP3.idTab_Prodaux4 = ' . $data['Prodaux4'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'TP.Produtos' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 
@@ -7196,6 +7197,7 @@ exit();*/
 				TP1.Prodaux1,
 				TP2.Prodaux2,
 				TP3.Prodaux3,
+				TP4.Prodaux4,
 				TP1.Abrev1,
 				TP2.Abrev2,
 				TP3.Abrev3,
@@ -7205,9 +7207,10 @@ exit();*/
 				TF.NomeFornecedor,
 				TCA.Categoria,
 				TCA.Abrev,
+				TV.idTab_Promocao,
 				TV.Convdesc,
 				TV.ValorProduto,
-				TV.Desconto,
+				TV.Desconto AS idTipo,
 				TV.QtdProdutoDesconto,
 				TC.Convenio,
 				TTP.Abrev,
@@ -7222,6 +7225,7 @@ exit();*/
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
+					LEFT JOIN Tab_Prodaux4 AS TP4 ON TP4.idTab_Prodaux4 = TP.Prodaux4
 					LEFT JOIN Tab_TipoProduto AS TTP ON TTP.Abrev = TP.TipoProduto
             WHERE
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -7328,10 +7332,10 @@ exit();*/
             SELECT
                 TPM.idTab_Promocao,
 				TPM.Promocao,
+				TPM.Descricao,
 				TPM.Arquivo,
 				TPM.Ativo,
-				TIP.idTab_Item_Promocao,
-				TIP.Item_Promocao,
+				TV.idTab_Produto,
 				TV.Convdesc,
 				TV.ValorProduto,
 				TV.QtdProdutoDesconto,
@@ -7339,10 +7343,9 @@ exit();*/
 				TDC.Desconto
             FROM
                 Tab_Promocao AS TPM
-					LEFT JOIN Tab_Desconto AS TDC ON TDC.idTab_Desconto = TPM.Desconto
-					LEFT JOIN Tab_Item_Promocao AS TIP ON TIP.idTab_Promocao = TPM.idTab_Promocao
-					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = TIP.Item_Promocao
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Promocao = TPM.idTab_Promocao
 					LEFT JOIN Tab_Produto AS TPD ON TPD.idTab_Produto = TV.idTab_Produto
+					LEFT JOIN Tab_Desconto AS TDC ON TDC.idTab_Desconto = TPM.Desconto					
             WHERE
                 TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY
@@ -7366,10 +7369,71 @@ exit();*/
             return TRUE;
         } else {
 
-            foreach ($query->result() as $row) {
+            #$somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somapago=$somapagar=$somareal=$balanco=$ant=0;
+            $subtotal=$total=0;
+			foreach ($query->result() as $row) {
+				/*
+				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
+                $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
+                $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
+                $row->DataPago = $this->basico->mascara_data($row->DataPago, 'barras');
 
+                $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
+				$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
+				$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
+                $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
+				*/
+                #esse trecho pode ser melhorado, serve para somar apenas uma vez
+                #o valor da entrada que pode aparecer mais de uma vez
+                /*
+				if ($ant != $row->idApp_OrcaTrata) {
+                    $ant = $row->idApp_OrcaTrata;
+                    $somaentrada += $row->ValorEntradaOrca;
+                }
+                else {
+                    $row->ValorEntradaOrca = FALSE;
+                    $row->DataEntradaOrca = FALSE;
+                }
+				*/
+                
+				$valor_produto = $row->ValorProduto;
+				$qtd_produto = $row->QtdProdutoDesconto;
+				$subtotal += $valor_produto * $qtd_produto;
+				
+				/*
+				$somarecebido += $row->ValorPago;
+                $somareceber += $row->ValorParcela;
+				
+
+                $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
+                $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
+                $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
+				*/
             }
+            $total = $subtotal;
+			/*
+			$somareceber -= $somarecebido;
+            $somareal = $somarecebido;
+            $balanco = $somarecebido + $somareceber;
 
+			$somapagar -= $somapago;
+			$somareal2 = $somapago;
+			$balanco2 = $somapago + $somapagar;
+			*/
+            $query->soma = new stdClass();
+            /*
+			$query->soma->somareceber = number_format($somareceber, 2, ',', '.');
+            $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
+            $query->soma->somareal = number_format($somareal, 2, ',', '.');
+            $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
+            $query->soma->balanco = number_format($balanco, 2, ',', '.');
+			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
+            $query->soma->somapago = number_format($somapago, 2, ',', '.');
+            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
+            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
+			*/
+			$query->soma->total = number_format($total, 2, ',', '.');
+			
             return $query;
         }
 
@@ -9073,6 +9137,30 @@ exit();*/
         return $array;
     }
 
+	public function select_prodaux4() {
+
+        $query = $this->db->query('
+            SELECT
+                P.idTab_Prodaux4,
+                P.Prodaux4
+            FROM
+                Tab_Prodaux4 AS P
+            WHERE
+                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+            ORDER BY
+                Prodaux4 ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idTab_Prodaux4] = $row->Prodaux4;
+        }
+
+        return $array;
+    }
+	
 	public function select_orcatrata() {
 
         $query = $this->db->query('

@@ -97,22 +97,25 @@
 							<th class="active" scope="col">Foto</th>
 							<th class="active" scope="col">Editar</th>
 							<th class="active">Id.</th>
+							<!--<th class="active">idTipo</th>-->
+							<th class="active">Prom</th>
+							<th class="active">Desconto</th>
 							<th class="active">Cod.</th>
 							<th class="active">Categoria</th>
 							<th class="active">Produto</th>
-							<th class="active">TipoDesc</th>
+							<th class="active">NomeProduto</th>
+							<th class="active">Tipo</th>
+							<th class="active">Esp</th>
 							<th class="active">Descricao</th>
 							<th class="active">Qtd</th>
 							<th class="active">Ativo</th>
 							<th class="active">Vender no Site</th>
 							<th class="active">Peso(kg)</th>
 							<th class="active">Comissao(%)</th>
-							<th class="active">Valor Balcao</th>
+							<th class="active">Valor</th>
 							<th class="active">V/C/A</th>
 							<th class="active">Prod/Serv</th>
 							<th class="active">Unid.</th>
-							<th class="active">Aux1</th>
-							<th class="active">Aux2</th>
 							<!--<th class="active">Custo</th>-->						
 							<!--<th class="active">Fornec.</th>-->
 						</tr>
@@ -136,10 +139,15 @@
 						</td>						
 						<!--<td><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>-->
 						<td><?php echo $row['idTab_Produto'] ?></td>
+						<!--<td><?php echo $row['idTipo'] ?></td>-->
+						<td><?php echo $row['idTab_Promocao'] ?></td>
+						<td><?php echo $row['Desconto'] ?></td>
 						<td><?php echo $row['CodProd'] ?></td>
 						<td><?php echo $row['Prodaux3'] ?></td>
+						<td><?php echo $row['Prodaux4'] ?></td>
 						<td><?php echo $row['Produtos'] ?></td>
-						<td><?php echo $row['Desconto'] ?></td>
+						<td><?php echo $row['Prodaux2'] ?></td>
+						<td><?php echo $row['Prodaux1'] ?></td>
 						<td><?php echo $row['Convdesc'] ?></td>
 						<td><?php echo $row['QtdProdutoDesconto'] ?></td>
 						<td><?php echo $row['Ativo'] ?></td>
@@ -149,9 +157,7 @@
 						<td><?php echo number_format($row['ValorProduto'], 2, ',','.') ?></td>
 						<td><?php echo $row['TipoProduto'] ?></td>
 						<td><?php echo $row['Categoria'] ?></td>
-						<td><?php echo $row['UnidadeProduto'] ?></td>
-						<td><?php echo $row['Prodaux1'] ?></td>
-						<td><?php echo $row['Prodaux2'] ?></td>					
+						<td><?php echo $row['UnidadeProduto'] ?></td>				
 						<?php } ?>						
 					</tbody>
 

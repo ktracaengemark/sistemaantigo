@@ -5480,12 +5480,14 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'Produtos',
+            'idTab_Promocao',
+			'Produtos',
 			'CodProd',
 			'TipoProduto',
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
+			'Prodaux4',
 			'Categoria',
 			'Ordenamento',
             'Campo',
@@ -5496,7 +5498,10 @@ class Relatorio extends CI_Controller {
 
 
         $data['select']['Campo'] = array(
+			'TV.idTab_Promocao' => 'id_Promocao',
+			'TP.idTab_Produto' => 'id_Produto',
 			'TP.Produtos' => 'Produto',			
+			'TP4.Prodaux4' => 'Modelo',
 			'TP3.Prodaux3' => 'Categoria',
 			'TP.Prodaux2' => 'Tipo',			
 			'TP.Prodaux1' => 'Esp.',
@@ -5514,6 +5519,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['Prodaux4'] = $this->Relatorio_model->select_prodaux4();
 		$data['select']['TipoProduto'] = $this->Relatorio_model->select_tipoproduto();
 
         $data['titulo'] = 'Produtos';
@@ -5526,6 +5532,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
 			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['Prodaux4'] = $data['query']['Prodaux4'];
 			$data['bd']['TipoProduto'] = $data['query']['TipoProduto'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
@@ -5638,7 +5645,7 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'Promocao',
+			'Promocao',
 			'Ordenamento',
             'Campo',
         ), TRUE));

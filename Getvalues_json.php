@@ -41,6 +41,33 @@ if ($_GET['q']==1) {
 
 }
 
+elseif ($_GET['q'] == 11) {
+
+    $result = mysql_query('
+            SELECT
+                idTab_Produto,
+                CONCAT(IFNULL(CodProd,""), " - ", IFNULL(Produtos,""), " - ", IFNULL(UnidadeProduto,""), " - ", IFNULL(ValorProdutoSite,"")) AS NomeProduto,
+                ValorProdutoSite
+            FROM 
+                Tab_Produto 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY
+				NomeProduto ASC	
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Produto'],
+            'name' => utf8_encode($row['NomeProduto']),
+            'value' => $row['ValorProdutoSite'],
+        );
+    } 
+    
+}
+
 elseif ($_GET['q'] == 2) {
 
     $result = mysql_query('

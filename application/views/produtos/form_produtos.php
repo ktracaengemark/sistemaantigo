@@ -179,7 +179,7 @@
 								<?php echo form_error('Prodaux3'); ?>
 							</div>
 							<div class="col-md-3">
-								<label for="Prodaux4">Modelo</label>								
+								<label for="Prodaux4">Produto / Modelo</label>								
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Prodaux4" name="Prodaux4">
 									<option value="">-- Selecione uma opção --</option>
@@ -193,9 +193,10 @@
 									}
 									?>
 								</select>
+								<?php echo form_error('Prodaux4'); ?>
 							</div>							
 							<div class="col-md-3">
-								<label for="Prodaux2">Tipo:</label>								
+								<label for="Prodaux2">Tipo / Cor:</label>								
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Prodaux2" name="Prodaux2">
 									<option value="">-- Selecione uma opção --</option>
@@ -209,9 +210,10 @@
 									}
 									?>
 								</select>
+								<?php echo form_error('Prodaux2'); ?>
 							</div>
 							<div class="col-md-3">
-								<label for="Prodaux1">Esp.:</label>									
+								<label for="Prodaux1">Esp / Tamanho:</label>									
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Prodaux1" name="Prodaux1">
 									<option value="">-- Selecione uma opção --</option>
@@ -225,21 +227,37 @@
 									}
 									?>
 								</select>
+								<?php echo form_error('Prodaux1'); ?>
 							</div>
 						</div>
+						
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<label for="Produtos">Produto:*</label><br>
 								<input type="text" class="form-control" maxlength="200"
 										name="Produtos" value="<?php echo $produtos['Produtos'] ?>">
 								<?php echo form_error('Produtos'); ?>
 							</div>							
-							<div class="col-md-2">
+							
+							
+							<div class="col-md-3">
 								<label for="CodProd">Código:</label><br>
 								<input type="text" class="form-control" maxlength="25"
 										name="CodProd" value="<?php echo $produtos['CodProd'] ?>">
 								<?php echo form_error('CodProd'); ?>
 							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-3">
+								<label for="ValorProdutoSite">Valor Referência:</label>
+								<div class="input-group">
+									<span class="input-group-addon" id="basic-addon1">R$</span>
+									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
+										name="ValorProdutoSite" value="<?php echo $produtos['ValorProdutoSite'] ?>">
+								</div>
+								<?php echo form_error('ValorProdutoSite'); ?>
+							</div>						
 							<div class="col-md-3">
 								<label for="Comissao">Comissão:</label><br>
 								<div class="input-group">
@@ -255,10 +273,7 @@
 									<input type="text" class="form-control Peso" maxlength="10" placeholder="0,000"
 											name="PesoProduto" value="<?php echo $produtos['PesoProduto'] ?>">
 								</div>
-							</div>							
-						</div>
-						
-						<div class="row">
+							</div>						
 							<div class="col-md-2 text-left">
 								<label for="Ativo">Produto Ativo?</label><br>
 								<div class="btn-group" data-toggle="buttons">
@@ -420,11 +435,31 @@
 								<div class="panel panel-info">
 									<div class="panel-heading">			
 										<div class="row">																					
+											<div class="col-md-2">
+												<label for="QtdProdutoDesconto">Qtd <?php echo $i ?>:</label>
+												<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto<?php echo $i ?>" placeholder="0"
+														name="QtdProdutoDesconto<?php echo $i ?>" value="<?php echo $valor[$i]['QtdProdutoDesconto'] ?>">
+											</div>											
+
+											<div class="col-md-4">
+												<label for="Convdesc">Descrição <?php echo $i ?></label>
+												<input type="text" class="form-control"  id="Convdesc<?php echo $i ?>" <?php echo $readonly; ?>
+														  name="Convdesc<?php echo $i ?>" value="<?php echo $valor[$i]['Convdesc']; ?>">
+											</div>
+											
+											<div class="col-md-2">
+												<label for="ValorProduto">Valor <?php echo $i ?></label>
+												<div class="input-group">
+													<span class="input-group-addon" id="basic-addon1">R$</span>
+													<input type="text" class="form-control Valor" id="ValorProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
+														name="ValorProduto<?php echo $i ?>" value="<?php echo $valor[$i]['ValorProduto'] ?>">
+												</div>
+											</div>
 											<div class="col-md-3">
 												<label for="Desconto">Tipo de Desconto <?php echo $i ?></label>
 												<?php if ($i == 1) { ?>
 												<?php } ?>
-												<select data-placeholder="Selecione uma opção..." class="form-control"
+												<select data-placeholder="Selecione uma opção..." class="form-control" readonly=''
 														 id="listadinamicad<?php echo $i ?>" name="Desconto<?php echo $i ?>">
 													<option value="">-- Selecione uma opção --</option>
 													<?php
@@ -437,32 +472,15 @@
 													}
 													?>
 												</select>
-											</div>
-											<div class="col-md-4">
-												<label for="Convdesc">Descrição <?php echo $i ?></label>
-												<input type="text" class="form-control"  id="Convdesc<?php echo $i ?>" <?php echo $readonly; ?>
-														  name="Convdesc<?php echo $i ?>" value="<?php echo $valor[$i]['Convdesc']; ?>">
-											</div>
-											<div class="col-md-2">
-												<label for="QtdProdutoDesconto">Qtd <?php echo $i ?>:</label>
-												<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto<?php echo $i ?>" placeholder="0"
-														name="QtdProdutoDesconto<?php echo $i ?>" value="<?php echo $valor[$i]['QtdProdutoDesconto'] ?>">
 											</div>											
-											<div class="col-md-2">
-												<label for="ValorProduto">Valor <?php echo $i ?></label>
-												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon1">R$</span>
-													<input type="text" class="form-control Valor" id="ValorProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
-														name="ValorProduto<?php echo $i ?>" value="<?php echo $valor[$i]['ValorProduto'] ?>">
-												</div>
-											</div>													
-											
+											<!--
 											<div class="col-md-1">
 												<label><br></label><br>
 												<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
 													<span class="glyphicon glyphicon-trash"></span>
 												</button>
 											</div>
+											-->
 										</div>
 									</div>	
 								</div>		
@@ -473,12 +491,13 @@
 							?>
 
 							</div>
-
+							
 							<div class="form-group">
 								<a class="add_field_button3 btn btn-xs btn-danger" onclick="adicionaValorDesconto()">
 									<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Valor
 								</a>
 							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -500,12 +519,13 @@
 								<span class="glyphicon glyphicon-save"></span> Salvar
 							</button>
 						</div>
+						<!--
 						<div class="col-md-6 text-right">
 							<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 								<span class="glyphicon glyphicon-trash"></span> Excluir
 							</button>
 						</div>
-
+						-->
 						<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">

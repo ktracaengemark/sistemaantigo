@@ -21,6 +21,7 @@
 							<th class="active">IdProm.</th>
 							<th class="active">Tipo</th>
 							<th class="active">Promocao</th>
+							<th class="active">Descrição</th>
 							<th class="active">IdProd.</th>
 							<th class="active">Qtd.</th>
 							<th class="active">Produto</th>
@@ -49,7 +50,8 @@
 							<td><?php echo $row['idTab_Promocao'] ?></td>
 							<td><?php echo $row['Desconto'] ?></td>
 							<td><?php echo $row['Promocao'] ?></td>
-							<td><?php echo $row['Item_Promocao'] ?></td>
+							<td><?php echo $row['Descricao'] ?></td>
+							<td><?php echo $row['idTab_Produto'] ?></td>
 							<td><?php echo $row['QtdProdutoDesconto'] ?></td>
 							<td><?php echo $row['Produtos'] ?></td>
 							<td><?php echo number_format($row['ValorProduto'], 2, ',','.') ?></td>

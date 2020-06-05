@@ -394,7 +394,7 @@
 					<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
 					<input type="hidden" name="idTab_Promocao" value="<?php echo $promocao['idTab_Promocao']; ?>">
 					<?php if ($metodo > 1) { ?>
-					<!--<input type="hidden" name="idTab_Item_Promocao" value="<?php echo $item_promocao['idTab_Item_Promocao']; ?>">
+					<!--<input type="hidden" name="idTab_Valor" value="<?php echo $item_promocao['idTab_Valor']; ?>">
 					<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 					<?php } ?>
 					<?php if ($metodo == 2) { ?>

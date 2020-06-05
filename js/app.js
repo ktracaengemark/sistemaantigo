@@ -1351,24 +1351,17 @@ function adicionaValorDesconto() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-3">\
-							<label for="Desconto'+pt+'">Tipo de Desconto</label>\
-							<select data-placeholder="Selecione uma opção..." class="form-control"\
-									 id="listadinamicad'+pt+'" name="Desconto'+pt+'">\
-								<option value="">-- Selecione uma opção --</option>\
-							</select>\
-						</div>\
-						<div class="col-md-4">\
-							<label for="Convdesc'+pt+'">Descrição</label>\
-							<input type="text" class="form-control" id="Convdesc'+pt+'"\
-									  name="Convdesc'+pt+'" value="">\
-						</div>\
 						<div class="col-md-2">\
 							<label for="QtdProdutoDesconto">Qtd:</label><br>\
 							<div class="input-group">\
 								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto'+pt+'" placeholder="0"\
 								    name="QtdProdutoDesconto'+pt+'" value="1">\
 							</div>\
+						</div>\
+						<div class="col-md-4">\
+							<label for="Convdesc'+pt+'">Descrição</label>\
+							<input type="text" class="form-control" id="Convdesc'+pt+'"\
+									  name="Convdesc'+pt+'" value="">\
 						</div>\
 						<div class="col-md-2">\
 							<label for="ValorProduto'+pt+'">Valor</label><br>\
@@ -1613,11 +1606,26 @@ function adiciona_item_promocao() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-9">\
-							<label for="Item_Promocao">Item:</label><br>\
-							<select class="form-control Chosen" id="listadinamicad'+pt+'" name="Item_Promocao'+pt+'">\
+						<div class="col-md-2">\
+							<label for="QtdProdutoDesconto">Qtd:</label><br>\
+							<div class="input-group">\
+								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto'+pt+'" placeholder="0"\
+								    name="QtdProdutoDesconto'+pt+'" value="1">\
+							</div>\
+						</div>\
+						<div class="col-md-5">\
+							<label for="idTab_Produto">Item:</label><br>\
+							<select class="form-control Chosen" id="listadinamicad'+pt+'" name="idTab_Produto'+pt+'">\
 								<option value="">-- Selecione uma opção --</option>\
 							</select>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="ValorProduto'+pt+'">Valor</label><br>\
+							<div class="input-group id="ValorProduto'+pt+'">\
+								<span class="input-group-addon" id="basic-addon1">R$</span>\
+								<input type="text" class="form-control Valor" id="ValorProduto'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ValorProduto'+pt+'" value="">\
+							</div>\
 						</div>\
 						<div class="col-md-1">\
 							<label><br></label><br>\
@@ -1638,7 +1646,7 @@ function adiciona_item_promocao() {
 
     //request the JSON data and parse into the select element
     $.ajax({
-        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=9',
+        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=11',
         dataType: 'JSON',
         type: "GET",
         success: function (data) {
