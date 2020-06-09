@@ -67,7 +67,7 @@ class Prodaux4_model extends CI_Model {
                 . 'WHERE '
                 . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
                 . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' '
-                . 'ORDER BY Abrev4 ASC ');
+                . 'ORDER BY Prodaux4 ASC ');
 
         /*
           echo $this->db->last_query();

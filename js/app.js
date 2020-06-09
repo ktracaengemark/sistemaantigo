@@ -4836,14 +4836,13 @@ $(document).ready(function () {
                 <div class="panel panel-warning">\
                     <div class="panel-heading">\
                         <div class="row">\
-							<div class="col-md-6">\
+							<div class="col-md-10">\
 								<label for="Cat_Prod'+pc+'">Cat_Prod:</label>\
 								<select data-placeholder="Selecione uma opção..." class="form-control"\
 										 id="listadinamicah'+pc+'" name="Cat_Prod'+pc+'">\
 									<option value=""></option>\
 								</select>\
 							</div>\
-							<div class="col-md-4"></div>\
 							<div class="col-md-1">\
 								<label><br></label><br>\
 								<a href="#" id="'+pc+'" class="remove_field93 btn btn-danger"\

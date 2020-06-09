@@ -914,7 +914,9 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
       
         (!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
-
+		(!$this->input->post('PCount')) ? $data['count']['PCount'] = 0 : $data['count']['PCount'] = $this->input->post('PCount');		
+        (!$this->input->post('PMCount')) ? $data['count']['PMCount'] = 0 : $data['count']['PMCount'] = $this->input->post('PMCount');
+		
 		(!$data['promocao']['TipoProduto']) ? $data['promocao']['TipoProduto'] = 'V' : FALSE;
 		(!$data['promocao']['Categoria']) ? $data['promocao']['Categoria'] = 'P' : FALSE;
 		(!$data['promocao']['UnidadeProduto']) ? $data['promocao']['UnidadeProduto'] = 'UNID' : FALSE;
@@ -931,6 +933,31 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
         }
         $data['count']['PTCount'] = $j - 1;
+		
+        $j = 1;
+        for ($i = 1; $i <= $data['count']['PCount']; $i++) {
+			
+            if ($this->input->post('Cor_Prod' . $i) || $this->input->post('Valor_Cor_Prod' . $i)){
+
+                $data['produto'][$j]['Cor_Prod'] = $this->input->post('Cor_Prod' . $i);
+				$data['produto'][$j]['Valor_Cor_Prod'] = $this->input->post('Valor_Cor_Prod' . $i);
+				$j++;
+            }
+        }
+        $data['count']['PCount'] = $j - 1;
+
+        $j = 1;
+        for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
+
+            if ($this->input->post('Tam_Prod' . $i) || $this->input->post('Fator_Tam_Prod' . $i)){
+
+				$data['procedimento'][$j]['Tam_Prod'] = $this->input->post('Tam_Prod' . $i);
+				$data['procedimento'][$j]['Fator_Tam_Prod'] = $this->input->post('Fator_Tam_Prod' . $i);
+                $j++;
+            }
+
+        }
+        $data['count']['PMCount'] = $j - 1;		
 
         //Fim do trecho de código que dá pra melhorar
 
@@ -955,6 +982,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
+		$data['select']['Cor_Prod'] = $this->Prodaux2_model->select_prodaux2();
+		$data['select']['Tam_Prod'] = $this->Prodaux1_model->select_prodaux1();		
 		$data['select']['idTab_Produto'] = $this->Basico_model->select_produtos();
 		//$data['select']['Promocao'] = $this->Relatorio_model->select_promocao();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
@@ -1058,6 +1087,34 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 }
                 $data['item_promocao']['idTab_Valor'] = $this->Promocao_model->set_item_promocao($data['item_promocao']);
             }
+			
+            #### App_Produto ####
+            if (isset($data['produto'])) {
+                $max = count($data['produto']);
+                for($j=1;$j<=$max;$j++) {
+					$data['produto'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+					$data['produto'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+					$data['produto'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['produto'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
+					$data['produto'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
+					$data['produto'][$j]['Valor_Cor_Prod'] = str_replace(',', '.', str_replace('.', '', $data['produto'][$j]['Valor_Cor_Prod']));
+				}
+                $data['produto']['idTab_Cor_Prod'] = $this->Produtos_model->set_produto($data['produto']);
+            }
+
+            #### App_Procedimento ####
+            if (isset($data['procedimento'])) {
+                $max = count($data['procedimento']);
+                for($j=1;$j<=$max;$j++) {
+                    $data['procedimento'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+                    $data['procedimento'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+					$data['procedimento'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['procedimento'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
+					$data['procedimento'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
+					$data['procedimento'][$j]['Fator_Tam_Prod'] = str_replace(',', '.', str_replace('.', '', $data['procedimento'][$j]['Fator_Tam_Prod']));
+                }
+                $data['procedimento']['idTab_Tam_Prod'] = $this->Produtos_model->set_procedimento($data['procedimento']);
+            }			
 
 /*
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1130,6 +1187,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
         
         (!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
+		(!$this->input->post('PCount')) ? $data['count']['PCount'] = 0 : $data['count']['PCount'] = $this->input->post('PCount');		
+        (!$this->input->post('PMCount')) ? $data['count']['PMCount'] = 0 : $data['count']['PMCount'] = $this->input->post('PMCount');		
 		
 		(!$data['promocao']['TipoProduto']) ? $data['promocao']['TipoProduto'] = 'V' : FALSE;
 		(!$data['promocao']['Categoria']) ? $data['promocao']['Categoria'] = 'P' : FALSE;

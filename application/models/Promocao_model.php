@@ -63,6 +63,30 @@ class Promocao_model extends CI_Model {
         }
     }	
 
+    public function set_produto($data) {
+
+        $query = $this->db->insert_batch('Tab_Cor_Prod', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+	
+    public function set_procedimento($data) {
+
+        $query = $this->db->insert_batch('Tab_Tam_Prod', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }	
+	
     public function get_promocao($data) {
         $query = $this->db->query('SELECT * FROM Tab_Promocao WHERE idTab_Promocao = ' . $data);
         $query = $query->result_array();
