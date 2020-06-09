@@ -7173,13 +7173,13 @@ exit();*/
 
 	public function list_produtos($data, $completo) {
 
-		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
-		$data['TipoProduto'] = ($data['TipoProduto']) ? ' AND TTP.idTab_TipoProduto = ' . $data['TipoProduto'] : FALSE;
-		$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
-		$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
-        $data['Prodaux3'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
-		$data['Prodaux4'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux4']) ? ' AND TP3.idTab_Prodaux4 = ' . $data['Prodaux4'] : FALSE;
-		$data['Campo'] = (!$data['Campo']) ? 'TP.Produtos' : $data['Campo'];
+		#$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
+		#$data['TipoProduto'] = ($data['TipoProduto']) ? ' AND TTP.idTab_TipoProduto = ' . $data['TipoProduto'] : FALSE;
+		#$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
+		#$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
+        #$data['Prodaux3'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
+		#$data['Prodaux4'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux4']) ? ' AND TP3.idTab_Prodaux4 = ' . $data['Prodaux4'] : FALSE;
+		$data['Campo'] = (!$data['Campo']) ? 'TP4.Prodaux4' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 
         $query = $this->db->query('
@@ -7194,49 +7194,29 @@ exit();*/
 				TP.Arquivo,
 				TP.Ativo,
 				TP.VendaSite,
-				TP1.Prodaux1,
-				TP2.Prodaux2,
-				TP3.Prodaux3,
 				TP4.Prodaux4,
-				TP1.Abrev1,
-				TP2.Abrev2,
-				TP3.Abrev3,
-				TP.UnidadeProduto,
-				TP.ValorCompraProduto,
-				TV.Fornecedor,
-				TF.NomeFornecedor,
-				TCA.Categoria,
-				TCA.Abrev,
-				TV.idTab_Promocao,
-				TV.Convdesc,
-				TV.ValorProduto,
-				TV.Desconto AS idTipo,
-				TV.QtdProdutoDesconto,
-				TC.Convenio,
-				TTP.Abrev,
-				TDSC.Desconto
+				TCOP.Cor_Prod,
+				TPA2.Prodaux2,
+				TPA2.Arquivo AS Arquivo_Cor,
+				TCOP.Valor_Cor_Prod,
+				TPA1.Prodaux1,
+				TTAP.Fator_Tam_Prod,
+				(TCOP.Valor_Cor_Prod * TTAP.Fator_Tam_Prod) AS Valor_Produto
             FROM
                 Tab_Produto AS TP
-					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produto = TP.idTab_Produto
-					LEFT JOIN Tab_Desconto AS TDSC ON TDSC.idTab_Desconto = TV.Desconto
-					LEFT JOIN Tab_Convenio AS TC ON TC.idTab_Convenio = TV.Convenio
-					LEFT JOIN App_Fornecedor AS TF ON TF.idApp_Fornecedor = TV.Fornecedor
-					LEFT JOIN Tab_Categoria AS TCA ON TCA.Abrev = TP.Categoria
-					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
-					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
-					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
 					LEFT JOIN Tab_Prodaux4 AS TP4 ON TP4.idTab_Prodaux4 = TP.Prodaux4
-					LEFT JOIN Tab_TipoProduto AS TTP ON TTP.Abrev = TP.TipoProduto
+					LEFT JOIN Tab_Cor_Prod AS TCOP ON TCOP.idTab_Produto = TP.idTab_Produto
+					LEFT JOIN Tab_Prodaux2 AS TPA2 ON TPA2.idTab_Prodaux2 = TCOP.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTAP ON TTAP.idTab_Produto = TP.idTab_Produto
+					LEFT JOIN Tab_Prodaux1 AS TPA1 ON TPA1.idTab_Prodaux1 = TTAP.Tam_Prod
             WHERE
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
-				' . $data['TipoProduto'] . '
-				' . $data['Produtos'] . '
-				' . $data['Prodaux1'] . '
-				' . $data['Prodaux2'] . '
-				' . $data['Prodaux3'] . '
 			ORDER BY
-				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '	, TP.Produtos		
+				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '	, 
+				TPA2.Prodaux2,
+				Valor_Produto
+		
         ');
 
         /*
@@ -7254,10 +7234,26 @@ exit();*/
             return TRUE;
         } else {
 
+            $valor_produto=0;
+			#$somaorcamento=0;
+			#$somacomissao=0;
             foreach ($query->result() as $row) {
 
+				$valor_produto = $row->Valor_Cor_Prod * $row->Fator_Tam_Prod;
+				#$somaorcamento += $row->ValorRestanteOrca;
+				#$somacomissao += $row->ValorComissao;
+                $row->Valor_Cor_Prod = number_format($row->Valor_Cor_Prod, 2, ',', '.');
+				$row->Fator_Tam_Prod = number_format($row->Fator_Tam_Prod, 2, ',', '.');
+				$row->Valor_Produto = number_format($row->Valor_Produto, 2, ',', '.');
+				$valor_produto = number_format($valor_produto, 2, ',', '.');
+				
             }
-
+            $query->soma = new stdClass();
+			#$query->soma->valor_produto = number_format($valor_produto, 2, ',', '.');
+            #$query->soma->somaorcamento = number_format($somaorcamento, 2, ',', '.');
+			#$query->soma->somacomissao = number_format($somacomissao, 2, ',', '.');			
+			
+			
             return $query;
         }
 

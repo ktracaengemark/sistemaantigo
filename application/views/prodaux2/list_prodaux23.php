@@ -3,9 +3,12 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Tipo</th>
-			<th>Abrev</th>
-            
+            <th>Imagem</th>
+			<th>Editar</th>
+			<th>Id</th>
+			<th>Categoria</th>            
+			<th>Tipo</th>
+			<!--<th>Abrev</th>-->
             <th></th>
         </tr>
     </thead>
@@ -17,14 +20,31 @@
             foreach ($q as $row)
             {
 
-                $url = base_url() . 'prodaux22/alterar3/' . $row['idTab_Prodaux2'];
-                #$url = '';
+                $url 	= 	base_url() . 'prodaux22/alterar3/' . $row['idTab_Prodaux2'];
+				$url2 	=	base_url() . 'prodaux22/alterarlogo/' . $row['idTab_Prodaux2'];
+				$url3 	= 	base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'];
+                
+				#$url = '';
 
-                echo '<tr class="clickable-row" data-href="' . $url . '">';
-                    echo '<td>' . $row['Prodaux2'] . '</td>';
-					echo '<td>' . $row['Abrev2'] . '</td>';
-                    echo '<td></td>';
-                echo '</tr>';            
+				#echo '<tr class="clickable-row" data-href="' . $url . '">';
+				echo '<tr>';
+					echo '<td class="notclickable">
+								<a class="btn btn-md btn-info notclickable" href="' . $url2 . '">
+									<img  alt="User Pic" src="' . $url3 . '" class="img-circle img-responsive" width="50">
+								</a>
+							</td>';					
+					echo '<td class="notclickable">
+								<a class="btn btn-md btn-info notclickable" href="' . $url . '">
+									<span class="glyphicon glyphicon-edit notclickable"></span>
+								</a>
+							</td>';				
+					echo '<td>' . $row['idTab_Prodaux2'] . '</td>';
+					echo '<td>' . $row['Prodaux4'] . '</td>';                    
+					echo '<td>' . $row['Prodaux2'] . '</td>';
+					#echo '<td>' . $row['Abrev2'] . '</td>';
+                    #echo '<td></td>';
+
+				echo '</tr>';            
 
                 $i++;
             }

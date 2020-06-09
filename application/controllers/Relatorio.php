@@ -5498,11 +5498,9 @@ class Relatorio extends CI_Controller {
 
 
         $data['select']['Campo'] = array(
-			'TV.idTab_Promocao' => 'id_Promocao',
+			'TP.Produtos' => 'Produto',
 			'TP.idTab_Produto' => 'id_Produto',
-			'TP.Produtos' => 'Produto',			
 			'TP4.Prodaux4' => 'Modelo',
-			'TP3.Prodaux3' => 'Categoria',
 			'TP.Prodaux2' => 'Tipo',			
 			'TP.Prodaux1' => 'Esp.',
 			'TP.TipoProduto' => 'V/C/A',

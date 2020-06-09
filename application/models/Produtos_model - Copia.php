@@ -50,42 +50,6 @@ class Produtos_model extends CI_Model {
             return $this->db->insert_id();
         }
     }
-
-    public function set_servico($data) {
-
-        $query = $this->db->insert_batch('Tab_Cat_Prod', $data);
-
-        if ($this->db->affected_rows() === 0) {
-            return FALSE;
-        } else {
-            #return TRUE;
-            return $this->db->insert_id();
-        }
-    }
-	
-    public function set_produto($data) {
-
-        $query = $this->db->insert_batch('Tab_Cor_Prod', $data);
-
-        if ($this->db->affected_rows() === 0) {
-            return FALSE;
-        } else {
-            #return TRUE;
-            return $this->db->insert_id();
-        }
-    }
-	
-    public function set_procedimento($data) {
-
-        $query = $this->db->insert_batch('Tab_Tam_Prod', $data);
-
-        if ($this->db->affected_rows() === 0) {
-            return FALSE;
-        } else {
-            #return TRUE;
-            return $this->db->insert_id();
-        }
-    }	
 	
     public function set_valor1($data) {
 
@@ -122,27 +86,6 @@ class Produtos_model extends CI_Model {
         return $query;
     }
 
-    public function get_servico($data) {
-		$query = $this->db->query('SELECT * FROM Tab_Cat_Prod WHERE idTab_Produto = ' . $data);
-        $query = $query->result_array();
-
-        return $query;
-    }
-	
-    public function get_produto($data) {
-		$query = $this->db->query('SELECT * FROM Tab_Cor_Prod WHERE idTab_Produto = ' . $data);
-        $query = $query->result_array();
-
-        return $query;
-    }
-	
-    public function get_procedimento($data) {
-		$query = $this->db->query('SELECT * FROM Tab_Tam_Prod WHERE idTab_Produto = ' . $data);
-        $query = $query->result_array();
-
-        return $query;
-    }	
-	
     public function list_produtos1($id, $aprovado, $completo) {
 
         $query = $this->db->query('
@@ -244,27 +187,6 @@ class Produtos_model extends CI_Model {
 
     }	
 
-    public function update_servico($data) {
-		
-        $query = $this->db->update_batch('Tab_Cat_Prod', $data, 'idTab_Cat_Prod');
-        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
-
-    }	
-	
-    public function update_produto($data) {
-		
-        $query = $this->db->update_batch('Tab_Cor_Prod', $data, 'idTab_Cor_Prod');
-        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
-
-    }
-	
-    public function update_procedimento($data) {
-		
-        $query = $this->db->update_batch('Tab_Tam_Prod', $data, 'idTab_Tam_Prod');
-        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
-
-    }	
-	
     public function delete_valor($data) {
 
         $this->db->where_in('idTab_Valor', $data);
@@ -276,51 +198,13 @@ class Produtos_model extends CI_Model {
             return TRUE;
         }
     }
-	
-    public function delete_servico($data) {
-
-        $this->db->where_in('idTab_Cat_Prod', $data);
-        $this->db->delete('Tab_Cat_Prod');
-
-        if ($this->db->affected_rows() === 0) {
-            return FALSE;
-        } else {
-            return TRUE;
-        }
-    }
-
-    public function delete_produto($data) {
-
-        $this->db->where_in('idTab_Cor_Prod', $data);
-        $this->db->delete('Tab_Cor_Prod');
-
-        if ($this->db->affected_rows() === 0) {
-            return FALSE;
-        } else {
-            return TRUE;
-        }
-    }
-	
-    public function delete_procedimento($data) {
-
-        $this->db->where_in('idTab_Tam_Prod', $data);
-        $this->db->delete('Tab_Tam_Prod');
-
-        if ($this->db->affected_rows() === 0) {
-            return FALSE;
-        } else {
-            return TRUE;
-        }
-    }	
 
     public function delete_produtos($id) {
 
-        $query = $this->db->delete('Tab_Produto', array('idTab_Produto' => $id));
+
         $query = $this->db->delete('Tab_Valor', array('idTab_Produto' => $id));
-        $query = $this->db->delete('Tab_Cat_Prod', array('idTab_Produto' => $id));
-        $query = $this->db->delete('Tab_Cor_Prod', array('idTab_Produto' => $id));
-        $query = $this->db->delete('Tab_Tam_Prod', array('idTab_Produto' => $id));
-		
+        $query = $this->db->delete('Tab_Produto', array('idTab_Produto' => $id));
+
         if ($this->db->affected_rows() === 0) {
             return FALSE;
         } else {

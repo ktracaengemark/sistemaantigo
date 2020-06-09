@@ -60,7 +60,7 @@ class Prodaux1_model extends CI_Model {
         }
     }
 
-    public function lista_prodaux1($x) {
+    public function lista_prodaux1_BKP($x) {
 
         $query = $this->db->query('SELECT * '
                 . 'FROM Tab_Prodaux1 '
@@ -93,6 +93,49 @@ class Prodaux1_model extends CI_Model {
         }
     }
 
+    public function lista_prodaux1($x) {
+
+        $query = $this->db->query('
+			SELECT 
+				TP1.idTab_Prodaux1,
+				TP1.Prodaux1,
+				TP1.Abrev1,
+				TP3.Prodaux3
+			FROM 
+				  Tab_Prodaux1 AS TP1
+					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP1.Prodaux3
+			WHERE
+                TP1.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
+                TP1.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+			ORDER BY 
+				TP3.Prodaux3 ASC,
+				TP1.Prodaux1 ASC
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+	
     public function select_prodaux13($data = FALSE) {
 
         if ($data === TRUE) {
@@ -149,7 +192,7 @@ class Prodaux1_model extends CI_Model {
                 idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '
                 ORDER BY Prodaux1 ASC'
     );
-
+	
             $array = array();
             foreach ($query->result() as $row) {
                 $array[$row->Prodaux1] = $row->Prodaux1;

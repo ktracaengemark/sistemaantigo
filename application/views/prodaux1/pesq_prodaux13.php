@@ -34,7 +34,7 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 
-			<?php echo validation_errors(); ?>
+			<?php #echo validation_errors(); ?>
 
 			<div class="panel panel-primary">
 
@@ -43,8 +43,25 @@
 
 					<?php echo form_open($form_open_path, 'role="form"'); ?>
 						<div class="row">
+							<div class="col-md-3">
+								<label for="Prodaux3">Categoria</label>								
+								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+										id="Prodaux3" name="Prodaux3">
+									<option value="">-- Selecione uma opção --</option>
+									<?php
+									foreach ($select['Prodaux3'] as $key => $row) {
+										if ($query['Prodaux3'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+								<?php echo form_error('Prodaux3'); ?>
+							</div>							
 							<div class="col-md-4">
-								<label for="Prodaux1">Aux1:</label><br>
+								<label for="Prodaux1">Esp / Tamanho</label><br>
 								<input type="text" class="form-control" maxlength="30"
 									   autofocus name="Prodaux1" value="<?php echo $query['Prodaux1'] ?>">
 							</div>
@@ -54,6 +71,7 @@
 								<input type="text" class="form-control" maxlength="4"
 										name="Abrev1" value="<?php echo $query['Abrev1'] ?>">
 							</div>
+							
 						</div>
 						<br>
 						<div class="form-group">

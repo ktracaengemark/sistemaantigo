@@ -231,7 +231,7 @@
 							</div>
 							-->
 							<div class="col-md-3">
-								<label for="Promocao">Promoção:*</label><br>
+								<label for="Promocao">Título / Promoção:*</label><br>
 								<input type="text" class="form-control" maxlength="200"
 										name="Promocao" value="<?php echo $promocao['Promocao'] ?>">
 							</div>

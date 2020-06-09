@@ -325,6 +325,15 @@ class Basico {
 		return $data;
     }
 	
+    function renomeiaprodaux2($data) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+        //$data = 'produto' . '_' . $_SESSION['Produtos']['idTab_Prodaux2'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = rand() . '_' . 'prodaux2' . '_' . $_SESSION['Produtos']['idTab_Prodaux2'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		return $data;
+    }	
+	
     function renomeiapromocao($data) {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);

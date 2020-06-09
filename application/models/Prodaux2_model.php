@@ -24,6 +24,20 @@ class Prodaux2_model extends CI_Model {
         }
     }
 
+    public function set_arquivo($data) {
+
+        $query = $this->db->insert('Sis_Arquivo', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+	
     public function get_prodaux2($data) {
         $query = $this->db->query('SELECT * FROM Tab_Prodaux2 WHERE idTab_Prodaux2 = ' . $data);
         $query = $query->result_array();
@@ -50,6 +64,14 @@ class Prodaux2_model extends CI_Model {
         }
     }
 	
+    public function update2_prodaux2($data, $id) {
+
+        unset($data['idTab_Prodaux2']);
+        $query = $this->db->update('Tab_Prodaux2', $data, array('idTab_Prodaux2' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }	
+	
 	public function delete_prodaux2($data) {        
 		$query = $this->db->delete('Tab_Prodaux2', array('idTab_Prodaux2' => $data));
 
@@ -60,7 +82,7 @@ class Prodaux2_model extends CI_Model {
         }
     }
 
-    public function lista_prodaux2($x) {
+    public function lista_prodaux2_BKP($x) {
 
         $query = $this->db->query('SELECT * '
                 . 'FROM Tab_Prodaux2 '
@@ -92,6 +114,50 @@ class Prodaux2_model extends CI_Model {
             }
         }
     }
+	
+    public function lista_prodaux2($x) {
+
+        $query = $this->db->query('
+			SELECT 
+				TP2.idTab_Prodaux2,
+				TP2.Prodaux2,
+				TP2.Abrev2,
+				TP2.Arquivo,
+				TP4.Prodaux4
+			FROM 
+				  Tab_Prodaux2 AS TP2
+					LEFT JOIN Tab_Prodaux4 AS TP4 ON TP4.idTab_Prodaux4 = TP2.Prodaux4
+			WHERE
+                TP2.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
+                TP2.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+			ORDER BY 
+				TP4.Prodaux4 ASC,
+				TP2.Prodaux2 ASC
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }	
 
     public function select_prodaux23($data = FALSE) {
 
