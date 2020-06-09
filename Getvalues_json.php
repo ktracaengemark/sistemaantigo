@@ -410,7 +410,7 @@ elseif ($_GET['q'] == 91) {
 				P.idTab_Prodaux1,
 				P.Prodaux1,
 				P3.Prodaux3,
-				CONCAT(IFNULL(P3.Prodaux3,""), " - ", IFNULL(P.Prodaux1,"")) AS Prodaux3
+				CONCAT(IFNULL(P3.Prodaux3,""), " - ", IFNULL(P.Prodaux1,"")) AS Prodaux1
             FROM
                 Tab_Prodaux1 AS P
 					LEFT JOIN Tab_Prodaux3 AS P3 ON P3.idTab_Prodaux3 = P.Prodaux3
@@ -426,7 +426,7 @@ elseif ($_GET['q'] == 91) {
 
         $event_array[] = array(
             'id' => $row['idTab_Prodaux1'],
-            'name' => utf8_encode($row['Prodaux3']),
+            'name' => utf8_encode($row['Prodaux1']),
         );
     }
 

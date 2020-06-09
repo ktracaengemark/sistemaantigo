@@ -4818,18 +4818,12 @@ $(document).ready(function () {
         
 //////// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
 		if (pc >= 2) {
-			//console.log( $("#listadinamicab"+(pc-1)).val() );
+			//console.log( $("#listadinamicah"+(pc-1)).val() );
 			var chosen;
-			chosen = $("#listadinamicab"+(pc-1)).val();
+			chosen = $("#listadinamicah"+(pc-1)).val();
 			//console.log( chosen + ' :: ' + pc );
 		}
 		
-		if (pc >= 2) {
-			//console.log( $("#listadinamicac"+(pc-1)).val() );
-			var chosen2;
-			chosen2 = $("#listadinamicac"+(pc-1)).val();
-			//console.log( chosen + ' :: ' + pc );
-		}
 /////// Termina aqui!!! ////
 		
 		e.preventDefault();
@@ -4842,14 +4836,14 @@ $(document).ready(function () {
                 <div class="panel panel-warning">\
                     <div class="panel-heading">\
                         <div class="row">\
-							<div class="col-md-4">\
+							<div class="col-md-6">\
 								<label for="Cat_Prod'+pc+'">Cat_Prod:</label>\
 								<select data-placeholder="Selecione uma opção..." class="form-control"\
-										 id="listadinamicac'+pc+'" name="Cat_Prod'+pc+'">\
+										 id="listadinamicah'+pc+'" name="Cat_Prod'+pc+'">\
 									<option value=""></option>\
 								</select>\
 							</div>\
-							<div class="col-md-1"></div>\
+							<div class="col-md-4"></div>\
 							<div class="col-md-1">\
 								<label><br></label><br>\
 								<a href="#" id="'+pc+'" class="remove_field93 btn btn-danger"\
@@ -4867,11 +4861,11 @@ $(document).ready(function () {
 		$('.DatePicker').datetimepicker(dateTimePickerOptions);
 		
 		//get a reference to the select element
-        $select = $('#listadinamicab'+pc);
+        $select = $('#listadinamicah'+pc);
 
         //request the JSON data and parse into the select element
         $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=9',
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=93',
             dataType: 'JSON',
             type: "GET",
             success: function (data) {
@@ -4897,40 +4891,7 @@ $(document).ready(function () {
                 $select.html('<option id="-1">ERRO</option>');
             }
 
-        });
-		
-		//get a reference to the select element
-        $select2 = $('#listadinamicac'+pc);
-
-        //request the JSON data and parse into the select element
-        $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=93',
-            dataType: 'JSON',
-            type: "GET",
-            success: function (data) {
-                //clear the current content of the select
-                $select2.html('');
-                //iterate over the data and append a select option
-                $select2.append('<option value="">-- Categoria --</option>');
-                $.each(data, function (key, val) {
-                    //alert(val.id);
-                    $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
-                })
-                $('.Chosen').chosen2({
-                    disable_search_threshold: 10,
-                    multiple_text: "Selecione uma ou mais opções",
-                    single_text: "Selecione uma opção",
-                    no_results_text: "Nenhum resultado para",
-                    width: "100%"
-                });
-            },
-            error: function () {
-                //alert('erro listadinamicaB');
-                //if there is an error append a 'none available' option
-                $select2.html('<option id="-1">ERRO</option>');
-            }
-
-        });		
+        });				
 
 		//permite o uso de radio buttons nesse bloco dinâmico
 		$('input:radio[id="radiogeraldinamico"]').change(function() {
@@ -4971,14 +4932,14 @@ $(document).ready(function () {
                 <div class="panel panel-warning">\
                     <div class="panel-heading">\
                         <div class="row">\
-							<div class="col-md-4">\
+							<div class="col-md-6">\
 								<label for="Cor_Prod'+pc+'">Tipo / Cor / Sabor</label>\
 								<select data-placeholder="Selecione uma opção..." class="form-control"\
 										 id="listadinamicaf'+pc+'" name="Cor_Prod'+pc+'">\
 									<option value=""></option>\
 								</select>\
 							</div>\
-							<div class="col-md-3">\
+							<div class="col-md-4">\
 								<label for="Valor_Cor_Prod'+pc+'">Valor</label><br>\
 								<div class="input-group id="Valor_Cor_Prod'+pc+'">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
@@ -4986,7 +4947,6 @@ $(document).ready(function () {
 										name="Valor_Cor_Prod'+pc+'" value="">\
 								</div>\
 							</div>\
-							<div class="col-md-1"></div>\
 							<div class="col-md-1">\
 								<label><br></label><br>\
 								<a href="#" id="'+pc+'" class="remove_field92 btn btn-danger"\
@@ -5058,18 +5018,12 @@ $(document).ready(function () {
         
 //////// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
 		if (pc >= 2) {
-			//console.log( $("#listadinamicab"+(pc-1)).val() );
+			//console.log( $("#listadinamicag"+(pc-1)).val() );
 			var chosen;
-			chosen = $("#listadinamicab"+(pc-1)).val();
+			chosen = $("#listadinamicag"+(pc-1)).val();
 			//console.log( chosen + ' :: ' + pc );
 		}
-		
-		if (pc >= 2) {
-			//console.log( $("#listadinamicac"+(pc-1)).val() );
-			var chosen2;
-			chosen2 = $("#listadinamicac"+(pc-1)).val();
-			//console.log( chosen + ' :: ' + pc );
-		}
+
 /////// Termina aqui!!! ////
 		
 		e.preventDefault();
@@ -5082,22 +5036,21 @@ $(document).ready(function () {
                 <div class="panel panel-warning">\
                     <div class="panel-heading">\
                         <div class="row">\
-							<div class="col-md-4">\
+							<div class="col-md-6">\
 								<label for="Tam_Prod'+pc+'">Esp / Tamanho</label>\
 								<select data-placeholder="Selecione uma opção..." class="form-control"\
-										 id="listadinamicac'+pc+'" name="Tam_Prod'+pc+'">\
+										 id="listadinamicag'+pc+'" name="Tam_Prod'+pc+'">\
 									<option value=""></option>\
 								</select>\
 							</div>\
-							<div class="col-md-3">\
+							<div class="col-md-4">\
 								<label for="Fator_Tam_Prod'+pc+'">Fator</label><br>\
 								<div class="input-group id="Fator_Tam_Prod'+pc+'">\
 									<span class="input-group-addon" id="basic-addon1">X</span>\
 									<input type="text" class="form-control Valor" id="Fator_Tam_Prod'+pc+'" maxlength="10" placeholder="0,00" \
-										name="Fator_Tam_Prod'+pc+'" value="">\
+										name="Fator_Tam_Prod'+pc+'" value="1,00">\
 								</div>\
 							</div>\
-							<div class="col-md-1"></div>\
 							<div class="col-md-1">\
 								<label><br></label><br>\
 								<a href="#" id="'+pc+'" class="remove_field91 btn btn-danger"\
@@ -5115,11 +5068,11 @@ $(document).ready(function () {
 		$('.DatePicker').datetimepicker(dateTimePickerOptions);
 		
 		//get a reference to the select element
-        $select = $('#listadinamicab'+pc);
+        $select = $('#listadinamicag'+pc);
 
         //request the JSON data and parse into the select element
         $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=9',
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=91',
             dataType: 'JSON',
             type: "GET",
             success: function (data) {
@@ -5146,39 +5099,6 @@ $(document).ready(function () {
             }
 
         });
-		
-		//get a reference to the select element
-        $select2 = $('#listadinamicac'+pc);
-
-        //request the JSON data and parse into the select element
-        $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=91',
-            dataType: 'JSON',
-            type: "GET",
-            success: function (data) {
-                //clear the current content of the select
-                $select2.html('');
-                //iterate over the data and append a select option
-                $select2.append('<option value="">-- Esp / Tamanho --</option>');
-                $.each(data, function (key, val) {
-                    //alert(val.id);
-                    $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
-                })
-                $('.Chosen').chosen2({
-                    disable_search_threshold: 10,
-                    multiple_text: "Selecione uma ou mais opções",
-                    single_text: "Selecione uma opção",
-                    no_results_text: "Nenhum resultado para",
-                    width: "100%"
-                });
-            },
-            error: function () {
-                //alert('erro listadinamicaB');
-                //if there is an error append a 'none available' option
-                $select2.html('<option id="-1">ERRO</option>');
-            }
-
-        });		
 
 		//permite o uso de radio buttons nesse bloco dinâmico
 		$('input:radio[id="radiogeraldinamico"]').change(function() {

@@ -60,7 +60,7 @@ class Prodaux42 extends CI_Controller {
         $this->form_validation->set_rules('Prodaux4', 'Modelo', 'required|trim');
 		$this->form_validation->set_rules('Abrev4', 'Abreviação', 'required|trim');
 
-        $data['titulo'] = 'Cadastrar Esp.';
+        $data['titulo'] = 'Cadastrar Modelo';
         $data['form_open_path'] = 'prodaux42/cadastrar3';
         $data['readonly'] = '';
         $data['disabled'] = '';

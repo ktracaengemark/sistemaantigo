@@ -58,8 +58,8 @@ class Prodaux22 extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-        $this->form_validation->set_rules('Prodaux2', 'Nome do Convênio', 'required|trim');
-		$this->form_validation->set_rules('Prodaux4', 'Categoria', 'required|trim');
+        $this->form_validation->set_rules('Prodaux2', 'Tipo / Cor / Sabor', 'required|trim');
+		$this->form_validation->set_rules('Prodaux4', 'Modelo', 'required|trim');
 
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();        
@@ -144,8 +144,8 @@ class Prodaux22 extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-        $this->form_validation->set_rules('Prodaux2', 'Nome do Convênio', 'required|trim');
-		$this->form_validation->set_rules('Prodaux4', 'Categoria', 'required|trim');
+        $this->form_validation->set_rules('Prodaux2', 'Tipo / Cor / Sabor', 'required|trim');
+		$this->form_validation->set_rules('Prodaux4', 'Modelo', 'required|trim');
        # $this->form_validation->set_rules('ValorVenda', 'Valor do Convênio', 'required|trim');
 
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();	

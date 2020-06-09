@@ -3,7 +3,7 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Esp.</th>
+            <th>Modelo</th>
 			<th>Abrev4</th>
             
             <th></th>

@@ -43,14 +43,14 @@
 
 					<?php echo form_open($form_open_path, 'role="form"'); ?>
 						<div class="row">
-							<div class="col-md-4">
-								<label for="Prodaux4">Aux4:</label><br>
+							<div class="col-md-6">
+								<label for="Prodaux4">Modelo</label><br>
 								<input type="text" class="form-control" maxlength="30"
 									   autofocus name="Prodaux4" value="<?php echo $query['Prodaux4'] ?>">
 							</div>
 							
 							<div class="col-md-3">
-								<label for="Abrev4">Abrev4.:</label><br>
+								<label for="Abrev4">Abrev4</label><br>
 								<input type="text" class="form-control" maxlength="4"
 										name="Abrev4" value="<?php echo $query['Abrev4'] ?>">
 							</div>

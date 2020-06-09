@@ -173,8 +173,7 @@ class Prodaux4_model extends CI_Model {
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
-				Prodaux4 ASC,
-				idTab_Prodaux4
+				Prodaux4 ASC
     ');
         } else {
             $query = $this->db->query(
@@ -188,8 +187,7 @@ class Prodaux4_model extends CI_Model {
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
-				Prodaux4 ASC,
-				idTab_Prodaux4
+				Prodaux4 ASC
     ');
 
             $array = array();

@@ -7196,6 +7196,7 @@ exit();*/
 				TP.VendaSite,
 				TP4.Prodaux4,
 				TCOP.Cor_Prod,
+				TPA2.idTab_Prodaux2,
 				TPA2.Prodaux2,
 				TPA2.Arquivo AS Arquivo_Cor,
 				TCOP.Valor_Cor_Prod,

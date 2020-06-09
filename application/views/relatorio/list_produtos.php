@@ -15,7 +15,8 @@
 
 					<thead>
 						<tr>                       																	
-							<th class="active" scope="col">Foto</th>
+							<!--<th class="active">Id.Imagem</th>-->
+							<th class="active" scope="col">Imagem</th>
 							<th class="active" scope="col">Editar</th>
 							<th class="active">Id.</th>
 							<th class="active">Produto/Modelo</th>
@@ -33,8 +34,9 @@
 
 					<!--<tr class="clickable-row" data-href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produto'] . ''; ?>">-->
 					<tr>	
+						<!--<td><?php echo $row['idTab_Prodaux2'] ?></td>-->
 						<td class="notclickable">
-							<a class="notclickable" href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produto'] . ''; ?>">
+							<a class="notclickable" href="<?php echo base_url() . 'prodaux2/alterarlogo/' . $row['idTab_Prodaux2'] . ''; ?>">
 								<img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo_Cor'] . ''; ?> "class="img-circle img-responsive" width='50'>
 							</a>
 						</td>
