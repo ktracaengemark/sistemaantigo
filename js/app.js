@@ -4816,7 +4816,7 @@ $(document).ready(function () {
     var pc = $("#SCount").val(); //initlal text box count
     $(".add_field_button93").click(function(e){ //on add input button click
         
-//////// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
+		// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
 		if (pc >= 2) {
 			//console.log( $("#listadinamicah"+(pc-1)).val() );
 			var chosen;
@@ -4824,7 +4824,7 @@ $(document).ready(function () {
 			//console.log( chosen + ' :: ' + pc );
 		}
 		
-/////// Termina aqui!!! ////
+		// Termina aqui!!! ////
 		
 		e.preventDefault();
 		
@@ -4912,14 +4912,19 @@ $(document).ready(function () {
     var pc = $("#PCount").val(); //initlal text box count
     $(".add_field_button92").click(function(e){ //on add input button click
         
-//////// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
+		// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
 		if (pc >= 2) {
 			//console.log( $("#listadinamicaf"+(pc-1)).val() );
 			var chosen;
 			chosen = $("#listadinamicaf"+(pc-1)).val();
 			//console.log( chosen + ' :: ' + pc );
+			
+			var chosen2;
+			chosen2 = $("#listadinamicai"+(pc-1)).val();		
+		
 		}
-/////// Termina aqui!!! ////
+				
+		// Termina aqui!!! ////
 		
 		e.preventDefault();
 		
@@ -4931,6 +4936,15 @@ $(document).ready(function () {
                 <div class="panel panel-warning">\
                     <div class="panel-heading">\
                         <div class="row">\
+							<div class="col-md-12">\
+								<label for="idTab_Promocao'+pc+'">Promocao</label>\
+								<select data-placeholder="Selecione uma opção..." class="form-control"\
+										 id="listadinamicai'+pc+'" name="idTab_Promocao'+pc+'">\
+									<option value=""></option>\
+								</select>\
+							</div>\
+						</div>\
+						<div class="row">\
 							<div class="col-md-6">\
 								<label for="Cor_Prod'+pc+'">Tipo / Cor / Sabor</label>\
 								<select data-placeholder="Selecione uma opção..." class="form-control"\
@@ -4994,6 +5008,39 @@ $(document).ready(function () {
             }
 
         });
+		
+		//get a reference to the select element
+        $select2 = $('#listadinamicai'+pc);
+
+        //request the JSON data and parse into the select element
+        $.ajax({
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=95',
+            dataType: 'JSON',
+            type: "GET",
+            success: function (data) {
+                //clear the current content of the select
+                $select2.html('');
+                //iterate over the data and append a select option
+                $select2.append('<option value="">-- Sel. Promocao --</option>');
+                $.each(data, function (key, val) {
+                    //alert(val.id);
+                    $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
+                })
+                $('.Chosen').chosen2({
+                    disable_search_threshold: 10,
+                    multiple_text: "Selecione uma ou mais opções",
+                    single_text: "Selecione uma opção",
+                    no_results_text: "Nenhum resultado para",
+                    width: "100%"
+                });
+            },
+            error: function () {
+                //alert('erro listadinamicaB');
+                //if there is an error append a 'none available' option
+                $select2.html('<option id="-1">ERRO</option>');
+            }
+
+        });		
 
 		//permite o uso de radio buttons nesse bloco dinâmico
 		$('input:radio[id="radiogeraldinamico"]').change(function() {
@@ -5015,15 +5062,17 @@ $(document).ready(function () {
     var pc = $("#PMCount").val(); //initlal text box count
     $(".add_field_button91").click(function(e){ //on add input button click
         
-//////// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
+		// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
 		if (pc >= 2) {
 			//console.log( $("#listadinamicag"+(pc-1)).val() );
 			var chosen;
 			chosen = $("#listadinamicag"+(pc-1)).val();
 			//console.log( chosen + ' :: ' + pc );
+			var chosen2;
+			chosen2 = $("#listadinamicaj"+(pc-1)).val();			
 		}
 
-/////// Termina aqui!!! ////
+		// Termina aqui!!! ////
 		
 		e.preventDefault();
 		
@@ -5035,6 +5084,15 @@ $(document).ready(function () {
                 <div class="panel panel-warning">\
                     <div class="panel-heading">\
                         <div class="row">\
+							<div class="col-md-12">\
+								<label for="idTab_Promocao'+pc+'">Promocao</label>\
+								<select data-placeholder="Selecione uma opção..." class="form-control"\
+										 id="listadinamicaj'+pc+'" name="idTab_Promocao'+pc+'">\
+									<option value=""></option>\
+								</select>\
+							</div>\
+						</div>\
+						<div class="row">\
 							<div class="col-md-6">\
 								<label for="Tam_Prod'+pc+'">Esp / Tamanho</label>\
 								<select data-placeholder="Selecione uma opção..." class="form-control"\
@@ -5098,6 +5156,39 @@ $(document).ready(function () {
             }
 
         });
+		
+		//get a reference to the select element
+        $select2 = $('#listadinamicaj'+pc);
+
+        //request the JSON data and parse into the select element
+        $.ajax({
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=95',
+            dataType: 'JSON',
+            type: "GET",
+            success: function (data) {
+                //clear the current content of the select
+                $select2.html('');
+                //iterate over the data and append a select option
+                $select2.append('<option value="">-- Sel. Promocao --</option>');
+                $.each(data, function (key, val) {
+                    //alert(val.id);
+                    $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
+                })
+                $('.Chosen').chosen2({
+                    disable_search_threshold: 10,
+                    multiple_text: "Selecione uma ou mais opções",
+                    single_text: "Selecione uma opção",
+                    no_results_text: "Nenhum resultado para",
+                    width: "100%"
+                });
+            },
+            error: function () {
+                //alert('erro listadinamicaB');
+                //if there is an error append a 'none available' option
+                $select2.html('<option id="-1">ERRO</option>');
+            }
+
+        });		
 
 		//permite o uso de radio buttons nesse bloco dinâmico
 		$('input:radio[id="radiogeraldinamico"]').change(function() {

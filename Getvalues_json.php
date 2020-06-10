@@ -432,6 +432,34 @@ elseif ($_GET['q'] == 91) {
 
 }
 
+elseif ($_GET['q'] == 95) {
+//// daqui, Esp/Tamanho, eu pego o Fator de Multiplicação
+    $result = mysql_query('
+            SELECT
+				P.idTab_Promocao,
+				P.Promocao,
+				P.Descricao,
+				CONCAT(IFNULL(P.Promocao,""), " - ", IFNULL(P.Descricao,"")) AS Promocao
+            FROM
+                Tab_Promocao AS P
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+			ORDER BY 
+				P.Promocao ASC
+				
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Promocao'],
+            'name' => utf8_encode($row['Promocao']),
+        );
+    }
+
+}
+
 echo json_encode($event_array);
 mysql_close($link);
 ?>

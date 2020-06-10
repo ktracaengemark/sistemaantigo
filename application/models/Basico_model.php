@@ -447,7 +447,7 @@ class Basico_model extends CI_Model {
 
 	public function get_atividade($data) {
 
-        if (isset($data) && $data) {
+if (isset($data) && $data) {
 
 			$query = $this->db->query('SELECT * FROM App_Atividade WHERE idApp_Atividade = "' . $data . '"');
 
@@ -984,6 +984,48 @@ class Basico_model extends CI_Model {
         return $array;
     }
 
+	public function select_promocao($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+				P.idTab_Promocao,
+				P.Promocao,
+				P.Descricao,
+				CONCAT(IFNULL(P.Promocao,""), " - ", IFNULL(P.Descricao,"")) AS Promocao
+            FROM
+                Tab_Promocao AS P
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+			ORDER BY 
+				P.Promocao ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+				P.idTab_Promocao,
+				P.Promocao,
+				P.Descricao,
+				CONCAT(IFNULL(P.Promocao,""), " - ", IFNULL(P.Descricao,"")) AS Promocao
+            FROM
+                Tab_Promocao AS P
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+			ORDER BY 
+				P.Promocao ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Promocao] = $row->Promocao;
+            }
+        }
+
+        return $array;
+    }
+	
 	public function select_produto1($data = FALSE) {
 
         if ($data === TRUE) {
