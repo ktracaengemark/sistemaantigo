@@ -5,9 +5,9 @@
         <tr>
             <th>Imagem</th>
 			<th>Editar</th>
-			<th>Id</th>
-			<th>Categoria</th>            
-			<th>Tipo</th>
+			<!--<th>Id</th>-->
+			<th>Modelo</th>            
+			<th>Tipo/Cor/Sabor</th>
 			<!--<th>Abrev</th>-->
             <th></th>
         </tr>
@@ -38,7 +38,7 @@
 									<span class="glyphicon glyphicon-edit notclickable"></span>
 								</a>
 							</td>';				
-					echo '<td>' . $row['idTab_Prodaux2'] . '</td>';
+					#echo '<td>' . $row['idTab_Prodaux2'] . '</td>';
 					echo '<td>' . $row['Prodaux4'] . '</td>';                    
 					echo '<td>' . $row['Prodaux2'] . '</td>';
 					#echo '<td>' . $row['Abrev2'] . '</td>';

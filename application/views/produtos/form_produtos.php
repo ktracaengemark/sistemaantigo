@@ -34,24 +34,7 @@
 								<div id="collapse2" class="panel-collapse" role="tabpanel" aria-labelledby="heading2" aria-expanded="false">
 									<div class="panel panel-success">
 										<div class="panel-heading">
-											<div class="row">				
-												<div class="col-md-8">
-													<label for="Prodaux4">Produto / Modelo</label>								
-													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-															id="Prodaux4" name="Prodaux4">
-														<option value="">-- Selecione uma opção --</option>
-														<?php
-														foreach ($select['Prodaux4'] as $key => $row) {
-															if ($produtos['Prodaux4'] == $key) {
-																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-															} else {
-																echo '<option value="' . $key . '">' . $row . '</option>';
-															}
-														}
-														?>
-													</select>
-													<?php echo form_error('Prodaux4'); ?>
-												</div>
+											<div class="row">
 												<div class="col-md-4 text-left">
 													<label for="Cadastrar">Mod/Cat/Tipo/Esp</label><br>
 													<div class="btn-group" data-toggle="buttons">
@@ -81,9 +64,7 @@
 
 													</div>
 												</div>
-											</div>	
-											<div class="row">				
-												<div class="col-md-12 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+												<div class="col-md-8 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
 													<label></label><br>
 													<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux42/cadastrar3/" role="button"> 
 														<span class="glyphicon glyphicon-plus"></span> Mod
@@ -109,6 +90,92 @@
 															<span class="glyphicon glyphicon-refresh"></span> Ref.
 													</button>
 													<?php echo form_error('Cadastrar'); ?>
+												</div>
+											</div>											
+											<div class="row">									
+												<div class="col-md-3">
+													<label for="Prodaux3">Categoria</label>								
+													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+															id="Prodaux3" name="Prodaux3">
+														<option value="">-- Selecione uma opção --</option>
+														<?php
+														foreach ($select['Prodaux3'] as $key => $row) {
+															if ($produtos['Prodaux3'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+													<?php echo form_error('Prodaux3'); ?>
+												</div>
+												<div class="col-md-3">
+													<label for="Prodaux4">Modelo</label>								
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+															id="Prodaux4" name="Prodaux4">
+														<option value="">-- Selecione uma opção --</option>
+														<?php
+														foreach ($select['Prodaux4'] as $key => $row) {
+															if ($produtos['Prodaux4'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+													<?php echo form_error('Prodaux4'); ?>
+												</div>
+												<div class="col-md-3">
+													<label for="Prodaux2">Tipo:</label>								
+													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+															id="Prodaux2" name="Prodaux2">
+														<option value="">-- Selecione uma opção --</option>
+														<?php
+														foreach ($select['Prodaux2'] as $key => $row) {
+															if ($produtos['Prodaux2'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+													<?php echo form_error('Prodaux2'); ?>
+												</div>
+												<div class="col-md-3">
+													<label for="Prodaux1">Esp.:</label>									
+													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+															id="Prodaux1" name="Prodaux1">
+														<option value="">-- Selecione uma opção --</option>
+														<?php
+														foreach ($select['Prodaux1'] as $key => $row) {
+															if ($produtos['Prodaux1'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+													<?php echo form_error('Prodaux1'); ?>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<label for="Produtos">Produto:*</label><br>
+													<input type="text" class="form-control" maxlength="200"
+															name="Produtos" id="Produtos" value="<?php echo $produtos['Produtos'] ?>">
+													<?php echo form_error('Produtos'); ?>
+												</div>							
+												
+												
+												<div class="col-md-3">
+													<label for="CodProd">Código:</label><br>
+													<input type="text" class="form-control" maxlength="25" readonly=""
+															name="CodProd" id="CodProd" value="<?php echo $produtos['CodProd'] ?>">
+													<?php echo form_error('CodProd'); ?>
 												</div>
 											</div>
 											<div class="row">				

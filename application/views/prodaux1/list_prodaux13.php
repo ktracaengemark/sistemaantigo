@@ -4,8 +4,8 @@
     <thead>
         <tr>
             <th>Categoria</th>
-			<th>Esp.</th>
-			<th>Abrev1</th>
+			<th>Tamanho</th>
+			<!--<th>Abrev1</th>-->
             <th></th>
         </tr>
     </thead>
@@ -23,7 +23,7 @@
                 echo '<tr class="clickable-row" data-href="' . $url . '">';
                     echo '<td>' . $row['Prodaux3'] . '</td>';
 					echo '<td>' . $row['Prodaux1'] . '</td>';
-					echo '<td>' . $row['Abrev1'] . '</td>';
+					#echo '<td>' . $row['Abrev1'] . '</td>';
                     echo '<td></td>';
                 echo '</tr>';            
 

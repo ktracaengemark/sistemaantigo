@@ -13,7 +13,7 @@ class Prodaux42 extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Prodaux4_model', 'Contatocliente_model'));
+        $this->load->model(array('Basico_model', 'Prodaux3_model', 'Prodaux4_model', 'Contatocliente_model'));
         $this->load->driver('session');
 
         #load header view
@@ -53,13 +53,17 @@ class Prodaux42 extends CI_Controller {
             'Prodaux4',
 			'Abrev4',
 			'idSis_Empresa',
+			'Prodaux3',
                 ), TRUE));
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         $this->form_validation->set_rules('Prodaux4', 'Modelo', 'required|trim');
-		$this->form_validation->set_rules('Abrev4', 'Abreviação', 'required|trim');
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 
+		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();		
+		
         $data['titulo'] = 'Cadastrar Modelo';
         $data['form_open_path'] = 'prodaux42/cadastrar3';
         $data['readonly'] = '';
@@ -130,6 +134,7 @@ class Prodaux42 extends CI_Controller {
             'Prodaux4',
             'Abrev4',
 			'idSis_Empresa',
+			'Prodaux3',
                 ), TRUE));
 
 
@@ -140,10 +145,13 @@ class Prodaux42 extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         $this->form_validation->set_rules('Prodaux4', 'Modelo', 'required|trim');
-		$this->form_validation->set_rules('Abrev4', 'Abreviação', 'required|trim');
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
        # $this->form_validation->set_rules('ValorVenda', 'Valor do Convênio', 'required|trim');
 
-        $data['titulo'] = 'Editar Esp.';
+		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();	
+		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
+		
+        $data['titulo'] = 'Editar Modelo';
         $data['form_open_path'] = 'prodaux42/alterar3';
         $data['readonly'] = '';
         $data['disabled'] = '';

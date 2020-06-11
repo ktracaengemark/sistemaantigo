@@ -542,7 +542,7 @@
 																	</div>
 																	<div class="col-md-6">
 																		<label for="idTab_Produto">Produto:</label>
-																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor(this.value,this.name,'Produto',<?php echo $i ?>,'NomeProduto')" <?php echo $readonly; ?>
+																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor2Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
 																				 id="listadinamicab<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
 																			<option value="">-- Selecione uma opção --</option>
 																			<?php
@@ -571,15 +571,6 @@
 																			<span class="input-group-addon" id="basic-addon1">R$</span>
 																			<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto<?php echo $i ?>"
 																				   name="SubtotalProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalProduto'] ?>">
-																		</div>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-12">
-																		<label for="NomeProduto">NomeProduto</label>
-																		<div class="input-group">
-																			<input type="text" class="form-control " id="NomeProduto<?php echo $i ?>" readonly=""
-																				name="NomeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['NomeProduto'] ?>">
 																		</div>
 																	</div>
 																</div>

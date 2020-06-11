@@ -1178,6 +1178,42 @@ if (isset($data) && $data) {
         return $array;
     }
 
+	public function select_produtos2($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+                idTab_Produto,
+                CONCAT(IFNULL(Produtos,"")) AS NomeProduto,
+                ValorCompraProduto
+            FROM 
+                Tab_Produto 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+                idTab_Produto,
+                CONCAT(IFNULL(Produtos,"")) AS NomeProduto,
+                ValorCompraProduto
+            FROM 
+                Tab_Produto 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Produto] = $row->NomeProduto;
+            }
+        }
+
+        return $array;
+    }
+	
 	public function select_produto2($data = FALSE) {
 
         if ($data === TRUE) {

@@ -62,6 +62,49 @@ class Prodaux4_model extends CI_Model {
 
     public function lista_prodaux4($x) {
 
+        $query = $this->db->query('
+			SELECT 
+				TP4.idTab_Prodaux4,
+				TP4.Prodaux4,
+				TP4.Abrev4,
+				TP3.Prodaux3
+			FROM 
+				  Tab_Prodaux4 AS TP4
+					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP4.Prodaux3
+			WHERE
+                TP4.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
+                TP4.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+			ORDER BY 
+				TP3.Prodaux3 ASC,
+				TP4.Prodaux4 ASC
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+	
+    public function lista_prodaux4_BKP($x) {
+
         $query = $this->db->query('SELECT * '
                 . 'FROM Tab_Prodaux4 '
                 . 'WHERE '

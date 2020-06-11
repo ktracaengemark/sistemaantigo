@@ -889,7 +889,7 @@ class Produtos extends CI_Controller {
             'TipoProduto',
 			'Categoria',
 			'UnidadeProduto',
-			#'CodProd',
+			'CodProd',
 			#'Fornecedor',
 			'ValorProdutoSite',
 			'Comissao',
@@ -978,15 +978,15 @@ class Produtos extends CI_Controller {
 
         #### Tab_Produto ####
 
-		//$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		$this->form_validation->set_rules('Prodaux4', 'Modelo', 'required|trim');
-		//$this->form_validation->set_rules('Prodaux2', 'Tipo', 'required|trim');
-		//$this->form_validation->set_rules('Prodaux1', 'Esp', 'required|trim');
+		$this->form_validation->set_rules('Prodaux2', 'Tipo', 'required|trim');
+		$this->form_validation->set_rules('Prodaux1', 'Esp', 'required|trim');
 		#$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim');		
 		
 		#$this->form_validation->set_rules($data['produtos']['CodProd'], 'Código', 'is_unique[Tab_Produto.'.$data['produtos']['CodProd'].']');
 		
-		$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
+		$this->form_validation->set_rules('CodProd', 'Código', 'required|trim|is_unique[Tab_Produto.CodProd]');
 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
@@ -1196,7 +1196,7 @@ class Produtos extends CI_Controller {
             'TipoProduto',
 			'Categoria',
 			'UnidadeProduto',
-			#'CodProd',
+			'CodProd',
 			'Fornecedor',
 			'ValorProdutoSite',
             'Comissao',
@@ -1357,15 +1357,15 @@ class Produtos extends CI_Controller {
 		
         #### Tab_Produto ####
 
-		//$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		$this->form_validation->set_rules('Prodaux4', 'Modelo', 'required|trim');
-		//$this->form_validation->set_rules('Prodaux2', 'Tipo', 'required|trim');
-		//$this->form_validation->set_rules('Prodaux1', 'Esp', 'required|trim');
+		$this->form_validation->set_rules('Prodaux2', 'Tipo', 'required|trim');
+		$this->form_validation->set_rules('Prodaux1', 'Esp', 'required|trim');
 		#$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
 		
 		#$this->form_validation->set_rules($data['produtos']['CodProd'], 'Código', 'is_unique_by_id[Tab_Produto.'.$data['produtos']['CodProd'].'.' . $data['produtos']['idTab_Produto'] . ']');
 		
-		//$this->form_validation->set_rules('CodProd', 'Código', 'is_unique_by_id[Tab_Produto.CodProd.' . $data['produtos']['idTab_Produto'] . ']');
+		$this->form_validation->set_rules('CodProd', 'Código', 'required|trim|is_unique_by_id[Tab_Produto.CodProd.' . $data['produtos']['idTab_Produto'] . ']');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();

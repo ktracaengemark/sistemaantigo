@@ -19,6 +19,7 @@
 							<th class="active" scope="col">Imagem</th>
 							<th class="active" scope="col">Editar</th>
 							<th class="active">Id.</th>
+							<th class="active">Código</th>
 							<th class="active">Produto/Modelo</th>
 							<th class="active">Cor/Sabor</th>
 							<th class="active">Tamanho</th>
@@ -47,6 +48,7 @@
 						</td>						
 						<!--<td><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo_Cor'] . ''; ?> "class="img-circle img-responsive" width='100'></td>-->
 						<td><?php echo $row['idTab_Produto'] ?></td>
+						<td><?php echo $row['CodProd'] ?></td>
 						<td><?php echo $row['Prodaux4'] ?></td>
 						<td><?php echo $row['Prodaux2'] ?></td>
 						<td><?php echo $row['Prodaux1'] ?></td>

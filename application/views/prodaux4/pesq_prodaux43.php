@@ -43,17 +43,35 @@
 
 					<?php echo form_open($form_open_path, 'role="form"'); ?>
 						<div class="row">
+							<div class="col-md-4">
+								<label for="Prodaux3">Categoria</label>								
+								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+										id="Prodaux3" name="Prodaux3">
+									<option value="">-- Selecione uma Categoria --</option>
+									<?php
+									foreach ($select['Prodaux3'] as $key => $row) {
+										if ($query['Prodaux3'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+								<?php echo form_error('Prodaux3'); ?>
+							</div>							
 							<div class="col-md-6">
 								<label for="Prodaux4">Modelo</label><br>
 								<input type="text" class="form-control" maxlength="30"
 									   autofocus name="Prodaux4" value="<?php echo $query['Prodaux4'] ?>">
 							</div>
-							
+							<!--
 							<div class="col-md-3">
 								<label for="Abrev4">Abrev4</label><br>
 								<input type="text" class="form-control" maxlength="4"
 										name="Abrev4" value="<?php echo $query['Abrev4'] ?>">
 							</div>
+							-->
 						</div>
 						<br>
 						<div class="form-group">

@@ -44,7 +44,7 @@
 					<?php echo form_open($form_open_path, 'role="form"'); ?>
 						<div class="row">
 							<div class="col-md-3">
-								<label for="Prodaux3">Categoria</label>								
+								<label for="Prodaux4">Categoria</label>								
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 										id="Prodaux3" name="Prodaux3">
 									<option value="">-- Selecione uma opção --</option>
@@ -60,18 +60,18 @@
 								</select>
 								<?php echo form_error('Prodaux3'); ?>
 							</div>							
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<label for="Prodaux1">Esp / Tamanho</label><br>
 								<input type="text" class="form-control" maxlength="30"
 									   autofocus name="Prodaux1" value="<?php echo $query['Prodaux1'] ?>">
 							</div>
-							
+							<!--
 							<div class="col-md-3">
 								<label for="Abrev1">Abrev1.:</label><br>
 								<input type="text" class="form-control" maxlength="4"
 										name="Abrev1" value="<?php echo $query['Abrev1'] ?>">
 							</div>
-							
+							-->
 						</div>
 						<br>
 						<div class="form-group">

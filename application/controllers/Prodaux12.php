@@ -58,7 +58,7 @@ class Prodaux12 extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-        $this->form_validation->set_rules('Prodaux1', 'Nome do Convênio', 'required|trim');
+        $this->form_validation->set_rules('Prodaux1', 'Tamanho', 'required|trim');
 		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
@@ -144,7 +144,7 @@ class Prodaux12 extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-        $this->form_validation->set_rules('Prodaux1', 'Nome do Convênio', 'required|trim');
+        $this->form_validation->set_rules('Prodaux1', 'Tamanho', 'required|trim');
 		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
        # $this->form_validation->set_rules('ValorVenda', 'Valor do Convênio', 'required|trim');
 

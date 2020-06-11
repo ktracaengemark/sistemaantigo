@@ -532,7 +532,7 @@
 																			<span class="glyphicon glyphicon-plus"></span> <b>Novo Produto</b>
 																		</a>-->
 																		<?php } ?>
-																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor2Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
+																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor(this.value,this.name,'Produto',<?php echo $i ?>,'NomeProduto')" <?php echo $readonly; ?>
 																				 id="listadinamicab<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
 																			<option value="">-- Selecione uma opção --</option>
 																			<?php
@@ -565,6 +565,15 @@
 																	</div>
 																</div>
 																<div class="row">
+																	<div class="col-md-12">
+																		<label for="NomeProduto">NomeProduto</label>
+																		<div class="input-group">
+																			<input type="text" class="form-control " id="NomeProduto<?php echo $i ?>" readonly=""
+																				name="NomeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['NomeProduto'] ?>">
+																		</div>
+																	</div>
+																</div>
+																<div class="row">
 																	<div class="col-md-1"></div>
 																	<div class="col-md-1">
 																		<label><br></label><br>
@@ -574,7 +583,7 @@
 																		</button>
 																	</div>
 																	<div class="col-md-2">
-																		<label for="idSis_Usuario<?php echo $i ?>">Profissional:</label>
+																		<label for="idSis_Usuario">Profissional <?php echo $i ?></label>
 																		<?php if ($i == 1) { ?>
 																		<?php } ?>
 																		<select data-placeholder="Selecione uma opção..." class="form-control"

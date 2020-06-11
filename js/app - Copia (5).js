@@ -1798,151 +1798,6 @@ function adiciona_item_promocao() {
  * @param {string} tabela
  * @returns {decimal}
  */
-
- function nomeProduto(id, tabela, campo, num) {
-	 //alert('Funcionando'); 
-	 
-    $.ajax({
-        // url para o arquivo json.php
-			// "Posso passar assim:"
-		//url: "../Nome_json.php?tabela=" + tabela + "&id_prod=" + id,
-			// "ou, Posso passar assim:"
-		url: window.location.origin + "/" + app + "/Nome_json.php?tabela=" + tabela + "&id_prod=" + id,
-		//type: 'POST',
-		dataType: 'html',
-        //dataType: "json",		
-		cache: false,
-		data:{},
-
-        // função para de sucesso
-        success: function (data) {
-
-			console.log(data);	
-
-        }, error: function(jqXHR, textStatus, errorThrown){
-			console.log('Erro');
-		}
-    });//termina o ajax
-	
-}
-
-function nomeProduto_2(id, tabela, campo, num) {
-
-    $.ajax({
-        // url para o arquivo json.php
-        url: window.location.origin + "/" + app + "/Nome_json.php?tabela=" + tabela + "&id_prod=" + id,
-        // dataType json
-        dataType: "json",
-        // função para de sucesso
-        success: function (data) {
-
-            // executo este laço para acessar os itens do objeto javaScript
-            for (i = 0; i < data.length; i++) {
-
-                if (data[i].id == id) {
-					console.log(data[i].nome);
-                    //carrega o valor no campo de acordo com a opção selecionada
-                    //$('#'+campo).val(data[i].valor);
-					
-					//""Posso usar assim, compondo o id passando o campo, pela variável, vindo do formulário""
-					//$('#'+campo2+num).val(data[i].nome);
-					
-					//""ou posso usar assim, passando diretamente o nome do id ""
-					//$('#NomeProduto'+num).val(data[i].nome);
-					
-					
-					//$('#'+campo2+num).val(data[i].id);
-					//var idproduto = data[i].id;
-					//var nomeproduto = data[i].nome;
-					//var nomecomposto1 = idproduto+'-'+nomeproduto;
-					//var nomecomposto2 = idproduto+' '+nomeproduto;
-					//var nomecomposto3 = idproduto+nomeproduto;
-					//$('#NomeProduto'+num).val(nomeproduto);
-					//$('#NomeProduto'+num).val(idproduto+'-'+nomeproduto);
-					//$('#NomeProduto'+num).val(nomecomposto2);
-					
-					//""Exemplo de outro código, para me guiar""
-					//var valor = $('#Valor'+item).html();
-					//var Subtotal = (valor.replace(".","").replace(",",".") * qtd.replace(".","").replace(",","."));
-					//var valorsubtotal = Subtotal.toFixed(2).replace(".", ",");
-					//$('#Subtotal'+item).html(valorsubtotal);				
-
-                }
-
-            }//fim do laço
-
-        }, error: function(jqXHR, textStatus, errorThrown){
-			console.log('Erro');
-		}
-    });//termina o ajax
-}
-
- 
- function nomeProduto_BKP() {
-	//alert('Funcionando'); 
-	 
-    $.ajax({
-        // url para o arquivo json.php
-        url: '../Nome_json.php',
-        // dataType json
-        dataType: "json",
-        // função para de sucesso
-        success: function (data) {
-
-            // executo este laço para acessar os itens do objeto javaScript
-
-				console.log(data.id);
-				
-				
-				/*
-                if (data.id == id) {
-
-                    //carrega o valor no campo de acordo com a opção selecionada
-                    //$('#'+campo).val(data[i].valor);
-					
-					//""Posso usar assim, compondo o id passando o campo, pela variável, vindo do formulário""
-					//$('#'+campo2+num).val(data[i].nome);
-					
-					//""ou posso usar assim, passando diretamente o nome do id ""
-					//$('#NomeProduto'+num).val(data[i].nome);
-					
-					
-					//$('#'+campo2+num).val(data[i].id);
-					var idproduto = data.id;
-					
-					var nomeproduto = data.nome;
-					
-					var nomecomposto1 = idproduto+'-'+nomeproduto;
-					var nomecomposto2 = idproduto+' '+nomeproduto;
-					var nomecomposto3 = idproduto+nomeproduto;
-					
-					$('#Produtos').val(nomeproduto);
-					
-					//$('#NomeProduto'+num).val(nomeproduto);
-					//$('#NomeProduto'+num).val(idproduto+'-'+nomeproduto);
-					//$('#NomeProduto'+num).val(nomecomposto2);
-					
-					//""Exemplo de outro código, para me guiar""
-					//var valor = $('#Valor'+item).html();
-					//var Subtotal = (valor.replace(".","").replace(",",".") * qtd.replace(".","").replace(",","."));
-					//var valorsubtotal = Subtotal.toFixed(2).replace(".", ",");
-					//$('#Subtotal'+item).html(valorsubtotal);				
-
-
-				}
-				*/	
-                    //para cada valor carregado o orçamento é calculado/atualizado
-                    //através da chamada de sua função
-                    //calculaOrcamento();
-					
-                    //break;
-					
-        }, error: function(jqXHR, textStatus, errorThrown){
-			console.log('Erro');
-		}
-    });//termina o ajax
-	
-}
  
 function buscaValor01(id, campo, tabela) {
 	
@@ -1976,69 +1831,8 @@ function buscaValor01(id, campo, tabela) {
 
 }
 
-function buscaValor(id, campo, tabela, num, campo2) {
+function buscaValor(id, campo, tabela, num) {
 
-    $.ajax({
-        // url para o arquivo json.php
-        url: window.location.origin + "/" + app + "/Valor_json.php?tabela=" + tabela,
-        // dataType json
-        dataType: "json",
-        // função para de sucesso
-        success: function (data) {
-
-            // executo este laço para acessar os itens do objeto javaScript
-            for (i = 0; i < data.length; i++) {
-
-                if (data[i].id == id) {
-					console.log(data[i].nome);
-                    //carrega o valor no campo de acordo com a opção selecionada
-                    $('#'+campo).val(data[i].valor);
-					
-					//""Posso usar assim, compondo o id passando o campo, pela variável, vindo do formulário""
-					//$('#'+campo2+num).val(data[i].nome);
-					
-					//""ou posso usar assim, passando diretamente o nome do id ""
-					//$('#NomeProduto'+num).val(data[i].nome);
-					
-					
-					//$('#'+campo2+num).val(data[i].id);
-					var idproduto = data[i].id;
-					var nomeproduto = data[i].nome;
-					var nomecomposto1 = idproduto+'-'+nomeproduto;
-					var nomecomposto2 = idproduto+' '+nomeproduto;
-					var nomecomposto3 = idproduto+nomeproduto;
-					//$('#NomeProduto'+num).val(nomeproduto);
-					//$('#NomeProduto'+num).val(idproduto+'-'+nomeproduto);
-					$('#NomeProduto'+num).val(nomecomposto2);
-					
-					//""Exemplo de outro código, para me guiar""
-					//var valor = $('#Valor'+item).html();
-					//var Subtotal = (valor.replace(".","").replace(",",".") * qtd.replace(".","").replace(",","."));
-					//var valorsubtotal = Subtotal.toFixed(2).replace(".", ",");
-					//$('#Subtotal'+item).html(valorsubtotal);				
-
-					
-					
-                    //if (tabela == area && $("#Qtd"+tabela+num).val()) {
-                    if ($("#QtdProduto"+num).val()) {
-                        calculaSubtotal($("#idTab_Produto"+num).val(),$("#QtdProduto"+num).val(),num,'OUTRO',tabela);
-                        break;
-                    }
-
-                    //para cada valor carregado o orçamento é calculado/atualizado
-                    //através da chamada de sua função
-                    calculaOrcamento();
-                    break;
-                }
-
-            }//fim do laço
-
-        }
-    });//termina o ajax
-}
-
-function buscaValor_BKP(id, campo, tabela, num) {
-	
     $.ajax({
         // url para o arquivo json.php
         url: window.location.origin + "/" + app + "/Valor_json.php?tabela=" + tabela,
@@ -4039,11 +3833,14 @@ $(document).ready(function () {
 			var chosen;
 			chosen = $("#listadinamicab"+(pc-1)).val();
 			//console.log( chosen + ' :: ' + pc );
-			//var chosen2;
-			//chosen2 = $("#listadinamicac"+(pc-1)).val();		
-		
 		}
-
+		
+		if (pc >= 2) {
+			//console.log( $("#listadinamicac"+(pc-1)).val() );
+			var chosen2;
+			chosen2 = $("#listadinamicac"+(pc-1)).val();
+			//console.log( chosen + ' :: ' + pc );
+		}
 /////// Termina aqui!!! ////
 		
 		e.preventDefault();
@@ -4066,7 +3863,7 @@ $(document).ready(function () {
                             </div>\
 							<div class="col-md-6">\
                                 <label for="idTab_Produto">Produto:</label><br>\
-                                <select class="form-control Chosen" id="listadinamicab'+pc+'" name="idTab_Produto'+pc+'" onchange="buscaValor(this.value,this.name,\'Produto\','+pc+',\'NomeProduto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')">\
+                                <select class="form-control Chosen" id="listadinamicab'+pc+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+pc+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" name="idTab_Produto'+pc+'">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
@@ -4085,15 +3882,6 @@ $(document).ready(function () {
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto'+pc+'"\
 										   name="SubtotalProduto'+pc+'" value="">\
-								</div>\
-							</div>\
-						</div>\
-                        <div class="row">\
-							<div class="col-md-2">\
-								<label for="NomeProduto">NomeProduto</label><br>\
-								<div class="input-group id="txtHint">\
-									<input type="text" class="form-control " readonly="" id="NomeProduto'+pc+'" \
-										name="NomeProduto'+pc+'" value="">\
 								</div>\
 							</div>\
 						</div>\
@@ -4184,7 +3972,7 @@ $(document).ready(function () {
 
         //request the JSON data and parse into the select element
         $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=2',
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=9',
             dataType: 'JSON',
             type: "GET",
             success: function (data) {
@@ -4211,13 +3999,13 @@ $(document).ready(function () {
             }
 
         });
-		/*
+		
 		//get a reference to the select element
         $select2 = $('#listadinamicac'+pc);
 
         //request the JSON data and parse into the select element
         $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json2.php?q=3',
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=3',
             dataType: 'JSON',
             type: "GET",
             success: function (data) {
@@ -4244,7 +4032,7 @@ $(document).ready(function () {
             }
 
         });		
-		*/
+
 		//permite o uso de radio buttons nesse bloco dinâmico
 		$('input:radio[id="radiogeraldinamico"]').change(function() {
 
