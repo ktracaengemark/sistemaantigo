@@ -2705,5 +2705,93 @@ if (isset($data) && $data) {
 
         return $array;
     }	
+
+	public function select_cor_prod($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('					
+            SELECT
+				P.idTab_Cor_Prod,
+				P.Cor_Prod,
+				P.idTab_Produto,
+				CONCAT(IFNULL(P.Nome_Cor_Prod,""), " -- ", IFNULL(P.idTab_Cor_Prod,"")) AS Nome_Cor_Prod
+            FROM
+                Tab_Cor_Prod AS P
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+			ORDER BY 
+				P.Nome_Cor_Prod ASC
+    ');
+					
+        } else {
+            $query = $this->db->query('
+            SELECT
+				P.idTab_Cor_Prod,
+				P.Cor_Prod,
+				P.idTab_Produto,
+				CONCAT(IFNULL(P.Nome_Cor_Prod,""), " -- ", IFNULL(P.idTab_Cor_Prod,"")) AS Nome_Cor_Prod
+            FROM
+                Tab_Cor_Prod AS P
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+			ORDER BY 
+				P.Nome_Cor_Prod ASC
+    ');
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Cor_Prod] = $row->Nome_Cor_Prod;
+            }
+        }
+
+        return $array;
+    }
+
+	public function select_tam_prod($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('					
+            SELECT
+				P.idTab_Tam_Prod,
+				P.Tam_Prod,
+				P.idTab_Produto,
+				CONCAT(IFNULL(P.Nome_Tam_Prod,""), " -- ", IFNULL(P.idTab_Tam_Prod,"")) AS Nome_Tam_Prod
+				
+            FROM
+                Tab_Tam_Prod AS P
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+			ORDER BY 
+				P.Nome_Tam_Prod ASC
+    ');
+					
+        } else {
+            $query = $this->db->query('
+            SELECT
+				P.idTab_Tam_Prod,
+				P.Tam_Prod,
+				P.idTab_Produto,
+				CONCAT(IFNULL(P.Nome_Tam_Prod,""), " -- ", IFNULL(P.idTab_Tam_Prod,"")) AS Nome_Tam_Prod
+				
+            FROM
+                Tab_Tam_Prod AS P
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+			ORDER BY 
+				P.Nome_Tam_Prod ASC
+    ');
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Tam_Prod] = $row->Nome_Tam_Prod;
+            }
+        }
+
+        return $array;
+    }
 	
 }

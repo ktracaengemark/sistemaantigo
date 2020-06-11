@@ -86,6 +86,18 @@ class Produtos_model extends CI_Model {
             return $this->db->insert_id();
         }
     }	
+
+    public function set_derivados($data) {
+
+        $query = $this->db->insert_batch('Tab_Produtos', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }	
 	
     public function set_valor1($data) {
 
@@ -138,6 +150,13 @@ class Produtos_model extends CI_Model {
 	
     public function get_procedimento($data) {
 		$query = $this->db->query('SELECT * FROM Tab_Tam_Prod WHERE idTab_Produto = ' . $data);
+        $query = $query->result_array();
+
+        return $query;
+    }	
+
+    public function get_derivados($data) {
+		$query = $this->db->query('SELECT * FROM Tab_Produtos WHERE idTab_Produto = ' . $data);
         $query = $query->result_array();
 
         return $query;
@@ -264,6 +283,13 @@ class Produtos_model extends CI_Model {
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }	
+
+    public function update_derivados($data) {
+		
+        $query = $this->db->update_batch('Tab_Produtos', $data, 'idTab_Produtos');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }	
 	
     public function delete_valor($data) {
 
@@ -313,6 +339,18 @@ class Produtos_model extends CI_Model {
         }
     }	
 
+    public function delete_derivados($data) {
+
+        $this->db->where_in('idTab_Produtos', $data);
+        $this->db->delete('Tab_Produtos');
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }	
+	
     public function delete_produtos($id) {
 
         $query = $this->db->delete('Tab_Produto', array('idTab_Produto' => $id));

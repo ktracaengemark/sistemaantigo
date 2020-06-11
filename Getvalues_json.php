@@ -460,6 +460,34 @@ elseif ($_GET['q'] == 95) {
 
 }
 
+elseif ($_GET['q'] == 97) {
+//// daqui, eu pegoo Tipo
+    $result = mysql_query('
+            SELECT
+				P.idTab_Cor_Prod,
+				P.Cor_Prod,
+				P.idTab_Produto,
+				CONCAT(IFNULL(P.Nome_Cor_Prod,""), " -- ", IFNULL(P.idTab_Cor_Prod,"")) AS Nome_Cor_Prod
+            FROM
+                Tab_Cor_Prod AS P
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+			ORDER BY 
+				P.Nome_Cor_Prod ASC
+				
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Cor_Prod'],
+            'name' => utf8_encode($row['Nome_Cor_Prod']),
+        );
+    }
+
+}
+
 echo json_encode($event_array);
 mysql_close($link);
 ?>

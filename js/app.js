@@ -5523,6 +5523,18 @@ $(document).ready(function () {
     $(".add_field_button97").click(function(e){ //on add input button click
         e.preventDefault();
 
+		// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
+		if (pc >= 2) {
+			//console.log( $("#listadinamicag"+(pc-1)).val() );
+			var chosen;
+			chosen = $("#listadinamicam"+(pc-1)).val();
+			//console.log( chosen + ' :: ' + pc );
+			var chosen2;
+			chosen2 = $("#listadinamican"+(pc-1)).val();			
+		}
+
+		// Termina aqui!!! ////		
+		
         pd++; //text box increment
         $("#PDCount").val(pd);
 
@@ -5531,111 +5543,24 @@ $(document).ready(function () {
                 <div class="panel panel-success">\
                     <div class="panel-heading">\
                         <div class="row">\
-                            <div class="col-md-2">\
-                                <label for="QtdProduto">Qtd:</label><br>\
-                                <div class="input-group">\
-                                    <input type="text" class="form-control Numero" maxlength="10" id="QtdProduto'+pd+'" placeholder="0"\
-                                        onkeyup="calculaSubtotal(this.value,this.name,'+pd+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pd+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
-                                       autofocus name="QtdProduto'+pd+'" value="1">\
-                                </div>\
-                            </div>\
-							<div class="col-md-6">\
-                                <label for="idTab_Produto">Produto:</label><br>\
-                                <select class="form-control Chosen" id="listadinamicab'+pd+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+pd+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" name="idTab_Produto'+pd+'">\
+							<div class="col-md-4">\
+                                <label for="Cor_Prod">Tipo </label><br>\
+                                <select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="listadinamicam'+pd+'" name="Cor_Prod'+pd+'">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
-							<div class="col-md-2">\
-								<label for="ValorProduto">Valor:</label><br>\
-								<div class="input-group id="txtHint">\
-									<span class="input-group-addon" id="basic-addon1">R$</span>\
-									<input type="text" class="form-control Valor" id="idTab_Produto'+pd+'" maxlength="10" placeholder="0,00" \
-										onfocus="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeyup="calculaSubtotal(this.value,this.name,'+pd+',\'VP\',\'Produto\')"\
-										name="ValorProduto'+pd+'" value="">\
-								</div>\
+							<div class="col-md-4">\
+								<label for="Tam_Prod'+pd+'">Tamanho</label>\
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen2" id="listadinamican'+pd+'" name="Tam_Prod'+pd+'">\
+									<option value="">-- Selecione uma opção --</option>\
+								</select>\
 							</div>\
-							<div class="col-md-2">\
-								<label for="SubtotalProduto">Subtotal:</label><br>\
-								<div class="input-group id="txtHint">\
-									<span class="input-group-addon" id="basic-addon1">R$</span>\
-									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto'+pd+'"\
-										   name="SubtotalProduto'+pd+'" value="">\
-								</div>\
-							</div>\
-						</div>\
-						<div class="row">\
-							<div class="col-md-1"></div>\
 							<div class="col-md-1">\
                                 <label><br></label><br>\
-                                <a href="#" id="'+pd+'" class="remove_field97 btn btn-danger"\
-                                        onclick="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pd+',\'CountMax\',0,\'ProdutoHidden\')">\
+                                <a href="#" id="'+pd+'" class="remove_field97 btn btn-danger">\
                                     <span class="glyphicon glyphicon-trash"></span>\
                                 </a>\
                             </div>\
-							<div class="col-md-2">\
-								<label for="idSis_Usuario'+pd+'">Profissional:</label>\
-								<select data-placeholder="Selecione uma opção..." class="form-control"\
-										 id="listadinamicac'+pd+'" name="idSis_Usuario'+pd+'">\
-									<option value=""></option>\
-								</select>\
-							</div>\
-							<div class="col-md-2">\
-								<label for="DataValidadeProduto'+pd+'">Validade:</label>\
-								<div class="input-group DatePicker">\
-									<span class="input-group-addon" disabled>\
-										<span class="glyphicon glyphicon-calendar"></span>\
-									</span>\
-									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
-										   name="DataValidadeProduto'+pd+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
-								</div>\
-							</div>\
-							<div class="col-md-2">\
-								<label for="ObsProduto'+pd+'">Obs:</label><br>\
-								<textarea type="text" class="form-control" id="ObsProduto'+pd+'" maxlength="250"\
-									  onfocus="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" name="ObsProduto'+pd+'" value=""></textarea>\
-							</div>\
-							<div class="col-md-2 panel-body">\
-								<div class="panel panel-primary">\
-									<div class="panel-heading">\
-										<div class="row">\
-											<div class="col-md-12">\
-												<label for="ConcluidoProduto">Entregue? </label><br>\
-												<div class="btn-group" data-toggle="buttons">\
-													<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pd+'" id="radio_ConcluidoProduto'+pd+'N">\
-													<input type="radio" name="ConcluidoProduto'+pd+'" id="radiogeraldinamico"\
-														autocomplete="off" value="N" checked>Não\
-													</label>\
-													<label class="btn btn-default" name="radio_ConcluidoProduto'+pd+'" id="radio_ConcluidoProduto'+pd+'S">\
-													<input type="radio" name="ConcluidoProduto'+pd+'" id="radiogeraldinamico"\
-														autocomplete="off" value="S" >Sim\
-													</label>\
-												</div>\
-											</div>\
-										</div>\
-									</div>\
-								</div>\
-							</div>\
-							<div class="col-md-2 panel-body">\
-								<div class="panel panel-danger">\
-									<div class="panel-heading">\
-										<div class="row">\
-											<div class="col-md-12">\
-												<label for="DevolvidoProduto">Devolvido? </label><br>\
-												<div class="btn-group" data-toggle="buttons">\
-													<label class="btn btn-warning active" name="radio_DevolvidoProduto'+pd+'" id="radio_DevolvidoProduto'+pd+'N">\
-													<input type="radio" name="DevolvidoProduto'+pd+'" id="radiogeraldinamico"\
-														autocomplete="off" value="N" checked>Não\
-													</label>\
-													<label class="btn btn-default" name="radio_DevolvidoProduto'+pd+'" id="radio_DevolvidoProduto'+pd+'S">\
-													<input type="radio" name="DevolvidoProduto'+pd+'" id="radiogeraldinamico"\
-														autocomplete="off" value="S" >Sim\
-													</label>\
-												</div>\
-											</div>\
-										</div>\
-									</div>\
-								</div>\
-							</div>\
 						</div>\
                     </div>\
                 </div>\
@@ -5646,18 +5571,18 @@ $(document).ready(function () {
 		$('.DatePicker').datetimepicker(dateTimePickerOptions);
 		
 		//get a reference to the select element
-        $select = $('#listadinamicab'+pd);
+        $select = $('#listadinamicam'+pd);
 
         //request the JSON data and parse into the select element
         $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=9',
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=97',
             dataType: 'JSON',
             type: "GET",
             success: function (data) {
                 //clear the current content of the select
                 $select.html('');
                 //iterate over the data and append a select option
-                //$select.append('<option value="">-- Selecione uma opção --</option>');
+                $select.append('<option value="">-- Selecione uma opção --</option>');
                 $.each(data, function (key, val) {
                     //alert(val.id);
                     $select.append('<option value="' + val.id + '">' + val.name + '</option>');
@@ -5679,23 +5604,23 @@ $(document).ready(function () {
         });
 		
 		//get a reference to the select element
-        $select2 = $('#listadinamicac'+pd);
+        $select2 = $('#listadinamican'+pd);
 
         //request the JSON data and parse into the select element
         $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=3',
+            url: window.location.origin+ '/' + app + '/Getvalues_json2.php?q=98',
             dataType: 'JSON',
             type: "GET",
             success: function (data) {
                 //clear the current content of the select
                 $select2.html('');
                 //iterate over the data and append a select option
-                $select2.append('<option value="">-- Sel. Profis. --</option>');
+                $select2.append('<option value="">-- Sel. Tamanho --</option>');
                 $.each(data, function (key, val) {
                     //alert(val.id);
                     $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
                 })
-                $('.Chosen').chosen({
+                $('.Chosen2').chosen({
                     disable_search_threshold: 10,
                     multiple_text: "Selecione uma ou mais opções",
                     single_text: "Selecione uma opção",
