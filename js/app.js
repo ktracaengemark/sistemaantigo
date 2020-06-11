@@ -5582,7 +5582,7 @@ $(document).ready(function () {
                 //clear the current content of the select
                 $select.html('');
                 //iterate over the data and append a select option
-                $select.append('<option value="">-- Selecione uma opção --</option>');
+                $select.append('<option value="">-- Sel. Tipo --</option>');
                 $.each(data, function (key, val) {
                     //alert(val.id);
                     $select.append('<option value="' + val.id + '">' + val.name + '</option>');
