@@ -1227,16 +1227,22 @@ class Produtos extends CI_Controller {
 						//$data['derivados'][$k]['Cod_Prod'] = $data['derivados'][$j]['idTab_Produtos'].'.'.$data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod'].'.'.$data['derivados'][$j]['Tam_Prod'];	
 						
 					}
-					/*	
-					echo '<br>';
-					echo "<pre>";
-					print_r($data['derivados']);
-					echo "</pre>";
-					exit ();
+					
+					/*
+					$data['derivados'] = array();
+					foreach($data['derivados'] as $row){
+					
+						//echo implode(",", $row)."\n";
+						$string2 = implode("",$row['idTab_Produtos']); 
+						$string2 = $this->Produtos_model->set_derivados($data['derivados']);
+					
+					}					
 					*/
-					$data['derivados']['idTab_Produtos'] = $this->Produtos_model->set_derivados($data['derivados']);
+
+					//$data['derivados']['idTab_Produtos'] = $this->Produtos_model->set_derivados($data['derivados']);
 				
 				}
+				
 				/*
 				echo '<br>';
 				echo "<pre>";
@@ -1244,7 +1250,7 @@ class Produtos extends CI_Controller {
 				echo "</pre>";
 				exit ();
 				*/
-				//$data['derivados']['idTab_Produtos'] = $this->Produtos_model->set_derivados($data['derivados']);
+				$data['derivados']['idTab_Produtos'] = $this->Produtos_model->set_derivados($data['derivados']);
 
 			}			
 			
