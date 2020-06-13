@@ -971,13 +971,14 @@ class Produtos extends CI_Controller {
         }
         $data['count']['PMCount'] = $j - 1;
 		
+		/*
         $j = 1;
         for ($i = 1; $i <= $data['count']['PDCount']; $i++) {
 
-            if ($this->input->post('idTab_Produto' . $i) || $this->input->post('Cat_Prod' . $i) || $this->input->post('Cor_Prod' . $i) || 
+            if ($this->input->post('Cat_Prod' . $i) || $this->input->post('Cor_Prod' . $i) || 
 				$this->input->post('Tam_Prod' . $i) || $this->input->post('Cod_Prod' . $i) || $this->input->post('Nome_Prod' . $i) ||
 				$this->input->post('Ativo_Prod' . $i)){
-				$data['derivados'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
+
 				$data['derivados'][$j]['Cat_Prod'] = $this->input->post('Cat_Prod' . $i);
 				$data['derivados'][$j]['Cor_Prod'] = $this->input->post('Cor_Prod' . $i);
 				$data['derivados'][$j]['Tam_Prod'] = $this->input->post('Tam_Prod' . $i);
@@ -989,6 +990,8 @@ class Produtos extends CI_Controller {
 
         }
         $data['count']['PDCount'] = $j - 1;		
+		*/
+		
 		
 		// O código do produto não é aqui, é lá embaixo
 		//$data['produtos']['CodProd'] = $data['produtos']['Prodaux4'].$data['produtos']['Prodaux2'].$data['produtos']['Prodaux1'];
@@ -1172,20 +1175,78 @@ class Produtos extends CI_Controller {
                 $data['procedimento']['idTab_Tam_Prod'] = $this->Produtos_model->set_procedimento($data['procedimento']);
             }			
 
-			#### App_Produtos Derivados ####
-            if (isset($data['procedimento'])) {
-                $max = count($data['procedimento']);
-                for($j=1;$j<=$max;$j++) {
-					$data['derivados'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-                    $data['derivados'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-					$data['derivados'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-                    $data['derivados'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
-					$data['derivados'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					//$data['derivados'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['derivados'][$j]['Nome_Prod'], 'ISO-8859-1'));
-					//$data['derivados'][$j]['Cod_Prod'] = $data['derivados'][$j]['idTab_Produtos'].'.'.$data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod'].'.'.$data['derivados'][$j]['Tam_Prod'];
-                }
-                $data['derivados']['idTab_Produtos'] = $this->Produtos_model->set_derivados($data['derivados']);
-            }			
+			#### App_Produtos Derivados ####//Esse erro me mostrou algo sobre o contador
+			if (isset($data['produto']) && isset($data['procedimento'])) {
+                
+				#### Tab_Cor_Prod ####
+				$data['tipo'] = $this->Produtos_model->get_produto($data['produtos']['idTab_Produto']);
+				if (count($data['tipo']) > 0) {
+					$data['tipo'] = array_combine(range(1, count($data['tipo'])), array_values($data['tipo']));
+					$data['count']['PCount'] = count($data['tipo']);
+					
+				}	
+				#### Tab_Tam_Prod ####
+				//$data['procedimento'] = $this->Produtos_model->get_procedimento($id);
+				$data['tamanho'] = $this->Produtos_model->get_procedimento($data['produtos']['idTab_Produto']);
+				if (count($data['tamanho']) > 0) {
+					$data['tamanho'] = array_combine(range(1, count($data['tamanho'])), array_values($data['tamanho']));
+					$data['count']['PMCount'] = count($data['tamanho']);
+
+				}
+				for($j=1;$j<=$data['count']['PCount'];$j++) {
+
+					//$j=1;
+					$tipo = $data['tipo'][$j]['idTab_Cor_Prod'];
+					
+					for($k=1;$k<=$data['count']['PMCount'];$k++) {
+						
+						/*
+						echo '<br>';
+						echo "<pre>";
+						print_r($tipo);
+						echo "</pre>";
+						//exit ();								
+						*/
+
+						$tamanho = $data['tamanho'][$k]['idTab_Tam_Prod'];
+						/*
+						echo '<br>';
+						echo "<pre>";
+						print_r($data[$k]);
+						echo "</pre>";
+						exit ();
+						*/
+						$data['derivados'][$j][$k]['Cor_Prod'] = $tipo;
+						$data['derivados'][$j][$k]['Tam_Prod'] = $tamanho;
+						$data['derivados'][$j][$k]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+						$data['derivados'][$j][$k]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+						$data['derivados'][$j][$k]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+						$data['derivados'][$j][$k]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
+						$data['derivados'][$j][$k]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
+						//$data['derivados'][$k]['Nome_Prod'] = trim(mb_strtoupper($data['derivados'][$j]['Nome_Prod'], 'ISO-8859-1'));
+						//$data['derivados'][$k]['Cod_Prod'] = $data['derivados'][$j]['idTab_Produtos'].'.'.$data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod'].'.'.$data['derivados'][$j]['Tam_Prod'];	
+						
+					}
+					/*	
+					echo '<br>';
+					echo "<pre>";
+					print_r($data['derivados']);
+					echo "</pre>";
+					exit ();
+					*/
+					$data['derivados']['idTab_Produtos'] = $this->Produtos_model->set_derivados($data['derivados']);
+				
+				}
+				/*
+				echo '<br>';
+				echo "<pre>";
+				print_r($data['derivados']);
+				echo "</pre>";
+				exit ();
+				*/
+				//$data['derivados']['idTab_Produtos'] = $this->Produtos_model->set_derivados($data['derivados']);
+
+			}			
 			
 /*
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1207,8 +1268,9 @@ class Produtos extends CI_Controller {
 				//$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produto', 'CREATE', $data['auditoriaitem']);
 				$data['msg'] = '?m=1';
 
-				#redirect(base_url() . 'produtos/listar/' . $data['msg']);
-				redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
+				//redirect(base_url() . 'produtos/listar/' . $data['msg']);
+				//redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
+				redirect(base_url() . 'produtos/alterar/' . $data['produtos']['idTab_Produto'] . $data['msg']);
 				exit();
 			}
         }
@@ -1767,7 +1829,8 @@ class Produtos extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'produtos/listar/' . $data['msg']);
-				redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
+				//redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
+				redirect(base_url() . 'produtos/alterar/' . $data['produtos']['idTab_Produto'] . $data['msg']);
                 exit();
             }
         }
