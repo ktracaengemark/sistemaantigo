@@ -75,13 +75,14 @@ elseif ($_GET['q'] == 98) {
 				P.idTab_Tam_Prod,
 				P.Tam_Prod,
 				P.idTab_Produto,
-				CONCAT(IFNULL(P.Nome_Tam_Prod,""), " -- ", IFNULL(P.idTab_Tam_Prod,"")) AS Nome_Tam_Prod
+				CONCAT(IFNULL(P.Nome_Tam_Prod,"")) AS Nome_Tam_Prod
 				
             FROM
                 Tab_Tam_Prod AS P
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' 
 			ORDER BY 
 				P.Nome_Tam_Prod ASC
 				

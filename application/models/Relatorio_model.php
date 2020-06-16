@@ -7171,7 +7171,7 @@ exit();*/
 
     }
 
-	public function list_produtos($data, $completo) {
+	public function list_produtos_BKP($data, $completo) {
 
 		#$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		#$data['TipoProduto'] = ($data['TipoProduto']) ? ' AND TTP.idTab_TipoProduto = ' . $data['TipoProduto'] : FALSE;
@@ -7250,6 +7250,92 @@ exit();*/
 				
             }
             $query->soma = new stdClass();
+			#$query->soma->valor_produto = number_format($valor_produto, 2, ',', '.');
+            #$query->soma->somaorcamento = number_format($somaorcamento, 2, ',', '.');
+			#$query->soma->somacomissao = number_format($somacomissao, 2, ',', '.');			
+			
+			
+            return $query;
+        }
+
+    }
+	
+	public function list_produtos($data, $completo) {
+
+		#$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
+		#$data['TipoProduto'] = ($data['TipoProduto']) ? ' AND TTP.idTab_TipoProduto = ' . $data['TipoProduto'] : FALSE;
+		#$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
+		#$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
+        $data['Prodaux3'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
+		#$data['Prodaux4'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux4']) ? ' AND TP3.idTab_Prodaux4 = ' . $data['Prodaux4'] : FALSE;
+		$data['Campo'] = (!$data['Campo']) ? 'TP.Produtos' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+
+        $query = $this->db->query('
+            SELECT
+                TPS.idTab_Produtos,
+				TPS.Cod_Prod,
+				TP.idTab_Produto,
+				TP.TipoProduto,
+				TP.Produtos,
+				TP.ValorProdutoSite,
+				TP.Comissao,
+				TP.PesoProduto,
+				TP.Arquivo,
+				TP.Ativo,
+				TP.VendaSite,
+				TCOP.Nome_Cor_Prod,
+				TTAP.Nome_Tam_Prod,
+				TP3.idTab_Prodaux3,
+				TP3.Prodaux3
+            FROM
+                Tab_Produtos AS TPS
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TPS.idTab_Produto
+					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
+					LEFT JOIN Tab_Cor_Prod AS TCOP ON TCOP.idTab_Cor_Prod = TPS.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTAP ON TTAP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1
+					
+            WHERE
+                TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+				' . $data['Prodaux3'] . '
+			ORDER BY
+				' . $data['Campo'] . '
+				' . $data['Ordenamento'] . ', 
+				TP.Produtos
+		
+        ');
+
+        /*
+        #AND
+        #P.idApp_Profissional = OT.idApp_Cliente
+
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            #$valor_produto=0;
+			#$somaorcamento=0;
+			#$somacomissao=0;
+            foreach ($query->result() as $row) {
+
+				#$valor_produto = $row->Valor_Cor_Prod * $row->Fator_Tam_Prod;
+				#$somaorcamento += $row->ValorRestanteOrca;
+				#$somacomissao += $row->ValorComissao;
+                #$row->Valor_Cor_Prod = number_format($row->Valor_Cor_Prod, 2, ',', '.');
+				#$row->Fator_Tam_Prod = number_format($row->Fator_Tam_Prod, 2, ',', '.');
+				#$row->Valor_Produto = number_format($row->Valor_Produto, 2, ',', '.');
+				#$valor_produto = number_format($valor_produto, 2, ',', '.');
+				
+            }
+            #$query->soma = new stdClass();
 			#$query->soma->valor_produto = number_format($valor_produto, 2, ',', '.');
             #$query->soma->somaorcamento = number_format($somaorcamento, 2, ',', '.');
 			#$query->soma->somacomissao = number_format($somacomissao, 2, ',', '.');			

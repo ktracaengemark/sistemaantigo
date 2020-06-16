@@ -112,7 +112,41 @@ class Produtos_model extends CI_Model {
     }	
 
     public function get_produtos($data) {
-        $query = $this->db->query('SELECT * FROM Tab_Produto WHERE idTab_Produto = ' . $data);
+        $query = $this->db->query('
+			SELECT  
+				TP.idTab_Produto,
+				TP.Produtos,
+				TP.idSis_Usuario,
+				TP.idSis_Empresa,
+				TP.idTab_Modulo,
+				TP.UnidadeProduto,
+				TP.TipoProduto,
+				TP.CodProd,
+				TP.CodBarra,
+				TP.Prodaux1,
+				TP.Prodaux2,
+				TP.Prodaux3,
+				TP.Prodaux4,
+				TP.Fornecedor,
+				TP.ValorCompraProduto,
+				TP.ValorProduto,
+				TP.ValorProdutoSite,
+				TP.Categoria,
+				TP.ProdutoProprio,
+				TP.Aprovado,
+				TP.Arquivo,
+				TP.Ativo,
+				TP.VendaSite,
+				TP.PesoProduto,
+				TP.Comissao,
+				TP.Desconto,
+				TPAUX3.Prodaux3 AS Nome_Prodaux3
+			FROM 
+				Tab_Produto AS TP
+					LEFT JOIN Tab_Prodaux3 AS TPAUX3 ON TPAUX3.idTab_Prodaux3 = TP.Prodaux3
+			WHERE 
+				TP.idTab_Produto = ' . $data
+		);
         $query = $query->result_array();
 
         /*
@@ -127,6 +161,13 @@ class Produtos_model extends CI_Model {
         return $query[0];
     }
 
+    public function get_modelo($data) {
+		$query = $this->db->query('SELECT * FROM Tab_Produto WHERE idTab_Produto = ' . $data);
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
     public function get_valor($data) {
 		$query = $this->db->query('SELECT * FROM Tab_Valor WHERE idTab_Produto = ' . $data);
         $query = $query->result_array();
@@ -156,7 +197,37 @@ class Produtos_model extends CI_Model {
     }	
 
     public function get_derivados($data) {
-		$query = $this->db->query('SELECT * FROM Tab_Produtos WHERE idTab_Produto = ' . $data);
+		$query = $this->db->query('
+			SELECT  
+				TPS.idTab_Produtos,
+				TPS.idSis_Usuario,
+				TPS.idSis_Empresa,
+				TPS.Cat_Prod,
+				TPS.idTab_Modulo,
+				TPS.idTab_Modelo,
+				TPS.Mod_Prod,
+				TPS.Cor_Prod,
+				TPS.Tam_Prod_Aux1,
+				TPS.idTab_Produto,
+				TPS.Nome_Prod,
+				TPS.Cod_Prod,
+				TPS.Ativo_Prod,
+				TPS.VendaSite,
+				TPS.Tipo_Valor_Prod,
+				TPS.Valor_Produto,
+				TPS.Qtd_Prod_Desc,
+				TPS.Qtd_Prod_Incr,
+				TDS.Desconto,
+				TCP.Nome_Cor_Prod,
+				TTP.Nome_Tam_Prod
+			FROM 
+				Tab_Produtos AS TPS
+					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TPS.Tipo_Valor_Prod
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1
+			WHERE 
+				TPS.idTab_Produto = ' . $data . '
+		');
         $query = $query->result_array();
 
         return $query;
@@ -358,6 +429,7 @@ class Produtos_model extends CI_Model {
         $query = $this->db->delete('Tab_Cat_Prod', array('idTab_Produto' => $id));
         $query = $this->db->delete('Tab_Cor_Prod', array('idTab_Produto' => $id));
         $query = $this->db->delete('Tab_Tam_Prod', array('idTab_Produto' => $id));
+		$query = $this->db->delete('Tab_Produtos', array('idTab_Produto' => $id));
 		
         if ($this->db->affected_rows() === 0) {
             return FALSE;

@@ -812,7 +812,7 @@
 													</div>
 												</div>
 														
-											<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>	
+											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
 												<input type="hidden" name="SCount" id="SCount" value="<?php echo $count['SCount']; ?>"/>
 
 												<div class="input_fields_wrap10">
@@ -940,14 +940,14 @@
 													}
 													?>
 												</div>
-												<!--																			
+																															
 												<div class="panel panel-warning">
 													<div class="panel-heading text-left">
 														<div class="row">	
 															<div class="col-md-2 text-left">
 																<a class="add_field_button10  btn btn-warning" 
 																		onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
-																	<span class="glyphicon glyphicon-arrow-down"></span> Rem.Produtos
+																	<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Promoções
 																</a>
 															</div>
 															<div class="col-md-2"></div>
@@ -968,7 +968,7 @@
 														</div>
 													</div>
 												</div>
-												-->
+												
 												<input type="hidden" name="CountMax2" id="CountMax2" value="<?php echo $ServicoSoma ?>">
 
 											<?php } ?>

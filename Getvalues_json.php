@@ -68,6 +68,39 @@ elseif ($_GET['q'] == 11) {
     
 }
 
+elseif ($_GET['q'] == 12) {
+
+    $result = mysql_query('
+            SELECT
+                TPS.idTab_Produtos,
+				TCP.idTab_Cor_Prod,
+				TCP.Nome_Cor_Prod,
+				TTP.idTab_Tam_Prod,
+				TTP.Nome_Tam_Prod,
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+                TPS.Valor_Produto
+            FROM 
+                Tab_Produtos AS TPS
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1				
+            WHERE
+                TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY
+				TPS.Nome_Prod ASC	
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Produtos'],
+            'name' => utf8_encode($row['Nome_Prod']),
+            'value' => $row['Valor_Produto'],
+        );
+    } 
+    
+}
+
 elseif ($_GET['q'] == 2) {
 
     $result = mysql_query('
@@ -409,6 +442,7 @@ elseif ($_GET['q'] == 91) {
             SELECT
 				P.idTab_Prodaux1,
 				P.Prodaux1,
+				P.Prodaux3,
 				P3.Prodaux3,
 				CONCAT(IFNULL(P3.Prodaux3,""), " - ", IFNULL(P.Prodaux1,"")) AS Prodaux1
             FROM
@@ -416,7 +450,8 @@ elseif ($_GET['q'] == 91) {
 					LEFT JOIN Tab_Prodaux3 AS P3 ON P3.idTab_Prodaux3 = P.Prodaux3
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.Prodaux3 = ' . $_SESSION['Produto']['Prodaux3'] . ' 
 			ORDER BY 
 				P3.Prodaux3 ASC,
 				P.Prodaux1 ASC
@@ -467,12 +502,13 @@ elseif ($_GET['q'] == 97) {
 				P.idTab_Cor_Prod,
 				P.Cor_Prod,
 				P.idTab_Produto,
-				CONCAT(IFNULL(P.Nome_Cor_Prod,""), " -- ", IFNULL(P.idTab_Cor_Prod,"")) AS Nome_Cor_Prod
+				CONCAT(IFNULL(P.Nome_Cor_Prod,"")) AS Nome_Cor_Prod
             FROM
                 Tab_Cor_Prod AS P
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' 
 			ORDER BY 
 				P.Nome_Cor_Prod ASC
 				

@@ -1632,7 +1632,7 @@
 																	<?php if ($i == 1) { ?>
 																	<?php } ?>
 																	<select data-placeholder="Selecione uma opção..." class="form-control" readonly=""
-																			 id="listadinamicac<?php echo $i ?>" name="idSis_Usuario<?php echo $i ?> readonly="" ">
+																			 id="listadinamicac<?php echo $i ?>" name="idSis_Usuario<?php echo $i ?>">
 																		<!--<option value="">-- Selecione uma opção --</option>-->
 																		<?php
 																		foreach ($select['idSis_Usuario'] as $key => $row) {

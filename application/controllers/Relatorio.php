@@ -1297,7 +1297,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Prodaux2'] = $data['query']['Prodaux2'];
 		$_SESSION['FiltroAlteraParcela']['Prodaux3'] = $data['query']['Prodaux3'];
 		$_SESSION['Imprimir']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];		
-
+		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         $this->form_validation->set_rules('DataInicio', 'Data Início', 'trim|valid_date');
         $this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
@@ -5500,9 +5500,6 @@ class Relatorio extends CI_Controller {
         $data['select']['Campo'] = array(
 			'TP.Produtos' => 'Produto',
 			'TP.idTab_Produto' => 'id_Produto',
-			'TP4.Prodaux4' => 'Modelo',
-			'TP.Prodaux2' => 'Tipo',			
-			'TP.Prodaux1' => 'Esp.',
 			'TP.TipoProduto' => 'V/C/A',
 			'TP.CodProd' => 'Código',			
 			#'TP.Categoria' => 'Prod/Serv',

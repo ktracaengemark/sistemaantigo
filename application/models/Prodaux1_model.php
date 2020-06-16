@@ -289,5 +289,54 @@ class Prodaux1_model extends CI_Model {
 
         return $array;
     }
-	
+
+	public function select_Prodaux14($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+				P.idTab_Prodaux1,
+				P.Prodaux1,
+				P.Prodaux3,
+				P3.Prodaux3,
+				CONCAT(IFNULL(P3.Prodaux3,""), " - ", IFNULL(P.Prodaux1,"")) AS Prodaux1
+            FROM
+                Tab_Prodaux1 AS P
+					LEFT JOIN Tab_Prodaux3 AS P3 ON P3.idTab_Prodaux3 = P.Prodaux3
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.Prodaux3 = ' . $_SESSION['Produto']['Prodaux3'] . '
+			ORDER BY 
+				P3.Prodaux3 ASC,
+				P.Prodaux1 ASC			
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+				P.idTab_Prodaux1,
+				P.Prodaux1,
+				P.Prodaux3,
+				P3.Prodaux3,
+				CONCAT(IFNULL(P3.Prodaux3,""), " - ", IFNULL(P.Prodaux1,"")) AS Prodaux1
+            FROM
+                Tab_Prodaux1 AS P
+					LEFT JOIN Tab_Prodaux3 AS P3 ON P3.idTab_Prodaux3 = P.Prodaux3
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.Prodaux3 = ' . $_SESSION['Produto']['Prodaux3'] . ' 
+			ORDER BY 
+				P3.Prodaux3 ASC,
+				P.Prodaux1 ASC			
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Prodaux1] = $row->Prodaux1;
+            }
+        }
+
+        return $array;
+    }	
 }

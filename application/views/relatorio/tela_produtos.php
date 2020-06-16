@@ -12,9 +12,11 @@
 						<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 							<span class="glyphicon glyphicon-filter"></span>Filtro de Produtos
 						</button>
+						<!--
 						<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 							<span class="glyphicon glyphicon-plus"></span> Novo Produto
 						</button>
+						-->
 					</div>
 				</div>	
 			</div>			
@@ -83,6 +85,7 @@
 								?>
 							</select>
 						</div>
+						<!--
 						<div class="col-md-4">
 							<label for="Ordenamento">Tipo</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -113,6 +116,7 @@
 								?>
 							</select>
 						</div>
+						-->
 					</div>
 				</div>	
 				<div class="form-group">	
