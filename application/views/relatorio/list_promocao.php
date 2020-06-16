@@ -51,7 +51,7 @@
 							<td><?php echo $row['Desconto'] ?></td>
 							<td><?php echo $row['Promocao'] ?></td>
 							<td><?php echo $row['Descricao'] ?></td>
-							<td><?php echo $row['idTab_Produto'] ?></td>
+							<td><?php echo $row['idTab_Produtos'] ?></td>
 							<td><?php echo $row['QtdProdutoDesconto'] ?></td>
 							<td><?php echo $row['Produtos'] ?></td>
 							<td><?php echo number_format($row['ValorProduto'], 2, ',','.') ?></td>

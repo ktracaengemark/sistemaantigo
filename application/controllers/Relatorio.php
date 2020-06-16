@@ -5658,7 +5658,7 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-        $data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
+        //$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();

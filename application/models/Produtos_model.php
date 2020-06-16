@@ -169,7 +169,7 @@ class Produtos_model extends CI_Model {
     }
 	
     public function get_valor($data) {
-		$query = $this->db->query('SELECT * FROM Tab_Valor WHERE idTab_Produto = ' . $data);
+		$query = $this->db->query('SELECT * FROM Tab_Valor WHERE idTab_Modelo = ' . $data);
         $query = $query->result_array();
 
         return $query;

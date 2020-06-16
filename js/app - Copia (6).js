@@ -1803,141 +1803,10 @@ function adiciona_item_promocao() {
 
 	});	
 	
-}
- 
-function adiciona_item_promocao2() {
-
-var pt2 = $("#PT2Count").val(); //initlal text box count
-
-    //alert( $("#SCount").val() );
-    pt2++; //text box increment
-    $("#PT2Count").val(pt2);
-    //console.log(pt2);
-
-    if (pt2 >= 2) {
-        //console.log( $("#listadinamica2"+(pt2-1)).val() );
-        var chosen;
-        chosen = $("#listadinamica2"+(pt2-1)).val();
-        //console.log( chosen + ' :: ' + pt2 );
-    }
-
-    //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
-
-    $(".input_fields_wrap32").append('\
-        <div class="form-group" id="32div'+pt2+'">\
-			<div class="panel panel-info">\
-				<div class="panel-heading">\
-					<div class="row">\
-						<div class="col-md-5">\
-							<label for="idTab_Produtos2">Item:</label><br>\
-							<select class="form-control Chosen2" id="listadinamica2'+pt2+'" name="idTab_Produtos2'+pt2+'">\
-								<option value="">-- Selecione uma opção --</option>\
-							</select>\
-						</div>\
-						<div class="col-md-1">\
-							<label for="QtdProdutoDesconto2">QtdPrd:</label><br>\
-							<div class="input-group">\
-								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto2'+pt2+'" placeholder="0"\
-								    name="QtdProdutoDesconto2'+pt2+'" value="1">\
-							</div>\
-						</div>\
-						<div class="col-md-1">\
-							<label for="QtdProdutoIncremento2">QtdInc:</label><br>\
-							<div class="input-group">\
-								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento2'+pt2+'" placeholder="0"\
-								    name="QtdProdutoIncremento2'+pt2+'" value="1">\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="ValorProduto2'+pt2+'">Valor</label><br>\
-							<div class="input-group id="ValorProduto2'+pt2+'">\
-								<span class="input-group-addon" id="basic-addon1">R$</span>\
-								<input type="text" class="form-control Valor" id="ValorProduto2'+pt2+'" maxlength="10" placeholder="0,00" \
-									name="ValorProduto2'+pt2+'" value="">\
-							</div>\
-						</div>\
-						<div class="col-md-1">\
-							<label><br></label><br>\
-							<button type="button" id="'+pt2+'" class="remove_field32 btn btn-danger">\
-								<span class="glyphicon glyphicon-trash"></span>\
-							</button>\
-						</div>\
-					</div>\
-				</div>\
-			</div>\
-        </div>'
-    ); //add input box
-    //habilita o botão de calendário após a geração dos campos dinâmicos
-    $('.DatePicker').datetimepicker(dateTimePickerOptions);
-
-	/*
-    //get a reference to the select element
-    $select = $('#listadinamicad'+pt);
-
-    //request the JSON data and parse into the select element
-    $.ajax({
-        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=12',
-        dataType: 'JSON',
-        type: "GET",
-        success: function (data) {
-            //clear the current content of the select
-            $select.html('');
-            //iterate over the data and append a select option
-            $select.append('<option value="">-- Selecione uma opção --</option>');
-            $.each(data, function (key, val) {
-                //alert(val.id);
-                if (val.id == chosen)
-                    $select.append('<option value="' + val.id + '" selected="selected">' + val.name + '</option>');
-                else
-                    $select.append('<option value="' + val.id + '">' + val.name + '</option>');
-            })
-        },
-        error: function () {
-            //alert('erro listadinamicaB');
-            //if there is an error append a 'none available' option
-            $select.html('<option id="-1">ERRO</option>');
-        }
-
-    });
-	*/
 	
-	//get a reference to the select element
-	$select = $('#listadinamica2'+pt2);
 
-	//request the JSON data and parse into the select element
-	$.ajax({
-		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=13',
-		dataType: 'JSON',
-		type: "GET",
-		success: function (data) {
-			//clear the current content of the select
-			$select.html('');
-			//iterate over the data and append a select option
-			$select.append('<option value="">-- Sel. Produto --</option>');
-			$.each(data, function (key, val) {
-				//alert(val.id);
-				$select.append('<option value="' + val.id + '">' + val.name + '</option>');
-			})
-			$('.Chosen2').chosen({
-				disable_search_threshold: 10,
-				multiple_text: "Selecione uma ou mais opções",
-				single_text: "Selecione uma opção",
-				no_results_text: "Nenhum resultado para",
-				width: "100%"
-			});
-		},
-		error: function () {
-			//alert('erro listadinamicaB');
-			//if there is an error append a 'none available' option
-			$select.html('<option id="-1">ERRO</option>');
-		}
-
-	});	
-	
 }
- 
-/*
+ /*
   * Função criada para funcionar junto com o recurso de hide/show do jquery nos
   * casos de radio button, que exigem um tratamento especial para funcionar
   * corretamente
@@ -5928,25 +5797,17 @@ $(document).ready(function () {
 								<input type="text" class="form-control" id="Nome_Prod'+pd+'" readonly=""\
 										  name="Nome_Prod'+pd+'" value="">\
 							</div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
                                 <label for="Cor_Prod">Tipo </label><br>\
                                 <select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="listadinamicam'+pd+'" name="Cor_Prod'+pd+'">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
 								<label for="Tam_Prod_Aux1'+pd+'">Tamanho</label>\
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen2" id="listadinamican'+pd+'" name="Tam_Prod_Aux1'+pd+'">\
 									<option value="">-- Selecione uma opção --</option>\
 								</select>\
-							</div>\
-							<div class="col-md-2">\
-								<label for="Valor_Produto'+pd+'">Valor</label><br>\
-								<div class="input-group id="Valor_Produto'+pd+'">\
-									<span class="input-group-addon" id="basic-addon1">R$</span>\
-									<input type="text" class="form-control Valor" id="Valor_Produto'+pd+'" maxlength="10" placeholder="0,00" \
-										name="Valor_Produto'+pd+'" value="">\
-								</div>\
 							</div>\
 							<div class="col-md-1">\
                                 <label><br></label><br>\
@@ -6246,11 +6107,6 @@ $(document).ready(function () {
     $(".input_fields_wrap3").on("click",".remove_field3", function(e){ //user click on remove text
         $("#3div"+$(this).attr("id")).remove();
     })
-	
-    //Remove os campos adicionados dinamicamente
-    $(".input_fields_wrap32").on("click",".remove_field32", function(e){ //user click on remove text
-        $("#32div"+$(this).attr("id")).remove();
-    })	
 
     //Remove os campos adicionados dinamicamente
     $(".input_fields_wrap30").on("click",".remove_field30", function(e){ //user click on remove text

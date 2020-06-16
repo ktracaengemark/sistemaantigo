@@ -7418,7 +7418,8 @@ exit();*/
 				TPM.Descricao,
 				TPM.Arquivo,
 				TPM.Ativo,
-				TV.idTab_Produto,
+				TV.idTab_Produtos,
+				TV.idTab_Modelo,
 				TV.Convdesc,
 				TV.ValorProduto,
 				TV.QtdProdutoDesconto,
@@ -7427,7 +7428,7 @@ exit();*/
             FROM
                 Tab_Promocao AS TPM
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Promocao = TPM.idTab_Promocao
-					LEFT JOIN Tab_Produto AS TPD ON TPD.idTab_Produto = TV.idTab_Produto
+					LEFT JOIN Tab_Produto AS TPD ON TPD.idTab_Produto = TV.idTab_Modelo
 					LEFT JOIN Tab_Desconto AS TDC ON TDC.idTab_Desconto = TPM.Desconto					
             WHERE
                 TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
@@ -9127,7 +9128,7 @@ exit();*/
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = OB.Prodaux1
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = OB.Prodaux2
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = OB.Prodaux3
-					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produto = OB.idTab_Produto
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Modelo = OB.idTab_Produto
             WHERE
 				OB.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OB.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '

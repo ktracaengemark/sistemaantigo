@@ -920,6 +920,7 @@
 						</div>
 					</div>					
 					-->
+					<!--
 					<div class="row">	
 						<div class="col-md-12">
 							<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
@@ -1021,6 +1022,7 @@
 							</div>
 						</div>
 					</div>
+					-->
 				<?php } ?>
 
 				<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>

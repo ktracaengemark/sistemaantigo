@@ -51,6 +51,18 @@ class Promocao_model extends CI_Model {
         }
     }
 	
+    public function set_item_promocao2($data) {
+
+        $query = $this->db->insert_batch('Tab_Valor', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }	
+	
     public function set_item_promocao1($data) {
 
         $query = $this->db->insert('Tab_Valor', $data);
@@ -103,12 +115,46 @@ class Promocao_model extends CI_Model {
         return $query[0];
     }
 
-    public function get_item_promocao($data) {
-		$query = $this->db->query('SELECT * FROM Tab_Valor WHERE idTab_Promocao = ' . $data);
+	public function get_item_promocao1($data) {
+		$query = $this->db->query('
+			SELECT * 
+			FROM 
+				Tab_Valor 
+			WHERE 
+				idTab_Promocao = ' . $data . ' 
+		');
         $query = $query->result_array();
 
         return $query;
     }
+	
+	public function get_item_promocao($data, $item) {
+		$query = $this->db->query('
+			SELECT * 
+			FROM 
+				Tab_Valor 
+			WHERE 
+				idTab_Promocao = ' . $data . ' AND
+				Item_Promocao = '. $item . '
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
+    public function get_item_promocao2($data, $item) {
+		$query = $this->db->query('
+			SELECT * 
+			FROM 
+				Tab_Valor 
+			WHERE 
+				idTab_Promocao = ' . $data . ' AND
+				Item_Promocao = '. $item . '
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }	
 
     public function list_promocao1($id, $aprovado, $completo) {
 
@@ -211,6 +257,13 @@ class Promocao_model extends CI_Model {
 
     }	
 
+    public function update_item_promocao2($data) {
+
+        $query = $this->db->update_batch('Tab_Valor', $data, 'idTab_Valor');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }	
+	
     public function delete_item_promocao($data) {
 
         $this->db->where_in('idTab_Valor', $data);
@@ -223,6 +276,18 @@ class Promocao_model extends CI_Model {
         }
     }
 
+    public function delete_item_promocao2($data) {
+
+        $this->db->where_in('idTab_Valor', $data);
+        $this->db->delete('Tab_Valor');
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+	
     public function delete_promocao($id) {
 
 

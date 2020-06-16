@@ -1385,6 +1385,118 @@ if (isset($data) && $data) {
 
         return $array;
     }
+
+	public function select_prod_der($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+                TPS.idTab_Produtos,
+				TPS.idTab_Produto,
+				TCP.idTab_Cor_Prod,
+				TCP.Nome_Cor_Prod,
+				TTP.idTab_Tam_Prod,
+				TTP.Nome_Tam_Prod,
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+                TPS.Valor_Produto
+            FROM 
+                Tab_Produtos AS TPS
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1				
+            WHERE
+                TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_1'] . '
+			ORDER BY
+				TPS.Nome_Prod ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+                TPS.idTab_Produtos,
+				TPS.idTab_Produto,
+				TCP.idTab_Cor_Prod,
+				TCP.Nome_Cor_Prod,
+				TTP.idTab_Tam_Prod,
+				TTP.Nome_Tam_Prod,
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+                TPS.Valor_Produto
+            FROM 
+                Tab_Produtos AS TPS
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1				
+            WHERE
+                TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_1'] . '
+			ORDER BY
+				TPS.Nome_Prod ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Produtos] = $row->Nome_Prod;
+            }
+        }
+
+        return $array;
+    }
+	
+	public function select_prod_der2($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+                TPS.idTab_Produtos,
+				TPS.idTab_Produto,
+				TCP.idTab_Cor_Prod,
+				TCP.Nome_Cor_Prod,
+				TTP.idTab_Tam_Prod,
+				TTP.Nome_Tam_Prod,
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+                TPS.Valor_Produto
+            FROM 
+                Tab_Produtos AS TPS
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1				
+            WHERE
+                TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_2'] . '
+			ORDER BY
+				TPS.Nome_Prod ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+                TPS.idTab_Produtos,
+				TPS.idTab_Produto,
+				TCP.idTab_Cor_Prod,
+				TCP.Nome_Cor_Prod,
+				TTP.idTab_Tam_Prod,
+				TTP.Nome_Tam_Prod,
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+                TPS.Valor_Produto
+            FROM 
+                Tab_Produtos AS TPS
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1				
+            WHERE
+                TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_2'] . '
+			ORDER BY
+				TPS.Nome_Prod ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Produtos] = $row->Nome_Prod;
+            }
+        }
+
+        return $array;
+    }	
 	
 	public function select_servico4($data = FALSE) {
 
