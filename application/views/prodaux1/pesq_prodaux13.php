@@ -45,7 +45,7 @@
 						<div class="row">
 							<div class="col-md-3">
 								<label for="Prodaux4">Categoria</label>								
-								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 										id="Prodaux3" name="Prodaux3">
 									<option value="">-- Selecione uma opção --</option>
 									<?php

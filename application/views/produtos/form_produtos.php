@@ -176,9 +176,17 @@
 												</div>
 												<div class="row">
 													<div class="col-md-6">
+														<label for="ValorProduto">A Partir de:</label><br>
+														<div class="input-group">
+															<span class="input-group-addon" id="basic-addon1">R$</span>
+															<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
+																	name="ValorProduto" value="<?php echo $produtos['ValorProduto'] ?>">
+														</div>
+													</div>
+													<div class="col-md-6">
 														<label for="Comissao">Comissão:</label><br>
 														<div class="input-group">
-															<span class="input-group-addon" id="basic-addon1">(%)</span>
+															<span class="input-group-addon" id="basic-addon1"> % </span>
 															<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
 																	name="Comissao" value="<?php echo $produtos['Comissao'] ?>">
 														</div>
@@ -1034,7 +1042,7 @@
 						<!--<input type="hidden" name="idTab_Valor" value="<?php echo $valor['idTab_Valor']; ?>">
 						<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 						<?php } ?>
-						<?php if ($metodo == 2) { ?>
+						<?php if ($metodo == 3) { ?>
 
 							<div class="col-md-6">
 								<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >

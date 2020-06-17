@@ -441,7 +441,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = PR.idTab_Servico
-					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Modelo
 			WHERE 
 				' . $permissao . '
 				' . $permissao5 . '
@@ -517,7 +517,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = PR.idTab_Produto
-					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto					
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Modelo					
 			WHERE 
 				' . $permissao . '
 				' . $permissao5 . '
@@ -580,7 +580,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = PR.idTab_Servico
-					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Modelo
 			WHERE 
 				' . $permissao . '
 				' . $permissao5 . '
@@ -647,7 +647,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = PR.idTab_Produto
-					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto					
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Modelo					
 			WHERE 
 				' . $permissao . '
 				' . $permissao5 . '
@@ -1049,7 +1049,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
 					LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
-					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Modelo
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
@@ -1149,7 +1149,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
 					LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
-					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Modelo
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
@@ -1248,7 +1248,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
 					LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
-					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Modelo
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
@@ -1347,7 +1347,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
 					LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
-					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Modelo
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
@@ -1443,7 +1443,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
 					LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
-					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Produto
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Modelo
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3

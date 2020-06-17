@@ -7171,7 +7171,7 @@ exit();*/
 
     }
 
-	public function list_produtos_BKP($data, $completo) {
+	public function list_produtos2($data, $completo) {
 
 		#$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		#$data['TipoProduto'] = ($data['TipoProduto']) ? ' AND TTP.idTab_TipoProduto = ' . $data['TipoProduto'] : FALSE;
@@ -7193,30 +7193,15 @@ exit();*/
 				TP.PesoProduto,
 				TP.Arquivo,
 				TP.Ativo,
-				TP.VendaSite,
-				TP4.Prodaux4,
-				TCOP.Cor_Prod,
-				TPA2.idTab_Prodaux2,
-				TPA2.Prodaux2,
-				TPA2.Arquivo AS Arquivo_Cor,
-				TCOP.Valor_Cor_Prod,
-				TPA1.Prodaux1,
-				TTAP.Fator_Tam_Prod,
-				(TCOP.Valor_Cor_Prod * TTAP.Fator_Tam_Prod) AS Valor_Produto
+				TP.VendaSite
             FROM
                 Tab_Produto AS TP
-					LEFT JOIN Tab_Prodaux4 AS TP4 ON TP4.idTab_Prodaux4 = TP.Prodaux4
-					LEFT JOIN Tab_Cor_Prod AS TCOP ON TCOP.idTab_Produto = TP.idTab_Produto
-					LEFT JOIN Tab_Prodaux2 AS TPA2 ON TPA2.idTab_Prodaux2 = TCOP.Cor_Prod
-					LEFT JOIN Tab_Tam_Prod AS TTAP ON TTAP.idTab_Produto = TP.idTab_Produto
-					LEFT JOIN Tab_Prodaux1 AS TPA1 ON TPA1.idTab_Prodaux1 = TTAP.Tam_Prod
+
             WHERE
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
-			ORDER BY
-				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '	, 
-				TPA2.Prodaux2,
-				Valor_Produto
+			ORDER BY 
+				TP.Produtos ASC
 		
         ');
 
@@ -7235,21 +7220,21 @@ exit();*/
             return TRUE;
         } else {
 
-            $valor_produto=0;
+            #$valor_produto=0;
 			#$somaorcamento=0;
 			#$somacomissao=0;
             foreach ($query->result() as $row) {
 
-				$valor_produto = $row->Valor_Cor_Prod * $row->Fator_Tam_Prod;
+				#$valor_produto = $row->Valor_Cor_Prod * $row->Fator_Tam_Prod;
 				#$somaorcamento += $row->ValorRestanteOrca;
 				#$somacomissao += $row->ValorComissao;
-                $row->Valor_Cor_Prod = number_format($row->Valor_Cor_Prod, 2, ',', '.');
-				$row->Fator_Tam_Prod = number_format($row->Fator_Tam_Prod, 2, ',', '.');
-				$row->Valor_Produto = number_format($row->Valor_Produto, 2, ',', '.');
-				$valor_produto = number_format($valor_produto, 2, ',', '.');
+                #$row->Valor_Cor_Prod = number_format($row->Valor_Cor_Prod, 2, ',', '.');
+				#$row->Fator_Tam_Prod = number_format($row->Fator_Tam_Prod, 2, ',', '.');
+				#$row->Valor_Produto = number_format($row->Valor_Produto, 2, ',', '.');
+				#$valor_produto = number_format($valor_produto, 2, ',', '.');
 				
             }
-            $query->soma = new stdClass();
+            #$query->soma = new stdClass();
 			#$query->soma->valor_produto = number_format($valor_produto, 2, ',', '.');
             #$query->soma->somaorcamento = number_format($somaorcamento, 2, ',', '.');
 			#$query->soma->somacomissao = number_format($somacomissao, 2, ',', '.');			

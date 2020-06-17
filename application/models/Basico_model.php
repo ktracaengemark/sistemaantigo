@@ -1122,7 +1122,7 @@ if (isset($data) && $data) {
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
-					LEFT JOIN Tab_Produto AS P ON P.idTab_Produto = V.idTab_Produto
+					LEFT JOIN Tab_Produto AS P ON P.idTab_Produto = V.idTab_Modelo
 					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = P.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
@@ -1130,7 +1130,7 @@ if (isset($data) && $data) {
             WHERE
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                P.idTab_Produto = V.idTab_Produto
+                P.idTab_Produto = V.idTab_Modelo
 			ORDER BY
 				P.CodProd ASC,
 				P.Categoria ASC,
@@ -1150,7 +1150,7 @@ if (isset($data) && $data) {
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
-					LEFT JOIN Tab_Produto AS P ON P.idTab_Produto = V.idTab_Produto
+					LEFT JOIN Tab_Produto AS P ON P.idTab_Produto = V.idTab_Modelo
 					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = P.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
@@ -1158,7 +1158,7 @@ if (isset($data) && $data) {
             WHERE
 				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                P.idTab_Produto = V.idTab_Produto
+                P.idTab_Produto = V.idTab_Modelo
 			ORDER BY
 				P.CodProd ASC,
 				P.Categoria ASC,

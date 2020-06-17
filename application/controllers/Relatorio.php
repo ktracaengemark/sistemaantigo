@@ -5611,7 +5611,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 
-            $data['report'] = $this->Relatorio_model->list_produtos($data['bd'],TRUE);
+            $data['report'] = $this->Relatorio_model->list_produtos2($data['bd'],TRUE);
 
             /*
               echo "<pre>";
@@ -5620,11 +5620,11 @@ class Relatorio extends CI_Controller {
               exit();
               */
 
-            $data['list'] = $this->load->view('relatorio/list_produtos2', $data, TRUE);
+            $data['list'] = $this->load->view('relatorio/list_produtos3', $data, TRUE);
 
         }
 
-        $this->load->view('relatorio/tela_produtos2', $data);
+        $this->load->view('relatorio/tela_produtos3', $data);
 
         $this->load->view('basico/footer');
 

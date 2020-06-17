@@ -1,4 +1,4 @@
-<div style="overflow: auto; height: 550px; ">	
+	
 	<div class="container-fluid">
 		
 
@@ -15,15 +15,15 @@
 
 					<thead>
 						<tr>                       																	
-							<!--<th class="active">Id.Imagem</th>-->
-							<th class="active" scope="col">ImgMod</th>
+							<!--<th class="active">Id.Imagem</th>
+							<th class="active" scope="col">Imagem</th>-->
 							<th class="active" scope="col">Editar</th>
-							<th class="active">Id.P</th>
+							<!--<th class="active">Id.P</th>-->
 							<th class="active">Id.M</th>
-							<th class="active">Código</th>
+							<!--<th class="active">Código</th>-->
 							<th class="active">Produto/Modelo</th>
-							<th class="active">Cor/Sabor</th>
-							<th class="active">Tamanho</th>
+							<!--<th class="active">Cor/Sabor</th>
+							<th class="active">Tamanho</th>-->
 						</tr>
 					</thead>
 
@@ -34,25 +34,25 @@
 					<!--<tr class="clickable-row" data-href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produto'] . ''; ?>">-->
 					<tr>	
 						<!--<td><?php echo $row['idTab_Prodaux2'] ?></td>-->
-						
+						<!--
 						<td class="notclickable">
-							<a class="notclickable" href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produto'] . ''; ?>">
+							<a class="notclickable" href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produtos'] . ''; ?>">
 								<img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='50'>
 							</a>
 						</td>
-						
+						-->
 						<td class="notclickable">
 							<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'produtos/alterar3/' . $row['idTab_Produto'] . ''; ?>">
 								<span class="glyphicon glyphicon-edit notclickable"></span>
 							</a>
 						</td>						
 						<!--<td><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>-->
-						<td><?php echo $row['idTab_Produtos'] ?></td>
+						<!--<td><?php echo $row['idTab_Produtos'] ?></td>-->
 						<td><?php echo $row['idTab_Produto'] ?></td>
-						<td><?php echo $row['Cod_Prod'] ?></td>
+						<!--<td><?php echo $row['Cod_Prod'] ?></td>-->
 						<td><?php echo $row['Produtos'] ?></td>
-						<td><?php echo $row['Nome_Cor_Prod'] ?></td>
-						<td><?php echo $row['Nome_Tam_Prod'] ?></td>
+						<!--<td><?php echo $row['Nome_Cor_Prod'] ?></td>
+						<td><?php echo $row['Nome_Tam_Prod'] ?></td>-->
 						<?php } ?>						
 					</tbody>
 
@@ -61,4 +61,4 @@
 			</div>
 
 	</div>
-</div>
+

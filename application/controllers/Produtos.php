@@ -1734,6 +1734,7 @@ class Produtos extends CI_Controller {
 			#'CodProd',
 			'Fornecedor',
 			'ValorProdutoSite',
+			'ValorProduto',
             'Comissao',
 			'PesoProduto',
             'Produtos',
@@ -2025,6 +2026,7 @@ class Produtos extends CI_Controller {
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['produtos']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProdutoSite']));
+			$data['produtos']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProduto']));
 			$data['produtos']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['Comissao']));
 			$data['produtos']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['PesoProduto']));
 			$data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produto']);
@@ -2300,6 +2302,7 @@ class Produtos extends CI_Controller {
 			#'CodProd',
 			'Fornecedor',
 			'ValorProdutoSite',
+			'ValorProduto',
             'Comissao',
 			'PesoProduto',
             'Produtos',
@@ -2597,6 +2600,7 @@ class Produtos extends CI_Controller {
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['produtos']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProdutoSite']));
+			$data['produtos']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorProduto']));
 			$data['produtos']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['Comissao']));
 			$data['produtos']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['PesoProduto']));
 			$data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produto']);

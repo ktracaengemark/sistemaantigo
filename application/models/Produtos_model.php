@@ -425,7 +425,7 @@ class Produtos_model extends CI_Model {
     public function delete_produtos($id) {
 
         $query = $this->db->delete('Tab_Produto', array('idTab_Produto' => $id));
-        $query = $this->db->delete('Tab_Valor', array('idTab_Produto' => $id));
+        $query = $this->db->delete('Tab_Valor', array('idTab_Modelo' => $id));
         $query = $this->db->delete('Tab_Cat_Prod', array('idTab_Produto' => $id));
         $query = $this->db->delete('Tab_Cor_Prod', array('idTab_Produto' => $id));
         $query = $this->db->delete('Tab_Tam_Prod', array('idTab_Produto' => $id));
