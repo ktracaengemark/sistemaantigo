@@ -472,7 +472,7 @@
 																		<label for="Tam_Prod">Tamanho/Esp <?php echo $i ?></label>
 																		<?php if ($i == 1) { ?>
 																		<?php } ?>
-																		<select data-placeholder="Sel. Tamanho" class="form-control"
+																		<select data-placeholder="Sel. Tamanho" class="form-control Chosen"
 																				 id="listadinamicag<?php echo $i ?>" name="Tam_Prod<?php echo $i ?>">
 																			<option value="">-- Sel. Tamanho --</option>
 																			<?php

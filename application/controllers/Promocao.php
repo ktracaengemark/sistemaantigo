@@ -907,7 +907,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'Prodaux4',
 			'Ativo',
 			'VendaSite',
-			#'Aprovado',
+			#'Aprovado',			
         ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -1100,11 +1100,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'VendaSite',
 			#'Aprovado',
 			'Cat_1',
-			'Mod_1',
 			'Cat_2',
-			'Mod_2',
 			'Cat_3',
-			'Mod_3',
         ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -1154,7 +1151,10 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         $data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $data['select']['Cat_1'] = $data['select']['Cat_2'] = $data['select']['Cat_3'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Cat_1'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Cat_2'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Cat_3'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['idTab_Produto'] = $this->Basico_model->select_produto2();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
@@ -1363,7 +1363,10 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         $data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $data['select']['Cat_1'] = $data['select']['Cat_2'] = $data['select']['Cat_3'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Cat_1'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Cat_2'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Cat_3'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Mod_1'] = $this->Basico_model->select_mod_1($data['promocao']['Cat_1']);
 		$data['select']['Mod_2'] = $this->Basico_model->select_mod_2($data['promocao']['Cat_2']);
@@ -1536,6 +1539,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         
 		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
 		(!$this->input->post('PT2Count')) ? $data['count']['PT2Count'] = 0 : $data['count']['PT2Count'] = $this->input->post('PT2Count');
+		(!$this->input->post('PT3Count')) ? $data['count']['PT3Count'] = 0 : $data['count']['PT3Count'] = $this->input->post('PT3Count');
 		(!$this->input->post('PCount')) ? $data['count']['PCount'] = 0 : $data['count']['PCount'] = $this->input->post('PCount');		
         (!$this->input->post('PMCount')) ? $data['count']['PMCount'] = 0 : $data['count']['PMCount'] = $this->input->post('PMCount');		
 		
@@ -1573,7 +1577,20 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         }
         $data['count']['PT2Count'] = $j - 1;		
 
-		
+        $j = 1;
+        for ($i = 1; $i <= $data['count']['PT3Count']; $i++) {
+
+            if ($this->input->post('QtdProdutoDesconto3' . $i) || $this->input->post('ValorProduto3' . $i)) {
+				$data['item_promocao3'][$j]['idTab_Valor'] = $this->input->post('idTab_Valor3' . $i);
+                $data['item_promocao3'][$j]['QtdProdutoDesconto'] = $this->input->post('QtdProdutoDesconto3' . $i);
+				$data['item_promocao3'][$j]['QtdProdutoIncremento'] = $this->input->post('QtdProdutoIncremento3' . $i);
+				$data['item_promocao3'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos3' . $i);
+				$data['item_promocao3'][$j]['ValorProduto'] = $this->input->post('ValorProduto3' . $i);
+                $j++;
+            }
+						
+        }
+        $data['count']['PT3Count'] = $j - 1;		
 		
 		
         //Fim do trecho de código que dá pra melhorar
@@ -1613,6 +1630,20 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 						
                 }
 				*/				
+            }
+			
+            #### Tab_Valor3 ####
+            $data['item_promocao3'] = $this->Promocao_model->get_item_promocao($id, "3");
+            if (count($data['item_promocao3']) > 0) {
+                $data['item_promocao3'] = array_combine(range(1, count($data['item_promocao3'])), array_values($data['item_promocao3']));
+                $data['count']['PT3Count'] = count($data['item_promocao3']);
+				/*
+                if (isset($data['item_promocao3'])) {
+
+                    for($j=1; $j <= $data['count']['PT3Count']; $j++)
+						
+                }
+				*/				
             }			
 
         }
@@ -1635,7 +1666,10 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         $data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $data['select']['Cat_1'] = $data['select']['Cat_2'] = $data['select']['Cat_3'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Cat_1'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Cat_2'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Cat_3'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Mod_1'] = $this->Basico_model->select_mod_1($data['promocao']['Cat_1']);
 		$data['select']['Mod_2'] = $this->Basico_model->select_mod_2($data['promocao']['Cat_2']);
@@ -1643,6 +1677,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 		$data['select']['idTab_Produto'] = $this->Basico_model->select_produto2();
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_prod_der();
 		$data['select']['idTab_Produtos2'] = $this->Basico_model->select_prod_der2();
+		$data['select']['idTab_Produtos3'] = $this->Basico_model->select_prod_der3();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		
@@ -1818,6 +1853,53 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 if (count($data['update']['item_promocao2']['excluir']))
                     $data['update']['item_promocao2']['bd']['excluir'] = $this->Promocao_model->delete_item_promocao($data['update']['item_promocao2']['excluir']);
 
+            }
+			
+            #### Tab_Valor3 ####
+            $data['update']['item_promocao3']['anterior'] = $this->Promocao_model->get_item_promocao($data['promocao']['idTab_Promocao'], "3");
+            if (isset($data['item_promocao3']) || (!isset($data['item_promocao3']) && isset($data['update']['item_promocao3']['anterior']) ) ) {
+
+                if (isset($data['item_promocao3']))
+                    $data['item_promocao3'] = array_values($data['item_promocao3']);
+                else
+                    $data['item_promocao3'] = array();
+
+                //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
+                $data['update']['item_promocao3'] = $this->basico->tratamento_array_multidimensional($data['item_promocao3'], $data['update']['item_promocao3']['anterior'], 'idTab_Valor');
+
+                $max = count($data['update']['item_promocao3']['inserir']);
+                for($j=0;$j<$max;$j++) {
+					$data['update']['item_promocao3']['inserir'][$j]['Item_Promocao'] = "3";
+					$data['update']['item_promocao3']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+					$data['update']['item_promocao3']['inserir'][$j]['Desconto'] = $data['promocao']['Desconto'];
+					$data['update']['item_promocao3']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+                    $data['update']['item_promocao3']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+					$data['update']['item_promocao3']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+                    $data['update']['item_promocao3']['inserir'][$j]['idTab_Promocao'] = $data['promocao']['idTab_Promocao'];
+					$data['update']['item_promocao3']['inserir'][$j]['Prodaux3'] = $data['promocao']['Cat_3'];
+					$data['update']['item_promocao3']['inserir'][$j]['idTab_Modelo'] = $data['promocao']['Mod_3'];
+					$data['update']['item_promocao3']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao3']['inserir'][$j]['ValorProduto']));
+                }
+
+                $max = count($data['update']['item_promocao3']['alterar']);
+                for($j=0;$j<$max;$j++) {
+					$data['update']['item_promocao3']['alterar'][$j]['Item_Promocao'] = "3";
+					$data['update']['item_promocao3']['alterar'][$j]['Desconto'] = $data['promocao']['Desconto'];
+					$data['update']['item_promocao3']['alterar'][$j]['Prodaux3'] = $data['promocao']['Cat_3'];
+					$data['update']['item_promocao3']['alterar'][$j]['idTab_Modelo'] = $data['promocao']['Mod_3'];
+					$data['update']['item_promocao3']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao3']['alterar'][$j]['ValorProduto']));
+					$data['update']['item_promocao3']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+				}
+
+                if (count($data['update']['item_promocao3']['inserir']))
+                    $data['update']['item_promocao3']['bd']['inserir'] = $this->Promocao_model->set_item_promocao($data['update']['item_promocao3']['inserir']);
+
+                if (count($data['update']['item_promocao3']['alterar']))
+                    $data['update']['item_promocao3']['bd']['alterar'] =  $this->Promocao_model->update_item_promocao($data['update']['item_promocao3']['alterar']);
+
+                if (count($data['update']['item_promocao3']['excluir']))
+                    $data['update']['item_promocao3']['bd']['excluir'] = $this->Promocao_model->delete_item_promocao($data['update']['item_promocao3']['excluir']);
+
             }			
 
 /*
@@ -1844,8 +1926,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'promocao/listar/' . $data['msg']);
-				redirect(base_url() . 'relatorio/promocao/' . $data['msg']);
-				//redirect(base_url() . 'promocao/alterar4/' . $data['promocao']['idTab_Promocao'] . $data['msg']);
+				//redirect(base_url() . 'relatorio/promocao/' . $data['msg']);
+				redirect(base_url() . 'promocao/alterar4/' . $data['promocao']['idTab_Promocao'] . $data['msg']);
                 exit();
             }
         }

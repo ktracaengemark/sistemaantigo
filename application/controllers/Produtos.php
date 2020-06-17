@@ -1157,7 +1157,7 @@ class Produtos extends CI_Controller {
 					$data['produto'][$j]['Nome_Cor_Prod'] = trim(mb_strtoupper($data['produto'][$j]['Nome_Cor_Prod'], 'ISO-8859-1'));
 				}
 						/*
-						echo '<br>';
+							echo '<br>';
 						echo "<pre>";
 						print_r($data['produto']);
 						echo "</pre>";

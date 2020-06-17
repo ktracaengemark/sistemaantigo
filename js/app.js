@@ -1807,7 +1807,7 @@ function adiciona_item_promocao() {
  
 function adiciona_item_promocao2() {
 
-var pt2 = $("#PT2Count").val(); //initlal text box count
+	var pt2 = $("#PT2Count").val(); //initlal text box count
 
     //alert( $("#SCount").val() );
     pt2++; //text box increment
@@ -1920,6 +1920,138 @@ var pt2 = $("#PT2Count").val(); //initlal text box count
 				$select.append('<option value="' + val.id + '">' + val.name + '</option>');
 			})
 			$('.Chosen2').chosen({
+				disable_search_threshold: 10,
+				multiple_text: "Selecione uma ou mais opções",
+				single_text: "Selecione uma opção",
+				no_results_text: "Nenhum resultado para",
+				width: "100%"
+			});
+		},
+		error: function () {
+			//alert('erro listadinamicaB');
+			//if there is an error append a 'none available' option
+			$select.html('<option id="-1">ERRO</option>');
+		}
+
+	});	
+	
+}
+ 
+function adiciona_item_promocao3() {
+
+    var pt3 = $("#PT3Count").val(); //initlal text box count
+
+    //alert( $("#SCount").val() );
+    pt3++; //text box increment
+    $("#PT3Count").val(pt3);
+    //console.log(pt3);
+
+    if (pt3 >= 2) {
+        //console.log( $("#listadinamica3"+(pt3-1)).val() );
+        var chosen;
+        chosen = $("#listadinamica3"+(pt3-1)).val();
+        //console.log( chosen + ' :: ' + pt3 );
+    }
+
+    //Captura a data do dia e carrega no campo correspondente
+    var currentDate = moment();
+
+    $(".input_fields_wrap33").append('\
+        <div class="form-group" id="33div'+pt3+'">\
+			<div class="panel panel-info">\
+				<div class="panel-heading">\
+					<div class="row">\
+						<div class="col-md-5">\
+							<label for="idTab_Produtos3">Item:</label><br>\
+							<select class="form-control Chosen3" id="listadinamica3'+pt3+'" name="idTab_Produtos3'+pt3+'">\
+								<option value="">-- Selecione uma opção --</option>\
+							</select>\
+						</div>\
+						<div class="col-md-1">\
+							<label for="QtdProdutoDesconto3">QtdPrd:</label><br>\
+							<div class="input-group">\
+								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto3'+pt3+'" placeholder="0"\
+								    name="QtdProdutoDesconto3'+pt3+'" value="1">\
+							</div>\
+						</div>\
+						<div class="col-md-1">\
+							<label for="QtdProdutoIncremento3">QtdInc:</label><br>\
+							<div class="input-group">\
+								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento3'+pt3+'" placeholder="0"\
+								    name="QtdProdutoIncremento3'+pt3+'" value="1">\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="ValorProduto3'+pt3+'">Valor</label><br>\
+							<div class="input-group id="ValorProduto3'+pt3+'">\
+								<span class="input-group-addon" id="basic-addon1">R$</span>\
+								<input type="text" class="form-control Valor" id="ValorProduto3'+pt3+'" maxlength="10" placeholder="0,00" \
+									name="ValorProduto3'+pt3+'" value="">\
+							</div>\
+						</div>\
+						<div class="col-md-1">\
+							<label><br></label><br>\
+							<button type="button" id="'+pt3+'" class="remove_field33 btn btn-danger">\
+								<span class="glyphicon glyphicon-trash"></span>\
+							</button>\
+						</div>\
+					</div>\
+				</div>\
+			</div>\
+        </div>'
+    ); //add input box
+    //habilita o botão de calendário após a geração dos campos dinâmicos
+    $('.DatePicker').datetimepicker(dateTimePickerOptions);
+
+	/*
+    //get a reference to the select element
+    $select = $('#listadinamicad'+pt);
+
+    //request the JSON data and parse into the select element
+    $.ajax({
+        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=12',
+        dataType: 'JSON',
+        type: "GET",
+        success: function (data) {
+            //clear the current content of the select
+            $select.html('');
+            //iterate over the data and append a select option
+            $select.append('<option value="">-- Selecione uma opção --</option>');
+            $.each(data, function (key, val) {
+                //alert(val.id);
+                if (val.id == chosen)
+                    $select.append('<option value="' + val.id + '" selected="selected">' + val.name + '</option>');
+                else
+                    $select.append('<option value="' + val.id + '">' + val.name + '</option>');
+            })
+        },
+        error: function () {
+            //alert('erro listadinamicaB');
+            //if there is an error append a 'none available' option
+            $select.html('<option id="-1">ERRO</option>');
+        }
+
+    });
+	*/
+	
+	//get a reference to the select element
+	$select = $('#listadinamica3'+pt3);
+
+	//request the JSON data and parse into the select element
+	$.ajax({
+		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=14',
+		dataType: 'JSON',
+		type: "GET",
+		success: function (data) {
+			//clear the current content of the select
+			$select.html('');
+			//iterate over the data and append a select option
+			$select.append('<option value="">-- Sel. Produto --</option>');
+			$.each(data, function (key, val) {
+				//alert(val.id);
+				$select.append('<option value="' + val.id + '">' + val.name + '</option>');
+			})
+			$('.Chosen3').chosen({
 				disable_search_threshold: 10,
 				multiple_text: "Selecione uma ou mais opções",
 				single_text: "Selecione uma opção",
@@ -6250,6 +6382,11 @@ $(document).ready(function () {
     //Remove os campos adicionados dinamicamente
     $(".input_fields_wrap32").on("click",".remove_field32", function(e){ //user click on remove text
         $("#32div"+$(this).attr("id")).remove();
+    })
+	
+    //Remove os campos adicionados dinamicamente
+    $(".input_fields_wrap33").on("click",".remove_field33", function(e){ //user click on remove text
+        $("#33div"+$(this).attr("id")).remove();
     })	
 
     //Remove os campos adicionados dinamicamente
