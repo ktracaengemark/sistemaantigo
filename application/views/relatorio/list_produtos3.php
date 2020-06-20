@@ -15,8 +15,8 @@
 
 					<thead>
 						<tr>                       																	
-							<!--<th class="active">Id.Imagem</th>
-							<th class="active" scope="col">Imagem</th>-->
+							<!--<th class="active">Id.Imagem</th>-->
+							<th class="active" scope="col">ImgModelo</th>
 							<th class="active" scope="col">Editar</th>
 							<!--<th class="active">Id.P</th>-->
 							<th class="active">Id.M</th>
@@ -34,15 +34,15 @@
 					<!--<tr class="clickable-row" data-href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produto'] . ''; ?>">-->
 					<tr>	
 						<!--<td><?php echo $row['idTab_Prodaux2'] ?></td>-->
-						<!--
+						
 						<td class="notclickable">
-							<a class="notclickable" href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produtos'] . ''; ?>">
+							<a class="notclickable" href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produto'] . ''; ?>">
 								<img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='50'>
 							</a>
 						</td>
-						-->
+						
 						<td class="notclickable">
-							<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'produtos/alterar3/' . $row['idTab_Produto'] . ''; ?>">
+							<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'produtos/alterar4/' . $row['idTab_Produto'] . ''; ?>">
 								<span class="glyphicon glyphicon-edit notclickable"></span>
 							</a>
 						</td>						

@@ -1442,20 +1442,14 @@ function adicionaValorDesconto() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-2">\
-							<label for="QtdProdutoDesconto">Qtd:</label><br>\
-							<div class="input-group">\
-								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto'+pt+'" placeholder="0"\
-								    name="QtdProdutoDesconto'+pt+'" value="1">\
-							</div>\
-						</div>\
-						<div class="col-md-4">\
-							<label for="Convdesc'+pt+'">Descrição</label>\
-							<input type="text" class="form-control" id="Convdesc'+pt+'"\
-									  name="Convdesc'+pt+'" value="">\
+						<div class="col-md-5">\
+							<label for="idTab_Produtos">Item:</label><br>\
+							<select class="form-control Chosen" id="listadinamicad'+pt+'" name="idTab_Produtos'+pt+'">\
+								<option value="">-- Selecione uma opção --</option>\
+							</select>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="ValorProduto'+pt+'">Valor</label><br>\
+							<label for="ValorProduto'+pt+'">Valor Venda S/Desc.</label><br>\
 							<div class="input-group id="ValorProduto'+pt+'">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
 								<input type="text" class="form-control Valor" id="ValorProduto'+pt+'" maxlength="10" placeholder="0,00" \
@@ -1475,7 +1469,8 @@ function adicionaValorDesconto() {
     ); //add input box
     //habilita o botão de calendário após a geração dos campos dinâmicos
     $('.DatePicker').datetimepicker(dateTimePickerOptions);
-
+	
+	/*
     //get a reference to the select element
     $select = $('#listadinamicad'+pt);
 
@@ -1504,6 +1499,39 @@ function adicionaValorDesconto() {
         }
 
     });
+	*/
+	//get a reference to the select element
+	$select = $('#listadinamicad'+pt);
+
+	//request the JSON data and parse into the select element
+	$.ajax({
+		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=15',
+		dataType: 'JSON',
+		type: "GET",
+		success: function (data) {
+			//clear the current content of the select
+			$select.html('');
+			//iterate over the data and append a select option
+			$select.append('<option value="">-- Sel. Produto --</option>');
+			$.each(data, function (key, val) {
+				//alert(val.id);
+				$select.append('<option value="' + val.id + '">' + val.name + '</option>');
+			})
+			$('.Chosen').chosen({
+				disable_search_threshold: 10,
+				multiple_text: "Selecione uma ou mais opções",
+				single_text: "Selecione uma opção",
+				no_results_text: "Nenhum resultado para",
+				width: "100%"
+			});
+		},
+		error: function () {
+			//alert('erro listadinamicaB');
+			//if there is an error append a 'none available' option
+			$select.html('<option id="-1">ERRO</option>');
+		}
+
+	});	
 
 }
 
@@ -6030,11 +6058,11 @@ $(document).ready(function () {
 
     });
 
-    //adiciona campos dinamicamente dos Produtos Vendidos 
+    //adiciona campos dinamicamente dos Produtos Derivados 
     var pd = $("#PDCount").val(); //initlal text box count
     $(".add_field_button97").click(function(e){ //on add input button click
         e.preventDefault();
-
+		/*
 		// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
 		if (pc >= 2) {
 			//console.log( $("#listadinamicag"+(pc-1)).val() );
@@ -6044,7 +6072,7 @@ $(document).ready(function () {
 			var chosen2;
 			chosen2 = $("#listadinamican"+(pc-1)).val();			
 		}
-
+		*/
 		// Termina aqui!!! ////		
 		
         pd++; //text box increment
@@ -6073,7 +6101,7 @@ $(document).ready(function () {
 								</select>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="Valor_Produto'+pd+'">Valor</label><br>\
+								<label for="Valor_Produto'+pd+'">Valor Custo</label><br>\
 								<div class="input-group id="Valor_Produto'+pd+'">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" id="Valor_Produto'+pd+'" maxlength="10" placeholder="0,00" \

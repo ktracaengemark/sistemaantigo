@@ -389,21 +389,10 @@
 														<div class="row">
 															<div class="col-md-3">
 																
-																<a class="add_field_button92 btn btn-success"
-																		onclick="calculaQtdSoma('Cor_Prod','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
+																<a class="add_field_button92 btn btn-success">
 																	<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Tipo/ Cor/ Sabor
 																</a>
 															</div>
-															<!--
-															<div class="col-md-2 text-center">	
-																
-																<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma ?></span></b>
-															</div>
-															<div class="col-md-2 text-center">	
-																
-																<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
-															</div>
-															-->
 														</div>
 													</div>
 												</div>
@@ -551,8 +540,7 @@
 														<div class="row">
 															<div class="col-md-3">
 																	
-																<a class="add_field_button91 btn btn-success"
-																		onclick="calculaQtdSoma('Tam_Prod','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
+																<a class="add_field_button91 btn btn-success">
 																	<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Tamanho
 																</a>
 															</div>
@@ -683,7 +671,6 @@
 					<?php } ?>
 				</div>
 				<?php if ($metodo > 2) { ?>
-					
 					<div class="row">
 						<div class="col-md-12">	
 							<div class="panel-group" id="accordion7" role="tablist" aria-multiselectable="true">
@@ -778,7 +765,7 @@
 																	</div>
 																	-->
 																	<div class="col-md-2">
-																		<label for="Valor_Produto">Valor <?php echo $i ?></label>
+																		<label for="Valor_Produto">Valor Custo <?php echo $i ?></label>
 																		<div class="input-group">
 																			<span class="input-group-addon" id="basic-addon1">R$</span>
 																			<input type="text" class="form-control Valor" id="Valor_Produto<?php echo $i ?>" maxlength="10" placeholder="0,00"
@@ -823,7 +810,7 @@
 							</div>
 						</div>
 					</div>
-					
+				<?php } ?>	
 					<!--
 					<div class="row">	
 						<div class="col-md-12">
@@ -928,7 +915,7 @@
 						</div>
 					</div>					
 					-->
-					<!--
+				<?php if ($metodo > 3) { ?>	
 					<div class="row">	
 						<div class="col-md-12">
 							<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
@@ -937,7 +924,7 @@
 										<h4 class="panel-title">
 											<a class="accordion-toggle">
 												<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-												Preços & Promoções
+												Preços de Venda S/ Desconto
 											</a>
 										</h4>
 									</div>
@@ -961,20 +948,24 @@
 												<div class="panel panel-info">
 													<div class="panel-heading">			
 														<div class="row">																					
-															<div class="col-md-2">
-																<label for="QtdProdutoDesconto">Qtd <?php echo $i ?>:</label>
-																<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto<?php echo $i ?>" placeholder="0"
-																		name="QtdProdutoDesconto<?php echo $i ?>" value="<?php echo $valor[$i]['QtdProdutoDesconto'] ?>">
-															</div>											
-
-															<div class="col-md-4">
-																<label for="Convdesc">Descrição <?php echo $i ?></label>
-																<input type="text" class="form-control"  id="Convdesc<?php echo $i ?>" <?php echo $readonly; ?>
-																		  name="Convdesc<?php echo $i ?>" value="<?php echo $valor[$i]['Convdesc']; ?>">
+															<div class="col-md-5">
+																<label for="idTab_Produtos<?php echo $i ?>">Produto <?php echo $i ?></label>
+																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																		 id="listadinamicad<?php echo $i ?>" name="idTab_Produtos<?php echo $i ?>">
+																	<option value="">-- Selecione uma opção --</option>
+																	<?php
+																	foreach ($select['idTab_Produtos'] as $key => $row) {
+																		if ($valor[$i]['idTab_Produtos'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	?>
+																</select>
 															</div>
-															
 															<div class="col-md-2">
-																<label for="ValorProduto">Valor <?php echo $i ?></label>
+																<label for="ValorProduto">Valor Venda S/Desc. <?php echo $i ?></label>
 																<div class="input-group">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorProduto<?php echo $i ?>" maxlength="10" placeholder="0,00"
@@ -1030,8 +1021,8 @@
 							</div>
 						</div>
 					</div>
-					-->
-				<?php } ?>
+				<?php } ?>	
+				
 
 				<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 				

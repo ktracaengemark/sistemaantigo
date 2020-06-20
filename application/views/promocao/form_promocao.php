@@ -585,7 +585,7 @@
 					<!--<input type="hidden" name="idTab_Valor" value="<?php echo $item_promocao['idTab_Valor']; ?>">
 					<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 					<?php } ?>
-					<?php if ($metodo == 2) { ?>
+					<?php if ($metodo == 4) { ?>
 
 						<div class="col-md-6">
 							<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >

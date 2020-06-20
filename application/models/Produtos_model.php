@@ -57,7 +57,7 @@ class Produtos_model extends CI_Model {
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
-        } else {
+			} else {
             #return TRUE;
             return $this->db->insert_id();
         }
@@ -169,7 +169,13 @@ class Produtos_model extends CI_Model {
     }
 	
     public function get_valor($data) {
-		$query = $this->db->query('SELECT * FROM Tab_Valor WHERE idTab_Modelo = ' . $data);
+		$query = $this->db->query('
+			SELECT * 
+			FROM 
+				Tab_Valor 
+			WHERE 
+				idTab_Modelo = ' . $data . '
+		');
         $query = $query->result_array();
 
         return $query;
