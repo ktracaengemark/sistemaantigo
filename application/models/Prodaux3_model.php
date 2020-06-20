@@ -171,6 +171,48 @@ class Prodaux3_model extends CI_Model {
                 Tab_Prodaux3
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				idTab_Prodaux3 = ' . $_SESSION['Produto']['Prodaux3'] . '
+			ORDER BY 
+				Prodaux3 ASC'
+    );
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+				idTab_Prodaux3,
+				CONCAT(Prodaux3, " - " , idTab_Prodaux3) AS Prodaux3,
+				Abrev3
+            FROM
+                Tab_Prodaux3
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				idTab_Prodaux3 = ' . $_SESSION['Produto']['Prodaux3'] . '
+			ORDER BY 
+				Prodaux3 ASC'
+    );
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Prodaux3] = $row->Prodaux3;
+            }
+        }
+
+        return $array;
+    }
+
+	public function select_prodaux3pr($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(
+                'SELECT                
+				idTab_Prodaux3,
+				CONCAT(Prodaux3, " - " , idTab_Prodaux3) AS Prodaux3,
+				Abrev3
+            FROM
+                Tab_Prodaux3
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
 				Prodaux3 ASC'
@@ -198,5 +240,45 @@ class Prodaux3_model extends CI_Model {
 
         return $array;
     }
+	
+	public function select_prodaux34($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(
+                'SELECT                
+				idTab_Prodaux3,
+				CONCAT(Prodaux3, " - " , idTab_Prodaux3) AS Prodaux3,
+				Abrev3
+            FROM
+                Tab_Prodaux3
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY 
+				Prodaux3 ASC'
+    );
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+				idTab_Prodaux3,
+				CONCAT(Prodaux3, " - " , idTab_Prodaux3) AS Prodaux3,
+				Abrev3
+            FROM
+                Tab_Prodaux3
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY 
+				Prodaux3 ASC'
+    );
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Prodaux3] = $row->Prodaux3;
+            }
+        }
+
+        return $array;
+    }	
 
 }

@@ -942,7 +942,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 		$data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux34();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Cor_Prod'] = $this->Prodaux2_model->select_prodaux2();
 		$data['select']['Tam_Prod'] = $this->Prodaux1_model->select_prodaux1();		
@@ -1151,7 +1151,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         $data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux34();
 		$data['select']['Cat_1'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Cat_2'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Cat_3'] = $this->Prodaux3_model->select_prodaux3();
@@ -1334,7 +1334,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
         if ($id) {
             #### Tab_Promocao ####
-            $data['promocao'] = $this->Promocao_model->get_promocao($id);
+            $_SESSION['Promocao'] = $data['promocao'] = $this->Promocao_model->get_promocao($id);
            
             #### Carrega os dados do cliente nas variáves de sessão ####
             #$this->load->model('Cliente_model');
@@ -1666,15 +1666,16 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         $data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
-		$data['select']['Cat_1'] = $this->Prodaux3_model->select_prodaux3();
-		$data['select']['Cat_2'] = $this->Prodaux3_model->select_prodaux3();
-		$data['select']['Cat_3'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux34();
+		$data['select']['Cat_1'] = $this->Prodaux3_model->select_prodaux3pr();
+		$data['select']['Cat_2'] = $this->Prodaux3_model->select_prodaux3pr();
+		$data['select']['Cat_3'] = $this->Prodaux3_model->select_prodaux3pr();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Mod_1'] = $this->Basico_model->select_mod_1($data['promocao']['Cat_1']);
 		$data['select']['Mod_2'] = $this->Basico_model->select_mod_2($data['promocao']['Cat_2']);
 		$data['select']['Mod_3'] = $this->Basico_model->select_mod_3($data['promocao']['Cat_3']);
 		$data['select']['idTab_Produto'] = $this->Basico_model->select_produto2();
+		#$data['select']['idTab_Produtos'] = $this->Basico_model->select_prod_der0();
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_prod_der();
 		$data['select']['idTab_Produtos2'] = $this->Basico_model->select_prod_der2();
 		$data['select']['idTab_Produtos3'] = $this->Basico_model->select_prod_der3();

@@ -123,15 +123,17 @@ class Prodaux2_model extends CI_Model {
 				TP2.Prodaux2,
 				TP2.Abrev2,
 				TP2.Arquivo,
-				TP4.Prodaux4
+				TP3.Prodaux3
 			FROM 
 				  Tab_Prodaux2 AS TP2
-					LEFT JOIN Tab_Prodaux4 AS TP4 ON TP4.idTab_Prodaux4 = TP2.Prodaux4
+					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP2.Prodaux3
 			WHERE
                 TP2.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-                TP2.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+                TP2.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				TP2.Prodaux3 = ' . $_SESSION['Produto']['Prodaux3'] . '
+				
 			ORDER BY 
-				TP4.Prodaux4 ASC,
+				TP3.Prodaux3 ASC,
 				TP2.Prodaux2 ASC
 		');
 
@@ -308,5 +310,54 @@ class Prodaux2_model extends CI_Model {
 
         return $array;
     }
-	
+
+	public function select_Prodaux24($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+				P.idTab_Prodaux2,
+				P.Prodaux2,
+				P.Prodaux3,
+				P3.Prodaux3,
+				CONCAT(IFNULL(P3.Prodaux3,""), " - ", IFNULL(P.Prodaux2,"")) AS Prodaux2
+            FROM
+                Tab_Prodaux2 AS P
+					LEFT JOIN Tab_Prodaux3 AS P3 ON P3.idTab_Prodaux3 = P.Prodaux3
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.Prodaux3 = ' . $_SESSION['Produto']['Prodaux3'] . '
+			ORDER BY 
+				P3.Prodaux3 ASC,
+				P.Prodaux2 ASC			
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+				P.idTab_Prodaux2,
+				P.Prodaux2,
+				P.Prodaux3,
+				P3.Prodaux3,
+				CONCAT(IFNULL(P3.Prodaux3,""), " - ", IFNULL(P.Prodaux2,"")) AS Prodaux2
+            FROM
+                Tab_Prodaux2 AS P
+					LEFT JOIN Tab_Prodaux3 AS P3 ON P3.idTab_Prodaux3 = P.Prodaux3
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.Prodaux3 = ' . $_SESSION['Produto']['Prodaux3'] . ' 
+			ORDER BY 
+				P3.Prodaux3 ASC,
+				P.Prodaux2 ASC			
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Prodaux2] = $row->Prodaux2;
+            }
+        }
+
+        return $array;
+    }	
 }

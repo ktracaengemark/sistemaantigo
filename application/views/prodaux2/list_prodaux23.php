@@ -6,7 +6,7 @@
             <th>Imagem</th>
 			<th>Editar</th>
 			<!--<th>Id</th>-->
-			<th>Modelo</th>            
+			<th>Categoria</th>            
 			<th>Tipo/Cor/Sabor</th>
 			<!--<th>Abrev</th>-->
             <th></th>
@@ -39,7 +39,7 @@
 								</a>
 							</td>';				
 					#echo '<td>' . $row['idTab_Prodaux2'] . '</td>';
-					echo '<td>' . $row['Prodaux4'] . '</td>';                    
+					echo '<td>' . $row['Prodaux3'] . '</td>';                    
 					echo '<td>' . $row['Prodaux2'] . '</td>';
 					#echo '<td>' . $row['Abrev2'] . '</td>';
                     #echo '<td></td>';

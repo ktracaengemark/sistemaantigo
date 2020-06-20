@@ -103,6 +103,37 @@ elseif ($_GET['q'] == 14) {
     
 }
 
+elseif ($_GET['q'] == 92) {
+//// daqui, Tipo/Cor, eu pego o Valor R$.....
+    $result = mysql_query('
+            SELECT
+				P.idTab_Prodaux2,
+				P.Prodaux2,
+				P.Prodaux3,
+				P3.Prodaux3,
+				CONCAT(IFNULL(P3.Prodaux3,""), " - ", IFNULL(P.Prodaux2,"")) AS Prodaux2
+            FROM
+                Tab_Prodaux2 AS P
+					LEFT JOIN Tab_Prodaux3 AS P3 ON P3.idTab_Prodaux3 = P.Prodaux3
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.Prodaux3 = ' . $_SESSION['Produto']['Prodaux3'] . ' 
+			ORDER BY 
+				P3.Prodaux3 ASC,
+				P.Prodaux2 ASC
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Prodaux2'],
+            'name' => utf8_encode($row['Prodaux2']),
+        );
+    }
+
+}
+
 elseif ($_GET['q'] == 98) {
 //// daqui, eu pegoo Tamanho
     $result = mysql_query('
@@ -110,10 +141,11 @@ elseif ($_GET['q'] == 98) {
 				P.idTab_Tam_Prod,
 				P.Tam_Prod,
 				P.idTab_Produto,
-				CONCAT(IFNULL(P.Nome_Tam_Prod,"")) AS Nome_Tam_Prod
-				
+				TPAUX1.Prodaux1,
+				CONCAT(IFNULL(TPAUX1.Prodaux1,"")) AS Nome_Tam_Prod
             FROM
                 Tab_Tam_Prod AS P
+					LEFT JOIN Tab_Prodaux1 AS TPAUX1 ON TPAUX1.idTab_Prodaux1 = P.Tam_Prod
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND

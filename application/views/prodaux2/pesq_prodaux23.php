@@ -44,13 +44,13 @@
 					<?php echo form_open($form_open_path, 'role="form"'); ?>
 						<div class="row">
 							<div class="col-md-4">
-								<label for="Prodaux4">Modelo</label>								
-								<select data-placeholder="Selecione o Modelo" class="form-control" <?php echo $readonly; ?>
-										id="Prodaux4" name="Prodaux4">
-									<option value="">-- Selecione O Modelo --</option>
+								<label for="Prodaux3">Categoria</label>								
+								<select data-placeholder="Selecione o Modelo" class="form-control Chosen" <?php echo $readonly; ?>
+										id="Prodaux3" name="Prodaux3">
+									<!--<option value="">-- Sel.a Categoria --</option>-->
 									<?php
-									foreach ($select['Prodaux4'] as $key => $row) {
-										if ($query['Prodaux4'] == $key) {
+									foreach ($select['Prodaux3'] as $key => $row) {
+										if ($query['Prodaux3'] == $key) {
 											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 										} else {
 											echo '<option value="' . $key . '">' . $row . '</option>';
@@ -58,7 +58,7 @@
 									}
 									?>
 								</select>
-								<?php echo form_error('Prodaux4'); ?>
+								<?php echo form_error('Prodaux3'); ?>
 							</div>							
 							<div class="col-md-4">
 								<label for="Prodaux2">Tipo/ Cor / Sabor</label><br>

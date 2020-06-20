@@ -47,7 +47,7 @@
 								<label for="Prodaux4">Categoria</label>								
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 										id="Prodaux3" name="Prodaux3">
-									<option value="">-- Selecione uma opção --</option>
+									<!--<option value="">-- Selecione uma opção --</option>-->
 									<?php
 									foreach ($select['Prodaux3'] as $key => $row) {
 										if ($query['Prodaux3'] == $key) {

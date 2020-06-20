@@ -104,10 +104,6 @@
 													</a>
 													<?php } else { ?>
 													<label></label><br>
-													<a class="btn btn-sm btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux22/cadastrar3/" role="button"> 
-														<span class="glyphicon glyphicon-plus"></span> Tipo
-													</a>
-													<label></label>
 													<a class="btn btn-sm btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux12/cadastrar3/" role="button"> 
 														<span class="glyphicon glyphicon-plus"></span> Tam
 													</a>
@@ -117,7 +113,10 @@
 													<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux42/cadastrar3/" role="button"> 
 														<span class="glyphicon glyphicon-plus"></span> Mod
 													</a>									
-													
+													<label></label>
+													<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux22/cadastrar3/" role="button"> 
+														<span class="glyphicon glyphicon-plus"></span> Tipo
+													</a>
 													
 													<label></label>
 													<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>fornecedor2/cadastrar3/" role="button"> 
@@ -274,7 +273,6 @@
 						</div>	
 					</div>
 					<?php if ($metodo > 1) { ?>
-						<!--
 						<div class="col-md-4">	
 							<div class="panel-group" id="accordion5" role="tablist" aria-multiselectable="true">
 								<div class="panel panel-primary">
@@ -308,6 +306,26 @@
 													<div class="form-group" id="92div<?php echo $i ?>">
 														<div class="panel panel-warning">
 															<div class="panel-heading">
+																<!--
+																<div class="row">
+																	<div class="col-md-12">
+																		<label for="idTab_Promocao<?php echo $i ?>">Promocao <?php echo $i ?></label>
+																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																				 id="listadinamicai<?php echo $i ?>" name="idTab_Promocao<?php echo $i ?>">
+																			<option value="">-- Selecione uma opção --</option>
+																			<?php
+																			foreach ($select['idTab_Promocao'] as $key => $row) {
+																				if ($produto[$i]['idTab_Promocao'] == $key) {
+																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																				} else {
+																					echo '<option value="' . $key . '">' . $row . '</option>';
+																				}
+																			}
+																			?>
+																		</select>
+																	</div>
+																</div>
+																-->
 																<div class="row">
 																	<div class="col-md-9">
 																		<label for="Nome_Cor_Prod">Tipo/Cor/Sabor <?php echo $i ?></label>
@@ -316,7 +334,7 @@
 																				name="Nome_Cor_Prod<?php echo $i ?>" value="<?php echo $produto[$i]['Nome_Cor_Prod'] ?>">
 																		</div>
 																	</div>
-																	
+																	<!--
 																	<div class="col-md-10">
 																		<label for="Cor_Prod<?php echo $i ?>">Tipo / Cor / Sabor <?php echo $i ?></label>
 																		<?php if ($i == 1) { ?>
@@ -336,6 +354,15 @@
 																		</select>
 																	</div>
 																	
+																	<div class="col-md-4">
+																		<label for="Valor_Cor_Prod">Valor <?php echo $i ?></label>
+																		<div class="input-group">
+																			<span class="input-group-addon" id="basic-addon1">R$</span>
+																			<input type="text" class="form-control Valor" id="Valor_Cor_Prod<?php echo $i ?>" maxlength="10" placeholder="0,00"
+																				name="Valor_Cor_Prod<?php echo $i ?>" value="<?php echo $produto[$i]['Valor_Cor_Prod'] ?>">
+																		</div>
+																	</div>
+																	-->
 																	<div class="col-md-1">
 																		<label><br></label><br>
 																		<button type="button" id="<?php echo $i ?>" class="remove_field92 btn btn-danger"
@@ -374,129 +401,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						-->
-						<div class="col-md-4">	
-							<div class="panel-group" id="accordion5" role="tablist" aria-multiselectable="true">
-								<div class="panel panel-primary">
-									 <div class="panel-heading" role="tab" id="heading5" data-toggle="collapse" data-parent="#accordion5" data-target="#collapse5">
-										<h4 class="panel-title">
-											<a class="accordion-toggle">
-												<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-												Tipo
-											</a>
-										</h4>
-									</div>
-
-									<div id="collapse5" class="panel-collapse" role="tabpanel" aria-labelledby="heading5" aria-expanded="false">
-										<div class="panel panel-success">
-											<div class="panel-heading">
-												<input type="hidden" name="PCount" id="PCount" value="<?php echo $count['PCount']; ?>"/>
-
-												<div class="input_fields_wrap92">
-													
-													<?php
-													$QtdSoma = $ProdutoSoma = 0;
-													for ($i=1; $i <= $count['PCount']; $i++) {
-													?>
-
-													<?php if ($metodo > 1) { ?>
-													<input type="hidden" name="idTab_Cor_Prod<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Cor_Prod']; ?>"/>
-													<?php } ?>
-
-													<input type="hidden" name="ProdutoHidden" id="ProdutoHidden<?php echo $i ?>" value="<?php echo $i ?>">
-
-													<div class="form-group" id="92div<?php echo $i ?>">
-														
-														<div class="panel panel-warning">
-															<div class="panel-heading">
-																<div class="row">
-																	<!--
-																	<div class="col-md-6">
-																		<label for="Nome_Cor_Prod">Tipo <?php echo $i ?></label>
-																		<div class="input-group">
-																			<input type="text" class="form-control" id="Nome_Cor_Prod<?php echo $i ?>"
-																				name="Nome_Cor_Prod<?php echo $i ?>" value="<?php echo $produto[$i]['Nome_Cor_Prod'] ?>">
-																		</div>
-																	</div>
-																	-->
-																	<div class="col-md-10">
-																		<label for="Cor_Prod">Tipo <?php echo $i ?></label>
-																		<?php if ($i == 1) { ?>
-																		<?php } ?>
-																		<select data-placeholder="Sel. Tipo" class="form-control Chosen"
-																				 id="listadinamica10<?php echo $i ?>" name="Cor_Prod<?php echo $i ?>">
-																			<option value="">-- Sel. Tipo --</option>
-																			<?php
-																			foreach ($select['Cor_Prod'] as $key => $row) {
-																				if ($produto[$i]['Cor_Prod'] == $key) {
-																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																				} else {
-																					echo '<option value="' . $key . '">' . $row . '</option>';
-																				}
-																			}
-																			?>
-																		</select>
-																	</div>
-																	<!--
-																	<div class="col-md-10">
-																		<label for="Prodaux1">Tamanho / Esp <?php echo $i ?></label>
-																		<?php if ($i == 1) { ?>
-																		<?php } ?>
-																		<select data-placeholder="Sel. Tamanho" class="form-control"
-																				 id="listadinamicag<?php echo $i ?>" name="Prodaux1<?php echo $i ?>">
-																			<option value="">-- Sel. Tamanho --</option>
-																			<?php
-																			foreach ($select['Prodaux1'] as $key => $row) {
-																				if ($produto[$i]['Prodaux1'] == $key) {
-																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																				} else {
-																					echo '<option value="' . $key . '">' . $row . '</option>';
-																				}
-																			}
-																			?>
-																		</select>
-																	</div>
-																	-->
-																	
-																	<div class="col-md-1">
-																		<label><br></label><br>
-																		<button type="button" id="<?php echo $i ?>" class="remove_field92 btn btn-danger"
-																				onclick="calculaQtdSoma('Cor_Prod','QtdSoma','ProdutoSoma',1,<?php echo $i ?>,'CountMax',0,'ProdutoHidden')">
-																			<span class="glyphicon glyphicon-trash"></span>
-																		</button>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-
-													<?php
-													$QtdSoma+=$produto[$i]['Cor_Prod'];
-													$ProdutoSoma++;
-													}
-													?>
-													<input type="hidden" name="CountMax" id="CountMax" value="<?php echo $ProdutoSoma ?>">
-												</div>
-											
-												<div class="panel panel-warning">
-													<div class="panel-heading text-left">
-														<div class="row">
-															<div class="col-md-3">
-																	
-																<a class="add_field_button92 btn btn-success">
-																	<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Tipo
-																</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>			
-						</div>						
+						</div>	
 						<div class="col-md-4">	
 							<div class="panel-group" id="accordion6" role="tablist" aria-multiselectable="true">
 								<div class="panel panel-primary">
@@ -552,7 +457,6 @@
 																</div>
 																-->
 																<div class="row">
-																	<!--
 																	<div class="col-md-6">
 																		<label for="Nome_Tam_Prod">Esp/Tamanho <?php echo $i ?></label>
 																		<div class="input-group">
@@ -560,7 +464,7 @@
 																				name="Nome_Tam_Prod<?php echo $i ?>" value="<?php echo $procedimento[$i]['Nome_Tam_Prod'] ?>">
 																		</div>
 																	</div>
-																	-->
+																	
 																	<div class="col-md-10">
 																		<label for="Tam_Prod">Tamanho/Esp <?php echo $i ?></label>
 																		<?php if ($i == 1) { ?>
@@ -797,16 +701,16 @@
 																		<input type="text" class="form-control"  id="Nome_Prod<?php echo $i ?>" <?php echo $readonly; ?> readonly = ""
 																				  name="Nome_Prod<?php echo $i ?>" value="<?php echo $derivados[$i]['Nome_Prod']; ?>">
 																	</div>
-																	<div class="col-md-3">
-																		<label for="Cor_Prod_Aux2">Tipo <?php echo $i ?></label>
+																	<div class="col-md-2">
+																		<label for="Cor_Prod">Tipo <?php echo $i ?></label>
 																		<?php if ($i == 1) { ?>
 																		<?php } ?>
 																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
-																				 id="listadinamicam<?php echo $i ?>" name="Cor_Prod_Aux2<?php echo $i ?>">
+																				 id="listadinamicam<?php echo $i ?>" name="Cor_Prod<?php echo $i ?>">
 																			<option value="">-- Sel. Tipo --</option>
 																			<?php
-																			foreach ($select['Cor_Prod_Aux2'] as $key => $row) {
-																				if ($derivados[$i]['Cor_Prod_Aux2'] == $key) {
+																			foreach ($select['Cor_Prod'] as $key => $row) {
+																				if ($derivados[$i]['Cor_Prod'] == $key) {
 																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																				} else {
 																					echo '<option value="' . $key . '">' . $row . '</option>';
@@ -1041,7 +945,7 @@
 																		name="ValorProduto<?php echo $i ?>" value="<?php echo $valor[$i]['ValorProduto'] ?>">
 																</div>
 															</div>
-															<div class="col-md-2">
+															<div class="col-md-3">
 																<label for="Desconto">Tipo de Desconto <?php echo $i ?></label>
 																<?php if ($i == 1) { ?>
 																<?php } ?>
@@ -1059,11 +963,7 @@
 																	?>
 																</select>
 															</div>											
-															<div class="col-md-2">
-																<label for="idTab_Promocao">Promoção <?php echo $i ?></label>
-																<input type="text" class="form-control"  id="idTab_Promocao<?php echo $i ?>" <?php echo $readonly; ?>
-																		readonly=""  name="idTab_Promocao<?php echo $i ?>" value="<?php echo $valor[$i]['idTab_Promocao']; ?>">
-															</div>
+															
 															<div class="col-md-1">
 																<label><br></label><br>
 																<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
@@ -1106,7 +1006,7 @@
 						<!--<input type="hidden" name="idTab_Valor" value="<?php echo $valor['idTab_Valor']; ?>">
 						<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 						<?php } ?>
-						<?php if ($metodo > 1) { ?>
+						<?php if ($metodo == 3) { ?>
 
 							<div class="col-md-6">
 								<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >

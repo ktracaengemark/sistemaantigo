@@ -7277,7 +7277,7 @@ exit();*/
                 Tab_Produtos AS TPS
 					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TPS.idTab_Produto
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
-					LEFT JOIN Tab_Cor_Prod AS TCOP ON TCOP.idTab_Cor_Prod = TPS.Cor_Prod
+					LEFT JOIN Tab_Cor_Prod AS TCOP ON TCOP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
 					LEFT JOIN Tab_Tam_Prod AS TTAP ON TTAP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1
 					
             WHERE

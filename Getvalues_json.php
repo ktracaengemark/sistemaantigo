@@ -78,12 +78,16 @@ elseif ($_GET['q'] == 12) {
 				TCP.Nome_Cor_Prod,
 				TTP.idTab_Tam_Prod,
 				TTP.Nome_Tam_Prod,
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+				TPAX1.Prodaux1,
+				TPAX2.Prodaux2,				
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TPAX2.Prodaux2,""), " - ", IFNULL(TPAX1.Prodaux1,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1				
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
+					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = TCP.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1	
+					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = TTP.Tam_Prod				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -113,12 +117,16 @@ elseif ($_GET['q'] == 15) {
 				TCP.Nome_Cor_Prod,
 				TTP.idTab_Tam_Prod,
 				TTP.Nome_Tam_Prod,
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+				TPAX1.Prodaux1,
+				TPAX2.Prodaux2,				
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TPAX2.Prodaux2,""), " - ", IFNULL(TPAX1.Prodaux1,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1				
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
+					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = TCP.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1	
+					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = TTP.Tam_Prod				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -152,7 +160,7 @@ elseif ($_GET['q'] == 13) {
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
 					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
@@ -187,7 +195,7 @@ elseif ($_GET['q'] == 14) {
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
 					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
@@ -521,15 +529,19 @@ elseif ($_GET['q'] == 92) {
     $result = mysql_query('
             SELECT
 				P.idTab_Prodaux2,
-				CONCAT(IFNULL(P4.Prodaux4,""), " - ", IFNULL(P.Prodaux2,"")) AS Prodaux2
+				P.Prodaux2,
+				P.Prodaux3,
+				P3.Prodaux3,
+				CONCAT(IFNULL(P3.Prodaux3,""), " - ", IFNULL(P.Prodaux2,"")) AS Prodaux2
             FROM
                 Tab_Prodaux2 AS P
-					LEFT JOIN Tab_Prodaux4 AS P4 ON P4.idTab_Prodaux4 = P.Prodaux4 
+					LEFT JOIN Tab_Prodaux3 AS P3 ON P3.idTab_Prodaux3 = P.Prodaux3
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.Prodaux3 = ' . $_SESSION['Produto']['Prodaux3'] . ' 
 			ORDER BY 
-				P4.Prodaux4 ASC,
+				P3.Prodaux3 ASC,
 				P.Prodaux2 ASC
     ');
 
@@ -609,9 +621,11 @@ elseif ($_GET['q'] == 97) {
 				P.idTab_Cor_Prod,
 				P.Cor_Prod,
 				P.idTab_Produto,
-				CONCAT(IFNULL(P.Nome_Cor_Prod,"")) AS Nome_Cor_Prod
+				TPAUX2.Prodaux2,
+				CONCAT(IFNULL(TPAUX2.Prodaux2,"")) AS Nome_Cor_Prod
             FROM
                 Tab_Cor_Prod AS P
+					LEFT JOIN Tab_Prodaux2 AS TPAUX2 ON TPAUX2.idTab_Prodaux2 = P.Cor_Prod
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND

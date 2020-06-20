@@ -1396,12 +1396,12 @@ class Produtos extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PDCount']; $i++) {
 
-            if ($this->input->post('Cat_Prod' . $i) || $this->input->post('Cor_Prod_Aux2' . $i) || 
+            if ($this->input->post('Cat_Prod' . $i) || $this->input->post('Cor_Prod' . $i) || 
 				$this->input->post('Tam_Prod_Aux1' . $i) || $this->input->post('Cod_Prod' . $i) || $this->input->post('Nome_Prod' . $i) ||
 				$this->input->post('Ativo' . $i)){
 
 				$data['derivados'][$j]['Cat_Prod'] = $this->input->post('Cat_Prod' . $i);
-				$data['derivados'][$j]['Cor_Prod_Aux2'] = $this->input->post('Cor_Prod_Aux2' . $i);
+				$data['derivados'][$j]['Cor_Prod'] = $this->input->post('Cor_Prod' . $i);
 				$data['derivados'][$j]['Tam_Prod_Aux1'] = $this->input->post('Tam_Prod_Aux1' . $i);
 				$data['derivados'][$j]['Cod_Prod'] = $this->input->post('Cod_Prod' . $i);
 				$data['derivados'][$j]['Nome_Prod'] = $this->input->post('Nome_Prod' . $i);
@@ -1444,7 +1444,7 @@ class Produtos extends CI_Controller {
 		$data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux34();
+		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Cat_Prod'] = $this->Prodaux3_model->select_prodaux3();
 		#$data['select']['Cor_Prod'] = $this->Basico_model->select_cor_prod();
@@ -1658,7 +1658,7 @@ class Produtos extends CI_Controller {
 						$tamanho = $data['tamanho'][$k]['idTab_Tam_Prod'];
 						$nome_tamanho = $data['tamanho'][$k]['Nome_Tam_Prod'];
 
-						$data['derivados'][$j][$k]['Cor_Prod_Aux2'] = $tipo;
+						$data['derivados'][$j][$k]['Cor_Prod'] = $tipo;
 						$data['derivados'][$j][$k]['Tam_Prod_Aux1'] = $tamanho;
 						$data['derivados'][$j][$k]['Cat_Prod'] = $categoria;
 						$data['derivados'][$j][$k]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
@@ -1824,11 +1824,11 @@ class Produtos extends CI_Controller {
 		$j = 1;
         for ($i = 1; $i <= $data['count']['PDCount']; $i++) {
 
-            if ($this->input->post('Cat_Prod' . $i) || $this->input->post('Cor_Prod_Aux2' . $i) || 
+            if ($this->input->post('Cat_Prod' . $i) || $this->input->post('Cor_Prod' . $i) || 
 				$this->input->post('Tam_Prod_Aux1' . $i) || $this->input->post('Cod_Prod' . $i) || $this->input->post('Nome_Prod' . $i)){
 				$data['derivados'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
 				#$data['derivados'][$j]['Cat_Prod'] = $this->input->post('Cat_Prod' . $i);
-				$data['derivados'][$j]['Cor_Prod_Aux2'] = $this->input->post('Cor_Prod_Aux2' . $i);
+				$data['derivados'][$j]['Cor_Prod'] = $this->input->post('Cor_Prod' . $i);
 				$data['derivados'][$j]['Tam_Prod_Aux1'] = $this->input->post('Tam_Prod_Aux1' . $i);
 				#$data['derivados'][$j]['Cod_Prod'] = $this->input->post('Cod_Prod' . $i);
 				$data['derivados'][$j]['Nome_Prod'] = $this->input->post('Nome_Prod' . $i);
@@ -1929,7 +1929,7 @@ class Produtos extends CI_Controller {
 		
         #### Tab_Produto ####
 
-		#$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		#$this->form_validation->set_rules('Prodaux4', 'Modelo', 'required|trim');
 		#$this->form_validation->set_rules('Prodaux2', 'Tipo', 'required|trim');
 		#$this->form_validation->set_rules('Prodaux1', 'Esp', 'required|trim');
@@ -1952,10 +1952,9 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Cat_Prod'] = $this->Prodaux3_model->select_prodaux3();
-		$data['select']['Cor_Prod'] = $this->Prodaux2_model->select_prodaux24();
+		$data['select']['Cor_Prod'] = $this->Basico_model->select_cor_prod();
 		$data['select']['Tam_Prod'] = $this->Prodaux1_model->select_prodaux14();
 		$data['select']['Tam_Prod_Aux1'] = $this->Basico_model->select_tam_prod();
-		$data['select']['Cor_Prod_Aux2'] = $this->Basico_model->select_cor_prod();
 		$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
@@ -2223,8 +2222,8 @@ class Produtos extends CI_Controller {
                     $data['update']['derivados']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod_Aux2'].'.'.$data['derivados'][$j]['Tam_Prod_Aux1'];
-					$data['update']['derivados']['inserir'][$j]['Cor_Prod_Aux2'] = $data['update']['derivados']['inserir'][$j]['Cor_Prod_Aux2'];
+					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod'].'.'.$data['derivados'][$j]['Tam_Prod_Aux1'];
+					$data['update']['derivados']['inserir'][$j]['Cor_Prod'] = $data['update']['derivados']['inserir'][$j]['Cor_Prod'];
 					$data['update']['derivados']['inserir'][$j]['Tam_Prod_Aux1'] = $data['update']['derivados']['inserir'][$j]['Tam_Prod_Aux1'];                
 				}
 
@@ -2232,8 +2231,8 @@ class Produtos extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod_Aux2'].'.'.$data['derivados'][$j]['Tam_Prod_Aux1'];					
-					$data['update']['derivados']['alterar'][$j]['Cor_Prod_Aux2'] = $data['update']['derivados']['alterar'][$j]['Cor_Prod_Aux2'];
+					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod'].'.'.$data['derivados'][$j]['Tam_Prod_Aux1'];					
+					$data['update']['derivados']['alterar'][$j]['Cor_Prod'] = $data['update']['derivados']['alterar'][$j]['Cor_Prod'];
 					$data['update']['derivados']['alterar'][$j]['Tam_Prod_Aux1'] = $data['update']['derivados']['alterar'][$j]['Tam_Prod_Aux1'];
 				}
 
@@ -2393,11 +2392,11 @@ class Produtos extends CI_Controller {
 		$j = 1;
         for ($i = 1; $i <= $data['count']['PDCount']; $i++) {
 
-            if ($this->input->post('Cat_Prod' . $i) || $this->input->post('Cor_Prod_Aux2' . $i) || $this->input->post('Valor_Produto' . $i) || 
+            if ($this->input->post('Cat_Prod' . $i) || $this->input->post('Cor_Prod' . $i) || $this->input->post('Valor_Produto' . $i) || 
 				$this->input->post('Tam_Prod_Aux1' . $i) || $this->input->post('Cod_Prod' . $i) || $this->input->post('Nome_Prod' . $i)){
 				$data['derivados'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
 				#$data['derivados'][$j]['Cat_Prod'] = $this->input->post('Cat_Prod' . $i);
-				$data['derivados'][$j]['Cor_Prod_Aux2'] = $this->input->post('Cor_Prod_Aux2' . $i);
+				$data['derivados'][$j]['Cor_Prod'] = $this->input->post('Cor_Prod' . $i);
 				$data['derivados'][$j]['Tam_Prod_Aux1'] = $this->input->post('Tam_Prod_Aux1' . $i);
 				#$data['derivados'][$j]['Cod_Prod'] = $this->input->post('Cod_Prod' . $i);
 				$data['derivados'][$j]['Nome_Prod'] = $this->input->post('Nome_Prod' . $i);
@@ -2502,7 +2501,7 @@ class Produtos extends CI_Controller {
 		
         #### Tab_Produto ####
 
-		#$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		#$this->form_validation->set_rules('Prodaux4', 'Modelo', 'required|trim');
 		#$this->form_validation->set_rules('Prodaux2', 'Tipo', 'required|trim');
 		#$this->form_validation->set_rules('Prodaux1', 'Esp', 'required|trim');
@@ -2525,9 +2524,8 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Cat_Prod'] = $this->Prodaux3_model->select_prodaux3();
-		$data['select']['Cor_Prod'] = $this->Prodaux2_model->select_prodaux24();
+		$data['select']['Cor_Prod'] = $this->Basico_model->select_cor_prod();
 		$data['select']['Tam_Prod'] = $this->Prodaux1_model->select_prodaux14();
-		$data['select']['Cor_Prod_Aux2'] = $this->Basico_model->select_cor_prod();
 		$data['select']['Tam_Prod_Aux1'] = $this->Basico_model->select_tam_prod();
 		$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
@@ -2798,8 +2796,8 @@ class Produtos extends CI_Controller {
                     $data['update']['derivados']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod_Aux2'].'.'.$data['derivados'][$j]['Tam_Prod_Aux1'];
-					$data['update']['derivados']['inserir'][$j]['Cor_Prod_Aux2'] = $data['update']['derivados']['inserir'][$j]['Cor_Prod_Aux2'];
+					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod'].'.'.$data['derivados'][$j]['Tam_Prod_Aux1'];
+					$data['update']['derivados']['inserir'][$j]['Cor_Prod'] = $data['update']['derivados']['inserir'][$j]['Cor_Prod'];
 					$data['update']['derivados']['inserir'][$j]['Tam_Prod_Aux1'] = $data['update']['derivados']['inserir'][$j]['Tam_Prod_Aux1'];                
 				}
 
@@ -2807,8 +2805,8 @@ class Produtos extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod_Aux2'].'.'.$data['derivados'][$j]['Tam_Prod_Aux1'];					
-					$data['update']['derivados']['alterar'][$j]['Cor_Prod_Aux2'] = $data['update']['derivados']['alterar'][$j]['Cor_Prod_Aux2'];
+					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod'].'.'.$data['derivados'][$j]['Tam_Prod_Aux1'];					
+					$data['update']['derivados']['alterar'][$j]['Cor_Prod'] = $data['update']['derivados']['alterar'][$j]['Cor_Prod'];
 					$data['update']['derivados']['alterar'][$j]['Tam_Prod_Aux1'] = $data['update']['derivados']['alterar'][$j]['Tam_Prod_Aux1'];
 				}
 
@@ -2884,7 +2882,7 @@ class Produtos extends CI_Controller {
             'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			#'Prodaux3',
 			'Prodaux4',
 			'Ativo',
 			'VendaSite',
@@ -2933,7 +2931,6 @@ class Produtos extends CI_Controller {
         }
         $data['count']['SCount'] = $j - 1;
 		
-		/*
         $j = 1;
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
 
@@ -2949,22 +2946,6 @@ class Produtos extends CI_Controller {
 
         }
         $data['count']['PCount'] = $j - 1;
-		*/
-		
-        $j = 1;
-        for ($i = 1; $i <= $data['count']['PCount']; $i++) {
-
-            if ($this->input->post('Nome_Cor_Prod' . $i) || $this->input->post('Cor_Prod' . $i) || $this->input->post('idTab_Promocao' . $i)){
-				$data['produto'][$j]['idTab_Cor_Prod'] = $this->input->post('idTab_Cor_Prod' . $i);
-                $data['produto'][$j]['Nome_Cor_Prod'] = $this->input->post('Nome_Cor_Prod' . $i);
-				$data['produto'][$j]['Cor_Prod'] = $this->input->post('Cor_Prod' . $i);
-				$data['produto'][$j]['idTab_Promocao'] = $this->input->post('idTab_Promocao' . $i);
-                $j++;
-            }
-
-        }
-        $data['count']['PCount'] = $j - 1;		
-		
 		
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
@@ -2986,11 +2967,11 @@ class Produtos extends CI_Controller {
 		$j = 1;
         for ($i = 1; $i <= $data['count']['PDCount']; $i++) {
 
-            if ($this->input->post('Cat_Prod' . $i) || $this->input->post('Cor_Prod_Aux2' . $i) || $this->input->post('Valor_Produto' . $i) || 
+            if ($this->input->post('Cat_Prod' . $i) || $this->input->post('Cor_Prod' . $i) || $this->input->post('Valor_Produto' . $i) || 
 				$this->input->post('Tam_Prod_Aux1' . $i) || $this->input->post('Cod_Prod' . $i) || $this->input->post('Nome_Prod' . $i)){
 				$data['derivados'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
 				#$data['derivados'][$j]['Cat_Prod'] = $this->input->post('Cat_Prod' . $i);
-				$data['derivados'][$j]['Cor_Prod_Aux2'] = $this->input->post('Cor_Prod_Aux2' . $i);
+				$data['derivados'][$j]['Cor_Prod'] = $this->input->post('Cor_Prod' . $i);
 				$data['derivados'][$j]['Tam_Prod_Aux1'] = $this->input->post('Tam_Prod_Aux1' . $i);
 				#$data['derivados'][$j]['Cod_Prod'] = $this->input->post('Cod_Prod' . $i);
 				$data['derivados'][$j]['Nome_Prod'] = $this->input->post('Nome_Prod' . $i);
@@ -3047,22 +3028,6 @@ class Produtos extends CI_Controller {
 */				
             }
 			
-			/*
-            #### Tab_Cor_Prod ####
-            $data['produto'] = $this->Produtos_model->get_produto($id);
-            if (count($data['produto']) > 0) {
-                $data['produto'] = array_combine(range(1, count($data['produto'])), array_values($data['produto']));
-                $data['count']['PCount'] = count($data['produto']);
-
-                if (isset($data['produto'])) {
-
-                    for($j=1; $j <= $data['count']['PCount']; $j++)
-						
-                }
-				
-            }
-			*/
-			
             #### Tab_Cor_Prod ####
             $data['produto'] = $this->Produtos_model->get_produto($id);
             if (count($data['produto']) > 0) {
@@ -3075,7 +3040,7 @@ class Produtos extends CI_Controller {
 						
                 }
 */				
-            }			
+            }
 			
             #### Tab_Tam_Prod ####
             $data['procedimento'] = $this->Produtos_model->get_procedimento($id);
@@ -3111,7 +3076,7 @@ class Produtos extends CI_Controller {
 		
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		#$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		#$this->form_validation->set_rules('Prodaux4', 'Modelo', 'required|trim');
 		#$this->form_validation->set_rules('Prodaux2', 'Tipo', 'required|trim');
 		#$this->form_validation->set_rules('Prodaux1', 'Esp', 'required|trim');
@@ -3134,10 +3099,9 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Cat_Prod'] = $this->Prodaux3_model->select_prodaux3();
-		$data['select']['Cor_Prod'] = $this->Prodaux2_model->select_prodaux24();
+		$data['select']['Cor_Prod'] = $this->Basico_model->select_cor_prod();
 		$data['select']['Tam_Prod'] = $this->Prodaux1_model->select_prodaux14();
 		$data['select']['Tam_Prod_Aux1'] = $this->Basico_model->select_tam_prod();
-		$data['select']['Cor_Prod_Aux2'] = $this->Basico_model->select_cor_prod();
 		$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_prod_der0();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
@@ -3308,8 +3272,6 @@ class Produtos extends CI_Controller {
 
             }
 			
-			
-			/*
             #### Tab_Cor_Prod ####
             $data['update']['produto']['anterior'] = $this->Produtos_model->get_produto($data['produtos']['idTab_Produto']);
             if (isset($data['produto']) || (!isset($data['produto']) && isset($data['update']['produto']['anterior']) ) ) {
@@ -3352,49 +3314,6 @@ class Produtos extends CI_Controller {
                     $data['update']['produto']['bd']['excluir'] = $this->Produtos_model->delete_produto($data['update']['produto']['excluir']);
 
             }
-			*/
-			
-			
-            #### Tab_Cor_Prod ####
-            $data['update']['produto']['anterior'] = $this->Produtos_model->get_produto($data['produtos']['idTab_Produto']);
-            if (isset($data['produto']) || (!isset($data['produto']) && isset($data['update']['produto']['anterior']) ) ) {
-
-                if (isset($data['produto']))
-                    $data['produto'] = array_values($data['produto']);
-                else
-                    $data['produto'] = array();
-
-                //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
-                $data['update']['produto'] = $this->basico->tratamento_array_multidimensional($data['produto'], $data['update']['produto']['anterior'], 'idTab_Cor_Prod');
-
-                $max = count($data['update']['produto']['inserir']);
-                for($j=0;$j<$max;$j++) {
-					$data['update']['produto']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-                    $data['update']['produto']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-					$data['update']['produto']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-                    $data['update']['produto']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
-					$data['update']['produto']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['produto']['inserir'][$j]['idTab_Promocao'] = $data['update']['produto']['inserir'][$j]['idTab_Promocao'];
-					$data['update']['produto']['inserir'][$j]['Nome_Cor_Prod'] = trim(mb_strtoupper($data['update']['produto']['inserir'][$j]['Nome_Cor_Prod'], 'ISO-8859-1'));
-				}
-
-                $max = count($data['update']['produto']['alterar']);
-                for($j=0;$j<$max;$j++) {
-					$data['update']['produto']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['produto']['alterar'][$j]['idTab_Promocao'] = $data['update']['produto']['alterar'][$j]['idTab_Promocao'];
-					$data['update']['produto']['alterar'][$j]['Nome_Cor_Prod'] = trim(mb_strtoupper($data['update']['produto']['alterar'][$j]['Nome_Cor_Prod'], 'ISO-8859-1'));
-				}
-
-                if (count($data['update']['produto']['inserir']))
-                    $data['update']['produto']['bd']['inserir'] = $this->Produtos_model->set_produto($data['update']['produto']['inserir']);
-
-                if (count($data['update']['produto']['alterar']))
-                    $data['update']['produto']['bd']['alterar'] =  $this->Produtos_model->update_produto($data['update']['produto']['alterar']);
-
-                if (count($data['update']['produto']['excluir']))
-                    $data['update']['produto']['bd']['excluir'] = $this->Produtos_model->delete_produto($data['update']['produto']['excluir']);
-
-            }			
 			
             #### Tab_Tam_Prod ####
             $data['update']['procedimento']['anterior'] = $this->Produtos_model->get_procedimento($data['produtos']['idTab_Produto']);
@@ -3460,8 +3379,8 @@ class Produtos extends CI_Controller {
                     $data['update']['derivados']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod_Aux2'].'.'.$data['derivados'][$j]['Tam_Prod_Aux1'];
-					$data['update']['derivados']['inserir'][$j]['Cor_Prod_Aux2'] = $data['update']['derivados']['inserir'][$j]['Cor_Prod_Aux2'];
+					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod'].'.'.$data['derivados'][$j]['Tam_Prod_Aux1'];
+					$data['update']['derivados']['inserir'][$j]['Cor_Prod'] = $data['update']['derivados']['inserir'][$j]['Cor_Prod'];
 					$data['update']['derivados']['inserir'][$j]['Tam_Prod_Aux1'] = $data['update']['derivados']['inserir'][$j]['Tam_Prod_Aux1'];                
 				}
 
@@ -3470,8 +3389,8 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['alterar'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod_Aux2'].'.'.$data['derivados'][$j]['Tam_Prod_Aux1'];					
-					$data['update']['derivados']['alterar'][$j]['Cor_Prod_Aux2'] = $data['update']['derivados']['alterar'][$j]['Cor_Prod_Aux2'];
+					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod'].'.'.$data['derivados'][$j]['Tam_Prod_Aux1'];					
+					$data['update']['derivados']['alterar'][$j]['Cor_Prod'] = $data['update']['derivados']['alterar'][$j]['Cor_Prod'];
 					$data['update']['derivados']['alterar'][$j]['Tam_Prod_Aux1'] = $data['update']['derivados']['alterar'][$j]['Tam_Prod_Aux1'];
 					$data['update']['derivados']['alterar'][$j]['Valor_Produto'] = str_replace(',', '.', str_replace('.', '', $data['update']['derivados']['alterar'][$j]['Valor_Produto']));
 				}

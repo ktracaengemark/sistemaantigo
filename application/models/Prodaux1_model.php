@@ -106,7 +106,8 @@ class Prodaux1_model extends CI_Model {
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP1.Prodaux3
 			WHERE
                 TP1.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-                TP1.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+                TP1.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				TP1.Prodaux3 = ' . $_SESSION['Produto']['Prodaux3'] . '
 			ORDER BY 
 				TP3.Prodaux3 ASC,
 				TP1.Prodaux1 ASC
