@@ -1098,7 +1098,17 @@
 												<div class="panel panel-info">
 													<div class="panel-heading">			
 														<div class="row">																					
-															<div class="col-md-5">
+															<div class="col-md-1">
+																<label for="QtdProdutoDesconto">QtdPrd <?php echo $i ?>:</label>
+																<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto<?php echo $i ?>" placeholder="0"
+																		name="QtdProdutoDesconto<?php echo $i ?>" value="<?php echo $valor[$i]['QtdProdutoDesconto'] ?>">
+															</div>
+															<div class="col-md-1">
+																<label for="QtdProdutoIncremento">QtdInc <?php echo $i ?>:</label>
+																<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento<?php echo $i ?>" placeholder="0"
+																		name="QtdProdutoIncremento<?php echo $i ?>" value="<?php echo $valor[$i]['QtdProdutoIncremento'] ?>">
+															</div>
+															<div class="col-md-4">
 																<label for="idTab_Produtos<?php echo $i ?>">Produto <?php echo $i ?></label>
 																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 																		 id="listadinamicad<?php echo $i ?>" name="idTab_Produtos<?php echo $i ?>">
@@ -1123,7 +1133,7 @@
 																</div>
 															</div>
 															<div class="col-md-2">
-																<label for="Desconto">Tipo de Desconto <?php echo $i ?></label>
+																<label for="Desconto">TipoValor <?php echo $i ?></label>
 																<?php if ($i == 1) { ?>
 																<?php } ?>
 																<select data-placeholder="Selecione uma opção..." class="form-control" readonly=""
@@ -1140,8 +1150,8 @@
 																	?>
 																</select>
 															</div>											
-															<div class="col-md-2">
-																<label for="idTab_Promocao">Promoção <?php echo $i ?></label>
+															<div class="col-md-1">
+																<label for="idTab_Promocao">Prom. <?php echo $i ?></label>
 																<input type="text" class="form-control"  id="idTab_Promocao<?php echo $i ?>" <?php echo $readonly; ?>
 																		readonly=""  name="idTab_Promocao<?php echo $i ?>" value="<?php echo $valor[$i]['idTab_Promocao']; ?>">
 															</div>

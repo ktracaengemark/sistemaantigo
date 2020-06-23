@@ -1442,7 +1442,21 @@ function adicionaValorDesconto() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-5">\
+						<div class="col-md-1">\
+							<label for="QtdProdutoDesconto">QtdPrd:</label><br>\
+							<div class="input-group">\
+								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto'+pt+'" placeholder="0"\
+								    name="QtdProdutoDesconto'+pt+'" value="1">\
+							</div>\
+						</div>\
+						<div class="col-md-1">\
+							<label for="QtdProdutoIncremento">QtdInc:</label><br>\
+							<div class="input-group">\
+								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento'+pt+'" placeholder="0"\
+								    name="QtdProdutoIncremento'+pt+'" value="1">\
+							</div>\
+						</div>\
+						<div class="col-md-4">\
 							<label for="idTab_Produtos">Item '+pt+':</label><br>\
 							<select class="form-control Chosen" id="listadinamicad'+pt+'" name="idTab_Produtos'+pt+'">\
 								<option value="">-- Selecione uma opção --</option>\

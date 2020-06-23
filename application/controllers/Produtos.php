@@ -2914,6 +2914,8 @@ class Produtos extends CI_Controller {
                 $data['valor'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
 				$data['valor'][$j]['idTab_Promocao'] = $this->input->post('idTab_Promocao' . $i);
                 $data['valor'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
+                $data['valor'][$j]['QtdProdutoDesconto'] = $this->input->post('QtdProdutoDesconto' . $i);
+				$data['valor'][$j]['QtdProdutoIncremento'] = $this->input->post('QtdProdutoIncremento' . $i);				
                 $j++;
             }
 
@@ -3162,8 +3164,8 @@ class Produtos extends CI_Controller {
                     $data['update']['valor']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['valor']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['valor']['inserir'][$j]['Desconto'] = '1';
-					$data['update']['valor']['inserir'][$j]['QtdProdutoIncremento'] = '1';
-					$data['update']['valor']['inserir'][$j]['QtdProdutoIncremento'] = '1';
+					$data['update']['valor']['inserir'][$j]['QtdProdutoDesconto'] = $data['update']['valor']['inserir'][$j]['QtdProdutoDesconto'];
+					$data['update']['valor']['inserir'][$j]['QtdProdutoIncremento'] = $data['update']['valor']['inserir'][$j]['QtdProdutoIncremento'];
 					$data['update']['valor']['inserir'][$j]['idTab_Promocao'] = '0';
 					$data['update']['valor']['inserir'][$j]['Prodaux3'] = $data['produtos']['Prodaux3'];
 					$data['update']['valor']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
@@ -3174,6 +3176,8 @@ class Produtos extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
 					$data['update']['valor']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ValorProduto']));
 					$data['update']['valor']['alterar'][$j]['idTab_Produtos'] = $data['update']['valor']['alterar'][$j]['idTab_Produtos'];
+					$data['update']['valor']['alterar'][$j]['QtdProdutoDesconto'] = $data['update']['valor']['alterar'][$j]['QtdProdutoDesconto'];
+					$data['update']['valor']['alterar'][$j]['QtdProdutoIncremento'] = $data['update']['valor']['alterar'][$j]['QtdProdutoIncremento'];
 					$data['update']['valor']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 				}
 
@@ -3296,7 +3300,7 @@ class Produtos extends CI_Controller {
                     $data['update']['derivados']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod_Aux2'].'.'.$data['derivados'][$j]['Tam_Prod_Aux1'];
+					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Cor_Prod_Aux2'].':'.$data['derivados'][$j]['Tam_Prod_Aux1'];
 					$data['update']['derivados']['inserir'][$j]['Cor_Prod_Aux2'] = $data['update']['derivados']['inserir'][$j]['Cor_Prod_Aux2'];
 					$data['update']['derivados']['inserir'][$j]['Tam_Prod_Aux1'] = $data['update']['derivados']['inserir'][$j]['Tam_Prod_Aux1'];                
 				}
@@ -3306,7 +3310,7 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['alterar'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Cor_Prod_Aux2'].'.'.$data['derivados'][$j]['Tam_Prod_Aux1'];					
+					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Cor_Prod_Aux2'].':'.$data['derivados'][$j]['Tam_Prod_Aux1'];					
 					$data['update']['derivados']['alterar'][$j]['Cor_Prod_Aux2'] = $data['update']['derivados']['alterar'][$j]['Cor_Prod_Aux2'];
 					$data['update']['derivados']['alterar'][$j]['Tam_Prod_Aux1'] = $data['update']['derivados']['alterar'][$j]['Tam_Prod_Aux1'];
 					$data['update']['derivados']['alterar'][$j]['Valor_Produto'] = str_replace(',', '.', str_replace('.', '', $data['update']['derivados']['alterar'][$j]['Valor_Produto']));
