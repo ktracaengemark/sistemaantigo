@@ -41,6 +41,33 @@ if ($_GET['q']==1) {
 
 }
 
+elseif ($_GET['q'] == 16) {
+
+    $result = mysql_query('
+            SELECT
+                idTab_Atributo,
+				idTab_Catprod,
+                CONCAT(IFNULL(Atributo,"")) AS Atributo
+            FROM 
+                Tab_Atributo 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				idTab_Catprod = ' . $_SESSION['Catprod']['idTab_Catprod'] . '
+			ORDER BY 
+				Atributo ASC	
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Atributo'],
+            'name' => utf8_encode($row['Atributo']),
+        );
+    } 
+    
+}
+
 elseif ($_GET['q'] == 11) {
 
     $result = mysql_query('

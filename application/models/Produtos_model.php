@@ -174,7 +174,8 @@ class Produtos_model extends CI_Model {
 			FROM 
 				Tab_Valor 
 			WHERE 
-				idTab_Modelo = ' . $data . '
+				idTab_Modelo = ' . $data . ' AND
+				idTab_Promocao = "0"
 		');
         $query = $query->result_array();
 
@@ -432,7 +433,7 @@ class Produtos_model extends CI_Model {
 
         $query = $this->db->delete('Tab_Produto', array('idTab_Produto' => $id));
         $query = $this->db->delete('Tab_Valor', array('idTab_Modelo' => $id));
-        $query = $this->db->delete('Tab_Cat_Prod', array('idTab_Produto' => $id));
+        #$query = $this->db->delete('Tab_Cat_Prod', array('idTab_Produto' => $id));
         $query = $this->db->delete('Tab_Cor_Prod', array('idTab_Produto' => $id));
         $query = $this->db->delete('Tab_Tam_Prod', array('idTab_Produto' => $id));
 		$query = $this->db->delete('Tab_Produtos', array('idTab_Produto' => $id));

@@ -7507,6 +7507,122 @@ exit();*/
         }
 
     }
+
+	public function list_catprod($data, $completo) {
+
+		$data['Catprod'] = ($data['Catprod']) ? ' AND TPM.idTab_Catprod = ' . $data['Catprod'] : FALSE;
+		#$data['TipoProduto'] = ($data['TipoProduto']) ? ' AND TTP.idTab_TipoProduto = ' . $data['TipoProduto'] : FALSE;
+		#$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
+		#$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
+        #$data['Prodaux3'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
+		$data['Campo'] = (!$data['Campo']) ? 'TPD.Produtos' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+
+        $query = $this->db->query('
+            SELECT
+                TPM.idTab_Catprod,
+				TPM.Catprod,
+				TPM.idSis_Empresa,
+				TAT.Atributo,
+				TOP.Opcao
+            FROM
+                Tab_Catprod AS TPM
+					LEFT JOIN Tab_Atributo AS TAT ON TAT.idTab_Catprod = TPM.idTab_Catprod
+					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Atributo = TAT.idTab_Atributo
+            WHERE
+                TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY
+				TPM.Catprod ASC,
+				TAT.Atributo ASC,
+				TOP.Opcao ASC
+        ');
+
+        /*
+        ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '	, TPM.Promocao ASC
+		#AND
+        #P.idApp_Profissional = OT.idApp_Cliente
+
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            #$somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somapago=$somapagar=$somareal=$balanco=$ant=0;
+            #$subtotal=$total=0;
+			foreach ($query->result() as $row) {
+				/*
+				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
+                $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
+                $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
+                $row->DataPago = $this->basico->mascara_data($row->DataPago, 'barras');
+
+                $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
+				$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
+				$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
+                $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
+				*/
+                #esse trecho pode ser melhorado, serve para somar apenas uma vez
+                #o valor da entrada que pode aparecer mais de uma vez
+                /*
+				if ($ant != $row->idApp_OrcaTrata) {
+                    $ant = $row->idApp_OrcaTrata;
+                    $somaentrada += $row->ValorEntradaOrca;
+                }
+                else {
+                    $row->ValorEntradaOrca = FALSE;
+                    $row->DataEntradaOrca = FALSE;
+                }
+				
+                
+				$valor_produto = $row->ValorProduto;
+				$qtd_produto = $row->QtdProdutoDesconto;
+				$subtotal += $valor_produto * $qtd_produto;
+				
+				
+				$somarecebido += $row->ValorPago;
+                $somareceber += $row->ValorParcela;
+				
+
+                $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
+                $row->ValorParcela = number_format($row->ValorParcela, 2, ',', '.');
+                $row->ValorPago = number_format($row->ValorPago, 2, ',', '.');
+				*/
+            }
+            /*
+				$total = $subtotal;
+			
+			$somareceber -= $somarecebido;
+            $somareal = $somarecebido;
+            $balanco = $somarecebido + $somareceber;
+
+			$somapagar -= $somapago;
+			$somareal2 = $somapago;
+			$balanco2 = $somapago + $somapagar;
+			
+            $query->soma = new stdClass();
+            
+			$query->soma->somareceber = number_format($somareceber, 2, ',', '.');
+            $query->soma->somarecebido = number_format($somarecebido, 2, ',', '.');
+            $query->soma->somareal = number_format($somareal, 2, ',', '.');
+            $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
+            $query->soma->balanco = number_format($balanco, 2, ',', '.');
+			$query->soma->somapagar = number_format($somapagar, 2, ',', '.');
+            $query->soma->somapago = number_format($somapago, 2, ',', '.');
+            $query->soma->somareal2 = number_format($somareal2, 2, ',', '.');
+            $query->soma->balanco2 = number_format($balanco2, 2, ',', '.');
+			
+			$query->soma->total = number_format($total, 2, ',', '.');
+			*/
+            return $query;
+        }
+
+    }
 	
 	public function list_orcamentoonline($data, $completo) {
 		

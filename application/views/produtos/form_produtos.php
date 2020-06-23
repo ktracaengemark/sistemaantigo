@@ -376,6 +376,84 @@
 							</div>
 						</div>
 						-->
+
+						<div class="col-md-4">
+							<div class="panel-group" id="accordion7" role="tablist" aria-multiselectable="true">
+								<div class="panel panel-primary">
+									 <div class="panel-heading" role="tab" id="heading7" data-toggle="collapse" data-parent="#accordion7" data-target="#collapse7">
+										<h4 class="panel-title">
+											<a class="accordion-toggle">
+												<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+												Adicionar Tipo
+											</a>
+										</h4>
+									</div>
+
+									<div id="collapse7" class="panel-collapse" role="tabpanel" aria-labelledby="heading7" aria-expanded="false">
+										<div class="panel-body">
+
+											<input type="hidden" name="TCount" id="TCount" value="<?php echo $count['TCount']; ?>"/>
+
+											<div class="input_fields_wrap99">
+
+											<?php
+											for ($i=1; $i <= $count['TCount']; $i++) {
+											?>
+
+											<?php if ($metodo > 1) { ?>
+											<input type="hidden" name="idTab_Cor_Prod<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Cor_Prod']; ?>"/>
+											<?php } ?>
+											<div class="form-group" id="99div<?php echo $i ?>">
+												<div class="panel panel-warning">
+													<div class="panel-heading">
+														<div class="row">
+															<div class="col-md-10">
+																<label for="Cor_Prod">Tipo <?php echo $i ?></label>
+																<?php if ($i == 1) { ?>
+																<?php } ?>
+																<select data-placeholder="Sel. Tipo" class="form-control Chosen"
+																		 id="listadinamica99<?php echo $i ?>" name="Cor_Prod<?php echo $i ?>">
+																	<option value="">-- Sel. Tipo --</option>
+																	<?php
+																	foreach ($select['Cor_Prod'] as $key => $row) {
+																		if ($produto[$i]['Cor_Prod'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	?>
+																</select>
+															</div>
+															<div class="col-md-1">
+																<label><br></label><br>
+																<button type="button" id="<?php echo $i ?>" class="remove_field99 btn btn-danger">
+																	<span class="glyphicon glyphicon-trash"></span>
+																</button>
+															</div>
+														</div>
+													</div>
+												</div>	
+											</div>
+
+											<?php
+											}
+											?>
+
+											</div>
+											
+											<div class="form-group">
+												<a class="add_field_button99 btn btn-xs btn-danger" onclick="adicionaTipo()">
+													<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Tipo
+												</a>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>						
+						<!--
 						<div class="col-md-4">	
 							<div class="panel-group" id="accordion5" role="tablist" aria-multiselectable="true">
 								<div class="panel panel-primary">
@@ -411,7 +489,7 @@
 														<div class="panel panel-warning">
 															<div class="panel-heading">
 																<div class="row">
-																	<!--
+																	
 																	<div class="col-md-6">
 																		<label for="Nome_Cor_Prod">Tipo <?php echo $i ?></label>
 																		<div class="input-group">
@@ -419,7 +497,7 @@
 																				name="Nome_Cor_Prod<?php echo $i ?>" value="<?php echo $produto[$i]['Nome_Cor_Prod'] ?>">
 																		</div>
 																	</div>
-																	-->
+																	
 																	<div class="col-md-10">
 																		<label for="Cor_Prod">Tipo <?php echo $i ?></label>
 																		<?php if ($i == 1) { ?>
@@ -438,7 +516,7 @@
 																			?>
 																		</select>
 																	</div>
-																	<!--
+																	
 																	<div class="col-md-10">
 																		<label for="Prodaux1">Tamanho / Esp <?php echo $i ?></label>
 																		<?php if ($i == 1) { ?>
@@ -457,7 +535,7 @@
 																			?>
 																		</select>
 																	</div>
-																	-->
+																	
 																	
 																	<div class="col-md-1">
 																		<label><br></label><br>
@@ -495,8 +573,11 @@
 										</div>
 									</div>
 								</div>
-							</div>			
+							</div>
+						</div>	
 						</div>						
+						-->
+						
 						<div class="col-md-4">	
 							<div class="panel-group" id="accordion6" role="tablist" aria-multiselectable="true">
 								<div class="panel panel-primary">

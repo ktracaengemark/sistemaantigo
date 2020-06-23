@@ -149,6 +149,8 @@
 							<li role="separator" class="divider"></li>							
 							<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-usd"></span> Produtos Derivados </a></li>
 							<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>relatorio/catprod"><span class="glyphicon glyphicon-usd"></span> Categorias </a></li>
+							<li role="separator" class="divider"></li>							
 							<li><a href="<?php echo base_url() ?>relatorio/promocao"><span class="glyphicon glyphicon-usd"></span> Promoções </a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-gift"></span> Produtos & Estoque</a></li>							

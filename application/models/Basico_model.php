@@ -429,7 +429,7 @@ class Basico_model extends CI_Model {
     }
 
 	public function get_permissao($data) {
-
+		
         if (isset($data) && $data) {
 
 			$query = $this->db->query('SELECT * FROM Sis_Permissao WHERE idSis_Permissao = "' . $data . '"');
@@ -3183,5 +3183,85 @@ if (isset($data) && $data) {
 
         return $array;
     }
+
+	public function select_catprod($data = FALSE) {
+	
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+				idTab_Catprod,
+                CONCAT(IFNULL(Catprod,"")) AS Catprod
+            FROM 
+                Tab_Catprod 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY 
+				Catprod ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+				idTab_Catprod,
+                CONCAT(IFNULL(Catprod,"")) AS Catprod
+            FROM 
+                Tab_Catprod 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY 
+				Catprod ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Catprod] = $row->Catprod;
+            }
+        }
+
+        return $array;
+    }
+	
+	public function select_atributo($data = FALSE) {
+	
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+                idTab_Atributo,
+				idTab_Catprod,
+                CONCAT(IFNULL(Atributo,"")) AS Atributo
+            FROM 
+                Tab_Atributo 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				idTab_Catprod = ' . $data . ' 
+			ORDER BY 
+				Atributo ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+                idTab_Atributo,
+				idTab_Catprod,
+                CONCAT(IFNULL(Atributo,"")) AS Atributo
+            FROM 
+                Tab_Atributo 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				idTab_Catprod = ' . $data . ' 
+			ORDER BY 
+				Atributo ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Atributo] = $row->Atributo;
+            }
+        }
+
+        return $array;
+    }	
 	
 }
