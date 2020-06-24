@@ -92,30 +92,26 @@ class Orcatrataprint_model extends CI_Model {
 				PV.idApp_OrcaTrata,
 				PV.ConcluidoServico,
 				P.UnidadeProduto,
-				P.CodProd,
-				TP3.Prodaux3,
-				TP1.Prodaux1,
-            	TP2.Prodaux2,
+				P.Cod_Prod,
+
 				TCO.Convenio,
 				V.Convdesc,
 				TFO.NomeFornecedor,
 				CONCAT(IFNULL(PV.idApp_Servico,""), " - " , IFNULL(PV.ConcluidoServico,""), " - Obs.: " , IFNULL(PV.ObsServico,"")) AS idApp_Servico,
 				CONCAT(IFNULL(PV.QtdServico,""), " - " , IFNULL(P.UnidadeProduto,"")) AS QtdServico,
-            	CONCAT(IFNULL(P.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(P.Produtos,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,"")) AS NomeServico,
+            	CONCAT(IFNULL(P.Cod_Prod,""), " -- ", IFNULL(P.Nome_Prod,"")) AS NomeServico,
             	PV.ValorServico
             FROM
             	App_Servico AS PV,
             	Tab_Valor AS V
             		LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
-            		LEFT JOIN Tab_Produto AS P ON P.idTab_Produto = V.idTab_Produto
+            		LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
             		LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
-            		LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = P.Prodaux3
-            		LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
-            		LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = P.Prodaux1
+
             WHERE
             	PV.idApp_OrcaTrata = ' . $data . ' AND
                 PV.idTab_Servico = V.idTab_Valor AND
-            	P.idTab_Produto = V.idTab_Produto
+            	P.idTab_Produtos = V.idTab_Produtos
             ORDER BY
             	PV.idApp_Servico'
         );
@@ -128,6 +124,7 @@ class Orcatrataprint_model extends CI_Model {
 		$query = $this->db->query(
             'SELECT
             	PV.QtdProduto,
+				PV.QtdIncremento,
 				PV.DataValidadeProduto,
 				PV.ObsProduto,
 				PV.idApp_Produto,
@@ -135,29 +132,34 @@ class Orcatrataprint_model extends CI_Model {
 				PV.ConcluidoProduto,
 				PV.DevolvidoProduto,
 				P.UnidadeProduto,
-				P.CodProd,
-				TP3.Prodaux3,
-				TP1.Prodaux1,
-            	TP2.Prodaux2,
+				P.Cod_Prod,
+				TCP.idTab_Cor_Prod,
+				TCP.Nome_Cor_Prod,
+				TTP.idTab_Tam_Prod,
+				TTP.Nome_Tam_Prod,
+				TPAX1.Prodaux1,
+				TPAX2.Prodaux2,
 				TCO.Convenio,
 				V.Convdesc,
 				TFO.NomeFornecedor,
-				CONCAT(IFNULL(PV.QtdProduto,""), " - " , IFNULL(P.UnidadeProduto,"")) AS QtdProduto,
-            	CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,"")) AS NomeProduto,
+				CONCAT(IFNULL(PV.QtdProduto,""), " X " , IFNULL(PV.QtdIncremento,""), " " , IFNULL(P.UnidadeProduto,"")) AS QtdProduto,
+            	CONCAT(IFNULL(P.Cod_Prod,""), " - ", IFNULL(P.Nome_Prod,""), " - ", IFNULL(TPAX2.Prodaux2,""), " - ", IFNULL(TPAX1.Prodaux1,"")) AS NomeProduto,
             	PV.ValorProduto
             FROM
             	App_Produto AS PV,
             	Tab_Valor AS V
             		LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
-            		LEFT JOIN Tab_Produto AS P ON P.idTab_Produto = V.idTab_Produto
+            		LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = P.Cor_Prod_Aux2
+					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = TCP.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = P.Tam_Prod_Aux1	
+					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = TTP.Tam_Prod					
             		LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
-            		LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = P.Prodaux3
-            		LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
-            		LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = P.Prodaux1
+
             WHERE
             	PV.idApp_OrcaTrata = ' . $data . ' AND
                 PV.idTab_Produto = V.idTab_Valor AND
-            	P.idTab_Produto = V.idTab_Produto
+            	P.idTab_Produtos = V.idTab_Produtos
             ORDER BY
             	PV.idApp_Produto'
         );

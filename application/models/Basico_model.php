@@ -1214,6 +1214,70 @@ if (isset($data) && $data) {
         return $array;
     }
 
+	public function select_produtos3($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+                V.idTab_Valor,
+                V.ValorProduto,
+				V.QtdProdutoIncremento,
+				TCP.idTab_Cor_Prod,
+				TCP.Nome_Cor_Prod,
+				TTP.idTab_Tam_Prod,
+				TTP.Nome_Tam_Prod,
+				TPAX1.Prodaux1,
+				TPAX2.Prodaux2,				
+				CONCAT(IFNULL(V.QtdProdutoIncremento,""), " - ", IFNULL(P.Nome_Prod,""), " - ", IFNULL(TPAX2.Prodaux2,""), " - ", IFNULL(TPAX1.Prodaux1,""), " - ", IFNULL(V.ValorProduto,"")) AS NomeProduto
+            FROM
+                Tab_Valor AS V
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = P.Cor_Prod_Aux2
+					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = TCP.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = P.Tam_Prod_Aux1	
+					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = TTP.Tam_Prod					
+            WHERE
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
+				P.idTab_Produtos = V.idTab_Produtos
+			ORDER BY
+				P.Nome_Prod ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+                V.idTab_Valor,
+                V.ValorProduto,
+				V.QtdProdutoIncremento,
+				TCP.idTab_Cor_Prod,
+				TCP.Nome_Cor_Prod,
+				TTP.idTab_Tam_Prod,
+				TTP.Nome_Tam_Prod,
+				TPAX1.Prodaux1,
+				TPAX2.Prodaux2,				
+				CONCAT(IFNULL(V.QtdProdutoIncremento,""), " - ", IFNULL(P.Nome_Prod,""), " - ", IFNULL(TPAX2.Prodaux2,""), " - ", IFNULL(TPAX1.Prodaux1,""), " - ", IFNULL(V.ValorProduto,"")) AS NomeProduto
+            FROM
+                Tab_Valor AS V
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = P.Cor_Prod_Aux2
+					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = TCP.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = P.Tam_Prod_Aux1	
+					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = TTP.Tam_Prod					
+            WHERE
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
+				P.idTab_Produtos = V.idTab_Produtos
+			ORDER BY
+				P.Nome_Prod ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Valor] = $row->NomeProduto;
+            }
+        }
+
+        return $array;
+    }
+	
 	public function select_mod_1($data) {
 		
 		$cat1 = ($data) ? ' AND Prodaux3 = ' . $data : FALSE;

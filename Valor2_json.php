@@ -30,6 +30,7 @@ if ($_GET['tabela']) {
         $event_array[] = array(
             'id' => $row['idTab_' . $_GET['tabela']],
             'valor' => str_replace(".", ",", $row['Valor' . $_GET['campo2']]),
+			'qtdinc' => $row['QtdProdutoIncremento'],
         );
     }
 }
@@ -40,6 +41,7 @@ else {
         $event_array[] = array(
             'id' => $row['idTab_' . $_GET['tabela']],
             'valor' => str_replace(".", ",", $row['Valor' . $_GET['tabela']]),
+			'qtdinc' => $row['QtdProdutoIncremento'],
         );
     }
 

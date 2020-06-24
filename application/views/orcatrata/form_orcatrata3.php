@@ -116,7 +116,7 @@
 <div class="col-md-8 ">
 	<div class="row">
 		<div class="col-md-12 col-lg-12">			
-			<?php echo validation_errors(); ?>
+			<?php #echo validation_errors(); ?>
 			<?php echo form_open_multipart($form_open_path); ?>
 			<div class="panel panel-<?php echo $panel; ?>">
 				<div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
@@ -534,11 +534,18 @@
 														<div class="panel panel-warning">
 															<div class="panel-heading">
 																<div class="row">
-																	<div class="col-md-2">
-																		<label for="QtdProduto">Qtd <?php echo $i ?>:</label>
+																	<div class="col-md-1">
+																		<label for="QtdProduto">Qtd.Item <?php echo $i ?>:</label>
 																		<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
 																				onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																				name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
+																	</div>
+																	<div class="col-md-1">
+																		<label for="QtdIncremento">Qtd.Emb.</label>
+																		<div class="input-group">
+																			<input type="text" class="form-control " id="QtdIncremento<?php echo $i ?>" readonly=""
+																				name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
+																		</div>
 																	</div>
 																	<div class="col-md-6">
 																		<label for="idTab_Produto">Produto:</label>
@@ -571,15 +578,6 @@
 																			<span class="input-group-addon" id="basic-addon1">R$</span>
 																			<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto<?php echo $i ?>"
 																				   name="SubtotalProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalProduto'] ?>">
-																		</div>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-12">
-																		<label for="NomeProduto">NomeProduto</label>
-																		<div class="input-group">
-																			<input type="text" class="form-control " id="NomeProduto<?php echo $i ?>" readonly=""
-																				name="NomeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['NomeProduto'] ?>">
 																		</div>
 																	</div>
 																</div>
@@ -812,7 +810,7 @@
 													</div>
 												</div>
 														
-											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
+											<?php if ($_SESSION['log']['NivelEmpresa'] >= 20 ) { ?>	
 												<input type="hidden" name="SCount" id="SCount" value="<?php echo $count['SCount']; ?>"/>
 
 												<div class="input_fields_wrap10">

@@ -2674,7 +2674,10 @@ function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
             for (i = 0; i < data.length; i++) {
 
                 if (data[i].id == id) {
-
+					
+					//""ou posso usar assim, passando diretamente o qtdinc do id ""
+					$('#QtdIncremento'+num).val(data[i].qtdinc);
+				
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
 
@@ -4759,17 +4762,24 @@ $(document).ready(function () {
                 <div class="panel panel-warning">\
                     <div class="panel-heading">\
                         <div class="row">\
-                            <div class="col-md-2">\
-                                <label for="QtdProduto">Qtd:</label><br>\
+                            <div class="col-md-1">\
+                                <label for="QtdProduto">Qtd.Item:</label><br>\
                                 <div class="input-group">\
                                     <input type="text" class="form-control Numero" maxlength="10" id="QtdProduto'+pc+'" placeholder="0"\
                                         onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
                                        autofocus name="QtdProduto'+pc+'" value="1">\
                                 </div>\
                             </div>\
+                            <div class="col-md-1">\
+                                <label for="QtdIncremento">Qtd.Emb.:</label><br>\
+                                <div class="input-group">\
+                                    <input type="text" class="form-control Numero" maxlength="10" id="QtdIncremento'+pc+'" readonly=""\
+                                       name="QtdIncremento'+pc+'" value="">\
+                                </div>\
+                            </div>\
 							<div class="col-md-6">\
                                 <label for="idTab_Produto">Produto:</label><br>\
-                                <select class="form-control Chosen" id="listadinamicab'+pc+'" name="idTab_Produto'+pc+'" onchange="buscaValor(this.value,this.name,\'Produto\','+pc+',\'NomeProduto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')">\
+                                <select class="form-control Chosen" id="listadinamicab'+pc+'" name="idTab_Produto'+pc+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+pc+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
@@ -4788,15 +4798,6 @@ $(document).ready(function () {
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto'+pc+'"\
 										   name="SubtotalProduto'+pc+'" value="">\
-								</div>\
-							</div>\
-						</div>\
-                        <div class="row">\
-							<div class="col-md-2">\
-								<label for="NomeProduto">NomeProduto</label><br>\
-								<div class="input-group id="txtHint">\
-									<input type="text" class="form-control " readonly="" id="NomeProduto'+pc+'" \
-										name="NomeProduto'+pc+'" value="">\
 								</div>\
 							</div>\
 						</div>\
@@ -4887,7 +4888,7 @@ $(document).ready(function () {
 
         //request the JSON data and parse into the select element
         $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=2',
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=90',
             dataType: 'JSON',
             type: "GET",
             success: function (data) {

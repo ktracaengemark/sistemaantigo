@@ -243,6 +243,29 @@ elseif ($_GET['q'] == 14) {
     
 }
 
+elseif ($_GET['q'] == 20) {
+
+    $result = mysql_query('
+            SELECT
+                idTab_Produtos,
+				Nome_Prod,
+                CONCAT(IFNULL(Nome_Prod,"")) AS NomeProduto
+            FROM 
+                Tab_Produtos 
+            WHERE
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Produtos'],
+            'name' => utf8_encode($row['NomeProduto']),
+        );
+    } 
+    
+}
+
 elseif ($_GET['q'] == 2) {
 
     $result = mysql_query('
@@ -301,6 +324,47 @@ elseif ($_GET['q'] == 23) {
         $event_array[] = array(
             'id' => $row['idTab_Produto'],
             'name' => utf8_encode($row['NomeProduto']),
+            'value' => $row['ValorProduto'],
+        );
+    }
+
+}
+
+elseif ($_GET['q'] == 90) {
+
+    $result = mysql_query('
+            SELECT
+                V.idTab_Valor,
+                V.ValorProduto,
+				V.QtdProdutoIncremento,
+				TCP.idTab_Cor_Prod,
+				TCP.Nome_Cor_Prod,
+				TTP.idTab_Tam_Prod,
+				TTP.Nome_Tam_Prod,
+				TPAX1.Prodaux1,
+				TPAX2.Prodaux2,				
+				CONCAT(IFNULL(V.QtdProdutoIncremento,""), " - ", IFNULL(P.Nome_Prod,""), " - ", IFNULL(TPAX2.Prodaux2,""), " - ", IFNULL(TPAX1.Prodaux1,""), " - ", IFNULL(V.ValorProduto,"")) AS NomeProduto
+            FROM
+                Tab_Valor AS V
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = P.Cor_Prod_Aux2
+					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = TCP.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = P.Tam_Prod_Aux1	
+					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = TTP.Tam_Prod					
+            WHERE
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
+				P.idTab_Produtos = V.idTab_Produtos
+			ORDER BY
+				P.Nome_Prod ASC
+        ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Valor'],
+            #'name' => utf8_encode($row['NomeProduto']),
+            #'name' => $row['NomeProduto'],
+            'name' => mb_convert_encoding($row['NomeProduto'], "UTF-8", "ISO-8859-1"),
             'value' => $row['ValorProduto'],
         );
     }

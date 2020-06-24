@@ -603,7 +603,7 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
 			
             if ($this->input->post('idTab_Produto' . $i) || $this->input->post('NomeProduto' . $i) || $this->input->post('ValorProduto' . $i) ||
-					$this->input->post('QtdProduto' . $i) || $this->input->post('SubtotalProduto' . $i) ||
+					$this->input->post('QtdProduto' . $i) || $this->input->post('QtdIncremento' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('idSis_Usuario' . $i) ||
 					$this->input->post('Aux_App_Produto_2' . $i) || $this->input->post('Aux_App_Produto_3' . $i) || $this->input->post('Aux_App_Produto_4' . $i) ||
 					$this->input->post('DataValidadeProduto' . $i) || $this->input->post('Aux_App_Produto_1' . $i)  || 
@@ -612,6 +612,7 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
 				$data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
+				$data['produto'][$j]['QtdIncremento'] = $this->input->post('QtdIncremento' . $i);
                 $data['produto'][$j]['SubtotalProduto'] = $this->input->post('SubtotalProduto' . $i);
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
@@ -700,7 +701,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
 		$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
-        $data['select']['Produto'] = $this->Basico_model->select_produtos2();
+        $data['select']['Produto'] = $this->Basico_model->select_produtos3();
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
 		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 		$data['select']['Prioridade'] = array (
@@ -1815,7 +1816,7 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
 
             if ($this->input->post('idTab_Produto' . $i) || $this->input->post('ValorProduto' . $i) || $this->input->post('NomeProduto' . $i) ||
-					$this->input->post('QtdProduto' . $i) || $this->input->post('SubtotalProduto' . $i) ||
+					$this->input->post('QtdProduto' . $i) || $this->input->post('QtdIncremento' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('DataValidadeProduto' . $i)||
 					$this->input->post('Aux_App_Produto_2' . $i) || $this->input->post('Aux_App_Produto_3' . $i) || $this->input->post('Aux_App_Produto_4' . $i) ||
 					$this->input->post('idSis_Usuario' . $i) || $this->input->post('ConcluidoProduto' . $i) ||  $this->input->post('CanceladoProduto' . $i) ||
@@ -1826,6 +1827,7 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
+				$data['produto'][$j]['QtdIncremento'] = $this->input->post('QtdIncremento' . $i);
                 $data['produto'][$j]['SubtotalProduto'] = $this->input->post('SubtotalProduto' . $i);
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
@@ -2007,7 +2009,7 @@ class Orcatrata extends CI_Controller {
 		}
 		$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
-		$data['select']['Produto'] = $this->Basico_model->select_produtos2();
+		$data['select']['Produto'] = $this->Basico_model->select_produtos3();
 		$data['select']['Servico'] = $this->Basico_model->select_produtos();
 		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 		$data['select']['Prioridade'] = array (
