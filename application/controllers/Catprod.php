@@ -305,6 +305,7 @@ class Catprod extends CI_Controller {
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Catprod', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
+				unset($_SESSION['Catprod']);
                 #redirect(base_url() . 'catprod/listar/' . $data['msg']);
 				//redirect(base_url() . 'relatorio/catprod/' . $data['msg']);
 				redirect(base_url() . 'catprod/alterar2/' . $data['catprod']['idTab_Catprod'] . $data['msg']);
@@ -738,6 +739,7 @@ class Catprod extends CI_Controller {
 
                 $data['msg'] = '?m=1';
 
+				unset($_SESSION['Catprod']);
                 #redirect(base_url() . 'catprod/listar/' . $data['msg']);
 				#redirect(base_url() . 'relatorio/catprod/' . $data['msg']);
 				redirect(base_url() . 'catprod/cadastrar' . $data['msg']);

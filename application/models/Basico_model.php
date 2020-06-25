@@ -1461,16 +1461,16 @@ if (isset($data) && $data) {
 				TCP.Nome_Cor_Prod,
 				TTP.idTab_Tam_Prod,
 				TTP.Nome_Tam_Prod,
-				TPAX1.Prodaux1,
-				TPAX2.Prodaux2,
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TPAX2.Prodaux2,""), " - ", IFNULL(TPAX1.Prodaux1,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,				
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
 					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
-					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = TCP.Cor_Prod
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1	
-					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = TTP.Tam_Prod			
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TCP.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TTP.Tam_Prod				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -1487,16 +1487,16 @@ if (isset($data) && $data) {
 				TCP.Nome_Cor_Prod,
 				TTP.idTab_Tam_Prod,
 				TTP.Nome_Tam_Prod,
-				TPAX1.Prodaux1,
-				TPAX2.Prodaux2,
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TPAX2.Prodaux2,""), " - ", IFNULL(TPAX1.Prodaux1,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,				
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
 					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
-					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = TCP.Cor_Prod
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1	
-					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = TTP.Tam_Prod				
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TCP.Cor_Prod
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TTP.Tam_Prod				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -3158,15 +3158,15 @@ if (isset($data) && $data) {
 				P.idTab_Cor_Prod,
 				P.Cor_Prod,
 				P.idTab_Produto,
-				TPAX2.Prodaux2,
-				CONCAT(IFNULL(TPAX2.Prodaux2,"")) AS Nome_Cor_Prod
+				TOP.Opcao,
+				CONCAT(IFNULL(TOP.Opcao,"")) AS Nome_Cor_Prod
             FROM
                 Tab_Cor_Prod AS P
-					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = P.Cor_Prod
+					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Opcao = P.Cor_Prod
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . '
+				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' 
 			ORDER BY 
 				P.Nome_Cor_Prod ASC
     ');
@@ -3177,11 +3177,11 @@ if (isset($data) && $data) {
 				P.idTab_Cor_Prod,
 				P.Cor_Prod,
 				P.idTab_Produto,
-				TPAX2.Prodaux2,
-				CONCAT(IFNULL(TPAX2.Prodaux2,"")) AS Nome_Cor_Prod
+				TOP.Opcao,
+				CONCAT(IFNULL(TOP.Opcao,"")) AS Nome_Cor_Prod
             FROM
                 Tab_Cor_Prod AS P
-					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = P.Cor_Prod
+					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Opcao = P.Cor_Prod
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -3207,11 +3207,11 @@ if (isset($data) && $data) {
 				P.idTab_Tam_Prod,
 				P.Tam_Prod,
 				P.idTab_Produto,
-				TPAX1.Prodaux1,
-				CONCAT(IFNULL(TPAX1.Prodaux1,"")) AS Nome_Tam_Prod
+				TOP.Opcao,
+				CONCAT(IFNULL(TOP.Opcao,"")) AS Nome_Tam_Prod
             FROM
-                Tab_Tam_Prod AS P	
-					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = P.Tam_Prod				
+                Tab_Tam_Prod AS P
+					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Opcao = P.Tam_Prod
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -3226,11 +3226,11 @@ if (isset($data) && $data) {
 				P.idTab_Tam_Prod,
 				P.Tam_Prod,
 				P.idTab_Produto,
-				TPAX1.Prodaux1,
-				CONCAT(IFNULL(TPAX1.Prodaux1,"")) AS Nome_Tam_Prod
+				TOP.Opcao,
+				CONCAT(IFNULL(TOP.Opcao,"")) AS Nome_Tam_Prod
             FROM
-                Tab_Tam_Prod AS P	
-					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = P.Tam_Prod
+                Tab_Tam_Prod AS P
+					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Opcao = P.Tam_Prod
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -3285,7 +3285,7 @@ if (isset($data) && $data) {
 
         return $array;
     }
-	
+			
 	public function select_atributo($data = FALSE) {
 	
         if ($data === TRUE) {
@@ -3297,7 +3297,6 @@ if (isset($data) && $data) {
             FROM 
                 Tab_Atributo 
             WHERE
-                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				idTab_Catprod = ' . $data . ' 
 			ORDER BY 
@@ -3312,7 +3311,6 @@ if (isset($data) && $data) {
             FROM 
                 Tab_Atributo 
             WHERE
-                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				idTab_Catprod = ' . $data . ' 
 			ORDER BY 
@@ -3322,6 +3320,94 @@ if (isset($data) && $data) {
             $array = array();
             foreach ($query->result() as $row) {
                 $array[$row->idTab_Atributo] = $row->Atributo;
+            }
+        }
+
+        return $array;
+    }	
+
+	public function select_opcao2($data = FALSE) {
+	
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+                idTab_Opcao,
+				idTab_Atributo,
+				idTab_Catprod,
+                CONCAT(IFNULL(Opcao,"")) AS Opcao
+            FROM 
+                Tab_Opcao 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				idTab_Atributo = ' . $_SESSION['Servico'][1] . '
+			ORDER BY 
+				Opcao ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+                idTab_Opcao,
+				idTab_Atributo,
+				idTab_Catprod,
+                CONCAT(IFNULL(Opcao,"")) AS Opcao
+            FROM 
+                Tab_Opcao 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				idTab_Atributo = ' . $_SESSION['Servico'][1] . '
+			ORDER BY 
+				Opcao ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Opcao] = $row->Opcao;
+            }
+        }
+
+        return $array;
+    }
+	
+	public function select_opcao1($data = FALSE) {
+	
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+                idTab_Opcao,
+				idTab_Atributo,
+				idTab_Catprod,
+                CONCAT(IFNULL(Opcao,"")) AS Opcao
+            FROM 
+                Tab_Opcao 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				idTab_Atributo = ' . $_SESSION['Servico'][2] . '
+			ORDER BY 
+				Opcao ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+                idTab_Opcao,
+				idTab_Atributo,
+				idTab_Catprod,
+                CONCAT(IFNULL(Opcao,"")) AS Opcao
+            FROM 
+                Tab_Opcao 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				idTab_Atributo = ' . $_SESSION['Servico'][2] . '
+			ORDER BY 
+				Opcao ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Opcao] = $row->Opcao;
             }
         }
 

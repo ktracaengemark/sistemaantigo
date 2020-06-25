@@ -2119,13 +2119,11 @@ class Produtos extends CI_Controller {
 					$data['update']['servico']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['servico']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['servico']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
-					$data['update']['servico']['inserir'][$j]['idTab_Catprod'] = $data['produtos']['Prodaux3'];
 					$data['update']['servico']['inserir'][$j]['idTab_Atributo'] = $data['update']['servico']['inserir'][$j]['idTab_Atributo'];
                 }
 
                 $max = count($data['update']['servico']['alterar']);
                 for($j=0;$j<$max;$j++) {
-					$data['update']['servico']['alterar'][$j]['idTab_Catprod'] = $data['produtos']['Prodaux3'];
 					$data['update']['servico']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['servico']['alterar'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['servico']['alterar'][$j]['idTab_Atributo'] = $data['update']['servico']['alterar'][$j]['idTab_Atributo'];
@@ -2722,13 +2720,11 @@ class Produtos extends CI_Controller {
 					$data['update']['servico']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['servico']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['servico']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
-					$data['update']['servico']['inserir'][$j]['idTab_Catprod'] = $data['produtos']['Prodaux3'];
 					$data['update']['servico']['inserir'][$j]['idTab_Atributo'] = $data['update']['servico']['inserir'][$j]['idTab_Atributo'];
                 }
 
                 $max = count($data['update']['servico']['alterar']);
                 for($j=0;$j<$max;$j++) {
-					$data['update']['servico']['alterar'][$j]['idTab_Catprod'] = $data['produtos']['Prodaux3'];
 					$data['update']['servico']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['servico']['alterar'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['servico']['alterar'][$j]['idTab_Atributo'] = $data['update']['servico']['alterar'][$j]['idTab_Atributo'];
@@ -3309,13 +3305,11 @@ class Produtos extends CI_Controller {
 					$data['update']['servico']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['servico']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['servico']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
-					$data['update']['servico']['inserir'][$j]['idTab_Catprod'] = $data['produtos']['Prodaux3'];
 					$data['update']['servico']['inserir'][$j]['idTab_Atributo'] = $data['update']['servico']['inserir'][$j]['idTab_Atributo'];
                 }
 
                 $max = count($data['update']['servico']['alterar']);
                 for($j=0;$j<$max;$j++) {
-					$data['update']['servico']['alterar'][$j]['idTab_Catprod'] = $data['produtos']['Prodaux3'];
 					$data['update']['servico']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['servico']['alterar'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['servico']['alterar'][$j]['idTab_Atributo'] = $data['update']['servico']['alterar'][$j]['idTab_Atributo'];

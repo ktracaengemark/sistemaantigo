@@ -372,7 +372,27 @@
 
 										<div id="collapse7" class="panel-collapse" role="tabpanel" aria-labelledby="heading7" aria-expanded="false">
 											<div class="panel-body">
-
+												<!--
+												<div class="row">
+													<div class="col-md-6">
+														<label for="Atributo_1">Atributo1*</label>								
+														<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> 
+																id="Atributo_1" name="Atributo_1">
+															<option value="">-- Sel.o Atributo 1 --</option>
+															<?php
+															foreach ($select['Atributo_1'] as $key => $row) {
+																if ($produtos['Atributo_1'] == $key) {
+																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																} else {
+																	echo '<option value="' . $key . '">' . $row . '</option>';
+																}
+															}
+															?>
+														</select>
+														<?php echo form_error('Atributo_1'); ?>
+													</div>
+												</div>									
+												-->
 												<input type="hidden" name="TCount" id="TCount" value="<?php echo $count['TCount']; ?>"/>
 
 												<div class="input_fields_wrap99">
@@ -450,7 +470,27 @@
 										<div id="collapse6" class="panel-collapse" role="tabpanel" aria-labelledby="heading6" aria-expanded="false">
 											<div class="panel panel-success">
 												<div class="panel-heading">
-
+													<!--
+													<div class="row">	
+														<div class="col-md-6">
+															<label for="Atributo_2">Atributo2*</label>								
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> 
+																	id="Atributo_2" name="Atributo_2">
+																<option value="">-- Sel.o Atributo 2 --</option>
+																<?php
+																foreach ($select['Atributo_2'] as $key => $row) {
+																	if ($produtos['Atributo_2'] == $key) {
+																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																	} else {
+																		echo '<option value="' . $key . '">' . $row . '</option>';
+																	}
+																}
+																?>
+															</select>
+															<?php echo form_error('Atributo_2'); ?>
+														</div>
+													</div>												
+													-->
 													<input type="hidden" name="PMCount" id="PMCount" value="<?php echo $count['PMCount']; ?>"/>
 
 													<div class="input_fields_wrap91">

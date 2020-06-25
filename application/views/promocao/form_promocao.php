@@ -105,7 +105,7 @@
 												<div class="panel-heading">
 													<div class="row">	
 														<div class="col-md-6">
-															<label for="Cat_1">Categoria*</label>								
+															<label for="Cat_1">Categoria1*</label>								
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> 
 																	id="Cat_1" name="Cat_1">
 																<option value="">-- Sel.uma Categoria --</option>
@@ -125,7 +125,7 @@
 													<?php if ($metodo > 2) { ?>
 														<div class="row">
 															<div class="col-md-12">
-																<label for="Mod_1">Modelo*</label>								
+																<label for="Mod_1">Modelo1*</label>								
 																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> 
 																		id="Mod_1" name="Mod_1">
 																	<option value="">-- Sel.um Modelo --</option>
