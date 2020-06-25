@@ -24,7 +24,7 @@
 				<!--Tab_Produto-->
 	
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-4">
 						<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">	
 							<div class="panel panel-primary">
 								<div class="panel-heading" role="tab" id="heading2" data-toggle="collapse" data-parent="#accordion2" data-target="#collapse2">
@@ -272,11 +272,9 @@
 							</div>
 						</div>	
 					</div>
-				</div>	
-					
-					
-				<div class="row">
+				
 					<?php if ($metodo > 1) { ?>
+						<!--
 						<div class="col-md-4">
 							<div class="panel-group" id="accordion7" role="tablist" aria-multiselectable="true">
 								<div class="panel panel-primary">
@@ -313,9 +311,9 @@
 																	<div class="col-md-10">
 																		<label for="idTab_Atributo">Atributo<?php echo $i ?></label>
 																		<?php if ($i == 1) { ?>
-																		<!--<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>servico/cadastrar/servico" role="button">
+																		<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>servico/cadastrar/servico" role="button">
 																			<span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
-																		</a>-->
+																		</a>
 																		<?php } ?>
 																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen"<?php echo $readonly; ?>
 																				id="listadinamica<?php echo $i ?>" name="idTab_Atributo<?php echo $i ?>">																					
@@ -355,8 +353,9 @@
 								</div>
 							</div>
 						</div>
+						-->
 					<?php } ?>
-					<?php if ($metodo > 2) { ?>
+					<?php if ($metodo > 1) { ?>
 						<div class="col-md-4">
 							<div class="panel-group" id="accordion7" role="tablist" aria-multiselectable="true">
 								<div class="panel panel-primary">
@@ -528,10 +527,9 @@
 							</div>			
 						</div>
 					
-					<?php } ?>
-				</div>
-					
-				
+					<?php } ?>				
+				</div>	
+
 				<?php if ($metodo > 2) { ?>
 					<div class="row">
 						<div class="col-md-12">	

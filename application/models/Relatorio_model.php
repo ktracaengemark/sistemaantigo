@@ -7201,7 +7201,7 @@ exit();*/
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 			ORDER BY 
-				TP.Produtos ASC
+				TP.idTab_Produto DESC
 		
         ');
 

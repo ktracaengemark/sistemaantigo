@@ -736,7 +736,7 @@ elseif ($_GET['q'] == 97) {
 
 elseif ($_GET['q'] == 101) {
 
-    $permissao1 = isset($_SESSION['Servico'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Servico'][1] : FALSE;
+    $permissao1 = isset($_SESSION['Atributos'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][1] : FALSE;
 	
 	$result = mysql_query('
             SELECT
@@ -766,7 +766,7 @@ elseif ($_GET['q'] == 101) {
 
 elseif ($_GET['q'] == 102) {
 
-    $permissao2 = isset($_SESSION['Servico'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Servico'][2] : FALSE;
+    $permissao2 = isset($_SESSION['Atributos'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][2] : FALSE;
 	
 	$result = mysql_query('
             SELECT

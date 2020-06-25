@@ -62,6 +62,18 @@ class Produtos_model extends CI_Model {
             return $this->db->insert_id();
         }
     }
+
+    public function set_opcao_select($data) {
+
+        $query = $this->db->insert_batch('Tab_Opcao_Select', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
 	
     public function set_produto($data) {
 
@@ -187,6 +199,29 @@ class Produtos_model extends CI_Model {
 
     public function get_servico($data) {
 		$query = $this->db->query('SELECT * FROM Tab_Atributo_Select WHERE idTab_Produto = ' . $data);
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
+    public function get_atributos($data) {
+		$query = $this->db->query('
+			SELECT 
+				TAS.idTab_Atributo_Select,
+				TAS.idTab_Catprod,
+				TAS.idTab_Atributo
+			FROM 
+				Tab_Atributo_Select AS TAS
+			WHERE 
+				TAS.idTab_Catprod = ' . $data . '
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }	
+
+    public function get_opcao_select($data) {
+		$query = $this->db->query('SELECT * FROM Tab_Opcao_Select WHERE idTab_Produto = ' . $data);
         $query = $query->result_array();
 
         return $query;
@@ -350,6 +385,13 @@ class Produtos_model extends CI_Model {
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }	
+
+    public function update_opcao_select($data) {
+		
+        $query = $this->db->update_batch('Tab_Opcao_Select', $data, 'idTab_Opcao_Select');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }	
 	
     public function update_produto($data) {
 		
@@ -396,6 +438,18 @@ class Produtos_model extends CI_Model {
         }
     }
 
+    public function delete_opcao_select($data) {
+		
+        $this->db->where_in('idTab_Opcao_Select', $data);
+        $this->db->delete('Tab_Opcao_Select');
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }	
+	
     public function delete_produto($data) {
 
         $this->db->where_in('idTab_Cor_Prod', $data);
@@ -435,6 +489,7 @@ class Produtos_model extends CI_Model {
     public function delete_produtos($id) {
 
         $query = $this->db->delete('Tab_Atributo_Select', array('idTab_Produto' => $id));
+		$query = $this->db->delete('Tab_Opcao_Select', array('idTab_Produto' => $id));
 		$query = $this->db->delete('Tab_Produto', array('idTab_Produto' => $id));
         $query = $this->db->delete('Tab_Valor', array('idTab_Modelo' => $id));
         #$query = $this->db->delete('Tab_Cat_Prod', array('idTab_Produto' => $id));

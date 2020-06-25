@@ -1852,7 +1852,33 @@ class Produtos extends CI_Controller {
         if ($id) {
             #### Tab_Produto ####
             $_SESSION['Produto'] = $data['produtos'] = $this->Produtos_model->get_produtos($id);
-           
+			
+			$categoria = $data['produtos']['Prodaux3'];
+			
+			$data['atributos'] = $this->Produtos_model->get_atributos($categoria, TRUE);
+            
+			if (count($data['atributos']) > 0) {
+                $data['atributos'] = array_combine(range(1, count($data['atributos'])), array_values($data['atributos']));
+                #$data['count']['SCount'] = count($data['atributos']);
+				
+				$item_atributo = '0';	
+				foreach($data['atributos'] as $atributos_view){
+					$item_atributo++;
+					$_SESSION['Atributos'][$item_atributo] = $atributos_view['idTab_Atributo'];
+				
+				}
+
+            }			
+			
+			/*
+			if (count($data['produtos']) > 0) {
+				$data['produtos'] = array_combine(range(1, count($data['produtos'])), array_values($data['produtos']));
+				foreach($data['produtos'] as $produtos_view){
+					$_SESSION['Produto']['Prodaux3'] = $produtos_view['Prodaux3'];
+				}
+			}		   
+			*/
+		   
             #### Carrega os dados do cliente nas variáves de sessão ####
             #$this->load->model('Cliente_model');
             #$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($data['produtos']['idApp_Cliente'], TRUE);
@@ -2295,7 +2321,8 @@ class Produtos extends CI_Controller {
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produto', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
-                unset($_SESSION['Servico']);
+                unset($_SESSION['Atributos']);
+				unset($_SESSION['Servico']);
 				#redirect(base_url() . 'produtos/listar/' . $data['msg']);
 				//redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
 				redirect(base_url() . 'produtos/alterar3/' . $data['produtos']['idTab_Produto'] . $data['msg']);
@@ -2449,12 +2476,25 @@ class Produtos extends CI_Controller {
         if ($id) {
             #### Tab_Produto ####
             $_SESSION['Produto'] = $data['produtos'] = $this->Produtos_model->get_produtos($id);
-           
-            #### Carrega os dados do cliente nas variáves de sessão ####
-            #$this->load->model('Cliente_model');
-            #$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($data['produtos']['idApp_Cliente'], TRUE);
-            #$_SESSION['log']['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
 
+			$categoria = $data['produtos']['Prodaux3'];
+			
+			$data['atributos'] = $this->Produtos_model->get_atributos($categoria, TRUE);
+            
+			if (count($data['atributos']) > 0) {
+                $data['atributos'] = array_combine(range(1, count($data['atributos'])), array_values($data['atributos']));
+                #$data['count']['SCount'] = count($data['atributos']);
+				
+				$item_atributo = '0';	
+				foreach($data['atributos'] as $atributos_view){
+					$item_atributo++;
+					$_SESSION['Atributos'][$item_atributo] = $atributos_view['idTab_Atributo'];
+				
+				}
+
+            }			
+			
+			
             #### Tab_Valor ####
             $data['valor'] = $this->Produtos_model->get_valor($id);
             if (count($data['valor']) > 0) {
@@ -2898,7 +2938,8 @@ class Produtos extends CI_Controller {
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produto', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
-                unset($_SESSION['Servico']);
+                unset($_SESSION['Atributos']);
+				unset($_SESSION['Servico']);
 				#redirect(base_url() . 'produtos/listar/' . $data['msg']);
 				//redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
 				redirect(base_url() . 'produtos/alterar4/' . $data['produtos']['idTab_Produto'] . $data['msg']);
@@ -3041,6 +3082,23 @@ class Produtos extends CI_Controller {
             #### Tab_Produto ####
             $_SESSION['Produto'] = $data['produtos'] = $this->Produtos_model->get_produtos($id);
 
+			$categoria = $data['produtos']['Prodaux3'];
+			
+			$data['atributos'] = $this->Produtos_model->get_atributos($categoria, TRUE);
+            
+			if (count($data['atributos']) > 0) {
+                $data['atributos'] = array_combine(range(1, count($data['atributos'])), array_values($data['atributos']));
+                #$data['count']['SCount'] = count($data['atributos']);
+				
+				$item_atributo = '0';	
+				foreach($data['atributos'] as $atributos_view){
+					$item_atributo++;
+					$_SESSION['Atributos'][$item_atributo] = $atributos_view['idTab_Atributo'];
+				
+				}
+
+            }			
+			
             #### Tab_Valor ####
             $data['valor'] = $this->Produtos_model->get_valor($id);
             if (count($data['valor']) > 0) {
@@ -3489,6 +3547,8 @@ class Produtos extends CI_Controller {
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produto', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
+				
+				unset($_SESSION['Atributos']);
 				unset($_SESSION['Servico']);
 				unset($_SESSION['Produto']);
                 #redirect(base_url() . 'produtos/listar/' . $data['msg']);
@@ -4172,7 +4232,8 @@ class Produtos extends CI_Controller {
 
                 $data['msg'] = '?m=1';
 
-                unset($_SESSION['Servico']);
+                unset($_SESSION['Atributos']);
+				unset($_SESSION['Servico']);
 				unset($_SESSION['Produto']);
 				#redirect(base_url() . 'produtos/listar/' . $data['msg']);
 				redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
