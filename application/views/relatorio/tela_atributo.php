@@ -10,10 +10,10 @@
 				<div class="row text-left">	
 					<div class="col-md-12">
 						<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-							<span class="glyphicon glyphicon-filter"></span>Filtro de Categoria
-						</button>						
+							<span class="glyphicon glyphicon-filter"></span>Filtro de Atributo
+						</button>
 						<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-							<span class="glyphicon glyphicon-plus"></span> Nova Categoria
+							<span class="glyphicon glyphicon-plus"></span> Novo Atributo
 						</button>
 					</div>
 				</div>	
@@ -22,13 +22,13 @@
 		<?php echo (isset($list)) ? $list : FALSE ?>	
 	</div>
 </div>
-<?php echo form_open('relatorio/catprod', 'role="form"'); ?>
+<?php echo form_open('relatorio/atributo', 'role="form"'); ?>
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content">
 			<div class="modal-header bg-danger">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das Categorias</h4>
+				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Produtos</h4>
 			</div>
 			<div class="modal-footer">
 				<div class="form-group">	
@@ -175,7 +175,7 @@
 					<div class="form-group col-md-4">
 						<div class="form-footer">		
 							<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-								<span class="glyphicon glyphicon-plus"></span> Nova Categoria
+								<span class="glyphicon glyphicon-plus"></span> Novo Atributo
 							</button>							
 						</div>	
 					</div>					
@@ -197,8 +197,8 @@
 		<div class="modal-content">
 			<div class="modal-header bg-danger">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Evite cadastrar Produtos REPETIDOS!<br>
-										"Pesquise" os Produtos Cadastradas!</h4>
+				<h4 class="modal-title">Evite cadastrar Atributo REPETIDO!<br>
+										"Pesquise" os Atributos Cadastradas!</h4>
 			</div>
 			<!--
 			<div class="modal-body">
@@ -215,8 +215,8 @@
 				</div>
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>catprod/cadastrar" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Nova Categoria
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>atributo/cadastrar" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Novo Atributo
 						</a>
 					</div>	
 				</div>

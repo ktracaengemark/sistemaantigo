@@ -16,7 +16,6 @@
 
 						<th class="active" scope="col">Editar</th>
 						<th class="active">Id.</th>
-						<th class="active">Categoria</th>
 						<th class="active">Atributo</th>
 						<th class="active">Opcao</th>
 					</tr>
@@ -28,15 +27,13 @@
 
 					<tr>	
 						<td class="notclickable">
-							<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'catprod/alterar/' . $row['idTab_Catprod'] . ''; ?>">
+							<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'atributo/alterar2/' . $row['idTab_Atributo'] . ''; ?>">
 								<span class="glyphicon glyphicon-edit notclickable"></span>
 							</a>
 						</td>
-						<td><?php echo $row['idTab_Catprod'] ?></td>
-						<td><?php echo $row['Catprod'] ?></td>
+						<td><?php echo $row['idTab_Atributo'] ?></td>
 						<td><?php echo $row['Atributo'] ?></td>
 						<td><?php echo $row['Opcao'] ?></td>
-
 					</tr>
 					<?php } ?>						
 				</tbody>

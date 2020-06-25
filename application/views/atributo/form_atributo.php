@@ -5,37 +5,34 @@
 
 	<div class="panel panel-<?php echo $panel; ?>">
 		<div class="panel-heading">
-			<?php echo $titulo; ?> Catprod
-			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/catprod" role="button">
-				<span class="glyphicon glyphicon-search"></span> Catprod
-			</a>
-			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/estoque" role="button">
-				<span class="glyphicon glyphicon-search"></span> Estoque
+			<?php echo $titulo; ?> Atributo
+			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/atributo" role="button">
+				<span class="glyphicon glyphicon-search"></span> Atributo
 			</a>
 		</div>			
 		<div class="panel-body">
 
 			<?php echo form_open_multipart($form_open_path); ?>
 
-			<!--Tab_Catprod-->
+			<!--Tab_Atributo-->
 
 			<div class="form-group">
 				<div class="panel panel-info">
 					<div class="panel-heading">	
 						<div class="row">
 							<div class="col-md-3">
-								<label for="Catprod">Categoria*</label><br>
+								<label for="Atributo">Atributo*</label><br>
 								<input type="text" class="form-control" maxlength="200"
-										name="Catprod" value="<?php echo $catprod['Catprod']; ?>">
-								<?php echo form_error('Catprod'); ?>
+										name="Atributo" value="<?php echo $atributo['Atributo']; ?>">
+								<?php echo form_error('Atributo'); ?>
 							</div>
 						</div>
 					</div>	
 				</div>		
 			</div>
 			
-			<?php if ($metodo > 1) { ?>
-				<div class="row">
+			<?php if ($metodo > 2) { ?>
+				<div class="row">		
 					<div class="col-md-12">
 						<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
 							<div class="panel panel-primary">
@@ -43,7 +40,7 @@
 									<h4 class="panel-title">
 										<a class="accordion-toggle">
 											<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-											Atributos
+											Opções
 										</a>
 									</h4>
 								</div>
@@ -51,45 +48,35 @@
 								<div id="collapse3" class="panel-collapse" role="tabpanel" aria-labelledby="heading3" aria-expanded="false">
 									<div class="panel-body">
 
-										<input type="hidden" name="PTCount" id="PTCount" value="<?php echo $count['PTCount']; ?>"/>
+										<input type="hidden" name="POCount" id="POCount" value="<?php echo $count['POCount']; ?>"/>
 
-										<div class="input_fields_wrap3">
+										<div class="input_fields_wrap32">
 
 										<?php
-										for ($i=1; $i <= $count['PTCount']; $i++) {
+										for ($i=1; $i <= $count['POCount']; $i++) {
 										?>
 
 										<?php if ($metodo > 1) { ?>
-										<input type="hidden" name="idTab_Atributo_Select<?php echo $i ?>" value="<?php echo $atributo[$i]['idTab_Atributo_Select']; ?>"/>
+										<input type="hidden" name="idTab_Opcao<?php echo $i ?>" value="<?php echo $opcao[$i]['idTab_Opcao']; ?>"/>
 										<?php } ?>
 
-										<div class="form-group" id="3div<?php echo $i ?>">
+										<div class="form-group" id="32div<?php echo $i ?>">
 											<div class="panel panel-info">
 												<div class="panel-heading">			
 													<div class="row">
-														<div class="col-md-5">
-															<label for="idTab_Atributo<?php echo $i ?>">Atributo <?php echo $i ?></label>
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
-																	 id="listadinamica3<?php echo $i ?>" name="idTab_Atributo<?php echo $i ?>">
-																<option value="">-- Selecione o Atributo --</option>
-																<?php
-																foreach ($select['idTab_Atributo'] as $key => $row) {
-																	if ($atributo[$i]['idTab_Atributo'] == $key) {
-																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																	} else {
-																		echo '<option value="' . $key . '">' . $row . '</option>';
-																	}
-																}
-																?>
-															</select>
-														</div>
+														<div class="col-md-2">
+															<label for="Opcao">Opção <?php echo $i ?></label>
+															<div class="input-group">
+																<input type="text" class="form-control" id="Opcao<?php echo $i ?>" maxlength="44"
+																	name="Opcao<?php echo $i ?>" value="<?php echo $opcao[$i]['Opcao'] ?>">
+															</div>
+														</div>											
 														<div class="col-md-1">
 															<label><br></label><br>
-															<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
+															<button type="button" id="<?php echo $i ?>" class="remove_field32 btn btn-danger">
 																<span class="glyphicon glyphicon-trash"></span>
 															</button>
 														</div>
-														
 													</div>
 												</div>	
 											</div>		
@@ -100,26 +87,24 @@
 										?>
 
 										</div>
-										
+
 										<div class="form-group">
-											<a class="btn btn-xs btn-danger" onclick="adiciona_atributo()">
-												<span class="glyphicon glyphicon-arrow-up"></span> Adiciona Atributo
+											<a class="btn btn-xs btn-danger" onclick="adiciona_opcao()">
+												<span class="glyphicon glyphicon-arrow-up"></span> Adiciona Opção
 											</a>
 										</div>
-										
 									</div>
 								</div>
 							</div>
-						</div>			
-					</div>
+						</div>
+					</div>	
 				</div>
 			<?php } ?>
-
 			<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 			<div class="form-group">
 				<div class="row">
 					<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
-					<input type="hidden" name="idTab_Catprod" value="<?php echo $catprod['idTab_Catprod']; ?>">
+					<input type="hidden" name="idTab_Atributo" value="<?php echo $atributo['idTab_Atributo']; ?>">
 					<?php if ($metodo > 1) { ?>
 					<!--<input type="hidden" name="idTab_Atributo" value="<?php echo $atributo['idTab_Atributo']; ?>">
 					<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
@@ -154,7 +139,7 @@
 											</button>
 										</div>
 										<div class="col-md-6 text-right">
-											<a class="btn btn-danger" href="<?php echo base_url() . 'catprod/excluir/' . $catprod['idTab_Catprod'] ?>" role="button">
+											<a class="btn btn-danger" href="<?php echo base_url() . 'atributo/excluir/' . $atributo['idTab_Atributo'] ?>" role="button">
 												<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 											</a>
 										</div>

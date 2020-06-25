@@ -159,9 +159,9 @@ class Catprod extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
-            if ($this->input->post('Atributo' . $i)) {
+            if ($this->input->post('idTab_Atributo' . $i)) {
+				$data['atributo'][$j]['idTab_Atributo_Select'] = $this->input->post('idTab_Atributo_Select' . $i);
 				$data['atributo'][$j]['idTab_Atributo'] = $this->input->post('idTab_Atributo' . $i);
-                $data['atributo'][$j]['Atributo'] = $this->input->post('Atributo' . $i);
                 $j++;
             }
 						
@@ -195,6 +195,8 @@ class Catprod extends CI_Controller {
 
 		$this->form_validation->set_rules('Catprod', 'Categoria', 'required|trim');
 		
+		$data['select']['idTab_Atributo'] = $this->Basico_model->select_atributo_cat();
+
         $data['titulo'] = 'Editar';
         $data['form_open_path'] = 'catprod/alterar';
         $data['readonly'] = '';
@@ -255,11 +257,11 @@ class Catprod extends CI_Controller {
                     $data['atributo'] = array();
 
                 //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
-                $data['update']['atributo'] = $this->basico->tratamento_array_multidimensional($data['atributo'], $data['update']['atributo']['anterior'], 'idTab_Atributo');
+                $data['update']['atributo'] = $this->basico->tratamento_array_multidimensional($data['atributo'], $data['update']['atributo']['anterior'], 'idTab_Atributo_Select');
 
                 $max = count($data['update']['atributo']['inserir']);
                 for($j=0;$j<$max;$j++) {
-					$data['update']['atributo']['inserir'][$j]['Atributo'] = trim(mb_strtoupper($data['update']['atributo']['inserir'][$j]['Atributo'], 'ISO-8859-1'));
+					$data['update']['atributo']['inserir'][$j]['idTab_Atributo'] = $data['update']['atributo']['inserir'][$j]['idTab_Atributo'];
 					$data['update']['atributo']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['atributo']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['atributo']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -268,7 +270,7 @@ class Catprod extends CI_Controller {
 
                 $max = count($data['update']['atributo']['alterar']);
                 for($j=0;$j<$max;$j++) {
-					$data['update']['atributo']['alterar'][$j]['Atributo'] = trim(mb_strtoupper($data['update']['atributo']['alterar'][$j]['Atributo'], 'ISO-8859-1'));
+					$data['update']['atributo']['alterar'][$j]['idTab_Atributo'] = $data['update']['atributo']['alterar'][$j]['idTab_Atributo'];
 				}
 
                 if (count($data['update']['atributo']['inserir']))
@@ -307,8 +309,8 @@ class Catprod extends CI_Controller {
 
 				unset($_SESSION['Catprod']);
                 #redirect(base_url() . 'catprod/listar/' . $data['msg']);
-				//redirect(base_url() . 'relatorio/catprod/' . $data['msg']);
-				redirect(base_url() . 'catprod/alterar2/' . $data['catprod']['idTab_Catprod'] . $data['msg']);
+				redirect(base_url() . 'relatorio/catprod/' . $data['msg']);
+				//redirect(base_url() . 'catprod/alterar2/' . $data['catprod']['idTab_Catprod'] . $data['msg']);
                 exit();
             }
         }
@@ -402,7 +404,7 @@ class Catprod extends CI_Controller {
 
 		$this->form_validation->set_rules('Catprod', 'Categoria', 'required|trim');
 		
-		$data['select']['idTab_Atributo'] = $this->Basico_model->select_atributo($data['catprod']['idTab_Catprod']);
+		$data['select']['idTab_Atributo'] = $this->Basico_model->select_atributo();
         
 		$data['titulo'] = 'Editar';
         $data['form_open_path'] = 'catprod/alterar2';
@@ -741,8 +743,8 @@ class Catprod extends CI_Controller {
 
 				unset($_SESSION['Catprod']);
                 #redirect(base_url() . 'catprod/listar/' . $data['msg']);
-				#redirect(base_url() . 'relatorio/catprod/' . $data['msg']);
-				redirect(base_url() . 'catprod/cadastrar' . $data['msg']);
+				redirect(base_url() . 'relatorio/catprod/' . $data['msg']);
+				#redirect(base_url() . 'catprod/cadastrar' . $data['msg']);
                 exit();
             //}
         //}

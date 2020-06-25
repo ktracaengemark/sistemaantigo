@@ -3285,36 +3285,82 @@ if (isset($data) && $data) {
 
         return $array;
     }
-			
+
+	public function select_atributo_cat($data = FALSE) {
+	
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+				TAS.idTab_Atributo,
+				TAS.idTab_Catprod,
+				TAS.Atributo,
+                CONCAT(IFNULL(TAS.Atributo,"")) AS Atributo
+            FROM 
+                Tab_Atributo AS TAS
+            WHERE
+				TAS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+			ORDER BY 
+				TAS.Atributo ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+				TAS.idTab_Atributo,
+				TAS.idTab_Catprod,
+				TAS.Atributo,
+                CONCAT(IFNULL(TAS.Atributo,"")) AS Atributo
+            FROM 
+                Tab_Atributo AS TAS
+            WHERE
+				TAS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY 
+				TAS.Atributo ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Atributo] = $row->Atributo;
+            }
+        }
+
+        return $array;
+    }	
+	
 	public function select_atributo($data = FALSE) {
 	
         if ($data === TRUE) {
             $array = $this->db->query('
             SELECT
-                idTab_Atributo,
-				idTab_Catprod,
-                CONCAT(IFNULL(Atributo,"")) AS Atributo
+                TAS.idTab_Atributo_Select,
+				TAS.idTab_Atributo,
+				TAS.idTab_Catprod,
+				TAT.Atributo,
+                CONCAT(IFNULL(TAT.Atributo,"")) AS Atributo
             FROM 
-                Tab_Atributo 
+                Tab_Atributo_Select AS TAS
+					LEFT JOIN Tab_Atributo AS TAT ON TAT.idTab_Atributo = TAS.idTab_Atributo
             WHERE
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				idTab_Catprod = ' . $data . ' 
+				TAS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TAS.idTab_Catprod = ' . $_SESSION['Produto']['Prodaux3'] . ' 
 			ORDER BY 
-				Atributo ASC
+				TAT.Atributo ASC
     ');
         } else {
             $query = $this->db->query('
             SELECT
-                idTab_Atributo,
-				idTab_Catprod,
-                CONCAT(IFNULL(Atributo,"")) AS Atributo
+                TAS.idTab_Atributo_Select,
+				TAS.idTab_Atributo,
+				TAS.idTab_Catprod,
+				TAT.Atributo,
+                CONCAT(IFNULL(TAT.Atributo,"")) AS Atributo
             FROM 
-                Tab_Atributo 
+                Tab_Atributo_Select AS TAS
+					LEFT JOIN Tab_Atributo AS TAT ON TAT.idTab_Atributo = TAS.idTab_Atributo
             WHERE
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				idTab_Catprod = ' . $data . ' 
+				TAS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TAS.idTab_Catprod = ' . $_SESSION['Produto']['Prodaux3'] . ' 
 			ORDER BY 
-				Atributo ASC
+				TAT.Atributo ASC
     ');
 
             $array = array();
@@ -3328,6 +3374,8 @@ if (isset($data) && $data) {
 
 	public function select_opcao2($data = FALSE) {
 	
+		$permissao1 = isset($_SESSION['Servico'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Servico'][1] : FALSE;
+		
         if ($data === TRUE) {
             $array = $this->db->query('
             SELECT
@@ -3339,8 +3387,8 @@ if (isset($data) && $data) {
                 Tab_Opcao 
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				idTab_Atributo = ' . $_SESSION['Servico'][1] . '
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+				' . $permissao1 . '
 			ORDER BY 
 				Opcao ASC
     ');
@@ -3355,8 +3403,8 @@ if (isset($data) && $data) {
                 Tab_Opcao 
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				idTab_Atributo = ' . $_SESSION['Servico'][1] . '
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+				' . $permissao1 . '
 			ORDER BY 
 				Opcao ASC
     ');
@@ -3371,7 +3419,10 @@ if (isset($data) && $data) {
     }
 	
 	public function select_opcao1($data = FALSE) {
-	
+		
+		$permissao2 = isset($_SESSION['Servico'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Servico'][2] : FALSE;
+		
+		
         if ($data === TRUE) {
             $array = $this->db->query('
             SELECT
@@ -3383,8 +3434,8 @@ if (isset($data) && $data) {
                 Tab_Opcao 
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				idTab_Atributo = ' . $_SESSION['Servico'][2] . '
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+				' . $permissao2 . '
 			ORDER BY 
 				Opcao ASC
     ');
@@ -3399,8 +3450,8 @@ if (isset($data) && $data) {
                 Tab_Opcao 
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				idTab_Atributo = ' . $_SESSION['Servico'][2] . '
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+				' . $permissao2 . '
 			ORDER BY 
 				Opcao ASC
     ');

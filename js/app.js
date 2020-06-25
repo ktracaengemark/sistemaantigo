@@ -1724,6 +1724,13 @@ function adiciona_atributo() {
     $("#PTCount").val(pt);
     //console.log(pt);
 
+	if (pt >= 2) {
+        //console.log( $("#listadinamica2"+(pt-1)).val() );
+        var chosen;
+        chosen = $("#listadinamica2"+(pt-1)).val();
+        //console.log( chosen + ' :: ' + pt );
+    }
+	
     //Captura a data do dia e carrega no campo correspondente
     var currentDate = moment();
 
@@ -1732,12 +1739,11 @@ function adiciona_atributo() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-4">\
-							<label for="Atributo'+pt+'">Atributo '+pt+'</label><br>\
-							<div class="input-group id="Atributo'+pt+'">\
-								<input type="text" class="form-control" id="Atributo'+pt+'" maxlength="44"\
-									name="Atributo'+pt+'" value="">\
-							</div>\
+						<div class="col-md-5">\
+							<label for="idTab_Atributo">Atributo '+pt+':</label><br>\
+							<select class="form-control Chosen" id="listadinamica2'+pt+'" name="idTab_Atributo'+pt+'">\
+								<option value="">-- Selecione o Atributo --</option>\
+							</select>\
 						</div>\
 						<div class="col-md-1">\
 							<label><br></label><br>\
@@ -1750,6 +1756,39 @@ function adiciona_atributo() {
 			</div>\
         </div>'
     ); //add input box
+	
+	//get a reference to the select element
+	$select = $('#listadinamica2'+pt);
+
+	//request the JSON data and parse into the select element
+	$.ajax({
+		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=16',
+		dataType: 'JSON',
+		type: "GET",
+		success: function (data) {
+			//clear the current content of the select
+			$select.html('');
+			//iterate over the data and append a select option
+			$select.append('<option value="">-- Selecione o Atributo--</option>');
+			$.each(data, function (key, val) {
+				//alert(val.id);
+				$select.append('<option value="' + val.id + '">' + val.name + '</option>');
+			})
+			$('.Chosen').chosen({
+				disable_search_threshold: 10,
+				multiple_text: "Selecione uma ou mais op??es",
+				single_text: "Selecione uma op??o",
+				no_results_text: "Nenhum resultado para",
+				width: "100%"
+			});
+		},
+		error: function () {
+			//alert('erro listadinamicaB');
+			//if there is an error append a 'none available' option
+			$select.html('<option id="-1">ERRO</option>');
+		}
+
+	});	
 
 }
 
@@ -1762,13 +1801,6 @@ function adiciona_opcao() {
     $("#POCount").val(pt2);
     //console.log(pt2);
 
-    if (pt2 >= 2) {
-        //console.log( $("#listadinamica2"+(pt2-1)).val() );
-        var chosen;
-        chosen = $("#listadinamica2"+(pt2-1)).val();
-        //console.log( chosen + ' :: ' + pt2 );
-    }
-
     //Captura a data do dia e carrega no campo correspondente
     var currentDate = moment();
 
@@ -1777,12 +1809,6 @@ function adiciona_opcao() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-5">\
-							<label for="idTab_Atributo">Atributo '+pt2+':</label><br>\
-							<select class="form-control Chosen" id="listadinamica2'+pt2+'" name="idTab_Atributo'+pt2+'">\
-								<option value="">-- Selecione uma opção --</option>\
-							</select>\
-						</div>\
 						<div class="col-md-4">\
 							<label for="Opcao'+pt2+'">Opcao '+pt2+'</label><br>\
 							<div class="input-group id="Opcao'+pt2+'">\
@@ -1801,39 +1827,6 @@ function adiciona_opcao() {
 			</div>\
         </div>'
     ); //add input box
-	
-	//get a reference to the select element
-	$select = $('#listadinamica2'+pt2);
-
-	//request the JSON data and parse into the select element
-	$.ajax({
-		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=16',
-		dataType: 'JSON',
-		type: "GET",
-		success: function (data) {
-			//clear the current content of the select
-			$select.html('');
-			//iterate over the data and append a select option
-			$select.append('<option value="">-- Sel. Produto --</option>');
-			$.each(data, function (key, val) {
-				//alert(val.id);
-				$select.append('<option value="' + val.id + '">' + val.name + '</option>');
-			})
-			$('.Chosen').chosen({
-				disable_search_threshold: 10,
-				multiple_text: "Selecione uma ou mais opções",
-				single_text: "Selecione uma opção",
-				no_results_text: "Nenhum resultado para",
-				width: "100%"
-			});
-		},
-		error: function () {
-			//alert('erro listadinamicaB');
-			//if there is an error append a 'none available' option
-			$select.html('<option id="-1">ERRO</option>');
-		}
-
-	});	
 	
 }
 

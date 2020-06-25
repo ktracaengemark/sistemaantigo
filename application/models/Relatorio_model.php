@@ -7527,7 +7527,9 @@ exit();*/
 				TOP.Opcao
             FROM
                 Tab_Catprod AS TPM
-					LEFT JOIN Tab_Atributo AS TAT ON TAT.idTab_Catprod = TPM.idTab_Catprod
+					
+					LEFT JOIN Tab_Atributo_Select AS TAS ON TAS.idTab_Catprod = TPM.idTab_Catprod
+					LEFT JOIN Tab_Atributo AS TAT ON TAT.idTab_Atributo = TAS.idTab_Atributo
 					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Atributo = TAT.idTab_Atributo
             WHERE
                 TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
@@ -7623,7 +7625,54 @@ exit();*/
         }
 
     }
+
+	public function list_atributo($data, $completo) {
 	
+		$data['Atributo'] = ($data['Atributo']) ? ' AND TPM.idTab_Atributo = ' . $data['Atributo'] : FALSE;
+		$data['Campo'] = (!$data['Campo']) ? 'TPD.Produtos' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+
+        $query = $this->db->query('
+            SELECT
+                TPM.idTab_Atributo,
+				TPM.Atributo,
+				TPM.idSis_Empresa,
+				TOP.Opcao
+            FROM
+                Tab_Atributo AS TPM
+					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Atributo = TPM.idTab_Atributo
+            WHERE
+                TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY
+				TPM.Atributo ASC,
+				TOP.Opcao ASC
+        ');
+
+        /*
+        ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '	, TPM.Promocao ASC
+		#AND
+        #P.idApp_Profissional = OT.idApp_Cliente
+
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+			foreach ($query->result() as $row) {
+
+            }
+
+            return $query;
+        }
+
+    }
+		
 	public function list_orcamentoonline($data, $completo) {
 		
         if ($data['DataFim']) {

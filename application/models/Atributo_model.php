@@ -4,7 +4,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Catprod_model extends CI_Model {
+class Atributo_model extends CI_Model {
 
     public function __construct() {
         parent::__construct();
@@ -13,9 +13,9 @@ class Catprod_model extends CI_Model {
         $this->load->model(array('Basico_model'));
     }
 
-    public function set_catprod($data) {
+    public function set_atributo($data) {
 
-        $query = $this->db->insert('Tab_Catprod', $data);
+        $query = $this->db->insert('Tab_Atributo', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -38,18 +38,6 @@ class Catprod_model extends CI_Model {
         }
 
     }
-	
-    public function set_atributo($data) {
-
-        $query = $this->db->insert_batch('Tab_Atributo_Select', $data);
-
-        if ($this->db->affected_rows() === 0) {
-            return FALSE;
-        } else {
-            #return TRUE;
-            return $this->db->insert_id();
-        }
-    }
 
     public function set_opcao($data) {
 
@@ -65,7 +53,7 @@ class Catprod_model extends CI_Model {
 	
     public function set_atributo2($data) {
 
-        $query = $this->db->insert_batch('Tab_Atributo_Select', $data);
+        $query = $this->db->insert_batch('Tab_Atributo', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -77,7 +65,7 @@ class Catprod_model extends CI_Model {
 	
     public function set_atributo1($data) {
 
-        $query = $this->db->insert('Tab_Atributo_Select', $data);
+        $query = $this->db->insert('Tab_Atributo', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -111,8 +99,8 @@ class Catprod_model extends CI_Model {
         }
     }	
 	
-    public function get_catprod($data) {
-        $query = $this->db->query('SELECT * FROM Tab_Catprod WHERE idTab_Catprod = ' . $data);
+    public function get_atributo($data) {
+        $query = $this->db->query('SELECT * FROM Tab_Atributo WHERE idTab_Atributo = ' . $data);
         $query = $query->result_array();
 
         /*
@@ -127,26 +115,13 @@ class Catprod_model extends CI_Model {
         return $query[0];
     }
 
-	public function get_atributo($data) {
-		$query = $this->db->query('
-			SELECT * 
-			FROM 
-				Tab_Atributo_Select 
-			WHERE 
-				idTab_Catprod = ' . $data . ' 
-		');
-        $query = $query->result_array();
-
-        return $query;
-    }
-
 	public function get_opcao($data) {
 		$query = $this->db->query('
 			SELECT * 
 			FROM 
 				Tab_Opcao 
 			WHERE 
-				idTab_Catprod = ' . $data . ' 
+				idTab_Atributo = ' . $data . ' 
 		');
         $query = $query->result_array();
 
@@ -157,10 +132,10 @@ class Catprod_model extends CI_Model {
 		$query = $this->db->query('
 			SELECT * 
 			FROM 
-				Tab_Atributo_Select 
+				Tab_Atributo 
 			WHERE 
-				idTab_Catprod = ' . $data . ' AND
-				Item_Catprod = '. $item . '
+				idTab_Atributo = ' . $data . ' AND
+				Item_Atributo = '. $item . '
 		');
         $query = $query->result_array();
 
@@ -171,25 +146,25 @@ class Catprod_model extends CI_Model {
 		$query = $this->db->query('
 			SELECT * 
 			FROM 
-				Tab_Atributo_Select 
+				Tab_Atributo 
 			WHERE 
-				idTab_Catprod = ' . $data . ' AND
-				Item_Catprod = '. $item . '
+				idTab_Atributo = ' . $data . ' AND
+				Item_Atributo = '. $item . '
 		');
         $query = $query->result_array();
 
         return $query;
     }	
 
-    public function list_catprod1($id, $aprovado, $completo) {
+    public function list_atributo1($id, $aprovado, $completo) {
 
         $query = $this->db->query('
             SELECT
-                TF.idTab_Catprod,
+                TF.idTab_Atributo,
                 TF.TipoProduto,
-                TF.Catprod
+                TF.Atributo
             FROM
-                Tab_Catprod AS TF
+                Tab_Atributo AS TF
             WHERE
                 TF.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' 
             ORDER BY
@@ -219,28 +194,28 @@ class Catprod_model extends CI_Model {
         }
     }
 
-    public function lista_catprod($x) {
+    public function lista_atributo($x) {
 
-		#$data['Catprod'] = ($data['Catprod']) ? ' AND TP.idTab_Catprod = ' . $data['Catprod'] : FALSE;
+		#$data['Atributo'] = ($data['Atributo']) ? ' AND TP.idTab_Atributo = ' . $data['Atributo'] : FALSE;
 		
         $query = $this->db->query('
 			SELECT 
-				TP.idTab_Catprod,
-				TP.Catprod,
+				TP.idTab_Atributo,
+				TP.Atributo,
 				T3.Prodaux3,
 				TV.AtributoProduto
 			FROM 
-				Tab_Catprod AS TP
+				Tab_Atributo AS TP
 				 LEFT JOIN Tab_Prodaux3 AS T3 ON T3.idTab_Prodaux3 = TP.Prodaux3
-				 LEFT JOIN Tab_Atributo_Select AS TV ON TV.idTab_Catprod = TP.idTab_Catprod
+				 LEFT JOIN Tab_Atributo AS TV ON TV.idTab_Atributo = TP.idTab_Atributo
 				 
 			WHERE 
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				TV.idTab_Catprod = TP.idTab_Catprod
+				TV.idTab_Atributo = TP.idTab_Atributo
 			ORDER BY 
 				T3.Prodaux3 ASC, 
-				TP.Catprod ASC 
+				TP.Atributo ASC 
 		');
 
         /*
@@ -267,17 +242,17 @@ class Catprod_model extends CI_Model {
         }
     }
 	
-    public function update_catprod($data, $id) {
+    public function update_atributo($data, $id) {
 
-        unset($data['idTab_Catprod']);
-        $query = $this->db->update('Tab_Catprod', $data, array('idTab_Catprod' => $id));
+        unset($data['idTab_Atributo']);
+        $query = $this->db->update('Tab_Atributo', $data, array('idTab_Atributo' => $id));
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }
 
-    public function update_atributo($data) {
+    public function update_atributo3($data) {
 
-        $query = $this->db->update_batch('Tab_Atributo_Select', $data, 'idTab_Atributo_Select');
+        $query = $this->db->update_batch('Tab_Atributo', $data, 'idTab_Atributo');
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }
@@ -291,15 +266,15 @@ class Catprod_model extends CI_Model {
 
     public function update_atributo2($data) {
 
-        $query = $this->db->update_batch('Tab_Atributo_Select', $data, 'idTab_Atributo_Select');
+        $query = $this->db->update_batch('Tab_Atributo', $data, 'idTab_Atributo');
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }	
 	
-    public function delete_atributo($data) {
+    public function delete_atributo3($data) {
 
-        $this->db->where_in('idTab_Atributo_Select', $data);
-        $this->db->delete('Tab_Atributo_Select');
+        $this->db->where_in('idTab_Atributo', $data);
+        $this->db->delete('Tab_Atributo');
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -322,8 +297,8 @@ class Catprod_model extends CI_Model {
 	
     public function delete_atributo2($data) {
 
-        $this->db->where_in('idTab_Atributo_Select', $data);
-        $this->db->delete('Tab_Atributo_Select');
+        $this->db->where_in('idTab_Atributo', $data);
+        $this->db->delete('Tab_Atributo');
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -332,11 +307,10 @@ class Catprod_model extends CI_Model {
         }
     }
 	
-    public function delete_catprod($id) {
+    public function delete_atributo($id) {
 
-        $query = $this->db->delete('Tab_Atributo_Select', array('idTab_Catprod' => $id));
-        $query = $this->db->delete('Tab_Catprod', array('idTab_Catprod' => $id));
-		
+		$query = $this->db->delete('Tab_Opcao', array('idTab_Atributo' => $id));
+        $query = $this->db->delete('Tab_Atributo', array('idTab_Atributo' => $id));
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -352,17 +326,17 @@ class Catprod_model extends CI_Model {
         return (isset($query[0]['TipoProduto'])) ? $query[0]['TipoProduto'] : FALSE;
     }
 	
-	public function select_catprod($data = FALSE) {
+	public function select_atributo($data = FALSE) {
 
         if ($data === TRUE) {
             $array = $this->db->query(
             'SELECT
-                TPV.idTab_Catprod,
-				CONCAT(IFNULL(TPV.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TPV.Catprod,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TPV.UnidadeProduto,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
+                TPV.idTab_Atributo,
+				CONCAT(IFNULL(TPV.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TPV.Atributo,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TPV.UnidadeProduto,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
 				TPV.AtributoCompraProduto,
 				TPV.Categoria
             FROM
-                Tab_Catprod AS TPV
+                Tab_Atributo AS TPV
 					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = TPV.Fornecedor
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPV.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPV.Prodaux2
@@ -374,19 +348,19 @@ class Catprod_model extends CI_Model {
 				TPV.CodProd ASC,
 				TPV.Categoria ASC,
 				TP3.Prodaux3,				
-				TPV.Catprod ASC,
+				TPV.Atributo ASC,
 				TP1.Prodaux1,
 				TP2.Prodaux2 
     ');
         } else {
             $query = $this->db->query(
             'SELECT
-                TPV.idTab_Catprod,
-				CONCAT(IFNULL(TPV.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TPV.Catprod,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TPV.UnidadeProduto,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
+                TPV.idTab_Atributo,
+				CONCAT(IFNULL(TPV.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TPV.Atributo,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TPV.UnidadeProduto,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
 				TPV.AtributoCompraProduto,
 				TPV.Categoria
             FROM
-                Tab_Catprod AS TPV
+                Tab_Atributo AS TPV
 					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = TPV.Fornecedor
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPV.Prodaux3
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPV.Prodaux2
@@ -398,14 +372,14 @@ class Catprod_model extends CI_Model {
 				TPV.CodProd ASC,
 				TPV.Categoria ASC,
 				TP3.Prodaux3,				
-				TPV.Catprod ASC,
+				TPV.Atributo ASC,
 				TP1.Prodaux1,
 				TP2.Prodaux2 
     ');
 
             $array = array();
             foreach ($query->result() as $row) {
-                $array[$row->idTab_Catprod] = $row->NomeProduto;
+                $array[$row->idTab_Atributo] = $row->NomeProduto;
             }
         }
 
