@@ -55,7 +55,8 @@
 														?>
 													</select>
 													<?php echo form_error('Prodaux3'); ?>
-												</div>												
+												</div>
+												
 												<div class="col-md-5">
 													<label for="Cadastrar">Cadastrar 
 														<?php if ($metodo == 1) { ?>
@@ -96,6 +97,7 @@
 											
 											<div class="row">
 												<div class="col-md-12 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+													<!--
 													<?php if ($metodo == 1) { ?>
 													<label></label><br>
 													<a class="btn btn-sm btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux32/cadastrar3" role="button"> 
@@ -111,7 +113,7 @@
 														<span class="glyphicon glyphicon-plus"></span> Tam
 													</a>
 													<?php } ?>
-													<!--
+													
 													<label></label>
 													<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux42/cadastrar3/" role="button"> 
 														<span class="glyphicon glyphicon-plus"></span> Mod
@@ -272,89 +274,7 @@
 							</div>
 						</div>	
 					</div>
-				
-					<?php if ($metodo > 1) { ?>
-						<!--
-						<div class="col-md-4">
-							<div class="panel-group" id="accordion7" role="tablist" aria-multiselectable="true">
-								<div class="panel panel-primary">
-									 <div class="panel-heading" role="tab" id="heading7" data-toggle="collapse" data-parent="#accordion7" data-target="#collapse7">
-										<h4 class="panel-title">
-											<a class="accordion-toggle">
-												<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-												Atributos
-											</a>
-										</h4>
-									</div>
 
-									<div id="collapse7" class="panel-collapse" role="tabpanel" aria-labelledby="heading7" aria-expanded="false">
-										<div class="panel-body">
-									
-											<input type="hidden" name="SCount" id="SCount" value="<?php echo $count['SCount']; ?>"/>
-
-											<div class="input_fields_wrap105">
-
-												<?php
-												for ($i=1; $i <= $count['SCount']; $i++) {
-												?>
-
-													<?php if ($metodo > 1) { ?>
-														<input type="hidden" name="idTab_Atributo_Select<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Atributo_Select']; ?>"/>
-													<?php } ?>
-
-													<input type="hidden" name="ServicoHidden" id="ServicoHidden<?php echo $i ?>" value="<?php echo $i ?>">
-													
-													<div class="form-group" id="105div<?php echo $i ?>">
-														<div class="panel panel-warning">
-															<div class="panel-heading">
-																<div class="row">
-																	<div class="col-md-10">
-																		<label for="idTab_Atributo">Atributo<?php echo $i ?></label>
-																		<?php if ($i == 1) { ?>
-																		<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>servico/cadastrar/servico" role="button">
-																			<span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
-																		</a>
-																		<?php } ?>
-																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen"<?php echo $readonly; ?>
-																				id="listadinamica<?php echo $i ?>" name="idTab_Atributo<?php echo $i ?>">																					
-																			<option value="">-- Selecione uma opção --</option>
-																			<?php
-																			foreach ($select['idTab_Atributo'] as $key => $row) {
-																				if ($servico[$i]['idTab_Atributo'] == $key) {
-																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																				} else {
-																					echo '<option value="' . $key . '">' . $row . '</option>';
-																				}
-																			}
-																			?>
-																		</select>
-																	</div>		
-																	<div class="col-md-1">
-																		<label><br></label><br>
-																		<button type="button" id="<?php echo $i ?>" class="remove_field105 btn btn-danger">
-																			<span class="glyphicon glyphicon-trash"></span>
-																		</button>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												<?php
-												}
-												?>
-											</div>
-											<div class="col-md-2 text-left">
-												<a class="add_field_button105 btn btn-warning">
-													<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Atributo
-												</a>
-											</div>											
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						-->
-					<?php } ?>
 					<?php if ($metodo > 1) { ?>
 						
 						<div class="col-md-4">

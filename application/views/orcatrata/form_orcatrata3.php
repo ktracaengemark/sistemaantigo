@@ -238,6 +238,7 @@
 									<div class="panel panel-success">
 										<div class="panel-heading">
 											<input type="hidden" name="PCount" id="PCount" value="<?php echo $count['PCount']; ?>"/>
+											<input type="hidden" name="Negocio" id="Negocio" value="1"/>
 											<?php if ($_SESSION['log']['idSis_Empresa'] == 42 ) { ?>
 												<div class="input_fields_wrap42">
 													
@@ -717,7 +718,7 @@
 																		<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Produtos
 																	</a>																						
 																<?php }else{ ?>	
-																	<a class="add_field_button9 btn btn-success"
+																	<a class="add_field_button9 btn btn-success" id="Negocio" value="1"
 																			onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
 																		<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Produtos
 																	</a>

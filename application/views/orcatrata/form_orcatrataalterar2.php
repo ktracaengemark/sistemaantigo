@@ -223,6 +223,7 @@
 									<div class="panel panel-success">
 										<div class="panel-heading">
 											<input type="hidden" name="PCount" id="PCount" value="<?php echo $count['PCount']; ?>"/>
+											<input type="hidden" name="Negocio" id="Negocio" value="1"/>
 											<?php if ($_SESSION['log']['idSis_Empresa'] == 42 ) { ?>
 												<div class="input_fields_wrap42">
 													

@@ -174,6 +174,7 @@
 								<div class="panel panel-success">
 									<div class="panel-heading">		
 										<input type="hidden" name="PCount" id="PCount" value="<?php echo $count['PCount']; ?>"/>
+										<input type="hidden" name="Negocio" id="Negocio" value="2"/>
 										<div class="input_fields_wrap9">
 											<?php
 											$QtdSoma = $ProdutoSoma = 0;
