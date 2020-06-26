@@ -135,31 +135,32 @@ elseif ($_GET['q'] == 92) {
 }
 
 elseif ($_GET['q'] == 98) {
-//// daqui, eu pegoo Tamanho
+//// daqui, eu pegoo Tipo
     $result = mysql_query('
             SELECT
-				P.idTab_Tam_Prod,
-				P.Tam_Prod,
+				P.idTab_Opcao_Select,
+				P.idTab_Opcao,
 				P.idTab_Produto,
 				TOP.Opcao,
-				CONCAT(IFNULL(TOP.Opcao,"")) AS Nome_Tam_Prod
+				CONCAT(IFNULL(TOP.Opcao,"")) AS Opcao
             FROM
-                Tab_Tam_Prod AS P
-					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Opcao = P.Tam_Prod
+                Tab_Opcao_Select AS P
+					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Opcao = P.idTab_Opcao
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' 
+				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' AND
+				P.Item_Atributo = "2"
 			ORDER BY 
-				P.Nome_Tam_Prod ASC
+				TOP.Opcao ASC
 				
     ');
 
     while ($row = mysql_fetch_assoc($result)) {
 
-        $event_array2[] = array(
-            'id' => $row['idTab_Tam_Prod'],
-            'name' => utf8_encode($row['Nome_Tam_Prod']),
+        $event_array[] = array(
+            'id' => $row['idTab_Opcao_Select'],
+            'name' => utf8_encode($row['Opcao']),
         );
     }
 

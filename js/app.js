@@ -6427,7 +6427,7 @@ $(document).ready(function () {
                 //clear the current content of the select
                 $select.html('');
                 //iterate over the data and append a select option
-                $select.append('<option value="">-- Sel. Tipo --</option>');
+                $select.append('<option value="">-- Sel. Opcao --</option>');
                 $.each(data, function (key, val) {
                     //alert(val.id);
                     $select.append('<option value="' + val.id + '">' + val.name + '</option>');
@@ -6453,14 +6453,14 @@ $(document).ready(function () {
 
         //request the JSON data and parse into the select element
         $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json2.php?q=98',
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=98',
             dataType: 'JSON',
             type: "GET",
             success: function (data) {
                 //clear the current content of the select
                 $select2.html('');
                 //iterate over the data and append a select option
-                $select2.append('<option value="">-- Sel. Tamanho --</option>');
+                $select2.append('<option value="">-- Sel. Opcao --</option>');
                 $.each(data, function (key, val) {
                     //alert(val.id);
                     $select2.append('<option value="' + val.id + '">' + val.name + '</option>');

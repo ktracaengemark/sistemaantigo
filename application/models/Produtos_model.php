@@ -220,14 +220,14 @@ class Produtos_model extends CI_Model {
         return $query;
     }	
 
-	public function get_item_promocao($data, $item) {
+	public function get_opcao_select($data, $item) {
 		$query = $this->db->query('
 			SELECT * 
 			FROM 
-				Tab_Valor 
+				Tab_Opcao_Select 
 			WHERE 
-				idTab_Promocao = ' . $data . ' AND
-				Item_Promocao = '. $item . '
+				idTab_Produto = ' . $data . ' AND
+				Item_Atributo = '. $item . '
 		');
         $query = $query->result_array();
 

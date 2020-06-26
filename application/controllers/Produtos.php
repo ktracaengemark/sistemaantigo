@@ -1656,7 +1656,8 @@ class Produtos extends CI_Controller {
             }
 			
             #### Tab_Valor2 ####
-            $data['item_promocao2'] = $this->Produtos_model->get_opcao_select2($id);
+            #$data['item_promocao2'] = $this->Produtos_model->get_opcao_select2($id);
+			$data['item_promocao2'] = $this->Produtos_model->get_opcao_select($id, "2");
             if (count($data['item_promocao2']) > 0) {
                 $data['item_promocao2'] = array_combine(range(1, count($data['item_promocao2'])), array_values($data['item_promocao2']));
                 $data['count']['PT2Count'] = count($data['item_promocao2']);
@@ -1670,8 +1671,9 @@ class Produtos extends CI_Controller {
             }
 			
             #### Tab_Valor3 ####
-            $data['item_promocao3'] = $this->Produtos_model->get_opcao_select1($id);
-            if (count($data['item_promocao3']) > 0) {
+            #$data['item_promocao3'] = $this->Produtos_model->get_opcao_select1($id);
+            $data['item_promocao3'] = $this->Produtos_model->get_opcao_select($id, "1");
+			if (count($data['item_promocao3']) > 0) {
                 $data['item_promocao3'] = array_combine(range(1, count($data['item_promocao3'])), array_values($data['item_promocao3']));
                 $data['count']['PT3Count'] = count($data['item_promocao3']);
 				/*
@@ -1724,16 +1726,22 @@ class Produtos extends CI_Controller {
 		#$data['select']['Cat_Prod'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Cor_Prod'] = $this->Prodaux2_model->select_prodaux24();
 		$data['select']['Tam_Prod'] = $this->Prodaux1_model->select_prodaux14();
-		$data['select']['Tam_Prod_Aux1'] = $this->Basico_model->select_tam_prod();
-		$data['select']['Cor_Prod_Aux2'] = $this->Basico_model->select_cor_prod();
+		
+		#$data['select']['Tam_Prod_Aux1'] = $this->Basico_model->select_tam_prod();
+		#$data['select']['Cor_Prod_Aux2'] = $this->Basico_model->select_cor_prod();
+		
 		$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		
 		$data['select']['Prodaux3'] = $this->Basico_model->select_catprod();
 		$data['select']['idTab_Atributo'] = $this->Basico_model->select_atributo($_SESSION['Produto']['Prodaux3']);
-		$data['select']['idTab_Opcao2'] = $this->Basico_model->select_opcao_select2();
-		$data['select']['idTab_Opcao3'] = $this->Basico_model->select_opcao_select3();
+		$data['select']['idTab_Opcao2'] = $this->Basico_model->select_opcao_2();
+		$data['select']['idTab_Opcao3'] = $this->Basico_model->select_opcao_3();
+		
+		$data['select']['Cor_Prod_Aux2'] = $this->Basico_model->select_opcao_select2();
+		$data['select']['Tam_Prod_Aux1'] = $this->Basico_model->select_opcao_select3();		
+		
 		#$data['select']['Atributo_1'] = $this->Basico_model->select_atributo($_SESSION['Produto']['Prodaux3']);
 		#$data['select']['Atributo_2'] = $this->Basico_model->select_atributo($_SESSION['Produto']['Prodaux3']);
 		#$data['select']['Atributo_3'] = $this->Basico_model->select_atributo($_SESSION['Produto']['Prodaux3']);		
@@ -1903,7 +1911,8 @@ class Produtos extends CI_Controller {
             }
 			
             #### Tab_Valor2 ####
-            $data['update']['item_promocao2']['anterior'] = $this->Produtos_model->get_opcao_select2($data['produtos']['idTab_Produto']);
+            #$data['update']['item_promocao2']['anterior'] = $this->Produtos_model->get_opcao_select2($data['produtos']['idTab_Produto']);
+			$data['update']['item_promocao2']['anterior'] = $this->Produtos_model->get_opcao_select($data['produtos']['idTab_Produto'], "2");
             if (isset($data['item_promocao2']) || (!isset($data['item_promocao2']) && isset($data['update']['item_promocao2']['anterior']) ) ) {
 
                 if (isset($data['item_promocao2']))
@@ -1922,14 +1931,14 @@ class Produtos extends CI_Controller {
 					$data['update']['item_promocao2']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['item_promocao2']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['item_promocao2']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['item_promocao2']['inserir'][$j]['idTab_Atributo_Select'] = $_SESSION['Atributos'][2];
+					
                 }
 
                 $max2 = count($data['update']['item_promocao2']['alterar']);
                 for($j=0;$j<$max2;$j++) {
 					$data['update']['item_promocao2']['alterar'][$j]['Item_Atributo'] = "2";
 					$data['update']['item_promocao2']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['item_promocao2']['alterar'][$j]['idTab_Atributo_Select'] = $_SESSION['Atributos'][2];
+					
 				}
 
                 if (count($data['update']['item_promocao2']['inserir']))
@@ -1944,7 +1953,8 @@ class Produtos extends CI_Controller {
             }
 			
             #### Tab_Valor3 ####
-            $data['update']['item_promocao3']['anterior'] = $this->Produtos_model->get_opcao_select1($data['produtos']['idTab_Produto']);
+            #$data['update']['item_promocao3']['anterior'] = $this->Produtos_model->get_opcao_select1($data['produtos']['idTab_Produto']);
+			$data['update']['item_promocao3']['anterior'] = $this->Produtos_model->get_opcao_select($data['produtos']['idTab_Produto'], "1");
             if (isset($data['item_promocao3']) || (!isset($data['item_promocao3']) && isset($data['update']['item_promocao3']['anterior']) ) ) {
 
                 if (isset($data['item_promocao3']))
@@ -1963,14 +1973,14 @@ class Produtos extends CI_Controller {
 					$data['update']['item_promocao3']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['item_promocao3']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['item_promocao3']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['item_promocao2']['inserir'][$j]['idTab_Atributo_Select'] = $_SESSION['Atributos'][1];
+					
                 }
 
                 $max = count($data['update']['item_promocao3']['alterar']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['item_promocao3']['alterar'][$j]['Item_Atributo'] = "1";
 					$data['update']['item_promocao3']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['item_promocao2']['alterar'][$j]['idTab_Atributo_Select'] = $_SESSION['Atributos'][1];
+					
 				}
 
                 if (count($data['update']['item_promocao3']['inserir']))
@@ -2255,7 +2265,8 @@ class Produtos extends CI_Controller {
             }
 			
             #### Tab_Valor ####
-            $data['item_promocao3'] = $this->Produtos_model->get_opcao_select1($id);
+            #$data['item_promocao3'] = $this->Produtos_model->get_opcao_select1($id);
+			$data['item_promocao3'] = $this->Produtos_model->get_opcao_select($id, "1");
             if (count($data['item_promocao3']) > 0) {
                 $data['item_promocao3'] = array_combine(range(1, count($data['item_promocao3'])), array_values($data['item_promocao3']));
                 $data['count']['PT3Count'] = count($data['item_promocao3']);
@@ -2269,7 +2280,8 @@ class Produtos extends CI_Controller {
             }
 			
             #### Tab_Valor2 ####
-            $data['item_promocao2'] = $this->Produtos_model->get_opcao_select2($id);
+            #$data['item_promocao2'] = $this->Produtos_model->get_opcao_select2($id);
+			$data['item_promocao2'] = $this->Produtos_model->get_opcao_select($id, "2");
             if (count($data['item_promocao2']) > 0) {
                 $data['item_promocao2'] = array_combine(range(1, count($data['item_promocao2'])), array_values($data['item_promocao2']));
                 $data['count']['PT2Count'] = count($data['item_promocao2']);
@@ -2327,8 +2339,10 @@ class Produtos extends CI_Controller {
 		$data['select']['Cat_Prod'] = $this->Prodaux3_model->select_prodaux3();
 		#$data['select']['Cor_Prod'] = $this->Prodaux2_model->select_prodaux24();
 		#$data['select']['Tam_Prod'] = $this->Prodaux1_model->select_prodaux14();
-		$data['select']['Cor_Prod_Aux2'] = $this->Basico_model->select_cor_prod();
-		$data['select']['Tam_Prod_Aux1'] = $this->Basico_model->select_tam_prod();
+		
+		#$data['select']['Cor_Prod_Aux2'] = $this->Basico_model->select_cor_prod();
+		#$data['select']['Tam_Prod_Aux1'] = $this->Basico_model->select_tam_prod();
+		
 		$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
@@ -2339,8 +2353,10 @@ class Produtos extends CI_Controller {
 		
 		$data['select']['Prodaux3'] = $this->Basico_model->select_catprod();
 		$data['select']['idTab_Atributo'] = $this->Basico_model->select_atributo($_SESSION['Produto']['Prodaux3']);
-		$data['select']['idTab_Opcao2'] = $this->Basico_model->select_opcao_select2();
-		$data['select']['idTab_Opcao3'] = $this->Basico_model->select_opcao_select3();
+		$data['select']['idTab_Opcao2'] = $this->Basico_model->select_opcao_2();
+		$data['select']['idTab_Opcao3'] = $this->Basico_model->select_opcao_3();
+		$data['select']['Cor_Prod_Aux2'] = $this->Basico_model->select_opcao_select2();
+		$data['select']['Tam_Prod_Aux1'] = $this->Basico_model->select_opcao_select3();
 		#$data['select']['Atributo_1'] = $this->Basico_model->select_atributo($_SESSION['Produto']['Prodaux3']);
 		#$data['select']['Atributo_2'] = $this->Basico_model->select_atributo($_SESSION['Produto']['Prodaux3']);
 		#$data['select']['Atributo_3'] = $this->Basico_model->select_atributo($_SESSION['Produto']['Prodaux3']);
@@ -2512,7 +2528,8 @@ class Produtos extends CI_Controller {
             }
 			
             #### Tab_Valor2 ####
-            $data['update']['item_promocao2']['anterior'] = $this->Produtos_model->get_opcao_select2($data['produtos']['idTab_Produto']);
+            #$data['update']['item_promocao2']['anterior'] = $this->Produtos_model->get_opcao_select2($data['produtos']['idTab_Produto']);
+			$data['update']['item_promocao2']['anterior'] = $this->Produtos_model->get_opcao_select($data['produtos']['idTab_Produto'], "2");
             if (isset($data['item_promocao2']) || (!isset($data['item_promocao2']) && isset($data['update']['item_promocao2']['anterior']) ) ) {
 
                 if (isset($data['item_promocao2']))
@@ -2531,14 +2548,14 @@ class Produtos extends CI_Controller {
 					$data['update']['item_promocao2']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['item_promocao2']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['item_promocao2']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['item_promocao2']['inserir'][$j]['idTab_Atributo_Select'] = $_SESSION['Atributos'][2];
+					
                 }
 
                 $max2 = count($data['update']['item_promocao2']['alterar']);
                 for($j=0;$j<$max2;$j++) {
 					$data['update']['item_promocao2']['alterar'][$j]['Item_Atributo'] = "2";
 					$data['update']['item_promocao2']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['item_promocao2']['alterar'][$j]['idTab_Atributo_Select'] = $_SESSION['Atributos'][2];
+					
 				}
 
                 if (count($data['update']['item_promocao2']['inserir']))
@@ -2553,7 +2570,8 @@ class Produtos extends CI_Controller {
             }
 			
             #### Tab_Valor3 ####
-            $data['update']['item_promocao3']['anterior'] = $this->Produtos_model->get_opcao_select1($data['produtos']['idTab_Produto']);
+            #$data['update']['item_promocao3']['anterior'] = $this->Produtos_model->get_opcao_select1($data['produtos']['idTab_Produto']);
+			$data['update']['item_promocao3']['anterior'] = $this->Produtos_model->get_opcao_select($data['produtos']['idTab_Produto'], "1");
             if (isset($data['item_promocao3']) || (!isset($data['item_promocao3']) && isset($data['update']['item_promocao3']['anterior']) ) ) {
 
                 if (isset($data['item_promocao3']))
@@ -2572,14 +2590,14 @@ class Produtos extends CI_Controller {
 					$data['update']['item_promocao3']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['item_promocao3']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['item_promocao3']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['item_promocao2']['inserir'][$j]['idTab_Atributo_Select'] = $_SESSION['Atributos'][1];
+					
                 }
 
                 $max = count($data['update']['item_promocao3']['alterar']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['item_promocao3']['alterar'][$j]['Item_Atributo'] = "1";
 					$data['update']['item_promocao3']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['item_promocao2']['alterar'][$j]['idTab_Atributo_Select'] = $_SESSION['Atributos'][1];
+					
 				}
 
                 if (count($data['update']['item_promocao3']['inserir']))
@@ -2850,7 +2868,8 @@ class Produtos extends CI_Controller {
             }			
 			
             #### Tab_Valor ####
-            $data['item_promocao3'] = $this->Produtos_model->get_opcao_select1($id);
+            #$data['item_promocao3'] = $this->Produtos_model->get_opcao_select1($id);
+			$data['item_promocao3'] = $this->Produtos_model->get_opcao_select($id, "1");
             if (count($data['item_promocao3']) > 0) {
                 $data['item_promocao3'] = array_combine(range(1, count($data['item_promocao3'])), array_values($data['item_promocao3']));
                 $data['count']['PT3Count'] = count($data['item_promocao3']);
@@ -2864,7 +2883,8 @@ class Produtos extends CI_Controller {
             }
 			
             #### Tab_Valor2 ####
-            $data['item_promocao2'] = $this->Produtos_model->get_opcao_select2($id);
+            #$data['item_promocao2'] = $this->Produtos_model->get_opcao_select2($id);
+			$data['item_promocao2'] = $this->Produtos_model->get_opcao_select($id, "2");
             if (count($data['item_promocao2']) > 0) {
                 $data['item_promocao2'] = array_combine(range(1, count($data['item_promocao2'])), array_values($data['item_promocao2']));
                 $data['count']['PT2Count'] = count($data['item_promocao2']);
@@ -2917,8 +2937,10 @@ class Produtos extends CI_Controller {
 		$data['select']['Cat_Prod'] = $this->Prodaux3_model->select_prodaux3();
 		#$data['select']['Cor_Prod'] = $this->Prodaux2_model->select_prodaux24();
 		#$data['select']['Tam_Prod'] = $this->Prodaux1_model->select_prodaux14();
-		$data['select']['Tam_Prod_Aux1'] = $this->Basico_model->select_tam_prod();
-		$data['select']['Cor_Prod_Aux2'] = $this->Basico_model->select_cor_prod();
+		
+		#$data['select']['Tam_Prod_Aux1'] = $this->Basico_model->select_tam_prod();
+		#$data['select']['Cor_Prod_Aux2'] = $this->Basico_model->select_cor_prod();
+		
 		#$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_prod_der0();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
@@ -2929,8 +2951,12 @@ class Produtos extends CI_Controller {
 		
 		$data['select']['Prodaux3'] = $this->Basico_model->select_catprod();
 		$data['select']['idTab_Atributo'] = $this->Basico_model->select_atributo($_SESSION['Produto']['Prodaux3']);
-		$data['select']['idTab_Opcao2'] = $this->Basico_model->select_opcao_select2();
-		$data['select']['idTab_Opcao3'] = $this->Basico_model->select_opcao_select3();
+		$data['select']['idTab_Opcao2'] = $this->Basico_model->select_opcao_2();
+		$data['select']['idTab_Opcao3'] = $this->Basico_model->select_opcao_3();
+		
+		$data['select']['Cor_Prod_Aux2'] = $this->Basico_model->select_opcao_select2();
+		$data['select']['Tam_Prod_Aux1'] = $this->Basico_model->select_opcao_select3();
+		
 		#$data['select']['Atributo_1'] = $this->Basico_model->select_atributo($_SESSION['Produto']['Prodaux3']);
 		#$data['select']['Atributo_2'] = $this->Basico_model->select_atributo($_SESSION['Produto']['Prodaux3']);
 		#$data['select']['Atributo_3'] = $this->Basico_model->select_atributo($_SESSION['Produto']['Prodaux3']);		
@@ -3108,7 +3134,8 @@ class Produtos extends CI_Controller {
             }			
 			
             #### Tab_Valor2 ####
-            $data['update']['item_promocao2']['anterior'] = $this->Produtos_model->get_opcao_select2($data['produtos']['idTab_Produto']);
+            #$data['update']['item_promocao2']['anterior'] = $this->Produtos_model->get_opcao_select2($data['produtos']['idTab_Produto']);
+			$data['update']['item_promocao2']['anterior'] = $this->Produtos_model->get_opcao_select($data['produtos']['idTab_Produto'], "2");
             if (isset($data['item_promocao2']) || (!isset($data['item_promocao2']) && isset($data['update']['item_promocao2']['anterior']) ) ) {
 
                 if (isset($data['item_promocao2']))
@@ -3127,14 +3154,14 @@ class Produtos extends CI_Controller {
 					$data['update']['item_promocao2']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['item_promocao2']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['item_promocao2']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['item_promocao2']['inserir'][$j]['idTab_Atributo_Select'] = $_SESSION['Atributos'][2];
+					
                 }
 
                 $max2 = count($data['update']['item_promocao2']['alterar']);
                 for($j=0;$j<$max2;$j++) {
 					$data['update']['item_promocao2']['alterar'][$j]['Item_Atributo'] = "2";
 					$data['update']['item_promocao2']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['item_promocao2']['alterar'][$j]['idTab_Atributo_Select'] = $_SESSION['Atributos'][2];
+					
 				}
 
                 if (count($data['update']['item_promocao2']['inserir']))
@@ -3149,7 +3176,8 @@ class Produtos extends CI_Controller {
             }
 			
             #### Tab_Valor3 ####
-            $data['update']['item_promocao3']['anterior'] = $this->Produtos_model->get_opcao_select1($data['produtos']['idTab_Produto']);
+            #$data['update']['item_promocao3']['anterior'] = $this->Produtos_model->get_opcao_select1($data['produtos']['idTab_Produto']);
+			$data['update']['item_promocao3']['anterior'] = $this->Produtos_model->get_opcao_select($data['produtos']['idTab_Produto'], "1");
             if (isset($data['item_promocao3']) || (!isset($data['item_promocao3']) && isset($data['update']['item_promocao3']['anterior']) ) ) {
 
                 if (isset($data['item_promocao3']))
@@ -3168,14 +3196,14 @@ class Produtos extends CI_Controller {
 					$data['update']['item_promocao3']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['item_promocao3']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['item_promocao3']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['item_promocao2']['inserir'][$j]['idTab_Atributo_Select'] = $_SESSION['Atributos'][1];
+					
                 }
 
                 $max = count($data['update']['item_promocao3']['alterar']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['item_promocao3']['alterar'][$j]['Item_Atributo'] = "1";
 					$data['update']['item_promocao3']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['item_promocao2']['alterar'][$j]['idTab_Atributo_Select'] = $_SESSION['Atributos'][1];
+					
 				}
 
                 if (count($data['update']['item_promocao3']['inserir']))
