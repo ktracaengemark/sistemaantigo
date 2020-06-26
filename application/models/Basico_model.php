@@ -1222,20 +1222,14 @@ if (isset($data) && $data) {
                 V.idTab_Valor,
                 V.ValorProduto,
 				V.QtdProdutoIncremento,
-				TCP.idTab_Cor_Prod,
-				TCP.Nome_Cor_Prod,
-				TTP.idTab_Tam_Prod,
-				TTP.Nome_Tam_Prod,
-				TPAX1.Prodaux1,
-				TPAX2.Prodaux2,				
-				CONCAT(IFNULL(V.QtdProdutoIncremento,""), " - ", IFNULL(P.Nome_Prod,""), " - ", IFNULL(TPAX2.Prodaux2,""), " - ", IFNULL(TPAX1.Prodaux1,""), " - ", IFNULL(V.ValorProduto,"")) AS NomeProduto
+				TOP2.Opcao,
+				TOP1.Opcao,			
+				CONCAT(IFNULL(V.QtdProdutoIncremento,""), " - ", IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = P.Cor_Prod_Aux2
-					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = TCP.Cor_Prod
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = P.Tam_Prod_Aux1	
-					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = TTP.Tam_Prod					
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2					
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 				P.idTab_Produtos = V.idTab_Produtos
@@ -1248,20 +1242,14 @@ if (isset($data) && $data) {
                 V.idTab_Valor,
                 V.ValorProduto,
 				V.QtdProdutoIncremento,
-				TCP.idTab_Cor_Prod,
-				TCP.Nome_Cor_Prod,
-				TTP.idTab_Tam_Prod,
-				TTP.Nome_Tam_Prod,
-				TPAX1.Prodaux1,
-				TPAX2.Prodaux2,				
-				CONCAT(IFNULL(V.QtdProdutoIncremento,""), " - ", IFNULL(P.Nome_Prod,""), " - ", IFNULL(TPAX2.Prodaux2,""), " - ", IFNULL(TPAX1.Prodaux1,""), " - ", IFNULL(V.ValorProduto,"")) AS NomeProduto
+				TOP2.Opcao,
+				TOP1.Opcao,			
+				CONCAT(IFNULL(V.QtdProdutoIncremento,""), " - ", IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = P.Cor_Prod_Aux2
-					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = TCP.Cor_Prod
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = P.Tam_Prod_Aux1	
-					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = TTP.Tam_Prod					
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2				
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 				P.idTab_Produtos = V.idTab_Produtos
@@ -1415,8 +1403,8 @@ if (isset($data) && $data) {
                 CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Opcao_Atributo_2
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
@@ -1432,8 +1420,8 @@ if (isset($data) && $data) {
                 CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Opcao_Atributo_2
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
@@ -1463,8 +1451,8 @@ if (isset($data) && $data) {
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Cor_Prod_Aux2
-					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Tam_Prod_Aux1				
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -1483,8 +1471,8 @@ if (isset($data) && $data) {
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Cor_Prod_Aux2
-					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Tam_Prod_Aux1				
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -1509,20 +1497,14 @@ if (isset($data) && $data) {
             SELECT
                 TPS.idTab_Produtos,
 				TPS.idTab_Produto,
-				TCP.idTab_Cor_Prod,
-				TCP.Nome_Cor_Prod,
-				TTP.idTab_Tam_Prod,
-				TTP.Nome_Tam_Prod,
-				TPAX1.Prodaux1,
-				TPAX2.Prodaux2,
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TPAX2.Prodaux2,""), " - ", IFNULL(TPAX1.Prodaux1,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,				
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
-					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = TCP.Cor_Prod
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1	
-					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = TTP.Tam_Prod
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -1535,20 +1517,14 @@ if (isset($data) && $data) {
             SELECT
                 TPS.idTab_Produtos,
 				TPS.idTab_Produto,
-				TCP.idTab_Cor_Prod,
-				TCP.Nome_Cor_Prod,
-				TTP.idTab_Tam_Prod,
-				TTP.Nome_Tam_Prod,
-				TPAX1.Prodaux1,
-				TPAX2.Prodaux2,				
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TPAX2.Prodaux2,""), " - ", IFNULL(TPAX1.Prodaux1,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,				
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
-					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = TCP.Cor_Prod
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1	
-					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = TTP.Tam_Prod			
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2			
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -1573,16 +1549,14 @@ if (isset($data) && $data) {
             SELECT
                 TPS.idTab_Produtos,
 				TPS.idTab_Produto,
-				TCP.idTab_Cor_Prod,
-				TCP.Nome_Cor_Prod,
-				TTP.idTab_Tam_Prod,
-				TTP.Nome_Tam_Prod,
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,				
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1				
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -1595,16 +1569,14 @@ if (isset($data) && $data) {
             SELECT
                 TPS.idTab_Produtos,
 				TPS.idTab_Produto,
-				TCP.idTab_Cor_Prod,
-				TCP.Nome_Cor_Prod,
-				TTP.idTab_Tam_Prod,
-				TTP.Nome_Tam_Prod,
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,				
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1				
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -1629,16 +1601,14 @@ if (isset($data) && $data) {
             SELECT
                 TPS.idTab_Produtos,
 				TPS.idTab_Produto,
-				TCP.idTab_Cor_Prod,
-				TCP.Nome_Cor_Prod,
-				TTP.idTab_Tam_Prod,
-				TTP.Nome_Tam_Prod,
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,				
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1				
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -1651,16 +1621,14 @@ if (isset($data) && $data) {
             SELECT
                 TPS.idTab_Produtos,
 				TPS.idTab_Produto,
-				TCP.idTab_Cor_Prod,
-				TCP.Nome_Cor_Prod,
-				TTP.idTab_Tam_Prod,
-				TTP.Nome_Tam_Prod,
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,				
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1				
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND

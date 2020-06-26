@@ -520,7 +520,7 @@
 															<div class="panel-heading">
 																<div class="row">
 																	<div class="col-md-1">
-																		<label for="QtdProduto">Qtd.Item <?php echo $i ?>:</label>
+																		<label for="QtdProduto">Qtd.Item</label>
 																		<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
 																				onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																				 name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
@@ -533,7 +533,7 @@
 																		</div>
 																	</div>																	
 																	<div class="col-md-6">
-																		<label for="idTab_Produto">Produto:</label>
+																		<label for="idTab_Produto">Produto <?php echo $i ?></label>
 																		<?php if ($i == 1) { ?>
 																		<!--<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>produto/cadastrar/produto" role="button">
 																			<span class="glyphicon glyphicon-plus"></span> <b>Novo Produto</b>

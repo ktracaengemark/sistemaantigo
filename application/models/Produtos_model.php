@@ -286,8 +286,8 @@ class Produtos_model extends CI_Model {
 				TPS.idTab_Modulo,
 				TPS.idTab_Modelo,
 				TPS.Mod_Prod,
-				TPS.Cor_Prod_Aux2,
-				TPS.Tam_Prod_Aux1,
+				TPS.Opcao_Atributo_1,
+				TPS.Opcao_Atributo_2,
 				TPS.idTab_Produto,
 				TPS.Nome_Prod,
 				TPS.Cod_Prod,
@@ -303,8 +303,8 @@ class Produtos_model extends CI_Model {
 			FROM 
 				Tab_Produtos AS TPS
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TPS.Tipo_Valor_Prod
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Cor_Prod_Aux2
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Tam_Prod_Aux1
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Opcao_Atributo_2
 			WHERE 
 				TPS.idTab_Produto = ' . $data . '
 		');

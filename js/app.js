@@ -1884,7 +1884,7 @@ function adiciona_opcao_select2() {
 			//clear the current content of the select
 			$select.html('');
 			//iterate over the data and append a select option
-			$select.append('<option value="">-- Sel. Opcao --</option>');
+			$select.append('<option value="">-- Sel. Opcao Atr. 1 --</option>');
 			$.each(data, function (key, val) {
 				//alert(val.id);
 				$select.append('<option value="' + val.id + '">' + val.name + '</option>');
@@ -6134,9 +6134,9 @@ $(document).ready(function () {
                     <div class="panel-heading">\
 						<div class="row">\
 							<div class="col-md-10">\
-								<label for="idTab_Opcao1'+pm+'">Opcao '+pm+'</label>\
+								<label for="idTab_Opcao3'+pm+'">Opcao '+pm+'</label>\
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen91" \
-										 id="listadinamicag'+pm+'" name="idTab_Opcao1'+pm+'">\
+										 id="listadinamicag'+pm+'" name="idTab_Opcao3'+pm+'">\
 									<option value=""></option>\
 								</select>\
 							</div>\
@@ -6157,14 +6157,14 @@ $(document).ready(function () {
 
         //request the JSON data and parse into the select element
         $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=102',
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=101',
             dataType: 'JSON',
             type: "GET",
             success: function (data) {
                 //clear the current content of the select
                 $select.html('');
                 //iterate over the data and append a select option
-                $select.append('<option value="">-- Selecione uma opção --</option>');
+                $select.append('<option value="">-- Sel. Opção Atr. 2 --</option>');
                 $.each(data, function (key, val) {
                     //alert(val.id);
                     $select.append('<option value="' + val.id + '">' + val.name + '</option>');
@@ -6381,14 +6381,14 @@ $(document).ready(function () {
 										  name="Nome_Prod'+pd+'" value="">\
 							</div>\
 							<div class="col-md-3">\
-                                <label for="Cor_Prod_Aux2">Tipo </label><br>\
-                                <select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="listadinamicam'+pd+'" name="Cor_Prod_Aux2'+pd+'">\
+                                <label for="Opcao_Atributo_1">Atributo1 </label><br>\
+                                <select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="listadinamicam'+pd+'" name="Opcao_Atributo_1'+pd+'">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
 							<div class="col-md-2">\
-								<label for="Tam_Prod_Aux1'+pd+'">Tamanho</label>\
-								<select data-placeholder="Selecione uma opção..." class="form-control Chosen2" id="listadinamican'+pd+'" name="Tam_Prod_Aux1'+pd+'">\
+								<label for="Opcao_Atributo_2'+pd+'">Atributo2</label>\
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen2" id="listadinamican'+pd+'" name="Opcao_Atributo_2'+pd+'">\
 									<option value="">-- Selecione uma opção --</option>\
 								</select>\
 							</div>\

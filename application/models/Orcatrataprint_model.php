@@ -133,27 +133,21 @@ class Orcatrataprint_model extends CI_Model {
 				PV.DevolvidoProduto,
 				P.UnidadeProduto,
 				P.Cod_Prod,
-				TCP.idTab_Cor_Prod,
-				TCP.Nome_Cor_Prod,
-				TTP.idTab_Tam_Prod,
-				TTP.Nome_Tam_Prod,
-				TPAX1.Prodaux1,
-				TPAX2.Prodaux2,
+				TOP2.Opcao,
+				TOP1.Opcao,
 				TCO.Convenio,
 				V.Convdesc,
 				TFO.NomeFornecedor,
 				CONCAT(IFNULL(PV.QtdProduto,""), " X " , IFNULL(PV.QtdIncremento,""), " " , IFNULL(P.UnidadeProduto,"")) AS QtdProduto,
-            	CONCAT(IFNULL(P.Cod_Prod,""), " - ", IFNULL(P.Nome_Prod,""), " - ", IFNULL(TPAX2.Prodaux2,""), " - ", IFNULL(TPAX1.Prodaux1,"")) AS NomeProduto,
+            	CONCAT(IFNULL(P.Cod_Prod,""), " - ", IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,"")) AS NomeProduto,
             	PV.ValorProduto
             FROM
             	App_Produto AS PV,
             	Tab_Valor AS V
             		LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
             		LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = P.Cor_Prod_Aux2
-					LEFT JOIN Tab_Prodaux2 AS TPAX2 ON TPAX2.idTab_Prodaux2 = TCP.Cor_Prod
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = P.Tam_Prod_Aux1	
-					LEFT JOIN Tab_Prodaux1 AS TPAX1 ON TPAX1.idTab_Prodaux1 = TTP.Tam_Prod					
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2					
             		LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
 
             WHERE
