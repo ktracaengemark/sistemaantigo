@@ -1830,161 +1830,6 @@ function adiciona_opcao() {
 	
 }
 
-function adiciona_opcao_select2() {
-
-	var pt2 = $("#PT2Count").val(); //initlal text box count
-
-    //alert( $("#SCount").val() );
-    pt2++; //text box increment
-    $("#PT2Count").val(pt2);
-    //console.log(pt2);
-
-    if (pt2 >= 2) {
-        //console.log( $("#listadinamica2"+(pt2-1)).val() );
-        var chosen;
-        chosen = $("#listadinamica2"+(pt2-1)).val();
-        //console.log( chosen + ' :: ' + pt2 );
-    }
-
-    //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
-
-    $(".input_fields_wrap32").append('\
-        <div class="form-group" id="32div'+pt2+'">\
-			<div class="panel panel-info">\
-				<div class="panel-heading">\
-					<div class="row">\
-						<div class="col-md-10">\
-							<label for="idTab_Opcao2">Opcao '+pt2+':</label><br>\
-							<select class="form-control Chosen2" id="listadinamica2'+pt2+'" name="idTab_Opcao2'+pt2+'">\
-								<option value="">-- Selecione uma opção --</option>\
-							</select>\
-						</div>\
-						<div class="col-md-1">\
-							<label><br></label><br>\
-							<button type="button" id="'+pt2+'" class="remove_field32 btn btn-danger">\
-								<span class="glyphicon glyphicon-trash"></span>\
-							</button>\
-						</div>\
-					</div>\
-				</div>\
-			</div>\
-        </div>'
-    ); //add input box
-	
-	//get a reference to the select element
-	$select = $('#listadinamica2'+pt2);
-
-	//request the JSON data and parse into the select element
-	$.ajax({
-		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=102',
-		dataType: 'JSON',
-		type: "GET",
-		success: function (data) {
-			//clear the current content of the select
-			$select.html('');
-			//iterate over the data and append a select option
-			$select.append('<option value="">-- Sel. Opcao --</option>');
-			$.each(data, function (key, val) {
-				//alert(val.id);
-				$select.append('<option value="' + val.id + '">' + val.name + '</option>');
-			})
-			$('.Chosen2').chosen({
-				disable_search_threshold: 10,
-				multiple_text: "Selecione uma ou mais opções",
-				single_text: "Selecione uma opção",
-				no_results_text: "Nenhum resultado para",
-				width: "100%"
-			});
-		},
-		error: function () {
-			//alert('erro listadinamicaB');
-			//if there is an error append a 'none available' option
-			$select.html('<option id="-1">ERRO</option>');
-		}
-
-	});	
-	
-}
-
-function adiciona_opcao_select3() {
-	
-    var pt3 = $("#PT3Count").val(); //initlal text box count
-
-    //alert( $("#SCount").val() );
-    pt3++; //text box increment
-    $("#PT3Count").val(pt3);
-    //console.log(pt3);
-
-    if (pt3 >= 2) {
-        //console.log( $("#listadinamica3"+(pt3-1)).val() );
-        var chosen;
-        chosen = $("#listadinamica3"+(pt3-1)).val();
-        //console.log( chosen + ' :: ' + pt3 );
-    }
-
-    //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
-
-    $(".input_fields_wrap33").append('\
-        <div class="form-group" id="33div'+pt3+'">\
-			<div class="panel panel-info">\
-				<div class="panel-heading">\
-					<div class="row">\
-						<div class="col-md-10">\
-							<label for="idTab_Opcao3">Item '+pt3+':</label><br>\
-							<select class="form-control Chosen3" id="listadinamica3'+pt3+'" name="idTab_Opcao3'+pt3+'">\
-								<option value="">-- Selecione uma opção --</option>\
-							</select>\
-						</div>\
-						<div class="col-md-1">\
-							<label><br></label><br>\
-							<button type="button" id="'+pt3+'" class="remove_field33 btn btn-danger">\
-								<span class="glyphicon glyphicon-trash"></span>\
-							</button>\
-						</div>\
-					</div>\
-				</div>\
-			</div>\
-        </div>'
-    ); //add input box
-	
-	//get a reference to the select element
-	$select = $('#listadinamica3'+pt3);
-
-	//request the JSON data and parse into the select element
-	$.ajax({
-		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=101',
-		dataType: 'JSON',
-		type: "GET",
-		success: function (data) {
-			//clear the current content of the select
-			$select.html('');
-			//iterate over the data and append a select option
-			$select.append('<option value="">-- Sel. Opcao --</option>');
-			$.each(data, function (key, val) {
-				//alert(val.id);
-				$select.append('<option value="' + val.id + '">' + val.name + '</option>');
-			})
-			$('.Chosen3').chosen({
-				disable_search_threshold: 10,
-				multiple_text: "Selecione uma ou mais opções",
-				single_text: "Selecione uma opção",
-				no_results_text: "Nenhum resultado para",
-				width: "100%"
-			});
-		},
-		error: function () {
-			//alert('erro listadinamicaB');
-			//if there is an error append a 'none available' option
-			$select.html('<option id="-1">ERRO</option>');
-		}
-
-	});	
-	
-}
-
-
 function adiciona_item_promocao() {
 
     var pt = $("#PTCount").val(); //initlal text box count
@@ -4205,8 +4050,8 @@ function adicionaTipo() {
 				<div class="panel-heading">\
 					<div class="row">\
 						<div class="col-md-10">\
-							<label for="idTab_Opcao2">Opcao '+at+'</label><br>\
-							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="listadinamica99'+at+'" name="idTab_Opcao2'+at+'">\
+							<label for="Cor_Prod">Opcao '+at+'</label><br>\
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="listadinamica99'+at+'" name="Cor_Prod'+at+'">\
 								<option value="">-- Selecione uma opção --</option>\
 							</select>\
 						</div>\
@@ -6134,9 +5979,9 @@ $(document).ready(function () {
                     <div class="panel-heading">\
 						<div class="row">\
 							<div class="col-md-10">\
-								<label for="idTab_Opcao1'+pm+'">Opcao '+pm+'</label>\
+								<label for="Tam_Prod'+pm+'">Opcao '+pm+'</label>\
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen91" \
-										 id="listadinamicag'+pm+'" name="idTab_Opcao1'+pm+'">\
+										 id="listadinamicag'+pm+'" name="Tam_Prod'+pm+'">\
 									<option value=""></option>\
 								</select>\
 							</div>\
@@ -6791,11 +6636,6 @@ $(document).ready(function () {
     $(".input_fields_wrap3").on("click",".remove_field3", function(e){ //user click on remove text
         $("#3div"+$(this).attr("id")).remove();
     })
-	
-    //Remove os campos adicionados dinamicamente
-    $(".input_fields_wrap31").on("click",".remove_field31", function(e){ //user click on remove text
-        $("#31div"+$(this).attr("id")).remove();
-    })	
 	
     //Remove os campos adicionados dinamicamente
     $(".input_fields_wrap32").on("click",".remove_field32", function(e){ //user click on remove text
