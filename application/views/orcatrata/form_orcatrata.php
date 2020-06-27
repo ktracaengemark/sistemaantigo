@@ -166,6 +166,7 @@
 									<div class="panel panel-success">
 										<div class="panel-heading">
 											<input type="hidden" name="PCount" id="PCount" value="<?php echo $count['PCount']; ?>"/>
+											<input type="hidden" name="Negocio" id="Negocio" value="1"/>
 											<?php if ($_SESSION['log']['idSis_Empresa'] == 42 ) { ?>
 												<div class="input_fields_wrap42">
 													
@@ -184,11 +185,18 @@
 														<div class="panel panel-success">
 															<div class="panel-heading">
 																<div class="row">
-																	<div class="col-md-2">
-																		<label for="QtdProduto">Qtd <?php echo $i ?>:</label>
+																	<div class="col-md-1">
+																		<label for="QtdProduto">Qtd.Item</label>
 																		<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
 																				onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																				name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
+																	</div>
+																	<div class="col-md-1">
+																		<label for="QtdIncremento">Qtd.Emb</label>
+																		<div class="input-group">
+																			<input type="text" class="form-control " id="QtdIncremento<?php echo $i ?>" readonly=""
+																				name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
+																		</div>
 																	</div>
 																	<div class="col-md-6">
 																		<label for="idTab_Produto">Produto:</label>
@@ -423,10 +431,17 @@
 															<div class="panel-heading">
 																<div class="row">
 																	<div class="col-md-2">
-																		<label for="QtdProduto">Qtd <?php echo $i ?>:</label>
+																		<label for="QtdProduto">Qtd.Item</label>
 																		<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
 																				onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																				autofocus name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
+																	</div>
+																	<div class="col-md-1">
+																		<label for="QtdIncremento">Qtd.Emb</label>
+																		<div class="input-group">
+																			<input type="text" class="form-control " id="QtdIncremento<?php echo $i ?>" readonly=""
+																				name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
+																		</div>
 																	</div>
 																	<div class="col-md-6">
 																		<label for="idTab_Produto">Produto:</label>

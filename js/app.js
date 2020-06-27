@@ -4656,9 +4656,11 @@ $(document).ready(function () {
 		
 		if (negocio == 1) {
 			var endereco = 'q=90';
+			var escrita = 'readonly=""';
 		}
 		if (negocio == 2) {
 			var endereco = 'q=20';
+			var escrita = '';
 		}		
 		
 //////// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
@@ -4685,7 +4687,7 @@ $(document).ready(function () {
                     <div class="panel-heading">\
                         <div class="row">\
                             <div class="col-md-1">\
-                                <label for="QtdProduto">Qtd.Item:</label><br>\
+                                <label for="QtdProduto">Qtd.Item</label><br>\
                                 <div class="input-group">\
                                     <input type="text" class="form-control Numero" maxlength="10" id="QtdProduto'+pc+'" placeholder="0"\
                                         onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
@@ -4693,9 +4695,9 @@ $(document).ready(function () {
                                 </div>\
                             </div>\
                             <div class="col-md-1">\
-                                <label for="QtdIncremento">Qtd.Emb.:</label><br>\
+                                <label for="QtdIncremento">Qtd.Emb</label><br>\
                                 <div class="input-group">\
-                                    <input type="text" class="form-control Numero" maxlength="10" id="QtdIncremento'+pc+'" readonly=""\
+                                    <input type="text" class="form-control Numero" maxlength="10" id="QtdIncremento'+pc+'" '+ escrita +'\
                                        name="QtdIncremento'+pc+'" value="">\
                                 </div>\
                             </div>\

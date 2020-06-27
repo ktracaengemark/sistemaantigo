@@ -233,13 +233,18 @@ elseif ($_GET['q'] == 20) {
 
     $result = mysql_query('
             SELECT
-                idTab_Produtos,
-				Nome_Prod,
-                CONCAT(IFNULL(Nome_Prod,"")) AS NomeProduto
+                P.idTab_Produtos,
+				P.Nome_Prod,
+				P.Valor_Produto,
+				TOP2.Opcao,
+				TOP1.Opcao,				
+				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - R$ ", IFNULL(P.Valor_Produto,"")) AS NomeProduto
             FROM 
-                Tab_Produtos 
+                Tab_Produtos AS P 
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2
             WHERE
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
     ');
 
     while ($row = mysql_fetch_assoc($result)) {

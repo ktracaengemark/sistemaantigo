@@ -165,7 +165,7 @@
 											<label for="Descricao">Descrição:</label><br>
 											<input type="text" class="form-control" maxlength="200"
 													autofocus name="Descricao" value="<?php echo $orcatrata['Descricao'] ?>">
-										</div>																	
+										</div>
 									</div>
 								</div>																	
 							</div>
@@ -188,11 +188,18 @@
 												<div class="panel panel-warning">
 													<div class="panel-heading">
 														<div class="row">
-															<div class="col-md-2">
-																<label for="QtdProduto">Qtd <?php echo $i ?>:</label>
+															<div class="col-md-1">
+																<label for="QtdProduto">Qtd.Item</label>
 																<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
 																		onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																		 name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
+															</div>
+															<div class="col-md-1">
+																<label for="QtdIncremento">Qtd.Emb</label>
+																<div class="input-group">
+																	<input type="text" class="form-control " id="QtdIncremento<?php echo $i ?>"
+																		name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
+																</div>
 															</div>
 															<div class="col-md-6">
 																<label for="idTab_Produto">Produto:</label>
@@ -710,7 +717,7 @@
 											<div class="panel panel-success">
 												<div class="panel-heading">
 													<div class="row">
-														<div class="col-md-6 text-center">
+														<div class="col-md-12 text-center">
 															<label for="AVAP">Forma de Pagam.</label><br>
 															<div class="btn-block" data-toggle="buttons">
 																<?php
@@ -741,17 +748,6 @@
 															</div>
 															<?php echo form_error('AVAP'); ?>
 														</div>																
-														<div class="col-md-6">
-															<label for="DataOrca">Dta Orçam:</label>
-															<div class="input-group <?php echo $datepicker; ?>">
-																<span class="input-group-addon" disabled>
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-																<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																		name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
-															</div>
-														</div>
-												
 													</div>
 												</div>
 											</div>
@@ -985,6 +981,16 @@
 							<div class="panel panel-danger">
 								<div class="panel-heading">
 									<div class="row">
+										<div class="col-md-3">
+											<label for="DataOrca">Dta Orçam:</label>
+											<div class="input-group <?php echo $datepicker; ?>">
+												<span class="input-group-addon" disabled>
+													<span class="glyphicon glyphicon-calendar"></span>
+												</span>
+												<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+														name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
+											</div>
+										</div>
 										<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 										<div class="col-md-3">
 											<label for="AprovadoOrca">Orçam. Aprovado?</label><br>

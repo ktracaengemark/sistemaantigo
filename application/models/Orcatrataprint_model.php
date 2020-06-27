@@ -162,6 +162,43 @@ class Orcatrataprint_model extends CI_Model {
         return $query;
     }
 
+    public function get_produto_desp($data) {
+		$query = $this->db->query(
+            'SELECT
+            	PV.QtdProduto,
+				PV.QtdIncremento,
+				PV.DataValidadeProduto,
+				PV.ObsProduto,
+				PV.idApp_Produto,
+				PV.idApp_OrcaTrata,
+				PV.ConcluidoProduto,
+				PV.DevolvidoProduto,
+				P.UnidadeProduto,
+				P.Cod_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,
+				TFO.NomeFornecedor,
+				CONCAT(IFNULL(PV.QtdProduto,""), " X " , IFNULL(PV.QtdIncremento,""), " " , IFNULL(P.UnidadeProduto,"")) AS QtdProduto,
+            	CONCAT(IFNULL(P.Cod_Prod,""), " - ", IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,"")) AS NomeProduto,
+            	PV.ValorProduto
+            FROM
+            	App_Produto AS PV
+            		LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = PV.idTab_Produto
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2					
+            		LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
+
+            WHERE
+            	PV.idApp_OrcaTrata = ' . $data . ' AND
+                PV.idTab_Produto = P.idTab_Produtos
+            ORDER BY
+            	PV.idApp_Produto'
+        );
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
     public function get_parcelasrec($data) {
 		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();

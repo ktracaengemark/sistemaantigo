@@ -62,12 +62,9 @@
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group">
 						<a type="button" class="btn btn-sm btn-primary" role="button" href="<?php echo base_url(); ?>orcatrata/cadastrar3">
-							<span class="glyphicon glyphicon-plus"></span> 
-							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-							Receitas/Vendas
-							<?php } else {?>
-							Receitas/Vendas
-							<?php } ?>
+							Receitas<span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-arrow-down"></span>/ 
+							Vendas<span class="glyphicon glyphicon-gift"></span><span class="glyphicon glyphicon-arrow-up"></span>
+
 						</a>
 						<button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>
@@ -103,12 +100,8 @@
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group">
 						<a type="button" class="btn btn-sm btn-danger" role="button" href="<?php echo base_url(); ?>orcatrata/cadastrardesp">
-							<span class="glyphicon glyphicon-plus"></span> 
-							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-							Despesas/Compras
-							<?php } else {?>
-							Despesas/Compras
-							<?php } ?>
+							Despesas<span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-arrow-up"></span>/ 
+							Compras<span class="glyphicon glyphicon-gift"></span><span class="glyphicon glyphicon-arrow-down"></span>
 						</a>
 						<button type="button" class="btn btn-sm btn-danger dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>

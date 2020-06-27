@@ -199,7 +199,7 @@ class OrcatrataPrintDesp extends CI_Controller {
             
 
             #### App_ProdutoVenda ####
-            $data['produto'] = $this->OrcatrataPrint_model->get_produto($id);
+            $data['produto'] = $this->OrcatrataPrint_model->get_produto_desp($id);
             if (count($data['produto']) > 0) {
                 $data['produto'] = array_combine(range(1, count($data['produto'])), array_values($data['produto']));
                 $data['count']['PCount'] = count($data['produto']);
