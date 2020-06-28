@@ -562,7 +562,7 @@
 																	<input type="hidden" class="form-control " id="idTab_Produtos<?php echo $i ?>" name="idTab_Produtos<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos'] ?>">			
 																	<div class="col-md-6">
 																		<label for="idTab_Produto">Produto <?php echo $i ?></label>
-																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor(this.value,this.name,'Produto',<?php echo $i ?>,'NomeProduto')" <?php echo $readonly; ?>
+																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor1Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
 																				 id="listadinamicab<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
 																			<option value="">-- Selecione uma opção --</option>
 																			<?php
