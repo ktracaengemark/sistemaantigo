@@ -166,7 +166,7 @@
 																		. '</label>'
 																		;
 																	} else {
-																		echo ''
+																	echo ''
 																		. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
 																		. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
 																		. 'autocomplete="off" value="' . $key . '" >' . $row
@@ -224,6 +224,7 @@
 										<div class="panel-heading">
 											<input type="hidden" name="PCount" id="PCount" value="<?php echo $count['PCount']; ?>"/>
 											<input type="hidden" name="Negocio" id="Negocio" value="1"/>
+											<input type="hidden" name="Empresa" id="Empresa" value="<?php echo $_SESSION['log']['idSis_Empresa']; ?>"/>
 											<?php if ($_SESSION['log']['idSis_Empresa'] == 42 ) { ?>
 												<div class="input_fields_wrap42">
 													
@@ -255,9 +256,11 @@
 																				name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
 																		</div>
 																	</div>
+																	<input type="hidden" class="form-control " id="idTab_Valor<?php echo $i ?>" name="idTab_Valor<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor'] ?>">
+																	<input type="hidden" class="form-control " id="idTab_Produtos<?php echo $i ?>" name="idTab_Produtos<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos'] ?>">
 																	<div class="col-md-6">
 																		<label for="idTab_Produto">Produto:</label>
-																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor2Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
+																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor1Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
 																				 id="listadinamicab<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
 																			<option value="">-- Selecione uma opção --</option>
 																			<?php

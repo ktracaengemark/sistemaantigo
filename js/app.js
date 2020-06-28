@@ -18,6 +18,16 @@ app = app.substring(0, pos);
 //Captura a data do dia e carrega no campo correspondente
 var currentDate = moment();
 
+camposDisponiveis();
+
+//Função que desabilita os campos não disponiveis.
+function camposDisponiveis () {
+	$('.campos').hide();
+	//document.getElementById('campos').style.display = "none";
+	
+}
+
+
 //variável de opções necessária para o funcionamento do datepiker em divs
 //geradas dinamicamente
 var dateTimePickerOptions = {
@@ -2773,7 +2783,6 @@ function buscaValor1Tabelas(id, campo, tabela, num, campo2) {
 
 }
 
-
 function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
 
     $.ajax({
@@ -2792,7 +2801,7 @@ function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
 					//""ou posso usar assim, passando diretamente o qtdinc do id ""
 
 					$('#idTab_Produtos'+num).val(data[i].id_produto);
-					console.log( data[i].id_produto );
+					//console.log( data[i].id_produto );
 				
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
@@ -4387,7 +4396,26 @@ $(document).ready(function () {
     //adiciona campos dinamicamente dos Produtos Entregues da Empresa 42
     $(".add_field_button42").click(function(e){ //on add input button click
         
-//////// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
+		var negocio = $('#Negocio').val();
+		//console.log( negocio );
+		
+		if (negocio == 1) {
+			var endereco = 'q=90';
+			var escrita = 'readonly=""';
+			var buscavalor = 'buscaValor1Tabelas';
+			var tblbusca = 'Valor';
+		}
+		if (negocio == 2) {
+			var endereco = 'q=20';
+			var escrita = '';
+			var buscavalor = 'buscaValor2Tabelas';
+			var tblbusca = 'Produtos';
+		}
+		
+		var empresa = $('#Empresa').val();
+		console.log( empresa );			
+		/*
+		//////// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
 		if (pc >= 2) {
 			//console.log( $("#listadinamicab"+(pc-1)).val() );
 			var chosen;
@@ -4401,8 +4429,9 @@ $(document).ready(function () {
 			chosen2 = $("#listadinamicac"+(pc-1)).val();
 			//console.log( chosen + ' :: ' + pc );
 		}
-/////// Termina aqui!!! ////
 		
+		/////// Termina aqui!!! ////
+		*/
 		e.preventDefault();
 		
         pc++; //text box increment
@@ -4413,17 +4442,26 @@ $(document).ready(function () {
                 <div class="panel panel-warning">\
                     <div class="panel-heading">\
                         <div class="row">\
-                            <div class="col-md-2">\
-                                <label for="QtdProduto">Qtd:</label><br>\
+                            <div class="col-md-1">\
+                                <label for="QtdProduto">Qtd.Item</label><br>\
                                 <div class="input-group">\
                                     <input type="text" class="form-control Numero" maxlength="10" id="QtdProduto'+pc+'" placeholder="0"\
                                         onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
                                        autofocus name="QtdProduto'+pc+'" value="1">\
                                 </div>\
                             </div>\
+                            <div class="col-md-1">\
+                                <label for="QtdIncremento">Qtd.Emb</label><br>\
+                                <div class="input-group">\
+                                    <input type="text" class="form-control Numero" maxlength="10" id="QtdIncremento'+pc+'" '+ escrita +'\
+                                       name="QtdIncremento'+pc+'" value="">\
+                                </div>\
+                            </div>\
+							<input type="hidden" class="form-control" id="idTab_Valor'+pc+'" name="idTab_Valor'+pc+'" value="">\
+							<input type="hidden" class="form-control" id="idTab_Produtos'+pc+'" name="idTab_Produtos'+pc+'" value="">\
 							<div class="col-md-6">\
                                 <label for="idTab_Produto">Produto:</label><br>\
-                                <select class="form-control Chosen" id="listadinamicab'+pc+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+pc+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" name="idTab_Produto'+pc+'">\
+                                <select class="form-control Chosen" id="listadinamicab'+pc+'" onchange="'+buscavalor+'(this.value,this.name,\''+tblbusca+'\','+pc+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" name="idTab_Produto'+pc+'">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
@@ -4450,7 +4488,7 @@ $(document).ready(function () {
 								<div class="row">\
 									<div class="col-md-12">\
 										<label for="idSis_Usuario'+pc+'">Profissional:</label>\
-										<select data-placeholder="Selecione uma opção..." class="form-control"\
+										<select data-placeholder="Selecione uma opção..." class="form-control Chosen2"\
 												 id="listadinamicac'+pc+'" name="idSis_Usuario'+pc+'">\
 											<option value=""></option>\
 										</select>\
@@ -4616,7 +4654,7 @@ $(document).ready(function () {
 
         //request the JSON data and parse into the select element
         $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=9',
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?' + endereco,
             dataType: 'JSON',
             type: "GET",
             success: function (data) {
@@ -4661,7 +4699,7 @@ $(document).ready(function () {
                     //alert(val.id);
                     $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
                 })
-                $('.Chosen').chosen2({
+                $('.Chosen2').chosen({
                     disable_search_threshold: 10,
                     multiple_text: "Selecione uma ou mais opções",
                     single_text: "Selecione uma opção",
@@ -4711,9 +4749,20 @@ $(document).ready(function () {
 			var escrita = '';
 			var buscavalor = 'buscaValor2Tabelas';
 			var tblbusca = 'Produtos';
-		}		
+		}
 		
-//////// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
+		var empresa = $('#Empresa').val();
+		console.log( empresa );
+		////Ver uma solução para os campos disponíveis da empresa 42
+		if(empresa == 42) {
+			$('.campos').show();
+		}
+		if(empresa == 2) {
+			$('.campos').hide();
+		}
+		//termina aqui
+		//////// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
+		/*
 		if (pc >= 2) {
 			//console.log( $("#listadinamicab"+(pc-1)).val() );
 			var chosen;
@@ -4723,8 +4772,8 @@ $(document).ready(function () {
 			//chosen2 = $("#listadinamicac"+(pc-1)).val();		
 		
 		}
-
-/////// Termina aqui!!! ////
+		*/
+		/////// Termina aqui!!! ////
 		
 		e.preventDefault();
 		
@@ -4788,7 +4837,7 @@ $(document).ready(function () {
 							</div>\
 							<div class="col-md-2">\
 								<label for="idSis_Usuario'+pc+'">Profissional:</label>\
-								<select data-placeholder="Selecione uma opção..." class="form-control"\
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen2"\
 										 id="listadinamicac'+pc+'" name="idSis_Usuario'+pc+'">\
 									<option value=""></option>\
 								</select>\
@@ -4894,7 +4943,7 @@ $(document).ready(function () {
             }
 
         });
-		/*
+		
 		//get a reference to the select element
         $select2 = $('#listadinamicac'+pc);
 
@@ -4912,7 +4961,7 @@ $(document).ready(function () {
                     //alert(val.id);
                     $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
                 })
-                $('.Chosen').chosen2({
+                $('.Chosen2').chosen({
                     disable_search_threshold: 10,
                     multiple_text: "Selecione uma ou mais opções",
                     single_text: "Selecione uma opção",
@@ -4927,7 +4976,7 @@ $(document).ready(function () {
             }
 
         });		
-		*/
+		
 		//permite o uso de radio buttons nesse bloco dinâmico
 		$('input:radio[id="radiogeraldinamico"]').change(function() {
 
