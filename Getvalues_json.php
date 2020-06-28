@@ -326,6 +326,7 @@ elseif ($_GET['q'] == 90) {
     $result = mysql_query('
             SELECT
                 V.idTab_Valor,
+				V.idTab_Produtos,
                 V.ValorProduto,
 				V.QtdProdutoIncremento,
 				TOP2.Opcao,
@@ -347,6 +348,7 @@ elseif ($_GET['q'] == 90) {
 
         $event_array[] = array(
             'id' => $row['idTab_Valor'],
+			'id_produto' => $row['idTab_Produtos'],
             #'name' => utf8_encode($row['NomeProduto']),
             #'name' => $row['NomeProduto'],
             'name' => mb_convert_encoding($row['NomeProduto'], "UTF-8", "ISO-8859-1"),

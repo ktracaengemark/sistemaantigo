@@ -2730,6 +2730,50 @@ function buscaValor2(id, campo, tabela, num, campo2) {
 
 }
 
+function buscaValor1Tabelas(id, campo, tabela, num, campo2) {
+
+    $.ajax({
+        // url para o arquivo json.php
+        url: window.location.origin + "/" + app + "/Valor1_json.php?tabela=" + tabela + "&campo2=" + campo2,
+        // dataType json
+        dataType: "json",
+        // função para de sucesso
+        success: function (data) {
+
+            // executo este laço para acessar os itens do objeto javaScript
+            for (i = 0; i < data.length; i++) {
+
+                if (data[i].id == id) {
+					
+					//""ou posso usar assim, passando diretamente o qtdinc do id ""
+					$('#QtdIncremento'+num).val(data[i].qtdinc);
+					$('#idTab_Produtos'+num).val(data[i].id_produto);
+					$('#idTab_Valor'+num).val(data[i].id_valor);
+					//console.log( data[i].id_produto );
+                    //carrega o valor no campo de acordo com a opção selecionada
+                    $('#'+campo).val(data[i].valor);
+
+                    //if (tabela == area && $("#Qtd"+tabela+num).val()) {
+                    if ($("#Qtd"+campo2+num).val()) {
+                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2);
+                        break;
+                    }
+
+                    //para cada valor carregado o orçamento é calculado/atualizado
+                    //através da chamada de sua função
+                    calculaOrcamento();
+                    break;
+                }
+
+            }//fim do laço
+
+        }
+    });//termina o ajax
+
+
+}
+
+
 function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
 
     $.ajax({
@@ -2746,7 +2790,9 @@ function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
                 if (data[i].id == id) {
 					
 					//""ou posso usar assim, passando diretamente o qtdinc do id ""
-					$('#QtdIncremento'+num).val(data[i].qtdinc);
+
+					$('#idTab_Produtos'+num).val(data[i].id_produto);
+					console.log( data[i].id_produto );
 				
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
@@ -4657,10 +4703,14 @@ $(document).ready(function () {
 		if (negocio == 1) {
 			var endereco = 'q=90';
 			var escrita = 'readonly=""';
+			var buscavalor = 'buscaValor1Tabelas';
+			var tblbusca = 'Valor';
 		}
 		if (negocio == 2) {
 			var endereco = 'q=20';
 			var escrita = '';
+			var buscavalor = 'buscaValor2Tabelas';
+			var tblbusca = 'Produtos';
 		}		
 		
 //////// Coloquei esse código aqui, mas não sei se está fazendo diferença!!!/////
@@ -4701,9 +4751,11 @@ $(document).ready(function () {
                                        name="QtdIncremento'+pc+'" value="">\
                                 </div>\
                             </div>\
+							<input type="hidden" class="form-control" id="idTab_Valor'+pc+'" name="idTab_Valor'+pc+'" value="">\
+							<input type="hidden" class="form-control" id="idTab_Produtos'+pc+'" name="idTab_Produtos'+pc+'" value="">\
 							<div class="col-md-6">\
                                 <label for="idTab_Produto">Produto:</label><br>\
-                                <select class="form-control Chosen" id="listadinamicab'+pc+'" name="idTab_Produto'+pc+'" onchange="buscaValor2Tabelas(this.value,this.name,\'Valor\','+pc+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')">\
+                                <select class="form-control Chosen" id="listadinamicab'+pc+'" name="idTab_Produto'+pc+'" onchange="'+buscavalor+'(this.value,this.name,\''+tblbusca+'\','+pc+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\

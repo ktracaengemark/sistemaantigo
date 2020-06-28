@@ -29,8 +29,8 @@ if ($_GET['tabela']) {
 
         $event_array[] = array(
             'id' => $row['idTab_' . $_GET['tabela']],
-            'valor' => str_replace(".", ",", $row['Valor' . $_GET['campo2']]),
-			'qtdinc' => $row['QtdProdutoIncremento'],
+            'valor' => str_replace(".", ",", $row['Valor_' . $_GET['campo2']]),
+			'id_produto' => $row['idTab_Produtos'],
         );
     }
 }
@@ -39,9 +39,9 @@ else {
     while ($row = mysql_fetch_assoc($result)) {
 
         $event_array[] = array(
-            'id' => $row['idTab_' . $_GET['tabela']],
-            'valor' => str_replace(".", ",", $row['Valor' . $_GET['tabela']]),
-			'qtdinc' => $row['QtdProdutoIncremento'],
+            'id' => $row['idTab_Produtos'],
+            'valor' => str_replace(".", ",", $row['Valor_Produto']),
+			'id_produto' => $row['idTab_Produtos'],
         );
     }
 

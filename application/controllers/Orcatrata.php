@@ -603,13 +603,15 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
 			
-            if ($this->input->post('idTab_Produto' . $i) || $this->input->post('NomeProduto' . $i) || $this->input->post('ValorProduto' . $i) ||
+            if ($this->input->post('idTab_Produto' . $i) || $this->input->post('idTab_Valor' . $i) || $this->input->post('idTab_Produtos' . $i) || $this->input->post('NomeProduto' . $i) || $this->input->post('ValorProduto' . $i) ||
 					$this->input->post('QtdProduto' . $i) || $this->input->post('QtdIncremento' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('idSis_Usuario' . $i) ||
 					$this->input->post('Aux_App_Produto_2' . $i) || $this->input->post('Aux_App_Produto_3' . $i) || $this->input->post('Aux_App_Produto_4' . $i) ||
 					$this->input->post('DataValidadeProduto' . $i) || $this->input->post('Aux_App_Produto_1' . $i)  || 
 					$this->input->post('Aux_App_Produto_5' . $i) || $this->input->post('HoraValidadeProduto' . $i)) {
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
+				$data['produto'][$j]['idTab_Valor'] = $this->input->post('idTab_Valor' . $i);
+				$data['produto'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
                 $data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
 				$data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
@@ -3310,7 +3312,7 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
 
-            if ($this->input->post('idTab_Produto' . $i) || $this->input->post('ValorProduto' . $i) ||
+            if ($this->input->post('idTab_Produto' . $i) || $this->input->post('idTab_Produtos' . $i) || $this->input->post('ValorProduto' . $i) ||
 					$this->input->post('QtdProduto' . $i) || $this->input->post('QtdIncremento' . $i) || $this->input->post('SubtotalProduto' . $i) ||
 					$this->input->post('ObsProduto' . $i) || $this->input->post('DataValidadeProduto' . $i) ||
 					$this->input->post('Aux_App_Produto_2' . $i) || $this->input->post('Aux_App_Produto_3' . $i) || 
@@ -3319,6 +3321,7 @@ class Orcatrata extends CI_Controller {
 					$this->input->post('DevolvidoProduto' . $i)  || 
 					$this->input->post('Aux_App_Produto_5' . $i) || $this->input->post('HoraValidadeProduto' . $i)) {
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
+				$data['produto'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
 				$data['produto'][$j]['QtdIncremento'] = $this->input->post('QtdIncremento' . $i);

@@ -270,6 +270,9 @@
 																				name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
 																		</div>
 																	</div>
+																	<input type="hidden" class="form-control " id="idTab_Valor<?php echo $i ?>"
+																				name="idTab_Valor<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor'] ?>">
+																				
 																	<div class="col-md-6">
 																		<label for="idTab_Produto">Produto:</label>
 																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor2Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
@@ -555,6 +558,8 @@
 																				name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
 																		</div>
 																	</div>
+																	<input type="hidden" class="form-control " id="idTab_Valor<?php echo $i ?>" name="idTab_Valor<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor'] ?>">
+																	<input type="hidden" class="form-control " id="idTab_Produtos<?php echo $i ?>" name="idTab_Produtos<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos'] ?>">			
 																	<div class="col-md-6">
 																		<label for="idTab_Produto">Produto <?php echo $i ?></label>
 																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor(this.value,this.name,'Produto',<?php echo $i ?>,'NomeProduto')" <?php echo $readonly; ?>

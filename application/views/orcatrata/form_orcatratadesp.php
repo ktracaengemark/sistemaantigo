@@ -201,6 +201,8 @@
 																		name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
 																</div>
 															</div>
+															
+															<input type="hidden" class="form-control " id="idTab_Produtos<?php echo $i ?>" name="idTab_Produtos<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos'] ?>">
 															<div class="col-md-6">
 																<label for="idTab_Produto">Produto:</label>
 																<?php if ($i == 1) { ?>
