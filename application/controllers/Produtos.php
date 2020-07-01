@@ -2682,7 +2682,7 @@ class Produtos extends CI_Controller {
 				unset($_SESSION['Servico']);
 				#redirect(base_url() . 'produtos/listar/' . $data['msg']);
 				//redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
-				redirect(base_url() . 'produtos/alterar4/' . $data['produtos']['idTab_Produto'] . $data['msg']);
+				redirect(base_url() . 'produtos/alterar3/' . $data['produtos']['idTab_Produto'] . $data['msg']);
                 exit();
             }
         }

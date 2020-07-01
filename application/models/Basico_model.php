@@ -2524,6 +2524,22 @@ if (isset($data) && $data) {
         return $array;
     }
 	
+	public function select_tipofrete($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('SELECT * FROM Tab_TipoFrete');
+        } else {
+            $query = $this->db->query('SELECT * FROM Tab_TipoFrete');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_TipoFrete] = $row->TipoFrete;
+            }
+        }
+
+        return $array;
+    }	
+	
 	public function select_desconto($data = FALSE) {
 
         if ($data === TRUE) {

@@ -20,6 +20,114 @@ var currentDate = moment();
 
 camposDisponiveis();
 
+exibirentrega();
+
+function exibirentrega() {
+		$('.Exibir').hide();
+		$('.QtdSoma').hide();
+		$('.FormaPag').hide();
+		$('.Liga').show();
+		$('.Desliga').hide();
+		$('.Correios').hide();
+		$('.Combinar').hide();
+		$('.Retirada').show();
+		$('.Calcular').show();
+		$('.Recalcular').hide();		
+}
+
+function formaPag(formapag){
+	//alert('teste FormaPag');
+	//console.log(formapag);
+	if(formapag == "P"){
+		$('.FormaPag').show();
+	}else{
+		$('.FormaPag').hide();
+	}
+}
+
+function exibirTroco(pagocom){
+	//alert('teste');
+	//console.log(pagocom);
+	if(pagocom == "7"){
+		$('.Exibir').show();
+	}else{
+		$('.Exibir').hide();
+	}
+}
+
+function tipoFrete(tipofrete){
+	var RecarregaCepDestino = $('#RecarregaCepDestino').val();
+	var RecarregaLogradouro = $('#RecarregaLogradouro').val();
+	var RecarregaNumero = $('#RecarregaNumero').val();
+	var RecarregaComplemento = $('#RecarregaComplemento').val();
+	var RecarregaBairro = $('#RecarregaBairro').val();
+	var RecarregaCidade = $('#RecarregaCidade').val();
+	var RecarregaEstado = $('#RecarregaEstado').val();
+
+	if(tipofrete == "1"){
+		$('.Liga').show();
+		$('.Desliga').hide();
+		$('.Correios').hide();
+		$('.Combinar').hide();
+		$('.Retirada').show();
+		$('.finalizar').show();			
+		$('#Cep').val('00000000');
+		$('#CepDestino').val(RecarregaCepDestino);
+		$('#Logradouro').val(RecarregaLogradouro);
+		$('#Numero').val(RecarregaNumero);
+		$('#Complemento').val(RecarregaComplemento);
+		$('#Bairro').val(RecarregaBairro);
+		$('#Cidade').val(RecarregaCidade);
+		$('#Estado').val(RecarregaEstado);
+		$('#valorfrete').val('0.00');
+		$('#prazoentrega').val('0');
+		
+	}		
+
+	if(tipofrete == "2"){
+		$('.Liga').hide();
+		$('.Desliga').show();
+		$('.Correios').hide();
+		$('.Combinar').show();
+		$('.Retirada').hide();
+		$('.finalizar').show();			
+		$('#Cep').val('00000000');
+		$('#CepDestino').val('');
+		$('#Logradouro').val('');
+		$('#Numero').val('');
+		$('#Complemento').val('');
+		$('#Bairro').val('');
+		$('#Cidade').val('');
+		$('#Estado').val('');
+		$('#valorfrete').val('0.00');
+		$('#prazoentrega').val('0');			
+	}
+	
+	if(tipofrete == "3"){
+		$('.Liga').hide();
+		$('.Desliga').show();
+		$('.Correios').show();
+		$('.Combinar').hide();
+		$('.Retirada').hide();
+		$('.Calcular').show();
+		$('.Recalcular').hide();			
+		$('.finalizar').hide();
+		$('#Cep').val('');
+		$('#CepDestino').val('');
+		$('#Logradouro').val('');
+		$('#Numero').val('');
+		$('#Complemento').val('');
+		$('#Bairro').val('');
+		$('#Cidade').val('');
+		$('#Estado').val('');
+		$('#valorfrete').val('');
+		$('#prazoentrega').val('');
+		$('#valor_total').val('');
+		$('#msg').html('');
+	}		
+
+}
+	
 //Função que desabilita os campos não disponiveis.
 function camposDisponiveis () {
 	$('.campos').hide();
@@ -125,10 +233,15 @@ function calculaQtdSoma(campo, soma, somaproduto, excluir, produtonum, countmax,
         }
     }
 
-    $("#"+soma).html(qtdsoma);
+	$("#"+soma).html(qtdsoma);
     $("#"+somaproduto).html(j-1);
     //console.log('>> ' + qtdsoma);
-
+	
+	if(qtdsoma >= 1){
+		$('.QtdSoma').show();
+	}else{
+		$('.QtdSoma').hide();
+	}
 }
 
 /*Atualiza o somatório do Qtd Devolvido no Orcatrata*/
@@ -357,12 +470,28 @@ function calculaResta(entrada) {
     //o valor é escrito no seu campo no formulário
     $('#ValorRestanteOrca').val(resta);
 	calculaParcelas();
+	calculaTotal();
+}
+
+function calculaTotal(entrada) {
+
+    //recebe o valor do orçamento
+    var orcamento = $("#ValorRestanteOrca").val();
+	var devolucao = $("#ValorFrete").val();
+    var restaT = -(- devolucao.replace(".","").replace(",",".") - orcamento.replace(".","").replace(",","."));
+
+    restaT = mascaraValorReal(restaT);
+
+    //o valor é escrito no seu campo no formulário
+    $('#ValorTotalOrca').val(restaT);
+	calculaParcelas();
 }
 
 function calculaTroco(entrada) {
 
     //recebe o valor do orçamento
-    var orcamento = $("#ValorRestanteOrca").val();
+    //var orcamento = $("#ValorRestanteOrca").val();
+	var orcamento = $("#ValorTotalOrca").val();
 	var devolucao = $("#ValorDinheiro").val();
     var resta = (devolucao.replace(".","").replace(",",".") - orcamento.replace(".","").replace(",","."));
 
@@ -409,9 +538,10 @@ $(document).on('focus',".input_fields_parcelas", function(){
  * informados no formulário (valor restante / parcelas e datas do vencimento)
  */
 function calculaParcelas() {
-
-    //captura os valores dos campos indicados
-    var resta = $("#ValorRestanteOrca").val();
+    //alert();
+	//captura os valores dos campos indicados
+    //var resta = $("#ValorRestanteOrca").val();
+	var resta = $("#ValorTotalOrca").val();
     var parcelas = $("#QtdParcelasOrca").val();
     var vencimento = $("#DataVencimentoOrca").val();
 
@@ -519,7 +649,8 @@ function calculaParcelas() {
 function calculaParcelasMensais() {
 
     //captura os valores dos campos indicados
-    var resta = $("#ValorRestanteOrca").val();
+    //var resta = $("#ValorRestanteOrca").val();
+	var resta = $("#ValorTotalOrca").val();
     var parcelas = $("#QtdParcelasOrca").val();
     var vencimento = $("#DataVencimentoOrca").val();
 
@@ -3182,6 +3313,7 @@ function calculaOrcamento() {
     //escreve o subtotal no campo do formulário
     $('#ValorOrca').val(subtotal);
     calculaResta($("#ValorEntradaOrca").val());
+	calculaTotal($("#ValorEntradaOrca").val());
 }
 
 function calculaOrcamentoCli() {
@@ -4752,7 +4884,7 @@ $(document).ready(function () {
 		}
 		
 		var empresa = $('#Empresa').val();
-		console.log( empresa );
+		//console.log( empresa );
 		////Ver uma solução para os campos disponíveis da empresa 42
 		if(empresa == 42) {
 			$('.campos').show();
@@ -4857,11 +4989,11 @@ $(document).ready(function () {
 								<textarea type="text" class="form-control" id="ObsProduto'+pc+'" maxlength="250"\
 									  onfocus="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" name="ObsProduto'+pc+'" value=""></textarea>\
 							</div>\
-							<div class="col-md-2 panel-body">\
+							<div class="col-md-4 panel-body">\
 								<div class="panel panel-primary">\
 									<div class="panel-heading">\
 										<div class="row">\
-											<div class="col-md-12">\
+											<div class="col-md-6">\
 												<label for="ConcluidoProduto">Entregue? </label><br>\
 												<div class="btn-group" data-toggle="buttons">\
 													<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
@@ -4874,15 +5006,7 @@ $(document).ready(function () {
 													</label>\
 												</div>\
 											</div>\
-										</div>\
-									</div>\
-								</div>\
-							</div>\
-							<div class="col-md-2 panel-body">\
-								<div class="panel panel-danger">\
-									<div class="panel-heading">\
-										<div class="row">\
-											<div class="col-md-12">\
+											<div class="col-md-6">\
 												<label for="DevolvidoProduto">Devolvido? </label><br>\
 												<div class="btn-group" data-toggle="buttons">\
 													<label class="btn btn-warning active" name="radio_DevolvidoProduto'+pc+'" id="radio_DevolvidoProduto'+pc+'N">\

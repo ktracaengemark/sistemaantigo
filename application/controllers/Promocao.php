@@ -104,7 +104,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         #### Tab_Promocao ####
 
 		$this->form_validation->set_rules('Desconto', 'Tipo de Desconto', 'required|trim');
-		$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim');		
+		#$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim');		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Promocao.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Promocao.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
@@ -311,7 +311,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         #### Tab_Promocao ####
 
 		$this->form_validation->set_rules('Desconto', 'Tipo de Desconto', 'required|trim');
-		$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim'); 		
+		#$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Promocao.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Promocao.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
@@ -522,7 +522,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         #### Tab_Promocao ####
 
 		$this->form_validation->set_rules('Desconto', 'Tipo de Desconto', 'required|trim');
-		$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim'); 		
+		#$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Promocao.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Promocao.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
@@ -729,7 +729,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         #### Tab_Promocao ####
 
 		$this->form_validation->set_rules('Desconto', 'Tipo de Desconto', 'required|trim');
-		$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim');		
+		#$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim');		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Promocao.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Promocao.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
@@ -928,8 +928,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         #### Tab_Promocao ####
 
 		$this->form_validation->set_rules('Desconto', 'Tipo de Promoção', 'required|trim');
-		$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim');
-		$this->form_validation->set_rules('Descricao', 'Descricão', 'required|trim');
+		#$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim');
+		#$this->form_validation->set_rules('Descricao', 'Descricão', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Promocao.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Promocao.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
@@ -1138,8 +1138,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         #### Tab_Promocao ####
 
 		$this->form_validation->set_rules('Desconto', 'Tipo de Desconto', 'required|trim');
-		$this->form_validation->set_rules('Promocao', 'Título', 'required|trim');
- 		$this->form_validation->set_rules('Descricao', 'Descricão', 'required|trim');
+		#$this->form_validation->set_rules('Promocao', 'Título', 'required|trim');
+ 		#$this->form_validation->set_rules('Descricao', 'Descricão', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Promocao.CodProd]');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
@@ -1355,8 +1355,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         #### Tab_Promocao ####
 
 		$this->form_validation->set_rules('Desconto', 'Tipo de Desconto', 'required|trim');
-		$this->form_validation->set_rules('Promocao', 'Título', 'required|trim');
- 		$this->form_validation->set_rules('Descricao', 'Descricão', 'required|trim');
+		#$this->form_validation->set_rules('Promocao', 'Título', 'required|trim');
+ 		#$this->form_validation->set_rules('Descricao', 'Descricão', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Promocao.CodProd]');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
@@ -1662,8 +1662,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         #### Tab_Promocao ####
 
 		$this->form_validation->set_rules('Desconto', 'Tipo de Desconto', 'required|trim');
-		$this->form_validation->set_rules('Promocao', 'Título', 'required|trim');
- 		$this->form_validation->set_rules('Descricao', 'Descricão', 'required|trim');
+		#$this->form_validation->set_rules('Promocao', 'Título', 'required|trim');
+ 		#$this->form_validation->set_rules('Descricao', 'Descricão', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Promocao.CodProd]');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
@@ -2041,7 +2041,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         #### Tab_Promocao ####
 
 		$this->form_validation->set_rules('Desconto', 'Tipo de Desconto', 'required|trim');
-		$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim'); 		
+		#$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Promocao.CodProd]');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
@@ -2299,7 +2299,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         #### Tab_Promocao ####
 
 		$this->form_validation->set_rules('Desconto', 'Tipo de Desconto', 'required|trim');
-		$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim'); 		
+		#$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Promocao.CodProd]');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
