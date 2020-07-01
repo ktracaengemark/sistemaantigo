@@ -943,7 +943,7 @@
 								<div class="panel-heading">	
 									<h4 class="mb-3"><b>Forma de Entrega</b></h4>
 									<div class="row ">
-										<div class="col-md-3 mb-3">
+										<div class="col-md-4 mb-3">
 											<!--<label for="TipoFrete">Frete:</label><br>-->
 											<select data-placeholder="Selecione uma Forma..." class="form-control Chosen" onchange="tipoFrete(this.value)" <?php echo $disabled; ?>
 													id="TipoFrete" name="TipoFrete">
@@ -1388,6 +1388,35 @@
 								<div class="panel-heading">
 									<h4 class="mb-3"><b>Status do Pedido</b></h4>
 									<div class="row">
+										<div class="col-md-4 text-left">
+											<!--<label for="DataOrca">Dta do Pedido</label>-->
+											<div class="input-group <?php echo $datepicker; ?>">
+												<span class="input-group-addon" disabled>
+													<span class="glyphicon glyphicon-calendar"></span>
+												</span>
+												<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+														name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
+											</div>
+										</div>
+										<div class="col-md-4 text-left">
+											<!--<label  for="Entregador">Entregador</label>-->
+											<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+													id="Entregador" name="Entregador">
+												<option value="">-- Selecione o Entregador --</option>
+												<?php
+												foreach ($select['Entregador'] as $key => $row) {
+														#(!$orcatrata['Entregador']) ? $orcatrata['Entregador'] = '1' : FALSE;
+													if ($orcatrata['Entregador'] == $key) {
+														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+													} else {
+														echo '<option value="' . $key . '">' . $row . '</option>';
+													}
+													}
+												?>
+											</select>
+										</div>
+									</div>
+									<div class="row">
 										<div class="col-md-4 panel-body">
 											<div class="panel panel-warning">
 												<div class="panel-heading">
@@ -1450,22 +1479,9 @@
 															</div>
 														</div>
 													</div>
-													<div class="row">
-														<div class="col-md-12 text-left">
-															<label for="DataOrca">Dta do Pedido</label>
-															<div class="input-group <?php echo $datepicker; ?>">
-																<span class="input-group-addon" disabled>
-																	<span class="glyphicon glyphicon-calendar"></span>
-																</span>
-																<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																		name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
-															</div>
-														</div>
-													</div>
 												</div>
 											</div>
-										</div>														
-														
+										</div>
 										<div class="col-md-4 panel-body">
 											<div class="panel panel-primary">
 												<div class="panel-heading">
@@ -1526,28 +1542,9 @@
 															</div>
 														</div>													
 													</div>
-													<div class="row">
-														<div class="col-md-12 text-left">
-															<label  for="Entregador">Entregador</label>
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
-																	id="Entregador" name="Entregador">
-																<option value="">-- Sel. Entregador --</option>
-																<?php
-																foreach ($select['Entregador'] as $key => $row) {
-																		#(!$orcatrata['Entregador']) ? $orcatrata['Entregador'] = '1' : FALSE;
-																	if ($orcatrata['Entregador'] == $key) {
-																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																	} else {
-																		echo '<option value="' . $key . '">' . $row . '</option>';
-																	}
-																	}
-																?>
-															</select>
-														</div>
-													</div>
 												</div>
 											</div>
-										</div>										
+										</div>
 										<div class="col-md-4 panel-body">
 											<div class="panel panel-warning">
 												<div class="panel-heading">

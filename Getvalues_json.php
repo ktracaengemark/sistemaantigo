@@ -330,10 +330,12 @@ elseif ($_GET['q'] == 90) {
                 V.ValorProduto,
 				V.QtdProdutoIncremento,
 				TOP2.Opcao,
-				TOP1.Opcao,				
-				CONCAT(IFNULL(V.QtdProdutoIncremento,""), " - ", IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(V.ValorProduto,"")) AS NomeProduto
+				TOP1.Opcao,
+				TDS.Desconto,
+				CONCAT(IFNULL(TDS.Desconto,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " - ", IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
+					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
 					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2				
