@@ -999,7 +999,7 @@ class Orcatrata_model extends CI_Model {
 				OT.Descricao,
 				OT.idApp_OrcaTrata,
 				OT.AprovadoOrca,
-                OT.DataOrca,
+				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
 				OT.DataEntradaOrca,
 				OT.DataPrazo,
                 OT.ValorOrca,
@@ -1009,6 +1009,9 @@ class Orcatrata_model extends CI_Model {
 				OT.DataVencimentoOrca,
                 OT.ConcluidoOrca,
                 OT.QuitadoOrca,
+				OT.FinalizadoOrca,
+				OT.EnviadoOrca,
+				OT.ProntoOrca,
                 OT.DataConclusao,
                 OT.DataQuitado,
 				OT.DataRetorno,
@@ -1021,23 +1024,6 @@ class Orcatrata_model extends CI_Model {
 				VP.Abrev3,
 				VP.AVAP,
 				TFP.FormaPag,
-				AP.idApp_Produto,
-				AP.QtdProduto,
-				DATE_FORMAT(AP.DataValidadeProduto, "%d/%m/%Y") AS DataValidadeProduto,
-				AP.ConcluidoProduto,
-				AP.DevolvidoProduto,
-				AP.ValorProduto,
-				AP.ObsProduto,
-				TS.idApp_Servico,
-				TS.QtdServico,
-				TS.DataValidadeServico,
-				TS.ConcluidoServico,
-				TS.ValorServico,				
-				TP.Produtos,
-				TP.TipoProduto,
-				TP3.Prodaux3,
-				TP2.Prodaux2,
-				TP1.Prodaux1,
 				TR.TipoFinanceiro
 			FROM 
                 App_OrcaTrata AS OT
@@ -1046,24 +1032,21 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
 					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
-					LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
-					LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
-					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
-					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Modelo
-					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
-					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
-					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "2" AND
 				OT.Tipo_Orca = "B" AND
-				AP.DevolvidoProduto = "N" AND
-				TP.TipoProduto = "A"
-				
+				OT.FinalizadoOrca = "N" AND
+				OT.ConcluidoOrca = "N" AND
+				OT.QuitadoOrca = "N" AND
+				OT.ProntoOrca = "S" AND
+				OT.EnviadoOrca = "N"
 			ORDER BY 
-				OT.idApp_OrcaTrata ASC 
+				OT.DataOrca ASC,
+				OT.idApp_OrcaTrata
+				
 		');
 
         /*
@@ -1099,7 +1082,7 @@ class Orcatrata_model extends CI_Model {
 				OT.Descricao,
 				OT.idApp_OrcaTrata,
 				OT.AprovadoOrca,
-                OT.DataOrca,
+				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
 				OT.DataEntradaOrca,
 				OT.DataPrazo,
                 OT.ValorOrca,
@@ -1109,6 +1092,9 @@ class Orcatrata_model extends CI_Model {
 				OT.DataVencimentoOrca,
                 OT.ConcluidoOrca,
                 OT.QuitadoOrca,
+				OT.FinalizadoOrca,
+				OT.EnviadoOrca,
+				OT.ProntoOrca,
                 OT.DataConclusao,
                 OT.DataQuitado,
 				OT.DataRetorno,
@@ -1121,23 +1107,6 @@ class Orcatrata_model extends CI_Model {
 				VP.Abrev3,
 				VP.AVAP,
 				TFP.FormaPag,
-				AP.idApp_Produto,
-				AP.QtdProduto,
-				DATE_FORMAT(AP.DataValidadeProduto, "%d/%m/%Y") AS DataValidadeProduto,
-				AP.ConcluidoProduto,
-				AP.DevolvidoProduto,
-				AP.ValorProduto,
-				AP.ObsProduto,
-				TS.idApp_Servico,
-				TS.QtdServico,
-				TS.DataValidadeServico,
-				TS.ConcluidoServico,
-				TS.ValorServico,				
-				TP.Produtos,
-				TP.TipoProduto,
-				TP3.Prodaux3,
-				TP2.Prodaux2,
-				TP1.Prodaux1,
 				TR.TipoFinanceiro
 			FROM 
                 App_OrcaTrata AS OT
@@ -1146,24 +1115,17 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
 					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
-					LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
-					LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
-					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
-					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Modelo
-					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
-					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
-					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "2" AND
-				OT.Tipo_Orca = "O" AND
-				AP.DevolvidoProduto = "N" AND
-				TP.TipoProduto = "A"
-				
+				OT.Tipo_Orca = "B" AND
+				OT.FinalizadoOrca = "N" AND
+				OT.QuitadoOrca = "N" 
 			ORDER BY 
-				OT.idApp_OrcaTrata ASC 
+				OT.DataOrca ASC,
+				OT.idApp_OrcaTrata
 		');
 
         /*
@@ -1199,7 +1161,7 @@ class Orcatrata_model extends CI_Model {
 				OT.Descricao,
 				OT.idApp_OrcaTrata,
 				OT.AprovadoOrca,
-                OT.DataOrca,
+				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
 				OT.DataEntradaOrca,
 				OT.DataPrazo,
                 OT.ValorOrca,
@@ -1209,6 +1171,9 @@ class Orcatrata_model extends CI_Model {
 				OT.DataVencimentoOrca,
                 OT.ConcluidoOrca,
                 OT.QuitadoOrca,
+				OT.FinalizadoOrca,
+				OT.EnviadoOrca,
+				OT.ProntoOrca,
                 OT.DataConclusao,
                 OT.DataQuitado,
 				OT.DataRetorno,
@@ -1221,22 +1186,6 @@ class Orcatrata_model extends CI_Model {
 				VP.Abrev3,
 				VP.AVAP,
 				TFP.FormaPag,
-				AP.idApp_Produto,
-				AP.QtdProduto,
-				DATE_FORMAT(AP.DataValidadeProduto, "%d/%m/%Y") AS DataValidadeProduto,
-				AP.ConcluidoProduto,
-				AP.ValorProduto,
-				AP.ObsProduto,
-				AP.HoraValidadeProduto,
-				TS.idApp_Servico,
-				TS.QtdServico,
-				TS.DataValidadeServico,
-				TS.ConcluidoServico,
-				TS.ValorServico,				
-				TP.Produtos,
-				TP3.Prodaux3,
-				TP2.Prodaux2,
-				TP1.Prodaux1,
 				TR.TipoFinanceiro
 			FROM 
                 App_OrcaTrata AS OT
@@ -1245,25 +1194,21 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
 					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
-					LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
-					LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
-					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
-					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Modelo
-					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
-					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
-					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "2" AND
 				OT.Tipo_Orca = "B" AND
-				AP.ConcluidoProduto = "N" AND
-				(TP.TipoProduto = "V" OR TP.TipoProduto = "D")
+				OT.FinalizadoOrca = "N" AND
+				OT.ConcluidoOrca = "N" AND
+				OT.QuitadoOrca = "N" AND
+				OT.ProntoOrca = "N" AND
+				OT.EnviadoOrca = "N"
 				
 			ORDER BY 
-				AP.DataValidadeProduto ASC,
-				AP.HoraValidadeProduto ASC
+				OT.DataOrca ASC,
+				OT.idApp_OrcaTrata
 		');
 
         /*
@@ -1299,7 +1244,7 @@ class Orcatrata_model extends CI_Model {
 				OT.Descricao,
 				OT.idApp_OrcaTrata,
 				OT.AprovadoOrca,
-                OT.DataOrca,
+				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
 				OT.DataEntradaOrca,
 				OT.DataPrazo,
                 OT.ValorOrca,
@@ -1309,6 +1254,9 @@ class Orcatrata_model extends CI_Model {
 				OT.DataVencimentoOrca,
                 OT.ConcluidoOrca,
                 OT.QuitadoOrca,
+				OT.FinalizadoOrca,
+				OT.EnviadoOrca,
+				OT.ProntoOrca,
                 OT.DataConclusao,
                 OT.DataQuitado,
 				OT.DataRetorno,
@@ -1321,21 +1269,6 @@ class Orcatrata_model extends CI_Model {
 				VP.Abrev3,
 				VP.AVAP,
 				TFP.FormaPag,
-				AP.idApp_Produto,
-				AP.QtdProduto,
-				DATE_FORMAT(AP.DataValidadeProduto, "%d/%m/%Y") AS DataValidadeProduto,
-				AP.ConcluidoProduto,
-				AP.ValorProduto,
-				AP.ObsProduto,
-				TS.idApp_Servico,
-				TS.QtdServico,
-				TS.DataValidadeServico,
-				TS.ConcluidoServico,
-				TS.ValorServico,				
-				TP.Produtos,
-				TP3.Prodaux3,
-				TP2.Prodaux2,
-				TP1.Prodaux1,
 				TR.TipoFinanceiro
 			FROM 
                 App_OrcaTrata AS OT
@@ -1344,24 +1277,21 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
 					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
-					LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
-					LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
-					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
-					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Modelo
-					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
-					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
-					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "2" AND
-				OT.Tipo_Orca = "O" AND
-				AP.ConcluidoProduto = "N" AND
-				(TP.TipoProduto = "V" OR TP.TipoProduto = "D")
-				
+				OT.Tipo_Orca = "B" AND
+				OT.FinalizadoOrca = "N" AND
+				OT.ConcluidoOrca = "N" AND
+				OT.QuitadoOrca = "N" AND
+				OT.ProntoOrca = "S" AND
+				OT.EnviadoOrca = "S" AND
+				OT.ConcluidoOrca = "N"
 			ORDER BY 
-				OT.idApp_OrcaTrata ASC 
+				OT.DataOrca ASC,
+				OT.idApp_OrcaTrata 
 		');
 
         /*

@@ -6,11 +6,12 @@
 				<th class="active">Imp.</th>-->							
 				<th class="active">Orc.</th>
 				<th class="active">Cliente</th>
-				<th class="active">Qtd</th>								
+				<th class="active">Data</th>
+				<!--<th class="active">Qtd</th>								
 				<th class="active">Produto</th>
 				<th class="active">Obs</th>
 				<th class="active">Valid.</th>
-				<th class="active">Devolv?</th>
+				<th class="active">Devolv?</th>-->
 				
 			</tr>
 		</thead>
@@ -22,18 +23,19 @@
 				foreach ($q3 as $row)
 				{
 
-					$url = base_url() . 'orcatrata/alterar2/' . $row['idApp_OrcaTrata'];
+					$url = base_url() . 'orcatrataprint/imprimir/' . $row['idApp_OrcaTrata'];
 					#$url = '';
 
 					echo '<tr class="clickable-row" data-href="' . $url . '">';
 						echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 						echo '<td>' . $row['NomeCliente'] . '</td>';
-						echo '<td>' . $row['QtdProduto'] . '</td>';
-						echo '<td>' . $row['Produtos'] . '</td>';
+						echo '<td>' . $row['DataOrca'] . '</td>';
+						#echo '<td>' . $row['QtdProduto'] . '</td>';
+						#echo '<td>' . $row['Produtos'] . '</td>';
 						#echo '<td>R$' . number_format($row['ValorProduto'], 2, ',', '.') . '</td>';
-						echo '<td>' . $row['ObsProduto'] . '</td>';
-						echo '<td>' . $row['DataValidadeProduto'] . '</td>';
-						echo '<td>' . $this->basico->mascara_palavra_completa($row['DevolvidoProduto'], 'NS') . '</td>';
+						#echo '<td>' . $row['ObsProduto'] . '</td>';
+						#echo '<td>' . $row['DataValidadeProduto'] . '</td>';
+						#echo '<td>' . $this->basico->mascara_palavra_completa($row['DevolvidoProduto'], 'NS') . '</td>';
 						
 					echo '</tr>';            
 
