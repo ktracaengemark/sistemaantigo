@@ -1020,6 +1020,7 @@ class Orcatrata_model extends CI_Model {
 				OT.ObsOrca,
 				OT.QtdParcelasOrca,
 				OT.Tipo_Orca,
+				TF.TipoFrete,
 				MD.Modalidade,
 				VP.Abrev3,
 				VP.AVAP,
@@ -1032,6 +1033,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
 					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
@@ -1102,6 +1104,7 @@ class Orcatrata_model extends CI_Model {
 				OT.ObsOrca,
 				OT.QtdParcelasOrca,
 				OT.Tipo_Orca,
+				TF.TipoFrete,
 				MD.Modalidade,
 				VP.Abrev3,
 				VP.AVAP,
@@ -1114,6 +1117,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
 					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
@@ -1123,6 +1127,7 @@ class Orcatrata_model extends CI_Model {
 				OT.FinalizadoOrca = "N" AND
 				OT.QuitadoOrca = "N" 
 			ORDER BY 
+				TF.idTab_TipoFrete,
 				OT.DataOrca ASC,
 				OT.idApp_OrcaTrata
 		');
@@ -1181,6 +1186,7 @@ class Orcatrata_model extends CI_Model {
 				OT.ObsOrca,
 				OT.QtdParcelasOrca,
 				OT.Tipo_Orca,
+				TF.TipoFrete,
 				MD.Modalidade,
 				VP.Abrev3,
 				VP.AVAP,
@@ -1193,6 +1199,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
 					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
@@ -1263,6 +1270,7 @@ class Orcatrata_model extends CI_Model {
 				OT.ObsOrca,
 				OT.QtdParcelasOrca,
 				OT.Tipo_Orca,
+				TF.TipoFrete,
 				MD.Modalidade,
 				VP.Abrev3,
 				VP.AVAP,
@@ -1275,6 +1283,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
 					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
@@ -1287,6 +1296,7 @@ class Orcatrata_model extends CI_Model {
 				OT.EnviadoOrca = "S" AND
 				OT.ConcluidoOrca = "N"
 			ORDER BY 
+				TF.idTab_TipoFrete,
 				OT.DataOrca ASC,
 				OT.idApp_OrcaTrata 
 		');

@@ -20,6 +20,26 @@ class Orcatrataprint_model extends CI_Model {
 				OT.AprovadoOrca,
 				OT.ConcluidoOrca,
 				OT.QuitadoOrca,
+				
+				OT.Cep,
+				OT.Logradouro,
+				OT.Numero,
+				OT.Complemento,
+				OT.Bairro,
+				OT.Cidade,
+				OT.Estado,
+				OT.Referencia,
+
+				OT.PrazoEntrega,
+				OT.ValorTotalOrca,
+				OT.ValorFrete,
+				OT.CombinadoFrete,
+				TF.TipoFrete,
+				OT.FinalizadoOrca,
+				OT.EnviadoOrca,
+				OT.ProntoOrca,
+				SU.Nome AS Entregador,
+				
 				OT.DataOrca,
 				OT.DataPrazo,
 				OT.DataConclusao,
@@ -55,7 +75,8 @@ class Orcatrataprint_model extends CI_Model {
 				LEFT JOIN Sis_Empresa AS EF ON EF.idSis_Empresa = OT.idSis_Empresa
 				LEFT JOIN Tab_TipoFinanceiro AS TP ON TP.idTab_TipoFinanceiro = OT.TipoFinanceiro				
 				LEFT JOIN Tab_Modalidade AS MO ON MO.Abrev = OT.Modalidade
-
+				LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
+				LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = OT.Entregador
 
             WHERE
             	OT.idApp_OrcaTrata = ' . $data . ' AND

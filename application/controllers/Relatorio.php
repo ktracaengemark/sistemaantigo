@@ -3181,6 +3181,7 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'NomeCliente',
+			'Tipo_Orca',
 			'NomeFornecedor',
 			'Dia',
 			'Ano',
@@ -3319,6 +3320,7 @@ class Relatorio extends CI_Controller {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+			$data['bd']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
             $data['bd']['TipoFinanceiroR'] = $data['query']['TipoFinanceiroR'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
@@ -3363,6 +3365,7 @@ class Relatorio extends CI_Controller {
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['NomeFornecedor'] = $data['query']['NomeFornecedor'];
             $data['bd']['TipoFinanceiroD'] = $data['query']['TipoFinanceiroD'];
+			$data['bd']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
@@ -3619,13 +3622,9 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'Produtos',
-            'CodProd',			
+			'Produtos',
             'DataInicio',
             'DataFim',
-			'Prodaux1',
-			'Prodaux2',
-			'Prodaux3',
 			'Ordenamento',
             'Campo',
         ), TRUE));
@@ -3636,14 +3635,9 @@ class Relatorio extends CI_Controller {
         #$this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
 
         $data['select']['Campo'] = array(
-			'TP.Produtos' => 'Produto',	
-			'TP.Prodaux3' => 'Categoria',
-			'TP.Prodaux2' => 'Tipo',
-			'TP.Prodaux1' => 'Esp.',
-			'TP.CodProd' => 'Código',
-			'TP.TipoProduto' => 'V/C/A',
-			#'TP.Categoria' => 'Prod/Serv',
-			#'TP.Prodaux1' => 'Aux1',
+
+			'TP.Nome_Prod' => 'Produto',
+
         );
 
         $data['select']['Ordenamento'] = array(
@@ -3652,24 +3646,19 @@ class Relatorio extends CI_Controller {
         );
 
 
-        $data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
-		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
-		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+        $data['select']['Produtos'] = $this->Relatorio_model->select_produtos1();
+		#$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
+		#$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
+		#$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
 
 
         $data['titulo'] = 'Relatório de Estoque';
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
-
+			$data['bd']['Produtos'] = $data['query']['Produtos'];
             $data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
-			$data['bd']['Produtos'] = $data['query']['Produtos'];
-			$data['bd']['CodProd'] = $data['query']['CodProd'];			
-			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
-			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 

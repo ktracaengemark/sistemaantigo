@@ -4,9 +4,10 @@
 			<tr>
 				<!--<th class="active">EdtOrç</th>
 				<th class="active">Imp.</th>-->							
-				<th class="active">Orc.</th>
-				<th class="active">Cliente</th>
-				<th class="active">Data</th>
+				<th class="col-md-2 active" scope="col">Pedido</th>
+				<th class="col-md-4 active" scope="col">Cliente</th>
+				<th class="col-md-2 active" scope="col">Data</th>
+				<th class="col-md-4 active" scope="col">Entrega</th>
 				<!--<th class="active">Qtd</th>								
 				<th class="active">Produto</th>
 				<th class="active">Obs.</th>
@@ -30,6 +31,7 @@
 						echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 						echo '<td>' . $row['NomeCliente'] . '</td>';
 						echo '<td>' . $row['DataOrca'] . '</td>';
+						echo '<td>' . $row['TipoFrete'] . '</td>';
 						#echo '<td>' . $row['QtdProduto'] . '</td>';
 						#echo '<td>' . $row['Produtos'] . '</td>';
 						#echo '<td>R$' . number_format($row['ValorProduto'], 2, ',', '.') . '</td>';

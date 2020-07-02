@@ -229,6 +229,65 @@
 						<?php } ?>								
 						<?php } ?>
 						
+						<h3 class="text-left">Entrega</h3>
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+						<table class="table table-bordered table-condensed table-striped">
+							<thead>
+								<tr>
+									<th class="col-md-2" scope="col">Orçam. R$</th>
+									<th class="col-md-2" scope="col">Desc. R$</th>
+									<th class="col-md-4" scope="col">Total R$</th>
+									<th class="col-md-2" scope="col">Dinheiro R$</th>
+									<th class="col-md-2" scope="col">Troco R$</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
+									<td><?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
+									<td><?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
+									<td><?php echo number_format($orcatrata['ValorDinheiro'], 2, ',', '.') ?></td>
+									<td><?php echo number_format($orcatrata['ValorTroco'], 2, ',', '.') ?></td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="table table-bordered table-condensed table-striped">
+							<thead>
+								<tr>
+									<th class="col-md-4" scope="col">Forma</th>
+									<th class="col-md-4" scope="col">Pago</th>
+									<th class="col-md-4" scope="col">Venc.</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><?php echo $orcatrata['Modalidade'] ?></td>
+									<td><?php echo $orcatrata['QtdParcelasOrca'] ?>X<?php echo $orcatrata['FormaPag'] ?></td>
+									<td><?php echo $orcatrata['DataVencimentoOrca'] ?></td>
+								</tr>
+							</tbody>
+						</table>
+						<?php } else {?>
+						<table class="table table-bordered table-condensed table-striped">
+							<thead>
+								<tr>
+									<th class="col-md-3" scope="col">Total R$</th>
+									<th class="col-md-3" scope="col">Forma</th>
+									<th class="col-md-3" scope="col">Pago</th>
+									<th class="col-md-3" scope="col">Venc.</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
+									<td><?php echo $orcatrata['Modalidade'] ?></td>
+									<td><?php echo $orcatrata['QtdParcelasOrca'] ?>X<?php echo $orcatrata['FormaPag'] ?></td>
+									<td><?php echo $orcatrata['DataVencimentoOrca'] ?></td>
+								</tr>
+							</tbody>
+						</table>						
+						<?php } ?>						
+						
 						<h3 class="text-left">Pagamento</h3>
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<table class="table table-bordered table-condensed table-striped">

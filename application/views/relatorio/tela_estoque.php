@@ -44,7 +44,7 @@
 				<?php if (($_SESSION['log']['NivelEmpresa'] >= 4) AND ($_SESSION['log']['NivelEmpresa'] <= 6 )) { ?>
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar1" role="button">
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar4" role="button">
 							<span class="glyphicon glyphicon-plus"></span> Novo Produto
 						</a>
 					</div>	
@@ -97,6 +97,7 @@
 						</div>
 					</div>
 				</div>
+				<!--
 				<div class="form-group">
 					<div class="row text-left">
 						<div class="col-md-4">
@@ -145,7 +146,8 @@
 							</select>
 						</div>						
 					</div>
-				</div>				
+				</div>
+				-->
 				<div class="form-group">
 					<div class="row text-left">						
 						<div class="col-md-8">

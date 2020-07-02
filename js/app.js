@@ -4878,7 +4878,7 @@ $(document).ready(function () {
 		}
 		if (negocio == 2) {
 			var endereco = 'q=20';
-			var escrita = '';
+			var escrita = 'readonly=""';
 			var buscavalor = 'buscaValor2Tabelas';
 			var tblbusca = 'Produtos';
 		}
@@ -4929,7 +4929,7 @@ $(document).ready(function () {
                                 <label for="QtdIncremento">Qtd.Emb</label><br>\
                                 <div class="input-group">\
                                     <input type="text" class="form-control Numero" maxlength="10" id="QtdIncremento'+pc+'" '+ escrita +'\
-                                       name="QtdIncremento'+pc+'" value="">\
+                                       name="QtdIncremento'+pc+'" value="1">\
                                 </div>\
                             </div>\
 							<input type="hidden" class="form-control" id="idTab_Valor'+pc+'" name="idTab_Valor'+pc+'" value="">\

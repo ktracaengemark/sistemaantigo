@@ -370,6 +370,21 @@ class Loginempresa extends CI_Controller {
 				
 				copy($arquivo_origem5, $arquivo_destino5);
 				
+				
+				$pasta6 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/';
+				mkdir($pasta6, 0777);
+				
+				$pasta61 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/original/';
+				mkdir($pasta61, 0777);
+				
+				$pasta62 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/miniatura/';
+				mkdir($pasta62, 0777);				
+				
+				$arquivo_origem6 = 'arquivos/imagens/empresas/1/promocao/miniatura/fotopromocao.jpg';
+				$arquivo_destino6 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/miniatura/fotopromocao.jpg';
+				
+				copy($arquivo_origem6, $arquivo_destino6);				
+				
 				if ($data['idSis_Usuario'] === FALSE) {
 					$data['msg'] = '?m=2';
 					$this->load->view('loginempresa/form_registrar', $data);
@@ -800,6 +815,20 @@ class Loginempresa extends CI_Controller {
 				$arquivo_destino5 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/miniatura/fotoproduto.jpg';
 				
 				copy($arquivo_origem5, $arquivo_destino5);
+				
+				$pasta6 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/';
+				mkdir($pasta6, 0777);
+				
+				$pasta61 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/original/';
+				mkdir($pasta61, 0777);
+				
+				$pasta62 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/miniatura/';
+				mkdir($pasta62, 0777);				
+				
+				$arquivo_origem6 = 'arquivos/imagens/empresas/1/promocao/miniatura/fotopromocao.jpg';
+				$arquivo_destino6 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/miniatura/fotopromocao.jpg';
+				
+				copy($arquivo_origem6, $arquivo_destino6);				
 				
 				if ($data['idSis_Usuario'] === FALSE) {
 					$data['msg'] = '?m=2';

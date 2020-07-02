@@ -15,8 +15,11 @@
 						<span class="glyphicon glyphicon-plus"></span> Novo
 					</a>
 					<?php if ($_SESSION['Orcatrata']['Tipo_Orca'] == "B" ) { ?>
+						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterarstatus/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
+							<span class="glyphicon glyphicon-edit"></span> Alterar Status										
+						</a>
 						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterar2/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
-							<span class="glyphicon glyphicon-edit"></span> Editar "B"										
+							<span class="glyphicon glyphicon-edit"></span> Editar Pedido										
 						</a>
 					<?php } else if ($_SESSION['Orcatrata']['Tipo_Orca'] == "O" ) { ?>
 						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alteraronline/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
@@ -85,7 +88,9 @@
 							<div class="col-md-9 text-left">
 								<h2><?php echo '<strong>' . $_SESSION['Orcatrata']['NomeEmpresa'] . '</strong><br><small>' . $_SESSION['Usuario']['Nome'] . '</small>' ?></h2>
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>								
-								<h3><?php echo '' . $_SESSION['Cliente']['NomeCliente'] . ' - ' . $_SESSION['Cliente']['idApp_Cliente'] . '' ?></h3>
+								
+								<h3 class="text-left">Orçamento<?php echo ' - <strong>' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '</strong>' ?> </h3>
+								
 								<?php } ?>							
 															
 							</div>						
@@ -94,27 +99,30 @@
 					<div class="panel-body">
 
 						<!--<hr />-->
-						<h3 class="text-left">Orçamento<?php echo '<strong> - ' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '</strong>' ?> </h3>								
+														
+						<h3 class="text-left"><b>Cliente</b>: <?php echo '' . $_SESSION['Cliente']['NomeCliente'] . ' - ' . $_SESSION['Cliente']['idApp_Cliente'] . '' ?></h3>
+						
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-3" scope="col">Tipo</th>
-									<th class="col-md-6" scope="col">Descrição</th>
-									<th class="col-md-6" scope="col">Data Orç.</th>
+									<th class="col-md-2" scope="col">Tipo</th>
+									<th class="col-md-2" scope="col">Data Orç.</th>
+									<th class="col-md-3" scope="col">Descrição</th>
+									<th class="col-md-5" scope="col">Observções</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-
 									<td><?php echo $orcatrata['TipoFinanceiro'] ?></td>
-									<td><?php echo $orcatrata['Descricao'] ?></td>
 									<td><?php echo $orcatrata['DataOrca'] ?></td>
+									<td><?php echo $orcatrata['Descricao'] ?></td>
+									<td><?php echo $orcatrata['ObsOrca'] ?></td>
 								</tr>
 							</tbody>
 						</table>
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<?php if( isset($count['PCount']) ) { ?>
-						<h3 class="text-left">Produtos Entregues </h3>
+						<h3 class="text-left"><b>Produtos</b></h3>
 
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
@@ -181,7 +189,7 @@
 						
 						<!--<hr />-->
 						
-						<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 20 ) { ?>
 						<?php if( isset($count['SCount']) ) { ?>							
 						<h3 class="text-left">Produtos Devolvidos  </h3>
 						<table class="table table-bordered table-condensed table-striped">
@@ -227,14 +235,62 @@
 						<?php } ?>							
 						<?php } ?>
 						
-						<h3 class="text-left">Pagamento</h3>
+						
+						<h3 class="text-left"><b>Entrega</b></h3>
+						<table class="table table-bordered table-condensed table-striped">
+							<thead>
+								<tr>
+									<th class="col-md-3" scope="col">Tipo</th>
+									<th class="col-md-3" scope="col">Entregador</th>
+									<th class="col-md-3" scope="col">Frete R$</th>
+									<th class="col-md-3" scope="col">Prazo</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><?php echo $orcatrata['TipoFrete'] ?></td>
+									<td><?php echo $orcatrata['Entregador'] ?></td>
+									<td><?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>
+									<td><?php echo $orcatrata['PrazoEntrega'] ?></td>
+								</tr>
+							</tbody>
+						</table>
+						<table class="table table-bordered table-condensed table-striped">
+							<thead>
+								<tr>
+									<th class="col-md-1" scope="col">Cep</th>
+									<th class="col-md-3" scope="col">Endereço</th>
+									<th class="col-md-1" scope="col">Número</th>
+									<th class="col-md-1" scope="col">Compl.</th>
+									<th class="col-md-1" scope="col">Bairro</th>
+									<th class="col-md-1" scope="col">Cidade</th>
+									<th class="col-md-1" scope="col">Estado</th>
+									<th class="col-md-3" scope="col">Ref.</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><?php echo $orcatrata['Cep'] ?></td>
+									<td><?php echo $orcatrata['Logradouro'] ?></td>
+									<td><?php echo $orcatrata['Numero'] ?></td>
+									<td><?php echo $orcatrata['Complemento'] ?></td>
+									<td><?php echo $orcatrata['Bairro'] ?></td>
+									<td><?php echo $orcatrata['Cidade'] ?></td>
+									<td><?php echo $orcatrata['Estado'] ?></td>
+									<td><?php echo $orcatrata['Referencia'] ?></td>
+								</tr>
+							</tbody>
+						</table>					
+						
+						<h3 class="text-left"><b>Pagamento</b></h3>
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
 									<th class="col-md-2" scope="col">Orçam. R$</th>
 									<th class="col-md-2" scope="col">Desc. R$</th>
-									<th class="col-md-4" scope="col">Total R$</th>
+									<th class="col-md-2" scope="col">Frete R$</th>
+									<th class="col-md-2" scope="col">Total R$</th>
 									<th class="col-md-2" scope="col">Dinheiro R$</th>
 									<th class="col-md-2" scope="col">Troco R$</th>
 								</tr>
@@ -243,7 +299,8 @@
 								<tr>
 									<td><?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
 									<td><?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
-									<td><?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
+									<td><?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>
+									<td><?php echo number_format($orcatrata['ValorTotalOrca'], 2, ',', '.') ?></td>
 									<td><?php echo number_format($orcatrata['ValorDinheiro'], 2, ',', '.') ?></td>
 									<td><?php echo number_format($orcatrata['ValorTroco'], 2, ',', '.') ?></td>
 								</tr>
@@ -277,7 +334,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td><?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
+									<td><?php echo number_format($orcatrata['ValorTotalOrca'], 2, ',', '.') ?></td>
 									<td><?php echo $orcatrata['Modalidade'] ?></td>
 									<td><?php echo $orcatrata['QtdParcelasOrca'] ?>X<?php echo $orcatrata['FormaPag'] ?></td>
 									<td><?php echo $orcatrata['DataVencimentoOrca'] ?></td>
@@ -318,13 +375,18 @@
 							</tbody>
 						</table>
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-						<h3 class="text-left">Status</h3>
+						<h3 class="text-left"><b>Status do Pedido</b></h3>
 						
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
 									
-									<th class="col-md-4" scope="col">Orç.Aprovado?</th>
+									<th class="col-md-2" scope="col">Aprovado?</th>
+									<th class="col-md-2" scope="col">Finalizado?</th>
+									<th class="col-md-2" scope="col">Pronto?</th>
+									<th class="col-md-2" scope="col">Enviado?</th>
+									<th class="col-md-2" scope="col">Entregue?</th>
+									<th class="col-md-2" scope="col">Pago?</th>
 
 								</tr>
 							</thead>
@@ -332,7 +394,11 @@
 								<tr>
 									
 									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['AprovadoOrca'], 'NS') ?></td>
-
+									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['FinalizadoOrca'], 'NS') ?></td>
+									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['ProntoOrca'], 'NS') ?></td>
+									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['EnviadoOrca'], 'NS') ?></td>
+									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['ConcluidoOrca'], 'NS') ?></td>
+									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['QuitadoOrca'], 'NS') ?></td>
 								</tr>
 							</tbody>
 						</table>

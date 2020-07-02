@@ -787,7 +787,7 @@
 											<div class="row">	
 												<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 												<div class="col-md-4 panel-body">
-													<div class="panel panel-warning">
+													<div class="panel panel-default">
 														<div class="panel-heading">
 															<div class="row">				
 																<div class="col-md-6">
@@ -845,12 +845,12 @@
 													</div>
 												</div>
 												<div class="col-md-4 panel-body">
-													<div class="panel panel-warning">
+													<div class="panel panel-default">
 														<div class="panel-heading">
 															<div class="row">														
 																<div class="col-md-12">
 																	<label class="sr-only" for="ObsOrca">OBS:</label>
-																	<textarea class="form-control" id="ObsOrca" <?php echo $readonly; ?> placeholder="Observaçoes:"
+																	<textarea class="form-control" id="ObsOrca" <?php echo $readonly; ?> placeholder="Observações:"
 																			  name="ObsOrca"><?php echo $orcatrata['ObsOrca']; ?></textarea>
 																</div>
 															</div>
@@ -870,7 +870,7 @@
 												<!--<label for="TipoFrete">Frete:</label><br>-->
 												<select data-placeholder="Selecione uma Forma..." class="form-control Chosen" onchange="tipoFrete(this.value)" <?php echo $disabled; ?>
 														id="TipoFrete" name="TipoFrete">
-															<!--<option value="">-- Selecione uma Forma --</option>-->
+															<option value="">-- Selecione uma Forma --</option>
 													<?php
 													foreach ($select['TipoFrete'] as $key => $row) {
 														if ($orcatrata['TipoFrete'] == $key) {
@@ -881,6 +881,7 @@
 													}
 													?>
 												</select>
+												<?php echo form_error('TipoFrete'); ?>
 											</div>
 										</div>
 										<?php if($metodo == 10) { ?>	
@@ -916,44 +917,44 @@
 										</div>
 										<?php } ?>
 										<div class="row ">
-											<div class="col-md-3 Desliga">
-												<label class="Desliga" for="Cep">Cep:</label>
-												<input type="text" class="form-control Desliga" id="Cep" maxlength="8" <?php echo $readonly; ?>
+											<div class="col-md-3 ">
+												<label class="" for="Cep">Cep:</label>
+												<input type="text" class="form-control " id="Cep" maxlength="8" <?php echo $readonly; ?>
 													   name="Cep" value="<?php echo $orcatrata['Cep']; ?>">
 											</div>
-											<div class="col-md-3 Desliga">
-												<label class="Desliga" for="Logradouro">Endreço:</label>
-												<input type="text" class="form-control Desliga" id="Logradouro" maxlength="100" <?php echo $readonly; ?>
+											<div class="col-md-3 ">
+												<label class="" for="Logradouro">Endreço:</label>
+												<input type="text" class="form-control " id="Logradouro" maxlength="100" <?php echo $readonly; ?>
 													   name="Logradouro" value="<?php echo $orcatrata['Logradouro']; ?>">
 											</div>
-											<div class="col-md-3 Desliga">
-												<label class="Desliga" for="Numero">Número:</label>
-												<input type="text" class="form-control Desliga" id="Numero" maxlength="100" <?php echo $readonly; ?>
+											<div class="col-md-3 ">
+												<label class="" for="Numero">Número:</label>
+												<input type="text" class="form-control " id="Numero" maxlength="100" <?php echo $readonly; ?>
 													   name="Numero" value="<?php echo $orcatrata['Numero']; ?>">
 											</div>
-											<div class="col-md-3 Desliga">
-												<label class="Desliga" for="Complemento">Complemento:</label>
-												<input type="text" class="form-control Desliga" id="Complemento" maxlength="100" <?php echo $readonly; ?>
+											<div class="col-md-3 ">
+												<label class="" for="Complemento">Complemento:</label>
+												<input type="text" class="form-control " id="Complemento" maxlength="100" <?php echo $readonly; ?>
 													   name="Complemento" value="<?php echo $orcatrata['Complemento']; ?>">
 											</div>
-											<div class="col-md-3 Desliga">
-												<label class="Desliga" for="Bairro">Bairro:</label>
-												<input type="text" class="form-control Desliga" id="Bairro" maxlength="100" <?php echo $readonly; ?>
+											<div class="col-md-3 ">
+												<label class="" for="Bairro">Bairro:</label>
+												<input type="text" class="form-control " id="Bairro" maxlength="100" <?php echo $readonly; ?>
 													   name="Bairro" value="<?php echo $orcatrata['Bairro']; ?>">
 											</div>
-											<div class="col-md-3 Desliga">
-												<label class="Desliga" for="Cidade">Cidade:</label>
-												<input type="text" class="form-control Desliga" id="Cidade" maxlength="100" <?php echo $readonly; ?>
+											<div class="col-md-3 ">
+												<label class="" for="Cidade">Cidade:</label>
+												<input type="text" class="form-control " id="Cidade" maxlength="100" <?php echo $readonly; ?>
 													   name="Cidade" value="<?php echo $orcatrata['Cidade']; ?>">
 											</div>
-											<div class="col-md-3 Desliga">
-												<label class="Desliga" for="Estado">Estado:</label>
-												<input type="text" class="form-control Desliga" id="Estado" maxlength="100" <?php echo $readonly; ?>
+											<div class="col-md-3 ">
+												<label class="" for="Estado">Estado:</label>
+												<input type="text" class="form-control " id="Estado" maxlength="100" <?php echo $readonly; ?>
 													   name="Estado" value="<?php echo $orcatrata['Estado']; ?>">
 											</div>
-											<div class="col-md-3 Desliga">
-												<label class="Desliga" for="Referencia">Referencia:</label>
-												<textarea class="form-control Desliga" id="Referencia" <?php echo $readonly; ?>
+											<div class="col-md-3 ">
+												<label class="" for="Referencia">Referencia:</label>
+												<textarea class="form-control " id="Referencia" <?php echo $readonly; ?>
 														  name="Referencia"><?php echo $orcatrata['Referencia']; ?>
 												</textarea>
 											</div>
@@ -980,7 +981,7 @@
 																					
 										<div class="row">
 											<div class="col-md-4 panel-body">
-												<div class="panel panel-warning">
+												<div class="panel panel-default">
 													<div class="panel-heading">
 														<div class="row">
 															<div class="col-md-12">
@@ -1015,7 +1016,7 @@
 												</div>
 											</div>
 											<div class="col-md-4 panel-body">
-												<div class="panel panel-warning">
+												<div class="panel panel-default">
 													<div class="panel-heading">
 														<div class="row">
 															<div class="col-md-12">
@@ -1041,7 +1042,7 @@
 										<h4 class="mb-3"><b>Forma de Pagamento</b></h4>
 										<div class="row">
 											<div class="col-md-4 panel-body">
-												<div class="panel panel-warning">
+												<div class="panel panel-default">
 													<div class="panel-heading">
 														<div class="row">
 															<div class="col-md-12 text-center">
@@ -1108,7 +1109,7 @@
 											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 											
 											<div class="col-md-4 panel-body">
-												<div class="panel panel-warning">
+												<div class="panel panel-default">
 													<div class="panel-heading">
 														<div class="row">	
 															<div class="col-md-6">
@@ -1314,7 +1315,7 @@
 											<div class="col-md-4">
 												<div class="row">
 													<div class="col-md-12 panel-body">
-														<div class="panel panel-warning">
+														<div class="panel panel-default">
 															<div class="panel-heading">
 																<div class="row">
 																	<div class="col-md-6 text-left">
@@ -1398,7 +1399,7 @@
 													<div class="col-md-4">
 														<div class="row">
 															<div class="col-md-12 panel-body">
-																<div class="panel panel-primary">
+																<div class="panel panel-success">
 																	<div class="panel-heading">
 																		<div class="row">				
 																			<div class="col-md-6 text-left">
@@ -1851,7 +1852,7 @@
 							<div class="panel panel-danger">
 								<div class="panel-heading">
 									<div type="button" data-toggle="collapse" data-target="#NaoEntreguesBalcao" aria-expanded="false" aria-controls="NaoEntreguesBalcao">
-										 Aguardando Produção
+										 Aguardando <b>Produção</b>
 									</div>					
 								</div>
 								<div <?php echo $collapse; ?> id="NaoEntreguesBalcao">
@@ -1867,7 +1868,7 @@
 							<div class="panel panel-success">
 								<div class="panel-heading">
 									<div type="button" data-toggle="collapse" data-target="#NaoDevolvidos" aria-expanded="false" aria-controls="NaoDevolvidos">
-										Aguardando Envio
+										Aguardando <b>Envio</b>
 									</div>			
 								</div>
 								<div <?php echo $collapse; ?> id="NaoDevolvidos">				
@@ -1883,7 +1884,7 @@
 							<div class="panel panel-warning">
 								<div class="panel-heading">
 									<div type="button" data-toggle="collapse" data-target="#NaoEntreguesOnline" aria-expanded="false" aria-controls="NaoEntreguesOnline">
-										Aguardando Entrega
+										Aguardando <b>Entrega</b>
 									</div>					
 								</div>
 								<div <?php echo $collapse; ?> id="NaoEntreguesOnline">
@@ -1896,10 +1897,10 @@
 							</div>
 						</div>
 						<div class="col-md-12">
-							<div class="panel panel-primary">
+							<div class="panel panel-warning">
 								<div class="panel-heading">
 									<div type="button" data-toggle="collapse" data-target="#NaoDevolvidosOnline" aria-expanded="false" aria-controls="NaoDevolvidosOnline">
-										Aguardando Pagamento
+										Aguardando <b>Pagamento</b>
 									</div>			
 								</div>
 								<div <?php echo $collapse; ?> id="NaoDevolvidosOnline">				
