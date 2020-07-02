@@ -1040,7 +1040,6 @@ class Orcatrata_model extends CI_Model {
 				OT.Tipo_Orca = "B" AND
 				OT.FinalizadoOrca = "N" AND
 				OT.ConcluidoOrca = "N" AND
-				OT.QuitadoOrca = "N" AND
 				OT.ProntoOrca = "S" AND
 				OT.EnviadoOrca = "N"
 			ORDER BY 
@@ -1202,7 +1201,6 @@ class Orcatrata_model extends CI_Model {
 				OT.Tipo_Orca = "B" AND
 				OT.FinalizadoOrca = "N" AND
 				OT.ConcluidoOrca = "N" AND
-				OT.QuitadoOrca = "N" AND
 				OT.ProntoOrca = "N" AND
 				OT.EnviadoOrca = "N"
 				
@@ -1285,7 +1283,6 @@ class Orcatrata_model extends CI_Model {
 				OT.Tipo_Orca = "B" AND
 				OT.FinalizadoOrca = "N" AND
 				OT.ConcluidoOrca = "N" AND
-				OT.QuitadoOrca = "N" AND
 				OT.ProntoOrca = "S" AND
 				OT.EnviadoOrca = "S" AND
 				OT.ConcluidoOrca = "N"

@@ -782,10 +782,7 @@ class Orcatrata extends CI_Controller {
         $data['radio'] = array(
             'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
         );
-        ($data['orcatrata']['AVAP'] == 'P') ?
-            $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
-						
-
+        ($data['orcatrata']['AVAP'] == 'P') ? $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
 		
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 		
@@ -910,7 +907,15 @@ class Orcatrata extends CI_Controller {
 				}  
 				else {	$data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'mysql');
 				}
-            }
+            
+				if ($data['orcatrata']['FinalizadoOrca'] == 'S') {$data['orcatrata']['ProntoOrca'] = "S";
+																	$data['orcatrata']['EnviadoOrca'] = "S";
+																	$data['orcatrata']['ConcluidoOrca'] = "S";
+																	$data['orcatrata']['QuitadoOrca'] = "S";
+				} 
+				else if($data['orcatrata']['ConcluidoOrca'] == 'S' && $data['orcatrata']['QuitadoOrca'] == 'S'){$data['orcatrata']['FinalizadoOrca'] = "S";
+				}
+			}
 			else if ($data['orcatrata']['AVAP'] == 'V') {$data['orcatrata']['DataVencimentoOrca'] = $data['orcatrata']['DataOrca'];
 														$data['orcatrata']['QuitadoOrca'] = "N";
 														$data['orcatrata']['ConcluidoOrca'] = "N";
@@ -2251,6 +2256,14 @@ class Orcatrata extends CI_Controller {
 				}  
 				else {	$data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'mysql');
 				}
+				
+				if ($data['orcatrata']['FinalizadoOrca'] == 'S') {$data['orcatrata']['ProntoOrca'] = "S";
+																	$data['orcatrata']['EnviadoOrca'] = "S";
+																	$data['orcatrata']['ConcluidoOrca'] = "S";
+																	$data['orcatrata']['QuitadoOrca'] = "S";
+				} 
+				else if($data['orcatrata']['ConcluidoOrca'] == 'S' && $data['orcatrata']['QuitadoOrca'] == 'S'){$data['orcatrata']['FinalizadoOrca'] = "S";
+				}				
             }
 			else if ($data['orcatrata']['AVAP'] == 'V') {$data['orcatrata']['DataVencimentoOrca'] = $data['orcatrata']['DataOrca'];
 														$data['orcatrata']['QuitadoOrca'] = "N";

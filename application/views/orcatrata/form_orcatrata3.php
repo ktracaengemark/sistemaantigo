@@ -1345,32 +1345,34 @@
 																			?>
 																		</div>
 																	</div>
-																	<div class="col-md-6 text-left">
-																		<label for="FinalizadoOrca">Finalizado?</label><br>
-																		<div class="btn-group" data-toggle="buttons">
-																			<?php
-																			foreach ($select['FinalizadoOrca'] as $key => $row) {
-																				if (!$orcatrata['FinalizadoOrca'])$orcatrata['FinalizadoOrca'] = 'N';
+																	<div id="AVAP" <?php #echo $div['AVAP']; ?>>
+																		<div class="col-md-6 text-left">
+																			<label for="FinalizadoOrca">Finalizado?</label><br>
+																			<div class="btn-group" data-toggle="buttons">
+																				<?php
+																				foreach ($select['FinalizadoOrca'] as $key => $row) {
+																					if (!$orcatrata['FinalizadoOrca'])$orcatrata['FinalizadoOrca'] = 'N';
 
-																				($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																					($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
-																				if ($orcatrata['FinalizadoOrca'] == $key) {
-																					echo ''
-																					. '<label class="btn btn-warning active" name="FinalizadoOrca_' . $hideshow . '">'
-																					. '<input type="radio" name="FinalizadoOrca" id="' . $hideshow . '" '
-																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																					. '</label>'
-																					;
-																				} else {
-																					echo ''
-																					. '<label class="btn btn-default" name="FinalizadoOrca_' . $hideshow . '">'
-																					. '<input type="radio" name="FinalizadoOrca" id="' . $hideshow . '" '
-																					. 'autocomplete="off" value="' . $key . '" >' . $row
-																					. '</label>'
-																					;
+																					if ($orcatrata['FinalizadoOrca'] == $key) {
+																						echo ''
+																						. '<label class="btn btn-warning active" name="FinalizadoOrca_' . $hideshow . '">'
+																						. '<input type="radio" name="FinalizadoOrca" id="' . $hideshow . '" '
+																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																						. '</label>'
+																						;
+																					} else {
+																						echo ''
+																						. '<label class="btn btn-default" name="FinalizadoOrca_' . $hideshow . '">'
+																						. '<input type="radio" name="FinalizadoOrca" id="' . $hideshow . '" '
+																						. 'autocomplete="off" value="' . $key . '" >' . $row
+																						. '</label>'
+																						;
+																					}
 																				}
-																			}
-																			?>
+																				?>
+																			</div>
 																		</div>
 																	</div>
 																</div>
@@ -1837,7 +1839,7 @@
 	<div class="panel panel-info ">
 		<div class="panel-heading">
 			<div class="text-center" type="button" data-toggle="collapse" data-target="#StatusOrç" aria-expanded="false" aria-controls="StatusOrç">
-				 <h4><b>Status do Pedido</b></h4>
+				 <h4><b>Status dos Pedidos</b></h4>
 			</div>		
 		
 			<div <?php echo $collapse; ?> id="StatusOrç">

@@ -1845,12 +1845,11 @@
 		</div>
 	</div>
 </div>
-
 <div class="col-md-4">
 	<div class="panel panel-info ">
 		<div class="panel-heading">
 			<div class="text-center" type="button" data-toggle="collapse" data-target="#StatusOrç" aria-expanded="false" aria-controls="StatusOrç">
-				 <h4><b>Status do Pedido</b></h4>
+				 <h4><b>Status dos Pedidos</b></h4>
 			</div>		
 		
 			<div <?php echo $collapse; ?> id="StatusOrç">
@@ -1909,11 +1908,11 @@
 						<div class="col-md-12">
 							<div class="panel panel-primary">
 								<div class="panel-heading">
-									<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoDevolvidosOnline" aria-expanded="false" aria-controls="NaoDevolvidosOnline">
+									<div type="button" data-toggle="collapse" data-target="#NaoDevolvidosOnline" aria-expanded="false" aria-controls="NaoDevolvidosOnline">
 										Aguardando Pagamento
 									</div>			
 								</div>
-								<div <?php echo $collapse1; ?> id="NaoDevolvidosOnline">				
+								<div <?php echo $collapse; ?> id="NaoDevolvidosOnline">				
 									<div class="panel-body">
 
 										<?php if (isset($list6)) echo $list6; ?>
