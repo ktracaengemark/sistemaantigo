@@ -705,12 +705,14 @@
 															</span>
 															</b>
 														</div>															
+														<!--
 														<div class="col-md-3 text-right">
 															<label></label><br>
 															<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>relatorio2/produtos2" role="button"> 
 																<span class="glyphicon glyphicon-plus"></span> Novo/ Editar/ Estoque
 															</a>
-														</div>																				
+														</div>
+														-->
 													</div>
 												</div>
 											</div>

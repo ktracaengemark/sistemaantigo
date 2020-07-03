@@ -213,15 +213,6 @@
 						</button>
 					</div>
 				</div>
-				<?php if (($_SESSION['log']['TabelasEmpresa'] == 1)) { ?>
-				<div class="form-group col-md-4 text-right">
-					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar1" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Nova Promocao
-						</a>
-					</div>	
-				</div>
-				<?php } else {?>
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
 						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar4" role="button">
@@ -229,7 +220,6 @@
 						</a>
 					</div>	
 				</div>
-				<?php } ?>
 				<div class="form-group col-md-4">
 					<div class="form-footer ">
 						<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">

@@ -83,12 +83,15 @@
 					<div class="panel-heading">	
 						<div class="row">
 							<div class="panel-heading col-md-3 text-left">
-								<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>" class="img-responsive" width='120'>
+								<!--<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>" class="img-responsive" width='120'>-->
+								<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>" class="img-responsive" width='120'>
 							</div>
 							<div class="col-md-9 text-left">
 								<h2><?php echo '<strong>' . $_SESSION['Orcatrata']['NomeEmpresa'] . '</strong><br><small>' . $_SESSION['Usuario']['Nome'] . '</small>' ?></h2>
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>								
-								<h3><?php echo '' . $_SESSION['Fornecedor']['NomeFornecedor'] . ' - ' . $_SESSION['Fornecedor']['idApp_Fornecedor'] . '' ?></h3>
+								<h3 class="text-left">Orçamento<?php echo '<strong> - ' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '</strong>' ?> </h3>
+								
+								
 								<?php } ?>							
 															
 							</div>						
@@ -97,7 +100,7 @@
 					<div class="panel-body">
 
 						<!--<hr />-->
-						<h3 class="text-left">Orçamento<?php echo '<strong> - ' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '</strong>' ?> </h3>								
+						<h3 class="text-left">Fornecedor: <?php echo '' . $_SESSION['Fornecedor']['NomeFornecedor'] . ' - ' . $_SESSION['Fornecedor']['idApp_Fornecedor'] . '' ?></h3>								
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>

@@ -138,7 +138,7 @@
 																<div class="col-md-1">
 																	<label for="QtdIncremento">Qtd.Emb</label>
 																	<div class="input-group">
-																		<input type="text" class="form-control " id="QtdIncremento<?php echo $i ?>"
+																		<input type="text" class="form-control " id="QtdIncremento<?php echo $i ?>" readonly=""
 																			name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
 																	</div>
 																</div>
@@ -318,13 +318,14 @@
 															
 															<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma ?></span></b><br />
 														</div>
-																												
+														<!--														
 														<div class="col-md-3 text-center">
 															<label></label>
 															<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>relatorio2/produtos2" role="button"> 
 																<span class="glyphicon glyphicon-plus"></span> Novo/ Editar/ Estoque
 															</a>
-														</div>																			
+														</div>
+														-->
 													</div>
 												</div>
 											</div>

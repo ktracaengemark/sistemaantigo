@@ -520,7 +520,7 @@ class Loginempresa extends CI_Controller {
 										$this->load->view('loginempresa/form_registrar', $data);
 									} else {
 											$data['valor'] = array(
-												'idTab_Produto' => $data['idTab_Produto'],
+												'idTab_Modelo' => $data['idTab_Produto'],
 												'idSis_Usuario' => $data['idSis_Usuario'],
 												'idSis_Empresa' => $data['idSis_Empresa'],
 												'idTab_Modulo' => "1",
@@ -961,7 +961,7 @@ class Loginempresa extends CI_Controller {
 										$this->load->view('loginempresa/form_registrar', $data);
 									} else {
 											$data['valor'] = array(
-												'idTab_Produto' => $data['idTab_Produto'],
+												'idTab_Modelo' => $data['idTab_Produto'],
 												'idSis_Usuario' => $data['idSis_Usuario'],
 												'idSis_Empresa' => $data['idSis_Empresa'],
 												'idTab_Modulo' => "1",
