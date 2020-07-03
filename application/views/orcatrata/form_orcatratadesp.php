@@ -656,7 +656,7 @@
 														<div class="row">
 															<div class="col-md-12">
 																<label for="FormaPagamento">Forma de Pagamento</label>
-																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																		id="FormaPagamento" name="FormaPagamento">
 																	<option value="">-- Selecione uma opção --</option>
 																	<?php

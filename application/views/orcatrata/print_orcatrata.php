@@ -16,7 +16,7 @@
 					</a>
 					<?php if ($_SESSION['Orcatrata']['Tipo_Orca'] == "B" ) { ?>
 						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterarstatus/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
-							<span class="glyphicon glyphicon-edit"></span> Alterar Status										
+							<span class="glyphicon glyphicon-edit"></span> Atualizar Status										
 						</a>
 						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterar2/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
 							<span class="glyphicon glyphicon-edit"></span> Editar Pedido										
@@ -343,7 +343,7 @@
 							</tbody>
 						</table>						
 						<?php } ?>
-						
+						<?php if( isset($count['PRCount']) ) { ?>
 						<h3 class="text-left">Parcelas</h3>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
@@ -375,6 +375,8 @@
 
 							</tbody>
 						</table>
+						<?php } else echo '<h3 class="text-left">S/Parcelas </h3>';{?>
+						<?php } ?>
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<h3 class="text-left"><b>Status do Pedido</b></h3>
 						

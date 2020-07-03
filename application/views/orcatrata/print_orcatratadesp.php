@@ -349,7 +349,7 @@
 							</tbody>
 						</table>						
 						<?php } ?>
-						
+						<?php if( isset($count['PRCount']) ) { ?>
 						<h3 class="text-left">Parcelas</h3>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
@@ -381,6 +381,8 @@
 
 							</tbody>
 						</table>
+						<?php } else echo '<h3 class="text-left">S/Parcelas </h3>';{?>
+						<?php } ?>
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<h3 class="text-left">Status</h3>
 						
