@@ -821,42 +821,11 @@
 												<div class="panel-heading text-left">
 													<div class="row">
 														<div class="col-md-3 form-inline">
-															<label></label><br>
+															<label></label>
 															<button class="btn btn-warning" type="button" data-toggle="collapse" onclick="adicionaParcelas()"
 																	data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas">
 																<span class="glyphicon glyphicon-plus"></span> Adic. Parcelas
 															</button>
-														</div>
-														<div class="col-md-3"></div>
-														<div class="col-md-2 text-center">
-															<b>TodasPagas?
-															<span class="btn-group" data-toggle="buttons">
-																<?php
-																foreach ($select['QuitadoOrca'] as $key => $row) {
-																	if (!$orcatrata['QuitadoOrca'])
-																		$orcatrata['QuitadoOrca'] = 'N';
-
-																	($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																	if ($orcatrata['QuitadoOrca'] == $key) {
-																		echo ''
-																		. '<label class="btn btn-warning active" name="QuitadoOrca_' . $hideshow . '">'
-																		. '<input type="radio" name="QuitadoOrca" id="' . $hideshow . '" '
-																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																		. '</label>'
-																		;
-																	} else {
-																		echo ''
-																		. '<label class="btn btn-default" name="QuitadoOrca_' . $hideshow . '">'
-																		. '<input type="radio" name="QuitadoOrca" id="' . $hideshow . '" '
-																		. 'autocomplete="off" value="' . $key . '" >' . $row
-																		. '</label>'
-																		;
-																	}
-																}
-																?>
-															</span>
-															</b>
 														</div>
 													</div>
 												</div>
