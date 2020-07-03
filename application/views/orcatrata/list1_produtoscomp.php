@@ -6,11 +6,7 @@
 				<th class="active">Imp.</th>-->							
 				<th class="active">Orc.</th>
 				<th class="active">Fornec.</th>
-				<th class="active">Qtd</th>								
-				<th class="active">Produto</th>
-				<th class="active">Obs.</th>
-				<th class="active">Valid.</th>
-				<th class="active">Entr.?</th>
+				<th class="active">Data</th>
 				
 			</tr>
 		</thead>
@@ -28,12 +24,7 @@
 					echo '<tr class="clickable-row" data-href="' . $url . '">';
 						echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 						echo '<td>' . $row['NomeFornecedor'] . '</td>';
-						echo '<td>' . $row['QtdProduto'] . '</td>';
-						echo '<td>' . $row['Produtos'] . '</td>';
-						#echo '<td>R$' . number_format($row['ValorProduto'], 2, ',', '.') . '</td>';
-						echo '<td>' . $row['ObsProduto'] . '</td>';
-						echo '<td>' . $row['DataValidadeProduto'] . '</td>';
-						echo '<td>' . $this->basico->mascara_palavra_completa($row['ConcluidoProduto'], 'NS') . '</td>';
+						echo '<td>' . $row['DataOrca'] . '</td>';
 						
 					echo '</tr>';            
 

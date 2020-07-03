@@ -1327,4 +1327,23 @@
 		</div>
 	</div>
 </div>
+<div class="col-md-4 ">
+	<div class="row">		
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoEntregues" aria-expanded="false" aria-controls="NaoEntregues">
+						<span class="glyphicon glyphicon-chevron-up"></span> Despesas/Compras
+					</div>
+				</div>
+				<div <?php echo $collapse; ?> id="NaoEntregues">	
+					<div class="panel-body">
+						
+						<?php if (isset($list1)) echo $list1; ?>
 
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+</div>

@@ -1364,11 +1364,7 @@ class Orcatrata_model extends CI_Model {
 				TS.QtdServico,
 				TS.DataValidadeServico,
 				TS.ConcluidoServico,
-				TS.ValorServico,				
-				TP.Produtos,
-				TP3.Prodaux3,
-				TP2.Prodaux2,
-				TP1.Prodaux1,
+				TS.ValorServico,
 				TR.TipoFinanceiro
 			FROM 
                 App_OrcaTrata AS OT
@@ -1379,17 +1375,10 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
 					LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
 					LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
-					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
-					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TV.idTab_Modelo
-					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TP.Prodaux1
-					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TP.Prodaux2
-					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				OT.AprovadoOrca = "S" AND
-				OT.idTab_TipoRD = "1" AND
-				AP.ConcluidoProduto = "N" 
+				OT.idTab_TipoRD = "1"  
 			ORDER BY 
 				OT.idApp_OrcaTrata ASC 
 		');
