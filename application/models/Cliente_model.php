@@ -176,7 +176,8 @@ class Cliente_model extends CI_Model {
             $array = $this->db->query(					
 				'SELECT                
 				idApp_Cliente,
-				CONCAT(idApp_Cliente, " - ", NomeCliente) As NomeCliente				
+				CelularCliente,
+				CONCAT(IFNULL(idApp_Cliente,""), " - ", IFNULL(NomeCliente,""), " - ", IFNULL(CelularCliente,"")) AS NomeCliente
             FROM
                 App_Cliente					
             WHERE
@@ -190,7 +191,8 @@ class Cliente_model extends CI_Model {
             $query = $this->db->query(
                 'SELECT                
 				idApp_Cliente,
-				CONCAT(idApp_Cliente, " - ",NomeCliente) As NomeCliente			
+				CelularCliente,
+				CONCAT(IFNULL(idApp_Cliente,""), " - ", IFNULL(NomeCliente,""), " - ", IFNULL(CelularCliente,"")) AS NomeCliente		
             FROM
                 App_Cliente					
             WHERE

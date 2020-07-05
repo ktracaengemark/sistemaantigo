@@ -2642,6 +2642,50 @@ class Orcatrata extends CI_Controller {
 
     }
 
+    public function pedido() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		
+        $data['titulo'] = 'Pedido';
+        $data['form_open_path'] = 'orcatrata/pedido';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'info';
+        $data['metodo'] = 1;
+		
+		$data['collapse'] = '';	
+		$data['collapse1'] = 'class="collapse"';		
+
+		$data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
+		$data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
+
+		$data['q5'] = $this->Orcatrata_model->list5_produtosvend(TRUE);
+		$data['list5'] = $this->load->view('orcatrata/list5_produtosvend', $data, TRUE);
+		
+		$data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
+		$data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
+
+		$data['q3'] = $this->Orcatrata_model->list3_produtosaluguel(TRUE);
+		$data['list3'] = $this->load->view('orcatrata/list3_produtosaluguel', $data, TRUE);
+		
+        $data['q6'] = $this->Orcatrata_model->list6_produtosaluguel(TRUE);
+        $data['list6'] = $this->load->view('orcatrata/list6_produtosaluguel', $data, TRUE);		
+
+		$data['q4'] = $this->Orcatrata_model->list4_receitasparc(TRUE);
+		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);		
+
+		
+		$this->load->view('orcatrata/form_pedido', $data);
+        
+
+        $this->load->view('basico/footer');
+    }
+	
     public function alterarstatus($id = FALSE) {
 
         if ($this->input->get('m') == 1)
@@ -2814,7 +2858,7 @@ class Orcatrata extends CI_Controller {
 
         if ($id) {
             #### App_OrcaTrata ####
-            $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata($id);
+            $_SESSION['OrcaTrata'] = $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata($id);
             $data['orcatrata']['Tipo_Orca'] = $data['orcatrata']['Tipo_Orca'];
 			$data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
@@ -2951,7 +2995,7 @@ class Orcatrata extends CI_Controller {
         $data['form_open_path'] = 'orcatrata/alterarstatus';
         $data['readonly'] = '';
         $data['disabled'] = '';
-        $data['panel'] = 'primary';
+        $data['panel'] = 'info';
         $data['metodo'] = 2;
 
 		$data['collapse'] = '';	
@@ -3411,7 +3455,8 @@ class Orcatrata extends CI_Controller {
                 #redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
 				#redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/parcelas/' . $data['msg']);
-				redirect(base_url() . 'OrcatrataPrint/imprimir/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
+				#redirect(base_url() . 'OrcatrataPrint/imprimir/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
+				redirect(base_url() . 'Orcatrata/pedido/' . $data['msg']);
 				exit();
             }
         }

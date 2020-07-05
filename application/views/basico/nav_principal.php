@@ -70,6 +70,8 @@
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">							
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/pedido"><span class="glyphicon glyphicon-pencil"></span> Atualizar Status</a></li>
+							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasrec"><span class="glyphicon glyphicon-pencil"></span> Relatório das Receitas</a></li>
 							<li role="separator" class="divider"></li>
 							<?php if ($_SESSION['log']['idSis_Empresa'] == 5 ) { ?>
