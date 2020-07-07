@@ -190,9 +190,9 @@
 						
 						<!--<hr />-->
 						
-						<?php if ($_SESSION['log']['NivelEmpresa'] >= 20 ) { ?>
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<?php if( isset($count['SCount']) ) { ?>							
-						<h3 class="text-left">Produtos Devolvidos  </h3>
+						<h3 class="text-left"><b>Serviços</b></h3>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
@@ -232,7 +232,7 @@
 
 							</tbody>
 						</table>
-						<?php } else echo '<h3 class="text-left">S/Produtos Devolvidos </h3>';{?>
+						<?php } else echo '<h3 class="text-left">S/Serviços </h3>';{?>
 						<?php } ?>							
 						<?php } ?>
 						
@@ -288,8 +288,8 @@
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-2" scope="col">Orçam. R$</th>
-									<th class="col-md-2" scope="col">Desc. R$</th>
+									<th class="col-md-2" scope="col">Produtos R$</th>
+									<th class="col-md-2" scope="col">Serviços R$</th>
 									<th class="col-md-2" scope="col">Frete R$</th>
 									<th class="col-md-2" scope="col">Total R$</th>
 									<th class="col-md-2" scope="col">Dinheiro R$</th>

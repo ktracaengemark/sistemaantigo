@@ -1309,6 +1309,7 @@ class Produtos extends CI_Controller {
             'idTab_Produto',           
             'TipoProduto',
 			'Categoria',
+			'Prod_Serv',
 			'UnidadeProduto',
 			#'CodProd',
 			#'Fornecedor',
@@ -1337,14 +1338,16 @@ class Produtos extends CI_Controller {
         #### Tab_Produto ####
 
 		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'required|trim|is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+		#$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();		
 		$data['select']['Desconto'] = $this->Basico_model->select_desconto();
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
-		$data['select']['Categoria'] = $this->Basico_model->select_categoria();		
+		$data['select']['Categoria'] = $this->Basico_model->select_categoria();
+		$data['select']['Prod_Serv'] = $this->Basico_model->select_prod_serv();
 		$data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
@@ -1477,6 +1480,7 @@ class Produtos extends CI_Controller {
             'idTab_Produto',			
             'TipoProduto',
 			'Categoria',
+			'Prod_Serv',
 			'UnidadeProduto',
 			#'CodProd',
 			'Fornecedor',
@@ -1569,7 +1573,7 @@ class Produtos extends CI_Controller {
             if ($this->input->post('Cat_Prod' . $i) || $this->input->post('Opcao_Atributo_1' . $i) || 
 				$this->input->post('Opcao_Atributo_2' . $i) || $this->input->post('Cod_Prod' . $i) || $this->input->post('Nome_Prod' . $i)){
 				$data['derivados'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
-				#$data['derivados'][$j]['Cat_Prod'] = $this->input->post('Cat_Prod' . $i);
+				#$data['derivados'][$j]['Prod_Serv'] = $this->input->post('Prod_Serv' . $i);
 				$data['derivados'][$j]['Opcao_Atributo_1'] = $this->input->post('Opcao_Atributo_1' . $i);
 				$data['derivados'][$j]['Opcao_Atributo_2'] = $this->input->post('Opcao_Atributo_2' . $i);
 				#$data['derivados'][$j]['Cod_Prod'] = $this->input->post('Cod_Prod' . $i);
@@ -1710,12 +1714,13 @@ class Produtos extends CI_Controller {
 		#$this->form_validation->set_rules($data['produtos']['CodProd'], 'Código', 'is_unique_by_id[Tab_Produto.'.$data['produtos']['CodProd'].'.' . $data['produtos']['idTab_Produto'] . ']');
 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'required|trim|is_unique_by_id[Tab_Produto.CodProd.' . $data['produtos']['idTab_Produto'] . ']');
-		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+		#$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['Desconto'] = $this->Basico_model->select_desconto();		
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();
+		$data['select']['Prod_Serv'] = $this->Basico_model->select_prod_serv();
 		#$data['select']['Fornecedor'] = $this->Fornecedor_model->select_Fornecedor();
         $data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux14();
@@ -2013,6 +2018,7 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['derivados']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
+					$data['update']['derivados']['inserir'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
 					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Opcao_Atributo_1'].'.'.$data['derivados'][$j]['Opcao_Atributo_2'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
@@ -2021,6 +2027,7 @@ class Produtos extends CI_Controller {
 
                 $max = count($data['update']['derivados']['alterar']);
                 for($j=0;$j<$max;$j++) {
+					$data['update']['derivados']['alterar'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
 					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Opcao_Atributo_1'].'.'.$data['derivados'][$j]['Opcao_Atributo_2'];					
@@ -2092,6 +2099,7 @@ class Produtos extends CI_Controller {
             'idTab_Produto',			
             'TipoProduto',
 			'Categoria',
+			'Prod_Serv',
 			'UnidadeProduto',
 			#'CodProd',
 			'Fornecedor',
@@ -2314,11 +2322,11 @@ class Produtos extends CI_Controller {
 		
         #### Tab_Produto ####
 
-		#$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		#$this->form_validation->set_rules('Prodaux4', 'Modelo', 'required|trim');
 		#$this->form_validation->set_rules('Prodaux2', 'Tipo', 'required|trim');
 		#$this->form_validation->set_rules('Prodaux1', 'Esp', 'required|trim');
-		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
+		#$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
 		
 		#$this->form_validation->set_rules($data['produtos']['CodProd'], 'Código', 'is_unique_by_id[Tab_Produto.'.$data['produtos']['CodProd'].'.' . $data['produtos']['idTab_Produto'] . ']');
 		
@@ -2329,6 +2337,7 @@ class Produtos extends CI_Controller {
 		$data['select']['Desconto'] = $this->Basico_model->select_desconto();		
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();
+		$data['select']['Prod_Serv'] = $this->Basico_model->select_prod_serv();
 		#$data['select']['Fornecedor'] = $this->Fornecedor_model->select_Fornecedor();
         $data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux14();
@@ -2630,6 +2639,7 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['derivados']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
+					$data['update']['derivados']['inserir'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
 					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Opcao_Atributo_1'].'.'.$data['derivados'][$j]['Opcao_Atributo_2'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
@@ -2638,6 +2648,7 @@ class Produtos extends CI_Controller {
 
                 $max = count($data['update']['derivados']['alterar']);
                 for($j=0;$j<$max;$j++) {
+					$data['update']['derivados']['alterar'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
 					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Opcao_Atributo_1'].'.'.$data['derivados'][$j]['Opcao_Atributo_2'];					
@@ -2709,6 +2720,7 @@ class Produtos extends CI_Controller {
             'idTab_Produto',			
             'TipoProduto',
 			'Categoria',
+			'Prod_Serv',
 			'UnidadeProduto',
 			#'CodProd',
 			'Fornecedor',
@@ -2921,12 +2933,13 @@ class Produtos extends CI_Controller {
 		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules($data['produtos']['CodProd'], 'Código', 'is_unique_by_id[Tab_Produto.'.$data['produtos']['CodProd'].'.' . $data['produtos']['idTab_Produto'] . ']');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'required|trim|is_unique_by_id[Tab_Produto.CodProd.' . $data['produtos']['idTab_Produto'] . ']');
-		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+		#$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['Desconto'] = $this->Basico_model->select_desconto();		
 		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoria();
+		$data['select']['Prod_Serv'] = $this->Basico_model->select_prod_serv();
 		#$data['select']['Fornecedor'] = $this->Fornecedor_model->select_Fornecedor();
         $data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux14();
@@ -3237,6 +3250,7 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['derivados']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
+					$data['update']['derivados']['inserir'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
 					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
@@ -3245,6 +3259,7 @@ class Produtos extends CI_Controller {
 
                 $max = count($data['update']['derivados']['alterar']);
                 for($j=0;$j<$max;$j++) {
+					$data['update']['derivados']['alterar'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['alterar'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));

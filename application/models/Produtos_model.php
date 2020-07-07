@@ -144,6 +144,7 @@ class Produtos_model extends CI_Model {
 				TP.ValorProduto,
 				TP.ValorProdutoSite,
 				TP.Categoria,
+				TP.Prod_Serv,
 				TP.ProdutoProprio,
 				TP.Aprovado,
 				TP.Arquivo,

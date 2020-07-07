@@ -56,7 +56,24 @@
 													</select>
 													<?php echo form_error('Prodaux3'); ?>
 												</div>
-												
+												<div class="col-md-6">
+													<label for="Prod_Serv">Prod/Serv*</label>								
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> 
+															id="Prod_Serv" name="Prod_Serv">
+														<option value="">-- Sel.a Opção --</option>
+														<?php
+														foreach ($select['Prod_Serv'] as $key => $row) {
+															if ($produtos['Prod_Serv'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+													<?php echo form_error('Prod_Serv'); ?>
+												</div>
+												<!--
 												<div class="col-md-5">
 													<label for="Cadastrar">Cadastrar 
 														<?php if ($metodo == 1) { ?>
@@ -92,12 +109,12 @@
 
 													</div>
 												</div>
-												
+												-->
 											</div>
-											
+											<!--
 											<div class="row">
 												<div class="col-md-12 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-													<!--
+													
 													<?php if ($metodo == 1) { ?>
 													<label></label><br>
 													<a class="btn btn-sm btn-info"   target="_blank" href="<?php echo base_url() ?>prodaux32/cadastrar3" role="button"> 
@@ -124,7 +141,7 @@
 													<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>fornecedor2/cadastrar3/" role="button"> 
 														<span class="glyphicon glyphicon-plus"></span> Fornec
 													</a>
-													-->
+													
 													<label></label>									
 													<button class="btn btn-sm btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
 															<span class="glyphicon glyphicon-refresh"></span> Recarregar
@@ -132,6 +149,7 @@
 													<?php echo form_error('Cadastrar'); ?>
 												</div>
 											</div>
+											-->
 											<?php if ($metodo > 1) { ?>
 												<div class="row">
 													<div class="col-md-12">	

@@ -29,7 +29,7 @@ if ($_GET['tabela']) {
 
         $event_array[] = array(
             'id' => $row['idTab_' . $_GET['tabela']],
-            'valor' => str_replace(".", ",", $row['Valor_' . $_GET['campo2']]),
+            'valor' => str_replace(".", ",", $row['Valor_Produto']),
 			'id_produto' => $row['idTab_Produtos'],
         );
     }

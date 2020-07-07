@@ -8,14 +8,22 @@
 			<div class="panel panel-<?php echo $panel; ?>">
 				<div class="panel-heading">
 					<div class="row">
-						<div class="col-md-10">	
+						<div class="col-md-8">	
 							<h4 class="text-center"><b><?php echo $titulo; ?> - <?php echo $orcatrata['idApp_OrcaTrata'] ?></b></h4>
 						</div>	
-						<div class="col-md-2">	
-							
-							<a class="text-right" href="<?php echo base_url() . 'orcatrata/alterar2/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
-								<span class="glyphicon glyphicon-edit"></span> Editar Pedido										
-							</a>
+						<div class="col-md-4">	
+							<div class="row">
+								<div class="col-md-6">
+									<a class="text-right" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $orcatrata['idApp_OrcaTrata']; ?>">
+										<span class="glyphicon glyphicon-print"></span> Imprimir										
+									</a>
+								</div>	
+								<div class="col-md-6">	
+									<a class="text-right" href="<?php echo base_url() . 'orcatrata/alterar2/' . $orcatrata['idApp_OrcaTrata']; ?>">
+										<span class="glyphicon glyphicon-edit"></span> Editar										
+									</a>
+								</div>	
+							</div>
 						</div>
 					</div>
 					<div style="overflow: auto; height: auto; ">
@@ -579,9 +587,11 @@
 							
 							
 									
-								<!--<hr />-->
+								<!-- Corrigir o nome do cliente-->
 																
-								<h5 class="text-left"><b>Cliente</b>: <?php echo '' . $_SESSION['Cliente']['NomeCliente'] . ' - ' . $_SESSION['Cliente']['idApp_Cliente'] . '' ?></h5>
+								<!--<h5 class="text-left"><b>Cliente</b>: <?php echo '' . $_SESSION['Cliente']['NomeCliente'] . ' - ' . $_SESSION['Cliente']['idApp_Cliente'] . '' ?></h5>-->
+								
+								<h5 class="text-left"><b>Cliente</b>: <?php echo '' . $orcatrata['idApp_Cliente'] . '' ?></h5>
 								
 								<table class="table table-bordered table-condensed table-striped">
 									<thead>
