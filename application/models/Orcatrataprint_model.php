@@ -41,6 +41,8 @@ class Orcatrataprint_model extends CI_Model {
 				SU.Nome AS Entregador,
 				
 				OT.DataOrca,
+				OT.DataEntregaOrca,
+				OT.HoraEntregaOrca,
 				OT.DataPrazo,
 				OT.DataConclusao,
 				OT.DataQuitado,				

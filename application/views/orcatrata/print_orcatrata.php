@@ -243,16 +243,17 @@
 								<tr>
 									<th class="col-md-3" scope="col">Tipo</th>
 									<th class="col-md-3" scope="col">Entregador</th>
-									<th class="col-md-3" scope="col">Frete R$</th>
-									<th class="col-md-3" scope="col">Prazo</th>
+									<th class="col-md-3" scope="col">Data</th>
+									<th class="col-md-3" scope="col">Hora</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td><?php echo $orcatrata['TipoFrete'] ?></td>
 									<td><?php echo $orcatrata['Entregador'] ?></td>
-									<td><?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>
-									<td><?php echo $orcatrata['PrazoEntrega'] ?></td>
+									<!--<td><?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>-->
+									<td><?php echo $orcatrata['DataEntregaOrca'] ?></td>
+									<td><?php echo $orcatrata['HoraEntregaOrca'] ?></td>
 								</tr>
 							</tbody>
 						</table>

@@ -755,7 +755,7 @@
 								<br>
 								<div class="panel panel-info">
 									<div class="panel-heading">	
-										<h4 class="mb-3"><b>Forma de Entrega</b></h4>										
+										<h4 class="mb-3"><b>Entrega</b></h4>										
 										<div class="row">
 											<div class="col-md-4 panel-body">
 												<div class="panel panel-default">
@@ -798,7 +798,7 @@
 								<br>								
 								<div class="panel panel-success">
 									<div class="panel-heading">
-										<h4 class="mb-3"><b>Forma de Pagamento</b></h4>
+										<h4 class="mb-3"><b>Pagamento</b></h4>
 										<div class="row">
 											<div class="col-md-4 panel-body">
 												<div class="panel panel-default">

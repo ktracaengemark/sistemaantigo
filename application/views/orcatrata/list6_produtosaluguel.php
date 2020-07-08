@@ -5,9 +5,10 @@
 				<!--<th class="active">EdtOrç</th>
 				<th class="active">Imp.</th>-->							
 				<th class="col-md-2 active" scope="col">Pedido</th>
-				<th class="col-md-4 active" scope="col">Cliente</th>
-				<th class="col-md-2 active" scope="col">Data</th>
-				<th class="col-md-4 active" scope="col">Entrega</th>
+				<th class="col-md-3 active" scope="col">Cliente</th>
+				<th class="col-md-2 active" scope="col">Entrega</th>
+				<th class="col-md-2 active" scope="col">Hora</th>
+				<th class="col-md-3 active" scope="col">Forma</th>
 				<!--<th class="active">Qtd</th>								
 				<th class="active">Produto</th>
 				<th class="active">Obs</th>
@@ -30,7 +31,8 @@
 					echo '<tr class="clickable-row" data-href="' . $url . '">';
 						echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 						echo '<td>' . $row['NomeCliente'] . '</td>';
-						echo '<td>' . $row['DataOrca'] . '</td>';
+						echo '<td>' . $row['DataEntregaOrca'] . '</td>';
+						echo '<td>' . $row['HoraEntregaOrca'] . '</td>';
 						echo '<td>' . $row['TipoFrete'] . '</td>';
 						#echo '<td>' . $row['QtdProduto'] . '</td>';
 						#echo '<td>' . $row['Produtos'] . '</td>';

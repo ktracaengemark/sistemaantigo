@@ -88,6 +88,9 @@ class Orcatrata_model extends CI_Model {
 			FROM 
 				App_OrcaTrata AS OT 
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+					LEFT JOIN Tab_FormaPag AS FP ON FP.idTab_FormaPag = OT.FormaPagamento
+					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
+					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = OT.Entregador
 			WHERE 
 				idApp_OrcaTrata = ' . $data .'
 		');
@@ -1111,6 +1114,8 @@ class Orcatrata_model extends CI_Model {
 				OT.idApp_OrcaTrata,
 				OT.AprovadoOrca,
 				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
+				DATE_FORMAT(OT.DataEntregaOrca, "%d/%m/%Y") AS DataEntregaOrca,
+				DATE_FORMAT(OT.HoraEntregaOrca, "%H:%i") AS HoraEntregaOrca,
 				OT.DataEntradaOrca,
 				OT.DataPrazo,
                 OT.ValorOrca,
@@ -1156,7 +1161,8 @@ class Orcatrata_model extends CI_Model {
 				OT.ProntoOrca = "S" AND
 				OT.EnviadoOrca = "N"
 			ORDER BY 
-				OT.DataOrca ASC,
+				OT.DataEntregaOrca ASC,
+				OT.HoraEntregaOrca ASC,
 				OT.idApp_OrcaTrata
 				
 		');
@@ -1195,6 +1201,8 @@ class Orcatrata_model extends CI_Model {
 				OT.idApp_OrcaTrata,
 				OT.AprovadoOrca,
 				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
+				DATE_FORMAT(OT.DataEntregaOrca, "%d/%m/%Y") AS DataEntregaOrca,
+				DATE_FORMAT(OT.HoraEntregaOrca, "%H:%i") AS HoraEntregaOrca,
 				OT.DataEntradaOrca,
 				OT.DataPrazo,
                 OT.ValorOrca,
@@ -1238,8 +1246,8 @@ class Orcatrata_model extends CI_Model {
 				OT.FinalizadoOrca = "N" AND
 				OT.QuitadoOrca = "N" 
 			ORDER BY 
-				TF.idTab_TipoFrete,
-				OT.DataOrca ASC,
+				OT.DataEntregaOrca ASC,
+				OT.HoraEntregaOrca ASC,
 				OT.idApp_OrcaTrata
 		');
 
@@ -1277,6 +1285,8 @@ class Orcatrata_model extends CI_Model {
 				OT.idApp_OrcaTrata,
 				OT.AprovadoOrca,
 				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
+				DATE_FORMAT(OT.DataEntregaOrca, "%d/%m/%Y") AS DataEntregaOrca,
+				DATE_FORMAT(OT.HoraEntregaOrca, "%H:%i") AS HoraEntregaOrca,
 				OT.DataEntradaOrca,
 				OT.DataPrazo,
                 OT.ValorOrca,
@@ -1323,7 +1333,8 @@ class Orcatrata_model extends CI_Model {
 				OT.EnviadoOrca = "N"
 				
 			ORDER BY 
-				OT.DataOrca ASC,
+				OT.DataEntregaOrca ASC,
+				OT.HoraEntregaOrca ASC,
 				OT.idApp_OrcaTrata
 		');
 
@@ -1361,6 +1372,8 @@ class Orcatrata_model extends CI_Model {
 				OT.idApp_OrcaTrata,
 				OT.AprovadoOrca,
 				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
+				DATE_FORMAT(OT.DataEntregaOrca, "%d/%m/%Y") AS DataEntregaOrca,
+				DATE_FORMAT(OT.HoraEntregaOrca, "%H:%i") AS HoraEntregaOrca,
 				OT.DataEntradaOrca,
 				OT.DataPrazo,
                 OT.ValorOrca,
@@ -1407,8 +1420,8 @@ class Orcatrata_model extends CI_Model {
 				OT.EnviadoOrca = "S" AND
 				OT.ConcluidoOrca = "N"
 			ORDER BY 
-				TF.idTab_TipoFrete,
-				OT.DataOrca ASC,
+				OT.DataEntregaOrca ASC,
+				OT.HoraEntregaOrca ASC,
 				OT.idApp_OrcaTrata 
 		');
 
@@ -1445,6 +1458,8 @@ class Orcatrata_model extends CI_Model {
 				OT.idApp_OrcaTrata,
 				OT.AprovadoOrca,
                 OT.DataOrca,
+				DATE_FORMAT(OT.DataEntregaOrca, "%d/%m/%Y") AS DataEntregaOrca,
+				OT.HoraEntregaOrca,
 				OT.DataEntradaOrca,
 				OT.DataPrazo,
                 OT.ValorOrca,
