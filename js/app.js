@@ -5473,7 +5473,13 @@ $(document).ready(function () {
 										name="QtdServico'+ps+'" value="1">\
 								</div>\
 							</div>\
-							<div class="col-md-3"></div>\
+							<div class="col-md-3">\
+								<label for="ProfissionalServico'+ps+'">Profissional:</label>\
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen2"\
+										 id="listadinamica_prof'+ps+'" name="ProfissionalServico'+ps+'">\
+									<option value=""></option>\
+								</select>\
+							</div>\
 							<div class="col-md-3">\
 								<label for="ValorServico">Valor:</label><br>\
 								<div class="input-group">\
@@ -5497,24 +5503,6 @@ $(document).ready(function () {
 									onclick="calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
 									<span class="glyphicon glyphicon-trash"></span>\
 								</a>\
-							</div>\
-						</div>\
-						<div class="row">\
-							<div class="col-md-5"></div>\
-							<div class="col-md-3">\
-								<label for="ObsServico'+ps+'">Obs:</label><br>\
-								<input type="text" class="form-control" id="ObsServico'+ps+'" maxlength="250"\
-									   name="ObsServico'+ps+'" value="">\
-							</div>\
-							<div class="col-md-3">\
-								<label for="DataValidadeServico'+ps+'">Validade:</label>\
-								<div class="input-group DatePicker">\
-									<span class="input-group-addon" disabled>\
-										<span class="glyphicon glyphicon-calendar"></span>\
-									</span>\
-									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
-										   name="DataValidadeServico'+ps+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
-								</div>\
 							</div>\
 						</div>\
 					</div>\
@@ -5557,6 +5545,39 @@ $(document).ready(function () {
             }
 
         });
+		
+		//get a reference to the select element
+        $select2 = $('#listadinamica_prof'+ps);
+
+        //request the JSON data and parse into the select element
+        $.ajax({
+            url: window.location.origin+ '/' + app + '/Getvalues_json2.php?q=3',
+            dataType: 'JSON',
+            type: "GET",
+            success: function (data) {
+                //clear the current content of the select
+                $select2.html('');
+                //iterate over the data and append a select option
+                $select2.append('<option value="">-- Sel. Profis. --</option>');
+                $.each(data, function (key, val) {
+                    //alert(val.id);
+                    $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
+                })
+                $('.Chosen2').chosen({
+                    disable_search_threshold: 10,
+                    multiple_text: "Selecione uma ou mais opções",
+                    single_text: "Selecione uma opção",
+                    no_results_text: "Nenhum resultado para",
+                    width: "100%"
+                });
+            },
+            error: function () {
+                //alert('erro listadinamicaB');
+                //if there is an error append a 'none available' option
+                $select2.html('<option id="-1">ERRO</option>');
+            }
+
+        });		
 
 		//permite o uso de radio buttons nesse bloco dinâmico
 		$('input:radio[id="radiogeraldinamico"]').change(function() {

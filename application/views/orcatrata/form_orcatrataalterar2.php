@@ -584,7 +584,25 @@
 																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
 																			 name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
 																</div>
-																<div class="col-md-3"></div>
+																<div class="col-md-3">
+																	<label for="ProfissionalServico<?php echo $i ?>">Profissional:</label>
+																	<?php if ($i == 1) { ?>
+																	<?php } ?>
+																	<select data-placeholder="Selecione uma opção..." class="form-control"
+																			 id="listadinamica_prof<?php echo $i ?>" name="ProfissionalServico<?php echo $i ?>">
+																		<option value="">-- Sel.Profis. --</option>
+																		<?php
+																		foreach ($select['ProfissionalServico'] as $key => $row) {
+																			(!$servico['ProfissionalServico']) ? $servico['ProfissionalServico'] = $_SESSION['log']['ProfissionalServico']: FALSE;
+																			if ($servico[$i]['ProfissionalServico'] == $key) {
+																				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																			} else {
+																				echo '<option value="' . $key . '">' . $row . '</option>';
+																			}
+																		}
+																		?>
+																	</select>
+																</div>
 																<div class="col-md-3">
 																	<label for="ValorServico">Valor do Produto:</label>
 																	<div class="input-group">
@@ -608,24 +626,6 @@
 																		onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',1,<?php echo $i ?>,'CountMax2',0,'ServicoHidden')">
 																		<span class="glyphicon glyphicon-trash"></span>
 																	</button>
-																</div>
-															</div>
-															<div class="row">
-																<div class="col-md-5"></div>
-																<div class="col-md-3">
-																	<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
-																	<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
-																		   name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
-																</div>
-																<div class="col-md-3">
-																	<label for="DataValidadeServico<?php echo $i ?>">Validade:</label>
-																	<div class="input-group <?php echo $datepicker; ?>">
-																		<span class="input-group-addon" disabled>
-																			<span class="glyphicon glyphicon-calendar"></span>
-																		</span>
-																		<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																			   name="DataValidadeServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataValidadeServico']; ?>">																				
-																	</div>
 																</div>
 															</div>
 														</div>

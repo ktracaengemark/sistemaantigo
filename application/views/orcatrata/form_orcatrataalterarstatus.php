@@ -396,7 +396,7 @@
 													<input type="hidden" name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
 													<input type="hidden" name="DataValidadeServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataValidadeServico'] ?>">
 													<input type="hidden" name="ConcluidoServico<?php echo $i ?>" value="<?php echo $servico[$i]['ConcluidoServico'] ?>">
-													
+													<input type="hidden" name="ProfissionalServico<?php echo $i ?>" value="<?php echo $servico[$i]['ProfissionalServico'] ?>">
 												</div>
 
 												<?php

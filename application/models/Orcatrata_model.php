@@ -147,13 +147,16 @@ class Orcatrata_model extends CI_Model {
 				TAP.DataValidadeServico,
 				TAP.ConcluidoServico,
 				TAP.idTab_TipoRD,
+				TAP.ProfissionalServico,
 				P.Nome_Prod,
 				TOP2.Opcao,
 				TOP1.Opcao,
-				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,"")) AS Servico,
+				SU.Nome,
+				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - ", IFNULL(SU.Nome,"")) AS Servico,
 				(TAP.QtdServico * TAP.ValorServico) AS Subtotal_Servico
 			FROM 
 				App_Servico AS TAP
+					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = TAP.ProfissionalServico
 					LEFT JOIN Tab_Valor AS V ON V.idTab_Valor = TAP.idTab_Servico
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
@@ -1965,7 +1968,7 @@ exit();*/
         if ($this->db->affected_rows() === 0) {
             return FALSE;
         } else {
-            return TRUE;
+		return TRUE;
         }
     }
 

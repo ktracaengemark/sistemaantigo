@@ -119,20 +119,22 @@ class Orcatrataprint_model extends CI_Model {
 				TCO.Convenio,
 				V.Convdesc,
 				TFO.NomeFornecedor,
+				SU.Nome,
 				CONCAT(IFNULL(PV.idApp_Servico,""), " - " , IFNULL(PV.ConcluidoServico,""), " - Obs.: " , IFNULL(PV.ObsServico,"")) AS idApp_Servico,
 				CONCAT(IFNULL(PV.QtdServico,"")) AS QtdServico,
-            	CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TPM.Promocao,"")) AS NomeServico,
+            	CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TPM.Promocao,""), " - ", IFNULL(SU.Nome,"")) AS NomeServico,
             	PV.ValorServico
+				
             FROM
-            	App_Servico AS PV,
-            	Tab_Valor AS V
-            		LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
+            	App_Servico AS PV
+					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = PV.ProfissionalServico
+            		LEFT JOIN Tab_Valor AS V ON V.idTab_Valor = PV.idTab_Servico
+					LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
             		LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2
             		LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
-
             WHERE
             	PV.idApp_OrcaTrata = ' . $data . ' AND
                 PV.idTab_Servico = V.idTab_Valor AND
