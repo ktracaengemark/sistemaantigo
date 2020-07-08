@@ -65,6 +65,15 @@ class Orcatrataprint_model extends CI_Model {
 				OT.Tipo_Orca,
 				FP.FormaPag,				
 				EF.NomeEmpresa,
+				
+				EF.Cnpj,
+				EF.Endereco,
+				EF.Numero,
+				EF.Complemento,
+				EF.Bairro,
+				EF.Municipio,
+				EF.Estado,
+				
 				MO.AVAP,
 				MO.Abrev3,
 				OT.Modalidade,

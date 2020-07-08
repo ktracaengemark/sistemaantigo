@@ -72,7 +72,7 @@
 			  </div>
 			</nav>
 		<?php } ?>
-	<?php } ?>			
+		<?php } ?>			
 	
 	<?php echo validation_errors(); ?>
 		
@@ -87,7 +87,11 @@
 								<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>" class="img-responsive" width='120'>
 							</div>
 							<div class="col-md-9 text-left">
-								<h2><?php echo '<strong>' . $_SESSION['Orcatrata']['NomeEmpresa'] . '</strong><br><small>' . $_SESSION['Usuario']['Nome'] . '</small>' ?></h2>
+								<h2><?php echo '<strong>' . $_SESSION['Orcatrata']['NomeEmpresa'] . '</strong>' ?></h2>
+								<h4>CNPJ:<?php echo '<strong>' . $orcatrata['Cnpj'] . '</strong>' ?></h4>
+								<h4>Endereço:<?php echo '<small>' . $orcatrata['Endereco'] . '</small> <small>' . $orcatrata['Numero'] . '</small> <small>' . $orcatrata['Complemento'] . '</small><br>
+														<small>' . $orcatrata['Bairro'] . '</small> - <small>' . $orcatrata['Municipio'] . '</small> - <small>' . $orcatrata['Estado'] . '</small>' ?></h4>
+								<h5>Colab.:<?php echo '<strong>' . $_SESSION['Usuario']['Nome'] . '</strong>' ?></h5>
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>								
 								
 								<h3 class="text-left">Orçamento<?php echo ' - <strong>' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '</strong>' ?> </h3>

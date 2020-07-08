@@ -89,7 +89,7 @@ class Orcatrata_model extends CI_Model {
 				App_OrcaTrata AS OT 
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Tab_FormaPag AS FP ON FP.idTab_FormaPag = OT.FormaPagamento
-					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
+					
 					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = OT.Entregador
 			WHERE 
 				idApp_OrcaTrata = ' . $data .'
