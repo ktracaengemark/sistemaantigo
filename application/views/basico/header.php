@@ -16,7 +16,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
     <head>
         <meta charset="utf-8">
         <!--<meta http-equiv="refresh" content="<?php #echo $tempo+1; ?>;<?php #echo base_url(); ?>login/sair/FALSE"/>-->
