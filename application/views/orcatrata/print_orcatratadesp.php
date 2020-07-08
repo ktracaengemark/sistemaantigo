@@ -120,7 +120,7 @@
 						</table>
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<?php if( isset($count['PCount']) ) { ?>								
-						<h3 class="text-left">Produtos Entregues </h3>
+						<h3 class="text-left">Produtos </h3>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
@@ -179,20 +179,20 @@
 
 							</tbody>
 						</table>
-						<?php } else echo '<h3 class="text-left">S/Produtos Entregues </h3>';{?>
+						<?php } else echo '<h3 class="text-left">S/Produtos</h3>';{?>
 						<?php } ?>								
 						<?php } ?>								
 						
 						<!--<hr />-->
 						
-						<?php if ($_SESSION['log']['NivelEmpresa'] >= 10 ) { ?>
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<?php if( isset($count['SCount']) ) { ?>								
-						<h3 class="text-left">Produtos Devolvidos  </h3>
+						<h3 class="text-left">Serviços  </h3>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
 									<th class="col-md-1" scope="col">Qtd</th>																															
-									<th class="col-md-9" scope="col">Produto</th>							
+									<th class="col-md-9" scope="col">Serviço</th>							
 									<th class="col-md-1" scope="col">Valor</th>
 									<th class="col-md-1" scope="col">Subtotal</th>
 								</tr>	
@@ -228,7 +228,7 @@
 
 							</tbody>
 						</table>
-						<?php } else echo '<h3 class="text-left">S/Produtos Devolvidos </h3>';{?>
+						<?php } else echo '<h3 class="text-left">S/Serviços </h3>';{?>
 						<?php } ?>								
 						<?php } ?>
 						

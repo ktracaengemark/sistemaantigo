@@ -472,7 +472,7 @@
 																	
 									<!--<h5 class="text-left"><b>Cliente</b>: <?php echo '' . $_SESSION['Cliente']['NomeCliente'] . ' - ' . $_SESSION['Cliente']['idApp_Cliente'] . '' ?></h5>-->
 									
-									<h4 class="text-left"><b>Cliente</b>: <?php echo '' . $orcatrata['idApp_Cliente'] . '' ?></h4>
+									<h4 class="text-left"><b>Cliente</b>: <?php echo '' . $orcatrata['NomeCliente'] . '' ?> - <?php echo '' . $orcatrata['idApp_Cliente'] . '' ?></h4>
 									
 									<table class="table table-bordered table-condensed table-striped">
 										<thead>

@@ -932,6 +932,30 @@
 											<div class="panel panel-default">
 												<div class="panel-heading">
 													<div class="row">
+														<div class="col-md-12">
+															<label for="FormaPagamento">Forma de Pagamento</label>
+															<select data-placeholder="Selecione uma opção..." class="form-control" onchange="exibirTroco(this.value)"<?php echo $readonly; ?>
+																	id="FormaPagamento" name="FormaPagamento">
+																<option value="">-- Selecione uma opção --</option>
+																<?php
+																foreach ($select['FormaPagamento'] as $key => $row) {
+																	if ($orcatrata['FormaPagamento'] == $key) {
+																		echo'<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																	} else {
+																		echo'<option value="' . $key . '">' . $row . '</option>';
+																	}
+																}
+																?>
+															</select>
+														</div>																
+													</div>	
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4 panel-body">
+											<div class="panel panel-primary">
+												<div class="panel-heading">
+													<div class="row">
 														<div class="col-md-12 text-center">
 															<label for="AVAP">Pargar</label><br>
 															<div class="btn-block" data-toggle="buttons">
@@ -965,30 +989,6 @@
 															<?php echo form_error('AVAP'); ?>
 														</div>
 													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4 panel-body">
-											<div class="panel panel-primary">
-												<div class="panel-heading">
-													<div class="row">
-														<div class="col-md-12">
-															<label for="FormaPagamento">Forma de Pagamento</label>
-															<select data-placeholder="Selecione uma opção..." class="form-control" onchange="exibirTroco(this.value)"<?php echo $readonly; ?>
-																	id="FormaPagamento" name="FormaPagamento">
-																<option value="">-- Selecione uma opção --</option>
-																<?php
-																foreach ($select['FormaPagamento'] as $key => $row) {
-																	if ($orcatrata['FormaPagamento'] == $key) {
-																		echo'<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																	} else {
-																		echo'<option value="' . $key . '">' . $row . '</option>';
-																	}
-																}
-																?>
-															</select>
-														</div>																
-													</div>	
 												</div>
 											</div>
 										</div>
@@ -1213,7 +1213,7 @@
 								<div class="panel-heading">
 									<h4 class="mb-3"><b>Status do Pedido</b></h4>
 									<div class="row">
-										<div class="col-md-4">
+										<div class="col-md-3">
 											<div class="row">
 												<div class="col-md-12 panel-body">
 													<div class="panel panel-default">
@@ -1250,7 +1250,7 @@
 															</div>
 															<div class="row">
 																<div class="col-md-12 text-right">
-																	<label for="FinalizadoOrca">Finalizado?</label><br>
+																	<label class="col-md-12 text-left" for="FinalizadoOrca">Finalizado?</label><br>
 																	<div class="btn-group" data-toggle="buttons">
 																		<?php
 																		foreach ($select['FinalizadoOrca'] as $key => $row) {
@@ -1297,14 +1297,14 @@
 										</div>	
 										<div id="FinalizadoOrca" <?php echo $div['FinalizadoOrca']; ?>>
 											<div id="ConcluidoOrca" <?php echo $div['ConcluidoOrca']; ?>>
-												<div class="col-md-4">
+												<div class="col-md-3">
 													<div class="row">
 														<div class="col-md-12 panel-body">
 															<div class="panel panel-success">
 																<div class="panel-heading">
 																	<div class="row">				
 																		<div class="col-md-12 text-left">
-																			<label for="ProntoOrca">Prds.Prontos?</label><br>
+																			<label for="ProntoOrca">Pronto p/Entrega?</label><br>
 																			<div class="btn-group" data-toggle="buttons">
 																				<?php
 																				foreach ($select['ProntoOrca'] as $key => $row) {
@@ -1335,7 +1335,7 @@
 																	</div>
 																	<div class="row">		
 																		<div class="col-md-12 text-right">
-																			<label for="EnviadoOrca">Prds.Enviados? </label><br>
+																			<label class="col-md-12 text-left" for="EnviadoOrca">Enviado? </label><br>
 																			<div class="btn-group" data-toggle="buttons">
 																				<?php
 																				foreach ($select['EnviadoOrca'] as $key => $row) {
@@ -1370,7 +1370,7 @@
 															<!--<label  for="Entregador">Entregador</label>-->
 															<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																	id="Entregador" name="Entregador">
-																<option value="">-- Selecione o Entregador --</option>
+																<option value="">-- Sel. o Entregador --</option>
 																<?php
 																foreach ($select['Entregador'] as $key => $row) {
 																		#(!$orcatrata['Entregador']) ? $orcatrata['Entregador'] = '1' : FALSE;
@@ -1386,12 +1386,12 @@
 													</div>
 												</div>	
 											</div>
-											<div class="col-md-4 panel-body">
+											<div class="col-md-3 panel-body">
 												<div class="panel panel-warning">
 													<div class="panel-heading">
 														<div class="row">
 															<div class="col-md-12 text-left">
-																<label for="ConcluidoOrca">Prds.Entregues?</label><br>
+																<label for="ConcluidoOrca">Entregue?</label><br>
 																<div class="btn-group" data-toggle="buttons">
 																	<?php
 																	foreach ($select['ConcluidoOrca'] as $key => $row) {
@@ -1421,7 +1421,7 @@
 														</div>
 														<div class="row">		
 															<div class="col-md-12 text-right">
-																<label for="QuitadoOrca">Prds.Pagos?</label><br>
+																<label class="col-md-12 text-left" for="QuitadoOrca">Pago?</label><br>
 																<div class="btn-group" data-toggle="buttons">
 																	<?php
 																	foreach ($select['QuitadoOrca'] as $key => $row) {
@@ -1502,7 +1502,7 @@
 									-->
 								</div>
 							</div>
-							
+						
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 20 ) { ?>
 							<br>
 							<div class="panel-group">	

@@ -83,7 +83,14 @@ class Orcatrata_model extends CI_Model {
     }
 
     public function get_orcatrata($data) {
-        $query = $this->db->query('SELECT * FROM App_OrcaTrata WHERE idApp_OrcaTrata = ' . $data);
+        $query = $this->db->query('
+			SELECT * 
+			FROM 
+				App_OrcaTrata AS OT 
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+			WHERE 
+				idApp_OrcaTrata = ' . $data .'
+		');
         $query = $query->result_array();
 
         /*

@@ -107,9 +107,9 @@
 							<thead>
 								<tr>
 									<th class="col-md-2" scope="col">Tipo</th>
-									<th class="col-md-2" scope="col">Data Orç.</th>
-									<th class="col-md-3" scope="col">Descrição</th>
-									<th class="col-md-5" scope="col">Observções</th>
+									<th class="col-md-2" scope="col">Data</th>
+									<th class="col-md-3" scope="col">Desc.</th>
+									<th class="col-md-5" scope="col">Obs.</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -132,7 +132,7 @@
 									<th class="col-md-2" scope="col">Qtd</th>																				
 									<!--<th scope="col">CodProd.</th>
 									<th scope="col">CategProd.</th>-->												
-									<th class="col-md-6" scope="col">DescProd.</th>							
+									<th class="col-md-6" scope="col">Produto</th>							
 									<th class="col-md-1" scope="col">Valor</th>
 									<th class="col-md-1" scope="col">Subtotal</th>
 								</tr>	
@@ -197,7 +197,7 @@
 							<thead>
 								<tr>
 									<th class="col-md-2" scope="col">Qtd</th>																															
-									<th class="col-md-7" scope="col">DescProd.</th>							
+									<th class="col-md-7" scope="col">Serviço</th>							
 									<th class="col-md-1" scope="col">Valor</th>
 									<th class="col-md-1" scope="col">Subtotal</th>
 								</tr>	
@@ -263,10 +263,6 @@
 									<th class="col-md-3" scope="col">Endereço</th>
 									<th class="col-md-1" scope="col">Número</th>
 									<th class="col-md-1" scope="col">Compl.</th>
-									<th class="col-md-1" scope="col">Bairro</th>
-									<th class="col-md-1" scope="col">Cidade</th>
-									<th class="col-md-1" scope="col">Estado</th>
-									<th class="col-md-3" scope="col">Ref.</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -275,6 +271,18 @@
 									<td><?php echo $orcatrata['Logradouro'] ?></td>
 									<td><?php echo $orcatrata['Numero'] ?></td>
 									<td><?php echo $orcatrata['Complemento'] ?></td>
+								</tr>
+							</tbody>
+							<thead>
+								<tr>
+									<th class="col-md-1" scope="col">Bairro</th>
+									<th class="col-md-1" scope="col">Cidade</th>
+									<th class="col-md-1" scope="col">Estado</th>
+									<th class="col-md-3" scope="col">Ref.</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
 									<td><?php echo $orcatrata['Bairro'] ?></td>
 									<td><?php echo $orcatrata['Cidade'] ?></td>
 									<td><?php echo $orcatrata['Estado'] ?></td>
@@ -291,9 +299,6 @@
 									<th class="col-md-2" scope="col">Produtos R$</th>
 									<th class="col-md-2" scope="col">Serviços R$</th>
 									<th class="col-md-2" scope="col">Frete R$</th>
-									<th class="col-md-2" scope="col">Total R$</th>
-									<th class="col-md-2" scope="col">Dinheiro R$</th>
-									<th class="col-md-2" scope="col">Troco R$</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -301,6 +306,17 @@
 									<td><?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
 									<td><?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
 									<td><?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>
+								</tr>
+							</tbody>
+							<thead>
+								<tr>
+									<th class="col-md-2" scope="col">Total R$</th>
+									<th class="col-md-2" scope="col">Dinheiro R$</th>
+									<th class="col-md-2" scope="col">Troco R$</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
 									<td><?php echo number_format($orcatrata['ValorTotalOrca'], 2, ',', '.') ?></td>
 									<td><?php echo number_format($orcatrata['ValorDinheiro'], 2, ',', '.') ?></td>
 									<td><?php echo number_format($orcatrata['ValorTroco'], 2, ',', '.') ?></td>
@@ -383,22 +399,27 @@
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									
 									<th class="col-md-2" scope="col">Aprovado?</th>
 									<th class="col-md-2" scope="col">Finalizado?</th>
 									<th class="col-md-2" scope="col">Pronto?</th>
-									<th class="col-md-2" scope="col">Enviado?</th>
-									<th class="col-md-2" scope="col">Entregue?</th>
-									<th class="col-md-2" scope="col">Pago?</th>
-
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									
 									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['AprovadoOrca'], 'NS') ?></td>
 									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['FinalizadoOrca'], 'NS') ?></td>
 									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['ProntoOrca'], 'NS') ?></td>
+								</tr>
+							</tbody>
+							<thead>
+								<tr>
+									<th class="col-md-2" scope="col">Enviado?</th>
+									<th class="col-md-2" scope="col">Entregue?</th>
+									<th class="col-md-2" scope="col">Pago?</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
 									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['EnviadoOrca'], 'NS') ?></td>
 									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['ConcluidoOrca'], 'NS') ?></td>
 									<td><?php echo $this->basico->mascara_palavra_completa($orcatrata['QuitadoOrca'], 'NS') ?></td>

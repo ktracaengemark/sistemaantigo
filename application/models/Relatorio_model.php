@@ -3688,8 +3688,8 @@ class Relatorio_model extends CI_Model {
             WHERE
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				TP.Prod_Serv = "P" AND
-                (' . $consulta . ')
+				TP.Prod_Serv = "P" 
+
 				' . $data['Produtos'] . '
 				
             ORDER BY
@@ -3723,7 +3723,7 @@ class Relatorio_model extends CI_Model {
             WHERE
                 OT.AprovadoOrca ="S" AND
 				APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                (' . $consulta . ') AND                
+                
 				APV.idTab_TipoRD = "1" AND
 				TP.Prod_Serv = "P" AND
 				APV.ConcluidoProduto = "S"
@@ -3750,7 +3750,7 @@ class Relatorio_model extends CI_Model {
             WHERE
                 OT.AprovadoOrca ="S" AND
 				APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                (' . $consulta . ') AND
+
                 TP.Prod_Serv = "P" AND
 				APV.idTab_TipoRD = "2"
 				' . $data['Produtos'] . '
