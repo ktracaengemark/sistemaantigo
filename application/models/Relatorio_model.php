@@ -3680,7 +3680,7 @@ class Relatorio_model extends CI_Model {
                 CONCAT(IFNULL(TP.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,"")) AS Produtos
             FROM
 				Tab_Produtos AS TP
-					LEFT JOIN App_Produto AS APV ON APV.idTab_Produtos = TP.idTab_Produtos
+					LEFT JOIN App_Produto AS APV ON APV.idTab_Produtos_Produto = TP.idTab_Produtos
 					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = APV.idApp_OrcaTrata
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TP.Opcao_Atributo_1
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TP.Opcao_Atributo_2
@@ -3688,6 +3688,7 @@ class Relatorio_model extends CI_Model {
             WHERE
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				TP.Prod_Serv = "P" AND
                 (' . $consulta . ')
 				' . $data['Produtos'] . '
 				
@@ -3718,12 +3719,13 @@ class Relatorio_model extends CI_Model {
             FROM
 				App_Produto AS APV
 					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = APV.idApp_OrcaTrata
-                    LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = APV.idTab_Produtos					
+                    LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = APV.idTab_Produtos_Produto					
             WHERE
                 OT.AprovadoOrca ="S" AND
 				APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 (' . $consulta . ') AND                
 				APV.idTab_TipoRD = "1" AND
+				TP.Prod_Serv = "P" AND
 				APV.ConcluidoProduto = "S"
 				' . $data['Produtos'] . '
 			GROUP BY
@@ -3744,11 +3746,12 @@ class Relatorio_model extends CI_Model {
             FROM
 				App_Produto AS APV
 					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = APV.idApp_OrcaTrata
-                    LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = APV.idTab_Produtos					
+                    LEFT JOIN Tab_Produtos AS TP ON TP.idTab_Produtos = APV.idTab_Produtos_Produto					
             WHERE
                 OT.AprovadoOrca ="S" AND
 				APV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                (' . $consulta . ') AND                
+                (' . $consulta . ') AND
+                TP.Prod_Serv = "P" AND
 				APV.idTab_TipoRD = "2"
 				' . $data['Produtos'] . '
 			GROUP BY

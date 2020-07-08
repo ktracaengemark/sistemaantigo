@@ -110,10 +110,12 @@
 								<br>
 								<div class="panel panel-success">
 									<div class="panel-heading">
-										<h4 class="mb-3"><b>Produtos & Serviços</b></h4>
-										<input type="hidden" name="PCount" id="PCount" value="<?php echo $count['PCount']; ?>"/>
+										
 										<input type="hidden" name="Negocio" id="Negocio" value="1"/>
 										<input type="hidden" name="Empresa" id="Empresa" value="<?php echo $_SESSION['log']['idSis_Empresa']; ?>"/>
+										
+										<h4 class="mb-3"><b>Produtos & Serviços</b></h4>
+										<input type="hidden" name="PCount" id="PCount" value="<?php echo $count['PCount']; ?>"/>
 										
 										<?php if ($_SESSION['log']['idSis_Empresa'] == 42 ) { ?>
 											<div class="input_fields_wrap42">
@@ -133,8 +135,8 @@
 													<div class="panel panel-warning">
 														<div class="panel-heading">
 															<div class="row">
-																<input type="hidden" class="form-control " id="idTab_Valor<?php echo $i ?>" name="idTab_Valor<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor'] ?>">
-																<input type="hidden" class="form-control " id="idTab_Produtos<?php echo $i ?>" name="idTab_Produtos<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos'] ?>">		
+																<input type="hidden" class="form-control " id="idTab_Valor_Produto<?php echo $i ?>" name="idTab_Valor_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor_Produto'] ?>">
+																<input type="hidden" class="form-control " id="idTab_Produtos_Produto<?php echo $i ?>" name="idTab_Produtos_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos_Produto'] ?>">		
 																
 																<div class="col-md-6">
 																	<label for="idTab_Produto">Produto:</label>

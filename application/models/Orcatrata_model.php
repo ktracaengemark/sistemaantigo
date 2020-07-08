@@ -114,12 +114,52 @@ class Orcatrata_model extends CI_Model {
         return $query[0];
     }
 	
-	public function get_servico($data) {
+	public function get_servico_bkp($data) {
 		$query = $this->db->query('SELECT * FROM App_Servico WHERE idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();
 
         return $query;
     }
+	
+    public function get_servico($data) {
+		$query = $this->db->query('
+			SELECT 
+				TAP.idApp_Servico,
+				TAP.idSis_Empresa,
+				TAP.idTab_Modulo,
+				TAP.idApp_OrcaTrata,
+				TAP.idApp_Cliente,
+				TAP.idApp_Fornecedor,
+				TAP.idSis_Usuario,
+				TAP.idTab_Servico,
+				TAP.idTab_Valor_Servico,
+				TAP.idTab_Produtos_Servico,
+				TAP.ValorServico,
+				TAP.ObsServico,
+				TAP.QtdServico,
+				TAP.DataValidadeServico,
+				TAP.ConcluidoServico,
+				TAP.idTab_TipoRD,
+				P.Nome_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,
+				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,"")) AS Servico,
+				(TAP.QtdServico * TAP.ValorServico) AS Subtotal_Servico
+			FROM 
+				App_Servico AS TAP
+					LEFT JOIN Tab_Valor AS V ON V.idTab_Valor = TAP.idTab_Servico
+					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
+					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2
+			WHERE 
+				TAP.idApp_OrcaTrata = ' . $data . '
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }	
 
 	public function get_servicodesp($data) {
 		$query = $this->db->query('SELECT * FROM App_Servico WHERE idTab_TipoRD = "3" AND idApp_OrcaTrata = ' . $data);
@@ -129,12 +169,73 @@ class Orcatrata_model extends CI_Model {
     }
 	
     public function get_produto($data) {
-		$query = $this->db->query('SELECT * FROM App_Produto WHERE idApp_OrcaTrata = ' . $data);
+		$query = $this->db->query('
+			SELECT 
+				TAP.idApp_Produto,
+				TAP.idSis_Empresa,
+				TAP.idTab_Modulo,
+				TAP.idApp_OrcaTrata,
+				TAP.idApp_Cliente,
+				TAP.idApp_Fornecedor,
+				TAP.idSis_Usuario,
+				TAP.idTab_Produto,
+				TAP.idTab_Valor_Produto,
+				TAP.idTab_Produtos_Produto,
+				TAP.NomeProduto,
+				TAP.ValorProduto,
+				TAP.QtdProduto,
+				TAP.QtdIncremento,
+				TAP.ValorCompraProduto,
+				TAP.QtdCompraProduto,
+				TAP.ObsProduto,
+				TAP.DataValidadeProduto,
+				TAP.HoraValidadeProduto,
+				TAP.ConcluidoProduto,
+				TAP.DevolvidoProduto,
+				TAP.CanceladoProduto,
+				TAP.idTab_TipoRD,
+				TAP.itens_pedido_valor_total,
+				TAP.Comissao,
+				TAP.StatusComissao,
+				TAP.Aux_App_Produto_1,
+				TAP.Aux_App_Produto_2,
+				TAP.Aux_App_Produto_3,
+				TAP.Aux_App_Produto_4,
+				TAP.Aux_App_Produto_5,
+				P.Nome_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,
+				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,"")) AS Produto,
+				(TAP.QtdProduto * TAP.ValorProduto) AS Subtotal_Produto
+			FROM 
+				App_Produto AS TAP
+					LEFT JOIN Tab_Valor AS V ON V.idTab_Valor = TAP.idTab_Produto
+					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
+					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2
+			WHERE 
+				TAP.idApp_OrcaTrata = ' . $data . '
+		');
         $query = $query->result_array();
 
         return $query;
     }
 
+    public function get_produto_bkp($data) {
+		$query = $this->db->query('
+			SELECT * 
+			FROM 
+				App_Produto
+			WHERE 
+				idApp_OrcaTrata = ' . $data . '
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
     public function get_produtodesp($data) {
 		$query = $this->db->query('SELECT * FROM App_Produto WHERE idTab_TipoRD = "1" AND idApp_OrcaTrata = ' . $data);
         $query = $query->result_array();

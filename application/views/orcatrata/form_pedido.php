@@ -7,7 +7,7 @@
 			<?php echo form_open_multipart($form_open_path); ?>
 			<div class="panel panel-<?php echo $panel; ?>">
 				<div class="panel-heading">
-					<h1 class="text-center"><b> Selecione o <?php echo $titulo; ?> para Atualizar o Status</b></h1>
+					<h1 class="text-center"><b> Selecione o <?php echo $titulo; ?></b></h1>
 				</div>
 			</div>
 		</div>

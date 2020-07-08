@@ -14,12 +14,12 @@
 						<div class="col-md-4">	
 							<div class="row">
 								<div class="col-md-6">
-									<a class="text-right" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $orcatrata['idApp_OrcaTrata']; ?>">
+									<a class="btn btn-sm btn-info text-right" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $orcatrata['idApp_OrcaTrata']; ?>">
 										<span class="glyphicon glyphicon-print"></span> Imprimir										
 									</a>
 								</div>	
 								<div class="col-md-6">	
-									<a class="text-right" href="<?php echo base_url() . 'orcatrata/alterar2/' . $orcatrata['idApp_OrcaTrata']; ?>">
+									<a class="btn btn-sm btn-info text-right" href="<?php echo base_url() . 'orcatrata/alterar2/' . $orcatrata['idApp_OrcaTrata']; ?>">
 										<span class="glyphicon glyphicon-edit"></span> Editar										
 									</a>
 								</div>	
@@ -72,8 +72,8 @@
 																			name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
 																	</div>
 																</div>
-																<input type="hidden" class="form-control " id="idTab_Valor<?php echo $i ?>" name="idTab_Valor<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor'] ?>">
-																<input type="hidden" class="form-control " id="idTab_Produtos<?php echo $i ?>" name="idTab_Produtos<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos'] ?>">		
+																<input type="hidden" class="form-control " id="idTab_Valor_Produto<?php echo $i ?>" name="idTab_Valor_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor_Produto'] ?>">
+																<input type="hidden" class="form-control " id="idTab_Produtos_Produto<?php echo $i ?>" name="idTab_Produtos_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos_Produto'] ?>">		
 																<div class="col-md-6">
 																	<label for="idTab_Produto">Produto:</label>
 																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor1Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
@@ -164,7 +164,7 @@
 																					<span class="glyphicon glyphicon-calendar"></span>
 																				</span>
 																				<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																					   name="DataValidadeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['DataValidadeProduto']; ?>">
+																				name="DataValidadeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['DataValidadeProduto']; ?>">
 																			</div>
 																		</div>
 																	</div>
@@ -346,8 +346,8 @@
 													
 													<input type="hidden" name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
 													<input type="hidden" name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
-													<input type="hidden" name="idTab_Valor<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor'] ?>">
-													<input type="hidden" name="idTab_Produtos<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos'] ?>">			
+													<input type="hidden" name="idTab_Valor_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor_Produto'] ?>">
+													<input type="hidden" name="idTab_Produtos_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos_Produto'] ?>">			
 													<input type="hidden" name="idTab_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produto'] ?>">
 													<input type="hidden" name="ValorProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ValorProduto'] ?>">
 													
@@ -369,7 +369,7 @@
 										<?php } ?>
 											
 													
-										<?php if ($_SESSION['log']['NivelEmpresa'] >= 20 ) { ?>	
+										<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
 											<input type="hidden" name="SCount" id="SCount" value="<?php echo $count['SCount']; ?>"/>
 
 											<div class="input_fields_wrap10">
@@ -386,109 +386,17 @@
 												<input type="hidden" name="ServicoHidden" id="ServicoHidden<?php echo $i ?>" value="<?php echo $i ?>">
 												
 												<div class="form-group" id="10div<?php echo $i ?>">
-													<div class="panel panel-warning">
-														<div class="panel-heading">
-															<div class="row">
-																<div class="col-md-2">
-																	<label for="QtdServico">Qtd <?php echo $i ?>:</label>
-																	<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0"
-																			onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
-																			 name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
-																</div>
-																<div class="col-md-6">
-																	<label for="idTab_Servico">Produto:</label>
-																	<?php if ($i == 1) { ?>
-																	<!--<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>servico/cadastrar/servico" role="button">
-																		<span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
-																	</a>-->
-																	<?php } ?>
-																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValorDevTabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
-																			id="listadinamica<?php echo $i ?>" name="idTab_Servico<?php echo $i ?>">																					
-																		<!--<option value="">-- Selecione uma opção --</option>-->
-																		<?php
-																		foreach ($select['Servico'] as $key => $row) {
-																			if ($servico[$i]['idTab_Servico'] == $key) {
-																				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																			} else {
-																				echo '<option value="' . $key . '">' . $row . '</option>';
-																			}
-																		}
-																		?>
-																	</select>
-																</div>
-																<div class="col-md-2">
-																	<label for="ValorServico">Valor do Produto:</label>
-																	<div class="input-group">
-																		<span class="input-group-addon" id="basic-addon1">R$</span>
-																		<input type="text" class="form-control Valor" id="idTab_Servico<?php echo $i ?>" maxlength="10" placeholder="0,00"
-																			onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','VP','Servico')"
-																			name="ValorServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorServico'] ?>">
-																	</div>
-																</div>
-																<div class="col-md-2">
-																	<label for="SubtotalServico">Subtotal:</label>
-																	<div class="input-group">
-																		<span class="input-group-addon" id="basic-addon1">R$</span>
-																		<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalServico<?php echo $i ?>"
-																			   name="SubtotalServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalServico'] ?>">
-																	</div>
-																</div>
-															</div>
-															<div class="row">
-																<div class="col-md-2"></div>
-																<div class="col-md-3">
-																	<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
-																	<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
-																		   name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
-																</div>
-																<div class="col-md-3">
-																	<label for="DataValidadeServico<?php echo $i ?>">Validade:</label>
-																	<div class="input-group <?php echo $datepicker; ?>">
-																		<span class="input-group-addon" disabled>
-																			<span class="glyphicon glyphicon-calendar"></span>
-																		</span>
-																		<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																			   name="DataValidadeServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataValidadeServico']; ?>">																				
-																	</div>
-																</div>
-																<div class="col-md-2">
-																	<label for="ConcluidoServico">Prd.Ent? </label><br>
-																	<div class="form-group">
-																		<div class="btn-group" data-toggle="buttons">
-																			<?php
-																			foreach ($select['ConcluidoServico'] as $key => $row) {
-																				(!$servico[$i]['ConcluidoServico']) ? $servico[$i]['ConcluidoServico'] = 'S' : FALSE;
-
-																				if ($servico[$i]['ConcluidoServico'] == $key) {
-																					echo ''
-																					. '<label class="btn btn-warning active" name="radiobutton_ConcluidoServico' . $i . '" id="radiobutton_ConcluidoServico' . $i .  $key . '">'
-																					. '<input type="radio" name="ConcluidoServico' . $i . '" id="radiobuttondinamico" '
-																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																					. '</label>'
-																					;
-																				} else {
-																					echo ''
-																					. '<label class="btn btn-default" name="radiobutton_ConcluidoServico' . $i . '" id="radiobutton_ConcluidoServico' . $i .  $key . '">'
-																					. '<input type="radio" name="ConcluidoServico' . $i . '" id="radiobuttondinamico" '
-																					. 'autocomplete="off" value="' . $key . '" >' . $row
-																					. '</label>'
-																					;
-																				}
-																			}
-																			?>
-																		</div>
-																	</div>
-																</div>																						
-																<div class="col-md-1">
-																	<label><br></label><br>
-																	<button type="button" id="<?php echo $i ?>" class="remove_field10 btn btn-danger"
-																		onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',1,<?php echo $i ?>,'CountMax2',0,'ServicoHidden')">
-																		<span class="glyphicon glyphicon-trash"></span>
-																	</button>
-																</div>
-															</div>
-														</div>
-													</div>
+													
+													<input type="hidden" name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
+													<input type="hidden" name="idTab_Valor_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Valor_Servico'] ?>">
+													<input type="hidden" name="idTab_Produtos_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Produtos_Servico'] ?>">
+													<input type="hidden" name="idTab_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Servico'] ?>">
+													<input type="hidden" name="ValorServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorServico'] ?>">
+													
+													<input type="hidden" name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
+													<input type="hidden" name="DataValidadeServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataValidadeServico'] ?>">
+													<input type="hidden" name="ConcluidoServico<?php echo $i ?>" value="<?php echo $servico[$i]['ConcluidoServico'] ?>">
+													
 												</div>
 
 												<?php
@@ -497,35 +405,7 @@
 												}
 												?>
 											</div>
-																														
-											<div class="panel panel-warning">
-												<div class="panel-heading text-left">
-													<div class="row">	
-														<div class="col-md-2 text-left">
-															<a class="add_field_button10  btn btn-warning" 
-																	onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
-																<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Promoções
-															</a>
-														</div>
-														<div class="col-md-2"></div>
-														<div class="col-md-2">	
-															<b>Produtos: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
-														</div>
-														<div class="col-md-2">	
-															<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
-														</div>
-														
-														
-														<div class="col-md-3 text-left">																							
-															<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
-																<span class="glyphicon glyphicon-menu-up"></span> Devolvidos
-															</a>
-														</div>
-														
-													</div>
-												</div>
-											</div>
-											
+
 											<input type="hidden" name="CountMax2" id="CountMax2" value="<?php echo $ServicoSoma ?>">
 
 										<?php } ?>
@@ -586,89 +466,174 @@
 							</div>
 							
 							
+							<div class="panel panel-info">
+								<div class="panel-heading">		
+									<!-- Corrigir o nome do cliente-->
+																	
+									<!--<h5 class="text-left"><b>Cliente</b>: <?php echo '' . $_SESSION['Cliente']['NomeCliente'] . ' - ' . $_SESSION['Cliente']['idApp_Cliente'] . '' ?></h5>-->
 									
-								<!-- Corrigir o nome do cliente-->
-																
-								<!--<h5 class="text-left"><b>Cliente</b>: <?php echo '' . $_SESSION['Cliente']['NomeCliente'] . ' - ' . $_SESSION['Cliente']['idApp_Cliente'] . '' ?></h5>-->
-								
-								<h5 class="text-left"><b>Cliente</b>: <?php echo '' . $orcatrata['idApp_Cliente'] . '' ?></h5>
-								
-								<table class="table table-bordered table-condensed table-striped">
-									<thead>
-										<tr>
-											<th class="col-md-2" scope="col">Tipo</th>
-											<th class="col-md-2" scope="col">Data Orç.</th>
-											<th class="col-md-3" scope="col">Descrição</th>
-											<th class="col-md-5" scope="col">Observções</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><?php echo $orcatrata['TipoFinanceiro'] ?></td>
-											<td><?php echo $orcatrata['DataOrca'] ?></td>
-											<td><?php echo $orcatrata['Descricao'] ?></td>
-											<td><?php echo $orcatrata['ObsOrca'] ?></td>
-										</tr>
-									</tbody>
-								</table>
-								
-								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-								<?php if( isset($count['PCount']) ) { ?>
-								<h5 class="text-left"><b>Produtos</b></h5>
+									<h4 class="text-left"><b>Cliente</b>: <?php echo '' . $orcatrata['idApp_Cliente'] . '' ?></h4>
 									
-								<table class="table table-bordered table-condensed table-striped">
-									<thead>
-										<tr>
-											<th class="col-md-2" scope="col">Qtd</th>																																
-											<th class="col-md-6" scope="col">DescProd.</th>							
-											<th class="col-md-1" scope="col">Valor</th>
-											<th class="col-md-1" scope="col">Subtotal</th>
-										</tr>	
-										<tr>
-											<th class="col-md-2" scope="col"></th>
-											<th class="col-md-6" scope="col">Data / Obs.:</th>	
-											<th class="col-md-1" scope="col"></th>
-											<th class="col-md-1" scope="col"></th>
-										</tr>
-									</thead>
+									<table class="table table-bordered table-condensed table-striped">
+										<thead>
+											<tr>
+												
+												<th class="col-md-2" scope="col">Data</th>
+												<th class="col-md-3" scope="col">Desc.</th>
+												<th class="col-md-5" scope="col">Obs.</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												
+												<td><?php echo $orcatrata['DataOrca'] ?></td>
+												<td><?php echo $orcatrata['Descricao'] ?></td>
+												<td><?php echo $orcatrata['ObsOrca'] ?></td>
+											</tr>
+										</tbody>
+									</table>
+									
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+									<?php if( isset($count['PCount']) ) { ?>
+									<h4 class="text-left"><b>Produtos</b></h4>
+										
+									<table class="table table-bordered table-condensed table-striped">
+										<thead>
+											<tr>
+												<th class="col-md-2" scope="col">Qtd</th>																																
+												<th class="col-md-6" scope="col">Produto</th>							
+												<th class="col-md-1" scope="col">Valor</th>
+												<th class="col-md-1" scope="col">Subtotal</th>
+											</tr>	
+											<!--
+											<tr>
+												<th class="col-md-2" scope="col"></th>
+												<th class="col-md-6" scope="col">Data / Obs.:</th>	
+												<th class="col-md-1" scope="col"></th>
+												<th class="col-md-1" scope="col"></th>
+											</tr>
+											-->
+										</thead>
 
-									<tbody>
+										<tbody>
 
-										<?php
-										for ($i=1; $i <= $count['PCount']; $i++) {
-											#echo $produto[$i]['QtdProduto'];
-										?>
+											<?php
+											for ($i=1; $i <= $count['PCount']; $i++) {
+												#echo $produto[$i]['QtdProduto'];
+											?>
 
-										<tr>
-											<td><?php echo $produto[$i]['QtdProduto'] ?></td>
-																		
-											<td><?php echo number_format($produto[$i]['ValorProduto'], 2, ',', '.') ?></td>
+											<tr>
+												<td><?php echo $produto[$i]['QtdProduto'] ?> X <?php echo $produto[$i]['QtdIncremento'] ?> Unid</td>
+												<td><?php echo $produto[$i]['Produto'] ?></td>							
+												<td><?php echo number_format($produto[$i]['ValorProduto'], 2, ',', '.') ?></td>
+												<td><?php echo number_format($produto[$i]['Subtotal_Produto'], 2, ',', '.') ?></td>
+											</tr>						
+											<!--
+											<tr>
+												<td></td>
+												<td>Data: <?php echo $produto[$i]['DataValidadeProduto'] ?> - Obs: <?php echo $produto[$i]['ObsProduto'] ?></td>
+												<td>Ent: <?php echo $produto[$i]['ConcluidoProduto'] ?></td>
+												<td>Dev: <?php echo $produto[$i]['DevolvidoProduto'] ?></td>
+											</tr>
+											-->
 											
-										</tr>						
-										<tr>
-											<td></td>
-											<td>Data: <?php echo $produto[$i]['DataValidadeProduto'] ?> - Obs: <?php echo $produto[$i]['ObsProduto'] ?></td>
-											<td>Ent: <?php echo $produto[$i]['ConcluidoProduto'] ?></td>
-											<td>Dev: <?php echo $produto[$i]['DevolvidoProduto'] ?></td>
-										</tr>
-										
-										
-										<?php
-										}
-										?>
+											<?php
+											}
+											?>
 
-									</tbody>
-								</table>
-								<?php } else echo '<h3 class="text-left">S/Produtos Entregues </h3>';{?>
-								<?php } ?>
-								<?php } ?>									
-								
-								
-								
-															
-							
-								
-							<div class="panel panel-danger">
+										</tbody>
+									</table>
+									<?php } else echo '<h3 class="text-left">S/Produtos Entregues </h3>';{?>
+									<?php } ?>
+									<?php } ?>
+									
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+									<?php if( isset($count['SCount']) ) { ?>							
+									<h4 class="text-left"><b>Serviços</b></h4>
+									<table class="table table-bordered table-condensed table-striped">
+										<thead>
+											<tr>
+												<th class="col-md-2" scope="col">Qtd</th>																															
+												<th class="col-md-6" scope="col">Serviço</th>							
+												<th class="col-md-1" scope="col">Valor</th>
+												<th class="col-md-1" scope="col">Subtotal</th>
+											</tr>	
+											<!--
+											<tr>
+												<th class="col-md-2" scope="col"></th>
+												<th class="col-md-7" scope="col">Ent-Obs.:</th>	
+												<th class="col-md-1" scope="col">Data</th>							
+											</tr>
+											-->
+										</thead>
+										<tbody>
+
+											<?php
+											for ($i=1; $i <= $count['SCount']; $i++) {
+												#echo $produto[$i]['QtdProduto'];
+											?>
+
+											<tr>
+												<td><?php echo $servico[$i]['QtdServico'] ?></td>																			
+												<td><?php echo $servico[$i]['Servico'] ?></td>							
+												<td><?php echo number_format($servico[$i]['ValorServico'], 2, ',', '.') ?></td>
+												<td><?php echo number_format($servico[$i]['Subtotal_Servico'], 2, ',', '.') ?></td>
+											</tr>						
+											<!--
+											<tr>
+												<td></td>
+												
+												<td><?php echo $servico[$i]['DataValidadeServico'] ?></td>							
+											</tr>
+											-->
+											<?php
+											}
+											?>
+
+										</tbody>
+									</table>
+									<?php } else echo '<h3 class="text-left">S/Serviços </h3>';{?>
+									<?php } ?>							
+									<?php } ?>								
+									
+									<h4 class="text-left"><b>Pagamento</b></h4>
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+									<table class="table table-bordered table-condensed table-striped">
+										<thead>
+											<tr>
+												<th class="col-md-4" scope="col">SubProd</th>
+												<th class="col-md-4" scope="col">SubServ</th>
+												<th class="col-md-4" scope="col">Frete</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>R$ <?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
+												<td>R$ <?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
+												<td>R$ <?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>
+											</tr>
+										</tbody>										
+										<thead>
+											<tr>	
+												
+												<th class="col-md-4" scope="col">Total</th>
+												<th class="col-md-4" scope="col">Dinheiro</th>
+												<th class="col-md-4" scope="col">Troco</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>	
+												<td>R$ <?php echo number_format($orcatrata['ValorTotalOrca'], 2, ',', '.') ?></td>
+												<td>R$ <?php echo number_format($orcatrata['ValorDinheiro'], 2, ',', '.') ?></td>
+												<td>R$ <?php echo number_format($orcatrata['ValorTroco'], 2, ',', '.') ?></td>
+											</tr>
+										</tbody>
+									</table>
+									<?php } ?>
+								</div>
+							</div>
+							<br>	
+							<div class="panel panel-info">
 								<div class="panel-heading">
 									<h4 class="mb-3"><b>Status do Pedido</b></h4>
 									<div class="row">
@@ -763,7 +728,7 @@
 																<div class="panel-heading">
 																	<div class="row">				
 																		<div class="col-md-12 text-left">
-																			<label for="ProntoOrca">Prds.Prontos?</label><br>
+																			<label for="ProntoOrca">Pronto P/Entrega?</label><br>
 																			<div class="btn-group" data-toggle="buttons">
 																				<?php
 																				foreach ($select['ProntoOrca'] as $key => $row) {
@@ -794,7 +759,7 @@
 																	</div>
 																	<div class="row">		
 																		<div class="col-md-12 text-right">
-																			<label for="EnviadoOrca">Prds.Enviados? </label><br>
+																			<label for="EnviadoOrca">Enviado? </label><br>
 																			<div class="btn-group" data-toggle="buttons">
 																				<?php
 																				foreach ($select['EnviadoOrca'] as $key => $row) {
@@ -1114,7 +1079,7 @@
 							</div>
 							<?php } ?>
 							<br>
-							<div class="panel panel-danger">
+							<div class="panel panel-info">
 								<div class="panel-heading">
 									<h4 class="mb-3"><b>Pedido</b></h4>
 									<div class="row">	

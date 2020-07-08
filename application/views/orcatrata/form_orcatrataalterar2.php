@@ -110,10 +110,12 @@
 							<br>
 								<div class="panel panel-success">
 									<div class="panel-heading">
-										<h4 class="mb-3"><b>Produtos & Serviços</b></h4>
-										<input type="hidden" name="PCount" id="PCount" value="<?php echo $count['PCount']; ?>"/>
+										
 										<input type="hidden" name="Negocio" id="Negocio" value="1"/>
 										<input type="hidden" name="Empresa" id="Empresa" value="<?php echo $_SESSION['log']['idSis_Empresa']; ?>"/>
+										
+										<h4 class="mb-3"><b>Produtos & Serviços</b></h4>
+										<input type="hidden" name="PCount" id="PCount" value="<?php echo $count['PCount']; ?>"/>
 										
 										<?php if ($_SESSION['log']['idSis_Empresa'] == 42 ) { ?>
 											<div class="input_fields_wrap42">
@@ -128,13 +130,13 @@
 												<?php } ?>
 
 												<input type="hidden" name="ProdutoHidden" id="ProdutoHidden<?php echo $i ?>" value="<?php echo $i ?>">
-
+												
 												<div class="form-group" id="42div<?php echo $i ?>">
 													<div class="panel panel-warning">
 														<div class="panel-heading">
 															<div class="row">
-																<input type="hidden" class="form-control " id="idTab_Valor<?php echo $i ?>" name="idTab_Valor<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor'] ?>">
-																<input type="hidden" class="form-control " id="idTab_Produtos<?php echo $i ?>" name="idTab_Produtos<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos'] ?>">		
+																<input type="hidden" class="form-control " id="idTab_Valor_Produto<?php echo $i ?>" name="idTab_Valor_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor_Produto'] ?>">
+																<input type="hidden" class="form-control " id="idTab_Produtos_Produto<?php echo $i ?>" name="idTab_Produtos_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos_Produto'] ?>">		
 																
 																<div class="col-md-6">
 																	<label for="idTab_Produto">Produto:</label>
@@ -423,8 +425,8 @@
 													<div class="panel panel-warning">
 														<div class="panel-heading">
 															<div class="row">
-																<input type="hidden" class="form-control " id="idTab_Valor<?php echo $i ?>" name="idTab_Valor<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor'] ?>">
-																<input type="hidden" class="form-control " id="idTab_Produtos<?php echo $i ?>" name="idTab_Produtos<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos'] ?>">			
+																<input type="hidden" class="form-control " id="idTab_Valor_Produto<?php echo $i ?>" name="idTab_Valor_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor_Produto'] ?>">
+																<input type="hidden" class="form-control " id="idTab_Produtos_Produto<?php echo $i ?>" name="idTab_Produtos_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos_Produto'] ?>">			
 																<div class="col-md-12">
 																	<label for="idTab_Produto">Produto <?php echo $i ?></label>
 																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor1Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
@@ -458,7 +460,7 @@
 																</div>
 																<div class="col-md-1"></div>
 																<div class="col-md-3">
-																	<label for="ValorProduto">Valor Emb.</label>
+																	<label for="ValorProduto">Valor Emb</label>
 																	<div class="input-group">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" id="idTab_Produto<?php echo $i ?>" maxlength="10" placeholder="0,00"
@@ -500,12 +502,12 @@
 														<div class="col-md-3 text-center">
 															<!--<label></label>-->
 															<?php if ($_SESSION['log']['idSis_Empresa'] == 42 ) { ?>
-																<a class="add_field_button42 btn btn-success"
+																<a class="add_field_button42 btn btn-warning"
 																		onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
 																	<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Produtos
 																</a>																						
 															<?php }else{ ?>	
-																<a class="add_field_button9 btn btn-success"
+																<a class="add_field_button9 btn btn-warning"
 																		onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
 																	<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Produtos
 																</a>
@@ -531,7 +533,7 @@
 												</div>
 											</div>
 											<br>		
-										<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
+										
 											<input type="hidden" name="SCount" id="SCount" value="<?php echo $count['SCount']; ?>"/>
 
 											<div class="input_fields_wrap10">
@@ -548,7 +550,7 @@
 												<input type="hidden" name="ServicoHidden" id="ServicoHidden<?php echo $i ?>" value="<?php echo $i ?>">
 												
 												<div class="form-group" id="10div<?php echo $i ?>">
-													<div class="panel panel-warning">
+													<div class="panel panel-danger">
 														<div class="panel-heading">
 															<div class="row">
 																<input type="hidden" class="form-control " id="idTab_Valor_Servico<?php echo $i ?>" name="idTab_Valor_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Valor_Servico'] ?>">
@@ -560,9 +562,9 @@
 																		<span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
 																	</a>-->
 																	<?php } ?>
-																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValorDevTabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
+																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor1Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Servico')" <?php echo $readonly; ?>
 																			id="listadinamica<?php echo $i ?>" name="idTab_Servico<?php echo $i ?>">																					
-																		<!--<option value="">-- Selecione uma opção --</option>-->
+																		<option value="">-- Selecione uma opção --</option>
 																		<?php
 																		foreach ($select['Servico'] as $key => $row) {
 																			if ($servico[$i]['idTab_Servico'] == $key) {
@@ -574,21 +576,21 @@
 																		?>
 																	</select>
 																</div>
-															</div>	
-															<div class="row">	
+															</div>
+															<div class="row">
 																<div class="col-md-2">
 																	<label for="QtdServico">Qtd <?php echo $i ?>:</label>
 																	<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0"
-																			onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
+																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
 																			 name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
 																</div>
-																<div class="col-md-3"></div> 
+																<div class="col-md-3"></div>
 																<div class="col-md-3">
 																	<label for="ValorServico">Valor do Produto:</label>
 																	<div class="input-group">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" id="idTab_Servico<?php echo $i ?>" maxlength="10" placeholder="0,00"
-																			onkeyup="calculaSubtotalDev(this.value,this.name,'<?php echo $i ?>','VP','Servico')"
+																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','VP','Servico')"
 																			name="ValorServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorServico'] ?>">
 																	</div>
 																</div>
@@ -609,7 +611,7 @@
 																</div>
 															</div>
 															<div class="row">
-																<div class="col-md-2"></div>
+																<div class="col-md-5"></div>
 																<div class="col-md-3">
 																	<label for="ObsServico<?php echo $i ?>">Obs:</label><br>
 																	<input type="text" class="form-control" id="ObsServico<?php echo $i ?>" maxlength="250"
@@ -640,19 +642,20 @@
 											<div class="panel panel-danger">
 												<div class="panel-heading text-left">
 													<div class="row">
-														<div class="col-md-3 "></div>
+														<div class="col-md-3"></div>
 														<div class="col-md-3 text-center">	
 															<b>Serviços: <span id="QtdSomaDev"><?php echo $QtdSomaDev ?></span></b>
 														</div>
 														<div class="col-md-3 text-center">	
 															<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
 														</div>
-														<div class="col-md-2 text-center">
+														<div class="col-md-3 text-center">
 															<a class="add_field_button10  btn btn-danger" 
 																	onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
 																<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Serviços
 															</a>
 														</div>
+														
 														<!--
 														<div class="col-md-3 text-left">																							
 															<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
@@ -666,8 +669,8 @@
 											
 											<input type="hidden" name="CountMax2" id="CountMax2" value="<?php echo $ServicoSoma ?>">
 
-										<?php } ?>
-
+										
+										<!-- soma dos produtos, serviços e total do orçamento-->
 										<div class="row">	
 											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 											<div class="col-md-4 panel-body">
@@ -675,7 +678,7 @@
 													<div class="panel-heading">
 														<div class="row">				
 															<div class="col-md-12">
-																<label for="ValorOrca">Orçamento:</label><br>
+																<label for="ValorOrca">Orçamento/Produtos:</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorOrca" maxlength="10" placeholder="0,00" 
@@ -686,7 +689,7 @@
 														</div>	
 														<div class="row">	
 															<div class="col-md-12">
-																<label for="ValorDev">Desconto:</label><br>
+																<label for="ValorDev">Orçamento/Serviços:</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00" 
