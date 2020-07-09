@@ -6809,14 +6809,14 @@ exit();*/
                 C.Telefone2,
                 C.Telefone3,
                 C.Sexo,
-                C.Endereco,
-                C.Bairro,
-                CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
+                C.EnderecoCliente,
+                C.BairroCliente,
+                CONCAT(M.NomeMunicipio, "/", M.Uf) AS MunicipioCliente,
                 C.Email
 
             FROM
 				App_Cliente AS C
-                    LEFT JOIN Tab_Municipio AS M ON C.Municipio = M.idTab_Municipio
+                    LEFT JOIN Tab_Municipio AS M ON C.MunicipioCliente = M.idTab_Municipio
 
             WHERE
 

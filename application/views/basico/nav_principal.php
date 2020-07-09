@@ -61,15 +61,25 @@
 				</li>						
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group">
+						
 						<a type="button" class="btn btn-sm btn-primary" role="button" href="<?php echo base_url(); ?>orcatrata/cadastrar3">
-							Receitas<span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-arrow-down"></span>/ 
+							Receitas<span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-arrow-down"></span> & 
 							Vendas<span class="glyphicon glyphicon-gift"></span><span class="glyphicon glyphicon-arrow-up"></span>
 
 						</a>
 						<button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>
 						</button>
+						
+						<!--
+						<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">
+							Receitas <span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-arrow-down"></span> / 
+							Vendas <span class="glyphicon glyphicon-gift"></span><span class="glyphicon glyphicon-arrow-up"></span> <span class="caret"></span>
+						</button>
+						-->
 						<ul class="dropdown-menu" role="menu">							
+							<!--<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/cadastrar3"><span class="glyphicon glyphicon-plus"></span> Nova Receita</a></li>
+							<li role="separator" class="divider"></li>-->
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/pedido"><span class="glyphicon glyphicon-pencil"></span> Atualizar Status</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasrec"><span class="glyphicon glyphicon-pencil"></span> Relatório das Receitas</a></li>

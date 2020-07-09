@@ -42,9 +42,9 @@
 						<td><?php echo $row['Telefone2'] ?></td>
 						<td><?php echo $row['Telefone3'] ?></td>
 						<td><?php echo $row['DataNascimento'] ?></td>
-						<td><?php echo $row['Endereco'] ?></td>
-						<td><?php echo $row['Bairro'] ?></td>
-						<td><?php echo $row['Municipio'] ?></td>
+						<td><?php echo $row['EnderecoCliente'] ?></td>
+						<td><?php echo $row['BairroCliente'] ?></td>
+						<td><?php echo $row['MunicipioCliente'] ?></td>
 						<td><?php echo $row['Email'] ?></td>
 						<td><?php echo $row['Ativo'] ?></td>
 					</tr>							

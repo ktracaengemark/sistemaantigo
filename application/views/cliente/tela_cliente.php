@@ -217,23 +217,23 @@
 													
 													}
 													
-													if ($query['Endereco'] || $query['Bairro'] || $query['Municipio']) {
+													if ($query['EnderecoCliente'] || $query['BairroCliente'] || $query['MunicipioCliente']) {
 														
 													echo '                                                 
 													<tr>
 														<td><span class="glyphicon glyphicon-home"></span> Endereço:</td>
-														<td>' . $query['Endereco'] . ' - ' . $query['Bairro'] . ' - ' . $query['Municipio'] . '</td>
+														<td>' . $query['EnderecoCliente'] . ' - ' . $query['BairroCliente'] . ' - ' . $query['MunicipioCliente'] . '</td>
 													</tr>
 													';
 													
 													}
 													
-													if ($query['Cep']) {
+													if ($query['CepCliente']) {
 														
 													echo '                                                 
 													<tr>
 														<td><span class="glyphicon glyphicon-envelope"></span> Cep:</td>
-														<td>' . $query['Cep'] . '</td>
+														<td>' . $query['CepCliente'] . '</td>
 													</tr>
 													';
 													
@@ -250,12 +250,12 @@
 													
 													}
 													
-													if ($query['Rg'] || $query['OrgaoExp'] || $query['Estado'] || $query['DataEmissao']) {
+													if ($query['Rg'] || $query['OrgaoExp'] || $query['EstadoCliente'] || $query['DataEmissao']) {
 														
 													echo '                                                 
 													<tr>
 														<td><span class="glyphicon glyphicon-pencil"></span> Rg:</td>
-														<td>' . $query['Rg'] . ' - ' . $query['OrgaoExp'] . ' - ' . $query['Estado'] . ' - ' . $query['DataEmissao'] . '</td>
+														<td>' . $query['Rg'] . ' - ' . $query['OrgaoExp'] . ' - ' . $query['EstadoCliente'] . ' - ' . $query['DataEmissao'] . '</td>
 													</tr>
 													';
 													

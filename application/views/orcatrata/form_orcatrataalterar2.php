@@ -757,7 +757,7 @@
 									<div class="row ">
 										<div class="col-md-4 mb-3">
 											<label for="TipoFrete">Forma de Entrega:</label><br>
-											<select data-placeholder="Selecione uma Forma..." class="form-control Chosen" onchange="tipoFrete(this.value)" <?php echo $disabled; ?>
+											<select data-placeholder="Selecione uma Forma..." class="form-control Chosen" <?php echo $disabled; ?>
 													id="TipoFrete" name="TipoFrete">
 														<option value="">-- Selecione uma Forma --</option>
 												<?php

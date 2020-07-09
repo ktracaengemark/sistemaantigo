@@ -58,17 +58,17 @@ class Cliente extends CI_Controller {
 			'CpfCliente',
 			'Rg',
 			'OrgaoExp',
-			'Estado',
+			'EstadoCliente',
 			'DataEmissao',			
-			'Cep',
+			'CepCliente',
             'CelularCliente',
             'Telefone2',
             'Telefone3',
 			'Ativo',
             'Sexo',
-            'Endereco',
-            'Bairro',
-            'Municipio',
+            'EnderecoCliente',
+            'BairroCliente',
+            'MunicipioCliente',
 			
             'Obs',
 			'Email',
@@ -91,7 +91,7 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
 		
-        $data['select']['Municipio'] = $this->Basico_model->select_municipio();
+        $data['select']['MunicipioCliente'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Associado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
@@ -106,10 +106,10 @@ class Cliente extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
 
-        if ($data['query']['Sexo'] || $data['query']['Endereco'] || $data['query']['Bairro'] ||
-			$data['query']['Municipio'] || $data['query']['Obs'] || $data['query']['Email'] || 
-			$data['query']['RegistroFicha'] || $data['query']['Cep'] || $data['query']['CpfCliente'] || 
-			$data['query']['Rg']  || $data['query']['OrgaoExp'] || $data['query']['Estado']  || $data['query']['DataEmissao'])
+        if ($data['query']['Sexo'] || $data['query']['EnderecoCliente'] || $data['query']['BairroCliente'] ||
+			$data['query']['MunicipioCliente'] || $data['query']['Obs'] || $data['query']['Email'] || 
+			$data['query']['RegistroFicha'] || $data['query']['CepCliente'] || $data['query']['CpfCliente'] || 
+			$data['query']['Rg']  || $data['query']['OrgaoExp'] || $data['query']['EstadoCliente']  || $data['query']['DataEmissao'])
             $data['collapse'] = '';
         else
             $data['collapse'] = 'class="collapse"';
@@ -176,17 +176,17 @@ class Cliente extends CI_Controller {
 			'CpfCliente',
 			'Rg',
 			'OrgaoExp',
-			'Estado',
+			'EstadoCliente',
 			'DataEmissao',
-			'Cep',
+			'CepCliente',
             'CelularCliente',
             'Telefone2',
             'Telefone3',
 			'Ativo',
             'Sexo',
-            'Endereco',
-            'Bairro',
-            'Municipio',
+            'EnderecoCliente',
+            'BairroCliente',
+            'MunicipioCliente',
 
             'Obs',
             #'idSis_Usuario',
@@ -214,7 +214,7 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
 		
-        $data['select']['Municipio'] = $this->Basico_model->select_municipio();
+        $data['select']['MunicipioCliente'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Associado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
@@ -230,10 +230,10 @@ class Cliente extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
-        if ($data['query']['Sexo'] || $data['query']['Endereco'] || $data['query']['Bairro'] ||
-			$data['query']['Municipio'] || $data['query']['Obs'] || $data['query']['Email'] || 
-			$data['query']['RegistroFicha'] || $data['query']['Cep'] || $data['query']['CpfCliente'] || 
-			$data['query']['Rg']  || $data['query']['OrgaoExp'] || $data['query']['Estado']  || $data['query']['DataEmissao'])
+        if ($data['query']['Sexo'] || $data['query']['EnderecoCliente'] || $data['query']['BairroCliente'] ||
+			$data['query']['MunicipioCliente'] || $data['query']['Obs'] || $data['query']['Email'] || 
+			$data['query']['RegistroFicha'] || $data['query']['CepCliente'] || $data['query']['CpfCliente'] || 
+			$data['query']['Rg']  || $data['query']['OrgaoExp'] || $data['query']['EstadoCliente']  || $data['query']['DataEmissao'])
             $data['collapse'] = '';
         else
             $data['collapse'] = 'class="collapse"';
@@ -656,11 +656,11 @@ class Cliente extends CI_Controller {
         ($data['query']['Telefone3']) ? $data['query']['Telefone'] = $data['query']['Telefone'] . ' - ' . $data['query']['Telefone3'] : FALSE;
 
 
-        if ($data['query']['Municipio']) {
-            $mun = $this->Basico_model->get_municipio($data['query']['Municipio']);
-            $data['query']['Municipio'] = $mun['NomeMunicipio'] . '/' . $mun['Uf'];
+        if ($data['query']['MunicipioCliente']) {
+            $mun = $this->Basico_model->get_municipio($data['query']['MunicipioCliente']);
+            $data['query']['MunicipioCliente'] = $mun['NomeMunicipio'] . '/' . $mun['Uf'];
         } else {
-            $data['query']['Municipio'] = $data['query']['Uf'] = $mun['Uf'] = '';
+            $data['query']['MunicipioCliente'] = $data['query']['Uf'] = $mun['Uf'] = '';
         }
 
         $data['contatocliente'] = $this->Contatocliente_model->lista_contatocliente(TRUE);

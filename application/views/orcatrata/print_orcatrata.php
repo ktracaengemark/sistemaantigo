@@ -89,8 +89,8 @@
 							<div class="col-md-9 text-left">
 								<h2><?php echo '<strong>' . $_SESSION['Orcatrata']['NomeEmpresa'] . '</strong>' ?></h2>
 								<h4>CNPJ:<?php echo '<strong>' . $orcatrata['Cnpj'] . '</strong>' ?></h4>
-								<h4>Endereço:<?php echo '<small>' . $orcatrata['Endereco'] . '</small> <small>' . $orcatrata['Numero'] . '</small> <small>' . $orcatrata['Complemento'] . '</small><br>
-														<small>' . $orcatrata['Bairro'] . '</small> - <small>' . $orcatrata['Municipio'] . '</small> - <small>' . $orcatrata['Estado'] . '</small>' ?></h4>
+								<h4>Endereço:<?php echo '<small>' . $orcatrata['EnderecoEmpresa'] . '</small> <small>' . $orcatrata['NumeroEmpresa'] . '</small> <small>' . $orcatrata['ComplementoEmpresa'] . '</small><br>
+														<small>' . $orcatrata['BairroEmpresa'] . '</small> - <small>' . $orcatrata['MunicipioEmpresa'] . '</small> - <small>' . $orcatrata['EstadoEmpresa'] . '</small>' ?></h4>
 								<h5>Colab.:<?php echo '<strong>' . $_SESSION['Usuario']['Nome'] . '</strong>' ?></h5>
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>								
 								
@@ -139,17 +139,6 @@
 									<th class="col-md-6" scope="col">Produto</th>							
 									<th class="col-md-1" scope="col">Valor</th>
 									<th class="col-md-1" scope="col">Subtotal</th>
-								</tr>	
-								<tr>
-									<th class="col-md-2" scope="col"></th>
-									<th class="col-md-6" scope="col">Data / Obs.:</th>	
-									<!--<th scope="col">Unidade</th>																				
-									<th scope="col">Aux1</th>
-									<th scope="col">Aux2</th>-->
-									<!--<th scope="col">Tipo </th>
-									<th scope="col">Desc </th>-->
-									<th class="col-md-1" scope="col"></th>
-									<th class="col-md-1" scope="col"></th>
 								</tr>
 							</thead>
 
@@ -168,20 +157,7 @@
 									<td><?php echo $produto[$i]['NomeProduto'] ?></td>							
 									<td><?php echo number_format($produto[$i]['ValorProduto'], 2, ',', '.') ?></td>
 									<td><?php echo $produto[$i]['SubtotalProduto'] ?></td>
-								</tr>						
-								<tr>
-									<td></td>
-									<td>Data: <?php echo $produto[$i]['DataValidadeProduto'] ?> - Obs: <?php if ($_SESSION['log']['idSis_Empresa'] != 42 ) echo $produto[$i]['ObsProduto'] ?></td>
-									<!--<td><?php echo $produto[$i]['ConcluidoProduto'] ?></td>														
-									<td><?php echo $produto[$i]['Prodaux1'] ?></td>
-									<td><?php echo $produto[$i]['Prodaux2'] ?></td>-->
-									<!--<td><?php echo $produto[$i]['Convenio'] ?></td>
-									<td><?php echo $produto[$i]['Convdesc'] ?></td>-->
-									<td>Ent: <?php echo $produto[$i]['ConcluidoProduto'] ?></td>
-									<td>Dev: <?php echo $produto[$i]['DevolvidoProduto'] ?></td>
 								</tr>
-								
-								
 								<?php
 								}
 								?>
@@ -205,11 +181,6 @@
 									<th class="col-md-1" scope="col">Valor</th>
 									<th class="col-md-1" scope="col">Subtotal</th>
 								</tr>	
-								<tr>
-									<th class="col-md-2" scope="col"></th>
-									<th class="col-md-7" scope="col">id-Ent-Obs.:</th>	
-									<th class="col-md-1" scope="col">Data</th>							
-								</tr>
 							</thead>
 							<tbody>
 
@@ -223,11 +194,6 @@
 									<td><?php echo $servico[$i]['NomeServico'] ?></td>							
 									<td><?php echo number_format($servico[$i]['ValorServico'], 2, ',', '.') ?></td>
 									<td><?php echo $servico[$i]['SubtotalServico'] ?></td>
-								</tr>						
-								<tr>
-									<td></td>
-									<td><?php echo $servico[$i]['idApp_Servico'] ?></td>
-									<td><?php echo $servico[$i]['DataValidadeServico'] ?></td>							
 								</tr>
 
 								<?php
@@ -264,10 +230,10 @@
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-1" scope="col">Cep</th>
-									<th class="col-md-3" scope="col">Endereço</th>
-									<th class="col-md-1" scope="col">Número</th>
-									<th class="col-md-1" scope="col">Compl.</th>
+									<th class="col-md-2" scope="col">Cep</th>
+									<th class="col-md-4" scope="col">Endereço</th>
+									<th class="col-md-2" scope="col">Número</th>
+									<th class="col-md-4" scope="col">Compl.</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -280,10 +246,10 @@
 							</tbody>
 							<thead>
 								<tr>
-									<th class="col-md-1" scope="col">Bairro</th>
-									<th class="col-md-1" scope="col">Cidade</th>
-									<th class="col-md-1" scope="col">Estado</th>
-									<th class="col-md-3" scope="col">Ref.</th>
+									<th class="col-md-2" scope="col">Bairro</th>
+									<th class="col-md-4" scope="col">Cidade</th>
+									<th class="col-md-2" scope="col">Estado</th>
+									<th class="col-md-4" scope="col">Ref.</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -316,7 +282,7 @@
 							<thead>
 								<tr>
 									<th class="col-md-2" scope="col">Total R$</th>
-									<th class="col-md-2" scope="col">Dinheiro R$</th>
+									<th class="col-md-2" scope="col">Troco para R$</th>
 									<th class="col-md-2" scope="col">Troco R$</th>
 								</tr>
 							</thead>
@@ -364,6 +330,7 @@
 							</tbody>
 						</table>						
 						<?php } ?>
+						<!--
 						<?php if( isset($count['PRCount']) ) { ?>
 						<h3 class="text-left">Parcelas</h3>
 						<table class="table table-bordered table-condensed table-striped">
@@ -398,6 +365,8 @@
 						</table>
 						<?php } else echo '<h3 class="text-left">S/Parcelas </h3>';{?>
 						<?php } ?>
+						-->
+						<!--
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<h3 class="text-left"><b>Status do Pedido</b></h3>
 						
@@ -432,6 +401,7 @@
 							</tbody>
 						</table>
 						<?php } ?>
+						-->
 						<!--
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>

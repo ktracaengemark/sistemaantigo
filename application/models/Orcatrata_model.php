@@ -92,7 +92,7 @@ class Orcatrata_model extends CI_Model {
 					
 					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = OT.Entregador
 			WHERE 
-				idApp_OrcaTrata = ' . $data .'
+				idApp_OrcaTrata = ' . $data . '
 		');
         $query = $query->result_array();
 

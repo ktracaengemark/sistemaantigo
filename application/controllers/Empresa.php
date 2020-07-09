@@ -151,11 +151,11 @@ class Empresa extends CI_Controller {
             'Email',
 			'Cnpj',
 			'InscEstadual',
-			'Endereco',
-			'Bairro',
-			'Municipio',
-			'Estado',
-			'Cep',
+			'EnderecoEmpresa',
+			'BairroEmpresa',
+			'MunicipioEmpresa',
+			'EstadoEmpresa',
+			'CepEmpresa',
 			'Telefone',
 			'Atuacao',
 			#'Sexo',
@@ -184,7 +184,7 @@ class Empresa extends CI_Controller {
         #$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         #$this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');		
 
-        $data['select']['Municipio'] = $this->Basico_model->select_municipio();
+        $data['select']['MunicipioEmpresa'] = $this->Basico_model->select_municipio();
 		$data['select']['CategoriaEmpresa'] = $this->Basico_model->select_categoriaempresa();
         #$data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		#$data['select']['Empresa'] = $this->Basico_model->select_status_sn();
@@ -197,8 +197,8 @@ class Empresa extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
-        if ($data['query']['Endereco'] || $data['query']['Bairro'] ||
-			$data['query']['Municipio'] || $data['query']['Cep'])
+        if ($data['query']['EnderecoEmpresa'] || $data['query']['BairroEmpresa'] ||
+			$data['query']['MunicipioEmpresa'] || $data['query']['CepEmpresa'])
             $data['collapse'] = '';
         else
             $data['collapse'] = 'class="collapse"';
