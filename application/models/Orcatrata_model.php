@@ -184,7 +184,7 @@ class Orcatrata_model extends CI_Model {
     public function get_produto($data) {
 		$query = $this->db->query('
 			SELECT 
-				TAP.idApp_Produto,
+			TAP.idApp_Produto,
 				TAP.idSis_Empresa,
 				TAP.idTab_Modulo,
 				TAP.idApp_OrcaTrata,
@@ -218,7 +218,7 @@ class Orcatrata_model extends CI_Model {
 				P.Nome_Prod,
 				TOP2.Opcao,
 				TOP1.Opcao,
-				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,"")) AS Produto,
+				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,"")) AS Produto,
 				(TAP.QtdProduto * TAP.ValorProduto) AS Subtotal_Produto
 			FROM 
 				App_Produto AS TAP

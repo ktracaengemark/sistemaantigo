@@ -26,16 +26,16 @@ class Pesquisar_model extends CI_Model {
                 E.idSis_Empresa,
                 E.NomeEmpresa,
 				E.Site,
-                E.Endereco,
-                E.Bairro,
+                E.EnderecoEmpresa,
+                E.BairroEmpresa,
 				CE.CategoriaEmpresa,
 				E.Atuacao,
 				E.Arquivo,
-                CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
+                CONCAT(M.NomeMunicipio, "/", M.Uf) AS MunicipioEmpresa,
                 E.Email
             FROM
                 Sis_Empresa AS E
-                    LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
+                    LEFT JOIN Tab_Municipio AS M ON E.MunicipioEmpresa = M.idTab_Municipio
 					LEFT JOIN Tab_CategoriaEmpresa AS CE ON CE.idTab_CategoriaEmpresa = E.CategoriaEmpresa
             WHERE
 				idSis_Empresa != "1" AND 

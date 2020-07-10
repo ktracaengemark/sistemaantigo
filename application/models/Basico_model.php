@@ -1226,7 +1226,7 @@ if (isset($data) && $data) {
 				TOP1.Opcao,
 				TDS.Desconto,
 				TPM.Promocao,
-				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$ ",  IFNULL(V.ValorProduto,"")) AS NomeProduto
+				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
@@ -1239,7 +1239,12 @@ if (isset($data) && $data) {
 				P.idTab_Produtos = V.idTab_Produtos AND
 				P.Prod_Serv = "P"
 			ORDER BY
-				P.Nome_Prod ASC
+				TDS.Desconto ASC,
+				P.Nome_Prod ASC,
+				TPM.Promocao ASC,
+				TOP2.Opcao,
+				TOP1.Opcao,
+				V.ValorProduto
     ');
         } else {
             $query = $this->db->query('
@@ -1251,7 +1256,7 @@ if (isset($data) && $data) {
 				TOP1.Opcao,
 				TDS.Desconto,
 				TPM.Promocao,
-				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$ ",  IFNULL(V.ValorProduto,"")) AS NomeProduto
+				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
@@ -1264,7 +1269,12 @@ if (isset($data) && $data) {
 				P.idTab_Produtos = V.idTab_Produtos AND
 				P.Prod_Serv = "P"
 			ORDER BY
-				P.Nome_Prod ASC
+				TDS.Desconto ASC,
+				P.Nome_Prod ASC,
+				TPM.Promocao ASC,
+				TOP2.Opcao,
+				TOP1.Opcao,
+				V.ValorProduto
     ');
 
             $array = array();
