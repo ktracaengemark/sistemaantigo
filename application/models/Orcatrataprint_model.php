@@ -42,7 +42,7 @@ class Orcatrataprint_model extends CI_Model {
 				
 				OT.DataOrca,
 				OT.DataEntregaOrca,
-				OT.HoraEntregaOrca,
+				DATE_FORMAT(OT.HoraEntregaOrca, "%H:%i") AS HoraEntregaOrca,
 				OT.DataPrazo,
 				OT.DataConclusao,
 				OT.DataQuitado,				

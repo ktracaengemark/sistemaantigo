@@ -696,10 +696,27 @@
 							<br>
 							<div class="panel panel-info">
 								<div class="panel-heading">	
-									<h4 class="mb-3"><b>Cliente & Entrega</b></h4>
+									<h4 class="mb-3"><b>Entrega & Cliente</b></h4>
 									<div class="row ">
+										<div class="col-md-4 mb-3">
+											<label for="TipoFrete">Forma de Entrega:</label><br>
+											<select data-placeholder="Selecione uma Forma..." class="form-control Chosen" <?php echo $disabled; ?>
+													id="TipoFrete" name="TipoFrete">
+														<option value="">-- Selecione uma Forma --</option>
+												<?php
+												foreach ($select['TipoFrete'] as $key => $row) {
+													if ($orcatrata['TipoFrete'] == $key) {
+														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+													} else {
+														echo '<option value="' . $key . '">' . $row . '</option>';
+													}
+												}
+												?>
+											</select>
+											<?php echo form_error('TipoFrete'); ?>
+										</div>
 										<div <?php echo $visivel; ?>>	
-											<div class="col-md-6">
+											<div class="col-md-8">
 												<div class="row">
 													<div class="col-md-12 text-left">
 														<label  for="idApp_Cliente">Cliente</label>
@@ -763,23 +780,6 @@
 												</div>
 												<?php echo form_error('idApp_Cliente'); ?>
 											</div>
-										</div>
-										<div class="col-md-3 mb-3">
-											<label for="TipoFrete">Forma de Entrega:</label><br>
-											<select data-placeholder="Selecione uma Forma..." class="form-control Chosen" onchange="tipoFrete(this.value)" <?php echo $disabled; ?>
-													id="TipoFrete" name="TipoFrete">
-														<option value="">-- Selecione uma Forma --</option>
-												<?php
-												foreach ($select['TipoFrete'] as $key => $row) {
-													if ($orcatrata['TipoFrete'] == $key) {
-														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-													} else {
-														echo '<option value="' . $key . '">' . $row . '</option>';
-													}
-												}
-												?>
-											</select>
-											<?php echo form_error('TipoFrete'); ?>
 										</div>
 									</div>
 									<?php if($metodo == 10) { ?>
@@ -848,7 +848,7 @@
 											<input type="text" class="form-control " id="Estado" maxlength="2" <?php echo $readonly; ?>
 												   name="Estado" value="<?php echo $orcatrata['Estado']; ?>">
 										</div>
-										<div class="col-md-3 ">
+										<div class="col-md-4 ">
 											<label class="" for="Referencia">Referencia:</label>
 											<textarea class="form-control " id="Referencia" <?php echo $readonly; ?>
 													  name="Referencia"><?php echo $orcatrata['Referencia']; ?>
@@ -1299,8 +1299,27 @@
 											<div class="col-md-4">
 												<div class="panel panel-success">
 													<div class="panel-heading">
-														<div class="row">		
+														<div class="row">				
 															<div class="col-md-12 text-left">
+																<label class="col-md-12" for="Entregador">Entregador</label>
+																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																		id="Entregador" name="Entregador">
+																	<option value="">-- Sel. o Entregador --</option>
+																	<?php
+																	foreach ($select['Entregador'] as $key => $row) {
+																			#(!$orcatrata['Entregador']) ? $orcatrata['Entregador'] = '1' : FALSE;
+																		if ($orcatrata['Entregador'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																		}
+																	?>
+																</select>
+															</div>	
+														</div>
+														<div class="row">		
+															<div class="col-md-12 text-right">
 																<label for="EnviadoOrca">Enviado? </label><br>
 																<div class="btn-group" data-toggle="buttons">
 																	<?php
@@ -1326,25 +1345,6 @@
 																	?>
 																</div>
 															</div>													
-														</div>
-														<div class="row">				
-															<div class="col-md-12 text-right">
-																<label class="col-md-12 text-right" for="Entregador">Entregador</label>
-																<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-																		id="Entregador" name="Entregador">
-																	<option value="">-- Sel. o Entregador --</option>
-																	<?php
-																	foreach ($select['Entregador'] as $key => $row) {
-																			#(!$orcatrata['Entregador']) ? $orcatrata['Entregador'] = '1' : FALSE;
-																		if ($orcatrata['Entregador'] == $key) {
-																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																		} else {
-																			echo '<option value="' . $key . '">' . $row . '</option>';
-																		}
-																		}
-																	?>
-																</select>
-															</div>	
 														</div>
 													</div>
 												</div>

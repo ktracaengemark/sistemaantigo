@@ -144,10 +144,15 @@ function buscaEnderecoCliente(id) {
             for (i = 0; i < data.length; i++) {
 
                 if (data[i].id == id) {
-					
 					//console.log( data[i].enderecocliente);
+					$('#Cep').val(data[i].cepcliente);
                     $('#Logradouro').val(data[i].enderecocliente);
 					$('#Numero').val(data[i].numerocliente);
+					$('#Complemento').val(data[i].complementocliente);
+					$('#Bairro').val(data[i].bairrocliente);
+					$('#Cidade').val(data[i].municipiocliente);
+					$('#Estado').val(data[i].estadocliente);
+					$('#Referencia').val(data[i].referenciacliente);
                     break;
                 }
 

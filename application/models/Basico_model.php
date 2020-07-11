@@ -398,7 +398,7 @@ class Basico_model extends CI_Model {
 
         if (isset($data) && $data) {
 
-			$query = $this->db->query('SELECT * FROM Tab_RelaPes WHERE idTab_RelaPes = "' . $data . '"');
+$query = $this->db->query('SELECT * FROM Tab_RelaPes WHERE idTab_RelaPes = "' . $data . '"');
 
             if ($query->num_rows() === 0) {
                 return '';
@@ -1239,8 +1239,8 @@ if (isset($data) && $data) {
 				P.idTab_Produtos = V.idTab_Produtos AND
 				P.Prod_Serv = "P"
 			ORDER BY
-				TDS.Desconto ASC,
 				P.Nome_Prod ASC,
+				TDS.Desconto ASC,
 				TPM.Promocao ASC,
 				TOP2.Opcao,
 				TOP1.Opcao,
@@ -1269,8 +1269,8 @@ if (isset($data) && $data) {
 				P.idTab_Produtos = V.idTab_Produtos AND
 				P.Prod_Serv = "P"
 			ORDER BY
-				TDS.Desconto ASC,
 				P.Nome_Prod ASC,
+				TDS.Desconto ASC,
 				TPM.Promocao ASC,
 				TOP2.Opcao,
 				TOP1.Opcao,

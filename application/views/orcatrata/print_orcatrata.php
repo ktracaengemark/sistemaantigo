@@ -212,7 +212,7 @@
 							<thead>
 								<tr>
 									<th class="col-md-3" scope="col">Tipo</th>
-									<th class="col-md-3" scope="col">Entregador</th>
+									<th class="col-md-3" scope="col">Entreg.</th>
 									<th class="col-md-3" scope="col">Data</th>
 									<th class="col-md-3" scope="col">Hora</th>
 								</tr>
@@ -231,7 +231,7 @@
 							<thead>
 								<tr>
 									<th class="col-md-2" scope="col">Cep</th>
-									<th class="col-md-4" scope="col">Endereço</th>
+									<th class="col-md-4" scope="col">End.</th>
 									<th class="col-md-2" scope="col">Número</th>
 									<th class="col-md-4" scope="col">Compl.</th>
 								</tr>
@@ -267,45 +267,45 @@
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-2" scope="col">Produtos R$</th>
-									<th class="col-md-2" scope="col">Serviços R$</th>
-									<th class="col-md-2" scope="col">Frete R$</th>
+									<th class="col-md-2" scope="col">Produtos</th>
+									<th class="col-md-2" scope="col">Serviços</th>
+									<th class="col-md-2" scope="col">Frete</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td><?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
-									<td><?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
-									<td><?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>
+									<td>R$ <?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
+									<td>R$ <?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
+									<td>R$ <?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>
 								</tr>
 							</tbody>
 							<thead>
 								<tr>
-									<th class="col-md-2" scope="col">Total R$</th>
-									<th class="col-md-2" scope="col">Troco para R$</th>
-									<th class="col-md-2" scope="col">Troco R$</th>
+									<th class="col-md-2" scope="col">Total</th>
+									<th class="col-md-2" scope="col">Troco para</th>
+									<th class="col-md-2" scope="col">Troco</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td><?php echo number_format($orcatrata['ValorTotalOrca'], 2, ',', '.') ?></td>
-									<td><?php echo number_format($orcatrata['ValorDinheiro'], 2, ',', '.') ?></td>
-									<td><?php echo number_format($orcatrata['ValorTroco'], 2, ',', '.') ?></td>
+									<td>R$ <?php echo number_format($orcatrata['ValorTotalOrca'], 2, ',', '.') ?></td>
+									<td>R$ <?php echo number_format($orcatrata['ValorDinheiro'], 2, ',', '.') ?></td>
+									<td>R$ <?php echo number_format($orcatrata['ValorTroco'], 2, ',', '.') ?></td>
 								</tr>
 							</tbody>
 						</table>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-4" scope="col">Forma</th>
-									<th class="col-md-4" scope="col">Pago</th>
+									<!--<th class="col-md-4" scope="col">Tipo</th>-->
+									<th class="col-md-8" scope="col">Forma de Pagamento</th>
 									<th class="col-md-4" scope="col">Venc.</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td><?php echo $orcatrata['Modalidade'] ?></td>
-									<td><?php echo $orcatrata['QtdParcelasOrca'] ?>X<?php echo $orcatrata['FormaPag'] ?></td>
+									<!--<td><?php echo $orcatrata['Modalidade'] ?> em <?php echo $orcatrata['QtdParcelasOrca'] ?> X </td>-->
+									<td><?php echo $orcatrata['FormaPag'] ?></td>
 									<td><?php echo $orcatrata['DataVencimentoOrca'] ?></td>
 								</tr>
 							</tbody>

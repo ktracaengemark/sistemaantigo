@@ -55,8 +55,14 @@ if ($_GET['q']==100) {
 
         $event_array[] = array(
             'id' => $row['idApp_Cliente'],
+			'cepcliente' => utf8_encode($row['CepCliente']),
             'enderecocliente' => utf8_encode($row['EnderecoCliente']),
 			'numerocliente' => utf8_encode($row['NumeroCliente']),
+			'complementocliente' => utf8_encode($row['ComplementoCliente']),
+			'bairrocliente' => utf8_encode($row['BairroCliente']),
+			'municipiocliente' => utf8_encode($row['CidadeCliente']),
+			'estadocliente' => utf8_encode($row['EstadoCliente']),
+			'referenciacliente' => utf8_encode($row['ReferenciaCliente']),
         );
     }
 
@@ -397,8 +403,8 @@ elseif ($_GET['q'] == 90) {
 				P.idTab_Produtos = V.idTab_Produtos AND
 				P.Prod_Serv = "P"
 			ORDER BY
-				TDS.Desconto ASC,
 				P.Nome_Prod ASC,
+				TDS.Desconto ASC,
 				TPM.Promocao ASC,
 				TOP2.Opcao,
 				TOP1.Opcao,
