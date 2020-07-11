@@ -812,6 +812,16 @@
 										</div>
 									</div>
 									<?php } ?>
+									<!--
+									<input type="hidden" name="CepCliente" id="CepCliente" value="<?php echo $orcatrata['Cep']; ?>">
+									<input type="hidden" name="EnderecoCliente" id="EnderecoCliente" value="<?php echo $orcatrata['Logradouro']; ?>">
+									<input type="hidden" name="NumeroCliente" id="NumeroCliente" value="<?php echo $orcatrata['Numero']; ?>">
+									<input type="hidden" name="ComplementoCliente" id="ComplementoCliente" value="<?php echo $orcatrata['Complemento']; ?>">
+									<input type="hidden" name="BairroCliente" id="BairroCliente" value="<?php echo $orcatrata['Bairro']; ?>">
+									<input type="hidden" name="CidadeCliente" id="CidadeCliente" value="<?php echo $orcatrata['Cidade']; ?>">
+									<input type="hidden" name="EstadoCliente" id="EstadoCliente" value="<?php echo $orcatrata['Estado']; ?>">
+									<input type="hidden" name="ReferenciaCliente" id="ReferenciaCliente" value="<?php echo $orcatrata['Referencia']; ?>">
+									-->
 									<div class="row ">
 										<div class="col-md-2 ">
 											<label class="" for="Cep">Cep:</label>

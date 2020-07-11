@@ -637,6 +637,19 @@ class Orcatrata extends CI_Controller {
 			'DataEntregaOrca',
 			'HoraEntregaOrca',
         ), TRUE));
+		
+		$data['query'] = $this->input->post(array(
+			'idApp_Cliente',
+			'CepCliente',
+            'EnderecoCliente',
+			'NumeroCliente',
+			'ComplementoCliente',
+			'CidadeCliente',
+            'BairroCliente',
+            'MunicipioCliente',
+			'EstadoCliente',
+			'ReferenciaCliente',
+        ), TRUE);
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
         //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
@@ -952,7 +965,16 @@ class Orcatrata extends CI_Controller {
             
 			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_OrcaTrata ####
-            $data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
+            
+			$data['orcatrata']['Logradouro'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
+			$data['orcatrata']['Numero'] = trim(mb_strtoupper($data['orcatrata']['Numero'], 'ISO-8859-1'));
+			$data['orcatrata']['Complemento'] = trim(mb_strtoupper($data['orcatrata']['Complemento'], 'ISO-8859-1'));
+			$data['orcatrata']['Bairro'] = trim(mb_strtoupper($data['orcatrata']['Bairro'], 'ISO-8859-1'));
+			$data['orcatrata']['Cidade'] = trim(mb_strtoupper($data['orcatrata']['Cidade'], 'ISO-8859-1'));
+			$data['orcatrata']['Estado'] = trim(mb_strtoupper($data['orcatrata']['Estado'], 'ISO-8859-1'));
+			$data['orcatrata']['Referencia'] = trim(mb_strtoupper($data['orcatrata']['Referencia'], 'ISO-8859-1'));
+			
+			$data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'mysql');
             $data['orcatrata']['DataEntregaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntregaOrca'], 'mysql');
 			$data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'mysql');
@@ -1012,7 +1034,28 @@ class Orcatrata extends CI_Controller {
             echo "</pre>";
             exit ();
             */
-
+			
+				#### APP_Cliente ####
+				$data['query']['CepCliente'] = $data['orcatrata']['Cep'];
+				$data['query']['EnderecoCliente'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
+				$data['query']['NumeroCliente'] = trim(mb_strtoupper($data['orcatrata']['Numero'], 'ISO-8859-1'));
+				$data['query']['ComplementoCliente'] = trim(mb_strtoupper($data['orcatrata']['Complemento'], 'ISO-8859-1'));
+				$data['query']['BairroCliente'] = trim(mb_strtoupper($data['orcatrata']['Bairro'], 'ISO-8859-1'));
+				$data['query']['CidadeCliente'] = trim(mb_strtoupper($data['orcatrata']['Cidade'], 'ISO-8859-1'));
+				$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['orcatrata']['Estado'], 'ISO-8859-1'));
+				$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['orcatrata']['Referencia'], 'ISO-8859-1'));
+							
+				$data['update']['query']['anterior'] = $this->Orcatrata_model->get_cliente($data['orcatrata']['idApp_Cliente']);
+				$data['update']['query']['campos'] = array_keys($data['query']);
+				/*
+				$data['update']['query']['auditoriaitem'] = $this->basico->set_log(
+					$data['update']['query']['anterior'],
+					$data['query'],
+					$data['update']['query']['campos'],
+					$data['query']['idApp_Cliente'], TRUE);
+				*/	
+				$data['update']['query']['bd'] = $this->Orcatrata_model->update_cliente($data['query'], $data['orcatrata']['idApp_Cliente']);
+			
             #### App_Servico ####
             if (isset($data['servico'])) {
                 $max = count($data['servico']);
