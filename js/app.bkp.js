@@ -127,43 +127,14 @@ function tipoFrete(tipofrete){
 	}		
 
 }
-
-function buscaEnderecoCliente(id) {
 	
-	//console.log(id);
-
-    $.ajax({
-
-		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=100&idCliente=' + id,
-        //url: window.location.origin+ '/' + app + '/EnderecoCliente_json.php?q=100&idCliente=' + id,
-		// dataType json
-        dataType: "json",
-		//method:'get',
-        // função para de sucesso
-        success: function (data) {
-            for (i = 0; i < data.length; i++) {
-
-                if (data[i].id == id) {
-					
-					//console.log( data[i].enderecocliente);
-                    $('#Logradouro').val(data[i].enderecocliente);
-					$('#Numero').val(data[i].numerocliente);
-                    break;
-                }
-
-            }//fim do laço
-		}
-		
-    });//termina o ajax
-	
-}
-
 //Função que desabilita os campos não disponiveis.
 function camposDisponiveis () {
 	$('.campos').hide();
 	//document.getElementById('campos').style.display = "none";
 	
 }
+
 
 //variável de opções necessária para o funcionamento do datepiker em divs
 //geradas dinamicamente
@@ -2587,6 +2558,7 @@ function nomeProduto_2(id, tabela, campo, num) {
 		}
     });//termina o ajax
 }
+
  
  function nomeProduto_BKP() {
 	//alert('Funcionando'); 
@@ -2918,7 +2890,7 @@ function buscaValor1Tabelas(id, campo, tabela, num, campo2) {
 					$('#QtdIncremento'+num).val(data[i].qtdinc);
 					$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
 					$('#idTab_Valor_'+campo2+num).val(data[i].id_valor);
-					console.log( data[i].id_produto );
+					//console.log( data[i].id_produto );
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
 

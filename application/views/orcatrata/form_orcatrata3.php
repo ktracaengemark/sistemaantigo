@@ -703,7 +703,7 @@
 												<div class="row">
 													<div class="col-md-12 text-left">
 														<label  for="idApp_Cliente">Cliente</label>
-														<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+														<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value)" <?php echo $readonly; ?>
 																id="idApp_Cliente" autofocus name="idApp_Cliente">
 															<option value="">-- Sel. Cliente --</option>
 															<?php
@@ -813,17 +813,17 @@
 									</div>
 									<?php } ?>
 									<div class="row ">
-										<div class="col-md-3 ">
+										<div class="col-md-2 ">
 											<label class="" for="Cep">Cep:</label>
 											<input type="text" class="form-control " id="Cep" maxlength="8" <?php echo $readonly; ?>
 												   name="Cep" value="<?php echo $orcatrata['Cep']; ?>">
 										</div>
-										<div class="col-md-3 ">
+										<div class="col-md-5 ">
 											<label class="" for="Logradouro">Endreço:</label>
 											<input type="text" class="form-control " id="Logradouro" maxlength="100" <?php echo $readonly; ?>
 												   name="Logradouro" value="<?php echo $orcatrata['Logradouro']; ?>">
 										</div>
-										<div class="col-md-3 ">
+										<div class="col-md-2 ">
 											<label class="" for="Numero">Número:</label>
 											<input type="text" class="form-control " id="Numero" maxlength="100" <?php echo $readonly; ?>
 												   name="Numero" value="<?php echo $orcatrata['Numero']; ?>">
@@ -843,9 +843,9 @@
 											<input type="text" class="form-control " id="Cidade" maxlength="100" <?php echo $readonly; ?>
 												   name="Cidade" value="<?php echo $orcatrata['Cidade']; ?>">
 										</div>
-										<div class="col-md-3 ">
+										<div class="col-md-2 ">
 											<label class="" for="Estado">Estado:</label>
-											<input type="text" class="form-control " id="Estado" maxlength="100" <?php echo $readonly; ?>
+											<input type="text" class="form-control " id="Estado" maxlength="2" <?php echo $readonly; ?>
 												   name="Estado" value="<?php echo $orcatrata['Estado']; ?>">
 										</div>
 										<div class="col-md-3 ">
@@ -874,7 +874,7 @@
 										-->
 										
 									</div>
-																				
+									<br>											
 									<div class="row">
 										<div class="col-md-4">
 											<div class="panel panel-default">

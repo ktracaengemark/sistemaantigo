@@ -41,6 +41,27 @@ if ($_GET['q']==1) {
 
 }
 
+if ($_GET['q']==100) {
+
+    $result = mysql_query('
+		SELECT *
+        FROM
+            App_Cliente
+        WHERE
+			idApp_Cliente = ' . $_GET['idCliente'] . '
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idApp_Cliente'],
+            'enderecocliente' => utf8_encode($row['EnderecoCliente']),
+			'numerocliente' => utf8_encode($row['NumeroCliente']),
+        );
+    }
+
+}
+
 elseif ($_GET['q'] == 16) {
 
     $result = mysql_query('
@@ -928,6 +949,7 @@ elseif ($_GET['q'] == 105) {
     } 
     
 }
+
 echo json_encode($event_array);
 mysql_close($link);
 ?>

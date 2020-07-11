@@ -188,9 +188,9 @@
 														   name="OrgaoExp" value="<?php echo $query['OrgaoExp']; ?>">
 												</div>
 												<div class="col-md-3">
-													<label for="EstadoCliente">Estado Emissor:</label>
+													<label for="EstadoExp">Estado Emissor:</label>
 													<input type="text" class="form-control" maxlength="2" <?php echo $readonly; ?>
-														   name="EstadoCliente" value="<?php echo $query['EstadoCliente']; ?>">
+														   name="EstadoExp" value="<?php echo $query['EstadoExp']; ?>">
 												</div>
 												<div class="col-md-3">
 													<label for="DataEmissao">Data de Emissão:</label>
@@ -202,16 +202,44 @@
 
 										<div class="form-group">
 											<div class="row">
-												<div class="col-md-3">
+												<div class="col-md-2">
+													<label for="CepCliente">Cep:</label>
+													<input type="text" class="form-control" id="CepCliente" maxlength="8" <?php echo $readonly; ?>
+														   name="CepCliente" value="<?php echo $query['CepCliente']; ?>">
+												</div>
+												<div class="col-md-5">
 													<label for="EnderecoCliente">Endreço:</label>
 													<input type="text" class="form-control" id="EnderecoCliente" maxlength="100" <?php echo $readonly; ?>
 														   name="EnderecoCliente" value="<?php echo $query['EnderecoCliente']; ?>">
 												</div>
+												<div class="col-md-2">
+													<label for="NumeroCliente">Numero:</label>
+													<input type="text" class="form-control" id="NumeroCliente" maxlength="100" <?php echo $readonly; ?>
+														   name="NumeroCliente" value="<?php echo $query['NumeroCliente']; ?>">
+												</div>
+												<div class="col-md-3">
+													<label for="ComplementoCliente">Complemento:</label>
+													<input type="text" class="form-control" id="ComplementoCliente" maxlength="100" <?php echo $readonly; ?>
+														   name="ComplementoCliente" value="<?php echo $query['ComplementoCliente']; ?>">
+												</div>
+											</div>	
+											<div class="row">	
 												<div class="col-md-3">
 													<label for="BairroCliente">Bairro:</label>
 													<input type="text" class="form-control" id="BairroCliente" maxlength="100" <?php echo $readonly; ?>
 														   name="BairroCliente" value="<?php echo $query['BairroCliente']; ?>">
 												</div>
+												<div class="col-md-3">
+													<label for="CidadeCliente">Município:</label>
+													<input type="text" class="form-control" id="CidadeCliente" maxlength="100" <?php echo $readonly; ?>
+														   name="CidadeCliente" value="<?php echo $query['CidadeCliente']; ?>">
+												</div>
+												<div class="col-md-2">
+													<label for="EstadoCliente">Estado:</label>
+													<input type="text" class="form-control" id="EstadoCliente" maxlength="2" <?php echo $readonly; ?>
+														   name="EstadoCliente" value="<?php echo $query['EstadoCliente']; ?>">
+												</div>
+												<!--
 												<div class="col-md-3">
 													<label for="MunicipioCliente">Município:</label><br>
 													<select data-placeholder="Selecione um Município..." class="form-control Chosen" <?php echo $disabled; ?>
@@ -228,10 +256,12 @@
 														?>
 													</select>
 												</div>
-												<div class="col-md-3">
-													<label for="CepCliente">Cep:</label>
-													<input type="text" class="form-control" maxlength="8" <?php echo $readonly; ?>
-														   name="CepCliente" value="<?php echo $query['CepCliente']; ?>">
+												-->
+												<div class="col-md-3 ">
+													<label class="" for="ReferenciaCliente">Referencia:</label>
+													<textarea class="form-control " id="ReferenciaCliente" <?php echo $readonly; ?>
+															  name="ReferenciaCliente"><?php echo $query['ReferenciaCliente']; ?>
+													</textarea>
 												</div>
 											</div>
 										</div>
