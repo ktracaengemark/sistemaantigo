@@ -130,12 +130,12 @@
 											
 											}
 										   
-											if ($query['Endereco'] || $query['Bairro'] || $query['Municipio']) {
+											if ($query['EnderecoFornecedor'] || $query['BairroFornecedor'] || $query['MunicipioFornecedor']) {
 												
 											echo '                                                 
 											<tr>
 												<td><span class="glyphicon glyphicon-home"></span> Endereço:</td>
-												<td>' . $query['Endereco'] . ' ' . $query['Bairro'] . ' ' . $query['Municipio'] . '</td>
+												<td>' . $query['EnderecoFornecedor'] . ' ' . $query['BairroFornecedor'] . ' ' . $query['MunicipioFornecedor'] . '</td>
 											</tr>
 											';
 											

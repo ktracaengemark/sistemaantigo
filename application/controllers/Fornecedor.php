@@ -61,9 +61,9 @@ class Fornecedor extends CI_Controller {
             'Telefone3',
             'Ativo',
             'Sexo',
-            'Endereco',
-            'Bairro',
-            'Municipio',
+            'EnderecoFornecedor',
+            'BairroFornecedor',
+            'MunicipioFornecedor',
             'Obs',
 			'Email',
             'idSis_Usuario',
@@ -86,7 +86,7 @@ class Fornecedor extends CI_Controller {
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();		
-        $data['select']['Municipio'] = $this->Basico_model->select_municipio();
+        $data['select']['MunicipioFornecedor'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Atividade'] = $this->Atividade_model->select_atividade();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
@@ -108,8 +108,8 @@ class Fornecedor extends CI_Controller {
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
         
-        if ($data['query']['Sexo'] || $data['query']['Endereco'] || $data['query']['Bairro'] || 
-                $data['query']['Municipio'] || $data['query']['Obs'] || $data['query']['Email'] || $data['query']['Cnpj'])
+        if ($data['query']['Sexo'] || $data['query']['EnderecoFornecedor'] || $data['query']['BairroFornecedor'] || 
+                $data['query']['MunicipioFornecedor'] || $data['query']['Obs'] || $data['query']['Email'] || $data['query']['Cnpj'])
             $data['collapse'] = '';
         else 
             $data['collapse'] = 'class="collapse"';            
@@ -180,9 +180,9 @@ class Fornecedor extends CI_Controller {
             'Telefone3',
             'Ativo',
             'Sexo',
-            'Endereco',
-            'Bairro',
-            'Municipio',
+            'EnderecoFornecedor',
+            'BairroFornecedor',
+            'MunicipioFornecedor',
             'Obs',
             'idSis_Usuario',
             'Email',
@@ -210,7 +210,7 @@ class Fornecedor extends CI_Controller {
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();		
-        $data['select']['Municipio'] = $this->Basico_model->select_municipio();
+        $data['select']['MunicipioFornecedor'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Atividade'] = $this->Atividade_model->select_atividade();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
@@ -231,8 +231,8 @@ class Fornecedor extends CI_Controller {
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
 		
-        if ($data['query']['Sexo'] || $data['query']['Endereco'] || $data['query']['Bairro'] || 
-                $data['query']['Municipio'] || $data['query']['Obs'] || $data['query']['Email'] || $data['query']['Cnpj'])
+        if ($data['query']['Sexo'] || $data['query']['EnderecoFornecedor'] || $data['query']['BairroFornecedor'] || 
+                $data['query']['MunicipioFornecedor'] || $data['query']['Obs'] || $data['query']['Email'] || $data['query']['Cnpj'])
             $data['collapse'] = '';
         else 
             $data['collapse'] = 'class="collapse"';        
@@ -394,11 +394,11 @@ class Fornecedor extends CI_Controller {
         ($data['query']['Telefone3']) ? $data['query']['Telefone'] = $data['query']['Telefone'] . ' - ' . $data['query']['Telefone3'] : FALSE;
         
         
-        if ($data['query']['Municipio']) {
-            $mun = $this->Basico_model->get_municipio($data['query']['Municipio']);
-            $data['query']['Municipio'] = $mun['NomeMunicipio'] . '/' . $mun['Uf'];
+        if ($data['query']['MunicipioFornecedor']) {
+            $mun = $this->Basico_model->get_municipio($data['query']['MunicipioFornecedor']);
+            $data['query']['MunicipioFornecedor'] = $mun['NomeMunicipio'] . '/' . $mun['Uf'];
         } else {
-            $data['query']['Municipio'] = $data['query']['Uf'] = $mun['Uf'] = '';
+            $data['query']['MunicipioFornecedor'] = $data['query']['UfFornecedor'] = $mun['Uf'] = '';
         }
 
         $data['contatofornec'] = $this->Contatofornec_model->lista_contatofornec(TRUE);

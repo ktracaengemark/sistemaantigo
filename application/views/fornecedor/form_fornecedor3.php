@@ -106,11 +106,11 @@
 								</div>
 							</div>
 							-->
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<div class="row">
 									<div class="col-md-12 text-left">
 										<label for="Atividade">Ativ.:</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+										<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 												id="Atividade" name="Atividade">
 											<option value="">-- Sel. Atividade --</option>
 											<?php
@@ -202,27 +202,27 @@
 						<div class="form-group">
 							<div class="row">
 								<div class="col-md-6">
-									<label for="Endereco">Endreço:</label>
-									<input type="text" class="form-control" id="Endereco" maxlength="100" <?php echo $readonly; ?>
-										   name="Endereco" value="<?php echo $query['Endereco']; ?>">
+									<label for="EnderecoFornecedor">Endreço:</label>
+									<input type="text" class="form-control" id="EnderecoFornecedor" maxlength="100" <?php echo $readonly; ?>
+										   name="EnderecoFornecedor" value="<?php echo $query['EnderecoFornecedor']; ?>">
 								</div>
 								<div class="col-md-6">
-									<label for="Bairro">Bairro:</label>
-									<input type="text" class="form-control" id="Bairro" maxlength="100" <?php echo $readonly; ?>
-										   name="Bairro" value="<?php echo $query['Bairro']; ?>">
+									<label for="BairroFornecedor">Bairro:</label>
+									<input type="text" class="form-control" id="BairroFornecedor" maxlength="100" <?php echo $readonly; ?>
+										   name="BairroFornecedor" value="<?php echo $query['BairroFornecedor']; ?>">
 								</div>
 							</div>
 						</div> 
 						<div class="form-group">
 							<div class="row">
 								<div class="col-md-6">
-									<label for="Municipio">Município:</label><br>
-									<select data-placeholder="Selecione um Município..." class="form-control" <?php echo $disabled; ?>
-											id="Municipio" name="Municipio">
+									<label for="MunicipioFornecedor">Município:</label><br>
+									<select data-placeholder="Selecione um Município..." class="form-control Chosen" <?php echo $disabled; ?>
+											id="MunicipioFornecedor" name="MunicipioFornecedor">
 										<option value="">-- Selecione uma opção --</option>
 										<?php
-										foreach ($select['Municipio'] as $key => $row) {
-											if ($query['Municipio'] == $key) {
+										foreach ($select['MunicipioFornecedor'] as $key => $row) {
+											if ($query['MunicipioFornecedor'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 											} else {
 												echo '<option value="' . $key . '">' . $row . '</option>';

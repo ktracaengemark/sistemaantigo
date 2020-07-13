@@ -7314,16 +7314,16 @@ exit();*/
                 E.Telefone2,
                 E.Telefone3,
                 E.Sexo,
-                E.Endereco,
-                E.Bairro,
-                CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
+                E.EnderecoFornecedor,
+                E.BairroFornecedor,
+                CONCAT(M.NomeMunicipio, "/", M.Uf) AS MunicipioFornecedor,
                 E.Email,
 				CE.NomeContatofornec,
 				TCE.Relacao,
 				CE.Sexo
             FROM
                 App_Fornecedor AS E
-                    LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
+                    LEFT JOIN Tab_Municipio AS M ON E.MunicipioFornecedor = M.idTab_Municipio
 					LEFT JOIN App_Contatofornec AS CE ON E.idApp_Fornecedor = CE.idApp_Fornecedor
 					LEFT JOIN Tab_Relacao AS TCE ON TCE.idTab_Relacao = CE.Relacao
 					LEFT JOIN Tab_TipoFornec AS TF ON TF.Abrev = E.TipoFornec
