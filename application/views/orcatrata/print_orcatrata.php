@@ -151,7 +151,7 @@
 
 								<tr>
 									<!--<td><?php echo $produto[$i]['idApp_OrcaTrata'] ?></td>-->
-									<td><?php echo $produto[$i]['QtdProduto'] ?></td>														
+									<td><?php echo $produto[$i]['QtdProduto'] ?> = <b><?php echo $produto[$i]['SubTotalQtd'] ?> Unid</b></td>														
 									<!--<td><?php echo $produto[$i]['CodProd'] ?></td>
 									<td><?php echo $produto[$i]['Prodaux3'] ?></td>-->					
 									<td><?php echo $produto[$i]['NomeProduto'] ?></td>							

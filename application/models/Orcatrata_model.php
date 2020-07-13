@@ -206,6 +206,7 @@ class Orcatrata_model extends CI_Model {
 				TAP.ValorProduto,
 				TAP.QtdProduto,
 				TAP.QtdIncremento,
+				(TAP.QtdProduto * TAP.QtdIncremento) AS SubTotalQtd,
 				TAP.ValorCompraProduto,
 				TAP.QtdCompraProduto,
 				TAP.ObsProduto,

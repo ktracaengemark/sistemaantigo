@@ -526,7 +526,7 @@
 											?>
 
 											<tr>
-												<td><?php echo $produto[$i]['QtdProduto'] ?> X <?php echo $produto[$i]['QtdIncremento'] ?> Unid</td>
+												<td><?php echo $produto[$i]['QtdProduto'] ?> X <?php echo $produto[$i]['QtdIncremento'] ?> = <b><?php echo $produto[$i]['SubTotalQtd'] ?> Unid</b></td>
 												<td><?php echo $produto[$i]['Produto'] ?></td>							
 												<td><?php echo number_format($produto[$i]['ValorProduto'], 2, ',', '.') ?></td>
 												<td><?php echo number_format($produto[$i]['Subtotal_Produto'], 2, ',', '.') ?></td>
