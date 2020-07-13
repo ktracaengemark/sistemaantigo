@@ -698,7 +698,7 @@
 								<div class="panel-heading">	
 									<h4 class="mb-3"><b>Entrega & Cliente</b></h4>
 									<div class="row ">
-										<div class="col-md-4 mb-3">
+										<div class="col-md-3 mb-3">
 											<label for="TipoFrete">Forma de Entrega:</label><br>
 											<select data-placeholder="Selecione uma Forma..." class="form-control Chosen" <?php echo $disabled; ?>
 													id="TipoFrete" name="TipoFrete">
@@ -716,7 +716,7 @@
 											<?php echo form_error('TipoFrete'); ?>
 										</div>
 										<div <?php echo $visivel; ?>>	
-											<div class="col-md-8">
+											<div class="col-md-6">
 												<div class="row">
 													<div class="col-md-12 text-left">
 														<label  for="idApp_Cliente">Cliente</label>
@@ -779,6 +779,34 @@
 													</div>
 												</div>
 												<?php echo form_error('idApp_Cliente'); ?>
+											</div>
+										</div>
+										<div class="col-md-3 text-left">
+											<label for="AtualizaEndereco">Atualizar Endereço?</label><br>
+											<div class="btn-group" data-toggle="buttons">
+												<?php
+												foreach ($select['AtualizaEndereco'] as $key => $row) {
+													if (!$cadastrar['AtualizaEndereco'])$cadastrar['AtualizaEndereco'] = 'N';
+
+													($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+													if ($cadastrar['AtualizaEndereco'] == $key) {
+														echo ''
+														. '<label class="btn btn-warning active" name="AtualizaEndereco_' . $hideshow . '">'
+														. '<input type="radio" name="AtualizaEndereco" id="' . $hideshow . '" '
+														. 'autocomplete="off" value="' . $key . '" checked>' . $row
+														. '</label>'
+														;
+													} else {
+														echo ''
+														. '<label class="btn btn-default" name="AtualizaEndereco_' . $hideshow . '">'
+														. '<input type="radio" name="AtualizaEndereco" id="' . $hideshow . '" '
+														. 'autocomplete="off" value="' . $key . '" >' . $row
+														. '</label>'
+														;
+													}
+												}
+												?>
 											</div>
 										</div>
 									</div>

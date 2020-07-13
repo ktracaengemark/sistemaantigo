@@ -1164,7 +1164,7 @@ class Orcatrata_model extends CI_Model {
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "2" AND
 				OT.Tipo_Orca = "B" AND
-				OT.FinalizadoOrca = "N" AND
+				
 				OT.ConcluidoOrca = "N" AND
 				OT.ProntoOrca = "S" AND
 				OT.EnviadoOrca = "N"
@@ -1251,7 +1251,7 @@ class Orcatrata_model extends CI_Model {
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "2" AND
 				OT.Tipo_Orca = "B" AND
-				OT.FinalizadoOrca = "N" AND
+				
 				OT.QuitadoOrca = "N" 
 			ORDER BY 
 				OT.DataEntregaOrca ASC,
@@ -1335,7 +1335,7 @@ class Orcatrata_model extends CI_Model {
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "2" AND
 				OT.Tipo_Orca = "B" AND
-				OT.FinalizadoOrca = "N" AND
+				
 				OT.ConcluidoOrca = "N" AND
 				OT.ProntoOrca = "N" AND
 				OT.EnviadoOrca = "N"
@@ -1422,7 +1422,7 @@ class Orcatrata_model extends CI_Model {
 				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "2" AND
 				OT.Tipo_Orca = "B" AND
-				OT.FinalizadoOrca = "N" AND
+				
 				OT.ConcluidoOrca = "N" AND
 				OT.ProntoOrca = "S" AND
 				OT.EnviadoOrca = "S" AND

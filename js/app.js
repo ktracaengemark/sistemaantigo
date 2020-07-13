@@ -129,9 +129,8 @@ function tipoFrete(tipofrete){
 }
 
 function buscaEnderecoCliente(id) {
-	
 	//console.log(id);
-
+	//exit();
     $.ajax({
 
 		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=100&idCliente=' + id,

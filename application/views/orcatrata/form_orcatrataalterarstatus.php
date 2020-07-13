@@ -28,7 +28,7 @@
 					</div>
 					<div style="overflow: auto; height: auto; ">
 						<div class="panel-group">	
-
+							<input type="hidden" name="DataOrca" value="<?php echo $orcatrata['DataOrca'] ?>">
 							<input type="hidden" name="Cadastrar" value="<?php echo $cadastrar['Cadastrar'] ?>">
 							<input type="hidden" name="idApp_Cliente" value="<?php echo $orcatrata['idApp_Cliente'] ?>">
 							<input type="hidden" name="TipoFinanceiro" value="<?php echo $orcatrata['TipoFinanceiro'] ?>">
@@ -430,6 +430,9 @@
 								<input type="hidden" name="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>">
 								<input type="hidden" name="ValorTotalOrca" value="<?php echo $orcatrata['ValorTotalOrca'] ?>">
 								<input type="hidden" name="PrazoEntrega" value="<?php echo $orcatrata['PrazoEntrega'] ?>">
+								<input type="hidden" name="DataEntregaOrca" value="<?php echo $orcatrata['DataEntregaOrca'] ?>">
+								<input type="hidden" name="HoraEntregaOrca" value="<?php echo $orcatrata['HoraEntregaOrca'] ?>">
+								
 							</div>	
 							<input type="hidden" name="AVAP" value="<?php echo $orcatrata['AVAP'] ?>">
 							<input type="hidden" name="FormaPagamento" value="<?php echo $orcatrata['FormaPagamento'] ?>">

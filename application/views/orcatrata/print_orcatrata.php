@@ -1,8 +1,8 @@
 <?php if (isset($msg)) echo $msg; ?>
 
 <div class="col-sm-offset-3 col-md-6 ">		
-	<?php if ( !isset($evento) && isset($_SESSION['Orcatrata'])) { ?>
-	<?php if ($_SESSION['Orcatrata']['idApp_OrcaTrata'] != 1 ) { ?>
+	<?php if ( !isset($evento) && isset($query)) { ?>
+	<?php if ($query['idApp_OrcaTrata'] != 1 ) { ?>
 			<nav class="navbar navbar-inverse navbar-fixed" role="banner">
 			  <div class="container-fluid">
 				<div class="navbar-header">
@@ -14,21 +14,21 @@
 					<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/cadastrar3/'; ?>">
 						<span class="glyphicon glyphicon-plus"></span> Novo
 					</a>
-					<?php if ($_SESSION['Orcatrata']['Tipo_Orca'] == "B" ) { ?>
-						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterarstatus/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
+					<?php if ($query['Tipo_Orca'] == "B" ) { ?>
+						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterarstatus/' . $query['idApp_OrcaTrata']; ?>">
 							<span class="glyphicon glyphicon-edit"></span> Atualizar Status										
 						</a>
-						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterar2/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
+						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterar2/' . $query['idApp_OrcaTrata']; ?>">
 							<span class="glyphicon glyphicon-edit"></span> Editar Pedido										
 						</a>
-					<?php } else if ($_SESSION['Orcatrata']['Tipo_Orca'] == "O" ) { ?>
-						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alteraronline/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
+					<?php } else if ($query['Tipo_Orca'] == "O" ) { ?>
+						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alteraronline/' . $query['idApp_OrcaTrata']; ?>">
 							<span class="glyphicon glyphicon-edit"></span> Editar "O"										
 						</a>					
 					<?php } ?>
 					<!--
-					<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-						<?php echo '<small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '.</small>' ?> 
+					<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $cliente['idApp_Cliente']; ?>">
+						<?php echo '<small>' . $cliente['idApp_Cliente'] . '</small> - <small>' . $cliente['NomeCliente'] . '.</small>' ?> 
 					</a>
 					-->
 				</div>
@@ -47,7 +47,7 @@
 						<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
 							<div class="btn-group " role="group" aria-label="...">
 								<a <?php if (preg_match("/orcatrata\/alterar2\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-									<a href="<?php echo base_url() . 'orcatrata/alterar2/' . $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>">
+									<a href="<?php echo base_url() . 'orcatrata/alterar2/' . $query['idApp_OrcaTrata']; ?>">
 										<button type="button" class="btn btn-md btn-default">
 											<span class="glyphicon glyphicon-edit"></span> Editar
 										</button>										
@@ -87,14 +87,14 @@
 								<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>" class="img-responsive" width='120'>
 							</div>
 							<div class="col-md-9 text-left">
-								<h2><?php echo '<strong>' . $_SESSION['Orcatrata']['NomeEmpresa'] . '</strong>' ?></h2>
+								<h2><?php echo '<strong>' . $query['NomeEmpresa'] . '</strong>' ?></h2>
 								<h4>CNPJ:<?php echo '<strong>' . $orcatrata['Cnpj'] . '</strong>' ?></h4>
 								<h4>Endereço:<?php echo '<small>' . $orcatrata['EnderecoEmpresa'] . '</small> <small>' . $orcatrata['NumeroEmpresa'] . '</small> <small>' . $orcatrata['ComplementoEmpresa'] . '</small><br>
 														<small>' . $orcatrata['BairroEmpresa'] . '</small> - <small>' . $orcatrata['MunicipioEmpresa'] . '</small> - <small>' . $orcatrata['EstadoEmpresa'] . '</small>' ?></h4>
-								<h5>Colab.:<?php echo '<strong>' . $_SESSION['Usuario']['Nome'] . '</strong>' ?></h5>
+								<h5>Colab.:<?php echo '<strong>' . $usuario['Nome'] . '</strong>' ?></h5>
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>								
 								
-								<h3 class="text-left">Orçamento<?php echo ' - <strong>' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '</strong>' ?> </h3>
+								<h3 class="text-left">Orçamento<?php echo ' - <strong>' . $query['idApp_OrcaTrata'] . '</strong>' ?> </h3>
 								
 								<?php } ?>							
 															
@@ -105,8 +105,8 @@
 
 						<!--<hr />-->
 														
-						<h3 class="text-left"><b>Cliente</b>: <?php echo '' . $_SESSION['Cliente']['NomeCliente'] . ' - ' . $_SESSION['Cliente']['idApp_Cliente'] . '' ?></h3>
-						
+						<h3 class="text-left"><b>Cliente</b>: <?php echo '' . $cliente['NomeCliente'] . '' ?></h3>
+						<h5 class="text-left"><b>Tel</b>: <?php echo '' . $cliente['CelularCliente'] . '' ?> - <b>ID</b>: <?php echo '' . $cliente['idApp_Cliente'] . '' ?> </h5>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
@@ -445,34 +445,3 @@
 		</div>
 	</div>	
 </div>
-<?php if ( !isset($evento) && isset($_SESSION['Orcatrata'])) { ?>
-	<?php if ($_SESSION['Orcatrata']['idApp_OrcaTrata'] != 1 ) { ?>		
-	<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header bg-danger">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
-				</div>
-				<div class="modal-body">
-					<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
-						Esta operação é irreversível.</p>
-				</div>
-				<div class="modal-footer">
-					<div class="col-md-6 text-left">
-						<button type="button" class="btn btn-warning" data-dismiss="modal">
-							<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
-						</button>
-					</div>
-					<div class="col-md-6 text-right">
-						<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluir2/' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] ?>" role="button">
-							<span class="glyphicon glyphicon-trash"></span>Confirmar Exclusão do Orç:
-							<?php echo $_SESSION['Orcatrata']['idApp_OrcaTrata']; ?>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<?php } ?>
-<?php } ?>
