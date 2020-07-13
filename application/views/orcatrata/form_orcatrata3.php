@@ -406,12 +406,12 @@
 															<!--<label></label>-->
 															<?php if ($_SESSION['log']['idSis_Empresa'] == 42 ) { ?>
 																<a class="add_field_button42 btn btn-warning"
-																		onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
+																		autofocus onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
 																	<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Produtos
 																</a>																						
 															<?php }else{ ?>	
 																<a class="add_field_button9 btn btn-warning"
-																		onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
+																		autofocus onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
 																	<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Produtos
 																</a>
 															<?php } ?>
@@ -723,7 +723,7 @@
 													<div class="col-md-12 text-left">
 														<label  for="idApp_Cliente">Cliente</label>
 														<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value)" <?php echo $readonly; ?>
-																id="idApp_Cliente" autofocus name="idApp_Cliente">
+																id="idApp_Cliente" name="idApp_Cliente">
 															<option value="">-- Sel. Cliente --</option>
 															<?php
 															foreach ($select['idApp_Cliente'] as $key => $row) {
