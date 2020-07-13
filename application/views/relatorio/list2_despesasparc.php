@@ -79,7 +79,7 @@
 									</td>';	
 								*/
 								echo '<td class="notclickable">
-										<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'OrcatrataPrintDesp/imprimirdesp/' . $row['idApp_OrcaTrata'] . '">
+										<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'OrcatrataPrint/imprimirdesp/' . $row['idApp_OrcaTrata'] . '">
 											<span class="glyphicon glyphicon-print notclickable"></span>
 										</a>
 										
@@ -136,7 +136,7 @@
 						foreach ($report->result_array() as $row) {
 							echo '<tr>';
 								echo '<td class="notclickable">
-										<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'OrcatrataPrintDesp/imprimirdesp/' . $row['idApp_OrcaTrata'] . '">
+										<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'OrcatrataPrint/imprimirdesp/' . $row['idApp_OrcaTrata'] . '">
 											<span class="glyphicon glyphicon-print notclickable"></span>
 										</a>
 									</td>';								

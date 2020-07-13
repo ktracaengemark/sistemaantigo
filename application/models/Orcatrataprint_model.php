@@ -220,7 +220,7 @@ class Orcatrataprint_model extends CI_Model {
 				TOP1.Opcao,
 				TFO.NomeFornecedor,
 				CONCAT(IFNULL(PV.QtdProduto,""), " X " , IFNULL(PV.QtdIncremento,""), " " , IFNULL(P.UnidadeProduto,"")) AS QtdProduto,
-            	CONCAT(IFNULL(P.Cod_Prod,""), " - ", IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,"")) AS NomeProduto,
+            	CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,"")) AS NomeProduto,
             	PV.ValorProduto
             FROM
             	App_Produto AS PV
@@ -234,6 +234,42 @@ class Orcatrataprint_model extends CI_Model {
                 PV.idTab_Produto = P.idTab_Produtos
             ORDER BY
             	PV.idApp_Produto'
+        );
+        $query = $query->result_array();
+
+        return $query;
+    }
+
+	public function get_servico_desp($data) {
+		$query = $this->db->query(
+            'SELECT
+            	PV.QtdServico,
+				PV.DataValidadeServico,
+				PV.ObsServico,
+				PV.idApp_Servico,
+				PV.idApp_OrcaTrata,
+				PV.ConcluidoServico,
+				P.UnidadeProduto,
+				P.Cod_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,
+				TFO.NomeFornecedor,
+				SU.Nome,
+				CONCAT(IFNULL(PV.idApp_Servico,""), " - " , IFNULL(PV.ConcluidoServico,""), " - Obs.: " , IFNULL(PV.ObsServico,"")) AS idApp_Servico,
+				CONCAT(IFNULL(PV.QtdServico,"")) AS QtdServico,
+            	CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(SU.Nome,"")) AS NomeServico,
+            	PV.ValorServico
+            FROM
+            	App_Servico AS PV
+					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = PV.ProfissionalServico
+            		LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = PV.idTab_Servico
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2
+            		LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
+            WHERE
+            	PV.idApp_OrcaTrata = ' . $data . '
+            ORDER BY
+            	PV.idApp_Servico'
         );
         $query = $query->result_array();
 

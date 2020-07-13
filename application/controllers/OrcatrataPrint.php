@@ -163,6 +163,7 @@ class OrcatrataPrint extends CI_Controller {
             #### App_OrcaTrata ####
             $data['orcatrata'] = $this->OrcatrataPrint_model->get_orcatrata($id);
             $data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
+			$data['orcatrata']['DataEntregaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntregaOrca'], 'barras');
             $data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'barras');
 			$data['orcatrata']['DataConclusao'] = $this->basico->mascara_data($data['orcatrata']['DataConclusao'], 'barras');
             $data['orcatrata']['DataRetorno'] = $this->basico->mascara_data($data['orcatrata']['DataRetorno'], 'barras');
@@ -170,21 +171,16 @@ class OrcatrataPrint extends CI_Controller {
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'barras');
             $data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'barras');
 
-            #### Carrega os dados do cliente nas variáves de sessão ####
-            $this->load->model('Fornecedor_model');
-            
-			#$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
-			$_SESSION['Fornecedor'] = $this->Fornecedor_model->get_fornecedor($data['orcatrata']['idApp_Fornecedor'], TRUE);
-			$_SESSION['Usuario'] = $this->Usuario_model->get_usuario($data['orcatrata']['idSis_Usuario'], TRUE);
-			#$this->load->model('OrcatrataPrint_model');
-			$_SESSION['Orcatrata'] = $data['query'] = $this->OrcatrataPrint_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);
-			#$_SESSION['Imprimir'] = $data['query'] = $this->OrcatrataPrint_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);
-			#$_SESSION['Orcatrata'] = $data['query'] = $this->OrcatrataPrint_model->get_orcatrata($id, TRUE);
-            #$_SESSION['log']['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
 
+			#### Carrega os dados do fornrcedor nas variáves de sessão ####
+            $this->load->model('Fornecedor_model');
+			$data['fornecedor'] = $this->Fornecedor_model->get_fornecedor($data['orcatrata']['idApp_Fornecedor'], TRUE);
+			$data['usuario'] = $this->Usuario_model->get_usuario($data['orcatrata']['idSis_Usuario'], TRUE);
+			$data['query'] = $this->OrcatrataPrint_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);	
+			
             
             #### App_ServicoVenda ####
-            $data['servico'] = $this->OrcatrataPrint_model->get_servico($id);
+            $data['servico'] = $this->OrcatrataPrint_model->get_servico_desp($id);
             if (count($data['servico']) > 0) {
                 $data['servico'] = array_combine(range(1, count($data['servico'])), array_values($data['servico']));
                 $data['count']['SCount'] = count($data['servico']);
@@ -200,7 +196,7 @@ class OrcatrataPrint extends CI_Controller {
             
 
             #### App_ProdutoVenda ####
-            $data['produto'] = $this->OrcatrataPrint_model->get_produto($id);
+            $data['produto'] = $this->OrcatrataPrint_model->get_produto_desp($id);
             if (count($data['produto']) > 0) {
                 $data['produto'] = array_combine(range(1, count($data['produto'])), array_values($data['produto']));
                 $data['count']['PCount'] = count($data['produto']);
@@ -221,10 +217,10 @@ class OrcatrataPrint extends CI_Controller {
             $data['parcelasrec'] = $this->OrcatrataPrint_model->get_parcelasrec($id);
             if (count($data['parcelasrec']) > 0) {
                 $data['parcelasrec'] = array_combine(range(1, count($data['parcelasrec'])), array_values($data['parcelasrec']));
-
+				$data['count']['PRCount'] = count($data['parcelasrec']);
                 if (isset($data['parcelasrec'])) {
 
-                    for($j=1; $j <= $data['orcatrata']['QtdParcelasOrca']; $j++) {
+                    for($j=1; $j <= $data['count']['PRCount']; $j++) {
                         $data['parcelasrec'][$j]['DataVencimento'] = $this->basico->mascara_data($data['parcelasrec'][$j]['DataVencimento'], 'barras');
                         $data['parcelasrec'][$j]['DataPago'] = $this->basico->mascara_data($data['parcelasrec'][$j]['DataPago'], 'barras');
                     }

@@ -5106,7 +5106,8 @@ class Orcatrata extends CI_Controller {
 				#redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
 				#redirect(base_url() . 'relatorio/parcelas/' . $data['msg']);
 				#redirect(base_url() . 'orcatrata/cadastrardesp/' . $data['msg']);
-				redirect(base_url() . 'OrcatrataPrintDesp/imprimirdesp/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);				
+				#redirect(base_url() . 'OrcatrataPrintDesp/imprimirdesp/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
+				redirect(base_url() . 'OrcatrataPrint/imprimirdesp/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
                 exit();
             }
         }
@@ -5843,7 +5844,8 @@ class Orcatrata extends CI_Controller {
                 #redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
 				#redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/parcelas/' . $data['msg']);
-				redirect(base_url() . 'OrcatrataPrintDesp/imprimirdesp/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
+				#redirect(base_url() . 'OrcatrataPrintDesp/imprimirdesp/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
+				redirect(base_url() . 'OrcatrataPrint/imprimirdesp/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
 				exit();
             }
         }
