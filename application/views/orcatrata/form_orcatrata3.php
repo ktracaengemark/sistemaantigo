@@ -428,9 +428,7 @@
 															<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma; ?></span></b>
 														</div>
 														-->
-														
-														<div class="col-md-3 text-center">	
-															
+														<div class="col-md-3 text-center">
 															<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma; ?></span></b><br />
 														</div>
 														<div class="col-md-3">	
@@ -447,20 +445,7 @@
 																	</div>
 																</div>
 															</div>
-														
 														</div>
-														
-														<!--
-														<div class="col-md-3">
-															<label for="QtdPrdOrca">Qtd.de Produtos:</label><br>
-															<div class="input-group" id="txtHint">
-																<span class="input-group-addon" id="basic-addon1">Produtos</span>
-																<input type="text" class="form-control text-right" id="QtdPrdOrca" maxlength="10" readonly=""
-																	   name="QtdPrdOrca" value="<?php echo $orcatrata['QtdPrdOrca'] ?>">
-																	   
-															</div>
-														</div>
-														-->
 														<div class="col-md-3">
 															<!--<label for="ValorOrca">Valor em Produtos:</label><br>-->
 															<div class="input-group" id="txtHint">
@@ -645,16 +630,6 @@
 																			name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
 																</div>
 															</div>
-															<!--
-															<div class="col-md-12">
-																<label for="QtdPrdOrca">Qtd.de Produtos:</label><br>
-																<div class="input-group" id="txtHint">
-																	<input type="text" class="form-control text-right" id="QtdPrdOrca" maxlength="10" readonly=""
-																		   name="QtdPrdOrca" value="<?php echo $orcatrata['QtdPrdOrca'] ?>">
-																		   <span class="input-group-addon" id="basic-addon1">Unid</span>
-																</div>
-															</div>
-															-->
 														</div>
 														<div class="row">														
 															<div class="col-md-12">
@@ -674,17 +649,6 @@
 																	?>
 																</select>
 															</div>
-															<!--
-															<div class="col-md-12">
-																<label for="ValorOrca">Valor em Produtos:</label><br>
-																<div class="input-group" id="txtHint">
-																	<span class="input-group-addon" id="basic-addon1">R$</span>
-																	<input type="text" class="form-control Valor" id="ValorOrca" maxlength="10" placeholder="0,00" readonly=""
-																		   onkeyup="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)" onchange="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)"
-																		   name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
-																</div>
-															</div>
-															-->
 														</div>
 													</div>
 												</div>
@@ -699,17 +663,6 @@
 																<textarea class="form-control" id="Descricao" <?php echo $readonly; ?> placeholder="Observaçoes:"
 																		  name="Descricao"><?php echo $orcatrata['Descricao']; ?></textarea>
 															</div>
-															<!--
-															<div class="col-md-12">
-																<label for="ValorDev">Serviços:</label><br>
-																<div class="input-group" id="txtHint">
-																	<span class="input-group-addon" id="basic-addon1">R$</span>
-																	<input type="text" class="form-control Valor" id="ValorDev" maxlength="10" placeholder="0,00" readonly=""
-																		   onkeyup="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)" onchange="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)"
-																		   name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
-																</div>
-															</div>
-															-->
 														</div>
 													</div>
 												</div>
@@ -747,56 +700,6 @@
 												</div>
 											</div>
 										</div>
-										<!--
-										<br>
-										<div class="row">
-											<div class="col-md-4 text-left">
-												<label for="DataOrca">Data do Pedido</label>
-												<div class="input-group <?php echo $datepicker; ?>">
-													<span class="input-group-addon" disabled>
-														<span class="glyphicon glyphicon-calendar"></span>
-													</span>
-													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-															name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
-												</div>
-											</div>
-											<div class="col-md-4">
-												<label for="TipoFinanceiro">Tipo de Receita</label>
-												<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-														id="TipoFinanceiro" name="TipoFinanceiro">
-													<option value="">-- Selecione uma opção --</option>
-													<?php
-													foreach ($select['TipoFinanceiro'] as $key => $row) {
-														(!$orcatrata['TipoFinanceiro']) ? $orcatrata['TipoFinanceiro'] = '31' : FALSE;
-														if ($orcatrata['TipoFinanceiro'] == $key) {
-															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-														} else {
-															echo '<option value="' . $key . '">' . $row . '</option>';
-														}
-													}
-													?>
-												</select>
-											</div>
-											<div class="col-md-4">
-												<label for="Descricao">Obs/Descrição:</label>
-												<textarea class="form-control" id="Descricao" <?php echo $readonly; ?> placeholder="Observaçoes:"
-														  name="Descricao"><?php echo $orcatrata['Descricao']; ?></textarea>
-											</div>
-											
-												<div class="col-md-4">
-												<label for="ObsOrca">Obs:</label>
-												<textarea class="form-control" id="ObsOrca" <?php echo $readonly; ?> placeholder="Observaçoes:"
-														  name="ObsOrca"><?php echo $orcatrata['ObsOrca']; ?></textarea>
-											</div>
-											
-											<div class="col-md-6">
-												<label for="Descricao">Descrição</label><br>
-												<input type="text" class="form-control" maxlength="200"
-														name="Descricao" value="<?php echo $orcatrata['Descricao'] ?>">
-											</div>
-											
-										</div>
-										-->
 									</div>
 								</div>
 							</div>

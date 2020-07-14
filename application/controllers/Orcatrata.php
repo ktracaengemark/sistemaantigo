@@ -75,6 +75,7 @@ class Orcatrata extends CI_Controller {
 			'DataQuitado',
             'ValorOrca',
 			'ValorDev',
+			'QtdPrdOrca',
             'ValorEntradaOrca',
 			'ValorDinheiro',
 			'ValorTroco',
@@ -174,6 +175,8 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['DataVencimentoOrca']) ? $data['orcatrata']['DataVencimentoOrca'] = date('d/m/Y', time()) : FALSE;
 		#(!$data['orcatrata']['DataPrazo']) ? $data['orcatrata']['DataPrazo'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['idTab_TipoRD']) ? $data['orcatrata']['idTab_TipoRD'] = "2" : FALSE;
+		(!$data['orcatrata']['ValorOrca']) ? $data['orcatrata']['ValorOrca'] = '0.00' : FALSE;
+		(!$data['orcatrata']['QtdPrdOrca']) ? $data['orcatrata']['QtdPrdOrca'] = '0' : FALSE;
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 
@@ -1351,6 +1354,7 @@ class Orcatrata extends CI_Controller {
             'DataRetorno',
 			'DataQuitado',
             'ValorOrca',
+			'QtdPrdOrca',
 			'ValorDev',
             'ValorEntradaOrca',
 			'ValorDinheiro',
@@ -1546,6 +1550,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1;$j<=$data['count']['PCount'];$j++) {
 						$data['produto'][$j]['SubtotalProduto'] = number_format(($data['produto'][$j]['ValorProduto'] * $data['produto'][$j]['QtdProduto']), 2, ',', '.');
+						$data['produto'][$j]['SubtotalQtdProduto'] = ($data['produto'][$j]['QtdIncrementoProduto'] * $data['produto'][$j]['QtdProduto']);
 						$data['produto'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['produto'][$j]['DataValidadeProduto'], 'barras');
 					}
 
@@ -2173,6 +2178,7 @@ class Orcatrata extends CI_Controller {
             'DataRetorno',
 			'DataQuitado',
             'ValorOrca',
+			'QtdPrdOrca',
 			'ValorDev',
             'ValorEntradaOrca',
 			'ValorDinheiro',
@@ -2373,7 +2379,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1;$j<=$data['count']['PCount'];$j++) {
 						$data['produto'][$j]['SubtotalProduto'] = number_format(($data['produto'][$j]['ValorProduto'] * $data['produto'][$j]['QtdProduto']), 2, ',', '.');
-						$data['produto'][$j]['SubtotalQtdProduto'] = number_format(($data['produto'][$j]['QtdIncrementoProduto'] * $data['produto'][$j]['QtdProduto']), 2, ',', '.');
+						$data['produto'][$j]['SubtotalQtdProduto'] = ($data['produto'][$j]['QtdIncrementoProduto'] * $data['produto'][$j]['QtdProduto']);
 						$data['produto'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['produto'][$j]['DataValidadeProduto'], 'barras');
 					}
 
@@ -3253,7 +3259,7 @@ class Orcatrata extends CI_Controller {
                 if (isset($data['servico'])) {
 
                     for($j=1;$j<=$data['count']['SCount'];$j++) {
-                        
+                        $data['servico'][$j]['SubtotalServico'] = number_format(($data['servico'][$j]['ValorServico'] * $data['servico'][$j]['QtdServico']), 2, ',', '.');
 						$data['servico'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeServico'], 'barras');
 					}
                 }
@@ -3270,6 +3276,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1;$j<=$data['count']['PCount'];$j++) {
 						$data['produto'][$j]['SubtotalProduto'] = number_format(($data['produto'][$j]['ValorProduto'] * $data['produto'][$j]['QtdProduto']), 2, ',', '.');
+						$data['produto'][$j]['SubtotalQtdProduto'] = ($data['produto'][$j]['QtdIncrementoProduto'] * $data['produto'][$j]['QtdProduto']);
 						$data['produto'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['produto'][$j]['DataValidadeProduto'], 'barras');
 					}
 
@@ -3869,6 +3876,7 @@ class Orcatrata extends CI_Controller {
             'DataRetorno',
 			'DataQuitado',
             'ValorOrca',
+			'QtdPrdOrca',
 			'ValorDev',
             'ValorEntradaOrca',
 			'ValorDinheiro',
@@ -4053,6 +4061,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1;$j<=$data['count']['PCount'];$j++) {
 						$data['produto'][$j]['SubtotalProduto'] = number_format(($data['produto'][$j]['ValorProduto'] * $data['produto'][$j]['QtdProduto']), 2, ',', '.');
+						$data['produto'][$j]['SubtotalQtdProduto'] = ($data['produto'][$j]['QtdIncrementoProduto'] * $data['produto'][$j]['QtdProduto']);
 						$data['produto'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['produto'][$j]['DataValidadeProduto'], 'barras');
 					}
 
@@ -4627,6 +4636,7 @@ class Orcatrata extends CI_Controller {
             'DataRetorno',
 			'DataQuitado',
             'ValorOrca',
+			'QtdPrdOrca',
 			'ValorDev',
             'ValorEntradaOrca',
 			'ValorDinheiro',
@@ -4668,6 +4678,8 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['DataVencimentoOrca']) ? $data['orcatrata']['DataVencimentoOrca'] = date('d/m/Y', time()) : FALSE;
 		#(!$data['orcatrata']['DataPrazo']) ? $data['orcatrata']['DataPrazo'] = date('d/m/Y', time()) : FALSE;
         (!$data['orcatrata']['idTab_TipoRD']) ? $data['orcatrata']['idTab_TipoRD'] = "1" : FALSE;
+		(!$data['orcatrata']['ValorOrca']) ? $data['orcatrata']['ValorOrca'] = '0.00' : FALSE;
+		(!$data['orcatrata']['QtdPrdOrca']) ? $data['orcatrata']['QtdPrdOrca'] = '0' : FALSE;
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 		
@@ -5164,6 +5176,7 @@ class Orcatrata extends CI_Controller {
             'DataRetorno',
 			'DataQuitado',
             'ValorOrca',
+			'QtdPrdOrca',
 			'ValorDev',
             'ValorEntradaOrca',
 			'ValorDinheiro',
@@ -5337,6 +5350,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1;$j<=$data['count']['PCount'];$j++) {
 						$data['produto'][$j]['SubtotalProduto'] = number_format(($data['produto'][$j]['ValorProduto'] * $data['produto'][$j]['QtdProduto']), 2, ',', '.');
+						$data['produto'][$j]['SubtotalQtdProduto'] = ($data['produto'][$j]['QtdIncrementoProduto'] * $data['produto'][$j]['QtdProduto']);
 						$data['produto'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['produto'][$j]['DataValidadeProduto'], 'barras');
 					}
 
@@ -7001,6 +7015,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1;$j<=$data['count']['PCount'];$j++) {
 						$data['produto'][$j]['SubtotalProduto'] = number_format(($data['produto'][$j]['ValorProduto'] * $data['produto'][$j]['QtdProduto']), 2, ',', '.');
+						$data['produto'][$j]['SubtotalQtdProduto'] = ($data['produto'][$j]['QtdIncrementoProduto'] * $data['produto'][$j]['QtdProduto']);
 						$data['produto'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['produto'][$j]['DataValidadeProduto'], 'barras');
 					}
 
@@ -7352,6 +7367,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1;$j<=$data['count']['PCount'];$j++) {
 						$data['produto'][$j]['SubtotalProduto'] = number_format(($data['produto'][$j]['ValorProduto'] * $data['produto'][$j]['QtdProduto']), 2, ',', '.');
+						$data['produto'][$j]['SubtotalQtdProduto'] = ($data['produto'][$j]['QtdIncrementoProduto'] * $data['produto'][$j]['QtdProduto']);
 						$data['produto'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['produto'][$j]['DataValidadeProduto'], 'barras');
 					}
 
@@ -7705,6 +7721,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1;$j<=$data['count']['PCount'];$j++) {
 						$data['produto'][$j]['SubtotalProduto'] = number_format(($data['produto'][$j]['ValorProduto'] * $data['produto'][$j]['QtdProduto']), 2, ',', '.');
+						$data['produto'][$j]['SubtotalQtdProduto'] = ($data['produto'][$j]['QtdIncrementoProduto'] * $data['produto'][$j]['QtdProduto']);
 						$data['produto'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['produto'][$j]['DataValidadeProduto'], 'barras');
 					}
 

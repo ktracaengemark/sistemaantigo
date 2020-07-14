@@ -2970,7 +2970,7 @@ function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
 
                     //if (tabela == area && $("#Qtd"+tabela+num).val()) {
                     if ($("#Qtd"+campo2+num).val()) {
-                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2);
+                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2,$("#QtdIncremento"+campo2+num).val());
                         break;
                     }
 
@@ -3166,9 +3166,17 @@ function calculaSubtotal(valor, campo, num, tipo, tabela, qtdinc) {
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (valor * data.replace(".","").replace(",","."));
 		var subtotalqtd = (qtdprdinc.replace(".","").replace(",",".") * qtdprd.replace(".","").replace(",","."));
-    } else {
+	} else if (tipo == 'QTDINC') {
+        //variável quantidadeincremento recebe a quantidadeincremento do produto selecionado
+        var data = $("#idTab_"+tabela+num).val();
+		var qtdprdinc = $("#QtdIncremento"+tabela+num).val();
+		var qtdprd = $("#Qtd"+tabela+num).val();
         //o subtotal é calculado como o produto da quantidade pelo seu valor
-        var subtotal = (valor.replace(".","").replace(",",".") * campo.replace(".","").replace(",","."));
+        var subtotal = (qtdprd * data.replace(".","").replace(",","."));
+		var subtotalqtd = (qtdprdinc.replace(".","").replace(",",".") * qtdprd.replace(".","").replace(",","."));	
+    } else {
+		//o subtotal é calculado como o produto da quantidade pelo seu valor
+		var subtotal = (valor.replace(".","").replace(",",".") * campo.replace(".","").replace(",","."));
 		var subtotalqtd = (qtdinc.replace(".","").replace(",",".") * campo.replace(".","").replace(",","."));
     }
 
@@ -5099,7 +5107,8 @@ $(document).ready(function () {
 							<div class="col-md-2">\
                                 <label for="QtdIncrementoProduto">Qtd.na Embl</label><br>\
                                 <div class="input-group">\
-                                    <input type="text" class="form-control Numero" maxlength="10" id="QtdIncrementoProduto'+pc+'" '+ escrita +'\
+                                    <input type="text" class="form-control Numero" maxlength="10" id="QtdIncrementoProduto'+pc+'" placeholder="0" '+ escrita +' \
+                                        onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTDINC\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pc+',\'QTDINC\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
                                        name="QtdIncrementoProduto'+pc+'" value="1">\
                                 </div>\
                             </div>\
