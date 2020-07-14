@@ -330,7 +330,7 @@
 															<div class="row">
 																<input type="hidden" class="form-control " id="idTab_Valor_Produto<?php echo $i ?>" name="idTab_Valor_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor_Produto'] ?>">
 																<input type="hidden" class="form-control " id="idTab_Produtos_Produto<?php echo $i ?>" name="idTab_Produtos_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos_Produto'] ?>">			
-																<div class="col-md-12">
+																<div class="col-md-11">
 																	<label for="idTab_Produto">Produto <?php echo $i ?></label>
 																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor1Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
 																			 id="listadinamicab<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
@@ -345,6 +345,13 @@
 																		}
 																		?>
 																	</select>
+																</div>
+																<div class="col-md-1">
+																	<label><br></label><br>
+																	<button type="button" id="<?php echo $i ?>" class="remove_field9 btn btn-danger"
+																			onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',1,<?php echo $i ?>,'CountMax',0,'ProdutoHidden')">
+																		<span class="glyphicon glyphicon-trash"></span>
+																	</button>
 																</div>
 															</div>
 															<div class="row">
@@ -361,7 +368,6 @@
 																			name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
 																	</div>
 																</div>
-																<div class="col-md-1"></div>
 																<div class="col-md-3">
 																	<label for="ValorProduto">Valor Emb</label>
 																	<div class="input-group">
@@ -371,20 +377,20 @@
 																			name="ValorProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ValorProduto'] ?>">
 																	</div>
 																</div>
+																<div class="col-md-2">
+																	<label for="SubtotalQtdProduto">Sub.Qtd.Prd</label>
+																	<div class="input-group">
+																		<input type="text" class="form-control text-right" maxlength="10" readonly="" id="SubtotalQtdProduto<?php echo $i ?>"
+																			   name="SubtotalQtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalQtdProduto'] ?>">
+																	</div>
+																</div>
 																<div class="col-md-3">
-																	<label for="SubtotalProduto">Subtotal</label>
+																	<label for="SubtotalProduto">Sub.Valor</label>
 																	<div class="input-group">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto<?php echo $i ?>"
 																			   name="SubtotalProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalProduto'] ?>">
 																	</div>
-																</div>
-																<div class="col-md-1">
-																	<label><br></label><br>
-																	<button type="button" id="<?php echo $i ?>" class="remove_field9 btn btn-danger"
-																			onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',1,<?php echo $i ?>,'CountMax',0,'ProdutoHidden')">
-																		<span class="glyphicon glyphicon-trash"></span>
-																	</button>
 																</div>
 															</div>
 														</div>
@@ -416,13 +422,24 @@
 																</a>
 															<?php } ?>
 														</div>
+														<!--
 														<div class="col-md-3 text-center">	
 															
 															<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma; ?></span></b>
 														</div>
+														-->
 														<div class="col-md-3 text-center">	
 															
 															<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma; ?></span></b><br />
+														</div>
+														<div class="col-md-3">
+															<!--<label for="QtdPrdOrca">Qtd.de Produtos:</label><br>-->
+															<div class="input-group" id="txtHint">
+																<span class="input-group-addon" id="basic-addon1">Produtos</span>
+																<input type="text" class="form-control text-right" id="QtdPrdOrca" maxlength="10" readonly=""
+																	   name="QtdPrdOrca" value="<?php echo $orcatrata['QtdPrdOrca'] ?>">
+																	   
+															</div>
 														</div>
 														<!--
 														<div class="col-md-3 text-center">
@@ -579,9 +596,21 @@
 											<div class="col-md-4">
 												<div class="panel panel-warning">
 													<div class="panel-heading">
+														<!--
 														<div class="row">														
 															<div class="col-md-12">
-																<label for="ValorOrca">Produtos:</label><br>
+																<label for="QtdPrdOrca">Qtd.de Produtos:</label><br>
+																<div class="input-group" id="txtHint">
+																	<input type="text" class="form-control text-right" id="QtdPrdOrca" maxlength="10" readonly=""
+																		   name="QtdPrdOrca" value="<?php echo $orcatrata['QtdPrdOrca'] ?>">
+																		   <span class="input-group-addon" id="basic-addon1">Unid</span>
+																</div>
+															</div>
+														</div>
+														-->
+														<div class="row">														
+															<div class="col-md-12">
+																<label for="ValorOrca">Valor em Produtos:</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorOrca" maxlength="10" placeholder="0,00" readonly=""
