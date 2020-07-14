@@ -66,10 +66,10 @@
 																			name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
 																</div>
 																<div class="col-md-1">
-																	<label for="QtdIncremento">Qtd.Emb</label>
+																	<label for="QtdIncrementoProduto">Qtd.Emb</label>
 																	<div class="input-group">
-																		<input type="text" class="form-control " id="QtdIncremento<?php echo $i ?>" readonly=""
-																			name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
+																		<input type="text" class="form-control " id="QtdIncrementoProduto<?php echo $i ?>" readonly=""
+																			name="QtdIncrementoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncrementoProduto'] ?>">
 																	</div>
 																</div>
 																<input type="hidden" class="form-control " id="idTab_Valor_Produto<?php echo $i ?>" name="idTab_Valor_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor_Produto'] ?>">
@@ -345,7 +345,7 @@
 												<div class="form-group" id="9div<?php echo $i ?>">
 													
 													<input type="hidden" name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
-													<input type="hidden" name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
+													<input type="hidden" name="QtdIncrementoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncrementoProduto'] ?>">
 													<input type="hidden" name="idTab_Valor_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor_Produto'] ?>">
 													<input type="hidden" name="idTab_Produtos_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos_Produto'] ?>">			
 													<input type="hidden" name="idTab_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produto'] ?>">
@@ -388,6 +388,7 @@
 												<div class="form-group" id="10div<?php echo $i ?>">
 													
 													<input type="hidden" name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
+													<input type="hidden" name="QtdIncrementoServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdIncrementoServico'] ?>">
 													<input type="hidden" name="idTab_Valor_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Valor_Servico'] ?>">
 													<input type="hidden" name="idTab_Produtos_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Produtos_Servico'] ?>">
 													<input type="hidden" name="idTab_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Servico'] ?>">
@@ -412,6 +413,7 @@
 
 											
 
+								<input type="hidden" name="QtdPrdOrca" value="<?php echo $orcatrata['QtdPrdOrca'] ?>">
 								<input type="hidden" name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
 								<input type="hidden" name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
 								<input type="hidden" name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
@@ -482,8 +484,7 @@
 											<tr>
 												
 												<th class="col-md-2" scope="col">Data</th>
-												<th class="col-md-3" scope="col">Desc.</th>
-												<th class="col-md-5" scope="col">Obs.</th>
+												<th class="col-md-8" scope="col">Desc.</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -491,7 +492,6 @@
 												
 												<td><?php echo $orcatrata['DataOrca'] ?></td>
 												<td><?php echo $orcatrata['Descricao'] ?></td>
-												<td><?php echo $orcatrata['ObsOrca'] ?></td>
 											</tr>
 										</tbody>
 									</table>
@@ -526,7 +526,7 @@
 											?>
 
 											<tr>
-												<td><?php echo $produto[$i]['QtdProduto'] ?> X <?php echo $produto[$i]['QtdIncremento'] ?> = <b><?php echo $produto[$i]['SubTotalQtd'] ?> Unid</b></td>
+												<td><?php echo $produto[$i]['QtdProduto'] ?> X <?php echo $produto[$i]['QtdIncrementoProduto'] ?> = <b><?php echo $produto[$i]['SubTotalQtd'] ?></b></td>
 												<td><?php echo $produto[$i]['Produto'] ?></td>							
 												<td><?php echo number_format($produto[$i]['ValorProduto'], 2, ',', '.') ?></td>
 												<td><?php echo number_format($produto[$i]['Subtotal_Produto'], 2, ',', '.') ?></td>
@@ -543,7 +543,9 @@
 											<?php
 											}
 											?>
-
+											<tr>
+												<td class="text-right">Total: <b><?php echo $orcatrata['QtdPrdOrca'] ?></b></td>
+											</tr>
 										</tbody>
 									</table>
 									<?php } else echo '<h3 class="text-left">S/Produtos Entregues </h3>';{?>

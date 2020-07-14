@@ -52,7 +52,7 @@
 											<span class="glyphicon glyphicon-edit"></span> Editar
 										</button>										
 									</a>
-								</a>										
+									</a>										
 							</div>
 						</li>								
 						<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
@@ -112,8 +112,7 @@
 								<tr>
 									<th class="col-md-2" scope="col">Tipo</th>
 									<th class="col-md-2" scope="col">Data</th>
-									<th class="col-md-3" scope="col">Desc.</th>
-									<th class="col-md-5" scope="col">Obs.</th>
+									<th class="col-md-8" scope="col">Desc.</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -121,7 +120,6 @@
 									<td><?php echo $orcatrata['TipoFinanceiro'] ?></td>
 									<td><?php echo $orcatrata['DataOrca'] ?></td>
 									<td><?php echo $orcatrata['Descricao'] ?></td>
-									<td><?php echo $orcatrata['ObsOrca'] ?></td>
 								</tr>
 							</tbody>
 						</table>
@@ -133,7 +131,7 @@
 							<thead>
 								<tr>
 									<!--<th scope="col">Nº</th>-->
-									<th class="col-md-2" scope="col">Qtd</th>																				
+									<th class="col-md-2" scope="col">QtdProdutos</th>																				
 									<!--<th scope="col">CodProd.</th>
 									<th scope="col">CategProd.</th>-->												
 									<th class="col-md-6" scope="col">Produto</th>							
@@ -151,17 +149,20 @@
 
 								<tr>
 									<!--<td><?php echo $produto[$i]['idApp_OrcaTrata'] ?></td>-->
-									<td><?php echo $produto[$i]['QtdProduto'] ?> = <b><?php echo $produto[$i]['SubTotalQtd'] ?> Unid</b></td>														
+									<td><?php echo $produto[$i]['QtdProduto'] ?> = <b><?php echo $produto[$i]['SubTotalQtd'] ?></b></td>														
 									<!--<td><?php echo $produto[$i]['CodProd'] ?></td>
 									<td><?php echo $produto[$i]['Prodaux3'] ?></td>-->					
 									<td><?php echo $produto[$i]['NomeProduto'] ?></td>							
 									<td><?php echo number_format($produto[$i]['ValorProduto'], 2, ',', '.') ?></td>
 									<td><?php echo $produto[$i]['SubtotalProduto'] ?></td>
 								</tr>
+								
 								<?php
 								}
 								?>
-
+								<tr>
+									<td class="text-right">Total: <b><?php echo $orcatrata['QtdPrdOrca'] ?></b></td>
+								</tr>
 							</tbody>
 						</table>
 						<?php } else echo '<h3 class="text-left">S/Produtos Entregues </h3>';{?>

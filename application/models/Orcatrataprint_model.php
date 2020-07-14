@@ -52,6 +52,7 @@ class Orcatrataprint_model extends CI_Model {
 				OT.idApp_Fornecedor,
 				OT.ValorOrca,
 				OT.ValorDev,
+				OT.QtdPrdOrca,
 				OT.ValorDinheiro,
 				OT.ValorTroco,
 				OT.ValorEntradaOrca,
@@ -163,8 +164,8 @@ class Orcatrataprint_model extends CI_Model {
 		$query = $this->db->query(
             'SELECT
             	PV.QtdProduto,
-				PV.QtdIncremento,
-				(PV.QtdProduto * PV.QtdIncremento) AS SubTotalQtd,
+				PV.QtdIncrementoProduto,
+				(PV.QtdProduto * PV.QtdIncrementoProduto) AS SubTotalQtd,
 				PV.DataValidadeProduto,
 				PV.ObsProduto,
 				PV.idApp_Produto,
@@ -178,7 +179,7 @@ class Orcatrataprint_model extends CI_Model {
 				TCO.Convenio,
 				V.Convdesc,
 				TFO.NomeFornecedor,
-				CONCAT(IFNULL(PV.QtdProduto,""), " X " , IFNULL(PV.QtdIncremento,"")) AS QtdProduto,
+				CONCAT(IFNULL(PV.QtdProduto,""), " X " , IFNULL(PV.QtdIncrementoProduto,"")) AS QtdProduto,
             	CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,"")) AS NomeProduto,
             	PV.ValorProduto
 				FROM
@@ -208,8 +209,8 @@ class Orcatrataprint_model extends CI_Model {
 		$query = $this->db->query(
             'SELECT
             	PV.QtdProduto,
-				PV.QtdIncremento,
-				(PV.QtdProduto * PV.QtdIncremento) AS SubTotalQtd,
+				PV.QtdIncrementoProduto,
+				(PV.QtdProduto * PV.QtdIncrementoProduto) AS SubTotalQtd,
 				PV.DataValidadeProduto,
 				PV.ObsProduto,
 				PV.idApp_Produto,
@@ -221,7 +222,7 @@ class Orcatrataprint_model extends CI_Model {
 				TOP2.Opcao,
 				TOP1.Opcao,
 				TFO.NomeFornecedor,
-				CONCAT(IFNULL(PV.QtdProduto,""), " X " , IFNULL(PV.QtdIncremento,"")) AS QtdProduto,
+				CONCAT(IFNULL(PV.QtdProduto,""), " X " , IFNULL(PV.QtdIncrementoProduto,"")) AS QtdProduto,
             	CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,"")) AS NomeProduto,
             	PV.ValorProduto
             FROM

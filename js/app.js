@@ -2919,7 +2919,7 @@ function buscaValor1Tabelas(id, campo, tabela, num, campo2) {
                 if (data[i].id == id) {
 					
 					//""ou posso usar assim, passando diretamente o qtdinc do id ""
-					$('#QtdIncremento'+num).val(data[i].qtdinc);
+					$('#QtdIncremento'+campo2+num).val(data[i].qtdinc);
 					$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
 					$('#idTab_Valor_'+campo2+num).val(data[i].id_valor);
 					//console.log( data[i].id_produto );
@@ -2928,7 +2928,7 @@ function buscaValor1Tabelas(id, campo, tabela, num, campo2) {
 
                     //if (tabela == area && $("#Qtd"+tabela+num).val()) {
                     if ($("#Qtd"+campo2+num).val()) {
-                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2,$("#QtdIncremento"+num).val());
+                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2,$("#QtdIncremento"+campo2+num).val());
                         break;
                     }
 
@@ -3153,7 +3153,7 @@ function calculaSubtotal(valor, campo, num, tipo, tabela, qtdinc) {
     if (tipo == 'VP') {
         //variável valor recebe o valor do produto selecionado
         var data = $("#Qtd"+tabela+num).val();
-		var qtdprdinc = $("#QtdIncremento"+num).val();
+		var qtdprdinc = $("#QtdIncremento"+tabela+num).val();
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (valor.replace(".","").replace(",",".") * data);
 		var subtotalqtd = (qtdprdinc.replace(".","").replace(",",".") * data.replace(".","").replace(",","."));
@@ -3161,7 +3161,7 @@ function calculaSubtotal(valor, campo, num, tipo, tabela, qtdinc) {
     } else if (tipo == 'QTD') {
         //variável quantidade recebe a quantidade do produto selecionado
         var data = $("#idTab_"+tabela+num).val();
-		var qtdprdinc = $("#QtdIncremento"+num).val();
+		var qtdprdinc = $("#QtdIncremento"+tabela+num).val();
 		var qtdprd = $("#Qtd"+tabela+num).val();
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (valor * data.replace(".","").replace(",","."));
@@ -5097,14 +5097,14 @@ $(document).ready(function () {
                                 </div>\
                             </div>\
 							<div class="col-md-2">\
-                                <label for="QtdIncremento">Qtd.Emb.</label><br>\
+                                <label for="QtdIncrementoProduto">Qtd.na Embl</label><br>\
                                 <div class="input-group">\
-                                    <input type="text" class="form-control Numero" maxlength="10" id="QtdIncremento'+pc+'" '+ escrita +'\
-                                       name="QtdIncremento'+pc+'" value="1">\
+                                    <input type="text" class="form-control Numero" maxlength="10" id="QtdIncrementoProduto'+pc+'" '+ escrita +'\
+                                       name="QtdIncrementoProduto'+pc+'" value="1">\
                                 </div>\
                             </div>\
 							<div class="col-md-3">\
-								<label for="ValorProduto">Valor Emb.</label><br>\
+								<label for="ValorProduto">Valor da Embl</label><br>\
 								<div class="input-group id="txtHint">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" \
@@ -5113,14 +5113,14 @@ $(document).ready(function () {
 								</div>\
 							</div>\
 							<div class="col-md-2">\
-								<label for="SubtotalQtdProduto">Sub.Qtd.Prd</label><br>\
+								<label for="SubtotalQtdProduto">Sub.Qtd.Prod</label><br>\
 								<div class="input-group id="txtHint">\
-									<input type="text" class="form-control text-right" maxlength="10" readonly="" id="SubtotalQtdProduto'+pc+'"\
+									<input type="text" class="form-control Numero text-right" maxlength="10" readonly="" id="SubtotalQtdProduto'+pc+'"\
 										   name="SubtotalQtdProduto'+pc+'" value="">\
 								</div>\
 							</div>\
 							<div class="col-md-3">\
-								<label for="SubtotalProduto">Sub.Valor</label><br>\
+								<label for="SubtotalProduto">Sub.Valor.Prod</label><br>\
 								<div class="input-group id="txtHint">\
 									<span class="input-group-addon" id="basic-addon1">R$</span>\
 									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto'+pc+'"\
@@ -5505,45 +5505,11 @@ $(document).ready(function () {
 						<div class="row">\
 							<input type="hidden" class="form-control" id="idTab_Valor_Servico'+ps+'" name="idTab_Valor_Servico'+ps+'" value="">\
 							<input type="hidden" class="form-control" id="idTab_Produtos_Servico'+ps+'" name="idTab_Produtos_Servico'+ps+'" value="">\
-							<div class="col-md-12">\
+							<div class="col-md-11">\
 								<label for="idTab_Servico">Servico '+ps+':</label><br>\
 								<select class="form-control Chosen4" id="listadinamica'+ps+'"  name="idTab_Servico'+ps+'" onchange="'+buscavalor_serv+'(this.value,this.name,\''+tblbusca_serv+'\','+ps+',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')">\
 									<option value="">-- Selecione uma opção --</option>\
 								</select>\
-							</div>\
-						</div>\
-						<div class="row">\
-							<div class="col-md-2">\
-								<label for="QtdServico">Qtd:</label><br>\
-								<div class="input-group">\
-									<input type="text" class="form-control Numero" maxlength="10" id="QtdServico'+ps+'" placeholder="0"\
-										onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
-										name="QtdServico'+ps+'" value="1">\
-								</div>\
-							</div>\
-							<div class="col-md-3">\
-								<label for="ProfissionalServico'+ps+'">Profissional:</label>\
-								<select data-placeholder="Selecione uma opção..." class="form-control Chosen2"\
-										 id="listadinamica_prof'+ps+'" name="ProfissionalServico'+ps+'">\
-									<option value=""></option>\
-								</select>\
-							</div>\
-							<div class="col-md-3">\
-								<label for="ValorServico">Valor:</label><br>\
-								<div class="input-group">\
-									<span class="input-group-addon" id="basic-addon1">R$</span>\
-									<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
-										onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'VP\',\'Servico\')" onchange="calculaSubtotal(this.value,this.name,'+ps+',\'VP\',\'Servico\')"\
-										name="ValorServico'+ps+'" value="">\
-								</div>\
-							</div>\
-							<div class="col-md-3">\
-								<label for="SubtotalServico">Subtotal:</label><br>\
-								<div class="input-group id="txtHint">\
-									<span class="input-group-addon" id="basic-addon1">R$</span>\
-									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalServico'+ps+'"\
-										   name="SubtotalServico'+ps+'" value="">\
-								</div>\
 							</div>\
 							<div class="col-md-1">\
 								<label><br></label><br>\
@@ -5551,6 +5517,41 @@ $(document).ready(function () {
 									onclick="calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
 									<span class="glyphicon glyphicon-trash"></span>\
 								</a>\
+							</div>\
+						</div>\
+						<div class="row">\
+							<div class="col-md-2">\
+								<label for="QtdServico">Qtd</label><br>\
+								<div class="input-group">\
+									<input type="text" class="form-control Numero" maxlength="10" id="QtdServico'+ps+'" placeholder="0"\
+										onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
+										name="QtdServico'+ps+'" value="1">\
+								</div>\
+							</div>\
+							<input type="hidden" class="form-control Numero" id="QtdIncrementoServico'+ps+'" name="QtdIncrementoServico'+ps+'" value="">\
+							<div class="col-md-3">\
+								<label for="ValorServico">Valor do Serviço</label><br>\
+								<div class="input-group">\
+									<span class="input-group-addon" id="basic-addon1">R$</span>\
+									<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
+										onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'VP\',\'Servico\')" onchange="calculaSubtotal(this.value,this.name,'+ps+',\'VP\',\'Servico\')"\
+										name="ValorServico'+ps+'" value="">\
+								</div>\
+							</div>\
+							<div class="col-md-4">\
+								<label for="ProfissionalServico'+ps+'">Profissional:</label>\
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen2"\
+										 id="listadinamica_prof'+ps+'" name="ProfissionalServico'+ps+'">\
+									<option value=""></option>\
+								</select>\
+							</div>\
+							<div class="col-md-3">\
+								<label for="SubtotalServico">Sub.Valor.Serv.</label><br>\
+								<div class="input-group id="txtHint">\
+									<span class="input-group-addon" id="basic-addon1">R$</span>\
+									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalServico'+ps+'"\
+										   name="SubtotalServico'+ps+'" value="">\
+								</div>\
 							</div>\
 						</div>\
 					</div>\
