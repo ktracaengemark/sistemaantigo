@@ -364,7 +364,8 @@
 																<div class="col-md-2">
 																	<label for="QtdIncrementoProduto">Qtd.na Embl</label>
 																	<div class="input-group">
-																		<input type="text" class="form-control Numero" id="QtdIncrementoProduto<?php echo $i ?>" readonly=""
+																		<input type="text" class="form-control Numero" id="QtdIncrementoProduto<?php echo $i ?>" readonly=""  placeholder="0"
+																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTDINC','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																			name="QtdIncrementoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncrementoProduto'] ?>">
 																	</div>
 																</div>
@@ -731,7 +732,7 @@
 													<div class="col-md-12 text-left">
 														<label  for="idApp_Cliente">Cliente</label>
 														<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value)" <?php echo $readonly; ?>
-																id="idApp_Cliente" autofocus name="idApp_Cliente">
+																id="idApp_Cliente" name="idApp_Cliente">
 															<option value="">-- Sel. Cliente --</option>
 															<?php
 															foreach ($select['idApp_Cliente'] as $key => $row) {

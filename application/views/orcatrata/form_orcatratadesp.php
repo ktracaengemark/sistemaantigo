@@ -68,7 +68,7 @@
 																<div class="col-md-1">
 																	<label for="QtdIncremento">Qtd.Emb</label>
 																	<div class="input-group">
-																		<input type="text" class="form-control " id="QtdIncremento<?php echo $i ?>" readonly=""
+																		<input type="text" class="form-control " id="QtdIncremento<?php echo $i ?>" 
 																			name="QtdIncremento<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncremento'] ?>">
 																	</div>
 																</div>
@@ -364,7 +364,8 @@
 																<div class="col-md-2">
 																	<label for="QtdIncrementoProduto">Qtd.na Embl</label>
 																	<div class="input-group">
-																		<input type="text" class="form-control Numero" id="QtdIncrementoProduto<?php echo $i ?>" readonly=""
+																		<input type="text" class="form-control Numero" id="QtdIncrementoProduto<?php echo $i ?>"  placeholder="0"
+																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTDINC','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																			name="QtdIncrementoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncrementoProduto'] ?>">
 																	</div>
 																</div>
