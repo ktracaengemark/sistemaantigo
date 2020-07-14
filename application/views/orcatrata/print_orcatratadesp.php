@@ -111,7 +111,7 @@
 
 								<tr>
 									<!--<td><?php echo $produto[$i]['idApp_OrcaTrata'] ?></td>-->
-									<td><?php echo $produto[$i]['QtdProduto'] ?> = <b><?php echo $produto[$i]['SubTotalQtd'] ?> Unid</b></td>														
+									<td><?php echo $produto[$i]['QtdProduto'] ?> = <b><?php echo $produto[$i]['SubTotalQtd'] ?></b></td>														
 									<!--<td><?php echo $produto[$i]['CodProd'] ?></td>
 									<td><?php echo $produto[$i]['Prodaux3'] ?></td>-->					
 									<td><?php echo $produto[$i]['NomeProduto'] ?></td>							
@@ -121,6 +121,9 @@
 								<?php
 								}
 								?>
+								<tr>
+									<td class="text-right">Total: <b><?php echo $orcatrata['QtdPrdOrca'] ?></b></td>
+								</tr>
 
 							</tbody>
 						</table>
