@@ -24,12 +24,14 @@
 								<span class="glyphicon glyphicon-pencil"></span> Editar Receitas Filtradas
 							</a>
 						</li>
+						<!--
 						<li role="separator" class="divider"></li>
 						<li>
 							<a class="dropdown-item" href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
 								<span class="glyphicon glyphicon-pencil"></span> Imprimir Cobranças Filtradas
 							</a>
-						</li>						
+						</li>
+						-->
 					</ul>
 				</div>
 				<!--
