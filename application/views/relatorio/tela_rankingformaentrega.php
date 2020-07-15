@@ -11,20 +11,20 @@
 
 				<div class="panel panel-info">
 
-					<div class="panel-heading"><span class="glyphicon glyphicon-pencil"></span><strong> Ranking de Vendas<?php #echo $titulo; ?></strong></div>
+					<div class="panel-heading"><span class="glyphicon glyphicon-pencil"></span><strong><?php echo $titulo; ?></strong></div>
 					<div class="panel-body">
 
-						<?php echo form_open('relatorio/rankingvendas', 'role="form"'); ?>
+						<?php echo form_open('relatorio/rankingformaentrega', 'role="form"'); ?>
 
 						<div class="form-group">
 							<div class="row">
 								<div class="col-md-4">
-									<label for="Ordenamento">Cliente</label>
+									<label for="Ordenamento">Entrega</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-											id="NomeCliente" name="NomeCliente">
+											id="TipoFrete" name="TipoFrete">
 										<?php
-										foreach ($select['NomeCliente'] as $key => $row) {
-											if ($query['NomeCliente'] == $key) {
+										foreach ($select['TipoFrete'] as $key => $row) {
+											if ($query['TipoFrete'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 											} else {
 												echo '<option value="' . $key . '">' . $row . '</option>';
@@ -69,9 +69,9 @@
 											</div>
 										</div>
 									</div>
-								</div>								
+								</div>
 							</div>												
-							<div class="row">
+							<div class="row">	
 								<div class="col-md-3">
 									<label for="DataInicio">Data Início: *</label>
 									<div class="input-group DatePicker">
@@ -79,7 +79,7 @@
 											<span class="glyphicon glyphicon-calendar"></span>
 										</span>
 										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
-									   autofocus name="DataInicio" value="<?php echo set_value('DataInicio', $query['DataInicio']); ?>">
+											   autofocus name="DataInicio" value="<?php echo set_value('DataInicio', $query['DataInicio']); ?>">
 									</div>
 								</div>
 								<div class="col-md-3">
@@ -89,7 +89,7 @@
 											<span class="glyphicon glyphicon-calendar"></span>
 										</span>
 										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
-									   name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
+											   name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
 									</div>
 								</div>								
 							</div>												

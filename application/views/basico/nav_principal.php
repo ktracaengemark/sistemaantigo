@@ -82,6 +82,8 @@
 							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasrec"><span class="glyphicon glyphicon-pencil"></span> Relatório das Receitas</a></li>
 							<li role="separator" class="divider"></li>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/rankingformapag"><span class="glyphicon glyphicon-pencil"></span> Ranking de Pagamento</a></li>
+							<li role="separator" class="divider"></li>
 							<?php if ($_SESSION['log']['idSis_Empresa'] == 5 ) { ?>
 							<!--<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/orcamentoonline"><span class="glyphicon glyphicon-pencil"></span> Orçamentos Online</a></li>
 							<li role="separator" class="divider"></li>							
@@ -99,10 +101,12 @@
 							<li><a href="<?php echo base_url() ?>relatorio/fiadorec"><span class="glyphicon glyphicon-usd"></span> Fiado das Vendas</a></li>
 							<li role="separator" class="divider"></li>							
 							<li><a href="<?php echo base_url() ?>relatorio/produtosvend"><span class="glyphicon glyphicon-pencil"></span> Produtos Vendidos</a></li>
+							<li role="separator" class="divider"></li>-->
+							<li><a href="<?php echo base_url() ?>relatorio/rankingvendas"><span class="glyphicon glyphicon-pencil"></span> Ranking de Clientes</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="<?php echo base_url() ?>relatorio/rankingvendas"><span class="glyphicon glyphicon-pencil"></span> Ranking de Vendas</a></li>-->
+							<li><a href="<?php echo base_url() ?>relatorio/rankingformaentrega"><span class="glyphicon glyphicon-pencil"></span> Ranking de Entrega</a></li>
 							<?php } ?>
-							<!--<li role="separator" class="divider"></li>-->
+							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>							
 						</ul>
 					</div>							
