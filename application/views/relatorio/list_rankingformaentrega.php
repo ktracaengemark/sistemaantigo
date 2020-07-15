@@ -14,6 +14,7 @@
 				</div>	
 			</div>	
 		</div>	
+		<!--
 		<table class="table table-bordered table-condensed table-striped">	
 			<tfoot>
 				<tr>						
@@ -22,23 +23,22 @@
 				</tr>
 			</tfoot>
 		</table>
+		-->
 		<div style="overflow: auto; width: auto; height: 300px;">			
 			<table class="table table-bordered table-condensed table-striped">
-				
+				<thead>
+					<tr>						
+						<th colspan="1" class="active">Total :</th>
+						<th colspan="1" class="active"><?php echo $report->soma->somaqtdparc ?></th>
+					</tr>
+				</thead>
 				<thead>
 					<tr>
 						<th class="active text-center">ENTREGA</th>
 						<th class="active text-center">PAGO</th>
 					</tr>
 				</thead>
-				<thead>
-					<tr>						
-						<th colspan="1" class="active">Total :</th>
-						<th colspan="1" class="active"><?php echo $report->soma->somaqtdparc ?></th>												
-					</tr>
-				</thead>
 				<tbody>
-
 					<?php
 					$cliente = array ();
 					$valor = array();
@@ -50,7 +50,7 @@
 							
 							echo '<tr>';
 								echo '<td>' . $row->TipoFrete . '</td>';
-								echo '<td>' . $row->QtdParc . '</td>';							
+								echo '<td>' . $row->QtdParc . '</td>';
 							echo '</tr>';
 						
 							$nomecliente = $row->TipoFrete;
@@ -62,12 +62,11 @@
 						}
 					}
 					?>
-
 				</tbody>
 				<tfoot>
 					<tr>						
 						<th colspan="1" class="active">Total:</th>
-						<th colspan="1" class="active"><?php echo $report->soma->somaqtdparc ?></th>						
+						<th colspan="1" class="active"><?php echo $report->soma->somaqtdparc ?></th>
 					</tr>
 				</tfoot>
 

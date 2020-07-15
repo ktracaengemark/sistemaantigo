@@ -3485,6 +3485,7 @@ class Relatorio extends CI_Controller {
 
 	$data['query'] = quotes_to_entities($this->input->post(array(
 		'ValorOrca',
+		'ValorFrete',
 		'TipoFrete',
 		'idTab_TipoFrete',
 		'DataInicio',
@@ -4464,6 +4465,8 @@ class Relatorio extends CI_Controller {
             'QuitadoOrca',
 			'ConcluidoOrca',
 			'FormaPag',
+			'TipoFrete',
+			'Entregador',
 
         ), TRUE));
 		/*
@@ -4502,23 +4505,18 @@ class Relatorio extends CI_Controller {
 
         $data['select']['Campo'] = array(
             'C.NomeCliente' => 'Nome do Cliente',
-
             'OT.idApp_OrcaTrata' => 'Número do Orçamento',
             'OT.AprovadoOrca' => 'Orçamento Aprovado?',
-            'OT.DataOrca' => 'Data do Orçamento',
-			'OT.DataEntradaOrca' => 'Validade do Orçamento',
-			'OT.DataPrazo' => 'Data da Entrega',
-            'OT.ValorOrca' => 'Valor do Orçamento',
-			'OT.ValorEntradaOrca' => 'Valor do Desconto',
-			'OT.ValorRestanteOrca' => 'Valor a Receber',
-			'OT.FormaPag' => 'Forma de Pag.?',
-            'OT.ConcluidoOrca' => 'Serviço Concluído?',
-            'OT.QuitadoOrca' => 'Orçamento Quitado?',
-            'OT.DataConclusao' => 'Data de Conclusão',
-			'OT.DataQuitado' => 'Data de Quitado',
-            'OT.DataRetorno' => 'Data de Retorno',
+            'OT.ConcluidoOrca' => 'Entregue?',
+            'OT.QuitadoOrca' => 'Pago?',            
+			'OT.DataOrca' => 'Data do Orçamento',
+			'OT.DataEntregaOrca' => 'Data da Entrega',
+            'OT.ValorRestanteOrca' => 'Valor Orçam',
+			'OT.ValorFrete' => 'Valor Frete',
+			'OT.ValorTotalOrca' => 'Valor Total',
+			'OT.FormaPag' => 'Forma de Pagam.?',
+			'OT.TipoFrete' => 'Forma de Entrega?',
 			'OT.ProfissionalOrca' => 'Profissional',
-
         );
 
         $data['select']['Ordenamento'] = array(
@@ -4527,16 +4525,20 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+		$data['select']['Entregador'] = $this->Relatorio_model->select_usuario();
 		$data['select']['FormaPag'] = $this->Relatorio_model->select_formapag();
-
-        $data['titulo'] = 'Clientes & Orçamentos';
+		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
+		
+        $data['titulo'] = 'Pedidos';
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+			$data['bd']['Entregador'] = $data['query']['Entregador'];
 			$data['bd']['FormaPag'] = $data['query']['FormaPag'];
+			$data['bd']['TipoFrete'] = $data['query']['TipoFrete'];
             $data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');

@@ -2,25 +2,25 @@
     <div class="panel-body">
 
 		<div class="col-md-1"></div>
+		<div class="col-md-3">
+            <label for="DataFim">Orçamento:</label>
+            <div class="input-group">
+                <span class="input-group-addon">R$</span>
+                <input type="text" class="form-control" disabled aria-label="Orcamento" value="<?php echo $report->soma->somarestante ?>">
+            </div>
+        </div>
+		<div class="col-md-3">
+            <label for="DataFim">Frete:</label>
+            <div class="input-group">
+                <span class="input-group-addon">R$</span>
+                <input type="text" class="form-control" disabled aria-label="Frete" value="<?php echo $report->soma->somafrete ?>">
+            </div>
+        </div>
         <div class="col-md-3">
-            <label for="DataFim">Total dos Orçamentos:</label>
+            <label for="DataFim">Total:</label>
             <div class="input-group">
                 <span class="input-group-addon">R$</span>
-                <input type="text" class="form-control" disabled aria-label="Total Orcamentos" value="<?php echo $report->soma->somaorcamento ?>">
-            </div>
-        </div>
-		<div class="col-md-3">
-            <label for="DataFim">Total dos Descontos:</label>
-            <div class="input-group">
-                <span class="input-group-addon">R$</span>
-                <input type="text" class="form-control" disabled aria-label="Total Descontos" value="<?php echo $report->soma->somadesconto ?>">
-            </div>
-        </div>
-		<div class="col-md-3">
-            <label for="DataFim">Total A Receber:</label>
-            <div class="input-group">
-                <span class="input-group-addon">R$</span>
-                <input type="text" class="form-control" disabled aria-label="Total Restante" value="<?php echo $report->soma->somarestante ?>">
+                <input type="text" class="form-control" disabled aria-label="Total" value="<?php echo $report->soma->somatotal ?>">
             </div>
         </div>
 		<div class="col-md-1"></div>
@@ -42,57 +42,53 @@
                     <tr>
 
 						<th class="active">Cliente</th>
-						<th class="active">Orç.</th>
+						<th class="active">Pedido</th>
                         
 						<!--<th class="active">Valid. do Orçam.</th>
 						<th class="active">Prazo de Entrega</th>-->
-                        <th class="active">Valor do Orç.</th>
-						<th class="active">Valor do Desc.</th>
-						<th class="active">Valor A Receber</th>					
+                        <th class="active">Orç.</th>
+						<th class="active">Frete</th>
+						<th class="active">Total</th>					
 						<th class="active">Apv.?</th>
 						<th class="active">Concl.?</th>
 						<th class="active">Quit.?</th>
-						<th class="active">Forma de Pag.</th>
+						<th class="active">Pagamento</th>
+						<th class="active">Entrega</th>
                         <th class="active">Dt. Orç.</th>
-						<th class="active">Dt. Concl.</th>
-                        <th class="active">Dt. Quit.</th>
-						<th class="active">Dt. Retor.</th>
+                        <th class="active">Dt. Ent.</th>
                         <th class="active">Dt. Venc.</th>
-						<th class="active">Obs.</th>
-						<th class="active">Prof.</th>
+						<!--<th class="active">Obs.</th>-->
+						<th class="active">Entregador</th>
                         <th class="active"></th>
                     </tr>
                 </thead>
 				<tbody>
                     <?php
                     foreach ($report->result_array() as $row) {
-                        #echo '<tr>';
-                        echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] . '">';
+                        echo '<tr>';
+                        #echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] . '">';
 
                             #echo '<div class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] . '">';
 							echo '<td>' . $row['NomeCliente'] . '</td>';
 							echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
-                            
 							#echo '<td>' . $row['DataEntradaOrca'] . '</td>';
 							#echo '<td>' . $row['DataPrazo'] . '</td>';
-                            echo '<td class="text-left">R$ ' . $row['ValorOrca'] . '</td>';
-							echo '<td class="text-left">R$ ' . $row['ValorEntradaOrca'] . '</td>';
-							echo '<td class="text-left">R$ ' . $row['ValorRestanteOrca'] . '</td>';
-							
+                            echo '<td class="text-left">' . $row['ValorRestanteOrca'] . '</td>';
+							echo '<td class="text-left">' . $row['ValorFrete'] . '</td>';
+							echo '<td class="text-left">' . $row['ValorTotalOrca'] . '</td>';
 							echo '<td>' . $row['AprovadoOrca'] . '</td>';
 							echo '<td>' . $row['ConcluidoOrca'] . '</td>';
 							echo '<td>' . $row['QuitadoOrca'] . '</td>';
                             echo '<td>' . $row['FormaPag'] . '</td>';
-                            echo '<td>' . $row['DataOrca'] . '</td>';							
-							echo '<td>' . $row['DataConclusao'] . '</td>';
-                            echo '<td>' . $row['DataQuitado'] . '</td>';
-							echo '<td>' . $row['DataRetorno'] . '</td>';
+							echo '<td>' . $row['TipoFrete'] . '</td>';
+                            echo '<td>' . $row['DataOrca'] . '</td>';
+							echo '<td>' . $row['DataEntregaOrca'] . '</td>';
 							echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
-							echo '<td>' . $row['ObsOrca'] . '</td>';
+							#echo '<td>' . $row['Descricao'] . '</td>';
 							echo '<td>' . $row['Nome'] . '</td>';
                             #echo '</div>';
 							echo '<td class="notclickable">
-                                    <a class="btn btn-md btn-info notclickable" target="_blank" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
+                                    <a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
                                         <span class="glyphicon glyphicon-print notclickable"></span>
                                     </a>
                                 </td>';

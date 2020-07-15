@@ -3828,6 +3828,34 @@ class Relatorio_model extends CI_Model {
         );
         $query['Parcelas'] = $query['Parcelas']->result();
 		
+        ####################################################################
+        #Entregador 
+
+        $query['Entregador'] = $this->db->query('
+            SELECT
+                TOT.ValorFrete AS QtdEntrega,
+				FP.idTab_TipoFrete,
+				SUE.Nome
+            FROM
+                App_OrcaTrata AS TOT
+                    LEFT JOIN Sis_Usuario AS SUE ON SUE.idSis_Usuario = TOT.Entregador
+					LEFT JOIN Tab_TipoFrete AS FP ON FP.idTab_TipoFrete = TOT.TipoFrete
+					LEFT JOIN App_Parcelas AS TPR ON TPR.idApp_OrcaTrata = TOT.idApp_OrcaTrata
+            WHERE
+                TOT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+                TOT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                (' . $consulta . ')
+                ' . $data['TipoFrete'] . ' AND
+                TOT.AprovadoOrca = "S" AND
+				TOT.QuitadoOrca = "S" AND
+				TOT.idTab_TipoRD = "2" 
+            GROUP BY
+                FP.idTab_TipoFrete
+            ORDER BY
+                ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
+        ');
+        $query['Entregador'] = $query['Entregador']->result();		
+		
 		$rankingvendas = new stdClass();
 		#$estoque = array();
         foreach ($query['TipoFrete'] as $row) {
@@ -3837,31 +3865,39 @@ class Relatorio_model extends CI_Model {
             $rankingvendas->{$row->idTab_TipoFrete}->TipoFrete = $row->TipoFrete;
         }
 
-
-				/*
+		/*
 		echo "<pre>";
 		print_r($query['Comprados']);
 		echo "</pre>";
-		exit();*/
+		exit();
+		*/
 		
 		foreach ($query['Parcelas'] as $row) {
             if (isset($rankingvendas->{$row->idTab_TipoFrete}))
                 $rankingvendas->{$row->idTab_TipoFrete}->QtdParc = $row->QtdParc;
         }
 		
+		foreach ($query['Entregador'] as $row) {
+            if (isset($rankingvendas->{$row->idTab_TipoFrete}))
+                $rankingvendas->{$row->idTab_TipoFrete}->QtdEntrega = $row->QtdEntrega;
+        }
+		
 		$rankingvendas->soma = new stdClass();
-		$somaqtdorcam = $somaqtddescon = $somaqtdvendida = $somaqtdparc = $somaqtddevol = 0;
+		$somaqtdparc = $somaqtdentrega = 0;
 
 		foreach ($rankingvendas as $row) {
 	
 			$row->QtdParc = (!isset($row->QtdParc)) ? 0 : $row->QtdParc;
-			#$row->QtdDevol = (!isset($row->QtdDevol)) ? 0 : $row->QtdDevol;
+			$row->QtdEntrega = (!isset($row->QtdEntrega)) ? 0 : $row->QtdEntrega;
 		
 			$somaqtdparc += $row->QtdParc;
-			#$row->QtdParc = number_format($row->QtdParc, 2, ',', '.');																
+			#$row->QtdParc = number_format($row->QtdParc, 2, ',', '.');
+			$somaqtdentrega += $row->QtdEntrega;
+			#$row->QtdEntrega = number_format($row->QtdEntrega, 2, ',', '.');
         }
 		
 		$rankingvendas->soma->somaqtdparc = number_format($somaqtdparc, 2, ',', '.');
+		$rankingvendas->soma->somaqtdentrega = number_format($somaqtdentrega, 2, ',', '.');
         /*
         echo $this->db->last_query();
         echo "<pre>";
@@ -6393,11 +6429,11 @@ exit();*/
 
         if ($data['DataFim2']) {
             $consulta2 =
-                '(OT.DataConclusao >= "' . $data['DataInicio2'] . '" AND OT.DataConclusao <= "' . $data['DataFim2'] . '")';
+                '(OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND OT.DataEntregaOrca <= "' . $data['DataFim2'] . '")';
         }
         else {
             $consulta2 =
-                '(OT.DataConclusao >= "' . $data['DataInicio2'] . '")';
+                '(OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '")';
         }
 
         if ($data['DataFim3']) {
@@ -6419,7 +6455,9 @@ exit();*/
         }
 
         $data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
+		$data['Entregador'] = ($data['Entregador']) ? ' AND OT.Entregador = ' . $data['Entregador'] : FALSE;
 		$data['FormaPag'] = ($data['FormaPag']) ? ' AND TFP.idTab_FormaPag = ' . $data['FormaPag'] : FALSE;
+		$data['TipoFrete'] = ($data['TipoFrete']) ? ' AND TTF.idTab_TipoFrete = ' . $data['TipoFrete'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'C.NomeCliente' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
@@ -6437,9 +6475,12 @@ exit();*/
 				OT.DataEntradaOrca,
 				OT.DataPrazo,
                 OT.ValorOrca,
+				OT.ValorFrete,
+				OT.ValorTotalOrca,
 				OT.ValorEntradaOrca,
 				OT.ValorRestanteOrca,
 				OT.DataVencimentoOrca,
+				OT.DataEntregaOrca,
                 OT.ConcluidoOrca,
                 OT.QuitadoOrca,
                 OT.DataConclusao,
@@ -6447,15 +6488,19 @@ exit();*/
 				OT.DataRetorno,
 				OT.idTab_TipoRD,
 				OT.FormaPagamento,
+				TTF.TipoFrete,
 				OT.ObsOrca,
+				OT.Descricao,
+				OT.Entregador,
 				TFP.FormaPag,
 				TSU.Nome
+				
             FROM
                 App_Cliente AS C,
                 App_OrcaTrata AS OT
-				LEFT JOIN Sis_Usuario AS TSU ON TSU.idSis_Usuario = OT.idSis_Usuario
+				LEFT JOIN Sis_Usuario AS TSU ON TSU.idSis_Usuario = OT.Entregador
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
-
+				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
             WHERE
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
@@ -6465,11 +6510,12 @@ exit();*/
 				' . $filtro3 . '
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['NomeCliente'] . '
+				' . $data['Entregador'] . '
+				' . $data['TipoFrete'] . '
 				' . $data['FormaPag'] . ' AND
 				OT.idTab_TipoRD = "2"
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
-
         ');
 
         /*
@@ -6487,9 +6533,12 @@ exit();*/
             $somaorcamento=0;
 			$somadesconto=0;
 			$somarestante=0;
+			$somafrete=0;
+			$somatotal=0;
             foreach ($query->result() as $row) {
 				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
 				$row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
+				$row->DataEntregaOrca = $this->basico->mascara_data($row->DataEntregaOrca, 'barras');
 				$row->DataPrazo = $this->basico->mascara_data($row->DataPrazo, 'barras');
                 $row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
 				$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
@@ -6502,6 +6551,9 @@ exit();*/
 
                 $somaorcamento += $row->ValorOrca;
                 $row->ValorOrca = number_format($row->ValorOrca, 2, ',', '.');
+				
+				$somafrete += $row->ValorFrete;
+                $row->ValorFrete = number_format($row->ValorFrete, 2, ',', '.');
 
 				$somadesconto += $row->ValorEntradaOrca;
                 $row->ValorEntradaOrca = number_format($row->ValorEntradaOrca, 2, ',', '.');
@@ -6509,11 +6561,14 @@ exit();*/
 				$somarestante += $row->ValorRestanteOrca;
                 $row->ValorRestanteOrca = number_format($row->ValorRestanteOrca, 2, ',', '.');
 
-
+				$somatotal += $row->ValorTotalOrca;
+                $row->ValorTotalOrca = number_format($row->ValorTotalOrca, 2, ',', '.');
 
             }
             $query->soma = new stdClass();
             $query->soma->somaorcamento = number_format($somaorcamento, 2, ',', '.');
+			$query->soma->somafrete = number_format($somafrete, 2, ',', '.');
+			$query->soma->somatotal = number_format($somatotal, 2, ',', '.');
 			$query->soma->somadesconto = number_format($somadesconto, 2, ',', '.');
 			$query->soma->somarestante = number_format($somarestante, 2, ',', '.');
 
@@ -9822,14 +9877,14 @@ exit();*/
         $query = $this->db->query('
             SELECT
 				P.idSis_Usuario,
-				CONCAT(IFNULL(F.Abrev,""), " --- ", IFNULL(P.Nome,"")) AS NomeUsuario
+				CONCAT(IFNULL(F.Funcao,""), " --- ", IFNULL(P.Nome,"")) AS NomeUsuario
             FROM
                 Sis_Usuario AS P
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
-			ORDER BY F.Abrev ASC
+			ORDER BY F.Funcao ASC
         ');
 
         $array = array();
