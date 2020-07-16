@@ -50,8 +50,8 @@
 						<th class="active">Frete</th>
 						<th class="active">Total</th>					
 						<th class="active">Apv.?</th>
-						<th class="active">Concl.?</th>
-						<th class="active">Quit.?</th>
+						<th class="active">Entr.?</th>
+						<th class="active">Pago?</th>
 						<th class="active">Pagamento</th>
 						<th class="active">Entrega</th>
                         <th class="active">Dt. Orç.</th>
