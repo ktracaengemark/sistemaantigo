@@ -754,7 +754,7 @@
 													<div class="row">
 														<div class="col-md-12 text-left">
 															<label  for="Entregador">Entregador</label>
-															<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 																	id="Entregador" name="Entregador">
 																<option value="">-- Sel. o Entregador --</option>
 																<?php

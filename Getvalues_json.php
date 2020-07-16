@@ -663,7 +663,7 @@ elseif ($_GET['q'] == 3) {
     $result = mysql_query('
             SELECT
 				P.idSis_Usuario,
-				CONCAT(IFNULL(P.Nome,""), " -- ", IFNULL(F.Funcao,"")) AS Nome
+				CONCAT(IFNULL(F.Funcao,""), " -- ", IFNULL(P.Nome,"")) AS Nome
             FROM
                 Sis_Usuario AS P
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao

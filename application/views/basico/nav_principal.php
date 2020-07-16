@@ -78,7 +78,7 @@
 						<ul class="dropdown-menu" role="menu">							
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/cadastrar3"><span class="glyphicon glyphicon-plus"></span> Nova Receita / Venda</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/pedido"><span class="glyphicon glyphicon-pencil"></span> Atualizar Status</a></li>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/pedido"><span class="glyphicon glyphicon-edit"></span> Atualizar Status dos Pedidos</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasrec"><span class="glyphicon glyphicon-pencil"></span> Relatório das Receitas</a></li>
 							<li role="separator" class="divider"></li>

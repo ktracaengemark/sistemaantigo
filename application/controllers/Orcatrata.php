@@ -902,7 +902,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['QuitadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['Quitado'] = $this->Basico_model->select_status_sn();
         #$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
+		#$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
 		$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
 		$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
@@ -4800,8 +4800,8 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Modalidade'] = $this->Basico_model->select_modalidade();
 		$data['select']['QuitadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['Quitado'] = $this->Basico_model->select_status_sn();
-        $data['select']['Profissional'] = $this->Usuario_model->select_usuario();
-		$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
+        #$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
+		#$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
 		$data['select']['idApp_Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
 		$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
 		$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
