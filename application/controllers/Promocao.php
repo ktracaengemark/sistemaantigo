@@ -907,6 +907,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'Prodaux4',
 			'Ativo',
 			'VendaSite',
+			'VendaBalcao',
 			#'Aprovado',			
         ), TRUE));
 
@@ -949,7 +950,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 		//$data['select']['idTab_Produto'] = $this->Basico_model->select_produtos();
 		//$data['select']['Promocao'] = $this->Relatorio_model->select_promocao();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
-		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();		
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Cadastrar';
         $data['form_open_path'] = 'promocao/cadastrar4';
@@ -973,29 +975,33 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
-		
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
 		
- 		(!$data['promocao']['Ativo']) ? $data['promocao']['Ativo'] = 'S' : FALSE;       
-		
+ 		(!$data['promocao']['Ativo']) ? $data['promocao']['Ativo'] = 'S' : FALSE;
 		$data['radio'] = array(
             'Ativo' => $this->basico->radio_checked($data['promocao']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['promocao']['Ativo'] == 'S') ?
-            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"'; 
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
 
- 		(!$data['promocao']['VendaSite']) ? $data['promocao']['VendaSite'] = 'S' : FALSE;       
-		
+ 		(!$data['promocao']['VendaSite']) ? $data['promocao']['VendaSite'] = 'S' : FALSE;
 		$data['radio'] = array(
             'VendaSite' => $this->basico->radio_checked($data['promocao']['VendaSite'], 'VendaSite', 'NS'),
         );
         ($data['promocao']['VendaSite'] == 'S') ?
-            $data['div']['VendaSite'] = '' : $data['div']['VendaSite'] = 'style="display: none;"';			
+            $data['div']['VendaSite'] = '' : $data['div']['VendaSite'] = 'style="display: none;"';
+
+ 		(!$data['promocao']['VendaBalcao']) ? $data['promocao']['VendaBalcao'] = 'S' : FALSE;
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['promocao']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['promocao']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"';
 		
 		/*
           echo '<br>';
@@ -1098,6 +1104,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'Prodaux4',
 			'Ativo',
 			'VendaSite',
+			'VendaBalcao',
 			#'Aprovado',
 			'Cat_1',
 			'Cat_2',
@@ -1162,8 +1169,9 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 		$data['select']['Cat_3'] = $this->Basico_model->select_catprod();		
 		
 		$data['select']['idTab_Produto'] = $this->Basico_model->select_produto2();
-		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Editar';
         $data['form_open_path'] = 'promocao/alterar';
@@ -1187,29 +1195,33 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
-		
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';       
         
- 		(!$data['promocao']['Ativo']) ? $data['promocao']['Ativo'] = 'S' : FALSE;       
-		
+ 		(!$data['promocao']['Ativo']) ? $data['promocao']['Ativo'] = 'S' : FALSE;
 		$data['radio'] = array(
             'Ativo' => $this->basico->radio_checked($data['promocao']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['promocao']['Ativo'] == 'S') ?
-            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';		
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
 		
- 		(!$data['promocao']['VendaSite']) ? $data['promocao']['VendaSite'] = 'S' : FALSE;       
-		
+ 		(!$data['promocao']['VendaSite']) ? $data['promocao']['VendaSite'] = 'S' : FALSE;
 		$data['radio'] = array(
             'VendaSite' => $this->basico->radio_checked($data['promocao']['VendaSite'], 'VendaSite', 'NS'),
         );
         ($data['promocao']['VendaSite'] == 'S') ?
-            $data['div']['VendaSite'] = '' : $data['div']['VendaSite'] = 'style="display: none;"';		
+            $data['div']['VendaSite'] = '' : $data['div']['VendaSite'] = 'style="display: none;"';
+		
+ 		(!$data['promocao']['VendaBalcao']) ? $data['promocao']['VendaBalcao'] = 'S' : FALSE;
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['promocao']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['promocao']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"';		
 		/*
           echo '<br>';
           echo "<pre>";
@@ -1312,6 +1324,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'Prodaux4',
 			'Ativo',
 			'VendaSite',
+			'VendaBalcao',
 			#'Aprovado',
 			'Cat_1',
 			'Mod_1',
@@ -1382,7 +1395,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 		$data['select']['Mod_3'] = $this->Basico_model->select_mod_3($data['promocao']['Cat_3']);
 		$data['select']['idTab_Produto'] = $this->Basico_model->select_produto2();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
-		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();		
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Editar';
         $data['form_open_path'] = 'promocao/alterar3';
@@ -1406,29 +1420,33 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
-		
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';       
         
- 		(!$data['promocao']['Ativo']) ? $data['promocao']['Ativo'] = 'S' : FALSE;       
-		
+ 		(!$data['promocao']['Ativo']) ? $data['promocao']['Ativo'] = 'S' : FALSE;
 		$data['radio'] = array(
             'Ativo' => $this->basico->radio_checked($data['promocao']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['promocao']['Ativo'] == 'S') ?
             $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';		
 		
- 		(!$data['promocao']['VendaSite']) ? $data['promocao']['VendaSite'] = 'S' : FALSE;       
-		
+ 		(!$data['promocao']['VendaSite']) ? $data['promocao']['VendaSite'] = 'S' : FALSE;
 		$data['radio'] = array(
             'VendaSite' => $this->basico->radio_checked($data['promocao']['VendaSite'], 'VendaSite', 'NS'),
         );
         ($data['promocao']['VendaSite'] == 'S') ?
-            $data['div']['VendaSite'] = '' : $data['div']['VendaSite'] = 'style="display: none;"';		
+            $data['div']['VendaSite'] = '' : $data['div']['VendaSite'] = 'style="display: none;"';
+			
+		(!$data['promocao']['VendaBalcao']) ? $data['promocao']['VendaBalcao'] = 'S' : FALSE;
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['promocao']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['promocao']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"';	
 		/*
           echo '<br>';
           echo "<pre>";
@@ -1532,6 +1550,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'Prodaux4',
 			'Ativo',
 			'VendaSite',
+			'VendaBalcao',
 			#'Aprovado',
 			'Cat_1',
 			'Mod_1',
@@ -1693,7 +1712,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 		$data['select']['idTab_Produtos2'] = $this->Basico_model->select_prod_der2();
 		$data['select']['idTab_Produtos3'] = $this->Basico_model->select_prod_der3();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
-		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();		
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Editar';
         $data['form_open_path'] = 'promocao/alterar4';
@@ -1717,29 +1737,33 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
-		
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';       
         
- 		(!$data['promocao']['Ativo']) ? $data['promocao']['Ativo'] = 'S' : FALSE;       
-		
+ 		(!$data['promocao']['Ativo']) ? $data['promocao']['Ativo'] = 'S' : FALSE;
 		$data['radio'] = array(
             'Ativo' => $this->basico->radio_checked($data['promocao']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['promocao']['Ativo'] == 'S') ?
             $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';		
 		
- 		(!$data['promocao']['VendaSite']) ? $data['promocao']['VendaSite'] = 'S' : FALSE;       
-		
+ 		(!$data['promocao']['VendaSite']) ? $data['promocao']['VendaSite'] = 'S' : FALSE;
 		$data['radio'] = array(
             'VendaSite' => $this->basico->radio_checked($data['promocao']['VendaSite'], 'VendaSite', 'NS'),
         );
         ($data['promocao']['VendaSite'] == 'S') ?
-            $data['div']['VendaSite'] = '' : $data['div']['VendaSite'] = 'style="display: none;"';		
+            $data['div']['VendaSite'] = '' : $data['div']['VendaSite'] = 'style="display: none;"';
+			
+		(!$data['promocao']['VendaBalcao']) ? $data['promocao']['VendaBalcao'] = 'S' : FALSE;
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['promocao']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['promocao']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"';	
 		/*
           echo '<br>';
           echo "<pre>";
