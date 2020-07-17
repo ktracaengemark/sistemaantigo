@@ -652,34 +652,6 @@
 													</div>
 													<?php echo form_error('DetalhadaEntrega'); ?>
 												</div>
-												<div class="col-md-2 text-left">
-													<label for="AtualizaEndereco">Atualizar End.?</label><br>
-													<div class="btn-group" data-toggle="buttons">
-														<?php
-														foreach ($select['AtualizaEndereco'] as $key => $row) {
-															if (!$cadastrar['AtualizaEndereco'])$cadastrar['AtualizaEndereco'] = 'N';
-
-															($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-															if ($cadastrar['AtualizaEndereco'] == $key) {
-																echo ''
-																. '<label class="btn btn-warning active" name="AtualizaEndereco_' . $hideshow . '">'
-																. '<input type="radio" name="AtualizaEndereco" id="' . $hideshow . '" '
-																. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																. '</label>'
-																;
-															} else {
-																echo ''
-																. '<label class="btn btn-default" name="AtualizaEndereco_' . $hideshow . '">'
-																. '<input type="radio" name="AtualizaEndereco" id="' . $hideshow . '" '
-																. 'autocomplete="off" value="' . $key . '" >' . $row
-																. '</label>'
-																;
-															}
-														}
-														?>
-													</div>
-												</div>
 											</div>
 											<br>
 											<div id="TipoFrete" <?php echo $div['TipoFrete']; ?>>
@@ -719,11 +691,39 @@
 														<input type="text" class="form-control " id="Estado" maxlength="2" <?php echo $readonly; ?>
 															   name="Estado" value="<?php echo $orcatrata['Estado']; ?>">
 													</div>
-													<div class="col-md-4 ">
+													<div class="col-md-2 ">
 														<label class="" for="Referencia">Referencia:</label>
 														<textarea class="form-control " id="Referencia" <?php echo $readonly; ?>
 																  name="Referencia"><?php echo $orcatrata['Referencia']; ?>
 														</textarea>
+													</div>
+													<div class="col-md-2 text-left">
+														<label for="AtualizaEndereco">Atualizar End.?</label><br>
+														<div class="btn-group" data-toggle="buttons">
+															<?php
+															foreach ($select['AtualizaEndereco'] as $key => $row) {
+																if (!$cadastrar['AtualizaEndereco'])$cadastrar['AtualizaEndereco'] = 'N';
+
+																($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																if ($cadastrar['AtualizaEndereco'] == $key) {
+																	echo ''
+																	. '<label class="btn btn-warning active" name="AtualizaEndereco_' . $hideshow . '">'
+																	. '<input type="radio" name="AtualizaEndereco" id="' . $hideshow . '" '
+																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																	. '</label>'
+																	;
+																} else {
+																	echo ''
+																	. '<label class="btn btn-default" name="AtualizaEndereco_' . $hideshow . '">'
+																	. '<input type="radio" name="AtualizaEndereco" id="' . $hideshow . '" '
+																	. 'autocomplete="off" value="' . $key . '" >' . $row
+																	. '</label>'
+																	;
+																}
+															}
+															?>
+														</div>
 													</div>
 													<!--
 													<div class="col-md-3">
