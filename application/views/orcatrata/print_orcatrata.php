@@ -262,7 +262,36 @@
 								</tr>
 							</tbody>
 						</table>					
-						
+						<table class="table table-bordered table-condensed table-striped">
+							<thead>
+								<tr>
+									<th class="col-md-4" scope="col">Nome</th>
+									<th class="col-md-4" scope="col">Tel.</th>
+									<th class="col-md-4" scope="col">Paren</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><?php echo $orcatrata['NomeRec'] ?></td>
+									<td><?php echo $orcatrata['TelefoneRec'] ?></td>
+									<td><?php echo $orcatrata['ParentescoRec'] ?></td>
+								</tr>
+							</tbody>
+							<thead>
+								<tr>
+									<th class="col-md-4" scope="col">Aux1</th>
+									<th class="col-md-4" scope="col">Aux2</th>
+									<th class="col-md-4" scope="col">ObsEnt.</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><?php echo $orcatrata['Aux1Entrega'] ?></td>
+									<td><?php echo $orcatrata['Aux2Entrega'] ?></td>
+									<td><?php echo $orcatrata['ObsEntrega'] ?></td>
+								</tr>
+							</tbody>
+						</table>
 						<h3 class="text-left"><b>Pagamento</b></h3>
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<table class="table table-bordered table-condensed table-striped">

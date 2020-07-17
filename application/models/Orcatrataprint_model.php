@@ -29,6 +29,13 @@ class Orcatrataprint_model extends CI_Model {
 				OT.Cidade,
 				OT.Estado,
 				OT.Referencia,
+				
+				OT.NomeRec,
+				OT.TelefoneRec,
+				OT.ParentescoRec,
+				OT.ObsEntrega,
+				OT.Aux1Entrega,
+				OT.Aux2Entrega,
 
 				OT.PrazoEntrega,
 				OT.ValorTotalOrca,
