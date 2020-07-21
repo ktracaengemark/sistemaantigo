@@ -21,7 +21,7 @@
 							<!--<th class="active">Id.P</th>-->
 							<th class="active">Id.M</th>
 							<!--<th class="active">Código</th>-->
-							<th class="active">Produto/Modelo</th>
+							<th class="active">Modelo</th>
 							<!--<th class="active">Cor/Sabor</th>
 							<th class="active">Tamanho</th>-->
 						</tr>

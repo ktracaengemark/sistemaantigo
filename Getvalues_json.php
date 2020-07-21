@@ -48,7 +48,7 @@ if ($_GET['q']==100) {
         FROM
             App_Cliente
         WHERE
-			idApp_Cliente = ' . $_GET['idCliente'] . '
+		idApp_Cliente = ' . $_GET['idCliente'] . '
     ');
 
     while ($row = mysql_fetch_assoc($result)) {

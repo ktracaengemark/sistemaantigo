@@ -22,7 +22,7 @@
 		<?php echo (isset($list)) ? $list : FALSE ?>	
 	</div>
 </div>
-<?php echo form_open('relatorio/promocao', 'role="form"'); ?>
+<?php echo form_open('relatorio/precopromocao', 'role="form"'); ?>
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content">
@@ -31,7 +31,90 @@
 				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Produtos</h4>
 			</div>
 			<div class="modal-footer">
-				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
+				<div class="form-group">	
+					<div class="row text-left">
+						<div class="col-md-8">
+							<label for="Ordenamento">Produto</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
+									id="Produtos" name="Produtos">
+								<?php
+								foreach ($select['Produtos'] as $key => $row) {
+									if ($query['Produtos'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<label for="Ordenamento">V/C/A</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="TipoProduto" name="TipoProduto">
+								<?php
+								foreach ($select['TipoProduto'] as $key => $row) {
+									if ($query['TipoProduto'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>						
+					</div>
+				</div>
+				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+				<div class="form-group">
+					<div class="row text-left">
+						<div class="col-md-4">
+							<label for="Ordenamento">Categoria</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="Prodaux3" name="Prodaux3">
+								<?php
+								foreach ($select['Prodaux3'] as $key => $row) {
+									if ($query['Prodaux3'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<label for="Ordenamento">Tipo</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="Prodaux2" name="Prodaux2">
+								<?php
+								foreach ($select['Prodaux2'] as $key => $row) {
+									if ($query['Prodaux2'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>						
+						<div class="col-md-4">
+							<label for="Ordenamento">Esp.</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="Prodaux1" name="Prodaux1">
+								<?php
+								foreach ($select['Prodaux1'] as $key => $row) {
+									if ($query['Prodaux1'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+					</div>
+				</div>	
 				<div class="form-group">	
 					<div class="row text-left">
 						<div class="col-md-12">
@@ -92,7 +175,7 @@
 					<div class="form-group col-md-4">
 						<div class="form-footer">		
 							<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-								<span class="glyphicon glyphicon-plus"></span> Nova Promoção
+								<span class="glyphicon glyphicon-plus"></span> Novo Produto
 							</button>							
 						</div>	
 					</div>					

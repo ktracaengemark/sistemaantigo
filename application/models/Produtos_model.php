@@ -42,7 +42,7 @@ class Produtos_model extends CI_Model {
     public function set_valor($data) {
 
         $query = $this->db->insert_batch('Tab_Valor', $data);
-
+		
         if ($this->db->affected_rows() === 0) {
             return FALSE;
         } else {
@@ -277,6 +277,29 @@ class Produtos_model extends CI_Model {
         return $query;
     }	
 
+    public function get_produtosderivados($data) {
+		$query = $this->db->query('
+			SELECT
+				TPS.idTab_Produtos,
+				TPS.idSis_Empresa,
+				TPS.Arquivo,
+				TPS.Nome_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,"")) AS NomeProduto
+			FROM 
+				Tab_Produtos AS TPS
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2
+			WHERE 
+				idTab_Produtos = ' . $data . '
+		');
+        $query = $query->result_array();
+
+        //return $query;
+		return $query[0];
+    }
+	
     public function get_derivados($data) {
 		$query = $this->db->query('
 			SELECT  
@@ -292,6 +315,7 @@ class Produtos_model extends CI_Model {
 				TPS.idTab_Produto,
 				TPS.Nome_Prod,
 				TPS.Cod_Prod,
+				TPS.Arquivo,
 				TPS.Ativo,
 				TPS.VendaSite,
 				TPS.Tipo_Valor_Prod,
@@ -408,6 +432,14 @@ class Produtos_model extends CI_Model {
 
     }
 
+    public function update_produtosderivados($data, $id) {
+
+        unset($data['idTab_Produtos']);
+        $query = $this->db->update('Tab_Produtos', $data, array('idTab_Produtos' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+	
     public function update_valor($data) {
 
         $query = $this->db->update_batch('Tab_Valor', $data, 'idTab_Valor');

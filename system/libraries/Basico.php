@@ -323,6 +323,15 @@ class Basico {
         //$data = 'produto' . '_' . $_SESSION['Produtos']['idTab_Produto'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
 		$data = rand() . '_' . 'produto' . '_' . $_SESSION['Produtos']['idTab_Produto'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
 		return $data;
+    }	
+
+    function renomeiaderivado($data) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+        //$data = 'produto' . '_' . $_SESSION['Produtos']['idTab_Produto'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = rand() . '_derivado_' . $_SESSION['Derivados']['idTab_Produtos'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		return $data;
     }
 	
     function renomeiaprodaux2($data) {

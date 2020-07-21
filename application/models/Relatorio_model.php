@@ -7590,25 +7590,27 @@ exit();*/
             SELECT
                 TPS.idTab_Produtos,
 				TPS.Cod_Prod,
+				TPS.Arquivo,
+				TPS.Nome_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " ", IFNULL(TOP2.Opcao,""), " ", IFNULL(TOP1.Opcao,"")) AS Nome_Prod,
 				TP.idTab_Produto,
 				TP.TipoProduto,
 				TP.Produtos,
 				TP.ValorProdutoSite,
 				TP.Comissao,
 				TP.PesoProduto,
-				TP.Arquivo,
 				TP.Ativo,
 				TP.VendaSite,
-				TCOP.Nome_Cor_Prod,
-				TTAP.Nome_Tam_Prod,
 				TP3.idTab_Prodaux3,
 				TP3.Prodaux3
             FROM
                 Tab_Produtos AS TPS
 					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TPS.idTab_Produto
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
-					LEFT JOIN Tab_Cor_Prod AS TCOP ON TCOP.idTab_Cor_Prod = TPS.Opcao_Atributo_1
-					LEFT JOIN Tab_Tam_Prod AS TTAP ON TTAP.idTab_Tam_Prod = TPS.Opcao_Atributo_2
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2
 					
             WHERE
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -7723,7 +7725,46 @@ exit();*/
 		#$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
 		#$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
         #$data['Prodaux3'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
-		$data['Campo'] = (!$data['Campo']) ? 'TPD.Produtos' : $data['Campo'];
+		$data['Campo'] = (!$data['Campo']) ? 'TPM.Promocao' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+
+        $query = $this->db->query('
+            SELECT
+                TPM.idTab_Promocao,
+				TPM.Promocao,
+				TPM.Descricao,
+				TPM.Arquivo,
+				TPM.Ativo,
+				TDC.Desconto
+            FROM
+                Tab_Promocao AS TPM
+					LEFT JOIN Tab_Desconto AS TDC ON TDC.idTab_Desconto = TPM.Desconto					
+            WHERE
+                TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY
+				TDC.Desconto ASC,
+				TPM.idTab_Promocao ASC		
+        ');
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+           
+			foreach ($query->result() as $row) {
+            }
+            return $query;
+        }
+
+    }
+
+	public function list_precopromocao($data, $completo) {
+
+		$data['Promocao'] = ($data['Promocao']) ? ' AND TPM.idTab_Promocao = ' . $data['Promocao'] : FALSE;
+		#$data['TipoProduto'] = ($data['TipoProduto']) ? ' AND TTP.idTab_TipoProduto = ' . $data['TipoProduto'] : FALSE;
+		#$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
+		#$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
+        #$data['Prodaux3'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
+		$data['Campo'] = (!$data['Campo']) ? 'TPD.Nome_Prod' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 
         $query = $this->db->query('
@@ -7738,12 +7779,16 @@ exit();*/
 				TV.Convdesc,
 				TV.ValorProduto,
 				TV.QtdProdutoDesconto,
-				TPD.Produtos,
+				TOP2.Opcao,
+				TOP1.Opcao,
+				CONCAT(IFNULL(TPD.Nome_Prod,""), " ", IFNULL(TOP2.Opcao,""), " ", IFNULL(TOP1.Opcao,"")) AS Nome_Prod,
 				TDC.Desconto
             FROM
                 Tab_Promocao AS TPM
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Promocao = TPM.idTab_Promocao
-					LEFT JOIN Tab_Produto AS TPD ON TPD.idTab_Produto = TV.idTab_Modelo
+					LEFT JOIN Tab_Produtos AS TPD ON TPD.idTab_Produtos = TV.idTab_Produtos
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPD.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPD.Opcao_Atributo_2
 					LEFT JOIN Tab_Desconto AS TDC ON TDC.idTab_Desconto = TPM.Desconto					
             WHERE
                 TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
@@ -7837,7 +7882,7 @@ exit();*/
         }
 
     }
-
+	
 	public function list_catprod($data, $completo) {
 
 		$data['Catprod'] = ($data['Catprod']) ? ' AND TPM.idTab_Catprod = ' . $data['Catprod'] : FALSE;

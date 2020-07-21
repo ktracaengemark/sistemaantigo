@@ -5818,6 +5818,67 @@ class Relatorio extends CI_Controller {
 
     }
 
+	public function precopromocao() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contatofornec com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = quotes_to_entities($this->input->post(array(
+			'Promocao',
+			'Ordenamento',
+            'Campo',
+        ), TRUE));
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+
+
+        $data['select']['Campo'] = array(
+			'TPM.Promocao' => 'Promocao',
+        );
+
+        $data['select']['Ordenamento'] = array(
+            'ASC' => 'Crescente',
+            'DESC' => 'Decrescente',
+        );
+
+        //$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
+		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
+		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
+		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['TipoProduto'] = $this->Relatorio_model->select_tipoproduto();
+
+        $data['titulo'] = 'Preços das Promoçoes';
+
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+			$data['bd']['Promocao'] = $data['query']['Promocao'];
+            $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+
+            $data['report'] = $this->Relatorio_model->list_precopromocao($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list'] = $this->load->view('relatorio/list_precopromocao', $data, TRUE);
+
+        }
+
+        $this->load->view('relatorio/tela_precopromocao', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+	
 	public function catprod() {
 
         if ($this->input->get('m') == 1)

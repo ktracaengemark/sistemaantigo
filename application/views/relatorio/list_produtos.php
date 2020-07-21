@@ -16,14 +16,12 @@
 					<thead>
 						<tr>                       																	
 							<!--<th class="active">Id.Imagem</th>-->
-							<th class="active" scope="col">ImgMod</th>
+							<th class="active" scope="col">ImgProd</th>
 							<th class="active" scope="col">Editar</th>
 							<th class="active">Id.P</th>
 							<th class="active">Id.M</th>
 							<th class="active">Código</th>
-							<th class="active">Produto/Modelo</th>
-							<th class="active">Cor/Sabor</th>
-							<th class="active">Tamanho</th>
+							<th class="active">Produto</th>
 						</tr>
 					</thead>
 
@@ -36,7 +34,7 @@
 						<!--<td><?php echo $row['idTab_Prodaux2'] ?></td>-->
 						
 						<td class="notclickable">
-							<a class="notclickable" href="<?php echo base_url() . 'produtos/alterarlogo/' . $row['idTab_Produto'] . ''; ?>">
+							<a class="notclickable" href="<?php echo base_url() . 'produtos/alterarlogoderivado/' . $row['idTab_Produtos'] . ''; ?>">
 								<img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='50'>
 							</a>
 						</td>
@@ -50,9 +48,7 @@
 						<td><?php echo $row['idTab_Produtos'] ?></td>
 						<td><?php echo $row['idTab_Produto'] ?></td>
 						<td><?php echo $row['Cod_Prod'] ?></td>
-						<td><?php echo $row['Produtos'] ?></td>
-						<td><?php echo $row['Nome_Cor_Prod'] ?></td>
-						<td><?php echo $row['Nome_Tam_Prod'] ?></td>
+						<td><?php echo $row['Nome_Prod'] ?></td>
 						<?php } ?>						
 					</tbody>
 

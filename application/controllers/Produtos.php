@@ -151,7 +151,7 @@ class Produtos extends CI_Controller {
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
-		
+			
  		(!$data['produtos']['Ativo']) ? $data['produtos']['Ativo'] = 'S' : FALSE;       
 		
 		$data['radio'] = array(
@@ -2020,7 +2020,7 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Opcao_Atributo_1'].'.'.$data['derivados'][$j]['Opcao_Atributo_2'];
+					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'];                
 				}
@@ -2030,7 +2030,7 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['alterar'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Opcao_Atributo_1'].'.'.$data['derivados'][$j]['Opcao_Atributo_2'];					
+					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];					
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'];
 				}
@@ -2641,7 +2641,7 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Opcao_Atributo_1'].'.'.$data['derivados'][$j]['Opcao_Atributo_2'];
+					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'];                
 				}
@@ -2651,7 +2651,7 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['alterar'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$data['derivados'][$j]['Opcao_Atributo_1'].'.'.$data['derivados'][$j]['Opcao_Atributo_2'];					
+					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];					
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'];
 				}
@@ -3961,6 +3961,185 @@ class Produtos extends CI_Controller {
 							$data['msg'] = '';
 						} else {
 							$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produto', 'UPDATE', $data['auditoriaitem']);
+							$data['msg'] = '?m=1';
+						}
+
+						redirect(base_url() . 'relatorio/produtos2/' . $data['msg']);
+						exit();
+					}				
+				}
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+
+    public function alterarlogoderivado($id = FALSE) {
+		
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['derivado'] = $this->input->post(array(
+			'idTab_Produtos',
+        ), TRUE);
+		
+        $data['file'] = $this->input->post(array(
+            'idTab_Produtos',
+			'idSis_Empresa',
+            'Arquivo',
+		), TRUE);
+
+        if ($id) {
+            //$data['derivado']['idTab_Produtos'] = $id;
+			$_SESSION['Derivados'] = $data['derivado'] = $this->Produtos_model->get_produtosderivados($id, TRUE);
+				/*
+				echo "<pre>";
+				print_r($data['derivado']);
+				echo "</pre>";
+				exit();
+				*/
+		
+		}
+		
+        if ($id)
+            $data['file']['idTab_Produtos'] = $id;
+			
+			//$_SESSION['File'] = $this->Produtos_model->get_produtosderivados($id, TRUE);
+			/*
+			echo "<pre>";
+			print_r($_SESSION['File']);
+			echo "</pre>";
+			exit();
+			*/
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
+            
+			$data['file']['Arquivo'] = $this->basico->renomeiaderivado($_FILES['Arquivo']['name']);
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
+        }
+
+        $data['titulo'] = 'Alterar Foto';
+        $data['form_open_path'] = 'produtos/alterarlogoderivado';
+        $data['readonly'] = 'readonly';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+		/*
+		echo "<pre>";
+		print_r($data['file']);
+		echo "</pre>";
+		exit();
+		*/		
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            #load login view
+            $this->load->view('produtos/form_derivado', $data);
+        }
+        else {
+
+            $config['upload_path'] = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/';
+            $config['max_size'] = 1000;
+            $config['allowed_types'] = ['jpg','jpeg','pjpeg','png','x-png'];
+            $config['file_name'] = $data['file']['Arquivo'];
+
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('Arquivo')) {
+                $data['msg'] = $this->basico->msg($this->upload->display_errors(), 'erro', FALSE, FALSE, FALSE);
+                $this->load->view('produtos/form_derivado', $data);
+            }
+            else {
+			
+				$dir = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/';		
+				$foto = $data['file']['Arquivo'];
+				$diretorio = $dir.$foto;					
+				$dir2 = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/';
+
+				switch($_FILES['Arquivo']['type']):
+					case 'image/jpg';
+					case 'image/jpeg';
+					case 'image/pjpeg';
+				
+						list($largura, $altura, $tipo) = getimagesize($diretorio);
+						
+						$img = imagecreatefromjpeg($diretorio);
+
+						$thumb = imagecreatetruecolor(200, 200);
+						
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
+						
+						imagejpeg($thumb, $dir2 . $foto);
+						imagedestroy($img);
+						imagedestroy($thumb);				      
+					
+					break;					
+
+					case 'image/png':
+					case 'image/x-png';
+						
+						list($largura, $altura, $tipo) = getimagesize($diretorio);
+						
+						$img = imagecreatefrompng($diretorio);
+
+						$thumb = imagecreatetruecolor(200, 200);
+						
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
+						
+						imagejpeg($thumb, $dir2 . $foto);
+						imagedestroy($img);
+						imagedestroy($thumb);				      
+					
+					break;
+					
+				endswitch;
+				
+                $data['camposfile'] = array_keys($data['file']);
+				$data['file']['idSis_Empresa'] = $_SESSION['Empresa']['idSis_Empresa'];
+				$data['idSis_Arquivo'] = $this->Produtos_model->set_arquivo($data['file']);
+
+                if ($data['idSis_Arquivo'] === FALSE) {
+                    $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+                    $this->basico->erro($msg);
+                    $this->load->view('produtos/form_derivado', $data);
+                }
+				else {
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
+					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
+					
+					$data['derivado']['Arquivo'] = $data['file']['Arquivo'];
+					$data['anterior'] = $this->Produtos_model->get_produtosderivados($data['derivado']['idTab_Produtos']);
+					$data['campos'] = array_keys($data['derivado']);
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['derivado'], $data['campos'], $data['derivado']['idTab_Produtos'], TRUE);
+
+					if ($data['auditoriaitem'] && $this->Produtos_model->update_produtosderivados($data['derivado'], $data['derivado']['idTab_Produtos']) === FALSE) {
+						$data['msg'] = '?m=2';
+						redirect(base_url() . 'produtos/form_derivado/' . $data['derivado']['idTab_Produtos'] . $data['msg']);
+						exit();
+					} else {
+
+						if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/' . $_SESSION['Derivados']['Arquivo'] . ''))
+							&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/' . $_SESSION['Derivados']['Arquivo'] . '')
+							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/fotoproduto.jpg'))){
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/original/' . $_SESSION['Derivados']['Arquivo'] . '');						
+						}
+						if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Derivados']['Arquivo'] . ''))
+							&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Derivados']['Arquivo'] . '')
+							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/fotoproduto.jpg'))){
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Derivados']['Arquivo'] . '');						
+						}						
+						
+						if ($data['auditoriaitem'] === FALSE) {
+							$data['msg'] = '';
+						} else {
+							$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produtos', 'UPDATE', $data['auditoriaitem']);
 							$data['msg'] = '?m=1';
 						}
 
