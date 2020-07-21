@@ -1710,7 +1710,7 @@ class Produtos extends CI_Controller {
         #### Tab_Produto ####
 
 		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
-		
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		#$this->form_validation->set_rules($data['produtos']['CodProd'], 'Código', 'is_unique_by_id[Tab_Produto.'.$data['produtos']['CodProd'].'.' . $data['produtos']['idTab_Produto'] . ']');
 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'required|trim|is_unique_by_id[Tab_Produto.CodProd.' . $data['produtos']['idTab_Produto'] . ']');

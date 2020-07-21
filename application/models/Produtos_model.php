@@ -156,10 +156,10 @@ class Produtos_model extends CI_Model {
 				TP.Atributo_1,
 				TP.Atributo_2,
 				TP.Atributo_3,
-				TPAUX3.Prodaux3 AS Nome_Prodaux3
+				CTP.Catprod
 			FROM 
 				Tab_Produto AS TP
-					LEFT JOIN Tab_Prodaux3 AS TPAUX3 ON TPAUX3.idTab_Prodaux3 = TP.Prodaux3
+					LEFT JOIN Tab_Catprod AS CTP ON CTP.idTab_Catprod = TP.Prodaux3
 			WHERE 
 				TP.idTab_Produto = ' . $data
 		);

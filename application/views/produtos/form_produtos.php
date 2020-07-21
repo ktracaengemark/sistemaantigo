@@ -38,23 +38,28 @@
 								<div id="collapse2" class="panel-collapse" role="tabpanel" aria-labelledby="heading2" aria-expanded="false">
 									<div class="panel panel-success">
 										<div class="panel-heading">
-											<div class="row">	
+											<div class="row">
 												<div class="col-md-6">
-													<label for="Prodaux3">Categoria*</label>								
-													<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> 
-															id="Prodaux3" name="Prodaux3">
-														<option value="">-- Sel.uma Categoria --</option>
-														<?php
-														foreach ($select['Prodaux3'] as $key => $row) {
-															if ($produtos['Prodaux3'] == $key) {
-																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-															} else {
-																echo '<option value="' . $key . '">' . $row . '</option>';
+													<label for="Prodaux3">Categoria*:</label>								
+													<?php if ($metodo == 1) { ?>
+														<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> 
+																id="Prodaux3" name="Prodaux3">
+															<option value="">-- Sel.uma Categoria --</option>
+															<?php
+															foreach ($select['Prodaux3'] as $key => $row) {
+																if ($produtos['Prodaux3'] == $key) {
+																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																} else {
+																	echo '<option value="' . $key . '">' . $row . '</option>';
+																}
 															}
-														}
-														?>
-													</select>
-													<?php echo form_error('Prodaux3'); ?>
+															?>
+														</select>
+														<?php echo form_error('Prodaux3'); ?>
+													<?php } else { ?>
+														<br>
+														<?php echo '<strong>" ' . $_SESSION['Produto']['Catprod'] . ' "</strong>' ?>
+													<?php } ?>
 												</div>
 												<div class="col-md-6">
 													<label for="Prod_Serv">Prod/Serv*</label>								
@@ -712,11 +717,9 @@
 				
 				<div class="row">
 					<div class="col-md-12">
-						<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
 						<input type="hidden" name="idTab_Produto" value="<?php echo $produtos['idTab_Produto']; ?>">
 						<?php if ($metodo > 1) { ?>
-						<!--<input type="hidden" name="idTab_Valor" value="<?php echo $valor['idTab_Valor']; ?>">
-						<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
+							<input type="hidden" name="Prodaux3" value="<?php echo $_SESSION['Produto']['Prodaux3']; ?>">
 						<?php } ?>
 						<?php if ($metodo > 1) { ?>
 
