@@ -170,28 +170,40 @@
 										
 										<div class="form-group">
 											<div class="row">
-												<div class="col-md-3">
+												<div class="col-md-4">
 													<label for="EnderecoEmpresa">Endreço:</label>
 													<input type="text" class="form-control" maxlength="200" <?php echo $readonly; ?>
 														   name="EnderecoEmpresa" value="<?php echo $query['EnderecoEmpresa']; ?>">
 												</div>
+												<div class="col-md-2">
+													<label for="NumeroEmpresa">Numero:</label>
+													<input type="text" class="form-control" maxlength="200" <?php echo $readonly; ?>
+														   name="NumeroEmpresa" value="<?php echo $query['NumeroEmpresa']; ?>">
+												</div>
 												<div class="col-md-3">
-													<label for="BairroEmpresa">BairroEmpresa:</label>
+													<label for="ComplementoEmpresa">Complemento:</label>
+													<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
+														   name="ComplementoEmpresa" value="<?php echo $query['ComplementoEmpresa']; ?>">
+												</div>
+												<div class="col-md-3">
+													<label for="BairroEmpresa">Bairro:</label>
 													<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
 														   name="BairroEmpresa" value="<?php echo $query['BairroEmpresa']; ?>">
 												</div>
+											</div>	
+											<div class="row">	
 												<div class="col-md-3">
-													<label for="MunicipioEmpresa">MunicipioEmpresa:</label>
+													<label for="MunicipioEmpresa">Municipio:</label>
 													<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
 														   name="MunicipioEmpresa" value="<?php echo $query['MunicipioEmpresa']; ?>">
 												</div>												
-												<div class="col-md-1">
-													<label for="EstadoEmpresa">EstadoEmpresa:</label>
+												<div class="col-md-3">
+													<label for="EstadoEmpresa">Estado:</label>
 													<input type="text" class="form-control" maxlength="2" <?php echo $readonly; ?>
 														   name="EstadoEmpresa" value="<?php echo $query['EstadoEmpresa']; ?>">
 												</div>
-												<div class="col-md-2">
-													<label for="CepEmpresa">CepEmpresa:</label>
+												<div class="col-md-3">
+													<label for="CepEmpresa">Cep:</label>
 													<input type="text" class="form-control" maxlength="8" <?php echo $readonly; ?>
 														   name="CepEmpresa" value="<?php echo $query['CepEmpresa']; ?>">
 												</div>

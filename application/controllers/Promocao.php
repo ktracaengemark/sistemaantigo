@@ -70,6 +70,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'Prodaux4',
 			'Ativo',
 			'VendaSite',
+			'ValorPromocao',
 			#'Aprovado',
         ), TRUE));
 
@@ -190,6 +191,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));			
@@ -279,7 +281,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'Prodaux2',
 			'Prodaux3',
 			'Ativo',
-			'VendaSite',			
+			'VendaSite',
+			'ValorPromocao',
 			#'Aprovado',
         ), TRUE));
 
@@ -399,6 +402,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));			
@@ -477,6 +481,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'CodProd',
 			'Fornecedor',
 			'Desconto',
+			'ValorPromocao',
 			'ValorProdutoSite',
 			'Comissao',
 			'PesoProduto',
@@ -609,6 +614,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));			
@@ -690,6 +696,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'Fornecedor',
 			'Desconto',
 			'ValorProdutoSite',
+			'ValorPromocao',
 			'Comissao',
 			'PesoProduto',
 			#'ValorProduto',
@@ -818,6 +825,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));
@@ -897,6 +905,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			#'Fornecedor',
 			'Desconto',
 			'ValorProdutoSite',
+			'ValorPromocao',
 			'Comissao',
 			'PesoProduto',
             'Promocao',
@@ -1026,6 +1035,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));			
@@ -1094,6 +1104,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'Fornecedor',
 			'Desconto',
 			'ValorProdutoSite',
+			'ValorPromocao',
             'Comissao',
 			'PesoProduto',
             'Promocao',
@@ -1246,6 +1257,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
+			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));
 			$data['update']['promocao']['anterior'] = $this->Promocao_model->get_promocao($data['promocao']['idTab_Promocao']);
@@ -1314,6 +1326,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'Fornecedor',
 			'Desconto',
 			'ValorProdutoSite',
+			'ValorPromocao',
             'Comissao',
 			'PesoProduto',
             'Promocao',
@@ -1471,6 +1484,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
+			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));
 			$data['update']['promocao']['anterior'] = $this->Promocao_model->get_promocao($data['promocao']['idTab_Promocao']);
@@ -1540,6 +1554,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'Fornecedor',
 			'Desconto',
 			'ValorProdutoSite',
+			'ValorPromocao',
             'Comissao',
 			'PesoProduto',
             'Promocao',
@@ -1788,6 +1803,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
+			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));
 			$data['update']['promocao']['anterior'] = $this->Promocao_model->get_promocao($data['promocao']['idTab_Promocao']);

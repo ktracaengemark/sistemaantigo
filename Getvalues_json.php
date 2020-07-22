@@ -401,7 +401,9 @@ elseif ($_GET['q'] == 90) {
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 				P.idTab_Produtos = V.idTab_Produtos AND
-				P.Prod_Serv = "P"
+				P.Prod_Serv = "P" AND
+				TPM.Ativo = "S" AND
+				TPM.VendaBalcao = "S"
 			ORDER BY
 				P.Nome_Prod ASC,
 				TDS.Desconto ASC,

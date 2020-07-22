@@ -152,6 +152,8 @@ class Empresa extends CI_Controller {
 			'Cnpj',
 			'InscEstadual',
 			'EnderecoEmpresa',
+			'NumeroEmpresa',
+			'ComplementoEmpresa',
 			'BairroEmpresa',
 			'MunicipioEmpresa',
 			'EstadoEmpresa',

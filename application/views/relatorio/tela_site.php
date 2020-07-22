@@ -17,12 +17,13 @@
 			<h2 class="ser-title">Slides!</h2>
 		<?php if (isset($list2)) echo $list2; ?>
 		</div>			
+		<!--
 		<hr class="botm-line">
 		<div class="col-md-12">
 			<h2 class="ser-title">Produtos!</h2>
-		<?php if (isset($list1)) echo $list1; ?>
+		<?php #if (isset($list1)) echo $list1; ?>
 		</div>			
-
+		-->
 	</div>
 </div>
 

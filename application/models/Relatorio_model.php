@@ -7735,6 +7735,9 @@ exit();*/
 				TPM.Descricao,
 				TPM.Arquivo,
 				TPM.Ativo,
+				TPM.VendaBalcao,
+				TPM.VendaSite,
+				TPM.ValorPromocao,
 				TDC.Desconto
             FROM
                 Tab_Promocao AS TPM
@@ -7751,6 +7754,7 @@ exit();*/
         } else {
            
 			foreach ($query->result() as $row) {
+				$row->ValorPromocao = number_format($row->ValorPromocao, 2, ',', '.');
             }
             return $query;
         }

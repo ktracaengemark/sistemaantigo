@@ -55,7 +55,14 @@
 							</div>
 						</div>	
 						<div class="row">	
-							<div class="col-md-3 text-left"></div>
+							<div class="col-md-3 text-left">
+								<label for="ValorPromocao">Valor Promoção:</label><br>
+								<div class="input-group">
+									<span class="input-group-addon" id="basic-addon1">R$</span>
+									<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
+											name="ValorPromocao" value="<?php echo $promocao['ValorPromocao'] ?>">
+								</div>
+							</div>
 							<div class="col-md-3 text-left">
 								<label for="Ativo">Promoção Ativa?</label><br>
 								<div class="btn-group" data-toggle="buttons">
