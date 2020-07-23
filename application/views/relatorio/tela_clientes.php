@@ -25,7 +25,7 @@
 		<div class="modal-content">
 			<div class="modal-header bg-danger">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Produtos</h4>
+				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Clientes</h4>
 			</div>
 			<div class="modal-footer">
 				<div class="form-group">	
@@ -107,7 +107,7 @@
 					<div class="form-group col-md-4">
 						<div class="form-footer">		
 							<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-								<span class="glyphicon glyphicon-plus"></span> Novo Produto
+								<span class="glyphicon glyphicon-plus"></span> Novo Cliente
 							</button>							
 						</div>	
 					</div>					

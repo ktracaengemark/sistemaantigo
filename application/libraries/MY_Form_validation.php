@@ -323,10 +323,41 @@ class MY_Form_validation extends CI_Form_validation {
                         . 'id' . $table . ' != "' . $id . '" AND ' . $field . ' = "' . $str . '"')->num_rows() === 0) : FALSE;
     
 	}
-	            
-              
-               
-              
+	
+    public function is_unique_by_id_empresa($str, $field) {
+        $CI = & get_instance();
+        $CI->form_validation->set_message('is_unique_by_id_empresa', '<b>%s</b> já cadastrado.');
+
+        #sscanf($field, '%[^.].%[^.]', $table, $field);
+        sscanf($field, '%[^.].%[^.].%[^.].%[^.].%[^.]', $table, $field, $id, $field2, $str2);
+
+        if ($field == "Cpf")
+            $str = ltrim(preg_replace("/[^0-9]/", "", $str), '0');
+		/*
+		echo "<pre>";
+			print_r($str);
+		echo "<br>";
+			print_r($field);
+		echo "<br>";
+			print_r($table);
+		echo "<br>";	  
+			print_r($field);
+		echo "<br>";	  
+			print_r($id);
+		echo "<br>";
+			print_r($field2);
+		echo "<br>";	  
+			print_r($str2);
+		echo "</pre>";
+		exit();
+		*/
+		return isset($this->CI->db)
+                #? ($this->CI->db->limit(1)->get_where($table, array($field => $str))->num_rows() === 0)
+                ? ($this->CI->db->limit(1)->query('SELECT ' . $field . ', ' . $field2 . ' FROM ' . $table . ' WHERE '
+                        . 'id' . $table . ' != "' . $id . '" AND ' . $field . ' = "' . $str . '" AND ' . $field2 . ' = "' . $str2 . '"')->num_rows() === 0) : FALSE;
+    
+	}	
+       
 	/**
 	 * Unique
 	 *
@@ -351,7 +382,23 @@ class MY_Form_validation extends CI_Form_validation {
         if ($field1 == "Cpf")
             $str = ltrim(preg_replace("/[^0-9]/", "", $str), '0');
 
-        return isset($this->CI->db) ? ($this->CI->db->limit(1)->query('SELECT ' . $field1 . ' FROM ' . $table . ' WHERE '
+		/*
+		echo "<pre>";
+			print_r($field);
+		echo "<br>";
+			print_r($table);
+		echo "<br>";	  
+			print_r($field1);
+		echo "<br>";
+			print_r($str);
+		echo "<br>";
+			print_r($field2);
+		echo "<br>";	  
+			print_r($str2);
+		echo "</pre>";
+		exit();
+		*/
+        return isset($this->CI->db) ? ($this->CI->db->limit(1)->query('SELECT ' . $field1 . ', ' . $field2 . ' FROM ' . $table . ' WHERE '
                         . $field1 . ' = "' . $str . '" AND ' . $field2 . ' = "' . $str2 . '"')->num_rows() === 0) : FALSE;
 
     }

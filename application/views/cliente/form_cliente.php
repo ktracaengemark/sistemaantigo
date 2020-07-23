@@ -141,11 +141,13 @@
 										<label for="NomeCliente">Nome do Cliente: *</label>
 										<input type="text" class="form-control" id="NomeCliente" maxlength="255" <?php echo $readonly; ?>
 											   name="NomeCliente" autofocus value="<?php echo $query['NomeCliente']; ?>">
+										<?php echo form_error('NomeCliente'); ?>
 									</div>
 									<div class="col-md-3">
 										<label for="CelularCliente">Tel.1 - Fixo ou Celular*</label>
 										<input type="text" class="form-control Celular CelularVariavel" id="CelularCliente" maxlength="11" <?php echo $readonly; ?>
 											   name="CelularCliente" placeholder="(XX)999999999" value="<?php echo $query['CelularCliente']; ?>">
+										<?php echo form_error('CelularCliente'); ?>
 									</div>
 									<div class="col-md-3">
 										<label for="DataNascimento">Data de Nascimento:</label>
@@ -284,6 +286,7 @@
 											<label for="CpfCliente">CPF:</label>
 											<input type="text" class="form-control" maxlength="11" <?php echo $readonly; ?>
 												   name="CpfCliente" value="<?php echo $query['CpfCliente']; ?>">
+											<?php echo form_error('CpfCliente'); ?>
 										</div>
 										<div class="col-md-3">
 											<label for="Telefone2">Tel.2 - Fixo ou Celular:</label>

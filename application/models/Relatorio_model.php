@@ -8899,8 +8899,7 @@ exit();*/
                 App_Cliente AS C
 
             WHERE
-                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
             ORDER BY
                 C.NomeCliente ASC
         ');
