@@ -172,6 +172,28 @@ class Loginempresa_model extends CI_Model {
 
     }
 
+    public function set_funcao($data) {
+        #unset($data['idSisgef_Fila']);
+        /*
+          echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit();
+         */
+        $query = $this->db->insert('Tab_Funcao', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+	
     public function set_usuario($data) {
         #unset($data['idSisgef_Fila']);
         /*
@@ -296,6 +318,20 @@ class Loginempresa_model extends CI_Model {
 
     }
 
+    public function set_atributo($data) {
+
+        $query = $this->db->insert('Tab_Atributo', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+	
     public function set_prodaux4($data) {
 
         $query = $this->db->insert('Tab_Prodaux4', $data);
@@ -351,6 +387,28 @@ class Loginempresa_model extends CI_Model {
         }
 
     }	
+
+    public function set_catprod($data) {
+        #unset($data['idSisgef_Fila']);
+        /*
+          echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit();
+         */
+        $query = $this->db->insert('Tab_Catprod', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
 	
     public function set_produto($data) {
         #unset($data['idSisgef_Fila']);
@@ -373,6 +431,50 @@ class Loginempresa_model extends CI_Model {
         }
 
     }
+	
+    public function set_produtos($data) {
+        #unset($data['idSisgef_Fila']);
+        /*
+          echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit();
+         */
+        $query = $this->db->insert('Tab_Produtos', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+	
+    public function set_promocao($data) {
+        #unset($data['idSisgef_Fila']);
+        /*
+          echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit();
+         */
+        $query = $this->db->insert('Tab_Promocao', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }	
 
     public function set_valor($data) {
         #unset($data['idSisgef_Fila']);
