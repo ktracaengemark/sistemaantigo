@@ -181,7 +181,6 @@ class Cliente_model extends CI_Model {
             FROM
                 App_Cliente					
             WHERE
-                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
 				idApp_Cliente DESC'
@@ -196,7 +195,6 @@ class Cliente_model extends CI_Model {
             FROM
                 App_Cliente					
             WHERE
-                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
 				idApp_Cliente DESC'

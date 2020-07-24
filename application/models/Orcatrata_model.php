@@ -1334,9 +1334,8 @@ class Orcatrata_model extends CI_Model {
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
                 OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				OT.AprovadoOrca = "S" AND
+				
 				OT.idTab_TipoRD = "2" AND
-				OT.Tipo_Orca = "B" AND
 				
 				OT.ConcluidoOrca = "N" AND
 				OT.ProntoOrca = "N" AND

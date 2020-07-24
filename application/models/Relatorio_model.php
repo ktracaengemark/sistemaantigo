@@ -1914,7 +1914,6 @@ class Relatorio_model extends CI_Model {
 				' . $filtro4 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
-				OT.AprovadoOrca = "S" AND
 				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" 
                 ' . $data['TipoFinanceiroR'] . '
@@ -5820,7 +5819,6 @@ exit();
 				LEFT JOIN App_Parcelas AS TPR ON TPR.idApp_OrcaTrata = TOT.idApp_OrcaTrata
             WHERE
                 TC.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                TC.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				TPR.Quitado = "S" AND
 				' . $consulta . '
                 ' . $data['NomeCliente'] . '
@@ -5845,11 +5843,9 @@ exit();
 
             WHERE
                 TPR.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                TPR.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ')
                 ' . $data['NomeCliente'] . ' AND
                 TOT.AprovadoOrca = "S" AND
-
 				TPR.Quitado = "S" AND
 				TPR.idTab_TipoRD = "2" AND
                 TC.idApp_Cliente != "0"
@@ -6503,7 +6499,6 @@ exit();*/
 				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
             WHERE
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 (' . $consulta . ') AND
                 ' . $filtro1 . '
                 ' . $filtro2 . '
