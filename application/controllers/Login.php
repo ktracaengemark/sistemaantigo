@@ -823,6 +823,7 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
 		$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
+		//$this->form_validation->set_rules('CelularCliente', 'CelularCliente', 'required|trim|is_unique_duplo[App_Cliente.CelularCliente.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('NumUsuarios', 'Nº de Usuários', 'required|trim');
 
 		$data['select']['TipoProfissional'] = $this->Basico_model->select_tipoprofissional();

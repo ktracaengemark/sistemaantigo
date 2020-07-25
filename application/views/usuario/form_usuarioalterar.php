@@ -386,6 +386,7 @@
 									<div class="form-group">
 										<div class="row">
 											<input type="hidden" name="idSis_Usuario" value="<?php echo $query['idSis_Usuario']; ?>">
+											<input type="hidden" name="idSis_Empresa" value="<?php echo $query['idSis_Empresa']; ?>">
 											<?php if ($metodo == 2) { ?>
 
 												<div class="col-md-6">

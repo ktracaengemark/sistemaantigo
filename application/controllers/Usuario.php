@@ -89,7 +89,8 @@ class Usuario extends CI_Controller {
 		#$this->form_validation->set_rules('CpfUsuario', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Usuario.CpfUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		#$this->form_validation->set_rules('Usuario', 'Usuario', 'required|trim|is_unique_duplo[Sis_Usuario.Usuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Nome', 'Nome do Usuário', 'required|trim');
-        $this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');		
+        //$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
+		$this->form_validation->set_rules('CelularUsuario', 'Celular do Usuário', 'required|trim|is_unique_duplo[Sis_Usuario.CelularUsuario.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');		
 		$this->form_validation->set_rules('Permissao', 'Acesso Ás Agendas', 'required|trim');		
 		$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
@@ -205,7 +206,7 @@ class Usuario extends CI_Controller {
         ), TRUE));
        
 		$data['query'] = $this->input->post(array(
-			
+			'idSis_Empresa',
 			'idSis_Usuario',
 			#'Usuario',
             'Nome',
@@ -241,7 +242,8 @@ class Usuario extends CI_Controller {
         $this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
-		$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
+		//$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
+		$this->form_validation->set_rules('CelularUsuario', 'Celular do Usuario', 'required|trim|is_unique_by_id_empresa[Sis_Usuario.CelularUsuario.' . $data['query']['idSis_Usuario'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('Permissao', 'Nível', 'required|trim');
 		$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
@@ -411,7 +413,7 @@ class Usuario extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = $this->input->post(array(
-
+			'idSis_Empresa',
 			'idSis_Usuario',
 			#'Usuario',
             'Nome',
@@ -449,7 +451,8 @@ class Usuario extends CI_Controller {
         $this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         $this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
-		$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
+		//$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
+		$this->form_validation->set_rules('CelularUsuario', 'Celular do Usuario', 'required|trim|is_unique_by_id_empresa[Sis_Usuario.CelularUsuario.' . $data['query']['idSis_Usuario'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		#$this->form_validation->set_rules('Permissao', 'Nível', 'required|trim');
 		#$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
