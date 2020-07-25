@@ -28,7 +28,7 @@
 																<?php
 																foreach ($select['idApp_Cliente'] as $key => $row) {
 																		(!$orcatrata['idApp_Cliente']) ? $orcatrata['idApp_Cliente'] = '1' : FALSE;
-																	if ($orcatrata['idApp_Cliente'] == $key) {
+																		if ($orcatrata['idApp_Cliente'] == $key) {
 																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																	} else {
 																		echo '<option value="' . $key . '">' . $row . '</option>';
@@ -466,8 +466,8 @@
 																	<span class="input-group-addon" disabled>
 																		<span class="glyphicon glyphicon-calendar"></span>
 																	</span>
-																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																			name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
+																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA" onchange="dateDiff()"
+																			id="DataOrca" name="DataOrca" value="<?php echo $orcatrata['DataOrca']; ?>">
 																</div>
 															</div>
 														</div>
@@ -750,9 +750,16 @@
 																<span class="input-group-addon" disabled>
 																	<span class="glyphicon glyphicon-calendar"></span>
 																</span>
-																<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																		name="DataEntregaOrca" value="<?php echo $orcatrata['DataEntregaOrca']; ?>">
+																<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA" onchange="dateDiff()"
+																		id="DataEntregaOrca" name="DataEntregaOrca" value="<?php echo $orcatrata['DataEntregaOrca']; ?>">
 															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-md-12 mb-3">
+															<label for="PrazoEntrega">Prazo (em dias)</label>
+															<input type="text" class="form-control " id="PrazoEntrega" maxlength="100" <?php echo $readonly; ?> readonly=""
+																   name="PrazoEntrega" value="<?php echo $orcatrata['PrazoEntrega']; ?>">
 														</div>
 													</div>	
 												</div>

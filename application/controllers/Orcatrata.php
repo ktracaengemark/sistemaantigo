@@ -537,6 +537,16 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			if ($data['orcatrata']['PrazoEntrega']){
+				$data['orcatrata']['PrazoEntrega'] = $data['orcatrata']['PrazoEntrega'];
+			}else{
+				//$data1 = date('Y-m-d', time());
+				$data1 = $data['orcatrata']['DataOrca'];
+				$data2 = $data['orcatrata']['DataEntregaOrca'];
+				$intervalo = strtotime($data2)-strtotime($data1); 
+				$dias = floor($intervalo / (60 * 60 * 24));
+				$data['orcatrata']['PrazoEntrega'] = $dias;
+			}
             $data['orcatrata']['idApp_OrcaTrata'] = $this->Orcatrata_model->set_orcatrata($data['orcatrata']);
 
 			#### APP_Cliente ####
@@ -1211,6 +1221,16 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa']; 
             $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			if ($data['orcatrata']['PrazoEntrega']){
+				$data['orcatrata']['PrazoEntrega'] = $data['orcatrata']['PrazoEntrega'];
+			}else{
+				//$data1 = date('Y-m-d', time());
+				$data1 = $data['orcatrata']['DataOrca'];
+				$data2 = $data['orcatrata']['DataEntregaOrca'];
+				$intervalo = strtotime($data2)-strtotime($data1); 
+				$dias = floor($intervalo / (60 * 60 * 24));
+				$data['orcatrata']['PrazoEntrega'] = $dias;
+			}	
             $data['orcatrata']['idApp_OrcaTrata'] = $this->Orcatrata_model->set_orcatrata($data['orcatrata']);
             
 			#### APP_Cliente ####
@@ -1941,6 +1961,17 @@ class Orcatrata extends CI_Controller {
 			#$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             #$data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             #$data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			
+			if ($data['orcatrata']['PrazoEntrega']){
+				$data['orcatrata']['PrazoEntrega'] = $data['orcatrata']['PrazoEntrega'];
+			}else{
+				//$data1 = date('Y-m-d', time());
+				$data1 = $data['orcatrata']['DataOrca'];
+				$data2 = $data['orcatrata']['DataEntregaOrca'];
+				$intervalo = strtotime($data2)-strtotime($data1); 
+				$dias = floor($intervalo / (60 * 60 * 24));
+				$data['orcatrata']['PrazoEntrega'] = $dias;
+			}
 
             $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
             $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
@@ -2834,7 +2865,18 @@ class Orcatrata extends CI_Controller {
 			#$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             #$data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             #$data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-
+			
+			if ($data['orcatrata']['PrazoEntrega']){
+				$data['orcatrata']['PrazoEntrega'] = $data['orcatrata']['PrazoEntrega'];
+			}else{
+				//$data1 = date('Y-m-d', time());
+				$data1 = $data['orcatrata']['DataOrca'];
+				$data2 = $data['orcatrata']['DataEntregaOrca'];
+				$intervalo = strtotime($data2)-strtotime($data1); 
+				$dias = floor($intervalo / (60 * 60 * 24));
+				$data['orcatrata']['PrazoEntrega'] = $dias;
+			}
+			
             $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
             $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
             $data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
@@ -3717,6 +3759,17 @@ class Orcatrata extends CI_Controller {
 			#$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             #$data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             #$data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			
+			if ($data['orcatrata']['PrazoEntrega']){
+				$data['orcatrata']['PrazoEntrega'] = $data['orcatrata']['PrazoEntrega'];
+			}else{
+				//$data1 = date('Y-m-d', time());
+				$data1 = $data['orcatrata']['DataOrca'];
+				$data2 = $data['orcatrata']['DataEntregaOrca'];
+				$intervalo = strtotime($data2)-strtotime($data1); 
+				$dias = floor($intervalo / (60 * 60 * 24));
+				$data['orcatrata']['PrazoEntrega'] = $dias;
+			}
 
             $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
             $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);

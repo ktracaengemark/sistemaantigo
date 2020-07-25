@@ -22,6 +22,41 @@ camposDisponiveis();
 
 exibirentrega();
 
+function dateDiff() {
+	
+	var dataorca = $('#DataOrca').val();
+	var dataentregaorca = $('#DataEntregaOrca').val();
+	
+	// Digamos que este é o formato das suas datas
+	// data = '30/03/2019';
+	// Precisamos quebrar a string para retornar cada parte
+	const dataorcaSplit = dataorca.split('/');
+
+	const day = dataorcaSplit[0]; 
+	const month = dataorcaSplit[1];
+	const year = dataorcaSplit[2];
+	
+	const dataentregaorcaSplit = dataentregaorca.split('/');
+
+	const day2 = dataentregaorcaSplit[0]; 
+	const month2 = dataentregaorcaSplit[1]; 
+	const year2 = dataentregaorcaSplit[2]; 
+
+	// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
+	dataorca = new Date(year, month - 1, day);
+	dataentregaorca = new Date(year2, month2 - 1, day2);
+	
+	const now = new Date(); // Data de hoje
+	const past = dataorca; // Outra data no passado
+	const past2 = dataentregaorca; // Outra data no passado
+	const diff = Math.abs(past2.getTime() - past.getTime()); // Subtrai uma data pela outra
+	const days = Math.ceil(diff / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).
+
+	// Mostra a diferença em dias
+	//console.log('Prazo de entrega: ' + days + ' dias');	
+	$('#PrazoEntrega').val(days);
+}
+
 function exibirentrega() {
 		$('.Exibir').hide();
 		$('.QtdSoma').hide();
