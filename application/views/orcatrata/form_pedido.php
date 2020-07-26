@@ -24,7 +24,22 @@
 						
 					<div class="row">
 					<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
-					
+						<div class="col-md-12">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<div type="button" data-toggle="collapse" data-target="#Combinar" aria-expanded="false" aria-controls="Combinar">
+										 Aguardando <b>Combinar Entrega e Pagamento</b>
+									</div>					
+								</div>
+								<div <?php echo $collapse; ?> id="Combinar">
+									<div class="panel-body">
+
+										<?php if (isset($list7)) echo $list7; ?>
+
+									</div>
+								</div>	
+							</div>
+						</div>
 						<div class="col-md-12">
 							<div class="panel panel-danger">
 								<div class="panel-heading">
@@ -89,26 +104,27 @@
 								</div>	
 							</div>
 						</div>		
+						<!--
 						<div class="col-md-12">
 							<div class="panel panel-primary">
 								<div class="panel-heading">
 									<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#NaoRecebidos" aria-expanded="false" aria-controls="NaoRecebidos">
 										<span class="glyphicon glyphicon-chevron-up"></span> Não Recebidos
 									</div>
-									<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/fiadorec" role="button">
+									<a class="btn btn-md btn-warning" href="<?php #echo base_url() ?>relatorio/fiadorec" role="button">
 										<span class="glyphicon glyphicon-search"></span> Fiado
 									</a>
 								</div>
-								<div <?php echo $collapse1; ?> id="NaoRecebidos">	
+								<div <?php #echo $collapse1; ?> id="NaoRecebidos">	
 									<div class="panel-body">
 
-										<?php if (isset($list2)) echo $list2; ?>
+										<?php #if (isset($list2)) echo $list2; ?>
 
 									</div>
 								</div>	
 							</div>
 						</div>
-							
+						-->	
 					<?php } else { ?>
 							
 						<div class="col-md-12">

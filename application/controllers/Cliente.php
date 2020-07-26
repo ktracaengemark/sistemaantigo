@@ -80,6 +80,9 @@ class Cliente extends CI_Controller {
             'RegistroFicha',
 			'Associado',
 			#'Profissional',
+			'usuario',
+			'senha',
+			'CodInterno',
         ), TRUE));
 
        
@@ -91,7 +94,7 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('CpfCliente', 'Cpf', 'trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[App_Cliente.CpfCliente.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('NomeCliente', 'Nome do Responsável', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        $this->form_validation->set_rules('CelularCliente', 'CelularCliente', 'required|trim|is_unique_duplo[App_Cliente.CelularCliente.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+        $this->form_validation->set_rules('CelularCliente', 'CelularCliente', 'required|trim|is_unique_duplo[App_Cliente.CelularCliente.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']|valid_celular');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
 		
@@ -141,13 +144,32 @@ class Cliente extends CI_Controller {
 			$data['query']['CidadeCliente'] = trim(mb_strtoupper($data['query']['CidadeCliente'], 'ISO-8859-1'));
 			$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['query']['EstadoCliente'], 'ISO-8859-1'));
 			$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['query']['ReferenciaCliente'], 'ISO-8859-1'));
+			
+			$data['query']['usuario'] = $data['query']['CelularCliente'];
+			$data['query']['senha'] = md5($data['query']['CelularCliente']);
+			$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+			
 			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
             $data['campos'] = array_keys($data['query']);
             $data['anterior'] = array();
-
+				/*
+				echo "<pre>";
+				print_r($data['query']['CelularCliente']);
+				echo "<br>";
+				print_r(strlen($data['query']['CelularCliente']));
+				echo "<br>";
+				print_r($data['query']);
+				echo "<br>";
+				print_r($data['campos']);
+				echo "<br>";
+				print_r($data['anterior']);
+				echo "<br>";
+				echo "</pre>";
+				exit();
+				*/
             $data['idApp_Cliente'] = $this->Cliente_model->set_cliente($data['query']);
 
             if ($data['idApp_Cliente'] === FALSE) {
@@ -225,7 +247,7 @@ class Cliente extends CI_Controller {
 		$this->form_validation->set_rules('CpfCliente', 'Cpf', 'trim|valid_cpf|alpha_numeric_spaces|is_unique_by_id_empresa[App_Cliente.CpfCliente.' . $data['query']['idApp_Cliente'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('NomeCliente', 'Nome do Cliente', 'required|trim');
         $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        $this->form_validation->set_rules('CelularCliente', 'CelularCliente', 'required|trim|is_unique_by_id_empresa[App_Cliente.CelularCliente.' . $data['query']['idApp_Cliente'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+        $this->form_validation->set_rules('CelularCliente', 'CelularCliente', 'required|trim|is_unique_by_id_empresa[App_Cliente.CelularCliente.' . $data['query']['idApp_Cliente'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']|valid_celular');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
 		

@@ -208,7 +208,7 @@
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
 
-											<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+											<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/alteraronline/' . $row['idApp_OrcaTrata'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
 											

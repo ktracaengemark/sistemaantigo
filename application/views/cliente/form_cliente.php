@@ -144,8 +144,8 @@
 										<?php echo form_error('NomeCliente'); ?>
 									</div>
 									<div class="col-md-3">
-										<label for="CelularCliente">Tel.1 - Fixo ou Celular*</label>
-										<input type="text" class="form-control Celular CelularVariavel" id="CelularCliente" maxlength="11" <?php echo $readonly; ?>
+										<label for="CelularCliente">Tel.1 - Celular*</label>
+										<input type="text" class="form-control Celular" id="CelularCliente" maxlength="11" <?php echo $readonly; ?>
 											   name="CelularCliente" placeholder="(XX)999999999" value="<?php echo $query['CelularCliente']; ?>">
 										<?php echo form_error('CelularCliente'); ?>
 									</div>

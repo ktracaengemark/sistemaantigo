@@ -87,6 +87,20 @@ class MY_Form_validation extends CI_Form_validation {
        
     }
 	
+    function valid_celular($data) {
+        $CI = & get_instance();
+
+        $CI->form_validation->set_message('valid_celular', 'O <b>%s</b> deve conter 11 números.');
+
+		$celular = strlen($data);
+
+		if ( $celular != 11) {
+
+			return FALSE;
+		}
+       
+    }	
+	
     function valid_extensaoBKP($data) {
         $CI = & get_instance();
 

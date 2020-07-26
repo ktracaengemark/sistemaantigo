@@ -53,7 +53,7 @@ class Orcatrata_model extends CI_Model {
         if ($this->db->affected_rows() === 0) {
             return FALSE;
         } else {
-            #return TRUE;
+		#return TRUE;
             return $this->db->insert_id();
         }
     }
@@ -1114,6 +1114,91 @@ class Orcatrata_model extends CI_Model {
         }
     }
 
+    public function list1_produtosvend($x) {
+		
+        $query = $this->db->query('
+			SELECT 
+                C.NomeCliente,
+				C.CelularCliente,
+				OT.Descricao,
+				OT.idApp_OrcaTrata,
+				OT.AprovadoOrca,
+				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
+				DATE_FORMAT(OT.DataEntregaOrca, "%d/%m/%Y") AS DataEntregaOrca,
+				DATE_FORMAT(OT.HoraEntregaOrca, "%H:%i") AS HoraEntregaOrca,
+				OT.DataEntradaOrca,
+				OT.DataPrazo,
+                OT.ValorOrca,
+				OT.ValorDev,				
+				OT.ValorEntradaOrca,
+				OT.ValorRestanteOrca,
+				OT.DataVencimentoOrca,
+                OT.ConcluidoOrca,
+                OT.QuitadoOrca,
+				OT.FinalizadoOrca,
+				OT.EnviadoOrca,
+				OT.ProntoOrca,
+                OT.DataConclusao,
+                OT.DataQuitado,
+				OT.DataRetorno,
+				OT.idTab_TipoRD,
+				OT.FormaPagamento,
+				OT.ObsOrca,
+				OT.QtdParcelasOrca,
+				OT.Tipo_Orca,
+				TF.TipoFrete,
+				MD.Modalidade,
+				VP.Abrev3,
+				VP.AVAP,
+				TFP.FormaPag,
+				TR.TipoFinanceiro
+			FROM 
+                App_OrcaTrata AS OT
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
+					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
+					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
+					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
+			WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				
+				OT.idTab_TipoRD = "2" AND
+				OT.AprovadoOrca = "S" AND
+				OT.ConcluidoOrca = "N" AND
+				OT.ProntoOrca = "N" AND
+				OT.EnviadoOrca = "N"
+				
+			ORDER BY 
+				OT.DataEntregaOrca ASC,
+				OT.HoraEntregaOrca ASC,
+				OT.idApp_OrcaTrata
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+		
     public function list3_produtosaluguel($x) {
 
         $query = $this->db->query('
@@ -1161,12 +1246,10 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
 					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				OT.AprovadoOrca = "S" AND
-				OT.idTab_TipoRD = "2" AND
-				OT.Tipo_Orca = "B" AND
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				
+				OT.idTab_TipoRD = "2" AND
+				OT.AprovadoOrca = "S" AND
 				OT.ConcluidoOrca = "N" AND
 				OT.ProntoOrca = "S" AND
 				OT.EnviadoOrca = "N"
@@ -1175,176 +1258,6 @@ class Orcatrata_model extends CI_Model {
 				OT.HoraEntregaOrca ASC,
 				OT.idApp_OrcaTrata
 				
-		');
-
-        /*
-          echo $this->db->last_query();
-          $query = $query->result_array();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-        */
-        if ($query->num_rows() === 0) {
-            return FALSE;
-        } else {
-            if ($x === FALSE) {
-                return TRUE;
-            } else {
-                #foreach ($query->result_array() as $row) {
-                #    $row->idApp_Profissional = $row->idApp_Profissional;
-                #    $row->NomeProfissional = $row->NomeProfissional;
-                #}
-                $query = $query->result_array();
-                return $query;
-            }
-        }
-    }
-
-    public function list6_produtosaluguel($x) {
-
-        $query = $this->db->query('
-			SELECT 
-                C.NomeCliente,
-				C.CelularCliente,
-				OT.Descricao,
-				OT.idApp_OrcaTrata,
-				OT.AprovadoOrca,
-				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
-				DATE_FORMAT(OT.DataEntregaOrca, "%d/%m/%Y") AS DataEntregaOrca,
-				DATE_FORMAT(OT.HoraEntregaOrca, "%H:%i") AS HoraEntregaOrca,
-				OT.DataEntradaOrca,
-				OT.DataPrazo,
-                OT.ValorOrca,
-				OT.ValorDev,				
-				OT.ValorEntradaOrca,
-				OT.ValorRestanteOrca,
-				OT.DataVencimentoOrca,
-                OT.ConcluidoOrca,
-                OT.QuitadoOrca,
-				OT.FinalizadoOrca,
-				OT.EnviadoOrca,
-				OT.ProntoOrca,
-                OT.DataConclusao,
-                OT.DataQuitado,
-				OT.DataRetorno,
-				OT.idTab_TipoRD,
-				OT.FormaPagamento,
-				OT.ObsOrca,
-				OT.QtdParcelasOrca,
-				OT.Tipo_Orca,
-				TF.TipoFrete,
-				MD.Modalidade,
-				VP.Abrev3,
-				VP.AVAP,
-				TFP.FormaPag,
-				TR.TipoFinanceiro
-			FROM 
-                App_OrcaTrata AS OT
-					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
-					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
-					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
-					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
-					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
-			WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				OT.AprovadoOrca = "S" AND
-				OT.idTab_TipoRD = "2" AND
-				OT.Tipo_Orca = "B" AND
-				
-				OT.QuitadoOrca = "N" 
-			ORDER BY 
-				OT.DataEntregaOrca ASC,
-				OT.HoraEntregaOrca ASC,
-				OT.idApp_OrcaTrata
-		');
-
-        /*
-          echo $this->db->last_query();
-          $query = $query->result_array();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-        */
-        if ($query->num_rows() === 0) {
-            return FALSE;
-        } else {
-            if ($x === FALSE) {
-                return TRUE;
-            } else {
-                #foreach ($query->result_array() as $row) {
-                #    $row->idApp_Profissional = $row->idApp_Profissional;
-                #    $row->NomeProfissional = $row->NomeProfissional;
-                #}
-                $query = $query->result_array();
-                return $query;
-            }
-        }
-    }
-	
-    public function list1_produtosvend($x) {
-
-        $query = $this->db->query('
-			SELECT 
-                C.NomeCliente,
-				C.CelularCliente,
-				OT.Descricao,
-				OT.idApp_OrcaTrata,
-				OT.AprovadoOrca,
-				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
-				DATE_FORMAT(OT.DataEntregaOrca, "%d/%m/%Y") AS DataEntregaOrca,
-				DATE_FORMAT(OT.HoraEntregaOrca, "%H:%i") AS HoraEntregaOrca,
-				OT.DataEntradaOrca,
-				OT.DataPrazo,
-                OT.ValorOrca,
-				OT.ValorDev,				
-				OT.ValorEntradaOrca,
-				OT.ValorRestanteOrca,
-				OT.DataVencimentoOrca,
-                OT.ConcluidoOrca,
-                OT.QuitadoOrca,
-				OT.FinalizadoOrca,
-				OT.EnviadoOrca,
-				OT.ProntoOrca,
-                OT.DataConclusao,
-                OT.DataQuitado,
-				OT.DataRetorno,
-				OT.idTab_TipoRD,
-				OT.FormaPagamento,
-				OT.ObsOrca,
-				OT.QtdParcelasOrca,
-				OT.Tipo_Orca,
-				TF.TipoFrete,
-				MD.Modalidade,
-				VP.Abrev3,
-				VP.AVAP,
-				TFP.FormaPag,
-				TR.TipoFinanceiro
-			FROM 
-                App_OrcaTrata AS OT
-					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
-					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
-					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
-					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
-					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
-			WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				
-				OT.idTab_TipoRD = "2" AND
-				
-				OT.ConcluidoOrca = "N" AND
-				OT.ProntoOrca = "N" AND
-				OT.EnviadoOrca = "N"
-				
-			ORDER BY 
-				OT.DataEntregaOrca ASC,
-				OT.HoraEntregaOrca ASC,
-				OT.idApp_OrcaTrata
 		');
 
         /*
@@ -1418,13 +1331,10 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
 					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-                OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				OT.AprovadoOrca = "S" AND
-				OT.idTab_TipoRD = "2" AND
-				OT.Tipo_Orca = "B" AND
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				
-				OT.ConcluidoOrca = "N" AND
+				OT.idTab_TipoRD = "2" AND
+				OT.AprovadoOrca = "S" AND
 				OT.ProntoOrca = "S" AND
 				OT.EnviadoOrca = "S" AND
 				OT.ConcluidoOrca = "N"
@@ -1432,6 +1342,170 @@ class Orcatrata_model extends CI_Model {
 				OT.DataEntregaOrca ASC,
 				OT.HoraEntregaOrca ASC,
 				OT.idApp_OrcaTrata 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+	
+    public function list6_produtosaluguel($x) {
+
+        $query = $this->db->query('
+			SELECT 
+                C.NomeCliente,
+				C.CelularCliente,
+				OT.Descricao,
+				OT.idApp_OrcaTrata,
+				OT.AprovadoOrca,
+				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
+				DATE_FORMAT(OT.DataEntregaOrca, "%d/%m/%Y") AS DataEntregaOrca,
+				DATE_FORMAT(OT.HoraEntregaOrca, "%H:%i") AS HoraEntregaOrca,
+				OT.DataEntradaOrca,
+				OT.DataPrazo,
+                OT.ValorOrca,
+				OT.ValorDev,				
+				OT.ValorEntradaOrca,
+				OT.ValorRestanteOrca,
+				OT.DataVencimentoOrca,
+                OT.ConcluidoOrca,
+                OT.QuitadoOrca,
+				OT.FinalizadoOrca,
+				OT.EnviadoOrca,
+				OT.ProntoOrca,
+                OT.DataConclusao,
+                OT.DataQuitado,
+				OT.DataRetorno,
+				OT.idTab_TipoRD,
+				OT.FormaPagamento,
+				OT.ObsOrca,
+				OT.QtdParcelasOrca,
+				OT.Tipo_Orca,
+				TF.TipoFrete,
+				MD.Modalidade,
+				VP.Abrev3,
+				VP.AVAP,
+				TFP.FormaPag,
+				TR.TipoFinanceiro
+			FROM 
+                App_OrcaTrata AS OT
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
+					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
+					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
+					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
+			WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				
+				OT.idTab_TipoRD = "2" AND
+				OT.AprovadoOrca = "S" AND
+				OT.QuitadoOrca = "N" 
+			ORDER BY 
+				OT.DataEntregaOrca ASC,
+				OT.HoraEntregaOrca ASC,
+				OT.idApp_OrcaTrata
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+	
+    public function list7_combinar($x) {
+
+        $query = $this->db->query('
+			SELECT 
+                C.NomeCliente,
+				C.CelularCliente,
+				OT.Descricao,
+				OT.idApp_OrcaTrata,
+				OT.AprovadoOrca,
+				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
+				DATE_FORMAT(OT.DataEntregaOrca, "%d/%m/%Y") AS DataEntregaOrca,
+				DATE_FORMAT(OT.HoraEntregaOrca, "%H:%i") AS HoraEntregaOrca,
+				OT.DataEntradaOrca,
+				OT.DataPrazo,
+                OT.ValorOrca,
+				OT.ValorDev,				
+				OT.ValorEntradaOrca,
+				OT.ValorRestanteOrca,
+				OT.DataVencimentoOrca,
+                OT.ConcluidoOrca,
+                OT.QuitadoOrca,
+				OT.FinalizadoOrca,
+				OT.EnviadoOrca,
+				OT.ProntoOrca,
+                OT.DataConclusao,
+                OT.DataQuitado,
+				OT.DataRetorno,
+				OT.idTab_TipoRD,
+				OT.FormaPagamento,
+				OT.ObsOrca,
+				OT.QtdParcelasOrca,
+				OT.Tipo_Orca,
+				OT.CombinadoFrete,
+				TF.TipoFrete,
+				MD.Modalidade,
+				VP.Abrev3,
+				VP.AVAP,
+				TFP.FormaPag,
+				TR.TipoFinanceiro
+			FROM 
+                App_OrcaTrata AS OT
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
+					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
+					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
+					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
+			WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				OT.idTab_TipoRD = "2" AND
+				(OT.AprovadoOrca = "N" OR OT.CombinadoFrete = "N")
+				
+			ORDER BY 
+				OT.DataEntregaOrca ASC,
+				OT.HoraEntregaOrca ASC,
+				OT.idApp_OrcaTrata
 		');
 
         /*
@@ -1937,7 +2011,7 @@ exit();*/
             }
         
     }
-
+	
     public function update_orcatrata($data, $id) {
 
         unset($data['idApp_OrcaTrata']);
