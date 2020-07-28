@@ -1,8 +1,8 @@
 <?php if ( !isset($evento) && isset($_SESSION['Empresa']) && isset($_SESSION['Promocao'])) { ?>
 <div class="container-fluid">	
 	<div class="row">
-		<div class="col-md-3"></div>
-		<div class="col-md-6">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
 			<div class="panel panel-<?php echo $panel; ?>">
 				<div class="panel-body">
 					<?php if (isset($msg)) echo $msg; ?>
@@ -13,19 +13,18 @@
 							<div class="row">
 								<div class="col-md-12 ">
 									<div class="col-md-6 ">	
-										<div class="col-md-12 ">
-											<div class="row">	
+										<div class="row">
+											<div class="col-md-12 ">
 												<a href="<?php echo base_url() . 'relatorio/promocao/'; ?>">
 													<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/' . $_SESSION['Promocao']['Arquivo'] . ''; ?>" 
 													class="img-responsive" width='300'>
 												</a>												
 											</div>
-										</div>										
-										<div class="col-md-12">
-											<div class="row">	
+										</div>
+										<div class="row">
+											<div class="col-md-12">
 												<label for="Promocao">Promocao:</label>
-												<input type="text" class="form-control" id="Promocao" maxlength="45" 
-														name="Promocao" value="<?php echo $_SESSION['Promocao']['Promocao']; ?>">
+												<?php echo $_SESSION['Promocao']['Promocao']; ?>
 											</div>
 										</div>
 									</div>	
@@ -67,7 +66,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
+		<div class="col-md-2"></div>
 	</div>
 </div>
 <?php } ?>

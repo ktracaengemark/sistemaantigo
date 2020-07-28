@@ -13,21 +13,24 @@
 							<div class="row">
 								<div class="col-md-12 ">
 									<div class="col-md-6 ">	
-										<div class="col-md-12 ">
-											<div class="row">	
-												<a href="<?php echo base_url() . 'relatorio/produtos/'; ?>">
-													<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Produtos']['Arquivo'] . ''; ?>" 
-													class="img-responsive" width='300'>
-												</a>												
-											</div>
-										</div>										
-										<div class="col-md-10">
-											<div class="row">	
-												<label for="Produtos">Produto:</label>
-												<input type="text" class="form-control" id="Produtos" maxlength="45" 
-														name="Produtos" value="<?php echo $_SESSION['Produtos']['Produtos']; ?>">
+										<div class="row">
+											<div class="col-md-12 ">
+												<div class="row">
+													<label>Produto:</label>
+													<a href="<?php echo base_url() . 'relatorio/produtos2/'; ?>">
+														<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Produtos']['Arquivo'] . ''; ?>" 
+														class="img-responsive" width='300'>
+													</a>
+												</div>	
 											</div>
 										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row">
+													<strong><?php echo $_SESSION['Produtos']['Produtos']; ?></strong>
+												</div>
+											</div>
+										</div>	
 									</div>	
 									<div class="col-md-6 ">	
 										<div class="form-group">

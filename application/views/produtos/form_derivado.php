@@ -16,7 +16,6 @@ exit();
 					<?php if (isset($msg)) echo $msg; ?>
 					<?php echo validation_errors(); ?>
 					<?php echo form_open_multipart($form_open_path); ?>
-					
 					<div class="panel panel-info">
 						<div class="panel-heading">						
 							<div class="row">

@@ -313,61 +313,69 @@
 									</div>
 
 									<div id="collapse3" class="panel-collapse" role="tabpanel" aria-labelledby="heading3" aria-expanded="false">
-										<div class="panel-body">
+										<div class="panel panel-warning">
+											<div class="panel-heading">
 
-											<input type="hidden" name="PT2Count" id="PT2Count" value="<?php echo $count['PT2Count']; ?>"/>
+												<input type="hidden" name="PT2Count" id="PT2Count" value="<?php echo $count['PT2Count']; ?>"/>
 
-											<div class="input_fields_wrap32">
+												<div class="input_fields_wrap32">
 
-											<?php
-											for ($i=1; $i <= $count['PT2Count']; $i++) {
-											?>
+												<?php
+												for ($i=1; $i <= $count['PT2Count']; $i++) {
+												?>
 
-											<?php if ($metodo > 1) { ?>
-											<input type="hidden" name="idTab_Opcao_Select2<?php echo $i ?>" value="<?php echo $item_promocao2[$i]['idTab_Opcao_Select']; ?>"/>
-											<?php } ?>
+												<?php if ($metodo > 1) { ?>
+												<input type="hidden" name="idTab_Opcao_Select2<?php echo $i ?>" value="<?php echo $item_promocao2[$i]['idTab_Opcao_Select']; ?>"/>
+												<?php } ?>
 
-											<div class="form-group" id="32div<?php echo $i ?>">
-												<div class="panel panel-info">
-													<div class="panel-heading">			
-														<div class="row">																					
-															<div class="col-md-10">
-																<label for="idTab_Opcao2<?php echo $i ?>">Item <?php echo $i ?></label>
-																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
-																		 id="listadinamica3<?php echo $i ?>" name="idTab_Opcao2<?php echo $i ?>">
-																	<option value="">-- Selecione uma opção --</option>
-																	<?php
-																	foreach ($select['idTab_Opcao2'] as $key => $row) {
-																		if ($item_promocao2[$i]['idTab_Opcao'] == $key) {
-																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																		} else {
-																			echo '<option value="' . $key . '">' . $row . '</option>';
+												<div class="form-group" id="32div<?php echo $i ?>">
+													<div class="panel panel-success">
+														<div class="panel-heading">			
+															<div class="row">																					
+																<div class="col-md-10">
+																	<label for="idTab_Opcao2<?php echo $i ?>">Opcao <?php echo $i ?></label>
+																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																			 id="listadinamica3<?php echo $i ?>" name="idTab_Opcao2<?php echo $i ?>">
+																		<option value="">-- Selecione uma opção --</option>
+																		<?php
+																		foreach ($select['idTab_Opcao2'] as $key => $row) {
+																			if ($item_promocao2[$i]['idTab_Opcao'] == $key) {
+																				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																			} else {
+																				echo '<option value="' . $key . '">' . $row . '</option>';
+																			}
 																		}
-																	}
-																	?>
-																</select>
-															</div>											
-															<div class="col-md-1">
-																<label><br></label><br>
-																<button type="button" id="<?php echo $i ?>" class="remove_field32 btn btn-danger">
-																	<span class="glyphicon glyphicon-trash"></span>
-																</button>
+																		?>
+																	</select>
+																</div>											
+																<div class="col-md-1">
+																	<label><br></label><br>
+																	<button type="button" id="<?php echo $i ?>" class="remove_field32 btn btn-danger">
+																		<span class="glyphicon glyphicon-trash"></span>
+																	</button>
+																</div>
+															</div>
+														</div>	
+													</div>		
+												</div>
+
+												<?php
+												}
+												?>
+
+												</div>
+												
+												<div class="panel panel-success">
+													<div class="panel-heading text-left">
+														<div class="row">
+															<div class="col-md-3">
+																<a class="btn btn-warning" onclick="adiciona_opcao_select2()">
+																	<span class="glyphicon glyphicon-arrow-up"></span> Adic.Opção Atrib. 1
+																</a>
 															</div>
 														</div>
-													</div>	
-												</div>		
-											</div>
-
-											<?php
-											}
-											?>
-
-											</div>
-
-											<div class="form-group">
-												<a class="btn btn-xs btn-danger" onclick="adiciona_opcao_select2()">
-													<span class="glyphicon glyphicon-arrow-up"></span> Adic.Opção Atrib. 1
-												</a>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>

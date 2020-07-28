@@ -2060,11 +2060,11 @@ function adiciona_opcao_select2() {
 
     $(".input_fields_wrap32").append('\
         <div class="form-group" id="32div'+pt2+'">\
-			<div class="panel panel-info">\
+			<div class="panel panel-success">\
 				<div class="panel-heading">\
 					<div class="row">\
 						<div class="col-md-10">\
-							<label for="idTab_Opcao2">Opcao '+pt2+':</label><br>\
+							<label for="idTab_Opcao2">Opcao '+pt2+'</label><br>\
 							<select class="form-control Chosen2" id="listadinamica2'+pt2+'" name="idTab_Opcao2'+pt2+'">\
 								<option value="">-- Selecione uma opção --</option>\
 							</select>\

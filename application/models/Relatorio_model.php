@@ -6932,15 +6932,22 @@ exit();*/
 				C.Arquivo,
 				C.Ativo,
                 C.DataNascimento,
+				C.DataCadastroCliente,
                 C.CelularCliente,
                 C.Telefone2,
                 C.Telefone3,
                 C.Sexo,
                 C.EnderecoCliente,
+				C.NumeroCliente,
+				C.ComplementoCliente,
                 C.BairroCliente,
+				C.CidadeCliente,
+				C.EstadoCliente,
                 CONCAT(M.NomeMunicipio, "/", M.Uf) AS MunicipioCliente,
-                C.Email
-
+                C.Email,
+				C.usuario,
+				C.senha,
+				C.CodInterno
             FROM
 				App_Cliente AS C
                     LEFT JOIN Tab_Municipio AS M ON C.MunicipioCliente = M.idTab_Municipio
@@ -6972,6 +6979,7 @@ exit();*/
 
             foreach ($query->result() as $row) {
 				$row->DataNascimento = $this->basico->mascara_data($row->DataNascimento, 'barras');
+				$row->DataCadastroCliente = $this->basico->mascara_data($row->DataCadastroCliente, 'barras');
 				$row->Ativo = $this->basico->mascara_palavra_completa($row->Ativo, 'NS');
                 #$row->Sexo = $this->basico->get_sexo($row->Sexo);
                 #$row->Sexo = ($row->Sexo == 2) ? 'F' : 'M';
