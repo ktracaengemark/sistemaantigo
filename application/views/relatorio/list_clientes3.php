@@ -22,9 +22,15 @@
 							<th class="active">Nascimento</th>
 							<th class="active">Endereço</th>
 							<th class="active">Bairro</th>
-							<th class="active">Município</th>
-							<th class="active">E-mail</th>
+							<th class="active">Cidade</th>
+							<!--<th class="active">E-mail</th>-->
 							<th class="active">Ativo?</th>
+							<th class="active">Cadastrado</th>
+							<th class="active">Login</th>
+							<!--<th class="active">Contato</th>
+							<th class="active">Sexo</th>
+							<th class="active">Rel. Com.</th>
+							<th class="active">Rel. Pes.</th>-->
 						</tr>
 					</thead>
 
@@ -44,9 +50,11 @@
 						<td><?php echo $row['DataNascimento'] ?></td>
 						<td><?php echo $row['EnderecoCliente'] ?></td>
 						<td><?php echo $row['BairroCliente'] ?></td>
-						<td><?php echo $row['MunicipioCliente'] ?></td>
-						<td><?php echo $row['Email'] ?></td>
+						<td><?php echo $row['CidadeCliente'] ?></td>
+						<!--<td><?php #echo $row['Email'] ?></td>-->
 						<td><?php echo $row['Ativo'] ?></td>
+						<td><?php echo $row['DataCadastroCliente'] ?></td>
+						<td><?php echo $row['usuario'] ?></td>
 					</tr>							
 					<?php
 					}

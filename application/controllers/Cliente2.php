@@ -217,6 +217,9 @@ class Cliente2 extends CI_Controller {
             'RegistroFicha',
 			'Associado',
 			#'Profissional',
+			'usuario',
+			'senha',
+			'CodInterno',
         ), TRUE);
 
         if ($id) {
@@ -280,6 +283,11 @@ class Cliente2 extends CI_Controller {
 			$data['query']['CidadeCliente'] = trim(mb_strtoupper($data['query']['CidadeCliente'], 'ISO-8859-1'));
 			$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['query']['EstadoCliente'], 'ISO-8859-1'));
 			$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['query']['ReferenciaCliente'], 'ISO-8859-1'));
+			
+			$data['query']['usuario'] = $data['query']['CelularCliente'];
+			$data['query']['senha'] = md5($data['query']['CelularCliente']);
+			$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+			
 			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			#$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 						
