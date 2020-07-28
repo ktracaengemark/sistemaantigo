@@ -209,8 +209,123 @@
 												</div>
 											</div>
 										</div>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-3">
+													<label for="EComerce">E-Comerce?</label><br>
+													<div class="form-group">
+														<div class="btn-group" data-toggle="buttons">
+															<?php
+															foreach ($select['EComerce'] as $key => $row) {
+																(!$query['EComerce']) ? $query['EComerce'] = 'S' : FALSE;
+
+																if ($query['EComerce'] == $key) {
+																	echo ''
+																	. '<label class="btn btn-warning active" name="radiobutton_EComerce" id="radiobutton_EComerce' . $key . '">'
+																	. '<input type="radio" name="EComerce" id="radiobutton" '
+																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																	. '</label>'
+																	;
+																} else {
+																	echo ''
+																	. '<label class="btn btn-default" name="radiobutton_EComerce" id="radiobutton_EComerce' . $key . '">'
+																	. '<input type="radio" name="EComerce" id="radiobutton" '
+																	. 'autocomplete="off" value="' . $key . '" >' . $row
+																	. '</label>'
+																	;
+																}
+															}
+															?>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-3">
+													<label for="RetirarLoja">Retirar na Loja?</label><br>
+													<div class="form-group">
+														<div class="btn-group" data-toggle="buttons">
+															<?php
+															foreach ($select['RetirarLoja'] as $key => $row) {
+																(!$query['RetirarLoja']) ? $query['RetirarLoja'] = 'S' : FALSE;
+
+																if ($query['RetirarLoja'] == $key) {
+																	echo ''
+																	. '<label class="btn btn-warning active" name="radiobutton_RetirarLoja" id="radiobutton_RetirarLoja' . $key . '">'
+																	. '<input type="radio" name="RetirarLoja" id="radiobutton" '
+																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																	. '</label>'
+																	;
+																} else {
+																	echo ''
+																	. '<label class="btn btn-default" name="radiobutton_RetirarLoja" id="radiobutton_RetirarLoja' . $key . '">'
+																	. '<input type="radio" name="RetirarLoja" id="radiobutton" '
+																	. 'autocomplete="off" value="' . $key . '" >' . $row
+																	. '</label>'
+																	;
+																}
+															}
+															?>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-3">
+													<label for="MotoBoy">Moto Boy?</label><br>
+													<div class="form-group">
+														<div class="btn-group" data-toggle="buttons">
+															<?php
+															foreach ($select['MotoBoy'] as $key => $row) {
+																(!$query['MotoBoy']) ? $query['MotoBoy'] = 'S' : FALSE;
+
+																if ($query['MotoBoy'] == $key) {
+																	echo ''
+																	. '<label class="btn btn-warning active" name="radiobutton_MotoBoy" id="radiobutton_MotoBoy' . $key . '">'
+																	. '<input type="radio" name="MotoBoy" id="radiobutton" '
+																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																	. '</label>'
+																	;
+																} else {
+																	echo ''
+																	. '<label class="btn btn-default" name="radiobutton_MotoBoy" id="radiobutton_MotoBoy' . $key . '">'
+																	. '<input type="radio" name="MotoBoy" id="radiobutton" '
+																	. 'autocomplete="off" value="' . $key . '" >' . $row
+																	. '</label>'
+																	;
+																}
+															}
+															?>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-3">
+													<label for="Correios">Correios?</label><br>
+													<div class="form-group">
+														<div class="btn-group" data-toggle="buttons">
+															<?php
+															foreach ($select['Correios'] as $key => $row) {
+																(!$query['Correios']) ? $query['Correios'] = 'S' : FALSE;
+
+																if ($query['Correios'] == $key) {
+																	echo ''
+																	. '<label class="btn btn-warning active" name="radiobutton_Correios" id="radiobutton_Correios' . $key . '">'
+																	. '<input type="radio" name="Correios" id="radiobutton" '
+																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																	. '</label>'
+																	;
+																} else {
+																	echo ''
+																	. '<label class="btn btn-default" name="radiobutton_Correios" id="radiobutton_Correios' . $key . '">'
+																	. '<input type="radio" name="Correios" id="radiobutton" '
+																	. 'autocomplete="off" value="' . $key . '" >' . $row
+																	. '</label>'
+																	;
+																}
+															}
+															?>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
-									</form>
 								</div>
 							</div>
 						</div>
@@ -281,7 +396,8 @@
 						</div>
 					</div>
 				</div>	
-			</div>		
+			</div>
+			</form>
 		</div>
 	</div>	
 </div>

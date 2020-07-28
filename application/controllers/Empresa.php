@@ -164,7 +164,11 @@ class Empresa extends CI_Controller {
 			#'Inativo',
 			'CategoriaEmpresa',
 			#'Site',
-            #'Senha',			
+            #'Senha',
+			'EComerce',
+			'RetirarLoja',
+			'MotoBoy',
+			'Correios',
         ), TRUE);
 				
 
@@ -189,6 +193,10 @@ class Empresa extends CI_Controller {
 
         $data['select']['MunicipioEmpresa'] = $this->Basico_model->select_municipio();
 		$data['select']['CategoriaEmpresa'] = $this->Basico_model->select_categoriaempresa();
+		$data['select']['EComerce'] = $this->Basico_model->select_status_sn();
+		$data['select']['RetirarLoja'] = $this->Basico_model->select_status_sn();
+		$data['select']['MotoBoy'] = $this->Basico_model->select_status_sn();
+		$data['select']['Correios'] = $this->Basico_model->select_status_sn();
         #$data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		#$data['select']['Empresa'] = $this->Basico_model->select_status_sn();
 		#$data['select']['Inativo'] = $this->Basico_model->select_inativo();
@@ -248,7 +256,7 @@ class Empresa extends CI_Controller {
 
         $this->load->view('basico/footer');
     }
-
+	
     public function alterarlogo1($id = FALSE) {
 
         if ($this->input->get('m') == 1)
