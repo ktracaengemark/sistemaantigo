@@ -7310,16 +7310,15 @@ exit();*/
                 E.idSis_Empresa,
                 E.NomeEmpresa,
 				E.Site,
-                E.Endereco,
-                E.Bairro,
+                E.EnderecoEmpresa,
+                E.BairroEmpresa,
 				CE.CategoriaEmpresa,
 				E.Atuacao,
 				E.Arquivo,
-                CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
+                E.MunicipioEmpresa,
                 E.Email
             FROM
                 Sis_Empresa AS E
-                    LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
 					LEFT JOIN Tab_CategoriaEmpresa AS CE ON CE.idTab_CategoriaEmpresa = E.CategoriaEmpresa
             WHERE
 				
@@ -7375,16 +7374,15 @@ exit();*/
                 E.Telefone2,
                 E.Telefone3,
                 E.Sexo,
-                E.Endereco,
-                E.Bairro,
-                CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
+                E.EnderecoEmpresa,
+                E.BairroEmpresa,
+                E.MunicipioEmpresa,
                 E.Email,
 				CE.NomeContato,
 				TCE.RelaCom,
 				CE.Sexo
             FROM
                 Sis_Empresa AS E
-                    LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
 					LEFT JOIN App_Contato AS CE ON E.idSis_Empresa = CE.idSis_Empresa
 					LEFT JOIN Tab_RelaCom AS TCE ON TCE.idTab_RelaCom = CE.RelaCom
 					LEFT JOIN Tab_TipoFornec AS TF ON TF.Abrev = E.TipoFornec

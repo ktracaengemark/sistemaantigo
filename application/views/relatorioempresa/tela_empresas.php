@@ -1,6 +1,6 @@
 <?php if ($msg) echo $msg; ?>
 
-<div class="col-md-offset-3 col-md-6">
+<div class="col-md-offset-1 col-md-10">
 
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">

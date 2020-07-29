@@ -3746,16 +3746,15 @@ exit();*/
                 E.idSis_Empresa,
                 E.NomeEmpresa,
 				E.Site,
-                E.Endereco,
-                E.Bairro,
+                E.EnderecoEmpresa,
+                E.BairroEmpresa,
 				CE.CategoriaEmpresa,
 				E.Atuacao,
 				E.Arquivo,
-                CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
+                E.MunicipioEmpresa,
                 E.Email
             FROM
                 Sis_Empresa AS E
-                    LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
 					LEFT JOIN Tab_CategoriaEmpresa AS CE ON CE.idTab_CategoriaEmpresa = E.CategoriaEmpresa
             WHERE
 				
@@ -3801,16 +3800,15 @@ exit();*/
             SELECT
                 E.idSis_Empresa,
                 E.NomeEmpresa,
-                E.Endereco,
-                E.Bairro,
+                E.EnderecoEmpresa,
+                E.BairroEmpresa,
 				E.Site,
 				E.Atuacao,
 				E.CategoriaEmpresa,
-                CONCAT(M.NomeMunicipio, "/", M.Uf) AS Municipio,
+				E.Municipio,
                 E.Email
             FROM
                 Sis_Empresa AS E
-                    LEFT JOIN Tab_Municipio AS M ON E.Municipio = M.idTab_Municipio
 			WHERE
 				E.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 

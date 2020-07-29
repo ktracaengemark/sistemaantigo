@@ -5350,8 +5350,8 @@ class Relatorio extends CI_Controller {
         $data['select']['Campo'] = array(
             'E.NomeEmpresa' => 'Nome da Empresa',
 			'CE.CategoriaEmpresa' => 'Categoria',
-            'E.Bairro' => 'Bairro',
-            'E.Municipio' => 'Município',
+            'E.BairroEmpresa' => 'Bairro',
+            'E.MunicipioEmpresa' => 'Cidade',
 
         );
 
@@ -5418,8 +5418,8 @@ class Relatorio extends CI_Controller {
 			'E.Atividade' => 'Atividade',
             #'E.DataNascimento' => 'Data de Nascimento',
             #'E.Sexo' => 'Sexo',
-            'E.Bairro' => 'Bairro',
-            'E.Municipio' => 'Município',
+            'E.BairroEmpresa' => 'Bairro',
+            'E.MunicipioEmpresa' => 'Cidade',
             'E.Email' => 'E-mail',
 			'CE.NomeContato' => 'Contato da idSis_Empresa',
 			'TCE.RelaCom' => 'Relação',
