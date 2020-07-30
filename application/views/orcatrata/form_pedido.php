@@ -41,6 +41,22 @@
 							</div>
 						</div>
 						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div type="button" data-toggle="collapse" data-target="#Pagamentoonline" aria-expanded="false" aria-controls="Pagamentoonline">
+										 <b>Pagamento OnLine</b>
+									</div>					
+								</div>
+								<div <?php echo $collapse; ?> id="Pagamentoonline">
+									<div class="panel-body">
+
+										<?php if (isset($list8)) echo $list8; ?>
+
+									</div>
+								</div>	
+							</div>
+						</div>
+						<div class="col-md-12">
 							<div class="panel panel-danger">
 								<div class="panel-heading">
 									<div type="button" data-toggle="collapse" data-target="#NaoEntreguesBalcao" aria-expanded="false" aria-controls="NaoEntreguesBalcao">

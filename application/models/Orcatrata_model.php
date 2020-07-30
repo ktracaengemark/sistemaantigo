@@ -1148,7 +1148,7 @@ class Orcatrata_model extends CI_Model {
 				OT.Tipo_Orca,
 				TF.TipoFrete,
 				MD.Modalidade,
-				VP.Abrev3,
+				VP.Abrev2,
 				VP.AVAP,
 				TFP.FormaPag,
 				TR.TipoFinanceiro
@@ -1158,7 +1158,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -1233,7 +1233,7 @@ class Orcatrata_model extends CI_Model {
 				OT.Tipo_Orca,
 				TF.TipoFrete,
 				MD.Modalidade,
-				VP.Abrev3,
+				VP.Abrev2,
 				VP.AVAP,
 				TFP.FormaPag,
 				TR.TipoFinanceiro
@@ -1243,7 +1243,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -1318,7 +1318,7 @@ class Orcatrata_model extends CI_Model {
 				OT.Tipo_Orca,
 				TF.TipoFrete,
 				MD.Modalidade,
-				VP.Abrev3,
+				VP.Abrev2,
 				VP.AVAP,
 				TFP.FormaPag,
 				TR.TipoFinanceiro
@@ -1328,7 +1328,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -1402,7 +1402,7 @@ class Orcatrata_model extends CI_Model {
 				OT.Tipo_Orca,
 				TF.TipoFrete,
 				MD.Modalidade,
-				VP.Abrev3,
+				VP.Abrev2,
 				VP.AVAP,
 				TFP.FormaPag,
 				TR.TipoFinanceiro
@@ -1412,12 +1412,13 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				
 				OT.idTab_TipoRD = "2" AND
+				
 				OT.AprovadoOrca = "S" AND
 				OT.QuitadoOrca = "N" 
 			ORDER BY 
@@ -1485,7 +1486,7 @@ class Orcatrata_model extends CI_Model {
 				OT.CombinadoFrete,
 				TF.TipoFrete,
 				MD.Modalidade,
-				VP.Abrev3,
+				VP.Abrev2,
 				VP.AVAP,
 				TFP.FormaPag,
 				TR.TipoFinanceiro
@@ -1495,12 +1496,15 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_TipoRD = "2" AND
-				(OT.AprovadoOrca = "N" OR OT.CombinadoFrete = "N")
+				OT.CombinadoFrete = "N" AND
+				OT.AprovadoOrca = "N" AND
+				OT.TipoFrete = "2" AND
+				OT.AprovadoOrca = "N"
 				
 			ORDER BY 
 				OT.DataEntregaOrca ASC,
@@ -1531,7 +1535,92 @@ class Orcatrata_model extends CI_Model {
             }
         }
     }
-		
+
+    public function list8_pagamentoonline($x) {
+
+        $query = $this->db->query('
+			SELECT 
+                C.NomeCliente,
+				C.CelularCliente,
+				OT.Descricao,
+				OT.idApp_OrcaTrata,
+				OT.AprovadoOrca,
+				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
+				DATE_FORMAT(OT.DataEntregaOrca, "%d/%m/%Y") AS DataEntregaOrca,
+				DATE_FORMAT(OT.HoraEntregaOrca, "%H:%i") AS HoraEntregaOrca,
+				OT.DataEntradaOrca,
+				OT.DataPrazo,
+                OT.ValorOrca,
+				OT.ValorDev,				
+				OT.ValorEntradaOrca,
+				OT.ValorRestanteOrca,
+				OT.DataVencimentoOrca,
+                OT.ConcluidoOrca,
+                OT.QuitadoOrca,
+				OT.FinalizadoOrca,
+				OT.EnviadoOrca,
+				OT.ProntoOrca,
+                OT.DataConclusao,
+                OT.DataQuitado,
+				OT.DataRetorno,
+				OT.idTab_TipoRD,
+				OT.FormaPagamento,
+				OT.ObsOrca,
+				OT.QtdParcelasOrca,
+				OT.Tipo_Orca,
+				OT.CombinadoFrete,
+				TF.TipoFrete,
+				MD.Modalidade,
+				VP.Abrev2,
+				VP.AVAP,
+				TFP.FormaPag,
+				TR.TipoFinanceiro
+			FROM 
+                App_OrcaTrata AS OT
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
+					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
+					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
+					LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
+			WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				OT.idTab_TipoRD = "2" AND
+				OT.CombinadoFrete = "S" AND
+				
+				OT.AVAP = "O" AND
+				OT.QuitadoOrca = "N"
+				
+			ORDER BY 
+				OT.DataEntregaOrca ASC,
+				OT.HoraEntregaOrca ASC,
+				OT.idApp_OrcaTrata
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+	
     public function list1_produtoscomp($x) {
 
         $query = $this->db->query('
@@ -1560,7 +1649,7 @@ class Orcatrata_model extends CI_Model {
 				OT.ObsOrca,
 				OT.QtdParcelasOrca,
 				MD.Modalidade,
-				VP.Abrev3,
+				VP.Abrev2,
 				VP.AVAP,
 				TFP.FormaPag,
 				AP.idApp_Produto,
@@ -1581,7 +1670,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 					LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
 					LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
 			WHERE
@@ -1876,7 +1965,7 @@ exit();*/
 				OT.QtdParcelasOrca,
 				OT.idSis_Usuario,
 				MD.Modalidade,
-				VP.Abrev3,
+				VP.Abrev2,
 				VP.AVAP,
 				TFP.FormaPag,
 				TR.TipoFinanceiro,
@@ -1889,7 +1978,7 @@ exit();*/
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 					LEFT JOIN App_Parcelas AS PR ON PR.idApp_Orcatrata = OT.idApp_OrcaTrata
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
@@ -1958,7 +2047,7 @@ exit();*/
 				OT.QtdParcelasOrca,
 				OT.idSis_Usuario,
 				MD.Modalidade,
-				VP.Abrev3,
+				VP.Abrev2,
 				VP.AVAP,
 				TFP.FormaPag,
 				TR.TipoFinanceiro,
@@ -1971,7 +2060,7 @@ exit();*/
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-					LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 					LEFT JOIN App_Parcelas AS PR ON PR.idApp_Orcatrata = OT.idApp_OrcaTrata
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 

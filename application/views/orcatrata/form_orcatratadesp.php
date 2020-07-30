@@ -615,28 +615,27 @@
 												<div class="panel panel-primary">
 													<div class="panel-heading">
 														<div class="row">
-															<div class="col-md-12 text-center">
-																<label for="AVAP">Pagar</label><br>
+															<div class="col-md-12 text-left">
+																<label for="AVAP">Pagamento:</label><br>
 																<div class="btn-block" data-toggle="buttons">
 																	<?php
 																	foreach ($select['AVAP'] as $key => $row) {
-																		if (!$orcatrata['AVAP']) $orcatrata['AVAP'] = 'V';
-
+																		(!$orcatrata['AVAP']) ? $orcatrata['AVAP'] = 'V' : FALSE;
+																		#if (!$orcatrata['AVAP'])$orcatrata['AVAP'] = V;
 																		($key == 'P') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
 																		if ($orcatrata['AVAP'] == $key) {
 																			echo ''
-																			. '<label class="btn btn-warning active" name="AVAP_' . $hideshow . '">'
+																			. '<label class="btn btn-default active" name="radio" id="radio' . $key . '">'
 																			. '<input type="radio" name="AVAP" id="' . $hideshow . '" '
-																			. 'onchange="calculaParcelas()" '
+																			. 'onchange="calculaParcelas(),formaPag(this.value)" '
 																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																			. '</label>'
 																			;
 																		} else {
 																			echo ''
-																			. '<label class="btn btn-default" name="AVAP_' . $hideshow . '">'
-																			. '<input type="radio" name="AVAP" id="' . $hideshow . '" '
-																			. 'onchange="calculaParcelas()" '
+																			. '<label class="btn btn-default" name="radio" id="radio' . $key . '">'
+																			. '<input type="radio" name="AVAP" id="' . $hideshow . '"'
+																			. 'onchange="calculaParcelas(),formaPag(this.value)" '
 																			. 'autocomplete="off" value="' . $key . '" >' . $row
 																			. '</label>'
 																			;
@@ -644,14 +643,14 @@
 																	}
 																	?>
 																</div>
-																<?php echo form_error('AVAP'); ?>
 															</div>																
 														</div>
 													</div>
 												</div>
 											</div>										
-										</div>	
+										</div>
 										<div id="AVAP" <?php echo $div['AVAP']; ?>>		
+											<br>
 											<div class="form-group">	
 												<div class="row">																
 													<div class="col-md-2">
@@ -1008,131 +1007,80 @@
 								
 								<div class="panel panel-info">
 									<div class="panel-heading">
+										<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
+										<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
 										<h4 class="mb-3"><b>Despesa</b></h4>
-										<div class="row">
-											<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
-											
-												<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
-												<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
-												<?php if ($metodo > 1) { ?>
-												<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
-												<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
-												<?php } ?>
-												<?php if ($metodo == 2) { ?>
+										<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
+											<div class="row">
+												<div class="col-md-8">
+													<?php if ($metodo > 1) { ?>
+													<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
+													<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
+													<?php } ?>
+													<?php if ($metodo == 2) { ?>
 
-													<div class="col-md-6">
-														<label></label>
-														<!--
-														<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-															<span class="glyphicon glyphicon-save"></span> Salvar
-														</button>
-														-->
-														<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
-															<span class="glyphicon glyphicon-save"></span> Salvar
-														</button>
-													</div>
-													<div class="col-md-6 text-right">
-														<label></label>
-														<button  type="button" class="btn btn-md btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-															<span class="glyphicon glyphicon-trash"></span> Excluir
-														</button>
-													</div>
+														<div class="col-md-6">
+															<label></label>
+															<!--
+															<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+																<span class="glyphicon glyphicon-save"></span> Salvar
+															</button>
+															-->
+															<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
+																<span class="glyphicon glyphicon-save"></span> Salvar
+															</button>														
+														</div>
+														<div class="col-md-6 text-right">
+															<label></label>
+															<button  type="button" class="btn btn-md btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+																<span class="glyphicon glyphicon-trash"></span> Excluir
+															</button>
+														</div>
 
-													<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-														<div class="modal-dialog" role="document">
-															<div class="modal-content">
-																<div class="modal-header bg-danger">
-																	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																	<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
-																</div>
-																<div class="modal-body">
-																	<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
-																		Esta operação é irreversível.</p>
-																</div>
-																<div class="modal-footer">
-																	<div class="col-md-6 text-left">
-																		<button type="button" class="btn btn-warning" name="submeter4" id="submeter4" onclick="DesabilitaBotao()" data-dismiss="modal">
-																			<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
-																		</button>
+														<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+															<div class="modal-dialog" role="document">
+																<div class="modal-content">
+																	<div class="modal-header bg-danger">
+																		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																		<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
 																	</div>
-																	<div class="col-md-6 text-right">
-																		<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluirdesp/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
-																			<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
-																		</a>
+																	<div class="modal-body">
+																		<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
+																			Esta operação é irreversível.</p>
+																	</div>
+																	<div class="modal-footer">
+																		<div class="col-md-6 text-left">
+																			<button type="button" class="btn btn-warning" name="submeter4" id="submeter4" onclick="DesabilitaBotao()" data-dismiss="modal">
+																				<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+																			</button>
+																		</div>
+																		<div class="col-md-6 text-right">
+																			<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluir2/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
+																				<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
+																			</a>
+																		</div>
 																	</div>
 																</div>
 															</div>
 														</div>
-													</div>
-												<?php } else { ?>
-													<div class="col-md-6">
-														<label></label>
-														<!--
-														<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-															<span class="glyphicon glyphicon-save"></span> Salvar
-														</button>
-														-->
-														<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
-															<span class="glyphicon glyphicon-save"></span> Salvar
-														</button>
-													</div>
-
-												<?php } ?>
-											
-											<?php } ?>
-										</div>
-										<!--
-										<div class="form-group ">
-											<div class="row">
-												<div class="col-md-4">
-													<div id="ConcluidoOrca" <?php echo $div['ConcluidoOrca']; ?>>	
-														<label for="DataConclusao">Concluído em:</label>
-														<div class="input-group <?php echo $datepicker; ?>">
-															<span class="input-group-addon" disabled>
-																<span class="glyphicon glyphicon-calendar"></span>
-															</span>
-															<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																   name="DataConclusao" value="<?php echo $orcatrata['DataConclusao']; ?>">
+													<?php } else { ?>
+														<div class="col-md-6 text-left">
+															<label></label>
+															<!--
+															<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+																<span class="glyphicon glyphicon-save"></span> Salvar
+															</button>
+															-->
+															<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)" data-loading-text="Aguarde..." value="1" >
+																<span class="glyphicon glyphicon-save"></span> Salvar
+															</button>														
 														</div>
-														
-													</div>
-												</div>
-												
-												<div class="col-md-4">
-													<div id="QuitadoOrca" <?php echo $div['QuitadoOrca']; ?>>	
-														<label for="DataQuitado">Quitado em:</label>
-														<div class="input-group <?php echo $datepicker; ?>">
-															<span class="input-group-addon" disabled>
-																<span class="glyphicon glyphicon-calendar"></span>
-															</span>
-															<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																   name="DataQuitado" value="<?php echo $orcatrata['DataQuitado']; ?>">																				
-														</div>
-													</div>
+													<?php } ?>
+													
+													
 												</div>
 											</div>
-										</div>
-										
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-3">
-													<label for="DataRetorno">Retornar em:</label>
-													<div class="input-group <?php echo $datepicker; ?>">
-														<span class="input-group-addon" disabled>
-															<span class="glyphicon glyphicon-calendar"></span>
-														</span>
-														<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-															   name="DataRetorno" value="<?php echo $orcatrata['DataRetorno']; ?>">
-													</div>
-												</div>
-												<div class="col-md-6">
-													<label for="ObsOrca">OBS:</label>
-													<textarea class="form-control" id="ObsOrca" <?php echo $readonly; ?>
-															  name="ObsOrca"><?php echo $orcatrata['ObsOrca']; ?></textarea>
-												</div>
-											</div>
-										</div>
-										-->
+										<?php } ?>
 									</div>
 								</div>
 						

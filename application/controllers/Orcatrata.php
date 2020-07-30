@@ -318,7 +318,8 @@ class Orcatrata extends CI_Controller {
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
         $data['select']['Produto'] = $this->Basico_model->select_produtos3();
 		$data['select']['Servico'] = $this->Basico_model->select_servicos3();
-		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		$data['select']['AVAP'] = $this->Basico_model->select_avap();
 		$data['select']['TipoFrete'] = $this->Basico_model->select_tipofrete();
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario();
 		$data['select']['Prioridade'] = array (
@@ -366,14 +367,15 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['TipoFinanceiro']) ? $data['orcatrata']['TipoFinanceiro'] = '31' : FALSE;
 		
 		#(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
-
+		($data['orcatrata']['AVAP'] == 'P') ? $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
+		
+		/*
         $data['radio'] = array(
             'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
         );
-
         ($data['orcatrata']['AVAP'] == 'P') ?
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
-		
+		*/
 		
 		(!$data['orcatrata']['CombinadoFrete']) ? $data['orcatrata']['CombinadoFrete'] = 'S' : FALSE;
 		(!$data['orcatrata']['TipoFrete']) ? $data['orcatrata']['TipoFrete'] = "1" : FALSE;
@@ -997,7 +999,8 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario();
         $data['select']['Produto'] = $this->Basico_model->select_produtos3();
 		$data['select']['Servico'] = $this->Basico_model->select_servicos3();
-		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		$data['select']['AVAP'] = $this->Basico_model->select_avap();
 		$data['select']['Prioridade'] = array (
 			'1' => 'Alta',
 			'2' => 'Média',
@@ -1057,16 +1060,19 @@ class Orcatrata extends CI_Controller {
 
 		($data['orcatrata']['TipoFrete'] == '1') ? $data['div']['TipoFrete'] = 'style="display: none;"' : $data['div']['TipoFrete'] = '';
 		
-        $data['radio'] = array(
+        ($data['orcatrata']['AVAP'] == 'P') ? $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
+		
+		/*
+		$data['radio'] = array(
+            'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
+        );
+        ($data['orcatrata']['AVAP'] == 'P') ? $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';	        
+		*/
+		
+		$data['radio'] = array(
             'DetalhadaEntrega' => $this->basico->radio_checked($data['orcatrata']['DetalhadaEntrega'], 'DetalhadaEntrega', 'SN'),
         );
         ($data['orcatrata']['DetalhadaEntrega'] == 'S') ? $data['div']['DetalhadaEntrega'] = '' : $data['div']['DetalhadaEntrega'] = 'style="display: none;"';		
-		
-        $data['radio'] = array(
-            'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
-        );
-        ($data['orcatrata']['AVAP'] == 'P') ? $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';		
-		
 
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
@@ -1176,7 +1182,10 @@ class Orcatrata extends CI_Controller {
 		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);
 
 		$data['q7'] = $this->Orcatrata_model->list7_combinar(TRUE);
-		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);		
+		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
+
+		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
+		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);		
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -1783,7 +1792,8 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario();
 		$data['select']['Produto'] = $this->Basico_model->select_produtos3();
 		$data['select']['Servico'] = $this->Basico_model->select_servicos3();
-		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		$data['select']['AVAP'] = $this->Basico_model->select_avap();
 		$data['select']['EnviadoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['Prioridade'] = array (
 			'1' => 'Alta',
@@ -1825,14 +1835,14 @@ class Orcatrata extends CI_Controller {
 
         #Ver uma solução melhor para este campo
 		(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
-
+		($data['orcatrata']['AVAP'] == 'P') ? $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
+		/*
         $data['radio'] = array(
             'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
         );
-
         ($data['orcatrata']['AVAP'] == 'P') ?
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
-		
+		*/
 		
 		(!$data['orcatrata']['CombinadoFrete']) ? $data['orcatrata']['CombinadoFrete'] = 'S' : FALSE;
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
@@ -2698,7 +2708,8 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario();
 		$data['select']['Produto'] = $this->Basico_model->select_produtos3();
 		$data['select']['Servico'] = $this->Basico_model->select_servicos3();
-		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		$data['select']['AVAP'] = $this->Basico_model->select_avap();
 		$data['select']['EnviadoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['Prioridade'] = array (
 			'1' => 'Alta',
@@ -2760,11 +2771,14 @@ class Orcatrata extends CI_Controller {
         );
         ($data['orcatrata']['DetalhadaEntrega'] == 'S') ? $data['div']['DetalhadaEntrega'] = '' : $data['div']['DetalhadaEntrega'] = 'style="display: none;"';
 		
+		($data['orcatrata']['AVAP'] == 'P') ? $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
+		/*
 		$data['radio'] = array(
             'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
         );
         ($data['orcatrata']['AVAP'] == 'P') ?
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';		
+		*/
 		
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
@@ -2867,7 +2881,10 @@ class Orcatrata extends CI_Controller {
 		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);
 
 		$data['q7'] = $this->Orcatrata_model->list7_combinar(TRUE);
-		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);		
+		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
+
+		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
+		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);		
 		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -3653,7 +3670,8 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario();
 		$data['select']['Produto'] = $this->Basico_model->select_produtos3();
 		$data['select']['Servico'] = $this->Basico_model->select_servicos3();
-		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		$data['select']['AVAP'] = $this->Basico_model->select_avap();
 		$data['select']['EnviadoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['Prioridade'] = array (
 			'1' => 'Alta',
@@ -3715,11 +3733,14 @@ class Orcatrata extends CI_Controller {
         );
         ($data['orcatrata']['DetalhadaEntrega'] == 'S') ? $data['div']['DetalhadaEntrega'] = '' : $data['div']['DetalhadaEntrega'] = 'style="display: none;"';
 		
+		($data['orcatrata']['AVAP'] == 'P') ? $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
+		/*
 		$data['radio'] = array(
             'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
         );
         ($data['orcatrata']['AVAP'] == 'P') ?
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';		
+		*/
 		
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
@@ -3822,7 +3843,10 @@ class Orcatrata extends CI_Controller {
 		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);
 
 		$data['q7'] = $this->Orcatrata_model->list7_combinar(TRUE);
-		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);		
+		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
+
+		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
+		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);		
 		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -3877,7 +3901,7 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['DataRetorno'] = $this->basico->mascara_data($data['orcatrata']['DataRetorno'], 'mysql');
             $data['orcatrata']['DataQuitado'] = $this->basico->mascara_data($data['orcatrata']['DataQuitado'], 'mysql');
 			if ($data['orcatrata']['AprovadoOrca'] == 'S'){
-				$data['orcatrata']['status'] = '1';
+				//$data['orcatrata']['status'] = '1';
 				if ($data['orcatrata']['AVAP'] == 'V') {
 					if ($data['orcatrata']['Tipo_Orca'] == 'B') {
 						$data['orcatrata']['DataVencimentoOrca'] = $data['orcatrata']['DataOrca'];
@@ -4304,7 +4328,10 @@ class Orcatrata extends CI_Controller {
 		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);
 
 		$data['q7'] = $this->Orcatrata_model->list7_combinar(TRUE);
-		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);		
+		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
+
+		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
+		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);		
 
 		
 		$this->load->view('orcatrata/form_pedido', $data);
@@ -4620,7 +4647,8 @@ class Orcatrata extends CI_Controller {
 		$data['select']['Entregador'] = $this->Usuario_model->select_usuario();
 		$data['select']['Produto'] = $this->Basico_model->select_produtos3();
 		$data['select']['Servico'] = $this->Basico_model->select_servicos3();
-		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		$data['select']['AVAP'] = $this->Basico_model->select_avap();
 		$data['select']['EnviadoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['Prioridade'] = array (
 			'1' => 'Alta',
@@ -4663,13 +4691,15 @@ class Orcatrata extends CI_Controller {
         #Ver uma solução melhor para este campo
 		(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
 
+		($data['orcatrata']['AVAP'] == 'P') ? $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
+		/*
         $data['radio'] = array(
             'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
         );
-
         ($data['orcatrata']['AVAP'] == 'P') ?
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
-			
+		*/
+		
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 		(!$data['orcatrata']['FinalizadoOrca']) ? $data['orcatrata']['FinalizadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['CanceladoOrca']) ? $data['orcatrata']['CanceladoOrca'] = 'N' : FALSE;
@@ -4770,7 +4800,10 @@ class Orcatrata extends CI_Controller {
 		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);
 
 		$data['q7'] = $this->Orcatrata_model->list7_combinar(TRUE);
-		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);		
+		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
+
+		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
+		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);		
 		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -5328,7 +5361,8 @@ class Orcatrata extends CI_Controller {
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
         $data['select']['Produto'] = $this->Basico_model->select_produto2();
 		$data['select']['Servico'] = $this->Basico_model->select_produto2();
-		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		$data['select']['AVAP'] = $this->Basico_model->select_avap();
 		$data['select']['Prioridade'] = array (
 			'1' => 'Alta',
 			'2' => 'Média',
@@ -5375,14 +5409,16 @@ class Orcatrata extends CI_Controller {
         (!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
 		
 		#(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
-
+		
+		($data['orcatrata']['AVAP'] == 'P') ? $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
+		
+		/*
         $data['radio'] = array(
             'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
         );
-
         ($data['orcatrata']['AVAP'] == 'P') ?
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
-
+		*/
 		
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 
@@ -5957,7 +5993,8 @@ class Orcatrata extends CI_Controller {
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Produto'] = $this->Basico_model->select_produto2();
 		$data['select']['Servico'] = $this->Basico_model->select_produto2();
-		$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
+		$data['select']['AVAP'] = $this->Basico_model->select_avap();
 		$data['select']['Prioridade'] = array (
 			'1' => 'Alta',
 			'2' => 'Média',
@@ -5998,13 +6035,14 @@ class Orcatrata extends CI_Controller {
 
         #Ver uma solução melhor para este campo
 		(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
-
+		($data['orcatrata']['AVAP'] == 'P') ? $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
+		/*
         $data['radio'] = array(
             'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
         );
-
         ($data['orcatrata']['AVAP'] == 'P') ?
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
+		*/	
 			
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
 		(!$data['orcatrata']['FinalizadoOrca']) ? $data['orcatrata']['FinalizadoOrca'] = 'N' : FALSE;

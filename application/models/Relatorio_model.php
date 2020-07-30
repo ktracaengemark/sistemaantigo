@@ -851,7 +851,7 @@ class Relatorio_model extends CI_Model {
 				OT.ObsOrca,
 				OT.QtdParcelasOrca,
 				MD.Modalidade,
-				VP.Abrev3,
+				VP.Abrev2,
 				VP.AVAP,
 				TFP.FormaPag,
 				TR.TipoFinanceiro
@@ -861,7 +861,7 @@ class Relatorio_model extends CI_Model {
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 				LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 				LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-				LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+				LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
@@ -985,7 +985,7 @@ class Relatorio_model extends CI_Model {
 				OT.ObsOrca,
 				OT.QtdParcelasOrca,
 				MD.Modalidade,
-				VP.Abrev3,				
+				VP.Abrev2,				
 				VP.AVAP,
 				TFP.FormaPag,
 				TR.TipoFinanceiro
@@ -994,7 +994,7 @@ class Relatorio_model extends CI_Model {
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 				LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 				LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-				LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+				LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 				LEFT JOIN App_Fornecedor AS F ON F.idApp_Fornecedor = OT.idApp_Fornecedor
             WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -1133,7 +1133,7 @@ class Relatorio_model extends CI_Model {
 				EMP.NomeEmpresa,
 				US.Nome AS NomeColaborador,
 				MD.Modalidade,
-				VP.Abrev3,
+				VP.Abrev2,
 				VP.AVAP,
 				TFP.FormaPag,
 				AP.idApp_Produto,
@@ -1162,7 +1162,7 @@ class Relatorio_model extends CI_Model {
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 				LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 				LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-				LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+				LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 				LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
 				LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
 				LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
@@ -1503,7 +1503,7 @@ class Relatorio_model extends CI_Model {
 				OT.ObsOrca,
 				OT.QtdParcelasOrca,
 				MD.Modalidade,
-				VP.Abrev3,
+				VP.Abrev2,
 				VP.AVAP,
 				TFP.FormaPag,
 				AP.idApp_Produto,
@@ -1528,7 +1528,7 @@ class Relatorio_model extends CI_Model {
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 				LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 				LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-				LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+				LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 				LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
 				LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata
 				LEFT JOIN Tab_Valor AS TV ON TV.idTab_Valor = AP.idTab_Produto
@@ -1690,7 +1690,7 @@ class Relatorio_model extends CI_Model {
 				OT.ObsOrca,
 				OT.QtdParcelasOrca,
 				MD.Modalidade,
-				VP.Abrev3,				
+				VP.Abrev2,				
 				VP.AVAP,
 				TFP.FormaPag,
 				AP.idApp_Produto,
@@ -1714,7 +1714,7 @@ class Relatorio_model extends CI_Model {
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 				LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 				LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
-				LEFT JOIN Tab_Modalidade AS VP ON VP.Abrev2 = OT.AVAP
+				LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 				LEFT JOIN App_Fornecedor AS F ON F.idApp_Fornecedor = OT.idApp_Fornecedor
 				LEFT JOIN App_Produto AS AP ON AP.idApp_Orcatrata = OT.idApp_OrcaTrata
 				LEFT JOIN App_Servico AS TS ON TS.idApp_Orcatrata = OT.idApp_OrcaTrata

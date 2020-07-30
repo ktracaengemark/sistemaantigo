@@ -998,7 +998,7 @@ if (isset($data) && $data) {
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
-			ORDER BY 
+				ORDER BY 
 				P.Promocao ASC
     ');
         } else {
@@ -2677,6 +2677,22 @@ if (isset($data) && $data) {
 
         return $array;
     }
+	
+	public function select_avap($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('SELECT * FROM Tab_AVAP ORDER BY idTab_AVAP ASC');
+        } else {
+            $query = $this->db->query('SELECT * FROM Tab_AVAP ORDER BY idTab_AVAP ASC');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->Abrev2] = $row->AVAP;
+            }
+        }
+
+        return $array;
+    }	
 	
 	public function select_produtosemp($data = FALSE) {
 
