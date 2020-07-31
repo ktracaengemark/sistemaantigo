@@ -845,50 +845,12 @@
 							<br>
 							<div class="panel panel-info">
 								<div class="panel-heading">
+									<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
+									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
 									<h4 class="mb-3"><b>Pedido</b></h4>
-									<div class="row">
-										<div class="col-md-4">
-											<div class="panel panel-primary">
-												<div class="panel-heading">
-													<div class="row">
-														<div class="col-md-12 text-left">
-															<label for="CanceladoOrca">Cancelado?</label><br>
-															<div class="btn-group" data-toggle="buttons">
-																<?php
-																foreach ($select['CanceladoOrca'] as $key => $row) {
-																	if (!$orcatrata['CanceladoOrca'])$orcatrata['CanceladoOrca'] = 'N';
-
-																	($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																	if ($orcatrata['CanceladoOrca'] == $key) {
-																		echo ''
-																		. '<label class="btn btn-warning active" name="CanceladoOrca_' . $hideshow . '">'
-																		. '<input type="radio" name="CanceladoOrca" id="' . $hideshow . '" '
-																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																		. '</label>'
-																		;
-																	} else {
-																		echo ''
-																		. '<label class="btn btn-default" name="CanceladoOrca_' . $hideshow . '">'
-																		. '<input type="radio" name="CanceladoOrca" id="' . $hideshow . '" '
-																		. 'autocomplete="off" value="' . $key . '" >' . $row
-																		. '</label>'
-																		;
-																	}
-																}
-																?>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									
-										<div class="col-md-8">	
-											<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
-											
-												<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
-												<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
+									<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
+										<div class="row">
+											<div class="col-md-8">
 												<?php if ($metodo > 1) { ?>
 												<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
 												<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
@@ -906,14 +868,13 @@
 															<span class="glyphicon glyphicon-save"></span> Salvar
 														</button>														
 													</div>
-													<!--
 													<div class="col-md-6 text-right">
 														<label></label>
 														<button  type="button" class="btn btn-md btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 															<span class="glyphicon glyphicon-trash"></span> Excluir
 														</button>
 													</div>
-													-->
+
 													<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
@@ -953,10 +914,49 @@
 														</button>														
 													</div>
 												<?php } ?>
-											
-											<?php } ?>
+												
+												
+											</div>
+										
+											<div class="col-md-4">
+												<div class="panel panel-primary">
+													<div class="panel-heading">
+														<div class="row">
+															<div class="col-md-12 text-left">
+																<label for="CanceladoOrca">Cancelado?</label><br>
+																<div class="btn-group" data-toggle="buttons">
+																	<?php
+																	foreach ($select['CanceladoOrca'] as $key => $row) {
+																		if (!$orcatrata['CanceladoOrca'])$orcatrata['CanceladoOrca'] = 'N';
+
+																		($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																		if ($orcatrata['CanceladoOrca'] == $key) {
+																			echo ''
+																			. '<label class="btn btn-warning active" name="CanceladoOrca_' . $hideshow . '">'
+																			. '<input type="radio" name="CanceladoOrca" id="' . $hideshow . '" '
+																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																			. '</label>'
+																			;
+																		} else {
+																			echo ''
+																			. '<label class="btn btn-default" name="CanceladoOrca_' . $hideshow . '">'
+																			. '<input type="radio" name="CanceladoOrca" id="' . $hideshow . '" '
+																			. 'autocomplete="off" value="' . $key . '" >' . $row
+																			. '</label>'
+																			;
+																		}
+																	}
+																	?>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										
 										</div>
-									</div>
+									<?php } ?>
 								</div>
 							</div>							
 						</div>
