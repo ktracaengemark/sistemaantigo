@@ -2970,6 +2970,7 @@ function buscaValor1Tabelas(id, campo, tabela, num, campo2) {
 					
 					//""ou posso usar assim, passando diretamente o qtdinc do id ""
 					$('#QtdIncremento'+campo2+num).val(data[i].qtdinc);
+					$('#Qtd'+campo2+num).val(data[i].qtdprod);
 					$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
 					$('#idTab_Valor_'+campo2+num).val(data[i].id_valor);
 					//console.log( data[i].id_produto );
