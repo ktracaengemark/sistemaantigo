@@ -2146,6 +2146,11 @@ function adiciona_item_promocao() {
 								<option value="">-- Selecione uma opção --</option>\
 							</select>\
 						</div>\
+						<div class="col-md-2">\
+							<label for="Convdesc'+pt+'">Descrição:</label>\
+							<input type="text" class="form-control" id="Convdesc'+pt+'"\
+									  name="Convdesc'+pt+'" value="">\
+						</div>\
 						<div class="col-md-1">\
 							<label for="QtdProdutoDesconto">QtdPrd:</label><br>\
 							<div class="input-group">\
@@ -2278,6 +2283,11 @@ function adiciona_item_promocao2() {
 								<option value="">-- Selecione uma opção --</option>\
 							</select>\
 						</div>\
+						<div class="col-md-2">\
+							<label for="Convdesc2'+pt2+'">Descrição:</label>\
+							<input type="text" class="form-control" id="Convdesc2'+pt2+'"\
+									  name="Convdesc2'+pt2+'" value="">\
+						</div>\
 						<div class="col-md-1">\
 							<label for="QtdProdutoDesconto2">QtdPrd:</label><br>\
 							<div class="input-group">\
@@ -2409,6 +2419,11 @@ function adiciona_item_promocao3() {
 							<select class="form-control Chosen3" id="listadinamica3'+pt3+'" name="idTab_Produtos3'+pt3+'">\
 								<option value="">-- Selecione uma opção --</option>\
 							</select>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="Convdesc3'+pt3+'">Descrição:</label>\
+							<input type="text" class="form-control" id="Convdesc3'+pt3+'"\
+									  name="Convdesc3'+pt3+'" value="">\
 						</div>\
 						<div class="col-md-1">\
 							<label for="QtdProdutoDesconto3">QtdPrd:</label><br>\
@@ -5116,25 +5131,12 @@ $(document).ready(function () {
                         <div class="row">\
 							<input type="hidden" class="form-control" id="idTab_Valor_Produto'+pc+'" name="idTab_Valor_Produto'+pc+'" value="">\
 							<input type="hidden" class="form-control" id="idTab_Produtos_Produto'+pc+'" name="idTab_Produtos_Produto'+pc+'" value="">\
-							<div class="col-md-9">\
+							<div class="col-md-11">\
                                 <label for="idTab_Produto">Produto '+pc+':</label><br>\
                                 <select class="form-control Chosen" id="listadinamicab'+pc+'" name="idTab_Produto'+pc+'" onchange="'+buscavalor+'(this.value,this.name,\''+tblbusca+'\','+pc+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
-							<div class="col-md-2">\
-								<label for="ConcluidoProduto">Entregue?</label><br>\
-								<div class="btn-group" data-toggle="buttons">\
-									<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
-									<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
-										autocomplete="off" value="N" checked>Não\
-									</label>\
-									<label class="btn btn-default" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'S">\
-									<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
-										autocomplete="off" value="S" >Sim\
-									</label>\
-								</div>\
-							</div>\
 							<div class="col-md-1 text-right">\
 								<label><br></label><br>\
 								<a href="#" id="'+pc+'" class="remove_field9 btn btn-danger"\
@@ -5562,24 +5564,11 @@ $(document).ready(function () {
 						<div class="row">\
 							<input type="hidden" class="form-control" id="idTab_Valor_Servico'+ps+'" name="idTab_Valor_Servico'+ps+'" value="">\
 							<input type="hidden" class="form-control" id="idTab_Produtos_Servico'+ps+'" name="idTab_Produtos_Servico'+ps+'" value="">\
-							<div class="col-md-9">\
+							<div class="col-md-11">\
 								<label for="idTab_Servico">Servico '+ps+':</label><br>\
 								<select class="form-control Chosen4" id="listadinamica'+ps+'"  name="idTab_Servico'+ps+'" onchange="'+buscavalor_serv+'(this.value,this.name,\''+tblbusca_serv+'\','+ps+',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')">\
 									<option value="">-- Selecione uma opção --</option>\
 								</select>\
-							</div>\
-							<div class="col-md-2">\
-								<label for="ConcluidoServico">Entregue?</label><br>\
-								<div class="btn-group" data-toggle="buttons">\
-									<label class="btn btn-warning active" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'N">\
-									<input type="radio" name="ConcluidoServico'+ps+'" id="radiogeraldinamico"\
-										autocomplete="off" value="N" checked>Não\
-									</label>\
-									<label class="btn btn-default" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'S">\
-									<input type="radio" name="ConcluidoServico'+ps+'" id="radiogeraldinamico"\
-										autocomplete="off" value="S" >Sim\
-									</label>\
-								</div>\
 							</div>\
 							<div class="col-md-1">\
 								<label><br></label><br>\

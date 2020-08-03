@@ -455,9 +455,9 @@ class Documentos extends CI_Controller {
 						
 						$img = imagecreatefromjpeg($diretorio);
 
-						$thumb = imagecreatetruecolor(126, 126);
+						$thumb = imagecreatetruecolor(300, 300);
 						
-						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 126, 126, $largura, $altura);
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 300, 300, $largura, $altura);
 						
 						imagejpeg($thumb, $dir2 . $foto);
 						imagedestroy($img);
@@ -472,9 +472,9 @@ class Documentos extends CI_Controller {
 						
 						$img = imagecreatefrompng($diretorio);
 
-						$thumb = imagecreatetruecolor(126, 126);
+						$thumb = imagecreatetruecolor(300, 300);
 						
-						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 126, 126, $largura, $altura);
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 300, 300, $largura, $altura);
 						
 						imagejpeg($thumb, $dir2 . $foto);
 						imagedestroy($img);

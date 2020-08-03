@@ -141,12 +141,12 @@
 							<thead>
 								<tr>
 									<!--<th scope="col">Nº</th>-->
-									<th class="col-md-2" scope="col">QtdProdutos</th>																				
+									<th class="col-md-1" scope="col">Qtd</th>																				
 									<!--<th scope="col">CodProd.</th>
 									<th scope="col">CategProd.</th>-->												
-									<th class="col-md-6" scope="col">Produto</th>							
-									<th class="col-md-1" scope="col">Valor</th>
-									<th class="col-md-1" scope="col">Subtotal</th>
+									<th class="col-md-10" scope="col">Produto</th>							
+									<!--<th class="col-md-1" scope="col">Valor</th>-->
+									<th class="col-md-1" scope="col">Sbt</th>
 								</tr>
 							</thead>
 
@@ -158,12 +158,13 @@
 								?>
 
 								<tr>
-									<!--<td><?php echo $produto[$i]['idApp_OrcaTrata'] ?></td>-->
-									<td><?php echo $produto[$i]['QtdProduto'] ?> = <b><?php echo $produto[$i]['SubTotalQtd'] ?></b></td>														
+									<!--<td><?php echo $produto[$i]['idApp_OrcaTrata'] ?></td>
+									<td><?php echo $produto[$i]['QtdProduto'] ?> = <b><?php echo $produto[$i]['SubTotalQtd'] ?></b></td>-->
 									<!--<td><?php echo $produto[$i]['CodProd'] ?></td>
-									<td><?php echo $produto[$i]['Prodaux3'] ?></td>-->					
-									<td><?php echo $produto[$i]['NomeProduto'] ?></td>							
-									<td><?php echo number_format($produto[$i]['ValorProduto'], 2, ',', '.') ?></td>
+									<td><?php echo $produto[$i]['Prodaux3'] ?></td>-->
+									<td><h4><b><?php echo $produto[$i]['SubTotalQtd'] ?></b></h4></td>
+									<td><h4><?php echo $produto[$i]['NomeProduto'] ?></h4></td>							
+									<!--<td><?php echo number_format($produto[$i]['ValorProduto'], 2, ',', '.') ?></td>-->
 									<td><?php echo $produto[$i]['SubtotalProduto'] ?></td>
 								</tr>
 								
@@ -171,7 +172,7 @@
 								}
 								?>
 								<tr>
-									<td class="text-right">Total: <b><?php echo $orcatrata['QtdPrdOrca'] ?></b></td>
+									<td class="text-left">Total: <b><?php echo $orcatrata['QtdPrdOrca'] ?></b></td>
 								</tr>
 							</tbody>
 						</table>

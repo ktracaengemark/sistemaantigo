@@ -411,6 +411,11 @@
 																</select>
 															</div>
 															<div class="col-md-2">
+																<label for="Convdesc">Descrição <?php echo $i ?></label>
+																<input type="text" class="form-control"  id="Convdesc<?php echo $i ?>" <?php echo $readonly; ?>
+																		  name="Convdesc<?php echo $i ?>" value="<?php echo $item_promocao[$i]['Convdesc']; ?>">
+															</div>
+															<div class="col-md-2">
 																<label for="ValorProduto">Valor <?php echo $i ?></label>
 																<div class="input-group">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -507,6 +512,11 @@
 																	</select>
 																</div>
 																<div class="col-md-2">
+																	<label for="Convdesc2">Descrição <?php echo $i ?></label>
+																	<input type="text" class="form-control"  id="Convdesc2<?php echo $i ?>" <?php echo $readonly; ?>
+																			  name="Convdesc2<?php echo $i ?>" value="<?php echo $item_promocao2[$i]['Convdesc']; ?>">
+																</div>
+																<div class="col-md-2">
 																	<label for="ValorProduto2">Valor <?php echo $i ?></label>
 																	<div class="input-group">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -599,6 +609,11 @@
 																		}
 																		?>
 																	</select>
+																</div>
+																<div class="col-md-2">
+																	<label for="Convdesc3">Descrição <?php echo $i ?></label>
+																	<input type="text" class="form-control"  id="Convdesc3<?php echo $i ?>" <?php echo $readonly; ?>
+																			  name="Convdesc3<?php echo $i ?>" value="<?php echo $item_promocao3[$i]['Convdesc']; ?>">
 																</div>
 																<div class="col-md-2">
 																	<label for="ValorProduto3">Valor <?php echo $i ?></label>

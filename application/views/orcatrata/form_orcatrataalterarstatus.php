@@ -214,10 +214,10 @@
 									<table class="table table-bordered table-condensed table-striped">
 										<thead>
 											<tr>
-												<th class="col-md-2" scope="col">Qtd</th>																																
-												<th class="col-md-6" scope="col">Produto</th>							
-												<th class="col-md-1" scope="col">Valor</th>
-												<th class="col-md-1" scope="col">Subtotal</th>
+												<th class="col-md-1" scope="col">Qtd</th>																																
+												<th class="col-md-10" scope="col">Produto</th>							
+												<!--<th class="col-md-1" scope="col">Valor</th>-->
+												<th class="col-md-1" scope="col">Sbt</th>
 											</tr>	
 											<!--
 											<tr>
@@ -237,9 +237,10 @@
 											?>
 
 											<tr>
-												<td><?php echo $produto[$i]['QtdProduto'] ?> X <?php echo $produto[$i]['QtdIncrementoProduto'] ?> = <b><?php echo $produto[$i]['SubTotalQtd'] ?></b></td>
+												<!--<td><?php echo $produto[$i]['QtdProduto'] ?> X <?php echo $produto[$i]['QtdIncrementoProduto'] ?> = <b><?php echo $produto[$i]['SubTotalQtd'] ?></b></td>-->
+												<td><b><?php echo $produto[$i]['SubTotalQtd'] ?></b></td>
 												<td><?php echo $produto[$i]['Produto'] ?></td>							
-												<td><?php echo number_format($produto[$i]['ValorProduto'], 2, ',', '.') ?></td>
+												<!--<td><?php echo number_format($produto[$i]['ValorProduto'], 2, ',', '.') ?></td>-->
 												<td><?php echo number_format($produto[$i]['Subtotal_Produto'], 2, ',', '.') ?></td>
 											</tr>						
 											<!--
@@ -255,7 +256,7 @@
 											}
 											?>
 											<tr>
-												<td class="text-right">Total: <b><?php echo $orcatrata['QtdPrdOrca'] ?></b></td>
+												<td class="text-left">Total: <b><?php echo $orcatrata['QtdPrdOrca'] ?></b></td>
 											</tr>
 										</tbody>
 									</table>

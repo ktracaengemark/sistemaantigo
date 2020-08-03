@@ -225,10 +225,11 @@ class Orcatrata_model extends CI_Model {
 				TAP.Aux_App_Produto_3,
 				TAP.Aux_App_Produto_4,
 				TAP.Aux_App_Produto_5,
+				V.Convdesc,
 				P.Nome_Prod,
 				TOP2.Opcao,
 				TOP1.Opcao,
-				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,"")) AS Produto,
+				CONCAT(IFNULL(P.Nome_Prod,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(V.Convdesc,"")) AS Produto,
 				(TAP.QtdProduto * TAP.ValorProduto) AS Subtotal_Produto
 			FROM 
 				App_Produto AS TAP
