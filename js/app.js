@@ -2969,11 +2969,12 @@ function buscaValor1Tabelas(id, campo, tabela, num, campo2) {
                 if (data[i].id == id) {
 					
 					//""ou posso usar assim, passando diretamente o qtdinc do id ""
+					$('#Nome'+campo2+num).val(data[i].nomeprod);
 					$('#QtdIncremento'+campo2+num).val(data[i].qtdinc);
 					$('#Qtd'+campo2+num).val(data[i].qtdprod);
 					$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
 					$('#idTab_Valor_'+campo2+num).val(data[i].id_valor);
-					//console.log( data[i].id_produto );
+					//console.log( data[i].nomeprod );
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
 
@@ -5132,6 +5133,7 @@ $(document).ready(function () {
                         <div class="row">\
 							<input type="hidden" class="form-control" id="idTab_Valor_Produto'+pc+'" name="idTab_Valor_Produto'+pc+'" value="">\
 							<input type="hidden" class="form-control" id="idTab_Produtos_Produto'+pc+'" name="idTab_Produtos_Produto'+pc+'" value="">\
+							<input type="hidden" class="form-control" id="NomeProduto'+pc+'" name="NomeProduto'+pc+'" value="">\
 							<div class="col-md-11">\
                                 <label for="idTab_Produto">Produto '+pc+':</label><br>\
                                 <select class="form-control Chosen" id="listadinamicab'+pc+'" name="idTab_Produto'+pc+'" onchange="'+buscavalor+'(this.value,this.name,\''+tblbusca+'\','+pc+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')">\

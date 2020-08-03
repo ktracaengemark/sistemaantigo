@@ -106,7 +106,7 @@
 								</li>
 								<?php } ?>	
 							</ul>
-						</div>
+							</div>
 					  </div>
 					</nav>
 				<?php } ?>
@@ -151,6 +151,7 @@
 															<div class="panel panel-warning">
 																<div class="panel-heading">
 																	<div class="row">
+																		<input type="hidden" class="form-control " id="NomeProduto<?php echo $i ?>" name="NomeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['NomeProduto'] ?>">
 																		<input type="hidden" class="form-control " id="idTab_Valor_Produto<?php echo $i ?>" name="idTab_Valor_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor_Produto'] ?>">
 																		<input type="hidden" class="form-control " id="idTab_Produtos_Produto<?php echo $i ?>" name="idTab_Produtos_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos_Produto'] ?>">			
 																		<div class="col-md-9">
