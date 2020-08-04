@@ -519,7 +519,7 @@
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorRestanteOrca" maxlength="10" placeholder="0,00" 
-																		   data-toggle="collapse" onkeyup="calculaParcelas(),calculaTotal(this.value),calculaTroco(this.value)" onchange="calculaParcelas(),calculaTroco(this.value)" onkeydown="calculaParcelas(),calculaTroco(this.value)"
+																		   data-toggle="collapse" onkeyup="calculaParcelas(),calculaTotal(this.value)" onchange="calculaParcelas()" onkeydown="calculaParcelas()"
 																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																		   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
 																</div>
@@ -610,7 +610,25 @@
 									</div>
 									<br>
 									<div id="TipoFrete" <?php echo $div['TipoFrete']; ?>>
+
+										<input type="hidden" name="CepOrigem" id="CepOrigem" placeholder="CepOrigem" value="<?php echo $_SESSION['Empresa']['CepEmpresa'];?>">
+										<input type="hidden" name="Peso" id="Peso" placeholder="Peso" value="1">
+										<input type="hidden" name="Formato" id="Formato" placeholder="Formato" value="1">
+										<input type="hidden" name="Comprimento" id="Comprimento" placeholder="Comprimento" value="30">
+										<input type="hidden" name="Largura" id="Largura" placeholder="Largura" value="15">									
+										<input type="hidden" name="Altura" id="Altura" placeholder="Altura" value="5">
+										<input type="hidden" name="Diametro" id="Diametro" placeholder="Diametro" value="0">		
+										<input type="hidden" name="MaoPropria" id="MaoPropria" placeholder="MaoPropria" value="N">
+										<input type="hidden" name="ValorDeclarado" id="ValorDeclarado" placeholder="ValorDeclarado" value="0">
+										<input type="hidden" name="AvisoRecebimento" id="AvisoRecebimento" placeholder="AvisoRecebimento" value="N">
+									
+									
 										<div class="row ">
+											<div class="col-md-2 mb-3 ">	
+												<label >Buscar End.</label>
+												<!--<button class=" form-control btn btn-lg btn-success" type="button" onclick="Procuraendereco(), LoadFrete(), calculaTotal(), calculaParcelas()" >Buscar</button>-->
+												<button class=" form-control btn btn-lg btn-success" type="button" onclick="Procuraendereco(), calculaTotal(), calculaParcelas()" >Buscar</button>
+											</div>
 											<div class="col-md-2 ">
 												<label class="" for="Cep">Cep:</label>
 												<input type="text" class="form-control " id="Cep" maxlength="8" <?php echo $readonly; ?>
@@ -626,7 +644,7 @@
 												<input type="text" class="form-control " id="Numero" maxlength="100" <?php echo $readonly; ?>
 													   name="Numero" value="<?php echo $orcatrata['Numero']; ?>">
 											</div>
-											<div class="col-md-4 ">
+											<div class="col-md-2 ">
 												<label class="" for="Complemento">Complemento:</label>
 												<input type="text" class="form-control " id="Complemento" maxlength="100" <?php echo $readonly; ?>
 													   name="Complemento" value="<?php echo $orcatrata['Complemento']; ?>">
@@ -759,6 +777,7 @@
 													<div class="row">
 														<div class="col-md-12 mb-3">
 															<label for="PrazoEntrega">Prazo (em dias)</label>
+															<span class="ResultadoPrecoPrazo "></span>
 															<input type="text" class="form-control " id="PrazoEntrega" maxlength="100" <?php echo $readonly; ?> readonly=""
 																   name="PrazoEntrega" value="<?php echo $orcatrata['PrazoEntrega']; ?>">
 														</div>
@@ -833,9 +852,10 @@
 														<div class="col-md-12">
 															<label for="ValorFrete">Taxa de Entrega:</label><br>
 															<div class="input-group" id="txtHint">
-																<span class="input-group-addon" id="basic-addon1">R$</span>
+																<span class="input-group-addon " id="basic-addon1">R$</span>
 																<input type="text" class="form-control Valor" id="ValorFrete" maxlength="10" placeholder="0,00" 
-																	   onkeyup="calculaTotal(this.value),calculaParcelas(),calculaTroco(this.value)"
+																	   data-toggle="collapse" onkeyup="calculaParcelas(),calculaTotal(this.value)" onchange="calculaParcelas()" onkeydown="calculaParcelas()"
+																		data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																	   name="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>">
 															</div>
 														</div>																
@@ -846,7 +866,7 @@
 															<div class="input-group" id="txtHint">
 																<span class="input-group-addon" id="basic-addon1">R$</span>
 																<input type="text" class="form-control Valor" id="ValorTotalOrca" maxlength="10" placeholder="0,00" readonly=''
-																	   data-toggle="collapse" onkeyup="calculaParcelas(),calculaTotal(this.value),calculaTroco(this.value)" onchange="calculaParcelas(),calculaTotal(this.value),calculaTroco(this.value)" onkeydown="calculaParcelas(),calculaTotal(this.value),calculaTroco(this.value)"
+																	   data-toggle="collapse" onkeyup="calculaParcelas(),calculaTotal(this.value)" onchange="calculaParcelas(),calculaTotal(this.value)" onkeydown="calculaParcelas(),calculaTotal(this.value)"
 																		data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																	   name="ValorTotalOrca" value="<?php echo $orcatrata['ValorTotalOrca'] ?>">
 															</div>
@@ -870,7 +890,9 @@
 														<div class="row">
 															<div class="col-md-12">
 																<label for="FormaPagamento">Forma de Pagamento</label>
-																<select data-placeholder="Selecione uma opção..." class="form-control" onchange="exibirTroco(this.value),dateDiff()"<?php echo $readonly; ?>
+																<select data-placeholder="Selecione uma opção..." class="form-control" 
+																	data-toggle="collapse" onchange="calculaParcelas(),calculaTotal(this.value),exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
+																		data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																		id="FormaPagamento" name="FormaPagamento">
 																	<option value="">-- Selecione uma opção --</option>
 																	<?php

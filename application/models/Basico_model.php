@@ -552,7 +552,7 @@ if (isset($data) && $data) {
         if (isset($data) && $data) {
 
 			$query = $this->db->query('
-				SELECT *
+					SELECT *
 					FROM
 						Sis_Empresa
 					WHERE
@@ -569,6 +569,29 @@ if (isset($data) && $data) {
             return '';
         }
     }
+	
+	public function get_end_empresa($data) {
+
+        if (isset($data) && $data) {
+
+			$query = $this->db->query('
+					SELECT *
+					FROM
+						Sis_Empresa
+					WHERE
+						idSis_Empresa = "' . $data . '"
+				');
+
+            if ($query->num_rows() === 0) {
+                return '';
+            } else {
+                $query = $query->result_array();
+                return $query[0];
+            }
+        } else {
+            return '';
+        }
+    }	
 	
 	public function get_tipofinanceiro($data) {
 

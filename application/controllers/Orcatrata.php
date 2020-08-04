@@ -465,7 +465,8 @@ class Orcatrata extends CI_Controller {
 
         $data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
 
-        /*
+		$data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);
+		/*
           echo '<br>';
           echo "<pre>";
           print_r($data);
@@ -486,13 +487,13 @@ class Orcatrata extends CI_Controller {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_OrcaTrata ####
             if ($data['orcatrata']['TipoFrete'] == '1') {
-				$data['orcatrata']['Cep'] = '';
-				$data['orcatrata']['Logradouro'] = '';
-				$data['orcatrata']['Numero'] = '';
-				$data['orcatrata']['Complemento'] = '';
-				$data['orcatrata']['Bairro'] = '';
-				$data['orcatrata']['Cidade'] = '';
-				$data['orcatrata']['Estado'] = '';
+				$data['orcatrata']['Cep'] = $data['empresa']['CepEmpresa'];
+				$data['orcatrata']['Logradouro'] = $data['empresa']['EnderecoEmpresa'];
+				$data['orcatrata']['Numero'] = $data['empresa']['NumeroEmpresa'];
+				$data['orcatrata']['Complemento'] = $data['empresa']['ComplementoEmpresa'];
+				$data['orcatrata']['Bairro'] = $data['empresa']['BairroEmpresa'];
+				$data['orcatrata']['Cidade'] = $data['empresa']['MunicipioEmpresa'];
+				$data['orcatrata']['Estado'] = $data['empresa']['EstadoEmpresa'];
 				$data['orcatrata']['Referencia'] = '';
 			} else {	
 				$data['orcatrata']['Cep'] = $data['orcatrata']['Cep'];
@@ -1187,6 +1188,14 @@ class Orcatrata extends CI_Controller {
 		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
 		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);		
 
+		$_SESSION['Empresa'] = $data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);
+		/*	 
+		echo '<br>';
+		echo "<pre>";
+		print_r($_SESSION['Empresa']['CepEmpresa']);
+		echo "</pre>";
+		exit ();
+		*/
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             //if (1 == 1) {
@@ -1200,14 +1209,14 @@ class Orcatrata extends CI_Controller {
             
 			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_OrcaTrata ####
-            if ($data['orcatrata']['TipoFrete'] == '1') {
-				$data['orcatrata']['Cep'] = '';
-				$data['orcatrata']['Logradouro'] = '';
-				$data['orcatrata']['Numero'] = '';
-				$data['orcatrata']['Complemento'] = '';
-				$data['orcatrata']['Bairro'] = '';
-				$data['orcatrata']['Cidade'] = '';
-				$data['orcatrata']['Estado'] = '';
+			if ($data['orcatrata']['TipoFrete'] == '1') {
+				$data['orcatrata']['Cep'] = $data['empresa']['CepEmpresa'];
+				$data['orcatrata']['Logradouro'] = $data['empresa']['EnderecoEmpresa'];
+				$data['orcatrata']['Numero'] = $data['empresa']['NumeroEmpresa'];
+				$data['orcatrata']['Complemento'] = $data['empresa']['ComplementoEmpresa'];
+				$data['orcatrata']['Bairro'] = $data['empresa']['BairroEmpresa'];
+				$data['orcatrata']['Cidade'] = $data['empresa']['MunicipioEmpresa'];
+				$data['orcatrata']['Estado'] = $data['empresa']['EstadoEmpresa'];
 				$data['orcatrata']['Referencia'] = '';
 			} else {	
 				$data['orcatrata']['Cep'] = $data['orcatrata']['Cep'];
@@ -1942,7 +1951,8 @@ class Orcatrata extends CI_Controller {
         $data['timepicker'] = 'TimePicker';
 
         $data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
-
+		
+		$data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);
         /*
           echo '<br>';
           echo "<pre>";
@@ -1964,13 +1974,13 @@ class Orcatrata extends CI_Controller {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_OrcaTrata ####
             if ($data['orcatrata']['TipoFrete'] == '1') {
-				$data['orcatrata']['Cep'] = '';
-				$data['orcatrata']['Logradouro'] = '';
-				$data['orcatrata']['Numero'] = '';
-				$data['orcatrata']['Complemento'] = '';
-				$data['orcatrata']['Bairro'] = '';
-				$data['orcatrata']['Cidade'] = '';
-				$data['orcatrata']['Estado'] = '';
+				$data['orcatrata']['Cep'] = $data['empresa']['CepEmpresa'];
+				$data['orcatrata']['Logradouro'] = $data['empresa']['EnderecoEmpresa'];
+				$data['orcatrata']['Numero'] = $data['empresa']['NumeroEmpresa'];
+				$data['orcatrata']['Complemento'] = $data['empresa']['ComplementoEmpresa'];
+				$data['orcatrata']['Bairro'] = $data['empresa']['BairroEmpresa'];
+				$data['orcatrata']['Cidade'] = $data['empresa']['MunicipioEmpresa'];
+				$data['orcatrata']['Estado'] = $data['empresa']['EstadoEmpresa'];
 				$data['orcatrata']['Referencia'] = '';
 			} else {	
 				$data['orcatrata']['Cep'] = $data['orcatrata']['Cep'];
@@ -2884,7 +2894,9 @@ class Orcatrata extends CI_Controller {
 		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
 
 		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
-		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);		
+		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);
+		
+		$data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);		
 		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -2898,13 +2910,13 @@ class Orcatrata extends CI_Controller {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_OrcaTrata ####
             if ($data['orcatrata']['TipoFrete'] == '1') {
-				$data['orcatrata']['Cep'] = '';
-				$data['orcatrata']['Logradouro'] = '';
-				$data['orcatrata']['Numero'] = '';
-				$data['orcatrata']['Complemento'] = '';
-				$data['orcatrata']['Bairro'] = '';
-				$data['orcatrata']['Cidade'] = '';
-				$data['orcatrata']['Estado'] = '';
+				$data['orcatrata']['Cep'] = $data['empresa']['CepEmpresa'];
+				$data['orcatrata']['Logradouro'] = $data['empresa']['EnderecoEmpresa'];
+				$data['orcatrata']['Numero'] = $data['empresa']['NumeroEmpresa'];
+				$data['orcatrata']['Complemento'] = $data['empresa']['ComplementoEmpresa'];
+				$data['orcatrata']['Bairro'] = $data['empresa']['BairroEmpresa'];
+				$data['orcatrata']['Cidade'] = $data['empresa']['MunicipioEmpresa'];
+				$data['orcatrata']['Estado'] = $data['empresa']['EstadoEmpresa'];
 				$data['orcatrata']['Referencia'] = '';
 			} else {	
 				$data['orcatrata']['Cep'] = $data['orcatrata']['Cep'];
@@ -3847,7 +3859,9 @@ class Orcatrata extends CI_Controller {
 		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
 
 		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
-		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);		
+		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);
+		
+		$data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);		
 		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -3869,13 +3883,13 @@ class Orcatrata extends CI_Controller {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_OrcaTrata ####
             if ($data['orcatrata']['TipoFrete'] == '1') {
-				$data['orcatrata']['Cep'] = '';
-				$data['orcatrata']['Logradouro'] = '';
-				$data['orcatrata']['Numero'] = '';
-				$data['orcatrata']['Complemento'] = '';
-				$data['orcatrata']['Bairro'] = '';
-				$data['orcatrata']['Cidade'] = '';
-				$data['orcatrata']['Estado'] = '';
+				$data['orcatrata']['Cep'] = $data['empresa']['CepEmpresa'];
+				$data['orcatrata']['Logradouro'] = $data['empresa']['EnderecoEmpresa'];
+				$data['orcatrata']['Numero'] = $data['empresa']['NumeroEmpresa'];
+				$data['orcatrata']['Complemento'] = $data['empresa']['ComplementoEmpresa'];
+				$data['orcatrata']['Bairro'] = $data['empresa']['BairroEmpresa'];
+				$data['orcatrata']['Cidade'] = $data['empresa']['MunicipioEmpresa'];
+				$data['orcatrata']['Estado'] = $data['empresa']['EstadoEmpresa'];
 				$data['orcatrata']['Referencia'] = '';
 			} else {	
 				$data['orcatrata']['Cep'] = $data['orcatrata']['Cep'];
@@ -4805,7 +4819,9 @@ class Orcatrata extends CI_Controller {
 		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
 
 		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
-		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);		
+		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);
+		
+		$data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);
 		
         #run form validation
         if ($this->form_validation->run() === FALSE) {

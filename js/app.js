@@ -197,6 +197,140 @@ function buscaEnderecoCliente(id) {
 	
 }
 
+function Procuraendereco() {
+	//alert('Procuraendereco - funcionando');
+	var Dados=$(this).serialize();
+	var CepDestino=$('#Cep').val();
+	var CepOrigem=$('#CepOrigem').val();
+	//console.log(CepOrigem);
+	$.ajax({
+		url: 'https://viacep.com.br/ws/'+CepDestino+'/json/',
+		method:'get',
+		dataType:'json',
+		data: Dados,
+		success:function(Dados){
+			//console.log(Dados);
+			$('.ResultCep').html('').append('<div>'+Dados.logradouro+','+Dados.bairro+'-'+Dados.localidade+'-'+Dados.uf+'</div>');			
+			//$('#Cep').val(CepDestino);
+			$('#Logradouro').val(Dados.logradouro);
+			$('#Numero').val('');
+			$('#Complemento').val('');
+			$('#Bairro').val(Dados.bairro);
+			$('#Cidade').val(Dados.localidade);
+			$('#Estado').val(Dados.uf);
+			$('#Referencia').val('');
+		},
+		error:function(Dados){
+			alert('Cep não encontrado. Tente Novamente');
+			$('#Cep').val('');
+		}
+	});
+}
+
+function LoadFrete() {
+	var dataorca = $('#DataOrca').val();
+		const dataorcaSplit = dataorca.split('/');
+		const day = dataorcaSplit[0]; 
+		const month = dataorcaSplit[1];
+		const year = dataorcaSplit[2];
+	var datapedido = new Date(year, month - 1, day);
+	var TotalOrca = $('#ValorRestanteOrca').val();
+	var CepDestino = $('#Cep').val();
+	var CepOrigem = $('#CepOrigem').val();
+	var Peso = $('#Peso').val();
+	var Formato = $('#Formato').val();
+	var Comprimento = $('#Comprimento').val();
+	var Altura = $('#Altura').val();
+	var Largura = $('#Largura').val();
+	var MaoPropria = $('#MaoPropria').val();
+	var ValorDeclarado = $('#ValorDeclarado').val();
+	var AvisoRecebimento = $('#AvisoRecebimento').val();
+	var Codigo = $('#Codigo').val();
+	var Diametro = $('#Diametro').val();
+
+	$.ajax({
+		url: '../calcula-frete_model.php',
+		type:'POST',
+		dataType:'html',
+		cache: false,
+		data: {CepDestino: CepDestino, 
+				CepOrigem: CepOrigem, 
+				Peso: Peso, 
+				Formato: Formato,
+				Comprimento: Comprimento,
+				Altura: Altura,
+				Largura: Largura,
+				MaoPropria: MaoPropria,
+				ValorDeclarado: ValorDeclarado,
+				AvisoRecebimento: AvisoRecebimento,
+				Codigo: Codigo,
+				Diametro: Diametro},
+		success:function(data){
+			//console.log(data);
+			$('.ResultadoPrecoPrazo').html(data);
+			
+			var prazo_entrega = $('#prazo_entrega').val();
+			$('#PrazoEntrega').val(prazo_entrega);
+			
+			var valor_frete2 = $('#valor_frete').val();
+			$('#ValorFrete').val(valor_frete2);
+			
+			var valor_orca3 	= TotalOrca.replace(',','.');
+			
+			var valor_frete3 	= valor_frete2.replace(',','.');
+			
+			var totalpedido	= parseFloat(valor_frete3) + parseFloat(valor_orca3);
+			
+			var totalpedido2	= totalpedido.toFixed(2);
+			
+			var totalpedido3 = totalpedido2.replace('.',',');
+			$('#ValorTotalOrca').val(totalpedido3);
+			
+			//var d = new Date();
+			var d = new Date(datapedido);
+			var data_entrega    = new Date(d.getTime() + (prazo_entrega * 24 * 60 * 60 * 1000));
+			
+			var mes = (data_entrega.getMonth() + 1);
+			if(mes < 10){
+				var novo_mes = "0" + mes;
+			}else{
+				var novo_mes = mes;
+			}
+			
+			var dia = (data_entrega.getDate());
+			if(dia < 10){
+				var novo_dia = "0" + dia;
+			}else{
+				var novo_dia = dia;
+			}
+			
+			var data_aparente = novo_dia + "/" + novo_mes + "/" + data_entrega.getFullYear();
+			$('#DataEntregaOrca').val(data_aparente);
+
+			if(valor_frete > "0.00"){
+				$('#msg').html('<p style="color: green">Cálculo realizada com Sucesso!!</p>');
+				$('.finalizar').show();
+			}else{
+				$('#msg').html('<p style="color: #FF0000">Erro ao realizar o Cálculo!!</p>');
+				$('.finalizar').hide();
+				//window.location = 'entrega.php';
+			}
+			
+			$('#Cep').val(CepDestino);
+			
+		}, beforeSend: function(){
+		
+		}, error: function(jqXHR, textStatus, errorThrown){
+			//console.log('Erro');
+			$('#msg').html('<p style="color: #FF0000">Erro ao realizar o Cálculo!!</p>');
+			//window.location = 'entrega.php';
+			alert('Erro ao calcular. Tente Novamente');
+			$('#Cep').val('');
+		}
+	});
+	
+}
+
 //Função que desabilita os campos não disponiveis.
 function camposDisponiveis () {
 	$('.campos').hide();
