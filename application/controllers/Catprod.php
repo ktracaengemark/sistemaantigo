@@ -94,7 +94,7 @@ class Catprod extends CI_Controller {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Catprod ####
 			#$data['catprod']['Desconto'] = 2;
-			$data['catprod']['Catprod'] = trim(mb_strtoupper($data['catprod']['Catprod'], 'ISO-8859-1'));
+			$data['catprod']['Catprod'] = trim(mb_strtoupper($data['catprod']['Catprod'], 'UTF-8'));
 			$data['catprod']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['catprod']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['catprod']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -234,7 +234,7 @@ class Catprod extends CI_Controller {
 						
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Catprod ####
-			$data['catprod']['Catprod'] = trim(mb_strtoupper($data['catprod']['Catprod'], 'ISO-8859-1'));
+			$data['catprod']['Catprod'] = trim(mb_strtoupper($data['catprod']['Catprod'], 'UTF-8'));
 			$data['catprod']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['catprod']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['catprod']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -443,7 +443,7 @@ class Catprod extends CI_Controller {
 						
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Catprod ####
-			$data['catprod']['Catprod'] = trim(mb_strtoupper($data['catprod']['Catprod'], 'ISO-8859-1'));
+			$data['catprod']['Catprod'] = trim(mb_strtoupper($data['catprod']['Catprod'], 'UTF-8'));
 			$data['catprod']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['catprod']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['catprod']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -470,7 +470,7 @@ class Catprod extends CI_Controller {
 
                 $max = count($data['update']['atributo']['inserir']);
                 for($j=0;$j<$max;$j++) {
-					$data['update']['atributo']['inserir'][$j]['Atributo'] = trim(mb_strtoupper($data['update']['atributo']['inserir'][$j]['Atributo'], 'ISO-8859-1'));
+					$data['update']['atributo']['inserir'][$j]['Atributo'] = trim(mb_strtoupper($data['update']['atributo']['inserir'][$j]['Atributo'], 'UTF-8'));
 					$data['update']['atributo']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['atributo']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['atributo']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -479,7 +479,7 @@ class Catprod extends CI_Controller {
 
                 $max = count($data['update']['atributo']['alterar']);
                 for($j=0;$j<$max;$j++) {
-					$data['update']['atributo']['alterar'][$j]['Atributo'] = trim(mb_strtoupper($data['update']['atributo']['alterar'][$j]['Atributo'], 'ISO-8859-1'));
+					$data['update']['atributo']['alterar'][$j]['Atributo'] = trim(mb_strtoupper($data['update']['atributo']['alterar'][$j]['Atributo'], 'UTF-8'));
 					$data['update']['atributo']['alterar'][$j]['idTab_Catprod'] = $data['catprod']['idTab_Catprod'];
 				}
 
@@ -508,7 +508,7 @@ class Catprod extends CI_Controller {
 
                 $max = count($data['update']['opcao']['inserir']);
                 for($j=0;$j<$max;$j++) {
-					$data['update']['opcao']['inserir'][$j]['Opcao'] = trim(mb_strtoupper($data['update']['opcao']['inserir'][$j]['Opcao'], 'ISO-8859-1'));
+					$data['update']['opcao']['inserir'][$j]['Opcao'] = trim(mb_strtoupper($data['update']['opcao']['inserir'][$j]['Opcao'], 'UTF-8'));
 					$data['update']['opcao']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['opcao']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['opcao']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -518,7 +518,7 @@ class Catprod extends CI_Controller {
 
                 $max = count($data['update']['opcao']['alterar']);
                 for($j=0;$j<$max;$j++) {
-					$data['update']['opcao']['alterar'][$j]['Opcao'] = trim(mb_strtoupper($data['update']['opcao']['alterar'][$j]['Opcao'], 'ISO-8859-1'));
+					$data['update']['opcao']['alterar'][$j]['Opcao'] = trim(mb_strtoupper($data['update']['opcao']['alterar'][$j]['Opcao'], 'UTF-8'));
 					$data['update']['opcao']['alterar'][$j]['idTab_Atributo'] = $data['update']['opcao']['alterar'][$j]['idTab_Atributo'];
 					$data['update']['opcao']['alterar'][$j]['idTab_Catprod'] = $data['catprod']['idTab_Catprod'];
 				}

@@ -26,6 +26,7 @@ $result = mysql_query(
 			TP.idTab_Produto,
 			TP.Produtos,
 			TP.UnidadeProduto,
+			P.Nome_Prod,
 			P.NomeProdutos,
 			P.Cod_Prod,
 			P.Arquivo,
@@ -34,7 +35,7 @@ $result = mysql_query(
 			TOP1.Opcao,
 			TDS.Desconto,
 			TPM.Promocao,
-			CONCAT(IFNULL(P.NomeProdutos,""),"-",IFNULL(TOP2.Opcao,""),"-",IFNULL(TOP1.Opcao,""),"-",IFNULL(V.Convdesc,"")) AS NomeProduto
+			CONCAT(IFNULL(P.Nome_Prod,""),"-",IFNULL(TOP2.Opcao,""),"-",IFNULL(TOP1.Opcao,""),"-",IFNULL(V.Convdesc,"")) AS NomeProduto
         FROM
             Tab_' . $_GET['tabela'] . ' AS V
 				LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao

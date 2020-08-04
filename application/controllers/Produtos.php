@@ -185,7 +185,7 @@ class Produtos extends CI_Controller {
 			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produto ####
-			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -207,7 +207,7 @@ class Produtos extends CI_Controller {
             if (isset($data['valor'])) {
                 $max = count($data['valor']);
                 for($j=1;$j<=$max;$j++) {
-                    $data['valor'][$j]['Convdesc'] = trim(mb_strtoupper($data['valor'][$j]['Convdesc'], 'ISO-8859-1'));
+                    $data['valor'][$j]['Convdesc'] = trim(mb_strtoupper($data['valor'][$j]['Convdesc'], 'UTF-8'));
 					$data['valor'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['valor'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['valor'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -393,7 +393,7 @@ class Produtos extends CI_Controller {
 			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produto ####
-			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -413,7 +413,7 @@ class Produtos extends CI_Controller {
 
             #### Tab_Valor ####
             if (isset($data['valor'])) { {
-					$data['valor']['Convdesc'] = trim(mb_strtoupper($data['valor']['Convdesc'], 'ISO-8859-1'));
+					$data['valor']['Convdesc'] = trim(mb_strtoupper($data['valor']['Convdesc'], 'UTF-8'));
                     $data['valor']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['valor']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['valor']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -602,7 +602,7 @@ class Produtos extends CI_Controller {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produto ####
-			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -624,7 +624,7 @@ class Produtos extends CI_Controller {
             if (isset($data['valor'])) {
                 $max = count($data['valor']);
                 for($j=1;$j<=$max;$j++) {
-                    $data['valor'][$j]['Convdesc'] = trim(mb_strtoupper($data['valor'][$j]['Convdesc'], 'ISO-8859-1'));
+                    $data['valor'][$j]['Convdesc'] = trim(mb_strtoupper($data['valor'][$j]['Convdesc'], 'UTF-8'));
 					$data['valor'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['valor'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['valor'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -810,7 +810,7 @@ class Produtos extends CI_Controller {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produto ####
-			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -830,7 +830,7 @@ class Produtos extends CI_Controller {
 
             #### Tab_Valor ####
             if (isset($data['valor'])) { {
-					$data['valor']['Convdesc'] = trim(mb_strtoupper($data['valor']['Convdesc'], 'ISO-8859-1'));
+					$data['valor']['Convdesc'] = trim(mb_strtoupper($data['valor']['Convdesc'], 'UTF-8'));
                     $data['valor']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['valor']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['valor']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -1097,7 +1097,7 @@ class Produtos extends CI_Controller {
 			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
 			#### Tab_Produto ####
 			$data['produtos']['Desconto'] = 1;
-			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
 			$data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 			$data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -1120,7 +1120,7 @@ class Produtos extends CI_Controller {
 				$max = count($data['valor']);
 				for($j=1;$j<=$max;$j++) {
 					$data['valor'][$j]['Desconto'] = 1;
-					$data['valor'][$j]['Convdesc'] = trim(mb_strtoupper($data['valor'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['valor'][$j]['Convdesc'] = trim(mb_strtoupper($data['valor'][$j]['Convdesc'], 'UTF-8'));
 					$data['valor'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 					$data['valor'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['valor'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -1154,7 +1154,7 @@ class Produtos extends CI_Controller {
                     $data['produto'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['produto'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['produto'][$j]['Valor_Cor_Prod'] = str_replace(',', '.', str_replace('.', '', $data['produto'][$j]['Valor_Cor_Prod']));
-					$data['produto'][$j]['Nome_Cor_Prod'] = trim(mb_strtoupper($data['produto'][$j]['Nome_Cor_Prod'], 'ISO-8859-1'));
+					$data['produto'][$j]['Nome_Cor_Prod'] = trim(mb_strtoupper($data['produto'][$j]['Nome_Cor_Prod'], 'UTF-8'));
 				}
 						/*
 							echo '<br>';
@@ -1177,7 +1177,7 @@ class Produtos extends CI_Controller {
                     $data['procedimento'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['procedimento'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['procedimento'][$j]['Fator_Tam_Prod'] = str_replace(',', '.', str_replace('.', '', $data['procedimento'][$j]['Fator_Tam_Prod']));
-					$data['procedimento'][$j]['Nome_Tam_Prod'] = trim(mb_strtoupper($data['procedimento'][$j]['Nome_Tam_Prod'], 'ISO-8859-1'));
+					$data['procedimento'][$j]['Nome_Tam_Prod'] = trim(mb_strtoupper($data['procedimento'][$j]['Nome_Tam_Prod'], 'UTF-8'));
                 }
                 $data['procedimento']['idTab_Tam_Prod'] = $this->Produtos_model->set_procedimento($data['procedimento']);
             }			
@@ -1191,7 +1191,7 @@ class Produtos extends CI_Controller {
 					$data['derivados'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['derivados'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['derivados'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					#$data['derivados'][$j][$k]['Nome_Prod'] = trim(mb_strtoupper($nome_modelo.' '.$nome_tipo.' '.$nome_tamanho, 'ISO-8859-1'));
+					#$data['derivados'][$j][$k]['Nome_Prod'] = trim(mb_strtoupper($nome_modelo.' '.$nome_tipo.' '.$nome_tamanho, 'UTF-8'));
 					#$data['derivados'][$j][$k]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$tipo.'.'.$tamanho;				
 				}
                 $data['derivados']['idTab_Produtos'] = $this->Produtos_model->set_derivados($data['derivados']);
@@ -1245,7 +1245,7 @@ class Produtos extends CI_Controller {
 						$data['derivados'][$j][$k]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 						$data['derivados'][$j][$k]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 						$data['derivados'][$j][$k]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-						$data['derivados'][$j][$k]['Nome_Prod'] = trim(mb_strtoupper($nome_modelo.' '.$nome_tipo.' '.$nome_tamanho, 'ISO-8859-1'));
+						$data['derivados'][$j][$k]['Nome_Prod'] = trim(mb_strtoupper($nome_modelo.' '.$nome_tipo.' '.$nome_tamanho, 'UTF-8'));
 						$data['derivados'][$j][$k]['Cod_Prod'] = $data['produtos']['idTab_Produto'].'.'.$tipo.'.'.$tamanho;
 
 					}
@@ -1415,7 +1415,7 @@ class Produtos extends CI_Controller {
 			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
 			#### Tab_Produto ####
 			$data['produtos']['Desconto'] = 1;
-			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
 			$data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 			$data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -1813,7 +1813,7 @@ class Produtos extends CI_Controller {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produto ####
-			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 			$data['produtos']['Atributo_1'] = $_SESSION['Servico'][1];
 			$data['produtos']['Atributo_2'] = $_SESSION['Servico'][2];
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
@@ -1846,7 +1846,7 @@ class Produtos extends CI_Controller {
 
                 $max = count($data['update']['valor']['inserir']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['valor']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['inserir'][$j]['Convdesc'], 'ISO-8859-1'));
+                    $data['update']['valor']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['inserir'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['valor']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['valor']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -1858,7 +1858,7 @@ class Produtos extends CI_Controller {
                 $max = count($data['update']['valor']['alterar']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['valor']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ValorProduto']));
-					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['valor']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 				}
 
@@ -2019,8 +2019,8 @@ class Produtos extends CI_Controller {
                     $data['update']['derivados']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
-					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['inserir'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
+					$data['update']['derivados']['inserir'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'];                
@@ -2030,8 +2030,8 @@ class Produtos extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
 					$data['update']['derivados']['alterar'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['alterar'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
+					$data['update']['derivados']['alterar'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];					
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'];
@@ -2436,7 +2436,7 @@ class Produtos extends CI_Controller {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produto ####
-			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 			$data['produtos']['Atributo_1'] = $_SESSION['Servico'][1];
 			$data['produtos']['Atributo_2'] = $_SESSION['Servico'][2];			
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
@@ -2469,7 +2469,7 @@ class Produtos extends CI_Controller {
 
                 $max = count($data['update']['valor']['inserir']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['valor']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['inserir'][$j]['Convdesc'], 'ISO-8859-1'));
+                    $data['update']['valor']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['inserir'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['valor']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['valor']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -2481,7 +2481,7 @@ class Produtos extends CI_Controller {
                 $max = count($data['update']['valor']['alterar']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['valor']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ValorProduto']));
-					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['valor']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 				}
 
@@ -2642,8 +2642,8 @@ class Produtos extends CI_Controller {
                     $data['update']['derivados']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
-					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['inserir'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
+					$data['update']['derivados']['inserir'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'];                
@@ -2653,8 +2653,8 @@ class Produtos extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
 					$data['update']['derivados']['alterar'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['alterar'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
+					$data['update']['derivados']['alterar'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];					
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'];
@@ -3042,7 +3042,7 @@ class Produtos extends CI_Controller {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produto ####
-			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 			$data['produtos']['Atributo_1'] = $_SESSION['Servico'][1];
 			$data['produtos']['Atributo_2'] = $_SESSION['Servico'][2];			
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
@@ -3255,8 +3255,8 @@ class Produtos extends CI_Controller {
                     $data['update']['derivados']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
-					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['inserir'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
+					$data['update']['derivados']['inserir'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'];                
@@ -3267,8 +3267,8 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['alterar'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['alterar'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
-					$data['update']['derivados']['alterar'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
+					$data['update']['derivados']['alterar'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];					
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'];
@@ -3493,7 +3493,7 @@ class Produtos extends CI_Controller {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produto ####
-			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -3523,7 +3523,7 @@ class Produtos extends CI_Controller {
 
                 $max = count($data['update']['valor']['inserir']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['valor']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['inserir'][$j]['Convdesc'], 'ISO-8859-1'));
+                    $data['update']['valor']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['inserir'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['valor']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['valor']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -3535,7 +3535,7 @@ class Produtos extends CI_Controller {
                 $max = count($data['update']['valor']['alterar']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['valor']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ValorProduto']));
-					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'UTF-8'));
 				}
 
                 if (count($data['update']['valor']['inserir']))
@@ -3732,7 +3732,7 @@ class Produtos extends CI_Controller {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produto ####
-			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'ISO-8859-1'));
+			$data['produtos']['Produtos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 			$data['produtos']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -3762,7 +3762,7 @@ class Produtos extends CI_Controller {
 
                 $max = count($data['update']['valor']['inserir']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['valor']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['inserir'][$j]['Convdesc'], 'ISO-8859-1'));
+                    $data['update']['valor']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['inserir'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['valor']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['valor']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -3774,7 +3774,7 @@ class Produtos extends CI_Controller {
                 $max = count($data['update']['valor']['alterar']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['valor']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ValorProduto']));
-					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'UTF-8'));
 				}
 
                 if (count($data['update']['valor']['inserir']))

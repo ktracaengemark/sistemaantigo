@@ -94,7 +94,7 @@ class Atributo extends CI_Controller {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Atributo ####
 			#$data['atributo']['Desconto'] = 2;
-			$data['atributo']['Atributo'] = trim(mb_strtoupper($data['atributo']['Atributo'], 'ISO-8859-1'));
+			$data['atributo']['Atributo'] = trim(mb_strtoupper($data['atributo']['Atributo'], 'UTF-8'));
 			$data['atributo']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['atributo']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['atributo']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -229,7 +229,7 @@ class Atributo extends CI_Controller {
 						
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Atributo ####
-			$data['atributo']['Atributo'] = trim(mb_strtoupper($data['atributo']['Atributo'], 'ISO-8859-1'));
+			$data['atributo']['Atributo'] = trim(mb_strtoupper($data['atributo']['Atributo'], 'UTF-8'));
 			$data['atributo']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['atributo']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['atributo']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -256,7 +256,7 @@ class Atributo extends CI_Controller {
 
                 $max = count($data['update']['opcao']['inserir']);
                 for($j=0;$j<$max;$j++) {
-					$data['update']['opcao']['inserir'][$j]['Opcao'] = trim(mb_strtoupper($data['update']['opcao']['inserir'][$j]['Opcao'], 'ISO-8859-1'));
+					$data['update']['opcao']['inserir'][$j]['Opcao'] = trim(mb_strtoupper($data['update']['opcao']['inserir'][$j]['Opcao'], 'UTF-8'));
 					$data['update']['opcao']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['opcao']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['opcao']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -265,7 +265,7 @@ class Atributo extends CI_Controller {
 
                 $max = count($data['update']['opcao']['alterar']);
                 for($j=0;$j<$max;$j++) {
-					$data['update']['opcao']['alterar'][$j]['Opcao'] = trim(mb_strtoupper($data['update']['opcao']['alterar'][$j]['Opcao'], 'ISO-8859-1'));
+					$data['update']['opcao']['alterar'][$j]['Opcao'] = trim(mb_strtoupper($data['update']['opcao']['alterar'][$j]['Opcao'], 'UTF-8'));
 					$data['update']['opcao']['alterar'][$j]['idTab_Atributo'] = $data['atributo']['idTab_Atributo'];
 				}
 
