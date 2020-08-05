@@ -2281,7 +2281,7 @@ function adiciona_item_promocao() {
 							</select>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="Convdesc'+pt+'">Descrição:</label>\
+							<label for="Convdesc'+pt+'">Desc. Embal:</label>\
 							<input type="text" class="form-control" id="Convdesc'+pt+'"\
 									  name="Convdesc'+pt+'" value="">\
 						</div>\
@@ -2293,14 +2293,14 @@ function adiciona_item_promocao() {
 							</div>\
 						</div>\
 						<div class="col-md-1">\
-							<label for="QtdProdutoIncremento">QtdInc:</label><br>\
+							<label for="QtdProdutoIncremento">QtdEmb:</label><br>\
 							<div class="input-group">\
 								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento'+pt+'" placeholder="0"\
 								    name="QtdProdutoIncremento'+pt+'" value="1">\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="ValorProduto'+pt+'">Valor</label><br>\
+							<label for="ValorProduto'+pt+'">ValorEmbal</label><br>\
 							<div class="input-group id="ValorProduto'+pt+'">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
 								<input type="text" class="form-control Valor" id="ValorProduto'+pt+'" maxlength="10" placeholder="0,00" \
@@ -2418,7 +2418,7 @@ function adiciona_item_promocao2() {
 							</select>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="Convdesc2'+pt2+'">Descrição:</label>\
+							<label for="Convdesc2'+pt2+'">Desc. Embal:</label>\
 							<input type="text" class="form-control" id="Convdesc2'+pt2+'"\
 									  name="Convdesc2'+pt2+'" value="">\
 						</div>\
@@ -2430,14 +2430,14 @@ function adiciona_item_promocao2() {
 							</div>\
 						</div>\
 						<div class="col-md-1">\
-							<label for="QtdProdutoIncremento2">QtdInc:</label><br>\
+							<label for="QtdProdutoIncremento2">QtdEmb:</label><br>\
 							<div class="input-group">\
 								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento2'+pt2+'" placeholder="0"\
 								    name="QtdProdutoIncremento2'+pt2+'" value="1">\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="ValorProduto2'+pt2+'">Valor</label><br>\
+							<label for="ValorProduto2'+pt2+'">ValorEmbal</label><br>\
 							<div class="input-group id="ValorProduto2'+pt2+'">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
 								<input type="text" class="form-control Valor" id="ValorProduto2'+pt2+'" maxlength="10" placeholder="0,00" \
@@ -2555,7 +2555,7 @@ function adiciona_item_promocao3() {
 							</select>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="Convdesc3'+pt3+'">Descrição:</label>\
+							<label for="Convdesc3'+pt3+'">Desc. Embal:</label>\
 							<input type="text" class="form-control" id="Convdesc3'+pt3+'"\
 									  name="Convdesc3'+pt3+'" value="">\
 						</div>\
@@ -2567,14 +2567,14 @@ function adiciona_item_promocao3() {
 							</div>\
 						</div>\
 						<div class="col-md-1">\
-							<label for="QtdProdutoIncremento3">QtdInc:</label><br>\
+							<label for="QtdProdutoIncremento3">QtdEmb:</label><br>\
 							<div class="input-group">\
 								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento3'+pt3+'" placeholder="0"\
 								    name="QtdProdutoIncremento3'+pt3+'" value="1">\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="ValorProduto3'+pt3+'">Valor</label><br>\
+							<label for="ValorProduto3'+pt3+'">ValorEmbal</label><br>\
 							<div class="input-group id="ValorProduto3'+pt3+'">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
 								<input type="text" class="form-control Valor" id="ValorProduto3'+pt3+'" maxlength="10" placeholder="0,00" \

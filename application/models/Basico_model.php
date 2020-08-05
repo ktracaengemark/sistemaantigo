@@ -1375,7 +1375,7 @@ if (isset($data) && $data) {
 	
 	public function select_mod_1($data) {
 		
-		$cat1 = ($data) ? ' AND Prodaux3 = ' . $data : FALSE;
+		$cat1 = ($data) ? ' AND Prodaux3 = ' . $data : ' AND Prodaux3 = "0"';
 		
         if ($data === TRUE) {
             $array = $this->db->query('
@@ -1417,7 +1417,7 @@ if (isset($data) && $data) {
 	
 	public function select_mod_2($data) {
 		
-		$cat2 = ($data) ? ' AND Prodaux3 = ' . $data : FALSE;
+		$cat2 = ($data) ? ' AND Prodaux3 = ' . $data : ' AND Prodaux3 = "0"';
 		
         if ($data === TRUE) {
             $array = $this->db->query('
@@ -1459,7 +1459,7 @@ if (isset($data) && $data) {
 	
 	public function select_mod_3($data) {
 		//$cat3 = ($data != '') ? 'Prodaux3 = "' . $data . '" AND ' : FALSE;
-		$cat3 = ($data) ? ' AND Prodaux3 = ' . $data : FALSE;
+		$cat3 = ($data) ? ' AND Prodaux3 = ' . $data : ' AND Prodaux3 = "0"';
 		
         if ($data === TRUE) {
             $array = $this->db->query('
@@ -3485,7 +3485,7 @@ if (isset($data) && $data) {
 
 	public function select_opcao2($data = FALSE) {
 	
-		$permissao1 = isset($_SESSION['Atributos'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][1] : FALSE;
+		$permissao1 = isset($_SESSION['Atributos'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][1] : 'AND idTab_Atributo = "0"';
 		
         if ($data === TRUE) {
             $array = $this->db->query('
@@ -3531,7 +3531,7 @@ if (isset($data) && $data) {
 	
 	public function select_opcao1($data = FALSE) {
 		
-		$permissao2 = isset($_SESSION['Atributos'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][2] : FALSE;
+		$permissao2 = isset($_SESSION['Atributos'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][2] : 'AND idTab_Atributo = "0"';
 		
 		
         if ($data === TRUE) {
@@ -3578,7 +3578,7 @@ if (isset($data) && $data) {
 
 	public function select_opcao_3($data = FALSE) {
 		
-		$permissao1 = isset($_SESSION['Atributos'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][1] : FALSE;
+		$permissao1 = isset($_SESSION['Atributos'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][1] : 'AND idTab_Atributo = "0"';
 		
 		
         if ($data === TRUE) {
@@ -3625,7 +3625,7 @@ if (isset($data) && $data) {
 	
 	public function select_opcao_2($data = FALSE) {
 		
-		$permissao2 = isset($_SESSION['Atributos'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][2] : FALSE;
+		$permissao2 = isset($_SESSION['Atributos'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][2] : 'AND idTab_Atributo = "0"';
 		
 		
         if ($data === TRUE) {
@@ -3672,7 +3672,7 @@ if (isset($data) && $data) {
 
 	public function select_opcao_select3($data = FALSE) {
 		
-		$permissao1 = isset($_SESSION['Atributos'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][1] : FALSE;
+		$permissao1 = isset($_SESSION['Atributos'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][1] : 'AND idTab_Atributo = "0"';
 		
 		
         if ($data === TRUE) {
@@ -3727,7 +3727,7 @@ if (isset($data) && $data) {
 	
 	public function select_opcao_select2($data = FALSE) {
 		
-		$permissao2 = isset($_SESSION['Atributos'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][2] : FALSE;
+		$permissao2 = isset($_SESSION['Atributos'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][2] : 'AND idTab_Atributo = "0"';
 		
 		
         if ($data === TRUE) {

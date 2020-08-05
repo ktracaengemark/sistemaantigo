@@ -937,7 +937,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
         #### Tab_Promocao ####
 
-		$this->form_validation->set_rules('Desconto', 'Tipo de Promoção', 'required|trim');
+		$this->form_validation->set_rules('Desconto', 'Tipo de Preço', 'required|trim');
 		#$this->form_validation->set_rules('Promocao', 'Produto', 'required|trim');
 		#$this->form_validation->set_rules('Descricao', 'Descricão', 'required|trim');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Promocao.CodProd]');
@@ -1140,7 +1140,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
         if ($id) {
             #### Tab_Promocao ####
-            $data['promocao'] = $this->Promocao_model->get_promocao($id);
+            $_SESSION['Promocao'] = $data['promocao'] = $this->Promocao_model->get_promocao($id);
            
             #### Carrega os dados do cliente nas variáves de sessão ####
             #$this->load->model('Cliente_model');
@@ -1593,7 +1593,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
-            if ($this->input->post('QtdProdutoDesconto' . $i) || $this->input->post('ValorProduto' . $i)) {
+            if ($this->input->post('idTab_Produtos' . $i) && $this->input->post('ValorProduto' . $i)) {
 				$data['item_promocao'][$j]['idTab_Valor'] = $this->input->post('idTab_Valor' . $i);
                 $data['item_promocao'][$j]['QtdProdutoDesconto'] = $this->input->post('QtdProdutoDesconto' . $i);
 				$data['item_promocao'][$j]['QtdProdutoIncremento'] = $this->input->post('QtdProdutoIncremento' . $i);
@@ -1609,7 +1609,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         $j = 1;
         for ($i = 1; $i <= $data['count']['PT2Count']; $i++) {
 
-            if ($this->input->post('QtdProdutoDesconto2' . $i) || $this->input->post('ValorProduto2' . $i)) {
+            if ($this->input->post('idTab_Produtos2' . $i) && $this->input->post('ValorProduto2' . $i)) {
 				$data['item_promocao2'][$j]['idTab_Valor'] = $this->input->post('idTab_Valor2' . $i);
                 $data['item_promocao2'][$j]['QtdProdutoDesconto'] = $this->input->post('QtdProdutoDesconto2' . $i);
 				$data['item_promocao2'][$j]['QtdProdutoIncremento'] = $this->input->post('QtdProdutoIncremento2' . $i);
@@ -1625,7 +1625,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         $j = 1;
         for ($i = 1; $i <= $data['count']['PT3Count']; $i++) {
 
-            if ($this->input->post('QtdProdutoDesconto3' . $i) || $this->input->post('ValorProduto3' . $i)) {
+            if ($this->input->post('idTab_Produtos3' . $i) && $this->input->post('ValorProduto3' . $i)) {
 				$data['item_promocao3'][$j]['idTab_Valor'] = $this->input->post('idTab_Valor3' . $i);
                 $data['item_promocao3'][$j]['QtdProdutoDesconto'] = $this->input->post('QtdProdutoDesconto3' . $i);
 				$data['item_promocao3'][$j]['QtdProdutoIncremento'] = $this->input->post('QtdProdutoIncremento3' . $i);

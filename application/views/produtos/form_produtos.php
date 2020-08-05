@@ -31,7 +31,7 @@
 									<h4 class="panel-title">
 										<a class="accordion-toggle">
 											<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-											Dados do Modelo
+											Dados do Produto
 										</a>
 									</h4>
 								</div>
@@ -41,7 +41,7 @@
 											<div class="row">
 												<div class="col-md-6">
 													<label for="Prodaux3">Categoria*:</label>								
-													<?php if ($metodo == 1) { ?>
+													<?php if ($metodo <= 1) { ?>
 														<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> 
 																id="Prodaux3" name="Prodaux3">
 															<option value="">-- Sel.uma Categoria --</option>
@@ -158,7 +158,7 @@
 											<?php if ($metodo > 1) { ?>
 												<div class="row">
 													<div class="col-md-12">	
-														<label for="Produtos">Modelo*</label><br>
+														<label for="Produtos">Produto*</label><br>
 														<input type="text" class="form-control" maxlength="200"
 																name="Produtos" id="Produtos" value="<?php echo $produtos['Produtos'] ?>">
 														<?php echo form_error('Produtos'); ?>

@@ -153,7 +153,7 @@ elseif ($_GET['q'] == 12) {
     
 }
 
-elseif ($_GET['q'] == 15) {
+elseif ($_GET['q'] == 13) {
 
     $result = mysql_query('
             SELECT
@@ -167,41 +167,6 @@ elseif ($_GET['q'] == 15) {
                 Tab_Produtos AS TPS
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2				
-            WHERE
-                TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				TPS.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . '
-			ORDER BY
-				TPS.Nome_Prod ASC	
-    ');
-
-    while ($row = mysql_fetch_assoc($result)) {
-
-        $event_array[] = array(
-            'id' => $row['idTab_Produtos'],
-            'name' => utf8_encode($row['Nome_Prod']),
-            'value' => $row['Valor_Produto'],
-        );
-    } 
-    
-}
-
-elseif ($_GET['q'] == 13) {
-
-    $result = mysql_query('
-            SELECT
-                TPS.idTab_Produtos,
-				TPS.idTab_Produto,
-				TCP.idTab_Cor_Prod,
-				TCP.Nome_Cor_Prod,
-				TTP.idTab_Tam_Prod,
-				TTP.Nome_Tam_Prod,
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
-                TPS.Valor_Produto
-            FROM 
-                Tab_Produtos AS TPS
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Opcao_Atributo_1
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Opcao_Atributo_2				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -227,20 +192,51 @@ elseif ($_GET['q'] == 14) {
             SELECT
                 TPS.idTab_Produtos,
 				TPS.idTab_Produto,
-				TCP.idTab_Cor_Prod,
-				TCP.Nome_Cor_Prod,
-				TTP.idTab_Tam_Prod,
-				TTP.Nome_Tam_Prod,
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TCP.Nome_Cor_Prod,""), " - ", IFNULL(TTP.Nome_Tam_Prod,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,				
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Opcao_Atributo_1
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Opcao_Atributo_2				
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_3'] . '
+			ORDER BY
+				TPS.Nome_Prod ASC	
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Produtos'],
+            'name' => utf8_encode($row['Nome_Prod']),
+            'value' => $row['Valor_Produto'],
+        );
+    } 
+    
+}
+
+elseif ($_GET['q'] == 15) {
+
+    $result = mysql_query('
+            SELECT
+                TPS.idTab_Produtos,
+				TPS.idTab_Produto,
+				TOP2.Opcao,
+				TOP1.Opcao,				
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+                TPS.Valor_Produto
+            FROM 
+                Tab_Produtos AS TPS
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2				
+            WHERE
+                TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TPS.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . '
 			ORDER BY
 				TPS.Nome_Prod ASC	
     ');
@@ -872,7 +868,7 @@ elseif ($_GET['q'] == 97) {
 
 elseif ($_GET['q'] == 101) {
 
-    $permissao1 = isset($_SESSION['Atributos'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][1] : FALSE;
+    $permissao1 = isset($_SESSION['Atributos'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][1] : 'AND idTab_Atributo = "0"';
 	
 	$result = mysql_query('
             SELECT
@@ -902,7 +898,7 @@ elseif ($_GET['q'] == 101) {
 
 elseif ($_GET['q'] == 102) {
 
-    $permissao2 = isset($_SESSION['Atributos'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][2] : FALSE;
+    $permissao2 = isset($_SESSION['Atributos'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][2] : 'AND idTab_Atributo = "0"';
 	
 	$result = mysql_query('
             SELECT

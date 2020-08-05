@@ -100,10 +100,73 @@ class Promocao_model extends CI_Model {
     }	
 	
     public function get_promocao($data) {
-        $query = $this->db->query('SELECT * FROM Tab_Promocao WHERE idTab_Promocao = ' . $data);
+        $query = $this->db->query('SELECT  
+										TPM.idTab_Promocao,
+										TPM.Promocao,
+										TPM.Descricao,
+										TPM.idSis_Usuario,
+										TPM.idSis_Empresa,
+										TPM.idTab_Modulo,
+										TPM.Desconto,
+										TPM.Ativo,
+										TPM.Arquivo,
+										TPM.UnidadeProduto,
+										TPM.TipoProduto,
+										TPM.CodProd,
+										TPM.CodBarra,
+										TPM.Prodaux1,
+										TPM.Prodaux2,
+										TPM.Prodaux3,
+										TPM.Prodaux4,
+										TPM.ValorCompraProduto,
+										TPM.ValorProduto,
+										TPM.ValorProdutoSite,
+										TPM.Categoria,
+										TPM.ProdutoProprio,
+										TPM.Aprovado,
+										TPM.VendaSite,
+										TPM.produto_breve_descricao,
+										TPM.ObsProduto,
+										TPM.Comprimento,
+										TPM.PesoProduto,
+										TPM.Comissao,
+										TPM.Fornecedor,
+										TPM.Cat_1,
+										TPM.Cat_2,
+										TPM.Cat_3,
+										TPM.Mod_1,
+										TPM.Mod_2,
+										TPM.Mod_3,
+										TPM.VendaBalcao,
+										TPM.ValorPromocao,
+										TC1.idTab_Catprod,
+										TC2.idTab_Catprod,
+										TC3.idTab_Catprod,
+										TC1.Catprod AS Cat1,
+										TC2.Catprod AS Cat2,
+										TC3.Catprod AS Cat3,
+										TDS1.Desconto AS Tipo
+									FROM 
+										Tab_Promocao AS TPM
+											LEFT JOIN Tab_Valor AS TV ON TV.idTab_Promocao = TPM.idTab_Promocao
+											LEFT JOIN Tab_Catprod AS TC1 ON TC1.idTab_Catprod = TPM.Cat_1
+											LEFT JOIN Tab_Catprod AS TC2 ON TC2.idTab_Catprod = TPM.Cat_2
+											LEFT JOIN Tab_Catprod AS TC3 ON TC3.idTab_Catprod = TPM.Cat_3
+											LEFT JOIN Tab_Desconto AS TDS1 ON TDS1.idTab_Desconto = TPM.Desconto
+											LEFT JOIN Tab_Desconto AS TDS2 ON TDS2.idTab_Desconto = TV.Desconto
+									WHERE 
+										TPM.idTab_Promocao = ' . $data . '
+								');
         $query = $query->result_array();
 
         /*
+		
+		LEFT JOIN Tab_Produto AS TP1 ON TP1.idTab_Produto = TPM.Mod_1
+		LEFT JOIN Tab_Produto AS TP2 ON TP2.idTab_Produto = TPM.Mod_2
+		LEFT JOIN Tab_Produto AS TP3 ON TP3.idTab_Produto = TPM.Mod_3
+		LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TPM.Desconto
+		
+
         //echo $this->db->last_query();
         echo '<br>';
         echo "<pre>";

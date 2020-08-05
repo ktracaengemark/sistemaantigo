@@ -20,10 +20,10 @@
 							<th class="active">Ativo</th>
 							<th class="active">Balcao</th>
 							<th class="active">Site</th>
-							<th class="active">IdProm.</th>
+							<th class="active">Id</th>
 							<th class="active">Tipo</th>
-							<th class="active">Promocao</th>
-							<th class="active">Descrição</th>
+							<th class="active">Titulo</th>
+							<th class="active">Descricao</th>
 							<th class="active">Valor</th>
 						</tr>
 					</thead>

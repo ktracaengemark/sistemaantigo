@@ -18,10 +18,10 @@
 							<th class="active" scope="col">Foto</th>
 							<th class="active" scope="col">Editar</th>
 							<th class="active">Ativo</th>
-							<th class="active">IdProm.</th>
+							<th class="active">Id</th>
 							<th class="active">Tipo</th>
-							<th class="active">Promocao</th>
-							<th class="active">Descrição</th>
+							<th class="active">Titulo</th>
+							<th class="active">Descricao</th>
 							<th class="active">IdProd.</th>
 							<th class="active">Qtd.</th>
 							<th class="active">Produto</th>

@@ -166,11 +166,11 @@
 							<li role="separator" class="divider"></li>							
 							<li><a href="<?php echo base_url() ?>relatorio/catprod"><span class="glyphicon glyphicon-pencil"></span> Categorias </a></li>
 							<li role="separator" class="divider"></li>							
-							<li><a href="<?php echo base_url() ?>relatorio/produtos2"><span class="glyphicon glyphicon-gift"></span> Modelos </a></li>
+							<li><a href="<?php echo base_url() ?>relatorio/produtos2"><span class="glyphicon glyphicon-gift"></span> Produtos </a></li>
 							<li role="separator" class="divider"></li>							
 							<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-gift"></span> Produtos Derivados </a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="<?php echo base_url() ?>relatorio/promocao"><span class="glyphicon glyphicon-usd"></span> Promoções </a></li>
+							<li><a href="<?php echo base_url() ?>relatorio/promocao"><span class="glyphicon glyphicon-usd"></span> Preços (Títulos) </a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/precopromocao"><span class="glyphicon glyphicon-usd"></span> Preços & Promoções </a></li>
 							<li role="separator" class="divider"></li>
