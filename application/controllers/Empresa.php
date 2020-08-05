@@ -169,6 +169,9 @@ class Empresa extends CI_Controller {
 			'RetirarLoja',
 			'MotoBoy',
 			'Correios',
+			'NaLoja',
+			'NaEntrega',
+			'OnLine',
 			'Boleto',
 			'Debito',
 			'Cartao',
@@ -200,6 +203,11 @@ class Empresa extends CI_Controller {
 		$data['select']['RetirarLoja'] = $this->Basico_model->select_status_sn();
 		$data['select']['MotoBoy'] = $this->Basico_model->select_status_sn();
 		$data['select']['Correios'] = $this->Basico_model->select_status_sn();
+		
+		$data['select']['NaLoja'] = $this->Basico_model->select_status_sn();
+		$data['select']['NaEntrega'] = $this->Basico_model->select_status_sn();
+		$data['select']['OnLine'] = $this->Basico_model->select_status_sn();
+		
 		$data['select']['Boleto'] = $this->Basico_model->select_status_sn();
 		$data['select']['Debito'] = $this->Basico_model->select_status_sn();
 		$data['select']['Cartao'] = $this->Basico_model->select_status_sn();
@@ -225,7 +233,14 @@ class Empresa extends CI_Controller {
             'EComerce' => $this->basico->radio_checked($data['query']['EComerce'], 'E-Comerce', 'NS'),
         );
         ($data['query']['EComerce'] == 'S') ?
-            $data['div']['EComerce'] = '' : $data['div']['EComerce'] = 'style="display: none;"';		
+            $data['div']['EComerce'] = '' : $data['div']['EComerce'] = 'style="display: none;"';
+			
+		(!$data['query']['OnLine']) ? $data['query']['OnLine'] = 'S' : FALSE;
+        $data['radio'] = array(
+            'OnLine' => $this->basico->radio_checked($data['query']['OnLine'], 'OnLine', 'NS'),
+        );
+        ($data['query']['OnLine'] == 'S') ?
+            $data['div']['OnLine'] = '' : $data['div']['OnLine'] = 'style="display: none;"';			
 		
         $data['nav_secundario'] = $this->load->view('empresa/nav_secundario', $data, TRUE);
 

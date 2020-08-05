@@ -1502,10 +1502,8 @@ class Orcatrata_model extends CI_Model {
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_TipoRD = "2" AND
-				OT.CombinadoFrete = "N" AND
-				OT.AprovadoOrca = "N" AND
-				OT.TipoFrete = "2" AND
-				OT.AprovadoOrca = "N"
+				(OT.CombinadoFrete = "N" OR
+				OT.AprovadoOrca = "N")
 				
 			ORDER BY 
 				OT.DataEntregaOrca ASC,
@@ -1588,10 +1586,8 @@ class Orcatrata_model extends CI_Model {
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_TipoRD = "2" AND
 				OT.CombinadoFrete = "S" AND
-				
 				OT.AVAP = "O" AND
 				OT.QuitadoOrca = "N"
-				
 			ORDER BY 
 				OT.DataEntregaOrca ASC,
 				OT.HoraEntregaOrca ASC,
