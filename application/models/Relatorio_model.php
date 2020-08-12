@@ -7784,9 +7784,10 @@ exit();*/
 				TV.Convdesc,
 				TV.ValorProduto,
 				TV.QtdProdutoDesconto,
+				TV.QtdProdutoIncremento,
 				TOP2.Opcao,
 				TOP1.Opcao,
-				CONCAT(IFNULL(TPD.Nome_Prod,""), " ", IFNULL(TOP2.Opcao,""), " ", IFNULL(TOP1.Opcao,"")) AS Nome_Prod,
+				CONCAT(IFNULL(TPD.Nome_Prod,""), " ", IFNULL(TOP2.Opcao,""), " ", IFNULL(TOP1.Opcao,""), " ", IFNULL(TV.Convdesc,""), " - ", IFNULL(TV.QtdProdutoIncremento,""), " Unid.") AS Nome_Prod,
 				TDC.Desconto
             FROM
                 Tab_Promocao AS TPM
