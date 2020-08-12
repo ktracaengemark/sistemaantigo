@@ -5234,7 +5234,8 @@ $(document).ready(function () {
 		
 		if (negocio == 1) {
 			var endereco = 'q=90';
-			var escrita = 'readonly=""';
+			//var escrita = 'readonly=""';
+			var escrita = '';
 			var buscavalor = 'buscaValor1Tabelas';
 			var tblbusca = 'Valor';
 		}

@@ -214,7 +214,7 @@
 																		<div class="col-md-2">
 																			<label for="QtdIncrementoProduto">Qtd.na Embl</label>
 																			<div class="input-group">
-																				<input type="text" class="form-control Numero" id="QtdIncrementoProduto<?php echo $i ?>" readonly=""  placeholder="0"
+																				<input type="text" class="form-control Numero" id="QtdIncrementoProduto<?php echo $i ?>" placeholder="0"
 																					onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTDINC','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																					name="QtdIncrementoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncrementoProduto'] ?>">
 																			</div>
@@ -339,7 +339,11 @@
 																	<div class="row">
 																		<input type="hidden" class="form-control " id="idTab_Valor_Servico<?php echo $i ?>" name="idTab_Valor_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Valor_Servico'] ?>">
 																		<input type="hidden" class="form-control " id="idTab_Produtos_Servico<?php echo $i ?>" name="idTab_Produtos_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Produtos_Servico'] ?>">
+																		<?php if ($metodo > 1) { ?>
 																		<div class="col-md-9">
+																		<?php } else {?>
+																		<div class="col-md-11">
+																		<?php } ?>
 																			<label for="idTab_Servico">Serviço <?php echo $i ?>:</label>
 																			<?php if ($i == 1) { ?>
 																			<!--<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>servico/cadastrar/servico" role="button">
@@ -360,32 +364,34 @@
 																				?>
 																			</select>
 																		</div>
-																		<div class="col-md-2 text-left">
-																			<label for="ConcluidoServico">Entregue? </label><br>
-																			<div class="btn-group" data-toggle="buttons">
-																				<?php
-																				foreach ($select['ConcluidoServico'] as $key => $row) {
-																					(!$servico[$i]['ConcluidoServico']) ? $servico[$i]['ConcluidoServico'] = 'N' : FALSE;
+																		<?php if ($metodo > 1) { ?>
+																			<div class="col-md-2 text-left">
+																				<label for="ConcluidoServico">Entregue? </label><br>
+																				<div class="btn-group" data-toggle="buttons">
+																					<?php
+																					foreach ($select['ConcluidoServico'] as $key => $row) {
+																						(!$servico[$i]['ConcluidoServico']) ? $servico[$i]['ConcluidoServico'] = 'N' : FALSE;
 
-																					if ($servico[$i]['ConcluidoServico'] == $key) {
-																						echo ''
-																						. '<label class="btn btn-warning active" name="radiobutton_ConcluidoServico' . $i . '" id="radiobutton_ConcluidoServico' . $i .  $key . '">'
-																						. '<input type="radio" name="ConcluidoServico' . $i . '" id="radiobuttondinamico" '
-																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																						. '</label>'
-																						;
-																					} else {
-																						echo ''
-																						. '<label class="btn btn-default" name="radiobutton_ConcluidoServico' . $i . '" id="radiobutton_ConcluidoServico' . $i .  $key . '">'
-																						. '<input type="radio" name="ConcluidoServico' . $i . '" id="radiobuttondinamico" '
-																						. 'autocomplete="off" value="' . $key . '" >' . $row
-																						. '</label>'
-																						;
+																						if ($servico[$i]['ConcluidoServico'] == $key) {
+																							echo ''
+																							. '<label class="btn btn-warning active" name="radiobutton_ConcluidoServico' . $i . '" id="radiobutton_ConcluidoServico' . $i .  $key . '">'
+																							. '<input type="radio" name="ConcluidoServico' . $i . '" id="radiobuttondinamico" '
+																							. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																							. '</label>'
+																							;
+																						} else {
+																							echo ''
+																							. '<label class="btn btn-default" name="radiobutton_ConcluidoServico' . $i . '" id="radiobutton_ConcluidoServico' . $i .  $key . '">'
+																							. '<input type="radio" name="ConcluidoServico' . $i . '" id="radiobuttondinamico" '
+																							. 'autocomplete="off" value="' . $key . '" >' . $row
+																							. '</label>'
+																							;
+																						}
 																					}
-																				}
-																				?>
+																					?>
+																				</div>
 																			</div>
-																		</div>
+																		<?php } ?>
 																		<div class="col-md-1">
 																			<label><br></label><br>
 																			<button type="button" id="<?php echo $i ?>" class="remove_field10 btn btn-danger"

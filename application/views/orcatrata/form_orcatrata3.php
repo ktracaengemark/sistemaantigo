@@ -108,7 +108,11 @@
 																<input type="hidden" class="form-control " id="NomeProduto<?php echo $i ?>" name="NomeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['NomeProduto'] ?>">
 																<input type="hidden" class="form-control " id="idTab_Valor_Produto<?php echo $i ?>" name="idTab_Valor_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor_Produto'] ?>">
 																<input type="hidden" class="form-control " id="idTab_Produtos_Produto<?php echo $i ?>" name="idTab_Produtos_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos_Produto'] ?>">
+																<?php if ($metodo > 1) { ?>
 																<div class="col-md-9">
+																<?php } else {?>
+																<div class="col-md-11">
+																<?php } ?>
 																	<label for="idTab_Produto">Produto <?php echo $i ?></label>
 																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor1Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
 																			 id="listadinamicab<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
@@ -124,32 +128,34 @@
 																		?>
 																	</select>
 																</div>
-																<div class="col-md-2 text-left">
-																	<label for="ConcluidoProduto">Entregue? </label><br>
-																	<div class="btn-group" data-toggle="buttons">
-																		<?php
-																		foreach ($select['ConcluidoProduto'] as $key => $row) {
-																			(!$produto[$i]['ConcluidoProduto']) ? $produto[$i]['ConcluidoProduto'] = 'N' : FALSE;
+																<?php if ($metodo > 1) { ?>
+																	<div class="col-md-2 text-left">
+																		<label for="ConcluidoProduto">Entregue? </label><br>
+																		<div class="btn-group" data-toggle="buttons">
+																			<?php
+																			foreach ($select['ConcluidoProduto'] as $key => $row) {
+																				(!$produto[$i]['ConcluidoProduto']) ? $produto[$i]['ConcluidoProduto'] = 'N' : FALSE;
 
-																			if ($produto[$i]['ConcluidoProduto'] == $key) {
-																				echo ''
-																				. '<label class="btn btn-warning active" name="radiobutton_ConcluidoProduto' . $i . '" id="radiobutton_ConcluidoProduto' . $i .  $key . '">'
-																				. '<input type="radio" name="ConcluidoProduto' . $i . '" id="radiobuttondinamico" '
-																				. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																				. '</label>'
-																				;
-																			} else {
-																				echo ''
-																				. '<label class="btn btn-default" name="radiobutton_ConcluidoProduto' . $i . '" id="radiobutton_ConcluidoProduto' . $i .  $key . '">'
-																				. '<input type="radio" name="ConcluidoProduto' . $i . '" id="radiobuttondinamico" '
-																				. 'autocomplete="off" value="' . $key . '" >' . $row
-																				. '</label>'
-																				;
+																				if ($produto[$i]['ConcluidoProduto'] == $key) {
+																					echo ''
+																					. '<label class="btn btn-warning active" name="radiobutton_ConcluidoProduto' . $i . '" id="radiobutton_ConcluidoProduto' . $i .  $key . '">'
+																					. '<input type="radio" name="ConcluidoProduto' . $i . '" id="radiobuttondinamico" '
+																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																					. '</label>'
+																					;
+																				} else {
+																					echo ''
+																					. '<label class="btn btn-default" name="radiobutton_ConcluidoProduto' . $i . '" id="radiobutton_ConcluidoProduto' . $i .  $key . '">'
+																					. '<input type="radio" name="ConcluidoProduto' . $i . '" id="radiobuttondinamico" '
+																					. 'autocomplete="off" value="' . $key . '" >' . $row
+																					. '</label>'
+																					;
+																				}
 																			}
-																		}
-																		?>
+																			?>
+																		</div>
 																	</div>
-																</div>
+																<?php } ?>
 																<div class="col-md-1">
 																	<label><br></label><br>
 																	<button type="button" id="<?php echo $i ?>" class="remove_field9 btn btn-danger"
@@ -168,7 +174,7 @@
 																<div class="col-md-2">
 																	<label for="QtdIncrementoProduto">Qtd.na Embl</label>
 																	<div class="input-group">
-																		<input type="text" class="form-control Numero" id="QtdIncrementoProduto<?php echo $i ?>" readonly=""  placeholder="0"
+																		<input type="text" class="form-control Numero" id="QtdIncrementoProduto<?php echo $i ?>" placeholder="0"
 																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTDINC','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																			name="QtdIncrementoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncrementoProduto'] ?>">
 																	</div>

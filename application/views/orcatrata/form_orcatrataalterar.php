@@ -214,7 +214,7 @@
 																			<div class="col-md-2">
 																				<label for="QtdIncrementoProduto">Qtd.na Embl</label>
 																				<div class="input-group">
-																					<input type="text" class="form-control Numero" id="QtdIncrementoProduto<?php echo $i ?>" readonly=""  placeholder="0"
+																					<input type="text" class="form-control Numero" id="QtdIncrementoProduto<?php echo $i ?>" placeholder="0"
 																						onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTDINC','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																						name="QtdIncrementoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncrementoProduto'] ?>">
 																				</div>
