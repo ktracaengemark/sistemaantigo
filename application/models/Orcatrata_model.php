@@ -1136,6 +1136,7 @@ class Orcatrata_model extends CI_Model {
 				OT.DataVencimentoOrca,
                 OT.ConcluidoOrca,
                 OT.QuitadoOrca,
+				OT.CanceladoOrca,
 				OT.FinalizadoOrca,
 				OT.EnviadoOrca,
 				OT.ProntoOrca,
@@ -1163,8 +1164,8 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				
 				OT.idTab_TipoRD = "2" AND
+				OT.CanceladoOrca = "N" AND
 				OT.AprovadoOrca = "S" AND
 				OT.ConcluidoOrca = "N" AND
 				OT.ProntoOrca = "N" AND
@@ -1221,6 +1222,7 @@ class Orcatrata_model extends CI_Model {
 				OT.DataVencimentoOrca,
                 OT.ConcluidoOrca,
                 OT.QuitadoOrca,
+				OT.CanceladoOrca,
 				OT.FinalizadoOrca,
 				OT.EnviadoOrca,
 				OT.ProntoOrca,
@@ -1248,8 +1250,8 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				
 				OT.idTab_TipoRD = "2" AND
+				OT.CanceladoOrca = "N" AND
 				OT.AprovadoOrca = "S" AND
 				OT.ConcluidoOrca = "N" AND
 				OT.ProntoOrca = "S" AND
@@ -1306,6 +1308,7 @@ class Orcatrata_model extends CI_Model {
 				OT.DataVencimentoOrca,
                 OT.ConcluidoOrca,
                 OT.QuitadoOrca,
+				OT.CanceladoOrca,
 				OT.FinalizadoOrca,
 				OT.EnviadoOrca,
 				OT.ProntoOrca,
@@ -1333,8 +1336,8 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				
 				OT.idTab_TipoRD = "2" AND
+				OT.CanceladoOrca = "N" AND
 				OT.AprovadoOrca = "S" AND
 				OT.ProntoOrca = "S" AND
 				OT.EnviadoOrca = "S" AND
@@ -1390,6 +1393,7 @@ class Orcatrata_model extends CI_Model {
 				OT.DataVencimentoOrca,
                 OT.ConcluidoOrca,
                 OT.QuitadoOrca,
+				OT.CanceladoOrca,
 				OT.FinalizadoOrca,
 				OT.EnviadoOrca,
 				OT.ProntoOrca,
@@ -1417,9 +1421,8 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				
 				OT.idTab_TipoRD = "2" AND
-				
+				OT.CanceladoOrca = "N" AND
 				OT.AprovadoOrca = "S" AND
 				OT.QuitadoOrca = "N" 
 			ORDER BY 
@@ -1474,6 +1477,7 @@ class Orcatrata_model extends CI_Model {
                 OT.ConcluidoOrca,
                 OT.QuitadoOrca,
 				OT.FinalizadoOrca,
+				OT.CanceladoOrca,
 				OT.EnviadoOrca,
 				OT.ProntoOrca,
                 OT.DataConclusao,
@@ -1502,8 +1506,9 @@ class Orcatrata_model extends CI_Model {
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_TipoRD = "2" AND
+				OT.CanceladoOrca = "N" AND
 				(OT.CombinadoFrete = "N" OR
-				OT.AprovadoOrca = "N")
+				(OT.AprovadoOrca = "N" AND OT.AVAP != "O"))
 				
 			ORDER BY 
 				OT.DataEntregaOrca ASC,
@@ -1556,6 +1561,7 @@ class Orcatrata_model extends CI_Model {
 				OT.DataVencimentoOrca,
                 OT.ConcluidoOrca,
                 OT.QuitadoOrca,
+				OT.CanceladoOrca,
 				OT.FinalizadoOrca,
 				OT.EnviadoOrca,
 				OT.ProntoOrca,
@@ -1585,6 +1591,7 @@ class Orcatrata_model extends CI_Model {
 			WHERE
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_TipoRD = "2" AND
+				OT.CanceladoOrca = "N" AND
 				OT.CombinadoFrete = "S" AND
 				OT.AVAP = "O" AND
 				OT.QuitadoOrca = "N"
