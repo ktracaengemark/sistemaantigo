@@ -5767,6 +5767,7 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
+			'Produtos',
 			'Promocao',
 			'Ordenamento',
             'Campo',
@@ -5785,7 +5786,8 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-        //$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
+        $data['select']['Produtos'] = $this->Relatorio_model->select_produtos1();
+		$data['select']['Promocao'] = $this->Relatorio_model->select_promocao();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
@@ -5795,6 +5797,7 @@ class Relatorio extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
+			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Promocao'] = $data['query']['Promocao'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
@@ -5828,6 +5831,7 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
+			'Produtos',
 			'Promocao',
 			'Ordenamento',
             'Campo',
@@ -5839,6 +5843,7 @@ class Relatorio extends CI_Controller {
 
         $data['select']['Campo'] = array(
 			'TPM.Promocao' => 'Promocao',
+			'TPD.Nome_Prod' => 'Produtos',
         );
 
         $data['select']['Ordenamento'] = array(
@@ -5846,7 +5851,7 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-        //$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
+        $data['select']['Produtos'] = $this->Relatorio_model->select_produtos1();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
@@ -5856,6 +5861,7 @@ class Relatorio extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
+			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Promocao'] = $data['query']['Promocao'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];

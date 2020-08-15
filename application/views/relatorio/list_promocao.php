@@ -52,7 +52,7 @@
 							<td><?php echo $row['Desconto'] ?></td>
 							<td><?php echo $row['Promocao'] ?></td>
 							<td><?php echo $row['Descricao'] ?></td>
-							<td>R$<?php echo $row['ValorPromocao'] ?></td>
+							<td>R$<?php echo $row['SubTotal2'] ?></td>
 						</tr>
 						<?php } ?>						
 					</tbody>

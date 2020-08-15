@@ -984,6 +984,12 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
+		($data['promocao']['Desconto'] == '2') ? $data['div']['Desconto'] = '' : $data['div']['Desconto'] = 'style="display: none;"';
+		
+		$data['radio'] = array(
+            'Desconto' => $this->basico->radio_checked($data['promocao']['Desconto'], 'Desconto', '12'),
+        );
+		
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
@@ -1030,8 +1036,13 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Promocao ####
 			#$data['promocao']['Desconto'] = 2;
-			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
-			$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+			if ($data['promocao']['Desconto'] == 1){
+				$data['promocao']['Promocao'] = '';
+				$data['promocao']['Descricao'] = '';
+			} else {
+				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
+				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+			}
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -1206,6 +1217,12 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
+		($data['promocao']['Desconto'] == '2') ? $data['div']['Desconto'] = '' : $data['div']['Desconto'] = 'style="display: none;"';
+		
+		$data['radio'] = array(
+            'Desconto' => $this->basico->radio_checked($data['promocao']['Desconto'], 'Desconto', '12'),
+        );
+		
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
@@ -1251,8 +1268,13 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Promocao ####
 			#$data['promocao']['Desconto'] = 2;
-			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
-			$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+			if ($data['promocao']['Desconto'] == 1){
+				$data['promocao']['Promocao'] = '';
+				$data['promocao']['Descricao'] = '';
+			} else {
+				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
+				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+			}
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -1432,6 +1454,12 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
+		
+		($data['promocao']['Desconto'] == '2') ? $data['div']['Desconto'] = '' : $data['div']['Desconto'] = 'style="display: none;"';
+		
+		$data['radio'] = array(
+            'Desconto' => $this->basico->radio_checked($data['promocao']['Desconto'], 'Desconto', '12'),
+        );
 
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		$data['radio'] = array(
@@ -1478,8 +1506,13 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Promocao ####
 			#$data['promocao']['Desconto'] = 2;
-			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
-			$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+			if ($data['promocao']['Desconto'] == 1){
+				$data['promocao']['Promocao'] = '';
+				$data['promocao']['Descricao'] = '';
+			} else {
+				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
+				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+			}
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -1754,6 +1787,12 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
+		
+		($data['promocao']['Desconto'] == '2') ? $data['div']['Desconto'] = '' : $data['div']['Desconto'] = 'style="display: none;"';
+		
+		$data['radio'] = array(
+            'Desconto' => $this->basico->radio_checked($data['promocao']['Desconto'], 'Desconto', '12'),
+        );
 
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
 		$data['radio'] = array(
@@ -1800,8 +1839,13 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Promocao ####
 			#$data['promocao']['Desconto'] = 2;
-			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
-			$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+			if ($data['promocao']['Desconto'] == 1){
+				$data['promocao']['Promocao'] = '';
+				$data['promocao']['Descricao'] = '';
+			} else {
+				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
+				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+			}
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];

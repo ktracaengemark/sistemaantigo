@@ -10,10 +10,10 @@
 				<div class="row text-left">	
 					<div class="col-md-12">
 						<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-							<span class="glyphicon glyphicon-filter"></span>Filtro de Promoções
+							<span class="glyphicon glyphicon-filter"></span>Filtro de Produtos
 						</button>
 						<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-							<span class="glyphicon glyphicon-plus"></span> Nova Promoção
+							<span class="glyphicon glyphicon-plus"></span> Novo Preço
 						</button>
 					</div>
 				</div>	
@@ -33,7 +33,7 @@
 			<div class="modal-footer">
 				<div class="form-group">	
 					<div class="row text-left">
-						<div class="col-md-8">
+						<div class="col-md-12">
 							<label for="Ordenamento">Produto</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
 									id="Produtos" name="Produtos">
@@ -48,6 +48,7 @@
 								?>
 							</select>
 						</div>
+						<!--
 						<div class="col-md-4">
 							<label for="Ordenamento">V/C/A</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -62,10 +63,12 @@
 								}
 								?>
 							</select>
-						</div>						
+						</div>
+						-->
 					</div>
 				</div>
 				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+				<!--
 				<div class="form-group">
 					<div class="row text-left">
 						<div class="col-md-4">
@@ -114,7 +117,8 @@
 							</select>
 						</div>
 					</div>
-				</div>	
+				</div>
+				
 				<div class="form-group">	
 					<div class="row text-left">
 						<div class="col-md-12">
@@ -153,6 +157,7 @@
 						</div>
 					</div>	
 				</div>
+				-->
 				<?php } ?>
 				<div class="row text-left">
 					<br>
@@ -175,7 +180,7 @@
 					<div class="form-group col-md-4">
 						<div class="form-footer">		
 							<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-								<span class="glyphicon glyphicon-plus"></span> Novo Produto
+								<span class="glyphicon glyphicon-plus"></span> Novo Preço
 							</button>							
 						</div>	
 					</div>					
@@ -197,8 +202,8 @@
 		<div class="modal-content">
 			<div class="modal-header bg-danger">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Evite cadastrar Produtos REPETIDOS!<br>
-										"Pesquise" os Produtos Cadastradas!</h4>
+				<h4 class="modal-title">Evite cadastrar Preços REPETIDOS!<br>
+										"Pesquise" os Preços Cadastradas!</h4>
 			</div>
 			<!--
 			<div class="modal-body">
@@ -216,7 +221,7 @@
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
 						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar4" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Nova Promocao4
+							<span class="glyphicon glyphicon-plus"></span> Novo Preço
 						</a>
 					</div>	
 				</div>

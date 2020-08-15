@@ -170,9 +170,9 @@
 							<li role="separator" class="divider"></li>							
 							<li><a href="<?php echo base_url() ?>relatorio/produtos"><span class="glyphicon glyphicon-gift"></span> Produtos Derivados </a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="<?php echo base_url() ?>relatorio/promocao"><span class="glyphicon glyphicon-usd"></span> Preços (Títulos) </a></li>
+							<li><a href="<?php echo base_url() ?>relatorio/promocao"><span class="glyphicon glyphicon-usd"></span> Promoções & Preços </a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="<?php echo base_url() ?>relatorio/precopromocao"><span class="glyphicon glyphicon-usd"></span> Preços & Promoções </a></li>
+							<li><a href="<?php echo base_url() ?>relatorio/precopromocao"><span class="glyphicon glyphicon-usd"></span> Produtos & Preços </a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-gift"></span> Produtos & Estoque</a></li>							
 							<!--<li role="separator" class="divider"></li>							

@@ -5,9 +5,12 @@
 
 	<div class="panel panel-<?php echo $panel; ?>">
 		<div class="panel-heading">
-			<?php echo $titulo; ?> Promocao
+			<?php echo $titulo; ?> Preços
+			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/precopromocao" role="button">
+				<span class="glyphicon glyphicon-search"></span> Produtos
+			</a>
 			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/promocao" role="button">
-				<span class="glyphicon glyphicon-search"></span> Promocao
+				<span class="glyphicon glyphicon-search"></span> Promocoes
 			</a>
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/estoque" role="button">
 				<span class="glyphicon glyphicon-search"></span> Estoque
@@ -26,6 +29,62 @@
 							<div class="col-md-3">
 								<label for="Desconto">Tipo</label>
 								<?php if ($metodo <= 1) { ?>
+									
+										<div class="btn-block" data-toggle="buttons">
+											<?php
+											foreach ($select['Desconto'] as $key => $row) {
+												if (!$promocao['Desconto']) $promocao['Desconto'] = '1';
+
+												($key == '2') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+												if ($promocao['Desconto'] == $key) {
+													echo ''
+													. '<label class="btn btn-warning active" name="Desconto_' . $hideshow . '">'
+													. '<input type="radio" name="Desconto" id="' . $hideshow . '" '
+													. 'autocomplete="off" value="' . $key . '" checked>' . $row
+													. '</label>'
+													;
+												} else {
+													echo ''
+													. '<label class="btn btn-default" name="Desconto_' . $hideshow . '">'
+													. '<input type="radio" name="Desconto" id="' . $hideshow . '" '
+													. 'autocomplete="off" value="' . $key . '" >' . $row
+													. '</label>'
+													;
+												}
+											}
+											?>
+
+										</div>
+										<!--
+										<div class="btn-block" data-toggle="buttons">
+											<?php
+											foreach ($select['Desconto'] as $key => $row) {
+												(!$promocao['Desconto']) ? $promocao['Desconto'] = '1' : FALSE;
+												#if (!$promocao['Desconto'])$promocao['Desconto'] = 1;
+												($key == '2') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+												if ($promocao['Desconto'] == $key) {
+													echo ''
+													. '<label class="btn btn-warning active" name="radio" id="radio' . $key . '">'
+													. '<input type="radio" name="Desconto" id="' . $hideshow . '" '
+													. 'onchange="calculaParcelas(),formaPag(this.value)" '
+													. 'autocomplete="off" value="' . $key . '" checked>' . $row
+													. '</label>'
+													;
+												} else {
+													echo ''
+													. '<label class="btn btn-default" name="radio" id="radio' . $key . '">'
+													. '<input type="radio" name="Desconto" id="' . $hideshow . '"'
+													. 'onchange="calculaParcelas(),formaPag(this.value)" '
+													. 'autocomplete="off" value="' . $key . '" >' . $row
+													. '</label>'
+													;
+												}
+											}
+											?>
+										</div>
+										-->
+									<!--
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 											id="Desconto" name="Desconto">
 										<option value="">-- Sel. uma opção --</option>
@@ -39,6 +98,7 @@
 										}
 										?>
 									</select>
+									-->
 								<?php }else { ?>
 									<input type="hidden" id="Desconto" name="Desconto" value="<?php echo $promocao['Desconto']; ?>"/>
 									<?php echo '<strong>" ' . $_SESSION['Promocao']['Tipo'] . ' "</strong>' ?>
@@ -46,20 +106,23 @@
 								<?php } ?>
 								<?php echo form_error('Desconto'); ?>
 							</div>
-							<div class="col-md-3">
-								<label for="Promocao">Título / Promoção:*</label><br>
-								<input type="text" class="form-control" maxlength="200"
-										name="Promocao" value="<?php echo $promocao['Promocao']; ?>">
-								<?php echo form_error('Promocao'); ?>
-							</div>
-							<div class="col-md-6">
-								<label for="Descricao">Descrição:*</label><br>
-								<input type="text" class="form-control" maxlength="200"
-										name="Descricao" value="<?php echo $promocao['Descricao']; ?>">
-								<?php echo form_error('Descricao'); ?>
-							</div>
+							<div id="Desconto" <?php echo $div['Desconto']; ?>>
+								<div class="col-md-3">
+									<label for="Promocao">Título / Promoção:*</label><br>
+									<input type="text" class="form-control" maxlength="200"
+											name="Promocao" value="<?php echo $promocao['Promocao']; ?>">
+									<?php echo form_error('Promocao'); ?>
+								</div>
+								<div class="col-md-6">
+									<label for="Descricao">Descrição:*</label><br>
+									<input type="text" class="form-control" maxlength="200"
+											name="Descricao" value="<?php echo $promocao['Descricao']; ?>">
+									<?php echo form_error('Descricao'); ?>
+								</div>
+							</div>	
 						</div>	
 						<div class="row">	
+							<!--
 							<div class="col-md-3 text-left">
 								<label for="ValorPromocao">Valor Promoção:</label><br>
 								<div class="input-group">
@@ -68,8 +131,9 @@
 											name="ValorPromocao" value="<?php echo $promocao['ValorPromocao'] ?>">
 								</div>
 							</div>
+							-->
 							<div class="col-md-3 text-left">
-								<label for="Ativo">Promoção Ativa?</label><br>
+								<label for="Ativo">Preço Ativo?</label><br>
 								<div class="btn-group" data-toggle="buttons">
 									<?php
 									foreach ($select['Ativo'] as $key => $row) {

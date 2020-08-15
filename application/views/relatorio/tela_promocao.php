@@ -28,10 +28,48 @@
 		<div class="modal-content">
 			<div class="modal-header bg-danger">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Produtos</h4>
+				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das Promocoes</h4>
 			</div>
 			<div class="modal-footer">
 				<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>	
+				<div class="form-group">	
+					<div class="row text-left">
+						<div class="col-md-12">
+							<label for="Ordenamento">Promocao</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
+									id="Promocao" name="Promocao">
+								<?php
+								foreach ($select['Promocao'] as $key => $row) {
+									if ($query['Promocao'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">	
+					<div class="row text-left">
+						<div class="col-md-12">
+							<label for="Ordenamento">Produto</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
+									id="Produtos" name="Produtos">
+								<?php
+								foreach ($select['Produtos'] as $key => $row) {
+									if ($query['Produtos'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+					</div>
+				</div>
 				<div class="form-group">	
 					<div class="row text-left">
 						<div class="col-md-12">
@@ -133,7 +171,7 @@
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
 						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar4" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Nova Promocao4
+							<span class="glyphicon glyphicon-plus"></span> Nova Promocao
 						</a>
 					</div>	
 				</div>

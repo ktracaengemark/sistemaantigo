@@ -18,10 +18,12 @@
 							<th class="active" scope="col">Foto</th>
 							<th class="active" scope="col">Editar</th>
 							<th class="active">Ativo</th>
+							<th class="active">Balcao</th>
+							<th class="active">Site</th>
 							<th class="active">Id</th>
 							<th class="active">Tipo</th>
-							<th class="active">Titulo</th>
-							<th class="active">Descricao</th>
+							<!--<th class="active">Titulo</th>
+							<th class="active">Descricao</th>-->
 							<th class="active">IdProd.</th>
 							<th class="active">Qtd.</th>
 							<th class="active">Produto</th>
@@ -36,8 +38,8 @@
 					<!--<tr class="clickable-row" data-href="<?php echo base_url() . 'promocao/alterarlogo/' . $row['idTab_Promocao'] . ''; ?>">-->
 						<tr>	
 							<td class="notclickable">
-								<a class="notclickable" href="<?php echo base_url() . 'promocao/alterarlogo/' . $row['idTab_Promocao'] . ''; ?>">
-									<img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'>
+								<a class="notclickable" href="<?php echo base_url() . 'produtos/alterarlogoderivado/' . $row['idTab_Produtos'] . ''; ?>">
+									<img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'>
 								</a>
 							</td>
 							<td class="notclickable">
@@ -47,12 +49,14 @@
 							</td>						
 							<!--<td><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>-->
 							<td><?php echo $row['Ativo'] ?></td>
+							<td><?php echo $row['VendaBalcao'] ?></td>
+							<td><?php echo $row['VendaSite'] ?></td>
 							<td><?php echo $row['idTab_Promocao'] ?></td>
 							<td><?php echo $row['Desconto'] ?></td>
-							<td><?php echo $row['Promocao'] ?></td>
-							<td><?php echo $row['Descricao'] ?></td>
+							<!--<td><?php echo $row['Promocao'] ?></td>
+							<td><?php echo $row['Descricao'] ?></td>-->
 							<td><?php echo $row['idTab_Produtos'] ?></td>
-							<td><?php echo $row['QtdProdutoDesconto'] ?></td>
+							<td><?php echo $row['QtdProdutoIncremento'] ?></td>
 							<td><?php echo $row['Nome_Prod'] ?></td>
 							<td><?php echo number_format($row['ValorProduto'], 2, ',','.') ?></td>
 						</tr>

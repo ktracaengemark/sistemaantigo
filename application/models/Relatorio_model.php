@@ -7720,7 +7720,8 @@ exit();*/
     }
 
 	public function list_promocao($data, $completo) {
-
+		
+		$data['Produtos'] = ($data['Produtos']) ? ' AND TPD.idTab_Produtos = ' . $data['Produtos'] : FALSE;
 		$data['Promocao'] = ($data['Promocao']) ? ' AND TPM.idTab_Promocao = ' . $data['Promocao'] : FALSE;
 		#$data['TipoProduto'] = ($data['TipoProduto']) ? ' AND TTP.idTab_TipoProduto = ' . $data['TipoProduto'] : FALSE;
 		#$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
@@ -7739,12 +7740,24 @@ exit();*/
 				TPM.VendaBalcao,
 				TPM.VendaSite,
 				TPM.ValorPromocao,
-				TDC.Desconto
+				TDC.Desconto,
+				TOP2.Opcao,
+				TOP1.Opcao,
+				SUM(TV.ValorProduto) AS SubTotal2
             FROM
                 Tab_Promocao AS TPM
-					LEFT JOIN Tab_Desconto AS TDC ON TDC.idTab_Desconto = TPM.Desconto					
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Promocao = TPM.idTab_Promocao
+					LEFT JOIN Tab_Produtos AS TPD ON TPD.idTab_Produtos = TV.idTab_Produtos
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPD.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPD.Opcao_Atributo_2
+					LEFT JOIN Tab_Desconto AS TDC ON TDC.idTab_Desconto = TPM.Desconto
             WHERE
-                TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+                TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TPM.Desconto = "2"
+				' . $data['Promocao'] . '
+				' . $data['Produtos'] . '
+			GROUP BY
+                TPM.idTab_Promocao
 			ORDER BY
 				TDC.Desconto ASC,
 				TPM.idTab_Promocao ASC		
@@ -7756,6 +7769,7 @@ exit();*/
            
 			foreach ($query->result() as $row) {
 				$row->ValorPromocao = number_format($row->ValorPromocao, 2, ',', '.');
+				$row->SubTotal2 = number_format($row->SubTotal2, 2, ',', '.');
             }
             return $query;
         }
@@ -7764,6 +7778,7 @@ exit();*/
 
 	public function list_precopromocao($data, $completo) {
 
+		$data['Produtos'] = ($data['Produtos']) ? ' AND TPD.idTab_Produtos = ' . $data['Produtos'] : FALSE;
 		$data['Promocao'] = ($data['Promocao']) ? ' AND TPM.idTab_Promocao = ' . $data['Promocao'] : FALSE;
 		#$data['TipoProduto'] = ($data['TipoProduto']) ? ' AND TTP.idTab_TipoProduto = ' . $data['TipoProduto'] : FALSE;
 		#$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
@@ -7777,8 +7792,10 @@ exit();*/
                 TPM.idTab_Promocao,
 				TPM.Promocao,
 				TPM.Descricao,
-				TPM.Arquivo,
+				TPD.Arquivo,
 				TPM.Ativo,
+				TPM.VendaBalcao,
+				TPM.VendaSite,
 				TV.idTab_Produtos,
 				TV.idTab_Modelo,
 				TV.Convdesc,
@@ -7797,7 +7814,9 @@ exit();*/
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPD.Opcao_Atributo_2
 					LEFT JOIN Tab_Desconto AS TDC ON TDC.idTab_Desconto = TPM.Desconto					
             WHERE
-                TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+                TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TPM.Desconto = "1"
+				' . $data['Produtos'] . '
 			ORDER BY
 				TDC.Desconto ASC,
 				TPM.idTab_Promocao ASC		
@@ -9660,6 +9679,37 @@ exit();*/
         return $array;
     }
 
+	public function select_promocao() {
+		
+        $query = $this->db->query('
+            SELECT
+                TPM.idTab_Promocao,
+				TPM.Promocao,
+				OB.idTab_Produtos,
+				TOP2.Opcao,
+				TOP1.Opcao,
+				CONCAT(IFNULL(OB.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,"")) AS Produtos
+            FROM
+                Tab_Promocao AS TPM
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Promocao = TPM.idTab_Promocao
+					LEFT JOIN Tab_Produtos AS OB ON OB.idTab_Produtos = TV.idTab_Produtos
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = OB.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = OB.Opcao_Atributo_2
+            WHERE
+				TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+            ORDER BY
+				Produtos ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idTab_Promocao] = $row->Promocao;
+        }
+
+        return $array;
+    }
+	
 	public function select_produtos1() {
 		
         $query = $this->db->query('
