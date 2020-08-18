@@ -21,6 +21,7 @@
 							<th class="active">Id.P</th>
 							<th class="active">Id.PD</th>
 							<th class="active">Código</th>
+							<th class="active">Tipo</th>
 							<th class="active">Categoria</th>
 							<th class="active">Produtos Derivados</th>
 						</tr>
@@ -49,6 +50,7 @@
 						<td><?php echo $row['idTab_Produto'] ?></td>
 						<td><?php echo $row['idTab_Produtos'] ?></td>
 						<td><?php echo $row['Cod_Prod'] ?></td>
+						<td><?php echo $row['Prod_Serv'] ?></td>
 						<td><?php echo $row['Catprod'] ?></td>
 						<td><?php echo $row['Nome_Prod'] ?></td>
 						<?php } ?>						

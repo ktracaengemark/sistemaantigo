@@ -7526,6 +7526,7 @@ exit();*/
 				TP.PesoProduto,
 				TP.Arquivo,
 				TP.Ativo,
+				TPRS.Prod_Serv,
 				TP.VendaSite,
 				TCP.Catprod,
 				TTP.Abrev,
@@ -7534,6 +7535,7 @@ exit();*/
                 Tab_Produto AS TP
 					LEFT JOIN Tab_Catprod AS TCP ON TCP.idTab_Catprod = TP.Prodaux3
 					LEFT JOIN Tab_TipoProduto AS TTP ON TTP.Abrev = TP.TipoProduto
+					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TP.Prod_Serv
             WHERE
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
@@ -7603,6 +7605,7 @@ exit();*/
 				TPS.Cod_Prod,
 				TPS.Arquivo,
 				TPS.Nome_Prod,
+				TPRS.Prod_Serv,
 				TOP2.Opcao,
 				TOP1.Opcao,
 				CONCAT(IFNULL(TPS.Nome_Prod,""), " ", IFNULL(TOP2.Opcao,""), " ", IFNULL(TOP1.Opcao,"")) AS Nome_Prod,
@@ -7621,7 +7624,7 @@ exit();*/
 					LEFT JOIN Tab_Catprod AS TCP ON TCP.idTab_Catprod = TP.Prodaux3
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2
-					
+					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TPS.Prod_Serv
             WHERE
                 TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
@@ -7933,12 +7936,14 @@ exit();*/
             SELECT
                 TPM.idTab_Catprod,
 				TPM.Catprod,
+				TPM.TipoCatprod,
 				TPM.idSis_Empresa,
+				TPRS.Prod_Serv,
 				TAT.Atributo,
 				TOP.Opcao
             FROM
                 Tab_Catprod AS TPM
-					
+					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TPM.TipoCatprod
 					LEFT JOIN Tab_Atributo_Select AS TAS ON TAS.idTab_Catprod = TPM.idTab_Catprod
 					LEFT JOIN Tab_Atributo AS TAT ON TAT.idTab_Atributo = TAS.idTab_Atributo
 					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Atributo = TAT.idTab_Atributo

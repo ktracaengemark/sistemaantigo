@@ -20,6 +20,7 @@
 							<th class="active" scope="col">Editar</th>
 							<!--<th class="active">Id.P</th>-->
 							<th class="active">Id</th>
+							<th class="active">Venda</th>
 							<th class="active">Tipo</th>
 							<th class="active">Categoria</th>
 							<th class="active">Modelo</th>
@@ -51,6 +52,7 @@
 						<!--<td><?php echo $row['idTab_Produtos'] ?></td>-->
 						<td><?php echo $row['idTab_Produto'] ?></td>
 						<td><?php echo $row['TipoProduto'] ?></td>
+						<td><?php echo $row['Prod_Serv'] ?></td>
 						<td><?php echo $row['Catprod'] ?></td>
 						<td><?php echo $row['Produtos'] ?></td>
 						<!--<td><?php echo $row['Nome_Cor_Prod'] ?></td>

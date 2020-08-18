@@ -1250,19 +1250,20 @@ if (isset($data) && $data) {
 				TOP1.Opcao,
 				TDS.Desconto,
 				TPM.Promocao,
-				CONCAT(IFNULL(P.Nome_Prod,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " Unid. - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
+				CONCAT(IFNULL(TPRS.Prod_Serv,""), " - ",  IFNULL(P.Nome_Prod,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " Unid. - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
 					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = P.Prod_Serv
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2					
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-				P.idTab_Produtos = V.idTab_Produtos AND
-				P.Prod_Serv = "P"
+				P.idTab_Produtos = V.idTab_Produtos
 			ORDER BY
+				P.Prod_Serv ASC,
 				P.Nome_Prod ASC,
 				TDS.Desconto ASC,
 				TPM.Promocao ASC,
@@ -1281,19 +1282,20 @@ if (isset($data) && $data) {
 				TOP1.Opcao,
 				TDS.Desconto,
 				TPM.Promocao,
-				CONCAT(IFNULL(P.Nome_Prod,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " Unid. - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
+				CONCAT(IFNULL(TPRS.Prod_Serv,""), " - ",  IFNULL(P.Nome_Prod,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " Unid. - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
 					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = P.Prod_Serv
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2				
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-				P.idTab_Produtos = V.idTab_Produtos AND
-				P.Prod_Serv = "P"
+				P.idTab_Produtos = V.idTab_Produtos
 			ORDER BY
+				P.Prod_Serv ASC,
 				P.Nome_Prod ASC,
 				TDS.Desconto ASC,
 				TPM.Promocao ASC,
@@ -3370,13 +3372,57 @@ if (isset($data) && $data) {
         if ($data === TRUE) {
             $array = $this->db->query('
             SELECT
+				TCAT.idTab_Catprod,
+				TCAT.TipoCatprod,
+                CONCAT(IFNULL(TPRS.Prod_Serv,""), " - " ,IFNULL(TCAT.Catprod,"")) AS Catprod
+            FROM 
+                Tab_Catprod AS TCAT
+					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TCAT.TipoCatprod
+            WHERE
+                TCAT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				TCAT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY 
+				TCAT.Catprod ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+				TCAT.idTab_Catprod,
+				TCAT.TipoCatprod,
+                CONCAT(IFNULL(TPRS.Prod_Serv,""), " - " ,IFNULL(TCAT.Catprod,"")) AS Catprod
+            FROM 
+                Tab_Catprod AS TCAT
+					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TCAT.TipoCatprod
+            WHERE
+                TCAT.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+				TCAT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY 
+				TCAT.Catprod ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Catprod] = $row->Catprod;
+            }
+        }
+
+        return $array;
+    }
+
+	public function select_catprod1($data = FALSE) {
+	
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
 				idTab_Catprod,
+				TipoCatprod,
                 CONCAT(IFNULL(Catprod,"")) AS Catprod
             FROM 
                 Tab_Catprod 
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . 'AND
+				TipoCatprod = "' . $data . '" 
 			ORDER BY 
 				Catprod ASC
     ');
@@ -3384,12 +3430,14 @@ if (isset($data) && $data) {
             $query = $this->db->query('
             SELECT
 				idTab_Catprod,
+				TipoCatprod,
                 CONCAT(IFNULL(Catprod,"")) AS Catprod
             FROM 
                 Tab_Catprod 
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TipoCatprod = "' . $data . '"
 			ORDER BY 
 				Catprod ASC
     ');
@@ -3402,7 +3450,7 @@ if (isset($data) && $data) {
 
         return $array;
     }
-
+	
 	public function select_atributo_cat($data = FALSE) {
 	
         if ($data === TRUE) {
@@ -3696,8 +3744,8 @@ if (isset($data) && $data) {
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' AND
-				P.Item_Atributo = "1"
+				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' 
+				' . $permissao1 . '
 			ORDER BY 
 				TOP.Opcao ASC
     ');
@@ -3716,8 +3764,8 @@ if (isset($data) && $data) {
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' AND
-				P.Item_Atributo = "1"
+				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' 
+				' . $permissao1 . '
 			ORDER BY 
 				TOP.Opcao ASC
     ');
@@ -3751,8 +3799,8 @@ if (isset($data) && $data) {
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' AND
-				P.Item_Atributo = "2"
+				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' 
+				' . $permissao2 . '
 			ORDER BY 
 				TOP.Opcao ASC
     ');
@@ -3771,8 +3819,8 @@ if (isset($data) && $data) {
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' AND
-				P.Item_Atributo = "2"
+				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' 
+				' . $permissao2 . '
 			ORDER BY 
 				TOP.Opcao ASC
     ');

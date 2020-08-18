@@ -261,14 +261,17 @@ elseif ($_GET['q'] == 20) {
 				P.Valor_Produto,
 				TOP2.Opcao,
 				TOP1.Opcao,				
-				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - R$ ", IFNULL(P.Valor_Produto,"")) AS NomeProduto
+				CONCAT(IFNULL(TPRS.Prod_Serv,""), " - ",  IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - R$ ", IFNULL(P.Valor_Produto,"")) AS NomeProduto
             FROM 
                 Tab_Produtos AS P 
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2
+					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = P.Prod_Serv
             WHERE
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.Prod_Serv = "P"
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY
+				P.Prod_Serv ASC,
+				P.Nome_Prod ASC
     ');
 
     while ($row = mysql_fetch_assoc($result)) {
@@ -387,21 +390,23 @@ elseif ($_GET['q'] == 90) {
 				TOP1.Opcao,
 				TDS.Desconto,
 				TPM.Promocao,
-				CONCAT(IFNULL(P.Nome_Prod,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " UNID - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
+				CONCAT(IFNULL(TPRS.Prod_Serv,""), " - ",  IFNULL(P.Nome_Prod,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " UNID - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
 					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = P.Prod_Serv
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2				
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 				P.idTab_Produtos = V.idTab_Produtos AND
-				P.Prod_Serv = "P" AND
+				
 				TPM.Ativo = "S" AND
 				TPM.VendaBalcao = "S"
 			ORDER BY
+				P.Prod_Serv ASC,
 				P.Nome_Prod ASC,
 				TDS.Desconto ASC,
 				TPM.Promocao ASC,
@@ -802,7 +807,8 @@ elseif ($_GET['q'] == 95) {
 
 elseif ($_GET['q'] == 98) {
 //// daqui, eu pegoo Tipo
-    $result = mysql_query('
+    $permissao1 = isset($_SESSION['Atributos'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][1] : 'AND idTab_Atributo = "0"';
+	$result = mysql_query('
             SELECT
 				P.idTab_Opcao_Select,
 				P.idTab_Opcao,
@@ -816,8 +822,8 @@ elseif ($_GET['q'] == 98) {
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' AND
-				P.Item_Atributo = "1"
+				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . '  
+				' . $permissao1 . '
 			ORDER BY 
 				TOP.Opcao ASC
 				
@@ -835,7 +841,8 @@ elseif ($_GET['q'] == 98) {
 
 elseif ($_GET['q'] == 97) {
 //// daqui, eu pegoo Tipo
-    $result = mysql_query('
+    $permissao2 = isset($_SESSION['Atributos'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][2] : 'AND idTab_Atributo = "0"';
+	$result = mysql_query('
             SELECT
 				P.idTab_Opcao_Select,
 				P.idTab_Opcao,
@@ -849,8 +856,8 @@ elseif ($_GET['q'] == 97) {
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' AND
-				P.Item_Atributo = "2"
+				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' 
+				' . $permissao2 . '
 			ORDER BY 
 				TOP.Opcao ASC
 				

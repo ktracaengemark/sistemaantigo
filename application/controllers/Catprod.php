@@ -50,7 +50,8 @@ class Catprod extends CI_Controller {
         $data['catprod'] = quotes_to_entities($this->input->post(array(
             #### Tab_Catprod ####
             'idTab_Catprod',
-            'Catprod',			
+            'Catprod',
+			'TipoCatprod',
         ), TRUE));
    
 
@@ -61,6 +62,8 @@ class Catprod extends CI_Controller {
         #### Tab_Catprod ####
 
 		$this->form_validation->set_rules('Catprod', 'Categoria', 'required|trim');		
+		$this->form_validation->set_rules('TipoCatprod', 'Prod/Serv', 'required|trim');	
+		$data['select']['TipoCatprod'] = $this->Basico_model->select_prod_serv();
 		
         $data['titulo'] = 'Cadastrar';
         $data['form_open_path'] = 'catprod/cadastrar';
@@ -152,6 +155,7 @@ class Catprod extends CI_Controller {
             #### Tab_Catprod ####
             'idTab_Catprod',			
             'Catprod',
+			#'TipoCatprod',
         ), TRUE));
 
 		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
@@ -193,8 +197,9 @@ class Catprod extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-		$this->form_validation->set_rules('Catprod', 'Categoria', 'required|trim');
-		
+		$this->form_validation->set_rules('Catprod', 'Categoria', 'required|trim');		
+		#$this->form_validation->set_rules('TipoCatprod', 'Prod/Serv', 'required|trim');	
+		$data['select']['TipoCatprod'] = $this->Basico_model->select_prod_serv();
 		$data['select']['idTab_Atributo'] = $this->Basico_model->select_atributo_cat();
 
         $data['titulo'] = 'Editar';
@@ -332,6 +337,7 @@ class Catprod extends CI_Controller {
             #### Tab_Catprod ####
             'idTab_Catprod',			
             'Catprod',
+			#'TipoCatprod',
         ), TRUE));
 
 		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
@@ -402,7 +408,9 @@ class Catprod extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-		$this->form_validation->set_rules('Catprod', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Catprod', 'Categoria', 'required|trim');		
+		#$this->form_validation->set_rules('TipoCatprod', 'Prod/Serv', 'required|trim');	
+		$data['select']['TipoCatprod'] = $this->Basico_model->select_prod_serv();
 		
 		$data['select']['idTab_Atributo'] = $this->Basico_model->select_atributo();
         

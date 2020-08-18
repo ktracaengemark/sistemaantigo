@@ -403,7 +403,7 @@
 												}
 												?>
 											</div>
-																														
+											<!--																			
 											<div class="panel panel-default">
 												<div class="panel-heading text-left">
 													<div class="row">
@@ -428,7 +428,6 @@
 																			</div>
 																		</div>
 																		<div class="col-md-6">
-																			<!--<label for="ValorDev">Serviços:</label><br>-->
 																			<div class="input-group" id="txtHint">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
 																				<input type="text" class="form-control text-right Valor" id="ValorDev" maxlength="10" placeholder="0,00" readonly=""
@@ -440,17 +439,10 @@
 																</div>		
 															</div>			
 														</div>
-														<!--
-														<div class="col-md-3 text-left">																							
-															<a class="btn btn-danger" type="button" data-toggle="collapse" data-target="#Devolvidos" aria-expanded="false" aria-controls="Devolvidos">
-																<span class="glyphicon glyphicon-menu-up"></span> Devolvidos
-															</a>
-														</div>
-														-->
 													</div>
 												</div>
 											</div>
-											
+											-->
 											<input type="hidden" name="CountMax2" id="CountMax2" value="<?php echo $ServicoSoma ?>">
 
 										

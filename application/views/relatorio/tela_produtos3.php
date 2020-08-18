@@ -10,7 +10,7 @@
 				<div class="row text-left">	
 					<div class="col-md-12">
 						<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-							<span class="glyphicon glyphicon-filter"></span>Filtro de Produtos
+							<span class="glyphicon glyphicon-filter"></span>Filtro de Modelos
 						</button>
 						<!--
 						<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
@@ -30,7 +30,7 @@
 		<div class="modal-content">
 			<div class="modal-header bg-danger">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Produtos</h4>
+				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Modelos</h4>
 			</div>
 			<div class="modal-footer">
 				<div class="form-group">	

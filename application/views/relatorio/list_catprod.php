@@ -16,6 +16,7 @@
 
 						<th class="active" scope="col">Editar</th>
 						<th class="active">Id.</th>
+						<th class="active">Tipo</th>
 						<th class="active">Categoria</th>
 						<th class="active">Atributo</th>
 						<th class="active">Opcao</th>
@@ -33,6 +34,7 @@
 							</a>
 						</td>
 						<td><?php echo $row['idTab_Catprod'] ?></td>
+						<td><?php echo $row['Prod_Serv'] ?></td>
 						<td><?php echo $row['Catprod'] ?></td>
 						<td><?php echo $row['Atributo'] ?></td>
 						<td><?php echo $row['Opcao'] ?></td>

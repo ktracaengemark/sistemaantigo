@@ -2243,7 +2243,7 @@ function adiciona_opcao_select2() {
 		error: function () {
 			//alert('erro listadinamicaB');
 			//if there is an error append a 'none available' option
-			$select.html('<option id="-1">ERRO</option>');
+			$select.html('<option id="-1"></option>');
 		}
 
 	});	
@@ -2274,6 +2274,13 @@ function adiciona_item_promocao() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
+						<div class="col-md-1">\
+							<label for="QtdProdutoDesconto">QtdPrd:</label><br>\
+							<div class="input-group">\
+								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto'+pt+'" placeholder="0"\
+								    name="QtdProdutoDesconto'+pt+'" value="1">\
+							</div>\
+						</div>\
 						<div class="col-md-5">\
 							<label for="idTab_Produtos">Item '+pt+':</label><br>\
 							<select class="form-control Chosen" id="listadinamicad'+pt+'" name="idTab_Produtos'+pt+'">\
@@ -2284,13 +2291,6 @@ function adiciona_item_promocao() {
 							<label for="Convdesc'+pt+'">Desc. Embal:</label>\
 							<input type="text" class="form-control" id="Convdesc'+pt+'"\
 									  name="Convdesc'+pt+'" value="">\
-						</div>\
-						<div class="col-md-1">\
-							<label for="QtdProdutoDesconto">QtdPrd:</label><br>\
-							<div class="input-group">\
-								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto'+pt+'" placeholder="0"\
-								    name="QtdProdutoDesconto'+pt+'" value="1">\
-							</div>\
 						</div>\
 						<div class="col-md-1">\
 							<label for="QtdProdutoIncremento">QtdEmb:</label><br>\
@@ -2411,6 +2411,13 @@ function adiciona_item_promocao2() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
+						<div class="col-md-1">\
+							<label for="QtdProdutoDesconto2">QtdPrd:</label><br>\
+							<div class="input-group">\
+								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto2'+pt2+'" placeholder="0"\
+								    name="QtdProdutoDesconto2'+pt2+'" value="1">\
+							</div>\
+						</div>\
 						<div class="col-md-5">\
 							<label for="idTab_Produtos2">Item '+pt2+':</label><br>\
 							<select class="form-control Chosen2" id="listadinamica2'+pt2+'" name="idTab_Produtos2'+pt2+'">\
@@ -2421,13 +2428,6 @@ function adiciona_item_promocao2() {
 							<label for="Convdesc2'+pt2+'">Desc. Embal:</label>\
 							<input type="text" class="form-control" id="Convdesc2'+pt2+'"\
 									  name="Convdesc2'+pt2+'" value="">\
-						</div>\
-						<div class="col-md-1">\
-							<label for="QtdProdutoDesconto2">QtdPrd:</label><br>\
-							<div class="input-group">\
-								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto2'+pt2+'" placeholder="0"\
-								    name="QtdProdutoDesconto2'+pt2+'" value="1">\
-							</div>\
 						</div>\
 						<div class="col-md-1">\
 							<label for="QtdProdutoIncremento2">QtdEmb:</label><br>\
@@ -2548,6 +2548,13 @@ function adiciona_item_promocao3() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
+						<div class="col-md-1">\
+							<label for="QtdProdutoDesconto3">QtdPrd:</label><br>\
+							<div class="input-group">\
+								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto3'+pt3+'" placeholder="0"\
+								    name="QtdProdutoDesconto3'+pt3+'" value="1">\
+							</div>\
+						</div>\
 						<div class="col-md-5">\
 							<label for="idTab_Produtos3">Item '+pt3+':</label><br>\
 							<select class="form-control Chosen3" id="listadinamica3'+pt3+'" name="idTab_Produtos3'+pt3+'">\
@@ -2558,13 +2565,6 @@ function adiciona_item_promocao3() {
 							<label for="Convdesc3'+pt3+'">Desc. Embal:</label>\
 							<input type="text" class="form-control" id="Convdesc3'+pt3+'"\
 									  name="Convdesc3'+pt3+'" value="">\
-						</div>\
-						<div class="col-md-1">\
-							<label for="QtdProdutoDesconto3">QtdPrd:</label><br>\
-							<div class="input-group">\
-								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto3'+pt3+'" placeholder="0"\
-								    name="QtdProdutoDesconto3'+pt3+'" value="1">\
-							</div>\
 						</div>\
 						<div class="col-md-1">\
 							<label for="QtdProdutoIncremento3">QtdEmb:</label><br>\
@@ -6864,7 +6864,7 @@ $(document).ready(function () {
             error: function () {
                 //alert('erro listadinamicaB');
                 //if there is an error append a 'none available' option
-                $select.html('<option id="-1">ERRO</option>');
+                $select.html('<option id="-1"></option>');
             }
 
         });		
@@ -6978,7 +6978,7 @@ $(document).ready(function () {
             error: function () {
                 //alert('erro listadinamicaB');
                 //if there is an error append a 'none available' option
-                $select.html('<option id="-1">ERRO</option>');
+                $select.html('<option id="-1"></option>');
             }
 
         });
@@ -7011,7 +7011,7 @@ $(document).ready(function () {
             error: function () {
                 //alert('erro listadinamicaB');
                 //if there is an error append a 'none available' option
-                $select2.html('<option id="-1">ERRO</option>');
+                $select2.html('<option id="-1"></option>');
             }
 
         });		

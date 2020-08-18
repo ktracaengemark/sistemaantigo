@@ -145,6 +145,7 @@ class Produtos_model extends CI_Model {
 				TP.ValorProdutoSite,
 				TP.Categoria,
 				TP.Prod_Serv,
+				TPRS.Prod_Serv AS TipoProdServ,
 				TP.ProdutoProprio,
 				TP.Aprovado,
 				TP.Arquivo,
@@ -160,6 +161,7 @@ class Produtos_model extends CI_Model {
 			FROM 
 				Tab_Produto AS TP
 					LEFT JOIN Tab_Catprod AS CTP ON CTP.idTab_Catprod = TP.Prodaux3
+					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TP.Prod_Serv
 			WHERE 
 				TP.idTab_Produto = ' . $data
 		);

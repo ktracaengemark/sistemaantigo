@@ -482,11 +482,6 @@
 																	<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto<?php echo $i ?>" placeholder="0"
 																			name="QtdProdutoDesconto<?php echo $i ?>" value="<?php echo $item_promocao[$i]['QtdProdutoDesconto'] ?>">
 																</div>
-																<div class="col-md-1">
-																	<label for="QtdProdutoIncremento">QtdEmb<?php echo $i ?>:</label>
-																	<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento<?php echo $i ?>" placeholder="0"
-																			name="QtdProdutoIncremento<?php echo $i ?>" value="<?php echo $item_promocao[$i]['QtdProdutoIncremento'] ?>">
-																</div>
 																<div class="col-md-5">
 																	<label for="idTab_Produtos<?php echo $i ?>">Item <?php echo $i ?>*</label>
 																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
@@ -507,6 +502,11 @@
 																	<label for="Convdesc">Desc. Embal <?php echo $i ?></label>
 																	<input type="text" class="form-control"  id="Convdesc<?php echo $i ?>" <?php echo $readonly; ?>
 																			  name="Convdesc<?php echo $i ?>" value="<?php echo $item_promocao[$i]['Convdesc']; ?>">
+																</div>
+																<div class="col-md-1">
+																	<label for="QtdProdutoIncremento">QtdEmb<?php echo $i ?>:</label>
+																	<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento<?php echo $i ?>" placeholder="0"
+																			name="QtdProdutoIncremento<?php echo $i ?>" value="<?php echo $item_promocao[$i]['QtdProdutoIncremento'] ?>">
 																</div>
 																<div class="col-md-2">
 																	<label for="ValorProduto">ValorEmbal <?php echo $i ?>*</label>
@@ -584,11 +584,6 @@
 																		<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto2<?php echo $i ?>" placeholder="0"
 																				name="QtdProdutoDesconto2<?php echo $i ?>" value="<?php echo $item_promocao2[$i]['QtdProdutoDesconto'] ?>">
 																	</div>
-																	<div class="col-md-1">
-																		<label for="QtdProdutoIncremento2">QtdEmb<?php echo $i ?>:</label>
-																		<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento2<?php echo $i ?>" placeholder="0"
-																				name="QtdProdutoIncremento2<?php echo $i ?>" value="<?php echo $item_promocao2[$i]['QtdProdutoIncremento'] ?>">
-																	</div>
 																	<div class="col-md-5">
 																		<label for="idTab_Produtos2<?php echo $i ?>">Item <?php echo $i ?>*</label>
 																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
@@ -609,6 +604,11 @@
 																		<label for="Convdesc2">Desc. Embal <?php echo $i ?></label>
 																		<input type="text" class="form-control"  id="Convdesc2<?php echo $i ?>" <?php echo $readonly; ?>
 																				  name="Convdesc2<?php echo $i ?>" value="<?php echo $item_promocao2[$i]['Convdesc']; ?>">
+																	</div>
+																	<div class="col-md-1">
+																		<label for="QtdProdutoIncremento2">QtdEmb<?php echo $i ?>:</label>
+																		<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento2<?php echo $i ?>" placeholder="0"
+																				name="QtdProdutoIncremento2<?php echo $i ?>" value="<?php echo $item_promocao2[$i]['QtdProdutoIncremento'] ?>">
 																	</div>
 																	<div class="col-md-2">
 																		<label for="ValorProduto2">ValorEmbal <?php echo $i ?>*</label>
@@ -685,11 +685,6 @@
 																		<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto3<?php echo $i ?>" placeholder="0"
 																				name="QtdProdutoDesconto3<?php echo $i ?>" value="<?php echo $item_promocao3[$i]['QtdProdutoDesconto'] ?>">
 																	</div>
-																	<div class="col-md-1">
-																		<label for="QtdProdutoIncremento3">QtdEmb<?php echo $i ?>:</label>
-																		<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento3<?php echo $i ?>" placeholder="0"
-																				name="QtdProdutoIncremento3<?php echo $i ?>" value="<?php echo $item_promocao3[$i]['QtdProdutoIncremento'] ?>">
-																	</div>
 																	<div class="col-md-5">
 																		<label for="idTab_Produtos3<?php echo $i ?>">Item <?php echo $i ?>*</label>
 																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
@@ -710,6 +705,11 @@
 																		<label for="Convdesc3">Desc. Embal <?php echo $i ?></label>
 																		<input type="text" class="form-control"  id="Convdesc3<?php echo $i ?>" <?php echo $readonly; ?>
 																				  name="Convdesc3<?php echo $i ?>" value="<?php echo $item_promocao3[$i]['Convdesc']; ?>">
+																	</div>
+																	<div class="col-md-1">
+																		<label for="QtdProdutoIncremento3">QtdEmb<?php echo $i ?>:</label>
+																		<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento3<?php echo $i ?>" placeholder="0"
+																				name="QtdProdutoIncremento3<?php echo $i ?>" value="<?php echo $item_promocao3[$i]['QtdProdutoIncremento'] ?>">
 																	</div>
 																	<div class="col-md-2">
 																		<label for="ValorProduto3">ValorEmbal <?php echo $i ?>*</label>

@@ -112,7 +112,15 @@ class Catprod_model extends CI_Model {
     }	
 	
     public function get_catprod($data) {
-        $query = $this->db->query('SELECT * FROM Tab_Catprod WHERE idTab_Catprod = ' . $data);
+        $query = $this->db->query('
+							SELECT 
+								* 
+							FROM 
+								Tab_Catprod AS TCT
+									LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TCT.TipoCatprod
+							WHERE 
+								TCT.idTab_Catprod = ' . $data . '
+		');
         $query = $query->result_array();
 
         /*

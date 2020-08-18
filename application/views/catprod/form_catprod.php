@@ -5,9 +5,9 @@
 
 	<div class="panel panel-<?php echo $panel; ?>">
 		<div class="panel-heading">
-			<?php echo $titulo; ?> Catprod
+			<?php echo $titulo; ?> Categoria
 			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/catprod" role="button">
-				<span class="glyphicon glyphicon-search"></span> Catprod
+				<span class="glyphicon glyphicon-search"></span> Categoria
 			</a>
 			<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/estoque" role="button">
 				<span class="glyphicon glyphicon-search"></span> Estoque
@@ -23,6 +23,28 @@
 				<div class="panel panel-info">
 					<div class="panel-heading">	
 						<div class="row">
+							<div class="col-md-3">
+								<label for="TipoCatprod">Prod/Serv*</label>								
+								<?php if ($metodo == 1) { ?>	
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> 
+											id="TipoCatprod" name="TipoCatprod">
+										<option value="">-- Sel.a Opção --</option>
+										<?php
+										foreach ($select['TipoCatprod'] as $key => $row) {
+											if ($catprod['TipoCatprod'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+									<?php echo form_error('TipoCatprod'); ?>
+								<?php } else { ?>
+									<br>
+									<?php echo '<strong>" ' . $_SESSION['Catprod']['Prod_Serv'] . ' "</strong>' ?>
+								<?php } ?>
+							</div>
 							<div class="col-md-3">
 								<label for="Catprod">Categoria*</label><br>
 								<input type="text" class="form-control" maxlength="200"
