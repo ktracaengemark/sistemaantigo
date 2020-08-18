@@ -89,7 +89,6 @@ class Orcatrata_model extends CI_Model {
 				App_OrcaTrata AS OT 
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Tab_FormaPag AS FP ON FP.idTab_FormaPag = OT.FormaPagamento
-					
 					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = OT.Entregador
 			WHERE 
 				idApp_OrcaTrata = ' . $data . '
@@ -107,6 +106,33 @@ class Orcatrata_model extends CI_Model {
 
         return $query[0];
     }
+	
+    public function get_orcatrata2($data) {
+        $query = $this->db->query('
+			SELECT * 
+			FROM 
+				App_OrcaTrata AS OT 
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+					LEFT JOIN Tab_FormaPag AS FP ON FP.idTab_FormaPag = OT.FormaPagamento
+					LEFT JOIN Tab_AVAP AS TAVAP ON TAVAP.Abrev2 = OT.AVAP
+					LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
+					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = OT.Entregador
+			WHERE 
+				idApp_OrcaTrata = ' . $data . '
+		');
+        $query = $query->result_array();
+
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query[0];
+    }	
 
     public function get_cliente($data) {
         $query = $this->db->query('SELECT * FROM App_Cliente WHERE idApp_Cliente = ' . $data);

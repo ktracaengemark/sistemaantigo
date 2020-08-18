@@ -24,7 +24,7 @@
 		<?php echo (isset($list)) ? $list : FALSE ?>	
 	</div>
 </div>
-<?php echo form_open('relatorio/produtos', 'role="form"'); ?>
+<?php echo form_open('relatorio/produtos2', 'role="form"'); ?>
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content">
@@ -35,28 +35,13 @@
 			<div class="modal-footer">
 				<div class="form-group">	
 					<div class="row text-left">
-						<div class="col-md-8">
+						<div class="col-md-12">
 							<label for="Ordenamento">Produto</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
 									id="Produtos" name="Produtos">
 								<?php
 								foreach ($select['Produtos'] as $key => $row) {
 									if ($query['Produtos'] == $key) {
-										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-									} else {
-										echo '<option value="' . $key . '">' . $row . '</option>';
-									}
-								}
-								?>
-							</select>
-						</div>
-						<div class="col-md-4">
-							<label for="Ordenamento">V/C/A</label>
-							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-									id="TipoProduto" name="TipoProduto">
-								<?php
-								foreach ($select['TipoProduto'] as $key => $row) {
-									if ($query['TipoProduto'] == $key) {
 										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 									} else {
 										echo '<option value="' . $key . '">' . $row . '</option>';
@@ -77,6 +62,21 @@
 								<?php
 								foreach ($select['Prodaux3'] as $key => $row) {
 									if ($query['Prodaux3'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<label for="Ordenamento">V/C/A</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="TipoProduto" name="TipoProduto">
+								<?php
+								foreach ($select['TipoProduto'] as $key => $row) {
+									if ($query['TipoProduto'] == $key) {
 										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 									} else {
 										echo '<option value="' . $key . '">' . $row . '</option>';

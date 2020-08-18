@@ -90,10 +90,10 @@
 		<div class="row">	
 			<div class="panel panel-info">
 				<div class="panel-heading">
+					<!--
 					<div class="panel-heading">	
 						<div class="row">
 							<div class="panel-heading col-md-3 text-left">
-								<!--<img alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>" class="img-responsive" width='120'>-->
 								<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>" class="img-responsive" width='120'>
 							</div>
 							<div class="col-md-9 text-left">
@@ -110,7 +110,26 @@
 															
 							</div>						
 						</div>
-					</div>	
+					</div>
+					-->
+					<table class="table table-bordered table-condensed table-striped">
+						<tbody>
+							<tr>
+								<td class="col-md-4 text-center" scope="col"><img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>" class="img-responsive" width='200'></td>
+								<td class="col-md-8 text-center" scope="col"><h3><?php echo '<strong>' . $query['NomeEmpresa'] . '</strong>' ?></h3>
+								<h4>CNPJ:<?php echo '<strong>' . $orcatrata['Cnpj'] . '</strong>' ?></h4>
+								<h4>Endereço:<?php echo '<small>' . $orcatrata['EnderecoEmpresa'] . '</small> <small>' . $orcatrata['NumeroEmpresa'] . '</small> <small>' . $orcatrata['ComplementoEmpresa'] . '</small><br>
+														<small>' . $orcatrata['BairroEmpresa'] . '</small> - <small>' . $orcatrata['MunicipioEmpresa'] . '</small> - <small>' . $orcatrata['EstadoEmpresa'] . '</small>' ?></h4>
+								<h5>Colab.:<?php echo '<strong>' . $usuario['Nome'] . '</strong>' ?></h5>
+								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>								
+								
+								<h4 class="text-center">Orçamento<?php echo ' - <strong>' . $query['idApp_OrcaTrata'] . '</strong>' ?> </h4>
+								
+								<?php } ?></td>
+							</tr>
+						</tbody>
+					</table>
+						
 					<div class="panel-body">
 
 						<!--<hr />-->
@@ -176,7 +195,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<?php } else echo '<h3 class="text-left">S/Produtos Entregues </h3>';{?>
+						<?php } else echo '<h3 class="text-left">S/Produtos</h3>';{?>
 						<?php } ?>
 						<?php } ?>
 						
@@ -214,7 +233,7 @@
 
 							</tbody>
 						</table>
-						<?php } else echo '<h3 class="text-left">S/Serviços </h3>';{?>
+						<?php } else echo '<h3 class="text-left">S/Serviços</h3>';{?>
 						<?php } ?>							
 						<?php } ?>
 						
@@ -339,13 +358,15 @@
 							<thead>
 								<tr>
 									<!--<th class="col-md-4" scope="col">Tipo</th>-->
-									<th class="col-md-8" scope="col">Forma de Pagamento</th>
+									<th class="col-md-4" scope="col">Onde</th>
+									<th class="col-md-4" scope="col">Forma</th>
 									<th class="col-md-4" scope="col">Venc.</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<!--<td><?php echo $orcatrata['Modalidade'] ?> em <?php echo $orcatrata['QtdParcelasOrca'] ?> X </td>-->
+									<td><?php echo $orcatrata['OndePagar'] ?></td>
 									<td><?php echo $orcatrata['FormaPag'] ?></td>
 									<td><?php echo $orcatrata['DataVencimentoOrca'] ?></td>
 								</tr>
@@ -371,7 +392,7 @@
 							</tbody>
 						</table>						
 						<?php } ?>
-						<!--
+						
 						<?php if( isset($count['PRCount']) ) { ?>
 						<h3 class="text-left">Parcelas</h3>
 						<table class="table table-bordered table-condensed table-striped">
@@ -406,7 +427,7 @@
 						</table>
 						<?php } else echo '<h3 class="text-left">S/Parcelas </h3>';{?>
 						<?php } ?>
-						-->
+						
 						<!--
 						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<h3 class="text-left"><b>Status do Pedido</b></h3>

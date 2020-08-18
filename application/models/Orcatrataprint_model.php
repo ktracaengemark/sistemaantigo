@@ -82,7 +82,7 @@ class Orcatrataprint_model extends CI_Model {
 				EF.BairroEmpresa,
 				EF.MunicipioEmpresa,
 				EF.EstadoEmpresa,
-				
+				TAVAP.AVAP AS OndePagar,
 				MO.AVAP,
 				MO.Abrev3,
 				OT.Modalidade,
@@ -93,7 +93,8 @@ class Orcatrataprint_model extends CI_Model {
                 Tab_FormaPag AS FP,
 				App_OrcaTrata AS OT
 				LEFT JOIN Sis_Empresa AS EF ON EF.idSis_Empresa = OT.idSis_Empresa
-				LEFT JOIN Tab_TipoFinanceiro AS TP ON TP.idTab_TipoFinanceiro = OT.TipoFinanceiro				
+				LEFT JOIN Tab_TipoFinanceiro AS TP ON TP.idTab_TipoFinanceiro = OT.TipoFinanceiro
+				LEFT JOIN Tab_AVAP AS TAVAP ON TAVAP.Abrev2 = OT.AVAP
 				LEFT JOIN Tab_Modalidade AS MO ON MO.Abrev = OT.Modalidade
 				LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
 				LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = OT.Entregador

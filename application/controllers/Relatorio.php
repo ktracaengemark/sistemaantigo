@@ -5609,6 +5609,7 @@ class Relatorio extends CI_Controller {
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idTab_Promocao',
 			'Produtos',
+			'ProdutoDerivado',
 			'CodProd',
 			'TipoProduto',
 			'Prodaux1',
@@ -5625,10 +5626,11 @@ class Relatorio extends CI_Controller {
 
 
         $data['select']['Campo'] = array(
-			'TP.Produtos' => 'Produto',
-			'TP.idTab_Produto' => 'id_Produto',
-			'TP.TipoProduto' => 'V/C/A',
-			'TP.CodProd' => 'Código',			
+			'TPS.Nome_Prod' => 'Produto Derivado',
+			'TCP.Catprod' => 'Categoria',
+			#'TP.idTab_Produto' => 'id_Produto',
+			#'TP.TipoProduto' => 'V/C/A',
+			#'TP.CodProd' => 'Código',			
 			#'TP.Categoria' => 'Prod/Serv',
         );
 
@@ -5638,9 +5640,11 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
+		$data['select']['ProdutoDerivado'] = $this->Relatorio_model->select_produtos1();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		//$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['Prodaux3'] = $this->Relatorio_model->select_catprod();
 		$data['select']['Prodaux4'] = $this->Relatorio_model->select_prodaux4();
 		$data['select']['TipoProduto'] = $this->Relatorio_model->select_tipoproduto();
 
@@ -5649,6 +5653,7 @@ class Relatorio extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
+			$data['bd']['ProdutoDerivado'] = $data['query']['ProdutoDerivado'];
 			$data['bd']['CodProd'] = $data['query']['CodProd'];
 			$data['bd']['Categoria'] = $data['query']['Categoria'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
@@ -5705,11 +5710,7 @@ class Relatorio extends CI_Controller {
 
         $data['select']['Campo'] = array(
 			'TP.Produtos' => 'Produto',			
-			'TP3.Prodaux3' => 'Categoria',
-			'TP.Prodaux2' => 'Tipo',			
-			'TP.Prodaux1' => 'Esp.',
-			'TP.TipoProduto' => 'V/C/A',
-			'TP.CodProd' => 'Código',
+			'TCP.Catprod' => 'Categoria',
 			#'TP.Categoria' => 'Prod/Serv',
         );
 
@@ -5721,7 +5722,8 @@ class Relatorio extends CI_Controller {
         $data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		//$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['Prodaux3'] = $this->Relatorio_model->select_catprod();
 		$data['select']['TipoProduto'] = $this->Relatorio_model->select_tipoproduto();
 
         $data['titulo'] = 'Produtos';

@@ -158,7 +158,7 @@
 											<?php if ($metodo > 1) { ?>
 												<div class="row">
 													<div class="col-md-12">	
-														<label for="Produtos">Produto*</label><br>
+														<label for="Produtos">Modelo*</label><br>
 														<input type="text" class="form-control" maxlength="200"
 																name="Produtos" id="Produtos" value="<?php echo $produtos['Produtos'] ?>">
 														<?php echo form_error('Produtos'); ?>

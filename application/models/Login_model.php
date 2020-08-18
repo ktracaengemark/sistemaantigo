@@ -582,28 +582,28 @@ class Login_model extends CI_Model {
         if ($data === TRUE) {
             $array = $this->db->query(					
 				'SELECT                
-				idSis_Empresa,
-				CONCAT(NomeEmpresa, " ", "(", " ", idSis_Empresa, " ", ")" ) as NomeEmpresa				
-            FROM
-                Sis_Empresa					
-			WHERE
-				idSis_Empresa = ' . $_SESSION['Empresa']['idSis_Empresa'] . '
-			ORDER BY 
-				NomeEmpresa ASC'
-    );
+					idSis_Empresa,
+					CONCAT(NomeEmpresa, " ", "(", " ", idSis_Empresa, " ", ")" ) as NomeEmpresa				
+				FROM
+					Sis_Empresa					
+				WHERE
+					idSis_Empresa = ' . $_SESSION['Empresa']['idSis_Empresa'] . '
+				ORDER BY 
+					NomeEmpresa ASC'
+			);
 					
         } else {
             $query = $this->db->query(
                 'SELECT                
-				idSis_Empresa,
-				CONCAT(NomeEmpresa, " ", "(", " ", idSis_Empresa, " ", ")" ) as NomeEmpresa					
-            FROM
-                Sis_Empresa					
-			WHERE
-				idSis_Empresa = ' . $_SESSION['Empresa']['idSis_Empresa'] . ' 
-			ORDER BY 
-				NomeEmpresa ASC'
-    );
+					idSis_Empresa,
+					CONCAT(NomeEmpresa, " ", "(", " ", idSis_Empresa, " ", ")" ) as NomeEmpresa					
+				FROM
+					Sis_Empresa					
+				WHERE
+					idSis_Empresa = ' . $_SESSION['Empresa']['idSis_Empresa'] . ' 
+				ORDER BY 
+					NomeEmpresa ASC'
+			);
             
             $array = array();
             foreach ($query->result() as $row) {
@@ -613,5 +613,42 @@ class Login_model extends CI_Model {
 
         return $array;
     }
+	
+	public function select_empresa5($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+					idSis_Empresa,
+					CONCAT(NomeEmpresa, " ", "(", " ", idSis_Empresa, " ", ")" ) as NomeEmpresa				
+				FROM
+					Sis_Empresa					
+				WHERE
+					idSis_Empresa = ' . $_SESSION['Acesso']['idSis_Empresa'] . '
+				ORDER BY 
+					NomeEmpresa ASC'
+			);
+					
+        } else {
+            $query = $this->db->query(
+                'SELECT                
+					idSis_Empresa,
+					CONCAT(NomeEmpresa, " ", "(", " ", idSis_Empresa, " ", ")" ) as NomeEmpresa					
+				FROM
+					Sis_Empresa					
+				WHERE
+					idSis_Empresa = ' . $_SESSION['Acesso']['idSis_Empresa'] . '
+				ORDER BY 
+					NomeEmpresa ASC'
+			);
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_Empresa] = $row->NomeEmpresa;
+            }
+        }
+
+        return $array;
+    }	
 	
 }

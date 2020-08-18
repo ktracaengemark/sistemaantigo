@@ -19,9 +19,10 @@
 							<th class="active" scope="col">ImgProd</th>
 							<th class="active" scope="col">Editar</th>
 							<th class="active">Id.P</th>
-							<th class="active">Id.M</th>
+							<th class="active">Id.PD</th>
 							<th class="active">Código</th>
-							<th class="active">Produto</th>
+							<th class="active">Categoria</th>
+							<th class="active">Produtos Derivados</th>
 						</tr>
 					</thead>
 
@@ -45,9 +46,10 @@
 							</a>
 						</td>						
 						<!--<td><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>-->
-						<td><?php echo $row['idTab_Produtos'] ?></td>
 						<td><?php echo $row['idTab_Produto'] ?></td>
+						<td><?php echo $row['idTab_Produtos'] ?></td>
 						<td><?php echo $row['Cod_Prod'] ?></td>
+						<td><?php echo $row['Catprod'] ?></td>
 						<td><?php echo $row['Nome_Prod'] ?></td>
 						<?php } ?>						
 					</tbody>

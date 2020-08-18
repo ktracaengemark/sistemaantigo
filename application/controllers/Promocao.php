@@ -2709,7 +2709,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'promocao/listar/' . $data['msg']);
-				redirect(base_url() . 'relatorio/promocao/' . $data['msg']);
+				#redirect(base_url() . 'relatorio/promocao/' . $data['msg']);
+				redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
                 exit();
             //}
         //}

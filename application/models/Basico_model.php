@@ -1598,8 +1598,10 @@ if (isset($data) && $data) {
     }	
 	
 	public function select_prod_der($data = FALSE) {
-
-        if ($data === TRUE) {
+		
+		$permissao1 = isset($_SESSION['Promocao']['Mod_1']) ? 'AND TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_1'] : 'AND TPS.idTab_Produto = "0"';
+        
+		if ($data === TRUE) {
             $array = $this->db->query('
             SELECT
                 TPS.idTab_Produtos,
@@ -1614,8 +1616,8 @@ if (isset($data) && $data) {
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_1'] . '
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+				' . $permissao1 . '
 			ORDER BY
 				TPS.Nome_Prod ASC
     ');
@@ -1634,8 +1636,8 @@ if (isset($data) && $data) {
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2			
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_1'] . '
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+				' . $permissao1 . '
 			ORDER BY
 				TPS.Nome_Prod ASC
     ');
@@ -1651,6 +1653,8 @@ if (isset($data) && $data) {
 	
 	public function select_prod_der2($data = FALSE) {
 
+		$permissao2 = isset($_SESSION['Promocao']['Mod_2']) ? 'AND TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_2'] : 'AND TPS.idTab_Produto = "0"';
+		
         if ($data === TRUE) {
             $array = $this->db->query('
             SELECT
@@ -1666,8 +1670,8 @@ if (isset($data) && $data) {
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_2'] . '
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
+				' . $permissao2 . '
 			ORDER BY
 				TPS.Nome_Prod ASC
     ');
@@ -1686,8 +1690,8 @@ if (isset($data) && $data) {
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_2'] . '
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+				' . $permissao2 . '
 			ORDER BY
 				TPS.Nome_Prod ASC
     ');
@@ -1703,6 +1707,8 @@ if (isset($data) && $data) {
 	
 	public function select_prod_der3($data = FALSE) {
 
+		$permissao3 = isset($_SESSION['Promocao']['Mod_3']) ? 'AND TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_3'] : 'AND TPS.idTab_Produto = "0"';
+	
         if ($data === TRUE) {
             $array = $this->db->query('
             SELECT
@@ -1718,8 +1724,8 @@ if (isset($data) && $data) {
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_3'] . '
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+				' . $permissao3 . '
 			ORDER BY
 				TPS.Nome_Prod ASC
     ');
@@ -1738,8 +1744,8 @@ if (isset($data) && $data) {
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2				
             WHERE
                 TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_3'] . '
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+				' . $permissao3 . '
 			ORDER BY
 				TPS.Nome_Prod ASC
     ');

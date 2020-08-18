@@ -406,14 +406,16 @@
 											<tr>	
 												
 												<th class="col-md-3" scope="col">Total</th>
+												<th class="col-md-3" scope="col">Onde</th>
 												<th class="col-md-3" scope="col">Forma</th>
-												<th class="col-md-3" scope="col">TrcP/</th>
-												<th class="col-md-3" scope="col">Trc</th>
+												<th class="col-md-2" scope="col">TrcP/</th>
+												<th class="col-md-2" scope="col">Trc</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>	
 												<td>R$ <?php echo number_format($orcatrata['ValorTotalOrca'], 2, ',', '.') ?></td>
+												<td><?php echo $orcatrata['AVAP'] ?></td>
 												<td><?php echo $orcatrata['FormaPag'] ?></td>
 												<td>R$ <?php echo number_format($orcatrata['ValorDinheiro'], 2, ',', '.') ?></td>
 												<td>R$ <?php echo number_format($orcatrata['ValorTroco'], 2, ',', '.') ?></td>
@@ -1000,7 +1002,7 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<div type="button" data-toggle="collapse" data-target="#Pagamentoonline" aria-expanded="false" aria-controls="Pagamentoonline">
-										 <b>Pagamento OnLine</b>
+										Aguardando <b>Pagamento OnLine</b>
 									</div>					
 								</div>
 								<div <?php echo $collapse; ?> id="Pagamentoonline">

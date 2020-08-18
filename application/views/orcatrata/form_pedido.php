@@ -44,7 +44,7 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<div type="button" data-toggle="collapse" data-target="#Pagamentoonline" aria-expanded="false" aria-controls="Pagamentoonline">
-										 <b>Pagamento OnLine</b>
+										Aguardando <b>Pagamento OnLine</b>
 									</div>					
 								</div>
 								<div <?php echo $collapse; ?> id="Pagamentoonline">

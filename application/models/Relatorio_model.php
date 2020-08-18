@@ -7504,13 +7504,14 @@ exit();*/
 
 	public function list_produtos2($data, $completo) {
 
-		#$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
-		#$data['TipoProduto'] = ($data['TipoProduto']) ? ' AND TTP.idTab_TipoProduto = ' . $data['TipoProduto'] : FALSE;
+		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
+		$data['Prodaux3'] = ($data['Prodaux3']) ? ' AND TP.Prodaux3 = ' . $data['Prodaux3'] : FALSE;
+		$data['TipoProduto'] = ($data['TipoProduto']) ? ' AND TP.TipoProduto = ' . $data['TipoProduto'] : FALSE;
 		#$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
 		#$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
         #$data['Prodaux3'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
 		#$data['Prodaux4'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux4']) ? ' AND TP3.idTab_Prodaux4 = ' . $data['Prodaux4'] : FALSE;
-		$data['Campo'] = (!$data['Campo']) ? 'TP4.Prodaux4' : $data['Campo'];
+		$data['Campo'] = (!$data['Campo']) ? 'TP.Produtos' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 
         $query = $this->db->query('
@@ -7518,21 +7519,28 @@ exit();*/
                 TP.idTab_Produto,
 				TP.TipoProduto,
 				TP.CodProd,
+				TP.Prodaux3,
 				TP.Produtos,
 				TP.ValorProdutoSite,
 				TP.Comissao,
 				TP.PesoProduto,
 				TP.Arquivo,
 				TP.Ativo,
-				TP.VendaSite
+				TP.VendaSite,
+				TCP.Catprod,
+				TTP.Abrev,
+				TTP.TipoProduto
             FROM
                 Tab_Produto AS TP
-
+					LEFT JOIN Tab_Catprod AS TCP ON TCP.idTab_Catprod = TP.Prodaux3
+					LEFT JOIN Tab_TipoProduto AS TTP ON TTP.Abrev = TP.TipoProduto
             WHERE
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+				' . $data['Prodaux3'] . '
+				' . $data['Produtos'] . '
 			ORDER BY 
-				TP.idTab_Produto DESC
+				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
 		
         ');
 
@@ -7578,11 +7586,13 @@ exit();*/
 	
 	public function list_produtos($data, $completo) {
 
-		#$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
+		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
+		$data['ProdutoDerivado'] = ($data['ProdutoDerivado']) ? ' AND TPS.idTab_Produtos = ' . $data['ProdutoDerivado'] : FALSE;
+		$data['Prodaux3'] = ($data['Prodaux3']) ? ' AND TP.Prodaux3 = ' . $data['Prodaux3'] : FALSE;
 		#$data['TipoProduto'] = ($data['TipoProduto']) ? ' AND TTP.idTab_TipoProduto = ' . $data['TipoProduto'] : FALSE;
 		#$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
 		#$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
-        $data['Prodaux3'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
+        #$data['Prodaux3'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;
 		#$data['Prodaux4'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux4']) ? ' AND TP3.idTab_Prodaux4 = ' . $data['Prodaux4'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'TP.Produtos' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
@@ -7604,19 +7614,20 @@ exit();*/
 				TP.PesoProduto,
 				TP.Ativo,
 				TP.VendaSite,
-				TP3.idTab_Prodaux3,
-				TP3.Prodaux3
+				TCP.Catprod
             FROM
                 Tab_Produtos AS TPS
 					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TPS.idTab_Produto
-					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
+					LEFT JOIN Tab_Catprod AS TCP ON TCP.idTab_Catprod = TP.Prodaux3
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2
 					
             WHERE
-                TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+                TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				' . $data['Prodaux3'] . '
+				' . $data['Produtos'] . '
+				' . $data['ProdutoDerivado'] . '
 			ORDER BY
 				' . $data['Campo'] . '
 				' . $data['Ordenamento'] . ', 
@@ -9434,7 +9445,7 @@ exit();*/
         $array = array();
         $array[0] = ':: Todos ::';
         foreach ($query->result() as $row) {
-            $array[$row->idTab_TipoProduto] = $row->TipoProduto;
+            $array[$row->Abrev] = $row->TipoProduto;
         }
 
         return $array;
@@ -9709,6 +9720,30 @@ exit();*/
 
         return $array;
     }
+
+	public function select_catprod() {
+		
+        $query = $this->db->query('
+            SELECT
+                P.idTab_Catprod,
+                P.Catprod
+            FROM
+                Tab_Catprod AS P
+            WHERE
+                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+            ORDER BY
+                Catprod ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idTab_Catprod] = $row->Catprod;
+        }
+
+        return $array;
+    }
+	
 	
 	public function select_produtos1() {
 		
@@ -9743,7 +9778,7 @@ exit();*/
         $query = $this->db->query('
             SELECT
                 OB.idTab_Produto,
-				CONCAT(IFNULL(OB.CodProd,""), " - ", IFNULL(TP3.Prodaux3,""), " - ", IFNULL(OB.Produtos,""), " - ", IFNULL(TP1.Prodaux1,""), " - ", IFNULL(TP2.Prodaux2,""), " -R$ ", IFNULL(TV.ValorProduto,"")) AS Produtos,
+				CONCAT(IFNULL(OB.Produtos,"")) AS Produtos,
 				TP1.Prodaux1,
 				TP2.Prodaux2,
 				TP3.Prodaux3,
