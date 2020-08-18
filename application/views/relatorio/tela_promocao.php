@@ -13,7 +13,7 @@
 							<span class="glyphicon glyphicon-filter"></span>Filtro de Promoções
 						</button>
 						<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-							<span class="glyphicon glyphicon-plus"></span> Nova Promoção
+							<span class="glyphicon glyphicon-plus"></span> Nova Promoção/Preço de Venda
 						</button>
 					</div>
 				</div>	
@@ -130,7 +130,7 @@
 					<div class="form-group col-md-4">
 						<div class="form-footer">		
 							<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-								<span class="glyphicon glyphicon-plus"></span> Nova Promoção
+								<span class="glyphicon glyphicon-plus"></span> Nova Promoção/Preço de Venda
 							</button>							
 						</div>	
 					</div>					
@@ -171,7 +171,7 @@
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
 						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar4" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Nova Promocao
+							<span class="glyphicon glyphicon-plus"></span> Nova Promocao/Preço de Venda
 						</a>
 					</div>	
 				</div>
