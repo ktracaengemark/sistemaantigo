@@ -455,15 +455,17 @@
 														}
 														?>
 													</div>
-													<!--																			
+																																
 													<div class="panel panel-default">
 														<div class="panel-heading text-left">
 															<div class="row">
 																<div class="col-md-3 text-center">
+																	<!--
 																	<a class="add_field_button10  btn btn-danger" 
 																			onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
 																		<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Serviços
 																	</a>
+																	-->
 																</div>
 																<div class="col-md-3 text-center">	
 																	<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
@@ -494,7 +496,7 @@
 															</div>
 														</div>
 													</div>
-													-->
+													
 													<input type="hidden" name="CountMax2" id="CountMax2" value="<?php echo $ServicoSoma ?>">
 
 												

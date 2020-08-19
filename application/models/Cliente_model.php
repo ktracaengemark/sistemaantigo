@@ -177,7 +177,8 @@ class Cliente_model extends CI_Model {
 				'SELECT                
 				idApp_Cliente,
 				CelularCliente,
-				CONCAT(IFNULL(idApp_Cliente,""), " - ", IFNULL(NomeCliente,""), " - ", IFNULL(CelularCliente,"")) AS NomeCliente
+				RegistroFicha,
+				CONCAT(IFNULL(idApp_Cliente,""), " - ", IFNULL(NomeCliente,""), " - ", IFNULL(CelularCliente,""), " - FCH:", IFNULL(RegistroFicha,"")) AS NomeCliente
             FROM
                 App_Cliente					
             WHERE
@@ -191,7 +192,8 @@ class Cliente_model extends CI_Model {
                 'SELECT                
 				idApp_Cliente,
 				CelularCliente,
-				CONCAT(IFNULL(idApp_Cliente,""), " - ", IFNULL(NomeCliente,""), " - ", IFNULL(CelularCliente,"")) AS NomeCliente		
+				RegistroFicha,
+				CONCAT(IFNULL(idApp_Cliente,""), " - ", IFNULL(NomeCliente,""), " - ", IFNULL(CelularCliente,""), " - FCH:", IFNULL(RegistroFicha,"")) AS NomeCliente		
             FROM
                 App_Cliente					
             WHERE

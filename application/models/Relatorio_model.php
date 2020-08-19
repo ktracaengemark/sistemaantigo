@@ -6945,6 +6945,7 @@ exit();*/
 				C.EstadoCliente,
                 CONCAT(M.NomeMunicipio, "/", M.Uf) AS MunicipioCliente,
                 C.Email,
+				C.RegistroFicha,
 				C.usuario,
 				C.senha,
 				C.CodInterno

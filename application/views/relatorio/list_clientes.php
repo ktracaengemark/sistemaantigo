@@ -15,6 +15,7 @@
 						<th class=" col-md-1" scope="col">Foto</th>
 						<th class="active">id</th>
 						<th class="active">Cliente</th>
+						<th class="active">Ficha</th>
 						<th class="active">Sexo</th>
 						<th class="active">Celular</th>
 						<th class="active">Telefone2</th>
@@ -48,6 +49,7 @@
 						<td><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/clientes/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>
 						<td><?php echo $row['idApp_Cliente'] ?></td>
 						<td><?php echo $row['NomeCliente'] ?></td>
+						<td><?php echo $row['RegistroFicha'] ?></td>
 						<td><?php echo $row['Sexo'] ?></td>
 						<td><?php echo $row['CelularCliente'] ?></td>
 						<td><?php echo $row['Telefone2'] ?></td>
