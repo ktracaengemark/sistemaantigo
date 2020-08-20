@@ -169,7 +169,8 @@ class Cliente2 extends CI_Controller {
                 $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Cliente', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
-                redirect(base_url() . 'relatorio2/clientes3/');
+                //redirect(base_url() . 'relatorio2/clientes3/');
+				redirect(base_url() . 'cliente2/prontuario2/' . $data['idApp_Cliente'] . $data['msg']);
                 exit();
             }
         }
@@ -309,7 +310,8 @@ class Cliente2 extends CI_Controller {
                     $data['msg'] = '?m=1';
                 }
 
-                redirect(base_url() . 'relatorio2/clientes3');
+                //redirect(base_url() . 'relatorio2/clientes3');
+				redirect(base_url() . 'cliente2/prontuario2/' . $data['idApp_Cliente'] . $data['msg']);
                 exit();
             }
         }
@@ -337,7 +339,7 @@ class Cliente2 extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-    public function pesquisar() {
+    public function pesquisar2() {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -370,26 +372,24 @@ class Cliente2 extends CI_Controller {
             if ($data['query']->num_rows() == 1) {
                 $info = $data['query']->result_array();
 
-                if ($_SESSION['agenda'])
-                    redirect('consulta/cadastrar/' . $info[0]['idApp_Cliente'] );
-                else
-                    redirect('cliente/prontuario/' . $info[0]['idApp_Cliente'] );
+                
+                    redirect('cliente2/prontuario2/' . $info[0]['idApp_Cliente'] );
 
                 exit();
             } else {
-                $data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
+                $data['list'] = $this->load->view('cliente/list_cliente2', $data, TRUE);
             }
 			
         }
 
         ($data['Pesquisa']) ? $data['cadastrar'] = TRUE : $data['cadastrar'] = FALSE;
 
-        $this->load->view('cliente/pesq_cliente', $data);
+        $this->load->view('cliente/pesq_cliente2', $data);
 
         $this->load->view('basico/footer');
     }
 
-    public function prontuario($id) {
+    public function prontuario2($id) {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -452,7 +452,7 @@ class Cliente2 extends CI_Controller {
             $data['list'] = $this->load->view('contatocliente/list_contatocliente', $data, TRUE);
 
         $data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
-        $this->load->view('cliente/tela_cliente', $data);
+        $this->load->view('cliente/tela_cliente2', $data);
 
         $this->load->view('basico/footer');
     }

@@ -1,5 +1,4 @@
 <br>
-
 <table class="table table-hover">
     <thead>
         <tr>
@@ -19,10 +18,8 @@
 
         foreach ($query->result_array() as $row) {
             
-            if (isset($_SESSION['agenda']))
-                $url = base_url() . 'consulta/cadastrar/' . $row['idApp_Cliente'];
-            else
-                $url = base_url() . 'cliente/prontuario/' . $row['idApp_Cliente'];
+            
+			$url = base_url() . 'cliente2/prontuario2/' . $row['idApp_Cliente'];
                     
             echo '<tr class="clickable-row" data-href="' . $url . '">';
                 echo '<td>' . $row['idApp_Cliente'] . '</td>';

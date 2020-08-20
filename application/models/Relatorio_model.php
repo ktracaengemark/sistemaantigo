@@ -8932,7 +8932,7 @@ exit();*/
         $query = $this->db->query('
             SELECT
                 C.idApp_Cliente,
-                CONCAT(IFNULL(C.idApp_Cliente, ""), " --- ", IFNULL(C.NomeCliente, ""), " --- ", IFNULL(C.CelularCliente, ""), " --- ", IFNULL(C.Telefone2, ""), " --- ", IFNULL(C.Telefone3, "")) As NomeCliente
+                CONCAT(IFNULL(C.idApp_Cliente, ""), " --- ", IFNULL(C.NomeCliente, ""), " --- ", IFNULL(C.CelularCliente, ""), " --- ", IFNULL(C.RegistroFicha, ""), " --- ", IFNULL(C.Telefone, ""), " --- ", IFNULL(C.Telefone2, ""), " --- ", IFNULL(C.Telefone3, "")) As NomeCliente
             FROM
                 App_Cliente AS C
 
@@ -9749,8 +9749,7 @@ exit();*/
 
         return $array;
     }
-	
-	
+		
 	public function select_produtos1() {
 		
         $query = $this->db->query('

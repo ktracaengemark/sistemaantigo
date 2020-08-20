@@ -13,15 +13,18 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">		
 			<ul class="nav navbar-nav navbar-center">
+				
 				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
-						<a href="<?php echo base_url(); ?>relatorio2/clientes3" role="button">
+						<!--<a href="<?php echo base_url(); ?>relatorio2/clientes3" role="button">-->
+						<a href="<?php echo base_url(); ?>cliente2/pesquisar2" role="button">
 							<button type="button" class="btn btn-lg btn-warning ">
 								<span class="glyphicon glyphicon-search"></span> Clientes
 							</button>
 						</a>						
 					</div>					
-				</li>				
+				</li>
+				
 				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
 						<a type="button" class="btn btn-lg btn-default " href="javascript:window.close()">

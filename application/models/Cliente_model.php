@@ -141,12 +141,13 @@ class Cliente_model extends CI_Model {
         $query = $this->db->query('SELECT * '
                 . 'FROM App_Cliente WHERE '
                 . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
-                . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND '
+				#. '(NomeCliente like "%' . $data . '%" ) '
                 . '(NomeCliente like "%' . $data . '%" OR '
+				. ' RegistroFicha like "%' . $data . '%" OR '
                 #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
                 #. 'NomeCliente like "%' . $data . '%" OR '
-                . 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
-                . 'CelularCliente like "%' . $data . '%" OR Telefone2 like "%' . $data . '%" OR Telefone3 like "%' . $data . '%") '
+                #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
+                . 'CelularCliente like "%' . $data . '%" OR Telefone like "%' . $data . '%" OR Telefone2 like "%' . $data . '%" OR Telefone3 like "%' . $data . '%") '
                 . 'ORDER BY NomeCliente ASC ');
         /*
           echo $this->db->last_query();
@@ -178,7 +179,7 @@ class Cliente_model extends CI_Model {
 				idApp_Cliente,
 				CelularCliente,
 				RegistroFicha,
-				CONCAT(IFNULL(idApp_Cliente,""), " - ", IFNULL(NomeCliente,""), " - ", IFNULL(CelularCliente,""), " - FCH:", IFNULL(RegistroFicha,"")) AS NomeCliente
+				CONCAT(IFNULL(idApp_Cliente,""), " - ", IFNULL(NomeCliente,""), " - ", IFNULL(CelularCliente,""), " - ", IFNULL(Telefone,""), " - ", IFNULL(Telefone2,""), " - FCH:", IFNULL(RegistroFicha,"")) AS NomeCliente
             FROM
                 App_Cliente					
             WHERE
@@ -193,7 +194,7 @@ class Cliente_model extends CI_Model {
 				idApp_Cliente,
 				CelularCliente,
 				RegistroFicha,
-				CONCAT(IFNULL(idApp_Cliente,""), " - ", IFNULL(NomeCliente,""), " - ", IFNULL(CelularCliente,""), " - FCH:", IFNULL(RegistroFicha,"")) AS NomeCliente		
+				CONCAT(IFNULL(idApp_Cliente,""), " - ", IFNULL(NomeCliente,""), " - ", IFNULL(CelularCliente,""), " - ", IFNULL(Telefone,""), " - ", IFNULL(Telefone2,""), " - FCH:", IFNULL(RegistroFicha,"")) AS NomeCliente		
             FROM
                 App_Cliente					
             WHERE
