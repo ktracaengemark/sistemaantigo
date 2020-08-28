@@ -3,8 +3,7 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <!--<th colspan="3">Total encontrado: <?php echo $query->num_rows(); ?> resultado(s)</th>-->
-			<th colspan="3">Total encontrado: <?php echo $total; ?> resultado(s)</th>
+            <th colspan="3">Total encontrado: <?php echo $query->num_rows(); ?> resultado(s)</th>
         </tr>
     </thead>	
     <thead>
@@ -38,11 +37,10 @@
     </tbody>
     <tfoot>
         <tr>
-            <!--<th colspan="3">Total encontrado: <?php echo $query->num_rows(); ?> resultado(s)</th>-->
-			<th colspan="3">Total encontrado: <?php echo $total; ?> resultado(s)</th>
+            <th colspan="3">Total encontrado: <?php echo $query->num_rows(); ?> resultado(s)</th>
         </tr>
     </tfoot>
 </table>
-<div class="text-center"><?php echo $pagination; ?></div>
+
 
 

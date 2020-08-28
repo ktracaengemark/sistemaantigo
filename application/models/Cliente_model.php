@@ -136,7 +136,7 @@ class Cliente_model extends CI_Model {
 
     }    
 
-    public function lista_cliente($data, $x) {
+    public function lista_cliente_ORIG($data, $x) {
 
         $query = $this->db->query('SELECT * '
                 . 'FROM App_Cliente WHERE '
@@ -148,7 +148,8 @@ class Cliente_model extends CI_Model {
                 #. 'NomeCliente like "%' . $data . '%" OR '
                 #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
                 . 'CelularCliente like "%' . $data . '%" OR Telefone like "%' . $data . '%" OR Telefone2 like "%' . $data . '%" OR Telefone3 like "%' . $data . '%") '
-                . 'ORDER BY NomeCliente ASC ');
+                . 'ORDER BY NomeCliente ASC '
+				. 'limit 10 ');
         /*
           echo $this->db->last_query();
           echo "<pre>";
@@ -170,6 +171,156 @@ class Cliente_model extends CI_Model {
             }
         }
     }
+	
+    public function lista_cliente($data, $data2, $data3, $x, $qtde=0, $page=0) {
+			/*
+			echo "<pre>";
+			print_r($data);
+			echo "<br>";
+			print_r($data2);
+			echo "<br>";
+			print_r($data3);
+			echo "<br>";
+			print_r($x);
+			echo "<br>";
+			print_r($qtde);
+			echo "<br>";
+			print_r($page);
+			echo "<br>";
+			echo "</pre>";
+			exit();
+			*/
+		//if($qtde > 0) $this->db->limit($qtde, $page);	
+		$ficha = ($data) ? ' AND RegistroFicha like "%' . $data . '%" ' : FALSE;
+		$nomedocliente = ($data2) ? ' AND NomeCliente like "%' . $data2 . '%" ' : FALSE;
+		$telefonedocliente = ($data3) ? ' AND (CelularCliente like "%' . $data3 . '%" OR Telefone like "%' . $data3 . '%" OR Telefone2 like "%' . $data3 . '%" OR Telefone3 like "%' . $data3 . '%") ' : FALSE;
+			$querylimit = '';
+        if ($qtde)
+            $querylimit = 'LIMIT ' . $page . ', ' . $qtde;
+        $query = $this->db->query('SELECT * '
+                . 'FROM App_Cliente WHERE '
+                . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  '
+				//. 'NomeCliente like "%' . $data . '%" '
+				. $nomedocliente
+				. $ficha
+				. $telefonedocliente
+				//. '(NomeCliente like "%' . $data . '%" ) '
+				//. '(NomeCliente like "%MARIA%" ) '
+				//. 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ''
+                #. '(NomeCliente like "%' . $data . '%" OR '
+				
+				//. '(NomeCliente like "%' . $data . '%" AND'
+				//. ' RegistroFicha like "%' . $data2 . '%" ) '
+				
+				//. ' AND RegistroFicha like "%' . $data . '%"'
+				//. $ficha
+				//. $nomedocliente
+				
+				
+				
+                #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
+                #. 'NomeCliente like "%' . $data . '%" OR '
+                #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
+                #. 'CelularCliente like "%' . $data . '%" OR Telefone like "%' . $data . '%" OR Telefone2 like "%' . $data . '%" OR Telefone3 like "%' . $data . '%") '
+                . 'ORDER BY NomeCliente ASC '
+				. $querylimit);
+				//. 'limit 10');
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                foreach ($query->result() as $row) {
+                    $row->DataNascimento = $this->basico->mascara_data($row->DataNascimento, 'barras');
+                }
+
+                return $query;
+            }
+        }
+    }	
+	
+    public function lista_cliente_1($data, $existe = FALSE, $total = FALSE, $limit = FALSE, $start = FALSE, $date = FALSE) {
+
+        if (preg_match("/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](1[89][0-9][0-9]|2[0189][0-9][0-9])$/", $data)) {
+            $query = 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
+                    . 'DataCadastroCliente = "' . $this->basico->mascara_data($data, 'mysql') . '" ';
+        }
+        elseif (is_numeric($data)) {
+            if($date === TRUE) {
+                $query = 'DataNascimento = "' . substr($data, 4, 4).'-'.substr($data, 2, 2).'-'.substr($data, 0, 2) . '" OR '
+                        . 'DataCadastroCliente = "' . substr($data, 4, 4).'-'.substr($data, 2, 2).'-'.substr($data, 0, 2) . '" ';
+            }
+            else
+                $query = 'RegistroFicha like "%' . $data . '%" OR '
+						. 'Telefone like "%' . $data . '%" ';
+        }
+        else
+            $query = 'NomeCliente like "%' . $data . '%" ';
+
+        $querylimit = '';
+        if ($limit)
+            $querylimit = 'LIMIT ' . $start . ', ' . $limit;
+
+        if ($existe === TRUE) {
+
+            $query = $this->db->query('SELECT * '
+                    . 'FROM App_Cliente WHERE '
+					. 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
+                    . $query
+                    . 'ORDER BY NomeCliente ASC');
+
+            if ($query->num_rows() == 0)
+                return FALSE;
+            else
+                return TRUE;
+        }
+        else {
+
+            if ($total === TRUE) {
+
+                $query = $this->db->query('SELECT * '
+                        . 'FROM App_Cliente WHERE '
+						. 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
+                        . $query
+                        . 'ORDER BY NomeCliente ASC');
+
+                return $query->num_rows();
+            }
+            else {
+
+                $query = $this->db->query('SELECT * '
+                        . 'FROM App_Cliente WHERE '
+						. 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
+                        . $query
+                        . 'ORDER BY NomeCliente ASC '
+                        . $querylimit);
+
+                /*
+                echo $this->db->last_query();
+                echo "<pre>";
+                print_r($query);
+                echo "</pre>";
+                exit();
+                */
+
+                foreach ($query->result() as $row) {
+                    $row->DataNascimento = $this->basico->mascara_data($row->DataNascimento, 'barras');
+                    $row->DataCadastroCliente = $this->basico->mascara_data($row->DataCadastroCliente, 'barras');
+                }
+
+                return $query;
+            }
+        }
+
+    }	
 	
 	public function select_cliente($data = FALSE) {
 

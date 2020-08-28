@@ -28,7 +28,7 @@ class Cliente extends CI_Controller {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-        elseif ($this->input->get('m') == 2)
+			elseif ($this->input->get('m') == 2)
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
@@ -62,6 +62,7 @@ class Cliente extends CI_Controller {
 			'DataEmissao',			
 			'CepCliente',
             'CelularCliente',
+			'Telefone',
             'Telefone2',
             'Telefone3',
 			'Ativo',
@@ -213,6 +214,7 @@ class Cliente extends CI_Controller {
 			'DataEmissao',
 			'CepCliente',
             'CelularCliente',
+			'Telefone',
             'Telefone2',
             'Telefone3',
 			'Ativo',
@@ -621,10 +623,14 @@ class Cliente extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
+		
+		
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        //$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-        $this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim|callback_get_cliente');
+        //$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'trim|callback_get_cliente');
+		//$this->form_validation->set_rules('NomeDoCliente', 'Nome do Cliente', 'trim');
+		//$this->form_validation->set_rules('TelefoneDoCliente', 'Telefone do Cliente', 'trim');
 
         if ($this->input->get('start') && $this->input->get('end')) {
             //$data['start'] = substr($this->input->get('start'),0,-3);
@@ -634,15 +640,83 @@ class Cliente extends CI_Controller {
         }
 
         $data['titulo'] = "Pesquisar Cliente";
+		
+		$this->load->library('pagination');
+		$_SESSION['Qtde'] = $config['per_page'] = 5;
+		$_SESSION['Page'] = $config["uri_segment"] = 5;
+		
+		$config['reuse_query_string'] = TRUE;
+        $config['num_links'] = 2;
+        $config['use_page_numbers'] = TRUE;
 
-        $data['Pesquisa'] = $this->input->post('Pesquisa');
+        $config['full_tag_open'] = "<ul class='pagination'>";
+        $config['full_tag_close'] = "</ul>";
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+        $config['next_tag_open'] = "<li>";
+        $config['next_tagl_close'] = "</li>";
+        $config['prev_tag_open'] = "<li>";
+        $config['prev_tagl_close'] = "</li>";
+        $config['first_tag_open'] = "<li>";
+        $config['first_tagl_close'] = "</li>";
+        $config['last_tag_open'] = "<li>";
+        $config['last_tagl_close'] = "</li>";
+
+		
+        $_SESSION['pesquisa'] = $data['Pesquisa'] = $this->input->post('Pesquisa');
+		$_SESSION['nomedocliente'] = $data['NomeDoCliente'] = $this->input->post('NomeDoCliente');
+		$_SESSION['telefone'] = $data['TelefoneDoCliente'] = $this->input->post('TelefoneDoCliente');
+		/*	
+			echo "<pre>";
+			print_r($_SESSION['pesquisa']);
+			echo "<br>";
+			print_r($_SESSION['nomedocliente']);
+			echo "<br>";
+			echo "</pre>";
+			exit();
+		*/
+		
         //echo date('d/m/Y H:i:s', $data['start'],0,-3));
 
         #run form validation
-        if ($this->form_validation->run() !== FALSE && $this->Cliente_model->lista_cliente($data['Pesquisa'], FALSE) === TRUE) {
+        //if ($this->form_validation->run() !== FALSE && $this->Cliente_model->lista_cliente($data['Pesquisa'], $data['NomeDoCliente'], $data['TelefoneDoCliente'],  FALSE) === TRUE) {
 
-            $data['query'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], TRUE);
+		$uri = (!$this->input->post('Pesquisa')) ? 4 : 4;
+
+        //if ($this->uri->segment($uri)) {
+			$config['base_url'] = base_url() . 'cliente/pesquisar/' . $data['Pesquisa'] . '/';
+			//$config['base_url'] = base_url() . 'cliente/pesquisar/';
+			//$data['total'] = $config['total_rows'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], $data['NomeDoCliente'], $data['TelefoneDoCliente'], TRUE)->num_rows();
+			$data['total'] = $config['total_rows'] = $this->Cliente_model->lista_cliente($_SESSION['pesquisa'], $_SESSION['nomedocliente'], $_SESSION['telefone'], TRUE)->num_rows();
+			$qtde = $config['per_page'];
 			
+			
+			//$page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"])) : 0;
+			$page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+			
+			$this->pagination->initialize($config);
+		
+            //$data['query'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], TRUE);
+			//$data['query'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], $data['NomeDoCliente'], $data['TelefoneDoCliente'], TRUE, $qtde, $page);
+			//$data['query'] = $this->Cliente_model->lista_cliente($_SESSION['pesquisa'], $_SESSION['nomedocliente'], $_SESSION['telefone'], TRUE, $qtde, $page);
+			$data['query'] = $this->Cliente_model->lista_cliente($_SESSION['pesquisa'], $_SESSION['nomedocliente'], $_SESSION['telefone'], TRUE, $qtde, ($page * $config["per_page"]));
+			$data['pagination'] = $this->pagination->create_links();
+			/*
+			echo "<pre>";
+			print_r($config['base_url']);
+			echo "<br>";
+			print_r($config['total_rows']);
+			echo "<br>";
+			print_r($qtde);
+			echo "<br>";
+			print_r($page);
+			echo "<br>";
+			echo "</pre>";
+			exit();
+			*/
+			/*
             if ($data['query']->num_rows() == 1) {
                 $info = $data['query']->result_array();
 
@@ -655,6 +729,107 @@ class Cliente extends CI_Controller {
             } else {
                 $data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
             }
+			*/
+			$data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
+			
+        //}
+
+        ($data['Pesquisa']) ? $data['cadastrar'] = TRUE : $data['cadastrar'] = FALSE;
+
+        $this->load->view('cliente/pesq_cliente', $data);
+
+        $this->load->view('basico/footer');
+    }
+	
+    public function pesquisar1() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		
+		
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        $this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'trim|callback_get_cliente');
+		$this->form_validation->set_rules('NomeDoCliente', 'Nome do Cliente', 'trim');
+		$this->form_validation->set_rules('TelefoneDoCliente', 'Telefone do Cliente', 'trim');
+
+        if ($this->input->get('start') && $this->input->get('end')) {
+            //$data['start'] = substr($this->input->get('start'),0,-3);
+            //$data['end'] = substr($this->input->get('end'),0,-3);
+            $_SESSION['agenda']['HoraInicio'] = substr($this->input->get('start'),0,-3);
+            $_SESSION['agenda']['HoraFim'] = substr($this->input->get('end'),0,-3);
+        }
+
+        $data['titulo'] = "Pesquisar Cliente";
+		
+		$this->load->library('pagination');
+		$_SESSION['Qtde'] = $config['per_page'] = 5;
+		$_SESSION['Page'] = $config["uri_segment"] = 4;
+		
+        $_SESSION['pesquisa'] = $data['Pesquisa'] = $this->input->post('Pesquisa');
+		$_SESSION['nomedocliente'] = $data['NomeDoCliente'] = $this->input->post('NomeDoCliente');
+		$_SESSION['telefone'] = $data['TelefoneDoCliente'] = $this->input->post('TelefoneDoCliente');
+		/*	
+			echo "<pre>";
+			print_r($_SESSION['pesquisa']);
+			echo "<br>";
+			print_r($_SESSION['nomedocliente']);
+			echo "<br>";
+			echo "</pre>";
+			exit();
+		*/
+		
+        //echo date('d/m/Y H:i:s', $data['start'],0,-3));
+
+        #run form validation
+        if ($this->form_validation->run() !== FALSE && $this->Cliente_model->lista_cliente($data['Pesquisa'], $data['NomeDoCliente'], $data['TelefoneDoCliente'],  FALSE) === TRUE) {
+
+			$config['base_url'] = base_url() . 'cliente/pesquisar/' . $data['Pesquisa'] . '/';
+			$config['total_rows'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], $data['NomeDoCliente'], $data['TelefoneDoCliente'], TRUE)->num_rows();
+			
+			$qtde = $config['per_page'];
+			$page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"])) : 0;
+			
+			
+			$this->pagination->initialize($config);
+		
+            //$data['query'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], TRUE);
+			$data['query'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], $data['NomeDoCliente'], $data['TelefoneDoCliente'], TRUE, $qtde, $page);
+			
+			$data['pagination'] = $this->pagination->create_links();
+			/*
+			echo "<pre>";
+			print_r($config['base_url']);
+			echo "<br>";
+			print_r($config['total_rows']);
+			echo "<br>";
+			print_r($qtde);
+			echo "<br>";
+			print_r($page);
+			echo "<br>";
+			echo "</pre>";
+			exit();
+			*/
+			/*
+            if ($data['query']->num_rows() == 1) {
+                $info = $data['query']->result_array();
+
+                if ($_SESSION['agenda'])
+                    redirect('consulta/cadastrar/' . $info[0]['idApp_Cliente'] );
+                else
+                    redirect('cliente/prontuario/' . $info[0]['idApp_Cliente'] );
+
+                exit();
+            } else {
+                $data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
+            }
+			*/
+			$data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
 			
         }
 
@@ -663,6 +838,122 @@ class Cliente extends CI_Controller {
         $this->load->view('cliente/pesq_cliente', $data);
 
         $this->load->view('basico/footer');
+    }
+
+    public function pesquisar2() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['titulo'] = "Pesquisar Cliente";
+        $data['novo'] = '';
+
+        $this->load->library('pagination');
+        $config['per_page'] = 25;
+        $config["uri_segment"] = 5;
+        $config['reuse_query_string'] = TRUE;
+        $config['num_links'] = 5;
+        $config['use_page_numbers'] = TRUE;
+
+        $config['full_tag_open'] = "<ul class='pagination'>";
+        $config['full_tag_close'] = "</ul>";
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+        $config['next_tag_open'] = "<li>";
+        $config['next_tagl_close'] = "</li>";
+        $config['prev_tag_open'] = "<li>";
+        $config['prev_tagl_close'] = "</li>";
+        $config['first_tag_open'] = "<li>";
+        $config['first_tagl_close'] = "</li>";
+        $config['last_tag_open'] = "<li>";
+        $config['last_tagl_close'] = "</li>";
+
+        $data['Pesquisa'] = '';
+
+        #$SESSION['Paginacao']['Pesquisa'] = (!isset($SESSION['Paginacao']['Pesquisa'])) ? '' : $SESSION['Paginacao']['Pesquisa'];
+        if (!isset($SESSION['Paginacao']['Pesquisa'])) {
+            $SESSION['Paginacao']['Pesquisa'] = '';
+            
+        }
+        else {
+            $SESSION['Paginacao']['Pesquisa'] = $SESSION['Paginacao']['Pesquisa'];
+           
+        }
+
+        #$uri = (isset($_SESSION['DataURI']) && $_SESSION['DataURI'] === TRUE) ? 7 : 4;
+        $uri = (!$this->input->post('Pesquisa')) ? 7 : 4;
+
+
+        if ($this->uri->segment($uri)) {
+
+            $data['Pesquisa'] = (isset($_SESSION['DataURI']) && $_SESSION['DataURI'] === TRUE) ? urldecode($this->uri->segment(4)).'/'.urldecode($this->uri->segment(5)).'/'.urldecode($this->uri->segment(6)) : urldecode($this->uri->segment(4));
+            
+
+            #run form validation
+            if ($this->Cliente_model->lista_cliente($data['Pesquisa'], TRUE) === TRUE) {
+
+                $config['base_url'] = base_url() . 'cliente/pesquisar/' . $data['Pesquisa'] . '/';
+                $config['total_rows'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], FALSE, TRUE);
+                ($config['total_rows'] > 1) ? $data['total_rows'] = $config['total_rows'] . ' resultados' : $config['total_rows'] . ' resultado';
+
+                $this->pagination->initialize($config);
+
+                $page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+                $data['query'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], FALSE, FALSE, $config["per_page"], ($page * $config["per_page"]));
+
+                $data['pagination'] = $this->pagination->create_links();
+
+                $data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
+            }
+        }
+        elseif ($this->input->post('Pesquisa')) {
+
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+            $this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim|callback_get_cliente');
+
+            #$data['Pesquisa'] = $this->input->post('Pesquisa');
+            #echo '<br /><br /><br /> >>> '.$this->input->post('Pesquisa').'<>'.$_SESSION['DataURI'] = (strpos($data['Pesquisa'], "/") > 0) ? TRUE : FALSE;
+            #$_SESSION['DataURI'] = (strpos($data['Pesquisa'], "/") > 0) ? TRUE : FALSE;
+            if((strpos($data['Pesquisa'], "/") > 0)) {
+                $data['Pesquisa'] = str_replace("/", "", $this->input->post('Pesquisa'));
+                $SESSION['DataURI'] = TRUE;
+            }
+            else {
+                $data['Pesquisa'] = $this->input->post('Pesquisa');
+                $SESSION['DataURI'] = FALSE;
+            }
+
+
+            #run form validation
+            if ($this->form_validation->run() !== FALSE && $this->Cliente_model->lista_cliente($data['Pesquisa'], TRUE) === TRUE) {
+
+                $config['base_url'] = base_url() . 'cliente/pesquisar/' . $data['Pesquisa'] . '/';
+                $config['total_rows'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], FALSE, TRUE);
+                ($config['total_rows'] > 1) ? $data['total_rows'] = $config['total_rows'] . ' resultados' : $data['total_rows'] = $config['total_rows'] . ' resultado';
+
+                $this->pagination->initialize($config);
+
+                $page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+                $data['query'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], FALSE, FALSE, $config["per_page"], ($page * $config["per_page"]));
+
+                $data['pagination'] = $this->pagination->create_links();
+
+                $data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
+            }
+        }
+
+		($data['Pesquisa']) ? $data['cadastrar'] = TRUE : $data['cadastrar'] = FALSE;
+        
+		$this->load->view('cliente/pesq_cliente', $data);
+
+        $this->load->view('basico/footer');		
+
     }
 
     public function prontuario($id) {
@@ -733,9 +1024,19 @@ class Cliente extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-    function get_cliente($data) {
+    function get_cliente() {
+		
+        if ($this->Cliente_model->lista_cliente($_SESSION['pesquisa'], $_SESSION['nomedocliente'], $_SESSION['telefone'], FALSE, $_SESSION['Qtde'], $_SESSION['Page']) === FALSE) {
+            $this->form_validation->set_message('get_cliente', '<strong>Cliente</strong> não encontrado.');
+            return FALSE;
+        } else {
+		return TRUE;
+        }
+    }
+	
+    function get_cliente_ORIG($data) {
 
-        if ($this->Cliente_model->lista_cliente($data, FALSE) === FALSE) {
+        if ($this->Cliente_model->lista_cliente($data, $data, FALSE) === FALSE) {
             $this->form_validation->set_message('get_cliente', '<strong>Cliente</strong> não encontrado.');
             return FALSE;
         } else {

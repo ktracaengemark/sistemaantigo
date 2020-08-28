@@ -6952,8 +6952,8 @@ exit();*/
             FROM
 				App_Cliente AS C
                     LEFT JOIN Tab_Municipio AS M ON C.MunicipioCliente = M.idTab_Municipio
-
-            WHERE
+			
+			WHERE
 
 
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
@@ -6961,6 +6961,8 @@ exit();*/
 
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
+			
+			limit 500
         ');
         /*
 
@@ -8939,7 +8941,7 @@ exit();*/
             WHERE
                 C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
             ORDER BY
-                C.NomeCliente ASC
+                C.NomeCliente ASC	
         ');
 
         $array = array();
