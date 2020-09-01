@@ -2373,42 +2373,48 @@ function adiciona_item_promocao() {
 					<div class="row">\
 						<div class="col-md-1 text-right"></div>\
 						<div class="col-md-2">\
-							<label for="AtivoPreco">Ativo? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'N">\
-								<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'S">\
-								<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
+							<label for="AtivoPreco">Ativo?</label><br>\
+							<div class="form-group">\
+								<div class="btn-group" data-toggle="buttons">\
+									<label class="btn btn-warning active" name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'N">\
+									<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
+										 autocomplete="off" value="N" checked>Não\
+									</label>\
+									<label class="btn btn-default" name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'S">\
+									<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
+										 autocomplete="off" value="S">Sim\
+									</label>\
+								</div>\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="VendaSitePreco">VendaSite? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'N">\
-								<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'S">\
-								<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
+							<label for="VendaBalcaoPreco">VendaBalcao?</label><br>\
+							<div class="form-group">\
+								<div class="btn-group" data-toggle="buttons">\
+									<label class="btn btn-warning active" name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'N">\
+									<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
+										 autocomplete="off" value="N" checked>Não\
+									</label>\
+									<label class="btn btn-default" name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'S">\
+									<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
+										 autocomplete="off" value="S">Sim\
+									</label>\
+								</div>\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="VendaBalcaoPreco">VendaBalcao? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'N">\
-								<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'S">\
-								<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
+							<label for="VendaSitePreco">VendaSite?</label><br>\
+							<div class="form-group">\
+								<div class="btn-group" data-toggle="buttons">\
+									<label class="btn btn-warning active" name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'N">\
+									<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
+										 autocomplete="off" value="N" checked>Não\
+									</label>\
+									<label class="btn btn-default" name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'S">\
+									<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
+										 autocomplete="off" value="S">Sim\
+									</label>\
+								</div>\
 							</div>\
 						</div>\
 						<div class="col-md-4 text-right"></div>\
@@ -2489,20 +2495,20 @@ function adiciona_item_promocao() {
 		}
 
 	});	
-	
+    
 	//permite o uso de radio buttons nesse bloco dinâmico
-	$('input:radio[id="radiogeraldinamico"]').change(function() {
+    $('input:radio[id="radiogeraldinamico"]').change(function() {
 
-		var value = $(this).val();
-		var name = $(this).attr("name");
+        var value = $(this).val();
+        var name = $(this).attr("name");
 
-		//console.log(value + ' <<>> ' + name);
+        //console.log(value + ' <<>> ' + name);
 
-		$('label[name="radio_' + name + '"]').removeClass();
-		$('label[name="radio_' + name + '"]').addClass("btn btn-default");
-		$('#radio_' + name + value).addClass("btn btn-warning active");
+        $('label[name="radio_' + name + '"]').removeClass();
+        $('label[name="radio_' + name + '"]').addClass("btn btn-default");
+        $('#radio_' + name + value).addClass("btn btn-warning active");
 
-	});	
+    });	
 	
 }
  
@@ -2841,42 +2847,48 @@ function adiciona_item_promocao5() {
 					<div class="row">\
 						<div class="col-md-1 text-right"></div>\
 						<div class="col-md-2">\
-							<label for="AtivoPreco">Ativo? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'N">\
-								<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'S">\
-								<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
+							<label for="AtivoPreco">Ativo?</label><br>\
+							<div class="form-group">\
+								<div class="btn-group" data-toggle="buttons">\
+									<label class="btn btn-warning active" name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'N">\
+									<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
+										 autocomplete="off" value="N" checked>Não\
+									</label>\
+									<label class="btn btn-default" name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'S">\
+									<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
+										 autocomplete="off" value="S">Sim\
+									</label>\
+								</div>\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="VendaSitePreco">VendaSite? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'N">\
-								<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'S">\
-								<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
+							<label for="VendaBalcaoPreco">VendaBalcao?</label><br>\
+							<div class="form-group">\
+								<div class="btn-group" data-toggle="buttons">\
+									<label class="btn btn-warning active" name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'N">\
+									<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
+										 autocomplete="off" value="N" checked>Não\
+									</label>\
+									<label class="btn btn-default" name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'S">\
+									<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
+										 autocomplete="off" value="S">Sim\
+									</label>\
+								</div>\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="VendaBalcaoPreco">VendaBalcao? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'N">\
-								<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'S">\
-								<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
+							<label for="VendaSitePreco">VendaSite?</label><br>\
+							<div class="form-group">\
+								<div class="btn-group" data-toggle="buttons">\
+									<label class="btn btn-warning active" name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'N">\
+									<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
+										 autocomplete="off" value="N" checked>Não\
+									</label>\
+									<label class="btn btn-default" name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'S">\
+									<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
+										 autocomplete="off" value="S">Sim\
+									</label>\
+								</div>\
 							</div>\
 						</div>\
 						<div class="col-md-4 text-right"></div>\

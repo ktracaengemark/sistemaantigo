@@ -1925,7 +1925,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 					$data['update']['item_promocao']['inserir'][$j]['Prodaux3'] = $data['promocao']['Cat_1'];
 					$data['update']['item_promocao']['inserir'][$j]['idTab_Modelo'] = $data['promocao']['Mod_1'];
 					$data['update']['item_promocao']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ValorProduto']));
-                }
+				}
 
                 $max = count($data['update']['item_promocao']['alterar']);
                 for($j=0;$j<$max;$j++) {
