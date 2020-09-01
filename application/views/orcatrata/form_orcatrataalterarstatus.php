@@ -128,7 +128,7 @@
 								<input type="hidden" name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
 								<input type="hidden" name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
 								<input type="hidden" name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
-								<input type="hidden" name="ObsOrca" value="<?php echo $orcatrata['ObsOrca'] ?>">
+								<!--<input type="hidden" name="ObsOrca" value="<?php echo $orcatrata['ObsOrca'] ?>">-->
 								<input type="hidden" name="TipoFrete" value="<?php echo $orcatrata['TipoFrete'] ?>">
 								
 								<input type="hidden" name="Cep" value="<?php echo $orcatrata['Cep'] ?>">
@@ -952,6 +952,13 @@
 																		}
 																	}
 																	?>
+																</div>
+															</div>
+															<div id="CanceladoOrca" <?php echo $div['CanceladoOrca']; ?>>
+																<div class="col-md-12">
+																	<label for="ObsOrca"></label>
+																	<textarea class="form-control" id="ObsOrca" <?php echo $readonly; ?> placeholder="Motivo:"
+																			  name="ObsOrca"><?php echo $orcatrata['ObsOrca']; ?></textarea>
 																</div>
 															</div>
 														</div>

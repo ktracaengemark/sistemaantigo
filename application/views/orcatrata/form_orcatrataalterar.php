@@ -1721,6 +1721,13 @@
 																			?>
 																		</div>
 																	</div>
+																	<div id="CanceladoOrca" <?php echo $div['CanceladoOrca']; ?>>
+																		<div class="col-md-12">
+																			<label for="ObsOrca"></label>
+																			<textarea class="form-control" id="ObsOrca" <?php echo $readonly; ?> placeholder="Motivo:"
+																					  name="ObsOrca"><?php echo $orcatrata['ObsOrca']; ?></textarea>
+																		</div>
+																	</div>
 																</div>
 															</div>
 														</div>
