@@ -192,6 +192,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
+			$data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'mysql');
+			$data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'mysql');
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));			
@@ -237,7 +239,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 $this->load->view('promocao/form_promocao', $data);
             } else {
 
-                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Promocao'], FALSE);
+//$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Promocao'], FALSE);
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Promocao', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
@@ -403,6 +405,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
+			$data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'mysql');
+			$data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'mysql');
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));			
@@ -615,6 +619,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
+			$data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'mysql');
+			$data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'mysql');
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));			
@@ -826,6 +832,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
+			$data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'mysql');
+			$data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'mysql');
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));
@@ -910,6 +918,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'PesoProduto',
             'Promocao',
 			'Descricao',
+			'DataInicioProm',
+			'DataFimProm',
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
@@ -1047,6 +1057,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
+			$data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'mysql');
+			$data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'mysql');
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));			
@@ -1084,7 +1096,11 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 #redirect(base_url() . 'promocao/listar/' . $data['msg']);
 				//redirect(base_url() . 'relatorio/promocao/' . $data['msg']);
 				#redirect(base_url() . 'agenda' . $data['msg']);
-                redirect(base_url() . 'promocao/alterar/' . $data['promocao']['idTab_Promocao'] . $data['msg']);
+				if ($data['promocao']['Desconto'] == 1) {
+					redirect(base_url() . 'promocao/alterar/' . $data['promocao']['idTab_Promocao'] . $data['msg']);
+				} else {
+					redirect(base_url() . 'promocao/alterar5/' . $data['promocao']['idTab_Promocao'] . $data['msg']);
+				}
 				exit();
             }
         }
@@ -1120,6 +1136,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'PesoProduto',
             'Promocao',
 			'Descricao',
+			'DataInicioProm',
+			'DataFimProm',
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
@@ -1152,7 +1170,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         if ($id) {
             #### Tab_Promocao ####
             $_SESSION['Promocao'] = $data['promocao'] = $this->Promocao_model->get_promocao($id);
-           
+			$data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'barras');
+			$data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'barras');
             #### Carrega os dados do cliente nas variáves de sessão ####
             #$this->load->model('Cliente_model');
             #$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($data['promocao']['idApp_Cliente'], TRUE);
@@ -1280,6 +1299,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
 			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
+			$data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'mysql');
+			$data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'mysql');
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));
 			$data['update']['promocao']['anterior'] = $this->Promocao_model->get_promocao($data['promocao']['idTab_Promocao']);
@@ -1353,6 +1374,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'PesoProduto',
             'Promocao',
 			'Descricao',
+			'DataInicioProm',
+			'DataFimProm',
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
@@ -1388,6 +1411,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         if ($id) {
             #### Tab_Promocao ####
             $_SESSION['Promocao'] = $data['promocao'] = $this->Promocao_model->get_promocao($id);
+			$data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'barras');
+			$data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'barras');
            
             #### Carrega os dados do cliente nas variáves de sessão ####
             #$this->load->model('Cliente_model');
@@ -1518,6 +1543,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
 			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
+			$data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'mysql');
+			$data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'mysql');
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));
 			$data['update']['promocao']['anterior'] = $this->Promocao_model->get_promocao($data['promocao']['idTab_Promocao']);
@@ -1592,6 +1619,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			'PesoProduto',
             'Promocao',
 			'Descricao',
+			'DataInicioProm',
+			'DataFimProm',
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
@@ -1633,6 +1662,9 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 				$data['item_promocao'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
 				$data['item_promocao'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
+				$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
+				$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
+				$data['item_promocao'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
                 $j++;
             }
 						
@@ -1677,6 +1709,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
         if ($id) {
             #### Tab_Promocao ####
             $_SESSION['Promocao'] = $data['promocao'] = $this->Promocao_model->get_promocao($id);
+			$data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'barras');
+			$data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'barras');
            
             #### Carrega os dados do cliente nas variáves de sessão ####
             #$this->load->model('Cliente_model');
@@ -1765,6 +1799,9 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();
+		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Editar';
         $data['form_open_path'] = 'promocao/alterar4';
@@ -1851,6 +1888,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
 			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
+			$data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'mysql');
+			$data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'mysql');
 			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
 			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));
 			$data['update']['promocao']['anterior'] = $this->Promocao_model->get_promocao($data['promocao']['idTab_Promocao']);
@@ -2029,6 +2068,334 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 #redirect(base_url() . 'promocao/listar/' . $data['msg']);
 				//redirect(base_url() . 'relatorio/promocao/' . $data['msg']);
 				redirect(base_url() . 'promocao/alterar4/' . $data['promocao']['idTab_Promocao'] . $data['msg']);
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+
+    }
+
+    public function alterar5($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $data['promocao'] = quotes_to_entities($this->input->post(array(
+            #### Tab_Promocao ####
+            'idTab_Promocao',			
+            'TipoProduto',
+			'Categoria',
+			'UnidadeProduto',
+			'CodProd',
+			'Fornecedor',
+			'Desconto',
+			'ValorProdutoSite',
+			'ValorPromocao',
+            'Comissao',
+			'PesoProduto',
+            'Promocao',
+			'Descricao',
+			'DataInicioProm',
+			'DataFimProm',
+			'Prodaux1',
+			'Prodaux2',
+			'Prodaux3',
+			'Prodaux4',
+			'Ativo',
+			'VendaSite',
+			'VendaBalcao',
+			#'Aprovado',
+			'Cat_1',
+			'Mod_1',
+			'Cat_2',
+			'Mod_2',
+			'Cat_3',
+			'Mod_3',
+        ), TRUE));
+
+        //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
+        //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
+
+        
+        
+		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
+		(!$this->input->post('PT2Count')) ? $data['count']['PT2Count'] = 0 : $data['count']['PT2Count'] = $this->input->post('PT2Count');
+		(!$this->input->post('PT3Count')) ? $data['count']['PT3Count'] = 0 : $data['count']['PT3Count'] = $this->input->post('PT3Count');
+		(!$this->input->post('PCount')) ? $data['count']['PCount'] = 0 : $data['count']['PCount'] = $this->input->post('PCount');		
+        (!$this->input->post('PMCount')) ? $data['count']['PMCount'] = 0 : $data['count']['PMCount'] = $this->input->post('PMCount');		
+		
+		(!$data['promocao']['TipoProduto']) ? $data['promocao']['TipoProduto'] = 'V' : FALSE;
+		(!$data['promocao']['Categoria']) ? $data['promocao']['Categoria'] = 'P' : FALSE;
+		(!$data['promocao']['UnidadeProduto']) ? $data['promocao']['UnidadeProduto'] = 'UNID' : FALSE;
+		
+        $j = 1;
+        for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
+
+            if ($this->input->post('idTab_Produtos' . $i) && $this->input->post('ValorProduto' . $i)) {
+				$data['item_promocao'][$j]['idTab_Valor'] = $this->input->post('idTab_Valor' . $i);
+                $data['item_promocao'][$j]['QtdProdutoDesconto'] = $this->input->post('QtdProdutoDesconto' . $i);
+				$data['item_promocao'][$j]['QtdProdutoIncremento'] = $this->input->post('QtdProdutoIncremento' . $i);
+				$data['item_promocao'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
+				$data['item_promocao'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
+				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
+				$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
+				$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
+				$data['item_promocao'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
+                $j++;
+            }
+						
+        }
+        $data['count']['PTCount'] = $j - 1;
+		
+		
+		
+		
+        //Fim do trecho de código que dá pra melhorar
+
+        if ($id) {
+            #### Tab_Promocao ####
+            $_SESSION['Promocao'] = $data['promocao'] = $this->Promocao_model->get_promocao($id);
+			$data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'barras');
+			$data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'barras');
+
+            #### Tab_Valor ####
+            $data['item_promocao'] = $this->Promocao_model->get_item_promocao1($id);
+            if (count($data['item_promocao']) > 0) {
+                $data['item_promocao'] = array_combine(range(1, count($data['item_promocao'])), array_values($data['item_promocao']));
+                $data['count']['PTCount'] = count($data['item_promocao']);
+				/*
+                if (isset($data['item_promocao'])) {
+
+                    for($j=1; $j <= $data['count']['PTCount']; $j++)
+						
+                }
+				*/				
+            }
+
+        }
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		
+        #### Tab_Promocao ####
+
+		$this->form_validation->set_rules('Desconto', 'Tipo de Desconto', 'required|trim');
+		#$this->form_validation->set_rules('Promocao', 'Título', 'required|trim');
+ 		#$this->form_validation->set_rules('Descricao', 'Descricão', 'required|trim');
+		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Promocao.CodProd]');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+		$data['select']['Desconto'] = $this->Basico_model->select_desconto();		
+		$data['select']['TipoProduto'] = $this->Basico_model->select_tipoproduto();
+		$data['select']['Categoria'] = $this->Basico_model->select_categoria();
+		#$data['select']['Desconto'] = $this->Basico_model->select_desconto();
+        $data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
+		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
+		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
+		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux34();
+		#$data['select']['Cat_1'] = $this->Prodaux3_model->select_prodaux3pr();
+		#$data['select']['Cat_2'] = $this->Prodaux3_model->select_prodaux3pr();
+		#$data['select']['Cat_3'] = $this->Prodaux3_model->select_prodaux3pr();
+		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
+		
+		$data['select']['Cat_1'] = $this->Basico_model->select_catprod();
+		$data['select']['Cat_2'] = $this->Basico_model->select_catprod();
+		$data['select']['Cat_3'] = $this->Basico_model->select_catprod();		
+		$data['select']['Mod_1'] = $this->Basico_model->select_mod_1($data['promocao']['Cat_1']);
+		$data['select']['Mod_2'] = $this->Basico_model->select_mod_2($data['promocao']['Cat_2']);
+		$data['select']['Mod_3'] = $this->Basico_model->select_mod_3($data['promocao']['Cat_3']);
+		$data['select']['idTab_Produto'] = $this->Basico_model->select_produto2();
+		#$data['select']['idTab_Produtos'] = $this->Basico_model->select_prod_der0();
+		$data['select']['idTab_Produtos'] = $this->Basico_model->select_produto2();
+		$data['select']['idTab_Produtos2'] = $this->Basico_model->select_prod_der2();
+		$data['select']['idTab_Produtos3'] = $this->Basico_model->select_prod_der3();
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();		
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();
+		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
+		
+        $data['titulo'] = 'Editar';
+        $data['form_open_path'] = 'promocao/alterar5';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 5;
+
+        //if (isset($data['item_promocao']) && ($data['item_promocao'][0]['DataValor'] || $data['item_promocao'][0]['Desconto']))
+        if ($data['count']['PTCount'] > 0 || $data['count']['PT2Count'] > 0)
+            $data['tratamentosin'] = 'in';
+        else
+            $data['tratamentosin'] = '';
+
+
+        #Ver uma solução melhor para este campo
+
+        $data['sidebar'] = 'col-sm-3 col-md-2';
+        $data['main'] = 'col-sm-7 col-md-8';
+
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+		
+		($data['promocao']['Desconto'] == '2') ? $data['div']['Desconto'] = '' : $data['div']['Desconto'] = 'style="display: none;"';
+		
+		$data['radio'] = array(
+            'Desconto' => $this->basico->radio_checked($data['promocao']['Desconto'], 'Desconto', '12'),
+        );
+
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';       
+        
+ 		(!$data['promocao']['Ativo']) ? $data['promocao']['Ativo'] = 'S' : FALSE;
+		$data['radio'] = array(
+            'Ativo' => $this->basico->radio_checked($data['promocao']['Ativo'], 'Ativo', 'NS'),
+        );
+        ($data['promocao']['Ativo'] == 'S') ?
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';		
+		
+ 		(!$data['promocao']['VendaSite']) ? $data['promocao']['VendaSite'] = 'S' : FALSE;
+		$data['radio'] = array(
+            'VendaSite' => $this->basico->radio_checked($data['promocao']['VendaSite'], 'VendaSite', 'NS'),
+        );
+        ($data['promocao']['VendaSite'] == 'S') ?
+            $data['div']['VendaSite'] = '' : $data['div']['VendaSite'] = 'style="display: none;"';
+			
+		(!$data['promocao']['VendaBalcao']) ? $data['promocao']['VendaBalcao'] = 'S' : FALSE;
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['promocao']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['promocao']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"';	
+		/*
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit ();
+          */
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('promocao/form_promocao5', $data);
+        } else {
+			
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];			
+
+            ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+            #### Tab_Promocao ####
+			#$data['promocao']['Desconto'] = 2;
+			if ($data['promocao']['Desconto'] == 1){
+				$data['promocao']['Promocao'] = '';
+				$data['promocao']['Descricao'] = '';
+			} else {
+				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
+				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+			}
+			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
+            $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+            $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			$data['promocao']['ValorProdutoSite'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorProdutoSite']));
+			$data['promocao']['ValorPromocao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['ValorPromocao']));
+			$data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'mysql');
+			$data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'mysql');
+			$data['promocao']['Comissao'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['Comissao']));
+			$data['promocao']['PesoProduto'] = str_replace(',', '.', str_replace('.', '', $data['promocao']['PesoProduto']));
+			$data['update']['promocao']['anterior'] = $this->Promocao_model->get_promocao($data['promocao']['idTab_Promocao']);
+            $data['update']['promocao']['campos'] = array_keys($data['promocao']);
+            $data['update']['promocao']['auditoriaitem'] = $this->basico->set_log(
+                $data['update']['promocao']['anterior'],
+                $data['promocao'],
+                $data['update']['promocao']['campos'],
+                $data['promocao']['idTab_Promocao'], TRUE);
+            $data['update']['promocao']['bd'] = $this->Promocao_model->update_promocao($data['promocao'], $data['promocao']['idTab_Promocao']);
+			
+            #### Tab_Valor ####
+            $data['update']['item_promocao']['anterior'] = $this->Promocao_model->get_item_promocao1($data['promocao']['idTab_Promocao']);
+            if (isset($data['item_promocao']) || (!isset($data['item_promocao']) && isset($data['update']['item_promocao']['anterior']) ) ) {
+
+                if (isset($data['item_promocao']))
+                    $data['item_promocao'] = array_values($data['item_promocao']);
+                else
+                    $data['item_promocao'] = array();
+
+                //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
+                $data['update']['item_promocao'] = $this->basico->tratamento_array_multidimensional($data['item_promocao'], $data['update']['item_promocao']['anterior'], 'idTab_Valor');
+
+                $max = count($data['update']['item_promocao']['inserir']);
+                for($j=0;$j<$max;$j++) {
+					$data['update']['item_promocao']['inserir'][$j]['Item_Promocao'] = "1";
+					$data['update']['item_promocao']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['inserir'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['item_promocao']['inserir'][$j]['Desconto'] = $data['promocao']['Desconto'];
+					$data['update']['item_promocao']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+                    $data['update']['item_promocao']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+					$data['update']['item_promocao']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+                    $data['update']['item_promocao']['inserir'][$j]['idTab_Promocao'] = $data['promocao']['idTab_Promocao'];
+					$data['update']['item_promocao']['inserir'][$j]['Prodaux3'] = $data['promocao']['Cat_1'];
+					$data['update']['item_promocao']['inserir'][$j]['idTab_Modelo'] = $data['promocao']['Mod_1'];
+					$data['update']['item_promocao']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ValorProduto']));
+                }
+
+                $max = count($data['update']['item_promocao']['alterar']);
+                for($j=0;$j<$max;$j++) {
+					$data['update']['item_promocao']['alterar'][$j]['Item_Promocao'] = "1";
+					$data['update']['item_promocao']['alterar'][$j]['Desconto'] = $data['promocao']['Desconto'];
+					$data['update']['item_promocao']['alterar'][$j]['Prodaux3'] = $data['promocao']['Cat_1'];
+					$data['update']['item_promocao']['alterar'][$j]['idTab_Modelo'] = $data['promocao']['Mod_1'];
+					$data['update']['item_promocao']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ValorProduto']));
+					$data['update']['item_promocao']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
+				}
+
+                if (count($data['update']['item_promocao']['inserir']))
+                    $data['update']['item_promocao']['bd']['inserir'] = $this->Promocao_model->set_item_promocao($data['update']['item_promocao']['inserir']);
+
+                if (count($data['update']['item_promocao']['alterar']))
+                    $data['update']['item_promocao']['bd']['alterar'] =  $this->Promocao_model->update_item_promocao($data['update']['item_promocao']['alterar']);
+
+                if (count($data['update']['item_promocao']['excluir']))
+                    $data['update']['item_promocao']['bd']['excluir'] = $this->Promocao_model->delete_item_promocao($data['update']['item_promocao']['excluir']);
+
+            }
+
+/*
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //*******CORRIGIR -  ALTERAR PARA ENTRAR COM TODAS AS MUDANÇAS NA TABELA DE LOG*****
+            $data['campos'] = array_keys($data['query']);
+            $data['anterior'] = array();
+            //*******CORRIGIR -  ALTERAR PARA ENTRAR COM TODAS AS MUDANÇAS NA TABELA DE LOG*****
+//////////////////////////////////////////////////Dados Basicos/////////////////////////////////////////////////////////////////////////
+*/
+
+            //if ($data['idTab_Promocao'] === FALSE) {
+            //if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
+            if ($data['auditoriaitem'] && !$data['update']['promocao']['bd']) {
+                $data['msg'] = '?m=2';
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+                $this->load->view('promocao/form_promocao5', $data);
+            } else {
+
+                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Promocao'], FALSE);
+                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Promocao', 'CREATE', $data['auditoriaitem']);
+                $data['msg'] = '?m=1';
+
+                #redirect(base_url() . 'promocao/listar/' . $data['msg']);
+				//redirect(base_url() . 'relatorio/promocao/' . $data['msg']);
+				redirect(base_url() . 'promocao/alterar5/' . $data['promocao']['idTab_Promocao'] . $data['msg']);
                 exit();
             }
         }

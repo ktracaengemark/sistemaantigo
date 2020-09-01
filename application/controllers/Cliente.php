@@ -609,13 +609,14 @@ class Cliente extends CI_Controller {
 
         $data['msg'] = '?m=1';
 
-		redirect(base_url() . 'agenda' . $data['msg']);
+		//redirect(base_url() . 'agenda' . $data['msg']);
+		redirect(base_url() . 'cliente/pesquisar');
 		exit();
 
         $this->load->view('basico/footer');
     }
 
-    public function pesquisar() {
+    public function pesquisar_2() {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -688,8 +689,9 @@ class Cliente extends CI_Controller {
         //if ($this->uri->segment($uri)) {
 			$config['base_url'] = base_url() . 'cliente/pesquisar/' . $data['Pesquisa'] . '/';
 			//$config['base_url'] = base_url() . 'cliente/pesquisar/';
-			//$data['total'] = $config['total_rows'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], $data['NomeDoCliente'], $data['TelefoneDoCliente'], TRUE)->num_rows();
-			$data['total'] = $config['total_rows'] = $this->Cliente_model->lista_cliente($_SESSION['pesquisa'], $_SESSION['nomedocliente'], $_SESSION['telefone'], TRUE)->num_rows();
+			//$config['total_rows'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], $data['NomeDoCliente'], $data['TelefoneDoCliente'], TRUE)->num_rows();
+			$config['total_rows'] = $this->Cliente_model->lista_cliente($_SESSION['pesquisa'], $_SESSION['nomedocliente'], $_SESSION['telefone'], TRUE)->num_rows();
+			($config['total_rows'] > 1) ? $data['total'] = $config['total_rows']: $config['total_rows'];
 			$qtde = $config['per_page'];
 			
 			
@@ -700,7 +702,6 @@ class Cliente extends CI_Controller {
 		
             //$data['query'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], TRUE);
 			//$data['query'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], $data['NomeDoCliente'], $data['TelefoneDoCliente'], TRUE, $qtde, $page);
-			//$data['query'] = $this->Cliente_model->lista_cliente($_SESSION['pesquisa'], $_SESSION['nomedocliente'], $_SESSION['telefone'], TRUE, $qtde, $page);
 			$data['query'] = $this->Cliente_model->lista_cliente($_SESSION['pesquisa'], $_SESSION['nomedocliente'], $_SESSION['telefone'], TRUE, $qtde, ($page * $config["per_page"]));
 			$data['pagination'] = $this->pagination->create_links();
 			/*
@@ -840,7 +841,7 @@ class Cliente extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-    public function pesquisar2() {
+    public function pesquisar() {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -853,10 +854,10 @@ class Cliente extends CI_Controller {
         $data['novo'] = '';
 
         $this->load->library('pagination');
-        $config['per_page'] = 25;
-        $config["uri_segment"] = 5;
+        $config['per_page'] = 10;
+        $config["uri_segment"] = 4;
         $config['reuse_query_string'] = TRUE;
-        $config['num_links'] = 5;
+        $config['num_links'] = 3;
         $config['use_page_numbers'] = TRUE;
 
         $config['full_tag_open'] = "<ul class='pagination'>";
@@ -873,27 +874,14 @@ class Cliente extends CI_Controller {
         $config['first_tagl_close'] = "</li>";
         $config['last_tag_open'] = "<li>";
         $config['last_tagl_close'] = "</li>";
-
+		$data['total'] = $this->Cliente_model->lista_cliente_total();
         $data['Pesquisa'] = '';
 
-        #$SESSION['Paginacao']['Pesquisa'] = (!isset($SESSION['Paginacao']['Pesquisa'])) ? '' : $SESSION['Paginacao']['Pesquisa'];
-        if (!isset($SESSION['Paginacao']['Pesquisa'])) {
-            $SESSION['Paginacao']['Pesquisa'] = '';
-            
-        }
-        else {
-            $SESSION['Paginacao']['Pesquisa'] = $SESSION['Paginacao']['Pesquisa'];
-           
-        }
-
-        #$uri = (isset($_SESSION['DataURI']) && $_SESSION['DataURI'] === TRUE) ? 7 : 4;
-        $uri = (!$this->input->post('Pesquisa')) ? 7 : 4;
-
-
-        if ($this->uri->segment($uri)) {
-
-            $data['Pesquisa'] = (isset($_SESSION['DataURI']) && $_SESSION['DataURI'] === TRUE) ? urldecode($this->uri->segment(4)).'/'.urldecode($this->uri->segment(5)).'/'.urldecode($this->uri->segment(6)) : urldecode($this->uri->segment(4));
-            
+#echo '<br><br><br><br> >> ' . $this->uri->segment(3);
+		
+        if ($this->uri->segment(3)) {
+		
+            $data['Pesquisa'] = urldecode($this->uri->segment(3));
 
             #run form validation
             if ($this->Cliente_model->lista_cliente($data['Pesquisa'], TRUE) === TRUE) {
@@ -901,18 +889,22 @@ class Cliente extends CI_Controller {
                 $config['base_url'] = base_url() . 'cliente/pesquisar/' . $data['Pesquisa'] . '/';
                 $config['total_rows'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], FALSE, TRUE);
                 ($config['total_rows'] > 1) ? $data['total_rows'] = $config['total_rows'] . ' resultados' : $config['total_rows'] . ' resultado';
-
+				($config['total_rows'] > 1) ? $data['cadastrar'] = FALSE : $data['cadastrar'] = TRUE;
                 $this->pagination->initialize($config);
-
+#echo '<br><br><br><br> >> ' . $config["uri_segment"];
                 $page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
                 $data['query'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], FALSE, FALSE, $config["per_page"], ($page * $config["per_page"]));
-
-                $data['pagination'] = $this->pagination->create_links();
+				/*
+				echo "<pre>";
+				print_r($data['total']);
+				echo "</pre>";
+				exit();
+				*/
+				$data['pagination'] = $this->pagination->create_links();
 
                 $data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
             }
-        }
-        elseif ($this->input->post('Pesquisa')) {
+        } elseif ($this->input->post('Pesquisa')) {
 
             $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
             $this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim|callback_get_cliente');
@@ -935,8 +927,14 @@ class Cliente extends CI_Controller {
 
                 $config['base_url'] = base_url() . 'cliente/pesquisar/' . $data['Pesquisa'] . '/';
                 $config['total_rows'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], FALSE, TRUE);
+				/*
+				echo "<pre>";
+				print_r($data['total']);
+				echo "</pre>";
+				exit();
+				*/
                 ($config['total_rows'] > 1) ? $data['total_rows'] = $config['total_rows'] . ' resultados' : $data['total_rows'] = $config['total_rows'] . ' resultado';
-
+				($config['total_rows'] > 1) ? $data['cadastrar'] = FALSE : $data['cadastrar'] = TRUE;
                 $this->pagination->initialize($config);
 
                 $page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
@@ -1024,7 +1022,7 @@ class Cliente extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-    function get_cliente() {
+    function get_cliente_1() {
 		
         if ($this->Cliente_model->lista_cliente($_SESSION['pesquisa'], $_SESSION['nomedocliente'], $_SESSION['telefone'], FALSE, $_SESSION['Qtde'], $_SESSION['Page']) === FALSE) {
             $this->form_validation->set_message('get_cliente', '<strong>Cliente</strong> não encontrado.');
@@ -1034,13 +1032,13 @@ class Cliente extends CI_Controller {
         }
     }
 	
-    function get_cliente_ORIG($data) {
+    function get_cliente($data) {
 
-        if ($this->Cliente_model->lista_cliente($data, $data, FALSE) === FALSE) {
+        if ($this->Cliente_model->lista_cliente($data, TRUE) === FALSE) {
             $this->form_validation->set_message('get_cliente', '<strong>Cliente</strong> não encontrado.');
-            return FALSE;
+			return FALSE;
         } else {
-		return TRUE;
+			return TRUE;
         }
     }
 

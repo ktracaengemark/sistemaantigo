@@ -1792,7 +1792,7 @@ function adicionaValorDesconto() {
 								    name="QtdProdutoDesconto'+pt+'" value="1">\
 							</div>\
 						</div>\
-						<div class="col-md-6">\
+						<div class="col-md-5">\
 							<label for="idTab_Produtos">Item '+pt+':</label><br>\
 							<select class="form-control Chosen" id="listadinamicad'+pt+'" name="idTab_Produtos'+pt+'">\
 								<option value="">-- Selecione uma opção --</option>\
@@ -1811,57 +1811,14 @@ function adicionaValorDesconto() {
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="ValorProduto'+pt+'">Preço de Venda</label><br>\
+							<label for="ValorProduto'+pt+'">Valor Venda S/Desc.</label><br>\
 							<div class="input-group id="ValorProduto'+pt+'">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
 								<input type="text" class="form-control Valor" id="ValorProduto'+pt+'" maxlength="10" placeholder="0,00" \
 									name="ValorProduto'+pt+'" value="">\
 							</div>\
 						</div>\
-					</div>\
-					<div class="row">\
-						<div class="col-md-1 text-right"></div>\
-						<div class="col-md-2">\
-							<label for="AtivoPreco">Ativo? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'N">\
-								<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'S">\
-								<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="VendaSitePreco">VendaSite? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'N">\
-								<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'S">\
-								<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="VendaBalcaoPreco">VendaBalcao? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'N">\
-								<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'S">\
-								<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
-							</div>\
-						</div>\
-						<div class="col-md-4 text-right"></div>\
-						<div class="col-md-1 text-right">\
+						<div class="col-md-1">\
 							<label><br></label><br>\
 							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\
 								<span class="glyphicon glyphicon-trash"></span>\
@@ -1935,20 +1892,6 @@ function adicionaValorDesconto() {
 			//if there is an error append a 'none available' option
 			$select.html('<option id="-1">ERRO</option>');
 		}
-
-	});
-	
-	//permite o uso de radio buttons nesse bloco dinâmico
-	$('input:radio[id="radiogeraldinamico"]').change(function() {
-
-		var value = $(this).val();
-		var name = $(this).attr("name");
-
-		//console.log(value + ' <<>> ' + name);
-
-		$('label[name="radio_' + name + '"]').removeClass();
-		$('label[name="radio_' + name + '"]').addClass("btn btn-default");
-		$('#radio_' + name + value).addClass("btn btn-warning active");
 
 	});	
 
@@ -2343,7 +2286,7 @@ function adiciona_item_promocao() {
 								    name="QtdProdutoDesconto'+pt+'" value="1">\
 							</div>\
 						</div>\
-						<div class="col-md-6">\
+						<div class="col-md-5">\
 							<label for="idTab_Produtos">Item '+pt+':</label><br>\
 							<select class="form-control Chosen" id="listadinamicad'+pt+'" name="idTab_Produtos'+pt+'">\
 								<option value="">-- Selecione uma opção --</option>\
@@ -2369,50 +2312,7 @@ function adiciona_item_promocao() {
 									name="ValorProduto'+pt+'" value="">\
 							</div>\
 						</div>\
-					</div>\
-					<div class="row">\
-						<div class="col-md-1 text-right"></div>\
-						<div class="col-md-2">\
-							<label for="AtivoPreco">Ativo? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'N">\
-								<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'S">\
-								<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="VendaSitePreco">VendaSite? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'N">\
-								<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'S">\
-								<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="VendaBalcaoPreco">VendaBalcao? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'N">\
-								<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'S">\
-								<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
-							</div>\
-						</div>\
-						<div class="col-md-4 text-right"></div>\
-						<div class="col-md-1 text-right">\
+						<div class="col-md-1">\
 							<label><br></label><br>\
 							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\
 								<span class="glyphicon glyphicon-trash"></span>\
@@ -2487,20 +2387,6 @@ function adiciona_item_promocao() {
 			//if there is an error append a 'none available' option
 			$select.html('<option id="-1">ERRO</option>');
 		}
-
-	});	
-	
-	//permite o uso de radio buttons nesse bloco dinâmico
-	$('input:radio[id="radiogeraldinamico"]').change(function() {
-
-		var value = $(this).val();
-		var name = $(this).attr("name");
-
-		//console.log(value + ' <<>> ' + name);
-
-		$('label[name="radio_' + name + '"]').removeClass();
-		$('label[name="radio_' + name + '"]').addClass("btn btn-default");
-		$('#radio_' + name + value).addClass("btn btn-warning active");
 
 	});	
 	
@@ -2779,169 +2665,7 @@ function adiciona_item_promocao3() {
 	});	
 	
 }
-
-function adiciona_item_promocao5() {
-
-    var pt = $("#PTCount").val(); //initlal text box count
-
-    //alert( $("#SCount").val() );
-    pt++; //text box increment
-    $("#PTCount").val(pt);
-    //console.log(pt);
-
-    if (pt >= 2) {
-        //console.log( $("#listadinamicad"+(pt-1)).val() );
-        var chosen;
-        chosen = $("#listadinamicad"+(pt-1)).val();
-        //console.log( chosen + ' :: ' + pt );
-    }
-
-    //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
-
-    $(".input_fields_wrap3").append('\
-        <div class="form-group" id="3div'+pt+'">\
-			<div class="panel panel-info">\
-				<div class="panel-heading">\
-					<div class="row">\
-						<div class="col-md-1">\
-							<label for="QtdProdutoDesconto">QtdPrd:</label><br>\
-							<div class="input-group">\
-								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto'+pt+'" placeholder="0"\
-								    name="QtdProdutoDesconto'+pt+'" value="1">\
-							</div>\
-						</div>\
-						<div class="col-md-6">\
-							<label for="idTab_Produtos">Item '+pt+':</label><br>\
-							<select class="form-control Chosen" id="listadinamicad'+pt+'" name="idTab_Produtos'+pt+'">\
-								<option value="">-- Selecione uma opção --</option>\
-							</select>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="Convdesc'+pt+'">Desc. Embal:</label>\
-							<input type="text" class="form-control" id="Convdesc'+pt+'"\
-									  name="Convdesc'+pt+'" value="">\
-						</div>\
-						<div class="col-md-1">\
-							<label for="QtdProdutoIncremento">QtdEmb:</label><br>\
-							<div class="input-group">\
-								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento'+pt+'" placeholder="0"\
-								    name="QtdProdutoIncremento'+pt+'" value="1">\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="ValorProduto'+pt+'">ValorEmbal</label><br>\
-							<div class="input-group id="ValorProduto'+pt+'">\
-								<span class="input-group-addon" id="basic-addon1">R$</span>\
-								<input type="text" class="form-control Valor" id="ValorProduto'+pt+'" maxlength="10" placeholder="0,00" \
-									name="ValorProduto'+pt+'" value="">\
-							</div>\
-						</div>\
-					</div>\
-					<div class="row">\
-						<div class="col-md-1 text-right"></div>\
-						<div class="col-md-2">\
-							<label for="AtivoPreco">Ativo? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'N">\
-								<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'S">\
-								<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="VendaSitePreco">VendaSite? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'N">\
-								<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'S">\
-								<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="VendaBalcaoPreco">VendaBalcao? </label><br>\
-							<div class="btn-group" data-toggle="buttons">\
-								<label class="btn btn-default " name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'N">\
-								<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="N" checked>Não\
-								</label>\
-								<label class="btn btn-warning active" name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'S">\
-								<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
-									autocomplete="off" value="S" >Sim\
-								</label>\
-							</div>\
-						</div>\
-						<div class="col-md-4 text-right"></div>\
-						<div class="col-md-1 text-right">\
-							<label><br></label><br>\
-							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\
-								<span class="glyphicon glyphicon-trash"></span>\
-							</button>\
-						</div>\
-					</div>\
-				</div>\
-			</div>\
-        </div>'
-    ); //add input box
-    //habilita o botão de calendário após a geração dos campos dinâmicos
-    $('.DatePicker').datetimepicker(dateTimePickerOptions);
-
-	//get a reference to the select element
-	$select = $('#listadinamicad'+pt);
-
-	//request the JSON data and parse into the select element
-	$.ajax({
-		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=122',
-		dataType: 'JSON',
-		type: "GET",
-		success: function (data) {
-			//clear the current content of the select
-			$select.html('');
-			//iterate over the data and append a select option
-			$select.append('<option value="">-- Sel. Produto --</option>');
-			$.each(data, function (key, val) {
-				//alert(val.id);
-				$select.append('<option value="' + val.id + '">' + val.name + '</option>');
-			})
-			$('.Chosen').chosen({
-				disable_search_threshold: 10,
-				multiple_text: "Selecione uma ou mais opções",
-				single_text: "Selecione uma opção",
-				no_results_text: "Nenhum resultado para",
-				width: "100%"
-			});
-		},
-		error: function () {
-			//alert('erro listadinamicaB');
-			//if there is an error append a 'none available' option
-			$select.html('<option id="-1">ERRO</option>');
-		}
-
-	});
-	
-	//permite o uso de radio buttons nesse bloco dinâmico
-	$('input:radio[id="radiogeraldinamico"]').change(function() {
-
-		var value = $(this).val();
-		var name = $(this).attr("name");
-
-		//console.log(value + ' <<>> ' + name);
-
-		$('label[name="radio_' + name + '"]').removeClass();
-		$('label[name="radio_' + name + '"]').addClass("btn btn-default");
-		$('#radio_' + name + value).addClass("btn btn-warning active");
-
-	});	
-	
-}
+ 
 /*
   * Função criada para funcionar junto com o recurso de hide/show do jquery nos
   * casos de radio button, que exigem um tratamento especial para funcionar
@@ -7196,18 +6920,18 @@ $(document).ready(function () {
 								<input type="text" class="form-control" id="Nome_Prod'+pd+'" readonly=""\
 										  name="Nome_Prod'+pd+'" value="">\
 							</div>\
-							<div class="col-md-2">\
-								<label for="Opcao_Atributo_2'+pd+'">Atributo1</label>\
-								<select data-placeholder="Selecione uma opção..." class="form-control Chosen2" id="listadinamican'+pd+'" name="Opcao_Atributo_2'+pd+'">\
-									<option value="">-- Selecione uma opção --</option>\
-								</select>\
-							</div>\
-							<div class="col-md-2">\
-                                <label for="Opcao_Atributo_1'+pd+'">Atributo2</label>\
+							<div class="col-md-3">\
+                                <label for="Opcao_Atributo_1">Atributo1 </label><br>\
                                 <select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="listadinamicam'+pd+'" name="Opcao_Atributo_1'+pd+'">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
+							<div class="col-md-2">\
+								<label for="Opcao_Atributo_2'+pd+'">Atributo2</label>\
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen2" id="listadinamican'+pd+'" name="Opcao_Atributo_2'+pd+'">\
+									<option value="">-- Selecione uma opção --</option>\
+								</select>\
+							</div>\
 							<div class="col-md-2">\
 								<label for="Valor_Produto'+pd+'">Valor Custo</label><br>\
 								<div class="input-group id="Valor_Produto'+pd+'">\

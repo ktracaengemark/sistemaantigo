@@ -193,7 +193,7 @@ class Produtos_model extends CI_Model {
 				Tab_Valor 
 			WHERE 
 				idTab_Modelo = ' . $data . ' AND
-				Desconto = "1"
+				idTab_Promocao = "0"
 		');
         $query = $query->result_array();
 

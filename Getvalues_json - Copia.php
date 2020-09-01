@@ -153,38 +153,6 @@ elseif ($_GET['q'] == 12) {
     
 }
 
-elseif ($_GET['q'] == 122) {
-
-    $result = mysql_query('
-            SELECT
-                TPS.idTab_Produtos,
-				TPS.idTab_Produto,
-				TOP2.Opcao,
-				TOP1.Opcao,				
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
-                TPS.Valor_Produto
-            FROM 
-                Tab_Produtos AS TPS
-					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
-					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2			
-            WHERE
-                TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
-			ORDER BY
-				TPS.Nome_Prod ASC	
-    ');
-
-    while ($row = mysql_fetch_assoc($result)) {
-
-        $event_array[] = array(
-            'id' => $row['idTab_Produtos'],
-            'name' => utf8_encode($row['Nome_Prod']),
-            'value' => $row['Valor_Produto'],
-        );
-    } 
-    
-}
-
 elseif ($_GET['q'] == 13) {
 
     $result = mysql_query('
@@ -259,7 +227,7 @@ elseif ($_GET['q'] == 15) {
 				TPS.idTab_Produto,
 				TOP2.Opcao,
 				TOP1.Opcao,				
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
                 TPS.Valor_Produto
             FROM 
                 Tab_Produtos AS TPS
@@ -422,7 +390,7 @@ elseif ($_GET['q'] == 90) {
 				TOP1.Opcao,
 				TDS.Desconto,
 				TPM.Promocao,
-				CONCAT(IFNULL(TPRS.Prod_Serv,""), " - ",  IFNULL(P.Nome_Prod,""), " - ",  IFNULL(TOP1.Opcao,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " UNID - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
+				CONCAT(IFNULL(TPRS.Prod_Serv,""), " - ",  IFNULL(P.Nome_Prod,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " UNID - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
@@ -435,10 +403,8 @@ elseif ($_GET['q'] == 90) {
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 				P.idTab_Produtos = V.idTab_Produtos AND
 				
-				TPM.Ativo = "S" AND
-				TPM.VendaBalcao = "S" AND
-				V.AtivoPreco = "S" AND
-				V.VendaBalcaoPreco = "S"
+				V.Ativo = "S" AND
+				V.VendaBalcao = "S"
 			ORDER BY
 				P.Prod_Serv ASC,
 				P.Nome_Prod ASC,

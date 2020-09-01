@@ -313,7 +313,7 @@ class Cliente2 extends CI_Controller {
                 }
 
                 //redirect(base_url() . 'relatorio2/clientes3');
-				redirect(base_url() . 'cliente2/prontuario2/' . $data['idApp_Cliente'] . $data['msg']);
+				redirect(base_url() . 'cliente2/prontuario2/' . $data['query']['idApp_Cliente'] . $data['msg']);
                 exit();
             }
         }
@@ -335,13 +335,127 @@ class Cliente2 extends CI_Controller {
         $data['msg'] = '?m=1';
 
 		//redirect(base_url() . 'agenda' . $data['msg']);
-		redirect(base_url() . 'relatorio2/clientes3');
+		//redirect(base_url() . 'relatorio2/clientes3');
+		redirect(base_url() . 'cliente2/pesquisar2');
 		exit();
 
         $this->load->view('basico/footer');
     }
 
     public function pesquisar2() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['titulo'] = "Pesquisar Cliente";
+        $data['novo'] = '';
+
+        $this->load->library('pagination');
+        $config['per_page'] = 10;
+        $config["uri_segment"] = 4;
+        $config['reuse_query_string'] = TRUE;
+        $config['num_links'] = 3;
+        $config['use_page_numbers'] = TRUE;
+
+        $config['full_tag_open'] = "<ul class='pagination'>";
+        $config['full_tag_close'] = "</ul>";
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+        $config['next_tag_open'] = "<li>";
+        $config['next_tagl_close'] = "</li>";
+        $config['prev_tag_open'] = "<li>";
+        $config['prev_tagl_close'] = "</li>";
+        $config['first_tag_open'] = "<li>";
+        $config['first_tagl_close'] = "</li>";
+        $config['last_tag_open'] = "<li>";
+        $config['last_tagl_close'] = "</li>";
+		$data['total'] = $this->Cliente_model->lista_cliente_total();
+        $data['Pesquisa'] = '';
+
+#echo '<br><br><br><br> >> ' . $this->uri->segment(3);
+		
+        if ($this->uri->segment(3)) {
+		
+            $data['Pesquisa'] = urldecode($this->uri->segment(3));
+
+            #run form validation
+            if ($this->Cliente_model->lista_cliente($data['Pesquisa'], TRUE) === TRUE) {
+
+                $config['base_url'] = base_url() . 'cliente2/pesquisar2/' . $data['Pesquisa'] . '/';
+                $config['total_rows'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], FALSE, TRUE);
+                ($config['total_rows'] > 1) ? $data['total_rows'] = $config['total_rows'] . ' resultados' : $config['total_rows'] . ' resultado';
+				($config['total_rows'] > 1) ? $data['cadastrar'] = FALSE : $data['cadastrar'] = TRUE;
+                $this->pagination->initialize($config);
+#echo '<br><br><br><br> >> ' . $config["uri_segment"];
+                $page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+                $data['query'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], FALSE, FALSE, $config["per_page"], ($page * $config["per_page"]));
+				/*
+				echo "<pre>";
+				print_r($data['total']);
+				echo "</pre>";
+				exit();
+				*/
+				$data['pagination'] = $this->pagination->create_links();
+
+                $data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
+            }
+        } elseif ($this->input->post('Pesquisa')) {
+
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+            $this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim|callback_get_cliente');
+
+            #$data['Pesquisa'] = $this->input->post('Pesquisa');
+            #echo '<br /><br /><br /> >>> '.$this->input->post('Pesquisa').'<>'.$_SESSION['DataURI'] = (strpos($data['Pesquisa'], "/") > 0) ? TRUE : FALSE;
+            #$_SESSION['DataURI'] = (strpos($data['Pesquisa'], "/") > 0) ? TRUE : FALSE;
+            if((strpos($data['Pesquisa'], "/") > 0)) {
+                $data['Pesquisa'] = str_replace("/", "", $this->input->post('Pesquisa'));
+                $SESSION['DataURI'] = TRUE;
+            }
+            else {
+                $data['Pesquisa'] = $this->input->post('Pesquisa');
+                $SESSION['DataURI'] = FALSE;
+            }
+
+
+            #run form validation
+            if ($this->form_validation->run() !== FALSE && $this->Cliente_model->lista_cliente($data['Pesquisa'], TRUE) === TRUE) {
+
+                $config['base_url'] = base_url() . 'cliente2/pesquisar2/' . $data['Pesquisa'] . '/';
+                $config['total_rows'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], FALSE, TRUE);
+				/*
+				echo "<pre>";
+				print_r($data['total']);
+				echo "</pre>";
+				exit();
+				*/
+                ($config['total_rows'] > 1) ? $data['total_rows'] = $config['total_rows'] . ' resultados' : $data['total_rows'] = $config['total_rows'] . ' resultado';
+				($config['total_rows'] > 1) ? $data['cadastrar'] = FALSE : $data['cadastrar'] = TRUE;
+                $this->pagination->initialize($config);
+
+                $page = ($this->uri->segment($config["uri_segment"])) ? ($this->uri->segment($config["uri_segment"]) - 1) : 0;
+                $data['query'] = $this->Cliente_model->lista_cliente($data['Pesquisa'], FALSE, FALSE, $config["per_page"], ($page * $config["per_page"]));
+				
+                $data['pagination'] = $this->pagination->create_links();
+
+                $data['list'] = $this->load->view('cliente/list_cliente2', $data, TRUE);
+            }
+        }
+
+		($data['Pesquisa']) ? $data['cadastrar'] = TRUE : $data['cadastrar'] = FALSE;
+        
+		$this->load->view('cliente/pesq_cliente2', $data);
+
+        $this->load->view('basico/footer');		
+
+    }
+	
+    public function pesquisar2_orig() {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);

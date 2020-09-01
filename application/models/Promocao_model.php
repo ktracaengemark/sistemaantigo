@@ -139,12 +139,15 @@ class Promocao_model extends CI_Model {
 										TPM.Mod_3,
 										TPM.VendaBalcao,
 										TPM.ValorPromocao,
+										TPM.DataInicioProm,
+										TPM.DataFimProm,
 										TC1.idTab_Catprod,
 										TC2.idTab_Catprod,
 										TC3.idTab_Catprod,
 										TC1.Catprod AS Cat1,
 										TC2.Catprod AS Cat2,
 										TC3.Catprod AS Cat3,
+										TP1.Produtos AS Modelo1,
 										TDS1.Desconto AS Tipo
 									FROM 
 										Tab_Promocao AS TPM
@@ -152,6 +155,7 @@ class Promocao_model extends CI_Model {
 											LEFT JOIN Tab_Catprod AS TC1 ON TC1.idTab_Catprod = TPM.Cat_1
 											LEFT JOIN Tab_Catprod AS TC2 ON TC2.idTab_Catprod = TPM.Cat_2
 											LEFT JOIN Tab_Catprod AS TC3 ON TC3.idTab_Catprod = TPM.Cat_3
+											LEFT JOIN Tab_Produto AS TP1 ON TP1.idTab_Produto = TPM.Mod_1
 											LEFT JOIN Tab_Desconto AS TDS1 ON TDS1.idTab_Desconto = TPM.Desconto
 											LEFT JOIN Tab_Desconto AS TDS2 ON TDS2.idTab_Desconto = TV.Desconto
 									WHERE 

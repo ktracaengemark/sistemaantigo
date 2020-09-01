@@ -7,27 +7,29 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
+			
 			<a type="button" class="navbar-brand btn btn-sm" href="<?php echo base_url() ?>usuario2/prontuario/<?php echo $_SESSION['log']['idSis_Usuario']; ?>"> 
 				 <?php echo $_SESSION['log']['Nome2']; ?>./<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
 			</a>
+			
+			<?php echo form_open(base_url() . 'cliente/pesquisar', 'class="navbar-form navbar-left"'); ?>
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button class="btn btn-info" type="submit">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+				<input type="text" placeholder="Pesquisar Cliente" class="form-control" name="Pesquisa" value="">
+			</div>
+			</form>
+				
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar1">
 
 			<ul class="nav navbar-nav navbar-center">
-				<!--
-				<li>
-					<?php echo form_open(base_url() . 'cliente/pesquisar', 'class="navbar-form navbar-left"'); ?>
-					<div class="input-group">
-						<span class="input-group-btn">
-							<button class="btn btn-info" type="submit">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</span>
-						<input type="text" placeholder="Pesquisar Cliente" class="form-control" name="Pesquisa" value="">
-					</div>
-					</form>
-				</li>
 				
+				
+				<!--
 				<li>
 					<?php echo form_open(base_url() . 'empresacli/pesquisar', 'class="navbar-form navbar-left"'); ?>
 					<div class="input-group">
@@ -158,8 +160,8 @@
 							<li role="separator" class="divider"></li>-->							
 							<li><a href="<?php echo base_url() ?>cliente/pesquisar"><span class="glyphicon glyphicon-user"></span> Clientes com filtro</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="<?php echo base_url() ?>relatorio/clientes"><span class="glyphicon glyphicon-user"></span> Clientes Lista </a></li>
-							<li role="separator" class="divider"></li>
+							<!--<li><a href="<?php echo base_url() ?>relatorio/clientes"><span class="glyphicon glyphicon-user"></span> Clientes Lista </a></li>
+							<li role="separator" class="divider"></li>-->
 							<li><a href="<?php echo base_url() ?>relatorio/fornecedor"><span class="glyphicon glyphicon-user"></span> Fornecedores </a></li>
 							<!--<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>login/registrar2"><span class="glyphicon glyphicon-user"></span> Conta Pessoal</a></li>-->
@@ -241,6 +243,5 @@
 			</ul>
 		</div>			
 	</div>
-
 </nav>
-<br>
+<br><br><br>

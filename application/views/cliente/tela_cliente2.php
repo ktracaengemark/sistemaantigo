@@ -39,13 +39,13 @@
 													<span class="glyphicon glyphicon-edit"></span> Editar
 												</button>
 											</a>
-											
-											<a href="<?php echo base_url() . 'cliente2/alterar3/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+											-->
+											<a href="<?php echo base_url() . 'cliente2/alterar3/' . $_SESSION['Cliente']['idApp_Cliente']; ?>" role="button">
 												<button type="button" class="btn btn-lg btn-primary ">
 													<span class="glyphicon glyphicon-edit"></span> Editar
 												</button>
 											</a>
-											-->
+											
 										</div>					
 									</li>
 									<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">

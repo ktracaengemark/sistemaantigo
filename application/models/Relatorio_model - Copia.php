@@ -3946,7 +3946,6 @@ class Relatorio_model extends CI_Model {
  
             WHERE
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				TP.Prod_Serv = "P" 
 
 				' . $data['Produtos'] . '
@@ -7611,7 +7610,7 @@ exit();*/
 				TPRS.Prod_Serv,
 				TOP2.Opcao,
 				TOP1.Opcao,
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " ", IFNULL(TOP1.Opcao,""), " ", IFNULL(TOP2.Opcao,"")) AS Nome_Prod,
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " ", IFNULL(TOP2.Opcao,""), " ", IFNULL(TOP1.Opcao,"")) AS Nome_Prod,
 				TP.idTab_Produto,
 				TP.TipoProduto,
 				TP.Produtos,
@@ -7821,7 +7820,7 @@ exit();*/
 				TV.QtdProdutoIncremento,
 				TOP2.Opcao,
 				TOP1.Opcao,
-				CONCAT(IFNULL(TPD.Nome_Prod,""), " ", IFNULL(TOP1.Opcao,""), " ", IFNULL(TOP2.Opcao,""), " ", IFNULL(TV.Convdesc,""), " - ", IFNULL(TV.QtdProdutoIncremento,""), " Unid.") AS Nome_Prod,
+				CONCAT(IFNULL(TPD.Nome_Prod,""), " ", IFNULL(TOP2.Opcao,""), " ", IFNULL(TOP1.Opcao,""), " ", IFNULL(TV.Convdesc,""), " - ", IFNULL(TV.QtdProdutoIncremento,""), " Unid.") AS Nome_Prod,
 				TDC.Desconto
             FROM
                 Tab_Promocao AS TPM

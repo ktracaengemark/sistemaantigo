@@ -121,9 +121,6 @@ class Produtos extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
-		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Cadastrar';
         $data['form_open_path'] = 'produtos/cadastrar';
@@ -331,9 +328,6 @@ class Produtos extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
-		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Cadastrar';
         $data['form_open_path'] = 'produtos/cadastrar1';
@@ -544,9 +538,6 @@ class Produtos extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
-		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Cadastrar';
         $data['form_open_path'] = 'produtos/cadastrar2';
@@ -753,9 +744,6 @@ class Produtos extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
-		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Cadastrar';
         $data['form_open_path'] = 'produtos/cadastrar3';
@@ -1044,9 +1032,6 @@ class Produtos extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
-		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Cadastrar';
         $data['form_open_path'] = 'produtos/categoria';
@@ -1372,9 +1357,7 @@ class Produtos extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
-		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
+		
         $data['titulo'] = 'Cadastrar';
         $data['form_open_path'] = 'produtos/cadastrar4';
         $data['readonly'] = '';
@@ -1542,9 +1525,6 @@ class Produtos extends CI_Controller {
                 $data['valor'][$j]['QtdProdutoDesconto'] = $this->input->post('QtdProdutoDesconto' . $i);
 				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['valor'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
-				$data['valor'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
-				$data['valor'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
-				$data['valor'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
                 $j++;
             }
 
@@ -1767,9 +1747,6 @@ class Produtos extends CI_Controller {
 		$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
-		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
 		
 		$data['select']['Prodaux3'] = $this->Basico_model->select_catprod1($_SESSION['Produto']['Prod_Serv']);
 		$data['select']['idTab_Atributo'] = $this->Basico_model->select_atributo($_SESSION['Produto']['Prodaux3']);
@@ -2053,7 +2030,7 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['inserir'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 					$data['update']['derivados']['inserir'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
-					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'].':'.$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
+					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'];                
 				}
@@ -2064,7 +2041,7 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 					$data['update']['derivados']['alterar'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
-					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'].':'.$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'];					
+					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];					
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'];
 				}
@@ -2114,6 +2091,7 @@ class Produtos extends CI_Controller {
         $this->load->view('basico/footer');
 
     }
+
 	
     public function alterar2($id = FALSE) {
 
@@ -2178,9 +2156,6 @@ class Produtos extends CI_Controller {
                 $data['valor'][$j]['QtdProdutoDesconto'] = $this->input->post('QtdProdutoDesconto' . $i);
 				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['valor'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
-				$data['valor'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
-				$data['valor'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
-				$data['valor'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
                 $j++;
             }
 
@@ -2403,9 +2378,6 @@ class Produtos extends CI_Controller {
 		$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
-		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
 		
 		$data['select']['Prodaux3'] = $this->Basico_model->select_catprod1($_SESSION['Produto']['Prod_Serv']);
 		$data['select']['idTab_Atributo'] = $this->Basico_model->select_atributo($_SESSION['Produto']['Prodaux3']);
@@ -2689,7 +2661,7 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['inserir'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 					$data['update']['derivados']['inserir'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
-					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'].':'.$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
+					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'];                
 				}
@@ -2700,7 +2672,7 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 					$data['update']['derivados']['alterar'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
-					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'].':'.$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'];					
+					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];					
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'];
 				}
@@ -2796,7 +2768,7 @@ class Produtos extends CI_Controller {
         
 		(!$this->input->post('PT3Count')) ? $data['count']['PT3Count'] = 0 : $data['count']['PT3Count'] = $this->input->post('PT3Count');
 		(!$this->input->post('PT2Count')) ? $data['count']['PT2Count'] = 0 : $data['count']['PT2Count'] = $this->input->post('PT2Count');        
-		//(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
+		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
 		(!$this->input->post('SCount')) ? $data['count']['SCount'] = 0 : $data['count']['SCount'] = $this->input->post('SCount');        
 		(!$this->input->post('TCount')) ? $data['count']['TCount'] = 0 : $data['count']['TCount'] = $this->input->post('TCount');		
         (!$this->input->post('PMCount')) ? $data['count']['PMCount'] = 0 : $data['count']['PMCount'] = $this->input->post('PMCount');
@@ -2805,7 +2777,7 @@ class Produtos extends CI_Controller {
 		(!$data['produtos']['TipoProduto']) ? $data['produtos']['TipoProduto'] = 'V' : FALSE;
 		(!$data['produtos']['Categoria']) ? $data['produtos']['Categoria'] = 'P' : FALSE;
 		(!$data['produtos']['UnidadeProduto']) ? $data['produtos']['UnidadeProduto'] = 'UNID' : FALSE;
-		/*
+
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
@@ -2815,15 +2787,12 @@ class Produtos extends CI_Controller {
                 $data['valor'][$j]['QtdProdutoDesconto'] = $this->input->post('QtdProdutoDesconto' . $i);
 				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['valor'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
-				$data['valor'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
-				$data['valor'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
-				$data['valor'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
                 $j++;
             }
 
         }
         $data['count']['PTCount'] = $j - 1;
-		*/
+		
         $j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
@@ -2918,21 +2887,21 @@ class Produtos extends CI_Controller {
 
             }			
 			
-			/*
+			
             #### Tab_Valor ####
             $data['valor'] = $this->Produtos_model->get_valor($id);
             if (count($data['valor']) > 0) {
                 $data['valor'] = array_combine(range(1, count($data['valor'])), array_values($data['valor']));
                 $data['count']['PTCount'] = count($data['valor']);
-				
+				/*
                 if (isset($data['valor'])) {
 
                     for($j=1; $j <= $data['count']['PTCount']; $j++)
 						
                 }
-								
+				*/				
             }
-			*/
+			
             #### Tab_Atributo_Select ####
             $data['servico'] = $this->Produtos_model->get_servico($id);
             if (count($data['servico']) > 0) {
@@ -3038,9 +3007,6 @@ class Produtos extends CI_Controller {
 		$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
-		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
 		
 		
 		$data['select']['Cor_Prod'] = $this->Basico_model->select_opcao2();
@@ -3066,12 +3032,11 @@ class Produtos extends CI_Controller {
         $data['metodo'] = 3;
 
         //if (isset($data['valor']) && ($data['valor'][0]['DataValor'] || $data['valor'][0]['Desconto']))
-        /*
-		if ($data['count']['PTCount'] > 0)
+        if ($data['count']['PTCount'] > 0)
             $data['tratamentosin'] = 'in';
         else
             $data['tratamentosin'] = '';
-		*/
+
 
         #Ver uma solução melhor para este campo
 
@@ -3139,7 +3104,7 @@ class Produtos extends CI_Controller {
                 $data['update']['produtos']['campos'],
                 $data['produtos']['idTab_Produto'], TRUE);
             $data['update']['produtos']['bd'] = $this->Produtos_model->update_produtos($data['produtos'], $data['produtos']['idTab_Produto']);
-			/*
+
             #### Tab_Valor ####
             $data['update']['valor']['anterior'] = $this->Produtos_model->get_valor($data['produtos']['idTab_Produto']);
             if (isset($data['valor']) || (!isset($data['valor']) && isset($data['update']['valor']['anterior']) ) ) {
@@ -3180,7 +3145,7 @@ class Produtos extends CI_Controller {
                     $data['update']['valor']['bd']['excluir'] = $this->Produtos_model->delete_valor($data['update']['valor']['excluir']);
 
             }
-			*/
+			
             #### Tab_Atributo_Select ####
             $data['update']['servico']['anterior'] = $this->Produtos_model->get_servico($data['produtos']['idTab_Produto']);
             if (isset($data['servico']) || (!isset($data['servico']) && isset($data['update']['servico']['anterior']) ) ) {
@@ -3329,7 +3294,7 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['inserir'][$j]['Prod_Serv'] = $_SESSION['Produto']['Prod_Serv'];
 					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 					$data['update']['derivados']['inserir'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
-					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'].':'.$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
+					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'];                
 				}
@@ -3340,7 +3305,7 @@ class Produtos extends CI_Controller {
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 					$data['update']['derivados']['alterar'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
-					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'].':'.$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'];					
+					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];					
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'];
 				}
@@ -3382,8 +3347,8 @@ class Produtos extends CI_Controller {
 				unset($_SESSION['Servico']);
 				unset($_SESSION['Produto']);
 				#redirect(base_url() . 'produtos/listar/' . $data['msg']);
-				//redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
-				redirect(base_url() . 'produtos/alterar3/' . $data['produtos']['idTab_Produto'] . $data['msg']);
+				redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
+				//redirect(base_url() . 'produtos/alterar3/' . $data['produtos']['idTab_Produto'] . $data['msg']);
                 exit();
             }
         }
@@ -3410,7 +3375,7 @@ class Produtos extends CI_Controller {
             'idTab_Produto',			
             'TipoProduto',
 			'Categoria',
-			#'Prod_Serv',
+			'Prod_Serv',
 			'UnidadeProduto',
 			#'CodProd',
 			'Fornecedor',
@@ -3421,7 +3386,7 @@ class Produtos extends CI_Controller {
             'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			#'Prodaux3',
+			'Prodaux3',
 			'Prodaux4',
 			'Ativo',
 			'VendaSite',
@@ -3454,11 +3419,7 @@ class Produtos extends CI_Controller {
 				$data['valor'][$j]['idTab_Promocao'] = $this->input->post('idTab_Promocao' . $i);
                 $data['valor'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
                 $data['valor'][$j]['QtdProdutoDesconto'] = $this->input->post('QtdProdutoDesconto' . $i);
-				$data['valor'][$j]['QtdProdutoIncremento'] = $this->input->post('QtdProdutoIncremento' . $i);
-				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
-				$data['valor'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
-				$data['valor'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
-				$data['valor'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
+				$data['valor'][$j]['QtdProdutoIncremento'] = $this->input->post('QtdProdutoIncremento' . $i);				
                 $j++;
             }
 
@@ -3505,17 +3466,12 @@ class Produtos extends CI_Controller {
 		$j = 1;
         for ($i = 1; $i <= $data['count']['PDCount']; $i++) {
 
-            if ($this->input->post('Cat_Prod' . $i) || $this->input->post('Opcao_Atributo_1' . $i) || $this->input->post('Valor_Produto' . $i) || 
-				$this->input->post('Opcao_Atributo_2' . $i) || $this->input->post('Cod_Prod' . $i) || $this->input->post('Nome_Prod' . $i)){
+            if ($this->input->post('Opcao_Atributo_1' . $i) || $this->input->post('Opcao_Atributo_2' . $i) || $this->input->post('Nome_Prod' . $i)){
 				$data['derivados'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
-				#$data['derivados'][$j]['Cat_Prod'] = $this->input->post('Cat_Prod' . $i);
+				$data['derivados'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['derivados'][$j]['Opcao_Atributo_1'] = $this->input->post('Opcao_Atributo_1' . $i);
 				$data['derivados'][$j]['Opcao_Atributo_2'] = $this->input->post('Opcao_Atributo_2' . $i);
-				#$data['derivados'][$j]['Cod_Prod'] = $this->input->post('Cod_Prod' . $i);
 				$data['derivados'][$j]['Nome_Prod'] = $this->input->post('Nome_Prod' . $i);
-				#$data['derivados'][$j]['Qtd_Prod_Desc'] = $this->input->post('Qtd_Prod_Desc' . $i);
-				#$data['derivados'][$j]['Qtd_Prod_Incr'] = $this->input->post('Qtd_Prod_Incr' . $i);
-				#$data['derivados'][$j]['Tipo_Valor_Prod'] = $this->input->post('Tipo_Valor_Prod' . $i);
 				$data['derivados'][$j]['Valor_Produto'] = $this->input->post('Valor_Produto' . $i);
                 $j++;
             }
@@ -3613,13 +3569,13 @@ class Produtos extends CI_Controller {
             if (count($data['derivados']) > 0) {
                 $data['derivados'] = array_combine(range(1, count($data['derivados'])), array_values($data['derivados']));
                 $data['count']['PDCount'] = count($data['derivados']);
-/*
+				/*
                 if (isset($data['derivados'])) {
 
                     for($j=1; $j <= $data['count']['PDCount']; $j++)
 						
                 }
-*/				
+				*/				
             }			
 
         }
@@ -3628,9 +3584,9 @@ class Produtos extends CI_Controller {
 		
         #### Tab_Produto ####
 
-		#$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
 		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim');
- 		#$this->form_validation->set_rules('Prod_Serv', 'Prod/Serv', 'required|trim');
+ 		$this->form_validation->set_rules('Prod_Serv', 'Prod/Serv', 'required|trim');
 		#$this->form_validation->set_rules($data['produtos']['CodProd'], 'Código', 'is_unique_by_id[Tab_Produto.'.$data['produtos']['CodProd'].'.' . $data['produtos']['idTab_Produto'] . ']');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'required|trim|is_unique_by_id[Tab_Produto.CodProd.' . $data['produtos']['idTab_Produto'] . ']');
 		#$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
@@ -3658,9 +3614,6 @@ class Produtos extends CI_Controller {
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_prod_der0();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
-		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
 		
 		$data['select']['Cor_Prod'] = $this->Basico_model->select_opcao2();
 		$data['select']['Tam_Prod'] = $this->Basico_model->select_opcao1();		
@@ -3782,12 +3735,10 @@ class Produtos extends CI_Controller {
 					$data['update']['valor']['inserir'][$j]['QtdProdutoDesconto'] = $data['update']['valor']['inserir'][$j]['QtdProdutoDesconto'];
 					$data['update']['valor']['inserir'][$j]['QtdProdutoIncremento'] = $data['update']['valor']['inserir'][$j]['QtdProdutoIncremento'];
 					$data['update']['valor']['inserir'][$j]['idTab_Promocao'] = '0';
-					$data['update']['valor']['inserir'][$j]['Item_Promocao'] = '0';
-					$data['update']['valor']['inserir'][$j]['Prodaux3'] = $_SESSION['Produto']['Prodaux3'];
+					$data['update']['valor']['inserir'][$j]['Prodaux3'] = $data['produtos']['Prodaux3'];
 					$data['update']['valor']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['valor']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ValorProduto']));
-					$data['update']['valor']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['inserir'][$j]['Convdesc'], 'ISO-8859-1'));
-				}
+                }
 
                 $max = count($data['update']['valor']['alterar']);
                 for($j=0;$j<$max;$j++) {
@@ -3796,9 +3747,6 @@ class Produtos extends CI_Controller {
 					$data['update']['valor']['alterar'][$j]['QtdProdutoDesconto'] = $data['update']['valor']['alterar'][$j]['QtdProdutoDesconto'];
 					$data['update']['valor']['alterar'][$j]['QtdProdutoIncremento'] = $data['update']['valor']['alterar'][$j]['QtdProdutoIncremento'];
 					$data['update']['valor']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
-					$data['update']['valor']['alterar'][$j]['idTab_Promocao'] = '0';
-					$data['update']['valor']['alterar'][$j]['Item_Promocao'] = '0';
 				}
 
                 if (count($data['update']['valor']['inserir']))
@@ -3952,28 +3900,31 @@ class Produtos extends CI_Controller {
 
                 $max = count($data['update']['derivados']['inserir']);
                 for($j=0;$j<$max;$j++) {
+					$data['update']['derivados']['inserir'][$j]['Valor_Produto'] = str_replace(',', '.', str_replace('.', '', $data['update']['derivados']['inserir'][$j]['Valor_Produto']));
 					$data['update']['derivados']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['derivados']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['derivados']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['derivados']['inserir'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['derivados']['inserir'][$j]['Prod_Serv'] = $_SESSION['Produto']['Prod_Serv'];
+					$data['update']['derivados']['inserir'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
 					$data['update']['derivados']['inserir'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 					$data['update']['derivados']['inserir'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
-					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'].':'.$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
+					$data['update']['derivados']['inserir'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['inserir'][$j]['Opcao_Atributo_2'];                
 				}
 
                 $max = count($data['update']['derivados']['alterar']);
                 for($j=0;$j<$max;$j++) {
-					$data['update']['derivados']['alterar'][$j]['Prod_Serv'] = $_SESSION['Produto']['Prod_Serv'];
+					$data['update']['derivados']['alterar'][$j]['Prod_Serv'] = $data['produtos']['Prod_Serv'];
+					$data['update']['derivados']['alterar'][$j]['idTab_Produto'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['derivados']['alterar'][$j]['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
 					$data['update']['derivados']['alterar'][$j]['NomeProdutos'] = trim(mb_strtoupper($data['produtos']['Produtos'], 'UTF-8'));
-					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'].':'.$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'];					
+					$data['update']['derivados']['alterar'][$j]['Cod_Prod'] = $data['produtos']['idTab_Produto'].':'.$data['derivados'][$j]['Opcao_Atributo_1'].':'.$data['derivados'][$j]['Opcao_Atributo_2'];					
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_1'];
 					$data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'] = $data['update']['derivados']['alterar'][$j]['Opcao_Atributo_2'];
+					$data['update']['derivados']['alterar'][$j]['Valor_Produto'] = str_replace(',', '.', str_replace('.', '', $data['update']['derivados']['alterar'][$j]['Valor_Produto']));
 				}
 
                 if (count($data['update']['derivados']['inserir']))
@@ -4076,9 +4027,7 @@ class Produtos extends CI_Controller {
                 $data['valor'][$j]['Fornecedor'] = $this->input->post('Fornecedor' . $i);
 				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['valor'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
-				$data['valor'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
-				$data['valor'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
-				$data['valor'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
+
                 $j++;
             }
 
@@ -4133,9 +4082,6 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
-		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Editar';
         $data['form_open_path'] = 'produtos/alterar';
@@ -4338,9 +4284,7 @@ class Produtos extends CI_Controller {
                 $data['valor'][$j]['Fornecedor'] = $this->input->post('Fornecedor' . $i);
 				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['valor'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
-				$data['valor'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
-				$data['valor'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
-				$data['valor'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
+
                 $j++;
             }
 

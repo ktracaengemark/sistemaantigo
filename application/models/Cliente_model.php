@@ -172,7 +172,7 @@ class Cliente_model extends CI_Model {
         }
     }
 	
-    public function lista_cliente($data, $data2, $data3, $x, $qtde=0, $page=0) {
+    public function lista_cliente_2($data, $data2, $data3, $x, $qtde=0, $page=0) {
 			/*
 			echo "<pre>";
 			print_r($data);
@@ -189,42 +189,20 @@ class Cliente_model extends CI_Model {
 			echo "<br>";
 			echo "</pre>";
 			exit();
-			*/
-		//if($qtde > 0) $this->db->limit($qtde, $page);	
-		$ficha = ($data) ? ' AND RegistroFicha like "%' . $data . '%" ' : FALSE;
-		$nomedocliente = ($data2) ? ' AND NomeCliente like "%' . $data2 . '%" ' : FALSE;
-		$telefonedocliente = ($data3) ? ' AND (CelularCliente like "%' . $data3 . '%" OR Telefone like "%' . $data3 . '%" OR Telefone2 like "%' . $data3 . '%" OR Telefone3 like "%' . $data3 . '%") ' : FALSE;
-			$querylimit = '';
-        if ($qtde)
-            $querylimit = 'LIMIT ' . $page . ', ' . $qtde;
+			*/	
+		$ficha = ($data) ? ' AND RegistroFicha like "%' . $data . '%" ' : '';
+		$nomedocliente = ($data2) ? ' AND NomeCliente like "%' . $data2 . '%" ' : '';
+		$telefonedocliente = ($data3) ? ' AND (CelularCliente like "%' . $data3 . '%" OR Telefone like "%' . $data3 . '%" OR Telefone2 like "%' . $data3 . '%" OR Telefone3 like "%' . $data3 . '%") ' : '';
+		$querylimit = ($qtde)? 'LIMIT ' . $page . ', ' . $qtde : '';
         $query = $this->db->query('SELECT * '
                 . 'FROM App_Cliente WHERE '
-                . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  '
-				//. 'NomeCliente like "%' . $data . '%" '
+                . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ''
 				. $nomedocliente
 				. $ficha
 				. $telefonedocliente
-				//. '(NomeCliente like "%' . $data . '%" ) '
-				//. '(NomeCliente like "%MARIA%" ) '
-				//. 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ''
-                #. '(NomeCliente like "%' . $data . '%" OR '
-				
-				//. '(NomeCliente like "%' . $data . '%" AND'
-				//. ' RegistroFicha like "%' . $data2 . '%" ) '
-				
-				//. ' AND RegistroFicha like "%' . $data . '%"'
-				//. $ficha
-				//. $nomedocliente
-				
-				
-				
-                #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
-                #. 'NomeCliente like "%' . $data . '%" OR '
-                #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
-                #. 'CelularCliente like "%' . $data . '%" OR Telefone like "%' . $data . '%" OR Telefone2 like "%' . $data . '%" OR Telefone3 like "%' . $data . '%") '
                 . 'ORDER BY NomeCliente ASC '
-				. $querylimit);
-				//. 'limit 10');
+				. $querylimit
+				);
         /*
           echo $this->db->last_query();
           echo "<pre>";
@@ -241,29 +219,53 @@ class Cliente_model extends CI_Model {
                 foreach ($query->result() as $row) {
                     $row->DataNascimento = $this->basico->mascara_data($row->DataNascimento, 'barras');
                 }
-
                 return $query;
             }
         }
     }	
+
+    public function lista_cliente_total() {
 	
-    public function lista_cliente_1($data, $existe = FALSE, $total = FALSE, $limit = FALSE, $start = FALSE, $date = FALSE) {
+        $query = $this->db->query('SELECT * '
+                . 'FROM App_Cliente WHERE '
+                . 'idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' ');
+		/*
+          echo "<pre>";
+          print_r($query->num_rows());
+          echo "</pre>";
+          exit();
+		  */
+		
+		if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+			return $query->num_rows();
+        }
+    }
+	
+    public function lista_cliente($data, $existe = FALSE, $total = FALSE, $limit = FALSE, $start = FALSE, $date = FALSE) {
 
         if (preg_match("/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](1[89][0-9][0-9]|2[0189][0-9][0-9])$/", $data)) {
             $query = 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
                     . 'DataCadastroCliente = "' . $this->basico->mascara_data($data, 'mysql') . '" ';
-        }
-        elseif (is_numeric($data)) {
+        }elseif (is_numeric($data)) {
             if($date === TRUE) {
                 $query = 'DataNascimento = "' . substr($data, 4, 4).'-'.substr($data, 2, 2).'-'.substr($data, 0, 2) . '" OR '
                         . 'DataCadastroCliente = "' . substr($data, 4, 4).'-'.substr($data, 2, 2).'-'.substr($data, 0, 2) . '" ';
-            }
-            else
-                $query = 'RegistroFicha like "%' . $data . '%" OR '
-						. 'Telefone like "%' . $data . '%" ';
-        }
-        else
-            $query = 'NomeCliente like "%' . $data . '%" ';
+            }else{
+				if((strlen($data)) <= 7){
+					$query = 'RegistroFicha like "%' . $data . '%" ';
+				}else{
+					$query = 'CelularCliente like "%' . $data . '%" OR '
+							. 'Telefone like "%' . $data . '%" OR '
+							. 'Telefone2 like "%' . $data . '%" OR '
+							. 'Telefone3 like "%' . $data . '%" ';
+				}
+			}			
+        }else{
+			$query = 'NomeCliente like "' . $data . '%" ';
+		}
+            
 
         $querylimit = '';
         if ($limit)
@@ -281,8 +283,7 @@ class Cliente_model extends CI_Model {
                 return FALSE;
             else
                 return TRUE;
-        }
-        else {
+        }else {
 
             if ($total === TRUE) {
 
@@ -293,8 +294,7 @@ class Cliente_model extends CI_Model {
                         . 'ORDER BY NomeCliente ASC');
 
                 return $query->num_rows();
-            }
-            else {
+            }else {
 
                 $query = $this->db->query('SELECT * '
                         . 'FROM App_Cliente WHERE '
