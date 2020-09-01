@@ -68,6 +68,7 @@ class Produtos extends CI_Controller {
 			'Prodaux3',
 			'Prodaux4',
 			'Ativo',
+			'VendaBalcao',
 			'VendaSite',
 			#'Aprovado',
         ), TRUE));
@@ -119,7 +120,8 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
-		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
@@ -161,7 +163,15 @@ class Produtos extends CI_Controller {
             'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['produtos']['Ativo'] == 'S') ?
-            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"'; 
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
+			
+ 		(!$data['produtos']['VendaBalcao']) ? $data['produtos']['VendaBalcao'] = 'S' : FALSE;
+		
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['produtos']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['produtos']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"'; 
 
  		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
 		
@@ -280,6 +290,7 @@ class Produtos extends CI_Controller {
 			'Prodaux2',
 			'Prodaux3',
 			'Ativo',
+			'VendaBalcao',
 			'VendaSite',			
 			#'Aprovado',
         ), TRUE));
@@ -329,7 +340,8 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux33'] = $this->Produtos_model->select_prodaux33();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
-		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
@@ -371,7 +383,15 @@ class Produtos extends CI_Controller {
             'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['produtos']['Ativo'] == 'S') ?
-            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';		
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
+			
+ 		(!$data['produtos']['VendaBalcao']) ? $data['produtos']['VendaBalcao'] = 'S' : FALSE;
+		
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['produtos']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['produtos']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"';		
 		
  		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
 		
@@ -490,6 +510,7 @@ class Produtos extends CI_Controller {
 			'Prodaux3',
 			'Prodaux4',
 			'Ativo',
+			'VendaBalcao',
 			'VendaSite',			
 			#'Aprovado',
         ), TRUE));
@@ -542,7 +563,8 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux33'] = $this->Produtos_model->select_prodaux33();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
-		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
@@ -584,7 +606,15 @@ class Produtos extends CI_Controller {
             'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['produtos']['Ativo'] == 'S') ?
-            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';		
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
+			
+ 		(!$data['produtos']['VendaBalcao']) ? $data['produtos']['VendaBalcao'] = 'S' : FALSE;
+		
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['produtos']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['produtos']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"';			
 		
  		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
 		
@@ -751,7 +781,8 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux33'] = $this->Produtos_model->select_prodaux33();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
-		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
@@ -793,7 +824,15 @@ class Produtos extends CI_Controller {
             'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['produtos']['Ativo'] == 'S') ?
-            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';		
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
+			
+ 		(!$data['produtos']['VendaBalcao']) ? $data['produtos']['VendaBalcao'] = 'S' : FALSE;
+		
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['produtos']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['produtos']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"';		
 		
  		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
 		
@@ -912,6 +951,7 @@ class Produtos extends CI_Controller {
 			'Prodaux3',
 			'Prodaux4',
 			'Ativo',
+			'VendaBalcao',
 			'VendaSite',
 			#'Aprovado',
         ), TRUE));
@@ -1042,7 +1082,8 @@ class Produtos extends CI_Controller {
 		#$data['select']['Tam_Prod'] = $this->Basico_model->select_tam_prod();		
 		$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
-		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
@@ -1084,7 +1125,15 @@ class Produtos extends CI_Controller {
             'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['produtos']['Ativo'] == 'S') ?
-            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"'; 
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
+			
+ 		(!$data['produtos']['VendaBalcao']) ? $data['produtos']['VendaBalcao'] = 'S' : FALSE;
+		
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['produtos']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['produtos']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"'; 
 
  		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
 		
@@ -1337,6 +1386,7 @@ class Produtos extends CI_Controller {
 			'Prodaux3',
 			'Prodaux4',
 			'Ativo',
+			'VendaBalcao',
 			'VendaSite',
 			#'Aprovado',
         ), TRUE));
@@ -1370,7 +1420,8 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();		
 		$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
-		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
@@ -1404,7 +1455,15 @@ class Produtos extends CI_Controller {
             'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['produtos']['Ativo'] == 'S') ?
-            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"'; 
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
+			
+ 		(!$data['produtos']['VendaBalcao']) ? $data['produtos']['VendaBalcao'] = 'S' : FALSE;
+		
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['produtos']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['produtos']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"'; 
 
  		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
 		
@@ -1511,6 +1570,7 @@ class Produtos extends CI_Controller {
 			'Prodaux3',
 			'Prodaux4',
 			'Ativo',
+			'VendaBalcao',
 			'VendaSite',
 			#'Aprovado',
 			#'Atributo_1',
@@ -1765,7 +1825,8 @@ class Produtos extends CI_Controller {
 		#$data['select']['Opcao_Atributo_1'] = $this->Basico_model->select_cor_prod();
 		
 		$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
-		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
@@ -1819,7 +1880,15 @@ class Produtos extends CI_Controller {
             'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['produtos']['Ativo'] == 'S') ?
-            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';		
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
+			
+ 		(!$data['produtos']['VendaBalcao']) ? $data['produtos']['VendaBalcao'] = 'S' : FALSE;
+		
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['produtos']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['produtos']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"';		
 		
  		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
 		
@@ -2147,6 +2216,7 @@ class Produtos extends CI_Controller {
 			'Prodaux3',
 			'Prodaux4',
 			'Ativo',
+			'VendaBalcao',
 			'VendaSite',
 			#'Aprovado',
 			#'Atributo_1',
@@ -2401,7 +2471,8 @@ class Produtos extends CI_Controller {
 		#$data['select']['Opcao_Atributo_1'] = $this->Basico_model->select_cor_prod();
 		
 		$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
-		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
@@ -2455,7 +2526,15 @@ class Produtos extends CI_Controller {
             'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['produtos']['Ativo'] == 'S') ?
-            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';		
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
+			
+ 		(!$data['produtos']['VendaBalcao']) ? $data['produtos']['VendaBalcao'] = 'S' : FALSE;
+		
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['produtos']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['produtos']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"';		
 		
  		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
 		
@@ -2783,6 +2862,7 @@ class Produtos extends CI_Controller {
 			'Prodaux3',
 			'Prodaux4',
 			'Ativo',
+			'VendaBalcao',
 			'VendaSite',
 			#'Aprovado',
 			#'Atributo_1',
@@ -3036,7 +3116,8 @@ class Produtos extends CI_Controller {
 		#$data['select']['Opcao_Atributo_2'] = $this->Basico_model->select_tam_prod();
 		
 		$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
-		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
@@ -3095,7 +3176,15 @@ class Produtos extends CI_Controller {
             'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['produtos']['Ativo'] == 'S') ?
-            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';		
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
+			
+ 		(!$data['produtos']['VendaBalcao']) ? $data['produtos']['VendaBalcao'] = 'S' : FALSE;
+		
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['produtos']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['produtos']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"';		
 		
  		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
 		
@@ -3424,6 +3513,7 @@ class Produtos extends CI_Controller {
 			#'Prodaux3',
 			'Prodaux4',
 			'Ativo',
+			'VendaBalcao',
 			'VendaSite',
 			#'Aprovado',
 			#'Atributo_1',
@@ -3656,7 +3746,8 @@ class Produtos extends CI_Controller {
 		
 		#$data['select']['idTab_Promocao'] = $this->Basico_model->select_promocao();
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_prod_der0();
-		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
@@ -3715,7 +3806,15 @@ class Produtos extends CI_Controller {
             'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['produtos']['Ativo'] == 'S') ?
-            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';		
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
+			
+ 		(!$data['produtos']['VendaBalcao']) ? $data['produtos']['VendaBalcao'] = 'S' : FALSE;
+		
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['produtos']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['produtos']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"';		
 		
  		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
 		
@@ -4054,6 +4153,7 @@ class Produtos extends CI_Controller {
 			'Prodaux3',
 			'Prodaux4',
 			'Ativo',
+			'VendaBalcao',
 			'VendaSite',
 			#'Aprovado',
         ), TRUE));
@@ -4131,7 +4231,8 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
-		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
+		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
@@ -4173,7 +4274,15 @@ class Produtos extends CI_Controller {
             'Ativo' => $this->basico->radio_checked($data['produtos']['Ativo'], 'Ativo', 'NS'),
         );
         ($data['produtos']['Ativo'] == 'S') ?
-            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';		
+            $data['div']['Ativo'] = '' : $data['div']['Ativo'] = 'style="display: none;"';
+			
+ 		(!$data['produtos']['VendaBalcao']) ? $data['produtos']['VendaBalcao'] = 'S' : FALSE;
+		
+		$data['radio'] = array(
+            'VendaBalcao' => $this->basico->radio_checked($data['produtos']['VendaBalcao'], 'VendaBalcao', 'NS'),
+        );
+        ($data['produtos']['VendaBalcao'] == 'S') ?
+            $data['div']['VendaBalcao'] = '' : $data['div']['VendaBalcao'] = 'style="display: none;"';		
 		
  		(!$data['produtos']['VendaSite']) ? $data['produtos']['VendaSite'] = 'S' : FALSE;       
 		

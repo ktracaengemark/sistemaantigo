@@ -7,28 +7,25 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			
+			<!--
 			<a type="button" class="navbar-brand btn btn-sm" href="<?php echo base_url() ?>usuario2/prontuario/<?php echo $_SESSION['log']['idSis_Usuario']; ?>"> 
 				 <?php echo $_SESSION['log']['Nome2']; ?>./<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
 			</a>
-			
+			-->
 			<?php echo form_open(base_url() . 'cliente/pesquisar', 'class="navbar-form navbar-left"'); ?>
 			<div class="input-group">
 				<span class="input-group-btn">
-					<button class="btn btn-info" type="submit">
+					<button class="btn btn-info btn-md" type="submit">
 						<span class="glyphicon glyphicon-search"></span>
 					</button>
 				</span>
-				<input type="text" placeholder="Pesquisar Cliente" class="form-control" name="Pesquisa" value="">
+				<input type="text" placeholder="Pesquisar Cliente" class="form-control btn-sm " name="Pesquisa" value="">
 			</div>
 			</form>
-				
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar1">
 
 			<ul class="nav navbar-nav navbar-center">
-				
-				
 				<!--
 				<li>
 					<?php echo form_open(base_url() . 'empresacli/pesquisar', 'class="navbar-form navbar-left"'); ?>
@@ -153,7 +150,7 @@
 				<li class="btn-toolbar btn-sm navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group">
 						<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
-							<span class="glyphicon glyphicon-pencil"></span> Cadastros & Relatórios  <span class="caret"></span>
+							<span class="glyphicon glyphicon-pencil"></span> Cadastros<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
 							<!--<li><a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>"><span class="glyphicon glyphicon-user"></span> Cobranca</a></li>
@@ -207,7 +204,7 @@
 							<?php } ?>
 							<span class="caret"></span>
 						</button>
-						<ul class="dropdown-menu" role="menu">							
+						<ul class="dropdown-menu" role="menu">
 							<li>
 								<a href="<?php echo base_url() ?>acesso"> 
 									<span class="glyphicon glyphicon-user"></span> Perfil
@@ -244,4 +241,4 @@
 		</div>			
 	</div>
 </nav>
-<br><br><br>
+<br>

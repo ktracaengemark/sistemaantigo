@@ -150,6 +150,7 @@ class Produtos_model extends CI_Model {
 				TP.Aprovado,
 				TP.Arquivo,
 				TP.Ativo,
+				TP.VendaBalcao,
 				TP.VendaSite,
 				TP.PesoProduto,
 				TP.Comissao,

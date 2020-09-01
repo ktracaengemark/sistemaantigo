@@ -235,8 +235,8 @@
 													-->	
 												</div>
 												<div class="row">
-													<div class="col-md-6 text-left">
-														<label for="Ativo">Produto Ativo?</label><br>
+													<div class="col-md-4 text-left">
+														<label for="Ativo">Ativo?</label><br>
 														<div class="btn-group" data-toggle="buttons">
 															<?php
 															foreach ($select['Ativo'] as $key => $row) {
@@ -263,9 +263,40 @@
 															?>
 														</div>
 													</div>
-													<div id="Ativo" <?php echo $div['Ativo']; ?>>	
-														<div class="col-md-6 text-left">
-															<label for="VendaSite">Vender no Site?</label><br>
+													<div id="Ativo" <?php echo $div['Ativo']; ?>>
+														<div class="col-md-4 text-left">
+															<label for="VendaBalcao">VendaBalcao?</label><br>
+															<div class="btn-group" data-toggle="buttons">
+																<?php
+																foreach ($select['VendaBalcao'] as $key => $row) {
+																	if (!$produtos['VendaBalcao']) $produtos['VendaBalcao'] = 'N';
+
+																	($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																	if ($produtos['VendaBalcao'] == $key) {
+																		echo ''
+																		. '<label class="btn btn-warning active" name="VendaBalcao_' . $hideshow . '">'
+																		. '<input type="radio" name="VendaBalcao" id="' . $hideshow . '" '
+																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																		. '</label>'
+																		;
+																	} else {
+																		echo ''
+																		. '<label class="btn btn-default" name="VendaBalcao_' . $hideshow . '">'
+																		. '<input type="radio" name="VendaBalcao" id="' . $hideshow . '" '
+																		. 'autocomplete="off" value="' . $key . '" >' . $row
+																		. '</label>'
+																		;
+																	}
+																}
+																?>
+															</div>
+														</div>								
+														<div id="VendaBalcao" <?php echo $div['VendaBalcao']; ?>>	
+															
+														</div>	
+														<div class="col-md-4 text-left">
+															<label for="VendaSite">VendaSite?</label><br>
 															<div class="btn-group" data-toggle="buttons">
 																<?php
 																foreach ($select['VendaSite'] as $key => $row) {
