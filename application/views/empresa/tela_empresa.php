@@ -99,7 +99,7 @@
 
 												echo '
 												<tr>
-													<td><span class="glyphicon glyphicon-gift"></span> Ingressou :</td>
+													<td><span class="glyphicon glyphicon-gift"></span> Cadastro :</td>
 														<td>' . $query['DataCriacao'] . '</td>
 												</tr>
 												<tr>
@@ -138,7 +138,7 @@
 
 												echo '
 												<tr>
-													<td><span class="glyphicon glyphicon-envelope"></span> Categoria:</td>
+													<td><span class="glyphicon glyphicon-pencil"></span> Categoria:</td>
 													<td>' . $query['CategoriaEmpresa'] . '</td>
 												</tr>
 												';
@@ -149,8 +149,30 @@
 
 												echo '
 												<tr>
-													<td><span class="glyphicon glyphicon-envelope"></span> Atuacao:</td>
+													<td><span class="glyphicon glyphicon-pencil"></span> Atuacao:</td>
 													<td>' . $query['Atuacao'] . '</td>
+												</tr>
+												';
+
+												}
+												
+												if ($query['SobreNos']) {
+
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-pencil"></span> Sobre Nos:</td>
+													<td>' . $query['SobreNos'] . '</td>
+												</tr>
+												';
+
+												}
+												
+												if ($query['Atendimento']) {
+
+												echo '
+												<tr>
+													<td><span class="glyphicon glyphicon-pencil"></span> Atendimento:</td>
+													<td>' . $query['Atendimento'] . '</td>
 												</tr>
 												';
 

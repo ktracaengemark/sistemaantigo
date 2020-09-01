@@ -175,6 +175,8 @@ class Empresa extends CI_Controller {
 			'Boleto',
 			'Debito',
 			'Cartao',
+			'Atendimento',
+			'SobreNos',
         ), TRUE);
 				
 

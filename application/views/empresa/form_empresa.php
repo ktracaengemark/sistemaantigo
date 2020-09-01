@@ -116,11 +116,6 @@
 													?>   
 												</select>          
 											</div>
-											<div class="col-md-3">
-												<label for="Atuacao">Atuação:</label>
-												<textarea class="form-control" id="Atuacao" <?php echo $readonly; ?>
-														  name="Atuacao"><?php echo $query['Atuacao']; ?></textarea>
-											</div>
 											<!--
 											<div class="col-md-3">
 												<label for="Site">Site:</label>
@@ -129,6 +124,23 @@
 											<?php echo form_error('Site'); ?>
 											</div>
 											-->
+										</div>
+										<div class="row">
+											<div class="col-md-3">
+												<label for="Atuacao">Atuação:</label>
+												<textarea class="form-control" id="Atuacao" <?php echo $readonly; ?>
+														  name="Atuacao"><?php echo $query['Atuacao']; ?></textarea>
+											</div>
+											<div class="col-md-3">
+												<label for="Atendimento">Atendimento:</label>
+												<textarea class="form-control" id="Atendimento" <?php echo $readonly; ?>
+														  name="Atendimento"><?php echo $query['Atendimento']; ?></textarea>
+											</div>
+											<div class="col-md-3">
+												<label for="SobreNos">Sobre Nós:</label>
+												<textarea class="form-control" id="SobreNos" <?php echo $readonly; ?>
+														  name="SobreNos"><?php echo $query['SobreNos']; ?></textarea>
+											</div>
 										</div>
 									</div>
 									
