@@ -2417,7 +2417,15 @@ function adiciona_item_promocao() {
 								</div>\
 							</div>\
 						</div>\
-						<div class="col-md-4 text-right"></div>\
+						<div class="col-md-2">\
+							<label for="ComissaoVenda'+pt+'">Comissao</label><br>\
+							<div class="input-group id="ComissaoVenda'+pt+'">\
+								<input type="text" class="form-control Valor text-right" id="ComissaoVenda'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ComissaoVenda'+pt+'" value="">\
+								<span class="input-group-addon" id="basic-addon1">%</span>\
+							</div>\
+						</div>\
+						<div class="col-md-2 text-right"></div>\
 						<div class="col-md-1 text-right">\
 							<label><br></label><br>\
 							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\
@@ -2891,7 +2899,15 @@ function adiciona_item_promocao5() {
 								</div>\
 							</div>\
 						</div>\
-						<div class="col-md-4 text-right"></div>\
+						<div class="col-md-2">\
+							<label for="ComissaoVenda'+pt+'">Comissao</label><br>\
+							<div class="input-group id="ComissaoVenda'+pt+'">\
+								<input type="text" class="form-control Valor text-right" id="ComissaoVenda'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ComissaoVenda'+pt+'" value="">\
+								<span class="input-group-addon" id="basic-addon1">%</span>\
+							</div>\
+						</div>\
+						<div class="col-md-2 text-right"></div>\
 						<div class="col-md-1 text-right">\
 							<label><br></label><br>\
 							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\
@@ -7203,18 +7219,18 @@ $(document).ready(function () {
                 <div class="panel panel-success">\
                     <div class="panel-heading">\
                         <div class="row">\
-							<div class="col-md-4">\
+							<div class="col-md-3">\
 								<label for="Nome_Prod'+pd+'">Produto '+pd+'</label>\
 								<input type="text" class="form-control" id="Nome_Prod'+pd+'" readonly=""\
 										  name="Nome_Prod'+pd+'" value="">\
 							</div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
 								<label for="Opcao_Atributo_2'+pd+'">Atributo1</label>\
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen2" id="listadinamican'+pd+'" name="Opcao_Atributo_2'+pd+'">\
 									<option value="">-- Selecione uma opção --</option>\
 								</select>\
 							</div>\
-							<div class="col-md-2">\
+							<div class="col-md-3">\
                                 <label for="Opcao_Atributo_1'+pd+'">Atributo2</label>\
                                 <select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="listadinamicam'+pd+'" name="Opcao_Atributo_1'+pd+'">\
                                     <option value="">-- Selecione uma opção --</option>\

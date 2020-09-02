@@ -564,7 +564,16 @@
 																		</div>
 																	</div>
 																</div>
-																<div class="col-md-4 text-right"></div>											
+																<div class="col-md-2">
+																	<label for="ComissaoVenda">Comissao<?php echo $i ?>*</label>
+																	<div class="input-group">
+																		<input type="text" class="form-control Valor text-right" id="ComissaoVenda<?php echo $i ?>" maxlength="10" placeholder="0,00"
+																			name="ComissaoVenda<?php echo $i ?>" value="<?php echo $item_promocao[$i]['ComissaoVenda'] ?>">
+																		<span class="input-group-addon" id="basic-addon1">%</span>
+																	</div>
+																</div>
+																<div class="col-md-2 text-right"></div>											
+																
 																<div class="col-md-1 text-right">
 																	<label><br></label><br>
 																	<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">

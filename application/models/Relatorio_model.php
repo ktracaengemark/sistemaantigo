@@ -7816,6 +7816,7 @@ exit();*/
 				TV.idTab_Produtos,
 				TV.idTab_Modelo,
 				TV.Convdesc,
+				TV.ComissaoVenda,
 				TV.ValorProduto,
 				TV.QtdProdutoDesconto,
 				TV.QtdProdutoIncremento,

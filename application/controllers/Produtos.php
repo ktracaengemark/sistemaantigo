@@ -2956,6 +2956,7 @@ class Produtos extends CI_Controller {
 				#$data['derivados'][$j]['Qtd_Prod_Incr'] = $this->input->post('Qtd_Prod_Incr' . $i);
 				#$data['derivados'][$j]['Tipo_Valor_Prod'] = $this->input->post('Tipo_Valor_Prod' . $i);
 				$data['derivados'][$j]['Valor_Produto'] = $this->input->post('Valor_Produto' . $i);
+				$data['derivados'][$j]['Comissao'] = $this->input->post('Comissao' . $i);
                 $j++;
             }
         }
@@ -3607,6 +3608,7 @@ class Produtos extends CI_Controller {
 				#$data['derivados'][$j]['Qtd_Prod_Incr'] = $this->input->post('Qtd_Prod_Incr' . $i);
 				#$data['derivados'][$j]['Tipo_Valor_Prod'] = $this->input->post('Tipo_Valor_Prod' . $i);
 				$data['derivados'][$j]['Valor_Produto'] = $this->input->post('Valor_Produto' . $i);
+				$data['derivados'][$j]['Comissao'] = $this->input->post('Comissao' . $i);
                 $j++;
             }
         }

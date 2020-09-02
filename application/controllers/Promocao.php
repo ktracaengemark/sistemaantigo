@@ -91,6 +91,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 $data['item_promocao'][$j]['Fornecedor'] = $this->input->post('Fornecedor' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['item_promocao'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
+				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
 
                 $j++;
             }
@@ -517,6 +518,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 $data['item_promocao'][$j]['Fornecedor'] = $this->input->post('Fornecedor' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['item_promocao'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
+				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
 
                 $j++;
             }
@@ -1661,6 +1663,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 				$data['item_promocao'][$j]['QtdProdutoIncremento'] = $this->input->post('QtdProdutoIncremento' . $i);
 				$data['item_promocao'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
 				$data['item_promocao'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
+				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
 				$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
 				$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
@@ -2146,6 +2149,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 				$data['item_promocao'][$j]['QtdProdutoIncremento'] = $this->input->post('QtdProdutoIncremento' . $i);
 				$data['item_promocao'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
 				$data['item_promocao'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
+				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
 				$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
 				$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
@@ -2456,6 +2460,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 $data['item_promocao'][$j]['Fornecedor'] = $this->input->post('Fornecedor' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['item_promocao'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
+				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
 
                 $j++;
             }
@@ -2714,6 +2719,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 $data['item_promocao'][$j]['Fornecedor'] = $this->input->post('Fornecedor' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['item_promocao'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
+				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
 
                 $j++;
             }

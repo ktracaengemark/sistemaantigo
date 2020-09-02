@@ -206,6 +206,7 @@
 														</select>
 													</div>
 												</div>
+												<!--
 												<div class="row">
 													<div class="col-md-6">
 														<label for="ValorProduto">A Partir de:</label><br>
@@ -223,7 +224,7 @@
 																	name="Comissao" value="<?php echo $produtos['Comissao'] ?>">
 														</div>
 													</div>
-													<!--
+													
 													<div class="col-md-4">
 														<label for="PesoProduto">Peso:</label><br>
 														<div class="input-group">
@@ -232,8 +233,9 @@
 																	name="PesoProduto" value="<?php echo $produtos['PesoProduto'] ?>">
 														</div>
 													</div>
-													-->	
+														
 												</div>
+												-->
 												<div class="row">
 													<div class="col-md-4 text-left">
 														<label for="Ativo">Ativo?</label><br>
@@ -548,12 +550,12 @@
 														<div class="panel panel-warning">
 															<div class="panel-heading">
 																<div class="row">
-																	<div class="col-md-4">
+																	<div class="col-md-3">
 																		<label for="Nome_Prod">Produto <?php echo $i ?></label>
 																		<input type="text" class="form-control"  id="Nome_Prod<?php echo $i ?>" <?php echo $readonly; ?> readonly = ""
 																				  name="Nome_Prod<?php echo $i ?>" value="<?php echo $derivados[$i]['Nome_Prod']; ?>">
 																	</div>
-																	<div class="col-md-2">
+																	<div class="col-md-3">
 																		<label for="Opcao_Atributo_2<?php echo $i ?>">Atributo1 </label>
 																		<?php if ($i == 1) { ?>
 																		<?php } ?>
@@ -571,7 +573,7 @@
 																			?>
 																		</select>
 																	</div>
-																	<div class="col-md-2">
+																	<div class="col-md-3">
 																		<label for="Opcao_Atributo_1">Atributo2 </label>
 																		<?php if ($i == 1) { ?>
 																		<?php } ?>

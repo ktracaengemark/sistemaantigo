@@ -28,6 +28,7 @@
 							<th class="active">Qtd.</th>
 							<th class="active">Produto</th>
 							<th class="active">Valor</th>
+							<th class="active">Comissao</th>
 						</tr>
 					</thead>
 
@@ -59,6 +60,7 @@
 							<td><?php echo $row['QtdProdutoIncremento'] ?></td>
 							<td><?php echo $row['Nome_Prod'] ?></td>
 							<td><?php echo number_format($row['ValorProduto'], 2, ',','.') ?></td>
+							<td><?php echo number_format($row['ComissaoVenda'], 2, ',','.') ?> %</td>
 						</tr>
 						<?php } ?>						
 					</tbody>

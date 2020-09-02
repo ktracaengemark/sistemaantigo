@@ -325,6 +325,7 @@ class Produtos_model extends CI_Model {
 				TPS.Valor_Produto,
 				TPS.Qtd_Prod_Desc,
 				TPS.Qtd_Prod_Incr,
+				TPS.Comissao,
 				TDS.Desconto,
 				TCP.Nome_Cor_Prod,
 				TTP.Nome_Tam_Prod
