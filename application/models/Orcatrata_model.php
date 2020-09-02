@@ -109,7 +109,7 @@ class Orcatrata_model extends CI_Model {
 	
     public function get_orcatrata2($data) {
         $query = $this->db->query('
-			SELECT * 
+		SELECT * 
 			FROM 
 				App_OrcaTrata AS OT 
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
@@ -244,7 +244,7 @@ class Orcatrata_model extends CI_Model {
 				TAP.CanceladoProduto,
 				TAP.idTab_TipoRD,
 				TAP.itens_pedido_valor_total,
-				TAP.Comissao,
+				TAP.ComissaoProduto,
 				TAP.StatusComissao,
 				TAP.Aux_App_Produto_1,
 				TAP.Aux_App_Produto_2,

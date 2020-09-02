@@ -6449,7 +6449,7 @@ exit();*/
             $consulta4 =
                 '(OT.DataQuitado >= "' . $data['DataInicio4'] . '")';
         }
-
+		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
         $data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
 		$data['Entregador'] = ($data['Entregador']) ? ' AND OT.Entregador = ' . $data['Entregador'] : FALSE;
 		$data['FormaPag'] = ($data['FormaPag']) ? ' AND TFP.idTab_FormaPag = ' . $data['FormaPag'] : FALSE;
@@ -6504,7 +6504,8 @@ exit();*/
                 ' . $filtro2 . '
 				' . $filtro3 . '
                 C.idApp_Cliente = OT.idApp_Cliente
-                ' . $data['NomeCliente'] . '
+                ' . $data['Orcamento'] . '
+				' . $data['NomeCliente'] . '
 				' . $data['Entregador'] . '
 				' . $data['TipoFrete'] . '
 				' . $data['FormaPag'] . ' AND

@@ -64,7 +64,7 @@
 											<input type="hidden" name="idTab_Produtos_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos_Produto'] ?>">			
 											<input type="hidden" name="idTab_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produto'] ?>">
 											<input type="hidden" name="ValorProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ValorProduto'] ?>">
-											
+											<input type="hidden" name="ComissaoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ComissaoProduto'] ?>">
 											<input type="hidden" name="idSis_Usuario<?php echo $i ?>" value="<?php echo $produto[$i]['idSis_Usuario'] ?>">
 											<input type="hidden" name="DataValidadeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['DataValidadeProduto'] ?>">
 											<input type="hidden" name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>">
@@ -126,6 +126,7 @@
 
 								<input type="hidden" name="QtdPrdOrca" value="<?php echo $orcatrata['QtdPrdOrca'] ?>">
 								<input type="hidden" name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
+								<input type="hidden" name="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
 								<input type="hidden" name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
 								<input type="hidden" name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
 								<!--<input type="hidden" name="ObsOrca" value="<?php echo $orcatrata['ObsOrca'] ?>">-->
@@ -240,7 +241,8 @@
 											<tr>
 												<!--<td><?php echo $produto[$i]['QtdProduto'] ?> X <?php echo $produto[$i]['QtdIncrementoProduto'] ?> = <b><?php echo $produto[$i]['SubTotalQtd'] ?></b></td>-->
 												<td><b><?php echo $produto[$i]['SubTotalQtd'] ?></b></td>
-												<td><?php echo $produto[$i]['Produto'] ?></td>							
+												<!--<td><?php echo $produto[$i]['Produto'] ?></td>-->
+												<td><?php echo $produto[$i]['NomeProduto'] ?>
 												<!--<td><?php echo number_format($produto[$i]['ValorProduto'], 2, ',', '.') ?></td>-->
 												<td><?php echo number_format($produto[$i]['Subtotal_Produto'], 2, ',', '.') ?></td>
 											</tr>						

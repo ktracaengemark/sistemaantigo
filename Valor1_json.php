@@ -23,6 +23,7 @@ $result = mysql_query(
 			V.QtdProdutoDesconto,
 			V.QtdProdutoIncremento,
 			V.Convdesc,
+			V.ComissaoVenda,
 			TP.idTab_Produto,
 			TP.Produtos,
 			TP.UnidadeProduto,
@@ -35,7 +36,7 @@ $result = mysql_query(
 			TOP1.Opcao,
 			TDS.Desconto,
 			TPM.Promocao,
-			CONCAT(IFNULL(P.Nome_Prod,"")," - ",IFNULL(TOP2.Opcao,"")," - ",IFNULL(TOP1.Opcao,"")," - ",IFNULL(V.Convdesc,"")," - ",IFNULL(V.QtdProdutoIncremento,"")," Unid.") AS NomeProduto
+			CONCAT(IFNULL(P.Nome_Prod,"")," - ",IFNULL(TOP2.Opcao,"")," - ",IFNULL(TOP1.Opcao,"")," - ",IFNULL(V.Convdesc,"")) AS NomeProduto
         FROM
             Tab_' . $_GET['tabela'] . ' AS V
 				LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
@@ -56,6 +57,7 @@ if ($_GET['tabela']) {
         $event_array[] = array(
             'id' => $row['idTab_' . $_GET['tabela']],
             'valor' => str_replace(".", ",", $row['ValorProduto']),
+			'comissaoprod' => str_replace(".", ",", $row['ComissaoVenda']),
 			'nomeprod' => $row['NomeProduto'],
 			'qtdprod' => $row['QtdProdutoDesconto'],
 			'qtdinc' => $row['QtdProdutoIncremento'],
@@ -71,6 +73,7 @@ else {
         $event_array[] = array(
             'id' => $row['idTab_' . $_GET['tabela']],
             'valor' => str_replace(".", ",", $row['ValorProduto']),
+			'comissaovenda' => str_replace(".", ",", $row['ComissaoVenda']),
 			'nomeprod' => $row['NomeProduto'],
 			'qtdprod' => $row['QtdProdutoDesconto'],
 			'qtdinc' => $row['QtdProdutoIncremento'],

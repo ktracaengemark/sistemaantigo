@@ -108,6 +108,7 @@
 																<input type="hidden" class="form-control " id="NomeProduto<?php echo $i ?>" name="NomeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['NomeProduto'] ?>">
 																<input type="hidden" class="form-control " id="idTab_Valor_Produto<?php echo $i ?>" name="idTab_Valor_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Valor_Produto'] ?>">
 																<input type="hidden" class="form-control " id="idTab_Produtos_Produto<?php echo $i ?>" name="idTab_Produtos_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos_Produto'] ?>">
+																<input type="hidden" class="form-control " id="ComissaoProduto<?php echo $i ?>" name="ComissaoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ComissaoProduto'] ?>">
 																<?php if ($metodo > 1) { ?>
 																<div class="col-md-9">
 																<?php } else {?>
@@ -188,6 +189,7 @@
 																			name="ValorProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ValorProduto'] ?>">
 																	</div>
 																</div>
+																<input type="hidden" class="form-control " id="SubtotalComissaoProduto<?php echo $i ?>" name="SubtotalComissaoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalComissaoProduto'] ?>">
 																<div class="col-md-2">
 																	<label for="SubtotalQtdProduto">Sub.Qtd.Prod</label>
 																	<div class="input-group">
@@ -252,6 +254,7 @@
 																				</div>
 																			</div>
 																		</div>
+																		<input type="hidden" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
 																		<div class="col-md-6">
 																			<!--<label for="ValorOrca">Valor em Produtos:</label><br>-->
 																			<div class="input-group" id="txtHint">

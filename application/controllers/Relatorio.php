@@ -4449,7 +4449,8 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'NomeCliente',
+            'Orcamento',
+			'NomeCliente',
             'DataInicio',
             'DataFim',
 			'DataInicio',
@@ -4535,7 +4536,8 @@ class Relatorio extends CI_Controller {
         if ($this->form_validation->run() !== FALSE) {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
-            $data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+            $data['bd']['Orcamento'] = $data['query']['Orcamento'];
+			$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
 			$data['bd']['Entregador'] = $data['query']['Entregador'];
 			$data['bd']['FormaPag'] = $data['query']['FormaPag'];
 			$data['bd']['TipoFrete'] = $data['query']['TipoFrete'];

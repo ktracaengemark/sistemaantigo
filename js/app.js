@@ -42,7 +42,7 @@ function dateDiff() {
 	const month2 = dataentregaorcaSplit[1]; 
 	const year2 = dataentregaorcaSplit[2]; 
 
-	// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
+// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
 	dataorca = new Date(year, month - 1, day);
 	dataentregaorca = new Date(year2, month2 - 1, day2);
 	
@@ -3413,17 +3413,18 @@ function buscaValor1Tabelas(id, campo, tabela, num, campo2) {
 					
 					//""ou posso usar assim, passando diretamente o qtdinc do id ""
 					$('#Nome'+campo2+num).val(data[i].nomeprod);
+					$('#Comissao'+campo2+num).val(data[i].comissaoprod);
 					$('#QtdIncremento'+campo2+num).val(data[i].qtdinc);
 					$('#Qtd'+campo2+num).val(data[i].qtdprod);
 					$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
 					$('#idTab_Valor_'+campo2+num).val(data[i].id_valor);
-					//console.log( data[i].nomeprod );
+					console.log( data[i].comissaoprod );
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
 
                     //if (tabela == area && $("#Qtd"+tabela+num).val()) {
                     if ($("#Qtd"+campo2+num).val()) {
-                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2,$("#QtdIncremento"+campo2+num).val());
+						calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2,$("#QtdIncremento"+campo2+num).val(),$("#Comissao"+campo2+num).val());
                         break;
                     }
 
@@ -3458,6 +3459,7 @@ function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
 					//""ou posso usar assim, passando diretamente o qtdinc do id ""
 
 					$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
+					$('#Comissao'+campo2+num).val(data[i].comissaoprod);
 					//console.log( data[i].id_produto );
 				
                     //carrega o valor no campo de acordo com a opção selecionada
@@ -3465,7 +3467,7 @@ function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
 
                     //if (tabela == area && $("#Qtd"+tabela+num).val()) {
                     if ($("#Qtd"+campo2+num).val()) {
-                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2,$("#QtdIncremento"+campo2+num).val());
+                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2,$("#QtdIncremento"+campo2+num).val(),$("#Comissao"+campo2+num).val());
                         break;
                     }
 
@@ -3643,42 +3645,69 @@ function buscaValorConsumo(id, campo, tabela, num) {
  * @param {int} num
  * @returns {decimal}
  */
-function calculaSubtotal(valor, campo, num, tipo, tabela, qtdinc) {
-
+function calculaSubtotal(valor, campo, num, tipo, tabela, qtdinc, comissao) {
+	
+	//console.log(comissao);
+	//console.log(comissao.replace(",","."));
+	//var comissaoprd = $("#Comissao"+tabela+num).val();
+	//console.log(comissaoprd);
+	//console.log(comissaoprd.replace(",","."));
     if (tipo == 'VP') {
         //variável valor recebe o valor do produto selecionado
         var data = $("#Qtd"+tabela+num).val();
 		var qtdprdinc = $("#QtdIncremento"+tabela+num).val();
+		var comissaoprd = $("#Comissao"+tabela+num).val();
+		//console.log(comissaoprd);
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (valor.replace(".","").replace(",",".") * data);
+		//console.log(subtotal);
+		var subtotalcomissao = (subtotal * comissaoprd.replace(",",".") / 100);
+		//console.log(subtotalcomissao);
 		var subtotalqtd = (qtdprdinc.replace(".","").replace(",",".") * data.replace(".","").replace(",","."));
         //alert('>>>'+valor+' :: '+campo+' :: '+num+' :: '+tipo+'<<<');
     } else if (tipo == 'QTD') {
         //variável quantidade recebe a quantidade do produto selecionado
         var data = $("#idTab_"+tabela+num).val();
 		var qtdprdinc = $("#QtdIncremento"+tabela+num).val();
+		var comissaoprd = $("#Comissao"+tabela+num).val();
+		//console.log(comissaoprd);
 		var qtdprd = $("#Qtd"+tabela+num).val();
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (valor * data.replace(".","").replace(",","."));
+		//console.log(subtotal);
+		var subtotalcomissao = (subtotal * comissaoprd.replace(",",".") / 100);
+		//console.log(subtotalcomissao);
 		var subtotalqtd = (qtdprdinc.replace(".","").replace(",",".") * qtdprd.replace(".","").replace(",","."));
 	} else if (tipo == 'QTDINC') {
         //variável quantidadeincremento recebe a quantidadeincremento do produto selecionado
         var data = $("#idTab_"+tabela+num).val();
 		var qtdprdinc = $("#QtdIncremento"+tabela+num).val();
+		var comissaoprd = $("#Comissao"+tabela+num).val();
+		//console.log(comissaoprd);
 		var qtdprd = $("#Qtd"+tabela+num).val();
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (qtdprd * data.replace(".","").replace(",","."));
+		//console.log(subtotal);
+		var subtotalcomissao = (subtotal * comissaoprd.replace(",",".") / 100);
+		//console.log(subtotalcomissao);
 		var subtotalqtd = (qtdprdinc.replace(".","").replace(",",".") * qtdprd.replace(".","").replace(",","."));	
     } else {
 		//o subtotal é calculado como o produto da quantidade pelo seu valor
 		var subtotal = (valor.replace(".","").replace(",",".") * campo.replace(".","").replace(",","."));
+		//console.log(subtotal);
+		var subtotalcomissao = (subtotal * comissao.replace(",",".") / 100);
+		///console.log(subtotalcomissao);
 		var subtotalqtd = (qtdinc.replace(".","").replace(",",".") * campo.replace(".","").replace(",","."));
     }
 
-    subtotal 	= mascaraValorReal(subtotal);
-	subtotalqtd1 = subtotalqtd;
+    subtotal 			= mascaraValorReal(subtotal);
+	//console.log(subtotal);
+	subtotalcomissao 	= mascaraValorReal(subtotalcomissao);
+	//console.log(subtotalcomissao);
+	subtotalqtd1 		= subtotalqtd;
     //o subtotal é escrito no seu campo no formulário
     $('#Subtotal'+tabela+num).val(subtotal);
+	$('#SubtotalComissao'+tabela+num).val(subtotalcomissao);
 	$('#SubtotalQtd'+tabela+num).val(subtotalqtd1);
 
     //para cada vez que o subtotal for calculado o orçamento e o total restante
@@ -3821,6 +3850,7 @@ function calculaOrcamento() {
     //define o subtotal inicial em 0.00
     var subtotalservico = 0.00;
 	var subtotal = 0.00;
+	var subtotalcomissao = 0.00;
 	var subtotalqtd = 0.00;
 
     //variável incrementadora
@@ -3845,6 +3875,7 @@ function calculaOrcamento() {
 
         if ($('#SubtotalProduto'+i).val()){
             subtotal += parseFloat($('#SubtotalProduto'+i).val().replace(".","").replace(",","."));
+			subtotalcomissao += parseFloat($('#SubtotalComissaoProduto'+i).val().replace(".","").replace(",","."));
 			subtotalqtd += parseFloat($('#SubtotalQtdProduto'+i).val().replace(".","").replace(",","."));
 		}
 		i++;
@@ -3854,11 +3885,13 @@ function calculaOrcamento() {
     //ponto para o vírgula como separador de casas decimais
     subtotalservico = mascaraValorReal(subtotalservico);
 	subtotal = mascaraValorReal(subtotal);
+	subtotalcomissao = mascaraValorReal(subtotalcomissao);
 	subtotalqtd1 = subtotalqtd;
 	//console.log(subtotalqtd1);
     //escreve o subtotal no campo do formulário
     $('#ValorDev').val(subtotalservico);
 	$('#ValorOrca').val(subtotal);
+	$('#ValorComissao').val(subtotalcomissao);
 	$('#QtdPrdOrca').val(subtotalqtd1);
     calculaResta($("#ValorEntradaOrca").val());
 	calculaTotal($("#ValorEntradaOrca").val());
@@ -5577,6 +5610,7 @@ $(document).ready(function () {
                         <div class="row">\
 							<input type="hidden" class="form-control" id="idTab_Valor_Produto'+pc+'" name="idTab_Valor_Produto'+pc+'" value="">\
 							<input type="hidden" class="form-control" id="idTab_Produtos_Produto'+pc+'" name="idTab_Produtos_Produto'+pc+'" value="">\
+							<input type="hidden" class="form-control" id="ComissaoProduto'+pc+'" name="ComissaoProduto'+pc+'" value="0.00">\
 							<input type="hidden" class="form-control" id="NomeProduto'+pc+'" name="NomeProduto'+pc+'" value="">\
 							<div class="col-md-11">\
                                 <label for="idTab_Produto">Produto '+pc+':</label><br>\
@@ -5618,6 +5652,7 @@ $(document).ready(function () {
 										name="ValorProduto'+pc+'" value="">\
 								</div>\
 							</div>\
+							<input type="hidden" class="form-control" id="SubtotalComissaoProduto'+pc+'" name="SubtotalComissaoProduto'+pc+'" value="0.00">\
 							<div class="col-md-2">\
 								<label for="SubtotalQtdProduto">Sub.Qtd.Prod</label><br>\
 								<div class="input-group id="txtHint">\

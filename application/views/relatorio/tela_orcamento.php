@@ -31,6 +31,13 @@
 									</select>
 								</div>
 								<div class="col-md-2">
+									<label for="Orcamento">Pedido:</label>
+									<div class="input-group">
+										<input type="text" class="form-control Numero"  
+											    name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
+									</div>
+								</div>
+								<div class="col-md-2">
 									<label for="AprovadoOrca">Aprovado?</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 											id="AprovadoOrca" name="AprovadoOrca">

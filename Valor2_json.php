@@ -30,6 +30,7 @@ if ($_GET['tabela']) {
         $event_array[] = array(
             'id' => $row['idTab_' . $_GET['tabela']],
             'valor' => str_replace(".", ",", $row['Valor_Produto']),
+			'comissaoprod' => str_replace(".", ",", $row['Comissao']),
 			'id_produto' => $row['idTab_Produtos'],
         );
     }
@@ -41,6 +42,7 @@ else {
         $event_array[] = array(
             'id' => $row['idTab_Produtos'],
             'valor' => str_replace(".", ",", $row['Valor_Produto']),
+			'comissaoprod' => str_replace(".", ",", $row['Comissao']),
 			'id_produto' => $row['idTab_Produtos'],
         );
     }
