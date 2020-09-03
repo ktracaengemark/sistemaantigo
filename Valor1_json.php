@@ -36,7 +36,7 @@ $result = mysql_query(
 			TOP1.Opcao,
 			TDS.Desconto,
 			TPM.Promocao,
-			CONCAT(IFNULL(P.Nome_Prod,"")," - ",IFNULL(TOP2.Opcao,"")," - ",IFNULL(TOP1.Opcao,"")," - ",IFNULL(V.Convdesc,"")) AS NomeProduto
+			CONCAT(IFNULL(P.Nome_Prod,"")," - ",IFNULL(TOP1.Opcao,"")," - ",IFNULL(TOP2.Opcao,"")," - ",IFNULL(V.Convdesc,"")) AS NomeProduto
         FROM
             Tab_' . $_GET['tabela'] . ' AS V
 				LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
@@ -71,7 +71,7 @@ else {
     while ($row = mysql_fetch_assoc($result)) {
 
         $event_array[] = array(
-            'id' => $row['idTab_' . $_GET['tabela']],
+            'id' => $row['idTab_Valor'],
             'valor' => str_replace(".", ",", $row['ValorProduto']),
 			'comissaovenda' => str_replace(".", ",", $row['ComissaoVenda']),
 			'nomeprod' => $row['NomeProduto'],

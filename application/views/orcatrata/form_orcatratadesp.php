@@ -104,12 +104,12 @@
 													<div class="panel panel-warning">
 														<div class="panel-heading">
 															<div class="row">
-																
+																<input type="hidden" class="form-control " id="NomeProduto<?php echo $i ?>" name="NomeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['NomeProduto'] ?>">
 																<input type="hidden" class="form-control " id="idTab_Produtos_Produto<?php echo $i ?>" name="idTab_Produtos_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos_Produto'] ?>">
 																<input type="hidden" class="form-control " id="ComissaoProduto<?php echo $i ?>" name="ComissaoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ComissaoProduto'] ?>">			
 																<div class="col-md-9">
 																	<label for="idTab_Produto">Produto <?php echo $i ?></label>
-																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor2Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
+																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor2Tabelas(this.value,this.name,'Produtos',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
 																			 id="listadinamicab<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
 																		<option value="">-- Selecione uma opção --</option>
 																		<?php
@@ -1052,7 +1052,7 @@
 																			</button>
 																		</div>
 																		<div class="col-md-6 text-right">
-																			<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluir2/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
+																			<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluirdesp/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
 																				<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 																			</a>
 																		</div>

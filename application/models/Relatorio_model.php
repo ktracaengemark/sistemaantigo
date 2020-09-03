@@ -6620,12 +6620,15 @@ exit();*/
 				OT.ObsOrca,
 				OT.Descricao,
 				OT.Entregador,
+				APP.NomeProduto,
+				CONCAT(IFNULL(APP.NomeProduto,"")) AS NomeProduto,
 				TFP.FormaPag
             FROM
                 App_Fornecedor AS C,
                 App_OrcaTrata AS OT
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
+				LEFT JOIN App_Produto AS APP ON APP.idApp_OrcaTrata = OT.idApp_OrcaTrata
             WHERE
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 (' . $consulta . ') AND
@@ -6638,6 +6641,8 @@ exit();*/
 				' . $data['TipoFrete'] . '
 				' . $data['FormaPag'] . ' AND
 				OT.idTab_TipoRD = "1"
+			GROUP BY
+				OT.idApp_OrcaTrata
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');

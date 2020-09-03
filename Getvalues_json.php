@@ -293,7 +293,7 @@ elseif ($_GET['q'] == 20) {
 				P.Valor_Produto,
 				TOP2.Opcao,
 				TOP1.Opcao,				
-				CONCAT(IFNULL(TPRS.Prod_Serv,""), " - ",  IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - R$ ", IFNULL(P.Valor_Produto,"")) AS NomeProduto
+				CONCAT(IFNULL(TPRS.Prod_Serv,""), " - ",  IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TOP2.Opcao,""), " - R$ ", IFNULL(P.Valor_Produto,"")) AS NomeProduto
             FROM 
                 Tab_Produtos AS P 
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
@@ -303,7 +303,9 @@ elseif ($_GET['q'] == 20) {
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY
 				P.Prod_Serv ASC,
-				P.Nome_Prod ASC
+				P.Nome_Prod ASC,
+				TOP2.Opcao,
+				TOP1.Opcao
     ');
 
     while ($row = mysql_fetch_assoc($result)) {

@@ -47,6 +47,7 @@
 							
 							<!--<th class="active">Valid. do Orçam.</th>
 							<th class="active">Prazo de Entrega</th>-->
+							<th class="active">Produto</th>
 							<th class="active">Orç.</th>
 							<th class="active">Frete</th>
 							<th class="active">Total</th>					
@@ -75,6 +76,7 @@
 									</td>';
 								echo '<td>' . $row['NomeFornecedor'] . '</td>';
 								echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
+								echo '<td>' . $row['NomeProduto'] . '</td>';
 								#echo '<td>' . $row['DataEntradaOrca'] . '</td>';
 								#echo '<td>' . $row['DataPrazo'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorRestanteOrca'] . '</td>';

@@ -1509,7 +1509,7 @@ if (isset($data) && $data) {
                 TPS.idTab_Produtos,
 				TOP2.Opcao,
 				TOP1.Opcao,
-                CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod
+                CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS NomeProduto
             FROM 
                 Tab_Produtos AS TPS
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
@@ -1526,7 +1526,7 @@ if (isset($data) && $data) {
                 TPS.idTab_Produtos,
 				TOP2.Opcao,
 				TOP1.Opcao,
-                CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod
+                CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS NomeProduto
             FROM 
                 Tab_Produtos AS TPS
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
@@ -1540,7 +1540,7 @@ if (isset($data) && $data) {
 
             $array = array();
             foreach ($query->result() as $row) {
-                $array[$row->idTab_Produtos] = $row->Nome_Prod;
+                $array[$row->idTab_Produtos] = $row->NomeProduto;
             }
         }
 
