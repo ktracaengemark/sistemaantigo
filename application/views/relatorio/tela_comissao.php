@@ -14,12 +14,13 @@
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" role="menu">
+					<!--
 					<li>
 						<a class="dropdown-item" href="<?php echo base_url() . 'orcatrata/alterarprodutorec/' . $_SESSION['log']['idSis_Empresa']; ?>">
 							<span class="glyphicon glyphicon-pencil"></span> Editar Produtos Filtradas
 						</a>
 					</li>
-					
+					-->
 				</ul>				
 			</div>			
 		</div>

@@ -46,13 +46,13 @@
 								<th class="active">Colaborador</th>
 								<th class="active">Cliente</th>
 								<th class="active">Dt.Venc.</th>								
-								<th class="active">Qtd</th>									
+								<!--<th class="active">Qtd</th>									
 								<th class="active">Produto</th>
 								<th class="active">Valor</th>
 								<th class="active">SubTotal</th>
 								<th class="active">Comissao(%)</th>
 								<th class="active">SubComissao</th>
-								<th class="active">Paga?</th>
+								<th class="active">Paga?</th>-->
 							</tr>
 						</thead>
 						<tbody>
@@ -85,13 +85,13 @@
 									echo '<td>' . $row['NomeColaborador'] . '</td>';
 									echo '<td>' . $row['NomeCliente'] . '</td>';
 									echo '<td>' . $row['DataVencimentoOrca'] . '</td>';									
-									echo '<td>' . $row['QtdProduto'] . '</td>';	
-									echo '<td>' . $row['Produtos'] . '</td>';
-									echo '<td class="text-right">' . $row['ValorProduto'] . '</td>';
-									echo '<td class="text-right">' . $row['SubTotal'] . '</td>';
-									echo '<td class="text-right">' . $row['Comissao'] . '</td>';
-									echo '<td class="text-right">' . $row['SubComissao'] . '</td>';
-									echo '<td>' . $row['StatusComissao'] . '</td>';
+									//echo '<td>' . $row['QtdProduto'] . '</td>';	
+									//echo '<td>' . $row['Produtos'] . '</td>';
+									//echo '<td class="text-right">' . $row['ValorProduto'] . '</td>';
+									//echo '<td class="text-right">' . $row['SubTotal'] . '</td>';
+									//echo '<td class="text-right">' . $row['ComissaoProduto'] . '</td>';
+									//echo '<td class="text-right">' . $row['SubComissao'] . '</td>';
+									//echo '<td>' . $row['StatusComissao'] . '</td>';
 
 									/*
 									echo '<td class="notclickable">
@@ -104,6 +104,7 @@
 							}
 							?>
 						</tbody>
+						<!--
 						<tfoot>
 							<tr>
 								<th colspan="4" class="active">Vendas: <?php echo $report->num_rows(); ?> resultado(s)</th>
@@ -112,6 +113,7 @@
 								<th colspan="2" class="active text-right">Comissao: R$ <?php echo $report->soma->somasubcomissao ?> </th>
 							</tr>
 						</tfoot>
+						-->
 					</table>
 				</div>
 			</div>

@@ -3444,10 +3444,10 @@ class Orcatrata extends CI_Controller {
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_OrcaTrata', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
-                #redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
+                redirect(base_url() . 'relatorio/orcamento/' . $data['msg']);
 				#redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/parcelas/' . $data['msg']);
-				redirect(base_url() . 'OrcatrataPrint/imprimir/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
+				//redirect(base_url() . 'OrcatrataPrint/imprimir/' . $data['orcatrata']['idApp_OrcaTrata'] . $data['msg']);
 				exit();
             }
         }
@@ -4501,6 +4501,39 @@ class Orcatrata extends CI_Controller {
 		$this->load->view('orcatrata/form_pedido', $data);
         
 
+        $this->load->view('basico/footer');
+    }
+
+    public function despesa() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		
+        $data['titulo'] = 'Despesa';
+        $data['form_open_path'] = 'orcatrata/despesa';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'danger';
+        $data['metodo'] = 1;
+		
+		$data['collapse'] = '';	
+		$data['collapse1'] = 'class="collapse"';
+		
+		$data['q'] = $this->Orcatrata_model->list1_produtoscomp(TRUE);
+        $data['list1'] = $this->load->view('orcatrata/list1_produtoscomp', $data, TRUE);
+
+		$data['q11'] = $this->Orcatrata_model->list11_produtosvend(TRUE);
+		$data['list11'] = $this->load->view('orcatrata/list11_produtosvend', $data, TRUE);
+		
+        $data['q12'] = $this->Orcatrata_model->list12_produtosaluguel(TRUE);
+        $data['list12'] = $this->load->view('orcatrata/list12_produtosaluguel', $data, TRUE);
+		
+		$this->load->view('orcatrata/form_despesa', $data);
+		
         $this->load->view('basico/footer');
     }
 	
@@ -5688,7 +5721,13 @@ class Orcatrata extends CI_Controller {
         $data['list2'] = $this->load->view('orcatrata/list2_rankingfaturado', $data, TRUE);
 		
 		$data['q4'] = $this->Orcatrata_model->list4_despesasparc(TRUE);
-		$data['list4'] = $this->load->view('orcatrata/list4_despesasparc', $data, TRUE);		
+		$data['list4'] = $this->load->view('orcatrata/list4_despesasparc', $data, TRUE);
+
+		$data['q11'] = $this->Orcatrata_model->list11_produtosvend(TRUE);
+		$data['list11'] = $this->load->view('orcatrata/list11_produtosvend', $data, TRUE);
+		
+        $data['q12'] = $this->Orcatrata_model->list12_produtosaluguel(TRUE);
+        $data['list12'] = $this->load->view('orcatrata/list12_produtosaluguel', $data, TRUE);		
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -6344,7 +6383,13 @@ class Orcatrata extends CI_Controller {
         $data['list2'] = $this->load->view('orcatrata/list2_rankingfaturado', $data, TRUE);
 		
 		$data['q4'] = $this->Orcatrata_model->list4_despesasparc(TRUE);
-		$data['list4'] = $this->load->view('orcatrata/list4_despesasparc', $data, TRUE);		
+		$data['list4'] = $this->load->view('orcatrata/list4_despesasparc', $data, TRUE);
+
+		$data['q11'] = $this->Orcatrata_model->list11_produtosvend(TRUE);
+		$data['list11'] = $this->load->view('orcatrata/list11_produtosvend', $data, TRUE);
+		
+        $data['q12'] = $this->Orcatrata_model->list12_produtosaluguel(TRUE);
+        $data['list12'] = $this->load->view('orcatrata/list12_produtosaluguel', $data, TRUE);		
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -6742,7 +6787,8 @@ class Orcatrata extends CI_Controller {
 
 				#redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
-				redirect(base_url() . 'relatorio/parcelasrec/' . $data['msg']);
+				#redirect(base_url() . 'relatorio/parcelasrec/' . $data['msg']);
+				redirect(base_url() . 'orcatrata/pedido/' . $data['msg']);
                 exit();
             //}
         //}
@@ -6766,7 +6812,8 @@ class Orcatrata extends CI_Controller {
 
 				#redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
-				redirect(base_url() . 'relatorio/parcelasdesp/' . $data['msg']);
+				#redirect(base_url() . 'relatorio/parcelasdesp/' . $data['msg']);
+				redirect(base_url() . 'orcatrata/despesa/' . $data['msg']);
                 exit();
             //}
         //}

@@ -77,11 +77,11 @@
 						<ul class="dropdown-menu" role="menu">							
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/cadastrar3"><span class="glyphicon glyphicon-plus"></span> Nova Receita / Venda</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/pedido"><span class="glyphicon glyphicon-edit"></span> Atualizar Status dos Pedidos</a></li>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/pedido"><span class="glyphicon glyphicon-edit"></span> Status dos Pedidos</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasrec"><span class="glyphicon glyphicon-pencil"></span> Relatório das Receitas</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/orcamento"><span class="glyphicon glyphicon-pencil"></span> Relatorio de Orçamentos</a></li>
+							<!--<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasrec"><span class="glyphicon glyphicon-pencil"></span> Relatório das Receitas</a></li>
+							<li role="separator" class="divider"></li>-->
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/orcamento"><span class="glyphicon glyphicon-pencil"></span> Relatorio de Receitas</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/rankingformapag"><span class="glyphicon glyphicon-pencil"></span> Ranking de Pagamento</a></li>
 							<li role="separator" class="divider"></li>
@@ -93,7 +93,7 @@
 							<?php } else {?>
 							<!--<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/orcamentoonlineempresa"><span class="glyphicon glyphicon-pencil"></span> Orçamentos Online</a></li>
 							<li role="separator" class="divider"></li>							
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/comissao"><span class="glyphicon glyphicon-pencil"></span> Relatório de Vendas Online</a></li>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/comissao"><span class="glyphicon glyphicon-pencil"></span> Relatório de Comissões</a></li>
 							<li role="separator" class="divider"></li>-->							
 							<?php } ?>
 							<!--<li><a href="<?php echo base_url() ?>relatorio/rankingreceitas"><span class="glyphicon glyphicon-equalizer"></span> Estatística das Receitas</a></li>-->
@@ -107,6 +107,8 @@
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/rankingformaentrega"><span class="glyphicon glyphicon-pencil"></span> Ranking de Entrega</a></li>
 							<?php } ?>
+							<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-gift"></span> Produtos & Estoque</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>							
 						</ul>
@@ -130,7 +132,11 @@
 						<ul class="dropdown-menu" role="menu">							
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/cadastrardesp"><span class="glyphicon glyphicon-plus"></span> Nova Despesa / Compra</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasdesp"><span class="glyphicon glyphicon-pencil"></span> Relatório das Despesas</a></li>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/despesa"><span class="glyphicon glyphicon-edit"></span> Status das Despesas</a></li>
+							<li role="separator" class="divider"></li>
+							<!--<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasdesp"><span class="glyphicon glyphicon-pencil"></span> Relatório das Despesas</a></li>
+							<li role="separator" class="divider"></li>-->
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/orcamento2"><span class="glyphicon glyphicon-pencil"></span> Relatorio de Despesas</a></li>
 							<li role="separator" class="divider"></li>
 							<!--<li><a href="<?php echo base_url() ?>relatorio/rankingdespesas"><span class="glyphicon glyphicon-equalizer"></span> Estatística das Despesas</a></li>-->
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
@@ -142,6 +148,8 @@
 							<li><a href="<?php echo base_url() ?>relatorio/rankingcompras"><span class="glyphicon glyphicon-pencil"></span> Ranking de Compras</a></li>-->
 							<?php } ?>
 							<!--<li role="separator" class="divider"></li>-->
+							<li><a href="<?php echo base_url() ?>relatorio/estoque"><span class="glyphicon glyphicon-gift"></span> Produtos & Estoque</a></li>
+							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/balanco"><span class="glyphicon glyphicon-usd"></span> Balanço</a></li>							
 						</ul>
 					</div>							
@@ -155,7 +163,7 @@
 						<ul class="dropdown-menu" role="menu">
 							<!--<li><a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>"><span class="glyphicon glyphicon-user"></span> Cobranca</a></li>
 							<li role="separator" class="divider"></li>-->							
-							<li><a href="<?php echo base_url() ?>cliente/pesquisar"><span class="glyphicon glyphicon-user"></span> Clientes com filtro</a></li>
+							<li><a href="<?php echo base_url() ?>cliente/pesquisar"><span class="glyphicon glyphicon-user"></span> Clientes</a></li>
 							<li role="separator" class="divider"></li>
 							<!--<li><a href="<?php echo base_url() ?>relatorio/clientes"><span class="glyphicon glyphicon-user"></span> Clientes Lista </a></li>
 							<li role="separator" class="divider"></li>-->

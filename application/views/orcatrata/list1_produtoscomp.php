@@ -4,8 +4,8 @@
 			<tr>
 				<!--<th class="active">EdtOrç</th>
 				<th class="active">Imp.</th>-->							
-				<th class="active">Orc.</th>
-				<th class="active">Fornec.</th>
+				<th class="active">Despesa</th>
+				<th class="active">Fornec</th>
 				<th class="active">Data</th>
 				
 			</tr>
