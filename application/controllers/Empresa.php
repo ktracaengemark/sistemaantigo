@@ -177,6 +177,7 @@ class Empresa extends CI_Controller {
 			'Cartao',
 			'Atendimento',
 			'SobreNos',
+			'ValorMinimo',
         ), TRUE);
 				
 
@@ -258,6 +259,7 @@ class Empresa extends CI_Controller {
             $data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));
             #$data['query']['Senha'] = md5($data['query']['Senha']);            
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
+			$data['query']['ValorMinimo'] = str_replace(',', '.', str_replace('.', '', $data['query']['ValorMinimo']));
             #$data['query']['Obs'] = nl2br($data['query']['Obs']);
             #$data['query']['Empresa'] = $_SESSION['log']['idSis_Empresa'];
 

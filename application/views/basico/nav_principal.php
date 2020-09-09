@@ -74,8 +74,10 @@
 							Receitas <span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-arrow-down"></span> / 
 							Vendas <span class="glyphicon glyphicon-gift"></span><span class="glyphicon glyphicon-arrow-up"></span> <span class="caret"></span>
 						</button>
-						<ul class="dropdown-menu" role="menu">							
+						<ul class="dropdown-menu" role="menu">
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/cadastrar3"><span class="glyphicon glyphicon-plus"></span> Nova Receita / Venda</a></li>
+							<li role="separator" class="divider"></li>							
+							<li><a href="<?php echo base_url() ?>cliente/pesquisar"><span class="glyphicon glyphicon-user"></span> Clientes</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/pedido"><span class="glyphicon glyphicon-edit"></span> Status dos Pedidos</a></li>
 							<li role="separator" class="divider"></li>
@@ -129,8 +131,10 @@
 							Despesas <span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-arrow-up"></span>/ 
 							Compras <span class="glyphicon glyphicon-gift"></span><span class="glyphicon glyphicon-arrow-down"></span> <span class="caret"></span>
 						</button>
-						<ul class="dropdown-menu" role="menu">							
+						<ul class="dropdown-menu" role="menu">
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/cadastrardesp"><span class="glyphicon glyphicon-plus"></span> Nova Despesa / Compra</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>relatorio/fornecedor"><span class="glyphicon glyphicon-user"></span> Fornecedores </a></li>
 							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/despesa"><span class="glyphicon glyphicon-edit"></span> Status das Despesas</a></li>
 							<li role="separator" class="divider"></li>
@@ -163,14 +167,14 @@
 						<ul class="dropdown-menu" role="menu">
 							<!--<li><a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>"><span class="glyphicon glyphicon-user"></span> Cobranca</a></li>
 							<li role="separator" class="divider"></li>-->							
-							<li><a href="<?php echo base_url() ?>cliente/pesquisar"><span class="glyphicon glyphicon-user"></span> Clientes</a></li>
+							<!--<li><a href="<?php echo base_url() ?>cliente/pesquisar"><span class="glyphicon glyphicon-user"></span> Clientes</a></li>
 							<li role="separator" class="divider"></li>
-							<!--<li><a href="<?php echo base_url() ?>relatorio/clientes"><span class="glyphicon glyphicon-user"></span> Clientes Lista </a></li>
+							<li><a href="<?php echo base_url() ?>relatorio/clientes"><span class="glyphicon glyphicon-user"></span> Clientes Lista </a></li>
 							<li role="separator" class="divider"></li>-->
-							<li><a href="<?php echo base_url() ?>relatorio/fornecedor"><span class="glyphicon glyphicon-user"></span> Fornecedores </a></li>
-							<!--<li role="separator" class="divider"></li>
-							<li><a href="<?php echo base_url() ?>login/registrar2"><span class="glyphicon glyphicon-user"></span> Conta Pessoal</a></li>-->
+							<!--<li><a href="<?php echo base_url() ?>relatorio/fornecedor"><span class="glyphicon glyphicon-user"></span> Fornecedores </a></li>
 							<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>login/registrar2"><span class="glyphicon glyphicon-user"></span> Conta Pessoal</a></li>
+							<li role="separator" class="divider"></li>-->
 							<li><a href="<?php echo base_url() ?>relatorio/atributo"><span class="glyphicon glyphicon-pencil"></span> Atributos </a></li>
 							<li role="separator" class="divider"></li>							
 							<li><a href="<?php echo base_url() ?>relatorio/catprod"><span class="glyphicon glyphicon-pencil"></span> Categorias </a></li>
@@ -249,4 +253,4 @@
 		</div>			
 	</div>
 </nav>
-<br>
+<br><br>

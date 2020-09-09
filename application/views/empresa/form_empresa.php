@@ -527,7 +527,22 @@
 														</div>
 													</div>
 												</div>
-											</div>									
+											</div>
+											<div class="form-group">
+												<div class="row">
+													<div class="col-md-3">
+														<h3 class="text-left">Valor Mínimo:</h3>
+													</div>
+													<div class="col-md-3">
+														<label for="ValorMinimo">A Partir de:</label><br>
+														<div class="input-group">
+															<span class="input-group-addon" id="basic-addon1">R$</span>
+															<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
+																	name="ValorMinimo" value="<?php echo $query['ValorMinimo'] ?>">
+														</div>
+													</div>
+												</div>
+											</div>											
 										</div>
 									</div>
 								</div>

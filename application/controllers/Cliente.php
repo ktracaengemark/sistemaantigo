@@ -902,7 +902,21 @@ class Cliente extends CI_Controller {
 				*/
 				$data['pagination'] = $this->pagination->create_links();
 
-                $data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
+				if ($data['query']->num_rows() == 1) {
+					$info = $data['query']->result_array();
+					
+					if ($_SESSION['agenda'])
+						redirect('consulta/cadastrar/' . $info[0]['idApp_Cliente'] );
+					else
+						redirect('cliente/prontuario/' . $info[0]['idApp_Cliente'] );
+
+					exit();
+				} else {
+					$data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
+				}				
+				
+				
+                //$data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
             }
         } elseif ($this->input->post('Pesquisa')) {
 
@@ -942,7 +956,21 @@ class Cliente extends CI_Controller {
 
                 $data['pagination'] = $this->pagination->create_links();
 
-                $data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
+				if ($data['query']->num_rows() == 1) {
+					$info = $data['query']->result_array();
+					
+					if ($_SESSION['agenda'])
+						redirect('consulta/cadastrar/' . $info[0]['idApp_Cliente'] );
+					else
+						redirect('cliente/prontuario/' . $info[0]['idApp_Cliente'] );
+
+					exit();
+				} else {
+					$data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
+				}                
+				
+				
+				//$data['list'] = $this->load->view('cliente/list_cliente', $data, TRUE);
             }
         }
 
