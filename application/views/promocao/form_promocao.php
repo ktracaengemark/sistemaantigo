@@ -461,8 +461,8 @@
 																</div>
 																<div class="col-md-2">
 																	<label for="Convdesc">Desc. Embal <?php echo $i ?></label>
-																	<input type="text" class="form-control"  id="Convdesc<?php echo $i ?>" <?php echo $readonly; ?>
-																			  name="Convdesc<?php echo $i ?>" value="<?php echo $item_promocao[$i]['Convdesc']; ?>">
+																	<textarea type="text" class="form-control"  id="Convdesc<?php echo $i ?>" <?php echo $readonly; ?>
+																			  name="Convdesc<?php echo $i ?>" value="<?php echo $item_promocao[$i]['Convdesc']; ?>"><?php echo $item_promocao[$i]['Convdesc']; ?></textarea>
 																</div>
 																<div class="col-md-1">
 																	<label for="QtdProdutoIncremento">QtdEmb<?php echo $i ?>:</label>

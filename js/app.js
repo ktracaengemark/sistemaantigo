@@ -2351,8 +2351,8 @@ function adiciona_item_promocao() {
 						</div>\
 						<div class="col-md-2">\
 							<label for="Convdesc'+pt+'">Desc. Embal:</label>\
-							<input type="text" class="form-control" id="Convdesc'+pt+'"\
-									  name="Convdesc'+pt+'" value="">\
+							<textarea type="text" class="form-control" id="Convdesc'+pt+'"\
+									  name="Convdesc'+pt+'" value=""></textarea>\
 						</div>\
 						<div class="col-md-1">\
 							<label for="QtdProdutoIncremento">QtdEmb:</label><br>\
@@ -2833,8 +2833,8 @@ function adiciona_item_promocao5() {
 						</div>\
 						<div class="col-md-2">\
 							<label for="Convdesc'+pt+'">Desc. Embal:</label>\
-							<input type="text" class="form-control" id="Convdesc'+pt+'"\
-									  name="Convdesc'+pt+'" value="">\
+							<textarea type="text" class="form-control" id="Convdesc'+pt+'"\
+									  name="Convdesc'+pt+'" value=""></textarea>\
 						</div>\
 						<div class="col-md-1">\
 							<label for="QtdProdutoIncremento">QtdEmb:</label><br>\
