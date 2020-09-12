@@ -3887,7 +3887,7 @@ class Produtos extends CI_Controller {
 					$data['update']['valor']['inserir'][$j]['Prodaux3'] = $_SESSION['Produto']['Prodaux3'];
 					$data['update']['valor']['inserir'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
 					$data['update']['valor']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ValorProduto']));
-					$data['update']['valor']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['inserir'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['valor']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['inserir'][$j]['Convdesc'], 'UTF-8'));
 				}
 
                 $max = count($data['update']['valor']['alterar']);
@@ -3897,7 +3897,7 @@ class Produtos extends CI_Controller {
 					$data['update']['valor']['alterar'][$j]['QtdProdutoDesconto'] = $data['update']['valor']['alterar'][$j]['QtdProdutoDesconto'];
 					$data['update']['valor']['alterar'][$j]['QtdProdutoIncremento'] = $data['update']['valor']['alterar'][$j]['QtdProdutoIncremento'];
 					$data['update']['valor']['alterar'][$j]['idTab_Modelo'] = $data['produtos']['idTab_Produto'];
-					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['valor']['alterar'][$j]['idTab_Promocao'] = '0';
 					$data['update']['valor']['alterar'][$j]['Item_Promocao'] = '0';
 				}

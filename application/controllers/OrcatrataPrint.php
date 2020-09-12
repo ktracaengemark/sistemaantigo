@@ -17,7 +17,8 @@ class OrcatrataPrint extends CI_Controller {
         $this->load->driver('session');
 
         #load header view
-        $this->load->view('basico/header');
+        #$this->load->view('basico/header');
+		$this->load->view('basico/header_refresh_print');
         $this->load->view('basico/nav_principal');
         #$this->load->view('basico/nav_impressao');
         #$this->load->view('orcatrata/nav_secundario');

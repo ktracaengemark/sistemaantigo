@@ -6383,7 +6383,7 @@ exit();*/
             return $query;
         }
     }
-
+	
     public function list_orcamento($data, $completo) {
 
         if ($data['DataFim']) {

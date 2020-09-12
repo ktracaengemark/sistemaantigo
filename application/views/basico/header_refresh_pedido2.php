@@ -19,8 +19,9 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
-        <!--<meta http-equiv="refresh" content="30">
-		<meta http-equiv="refresh" content="<?php #echo $tempo+1;?>;<?php #echo base_url(); ?>login/sair/FALSE"/>-->
+        <!--<meta http-equiv="refresh" content="30">-->
+		<meta http-equiv="refresh" content="60;<?php echo base_url(); ?>pedidos/pedidos">
+		<!--<meta http-equiv="refresh" content="<?php #echo $tempo+1;?>;<?php #echo base_url(); ?>login/sair/FALSE"/>-->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">

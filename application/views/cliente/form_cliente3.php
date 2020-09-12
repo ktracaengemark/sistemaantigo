@@ -77,24 +77,26 @@
 								<div class="panel-body">
 									<div class="form-group">
 										<div class="row">
-											<div class="col-md-4">
+											<div class="col-md-8">
 												<label for="NomeCliente">Nome do Cliente: *</label>
 												<input type="text" class="form-control" id="NomeCliente" maxlength="255" <?php echo $readonly; ?>
 													   name="NomeCliente" autofocus value="<?php echo $query['NomeCliente']; ?>">
 												<?php echo form_error('NomeCliente'); ?>
 											</div>
-											<div class="col-md-3">
+											<div class="col-md-4">
 												<label for="CelularCliente">Celular*</label>
 												<input type="text" class="form-control Celular" id="CelularCliente" maxlength="11" <?php echo $readonly; ?>
 													   name="CelularCliente" placeholder="(XX)999999999" value="<?php echo $query['CelularCliente']; ?>">
 												<?php echo form_error('CelularCliente'); ?>
 											</div>
-											<div class="col-md-3">
+										</div>	
+										<div class="row">
+											<div class="col-md-4">
 												<label for="DataNascimento">Data de Nascimento:</label>
 												<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
 													   name="DataNascimento" placeholder="DD/MM/AAAA" value="<?php echo $query['DataNascimento']; ?>">
 											</div>						
-											<div class="col-md-2">
+											<div class="col-md-4">
 												<label for="Sexo">Sexo:</label>
 												<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 														id="Sexo" name="Sexo">
@@ -110,32 +112,59 @@
 													?>
 												</select>
 											</div>
+											<div class="col-md-3 text-left">
+												<label for="Cadastrar">Cadastrar Senha?</label>
+												<div class="btn-group" data-toggle="buttons">
+													<?php
+													foreach ($select['Cadastrar'] as $key => $row) {
+														//if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
+														($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+														if ($cadastrar['Cadastrar'] == $key) {
+															echo ''
+															. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
+															. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+															. 'autocomplete="off" value="' . $key . '" checked>' . $row
+															. '</label>'
+															;
+														} else {
+															echo ''
+															. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
+															. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+															. 'autocomplete="off" value="' . $key . '" >' . $row
+															. '</label>'
+															;
+														}
+													}
+													?>
+												</div>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="row">
-											<div class="col-md-2">
+											<div class="col-md-3">
 												<label for="CepCliente">Cep:</label>
 												<input type="text" class="form-control" id="CepCliente" maxlength="8" <?php echo $readonly; ?>
 													   name="CepCliente" value="<?php echo $query['CepCliente']; ?>">
 											</div>
-											<div class="col-md-5">
+											<div class="col-md-6">
 												<label for="EnderecoCliente">Endreço:</label>
 												<input type="text" class="form-control" id="EnderecoCliente" maxlength="100" <?php echo $readonly; ?>
 													   name="EnderecoCliente" value="<?php echo $query['EnderecoCliente']; ?>">
 											</div>
-											<div class="col-md-2">
+											<div class="col-md-3">
 												<label for="NumeroCliente">Numero:</label>
 												<input type="text" class="form-control" id="NumeroCliente" maxlength="100" <?php echo $readonly; ?>
 													   name="NumeroCliente" value="<?php echo $query['NumeroCliente']; ?>">
 											</div>
+										</div>	
+										<div class="row">
 											<div class="col-md-3">
 												<label for="ComplementoCliente">Complemento:</label>
 												<input type="text" class="form-control" id="ComplementoCliente" maxlength="100" <?php echo $readonly; ?>
 													   name="ComplementoCliente" value="<?php echo $query['ComplementoCliente']; ?>">
-											</div>
-										</div>	
-										<div class="row">	
+											</div>	
 											<div class="col-md-3">
 												<label for="BairroCliente">Bairro:</label>
 												<input type="text" class="form-control" id="BairroCliente" maxlength="100" <?php echo $readonly; ?>
@@ -146,7 +175,7 @@
 												<input type="text" class="form-control" id="CidadeCliente" maxlength="100" <?php echo $readonly; ?>
 													   name="CidadeCliente" value="<?php echo $query['CidadeCliente']; ?>">
 											</div>
-											<div class="col-md-2">
+											<div class="col-md-3">
 												<label for="EstadoCliente">Estado:</label>
 												<input type="text" class="form-control" id="EstadoCliente" maxlength="2" <?php echo $readonly; ?>
 													   name="EstadoCliente" value="<?php echo $query['EstadoCliente']; ?>">
@@ -169,6 +198,8 @@
 												</select>
 											</div>
 											-->
+										</div>	
+										<div class="row">
 											<div class="col-md-3 ">
 												<label class="" for="ReferenciaCliente">Referencia:</label>
 												<textarea class="form-control " id="ReferenciaCliente" <?php echo $readonly; ?>

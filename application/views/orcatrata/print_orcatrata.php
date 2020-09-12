@@ -16,11 +16,11 @@
 					</a>
 					<?php if ($query['Tipo_Orca'] == "O" ) { ?>	
 						<?php if ($query['AprovadoOrca'] == "N" ) { ?>	
-							<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alteraronline/' . $query['idApp_OrcaTrata']; ?>">
+							<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterar2/' . $query['idApp_OrcaTrata']; ?>">
 								<span class="glyphicon glyphicon-edit"></span> Editar Pedido "<?php echo $query['Tipo_Orca'];?>"										
 							</a>	
 						<?php } else { ?>
-							<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterarstatus/' . $query['idApp_OrcaTrata']; ?>">
+							<a class="navbar-brand" href="<?php echo base_url() . 'statuspedido/alterarstatus/' . $query['idApp_OrcaTrata']; ?>">
 								<span class="glyphicon glyphicon-edit"></span> Atualizar Status										
 							</a>
 							<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterar2/' . $query['idApp_OrcaTrata']; ?>">
@@ -29,7 +29,7 @@
 						<?php } ?>
 							
 					<?php } else { ?>
-						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterarstatus/' . $query['idApp_OrcaTrata']; ?>">
+						<a class="navbar-brand" href="<?php echo base_url() . 'statuspedido/alterarstatus/' . $query['idApp_OrcaTrata']; ?>">
 							<span class="glyphicon glyphicon-edit"></span> Atualizar Status										
 						</a>
 						<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterar2/' . $query['idApp_OrcaTrata']; ?>">

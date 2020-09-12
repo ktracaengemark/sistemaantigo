@@ -94,7 +94,7 @@ class Orcatrata_model extends CI_Model {
 				idApp_OrcaTrata = ' . $data . '
 		');
         $query = $query->result_array();
-
+		
         /*
         //echo $this->db->last_query();
         echo '<br>';
@@ -1703,7 +1703,6 @@ class Orcatrata_model extends CI_Model {
             }
         }
     }
-
 	
     public function list11_produtosvend($x) {
 		

@@ -714,7 +714,7 @@
 													</textarea>
 												</div>
 											</div>	
-											<div class="row ">	
+											<div class="row ">
 												<div class="col-md-8 text-left"></div>
 												<div class="col-md-4 text-left">
 													<label for="AtualizaEndereco">Atualizar End.?</label><br>
@@ -964,7 +964,7 @@
 																		foreach ($select['AVAP'] as $key => $row) {
 																			(!$orcatrata['AVAP']) ? $orcatrata['AVAP'] = 'V' : FALSE;
 																			#if (!$orcatrata['AVAP'])$orcatrata['AVAP'] = V;
-																			($key == 'P') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																			($key == 'V') ? $hideshow = 'hideradio' : $hideshow = 'showradio';
 																			if ($orcatrata['AVAP'] == $key) {
 																				echo ''
 																				. '<label class="btn btn-default active" name="radio" id="radio' . $key . '">'
@@ -1194,12 +1194,12 @@
 										</div>
 									</div>	
 									
-									<div class="panel panel-default">
+									<div class="panel panel-info">
 										<div class="panel-heading">
 											<h4 class="mb-3"><b>Status do Pedido</b></h4>
 											<div class="row">
 												<div class="col-md-4">
-													<div class="panel panel-info">
+													<div class="panel panel-danger">
 														<div class="panel-heading">
 															<div class="row">
 																<div class="col-md-12 text-left">
@@ -1616,7 +1616,7 @@
 									</div>
 									
 									<?php } ?>
-									<div class="panel panel-default">
+									<div class="panel panel-info">
 										<div class="panel-heading">
 											<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
 											<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">

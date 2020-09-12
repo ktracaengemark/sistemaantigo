@@ -2698,7 +2698,7 @@ class Orcatrata extends CI_Controller {
 
         if ($id) {
             #### App_OrcaTrata ####
-            $_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata($id);
+            $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata($id);
             $data['orcatrata']['Tipo_Orca'] = $data['orcatrata']['Tipo_Orca'];
 			$data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
@@ -3683,7 +3683,7 @@ class Orcatrata extends CI_Controller {
 
         if ($id) {
             #### App_OrcaTrata ####
-            $_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata($id);
+            $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata($id);
             $data['orcatrata']['Tipo_Orca'] = $data['orcatrata']['Tipo_Orca'];
 			$data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
@@ -4006,7 +4006,7 @@ class Orcatrata extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             //$this->load->view('orcatrata/form_orcatrataalterar2', $data);
-			$this->load->view('orcatrata/form_orcatrata_online', $data);
+			$this->load->view('orcatrata/form_orcatrata3', $data);
 			/*
 			if ($data['orcatrata']['Tipo_Orca']= 'B' ){
 				$this->load->view('orcatrata/form_orcatrataalterar2', $data);
@@ -4433,7 +4433,7 @@ class Orcatrata extends CI_Controller {
 
                 $this->basico->erro($msg);
 				//$this->load->view('orcatrata/form_orcatrataalterar2', $data);
-				$this->load->view('orcatrata/form_orcatrata_online', $data);
+				$this->load->view('orcatrata/form_orcatrata3', $data);
 				/*
 				if ($data['orcatrata']['Tipo_Orca']= 'B' ){
 					$this->load->view('orcatrata/form_orcatrataalterar2', $data);

@@ -25,7 +25,7 @@
 				foreach ($q6 as $row)
 				{
 
-					$url = base_url() . 'Orcatrata/alterarstatus/' . $row['idApp_OrcaTrata'];
+					$url = base_url() . 'statuspedido/alterarstatus/' . $row['idApp_OrcaTrata'];
 					#$url = '';
 
 					echo '<tr class="clickable-row" data-href="' . $url . '">';

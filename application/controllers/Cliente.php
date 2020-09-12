@@ -48,7 +48,11 @@ class Cliente extends CI_Controller {
         else
             $data['msg'] = '';
 
-        $data['query'] = quotes_to_entities($this->input->post(array(
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));        
+		
+		$data['query'] = quotes_to_entities($this->input->post(array(
             'idSis_Empresa',
 			'idSis_Usuario',
 			'idApp_Cliente',
@@ -81,9 +85,9 @@ class Cliente extends CI_Controller {
             'RegistroFicha',
 			'Associado',
 			#'Profissional',
-			'usuario',
-			'senha',
-			'CodInterno',
+			#'usuario',
+			#'senha',
+			#'CodInterno',
         ), TRUE));
 
        
@@ -98,7 +102,9 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('CelularCliente', 'CelularCliente', 'required|trim|is_unique_duplo[App_Cliente.CelularCliente.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']|valid_celular');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
-		
+		//$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();		
         $data['select']['MunicipioCliente'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Associado'] = $this->Basico_model->select_status_sn();
@@ -126,12 +132,21 @@ class Cliente extends CI_Controller {
         $data['main'] = 'col-sm-7 col-md-8';
 
         $data['tela'] = $this->load->view('cliente/form_cliente2', $data, TRUE);
-
+		
+		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('cliente/form_cliente2', $data);
         } else {
 
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
 			
             $data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');            
@@ -145,11 +160,11 @@ class Cliente extends CI_Controller {
 			$data['query']['CidadeCliente'] = trim(mb_strtoupper($data['query']['CidadeCliente'], 'ISO-8859-1'));
 			$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['query']['EstadoCliente'], 'ISO-8859-1'));
 			$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['query']['ReferenciaCliente'], 'ISO-8859-1'));
-			
-			$data['query']['usuario'] = $data['query']['CelularCliente'];
-			$data['query']['senha'] = md5($data['query']['CelularCliente']);
-			$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
-			
+			if ($data['cadastrar']['Cadastrar'] == 'S'){
+				$data['query']['usuario'] = $data['query']['CelularCliente'];
+				$data['query']['senha'] = md5($data['query']['CelularCliente']);
+				$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+			}
 			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -200,6 +215,10 @@ class Cliente extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));		
 
         $data['query'] = $this->input->post(array(
             'idSis_Empresa',
@@ -233,9 +252,9 @@ class Cliente extends CI_Controller {
             'RegistroFicha',
 			'Associado',
 			#'Profissional',
-			'usuario',
-			'senha',
-			'CodInterno',
+			#'usuario',
+			#'senha',
+			#'CodInterno',
         ), TRUE);
 
         if ($id) {
@@ -255,7 +274,9 @@ class Cliente extends CI_Controller {
         $this->form_validation->set_rules('CelularCliente', 'CelularCliente', 'required|trim|is_unique_by_id_empresa[App_Cliente.CelularCliente.' . $data['query']['idApp_Cliente'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']|valid_celular');
         $this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
-		
+		//$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
         $data['select']['MunicipioCliente'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Associado'] = $this->Basico_model->select_status_sn();
@@ -285,10 +306,20 @@ class Cliente extends CI_Controller {
         $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
         $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
 
+		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'N' : FALSE;
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('cliente/form_cliente', $data);
         } else {
+		
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
 
             $data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
@@ -301,11 +332,11 @@ class Cliente extends CI_Controller {
 			$data['query']['CidadeCliente'] = trim(mb_strtoupper($data['query']['CidadeCliente'], 'ISO-8859-1'));
 			$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['query']['EstadoCliente'], 'ISO-8859-1'));
 			$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['query']['ReferenciaCliente'], 'ISO-8859-1'));
-			
-			$data['query']['usuario'] = $data['query']['CelularCliente'];
-			$data['query']['senha'] = md5($data['query']['CelularCliente']);
-			$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
-			
+			if ($data['cadastrar']['Cadastrar'] == 'S'){
+				$data['query']['usuario'] = $data['query']['CelularCliente'];
+				$data['query']['senha'] = md5($data['query']['CelularCliente']);
+				$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+			}
 			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			#$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 						

@@ -26,10 +26,10 @@
 				foreach ($q8 as $row)
 				{
 
-					$url = base_url() . 'Orcatrata/alteraronline/' . $row['idApp_OrcaTrata'];
+					$url = base_url() . 'statuspedido/alterarstatus/' . $row['idApp_OrcaTrata'];
 					#$url = '';
 
-					echo '<tr class="clickable-row" data-href="' . $url . '">';
+					echo '<tr class="clickable-row bg-warning" data-href="' . $url . '">';
 						echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 						echo '<td>' . $row['NomeCliente'] . '</td>';
 						echo '<td>' . $row['DataEntregaOrca'] . '</td>';

@@ -188,7 +188,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Promocao ####
-			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
+			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -213,7 +213,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             if (isset($data['item_promocao'])) {
                 $max = count($data['item_promocao']);
                 for($j=1;$j<=$max;$j++) {
-                    $data['item_promocao'][$j]['Convdesc'] = trim(mb_strtoupper($data['item_promocao'][$j]['Convdesc'], 'ISO-8859-1'));
+                    $data['item_promocao'][$j]['Convdesc'] = trim(mb_strtoupper($data['item_promocao'][$j]['Convdesc'], 'UTF-8'));
 					$data['item_promocao'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['item_promocao'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['item_promocao'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -401,7 +401,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Promocao ####
-			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
+			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -424,7 +424,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
             #### Tab_Valor ####
             if (isset($data['item_promocao'])) { {
-					$data['item_promocao']['Convdesc'] = trim(mb_strtoupper($data['item_promocao']['Convdesc'], 'ISO-8859-1'));
+					$data['item_promocao']['Convdesc'] = trim(mb_strtoupper($data['item_promocao']['Convdesc'], 'UTF-8'));
                     $data['item_promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['item_promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['item_promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -616,7 +616,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Promocao ####
-			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
+			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -641,7 +641,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
             if (isset($data['item_promocao'])) {
                 $max = count($data['item_promocao']);
                 for($j=1;$j<=$max;$j++) {
-                    $data['item_promocao'][$j]['Convdesc'] = trim(mb_strtoupper($data['item_promocao'][$j]['Convdesc'], 'ISO-8859-1'));
+                    $data['item_promocao'][$j]['Convdesc'] = trim(mb_strtoupper($data['item_promocao'][$j]['Convdesc'], 'UTF-8'));
 					$data['item_promocao'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['item_promocao'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['item_promocao'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -829,7 +829,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Promocao ####
-			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
+			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -852,7 +852,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
             #### Tab_Valor ####
             if (isset($data['item_promocao'])) { {
-					$data['item_promocao']['Convdesc'] = trim(mb_strtoupper($data['item_promocao']['Convdesc'], 'ISO-8859-1'));
+					$data['item_promocao']['Convdesc'] = trim(mb_strtoupper($data['item_promocao']['Convdesc'], 'UTF-8'));
                     $data['item_promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['item_promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['item_promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -1052,8 +1052,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 				$data['promocao']['Promocao'] = '';
 				$data['promocao']['Descricao'] = '';
 			} else {
-				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
-				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
+				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'UTF-8'));
 			}
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
@@ -1293,8 +1293,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 				$data['promocao']['Promocao'] = '';
 				$data['promocao']['Descricao'] = '';
 			} else {
-				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
-				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
+				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'UTF-8'));
 			}
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
@@ -1537,8 +1537,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 				$data['promocao']['Promocao'] = '';
 				$data['promocao']['Descricao'] = '';
 			} else {
-				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
-				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
+				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'UTF-8'));
 			}
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
@@ -1883,8 +1883,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 				$data['promocao']['Promocao'] = '';
 				$data['promocao']['Descricao'] = '';
 			} else {
-				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
-				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
+				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'UTF-8'));
 			}
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
@@ -1919,7 +1919,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 $max = count($data['update']['item_promocao']['inserir']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['item_promocao']['inserir'][$j]['Item_Promocao'] = "1";
-					$data['update']['item_promocao']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['inserir'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['item_promocao']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['inserir'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['item_promocao']['inserir'][$j]['Desconto'] = $data['promocao']['Desconto'];
 					$data['update']['item_promocao']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['item_promocao']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -1937,7 +1937,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 					$data['update']['item_promocao']['alterar'][$j]['Prodaux3'] = $data['promocao']['Cat_1'];
 					$data['update']['item_promocao']['alterar'][$j]['idTab_Modelo'] = $data['promocao']['Mod_1'];
 					$data['update']['item_promocao']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ValorProduto']));
-					$data['update']['item_promocao']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['item_promocao']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['alterar'][$j]['Convdesc'], 'UTF-8'));
 				}
 
                 if (count($data['update']['item_promocao']['inserir']))
@@ -1966,7 +1966,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 $max2 = count($data['update']['item_promocao2']['inserir']);
                 for($j=0;$j<$max2;$j++) {
 					$data['update']['item_promocao2']['inserir'][$j]['Item_Promocao'] = "2";
-					$data['update']['item_promocao2']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao2']['inserir'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['item_promocao2']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao2']['inserir'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['item_promocao2']['inserir'][$j]['Desconto'] = $data['promocao']['Desconto'];
 					$data['update']['item_promocao2']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['item_promocao2']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -1984,7 +1984,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 					$data['update']['item_promocao2']['alterar'][$j]['Prodaux3'] = $data['promocao']['Cat_2'];
 					$data['update']['item_promocao2']['alterar'][$j]['idTab_Modelo'] = $data['promocao']['Mod_2'];
 					$data['update']['item_promocao2']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao2']['alterar'][$j]['ValorProduto']));
-					$data['update']['item_promocao2']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao2']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['item_promocao2']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao2']['alterar'][$j]['Convdesc'], 'UTF-8'));
 				}
 
                 if (count($data['update']['item_promocao2']['inserir']))
@@ -2013,7 +2013,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 $max = count($data['update']['item_promocao3']['inserir']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['item_promocao3']['inserir'][$j]['Item_Promocao'] = "3";
-					$data['update']['item_promocao3']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao3']['inserir'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['item_promocao3']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao3']['inserir'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['item_promocao3']['inserir'][$j]['Desconto'] = $data['promocao']['Desconto'];
 					$data['update']['item_promocao3']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['item_promocao3']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -2031,7 +2031,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 					$data['update']['item_promocao3']['alterar'][$j]['Prodaux3'] = $data['promocao']['Cat_3'];
 					$data['update']['item_promocao3']['alterar'][$j]['idTab_Modelo'] = $data['promocao']['Mod_3'];
 					$data['update']['item_promocao3']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao3']['alterar'][$j]['ValorProduto']));
-					$data['update']['item_promocao3']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao3']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['item_promocao3']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao3']['alterar'][$j]['Convdesc'], 'UTF-8'));
 				}
 
                 if (count($data['update']['item_promocao3']['inserir']))
@@ -2306,8 +2306,8 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 				$data['promocao']['Promocao'] = '';
 				$data['promocao']['Descricao'] = '';
 			} else {
-				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
-				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'ISO-8859-1'));
+				$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
+				$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'UTF-8'));
 			}
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
@@ -2342,7 +2342,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 $max = count($data['update']['item_promocao']['inserir']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['item_promocao']['inserir'][$j]['Item_Promocao'] = "1";
-					$data['update']['item_promocao']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['inserir'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['item_promocao']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['inserir'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['item_promocao']['inserir'][$j]['Desconto'] = $data['promocao']['Desconto'];
 					$data['update']['item_promocao']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['item_promocao']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -2360,7 +2360,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 					$data['update']['item_promocao']['alterar'][$j]['Prodaux3'] = $data['promocao']['Cat_1'];
 					$data['update']['item_promocao']['alterar'][$j]['idTab_Modelo'] = $data['promocao']['Mod_1'];
 					$data['update']['item_promocao']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ValorProduto']));
-					$data['update']['item_promocao']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['item_promocao']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['alterar'][$j]['Convdesc'], 'UTF-8'));
 				}
 
                 if (count($data['update']['item_promocao']['inserir']))
@@ -2579,7 +2579,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Promocao ####
-			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
+			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -2609,7 +2609,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
                 $max = count($data['update']['item_promocao']['inserir']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['item_promocao']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['inserir'][$j]['Convdesc'], 'ISO-8859-1'));
+                    $data['update']['item_promocao']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['inserir'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['item_promocao']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['item_promocao']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['item_promocao']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -2621,7 +2621,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 $max = count($data['update']['item_promocao']['alterar']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['item_promocao']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ValorProduto']));
-					$data['update']['item_promocao']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['item_promocao']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['alterar'][$j]['Convdesc'], 'UTF-8'));
 				}
 
                 if (count($data['update']['item_promocao']['inserir']))
@@ -2820,7 +2820,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Promocao ####
-			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'ISO-8859-1'));
+			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
 			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
             $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -2850,7 +2850,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
 
                 $max = count($data['update']['item_promocao']['inserir']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['item_promocao']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['inserir'][$j]['Convdesc'], 'ISO-8859-1'));
+                    $data['update']['item_promocao']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['inserir'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['item_promocao']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['item_promocao']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['item_promocao']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -2862,7 +2862,7 @@ $data['promocao'] = quotes_to_entities($this->input->post(array(
                 $max = count($data['update']['item_promocao']['alterar']);
                 for($j=0;$j<$max;$j++) {
 					$data['update']['item_promocao']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ValorProduto']));
-					$data['update']['item_promocao']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['alterar'][$j]['Convdesc'], 'ISO-8859-1'));
+					$data['update']['item_promocao']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['alterar'][$j]['Convdesc'], 'UTF-8'));
 				}
 
                 if (count($data['update']['item_promocao']['inserir']))

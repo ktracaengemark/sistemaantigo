@@ -29,7 +29,7 @@
 					$url = base_url() . 'Orcatrata/alterarstatus/' . $row['idApp_OrcaTrata'];
 					#$url = '';
 
-					echo '<tr class="clickable-row" data-href="' . $url . '">';
+					echo '<tr class="clickable-row " data-href="' . $url . '">';
 						echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 						echo '<td>' . $row['NomeCliente'] . '</td>';
 						echo '<td>' . $row['DataEntregaOrca'] . '</td>';

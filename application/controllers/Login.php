@@ -1679,7 +1679,7 @@ class Login extends CI_Controller {
                 $_SESSION['log']['idSis_Usuario'] = 1;
             }
             $this->Login_model->set_acesso($_SESSION['log']['idSis_Usuario'], 'TIMEOUT');
-            $data['msg'] = '?m=2';
+            $data['msg'] = '?m=3';
         }
 
         #clear de session data
