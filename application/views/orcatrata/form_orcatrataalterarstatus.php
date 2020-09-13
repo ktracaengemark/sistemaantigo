@@ -698,10 +698,10 @@
 								</div>
 							</div>
 							
-							<?php if ($_SESSION['log']['NivelEmpresa'] >= 20 ) { ?>
+							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							<br>
-							<div class="panel-group">	
-								<div class="panel panel-success">
+								
+								<div class="panel panel-default">
 									<div class="panel-heading text-left">
 										<!--
 										<a class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Procedimentos" aria-expanded="false" aria-controls="Procedimentos">
@@ -709,7 +709,7 @@
 										</a>
 										-->
 										<div <?php echo $collapse; ?> id="Procedimentos">
-											<div class="panel-body">
+											
 
 												<input type="hidden" name="PMCount" id="PMCount" value="<?php echo $count['PMCount']; ?>"/>
 
@@ -842,11 +842,11 @@
 														</a>
 													</div>
 												</div>
-											</div>
+											
 										</div>
 									</div>	
 								</div>
-							</div>
+							
 							<?php } ?>
 							<br>
 							<div class="panel panel-default">

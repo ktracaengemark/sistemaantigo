@@ -1917,7 +1917,7 @@ class Orcatrata extends CI_Controller {
             $data['visivel'] = 'style="display: none;"';		
 
         #Ver uma solução melhor para este campo
-		(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
+		//(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
 		($data['orcatrata']['AVAP'] == 'P') ? $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
 		/*
         $data['radio'] = array(

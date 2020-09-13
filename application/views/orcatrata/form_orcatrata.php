@@ -1464,9 +1464,9 @@
 										</div>
 									</div>
 
-									<?php if ($_SESSION['log']['NivelEmpresa'] >= 20 ) { ?>
-									<br>	
-									<div class="panel panel-success">
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+										
+									<div class="panel panel-default">
 										<div class="panel-heading">
 											<!--
 											<a class="btn btn-primary" type="button" data-toggle="collapse" data-target="#Procedimentos" aria-expanded="false" aria-controls="Procedimentos">
@@ -1600,8 +1600,7 @@
 
 											</div>
 
-											<div class="panel panel-warning">
-												<div class="panel-heading text-left">
+											
 													<div class="row">
 														<div class="col-md-4">
 															<a class="add_field_button3 btn btn btn-warning" onclick="adicionaProcedimento()">
@@ -1609,8 +1608,6 @@
 															</a>
 														</div>
 													</div>
-												</div>
-											</div>
 											
 										</div>	
 									</div>

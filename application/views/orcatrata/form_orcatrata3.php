@@ -1429,10 +1429,10 @@
 									</div>
 								</div>
 								
-								<?php if ($_SESSION['log']['NivelEmpresa'] >= 20 ) { ?>
-								<br>
-								<div class="panel-group">	
-									<div class="panel panel-success">
+								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+								
+									
+									<div class="panel panel-default">
 
 										<div class="panel-heading text-left">
 											<!--
@@ -1441,7 +1441,7 @@
 											</a>
 											-->
 											<div <?php echo $collapse; ?> id="Procedimentos">
-												<div class="panel-body">
+												
 
 													<input type="hidden" name="PMCount" id="PMCount" value="<?php echo $count['PMCount']; ?>"/>
 
@@ -1574,11 +1574,11 @@
 															</a>
 														</div>
 													</div>
-												</div>
+												
 											</div>
 										</div>	
 									</div>
-								</div>
+								
 								<?php } ?>
 								
 								<div class="panel panel-default">
