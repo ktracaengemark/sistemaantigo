@@ -930,7 +930,7 @@
 																	foreach ($select['AVAP'] as $key => $row) {
 																		(!$orcatrata['AVAP']) ? $orcatrata['AVAP'] = 'V' : FALSE;
 																		#if (!$orcatrata['AVAP'])$orcatrata['AVAP'] = V;
-																		($key == 'P') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																		($key != 'V') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 																		if ($orcatrata['AVAP'] == $key) {
 																			echo ''
 																			. '<label class="btn btn-default active" name="radio" id="radio' . $key . '">'
