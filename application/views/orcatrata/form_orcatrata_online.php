@@ -932,7 +932,7 @@
 																	foreach ($select['AVAP'] as $key => $row) {
 																		(!$orcatrata['AVAP']) ? $orcatrata['AVAP'] = 'V' : FALSE;
 																		#if (!$orcatrata['AVAP'])$orcatrata['AVAP'] = V;
-																		($key == 'P') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																		($key != 'V') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 																		if ($orcatrata['AVAP'] == $key) {
 																			echo ''
 																			. '<label class="btn btn-default active" name="radio" id="radio' . $key . '">'
@@ -1025,7 +1025,7 @@
 											</div>
 											<?php } ?>
 										</div>
-										<div id="AVAP" <?php echo $div['AVAP']; ?>>
+										<div>
 											<div class="row">																
 												<div class="col-md-2">
 													<label for="QtdParcelasOrca">Parcelas</label><br>
