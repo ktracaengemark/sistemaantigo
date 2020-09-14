@@ -395,7 +395,7 @@ class Statuspedido extends CI_Controller {
         #Ver uma solução melhor para este campo
 		//(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
 
-		($data['orcatrata']['AVAP'] != 'V') ? $data['div']['AVAP'] = 'style="display: none;"' : $data['div']['AVAP'] = '';
+		($data['orcatrata']['AVAP'] != 'V') ? $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
 		/*
         $data['radio'] = array(
             'AVAP' => $this->basico->radio_checked($data['orcatrata']['AVAP'], 'AVAP', 'VP'),
@@ -531,19 +531,9 @@ class Statuspedido extends CI_Controller {
 			$data['orcatrata']['DataConclusao'] = $this->basico->mascara_data($data['orcatrata']['DataConclusao'], 'mysql');
             $data['orcatrata']['DataRetorno'] = $this->basico->mascara_data($data['orcatrata']['DataRetorno'], 'mysql');
             $data['orcatrata']['DataQuitado'] = $this->basico->mascara_data($data['orcatrata']['DataQuitado'], 'mysql');
+			$data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'mysql');
 			if ($data['orcatrata']['CanceladoOrca'] == 'N'){
 				if ($data['orcatrata']['AprovadoOrca'] == 'S'){
-					if ($data['orcatrata']['AVAP'] == 'V') {
-						if ($data['orcatrata']['Tipo_Orca'] == 'B') {
-							$data['orcatrata']['DataVencimentoOrca'] = $data['orcatrata']['DataOrca'];
-							//$data['orcatrata']['QuitadoOrca'] = "S";
-						} else {
-							$data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'mysql');
-						}
-					} else {	
-						$data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'mysql');
-					}
-					
 					if ($data['orcatrata']['FinalizadoOrca'] == 'S') {
 						$data['orcatrata']['ProntoOrca'] = "S";
 						$data['orcatrata']['EnviadoOrca'] = "S";
@@ -554,28 +544,23 @@ class Statuspedido extends CI_Controller {
 						$data['orcatrata']['ProntoOrca'] = "S";
 						$data['orcatrata']['EnviadoOrca'] = "S";
 					}
-					if ($data['orcatrata']['TipoFrete'] == '1' && $data['orcatrata']['ProntoOrca'] == 'S') {$data['orcatrata']['EnviadoOrca'] = "S";
+					if ($data['orcatrata']['TipoFrete'] == '1' && $data['orcatrata']['ProntoOrca'] == 'S') {
+						$data['orcatrata']['EnviadoOrca'] = "S";
 					}
 					
-				} else if ($data['orcatrata']['AVAP'] == 'V') {
-						$data['orcatrata']['DataVencimentoOrca'] = $data['orcatrata']['DataOrca'];
-						$data['orcatrata']['QuitadoOrca'] = "N";
-						$data['orcatrata']['ConcluidoOrca'] = "N";
-						$data['orcatrata']['DevolvidoOrca'] = "N";
-					} else {	
-						$data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'mysql');
-						$data['orcatrata']['QuitadoOrca'] = "N";
-						$data['orcatrata']['ConcluidoOrca'] = "N";
-						$data['orcatrata']['DevolvidoOrca'] = "N";
-					}
-			} else {	
-				$data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'mysql');
+				} else {
+					$data['orcatrata']['QuitadoOrca'] = "N";
+					$data['orcatrata']['ConcluidoOrca'] = "N";
+					$data['orcatrata']['DevolvidoOrca'] = "N";
+				}
+			} else {
 				$data['orcatrata']['QuitadoOrca'] = "N";
 				$data['orcatrata']['ConcluidoOrca'] = "N";
 				$data['orcatrata']['DevolvidoOrca'] = "N";
 				$data['orcatrata']['ProntoOrca'] = "N";
 				$data['orcatrata']['EnviadoOrca'] = "N";
 				$data['orcatrata']['AprovadoOrca'] = "N";
+				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}
 
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');

@@ -13,20 +13,25 @@
 								<h5 class="text-center"><b> Selecione o Pedido</b><?php #echo $titulo; ?></h5>
 							</div>
 							-->
-							<div class="col-md-3">
+							<div class="col-md-4">
+								<label>Gestor de Pedidos</label>
 								<div class="input-group">
-								<label>Selecione o Pedido</label>
-									<input type="text" class="form-control Numero"  
-											name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
+									<span class="input-group-btn">
+										<button class="btn btn-info btn-md" type="submit">
+											<span class="glyphicon glyphicon-search"></span> 
+										</button>
+									</span>
+									<input type="text" class="form-control Numero" placeholder="Pesquisar Pedido" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
 								</div>
 							</div>
-							<div class="col-md-3 text-left">
+							<!--
+								<div class="col-md-3 text-left">
 								<br>
 								<button class="btn btn-md btn-warning btn-block" name="pesquisar" value="0" type="submit">
 									<span class="glyphicon glyphicon-search"></span> Pesquisar
 								</button>
 							</div>
-							<!--
+							
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>Ordenamento</label>
@@ -64,8 +69,8 @@
 								</div>
 							</div>
 							-->
-							<div class="col-md-3">										
-								<br>
+							<div class="col-md-4">										
+								<label>Cadastrar novo Pedido</label>
 								<a class="btn btn-md btn-danger btn-block" href="<?php echo base_url() ?>orcatrata/cadastrar3" role="button"> 
 									<span class="glyphicon glyphicon-plus"></span> Novo Pedido
 								</a>

@@ -3417,6 +3417,7 @@ function buscaValor1Tabelas(id, campo, tabela, num, campo2) {
 					$('#QtdIncremento'+campo2+num).val(data[i].qtdinc);
 					$('#Qtd'+campo2+num).val(data[i].qtdprod);
 					$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
+					$('#Prod_Serv_'+campo2+num).val(data[i].prod_serv);
 					$('#idTab_Valor_'+campo2+num).val(data[i].id_valor);
 					console.log( data[i].comissaoprod );
                     //carrega o valor no campo de acordo com a opção selecionada
@@ -5611,13 +5612,34 @@ $(document).ready(function () {
 							<input type="hidden" class="form-control" id="idTab_Valor_Produto'+pc+'" name="idTab_Valor_Produto'+pc+'" value="">\
 							<input type="hidden" class="form-control" id="idTab_Produtos_Produto'+pc+'" name="idTab_Produtos_Produto'+pc+'" value="">\
 							<input type="hidden" class="form-control" id="ComissaoProduto'+pc+'" name="ComissaoProduto'+pc+'" value="0.00">\
+							<input type="hidden" class="form-control" id="Prod_Serv_Produto'+pc+'" name="Prod_Serv_Produto'+pc+'" value="">\
 							<input type="hidden" class="form-control" id="NomeProduto'+pc+'" name="NomeProduto'+pc+'" value="">\
-							<div class="col-md-11">\
+							<div class="col-md-7">\
                                 <label for="idTab_Produto">Produto '+pc+':</label><br>\
                                 <select class="form-control Chosen" id="listadinamicab'+pc+'" name="idTab_Produto'+pc+'" onchange="'+buscavalor+'(this.value,this.name,\''+tblbusca+'\','+pc+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
+							<div class="col-md-2">\
+								<label for="ProfissionalProduto'+pc+'">Profissional:</label>\
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen20"\
+										 id="listadinamica_prof_prod'+pc+'" name="ProfissionalProduto'+pc+'">\
+									<option value=""></option>\
+								</select>\
+							</div>\
+							<div class="col-md-2">\
+								<label for="ConcluidoProduto">Entregue? </label><br>\
+								<div class="btn-group" data-toggle="buttons">\
+									<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
+									<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
+										autocomplete="off" value="N" checked>Não\
+									</label>\
+									<label class="btn btn-default" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'S">\
+									<input type="radio" name="ConcluidoProduto'+pc+'" id="radiogeraldinamico"\
+										autocomplete="off" value="S" >Sim\
+									</label>\
+								</div>\
+							</div>\
 							<div class="col-md-1 text-right">\
 								<label><br></label><br>\
 								<a href="#" id="'+pc+'" class="remove_field9 btn btn-danger"\
@@ -5714,7 +5736,7 @@ $(document).ready(function () {
         });
 		
 		//get a reference to the select element
-        $select2 = $('#listadinamicac'+pc);
+        $select20 = $('#listadinamica_prof_prod'+pc);
 
         //request the JSON data and parse into the select element
         $.ajax({
@@ -5723,14 +5745,14 @@ $(document).ready(function () {
             type: "GET",
             success: function (data) {
                 //clear the current content of the select
-                $select2.html('');
+                $select20.html('');
                 //iterate over the data and append a select option
-                $select2.append('<option value="">-- Sel. Profis. --</option>');
+                $select20.append('<option value="">-- Sel. Profis. --</option>');
                 $.each(data, function (key, val) {
                     //alert(val.id);
-                    $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
+                    $select20.append('<option value="' + val.id + '">' + val.name + '</option>');
                 })
-                $('.Chosen2').chosen({
+                $('.Chosen20').chosen({
                     disable_search_threshold: 10,
                     multiple_text: "Selecione uma ou mais opções",
                     single_text: "Selecione uma opção",
@@ -5741,7 +5763,7 @@ $(document).ready(function () {
             error: function () {
                 //alert('erro listadinamicaB');
                 //if there is an error append a 'none available' option
-                $select2.html('<option id="-1">ERRO</option>');
+                $select20.html('<option id="-1">ERRO</option>');
             }
 
         });		
@@ -5761,7 +5783,7 @@ $(document).ready(function () {
 		});
 
     });
-
+	
 /*	
     //adiciona campos dinamicamente dos Produtos Vendidos 
 	var pc = $("#PCount").val(); //initlal text box count
@@ -6046,11 +6068,29 @@ $(document).ready(function () {
 						<div class="row">\
 							<input type="hidden" class="form-control" id="idTab_Valor_Servico'+ps+'" name="idTab_Valor_Servico'+ps+'" value="">\
 							<input type="hidden" class="form-control" id="idTab_Produtos_Servico'+ps+'" name="idTab_Produtos_Servico'+ps+'" value="">\
-							<div class="col-md-11">\
+							<input type="hidden" class="form-control" id="ComissaoServico'+ps+'" name="ComissaoServico'+ps+'" value="">\
+							<input type="hidden" class="form-control" id="Prod_Serv_Servico'+ps+'" name="Prod_Serv_Servico'+ps+'" value="">\
+							<input type="hidden" class="form-control" id="NomeServico'+ps+'" name="NomeServico'+ps+'" value="">\
+							<div class="col-md-9">\
 								<label for="idTab_Servico">Servico '+ps+':</label><br>\
 								<select class="form-control Chosen4" id="listadinamica'+ps+'"  name="idTab_Servico'+ps+'" onchange="'+buscavalor_serv+'(this.value,this.name,\''+tblbusca_serv+'\','+ps+',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')">\
 									<option value="">-- Selecione uma opção --</option>\
 								</select>\
+							</div>\
+							<div class="col-md-2">\
+								<label for="ConcluidoServico">Entregue? </label><br>\
+								<div class="form-group">\
+									<div class="btn-group" data-toggle="buttons">\
+										<label class="btn btn-warning active" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'N">\
+										<input type="radio" name="ConcluidoServico'+ps+'" id="radiogeraldinamico"\
+											autocomplete="off" value="N" checked>Não\
+										</label>\
+										<label class="btn btn-default" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'S">\
+										<input type="radio" name="ConcluidoServico'+ps+'" id="radiogeraldinamico"\
+											autocomplete="off" value="S" >Sim\
+										</label>\
+									</div>\
+								</div>\
 							</div>\
 							<div class="col-md-1">\
 								<label><br></label><br>\

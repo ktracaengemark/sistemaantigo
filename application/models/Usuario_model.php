@@ -258,7 +258,7 @@ class Usuario_model extends CI_Model {
             $array = $this->db->query('					
             SELECT
 				P.idSis_Usuario,
-				CONCAT(IFNULL(F.Funcao,""), " -- ", IFNULL(P.Nome,"")) AS Nome
+				CONCAT(IFNULL(P.Nome,""), " -- ", IFNULL(F.Funcao,"")) AS Nome
             FROM
                 Sis_Usuario AS P
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
@@ -274,7 +274,7 @@ class Usuario_model extends CI_Model {
             $query = $this->db->query('
             SELECT
 				P.idSis_Usuario,
-				CONCAT(IFNULL(F.Funcao,""), " -- ", IFNULL(P.Nome,"")) AS Nome
+				CONCAT(IFNULL(P.Nome,""), " -- ", IFNULL(F.Funcao,"")) AS Nome
             FROM
                 Sis_Usuario AS P
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao

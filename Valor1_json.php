@@ -32,6 +32,7 @@ $result = mysql_query(
 			P.Cod_Prod,
 			P.Arquivo,
 			P.Opcao_Atributo_1,
+			P.Prod_Serv,
 			TOP2.Opcao,
 			TOP1.Opcao,
 			TDS.Desconto,
@@ -63,6 +64,7 @@ if ($_GET['tabela']) {
 			'qtdinc' => $row['QtdProdutoIncremento'],
 			'id_produto' => $row['idTab_Produtos'],
 			'id_valor' => $row['idTab_Valor'],
+			'prod_serv' => $row['Prod_Serv'],
         );
     }
 }
@@ -79,6 +81,7 @@ else {
 			'qtdinc' => $row['QtdProdutoIncremento'],
 			'id_produto' => $row['idTab_Produtos'],
 			'id_valor' => $row['idTab_Valor'],
+			'prod_serv' => $row['Prod_Serv'],
         );
     }
 

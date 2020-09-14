@@ -178,6 +178,9 @@ class Orcatrata_model extends CI_Model {
 				TAP.idTab_Servico,
 				TAP.idTab_Valor_Servico,
 				TAP.idTab_Produtos_Servico,
+				TAP.Prod_Serv_Servico,
+				TAP.NomeServico,
+				TAP.ComissaoServico,
 				TAP.ValorServico,
 				TAP.ObsServico,
 				TAP.QtdServico,
@@ -229,6 +232,7 @@ class Orcatrata_model extends CI_Model {
 				TAP.idTab_Produto,
 				TAP.idTab_Valor_Produto,
 				TAP.idTab_Produtos_Produto,
+				TAP.Prod_Serv_Produto,
 				TAP.NomeProduto,
 				TAP.ValorProduto,
 				TAP.QtdProduto,
@@ -251,14 +255,17 @@ class Orcatrata_model extends CI_Model {
 				TAP.Aux_App_Produto_3,
 				TAP.Aux_App_Produto_4,
 				TAP.Aux_App_Produto_5,
+				TAP.ProfissionalProduto,
 				V.Convdesc,
 				P.Nome_Prod,
 				TOP2.Opcao,
 				TOP1.Opcao,
+				SU.Nome,
 				CONCAT(IFNULL(P.Nome_Prod,""), " - ",  IFNULL(TOP1.Opcao,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(V.Convdesc,"")) AS Produto,
 				(TAP.QtdProduto * TAP.ValorProduto) AS Subtotal_Produto
 			FROM 
 				App_Produto AS TAP
+					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = TAP.ProfissionalProduto
 					LEFT JOIN Tab_Valor AS V ON V.idTab_Valor = TAP.idTab_Produto
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto

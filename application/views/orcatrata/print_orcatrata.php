@@ -311,23 +311,26 @@
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-2" scope="col">Produtos</th>
-									<th class="col-md-2" scope="col">Serviços</th>
-									<th class="col-md-2" scope="col">Frete</th>
+									<th class="col-md-3" scope="col">Produtos</th>
+									<th class="col-md-3" scope="col">Serviços</th>
+									<th class="col-md-3" scope="col">Orçam.</th>
+									<th class="col-md-3" scope="col">Frete</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>R$ <?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
 									<td>R$ <?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
+									<td>R$ <?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
 									<td>R$ <?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>
 								</tr>
 							</tbody>
 							<thead>
 								<tr>
-									<th class="col-md-2" scope="col">Total</th>
-									<th class="col-md-2" scope="col">Troco para</th>
-									<th class="col-md-2" scope="col">Troco</th>
+									<th class="col-md-3" scope="col">Total</th>
+									<th class="col-md-3" scope="col">Troco para</th>
+									<th class="col-md-3" scope="col">Troco</th>
+									<th class="col-md-3" scope="col"></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -335,6 +338,7 @@
 									<td>R$ <?php echo number_format($orcatrata['ValorTotalOrca'], 2, ',', '.') ?></td>
 									<td>R$ <?php echo number_format($orcatrata['ValorDinheiro'], 2, ',', '.') ?></td>
 									<td>R$ <?php echo number_format($orcatrata['ValorTroco'], 2, ',', '.') ?></td>
+									<td></td>
 								</tr>
 							</tbody>
 						</table>
