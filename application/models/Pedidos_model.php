@@ -479,7 +479,10 @@ class Pedidos_model extends CI_Model {
 				VP.Abrev2,
 				VP.AVAP,
 				TFP.FormaPag,
-				TR.TipoFinanceiro
+				TR.TipoFinanceiro,
+				PAR.Parcela,
+				PAR.Quitado,
+				DATE_FORMAT(PAR.DataVencimento, "%d/%m/%Y") AS DataVencimento
 			FROM 
                 App_OrcaTrata AS OT
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
@@ -488,6 +491,7 @@ class Pedidos_model extends CI_Model {
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
 					LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete
+					LEFT JOIN App_Parcelas AS PAR ON PAR.idApp_OrcaTrata = OT.idApp_OrcaTrata
 			WHERE
 				' . $data['Orcamento'] . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -496,9 +500,7 @@ class Pedidos_model extends CI_Model {
 				OT.AprovadoOrca = "S" AND
 				OT.QuitadoOrca = "N"
 			ORDER BY 
-				OT.DataEntregaOrca ASC,
-				OT.HoraEntregaOrca ASC,
-				OT.idApp_OrcaTrata
+				PAR.DataVencimento ASC
 		');
 
         /*

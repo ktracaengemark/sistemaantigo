@@ -69,7 +69,6 @@
 				<table class="table table-bordered table-condensed table-striped">
 					<thead>
 						<tr>
-							
 							<th class="col-md-1" scope="col">Qtd</th>
 							<th class="col-md-3" scope="col">Produto</th>							
 							<th class="col-md-1" scope="col">R$</th>
@@ -79,10 +78,8 @@
 							<th class="col-md-3" scope="col">Produto</th>							
 							<th class="col-md-1" scope="col">R$</th>
 							<th class="col-md-1" scope="col">Ent?</th>
-						</tr>	
-
+						</tr>
 					</thead>
-
 					<tbody>
 
 						<?php
@@ -101,10 +98,7 @@
 							<td class="col-md-3" scope="col"><?php echo $produto[$k]['NomeProduto'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $produto[$k]['SubtotalProduto'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $produto[$k]['ConcluidoProduto'] ?></td>										
-						</tr>						
-
-
-						
+						</tr>
 						<?php
 						}
 						?>
@@ -114,6 +108,38 @@
 						?>
 
 					</tbody>
+					<thead>
+						<tr>
+							
+							<th class="col-md-1" scope="col">Parcela</th>
+							<th class="col-md-3" scope="col">Venc.</th>
+							<th class="col-md-1" scope="col">R$</th>
+							<th class="col-md-1" scope="col">Pago?</th>
+							
+							<th class="col-md-1" scope="col">Parcela</th>
+							<th class="col-md-3" scope="col">Venc.</th>
+							<th class="col-md-1" scope="col">R$</th>
+							<th class="col-md-1" scope="col">Pago?</th>											
+						</tr>
+					</thead>
+					<tbody>
+					<?php for ($j=1; $j <= $count['PRCount']; $j++) { ?>
+						<?php if($orcatrata[$i]['idApp_OrcaTrata'] == $parcelasrec[$j]['idApp_OrcaTrata']) { ?>
+						<tr>
+							
+							<td class="col-md-1" scope="col"><?php echo $parcelasrec[$j]['Parcela'] ?></td>
+							<td class="col-md-3" scope="col"><?php echo $parcelasrec[$j]['DataVencimento'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo number_format($parcelasrec[$j]['ValorParcela'], 2, ',', '.') ?></td>
+							<td class="col-md-1" scope="col"><?php echo $this->basico->mascara_palavra_completa($parcelasrec[$j]['Quitado'], 'NS') ?></td>									
+						
+							<td class="col-md-1" scope="col"><?php echo $parcelasrec[$j]['Parcela'] ?></td>
+							<td class="col-md-3" scope="col"><?php echo $parcelasrec[$j]['DataVencimento'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo number_format($parcelasrec[$j]['ValorParcela'], 2, ',', '.') ?></td>
+							<td class="col-md-1" scope="col"><?php echo $this->basico->mascara_palavra_completa($parcelasrec[$j]['Quitado'], 'NS') ?></td>										
+						</tr>
+						<?php } ?>
+					<?php } ?>
+					</tbody>					
 				</table>
 				<!--
 				<table class="table table-bordered table-condensed table-striped">
@@ -168,10 +194,11 @@
 				<?php } ?>						
 
 				<!--<h3 class="text-left">Parcelas</h3>-->
+				<!--
 				<table class="table table-bordered table-condensed table-striped">
 					<thead>
 						<tr>
-							<!--<th class="col-md-2" scope="col">j</th>-->
+							
 							<th class="col-md-1" scope="col">Parcela</th>
 							<th class="col-md-3" scope="col">Venc.</th>
 							<th class="col-md-1" scope="col">R$</th>
@@ -187,7 +214,7 @@
 					<?php for ($j=1; $j <= $count['PRCount']; $j++) { ?>
 						<?php if($orcatrata[$i]['idApp_OrcaTrata'] == $parcelasrec[$j]['idApp_OrcaTrata']) { ?>
 						<tr>
-							<!--<td><?php echo $j ?></td>-->
+							
 							<td class="col-md-1" scope="col"><?php echo $parcelasrec[$j]['Parcela'] ?></td>
 							<td class="col-md-3" scope="col"><?php echo $parcelasrec[$j]['DataVencimento'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo number_format($parcelasrec[$j]['ValorParcela'], 2, ',', '.') ?></td>
@@ -202,6 +229,7 @@
 					<?php } ?>
 					</tbody>
 				</table>
+				-->
 			</div>
 		<?php } ?>
 	<?php } else echo '<h3 class="text-center">Nenhum Orçamento Filtrado!</h3>';{?>

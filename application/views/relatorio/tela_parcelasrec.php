@@ -13,7 +13,7 @@
 				</button>-->			
 				<div class="btn-group">
 					<a type="button" class="btn btn-md btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-						<span class="glyphicon glyphicon-filter"></span> Filtrar Receitas
+						<span class="glyphicon glyphicon-filter"></span> Filtrar Parcelas
 					</a>
 					<button type="button" class="btn btn-md btn-warning dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<span class="caret"></span>
