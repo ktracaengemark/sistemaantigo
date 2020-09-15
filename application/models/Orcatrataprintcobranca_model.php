@@ -24,7 +24,7 @@ class Orcatrataprintcobranca_model extends CI_Model {
 		
 		$permissao1 = ($_SESSION['FiltroAlteraParcela']['Quitado'] != "0" ) ? 'PR.Quitado = "' . $_SESSION['FiltroAlteraParcela']['Quitado'] . '" AND ' : FALSE;
 		//$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
-		$permissao2 = ($_SESSION['FiltroAlteraParcela']['NomeCliente'] != "0" ) ? 'C.idApp_Cliente = "' . $_SESSION['FiltroAlteraParcela']['NomeCliente'] . '" AND ' : FALSE;
+		//$permissao2 = ($_SESSION['FiltroAlteraParcela']['NomeCliente'] != "0" ) ? 'C.idApp_Cliente = "' . $_SESSION['FiltroAlteraParcela']['NomeCliente'] . '" AND ' : FALSE;
 		$query = $this->db->query(
             'SELECT
 				C.NomeCliente,
@@ -84,7 +84,7 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				LEFT JOIN App_Parcelas AS PR ON PR.idApp_OrcaTrata = OT.idApp_OrcaTrata
             WHERE
             	' . $permissao1 . '
-				' . $permissao2 . '
+				
 				OT.idSis_Empresa = ' . $data . ' AND
                 OT.idApp_Cliente = C.idApp_Cliente AND
 				OT.FormaPagamento = FP.idTab_FormaPag AND

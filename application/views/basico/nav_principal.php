@@ -95,9 +95,9 @@
 							<li role="separator" class="divider"></li>-->
 							<?php } else {?>
 							<!--<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/orcamentoonlineempresa"><span class="glyphicon glyphicon-pencil"></span> Orçamentos Online</a></li>
-							<li role="separator" class="divider"></li>							
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/comissao"><span class="glyphicon glyphicon-pencil"></span> Relatório de Comissões</a></li>
 							<li role="separator" class="divider"></li>-->							
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/comissao"><span class="glyphicon glyphicon-pencil"></span> Relatório de Comissões</a></li>
+							<li role="separator" class="divider"></li>							
 							<?php } ?>
 							<!--<li><a href="<?php echo base_url() ?>relatorio/rankingreceitas"><span class="glyphicon glyphicon-equalizer"></span> Estatística das Receitas</a></li>-->
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>

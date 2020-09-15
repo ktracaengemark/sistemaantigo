@@ -2934,7 +2934,6 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'NomeCliente',
 			'NomeFornecedor',
 			'Dia',
 			'Ano',
@@ -2995,7 +2994,6 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
 		$_SESSION['FiltroAlteraParcela']['Orcarec'] = $data['query']['Orcarec'];
 		$_SESSION['FiltroAlteraParcela']['Orcades'] = $data['query']['Orcades'];
-		$_SESSION['FiltroAlteraParcela']['NomeCliente'] = $data['query']['NomeCliente'];
 		$_SESSION['FiltroAlteraParcela']['NomeFornecedor'] = $data['query']['NomeFornecedor'];
 		$_SESSION['FiltroAlteraParcela']['FormaPagamento'] = $data['query']['FormaPagamento'];
 		$_SESSION['FiltroAlteraParcela']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
@@ -3064,7 +3062,7 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-		$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+
 		$data['select']['NomeFornecedor'] = $this->Relatorio_model->select_fornecedor();
 		$data['select']['Orcarec'] = $this->Relatorio_model->select_orcarec();
 		$data['select']['Orcades'] = $this->Relatorio_model->select_orcades();
@@ -3084,7 +3082,6 @@ class Relatorio extends CI_Controller {
         if ($this->form_validation->run() !== FALSE) {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
-            $data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
             $data['bd']['TipoFinanceiroR'] = $data['query']['TipoFinanceiroR'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
@@ -4450,7 +4447,6 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'Orcamento',
-			'NomeCliente',
             'DataInicio',
             'DataFim',
 			'DataInicio',
@@ -4505,7 +4501,6 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['Campo'] = array(
-            'C.NomeCliente' => 'Nome do Cliente',
             'OT.idApp_OrcaTrata' => 'Número do Orçamento',
             'OT.AprovadoOrca' => 'Orçamento Aprovado?',
             'OT.ConcluidoOrca' => 'Entregue?',
@@ -4525,7 +4520,7 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-        $data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+
 		$data['select']['Entregador'] = $this->Relatorio_model->select_usuario();
 		$data['select']['FormaPag'] = $this->Relatorio_model->select_formapag();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
@@ -4537,7 +4532,6 @@ class Relatorio extends CI_Controller {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
-			$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
 			$data['bd']['Entregador'] = $data['query']['Entregador'];
 			$data['bd']['FormaPag'] = $data['query']['FormaPag'];
 			$data['bd']['TipoFrete'] = $data['query']['TipoFrete'];

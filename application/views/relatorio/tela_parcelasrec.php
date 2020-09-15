@@ -15,11 +15,12 @@
 					<a type="button" class="btn btn-md btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 						<span class="glyphicon glyphicon-filter"></span> Filtrar Parcelas
 					</a>
-					<button type="button" class="btn btn-md btn-warning dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<!--
+						<button type="button" class="btn btn-md btn-warning dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">							
-						<!--
+						
 						<li>
 							<a class="dropdown-item" href="<?php echo base_url() . 'orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa']; ?>">
 								<span class="glyphicon glyphicon-pencil"></span> Editar Receitas Filtradas
@@ -27,7 +28,7 @@
 						</li>
 						
 						<li role="separator" class="divider"></li>
-						-->
+						
 						<li>
 							<a class="dropdown-item" href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
 								<span class="glyphicon glyphicon-pencil"></span> Imprimir Cobranças Filtradas
@@ -35,16 +36,18 @@
 						</li>
 						
 					</ul>
+					-->
 				</div>
+				<a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
+					<button type="button" class="btn btn-md btn-info">
+						<span class="glyphicon glyphicon-print"></span> Imprimir Filtro
+					</button>
+				</a>
+				
 				<!--
 				<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 					<span class="glyphicon glyphicon-filter"></span>Filtrar receitas <?php #echo $titulo1; ?>
 				</button>
-				<a href="<?php echo base_url() . 'orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa']; ?>">
-					<button type="button" class="btn btn-sm btn-info">
-						<span class="glyphicon glyphicon-edit"></span> Editar
-					</button>
-				</a>
 				
 				<button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#Receitas" aria-expanded="false" aria-controls="Receitas">
 					<span class="glyphicon glyphicon-menu-up"></span> Fechar
@@ -111,28 +114,7 @@
 						</div>
 						<div class="modal-footer">
 							<div class="panel panel-info">
-								<div class="panel-heading">									
-									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
-									<div class="form-group">	
-										<div class="row">								
-											<div class="col-md-12 text-left">
-												<label for="Ordenamento">Cliente:</label>
-												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-														id="NomeCliente" name="NomeCliente">
-													<?php
-													foreach ($select['NomeCliente'] as $key => $row) {
-														if ($query['NomeCliente'] == $key) {
-															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-														} else {
-															echo '<option value="' . $key . '">' . $row . '</option>';
-														}
-													}
-													?>
-												</select>
-											</div>
-										</div>
-									</div>
-									<?php } ?>
+								<div class="panel-heading">
 									<!--
 									<div class="form-group">								
 										<div class="row">	
@@ -185,35 +167,7 @@
 									</div>
 									-->
 
-									<div class="form-group">
-										<div class="row">										
-											<div class="form-group col-md-4 text-left">
-												<label></label><br>
-												<div class="form-footer ">
-													<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
-														<span class="glyphicon glyphicon-filter"></span> Filtrar
-													</button>
-												</div>
-											</div>
-											<div class="form-group col-md-4 text-left">
-												<label></label><br>
-												<div class="form-footer ">
-													<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-														<span class="glyphicon glyphicon-remove"> Fechar
-													</button>
-												</div>
-											</div>
-											<!--
-											<div class="form-group col-md-3 text-left">
-												<div class="form-footer">		
-													<a class="btn btn-success btn-block" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
-														<span class="glyphicon glyphicon-search"></span> Receitas
-													</a>
-												</div>	
-											</div>
-											-->
-										</div>
-									</div>
+
 									<div class="row">
 										<!--
 										<div class="col-md-3 text-left" >
@@ -364,7 +318,35 @@
 											</select>
 										</div>
 									</div>
-																		
+									<div class="form-group">
+										<div class="row">										
+											<div class="form-group col-md-4 text-left">
+												<label></label><br>
+												<div class="form-footer ">
+													<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
+														<span class="glyphicon glyphicon-filter"></span> Filtrar
+													</button>
+												</div>
+											</div>
+											<div class="form-group col-md-4 text-left">
+												<label></label><br>
+												<div class="form-footer ">
+													<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+														<span class="glyphicon glyphicon-remove"> Fechar
+													</button>
+												</div>
+											</div>
+											<!--
+											<div class="form-group col-md-3 text-left">
+												<div class="form-footer">		
+													<a class="btn btn-success btn-block" href="<?php echo base_url() ?>relatorio/financeiro" role="button">
+														<span class="glyphicon glyphicon-search"></span> Receitas
+													</a>
+												</div>	
+											</div>
+											-->
+										</div>
+									</div>																		
 									<!--
 									<div class="row">	
 										<div class="col-md-6 text-left">

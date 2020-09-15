@@ -1821,7 +1821,7 @@ class Relatorio_model extends CI_Model {
         }
 		
 		#$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
-        $data['NomeCliente'] = (($_SESSION['log']['idSis_Empresa'] != 5) && ($data['NomeCliente'])) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;		
+        #$data['NomeCliente'] = (($_SESSION['log']['idSis_Empresa'] != 5) && ($data['NomeCliente'])) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;		
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
@@ -1893,7 +1893,6 @@ class Relatorio_model extends CI_Model {
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . '
-				' . $data['NomeCliente'] . '
 			ORDER BY
 				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
 		');
@@ -1929,8 +1928,7 @@ class Relatorio_model extends CI_Model {
 				' . $data['Orcarec'] . '                
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
-				' . $data['Ano'] . '
-				' . $data['NomeCliente'] . '				
+				' . $data['Ano'] . '				
  				
         ');			
 		$parcelasrecebidas = $parcelasrecebidas->result();		
@@ -6422,7 +6420,6 @@ exit();*/
                 '(OT.DataQuitado >= "' . $data['DataInicio4'] . '")';
         }
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
-        $data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
 		$data['Entregador'] = ($data['Entregador']) ? ' AND OT.Entregador = ' . $data['Entregador'] : FALSE;
 		$data['FormaPag'] = ($data['FormaPag']) ? ' AND TFP.idTab_FormaPag = ' . $data['FormaPag'] : FALSE;
 		$data['TipoFrete'] = ($data['TipoFrete']) ? ' AND TTF.idTab_TipoFrete = ' . $data['TipoFrete'] : FALSE;
@@ -6472,12 +6469,12 @@ exit();*/
             WHERE
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 (' . $consulta . ') AND
+				(' . $consulta2 . ') AND
                 ' . $filtro1 . '
                 ' . $filtro2 . '
 				' . $filtro3 . '
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['Orcamento'] . '
-				' . $data['NomeCliente'] . '
 				' . $data['Entregador'] . '
 				' . $data['TipoFrete'] . '
 				' . $data['FormaPag'] . ' AND
