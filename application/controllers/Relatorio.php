@@ -4461,6 +4461,8 @@ class Relatorio extends CI_Controller {
             'AprovadoOrca',
             'QuitadoOrca',
 			'ConcluidoOrca',
+			'FinalizadoOrca',
+			'CanceladoOrca',
 			'FormaPag',
 			'TipoFrete',
 			'Entregador',
@@ -4500,11 +4502,25 @@ class Relatorio extends CI_Controller {
             'S' => 'Sim',
         );
 
+		$data['select']['FinalizadoOrca'] = array(
+            '#' => 'TODOS',
+            'N' => 'Não',
+            'S' => 'Sim',
+        );
+
+		$data['select']['CanceladoOrca'] = array(
+            '#' => 'TODOS',
+            'N' => 'Não',
+            'S' => 'Sim',
+        );
+
         $data['select']['Campo'] = array(
             'OT.idApp_OrcaTrata' => 'Número do Orçamento',
             'OT.AprovadoOrca' => 'Orçamento Aprovado?',
             'OT.ConcluidoOrca' => 'Entregue?',
-            'OT.QuitadoOrca' => 'Pago?',            
+            'OT.QuitadoOrca' => 'Pago?',
+            'OT.FinalizadoOrca' => 'Finalizado?',
+			'OT.CanceladoOrca' => 'Cancelado?',
 			'OT.DataOrca' => 'Data do Orçamento',
 			'OT.DataEntregaOrca' => 'Data da Entrega',
             'OT.ValorRestanteOrca' => 'Valor Orçam',
@@ -4549,6 +4565,8 @@ class Relatorio extends CI_Controller {
             $data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
             $data['bd']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
 			$data['bd']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
+			$data['bd']['FinalizadoOrca'] = $data['query']['FinalizadoOrca'];
+			$data['bd']['CanceladoOrca'] = $data['query']['CanceladoOrca'];
 
             $data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);
 

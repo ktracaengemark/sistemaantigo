@@ -6428,6 +6428,8 @@ exit();*/
 		$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
 		$filtro3 = ($data['ConcluidoOrca'] != '#') ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
+		$filtro4 = ($data['FinalizadoOrca'] != '#') ? 'OT.FinalizadoOrca = "' . $data['FinalizadoOrca'] . '" AND ' : FALSE;
+		$filtro5 = ($data['CanceladoOrca'] != '#') ? 'OT.CanceladoOrca = "' . $data['CanceladoOrca'] . '" AND ' : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -6447,6 +6449,8 @@ exit();*/
 				OT.DataVencimentoOrca,
 				OT.DataEntregaOrca,
                 OT.ConcluidoOrca,
+                OT.FinalizadoOrca,
+                OT.CanceladoOrca,
                 OT.QuitadoOrca,
                 OT.DataConclusao,
                 OT.DataQuitado,
@@ -6473,6 +6477,8 @@ exit();*/
                 ' . $filtro1 . '
                 ' . $filtro2 . '
 				' . $filtro3 . '
+				' . $filtro4 . '
+				' . $filtro5 . '
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['Orcamento'] . '
 				' . $data['Entregador'] . '
@@ -6513,6 +6519,8 @@ exit();*/
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
                 $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
+                $row->FinalizadoOrca = $this->basico->mascara_palavra_completa($row->FinalizadoOrca, 'NS');
+                $row->CanceladoOrca = $this->basico->mascara_palavra_completa($row->CanceladoOrca, 'NS');
 
                 $somaorcamento += $row->ValorOrca;
                 $row->ValorOrca = number_format($row->ValorOrca, 2, ',', '.');

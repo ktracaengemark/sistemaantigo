@@ -573,12 +573,12 @@ class Orcatrata extends CI_Controller {
 					$data['orcatrata']['DevolvidoOrca'] = "N";
 				}
 			} else {
-				$data['orcatrata']['QuitadoOrca'] = "N";
-				$data['orcatrata']['ConcluidoOrca'] = "N";
-				$data['orcatrata']['DevolvidoOrca'] = "N";
-				$data['orcatrata']['ProntoOrca'] = "N";
-				$data['orcatrata']['EnviadoOrca'] = "N";
-				$data['orcatrata']['AprovadoOrca'] = "N";
+				$data['orcatrata']['QuitadoOrca'] = $data['orcatrata']['QuitadoOrca'];
+				$data['orcatrata']['ConcluidoOrca'] = $data['orcatrata']['ConcluidoOrca'];
+				$data['orcatrata']['DevolvidoOrca'] = $data['orcatrata']['DevolvidoOrca'];
+				$data['orcatrata']['ProntoOrca'] = $data['orcatrata']['ProntoOrca'];
+				$data['orcatrata']['EnviadoOrca'] = $data['orcatrata']['EnviadoOrca'];
+				$data['orcatrata']['AprovadoOrca'] = $data['orcatrata']['AprovadoOrca'];
 				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}
             $data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
@@ -1311,12 +1311,12 @@ class Orcatrata extends CI_Controller {
 					$data['orcatrata']['DevolvidoOrca'] = "N";
 				}
 			} else {
-				$data['orcatrata']['QuitadoOrca'] = "N";
-				$data['orcatrata']['ConcluidoOrca'] = "N";
-				$data['orcatrata']['DevolvidoOrca'] = "N";
-				$data['orcatrata']['ProntoOrca'] = "N";
-				$data['orcatrata']['EnviadoOrca'] = "N";
-				$data['orcatrata']['AprovadoOrca'] = "N";
+				$data['orcatrata']['QuitadoOrca'] = $data['orcatrata']['QuitadoOrca'];
+				$data['orcatrata']['ConcluidoOrca'] = $data['orcatrata']['ConcluidoOrca'];
+				$data['orcatrata']['DevolvidoOrca'] = $data['orcatrata']['DevolvidoOrca'];
+				$data['orcatrata']['ProntoOrca'] = $data['orcatrata']['ProntoOrca'];
+				$data['orcatrata']['EnviadoOrca'] = $data['orcatrata']['EnviadoOrca'];
+				$data['orcatrata']['AprovadoOrca'] = $data['orcatrata']['AprovadoOrca'];
 				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}
 			$data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
@@ -2111,12 +2111,12 @@ class Orcatrata extends CI_Controller {
 					$data['orcatrata']['DevolvidoOrca'] = "N";
 				}
 			} else {
-				$data['orcatrata']['QuitadoOrca'] = "N";
-				$data['orcatrata']['ConcluidoOrca'] = "N";
-				$data['orcatrata']['DevolvidoOrca'] = "N";
-				$data['orcatrata']['ProntoOrca'] = "N";
-				$data['orcatrata']['EnviadoOrca'] = "N";
-				$data['orcatrata']['AprovadoOrca'] = "N";
+				$data['orcatrata']['QuitadoOrca'] = $data['orcatrata']['QuitadoOrca'];
+				$data['orcatrata']['ConcluidoOrca'] = $data['orcatrata']['ConcluidoOrca'];
+				$data['orcatrata']['DevolvidoOrca'] = $data['orcatrata']['DevolvidoOrca'];
+				$data['orcatrata']['ProntoOrca'] = $data['orcatrata']['ProntoOrca'];
+				$data['orcatrata']['EnviadoOrca'] = $data['orcatrata']['EnviadoOrca'];
+				$data['orcatrata']['AprovadoOrca'] = $data['orcatrata']['AprovadoOrca'];
 				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}
             $data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
@@ -3065,12 +3065,12 @@ class Orcatrata extends CI_Controller {
 					$data['orcatrata']['DevolvidoOrca'] = "N";
 				}
 			} else {
-				$data['orcatrata']['QuitadoOrca'] = "N";
-				$data['orcatrata']['ConcluidoOrca'] = "N";
-				$data['orcatrata']['DevolvidoOrca'] = "N";
-				$data['orcatrata']['ProntoOrca'] = "N";
-				$data['orcatrata']['EnviadoOrca'] = "N";
-				$data['orcatrata']['AprovadoOrca'] = "N";
+				$data['orcatrata']['QuitadoOrca'] = $data['orcatrata']['QuitadoOrca'];
+				$data['orcatrata']['ConcluidoOrca'] = $data['orcatrata']['ConcluidoOrca'];
+				$data['orcatrata']['DevolvidoOrca'] = $data['orcatrata']['DevolvidoOrca'];
+				$data['orcatrata']['ProntoOrca'] = $data['orcatrata']['ProntoOrca'];
+				$data['orcatrata']['EnviadoOrca'] = $data['orcatrata']['EnviadoOrca'];
+				$data['orcatrata']['AprovadoOrca'] = $data['orcatrata']['AprovadoOrca'];
 				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}		
             $data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
@@ -4054,12 +4054,12 @@ class Orcatrata extends CI_Controller {
 					$data['orcatrata']['DevolvidoOrca'] = "N";
 				}
 			} else {
-				$data['orcatrata']['QuitadoOrca'] = "N";
-				$data['orcatrata']['ConcluidoOrca'] = "N";
-				$data['orcatrata']['DevolvidoOrca'] = "N";
-				$data['orcatrata']['ProntoOrca'] = "N";
-				$data['orcatrata']['EnviadoOrca'] = "N";
-				$data['orcatrata']['AprovadoOrca'] = "N";
+				$data['orcatrata']['QuitadoOrca'] = $data['orcatrata']['QuitadoOrca'];
+				$data['orcatrata']['ConcluidoOrca'] = $data['orcatrata']['ConcluidoOrca'];
+				$data['orcatrata']['DevolvidoOrca'] = $data['orcatrata']['DevolvidoOrca'];
+				$data['orcatrata']['ProntoOrca'] = $data['orcatrata']['ProntoOrca'];
+				$data['orcatrata']['EnviadoOrca'] = $data['orcatrata']['EnviadoOrca'];
+				$data['orcatrata']['AprovadoOrca'] = $data['orcatrata']['AprovadoOrca'];
 				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}
             $data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
@@ -4945,12 +4945,12 @@ class Orcatrata extends CI_Controller {
 					$data['orcatrata']['DevolvidoOrca'] = "N";
 				}
 			} else {
-				$data['orcatrata']['QuitadoOrca'] = "N";
-				$data['orcatrata']['ConcluidoOrca'] = "N";
-				$data['orcatrata']['DevolvidoOrca'] = "N";
-				$data['orcatrata']['ProntoOrca'] = "N";
-				$data['orcatrata']['EnviadoOrca'] = "N";
-				$data['orcatrata']['AprovadoOrca'] = "N";
+				$data['orcatrata']['QuitadoOrca'] = $data['orcatrata']['QuitadoOrca'];
+				$data['orcatrata']['ConcluidoOrca'] = $data['orcatrata']['ConcluidoOrca'];
+				$data['orcatrata']['DevolvidoOrca'] = $data['orcatrata']['DevolvidoOrca'];
+				$data['orcatrata']['ProntoOrca'] = $data['orcatrata']['ProntoOrca'];
+				$data['orcatrata']['EnviadoOrca'] = $data['orcatrata']['EnviadoOrca'];
+				$data['orcatrata']['AprovadoOrca'] = $data['orcatrata']['AprovadoOrca'];
 				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}
 
@@ -5739,12 +5739,12 @@ class Orcatrata extends CI_Controller {
 					$data['orcatrata']['DevolvidoOrca'] = "N";
 				}
 			} else {
-				$data['orcatrata']['QuitadoOrca'] = "N";
-				$data['orcatrata']['ConcluidoOrca'] = "N";
-				$data['orcatrata']['DevolvidoOrca'] = "N";
-				$data['orcatrata']['ProntoOrca'] = "N";
-				$data['orcatrata']['EnviadoOrca'] = "N";
-				$data['orcatrata']['AprovadoOrca'] = "N";
+				$data['orcatrata']['QuitadoOrca'] = $data['orcatrata']['QuitadoOrca'];
+				$data['orcatrata']['ConcluidoOrca'] = $data['orcatrata']['ConcluidoOrca'];
+				$data['orcatrata']['DevolvidoOrca'] = $data['orcatrata']['DevolvidoOrca'];
+				$data['orcatrata']['ProntoOrca'] = $data['orcatrata']['ProntoOrca'];
+				$data['orcatrata']['EnviadoOrca'] = $data['orcatrata']['EnviadoOrca'];
+				$data['orcatrata']['AprovadoOrca'] = $data['orcatrata']['AprovadoOrca'];
 				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}
 			$data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
@@ -6398,12 +6398,12 @@ class Orcatrata extends CI_Controller {
 					$data['orcatrata']['DevolvidoOrca'] = "N";
 				}
 			} else {
-				$data['orcatrata']['QuitadoOrca'] = "N";
-				$data['orcatrata']['ConcluidoOrca'] = "N";
-				$data['orcatrata']['DevolvidoOrca'] = "N";
-				$data['orcatrata']['ProntoOrca'] = "N";
-				$data['orcatrata']['EnviadoOrca'] = "N";
-				$data['orcatrata']['AprovadoOrca'] = "N";
+				$data['orcatrata']['QuitadoOrca'] = $data['orcatrata']['QuitadoOrca'];
+				$data['orcatrata']['ConcluidoOrca'] = $data['orcatrata']['ConcluidoOrca'];
+				$data['orcatrata']['DevolvidoOrca'] = $data['orcatrata']['DevolvidoOrca'];
+				$data['orcatrata']['ProntoOrca'] = $data['orcatrata']['ProntoOrca'];
+				$data['orcatrata']['EnviadoOrca'] = $data['orcatrata']['EnviadoOrca'];
+				$data['orcatrata']['AprovadoOrca'] = $data['orcatrata']['AprovadoOrca'];
 				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}
             $data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));

@@ -53,13 +53,15 @@
 							<th class="active">Apv.?</th>
 							<th class="active">Entr.?</th>
 							<th class="active">Pago?</th>
+							<th class="active">Cancel?</th>
+							<th class="active">Final?</th>
 							<th class="active">Pagamento</th>
 							<th class="active">Entrega</th>
 							<th class="active">Dt. Orç.</th>
 							<th class="active">Dt. Ent.</th>
 							<th class="active">Dt. Venc.</th>
-							<!--<th class="active">Obs.</th>-->
-							<th class="active">Entregador</th>
+							<!--<th class="active">Obs.</th>
+							<th class="active">Entregador</th>-->
 							<th class="active">Print</th>
 						</tr>
 					</thead>
@@ -85,13 +87,15 @@
 								echo '<td>' . $row['AprovadoOrca'] . '</td>';
 								echo '<td>' . $row['ConcluidoOrca'] . '</td>';
 								echo '<td>' . $row['QuitadoOrca'] . '</td>';
+								echo '<td>' . $row['CanceladoOrca'] . '</td>';
+								echo '<td>' . $row['FinalizadoOrca'] . '</td>';
 								echo '<td>' . $row['FormaPag'] . '</td>';
 								echo '<td>' . $row['TipoFrete'] . '</td>';
 								echo '<td>' . $row['DataOrca'] . '</td>';
 								echo '<td>' . $row['DataEntregaOrca'] . '</td>';
 								echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
 								#echo '<td>' . $row['Descricao'] . '</td>';
-								echo '<td>' . $row['Nome'] . '</td>';
+								#echo '<td>' . $row['Nome'] . '</td>';
 								#echo '</div>';
 								echo '<td class="notclickable">
 										<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
