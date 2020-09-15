@@ -28,6 +28,17 @@ class Orcatrataprintcobranca_model extends CI_Model {
 		$query = $this->db->query(
             'SELECT
 				C.NomeCliente,
+				C.CelularCliente,
+				C.Telefone,
+				C.Telefone2,
+				C.Telefone3,
+				C.EnderecoCliente,
+				C.NumeroCliente,
+				C.ComplementoCliente,
+				C.BairroCliente,
+				C.CidadeCliente,
+				C.EstadoCliente,
+				
 				OT.idSis_Empresa,
 				OT.idApp_OrcaTrata,
 				OT.AprovadoOrca,
@@ -42,6 +53,7 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				OT.idApp_Cliente,
 				OT.idApp_Fornecedor,
 				OT.ValorOrca,
+				OT.ValorTotalOrca,
 				OT.ValorDev,
 				OT.ValorDinheiro,
 				OT.ValorTroco,
