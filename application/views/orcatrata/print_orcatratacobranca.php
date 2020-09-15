@@ -33,12 +33,12 @@
 				<table class="table table-bordered table-condensed table-striped">
 					<tbody>
 						<tr>
-							<td class="col-md-1" scope="col"><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>"class="img-circle img-responsive" width='100'></td>
-							<td class="col-md-5 text-center" scope="col"><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . ' <br><br> Cliente: ' . $orcatrata[$i]['NomeCliente'] . ' id: ' . $orcatrata[$i]['idApp_Cliente'] . ' <br><br> Orçamento:' . $orcatrata[$i]['idApp_OrcaTrata'] . '</strong>' ?> </td>
-							<!--<td class="col-md-2" scope="col"></td>-->
-							<td class="col-md-1" scope="col"><img  alt="User Pic" src="<?php echo base_url() . 'arquivos/imagens/empresas/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>"class="img-circle img-responsive" width='100'></td>
-							<td class="col-md-5 text-center" scope="col"><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . ' <br><br> Cliente: ' . $orcatrata[$i]['NomeCliente'] . ' id: ' . $orcatrata[$i]['idApp_Cliente'] . ' <br><br> Orçamento:' . $orcatrata[$i]['idApp_OrcaTrata'] . '</strong>' ?> </td>
-							<!--<td class="col-md-2" scope="col"></td>-->
+							<td class="col-md-1" scope="col"><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>"class="img-circle img-responsive" width='100'></td>
+							<td class="col-md-4 text-left" scope="col"><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . ' <br> Cliente: ' . $orcatrata[$i]['NomeCliente'] . ' id: ' . $orcatrata[$i]['idApp_Cliente'] . ' <br> Orçamento:' . $orcatrata[$i]['idApp_OrcaTrata'] . '</strong>' ?></td>
+							<td class="col-md-1" scope="col"><?php echo 'Data: <br>'  . $orcatrata[$i]['DataOrca'] . '<br>' . $i ?></td>
+							<td class="col-md-1" scope="col"><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>"class="img-circle img-responsive" width='100'></td>
+							<td class="col-md-4 text-left" scope="col"><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . ' <br> Cliente: ' . $orcatrata[$i]['NomeCliente'] . ' id: ' . $orcatrata[$i]['idApp_Cliente'] . ' <br> Orçamento:' . $orcatrata[$i]['idApp_OrcaTrata'] . '</strong>' ?></td>
+							<td class="col-md-1" scope="col"><?php echo 'Data: <br>'  . $orcatrata[$i]['DataOrca'] . '<br>' . $i ?></td>
 						</tr>
 					</tbody>
 				</table>								
@@ -49,30 +49,66 @@
 				<table class="table table-bordered table-condensed table-striped">
 					<thead>
 						<tr>
-							<th class="col-md-1" scope="col">Orç</th>
-							<th class="col-md-1" scope="col">Qtd</th>
-							<th class="col-md-2" scope="col">Produto</th>							
-							<th class="col-md-1" scope="col">Valor</th>
-							<th class="col-md-1" scope="col">Subtotal</th>
 							
-							<th class="col-md-1" scope="col">Orç</th>
 							<th class="col-md-1" scope="col">Qtd</th>
-							<th class="col-md-2" scope="col">Produto</th>							
-							<th class="col-md-1" scope="col">Valor</th>
-							<th class="col-md-1" scope="col">Subtotal</th>										
+							<th class="col-md-3" scope="col">Produto</th>							
+							<th class="col-md-1" scope="col">R$</th>
+							<th class="col-md-1" scope="col">Ent</th>
+							
+							<th class="col-md-1" scope="col">Qtd</th>
+							<th class="col-md-3" scope="col">Produto</th>							
+							<th class="col-md-1" scope="col">R$</th>
+							<th class="col-md-1" scope="col">Ent</th>
 						</tr>	
+
+					</thead>
+
+					<tbody>
+
+						<?php
+						for ($k=1; $k <= $count['PCount']; $k++) {
+						?>
+						<?php if($orcatrata[$i]['idApp_OrcaTrata'] == $produto[$k]['idApp_OrcaTrata']) { ?>
 						<tr>
-							<th class="col-md-1" scope="col">cont: <?php echo $i ?></th>
-							<th class="col-md-1" scope="col">Data</th>	
-							<th class="col-md-2" scope="col">Obs</th>
-							<th class="col-md-1" scope="col">Ent</th>
-							<th class="col-md-1" scope="col">Dev</th>
 							
-							<th class="col-md-1" scope="col">cont: <?php echo $i ?></th>
-							<th class="col-md-1" scope="col">Data</th>	
+							<td class="col-md-1" scope="col"><?php echo $produto[$k]['Qtd_Prod'] ?></td>
+							<td class="col-md-3" scope="col"><?php echo $produto[$k]['NomeProduto'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $produto[$k]['SubtotalProduto'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $produto[$k]['ConcluidoProduto'] ?></td>
+						
+							
+							<td class="col-md-1" scope="col"><?php echo $produto[$k]['Qtd_Prod'] ?></td>
+							<td class="col-md-3" scope="col"><?php echo $produto[$k]['NomeProduto'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $produto[$k]['SubtotalProduto'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $produto[$k]['ConcluidoProduto'] ?></td>										
+						</tr>						
+
+
+						
+						<?php
+						}
+						?>
+						
+						<?php
+						}
+						?>
+
+					</tbody>
+				</table>
+				<!--
+				<table class="table table-bordered table-condensed table-striped">
+					<thead>
+							
+						<tr>
+							
+								
 							<th class="col-md-2" scope="col">Obs</th>
 							<th class="col-md-1" scope="col">Ent</th>
-							<th class="col-md-1" scope="col">Dev</th>											
+							
+							
+								
+							<th class="col-md-2" scope="col">Obs</th>
+							<th class="col-md-1" scope="col">Ent</th>											
 							
 						</tr>
 					</thead>
@@ -83,31 +119,17 @@
 						for ($k=1; $k <= $count['PCount']; $k++) {
 						?>
 						<?php if($orcatrata[$i]['idApp_OrcaTrata'] == $produto[$k]['idApp_OrcaTrata']) { ?>
+												
 						<tr>
-							<td class="col-md-1" scope="col"><?php echo $produto[$k]['idApp_OrcaTrata'] ?></td>
-							<td class="col-md-1" scope="col"><?php echo $produto[$k]['QtdProduto'] ?></td>
-							<td class="col-md-2" scope="col"><?php echo $produto[$k]['NomeProduto'] ?></td>							
-							<td class="col-md-1" scope="col"><?php echo number_format($produto[$k]['ValorProduto'], 2, ',', '.') ?></td>
-							<td class="col-md-1" scope="col"><?php echo $produto[$k]['SubtotalProduto'] ?></td>
-						
-							<td class="col-md-1" scope="col"><?php echo $produto[$k]['idApp_OrcaTrata'] ?></td>
-							<td class="col-md-1" scope="col"><?php echo $produto[$k]['QtdProduto'] ?></td>
-							<td class="col-md-2" scope="col"><?php echo $produto[$k]['NomeProduto'] ?></td>							
-							<td class="col-md-1" scope="col"><?php echo number_format($produto[$k]['ValorProduto'], 2, ',', '.') ?></td>
-							<td class="col-md-1" scope="col"><?php echo $produto[$k]['SubtotalProduto'] ?></td>										
-						</tr>						
-						<tr>
-							<td class="col-md-1" scope="col"></td>
-							<td class="col-md-1" scope="col"><?php echo $produto[$k]['DataValidadeProduto'] ?></td>
-							<td class="col-md-2" scope="col"><?php if ($_SESSION['log']['idSis_Empresa'] != 42 ) echo $produto[$i]['ObsProduto'] ?></td>
+							
+							
+							<td class="col-md-2" scope="col"><?php echo $produto[$i]['ObsProduto'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $produto[$k]['ConcluidoProduto'] ?></td>
-							<td class="col-md-1" scope="col"><?php echo $produto[$k]['DevolvidoProduto'] ?></td>
 						
-							<td class="col-md-1" scope="col"></td>
-							<td class="col-md-1" scope="col"><?php echo $produto[$k]['DataValidadeProduto'] ?></td>
-							<td class="col-md-2" scope="col"><?php if ($_SESSION['log']['idSis_Empresa'] != 42 ) echo $produto[$i]['ObsProduto'] ?></td>
-							<td class="col-md-1" scope="col"><?php echo $produto[$k]['ConcluidoProduto'] ?></td>
-							<td class="col-md-1" scope="col"><?php echo $produto[$k]['DevolvidoProduto'] ?></td>										
+							
+							
+							<td class="col-md-2" scope="col"><?php echo $produto[$i]['ObsProduto'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $produto[$k]['ConcluidoProduto'] ?></td>										
 						</tr>
 
 						
@@ -121,6 +143,7 @@
 
 					</tbody>
 				</table>
+				-->
 				<?php } else echo '<h3 class="text-left">S/Produtos Entregues </h3>';{?>
 				<?php } ?>						
 
@@ -129,17 +152,15 @@
 					<thead>
 						<tr>
 							<!--<th class="col-md-2" scope="col">j</th>-->
-							<th class="col-md-1" scope="col">Orç</th>
 							<th class="col-md-1" scope="col">Parcela</th>
-							<th class="col-md-2" scope="col">R$</th>											
-							<th class="col-md-1" scope="col">Venc Prc</th>
-							<th class="col-md-1" scope="col">Prc.Qt?</th>
+							<th class="col-md-3" scope="col">R$</th>											
+							<th class="col-md-1" scope="col">Venc.</th>
+							<th class="col-md-1" scope="col">Qt?</th>
 							
-							<th class="col-md-1" scope="col">Orç</th>
 							<th class="col-md-1" scope="col">Parcela</th>
-							<th class="col-md-2" scope="col">R$</th>											
-							<th class="col-md-1" scope="col">Venc Prc</th>
-							<th class="col-md-1" scope="col">Prc.Qt?</th>											
+							<th class="col-md-3" scope="col">R$</th>											
+							<th class="col-md-1" scope="col">Venc.</th>
+							<th class="col-md-1" scope="col">Qt?</th>											
 						</tr>
 					</thead>
 					<tbody>
@@ -147,15 +168,13 @@
 						<?php if($orcatrata[$i]['idApp_OrcaTrata'] == $parcelasrec[$j]['idApp_OrcaTrata']) { ?>
 						<tr>
 							<!--<td><?php echo $j ?></td>-->
-							<td class="col-md-1" scope="col"><?php echo $parcelasrec[$j]['idApp_OrcaTrata'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $parcelasrec[$j]['Parcela'] ?></td>
-							<td class="col-md-2" scope="col"><?php echo number_format($parcelasrec[$j]['ValorParcela'], 2, ',', '.') ?></td>											
+							<td class="col-md-3" scope="col"><?php echo number_format($parcelasrec[$j]['ValorParcela'], 2, ',', '.') ?></td>											
 							<td class="col-md-1" scope="col"><?php echo $parcelasrec[$j]['DataVencimento'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $this->basico->mascara_palavra_completa($parcelasrec[$j]['Quitado'], 'NS') ?></td>									
 						
-							<td class="col-md-1" scope="col"><?php echo $parcelasrec[$j]['idApp_OrcaTrata'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $parcelasrec[$j]['Parcela'] ?></td>
-							<td class="col-md-2" scope="col"><?php echo number_format($parcelasrec[$j]['ValorParcela'], 2, ',', '.') ?></td>											
+							<td class="col-md-3" scope="col"><?php echo number_format($parcelasrec[$j]['ValorParcela'], 2, ',', '.') ?></td>											
 							<td class="col-md-1" scope="col"><?php echo $parcelasrec[$j]['DataVencimento'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $this->basico->mascara_palavra_completa($parcelasrec[$j]['Quitado'], 'NS') ?></td>										
 						</tr>

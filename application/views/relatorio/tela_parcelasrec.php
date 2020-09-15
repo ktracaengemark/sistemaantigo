@@ -19,19 +19,21 @@
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">							
+						<!--
 						<li>
 							<a class="dropdown-item" href="<?php echo base_url() . 'orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa']; ?>">
 								<span class="glyphicon glyphicon-pencil"></span> Editar Receitas Filtradas
 							</a>
 						</li>
-						<!--
+						
 						<li role="separator" class="divider"></li>
+						-->
 						<li>
 							<a class="dropdown-item" href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
 								<span class="glyphicon glyphicon-pencil"></span> Imprimir Cobranças Filtradas
 							</a>
 						</li>
-						-->
+						
 					</ul>
 				</div>
 				<!--

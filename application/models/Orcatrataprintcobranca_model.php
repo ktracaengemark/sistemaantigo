@@ -104,37 +104,23 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				PV.idApp_OrcaTrata,
 				PV.idTab_Produto,
 				PV.QtdProduto,
+				PV.QtdIncrementoProduto,
+				(PV.QtdProduto * PV.QtdIncrementoProduto) AS Qtd_Prod,
 				PV.DataValidadeProduto,
 				PV.ObsProduto,
 				PV.idApp_Produto,
 				PV.ConcluidoProduto,
 				PV.DevolvidoProduto,
 				PV.ValorProduto,
-				P.UnidadeProduto,
-				P.CodProd,
-				TP3.Prodaux3,
-				TP1.Prodaux1,
-            	TP2.Prodaux2,
-				TCO.Convenio,
-				V.Convdesc,
-				TFO.NomeFornecedor,
-				CONCAT(IFNULL(PV.QtdProduto,""), " - " , IFNULL(P.UnidadeProduto,"")) AS QtdProduto,
-            	CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,"")) AS NomeProduto				
+				PV.NomeProduto,
+				TPS.Nome_Prod
 			FROM 
 				App_OrcaTrata AS OT,
-				App_Produto AS PV,
-            	Tab_Valor AS V
-            		LEFT JOIN Tab_Convenio AS TCO ON TCO.idTab_Convenio = V.Convenio
-            		LEFT JOIN Tab_Produto AS P ON P.idTab_Produto = V.idTab_Produto
-            		LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
-            		LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = P.Prodaux3
-            		LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
-            		LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = P.Prodaux1
+				App_Produto AS PV
+					LEFT JOIN Tab_Produtos AS TPS ON TPS.idTab_Produtos = PV.idTab_Produtos_Produto
 			WHERE 
 				PV.idApp_OrcaTrata = OT.idApp_OrcaTrata AND
-				PV.idSis_Empresa = ' . $data . ' AND
-                PV.idTab_Produto = V.idTab_Valor AND
-            	P.idTab_Produto = V.idTab_Produto
+				PV.idSis_Empresa = ' . $data . ' 
             ORDER BY
             	PV.idApp_OrcaTrata DESC				
 		
