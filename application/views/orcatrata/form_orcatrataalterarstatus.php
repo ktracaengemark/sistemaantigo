@@ -184,7 +184,7 @@
 							</div>
 							
 							
-							<div class="panel panel-info">
+							<div class="panel panel-success">
 								<div class="panel-heading">		
 									<!-- Corrigir o nome do cliente-->
 																	
@@ -314,8 +314,12 @@
 									</table>
 									<?php } else echo '<h3 class="text-left">S/Serviços </h3>';{?>
 									<?php } ?>							
-									<?php } ?>								
-									
+									<?php } ?>
+								</div>	
+							</div>
+							<br>
+							<div class="panel panel-info">
+								<div class="panel-heading">		
 									<h4 class="text-left"><b>Entrega</b></h4>
 									<table class="table table-bordered table-condensed table-striped">
 										<thead>
@@ -375,7 +379,7 @@
 											<tr>
 												<th class="col-md-4" scope="col">Nome</th>
 												<th class="col-md-4" scope="col">Tel.</th>
-												<th class="col-md-4" scope="col">Paren</th>
+												<th class="col-md-4" scope="col">Parentesco</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -389,7 +393,7 @@
 											<tr>
 												<th class="col-md-4" scope="col">Aux1</th>
 												<th class="col-md-4" scope="col">Aux2</th>
-												<th class="col-md-4" scope="col">ObsEnt.</th>
+												<th class="col-md-4" scope="col">Obs Ent.</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -400,7 +404,11 @@
 											</tr>
 										</tbody>
 									</table>
-
+								</div>	
+							</div>
+							<br>
+							<div class="panel panel-success">
+								<div class="panel-heading">	
 									<h4 class="text-left"><b>Pagamento</b></h4>
 									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 									<table class="table table-bordered table-condensed table-striped">
