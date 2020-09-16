@@ -221,6 +221,7 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['produto'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Produto' . $i);
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
+				$data['produto'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Produto' . $i);
                 $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);                
 				$data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
@@ -1665,6 +1666,7 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['produto'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Produto' . $i);
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
+				$data['produto'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Produto' . $i);
                 $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);                
 				$data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
@@ -3572,6 +3574,7 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['produto'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Produto' . $i);
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
+				$data['produto'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Produto' . $i);
                 $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
@@ -4545,6 +4548,7 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['produto'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Produto' . $i);
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
+				$data['produto'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Produto' . $i);
                 $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
@@ -5443,6 +5447,7 @@ class Orcatrata extends CI_Controller {
             if ($this->input->post('idTab_Produto' . $i)) {
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
+				$data['produto'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Produto' . $i);
                 $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
@@ -6020,6 +6025,7 @@ class Orcatrata extends CI_Controller {
                 $data['produto'][$j]['idApp_Produto'] = $this->input->post('idApp_Produto' . $i);
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
+				$data['produto'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Produto' . $i);
                 $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
