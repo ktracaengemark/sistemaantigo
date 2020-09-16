@@ -4466,6 +4466,7 @@ class Relatorio extends CI_Controller {
 			'FormaPag',
 			'AVAP',
 			'TipoFrete',
+			'Tipo_Orca',
 			'Entregador',
 
         ), TRUE));
@@ -4522,6 +4523,12 @@ class Relatorio extends CI_Controller {
             'P' => 'Na Entrega',
         );
 
+		$data['select']['Tipo_Orca'] = array(
+            '#' => '::TODOS::',
+            'B' => 'Na Loja',
+            'O' => 'On Line',
+        );
+
         $data['select']['Campo'] = array(
             'OT.idApp_OrcaTrata' => 'Número do Orçamento',
             'OT.AprovadoOrca' => 'Orçamento Aprovado?',
@@ -4576,6 +4583,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['FinalizadoOrca'] = $data['query']['FinalizadoOrca'];
 			$data['bd']['CanceladoOrca'] = $data['query']['CanceladoOrca'];
 			$data['bd']['AVAP'] = $data['query']['AVAP'];
+			$data['bd']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
             $data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);
 
             /*

@@ -44,7 +44,7 @@
 							<th class="active">Edit</th>
 							<th class="active">Cliente</th>
 							<th class="active">Pedido</th>
-							
+							<th class="active">Compra</th>
 							<!--<th class="active">Valid. do Orçam.</th>
 							<th class="active">Prazo de Entrega</th>-->
 							<th class="active">Orç.</th>
@@ -73,12 +73,13 @@
 
 								#echo '<div class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">';
 								echo '<td class="notclickable">
-										<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">
+										<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'statuspedido/alterarstatus/' . $row['idApp_OrcaTrata'] . '">
 											<span class="glyphicon glyphicon-edit notclickable"></span>
 										</a>
 									</td>';
 								echo '<td>' . $row['NomeCliente'] . '</td>';
 								echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
+								echo '<td>' . $row['Tipo_Orca'] . '</td>';
 								#echo '<td>' . $row['DataEntradaOrca'] . '</td>';
 								#echo '<td>' . $row['DataPrazo'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorRestanteOrca'] . '</td>';

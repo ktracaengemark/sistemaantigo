@@ -6431,6 +6431,7 @@ exit();*/
 		$filtro4 = ($data['FinalizadoOrca'] != '#') ? 'OT.FinalizadoOrca = "' . $data['FinalizadoOrca'] . '" AND ' : FALSE;
 		$filtro5 = ($data['CanceladoOrca'] != '#') ? 'OT.CanceladoOrca = "' . $data['CanceladoOrca'] . '" AND ' : FALSE;
 		$filtro6 = ($data['AVAP'] != '#') ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
+		$filtro7 = ($data['Tipo_Orca'] != '#') ? 'OT.Tipo_Orca = "' . $data['Tipo_Orca'] . '" AND ' : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -6459,6 +6460,7 @@ exit();*/
 				OT.idTab_TipoRD,
 				OT.FormaPagamento,
 				OT.AVAP,
+				OT.Tipo_Orca,
 				TTF.TipoFrete,
 				OT.ObsOrca,
 				OT.Descricao,
@@ -6482,6 +6484,7 @@ exit();*/
 				' . $filtro4 . '
 				' . $filtro5 . '
 				' . $filtro6 . '
+				' . $filtro7 . '
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['Orcamento'] . '
 				' . $data['Entregador'] . '
@@ -6539,6 +6542,14 @@ exit();*/
 
 				$somatotal += $row->ValorTotalOrca;
                 $row->ValorTotalOrca = number_format($row->ValorTotalOrca, 2, ',', '.');
+				
+				if($row->Tipo_Orca == "B"){
+					$row->Tipo_Orca = "Na Loja";
+				}elseif($row->Tipo_Orca == "O"){
+					$row->Tipo_Orca = "On Line";
+				}else{
+					$row->Tipo_Orca = "Outros";
+				}
 
             }
             $query->soma = new stdClass();

@@ -102,6 +102,21 @@
 						<div class="form-group">	
 							<div class="row">	
 								<div class="col-md-2">
+									<label for="Ordenamento">Local de Compra</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+											id="Tipo_Orca" name="Tipo_Orca">
+										<?php
+										foreach ($select['Tipo_Orca'] as $key => $row) {
+											if ($query['Tipo_Orca'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>	
+								<div class="col-md-2">
 									<label for="Ordenamento">Local de Pag.</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 											id="AVAP" name="AVAP">
