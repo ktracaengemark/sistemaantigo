@@ -102,6 +102,21 @@
 						<div class="form-group">	
 							<div class="row">	
 								<div class="col-md-2">
+									<label for="Ordenamento">Local de Pag.</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+											id="AVAP" name="AVAP">
+										<?php
+										foreach ($select['AVAP'] as $key => $row) {
+											if ($query['AVAP'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>	
+								<div class="col-md-2">
 									<label for="Ordenamento">Forma de Pag.</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 											id="FormaPag" name="FormaPag">

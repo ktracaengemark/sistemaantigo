@@ -6430,6 +6430,7 @@ exit();*/
 		$filtro3 = ($data['ConcluidoOrca'] != '#') ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
 		$filtro4 = ($data['FinalizadoOrca'] != '#') ? 'OT.FinalizadoOrca = "' . $data['FinalizadoOrca'] . '" AND ' : FALSE;
 		$filtro5 = ($data['CanceladoOrca'] != '#') ? 'OT.CanceladoOrca = "' . $data['CanceladoOrca'] . '" AND ' : FALSE;
+		$filtro6 = ($data['AVAP'] != '#') ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -6457,6 +6458,7 @@ exit();*/
 				OT.DataRetorno,
 				OT.idTab_TipoRD,
 				OT.FormaPagamento,
+				OT.AVAP,
 				TTF.TipoFrete,
 				OT.ObsOrca,
 				OT.Descricao,
@@ -6479,6 +6481,7 @@ exit();*/
 				' . $filtro3 . '
 				' . $filtro4 . '
 				' . $filtro5 . '
+				' . $filtro6 . '
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['Orcamento'] . '
 				' . $data['Entregador'] . '
