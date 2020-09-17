@@ -3419,7 +3419,7 @@ function buscaValor1Tabelas(id, campo, tabela, num, campo2) {
 					$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
 					$('#Prod_Serv_'+campo2+num).val(data[i].prod_serv);
 					$('#idTab_Valor_'+campo2+num).val(data[i].id_valor);
-					console.log( data[i].comissaoprod );
+					console.log( data[i].comissaoprod +' valor da comissão do produto');
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
 
@@ -3662,7 +3662,7 @@ function calculaSubtotal(valor, campo, num, tipo, tabela, qtdinc, comissao) {
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (valor.replace(".","").replace(",",".") * data);
 		//console.log(subtotal);
-		var subtotalcomissao = (subtotal * comissaoprd.replace(",",".") / 100);
+		var subtotalcomissao = (subtotal * comissaoprd / 100);
 		//console.log(subtotalcomissao);
 		var subtotalqtd = (qtdprdinc.replace(".","").replace(",",".") * data.replace(".","").replace(",","."));
         //alert('>>>'+valor+' :: '+campo+' :: '+num+' :: '+tipo+'<<<');
@@ -3676,7 +3676,7 @@ function calculaSubtotal(valor, campo, num, tipo, tabela, qtdinc, comissao) {
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (valor * data.replace(".","").replace(",","."));
 		//console.log(subtotal);
-		var subtotalcomissao = (subtotal * comissaoprd.replace(",",".") / 100);
+		var subtotalcomissao = (subtotal * comissaoprd / 100);
 		//console.log(subtotalcomissao);
 		var subtotalqtd = (qtdprdinc.replace(".","").replace(",",".") * qtdprd.replace(".","").replace(",","."));
 	} else if (tipo == 'QTDINC') {
@@ -3689,23 +3689,26 @@ function calculaSubtotal(valor, campo, num, tipo, tabela, qtdinc, comissao) {
         //o subtotal é calculado como o produto da quantidade pelo seu valor
         var subtotal = (qtdprd * data.replace(".","").replace(",","."));
 		//console.log(subtotal);
-		var subtotalcomissao = (subtotal * comissaoprd.replace(",",".") / 100);
+		var subtotalcomissao = (subtotal * comissaoprd / 100);
 		//console.log(subtotalcomissao);
 		var subtotalqtd = (qtdprdinc.replace(".","").replace(",",".") * qtdprd.replace(".","").replace(",","."));	
     } else {
 		//o subtotal é calculado como o produto da quantidade pelo seu valor
 		var subtotal = (valor.replace(".","").replace(",",".") * campo.replace(".","").replace(",","."));
 		//console.log(subtotal);
-		var subtotalcomissao = (subtotal * comissao.replace(",",".") / 100);
-		///console.log(subtotalcomissao);
+		var subtotalcomissao = (subtotal * comissao / 100);
+		//console.log(subtotalcomissao);
 		var subtotalqtd = (qtdinc.replace(".","").replace(",",".") * campo.replace(".","").replace(",","."));
     }
 
     subtotal 			= mascaraValorReal(subtotal);
-	//console.log(subtotal);
-	subtotalcomissao 	= mascaraValorReal(subtotalcomissao);
-	//console.log(subtotalcomissao);
+	//subtotalcomissao 	= mascaraValorReal(subtotalcomissao);
 	subtotalqtd1 		= subtotalqtd;
+	
+	console.log(subtotalqtd1 + ' - Quantidade do produto');
+	console.log(subtotal + ' - Subtotal do produto');
+	console.log(subtotalcomissao + ' - Subtotal da comissão do produto');
+	
     //o subtotal é escrito no seu campo no formulário
     $('#Subtotal'+tabela+num).val(subtotal);
 	$('#SubtotalComissao'+tabela+num).val(subtotalcomissao);
@@ -3876,7 +3879,8 @@ function calculaOrcamento() {
 
         if ($('#SubtotalProduto'+i).val()){
             subtotal += parseFloat($('#SubtotalProduto'+i).val().replace(".","").replace(",","."));
-			subtotalcomissao += parseFloat($('#SubtotalComissaoProduto'+i).val().replace(".","").replace(",","."));
+			//subtotalcomissao += parseFloat($('#SubtotalComissaoProduto'+i).val().replace(".","").replace(",","."));
+			subtotalcomissao += parseFloat($('#SubtotalComissaoProduto'+i).val());
 			subtotalqtd += parseFloat($('#SubtotalQtdProduto'+i).val().replace(".","").replace(",","."));
 		}
 		i++;
@@ -3886,9 +3890,13 @@ function calculaOrcamento() {
     //ponto para o vírgula como separador de casas decimais
     subtotalservico = mascaraValorReal(subtotalservico);
 	subtotal = mascaraValorReal(subtotal);
-	subtotalcomissao = mascaraValorReal(subtotalcomissao);
+	//subtotalcomissao = mascaraValorReal(subtotalcomissao);
 	subtotalqtd1 = subtotalqtd;
-	//console.log(subtotalqtd1);
+	
+	console.log(subtotalqtd1 + ' - Quantidade Total de produtos');
+	console.log(subtotal + ' - Valor Total de produtos');
+	console.log(subtotalcomissao + ' - Valor Total de comissão');
+	
     //escreve o subtotal no campo do formulário
     $('#ValorDev').val(subtotalservico);
 	$('#ValorOrca').val(subtotal);

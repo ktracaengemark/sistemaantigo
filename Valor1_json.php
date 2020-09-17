@@ -58,7 +58,7 @@ if ($_GET['tabela']) {
         $event_array[] = array(
             'id' => $row['idTab_' . $_GET['tabela']],
             'valor' => str_replace(".", ",", $row['ValorProduto']),
-			'comissaoprod' => str_replace(".", ",", $row['ComissaoVenda']),
+			'comissaoprod' => $row['ComissaoVenda'],
 			'nomeprod' => $row['NomeProduto'],
 			'qtdprod' => $row['QtdProdutoDesconto'],
 			'qtdinc' => $row['QtdProdutoIncremento'],
