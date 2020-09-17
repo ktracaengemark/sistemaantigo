@@ -15,7 +15,20 @@
 		<script type="text/javascript">
 			$('#ca-container').contentcarousel();
 		</script>
-
+		<script>
+			function mostrarSenha(){
+				var tipo = document.getElementById("inputPassword");
+				if(tipo.type == "password"){
+					tipo.type = "text";
+					$('.Mostrar').hide();
+					$('.NMostrar').show();
+				}else{
+					tipo.type = "password";
+					$('.Mostrar').show();
+					$('.NMostrar').hide();
+				}
+			}
+		</script>
 	</div>
 	<div class="col-md-2 "></div>
 	<div class="col-md-5 ">
@@ -39,7 +52,19 @@
 			<input type="text" id="inputText" maxlength="11" class="form-control" placeholder="Celular Admin (xx)999999999" autofocus name="CelularAdmin" value="<?php echo set_value('CelularAdmin'); ?>">	   
 			<?php echo form_error('CelularAdmin'); ?>
 			<label class="sr-only">Senha</label>
-			<input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">
+			<div class="input-group">
+				<input type="password" name="Senha" id="inputPassword" placeholder="Digite a sua senha" class="form-control btn-sm " value="">
+				<span class="input-group-btn">
+					<button class="btn btn-info btn-md " type="button" onclick="mostrarSenha()">
+						
+						<span class="Mostrar glyphicon glyphicon-eye-open"></span>
+						
+						<span class="NMostrar glyphicon glyphicon-eye-close"></span>
+						
+					</button>
+				</span>
+			</div>
+			<!--<input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">-->
 			<?php echo form_error('Senha'); ?>
 			<input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
 			<button class="btn btn-md btn-primary btn-block" type="submit"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Admin.</button>

@@ -22,6 +22,13 @@ camposDisponiveis();
 
 exibirentrega();
 
+exibir();
+
+function exibir(){
+	$('.Mostrar').show();
+	$('.NMostrar').hide();
+}
+
 function dateDiff() {
 	
 	var dataorca = $('#DataOrca').val();
