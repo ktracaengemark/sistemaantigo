@@ -11,6 +11,7 @@
 					<thead>
 						<tr>
 							<th class="active">Pedido</th>
+							<th class="active">idCli</th>
 							<th class="active">Cliente</th>
 							<th class="active">Entrega</th>
 							<th class="active">Hora</th>
@@ -23,6 +24,7 @@
 							#echo '<tr>';
 							echo '<tr class="clickable-row bg-warning" data-href="' . base_url() . 'statuspedido/alterarstatus/' . $row['idApp_OrcaTrata'] . '">';
 								echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';	
+								echo '<td>' . $row['idApp_Cliente'] . '</td>';	
 								echo '<td>' . $row['NomeCliente'] . '</td>';
 								echo '<td>' . $row['DataEntregaOrca'] . '</td>';
 								echo '<td>' . $row['HoraEntregaOrca'] . '</td>';

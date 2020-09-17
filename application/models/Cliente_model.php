@@ -254,7 +254,8 @@ class Cliente_model extends CI_Model {
                         . 'DataCadastroCliente = "' . substr($data, 4, 4).'-'.substr($data, 2, 2).'-'.substr($data, 0, 2) . '" ';
             }else{
 				if((strlen($data)) <= 7){
-					$query = 'RegistroFicha like "' . $data . '" ';
+					$query = 'idApp_Cliente like "' . $data . '" OR '
+							. 'RegistroFicha like "' . $data . '" ';
 				}else{
 					$query = 'CelularCliente like "%' . $data . '%" OR '
 							. 'Telefone like "%' . $data . '%" OR '

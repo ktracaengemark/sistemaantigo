@@ -21,7 +21,8 @@ class Pedidos_model extends CI_Model {
 
         $query = $this->db->query('
 			SELECT 
-                C.NomeCliente,
+                C.idApp_Cliente,
+				C.NomeCliente,
 				C.CelularCliente,
 				OT.Descricao,
 				OT.idApp_OrcaTrata,
@@ -105,6 +106,7 @@ class Pedidos_model extends CI_Model {
 
         $query = $this->db->query('
 			SELECT 
+                C.idApp_Cliente, 
                 C.NomeCliente,
 				C.CelularCliente,
 				OT.Descricao,
@@ -189,6 +191,7 @@ class Pedidos_model extends CI_Model {
 
         $query = $this->db->query('
 			SELECT 
+                C.idApp_Cliente, 
                 C.NomeCliente,
 				C.CelularCliente,
 				OT.Descricao,
@@ -274,6 +277,7 @@ class Pedidos_model extends CI_Model {
 
         $query = $this->db->query('
 			SELECT 
+                C.idApp_Cliente, 
                 C.NomeCliente,
 				C.CelularCliente,
 				OT.Descricao,
@@ -359,6 +363,7 @@ class Pedidos_model extends CI_Model {
 
         $query = $this->db->query('
 			SELECT 
+                C.idApp_Cliente, 
                 C.NomeCliente,
 				C.CelularCliente,
 				OT.Descricao,
@@ -444,6 +449,7 @@ class Pedidos_model extends CI_Model {
 
         $query = $this->db->query('
 			SELECT 
+                C.idApp_Cliente, 
                 C.NomeCliente,
 				C.CelularCliente,
 				OT.Descricao,
