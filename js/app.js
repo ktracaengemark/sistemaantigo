@@ -3419,7 +3419,7 @@ function buscaValor1Tabelas(id, campo, tabela, num, campo2) {
 					$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
 					$('#Prod_Serv_'+campo2+num).val(data[i].prod_serv);
 					$('#idTab_Valor_'+campo2+num).val(data[i].id_valor);
-					console.log( data[i].comissaoprod +' valor da comissão do produto');
+					//console.log( data[i].comissaoprod +' valor da comissão do produto');
                     //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[i].valor);
 
@@ -3705,9 +3705,9 @@ function calculaSubtotal(valor, campo, num, tipo, tabela, qtdinc, comissao) {
 	//subtotalcomissao 	= mascaraValorReal(subtotalcomissao);
 	subtotalqtd1 		= subtotalqtd;
 	
-	console.log(subtotalqtd1 + ' - Quantidade do produto');
-	console.log(subtotal + ' - Subtotal do produto');
-	console.log(subtotalcomissao + ' - Subtotal da comissão do produto');
+	//console.log(subtotalqtd1 + ' - Quantidade do produto');
+	//console.log(subtotal + ' - Subtotal do produto');
+	//console.log(subtotalcomissao + ' - Subtotal da comissão do produto');
 	
     //o subtotal é escrito no seu campo no formulário
     $('#Subtotal'+tabela+num).val(subtotal);
@@ -3893,9 +3893,9 @@ function calculaOrcamento() {
 	//subtotalcomissao = mascaraValorReal(subtotalcomissao);
 	subtotalqtd1 = subtotalqtd;
 	
-	console.log(subtotalqtd1 + ' - Quantidade Total de produtos');
-	console.log(subtotal + ' - Valor Total de produtos');
-	console.log(subtotalcomissao + ' - Valor Total de comissão');
+	//console.log(subtotalqtd1 + ' - Quantidade Total de produtos');
+	//console.log(subtotal + ' - Valor Total de produtos');
+	//console.log(subtotalcomissao + ' - Valor Total de comissão');
 	
     //escreve o subtotal no campo do formulário
     $('#ValorDev').val(subtotalservico);
