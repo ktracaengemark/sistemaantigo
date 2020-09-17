@@ -1233,6 +1233,7 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idApp_OrcaTrata',
+			'Associado',
 			'idSis_Usuario',
 			'DataVencimentoOrca',			
 			'NomeCliente',
@@ -1252,9 +1253,11 @@ class Relatorio extends CI_Controller {
             'AprovadoOrca',
             'QuitadoOrca',
 			'ConcluidoOrca',
+			'StatusComissaoOrca',
 			'Quitado',
 			'Modalidade',
 			'AVAP',
+			'Tipo_Orca',
 			'FormaPag',
 			'Orcarec',
 			'Orcades',
@@ -1285,6 +1288,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Orcarec'] = $data['query']['Orcarec'];
 		$_SESSION['FiltroAlteraParcela']['Orcades'] = $data['query']['Orcades'];
 		$_SESSION['FiltroAlteraParcela']['NomeCliente'] = $data['query']['NomeCliente'];
+		$_SESSION['FiltroAlteraParcela']['Associado'] = $data['query']['Associado'];
 		$_SESSION['FiltroAlteraParcela']['NomeFornecedor'] = $data['query']['NomeFornecedor'];		
 		$_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
         $_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
@@ -1347,7 +1351,7 @@ class Relatorio extends CI_Controller {
             '0' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
-        );		
+        );
 		
 		$data['select']['Modalidade'] = array(
             '0' => 'TODOS',
@@ -1356,9 +1360,22 @@ class Relatorio extends CI_Controller {
         );
 		
 		$data['select']['AVAP'] = array(
+            '#' => 'TODOS',
+            'V' => 'Na Loja',
+			'O' => 'On Line',
+            'P' => 'Na Entrega',
+        );
+		
+		$data['select']['Tipo_Orca'] = array(
+            '#' => 'TODOS',
+            'B' => 'Na Loja',
+			'O' => 'On Line',
+        );
+		
+		$data['select']['StatusComissaoOrca'] = array(
             '0' => 'TODOS',
-            'V' => 'À Vista',
-            'P' => 'À Prazo',
+            'N' => 'Não',
+            'S' => 'Sim',
         );		
 
         $data['select']['Campo'] = array(
@@ -1372,6 +1389,7 @@ class Relatorio extends CI_Controller {
         );
 
 		$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+		$data['select']['Associado'] = $this->Relatorio_model->select_usuario_associado();
 		$data['select']['NomeFornecedor'] = $this->Relatorio_model->select_fornecedor();
 		$data['select']['ObsOrca'] = $this->Relatorio_model->select_obsorca();
 		$data['select']['TipoFinanceiro'] = $this->Relatorio_model->select_tipofinanceiro();
@@ -1396,6 +1414,7 @@ class Relatorio extends CI_Controller {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+			$data['bd']['Associado'] = $data['query']['Associado'];
             $data['bd']['TipoFinanceiroR'] = $data['query']['TipoFinanceiroR'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
@@ -1412,8 +1431,10 @@ class Relatorio extends CI_Controller {
 			$data['bd']['ConcluidoProduto'] = $data['query']['ConcluidoProduto'];
 			$data['bd']['DevolvidoProduto'] = $data['query']['DevolvidoProduto'];
 			$data['bd']['ConcluidoServico'] = $data['query']['ConcluidoServico'];
+			$data['bd']['StatusComissaoOrca'] = $data['query']['StatusComissaoOrca'];
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
 			$data['bd']['AVAP'] = $data['query']['AVAP'];
+			$data['bd']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
 			$data['bd']['FormaPag'] = $data['query']['FormaPag'];
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
@@ -4480,8 +4501,8 @@ class Relatorio extends CI_Controller {
         $this->form_validation->set_rules('DataFim', 'Data Fim do Orçamento', 'trim|valid_date');
 		$this->form_validation->set_rules('DataInicio2', 'Data Início da Entrega', 'trim|valid_date');
         $this->form_validation->set_rules('DataFim2', 'Data Fim da Entrega', 'trim|valid_date');
-		$this->form_validation->set_rules('DataInicio3', 'Data Início do Retorno', 'trim|valid_date');
-        $this->form_validation->set_rules('DataFim3', 'Data Fim do Retorno', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio3', 'Data Início do Vencimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim3', 'Data Fim do Vencimento', 'trim|valid_date');
 		$this->form_validation->set_rules('DataInicio4', 'Data Início do Quitado', 'trim|valid_date');
         $this->form_validation->set_rules('DataFim4', 'Data Fim do Quitado', 'trim|valid_date');
 

@@ -109,6 +109,7 @@ class Login extends CI_Controller {
 			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
 			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
 			$_SESSION['log']['Site'] = $query3['Site'];
+			$_SESSION['log']['Arquivo_Empresa'] = $query3['Arquivo'];
 			
 			/*  
 			  echo "<pre>";
@@ -258,6 +259,7 @@ class Login extends CI_Controller {
 			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
 			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
 			$_SESSION['log']['Site'] = $query3['Site'];
+			$_SESSION['log']['Arquivo_Empresa'] = $query3['Arquivo'];
 			/*  
 			  echo "<pre>";
               print_r($_SESSION['log']['NivelEmpresa']);
@@ -406,6 +408,7 @@ class Login extends CI_Controller {
 			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
 			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
 			$_SESSION['log']['Site'] = $query3['Site'];
+			$_SESSION['log']['Arquivo_Empresa'] = $query3['Arquivo'];
 			/*  
 			  echo "<pre>";
               print_r($_SESSION['log']['NivelEmpresa']);
@@ -554,6 +557,7 @@ class Login extends CI_Controller {
 			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
 			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
 			$_SESSION['log']['Site'] = $query3['Site'];
+			$_SESSION['log']['Arquivo_Empresa'] = $query3['Arquivo'];
 			/*  
 			  echo "<pre>";
               print_r($_SESSION['log']['NivelEmpresa']);
@@ -702,6 +706,7 @@ class Login extends CI_Controller {
 			$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
 			$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
 			$_SESSION['log']['Site'] = $query3['Site'];
+			$_SESSION['log']['Arquivo_Empresa'] = $query3['Arquivo'];
 			$_SESSION['log']['Empresa'] = $query3['idSis_Empresa'];
 			/*  
 			  echo "<pre>";
@@ -862,6 +867,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['TabelasEmpresa'] = $query3['TabelasEmpresa'];
 				$_SESSION['log']['DataDeValidade'] = $query3['DataDeValidade'];
 				$_SESSION['log']['Site'] = $query3['Site'];
+				$_SESSION['log']['Arquivo_Empresa'] = $query3['Arquivo'];
 				$_SESSION['log']['Empresa'] = $query3['idSis_Empresa'];
 				/*  
 				  echo "<pre>";

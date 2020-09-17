@@ -23,7 +23,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="arquivos/imagens/empresas/profile-2.png">
+		<link rel="icon" href="<?php echo base_url() . 'arquivos/imagens/empresas/profile-5.png'; ?>">
 
         <!-- <title>ROMATI - Agenda online de pacientes</title>-->
         <title>Empresas</title>        

@@ -25,9 +25,9 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="arquivos/imagens/empresas/<?php echo $_SESSION['log']['idSis_Empresa'] ?>/documentos/miniatura/<?php echo $_SESSION['log']['Icone'] ?>">
+		<link rel="icon" href="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['log']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['log']['Arquivo_Empresa'] . ''; ?>">
 
-        <!-- <title>ROMATI - Agenda online de pacientes</title>-->
+		<!-- <title>ROMATI - Agenda online de pacientes</title>-->
         <title><?php echo $_SESSION['log']['Nome2'] ?>/<?php echo $_SESSION['log']['NomeEmpresa2'] ?></title>        
 
         <!-- HUAP CSS Custom -->

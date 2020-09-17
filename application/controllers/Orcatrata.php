@@ -599,6 +599,7 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['idTab_TipoRD'] = "2";
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+			$data['orcatrata']['Associado'] = $_SESSION['log']['idSis_Usuario'];
             $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			if ($data['orcatrata']['PrazoEntrega']){
 				$data['orcatrata']['PrazoEntrega'] = $data['orcatrata']['PrazoEntrega'];
@@ -1337,6 +1338,7 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['idTab_TipoRD'] = "2";
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa']; 
             $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+			$data['orcatrata']['Associado'] = $_SESSION['log']['idSis_Usuario'];
             $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			if ($data['orcatrata']['PrazoEntrega']){
 				$data['orcatrata']['PrazoEntrega'] = $data['orcatrata']['PrazoEntrega'];

@@ -1092,11 +1092,14 @@ class Relatorio_model extends CI_Model {
         $filtro2 = ($data['QuitadoOrca']) ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
 		$filtro3 = ($data['ConcluidoOrca']) ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
-		$filtro6 = ($data['AVAP']) ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
+		//$filtro6 = ($data['AVAP']) ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
+		$filtro6 = ($data['AVAP'] != '#') ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
+		$filtro12 = ($data['Tipo_Orca'] != '#') ? 'OT.Tipo_Orca = "' . $data['Tipo_Orca'] . '" AND ' : FALSE;
 		$filtro7 = ($data['FormaPag']) ? 'OT.FormaPagamento = "' . $data['FormaPag'] . '" AND ' : FALSE;
 		$filtro8 = ($data['ConcluidoProduto']) ? 'AP.ConcluidoProduto = "' . $data['ConcluidoProduto'] . '" AND ' : FALSE;
 		$filtro10 = ($data['DevolvidoProduto']) ? 'AP.DevolvidoProduto = "' . $data['DevolvidoProduto'] . '" AND ' : FALSE;
-		$filtro9 = ($data['ConcluidoServico']) ? 'TS.ConcluidoServico = "' . $data['ConcluidoServico'] . '" AND ' : FALSE;		
+		$filtro9 = ($data['ConcluidoServico']) ? 'TS.ConcluidoServico = "' . $data['ConcluidoServico'] . '" AND ' : FALSE;
+		
 		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
 		$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
@@ -1119,6 +1122,7 @@ class Relatorio_model extends CI_Model {
 				OT.ValorDev,				
 				OT.ValorEntradaOrca,
 				OT.ValorRestanteOrca,
+				OT.ValorTotalOrca,
 				OT.DataVencimentoOrca,
                 OT.ConcluidoOrca,
                 OT.QuitadoOrca,
@@ -1130,6 +1134,9 @@ class Relatorio_model extends CI_Model {
 				OT.ObsOrca,
 				OT.QtdParcelasOrca,
 				OT.Tipo_Orca,
+				OT.Associado,
+				OT.ValorComissao,
+				OT.StatusComissaoOrca,
 				EMP.NomeEmpresa,
 				US.Nome AS NomeColaborador,
 				MD.Modalidade,
@@ -1147,10 +1154,9 @@ class Relatorio_model extends CI_Model {
 				LEFT JOIN Sis_Empresa AS EMP ON EMP.idSis_Empresa = OT.idSis_Empresa
 				LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = OT.idSis_Usuario
             WHERE
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				OT.AprovadoOrca = "S" AND
-				OT.idTab_TipoRD = "2" AND
-				OT.Tipo_Orca = "O"
+                ' . $filtro12 . '
+				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				OT.idTab_TipoRD = "2" 
             ORDER BY
 				OT.idApp_OrcaTrata
 
@@ -1172,6 +1178,7 @@ class Relatorio_model extends CI_Model {
 			$subtotal=0;
 			$quantidade=0;
 			$somaorcamento=0;
+			$somacomissao=0;
 			$somadesconto=0;
 			$somarestante=0;
 			$somasubcomissao=0;
@@ -1187,6 +1194,20 @@ class Relatorio_model extends CI_Model {
 				$row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
                 $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
+				$row->StatusComissaoOrca = $this->basico->mascara_palavra_completa($row->StatusComissaoOrca, 'NS');
+				if($row->Tipo_Orca == "B"){
+					$row->Tipo_Orca = "Na Loja";
+				}elseif($row->Tipo_Orca == "O"){
+					$row->Tipo_Orca = "On Line";
+				}else{
+					$row->Tipo_Orca = "Outros";
+				}				
+				
+				$somaorcamento += $row->ValorTotalOrca;
+				$row->ValorTotalOrca = number_format($row->ValorTotalOrca, 2, ',', '.');
+				$somacomissao += $row->ValorComissao;
+				$row->ValorComissao = number_format($row->ValorComissao, 2, ',', '.');
+				
 				/*
 				$row->DataValidadeProduto = $this->basico->mascara_data($row->DataValidadeProduto, 'barras');
 				$row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
@@ -1218,9 +1239,11 @@ class Relatorio_model extends CI_Model {
 				$row->SubComissao = number_format($row->SubComissao, 2, ',', '.');
 				*/
             }
-            /*
+            
 			$query->soma = new stdClass();
             $query->soma->somaorcamento = number_format($somaorcamento, 2, ',', '.');
+			$query->soma->somacomissao = number_format($somacomissao, 2, ',', '.');
+			/*
 			$query->soma->somadesconto = number_format($somadesconto, 2, ',', '.');
 			$query->soma->somarestante = number_format($somarestante, 2, ',', '.');
 			$query->soma->quantidade = number_format($quantidade);
@@ -6404,11 +6427,11 @@ exit();*/
 
         if ($data['DataFim3']) {
             $consulta3 =
-                '(OT.DataRetorno >= "' . $data['DataInicio3'] . '" AND OT.DataRetorno <= "' . $data['DataFim3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '")';
         }
         else {
             $consulta3 =
-                '(OT.DataRetorno >= "' . $data['DataInicio3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '")';
         }
 
 		if ($data['DataFim4']) {
@@ -6478,6 +6501,7 @@ exit();*/
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 (' . $consulta . ') AND
 				(' . $consulta2 . ') AND
+				(' . $consulta3 . ') AND
                 ' . $filtro1 . '
                 ' . $filtro2 . '
 				' . $filtro3 . '
@@ -6514,7 +6538,6 @@ exit();*/
 			$somatotal=0;
             foreach ($query->result() as $row) {
 				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
-				$row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
 				$row->DataEntregaOrca = $this->basico->mascara_data($row->DataEntregaOrca, 'barras');
 				$row->DataPrazo = $this->basico->mascara_data($row->DataPrazo, 'barras');
                 $row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
@@ -10192,6 +10215,31 @@ exit();*/
         return $array;
     }
 
+	public function select_usuario_associado() {
+
+        $query = $this->db->query('
+            SELECT
+				OT.idApp_OrcaTrata,
+				US.idSis_Usuario,
+				CONCAT(IFNULL(US.Nome,"")) AS NomeUsuario
+            FROM
+                App_OrcaTrata AS OT
+					LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = OT.Associado
+            WHERE
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY 
+				US.Nome ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idSis_Usuario] = $row->NomeUsuario;
+        }
+
+        return $array;
+    }
+	
 	public function select_orcarec() {
 
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;

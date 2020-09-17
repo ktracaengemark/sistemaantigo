@@ -11,7 +11,7 @@
 						<a href="<?php echo base_url() . 'documentos/alterar_icone/' . $row['idApp_Documentos'] . ''; ?>"><img class="img-responsive" width='100' src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $row['Icone'] . ''; ?>"></a>
 						<div class="card-body">
 							<h4 class="card-title">
-								<a href="<?php echo base_url() . 'documentos/alterar_logo_nav/' . $row['idApp_Documentos'] . ''; ?>"><?php echo $row['Icone'];?></a>
+								<a href="<?php echo base_url() . 'documentos/alterar_icone/' . $row['idApp_Documentos'] . ''; ?>"><?php echo $row['Icone'];?></a>
 							</h4>
 						</div>
 					</div>
