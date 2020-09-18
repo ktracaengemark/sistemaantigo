@@ -1233,10 +1233,11 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idApp_OrcaTrata',
-			'Associado',
+			'NomeAssociado',
 			'idSis_Usuario',
-			'DataVencimentoOrca',			
+			'DataVencimentoOrca',
 			//'NomeCliente',
+			'NomeUsuario',
 			'NomeFornecedor',
 			'Dia',
 			'Ano',
@@ -1288,12 +1289,17 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Orcarec'] = $data['query']['Orcarec'];
 		$_SESSION['FiltroAlteraParcela']['Orcades'] = $data['query']['Orcades'];
 		//$_SESSION['FiltroAlteraParcela']['NomeCliente'] = $data['query']['NomeCliente'];
-		$_SESSION['FiltroAlteraParcela']['Associado'] = $data['query']['Associado'];
+		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];
+		$_SESSION['FiltroAlteraParcela']['NomeAssociado'] = $data['query']['NomeAssociado'];
 		$_SESSION['FiltroAlteraParcela']['NomeFornecedor'] = $data['query']['NomeFornecedor'];		
 		$_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
         $_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
         $_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];
 		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];
+		$_SESSION['FiltroAlteraParcela']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
+		$_SESSION['FiltroAlteraParcela']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
+		$_SESSION['FiltroAlteraParcela']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
+		$_SESSION['FiltroAlteraParcela']['StatusComissaoOrca'] = $data['query']['StatusComissaoOrca'];
 		$_SESSION['FiltroAlteraParcela']['ConcluidoProduto'] = $data['query']['ConcluidoProduto'];
 		$_SESSION['FiltroAlteraParcela']['DevolvidoProduto'] = $data['query']['DevolvidoProduto'];
 		$_SESSION['FiltroAlteraParcela']['ConcluidoServico'] = $data['query']['ConcluidoServico'];
@@ -1374,8 +1380,8 @@ class Relatorio extends CI_Controller {
 		
 		$data['select']['StatusComissaoOrca'] = array(
             '0' => 'TODOS',
-            'N' => 'Não',
-            'S' => 'Sim',
+            'N' => 'NãoPaga',
+            'S' => 'Paga',
         );		
 
         $data['select']['Campo'] = array(
@@ -1389,7 +1395,8 @@ class Relatorio extends CI_Controller {
         );
 
 		//$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
-		$data['select']['Associado'] = $this->Relatorio_model->select_usuario_associado();
+		$data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
+		$data['select']['NomeAssociado'] = $this->Relatorio_model->select_usuario_associado();
 		$data['select']['NomeFornecedor'] = $this->Relatorio_model->select_fornecedor();
 		$data['select']['ObsOrca'] = $this->Relatorio_model->select_obsorca();
 		$data['select']['TipoFinanceiro'] = $this->Relatorio_model->select_tipofinanceiro();
@@ -1414,7 +1421,8 @@ class Relatorio extends CI_Controller {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             //$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
-			$data['bd']['Associado'] = $data['query']['Associado'];
+            $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
+			$data['bd']['NomeAssociado'] = $data['query']['NomeAssociado'];
             $data['bd']['TipoFinanceiroR'] = $data['query']['TipoFinanceiroR'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];

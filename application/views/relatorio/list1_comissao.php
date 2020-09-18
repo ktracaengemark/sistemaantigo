@@ -33,7 +33,7 @@
 						<thead>
 							<tr>
 								<th colspan="3" class="active"> <?php echo $report->num_rows(); ?> resultado(s)</th>
-								<th colspan="5" class="active"></th>
+								<th colspan="8" class="active"></th>
 								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somaorcamento ?> </th>
 								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somacomissao ?> </th>
 								<!--<th colspan="4" class="active"> <?php echo $report->soma->quantidade ?> Produtos Vendidos</th>
@@ -51,8 +51,11 @@
 								<th class="active">Colaborador</th>
 								<th class="active">Associado</th>
 								<th class="active">Cliente</th>
+								<th class="active">Aprovado</th>
+								<th class="active">Entrege</th>
+								<th class="active">Pago</th>
 								<th class="active">Dt.Venc.</th>
-								<th class="active">Receita</th>
+								<th class="active">Valor</th>
 								<th class="active">Comissao</th>
 								<th class="active">Paga?</th>								
 								<!--<th class="active">Qtd</th>									
@@ -97,6 +100,9 @@
 									echo '<td>' . $row['NomeColaborador'] . '</td>';
 									echo '<td>' . $row['Associado'] . '</td>';
 									echo '<td>' . $row['NomeCliente'] . '</td>';
+									echo '<td>' . $row['AprovadoOrca'] . '</td>';
+									echo '<td>' . $row['ConcluidoOrca'] . '</td>';
+									echo '<td>' . $row['QuitadoOrca'] . '</td>';
 									echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
 									echo '<td>' . $row['ValorRestanteOrca'] . '</td>';	
 									echo '<td>' . $row['ValorComissao'] . '</td>';	
@@ -125,7 +131,7 @@
 						<tfoot>
 							<tr>
 								<th colspan="3" class="active"> <?php echo $report->num_rows(); ?> resultado(s)</th>
-								<th colspan="5" class="active"></th>
+								<th colspan="8" class="active"></th>
 								<!--<th colspan="2" class="active"> <?php echo $report->soma->quantidade ?> Produtos</th>-->
 								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somaorcamento ?> </th>
 								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somacomissao ?> </th>

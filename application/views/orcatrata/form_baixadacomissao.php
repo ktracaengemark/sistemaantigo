@@ -41,7 +41,7 @@
 												?>
 
 													<?php if ($metodo > 1) { ?>
-													<input type="hidden" name="idApp_OrcaTrata<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_OrcaTrata']; ?>"/>
+													<input type="hidden" name="idApp_OrcaTrata<?php echo $i ?>" value="<?php echo $orcamento[$i]['idApp_OrcaTrata']; ?>"/>
 													<?php } ?>
 
 													<div class="form-group" id="21div<?php echo $i ?>">
@@ -54,7 +54,7 @@
 																	</div>
 																	<div class="col-md-1">
 																		<label for="DataVencimentoOrca">Pedido:</label>
-																		<span><?php echo $parcelasrec[$i]['idApp_OrcaTrata'] ?></span>
+																		<span><?php echo $orcamento[$i]['idApp_OrcaTrata'] ?></span>
 																	</div>
 																	<div class="col-md-2">
 																		<label for="DataVencimentoOrca">Venc:</label>
@@ -63,7 +63,7 @@
 																				<span class="glyphicon glyphicon-calendar"></span>
 																			</span>
 																			<input type="text" class="form-control Date" readonly="" id="DataVencimentoOrca<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
-																				   name="DataVencimentoOrca<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataVencimentoOrca'] ?>">																
+																				   name="DataVencimentoOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['DataVencimentoOrca'] ?>">																
 																		</div>
 																	</div>
 																	<div class="col-md-2">
@@ -71,7 +71,7 @@
 																		<div class="input-group" id="txtHint">
 																			<span class="input-group-addon" id="basic-addon1">R$</span>
 																			<input type="text" class="form-control Valor" readonly="" maxlength="10" placeholder="0,00" id="ValorRestanteOrca<?php echo $i ?>"
-																				   name="ValorRestanteOrca<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorRestanteOrca'] ?>">
+																				   name="ValorRestanteOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['ValorRestanteOrca'] ?>">
 																		</div>
 																	</div>
 																	<div class="col-md-2">
@@ -79,7 +79,7 @@
 																		<div class="input-group" id="txtHint">
 																			<span class="input-group-addon" id="basic-addon1">R$</span>
 																			<input type="text" class="form-control Valor"  maxlength="10" placeholder="0,00" id="ValorComissao<?php echo $i ?>"
-																				   name="ValorComissao<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorComissao'] ?>">
+																				   name="ValorComissao<?php echo $i ?>" value="<?php echo $orcamento[$i]['ValorComissao'] ?>">
 																		</div>
 																	</div>
 																	<div class="col-md-2">
@@ -88,9 +88,9 @@
 																			<div class="btn-group" data-toggle="buttons">
 																				<?php
 																				foreach ($select['StatusComissaoOrca'] as $key => $row) {
-																					(!$parcelasrec[$i]['StatusComissaoOrca']) ? $parcelasrec[$i]['StatusComissaoOrca'] = 'N' : FALSE;
+																					(!$orcamento[$i]['StatusComissaoOrca']) ? $orcamento[$i]['StatusComissaoOrca'] = 'N' : FALSE;
 
-																					if ($parcelasrec[$i]['StatusComissaoOrca'] == $key) {
+																					if ($orcamento[$i]['StatusComissaoOrca'] == $key) {
 																						echo ''
 																						. '<label class="btn btn-warning active" name="radiobutton_StatusComissaoOrca' . $i . '" id="radiobutton_StatusComissaoOrca' . $i .  $key . '">'
 																						. '<input type="radio" name="StatusComissaoOrca' . $i . '" id="radiobuttondinamico" '
@@ -128,7 +128,7 @@
 								<div class="row">
 									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
 									<input type="hidden" name="idSis_Empresa" value="<?php echo $_SESSION['log']['idSis_Empresa']; ?>">
-									<!--<input type="hidden" name="idSis_Empresa" value="<?php echo $orcatrata['idSis_Empresa']; ?>">-->
+									<!--<input type="hidden" name="idSis_Empresa" value="<?php echo $empresa['idSis_Empresa']; ?>">-->
 									<?php if ($metodo > 1) { ?>
 									<?php } ?>
 									<?php if ($metodo == 2) { ?>
@@ -190,7 +190,7 @@
 														</div>
 														<!--
 														<div class="col-md-6 text-right">
-															<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluir2/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
+															<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluir2/' . $empresa['idApp_OrcaTrata'] ?>" role="button">
 																<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 															</a>
 														</div>

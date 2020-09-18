@@ -420,7 +420,7 @@ class Relatorio_model extends CI_Model {
 
         if ($completo === FALSE) {
             return TRUE;
-        } else {
+			} else {
 
             $somapago=$somapagar=$somaentrada=$somareceber=$somarecebido=$somapago=$somapagar=$somareal=$balanco=$ant=0;
             foreach ($query->result() as $row) {
@@ -1081,6 +1081,7 @@ class Relatorio_model extends CI_Model {
         }
 		
         //$data['NomeCliente'] = (($_SESSION['log']['idSis_Empresa'] != 5) && ($data['NomeCliente'])) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
+		$data['NomeUsuario'] = ($data['NomeUsuario']) ? ' AND OT.idSis_Usuario = ' . $data['NomeUsuario'] : FALSE;
         //$data['Campo'] = (!$data['Campo']) ? 'TP.Produtos' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(OT.DataVencimentoOrca) = ' . $data['Dia'] : FALSE;
@@ -1091,6 +1092,7 @@ class Relatorio_model extends CI_Model {
 		$filtro1 = ($data['AprovadoOrca']) ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoOrca']) ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
 		$filtro3 = ($data['ConcluidoOrca']) ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
+		$filtro11 = ($data['StatusComissaoOrca']) ? 'OT.StatusComissaoOrca = "' . $data['StatusComissaoOrca'] . '" AND ' : FALSE;
 		$filtro5 = ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
 		//$filtro6 = ($data['AVAP']) ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
 		$filtro6 = ($data['AVAP'] != '#') ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
@@ -1155,10 +1157,17 @@ class Relatorio_model extends CI_Model {
 				LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = OT.idSis_Usuario
             WHERE
                 ' . $filtro12 . '
+				' . $filtro1 . '
+				' . $filtro2 . '
+				' . $filtro3 . '
+				' . $filtro11 . '				
 				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				OT.idTab_TipoRD = "2" 
+				OT.idTab_TipoRD = "2"
+				' . $data['NomeUsuario'] . '
+
             ORDER BY
-				OT.DataVencimentoOrca
+				OT.DataVencimentoOrca,
+				OT.idApp_OrcaTrata 
 
         ');
 
@@ -10221,7 +10230,7 @@ exit();*/
             SELECT
 				OT.idApp_OrcaTrata,
 				US.idSis_Usuario,
-				CONCAT(IFNULL(US.Nome,"")) AS NomeUsuario
+				CONCAT(IFNULL(US.Nome,"")) AS NomeAssociado
             FROM
                 App_OrcaTrata AS OT
 					LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = OT.Associado
@@ -10234,7 +10243,7 @@ exit();*/
         $array = array();
         $array[0] = ':: Todos ::';
         foreach ($query->result() as $row) {
-            $array[$row->idSis_Usuario] = $row->NomeUsuario;
+            $array[$row->idSis_Usuario] = $row->NomeAssociado;
         }
 
         return $array;
