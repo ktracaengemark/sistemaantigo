@@ -1080,7 +1080,7 @@ class Relatorio_model extends CI_Model {
                 '(OT.DataVencimentoOrca >= "' . $data['DataInicio'] . '")';
         }
 		
-        $data['NomeCliente'] = (($_SESSION['log']['idSis_Empresa'] != 5) && ($data['NomeCliente'])) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
+        //$data['NomeCliente'] = (($_SESSION['log']['idSis_Empresa'] != 5) && ($data['NomeCliente'])) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
         //$data['Campo'] = (!$data['Campo']) ? 'TP.Produtos' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(OT.DataVencimentoOrca) = ' . $data['Dia'] : FALSE;
@@ -1158,7 +1158,7 @@ class Relatorio_model extends CI_Model {
 				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_TipoRD = "2" 
             ORDER BY
-				OT.idApp_OrcaTrata
+				OT.DataVencimentoOrca
 
         ');
 
@@ -1203,8 +1203,8 @@ class Relatorio_model extends CI_Model {
 					$row->Tipo_Orca = "Outros";
 				}				
 				
-				$somaorcamento += $row->ValorTotalOrca;
-				$row->ValorTotalOrca = number_format($row->ValorTotalOrca, 2, ',', '.');
+				$somaorcamento += $row->ValorRestanteOrca;
+				$row->ValorRestanteOrca = number_format($row->ValorRestanteOrca, 2, ',', '.');
 				$somacomissao += $row->ValorComissao;
 				$row->ValorComissao = number_format($row->ValorComissao, 2, ',', '.');
 				

@@ -15,13 +15,29 @@
 
 						<div class="form-group">
 							<div class="row">
+								<!--
+								<div class="col-md-2 btn-group">
+									<label for="Orcamento">Pedido:</label>
+										<input type="text" class="form-control Numero" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
+										<span class="input-group-btn">
+											<button class="btn btn-info btn-md" type="submit">
+												<span class="glyphicon glyphicon-user"></span> <span class="glyphicon glyphicon-search"></span> 
+											</button>
+										</span>
+									
+								</div>
+								-->
 								<div class="col-md-2">
 									<label for="Orcamento">Pedido:</label>
 									<div class="input-group">
-										<input type="text" class="form-control Numero"  
-											    name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
+										<input type="text" placeholder="Pesquisar Pedido" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
+										<span class="input-group-btn">
+											<button class="btn btn-info btn-md" type="submit">
+												<span class="glyphicon glyphicon-search"></span> 
+											</button>
+										</span>
 									</div>
-								</div>
+								</div>	
 								<div class="col-md-2">
 									<label for="AprovadoOrca">Aprovado?</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"

@@ -21,7 +21,7 @@
 					<div class="input-group">
 						<span class="input-group-addon">R$</span>
 						<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somareceber ?>">
-					</div>
+						</div>
 				</div>				
 			</div>	
 		</div>
@@ -43,15 +43,18 @@
 							<!--<th class="active">Ed.Orç</th>
 							<th class="active">Ed.Prc</th>-->
 							<th class="active">Imp.</th>
+							<th class="active">Cont.</th>
 							<th class="active">Pc</th>
 							<th class="active">Orç.</th>
 							<th class="col-md-3 active">Cliente</th>
 							<th class="active" scope="col">Receita</th>	
 							<th class="active">Dt Orca</th>
+							<th class="active">Aprovado</th>
+							<th class="active">Entregue</th>
+							<th class="active">Pago</th>
 							<th class="active">Dt Venc</th>
-							<th class="active">Receber</th>
-							<th class="active">Produtos</th>
-							<th class="active">Parcelas</th>
+							<th class="active">Valor</th>
+							<th class="active">Quitada</th>
 							<!--<th class="active">Dt.Pag</th>
 							<th class="active">Recebido</th>
 							<th class="active">Valor Recebido</th>
@@ -62,6 +65,7 @@
 					</thead>
 					<tbody>
 						<?php
+						$count = 1;
 						foreach ($report->result_array() as $row) {
 							echo '<tr>';
 							#echo '<tr class="clickable-row" data-href="' . base_url() . 'Orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">';
@@ -84,21 +88,25 @@
 											<span class="glyphicon glyphicon-print notclickable"></span>
 										</a>
 										
-									</td>';									
+									</td>';
+								echo '<td>' . $count . '</td>';	
 								echo '<td>' . $row['Parcela'] . '</td>';
 								echo '<td>' . $row['idApp_OrcaTrata'] . '- ' . $row['TipoFinanceiro'] . '</td>';
 								echo '<td>' . $row['NomeCliente'] . '</td>';
 								echo '<td>' . $row['Descricao'] . '</td>';
 								echo '<td>' . $row['DataOrca'] . '</td>';
+								echo '<td>' . $row['AprovadoOrca'] . '</td>';
+								echo '<td>' . $row['ConcluidoOrca'] . '</td>';
+								echo '<td>' . $row['QuitadoOrca'] . '</td>';
 								echo '<td>' . $row['DataVencimento'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorParcela'] . '</td>';
-								echo '<td>' . $row['ConcluidoOrca'] . '</td>';									
-								echo '<td>' . $row['QuitadoOrca'] . '</td>';
+								echo '<td>' . $row['Quitado'] . '</td>';
 								#echo '<td>' . $row['DataPago'] . '</td>';
 								#echo '<td class="text-left">' . $row['ValorPago'] . '</td>';
 								#echo '<td class="text-left">R$ ' . $row['ValorPago'] . '</td>';
 								#echo '<td>' . $row['DataOrca'] . '</td>';
 							echo '</tr>';
+							$count++;
 						}
 						?>
 					</tbody>

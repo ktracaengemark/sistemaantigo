@@ -6,23 +6,57 @@
 	<div class="panel panel-info">
 		<div class="panel-heading">
 			<?php echo form_open('relatorio/comissao', 'role="form"'); ?>
+			<!--
 			<div class="btn-group">
 				<a type="button" class="btn btn-md btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-					<span class="glyphicon glyphicon-filter"></span> Filtrar Produtos
+					<span class="glyphicon glyphicon-filter"></span> Filtrar Receitas
 				</a>
+				<a class="btn btn-md btn-warning" type="button" href="<?php echo base_url() . 'orcatrata/alterarprodutorec/' . $_SESSION['log']['idSis_Empresa']; ?>">
+					<span class="glyphicon glyphicon-pencil"></span> Editar Produtos Filtradas
+				</a>
+				
 				<button type="button" class="btn btn-md btn-warning dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu" role="menu">
-					<!--
+					
 					<li>
 						<a class="dropdown-item" href="<?php echo base_url() . 'orcatrata/alterarprodutorec/' . $_SESSION['log']['idSis_Empresa']; ?>">
 							<span class="glyphicon glyphicon-pencil"></span> Editar Produtos Filtradas
 						</a>
 					</li>
-					-->
-				</ul>				
-			</div>			
+					
+				</ul>
+				
+			</div>
+			-->
+			<div class="btn-line">
+				<a type="button" class="btn btn-md btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+					<span class="glyphicon glyphicon-filter"></span> Filtrar
+				</a>
+				<a class="btn btn-md btn-warning" type="button" href="<?php echo base_url() . 'orcatrata/baixadacomissao/' . $_SESSION['log']['idSis_Empresa']; ?>">
+					<span class="glyphicon glyphicon-pencil"></span> Editar
+				</a>
+				<!--
+				<a class="btn btn-md btn-warning" type="button" href="<?php echo base_url() . 'orcatrata/alterarprodutorec/' . $_SESSION['log']['idSis_Empresa']; ?>">
+					<span class="glyphicon glyphicon-print"></span> Impr.
+				</a>
+				-->
+				<!--
+				<button type="button" class="btn btn-md btn-warning dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					
+					<li>
+						<a class="dropdown-item" href="<?php echo base_url() . 'orcatrata/alterarprodutorec/' . $_SESSION['log']['idSis_Empresa']; ?>">
+							<span class="glyphicon glyphicon-pencil"></span> Editar Produtos Filtradas
+						</a>
+					</li>
+					
+				</ul>
+				-->
+			</div>
 		</div>
 		<div class="panel-body">
 			<div <?php echo $collapse; ?> id="Receitas">
@@ -44,14 +78,29 @@
 				<div class="panel panel-info">
 					<div class="panel-heading">							
 						<div class="form-group text-left">	
-							<div class="row">		
-								<div class="col-md-12 text-left">
-									<label for="Ordenamento">Cliente:</label>
-									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-											id="NomeCliente" name="NomeCliente">
+							<div class="row">	
+								<div class="col-md-6">
+									<label for="Ordenamento">Local de Compra</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+											id="Tipo_Orca" name="Tipo_Orca">
 										<?php
-										foreach ($select['NomeCliente'] as $key => $row) {
-											if ($query['NomeCliente'] == $key) {
+										foreach ($select['Tipo_Orca'] as $key => $row) {
+											if ($query['Tipo_Orca'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>		
+								<div class="col-md-6 text-left">
+									<label for="Ordenamento">Associado:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="Associado" name="Associado">
+										<?php
+										foreach ($select['Associado'] as $key => $row) {
+											if ($query['Associado'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 											} else {
 												echo '<option value="' . $key . '">' . $row . '</option>';
@@ -61,6 +110,7 @@
 									</select>
 								</div>
 							</div>
+							<!--
 							<div class="row">	
 								<div class="col-md-12 text-left">
 									<label for="Ordenamento">Produtos:</label>
@@ -77,7 +127,8 @@
 										?>
 									</select>
 								</div>								
-							</div>							
+							</div>
+							-->
 						</div>		
 					</div>
 				</div>

@@ -1236,7 +1236,7 @@ class Relatorio extends CI_Controller {
 			'Associado',
 			'idSis_Usuario',
 			'DataVencimentoOrca',			
-			'NomeCliente',
+			//'NomeCliente',
 			'NomeFornecedor',
 			'Dia',
 			'Ano',
@@ -1287,7 +1287,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];
 		$_SESSION['FiltroAlteraParcela']['Orcarec'] = $data['query']['Orcarec'];
 		$_SESSION['FiltroAlteraParcela']['Orcades'] = $data['query']['Orcades'];
-		$_SESSION['FiltroAlteraParcela']['NomeCliente'] = $data['query']['NomeCliente'];
+		//$_SESSION['FiltroAlteraParcela']['NomeCliente'] = $data['query']['NomeCliente'];
 		$_SESSION['FiltroAlteraParcela']['Associado'] = $data['query']['Associado'];
 		$_SESSION['FiltroAlteraParcela']['NomeFornecedor'] = $data['query']['NomeFornecedor'];		
 		$_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
@@ -1388,7 +1388,7 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-		$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+		//$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
 		$data['select']['Associado'] = $this->Relatorio_model->select_usuario_associado();
 		$data['select']['NomeFornecedor'] = $this->Relatorio_model->select_fornecedor();
 		$data['select']['ObsOrca'] = $this->Relatorio_model->select_obsorca();
@@ -1413,7 +1413,7 @@ class Relatorio extends CI_Controller {
         if ($this->form_validation->run() !== FALSE) {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
-            $data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+            //$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
 			$data['bd']['Associado'] = $data['query']['Associado'];
             $data['bd']['TipoFinanceiroR'] = $data['query']['TipoFinanceiroR'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
@@ -3045,8 +3045,8 @@ class Relatorio extends CI_Controller {
 
         $data['select']['QuitadoOrca'] = array(
 			'0' => 'TODOS',            
-			'S' => 'Quitadas',
-            'N' => 'Não Quitadas',
+			'S' => 'Pago',
+            'N' => 'Não Pago',
         );
 
 		$data['select']['ConcluidoOrca'] = array(
@@ -3057,8 +3057,8 @@ class Relatorio extends CI_Controller {
 
 		$data['select']['Quitado'] = array(
 			'0' => 'TODAS',			
-			'S' => 'Pagas',
-			'N' => 'NÃO Pagas',
+			'S' => 'Quitada',
+			'N' => 'NÃO Quitada',
         );
 		
 		$data['select']['Modalidade'] = array(

@@ -11,10 +11,19 @@
 				<!--<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal11-sm">
 					<span class="glyphicon glyphicon-plus"></span>Rec.<?php #echo $titulo1; ?>
 				</button>-->			
-				<div class="btn-group">
+				<div class="btn-line">
 					<a type="button" class="btn btn-md btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-						<span class="glyphicon glyphicon-filter"></span> Filtrar Parcelas
+						<span class="glyphicon glyphicon-filter"></span> Filtrar
 					</a>
+					
+					<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
+						<span class="glyphicon glyphicon-print"></span> Impr.
+					</a>
+					<!--
+					<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . 'orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa']; ?>">
+						<span class="glyphicon glyphicon-pencil"></span> Editar
+					</a>
+					-->
 					<!--
 						<button type="button" class="btn btn-md btn-warning dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<span class="caret"></span>
@@ -38,12 +47,13 @@
 					</ul>
 					-->
 				</div>
+				<!--
 				<a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
 					<button type="button" class="btn btn-md btn-info">
 						<span class="glyphicon glyphicon-print"></span> Imprimir Filtro
 					</button>
 				</a>
-				
+				-->
 				<!--
 				<button  class="btn btn-sm btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 					<span class="glyphicon glyphicon-filter"></span>Filtrar receitas <?php #echo $titulo1; ?>

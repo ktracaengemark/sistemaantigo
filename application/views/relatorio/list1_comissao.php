@@ -21,31 +21,40 @@
 				<div>
 					<!--
 					<table class="table table-bordered table-condensed table-striped">
-						<tfoot>
+						<thead>
 							<tr>
 								<th colspan="3" class="active">Receitas: <?php echo $report->num_rows(); ?> resultado(s)</th>
 							</tr>
-						</tfoot>
+						</thead>
 					</table>
 					-->
 					<table class="table table-bordered table-condensed table-striped">
-						<!--
+						
 						<thead>
 							<tr>
-								<th colspan="4" class="active">Vendas: <?php echo $report->num_rows(); ?> resultado(s)</th>
-								<th colspan="4" class="active"> <?php echo $report->soma->quantidade ?> Produtos Vendidos</th>
-								<th colspan="1" class="active">Total: <?php echo $report->soma->somasubtotal ?> </th>
+								<th colspan="3" class="active"> <?php echo $report->num_rows(); ?> resultado(s)</th>
+								<th colspan="5" class="active"></th>
+								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somaorcamento ?> </th>
+								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somacomissao ?> </th>
+								<!--<th colspan="4" class="active"> <?php echo $report->soma->quantidade ?> Produtos Vendidos</th>
+								<th colspan="1" class="active">Total: <?php echo $report->soma->somasubtotal ?> </th>-->
 							</tr>
 						</thead>
-						-->
+						
 						<thead>						
 							<tr>
-								<!--<th class="active">EdtOrç</th>
-								<th class="active">Imp.</th>-->							
+								<!--<th class="active">EdtOrç</th>-->
+								<th class="active">Imp.</th>
+								<th class="active">Cont.</th>							
 								<th class="active">Orç.</th>
+								<th class="active">Compra</th>
 								<th class="active">Colaborador</th>
+								<th class="active">Associado</th>
 								<th class="active">Cliente</th>
-								<th class="active">Dt.Venc.</th>								
+								<th class="active">Dt.Venc.</th>
+								<th class="active">Receita</th>
+								<th class="active">Comissao</th>
+								<th class="active">Paga?</th>								
 								<!--<th class="active">Qtd</th>									
 								<th class="active">Produto</th>
 								<th class="active">Valor</th>
@@ -57,6 +66,7 @@
 						</thead>
 						<tbody>
 							<?php
+							$count = 1;
 							foreach ($report->result_array() as $row) {
 								echo '<tr>';
 								#echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">';
@@ -68,23 +78,29 @@
 										</td>';
 										
 									echo '<td class="notclickable">
-											<a class="btn btn-md btn-info notclickable" target="_blank" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
-												<span class="glyphicon glyphicon-print notclickable"></span>
-											</a>
-											
-										</td>';
-										
-									echo '<td class="notclickable">
 											<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
 												<span class="glyphicon glyphicon-print notclickable"></span>
 											</a>
 											
 										</td>';
 									*/	
+									echo '<td class="notclickable">
+											<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
+												<span class="glyphicon glyphicon-print notclickable"></span>
+											</a>
+											
+										</td>';
+										
+									echo '<td>' . $count . '</td>';
 									echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
+									echo '<td>' . $row['Tipo_Orca'] . '</td>';
 									echo '<td>' . $row['NomeColaborador'] . '</td>';
+									echo '<td>' . $row['Associado'] . '</td>';
 									echo '<td>' . $row['NomeCliente'] . '</td>';
-									echo '<td>' . $row['DataVencimentoOrca'] . '</td>';									
+									echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
+									echo '<td>' . $row['ValorRestanteOrca'] . '</td>';	
+									echo '<td>' . $row['ValorComissao'] . '</td>';	
+									echo '<td>' . $row['StatusComissaoOrca'] . '</td>';											
 									//echo '<td>' . $row['QtdProduto'] . '</td>';	
 									//echo '<td>' . $row['Produtos'] . '</td>';
 									//echo '<td class="text-right">' . $row['ValorProduto'] . '</td>';
@@ -101,19 +117,21 @@
 										</td>';	
 									*/	
 								echo '</tr>';
+								$count++;
 							}
 							?>
 						</tbody>
-						<!--
+						
 						<tfoot>
 							<tr>
-								<th colspan="4" class="active">Vendas: <?php echo $report->num_rows(); ?> resultado(s)</th>
-								<th colspan="2" class="active"> <?php echo $report->soma->quantidade ?> Produtos</th>
-								<th colspan="2" class="active text-right">Total: R$ <?php echo $report->soma->somasubtotal ?> </th>
-								<th colspan="2" class="active text-right">Comissao: R$ <?php echo $report->soma->somasubcomissao ?> </th>
+								<th colspan="3" class="active"> <?php echo $report->num_rows(); ?> resultado(s)</th>
+								<th colspan="5" class="active"></th>
+								<!--<th colspan="2" class="active"> <?php echo $report->soma->quantidade ?> Produtos</th>-->
+								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somaorcamento ?> </th>
+								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somacomissao ?> </th>
 							</tr>
 						</tfoot>
-						-->
+						
 					</table>
 				</div>
 			</div>
