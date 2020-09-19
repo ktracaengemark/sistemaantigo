@@ -88,24 +88,78 @@ class Pedidos2 extends CI_Controller {
             $data['bd']['Campo'] = $data['query']['Campo'];
 
             $data['report_combinar'] = $this->Pedidos_model->list_pedidos_combinar($data['bd'],TRUE);
-            $data['list_combinar'] = $this->load->view('pedidos/list_pedidos_combinar', $data, TRUE);
-			
             $data['report_pagonline'] = $this->Pedidos_model->list_pedidos_pagonline($data['bd'],TRUE);
-            $data['list_pagonline'] = $this->load->view('pedidos/list_pedidos_pagonline', $data, TRUE);
-			
             $data['report_producao'] = $this->Pedidos_model->list_pedidos_producao($data['bd'],TRUE);
-            $data['list_producao'] = $this->load->view('pedidos/list_pedidos_producao', $data, TRUE);
-			
             $data['report_envio'] = $this->Pedidos_model->list_pedidos_envio($data['bd'],TRUE);
-            $data['list_envio'] = $this->load->view('pedidos/list_pedidos_envio', $data, TRUE);
-			
             $data['report_entrega'] = $this->Pedidos_model->list_pedidos_entrega($data['bd'],TRUE);
-            $data['list_entrega'] = $this->load->view('pedidos/list_pedidos_entrega', $data, TRUE);
-			
             $data['report_pagamento'] = $this->Pedidos_model->list_pedidos_pagamento($data['bd'],TRUE);
-            $data['list_pagamento'] = $this->load->view('pedidos/list_pedidos_pagamento', $data, TRUE);
 			
-			
+            $data['list_combinar'] = $this->load->view('pedidos/list_pedidos_combinar', $data, TRUE);
+            $data['list_pagonline'] = $this->load->view('pedidos/list_pedidos_pagonline', $data, TRUE);
+            $data['list_producao'] = $this->load->view('pedidos/list_pedidos_producao', $data, TRUE);
+            $data['list_envio'] = $this->load->view('pedidos/list_pedidos_envio', $data, TRUE);
+            $data['list_entrega'] = $this->load->view('pedidos/list_pedidos_entrega', $data, TRUE);
+			$data['list_pagamento'] = $this->load->view('pedidos/list_pedidos_pagamento', $data, TRUE);
+
+			// Caso seja preciso, fiz essa mandada direta para a alteração de pedido ou status //
+			/*
+			if ($data['report_combinar']->num_rows() == 1) {
+				
+				$info = $data['report_combinar']->result_array();
+				
+				redirect('Orcatrata/alteraronline/' . $info[0]['idApp_OrcaTrata'] );
+
+				exit();
+				
+			} elseif ($data['report_pagonline']->num_rows() == 1){
+				
+				$info = $data['report_pagonline']->result_array();
+				
+				redirect('statuspedido/alterarstatus/' . $info[0]['idApp_OrcaTrata'] );
+
+				exit();
+				
+			} elseif ($data['report_producao']->num_rows() == 1){
+				
+				$info = $data['report_producao']->result_array();
+				
+				redirect('statuspedido/alterarstatus/' . $info[0]['idApp_OrcaTrata'] );
+
+				exit();	
+				
+			} elseif ($data['report_envio']->num_rows() == 1){
+				
+				$info = $data['report_envio']->result_array();
+				
+				redirect('statuspedido/alterarstatus/' . $info[0]['idApp_OrcaTrata'] );
+
+				exit();	
+				
+			} elseif ($data['report_entrega']->num_rows() == 1){
+				
+				$info = $data['report_entrega']->result_array();
+				
+				redirect('statuspedido/alterarstatus/' . $info[0]['idApp_OrcaTrata'] );
+
+				exit();	
+				
+			} elseif ($data['report_pagamento']->num_rows() == 1){
+				
+				$info = $data['report_pagamento']->result_array();
+				
+				redirect('statuspedido/alterarstatus/' . $info[0]['idApp_OrcaTrata'] );
+
+				exit();
+				
+			} else {
+				$data['list_combinar'] = $this->load->view('pedidos/list_pedidos_combinar', $data, TRUE);
+				$data['list_pagonline'] = $this->load->view('pedidos/list_pedidos_pagonline', $data, TRUE);
+				$data['list_producao'] = $this->load->view('pedidos/list_pedidos_producao', $data, TRUE);
+				$data['list_envio'] = $this->load->view('pedidos/list_pedidos_envio', $data, TRUE);
+				$data['list_entrega'] = $this->load->view('pedidos/list_pedidos_entrega', $data, TRUE);
+				$data['list_pagamento'] = $this->load->view('pedidos/list_pedidos_pagamento', $data, TRUE);
+			}
+			*/
         }
 
         $this->load->view('pedidos/tela_pedidos', $data);
