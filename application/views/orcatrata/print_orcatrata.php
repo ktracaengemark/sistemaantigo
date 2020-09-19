@@ -220,9 +220,8 @@
 						<?php } else echo '<h3 class="text-left">S/Serviços</h3>';{?>
 						<?php } ?>							
 						<?php } ?>
-						
-						
-						<h3 class="text-left"><b>Entrega</b></h3>
+												
+						<h3 class="text-left"><b>Entrega</b>: <?php echo '<strong>' . $query['idApp_OrcaTrata'] . '</strong>' ?> - <b> Cliente:</b> <?php echo '' . $cliente['NomeCliente'] . '' ?> </h3><h4>Tel: <?php echo '' . $cliente['CelularCliente'] . '' ?> - id: <?php echo '' . $cliente['idApp_Cliente'] . '' ?></h4>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
