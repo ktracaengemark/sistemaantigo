@@ -217,6 +217,17 @@
 													
 													}
 													
+													if ($query['CepCliente']) {
+														
+													echo '                                                 
+													<tr>
+														<td><span class="glyphicon glyphicon-envelope"></span> Cep:</td>
+														<td>' . $query['CepCliente'] . '</td>
+													</tr>
+													';
+													
+													}
+													
 													if ($query['EnderecoCliente'] || $query['BairroCliente'] || $query['MunicipioCliente']) {
 														
 													echo '                                                 
@@ -228,12 +239,12 @@
 													
 													}
 													
-													if ($query['CepCliente']) {
+													if ($query['ReferenciaCliente']) {
 														
 													echo '                                                 
 													<tr>
-														<td><span class="glyphicon glyphicon-envelope"></span> Cep:</td>
-														<td>' . $query['CepCliente'] . '</td>
+														<td><span class="glyphicon glyphicon-pencil"></span> Ref.:</td>
+														<td>' . $query['ReferenciaCliente'] . '</td>
 													</tr>
 													';
 													

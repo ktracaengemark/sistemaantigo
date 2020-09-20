@@ -7228,7 +7228,6 @@ class Orcatrata extends CI_Controller {
         $this->load->view('basico/footer');
 
     }
-
 	
     public function alterarparcelarec($id = FALSE) {
 

@@ -1319,26 +1319,26 @@ class Relatorio extends CI_Controller {
 		
         $data['select']['AprovadoOrca'] = array(
             '0' => 'TODOS',
-			'N' => 'Não',
-			'S' => 'Sim',
+			'N' => 'Não Aprovado',
+			'S' => 'Aprovado',
         );
 
         $data['select']['QuitadoOrca'] = array(
             '0' => 'TODOS',
-            'N' => 'Não',
-            'S' => 'Sim',
+            'N' => 'Não Pago',
+            'S' => 'Pago',
         );
 
 		$data['select']['ConcluidoOrca'] = array(
             '0' => 'TODOS',
-            'N' => 'Não',
-            'S' => 'Sim',
+            'N' => 'Não Entregue',
+            'S' => 'Entregue',
         );
 
 		$data['select']['Quitado'] = array(
 			'0' => 'TODOS',
-			'N' => 'Não',
-            'S' => 'Sim',
+			'N' => 'Não Quitado',
+            'S' => 'Quitado',
         );
 
 		$data['select']['ConcluidoProduto'] = array(

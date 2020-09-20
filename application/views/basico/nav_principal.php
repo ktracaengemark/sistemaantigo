@@ -78,13 +78,13 @@
 						<ul class="dropdown-menu" role="menu">
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/cadastrar3"><span class="glyphicon glyphicon-plus"></span> Nova Receita / Venda</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>pedidos/pedidos"><span class="glyphicon glyphicon-edit"></span> Status dos Pedidos</a></li>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>pedidos/pedidos"><span class="glyphicon glyphicon-edit"></span> Gestor dos Pedidos</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>cliente/pesquisar"><span class="glyphicon glyphicon-user"></span> Clientes</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/orcamento"><span class="glyphicon glyphicon-pencil"></span> Relatorio de Receitas</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasrec"><span class="glyphicon glyphicon-pencil"></span> Parcelas/Cobranças</a></li>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasrec"><span class="glyphicon glyphicon-pencil"></span> Relatório de Cobranças</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/rankingformapag"><span class="glyphicon glyphicon-pencil"></span> Ranking de Pagamento</a></li>
 							<li role="separator" class="divider"></li>
