@@ -228,12 +228,23 @@
 													
 													}
 													
-													if ($query['EnderecoCliente'] || $query['BairroCliente'] || $query['MunicipioCliente']) {
+													if ($query['EnderecoCliente'] || 
+														$query['NumeroCliente'] ||  
+														$query['ComplementoCliente'] ||  
+														$query['BairroCliente'] ||   
+														$query['MunicipioCliente'] ||
+														$query['EstadoCliente']) {
 														
 													echo '                                                 
 													<tr>
-														<td><span class="glyphicon glyphicon-home"></span> Endereço:</td>
-														<td>' . $query['EnderecoCliente'] . ' - ' . $query['BairroCliente'] . ' - ' . $query['MunicipioCliente'] . '</td>
+														<td><span class="glyphicon glyphicon-home"></span>Endereço:</td>
+														<td>' . $query['EnderecoCliente'] . 
+															' - ' . $query['NumeroCliente'] .
+															' - ' . $query['ComplementoCliente'] .
+															' - ' . $query['BairroCliente'] . 
+															' - ' . $query['MunicipioCliente'] . 
+															' - ' . $query['EstadoCliente'] .
+															'</td>
 													</tr>
 													';
 													

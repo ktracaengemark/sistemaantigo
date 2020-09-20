@@ -274,23 +274,45 @@
 													
 													}
 													
-													if ($query['EnderecoCliente'] || $query['BairroCliente'] || $query['MunicipioCliente']) {
-														
-													echo '                                                 
-													<tr>
-														<td><span class="glyphicon glyphicon-home"></span> Endereço:</td>
-														<td>' . $query['EnderecoCliente'] . ' - ' . $query['BairroCliente'] . ' - ' . $query['MunicipioCliente'] . '</td>
-													</tr>
-													';
-													
-													}
-													
 													if ($query['CepCliente']) {
 														
 													echo '                                                 
 													<tr>
 														<td><span class="glyphicon glyphicon-envelope"></span> Cep:</td>
 														<td>' . $query['CepCliente'] . '</td>
+													</tr>
+													';
+													
+													}
+													
+													if ($query['EnderecoCliente'] || 
+														$query['NumeroCliente'] ||  
+														$query['ComplementoCliente'] ||  
+														$query['BairroCliente'] ||   
+														$query['MunicipioCliente'] ||
+														$query['EstadoCliente']) {
+														
+													echo '                                                 
+													<tr>
+														<td><span class="glyphicon glyphicon-home"></span>Endereço:</td>
+														<td>' . $query['EnderecoCliente'] . 
+															' - ' . $query['NumeroCliente'] .
+															' - ' . $query['ComplementoCliente'] .
+															' - ' . $query['BairroCliente'] . 
+															' - ' . $query['MunicipioCliente'] . 
+															' - ' . $query['EstadoCliente'] .
+															'</td>
+													</tr>
+													';
+													
+													}
+													
+													if ($query['ReferenciaCliente']) {
+														
+													echo '                                                 
+													<tr>
+														<td><span class="glyphicon glyphicon-pencil"></span> Ref.:</td>
+														<td>' . $query['ReferenciaCliente'] . '</td>
 													</tr>
 													';
 													

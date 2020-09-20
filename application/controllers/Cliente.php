@@ -1051,7 +1051,7 @@ class Cliente extends CI_Controller {
 		$data['query']['idSis_Empresa'] = $this->Basico_model->get_empresa($data['query']['idSis_Empresa']);
 		$data['query']['Profissional'] = $this->Basico_model->get_profissional($data['query']['Profissional']);
 		
-        $data['query']['Telefone'] = $data['query']['CelularCliente'];
+        $data['query']['Telefone'] = $data['query']['CelularCliente'] . ' - ' . $data['query']['Telefone'];
         ($data['query']['Telefone2']) ? $data['query']['Telefone'] = $data['query']['Telefone'] . ' - ' . $data['query']['Telefone2'] : FALSE;
         ($data['query']['Telefone3']) ? $data['query']['Telefone'] = $data['query']['Telefone'] . ' - ' . $data['query']['Telefone3'] : FALSE;
 
