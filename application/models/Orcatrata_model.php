@@ -327,6 +327,13 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 		
+    public function get_produto_posterior($data) {
+		$query = $this->db->query('SELECT * FROM App_Produto WHERE idApp_OrcaTrata = ' . $data . ' AND ConcluidoProduto = "N"');
+        $query = $query->result_array();
+
+        return $query;
+    }
+
     public function get_produto_bkp($data) {
 		$query = $this->db->query('
 			SELECT * 
@@ -406,6 +413,13 @@ class Orcatrata_model extends CI_Model {
 
         return $query;
     }
+	
+    public function get_parcelas_posterior($data) {
+		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data . ' AND Quitado = "N"');
+        $query = $query->result_array();
+
+        return $query;
+    }	
 
     public function get_parcelas_baixa($data) {
 		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data);

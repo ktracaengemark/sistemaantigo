@@ -3111,7 +3111,7 @@ class Orcatrata extends CI_Controller {
 				$dias = floor($intervalo / (60 * 60 * 24));
 				$data['orcatrata']['PrazoEntrega'] = $dias;
 			}
-			
+			/*
             $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
             $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
             $data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
@@ -3120,7 +3120,7 @@ class Orcatrata extends CI_Controller {
                 $data['update']['orcatrata']['campos'],
                 $data['orcatrata']['idApp_OrcaTrata'], TRUE);
             $data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);
-
+			*/
             
 			#### APP_Cliente ####
 			if ($data['cadastrar']['AtualizaEndereco'] == 'S'){
@@ -3300,6 +3300,29 @@ class Orcatrata extends CI_Controller {
                     $data['update']['produto']['bd']['excluir'] = $this->Orcatrata_model->delete_produto($data['update']['produto']['excluir']);
 
             }
+			
+			$data['update']['produto']['posterior'] = $this->Orcatrata_model->get_produto_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['produto']['posterior'])){
+				$max_produto = count($data['update']['produto']['posterior']);
+				if($max_produto == 0){
+					$data['orcatrata']['ConcluidoOrca'] = "S";
+					$data['orcatrata']['ProntoOrca'] = "S";
+					$data['orcatrata']['EnviadoOrca'] = "S";
+					$data['orcatrata']['CombinadoFrete'] = "S";
+				}else{
+					$data['orcatrata']['ConcluidoOrca'] = "N";
+				}
+				/*
+				$data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
+				$data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
+				$data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
+					$data['update']['orcatrata']['anterior'],
+					$data['orcatrata'],
+					$data['update']['orcatrata']['campos'],
+					$data['orcatrata']['idApp_OrcaTrata'], TRUE);
+				$data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);
+				*/
+			}
 
             #### App_ParcelasRec ####
             $data['update']['parcelasrec']['anterior'] = $this->Orcatrata_model->get_parcelas($data['orcatrata']['idApp_OrcaTrata']);
@@ -3364,6 +3387,25 @@ class Orcatrata extends CI_Controller {
 
             }
 			
+			$data['update']['parcelasrec']['posterior'] = $this->Orcatrata_model->get_parcelas_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['parcelasrec']['posterior'])){
+				$max_parcela = count($data['update']['parcelasrec']['posterior']);
+				if($max_parcela == 0){
+					$data['orcatrata']['QuitadoOrca'] = "S";				
+				}else{
+					$data['orcatrata']['QuitadoOrca'] = "N";
+				}
+				/*
+				$data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
+				$data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
+				$data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
+					$data['update']['orcatrata']['anterior'],
+					$data['orcatrata'],
+					$data['update']['orcatrata']['campos'],
+					$data['orcatrata']['idApp_OrcaTrata'], TRUE);
+				$data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);
+				*/
+			}
             #### App_Procedimento ####
             $data['update']['procedimento']['anterior'] = $this->Orcatrata_model->get_procedimento($data['orcatrata']['idApp_OrcaTrata']);
             if (isset($data['procedimento']) || (!isset($data['procedimento']) && isset($data['update']['procedimento']['anterior']) ) ) {
@@ -3404,6 +3446,15 @@ class Orcatrata extends CI_Controller {
                     $data['update']['procedimento']['bd']['excluir'] = $this->Orcatrata_model->delete_procedimento($data['update']['procedimento']['excluir']);
 
             }
+			
+			$data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
+			$data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
+			$data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
+				$data['update']['orcatrata']['anterior'],
+				$data['orcatrata'],
+				$data['update']['orcatrata']['campos'],
+				$data['orcatrata']['idApp_OrcaTrata'], TRUE);
+			$data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);			
 
 /*
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
