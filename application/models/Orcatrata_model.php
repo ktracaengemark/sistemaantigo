@@ -118,6 +118,28 @@ class Orcatrata_model extends CI_Model {
 
         return $query[0];
     }
+
+    public function get_orcatrata_baixa($data) {
+        $query = $this->db->query('
+			SELECT * 
+			FROM 
+				App_OrcaTrata
+			WHERE 
+				idApp_OrcaTrata = ' . $data . '
+		');
+        $query = $query->result_array();
+		
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query[0];
+    }
 	
     public function get_orcatrata2($data) {
         $query = $this->db->query('
@@ -292,6 +314,19 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 
+    public function get_produto_baixa($data) {
+		$query = $this->db->query('
+			SELECT *
+			FROM 
+				App_Produto
+			WHERE 
+				idApp_OrcaTrata = ' . $data . '
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }
+		
     public function get_produto_bkp($data) {
 		$query = $this->db->query('
 			SELECT * 
@@ -372,15 +407,22 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 
+    public function get_parcelas_baixa($data) {
+		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data);
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
     public function get_baixadacomissao($data) {
 
         if ($_SESSION['FiltroAlteraParcela']['DataFim']) {
             $consulta =
-                '(PR.DataVencimentoOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND PR.DataVencimentoOrca <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND OT.DataVencimentoOrca <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '")';
         }
         else {
             $consulta =
-                '(PR.DataVencimentoOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '")';
         }		
 		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		//$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
@@ -425,7 +467,8 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao10 . '
 				' . $permissao11 . '
 				OT.idSis_Empresa = ' . $data . ' AND
-				OT.idTab_TipoRD = "2" 
+				OT.idTab_TipoRD = "2" AND
+				' . $consulta . '
 			ORDER BY
 				OT.DataVencimentoOrca,
 				OT.idApp_OrcaTrata  

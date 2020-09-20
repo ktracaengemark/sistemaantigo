@@ -4634,6 +4634,177 @@ class Relatorio extends CI_Controller {
 
     }
 
+    public function baixadopedido() {
+	
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = quotes_to_entities($this->input->post(array(
+            'Orcamento',
+            'DataInicio',
+            'DataFim',
+			'DataInicio',
+            'DataFim2',
+			'DataInicio2',
+            'DataFim3',
+			'DataInicio3',
+			'DataFim4',
+			'DataInicio4',
+            'Ordenamento',
+            'Campo',
+            'AprovadoOrca',
+            'QuitadoOrca',
+			'ConcluidoOrca',
+			'FinalizadoOrca',
+			'CanceladoOrca',
+			'FormaPag',
+			'AVAP',
+			'TipoFrete',
+			'Tipo_Orca',
+			'Entregador',
+
+        ), TRUE));
+		/*
+		if (!$data['query']['DataInicio'])
+           $data['query']['DataInicio'] = '01/01/2017';
+		*/
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+        $this->form_validation->set_rules('DataInicio', 'Data Início do Orçamento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim', 'Data Fim do Orçamento', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio2', 'Data Início da Entrega', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim2', 'Data Fim da Entrega', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio3', 'Data Início do Vencimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim3', 'Data Fim do Vencimento', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio4', 'Data Início do Quitado', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim4', 'Data Fim do Quitado', 'trim|valid_date');
+
+
+        $data['select']['AprovadoOrca'] = array(
+            '#' => 'TODOS',
+            'N' => 'Não',
+            'S' => 'Sim',
+        );
+
+        $data['select']['QuitadoOrca'] = array(
+            '#' => 'TODOS',
+            'N' => 'Não',
+            'S' => 'Sim',
+        );
+
+		$data['select']['ConcluidoOrca'] = array(
+            '#' => 'TODOS',
+            'N' => 'Não',
+            'S' => 'Sim',
+        );
+
+		$data['select']['FinalizadoOrca'] = array(
+            '#' => 'TODOS',
+            'N' => 'Não',
+            'S' => 'Sim',
+        );
+
+		$data['select']['CanceladoOrca'] = array(
+            '#' => 'TODOS',
+            'N' => 'Não',
+            'S' => 'Sim',
+        );
+
+		$data['select']['AVAP'] = array(
+            '#' => '::TODOS::',
+            'V' => 'Na Loja',
+            'O' => 'On Line',
+            'P' => 'Na Entrega',
+        );
+
+		$data['select']['Tipo_Orca'] = array(
+            '#' => '::TODOS::',
+            'B' => 'Na Loja',
+            'O' => 'On Line',
+        );
+
+        $data['select']['Campo'] = array(
+            'OT.idApp_OrcaTrata' => 'Número do Orçamento',
+            'OT.AprovadoOrca' => 'Orçamento Aprovado?',
+            'OT.ConcluidoOrca' => 'Entregue?',
+            'OT.QuitadoOrca' => 'Pago?',
+            'OT.FinalizadoOrca' => 'Finalizado?',
+			'OT.CanceladoOrca' => 'Cancelado?',
+			'OT.DataOrca' => 'Data do Orçamento',
+			'OT.DataEntregaOrca' => 'Data da Entrega',
+            'OT.ValorRestanteOrca' => 'Valor Orçam',
+			'OT.ValorFrete' => 'Valor Frete',
+			'OT.ValorTotalOrca' => 'Valor Total',
+			'OT.FormaPag' => 'Forma de Pagam.?',
+			'OT.TipoFrete' => 'Forma de Entrega?',
+			'OT.ProfissionalOrca' => 'Profissional',
+        );
+
+        $data['select']['Ordenamento'] = array(
+            'ASC' => 'Crescente',
+            'DESC' => 'Decrescente',
+        );
+
+
+		$data['select']['Entregador'] = $this->Relatorio_model->select_usuario();
+		$data['select']['FormaPag'] = $this->Relatorio_model->select_formapag();
+		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
+		
+        $data['titulo'] = 'Receitas';
+
+        #run form validation
+        if ($this->form_validation->run() !== FALSE) {
+
+            #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
+            $data['bd']['Orcamento'] = $data['query']['Orcamento'];
+			$data['bd']['Entregador'] = $data['query']['Entregador'];
+			$data['bd']['FormaPag'] = $data['query']['FormaPag'];
+			$data['bd']['TipoFrete'] = $data['query']['TipoFrete'];
+            $data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+            $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
+            $data['bd']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
+			$data['bd']['DataInicio3'] = $this->basico->mascara_data($data['query']['DataInicio3'], 'mysql');
+            $data['bd']['DataFim3'] = $this->basico->mascara_data($data['query']['DataFim3'], 'mysql');
+			$data['bd']['DataInicio4'] = $this->basico->mascara_data($data['query']['DataInicio4'], 'mysql');
+            $data['bd']['DataFim4'] = $this->basico->mascara_data($data['query']['DataFim4'], 'mysql');
+
+            $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+            $data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
+            $data['bd']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
+			$data['bd']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
+			$data['bd']['FinalizadoOrca'] = $data['query']['FinalizadoOrca'];
+			$data['bd']['CanceladoOrca'] = $data['query']['CanceladoOrca'];
+			$data['bd']['AVAP'] = $data['query']['AVAP'];
+			$data['bd']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
+			
+            $data['report'] = $this->Relatorio_model->list_baixadopedido($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list'] = $this->load->view('relatorio/list_baixadopedido', $data, TRUE);
+            //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+        }
+
+        $this->load->view('relatorio/tela_baixadopedido', $data);
+
+        $this->load->view('basico/footer');
+
+
+
+    }
+	
+	
     public function orcamento2() {
 
         if ($this->input->get('m') == 1)

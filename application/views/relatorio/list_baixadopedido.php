@@ -62,6 +62,7 @@
 							<th class="active">Dt. Venc.</th>
 							<!--<th class="active">Obs.</th>
 							<th class="active">Entregador</th>-->
+							<th class="active">Baixa</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -77,7 +78,7 @@
 											<span class="glyphicon glyphicon-print notclickable"></span>
 										</a>
 									</td>';
-									
+								
 								echo '<td>' . $row['NomeCliente'] . '</td>';
 								echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 								echo '<td>' . $row['Tipo_Orca'] . '</td>';
@@ -99,6 +100,19 @@
 								#echo '<td>' . $row['Descricao'] . '</td>';
 								#echo '<td>' . $row['Nome'] . '</td>';
 								#echo '</div>';
+								if($row['QuitadoOrca'] == "Sim"){
+									echo '<td class="notclickable">
+											<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'orcatrata/baixadopedido/' . $row['idApp_OrcaTrata'] . '">
+												<span class="glyphicon glyphicon-ok notclickable"></span>
+											</a>
+										</td>';
+								}else{
+									echo '<td class="notclickable">
+											<a class="btn btn-md btn-info notclickable">
+												<span class="glyphicon glyphicon-ok notclickable"></span>
+											</a>
+										</td>';
+								}
 							echo '</tr>';
 						}
 						?>

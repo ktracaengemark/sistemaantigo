@@ -11,16 +11,19 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span> 
 					</button>
+					<!--
 					<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/cadastrar3/'; ?>">
 						<span class="glyphicon glyphicon-plus"></span> Novo
 					</a>
+					-->
 					<a class="navbar-brand" href="<?php echo base_url() . 'statuspedido/alterarstatus/' . $query['idApp_OrcaTrata']; ?>">
-						<span class="glyphicon glyphicon-edit"></span> Atualizar Status										
+						<span class="glyphicon glyphicon-edit"></span> Atualizar Status	"<?php echo $query['Tipo_Orca'];?>"									
 					</a>
+					<!--
 					<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterar2/' . $query['idApp_OrcaTrata']; ?>">
 						<span class="glyphicon glyphicon-edit"></span> Editar Pedido "<?php echo $query['Tipo_Orca'];?>"										
 					</a>
-					<!--
+					
 					<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $cliente['idApp_Cliente']; ?>">
 						<?php echo '<small>' . $cliente['idApp_Cliente'] . '</small> - <small>' . $cliente['NomeCliente'] . '.</small>' ?> 
 					</a>

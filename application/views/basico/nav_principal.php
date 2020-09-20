@@ -86,6 +86,8 @@
 							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasrec"><span class="glyphicon glyphicon-pencil"></span> Relatório de Cobranças</a></li>
 							<li role="separator" class="divider"></li>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/baixadopedido"><span class="glyphicon glyphicon-pencil"></span> Relatório de Baixa de Pedidos</a></li>
+							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/rankingformapag"><span class="glyphicon glyphicon-pencil"></span> Ranking de Pagamento</a></li>
 							<li role="separator" class="divider"></li>
 							<?php if ($_SESSION['log']['idSis_Empresa'] == 5 ) { ?>
