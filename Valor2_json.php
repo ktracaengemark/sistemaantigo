@@ -20,6 +20,7 @@ $result = mysql_query(
 			T.Cod_Prod,
 			T.Comissao,
 			T.Valor_Produto,
+			T.Prod_Serv,
 			TOP2.Opcao,
 			TOP1.Opcao,
 			CONCAT(IFNULL(T.Nome_Prod,"")," - ",IFNULL(TOP1.Opcao,"")," - ",IFNULL(TOP2.Opcao,"")) AS NomeProduto
@@ -42,6 +43,7 @@ if ($_GET['tabela']) {
 			'comissaoprod' => str_replace(".", ",", $row['Comissao']),
 			'nomeprod' => $row['NomeProduto'],
 			'id_produto' => $row['idTab_Produtos'],
+			'prod_serv' => $row['Prod_Serv'],
         );
     }
 }
@@ -55,6 +57,7 @@ else {
 			'comissaoprod' => str_replace(".", ",", $row['Comissao']),
 			'nomeprod' => $row['NomeProduto'],
 			'id_produto' => $row['idTab_Produtos'],
+			'prod_serv' => $row['Prod_Serv'],
         );
     }
 

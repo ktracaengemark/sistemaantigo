@@ -143,25 +143,6 @@
 																		?>
 																	</select>
 																</div>
-																<div class="col-md-2">
-																	<label for="ProfissionalProduto<?php echo $i ?>">Profissional</label>
-																	<?php if ($i == 1) { ?>
-																	<?php } ?>
-																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-																			 id="listadinamica_prof_prod<?php echo $i ?>" name="ProfissionalProduto<?php echo $i ?>">
-																		<option value="">-- Sel.Profis. --</option>
-																		<?php
-																		foreach ($select['ProfissionalProduto'] as $key => $row) {
-																			(!$produto['ProfissionalProduto']) ? $produto['ProfissionalProduto'] = $_SESSION['log']['ProfissionalProduto']: FALSE;
-																			if ($produto[$i]['ProfissionalProduto'] == $key) {
-																				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																			} else {
-																				echo '<option value="' . $key . '">' . $row . '</option>';
-																			}
-																		}
-																		?>
-																	</select>
-																</div>
 																<div class="col-md-2 text-left">
 																	<label for="ConcluidoProduto">Entregue? </label><br>
 																	<div class="btn-group" data-toggle="buttons">

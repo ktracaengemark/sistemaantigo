@@ -3467,6 +3467,7 @@ function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
 					//""ou posso usar assim, passando diretamente o qtdinc do id ""
 					$('#Nome'+campo2+num).val(data[i].nomeprod);
 					$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
+					$('#Prod_Serv_'+campo2+num).val(data[i].prod_serv);
 					$('#Comissao'+campo2+num).val(data[i].comissaoprod);
 					//console.log( data[i].id_produto );
 				

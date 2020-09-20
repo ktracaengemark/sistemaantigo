@@ -367,6 +367,7 @@ class Orcatrata_model extends CI_Model {
 				TAP.idTab_Produto,
 				TAP.idTab_Valor_Produto,
 				TAP.idTab_Produtos_Produto,
+				TAP.Prod_Serv_Produto,
 				TAP.NomeProduto,
 				TAP.ValorProduto,
 				TAP.QtdProduto,

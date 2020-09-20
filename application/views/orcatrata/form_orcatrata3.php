@@ -1514,7 +1514,7 @@
 														</div>
 														<div class="row">		
 															<div class="col-md-12 text-right">
-																<label class="col-md-6"></label><label class="col-md-6 text-left" for="QuitadoOrca">Pago?</label><br>
+																<label for="QuitadoOrca">Prds.Pagos?</label><br>
 																<div class="btn-group" data-toggle="buttons">
 																	<?php
 																	foreach ($select['QuitadoOrca'] as $key => $row) {
