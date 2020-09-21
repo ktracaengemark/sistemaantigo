@@ -1259,7 +1259,7 @@ class Relatorio extends CI_Controller {
 			'Modalidade',
 			'AVAP',
 			'Tipo_Orca',
-			'FormaPag',
+			'FormaPagamento',
 			'Orcarec',
 			'Orcades',
 			'Produtos',
@@ -1299,6 +1299,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
 		$_SESSION['FiltroAlteraParcela']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
 		$_SESSION['FiltroAlteraParcela']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
+		$_SESSION['FiltroAlteraParcela']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
 		$_SESSION['FiltroAlteraParcela']['StatusComissaoOrca'] = $data['query']['StatusComissaoOrca'];
 		$_SESSION['FiltroAlteraParcela']['ConcluidoProduto'] = $data['query']['ConcluidoProduto'];
 		$_SESSION['FiltroAlteraParcela']['DevolvidoProduto'] = $data['query']['DevolvidoProduto'];
@@ -1366,14 +1367,14 @@ class Relatorio extends CI_Controller {
         );
 		
 		$data['select']['AVAP'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'V' => 'Na Loja',
 			'O' => 'On Line',
             'P' => 'Na Entrega',
         );
 		
 		$data['select']['Tipo_Orca'] = array(
-            '#' => 'TODOS',
+            '0' => 'TODOS',
             'B' => 'Na Loja',
 			'O' => 'On Line',
         );
@@ -1406,7 +1407,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Mespag'] = $this->Relatorio_model->select_mes();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
 		$data['select']['Ano'] = $this->Relatorio_model->select_ano();
-		$data['select']['FormaPag'] = $this->Relatorio_model->select_formapag();
+		$data['select']['FormaPagamento'] = $this->Relatorio_model->select_formapag();
 		$data['select']['Orcarec'] = $this->Relatorio_model->select_orcarec();
 		$data['select']['Orcades'] = $this->Relatorio_model->select_orcades();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
@@ -1443,7 +1444,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Modalidade'] = $data['query']['Modalidade'];
 			$data['bd']['AVAP'] = $data['query']['AVAP'];
 			$data['bd']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
-			$data['bd']['FormaPag'] = $data['query']['FormaPag'];
+			$data['bd']['FormaPagamento'] = $data['query']['FormaPagamento'];
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
