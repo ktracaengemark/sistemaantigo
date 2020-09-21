@@ -4754,7 +4754,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['FormaPag'] = $this->Relatorio_model->select_formapag();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
 		
-        $data['titulo'] = 'Receitas';
+        $data['titulo'] = 'Baixa do Pedido';
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {

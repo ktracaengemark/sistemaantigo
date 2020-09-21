@@ -100,19 +100,27 @@
 								#echo '<td>' . $row['Descricao'] . '</td>';
 								#echo '<td>' . $row['Nome'] . '</td>';
 								#echo '</div>';
-								if($row['QuitadoOrca'] == "Sim"){
-									echo '<td class="notclickable">
-											<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'orcatrata/baixadopedido/' . $row['idApp_OrcaTrata'] . '">
-												<span class="glyphicon glyphicon-ok notclickable"></span>
-											</a>
-										</td>';
+								if($row['AprovadoOrca'] == "Sim"){	
+									if($row['QuitadoOrca'] == "Sim"){
+										echo '<td class="notclickable">
+												<a class="btn btn-md btn-danger notclickable">
+													<span class="glyphicon glyphicon-ok notclickable"></span>
+												</a>
+											</td>';
+									}else{
+										echo '<td class="notclickable">
+												<a class="btn btn-md btn-success notclickable" href="' . base_url() . 'orcatrata/baixadopedido/' . $row['idApp_OrcaTrata'] . '">
+													<span class="glyphicon glyphicon-ok notclickable"></span>
+												</a>
+											</td>';
+									}
 								}else{
 									echo '<td class="notclickable">
-											<a class="btn btn-md btn-info notclickable">
-												<span class="glyphicon glyphicon-ok notclickable"></span>
-											</a>
-										</td>';
-								}
+												<a class="btn btn-md btn-danger notclickable">
+													<span class="glyphicon glyphicon-ok notclickable"></span>
+												</a>
+											</td>';
+								}	
 							echo '</tr>';
 						}
 						?>

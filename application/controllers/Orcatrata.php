@@ -3584,7 +3584,7 @@ class Orcatrata extends CI_Controller {
 
         #### App_OrcaTrata ####
 		
-        $data['titulo'] = 'Pedido';
+        $data['titulo'] = 'Baixa do Pedido';
         $data['form_open_path'] = 'orcatrata/baixadopedido';
         $data['readonly'] = '';
         $data['disabled'] = '';

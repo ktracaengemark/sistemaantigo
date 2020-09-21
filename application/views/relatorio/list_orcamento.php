@@ -60,6 +60,7 @@
 							<th class="active">Dt. Orç.</th>
 							<th class="active">Dt. Ent.</th>
 							<th class="active">Dt. Venc.</th>
+							<th class="active">Editar</th>
 							<!--<th class="active">Obs.</th>
 							<th class="active">Entregador</th>-->
 						</tr>
@@ -99,6 +100,11 @@
 								#echo '<td>' . $row['Descricao'] . '</td>';
 								#echo '<td>' . $row['Nome'] . '</td>';
 								#echo '</div>';
+								echo '<td class="notclickable">
+										<a class="btn btn-md btn-warning notclickable" href="' . base_url() . 'statuspedido/alterarstatus/' . $row['idApp_OrcaTrata'] . '">
+											<span class="glyphicon glyphicon-edit notclickable"></span>
+										</a>
+									</td>';
 							echo '</tr>';
 						}
 						?>
