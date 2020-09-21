@@ -1927,7 +1927,8 @@ class Relatorio_model extends CI_Model {
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . '
 			ORDER BY
-				' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
+				PR.DataVencimento ASC,
+				OT.idApp_OrcaTrata ASC
 		');
 
         ####################################################################

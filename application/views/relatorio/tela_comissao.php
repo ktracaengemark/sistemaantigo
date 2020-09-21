@@ -6,6 +6,7 @@
 	<div class="panel panel-info">
 		<div class="panel-heading">
 			<?php echo form_open('relatorio/comissao', 'role="form"'); ?>
+			<h4>Comissões</h4>
 			<!--
 			<div class="btn-group">
 				<a type="button" class="btn btn-md btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">

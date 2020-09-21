@@ -7,7 +7,7 @@
 
 		<div class="panel-heading">
 			<?php echo form_open('relatorio/parcelasrec', 'role="form"'); ?>
-
+				<h4>Cobranças</h4>
 				<!--<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal11-sm">
 					<span class="glyphicon glyphicon-plus"></span>Rec.<?php #echo $titulo1; ?>
 				</button>-->			
@@ -291,7 +291,7 @@
 									</div>
 									<div class="row">
 										<div class="col-md-4 text-left">
-											<label for="DataInicio">De: "Data Início"</label>
+											<label for="DataInicio">"Venc.Parc. Início"</label>
 											<div class="input-group DatePicker">
 												<span class="input-group-addon" disabled>
 													<span class="glyphicon glyphicon-calendar"></span>
@@ -302,7 +302,7 @@
 											</div>
 										</div>
 										<div class="col-md-4 text-left">
-											<label for="DataFim">Até: "Data Fim"</label>
+											<label for="DataFim">"Venc.Parc. Fim"</label>
 											<div class="input-group DatePicker">
 												<span class="input-group-addon" disabled>
 													<span class="glyphicon glyphicon-calendar"></span>
