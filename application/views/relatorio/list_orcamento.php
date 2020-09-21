@@ -42,9 +42,11 @@
 					<thead>
 						<tr>
 							<th class="active">Print</th>
+							<th class="active">Editar</th>
 							<th class="active">Cliente</th>
 							<th class="active">Pedido</th>
 							<th class="active">Compra</th>
+							<th class="active">Loc.Pag.</th>
 							<!--<th class="active">Valid. do Orçam.</th>
 							<th class="active">Prazo de Entrega</th>-->
 							<th class="active">Orç.</th>
@@ -55,12 +57,11 @@
 							<th class="active">Pago?</th>
 							<th class="active">Cancel?</th>
 							<th class="active">Final?</th>
-							<th class="active">Pagamento</th>
+							<th class="active">Form.Pag.</th>
 							<th class="active">Entrega</th>
 							<th class="active">Dt. Orç.</th>
 							<th class="active">Dt. Ent.</th>
 							<th class="active">Dt. Venc.</th>
-							<th class="active">Editar</th>
 							<!--<th class="active">Obs.</th>
 							<th class="active">Entregador</th>-->
 						</tr>
@@ -78,10 +79,15 @@
 											<span class="glyphicon glyphicon-print notclickable"></span>
 										</a>
 									</td>';
-									
+								echo '<td class="notclickable">
+										<a class="btn btn-md btn-warning notclickable" href="' . base_url() . 'statuspedido/alterarstatus/' . $row['idApp_OrcaTrata'] . '">
+											<span class="glyphicon glyphicon-edit notclickable"></span>
+										</a>
+									</td>';
 								echo '<td>' . $row['NomeCliente'] . '</td>';
 								echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 								echo '<td>' . $row['Tipo_Orca'] . '</td>';
+								echo '<td>' . $row['AVAP'] . '</td>';
 								#echo '<td>' . $row['DataEntradaOrca'] . '</td>';
 								#echo '<td>' . $row['DataPrazo'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorRestanteOrca'] . '</td>';
@@ -100,11 +106,6 @@
 								#echo '<td>' . $row['Descricao'] . '</td>';
 								#echo '<td>' . $row['Nome'] . '</td>';
 								#echo '</div>';
-								echo '<td class="notclickable">
-										<a class="btn btn-md btn-warning notclickable" href="' . base_url() . 'statuspedido/alterarstatus/' . $row['idApp_OrcaTrata'] . '">
-											<span class="glyphicon glyphicon-edit notclickable"></span>
-										</a>
-									</td>';
 							echo '</tr>';
 						}
 						?>

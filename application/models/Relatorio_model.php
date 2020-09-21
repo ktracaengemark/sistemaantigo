@@ -6493,7 +6493,7 @@ exit();*/
 				OT.DataRetorno,
 				OT.idTab_TipoRD,
 				OT.FormaPagamento,
-				OT.AVAP,
+				TAV.AVAP,
 				OT.Tipo_Orca,
 				TTF.TipoFrete,
 				OT.ObsOrca,
@@ -6508,6 +6508,7 @@ exit();*/
 				LEFT JOIN Sis_Usuario AS TSU ON TSU.idSis_Usuario = OT.Entregador
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
+				LEFT JOIN Tab_AVAP AS TAV ON TAV.Abrev2 = OT.AVAP
             WHERE
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 (' . $consulta . ') AND
