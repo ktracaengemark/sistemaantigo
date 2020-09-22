@@ -112,8 +112,7 @@
 																<input type="hidden" class="form-control " id="idTab_Produtos_Produto<?php echo $i ?>" name="idTab_Produtos_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos_Produto'] ?>">
 																<input type="hidden" class="form-control " id="Prod_Serv_Produto<?php echo $i ?>" name="Prod_Serv_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['Prod_Serv_Produto'] ?>">
 																<input type="hidden" class="form-control " id="ComissaoProduto<?php echo $i ?>" name="ComissaoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ComissaoProduto'] ?>">
-																
-																<div class="col-md-7">
+																<div class="col-md-9">
 																	<label for="idTab_Produto">Produto <?php echo $i ?></label>
 																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor1Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
 																			 id="listadinamicab<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
@@ -129,6 +128,7 @@
 																		?>
 																	</select>
 																</div>
+																<!--
 																<div class="col-md-2">
 																	<label for="ProfissionalProduto<?php echo $i ?>">Profissional</label>
 																	<?php if ($i == 1) { ?>
@@ -148,6 +148,7 @@
 																		?>
 																	</select>
 																</div>
+																-->
 																<div class="col-md-2 text-left">
 																	<label for="ConcluidoProduto">Entregue? </label><br>
 																	<div class="btn-group" data-toggle="buttons">
@@ -189,14 +190,6 @@
 																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																			name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
 																</div>
-																<div class="col-md-2">
-																	<label for="QtdIncrementoProduto">Qtd.na Embl</label>
-																	<div class="input-group">
-																		<input type="text" class="form-control Numero" id="QtdIncrementoProduto<?php echo $i ?>" placeholder="0"
-																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTDINC','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
-																			name="QtdIncrementoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncrementoProduto'] ?>">
-																	</div>
-																</div>
 																<div class="col-md-3">
 																	<label for="ValorProduto">Valor da Embl</label>
 																	<div class="input-group">
@@ -206,13 +199,17 @@
 																			name="ValorProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ValorProduto'] ?>">
 																	</div>
 																</div>
+																<div class="col-md-2">
+																	<label for="QtdIncrementoProduto">Qtd.na Embl</label>
+																	<input type="text" class="form-control Numero" id="QtdIncrementoProduto<?php echo $i ?>" placeholder="0"
+																		onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTDINC','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
+																		name="QtdIncrementoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdIncrementoProduto'] ?>">
+																</div>
 																<input type="hidden" class="form-control " id="SubtotalComissaoProduto<?php echo $i ?>" name="SubtotalComissaoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalComissaoProduto'] ?>">
 																<div class="col-md-2">
 																	<label for="SubtotalQtdProduto">Sub.Qtd.Prod</label>
-																	<div class="input-group">
-																		<input type="text" class="form-control Numero text-left" maxlength="10" readonly="" id="SubtotalQtdProduto<?php echo $i ?>"
-																			   name="SubtotalQtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalQtdProduto'] ?>">
-																	</div>
+																	<input type="text" class="form-control Numero text-left" maxlength="10" readonly="" id="SubtotalQtdProduto<?php echo $i ?>"
+																		   name="SubtotalQtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalQtdProduto'] ?>">
 																</div>
 																<div class="col-md-3">
 																	<label for="SubtotalProduto">Sub.Valor.Prod.</label>
@@ -263,7 +260,7 @@
 																					<b>Produtos: </b> 
 																				</div>
 																				<div class="col-md-8">
-																					<div class="input-group" id="txtHint">
+																					<div  id="txtHint">
 																						<input type="text" class="form-control text-right Numero" id="QtdPrdOrca" maxlength="10" readonly=""
 																							   name="QtdPrdOrca" value="<?php echo $orcatrata['QtdPrdOrca'] ?>">
 																							   
@@ -308,7 +305,7 @@
 												?>
 
 												<?php if ($metodo > 1) { ?>
-												<input type="hidden" name="idApp_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idApp_Servico']; ?>"/>
+												<input type="hidden" name="idApp_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idApp_Produto']; ?>"/>
 												<?php } ?>
 
 												<input type="hidden" name="ServicoHidden" id="ServicoHidden<?php echo $i ?>" value="<?php echo $i ?>">
@@ -317,11 +314,11 @@
 													<div class="panel panel-danger">
 														<div class="panel-heading">
 															<div class="row">
-																<input type="hidden" class="form-control " id="idTab_Valor_Servico<?php echo $i ?>" name="idTab_Valor_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Valor_Servico'] ?>">
-																<input type="hidden" class="form-control " id="idTab_Produtos_Servico<?php echo $i ?>" name="idTab_Produtos_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Produtos_Servico'] ?>">
-																<input type="hidden" class="form-control " id="Prod_Serv_Servico<?php echo $i ?>" name="Prod_Serv_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['Prod_Serv_Servico'] ?>">
-																<input type="hidden" class="form-control " id="ComissaoServico<?php echo $i ?>" name="ComissaoServico<?php echo $i ?>" value="<?php echo $servico[$i]['ComissaoServico'] ?>">
-																<input type="hidden" class="form-control " id="NomeServico<?php echo $i ?>" name="NomeServico<?php echo $i ?>" value="<?php echo $servico[$i]['NomeServico'] ?>">
+																<input type="hidden" class="form-control " id="idTab_Valor_Servico<?php echo $i ?>" name="idTab_Valor_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Valor_Produto'] ?>">
+																<input type="hidden" class="form-control " id="idTab_Produtos_Servico<?php echo $i ?>" name="idTab_Produtos_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Produtos_Produto'] ?>">
+																<input type="hidden" class="form-control " id="Prod_Serv_Servico<?php echo $i ?>" name="Prod_Serv_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['Prod_Serv_Produto'] ?>">
+																<input type="hidden" class="form-control " id="ComissaoServico<?php echo $i ?>" name="ComissaoServico<?php echo $i ?>" value="<?php echo $servico[$i]['ComissaoProduto'] ?>">
+																<input type="hidden" class="form-control " id="NomeServico<?php echo $i ?>" name="NomeServico<?php echo $i ?>" value="<?php echo $servico[$i]['NomeProduto'] ?>">
 																<div class="col-md-9">
 																	<label for="idTab_Servico">Serviço <?php echo $i ?>:</label>
 																	<?php if ($i == 1) { ?>
@@ -334,7 +331,7 @@
 																		<option value="">-- Selecione uma opção --</option>
 																		<?php
 																		foreach ($select['Servico'] as $key => $row) {
-																			if ($servico[$i]['idTab_Servico'] == $key) {
+																			if ($servico[$i]['idTab_Produto'] == $key) {
 																				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																			} else {
 																				echo '<option value="' . $key . '">' . $row . '</option>';
@@ -348,9 +345,9 @@
 																	<div class="btn-group" data-toggle="buttons">
 																		<?php
 																		foreach ($select['ConcluidoServico'] as $key => $row) {
-																			(!$servico[$i]['ConcluidoServico']) ? $servico[$i]['ConcluidoServico'] = 'N' : FALSE;
+																			(!$servico[$i]['ConcluidoProduto']) ? $servico[$i]['ConcluidoProduto'] = 'N' : FALSE;
 
-																			if ($servico[$i]['ConcluidoServico'] == $key) {
+																			if ($servico[$i]['ConcluidoProduto'] == $key) {
 																				echo ''
 																				. '<label class="btn btn-warning active" name="radiobutton_ConcluidoServico' . $i . '" id="radiobutton_ConcluidoServico' . $i .  $key . '">'
 																				. '<input type="radio" name="ConcluidoServico' . $i . '" id="radiobuttondinamico" '
@@ -382,16 +379,16 @@
 																	<label for="QtdServico">Qtd</label>
 																	<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0"
 																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
-																			 name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
+																			 name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdProduto'] ?>">
 																</div>
-																<input type="hidden" class="form-control Numero" id="QtdIncrementoServico<?php echo $i ?>" name="QtdIncrementoServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdIncrementoServico'] ?>">
+																<input type="hidden" class="form-control Numero" id="QtdIncrementoServico<?php echo $i ?>" name="QtdIncrementoServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdIncrementoProduto'] ?>">
 																<div class="col-md-3">
 																	<label for="ValorServico">Valor do Serviço</label>
 																	<div class="input-group">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" id="idTab_Servico<?php echo $i ?>" maxlength="10" placeholder="0,00"
 																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','VP','Servico')"
-																			name="ValorServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorServico'] ?>">
+																			name="ValorServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorProduto'] ?>">
 																	</div>
 																</div>
 																<div class="col-md-4">
@@ -404,7 +401,7 @@
 																		<?php
 																		foreach ($select['ProfissionalServico'] as $key => $row) {
 																			(!$servico['ProfissionalServico']) ? $servico['ProfissionalServico'] = $_SESSION['log']['ProfissionalServico']: FALSE;
-																			if ($servico[$i]['ProfissionalServico'] == $key) {
+																			if ($servico[$i]['ProfissionalProduto'] == $key) {
 																				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																			} else {
 																				echo '<option value="' . $key . '">' . $row . '</option>';
@@ -418,7 +415,7 @@
 																	<div class="input-group">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalServico<?php echo $i ?>"
-																			   name="SubtotalServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalServico'] ?>">
+																			   name="SubtotalServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalProduto'] ?>">
 																	</div>
 																</div>
 															</div>
@@ -427,7 +424,7 @@
 												</div>
 
 												<?php
-												$QtdSomaDev+=$servico[$i]['QtdServico'];
+												$QtdSomaDev+=$servico[$i]['QtdProduto'];
 												$ServicoSoma++;
 												}
 												?>
@@ -438,12 +435,12 @@
 													<div class="row">
 														
 														<div class="col-md-3 text-center">
-															<!--
+															
 															<a class="add_field_button10  btn btn-danger" 
 																	onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
 																<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Serviços
 															</a>
-															-->
+															
 														</div>
 														
 														<div class="col-md-3 text-center">	

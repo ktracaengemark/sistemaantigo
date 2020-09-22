@@ -291,6 +291,7 @@ elseif ($_GET['q'] == 20) {
                 P.idTab_Produtos,
 				P.Nome_Prod,
 				P.Valor_Produto,
+				P.Prod_Serv,
 				TOP2.Opcao,
 				TOP1.Opcao,				
 				CONCAT(IFNULL(TPRS.Prod_Serv,""), " - ",  IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TOP2.Opcao,""), " - R$ ", IFNULL(P.Valor_Produto,"")) AS NomeProduto
@@ -300,7 +301,8 @@ elseif ($_GET['q'] == 20) {
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2
 					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = P.Prod_Serv
             WHERE
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.Prod_Serv = "P"
 			ORDER BY
 				P.Prod_Serv ASC,
 				P.Nome_Prod ASC,
@@ -436,11 +438,11 @@ elseif ($_GET['q'] == 90) {
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 				P.idTab_Produtos = V.idTab_Produtos AND
-				
 				TPM.Ativo = "S" AND
 				TPM.VendaBalcao = "S" AND
 				V.AtivoPreco = "S" AND
-				V.VendaBalcaoPreco = "S"
+				V.VendaBalcaoPreco = "S" AND
+				P.Prod_Serv = "P"
 			ORDER BY
 				P.Prod_Serv ASC,
 				P.Nome_Prod ASC,
@@ -488,6 +490,10 @@ elseif ($_GET['q'] == 902) {
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 				P.idTab_Produtos = V.idTab_Produtos AND
+				TPM.Ativo = "S" AND
+				TPM.VendaBalcao = "S" AND
+				V.AtivoPreco = "S" AND
+				V.VendaBalcaoPreco = "S" AND
 				P.Prod_Serv = "S"
 			ORDER BY
 				P.Nome_Prod ASC

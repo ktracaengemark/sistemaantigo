@@ -36,7 +36,7 @@ class Orcatrata_model extends CI_Model {
         //exit ();
         */
 
-        $query = $this->db->insert_batch('App_Servico', $data);
+        $query = $this->db->insert_batch('App_Produto', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -199,7 +199,7 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 	
-    public function get_servico($data) {
+    public function get_servico_bkp_orig($data) {
 		$query = $this->db->query('
 			SELECT 
 				TAP.idApp_Servico,
@@ -246,8 +246,56 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }	
 
+    public function get_servico($data) {
+		$query = $this->db->query('
+			SELECT 
+				TAP.idApp_Produto,
+				TAP.idSis_Empresa,
+				TAP.idTab_Modulo,
+				TAP.idApp_OrcaTrata,
+				TAP.idApp_Cliente,
+				TAP.idApp_Fornecedor,
+				TAP.idSis_Usuario,
+				TAP.idTab_Produto,
+				TAP.idTab_Valor_Produto,
+				TAP.idTab_Produtos_Produto,
+				TAP.Prod_Serv_Produto,
+				TAP.NomeProduto,
+				TAP.ComissaoProduto,
+				TAP.ValorProduto,
+				TAP.ObsProduto,
+				TAP.QtdProduto,
+				TAP.QtdIncrementoProduto,
+				TAP.DataValidadeProduto,
+				TAP.ConcluidoProduto,
+				TAP.idTab_TipoRD,
+				TAP.ProfissionalProduto,
+				P.Nome_Prod,
+				TOP2.Opcao,
+				TOP1.Opcao,
+				SU.Nome,
+				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - ", IFNULL(SU.Nome,"")) AS Produto,
+				(TAP.QtdProduto * TAP.ValorProduto) AS Subtotal_Produto
+			FROM 
+				App_Produto AS TAP
+					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = TAP.ProfissionalProduto
+					LEFT JOIN Tab_Valor AS V ON V.idTab_Valor = TAP.idTab_Produto
+					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
+					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2
+			WHERE 
+				TAP.idApp_OrcaTrata = ' . $data . ' AND
+				TAP.Prod_Serv_Produto = "S" 
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
 	public function get_servicodesp($data) {
-		$query = $this->db->query('SELECT * FROM App_Servico WHERE idTab_TipoRD = "3" AND idApp_OrcaTrata = ' . $data);
+		$query = $this->db->query('SELECT * FROM App_Produto WHERE idApp_OrcaTrata = ' . $data . ' AND Prod_Serv_Produto = "S"  ');
         $query = $query->result_array();
 
         return $query;
@@ -307,7 +355,8 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2
 			WHERE 
-				TAP.idApp_OrcaTrata = ' . $data . '
+				TAP.idApp_OrcaTrata = ' . $data . ' AND
+				TAP.Prod_Serv_Produto = "P" 
 		');
         $query = $query->result_array();
 
@@ -401,7 +450,8 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2 
 			WHERE 
-				TAP.idApp_OrcaTrata = ' . $data . '
+				TAP.idApp_OrcaTrata = ' . $data . ' AND
+				TAP.Prod_Serv_Produto = "P" 
 		');
         $query = $query->result_array();
 
@@ -2532,7 +2582,7 @@ exit();*/
 		
     public function update_servico($data) {
 
-        $query = $this->db->update_batch('App_Servico', $data, 'idApp_Servico');
+        $query = $this->db->update_batch('App_Produto', $data, 'idApp_Produto');
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }
@@ -2567,8 +2617,8 @@ exit();*/
 
     public function delete_servico($data) {
 
-        $this->db->where_in('idApp_Servico', $data);
-        $this->db->delete('App_Servico');
+        $this->db->where_in('idApp_Produto', $data);
+        $this->db->delete('App_Produto');
 
         //$query = $this->db->delete('App_Servico', array('idApp_Servico' => $data));
 

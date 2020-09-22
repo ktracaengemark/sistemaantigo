@@ -759,6 +759,39 @@ class Orcatrata extends CI_Controller {
                 }
                 $data['procedimento']['idApp_Procedimento'] = $this->Orcatrata_model->set_procedimento($data['procedimento']);
             }
+			
+			$data['update']['produto']['posterior'] = $this->Orcatrata_model->get_produto_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['produto']['posterior'])){
+				$max_produto = count($data['update']['produto']['posterior']);
+				if($max_produto == 0){
+					$data['orcatrata']['ConcluidoOrca'] = "S";
+					$data['orcatrata']['ProntoOrca'] = "S";
+					$data['orcatrata']['EnviadoOrca'] = "S";
+					$data['orcatrata']['CombinadoFrete'] = "S";
+				}else{
+					$data['orcatrata']['ConcluidoOrca'] = "N";
+				}
+			}
+			
+			$data['update']['parcelasrec']['posterior'] = $this->Orcatrata_model->get_parcelas_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['parcelasrec']['posterior'])){
+				$max_parcela = count($data['update']['parcelasrec']['posterior']);
+				if($max_parcela == 0){
+					$data['orcatrata']['QuitadoOrca'] = "S";				
+				}else{
+					$data['orcatrata']['QuitadoOrca'] = "N";
+				}
+
+			}
+			
+			$data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
+			$data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
+			$data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
+				$data['update']['orcatrata']['anterior'],
+				$data['orcatrata'],
+				$data['update']['orcatrata']['campos'],
+				$data['orcatrata']['idApp_OrcaTrata'], TRUE);
+			$data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);
 
 /*
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1480,7 +1513,7 @@ class Orcatrata extends CI_Controller {
 					}
                 }
                 $data['parcelasrec']['idApp_Parcelas'] = $this->Orcatrata_model->set_parcelas($data['parcelasrec']);
-            }
+            }			
 
             #### App_Procedimento ####
             if (isset($data['procedimento'])) {
@@ -1496,6 +1529,39 @@ class Orcatrata extends CI_Controller {
                 }
                 $data['procedimento']['idApp_Procedimento'] = $this->Orcatrata_model->set_procedimento($data['procedimento']);
             }
+			
+			$data['update']['produto']['posterior'] = $this->Orcatrata_model->get_produto_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['produto']['posterior'])){
+				$max_produto = count($data['update']['produto']['posterior']);
+				if($max_produto == 0){
+					$data['orcatrata']['ConcluidoOrca'] = "S";
+					$data['orcatrata']['ProntoOrca'] = "S";
+					$data['orcatrata']['EnviadoOrca'] = "S";
+					$data['orcatrata']['CombinadoFrete'] = "S";
+				}else{
+					$data['orcatrata']['ConcluidoOrca'] = "N";
+				}
+			}
+			
+			$data['update']['parcelasrec']['posterior'] = $this->Orcatrata_model->get_parcelas_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['parcelasrec']['posterior'])){
+				$max_parcela = count($data['update']['parcelasrec']['posterior']);
+				if($max_parcela == 0){
+					$data['orcatrata']['QuitadoOrca'] = "S";				
+				}else{
+					$data['orcatrata']['QuitadoOrca'] = "N";
+				}
+
+			}
+			
+			$data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
+			$data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
+			$data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
+				$data['update']['orcatrata']['anterior'],
+				$data['orcatrata'],
+				$data['update']['orcatrata']['campos'],
+				$data['orcatrata']['idApp_OrcaTrata'], TRUE);
+			$data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);			
 
 /*
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2154,7 +2220,7 @@ class Orcatrata extends CI_Controller {
 				$dias = floor($intervalo / (60 * 60 * 24));
 				$data['orcatrata']['PrazoEntrega'] = $dias;
 			}
-
+			/*
             $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
             $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
             $data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
@@ -2163,8 +2229,8 @@ class Orcatrata extends CI_Controller {
                 $data['update']['orcatrata']['campos'],
                 $data['orcatrata']['idApp_OrcaTrata'], TRUE);
             $data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);
-
-#### APP_Cliente ####
+			*/
+			#### APP_Cliente ####
 			if ($data['cadastrar']['AtualizaEndereco'] == 'S'){
 				$data['cliente']['CepCliente'] = $data['orcatrata']['Cep'];
 				$data['cliente']['EnderecoCliente'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
@@ -2310,6 +2376,7 @@ class Orcatrata extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
                     $data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'];
+					$data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'] = $data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'];
 					$data['update']['produto']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['produto']['alterar'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['produto']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['produto']['alterar'][$j]['ValorProduto']));
 					$data['update']['produto']['alterar'][$j]['ComissaoProduto'] = $data['update']['produto']['alterar'][$j]['ComissaoProduto'];
@@ -2439,6 +2506,38 @@ class Orcatrata extends CI_Controller {
                     $data['update']['procedimento']['bd']['excluir'] = $this->Orcatrata_model->delete_procedimento($data['update']['procedimento']['excluir']);
 
             }
+			
+			$data['update']['produto']['posterior'] = $this->Orcatrata_model->get_produto_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['produto']['posterior'])){
+				$max_produto = count($data['update']['produto']['posterior']);
+				if($max_produto == 0){
+					$data['orcatrata']['ConcluidoOrca'] = "S";
+					$data['orcatrata']['ProntoOrca'] = "S";
+					$data['orcatrata']['EnviadoOrca'] = "S";
+					$data['orcatrata']['CombinadoFrete'] = "S";
+				}else{
+					$data['orcatrata']['ConcluidoOrca'] = "N";
+				}
+			}
+			
+			$data['update']['parcelasrec']['posterior'] = $this->Orcatrata_model->get_parcelas_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['parcelasrec']['posterior'])){
+				$max_parcela = count($data['update']['parcelasrec']['posterior']);
+				if($max_parcela == 0){
+					$data['orcatrata']['QuitadoOrca'] = "S";				
+				}else{
+					$data['orcatrata']['QuitadoOrca'] = "N";
+				}
+			}
+			
+			$data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
+			$data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
+			$data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
+				$data['update']['orcatrata']['anterior'],
+				$data['orcatrata'],
+				$data['update']['orcatrata']['campos'],
+				$data['orcatrata']['idApp_OrcaTrata'], TRUE);
+			$data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);
 
 /*
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3111,7 +3210,7 @@ class Orcatrata extends CI_Controller {
 				$dias = floor($intervalo / (60 * 60 * 24));
 				$data['orcatrata']['PrazoEntrega'] = $dias;
 			}
-			
+			/*
             $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
             $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
             $data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
@@ -3120,7 +3219,7 @@ class Orcatrata extends CI_Controller {
                 $data['update']['orcatrata']['campos'],
                 $data['orcatrata']['idApp_OrcaTrata'], TRUE);
             $data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);
-
+			*/
             
 			#### APP_Cliente ####
 			if ($data['cadastrar']['AtualizaEndereco'] == 'S'){
@@ -3404,6 +3503,38 @@ class Orcatrata extends CI_Controller {
                     $data['update']['procedimento']['bd']['excluir'] = $this->Orcatrata_model->delete_procedimento($data['update']['procedimento']['excluir']);
 
             }
+			
+			$data['update']['produto']['posterior'] = $this->Orcatrata_model->get_produto_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['produto']['posterior'])){
+				$max_produto = count($data['update']['produto']['posterior']);
+				if($max_produto == 0){
+					$data['orcatrata']['ConcluidoOrca'] = "S";
+					$data['orcatrata']['ProntoOrca'] = "S";
+					$data['orcatrata']['EnviadoOrca'] = "S";
+					$data['orcatrata']['CombinadoFrete'] = "S";
+				}else{
+					$data['orcatrata']['ConcluidoOrca'] = "N";
+				}
+			}
+			
+			$data['update']['parcelasrec']['posterior'] = $this->Orcatrata_model->get_parcelas_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['parcelasrec']['posterior'])){
+				$max_parcela = count($data['update']['parcelasrec']['posterior']);
+				if($max_parcela == 0){
+					$data['orcatrata']['QuitadoOrca'] = "S";				
+				}else{
+					$data['orcatrata']['QuitadoOrca'] = "N";
+				}
+			}
+			
+			$data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
+			$data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
+			$data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
+				$data['update']['orcatrata']['anterior'],
+				$data['orcatrata'],
+				$data['update']['orcatrata']['campos'],
+				$data['orcatrata']['idApp_OrcaTrata'], TRUE);
+			$data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);			
 
 /*
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3439,7 +3570,143 @@ class Orcatrata extends CI_Controller {
         $this->load->view('basico/footer');
 
     }
+
+    public function baixadopedido($id = FALSE) {
+		
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #### App_OrcaTrata ####
+		
+        $data['titulo'] = 'Baixa do Pedido';
+        $data['form_open_path'] = 'orcatrata/baixadopedido';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+
+        /*
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit ();
+        */
 	
+		
+        #run form validation
+		
+		
+            ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+            #### App_OrcaTrata ####
+			$data['orcatrata']['AprovadoOrca'] = "S";
+			$data['orcatrata']['ConcluidoOrca'] = "S";
+			$data['orcatrata']['QuitadoOrca'] = "S";
+			$data['orcatrata']['FinalizadoOrca'] = "S";
+			$data['orcatrata']['ProntoOrca'] = "S";
+			$data['orcatrata']['EnviadoOrca'] = "S";
+
+            $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata_baixa($id);
+            $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
+            $data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
+                $data['update']['orcatrata']['anterior'],
+                $data['orcatrata'],
+                $data['update']['orcatrata']['campos'],
+                $id, 
+			TRUE);
+            $data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $id);
+
+			
+			/*
+            //echo count($data['servico']);
+			echo '<br>';
+            echo "<pre>";
+            print_r($data['cliente']);
+            echo "</pre>";
+            exit ();
+            */			
+			
+			
+			#### App_Servico ####
+            $data['update']['servico']['anterior'] = $this->Orcatrata_model->get_servico($id);
+            if (isset($data['servico']) || (!isset($data['servico']) && isset($data['update']['servico']['anterior']) ) ) {
+
+                if (isset($data['servico']))
+                    $data['servico'] = array_values($data['servico']);
+                else
+                    $data['servico'] = array();
+
+                //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
+                $data['update']['servico'] = $this->basico->tratamento_array_multidimensional($data['servico'], $data['update']['servico']['anterior'], 'idApp_Servico');
+
+                $max = count($data['update']['servico']['alterar']);
+                for($j=0;$j<$max;$j++) {
+					$data['update']['servico']['alterar'][$j]['ConcluidoServico'] = 'S';		
+                }
+
+                if (count($data['update']['servico']['alterar']))
+                    $data['update']['servico']['bd']['alterar'] = $this->Orcatrata_model->update_servico($data['update']['servico']['alterar']);
+            }
+
+            #### App_Produto ####
+            $data['update']['produto']['alterar'] = $this->Orcatrata_model->get_produto_baixa($id);
+            if (isset($data['update']['produto']['alterar'])){
+
+                $max = count($data['update']['produto']['alterar']);
+                for($j=0;$j<$max;$j++) {
+					$data['update']['produto']['alterar'][$j]['ConcluidoProduto'] = 'S';				
+                }
+                if (count($data['update']['produto']['alterar']))
+                    $data['update']['produto']['bd']['alterar'] =  $this->Orcatrata_model->update_produto($data['update']['produto']['alterar']);
+
+            }
+
+            #### App_ParcelasRec ####
+            $data['update']['parcelasrec']['alterar'] = $this->Orcatrata_model->get_parcelas_baixa($id);
+            if (isset($data['update']['parcelasrec']['alterar'])){
+			
+                $max = count($data['update']['parcelasrec']['alterar']);
+                for($j=0;$j<$max;$j++) {
+					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
+						if ($data['orcatrata']['QuitadoOrca'] == 'S') { 
+							$data['update']['parcelasrec']['alterar'][$j]['Quitado'] = 'S';
+						}
+					} else {
+						$data['update']['parcelasrec']['alterar'][$j]['Quitado'] = 'N';
+					}				
+				}
+
+                if (count($data['update']['parcelasrec']['alterar']))
+                    $data['update']['parcelasrec']['bd']['alterar'] =  $this->Orcatrata_model->update_parcelas($data['update']['parcelasrec']['alterar']);
+
+            }
+
+            if ($data['auditoriaitem'] && !$data['update']['orcatrata']['bd']) {
+                $data['msg'] = '?m=2';
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+				$this->load->view('orcatrata/form_orcatrataalterar2', $data);
+            } else {
+
+                $data['msg'] = '?m=1';
+
+				redirect(base_url() . 'relatorio/baixadopedido/' . $data['msg']);
+				exit();
+            }
+        
+
+        $this->load->view('basico/footer');
+
+    }
+
     public function alteraronline($id = FALSE) {
 
         if ($this->input->get('m') == 1)
@@ -4261,6 +4528,7 @@ class Orcatrata extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
 					$data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'];
+					$data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'] = $data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'];
 					$data['update']['produto']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['produto']['alterar'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['produto']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['produto']['alterar'][$j]['ValorProduto']));
 					$data['update']['produto']['alterar'][$j]['ComissaoProduto'] = $data['update']['produto']['alterar'][$j]['ComissaoProduto'];
@@ -5095,6 +5363,7 @@ class Orcatrata extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
 					$data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'];
+					$data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'] = $data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'];
                     $data['update']['produto']['alterar'][$j]['NomeProduto'] = $data['update']['produto']['alterar'][$j]['NomeProduto'];
 					unset($data['update']['produto']['alterar'][$j]['SubtotalProduto']);
 					unset($data['update']['produto']['alterar'][$j]['SubtotalComissaoProduto']);
@@ -5895,6 +6164,39 @@ class Orcatrata extends CI_Controller {
                 }
                 $data['procedimento']['idApp_Procedimento'] = $this->Orcatrata_model->set_procedimento($data['procedimento']);
             }
+			
+			$data['update']['produto']['posterior'] = $this->Orcatrata_model->get_produto_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['produto']['posterior'])){
+				$max_produto = count($data['update']['produto']['posterior']);
+				if($max_produto == 0){
+					$data['orcatrata']['ConcluidoOrca'] = "S";
+					$data['orcatrata']['ProntoOrca'] = "S";
+					$data['orcatrata']['EnviadoOrca'] = "S";
+					$data['orcatrata']['CombinadoFrete'] = "S";
+				}else{
+					$data['orcatrata']['ConcluidoOrca'] = "N";
+				}
+			}
+			
+			$data['update']['parcelasrec']['posterior'] = $this->Orcatrata_model->get_parcelas_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['parcelasrec']['posterior'])){
+				$max_parcela = count($data['update']['parcelasrec']['posterior']);
+				if($max_parcela == 0){
+					$data['orcatrata']['QuitadoOrca'] = "S";				
+				}else{
+					$data['orcatrata']['QuitadoOrca'] = "N";
+				}
+
+			}
+			
+			$data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
+			$data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
+			$data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
+				$data['update']['orcatrata']['anterior'],
+				$data['orcatrata'],
+				$data['update']['orcatrata']['campos'],
+				$data['orcatrata']['idApp_OrcaTrata'], TRUE);
+			$data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);
 
 /*
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -6443,7 +6745,7 @@ class Orcatrata extends CI_Controller {
 			#$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             #$data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             #$data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-
+			/*
             $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
             $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
             $data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
@@ -6452,7 +6754,7 @@ class Orcatrata extends CI_Controller {
                 $data['update']['orcatrata']['campos'],
                 $data['orcatrata']['idApp_OrcaTrata'], TRUE);
             $data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);
-
+			*/
             #### App_Servico ####
             $data['update']['servico']['anterior'] = $this->Orcatrata_model->get_servicodesp($data['orcatrata']['idApp_OrcaTrata']);
             if (isset($data['servico']) || (!isset($data['servico']) && isset($data['update']['servico']['anterior']) ) ) {
@@ -6554,6 +6856,7 @@ class Orcatrata extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
                     #$data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'];
+					$data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'] = $data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'];
 					$data['update']['produto']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['produto']['alterar'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['produto']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['produto']['alterar'][$j]['ValorProduto']));
 					$data['update']['produto']['alterar'][$j]['ComissaoProduto'] = $data['update']['produto']['alterar'][$j]['ComissaoProduto'];
@@ -6682,6 +6985,38 @@ class Orcatrata extends CI_Controller {
                     $data['update']['procedimento']['bd']['excluir'] = $this->Orcatrata_model->delete_procedimento($data['update']['procedimento']['excluir']);
 
             }
+			
+			$data['update']['produto']['posterior'] = $this->Orcatrata_model->get_produto_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['produto']['posterior'])){
+				$max_produto = count($data['update']['produto']['posterior']);
+				if($max_produto == 0){
+					$data['orcatrata']['ConcluidoOrca'] = "S";
+					$data['orcatrata']['ProntoOrca'] = "S";
+					$data['orcatrata']['EnviadoOrca'] = "S";
+					$data['orcatrata']['CombinadoFrete'] = "S";
+				}else{
+					$data['orcatrata']['ConcluidoOrca'] = "N";
+				}
+			}
+			
+			$data['update']['parcelasrec']['posterior'] = $this->Orcatrata_model->get_parcelas_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['parcelasrec']['posterior'])){
+				$max_parcela = count($data['update']['parcelasrec']['posterior']);
+				if($max_parcela == 0){
+					$data['orcatrata']['QuitadoOrca'] = "S";				
+				}else{
+					$data['orcatrata']['QuitadoOrca'] = "N";
+				}
+			}
+			
+			$data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
+			$data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
+			$data['update']['orcatrata']['auditoriaitem'] = $this->basico->set_log(
+				$data['update']['orcatrata']['anterior'],
+				$data['orcatrata'],
+				$data['update']['orcatrata']['campos'],
+				$data['orcatrata']['idApp_OrcaTrata'], TRUE);
+			$data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);
 
 /*
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -6756,20 +7091,19 @@ class Orcatrata extends CI_Controller {
         else
             $data['msg'] = '';
 
- 
-                $this->Orcatrata_model->delete_orcatrata($id);
+			$this->Orcatrata_model->delete_orcatrata($id);
 
-                $data['msg'] = '?m=1';
+			$data['msg'] = '?m=1';
 
-				#redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
-				#redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
-				#redirect(base_url() . 'relatorio/parcelasrec/' . $data['msg']);
-				#redirect(base_url() . 'relatorio/orcamento/' . $data['msg']);
-				redirect(base_url() . 'pedidos/pedidos/' . $data['msg']);
-                exit();
-            //}
-        //}
-
+			#redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
+			#redirect(base_url() . 'relatorio/financeiro/' . $data['msg']);
+			#redirect(base_url() . 'relatorio/parcelasrec/' . $data['msg']);
+			#redirect(base_url() . 'relatorio/orcamento/' . $data['msg']);
+			
+			redirect(base_url() . 'pedidos/pedidos/' . $data['msg']);
+			
+			exit();
+				
         $this->load->view('basico/footer');
     }
 
@@ -7030,6 +7364,205 @@ class Orcatrata extends CI_Controller {
 
     }
 
+    public function baixadacomissao($id = FALSE) {
+		
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+		$data['query'] = quotes_to_entities($this->input->post(array(
+			'Dia',
+			'Mesvenc',
+			'Ano',
+			'Orcarec',
+			'NomeCliente',
+			'QuitadoComissão',
+			'AprovadoOrca',
+			'ConcluidoOrca',
+			'QuitadoOrca',
+        ), TRUE));
+		
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $data['empresa'] = quotes_to_entities($this->input->post(array(
+            #### Sis_Empresa ####
+            'idSis_Empresa',
+			
+        ), TRUE));
+
+        //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
+        //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
+
+		(!$this->input->post('PRCount')) ? $data['count']['PRCount'] = 0 : $data['count']['PRCount'] = $this->input->post('PRCount');
+		
+		
+
+        $j = 1;
+        for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
+
+            if ($this->input->post('ValorRestanteOrca' . $i) || $this->input->post('DataVencimentoOrca' . $i) || $this->input->post('StatusComissaoOrca' . $i)) {
+                $data['orcamento'][$j]['idApp_OrcaTrata'] = $this->input->post('idApp_OrcaTrata' . $i);
+                $data['orcamento'][$j]['ValorRestanteOrca'] = $this->input->post('ValorRestanteOrca' . $i);
+                $data['orcamento'][$j]['ValorComissao'] = $this->input->post('ValorComissao' . $i);
+                $data['orcamento'][$j]['DataVencimentoOrca'] = $this->input->post('DataVencimentoOrca' . $i);
+                $data['orcamento'][$j]['StatusComissaoOrca'] = $this->input->post('StatusComissaoOrca' . $i);
+				$j++;
+            }
+        }
+		$data['count']['PRCount'] = $j - 1;
+
+        //Fim do trecho de código que dá pra melhorar
+
+        if ($id) {
+            #### Sis_Empresa ####
+            $data['empresa'] = $this->Orcatrata_model->get_orcatrataalterar($id);
+
+
+            #### App_Parcelas ####
+            $data['orcamento'] = $this->Orcatrata_model->get_baixadacomissao($id);
+            if (count($data['orcamento']) > 0) {
+                $data['orcamento'] = array_combine(range(1, count($data['orcamento'])), array_values($data['orcamento']));
+				$data['count']['PRCount'] = count($data['orcamento']);
+				
+                if (isset($data['orcamento'])) {
+
+                    for($j=1; $j <= $data['count']['PRCount']; $j++) {
+                        $data['orcamento'][$j]['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcamento'][$j]['DataVencimentoOrca'], 'barras');
+                    }
+
+                }
+            }
+
+        }
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #### Sis_Empresa ####
+        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'trim');
+
+		$data['select']['QuitadoComissão'] = $this->Basico_model->select_status_sn();
+        $data['select']['StatusComissaoOrca'] = $this->Basico_model->select_status_sn();
+		$data['select']['AprovadoOrca'] = $this->Basico_model->select_status_sn();
+		$data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
+		$data['select']['QuitadoOrca'] = $this->Basico_model->select_status_sn();
+		$data['select']['Dia'] = $this->Basico_model->select_dia();
+		$data['select']['Mesvenc'] = $this->Basico_model->select_mes();
+		$data['select']['Orcarec'] = $this->Basico_model->select_orcarec();
+		$data['select']['NomeCliente'] = $this->Basico_model->select_cliente();		
+		
+        $data['titulo'] = 'Baixa da Comissao';
+        $data['form_open_path'] = 'orcatrata/baixadacomissao';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'info';
+        $data['metodo'] = 2;
+
+		$data['collapse'] = '';	
+		$data['collapse1'] = 'class="collapse"';		
+		
+        if ($data['count']['PRCount'] > 0 )
+            $data['parcelasin'] = 'in';
+        else
+            $data['parcelasin'] = '';
+
+
+        $data['sidebar'] = 'col-sm-3 col-md-2';
+        $data['main'] = 'col-sm-7 col-md-8';
+
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+
+        /*
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit ();
+        */
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('orcatrata/form_baixadacomissao', $data);
+        } else {
+
+            $data['bd']['Dia'] = $data['query']['Dia'];
+			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
+			$data['bd']['Ano'] = $data['query']['Ano'];
+			$data['bd']['Orcarec'] = $data['query']['Orcarec'];
+			$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+			$data['bd']['QuitadoComissão'] = $data['query']['QuitadoComissão'];
+			$data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
+			$data['bd']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
+			$data['bd']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
+			
+			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+            #### Sis_Empresa ####
+
+			$data['empresa']['DataOrca'] = $this->basico->mascara_data($data['empresa']['DataOrca'], 'mysql');
+
+
+            $data['update']['empresa']['anterior'] = $this->Orcatrata_model->get_orcatrataalterar($data['empresa']['idSis_Empresa']);
+            $data['update']['empresa']['campos'] = array_keys($data['empresa']);
+            $data['update']['empresa']['auditoriaitem'] = $this->basico->set_log(
+                $data['update']['empresa']['anterior'],
+                $data['empresa'],
+                $data['update']['empresa']['campos'],
+                $data['empresa']['idSis_Empresa'], TRUE);
+            $data['update']['empresa']['bd'] = $this->Orcatrata_model->update_orcatrataalterar($data['empresa'], $data['empresa']['idSis_Empresa']);
+
+
+            #### App_ParcelasRec ####
+            $data['update']['orcamento']['anterior'] = $this->Orcatrata_model->get_baixadacomissao($data['empresa']['idSis_Empresa']);
+            if (isset($data['orcamento']) || (!isset($data['orcamento']) && isset($data['update']['orcamento']['anterior']) ) ) {
+
+                if (isset($data['orcamento']))
+                    $data['orcamento'] = array_values($data['orcamento']);
+                else
+                    $data['orcamento'] = array();
+
+                //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
+                $data['update']['orcamento'] = $this->basico->tratamento_array_multidimensional($data['orcamento'], $data['update']['orcamento']['anterior'], 'idApp_OrcaTrata');
+
+                $max = count($data['update']['orcamento']['alterar']);
+                for($j=0;$j<$max;$j++) {
+                    $data['update']['orcamento']['alterar'][$j]['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['update']['orcamento']['alterar'][$j]['ValorRestanteOrca']));
+                    $data['update']['orcamento']['alterar'][$j]['ValorComissao'] = str_replace(',', '.', str_replace('.', '', $data['update']['orcamento']['alterar'][$j]['ValorComissao']));
+                    $data['update']['orcamento']['alterar'][$j]['DataVencimentoOrca'] = $this->basico->mascara_data($data['update']['orcamento']['alterar'][$j]['DataVencimentoOrca'], 'mysql');
+					if ($data['query']['QuitadoComissão'] == 'S') $data['update']['orcamento']['alterar'][$j]['StatusComissaoOrca'] = 'S';
+				}
+
+                if (count($data['update']['orcamento']['alterar']))
+                    $data['update']['orcamento']['bd']['alterar'] =  $this->Orcatrata_model->update_comissao($data['update']['orcamento']['alterar']);
+
+            }
+
+            //if ($data['idSis_Empresa'] === FALSE) {
+            //if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
+            if ($data['auditoriaitem'] && !$data['update']['empresa']['bd']) {
+                $data['msg'] = '?m=2';
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+                $this->load->view('orcatrata/form_baixadacomissao', $data);
+            } else {
+
+                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idSis_Empresa'], FALSE);
+                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'CREATE', $data['auditoriaitem']);
+                $data['msg'] = '?m=1';
+
+				redirect(base_url() . 'relatorio/comissao/' . $data['msg']);
+				//redirect(base_url() . 'orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa'] . $data['msg']);
+
+				exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+
+    }
+	
     public function alterarparcelarec($id = FALSE) {
 
         if ($this->input->get('m') == 1)
@@ -7261,6 +7794,7 @@ class Orcatrata extends CI_Controller {
                 #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/receitasparc/' . $data['msg']);
 				redirect(base_url() . 'relatorio/parcelasrec/' . $data['msg']);
+				//redirect(base_url() . 'orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa'] . $data['msg']);
 
 				exit();
             }
@@ -8046,6 +8580,7 @@ class Orcatrata extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
                     $data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'];
+					$data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'] = $data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'];
 					$data['update']['produto']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['produto']['alterar'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['produto']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['produto']['alterar'][$j]['ValorProduto']));
 					$data['update']['produto']['alterar'][$j]['ComissaoProduto'] = $data['update']['produto']['alterar'][$j]['ComissaoProduto'];
@@ -8416,6 +8951,7 @@ class Orcatrata extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
                     $data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'];
+					$data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'] = $data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'];
 					$data['update']['produto']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['produto']['alterar'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['produto']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['produto']['alterar'][$j]['ValorProduto']));
 					$data['update']['produto']['alterar'][$j]['ComissaoProduto'] = $data['update']['produto']['alterar'][$j]['ComissaoProduto'];
@@ -8788,6 +9324,7 @@ class Orcatrata extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
                     $data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'];
+					$data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'] = $data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'];
 					$data['update']['produto']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['produto']['alterar'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['produto']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['produto']['alterar'][$j]['ValorProduto']));
 					$data['update']['produto']['alterar'][$j]['ComissaoProduto'] = $data['update']['produto']['alterar'][$j]['ComissaoProduto'];

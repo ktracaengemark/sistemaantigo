@@ -91,28 +91,28 @@
 										?>
 
 										<?php if ($metodo > 1) { ?>
-										<input type="hidden" name="idApp_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idApp_Servico']; ?>"/>
+										<input type="hidden" name="idApp_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idApp_Produto']; ?>"/>
 										<?php } ?>
 
 										<input type="hidden" name="ServicoHidden" id="ServicoHidden<?php echo $i ?>" value="<?php echo $i ?>">
 										
 										<div class="form-group" id="10div<?php echo $i ?>">
 											
-											<input type="hidden" name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdServico'] ?>">
-											<input type="hidden" name="QtdIncrementoServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdIncrementoServico'] ?>">
-											<input type="hidden" name="idTab_Valor_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Valor_Servico'] ?>">
-											<input type="hidden" name="idTab_Produtos_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Produtos_Servico'] ?>">
-											<input type="hidden" name="idTab_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Servico'] ?>">
-											<input type="hidden" name="ValorServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorServico'] ?>">
+											<input type="hidden" name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdProduto'] ?>">
+											<input type="hidden" name="QtdIncrementoServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdIncrementoProduto'] ?>">
+											<input type="hidden" name="idTab_Valor_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Valor_Produto'] ?>">
+											<input type="hidden" name="idTab_Produtos_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Produtos_Produto'] ?>">
+											<input type="hidden" name="idTab_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Produto'] ?>">
+											<input type="hidden" name="ValorServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorProduto'] ?>">
 											
-											<input type="hidden" name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsServico'] ?>">
-											<input type="hidden" name="DataValidadeServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataValidadeServico'] ?>">
-											<input type="hidden" name="ConcluidoServico<?php echo $i ?>" value="<?php echo $servico[$i]['ConcluidoServico'] ?>">
-											<input type="hidden" name="ProfissionalServico<?php echo $i ?>" value="<?php echo $servico[$i]['ProfissionalServico'] ?>">
+											<input type="hidden" name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
+											<input type="hidden" name="DataValidadeServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataValidadeProduto'] ?>">
+											<input type="hidden" name="ConcluidoServico<?php echo $i ?>" value="<?php echo $servico[$i]['ConcluidoProduto'] ?>">
+											<input type="hidden" name="ProfissionalServico<?php echo $i ?>" value="<?php echo $servico[$i]['ProfissionalProduto'] ?>">
 										</div>
 
 										<?php
-										$QtdSomaDev+=$servico[$i]['QtdServico'];
+										$QtdSomaDev+=$servico[$i]['QtdProduto'];
 										$ServicoSoma++;
 										}
 										?>
@@ -219,7 +219,7 @@
 												<th class="col-md-1" scope="col">Qtd</th>																																
 												<th class="col-md-10" scope="col">Produto</th>							
 												<!--<th class="col-md-1" scope="col">Valor</th>-->
-												<th class="col-md-1" scope="col">Sbt</th>
+												<th class="col-md-1" scope="col">Subtotal</th>
 											</tr>	
 											<!--
 											<tr>
@@ -273,9 +273,9 @@
 									<table class="table table-bordered table-condensed table-striped">
 										<thead>
 											<tr>
-												<th class="col-md-2" scope="col">Qtd</th>																															
-												<th class="col-md-6" scope="col">Serviço</th>							
-												<th class="col-md-1" scope="col">Valor</th>
+												<th class="col-md-1" scope="col">Qtd</th>																															
+												<th class="col-md-10" scope="col">Serviço</th>							
+												<!--<th class="col-md-1" scope="col">Valor</th>-->
 												<th class="col-md-1" scope="col">Subtotal</th>
 											</tr>	
 											<!--
@@ -294,16 +294,16 @@
 											?>
 
 											<tr>
-												<td><?php echo $servico[$i]['QtdServico'] ?></td>																			
-												<td><?php echo $servico[$i]['Servico'] ?></td>							
-												<td><?php echo number_format($servico[$i]['ValorServico'], 2, ',', '.') ?></td>
-												<td><?php echo number_format($servico[$i]['Subtotal_Servico'], 2, ',', '.') ?></td>
+												<td><?php echo $servico[$i]['QtdProduto'] ?></td>																			
+												<td><?php echo $servico[$i]['Produto'] ?></td>							
+												<!--<td><?php echo number_format($servico[$i]['ValorProduto'], 2, ',', '.') ?></td>-->
+												<td><?php echo number_format($servico[$i]['Subtotal_Produto'], 2, ',', '.') ?></td>
 											</tr>						
 											<!--
 											<tr>
 												<td></td>
 												
-												<td><?php echo $servico[$i]['DataValidadeServico'] ?></td>							
+												<td><?php echo $servico[$i]['DataValidadeProduto'] ?></td>							
 											</tr>
 											-->
 											<?php

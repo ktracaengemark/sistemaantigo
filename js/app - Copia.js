@@ -5630,12 +5630,19 @@ $(document).ready(function () {
 							<input type="hidden" class="form-control" id="ComissaoProduto'+pc+'" name="ComissaoProduto'+pc+'" value="0.00">\
 							<input type="hidden" class="form-control" id="Prod_Serv_Produto'+pc+'" name="Prod_Serv_Produto'+pc+'" value="">\
 							<input type="hidden" class="form-control" id="NomeProduto'+pc+'" name="NomeProduto'+pc+'" value="">\
-							<div class="col-md-9">\
+							<div class="col-md-7">\
                                 <label for="idTab_Produto">Produto '+pc+':</label><br>\
                                 <select class="form-control Chosen" id="listadinamicab'+pc+'" name="idTab_Produto'+pc+'" onchange="'+buscavalor+'(this.value,this.name,\''+tblbusca+'\','+pc+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')">\
                                     <option value="">-- Selecione uma opção --</option>\
                                 </select>\
                             </div>\
+							<div class="col-md-2">\
+								<label for="ProfissionalProduto'+pc+'">Profissional:</label>\
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen20"\
+										 id="listadinamica_prof_prod'+pc+'" name="ProfissionalProduto'+pc+'">\
+									<option value=""></option>\
+								</select>\
+							</div>\
 							<div class="col-md-2">\
 								<label for="ConcluidoProduto">Entregue? </label><br>\
 								<div class="btn-group" data-toggle="buttons">\
@@ -5660,9 +5667,19 @@ $(document).ready(function () {
 						<div class="row">\
 							<div class="col-md-2">\
                                 <label for="QtdProduto">Qtd.Item</label><br>\
-								<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto'+pc+'" placeholder="0"\
-									onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
-								   autofocus name="QtdProduto'+pc+'" value="1">\
+                                <div class="input-group">\
+                                    <input type="text" class="form-control Numero" maxlength="10" id="QtdProduto'+pc+'" placeholder="0"\
+                                        onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
+                                       autofocus name="QtdProduto'+pc+'" value="1">\
+                                </div>\
+                            </div>\
+							<div class="col-md-2">\
+                                <label for="QtdIncrementoProduto">Qtd.na Embl</label><br>\
+                                <div class="input-group">\
+                                    <input type="text" class="form-control Numero" maxlength="10" id="QtdIncrementoProduto'+pc+'" placeholder="0" '+ escrita +' \
+                                        onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTDINC\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pc+',\'QTDINC\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
+                                       name="QtdIncrementoProduto'+pc+'" value="1">\
+                                </div>\
                             </div>\
 							<div class="col-md-3">\
 								<label for="ValorProduto">Valor da Embl</label><br>\
@@ -5673,16 +5690,10 @@ $(document).ready(function () {
 										name="ValorProduto'+pc+'" value="">\
 								</div>\
 							</div>\
-							<div class="col-md-2">\
-                                <label for="QtdIncrementoProduto">Qtd.na Embl</label><br>\
-								<input type="text" class="form-control Numero" maxlength="10" id="QtdIncrementoProduto'+pc+'" placeholder="0" '+ escrita +' \
-									onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTDINC\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pc+',\'QTDINC\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
-								   name="QtdIncrementoProduto'+pc+'" value="1">\
-                            </div>\
 							<input type="hidden" class="form-control" id="SubtotalComissaoProduto'+pc+'" name="SubtotalComissaoProduto'+pc+'" value="0.00">\
 							<div class="col-md-2">\
 								<label for="SubtotalQtdProduto">Sub.Qtd.Prod</label><br>\
-								<div id="txtHint">\
+								<div class="input-group id="txtHint">\
 									<input type="text" class="form-control Numero text-right" maxlength="10" readonly="" id="SubtotalQtdProduto'+pc+'"\
 										   name="SubtotalQtdProduto'+pc+'" value="">\
 								</div>\
@@ -6108,11 +6119,13 @@ $(document).ready(function () {
 						<div class="row">\
 							<div class="col-md-2">\
 								<label for="QtdServico">Qtd</label><br>\
-								<input type="text" class="form-control Numero" maxlength="10" id="QtdServico'+ps+'" placeholder="0"\
-									onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
-									name="QtdServico'+ps+'" value="1">\
+								<div class="input-group">\
+									<input type="text" class="form-control Numero" maxlength="10" id="QtdServico'+ps+'" placeholder="0"\
+										onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
+										name="QtdServico'+ps+'" value="1">\
+								</div>\
 							</div>\
-							<input type="hidden" class="form-control Numero" id="QtdIncrementoServico'+ps+'" name="QtdIncrementoServico'+ps+'" value="1">\
+							<input type="hidden" class="form-control Numero" id="QtdIncrementoServico'+ps+'" name="QtdIncrementoServico'+ps+'" value="">\
 							<div class="col-md-3">\
 								<label for="ValorServico">Valor do Serviço</label><br>\
 								<div class="input-group">\

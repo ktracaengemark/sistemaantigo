@@ -190,24 +190,24 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 
-        $j = 1;
+		$j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
             if ($this->input->post('idTab_Servico' . $i)) {
-                $data['servico'][$j]['idTab_Servico'] = $this->input->post('idTab_Servico' . $i);
-				$data['servico'][$j]['idTab_Valor_Servico'] = $this->input->post('idTab_Valor_Servico' . $i);
-				$data['servico'][$j]['idTab_Produtos_Servico'] = $this->input->post('idTab_Produtos_Servico' . $i);
-				$data['servico'][$j]['Prod_Serv_Servico'] = $this->input->post('Prod_Serv_Servico' . $i);
-				$data['servico'][$j]['NomeServico'] = $this->input->post('NomeServico' . $i);
-				$data['servico'][$j]['ComissaoServico'] = $this->input->post('ComissaoServico' . $i);
-                $data['servico'][$j]['ValorServico'] = $this->input->post('ValorServico' . $i);
-                $data['servico'][$j]['QtdServico'] = $this->input->post('QtdServico' . $i);
-				$data['servico'][$j]['QtdIncrementoServico'] = $this->input->post('QtdIncrementoServico' . $i);
-                $data['servico'][$j]['SubtotalServico'] = $this->input->post('SubtotalServico' . $i);
-                $data['servico'][$j]['ObsServico'] = $this->input->post('ObsServico' . $i);
-                $data['servico'][$j]['DataValidadeServico'] = $this->input->post('DataValidadeServico' . $i);
-				$data['servico'][$j]['ConcluidoServico'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalServico'] = $this->input->post('ProfissionalServico' . $i);
+                $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
+				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
+				$data['servico'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Servico' . $i);
+				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
+				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
+				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+                $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
+                $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
+				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
+                $data['servico'][$j]['SubtotalProduto'] = $this->input->post('SubtotalServico' . $i);
+                $data['servico'][$j]['ObsProduto'] = $this->input->post('ObsServico' . $i);
+                $data['servico'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeServico' . $i);
+				$data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
+				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
                 $j++;
             }
 
@@ -661,22 +661,22 @@ class Orcatrata extends CI_Controller {
                 $max = count($data['servico']);
                 for($j=1;$j<=$max;$j++) {
                     $data['servico'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-					$data['servico'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-                    $data['servico'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['servico'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+					$data['servico'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['servico'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
-					$data['servico'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
-					$data['servico'][$j]['idTab_TipoRD'] = "4";
-					$data['servico'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeServico'], 'mysql');
-					$data['servico'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorServico']));
-                    unset($data['servico'][$j]['SubtotalServico']);
+                    $data['servico'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
+					$data['servico'][$j]['idTab_TipoRD'] = "2";
+					$data['servico'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeProduto'], 'mysql');
+                    $data['servico'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorProduto']));
+                    unset($data['servico'][$j]['SubtotalProduto']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
-						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['servico'][$j]['ConcluidoServico'] = 'S';
+						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['servico'][$j]['ConcluidoProduto'] = 'S';
 						}
 					}
-					else {$data['servico'][$j]['ConcluidoServico'] = 'N';
-					}               
+					else {$data['servico'][$j]['ConcluidoProduto'] = 'N';
+					}	
 				}
-                $data['servico']['idApp_Servico'] = $this->Orcatrata_model->set_servico($data['servico']);
+                $data['servico']['idApp_Produto'] = $this->Orcatrata_model->set_servico($data['servico']);
             }
 
             #### App_Produto ####
@@ -938,7 +938,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
 		#(!$data['orcatrata']['ValorFrete']) ? $data['orcatrata']['ValorFrete'] = '0.00' : FALSE;
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
-		
+		/*
 		$j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
@@ -962,6 +962,30 @@ class Orcatrata extends CI_Controller {
 
         }
         $data['count']['SCount'] = $j - 1;
+		*/
+		$j = 1;
+        for ($i = 1; $i <= $data['count']['SCount']; $i++) {
+
+            if ($this->input->post('idTab_Servico' . $i)) {
+                $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
+				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
+				$data['servico'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Servico' . $i);
+				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
+				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
+				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+                $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
+                $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
+				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
+                $data['servico'][$j]['SubtotalProduto'] = $this->input->post('SubtotalServico' . $i);
+                $data['servico'][$j]['ObsProduto'] = $this->input->post('ObsServico' . $i);
+                $data['servico'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeServico' . $i);
+				$data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
+				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
+                $j++;
+            }
+
+        }
+        $data['count']['SCount'] = $j - 1;		
 
         $j = 1;
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
@@ -1445,18 +1469,18 @@ class Orcatrata extends CI_Controller {
 					$data['servico'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['servico'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     $data['servico'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
-					$data['servico'][$j]['idTab_TipoRD'] = "4";
-					$data['servico'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeServico'], 'mysql');
-                    $data['servico'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorServico']));
-                    unset($data['servico'][$j]['SubtotalServico']);
+					$data['servico'][$j]['idTab_TipoRD'] = "2";
+					$data['servico'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeProduto'], 'mysql');
+                    $data['servico'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorProduto']));
+                    unset($data['servico'][$j]['SubtotalProduto']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
-						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['servico'][$j]['ConcluidoServico'] = 'S';
+						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['servico'][$j]['ConcluidoProduto'] = 'S';
 						}
 					}
-					else {$data['servico'][$j]['ConcluidoServico'] = 'N';
+					else {$data['servico'][$j]['ConcluidoProduto'] = 'N';
 					}	
 				}
-                $data['servico']['idApp_Servico'] = $this->Orcatrata_model->set_servico($data['servico']);
+                $data['servico']['idApp_Produto'] = $this->Orcatrata_model->set_servico($data['servico']);
             }
 
             #### App_Produto ####
@@ -1529,7 +1553,20 @@ class Orcatrata extends CI_Controller {
                 }
                 $data['procedimento']['idApp_Procedimento'] = $this->Orcatrata_model->set_procedimento($data['procedimento']);
             }
-			
+			/*
+			$data['update']['servico']['posterior'] = $this->Orcatrata_model->get_servico_posterior($data['orcatrata']['idApp_OrcaTrata']);
+			if (isset($data['update']['servico']['posterior'])){
+				$max_produto = count($data['update']['servico']['posterior']);
+				if($max_produto == 0){
+					$data['orcatrata']['ConcluidoOrca'] = "S";
+					$data['orcatrata']['ProntoOrca'] = "S";
+					$data['orcatrata']['EnviadoOrca'] = "S";
+					$data['orcatrata']['CombinadoFrete'] = "S";
+				}else{
+					$data['orcatrata']['ConcluidoOrca'] = "N";
+				}
+			}
+			*/
 			$data['update']['produto']['posterior'] = $this->Orcatrata_model->get_produto_posterior($data['orcatrata']['idApp_OrcaTrata']);
 			if (isset($data['update']['produto']['posterior'])){
 				$max_produto = count($data['update']['produto']['posterior']);
@@ -1707,21 +1744,21 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
             if ($this->input->post('idTab_Servico' . $i)) {
-                $data['servico'][$j]['idApp_Servico'] = $this->input->post('idApp_Servico' . $i);
-                $data['servico'][$j]['idTab_Servico'] = $this->input->post('idTab_Servico' . $i);
-				$data['servico'][$j]['idTab_Valor_Servico'] = $this->input->post('idTab_Valor_Servico' . $i);
-				$data['servico'][$j]['idTab_Produtos_Servico'] = $this->input->post('idTab_Produtos_Servico' . $i);
-				$data['servico'][$j]['Prod_Serv_Servico'] = $this->input->post('Prod_Serv_Servico' . $i);
-				$data['servico'][$j]['NomeServico'] = $this->input->post('NomeServico' . $i);
-				$data['servico'][$j]['ComissaoServico'] = $this->input->post('ComissaoServico' . $i);
-                $data['servico'][$j]['ValorServico'] = $this->input->post('ValorServico' . $i);
-                $data['servico'][$j]['QtdServico'] = $this->input->post('QtdServico' . $i);
-				$data['servico'][$j]['QtdIncrementoServico'] = $this->input->post('QtdIncrementoServico' . $i);
-                $data['servico'][$j]['SubtotalServico'] = $this->input->post('SubtotalServico' . $i);
-                $data['servico'][$j]['ObsServico'] = $this->input->post('ObsServico' . $i);
-				$data['servico'][$j]['DataValidadeServico'] = $this->input->post('DataValidadeServico' . $i);
-                $data['servico'][$j]['ConcluidoServico'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalServico'] = $this->input->post('ProfissionalServico' . $i);
+                $data['servico'][$j]['idApp_Produto'] = $this->input->post('idApp_Servico' . $i);
+                $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
+				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
+				$data['servico'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Servico' . $i);
+				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
+				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
+				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+                $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
+                $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
+				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
+                $data['servico'][$j]['SubtotalProduto'] = $this->input->post('SubtotalServico' . $i);
+                $data['servico'][$j]['ObsProduto'] = $this->input->post('ObsServico' . $i);
+				$data['servico'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeServico' . $i);
+                $data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
+				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
                 $j++;
             }
 
@@ -1829,8 +1866,8 @@ class Orcatrata extends CI_Controller {
                 if (isset($data['servico'])) {
 
                     for($j=1;$j<=$data['count']['SCount'];$j++) {
-                        $data['servico'][$j]['SubtotalServico'] = number_format(($data['servico'][$j]['ValorServico'] * $data['servico'][$j]['QtdServico']), 2, ',', '.');
-						$data['servico'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeServico'], 'barras');
+                        $data['servico'][$j]['SubtotalProduto'] = number_format(($data['servico'][$j]['ValorProduto'] * $data['servico'][$j]['QtdProduto']), 2, ',', '.');
+						$data['servico'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeProduto'], 'barras');
 					}
                 }
             }
@@ -2273,7 +2310,7 @@ class Orcatrata extends CI_Controller {
             exit ();
             */			
 			
-            #### App_Servico ####
+			#### App_Servico ####
             $data['update']['servico']['anterior'] = $this->Orcatrata_model->get_servico($data['orcatrata']['idApp_OrcaTrata']);
             if (isset($data['servico']) || (!isset($data['servico']) && isset($data['update']['servico']['anterior']) ) ) {
 
@@ -2283,7 +2320,7 @@ class Orcatrata extends CI_Controller {
                     $data['servico'] = array();
 
                 //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
-                $data['update']['servico'] = $this->basico->tratamento_array_multidimensional($data['servico'], $data['update']['servico']['anterior'], 'idApp_Servico');
+                $data['update']['servico'] = $this->basico->tratamento_array_multidimensional($data['servico'], $data['update']['servico']['anterior'], 'idApp_Produto');
 
                 $max = count($data['update']['servico']['inserir']);
                 for($j=0;$j<$max;$j++) {
@@ -2293,33 +2330,35 @@ class Orcatrata extends CI_Controller {
 					$data['update']['servico']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['servico']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     $data['update']['servico']['inserir'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
-					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "4";
-					$data['update']['servico']['inserir'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeServico'], 'mysql');
-                    $data['update']['servico']['inserir'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorServico']));
-                    unset($data['update']['servico']['inserir'][$j]['SubtotalServico']);
+					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "2";
+					$data['update']['servico']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeProduto'], 'mysql');
+					$data['update']['servico']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorProduto']));
+                    unset($data['update']['servico']['inserir'][$j]['SubtotalProduto']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
-						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['update']['servico']['inserir'][$j]['ConcluidoServico'] = 'S';
+						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
+							$data['update']['servico']['inserir'][$j]['ConcluidoProduto'] = 'S';
 						}
 						
+					} else {
+						$data['update']['servico']['inserir'][$j]['ConcluidoProduto'] = 'N';
 					}
-					else {$data['update']['servico']['inserir'][$j]['ConcluidoServico'] = 'N';
-					}	
-               
 				}
 
                 $max = count($data['update']['servico']['alterar']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['servico']['alterar'][$j]['idTab_Valor_Servico'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Servico'];
-					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Servico'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Servico'];
-					$data['update']['servico']['alterar'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeServico'], 'mysql');
-					$data['update']['servico']['alterar'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['alterar'][$j]['ValorServico']));
-                    unset($data['update']['servico']['alterar'][$j]['SubtotalServico']);
+                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto'];
+					$data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'];
+					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
+					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
+					$data['update']['servico']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['alterar'][$j]['ValorProduto']));
+                    unset($data['update']['servico']['alterar'][$j]['SubtotalProduto']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
-						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['update']['servico']['alterar'][$j]['ConcluidoServico'] = 'S';
+						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
+							$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = 'S';
 						}
+					} else {
+						$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = 'N';
 					}
-					else {$data['update']['servico']['alterar'][$j]['ConcluidoServico'] = 'N';
-					}				
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['servico']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
                 }
 
@@ -2682,7 +2721,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['HoraEntregaOrca']) ? $data['orcatrata']['HoraEntregaOrca'] = date('H:i:s', strtotime('+1 hour')) : FALSE;
 		(!$data['orcatrata']['idApp_Cliente']) ? $data['orcatrata']['idApp_Cliente'] = '1' : FALSE;
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
-		
+		/*
         $j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
@@ -2707,6 +2746,31 @@ class Orcatrata extends CI_Controller {
 
         }
         $data['count']['SCount'] = $j - 1;
+		*/
+        $j = 1;
+        for ($i = 1; $i <= $data['count']['SCount']; $i++) {
+
+            if ($this->input->post('idTab_Servico' . $i)) {
+                $data['servico'][$j]['idApp_Produto'] = $this->input->post('idApp_Servico' . $i);
+                $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
+				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
+				$data['servico'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Servico' . $i);
+				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
+				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
+				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+                $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
+                $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
+				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
+                $data['servico'][$j]['SubtotalProduto'] = $this->input->post('SubtotalServico' . $i);
+                $data['servico'][$j]['ObsProduto'] = $this->input->post('ObsServico' . $i);
+				$data['servico'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeServico' . $i);
+                $data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
+				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
+                $j++;
+            }
+
+        }
+        $data['count']['SCount'] = $j - 1;		
 
         $j = 1;
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
@@ -2812,8 +2876,8 @@ class Orcatrata extends CI_Controller {
                 if (isset($data['servico'])) {
 
                     for($j=1;$j<=$data['count']['SCount'];$j++) {
-                        $data['servico'][$j]['SubtotalServico'] = number_format(($data['servico'][$j]['ValorServico'] * $data['servico'][$j]['QtdServico']), 2, ',', '.');
-						$data['servico'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeServico'], 'barras');
+                        $data['servico'][$j]['SubtotalProduto'] = number_format(($data['servico'][$j]['ValorProduto'] * $data['servico'][$j]['QtdProduto']), 2, ',', '.');
+						$data['servico'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeProduto'], 'barras');
 					}
                 }
             }
@@ -3275,7 +3339,7 @@ class Orcatrata extends CI_Controller {
                     $data['servico'] = array();
 
                 //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
-                $data['update']['servico'] = $this->basico->tratamento_array_multidimensional($data['servico'], $data['update']['servico']['anterior'], 'idApp_Servico');
+                $data['update']['servico'] = $this->basico->tratamento_array_multidimensional($data['servico'], $data['update']['servico']['anterior'], 'idApp_Produto');
 
                 $max = count($data['update']['servico']['inserir']);
                 for($j=0;$j<$max;$j++) {
@@ -3285,32 +3349,34 @@ class Orcatrata extends CI_Controller {
 					$data['update']['servico']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['servico']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     $data['update']['servico']['inserir'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
-					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "4";
-					$data['update']['servico']['inserir'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeServico'], 'mysql');
-					$data['update']['servico']['inserir'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorServico']));
-                    unset($data['update']['servico']['inserir'][$j]['SubtotalServico']);
+					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "2";
+					$data['update']['servico']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeProduto'], 'mysql');
+					$data['update']['servico']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorProduto']));
+                    unset($data['update']['servico']['inserir'][$j]['SubtotalProduto']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
-						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['update']['servico']['inserir'][$j]['ConcluidoServico'] = 'S';
+						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
+							$data['update']['servico']['inserir'][$j]['ConcluidoProduto'] = 'S';
 						}
 						
-					}
-					else {$data['update']['servico']['inserir'][$j]['ConcluidoServico'] = 'N';
+					} else {
+						$data['update']['servico']['inserir'][$j]['ConcluidoProduto'] = 'N';
 					}
 				}
 
                 $max = count($data['update']['servico']['alterar']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['servico']['alterar'][$j]['ProfissionalServico'] = $data['update']['servico']['alterar'][$j]['ProfissionalServico'];
-					$data['update']['servico']['alterar'][$j]['idTab_Valor_Servico'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Servico'];
-					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Servico'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Servico'];
-					$data['update']['servico']['alterar'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeServico'], 'mysql');
-					$data['update']['servico']['alterar'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['alterar'][$j]['ValorServico']));
-                    unset($data['update']['servico']['alterar'][$j]['SubtotalServico']);
+                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto'];
+					$data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'];
+					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
+					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
+					$data['update']['servico']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['alterar'][$j]['ValorProduto']));
+                    unset($data['update']['servico']['alterar'][$j]['SubtotalProduto']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
-						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['update']['servico']['alterar'][$j]['ConcluidoServico'] = 'S';
+						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
+							$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = 'S';
 						}
-					}
-					else {$data['update']['servico']['alterar'][$j]['ConcluidoServico'] = 'N';
+					} else {
+						$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = 'N';
 					}
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['servico']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
                 }
@@ -3821,21 +3887,21 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
             if ($this->input->post('idTab_Servico' . $i)) {
-                $data['servico'][$j]['idApp_Servico'] = $this->input->post('idApp_Servico' . $i);
-                $data['servico'][$j]['idTab_Servico'] = $this->input->post('idTab_Servico' . $i);
-				$data['servico'][$j]['idTab_Valor_Servico'] = $this->input->post('idTab_Valor_Servico' . $i);
-				$data['servico'][$j]['idTab_Produtos_Servico'] = $this->input->post('idTab_Produtos_Servico' . $i);
-				$data['servico'][$j]['Prod_Serv_Servico'] = $this->input->post('Prod_Serv_Servico' . $i);
-				$data['servico'][$j]['NomeServico'] = $this->input->post('NomeServico' . $i);
-				$data['servico'][$j]['ComissaoServico'] = $this->input->post('ComissaoServico' . $i);
-                $data['servico'][$j]['ValorServico'] = $this->input->post('ValorServico' . $i);
-                $data['servico'][$j]['QtdServico'] = $this->input->post('QtdServico' . $i);
-				$data['servico'][$j]['QtdIncrementoServico'] = $this->input->post('QtdIncrementoServico' . $i);
-                $data['servico'][$j]['SubtotalServico'] = $this->input->post('SubtotalServico' . $i);
-                $data['servico'][$j]['ObsServico'] = $this->input->post('ObsServico' . $i);
-				$data['servico'][$j]['DataValidadeServico'] = $this->input->post('DataValidadeServico' . $i);
-                $data['servico'][$j]['ConcluidoServico'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalServico'] = $this->input->post('ProfissionalServico' . $i);
+                $data['servico'][$j]['idApp_Produto'] = $this->input->post('idApp_Servico' . $i);
+                $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
+				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
+				$data['servico'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Servico' . $i);
+				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
+				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
+				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+                $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
+                $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
+				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
+                $data['servico'][$j]['SubtotalProduto'] = $this->input->post('SubtotalServico' . $i);
+                $data['servico'][$j]['ObsProduto'] = $this->input->post('ObsServico' . $i);
+				$data['servico'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeServico' . $i);
+                $data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
+				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
                 $j++;
             }
 
@@ -3965,8 +4031,8 @@ class Orcatrata extends CI_Controller {
                 if (isset($data['servico'])) {
 
                     for($j=1;$j<=$data['count']['SCount'];$j++) {
-                        $data['servico'][$j]['SubtotalServico'] = number_format(($data['servico'][$j]['ValorServico'] * $data['servico'][$j]['QtdServico']), 2, ',', '.');
-						$data['servico'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeServico'], 'barras');
+                        $data['servico'][$j]['SubtotalProduto'] = number_format(($data['servico'][$j]['ValorProduto'] * $data['servico'][$j]['QtdProduto']), 2, ',', '.');
+						$data['servico'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeProduto'], 'barras');
 					}
                 }
             }
@@ -4435,7 +4501,7 @@ class Orcatrata extends CI_Controller {
                     $data['servico'] = array();
 
                 //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
-                $data['update']['servico'] = $this->basico->tratamento_array_multidimensional($data['servico'], $data['update']['servico']['anterior'], 'idApp_Servico');
+                $data['update']['servico'] = $this->basico->tratamento_array_multidimensional($data['servico'], $data['update']['servico']['anterior'], 'idApp_Produto');
 
                 $max = count($data['update']['servico']['inserir']);
                 for($j=0;$j<$max;$j++) {
@@ -4445,32 +4511,34 @@ class Orcatrata extends CI_Controller {
 					$data['update']['servico']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['servico']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     $data['update']['servico']['inserir'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
-					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "4";
-					$data['update']['servico']['inserir'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeServico'], 'mysql');
-					$data['update']['servico']['inserir'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorServico']));
-                    unset($data['update']['servico']['inserir'][$j]['SubtotalServico']);
+					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "2";
+					$data['update']['servico']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeProduto'], 'mysql');
+					$data['update']['servico']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorProduto']));
+                    unset($data['update']['servico']['inserir'][$j]['SubtotalProduto']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
-						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['update']['servico']['inserir'][$j]['ConcluidoServico'] = 'S';
+						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
+							$data['update']['servico']['inserir'][$j]['ConcluidoProduto'] = 'S';
 						}
 						
-					}
-					else {$data['update']['servico']['inserir'][$j]['ConcluidoServico'] = 'N';
+					} else {
+						$data['update']['servico']['inserir'][$j]['ConcluidoProduto'] = 'N';
 					}
 				}
 
                 $max = count($data['update']['servico']['alterar']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['servico']['alterar'][$j]['ProfissionalServico'] = $data['update']['servico']['alterar'][$j]['ProfissionalServico'];
-					$data['update']['servico']['alterar'][$j]['idTab_Valor_Servico'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Servico'];
-					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Servico'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Servico'];
-					$data['update']['servico']['alterar'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeServico'], 'mysql');
-					$data['update']['servico']['alterar'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['alterar'][$j]['ValorServico']));
-                    unset($data['update']['servico']['alterar'][$j]['SubtotalServico']);
+                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto'];
+					$data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'];
+					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
+					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
+					$data['update']['servico']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['alterar'][$j]['ValorProduto']));
+                    unset($data['update']['servico']['alterar'][$j]['SubtotalProduto']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
-						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['update']['servico']['alterar'][$j]['ConcluidoServico'] = 'S';
+						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
+							$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = 'S';
 						}
-					}
-					else {$data['update']['servico']['alterar'][$j]['ConcluidoServico'] = 'N';
+					} else {
+						$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = 'N';
 					}
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['servico']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
                 }
@@ -5285,7 +5353,7 @@ class Orcatrata extends CI_Controller {
 					$data['update']['servico']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['servico']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     $data['update']['servico']['inserir'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
-					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "4";
+					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "2";
 					$data['update']['servico']['inserir'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeServico'], 'mysql');
                     unset($data['update']['servico']['inserir'][$j]['SubtotalServico']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
@@ -5701,20 +5769,20 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
             if ($this->input->post('idTab_Servico' . $i)) {
-                $data['servico'][$j]['idTab_Servico'] = $this->input->post('idTab_Servico' . $i);
-				$data['servico'][$j]['idTab_Valor_Servico'] = $this->input->post('idTab_Valor_Servico' . $i);
-				$data['servico'][$j]['idTab_Produtos_Servico'] = $this->input->post('idTab_Produtos_Servico' . $i);
-				$data['servico'][$j]['Prod_Serv_Servico'] = $this->input->post('Prod_Serv_Servico' . $i);
-				$data['servico'][$j]['NomeServico'] = $this->input->post('NomeServico' . $i);
-				$data['servico'][$j]['ComissaoServico'] = $this->input->post('ComissaoServico' . $i);
-                $data['servico'][$j]['ValorServico'] = $this->input->post('ValorServico' . $i);
-                $data['servico'][$j]['QtdServico'] = $this->input->post('QtdServico' . $i);
-				$data['servico'][$j]['QtdIncrementoServico'] = $this->input->post('QtdIncrementoServico' . $i);
-                $data['servico'][$j]['SubtotalServico'] = $this->input->post('SubtotalServico' . $i);
-                $data['servico'][$j]['ObsServico'] = $this->input->post('ObsServico' . $i);
-                $data['servico'][$j]['DataValidadeServico'] = $this->input->post('DataValidadeServico' . $i);
-				$data['servico'][$j]['ConcluidoServico'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalServico'] = $this->input->post('ProfissionalServico' . $i);
+                $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
+				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
+				$data['servico'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Servico' . $i);
+				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
+				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
+				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+                $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
+                $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
+				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
+                $data['servico'][$j]['SubtotalProduto'] = $this->input->post('SubtotalServico' . $i);
+                $data['servico'][$j]['ObsProduto'] = $this->input->post('ObsServico' . $i);
+                $data['servico'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeServico' . $i);
+				$data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
+				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
                 $j++;
             }
 
@@ -5832,7 +5900,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['ProfissionalProduto'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
         $data['select']['Produto'] = $this->Basico_model->select_produto2();
-		$data['select']['Servico'] = $this->Basico_model->select_produto2();
+		$data['select']['Servico'] = $this->Basico_model->select_servico2();
 		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 		$data['select']['AVAP'] = $this->Basico_model->select_avap();
 		$data['select']['Prioridade'] = array (
@@ -6060,7 +6128,7 @@ class Orcatrata extends CI_Controller {
             echo "</pre>";
             exit ();
             */
-
+			
             #### App_Servico ####
             if (isset($data['servico'])) {
                 $max = count($data['servico']);
@@ -6070,19 +6138,20 @@ class Orcatrata extends CI_Controller {
 					$data['servico'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['servico'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     $data['servico'][$j]['idApp_Fornecedor'] = $data['orcatrata']['idApp_Fornecedor'];					
-					$data['servico'][$j]['idTab_TipoRD'] = "3";
-					$data['servico'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeServico'], 'mysql');
-                    $data['servico'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorServico']));
-					unset($data['servico'][$j]['SubtotalServico']);
+					$data['servico'][$j]['idTab_TipoRD'] = "1";
+					$data['servico'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeProduto'], 'mysql');
+                    $data['servico'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorProduto']));
+                    unset($data['servico'][$j]['SubtotalProduto']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
-						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['servico'][$j]['ConcluidoServico'] = 'S';
-						}						
-					}
-					else {	$data['servico'][$j]['ConcluidoServico'] = 'N';
-					}               
+						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
+							$data['servico'][$j]['ConcluidoProduto'] = 'S';
+						}
+					} else {
+						$data['servico'][$j]['ConcluidoProduto'] = 'N';
+					}	
 				}
-                $data['servico']['idApp_Servico'] = $this->Orcatrata_model->set_servico($data['servico']);
-            }
+                $data['servico']['idApp_Produto'] = $this->Orcatrata_model->set_servico($data['servico']);
+            }			
 
             #### App_Produto ####
             if (isset($data['produto'])) {
@@ -6311,21 +6380,21 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
             if ($this->input->post('idTab_Servico' . $i)) {
-                $data['servico'][$j]['idApp_Servico'] = $this->input->post('idApp_Servico' . $i);
-                $data['servico'][$j]['idTab_Servico'] = $this->input->post('idTab_Servico' . $i);
-				$data['servico'][$j]['idTab_Valor_Servico'] = $this->input->post('idTab_Valor_Servico' . $i);
-				$data['servico'][$j]['idTab_Produtos_Servico'] = $this->input->post('idTab_Produtos_Servico' . $i);
-				$data['servico'][$j]['Prod_Serv_Servico'] = $this->input->post('Prod_Serv_Servico' . $i);
-				$data['servico'][$j]['NomeServico'] = $this->input->post('NomeServico' . $i);
-				$data['servico'][$j]['ComissaoServico'] = $this->input->post('ComissaoServico' . $i);
-                $data['servico'][$j]['ValorServico'] = $this->input->post('ValorServico' . $i);
-                $data['servico'][$j]['QtdServico'] = $this->input->post('QtdServico' . $i);
-				$data['servico'][$j]['QtdIncrementoServico'] = $this->input->post('QtdIncrementoServico' . $i);
-                $data['servico'][$j]['SubtotalServico'] = $this->input->post('SubtotalServico' . $i);
-                $data['servico'][$j]['ObsServico'] = $this->input->post('ObsServico' . $i);
-				$data['servico'][$j]['DataValidadeServico'] = $this->input->post('DataValidadeServico' . $i);
-                $data['servico'][$j]['ConcluidoServico'] = $this->input->post('ConcluidoServico' . $i);
-				$data['servico'][$j]['ProfissionalServico'] = $this->input->post('ProfissionalServico' . $i);
+                $data['servico'][$j]['idApp_Produto'] = $this->input->post('idApp_Servico' . $i);
+                $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
+				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
+				$data['servico'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Servico' . $i);
+				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
+				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
+				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+                $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
+                $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
+				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
+                $data['servico'][$j]['SubtotalProduto'] = $this->input->post('SubtotalServico' . $i);
+                $data['servico'][$j]['ObsProduto'] = $this->input->post('ObsServico' . $i);
+				$data['servico'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeServico' . $i);
+                $data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
+				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
                 $j++;
             }
 
@@ -6432,8 +6501,8 @@ class Orcatrata extends CI_Controller {
                 if (isset($data['servico'])) {
 
                     for($j=1;$j<=$data['count']['SCount'];$j++) {
-                        $data['servico'][$j]['SubtotalServico'] = number_format(($data['servico'][$j]['ValorServico'] * $data['servico'][$j]['QtdServico']), 2, ',', '.');
-						$data['servico'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeServico'], 'barras');
+                        $data['servico'][$j]['SubtotalProduto'] = number_format(($data['servico'][$j]['ValorProduto'] * $data['servico'][$j]['QtdProduto']), 2, ',', '.');
+						$data['servico'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeProduto'], 'barras');
 					}
                 }
             }
@@ -6530,7 +6599,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['ProfissionalProduto'] = $this->Usuario_model->select_usuario();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Produto'] = $this->Basico_model->select_produto2();
-		$data['select']['Servico'] = $this->Basico_model->select_produto2();
+		$data['select']['Servico'] = $this->Basico_model->select_servico2();
 		#$data['select']['AVAP'] = $this->Basico_model->select_modalidade2();
 		$data['select']['AVAP'] = $this->Basico_model->select_avap();
 		$data['select']['Prioridade'] = array (
@@ -6755,8 +6824,9 @@ class Orcatrata extends CI_Controller {
                 $data['orcatrata']['idApp_OrcaTrata'], TRUE);
             $data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);
 			*/
-            #### App_Servico ####
-            $data['update']['servico']['anterior'] = $this->Orcatrata_model->get_servicodesp($data['orcatrata']['idApp_OrcaTrata']);
+
+			#### App_Servico ####
+            $data['update']['servico']['anterior'] = $this->Orcatrata_model->get_servico($data['orcatrata']['idApp_OrcaTrata']);
             if (isset($data['servico']) || (!isset($data['servico']) && isset($data['update']['servico']['anterior']) ) ) {
 
                 if (isset($data['servico']))
@@ -6765,7 +6835,7 @@ class Orcatrata extends CI_Controller {
                     $data['servico'] = array();
 
                 //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
-                $data['update']['servico'] = $this->basico->tratamento_array_multidimensional($data['servico'], $data['update']['servico']['anterior'], 'idApp_Servico');
+                $data['update']['servico'] = $this->basico->tratamento_array_multidimensional($data['servico'], $data['update']['servico']['anterior'], 'idApp_Produto');
 
                 $max = count($data['update']['servico']['inserir']);
                 for($j=0;$j<$max;$j++) {
@@ -6775,32 +6845,36 @@ class Orcatrata extends CI_Controller {
 					$data['update']['servico']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['servico']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     $data['update']['servico']['inserir'][$j]['idApp_Fornecedor'] = $data['orcatrata']['idApp_Fornecedor'];					
-					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "3";
-					$data['update']['servico']['inserir'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeServico'], 'mysql');
-                    $data['update']['servico']['inserir'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorServico']));
-                    unset($data['update']['servico']['inserir'][$j]['SubtotalServico']);
+					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "1";
+					$data['update']['servico']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeProduto'], 'mysql');
+					$data['update']['servico']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorProduto']));
+                    unset($data['update']['servico']['inserir'][$j]['SubtotalProduto']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
-						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['update']['servico']['inserir'][$j]['ConcluidoServico'] = 'S';
+						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
+							$data['update']['servico']['inserir'][$j]['ConcluidoProduto'] = 'S';
 						}
-					}
-					else {$data['update']['servico']['inserir'][$j]['ConcluidoServico'] = 'N';
+						
+					} else {
+						$data['update']['servico']['inserir'][$j]['ConcluidoProduto'] = 'N';
 					}
 				}
 
                 $max = count($data['update']['servico']['alterar']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['servico']['alterar'][$j]['idTab_Valor_Servico'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Servico'];
-					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Servico'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Servico'];
-					$data['update']['servico']['alterar'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeServico'], 'mysql');
-					$data['update']['servico']['alterar'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['alterar'][$j]['ValorServico']));
-                    unset($data['update']['servico']['alterar'][$j]['SubtotalServico']);
+                    $data['update']['servico']['alterar'][$j]['ProfissionalProduto'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto'];
+					$data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'];
+					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
+					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
+					$data['update']['servico']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['alterar'][$j]['ValorProduto']));
+                    unset($data['update']['servico']['alterar'][$j]['SubtotalProduto']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
-						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { $data['update']['servico']['alterar'][$j]['ConcluidoServico'] = 'S';
+						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
+							$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = 'S';
 						}
+					} else {
+						$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = 'N';
 					}
-					else {$data['update']['servico']['alterar'][$j]['ConcluidoServico'] = 'N';
-					}				
-					if ($data['orcatrata']['idApp_Fornecedor']) $data['update']['servico']['alterar'][$j]['idApp_Fornecedor'] = $data['orcatrata']['idApp_Fornecedor'];					
+					if ($data['orcatrata']['idApp_Cliente']) $data['update']['servico']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
                 }
 
                 if (count($data['update']['servico']['inserir']))
@@ -6811,8 +6885,8 @@ class Orcatrata extends CI_Controller {
 
                 if (count($data['update']['servico']['excluir']))
                     $data['update']['servico']['bd']['excluir'] = $this->Orcatrata_model->delete_servico($data['update']['servico']['excluir']);
-            }
-
+            }			
+			
             #### App_Produto ####
             $data['update']['produto']['anterior'] = $this->Orcatrata_model->get_produtodesp($data['orcatrata']['idApp_OrcaTrata']);
             if (isset($data['produto']) || (!isset($data['produto']) && isset($data['update']['produto']['anterior']) ) ) {
@@ -8502,7 +8576,7 @@ class Orcatrata extends CI_Controller {
                     $data['update']['servico']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['servico']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['update']['servico']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];					
-					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "3";
+					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "1";
 					$data['update']['servico']['inserir'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeServico'], 'mysql');
 					$data['update']['servico']['inserir'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorServico']));
                     unset($data['update']['servico']['inserir'][$j]['SubtotalServico']);
@@ -8874,7 +8948,7 @@ class Orcatrata extends CI_Controller {
                     $data['update']['servico']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['servico']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['update']['servico']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];					
-					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "4";
+					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "2";
 					$data['update']['servico']['inserir'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeServico'], 'mysql');
 					$data['update']['servico']['inserir'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorServico']));
                     unset($data['update']['servico']['inserir'][$j]['SubtotalServico']);
@@ -9247,7 +9321,7 @@ class Orcatrata extends CI_Controller {
                     $data['update']['servico']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['servico']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['update']['servico']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];					
-					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "4";
+					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "2";
 					$data['update']['servico']['inserir'][$j]['DataValidadeServico'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeServico'], 'mysql');
 					$data['update']['servico']['inserir'][$j]['ValorServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorServico']));
                     unset($data['update']['servico']['inserir'][$j]['SubtotalServico']);
