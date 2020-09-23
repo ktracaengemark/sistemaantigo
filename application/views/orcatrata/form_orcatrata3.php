@@ -379,7 +379,9 @@
 																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
 																			 name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdProduto'] ?>">
 																</div>
-																<input type="hidden" class="form-control Numero" id="QtdIncrementoServico<?php echo $i ?>" name="QtdIncrementoServico<?php echo $i ?>" value="1">
+																<input type="hidden" class="form-control Numero" id="QtdIncrementoServico<?php echo $i ?>" name="QtdIncrementoServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdIncrementoProduto'] ?>">
+																<input type="hidden" class="form-control " id="SubtotalComissaoServico<?php echo $i ?>" name="SubtotalComissaoServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalComissaoProduto'] ?>">
+																<input type="hidden" class="form-control " id="SubtotalQtdServico<?php echo $i ?>" name="SubtotalQtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalQtdProduto'] ?>">
 																<div class="col-md-3">
 																	<label for="ValorServico">Valor do Serviço</label>
 																	<div class="input-group">
@@ -448,10 +450,26 @@
 															<div class="panel panel-danger">
 																<div class="panel-heading">
 																	<div class="row">
+																		<!--
 																		<div class="col-md-6">
 																			<div class="row">
 																				<div class="col-md-12 text-left">	
 																					<b>Serviços: <span class="text-right" id="QtdSomaDev"><?php echo $QtdSomaDev ?></span> </b>
+																				</div>
+																			</div>
+																		</div>
+																		-->
+																		<div class="col-md-6">
+																			<div class="row">
+																				<div class="col-md-4 text-left">	
+																					<b>Serviços: </b> 
+																				</div>
+																				<div class="col-md-8">
+																					<div  id="txtHint">
+																						<input type="text" class="form-control text-right Numero" id="QtdSrvOrca" maxlength="10" readonly=""
+																							   name="QtdSrvOrca" value="<?php echo $orcatrata['QtdSrvOrca'] ?>">
+																							   
+																					</div>
 																				</div>
 																			</div>
 																		</div>

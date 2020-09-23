@@ -3713,9 +3713,9 @@ function calculaSubtotal(valor, campo, num, tipo, tabela, qtdinc, comissao) {
 	//subtotalcomissao 	= mascaraValorReal(subtotalcomissao);
 	subtotalqtd1 		= subtotalqtd;
 	
-	//console.log(subtotalqtd1 + ' - Quantidade do produto');
-	//console.log(subtotal + ' - Subtotal do produto');
-	//console.log(subtotalcomissao + ' - Subtotal da comissão do produto');
+	//console.log(subtotalqtd1 + ' - Quantidade do ' + tabela);
+	//console.log(subtotal + ' - Subtotal do ' + tabela);
+	//console.log(subtotalcomissao + ' - Subtotal da comissão do ' + tabela);
 	
     //o subtotal é escrito no seu campo no formulário
     $('#Subtotal'+tabela+num).val(subtotal);
@@ -3860,11 +3860,15 @@ function calculaOrcamento() {
     var sc = parseFloat($('#SCount').val().replace(".","").replace(",","."));
     var pc = parseFloat($('#PCount').val().replace(".","").replace(",","."));
     //define o subtotal inicial em 0.00
-    var subtotalservico = 0.00;
+    
+	var subtotalservico = 0.00;
+	var subtotalcomissaoservico = 0.00;
+	var subtotalqtdservico = 0.00;
+	
 	var subtotal = 0.00;
 	var subtotalcomissao = 0.00;
 	var subtotalqtd = 0.00;
-
+	
     //variável incrementadora
     var i = 0;
     //percorre todos os campos de serviço, somando seus valores
@@ -3872,15 +3876,18 @@ function calculaOrcamento() {
 
         //soma os valores apenas dos campos que existirem, o que forem apagados
         //ou removidos são ignorados
-        if ($('#SubtotalServico'+i).val())
+        if ($('#SubtotalServico'+i).val()){
             //subtotal += parseFloat($('#idTab_Servico'+i).val().replace(".","").replace(",","."));
             //subtotal -= parseFloat($('#SubtotalServico'+i).val().replace(".","").replace(",","."));
 			subtotalservico += parseFloat($('#SubtotalServico'+i).val().replace(".","").replace(",","."));
-
-        //incrementa a variável i
-        i++;
+			subtotalcomissaoservico += parseFloat($('#SubtotalComissaoServico'+i).val());
+			subtotalqtdservico += parseFloat($('#SubtotalQtdServico'+i).val().replace(".","").replace(",","."));
+			//incrementa a variável i
+        }
+		i++;
     }
-
+	//console.log(subtotalcomissaoservico + ' - Total Comissão servico');
+	//console.log(subtotalqtdservico + ' - Total Quantidade servico');
     //faz o mesmo que o laço anterior mas agora para produtos
     var i = 0;
     while (i <= pc) {
@@ -3893,23 +3900,30 @@ function calculaOrcamento() {
 		}
 		i++;
     }
-
+	//console.log(subtotalcomissao + ' - Total Comissão produto');
     //calcula o subtotal, configurando para duas casas decimais e trocando o
     //ponto para o vírgula como separador de casas decimais
     subtotalservico = mascaraValorReal(subtotalservico);
 	subtotal = mascaraValorReal(subtotal);
 	//subtotalcomissao = mascaraValorReal(subtotalcomissao);
 	subtotalqtd1 = subtotalqtd;
-	
+	subtotalqtd2 = subtotalqtdservico;
 	//console.log(subtotalqtd1 + ' - Quantidade Total de produtos');
+	//console.log(subtotalqtd2 + ' - Quantidade Total de servicos');
 	//console.log(subtotal + ' - Valor Total de produtos');
 	//console.log(subtotalcomissao + ' - Valor Total de comissão');
-	
-    //escreve o subtotal no campo do formulário
+	var valorcomissao = -(-subtotalcomissaoservico -subtotalcomissao);
+    //console.log(valorcomissao + ' - ValorComissao');
+	//escreve o subtotal no campo do formulário
     $('#ValorDev').val(subtotalservico);
+	//console.log(subtotalservico + ' - Valor Total de servicos');
 	$('#ValorOrca').val(subtotal);
-	$('#ValorComissao').val(subtotalcomissao);
+	//console.log(subtotal + ' - Valor Total de produtos');
+	$('#ValorComissao').val(valorcomissao);
+	
 	$('#QtdPrdOrca').val(subtotalqtd1);
+	
+	$('#QtdSrvOrca').val(subtotalqtd2);
     calculaResta($("#ValorEntradaOrca").val());
 	calculaTotal($("#ValorEntradaOrca").val());
 }
@@ -6113,6 +6127,8 @@ $(document).ready(function () {
 									name="QtdServico'+ps+'" value="1">\
 							</div>\
 							<input type="hidden" class="form-control Numero" id="QtdIncrementoServico'+ps+'" name="QtdIncrementoServico'+ps+'" value="1">\
+							<input type="hidden" class="form-control" id="SubtotalComissaoServico'+ps+'" name="SubtotalComissaoServico'+ps+'" value="0.00">\
+							<input type="hidden" class="form-control Numero" id="SubtotalQtdServico'+ps+'" name="SubtotalQtdServico'+ps+'" value="">\
 							<div class="col-md-3">\
 								<label for="ValorServico">Valor do Serviço</label><br>\
 								<div class="input-group">\
