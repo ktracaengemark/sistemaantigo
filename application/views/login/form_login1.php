@@ -68,7 +68,7 @@
 			<?php echo form_error('Senha'); ?>
 			<input type="hidden" name="modulo" value="<?php echo $modulo; ?>">
 			<button class="btn btn-md btn-warning btn-block" type="submit"><span class="glyphicon glyphicon-log-in">
-				</span> Acessar Conta Pessoal
+				</span> Acessar Conta Associado
 			</button>	
 			
 			<!--<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('CelularUsuario'); ?>">Esqueci usuário/senha!</a></p>-->
@@ -84,11 +84,13 @@
 			<br>
 			<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
 				<span class="glyphicon glyphicon-home"></span> Empresas
-			</a>			
+			</a>
+			<!--
 			<br>
 			<a class="btn btn-md btn-success  btn-block" href="<?php echo base_url(); ?>login/index3" role="button">
 				<span class="glyphicon glyphicon-plus"></span> Cadastrar Nova Conta
 			</a>
+			-->
 		</div>
 	</div>	
 </div>

@@ -77,18 +77,20 @@
 			
 			<!--<p><a href="<?php echo base_url(); ?>login/recuperar/?usuario=<?php echo set_value('CelularUsuario'); ?>">Esqueci usuário/senha!</a></p>-->
 
-			<a class="btn btn btn-warning  btn-block" href="<?php echo base_url(); ?>login/index1" role="button"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Pessoal</a>			
+			<a class="btn btn btn-warning  btn-block" href="<?php echo base_url(); ?>login/index1" role="button"><span class="glyphicon glyphicon-log-in"></span> Acessar Conta Associado</a>			
 			<!--
 			<a class="btn btn btn-primary btn-block" href="<?php echo base_url(); ?>loginempresa/index" role="button"><span class="glyphicon glyphicon-log-in"></span> Acesso Conta Admin.</a>	
 			-->
 			<br>			
 			<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
 				<span class="glyphicon glyphicon-home"></span> Empresas
-			</a>			
+			</a>
+			<!--
 			<br>
 			<a class="btn btn-md btn-success  btn-block" href="<?php echo base_url(); ?>login/index3" role="button">
 				<span class="glyphicon glyphicon-plus"></span> Cadastrar Nova Conta
 			</a>
+			-->
 		</div>	
 	</div>	
 </div>

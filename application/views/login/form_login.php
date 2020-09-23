@@ -70,7 +70,7 @@
 	<div class="col-md-5 ">
 		<div class="row">
 			<a class="btn btn-md btn-warning btn-block" href="<?php echo base_url(); ?>login/index1" role="button">
-				<span class="glyphicon glyphicon-log-in"></span> Acessar Conta Pessoal
+				<span class="glyphicon glyphicon-log-in"></span> Acessar Conta Associado
 			</a>
 			<a class="btn btn-md btn-info btn-block" href="<?php echo base_url(); ?>login/index2" role="button">
 				<span class="glyphicon glyphicon-log-in"></span> Acessar Conta Empresa
@@ -79,10 +79,12 @@
 				<span class="glyphicon glyphicon-log-in"></span> Acessar Conta Admin.
 			</a>
 			<br>
+			<!--
 			<a class="btn btn-md btn-success  btn-block" href="<?php echo base_url(); ?>login/index3" role="button">
 				<span class="glyphicon glyphicon-plus"></span> Cadastrar Nova Conta
 			</a>
 			<br>
+			-->
 			<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>pesquisar/empresas" role="button">
 				<span class="glyphicon glyphicon-search"></span> Produtos & Serviços
 			</a>
