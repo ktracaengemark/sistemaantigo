@@ -96,20 +96,6 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">	
-					<div class="col-md-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								Aguardando <b>Pagamento OnLine</b>
-							</div>
-							<div class="panel-body">
-								
-								<?php echo (isset($list_pagonline)) ? $list_pagonline : FALSE ?>
-								
-							</div>
-						</div>
-					</div>
-				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="panel panel-info">
@@ -161,6 +147,20 @@
 							<div class="panel-body">
 								
 								<?php echo (isset($list_pagamento)) ? $list_pagamento : FALSE ?>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">	
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								Aguardando <b>Não Aprovados</b>
+							</div>
+							<div class="panel-body">
+								
+								<?php echo (isset($list_pagonline)) ? $list_pagonline : FALSE ?>
 								
 							</div>
 						</div>

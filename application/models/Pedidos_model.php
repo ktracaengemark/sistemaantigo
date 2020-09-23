@@ -156,9 +156,7 @@ class Pedidos_model extends CI_Model {
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_TipoRD = "2" AND
 				OT.CanceladoOrca = "N" AND
-				OT.CombinadoFrete = "S" AND
-				OT.AVAP = "O" AND
-				OT.QuitadoOrca = "N"
+				OT.AprovadoOrca = "N"
 			ORDER BY 
 				OT.DataEntregaOrca ASC,
 				OT.HoraEntregaOrca ASC,
