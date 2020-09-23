@@ -186,15 +186,6 @@
 																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Produto'),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',0,'ProdutoHidden')"
 																			name="QtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['QtdProduto'] ?>">
 																</div>
-																<div class="col-md-3">
-																	<label for="ValorProduto">Valor da Embl</label>
-																	<div class="input-group">
-																		<span class="input-group-addon" id="basic-addon1">R$</span>
-																		<input type="text" class="form-control Valor" id="idTab_Produto<?php echo $i ?>" maxlength="10" placeholder="0,00"
-																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','VP','Produto')"
-																			name="ValorProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ValorProduto'] ?>">
-																	</div>
-																</div>
 																<div class="col-md-2">
 																	<label for="QtdIncrementoProduto">Qtd.na Embl</label>
 																	<input type="text" class="form-control Numero" id="QtdIncrementoProduto<?php echo $i ?>" placeholder="0"
@@ -206,6 +197,15 @@
 																	<label for="SubtotalQtdProduto">Sub.Qtd.Prod</label>
 																	<input type="text" class="form-control Numero text-left" maxlength="10" readonly="" id="SubtotalQtdProduto<?php echo $i ?>"
 																		   name="SubtotalQtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalQtdProduto'] ?>">
+																</div>
+																<div class="col-md-3">
+																	<label for="ValorProduto">Valor da Embl</label>
+																	<div class="input-group">
+																		<span class="input-group-addon" id="basic-addon1">R$</span>
+																		<input type="text" class="form-control Valor" id="idTab_Produto<?php echo $i ?>" maxlength="10" placeholder="0,00"
+																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','VP','Produto')"
+																			name="ValorProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ValorProduto'] ?>">
+																	</div>
 																</div>
 																<div class="col-md-3">
 																	<label for="SubtotalProduto">Sub.Valor.Prod.</label>
@@ -376,18 +376,6 @@
 																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','QTD','Servico'),calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',0,'ServicoHidden')"
 																			 name="QtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdProduto'] ?>">
 																</div>
-																<input type="hidden" class="form-control Numero" id="QtdIncrementoServico<?php echo $i ?>" name="QtdIncrementoServico<?php echo $i ?>" value="1">
-																<input type="hidden" class="form-control " id="SubtotalComissaoServico<?php echo $i ?>" name="SubtotalComissaoServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalComissaoProduto'] ?>">
-																<input type="hidden" class="form-control " id="SubtotalQtdServico<?php echo $i ?>" name="SubtotalQtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalQtdProduto'] ?>">
-																<div class="col-md-3">
-																	<label for="ValorServico">Valor do Serviço</label>
-																	<div class="input-group">
-																		<span class="input-group-addon" id="basic-addon1">R$</span>
-																		<input type="text" class="form-control Valor" id="idTab_Servico<?php echo $i ?>" maxlength="10" placeholder="0,00"
-																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','VP','Servico')"
-																			name="ValorServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorProduto'] ?>">
-																	</div>
-																</div>
 																<div class="col-md-4">
 																	<label for="ProfissionalServico<?php echo $i ?>">Profissional</label>
 																	<?php if ($i == 1) { ?>
@@ -406,6 +394,18 @@
 																		}
 																		?>
 																	</select>
+																</div>
+																<input type="hidden" class="form-control Numero" id="QtdIncrementoServico<?php echo $i ?>" name="QtdIncrementoServico<?php echo $i ?>" value="1">
+																<input type="hidden" class="form-control " id="SubtotalComissaoServico<?php echo $i ?>" name="SubtotalComissaoServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalComissaoProduto'] ?>">
+																<input type="hidden" class="form-control " id="SubtotalQtdServico<?php echo $i ?>" name="SubtotalQtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalQtdProduto'] ?>">
+																<div class="col-md-3">
+																	<label for="ValorServico">Valor do Serviço</label>
+																	<div class="input-group">
+																		<span class="input-group-addon" id="basic-addon1">R$</span>
+																		<input type="text" class="form-control Valor" id="idTab_Servico<?php echo $i ?>" maxlength="10" placeholder="0,00"
+																			onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>','VP','Servico')"
+																			name="ValorServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorProduto'] ?>">
+																	</div>
 																</div>
 																<div class="col-md-3">
 																	<label for="SubtotalServico">Sub.Valor.Serv:</label>

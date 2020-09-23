@@ -84,7 +84,7 @@
 			<div class="col-md-12">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="panel panel-default">
+						<div class="panel panel-primary">
 							<div class="panel-heading">
 								Aguardando <b>Combinar</b>
 							</div>
@@ -154,7 +154,7 @@
 				</div>
 				<div class="row">	
 					<div class="col-md-12">
-						<div class="panel panel-default">
+						<div class="panel panel-primary">
 							<div class="panel-heading">
 								Aguardando <b>Não Aprovados</b>
 							</div>
