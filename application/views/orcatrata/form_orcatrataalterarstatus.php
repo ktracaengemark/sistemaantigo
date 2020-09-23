@@ -104,6 +104,7 @@
 											<input type="hidden" name="idTab_Produtos_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Produtos_Produto'] ?>">
 											<input type="hidden" name="idTab_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Produto'] ?>">
 											<input type="hidden" name="ValorServico<?php echo $i ?>" value="<?php echo $servico[$i]['ValorProduto'] ?>">
+											<input type="hidden" name="ComissaoServico<?php echo $i ?>" value="<?php echo $servico[$i]['ComissaoProduto'] ?>">
 											
 											<input type="hidden" name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
 											<input type="hidden" name="DataValidadeServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataValidadeProduto'] ?>">
@@ -125,6 +126,7 @@
 											
 
 								<input type="hidden" name="QtdPrdOrca" value="<?php echo $orcatrata['QtdPrdOrca'] ?>">
+								<input type="hidden" name="QtdSrvOrca" value="<?php echo $orcatrata['QtdSrvOrca'] ?>">
 								<input type="hidden" name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
 								<input type="hidden" name="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
 								<input type="hidden" name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
@@ -309,7 +311,9 @@
 											<?php
 											}
 											?>
-
+											<tr>
+												<td class="text-left">Total: <b><?php echo $orcatrata['QtdSrvOrca'] ?></b></td>
+											</tr>
 										</tbody>
 									</table>
 									<?php } else echo '<h3 class="text-left">S/Serviços </h3>';{?>

@@ -77,6 +77,7 @@ class Statuspedido extends CI_Controller {
 			'ValorComissao',
 			'ValorDev',
 			'QtdPrdOrca',
+			'QtdSrvOrca',
             'ValorEntradaOrca',
 			'ValorDinheiro',
 			'ValorTroco',
@@ -138,6 +139,8 @@ class Statuspedido extends CI_Controller {
                 $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
 				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
                 $data['servico'][$j]['SubtotalProduto'] = $this->input->post('SubtotalServico' . $i);
+				$data['servico'][$j]['SubtotalComissaoProduto'] = $this->input->post('SubtotalComissaoServico' . $i);
+				$data['servico'][$j]['SubtotalQtdProduto'] = $this->input->post('SubtotalQtdServico' . $i);
                 $data['servico'][$j]['ObsProduto'] = $this->input->post('ObsServico' . $i);
 				$data['servico'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeServico' . $i);
                 $data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
@@ -251,6 +254,8 @@ class Statuspedido extends CI_Controller {
 
                     for($j=1;$j<=$data['count']['SCount'];$j++) {
                         $data['servico'][$j]['SubtotalProduto'] = number_format(($data['servico'][$j]['ValorProduto'] * $data['servico'][$j]['QtdProduto']), 2, ',', '.');
+						$data['servico'][$j]['SubtotalComissaoProduto'] = ($data['servico'][$j]['ValorProduto'] * $data['servico'][$j]['QtdProduto'] * $data['servico'][$j]['ComissaoProduto'] /100);
+						$data['servico'][$j]['SubtotalQtdProduto'] = ($data['servico'][$j]['QtdIncrementoProduto'] * $data['servico'][$j]['QtdProduto']);
 						$data['servico'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeProduto'], 'barras');
 					}
                 }
@@ -614,6 +619,8 @@ class Statuspedido extends CI_Controller {
 					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "2";
 					$data['update']['servico']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeProduto'], 'mysql');
                     unset($data['update']['servico']['inserir'][$j]['SubtotalProduto']);
+					unset($data['update']['servico']['inserir'][$j]['SubtotalComissaoProduto']);
+					unset($data['update']['servico']['inserir'][$j]['SubtotalQtdProduto']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
 						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
 							$data['update']['servico']['inserir'][$j]['ConcluidoProduto'] = 'S';
@@ -630,6 +637,8 @@ class Statuspedido extends CI_Controller {
 					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
 					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
                     unset($data['update']['servico']['alterar'][$j]['SubtotalProduto']);
+					unset($data['update']['servico']['alterar'][$j]['SubtotalComissaoProduto']);
+					unset($data['update']['servico']['alterar'][$j]['SubtotalQtdProduto']);
 					if ($data['orcatrata']['AprovadoOrca'] == 'S') { 
 						if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
 							$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = 'S';
