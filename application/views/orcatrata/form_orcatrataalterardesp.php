@@ -948,7 +948,7 @@
 												<div class="panel-heading">
 													<div class="row">
 														<div class="col-md-12 text-left">
-															<label for="ConcluidoOrca">Entregue?</label><br>
+															<label for="ConcluidoOrca">Prds & Srvs. Entregues?</label><br>
 															<div class="btn-group" data-toggle="buttons">
 																<?php
 																foreach ($select['ConcluidoOrca'] as $key => $row) {
@@ -978,7 +978,7 @@
 													</div>
 													<div class="row">		
 														<div class="col-md-12 text-right">
-															<label class="col-md-6"></label><label class="col-md-6 text-left" for="QuitadoOrca">Pago?</label><br>
+															<label for="QuitadoOrca">Parcelas Pagas?</label><br>
 															<div class="btn-group" data-toggle="buttons">
 																<?php
 																foreach ($select['QuitadoOrca'] as $key => $row) {
