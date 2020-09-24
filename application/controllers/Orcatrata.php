@@ -1202,8 +1202,7 @@ class Orcatrata extends CI_Controller {
             'CombinadoFrete' => $this->basico->radio_checked($data['orcatrata']['CombinadoFrete'], 'Combinado Entrega', 'NS'),
         );
         ($data['orcatrata']['CombinadoFrete'] == 'S') ?
-            $data['div']['CombinadoFrete'] = '' : $data['div']['CombinadoFrete'] = 'style="display: none;"';		
-		
+            $data['div']['CombinadoFrete'] = '' : $data['div']['CombinadoFrete'] = 'style="display: none;"';
 		
 		$data['radio'] = array(
             'AprovadoOrca' => $this->basico->radio_checked($data['orcatrata']['AprovadoOrca'], 'Orçamento Aprovado', 'NS'),
@@ -1246,7 +1245,7 @@ class Orcatrata extends CI_Controller {
         $data['radio'] = array(
             'FinalizadoOrca' => $this->basico->radio_checked($data['orcatrata']['FinalizadoOrca'], 'Orçamento Finalizado', 'NS'),
         );
-        ($data['orcatrata']['FinalizadoOrca'] == 'N') ?
+		($data['orcatrata']['FinalizadoOrca'] == 'N') ?
             $data['div']['FinalizadoOrca'] = '' : $data['div']['FinalizadoOrca'] = 'style="display: none;"';
 		
 		$data['radio'] = array(
@@ -7681,8 +7680,8 @@ class Orcatrata extends CI_Controller {
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
-				redirect(base_url() . 'relatorio/comissao/' . $data['msg']);
-				//redirect(base_url() . 'orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa'] . $data['msg']);
+				//redirect(base_url() . 'relatorio/comissao/' . $data['msg']);
+				redirect(base_url() . 'orcatrata/baixadacomissao/' . $_SESSION['log']['idSis_Empresa'] . $data['msg']);
 
 				exit();
             }

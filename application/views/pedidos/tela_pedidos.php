@@ -86,7 +86,7 @@
 					<div class="col-md-12">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
-								Aguardando <b>Combinar</b>
+								Aguardando <b>Combinar com o Cliente</b>
 							</div>
 							<div class="panel-body">
 								

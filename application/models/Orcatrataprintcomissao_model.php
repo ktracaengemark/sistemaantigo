@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Orcatrataprintcobranca_model extends CI_Model {
+class Orcatrataprintcomissao_model extends CI_Model {
 
     public function __construct() {
         parent::__construct();
@@ -15,43 +15,23 @@ class Orcatrataprintcobranca_model extends CI_Model {
 		
 		if ($_SESSION['FiltroAlteraParcela']['DataFim']) {
             $consulta =
-				'(OT.DataOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND OT.DataOrca <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '")';
+				'(OT.DataVencimentoOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND OT.DataVencimentoOrca <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '")';
         }
         else {
             $consulta =
-                '(OT.DataOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '")';
         }
 		
-		if ($_SESSION['FiltroAlteraParcela']['DataFim2']) {
-            $consulta2 =
-				'(OT.DataEntregaOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio2'] . '" AND OT.DataEntregaOrca <= "' . $_SESSION['FiltroAlteraParcela']['DataFim2'] . '")';
-        }
-        else {
-            $consulta2 =
-                '(OT.DataEntregaOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio2'] . '")';
-        }
-		
-		if ($_SESSION['FiltroAlteraParcela']['DataFim3']) {
-            $consulta3 =
-				'(PR.DataVencimento >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio3'] . '" AND PR.DataVencimento <= "' . $_SESSION['FiltroAlteraParcela']['DataFim3'] . '")';
-        }
-        else {
-            $consulta3 =
-                '(PR.DataVencimento >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio3'] . '")';
-        }
-		$permissao = ($_SESSION['FiltroAlteraParcela']['Orcamento'] != "" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcamento'] . '" AND ' : FALSE;
 		$permissao1 = ($_SESSION['FiltroAlteraParcela']['AprovadoOrca'] != "0" ) ? 'OT.AprovadoOrca = "' . $_SESSION['FiltroAlteraParcela']['AprovadoOrca'] . '" AND ' : FALSE;
 		$permissao2 = ($_SESSION['FiltroAlteraParcela']['QuitadoOrca'] != "0" ) ? 'OT.QuitadoOrca = "' . $_SESSION['FiltroAlteraParcela']['QuitadoOrca'] . '" AND ' : FALSE;
 		$permissao3 = ($_SESSION['FiltroAlteraParcela']['ConcluidoOrca'] != "0" ) ? 'OT.ConcluidoOrca = "' . $_SESSION['FiltroAlteraParcela']['ConcluidoOrca'] . '" AND ' : FALSE;
 		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Quitado'] != "0" ) ? 'PR.Quitado = "' . $_SESSION['FiltroAlteraParcela']['Quitado'] . '" AND ' : FALSE;
-		$permissao6 = ($_SESSION['FiltroAlteraParcela']['FormaPagamento'] != "0" ) ? 'OT.FormaPagamento = "' . $_SESSION['FiltroAlteraParcela']['FormaPagamento'] . '" AND ' : FALSE;
+		//$permissao6 = ($_SESSION['FiltroAlteraParcela']['FormaPagamento'] != "0" ) ? 'OT.FormaPagamento = "' . $_SESSION['FiltroAlteraParcela']['FormaPagamento'] . '" AND ' : FALSE;
 		$permissao7 = ($_SESSION['FiltroAlteraParcela']['Tipo_Orca'] != "0" ) ? 'OT.Tipo_Orca = "' . $_SESSION['FiltroAlteraParcela']['Tipo_Orca'] . '" AND ' : FALSE;
-		$permissao8 = ($_SESSION['FiltroAlteraParcela']['TipoFrete'] != "0" ) ? 'OT.TipoFrete = "' . $_SESSION['FiltroAlteraParcela']['TipoFrete'] . '" AND ' : FALSE;
-		$permissao9 = ($_SESSION['FiltroAlteraParcela']['AVAP'] != "0" ) ? 'OT.AVAP = "' . $_SESSION['FiltroAlteraParcela']['AVAP'] . '" AND ' : FALSE;
-		$permissao10 = ($_SESSION['FiltroAlteraParcela']['FinalizadoOrca'] != "0" ) ? 'OT.FinalizadoOrca = "' . $_SESSION['FiltroAlteraParcela']['FinalizadoOrca'] . '" AND ' : FALSE;
-		$permissao11 = ($_SESSION['FiltroAlteraParcela']['CanceladoOrca'] != "0" ) ? 'OT.CanceladoOrca = "' . $_SESSION['FiltroAlteraParcela']['CanceladoOrca'] . '" AND ' : FALSE;
-		$permissao20 = ($_SESSION['FiltroAlteraParcela']['TipoFinanceiroR'] != "0" ) ? 'OT.TipoFinanceiro = "' . $_SESSION['FiltroAlteraParcela']['TipoFinanceiroR'] . '" AND ' : FALSE;
-
+		$permissao10 = ($_SESSION['FiltroAlteraParcela']['StatusComissaoOrca'] != "0" ) ? 'OT.StatusComissaoOrca = "' . $_SESSION['FiltroAlteraParcela']['StatusComissaoOrca'] . '" AND ' : FALSE;
+		$permissao11 = ($_SESSION['FiltroAlteraParcela']['NomeUsuario'] != "0" ) ? 'OT.idSis_Usuario = "' . $_SESSION['FiltroAlteraParcela']['NomeUsuario'] . '" AND ' : FALSE;
+		//$permissao20 = ($_SESSION['FiltroAlteraParcela']['TipoFinanceiroR'] != "0" ) ? 'OT.TipoFinanceiro = "' . $_SESSION['FiltroAlteraParcela']['TipoFinanceiroR'] . '" AND ' : FALSE;
+		
 		//$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
 		//$permissao2 = ($_SESSION['FiltroAlteraParcela']['NomeCliente'] != "0" ) ? 'C.idApp_Cliente = "' . $_SESSION['FiltroAlteraParcela']['NomeCliente'] . '" AND ' : FALSE;
 		$query = $this->db->query(
@@ -72,17 +52,12 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				OT.AprovadoOrca,
 				OT.ConcluidoOrca,
 				OT.QuitadoOrca,
-				OT.TipoFrete,
-				OT.AVAP,
-				OT.FinalizadoOrca,
-				OT.CanceladoOrca,
 				OT.DataOrca,
 				OT.DataPrazo,
 				OT.DataConclusao,
 				OT.DataQuitado,				
 				OT.DataRetorno,
 				OT.DataEntradaOrca,
-				OT.DataEntregaOrca,
 				OT.idApp_Cliente,
 				OT.idApp_Fornecedor,
 				OT.ValorOrca,
@@ -92,13 +67,16 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				OT.ValorTroco,
 				OT.ValorEntradaOrca,
 				OT.ValorRestanteOrca,
+				OT.ValorComissao,
 				OT.QtdParcelasOrca,
 				OT.DataVencimentoOrca,
+				OT.StatusComissaoOrca,
 				OT.idSis_Usuario,
 				OT.ObsOrca,
 				OT.Descricao,
 				OT.TipoFinanceiro,
 				OT.Tipo_Orca,
+				OT.FormaPagamento,
 				FP.FormaPag,				
 				EF.NomeEmpresa,
 				MO.AVAP,
@@ -106,43 +84,36 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				OT.Modalidade,
 				MO.Modalidade,
 				TP.TipoFinanceiro,
-				PR.DataVencimento
-            FROM           	
-                Tab_FormaPag AS FP,
+				PR.DataVencimento,
+				US.Nome
+            FROM
 				App_OrcaTrata AS OT
 				LEFT JOIN Sis_Empresa AS EF ON EF.idSis_Empresa = OT.idSis_Empresa
-				LEFT JOIN Tab_TipoFinanceiro AS TP ON TP.idTab_TipoFinanceiro = OT.TipoFinanceiro				
+				LEFT JOIN Tab_FormaPag AS FP ON FP.idTab_FormaPag = OT.FormaPagamento
+				LEFT JOIN Tab_TipoFinanceiro AS TP ON TP.idTab_TipoFinanceiro = OT.TipoFinanceiro
 				LEFT JOIN Tab_Modalidade AS MO ON MO.Abrev = OT.Modalidade
 				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 				LEFT JOIN App_Parcelas AS PR ON PR.idApp_OrcaTrata = OT.idApp_OrcaTrata
+				LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = OT.idSis_Usuario
             WHERE
-            	' . $permissao . '
             	' . $permissao1 . '
 				' . $permissao2 . '
 				' . $permissao3 . '
-				' . $permissao4 . '
-				' . $permissao6 . '
 				' . $permissao7 . '
-				' . $permissao8 . '
-				' . $permissao9 . '
 				' . $permissao10 . '
 				' . $permissao11 . '
 				OT.idSis_Empresa = ' . $data . ' AND
                 OT.idApp_Cliente = C.idApp_Cliente AND
-				OT.FormaPagamento = FP.idTab_FormaPag AND
-				' . $consulta . ' AND
-				' . $consulta2 . ' AND
-				' . $consulta3 . '
+				OT.idTab_TipoRD = "2" AND
+				' . $consulta . '
 			GROUP BY
-                OT.idApp_OrcaTrata
-
+                OT.idApp_OrcaTrata	
             ORDER BY
-				PR.DataVencimento ASC,
-				OT.idApp_OrcaTrata ASC		
+				OT.DataVencimentoOrca,
+				OT.idApp_OrcaTrata		
         ');
         $query = $query->result_array();
-
-        /*
+		/*
         //echo $this->db->last_query();
         echo '<br>';
         echo "<pre>";

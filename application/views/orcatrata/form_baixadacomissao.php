@@ -4,8 +4,7 @@
 <div class="container-fluid">
 	<div class="row">
 
-		<div class="col-md-1"></div>
-		<div class="col-md-10 ">
+		<div class="col-md-12 ">
 
 			<div class="row">
 
@@ -16,9 +15,14 @@
 
 					<div class="panel panel-<?php echo $panel; ?>">
 						<div class="panel-heading">
-							<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/comissao" role="button">
-								<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo; ?>
-							</a>
+							<div class="btn-line">
+								<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/comissao" role="button">
+									<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo; ?>
+								</a>
+								<a class="btn btn-md btn-warning" type="button" href="<?php echo base_url() . 'orcatrataprintcomissao/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
+									<span class="glyphicon glyphicon-print"></span> Print.
+								</a>
+							</div>	
 						</div>
 						<div class="panel-body">
 
@@ -48,13 +52,23 @@
 														<div class="panel panel-warning">
 															<div class="panel-heading">
 																<div class="row">
-																	<div class="col-md-1">
-																		<label for="DataVencimentoOrca">Cont:</label><br>
-																		<span><?php echo $i ?>/<?php echo $count['PRCount'] ?></span>
+																	<div class="col-md-2">
+																		<label for="DataVencimentoOrca">Cont - Pedido - Local:</label><br>
+																		<span><?php echo $i ?>/<?php echo $count['PRCount'] ?>
+																			- <?php echo $orcamento[$i]['idApp_OrcaTrata'] ?>
+																			
+																			- <?php if($orcamento[$i]['Tipo_Orca'] == "O") {
+																						echo 'On Line';
+																					} elseif($orcamento[$i]['Tipo_Orca'] == "B"){
+																						echo 'Na Loja';
+																					}else{
+																						echo 'Outros';
+																					}?>
+																		</span>
 																	</div>
-																	<div class="col-md-1">
-																		<label for="DataVencimentoOrca">Pedido:</label>
-																		<span><?php echo $orcamento[$i]['idApp_OrcaTrata'] ?></span>
+																	<div class="col-md-2">
+																		<label for="DataVencimentoOrca">Funcionario:</label><br>
+																		<span><?php echo $orcamento[$i]['Nome'] ?></span>
 																	</div>
 																	<div class="col-md-2">
 																		<label for="DataVencimentoOrca">Venc:</label>
@@ -217,6 +231,5 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
 	</div>
 </div>

@@ -93,7 +93,6 @@
 											</a>
 											
 										</td>';
-										
 									echo '<td>' . $count . '</td>';
 									echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 									echo '<td>' . $row['Tipo_Orca'] . '</td>';

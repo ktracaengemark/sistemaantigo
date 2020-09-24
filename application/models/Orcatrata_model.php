@@ -518,14 +518,17 @@ class Orcatrata_model extends CI_Model {
 				OT.StatusComissaoOrca,
 				OT.ValorRestanteOrca,
 				OT.ValorComissao,
+				OT.Tipo_Orca,
 				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
 				TR.TipoFinanceiro,
-				E.NomeEmpresa				
+				E.NomeEmpresa,
+				US.Nome
 			FROM 
 				App_OrcaTrata AS OT
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = OT.idSis_Empresa
+					LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = OT.idSis_Usuario
 			WHERE
 				' . $permissao1 . '
 				' . $permissao2 . '
@@ -534,8 +537,11 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao10 . '
 				' . $permissao11 . '
 				OT.idSis_Empresa = ' . $data . ' AND
+                OT.idApp_Cliente = C.idApp_Cliente AND
 				OT.idTab_TipoRD = "2" AND
 				' . $consulta . '
+			GROUP BY
+                OT.idApp_OrcaTrata
 			ORDER BY
 				OT.DataVencimentoOrca,
 				OT.idApp_OrcaTrata  

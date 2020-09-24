@@ -1,10 +1,10 @@
 <?php if ($msg) echo $msg; ?>
-<?php echo form_open('relatorio/comissao', 'role="form"'); ?>
-<div class="col-md-12 ">		
+<?php echo form_open('relatorio/cobrancas', 'role="form"'); ?>	
+<div class="col-md-12">		
 	<?php echo validation_errors(); ?>
-	<div class="panel panel-danger">
+	<div class="panel panel-info">
 		<div class="panel-heading">
-			<h4>Comissões</h4>
+			<h4><?php echo $titulo1; ?></h4>
 			<div class="input-group col-md-3">
 				<span class="input-group-btn">
 					<button class="btn btn-info btn-md" type="submit">
@@ -12,26 +12,19 @@
 					</button>
 				</span>
 				<input type="text" placeholder="Pesquisar Pedido" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
-				<span class="input-group-btn">
+				<span class="input-group-btn">	
 					<button class="btn btn-warning btn-md" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 						<span class="glyphicon glyphicon-filter"></span>
 					</button>
 				</span>
 				<span class="input-group-btn">
-					<a href="<?php echo base_url() . 'orcatrataprintcomissao/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
+					<a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
 						<button class="btn btn-success btn-md" type="button">
 							<span class="glyphicon glyphicon-print"></span>
 						</button>
 					</a>
 				</span>
-				<span class="input-group-btn">
-					<a href="<?php echo base_url() . 'orcatrata/baixadacomissao/' . $_SESSION['log']['idSis_Empresa']; ?>">
-						<button class="btn btn-danger btn-md" type="button">
-							<span class="glyphicon glyphicon-edit"></span>
-						</button>
-					</a>
-				</span>				
-			</div>
+			</div>	
 		</div>
 		<div class="panel-body">
 			<div <?php echo $collapse; ?> id="Receitas">
@@ -40,17 +33,65 @@
 		</div>
 	</div>
 </div>
-
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
-			<div class="modal-header bg-danger">
+			<div class="modal-header bg-info">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das Comissões</h4>
+				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das Cobranças</h4>
 			</div>
 			<div class="modal-footer">
-				<div class="panel panel-danger">
+				<div class="panel panel-info">
 					<div class="panel-heading text-left">
+					<!--								
+						<div class="row">	
+							<div class="col-md-3 text-left" >
+								<label for="Ordenamento">Dia:</label>
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+										id="Dia" name="Dia">
+									<?php
+									foreach ($select['Dia'] as $key => $row) {
+										if ($query['Dia'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
+							<div class="col-md-3 text-left" >
+								<label for="Ordenamento">Mês:</label>
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+										id="Mesvenc" name="Mesvenc">
+									<?php
+									foreach ($select['Mesvenc'] as $key => $row) {
+										if ($query['Mesvenc'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
+							<div class="col-md-3 text-left" >
+								<label for="Ordenamento">Ano:</label>
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+										id="Ano" name="Ano">
+									<?php
+									foreach ($select['Ano'] as $key => $row) {
+										if ($query['Ano'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>								
+						</div>
+					-->
 						<div class="row">
 							<div class="col-md-4">
 								<label for="AprovadoOrca">Aprovado?</label>
@@ -100,12 +141,12 @@
 						</div>	
 						<div class="row">
 							<div class="col-md-4 text-left">
-								<label for="StatusComissaoOrca">Status Comissão:</label>
+								<label for="Quitado">Status das Parcelas:</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-										id="StatusComissaoOrca" name="StatusComissaoOrca">
+										id="Quitado" name="Quitado">
 									<?php
-									foreach ($select['StatusComissaoOrca'] as $key => $row) {
-										if ($query['StatusComissaoOrca'] == $key) {
+									foreach ($select['Quitado'] as $key => $row) {
+										if ($query['Quitado'] == $key) {
 											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 										} else {
 											echo '<option value="' . $key . '">' . $row . '</option>';
@@ -147,7 +188,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel panel-danger">
+				<div class="panel panel-info">
 					<div class="panel-heading text-left">	
 						<div class="row">	
 							<div class="col-md-3">
@@ -179,7 +220,7 @@
 									}
 									?>
 								</select>
-							</div>	
+							</div>
 							<div class="col-md-3">
 								<label for="Ordenamento">Forma de Pag.</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -210,14 +251,16 @@
 									?>
 								</select>
 							</div>
-							<!--
-							<div class="col-md-4">
-								<label for="Ordenamento">Entregador:</label>
-								<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-										id="Entregador" name="Entregador">
+						</div>
+						<!--
+						<div class="row">
+							<div class="col-md-3 text-left">
+								<label for="Ordenamento">Tipo Receita:</label>
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+										id="TipoFinanceiroR" name="TipoFinanceiroR">
 									<?php
-									foreach ($select['Entregador'] as $key => $row) {
-										if ($query['Entregador'] == $key) {
+									foreach ($select['TipoFinanceiroR'] as $key => $row) {
+										if ($query['TipoFinanceiroR'] == $key) {
 											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 										} else {
 											echo '<option value="' . $key . '">' . $row . '</option>';
@@ -226,11 +269,11 @@
 									?>
 								</select>
 							</div>
-							-->
 						</div>
+						-->
 					</div>
 				</div>
-				<div class="panel panel-danger">
+				<div class="panel panel-info">
 					<div class="panel-heading text-left">
 						<div class="row">
 							<div class="col-md-3">
@@ -273,10 +316,10 @@
 											name="DataFim2" value="<?php echo set_value('DataFim2', $query['DataFim2']); ?>">
 								</div>
 							</div>
-						</div>
+						</div>	
 						<div class="row">
 							<div class="col-md-3">
-								<label for="DataInicio3">Venc.Inc.</label>
+								<label for="DataInicio3">Venc.Parc.Inc.</label>
 								<div class="input-group DatePicker">
 									<span class="input-group-addon" disabled>
 										<span class="glyphicon glyphicon-calendar"></span>
@@ -286,7 +329,7 @@
 								</div>
 							</div>
 							<div class="col-md-3">
-								<label for="DataFim3">Venc.Fim</label>
+								<label for="DataFim3">Venc.Parc.Fim</label>
 								<div class="input-group DatePicker">
 									<span class="input-group-addon" disabled>
 										<span class="glyphicon glyphicon-calendar"></span>
@@ -294,26 +337,11 @@
 									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
 											name="DataFim3" value="<?php echo set_value('DataFim3', $query['DataFim3']); ?>">
 								</div>
-							</div>		
-							<div class="col-md-6 text-left">
-								<label for="Ordenamento">Colaborador:</label>
-								<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
-										id="NomeUsuario" name="NomeUsuario">
-									<?php
-									foreach ($select['NomeUsuario'] as $key => $row) {
-										if ($query['NomeUsuario'] == $key) {
-											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-										} else {
-											echo '<option value="' . $key . '">' . $row . '</option>';
-										}
-									}
-									?>
-								</select>
 							</div>
-						</div>	
+						</div>
 					</div>
 				</div>
-				<div class="panel panel-danger">
+				<div class="panel panel-info">
 					<div class="panel-heading text-left">
 						<div class="row">
 							<div class="form-footer col-md-4">
@@ -330,37 +358,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<!--
-				<div class="panel panel-danger">
-					<div class="panel-heading text-left">
-						
-						<div class="row">	
-							<div class="col-md-12 text-left">
-								<label for="Ordenamento">Produtos:</label>
-								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-										id="Produtos" name="Produtos">
-									<?php
-									foreach ($select['Produtos'] as $key => $row) {
-										if ($query['Produtos'] == $key) {
-											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-										} else {
-											echo '<option value="' . $key . '">' . $row . '</option>';
-										}
-									}
-									?>
-								</select>
-							</div>								
-						</div>
-						
-					</div>		
-				</div>
-				-->
+				</div>							
 			</div>
 		</div>									
 	</div>
-</div>																				
-
-
-
-
+</div>
+</form>
