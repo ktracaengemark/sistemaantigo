@@ -540,12 +540,14 @@ class Statuspedido extends CI_Controller {
 			if ($data['orcatrata']['CanceladoOrca'] == 'N'){
 				if ($data['orcatrata']['AprovadoOrca'] == 'S'){
 					if ($data['orcatrata']['FinalizadoOrca'] == 'S') {
+						$data['orcatrata']['CombinadoFrete'] = "S";
 						$data['orcatrata']['ProntoOrca'] = "S";
 						$data['orcatrata']['EnviadoOrca'] = "S";
 						$data['orcatrata']['ConcluidoOrca'] = "S";
 						$data['orcatrata']['QuitadoOrca'] = "S";
 					} else if($data['orcatrata']['ConcluidoOrca'] == 'S' && $data['orcatrata']['QuitadoOrca'] == 'S'){
 						$data['orcatrata']['FinalizadoOrca'] = "S";
+						$data['orcatrata']['CombinadoFrete'] = "S";
 						$data['orcatrata']['ProntoOrca'] = "S";
 						$data['orcatrata']['EnviadoOrca'] = "S";
 					}
