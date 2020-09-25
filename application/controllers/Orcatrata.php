@@ -587,7 +587,7 @@ class Orcatrata extends CI_Controller {
 				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}
             $data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
-			$data['orcatrata']['ValorComissao'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorComissao']));
+			$data['orcatrata']['ValorComissao'] = $data['orcatrata']['ValorComissao'];
             $data['orcatrata']['ValorDev'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDev']));
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
@@ -2245,7 +2245,7 @@ class Orcatrata extends CI_Controller {
 				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}
             $data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
-			$data['orcatrata']['ValorComissao'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorComissao']));
+			$data['orcatrata']['ValorComissao'] = $data['orcatrata']['ValorComissao'];
             $data['orcatrata']['ValorDev'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDev']));
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
 			$data['orcatrata']['ValorDinheiro'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDinheiro']));
@@ -4442,7 +4442,7 @@ class Orcatrata extends CI_Controller {
 				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}
             $data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
-			$data['orcatrata']['ValorComissao'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorComissao']));
+			$data['orcatrata']['ValorComissao'] = $data['orcatrata']['ValorComissao'];
             $data['orcatrata']['ValorDev'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDev']));
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
 			$data['orcatrata']['ValorDinheiro'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDinheiro']));
@@ -6144,7 +6144,7 @@ class Orcatrata extends CI_Controller {
 				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}
 			$data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
-			$data['orcatrata']['ValorComissao'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorComissao']));
+			$data['orcatrata']['ValorComissao'] = $data['orcatrata']['ValorComissao'];
             $data['orcatrata']['ValorDev'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDev']));
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'mysql');
@@ -6846,7 +6846,7 @@ class Orcatrata extends CI_Controller {
 				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}
             $data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
-			$data['orcatrata']['ValorComissao'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorComissao']));
+			$data['orcatrata']['ValorComissao'] = $data['orcatrata']['ValorComissao'];
             $data['orcatrata']['ValorDev'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDev']));
 			$data['orcatrata']['ValorEntradaOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorEntradaOrca']));
 			$data['orcatrata']['ValorDinheiro'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDinheiro']));
