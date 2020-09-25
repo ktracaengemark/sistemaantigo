@@ -18,14 +18,14 @@
 					</button>
 				</span>
 				<span class="input-group-btn">
-					<a href="<?php echo base_url() . 'orcatrataprintcomissao/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
+					<a href="<?php echo base_url() . 'OrcatrataPrintComissao/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
 						<button class="btn btn-success btn-md" type="button">
 							<span class="glyphicon glyphicon-print"></span>
 						</button>
 					</a>
 				</span>
 				<span class="input-group-btn">
-					<a href="<?php echo base_url() . 'orcatrata/baixadacomissao/' . $_SESSION['log']['idSis_Empresa']; ?>">
+					<a href="<?php echo base_url() . 'Orcatrata/baixadacomissao/' . $_SESSION['log']['idSis_Empresa']; ?>">
 						<button class="btn btn-danger btn-md" type="button">
 							<span class="glyphicon glyphicon-edit"></span>
 						</button>

@@ -19,7 +19,7 @@
 								<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/comissao" role="button">
 									<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo; ?>
 								</a>
-								<a class="btn btn-md btn-warning" type="button" href="<?php echo base_url() . 'orcatrataprintcomissao/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
+								<a class="btn btn-md btn-warning" type="button" href="<?php echo base_url() . 'OrcatrataPrintComissao/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
 									<span class="glyphicon glyphicon-print"></span> Print.
 								</a>
 							</div>	

@@ -15,7 +15,7 @@
 				<a type="button" class="btn btn-md btn-default " href="javascript:window.print()">
 					<span class="glyphicon glyphicon-print"></span> Imprimir
 				</a>
-				<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . 'orcatrata/baixadacomissao/' . $_SESSION['log']['idSis_Empresa']; ?>">
+				<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . 'Orcatrata/baixadacomissao/' . $_SESSION['log']['idSis_Empresa']; ?>">
 					<span class="glyphicon glyphicon-pencil"></span> Editar
 				</a>
 			</div>
