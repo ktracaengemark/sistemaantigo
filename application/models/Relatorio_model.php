@@ -1119,6 +1119,7 @@ class Relatorio_model extends CI_Model {
 		$filtro9 = ($data['AVAP']) ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
 		$filtro10 = ($data['FinalizadoOrca']) ? 'OT.FinalizadoOrca = "' . $data['FinalizadoOrca'] . '" AND ' : FALSE;
 		$filtro11 = ($data['CanceladoOrca']) ? 'OT.CanceladoOrca = "' . $data['CanceladoOrca'] . '" AND ' : FALSE;
+		$filtro13 = ($data['CombinadoFrete']) ? 'OT.CombinadoFrete = "' . $data['CombinadoFrete'] . '" AND ' : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 
         $query = $this->db->query(
@@ -1129,6 +1130,7 @@ class Relatorio_model extends CI_Model {
 				OT.idSis_Usuario,
 				OT.idTab_TipoRD,
                 OT.AprovadoOrca,
+                OT.CombinadoFrete,
 				OT.ObsOrca,
 				CONCAT(IFNULL(OT.Descricao,"")) AS Descricao,
                 OT.DataOrca,
@@ -1181,6 +1183,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro9 . '
 				' . $filtro10 . '
 				' . $filtro11 . '
+				' . $filtro13 . '
 				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" 
                 ' . $data['Orcamento'] . '
@@ -1218,6 +1221,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro9 . '
 				' . $filtro10 . '
 				' . $filtro11 . '
+				' . $filtro13 . '
 				OT.idTab_TipoRD = "2" AND
 				OT.AprovadoOrca = "S" AND
 				PR.idTab_TipoRD = "2" AND
@@ -1245,7 +1249,7 @@ class Relatorio_model extends CI_Model {
                 $row->DataEntregaOrca = $this->basico->mascara_data($row->DataEntregaOrca, 'barras');
                 $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
                 $row->DataPago = $this->basico->mascara_data($row->DataPago, 'barras');
-
+                $row->CombinadoFrete = $this->basico->mascara_palavra_completa($row->CombinadoFrete, 'NS');
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
 				$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
 				$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
@@ -1361,10 +1365,11 @@ class Relatorio_model extends CI_Model {
 		$filtro10 = ($data['FinalizadoOrca']) ? 'OT.FinalizadoOrca = "' . $data['FinalizadoOrca'] . '" AND ' : FALSE;
 		$filtro11 = ($data['CanceladoOrca']) ? 'OT.CanceladoOrca = "' . $data['CanceladoOrca'] . '" AND ' : FALSE;
 		$filtro12 = ($data['StatusComissaoOrca']) ? 'OT.StatusComissaoOrca = "' . $data['StatusComissaoOrca'] . '" AND ' : FALSE;
-		$filtro13 = ($data['NomeUsuario']) ? 'OT.idSis_Usuario = "' . $data['NomeUsuario'] . '" AND ' : FALSE;
+		$filtro13 = ($data['CombinadoFrete']) ? 'OT.CombinadoFrete = "' . $data['CombinadoFrete'] . '" AND ' : FALSE;
 		$filtro14 = ($data['ConcluidoProduto']) ? 'AP.ConcluidoProduto = "' . $data['ConcluidoProduto'] . '" AND ' : FALSE;
 		$filtro15 = ($data['ConcluidoServico']) ? 'TS.ConcluidoServico = "' . $data['ConcluidoServico'] . '" AND ' : FALSE;	
 		$filtro16 = ($data['DevolvidoProduto']) ? 'AP.DevolvidoProduto = "' . $data['DevolvidoProduto'] . '" AND ' : FALSE;
+		$filtro17 = ($data['NomeUsuario']) ? 'OT.idSis_Usuario = "' . $data['NomeUsuario'] . '" AND ' : FALSE;
 		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
 		$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
@@ -1373,12 +1378,13 @@ class Relatorio_model extends CI_Model {
 		
         $query = $this->db->query('
             SELECT
-                C.NomeCliente,
+                CONCAT(IFNULL(C.idApp_Cliente,""), " - " ,IFNULL(C.NomeCliente,""), " - " ,IFNULL(C.CelularCliente,"") ) AS NomeCliente,
 				C.CelularCliente,
 				OT.Descricao,
 				OT.idSis_Empresa,
 				OT.idSis_Usuario,
 				OT.idApp_OrcaTrata,
+				OT.CombinadoFrete,
 				OT.AprovadoOrca,
 				OT.FinalizadoOrca,
 				OT.CanceladoOrca,
@@ -1411,6 +1417,7 @@ class Relatorio_model extends CI_Model {
 				VP.Abrev2,
 				VP.AVAP,
 				TFP.FormaPag,
+				TTF.TipoFrete,
 				TR.TipoFinanceiro
             FROM
                 App_OrcaTrata AS OT
@@ -1421,6 +1428,7 @@ class Relatorio_model extends CI_Model {
 				LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 				LEFT JOIN Sis_Empresa AS EMP ON EMP.idSis_Empresa = OT.idSis_Empresa
 				LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = OT.idSis_Usuario
+				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
             WHERE
 				' . $filtro1 . '
 				' . $filtro2 . '
@@ -1433,6 +1441,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro11 . '
 				' . $filtro12 . '
 				' . $filtro13 . '
+				' . $filtro17 . '
 				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_TipoRD = "2" AND
 				' . $consulta . ' AND
@@ -1475,6 +1484,7 @@ class Relatorio_model extends CI_Model {
 				$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
                 $row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
 				$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
+				$row->CombinadoFrete = $this->basico->mascara_palavra_completa($row->CombinadoFrete, 'NS');
 				$row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
                 $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->FinalizadoOrca = $this->basico->mascara_palavra_completa($row->FinalizadoOrca, 'NS');
@@ -6742,6 +6752,7 @@ exit();*/
 		$filtro5 = ($data['CanceladoOrca'] != '#') ? 'OT.CanceladoOrca = "' . $data['CanceladoOrca'] . '" AND ' : FALSE;
 		$filtro6 = ($data['AVAP'] != '#') ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
 		$filtro7 = ($data['Tipo_Orca'] != '#') ? 'OT.Tipo_Orca = "' . $data['Tipo_Orca'] . '" AND ' : FALSE;
+		$filtro13 = ($data['CombinadoFrete'] != '#') ? 'OT.CombinadoFrete = "' . $data['CombinadoFrete'] . '" AND ' : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -6749,6 +6760,7 @@ exit();*/
 				C.CelularCliente,
 				CONCAT(IFNULL(C.idApp_Cliente,""), " - ", IFNULL(C.NomeCliente,""), " - ", IFNULL(C.CelularCliente,"")) AS NomeCliente,
 				OT.idApp_OrcaTrata,
+                OT.CombinadoFrete,
                 OT.AprovadoOrca,
                 OT.DataOrca,
 				OT.DataEntradaOrca,
@@ -6797,6 +6809,7 @@ exit();*/
 				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
+				' . $filtro13 . '
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['Orcamento'] . '
 				' . $data['Entregador'] . '
@@ -6832,7 +6845,7 @@ exit();*/
 				$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
                 $row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
 				$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
-
+                $row->CombinadoFrete = $this->basico->mascara_palavra_completa($row->CombinadoFrete, 'NS');
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
                 $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
@@ -6921,10 +6934,11 @@ exit();*/
 		$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
 		$filtro3 = ($data['ConcluidoOrca'] != '#') ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
-		$filtro4 = ($data['FinalizadoOrca'] != '#') ? 'OT.FinalizadoOrca = "' . $data['FinalizadoOrca'] . '" AND ' : FALSE;
-		$filtro5 = ($data['CanceladoOrca'] != '#') ? 'OT.CanceladoOrca = "' . $data['CanceladoOrca'] . '" AND ' : FALSE;
-		$filtro6 = ($data['AVAP'] != '#') ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
 		$filtro7 = ($data['Tipo_Orca'] != '#') ? 'OT.Tipo_Orca = "' . $data['Tipo_Orca'] . '" AND ' : FALSE;
+		$filtro9 = ($data['AVAP'] != '#') ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
+		$filtro10 = ($data['FinalizadoOrca'] != '#') ? 'OT.FinalizadoOrca = "' . $data['FinalizadoOrca'] . '" AND ' : FALSE;
+		$filtro11 = ($data['CanceladoOrca'] != '#') ? 'OT.CanceladoOrca = "' . $data['CanceladoOrca'] . '" AND ' : FALSE;
+		$filtro13 = ($data['CombinadoFrete'] != '#') ? 'OT.CombinadoFrete = "' . $data['CombinadoFrete'] . '" AND ' : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -6933,6 +6947,7 @@ exit();*/
 				CONCAT(IFNULL(C.idApp_Cliente,""), " - ", IFNULL(C.NomeCliente,""), " - ", IFNULL(C.CelularCliente,"")) AS NomeCliente,
 				OT.idApp_OrcaTrata,
                 OT.AprovadoOrca,
+                OT.CombinadoFrete,
                 OT.DataOrca,
 				OT.DataEntradaOrca,
 				OT.DataPrazo,
@@ -6976,10 +6991,11 @@ exit();*/
                 ' . $filtro1 . '
                 ' . $filtro2 . '
 				' . $filtro3 . '
-				' . $filtro4 . '
-				' . $filtro5 . '
-				' . $filtro6 . '
 				' . $filtro7 . '
+				' . $filtro9 . '
+				' . $filtro10 . '
+				' . $filtro11 . '
+				' . $filtro13 . '
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['Orcamento'] . '
 				' . $data['Entregador'] . '
@@ -7015,7 +7031,7 @@ exit();*/
 				$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
                 $row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
 				$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
-
+                $row->CombinadoFrete = $this->basico->mascara_palavra_completa($row->CombinadoFrete, 'NS');
                 $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
                 $row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
                 $row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');

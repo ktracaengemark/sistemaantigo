@@ -68,8 +68,9 @@
 							<th class="active">Editar</th>
 							<th class="active">Cont.</th>
 							<th class="active">Pc</th>
-							<th class="active">Orç.</th>
+							<th class="active">Pedido</th>
 							<th class="col-md-2 active">Cliente</th>
+							<th class="active">Comb.</th>
 							<th class="active">Apro.</th>
 							<th class="active">Entr.</th>
 							<th class="active">Pago.</th>
@@ -77,12 +78,12 @@
 							<th class="active">Cancel.</th>
 							<th class="active">Compra</th>
 							<th class="active">Entrega</th>
-							<th class="active">Loc.Pag.</th>
+							<th class="active">Pagam.</th>
 							<th class="active">Form.Pag.</th>
-							<th class="active">Dt Pedido</th>
-							<th class="active">Dt Entrega</th>
-							<th class="active">Dt Venc Prc</th>
-							<th class="active">Valor</th>
+							<th class="active">DtPedido</th>
+							<th class="active">DtEntrega</th>
+							<th class="active">DtVenc Prc</th>
+							<th class="active">Valor Parc</th>
 							<th class="active">Quitada</th>
 							<!--<th class="active">Dt.Pag</th>
 							<th class="active">Recebido</th>
@@ -126,6 +127,7 @@
 								echo '<td>' . $row['Parcela'] . '</td>';
 								echo '<td>' . $row['idApp_OrcaTrata'] . '- ' . $row['TipoFinanceiro'] . '</td>';
 								echo '<td>' . $row['NomeCliente'] . '</td>';
+								echo '<td>' . $row['CombinadoFrete'] . '</td>';
 								echo '<td>' . $row['AprovadoOrca'] . '</td>';
 								echo '<td>' . $row['ConcluidoOrca'] . '</td>';
 								echo '<td>' . $row['QuitadoOrca'] . '</td>';

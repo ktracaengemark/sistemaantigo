@@ -1507,6 +1507,7 @@ class Relatorio extends CI_Controller {
             'Campo',
 			'ObsOrca',
             'AprovadoOrca',
+			'CombinadoFrete',
             'QuitadoOrca',
 			'ConcluidoOrca',
 			'FinalizadoOrca',
@@ -1557,6 +1558,7 @@ class Relatorio extends CI_Controller {
         $_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
         $_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];
 		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];
+		$_SESSION['FiltroAlteraParcela']['CombinadoFrete'] = $data['query']['CombinadoFrete'];
 		$_SESSION['FiltroAlteraParcela']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
 		$_SESSION['FiltroAlteraParcela']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
 		$_SESSION['FiltroAlteraParcela']['FinalizadoOrca'] = $data['query']['FinalizadoOrca'];
@@ -1592,6 +1594,12 @@ class Relatorio extends CI_Controller {
             '0' => 'TODOS',
 			'N' => 'Não Aprovado',
 			'S' => 'Aprovado',
+        );
+
+        $data['select']['CombinadoFrete'] = array(
+            '0' => 'TODOS',
+            'N' => 'Não',
+            'S' => 'Sim',
         );
 
         $data['select']['QuitadoOrca'] = array(
@@ -1717,6 +1725,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['ObsOrca'] = $data['query']['ObsOrca'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
+            $data['bd']['CombinadoFrete'] = $data['query']['CombinadoFrete'];
             $data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
             $data['bd']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
 			$data['bd']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
@@ -4931,8 +4940,6 @@ class Relatorio extends CI_Controller {
 
         $this->load->view('basico/footer');
 
-
-
     }
 
     public function baixadopedido() {
@@ -4962,6 +4969,7 @@ class Relatorio extends CI_Controller {
 			'ConcluidoOrca',
 			'FinalizadoOrca',
 			'CanceladoOrca',
+			'CombinadoFrete',
 			'FormaPag',
 			'AVAP',
 			'TipoFrete',
@@ -5015,6 +5023,12 @@ class Relatorio extends CI_Controller {
             'S' => 'Sim',
         );
 
+		$data['select']['CombinadoFrete'] = array(
+            '#' => 'TODOS',
+            'N' => 'Não',
+            'S' => 'Sim',
+        );
+
 		$data['select']['AVAP'] = array(
             '#' => '::TODOS::',
             'V' => 'Na Loja',
@@ -5030,6 +5044,7 @@ class Relatorio extends CI_Controller {
 
         $data['select']['Campo'] = array(
             'OT.idApp_OrcaTrata' => 'Número do Orçamento',
+			'OT.CombinadoFrete' => 'Combinado?',
             'OT.AprovadoOrca' => 'Orçamento Aprovado?',
             'OT.ConcluidoOrca' => 'Entregue?',
             'OT.QuitadoOrca' => 'Pago?',
@@ -5073,7 +5088,6 @@ class Relatorio extends CI_Controller {
             $data['bd']['DataFim3'] = $this->basico->mascara_data($data['query']['DataFim3'], 'mysql');
 			$data['bd']['DataInicio4'] = $this->basico->mascara_data($data['query']['DataInicio4'], 'mysql');
             $data['bd']['DataFim4'] = $this->basico->mascara_data($data['query']['DataFim4'], 'mysql');
-
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
             $data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
@@ -5081,6 +5095,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
 			$data['bd']['FinalizadoOrca'] = $data['query']['FinalizadoOrca'];
 			$data['bd']['CanceladoOrca'] = $data['query']['CanceladoOrca'];
+			$data['bd']['CombinadoFrete'] = $data['query']['CombinadoFrete'];
 			$data['bd']['AVAP'] = $data['query']['AVAP'];
 			$data['bd']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
 			
@@ -5100,8 +5115,6 @@ class Relatorio extends CI_Controller {
         $this->load->view('relatorio/tela_baixadopedido', $data);
 
         $this->load->view('basico/footer');
-
-
 
     }
 		

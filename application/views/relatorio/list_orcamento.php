@@ -46,18 +46,19 @@
 							<th class="active">Cont.</th>
 							<th class="active">Pedido</th>
 							<th class="active">Cliente</th>
-							<th class="active">Orç.</th>
+							<th class="active">Valor</th>
 							<th class="active">Frete</th>
-							<th class="active">Total</th>					
-							<th class="active">Apv.?</th>
-							<th class="active">Entr.?</th>
-							<th class="active">Pago?</th>
-							<th class="active">Final?</th>
-							<th class="active">Cancel?</th>
+							<th class="active">Total</th>
+							<th class="active">Comb.</th>
+							<th class="active">Apv.</th>
+							<th class="active">Entr.</th>
+							<th class="active">Pago</th>
+							<th class="active">Final.</th>
+							<th class="active">Cancel.</th>
 							<th class="active">Compra</th>
-							<th class="active">Loc.Pag.</th>
-							<th class="active">Form.Pag.</th>
 							<th class="active">Entrega</th>
+							<th class="active">Pagam.</th>
+							<th class="active">Form.Pag</th>
 							<th class="active">Dt. Orç.</th>
 							<th class="active">Dt. Ent.</th>
 							<th class="active">Dt. Venc.</th>
@@ -90,15 +91,16 @@
 								echo '<td class="text-left">' . $row['ValorRestanteOrca'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorFrete'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorTotalOrca'] . '</td>';
+								echo '<td>' . $row['CombinadoFrete'] . '</td>';
 								echo '<td>' . $row['AprovadoOrca'] . '</td>';
 								echo '<td>' . $row['ConcluidoOrca'] . '</td>';
 								echo '<td>' . $row['QuitadoOrca'] . '</td>';
 								echo '<td>' . $row['FinalizadoOrca'] . '</td>';
 								echo '<td>' . $row['CanceladoOrca'] . '</td>';
 								echo '<td>' . $row['Tipo_Orca'] . '</td>';
+								echo '<td>' . $row['TipoFrete'] . '</td>';
 								echo '<td>' . $row['AVAP'] . '</td>';
 								echo '<td>' . $row['FormaPag'] . '</td>';
-								echo '<td>' . $row['TipoFrete'] . '</td>';
 								echo '<td>' . $row['DataOrca'] . '</td>';
 								echo '<td>' . $row['DataEntregaOrca'] . '</td>';
 								echo '<td>' . $row['DataVencimentoOrca'] . '</td>';

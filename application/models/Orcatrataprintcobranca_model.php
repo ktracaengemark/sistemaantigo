@@ -50,6 +50,7 @@ class Orcatrataprintcobranca_model extends CI_Model {
 		$permissao9 = ($_SESSION['FiltroAlteraParcela']['AVAP'] != "0" ) ? 'OT.AVAP = "' . $_SESSION['FiltroAlteraParcela']['AVAP'] . '" AND ' : FALSE;
 		$permissao10 = ($_SESSION['FiltroAlteraParcela']['FinalizadoOrca'] != "0" ) ? 'OT.FinalizadoOrca = "' . $_SESSION['FiltroAlteraParcela']['FinalizadoOrca'] . '" AND ' : FALSE;
 		$permissao11 = ($_SESSION['FiltroAlteraParcela']['CanceladoOrca'] != "0" ) ? 'OT.CanceladoOrca = "' . $_SESSION['FiltroAlteraParcela']['CanceladoOrca'] . '" AND ' : FALSE;
+		$permissao13 = ($_SESSION['FiltroAlteraParcela']['CombinadoFrete'] != "0" ) ? 'OT.CombinadoFrete = "' . $_SESSION['FiltroAlteraParcela']['CombinadoFrete'] . '" AND ' : FALSE;
 		$permissao20 = ($_SESSION['FiltroAlteraParcela']['TipoFinanceiroR'] != "0" ) ? 'OT.TipoFinanceiro = "' . $_SESSION['FiltroAlteraParcela']['TipoFinanceiroR'] . '" AND ' : FALSE;
 
 		//$data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
@@ -69,6 +70,7 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				C.EstadoCliente,
 				OT.idSis_Empresa,
 				OT.idApp_OrcaTrata,
+				OT.CombinadoFrete,
 				OT.AprovadoOrca,
 				OT.ConcluidoOrca,
 				OT.QuitadoOrca,
@@ -127,6 +129,7 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				' . $permissao9 . '
 				' . $permissao10 . '
 				' . $permissao11 . '
+				' . $permissao13 . '
 				OT.idSis_Empresa = ' . $data . ' AND
                 OT.idApp_Cliente = C.idApp_Cliente AND
 				OT.FormaPagamento = FP.idTab_FormaPag AND
@@ -135,7 +138,6 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				' . $consulta3 . '
 			GROUP BY
                 OT.idApp_OrcaTrata
-
             ORDER BY
 				PR.DataVencimento ASC,
 				OT.idApp_OrcaTrata ASC		

@@ -33,7 +33,7 @@
 						<thead>
 							<tr>
 								<th colspan="3" class="active"> <?php echo $report->num_rows(); ?> resultado(s)</th>
-								<th colspan="8" class="active"></th>
+								<th colspan="16" class="active"></th>
 								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somaorcamento ?> </th>
 								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somacomissao ?> </th>
 								<!--<th colspan="4" class="active"> <?php echo $report->soma->quantidade ?> Produtos Vendidos</th>
@@ -46,15 +46,23 @@
 								<!--<th class="active">EdtOrç</th>-->
 								<th class="active">Imp.</th>
 								<th class="active">Cont.</th>							
-								<th class="active">Orç.</th>
-								<th class="active">Compra</th>
-								<th class="active">Colaborador</th>
-								<th class="active">Associado</th>
+								<th class="active">Pedido</th>
 								<th class="active">Cliente</th>
-								<th class="active">Aprovado</th>
-								<th class="active">Entrege</th>
+								<th class="active">Colaborador</th>
+								<!--<th class="active">Associado</th>-->
+								<th class="active">Comb.</th>
+								<th class="active">Apr.</th>
+								<th class="active">Entr.</th>
 								<th class="active">Pago</th>
-								<th class="active">Dt.Venc.</th>
+								<th class="active">Final.</th>
+								<th class="active">Canc.</th>
+								<th class="active">Compra</th>
+								<th class="active">Entrega</th>
+								<th class="active">Pagam.</th>
+								<th class="active">Form.Pag.</th>
+								<th class="active">DtPedido</th>
+								<th class="active">DtEntrega</th>
+								<th class="active">DtVenc</th>
 								<th class="active">Valor</th>
 								<th class="active">Comissao</th>
 								<th class="active">Paga?</th>								
@@ -95,13 +103,21 @@
 										</td>';
 									echo '<td>' . $count . '</td>';
 									echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
-									echo '<td>' . $row['Tipo_Orca'] . '</td>';
-									echo '<td>' . $row['NomeColaborador'] . '</td>';
-									echo '<td>' . $row['Associado'] . '</td>';
 									echo '<td>' . $row['NomeCliente'] . '</td>';
+									echo '<td>' . $row['NomeColaborador'] . '</td>';
+									#echo '<td>' . $row['Associado'] . '</td>';
+									echo '<td>' . $row['CombinadoFrete'] . '</td>';
 									echo '<td>' . $row['AprovadoOrca'] . '</td>';
 									echo '<td>' . $row['ConcluidoOrca'] . '</td>';
 									echo '<td>' . $row['QuitadoOrca'] . '</td>';
+									echo '<td>' . $row['FinalizadoOrca'] . '</td>';
+									echo '<td>' . $row['CanceladoOrca'] . '</td>';
+									echo '<td>' . $row['Tipo_Orca'] . '</td>';
+									echo '<td>' . $row['TipoFrete'] . '</td>';
+									echo '<td>' . $row['AVAP'] . '</td>';
+									echo '<td>' . $row['FormaPag'] . '</td>';
+									echo '<td>' . $row['DataOrca'] . '</td>';
+									echo '<td>' . $row['DataEntregaOrca'] . '</td>';
 									echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
 									echo '<td>' . $row['ValorRestanteOrca'] . '</td>';	
 									echo '<td>' . $row['ValorComissao'] . '</td>';	
@@ -130,7 +146,7 @@
 						<tfoot>
 							<tr>
 								<th colspan="3" class="active"> <?php echo $report->num_rows(); ?> resultado(s)</th>
-								<th colspan="8" class="active"></th>
+								<th colspan="16" class="active"></th>
 								<!--<th colspan="2" class="active"> <?php echo $report->soma->quantidade ?> Produtos</th>-->
 								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somaorcamento ?> </th>
 								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somacomissao ?> </th>
