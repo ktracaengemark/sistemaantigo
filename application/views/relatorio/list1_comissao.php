@@ -33,7 +33,7 @@
 						<thead>
 							<tr>
 								<th colspan="3" class="active"> <?php echo $report->num_rows(); ?> resultado(s)</th>
-								<th colspan="16" class="active"></th>
+								<th colspan="15" class="active"></th>
 								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somaorcamento ?> </th>
 								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somacomissao ?> </th>
 								<!--<th colspan="4" class="active"> <?php echo $report->soma->quantidade ?> Produtos Vendidos</th>
@@ -146,7 +146,7 @@
 						<tfoot>
 							<tr>
 								<th colspan="3" class="active"> <?php echo $report->num_rows(); ?> resultado(s)</th>
-								<th colspan="16" class="active"></th>
+								<th colspan="15" class="active"></th>
 								<!--<th colspan="2" class="active"> <?php echo $report->soma->quantidade ?> Produtos</th>-->
 								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somaorcamento ?> </th>
 								<th colspan="1" class="active text-right">Total: R$ <?php echo $report->soma->somacomissao ?> </th>
