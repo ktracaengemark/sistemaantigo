@@ -408,8 +408,9 @@ class Statuspedido extends CI_Controller {
         ($data['orcatrata']['AVAP'] == 'P') ?
             $data['div']['AVAP'] = '' : $data['div']['AVAP'] = 'style="display: none;"';
 		*/
-		
-		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'S' : FALSE;
+		(!$data['orcatrata']['CombinadoFrete']) ? $data['orcatrata']['CombinadoFrete'] = 'N' : FALSE;
+		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'N' : FALSE;
+		(!$data['orcatrata']['EnviadoOrca']) ? $data['orcatrata']['EnviadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['FinalizadoOrca']) ? $data['orcatrata']['FinalizadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['CanceladoOrca']) ? $data['orcatrata']['CanceladoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;
@@ -437,12 +438,24 @@ class Statuspedido extends CI_Controller {
         );
         ($data['orcatrata']['AprovadoOrca'] == 'S') ?
             $data['div']['AprovadoOrca'] = '' : $data['div']['AprovadoOrca'] = 'style="display: none;"';
+			
+		$data['radio'] = array(
+            'EnviadoOrca' => $this->basico->radio_checked($data['orcatrata']['EnviadoOrca'], 'Pedido Enviado', 'NS'),
+        );
+        ($data['orcatrata']['EnviadoOrca'] == 'S') ?
+            $data['div']['EnviadoOrca'] = '' : $data['div']['EnviadoOrca'] = 'style="display: none;"';
 
         $data['radio'] = array(
             'FinalizadoOrca' => $this->basico->radio_checked($data['orcatrata']['FinalizadoOrca'], 'Orçamento Finalizado', 'NS'),
         );
         ($data['orcatrata']['FinalizadoOrca'] == 'N') ?
-            $data['div']['FinalizadoOrca'] = '' : $data['div']['FinalizadoOrca'] = 'style="display: none;"';
+            $data['div']['FinalizadoOrca'] = '' : $data['div']['FinalizadoOrca'] = 'style="display: none;"';        
+		
+		$data['radio'] = array(
+            'CombinadoFrete' => $this->basico->radio_checked($data['orcatrata']['CombinadoFrete'], 'Combinado Entrega', 'NS'),
+        );
+        ($data['orcatrata']['CombinadoFrete'] == 'S') ?
+            $data['div']['CombinadoFrete'] = '' : $data['div']['CombinadoFrete'] = 'style="display: none;"';
 		
 		$data['radio'] = array(
             'CanceladoOrca' => $this->basico->radio_checked($data['orcatrata']['CanceladoOrca'], 'Orçamento Cancelado', 'NS'),
@@ -538,35 +551,30 @@ class Statuspedido extends CI_Controller {
             $data['orcatrata']['DataQuitado'] = $this->basico->mascara_data($data['orcatrata']['DataQuitado'], 'mysql');
 			$data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'mysql');
 			if ($data['orcatrata']['CanceladoOrca'] == 'N'){
-				if ($data['orcatrata']['AprovadoOrca'] == 'S'){
-					if ($data['orcatrata']['FinalizadoOrca'] == 'S') {
+				if ($data['orcatrata']['FinalizadoOrca'] == 'S'){
+						$data['orcatrata']['AprovadoOrca'] = "S";
 						$data['orcatrata']['CombinadoFrete'] = "S";
 						$data['orcatrata']['ProntoOrca'] = "S";
 						$data['orcatrata']['EnviadoOrca'] = "S";
 						$data['orcatrata']['ConcluidoOrca'] = "S";
 						$data['orcatrata']['QuitadoOrca'] = "S";
-					} else if($data['orcatrata']['ConcluidoOrca'] == 'S' && $data['orcatrata']['QuitadoOrca'] == 'S'){
+				} elseif($data['orcatrata']['ConcluidoOrca'] == 'S' && $data['orcatrata']['QuitadoOrca'] == 'S'){
+						$data['orcatrata']['AprovadoOrca'] = "S";
 						$data['orcatrata']['FinalizadoOrca'] = "S";
 						$data['orcatrata']['CombinadoFrete'] = "S";
 						$data['orcatrata']['ProntoOrca'] = "S";
 						$data['orcatrata']['EnviadoOrca'] = "S";
-					}
-					if ($data['orcatrata']['TipoFrete'] == '1' && $data['orcatrata']['ProntoOrca'] == 'S') {
+				} elseif ($data['orcatrata']['TipoFrete'] == '1' && $data['orcatrata']['ProntoOrca'] == 'S') {
 						$data['orcatrata']['EnviadoOrca'] = "S";
-					}
-					
-				} else {
-					$data['orcatrata']['QuitadoOrca'] = "N";
-					$data['orcatrata']['ConcluidoOrca'] = "N";
-					$data['orcatrata']['DevolvidoOrca'] = "N";
 				}
 			} else {
-				$data['orcatrata']['QuitadoOrca'] = "N";
-				$data['orcatrata']['ConcluidoOrca'] = "N";
-				$data['orcatrata']['DevolvidoOrca'] = "N";
-				$data['orcatrata']['ProntoOrca'] = "N";
-				$data['orcatrata']['EnviadoOrca'] = "N";
-				$data['orcatrata']['AprovadoOrca'] = "N";
+				$data['orcatrata']['CombinadoFrete'] = $data['orcatrata']['CombinadoFrete'];
+				$data['orcatrata']['AprovadoOrca'] = $data['orcatrata']['AprovadoOrca'];
+				$data['orcatrata']['QuitadoOrca'] = $data['orcatrata']['QuitadoOrca'];
+				$data['orcatrata']['ConcluidoOrca'] = $data['orcatrata']['ConcluidoOrca'];
+				$data['orcatrata']['DevolvidoOrca'] = $data['orcatrata']['DevolvidoOrca'];
+				$data['orcatrata']['ProntoOrca'] = $data['orcatrata']['ProntoOrca'];
+				$data['orcatrata']['EnviadoOrca'] = $data['orcatrata']['EnviadoOrca'];
 				$data['orcatrata']['FinalizadoOrca'] = "S";
 			}
 

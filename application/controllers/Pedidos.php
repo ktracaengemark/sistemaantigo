@@ -88,6 +88,7 @@ class Pedidos extends CI_Controller {
             $data['bd']['Campo'] = $data['query']['Campo'];
 
             $data['report_combinar'] = $this->Pedidos_model->list_pedidos_combinar($data['bd'],TRUE);
+			$data['report_aprovar'] = $this->Pedidos_model->list_pedidos_aprovar($data['bd'],TRUE);
             $data['report_pagonline'] = $this->Pedidos_model->list_pedidos_pagonline($data['bd'],TRUE);
             $data['report_producao'] = $this->Pedidos_model->list_pedidos_producao($data['bd'],TRUE);
             $data['report_envio'] = $this->Pedidos_model->list_pedidos_envio($data['bd'],TRUE);
@@ -95,6 +96,7 @@ class Pedidos extends CI_Controller {
             $data['report_pagamento'] = $this->Pedidos_model->list_pedidos_pagamento($data['bd'],TRUE);
 			
             $data['list_combinar'] = $this->load->view('pedidos/list_pedidos_combinar', $data, TRUE);
+			$data['list_aprovar'] = $this->load->view('pedidos/list_pedidos_aprovar', $data, TRUE);
             $data['list_pagonline'] = $this->load->view('pedidos/list_pedidos_pagonline', $data, TRUE);
             $data['list_producao'] = $this->load->view('pedidos/list_pedidos_producao', $data, TRUE);
             $data['list_envio'] = $this->load->view('pedidos/list_pedidos_envio', $data, TRUE);

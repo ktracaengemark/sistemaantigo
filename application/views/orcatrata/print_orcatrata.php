@@ -228,8 +228,8 @@
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-3" scope="col">Tipo</th>
-									<th class="col-md-3" scope="col">Entreg.</th>
+									<th class="col-md-3" scope="col">Onde</th>
+									<th class="col-md-3" scope="col">Entregador</th>
 									<th class="col-md-3" scope="col">Data</th>
 									<th class="col-md-3" scope="col">Hora</th>
 								</tr>

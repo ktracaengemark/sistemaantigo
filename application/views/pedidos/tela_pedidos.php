@@ -98,6 +98,20 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								Aguardando <b>Aprovação do Cliente</b>
+							</div>
+							<div class="panel-body">
+								
+								<?php echo (isset($list_aprovar)) ? $list_aprovar : FALSE ?>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								Aguardando <b>Produção</b>
@@ -156,7 +170,7 @@
 					<div class="col-md-12">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
-								Aguardando <b>Não Aprovados</b>
+								<b>Cancelados</b>
 							</div>
 							<div class="panel-body">
 								

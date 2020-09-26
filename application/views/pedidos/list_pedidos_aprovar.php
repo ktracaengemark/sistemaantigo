@@ -5,7 +5,7 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th colspan="5" class="active">Total encontrado: <?php echo $report_pagonline->num_rows(); ?> resultado(s)</th>
+							<th colspan="5" class="active">Total encontrado: <?php echo $report_aprovar->num_rows(); ?> resultado(s)</th>
 						</tr>
 					</thead>
 					<thead>
@@ -20,9 +20,9 @@
 					</thead>
 					<tbody>
 						<?php
-						foreach ($report_pagonline->result_array() as $row) {
+						foreach ($report_aprovar->result_array() as $row) {
 							#echo '<tr>';
-							echo '<tr class="clickable-row bg-default" data-href="' . base_url() . 'statuspedido/alterarstatus/' . $row['idApp_OrcaTrata'] . '">';
+							echo '<tr class="clickable-row bg-warning" data-href="' . base_url() . 'Statuspedido/alterarstatus/' . $row['idApp_OrcaTrata'] . '">';
 								echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';	
 								echo '<td>' . $row['idApp_Cliente'] . '</td>';	
 								echo '<td>' . $row['NomeCliente'] . '</td>';
