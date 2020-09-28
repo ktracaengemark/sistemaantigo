@@ -23,10 +23,14 @@ camposDisponiveis();
 exibirentrega();
 
 exibir();
-
+exibir_confirmar();
 function exibir(){
 	$('.Mostrar').show();
 	$('.NMostrar').hide();
+}
+function exibir_confirmar(){
+	$('.Open').show();
+	$('.Close').hide();
 }
 
 function dateDiff() {

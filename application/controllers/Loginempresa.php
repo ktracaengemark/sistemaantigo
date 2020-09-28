@@ -167,6 +167,13 @@ class Loginempresa extends CI_Controller {
             'Email',
             #'UsuarioEmpresa',
 			'NomeEmpresa',
+            'EnderecoEmpresa',
+            'NumeroEmpresa',
+            'ComplementoEmpresa',
+            'BairroEmpresa',
+            'MunicipioEmpresa',
+            'EstadoEmpresa',
+            'CepEmpresa',
             'NomeAdmin',
 			'DataNascimento',
 			'Sexo',
@@ -194,7 +201,14 @@ class Loginempresa extends CI_Controller {
 		#$this->form_validation->set_rules('CpfAdmin', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CpfAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
 		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');		
         #$this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
-		$this->form_validation->set_rules('NomeAdmin', 'Nome do Administrador', 'required|trim');      	
+		$this->form_validation->set_rules('EnderecoEmpresa', 'Endereço', 'required|trim');
+		$this->form_validation->set_rules('NumeroEmpresa', 'Número', 'required|trim');
+		$this->form_validation->set_rules('ComplementoEmpresa', 'Complemento', 'trim');
+		$this->form_validation->set_rules('BairroEmpresa', 'Bairro', 'required|trim');
+		$this->form_validation->set_rules('MunicipioEmpresa', 'Cidade', 'required|trim');
+		$this->form_validation->set_rules('EstadoEmpresa', 'Estado', 'required|trim');
+		$this->form_validation->set_rules('CepEmpresa', 'CEP', 'required|trim');
+		$this->form_validation->set_rules('NomeAdmin', 'Nome do Administrador', 'required|trim');
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
 		$this->form_validation->set_rules('CelularAdmin', 'Celular', 'required|trim|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CelularAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
@@ -212,6 +226,13 @@ class Loginempresa extends CI_Controller {
         } else {
 			
 			$data['query']['NomeEmpresa'] = trim(mb_strtoupper($data['query']['NomeEmpresa'], 'ISO-8859-1'));
+			$data['query']['EnderecoEmpresa'] = trim(mb_strtoupper($data['query']['EnderecoEmpresa'], 'ISO-8859-1'));
+			$data['query']['NumeroEmpresa'] = trim(mb_strtoupper($data['query']['NumeroEmpresa'], 'ISO-8859-1'));
+			$data['query']['ComplementoEmpresa'] = trim(mb_strtoupper($data['query']['ComplementoEmpresa'], 'ISO-8859-1'));
+			$data['query']['BairroEmpresa'] = trim(mb_strtoupper($data['query']['BairroEmpresa'], 'ISO-8859-1'));
+			$data['query']['MunicipioEmpresa'] = trim(mb_strtoupper($data['query']['MunicipioEmpresa'], 'ISO-8859-1'));
+			$data['query']['EstadoEmpresa'] = trim(mb_strtoupper($data['query']['EstadoEmpresa'], 'ISO-8859-1'));
+			$data['query']['CepEmpresa'] = trim(mb_strtoupper($data['query']['CepEmpresa'], 'ISO-8859-1'));
 			$data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));
 			//$data['query']['Site'] = trim(mb_strtoupper($data['query']['Site'], 'UTF-8'));
 			$data['query']['idSis_EmpresaMatriz'] = 2;
@@ -242,7 +263,28 @@ class Loginempresa extends CI_Controller {
                 $data['msg'] = '?m=2';
                 $this->load->view('loginempresa/form_registrar', $data);
 			} else {
-
+				
+				$data['atendimento']['1']['Dia_Semana'] = "SEGUNDA";
+                $data['atendimento']['2']['Dia_Semana'] = "TERCA";
+                $data['atendimento']['3']['Dia_Semana'] = "QUARTA";
+                $data['atendimento']['4']['Dia_Semana'] = "QUINTA";
+                $data['atendimento']['5']['Dia_Semana'] = "SEXTA";
+                $data['atendimento']['6']['Dia_Semana'] = "SABADO";
+                $data['atendimento']['7']['Dia_Semana'] = "DOMINGO";
+				
+				for($j=1; $j<=7; $j++) {
+					$data['atendimento'][$j] = array(
+						'idSis_Empresa' => $data['idSis_Empresa'],
+						'id_Dia' => $j,
+						'Dia_Semana' => $data['atendimento'][$j]['Dia_Semana'],
+						'Aberto' => "S",
+						'Hora_Abre' => "00:00:00",
+						'Hora_Fecha' => "23:59:59"
+					);
+					$data['campos'] = array_keys($data['atendimento'][$j]);
+					$data['idApp_Atendimento'] = $this->Loginempresa_model->set_atendimento($data['atendimento'][$j]);
+				}
+				
 				$data['funcao'] = array(
 					'idSis_Empresa' => $data['idSis_Empresa'],
 					'idSis_Usuario' => "0",
@@ -304,7 +346,7 @@ class Loginempresa extends CI_Controller {
 						$data['idApp_Agenda'] = $this->Loginempresa_model->set_agenda($data['agenda']);
 
 						$data['cliente'] = array(
-							'NomeCliente' => 'CLIENTE 1',
+							'NomeCliente' => 'CLIENTE',
 							'idTab_Modulo' => "1",
 							'idSis_Usuario' => $data['idSis_Usuario'],
 							'idSis_Empresa' => $data['idSis_Empresa']
@@ -314,7 +356,7 @@ class Loginempresa extends CI_Controller {
 						$data['idApp_Cliente'] = $this->Loginempresa_model->set_cliente($data['cliente']);
 
 						$data['fornecedor'] = array(
-							'NomeFornecedor' => 'FORNECEDOR 1',
+							'NomeFornecedor' => 'FORNECEDOR',
 							'idTab_Modulo' => "1",
 							'idSis_Usuario' => $data['idSis_Usuario'],
 							'idSis_Empresa' => $data['idSis_Empresa']
@@ -357,7 +399,7 @@ class Loginempresa extends CI_Controller {
 						} else {
 						
 							$data['produto'] = array(
-								'Produtos' => 'PRODUTO TESTE 1',
+								'Produtos' => 'PRODUTO TESTE',
 								'idTab_Modulo' => "1",
 								'VendaSite' => "S",
 								'Prodaux3' => $data['idTab_Catprod'],
@@ -393,8 +435,8 @@ class Loginempresa extends CI_Controller {
 								} else {	
 									
 									$data['promocao'] = array(
-										'Promocao' => "Promocao 1",
-										'Descricao' => "Descricao Promocao 1",
+										'Promocao' => "Promocao ",
+										'Descricao' => "Descricao Promocao ",
 										'idSis_Usuario' => $data['idSis_Usuario'],
 										'idSis_Empresa' => $data['idSis_Empresa'],
 										'idTab_Modulo' => "1",
@@ -630,6 +672,13 @@ class Loginempresa extends CI_Controller {
             'Email',
             #'UsuarioEmpresa',
 			'NomeEmpresa',
+            'EnderecoEmpresa',
+            'NumeroEmpresa',
+            'ComplementoEmpresa',
+            'BairroEmpresa',
+            'MunicipioEmpresa',
+            'EstadoEmpresa',
+            'CepEmpresa',
             'NomeAdmin',
 			'DataNascimento',
 			'Sexo',
@@ -658,6 +707,13 @@ class Loginempresa extends CI_Controller {
 		#$this->form_validation->set_rules('CpfAdmin', 'Cpf', 'required|trim|valid_cpf|alpha_numeric_spaces|is_unique_duplo[Sis_Empresa.CpfAdmin.NomeEmpresa.' . $data['query']['NomeEmpresa'] . ']');
 		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');		
         #$this->form_validation->set_rules('UsuarioEmpresa', 'Usuário', 'required|trim|is_unique[Sis_Empresa.UsuarioEmpresa]');
+		$this->form_validation->set_rules('EnderecoEmpresa', 'Endereço', 'required|trim');
+		$this->form_validation->set_rules('NumeroEmpresa', 'Número', 'required|trim');
+		$this->form_validation->set_rules('ComplementoEmpresa', 'Complemento', 'trim');
+		$this->form_validation->set_rules('BairroEmpresa', 'Bairro', 'required|trim');
+		$this->form_validation->set_rules('MunicipioEmpresa', 'Cidade', 'required|trim');
+		$this->form_validation->set_rules('EstadoEmpresa', 'Estado', 'required|trim');
+		$this->form_validation->set_rules('CepEmpresa', 'CEP', 'required|trim');
 		$this->form_validation->set_rules('NomeAdmin', 'Nome do Administrador', 'required|trim');      	
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
@@ -677,6 +733,13 @@ class Loginempresa extends CI_Controller {
         } else {
 			
 			$data['query']['NomeEmpresa'] = trim(mb_strtoupper($data['query']['NomeEmpresa'], 'ISO-8859-1'));
+			$data['query']['EnderecoEmpresa'] = trim(mb_strtoupper($data['query']['EnderecoEmpresa'], 'ISO-8859-1'));
+			$data['query']['NumeroEmpresa'] = trim(mb_strtoupper($data['query']['NumeroEmpresa'], 'ISO-8859-1'));
+			$data['query']['ComplementoEmpresa'] = trim(mb_strtoupper($data['query']['ComplementoEmpresa'], 'ISO-8859-1'));
+			$data['query']['BairroEmpresa'] = trim(mb_strtoupper($data['query']['BairroEmpresa'], 'ISO-8859-1'));
+			$data['query']['MunicipioEmpresa'] = trim(mb_strtoupper($data['query']['MunicipioEmpresa'], 'ISO-8859-1'));
+			$data['query']['EstadoEmpresa'] = trim(mb_strtoupper($data['query']['EstadoEmpresa'], 'ISO-8859-1'));
+			$data['query']['CepEmpresa'] = trim(mb_strtoupper($data['query']['CepEmpresa'], 'ISO-8859-1'));
 			$data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));			
 			$data['query']['idSis_EmpresaMatriz'] = 2;
 			$data['query']['Associado'] = $_SESSION['log']['idSis_Empresa'];
@@ -707,6 +770,27 @@ class Loginempresa extends CI_Controller {
                 $this->load->view('loginempresa/form_registrar2', $data);
             } else {
 
+				$data['atendimento']['1']['Dia_Semana'] = "SEGUNDA";
+                $data['atendimento']['2']['Dia_Semana'] = "TERCA";
+                $data['atendimento']['3']['Dia_Semana'] = "QUARTA";
+                $data['atendimento']['4']['Dia_Semana'] = "QUINTA";
+                $data['atendimento']['5']['Dia_Semana'] = "SEXTA";
+                $data['atendimento']['6']['Dia_Semana'] = "SABADO";
+                $data['atendimento']['7']['Dia_Semana'] = "DOMINGO";
+				
+				for($j=1; $j<=7; $j++) {
+					$data['atendimento'][$j] = array(
+						'idSis_Empresa' => $data['idSis_Empresa'],
+						'id_Dia' => $j,
+						'Dia_Semana' => $data['atendimento'][$j]['Dia_Semana'],
+						'Aberto' => "S",
+						'Hora_Abre' => "00:00:00",
+						'Hora_Fecha' => "23:59:59"
+					);
+					$data['campos'] = array_keys($data['atendimento'][$j]);
+					$data['idApp_Atendimento'] = $this->Loginempresa_model->set_atendimento($data['atendimento'][$j]);
+				}
+				
 				$data['funcao'] = array(
 					'idSis_Empresa' => $data['idSis_Empresa'],
 					'idSis_Usuario' => "0",
@@ -768,7 +852,7 @@ class Loginempresa extends CI_Controller {
 						$data['idApp_Agenda'] = $this->Loginempresa_model->set_agenda($data['agenda']);
 
 						$data['cliente'] = array(
-							'NomeCliente' => 'CLIENTE 1',
+							'NomeCliente' => 'CLIENTE',
 							'idTab_Modulo' => "1",
 							'idSis_Usuario' => $data['idSis_Usuario'],
 							'idSis_Empresa' => $data['idSis_Empresa']
@@ -778,7 +862,7 @@ class Loginempresa extends CI_Controller {
 						$data['idApp_Cliente'] = $this->Loginempresa_model->set_cliente($data['cliente']);
 
 						$data['fornecedor'] = array(
-							'NomeFornecedor' => 'FORNECEDOR 1',
+							'NomeFornecedor' => 'FORNECEDOR',
 							'idTab_Modulo' => "1",
 							'idSis_Usuario' => $data['idSis_Usuario'],
 							'idSis_Empresa' => $data['idSis_Empresa']
@@ -821,7 +905,7 @@ class Loginempresa extends CI_Controller {
 						} else {
 						
 							$data['produto'] = array(
-								'Produtos' => 'PRODUTO TESTE 1',
+								'Produtos' => 'PRODUTO TESTE',
 								'idTab_Modulo' => "1",
 								'VendaSite' => "S",
 								'Prodaux3' => $data['idTab_Catprod'],
@@ -857,8 +941,8 @@ class Loginempresa extends CI_Controller {
 								} else {	
 									
 									$data['promocao'] = array(
-										'Promocao' => "Promocao 1",
-										'Descricao' => "Descricao Promocao 1",
+										'Promocao' => "Promocao",
+										'Descricao' => "Descricao Promocao",
 										'idSis_Usuario' => $data['idSis_Usuario'],
 										'idSis_Empresa' => $data['idSis_Empresa'],
 										'idTab_Modulo' => "1",

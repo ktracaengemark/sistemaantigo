@@ -172,6 +172,28 @@ class Loginempresa_model extends CI_Model {
 
     }
 
+    public function set_atendimento($data) {
+        #unset($data['idSisgef_Fila']);
+        /*
+          echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit();
+         */
+        $query = $this->db->insert('App_Atendimento', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }	
+	
     public function set_funcao($data) {
         #unset($data['idSisgef_Fila']);
         /*

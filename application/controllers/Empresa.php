@@ -2465,5 +2465,177 @@ class Empresa extends CI_Controller {
 
         $this->load->view('basico/footer');
     }
+
+    public function atendimento($id = FALSE) {
+		
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $data['empresa'] = quotes_to_entities($this->input->post(array(
+            #### Sis_Empresa ####
+            'idSis_Empresa',
+			
+        ), TRUE));
+
+        //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
+        //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
+
+		(!$this->input->post('PRCount')) ? $data['count']['PRCount'] = 0 : $data['count']['PRCount'] = $this->input->post('PRCount');
+
+        $j = 1;
+        for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
+
+            if ($this->input->post('Aberto' . $i) || $this->input->post('Hora_Abre' . $i) || $this->input->post('Hora_Fecha' . $i)) {
+                $data['atendimento'][$j]['idApp_Atendimento'] = $this->input->post('idApp_Atendimento' . $i);
+                $data['atendimento'][$j]['id_Dia'] = $this->input->post('id_Dia' . $i);
+                $data['atendimento'][$j]['Dia_Semana'] = $this->input->post('Dia_Semana' . $i);
+                $data['atendimento'][$j]['Aberto'] = $this->input->post('Aberto' . $i);
+                $data['atendimento'][$j]['Hora_Abre'] = $this->input->post('Hora_Abre' . $i);
+                $data['atendimento'][$j]['Hora_Fecha'] = $this->input->post('Hora_Fecha' . $i);
+				$j++;
+            }
+        }
+		$data['count']['PRCount'] = $j - 1;
+
+        //Fim do trecho de código que dá pra melhorar
+
+        if ($id) {
+            #### Sis_Empresa ####
+            $data['empresa'] = $this->Empresa_model->get_empresa($id);
+
+
+            #### App_Parcelas ####
+            $_SESSION['Atendimento'] = $data['atendimento'] = $this->Empresa_model->get_atendimento($id);
+            if (count($data['atendimento']) > 0) {
+                $data['atendimento'] = array_combine(range(1, count($data['atendimento'])), array_values($data['atendimento']));
+				$data['count']['PRCount'] = count($data['atendimento']);
+				
+                if (isset($data['atendimento'])) {
+
+                    for($j=1; $j <= $data['count']['PRCount']; $j++) {
+                        //$data['atendimento'][$j]['DataVencimentoOrca'] = $this->basico->mascara_data($data['atendimento'][$j]['DataVencimentoOrca'], 'barras');
+                    }
+
+                }
+            }
+
+        }
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #### Sis_Empresa ####
+        $this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'trim');
+		//$this->form_validation->set_rules('Hora_Abre', 'Abre às', 'required|trim|valid_hour');
+		//$this->form_validation->set_rules('Hora_Fecha', 'Fecha às', 'required|trim|valid_hour');
+        //$this->form_validation->set_rules('Hora_Fecha', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['atendimento']['Hora_Abre'] . ']');
+
+
+        $data['select']['Aberto'] = $this->Basico_model->select_status_sn();		
+		
+        $data['titulo'] = 'Atendimento';
+        $data['form_open_path'] = 'empresa/atendimento';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'info';
+        $data['metodo'] = 2;
+
+		$data['collapse'] = '';	
+		$data['collapse1'] = 'class="collapse"';		
+		
+        if ($data['count']['PRCount'] > 0 )
+            $data['parcelasin'] = 'in';
+        else
+            $data['parcelasin'] = '';
+
+
+        $data['sidebar'] = 'col-sm-3 col-md-2';
+        $data['main'] = 'col-sm-7 col-md-8';
+
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+
+        /*
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit ();
+        */
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('empresa/form_atendimento', $data);
+        } else {
+			
+			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+            #### Sis_Empresa ####
+
+			$data['empresa']['DataOrca'] = $this->basico->mascara_data($data['empresa']['DataOrca'], 'mysql');
+
+
+            $data['update']['empresa']['anterior'] = $this->Empresa_model->get_empresa($data['empresa']['idSis_Empresa']);
+            $data['update']['empresa']['campos'] = array_keys($data['empresa']);
+            $data['update']['empresa']['auditoriaitem'] = $this->basico->set_log(
+                $data['update']['empresa']['anterior'],
+                $data['empresa'],
+                $data['update']['empresa']['campos'],
+                $data['empresa']['idSis_Empresa'], TRUE);
+            $data['update']['empresa']['bd'] = $this->Empresa_model->update_empresa($data['empresa'], $data['empresa']['idSis_Empresa']);
+
+
+            #### App_ParcelasRec ####
+            $data['update']['atendimento']['anterior'] = $this->Empresa_model->get_atendimento($data['empresa']['idSis_Empresa']);
+            if (isset($data['atendimento']) || (!isset($data['atendimento']) && isset($data['update']['atendimento']['anterior']) ) ) {
+
+                if (isset($data['atendimento']))
+                    $data['atendimento'] = array_values($data['atendimento']);
+                else
+                    $data['atendimento'] = array();
+
+                //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
+                $data['update']['atendimento'] = $this->basico->tratamento_array_multidimensional($data['atendimento'], $data['update']['atendimento']['anterior'], 'idApp_Atendimento');
+
+                $max = count($data['update']['atendimento']['alterar']);
+                for($j=0;$j<$max;$j++) {
+                    //$data['update']['atendimento']['alterar'][$j]['ValorRestanteOrca'] = str_replace(',', '.', str_replace('.', '', $data['update']['atendimento']['alterar'][$j]['ValorRestanteOrca']));
+                    //$data['update']['atendimento']['alterar'][$j]['ValorComissao'] = str_replace(',', '.', str_replace('.', '', $data['update']['atendimento']['alterar'][$j]['ValorComissao']));
+                    //$data['update']['atendimento']['alterar'][$j]['DataVencimentoOrca'] = $this->basico->mascara_data($data['update']['atendimento']['alterar'][$j]['DataVencimentoOrca'], 'mysql');
+					
+				}
+
+                if (count($data['update']['atendimento']['alterar']))
+                    $data['update']['atendimento']['bd']['alterar'] =  $this->Empresa_model->update_atendimento($data['update']['atendimento']['alterar']);
+
+            }
+
+            //if ($data['idSis_Empresa'] === FALSE) {
+            //if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
+            if ($data['auditoriaitem'] && !$data['update']['empresa']['bd']) {
+                $data['msg'] = '?m=2';
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+                $this->load->view('empresa/form_atendimento', $data);
+            } else {
+
+                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idSis_Empresa'], FALSE);
+                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'CREATE', $data['auditoriaitem']);
+                $data['msg'] = '?m=1';
+
+				//redirect(base_url() . 'relatorio/comissao/' . $data['msg']);
+				redirect(base_url() . 'empresa/prontuario/' . $_SESSION['log']['idSis_Empresa'] . $data['msg']);
+
+				exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+
+    }
 	
 }

@@ -77,8 +77,16 @@ class Empresa_model extends CI_Model {
 
         return $query[0];
     }
-	
+
     public function update_empresa($data, $id) {
+		
+		unset($data['idSis_Empresa']);
+        $query = $this->db->update('Sis_Empresa', $data, array('idSis_Empresa' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }	
+	
+    public function update_empresa_original($data, $id) {
 
         unset($data['Id']);
         $query = $this->db->update('Sis_Empresa', $data, array('idSis_Empresa' => $id));
@@ -339,5 +347,28 @@ class Empresa_model extends CI_Model {
             }
         }
     }
+
+    public function get_atendimento($data) {
+		
+		$query = $this->db->query('
+            SELECT *
+            FROM
+				App_Atendimento
+            WHERE
+				idSis_Empresa = ' . $data . '	
+            ORDER BY
+				idApp_Atendimento 
+		');
+        $query = $query->result_array();
+          
+        return $query;
+    }
+
+    public function update_atendimento($data) {
+		
+        $query = $this->db->update_batch('App_Atendimento', $data, 'idApp_Atendimento');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }	
 	
 }
