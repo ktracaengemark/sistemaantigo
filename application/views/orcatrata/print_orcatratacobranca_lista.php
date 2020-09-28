@@ -1,8 +1,7 @@
 <?php if (isset($msg)) echo $msg; ?>
 
 <?php echo validation_errors(); ?>
-<div class="col-md-3"></div>
-<div class="col-md-6">	
+<div class="col-md-12">	
 	<nav class="navbar navbar-inverse navbar-fixed" role="banner">
 	  <div class="container-fluid">
 		<div class="navbar-header">
@@ -16,8 +15,8 @@
 					<span class="glyphicon glyphicon-print"></span>
 				</a>
 				
-				<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir_lista/' . $_SESSION['log']['idSis_Empresa']; ?>">
-					<span class="glyphicon glyphicon-pencil"></span> Versão Lista
+				<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
+					<span class="glyphicon glyphicon-pencil"></span> Versão Recibo
 				</a>
 				
 			</div>
@@ -47,43 +46,14 @@
 				<table class="table table-bordered table-condensed table-striped">
 					<thead>
 						<tr>
-							<td class="col-md-1" scope="col"><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>"class="img-circle img-responsive" width='100'>
-																						
-																						</td>
-							<td class="col-md-3 text-left" scope="col"><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>'
-																				. '<br><br><strong>' . $orcatrata[$i]['NomeCliente'] . '</strong> - ' . $orcatrata[$i]['idApp_Cliente'] . ''
-																				. '<br>' . $orcatrata[$i]['EnderecoCliente'] . ' - ' . $orcatrata[$i]['NumeroCliente'] . ''
-																				. '<br>' . $orcatrata[$i]['ComplementoCliente'] . ' - ' . $orcatrata[$i]['BairroCliente'] . ' - ' . $orcatrata[$i]['CidadeCliente'] . ' - ' . $orcatrata[$i]['EstadoCliente'] . ''
-																				. '<br>Tel.:' . $orcatrata[$i]['CelularCliente'] . ' / ' . $orcatrata[$i]['Telefone'] . ' / ' . $orcatrata[$i]['Telefone2'] . ' / ' . $orcatrata[$i]['Telefone3'] . ''
+							<td class="col-md-1 text-left" scope="col"><?php echo 'Orç.: <strong>' . $orcatrata[$i]['idApp_OrcaTrata'] . '</strong>' . ' - '  . $orcatrata[$i]['DataOrca'] . ''
 																		?></td>
-							<td class="col-md-1 text-center" scope="col"><?php echo 
-																					'Data:<br><strong>'  . $orcatrata[$i]['DataOrca'] . '</strong>'
-																				. '<br><br>Valor Total:'
-																				. '<br>R$: <strong>'  . $orcatrata[$i]['ValorTotalOrca'] . '</strong>'
-																			?></td>
-							<td class="col-md-1 text-center" scope="col"><?php echo 'Orçamento:<br><strong>' . $orcatrata[$i]['idApp_OrcaTrata'] . '</strong>'
-																				. '<br><br><br>Via da Empresa: <strong>'  . $i . '/' . $count['POCount'] . '</strong>'
-																			?></td>
-						</tr>
-					</thead>
-					<thead>
-						<tr>
-							<td class="col-md-1" scope="col"><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>"class="img-circle img-responsive" width='100'>
-																						
-																						</td>
-							<td class="col-md-3 text-left" scope="col"><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>'
-																				. '<br><br><strong>' . $orcatrata[$i]['NomeCliente'] . '</strong> - ' . $orcatrata[$i]['idApp_Cliente'] . ''
-																				. '<br>' . $orcatrata[$i]['EnderecoCliente'] . ' - ' . $orcatrata[$i]['NumeroCliente'] . ''
-																				. '<br>' . $orcatrata[$i]['ComplementoCliente'] . ' - ' . $orcatrata[$i]['BairroCliente'] . ' - ' . $orcatrata[$i]['CidadeCliente'] . ' - ' . $orcatrata[$i]['EstadoCliente'] . ''
-																				. '<br>Tel.:' . $orcatrata[$i]['CelularCliente'] . ' / ' . $orcatrata[$i]['Telefone'] . ' / ' . $orcatrata[$i]['Telefone2'] . ' / ' . $orcatrata[$i]['Telefone3'] . ''
+							<td class="col-md-3 text-left" scope="col"><?php echo '' . $orcatrata[$i]['idApp_Cliente'] . ' - <strong>' . $orcatrata[$i]['NomeCliente'] . '</strong>'
+																				. ' - <strong>Tel.:</strong>' . $orcatrata[$i]['CelularCliente'] . ' - ' . $orcatrata[$i]['Telefone'] . ' - ' . $orcatrata[$i]['Telefone2'] . ' - ' . $orcatrata[$i]['Telefone3'] . ''
 																		?></td>
-							<td class="col-md-1 text-center" scope="col"><?php echo 
-																					'Data:<br><strong>'  . $orcatrata[$i]['DataOrca'] . '</strong>'
-																				. '<br><br>Valor Total:'
-																				. '<br>R$: <strong>'  . $orcatrata[$i]['ValorTotalOrca'] . '</strong>'
+							<td class="col-md-1 text-left" scope="col"><?php echo 'Valor Total:' . 'R$: <strong>'  . $orcatrata[$i]['ValorTotalOrca'] . '</strong>'
 																			?></td>
-							<td class="col-md-1 text-center" scope="col"><?php echo 'Orçamento:<br><strong>' . $orcatrata[$i]['idApp_OrcaTrata'] . '</strong>'
-																				. '<br><br><br>Via do Cliente'
+							<td class="col-md-1 text-left" scope="col"><?php echo ''  . $orcatrata[$i]['AVAP'] . '' . ' - <strong>'  . $orcatrata[$i]['FormaPag'] . '</strong>'
 																			?></td>
 						</tr>
 					</thead>

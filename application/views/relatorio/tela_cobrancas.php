@@ -18,7 +18,7 @@
 					</button>
 				</span>
 				<span class="input-group-btn">
-					<a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
+					<a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir_lista/' . $_SESSION['log']['idSis_Empresa']; ?>">
 						<button class="btn btn-success btn-md" type="button">
 							<span class="glyphicon glyphicon-print"></span>
 						</button>

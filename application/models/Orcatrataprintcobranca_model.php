@@ -103,18 +103,16 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				OT.Tipo_Orca,
 				FP.FormaPag,				
 				EF.NomeEmpresa,
-				MO.AVAP,
-				MO.Abrev3,
-				OT.Modalidade,
-				MO.Modalidade,
+				TAV.AVAP,
+				TAV.Abrev2,
 				TP.TipoFinanceiro,
 				PR.DataVencimento
             FROM           	
                 Tab_FormaPag AS FP,
 				App_OrcaTrata AS OT
 				LEFT JOIN Sis_Empresa AS EF ON EF.idSis_Empresa = OT.idSis_Empresa
-				LEFT JOIN Tab_TipoFinanceiro AS TP ON TP.idTab_TipoFinanceiro = OT.TipoFinanceiro				
-				LEFT JOIN Tab_Modalidade AS MO ON MO.Abrev = OT.Modalidade
+				LEFT JOIN Tab_TipoFinanceiro AS TP ON TP.idTab_TipoFinanceiro = OT.TipoFinanceiro
+				LEFT JOIN Tab_AVAP AS TAV ON TAV.Abrev2 = OT.AVAP
 				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 				LEFT JOIN App_Parcelas AS PR ON PR.idApp_OrcaTrata = OT.idApp_OrcaTrata
             WHERE
