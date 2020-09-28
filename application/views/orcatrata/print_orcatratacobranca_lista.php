@@ -46,7 +46,7 @@
 				<table class="table table-bordered table-condensed table-striped">
 					<thead>
 						<tr>
-							<td class="col-md-1 text-left" scope="col"><?php echo 'Orç.: <strong>' . $orcatrata[$i]['idApp_OrcaTrata'] . '</strong>' . ' - '  . $orcatrata[$i]['DataOrca'] . ''
+							<td class="col-md-1 text-left" scope="col"><?php echo ''  . $i . '/' . $count['POCount'] . '' . ' - <strong>' . $orcatrata[$i]['idApp_OrcaTrata'] . '</strong>' . ' - '  . $orcatrata[$i]['DataOrca'] . ''
 																		?></td>
 							<td class="col-md-3 text-left" scope="col"><?php echo '' . $orcatrata[$i]['idApp_Cliente'] . ' - <strong>' . $orcatrata[$i]['NomeCliente'] . '</strong>'
 																				. ' - <strong>Tel.:</strong>' . $orcatrata[$i]['CelularCliente'] . ' - ' . $orcatrata[$i]['Telefone'] . ' - ' . $orcatrata[$i]['Telefone2'] . ' - ' . $orcatrata[$i]['Telefone3'] . ''
