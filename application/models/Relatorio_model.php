@@ -1223,7 +1223,6 @@ class Relatorio_model extends CI_Model {
 				' . $filtro11 . '
 				' . $filtro13 . '
 				OT.idTab_TipoRD = "2" AND
-				OT.AprovadoOrca = "S" AND
 				PR.idTab_TipoRD = "2" AND
 				PR.Quitado = "S"
 				' . $data['Orcamento'] . '				
