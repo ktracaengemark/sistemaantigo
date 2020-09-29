@@ -1188,8 +1188,8 @@ class Relatorio_model extends CI_Model {
 				PR.idTab_TipoRD = "2" 
                 ' . $data['Orcamento'] . '
 			ORDER BY
-				PR.DataVencimento ASC,
-				OT.idApp_OrcaTrata ASC
+				C.NomeCliente ASC,
+				PR.DataVencimento ASC
 		');
 
         ####################################################################

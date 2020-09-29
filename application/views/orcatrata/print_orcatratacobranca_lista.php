@@ -42,14 +42,28 @@
 	</nav>	
 	<?php if( isset($count['POCount']) ) { ?>
 		<div style="overflow: auto; height: auto; ">
-			<table class="table table-bordered table-condensed table-striped">
+			<table class="  table-condensed table-striped">
 				<thead>
 					<tr>
-						<th class="col-md-1" scope="col">cont: <?php echo $count['POCount'] ?></th>
-						<th class="col-md-1" scope="col">Pedido</th>
-						<th class="col-md-1" scope="col">Data</th>
-						<th class="col-md-1" scope="col">idCli</th>
-						<th class="col-md-3" scope="col">Cliente</th>
+						<td class="col-md-1" scope="col"><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>"class="img-circle img-responsive" width='50'>
+																					
+																					</td>
+						<td class="col-md-3 text-left" scope="col"><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>  "Listagem de Cobrança"'
+																	?></td>
+						<td class="col-md-1 text-left" scope="col"><?php echo 'Vencimento De: <strong>'  . $_SESSION['Imprimir']['DataInicio3'] . '</strong> '
+																				. ', À: <strong>'  . $_SESSION['Imprimir']['DataFim3'] . '</strong>'
+																		?></td>
+					</tr>
+				</thead>
+			</table>
+			<table class="table table-bordered table-condensed table-striped">	
+				<thead>
+					<tr>
+						<th class="col-md-1" scope="col">cont: <?php echo $count['POCount'] ?> - Pedido</th>
+						<th class="col-md-1" scope="col">Dt Pedido</th>
+						<th class="col-md-1" scope="col">Dt Entr</th>
+						<th class="col-md-1" scope="col">Dt Venc</th>
+						<th class="col-md-1" scope="col">id - Cliente</th>
 						<th class="col-md-2" scope="col">Tel</th>
 						<th class="col-md-1" scope="col">Entr/Pago</th>
 						<th class="col-md-1" scope="col">Valor</th>
@@ -61,11 +75,11 @@
 					for ($i=1; $i <= $count['POCount']; $i++) { 
 					?>
 						<tr>
-							<td class="col-md-1" scope="col"><?php echo $i ?></td>
-							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['idApp_OrcaTrata'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $i ?> - <?php echo $orcatrata[$i]['idApp_OrcaTrata'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['DataOrca'] ?></td>
-							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['idApp_Cliente'] ?></td>
-							<td class="col-md-3" scope="col"><?php echo $orcatrata[$i]['NomeCliente'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['DataEntregaOrca'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['DataVencimentoOrca'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['idApp_Cliente'] ?> - <?php echo $orcatrata[$i]['NomeCliente'] ?></td>
 							<td class="col-md-2" scope="col"><?php echo $orcatrata[$i]['CelularCliente'] ?>
 															- <?php echo $orcatrata[$i]['Telefone'] ?>
 															- <?php echo $orcatrata[$i]['Telefone2'] ?>

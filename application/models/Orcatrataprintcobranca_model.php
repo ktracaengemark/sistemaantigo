@@ -138,8 +138,8 @@ class Orcatrataprintcobranca_model extends CI_Model {
 			GROUP BY
                 OT.idApp_OrcaTrata
             ORDER BY
-				PR.DataVencimento ASC,
-				OT.idApp_OrcaTrata ASC		
+				C.NomeCliente ASC,
+				PR.DataVencimento ASC		
         ');
         $query = $query->result_array();
 
@@ -180,7 +180,7 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				PV.idApp_OrcaTrata = OT.idApp_OrcaTrata AND
 				PV.idSis_Empresa = ' . $data . ' 
             ORDER BY
-            	PV.idApp_OrcaTrata DESC				
+            	PV.idTab_Produto ASC				
 		
 		');
         $query = $query->result_array();

@@ -41,7 +41,10 @@ class OrcatrataPrintCobranca extends CI_Controller {
         elseif ($this->input->get('m') == 2)
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
-            $data['msg'] = '';		
+            $data['msg'] = '';
+		
+		$_SESSION['Imprimir']['DataInicio3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio3'], 'barras');
+		$_SESSION['Imprimir']['DataFim3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim3'], 'barras');
 		
         if ($id) {
             #### App_OrcaTrata ####
@@ -148,6 +151,9 @@ class OrcatrataPrintCobranca extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';		
+		
+		$_SESSION['Imprimir']['DataInicio3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio3'], 'barras');
+		$_SESSION['Imprimir']['DataFim3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim3'], 'barras');
 		
         if ($id) {
             #### App_OrcaTrata ####
