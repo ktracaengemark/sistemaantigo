@@ -40,79 +40,48 @@
 		-->
 	  </div>
 	</nav>	
-	<?php if( isset($count['POCount']) ) { ?>	
-		<?php for ($i=1; $i <= $count['POCount']; $i++) { ?>
-			<div style="overflow: auto; height: auto; ">
-				<table class="table table-bordered table-condensed table-striped">
-					<thead>
+	<?php if( isset($count['POCount']) ) { ?>
+		<div style="overflow: auto; height: auto; ">
+			<table class="table table-bordered table-condensed table-striped">
+				<thead>
+					<tr>
+						<th class="col-md-1" scope="col">cont: <?php echo $count['POCount'] ?></th>
+						<th class="col-md-1" scope="col">Pedido</th>
+						<th class="col-md-1" scope="col">Data</th>
+						<th class="col-md-1" scope="col">idCli</th>
+						<th class="col-md-3" scope="col">Cliente</th>
+						<th class="col-md-2" scope="col">Tel</th>
+						<th class="col-md-1" scope="col">Entr/Pago</th>
+						<th class="col-md-1" scope="col">Valor</th>
+						<th class="col-md-1" scope="col">Lc/Fr.Pag.</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php 
+					for ($i=1; $i <= $count['POCount']; $i++) { 
+					?>
 						<tr>
-							<td class="col-md-1 text-left" scope="col"><?php echo ''  . $i . '/' . $count['POCount'] . '' . ' - <strong>' . $orcatrata[$i]['idApp_OrcaTrata'] . '</strong>' . ' - '  . $orcatrata[$i]['DataOrca'] . ''
-																		?></td>
-							<td class="col-md-3 text-left" scope="col"><?php echo '' . $orcatrata[$i]['idApp_Cliente'] . ' - <strong>' . $orcatrata[$i]['NomeCliente'] . '</strong>'
-																				. ' - <strong>Tel.:</strong>' . $orcatrata[$i]['CelularCliente'] . ' - ' . $orcatrata[$i]['Telefone'] . ' - ' . $orcatrata[$i]['Telefone2'] . ' - ' . $orcatrata[$i]['Telefone3'] . ''
-																		?></td>
-							<td class="col-md-1 text-left" scope="col"><?php echo 'Valor Total:' . 'R$: <strong>'  . $orcatrata[$i]['ValorTotalOrca'] . '</strong>'
-																			?></td>
-							<td class="col-md-1 text-left" scope="col"><?php echo ''  . $orcatrata[$i]['AVAP'] . '' . ' - <strong>'  . $orcatrata[$i]['FormaPag'] . '</strong>'
-																			?></td>
+							<td class="col-md-1" scope="col"><?php echo $i ?></td>
+							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['idApp_OrcaTrata'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['DataOrca'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['idApp_Cliente'] ?></td>
+							<td class="col-md-3" scope="col"><?php echo $orcatrata[$i]['NomeCliente'] ?></td>
+							<td class="col-md-2" scope="col"><?php echo $orcatrata[$i]['CelularCliente'] ?>
+															- <?php echo $orcatrata[$i]['Telefone'] ?>
+															- <?php echo $orcatrata[$i]['Telefone2'] ?>
+															- <?php echo $orcatrata[$i]['Telefone3'] ?>
+															</td>
+							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['ConcluidoOrca'] ?> / <?php echo $orcatrata[$i]['QuitadoOrca'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['ValorTotalOrca'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['AVAP'] ?>/<?php echo $orcatrata[$i]['FormaPag'] ?></td>
 						</tr>
-					</thead>
-					<thead>
-						<tr>
-							<th class="col-md-1" scope="col">Qtd</th>
-							<th class="col-md-3" scope="col">Produto</th>							
-							<th class="col-md-1" scope="col">R$</th>
-							<th class="col-md-1" scope="col">Ent?</th>
-						</tr>
-					</thead>
-					<tbody>
-
-						<?php
-						for ($k=1; $k <= $count['PCount']; $k++) {
-						?>
-						<?php if($orcatrata[$i]['idApp_OrcaTrata'] == $produto[$k]['idApp_OrcaTrata']) { ?>
-						<tr>
-							<td class="col-md-1" scope="col"><?php echo $produto[$k]['Qtd_Prod'] ?></td>
-							<td class="col-md-3" scope="col"><?php echo $produto[$k]['NomeProduto'] ?></td>
-							<td class="col-md-1" scope="col"><?php echo $produto[$k]['SubtotalProduto'] ?></td>
-							<td class="col-md-1" scope="col"><?php echo $produto[$k]['ConcluidoProduto'] ?></td>										
-						</tr>
-						<?php
-						}
-						?>
-						
-						<?php
-						}
-						?>
-
-					</tbody>
-					<thead>
-						<tr>
-							<th class="col-md-1" scope="col">Parcela</th>
-							<th class="col-md-3" scope="col">Venc.</th>
-							<th class="col-md-1" scope="col">R$</th>
-							<th class="col-md-1" scope="col">Pago?</th>										
-						</tr>
-					</thead>
-					<tbody>
-					<?php for ($j=1; $j <= $count['PRCount']; $j++) { ?>
-						<?php if($orcatrata[$i]['idApp_OrcaTrata'] == $parcelasrec[$j]['idApp_OrcaTrata']) { ?>
-						<tr>
-							<td class="col-md-1" scope="col"><?php echo $parcelasrec[$j]['Parcela'] ?></td>
-							<td class="col-md-3" scope="col"><?php echo $parcelasrec[$j]['DataVencimento'] ?></td>
-							<td class="col-md-1" scope="col"><?php echo number_format($parcelasrec[$j]['ValorParcela'], 2, ',', '.') ?></td>
-							<td class="col-md-1" scope="col"><?php echo $this->basico->mascara_palavra_completa($parcelasrec[$j]['Quitado'], 'NS') ?></td>									
-						</tr>
-						<?php } ?>
-					<?php } ?>
-					</tbody>					
-				</table>
-				<?php if( isset($count['PCount']) ) { ?>
-				<?php } else echo '<h3 class="text-left">S/Produtos Entregues </h3>';{?>
-				<?php } ?>
-			</div>
-		<?php } ?>
+					
+					<?php
+					}
+					?>
+				</tbody>
+			</table>
+		</div>
 	<?php } else echo '<h3 class="text-center">Nenhum Orçamento Filtrado!</h3>';{?>
-	<?php } ?>		
-
+	<?php } ?>
 </div>	

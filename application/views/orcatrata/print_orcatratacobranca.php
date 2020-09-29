@@ -53,7 +53,7 @@
 							<td class="col-md-3 text-left" scope="col"><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>'
 																				. '<br><br><strong>' . $orcatrata[$i]['NomeCliente'] . '</strong> - ' . $orcatrata[$i]['idApp_Cliente'] . ''
 																				. '<br>' . $orcatrata[$i]['EnderecoCliente'] . ' - ' . $orcatrata[$i]['NumeroCliente'] . ''
-																				. '<br>' . $orcatrata[$i]['ComplementoCliente'] . ' - ' . $orcatrata[$i]['BairroCliente'] . ' - ' . $orcatrata[$i]['CidadeCliente'] . ' - ' . $orcatrata[$i]['EstadoCliente'] . ''
+																				. '<br>' . $orcatrata[$i]['ComplementoCliente'] . ' - ' . $orcatrata[$i]['BairroCliente'] . ' - ' . $orcatrata[$i]['CidadeCliente'] . ' - ' . $orcatrata[$i]['EstadoCliente'] . '<br>' . $orcatrata[$i]['ReferenciaCliente'] . ''
 																				. '<br>Tel.:' . $orcatrata[$i]['CelularCliente'] . ' / ' . $orcatrata[$i]['Telefone'] . ' / ' . $orcatrata[$i]['Telefone2'] . ' / ' . $orcatrata[$i]['Telefone3'] . ''
 																		?></td>
 							<td class="col-md-1 text-center" scope="col"><?php echo 
@@ -74,7 +74,7 @@
 							<td class="col-md-3 text-left" scope="col"><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>'
 																				. '<br><br><strong>' . $orcatrata[$i]['NomeCliente'] . '</strong> - ' . $orcatrata[$i]['idApp_Cliente'] . ''
 																				. '<br>' . $orcatrata[$i]['EnderecoCliente'] . ' - ' . $orcatrata[$i]['NumeroCliente'] . ''
-																				. '<br>' . $orcatrata[$i]['ComplementoCliente'] . ' - ' . $orcatrata[$i]['BairroCliente'] . ' - ' . $orcatrata[$i]['CidadeCliente'] . ' - ' . $orcatrata[$i]['EstadoCliente'] . ''
+																				. '<br>' . $orcatrata[$i]['ComplementoCliente'] . ' - ' . $orcatrata[$i]['BairroCliente'] . ' - ' . $orcatrata[$i]['CidadeCliente'] . ' - ' . $orcatrata[$i]['EstadoCliente'] . '<br>' . $orcatrata[$i]['ReferenciaCliente'] . ''
 																				. '<br>Tel.:' . $orcatrata[$i]['CelularCliente'] . ' / ' . $orcatrata[$i]['Telefone'] . ' / ' . $orcatrata[$i]['Telefone2'] . ' / ' . $orcatrata[$i]['Telefone3'] . ''
 																		?></td>
 							<td class="col-md-1 text-center" scope="col"><?php echo 

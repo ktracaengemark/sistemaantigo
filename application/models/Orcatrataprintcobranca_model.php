@@ -68,6 +68,7 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				C.BairroCliente,
 				C.CidadeCliente,
 				C.EstadoCliente,
+				C.ReferenciaCliente,
 				OT.idSis_Empresa,
 				OT.idApp_OrcaTrata,
 				OT.CombinadoFrete,
