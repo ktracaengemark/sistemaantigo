@@ -63,7 +63,8 @@
 						<th class="col-md-1" scope="col">Dt Pedido</th>
 						<th class="col-md-1" scope="col">Dt Entr</th>
 						<th class="col-md-1" scope="col">Dt Venc</th>
-						<th class="col-md-1" scope="col">id - Cliente</th>
+						<th class="col-md-1" scope="col">id</th>
+						<th class="col-md-2" scope="col">Cliente</th>
 						<th class="col-md-2" scope="col">Tel</th>
 						<th class="col-md-1" scope="col">Entr/Pago</th>
 						<th class="col-md-1" scope="col">Valor</th>
@@ -79,7 +80,8 @@
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['DataOrca'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['DataEntregaOrca'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['DataVencimentoOrca'] ?></td>
-							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['idApp_Cliente'] ?> - <?php echo $orcatrata[$i]['NomeCliente'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['idApp_Cliente'] ?></td>
+							<td class="col-md-2" scope="col"><?php echo $orcatrata[$i]['NomeCliente'] ?></td>
 							<td class="col-md-2" scope="col"><?php echo $orcatrata[$i]['CelularCliente'] ?>
 															- <?php echo $orcatrata[$i]['Telefone'] ?>
 															- <?php echo $orcatrata[$i]['Telefone2'] ?>
