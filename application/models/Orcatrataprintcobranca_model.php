@@ -102,6 +102,8 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				OT.Descricao,
 				OT.TipoFinanceiro,
 				OT.Tipo_Orca,
+				OT.NomeRec,
+				OT.ParentescoRec,
 				FP.FormaPag,				
 				EF.NomeEmpresa,
 				TAV.AVAP,

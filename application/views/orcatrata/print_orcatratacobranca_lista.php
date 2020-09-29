@@ -50,8 +50,8 @@
 																					</td>
 						<td class="col-md-3 text-left" scope="col"><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>  "Listagem de Cobrança"'
 																	?></td>
-						<td class="col-md-1 text-left" scope="col"><?php echo 'Vencimento De: <strong>'  . $_SESSION['Imprimir']['DataInicio3'] . '</strong> '
-																				. ', À: <strong>'  . $_SESSION['Imprimir']['DataFim3'] . '</strong>'
+						<td class="col-md-1 text-left" scope="col"><?php echo 'Vencimento De: <strong>'  . $Imprimir['DataInicio3'] . '</strong> '
+																				. ', À: <strong>'  . $Imprimir['DataFim3'] . '</strong>'
 																		?></td>
 					</tr>
 				</thead>

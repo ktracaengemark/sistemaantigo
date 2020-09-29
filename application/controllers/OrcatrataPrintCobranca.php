@@ -43,8 +43,8 @@ class OrcatrataPrintCobranca extends CI_Controller {
         else
             $data['msg'] = '';
 		
-		$_SESSION['Imprimir']['DataInicio3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio3'], 'barras');
-		$_SESSION['Imprimir']['DataFim3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim3'], 'barras');
+		$data['Imprimir']['DataInicio3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio3'], 'barras');
+		$data['Imprimir']['DataFim3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim3'], 'barras');
 		
         if ($id) {
             #### App_OrcaTrata ####
@@ -152,8 +152,8 @@ class OrcatrataPrintCobranca extends CI_Controller {
         else
             $data['msg'] = '';		
 		
-		$_SESSION['Imprimir']['DataInicio3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio3'], 'barras');
-		$_SESSION['Imprimir']['DataFim3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim3'], 'barras');
+		$data['Imprimir']['DataInicio3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio3'], 'barras');
+		$data['Imprimir']['DataFim3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim3'], 'barras');
 		
         if ($id) {
             #### App_OrcaTrata ####
