@@ -1,11 +1,11 @@
 <?php if ($msg) echo $msg; ?>
 <?php echo validation_errors(); ?>    
-	<?php echo form_open('pedidos/pedidos', 'role="form"'); ?>
+	<?php echo form_open('despesas/despesas', 'role="form"'); ?>
 	<div class="col-md-2 "></div>
 	<div class="col-md-8 ">
 		<div class="row">	
 			<div class="col-md-12 ">
-				<div class="panel panel-primary">
+				<div class="panel panel-danger">
 					<div class="panel-heading">
 						<div class="row">
 							<!--
@@ -14,14 +14,14 @@
 							</div>
 							-->
 							<div class="col-md-4">
-								<label>Gestor de Pedidos</label>
+								<label>Gestor de Despesas</label>
 								<div class="input-group">
 									<span class="input-group-btn">
 										<button class="btn btn-info btn-md" type="submit">
 											<span class="glyphicon glyphicon-search"></span> 
 										</button>
 									</span>
-									<input type="text" class="form-control Numero" placeholder="Pesquisar Pedido" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
+									<input type="text" class="form-control Numero" placeholder="Pesquisar Despesa" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
 								</div>
 							</div>
 							<!--
@@ -71,8 +71,8 @@
 							-->
 							<div class="col-md-4">										
 								<label>Cadastrar novo Pedido</label>
-								<a class="btn btn-md btn-info btn-block" href="<?php echo base_url() ?>orcatrata/cadastrar3" role="button"> 
-									<span class="glyphicon glyphicon-plus"></span> Novo Pedido
+								<a class="btn btn-md btn-danger btn-block" href="<?php echo base_url() ?>orcatrata/cadastrardesp" role="button"> 
+									<span class="glyphicon glyphicon-plus"></span> Nova Compra / Despesa
 								</a>
 							</div>
 						</div>	
@@ -86,53 +86,11 @@
 					<div class="col-md-12">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
-								Aguardando <b>Combinar com o Cliente</b>
-							</div>
-							<div class="panel-body">
-								
-								<?php echo (isset($list_combinar)) ? $list_combinar : FALSE ?>
-								
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-primary">
-							<div class="panel-heading">
-								Aguardando <b>Aprovação do Cliente</b>
+								Aguardando <b>Aprovação</b>
 							</div>
 							<div class="panel-body">
 								
 								<?php echo (isset($list_aprovar)) ? $list_aprovar : FALSE ?>
-								
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-info">
-							<div class="panel-heading">
-								Aguardando <b>Produção</b>
-							</div>
-							<div class="panel-body">
-								
-								<?php echo (isset($list_producao)) ? $list_producao : FALSE ?>
-								
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">			
-					<div class="col-md-12">
-						<div class="panel panel-success">
-							<div class="panel-heading">
-								Aguardando <b>Envio</b>
-							</div>
-							<div class="panel-body">
-								
-								<?php echo (isset($list_envio)) ? $list_envio : FALSE ?>
 								
 							</div>
 						</div>

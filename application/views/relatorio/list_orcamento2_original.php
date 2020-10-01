@@ -41,74 +41,62 @@
 				<table class="table table-bordered table-condensed table-striped">
 					<thead>
 						<tr>
-							<th class="active">Print</th>
-							<th class="active">Editar</th>
-							<th class="active">Cont.</th>
-							<th class="active">Pedido</th>
+							<th class="active">Edit</th>
 							<th class="active">Fornecedor</th>
-							<th class="active">Valor</th>
+							<th class="active">Pedido</th>
+							
+							<!--<th class="active">Valid. do Orçam.</th>
+							<th class="active">Prazo de Entrega</th>-->
+							<th class="active">Produto</th>
+							<th class="active">Orç.</th>
 							<th class="active">Frete</th>
-							<th class="active">Total</th>
-							<th class="active">Comb.</th>
-							<th class="active">Apv.</th>
-							<th class="active">Entr.</th>
-							<th class="active">Pago</th>
-							<th class="active">Final.</th>
-							<th class="active">Cancel.</th>
-							<th class="active">Compra</th>
-							<th class="active">Entrega</th>
-							<th class="active">Pagam.</th>
-							<th class="active">Form.Pag</th>
+							<th class="active">Total</th>					
+							<th class="active">Apv?</th>
+							<th class="active">Entr?</th>
+							<th class="active">Pago?</th>
+							<th class="active">Pagamento</th>
 							<th class="active">Dt. Orç.</th>
 							<th class="active">Dt. Ent.</th>
 							<th class="active">Dt. Venc.</th>
+							<!--<th class="active">Obs.</th>-->
+							<th class="active">Print</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
-						$count = 1;
 						foreach ($report->result_array() as $row) {
 							echo '<tr>';
 							#echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">';
 
 								#echo '<div class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">';
-								
 								echo '<td class="notclickable">
-										<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'OrcatrataPrint/imprimirdesp/' . $row['idApp_OrcaTrata'] . '">
-											<span class="glyphicon glyphicon-print notclickable"></span>
-										</a>
-									</td>';
-								echo '<td class="notclickable">
-										<a class="btn btn-md btn-warning notclickable" href="' . base_url() . 'Orcatrata/alterardesp/' . $row['idApp_OrcaTrata'] . '">
+										<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'orcatrata/alterardesp/' . $row['idApp_OrcaTrata'] . '">
 											<span class="glyphicon glyphicon-edit notclickable"></span>
 										</a>
 									</td>';
-								echo '<td>' . $count . '</td>';	
-								echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 								echo '<td>' . $row['NomeFornecedor'] . '</td>';
+								echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
+								echo '<td>' . $row['NomeProduto'] . '</td>';
 								#echo '<td>' . $row['DataEntradaOrca'] . '</td>';
 								#echo '<td>' . $row['DataPrazo'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorRestanteOrca'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorFrete'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorTotalOrca'] . '</td>';
-								echo '<td>' . $row['CombinadoFrete'] . '</td>';
 								echo '<td>' . $row['AprovadoOrca'] . '</td>';
 								echo '<td>' . $row['ConcluidoOrca'] . '</td>';
 								echo '<td>' . $row['QuitadoOrca'] . '</td>';
-								echo '<td>' . $row['FinalizadoOrca'] . '</td>';
-								echo '<td>' . $row['CanceladoOrca'] . '</td>';
-								echo '<td>' . $row['Tipo_Orca'] . '</td>';
-								echo '<td>' . $row['TipoFrete'] . '</td>';
-								echo '<td>' . $row['AVAP'] . '</td>';
 								echo '<td>' . $row['FormaPag'] . '</td>';
 								echo '<td>' . $row['DataOrca'] . '</td>';
 								echo '<td>' . $row['DataEntregaOrca'] . '</td>';
 								echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
 								#echo '<td>' . $row['Descricao'] . '</td>';
-								#echo '<td>' . $row['Nome'] . '</td>';
 								#echo '</div>';
+								echo '<td class="notclickable">
+										<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrint/imprimirdesp/' . $row['idApp_OrcaTrata'] . '">
+											<span class="glyphicon glyphicon-print notclickable"></span>
+										</a>
+									</td>';
 							echo '</tr>';
-							$count++;
 						}
 						?>
 					</tbody>

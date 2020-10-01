@@ -38,8 +38,8 @@
 															</select>
 															<?php echo form_error('idApp_Cliente'); ?>
 														</div>
-														<div class="col-md-3 text-left">
-															<label for="Cadastrar">Cliente Encontrado?</label>
+														<div class="col-md-2 text-left">
+															<label for="Cadastrar">Cliente Encontrado?</label><br>
 															<div class="btn-group" data-toggle="buttons">
 																<?php
 																foreach ($select['Cadastrar'] as $key => $row) {
@@ -67,14 +67,14 @@
 
 															</div>
 														</div>
-														<div class="col-md-3 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-															<label for="Cadastrar">Cadastrar/Editar Cliente</label>
+														<div class="col-md-4 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+															<label for="Cadastrar">Cadastrar/Editar Cliente</label><br>
 															<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>cliente2/cadastrar3/" role="button"> 
-																<span class="glyphicon glyphicon-plus"></span>Cliente
+																<span class="glyphicon glyphicon-plus"></span> <span class="glyphicon glyphicon-edit"></span> Cliente
 															</a>
 															
 															<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
-																	<span class="glyphicon glyphicon-refresh"></span>Ref.
+																	<span class="glyphicon glyphicon-refresh"></span>Recarregar
 															</button>
 															<?php echo form_error('Cadastrar'); ?>
 														</div>
@@ -894,7 +894,7 @@
 															<div class="col-md-12">
 																<label for="FormaPagamento">Forma de Pagamento</label>
 																<select data-placeholder="Selecione uma opção..." class="form-control" 
-																	data-toggle="collapse" onchange="calculaParcelas(),calculaTotal(this.value),exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
+																	data-toggle="collapse" onchange="exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
 																		data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																		id="FormaPagamento" name="FormaPagamento">
 																	<option value="">-- Selecione uma opção --</option>
@@ -930,7 +930,7 @@
 																			echo ''
 																			. '<label class="btn btn-default active" name="radio" id="radio' . $key . '">'
 																			. '<input type="radio" name="AVAP" id="' . $hideshow . '" '
-																			. 'onchange="calculaParcelas(),formaPag(this.value)" '
+																			. 'onchange="formaPag(this.value)" '
 																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																			. '</label>'
 																			;
@@ -938,7 +938,7 @@
 																			echo ''
 																			. '<label class="btn btn-default" name="radio" id="radio' . $key . '">'
 																			. '<input type="radio" name="AVAP" id="' . $hideshow . '"'
-																			. 'onchange="calculaParcelas(),formaPag(this.value)" '
+																			. 'onchange="formaPag(this.value)" '
 																			. 'autocomplete="off" value="' . $key . '" >' . $row
 																			. '</label>'
 																			;
@@ -1738,7 +1738,6 @@
 														</div>
 													</div>
 												</div>
-											
 											</div>
 										<?php } ?>
 									</div>

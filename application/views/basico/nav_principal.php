@@ -60,7 +60,6 @@
 				</li>						
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group">
-						
 						<a type="button" class="btn btn-sm btn-primary" role="button" href="<?php echo base_url(); ?>pedidos/pedidos">
 							Receitas<span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-arrow-down"></span> & 
 							Vendas<span class="glyphicon glyphicon-gift"></span><span class="glyphicon glyphicon-arrow-up"></span>
@@ -121,25 +120,26 @@
 				</li>
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group">
-						<!--
-						<a type="button" class="btn btn-sm btn-danger" role="button" href="<?php echo base_url(); ?>orcatrata/cadastrardesp">
+						
+						<a type="button" class="btn btn-sm btn-danger" role="button" href="<?php echo base_url(); ?>despesas/despesas">
 							Despesas<span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-arrow-up"></span>/ 
 							Compras<span class="glyphicon glyphicon-gift"></span><span class="glyphicon glyphicon-arrow-down"></span>
 						</a>
 						<button type="button" class="btn btn-sm btn-danger dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>
 						</button>
-						-->
+						<!--
 						<button type="button" class="btn btn-sm btn-danger dropdown-toggle" data-toggle="dropdown">
 							Despesas <span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-arrow-up"></span>/ 
 							Compras <span class="glyphicon glyphicon-gift"></span><span class="glyphicon glyphicon-arrow-down"></span> <span class="caret"></span>
 						</button>
+						-->
 						<ul class="dropdown-menu" role="menu">
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/cadastrardesp"><span class="glyphicon glyphicon-plus"></span> Nova Despesa / Compra</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="<?php echo base_url() ?>relatorio/fornecedor"><span class="glyphicon glyphicon-user"></span> Fornecedores </a></li>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>despesas/despesas"><span class="glyphicon glyphicon-edit"></span> Gestor dos Despesas</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>orcatrata/despesa"><span class="glyphicon glyphicon-edit"></span> Status das Despesas</a></li>
+							<li><a href="<?php echo base_url() ?>relatorio/fornecedor"><span class="glyphicon glyphicon-user"></span> Fornecedores </a></li>
 							<li role="separator" class="divider"></li>
 							<!--<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasdesp"><span class="glyphicon glyphicon-pencil"></span> Relatório das Despesas</a></li>
 							<li role="separator" class="divider"></li>-->
