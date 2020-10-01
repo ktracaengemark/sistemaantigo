@@ -22,7 +22,7 @@
 													<div class="row">
 														<div class="col-md-6 text-left">	
 															<label for="idApp_Fornecedor">Fornecedor</label>
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoFornecedor(this.value),dateDiff()" <?php echo $readonly; ?>
 																	id="idApp_Fornecedor" name="idApp_Fornecedor">
 																<option value="">-- Sel. Fornecedor --</option>
 																<?php
@@ -709,7 +709,7 @@
 										<div class="row ">
 											<div class="col-md-8 text-left"></div>
 											<div class="col-md-4 text-left">
-												<label for="AtualizaEndereco">Atualizar End.?</label><br>
+												<label for="AtualizaEndereco">Atualizar End. do Fornecedor?</label><br>
 												<div class="btn-group" data-toggle="buttons">
 													<?php
 													foreach ($select['AtualizaEndereco'] as $key => $row) {
@@ -1377,7 +1377,7 @@
 															<div class="panel-heading">
 																<div class="row">
 																	<div class="col-md-12 text-left">
-																		<label for="AprovadoOrca">Aprovado pelo Cliente?</label><br>
+																		<label for="AprovadoOrca">Aprovado?</label><br>
 																		<div class="btn-group" data-toggle="buttons">
 																			<?php
 																			foreach ($select['AprovadoOrca'] as $key => $row) {

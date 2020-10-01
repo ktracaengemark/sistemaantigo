@@ -5821,17 +5821,17 @@ class Orcatrata extends CI_Controller {
 			'CanceladoOrca',
         ), TRUE));
 		
-		$data['cliente'] = $this->input->post(array(
-			'idApp_Cliente',
-			'CepCliente',
-            'EnderecoCliente',
-			'NumeroCliente',
-			'ComplementoCliente',
-			'CidadeCliente',
-            'BairroCliente',
-            'MunicipioCliente',
-			'EstadoCliente',
-			'ReferenciaCliente',
+		$data['fornecedor'] = $this->input->post(array(
+			'idApp_Fornecedor',
+			'CepFornecedor',
+            'EnderecoFornecedor',
+			'NumeroFornecedor',
+			'ComplementoFornecedor',
+			'CidadeFornecedor',
+            'BairroFornecedor',
+            'MunicipioFornecedor',
+			'EstadoFornecedor',
+			'ReferenciaFornecedor',
         ), TRUE);
 		
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -6342,34 +6342,34 @@ class Orcatrata extends CI_Controller {
 			*/
 			$data['orcatrata']['idApp_OrcaTrata'] = $this->Orcatrata_model->set_orcatrata($data['orcatrata']);
             
-			#### APP_Cliente ####
+			#### APP_Fornecedor ####
 			if ($data['cadastrar']['AtualizaEndereco'] == 'S'){
-				$data['cliente']['CepCliente'] = $data['orcatrata']['Cep'];
-				$data['cliente']['EnderecoCliente'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
-				$data['cliente']['NumeroCliente'] = trim(mb_strtoupper($data['orcatrata']['Numero'], 'ISO-8859-1'));
-				$data['cliente']['ComplementoCliente'] = trim(mb_strtoupper($data['orcatrata']['Complemento'], 'ISO-8859-1'));
-				$data['cliente']['BairroCliente'] = trim(mb_strtoupper($data['orcatrata']['Bairro'], 'ISO-8859-1'));
-				$data['cliente']['CidadeCliente'] = trim(mb_strtoupper($data['orcatrata']['Cidade'], 'ISO-8859-1'));
-				$data['cliente']['EstadoCliente'] = trim(mb_strtoupper($data['orcatrata']['Estado'], 'ISO-8859-1'));
-				$data['cliente']['ReferenciaCliente'] = trim(mb_strtoupper($data['orcatrata']['Referencia'], 'ISO-8859-1'));
+				$data['fornecedor']['CepFornecedor'] = $data['orcatrata']['Cep'];
+				$data['fornecedor']['EnderecoFornecedor'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
+				$data['fornecedor']['NumeroFornecedor'] = trim(mb_strtoupper($data['orcatrata']['Numero'], 'ISO-8859-1'));
+				$data['fornecedor']['ComplementoFornecedor'] = trim(mb_strtoupper($data['orcatrata']['Complemento'], 'ISO-8859-1'));
+				$data['fornecedor']['BairroFornecedor'] = trim(mb_strtoupper($data['orcatrata']['Bairro'], 'ISO-8859-1'));
+				$data['fornecedor']['CidadeFornecedor'] = trim(mb_strtoupper($data['orcatrata']['Cidade'], 'ISO-8859-1'));
+				$data['fornecedor']['EstadoFornecedor'] = trim(mb_strtoupper($data['orcatrata']['Estado'], 'ISO-8859-1'));
+				$data['fornecedor']['ReferenciaFornecedor'] = trim(mb_strtoupper($data['orcatrata']['Referencia'], 'ISO-8859-1'));
 							
-				$data['update']['cliente']['anterior'] = $this->Orcatrata_model->get_cliente($data['orcatrata']['idApp_Cliente']);
-				$data['update']['cliente']['campos'] = array_keys($data['cliente']);
+				$data['update']['fornecedor']['anterior'] = $this->Orcatrata_model->get_fornecedor($data['orcatrata']['idApp_Fornecedor']);
+				$data['update']['fornecedor']['campos'] = array_keys($data['fornecedor']);
 				/*
-				$data['update']['cliente']['auditoriaitem'] = $this->basico->set_log(
-					$data['update']['cliente']['anterior'],
-					$data['cliente'],
-					$data['update']['cliente']['campos'],
-					$data['cliente']['idApp_Cliente'], TRUE);
+				$data['update']['fornecedor']['auditoriaitem'] = $this->basico->set_log(
+					$data['update']['fornecedor']['anterior'],
+					$data['fornecedor'],
+					$data['update']['fornecedor']['campos'],
+					$data['fornecedor']['idApp_Fornecedor'], TRUE);
 				*/	
-				$data['update']['cliente']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente'], $data['orcatrata']['idApp_Cliente']);
+				$data['update']['fornecedor']['bd'] = $this->Orcatrata_model->update_fornecedor($data['fornecedor'], $data['orcatrata']['idApp_Fornecedor']);
 				
 				/*
 				// ""ver modo correto de fazer o set_log e set_auditoria""
 				if ($data['auditoriaitem'] === FALSE) {
                     $data['msg'] = '';
                 } else {
-                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Cliente', 'UPDATE', $data['auditoriaitem']);
+                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Fornecedor', 'UPDATE', $data['auditoriaitem']);
                     $data['msg'] = '?m=1';
                 }
 				*/
@@ -6380,7 +6380,7 @@ class Orcatrata extends CI_Controller {
             //echo count($data['servico']);
 			echo '<br>';
             echo "<pre>";
-            print_r($data['cliente']);
+            print_r($data['fornecedor']);
             echo "</pre>";
             exit ();
             */
@@ -6645,17 +6645,17 @@ class Orcatrata extends CI_Controller {
 			'CanceladoOrca',
         ), TRUE));
 		
-		$data['cliente'] = $this->input->post(array(
-			'idApp_Cliente',
-			'CepCliente',
-            'EnderecoCliente',
-			'NumeroCliente',
-			'ComplementoCliente',
-			'CidadeCliente',
-            'BairroCliente',
-            'MunicipioCliente',
-			'EstadoCliente',
-			'ReferenciaCliente',
+		$data['fornecedor'] = $this->input->post(array(
+			'idApp_Fornecedor',
+			'CepFornecedor',
+            'EnderecoFornecedor',
+			'NumeroFornecedor',
+			'ComplementoFornecedor',
+			'CidadeFornecedor',
+            'BairroFornecedor',
+            'MunicipioFornecedor',
+			'EstadoFornecedor',
+			'ReferenciaFornecedor',
         ), TRUE);
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -7244,34 +7244,34 @@ class Orcatrata extends CI_Controller {
             $data['update']['orcatrata']['bd'] = $this->Orcatrata_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_OrcaTrata']);
 			*/
             
-			#### APP_Cliente ####
+			#### APP_Fornecedor ####
 			if ($data['cadastrar']['AtualizaEndereco'] == 'S'){
-				$data['cliente']['CepCliente'] = $data['orcatrata']['Cep'];
-				$data['cliente']['EnderecoCliente'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
-				$data['cliente']['NumeroCliente'] = trim(mb_strtoupper($data['orcatrata']['Numero'], 'ISO-8859-1'));
-				$data['cliente']['ComplementoCliente'] = trim(mb_strtoupper($data['orcatrata']['Complemento'], 'ISO-8859-1'));
-				$data['cliente']['BairroCliente'] = trim(mb_strtoupper($data['orcatrata']['Bairro'], 'ISO-8859-1'));
-				$data['cliente']['CidadeCliente'] = trim(mb_strtoupper($data['orcatrata']['Cidade'], 'ISO-8859-1'));
-				$data['cliente']['EstadoCliente'] = trim(mb_strtoupper($data['orcatrata']['Estado'], 'ISO-8859-1'));
-				$data['cliente']['ReferenciaCliente'] = trim(mb_strtoupper($data['orcatrata']['Referencia'], 'ISO-8859-1'));
+				$data['fornecedor']['CepFornecedor'] = $data['orcatrata']['Cep'];
+				$data['fornecedor']['EnderecoFornecedor'] = trim(mb_strtoupper($data['orcatrata']['Logradouro'], 'ISO-8859-1'));
+				$data['fornecedor']['NumeroFornecedor'] = trim(mb_strtoupper($data['orcatrata']['Numero'], 'ISO-8859-1'));
+				$data['fornecedor']['ComplementoFornecedor'] = trim(mb_strtoupper($data['orcatrata']['Complemento'], 'ISO-8859-1'));
+				$data['fornecedor']['BairroFornecedor'] = trim(mb_strtoupper($data['orcatrata']['Bairro'], 'ISO-8859-1'));
+				$data['fornecedor']['CidadeFornecedor'] = trim(mb_strtoupper($data['orcatrata']['Cidade'], 'ISO-8859-1'));
+				$data['fornecedor']['EstadoFornecedor'] = trim(mb_strtoupper($data['orcatrata']['Estado'], 'ISO-8859-1'));
+				$data['fornecedor']['ReferenciaFornecedor'] = trim(mb_strtoupper($data['orcatrata']['Referencia'], 'ISO-8859-1'));
 							
-				$data['update']['cliente']['anterior'] = $this->Orcatrata_model->get_cliente($data['orcatrata']['idApp_Cliente']);
-				$data['update']['cliente']['campos'] = array_keys($data['cliente']);
+				$data['update']['fornecedor']['anterior'] = $this->Orcatrata_model->get_fornecedor($data['orcatrata']['idApp_Fornecedor']);
+				$data['update']['fornecedor']['campos'] = array_keys($data['fornecedor']);
 				/*
-				$data['update']['cliente']['auditoriaitem'] = $this->basico->set_log(
-					$data['update']['cliente']['anterior'],
-					$data['cliente'],
-					$data['update']['cliente']['campos'],
-					$data['cliente']['idApp_Cliente'], TRUE);
+				$data['update']['fornecedor']['auditoriaitem'] = $this->basico->set_log(
+					$data['update']['fornecedor']['anterior'],
+					$data['fornecedor'],
+					$data['update']['fornecedor']['campos'],
+					$data['fornecedor']['idApp_Fornecedor'], TRUE);
 				*/	
-				$data['update']['cliente']['bd'] = $this->Orcatrata_model->update_cliente($data['cliente'], $data['orcatrata']['idApp_Cliente']);
+				$data['update']['fornecedor']['bd'] = $this->Orcatrata_model->update_fornecedor($data['fornecedor'], $data['orcatrata']['idApp_Fornecedor']);
 				
 				/*
 				// ""ver modo correto de fazer o set_log e set_auditoria""
 				if ($data['auditoriaitem'] === FALSE) {
                     $data['msg'] = '';
                 } else {
-                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Cliente', 'UPDATE', $data['auditoriaitem']);
+                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Fornecedor', 'UPDATE', $data['auditoriaitem']);
                     $data['msg'] = '?m=1';
                 }
 				*/

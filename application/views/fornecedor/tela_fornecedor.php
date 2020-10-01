@@ -130,12 +130,35 @@
 											
 											}
 										   
+											if ($query['CepFornecedor']) {
+												
+											echo '                                                 
+											<tr>
+												<td><span class="glyphicon glyphicon-home"></span> Cep:</td>
+												<td>' . $query['CepFornecedor'] . '</td>
+											</tr>
+											';
+											
+											}
+										   
 											if ($query['EnderecoFornecedor'] || $query['BairroFornecedor'] || $query['MunicipioFornecedor']) {
 												
 											echo '                                                 
 											<tr>
 												<td><span class="glyphicon glyphicon-home"></span> Endereço:</td>
-												<td>' . $query['EnderecoFornecedor'] . ' ' . $query['BairroFornecedor'] . ' ' . $query['MunicipioFornecedor'] . '</td>
+												<td>' . $query['EnderecoFornecedor'] . ' , ' . $query['NumeroFornecedor'] . ' - ' . $query['ComplementoFornecedor'] . '<br>
+													' . $query['BairroFornecedor'] . ' - ' . $query['CidadeFornecedor'] . ' - ' . $query['EstadoFornecedor'] . '</td>
+											</tr>
+											';
+											
+											}
+										   
+											if ($query['ReferenciaFornecedor']) {
+												
+											echo '                                                 
+											<tr>
+												<td><span class="glyphicon glyphicon-home"></span> Referencia:</td>
+												<td>' . $query['ReferenciaFornecedor'] . '</td>
 											</tr>
 											';
 											

@@ -208,6 +208,39 @@ function buscaEnderecoCliente(id) {
 	
 }
 
+function buscaEnderecoFornecedor(id) {
+	//console.log(id);
+	//exit();
+    $.ajax({
+
+		url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=110&idFornecedor=' + id,
+		// dataType json
+        dataType: "json",
+		//method:'get',
+        // função para de sucesso
+        success: function (data) {
+            for (i = 0; i < data.length; i++) {
+
+                if (data[i].id == id) {
+					//console.log( data[i].enderecofornecedor);
+					$('#Cep').val(data[i].cepfornecedor);
+                    $('#Logradouro').val(data[i].enderecofornecedor);
+					$('#Numero').val(data[i].numerofornecedor);
+					$('#Complemento').val(data[i].complementofornecedor);
+					$('#Bairro').val(data[i].bairrofornecedor);
+					$('#Cidade').val(data[i].municipiofornecedor);
+					$('#Estado').val(data[i].estadofornecedor);
+					$('#Referencia').val(data[i].referenciafornecedor);
+                    break;
+                }
+
+            }//fim do laço
+		}
+		
+    });//termina o ajax
+	
+}
+
 function Procuraendereco() {
 	//alert('Procuraendereco - funcionando');
 	var Dados=$(this).serialize();

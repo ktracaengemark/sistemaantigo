@@ -213,15 +213,49 @@
 										</div>
 										<div class="form-group">
 											<div class="row">
-												<div class="col-md-6">
+												<div class="col-md-4">
 													<label for="EnderecoFornecedor">Endreço:</label>
-													<input type="text" class="form-control" id="EnderecoFornecedor" maxlength="100" <?php echo $readonly; ?>
-														   name="EnderecoFornecedor" value="<?php echo $query['EnderecoFornecedor']; ?>">
+													<textarea type="text" class="form-control" id="EnderecoFornecedor" maxlength="200" <?php echo $readonly; ?>
+														   name="EnderecoFornecedor" value="<?php echo $query['EnderecoFornecedor']; ?>"><?php echo $query['EnderecoFornecedor']; ?></textarea>
 												</div>
-												<div class="col-md-6">
+												<div class="col-md-4">
+													<label for="NumeroFornecedor">Numero:</label>
+													<input type="text" class="form-control" id="NumeroFornecedor" maxlength="100" <?php echo $readonly; ?>
+														   name="NumeroFornecedor" value="<?php echo $query['NumeroFornecedor']; ?>">
+												</div>
+												<div class="col-md-4">
+													<label for="ComplementoFornecedor">Complemento:</label>
+													<input type="text" class="form-control" id="ComplementoFornecedor" maxlength="100" <?php echo $readonly; ?>
+														   name="ComplementoFornecedor" value="<?php echo $query['ComplementoFornecedor']; ?>">
+												</div>
+											</div>	
+											<div class="row">	
+												<div class="col-md-4">
 													<label for="BairroFornecedor">Bairro:</label>
 													<input type="text" class="form-control" id="BairroFornecedor" maxlength="100" <?php echo $readonly; ?>
 														   name="BairroFornecedor" value="<?php echo $query['BairroFornecedor']; ?>">
+												</div>
+												<div class="col-md-4">
+													<label for="CidadeFornecedor">Cidade:</label>
+													<input type="text" class="form-control" id="CidadeFornecedor" maxlength="100" <?php echo $readonly; ?>
+														   name="CidadeFornecedor" value="<?php echo $query['CidadeFornecedor']; ?>">
+												</div>
+												<div class="col-md-4">
+													<label for="EstadoFornecedor">Estado:</label>
+													<input type="text" class="form-control" id="EstadoFornecedor" maxlength="100" <?php echo $readonly; ?>
+														   name="EstadoFornecedor" value="<?php echo $query['EstadoFornecedor']; ?>">
+												</div>
+											</div>	
+											<div class="row">
+												<div class="col-md-4">
+													<label for="CepFornecedor">Cep:</label>
+													<input type="text" class="form-control" id="CepFornecedor" maxlength="100" <?php echo $readonly; ?>
+														   name="CepFornecedor" value="<?php echo $query['CepFornecedor']; ?>">
+												</div>	
+												<div class="col-md-4">
+													<label for="ReferenciaFornecedor">Referencia:</label>
+													<textarea type="text" class="form-control" id="ReferenciaFornecedor" maxlength="100" <?php echo $readonly; ?>
+														   name="ReferenciaFornecedor" value="<?php echo $query['ReferenciaFornecedor']; ?>"><?php echo $query['ReferenciaFornecedor']; ?></textarea>
 												</div>
 											</div>
 										</div> 

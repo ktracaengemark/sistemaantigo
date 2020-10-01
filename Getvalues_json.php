@@ -68,6 +68,33 @@ if ($_GET['q']==100) {
 
 }
 
+if ($_GET['q']==110) {
+
+    $result = mysql_query('
+		SELECT *
+        FROM
+            App_Fornecedor
+        WHERE
+		idApp_Fornecedor = ' . $_GET['idFornecedor'] . '
+    ');
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idApp_Fornecedor'],
+			'cepfornecedor' => utf8_encode($row['CepFornecedor']),
+            'enderecofornecedor' => utf8_encode($row['EnderecoFornecedor']),
+			'numerofornecedor' => utf8_encode($row['NumeroFornecedor']),
+			'complementofornecedor' => utf8_encode($row['ComplementoFornecedor']),
+			'bairrofornecedor' => utf8_encode($row['BairroFornecedor']),
+			'municipiofornecedor' => utf8_encode($row['CidadeFornecedor']),
+			'estadofornecedor' => utf8_encode($row['EstadoFornecedor']),
+			'referenciafornecedor' => utf8_encode($row['ReferenciaFornecedor']),
+        );
+    }
+
+}
+
 elseif ($_GET['q'] == 16) {
 
     $result = mysql_query('

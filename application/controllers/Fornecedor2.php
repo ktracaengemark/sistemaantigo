@@ -61,8 +61,14 @@ class Fornecedor2 extends CI_Controller {
             'Telefone3',
             'Ativo',
             'Sexo',
+            'CepFornecedor',
             'EnderecoFornecedor',
+            'NumeroFornecedor',
+            'ComplementoFornecedor',
             'BairroFornecedor',
+            'CidadeFornecedor',
+            'EstadoFornecedor',
+            'ReferenciaFornecedor',
             'MunicipioFornecedor',
             'Obs',
 			'Email',
@@ -127,6 +133,13 @@ class Fornecedor2 extends CI_Controller {
 			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
 
             $data['query']['NomeFornecedor'] = trim(mb_strtoupper($data['query']['NomeFornecedor'], 'ISO-8859-1'));
+			$data['query']['EnderecoFornecedor'] = trim(mb_strtoupper($data['query']['EnderecoFornecedor'], 'ISO-8859-1'));
+			$data['query']['NumeroFornecedor'] = trim(mb_strtoupper($data['query']['NumeroFornecedor'], 'ISO-8859-1'));
+			$data['query']['ComplementoFornecedor'] = trim(mb_strtoupper($data['query']['ComplementoFornecedor'], 'ISO-8859-1'));
+			$data['query']['BairroFornecedor'] = trim(mb_strtoupper($data['query']['BairroFornecedor'], 'ISO-8859-1'));
+			$data['query']['CidadeFornecedor'] = trim(mb_strtoupper($data['query']['CidadeFornecedor'], 'ISO-8859-1'));
+			$data['query']['EstadoFornecedor'] = trim(mb_strtoupper($data['query']['EstadoFornecedor'], 'ISO-8859-1'));
+			$data['query']['ReferenciaFornecedor'] = trim(mb_strtoupper($data['query']['ReferenciaFornecedor'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
             $data['query']['Obs'] = nl2br($data['query']['Obs']);
             #$data['query']['TipoFornec'] = $data['query']['TipoFornec'];
@@ -180,8 +193,14 @@ class Fornecedor2 extends CI_Controller {
             'Telefone3',
             'Ativo',
             'Sexo',
+            'CepFornecedor',
             'EnderecoFornecedor',
+            'NumeroFornecedor',
+            'ComplementoFornecedor',
             'BairroFornecedor',
+            'CidadeFornecedor',
+            'EstadoFornecedor',
+            'ReferenciaFornecedor',
             'MunicipioFornecedor',
             'Obs',
             'idSis_Usuario',
@@ -250,6 +269,13 @@ class Fornecedor2 extends CI_Controller {
 			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
 
             $data['query']['NomeFornecedor'] = trim(mb_strtoupper($data['query']['NomeFornecedor'], 'ISO-8859-1'));
+			$data['query']['EnderecoFornecedor'] = trim(mb_strtoupper($data['query']['EnderecoFornecedor'], 'ISO-8859-1'));
+			$data['query']['NumeroFornecedor'] = trim(mb_strtoupper($data['query']['NumeroFornecedor'], 'ISO-8859-1'));
+			$data['query']['ComplementoFornecedor'] = trim(mb_strtoupper($data['query']['ComplementoFornecedor'], 'ISO-8859-1'));
+			$data['query']['BairroFornecedor'] = trim(mb_strtoupper($data['query']['BairroFornecedor'], 'ISO-8859-1'));
+			$data['query']['CidadeFornecedor'] = trim(mb_strtoupper($data['query']['CidadeFornecedor'], 'ISO-8859-1'));
+			$data['query']['EstadoFornecedor'] = trim(mb_strtoupper($data['query']['EstadoFornecedor'], 'ISO-8859-1'));
+			$data['query']['ReferenciaFornecedor'] = trim(mb_strtoupper($data['query']['ReferenciaFornecedor'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
             $data['query']['Obs'] = nl2br($data['query']['Obs']);
             #$data['query']['TipoFornec'] = $data['query']['TipoFornec'];

@@ -5,7 +5,7 @@
 	<div class="col-md-8 ">
 		<div class="row">	
 			<div class="col-md-12 ">
-				<div class="panel panel-primary">
+				<div class="panel panel-info">
 					<div class="panel-heading">
 						<div class="row">
 							<!--
@@ -17,7 +17,7 @@
 								<label>Gestor de Pedidos</label>
 								<div class="input-group">
 									<span class="input-group-btn">
-										<button class="btn btn-info btn-md" type="submit">
+										<button class="btn btn-primary btn-md" type="submit">
 											<span class="glyphicon glyphicon-search"></span> 
 										</button>
 									</span>
@@ -70,9 +70,9 @@
 							</div>
 							-->
 							<div class="col-md-4">										
-								<label>Cadastrar novo Pedido</label>
-								<a class="btn btn-md btn-info btn-block" href="<?php echo base_url() ?>orcatrata/cadastrar3" role="button"> 
-									<span class="glyphicon glyphicon-plus"></span> Novo Pedido
+								<label>Cadastrar Novo Pedido</label>
+								<a class="btn btn-md btn-primary btn-block" href="<?php echo base_url() ?>orcatrata/cadastrar3" role="button"> 
+									<span class="glyphicon glyphicon-plus"></span> Nova Venda / Receita
 								</a>
 							</div>
 						</div>	

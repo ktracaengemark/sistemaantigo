@@ -17,7 +17,7 @@
 								<label>Gestor de Despesas</label>
 								<div class="input-group">
 									<span class="input-group-btn">
-										<button class="btn btn-info btn-md" type="submit">
+										<button class="btn btn-danger btn-md" type="submit">
 											<span class="glyphicon glyphicon-search"></span> 
 										</button>
 									</span>
@@ -70,7 +70,7 @@
 							</div>
 							-->
 							<div class="col-md-4">										
-								<label>Cadastrar novo Pedido</label>
+								<label>Cadastrar Nova Despesa</label>
 								<a class="btn btn-md btn-danger btn-block" href="<?php echo base_url() ?>orcatrata/cadastrardesp" role="button"> 
 									<span class="glyphicon glyphicon-plus"></span> Nova Compra / Despesa
 								</a>

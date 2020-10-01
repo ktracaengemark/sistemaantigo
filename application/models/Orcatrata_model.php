@@ -176,6 +176,14 @@ class Orcatrata_model extends CI_Model {
         return $query[0];
     }
 	
+    public function get_fornecedor($data) {
+        $query = $this->db->query('SELECT * FROM App_Fornecedor WHERE idApp_Fornecedor = ' . $data);
+
+        $query = $query->result_array();
+
+        return $query[0];
+    }	
+	
     public function get_orcatrataalterar($data) {
         $query = $this->db->query('SELECT * FROM Sis_Empresa WHERE idSis_Empresa = ' . $data);
         $query = $query->result_array();
@@ -2632,6 +2640,25 @@ exit();*/
 
         unset($data['Id']);
         $query = $this->db->update('App_Cliente', $data, array('idApp_Cliente' => $id));
+        /*
+          echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit ();
+         */
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+    public function update_fornecedor($data, $id) {
+
+        unset($data['Id']);
+        $query = $this->db->update('App_Fornecedor', $data, array('idApp_Fornecedor' => $id));
         /*
           echo $this->db->last_query();
           echo '<br>';
