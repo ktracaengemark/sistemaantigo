@@ -67,7 +67,10 @@ class Relatorio extends CI_Controller {
 		$data['titulo2'] = 'Finanças & Estoque';
 		$data['titulo3'] = 'Relatório 3';
 		$data['titulo4'] = 'Comissão';
-
+		
+		$data['collapse'] = '';
+		$data['collapse1'] = 'class="collapse"';
+		
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
 

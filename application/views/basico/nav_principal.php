@@ -42,7 +42,7 @@
 				-->
 				<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group">
-						<a type="button" class="btn btn-sm btn-info" role="button" href="<?php echo base_url(); ?>agenda">
+						<a type="button" class="btn btn-sm btn-success" role="button" href="<?php echo base_url(); ?>agenda">
 							<span class="glyphicon glyphicon-calendar"></span> 
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							Tarefas & Agendas
@@ -50,7 +50,7 @@
 							Tarefas & Agenda
 							<?php } ?>
 						</a>
-						<button type="button" class="btn btn-sm btn-info dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<button type="button" class="btn btn-sm btn-success dropdown-toggle dropdown-toggle-split" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">							
