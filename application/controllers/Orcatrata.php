@@ -12257,6 +12257,10 @@ class Orcatrata extends CI_Controller {
         //$_SESSION['OrcaTrataCons']['idApp_Cliente'] = $id;
         $data['aprovado'] = $this->Orcatrata_model->list_orcamento($id, 'S', TRUE);
         $data['naoaprovado'] = $this->Orcatrata_model->list_orcamento($id, 'N', TRUE);
+        $data['finalizado'] = $this->Orcatrata_model->list_orcamentofinal($id, 'S', TRUE);
+        $data['naofinalizado'] = $this->Orcatrata_model->list_orcamentofinal($id, 'N', TRUE);
+        $data['cancelado'] = $this->Orcatrata_model->list_orcamentocancel($id, 'S', TRUE);
+        $data['naocancelado'] = $this->Orcatrata_model->list_orcamentocancel($id, 'N', TRUE);
 
         //$data['aprovado'] = array();
         //$data['naoaprovado'] = array();

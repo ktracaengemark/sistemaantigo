@@ -126,12 +126,16 @@
 								<ul class="nav nav-tabs" role="tablist">
 									<li role="presentation" class="active" ><a href="#proxima" aria-controls="proxima" role="tab" data-toggle="tab">Aprovados</a></li>
 									<li role="presentation" ><a href="#anterior" aria-controls="anterior" role="tab" data-toggle="tab">Não Aprovados</a></li>
+									<li role="presentation" ><a href="#finalizado" aria-controls="finalizado" role="tab" data-toggle="tab">Finalizado</a></li>
+									<li role="presentation" ><a href="#naofinalizado" aria-controls="naofinalizado" role="tab" data-toggle="tab">Não Finalizado</a></li>
+									<li role="presentation" ><a href="#cancelado" aria-controls="cancelado" role="tab" data-toggle="tab">Cancelado</a></li>
+									<li role="presentation" ><a href="#naocancelado" aria-controls="naocancelado" role="tab" data-toggle="tab">Não Cancelado</a></li>
 								</ul>
 
 								<!-- Tab panes -->
 								<div class="tab-content">
 
-									<!-- Próximas Consultas -->
+									<!-- Aprovados -->
 									<div role="tabpanel" class="tab-pane active " id="proxima">
 
 										<?php
@@ -160,7 +164,13 @@
 											<h5>
 												<span class="glyphicon glyphicon-calendar"></span> <b>Data do Orçamento:</b> <?php echo $row['DataOrca']; ?>
 											</h5>
-											<!--
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data da Entrega:</b> <?php echo $row['DataEntregaOrca']; ?>
+											</h5>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data do Venc.:</b> <?php echo $row['DataVencimentoOrca']; ?>
+											</h5>
+											
 											<p>
 												<?php if ($row['ProfissionalOrca']) { ?>
 												<span class="glyphicon glyphicon-user"></span> <b>Profissional:</b> <?php echo $row['ProfissionalOrca']; ?> -
@@ -169,21 +179,28 @@
 												<?php } ?>
 
 											</p>
-											-->
 											<p>
 												<?php if ($row['ConcluidoOrca']) { ?>
 												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
 												<?php } ?>
 											</p>
-											<!--
 											<p>
 												<?php if ($row['QuitadoOrca']) { ?>
 												<span class="glyphicon glyphicon-usd"></span> <b>Orç. Quitado?</b> <?php echo $row['QuitadoOrca']; ?>
 												<?php } ?>
 											</p>
-											-->
 											<p>
-												<span class="glyphicon glyphicon-pencil"></span> <b>Obs:</b> <?php echo nl2br($row['ObsOrca']); ?>
+												<?php if ($row['FinalizadoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Finalizado?</b> <?php echo $row['FinalizadoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['CanceladoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Cancelado?</b> <?php echo $row['CanceladoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Motivo:</b> <?php echo nl2br($row['ObsOrca']); ?>
 											</p>
 
 										</div>
@@ -197,7 +214,7 @@
 
 									</div>
 
-									<!-- Histórico de Consultas -->
+									<!-- Não Aprovados -->
 									<div role="tabpanel" class="tab-pane " id="anterior">
 
 										<?php
@@ -224,6 +241,88 @@
 											<h5>
 												<span class="glyphicon glyphicon-calendar"></span> <b>Data do Orçamento:</b> <?php echo $row['DataOrca']; ?>
 											</h5>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data da Entrega:</b> <?php echo $row['DataEntregaOrca']; ?>
+											</h5>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data do Venc.:</b> <?php echo $row['DataVencimentoOrca']; ?>
+											</h5>
+
+											<p>
+												<?php if ($row['ProfissionalOrca']) { ?>
+												<span class="glyphicon glyphicon-user"></span> <b>Profissional:</b> <?php echo $row['ProfissionalOrca']; ?> -
+												<?php } if ($row['AprovadoOrca']) { ?>
+												<span class="glyphicon glyphicon-thumbs-down"></span> <b>Orç. Aprovado?</b> <?php echo $row['AprovadoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['ConcluidoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['QuitadoOrca']) { ?>
+												<span class="glyphicon glyphicon-usd"></span> <b>Orç. Quitado?</b> <?php echo $row['QuitadoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['FinalizadoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Finalizado?</b> <?php echo $row['FinalizadoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['CanceladoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Cancelado?</b> <?php echo $row['CanceladoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Motivo:</b> <?php echo nl2br($row['ObsOrca']); ?>
+											</p>
+
+										</div>
+
+										<?php
+											}
+										} else {
+											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhum registro</b></div>';
+										}
+										?>
+
+									</div>
+
+									<!-- Finalizados -->
+									<div role="tabpanel" class="tab-pane " id="finalizado">
+
+										<?php
+										if ($finalizado) {
+
+											foreach ($finalizado->result_array() as $row) {
+										?>
+
+										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
+
+											<a class="btn btn-success" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Dados
+											</a>
+											
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											</a>
+
+											<br><br>
+
+											<h4>
+												<span class="glyphicon glyphicon-tags"></span> <b>Nº Orç.:</b> <?php echo $row['idApp_OrcaTrata']; ?>
+											</h4>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data do Orçamento:</b> <?php echo $row['DataOrca']; ?>
+											</h5>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data da Entrega:</b> <?php echo $row['DataEntregaOrca']; ?>
+											</h5>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data do Venc.:</b> <?php echo $row['DataVencimentoOrca']; ?>
+											</h5>
 
 											<p>
 												<?php if ($row['ProfissionalOrca']) { ?>
@@ -243,7 +342,17 @@
 												<?php } ?>
 											</p>
 											<p>
-												<span class="glyphicon glyphicon-pencil"></span> <b>Obs:</b> <?php echo nl2br($row['ObsOrca']); ?>
+												<?php if ($row['FinalizadoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Finalizado?</b> <?php echo $row['FinalizadoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['CanceladoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Cancelado?</b> <?php echo $row['CanceladoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Motivo:</b> <?php echo nl2br($row['ObsOrca']); ?>
 											</p>
 
 										</div>
@@ -257,6 +366,234 @@
 
 									</div>
 
+									<!-- Não Finalizados -->
+									<div role="tabpanel" class="tab-pane " id="naofinalizado">
+
+										<?php
+										if ($naofinalizado) {
+
+											foreach ($naofinalizado->result_array() as $row) {
+										?>
+
+										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
+
+											<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Dados
+											</a>
+											
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											</a>
+
+											<br><br>
+
+											<h4>
+												<span class="glyphicon glyphicon-tags"></span> <b>Nº Orç.:</b> <?php echo $row['idApp_OrcaTrata']; ?>
+											</h4>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data do Orçamento:</b> <?php echo $row['DataOrca']; ?>
+											</h5>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data da Entrega:</b> <?php echo $row['DataEntregaOrca']; ?>
+											</h5>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data do Venc.:</b> <?php echo $row['DataVencimentoOrca']; ?>
+											</h5>
+
+											<p>
+												<?php if ($row['ProfissionalOrca']) { ?>
+												<span class="glyphicon glyphicon-user"></span> <b>Profissional:</b> <?php echo $row['ProfissionalOrca']; ?> -
+												<?php } if ($row['AprovadoOrca']) { ?>
+												<span class="glyphicon glyphicon-thumbs-up"></span> <b>Orç. Aprovado?</b> <?php echo $row['AprovadoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['ConcluidoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['QuitadoOrca']) { ?>
+												<span class="glyphicon glyphicon-usd"></span> <b>Orç. Quitado?</b> <?php echo $row['QuitadoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['FinalizadoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Finalizado?</b> <?php echo $row['FinalizadoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['CanceladoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Cancelado?</b> <?php echo $row['CanceladoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Motivo:</b> <?php echo nl2br($row['ObsOrca']); ?>
+											</p>
+
+										</div>
+
+										<?php
+											}
+										} else {
+											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhum registro</b></div>';
+										}
+										?>
+
+									</div>
+
+									<!-- Cancelado -->
+									<div role="tabpanel" class="tab-pane " id="cancelado">
+
+										<?php
+										if ($cancelado) {
+
+											foreach ($cancelado->result_array() as $row) {
+										?>
+
+										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
+
+											<a class="btn btn-success" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Dados
+											</a>
+											
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											</a>
+
+											<br><br>
+
+											<h4>
+												<span class="glyphicon glyphicon-tags"></span> <b>Nº Orç.:</b> <?php echo $row['idApp_OrcaTrata']; ?>
+											</h4>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data do Orçamento:</b> <?php echo $row['DataOrca']; ?>
+											</h5>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data da Entrega:</b> <?php echo $row['DataEntregaOrca']; ?>
+											</h5>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data do Venc.:</b> <?php echo $row['DataVencimentoOrca']; ?>
+											</h5>
+
+											<p>
+												<?php if ($row['ProfissionalOrca']) { ?>
+												<span class="glyphicon glyphicon-user"></span> <b>Profissional:</b> <?php echo $row['ProfissionalOrca']; ?> -
+												<?php } if ($row['AprovadoOrca']) { ?>
+												<span class="glyphicon glyphicon-thumbs-up"></span> <b>Orç. Aprovado?</b> <?php echo $row['AprovadoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['ConcluidoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['QuitadoOrca']) { ?>
+												<span class="glyphicon glyphicon-usd"></span> <b>Orç. Quitado?</b> <?php echo $row['QuitadoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['FinalizadoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Finalizado?</b> <?php echo $row['FinalizadoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['CanceladoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Cancelado?</b> <?php echo $row['CanceladoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Motivo:</b> <?php echo nl2br($row['ObsOrca']); ?>
+											</p>
+
+										</div>
+
+										<?php
+											}
+										} else {
+											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhum registro</b></div>';
+										}
+										?>
+
+									</div>
+
+									<!-- Não Cancelado -->
+									<div role="tabpanel" class="tab-pane " id="naocancelado">
+
+										<?php
+										if ($naocancelado) {
+
+											foreach ($naocancelado->result_array() as $row) {
+										?>
+
+										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
+
+											<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Dados
+											</a>
+											
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											</a>
+
+											<br><br>
+
+											<h4>
+												<span class="glyphicon glyphicon-tags"></span> <b>Nº Orç.:</b> <?php echo $row['idApp_OrcaTrata']; ?>
+											</h4>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data do Orçamento:</b> <?php echo $row['DataOrca']; ?>
+											</h5>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data da Entrega:</b> <?php echo $row['DataEntregaOrca']; ?>
+											</h5>
+											<h5>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data do Venc.:</b> <?php echo $row['DataVencimentoOrca']; ?>
+											</h5>
+
+											<p>
+												<?php if ($row['ProfissionalOrca']) { ?>
+												<span class="glyphicon glyphicon-user"></span> <b>Profissional:</b> <?php echo $row['ProfissionalOrca']; ?> -
+												<?php } if ($row['AprovadoOrca']) { ?>
+												<span class="glyphicon glyphicon-thumbs-up"></span> <b>Orç. Aprovado?</b> <?php echo $row['AprovadoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['ConcluidoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['QuitadoOrca']) { ?>
+												<span class="glyphicon glyphicon-usd"></span> <b>Orç. Quitado?</b> <?php echo $row['QuitadoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['FinalizadoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Finalizado?</b> <?php echo $row['FinalizadoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<?php if ($row['CanceladoOrca']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Cancelado?</b> <?php echo $row['CanceladoOrca']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Motivo:</b> <?php echo nl2br($row['ObsOrca']); ?>
+											</p>
+
+										</div>
+
+										<?php
+											}
+										} else {
+											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhum registro</b></div>';
+										}
+										?>
+
+									</div>
+									
 								</div>
 
 							</div>

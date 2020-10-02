@@ -1382,6 +1382,8 @@ class Orcatrata_model extends CI_Model {
             . 'OT.idApp_OrcaTrata, '
 			. 'OT.idSis_Empresa, '
             . 'OT.DataOrca, '
+            . 'OT.DataEntregaOrca, '
+            . 'OT.DataVencimentoOrca, '
 			. 'OT.DataPrazo, '
 			. 'OT.DataConclusao, '
 			. 'OT.DataQuitado, '
@@ -1389,6 +1391,8 @@ class Orcatrata_model extends CI_Model {
             . 'OT.AprovadoOrca, '
 			. 'OT.ConcluidoOrca, '
 			. 'OT.QuitadoOrca, '
+			. 'OT.FinalizadoOrca, '
+			. 'OT.CanceladoOrca, '
             . 'OT.ObsOrca '
             . 'FROM '
             . 'App_OrcaTrata AS OT '
@@ -1396,12 +1400,13 @@ class Orcatrata_model extends CI_Model {
 			. 'OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
 			. 'OT.idApp_Cliente = ' . $id . ' AND '
 			. 'OT.idTab_TipoRD = "2" AND '
-            . 'OT.AprovadoOrca = "' . $aprovado . '" '
+            . 'OT.AprovadoOrca = "' . $aprovado . '" AND '
+            . 'OT.FinalizadoOrca = "N" AND '
+			. 'OT.CanceladoOrca = "N" '
             . 'ORDER BY '
-			#. 'OT.DataOrca DESC, '
-			. 'OT.ConcluidoOrca ASC, '
-			. 'OT.QuitadoOrca ASC, '
-			. 'OT.DataOrca DESC ');
+			. 'OT.DataOrca DESC, '
+			. 'OT.DataEntregaOrca DESC, '
+			. 'OT.DataVencimentoOrca DESC ');
         /*
           echo $this->db->last_query();
           echo "<pre>";
@@ -1418,12 +1423,16 @@ class Orcatrata_model extends CI_Model {
 
                 foreach ($query->result() as $row) {
 					$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
+					$row->DataEntregaOrca = $this->basico->mascara_data($row->DataEntregaOrca, 'barras');
+					$row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
 					$row->DataPrazo = $this->basico->mascara_data($row->DataPrazo, 'barras');
 					$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
 					$row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
                     $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
 					$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
 					$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
+					$row->FinalizadoOrca = $this->basico->mascara_palavra_completa($row->FinalizadoOrca, 'NS');
+					$row->CanceladoOrca = $this->basico->mascara_palavra_completa($row->CanceladoOrca, 'NS');
                     #$row->ProfissionalOrca = $this->get_profissional($row->ProfissionalOrca);
                 }
                 return $query;
@@ -1431,6 +1440,131 @@ class Orcatrata_model extends CI_Model {
         }
     }
 
+    public function list_orcamentofinal($id, $finalizado, $completo) {
+
+        $query = $this->db->query('SELECT '
+            . 'OT.idApp_OrcaTrata, '
+			. 'OT.idSis_Empresa, '
+            . 'OT.DataOrca, '
+            . 'OT.DataEntregaOrca, '
+            . 'OT.DataVencimentoOrca, '
+			. 'OT.DataPrazo, '
+			. 'OT.DataConclusao, '
+			. 'OT.DataQuitado, '
+            . 'OT.ProfissionalOrca, '
+            . 'OT.AprovadoOrca, '
+			. 'OT.ConcluidoOrca, '
+			. 'OT.QuitadoOrca, '
+			. 'OT.FinalizadoOrca, '
+			. 'OT.CanceladoOrca, '
+            . 'OT.ObsOrca '
+            . 'FROM '
+            . 'App_OrcaTrata AS OT '
+            . 'WHERE '
+			. 'OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
+			. 'OT.idApp_Cliente = ' . $id . ' AND '
+			. 'OT.idTab_TipoRD = "2" AND '
+            . 'OT.FinalizadoOrca = "' . $finalizado . '" AND '
+			. 'OT.CanceladoOrca = "N" '
+            . 'ORDER BY '
+			. 'OT.DataOrca DESC, '
+			. 'OT.DataEntregaOrca DESC, '
+			. 'OT.DataVencimentoOrca DESC ');
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+          */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($completo === FALSE) {
+                return TRUE;
+            } else {
+
+                foreach ($query->result() as $row) {
+					$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
+					$row->DataEntregaOrca = $this->basico->mascara_data($row->DataEntregaOrca, 'barras');
+					$row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
+					$row->DataPrazo = $this->basico->mascara_data($row->DataPrazo, 'barras');
+					$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
+					$row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
+                    $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
+					$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
+					$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
+					$row->FinalizadoOrca = $this->basico->mascara_palavra_completa($row->FinalizadoOrca, 'NS');
+					$row->CanceladoOrca = $this->basico->mascara_palavra_completa($row->CanceladoOrca, 'NS');
+                    #$row->ProfissionalOrca = $this->get_profissional($row->ProfissionalOrca);
+                }
+                return $query;
+            }
+        }
+    }
+
+    public function list_orcamentocancel($id, $cancelado, $completo) {
+
+        $query = $this->db->query('SELECT '
+            . 'OT.idApp_OrcaTrata, '
+			. 'OT.idSis_Empresa, '
+            . 'OT.DataOrca, '
+            . 'OT.DataEntregaOrca, '
+            . 'OT.DataVencimentoOrca, '
+			. 'OT.DataPrazo, '
+			. 'OT.DataConclusao, '
+			. 'OT.DataQuitado, '
+            . 'OT.ProfissionalOrca, '
+            . 'OT.AprovadoOrca, '
+			. 'OT.ConcluidoOrca, '
+			. 'OT.QuitadoOrca, '
+			. 'OT.FinalizadoOrca, '
+			. 'OT.CanceladoOrca, '
+            . 'OT.ObsOrca '
+            . 'FROM '
+            . 'App_OrcaTrata AS OT '
+            . 'WHERE '
+			. 'OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND '
+			. 'OT.idApp_Cliente = ' . $id . ' AND '
+			. 'OT.idTab_TipoRD = "2" AND '
+            . 'OT.CanceladoOrca = "' . $cancelado . '" '
+            . 'ORDER BY '
+			. 'OT.DataOrca DESC, '
+			. 'OT.DataEntregaOrca DESC, '
+			. 'OT.DataVencimentoOrca DESC ');
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+          */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($completo === FALSE) {
+                return TRUE;
+            } else {
+
+                foreach ($query->result() as $row) {
+					$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
+					$row->DataEntregaOrca = $this->basico->mascara_data($row->DataEntregaOrca, 'barras');
+					$row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
+					$row->DataPrazo = $this->basico->mascara_data($row->DataPrazo, 'barras');
+					$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
+					$row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
+                    $row->AprovadoOrca = $this->basico->mascara_palavra_completa($row->AprovadoOrca, 'NS');
+					$row->ConcluidoOrca = $this->basico->mascara_palavra_completa($row->ConcluidoOrca, 'NS');
+					$row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
+					$row->FinalizadoOrca = $this->basico->mascara_palavra_completa($row->FinalizadoOrca, 'NS');
+					$row->CanceladoOrca = $this->basico->mascara_palavra_completa($row->CanceladoOrca, 'NS');
+                    #$row->ProfissionalOrca = $this->get_profissional($row->ProfissionalOrca);
+                }
+                return $query;
+            }
+        }
+    }
+	
     public function list_orcatrataBKP($x) {
 
         $query = $this->db->query('SELECT '
