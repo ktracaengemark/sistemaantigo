@@ -635,7 +635,7 @@ class Basico {
         if ($opcao == '123') {
 
             if ($data == '1')
-                return 'Fazer';
+                return 'A Fazer';
             else if ($data == '2')
                 return 'Fazendo';
 			else if ($data == '3')

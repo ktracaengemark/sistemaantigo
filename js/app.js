@@ -8002,7 +8002,7 @@ $('#calendar').fullCalendar({
             url: 'Consulta_json.php', // use the `url` property
         }],
     //allDayDefault: true,
-    defaultView: 'month',
+    defaultView: 'agendaWeek',
     //contentHeight: 700,
     height: 'auto',
     //handleWindowResize: false,

@@ -121,12 +121,12 @@ class Tarefa extends CI_Controller {
 			'3' => 'Baixa',
         );
 		$data['select']['Statustarefa'] = array (
-            '1' => 'Fazer',
+            '1' => 'A Fazer',
             '2' => 'Fazendo',
 			'3' => 'Feito',
         );
 		$data['select']['Statussubtarefa'] = array (
-            '1' => 'Fazer',
+            '1' => 'A Fazer',
             '2' => 'Fazendo',
 			'3' => 'Feito',
         );		
@@ -376,12 +376,12 @@ class Tarefa extends CI_Controller {
 			'3' => 'Baixa',
         );
 		$data['select']['Statustarefa'] = array (
-            '1' => 'Fazer',
+            '1' => 'A Fazer',
             '2' => 'Fazendo',
 			'3' => 'Feito',
         );
 		$data['select']['Statussubtarefa'] = array (
-            '1' => 'Fazer',
+            '1' => 'A Fazer',
             '2' => 'Fazendo',
 			'3' => 'Feito',
         );		
@@ -659,12 +659,12 @@ class Tarefa extends CI_Controller {
 			'3' => 'Baixa',
         );
 		$data['select']['Statustarefa'] = array (
-            '1' => 'Fazer',
+            '1' => 'A Fazer',
             '2' => 'Fazendo',
 			'3' => 'Feito',
         );
 		$data['select']['Statussubtarefa'] = array (
-            '1' => 'Fazer',
+            '1' => 'A Fazer',
             '2' => 'Fazendo',
 			'3' => 'Feito',
         );		

@@ -13,22 +13,22 @@
 				<table class="table table-bordered table-condensed table-striped">								
 					<thead>
 						<tr>
+							<th class="active">Excl</th>
 							<!--<th class="active">Filt.</th>
 							<th class="active">Edit</th>
 							<th class="active">Empresa</th>-->
 							<th class="active">Categoria</th>
 							<th class="active">Prior.</th>
-							<th class="active">Sts.Trf</th>
 							<th class="active">Tarefa</th>
+							<th class="active">Sts.Trf</th>
 							<th class="active">SubPri.</th>
-							<th class="active">SubSts</th>
 							<th class="active">SubTarefa</th>
+							<th class="active">SubSts</th>
 							<!--<th class="active">Cnl.SbTF</th>-->
 							<th class="active">Iniciar</th>
 							<th class="active">Concluir</th>
 							<!--<th class="active">Comp.</th>
 							<th class="active">Usuario</th>-->
-							<th class="active">Excl</th>
 						</tr>
 					</thead>
 
@@ -57,24 +57,24 @@
 									</td>';
 								*/	
 								#echo '<td>' . $row['NomeEmpresa'] . '</td>';
-								echo '<td>' . $row['Categoria'] . '</td>';
-								echo '<td>' . $row['Prioridade'] . '</td>';
-								echo '<td>' . $row['Statustarefa'] . '</td>';
-								echo '<td>' . $row['Procedimento'] . '</td>';
-								#echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
-								echo '<td>' . $row['SubPrioridade'] . '</td>';
-								echo '<td>' . $row['Statussubtarefa'] . '</td>';
-								echo '<td>' . $row['SubProcedimento'] . '</td>';
-								#echo '<td>' . $row['ConcluidoSubProcedimento'] . '</td>';
-								echo '<td>' . $row['DataProcedimento'] . '</td>';
-								echo '<td>' . $row['DataProcedimentoLimite'] . '</td>';
-								#echo '<td>' . $row['Comp'] . '</td>';
-								#echo '<td>' . $row['NomeUsuario'] . '</td>';
 								echo '<td class="notclickable">
 										<a class="btn btn-sm btn-danger notclickable" href="' . base_url() . 'tarefa/excluir/' . $row['idApp_Procedimento'] . '">
 											<span class="glyphicon glyphicon-trash notclickable"></span>
 										</a>
 									</td>';
+								echo '<td>' . $row['Categoria'] . '</td>';
+								echo '<td>' . $row['Prioridade'] . '</td>';
+								echo '<td>' . $row['Procedimento'] . '</td>';
+								echo '<td>' . $row['Statustarefa'] . '</td>';
+								#echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
+								echo '<td>' . $row['SubPrioridade'] . '</td>';
+								echo '<td>' . $row['SubProcedimento'] . '</td>';
+								echo '<td>' . $row['Statussubtarefa'] . '</td>';
+								#echo '<td>' . $row['ConcluidoSubProcedimento'] . '</td>';
+								echo '<td>' . $row['DataProcedimento'] . '</td>';
+								echo '<td>' . $row['DataProcedimentoLimite'] . '</td>';
+								#echo '<td>' . $row['Comp'] . '</td>';
+								#echo '<td>' . $row['NomeUsuario'] . '</td>';
 									
 							echo '</tr>';
 						}

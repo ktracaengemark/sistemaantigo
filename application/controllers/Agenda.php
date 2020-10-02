@@ -140,7 +140,7 @@ class Agenda extends CI_Controller {
 		
         $data['select']['Statustarefa'] = array (
             '0' => '::Todos::',
-			'1' => 'Fazer',
+			'1' => 'A Fazer',
 			'2' => 'Fazendo',
 			'3' => 'Feito',
         );		
@@ -154,7 +154,7 @@ class Agenda extends CI_Controller {
 
         $data['select']['Statussubtarefa'] = array (
             '0' => '::Todos::',
-			'1' => 'Fazer',
+			'1' => 'A Fazer',
 			'2' => 'Fazendo',
 			'3' => 'Feito',
         );		
