@@ -11,7 +11,7 @@
 					<a class="text-center" style="color: #3CB371" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
 						<h3 class="text-center"><b>Tarefas & Agendas<?php #echo $titulo2; ?></b></h3>
 					</a>
-					<div <?php echo $collapse1; ?> id="Tarefas">	
+					<div <?php echo $collapse; ?> id="Tarefas">	
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-12">
@@ -54,7 +54,7 @@
 					<a class="text-center" style="color: #00008B" data-toggle="collapse" data-target="#Receitas" aria-expanded="false" aria-controls="Receitas">
 						<h3 class="text-center"><b>Receitas & Vendas<?php #echo $titulo2; ?></b></h3>
 					</a>
-					<div <?php echo $collapse1; ?> id="Receitas">
+					<div <?php echo $collapse; ?> id="Receitas">
 						<div class="panel-body">
 							<div class="row">								
 								<div class="col-md-12">											
@@ -171,7 +171,7 @@
 					<a class="text-center" style="color: #8B0000" data-toggle="collapse" data-target="#Despesas" aria-expanded="false" aria-controls="Despesas">
 						<h3 class="text-center"><b>Despesas & Compras<?php #echo $titulo2; ?></b></h3>
 					</a>
-					<div <?php echo $collapse1; ?> id="Despesas">
+					<div <?php echo $collapse; ?> id="Despesas">
 						<div class="panel-body">
 							<div class="row">								
 								<div class="col-md-12">											
@@ -260,7 +260,7 @@
 					<a class="text-center" style="color: #4F4F4F" data-toggle="collapse" data-target="#Administracao" aria-expanded="false" aria-controls="Administracao">
 						<h3 class="text-center"><b>Administração<?php #echo $titulo2; ?></b></h3>
 					</a>
-					<div <?php echo $collapse1; ?> id="Administracao">
+					<div <?php echo $collapse; ?> id="Administracao">
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-12">
@@ -313,14 +313,14 @@
 									<div class="form-group col-md-12 text-left">
 										<div class="row">													
 											<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/precopromocao" role="button"> 
-												<span class="glyphicon glyphicon-usd"></span> Preço dos Produtos
+												<span class="glyphicon glyphicon-usd"></span> Preço & Comissão dos Produtos
 											</a>
 										</div>	
 									</div>
 									<div class="form-group col-md-12 text-left">
 										<div class="row">													
 											<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/promocao" role="button"> 
-												<span class="glyphicon glyphicon-usd"></span> Preço das Promoções
+												<span class="glyphicon glyphicon-usd"></span> Preço & Comissão das Promoções
 											</a>
 										</div>	
 									</div>
