@@ -375,9 +375,6 @@ class Loginempresa extends CI_Controller {
 
 						
 						$data['documentos'] = array(
-							'Token_Sandbox' => 'A058483B1624431FB344C5FB79A44A4E',
-							'Token_Producao' => '0926B71D5A7C4CB2AA670920FAAED535',
-							'Email_Pagseguro' => 'marciorodeng@gmail.com',
 							'idSis_Usuario' => $data['idSis_Usuario'],					
 							'idSis_Empresa' => $data['idSis_Empresa']
 						);
@@ -637,8 +634,10 @@ class Loginempresa extends CI_Controller {
 							. '
 					  <div class="alert alert-success" role="alert">
 					  <h4>
-					  <p><b>Empresa cadastrado com sucesso!</b></p>
-					  <p>Clique no botão abaixo e retorne para a tela de Login do Administrador, para entrar no sistema.</p>
+					  <p><b>Empresa cadastrado com sucesso! "' . $data['query']['NomeEmpresa'] . '" Nº ' . $data['idSis_Empresa'] . '</b></p>
+					  <p>Clique no botão abaixo e retorne para a tela de Login do Administrador.<br>
+					  Para entrar no sistema, insira o número da empresa, informado acima,<br>
+					  o celular cadastrado como login e a senha cadastrada.</p>
 					  </h4>
 					  <br>
 					 
@@ -881,9 +880,6 @@ class Loginempresa extends CI_Controller {
 
 						
 						$data['documentos'] = array(
-							'Token_Sandbox' => 'A058483B1624431FB344C5FB79A44A4E',
-							'Token_Producao' => '0926B71D5A7C4CB2AA670920FAAED535',
-							'Email_Pagseguro' => 'marciorodeng@gmail.com',
 							'idSis_Usuario' => $data['idSis_Usuario'],					
 							'idSis_Empresa' => $data['idSis_Empresa']
 						);
@@ -1146,8 +1142,10 @@ class Loginempresa extends CI_Controller {
                         . '
                   <div class="alert alert-success" role="alert">
                   <h4>
-                  <p><b>Empresa cadastrado com sucesso!</b></p>
-                  <p>Clique no botão abaixo e retorne para a tela de Login do Administrador, para entrar no sistema.</p>
+                  <p><b>Empresa cadastrado com sucesso! "' . $data['query']['NomeEmpresa'] . '" Nº ' . $data['idSis_Empresa'] . '</b></p>
+                  <p>Clique no botão abaixo e retorne para a tela de Login do Administrador.<br>
+				  Para entrar no sistema, insira o número da empresa, informado acima,<br>
+				  o celular cadastrado como login e a senha cadastrada.</p>
                   </h4>
                   <br>
                   </div> '
