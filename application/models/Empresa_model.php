@@ -100,7 +100,8 @@ class Empresa_model extends CI_Model {
         $query = $this->db->update('App_Documentos', $data, array('idSis_Empresa' => $id));
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
-    }	
+    }
+	
     public function update_empresa_original($data, $id) {
 
         unset($data['Id']);
