@@ -2672,6 +2672,7 @@ class Empresa extends CI_Controller {
 			'Token_Sandbox',
 			'Token_Producao',
 			'Email_Pagseguro',
+			'Email_Loja',
 			'Ativo_Pagseguro',
         ), TRUE);
 				
@@ -2682,12 +2683,10 @@ class Empresa extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-		$this->form_validation->set_rules('Email_Pagseguro', 'E-mail', 'trim|valid_email');
-        #$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
-        #$this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
-		
-		//$data['select']['NaLoja'] = $this->Basico_model->select_status_sn();
-		#$data['select']['Inativo'] = $this->Basico_model->select_inativo();
+		$this->form_validation->set_rules('Email_Pagseguro', 'E-mail do PagSeguro', 'required|trim|valid_email');
+		$this->form_validation->set_rules('Email_Loja', 'E-mail da Loja', 'required|trim|valid_email');
+        $this->form_validation->set_rules('Token_Sandbox', 'Token_Sandbox', 'required|trim');
+        $this->form_validation->set_rules('Token_Producao', 'Token_Producao', 'required|trim');
 		
 		$data['select']['Ativo_Pagseguro'] = $this->Basico_model->select_status_sn();
 

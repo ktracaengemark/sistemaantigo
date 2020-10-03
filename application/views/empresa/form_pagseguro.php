@@ -65,12 +65,7 @@
 								<div class="panel-heading">
 									<h3 class="text-left">Dados do Pag Seguro</h3>
 									<div class="form-group">
-										<div class="row">										
-											<div class="col-md-6">
-												<label for="Email_Pagseguro">E-mail:</label>
-												<input type="text" class="form-control" id="Email_Pagseguro" maxlength="100" <?php echo $readonly; ?>
-													   name="Email_Pagseguro" value="<?php echo $pagseguro['Email_Pagseguro']; ?>">
-											</div>
+										<div class="row">
 											<div class="col-md-6">
 												<label for="Ativo_Pagseguro">Ativo_Pagseguro?</label><br>
 												<div class="form-group">
@@ -98,6 +93,21 @@
 														?>
 													</div>
 												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											
+											<div class="col-md-6">
+												<label for="Email_Loja">E-mail da Loja:</label>
+												<input type="text" class="form-control" id="Email_Loja" maxlength="100" <?php echo $readonly; ?>
+													   name="Email_Loja" value="<?php echo $pagseguro['Email_Loja']; ?>">
+											</div>
+											<div class="col-md-6">
+												<label for="Email_Pagseguro">E-mail do PagSeguro:</label>
+												<input type="text" class="form-control" id="Email_Pagseguro" maxlength="100" <?php echo $readonly; ?>
+													   name="Email_Pagseguro" value="<?php echo $pagseguro['Email_Pagseguro']; ?>">
 											</div>
 										</div>
 									</div>	

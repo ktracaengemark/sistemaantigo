@@ -97,6 +97,25 @@
 														';
 														}
 														
+														if ($pagseguro['Email_Loja']) {
+
+														echo '
+														<tr>
+															<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-envelope"></span> Email_Loja:</td>
+															<td>' . $pagseguro['Email_Loja'] . '</td>
+														</tr>
+														';
+
+														} else {
+														
+														echo '
+														<tr>
+															<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-envelope"></span> Email da Loja:</td>
+															<td>Nao existe E-Mail Cadastrado</td>
+														</tr>
+														';
+														}
+														
 														if ($pagseguro['Email_Pagseguro']) {
 
 														echo '
@@ -108,7 +127,12 @@
 
 														} else {
 														
-															echo ' Nao existe E-Mail Cadastrado <br>';
+														echo '
+														<tr>
+															<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-envelope"></span> Email do PagSeguro:</td>
+															<td>Nao existe E-Mail Cadastrado</td>
+														</tr>
+														';
 														}
 														
 														if ($pagseguro['Token_Sandbox']) {
@@ -122,7 +146,12 @@
 
 														} else {
 														
-															echo ' Nao existe Token_Sandbox Cadastrado <br>';
+														echo '
+														<tr>
+															<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-pencil"></span> Token do Sandbox:</td>
+															<td>Nao existe Token do Sandbox Cadastrado</td>
+														</tr>
+														';
 														}
 
 														if ($pagseguro['Token_Producao']) {
@@ -136,7 +165,12 @@
 
 														} else {
 														
-															echo ' Nao existe Token_Producao Cadastrado ';
+														echo '
+														<tr>
+															<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-pencil"></span> Token do PagSeguro:</td>
+															<td>Nao existe Token do PagSeguro Cadastrado</td>
+														</tr>
+														';
 														}
 
 														?>
