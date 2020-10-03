@@ -12,6 +12,7 @@
 					</button>
 				</span>
 				<input type="text" placeholder="Pesquisar Pedido" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
+				<input type="text" placeholder="Pesquisar Cliente" class="form-control Numero btn-sm" name="Cliente" value="<?php echo set_value('Cliente', $query['Cliente']); ?>">
 				<span class="input-group-btn">
 					<button class="btn btn-warning btn-md" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 						<span class="glyphicon glyphicon-filter"></span>
@@ -114,6 +115,22 @@
 							</div>
 						</div>	
 						<div class="row">
+							<div class="col-md-3"></div>
+							<div class="col-md-3 text-left">
+								<label for="StatusComissaoOrca">Status Comissão:</label>
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+										id="StatusComissaoOrca" name="StatusComissaoOrca">
+									<?php
+									foreach ($select['StatusComissaoOrca'] as $key => $row) {
+										if ($query['StatusComissaoOrca'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
 							<div class="col-md-3">
 								<label for="FinalizadoOrca">Finalizado</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -136,21 +153,6 @@
 									<?php
 									foreach ($select['CanceladoOrca'] as $key => $row) {
 										if ($query['CanceladoOrca'] == $key) {
-											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-										} else {
-											echo '<option value="' . $key . '">' . $row . '</option>';
-										}
-									}
-									?>
-								</select>
-							</div>
-							<div class="col-md-3 text-left">
-								<label for="StatusComissaoOrca">Status Comissão:</label>
-								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-										id="StatusComissaoOrca" name="StatusComissaoOrca">
-									<?php
-									foreach ($select['StatusComissaoOrca'] as $key => $row) {
-										if ($query['StatusComissaoOrca'] == $key) {
 											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 										} else {
 											echo '<option value="' . $key . '">' . $row . '</option>';
@@ -309,7 +311,13 @@
 									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
 											name="DataFim3" value="<?php echo set_value('DataFim3', $query['DataFim3']); ?>">
 								</div>
-							</div>		
+							</div>
+						</div>	
+					</div>
+				</div>
+				<div class="panel panel-danger">
+					<div class="panel-heading text-left">
+						<div class="row">		
 							<div class="col-md-6 text-left">
 								<label for="Ordenamento">Colaborador:</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 

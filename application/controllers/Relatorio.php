@@ -1288,6 +1288,7 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'Orcamento',
+            'Cliente',
 			'NomeFornecedor',
 			'Dia',
 			'Ano',
@@ -1367,6 +1368,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoFrete'] = $data['query']['TipoFrete'];
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiroR'] = $data['query']['TipoFinanceiroR'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
+		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         $this->form_validation->set_rules('DataInicio', 'Data Início do Pedido', 'trim|valid_date');
@@ -1480,6 +1482,7 @@ class Relatorio extends CI_Controller {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
+            $data['bd']['Cliente'] = $data['query']['Cliente'];
             $data['bd']['TipoFinanceiroR'] = $data['query']['TipoFinanceiroR'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
@@ -1538,6 +1541,7 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'Orcamento',
+			'Cliente',
 			'idApp_OrcaTrata',
 			'NomeAssociado',
 			'idSis_Usuario',
@@ -1631,6 +1635,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Prodaux2'] = $data['query']['Prodaux2'];
 		$_SESSION['FiltroAlteraParcela']['Prodaux3'] = $data['query']['Prodaux3'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
+		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
 		$_SESSION['Imprimir']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -1770,6 +1775,7 @@ class Relatorio extends CI_Controller {
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             //$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
+            $data['bd']['Cliente'] = $data['query']['Cliente'];
             $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
 			$data['bd']['NomeAssociado'] = $data['query']['NomeAssociado'];
             $data['bd']['TipoFinanceiroR'] = $data['query']['TipoFinanceiroR'];
@@ -4782,6 +4788,7 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'Orcamento',
+            'Cliente',
             'DataInicio',
             'DataFim',
 			'DataInicio',
@@ -4905,6 +4912,7 @@ class Relatorio extends CI_Controller {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
+            $data['bd']['Cliente'] = $data['query']['Cliente'];
 			$data['bd']['Entregador'] = $data['query']['Entregador'];
 			$data['bd']['FormaPag'] = $data['query']['FormaPag'];
 			$data['bd']['TipoFrete'] = $data['query']['TipoFrete'];
@@ -4957,6 +4965,7 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'Orcamento',
+            'Cliente',
             'DataInicio',
             'DataFim',
 			'DataInicio',
@@ -5081,6 +5090,7 @@ class Relatorio extends CI_Controller {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
+            $data['bd']['Cliente'] = $data['query']['Cliente'];
 			$data['bd']['Entregador'] = $data['query']['Entregador'];
 			$data['bd']['FormaPag'] = $data['query']['FormaPag'];
 			$data['bd']['TipoFrete'] = $data['query']['TipoFrete'];
@@ -5133,6 +5143,7 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'Orcamento',
+            'Fornecedor',
             'DataInicio',
             'DataFim',
 			'DataInicio',
@@ -5256,6 +5267,7 @@ class Relatorio extends CI_Controller {
 
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
+            $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
 			$data['bd']['Entregador'] = $data['query']['Entregador'];
 			$data['bd']['FormaPag'] = $data['query']['FormaPag'];
 			$data['bd']['TipoFrete'] = $data['query']['TipoFrete'];

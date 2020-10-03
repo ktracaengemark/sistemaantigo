@@ -1098,7 +1098,8 @@ class Relatorio_model extends CI_Model {
                 '(PR.DataVencimento >= "' . $data['DataInicio3'] . '")';
         }
 		
-		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;		
+		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
+		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
@@ -1187,6 +1188,7 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" 
                 ' . $data['Orcamento'] . '
+                ' . $data['Cliente'] . '
 			ORDER BY
 				C.NomeCliente ASC,
 				PR.DataVencimento ASC
@@ -1225,7 +1227,8 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" AND
 				PR.Quitado = "S"
-				' . $data['Orcamento'] . '				
+				' . $data['Orcamento'] . '
+                ' . $data['Cliente'] . '				
  				
         ');			
 		$parcelasrecebidas = $parcelasrecebidas->result();		
@@ -1346,6 +1349,7 @@ class Relatorio_model extends CI_Model {
         }
 		
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
+		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
         //$data['Campo'] = (!$data['Campo']) ? 'TP.Produtos' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(OT.DataVencimentoOrca) = ' . $data['Dia'] : FALSE;
@@ -1383,6 +1387,7 @@ class Relatorio_model extends CI_Model {
 				OT.idSis_Empresa,
 				OT.idSis_Usuario,
 				OT.idApp_OrcaTrata,
+				OT.idApp_Cliente,
 				OT.CombinadoFrete,
 				OT.AprovadoOrca,
 				OT.FinalizadoOrca,
@@ -1446,7 +1451,8 @@ class Relatorio_model extends CI_Model {
 				' . $consulta . ' AND
 				' . $consulta2 . ' AND
 				' . $consulta3 . ' 
-				' . $data['Orcamento'] . '
+				' . $data['Orcamento'] . ' 
+				' . $data['Cliente'] . '
 
             ORDER BY
 				OT.DataVencimentoOrca,
@@ -6739,6 +6745,7 @@ exit();*/
                 '(OT.DataQuitado >= "' . $data['DataInicio4'] . '")';
         }
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
+		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
 		$data['Entregador'] = ($data['Entregador']) ? ' AND OT.Entregador = ' . $data['Entregador'] : FALSE;
 		$data['FormaPag'] = ($data['FormaPag']) ? ' AND TFP.idTab_FormaPag = ' . $data['FormaPag'] : FALSE;
 		$data['TipoFrete'] = ($data['TipoFrete']) ? ' AND TTF.idTab_TipoFrete = ' . $data['TipoFrete'] : FALSE;
@@ -6811,6 +6818,7 @@ exit();*/
 				' . $filtro13 . '
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['Orcamento'] . '
+                ' . $data['Cliente'] . '
 				' . $data['Entregador'] . '
 				' . $data['TipoFrete'] . '
 				' . $data['FormaPag'] . ' AND
@@ -6925,6 +6933,7 @@ exit();*/
                 '(OT.DataQuitado >= "' . $data['DataInicio4'] . '")';
         }
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
+		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
 		$data['Entregador'] = ($data['Entregador']) ? ' AND OT.Entregador = ' . $data['Entregador'] : FALSE;
 		$data['FormaPag'] = ($data['FormaPag']) ? ' AND TFP.idTab_FormaPag = ' . $data['FormaPag'] : FALSE;
 		$data['TipoFrete'] = ($data['TipoFrete']) ? ' AND TTF.idTab_TipoFrete = ' . $data['TipoFrete'] : FALSE;
@@ -6945,6 +6954,7 @@ exit();*/
 				C.CelularCliente,
 				CONCAT(IFNULL(C.idApp_Cliente,""), " - ", IFNULL(C.NomeCliente,""), " - ", IFNULL(C.CelularCliente,"")) AS NomeCliente,
 				OT.idApp_OrcaTrata,
+				OT.idApp_Cliente,
                 OT.AprovadoOrca,
                 OT.CombinadoFrete,
                 OT.DataOrca,
@@ -6997,6 +7007,7 @@ exit();*/
 				' . $filtro13 . '
                 C.idApp_Cliente = OT.idApp_Cliente
                 ' . $data['Orcamento'] . '
+                ' . $data['Cliente'] . '
 				' . $data['Entregador'] . '
 				' . $data['TipoFrete'] . '
 				' . $data['FormaPag'] . ' AND
@@ -7111,6 +7122,7 @@ exit();*/
                 '(OT.DataQuitado >= "' . $data['DataInicio4'] . '")';
         }
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
+		$data['Fornecedor'] = ($data['Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['Fornecedor'] : FALSE;
 		$data['Entregador'] = ($data['Entregador']) ? ' AND OT.Entregador = ' . $data['Entregador'] : FALSE;
 		$data['FormaPag'] = ($data['FormaPag']) ? ' AND TFP.idTab_FormaPag = ' . $data['FormaPag'] : FALSE;
 		$data['TipoFrete'] = ($data['TipoFrete']) ? ' AND TTF.idTab_TipoFrete = ' . $data['TipoFrete'] : FALSE;
@@ -7131,6 +7143,7 @@ exit();*/
 				C.Telefone1,
 				CONCAT(IFNULL(C.idApp_Fornecedor,""), " - ", IFNULL(C.NomeFornecedor,""), " - ", IFNULL(C.Telefone1,"")) AS NomeFornecedor,
 				OT.idApp_OrcaTrata,
+				OT.idApp_Fornecedor,
                 OT.CombinadoFrete,
                 OT.AprovadoOrca,
                 OT.DataOrca,
@@ -7183,6 +7196,7 @@ exit();*/
 				' . $filtro13 . '
                 C.idApp_Fornecedor = OT.idApp_Fornecedor
                 ' . $data['Orcamento'] . '
+                ' . $data['Fornecedor'] . '
 				' . $data['Entregador'] . '
 				' . $data['TipoFrete'] . '
 				' . $data['FormaPag'] . ' AND

@@ -83,8 +83,8 @@
 											<span class="glyphicon glyphicon-print notclickable"></span>
 										</a>
 									</td>';
-								if($row['AprovadoOrca'] == "Sim"){	
-									if($row['QuitadoOrca'] == "Sim"){
+								if($row['CanceladoOrca'] == "Não"){	
+									if($row['QuitadoOrca'] == "Sim" && $row['ConcluidoOrca'] == "Sim"){
 										echo '<td class="notclickable">
 												<a class="btn btn-md btn-danger notclickable">
 													<span class="glyphicon glyphicon-ok notclickable"></span>
