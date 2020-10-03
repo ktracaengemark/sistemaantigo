@@ -3,11 +3,8 @@
 	
 	<div class="container-fluid">
 		<div class="row">
-
 			<div class="col-sm-offset-2 col-md-8">
-
 				<div class="panel panel-primary">
-
 					<div class="panel-heading">
 						<div class="btn-group">
 							<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
@@ -58,88 +55,112 @@
 					</div>
 					<div class="panel-body">
 						<div style="overflow: auto; height: auto; ">
-							<div class="form-group">	
-								<div class="row">
-									<div class=" col-md-6">	
-										<div class="row">	
-											<div class="col-sm-offset-2 col-md-10 " align="left"> 
-												<a href="<?php echo base_url() . 'empresa/alterarlogo/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">	
-													<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>"
-													class="img-circle img-responsive" width='200'>
-												</a>
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<div class="form-group">	
+										<div class="row">
+											<div class=" col-md-6">	
+												<div class="row">	
+													<div class="col-sm-offset-2 col-md-10 " align="left"> 
+														<a href="<?php echo base_url() . 'empresa/alterarlogo/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">	
+															<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>"
+															class="img-circle img-responsive" width='200'>
+														</a>
+													</div>
+												</div>		
 											</div>
-										</div>		
-									</div>
-								</div>	
-								<div class="row">	
-									<div class=" col-md-12">							
-										<table class="table table-user-information">
-											<tbody>
+										</div>
+										<h3>Status do PagSeguro</h3>
+										<div class="row">	
+											<div class=" col-md-12">							
+												<table class="table table-user-information">
+													<tbody>
 
-												<?php
-												
-												if ($pagseguro['Email_Pagseguro']) {
+														<?php
+														
+														if ($pagseguro['Ativo_Pagseguro'] == "N") {
 
-												echo '
-												<tr>
-													<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-envelope"></span> Email_Pagseguro:</td>
-													<td>' . $pagseguro['Email_Pagseguro'] . '</td>
-												</tr>
-												';
+														echo '
+														<tr>
+															<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-thumbs-down"></span> Ativo_Pagseguro:</td>
+															<td>NAO</td>
+														</tr>
+														';
 
-												} else {
-												
-													echo ' Nao existe E-Mail Cadastrado <br>';
-												}
-												
-												if ($pagseguro['Token_Sandbox']) {
+														} else if($pagseguro['Ativo_Pagseguro'] == "S"){
 
-												echo '
-												<tr>
-													<td><span class="glyphicon glyphicon-pencil"></span> Token_Sandbox:</td>
-													<td>' . $pagseguro['Token_Sandbox'] . '</td>
-												</tr>
-												';
+														echo '
+														<tr>
+															<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-thumbs-up"></span> Ativo_Pagseguro:</td>
+															<td>SIM</td>
+														</tr>
+														';
+														}
+														
+														if ($pagseguro['Email_Pagseguro']) {
 
-												} else {
-												
-													echo ' Nao existe Token_Sandbox Cadastrado <br>';
-												}
+														echo '
+														<tr>
+															<td class="col-md-3 col-lg-3"><span class="glyphicon glyphicon-envelope"></span> Email_Pagseguro:</td>
+															<td>' . $pagseguro['Email_Pagseguro'] . '</td>
+														</tr>
+														';
 
-												if ($pagseguro['Token_Producao']) {
+														} else {
+														
+															echo ' Nao existe E-Mail Cadastrado <br>';
+														}
+														
+														if ($pagseguro['Token_Sandbox']) {
 
-												echo '
-												<tr>
-													<td><span class="glyphicon glyphicon-pencil"></span> Token_Producao:</td>
-													<td>' . $pagseguro['Token_Producao'] . '</td>
-												</tr>
-												';
+														echo '
+														<tr>
+															<td><span class="glyphicon glyphicon-pencil"></span> Token_Sandbox:</td>
+															<td>' . $pagseguro['Token_Sandbox'] . '</td>
+														</tr>
+														';
 
-												} else {
-												
-													echo ' Nao existe Token_Producao Cadastrado ';
-												}
+														} else {
+														
+															echo ' Nao existe Token_Sandbox Cadastrado <br>';
+														}
 
-												?>
+														if ($pagseguro['Token_Producao']) {
 
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>		
-							<div class="row">
-								<div class="col-md-12">
-									<div class="panel panel-primary">
-										<div class="panel-heading">
-											<div class="btn-group">
-												<a type="button" class="btn btn-sm btn-default" href="<?php echo base_url() . 'empresa/alterarpagseguro/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
-													<span class="glyphicon glyphicon-edit"></span> Editar Pag Seguro
-												</a>
+														echo '
+														<tr>
+															<td><span class="glyphicon glyphicon-pencil"></span> Token_Producao:</td>
+															<td>' . $pagseguro['Token_Producao'] . '</td>
+														</tr>
+														';
+
+														} else {
+														
+															echo ' Nao existe Token_Producao Cadastrado ';
+														}
+
+														?>
+
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>		
+									<div class="row">
+										<div class="col-md-12">
+											<div class="panel panel-primary">
+												<div class="panel-heading">
+													<div class="btn-group">
+														<a type="button" class="btn btn-sm btn-default" href="<?php echo base_url() . 'empresa/alterarpagseguro/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+															<span class="glyphicon glyphicon-edit"></span> Editar Pag Seguro
+														</a>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
+							</div>						
 						</div>
 					</div>
 				</div>

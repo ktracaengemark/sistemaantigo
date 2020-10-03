@@ -2672,6 +2672,7 @@ class Empresa extends CI_Controller {
 			'Token_Sandbox',
 			'Token_Producao',
 			'Email_Pagseguro',
+			'Ativo_Pagseguro',
         ), TRUE);
 				
 
@@ -2687,6 +2688,8 @@ class Empresa extends CI_Controller {
 		
 		//$data['select']['NaLoja'] = $this->Basico_model->select_status_sn();
 		#$data['select']['Inativo'] = $this->Basico_model->select_inativo();
+		
+		$data['select']['Ativo_Pagseguro'] = $this->Basico_model->select_status_sn();
 
         $data['titulo'] = 'Pag Seguro';
         $data['form_open_path'] = 'empresa/alterarpagseguro';
