@@ -45,6 +45,14 @@ class Empresa_model extends CI_Model {
 
         return $query[0];
     }
+	
+    public function get_pagseguro($data) {
+        $query = $this->db->query('SELECT * FROM App_Documentos WHERE idSis_Empresa = ' . $data);
+
+        $query = $query->result_array();
+
+        return $query[0];
+    }	
 
     public function get_pagina($data) {
         $query = $this->db->query('SELECT * FROM App_Documentos WHERE idSis_Empresa = ' . $data);
@@ -85,7 +93,14 @@ class Empresa_model extends CI_Model {
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }	
-	
+
+    public function update_pagseguro($data, $id) {
+		
+		unset($data['idSis_Empresa']);
+        $query = $this->db->update('App_Documentos', $data, array('idSis_Empresa' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }	
     public function update_empresa_original($data, $id) {
 
         unset($data['Id']);

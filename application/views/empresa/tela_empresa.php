@@ -44,6 +44,14 @@
 											<span class="glyphicon glyphicon-edit"></span> Alterar Logo
 										</a>
 									</a>
+								</li>
+								<li role="separator" class="divider"></li>
+								<li>
+									<a <?php if (preg_match("/empresa\/pagseguro\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
+										<a href="<?php echo base_url() . 'empresa/pagseguro/' . $_SESSION['Empresa']['idSis_Empresa']; ?>">
+											<span class="glyphicon glyphicon-edit"></span> Pag Seguro
+										</a>
+									</a>
 								</li>								
 							</ul>
 						</div>

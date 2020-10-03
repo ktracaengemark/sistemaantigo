@@ -2637,5 +2637,99 @@ class Empresa extends CI_Controller {
         $this->load->view('basico/footer');
 
     }
+
+    public function pagseguro($id) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $_SESSION['PagSeguro'] = $data['pagseguro'] = $this->Empresa_model->get_pagseguro($id, TRUE);
+        $data['titulo'] = 'Pag Seguro ' ;
+        $data['panel'] = 'primary';
+        $data['metodo'] = 4;
+
+        $this->load->view('empresa/tela_pagseguro', $data);
+
+        $this->load->view('basico/footer');
+    }
+
+    public function alterarpagseguro($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['pagseguro'] = $this->input->post(array(
+			'idSis_Empresa',
+			'idApp_Documentos',
+			'Token_Sandbox',
+			'Token_Producao',
+			'Email_Pagseguro',
+        ), TRUE);
+				
+
+        if ($id) {
+            $_SESSION['PagSeguro'] = $data['pagseguro'] = $this->Empresa_model->get_pagseguro($id, TRUE);
+        }
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+		$this->form_validation->set_rules('Email_Pagseguro', 'E-mail', 'trim|valid_email');
+        #$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
+        #$this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');
+		
+		//$data['select']['NaLoja'] = $this->Basico_model->select_status_sn();
+		#$data['select']['Inativo'] = $this->Basico_model->select_inativo();
+
+        $data['titulo'] = 'Pag Seguro';
+        $data['form_open_path'] = 'empresa/alterarpagseguro';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+        $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
+        $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('empresa/form_pagseguro', $data);
+        } else {
+
+			//$data['pagseguro']['NomeEmpresa'] = trim(mb_strtoupper($data['pagseguro']['NomeEmpresa'], 'ISO-8859-1'));
+            //$data['pagseguro']['NomeAdmin'] = trim(mb_strtoupper($data['pagseguro']['NomeAdmin'], 'ISO-8859-1'));
+
+            $data['anterior'] = $this->Empresa_model->get_pagseguro($data['pagseguro']['idSis_Empresa']);
+            $data['campos'] = array_keys($data['pagseguro']);
+
+            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['pagseguro'], $data['campos'], $data['pagseguro']['idSis_Empresa'], TRUE);
+
+            if ($data['auditoriaitem'] && $this->Empresa_model->update_pagseguro($data['pagseguro'], $data['pagseguro']['idSis_Empresa']) === FALSE) {
+                $data['msg'] = '?m=2';
+                redirect(base_url() . 'empresa/form_pagseguro/' . $data['pagseguro']['idSis_Empresa'] . $data['msg']);
+                exit();
+            } else {
+
+                if ($data['auditoriaitem'] === FALSE) {
+                    $data['msg'] = '';
+                } else {
+                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Empresa', 'UPDATE', $data['auditoriaitem']);
+                    $data['msg'] = '?m=1';
+                }
+
+				redirect(base_url() . 'empresa/pagseguro/' . $data['pagseguro']['idSis_Empresa'] . $data['msg']);
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
 	
 }
