@@ -58,7 +58,6 @@
 																		?></td>
 							<td class="col-md-1 text-center" scope="col"><?php echo 'Data:<br><strong>'  . $orcatrata[$i]['DataOrca'] . '</strong>'
 																				. '<br><br>Recebedor:<br><strong>'  . $orcatrata[$i]['NomeRec'] . '</strong>'
-																				. '<br><br>Relação:<br><strong>'  . $orcatrata[$i]['ParentescoRec'] . '</strong>'
 																			?></td>
 							<td class="col-md-1 text-center" scope="col"><?php echo 'Orçamento:<br><strong>' . $orcatrata[$i]['idApp_OrcaTrata'] . '</strong>'
 																				. '<br><br>Valor Total:'
@@ -80,7 +79,6 @@
 																		?></td>
 							<td class="col-md-1 text-center" scope="col"><?php echo 'Data:<br><strong>'  . $orcatrata[$i]['DataOrca'] . '</strong>'
 																				. '<br><br>Recebedor:<br><strong>'  . $orcatrata[$i]['NomeRec'] . '</strong>'
-																				. '<br><br>Relação:<br><strong>'  . $orcatrata[$i]['ParentescoRec'] . '</strong>'
 																			?></td>
 							<td class="col-md-1 text-center" scope="col"><?php echo 'Orçamento:<br><strong>' . $orcatrata[$i]['idApp_OrcaTrata'] . '</strong>'
 																				. '<br><br>Valor Total:'
