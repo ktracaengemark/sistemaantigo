@@ -891,7 +891,7 @@
 															<div class="col-md-12">
 																<label for="FormaPagamento">Forma de Pagamento</label>
 																<select data-placeholder="Selecione uma opção..." class="form-control" 
-																	data-toggle="collapse" onchange="calculaParcelas(),calculaTotal(this.value),exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
+																	data-toggle="collapse" onchange="exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
 																		data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																		id="FormaPagamento" name="FormaPagamento">
 																	<option value="">-- Selecione uma opção --</option>
@@ -927,7 +927,7 @@
 																			echo ''
 																			. '<label class="btn btn-default active" name="radio" id="radio' . $key . '">'
 																			. '<input type="radio" name="AVAP" id="' . $hideshow . '" '
-																			. 'onchange="calculaParcelas(),formaPag(this.value)" '
+																			. 'onchange="formaPag(this.value)" '
 																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																			. '</label>'
 																			;
@@ -935,7 +935,7 @@
 																			echo ''
 																			. '<label class="btn btn-default" name="radio" id="radio' . $key . '">'
 																			. '<input type="radio" name="AVAP" id="' . $hideshow . '"'
-																			. 'onchange="calculaParcelas(),formaPag(this.value)" '
+																			. 'onchange="formaPag(this.value)" '
 																			. 'autocomplete="off" value="' . $key . '" >' . $row
 																			. '</label>'
 																			;
@@ -944,41 +944,6 @@
 																	?>
 																</div>
 															</div>
-															
-															<!--
-															<div class="col-md-12 text-center">
-																<label for="AVAP">Pargamento?</label><br>
-																<div class="btn-block" data-toggle="buttons">
-																	<?php
-																	foreach ($select['AVAP'] as $key => $row) {
-																		if (!$orcatrata['AVAP']) $orcatrata['AVAP'] = 'V';
-
-																		($key == 'P') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																		if ($orcatrata['AVAP'] == $key) {
-																			echo ''
-																			. '<label class="btn btn-warning active" name="AVAP_' . $hideshow . '">'
-																			. '<input type="radio" name="AVAP" id="' . $hideshow . '" '
-																			. 'onchange="calculaParcelas(),formaPag(this.value)" '
-																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																			. '</label>'
-																			;
-																		} else {
-																			echo ''
-																			. '<label class="btn btn-default" name="AVAP_' . $hideshow . '">'
-																			. '<input type="radio" name="AVAP" id="' . $hideshow . '" '
-																			. 'onchange="calculaParcelas(),formaPag(this.value)" '
-																			. 'autocomplete="off" value="' . $key . '" >' . $row
-																			. '</label>'
-																			;
-																		}
-																	}
-																	?>
-
-																</div>
-																<?php echo form_error('AVAP'); ?>
-															</div>
-															-->
 														</div>
 													</div>
 												</div>

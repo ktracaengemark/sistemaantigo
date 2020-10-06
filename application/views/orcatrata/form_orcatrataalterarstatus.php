@@ -14,7 +14,7 @@
 									<div class="panel-heading">
 										<input type="hidden" name="Negocio" id="Negocio" value="1"/>
 										<input type="hidden" name="Empresa" id="Empresa" value="<?php echo $_SESSION['log']['idSis_Empresa']; ?>"/>
-										<h4 class="mb-3"><b>Editar Orçamento2</b></h4>
+										<h4 class="mb-3"><b>Alterar Status</b></h4>
 										<div <?php echo $visivel; ?>>
 											<div class="row">
 												<div class="col-md-12">
@@ -1418,14 +1418,14 @@
 									<h4 class="mb-3"><b>Pedido</b></h4>
 									<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 										<div class="row">
-											<div class="col-md-8">
+											<div class="col-md-9">
 												<?php if ($metodo > 1) { ?>
 												<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
 												<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 												<?php } ?>
 												<?php if ($metodo == 2) { ?>
 
-													<div class="col-md-6">
+													<div class="col-md-3">
 														<label></label>
 														<!--
 														<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
@@ -1435,6 +1435,20 @@
 														<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." value="1" >
 															<span class="glyphicon glyphicon-save"></span> Salvar
 														</button>														
+													</div>	
+													<div class="col-md-6">	
+														<div class="row">
+															<div class="col-md-6">
+																<a class="btn btn-lg btn-info text-right" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $orcatrata['idApp_OrcaTrata']; ?>">
+																	<span class="glyphicon glyphicon-print"></span> Imprimir										
+																</a>
+															</div>	
+															<div class="col-md-6">	
+																<a class="btn btn-lg btn-info text-right" href="<?php echo base_url() . 'orcatrata/alterar2/' . $orcatrata['idApp_OrcaTrata']; ?>">
+																	<span class="glyphicon glyphicon-edit"></span> Editar										
+																</a>
+															</div>	
+														</div>
 													</div>
 													<!--
 													<div class="col-md-6 text-right">
@@ -1487,7 +1501,7 @@
 												
 											</div>
 										
-											<div class="col-md-4">
+											<div class="col-md-3">
 												<div class="panel panel-primary">
 													<div class="panel-heading">
 														<div class="row">

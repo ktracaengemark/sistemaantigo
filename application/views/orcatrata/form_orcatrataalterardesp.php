@@ -919,7 +919,7 @@
 																		echo ''
 																		. '<label class="btn btn-default active" name="radio" id="radio' . $key . '">'
 																		. '<input type="radio" name="AVAP" id="' . $hideshow . '" '
-																		. 'onchange="calculaParcelas(),formaPag(this.value)" '
+																		. 'onchange="formaPag(this.value)" '
 																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																		. '</label>'
 																		;
@@ -927,7 +927,7 @@
 																		echo ''
 																		. '<label class="btn btn-default" name="radio" id="radio' . $key . '">'
 																		. '<input type="radio" name="AVAP" id="' . $hideshow . '"'
-																		. 'onchange="calculaParcelas(),formaPag(this.value)" '
+																		. 'onchange="formaPag(this.value)" '
 																		. 'autocomplete="off" value="' . $key . '" >' . $row
 																		. '</label>'
 																		;
