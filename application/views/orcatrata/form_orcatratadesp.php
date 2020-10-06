@@ -509,7 +509,7 @@
 														</div>
 														<div class="row">														
 															<div class="col-md-12">
-																<label for="TipoFinanceiro">Tipo de Receita</label>
+																<label for="TipoFinanceiro">Tipo de Despesa</label>
 																<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 																		id="TipoFinanceiro" name="TipoFinanceiro">
 																	<option value="">-- Selecione uma opção --</option>
@@ -1267,7 +1267,7 @@
 								<?php } ?>
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<h4 class="mb-3"><b>Status do Pedido</b></h4>
+										<h4 class="mb-3"><b>Status da Despesa</b></h4>
 										<div class="row">
 											<div class="col-md-3">
 												<div class="panel panel-primary">
