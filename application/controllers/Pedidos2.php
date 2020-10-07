@@ -152,34 +152,7 @@ class Pedidos2 extends CI_Controller {
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
 					LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
-					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete';
-			
-        $_SESSION['FiltroAlteraParcela']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
-		$_SESSION['FiltroAlteraParcela']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
-        $_SESSION['FiltroAlteraParcela']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
-		$_SESSION['FiltroAlteraParcela']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
-        $_SESSION['FiltroAlteraParcela']['DataInicio3'] = $this->basico->mascara_data($data['query']['DataInicio3'], 'mysql');
-		$_SESSION['FiltroAlteraParcela']['DataFim3'] = $this->basico->mascara_data($data['query']['DataFim3'], 'mysql');		
-		$_SESSION['FiltroAlteraParcela']['Dia'] = $data['query']['Dia'];
-        $_SESSION['FiltroAlteraParcela']['Mesvenc'] = $data['query']['Mesvenc'];
-        $_SESSION['FiltroAlteraParcela']['Ano'] = $data['query']['Ano'];
-		$_SESSION['FiltroAlteraParcela']['Quitado'] = $data['query']['Quitado'];
-		$_SESSION['FiltroAlteraParcela']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
-		$_SESSION['FiltroAlteraParcela']['ConcluidoOrca'] = $data['query']['ConcluidoOrca'];
-		$_SESSION['FiltroAlteraParcela']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
-		$_SESSION['FiltroAlteraParcela']['FinalizadoOrca'] = $data['query']['FinalizadoOrca'];
-		$_SESSION['FiltroAlteraParcela']['CanceladoOrca'] = $data['query']['CanceladoOrca'];
-		$_SESSION['FiltroAlteraParcela']['CombinadoFrete'] = $data['query']['CombinadoFrete'];
-		$_SESSION['FiltroAlteraParcela']['Orcarec'] = $data['query']['Orcarec'];
-		$_SESSION['FiltroAlteraParcela']['Orcades'] = $data['query']['Orcades'];
-		$_SESSION['FiltroAlteraParcela']['NomeFornecedor'] = $data['query']['NomeFornecedor'];
-		$_SESSION['FiltroAlteraParcela']['FormaPagamento'] = $data['query']['FormaPagamento'];
-		$_SESSION['FiltroAlteraParcela']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
-		$_SESSION['FiltroAlteraParcela']['AVAP'] = $data['query']['AVAP'];
-		$_SESSION['FiltroAlteraParcela']['TipoFrete'] = $data['query']['TipoFrete'];
-		$_SESSION['FiltroAlteraParcela']['TipoFinanceiroR'] = $data['query']['TipoFinanceiroR'];
-		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
-		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];			
+					LEFT JOIN Tab_TipoFrete AS TF ON TF.idTab_TipoFrete = OT.TipoFrete';			
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         //$this->form_validation->set_rules('Orcamento', 'Orcamento', 'trim');
