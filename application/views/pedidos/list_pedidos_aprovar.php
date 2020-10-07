@@ -13,6 +13,7 @@
 							<th class="active">Pedido</th>
 							<th class="active">idCli</th>
 							<th class="active">Cliente</th>
+							<th class="active">Compra</th>
 							<th class="active">Entrega</th>
 							<th class="active">Hora</th>
 							<th class="active">Forma</th>
@@ -26,6 +27,7 @@
 								echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';	
 								echo '<td>' . $row['idApp_Cliente'] . '</td>';	
 								echo '<td>' . $row['NomeCliente'] . '</td>';
+								echo '<td>' . $row['Tipo_Orca'] . '</td>';
 								echo '<td>' . $row['DataEntregaOrca'] . '</td>';
 								echo '<td>' . $row['HoraEntregaOrca'] . '</td>';
 								echo '<td>' . $row['TipoFrete'] . '</td>';
