@@ -81,7 +81,6 @@ class Cliente extends CI_Controller {
 			'ReferenciaCliente',
             'Obs',
 			'Email',
-
             'RegistroFicha',
 			'Associado',
 			#'Profissional',
@@ -90,7 +89,6 @@ class Cliente extends CI_Controller {
 			#'CodInterno',
         ), TRUE));
 
-       
 		(!$data['query']['DataCadastroCliente']) ? $data['query']['DataCadastroCliente'] = date('d/m/Y', time()) : FALSE;
 		
 	   $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -146,62 +144,168 @@ class Cliente extends CI_Controller {
             $this->load->view('cliente/form_cliente2', $data);
         } else {
 
-			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
+			$_SESSION['Empresa5'] = $data['empresa5'] = $this->Cliente_model->get_empresa5($data['query']['CelularCliente']);
 			
-            $data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
-            $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');            
-			$data['query']['DataCadastroCliente'] = $this->basico->mascara_data($data['query']['DataCadastroCliente'], 'mysql');
-			$data['query']['DataEmissao'] = $this->basico->mascara_data($data['query']['DataEmissao'], 'mysql');
-			$data['query']['Obs'] = nl2br($data['query']['Obs']);
-			$data['query']['EnderecoCliente'] = trim(mb_strtoupper($data['query']['EnderecoCliente'], 'ISO-8859-1'));
-			$data['query']['NumeroCliente'] = trim(mb_strtoupper($data['query']['NumeroCliente'], 'ISO-8859-1'));
-			$data['query']['ComplementoCliente'] = trim(mb_strtoupper($data['query']['ComplementoCliente'], 'ISO-8859-1'));
-			$data['query']['BairroCliente'] = trim(mb_strtoupper($data['query']['BairroCliente'], 'ISO-8859-1'));
-			$data['query']['CidadeCliente'] = trim(mb_strtoupper($data['query']['CidadeCliente'], 'ISO-8859-1'));
-			$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['query']['EstadoCliente'], 'ISO-8859-1'));
-			$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['query']['ReferenciaCliente'], 'ISO-8859-1'));
-			if ($data['cadastrar']['Cadastrar'] == 'S'){
-				$data['query']['usuario'] = $data['query']['CelularCliente'];
-				$data['query']['senha'] = md5($data['query']['CelularCliente']);
-				$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
-			}
-			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-			$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-            $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			if (!isset($_SESSION['Empresa5'])){
+				
+				$data['usuario']['Nome'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
+				$data['usuario']['idSis_Empresa'] = 5;
+				$data['usuario']['NomeEmpresa'] = "CONTA PESSOAL";
+				$data['usuario']['Permissao'] = 3;
+				$data['usuario']['idTab_Modulo'] = 1;
+				$data['usuario']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
+				$data['usuario']['DataCriacao'] = date('Y-m-d', time());
+				$data['usuario']['Codigo'] = md5(uniqid(time() . rand()));
+				$data['usuario']['Inativo'] = 0;
+				$data['usuario']['CelularUsuario'] = $data['query']['CelularCliente'];
+				$data['usuario']['Senha'] = md5($data['query']['CelularCliente']);
+				
+				$data['anterior'] = array();
+				$data['campos'] = array_keys($data['usuario']);
 
-            $data['campos'] = array_keys($data['query']);
-            $data['anterior'] = array();
+				$data['idSis_Usuario'] = $this->Cliente_model->set_usuario($data['usuario']);
+
+				if ($data['idSis_Usuario'] === FALSE) {
+					$data['msg'] = '?m=2';
+					$this->load->view('cliente/form_cliente2', $data);
+				} else {
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['usuario'], $data['campos'], $data['idSis_Usuario']);
+					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Usuario', 'CREATE', $data['auditoriaitem'], $data['idSis_Usuario']);
+					/*
+					  echo $this->db->last_query();
+					  echo "<pre>";
+					  print_r($data);
+					  echo "</pre>";
+					  exit();
+					 */
+					$data['agenda'] = array(
+						'NomeAgenda' => 'Cliente',
+						'idSis_Usuario' => $data['idSis_Usuario'],
+						'idSis_Empresa' => "5"
+					);
+					$data['campos'] = array_keys($data['agenda']);
+
+					$data['idApp_Agenda'] = $this->Cliente_model->set_agenda($data['agenda']);
+			
+					$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
+					
+					$data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
+					$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');            
+					$data['query']['DataCadastroCliente'] = $this->basico->mascara_data($data['query']['DataCadastroCliente'], 'mysql');
+					$data['query']['DataEmissao'] = $this->basico->mascara_data($data['query']['DataEmissao'], 'mysql');
+					$data['query']['Obs'] = nl2br($data['query']['Obs']);
+					$data['query']['EnderecoCliente'] = trim(mb_strtoupper($data['query']['EnderecoCliente'], 'ISO-8859-1'));
+					$data['query']['NumeroCliente'] = trim(mb_strtoupper($data['query']['NumeroCliente'], 'ISO-8859-1'));
+					$data['query']['ComplementoCliente'] = trim(mb_strtoupper($data['query']['ComplementoCliente'], 'ISO-8859-1'));
+					$data['query']['BairroCliente'] = trim(mb_strtoupper($data['query']['BairroCliente'], 'ISO-8859-1'));
+					$data['query']['CidadeCliente'] = trim(mb_strtoupper($data['query']['CidadeCliente'], 'ISO-8859-1'));
+					$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['query']['EstadoCliente'], 'ISO-8859-1'));
+					$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['query']['ReferenciaCliente'], 'ISO-8859-1'));
+					
+					if ($data['cadastrar']['Cadastrar'] == 'S'){
+						$data['query']['usuario'] = $data['query']['CelularCliente'];
+						$data['query']['senha'] = $data['usuario']['Senha'];
+						$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+					}
+					
+					#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+					$data['query']['idSis_Usuario_5'] = $data['idSis_Usuario'];
+					$data['query']['Codigo'] = $data['usuario']['Codigo'];
+					$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+					$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+
+					$data['campos'] = array_keys($data['query']);
+					$data['anterior'] = array();
+					$data['idApp_Cliente'] = $this->Cliente_model->set_cliente($data['query']);
+
+					if ($data['idApp_Cliente'] === FALSE) {
+						$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+						$this->basico->erro($msg);
+						$this->load->view('cliente/form_cliente2', $data);
+					} else {
+
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Cliente'], FALSE);
+						$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Cliente', 'CREATE', $data['auditoriaitem']);
+						$data['msg'] = '?m=1';
+
+						redirect(base_url() . 'cliente/prontuario/' . $data['idApp_Cliente'] . $data['msg']);
+						exit();
+					}
+				}
+			} else {
 				/*
 				echo "<pre>";
 				print_r($data['query']['CelularCliente']);
 				echo "<br>";
-				print_r(strlen($data['query']['CelularCliente']));
-				echo "<br>";
-				print_r($data['query']);
-				echo "<br>";
-				print_r($data['campos']);
-				echo "<br>";
-				print_r($data['anterior']);
+				print_r($_SESSION['Empresa5']);
 				echo "<br>";
 				echo "</pre>";
-				exit();
+				exit();		
 				*/
-            $data['idApp_Cliente'] = $this->Cliente_model->set_cliente($data['query']);
+				$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
+				
+				$data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
+				$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');            
+				$data['query']['DataCadastroCliente'] = $this->basico->mascara_data($data['query']['DataCadastroCliente'], 'mysql');
+				$data['query']['DataEmissao'] = $this->basico->mascara_data($data['query']['DataEmissao'], 'mysql');
+				$data['query']['Obs'] = nl2br($data['query']['Obs']);
+				$data['query']['EnderecoCliente'] = trim(mb_strtoupper($data['query']['EnderecoCliente'], 'ISO-8859-1'));
+				$data['query']['NumeroCliente'] = trim(mb_strtoupper($data['query']['NumeroCliente'], 'ISO-8859-1'));
+				$data['query']['ComplementoCliente'] = trim(mb_strtoupper($data['query']['ComplementoCliente'], 'ISO-8859-1'));
+				$data['query']['BairroCliente'] = trim(mb_strtoupper($data['query']['BairroCliente'], 'ISO-8859-1'));
+				$data['query']['CidadeCliente'] = trim(mb_strtoupper($data['query']['CidadeCliente'], 'ISO-8859-1'));
+				$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['query']['EstadoCliente'], 'ISO-8859-1'));
+				$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['query']['ReferenciaCliente'], 'ISO-8859-1'));
+				
+				if ($data['cadastrar']['Cadastrar'] == 'S'){
+					$data['query']['usuario'] = $data['query']['CelularCliente'];
+					$data['query']['senha'] = $_SESSION['Empresa5']['Senha'];
+					$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+				}
+				
+				#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+				$data['query']['idSis_Usuario_5'] = $_SESSION['Empresa5']['idSis_Usuario'];
+				$data['query']['Codigo'] = $_SESSION['Empresa5']['Codigo'];
+				$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+				$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
-            if ($data['idApp_Cliente'] === FALSE) {
-                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+				$data['campos'] = array_keys($data['query']);
+				$data['anterior'] = array();
+					/*
+					echo "<pre>";
+					print_r($data['query']['CelularCliente']);
+					echo "<br>";
+					print_r(strlen($data['query']['CelularCliente']));
+					echo "<br>";
+					print_r($data['query']);
+					echo "<br>";
+					print_r($data['campos']);
+					echo "<br>";
+					print_r($data['anterior']);
+					echo "<br>";
+					echo "</pre>";
+					exit();
+					*/
+				$data['idApp_Cliente'] = $this->Cliente_model->set_cliente($data['query']);
 
-                $this->basico->erro($msg);
-                $this->load->view('cliente/form_cliente2', $data);
-            } else {
+				if ($data['idApp_Cliente'] === FALSE) {
+					$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
-                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Cliente'], FALSE);
-                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Cliente', 'CREATE', $data['auditoriaitem']);
-                $data['msg'] = '?m=1';
+					$this->basico->erro($msg);
+					$this->load->view('cliente/form_cliente2', $data);
+				} else {
 
-                redirect(base_url() . 'cliente/prontuario/' . $data['idApp_Cliente'] . $data['msg']);
-                exit();
-            }
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Cliente'], FALSE);
+					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Cliente', 'CREATE', $data['auditoriaitem']);
+					$data['msg'] = '?m=1';
+
+					redirect(base_url() . 'cliente/prontuario/' . $data['idApp_Cliente'] . $data['msg']);
+					exit();
+				}
+				
+			}	
         }
 
         $this->load->view('basico/footer');
@@ -318,49 +422,186 @@ class Cliente extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('cliente/form_cliente', $data);
         } else {
-		
-			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
 
-            $data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
-            $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
-            $data['query']['DataEmissao'] = $this->basico->mascara_data($data['query']['DataEmissao'], 'mysql');
-			$data['query']['Obs'] = nl2br($data['query']['Obs']);
-			$data['query']['EnderecoCliente'] = trim(mb_strtoupper($data['query']['EnderecoCliente'], 'ISO-8859-1'));
-			$data['query']['NumeroCliente'] = trim(mb_strtoupper($data['query']['NumeroCliente'], 'ISO-8859-1'));
-			$data['query']['ComplementoCliente'] = trim(mb_strtoupper($data['query']['ComplementoCliente'], 'ISO-8859-1'));
-			$data['query']['BairroCliente'] = trim(mb_strtoupper($data['query']['BairroCliente'], 'ISO-8859-1'));
-			$data['query']['CidadeCliente'] = trim(mb_strtoupper($data['query']['CidadeCliente'], 'ISO-8859-1'));
-			$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['query']['EstadoCliente'], 'ISO-8859-1'));
-			$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['query']['ReferenciaCliente'], 'ISO-8859-1'));
-			if ($data['cadastrar']['Cadastrar'] == 'S'){
-				$data['query']['usuario'] = $data['query']['CelularCliente'];
-				$data['query']['senha'] = md5($data['query']['CelularCliente']);
-				$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
-			}
-			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-			#$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-						
-            $data['anterior'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
-            $data['campos'] = array_keys($data['query']);
-
-            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_Cliente'], TRUE);
-
-            if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
-                $data['msg'] = '?m=1';
-                redirect(base_url() . 'cliente/prontuario/' . $data['query']['idApp_Cliente'] . $data['msg']);
-                exit();
-            } else {
-
-                if ($data['auditoriaitem'] === FALSE) {
-                    $data['msg'] = '';
-                } else {
-                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Cliente', 'UPDATE', $data['auditoriaitem']);
-                    $data['msg'] = '?m=1';
-                }
+			$_SESSION['Empresa5'] = $data['empresa5'] = $this->Cliente_model->get_empresa5($data['query']['CelularCliente']);
+			
+			if (!isset($_SESSION['Empresa5'])){
 				
-                redirect(base_url() . 'cliente/prontuario/' . $data['query']['idApp_Cliente'] . $data['msg']);
-                exit();
-            }
+				$data['usuario']['Nome'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
+				$data['usuario']['idSis_Empresa'] = 5;
+				$data['usuario']['NomeEmpresa'] = "CONTA PESSOAL";
+				$data['usuario']['Permissao'] = 3;
+				$data['usuario']['idTab_Modulo'] = 1;
+				$data['usuario']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
+				$data['usuario']['DataCriacao'] = date('Y-m-d', time());
+				$data['usuario']['Codigo'] = md5(uniqid(time() . rand()));
+				$data['usuario']['Inativo'] = 0;
+				$data['usuario']['CelularUsuario'] = $data['query']['CelularCliente'];
+				if(!isset($data['query']['senha'])){
+					$data['usuario']['Senha'] = md5($data['query']['CelularCliente']);
+					$data['query']['senha'] = $data['usuario']['Senha'];
+					$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+				}else{
+					$data['usuario']['Senha'] = $data['query']['senha'];
+				}
+				$data['anterior'] = array();
+				$data['campos'] = array_keys($data['usuario']);
+
+				$data['idSis_Usuario'] = $this->Cliente_model->set_usuario($data['usuario']);
+
+				if ($data['idSis_Usuario'] === FALSE) {
+					$data['msg'] = '?m=2';
+					$this->load->view('cliente/form_cliente2', $data);
+				} else {
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['usuario'], $data['campos'], $data['idSis_Usuario']);
+					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Sis_Usuario', 'CREATE', $data['auditoriaitem'], $data['idSis_Usuario']);
+					/*
+					  echo $this->db->last_query();
+					  echo "<pre>";
+					  print_r($data);
+					  echo "</pre>";
+					  exit();
+					 */
+					$data['agenda'] = array(
+						'NomeAgenda' => 'Cliente',
+						'idSis_Usuario' => $data['idSis_Usuario'],
+						'idSis_Empresa' => "5"
+					);
+					$data['campos'] = array_keys($data['agenda']);
+
+					$data['idApp_Agenda'] = $this->Cliente_model->set_agenda($data['agenda']);
+		
+					$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
+
+					$data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
+					$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
+					$data['query']['DataEmissao'] = $this->basico->mascara_data($data['query']['DataEmissao'], 'mysql');
+					$data['query']['Obs'] = nl2br($data['query']['Obs']);
+					$data['query']['EnderecoCliente'] = trim(mb_strtoupper($data['query']['EnderecoCliente'], 'ISO-8859-1'));
+					$data['query']['NumeroCliente'] = trim(mb_strtoupper($data['query']['NumeroCliente'], 'ISO-8859-1'));
+					$data['query']['ComplementoCliente'] = trim(mb_strtoupper($data['query']['ComplementoCliente'], 'ISO-8859-1'));
+					$data['query']['BairroCliente'] = trim(mb_strtoupper($data['query']['BairroCliente'], 'ISO-8859-1'));
+					$data['query']['CidadeCliente'] = trim(mb_strtoupper($data['query']['CidadeCliente'], 'ISO-8859-1'));
+					$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['query']['EstadoCliente'], 'ISO-8859-1'));
+					$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['query']['ReferenciaCliente'], 'ISO-8859-1'));
+					
+					if ($data['cadastrar']['Cadastrar'] == 'S'){
+					
+						$data['query']['usuario'] = $data['query']['CelularCliente'];
+
+						$data['query']['senha'] = md5($data['query']['CelularCliente']);
+						
+						$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+						
+						$data['usuario']['Senha'] = $data['query']['senha'];
+						
+						$data['update']['usuario']['anterior'] = $this->Cliente_model->get_usuario($data['idSis_Usuario']);
+						
+						$data['update']['usuario']['campos'] = array_keys($data['usuario']);
+						
+						$data['update']['usuario']['auditoriaitem'] = $this->basico->set_log(
+							$data['update']['usuario']['anterior'],
+							$data['usuario'],
+							$data['update']['usuario']['campos'],
+							$data['usuario']['idSis_Usuario'], TRUE);
+							
+						$data['update']['usuario']['bd'] = $this->Cliente_model->update_usuario($data['usuario'], $data['idSis_Usuario']);
+						
+					}
+						
+					$data['query']['idSis_Usuario_5'] = $data['idSis_Usuario'];
+					$data['query']['Codigo'] = $data['usuario']['Codigo'];
+								
+					$data['anterior'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
+					$data['campos'] = array_keys($data['query']);
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_Cliente'], TRUE);
+
+					if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
+						$data['msg'] = '?m=1';
+						redirect(base_url() . 'cliente/prontuario/' . $data['query']['idApp_Cliente'] . $data['msg']);
+						exit();
+					} else {
+
+						if ($data['auditoriaitem'] === FALSE) {
+							$data['msg'] = '';
+						} else {
+							$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Cliente', 'UPDATE', $data['auditoriaitem']);
+							$data['msg'] = '?m=1';
+						}
+						
+						redirect(base_url() . 'cliente/prontuario/' . $data['query']['idApp_Cliente'] . $data['msg']);
+						exit();
+					}
+				}
+				
+			} else {
+		
+				$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
+
+				$data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
+				$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
+				$data['query']['DataEmissao'] = $this->basico->mascara_data($data['query']['DataEmissao'], 'mysql');
+				$data['query']['Obs'] = nl2br($data['query']['Obs']);
+				$data['query']['EnderecoCliente'] = trim(mb_strtoupper($data['query']['EnderecoCliente'], 'ISO-8859-1'));
+				$data['query']['NumeroCliente'] = trim(mb_strtoupper($data['query']['NumeroCliente'], 'ISO-8859-1'));
+				$data['query']['ComplementoCliente'] = trim(mb_strtoupper($data['query']['ComplementoCliente'], 'ISO-8859-1'));
+				$data['query']['BairroCliente'] = trim(mb_strtoupper($data['query']['BairroCliente'], 'ISO-8859-1'));
+				$data['query']['CidadeCliente'] = trim(mb_strtoupper($data['query']['CidadeCliente'], 'ISO-8859-1'));
+				$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['query']['EstadoCliente'], 'ISO-8859-1'));
+				$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['query']['ReferenciaCliente'], 'ISO-8859-1'));
+					
+				if ($data['cadastrar']['Cadastrar'] == 'S'){
+				
+					$data['query']['usuario'] = $data['query']['CelularCliente'];
+					$data['query']['senha'] = md5($data['query']['CelularCliente']);
+					$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+					
+					$data['usuario']['Senha'] = $data['query']['senha'];
+					
+					$data['update']['usuario']['anterior'] = $this->Cliente_model->get_usuario($_SESSION['Empresa5']['idSis_Usuario']);
+					
+					$data['update']['usuario']['campos'] = array_keys($data['usuario']);
+					
+					$data['update']['usuario']['auditoriaitem'] = $this->basico->set_log(
+						$data['update']['usuario']['anterior'],
+						$data['usuario'],
+						$data['update']['usuario']['campos'],
+						$data['usuario']['idSis_Usuario'], TRUE);
+						
+					$data['update']['usuario']['bd'] = $this->Cliente_model->update_usuario($data['usuario'], $_SESSION['Empresa5']['idSis_Usuario']);
+					
+				}else{
+					$data['query']['usuario'] = $data['query']['CelularCliente'];
+					$data['query']['senha'] = $_SESSION['Empresa5']['Senha'];
+					$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+				}
+				$data['query']['idSis_Usuario_5'] = $_SESSION['Empresa5']['idSis_Usuario'];
+				$data['query']['Codigo'] = $_SESSION['Empresa5']['Codigo'];				
+
+				$data['anterior'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
+				$data['campos'] = array_keys($data['query']);
+
+				$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_Cliente'], TRUE);
+
+				if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
+					$data['msg'] = '?m=1';
+					redirect(base_url() . 'cliente/prontuario/' . $data['query']['idApp_Cliente'] . $data['msg']);
+					exit();
+				} else {
+
+					if ($data['auditoriaitem'] === FALSE) {
+						$data['msg'] = '';
+					} else {
+						$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Cliente', 'UPDATE', $data['auditoriaitem']);
+						$data['msg'] = '?m=1';
+					}
+					
+					redirect(base_url() . 'cliente/prontuario/' . $data['query']['idApp_Cliente'] . $data['msg']);
+					exit();
+				}
+			}
         }
 
         $this->load->view('basico/footer');

@@ -43,8 +43,60 @@ class Cliente_model extends CI_Model {
 
     }
 
+    public function set_usuario($data) {
+        #unset($data['idSisgef_Fila']);
+        /*
+          echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit();
+         */
+        $query = $this->db->insert('Sis_Usuario', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+
+    public function set_agenda($data) {
+        #unset($data['idSisgef_Fila']);
+        /*
+          echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit();
+         */
+        $query = $this->db->insert('App_Agenda', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+
     public function get_cliente($data) {
         $query = $this->db->query('SELECT * FROM App_Cliente WHERE idApp_Cliente = ' . $data);
+
+        $query = $query->result_array();
+
+        return $query[0];
+    }
+
+    public function get_usuario($data) {
+        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE idSis_Usuario = ' . $data);
 
         $query = $query->result_array();
 
@@ -59,6 +111,14 @@ class Cliente_model extends CI_Model {
 
     }    
 
+    public function get_empresa5($data) {
+        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE idSis_Empresa = "5" AND CelularUsuario = ' . $data);
+        $query = $query->result_array();
+
+        return $query[0];
+
+    }
+	
     public function update_cliente($data, $id) {
 
         unset($data['Id']);
@@ -76,6 +136,14 @@ class Cliente_model extends CI_Model {
         } else {
             return TRUE;
         }
+    }
+	
+    public function update_usuario($data, $id) {
+
+        unset($data['idSis_Usuario']);
+        $query = $this->db->update('Sis_Usuario', $data, array('idSis_Usuario' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
     }
 
     public function delete_cliente($data) {
