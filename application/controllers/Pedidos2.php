@@ -138,6 +138,8 @@ class Pedidos2 extends CI_Controller {
                 PR.DataPago,
                 PR.ValorPago,
                 PR.Quitado,
+				PRD.NomeProduto,
+				PRD.ConcluidoProduto,
 				TF.TipoFrete,
 				MD.Modalidade,
 				VP.Abrev2,
@@ -149,6 +151,7 @@ class Pedidos2 extends CI_Controller {
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
+					LEFT JOIN App_Produto AS PRD ON PRD.idApp_OrcaTrata = OT.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
 					LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP

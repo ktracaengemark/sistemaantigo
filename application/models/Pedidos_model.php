@@ -116,6 +116,7 @@ class Pedidos_model extends CI_Model {
 				$row->FinalizadoOrca = $this->basico->mascara_palavra_completa($row->FinalizadoOrca, 'NS');
 				$row->CanceladoOrca = $this->basico->mascara_palavra_completa($row->CanceladoOrca, 'NS');
                 $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
+                $row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
 				
 				if($row->Tipo_Orca == "O"){
 					$row->Tipo_Orca = "On Line";
@@ -207,6 +208,8 @@ class Pedidos_model extends CI_Model {
 				OT.AprovadoOrca = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+			GROUP BY
+                OT.idApp_OrcaTrata
 			ORDER BY 
 				OT.DataEntregaOrca ASC,
 				OT.HoraEntregaOrca ASC,
@@ -232,6 +235,7 @@ class Pedidos_model extends CI_Model {
 				$row->FinalizadoOrca = $this->basico->mascara_palavra_completa($row->FinalizadoOrca, 'NS');
 				$row->CanceladoOrca = $this->basico->mascara_palavra_completa($row->CanceladoOrca, 'NS');
                 $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
+                $row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
 				
 				if($row->Tipo_Orca == "O"){
 					$row->Tipo_Orca = "On Line";
@@ -323,7 +327,8 @@ class Pedidos_model extends CI_Model {
 				OT.AprovadoOrca = "S" AND
 				OT.ConcluidoOrca = "N" AND
 				OT.ProntoOrca = "N" AND
-				OT.EnviadoOrca = "N"
+				PRD.ConcluidoProduto = "N" 
+				
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
 			GROUP BY
@@ -353,6 +358,7 @@ class Pedidos_model extends CI_Model {
 				$row->FinalizadoOrca = $this->basico->mascara_palavra_completa($row->FinalizadoOrca, 'NS');
 				$row->CanceladoOrca = $this->basico->mascara_palavra_completa($row->CanceladoOrca, 'NS');
                 $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
+                $row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
 				
 				if($row->Tipo_Orca == "O"){
 					$row->Tipo_Orca = "On Line";
@@ -444,7 +450,8 @@ class Pedidos_model extends CI_Model {
 				OT.AprovadoOrca = "S" AND
 				OT.ConcluidoOrca = "N" AND
 				OT.ProntoOrca = "S" AND
-				OT.EnviadoOrca = "N"
+				OT.EnviadoOrca = "N" AND
+				PRD.ConcluidoProduto = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
 			GROUP BY
@@ -474,6 +481,7 @@ class Pedidos_model extends CI_Model {
 				$row->FinalizadoOrca = $this->basico->mascara_palavra_completa($row->FinalizadoOrca, 'NS');
 				$row->CanceladoOrca = $this->basico->mascara_palavra_completa($row->CanceladoOrca, 'NS');
                 $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
+                $row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
 				
 				if($row->Tipo_Orca == "O"){
 					$row->Tipo_Orca = "On Line";
@@ -563,9 +571,9 @@ class Pedidos_model extends CI_Model {
 				OT.CanceladoOrca = "N" AND
 				OT.CombinadoFrete = "S" AND
 				OT.AprovadoOrca = "S" AND
-				OT.ProntoOrca = "S" AND
-				OT.EnviadoOrca = "S" AND
-				OT.ConcluidoOrca = "N"
+				
+				OT.ConcluidoOrca = "N" AND
+				PRD.ConcluidoProduto = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
 			GROUP BY
@@ -595,6 +603,7 @@ class Pedidos_model extends CI_Model {
 				$row->FinalizadoOrca = $this->basico->mascara_palavra_completa($row->FinalizadoOrca, 'NS');
 				$row->CanceladoOrca = $this->basico->mascara_palavra_completa($row->CanceladoOrca, 'NS');
                 $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
+                $row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
 				
 				if($row->Tipo_Orca == "O"){
 					$row->Tipo_Orca = "On Line";
@@ -687,6 +696,8 @@ class Pedidos_model extends CI_Model {
 				OT.QuitadoOrca = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+			GROUP BY
+                OT.idApp_OrcaTrata
 			ORDER BY 
 				PR.DataVencimento ASC
 		');
@@ -710,6 +721,7 @@ class Pedidos_model extends CI_Model {
 				$row->FinalizadoOrca = $this->basico->mascara_palavra_completa($row->FinalizadoOrca, 'NS');
 				$row->CanceladoOrca = $this->basico->mascara_palavra_completa($row->CanceladoOrca, 'NS');
                 $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
+                $row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
 				
 				if($row->Tipo_Orca == "O"){
 					$row->Tipo_Orca = "On Line";
@@ -826,6 +838,7 @@ class Pedidos_model extends CI_Model {
 				$row->FinalizadoOrca = $this->basico->mascara_palavra_completa($row->FinalizadoOrca, 'NS');
 				$row->CanceladoOrca = $this->basico->mascara_palavra_completa($row->CanceladoOrca, 'NS');
                 $row->Quitado = $this->basico->mascara_palavra_completa($row->Quitado, 'NS');
+                $row->ConcluidoProduto = $this->basico->mascara_palavra_completa($row->ConcluidoProduto, 'NS');
 				
 				if($row->Tipo_Orca == "O"){
 					$row->Tipo_Orca = "On Line";
@@ -834,8 +847,6 @@ class Pedidos_model extends CI_Model {
 				}else{
 					$row->Tipo_Orca = "Outros";
 				}
-				
-				
             }
             return $query;
         }		
