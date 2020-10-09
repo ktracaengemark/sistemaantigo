@@ -202,18 +202,16 @@ class Cliente2 extends CI_Controller {
 					$data['query']['CidadeCliente'] = trim(mb_strtoupper($data['query']['CidadeCliente'], 'ISO-8859-1'));
 					$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['query']['EstadoCliente'], 'ISO-8859-1'));
 					$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['query']['ReferenciaCliente'], 'ISO-8859-1'));
-					
-					if ($data['cadastrar']['Cadastrar'] == 'S'){
-						$data['query']['usuario'] = $data['query']['CelularCliente'];
-						$data['query']['senha'] = $data['usuario']['Senha'];
-						$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
-					}
-					
-					#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+
+					$data['query']['usuario'] = $data['query']['CelularCliente'];
+					$data['query']['senha'] = $data['usuario']['Senha'];
+					$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+
 					$data['query']['idSis_Usuario_5'] = $data['idSis_Usuario'];
 					$data['query']['Codigo'] = $data['usuario']['Codigo'];
 					$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 					$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+					$data['query']['LocalCadastroCliente'] = "L";
 
 					$data['campos'] = array_keys($data['query']);
 					$data['anterior'] = array();
@@ -259,17 +257,15 @@ class Cliente2 extends CI_Controller {
 				$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['query']['EstadoCliente'], 'ISO-8859-1'));
 				$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['query']['ReferenciaCliente'], 'ISO-8859-1'));
 				
-				if ($data['cadastrar']['Cadastrar'] == 'S'){
-					$data['query']['usuario'] = $data['query']['CelularCliente'];
-					$data['query']['senha'] = $_SESSION['Empresa5']['Senha'];
-					$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
-				}
-				
-				#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+				$data['query']['usuario'] = $data['query']['CelularCliente'];
+				$data['query']['senha'] = $_SESSION['Empresa5']['Senha'];
+				$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+					
 				$data['query']['idSis_Usuario_5'] = $_SESSION['Empresa5']['idSis_Usuario'];
 				$data['query']['Codigo'] = $_SESSION['Empresa5']['Codigo'];
 				$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 				$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+				$data['query']['LocalCadastroCliente'] = "L";
 
 				$data['campos'] = array_keys($data['query']);
 				$data['anterior'] = array();
@@ -440,7 +436,7 @@ class Cliente2 extends CI_Controller {
 				if(!isset($data['query']['senha'])){
 					$data['usuario']['Senha'] = md5($data['query']['CelularCliente']);
 					$data['query']['senha'] = $data['usuario']['Senha'];
-					$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+					//$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
 				}else{
 					$data['usuario']['Senha'] = $data['query']['senha'];
 				}
@@ -485,7 +481,7 @@ class Cliente2 extends CI_Controller {
 					$data['query']['CidadeCliente'] = trim(mb_strtoupper($data['query']['CidadeCliente'], 'ISO-8859-1'));
 					$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['query']['EstadoCliente'], 'ISO-8859-1'));
 					$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['query']['ReferenciaCliente'], 'ISO-8859-1'));
-					
+					/*
 					if ($data['cadastrar']['Cadastrar'] == 'S'){
 					
 						$data['query']['usuario'] = $data['query']['CelularCliente'];
@@ -509,7 +505,10 @@ class Cliente2 extends CI_Controller {
 						$data['update']['usuario']['bd'] = $this->Cliente_model->update_usuario($data['usuario'], $data['idSis_Usuario']);
 						
 					}
-						
+					*/
+					if(!isset($data['query']['CodInterno'])){
+						$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+					}	
 					$data['query']['idSis_Usuario_5'] = $data['idSis_Usuario'];
 					$data['query']['Codigo'] = $data['usuario']['Codigo'];
 								
@@ -551,7 +550,7 @@ class Cliente2 extends CI_Controller {
 				$data['query']['CidadeCliente'] = trim(mb_strtoupper($data['query']['CidadeCliente'], 'ISO-8859-1'));
 				$data['query']['EstadoCliente'] = trim(mb_strtoupper($data['query']['EstadoCliente'], 'ISO-8859-1'));
 				$data['query']['ReferenciaCliente'] = trim(mb_strtoupper($data['query']['ReferenciaCliente'], 'ISO-8859-1'));
-					
+				/*	
 				if ($data['cadastrar']['Cadastrar'] == 'S'){
 				
 					$data['query']['usuario'] = $data['query']['CelularCliente'];
@@ -575,6 +574,12 @@ class Cliente2 extends CI_Controller {
 				}else{
 					$data['query']['usuario'] = $data['query']['CelularCliente'];
 					$data['query']['senha'] = $_SESSION['Empresa5']['Senha'];
+					$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
+				}
+				*/
+				$data['query']['usuario'] = $data['query']['CelularCliente'];
+				$data['query']['senha'] = $_SESSION['Empresa5']['Senha'];
+				if(!isset($data['query']['CodInterno'])){
 					$data['query']['CodInterno'] = md5(uniqid(time() . rand()));
 				}
 				$data['query']['idSis_Usuario_5'] = $_SESSION['Empresa5']['idSis_Usuario'];
