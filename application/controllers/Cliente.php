@@ -158,6 +158,7 @@ class Cliente extends CI_Controller {
 				$data['usuario']['Codigo'] = md5(uniqid(time() . rand()));
 				$data['usuario']['Inativo'] = 0;
 				$data['usuario']['CelularUsuario'] = $data['query']['CelularCliente'];
+				$data['usuario']['Usuario'] = $data['query']['CelularCliente'];
 				$data['usuario']['Senha'] = md5($data['query']['CelularCliente']);
 				
 				$data['anterior'] = array();
@@ -190,6 +191,7 @@ class Cliente extends CI_Controller {
 			
 					$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
 					
+					$data['query']['idTab_Modulo'] = 1;
 					$data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
 					$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');            
 					$data['query']['DataCadastroCliente'] = $this->basico->mascara_data($data['query']['DataCadastroCliente'], 'mysql');
@@ -243,7 +245,8 @@ class Cliente extends CI_Controller {
 				exit();		
 				*/
 				$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
-				
+					
+				$data['query']['idTab_Modulo'] = 1;
 				$data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
 				$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');            
 				$data['query']['DataCadastroCliente'] = $this->basico->mascara_data($data['query']['DataCadastroCliente'], 'mysql');
@@ -433,6 +436,7 @@ class Cliente extends CI_Controller {
 				$data['usuario']['Codigo'] = md5(uniqid(time() . rand()));
 				$data['usuario']['Inativo'] = 0;
 				$data['usuario']['CelularUsuario'] = $data['query']['CelularCliente'];
+				$data['usuario']['Usuario'] = $data['query']['CelularCliente'];
 				if(!isset($data['query']['senha'])){
 					$data['usuario']['Senha'] = md5($data['query']['CelularCliente']);
 					$data['query']['senha'] = $data['usuario']['Senha'];
@@ -469,7 +473,8 @@ class Cliente extends CI_Controller {
 					$data['idApp_Agenda'] = $this->Cliente_model->set_agenda($data['agenda']);
 		
 					$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
-
+					
+					$data['query']['idTab_Modulo'] = 1;
 					$data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
 					$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
 					$data['query']['DataEmissao'] = $this->basico->mascara_data($data['query']['DataEmissao'], 'mysql');
@@ -538,7 +543,8 @@ class Cliente extends CI_Controller {
 			} else {
 		
 				$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
-
+					
+				$data['query']['idTab_Modulo'] = 1;
 				$data['query']['NomeCliente'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
 				$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
 				$data['query']['DataEmissao'] = $this->basico->mascara_data($data['query']['DataEmissao'], 'mysql');
