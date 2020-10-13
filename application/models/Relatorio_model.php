@@ -6797,14 +6797,14 @@ exit();*/
 				TSU.Nome
 				
             FROM
-                App_Cliente AS C,
                 App_OrcaTrata AS OT
+				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 				LEFT JOIN Sis_Usuario AS TSU ON TSU.idSis_Usuario = OT.Entregador
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
 				LEFT JOIN Tab_AVAP AS TAV ON TAV.Abrev2 = OT.AVAP
             WHERE
-				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 (' . $consulta . ') AND
 				(' . $consulta2 . ') AND
 				(' . $consulta3 . ') AND
@@ -6816,13 +6816,12 @@ exit();*/
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro13 . '
-                C.idApp_Cliente = OT.idApp_Cliente
+				OT.idTab_TipoRD = "2"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
 				' . $data['Entregador'] . '
 				' . $data['TipoFrete'] . '
-				' . $data['FormaPag'] . ' AND
-				OT.idTab_TipoRD = "2"
+				' . $data['FormaPag'] . '
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');
@@ -7175,14 +7174,14 @@ exit();*/
 				TSU.Nome
 				
             FROM
-                App_Fornecedor AS C,
                 App_OrcaTrata AS OT
+				LEFT JOIN App_Fornecedor AS C ON C.idApp_Fornecedor = OT.idApp_Fornecedor
 				LEFT JOIN Sis_Usuario AS TSU ON TSU.idSis_Usuario = OT.Entregador
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
 				LEFT JOIN Tab_AVAP AS TAV ON TAV.Abrev2 = OT.AVAP
             WHERE
-				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 (' . $consulta . ') AND
 				(' . $consulta2 . ') AND
 				(' . $consulta3 . ') AND
@@ -7194,13 +7193,12 @@ exit();*/
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro13 . '
-                C.idApp_Fornecedor = OT.idApp_Fornecedor
+				OT.idTab_TipoRD = "1"
                 ' . $data['Orcamento'] . '
                 ' . $data['Fornecedor'] . '
 				' . $data['Entregador'] . '
 				' . $data['TipoFrete'] . '
-				' . $data['FormaPag'] . ' AND
-				OT.idTab_TipoRD = "1"
+				' . $data['FormaPag'] . '
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');

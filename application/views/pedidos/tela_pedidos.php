@@ -40,124 +40,126 @@
 					</div>
 				</div>
 			</div>
-		</div>	
-		<div class="row">	
-			<div class="col-md-12">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-primary">
-							<div class="panel-heading">
-								<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Combinar" aria-expanded="false" aria-controls="Combinar">
-									<h5 class="text-left">Aguardando <b>Combinar com o Cliente</b></h5>
-								</a>
-							</div>
-							<div <?php echo $collapse; ?> id="Combinar">
-								<div class="panel-body">
-									<?php echo (isset($list_combinar)) ? $list_combinar : FALSE ?>
-								</div>
-							</div>	
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-primary">
-							<div class="panel-heading">
-								<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Aprovar" aria-expanded="false" aria-controls="Aprovar">
-									<h5 class="text-left">Aguardando <b>Aprovação do Cliente</b></h5>
-								</a>
-							</div>
-							<div <?php echo $collapse; ?> id="Aprovar">
-								<div class="panel-body">
-									<?php echo (isset($list_aprovar)) ? $list_aprovar : FALSE ?>
-								</div>
-							</div>	
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-info">
-							<div class="panel-heading">
-								<a class="text-center" style="color: #00008B" data-toggle="collapse" data-target="#Producao" aria-expanded="false" aria-controls="Producao">
-									<h5 class="text-left">Aguardando <b>Produção</b></h5>
-								</a>
-							</div>
-							<div <?php echo $collapse; ?> id="Producao">
-								<div class="panel-body">
-									<?php echo (isset($list_producao)) ? $list_producao : FALSE ?>
-								</div>
-							</div>	
-						</div>
-					</div>
-				</div>
-				<div class="row">			
-					<div class="col-md-12">
-						<div class="panel panel-success">
-							<div class="panel-heading">
-								<a class="text-center" style="color: #3CB371" data-toggle="collapse" data-target="#Envio" aria-expanded="false" aria-controls="Envio">
-									<h5 class="text-left">Aguardando <b>Envio</b></h5>
-								</a>
-							</div>
-							<div <?php echo $collapse; ?> id="Envio">
-								<div class="panel-body">
-									<?php echo (isset($list_envio)) ? $list_envio : FALSE ?>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-warning">
-							<div class="panel-heading">
-								<a class="text-center" style="color: #B8860B" data-toggle="collapse" data-target="#Entrega" aria-expanded="false" aria-controls="Entrega">
-									<h5 class="text-left">Aguardando <b>Entrega</b></h5>
-								</a>
-							</div>
-							<div <?php echo $collapse; ?> id="Entrega">
-								<div class="panel-body">
-									<?php echo (isset($list_entrega)) ? $list_entrega : FALSE ?>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">			
-					<div class="col-md-12">
-						<div class="panel panel-warning">
-							<div class="panel-heading">
-								<a class="text-center" style="color: #B8860B" data-toggle="collapse" data-target="#Pagamento" aria-expanded="false" aria-controls="Pagamento">
-									<h5 class="text-left">Aguardando <b>Pagamento</b></h5>
-								</a>
-							</div>
-							<div <?php echo $collapse; ?> id="Pagamento">
-								<div class="panel-body">
-									<?php echo (isset($list_pagamento)) ? $list_pagamento : FALSE ?>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">	
-					<div class="col-md-12">
-						<div class="panel panel-primary">
-							<div class="panel-heading">
-								<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Cancelados" aria-expanded="false" aria-controls="Cancelados">
-									<h5 class="text-left"><b>Cancelados</b></h5>
-								</a>
-							</div>
-							<div <?php echo $collapse; ?> id="Cancelados">
-								<div class="panel-body">
-									<?php echo (isset($list_pagonline)) ? $list_pagonline : FALSE ?>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>	
-			</div>	
 		</div>
-	</div>	
+		<div style="overflow: auto; height: 550px; ">
+			<div class="row">	
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Combinar" aria-expanded="false" aria-controls="Combinar">
+										<h5 class="text-left">Aguardando <b>Combinar com o Cliente</b></h5>
+									</a>
+								</div>
+								<div <?php echo $collapse; ?> id="Combinar">
+									<div class="panel-body">
+										<?php echo (isset($list_combinar)) ? $list_combinar : FALSE ?>
+									</div>
+								</div>	
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Aprovar" aria-expanded="false" aria-controls="Aprovar">
+										<h5 class="text-left">Aguardando <b>Aprovação do Cliente</b></h5>
+									</a>
+								</div>
+								<div <?php echo $collapse; ?> id="Aprovar">
+									<div class="panel-body">
+										<?php echo (isset($list_aprovar)) ? $list_aprovar : FALSE ?>
+									</div>
+								</div>	
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<a class="text-center" style="color: #00008B" data-toggle="collapse" data-target="#Producao" aria-expanded="false" aria-controls="Producao">
+										<h5 class="text-left">Aguardando <b>Produção</b></h5>
+									</a>
+								</div>
+								<div <?php echo $collapse; ?> id="Producao">
+									<div class="panel-body">
+										<?php echo (isset($list_producao)) ? $list_producao : FALSE ?>
+									</div>
+								</div>	
+							</div>
+						</div>
+					</div>
+					<div class="row">			
+						<div class="col-md-12">
+							<div class="panel panel-success">
+								<div class="panel-heading">
+									<a class="text-center" style="color: #3CB371" data-toggle="collapse" data-target="#Envio" aria-expanded="false" aria-controls="Envio">
+										<h5 class="text-left">Aguardando <b>Envio</b></h5>
+									</a>
+								</div>
+								<div <?php echo $collapse; ?> id="Envio">
+									<div class="panel-body">
+										<?php echo (isset($list_envio)) ? $list_envio : FALSE ?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-warning">
+								<div class="panel-heading">
+									<a class="text-center" style="color: #B8860B" data-toggle="collapse" data-target="#Entrega" aria-expanded="false" aria-controls="Entrega">
+										<h5 class="text-left">Aguardando <b>Entrega</b></h5>
+									</a>
+								</div>
+								<div <?php echo $collapse; ?> id="Entrega">
+									<div class="panel-body">
+										<?php echo (isset($list_entrega)) ? $list_entrega : FALSE ?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">			
+						<div class="col-md-12">
+							<div class="panel panel-warning">
+								<div class="panel-heading">
+									<a class="text-center" style="color: #B8860B" data-toggle="collapse" data-target="#Pagamento" aria-expanded="false" aria-controls="Pagamento">
+										<h5 class="text-left">Aguardando <b>Pagamento</b></h5>
+									</a>
+								</div>
+								<div <?php echo $collapse; ?> id="Pagamento">
+									<div class="panel-body">
+										<?php echo (isset($list_pagamento)) ? $list_pagamento : FALSE ?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">	
+						<div class="col-md-12">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Cancelados" aria-expanded="false" aria-controls="Cancelados">
+										<h5 class="text-left"><b>Cancelados</b></h5>
+									</a>
+								</div>
+								<div <?php echo $collapse; ?> id="Cancelados">
+									<div class="panel-body">
+										<?php echo (isset($list_pagonline)) ? $list_pagonline : FALSE ?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>	
+			</div>
+		</div>
+	</div>
 	<div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">

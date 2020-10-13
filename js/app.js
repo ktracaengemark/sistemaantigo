@@ -23,10 +23,20 @@ camposDisponiveis();
 exibirentrega();
 
 exibir();
-exibir_confirmar();
+exibir_confirmar();	
+Aguardar();
+
+//Função que desabilita a Mensagem de Aguardar.
+function Aguardar () {
+	$('.aguardar').hide();
+	$('.exibir').show();
+}
+
 function exibir(){
+	
 	$('.Mostrar').show();
 	$('.NMostrar').hide();
+	
 }
 function exibir_confirmar(){
 	$('.Open').show();
@@ -416,33 +426,54 @@ var dateTimePickerOptions = {
 
 //Função que desabilita o botão submit após 1 click, evitando mais de um envio de formulário.
 function DesabilitaBotao (valor) {
-
+	$('.aguardar').show();
+	$('.exibir').hide();
+	//document.getElementById('aguardar').style.display = "";
     if (valor) {
         document.getElementById('submeter').style.display = "none";
 		document.getElementById('submeter2').style.display = "none";
+		document.getElementById('submeter5').style.display = "none";
+		document.getElementById('submeter6').style.display = "none";
+		document.getElementById('submeter7').style.display = "none";
+		document.getElementById('submeter8').style.display = "none";
+        document.getElementById('aguardar').style.display = "";		
+    }
+    else {
+        document.getElementById('submeter').style.display = "";
+		document.getElementById('submeter2').style.display = "";
+		document.getElementById('submeter5').style.display = "";
+		document.getElementById('submeter6').style.display = "";
+		document.getElementById('submeter7').style.display = "";
+		document.getElementById('submeter8').style.display = "";
+        document.getElementById('aguardar').style.display = "none";
+    }
+}
+
+function DesabilitaBotaoExcluir (valor) {
+    $('.aguardar').hide();
+	$('.exibir').show();
+    if (valor) {
+        document.getElementById('submeter').style.display = "none";
+		document.getElementById('submeter2').style.display = "none";
+		document.getElementById('submeter3').style.display = "none";
+		document.getElementById('submeter4').style.display = "none";
+		document.getElementById('submeter5').style.display = "none";
+		document.getElementById('submeter6').style.display = "none";
+		document.getElementById('submeter7').style.display = "none";
+		document.getElementById('submeter8').style.display = "none";
         document.getElementById('aguardar').style.display = "";
     }
     else {
         document.getElementById('submeter').style.display = "";
 		document.getElementById('submeter2').style.display = "";
-        document.getElementById('aguardar').style.display = "none";
-    }
-
-}
-
-function DesabilitaBotaoExcluir (valor) {
-
-    if (valor) {
-		document.getElementById('submeter3').style.display = "none";
-		document.getElementById('submeter4').style.display = "none";
-        document.getElementById('aguardar').style.display = "";
-    }
-    else {
 		document.getElementById('submeter3').style.display = "";
 		document.getElementById('submeter4').style.display = "";
+		document.getElementById('submeter5').style.display = "";
+		document.getElementById('submeter6').style.display = "";
+		document.getElementById('submeter7').style.display = "";
+		document.getElementById('submeter8').style.display = "";
         document.getElementById('aguardar').style.display = "none";
     }
-
 }
 
 /*Atualiza o somatório do Qtd no Orcatrata*/
@@ -722,14 +753,21 @@ function calculaResta(entrada) {
 function calculaTotal(entrada) {
 
     //recebe o valor do orçamento
+    var valorextraorca = $("#ValorExtraOrca").val();
+	console.log(valorextraorca +' valor extra');
     var orcamento = $("#ValorRestanteOrca").val();
 	var devolucao = $("#ValorFrete").val();
-    var restaT = -(- devolucao.replace(".","").replace(",",".") - orcamento.replace(".","").replace(",","."));
+    var restaT = -(- devolucao.replace(".","").replace(",",".") - orcamento.replace(".","").replace(",",".") - valorextraorca.replace(".","").replace(",","."));
+    var valorsomaorca = -(- valorextraorca.replace(".","").replace(",",".") - orcamento.replace(".","").replace(",","."));
 
     restaT = mascaraValorReal(restaT);
+	valorsomaorca = mascaraValorReal(valorsomaorca);
+	console.log(valorsomaorca +' valor soma');
 
     //o valor é escrito no seu campo no formulário
-    $('#ValorTotalOrca').val(restaT);
+    $('#ValorSomaOrca').val(valorsomaorca);
+	$('#ValorTotalOrca').val(restaT);
+	
 	calculaParcelas();
 }
 

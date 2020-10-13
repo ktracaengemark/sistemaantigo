@@ -11,9 +11,11 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span> 
 					</button>
+					<!--
 					<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/cadastrardesp/'; ?>">
 						<span class="glyphicon glyphicon-plus"></span> Novo
 					</a>
+					-->
 					<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterardesp/' . $query['idApp_OrcaTrata']; ?>">
 						<span class="glyphicon glyphicon-edit"></span> Editar Pedido										
 					</a>
@@ -63,10 +65,11 @@
 					<div class="panel-body">
 
 						<!--<hr />-->
-														
-						<h3 class="text-left"><b>Fornecedor</b>: <?php echo '' . $fornecedor['NomeFornecedor'] . '' ?></h3>
-						<h5 class="text-left"><b>Tel</b>: <?php echo '' . $fornecedor['Telefone1'] . '' ?> - <b>ID</b>: <?php echo '' . $fornecedor['idApp_Fornecedor'] . '' ?> </h5>
-						<table class="table table-bordered table-condensed table-striped">
+						<?php if($orcatrata['idApp_Fornecedor'] != 0) { ?>								
+							<h3 class="text-left"><b>Fornecedor</b>: <?php echo '' . $fornecedor['NomeFornecedor'] . '' ?></h3>
+							<h5 class="text-left"><b>Tel</b>: <?php echo '' . $fornecedor['Telefone1'] . '' ?> - <b>ID</b>: <?php echo '' . $fornecedor['idApp_Fornecedor'] . '' ?> </h5>
+						<?php } ?>
+							<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
 									<th class="col-md-2" scope="col">Tipo</th>
@@ -247,17 +250,17 @@
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-3" scope="col">Produtos</th>
-									<th class="col-md-3" scope="col">Serviços</th>
-									<th class="col-md-3" scope="col">Orçam.</th>
-									<th class="col-md-3" scope="col">Frete</th>
+									<th class="col-md-3" scope="col">Despesa</th>
+									<th class="col-md-3" scope="col">Prd + Srv</th>
+									<th class="col-md-3" scope="col">Desp + Prd + Srv</th>
+									<th class="col-md-3" scope="col">Taxa Entrega</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td>R$ <?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
-									<td>R$ <?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
+									<td>R$ <?php echo number_format($orcatrata['ValorExtraOrca'], 2, ',', '.') ?></td>
 									<td>R$ <?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
+									<td>R$ <?php echo number_format($orcatrata['ValorSomaOrca'], 2, ',', '.') ?></td>
 									<td>R$ <?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>
 								</tr>
 							</tbody>

@@ -221,7 +221,7 @@
 						<div class="panel-heading text-left">
 							<div class="row">
 								<div class="col-md-3">
-									<label for="DataInicio">Pedido Inc.</label>
+									<label for="DataInicio">Receita Inc.</label>
 									<div class="input-group DatePicker">
 										<span class="input-group-addon" disabled>
 											<span class="glyphicon glyphicon-calendar"></span>
@@ -231,7 +231,7 @@
 									</div>
 								</div>
 								<div class="col-md-3">
-									<label for="DataFim">Pedido Fim</label>
+									<label for="DataFim">Receita Fim</label>
 									<div class="input-group DatePicker">
 										<span class="input-group-addon" disabled>
 											<span class="glyphicon glyphicon-calendar"></span>

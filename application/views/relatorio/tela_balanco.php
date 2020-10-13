@@ -221,10 +221,10 @@
 			<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-search"></span>Filtro
 			</button>
-			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/parcelasrec" role="button">
+			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/orcamento" role="button">
 				<span class="glyphicon glyphicon-search"></span>Receitas
 			</a>			
-			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>relatorio/parcelasdesp" role="button">
+			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>relatorio/orcamento2" role="button">
 				<span class="glyphicon glyphicon-search"></span>Despesas
 			</a>
 		</div>
@@ -263,10 +263,10 @@
 			<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 				<span class="glyphicon glyphicon-search"></span>Filtro
 			</button>
-			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/parcelasrec" role="button">
+			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/orcamento" role="button">
 				<span class="glyphicon glyphicon-search"></span>Receitas
 			</a>			
-			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>relatorio/parcelasdesp" role="button">
+			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>relatorio/orcamento2" role="button">
 				<span class="glyphicon glyphicon-search"></span>Despesas
 			</a>
 		</div>

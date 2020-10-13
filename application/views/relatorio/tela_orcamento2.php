@@ -8,7 +8,7 @@
 				<h4><?php echo $titulo; ?></h4>
 				<div class="input-group col-md-3">
 					<span class="input-group-btn">
-						<button class="btn btn-info btn-md" type="submit">
+						<button class="btn btn-danger btn-md" type="submit">
 							<span class="glyphicon glyphicon-search"></span> 
 						</button>
 					</span>
@@ -30,12 +30,12 @@
 	<div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-				<div class="modal-header bg-info">
+				<div class="modal-header bg-danger">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das Despesas</h4>
 				</div>
 				<div class="modal-footer">
-					<div class="panel panel-info">
+					<div class="panel panel-danger">
 						<div class="panel-heading text-left">
 							<div class="row">	
 								<div class="col-md-3">
@@ -134,7 +134,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="panel panel-info">
+					<div class="panel panel-danger">
 						<div class="panel-heading text-left">	
 							<div class="row">	
 								<div class="col-md-3">
@@ -217,11 +217,11 @@
 							</div>
 						</div>
 					</div>
-					<div class="panel panel-info">
+					<div class="panel panel-danger">
 						<div class="panel-heading text-left">
 							<div class="row">
 								<div class="col-md-3">
-									<label for="DataInicio">Pedido Inc.</label>
+									<label for="DataInicio">Despesa Inc.</label>
 									<div class="input-group DatePicker">
 										<span class="input-group-addon" disabled>
 											<span class="glyphicon glyphicon-calendar"></span>
@@ -231,7 +231,7 @@
 									</div>
 								</div>
 								<div class="col-md-3">
-									<label for="DataFim">Pedido Fim</label>
+									<label for="DataFim">Despesa Fim</label>
 									<div class="input-group DatePicker">
 										<span class="input-group-addon" disabled>
 											<span class="glyphicon glyphicon-calendar"></span>
@@ -286,7 +286,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="panel panel-info">
+					<div class="panel panel-danger">
 						<div class="panel-heading text-left">
 							<div class="row">
 								<div class="form-footer col-md-4">
