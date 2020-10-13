@@ -46,7 +46,8 @@
 							<th class="active">Cont.</th>
 							<th class="active">Pedido</th>
 							<th class="active">Cliente</th>
-							<th class="active">Valor</th>
+							<th class="active">Rec</th>
+							<th class="active">Prd+Srv</th>
 							<th class="active">Frete</th>
 							<th class="active">Total</th>
 							<th class="active">Comb.</th>
@@ -59,9 +60,10 @@
 							<th class="active">Entrega</th>
 							<th class="active">Pagam.</th>
 							<th class="active">Form.Pag</th>
-							<th class="active">Dt. Orç.</th>
-							<th class="active">Dt. Ent.</th>
-							<th class="active">Dt. Venc.</th>
+							<th class="active">Dt.Orç.</th>
+							<th class="active">Dt.Ent.</th>
+							<th class="active">Dt.Vnc.</th>
+							<th class="active">Dt.Vnc.Prc.</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -88,6 +90,7 @@
 								echo '<td>' . $row['NomeCliente'] . '</td>';
 								#echo '<td>' . $row['DataEntradaOrca'] . '</td>';
 								#echo '<td>' . $row['DataPrazo'] . '</td>';
+								echo '<td class="text-left">' . $row['ValorExtraOrca'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorRestanteOrca'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorFrete'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorTotalOrca'] . '</td>';
@@ -104,6 +107,7 @@
 								echo '<td>' . $row['DataOrca'] . '</td>';
 								echo '<td>' . $row['DataEntregaOrca'] . '</td>';
 								echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
+								echo '<td>' . $row['DataVencimento'] . '</td>';
 								#echo '<td>' . $row['Descricao'] . '</td>';
 								#echo '<td>' . $row['Nome'] . '</td>';
 								#echo '</div>';

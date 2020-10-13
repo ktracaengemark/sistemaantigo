@@ -165,7 +165,7 @@
 			<div class="modal-content">
 				<div class="modal-header bg-info">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das Cobranças</h4>
+					<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das Receitas</h4>
 				</div>
 				<div class="modal-footer">
 					<!--
@@ -415,7 +415,7 @@
 							</div>	
 							<div class="row">
 								<div class="col-md-3">
-									<label for="DataInicio3">Venc.Parc.Inc.</label>
+									<label for="DataInicio3">Vnc.Inc.</label>
 									<div class="input-group DatePicker">
 										<span class="input-group-addon" disabled>
 											<span class="glyphicon glyphicon-calendar"></span>
@@ -425,13 +425,33 @@
 									</div>
 								</div>
 								<div class="col-md-3">
-									<label for="DataFim3">Venc.Parc.Fim</label>
+									<label for="DataFim3">Vnc.Fim</label>
 									<div class="input-group DatePicker">
 										<span class="input-group-addon" disabled>
 											<span class="glyphicon glyphicon-calendar"></span>
 										</span>
 										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
 												name="DataFim3" value="<?php echo set_value('DataFim3', $query['DataFim3']); ?>">
+									</div>
+								</div>
+								<div class="col-md-3">
+									<label for="DataInicio4">Vnc.Parc. Inc.</label>
+									<div class="input-group DatePicker">
+										<span class="input-group-addon" disabled>
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+												name="DataInicio4" value="<?php echo set_value('DataInicio4', $query['DataInicio4']); ?>">
+									</div>
+								</div>
+								<div class="col-md-3">
+									<label for="DataFim4">Vnc.Parc. Fim</label>
+									<div class="input-group DatePicker">
+										<span class="input-group-addon" disabled>
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+												name="DataFim4" value="<?php echo set_value('DataFim4', $query['DataFim4']); ?>">
 									</div>
 								</div>
 							</div>

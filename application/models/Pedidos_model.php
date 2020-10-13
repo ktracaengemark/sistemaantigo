@@ -35,11 +35,20 @@ class Pedidos_model extends CI_Model {
 
         if ($data['DataFim3']) {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '" AND PR.DataVencimento <= "' . $data['DataFim3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '")';
         }
         else {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '")';
+        }
+
+        if ($data['DataFim4']) {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND PR.DataVencimento <= "' . $data['DataFim4'] . '")';
+        }
+        else {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }		
 		
 		//$data['Orcamento'] = ($data['Orcamento']) ? ' OT.idApp_OrcaTrata = ' . $data['Orcamento'] . ' AND ' : FALSE;
@@ -78,6 +87,7 @@ class Pedidos_model extends CI_Model {
 				' . $consulta . ' AND
 				' . $consulta2 . ' AND
 				' . $consulta3 . ' AND
+				' . $consulta4 . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
 				' . $filtro6 . '
@@ -153,11 +163,20 @@ class Pedidos_model extends CI_Model {
 
         if ($data['DataFim3']) {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '" AND PR.DataVencimento <= "' . $data['DataFim3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '")';
         }
         else {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '")';
+        }
+
+        if ($data['DataFim4']) {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND PR.DataVencimento <= "' . $data['DataFim4'] . '")';
+        }
+        else {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }		
 		
 		//$data['Orcamento'] = ($data['Orcamento']) ? ' OT.idApp_OrcaTrata = ' . $data['Orcamento'] . ' AND ' : FALSE;
@@ -196,6 +215,7 @@ class Pedidos_model extends CI_Model {
 				' . $consulta . ' AND
 				' . $consulta2 . ' AND
 				' . $consulta3 . ' AND
+				' . $consulta4 . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
 				' . $filtro6 . '
@@ -272,11 +292,20 @@ class Pedidos_model extends CI_Model {
 
         if ($data['DataFim3']) {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '" AND PR.DataVencimento <= "' . $data['DataFim3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '")';
         }
         else {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '")';
+        }
+
+        if ($data['DataFim4']) {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND PR.DataVencimento <= "' . $data['DataFim4'] . '")';
+        }
+        else {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }		
 		
 		//$data['Orcamento'] = ($data['Orcamento']) ? ' OT.idApp_OrcaTrata = ' . $data['Orcamento'] . ' AND ' : FALSE;
@@ -315,6 +344,7 @@ class Pedidos_model extends CI_Model {
 				' . $consulta . ' AND
 				' . $consulta2 . ' AND
 				' . $consulta3 . ' AND
+				' . $consulta4 . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
 				' . $filtro6 . '
@@ -395,11 +425,20 @@ class Pedidos_model extends CI_Model {
 
         if ($data['DataFim3']) {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '" AND PR.DataVencimento <= "' . $data['DataFim3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '")';
         }
         else {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '")';
+        }
+
+        if ($data['DataFim4']) {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND PR.DataVencimento <= "' . $data['DataFim4'] . '")';
+        }
+        else {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }		
 		
 		//$data['Orcamento'] = ($data['Orcamento']) ? ' OT.idApp_OrcaTrata = ' . $data['Orcamento'] . ' AND ' : FALSE;
@@ -438,6 +477,7 @@ class Pedidos_model extends CI_Model {
 				' . $consulta . ' AND
 				' . $consulta2 . ' AND
 				' . $consulta3 . ' AND
+				' . $consulta4 . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
 				' . $filtro6 . '
@@ -518,11 +558,20 @@ class Pedidos_model extends CI_Model {
 
         if ($data['DataFim3']) {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '" AND PR.DataVencimento <= "' . $data['DataFim3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '")';
         }
         else {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '")';
+        }
+
+        if ($data['DataFim4']) {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND PR.DataVencimento <= "' . $data['DataFim4'] . '")';
+        }
+        else {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }		
 		
 		//$data['Orcamento'] = ($data['Orcamento']) ? ' OT.idApp_OrcaTrata = ' . $data['Orcamento'] . ' AND ' : FALSE;
@@ -561,6 +610,7 @@ class Pedidos_model extends CI_Model {
 				' . $consulta . ' AND
 				' . $consulta2 . ' AND
 				' . $consulta3 . ' AND
+				' . $consulta4 . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
 				' . $filtro6 . '
@@ -640,11 +690,20 @@ class Pedidos_model extends CI_Model {
 
         if ($data['DataFim3']) {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '" AND PR.DataVencimento <= "' . $data['DataFim3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '")';
         }
         else {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '")';
+        }
+
+        if ($data['DataFim4']) {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND PR.DataVencimento <= "' . $data['DataFim4'] . '")';
+        }
+        else {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }		
 		
 		//$data['Orcamento'] = ($data['Orcamento']) ? ' OT.idApp_OrcaTrata = ' . $data['Orcamento'] . ' AND ' : FALSE;
@@ -683,6 +742,7 @@ class Pedidos_model extends CI_Model {
 				' . $consulta . ' AND
 				' . $consulta2 . ' AND
 				' . $consulta3 . ' AND
+				' . $consulta4 . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
 				' . $filtro6 . '
@@ -759,11 +819,20 @@ class Pedidos_model extends CI_Model {
 
         if ($data['DataFim3']) {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '" AND PR.DataVencimento <= "' . $data['DataFim3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '")';
         }
         else {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '")';
+        }
+
+        if ($data['DataFim4']) {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND PR.DataVencimento <= "' . $data['DataFim4'] . '")';
+        }
+        else {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }		
 		
 		//$data['Orcamento'] = ($data['Orcamento']) ? ' OT.idApp_OrcaTrata = ' . $data['Orcamento'] . ' AND ' : FALSE;
@@ -802,6 +871,7 @@ class Pedidos_model extends CI_Model {
 				' . $consulta . ' AND
 				' . $consulta2 . ' AND
 				' . $consulta3 . ' AND
+				' . $consulta4 . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
 				' . $filtro6 . '

@@ -6738,11 +6738,11 @@ exit();*/
 
 		if ($data['DataFim4']) {
             $consulta4 =
-                '(OT.DataQuitado >= "' . $data['DataInicio4'] . '" AND OT.DataQuitado <= "' . $data['DataFim4'] . '")';
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND PR.DataVencimento <= "' . $data['DataFim4'] . '")';
         }
         else {
             $consulta4 =
-                '(OT.DataQuitado >= "' . $data['DataInicio4'] . '")';
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
@@ -6775,6 +6775,7 @@ exit();*/
 				OT.ValorFrete,
 				OT.ValorTotalOrca,
 				OT.ValorEntradaOrca,
+				OT.ValorExtraOrca,
 				OT.ValorRestanteOrca,
 				OT.DataVencimentoOrca,
 				OT.DataEntregaOrca,
@@ -6793,12 +6794,21 @@ exit();*/
 				OT.ObsOrca,
 				OT.Descricao,
 				OT.Entregador,
+                PR.idSis_Empresa,
+				PR.Parcela,
+				CONCAT(PR.Parcela) AS Parcela,
+                DATE_FORMAT(PR.DataVencimento, "%d/%m/%Y") AS DataVencimento,
+                PR.ValorParcela,
+                PR.DataPago,
+                PR.ValorPago,
+                PR.Quitado,
 				TFP.FormaPag,
 				TSU.Nome
 				
             FROM
                 App_OrcaTrata AS OT
 				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+				LEFT JOIN App_Parcelas AS PR ON PR.idApp_OrcaTrata = OT.idApp_OrcaTrata
 				LEFT JOIN Sis_Usuario AS TSU ON TSU.idSis_Usuario = OT.Entregador
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
@@ -6808,6 +6818,7 @@ exit();*/
                 (' . $consulta . ') AND
 				(' . $consulta2 . ') AND
 				(' . $consulta3 . ') AND
+				(' . $consulta4 . ') AND
                 ' . $filtro1 . '
                 ' . $filtro2 . '
 				' . $filtro3 . '
@@ -6822,6 +6833,8 @@ exit();*/
 				' . $data['Entregador'] . '
 				' . $data['TipoFrete'] . '
 				' . $data['FormaPag'] . '
+			GROUP BY
+                OT.idApp_OrcaTrata
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');
@@ -6869,6 +6882,7 @@ exit();*/
 
 				$somarestante += $row->ValorRestanteOrca;
                 $row->ValorRestanteOrca = number_format($row->ValorRestanteOrca, 2, ',', '.');
+                $row->ValorExtraOrca = number_format($row->ValorExtraOrca, 2, ',', '.');
 
 				$somatotal += $row->ValorTotalOrca;
                 $row->ValorTotalOrca = number_format($row->ValorTotalOrca, 2, ',', '.');
@@ -7114,11 +7128,11 @@ exit();*/
 
 		if ($data['DataFim4']) {
             $consulta4 =
-                '(OT.DataQuitado >= "' . $data['DataInicio4'] . '" AND OT.DataQuitado <= "' . $data['DataFim4'] . '")';
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND PR.DataVencimento <= "' . $data['DataFim4'] . '")';
         }
         else {
             $consulta4 =
-                '(OT.DataQuitado >= "' . $data['DataInicio4'] . '")';
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Fornecedor'] = ($data['Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['Fornecedor'] : FALSE;
@@ -7153,6 +7167,7 @@ exit();*/
 				OT.ValorTotalOrca,
 				OT.ValorEntradaOrca,
 				OT.ValorRestanteOrca,
+				OT.ValorExtraOrca,
 				OT.DataVencimentoOrca,
 				OT.DataEntregaOrca,
                 OT.ConcluidoOrca,
@@ -7170,12 +7185,21 @@ exit();*/
 				OT.ObsOrca,
 				OT.Descricao,
 				OT.Entregador,
+                PR.idSis_Empresa,
+				PR.Parcela,
+				CONCAT(PR.Parcela) AS Parcela,
+                DATE_FORMAT(PR.DataVencimento, "%d/%m/%Y") AS DataVencimento,
+                PR.ValorParcela,
+                PR.DataPago,
+                PR.ValorPago,
+                PR.Quitado,
 				TFP.FormaPag,
 				TSU.Nome
 				
             FROM
                 App_OrcaTrata AS OT
 				LEFT JOIN App_Fornecedor AS C ON C.idApp_Fornecedor = OT.idApp_Fornecedor
+				LEFT JOIN App_Parcelas AS PR ON PR.idApp_OrcaTrata = OT.idApp_OrcaTrata
 				LEFT JOIN Sis_Usuario AS TSU ON TSU.idSis_Usuario = OT.Entregador
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
@@ -7185,6 +7209,7 @@ exit();*/
                 (' . $consulta . ') AND
 				(' . $consulta2 . ') AND
 				(' . $consulta3 . ') AND
+				(' . $consulta4 . ') AND
                 ' . $filtro1 . '
                 ' . $filtro2 . '
 				' . $filtro3 . '
@@ -7199,6 +7224,8 @@ exit();*/
 				' . $data['Entregador'] . '
 				' . $data['TipoFrete'] . '
 				' . $data['FormaPag'] . '
+			GROUP BY
+                OT.idApp_OrcaTrata
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');
@@ -7246,6 +7273,7 @@ exit();*/
 
 				$somarestante += $row->ValorRestanteOrca;
                 $row->ValorRestanteOrca = number_format($row->ValorRestanteOrca, 2, ',', '.');
+                $row->ValorExtraOrca = number_format($row->ValorExtraOrca, 2, ',', '.');
 
 				$somatotal += $row->ValorTotalOrca;
                 $row->ValorTotalOrca = number_format($row->ValorTotalOrca, 2, ',', '.');

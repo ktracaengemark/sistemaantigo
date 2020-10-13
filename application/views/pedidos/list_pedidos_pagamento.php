@@ -15,7 +15,7 @@
 							<th class="active">Cliente</th>
 							<th class="active">Compra</th>
 							<th class="active">Parcela</th>
-							<th class="active">Venc.</th>
+							<th class="active">Vnc.Prc.</th>
 							<th class="active">Pago?</th>
 						</tr>
 					</thead>
