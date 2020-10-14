@@ -751,18 +751,28 @@ function calculaResta(entrada) {
 }
 
 function calculaTotal(entrada) {
-
-    //recebe o valor do orçamento
+	//recebe o Nivel da Empresa
+	var nivelempresa = $("#NivelEmpresa").val();
+	//console.log(nivelempresa +' - Nível da Empresa');
+    
+	//recebe o valor do orçamento
     var valorextraorca = $("#ValorExtraOrca").val();
-	console.log(valorextraorca +' valor extra');
+	//console.log(valorextraorca +' - Valor extra');
     var orcamento = $("#ValorRestanteOrca").val();
+	//console.log(orcamento +' - Valor Prd+Srv');
 	var devolucao = $("#ValorFrete").val();
-    var restaT = -(- devolucao.replace(".","").replace(",",".") - orcamento.replace(".","").replace(",",".") - valorextraorca.replace(".","").replace(",","."));
-    var valorsomaorca = -(- valorextraorca.replace(".","").replace(",",".") - orcamento.replace(".","").replace(",","."));
-
+	if(nivelempresa >= 4){
+		var restaT = -(- devolucao.replace(".","").replace(",",".") - orcamento.replace(".","").replace(",",".") - valorextraorca.replace(".","").replace(",","."));
+		var valorsomaorca = -(- valorextraorca.replace(".","").replace(",",".") - orcamento.replace(".","").replace(",","."));
+	}else{
+		var restaT = -(- devolucao - orcamento - valorextraorca.replace(".","").replace(",","."));
+		var valorsomaorca = -(- valorextraorca.replace(".","").replace(",",".") - orcamento);
+	}
     restaT = mascaraValorReal(restaT);
+	//console.log(restaT +' - Valor Total');
+	
 	valorsomaorca = mascaraValorReal(valorsomaorca);
-	console.log(valorsomaorca +' valor soma');
+	//console.log(valorsomaorca +' - Valor soma');
 
     //o valor é escrito no seu campo no formulário
     $('#ValorSomaOrca').val(valorsomaorca);

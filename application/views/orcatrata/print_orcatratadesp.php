@@ -251,33 +251,33 @@
 							<thead>
 								<tr>
 									<th class="col-md-3" scope="col">Despesa</th>
-									<th class="col-md-3" scope="col">Prd + Srv</th>
+									<th class="col-md-3" scope="col">Prudutos</th>
+									<th class="col-md-3" scope="col">Servicos</th>
 									<th class="col-md-3" scope="col">Desp + Prd + Srv</th>
-									<th class="col-md-3" scope="col">Taxa Entrega</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>R$ <?php echo number_format($orcatrata['ValorExtraOrca'], 2, ',', '.') ?></td>
-									<td>R$ <?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
+									<td>R$ <?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
+									<td>R$ <?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
 									<td>R$ <?php echo number_format($orcatrata['ValorSomaOrca'], 2, ',', '.') ?></td>
-									<td>R$ <?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>
 								</tr>
 							</tbody>
 							<thead>
 								<tr>
+									<th class="col-md-3" scope="col">Taxa Entrega</th>
 									<th class="col-md-3" scope="col">Total</th>
 									<th class="col-md-3" scope="col">Troco para</th>
 									<th class="col-md-3" scope="col">Troco</th>
-									<th class="col-md-3" scope="col"></th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
+									<td>R$ <?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>
 									<td>R$ <?php echo number_format($orcatrata['ValorTotalOrca'], 2, ',', '.') ?></td>
 									<td>R$ <?php echo number_format($orcatrata['ValorDinheiro'], 2, ',', '.') ?></td>
 									<td>R$ <?php echo number_format($orcatrata['ValorTroco'], 2, ',', '.') ?></td>
-									<td></td>
 								</tr>
 							</tbody>
 						</table>

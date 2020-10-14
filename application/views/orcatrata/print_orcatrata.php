@@ -77,28 +77,6 @@
 		<div class="row">	
 			<div class="panel panel-info">
 				<div class="panel-heading">
-					<!--
-					<div class="panel-heading">	
-						<div class="row">
-							<div class="panel-heading col-md-3 text-left">
-								<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>" class="img-responsive" width='120'>
-							</div>
-							<div class="col-md-9 text-left">
-								<h2><?php echo '<strong>' . $query['NomeEmpresa'] . '</strong>' ?></h2>
-								<h4>CNPJ:<?php echo '<strong>' . $orcatrata['Cnpj'] . '</strong>' ?></h4>
-								<h4>Endereço:<?php echo '<small>' . $orcatrata['EnderecoEmpresa'] . '</small> <small>' . $orcatrata['NumeroEmpresa'] . '</small> <small>' . $orcatrata['ComplementoEmpresa'] . '</small><br>
-														<small>' . $orcatrata['BairroEmpresa'] . '</small> - <small>' . $orcatrata['MunicipioEmpresa'] . '</small> - <small>' . $orcatrata['EstadoEmpresa'] . '</small>' ?></h4>
-								<h5>Colab.:<?php echo '<strong>' . $usuario['Nome'] . '</strong>' ?></h5>
-								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>								
-								
-								<h3 class="text-left">Orçamento<?php echo ' - <strong>' . $query['idApp_OrcaTrata'] . '</strong>' ?> </h3>
-								
-								<?php } ?>							
-															
-							</div>						
-						</div>
-					</div>
-					-->
 					<table class="table table-bordered table-condensed table-striped">
 						<tbody>
 							<tr>
@@ -108,11 +86,11 @@
 								<h4>Endereço:<?php echo '<small>' . $orcatrata['EnderecoEmpresa'] . '</small> <small>' . $orcatrata['NumeroEmpresa'] . '</small> <small>' . $orcatrata['ComplementoEmpresa'] . '</small><br>
 														<small>' . $orcatrata['BairroEmpresa'] . '</small> - <small>' . $orcatrata['MunicipioEmpresa'] . '</small> - <small>' . $orcatrata['EstadoEmpresa'] . '</small>' ?></h4>
 								<h5>Colab.:<?php echo '<strong>' . $usuario['Nome'] . '</strong>' ?></h5>
-								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>								
+																
 								
 								<h4 class="text-center">Orçamento<?php echo ' - <strong>' . $query['idApp_OrcaTrata'] . '</strong>' ?> </h4>
 								
-								<?php } ?></td>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -215,7 +193,7 @@
 						<?php } else echo '<h3 class="text-left">S/Serviços</h3>';{?>
 						<?php } ?>							
 						<?php } ?>
-												
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>						
 						<h3 class="text-left"><b>Entrega</b>: <?php echo '<strong>' . $query['idApp_OrcaTrata'] . '</strong>' ?>
 						<?php if($orcatrata['idApp_Cliente'] != 0) { ?>
 							- <b> Cliente:</b> <?php echo '' . $cliente['NomeCliente'] . '' ?> </h3><h4>Tel: <?php echo '' . $cliente['CelularCliente'] . '' ?> - id: <?php echo '' . $cliente['idApp_Cliente'] . '' ?></h4>
@@ -303,39 +281,39 @@
 								</tr>
 							</tbody>
 						</table>
+						<?php } ?>
 						<h3 class="text-left"><b>Pagamento</b></h3>
-						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-3" scope="col">Receita</th>
-									<th class="col-md-3" scope="col">Prd + Srv</th>
-									<th class="col-md-3" scope="col">Rec + Prd + Srv.</th>
-									<th class="col-md-3" scope="col">Taxa Entrega</th>
+									<th class="col-md-3" scope="col">Despesa</th>
+									<th class="col-md-3" scope="col">Prudutos</th>
+									<th class="col-md-3" scope="col">Servicos</th>
+									<th class="col-md-3" scope="col">Desp + Prd + Srv</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>R$ <?php echo number_format($orcatrata['ValorExtraOrca'], 2, ',', '.') ?></td>
-									<td>R$ <?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
+									<td>R$ <?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
+									<td>R$ <?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
 									<td>R$ <?php echo number_format($orcatrata['ValorSomaOrca'], 2, ',', '.') ?></td>
-									<td>R$ <?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>
 								</tr>
 							</tbody>
 							<thead>
 								<tr>
-									<th class="col-md-3" scope="col">Total Orç.</th>
+									<th class="col-md-3" scope="col">Taxa Entrega</th>
+									<th class="col-md-3" scope="col">Total</th>
 									<th class="col-md-3" scope="col">Troco para</th>
 									<th class="col-md-3" scope="col">Troco</th>
-									<th class="col-md-3" scope="col"></th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
+									<td>R$ <?php echo number_format($orcatrata['ValorFrete'], 2, ',', '.') ?></td>
 									<td>R$ <?php echo number_format($orcatrata['ValorTotalOrca'], 2, ',', '.') ?></td>
 									<td>R$ <?php echo number_format($orcatrata['ValorDinheiro'], 2, ',', '.') ?></td>
 									<td>R$ <?php echo number_format($orcatrata['ValorTroco'], 2, ',', '.') ?></td>
-									<td></td>
 								</tr>
 							</tbody>
 						</table>
@@ -357,26 +335,6 @@
 								</tr>
 							</tbody>
 						</table>
-						<?php } else {?>
-						<table class="table table-bordered table-condensed table-striped">
-							<thead>
-								<tr>
-									<th class="col-md-3" scope="col">Total R$</th>
-									<th class="col-md-3" scope="col">Forma</th>
-									<th class="col-md-3" scope="col">Pago</th>
-									<th class="col-md-3" scope="col">Venc.</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><?php echo number_format($orcatrata['ValorTotalOrca'], 2, ',', '.') ?></td>
-									<td><?php echo $orcatrata['Modalidade'] ?></td>
-									<td><?php echo $orcatrata['QtdParcelasOrca'] ?>X<?php echo $orcatrata['FormaPag'] ?></td>
-									<td><?php echo $orcatrata['DataVencimentoOrca'] ?></td>
-								</tr>
-							</tbody>
-						</table>						
-						<?php } ?>
 						
 						<?php if( isset($count['PRCount']) ) { ?>
 						<h3 class="text-left">Parcelas</h3>
