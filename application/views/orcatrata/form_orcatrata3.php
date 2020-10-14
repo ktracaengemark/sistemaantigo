@@ -605,12 +605,12 @@
 													</div>
 												</div>
 											</div>
-											<div class="col-md-8">
+											<div class="col-md-4">
 												<div class="panel panel-default">
-													<div class="panel-heading">	
+													<div class="panel-heading">
 														<div class="row">
-															<div class="col-md-4">
-																<label for="ValorExtraOrca">Receita:</label>
+															<div class="col-md-6">
+																<label for="ValorExtraOrca">Extra:</label>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon " id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorExtraOrca" maxlength="10" placeholder="0,00" 
@@ -619,8 +619,17 @@
 																		   name="ValorExtraOrca" value="<?php echo $orcatrata['ValorExtraOrca'] ?>">
 																</div>
 															</div>
-															<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-															<div class="col-md-4">
+															
+														</div>
+													</div>
+												</div>	
+											</div>
+											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+											<div class="col-md-4">
+												<div class="panel panel-default">
+													<div class="panel-heading">
+														<div class="row">
+															<div class="col-md-6">
 																<label for="ValorRestanteOrca">Prd + Srv:</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -630,8 +639,8 @@
 																		   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
 																</div>
 															</div>
-															<div class="col-md-4">
-																<label for="ValorSomaOrca">Total Orçamento:</label><br>
+															<div class="col-md-6">
+																<label for="ValorSomaOrca">Extra + Prd + Srv:</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorSomaOrca" maxlength="10" placeholder="0,00" readonly=''
@@ -640,14 +649,14 @@
 																		   name="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>">
 																</div>
 															</div>
-															<?php }else{ ?>
-																<input type="hidden" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>"/>
-																<input type="hidden" name="ValorSomaOrca" id="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>"/>
-															<?php } ?>
-														</div>
+														</div>	
 													</div>
 												</div>
 											</div>
+											<?php }else{ ?>
+												<input type="hidden" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>"/>
+												<input type="hidden" name="ValorSomaOrca" id="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>"/>
+											<?php } ?>
 										</div>
 									</div>
 								</div>

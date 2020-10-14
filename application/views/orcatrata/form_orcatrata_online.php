@@ -486,33 +486,42 @@
 													</div>
 												</div>
 											</div>
-											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-											<div class="col-md-8">
+											<div class="col-md-4">
 												<div class="panel panel-default">
 													<div class="panel-heading">
 														<div class="row">
-															<div class="col-md-4">
-																<label for="ValorExtraOrca">Valor da Receita:</label>
+															<div class="col-md-6">
+																<label for="ValorExtraOrca">Extra:</label>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon " id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorExtraOrca" maxlength="10" placeholder="0,00" 
-																		   data-toggle="collapse" onkeyup="calculaParcelas(),calculaTotal(this.value),calculaTroco()" onchange="calculaParcelas(),calculaTroco()" onkeydown="calculaParcelas(),calculaTroco()"
+																		   data-toggle="collapse" onkeyup="calculaParcelas(),calculaTotal(this.value)" onchange="calculaParcelas(),calculaTotal(this.value)" onkeydown="calculaParcelas(),calculaTotal(this.value)"
 																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																		   name="ValorExtraOrca" value="<?php echo $orcatrata['ValorExtraOrca'] ?>">
 																</div>
 															</div>
-															<div class="col-md-4">
+															
+														</div>
+													</div>
+												</div>	
+											</div>
+											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+											<div class="col-md-4">
+												<div class="panel panel-default">
+													<div class="panel-heading">
+														<div class="row">
+															<div class="col-md-6">
 																<label for="ValorRestanteOrca">Prd + Srv:</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorRestanteOrca" maxlength="10" placeholder="0,00" readonly=''
-																		   data-toggle="collapse" onkeyup="calculaParcelas(),calculaTotal(this.value),calculaTroco()" onchange="calculaParcelas(),calculaTroco()" onkeydown="calculaParcelas(),calculaTroco()"
+																		   data-toggle="collapse" onkeyup="calculaParcelas(),calculaTotal(this.value)" onchange="calculaParcelas()" onkeydown="calculaParcelas()"
 																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																		   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
 																</div>
 															</div>
-															<div class="col-md-4">
-																<label for="ValorSomaOrca">Total Orçamento:</label><br>
+															<div class="col-md-6">
+																<label for="ValorSomaOrca">Extra + Prd + Srv:</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorSomaOrca" maxlength="10" placeholder="0,00" readonly=''
@@ -521,7 +530,7 @@
 																		   name="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>">
 																</div>
 															</div>
-														</div>
+														</div>	
 													</div>
 												</div>
 											</div>

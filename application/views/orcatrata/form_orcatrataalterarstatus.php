@@ -136,7 +136,7 @@
 																	<input type="text" class="form-control Numero text-left" maxlength="10" readonly="" id="SubtotalQtdProduto<?php echo $i ?>"
 																		   name="SubtotalQtdProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalQtdProduto'] ?>">
 																</div>
-																<div class="col-md-2">
+																<div class="col-md-3">
 																	<label for="ValorProduto">Valor da Embl</label>
 																	<div class="input-group">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -145,7 +145,7 @@
 																			name="ValorProduto<?php echo $i ?>" readonly="" value="<?php echo $produto[$i]['ValorProduto'] ?>">
 																	</div>
 																</div>
-																<div class="col-md-2">
+																<div class="col-md-3">
 																	<label for="SubtotalProduto">Sub.Valor.Prod.</label>
 																	<div class="input-group">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -250,7 +250,7 @@
 																<input type="hidden" class="form-control Numero" id="QtdIncrementoServico<?php echo $i ?>" name="QtdIncrementoServico<?php echo $i ?>" value="<?php echo $servico[$i]['QtdIncrementoProduto'] ?>">
 																<input type="hidden" class="form-control " id="SubtotalComissaoServico<?php echo $i ?>" name="SubtotalComissaoServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalComissaoProduto'] ?>">
 																<input type="hidden" class="form-control " id="SubtotalQtdServico<?php echo $i ?>" name="SubtotalQtdServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalQtdProduto'] ?>">
-																<div class="col-md-2">
+																<div class="col-md-3">
 																	<label for="ValorServico">Valor do Serviço</label>
 																	<div class="input-group">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -259,7 +259,7 @@
 																			name="ValorServico<?php echo $i ?>" readonly="" value="<?php echo $servico[$i]['ValorProduto'] ?>">
 																	</div>
 																</div>
-																<div class="col-md-2">
+																<div class="col-md-3">
 																	<label for="SubtotalServico">Sub.Valor.Serv:</label>
 																	<div class="input-group">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -308,7 +308,7 @@
 																				</div>
 																			</div>
 																			<input type="hidden" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
-																			<div class="col-md-4">
+																			<div class="col-md-6">
 																				<!--<label for="ValorOrca">Valor em Produtos:</label><br>-->
 																				<div class="input-group" id="txtHint">
 																					<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -361,7 +361,7 @@
 																					</div>
 																				</div>
 																			</div>
-																			<div class="col-md-4">
+																			<div class="col-md-6">
 																				<div class="input-group" id="txtHint">
 																					<span class="input-group-addon" id="basic-addon1">R$</span>
 																					<input type="text" class="form-control text-right Valor" id="ValorDev" maxlength="10" placeholder="0,00" readonly=""
@@ -387,29 +387,38 @@
 														<div class="row">	
 															<div class="col-md-12">
 																<label for="Descricao">Obs/Descrição:</label>
-																<textarea class="form-control" id="Descricao" <?php echo $readonly; ?> placeholder="Observaçoes:" readonly=''
+																<textarea class="form-control" id="Descricao" <?php echo $readonly; ?> placeholder="Observaçoes:"
 																		  name="Descricao"><?php echo $orcatrata['Descricao']; ?></textarea>
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
-											<div class="col-md-8">
+											<div class="col-md-4">
 												<div class="panel panel-default">
-													<div class="panel-heading">	
+													<div class="panel-heading">
 														<div class="row">
-															<div class="col-md-4">
-																<label for="ValorExtraOrca">Receita:</label>
+															<div class="col-md-6">
+																<label for="ValorExtraOrca">Extra:</label>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon " id="basic-addon1">R$</span>
-																	<input type="text" class="form-control Valor" id="ValorExtraOrca" maxlength="10" placeholder="0,00" readonly=''
+																	<input type="text" class="form-control Valor" id="ValorExtraOrca" maxlength="10" placeholder="0,00" 
 																		   data-toggle="collapse" onkeyup="calculaParcelas(),calculaTotal(this.value)" onchange="calculaParcelas(),calculaTotal(this.value)" onkeydown="calculaParcelas(),calculaTotal(this.value)"
 																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																		   name="ValorExtraOrca" value="<?php echo $orcatrata['ValorExtraOrca'] ?>">
 																</div>
 															</div>
-															<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-															<div class="col-md-4">
+															
+														</div>
+													</div>
+												</div>	
+											</div>
+											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+											<div class="col-md-4">
+												<div class="panel panel-default">
+													<div class="panel-heading">
+														<div class="row">
+															<div class="col-md-6">
 																<label for="ValorRestanteOrca">Prd + Srv:</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -419,8 +428,8 @@
 																		   name="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>">
 																</div>
 															</div>
-															<div class="col-md-4">
-																<label for="ValorSomaOrca">Total Orçamento:</label><br>
+															<div class="col-md-6">
+																<label for="ValorSomaOrca">Extra + Prd + Srv:</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorSomaOrca" maxlength="10" placeholder="0,00" readonly=''
@@ -429,14 +438,14 @@
 																		   name="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>">
 																</div>
 															</div>
-															<?php }else{ ?>
-																<input type="hidden" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>"/>
-																<input type="hidden" name="ValorSomaOrca" id="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>"/>
-															<?php } ?>
-														</div>
+														</div>	
 													</div>
 												</div>
 											</div>
+											<?php }else{ ?>
+												<input type="hidden" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>"/>
+												<input type="hidden" name="ValorSomaOrca" id="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>"/>
+											<?php } ?>
 										</div>
 									</div>
 								</div>
