@@ -274,24 +274,24 @@
 					<div <?php echo $collapse; ?> id="Administracao">
 						<div class="panel-body">
 							<div class="row">
-								<div class="col-md-12">
-									<label for=""><h4><b>Pessoas & Empresas</b></h4></label>
-									<div class="form-group col-md-12 text-left">
-										<div class="row">																				
-											<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>cliente/pesquisar" role="button"> 
-												<span class="glyphicon glyphicon-user"></span> Clientes
-											</a>
+								<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>	
+									<div class="col-md-12">
+										<label for=""><h4><b>Pessoas & Empresas</b></h4></label>
+										<div class="form-group col-md-12 text-left">
+											<div class="row">																				
+												<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>cliente/pesquisar" role="button"> 
+													<span class="glyphicon glyphicon-user"></span> Clientes
+												</a>
+											</div>
 										</div>
+										<div class="form-group col-md-12 text-left">	
+											<div class="row">		
+												<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/fornecedor" role="button"> 
+													<span class="glyphicon glyphicon-user"></span> Fornecedores
+												</a>
+											</div>	
+										</div>																										
 									</div>
-									<div class="form-group col-md-12 text-left">	
-										<div class="row">		
-											<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/fornecedor" role="button"> 
-												<span class="glyphicon glyphicon-user"></span> Fornecedores
-											</a>
-										</div>	
-									</div>																										
-								</div>
-								<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 									<div class="col-md-12">
 										<label for=""><h4><b>Produtos, Serviços & Valores</b></h4></label>
 										<div class="form-group col-md-12 text-left">
