@@ -160,7 +160,7 @@
 						<?php } else echo '<h3 class="text-left">S/Serviços</h3>';{?>
 						<?php } ?>							
 						<?php } ?>
-												
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>							
 						<h3 class="text-left"><b>Entrega</b>: <?php echo '<strong>' . $query['idApp_OrcaTrata'] . '</strong>' ?></h3>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
@@ -245,8 +245,8 @@
 								</tr>
 							</tbody>
 						</table>
+						<?php } ?>	
 						<h3 class="text-left"><b>Pagamento</b></h3>
-						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
@@ -299,26 +299,6 @@
 								</tr>
 							</tbody>
 						</table>
-						<?php } else {?>
-						<table class="table table-bordered table-condensed table-striped">
-							<thead>
-								<tr>
-									<th class="col-md-3" scope="col">Total R$</th>
-									<th class="col-md-3" scope="col">Forma</th>
-									<th class="col-md-3" scope="col">Pago</th>
-									<th class="col-md-3" scope="col">Venc.</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><?php echo number_format($orcatrata['ValorTotalOrca'], 2, ',', '.') ?></td>
-									<td><?php echo $orcatrata['Modalidade'] ?></td>
-									<td><?php echo $orcatrata['QtdParcelasOrca'] ?>X<?php echo $orcatrata['FormaPag'] ?></td>
-									<td><?php echo $orcatrata['DataVencimentoOrca'] ?></td>
-								</tr>
-							</tbody>
-						</table>						
-						<?php } ?>
 						
 						<?php if( isset($count['PRCount']) ) { ?>
 						<h3 class="text-left">Parcelas</h3>

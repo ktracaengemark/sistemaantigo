@@ -394,7 +394,6 @@
 													</div>
 												</div>
 											</div>
-											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 											<div class="col-md-8">
 												<div class="panel panel-default">
 													<div class="panel-heading">	
@@ -409,6 +408,7 @@
 																		   name="ValorExtraOrca" value="<?php echo $orcatrata['ValorExtraOrca'] ?>">
 																</div>
 															</div>
+															<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 															<div class="col-md-4">
 																<label for="ValorRestanteOrca">Prd + Srv:</label><br>
 																<div class="input-group" id="txtHint">
@@ -429,14 +429,14 @@
 																		   name="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>">
 																</div>
 															</div>
+															<?php }else{ ?>
+																<input type="hidden" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>"/>
+																<input type="hidden" name="ValorSomaOrca" id="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>"/>
+															<?php } ?>
 														</div>
 													</div>
 												</div>
 											</div>
-											<?php }else{ ?>
-												<input type="hidden" name="ValorRestanteOrca" id="ValorRestanteOrca" value="<?php echo $orcatrata['ValorRestanteOrca'] ?>"/>
-												<input type="hidden" name="ValorSomaOrca" id="ValorSomaOrca" value="<?php echo $orcatrata['ValorSomaOrca'] ?>"/>
-											<?php } ?>
 										</div>
 									</div>
 								</div>
