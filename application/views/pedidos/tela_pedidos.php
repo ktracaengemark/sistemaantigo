@@ -22,7 +22,9 @@
 										</button>
 									</span>
 									<input type="text" class="form-control Numero" placeholder="Pesquisar Pedido" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
-									<input type="text" class="form-control Numero" placeholder="Pesquisar Cliente"  name="Cliente" value="<?php echo set_value('Cliente', $query['Cliente']); ?>">
+									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+										<input type="text" class="form-control Numero" placeholder="Pesquisar Cliente"  name="Cliente" value="<?php echo set_value('Cliente', $query['Cliente']); ?>">
+									<?php } ?>
 									<span class="input-group-btn">	
 										<button class="btn btn-warning btn-md" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 											<span class="glyphicon glyphicon-filter"></span>
@@ -31,7 +33,10 @@
 								</div>
 							</div>
 							<div class="col-md-4">										
-								<label>Cadastrar Novo Pedido</label><br><br>
+								<label>Cadastrar Novo Pedido</label>
+								<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>	
+									<br><br>
+								<?php } ?>	
 								<a class="btn btn-md btn-primary btn-block" href="<?php echo base_url() ?>orcatrata/cadastrar3" role="button"> 
 									<span class="glyphicon glyphicon-plus"></span> Nova Venda / Receita
 								</a>
@@ -44,86 +49,88 @@
 		<div style="overflow: auto; height: 550px; ">
 			<div class="row">	
 				<div class="col-md-12">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-primary">
-								<div class="panel-heading">
-									<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Combinar" aria-expanded="false" aria-controls="Combinar">
-										<h5 class="text-left">Aguardando <b>Combinar com o Cliente</b></h5>
-									</a>
-								</div>
-								<div <?php echo $collapse; ?> id="Combinar">
-									<div class="panel-body">
-										<?php echo (isset($list_combinar)) ? $list_combinar : FALSE ?>
+					<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Combinar" aria-expanded="false" aria-controls="Combinar">
+											<h5 class="text-left">Aguardando <b>Combinar com o Cliente</b></h5>
+										</a>
 									</div>
-								</div>	
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-primary">
-								<div class="panel-heading">
-									<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Aprovar" aria-expanded="false" aria-controls="Aprovar">
-										<h5 class="text-left">Aguardando <b>Aprovação do Cliente</b></h5>
-									</a>
-								</div>
-								<div <?php echo $collapse; ?> id="Aprovar">
-									<div class="panel-body">
-										<?php echo (isset($list_aprovar)) ? $list_aprovar : FALSE ?>
-									</div>
-								</div>	
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-info">
-								<div class="panel-heading">
-									<a class="text-center" style="color: #00008B" data-toggle="collapse" data-target="#Producao" aria-expanded="false" aria-controls="Producao">
-										<h5 class="text-left">Aguardando <b>Produção</b></h5>
-									</a>
-								</div>
-								<div <?php echo $collapse; ?> id="Producao">
-									<div class="panel-body">
-										<?php echo (isset($list_producao)) ? $list_producao : FALSE ?>
-									</div>
-								</div>	
-							</div>
-						</div>
-					</div>
-					<div class="row">			
-						<div class="col-md-12">
-							<div class="panel panel-success">
-								<div class="panel-heading">
-									<a class="text-center" style="color: #3CB371" data-toggle="collapse" data-target="#Envio" aria-expanded="false" aria-controls="Envio">
-										<h5 class="text-left">Aguardando <b>Envio</b></h5>
-									</a>
-								</div>
-								<div <?php echo $collapse; ?> id="Envio">
-									<div class="panel-body">
-										<?php echo (isset($list_envio)) ? $list_envio : FALSE ?>
-									</div>
+									<div <?php echo $collapse; ?> id="Combinar">
+										<div class="panel-body">
+											<?php echo (isset($list_combinar)) ? $list_combinar : FALSE ?>
+										</div>
+									</div>	
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-warning">
-								<div class="panel-heading">
-									<a class="text-center" style="color: #B8860B" data-toggle="collapse" data-target="#Entrega" aria-expanded="false" aria-controls="Entrega">
-										<h5 class="text-left">Aguardando <b>Entrega</b></h5>
-									</a>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Aprovar" aria-expanded="false" aria-controls="Aprovar">
+											<h5 class="text-left">Aguardando <b>Aprovação do Cliente</b></h5>
+										</a>
+									</div>
+									<div <?php echo $collapse; ?> id="Aprovar">
+										<div class="panel-body">
+											<?php echo (isset($list_aprovar)) ? $list_aprovar : FALSE ?>
+										</div>
+									</div>	
 								</div>
-								<div <?php echo $collapse; ?> id="Entrega">
-									<div class="panel-body">
-										<?php echo (isset($list_entrega)) ? $list_entrega : FALSE ?>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-info">
+									<div class="panel-heading">
+										<a class="text-center" style="color: #00008B" data-toggle="collapse" data-target="#Producao" aria-expanded="false" aria-controls="Producao">
+											<h5 class="text-left">Aguardando <b>Produção</b></h5>
+										</a>
+									</div>
+									<div <?php echo $collapse; ?> id="Producao">
+										<div class="panel-body">
+											<?php echo (isset($list_producao)) ? $list_producao : FALSE ?>
+										</div>
+									</div>	
+								</div>
+							</div>
+						</div>
+						<div class="row">			
+							<div class="col-md-12">
+								<div class="panel panel-success">
+									<div class="panel-heading">
+										<a class="text-center" style="color: #3CB371" data-toggle="collapse" data-target="#Envio" aria-expanded="false" aria-controls="Envio">
+											<h5 class="text-left">Aguardando <b>Envio</b></h5>
+										</a>
+									</div>
+									<div <?php echo $collapse; ?> id="Envio">
+										<div class="panel-body">
+											<?php echo (isset($list_envio)) ? $list_envio : FALSE ?>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-warning">
+									<div class="panel-heading">
+										<a class="text-center" style="color: #B8860B" data-toggle="collapse" data-target="#Entrega" aria-expanded="false" aria-controls="Entrega">
+											<h5 class="text-left">Aguardando <b>Entrega</b></h5>
+										</a>
+									</div>
+									<div <?php echo $collapse; ?> id="Entrega">
+										<div class="panel-body">
+											<?php echo (isset($list_entrega)) ? $list_entrega : FALSE ?>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					<?php } ?>	
 					<div class="row">			
 						<div class="col-md-12">
 							<div class="panel panel-warning">
@@ -140,22 +147,24 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">	
-						<div class="col-md-12">
-							<div class="panel panel-primary">
-								<div class="panel-heading">
-									<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Cancelados" aria-expanded="false" aria-controls="Cancelados">
-										<h5 class="text-left"><b>Cancelados</b></h5>
-									</a>
-								</div>
-								<div <?php echo $collapse; ?> id="Cancelados">
-									<div class="panel-body">
-										<?php echo (isset($list_pagonline)) ? $list_pagonline : FALSE ?>
+					<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+						<div class="row">	
+							<div class="col-md-12">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Cancelados" aria-expanded="false" aria-controls="Cancelados">
+											<h5 class="text-left"><b>Cancelados</b></h5>
+										</a>
+									</div>
+									<div <?php echo $collapse; ?> id="Cancelados">
+										<div class="panel-body">
+											<?php echo (isset($list_pagonline)) ? $list_pagonline : FALSE ?>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>	
+					<?php } ?>
 				</div>	
 			</div>
 		</div>

@@ -6759,6 +6759,8 @@ exit();*/
 		$filtro6 = ($data['AVAP'] != '#') ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
 		$filtro7 = ($data['Tipo_Orca'] != '#') ? 'OT.Tipo_Orca = "' . $data['Tipo_Orca'] . '" AND ' : FALSE;
 		$filtro13 = ($data['CombinadoFrete'] != '#') ? 'OT.CombinadoFrete = "' . $data['CombinadoFrete'] . '" AND ' : FALSE;
+		$filtro14 = ($data['Quitado']) ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -6797,7 +6799,7 @@ exit();*/
                 PR.idSis_Empresa,
 				PR.Parcela,
 				CONCAT(PR.Parcela) AS Parcela,
-                DATE_FORMAT(PR.DataVencimento, "%d/%m/%Y") AS DataVencimento,
+				PR.DataVencimento,
                 PR.ValorParcela,
                 PR.DataPago,
                 PR.ValorPago,
@@ -6818,7 +6820,7 @@ exit();*/
                 (' . $consulta . ') AND
 				(' . $consulta2 . ') AND
 				(' . $consulta3 . ') AND
-				(' . $consulta4 . ') AND
+                ' . $permissao . '
                 ' . $filtro1 . '
                 ' . $filtro2 . '
 				' . $filtro3 . '
@@ -6827,6 +6829,7 @@ exit();*/
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro13 . '
+				' . $filtro14 . '
 				OT.idTab_TipoRD = "2"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
@@ -6861,6 +6864,7 @@ exit();*/
 				$row->DataEntregaOrca = $this->basico->mascara_data($row->DataEntregaOrca, 'barras');
 				$row->DataPrazo = $this->basico->mascara_data($row->DataPrazo, 'barras');
                 $row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
+                $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
 				$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
                 $row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
 				$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
@@ -7149,6 +7153,7 @@ exit();*/
 		$filtro6 = ($data['AVAP'] != '#') ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
 		$filtro7 = ($data['Tipo_Orca'] != '#') ? 'OT.Tipo_Orca = "' . $data['Tipo_Orca'] . '" AND ' : FALSE;
 		$filtro13 = ($data['CombinadoFrete'] != '#') ? 'OT.CombinadoFrete = "' . $data['CombinadoFrete'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -7209,7 +7214,7 @@ exit();*/
                 (' . $consulta . ') AND
 				(' . $consulta2 . ') AND
 				(' . $consulta3 . ') AND
-				(' . $consulta4 . ') AND
+                ' . $permissao . '
                 ' . $filtro1 . '
                 ' . $filtro2 . '
 				' . $filtro3 . '

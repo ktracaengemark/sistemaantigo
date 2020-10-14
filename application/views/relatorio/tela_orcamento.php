@@ -13,7 +13,9 @@
 						</button>
 					</span>
 					<input type="text" placeholder="Pesquisar Pedido" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
-					<input type="text" placeholder="Pesquisar Cliente" class="form-control Numero btn-sm" name="Cliente" value="<?php echo set_value('Cliente', $query['Cliente']); ?>">
+					<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
+						<input type="text" placeholder="Pesquisar Cliente" class="form-control Numero btn-sm" name="Cliente" value="<?php echo set_value('Cliente', $query['Cliente']); ?>">
+					<?php } ?>
 					<span class="input-group-btn">
 						<button class="btn btn-warning btn-md" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 							<span class="glyphicon glyphicon-filter"></span>
@@ -100,7 +102,22 @@
 								</div>
 							</div>	
 							<div class="row">
-								<div class="col-md-6"></div>
+								<div class="col-md-3"></div>
+								<div class="col-md-3 text-left">
+									<label for="Quitado">Status das Parcelas</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="Quitado" name="Quitado">
+										<?php
+										foreach ($select['Quitado'] as $key => $row) {
+											if ($query['Quitado'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
 								<div class="col-md-3">
 									<label for="FinalizadoOrca">Finalizado</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -283,6 +300,7 @@
 												name="DataFim3" value="<?php echo set_value('DataFim3', $query['DataFim3']); ?>">
 									</div>
 								</div>
+								<!--
 								<div class="col-md-3">
 									<label for="DataInicio4">Venc.Parc. Inc.</label>
 									<div class="input-group DatePicker">
@@ -303,6 +321,7 @@
 												name="DataFim4" value="<?php echo set_value('DataFim4', $query['DataFim4']); ?>">
 									</div>
 								</div>
+								-->
 							</div>
 						</div>
 					</div>

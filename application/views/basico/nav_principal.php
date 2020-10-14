@@ -7,21 +7,22 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<!--
-			<a type="button" class="navbar-brand btn btn-sm" href="<?php echo base_url() ?>usuario2/prontuario/<?php echo $_SESSION['log']['idSis_Usuario']; ?>"> 
-				 <?php echo $_SESSION['log']['Nome2']; ?>./<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
-			</a>
-			-->
-			<?php echo form_open(base_url() . 'cliente/pesquisar', 'class="navbar-form navbar-left"'); ?>
-			<div class="input-group">
-				<span class="input-group-btn">
-					<button class="btn btn-info btn-md" type="submit">
-						<span class="glyphicon glyphicon-user"></span> <span class="glyphicon glyphicon-search"></span> 
-					</button>
-				</span>
-				<input type="text" placeholder="Pesquisar Cliente" class="form-control btn-sm " name="Pesquisa" value="">
-			</div>
-			</form>
+			<?php if($_SESSION['log']['idSis_Empresa'] == "5") {?>
+				<a type="button" class="navbar-brand btn btn-sm" href="<?php echo base_url() ?>usuario2/prontuario/<?php echo $_SESSION['log']['idSis_Usuario']; ?>"> 
+					 <?php echo $_SESSION['log']['Nome2']; ?>./<?php echo $_SESSION['log']['NomeEmpresa2']; ?>.
+				</a>
+			<?php }else{?>	
+				<?php echo form_open(base_url() . 'cliente/pesquisar', 'class="navbar-form navbar-left"'); ?>
+				<div class="input-group">
+					<span class="input-group-btn">
+						<button class="btn btn-info btn-md" type="submit">
+							<span class="glyphicon glyphicon-user"></span> <span class="glyphicon glyphicon-search"></span> 
+						</button>
+					</span>
+					<input type="text" placeholder="Pesquisar Cliente" class="form-control btn-sm " name="Pesquisa" value="">
+				</div>
+				</form>
+			<?php } ?>	
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar1">
 

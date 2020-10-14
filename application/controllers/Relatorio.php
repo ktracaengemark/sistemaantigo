@@ -4811,11 +4811,15 @@ class Relatorio extends CI_Controller {
 			'TipoFrete',
 			'Tipo_Orca',
 			'Entregador',
+			'Quitado',
 
         ), TRUE));
 		/*
 		if (!$data['query']['DataInicio'])
            $data['query']['DataInicio'] = '01/01/2017';
+		
+		if (!$data['query']['DataInicio4']) $data['query']['DataInicio4'] = '00/00/0000';
+		if (!$data['query']['DataFim4']) $data['query']['DataFim4'] = '00/00/0000';
 		*/
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
@@ -4878,6 +4882,12 @@ class Relatorio extends CI_Controller {
             'O' => 'On Line',
         );
 
+		$data['select']['Quitado'] = array(
+			'0' => '::TODOS::',			
+			'S' => 'Quitada',
+			'N' => 'NÃO Quitada',
+        );
+
         $data['select']['Campo'] = array(
             'OT.idApp_OrcaTrata' => 'Número do Orçamento',
             'OT.AprovadoOrca' => 'Orçamento Aprovado?',
@@ -4935,6 +4945,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['CombinadoFrete'] = $data['query']['CombinadoFrete'];
 			$data['bd']['AVAP'] = $data['query']['AVAP'];
 			$data['bd']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
+			$data['bd']['Quitado'] = $data['query']['Quitado'];
             $data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);
 
             /*

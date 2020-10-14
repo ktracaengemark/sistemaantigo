@@ -63,7 +63,6 @@
 							<th class="active">Dt.Orç.</th>
 							<th class="active">Dt.Ent.</th>
 							<th class="active">Dt.Vnc.</th>
-							<th class="active">Dt.Vnc.Prc.</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -107,7 +106,6 @@
 								echo '<td>' . $row['DataOrca'] . '</td>';
 								echo '<td>' . $row['DataEntregaOrca'] . '</td>';
 								echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
-								echo '<td>' . $row['DataVencimento'] . '</td>';
 								#echo '<td>' . $row['Descricao'] . '</td>';
 								#echo '<td>' . $row['Nome'] . '</td>';
 								#echo '</div>';
