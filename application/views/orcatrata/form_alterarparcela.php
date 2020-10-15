@@ -17,14 +17,15 @@
 					<div class="panel panel-<?php echo $panel; ?>">
 						<div class="panel-heading">
 							<?php if ($titulo == "Receitas" ) { ?>
-							<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/parcelasrec" role="button">
-								<span class="glyphicon glyphicon-pencil"></span> Rel. das <?php echo $titulo; ?>
+							<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/cobrancas" role="button">
+								<span class="glyphicon glyphicon-pencil"></span> <?php echo $titulo; ?> à  Receber
 							</a>							
 							<?php } else { ?>
 							<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/parcelasdesp" role="button">
-								<span class="glyphicon glyphicon-pencil"></span> Rel. das <?php echo $titulo; ?>
+								<span class="glyphicon glyphicon-pencil"></span> <?php echo $titulo; ?> à Pagar
 							</a>
 							<?php } ?>
+							<!--
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 								<?php if ($titulo == "Receitas" ) { ?>
 									<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/fiadorec" role="button">
@@ -36,6 +37,7 @@
 									</a>
 								<?php } ?>
 							<?php } ?>
+							-->
 							<!--<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/despesasparc" role="button">
 								<span class="glyphicon glyphicon-search"></span>PcDesp
 							</a>-->
@@ -62,12 +64,14 @@
 
 													<?php if ($metodo > 1) { ?>
 													<input type="hidden" name="idApp_Parcelas<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_Parcelas']; ?>"/>
+													
 													<?php } ?>
 
 													<div class="form-group" id="21div<?php echo $i ?>">
 														<div class="panel panel-warning">
 															<div class="panel-heading">
 																<div class="row">
+																	<input type="hidden" name="idApp_OrcaTrata<?php echo $i ?>" id="idApp_OrcaTrata<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_OrcaTrata']; ?>"/>
 																	<div class="col-md-1">
 																		<label for="Parcela">Prcl <?php echo $i ?>:</label><br>
 																		<input type="text" class="form-control" readonly=""

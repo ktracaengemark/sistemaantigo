@@ -72,7 +72,7 @@
 										<div class="form-group col-md-12 text-left">
 											<div class="row">										
 												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/cobrancas" role="button"> 
-													<span class="glyphicon glyphicon-usd"></span> Cobranças
+													<span class="glyphicon glyphicon-usd"></span> Receitas à Receber
 												</a>
 											</div>	
 										</div>
@@ -187,6 +187,13 @@
 											<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/orcamento2" role="button"> 
 												<span class="glyphicon glyphicon-usd"></span> Despesas
 											</a>											
+										</div>	
+									</div>
+									<div class="form-group col-md-12 text-left">
+										<div class="row">										
+											<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/debitos" role="button"> 
+												<span class="glyphicon glyphicon-usd"></span> Despesas à Pagar
+											</a>
 										</div>	
 									</div>
 									<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>

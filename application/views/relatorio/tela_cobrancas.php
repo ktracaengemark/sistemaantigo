@@ -27,6 +27,13 @@
 						</button>
 					</a>
 				</span>
+				<span class="input-group-btn">
+					<a href="<?php echo base_url() . 'Orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa']; ?>">
+						<button class="btn btn-danger btn-md" type="button">
+							<span class="glyphicon glyphicon-edit"></span>
+						</button>
+					</a>
+				</span>	
 			</div>	
 		</div>
 		<div class="panel-body">

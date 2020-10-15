@@ -471,7 +471,7 @@ class Orcatrata_model extends CI_Model {
         $query = $query->result_array();
 
         return $query;
-    }
+    }	
 	
     public function get_parcelas_posterior($data) {
 		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data . ' AND Quitado = "N"');
@@ -706,12 +706,30 @@ class Orcatrata_model extends CI_Model {
 
         if ($_SESSION['FiltroAlteraParcela']['DataFim']) {
             $consulta =
-                '(PR.DataVencimento >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND PR.DataVencimento <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '")';
-        }
+                '(OT.DataOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '" AND OT.DataOrca  <= "' . $_SESSION['FiltroAlteraParcela']['DataFim'] . '")';
+		}
         else {
             $consulta =
-                '(PR.DataVencimento >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '")';
-        }		
+                '(OT.DataOrca  >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio'] . '")';
+        }
+
+        if ($_SESSION['FiltroAlteraParcela']['DataFim2']) {
+            $consulta2 =
+                '(OT.DataEntregaOrca  >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio2'] . '" AND OT.DataEntregaOrca <= "' . $_SESSION['FiltroAlteraParcela']['DataFim2'] . '")';
+        }
+        else {
+            $consulta2 =
+                '(OT.DataEntregaOrca >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio2'] . '")';
+        }
+
+        if ($_SESSION['FiltroAlteraParcela']['DataFim3']) {
+            $consulta3 =
+                '(PR.DataVencimento >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio3'] . '" AND PR.DataVencimento <= "' . $_SESSION['FiltroAlteraParcela']['DataFim3'] . '")';
+        }
+        else {
+            $consulta3 =
+                '(PR.DataVencimento >= "' . $_SESSION['FiltroAlteraParcela']['DataInicio3'] . '")';
+        }
 		#$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'PR.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 		$permissao1 = ($_SESSION['FiltroAlteraParcela']['AprovadoOrca'] != "0" ) ? 'OT.AprovadoOrca = "' . $_SESSION['FiltroAlteraParcela']['AprovadoOrca'] . '" AND ' : FALSE;
@@ -743,6 +761,7 @@ class Orcatrata_model extends CI_Model {
 				CONCAT(PR.idSis_Empresa, "-", E.NomeEmpresa) AS idSis_Empresa,
 				PR.idApp_Parcelas,
 				PR.Parcela,
+				PR.idApp_OrcaTrata,
 				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "--", IFNULL(TR.TipoFinanceiro,""), "--", IFNULL(C.NomeCliente,""), "--", IFNULL(OT.Descricao,"")) AS Receita,
 				PR.ValorParcela,
 				PR.DataVencimento,
@@ -761,7 +780,9 @@ class Orcatrata_model extends CI_Model {
 				OT.idTab_TipoRD = "2" AND				
 								
 				PR.idSis_Empresa = ' . $data . ' AND
-				' . $consulta . ' AND				
+				' . $consulta . ' AND
+				' . $consulta2 . ' AND
+				' . $consulta3 . ' AND				
 				' . $permissao1 . '
 				' . $permissao2 . '
 				' . $permissao3 . '
@@ -2838,6 +2859,14 @@ exit();*/
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }
+	
+    public function update_parcelas_id($data, $id) {
+
+        unset($data['idApp_Parcelas']);
+        $query = $this->db->update('App_Parcelas', $data, array('idApp_Parcelas' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }	
 	
     public function update_comissao($data) {
 
