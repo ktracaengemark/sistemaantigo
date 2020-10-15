@@ -1271,6 +1271,7 @@
 									</div>	
 								</div>
 							<?php } ?>
+							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							<br>
 							<div class="panel panel-default">
 								<div class="panel-heading">
@@ -1279,38 +1280,36 @@
 										<div class="col-md-3">
 											<div class="panel panel-primary">
 												<div class="panel-heading">
-													<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-														<div class="row">
-															<div class="col-md-12 text-left">
-																<label for="CombinadoFrete">Tudo Combinado?</label><br>
-																<div class="btn-group" data-toggle="buttons">
-																	<?php
-																	foreach ($select['CombinadoFrete'] as $key => $row) {
-																		if (!$orcatrata['CombinadoFrete'])$orcatrata['CombinadoFrete'] = 'S';
+													<div class="row">
+														<div class="col-md-12 text-left">
+															<label for="CombinadoFrete">Tudo Combinado?</label><br>
+															<div class="btn-group" data-toggle="buttons">
+																<?php
+																foreach ($select['CombinadoFrete'] as $key => $row) {
+																	if (!$orcatrata['CombinadoFrete'])$orcatrata['CombinadoFrete'] = 'S';
 
-																		($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																	($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
-																		if ($orcatrata['CombinadoFrete'] == $key) {
-																			echo ''
-																			. '<label class="btn btn-warning active" name="CombinadoFrete_' . $hideshow . '">'
-																			. '<input type="radio" name="CombinadoFrete" id="' . $hideshow . '" '
-																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																			. '</label>'
-																			;
-																		} else {
-																			echo ''
-																			. '<label class="btn btn-default" name="CombinadoFrete_' . $hideshow . '">'
-																			. '<input type="radio" name="CombinadoFrete" id="' . $hideshow . '" '
-																			. 'autocomplete="off" value="' . $key . '" >' . $row
-																			. '</label>'
-																			;
-																		}
+																	if ($orcatrata['CombinadoFrete'] == $key) {
+																		echo ''
+																		. '<label class="btn btn-warning active" name="CombinadoFrete_' . $hideshow . '">'
+																		. '<input type="radio" name="CombinadoFrete" id="' . $hideshow . '" '
+																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																		. '</label>'
+																		;
+																	} else {
+																		echo ''
+																		. '<label class="btn btn-default" name="CombinadoFrete_' . $hideshow . '">'
+																		. '<input type="radio" name="CombinadoFrete" id="' . $hideshow . '" '
+																		. 'autocomplete="off" value="' . $key . '" >' . $row
+																		. '</label>'
+																		;
 																	}
-																	?>
-																</div>
+																}
+																?>
 															</div>
 														</div>
-													<?php } ?>
+													</div>
 													<div class="row">
 														<div class="col-md-12 text-right">
 															<label for="FinalizadoOrca">Finalizado?</label><br>
@@ -1344,7 +1343,6 @@
 												</div>
 											</div>
 										</div>
-										<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 										<div id="FinalizadoOrca" <?php echo $div['FinalizadoOrca']; ?>>
 											<div id="CombinadoFrete" <?php echo $div['CombinadoFrete']; ?>>
 												<div class="col-md-3">
@@ -1545,7 +1543,6 @@
 												</div>
 											</div>
 										</div>
-										<?php } ?>
 									</div>	
 									<!--
 									<div class="form-group ">
@@ -1594,6 +1591,7 @@
 									-->
 								</div>
 							</div>
+							<?php } ?>
 							<br>
 							<div class="panel panel-default">
 								<div class="panel-heading">
