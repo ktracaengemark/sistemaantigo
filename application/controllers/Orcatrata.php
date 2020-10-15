@@ -3839,6 +3839,7 @@ class Orcatrata extends CI_Controller {
 		
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_OrcaTrata ####
+			$data['orcatrata']['CombinadoFrete'] = "S";
 			$data['orcatrata']['AprovadoOrca'] = "S";
 			$data['orcatrata']['ConcluidoOrca'] = "S";
 			$data['orcatrata']['QuitadoOrca'] = "S";
