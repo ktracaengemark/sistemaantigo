@@ -248,7 +248,7 @@ class Statuspedido extends CI_Controller {
                 $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
                 $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
                 $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
-				$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
+				//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
 				$j++;
             }
         }
@@ -904,12 +904,14 @@ class Statuspedido extends CI_Controller {
 
                 $max = count($data['update']['parcelasrec']['inserir']);
                 for($j=0;$j<$max;$j++) {
-                    //$data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-                    if ($data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario']){
+                    $data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+                    /*
+					if ($data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario']){
 						$data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'];
 					}else{
 						$data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 					}
+					*/
 					$data['update']['parcelasrec']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['update']['parcelasrec']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['parcelasrec']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];

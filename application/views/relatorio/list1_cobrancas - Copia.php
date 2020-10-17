@@ -25,7 +25,8 @@
 				</div>				
 			</div>	
 		</div>
-	</div>	
+	</div>		
+	<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>		
 	<div class="container-fluid">
 		<div class="row">
 			<div>
@@ -39,6 +40,30 @@
 				<table class="table table-bordered table-condensed table-striped">
 					<thead>
 						<tr>
+							<!--
+							<th class="active">Print</th>
+							<th class="active">Editar</th>
+							<th class="active">Cont.</th>
+							<th class="active">Pedido</th>
+							<th class="active">Cliente</th>
+							<th class="active">Orç.</th>
+							<th class="active">Frete</th>
+							<th class="active">Total</th>					
+							<th class="active">Apv.?</th>
+							<th class="active">Entr.?</th>
+							<th class="active">Pago?</th>
+							<th class="active">Final?</th>
+							<th class="active">Cancel?</th>
+							<th class="active">Compra</th>
+							<th class="active">Loc.Pag.</th>
+							<th class="active">Form.Pag.</th>
+							<th class="active">Entrega</th>
+							<th class="active">Dt. Orç.</th>
+							<th class="active">Dt. Ent.</th>
+							<th class="active">Dt. Venc.</th>
+							-->
+							<!--<th class="active">Ed.Orç</th>
+							<th class="active">Ed.Prc</th>-->
 							<th class="active">Imp.</th>
 							<th class="active">Editar</th>
 							<th class="active">Cont.</th>
@@ -130,4 +155,56 @@
 			</div>
 		</div>
 	</div>
+	<?php } else { ?>
+	<div class="container-fluid">
+		<div class="row">
+			<div>
+				<table class="table table-bordered table-condensed table-striped">	
+					<tfoot>
+						<tr>
+							<th colspan="3" class="active">Total de Parcelas: <?php echo $report->num_rows(); ?> resultado(s)</th>
+						</tr>
+					</tfoot>
+				</table>            
+				<table class="table table-bordered table-condensed table-striped">
+					<thead>
+						<tr>
+							<!--<th class="active">Ed.Orç</th>
+							<th class="active">Ed.Prc</th>-->
+							<th class="active">Imp.</th>
+							<th class="active">Pc</th>
+							<th class="active">Orç.</th>
+							<th class="active" scope="col">Receita</th>	
+							<th class="active">Dt Orca</th>
+							<th class="active">Dt Venc</th>
+							<th class="active">Receber</th>
+							<th class="active">Qt</th>					
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						foreach ($report->result_array() as $row) {
+							echo '<tr>';
+								echo '<td class="notclickable">
+										<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
+											<span class="glyphicon glyphicon-print notclickable"></span>
+										</a>
+										
+									</td>';									
+								echo '<td>' . $row['Parcela'] . '</td>';
+								echo '<td>' . $row['idApp_OrcaTrata'] . '- ' . $row['TipoFinanceiro'] . '</td>';
+								echo '<td>' . $row['Descricao'] . '</td>';
+								echo '<td>' . $row['DataOrca'] . '</td>';
+								echo '<td>' . $row['DataVencimento'] . '</td>';
+								echo '<td class="text-left">' . $row['ValorParcela'] . '</td>';
+								echo '<td>' . $row['Quitado'] . '</td>';
+							echo '</tr>';
+						}
+						?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>	
+	<?php } ?>
 </div>

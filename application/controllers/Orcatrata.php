@@ -2975,7 +2975,7 @@ class Orcatrata extends CI_Controller {
                 $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
                 $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
                 $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
-				$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
+				//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
 				$j++;
             }
         }
@@ -3640,12 +3640,14 @@ class Orcatrata extends CI_Controller {
 
                 $max = count($data['update']['parcelasrec']['inserir']);
                 for($j=0;$j<$max;$j++) {
-                    //$data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-                    if ($data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario']){
+                    $data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+                    /*
+					if ($data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario']){
 						$data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'];
 					}else{
 						$data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 					}
+					*/
 					$data['update']['parcelasrec']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['update']['parcelasrec']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['parcelasrec']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
@@ -4149,7 +4151,7 @@ class Orcatrata extends CI_Controller {
 					$data['parcelasrec'][$i]['ValorPago'] = $this->input->post('ValorPago' . $i);
 					$data['parcelasrec'][$i]['DataPago'] = $this->input->post('DataPago' . $i);
 					$data['parcelasrec'][$i]['Quitado'] = $this->input->post('Quitado' . $i);
-					$data['parcelasrec'][$i]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
+					//$data['parcelasrec'][$i]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
 				}
             }
 
@@ -4848,12 +4850,14 @@ class Orcatrata extends CI_Controller {
 
                 $max = count($data['update']['parcelasrec']['inserir']);
                 for($j=0;$j<$max;$j++) {
-                    //$data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-                    if ($data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario']){
+                    $data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+					/* 
+					if ($data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario']){
 						$data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'];
 					}else{
 						$data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 					}
+					*/
 					$data['update']['parcelasrec']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['update']['parcelasrec']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['parcelasrec']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
@@ -7014,7 +7018,7 @@ class Orcatrata extends CI_Controller {
                 $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
                 $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
                 $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
-				$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
+				//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
 				$j++;
             }
         }
@@ -7691,12 +7695,14 @@ class Orcatrata extends CI_Controller {
 
                 $max = count($data['update']['parcelasrec']['inserir']);
                 for($j=0;$j<$max;$j++) {
-                    //$data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-                    if ($data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario']){
+                    $data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+                    /*
+					if ($data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario']){
 						$data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'];
 					}else{
 						$data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 					}
+					*/
 					$data['update']['parcelasrec']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['update']['parcelasrec']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['parcelasrec']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
@@ -8625,7 +8631,7 @@ class Orcatrata extends CI_Controller {
         ), TRUE));
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        $data['orcatrata'] = quotes_to_entities($this->input->post(array(
+        $data['empresa'] = quotes_to_entities($this->input->post(array(
             #### Sis_Empresa ####
             'idSis_Empresa',
 			
@@ -8661,7 +8667,7 @@ class Orcatrata extends CI_Controller {
 
         if ($id) {
             #### Sis_Empresa ####
-            $data['orcatrata'] = $this->Orcatrata_model->get_orcatrataalterar($id);
+            $data['empresa'] = $this->Orcatrata_model->get_orcatrataalterar($id);
 
 
             #### App_Parcelas ####
@@ -8759,7 +8765,7 @@ class Orcatrata extends CI_Controller {
 			*/
 
             #### App_ParcelasRec ####
-            $data['update']['parcelasrec']['anterior'] = $this->Orcatrata_model->get_alterarparcelarec($data['orcatrata']['idSis_Empresa']);
+            $data['update']['parcelasrec']['anterior'] = $this->Orcatrata_model->get_alterarparcelarec($data['empresa']['idSis_Empresa']);
             if (isset($data['parcelasrec']) || (!isset($data['parcelasrec']) && isset($data['update']['parcelasrec']['anterior']) ) ) {
 
                 if (isset($data['parcelasrec']))
@@ -8781,6 +8787,8 @@ class Orcatrata extends CI_Controller {
 
 					$data['update']['parcelasrec']['bd'] = $this->Orcatrata_model->update_parcelas_id($data['update']['parcelasrec']['alterar'][$j], $data['update']['parcelasrec']['alterar'][$j]['idApp_Parcelas']);
 
+					$data['orcatrata'] = $this->Orcatrata_model->get_orcatrata_baixa($data['update']['parcelasrec']['alterar'][$j]['idApp_OrcaTrata']);
+					
 					$data['update']['parcelasrec']['posterior'] = $this->Orcatrata_model->get_parcelas_posterior($data['update']['parcelasrec']['alterar'][$j]['idApp_OrcaTrata']);
 					if (isset($data['update']['parcelasrec']['posterior'])){
 						$max_parcela = count($data['update']['parcelasrec']['posterior']);
@@ -8819,30 +8827,40 @@ class Orcatrata extends CI_Controller {
 					echo '<br>';
 					echo "<pre>";
 					print_r($data['update']['parcelasrec']['alterar'][$j]['idApp_Parcelas']);
-					echo "</pre>";
 					echo '<br>';
-					echo "<pre>";
 					print_r($data['update']['parcelasrec']['alterar'][$j]['idApp_OrcaTrata']);
-					echo "</pre>";
-					
 					echo '<br>';
-					echo "<pre>";
-					print_r($data['parcelas'][$j]);
-					echo "</pre>";
-					
-					echo '<br>';
-					echo "<pre>";
-					print_r($data['update']['parcelasrec']['posterior']);
-					echo "</pre>";
-					
-					echo '<br>';
-					echo "<pre>";
 					print_r($max_parcela);
+					echo '<br>';
+					print_r($max_produto);
+					echo '<br>';
+					print_r($data['orcatrata']['CombinadoFrete']);
+					echo '<br>';
+					print_r($data['orcatrata']['AprovadoOrca']);
+					echo '<br>';
+					print_r($data['orcatrata']['ProntoOrca']);
+					echo '<br>';
+					print_r($data['orcatrata']['EnviadoOrca']);
+					echo '<br>';
+					print_r($data['orcatrata']['QuitadoOrca']);
+					echo '<br>';
+					print_r($data['orcatrata']['ConcluidoOrca']);
+					echo '<br>';
+					print_r($data['orcatrata']['FinalizadoOrca']);
+					echo '<br>';
+					echo "</pre>";
+					echo '<br>';
+					
+					echo "<pre>";
+					echo '<br>';
+					print_r($data['update']['parcelasrec']['posterior']);
+					echo '<br>';
+					print_r($data['update']['produto']['posterior']);
 					echo "</pre>";
 					
-					echo '<br>';
 					echo "<pre>";
-					print_r($data['orcatrata']['QuitadoOrca']);
+					echo '<br>';
+					print_r($data['orcatrata']['idApp_OrcaTrata']);
 					echo "</pre>";
 					*/
 				}
