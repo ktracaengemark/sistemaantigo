@@ -75,11 +75,18 @@
 											</a>
 										</div>	
 									</div>
-									<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>	
+									<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 										<div class="form-group col-md-12 text-left">
 											<div class="row">										
 												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/baixadopedido" role="button"> 
 													<span class="glyphicon glyphicon-usd"></span> Baixa do Pedido
+												</a>
+											</div>	
+										</div>
+										<div class="form-group col-md-12 text-left">
+											<div class="row">										
+												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/comissao" role="button"> 
+													<span class="glyphicon glyphicon-usd"></span> Comissões
 												</a>
 											</div>	
 										</div>
@@ -195,16 +202,7 @@
 												<span class="glyphicon glyphicon-usd"></span> Despesas à Pagar
 											</a>
 										</div>	
-									</div>
-									<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
-										<div class="form-group col-md-12 text-left">
-											<div class="row">										
-												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/comissao" role="button"> 
-													<span class="glyphicon glyphicon-usd"></span> Comissões
-												</a>
-											</div>	
-										</div>
-									<?php }?>	
+									</div>	
 									<div class="form-group col-md-12 text-left">
 										<div class="row">		
 											<a  type="button" class="btn btn-md btn-warning btn-block" href="<?php echo base_url() ?>relatorio/balanco" role="button"> 

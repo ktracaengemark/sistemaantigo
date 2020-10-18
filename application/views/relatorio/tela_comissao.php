@@ -2,7 +2,7 @@
 <?php echo form_open('relatorio/comissao', 'role="form"'); ?>
 <div class="col-md-12 ">		
 	<?php echo validation_errors(); ?>
-	<div class="panel panel-danger">
+	<div class="panel panel-info">
 		<div class="panel-heading">
 			<h4>Comissões</h4>
 			<div class="input-group col-md-3">
@@ -45,12 +45,12 @@
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
-			<div class="modal-header bg-danger">
+			<div class="modal-header bg-info">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das Comissões</h4>
 			</div>
 			<div class="modal-footer">
-				<div class="panel panel-danger">
+				<div class="panel panel-info">
 					<div class="panel-heading text-left">
 						<div class="row">	
 							<div class="col-md-3">
@@ -178,7 +178,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel panel-danger">
+				<div class="panel panel-info">
 					<div class="panel-heading text-left">	
 						<div class="row">	
 							<div class="col-md-3">
@@ -278,7 +278,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel panel-danger">
+				<div class="panel panel-info">
 					<div class="panel-heading text-left">
 						<div class="row">
 							<div class="col-md-3">
@@ -366,7 +366,7 @@
 						</div>	
 					</div>
 				</div>
-				<div class="panel panel-danger">
+				<div class="panel panel-info">
 					<div class="panel-heading text-left">
 						<div class="row">		
 							<div class="col-md-6 text-left">
@@ -387,7 +387,7 @@
 						</div>	
 					</div>
 				</div>
-				<div class="panel panel-danger">
+				<div class="panel panel-info">
 					<div class="panel-heading text-left">
 						<div class="row">
 							<div class="form-footer col-md-4">
@@ -406,7 +406,7 @@
 					</div>
 				</div>
 				<!--
-				<div class="panel panel-danger">
+				<div class="panel panel-info">
 					<div class="panel-heading text-left">
 						
 						<div class="row">	
