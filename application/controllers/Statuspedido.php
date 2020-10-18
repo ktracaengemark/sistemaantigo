@@ -641,7 +641,7 @@ class Statuspedido extends CI_Controller {
             $data['orcatrata']['DataRetorno'] = $this->basico->mascara_data($data['orcatrata']['DataRetorno'], 'mysql');
             $data['orcatrata']['DataQuitado'] = $this->basico->mascara_data($data['orcatrata']['DataQuitado'], 'mysql');
 			$data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'mysql');
-			if ($data['orcatrata']['CanceladoOrca'] == 'N'){
+			
 				if ($data['orcatrata']['FinalizadoOrca'] == 'S'){
 						$data['orcatrata']['AprovadoOrca'] = "S";
 						$data['orcatrata']['CombinadoFrete'] = "S";
@@ -657,17 +657,7 @@ class Statuspedido extends CI_Controller {
 						$data['orcatrata']['EnviadoOrca'] = "S";
 				} elseif ($data['orcatrata']['TipoFrete'] == '1' && $data['orcatrata']['ProntoOrca'] == 'S') {
 						$data['orcatrata']['EnviadoOrca'] = "S";
-				}
-			} else {
-				$data['orcatrata']['CombinadoFrete'] = $data['orcatrata']['CombinadoFrete'];
-				$data['orcatrata']['AprovadoOrca'] = $data['orcatrata']['AprovadoOrca'];
-				$data['orcatrata']['QuitadoOrca'] = $data['orcatrata']['QuitadoOrca'];
-				$data['orcatrata']['ConcluidoOrca'] = $data['orcatrata']['ConcluidoOrca'];
-				$data['orcatrata']['DevolvidoOrca'] = $data['orcatrata']['DevolvidoOrca'];
-				$data['orcatrata']['ProntoOrca'] = $data['orcatrata']['ProntoOrca'];
-				$data['orcatrata']['EnviadoOrca'] = $data['orcatrata']['EnviadoOrca'];
-				$data['orcatrata']['FinalizadoOrca'] = "S";
-			}		
+				}		
             $data['orcatrata']['ValorOrca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorOrca']));
 			$data['orcatrata']['ValorComissao'] = $data['orcatrata']['ValorComissao'];
             $data['orcatrata']['ValorDev'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorDev']));
@@ -1024,6 +1014,8 @@ class Statuspedido extends CI_Controller {
 				$data['orcatrata']['CombinadoFrete'] = "S";
 				$data['orcatrata']['ProntoOrca'] = "S";
 				$data['orcatrata']['EnviadoOrca'] = "S";
+			}else{
+				$data['orcatrata']['FinalizadoOrca'] = "N";
 			}
 			
 			$data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);

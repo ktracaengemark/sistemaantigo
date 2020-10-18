@@ -1,16 +1,16 @@
 <div style="overflow: auto; height: 550px; ">		
-	<div class="panel panel-info">
+	<div class="panel panel-danger">
 		<div class="panel-heading">
 			<div class="row">	
 				<div class="col-md-4">
-					<label for="DataFim">Recebido:</label>
+					<label for="DataFim">Pago:</label>
 					<div class="input-group">
 						<span class="input-group-addon">R$</span>
 						<input type="text" class="form-control" disabled aria-label="Total Recebido" value="<?php echo $report->soma->somarecebido ?>">
 					</div>
 				</div>
 				<div class="col-md-4">
-					<label for="DataFim">à Receber:</label>
+					<label for="DataFim">à Pagar:</label>
 					<div class="input-group">
 						<span class="input-group-addon">R$</span>
 						<input type="text" class="form-control" disabled aria-label="Total a Receber" value="<?php echo $report->soma->balanco ?>">
@@ -43,8 +43,8 @@
 							<th class="active">Editar</th>
 							<th class="active">Cont.</th>
 							<th class="active">Pc</th>
-							<th class="active">Pedido</th>
-							<th class="col-md-2 active">Cliente</th>
+							<th class="active">Despesa</th>
+							<th class="col-md-2 active">Fornec</th>
 							<th class="active">Comb.</th>
 							<th class="active">Apro.</th>
 							<th class="active">Entr.</th>
@@ -89,19 +89,19 @@
 									</td>';
 								*/
 								echo '<td class="notclickable">
-										<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
+										<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrint/imprimirdesp/' . $row['idApp_OrcaTrata'] . '">
 											<span class="glyphicon glyphicon-print notclickable"></span>
 										</a>
 									</td>';
 								echo '<td class="notclickable">
-										<a class="btn btn-md btn-success notclickable" href="' . base_url() . 'statuspedido/alterarstatus/' . $row['idApp_OrcaTrata'] . '">
+										<a class="btn btn-md btn-success notclickable" href="' . base_url() . 'Orcatrata/alterardesp/' . $row['idApp_OrcaTrata'] . '">
 											<span class="glyphicon glyphicon-edit notclickable"></span>
 										</a>
 									</td>';
 								echo '<td>' . $count . '</td>';	
 								echo '<td>' . $row['Parcela'] . '</td>';
-								echo '<td>' . $row['idApp_OrcaTrata'] . '- ' . $row['TipoFinanceiro'] . ' - ' . $row['Descricao'] . '</td>';
-								echo '<td>' . $row['NomeCliente'] . '</td>';
+								echo '<td>' . $row['idApp_OrcaTrata'] . ' - ' . $row['TipoFinanceiro'] . ' - ' . $row['Descricao'] . '</td>';
+								echo '<td>' . $row['NomeFornecedor'] . '</td>';
 								echo '<td>' . $row['CombinadoFrete'] . '</td>';
 								echo '<td>' . $row['AprovadoOrca'] . '</td>';
 								echo '<td>' . $row['ConcluidoOrca'] . '</td>';

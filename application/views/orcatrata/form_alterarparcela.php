@@ -3,9 +3,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-
-		<div class="col-md-1"></div>
-		<div class="col-md-10 ">
+		<div class="col-md-12 ">
 
 			<div class="row">
 
@@ -21,7 +19,7 @@
 								<span class="glyphicon glyphicon-pencil"></span> <?php echo $titulo; ?> à  Receber
 							</a>							
 							<?php } else { ?>
-							<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/parcelasdesp" role="button">
+							<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/debitos" role="button">
 								<span class="glyphicon glyphicon-pencil"></span> <?php echo $titulo; ?> à Pagar
 							</a>
 							<?php } ?>
@@ -251,6 +249,5 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
 	</div>
 </div>

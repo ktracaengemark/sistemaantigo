@@ -232,6 +232,23 @@
 								</div>
 								-->
 							</div>
+							<div class="row">
+								<div class="col-md-3 text-left">
+									<label for="Ordenamento">Tipo Receita:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="TipoFinanceiroR" name="TipoFinanceiroR">
+										<?php
+										foreach ($select['TipoFinanceiroR'] as $key => $row) {
+											if ($query['TipoFinanceiroR'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="panel panel-info">

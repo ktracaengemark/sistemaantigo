@@ -1,8 +1,8 @@
 <?php if ($msg) echo $msg; ?>
 <?php echo validation_errors(); ?>    
 	<?php echo form_open('despesas/despesas', 'role="form"'); ?>
-	<div class="col-md-2 "></div>
-	<div class="col-md-8 ">
+	<div class="col-md-1 "></div>
+	<div class="col-md-10 ">
 		<div class="row">	
 			<div class="col-md-12 ">
 				<div class="panel panel-danger">
@@ -177,7 +177,6 @@
 					<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das Despesas</h4>
 				</div>
 				<div class="modal-footer">
-					<!--
 					<div class="panel panel-danger">
 						<div class="panel-heading text-left">
 							<div class="row">	
@@ -292,7 +291,6 @@
 							</div>
 						</div>
 					</div>
-					-->
 					<div class="panel panel-danger">
 						<div class="panel-heading text-left">	
 							<div class="row">	

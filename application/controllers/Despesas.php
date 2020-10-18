@@ -294,14 +294,25 @@ class Despesas extends CI_Controller {
             $data['report_envio'] = $this->Despesas_model->list_despesas_envio($data['bd'],TRUE);
             $data['report_entrega'] = $this->Despesas_model->list_despesas_entrega($data['bd'],TRUE);
             $data['report_pagamento'] = $this->Despesas_model->list_despesas_pagamento($data['bd'],TRUE);
+
+			$data['pesquisar'] = $this->Despesas_model->list_despesas_pesquisar($data['bd'],TRUE);
 			
-            $data['list_combinar'] = $this->load->view('despesas/list_despesas_combinar', $data, TRUE);
-			$data['list_aprovar'] = $this->load->view('despesas/list_despesas_aprovar', $data, TRUE);
-            $data['list_pagonline'] = $this->load->view('despesas/list_despesas_pagonline', $data, TRUE);
-            $data['list_producao'] = $this->load->view('despesas/list_despesas_producao', $data, TRUE);
-            $data['list_envio'] = $this->load->view('despesas/list_despesas_envio', $data, TRUE);
-            $data['list_entrega'] = $this->load->view('despesas/list_despesas_entrega', $data, TRUE);
-			$data['list_pagamento'] = $this->load->view('despesas/list_despesas_pagamento', $data, TRUE);
+			if ($data['pesquisar']->num_rows() == 1) {
+				$info = $data['pesquisar']->result_array();
+				
+				redirect('Orcatrata/alterardesp/' . $info[0]['idApp_OrcaTrata'] );
+
+				exit();
+				
+			} else {			
+				$data['list_combinar'] = $this->load->view('despesas/list_despesas_combinar', $data, TRUE);
+				$data['list_aprovar'] = $this->load->view('despesas/list_despesas_aprovar', $data, TRUE);
+				$data['list_pagonline'] = $this->load->view('despesas/list_despesas_pagonline', $data, TRUE);
+				$data['list_producao'] = $this->load->view('despesas/list_despesas_producao', $data, TRUE);
+				$data['list_envio'] = $this->load->view('despesas/list_despesas_envio', $data, TRUE);
+				$data['list_entrega'] = $this->load->view('despesas/list_despesas_entrega', $data, TRUE);
+				$data['list_pagamento'] = $this->load->view('despesas/list_despesas_pagamento', $data, TRUE);
+			}
         }
 
         $this->load->view('despesas/tela_despesas', $data);

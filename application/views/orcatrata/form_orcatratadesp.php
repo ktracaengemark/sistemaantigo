@@ -1718,7 +1718,7 @@
 																			</button>
 																		</div>
 																		<div class="col-md-6 text-right">
-																			<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluir2/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
+																			<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluirdesp/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
 																				<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 																			</a>
 																		</div>

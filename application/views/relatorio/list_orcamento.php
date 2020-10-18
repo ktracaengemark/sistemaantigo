@@ -45,23 +45,31 @@
 							<th class="active">Editar</th>
 							<th class="active">Cont.</th>
 							<th class="active">Pedido</th>
-							<th class="active">Cliente</th>
-							<th class="active">Rec</th>
-							<th class="active">Prd+Srv</th>
-							<th class="active">Frete</th>
-							<th class="active">Total</th>
-							<th class="active">Comb.</th>
-							<th class="active">Apv.</th>
-							<th class="active">Entr.</th>
+							<?php if($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+								<th class="active">Cliente</th>
+							<?php } ?>
+							<th class="active">Desp</th>
+							<?php if($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+								<th class="active">Prd+Srv</th>
+								<th class="active">Frete</th>
+								<th class="active">Total</th>
+								<th class="active">Comb.</th>
+								<th class="active">Apv.</th>
+								<th class="active">Entr.</th>
+							<?php } ?>
 							<th class="active">Pago</th>
-							<th class="active">Final.</th>
-							<th class="active">Cancel.</th>
-							<th class="active">Compra</th>
-							<th class="active">Entrega</th>
+							<?php if($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+								<th class="active">Final.</th>
+								<th class="active">Cancel.</th>
+								<th class="active">Compra</th>
+								<th class="active">Entrega</th>
+							<?php } ?>
 							<th class="active">Pagam.</th>
 							<th class="active">Form.Pag</th>
 							<th class="active">Dt.Orç.</th>
-							<th class="active">Dt.Ent.</th>
+							<?php if($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+								<th class="active">Dt.Ent.</th>
+							<?php } ?>
 							<th class="active">Dt.Vnc.</th>
 						</tr>
 					</thead>
@@ -85,26 +93,34 @@
 										</a>
 									</td>';
 								echo '<td>' . $count . '</td>';	
-								echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
-								echo '<td>' . $row['NomeCliente'] . '</td>';
+								echo '<td>' . $row['idApp_OrcaTrata'] . ' - ' . $row['TipoFinanceiro'] . ' - ' . $row['Descricao'] . '</td>';
 								#echo '<td>' . $row['DataEntradaOrca'] . '</td>';
 								#echo '<td>' . $row['DataPrazo'] . '</td>';
+								if($_SESSION['log']['NivelEmpresa'] >= 4 ){
+									echo '<td>' . $row['NomeCliente'] . '</td>';
+								}
 								echo '<td class="text-left">' . $row['ValorExtraOrca'] . '</td>';
-								echo '<td class="text-left">' . $row['ValorRestanteOrca'] . '</td>';
-								echo '<td class="text-left">' . $row['ValorFrete'] . '</td>';
-								echo '<td class="text-left">' . $row['ValorTotalOrca'] . '</td>';
-								echo '<td>' . $row['CombinadoFrete'] . '</td>';
-								echo '<td>' . $row['AprovadoOrca'] . '</td>';
-								echo '<td>' . $row['ConcluidoOrca'] . '</td>';
+								if($_SESSION['log']['NivelEmpresa'] >= 4 ){
+									echo '<td class="text-left">' . $row['ValorRestanteOrca'] . '</td>';
+									echo '<td class="text-left">' . $row['ValorFrete'] . '</td>';
+									echo '<td class="text-left">' . $row['ValorTotalOrca'] . '</td>';
+									echo '<td>' . $row['CombinadoFrete'] . '</td>';
+									echo '<td>' . $row['AprovadoOrca'] . '</td>';
+									echo '<td>' . $row['ConcluidoOrca'] . '</td>';
+								}
 								echo '<td>' . $row['QuitadoOrca'] . '</td>';
-								echo '<td>' . $row['FinalizadoOrca'] . '</td>';
-								echo '<td>' . $row['CanceladoOrca'] . '</td>';
-								echo '<td>' . $row['Tipo_Orca'] . '</td>';
-								echo '<td>' . $row['TipoFrete'] . '</td>';
+								if($_SESSION['log']['NivelEmpresa'] >= 4 ){
+									echo '<td>' . $row['FinalizadoOrca'] . '</td>';
+									echo '<td>' . $row['CanceladoOrca'] . '</td>';
+									echo '<td>' . $row['Tipo_Orca'] . '</td>';
+									echo '<td>' . $row['TipoFrete'] . '</td>';
+								}
 								echo '<td>' . $row['AVAP'] . '</td>';
 								echo '<td>' . $row['FormaPag'] . '</td>';
 								echo '<td>' . $row['DataOrca'] . '</td>';
-								echo '<td>' . $row['DataEntregaOrca'] . '</td>';
+								if($_SESSION['log']['NivelEmpresa'] >= 4 ){
+									echo '<td>' . $row['DataEntregaOrca'] . '</td>';
+								}	
 								echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
 								#echo '<td>' . $row['Descricao'] . '</td>';
 								#echo '<td>' . $row['Nome'] . '</td>';
