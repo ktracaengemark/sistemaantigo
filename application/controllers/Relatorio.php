@@ -1481,7 +1481,7 @@ $data['select']['QuitadoOrca'] = array(
 		$data['select']['FormaPagamento'] = $this->Relatorio_model->select_formapag();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
 		
-        $data['titulo1'] = 'Cobranças';
+        $data['titulo1'] = 'Receitas À Receber';
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
@@ -1721,7 +1721,7 @@ $data['select']['QuitadoOrca'] = array(
 		$data['select']['FormaPagamento'] = $this->Relatorio_model->select_formapag();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
 		
-        $data['titulo1'] = 'Débitos';
+        $data['titulo1'] = 'Despesas À Pagar';
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
@@ -1807,6 +1807,8 @@ $data['select']['QuitadoOrca'] = array(
             'DataFim2',
 			'DataInicio3',
             'DataFim3',
+			'DataInicio4',
+            'DataFim4',
 			'TipoFinanceiro',
 			'TipoFinanceiroR',
 			'TipoFinanceiroD',
@@ -1853,7 +1855,9 @@ $data['select']['QuitadoOrca'] = array(
         $_SESSION['FiltroAlteraParcela']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
 		$_SESSION['FiltroAlteraParcela']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
         $_SESSION['FiltroAlteraParcela']['DataInicio3'] = $this->basico->mascara_data($data['query']['DataInicio3'], 'mysql');
-		$_SESSION['FiltroAlteraParcela']['DataFim3'] = $this->basico->mascara_data($data['query']['DataFim3'], 'mysql');        
+		$_SESSION['FiltroAlteraParcela']['DataFim3'] = $this->basico->mascara_data($data['query']['DataFim3'], 'mysql');
+        $_SESSION['FiltroAlteraParcela']['DataInicio4'] = $this->basico->mascara_data($data['query']['DataInicio4'], 'mysql');
+		$_SESSION['FiltroAlteraParcela']['DataFim4'] = $this->basico->mascara_data($data['query']['DataFim4'], 'mysql');
 		$_SESSION['FiltroAlteraParcela']['Produtos'] = $data['query']['Produtos'];
 		$_SESSION['FiltroAlteraParcela']['Orcarec'] = $data['query']['Orcarec'];
 		$_SESSION['FiltroAlteraParcela']['Orcades'] = $data['query']['Orcades'];
@@ -1875,6 +1879,7 @@ $data['select']['QuitadoOrca'] = array(
 		$_SESSION['FiltroAlteraParcela']['FormaPagamento'] = $data['query']['FormaPagamento'];
 		$_SESSION['FiltroAlteraParcela']['AVAP'] = $data['query']['AVAP'];
 		$_SESSION['FiltroAlteraParcela']['TipoFrete'] = $data['query']['TipoFrete'];
+		$_SESSION['FiltroAlteraParcela']['TipoFinanceiroR'] = $data['query']['TipoFinanceiroR'];
 		$_SESSION['FiltroAlteraParcela']['StatusComissaoOrca'] = $data['query']['StatusComissaoOrca'];
 		$_SESSION['FiltroAlteraParcela']['ConcluidoProduto'] = $data['query']['ConcluidoProduto'];
 		$_SESSION['FiltroAlteraParcela']['DevolvidoProduto'] = $data['query']['DevolvidoProduto'];
@@ -1893,6 +1898,8 @@ $data['select']['QuitadoOrca'] = array(
         $this->form_validation->set_rules('DataFim2', 'Data Fim da Entrega', 'trim|valid_date');
 		$this->form_validation->set_rules('DataInicio3', 'Data Início do Vencimento', 'trim|valid_date');
         $this->form_validation->set_rules('DataFim3', 'Data Fim do Vencimento', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio4', 'Data Início do Vnc da Prc', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim4', 'Data Fim do Vnc da Prc', 'trim|valid_date');
 		
 		$data['collapse'] = '';	
 
@@ -2060,7 +2067,9 @@ $data['select']['QuitadoOrca'] = array(
 			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
             $data['bd']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
 			$data['bd']['DataInicio3'] = $this->basico->mascara_data($data['query']['DataInicio3'], 'mysql');
-            $data['bd']['DataFim3'] = $this->basico->mascara_data($data['query']['DataFim3'], 'mysql');            
+            $data['bd']['DataFim3'] = $this->basico->mascara_data($data['query']['DataFim3'], 'mysql');
+			$data['bd']['DataInicio4'] = $this->basico->mascara_data($data['query']['DataInicio4'], 'mysql');
+            $data['bd']['DataFim4'] = $this->basico->mascara_data($data['query']['DataFim4'], 'mysql');            
 			$data['report'] = $this->Relatorio_model->list1_comissao($data['bd'],TRUE);
 
             /*

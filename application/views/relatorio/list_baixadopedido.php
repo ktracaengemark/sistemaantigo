@@ -61,9 +61,10 @@
 							<th class="active">Entrega</th>
 							<th class="active">Pagamento</th>
 							<th class="active">Form.Pagam.</th>
-							<th class="active">Dt. Orç.</th>
-							<th class="active">Dt. Ent.</th>
-							<th class="active">Dt. Venc.</th>
+							<th class="active">Dt.Orç.</th>
+							<th class="active">Dt.Ent.</th>
+							<th class="active">Dt.Vnc.</th>
+							<th class="active">Dt.Vnc.Prc.</th>
 							<!--<th class="active">Obs.</th>
 							<th class="active">Entregador</th>-->
 						</tr>
@@ -125,6 +126,7 @@
 								echo '<td>' . $row['DataOrca'] . '</td>';
 								echo '<td>' . $row['DataEntregaOrca'] . '</td>';
 								echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
+								echo '<td>' . $row['DataVencimento'] . '</td>';
 								#echo '<td>' . $row['Descricao'] . '</td>';
 								#echo '<td>' . $row['Nome'] . '</td>';
 								#echo '</div>';	

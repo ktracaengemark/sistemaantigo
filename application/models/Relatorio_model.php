@@ -1091,15 +1091,30 @@ class Relatorio_model extends CI_Model {
 
         if ($data['DataFim3']) {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '" AND PR.DataVencimento <= "' . $data['DataFim3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '")';
         }
         else {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '")';
         }
+
+		if ($data['DataFim4']) {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND PR.DataVencimento <= "' . $data['DataFim4'] . '")';
+        }
+        else {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
+        }
+
+		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
 		
 		$date_inicio_entrega = ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
 		$date_fim_entrega = ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc = ($data['DataInicio3']) ? 'OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND ' : FALSE;
+		$date_fim_vnc = ($data['DataFim3']) ? 'OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '" AND ' : FALSE;
 		
 		$date_inicio_vnc_prc = ($data['DataInicio4']) ? 'PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND ' : FALSE;
 		$date_fim_vnc_prc = ($data['DataFim4']) ? 'PR.DataVencimento <= "' . $data['DataFim4'] . '" AND ' : FALSE;
@@ -1143,6 +1158,7 @@ class Relatorio_model extends CI_Model {
                 OT.DataOrca,
                 OT.DataEntradaOrca,
                 OT.DataEntregaOrca,
+                OT.DataVencimentoOrca,
                 OT.ValorEntradaOrca,
 				OT.QuitadoOrca,
 				OT.ConcluidoOrca,
@@ -1174,12 +1190,15 @@ class Relatorio_model extends CI_Model {
 					LEFT JOIN Tab_AVAP AS TAV ON TAV.Abrev2 = OT.AVAP
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
             WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
                 ' . $date_inicio_entrega . '
                 ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
                 ' . $date_inicio_vnc_prc . '
                 ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				' . $consulta . ' AND
 				' . $permissao . '
 				' . $filtro1 . '
 				' . $filtro2 . '
@@ -1215,12 +1234,15 @@ class Relatorio_model extends CI_Model {
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
             WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
                 ' . $date_inicio_entrega . '
                 ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
                 ' . $date_inicio_vnc_prc . '
                 ' . $date_fim_vnc_prc . '
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				' . $consulta . ' AND				
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND			
 				' . $permissao . '
 				' . $filtro1 . '
 				' . $filtro2 . '
@@ -1259,6 +1281,7 @@ class Relatorio_model extends CI_Model {
 				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
                 $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
                 $row->DataEntregaOrca = $this->basico->mascara_data($row->DataEntregaOrca, 'barras');
+                $row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
                 $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
                 $row->DataPago = $this->basico->mascara_data($row->DataPago, 'barras');
                 $row->CombinadoFrete = $this->basico->mascara_palavra_completa($row->CombinadoFrete, 'NS');
@@ -1351,15 +1374,30 @@ class Relatorio_model extends CI_Model {
 
         if ($data['DataFim3']) {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '" AND PR.DataVencimento <= "' . $data['DataFim3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '")';
         }
         else {
             $consulta3 =
-                '(PR.DataVencimento >= "' . $data['DataInicio3'] . '")';
+                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '")';
         }
+
+		if ($data['DataFim4']) {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND PR.DataVencimento <= "' . $data['DataFim4'] . '")';
+        }
+        else {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
+        }
+		
+		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
 		
 		$date_inicio_entrega = ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
 		$date_fim_entrega = ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc = ($data['DataInicio3']) ? 'OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND ' : FALSE;
+		$date_fim_vnc = ($data['DataFim3']) ? 'OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '" AND ' : FALSE;
 		
 		$date_inicio_vnc_prc = ($data['DataInicio4']) ? 'PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND ' : FALSE;
 		$date_fim_vnc_prc = ($data['DataFim4']) ? 'PR.DataVencimento <= "' . $data['DataFim4'] . '" AND ' : FALSE;
@@ -1403,6 +1441,7 @@ class Relatorio_model extends CI_Model {
                 OT.DataOrca,
                 OT.DataEntradaOrca,
                 OT.DataEntregaOrca,
+                OT.DataVencimentoOrca,
                 OT.ValorEntradaOrca,
 				OT.QuitadoOrca,
 				OT.ConcluidoOrca,
@@ -1435,12 +1474,15 @@ class Relatorio_model extends CI_Model {
 					LEFT JOIN Tab_AVAP AS TAV ON TAV.Abrev2 = OT.AVAP
 					LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
             WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
                 ' . $date_inicio_entrega . '
                 ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
                 ' . $date_inicio_vnc_prc . '
                 ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				' . $consulta . ' AND
 				' . $permissao . '
 				' . $filtro1 . '
 				' . $filtro2 . '
@@ -1476,12 +1518,15 @@ class Relatorio_model extends CI_Model {
 					LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
             WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
                 ' . $date_inicio_entrega . '
                 ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
                 ' . $date_inicio_vnc_prc . '
                 ' . $date_fim_vnc_prc . '
-                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				' . $consulta . ' AND				
+                OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND				
 				' . $permissao . '
 				' . $filtro1 . '
 				' . $filtro2 . '
@@ -1519,6 +1564,7 @@ class Relatorio_model extends CI_Model {
 				$row->DataOrca = $this->basico->mascara_data($row->DataOrca, 'barras');
                 $row->DataEntradaOrca = $this->basico->mascara_data($row->DataEntradaOrca, 'barras');
                 $row->DataEntregaOrca = $this->basico->mascara_data($row->DataEntregaOrca, 'barras');
+                $row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
                 $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
                 $row->DataPago = $this->basico->mascara_data($row->DataPago, 'barras');
                 $row->CombinadoFrete = $this->basico->mascara_palavra_completa($row->CombinadoFrete, 'NS');
@@ -1617,7 +1663,56 @@ class Relatorio_model extends CI_Model {
             $consulta3 =
                 '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '")';
         }
+
+		if ($data['DataFim4']) {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND PR.DataVencimento <= "' . $data['DataFim4'] . '")';
+        }
+        else {
+            $consulta4 =
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
+        }
 		
+		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		
+		$date_inicio_entrega = ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
+		$date_fim_entrega = ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc = ($data['DataInicio3']) ? 'OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND ' : FALSE;
+		$date_fim_vnc = ($data['DataFim3']) ? 'OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc_prc = ($data['DataInicio4']) ? 'PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND ' : FALSE;
+		$date_fim_vnc_prc = ($data['DataFim4']) ? 'PR.DataVencimento <= "' . $data['DataFim4'] . '" AND ' : FALSE;
+		
+		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
+		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
+		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PR.DataVencimento) = ' . $data['Dia'] : FALSE;
+		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PR.DataVencimento) = ' . $data['Mesvenc'] : FALSE;
+		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
+		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;
+		$data['TipoFinanceiroR'] = ($data['TipoFinanceiroR']) ? ' AND TR.idTab_TipoFinanceiro = ' . $data['TipoFinanceiroR'] : FALSE;
+		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
+		$data['Orcarec'] = ($data['Orcarec']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcarec'] : FALSE;
+		$data['Campo'] = (!$data['Campo']) ? 'PR.DataVencimento' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$filtro1 = ($data['AprovadoOrca']) ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
+        $filtro2 = ($data['QuitadoOrca']) ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
+		$filtro3 = ($data['ConcluidoOrca']) ? 'OT.ConcluidoOrca = "' . $data['ConcluidoOrca'] . '" AND ' : FALSE;
+		$filtro4 = ($data['Quitado']) ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
+		$filtro5 = ($data['Modalidade']) ? 'OT.Modalidade = "' . $data['Modalidade'] . '" AND ' : FALSE;
+		$filtro6 = ($data['FormaPagamento']) ? 'OT.FormaPagamento = "' . $data['FormaPagamento'] . '" AND ' : FALSE;
+		$filtro7 = ($data['Tipo_Orca']) ? 'OT.Tipo_Orca = "' . $data['Tipo_Orca'] . '" AND ' : FALSE;
+		$filtro8 = ($data['TipoFrete']) ? 'OT.TipoFrete = "' . $data['TipoFrete'] . '" AND ' : FALSE;
+		$filtro9 = ($data['AVAP']) ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
+		$filtro10 = ($data['FinalizadoOrca']) ? 'OT.FinalizadoOrca = "' . $data['FinalizadoOrca'] . '" AND ' : FALSE;
+		$filtro11 = ($data['CanceladoOrca']) ? 'OT.CanceladoOrca = "' . $data['CanceladoOrca'] . '" AND ' : FALSE;
+		$filtro13 = ($data['CombinadoFrete']) ? 'OT.CombinadoFrete = "' . $data['CombinadoFrete'] . '" AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND PR.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;		
+
+		$filtro17 = ($data['NomeUsuario']) ? 'OT.idSis_Usuario = "' . $data['NomeUsuario'] . '" AND ' : FALSE;
+		$filtro12 = ($data['StatusComissaoOrca']) ? 'OT.StatusComissaoOrca = "' . $data['StatusComissaoOrca'] . '" AND ' : FALSE;		
+		/*
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
         //$data['Campo'] = (!$data['Campo']) ? 'TP.Produtos' : $data['Campo'];
@@ -1648,7 +1743,7 @@ class Relatorio_model extends CI_Model {
 		$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
         $data['Prodaux3'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux3']) ? ' AND TP3.idTab_Prodaux3 = ' . $data['Prodaux3'] : FALSE;		
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;		
-		
+		*/
         $query = $this->db->query('
             SELECT
                 CONCAT(IFNULL(C.idApp_Cliente,""), " - " ,IFNULL(C.NomeCliente,""), " - " ,IFNULL(C.CelularCliente,"") ) AS NomeCliente,
@@ -1685,6 +1780,8 @@ class Relatorio_model extends CI_Model {
 				OT.Associado,
 				OT.ValorComissao,
 				OT.StatusComissaoOrca,
+				PR.DataVencimento,
+				PR.Quitado,
 				EMP.NomeEmpresa,
 				US.Nome AS NomeColaborador,
 				MD.Modalidade,
@@ -1697,6 +1794,7 @@ class Relatorio_model extends CI_Model {
                 App_OrcaTrata AS OT
 				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
+				LEFT JOIN App_Parcelas AS PR ON PR.idApp_OrcaTrata = OT.idApp_OrcaTrata
 				LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 				LEFT JOIN Tab_Modalidade AS MD ON MD.Abrev = OT.Modalidade
 				LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
@@ -1704,26 +1802,36 @@ class Relatorio_model extends CI_Model {
 				LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = OT.idSis_Usuario
 				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
             WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
+                ' . $date_inicio_entrega . '
+                ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
+                ' . $date_inicio_vnc_prc . '
+                ' . $date_fim_vnc_prc . '
+				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				' . $permissao . '
 				' . $filtro1 . '
 				' . $filtro2 . '
 				' . $filtro3 . '
+				' . $filtro4 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
 				' . $filtro9 . '
 				' . $filtro10 . '
 				' . $filtro11 . '
-				' . $filtro12 . '
 				' . $filtro13 . '
+				' . $filtro12 . '
 				' . $filtro17 . '
-				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OT.idTab_TipoRD = "2" AND
-				' . $consulta . ' AND
-				' . $consulta2 . ' AND
-				' . $consulta3 . ' 
-				' . $data['Orcamento'] . ' 
-				' . $data['Cliente'] . '
-
+				PR.idTab_TipoRD = "2" 
+                ' . $data['Orcamento'] . '
+                ' . $data['Cliente'] . '
+                ' . $data['TipoFinanceiroR'] . ' 
+			GROUP BY
+                OT.idApp_OrcaTrata
             ORDER BY
 				OT.DataVencimentoOrca,
 				OT.idApp_OrcaTrata
@@ -1756,6 +1864,7 @@ class Relatorio_model extends CI_Model {
 				$row->DataEntregaOrca = $this->basico->mascara_data($row->DataEntregaOrca, 'barras');
 				$row->DataPrazo = $this->basico->mascara_data($row->DataPrazo, 'barras');
                 $row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
+                $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
 				$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
                 $row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
 				$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
@@ -7008,12 +7117,25 @@ exit();*/
 
 		if ($data['DataFim4']) {
             $consulta4 =
-                '(OT.DataQuitado >= "' . $data['DataInicio4'] . '" AND OT.DataQuitado <= "' . $data['DataFim4'] . '")';
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND PR.DataVencimento <= "' . $data['DataFim4'] . '")';
         }
         else {
             $consulta4 =
-                '(OT.DataQuitado >= "' . $data['DataInicio4'] . '")';
+                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }
+
+		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		
+		$date_inicio_entrega = ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
+		$date_fim_entrega = ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc = ($data['DataInicio3']) ? 'OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND ' : FALSE;
+		$date_fim_vnc = ($data['DataFim3']) ? 'OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc_prc = ($data['DataInicio4']) ? 'PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND ' : FALSE;
+		$date_fim_vnc_prc = ($data['DataFim4']) ? 'PR.DataVencimento <= "' . $data['DataFim4'] . '" AND ' : FALSE;
+		
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
 		$data['Entregador'] = ($data['Entregador']) ? ' AND OT.Entregador = ' . $data['Entregador'] : FALSE;
@@ -7064,6 +7186,15 @@ exit();*/
 				OT.ObsOrca,
 				OT.Descricao,
 				OT.Entregador,
+                PR.idSis_Empresa,
+				PR.idSis_Usuario,
+				PR.Parcela,
+				CONCAT(PR.Parcela) AS Parcela,
+                PR.DataVencimento,
+                PR.ValorParcela,
+                PR.DataPago,
+                PR.ValorPago,
+                PR.Quitado,
 				TFP.FormaPag,
 				TSU.Nome
 				
@@ -7072,13 +7203,19 @@ exit();*/
                 App_OrcaTrata AS OT
 				LEFT JOIN Sis_Usuario AS TSU ON TSU.idSis_Usuario = OT.Entregador
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
+				LEFT JOIN App_Parcelas AS PR ON OT.idApp_OrcaTrata = PR.idApp_OrcaTrata
 				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
 				LEFT JOIN Tab_AVAP AS TAV ON TAV.Abrev2 = OT.AVAP
             WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
+                ' . $date_inicio_entrega . '
+                ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
+                ' . $date_inicio_vnc_prc . '
+                ' . $date_fim_vnc_prc . '
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                (' . $consulta . ') AND
-				(' . $consulta2 . ') AND
-				(' . $consulta3 . ') AND
                 ' . $filtro1 . '
                 ' . $filtro2 . '
 				' . $filtro3 . '
@@ -7120,6 +7257,7 @@ exit();*/
 				$row->DataEntregaOrca = $this->basico->mascara_data($row->DataEntregaOrca, 'barras');
 				$row->DataPrazo = $this->basico->mascara_data($row->DataPrazo, 'barras');
                 $row->DataVencimentoOrca = $this->basico->mascara_data($row->DataVencimentoOrca, 'barras');
+                $row->DataVencimento = $this->basico->mascara_data($row->DataVencimento, 'barras');
 				$row->DataConclusao = $this->basico->mascara_data($row->DataConclusao, 'barras');
                 $row->DataQuitado = $this->basico->mascara_data($row->DataQuitado, 'barras');
 				$row->DataRetorno = $this->basico->mascara_data($row->DataRetorno, 'barras');
@@ -7177,8 +7315,6 @@ exit();*/
                 '(OT.DataOrca >= "' . $data['DataInicio'] . '")';
         }
 
-		
-		
         if ($data['DataFim2']) {
             $consulta2 =
                 '(OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND OT.DataEntregaOrca <= "' . $data['DataFim2'] . '")';
@@ -7188,8 +7324,6 @@ exit();*/
                 '(OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '")';
         }
 
-		
-		
         if ($data['DataFim3']) {
             $consulta3 =
                 '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '")';
@@ -7207,8 +7341,19 @@ exit();*/
             $consulta4 =
                 '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }
+		
+		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		
 		$date_inicio_entrega = ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
 		$date_fim_entrega = ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc = ($data['DataInicio3']) ? 'OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND ' : FALSE;
+		$date_fim_vnc = ($data['DataFim3']) ? 'OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc_prc = ($data['DataInicio4']) ? 'PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND ' : FALSE;
+		$date_fim_vnc_prc = ($data['DataFim4']) ? 'PR.DataVencimento <= "' . $data['DataFim4'] . '" AND ' : FALSE;
+		
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;
 		$data['Entregador'] = ($data['Entregador']) ? ' AND OT.Entregador = ' . $data['Entregador'] : FALSE;
@@ -7226,7 +7371,7 @@ exit();*/
 		$filtro7 = ($data['Tipo_Orca'] != '#') ? 'OT.Tipo_Orca = "' . $data['Tipo_Orca'] . '" AND ' : FALSE;
 		$filtro13 = ($data['CombinadoFrete'] != '#') ? 'OT.CombinadoFrete = "' . $data['CombinadoFrete'] . '" AND ' : FALSE;
 		$filtro14 = ($data['Quitado']) ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND PR.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -7273,7 +7418,6 @@ exit();*/
                 PR.Quitado,
 				TFP.FormaPag,
 				TSU.Nome
-				
             FROM
                 App_OrcaTrata AS OT
 				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
@@ -7284,11 +7428,15 @@ exit();*/
 				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
 				LEFT JOIN Tab_AVAP AS TAV ON TAV.Abrev2 = OT.AVAP
             WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
                 ' . $date_inicio_entrega . '
                 ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
+                ' . $date_inicio_vnc_prc . '
+                ' . $date_fim_vnc_prc . '
 				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                (' . $consulta . ') AND
-				(' . $consulta3 . ') AND
                 ' . $permissao . '
                 ' . $filtro1 . '
                 ' . $filtro2 . '
@@ -7299,7 +7447,7 @@ exit();*/
 				' . $filtro7 . '
 				' . $filtro13 . '
 				' . $filtro14 . '
-				OT.idTab_TipoRD = "2"
+				OT.idTab_TipoRD = "2" 
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
 				' . $data['Entregador'] . '
@@ -7419,8 +7567,19 @@ exit();*/
             $consulta4 =
                 '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }
+		
+		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		
 		$date_inicio_entrega = ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
 		$date_fim_entrega = ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc = ($data['DataInicio3']) ? 'OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND ' : FALSE;
+		$date_fim_vnc = ($data['DataFim3']) ? 'OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc_prc = ($data['DataInicio4']) ? 'PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND ' : FALSE;
+		$date_fim_vnc_prc = ($data['DataFim4']) ? 'PR.DataVencimento <= "' . $data['DataFim4'] . '" AND ' : FALSE;
+		
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Fornecedor'] = ($data['Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['Fornecedor'] : FALSE;
 		$data['Entregador'] = ($data['Entregador']) ? ' AND OT.Entregador = ' . $data['Entregador'] : FALSE;
@@ -7437,7 +7596,7 @@ exit();*/
 		$filtro6 = ($data['AVAP'] != '#') ? 'OT.AVAP = "' . $data['AVAP'] . '" AND ' : FALSE;
 		$filtro7 = ($data['Tipo_Orca'] != '#') ? 'OT.Tipo_Orca = "' . $data['Tipo_Orca'] . '" AND ' : FALSE;
 		$filtro13 = ($data['CombinadoFrete'] != '#') ? 'OT.CombinadoFrete = "' . $data['CombinadoFrete'] . '" AND ' : FALSE;
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND PR.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 
         $query = $this->db->query('
             SELECT
@@ -7496,11 +7655,15 @@ exit();*/
 				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
 				LEFT JOIN Tab_AVAP AS TAV ON TAV.Abrev2 = OT.AVAP
             WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
                 ' . $date_inicio_entrega . '
                 ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
+                ' . $date_inicio_vnc_prc . '
+                ' . $date_fim_vnc_prc . '
 				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-                (' . $consulta . ') AND
-				(' . $consulta3 . ') AND
                 ' . $permissao . '
                 ' . $filtro1 . '
                 ' . $filtro2 . '
@@ -7510,7 +7673,7 @@ exit();*/
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro13 . '
-				OT.idTab_TipoRD = "1"
+				OT.idTab_TipoRD = "1" 
                 ' . $data['Orcamento'] . '
                 ' . $data['Fornecedor'] . '
 				' . $data['Entregador'] . '

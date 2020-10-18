@@ -57,8 +57,9 @@
 							<th class="active">Form.Pag.</th>
 							<th class="active">DtPedido</th>
 							<th class="active">DtEntrega</th>
-							<th class="active">DtVenc Prc</th>
-							<th class="active">Valor Parc</th>
+							<th class="active">DtVnc</th>
+							<th class="active">DtVncPrc</th>
+							<th class="active">ParcR$</th>
 							<th class="active">Quitada</th>
 							<!--<th class="active">Dt.Pag</th>
 							<th class="active">Recebido</th>
@@ -114,6 +115,7 @@
 								echo '<td>' . $row['FormaPag'] . '</td>';
 								echo '<td>' . $row['DataOrca'] . '</td>';
 								echo '<td>' . $row['DataEntregaOrca'] . '</td>';
+								echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
 								echo '<td>' . $row['DataVencimento'] . '</td>';
 								echo '<td class="text-left">' . $row['ValorParcela'] . '</td>';
 								echo '<td>' . $row['Quitado'] . '</td>';
