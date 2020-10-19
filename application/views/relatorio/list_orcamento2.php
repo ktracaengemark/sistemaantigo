@@ -1,33 +1,33 @@
 <div style="overflow: auto; height: 550px; ">	
+	<!--
 	<div class="panel panel-default">
 		<div class="panel-body">
-
 			<div class="col-md-1"></div>
 			<div class="col-md-3">
 				<label for="DataFim">Orçamento:</label>
 				<div class="input-group">
 					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Orcamento" value="<?php echo $report->soma->somarestante ?>">
+					<input type="text" class="form-control" disabled aria-label="Orcamento" value="<?php #echo $report->soma->somarestante ?>">
 				</div>
 			</div>
 			<div class="col-md-3">
 				<label for="DataFim">Frete:</label>
 				<div class="input-group">
 					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Frete" value="<?php echo $report->soma->somafrete ?>">
+					<input type="text" class="form-control" disabled aria-label="Frete" value="<?php #echo $report->soma->somafrete ?>">
 				</div>
 			</div>
 			<div class="col-md-3">
 				<label for="DataFim">Total:</label>
 				<div class="input-group">
 					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total" value="<?php echo $report->soma->somatotal ?>">
+					<input type="text" class="form-control" disabled aria-label="Total" value="<?php #echo $report->soma->somatotal ?>">
 				</div>
 			</div>
 			<div class="col-md-1"></div>
 		</div>
 	</div>
-
+	-->
 	<div class="container-fluid">
 		<div class="row">
 			<div>

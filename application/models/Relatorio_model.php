@@ -7185,8 +7185,6 @@ exit();*/
                 ' . $date_fim_entrega . '
                 ' . $date_inicio_vnc . '
                 ' . $date_fim_vnc . '
-                ' . $date_inicio_vnc_prc . '
-                ' . $date_fim_vnc_prc . '
                 ' . $filtro1 . '
                 ' . $filtro2 . '
 				' . $filtro3 . '
@@ -7405,8 +7403,6 @@ exit();*/
                 ' . $date_fim_entrega . '
                 ' . $date_inicio_vnc . '
                 ' . $date_fim_vnc . '
-                ' . $date_inicio_vnc_prc . '
-                ' . $date_fim_vnc_prc . '
 				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 ' . $permissao . '
                 ' . $filtro1 . '
@@ -7417,7 +7413,6 @@ exit();*/
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro13 . '
-				' . $filtro14 . '
 				OT.idTab_TipoRD = "2" 
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
@@ -7632,8 +7627,6 @@ exit();*/
                 ' . $date_fim_entrega . '
                 ' . $date_inicio_vnc . '
                 ' . $date_fim_vnc . '
-                ' . $date_inicio_vnc_prc . '
-                ' . $date_fim_vnc_prc . '
 				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 ' . $permissao . '
                 ' . $filtro1 . '

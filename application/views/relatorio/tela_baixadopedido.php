@@ -278,6 +278,7 @@
 															name="DataFim3" value="<?php echo set_value('DataFim3', $query['DataFim3']); ?>">
 												</div>
 											</div>
+											<!--
 											<div class="col-md-3">
 												<label for="DataInicio4">Vnc.Prc.Inc.</label>
 												<div class="input-group DatePicker">
@@ -298,6 +299,7 @@
 															name="DataFim4" value="<?php echo set_value('DataFim4', $query['DataFim4']); ?>">
 												</div>
 											</div>
+											-->
 										</div>
 									</div>
 								</div>

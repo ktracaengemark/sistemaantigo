@@ -102,7 +102,8 @@
 								</div>
 							</div>	
 							<div class="row">
-								<div class="col-md-3"></div>
+								<div class="col-md-6"></div>
+								<!--
 								<div class="col-md-3 text-left">
 									<label for="Quitado">Status das Parcelas</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -118,6 +119,7 @@
 										?>
 									</select>
 								</div>
+								-->
 								<div class="col-md-3">
 									<label for="FinalizadoOrca">Finalizado</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"

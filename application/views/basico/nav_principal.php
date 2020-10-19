@@ -58,10 +58,10 @@
 						</button>
 						
 						<ul class="dropdown-menu" role="menu">
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>agenda"><span class="glyphicon glyphicon-pencil"></span> Tarefas </a></li>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>agenda"><span class="glyphicon glyphicon-pencil"></span> Tarefas & Agenda </a></li>
 							<li role="separator" class="divider"></li>
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>agenda"><span class="glyphicon glyphicon-calendar"></span> Agenda </a></li>
-							<li role="separator" class="divider"></li>
+							<!--<li><a class="dropdown-item" href="<?php echo base_url() ?>agenda"><span class="glyphicon glyphicon-calendar"></span> Agenda </a></li>
+							<li role="separator" class="divider"></li>-->
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/admin"><span class="glyphicon glyphicon-list"></span> Menu </a></li>
 						</ul>
 					</div>							
@@ -85,8 +85,8 @@
 						
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="<?php echo base_url() ?>pedidos/pedidos"><span class="glyphicon glyphicon-pencil"></span> Gestor de Receitas</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="<?php echo base_url() ?>Orcatrata/cadastrar3"><span class="glyphicon glyphicon-plus"></span> Nova Receita</a></li>
+							<!--<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>Orcatrata/cadastrar3"><span class="glyphicon glyphicon-plus"></span> Nova Receita</a></li>-->
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/admin"><span class="glyphicon glyphicon-list"></span> Menu</a></li>
 							<?php if ($_SESSION['log']['idSis_Empresa'] == 5 ) { ?>
@@ -125,8 +125,8 @@
 						
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="<?php echo base_url() ?>despesas/despesas"><span class="glyphicon glyphicon-pencil"></span> Gestor de Despesas</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="<?php echo base_url() ?>Orcatrata/cadastrardesp"><span class="glyphicon glyphicon-plus"></span> Nova Despesa</a></li>
+							<!--<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>Orcatrata/cadastrardesp"><span class="glyphicon glyphicon-plus"></span> Nova Despesa</a></li>-->
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/admin"><span class="glyphicon glyphicon-list"></span> Menu </a></li>
 							<!--<li role="separator" class="divider"></li>
@@ -189,16 +189,16 @@
 							</li>
 							<li role="separator" class="divider"></li>
 							-->							
-							<!--
-							<li><a href="<?php echo base_url() ?>login/registrar2"><span class="glyphicon glyphicon-user"></span> Conta Pessoal</a></li>
-							<li role="separator" class="divider"></li>-->
+							
+							<li><a href="<?php echo base_url() ?>relatorio/loginempresa"><span class="glyphicon glyphicon-pencil"></span> Administração</a></li>
+							<li role="separator" class="divider"></li>
 							<?php if ($_SESSION['log']['idSis_Empresa'] == 2 ) { ?>		
 							<li><a href="<?php echo base_url() ?>relatorio/clenkontraki"><span class="glyphicon glyphicon-list-alt"></span> Clientes Enkontraki</a></li>									
 							<li role="separator" class="divider"></li>
 							<?php } ?>
-							<li><a href="<?php echo base_url() ?>login/sair"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
-							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/admin"><span class="glyphicon glyphicon-list"></span> Menu</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>login/sair"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema</a></li>
 						</ul>
 					</div>
 				</li>	

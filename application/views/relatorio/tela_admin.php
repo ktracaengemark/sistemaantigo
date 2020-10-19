@@ -64,14 +64,28 @@
 									<div class="form-group col-md-12 text-left">
 										<div class="row">		
 											<a  type="button" class="btn btn-md btn-default btn-block text-left" href="<?php echo base_url() ?>relatorio/orcamento" role="button"> 
-												<span class="glyphicon glyphicon-usd"></span> Receitas
+												<span class="glyphicon glyphicon-pencil"></span> Receitas
 											</a>											
 										</div>	
 									</div>
 									<div class="form-group col-md-12 text-left">
 										<div class="row">										
 											<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/cobrancas" role="button"> 
-												<span class="glyphicon glyphicon-usd"></span> Receitas à Receber
+												<span class="glyphicon glyphicon-usd"></span> Receitas & Parcelas
+											</a>
+										</div>	
+									</div>
+									<div class="form-group col-md-12 text-left">
+										<div class="row">										
+											<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
+												<span class="glyphicon glyphicon-gift"></span> Receitas & Produtos
+											</a>
+										</div>	
+									</div>
+									<div class="form-group col-md-12 text-left">
+										<div class="row">										
+											<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
+												<span class="glyphicon glyphicon-pencil"></span> Receitas & Procedimentos
 											</a>
 										</div>	
 									</div>
@@ -192,14 +206,28 @@
 									<div class="form-group col-md-12 text-left">
 										<div class="row">		
 											<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/orcamento2" role="button"> 
-												<span class="glyphicon glyphicon-usd"></span> Despesas
+												<span class="glyphicon glyphicon-pencil"></span> Despesas
 											</a>											
 										</div>	
 									</div>
 									<div class="form-group col-md-12 text-left">
 										<div class="row">										
 											<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/debitos" role="button"> 
-												<span class="glyphicon glyphicon-usd"></span> Despesas à Pagar
+												<span class="glyphicon glyphicon-usd"></span> Despesas & Parcelas
+											</a>
+										</div>	
+									</div>
+									<div class="form-group col-md-12 text-left">
+										<div class="row">										
+											<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
+												<span class="glyphicon glyphicon-gift"></span> Despesas & Produtos
+											</a>
+										</div>	
+									</div>
+									<div class="form-group col-md-12 text-left">
+										<div class="row">										
+											<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
+												<span class="glyphicon glyphicon-pencil"></span> Despesas & Procedimentos
 											</a>
 										</div>	
 									</div>	
