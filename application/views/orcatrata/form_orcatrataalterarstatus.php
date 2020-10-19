@@ -20,7 +20,7 @@
 											<div class="row">
 												<div class="col-md-4">
 													<label for="TipoFinanceiro">Tipo de Receita</label>
-													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 															id="TipoFinanceiro" name="TipoFinanceiro">
 														<option value="">-- Selecione uma opção --</option>
 														<?php
