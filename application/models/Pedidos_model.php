@@ -764,7 +764,8 @@ class Pedidos_model extends CI_Model {
 				OT.CanceladoOrca = "N" AND
 				OT.CombinadoFrete = "S" AND
 				OT.AprovadoOrca = "S" AND
-				
+				OT.ProntoOrca = "S" AND
+				OT.EnviadoOrca = "S" AND
 				OT.ConcluidoOrca = "N" AND
 				PRD.ConcluidoProduto = "N"
                 ' . $data['Orcamento'] . '
