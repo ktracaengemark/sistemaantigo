@@ -1238,6 +1238,7 @@
 										</div>									
 									</div>
 								</div>
+								<br>
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 									<div class="panel panel-default">
 										<div class="panel-heading text-left">
@@ -1385,8 +1386,10 @@
 											</div>
 										</div>	
 									</div>
+									<br>
 								<?php } ?>
 								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+								<div id="CanceladoOrca" <?php echo $div['CanceladoOrca']; ?>>
 									<div class="panel panel-default">
 										<div class="panel-heading">
 											<h4 class="mb-3"><b>Status do Pedido</b></h4>
@@ -1706,6 +1709,8 @@
 											-->
 										</div>
 									</div>
+								<br>
+								</div>
 								<?php } ?>
 								<div class="panel panel-default">
 									<div class="panel-heading">
@@ -1714,7 +1719,7 @@
 										<h4 class="mb-3"><b>Pedido</b></h4>
 										<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 											<div class="row">
-												<div class="col-md-8">
+												<div class="col-md-9">
 													<?php if ($metodo > 1) { ?>
 													<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
 													<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
@@ -1788,7 +1793,7 @@
 													<?php } ?>
 												</div>
 												<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-												<div class="col-md-4">
+												<div class="col-md-3">
 													<div class="panel panel-primary">
 														<div class="panel-heading">
 															<div class="row">
@@ -1799,7 +1804,7 @@
 																		foreach ($select['CanceladoOrca'] as $key => $row) {
 																			if (!$orcatrata['CanceladoOrca'])$orcatrata['CanceladoOrca'] = 'N';
 
-																			($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																			($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
 																			if ($orcatrata['CanceladoOrca'] == $key) {
 																				echo ''
@@ -1820,13 +1825,11 @@
 																		?>
 																	</div>
 																</div>
-																<div id="CanceladoOrca" <?php echo $div['CanceladoOrca']; ?>>
-																	<div class="col-md-12">
-																		<label for="ObsOrca"></label>
-																		<textarea class="form-control" id="ObsOrca" <?php echo $readonly; ?> placeholder="Motivo:"
-																				  name="ObsOrca"><?php echo $orcatrata['ObsOrca']; ?></textarea>
-																	</div>
-																</div>	
+																<div class="col-md-12">
+																	<label for="ObsOrca"></label>
+																	<textarea class="form-control" id="ObsOrca" <?php echo $readonly; ?> placeholder="Motivo:"
+																			  name="ObsOrca"><?php echo $orcatrata['ObsOrca']; ?></textarea>
+																</div>
 															</div>
 														</div>
 													</div>

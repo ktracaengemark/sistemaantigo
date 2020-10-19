@@ -433,7 +433,7 @@ class Orcatrata extends CI_Controller {
 		$data['radio'] = array(
             'CanceladoOrca' => $this->basico->radio_checked($data['orcatrata']['CanceladoOrca'], 'Orçamento Cancelado', 'NS'),
         );
-        ($data['orcatrata']['CanceladoOrca'] == 'S') ?
+        ($data['orcatrata']['CanceladoOrca'] == 'N') ?
             $data['div']['CanceladoOrca'] = '' : $data['div']['CanceladoOrca'] = 'style="display: none;"';		
 		
 		$data['radio'] = array(
@@ -1310,7 +1310,7 @@ class Orcatrata extends CI_Controller {
 		$data['radio'] = array(
             'CanceladoOrca' => $this->basico->radio_checked($data['orcatrata']['CanceladoOrca'], 'Orçamento Cancelado', 'NS'),
         );
-        ($data['orcatrata']['CanceladoOrca'] == 'S') ?
+        ($data['orcatrata']['CanceladoOrca'] == 'N') ?
             $data['div']['CanceladoOrca'] = '' : $data['div']['CanceladoOrca'] = 'style="display: none;"';
 			
 			
@@ -2184,7 +2184,7 @@ class Orcatrata extends CI_Controller {
 		$data['radio'] = array(
             'CanceladoOrca' => $this->basico->radio_checked($data['orcatrata']['CanceladoOrca'], 'Orçamento Cancelado', 'NS'),
         );
-        ($data['orcatrata']['CanceladoOrca'] == 'S') ?
+        ($data['orcatrata']['CanceladoOrca'] == 'N') ?
             $data['div']['CanceladoOrca'] = '' : $data['div']['CanceladoOrca'] = 'style="display: none;"'; 		
 		
         $data['radio'] = array(
@@ -3222,7 +3222,7 @@ class Orcatrata extends CI_Controller {
 		$data['radio'] = array(
             'CanceladoOrca' => $this->basico->radio_checked($data['orcatrata']['CanceladoOrca'], 'Produtos Entregues', 'NS'),
         );
-        ($data['orcatrata']['CanceladoOrca'] == 'S') ?
+        ($data['orcatrata']['CanceladoOrca'] == 'N') ?
             $data['div']['CanceladoOrca'] = '' : $data['div']['CanceladoOrca'] = 'style="display: none;"';        
 		
 		$data['radio'] = array(
@@ -4415,7 +4415,7 @@ class Orcatrata extends CI_Controller {
 		$data['radio'] = array(
             'CanceladoOrca' => $this->basico->radio_checked($data['orcatrata']['CanceladoOrca'], 'Produtos Entregues', 'NS'),
         );
-        ($data['orcatrata']['CanceladoOrca'] == 'S') ?
+        ($data['orcatrata']['CanceladoOrca'] == 'N') ?
             $data['div']['CanceladoOrca'] = '' : $data['div']['CanceladoOrca'] = 'style="display: none;"';
 			
 		$data['radio'] = array(
@@ -5401,7 +5401,7 @@ class Orcatrata extends CI_Controller {
 		$data['radio'] = array(
             'CanceladoOrca' => $this->basico->radio_checked($data['orcatrata']['CanceladoOrca'], 'Orçamento Cancelado', 'NS'),
         );
-        ($data['orcatrata']['CanceladoOrca'] == 'S') ?
+        ($data['orcatrata']['CanceladoOrca'] == 'N') ?
             $data['div']['CanceladoOrca'] = '' : $data['div']['CanceladoOrca'] = 'style="display: none;"';        
 		
 		$data['radio'] = array(
@@ -6330,7 +6330,7 @@ class Orcatrata extends CI_Controller {
 		$data['radio'] = array(
             'CanceladoOrca' => $this->basico->radio_checked($data['orcatrata']['CanceladoOrca'], 'Orçamento Cancelado', 'NS'),
         );
-        ($data['orcatrata']['CanceladoOrca'] == 'S') ?
+        ($data['orcatrata']['CanceladoOrca'] == 'N') ?
             $data['div']['CanceladoOrca'] = '' : $data['div']['CanceladoOrca'] = 'style="display: none;"';
 		
 		$data['radio'] = array(
@@ -7247,7 +7247,7 @@ class Orcatrata extends CI_Controller {
 		$data['radio'] = array(
             'CanceladoOrca' => $this->basico->radio_checked($data['orcatrata']['CanceladoOrca'], 'Produtos Entregues', 'NS'),
         );
-        ($data['orcatrata']['CanceladoOrca'] == 'S') ?
+        ($data['orcatrata']['CanceladoOrca'] == 'N') ?
             $data['div']['CanceladoOrca'] = '' : $data['div']['CanceladoOrca'] = 'style="display: none;"';
 		
 		$data['radio'] = array(
