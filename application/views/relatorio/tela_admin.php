@@ -75,21 +75,21 @@
 											</a>
 										</div>	
 									</div>
-									<div class="form-group col-md-12 text-left">
-										<div class="row">										
-											<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
-												<span class="glyphicon glyphicon-gift"></span> Receitas & Produtos
-											</a>
-										</div>	
-									</div>
-									<div class="form-group col-md-12 text-left">
-										<div class="row">										
-											<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
-												<span class="glyphicon glyphicon-pencil"></span> Receitas & Procedimentos
-											</a>
-										</div>	
-									</div>
 									<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
+										<div class="form-group col-md-12 text-left">
+											<div class="row">										
+												<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
+													<span class="glyphicon glyphicon-gift"></span> Receitas & Produtos
+												</a>
+											</div>	
+										</div>
+										<div class="form-group col-md-12 text-left">
+											<div class="row">										
+												<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
+													<span class="glyphicon glyphicon-pencil"></span> Receitas & Procedimentos
+												</a>
+											</div>	
+										</div>
 										<div class="form-group col-md-12 text-left">
 											<div class="row">										
 												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/baixadopedido" role="button"> 
@@ -217,20 +217,22 @@
 											</a>
 										</div>	
 									</div>
-									<div class="form-group col-md-12 text-left">
-										<div class="row">										
-											<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
-												<span class="glyphicon glyphicon-gift"></span> Despesas & Produtos
-											</a>
-										</div>	
-									</div>
-									<div class="form-group col-md-12 text-left">
-										<div class="row">										
-											<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
-												<span class="glyphicon glyphicon-pencil"></span> Despesas & Procedimentos
-											</a>
-										</div>	
-									</div>	
+									<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
+										<div class="form-group col-md-12 text-left">
+											<div class="row">										
+												<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
+													<span class="glyphicon glyphicon-gift"></span> Despesas & Produtos
+												</a>
+											</div>	
+										</div>
+										<div class="form-group col-md-12 text-left">
+											<div class="row">										
+												<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
+													<span class="glyphicon glyphicon-pencil"></span> Despesas & Procedimentos
+												</a>
+											</div>	
+										</div>
+									<?php } ?>
 									<div class="form-group col-md-12 text-left">
 										<div class="row">		
 											<a  type="button" class="btn btn-md btn-warning btn-block" href="<?php echo base_url() ?>relatorio/balanco" role="button"> 
