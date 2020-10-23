@@ -45,19 +45,19 @@
 						<div class="panel panel-info">
 							<div class="panel-heading">	
 								<div class="row">
-									<div class="col-md-2">
+									<div class="col-md-4">
 										<label  for="Procedimento">Tarefa:</label>
 										<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?> maxlength="40"
 												  name="Procedimento"><?php echo $tarefa['Procedimento']; ?></textarea>
 									<?php echo form_error('Procedimento'); ?>
 									</div>									
-									<div class="col-md-2">
+									<div class="col-md-4">
 										<div class="row">
 											<div class="col-md-12 " >
 												<label for="Categoria">Categoria:</label>
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 														id="Categoria" name="Categoria">
-													<option value="">- Selecione uma Categoria -</option>	
+													<option value="">- Selec. Categoria -</option>	
 													<?php
 													foreach ($select['Categoria'] as $key => $row) {
 														if ($tarefa['Categoria'] == $key) {
@@ -105,16 +105,15 @@
 										</div>	
 										<div id="Cadastrar" <?php echo $div['Cadastrar']; ?>>	
 											<div class="row">											
-												<div class="col-md-12 text-left">
-													<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>categoria2/cadastrar3/" role="button"> 
-														<span class="glyphicon glyphicon-plus"></span>Categoria
+												<div class="col-md-6 text-left">
+													<a class="btn btn-md btn-info btn-block"   target="_blank" href="<?php echo base_url() ?>categoria2/cadastrar3/" role="button"> 
+														<span class="glyphicon glyphicon-plus"></span>Cat
 													</a>
 												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-12 text-left">
-													<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
-															<span class="glyphicon glyphicon-refresh"></span>Ref.
+											
+												<div class="col-md-6 text-left">
+													<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+															<span class="glyphicon glyphicon-refresh"></span>Rec.
 													</button>
 													<?php echo form_error('Cadastrar'); ?>
 												</div>											
@@ -146,11 +145,11 @@
 										</select>
 									</div>
 									-->
-									<div class="col-md-2 ">
+									<div class="col-md-4">
 										<label for="Prioridade">Prioridade:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 												id="Prioridade" name="Prioridade">
-											<option value="">-- Selecione uma opção --</option>
+											<!--<option value="">-- Selecione uma opção --</option>-->
 											<?php
 											foreach ($select['Prioridade'] as $key => $row) {
 												if ($tarefa['Prioridade'] == $key) {
@@ -163,7 +162,25 @@
 										</select>
 										<?php echo form_error('Prioridade'); ?>
 									</div>
-									<div class="col-md-4" >
+								</div>	
+								<div class="row">
+									<div class="col-md-4 ">
+										<label for="Statustarefa">StatusTRF:</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+												id="Statustarefa" name="Statustarefa">
+											<!--<option value="">-- Selecione uma opção --</option>-->
+											<?php
+											foreach ($select['Statustarefa'] as $key => $row) {
+												if ($tarefa['Statustarefa'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>
+									<div class="col-md-8" >
 										<div class="form-group">
 											<div class="row">
 												<div class="col-md-6 text-left">
@@ -193,22 +210,6 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-md-2 ">
-										<label for="Statustarefa">StatusTRF:</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-												id="Statustarefa" name="Statustarefa">
-											<!--<option value="">-- Selecione uma opção --</option>-->
-											<?php
-											foreach ($select['Statustarefa'] as $key => $row) {
-												if ($tarefa['Statustarefa'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											?>
-										</select>
-									</div>									
 									<!--
 									<div class="col-md-2 form-inline">
 										<label for="ConcluidoProcedimento">Tarefa Concl.?</label><br>

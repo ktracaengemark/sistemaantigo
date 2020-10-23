@@ -780,6 +780,7 @@ class Orcatrata_model extends CI_Model {
 		$permissao7 = ($_SESSION['FiltroAlteraParcela']['Tipo_Orca'] != "0" ) ? 'OT.Tipo_Orca = "' . $_SESSION['FiltroAlteraParcela']['Tipo_Orca'] . '" AND ' : FALSE;
 		$permissao33 = ($_SESSION['FiltroAlteraParcela']['AVAP'] != "0" ) ? 'OT.AVAP = "' . $_SESSION['FiltroAlteraParcela']['AVAP'] . '" AND ' : FALSE;
 		$permissao34 = ($_SESSION['FiltroAlteraParcela']['TipoFrete'] != "0" ) ? 'OT.TipoFrete = "' . $_SESSION['FiltroAlteraParcela']['TipoFrete'] . '" AND ' : FALSE;
+		$permissao5 = ($_SESSION['FiltroAlteraParcela']['Modalidade'] != "0" ) ? 'OT.Modalidade = "' . $_SESSION['FiltroAlteraParcela']['Modalidade'] . '" AND ' : FALSE;
 		$permissao6 = ($_SESSION['FiltroAlteraParcela']['FormaPagamento'] != "0" ) ? 'OT.FormaPagamento = "' . $_SESSION['FiltroAlteraParcela']['FormaPagamento'] . '" AND ' : FALSE;
 		$permissao32 = ($_SESSION['FiltroAlteraParcela']['TipoFinanceiroR'] != "0" ) ? 'OT.TipoFinanceiro = "' . $_SESSION['FiltroAlteraParcela']['TipoFinanceiroR'] . '" AND ' : FALSE;
 		
@@ -836,11 +837,13 @@ class Orcatrata_model extends CI_Model {
                 ' . $date_fim_vnc_prc . '
 				OT.idSis_Empresa = ' . $data . ' AND
 				OT.idTab_TipoRD = "2" AND
+				OT.Modalidade = "M" AND
 				PR.idSis_Empresa = ' . $data . ' AND
 				' . $permissao1 . '
 				' . $permissao2 . '
 				' . $permissao3 . '
 				' . $permissao4 . '
+				' . $permissao5 . '
 				' . $permissao6 . '
 				' . $permissao7 . '
 				' . $permissao10 . '
@@ -907,6 +910,7 @@ class Orcatrata_model extends CI_Model {
 		$permissao7 = ($_SESSION['FiltroAlteraParcela']['Tipo_Orca'] != "0" ) ? 'OT.Tipo_Orca = "' . $_SESSION['FiltroAlteraParcela']['Tipo_Orca'] . '" AND ' : FALSE;
 		$permissao33 = ($_SESSION['FiltroAlteraParcela']['AVAP'] != "0" ) ? 'OT.AVAP = "' . $_SESSION['FiltroAlteraParcela']['AVAP'] . '" AND ' : FALSE;
 		$permissao34 = ($_SESSION['FiltroAlteraParcela']['TipoFrete'] != "0" ) ? 'OT.TipoFrete = "' . $_SESSION['FiltroAlteraParcela']['TipoFrete'] . '" AND ' : FALSE;
+		$permissao5 = ($_SESSION['FiltroAlteraParcela']['Modalidade'] != "0" ) ? 'OT.Modalidade = "' . $_SESSION['FiltroAlteraParcela']['Modalidade'] . '" AND ' : FALSE;
 		$permissao6 = ($_SESSION['FiltroAlteraParcela']['FormaPagamento'] != "0" ) ? 'OT.FormaPagamento = "' . $_SESSION['FiltroAlteraParcela']['FormaPagamento'] . '" AND ' : FALSE;
 		$permissao32 = ($_SESSION['FiltroAlteraParcela']['TipoFinanceiroD'] != "0" ) ? 'OT.TipoFinanceiro = "' . $_SESSION['FiltroAlteraParcela']['TipoFinanceiroD'] . '" AND ' : FALSE;
 		
@@ -963,11 +967,13 @@ class Orcatrata_model extends CI_Model {
                 ' . $date_fim_vnc_prc . '
 				OT.idSis_Empresa = ' . $data . ' AND
 				OT.idTab_TipoRD = "1" AND
+				OT.Modalidade = "M" AND
 				PR.idSis_Empresa = ' . $data . ' AND		
 				' . $permissao1 . '
 				' . $permissao2 . '
 				' . $permissao3 . '
 				' . $permissao4 . '
+				' . $permissao5 . '
 				' . $permissao6 . '
 				' . $permissao7 . '
 				' . $permissao10 . '

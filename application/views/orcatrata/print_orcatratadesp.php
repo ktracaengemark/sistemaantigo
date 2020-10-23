@@ -250,10 +250,10 @@
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-3" scope="col">Despesa</th>
+									<th class="col-md-3" scope="col">Extra</th>
 									<th class="col-md-3" scope="col">Prudutos</th>
 									<th class="col-md-3" scope="col">Servicos</th>
-									<th class="col-md-3" scope="col">Desp + Prd + Srv</th>
+									<th class="col-md-3" scope="col">Extra + Prd + Srv</th>
 								</tr>
 							</thead>
 							<tbody>

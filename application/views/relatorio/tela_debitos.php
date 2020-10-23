@@ -247,6 +247,21 @@
 									?>
 								</select>
 							</div>
+							<div class="col-md-3 text-left">
+								<label for="Modalidade">Modalidade:</label>
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+										id="Modalidade" name="Modalidade">
+									<?php
+									foreach ($select['Modalidade'] as $key => $row) {
+										if ($query['Modalidade'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
 						</div>
 					</div>
 				</div>

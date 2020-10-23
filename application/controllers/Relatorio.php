@@ -1367,6 +1367,7 @@ $data['select']['QuitadoOrca'] = array(
 		$_SESSION['FiltroAlteraParcela']['Orcades'] = $data['query']['Orcades'];
 		$_SESSION['FiltroAlteraParcela']['NomeFornecedor'] = $data['query']['NomeFornecedor'];
 		$_SESSION['FiltroAlteraParcela']['FormaPagamento'] = $data['query']['FormaPagamento'];
+		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
 		$_SESSION['FiltroAlteraParcela']['AVAP'] = $data['query']['AVAP'];
 		$_SESSION['FiltroAlteraParcela']['TipoFrete'] = $data['query']['TipoFrete'];
@@ -1432,7 +1433,7 @@ $data['select']['QuitadoOrca'] = array(
 		
 		$data['select']['Modalidade'] = array(
             '0' => '::TODOS::',
-            'P' => 'Parcelas',
+            'P' => 'Dividido',
             'M' => 'Mensal',
         );
 		
@@ -1607,6 +1608,7 @@ $data['select']['QuitadoOrca'] = array(
 		$_SESSION['FiltroAlteraParcela']['Orcades'] = $data['query']['Orcades'];
 		$_SESSION['FiltroAlteraParcela']['NomeFornecedor'] = $data['query']['NomeFornecedor'];
 		$_SESSION['FiltroAlteraParcela']['FormaPagamento'] = $data['query']['FormaPagamento'];
+		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Tipo_Orca'] = $data['query']['Tipo_Orca'];
 		$_SESSION['FiltroAlteraParcela']['AVAP'] = $data['query']['AVAP'];
 		$_SESSION['FiltroAlteraParcela']['TipoFrete'] = $data['query']['TipoFrete'];
@@ -1672,7 +1674,7 @@ $data['select']['QuitadoOrca'] = array(
 		
 		$data['select']['Modalidade'] = array(
             '0' => '::TODOS::',
-            'P' => 'Parcelas',
+            'P' => 'Dividido',
             'M' => 'Mensal',
         );
 		
@@ -6003,6 +6005,9 @@ $data['select']['QuitadoOrca'] = array(
             'Ordenamento',
             'Campo',
         ), TRUE));
+		
+		$config['base_url'] = base_url() . 'relatorio/clientes/';
+		
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');

@@ -1205,6 +1205,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro2 . '
 				' . $filtro3 . '
 				' . $filtro4 . '
+				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
@@ -1249,6 +1250,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro2 . '
 				' . $filtro3 . '
 				' . $filtro4 . '
+				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
@@ -1490,6 +1492,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro2 . '
 				' . $filtro3 . '
 				' . $filtro4 . '
+				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
@@ -1534,6 +1537,7 @@ class Relatorio_model extends CI_Model {
 				' . $filtro2 . '
 				' . $filtro3 . '
 				' . $filtro4 . '
+				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
@@ -8225,13 +8229,16 @@ exit();*/
 
     }
 
-	public function list_clientes($data, $completo) {
+	public function list_clientes($data, $completo, $limit = null, $offset = null) {
 
         $data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'C.NomeCliente' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$filtro10 = ($data['Ativo'] != '#') ? 'C.Ativo = "' . $data['Ativo'] . '" AND ' : FALSE;
         #$q = ($_SESSION['log']['Permissao'] > 2) ? ' C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
+		
+		if($limit)
+			$this->db->limit($limit,$offset);
 		
 		$query = $this->db->query('
             SELECT
@@ -8270,10 +8277,10 @@ exit();*/
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
 			
-			limit 500
+			
         ');
         /*
-
+		limit 3
         #AND
         #C.idApp_Cliente = OT.idApp_Cliente
 

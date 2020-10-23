@@ -88,7 +88,7 @@ class Statuspedido extends CI_Controller {
             'QtdParcelasOrca',
             'DataVencimentoOrca',
             'ObsOrca',
-			'Modalidade',
+			#'Modalidade',
 			#'idTab_TipoRD',
 			'AVAP',
 			#'Tipo_Orca',
@@ -270,7 +270,7 @@ class Statuspedido extends CI_Controller {
             $data['orcatrata']['DataQuitado'] = $this->basico->mascara_data($data['orcatrata']['DataQuitado'], 'barras');
 			$data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'barras');
             $data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'barras');
-
+			
             #### Carrega os dados do cliente nas variáves de sessão ####
            # $this->load->model('Cliente_model');
             #$_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
@@ -448,7 +448,7 @@ class Statuspedido extends CI_Controller {
 		(!$data['orcatrata']['ProntoOrca']) ? $data['orcatrata']['ProntoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['DevolvidoOrca']) ? $data['orcatrata']['DevolvidoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
-		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;		
+		//(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;		
 		//(!$data['orcatrata']['TipoFrete']) ? $data['orcatrata']['TipoFrete'] = "1" : FALSE;
  		(!$data['orcatrata']['DetalhadaEntrega']) ? $data['orcatrata']['DetalhadaEntrega'] = 'N' : FALSE;
 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
@@ -481,13 +481,13 @@ class Statuspedido extends CI_Controller {
         );
         ($data['cadastrar']['AtualizaEndereco'] == 'N') ?
             $data['div']['AtualizaEndereco'] = '' : $data['div']['AtualizaEndereco'] = 'style="display: none;"';	
-			
+		/*	
         $data['radio'] = array(
             'Modalidade' => $this->basico->radio_checked($data['orcatrata']['Modalidade'], 'Modalidade', 'PM'),
         );
         ($data['orcatrata']['Modalidade'] == 'P') ?
             $data['div']['Modalidade'] = '' : $data['div']['Modalidade'] = 'style="display: none;"';
-        		
+        */		
 		$data['radio'] = array(
             'CombinadoFrete' => $this->basico->radio_checked($data['orcatrata']['CombinadoFrete'], 'Combinado Entrega', 'NS'),
         );

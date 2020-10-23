@@ -67,6 +67,7 @@ class Orcatrata extends CI_Controller {
             'ProfissionalOrca',
             'AprovadoOrca',
             'ConcluidoOrca',
+			'BrindeOrca',
 			'DevolvidoOrca',
 			'ProntoOrca',
             'QuitadoOrca',
@@ -197,7 +198,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['QtdPrdOrca']) ? $data['orcatrata']['QtdPrdOrca'] = '0' : FALSE;
 		(!$data['orcatrata']['QtdSrvOrca']) ? $data['orcatrata']['QtdSrvOrca'] = '0' : FALSE;
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
-		(!$data['orcatrata']['ValorExtraOrca']) ? $data['orcatrata']['ValorExtraOrca'] = '0.00' : FALSE;
+		//(!$data['orcatrata']['ValorExtraOrca']) ? $data['orcatrata']['ValorExtraOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['ValorSomaOrca']) ? $data['orcatrata']['ValorSomaOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 
@@ -279,6 +280,33 @@ class Orcatrata extends CI_Controller {
         }
         $data['count']['PMCount'] = $j - 1;
 
+		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+		$data['somatotal'] = 0;
+		
+		if ($data['valortotalorca'] > 0.00 && $data['orcatrata']['QtdParcelasOrca'] >=1) {
+			
+            for ($i = 1; $i <= $data['orcatrata']['QtdParcelasOrca']; $i++) {
+
+				$data['valoredit'][$i] =  str_replace(',', '.', str_replace('.', '', $this->input->post('ValorParcela' . $i)));
+				$data['somatotal'] += $data['valoredit'][$i];
+				
+				if ($this->input->post('Parcela' . $i) || $this->input->post('ValorParcela' . $i) || $this->input->post('DataVencimento' . $i)){
+					$data['parcelasrec'][$i]['Parcela'] = $this->input->post('Parcela' . $i);
+					$data['parcelasrec'][$i]['ValorParcela'] = $this->input->post('ValorParcela' . $i);
+					$data['parcelasrec'][$i]['DataVencimento'] = $this->input->post('DataVencimento' . $i);
+					$data['parcelasrec'][$i]['ValorPago'] = $this->input->post('ValorPago' . $i);
+					$data['parcelasrec'][$i]['DataPago'] = $this->input->post('DataPago' . $i);
+					$data['parcelasrec'][$i]['Quitado'] = $this->input->post('Quitado' . $i);
+				}
+            }
+			
+        }
+		
+		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
+		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];		
+		
+		/*
         if ($data['orcatrata']['ValorTotalOrca'] > 0) {
 
             for ($i = 1; $i <= $data['orcatrata']['QtdParcelasOrca']; $i++) {
@@ -295,17 +323,29 @@ class Orcatrata extends CI_Controller {
 			}
 
         }
-		
+		*/
 
         //Fim do trecho de código que dá pra melhorar
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### App_OrcaTrata ####
-        
-        #$this->form_validation->set_rules('DataProcedimento', 'DataProcedimento', 'required|trim');
-        #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
-        #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
+		
+		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
+			if($data['diferenca'] < 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
+			}elseif($data['diferenca'] > 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
+			}
+		}
+		if ($data['valortotalorca'] <= 0.00 ) {
+			$this->form_validation->set_rules('BrindeOrca', 'Se quiser Permitir Total = 0,00, então coloque a chave na posição "Sim".<br>Com o Total = 0,00, as parcelas geradas não serão salvas.', 'trim|valid_brinde');
+		}
+		
 		$this->form_validation->set_rules('DataOrca', 'Data do Orçamento', 'required|trim|valid_date');
 		$this->form_validation->set_rules('AVAP', 'À Vista ou À Prazo', 'required|trim');
 		$this->form_validation->set_rules('Modalidade', 'Tipo de Recebimento', 'required|trim');		
@@ -329,6 +369,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
+        $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['ProntoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
@@ -410,7 +451,8 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['CanceladoOrca']) ? $data['orcatrata']['CanceladoOrca'] = 'N' : FALSE;		
 		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;       
 		(!$data['orcatrata']['ProntoOrca']) ? $data['orcatrata']['ProntoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['DevolvidoOrca']) ? $data['orcatrata']['DevolvidoOrca'] = 'N' : FALSE;
         (!$data['orcatrata']['FinalizadoOrca']) ? $data['orcatrata']['FinalizadoOrca'] = 'N' : FALSE;
@@ -483,6 +525,13 @@ class Orcatrata extends CI_Controller {
         );
         ($data['orcatrata']['ConcluidoOrca'] == 'N') ?
             $data['div']['ConcluidoOrca'] = '' : $data['div']['ConcluidoOrca'] = 'style="display: none;"';
+
+			
+        $data['radio'] = array(
+            'BrindeOrca' => $this->basico->radio_checked($data['orcatrata']['BrindeOrca'], 'Brinde', 'NS'),
+        );
+        ($data['orcatrata']['BrindeOrca'] == 'N') ?
+            $data['div']['BrindeOrca'] = '' : $data['div']['BrindeOrca'] = 'style="display: none;"';
 
         $data['radio'] = array(
             'QuitadoOrca' => $this->basico->radio_checked($data['orcatrata']['QuitadoOrca'], 'Orçamento Quitado', 'NS'),
@@ -880,6 +929,7 @@ class Orcatrata extends CI_Controller {
             'ProfissionalOrca',
             'AprovadoOrca',
             'ConcluidoOrca',
+            'BrindeOrca',
 			'DevolvidoOrca',
 			'ProntoOrca',
             'QuitadoOrca',
@@ -955,12 +1005,14 @@ class Orcatrata extends CI_Controller {
         (!$this->input->post('PCount')) ? $data['count']['PCount'] = 0 : $data['count']['PCount'] = $this->input->post('PCount');
         (!$this->input->post('P2Count')) ? $data['count']['P2Count'] = 0 : $data['count']['P2Count'] = $this->input->post('P2Count');
         (!$this->input->post('PMCount')) ? $data['count']['PMCount'] = 0 : $data['count']['PMCount'] = $this->input->post('PMCount');
+		//(!$this->input->post('PRCount')) ? $data['count']['PRCount'] = 0 : $data['count']['PRCount'] = $this->input->post('PRCount');
 
         //Data de hoje como default
 		(!$data['orcatrata']['idApp_Cliente']) ? $data['orcatrata']['idApp_Cliente'] = '0' : FALSE;
 		(!$data['orcatrata']['Cli_Forn_Orca']) ? $data['orcatrata']['Cli_Forn_Orca'] = 'S' : FALSE;
 		(!$data['orcatrata']['Prd_Srv_Orca']) ? $data['orcatrata']['Prd_Srv_Orca'] = 'S' : FALSE;
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;
 		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE;        
 		(!$data['orcatrata']['DataOrca']) ? $data['orcatrata']['DataOrca'] = date('d/m/Y', time()) : FALSE;
 		(!$data['orcatrata']['HoraOrca']) ? $data['orcatrata']['HoraOrca'] = date('H:i:s', time()) : FALSE;
@@ -974,13 +1026,16 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['QtdPrdOrca']) ? $data['orcatrata']['QtdPrdOrca'] = '0' : FALSE;
 		(!$data['orcatrata']['QtdSrvOrca']) ? $data['orcatrata']['QtdSrvOrca'] = '0' : FALSE;
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
-		(!$data['orcatrata']['ValorFrete']) ? $data['orcatrata']['ValorFrete'] = '0.00' : FALSE;
-		(!$data['orcatrata']['ValorExtraOrca']) ? $data['orcatrata']['ValorExtraOrca'] = '0.00' : FALSE;
+		//(!$data['orcatrata']['ValorFrete']) ? $data['orcatrata']['ValorFrete'] = '0.00' : FALSE;
+		//(!$data['orcatrata']['ValorExtraOrca']) ? $data['orcatrata']['ValorExtraOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['ValorSomaOrca']) ? $data['orcatrata']['ValorSomaOrca'] = '0.00' : FALSE;
-		(!$data['orcatrata']['ValorRestanteOrca']) ? $data['orcatrata']['ValorRestanteOrca'] = '0.00' : FALSE;
-		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
+		//(!$data['orcatrata']['ValorRestanteOrca']) ? $data['orcatrata']['ValorRestanteOrca'] = '0.00' : FALSE;
+		(!$data['orcatrata']['ValorTotalOrca']) ? $data['orcatrata']['ValorTotalOrca'] = '0.00' : FALSE;
+		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = 1 : FALSE;
 		(!$data['orcatrata']['TipoFrete']) ? $data['orcatrata']['TipoFrete'] = "1" : FALSE;
 		(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
+		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
+		
 		/*
 		$j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
@@ -1086,11 +1141,18 @@ class Orcatrata extends CI_Controller {
         }
         $data['count']['PMCount'] = $j - 1;
 
-        if ($data['orcatrata']['ValorTotalOrca'] > 0 ) {
-
+		
+		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+		$data['somatotal'] = 0;
+		
+		if ($data['valortotalorca'] > 0.00 && $data['orcatrata']['QtdParcelasOrca'] >=1) {
+			
             for ($i = 1; $i <= $data['orcatrata']['QtdParcelasOrca']; $i++) {
+
+				$data['valoredit'][$i] =  str_replace(',', '.', str_replace('.', '', $this->input->post('ValorParcela' . $i)));
+				$data['somatotal'] += $data['valoredit'][$i];
 				
-				if ($this->input->post('ValorParcela' . $i) > 0 && $this->input->post('ValorParcela' . $i) != ''){
+				if ($this->input->post('Parcela' . $i) || $this->input->post('ValorParcela' . $i) || $this->input->post('DataVencimento' . $i)){
 					$data['parcelasrec'][$i]['Parcela'] = $this->input->post('Parcela' . $i);
 					$data['parcelasrec'][$i]['ValorParcela'] = $this->input->post('ValorParcela' . $i);
 					$data['parcelasrec'][$i]['DataVencimento'] = $this->input->post('DataVencimento' . $i);
@@ -1099,18 +1161,34 @@ class Orcatrata extends CI_Controller {
 					$data['parcelasrec'][$i]['Quitado'] = $this->input->post('Quitado' . $i);
 				}
             }
-
+			
         }
+		
+		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
+		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
 
         //Fim do trecho de código que dá pra melhorar
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### App_OrcaTrata ####
-        
-        #$this->form_validation->set_rules('DataProcedimento', 'DataProcedimento', 'required|trim');
-        #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
-        #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
+		
+		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
+			if($data['diferenca'] < 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
+			}elseif($data['diferenca'] > 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
+			}
+		}
+		if ($data['valortotalorca'] <= 0.00 ) {
+			$this->form_validation->set_rules('BrindeOrca', 'Se quiser Permitir Total = 0,00, então coloque a chave na posição "Sim".<br>Com o Total = 0,00, as parcelas geradas não serão salvas.', 'trim|valid_brinde');
+		}
+		
 		if ($_SESSION['log']['NivelEmpresa'] >= '4' && $data['orcatrata']['Cli_Forn_Orca'] == "S") {
 			$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
 			$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
@@ -1123,7 +1201,8 @@ class Orcatrata extends CI_Controller {
 		if ($_SESSION['log']['NivelEmpresa'] >= '4') {
 			$this->form_validation->set_rules('TipoFrete', 'Forma de Entrega', 'required|trim');
 		}
-		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas', 'required|trim');
+		//$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas Tem que ser maior que "0" ', 'required|trim|valid_qtdparcelas');
+		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas Tem que ser maior que "0" ', 'required|trim');
 		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
@@ -1139,6 +1218,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
+        $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['ProntoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
@@ -1206,7 +1286,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['CombinadoFrete']) ? $data['orcatrata']['CombinadoFrete'] = 'N' : FALSE;
 		//(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 		//(!$data['orcatrata']['TipoFrete']) ? $data['orcatrata']['TipoFrete'] = "1" : FALSE;
-		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
+		//(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
 		(!$data['orcatrata']['AprovadoOrca']) ? $data['orcatrata']['AprovadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['EnviadoOrca']) ? $data['orcatrata']['EnviadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['ConcluidoOrca']) ? $data['orcatrata']['ConcluidoOrca'] = 'N' : FALSE;
@@ -1263,6 +1343,13 @@ class Orcatrata extends CI_Controller {
         );
         ($data['orcatrata']['ConcluidoOrca'] == 'N') ?
             $data['div']['ConcluidoOrca'] = '' : $data['div']['ConcluidoOrca'] = 'style="display: none;"';
+
+			
+        $data['radio'] = array(
+            'BrindeOrca' => $this->basico->radio_checked($data['orcatrata']['BrindeOrca'], 'Brinde', 'NS'),
+        );
+        ($data['orcatrata']['BrindeOrca'] == 'N') ?
+            $data['div']['BrindeOrca'] = '' : $data['div']['BrindeOrca'] = 'style="display: none;"';
 			
 		$data['radio'] = array(
             'AtualizaEndereco' => $this->basico->radio_checked($data['cadastrar']['AtualizaEndereco'], 'AtualizaEndereco', 'NS'),
@@ -1376,7 +1463,7 @@ class Orcatrata extends CI_Controller {
             //if (1 == 1) {
             $this->load->view('orcatrata/form_orcatrata3', $data);
         } else {
-
+		
 			$data['cadastrar']['QuitadoParcelas'] = $data['cadastrar']['QuitadoParcelas'];
 			$data['cadastrar']['ConcluidoProduto'] = $data['cadastrar']['ConcluidoProduto'];
 			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
@@ -1466,13 +1553,7 @@ class Orcatrata extends CI_Controller {
 				$dias = floor($intervalo / (60 * 60 * 24));
 				$data['orcatrata']['PrazoEntrega'] = $dias;
 			}	
-            /*
-			echo "<pre>";
-            echo '<br>';
-			print_r($data['orcatrata']['ValorComissao']);
-            echo "</pre>";
-            exit ();			
-			*/
+		
 			$data['orcatrata']['idApp_OrcaTrata'] = $this->Orcatrata_model->set_orcatrata($data['orcatrata']);
             
 			#### APP_Cliente ####
@@ -1729,6 +1810,7 @@ class Orcatrata extends CI_Controller {
             'ProfissionalOrca',
             'AprovadoOrca',
             'ConcluidoOrca',
+			'BrindeOrca',
 			'DevolvidoOrca',
 			'ProntoOrca',
             'QuitadoOrca',
@@ -1895,7 +1977,38 @@ class Orcatrata extends CI_Controller {
 
         }
         $data['count']['PMCount'] = $j - 1;
+		
+		
+		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+		$data['somatotal'] = 0;	
 
+        $j = 1;
+        for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
+
+				$data['valoredit'][$i] =  str_replace(',', '.', str_replace('.', '', $this->input->post('ValorParcela' . $i)));
+				$data['somatotal'] += $data['valoredit'][$i];            
+			
+			if ($data['valoredit'][$i] > 0.00){
+                $data['parcelasrec'][$j]['idApp_Parcelas'] = $this->input->post('idApp_Parcelas' . $i);
+                $data['parcelasrec'][$j]['Parcela'] = $this->input->post('Parcela' . $i);
+                $data['parcelasrec'][$j]['ValorParcela'] = $this->input->post('ValorParcela' . $i);
+                $data['parcelasrec'][$j]['DataVencimento'] = $this->input->post('DataVencimento' . $i);
+                $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
+                $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
+                $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
+				//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
+				$j++;
+            }
+        }
+		$data['count']['PRCount'] = $j - 1;
+
+		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
+		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];		
+		
+		
+		
+		/*
         $j = 1;
         for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
 
@@ -1911,7 +2024,7 @@ class Orcatrata extends CI_Controller {
             }
         }
 		$data['count']['PRCount'] = $j - 1;
-
+		*/
         //Fim do trecho de código que dá pra melhorar
 
         if ($id) {
@@ -1928,6 +2041,7 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['DataQuitado'] = $this->basico->mascara_data($data['orcatrata']['DataQuitado'], 'barras');
 			$data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'barras');
             $data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'barras');
+			$data['valortotalorca'] = $data['orcatrata']['ValorTotalOrca'];
 			
             #### Carrega os dados do cliente nas variáves de sessão ####
             $this->load->model('Cliente_model');
@@ -2009,9 +2123,21 @@ class Orcatrata extends CI_Controller {
 
         #### App_OrcaTrata ####
         
-		#$this->form_validation->set_rules('DataProcedimento', 'DataProcedimento', 'required|trim');
-        #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
-        #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
+		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
+			if($data['diferenca'] < 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
+			}elseif($data['diferenca'] > 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
+			}
+		}
+		if ($data['valortotalorca'] <= 0.00 ) {
+			$this->form_validation->set_rules('BrindeOrca', 'Se quiser Permitir Total = 0,00, então coloque a chave na posição "Sim".<br>Com o Total = 0,00, as parcelas geradas não serão salvas.', 'trim|valid_brinde');
+		}
+		
 		$this->form_validation->set_rules('DataOrca', 'Data do Orçamento', 'required|trim|valid_date');
 		$this->form_validation->set_rules('AVAP', 'À Vista ou À Prazo', 'required|trim');
 		$this->form_validation->set_rules('TipoFrete', 'Forma de Entrega', 'required|trim');
@@ -2032,6 +2158,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
+        $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ProntoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['TipoFrete'] = $this->Basico_model->select_tipofrete();
 		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
@@ -2113,7 +2240,8 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
  		(!$data['orcatrata']['DetalhadaEntrega']) ? $data['orcatrata']['DetalhadaEntrega'] = 'N' : FALSE;		
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE; 
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE; 
 		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE;
 		(!$data['orcatrata']['TipoFrete']) ? $data['orcatrata']['TipoFrete'] = "1" : FALSE;
 		
@@ -2168,6 +2296,13 @@ class Orcatrata extends CI_Controller {
         );
         ($data['orcatrata']['ConcluidoOrca'] == 'N') ?
             $data['div']['ConcluidoOrca'] = '' : $data['div']['ConcluidoOrca'] = 'style="display: none;"';
+
+			
+        $data['radio'] = array(
+            'BrindeOrca' => $this->basico->radio_checked($data['orcatrata']['BrindeOrca'], 'Brinde', 'NS'),
+        );
+        ($data['orcatrata']['BrindeOrca'] == 'N') ?
+            $data['div']['BrindeOrca'] = '' : $data['div']['BrindeOrca'] = 'style="display: none;"';
 			
         $data['radio'] = array(
             'ProntoOrca' => $this->basico->radio_checked($data['orcatrata']['ProntoOrca'], 'Pronto p/Entrega', 'NS'),
@@ -2198,7 +2333,7 @@ class Orcatrata extends CI_Controller {
         );
         ($data['orcatrata']['QuitadoOrca'] == 'S') ?
             $data['div']['QuitadoOrca'] = '' : $data['div']['QuitadoOrca'] = 'style="display: none;"';
-		
+		/*
 		$data['radio'] = array(
             'Cli_Forn_Orca' => $this->basico->radio_checked($data['orcatrata']['Cli_Forn_Orca'], 'Cliente/Fornecedor', 'NS'),
         );
@@ -2210,8 +2345,8 @@ class Orcatrata extends CI_Controller {
         );
         ($data['orcatrata']['Prd_Srv_Orca'] == 'S') ?
             $data['div']['Prd_Srv_Orca'] = '' : $data['div']['Prd_Srv_Orca'] = 'style="display: none;"';
-
-
+		*/
+		
         $data['sidebar'] = 'col-sm-3 col-md-2';
         $data['main'] = 'col-sm-7 col-md-8';
 
@@ -2748,6 +2883,7 @@ class Orcatrata extends CI_Controller {
             'ProfissionalOrca',
             'AprovadoOrca',
             'ConcluidoOrca',
+			'BrindeOrca',
 			'DevolvidoOrca',
 			'ProntoOrca',
             'QuitadoOrca',
@@ -2943,10 +3079,17 @@ class Orcatrata extends CI_Controller {
         }
         $data['count']['PMCount'] = $j - 1;
 
+		
+		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+		$data['somatotal'] = 0;	
+
         $j = 1;
         for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
+
+				$data['valoredit'][$i] =  str_replace(',', '.', str_replace('.', '', $this->input->post('ValorParcela' . $i)));
+				$data['somatotal'] += $data['valoredit'][$i];            
 			
-            if ($this->input->post('ValorParcela' . $i) > 0 && $this->input->post('ValorParcela' . $i) != '') {
+			if ($data['valoredit'][$i] > 0.00){
                 $data['parcelasrec'][$j]['idApp_Parcelas'] = $this->input->post('idApp_Parcelas' . $i);
                 $data['parcelasrec'][$j]['Parcela'] = $this->input->post('Parcela' . $i);
                 $data['parcelasrec'][$j]['ValorParcela'] = $this->input->post('ValorParcela' . $i);
@@ -2960,7 +3103,16 @@ class Orcatrata extends CI_Controller {
         }
 		$data['count']['PRCount'] = $j - 1;
 
-        //Fim do trecho de código que dá pra melhorar
+		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
+		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];		
+		/*
+		echo '<br>';
+		echo "<pre>";
+		print_r($data['valortotalorca']);
+		echo "</pre>";								
+        */
+		//Fim do trecho de código que dá pra melhorar
 
         if ($id) {
             #### App_OrcaTrata ####
@@ -2976,7 +3128,14 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['DataQuitado'] = $this->basico->mascara_data($data['orcatrata']['DataQuitado'], 'barras');
 			$data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'barras');
             $data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'barras');
-
+			$data['valortotalorca'] = $data['orcatrata']['ValorTotalOrca'];
+			/*
+			echo '<br>';
+			echo "<pre>";
+			print_r($data['valortotalorca']);
+			echo "</pre>";
+			exit ();
+			*/
             #### Carrega os dados do cliente nas variáves de sessão ####
            # $this->load->model('Cliente_model');
             #$_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
@@ -3059,9 +3218,21 @@ class Orcatrata extends CI_Controller {
 
         #### App_OrcaTrata ####
         
-		#$this->form_validation->set_rules('DataProcedimento', 'DataProcedimento', 'required|trim');
-        #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
-        #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
+		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
+			if($data['diferenca'] < 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
+			}elseif($data['diferenca'] > 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
+			}
+		}
+		if ($data['valortotalorca'] <= 0.00 ) {
+			$this->form_validation->set_rules('BrindeOrca', 'Se quiser Permitir Total = 0,00, então coloque a chave na posição "Sim".<br>Com o Total = 0,00, as parcelas geradas não serão salvas.', 'trim|valid_brinde');
+		}		
+		
 		if ($_SESSION['log']['NivelEmpresa'] >= '4' ){
 			//$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
 			$this->form_validation->set_rules('TipoFrete', 'Forma de Entrega', 'required|trim');
@@ -3085,6 +3256,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
+        $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['ProntoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
@@ -3158,7 +3330,8 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;
  		(!$data['orcatrata']['DetalhadaEntrega']) ? $data['orcatrata']['DetalhadaEntrega'] = 'N' : FALSE;
-		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;
 		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE;
 		
         ($data['orcatrata']['TipoFrete'] == '1') ? $data['div']['TipoFrete'] = 'style="display: none;"' : $data['div']['TipoFrete'] = '';
@@ -3230,6 +3403,13 @@ class Orcatrata extends CI_Controller {
         );
         ($data['orcatrata']['ConcluidoOrca'] == 'N') ?
             $data['div']['ConcluidoOrca'] = '' : $data['div']['ConcluidoOrca'] = 'style="display: none;"';
+
+			
+        $data['radio'] = array(
+            'BrindeOrca' => $this->basico->radio_checked($data['orcatrata']['BrindeOrca'], 'Brinde', 'NS'),
+        );
+        ($data['orcatrata']['BrindeOrca'] == 'N') ?
+            $data['div']['BrindeOrca'] = '' : $data['div']['BrindeOrca'] = 'style="display: none;"';
 
         $data['radio'] = array(
             'ProntoOrca' => $this->basico->radio_checked($data['orcatrata']['ProntoOrca'], 'Produtos Devolvidos', 'NS'),
@@ -3306,8 +3486,9 @@ class Orcatrata extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('orcatrata/form_orcatrataalterar2', $data);
+		    	
 		} else {
-
+			
 			$data['cadastrar']['QuitadoParcelas'] = $data['cadastrar']['QuitadoParcelas'];
 			$data['cadastrar']['ConcluidoProduto'] = $data['cadastrar']['ConcluidoProduto'];
 			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
@@ -3942,6 +4123,7 @@ class Orcatrata extends CI_Controller {
             'ProfissionalOrca',
             'AprovadoOrca',
             'ConcluidoOrca',
+			'BrindeOrca',
 			'DevolvidoOrca',
 			'ProntoOrca',
             'QuitadoOrca',
@@ -4110,7 +4292,37 @@ class Orcatrata extends CI_Controller {
 
         }
         $data['count']['PMCount'] = $j - 1;
+		
+		
+		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+		$data['somatotal'] = 0;
+		
+		if ($data['valortotalorca'] > 0.00 && $data['orcatrata']['QtdParcelasOrca'] >=1) {
+			
+            for ($i = 1; $i <= $data['orcatrata']['QtdParcelasOrca']; $i++) {
 
+				$data['valoredit'][$i] =  str_replace(',', '.', str_replace('.', '', $this->input->post('ValorParcela' . $i)));
+				$data['somatotal'] += $data['valoredit'][$i];
+				
+				if ($this->input->post('idApp_Parcelas' . $i) || $this->input->post('Parcela' . $i) || 
+					$this->input->post('ValorParcela' . $i) || $this->input->post('DataVencimento' . $i)){
+					$data['parcelasrec'][$i]['idApp_Parcelas'] = $this->input->post('idApp_Parcelas' . $i);
+					$data['parcelasrec'][$i]['Parcela'] = $this->input->post('Parcela' . $i);
+					$data['parcelasrec'][$i]['ValorParcela'] = $this->input->post('ValorParcela' . $i);
+					$data['parcelasrec'][$i]['DataVencimento'] = $this->input->post('DataVencimento' . $i);
+					$data['parcelasrec'][$i]['ValorPago'] = $this->input->post('ValorPago' . $i);
+					$data['parcelasrec'][$i]['DataPago'] = $this->input->post('DataPago' . $i);
+					$data['parcelasrec'][$i]['Quitado'] = $this->input->post('Quitado' . $i);
+				}
+            }
+			
+        }
+		
+		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
+		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];		
+		
+		/*
         if ($data['orcatrata']['QtdParcelasOrca'] > 0 ) {
 
             for ($i = 1; $i <= $data['orcatrata']['QtdParcelasOrca']; $i++) {
@@ -4128,24 +4340,6 @@ class Orcatrata extends CI_Controller {
             }
 
         }		
-		
-		/*
-        $j = 1;
-        for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
-			
-            if ($this->input->post('ValorParcela' . $i) > 0 && $this->input->post('ValorParcela' . $i) != '') {
-                $data['parcelasrec'][$j]['idApp_Parcelas'] = $this->input->post('idApp_Parcelas' . $i);
-                $data['parcelasrec'][$j]['Parcela'] = $this->input->post('Parcela' . $i);
-                $data['parcelasrec'][$j]['ValorParcela'] = $this->input->post('ValorParcela' . $i);
-                $data['parcelasrec'][$j]['DataVencimento'] = $this->input->post('DataVencimento' . $i);
-                $data['parcelasrec'][$j]['ValorPago'] = $this->input->post('ValorPago' . $i);
-                $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
-                $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
-				$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
-				$j++;
-            }
-        }
-		$data['count']['PRCount'] = $j - 1;
 		*/
         //Fim do trecho de código que dá pra melhorar
 
@@ -4163,8 +4357,9 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['DataQuitado'] = $this->basico->mascara_data($data['orcatrata']['DataQuitado'], 'barras');
 			$data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'barras');
             $data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'barras');
-
-            #### Carrega os dados do cliente nas variáves de sessão ####
+			$data['valortotalorca'] = $data['orcatrata']['ValorTotalOrca'];
+            
+			#### Carrega os dados do cliente nas variáves de sessão ####
            # $this->load->model('Cliente_model');
             #$_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
            # $_SESSION['Cliente']['NomeCliente'] = (strlen($data['query']['NomeCliente']) > 12) ? substr($data['query']['NomeCliente'], 0, 12) : $data['query']['NomeCliente'];
@@ -4245,9 +4440,21 @@ class Orcatrata extends CI_Controller {
 
         #### App_OrcaTrata ####
         
-		#$this->form_validation->set_rules('DataProcedimento', 'DataProcedimento', 'required|trim');
-        #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
-        #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
+		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
+			if($data['diferenca'] < 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
+			}elseif($data['diferenca'] > 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
+			}
+		}
+		if ($data['valortotalorca'] <= 0.00 ) {
+			$this->form_validation->set_rules('BrindeOrca', 'Se quiser Permitir Total = 0,00, então coloque a chave na posição "Sim".<br>Com o Total = 0,00, as parcelas geradas não serão salvas.', 'trim|valid_brinde');
+		}
+		
 		if ($_SESSION['log']['NivelEmpresa'] >= '4' ){
 			//$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
 			$this->form_validation->set_rules('TipoFrete', 'Forma de Entrega', 'required|trim');
@@ -4271,6 +4478,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
+        $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['ProntoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
@@ -4351,7 +4559,8 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;		
 		(!$data['orcatrata']['TipoFrete']) ? $data['orcatrata']['TipoFrete'] = "1" : FALSE;
  		(!$data['orcatrata']['DetalhadaEntrega']) ? $data['orcatrata']['DetalhadaEntrega'] = 'N' : FALSE;
-		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;
 		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE;
 		
         ($data['orcatrata']['TipoFrete'] == '1') ? $data['div']['TipoFrete'] = 'style="display: none;"' : $data['div']['TipoFrete'] = '';
@@ -4422,7 +4631,14 @@ class Orcatrata extends CI_Controller {
             'ConcluidoOrca' => $this->basico->radio_checked($data['orcatrata']['ConcluidoOrca'], 'Produtos Entregues', 'NS'),
         );
         ($data['orcatrata']['ConcluidoOrca'] == 'N') ?
-            $data['div']['ConcluidoOrca'] = '' : $data['div']['ConcluidoOrca'] = 'style="display: none;"';	
+            $data['div']['ConcluidoOrca'] = '' : $data['div']['ConcluidoOrca'] = 'style="display: none;"';
+
+			
+        $data['radio'] = array(
+            'BrindeOrca' => $this->basico->radio_checked($data['orcatrata']['BrindeOrca'], 'Brinde', 'NS'),
+        );
+        ($data['orcatrata']['BrindeOrca'] == 'N') ?
+            $data['div']['BrindeOrca'] = '' : $data['div']['BrindeOrca'] = 'style="display: none;"';
 
         $data['radio'] = array(
             'ProntoOrca' => $this->basico->radio_checked($data['orcatrata']['ProntoOrca'], 'Produtos Devolvidos', 'NS'),
@@ -5017,6 +5233,7 @@ class Orcatrata extends CI_Controller {
             'ProfissionalOrca',
             'AprovadoOrca',
             'ConcluidoOrca',
+			'BrindeOrca',
 			'DevolvidoOrca',
 			'ProntoOrca',
             'QuitadoOrca',
@@ -5291,6 +5508,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
+        $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['ProntoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
@@ -5372,7 +5590,8 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;		
 
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE; 
+		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;      
 		
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
@@ -5409,6 +5628,13 @@ class Orcatrata extends CI_Controller {
         );
         ($data['orcatrata']['ConcluidoOrca'] == 'N') ?
             $data['div']['ConcluidoOrca'] = '' : $data['div']['ConcluidoOrca'] = 'style="display: none;"';
+
+			
+        $data['radio'] = array(
+            'BrindeOrca' => $this->basico->radio_checked($data['orcatrata']['BrindeOrca'], 'Brinde', 'NS'),
+        );
+        ($data['orcatrata']['BrindeOrca'] == 'N') ?
+            $data['div']['BrindeOrca'] = '' : $data['div']['BrindeOrca'] = 'style="display: none;"';
 
         $data['radio'] = array(
             'ProntoOrca' => $this->basico->radio_checked($data['orcatrata']['ProntoOrca'], 'Pronto p/Entrega', 'NS'),
@@ -5913,6 +6139,7 @@ class Orcatrata extends CI_Controller {
             'ProfissionalOrca',
             'AprovadoOrca',
             'ConcluidoOrca',
+			'BrindeOrca',
 			'DevolvidoOrca',
 			'ProntoOrca',
             'QuitadoOrca',
@@ -6005,9 +6232,9 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['QtdPrdOrca']) ? $data['orcatrata']['QtdPrdOrca'] = '0' : FALSE;
 		(!$data['orcatrata']['QtdSrvOrca']) ? $data['orcatrata']['QtdSrvOrca'] = '0' : FALSE;
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
-		(!$data['orcatrata']['ValorExtraOrca']) ? $data['orcatrata']['ValorExtraOrca'] = '0.00' : FALSE;
+		//(!$data['orcatrata']['ValorExtraOrca']) ? $data['orcatrata']['ValorExtraOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['ValorSomaOrca']) ? $data['orcatrata']['ValorSomaOrca'] = '0.00' : FALSE;
-		(!$data['orcatrata']['ValorFrete']) ? $data['orcatrata']['ValorFrete'] = '0.00' : FALSE;
+		//(!$data['orcatrata']['ValorFrete']) ? $data['orcatrata']['ValorFrete'] = '0.00' : FALSE;
 		(!$data['orcatrata']['QtdParcelasOrca']) ? $data['orcatrata']['QtdParcelasOrca'] = "1" : FALSE;
 		(!$data['orcatrata']['TipoFrete']) ? $data['orcatrata']['TipoFrete'] = "1" : FALSE;
 		(!$data['orcatrata']['AVAP']) ? $data['orcatrata']['AVAP'] = 'V' : FALSE;
@@ -6116,6 +6343,33 @@ class Orcatrata extends CI_Controller {
         }
         $data['count']['PMCount'] = $j - 1;
 
+		
+		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+		$data['somatotal'] = 0;
+		
+		if ($data['valortotalorca'] > 0.00 && $data['orcatrata']['QtdParcelasOrca'] >=1) {
+			
+            for ($i = 1; $i <= $data['orcatrata']['QtdParcelasOrca']; $i++) {
+
+				$data['valoredit'][$i] =  str_replace(',', '.', str_replace('.', '', $this->input->post('ValorParcela' . $i)));
+				$data['somatotal'] += $data['valoredit'][$i];
+				
+				if ($this->input->post('Parcela' . $i) || $this->input->post('ValorParcela' . $i) || $this->input->post('DataVencimento' . $i)){
+					$data['parcelasrec'][$i]['Parcela'] = $this->input->post('Parcela' . $i);
+					$data['parcelasrec'][$i]['ValorParcela'] = $this->input->post('ValorParcela' . $i);
+					$data['parcelasrec'][$i]['DataVencimento'] = $this->input->post('DataVencimento' . $i);
+					$data['parcelasrec'][$i]['ValorPago'] = $this->input->post('ValorPago' . $i);
+					$data['parcelasrec'][$i]['DataPago'] = $this->input->post('DataPago' . $i);
+					$data['parcelasrec'][$i]['Quitado'] = $this->input->post('Quitado' . $i);
+				}
+            }
+			
+        }
+		
+		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
+		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];		
+		/*
         if ($data['orcatrata']['ValorTotalOrca'] > 0 ) {
 
             for ($i = 1; $i <= $data['orcatrata']['QtdParcelasOrca']; $i++) {
@@ -6131,16 +6385,28 @@ class Orcatrata extends CI_Controller {
             }
 
         }
-
+		*/
         //Fim do trecho de código que dá pra melhorar
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### App_OrcaTrata ####
         
-        #$this->form_validation->set_rules('DataProcedimento', 'DataProcedimento', 'required|trim');
-        #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
-        #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
+		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
+			if($data['diferenca'] < 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
+			}elseif($data['diferenca'] > 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
+			}
+		}
+		if ($data['valortotalorca'] <= 0.00 ) {
+			$this->form_validation->set_rules('BrindeOrca', 'Se quiser Permitir Total = 0,00, então coloque a chave na posição "Sim".<br>Com o Total = 0,00, as parcelas geradas não serão salvas.', 'trim|valid_brinde');
+		}
+		
 		if ($_SESSION['log']['NivelEmpresa'] >= '4' && $data['orcatrata']['Cli_Forn_Orca'] == "S") {
 			$this->form_validation->set_rules('idApp_Fornecedor', 'Fornecedor', 'required|trim');
 			$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
@@ -6169,6 +6435,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
+        $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['ProntoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
@@ -6247,6 +6514,7 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['QuitadoOrca']) ? $data['orcatrata']['QuitadoOrca'] = 'N' : FALSE;
 		(!$data['orcatrata']['DetalhadaEntrega']) ? $data['orcatrata']['DetalhadaEntrega'] = 'N' : FALSE;
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;
 		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE;
 
 		($data['orcatrata']['TipoFrete'] == '1') ? $data['div']['TipoFrete'] = 'style="display: none;"' : $data['div']['TipoFrete'] = '';
@@ -6295,6 +6563,13 @@ class Orcatrata extends CI_Controller {
         );
         ($data['orcatrata']['ConcluidoOrca'] == 'N') ?
             $data['div']['ConcluidoOrca'] = '' : $data['div']['ConcluidoOrca'] = 'style="display: none;"';
+
+			
+        $data['radio'] = array(
+            'BrindeOrca' => $this->basico->radio_checked($data['orcatrata']['BrindeOrca'], 'Brinde', 'NS'),
+        );
+        ($data['orcatrata']['BrindeOrca'] == 'N') ?
+            $data['div']['BrindeOrca'] = '' : $data['div']['BrindeOrca'] = 'style="display: none;"';
 			
 		$data['radio'] = array(
             'AtualizaEndereco' => $this->basico->radio_checked($data['cadastrar']['AtualizaEndereco'], 'AtualizaEndereco', 'NS'),
@@ -6761,6 +7036,7 @@ class Orcatrata extends CI_Controller {
             'ProfissionalOrca',
             'AprovadoOrca',
             'ConcluidoOrca',
+			'BrindeOrca',
 			'DevolvidoOrca',
 			'ProntoOrca',
             'QuitadoOrca',
@@ -6956,10 +7232,17 @@ class Orcatrata extends CI_Controller {
         }
         $data['count']['PMCount'] = $j - 1;
 
+		
+		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+		$data['somatotal'] = 0;	
+
         $j = 1;
         for ($i = 1; $i <= $data['count']['PRCount']; $i++) {
+
+				$data['valoredit'][$i] =  str_replace(',', '.', str_replace('.', '', $this->input->post('ValorParcela' . $i)));
+				$data['somatotal'] += $data['valoredit'][$i];            
 			
-            if ($this->input->post('ValorParcela' . $i) > 0 && $this->input->post('ValorParcela' . $i) != '') {
+			if ($data['valoredit'][$i] > 0.00){
                 $data['parcelasrec'][$j]['idApp_Parcelas'] = $this->input->post('idApp_Parcelas' . $i);
                 $data['parcelasrec'][$j]['Parcela'] = $this->input->post('Parcela' . $i);
                 $data['parcelasrec'][$j]['ValorParcela'] = $this->input->post('ValorParcela' . $i);
@@ -6972,6 +7255,10 @@ class Orcatrata extends CI_Controller {
             }
         }
 		$data['count']['PRCount'] = $j - 1;
+
+		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
+		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];		
 
         //Fim do trecho de código que dá pra melhorar
 
@@ -6989,7 +7276,7 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['DataQuitado'] = $this->basico->mascara_data($data['orcatrata']['DataQuitado'], 'barras');
 			$data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'barras');
             $data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'barras');
-
+			$data['valortotalorca'] = $data['orcatrata']['ValorTotalOrca'];
             #### Carrega os dados do cliente nas variáves de sessão ####
            # $this->load->model('Cliente_model');
             #$_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
@@ -7072,9 +7359,21 @@ class Orcatrata extends CI_Controller {
 
         #### App_OrcaTrata ####
         
-		#$this->form_validation->set_rules('DataProcedimento', 'DataProcedimento', 'required|trim');
-        #$this->form_validation->set_rules('Parcela', 'Parcela', 'required|trim');
-        #$this->form_validation->set_rules('ProfissionalOrca', 'Profissional', 'required|trim');
+		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
+			if($data['diferenca'] < 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
+			}elseif($data['diferenca'] > 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
+			}
+		}
+		if ($data['valortotalorca'] <= 0.00 ) {
+			$this->form_validation->set_rules('BrindeOrca', 'Se quiser Permitir Total = 0,00, então coloque a chave na posição "Sim".<br>Com o Total = 0,00, as parcelas geradas não serão salvas.', 'trim|valid_brinde');
+		}
+		
 		if ($_SESSION['log']['NivelEmpresa'] >= '4' && $data['orcatrata']['Cli_Forn_Orca'] == "S") {
 			$this->form_validation->set_rules('idApp_Fornecedor', 'Fornecedor', 'required|trim');
 			$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
@@ -7102,6 +7401,7 @@ class Orcatrata extends CI_Controller {
 		$data['select']['FinalizadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['FormaPagamento'] = $this->Formapag_model->select_formapag();
         $data['select']['ConcluidoOrca'] = $this->Basico_model->select_status_sn();
+        $data['select']['BrindeOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['DevolvidoOrca'] = $this->Basico_model->select_status_sn();
 		$data['select']['ProntoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoServico'] = $this->Basico_model->select_status_sn();
@@ -7114,13 +7414,6 @@ class Orcatrata extends CI_Controller {
 		$data['select']['QuitadoOrca'] = $this->Basico_model->select_status_sn();
         $data['select']['Quitado'] = $this->Basico_model->select_status_sn();
 		$data['select']['idApp_Fornecedor'] = $this->Fornecedor_model->select_fornecedor();
-		/*
-		if ($data['orcatrata']['Tipo_Orca']= 'B' ){
-			$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
-		}else{
-			$data['select']['idApp_Cliente'] = $this->Cliente_model->select_clienteonline();
-		}
-		*/
 		$data['select']['Profissional'] = $this->Usuario_model->select_usuario();
 		$data['select']['ProfissionalServico'] = $this->Usuario_model->select_usuario();
 		$data['select']['ProfissionalProduto'] = $this->Usuario_model->select_usuario();
@@ -7183,7 +7476,8 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['Modalidade']) ? $data['orcatrata']['Modalidade'] = 'P' : FALSE;		
 		
  		(!$data['orcatrata']['DetalhadaEntrega']) ? $data['orcatrata']['DetalhadaEntrega'] = 'N' : FALSE;
-		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+		(!$data['orcatrata']['BrindeOrca']) ? $data['orcatrata']['BrindeOrca'] = 'N' : FALSE;
 		(!$data['cadastrar']['AtualizaEndereco']) ? $data['cadastrar']['AtualizaEndereco'] = 'N' : FALSE;
 		
         ($data['orcatrata']['TipoFrete'] == '1') ? $data['div']['TipoFrete'] = 'style="display: none;"' : $data['div']['TipoFrete'] = '';
@@ -7267,6 +7561,13 @@ class Orcatrata extends CI_Controller {
         );
         ($data['orcatrata']['ConcluidoOrca'] == 'N') ?
             $data['div']['ConcluidoOrca'] = '' : $data['div']['ConcluidoOrca'] = 'style="display: none;"';
+
+			
+        $data['radio'] = array(
+            'BrindeOrca' => $this->basico->radio_checked($data['orcatrata']['BrindeOrca'], 'Brinde', 'NS'),
+        );
+        ($data['orcatrata']['BrindeOrca'] == 'N') ?
+            $data['div']['BrindeOrca'] = '' : $data['div']['BrindeOrca'] = 'style="display: none;"';
 
         $data['radio'] = array(
             'ProntoOrca' => $this->basico->radio_checked($data['orcatrata']['ProntoOrca'], 'Produtos Devolvidos', 'NS'),

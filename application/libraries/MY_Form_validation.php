@@ -76,10 +76,62 @@ class MY_Form_validation extends CI_Form_validation {
         }
     }
 	
+    function valid_soma_maior($data) {
+        $CI = & get_instance();
+
+        $CI->form_validation->set_message('valid_soma_maior', '<b>%s</b>');
+
+		$valortotalorca = str_replace(',', '.', str_replace('.', '', $data));
+		
+		if ($data)  {
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+       
+    }
+	
+    function valid_soma_menor($data) {
+        $CI = & get_instance();
+
+        $CI->form_validation->set_message('valid_soma_menor', '<b>%s</b>');
+
+		$valortotalorca = str_replace(',', '.', str_replace('.', '', $data));
+		
+		if ($data)  {
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+       
+    }
+	
+    function valid_qtdparcelas($data) {
+        $CI = & get_instance();
+
+        $CI->form_validation->set_message('valid_qtdparcelas', '<b>%s</b>');
+
+		if (($data) < 1) {
+			return FALSE;
+		}
+       
+    }
+	
     function valid_aprovado($data) {
         $CI = & get_instance();
 
         $CI->form_validation->set_message('valid_aprovado', '<b>%s</b>');
+
+		if (($data) != "S") {
+			return FALSE;
+		}
+       
+    }
+	
+    function valid_brinde($data) {
+        $CI = & get_instance();
+
+        $CI->form_validation->set_message('valid_brinde', '<b>%s</b>');
 
 		if (($data) != "S") {
 			return FALSE;

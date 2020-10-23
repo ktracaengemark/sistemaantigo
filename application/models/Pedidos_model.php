@@ -92,15 +92,15 @@ class Pedidos_model extends CI_Model {
         $query = $this->db->query('
 			' . $data['selecione'] . '
 			WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
                 ' . $date_inicio_entrega . '
                 ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
                 ' . $date_inicio_vnc_prc . '
                 ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				' . $consulta . ' AND
-				
-				' . $consulta3 . ' AND
-				
 				' . $permissao . '
 				' . $filtro1 . '
 				' . $filtro2 . '
@@ -194,9 +194,18 @@ class Pedidos_model extends CI_Model {
                 '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }		
 		
-		//$data['Orcamento'] = ($data['Orcamento']) ? ' OT.idApp_OrcaTrata = ' . $data['Orcamento'] . ' AND ' : FALSE;
-        //$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
-        //$data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		
+		$date_inicio_entrega = ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
+		$date_fim_entrega = ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc = ($data['DataInicio3']) ? 'OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND ' : FALSE;
+		$date_fim_vnc = ($data['DataFim3']) ? 'OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc_prc = ($data['DataInicio4']) ? 'PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND ' : FALSE;
+		$date_fim_vnc_prc = ($data['DataFim4']) ? 'PR.DataVencimento <= "' . $data['DataFim4'] . '" AND ' : FALSE;
+		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
@@ -226,11 +235,15 @@ class Pedidos_model extends CI_Model {
 		$query = $this->db->query('
 			' . $data['selecione'] . '
 			WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
+                ' . $date_inicio_entrega . '
+                ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
+                ' . $date_inicio_vnc_prc . '
+                ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				' . $consulta . ' AND
-				' . $consulta2 . ' AND
-				' . $consulta3 . ' AND
-				' . $consulta4 . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
 				' . $filtro6 . '
@@ -322,9 +335,18 @@ class Pedidos_model extends CI_Model {
                 '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }		
 		
-		//$data['Orcamento'] = ($data['Orcamento']) ? ' OT.idApp_OrcaTrata = ' . $data['Orcamento'] . ' AND ' : FALSE;
-        //$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
-        //$data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		
+		$date_inicio_entrega = ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
+		$date_fim_entrega = ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc = ($data['DataInicio3']) ? 'OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND ' : FALSE;
+		$date_fim_vnc = ($data['DataFim3']) ? 'OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc_prc = ($data['DataInicio4']) ? 'PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND ' : FALSE;
+		$date_fim_vnc_prc = ($data['DataFim4']) ? 'PR.DataVencimento <= "' . $data['DataFim4'] . '" AND ' : FALSE;
+		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
@@ -354,11 +376,15 @@ class Pedidos_model extends CI_Model {
 		$query = $this->db->query('
 			' . $data['selecione'] . '
 			WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
+                ' . $date_inicio_entrega . '
+                ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
+                ' . $date_inicio_vnc_prc . '
+                ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				' . $consulta . ' AND
-				' . $consulta2 . ' AND
-				' . $consulta3 . ' AND
-				' . $consulta4 . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
 				' . $filtro6 . '
@@ -451,9 +477,18 @@ class Pedidos_model extends CI_Model {
                 '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }		
 		
-		//$data['Orcamento'] = ($data['Orcamento']) ? ' OT.idApp_OrcaTrata = ' . $data['Orcamento'] . ' AND ' : FALSE;
-        //$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
-        //$data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		
+		$date_inicio_entrega = ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
+		$date_fim_entrega = ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc = ($data['DataInicio3']) ? 'OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND ' : FALSE;
+		$date_fim_vnc = ($data['DataFim3']) ? 'OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc_prc = ($data['DataInicio4']) ? 'PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND ' : FALSE;
+		$date_fim_vnc_prc = ($data['DataFim4']) ? 'PR.DataVencimento <= "' . $data['DataFim4'] . '" AND ' : FALSE;
+		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
@@ -483,11 +518,15 @@ class Pedidos_model extends CI_Model {
         $query = $this->db->query('
 			' . $data['selecione'] . '
 			WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
+                ' . $date_inicio_entrega . '
+                ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
+                ' . $date_inicio_vnc_prc . '
+                ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				' . $consulta . ' AND
-				' . $consulta2 . ' AND
-				' . $consulta3 . ' AND
-				' . $consulta4 . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
 				' . $filtro6 . '
@@ -584,9 +623,18 @@ class Pedidos_model extends CI_Model {
                 '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }		
 		
-		//$data['Orcamento'] = ($data['Orcamento']) ? ' OT.idApp_OrcaTrata = ' . $data['Orcamento'] . ' AND ' : FALSE;
-        //$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
-        //$data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		
+		$date_inicio_entrega = ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
+		$date_fim_entrega = ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc = ($data['DataInicio3']) ? 'OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND ' : FALSE;
+		$date_fim_vnc = ($data['DataFim3']) ? 'OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc_prc = ($data['DataInicio4']) ? 'PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND ' : FALSE;
+		$date_fim_vnc_prc = ($data['DataFim4']) ? 'PR.DataVencimento <= "' . $data['DataFim4'] . '" AND ' : FALSE;
+		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
@@ -616,11 +664,15 @@ class Pedidos_model extends CI_Model {
         $query = $this->db->query('
 			' . $data['selecione'] . '
 			WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
+                ' . $date_inicio_entrega . '
+                ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
+                ' . $date_inicio_vnc_prc . '
+                ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				' . $consulta . ' AND
-				' . $consulta2 . ' AND
-				' . $consulta3 . ' AND
-				' . $consulta4 . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
 				' . $filtro6 . '
@@ -717,9 +769,18 @@ class Pedidos_model extends CI_Model {
                 '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }		
 		
-		//$data['Orcamento'] = ($data['Orcamento']) ? ' OT.idApp_OrcaTrata = ' . $data['Orcamento'] . ' AND ' : FALSE;
-        //$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
-        //$data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		
+		$date_inicio_entrega = ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
+		$date_fim_entrega = ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc = ($data['DataInicio3']) ? 'OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND ' : FALSE;
+		$date_fim_vnc = ($data['DataFim3']) ? 'OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc_prc = ($data['DataInicio4']) ? 'PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND ' : FALSE;
+		$date_fim_vnc_prc = ($data['DataFim4']) ? 'PR.DataVencimento <= "' . $data['DataFim4'] . '" AND ' : FALSE;
+		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
@@ -749,11 +810,15 @@ class Pedidos_model extends CI_Model {
         $query = $this->db->query('
 			' . $data['selecione'] . '
 			WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
+                ' . $date_inicio_entrega . '
+                ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
+                ' . $date_inicio_vnc_prc . '
+                ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				' . $consulta . ' AND
-				' . $consulta2 . ' AND
-				' . $consulta3 . ' AND
-				' . $consulta4 . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
 				' . $filtro6 . '
@@ -850,9 +915,18 @@ class Pedidos_model extends CI_Model {
                 '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }		
 		
-		//$data['Orcamento'] = ($data['Orcamento']) ? ' OT.idApp_OrcaTrata = ' . $data['Orcamento'] . ' AND ' : FALSE;
-        //$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
-        //$data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		
+		$date_inicio_entrega = ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
+		$date_fim_entrega = ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc = ($data['DataInicio3']) ? 'OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND ' : FALSE;
+		$date_fim_vnc = ($data['DataFim3']) ? 'OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc_prc = ($data['DataInicio4']) ? 'PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND ' : FALSE;
+		$date_fim_vnc_prc = ($data['DataFim4']) ? 'PR.DataVencimento <= "' . $data['DataFim4'] . '" AND ' : FALSE;
+		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
@@ -882,11 +956,15 @@ class Pedidos_model extends CI_Model {
         $query = $this->db->query('
 			' . $data['selecione'] . '
 			WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
+                ' . $date_inicio_entrega . '
+                ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
+                ' . $date_inicio_vnc_prc . '
+                ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				' . $consulta . ' AND
-				' . $consulta2 . ' AND
-				' . $consulta3 . ' AND
-				' . $consulta4 . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
 				' . $filtro6 . '
@@ -979,9 +1057,18 @@ class Pedidos_model extends CI_Model {
                 '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
         }		
 		
-		//$data['Orcamento'] = ($data['Orcamento']) ? ' OT.idApp_OrcaTrata = ' . $data['Orcamento'] . ' AND ' : FALSE;
-        //$data['Campo'] = (!$data['Campo']) ? 'OT.idApp_OrcaTrata' : $data['Campo'];
-        //$data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		
+		$date_inicio_entrega = ($data['DataInicio2']) ? 'OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
+		$date_fim_entrega = ($data['DataFim2']) ? 'OT.DataEntregaOrca <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc = ($data['DataInicio3']) ? 'OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND ' : FALSE;
+		$date_fim_vnc = ($data['DataFim3']) ? 'OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '" AND ' : FALSE;
+		
+		$date_inicio_vnc_prc = ($data['DataInicio4']) ? 'PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND ' : FALSE;
+		$date_fim_vnc_prc = ($data['DataFim4']) ? 'PR.DataVencimento <= "' . $data['DataFim4'] . '" AND ' : FALSE;
+		
 		$data['selecione'] = $data['selecione'];
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] : FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] : FALSE;		
@@ -1011,11 +1098,15 @@ class Pedidos_model extends CI_Model {
         $query = $this->db->query('
 			' . $data['selecione'] . '
 			WHERE
+                ' . $date_inicio_orca . '
+                ' . $date_fim_orca . '
+                ' . $date_inicio_entrega . '
+                ' . $date_fim_entrega . '
+                ' . $date_inicio_vnc . '
+                ' . $date_fim_vnc . '
+                ' . $date_inicio_vnc_prc . '
+                ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				' . $consulta . ' AND
-				' . $consulta2 . ' AND
-				' . $consulta3 . ' AND
-				' . $consulta4 . ' AND
 				' . $permissao . '
 				' . $filtro4 . '
 				' . $filtro6 . '

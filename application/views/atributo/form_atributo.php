@@ -64,12 +64,10 @@
 											<div class="panel panel-info">
 												<div class="panel-heading">			
 													<div class="row">
-														<div class="col-md-2">
+														<div class="col-md-6">
 															<label for="Opcao">Opção <?php echo $i ?></label>
-															<div class="input-group">
 																<input type="text" class="form-control" id="Opcao<?php echo $i ?>" maxlength="44"
 																	name="Opcao<?php echo $i ?>" value="<?php echo $opcao[$i]['Opcao'] ?>">
-															</div>
 														</div>											
 														<div class="col-md-1">
 															<label><br></label><br>

@@ -956,7 +956,7 @@
 														<div class="row">
 															<div class="col-md-12">
 																<label for="FormaPagamento">Forma de Pagamento</label>
-																<select data-placeholder="Selecione uma opção..." class="form-control" 
+																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
 																	data-toggle="collapse" onchange="exibirTroco(this.value),dateDiff()" <?php echo $readonly; ?>
 																		data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																		id="FormaPagamento" name="FormaPagamento">
@@ -1019,7 +1019,7 @@
 												<div class="panel panel-default">
 													<div class="panel-heading">
 														<div class="row">
-															<div class="col-md-12">
+															<div class="col-md-6">
 																<label for="ValorTotalOrca">Total da Despesa:</label><br>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -1028,7 +1028,38 @@
 																			data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
 																		   name="ValorTotalOrca" value="<?php echo $orcatrata['ValorTotalOrca'] ?>">
 																</div>
+															</div>
+															<div class="col-md-6 text-left">
+																<label for="BrindeOrca">Permitir Total= 0,00 ?</label><br>
+																<div class="btn-group" data-toggle="buttons">
+																	<?php
+																	foreach ($select['BrindeOrca'] as $key => $row) {
+																		if (!$orcatrata['BrindeOrca'])$orcatrata['BrindeOrca'] = 'N';
+
+																		($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																		if ($orcatrata['BrindeOrca'] == $key) {
+																			echo ''
+																			. '<label class="btn btn-warning active" name="BrindeOrca_' . $hideshow . '">'
+																			. '<input type="radio" name="BrindeOrca" id="' . $hideshow . '" '
+																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																			. '</label>'
+																			;
+																		} else {
+																			echo ''
+																			. '<label class="btn btn-default" name="BrindeOrca_' . $hideshow . '">'
+																			. '<input type="radio" name="BrindeOrca" id="' . $hideshow . '" '
+																			. 'autocomplete="off" value="' . $key . '" >' . $row
+																			. '</label>'
+																			;
+																		}
+																	}
+																	?>
+																</div>
 															</div>																
+														</div>
+														<div id="BrindeOrca" <?php echo $div['BrindeOrca']; ?>>
+														<?php echo form_error('BrindeOrca'); ?>
 														</div>
 														<div class="row">	
 															<div class="col-md-6">
@@ -1093,7 +1124,7 @@
 																echo ''
 																. '<label class="btn btn-warning active" name="radiobutton_Modalidade" id="radiobutton_Modalidade' .  $key . '">'
 																. '<input type="radio" name="Modalidade" id="radiobuttondinamico" '
-																. 'onchange="calculaParcelas()" '
+																. 'onchange="calculaParcelas(this.value)" '
 																. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																. '</label>'
 																;
@@ -1101,7 +1132,7 @@
 																echo ''
 																. '<label class="btn btn-default" name="radiobutton_Modalidade" id="radiobutton_Modalidade' .  $key . '">'
 																. '<input type="radio" name="Modalidade" id="radiobuttondinamico" '
-																. 'onchange="calculaParcelasMensais()" '
+																. 'onchange="calculaParcelas(this.value)" '
 																. 'autocomplete="off" value="' . $key . '" >' . $row
 																. '</label>'
 																;
@@ -1113,84 +1144,87 @@
 											</div>
 												<!--App_parcelasRec-->
 											<br>
+											<?php echo form_error('ValorTotalOrca'); ?>
 											
 											<div class="input_fields_parcelas">
-												<?php if($orcatrata['ValorTotalOrca'] > 0) { ?>
+												<?php if(isset($orcatrata['QtdParcelasOrca']) && $valortotalorca > 0.00) { ?>
 													<?php
 													for ($i=1; $i <= $orcatrata['QtdParcelasOrca']; $i++) {
 													?>
 
-													<?php if ($metodo > 1) { ?>
-													<input type="hidden" name="idApp_Parcelas<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_Parcelas']; ?>"/>
-													<?php } ?>
+														<?php if ($metodo > 1) { ?>
+														<input type="hidden" name="idApp_Parcelas<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_Parcelas']; ?>"/>
+														<?php } ?>
 
-													<div class="form-group">
-														<div class="panel panel-warning">
-															<div class="panel-heading">
-																<div class="row">
-																	<div class="col-md-2">
-																		<label for="Parcela">Parcela <?php echo $i ?>:</label><br>
-																		<input type="text" class="form-control" maxlength="6" readonly=""
-																			   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
-																	</div>
-																	<div class="col-md-3">
-																		<label for="ValorParcela">Valor Parcela:</label><br>
-																		<div class="input-group" id="txtHint">
-																			<span class="input-group-addon" id="basic-addon1">R$</span>
-																			<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorParcela<?php echo $i ?>"
-																				   name="ValorParcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorParcela'] ?>">
+														<div class="form-group">
+															<div class="panel panel-warning">
+																<div class="panel-heading">
+																	<div class="row">
+																		<div class="col-md-2">
+																			<label for="Parcela">Parcela <?php echo $i ?>:</label><br>
+																			<input type="text" class="form-control" maxlength="6" readonly=""
+																				   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
 																		</div>
-																	</div>
-																	<div class="col-md-3">
-																		<label for="DataVencimento">Data Venc. Parc.</label>
-																		<div class="input-group DatePicker">
-																			<span class="input-group-addon" disabled>
-																				<span class="glyphicon glyphicon-calendar"></span>
-																			</span>
-																			<input type="text" class="form-control Date" id="DataVencimento<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
-																				   name="DataVencimento<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataVencimento'] ?>">
-																			
-																		</div>
-																	</div>
-																	<div class="col-md-3">
-																		<label for="Quitado">Parc. Paga?</label><br>
-																		<div class="form-group">
-																			<div class="btn-group" data-toggle="buttons">
-																				<?php
-																				foreach ($select['Quitado'] as $key => $row) {
-																					(!$parcelasrec[$i]['Quitado']) ? $parcelasrec[$i]['Quitado'] = 'N' : FALSE;
-
-																					if ($parcelasrec[$i]['Quitado'] == $key) {
-																						echo ''
-																						. '<label class="btn btn-warning active" name="radiobutton_Quitado' . $i . '" id="radiobutton_Quitado' . $i .  $key . '">'
-																						. '<input type="radio" name="Quitado' . $i . '" id="radiobuttondinamico" '
-																						. 'onchange="carregaQuitado(this.value,this.name,'.$i.')" '
-																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																						. '</label>'
-																						;
-																					} else {
-																						echo ''
-																						. '<label class="btn btn-default" name="radiobutton_Quitado' . $i . '" id="radiobutton_Quitado' . $i .  $key . '">'
-																						. '<input type="radio" name="Quitado' . $i . '" id="radiobuttondinamico" '
-																						. 'onchange="carregaQuitado(this.value,this.name,'.$i.')" '
-																						. 'autocomplete="off" value="' . $key . '" >' . $row
-																						. '</label>'
-																						;
-																					}
-																				}
-																				?>
+																		<div class="col-md-3">
+																			<label for="ValorParcela">Valor Parcela:</label><br>
+																			<div class="input-group" id="txtHint">
+																				<span class="input-group-addon" id="basic-addon1">R$</span>
+																				<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorParcela<?php echo $i ?>"
+																					   name="ValorParcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorParcela'] ?>">
 																			</div>
 																		</div>
-																	</div>																	
+																		<div class="col-md-3">
+																			<label for="DataVencimento">Data Venc. Parc.</label>
+																			<div class="input-group DatePicker">
+																				<span class="input-group-addon" disabled>
+																					<span class="glyphicon glyphicon-calendar"></span>
+																				</span>
+																				<input type="text" class="form-control Date" id="DataVencimento<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																					   name="DataVencimento<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataVencimento'] ?>">
+																				
+																			</div>
+																		</div>
+																		<div class="col-md-3">
+																			<label for="Quitado">Parc. Paga?</label><br>
+																			<div class="form-group">
+																				<div class="btn-group" data-toggle="buttons">
+																					<?php
+																					foreach ($select['Quitado'] as $key => $row) {
+																						(!$parcelasrec[$i]['Quitado']) ? $parcelasrec[$i]['Quitado'] = 'N' : FALSE;
+
+																						if ($parcelasrec[$i]['Quitado'] == $key) {
+																							echo ''
+																							. '<label class="btn btn-warning active" name="radiobutton_Quitado' . $i . '" id="radiobutton_Quitado' . $i .  $key . '">'
+																							. '<input type="radio" name="Quitado' . $i . '" id="radiobuttondinamico" '
+																							. 'onchange="carregaQuitado(this.value,this.name,'.$i.')" '
+																							. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																							. '</label>'
+																							;
+																						} else {
+																							echo ''
+																							. '<label class="btn btn-default" name="radiobutton_Quitado' . $i . '" id="radiobutton_Quitado' . $i .  $key . '">'
+																							. '<input type="radio" name="Quitado' . $i . '" id="radiobuttondinamico" '
+																							. 'onchange="carregaQuitado(this.value,this.name,'.$i.')" '
+																							. 'autocomplete="off" value="' . $key . '" >' . $row
+																							. '</label>'
+																							;
+																						}
+																					}
+																					?>
+																				</div>
+																			</div>
+																		</div>																	
+																	</div>
 																</div>
 															</div>
 														</div>
-													</div>
 
 													<?php
 													}
 													?>
-												<?php } ?>	
+												<?php
+												} 
+												?>	
 											</div>
 											
 										</div>									

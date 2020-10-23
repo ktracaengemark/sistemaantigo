@@ -314,11 +314,27 @@
 										<label for=""><h4><b>Pessoas & Empresas</b></h4></label>
 										<div class="form-group col-md-12 text-left">
 											<div class="row">																				
-												<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>cliente/pesquisar" role="button"> 
-													<span class="glyphicon glyphicon-user"></span> Clientes
+												<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/clientes" role="button"> 
+													<span class="glyphicon glyphicon-user"></span> Clientes/lista
 												</a>
 											</div>
 										</div>
+										<div class="form-group col-md-12 text-left">
+											<div class="row">																				
+												<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>cliente/pesquisar" role="button"> 
+													<span class="glyphicon glyphicon-user"></span> Clientes/Pesquisa
+												</a>
+											</div>
+										</div>
+										<?php if ($_SESSION['log']['idSis_Empresa'] == 2 ) { ?>	
+											<div class="form-group col-md-12 text-left">
+												<div class="row">																				
+													<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/clenkontraki" role="button"> 
+														<span class="glyphicon glyphicon-user"></span> Clientes Enkontraki/ Lista
+													</a>
+												</div>
+											</div>
+										<?php } ?>
 										<div class="form-group col-md-12 text-left">	
 											<div class="row">		
 												<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/fornecedor" role="button"> 
