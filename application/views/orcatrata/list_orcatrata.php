@@ -127,9 +127,9 @@
 									<li role="presentation" class="active" ><a href="#proxima" aria-controls="proxima" role="tab" data-toggle="tab">Aprovados</a></li>
 									<li role="presentation" ><a href="#anterior" aria-controls="anterior" role="tab" data-toggle="tab">Não Aprovados</a></li>
 									<li role="presentation" ><a href="#finalizado" aria-controls="finalizado" role="tab" data-toggle="tab">Finalizado</a></li>
-									<li role="presentation" ><a href="#naofinalizado" aria-controls="naofinalizado" role="tab" data-toggle="tab">Não Finalizado</a></li>
+									<!--<li role="presentation" ><a href="#naofinalizado" aria-controls="naofinalizado" role="tab" data-toggle="tab">Não Finalizado</a></li>-->
 									<li role="presentation" ><a href="#cancelado" aria-controls="cancelado" role="tab" data-toggle="tab">Cancelado</a></li>
-									<li role="presentation" ><a href="#naocancelado" aria-controls="naocancelado" role="tab" data-toggle="tab">Não Cancelado</a></li>
+									<!--<li role="presentation" ><a href="#naocancelado" aria-controls="naocancelado" role="tab" data-toggle="tab">Não Cancelado</a></li>-->
 								</ul>
 
 								<!-- Tab panes -->
