@@ -837,7 +837,6 @@ class Orcatrata_model extends CI_Model {
                 ' . $date_fim_vnc_prc . '
 				OT.idSis_Empresa = ' . $data . ' AND
 				OT.idTab_TipoRD = "2" AND
-				OT.Modalidade = "M" AND
 				PR.idSis_Empresa = ' . $data . ' AND
 				' . $permissao1 . '
 				' . $permissao2 . '
@@ -967,7 +966,6 @@ class Orcatrata_model extends CI_Model {
                 ' . $date_fim_vnc_prc . '
 				OT.idSis_Empresa = ' . $data . ' AND
 				OT.idTab_TipoRD = "1" AND
-				OT.Modalidade = "M" AND
 				PR.idSis_Empresa = ' . $data . ' AND		
 				' . $permissao1 . '
 				' . $permissao2 . '
