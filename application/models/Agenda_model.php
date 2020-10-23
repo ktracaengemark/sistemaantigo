@@ -696,7 +696,10 @@ class Agenda_model extends CI_Model {
 				' . $filtro12 . '
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				(P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '))
+				P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ')) AND
+				P.idApp_OrcaTrata = "0" AND
+				P.idApp_Cliente = "0" AND
+				P.idApp_Fornecedor = "0" 
 				' . $data['Procedimento'] . '
             ORDER BY
 				' . $data['Campo'] . '
