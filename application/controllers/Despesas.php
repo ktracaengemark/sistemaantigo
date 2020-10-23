@@ -210,7 +210,7 @@ class Despesas extends CI_Controller {
 		
 		$data['select']['Modalidade'] = array(
             '0' => '::TODOS::',
-            'P' => 'Parcelas',
+            'P' => 'Dividido',
             'M' => 'Mensal',
         );
 		

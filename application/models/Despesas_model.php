@@ -106,6 +106,7 @@ class Despesas_model extends CI_Model {
 				' . $filtro2 . '
 				' . $filtro3 . '
 				' . $filtro4 . '
+				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
@@ -245,11 +246,18 @@ class Despesas_model extends CI_Model {
                 ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				' . $permissao . '
+				' . $filtro1 . '
+				' . $filtro2 . '
+				' . $filtro3 . '
 				' . $filtro4 . '
+				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
 				' . $filtro9 . '
+				' . $filtro10 . '
+				' . $filtro11 . '
+				' . $filtro13 . '
 				OT.idTab_TipoRD = "1" AND
 				OT.CanceladoOrca = "N" AND
 				OT.CombinadoFrete = "N"
@@ -386,11 +394,18 @@ class Despesas_model extends CI_Model {
                 ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				' . $permissao . '
+				' . $filtro1 . '
+				' . $filtro2 . '
+				' . $filtro3 . '
 				' . $filtro4 . '
+				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
 				' . $filtro9 . '
+				' . $filtro10 . '
+				' . $filtro11 . '
+				' . $filtro13 . '
 				OT.idTab_TipoRD = "1" AND
 				OT.CanceladoOrca = "N" AND
 				OT.CombinadoFrete = "S" AND
@@ -528,11 +543,18 @@ class Despesas_model extends CI_Model {
                 ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				' . $permissao . '
+				' . $filtro1 . '
+				' . $filtro2 . '
+				' . $filtro3 . '
 				' . $filtro4 . '
+				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
 				' . $filtro9 . '
+				' . $filtro10 . '
+				' . $filtro11 . '
+				' . $filtro13 . '
 				OT.idTab_TipoRD = "1" AND
 				OT.CanceladoOrca = "N" AND
 				OT.CombinadoFrete = "S" AND
@@ -674,11 +696,18 @@ class Despesas_model extends CI_Model {
                 ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				' . $permissao . '
+				' . $filtro1 . '
+				' . $filtro2 . '
+				' . $filtro3 . '
 				' . $filtro4 . '
+				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
 				' . $filtro9 . '
+				' . $filtro10 . '
+				' . $filtro11 . '
+				' . $filtro13 . '
 				OT.idTab_TipoRD = "1" AND
 				OT.CanceladoOrca = "N" AND
 				OT.CombinadoFrete = "S" AND
@@ -820,11 +849,18 @@ class Despesas_model extends CI_Model {
                 ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				' . $permissao . '
+				' . $filtro1 . '
+				' . $filtro2 . '
+				' . $filtro3 . '
 				' . $filtro4 . '
+				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
 				' . $filtro9 . '
+				' . $filtro10 . '
+				' . $filtro11 . '
+				' . $filtro13 . '
 				OT.idTab_TipoRD = "1" AND
 				OT.CanceladoOrca = "N" AND
 				OT.CombinadoFrete = "S" AND
@@ -966,11 +1002,18 @@ class Despesas_model extends CI_Model {
                 ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				' . $permissao . '
+				' . $filtro1 . '
+				' . $filtro2 . '
+				' . $filtro3 . '
 				' . $filtro4 . '
+				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
 				' . $filtro9 . '
+				' . $filtro10 . '
+				' . $filtro11 . '
+				' . $filtro13 . '
 				OT.idTab_TipoRD = "1" AND
 				OT.CanceladoOrca = "N" AND
 				OT.CombinadoFrete = "S" AND
@@ -1108,11 +1151,18 @@ class Despesas_model extends CI_Model {
                 ' . $date_fim_vnc_prc . '
                 OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				' . $permissao . '
+				' . $filtro1 . '
+				' . $filtro2 . '
+				' . $filtro3 . '
 				' . $filtro4 . '
+				' . $filtro5 . '
 				' . $filtro6 . '
 				' . $filtro7 . '
 				' . $filtro8 . '
 				' . $filtro9 . '
+				' . $filtro10 . '
+				' . $filtro11 . '
+				' . $filtro13 . '
 				OT.idTab_TipoRD = "1" AND
 				OT.CanceladoOrca = "S"
                 ' . $data['Orcamento'] . '
