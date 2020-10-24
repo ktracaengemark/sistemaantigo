@@ -12,21 +12,25 @@
 					</button>
 				</span>
 				<input type="text" placeholder="Pesquisar Pedido" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
-				<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>	
+				<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 					<input type="text" placeholder="Pesquisar Cliente" class="form-control Numero btn-sm" name="Cliente" value="<?php echo set_value('Cliente', $query['Cliente']); ?>">
-				<?php }?>
+				<?php }else{ ?>
+					<input type="hidden" name="Cliente" id="Cliente" value=""/>
+				<?php } ?>
 				<span class="input-group-btn">	
 					<button class="btn btn-warning btn-md" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 						<span class="glyphicon glyphicon-filter"></span>
 					</button>
 				</span>
-				<span class="input-group-btn">
-					<a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir_lista/' . $_SESSION['log']['idSis_Empresa']; ?>">
-						<button class="btn btn-success btn-md" type="button">
-							<span class="glyphicon glyphicon-print"></span>
-						</button>
-					</a>
-				</span>
+				<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
+					<span class="input-group-btn">
+						<a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir_lista/' . $_SESSION['log']['idSis_Empresa']; ?>">
+							<button class="btn btn-success btn-md" type="button">
+								<span class="glyphicon glyphicon-print"></span>
+							</button>
+						</a>
+					</span>
+				<?php } ?>
 				<span class="input-group-btn">
 					<a href="<?php echo base_url() . 'Orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa']; ?>">
 						<button class="btn btn-danger btn-md" type="button">
@@ -53,6 +57,7 @@
 			<div class="modal-footer">
 				<div class="panel panel-info">
 					<div class="panel-heading text-left">
+						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 						<div class="row">	
 							<div class="col-md-3">
 								<label for="CombinadoFrete">Combinado</label>
@@ -114,9 +119,17 @@
 									?>
 								</select>
 							</div>
-						</div>	
+						</div>
+						<?php }else{ ?>
+							<input type="hidden" name="CombinadoFrete" id="CombinadoFrete" value="0"/>
+							<input type="hidden" name="AprovadoOrca" id="AprovadoOrca" value="0"/>
+							<input type="hidden" name="ConcluidoOrca" id="ConcluidoOrca" value="0"/>
+							<input type="hidden" name="QuitadoOrca" id="QuitadoOrca" value="0"/>
+						<?php } ?>
 						<div class="row">
+							<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<div class="col-md-3"></div>
+							<?php } ?>
 							<div class="col-md-3 text-left">
 								<label for="Quitado">Status das Parcelas</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -132,6 +145,7 @@
 									?>
 								</select>
 							</div>
+							<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<div class="col-md-3">
 								<label for="FinalizadoOrca">Finalizado</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -162,11 +176,16 @@
 									?>
 								</select>
 							</div>
+							<?php }else{ ?>
+								<input type="hidden" name="FinalizadoOrca" id="FinalizadoOrca" value="0"/>
+								<input type="hidden" name="CanceladoOrca" id="CanceladoOrca" value="0"/>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
 				<div class="panel panel-info">
 					<div class="panel-heading text-left">	
+						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 						<div class="row">	
 							<div class="col-md-3">
 								<label for="Ordenamento">Compra</label>
@@ -213,6 +232,13 @@
 									?>
 								</select>
 							</div>
+						</div>
+						<?php }else{ ?>
+							<input type="hidden" name="Tipo_Orca" id="Tipo_Orca" value="0"/>
+							<input type="hidden" name="TipoFrete" id="TipoFrete" value="0"/>
+							<input type="hidden" name="AVAP" id="AVAP" value="0"/>
+						<?php } ?>
+						<div class="row">
 							<div class="col-md-3">
 								<label for="Ordenamento">Forma de Pag.</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -228,8 +254,6 @@
 									?>
 								</select>
 							</div>
-						</div>
-						<div class="row">
 							<div class="col-md-3 text-left">
 								<label for="Ordenamento">Tipo Receita:</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -260,6 +284,7 @@
 									?>
 								</select>
 							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -286,6 +311,7 @@
 											name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
 								</div>
 							</div>
+							<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<div class="col-md-3">
 								<label for="DataInicio2">Entrega Inc.</label>
 								<div class="input-group DatePicker">
@@ -328,6 +354,12 @@
 											name="DataFim3" value="<?php echo set_value('DataFim3', $query['DataFim3']); ?>">
 								</div>
 							</div>
+							<?php }else{ ?>
+								<input type="hidden" name="DataInicio2" id="DataInicio2" value=""/>
+								<input type="hidden" name="DataFim2" id="DataFim2" value=""/>
+								<input type="hidden" name="DataInicio3" id="DataInicio3" value=""/>
+								<input type="hidden" name="DataFim3" id="DataFim3" value=""/>
+							<?php } ?>
 							<div class="col-md-3">
 								<label for="DataInicio4">Vnc.Prc.Inc.</label>
 								<div class="input-group DatePicker">

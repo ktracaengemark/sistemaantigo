@@ -117,6 +117,7 @@ class Pedidos_model extends CI_Model {
 				OT.idTab_TipoRD = "2" 
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
@@ -263,6 +264,7 @@ class Pedidos_model extends CI_Model {
 				OT.CombinadoFrete = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
@@ -412,6 +414,7 @@ class Pedidos_model extends CI_Model {
 				OT.AprovadoOrca = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
@@ -565,6 +568,7 @@ class Pedidos_model extends CI_Model {
 				
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
@@ -718,6 +722,7 @@ class Pedidos_model extends CI_Model {
 				PRD.ConcluidoProduto = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
@@ -871,6 +876,7 @@ class Pedidos_model extends CI_Model {
 				PRD.ConcluidoProduto = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
@@ -1022,6 +1028,7 @@ class Pedidos_model extends CI_Model {
 				PR.Quitado = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
@@ -1167,6 +1174,7 @@ class Pedidos_model extends CI_Model {
 				OT.CanceladoOrca = "S"
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
+                ' . $data['TipoFinanceiroR'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 

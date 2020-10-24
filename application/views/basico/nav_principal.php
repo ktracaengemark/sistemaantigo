@@ -85,8 +85,10 @@
 						
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="<?php echo base_url() ?>pedidos/pedidos"><span class="glyphicon glyphicon-pencil"></span> Gestor de Receitas</a></li>
-							<!--<li role="separator" class="divider"></li>
-							<li><a href="<?php echo base_url() ?>Orcatrata/cadastrar3"><span class="glyphicon glyphicon-plus"></span> Nova Receita</a></li>-->
+							<?php if ($_SESSION['log']['idSis_Empresa'] == 5 ) { ?>
+							<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>Orcatrata/cadastrar3"><span class="glyphicon glyphicon-plus"></span> Nova Receita</a></li>
+							<?php } ?>
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/admin"><span class="glyphicon glyphicon-list"></span> Menu</a></li>
 							<?php if ($_SESSION['log']['idSis_Empresa'] == 5 ) { ?>
@@ -125,8 +127,10 @@
 						
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="<?php echo base_url() ?>despesas/despesas"><span class="glyphicon glyphicon-pencil"></span> Gestor de Despesas</a></li>
-							<!--<li role="separator" class="divider"></li>
-							<li><a href="<?php echo base_url() ?>Orcatrata/cadastrardesp"><span class="glyphicon glyphicon-plus"></span> Nova Despesa</a></li>-->
+							<?php if ($_SESSION['log']['idSis_Empresa'] == 5 ) { ?>
+							<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>Orcatrata/cadastrardesp"><span class="glyphicon glyphicon-plus"></span> Nova Despesa</a></li>
+							<?php } ?>
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/admin"><span class="glyphicon glyphicon-list"></span> Menu </a></li>
 							<!--<li role="separator" class="divider"></li>

@@ -610,7 +610,7 @@
 													<div class="panel-heading">
 														<div class="row">
 															<div class="col-md-6">
-																<label for="ValorExtraOrca">Extra:</label>
+																<label for="ValorExtraOrca">Outros:</label>
 																<div class="input-group" id="txtHint">
 																	<span class="input-group-addon " id="basic-addon1">R$</span>
 																	<input type="text" class="form-control Valor" id="ValorExtraOrca" maxlength="10" placeholder="0,00" 
@@ -980,6 +980,7 @@
 													</div>
 												</div>
 											</div>
+											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 											<div class="col-md-4">
 												<div class="panel panel-primary">
 													<div class="panel-heading">
@@ -1013,48 +1014,10 @@
 																	?>
 																</div>
 															</div>
-															
-															<!--
-															<div class="col-md-12 text-center">
-																<label for="AVAP">Pargamento?</label><br>
-																<div class="btn-block" data-toggle="buttons">
-																	<?php
-																	/*
-																	foreach ($select['AVAP'] as $key => $row) {
-																		if (!$orcatrata['AVAP']) $orcatrata['AVAP'] = 'V';
-
-																		($key == 'P') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																		if ($orcatrata['AVAP'] == $key) {
-																			echo ''
-																			. '<label class="btn btn-warning active" name="AVAP_' . $hideshow . '">'
-																			. '<input type="radio" name="AVAP" id="' . $hideshow . '" '
-																			. 'onchange="calculaParcelas(),formaPag(this.value)" '
-																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																			. '</label>'
-																			;
-																		} else {
-																			echo ''
-																			. '<label class="btn btn-default" name="AVAP_' . $hideshow . '">'
-																			. '<input type="radio" name="AVAP" id="' . $hideshow . '" '
-																			. 'onchange="calculaParcelas(),formaPag(this.value)" '
-																			. 'autocomplete="off" value="' . $key . '" >' . $row
-																			. '</label>'
-																			;
-																		}
-																	}
-																	*/
-																	?>
-
-																</div>
-																<?php #echo form_error('AVAP'); ?>
-															</div>
-															-->
 														</div>
 													</div>
 												</div>
 											</div>
-											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 											<div class="col-md-4">
 												<div class="panel panel-default">
 													<div class="panel-heading">
@@ -1120,12 +1083,12 @@
 																		   name="ValorTroco" value="<?php echo $orcatrata['ValorTroco'] ?>">
 																</div>
 															</div>
-														</div>	
-														
+														</div>
 													</div>
 												</div>
 											</div>
 											<?php }else{ ?>
+												<input type="hidden" name="AVAP" id="AVAP" value="<?php echo $orcatrata['AVAP'] ?>"/>
 												<input type="hidden" name="ValorTotalOrca" id="ValorTotalOrca" value="<?php echo $orcatrata['ValorTotalOrca'] ?>"/>
 												<input type="hidden" name="ValorDinheiro" id="ValorDinheiro" value="<?php echo $orcatrata['ValorDinheiro'] ?>"/>
 												<input type="hidden" name="ValorTroco" id="ValorTroco" value="<?php echo $orcatrata['ValorTroco'] ?>"/>

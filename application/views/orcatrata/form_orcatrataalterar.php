@@ -596,7 +596,7 @@
 															<div class="panel-heading">
 																<div class="row">
 																	<div class="col-md-6">
-																		<label for="ValorExtraOrca">Extra:</label>
+																		<label for="ValorExtraOrca">Outros:</label>
 																		<div class="input-group" id="txtHint">
 																			<span class="input-group-addon " id="basic-addon1">R$</span>
 																			<input type="text" class="form-control Valor" id="ValorExtraOrca" maxlength="10" placeholder="0,00" 
@@ -1085,26 +1085,6 @@
 												-->
 											</div>									
 											<div class="row">
-												<div class="col-md-2">
-													<label for="QtdParcelasOrca">Parcelas</label><br>
-													<input type="text" class="form-control Numero" id="QtdParcelasOrca" maxlength="3" placeholder="0"
-														   data-toggle="collapse" onkeyup="calculaParcelas()"
-																data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
-														   name="QtdParcelasOrca" value="<?php echo $orcatrata['QtdParcelasOrca'] ?>">
-												<?php echo form_error('QtdParcelasOrca'); ?>
-												</div>																																			
-												<div class="col-md-3">
-													<label for="DataVencimentoOrca">Venc.</label>
-													<div class="input-group <?php echo $datepicker; ?>">
-														<span class="input-group-addon" disabled>
-															<span class="glyphicon glyphicon-calendar"></span>
-														</span>
-														<input type="text" class="form-control Date" id="DataVencimentoOrca" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-															   data-toggle="collapse" onkeyup="calculaParcelas()" onchange="calculaParcelas()"
-																data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
-															   name="DataVencimentoOrca" value="<?php echo $orcatrata['DataVencimentoOrca']; ?>">																			
-													</div>
-												</div>
 												<div class="col-md-3 form-inline">
 													<label for="Modalidade">Dividido/ Mensal</label><br>
 													<div class="btn-group" data-toggle="buttons">
@@ -1133,7 +1113,9 @@
 														?>
 
 													</div>
-												</div>															
+												</div>
+												<input type="hidden" name="QtdParcelasOrca" id="QtdParcelasOrca" value="<?php echo $orcatrata['QtdParcelasOrca'] ?>"/>
+												<input type="hidden" name="DataVencimentoOrca" id="DataVencimentoOrca" value="<?php echo $orcatrata['DataVencimentoOrca'] ?>"/>																
 											</div>
 											<!--App_parcelasRec-->
 											<br>

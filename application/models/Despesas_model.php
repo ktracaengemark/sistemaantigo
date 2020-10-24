@@ -117,6 +117,7 @@ class Despesas_model extends CI_Model {
 				OT.idTab_TipoRD = "1" 
                 ' . $data['Orcamento'] . '
                 ' . $data['Fornecedor'] . '
+                ' . $data['TipoFinanceiroD'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
@@ -262,7 +263,8 @@ class Despesas_model extends CI_Model {
 				OT.CanceladoOrca = "N" AND
 				OT.CombinadoFrete = "N"
                 ' . $data['Orcamento'] . '
-                ' . $data['Fornecedor'] . ' 
+                ' . $data['Fornecedor'] . '
+                ' . $data['TipoFinanceiroD'] . ' 
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
@@ -412,6 +414,7 @@ class Despesas_model extends CI_Model {
 				OT.AprovadoOrca = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Fornecedor'] . '
+                ' . $data['TipoFinanceiroD'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
@@ -562,9 +565,9 @@ class Despesas_model extends CI_Model {
 				OT.ConcluidoOrca = "N" AND
 				OT.ProntoOrca = "N" AND
 				PRD.ConcluidoProduto = "N" 
-				
                 ' . $data['Orcamento'] . '
                 ' . $data['Fornecedor'] . '
+                ' . $data['TipoFinanceiroD'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
@@ -718,6 +721,7 @@ class Despesas_model extends CI_Model {
 				PRD.ConcluidoProduto = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Fornecedor'] . '
+                ' . $data['TipoFinanceiroD'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
@@ -871,6 +875,7 @@ class Despesas_model extends CI_Model {
 				PRD.ConcluidoProduto = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Fornecedor'] . '
+                ' . $data['TipoFinanceiroD'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
@@ -1022,6 +1027,7 @@ class Despesas_model extends CI_Model {
 				PR.Quitado = "N"
                 ' . $data['Orcamento'] . '
                 ' . $data['Fornecedor'] . '
+                ' . $data['TipoFinanceiroD'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
@@ -1167,6 +1173,7 @@ class Despesas_model extends CI_Model {
 				OT.CanceladoOrca = "S"
                 ' . $data['Orcamento'] . '
                 ' . $data['Fornecedor'] . '
+                ' . $data['TipoFinanceiroD'] . '
 			GROUP BY
                 OT.idApp_OrcaTrata
 			ORDER BY 
