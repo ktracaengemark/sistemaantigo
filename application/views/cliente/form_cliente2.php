@@ -169,6 +169,34 @@
 														  name="ReferenciaCliente"><?php echo $query['ReferenciaCliente']; ?>
 												</textarea>
 											</div>
+											<div class="col-md-3">
+												<label for="ClienteConsultor">Cliente Consultor?</label><br>
+												<div class="form-group">
+													<div class="btn-group" data-toggle="buttons">
+														<?php
+														foreach ($select['ClienteConsultor'] as $key => $row) {
+															(!$query['ClienteConsultor']) ? $query['ClienteConsultor'] = 'N' : FALSE;
+
+															if ($query['ClienteConsultor'] == $key) {
+																echo ''
+																. '<label class="btn btn-warning active" name="radiobutton_ClienteConsultor" id="radiobutton_ClienteConsultor' . $key . '">'
+																. '<input type="radio" name="ClienteConsultor" id="radiobutton" '
+																. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																. '</label>'
+																;
+															} else {
+																echo ''
+																. '<label class="btn btn-default" name="radiobutton_ClienteConsultor" id="radiobutton_ClienteConsultor' . $key . '">'
+																. '<input type="radio" name="ClienteConsultor" id="radiobutton" '
+																. 'autocomplete="off" value="' . $key . '" >' . $row
+																. '</label>'
+																;
+															}
+														}
+														?>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 

@@ -70,6 +70,7 @@ class Cliente2 extends CI_Controller {
             'Telefone2',
             'Telefone3',
 			'Ativo',
+			'ClienteConsultor',
             'Sexo',
             'EnderecoCliente',
 			'NumeroCliente',
@@ -90,6 +91,7 @@ class Cliente2 extends CI_Controller {
         ), TRUE));
 
 		(!$data['query']['DataCadastroCliente']) ? $data['query']['DataCadastroCliente'] = date('d/m/Y', time()) : FALSE;
+		(!$data['query']['ClienteConsultor']) ? $data['query']['ClienteConsultor'] = 'N' : FALSE;
 		
 	   $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
@@ -107,6 +109,7 @@ class Cliente2 extends CI_Controller {
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Associado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['ClienteConsultor'] = $this->Basico_model->select_status_sn();
 		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresacli();
 		
 		$data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
@@ -340,6 +343,7 @@ class Cliente2 extends CI_Controller {
             'Telefone2',
             'Telefone3',
 			'Ativo',
+			'ClienteConsultor',
             'Sexo',
             'EnderecoCliente',
 			'NumeroCliente',
@@ -384,6 +388,7 @@ class Cliente2 extends CI_Controller {
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Associado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['ClienteConsultor'] = $this->Basico_model->select_status_sn();
 		$data['select']['Profissional'] = $this->Basico_model->select_profissional2();
 		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresacli();
 		
@@ -837,6 +842,7 @@ class Cliente2 extends CI_Controller {
 
         $data['query']['Sexo'] = $this->Basico_model->get_sexo($data['query']['Sexo']);
 		$data['query']['Ativo'] = $this->Basico_model->get_ativo($data['query']['Ativo']);
+		$data['query']['ClienteConsultor'] = $this->Basico_model->get_ativo($data['query']['ClienteConsultor']);
 		$data['query']['idSis_Empresa'] = $this->Basico_model->get_empresa($data['query']['idSis_Empresa']);
 		$data['query']['Profissional'] = $this->Basico_model->get_profissional($data['query']['Profissional']);
 		

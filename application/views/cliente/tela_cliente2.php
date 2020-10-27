@@ -373,6 +373,17 @@
 													
 													}
 													
+													if ($query['ClienteConsultor']) {
+														
+													echo '                                                 
+													<tr>
+														<td><span class="glyphicon glyphicon-alert"></span> Cliente Consultor:</td>
+														<td>' . $query['ClienteConsultor'] . '</td>
+													</tr>
+													';
+													
+													}
+													
 													if ($query['Ativo']) {
 														
 													echo '                                                 
