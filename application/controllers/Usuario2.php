@@ -39,7 +39,7 @@ class Usuario2 extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-    public function alterar($id = FALSE) {
+    public function alterarsenha($id = FALSE) {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -51,67 +51,30 @@ class Usuario2 extends CI_Controller {
         $data['query'] = $this->input->post(array(
 			'idSis_Empresa',
 			'idSis_Usuario',
-			#'Usuario',
             'Nome',
-            'DataNascimento',
             'CelularUsuario',
-            'Email',
-			'Sexo',
-			#'Permissao',
-			#'Funcao',
-			#'Inativo',
-			'CpfUsuario',
-			'RgUsuario',
-			'OrgaoExpUsuario',
-			'EstadoEmUsuario',
-			'DataEmUsuario',
-			'EnderecoUsuario',
-			'BairroUsuario',
-			'MunicipioUsuario',
-			'EstadoUsuario',
-			'CepUsuario',
-			#'CompAgenda',
             'Senha',
         ), TRUE);
 
         if ($id) {
             $data['query'] = $this->Usuario_model->get_usuario($id);
-            $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
-			$data['query']['DataEmUsuario'] = $this->basico->mascara_data($data['query']['DataEmUsuario'], 'barras');
         }
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-        #$this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim|is_unique_duplo[Sis_Usuario.Nome.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
         $this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim');
-        $this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        $this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');
-		//$this->form_validation->set_rules('CelularUsuario', 'CelularUsuario', 'required|trim');
         $this->form_validation->set_rules('CelularUsuario', 'Celular do Usuario', 'required|trim|is_unique_by_id_empresa[Sis_Usuario.CelularUsuario.' . $data['query']['idSis_Usuario'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-		#$this->form_validation->set_rules('Permissao', 'Nível', 'required|trim');
-		#$this->form_validation->set_rules('Funcao', 'Funcao', 'required|trim');
         $this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
         $this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');		
 
-        $data['select']['Municipio'] = $this->Basico_model->select_municipio();
-        $data['select']['Sexo'] = $this->Basico_model->select_sexo();
-		#$data['select']['Inativo'] = $this->Basico_model->select_inativo();
-		#$data['select']['Permissao'] = $this->Basico_model->select_permissao();
-		#$data['select']['Funcao'] = $this->Funcao_model->select_funcao();
-		$data['select']['CompAgenda'] = $this->Basico_model->select_status_sn();
-		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa5();
-		
-        $data['titulo'] = 'Editar Usuário';
-        $data['form_open_path'] = 'usuario2/alterar';
+        $data['titulo'] = 'Editar Senha';
+        $data['form_open_path'] = 'usuario2/alterarsenha';
         $data['readonly'] = '';
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
 
-        if ($data['query']['EnderecoUsuario'] || $data['query']['BairroUsuario'] ||
-			$data['query']['MunicipioUsuario'] || $data['query']['CepUsuario'] || $data['query']['RgUsuario']  || 
-			$data['query']['OrgaoExpUsuario'] || $data['query']['EstadoEmUsuario']  || $data['query']['DataEmUsuario'])
+        if ($data['query']['Nome'] || $data['query']['CelularUsuario'])
             $data['collapse'] = '';
         else
             $data['collapse'] = 'class="collapse"';
@@ -123,14 +86,89 @@ class Usuario2 extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('usuario/form_usuarioalterar2', $data);
+            $this->load->view('usuario/form_usuariosenha', $data);
         } else {
 
             $data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
-            $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
-			$data['query']['DataEmUsuario'] = $this->basico->mascara_data($data['query']['DataEmUsuario'], 'mysql');
-            $data['query']['Senha'] = md5($data['query']['Senha']);			
-            #$data['query']['Obs'] = nl2br($data['query']['Obs']);
+            $data['query']['Senha'] = md5($data['query']['Senha']);	
+
+
+            $data['anterior'] = $this->Usuario_model->get_usuario($data['query']['idSis_Usuario']);
+            $data['campos'] = array_keys($data['query']);
+
+            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Usuario'], TRUE);
+
+            if ($data['auditoriaitem'] && $this->Usuario_model->update_usuario($data['query'], $data['query']['idSis_Usuario']) === FALSE) {
+                $data['msg'] = '?m=1';
+                redirect(base_url() . 'usuario2/prontuario/' . $data['query']['idSis_Usuario'] . $data['msg']);
+                exit();
+            } else {
+
+                if ($data['auditoriaitem'] === FALSE) {
+                    $data['msg'] = '';
+                } else {
+                    $data['auditoria'] = $this->Basico_model->set_auditoriaempresa($data['auditoriaitem'], 'Sis_Usuario', 'UPDATE', $data['auditoriaitem']);
+                    $data['msg'] = '?m=1';
+                }
+
+                redirect(base_url() . 'usuario2/prontuario/' . $data['query']['idSis_Usuario'] . $data['msg']);
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+
+    public function alterarconta($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = $this->input->post(array(
+			'idSis_Empresa',
+			'idSis_Usuario',
+            'Nome',
+            'Banco',
+            'Agencia',
+            'Conta',
+        ), TRUE);
+
+        if ($id) {
+            $data['query'] = $this->Usuario_model->get_usuario($id);
+        }
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        $this->form_validation->set_rules('Nome', 'Nome do Responsável', 'required|trim');
+
+		
+        $data['titulo'] = 'Editar Conta';
+        $data['form_open_path'] = 'usuario2/alterarconta';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+        if ($data['query']['Agencia'] || $data['query']['Conta'])
+            $data['collapse'] = '';
+        else
+            $data['collapse'] = 'class="collapse"';
+
+        $data['nav_secundario'] = $this->load->view('usuario/nav_secundario', $data, TRUE);
+
+        $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
+        $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('usuario/form_usuarioconta', $data);
+        } else {
+
+            $data['query']['Nome'] = trim(mb_strtoupper($data['query']['Nome'], 'ISO-8859-1'));
 
 
             $data['anterior'] = $this->Usuario_model->get_usuario($data['query']['idSis_Usuario']);

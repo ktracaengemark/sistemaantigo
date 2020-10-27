@@ -17,22 +17,6 @@
 										<span class="glyphicon glyphicon-file"> </span>Ver Dados do Usuario
 									</a>
 								</a>
-							</li>
-							<li role="separator" class="divider"></li>
-							<li>
-								<a <?php if (preg_match("/usuario2\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
-									<a href="<?php echo base_url() . 'usuario2/alterar/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
-										<span class="glyphicon glyphicon-edit"></span> Editar Dados do Usuario
-									</a>
-								</a>
-							</li>
-							<li role="separator" class="divider"></li>
-							<li>
-								<a <?php if (preg_match("/usuario2\/alterarlogo\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
-									<a href="<?php echo base_url() . 'usuario2/alterarlogo/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
-										<span class="glyphicon glyphicon-edit"></span> Alterar Logo
-									</a>
-								</a>
 							</li>							
 						</ul>
 					</div>
