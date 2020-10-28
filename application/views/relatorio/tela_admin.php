@@ -102,7 +102,14 @@
 										<div class="form-group col-md-12 text-left">
 											<div class="row">										
 												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/comissao" role="button"> 
-													<span class="glyphicon glyphicon-usd"></span> Comissões
+													<span class="glyphicon glyphicon-usd"></span> Comissões NaLoja
+												</a>
+											</div>	
+										</div>
+										<div class="form-group col-md-12 text-left">
+											<div class="row">										
+												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/comissao_online" role="button"> 
+													<span class="glyphicon glyphicon-usd"></span> Comissões OnLine
 												</a>
 											</div>	
 										</div>

@@ -49,8 +49,7 @@
 								<th class="active">Pedido</th>
 								<th class="active">Cliente</th>
 								<th class="active">Tipo</th>
-								<th class="active">Colaborador</th>
-								<!--<th class="active">Associado</th>-->
+								<th class="active"><?php echo $nome ?></th>
 								<th class="active">Comb.</th>
 								<th class="active">Apr.</th>
 								<th class="active">Entr.</th>
@@ -82,21 +81,6 @@
 							$count = 1;
 							foreach ($report->result_array() as $row) {
 								echo '<tr>';
-								#echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">';
-									/*
-									echo '<td class="notclickable">
-									<a class="btn btn-md btn-success notclickable" href="' . base_url() . 'Orcatrata/alterar2/' . $row['idApp_OrcaTrata'] . '">
-												<span class="glyphicon glyphicon-edit notclickable"></span>
-											</a>
-										</td>';
-										
-									echo '<td class="notclickable">
-											<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
-												<span class="glyphicon glyphicon-print notclickable"></span>
-											</a>
-											
-										</td>';
-									*/	
 									echo '<td class="notclickable">
 											<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
 												<span class="glyphicon glyphicon-print notclickable"></span>
@@ -107,8 +91,11 @@
 									echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 									echo '<td>' . $row['NomeCliente'] . '</td>';
 									echo '<td>' . $row['TipoFinanceiro'] . '</td>';
-									echo '<td>' . $row['NomeColaborador'] . '</td>';
-									#echo '<td>' . $row['Associado'] . '</td>';
+									if ($metodo == 1) { 
+										echo '<td>' . $row['NomeColaborador'] . '</td>';
+									} else if ($metodo == 2) {		
+										echo '<td>' . $row['NomeAssociado'] . '</td>';
+									} 
 									echo '<td>' . $row['CombinadoFrete'] . '</td>';
 									echo '<td>' . $row['AprovadoOrca'] . '</td>';
 									echo '<td>' . $row['ConcluidoOrca'] . '</td>';
@@ -124,8 +111,8 @@
 									echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
 									echo '<td>' . $row['DataVencimento'] . '</td>';
 									echo '<td>' . $row['ValorRestanteOrca'] . '</td>';	
-									echo '<td>' . $row['ValorComissao'] . '</td>';	
-									echo '<td>' . $row['StatusComissaoOrca'] . '</td>';											
+									echo '<td>' . $row['ValorComissao'] . '</td>';
+									echo '<td>' . $row[$status] . '</td>';
 									//echo '<td>' . $row['QtdProduto'] . '</td>';	
 									//echo '<td>' . $row['Produtos'] . '</td>';
 									//echo '<td class="text-right">' . $row['ValorProduto'] . '</td>';

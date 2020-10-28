@@ -75,7 +75,9 @@ class Orcatrataprintcomissao_model extends CI_Model {
 		$permissao25 = ($_SESSION['FiltroAlteraParcela']['Orcarec'] != "0" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcarec'] . '" AND ' : FALSE;		
 		
 		$permissao17 = ($_SESSION['FiltroAlteraParcela']['NomeUsuario'] != "0" ) ? 'OT.idSis_Usuario = "' . $_SESSION['FiltroAlteraParcela']['NomeUsuario'] . '" AND ' : FALSE;
+		$permissao18 = ($_SESSION['FiltroAlteraParcela']['NomeAssociado'] != "0" ) ? 'OT.Associado = "' . $_SESSION['FiltroAlteraParcela']['NomeAssociado'] . '" AND ' : FALSE;
 		$permissao12 = ($_SESSION['FiltroAlteraParcela']['StatusComissaoOrca'] != "0" ) ? 'OT.StatusComissaoOrca = "' . $_SESSION['FiltroAlteraParcela']['StatusComissaoOrca'] . '" AND ' : FALSE;
+		$permissao14 = ($_SESSION['FiltroAlteraParcela']['StatusComissaoOrca_Online'] != "0" ) ? 'OT.StatusComissaoOrca_Online = "' . $_SESSION['FiltroAlteraParcela']['StatusComissaoOrca_Online'] . '" AND ' : FALSE;
 		
 		$query = $this->db->query(
             'SELECT
@@ -118,12 +120,14 @@ class Orcatrataprintcomissao_model extends CI_Model {
 				OT.DataEntregaOrca,
 				OT.DataVencimentoOrca,
 				OT.StatusComissaoOrca,
+				OT.StatusComissaoOrca_Online,
 				OT.idSis_Usuario,
 				OT.ObsOrca,
 				OT.Descricao,
 				OT.TipoFinanceiro,
 				OT.Tipo_Orca,
 				OT.FormaPagamento,
+				OT.Associado,
 				TTF.TipoFrete,
 				FP.FormaPag,				
 				EF.NomeEmpresa,
@@ -133,7 +137,8 @@ class Orcatrataprintcomissao_model extends CI_Model {
 				TP.TipoFinanceiro,
 				PR.DataVencimento,
 				PR.Quitado,
-				US.Nome
+				US.Nome AS NomeColaborador,
+				USA.Nome AS NomeAssociado
             FROM
 				App_OrcaTrata AS OT
 				LEFT JOIN Sis_Empresa AS EF ON EF.idSis_Empresa = OT.idSis_Empresa
@@ -143,6 +148,7 @@ class Orcatrataprintcomissao_model extends CI_Model {
 				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 				LEFT JOIN App_Parcelas AS PR ON PR.idApp_OrcaTrata = OT.idApp_OrcaTrata
 				LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = OT.idSis_Usuario
+				LEFT JOIN Sis_Usuario AS USA ON USA.idSis_Usuario = OT.Associado
 				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
             WHERE
 				' . $permissao . '
@@ -156,12 +162,14 @@ class Orcatrataprintcomissao_model extends CI_Model {
 				' . $permissao10 . '
 				' . $permissao11 . '
 				' . $permissao12 . '
+				' . $permissao14 . '
 				' . $permissao6 . '
 				' . $permissao7 . '
 				' . $permissao32 . '
 				' . $permissao33 . '
 				' . $permissao34 . '
 				' . $permissao17 . '
+				' . $permissao18 . '
                 ' . $date_inicio_orca . '
                 ' . $date_fim_orca . '
                 ' . $date_inicio_entrega . '

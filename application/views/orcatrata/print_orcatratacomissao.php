@@ -15,7 +15,7 @@
 				<a type="button" class="btn btn-md btn-default " href="javascript:window.print()">
 					<span class="glyphicon glyphicon-print"></span> Imprimir
 				</a>
-				<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . 'Orcatrata/baixadacomissao/' . $_SESSION['log']['idSis_Empresa']; ?>">
+				<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . $form_open_path . $_SESSION['log']['idSis_Empresa']; ?>">
 					<span class="glyphicon glyphicon-pencil"></span> Editar
 				</a>
 			</div>
@@ -25,6 +25,10 @@
 				<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
 					<div class="btn-group " role="group" aria-label="...">
 						<!--
+						<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . $comissao; ?>">
+							<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo; ?>
+						</a>
+						
 						<a href="javascript:window.print()">
 							<button type="button" class="btn btn-md btn-default ">
 								<span class="glyphicon glyphicon-print"></span> Imprimir
@@ -44,6 +48,7 @@
 					<tr>
 						<td class="col-md-1" scope="col"><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>"class="img-circle img-responsive" width='100'></td>
 						<td class="col-md-3 text-left" scope="col"><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>'?></td>
+						<td class="col-md-3 text-left" scope="col"><?php echo '<strong>' . $titulo . '</strong>'?><br>Total: R$ <?php echo '<strong>' . $somatotal . '</strong>'?></td>
 					</tr>
 				</thead>			
 			</table>
@@ -67,10 +72,10 @@
 							<td class="col-md-1" scope="col"><?php echo $i ?></td>
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['idApp_OrcaTrata'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['Tipo_Orca'] ?></td>
-							<td class="col-md-2" scope="col"><?php echo $orcatrata[$i]['Nome'] ?></td>
+							<td class="col-md-2" scope="col"><?php echo $orcatrata[$i][$nome] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['ValorRestanteOrca'] ?></td>
 							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['ValorComissao'] ?></td>
-							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i]['StatusComissaoOrca'] ?></td>
+							<td class="col-md-1" scope="col"><?php echo $orcatrata[$i][$status] ?></td>
 						</tr>
 					
 					<?php

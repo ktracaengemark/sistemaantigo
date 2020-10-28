@@ -1642,42 +1642,6 @@ class Relatorio_model extends CI_Model {
     }
 
     public function list1_comissao($data, $completo) {
-	
-        if ($data['DataFim']) {
-            $consulta =
-                '(OT.DataOrca >= "' . $data['DataInicio'] . '" AND OT.DataOrca  <= "' . $data['DataFim'] . '")';
-        }
-        else {
-            $consulta =
-                '(OT.DataOrca  >= "' . $data['DataInicio'] . '")';
-        }
-
-        if ($data['DataFim2']) {
-            $consulta2 =
-                '(OT.DataEntregaOrca  >= "' . $data['DataInicio2'] . '" AND OT.DataEntregaOrca <= "' . $data['DataFim2'] . '")';
-        }
-        else {
-            $consulta2 =
-                '(OT.DataEntregaOrca >= "' . $data['DataInicio2'] . '")';
-        }
-
-        if ($data['DataFim3']) {
-            $consulta3 =
-                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '" AND OT.DataVencimentoOrca <= "' . $data['DataFim3'] . '")';
-        }
-        else {
-            $consulta3 =
-                '(OT.DataVencimentoOrca >= "' . $data['DataInicio3'] . '")';
-        }
-
-		if ($data['DataFim4']) {
-            $consulta4 =
-                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '" AND PR.DataVencimento <= "' . $data['DataFim4'] . '")';
-        }
-        else {
-            $consulta4 =
-                '(PR.DataVencimento >= "' . $data['DataInicio4'] . '")';
-        }
 		
 		$date_inicio_orca = ($data['DataInicio']) ? 'OT.DataOrca >= "' . $data['DataInicio'] . '" AND ' : FALSE;
 		$date_fim_orca = ($data['DataFim']) ? 'OT.DataOrca <= "' . $data['DataFim'] . '" AND ' : FALSE;
@@ -1717,7 +1681,9 @@ class Relatorio_model extends CI_Model {
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND PR.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;		
 
 		$filtro17 = ($data['NomeUsuario']) ? 'OT.idSis_Usuario = "' . $data['NomeUsuario'] . '" AND ' : FALSE;
-		$filtro12 = ($data['StatusComissaoOrca']) ? 'OT.StatusComissaoOrca = "' . $data['StatusComissaoOrca'] . '" AND ' : FALSE;		
+		$filtro18 = ($data['NomeAssociado']) ? 'OT.Associado = "' . $data['NomeAssociado'] . '" AND ' : FALSE;
+		$filtro12 = ($data['StatusComissaoOrca']) ? 'OT.StatusComissaoOrca = "' . $data['StatusComissaoOrca'] . '" AND ' : FALSE;
+		$filtro14 = ($data['StatusComissaoOrca_Online']) ? 'OT.StatusComissaoOrca_Online = "' . $data['StatusComissaoOrca_Online'] . '" AND ' : FALSE;		
 
         $query = $this->db->query('
             SELECT
@@ -1755,10 +1721,12 @@ class Relatorio_model extends CI_Model {
 				OT.Associado,
 				OT.ValorComissao,
 				OT.StatusComissaoOrca,
+				OT.StatusComissaoOrca_Online,
 				PR.DataVencimento,
 				PR.Quitado,
 				EMP.NomeEmpresa,
 				US.Nome AS NomeColaborador,
+				USA.Nome AS NomeAssociado,
 				MD.Modalidade,
 				VP.Abrev2,
 				VP.AVAP,
@@ -1775,6 +1743,7 @@ class Relatorio_model extends CI_Model {
 				LEFT JOIN Tab_AVAP AS VP ON VP.Abrev2 = OT.AVAP
 				LEFT JOIN Sis_Empresa AS EMP ON EMP.idSis_Empresa = OT.idSis_Empresa
 				LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = OT.idSis_Usuario
+				LEFT JOIN Sis_Usuario AS USA ON USA.idSis_Usuario = OT.Associado
 				LEFT JOIN Tab_TipoFrete AS TTF ON TTF.idTab_TipoFrete = OT.TipoFrete
             WHERE
                 ' . $date_inicio_orca . '
@@ -1800,7 +1769,9 @@ class Relatorio_model extends CI_Model {
 				' . $filtro11 . '
 				' . $filtro13 . '
 				' . $filtro12 . '
+				' . $filtro14 . '
 				' . $filtro17 . '
+				' . $filtro18 . '
 				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" 
                 ' . $data['Orcamento'] . '
@@ -1851,6 +1822,8 @@ class Relatorio_model extends CI_Model {
                 $row->CanceladoOrca = $this->basico->mascara_palavra_completa($row->CanceladoOrca, 'NS');
                 $row->QuitadoOrca = $this->basico->mascara_palavra_completa($row->QuitadoOrca, 'NS');
 				$row->StatusComissaoOrca = $this->basico->mascara_palavra_completa($row->StatusComissaoOrca, 'NS');
+				$row->StatusComissaoOrca_Online = $this->basico->mascara_palavra_completa($row->StatusComissaoOrca_Online, 'NS');
+				
 				if($row->Tipo_Orca == "B"){
 					$row->Tipo_Orca = "Na Loja";
 				}elseif($row->Tipo_Orca == "O"){
@@ -11358,7 +11331,60 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
+				C.idSis_Usuario_5,
+				P.idSis_Usuario,
+				CONCAT(IFNULL(C.idApp_Cliente,""), " --- ", IFNULL(P.Nome,""), " --- ", IFNULL(P.CelularUsuario,"")) AS NomeAssociado
+            FROM
+                App_Cliente AS C
+					LEFT JOIN Sis_Usuario AS P ON P.idSis_Usuario = C.idSis_Usuario_5
+					LEFT JOIN App_OrcaTrata AS OT ON OT.Associado = P.idSis_Usuario
+            WHERE
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY 
+				C.NomeCliente ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idSis_Usuario] = $row->NomeAssociado;
+        }
+
+        return $array;
+    }
+
+	public function select_usuario_associado_BKP2() {
+
+        $query = $this->db->query('
+            SELECT
+				P.idSis_Usuario,
+				CONCAT(IFNULL(P.Nome,""), " --- ", IFNULL(P.CelularUsuario,"")) AS NomeAssociado
+            FROM
+                Sis_Usuario AS P
+					LEFT JOIN App_Cliente AS C ON C.idSis_Usuario_5 = P.idSis_Usuario
+					LEFT JOIN App_OrcaTrata AS OT ON OT.Associado = P.idSis_Usuario
+            WHERE
+                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY 
+				P.Nome ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idSis_Usuario] = $row->NomeAssociado;
+        }
+
+        return $array;
+    }
+	
+	public function select_usuario_associado_BKP() {
+
+        $query = $this->db->query('
+            SELECT
 				OT.idApp_OrcaTrata,
+				OT.Associado,
 				US.idSis_Usuario,
 				CONCAT(IFNULL(US.Nome,"")) AS NomeAssociado
             FROM
