@@ -265,6 +265,7 @@
 																			?>
 																		</div>
 																	</div>
+																	<!--
 																	<div class="col-md-1">
 																		<label><br></label><br>
 																		<button type="button" id="<?php echo $i ?>" class="remove_field9 btn btn-danger"
@@ -272,6 +273,7 @@
 																			<span class="glyphicon glyphicon-trash"></span>
 																		</button>
 																	</div>
+																	-->
 																</div>
 																<div class="row">
 																	<div class="col-md-2">
@@ -394,6 +396,7 @@
 																			?>
 																		</div>
 																	</div>
+																	<!--
 																	<div class="col-md-1">
 																		<label><br></label><br>
 																		<button type="button" id="<?php echo $i ?>" class="remove_field10 btn btn-danger"
@@ -401,6 +404,7 @@
 																			<span class="glyphicon glyphicon-trash"></span>
 																		</button>
 																	</div>
+																	-->
 																</div>
 																<div class="row">
 																	<div class="col-md-2">

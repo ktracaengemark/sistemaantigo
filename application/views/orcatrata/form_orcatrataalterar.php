@@ -163,7 +163,7 @@
 															</div>
 														</div>
 												</div>
-												<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 && ($count['PCount'] > 0 || $count['SCount'] > 0)) { ?>
+												<?php if ($_SESSION['log']['NivelEmpresa'] >= 4) { ?>
 													
 
 														<h5 class="mb-3"><b>Produtos & Serviços</b></h5>
@@ -255,6 +255,7 @@
 																					?>
 																				</div>
 																			</div>
+																			<!--
 																			<div class="col-md-1">
 																				<label><br></label><br>
 																				<button type="button" id="<?php echo $i ?>" class="remove_field9 btn btn-danger"
@@ -262,6 +263,7 @@
 																					<span class="glyphicon glyphicon-trash"></span>
 																				</button>
 																			</div>
+																			-->
 																		</div>
 																		<div class="row">
 																			<div class="col-md-2">
@@ -385,6 +387,7 @@
 																					?>
 																				</div>
 																			</div>
+																			<!--
 																			<div class="col-md-1">
 																				<label><br></label><br>
 																				<button type="button" id="<?php echo $i ?>" class="remove_field10 btn btn-danger"
@@ -392,6 +395,7 @@
 																					<span class="glyphicon glyphicon-trash"></span>
 																				</button>
 																			</div>
+																			-->
 																		</div>
 																		<div class="row">
 																			<div class="col-md-2">
