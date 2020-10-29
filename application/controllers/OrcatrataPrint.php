@@ -163,7 +163,7 @@ class OrcatrataPrint extends CI_Controller {
 
         if ($id) {
             #### App_OrcaTrata ####
-            $data['orcatrata'] = $this->OrcatrataPrint_model->get_orcatrata($id);
+            $_SESSION['Orcatrata'] = $data['orcatrata'] = $this->OrcatrataPrint_model->get_orcatrata($id);
             $data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
 			$data['orcatrata']['DataEntregaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntregaOrca'], 'barras');
             $data['orcatrata']['DataPrazo'] = $this->basico->mascara_data($data['orcatrata']['DataPrazo'], 'barras');
@@ -175,9 +175,19 @@ class OrcatrataPrint extends CI_Controller {
 
             #### Carrega os dados do cliente nas variáves de sessão ####
             $this->load->model('Cliente_model');
-            if($data['orcatrata']['idApp_Cliente'] != 0){
+          
+			
+			
+			#### Carrega os dados do cliente nas variáves de sessão ####
+            $this->load->model('Cliente_model');
+			
+            $_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
+            $_SESSION['Cliente']['NomeCliente'] = (strlen($data['query']['NomeCliente']) > 12) ? substr($data['query']['NomeCliente'], 0, 12) : $data['query']['NomeCliente']; 
+			/*
+			if($data['orcatrata']['idApp_Cliente'] != 0){
 				$data['cliente'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
-			}	
+			}
+			*/
 			$data['usuario'] = $this->Usuario_model->get_usuario($data['orcatrata']['idSis_Usuario'], TRUE);
 			$data['query'] = $this->OrcatrataPrint_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);
 			#$_SESSION['Imprimir'] = $data['query'] = $this->OrcatrataPrint_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);

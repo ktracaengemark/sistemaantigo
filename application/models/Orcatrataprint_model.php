@@ -28,6 +28,7 @@ class Orcatrataprint_model extends CI_Model {
 				C.CidadeCliente,
 				C.EstadoCliente,
 				C.ReferenciaCliente,
+				OT.idSis_Empresa,
 				OT.idApp_OrcaTrata,
 				OT.AprovadoOrca,
 				OT.ConcluidoOrca,
