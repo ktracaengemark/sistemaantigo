@@ -183,7 +183,7 @@
 											</p>
 											<p>
 												<?php if ($row['ConcluidoOrca']) { ?>
-												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Entregue?</b> <?php echo $row['ConcluidoOrca']; ?>
 												<?php } ?>
 											</p>
 											<p>
@@ -259,7 +259,7 @@
 											</p>
 											<p>
 												<?php if ($row['ConcluidoOrca']) { ?>
-												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Entregue?</b> <?php echo $row['ConcluidoOrca']; ?>
 												<?php } ?>
 											</p>
 											<p>
@@ -338,7 +338,7 @@
 											</p>
 											<p>
 												<?php if ($row['ConcluidoOrca']) { ?>
-												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Entregue?</b> <?php echo $row['ConcluidoOrca']; ?>
 												<?php } ?>
 											</p>
 											<p>
@@ -414,7 +414,7 @@
 											</p>
 											<p>
 												<?php if ($row['ConcluidoOrca']) { ?>
-												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Entregue?</b> <?php echo $row['ConcluidoOrca']; ?>
 												<?php } ?>
 											</p>
 											<p>
@@ -490,7 +490,7 @@
 											</p>
 											<p>
 												<?php if ($row['ConcluidoOrca']) { ?>
-												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Entregue?</b> <?php echo $row['ConcluidoOrca']; ?>
 												<?php } ?>
 											</p>
 											<p>
@@ -566,7 +566,7 @@
 											</p>
 											<p>
 												<?php if ($row['ConcluidoOrca']) { ?>
-												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Entregue?</b> <?php echo $row['ConcluidoOrca']; ?>
 												<?php } ?>
 											</p>
 											<p>
@@ -642,7 +642,7 @@
 											</p>
 											<p>
 												<?php if ($row['ConcluidoOrca']) { ?>
-												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Entregue?</b> <?php echo $row['ConcluidoOrca']; ?>
 												<?php } ?>
 											</p>
 											<p>
@@ -718,7 +718,7 @@
 											</p>
 											<p>
 												<?php if ($row['ConcluidoOrca']) { ?>
-												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Concluído?</b> <?php echo $row['ConcluidoOrca']; ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Orç. Entregue?</b> <?php echo $row['ConcluidoOrca']; ?>
 												<?php } ?>
 											</p>
 											<p>

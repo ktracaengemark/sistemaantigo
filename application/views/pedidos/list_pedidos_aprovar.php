@@ -23,7 +23,7 @@
 						<?php
 						foreach ($report_aprovar->result_array() as $row) {
 							#echo '<tr>';
-							echo '<tr class="clickable-row bg-warning" data-href="' . base_url() . 'Statuspedido/alterarstatus/' . $row['idApp_OrcaTrata'] . '">';
+							echo '<tr class="clickable-row bg-warning" data-href="' . base_url() . $status . $row['idApp_OrcaTrata'] . '">';
 								echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';	
 								echo '<td>' . $row['idApp_Cliente'] . '</td>';	
 								echo '<td>' . $row['NomeCliente'] . '</td>';

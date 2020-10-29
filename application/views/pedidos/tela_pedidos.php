@@ -1,6 +1,6 @@
 <?php if ($msg) echo $msg; ?>
-<?php echo validation_errors(); ?>    
-	<?php echo form_open('pedidos/pedidos', 'role="form"'); ?>
+<?php echo validation_errors(); ?> 
+	<?php echo form_open($form_open_path, 'role="form"'); ?>
 	<div class="col-md-1 "></div>
 	<div class="col-md-10 ">
 		<div class="row">	
@@ -14,7 +14,7 @@
 							</div>
 							-->
 							<div class="col-md-4">
-								<label>Gestor de Pedidos</label>
+								<label><?php echo $titulo;?></label>
 								<div class="input-group">
 									<span class="input-group-btn">
 										<button class="btn btn-primary btn-md" type="submit">

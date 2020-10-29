@@ -250,7 +250,16 @@ class Pedidos2 extends CI_Controller {
 		$data['select']['FormaPagamento'] = $this->Relatorio_model->select_formapag();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
 		
-        $data['titulo'] = 'Gestor de Pedidos';
+        $data['titulo'] = 'Gestor de Pedidos Dinâmico';
+        $data['form_open_path'] = 'Pedidos/pedidos';
+		$data['comissao'] = 'relatorio/comissao/';
+        $data['status'] = 'Statuspedido/alterarstatus/';
+		$data['imprimir'] = 'OrcatrataPrintComissao/imprimir/';
+        $data['nome'] = 'NomeColaborador';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'info';
+        $data['metodo'] = 1;
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
@@ -320,4 +329,5 @@ class Pedidos2 extends CI_Controller {
 
         $this->load->view('basico/footer');
     }
+
 }
