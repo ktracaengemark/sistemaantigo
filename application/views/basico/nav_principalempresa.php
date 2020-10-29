@@ -70,7 +70,7 @@
 							</li>
 							<li role="separator" class="divider"></li>							
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
-							<li><a href="<?php echo base_url() ?>relatorioempresa/sistemaempresa"><span class="glyphicon glyphicon-pencil"></span> Renovar Assinatura</a></li>
+							<li><a href="<?php echo base_url() ?>../enkontraki" target="_blank"><span class="glyphicon glyphicon-pencil"></span> Renovar Assinatura</a></li>
 							<li role="separator" class="divider"></li>									
 							<?php } ?>
 							<li><a href="<?php echo base_url() ?>relatorioempresa/empresas"><span class="glyphicon glyphicon-home"></span> Empresas</a></li>
