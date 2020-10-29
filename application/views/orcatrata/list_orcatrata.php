@@ -152,11 +152,13 @@
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
 											
-												
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
-												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+												<span class="glyphicon glyphicon-print"></span> Versão Entrega
 											</a>
-											
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
+											</a>
 
 											<br><br>
 
@@ -231,8 +233,12 @@
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
 											
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
-												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão Entrega
+											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
 											</a>
 
 											<br><br>
@@ -307,9 +313,12 @@
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
 											
-												
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
-												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+												<span class="glyphicon glyphicon-print"></span> Versão Entrega
+											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
 											</a>
 											
 
@@ -386,8 +395,12 @@
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
 											
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
-												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão Entrega
+											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
 											</a>
 
 											<br><br>
@@ -462,8 +475,12 @@
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
 											
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
-												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão Entrega
+											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
 											</a>
 
 											<br><br>
@@ -538,8 +555,12 @@
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
 											
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
-												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão Entrega
+											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
 											</a>
 
 											<br><br>
@@ -614,8 +635,12 @@
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
 											
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
-												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão Entrega
+											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
 											</a>
 
 											<br><br>
@@ -690,8 +715,12 @@
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
 											
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
-												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão Entrega
+											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
 											</a>
 
 											<br><br>

@@ -16,6 +16,18 @@ class Orcatrataprint_model extends CI_Model {
     public function get_orcatrata($data) {
         $query = $this->db->query(
             'SELECT
+				C.NomeCliente,
+				C.CelularCliente,
+				C.Telefone,
+				C.Telefone2,
+				C.Telefone3,
+				C.EnderecoCliente,
+				C.NumeroCliente,
+				C.ComplementoCliente,
+				C.BairroCliente,
+				C.CidadeCliente,
+				C.EstadoCliente,
+				C.ReferenciaCliente,
 				OT.idApp_OrcaTrata,
 				OT.AprovadoOrca,
 				OT.ConcluidoOrca,
@@ -92,10 +104,11 @@ class Orcatrataprint_model extends CI_Model {
 				MO.Modalidade,
 				TP.TipoFinanceiro
 
-            FROM           	
-                Tab_FormaPag AS FP,
+            FROM
 				App_OrcaTrata AS OT
 				LEFT JOIN Sis_Empresa AS EF ON EF.idSis_Empresa = OT.idSis_Empresa
+				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+				LEFT JOIN Tab_FormaPag AS FP ON FP.idTab_FormaPag = OT.FormaPagamento
 				LEFT JOIN Tab_TipoFinanceiro AS TP ON TP.idTab_TipoFinanceiro = OT.TipoFinanceiro
 				LEFT JOIN Tab_AVAP AS TAVAP ON TAVAP.Abrev2 = OT.AVAP
 				LEFT JOIN Tab_Modalidade AS MO ON MO.Abrev = OT.Modalidade
@@ -103,9 +116,8 @@ class Orcatrataprint_model extends CI_Model {
 				LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = OT.Entregador
 
             WHERE
-            	OT.idApp_OrcaTrata = ' . $data . ' AND
-                OT.FormaPagamento = FP.idTab_FormaPag'
-        );
+            	OT.idApp_OrcaTrata = ' . $data . ' 
+		');
         $query = $query->result_array();
 
         /*
