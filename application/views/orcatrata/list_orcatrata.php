@@ -125,9 +125,9 @@
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs" role="tablist">
 									<!--<li role="presentation" class="active" ><a href="#combinado" aria-controls="combinado" role="tab" data-toggle="tab">Combinados</a></li>-->
-									<li role="presentation" class="active" ><a href="#naocombinado" aria-controls="naocombinado" role="tab" data-toggle="tab">Não Combinados</a></li>
+									<li role="presentation" ><a href="#naocombinado" aria-controls="naocombinado" role="tab" data-toggle="tab">Não Combinados</a></li>
 									<li role="presentation" ><a href="#anterior" aria-controls="anterior" role="tab" data-toggle="tab">Não Aprovados</a></li>
-									<li role="presentation" ><a href="#proxima" aria-controls="proxima" role="tab" data-toggle="tab">Aprovados</a></li>
+									<li role="presentation" class="active" ><a href="#proxima" aria-controls="proxima" role="tab" data-toggle="tab">Aprovados</a></li>
 									<li role="presentation" ><a href="#finalizado" aria-controls="finalizado" role="tab" data-toggle="tab">Finalizado</a></li>
 									<!--<li role="presentation" ><a href="#naofinalizado" aria-controls="naofinalizado" role="tab" data-toggle="tab">Não Finalizado</a></li>-->
 									<li role="presentation" ><a href="#cancelado" aria-controls="cancelado" role="tab" data-toggle="tab">Cancelado</a></li>
@@ -138,8 +138,7 @@
 								<div class="tab-content">
 
 									<!-- Combinados -->
-									<!--
-									<div role="tabpanel" class="tab-pane active " id="combinado">
+									<div role="tabpanel" class="tab-pane " id="combinado">
 
 										<?php
 										if ($combinado) {
@@ -216,9 +215,9 @@
 										?>
 
 									</div>
-									-->
+									
 									<!-- Não Combinados -->
-									<div role="tabpanel" class="tab-pane active" id="naocombinado">
+									<div role="tabpanel" class="tab-pane" id="naocombinado">
 
 										<?php
 										if ($naocombinado) {
@@ -294,7 +293,7 @@
 									</div>
 
 									<!-- Aprovados -->
-									<div role="tabpanel" class="tab-pane " id="proxima">
+									<div role="tabpanel" class="tab-pane active" id="proxima">
 
 										<?php
 										if ($aprovado) {
@@ -753,13 +752,11 @@
 									</div>
 									
 								</div>
-
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
 		</div>
 		<div class="col-md-2"></div>
 	</div>	
