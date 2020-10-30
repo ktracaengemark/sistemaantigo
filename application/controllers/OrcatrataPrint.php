@@ -62,14 +62,14 @@ class OrcatrataPrint extends CI_Controller {
 
             #### Carrega os dados do cliente nas variáves de sessão ####
             $this->load->model('Cliente_model');
-            if($data['orcatrata']['idApp_Cliente'] != 0){
-				$data['cliente'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
-			}	
+			if($data['orcatrata']['idApp_Cliente'] != 0 && $data['orcatrata']['idApp_Cliente'] != 1){
+				//$data['cliente'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
+				$_SESSION['Cliente'] = $data['cliente'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
+				$_SESSION['Cliente']['NomeCliente'] = (strlen($data['cliente']['NomeCliente']) > 12) ? substr($data['cliente']['NomeCliente'], 0, 12) : $data['cliente']['NomeCliente'];
+			}
+			
 			$data['usuario'] = $this->Usuario_model->get_usuario($data['orcatrata']['idSis_Usuario'], TRUE);
 			$data['query'] = $this->OrcatrataPrint_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);
-			#$_SESSION['Imprimir'] = $data['query'] = $this->OrcatrataPrint_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);
-			#$_SESSION['Orcatrata'] = $data['query'] = $this->OrcatrataPrint_model->get_orcatrata($id, TRUE);
-            #$_SESSION['log']['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
 
             
             #### App_ServicoVenda ####
@@ -83,6 +83,7 @@ class OrcatrataPrint extends CI_Controller {
                     for($j=1;$j<=$data['count']['SCount'];$j++) {
                         $data['servico'][$j]['SubtotalProduto'] = number_format(($data['servico'][$j]['ValorProduto'] * $data['servico'][$j]['QtdProduto']), 2, ',', '.');
 						$data['servico'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeProduto'], 'barras');
+						$data['servico'][$j]['ConcluidoProduto'] = $this->basico->mascara_palavra_completa($data['servico'][$j]['ConcluidoProduto'], 'NS');
 					}
 				}
             }
@@ -137,6 +138,11 @@ class OrcatrataPrint extends CI_Controller {
             }
 
         }
+		
+        $data['titulo'] = 'Versão Entrega';
+        $data['form_open_path'] = 'OrcatrataPrint/imprimir';
+        $data['panel'] = 'info';
+        $data['metodo'] = 1;		
 
         /*
           echo '<br>';
@@ -173,26 +179,15 @@ class OrcatrataPrint extends CI_Controller {
             $data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'barras');
             $data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'barras');
 
-            #### Carrega os dados do cliente nas variáves de sessão ####
-            $this->load->model('Cliente_model');
-          
-			
-			
 			#### Carrega os dados do cliente nas variáves de sessão ####
             $this->load->model('Cliente_model');
-			
-            $_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
-            $_SESSION['Cliente']['NomeCliente'] = (strlen($data['query']['NomeCliente']) > 12) ? substr($data['query']['NomeCliente'], 0, 12) : $data['query']['NomeCliente']; 
-			/*
-			if($data['orcatrata']['idApp_Cliente'] != 0){
-				$data['cliente'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
+			if($data['orcatrata']['idApp_Cliente'] != 0 && $data['orcatrata']['idApp_Cliente'] != 1){
+				//$data['cliente'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
+				$_SESSION['Cliente'] = $data['cliente'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
+				$_SESSION['Cliente']['NomeCliente'] = (strlen($data['cliente']['NomeCliente']) > 12) ? substr($data['cliente']['NomeCliente'], 0, 12) : $data['cliente']['NomeCliente'];
 			}
-			*/
 			$data['usuario'] = $this->Usuario_model->get_usuario($data['orcatrata']['idSis_Usuario'], TRUE);
 			$data['query'] = $this->OrcatrataPrint_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);
-			#$_SESSION['Imprimir'] = $data['query'] = $this->OrcatrataPrint_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata'], TRUE);
-			#$_SESSION['Orcatrata'] = $data['query'] = $this->OrcatrataPrint_model->get_orcatrata($id, TRUE);
-            #$_SESSION['log']['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
 
             
             #### App_ServicoVenda ####
@@ -206,6 +201,7 @@ class OrcatrataPrint extends CI_Controller {
                     for($j=1;$j<=$data['count']['SCount'];$j++) {
                         $data['servico'][$j]['SubtotalProduto'] = number_format(($data['servico'][$j]['ValorProduto'] * $data['servico'][$j]['QtdProduto']), 2, ',', '.');
 						$data['servico'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeProduto'], 'barras');
+						$data['servico'][$j]['ConcluidoProduto'] = $this->basico->mascara_palavra_completa($data['servico'][$j]['ConcluidoProduto'], 'NS');
 					}
 				}
             }
@@ -260,6 +256,11 @@ class OrcatrataPrint extends CI_Controller {
             }
 
         }
+		
+        $data['titulo'] = 'Versão Cobrança';
+        $data['form_open_path'] = 'OrcatrataPrint/imprimircobranca';
+        $data['panel'] = 'info';
+        $data['metodo'] = 2;		
 
         /*
           echo '<br>';
@@ -269,7 +270,7 @@ class OrcatrataPrint extends CI_Controller {
           #exit ();
          */
 
-        $this->load->view('orcatrata/print_orcatrata2', $data);
+        $this->load->view('orcatrata/print_orcatrata', $data);
 
         $this->load->view('basico/footer');
 

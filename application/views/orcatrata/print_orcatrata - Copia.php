@@ -1,8 +1,125 @@
 <?php if (isset($msg)) echo $msg; ?>
 
-<div class="col-sm-offset-3 col-md-6 ">		
+<div class="col-sm-offset-3 col-md-6 ">	
+	
+		<?php if ( !isset($evento) && isset($query)) { ?>
+			<?php if ($query['idApp_Cliente'] != 1 && $query['idApp_Cliente'] != 0) { ?>
+				<nav class="navbar navbar-inverse navbar-fixed" role="banner">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span> 
+							</button>
+							
+							<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $query['idApp_Cliente']; ?>">
+								<?php echo '<small>' . $query['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '.</small>' ?> 
+							</a>
+						</div>
+						<div class="collapse navbar-collapse" id="myNavbar">
+							<ul class="nav navbar-nav navbar-center">
+								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group">
+										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+											<span class="glyphicon glyphicon-user"></span> Cliente <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a <?php if (preg_match("/cliente\/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'cliente/prontuario/' . $query['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-file"></span> Ver Dados do Cliente
+													</a>
+												</a>
+											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a <?php if (preg_match("/cliente\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'cliente/alterar/' . $query['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-edit"></span> Editar Dados do Cliente
+													</a>
+												</a>
+											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+													<a href="<?php echo base_url() . 'cliente/prontuario/' . $query['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-user"></span> Contatos do Cliente
+													</a>
+												</a>
+											</li>
+										</ul>
+									</div>									
+								</li>
+								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group">
+										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+											<span class="glyphicon glyphicon-calendar"></span> Agenda <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a <?php if (preg_match("/consulta\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+													<a href="<?php echo base_url() . 'consulta/listar/' . $query['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-calendar"></span> Lista de Agendamentos
+													</a>
+												</a>
+											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a <?php if (preg_match("/consulta\/cadastrar1\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'consulta/cadastrar1/' . $query['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-plus"></span> Novo Agendamento
+													</a>
+												</a>
+											</li>
+										</ul>
+									</div>									
+								</li>								
+								<?php if ($query['idSis_Empresa'] == $_SESSION['log']['idSis_Empresa'] ) { ?>
+								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group">
+										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+											<span class="glyphicon glyphicon-usd"></span> Orçs. <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a <?php if (preg_match("/orcatrata\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+													<a href="<?php echo base_url() . 'orcatrata/listar/' . $query['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-usd"></span> Lista de Orçamentos
+													</a>
+												</a>
+											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a <?php if (preg_match("/orcatrata\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'orcatrata/cadastrar/' . $query['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-plus"></span> Novo Orçamento
+													</a>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<?php } ?>
+								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group">
+										<a href="javascript:window.print()">
+											<button type="button" class="btn btn-md btn-default ">
+												<span class="glyphicon glyphicon-print"></span>
+											</button>
+										</a>
+									</div>									
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			<?php } ?>
+		<?php } ?>	
+	
+	
 	<?php if ( !isset($evento) && isset($query)) { ?>
-		<?php if ($query['idApp_OrcaTrata'] != 1 ) { ?>
+	<?php if ($query['idApp_OrcaTrata'] != 1 && $query['idApp_OrcaTrata'] != 0) { ?>
 			<nav class="navbar navbar-inverse navbar-fixed" role="banner">
 			  <div class="container-fluid">
 				<div class="navbar-header">
@@ -12,13 +129,22 @@
 						<span class="icon-bar"></span> 
 					</button>
 					<!--
-					<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/cadastrardesp/'; ?>">
+					<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/cadastrar3/'; ?>">
 						<span class="glyphicon glyphicon-plus"></span> Novo
 					</a>
 					-->
-					<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterardesp/' . $query['idApp_OrcaTrata']; ?>">
-						<span class="glyphicon glyphicon-edit"></span> Editar Despesa										
+					<a class="navbar-brand" href="<?php echo base_url() . 'statuspedido/alterarstatus/' . $query['idApp_OrcaTrata']; ?>">
+						<span class="glyphicon glyphicon-edit"></span> Atualizar Status	"<?php echo $query['Tipo_Orca'];?>"									
 					</a>
+					<!--
+					<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterar2/' . $query['idApp_OrcaTrata']; ?>">
+						<span class="glyphicon glyphicon-edit"></span> Editar Pedido "<?php echo $query['Tipo_Orca'];?>"										
+					</a>
+					
+					<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $cliente['idApp_Cliente']; ?>">
+						<?php echo '<small>' . $cliente['idApp_Cliente'] . '</small> - <small>' . $cliente['NomeCliente'] . '.</small>' ?> 
+					</a>
+					-->
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-center">
@@ -26,23 +152,47 @@
 							<div class="btn-group " role="group" aria-label="...">
 								<a href="javascript:window.print()">
 									<button type="button" class="btn btn-md btn-default ">
-										<span class="glyphicon glyphicon-print"></span> Imprimir
+										<span class="glyphicon glyphicon-print"></span>
 									</button>
 								</a>										
 							</div>
 						</li>
+						<!--
+						<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group " role="group" aria-label="...">
+								<a <?php if (preg_match("/orcatrata\/alterar2\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+									<a href="<?php echo base_url() . 'orcatrata/alterar2/' . $query['idApp_OrcaTrata']; ?>">
+										<button type="button" class="btn btn-md btn-default">
+											<span class="glyphicon glyphicon-edit"></span> Editar
+										</button>										
+									</a>
+									</a>										
+							</div>
+						</li>								
+						<li class="btn-toolbar btn-lg navbar-form" role="toolbar" aria-label="...">
+							<div class="btn-group " role="group" aria-label="...">
+								<a <?php if (preg_match("/orcatrata\/cadastrar3\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+									<a href="<?php echo base_url() . 'orcatrata/cadastrar3/'; ?>">
+										<button type="button" class="btn btn-md btn-active ">
+											<span class="glyphicon glyphicon-plus"></span> Novo
+										</button>										
+									</a>
+								</a>										
+							</div>
+						</li>
+						-->
 					</ul>
 				</div>
 			  </div>
 			</nav>
 		<?php } ?>
-	<?php } ?>			
+		<?php } ?>			
 	
 	<?php echo validation_errors(); ?>
 		
 	<div style="overflow: auto; height: auto; ">		
 		<div class="row">	
-			<div class="panel panel-danger">
+			<div class="panel panel-info">
 				<div class="panel-heading">
 					<table class="table table-bordered table-condensed table-striped">
 						<tbody>
@@ -53,11 +203,11 @@
 								<h4>Endereço:<?php echo '<small>' . $orcatrata['EnderecoEmpresa'] . '</small> <small>' . $orcatrata['NumeroEmpresa'] . '</small> <small>' . $orcatrata['ComplementoEmpresa'] . '</small><br>
 														<small>' . $orcatrata['BairroEmpresa'] . '</small> - <small>' . $orcatrata['MunicipioEmpresa'] . '</small> - <small>' . $orcatrata['EstadoEmpresa'] . '</small>' ?></h4>
 								<h5>Colab.:<?php echo '<strong>' . $usuario['Nome'] . '</strong>' ?></h5>
-								<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>								
+																
 								
 								<h4 class="text-center">Orçamento<?php echo ' - <strong>' . $query['idApp_OrcaTrata'] . '</strong>' ?> </h4>
 								
-								<?php } ?></td>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -65,11 +215,11 @@
 					<div class="panel-body">
 
 						<!--<hr />-->
-						<?php if($orcatrata['idApp_Fornecedor'] != 0) { ?>								
-							<h3 class="text-left"><b>Fornecedor</b>: <?php echo '' . $fornecedor['NomeFornecedor'] . '' ?></h3>
-							<h5 class="text-left"><b>Tel</b>: <?php echo '' . $fornecedor['Telefone1'] . '' ?> - <b>ID</b>: <?php echo '' . $fornecedor['idApp_Fornecedor'] . '' ?> </h5>
-						<?php } ?>
-							<table class="table table-bordered table-condensed table-striped">
+						<?php if($orcatrata['idApp_Cliente'] != 0) { ?>								
+							<h3 class="text-left"><b>Cliente</b>: <?php echo '' . $cliente['NomeCliente'] . '' ?></h3>
+							<h5 class="text-left"><b>Tel</b>: <?php echo '' . $cliente['CelularCliente'] . '' ?> - <b>ID</b>: <?php echo '' . $cliente['idApp_Cliente'] . '' ?> </h5>
+						<?php }?>
+						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
 									<th class="col-md-2" scope="col">Tipo</th>
@@ -92,7 +242,7 @@
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
-									<th class="col-md-1" scope="col">Qtd</th>											
+									<th class="col-md-1" scope="col">Qtd</th>												
 									<th class="col-md-10" scope="col">Produto</th>
 									<th class="col-md-1" scope="col">Subtotal</th>
 								</tr>
@@ -160,8 +310,11 @@
 						<?php } else echo '<h3 class="text-left">S/Serviços</h3>';{?>
 						<?php } ?>							
 						<?php } ?>
-						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>							
-						<h3 class="text-left"><b>Entrega</b>: <?php echo '<strong>' . $query['idApp_OrcaTrata'] . '</strong>' ?></h3>
+						<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>						
+						<h3 class="text-left"><b>Entrega</b>: <?php echo '<strong>' . $query['idApp_OrcaTrata'] . '</strong>' ?>
+						<?php if($orcatrata['idApp_Cliente'] != 0) { ?>
+							- <b> Cliente:</b> <?php echo '' . $cliente['NomeCliente'] . '' ?> </h3><h4>Tel: <?php echo '' . $cliente['CelularCliente'] . '' ?> - id: <?php echo '' . $cliente['idApp_Cliente'] . '' ?></h4>
+						<?php } ?>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>
 								<tr>
@@ -245,7 +398,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<?php } ?>	
+						<?php } ?>
 						<h3 class="text-left"><b>Pagamento</b></h3>
 						<table class="table table-bordered table-condensed table-striped">
 							<thead>

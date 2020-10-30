@@ -280,7 +280,8 @@ class Orcatrata extends CI_Controller {
         }
         $data['count']['PMCount'] = $j - 1;
 
-		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+		$data['valortotalorca'] = str_replace(',', '.', $data['orcatrata']['ValorTotalOrca']);
+		//$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
 		$data['somatotal'] = 0;
 		
 		if ($data['valortotalorca'] > 0.00 && $data['orcatrata']['QtdParcelasOrca'] >=1) {
@@ -302,10 +303,6 @@ class Orcatrata extends CI_Controller {
 			
         }
 		
-		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
-		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
-		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];		
-		
 		/*
         if ($data['orcatrata']['ValorTotalOrca'] > 0) {
 
@@ -326,7 +323,11 @@ class Orcatrata extends CI_Controller {
 		*/
 
         //Fim do trecho de código que dá pra melhorar
-
+		
+		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
+		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
+		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### App_OrcaTrata ####
@@ -1141,8 +1142,8 @@ class Orcatrata extends CI_Controller {
         }
         $data['count']['PMCount'] = $j - 1;
 
-		
-		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+		$data['valortotalorca'] = str_replace(',', '.', $data['orcatrata']['ValorTotalOrca']);
+		//$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
 		$data['somatotal'] = 0;
 		
 		if ($data['valortotalorca'] > 0.00 && $data['orcatrata']['QtdParcelasOrca'] >=1) {
@@ -1978,8 +1979,8 @@ class Orcatrata extends CI_Controller {
         }
         $data['count']['PMCount'] = $j - 1;
 		
-		
-		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+		$data['valortotalorca'] = str_replace(',', '.', $data['orcatrata']['ValorTotalOrca']);
+		//$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
 		$data['somatotal'] = 0;	
 
         $j = 1;
@@ -2001,11 +2002,11 @@ class Orcatrata extends CI_Controller {
             }
         }
 		$data['count']['PRCount'] = $j - 1;
-
+		/*
 		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
 		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];		
-		
+		*/
 		
 		
 		/*
@@ -2118,6 +2119,10 @@ class Orcatrata extends CI_Controller {
             }
 
         }
+
+		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
+		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
@@ -3079,8 +3084,8 @@ class Orcatrata extends CI_Controller {
         }
         $data['count']['PMCount'] = $j - 1;
 
-		
-		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+		$data['valortotalorca'] = str_replace(',', '.', $data['orcatrata']['ValorTotalOrca']);
+		//$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
 		$data['somatotal'] = 0;	
 
         $j = 1;
@@ -3102,14 +3107,18 @@ class Orcatrata extends CI_Controller {
             }
         }
 		$data['count']['PRCount'] = $j - 1;
-
+		/*
 		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
 		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];		
-		/*
+		
 		echo '<br>';
 		echo "<pre>";
 		print_r($data['valortotalorca']);
+		echo '<br>';
+		print_r($data['somatotal']);
+		echo '<br>';
+		print_r($data['diferenca']);
 		echo "</pre>";								
         */
 		//Fim do trecho de código que dá pra melhorar
@@ -3214,6 +3223,19 @@ class Orcatrata extends CI_Controller {
 
         }
 
+		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
+		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];		
+		/*
+		echo '<br>';
+		echo "<pre>";
+		print_r($data['valortotalorca']);
+		echo '<br>';
+		print_r($data['somatotal']);
+		echo '<br>';
+		print_r($data['diferenca']);
+		echo "</pre>";		
+		*/
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### App_OrcaTrata ####
@@ -4158,8 +4180,8 @@ class Orcatrata extends CI_Controller {
         }
         $data['count']['PMCount'] = $j - 1;
 		
-		
-		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+		$data['valortotalorca'] = str_replace(',', '.', $data['orcatrata']['ValorTotalOrca']);
+		//$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
 		$data['somatotal'] = 0;
 		
 		if ($data['valortotalorca'] > 0.00 && $data['orcatrata']['QtdParcelasOrca'] >=1) {
@@ -4182,11 +4204,11 @@ class Orcatrata extends CI_Controller {
             }
 			
         }
-		
+		/*
 		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
 		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];		
-		
+		*/
 		/*
         if ($data['orcatrata']['QtdParcelasOrca'] > 0 ) {
 
@@ -4300,6 +4322,10 @@ class Orcatrata extends CI_Controller {
             }
 
         }
+
+		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
+		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
@@ -6323,8 +6349,8 @@ class Orcatrata extends CI_Controller {
         }
         $data['count']['PMCount'] = $j - 1;
 
-		
-		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+		$data['valortotalorca'] = str_replace(',', '.', $data['orcatrata']['ValorTotalOrca']);
+		//$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
 		$data['somatotal'] = 0;
 		
 		if ($data['valortotalorca'] > 0.00 && $data['orcatrata']['QtdParcelasOrca'] >=1) {
@@ -6346,9 +6372,7 @@ class Orcatrata extends CI_Controller {
 			
         }
 		
-		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
-		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
-		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];		
+		
 		/*
         if ($data['orcatrata']['ValorTotalOrca'] > 0 ) {
 
@@ -6367,7 +6391,11 @@ class Orcatrata extends CI_Controller {
         }
 		*/
         //Fim do trecho de código que dá pra melhorar
-
+		
+		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
+		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
+		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #### App_OrcaTrata ####
@@ -7212,8 +7240,8 @@ class Orcatrata extends CI_Controller {
         }
         $data['count']['PMCount'] = $j - 1;
 
-		
-		$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
+		$data['valortotalorca'] = str_replace(',', '.', $data['orcatrata']['ValorTotalOrca']);
+		//$data['valortotalorca'] = str_replace(',', '.', str_replace('.', '', $data['orcatrata']['ValorTotalOrca']));
 		$data['somatotal'] = 0;	
 
         $j = 1;
@@ -7235,11 +7263,11 @@ class Orcatrata extends CI_Controller {
             }
         }
 		$data['count']['PRCount'] = $j - 1;
-
+		/*
 		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
 		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
 		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];		
-
+		*/
         //Fim do trecho de código que dá pra melhorar
 
         if ($id) {
@@ -7334,6 +7362,10 @@ class Orcatrata extends CI_Controller {
             }
 
         }
+
+		$data['somatotal'] = number_format($data['somatotal'],2,",",".");
+		$data['somatotal'] = str_replace(',', '.', str_replace(',', '.', $data['somatotal']));
+		$data['diferenca'] = $data['valortotalorca'] - $data['somatotal'];
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
@@ -12487,9 +12519,16 @@ class Orcatrata extends CI_Controller {
         else
             $data['msg'] = '';
 
-
-        //$_SESSION['OrcaTrataCons'] = $this->Orcatrata_model->get_cliente($id, TRUE);
-        //$_SESSION['OrcaTrataCons']['idApp_Cliente'] = $id;
+		$this->load->model('Cliente_model');
+		
+		if ($id) {
+            $data['cliente']['idApp_Cliente'] = $id;
+			$_SESSION['Cliente'] = $data['cliente'] = $this->Cliente_model->get_cliente($id, TRUE);
+			$data['resumo'] = $this->Cliente_model->get_cliente($id);
+			$_SESSION['Cliente']['NomeCompleto'] = $data['resumo']['NomeCliente'];
+			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 12) ? substr($data['resumo']['NomeCliente'], 0, 12) : $data['resumo']['NomeCliente'];
+		}
+		
         $data['combinado'] = $this->Orcatrata_model->list_orcamentocomb($id, 'S', TRUE);
         $data['naocombinado'] = $this->Orcatrata_model->list_orcamentocomb($id, 'N', TRUE);
         $data['aprovado'] = $this->Orcatrata_model->list_orcamento($id, 'S', TRUE);

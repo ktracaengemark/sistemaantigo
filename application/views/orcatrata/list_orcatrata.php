@@ -115,8 +115,7 @@
 				<div class="col-md-12 col-lg-12">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<strong>Orçamentos do Cliente: </strong>
-							<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '.</small>' ?>
+							<?php echo '<strong>' . $_SESSION['Cliente']['NomeCompleto'] . '</strong> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '.</small>' ?>
 						</div>
 						<div class="panel-body">
 
