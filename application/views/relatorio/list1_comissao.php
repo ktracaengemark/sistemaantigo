@@ -33,9 +33,11 @@
 						<thead>
 							<tr>
 								<th colspan="3" class="active"> <?php echo $report->num_rows(); ?> resultado(s)</th>
-								<th colspan="17" class="active"></th>
-								<th colspan="1" class="active text-right">Total:R$ <?php echo $report->soma->somaorcamento ?> </th>
-								<th colspan="1" class="active text-right">Total:R$ <?php echo $report->soma->somacomissao ?> </th>
+								<?php if($metodo == 1 || $metodo == 2) { ?>
+									<th colspan="17" class="active"></th>
+									<th colspan="1" class="active text-right">Total:R$ <?php echo $report->soma->somaorcamento ?> </th>
+									<th colspan="1" class="active text-right">Total:R$ <?php echo $report->soma->somacomissao ?> </th>
+								<?php } ?>
 								<!--<th colspan="4" class="active"> <?php echo $report->soma->quantidade ?> Produtos Vendidos</th>
 								<th colspan="1" class="active">Total: <?php echo $report->soma->somasubtotal ?> </th>-->
 							</tr>
@@ -45,6 +47,9 @@
 							<tr>
 								<!--<th class="active">EdtOrç</th>-->
 								<th class="active">Imp.</th>
+								<?php if($metodo == 3) { ?>
+									<th class="active">Baixa</th>
+								<?php } ?>
 								<th class="active">Cont.</th>							
 								<th class="active">Pedido</th>
 								<th class="active">Cliente</th>
@@ -64,9 +69,11 @@
 								<th class="active">DtEntrega</th>
 								<th class="active">DtVnc</th>
 								<th class="active">DtVncPrc</th>
-								<th class="active">ValorTotal</th>
-								<th class="active">Comissao</th>
-								<th class="active">Paga?</th>								
+								<?php if($metodo == 1 || $metodo == 2) { ?>
+									<th class="active">Prd/Srv</th>
+									<th class="active">Comissao</th>
+									<th class="active">Paga?</th>
+								<?php } ?>
 								<!--<th class="active">Qtd</th>									
 								<th class="active">Produto</th>
 								<th class="active">Valor</th>
@@ -87,15 +94,34 @@
 											</a>
 											
 										</td>';
+									if($metodo == 3){
+										if($row['CanceladoOrca'] == "Não"){	
+											if($row['QuitadoOrca'] == "Sim" && $row['ConcluidoOrca'] == "Sim"){
+												echo '<td class="notclickable">
+														<a class="btn btn-md btn-danger notclickable">
+															<span class="glyphicon glyphicon-ok notclickable"></span>
+														</a>
+													</td>';
+											}else{
+												echo '<td class="notclickable">
+														<a class="btn btn-md btn-success notclickable" href="' . base_url() . 'orcatrata/baixadopedido/' . $row['idApp_OrcaTrata'] . '">
+															<span class="glyphicon glyphicon-ok notclickable"></span>
+														</a>
+													</td>';
+											}
+										}else{
+											echo '<td class="notclickable">
+														<a class="btn btn-md btn-danger notclickable">
+															<span class="glyphicon glyphicon-ok notclickable"></span>
+														</a>
+													</td>';
+										}
+									}	
 									echo '<td>' . $count . '</td>';
 									echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 									echo '<td>' . $row['NomeCliente'] . '</td>';
 									echo '<td>' . $row['TipoFinanceiro'] . '</td>';
-									if ($metodo == 1) { 
-										echo '<td>' . $row['NomeColaborador'] . '</td>';
-									} else if ($metodo == 2) {		
-										echo '<td>' . $row['NomeAssociado'] . '</td>';
-									} 
+									echo '<td>' . $row[$nome] . '</td>';
 									echo '<td>' . $row['CombinadoFrete'] . '</td>';
 									echo '<td>' . $row['AprovadoOrca'] . '</td>';
 									echo '<td>' . $row['ConcluidoOrca'] . '</td>';
@@ -110,9 +136,11 @@
 									echo '<td>' . $row['DataEntregaOrca'] . '</td>';
 									echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
 									echo '<td>' . $row['DataVencimento'] . '</td>';
-									echo '<td>' . $row['ValorRestanteOrca'] . '</td>';	
-									echo '<td>' . $row['ValorComissao'] . '</td>';
-									echo '<td>' . $row[$status] . '</td>';
+									if($metodo == 1 || $metodo == 2){
+										echo '<td>' . $row['ValorRestanteOrca'] . '</td>';	
+										echo '<td>' . $row['ValorComissao'] . '</td>';
+										echo '<td>' . $row[$status] . '</td>';
+									}
 									//echo '<td>' . $row['QtdProduto'] . '</td>';	
 									//echo '<td>' . $row['Produtos'] . '</td>';
 									//echo '<td class="text-right">' . $row['ValorProduto'] . '</td>';
@@ -137,10 +165,12 @@
 						<tfoot>
 							<tr>
 								<th colspan="3" class="active"> <?php echo $report->num_rows(); ?> resultado(s)</th>
-								<th colspan="17" class="active"></th>
-								<!--<th colspan="2" class="active"> <?php echo $report->soma->quantidade ?> Produtos</th>-->
-								<th colspan="1" class="active text-right">Total:R$ <?php echo $report->soma->somaorcamento ?> </th>
-								<th colspan="1" class="active text-right">Total:R$ <?php echo $report->soma->somacomissao ?> </th>
+								<?php if($metodo == 1 || $metodo == 2) { ?>
+									<th colspan="17" class="active"></th>
+									<!--<th colspan="2" class="active"> <?php echo $report->soma->quantidade ?> Produtos</th>-->
+									<th colspan="1" class="active text-right">Total:R$ <?php echo $report->soma->somaorcamento ?> </th>
+									<th colspan="1" class="active text-right">Total:R$ <?php echo $report->soma->somacomissao ?> </th>
+								<?php } ?>	
 							</tr>
 						</tfoot>
 						

@@ -71,7 +71,7 @@
 																<div class="row">
 																	<input type="hidden" name="idApp_OrcaTrata<?php echo $i ?>" id="idApp_OrcaTrata<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['idApp_OrcaTrata']; ?>"/>
 																	<div class="col-md-1">
-																		<label for="Parcela">Prcl <?php echo $i ?>:</label><br>
+																		<label for="Parcela">Prcl <?php echo $i ?> / <?php echo $count['PRCount']; ?></label><br>
 																		<input type="text" class="form-control" readonly=""
 																			   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
 																	</div>																	
@@ -99,15 +99,15 @@
 																			<span class="input-group-addon" disabled>
 																				<span class="glyphicon glyphicon-calendar"></span>
 																			</span>
-																			<input type="text" class="form-control Date" id="DataVencimento<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																			<input type="text" class="form-control Date" id="DataVencimento<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA" 
 																				   name="DataVencimento<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataVencimento'] ?>">																
 																		</div>
 																	</div>																	
 																	<div class="col-md-2">
-																		<label for="ValorParcela">Valor Parcela:</label><br>
+																		<label for="ValorParcela">Valor Parcela / <?php echo $parcelasrec[$i]['Tipo'] ?></label><br>
 																		<div class="input-group" id="txtHint">
 																			<span class="input-group-addon" id="basic-addon1">R$</span>
-																			<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorParcela<?php echo $i ?>"
+																			<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="ValorParcela<?php echo $i ?>" <?php echo $parcelasrec[$i]['readonly'] ?>
 																				   name="ValorParcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['ValorParcela'] ?>">
 																		</div>
 																	</div>
@@ -124,7 +124,7 @@
 																						. '<label class="btn btn-warning active" name="radiobutton_Quitado' . $i . '" id="radiobutton_Quitado' . $i .  $key . '">'
 																						. '<input type="radio" name="Quitado' . $i . '" id="radiobuttondinamico" '
 																						. 'onchange="carregaQuitado(this.value,this.name,'.$i.')" '
-																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																						. 'autocomplete="off" value="' . $key . '" checked >' . $row
 																						. '</label>'
 																						;
 																					} else {

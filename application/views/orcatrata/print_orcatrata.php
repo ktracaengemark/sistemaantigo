@@ -3,7 +3,7 @@
 <div class="col-sm-offset-2 col-md-8 ">	
 	<?php echo form_open_multipart($form_open_path); ?>
 	<?php if ( !isset($evento) && isset($query)) { ?>
-		<?php if ($query['idApp_Cliente'] != 1 && $query['idApp_Cliente'] != 0) { ?>
+		<?php if ($query['idApp_Cliente'] != 150001 && $query['idApp_Cliente'] != 1 && $query['idApp_Cliente'] != 0) { ?>
 			<nav class="navbar navbar-inverse navbar-fixed" role="banner">
 				<div class="container-fluid">
 					<div class="navbar-header">
@@ -103,9 +103,16 @@
 							<?php } ?>
 							<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 								<div class="btn-group">
+									<a type="button" class="btn btn-md btn-default " href="<?php echo base_url() . 'orcatrata/alterar/' . $query['idApp_OrcaTrata']; ?>">
+										<span class="glyphicon glyphicon-edit"></span>
+									</a>
+								</div>									
+							</li>
+							<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+								<div class="btn-group">
 									<a href="javascript:window.print()">
 										<button type="button" class="btn btn-md btn-default ">
-											<span class="glyphicon glyphicon-print"></span> Imprimir
+											<span class="glyphicon glyphicon-print"></span>Print
 										</button>
 									</a>
 								</div>									

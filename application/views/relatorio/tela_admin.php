@@ -76,11 +76,18 @@
 												</a>											
 											</div>	
 										</div>
+										<div class="form-group col-md-12 text-left">
+											<div class="row">										
+												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/baixadasreceitas" role="button"> 
+													<span class="glyphicon glyphicon-pencil"></span> Baixa das Receitas(Pag.Prd.Prc.)
+												</a>
+											</div>	
+										</div>
 									<?php } ?>	
 									<div class="form-group col-md-12 text-left">
 										<div class="row">										
 											<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/cobrancas" role="button"> 
-												<span class="glyphicon glyphicon-usd"></span> Receitas & Parcelas
+												<span class="glyphicon glyphicon-usd"></span> Baixa dos Pagamentos(Pag.)
 											</a>
 										</div>	
 									</div>
@@ -88,21 +95,14 @@
 										<div class="form-group col-md-12 text-left">
 											<div class="row">										
 												<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
-													<span class="glyphicon glyphicon-gift"></span> Receitas & Produtos
+													<span class="glyphicon glyphicon-gift"></span> Baixa dos Produtos(Prd.)
 												</a>
 											</div>	
 										</div>
 										<div class="form-group col-md-12 text-left">
 											<div class="row">										
 												<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
-													<span class="glyphicon glyphicon-pencil"></span> Receitas & Procedimentos
-												</a>
-											</div>	
-										</div>
-										<div class="form-group col-md-12 text-left">
-											<div class="row">										
-												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/baixadopedido" role="button"> 
-													<span class="glyphicon glyphicon-usd"></span> Baixa do Pedido
+													<span class="glyphicon glyphicon-pencil"></span> Baixa dos Procedimentos(Prc.)
 												</a>
 											</div>	
 										</div>

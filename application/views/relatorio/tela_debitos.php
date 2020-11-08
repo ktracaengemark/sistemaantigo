@@ -5,38 +5,45 @@
 	<div class="panel panel-danger">
 		<div class="panel-heading">
 			<h4><?php echo $titulo1; ?></h4>
-			<div class="input-group col-md-3">
-				<span class="input-group-btn">
-					<button class="btn btn-danger btn-md" type="submit">
-						<span class="glyphicon glyphicon-search"></span> 
-					</button>
-				</span>
-				<input type="text" placeholder="Pesquisar despesa" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
-				<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>	
+			<div class="col-md-3 text-left">
+				<div class="input-group">
+					<span class="input-group-btn">
+						<button class="btn btn-danger btn-md" type="submit">
+							<span class="glyphicon glyphicon-search"></span> 
+						</button>
+					</span>
+					<input type="text" placeholder="Pesquisar despesa" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
+				</div>
+			</div>
+			<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>	
+			<div class="col-md-3 text-left">
+				<div class="input-group">
+					<span class="input-group-btn">
+						<button class="btn btn-danger btn-md" type="submit">
+							<span class="glyphicon glyphicon-search"></span> 
+						</button>
+					</span>
 					<input type="text" placeholder="Pesquisar Fornecedor" class="form-control Numero btn-sm" name="Fornecedor" value="<?php echo set_value('Fornecedor', $query['Fornecedor']); ?>">
-				<?php }?>
-				<span class="input-group-btn">	
-					<button class="btn btn-warning btn-md" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-						<span class="glyphicon glyphicon-filter"></span>
-					</button>
-				</span>
-				<!--
-				<span class="input-group-btn">
-					<a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir_lista/' . $_SESSION['log']['idSis_Empresa']; ?>">
-						<button class="btn btn-success btn-md" type="button">
-							<span class="glyphicon glyphicon-print"></span>
-						</button>
-					</a>
-				</span>
-				-->
-				<span class="input-group-btn">
-					<a href="<?php echo base_url() . 'Orcatrata/alterarparceladesp/' . $_SESSION['log']['idSis_Empresa']; ?>">
-						<button class="btn btn-danger btn-md" type="button">
-							<span class="glyphicon glyphicon-edit"></span>
-						</button>
-					</a>
-				</span>	
-			</div>	
+				</div>
+			</div>
+			<?php }else{ ?>
+				<input type="hidden" name="Fornecedor" id="Fornecedor" value=""/>
+			<?php } ?>
+			<button class="btn btn-warning btn-md" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+				<span class="glyphicon glyphicon-filter"></span>
+			</button>	
+			<!--
+			<a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir_lista/' . $_SESSION['log']['idSis_Empresa']; ?>">
+				<button class="btn btn-success btn-md" type="button">
+					<span class="glyphicon glyphicon-print"></span>
+				</button>
+			</a>
+			-->
+			<a href="<?php echo base_url() . 'Orcatrata/alterarparceladesp/' . $_SESSION['log']['idSis_Empresa']; ?>">
+				<button class="btn btn-danger btn-md" type="button">
+					<span class="glyphicon glyphicon-edit"></span>
+				</button>
+			</a>
 		</div>
 		<div class="panel-body">
 			<div <?php echo $collapse; ?> id="Receitas">
