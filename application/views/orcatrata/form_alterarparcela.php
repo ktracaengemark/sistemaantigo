@@ -16,11 +16,11 @@
 						<div class="panel-heading">
 							<?php if ($titulo == "Receitas" ) { ?>
 							<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/cobrancas" role="button">
-								<span class="glyphicon glyphicon-pencil"></span> <?php echo $titulo; ?> à  Receber
+								<span class="glyphicon glyphicon-pencil"></span> Parcelas das <?php echo $titulo; ?> 
 							</a>							
-							<?php } else { ?>
+							<?php } else if($titulo == "Despesas"){ ?>
 							<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/debitos" role="button">
-								<span class="glyphicon glyphicon-pencil"></span> <?php echo $titulo; ?> à Pagar
+								<span class="glyphicon glyphicon-pencil"></span> Parcelas das <?php echo $titulo; ?>
 							</a>
 							<?php } ?>
 							<!--
@@ -29,7 +29,7 @@
 									<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/fiadorec" role="button">
 										<span class="glyphicon glyphicon-search"></span> Fiados 
 									</a>
-								<?php } else { ?>	
+								<?php } else if($titulo == "Despesas"){ ?>	
 									<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>relatorio/fiadodesp" role="button">
 										<span class="glyphicon glyphicon-search"></span> Fiados 
 									</a>
@@ -48,13 +48,9 @@
 
 									<div  style="overflow: auto; height: 456px; ">
 										
-									
-										
 											<div class="panel-body">
 												<!--App_parcelasRec-->
 												<input type="hidden" name="PRCount" id="PRCount" value="<?php echo $count['PRCount']; ?>"/>
-
-												
 
 												<?php
 												for ($i=1; $i <= $count['PRCount']; $i++) {
@@ -75,13 +71,13 @@
 																		<input type="text" class="form-control" readonly=""
 																			   name="Parcela<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Parcela'] ?>">
 																	</div>																	
-																	<?php if ($titulo == "Receitas" ) { ?>
+																	<?php if ($titulo == "Receitas") { ?>
 																	<div class="col-md-3">
 																		<label for="Receita">Receita:</label><br>
 																		<input type="text" class="form-control" readonly=""
 																			   name="Receita<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['Receita'] ?>">
 																	</div>							
-																	<?php } else { ?>
+																	<?php } else if($titulo == "Despesas"){ ?>
 																	<div class="col-md-3">
 																		<label for="Despesa">Despesa:</label><br>
 																		<input type="text" class="form-control" readonly=""
@@ -158,94 +154,78 @@
 						
 							<div class="form-group">
 								<div class="row">
-									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
 									<input type="hidden" name="idSis_Empresa" value="<?php echo $_SESSION['log']['idSis_Empresa']; ?>">
 									<!--<input type="hidden" name="idSis_Empresa" value="<?php echo $orcatrata['idSis_Empresa']; ?>">-->
-									<?php if ($metodo > 1) { ?>
-									<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
-									<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
-									<?php } ?>
-									<?php if ($metodo == 2) { ?>
-										<div class="col-md-6 text-left">
-											<label for="QuitadoParcelas">Todas as Parcelas Quitadas?</label><br>
-											<div class="btn-group" data-toggle="buttons">
-												<?php
-												foreach ($select['QuitadoParcelas'] as $key => $row) {
-													(!$query['QuitadoParcelas']) ? $query['QuitadoParcelas'] = 'N' : FALSE;
+									<div class="col-md-6 text-left">
+										<label for="QuitadoParcelas">Todas as Parcelas Quitadas?</label><br>
+										<div class="btn-group" data-toggle="buttons">
+											<?php
+											foreach ($select['QuitadoParcelas'] as $key => $row) {
+												(!$query['QuitadoParcelas']) ? $query['QuitadoParcelas'] = 'N' : FALSE;
 
-													if ($query['QuitadoParcelas'] == $key) {
-														echo ''
-														. '<label class="btn btn-warning active" name="radiobutton_QuitadoParcelas' . '" id="radiobutton_QuitadoParcelas' .  $key . '">'
-														. '<input type="radio" name="QuitadoParcelas' . '" id="radiobuttondinamico" '
-														. 'autocomplete="off" value="' . $key . '" checked>' . $row
-														. '</label>'
-														;
-													} else {
-														echo ''
-														. '<label class="btn btn-default" name="radiobutton_QuitadoParcelas' .  '" id="radiobutton_QuitadoParcelas' .  $key . '">'
-														. '<input type="radio" name="QuitadoParcelas' . '" id="radiobuttondinamico" '
-														. 'autocomplete="off" value="' . $key . '" >' . $row
-														. '</label>'
-														;
-													}
+												if ($query['QuitadoParcelas'] == $key) {
+													echo ''
+													. '<label class="btn btn-warning active" name="radiobutton_QuitadoParcelas' . '" id="radiobutton_QuitadoParcelas' .  $key . '">'
+													. '<input type="radio" name="QuitadoParcelas' . '" id="radiobuttondinamico" '
+													. 'autocomplete="off" value="' . $key . '" checked>' . $row
+													. '</label>'
+													;
+												} else {
+													echo ''
+													. '<label class="btn btn-default" name="radiobutton_QuitadoParcelas' .  '" id="radiobutton_QuitadoParcelas' .  $key . '">'
+													. '<input type="radio" name="QuitadoParcelas' . '" id="radiobuttondinamico" '
+													. 'autocomplete="off" value="' . $key . '" >' . $row
+													. '</label>'
+													;
 												}
-												?>
-											</div>
-											<?php #echo form_error('QuitadoParcelas'); ?>
+											}
+											?>
 										</div>
-										<div class="col-md-6 text-right">
-											<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-												<span class="glyphicon glyphicon-save"></span> Salvar
-											</button>
-										</div>
-										<!--
-										<div class="col-md-6 text-right">
-											<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-												<span class="glyphicon glyphicon-trash"></span> Excluir
-											</button>
-										</div>
-										-->
-										<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header bg-danger">
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-														<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
+										<?php #echo form_error('QuitadoParcelas'); ?>
+									</div>
+									<div class="col-md-6 text-right">
+										<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+											<span class="glyphicon glyphicon-save"></span> Salvar
+										</button>
+									</div>
+									<!--
+									<div class="col-md-6 text-right">
+										<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+											<span class="glyphicon glyphicon-trash"></span> Excluir
+										</button>
+									</div>
+									-->
+									<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header bg-danger">
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+													<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
+												</div>
+												<div class="modal-body">
+													<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
+														Esta operação é irreversível.</p>
+												</div>
+												<div class="modal-footer">
+													<div class="col-md-6 text-left">
+														<button type="button" class="btn btn-warning" data-dismiss="modal">
+															<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+														</button>
 													</div>
-													<div class="modal-body">
-														<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
-															Esta operação é irreversível.</p>
-													</div>
-													<div class="modal-footer">
-														<div class="col-md-6 text-left">
-															<button type="button" class="btn btn-warning" data-dismiss="modal">
-																<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
-															</button>
-														</div>
-														<div class="col-md-6 text-right">
-															<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluir2/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
-																<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
-															</a>
-														</div>
+													<div class="col-md-6 text-right">
+														<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/excluir2/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
+															<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
+														</a>
 													</div>
 												</div>
 											</div>
 										</div>
-									<?php } else { ?>
-										<div class="col-md-6">
-											<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
-												<span class="glyphicon glyphicon-save"></span> Salvar
-											</button>
-										</div>
-
-									<?php } ?>
+									</div>
 								</div>
 							</div>
-
-							</form>
-
 						</div>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>

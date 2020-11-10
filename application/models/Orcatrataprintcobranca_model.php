@@ -47,6 +47,7 @@ class Orcatrataprintcobranca_model extends CI_Model {
 		
 		$permissao30 = ($_SESSION['FiltroAlteraParcela']['Orcamento'] != "" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcamento'] . '" AND ' : FALSE;
 		$permissao31 = ($_SESSION['FiltroAlteraParcela']['Cliente'] != "" ) ? 'OT.idApp_Cliente = "' . $_SESSION['FiltroAlteraParcela']['Cliente'] . '" AND ' : FALSE;
+		$permissao36 = ($_SESSION['FiltroAlteraParcela']['Fornecedor'] != "" ) ? 'OT.idApp_Fornecedor = "' . $_SESSION['FiltroAlteraParcela']['Fornecedor'] . '" AND ' : FALSE;
 		$permissao13 = ($_SESSION['FiltroAlteraParcela']['CombinadoFrete'] != "0" ) ? 'OT.CombinadoFrete = "' . $_SESSION['FiltroAlteraParcela']['CombinadoFrete'] . '" AND ' : FALSE;
 		$permissao1 = ($_SESSION['FiltroAlteraParcela']['AprovadoOrca'] != "0" ) ? 'OT.AprovadoOrca = "' . $_SESSION['FiltroAlteraParcela']['AprovadoOrca'] . '" AND ' : FALSE;
 		$permissao3 = ($_SESSION['FiltroAlteraParcela']['ConcluidoOrca'] != "0" ) ? 'OT.ConcluidoOrca = "' . $_SESSION['FiltroAlteraParcela']['ConcluidoOrca'] . '" AND ' : FALSE;
@@ -59,7 +60,8 @@ class Orcatrataprintcobranca_model extends CI_Model {
 		$permissao33 = ($_SESSION['FiltroAlteraParcela']['AVAP'] != "0" ) ? 'OT.AVAP = "' . $_SESSION['FiltroAlteraParcela']['AVAP'] . '" AND ' : FALSE;
 		$permissao34 = ($_SESSION['FiltroAlteraParcela']['TipoFrete'] != "0" ) ? 'OT.TipoFrete = "' . $_SESSION['FiltroAlteraParcela']['TipoFrete'] . '" AND ' : FALSE;
 		$permissao6 = ($_SESSION['FiltroAlteraParcela']['FormaPagamento'] != "0" ) ? 'OT.FormaPagamento = "' . $_SESSION['FiltroAlteraParcela']['FormaPagamento'] . '" AND ' : FALSE;
-		$permissao32 = ($_SESSION['FiltroAlteraParcela']['TipoFinanceiroR'] != "0" ) ? 'OT.TipoFinanceiro = "' . $_SESSION['FiltroAlteraParcela']['TipoFinanceiroR'] . '" AND ' : FALSE;
+		$permissao32 = ($_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] != "0" ) ? 'OT.TipoFinanceiro = "' . $_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] . '" AND ' : FALSE;
+		$permissao35 = ($_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] != "" ) ? 'OT.idTab_TipoRD = "' . $_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] . '" AND PR.idTab_TipoRD = "' . $_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] . '" AND' : FALSE;
 		
 		$permissao26 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
 		$permissao27 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "0" ) ? 'YEAR(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
@@ -79,6 +81,7 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				C.CidadeCliente,
 				C.EstadoCliente,
 				C.ReferenciaCliente,
+				F.NomeFornecedor,
 				OT.idSis_Empresa,
 				OT.idApp_OrcaTrata,
 				OT.CombinadoFrete,
@@ -127,6 +130,7 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				LEFT JOIN Tab_TipoFinanceiro AS TP ON TP.idTab_TipoFinanceiro = OT.TipoFinanceiro
 				LEFT JOIN Tab_AVAP AS TAV ON TAV.Abrev2 = OT.AVAP
 				LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
+				LEFT JOIN App_Fornecedor AS F ON F.idApp_Fornecedor = OT.idApp_Fornecedor
 				LEFT JOIN App_Parcelas AS PR ON PR.idApp_OrcaTrata = OT.idApp_OrcaTrata
             WHERE
             	' . $permissao . '		
@@ -144,6 +148,8 @@ class Orcatrataprintcobranca_model extends CI_Model {
 				' . $permissao32 . '
 				' . $permissao33 . '
 				' . $permissao34 . '
+				' . $permissao35 . '
+				' . $permissao36 . '
                 ' . $date_inicio_orca . '
                 ' . $date_fim_orca . '
                 ' . $date_inicio_entrega . '
@@ -152,14 +158,13 @@ class Orcatrataprintcobranca_model extends CI_Model {
                 ' . $date_fim_vnc . '
                 ' . $date_inicio_vnc_prc . '
                 ' . $date_fim_vnc_prc . '
-				OT.idTab_TipoRD = "2" AND
-				PR.idTab_TipoRD = "2" AND
 				OT.idSis_Empresa = ' . $data . ' AND
 				PR.idSis_Empresa = ' . $data . '
 			GROUP BY
                 OT.idApp_OrcaTrata
             ORDER BY
 				C.NomeCliente ASC,
+				F.NomeFornecedor ASC,
 				PR.DataVencimento ASC		
         ');
         $query = $query->result_array();

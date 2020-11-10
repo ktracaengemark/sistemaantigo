@@ -19,9 +19,11 @@
 								<a class="btn btn-md btn-warning" href="<?php echo base_url() . $relatorio; ?>" role="button">
 									<span class="glyphicon glyphicon-pencil"></span><?php echo $titulo; ?>
 								</a>
+								<!--
 								<a class="btn btn-md btn-warning" type="button" href="<?php echo base_url() . $imprimir . $_SESSION['log']['idSis_Empresa']; ?>">
 									<span class="glyphicon glyphicon-print"></span> Print.
 								</a>
+								-->
 								<a class="btn btn-md btn-warning" href="" role="button">
 									<span class="glyphicon glyphicon-usd"></span>R$ <?php echo $somatotal; ?>
 								</a>
@@ -67,8 +69,8 @@
 																	</span>
 																</div>
 																<div class="col-md-2">
-																	<label><?php echo $nome; ?>:</label><br>
-																	<span><?php echo $orcamento[$i][$nome] ?></span>	
+																	<label><?php echo $nomeusuario; ?>:</label><br>
+																	<span><?php echo $orcamento[$i][$nomeusuario] ?></span>	
 																</div>
 																<div class="col-md-2">
 																	<label for="DataEntregaOrca">Entrega:</label>

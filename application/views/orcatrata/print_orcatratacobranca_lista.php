@@ -15,7 +15,7 @@
 					<span class="glyphicon glyphicon-print"></span>
 				</a>
 				
-				<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir/' . $_SESSION['log']['idSis_Empresa']; ?>">
+				<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . $imprimirrecibo . $_SESSION['log']['idSis_Empresa']; ?>">
 					<span class="glyphicon glyphicon-pencil"></span> Versão Recibo
 				</a>
 				

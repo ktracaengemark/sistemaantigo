@@ -78,7 +78,7 @@
 										</div>
 										<div class="form-group col-md-12 text-left">
 											<div class="row">										
-												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/baixadasreceitas" role="button"> 
+												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/alterarreceitas" role="button"> 
 													<span class="glyphicon glyphicon-pencil"></span> Baixa das Receitas(Pag.Prd.Prc.)
 												</a>
 											</div>	
@@ -87,7 +87,7 @@
 									<div class="form-group col-md-12 text-left">
 										<div class="row">										
 											<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/cobrancas" role="button"> 
-												<span class="glyphicon glyphicon-usd"></span> Baixa dos Pagamentos(Pag.)
+												<span class="glyphicon glyphicon-usd"></span> Pagamentos (Pag.)
 											</a>
 										</div>	
 									</div>
@@ -95,14 +95,14 @@
 										<div class="form-group col-md-12 text-left">
 											<div class="row">										
 												<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
-													<span class="glyphicon glyphicon-gift"></span> Baixa dos Produtos(Prd.)
+													<span class="glyphicon glyphicon-gift"></span> Produtos (Prd.)
 												</a>
 											</div>	
 										</div>
 										<div class="form-group col-md-12 text-left">
 											<div class="row">										
 												<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
-													<span class="glyphicon glyphicon-pencil"></span> Baixa dos Procedimentos(Prc.)
+													<span class="glyphicon glyphicon-pencil"></span> Procedimentos (Prc.)
 												</a>
 											</div>	
 										</div>
@@ -227,11 +227,18 @@
 												</a>											
 											</div>	
 										</div>
+										<div class="form-group col-md-12 text-left">
+											<div class="row">										
+												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/alterardespesas" role="button"> 
+													<span class="glyphicon glyphicon-pencil"></span> Baixa das Despesas(Pag.Prd.Prc.)
+												</a>
+											</div>	
+										</div>
 									<?php } ?>	
 									<div class="form-group col-md-12 text-left">
 										<div class="row">										
 											<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/debitos" role="button"> 
-												<span class="glyphicon glyphicon-usd"></span> Despesas & Parcelas
+												<span class="glyphicon glyphicon-usd"></span> Pagamentos (Pag.)
 											</a>
 										</div>	
 									</div>
@@ -239,14 +246,14 @@
 										<div class="form-group col-md-12 text-left">
 											<div class="row">										
 												<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
-													<span class="glyphicon glyphicon-gift"></span> Despesas & Produtos
+													<span class="glyphicon glyphicon-gift"></span> Produtos (Prd)
 												</a>
 											</div>	
 										</div>
 										<div class="form-group col-md-12 text-left">
 											<div class="row">										
 												<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
-													<span class="glyphicon glyphicon-pencil"></span> Despesas & Procedimentos
+													<span class="glyphicon glyphicon-pencil"></span> Procedimentos (Prc)
 												</a>
 											</div>	
 										</div>

@@ -67,8 +67,8 @@
 																	</span>
 																</div>
 																<div class="col-md-2">
-																	<label><?php echo $nome; ?>:</label><br>
-																	<span><?php echo $orcamento[$i][$nome] ?></span>	
+																	<label><?php echo $nomeusuario; ?>:</label><br>
+																	<span><?php echo $orcamento[$i][$nomeusuario] ?></span>	
 																</div>
 																<div class="col-md-2">
 																	<label for="DataVencimentoOrca">Venc:</label>

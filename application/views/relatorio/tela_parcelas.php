@@ -41,13 +41,13 @@
 				<span class="glyphicon glyphicon-filter"></span>
 			</button>			
 			<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
-				<a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir_lista/' . $_SESSION['log']['idSis_Empresa']; ?>">
+				<a href="<?php echo base_url() . $imprimirlista . $_SESSION['log']['idSis_Empresa']; ?>">
 					<button class="btn btn-success btn-md" type="button">
 						<span class="glyphicon glyphicon-print"></span>
 					</button>
 				</a>
 			<?php } ?>
-			<a href="<?php echo base_url() . 'Orcatrata/alterarparcelarec/' . $_SESSION['log']['idSis_Empresa']; ?>">
+			<a href="<?php echo base_url() . $alterarparc . $_SESSION['log']['idSis_Empresa']; ?>">
 				<button class="btn btn-danger btn-md" type="button">
 					<span class="glyphicon glyphicon-edit"></span>
 				</button>
@@ -267,7 +267,7 @@
 									?>
 								</select>
 							</div>
-							<input type="hidden" name="idTab_TipoRD" id="idTab_TipoRD" value="<?php echo $idTab_TipoRD; ?>"/>
+							<input type="hidden" name="idTab_TipoRD" id="idTab_TipoRD" value="<?php echo $TipoRD; ?>"/>
 							<div class="col-md-3 text-left">
 								<label for="Ordenamento">Tipo <?php echo $TipoFinanceiro; ?>:</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
