@@ -471,7 +471,23 @@ class Orcatrata_model extends CI_Model {
         $query = $query->result_array();
 
         return $query;
-    }	
+    }
+	
+    public function get_parcela($data) {
+        $query = $this->db->query(' SELECT * FROM App_Parcelas WHERE idApp_Parcelas = ' . $data . '');
+        $query = $query->result_array();
+		
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query[0];
+    }
 	
     public function get_parcelas_posterior($data) {
 		$query = $this->db->query('SELECT * FROM App_Parcelas WHERE idApp_OrcaTrata = ' . $data . ' AND Quitado = "N"');
@@ -3354,6 +3370,14 @@ exit();*/
     public function update_parcelas($data) {
 
         $query = $this->db->update_batch('App_Parcelas', $data, 'idApp_Parcelas');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+	
+    public function update_parcela($data, $id) {
+
+        unset($data['idApp_Parcelas']);
+        $query = $this->db->update('App_Parcelas', $data, array('idApp_Parcelas' => $id));
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }

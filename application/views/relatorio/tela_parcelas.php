@@ -42,13 +42,13 @@
 			</button>			
 			<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 				<a href="<?php echo base_url() . $imprimirlista . $_SESSION['log']['idSis_Empresa']; ?>">
-					<button class="btn btn-success btn-md" type="button">
+					<button class="btn btn-<?php echo $panel; ?> btn-md" type="button">
 						<span class="glyphicon glyphicon-print"></span>
 					</button>
 				</a>
 			<?php } ?>
 			<a href="<?php echo base_url() . $alterarparc . $_SESSION['log']['idSis_Empresa']; ?>">
-				<button class="btn btn-danger btn-md" type="button">
+				<button class="btn btn-success btn-md" type="button">
 					<span class="glyphicon glyphicon-edit"></span>
 				</button>
 			</a>

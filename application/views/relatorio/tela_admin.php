@@ -71,7 +71,7 @@
 										</div>
 										<div class="form-group col-md-12 text-left">
 											<div class="row">		
-												<a  type="button" class="btn btn-md btn-default btn-block text-left" href="<?php echo base_url() ?>relatorio/orcamento" role="button"> 
+												<a  type="button" class="btn btn-md btn-default btn-block text-left" href="<?php echo base_url() ?>relatorio/receitas" role="button"> 
 													<span class="glyphicon glyphicon-pencil"></span> Receitas
 												</a>											
 											</div>	
@@ -222,7 +222,14 @@
 									<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 										<div class="form-group col-md-12 text-left">
 											<div class="row">		
-												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/orcamento2" role="button"> 
+												<a  type="button" class="btn btn-md btn-default btn-block text-left" href="<?php echo base_url() ?>despesas/despesas" role="button"> 
+													<span class="glyphicon glyphicon-pencil"></span> Gestor de Despesas Estático
+												</a>											
+											</div>	
+										</div>
+										<div class="form-group col-md-12 text-left">
+											<div class="row">		
+												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/despesas" role="button"> 
 													<span class="glyphicon glyphicon-pencil"></span> Despesas
 												</a>											
 											</div>	

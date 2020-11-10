@@ -13,8 +13,8 @@
 								<h5 class="text-center"><b> Selecione o Pedido</b><?php #echo $titulo; ?></h5>
 							</div>
 							-->
-							<div class="col-md-4">
-								<label>Gestor de Despesas</label>
+							<div class="col-md-3 text-left">
+							<label>Gestor de Despesas</label>
 								<div class="input-group">
 									<span class="input-group-btn">
 										<button class="btn btn-danger btn-md" type="submit">
@@ -22,24 +22,36 @@
 										</button>
 									</span>
 									<input type="text" class="form-control Numero" placeholder="Pesquisar Despesa" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
-									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>	
-										<input type="text" class="form-control Numero" placeholder="Pesquisar Fornecedor"  name="Fornecedor" value="<?php echo set_value('Fornecedor', $query['Fornecedor']); ?>">
-									<?php } ?>
-									<span class="input-group-btn">	
-										<button class="btn btn-warning btn-md" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-											<span class="glyphicon glyphicon-filter"></span>
-										</button>
-									</span>
 								</div>
 							</div>
-							<div class="col-md-4">										
+							<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+								<div class="col-md-3 text-left">
+								<label>.</label>	
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button class="btn btn-danger btn-md" type="submit">
+												<span class="glyphicon glyphicon-search"></span> 
+											</button>
+										</span>
+										<input type="text" class="form-control Numero" placeholder="Pesquisar Fornecedor"  name="Fornecedor" value="<?php echo set_value('Fornecedor', $query['Fornecedor']); ?>">
+									</div>
+								</div>
+							<?php }else{ ?>
+								<input type="hidden" name="Fornecedor" id="Fornecedor" value=""/>
+							<?php } ?>
+							<div class="col-md-6">
+								<div class="col-md-4">
+								<label>Filtros</label>	
+									<button class="btn btn-warning btn-md btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+										<span class="glyphicon glyphicon-filter"></span>
+									</button>
+								</div>
+								<div class="col-md-8">
 								<label>Cadastrar Nova Despesa</label>
-								<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>	
-									<br><br>
-								<?php } ?>	
-								<a class="btn btn-md btn-danger btn-block" href="<?php echo base_url() ?>orcatrata/cadastrardesp" role="button"> 
-									<span class="glyphicon glyphicon-plus"></span> Nova Compra / Despesa
-								</a>
+									<a class="btn btn-md btn-danger btn-block" href="<?php echo base_url() ?>orcatrata/cadastrardesp" role="button"> 
+										<span class="glyphicon glyphicon-plus"></span> Nova Compra / Despesa
+									</a>
+								</div>	
 							</div>
 						</div>	
 					</div>

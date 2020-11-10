@@ -13,7 +13,7 @@
 								<h5 class="text-center"><b> Selecione o Pedido</b><?php #echo $titulo; ?></h5>
 							</div>
 							-->
-							<div class="col-md-4">
+							<div class="col-md-3 text-left">
 								<label><?php echo $titulo;?></label>
 								<div class="input-group">
 									<span class="input-group-btn">
@@ -22,26 +22,36 @@
 										</button>
 									</span>
 									<input type="text" class="form-control Numero" placeholder="Pesquisar Pedido" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
-									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
-										<input type="text" class="form-control Numero" placeholder="Pesquisar Cliente"  name="Cliente" value="<?php echo set_value('Cliente', $query['Cliente']); ?>">
-									<?php }else{ ?>
-										<input type="hidden" name="Cliente" id="Cliente" value=""/>
-									<?php } ?>
-									<span class="input-group-btn">	
-										<button class="btn btn-warning btn-md" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-											<span class="glyphicon glyphicon-filter"></span>
-										</button>
-									</span>
 								</div>
 							</div>
-							<div class="col-md-4">										
-								<label>Cadastrar Novo Pedido</label>
-								<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>	
-									<br><br>
-								<?php } ?>	
-								<a class="btn btn-md btn-primary btn-block" href="<?php echo base_url() ?>orcatrata/cadastrar3" role="button"> 
-									<span class="glyphicon glyphicon-plus"></span> Nova Venda / Receita
-								</a>
+							<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+								<div class="col-md-3 text-left">
+									<label>.</label>
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button class="btn btn-primary btn-md" type="submit">
+												<span class="glyphicon glyphicon-search"></span> 
+											</button>
+										</span>
+										<input type="text" class="form-control Numero" placeholder="Pesquisar Cliente"  name="Cliente" value="<?php echo set_value('Cliente', $query['Cliente']); ?>">
+									</div>
+								</div>
+							<?php }else{ ?>
+								<input type="hidden" name="Cliente" id="Cliente" value=""/>
+							<?php } ?>
+							<div class="col-md-6">
+								<div class="col-md-4">
+									<label>Filtros</label>
+									<button class="btn btn-warning btn-md btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+										<span class="glyphicon glyphicon-filter"></span>
+									</button>
+								</div>
+								<div class="col-md-8">
+									<label>Cadastrar Novo Pedido</label>	
+									<a class="btn btn-md btn-primary btn-block" href="<?php echo base_url() ?>orcatrata/cadastrar3" role="button"> 
+										<span class="glyphicon glyphicon-plus"></span> Nova Venda / Receita
+									</a>
+								</div>	
 							</div>
 						</div>	
 					</div>
