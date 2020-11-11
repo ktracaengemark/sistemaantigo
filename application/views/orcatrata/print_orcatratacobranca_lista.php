@@ -48,10 +48,10 @@
 						<td class="col-md-1" scope="col"><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>"class="img-circle img-responsive" width='50'>
 																					
 																					</td>
-						<td class="col-md-3 text-left" scope="col"><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>  "Listagem de Cobrança"'
+						<td class="col-md-3 text-left" scope="col"><?php echo '<strong>' . $_SESSION['Empresa']['NomeEmpresa'] . '</strong>  "' . $titulo . '"'
 																	?></td>
-						<td class="col-md-1 text-left" scope="col"><?php echo 'Vencimento De: <strong>'  . $Imprimir['DataInicio3'] . '</strong> '
-																				. ', À: <strong>'  . $Imprimir['DataFim3'] . '</strong>'
+						<td class="col-md-1 text-left" scope="col"><?php echo 'Vencimento De: <strong>'  . $Imprimir['DataInicio4'] . '</strong> '
+																				. ', À: <strong>'  . $Imprimir['DataFim4'] . '</strong>'
 																		?></td>
 					</tr>
 				</thead>

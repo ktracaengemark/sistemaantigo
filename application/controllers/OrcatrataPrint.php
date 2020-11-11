@@ -396,8 +396,8 @@ class OrcatrataPrint extends CI_Controller {
         else
             $data['msg'] = '';
 		
-		$data['Imprimir']['DataInicio3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio3'], 'barras');
-		$data['Imprimir']['DataFim3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim3'], 'barras');
+		$data['Imprimir']['DataInicio4'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio4'], 'barras');
+		$data['Imprimir']['DataFim4'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim4'], 'barras');
 		
         if ($id) {
             #### App_OrcaTrata ####
@@ -514,8 +514,8 @@ class OrcatrataPrint extends CI_Controller {
         else
             $data['msg'] = '';		
 		
-		$data['Imprimir']['DataInicio3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio3'], 'barras');
-		$data['Imprimir']['DataFim3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim3'], 'barras');
+		$data['Imprimir']['DataInicio4'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio4'], 'barras');
+		$data['Imprimir']['DataFim4'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim4'], 'barras');
 		
         if ($id) {
             #### App_OrcaTrata ####
@@ -631,8 +631,8 @@ class OrcatrataPrint extends CI_Controller {
         else
             $data['msg'] = '';
 		
-		$data['Imprimir']['DataInicio3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio3'], 'barras');
-		$data['Imprimir']['DataFim3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim3'], 'barras');
+		$data['Imprimir']['DataInicio4'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio4'], 'barras');
+		$data['Imprimir']['DataFim4'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim4'], 'barras');
 		
         if ($id) {
             #### App_OrcaTrata ####
@@ -719,7 +719,7 @@ class OrcatrataPrint extends CI_Controller {
 		
         $data['titulo'] = 'Versão Recibo Debito';
         $data['form_open_path'] = 'OrcatrataPrint/imprimirrecibodesp';
-        $data['panel'] = 'info';
+        $data['panel'] = 'danger';
         $data['metodo'] = 1;
 		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistadesp/';
@@ -749,8 +749,8 @@ class OrcatrataPrint extends CI_Controller {
         else
             $data['msg'] = '';		
 		
-		$data['Imprimir']['DataInicio3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio3'], 'barras');
-		$data['Imprimir']['DataFim3'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim3'], 'barras');
+		$data['Imprimir']['DataInicio4'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio4'], 'barras');
+		$data['Imprimir']['DataFim4'] = $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim4'], 'barras');
 		
         if ($id) {
             #### App_OrcaTrata ####
@@ -835,13 +835,13 @@ class OrcatrataPrint extends CI_Controller {
 
         }
 
-        $data['titulo'] = 'Versão Lista Cobrança';
-        $data['form_open_path'] = 'OrcatrataPrint/imprimirlistarec';
-        $data['panel'] = 'info';
+        $data['titulo'] = 'Versão Lista Débitos';
+        $data['form_open_path'] = 'OrcatrataPrint/imprimirlistadesp';
+        $data['panel'] = 'danger';
         $data['metodo'] = 1;
-		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
-		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
-		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
+		$data['imprimir'] = 'OrcatrataPrint/imprimirdesp/';
+		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistadesp/';
+		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirrecibodesp/';
 		
         /*
           echo '<br>';

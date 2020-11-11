@@ -3,62 +3,86 @@
 <?php echo form_open($form_open_path, 'role="form"'); ?>	
 <div class="col-md-12">		
 	<?php echo validation_errors(); ?>
-	<div class="panel panel-<?php echo $panel; ?>">
-		<div class="panel-heading">
-			<h4><?php echo $titulo1; ?></h4>
-			<div class="col-md-3 text-left">
-				<div class="input-group">
-					<span class="input-group-btn">
-						<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
-							<span class="glyphicon glyphicon-search"></span> 
-						</button>
-					</span>
-					<input type="text" placeholder="Pesquisar Pedido" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
-				</div>
-			</div>	
-			<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
-				<div class="col-md-3 text-left">	
-					<div class="input-group">
-						<span class="input-group-btn">
-							<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
-								<span class="glyphicon glyphicon-search"></span> 
-							</button>
-						</span>
-						<?php if($metodo == 2) {?>	
-							<input type="text" placeholder="Pesquisar <?php echo $nome; ?>" class="form-control Numero btn-sm" name="<?php echo $nome; ?>" id="<?php echo $nome; ?>" value="<?php echo set_value($nome, $query[$nome]); ?>">
-							<input type="hidden" name="Fornecedor" id="Fornecedor" value="">
-						<?php }elseif($metodo == 1){ ?>	
-							<input type="text" placeholder="Pesquisar <?php echo $nome; ?>" class="form-control Numero btn-sm" name="<?php echo $nome; ?>" id="<?php echo $nome; ?>" value="<?php echo set_value($nome, $query[$nome]); ?>">
-							<input type="hidden" name="Cliente" id="Cliente" value="">
+	<div class="row">
+		<div class="col-md-12 ">
+			<div class="panel panel-<?php echo $panel; ?>">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-md-3 text-left">
+							<label><?php echo $titulo1;?></label>
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
+										<span class="glyphicon glyphicon-search"></span> 
+									</button>
+								</span>
+								<input type="text" placeholder="Pesquisar Pedido" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
+							</div>
+						</div>	
+						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
+							<div class="col-md-3 text-left">	
+								<label>.</label>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
+											<span class="glyphicon glyphicon-search"></span> 
+										</button>
+									</span>
+									<?php if($metodo == 2) {?>	
+										<input type="text" placeholder="Pesquisar <?php echo $nome; ?>" class="form-control Numero btn-sm" name="<?php echo $nome; ?>" id="<?php echo $nome; ?>" value="<?php echo set_value($nome, $query[$nome]); ?>">
+										<input type="hidden" name="Fornecedor" id="Fornecedor" value="">
+									<?php }elseif($metodo == 1){ ?>	
+										<input type="text" placeholder="Pesquisar <?php echo $nome; ?>" class="form-control Numero btn-sm" name="<?php echo $nome; ?>" id="<?php echo $nome; ?>" value="<?php echo set_value($nome, $query[$nome]); ?>">
+										<input type="hidden" name="Cliente" id="Cliente" value="">
+									<?php } ?>
+								</div>
+							</div>	
+						<?php }else{ ?>
+							<input type="hidden" name="Cliente" id="Cliente" value=""/>
+							<input type="hidden" name="Fornecedor" id="Fornecedor" value=""/>
 						<?php } ?>
-					</div>
-				</div>	
-			<?php }else{ ?>
-				<input type="hidden" name="Cliente" id="Cliente" value=""/>
-				<input type="hidden" name="Fornecedor" id="Fornecedor" value=""/>
-			<?php } ?>
-			<button class="btn btn-warning btn-md" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-				<span class="glyphicon glyphicon-filter"></span>
-			</button>			
-			<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
-				<a href="<?php echo base_url() . $imprimirlista . $_SESSION['log']['idSis_Empresa']; ?>">
-					<button class="btn btn-<?php echo $panel; ?> btn-md" type="button">
-						<span class="glyphicon glyphicon-print"></span>
-					</button>
-				</a>
-			<?php } ?>
-			<a href="<?php echo base_url() . $alterarparc . $_SESSION['log']['idSis_Empresa']; ?>">
-				<button class="btn btn-success btn-md" type="button">
-					<span class="glyphicon glyphicon-edit"></span>
-				</button>
-			</a>
-		</div>
-		<div class="panel-body">
-			<div <?php echo $collapse; ?> id="Receitas">
+						
+						<div class="col-md-3">
+							<div class="col-md-4">
+								<label>Filtros</label>
+								<button class="btn btn-warning btn-md btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+									<span class="glyphicon glyphicon-filter"></span>
+								</button>
+							</div>
+							<?php if ($editar == 1) { ?>
+								<?php if ($print == 1) { ?>	
+									<div class="col-md-4">
+										<label>Imprimir</label>
+										<a href="<?php echo base_url() . $imprimirlista . $_SESSION['log']['idSis_Empresa']; ?>">
+											<button class="btn btn-<?php echo $panel; ?> btn-md btn-block" type="button">
+												<span class="glyphicon glyphicon-print"></span>
+											</button>
+										</a>
+									</div>
+								<?php } ?>	
+								<div class="col-md-4">
+									<label>Baixa</label>
+									<a href="<?php echo base_url() . $alterarparc . $_SESSION['log']['idSis_Empresa']; ?>">
+										<button class="btn btn-success btn-md btn-block" type="button">
+											<span class="glyphicon glyphicon-edit"></span>
+										</button>
+									</a>
+								</div>	
+							<?php } ?>	
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>	
+	</div>	
+	<div class="row">	
+		<div class="col-md-12 ">
+			<div style="overflow: auto; height: 550px; ">
 				<?php echo (isset($list1)) ? $list1 : FALSE ?>
 			</div>
 		</div>
 	</div>
+	
 </div>
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-lg" role="document">

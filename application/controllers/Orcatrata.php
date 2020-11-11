@@ -9353,7 +9353,7 @@ class Orcatrata extends CI_Controller {
 			
 			$data['msg'] = '?m=1';
 			
-			redirect(base_url() . 'orcatrata/alterarreceitas/' . $_SESSION['log']['idSis_Empresa'] . $data['msg']);
+			redirect(base_url() . 'orcatrata/alterardespesas/' . $_SESSION['log']['idSis_Empresa'] . $data['msg']);
 
 			exit();			
 			

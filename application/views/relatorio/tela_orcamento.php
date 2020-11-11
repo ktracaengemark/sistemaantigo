@@ -85,26 +85,36 @@
 									<span class="glyphicon glyphicon-filter"></span>
 								</button>
 							</div>
+							
+							<?php if ($print == 1) { ?>	
+								<div class="col-md-4">
+									<label>Imprimir</label>
+									<a href="<?php echo base_url() . $imprimir . $_SESSION['log']['idSis_Empresa']; ?>">
+										<button class="btn btn-<?php echo $panel; ?> btn-md btn-block" type="button">
+											<span class="glyphicon glyphicon-print"></span>
+										</button>
+									</a>
+								</div>
+							<?php } ?>
 							<?php if ($editar == 1) { ?>
-								<?php if ($print == 1) { ?>	
-									<div class="col-md-4">
-										<label>Imprimir</label>
-										<a href="<?php echo base_url() . $imprimir . $_SESSION['log']['idSis_Empresa']; ?>">
-											<button class="btn btn-success btn-md btn-block" type="button">
-												<span class="glyphicon glyphicon-print"></span>
-											</button>
-										</a>
-									</div>
-								<?php } ?>	
 								<div class="col-md-4">
 									<label>Baixa</label>
 									<a href="<?php echo base_url() . $baixatodas . $_SESSION['log']['idSis_Empresa']; ?>">
-										<button class="btn btn-danger btn-md btn-block" type="button">
+										<button class="btn btn-success btn-md btn-block" type="button">
 											<span class="glyphicon glyphicon-edit"></span>
 										</button>
 									</a>
 								</div>	
-							<?php } ?>	
+							<?php }elseif($editar == 2){ ?>
+								<div class="col-md-4">
+									<label>Tela de Baixa</label>
+									<a href="<?php echo base_url() . $alterar; ?>">
+										<button class="btn btn-danger btn-md btn-block" type="button">
+											<span class="glyphicon glyphicon-alert"></span>
+										</button>
+									</a>
+								</div>
+							<?php } ?>
 						</div>
 					</div>	
 				</div>
@@ -475,74 +485,51 @@
 						</div>	
 					</div>
 				</div>
-				<!--
 				<div class="panel panel-<?php echo $panel; ?>">
 					<div class="panel-heading text-left">
-						<div class="row">
-							<?php if ($metodo == 1) { ?>
-								<input type="hidden" name="NomeAssociado" id="NomeAssociado" value="0"/>		
-								<div class="col-md-6 text-left">
-									<label for="Ordenamento">Colaborador:</label>
-									<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
-											id="NomeUsuario" name="NomeUsuario">
-										<?php
-										/*
-										foreach ($select['NomeUsuario'] as $key => $row) {
-											if ($query['NomeUsuario'] == $key) {
-												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-												echo '<option value="' . $key . '">' . $row . '</option>';
-											}
-										}
-										*/
-										?>
-									</select>
-								</div>
-							<?php } else if ($metodo == 2) { ?>	
-								<input type="hidden" name="NomeUsuario" id="NomeUsuario" value="0"/>
-								<div class="col-md-6 text-left">	
-									<div class="input-group">
-										<label for="Ordenamento">Associado:</label>
-										<input type="text" placeholder="Pesquisar Associado" class="form-control Numero btn-sm" name="NomeAssociado" id="NomeAssociado" value="<?php echo set_value('NomeAssociado', $query['NomeAssociado']); ?>">
+						<div class="row">				
+							<div class="col-md-6 text-left">
+								<label for="Ordenamento">Ordenamento:</label>
+								<div class="form-group btn-block">
+									<div class="row">
+										<div class="col-md-8">
+											<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
+													id="Campo" name="Campo">
+												<?php
+												foreach ($select['Campo'] as $key => $row) {
+													if ($query['Campo'] == $key) {
+														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+													} else {
+														echo '<option value="' . $key . '">' . $row . '</option>';
+													}
+												}
+												?>
+											</select>
+										</div>
+										<div class="col-md-4">
+											<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
+													id="Ordenamento" name="Ordenamento">
+												<?php
+												foreach ($select['Ordenamento'] as $key => $row) {
+													if ($query['Ordenamento'] == $key) {
+														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+													} else {
+														echo '<option value="' . $key . '">' . $row . '</option>';
+													}
+												}
+												?>
+											</select>
+										</div>
 									</div>
-								</div>	
-								
-								<div class="col-md-6 text-left">
-									<label for="Ordenamento">Associado:</label>
-									<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
-											id="NomeAssociado" name="NomeAssociado">
-										<?php
-										/*
-										foreach ($select['NomeAssociado'] as $key => $row) {
-											if ($query['NomeAssociado'] == $key) {
-												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-												echo '<option value="' . $key . '">' . $row . '</option>';
-											}
-										}
-										*/
-										?>
-									</select>
 								</div>
-								
-							<?php } else if ($metodo == 3) { ?>
-								<input type="hidden" name="NomeAssociado" id="NomeAssociado" value="0"/>
-								<input type="hidden" name="NomeUsuario" id="NomeUsuario" value="0"/>
-							<?php } ?>
-						</div>	
-					</div>
-				</div>
-				-->
-				<div class="panel panel-<?php echo $panel; ?>">
-					<div class="panel-heading text-left">
-						<div class="row">
-							<div class="form-footer col-md-4">
+							</div>			
+							<div class="form-footer col-md-3">
 							<label></label><br>
 								<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
 									<span class="glyphicon glyphicon-filter"></span> Filtrar
 								</button>
 							</div>
-							<div class="form-footer col-md-4">
+							<div class="form-footer col-md-3">
 							<label></label><br>
 								<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
 									<span class="glyphicon glyphicon-remove"> Fechar

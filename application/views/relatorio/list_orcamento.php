@@ -106,7 +106,7 @@
 								}
 							}else if($editar == 2){
 								echo '<td class="notclickable">
-										<a class="btn btn-md btn-success notclickable" href="' . base_url() . $edit . $row['idApp_OrcaTrata'] . '">
+										<a class="btn btn-md btn-warning notclickable" href="' . base_url() . $edit . $row['idApp_OrcaTrata'] . '">
 											<span class="glyphicon glyphicon-edit notclickable"></span>
 										</a>
 									</td>';
