@@ -51,7 +51,7 @@
 				<thead>
 					<tr>
 						<th class="active">Imp.</th>
-						<th class="active">Baixa</th>
+						<th class="active">Editar</th>
 						<th class="active">Cont.</th>
 						<th class="active">Pc</th>
 						<th class="active">Pedido</th>

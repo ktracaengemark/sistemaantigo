@@ -1,100 +1,67 @@
 <?php if ($msg) echo $msg; ?>
-<?php #echo form_open('relatorio/cobrancas', 'role="form"'); ?>
-<?php echo form_open($form_open_path, 'role="form"'); ?>	
+<?php echo form_open('relatorio/debitos', 'role="form"'); ?>	
 <div class="col-md-12">		
 	<?php echo validation_errors(); ?>
-	<div class="row">
-		<div class="col-md-12 ">
-			<div class="panel panel-<?php echo $panel; ?>">
-				<div class="panel-heading">
-					<div class="row">
-						<div class="col-md-3 text-left">
-							<label><?php echo $titulo1;?></label>
-							<div class="input-group">
-								<span class="input-group-btn">
-									<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
-										<span class="glyphicon glyphicon-search"></span> 
-									</button>
-								</span>
-								<input type="text" placeholder="Pesquisar Pedido" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
-							</div>
-						</div>	
-						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
-							<div class="col-md-3 text-left">	
-								<label>.</label>
-								<div class="input-group">
-									<span class="input-group-btn">
-										<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
-											<span class="glyphicon glyphicon-search"></span> 
-										</button>
-									</span>
-									<?php if($metodo == 2) {?>	
-										<input type="text" placeholder="Pesquisar <?php echo $nome; ?>" class="form-control Numero btn-sm" name="<?php echo $nome; ?>" id="<?php echo $nome; ?>" value="<?php echo set_value($nome, $query[$nome]); ?>">
-										<input type="hidden" name="Fornecedor" id="Fornecedor" value="">
-									<?php }elseif($metodo == 1){ ?>	
-										<input type="text" placeholder="Pesquisar <?php echo $nome; ?>" class="form-control Numero btn-sm" name="<?php echo $nome; ?>" id="<?php echo $nome; ?>" value="<?php echo set_value($nome, $query[$nome]); ?>">
-										<input type="hidden" name="Cliente" id="Cliente" value="">
-									<?php } ?>
-								</div>
-							</div>	
-						<?php }else{ ?>
-							<input type="hidden" name="Cliente" id="Cliente" value=""/>
-							<input type="hidden" name="Fornecedor" id="Fornecedor" value=""/>
-						<?php } ?>
-						
-						<div class="col-md-3">
-							<div class="col-md-4">
-								<label>Filtros</label>
-								<button class="btn btn-warning btn-md btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-									<span class="glyphicon glyphicon-filter"></span>
-								</button>
-							</div>
-							<?php if ($editar == 1) { ?>
-								<?php if ($print == 1) { ?>	
-									<div class="col-md-4">
-										<label>Imprimir</label>
-										<a href="<?php echo base_url() . $imprimirlista . $_SESSION['log']['idSis_Empresa']; ?>">
-											<button class="btn btn-<?php echo $panel; ?> btn-md btn-block" type="button">
-												<span class="glyphicon glyphicon-print"></span>
-											</button>
-										</a>
-									</div>
-								<?php } ?>	
-								<div class="col-md-4">
-									<label>Baixa</label>
-									<a href="<?php echo base_url() . $alterarparc . $_SESSION['log']['idSis_Empresa']; ?>">
-										<button class="btn btn-success btn-md btn-block" type="button">
-											<span class="glyphicon glyphicon-edit"></span>
-										</button>
-									</a>
-								</div>	
-							<?php } ?>	
-						</div>
-					</div>	
+	<div class="panel panel-danger">
+		<div class="panel-heading">
+			<h4><?php echo $titulo1; ?></h4>
+			<div class="col-md-3 text-left">
+				<div class="input-group">
+					<span class="input-group-btn">
+						<button class="btn btn-danger btn-md" type="submit">
+							<span class="glyphicon glyphicon-search"></span> 
+						</button>
+					</span>
+					<input type="text" placeholder="Pesquisar despesa" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
 				</div>
 			</div>
-		</div>	
-	</div>	
-	<div class="row">	
-		<div class="col-md-12 ">
-			<div style="overflow: auto; height: 550px; ">
+			<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>	
+			<div class="col-md-3 text-left">
+				<div class="input-group">
+					<span class="input-group-btn">
+						<button class="btn btn-danger btn-md" type="submit">
+							<span class="glyphicon glyphicon-search"></span> 
+						</button>
+					</span>
+					<input type="text" placeholder="Pesquisar Fornecedor" class="form-control Numero btn-sm" name="Fornecedor" value="<?php echo set_value('Fornecedor', $query['Fornecedor']); ?>">
+				</div>
+			</div>
+			<?php }else{ ?>
+				<input type="hidden" name="Fornecedor" id="Fornecedor" value=""/>
+			<?php } ?>
+			<button class="btn btn-warning btn-md" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+				<span class="glyphicon glyphicon-filter"></span>
+			</button>	
+			<!--
+			<a href="<?php echo base_url() . 'OrcatrataPrintCobranca/imprimir_lista/' . $_SESSION['log']['idSis_Empresa']; ?>">
+				<button class="btn btn-success btn-md" type="button">
+					<span class="glyphicon glyphicon-print"></span>
+				</button>
+			</a>
+			-->
+			<a href="<?php echo base_url() . 'Orcatrata/alterarparceladesp/' . $_SESSION['log']['idSis_Empresa']; ?>">
+				<button class="btn btn-danger btn-md" type="button">
+					<span class="glyphicon glyphicon-edit"></span>
+				</button>
+			</a>
+		</div>
+		<div class="panel-body">
+			<div <?php echo $collapse; ?> id="Receitas">
 				<?php echo (isset($list1)) ? $list1 : FALSE ?>
 			</div>
 		</div>
 	</div>
-	
 </div>
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
-			<div class="modal-header bg-<?php echo $panel; ?>">
+			<div class="modal-header bg-danger">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das <?php echo $titulo1; ?></h4>
+				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Débitos</h4>
 			</div>
 			<div class="modal-footer">
-				<div class="panel panel-<?php echo $panel; ?>">
+				<div class="panel panel-danger">
 					<div class="panel-heading text-left">
-						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 						<div class="row">	
 							<div class="col-md-3">
 								<label for="CombinadoFrete">Combinado</label>
@@ -156,17 +123,9 @@
 									?>
 								</select>
 							</div>
-						</div>
-						<?php }else{ ?>
-							<input type="hidden" name="CombinadoFrete" id="CombinadoFrete" value="0"/>
-							<input type="hidden" name="AprovadoOrca" id="AprovadoOrca" value="0"/>
-							<input type="hidden" name="ConcluidoOrca" id="ConcluidoOrca" value="0"/>
-							<input type="hidden" name="QuitadoOrca" id="QuitadoOrca" value="0"/>
-						<?php } ?>
+						</div>	
 						<div class="row">
-							<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<div class="col-md-3"></div>
-							<?php } ?>
 							<div class="col-md-3 text-left">
 								<label for="Quitado">Status das Parcelas</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
@@ -182,7 +141,6 @@
 									?>
 								</select>
 							</div>
-							<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<div class="col-md-3">
 								<label for="FinalizadoOrca">Finalizado</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -213,16 +171,11 @@
 									?>
 								</select>
 							</div>
-							<?php }else{ ?>
-								<input type="hidden" name="FinalizadoOrca" id="FinalizadoOrca" value="0"/>
-								<input type="hidden" name="CanceladoOrca" id="CanceladoOrca" value="0"/>
-							<?php } ?>
 						</div>
 					</div>
 				</div>
-				<div class="panel panel-<?php echo $panel; ?>">
+				<div class="panel panel-danger">
 					<div class="panel-heading text-left">	
-						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 						<div class="row">	
 							<div class="col-md-3">
 								<label for="Ordenamento">Compra</label>
@@ -269,13 +222,6 @@
 									?>
 								</select>
 							</div>
-						</div>
-						<?php }else{ ?>
-							<input type="hidden" name="Tipo_Orca" id="Tipo_Orca" value="0"/>
-							<input type="hidden" name="TipoFrete" id="TipoFrete" value="0"/>
-							<input type="hidden" name="AVAP" id="AVAP" value="0"/>
-						<?php } ?>
-						<div class="row">
 							<div class="col-md-3">
 								<label for="Ordenamento">Forma de Pag.</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -291,14 +237,15 @@
 									?>
 								</select>
 							</div>
-							<input type="hidden" name="idTab_TipoRD" id="idTab_TipoRD" value="<?php echo $TipoRD; ?>"/>
+						</div>
+						<div class="row">
 							<div class="col-md-3 text-left">
-								<label for="Ordenamento">Tipo <?php echo $TipoFinanceiro; ?>:</label>
+								<label for="Ordenamento">Tipo Receita:</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-										id="TipoFinanceiro" name="TipoFinanceiro">
+										id="TipoFinanceiroD" name="TipoFinanceiroD">
 									<?php
-									foreach ($select[$TipoFinanceiro] as $key => $row) {
-										if ($query['TipoFinanceiro'] == $key) {
+									foreach ($select['TipoFinanceiroD'] as $key => $row) {
+										if ($query['TipoFinanceiroD'] == $key) {
 											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 										} else {
 											echo '<option value="' . $key . '">' . $row . '</option>';
@@ -322,11 +269,10 @@
 									?>
 								</select>
 							</div>
-							
 						</div>
 					</div>
 				</div>
-				<div class="panel panel-<?php echo $panel; ?>">
+				<div class="panel panel-danger">
 					<div class="panel-heading text-left">
 						<div class="row">
 							<div class="col-md-3">
@@ -349,7 +295,6 @@
 											name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
 								</div>
 							</div>
-							<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<div class="col-md-3">
 								<label for="DataInicio2">Entrega Inc.</label>
 								<div class="input-group DatePicker">
@@ -392,12 +337,6 @@
 											name="DataFim3" value="<?php echo set_value('DataFim3', $query['DataFim3']); ?>">
 								</div>
 							</div>
-							<?php }else{ ?>
-								<input type="hidden" name="DataInicio2" id="DataInicio2" value=""/>
-								<input type="hidden" name="DataFim2" id="DataFim2" value=""/>
-								<input type="hidden" name="DataInicio3" id="DataInicio3" value=""/>
-								<input type="hidden" name="DataFim3" id="DataFim3" value=""/>
-							<?php } ?>
 							<div class="col-md-3">
 								<label for="DataInicio4">Vnc.Prc.Inc.</label>
 								<div class="input-group DatePicker">
@@ -421,51 +360,16 @@
 						</div>
 					</div>
 				</div>
-				<div class="panel panel-<?php echo $panel; ?>">
+				<div class="panel panel-danger">
 					<div class="panel-heading text-left">
-						<div class="row">				
-							<div class="col-md-6 text-left">
-								<label for="Ordenamento">Ordenamento:</label>
-								<div class="form-group btn-block">
-									<div class="row">
-										<div class="col-md-8">
-											<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-													id="Campo" name="Campo">
-												<?php
-												foreach ($select['Campo'] as $key => $row) {
-													if ($query['Campo'] == $key) {
-														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-													} else {
-														echo '<option value="' . $key . '">' . $row . '</option>';
-													}
-												}
-												?>
-											</select>
-										</div>
-										<div class="col-md-4">
-											<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-													id="Ordenamento" name="Ordenamento">
-												<?php
-												foreach ($select['Ordenamento'] as $key => $row) {
-													if ($query['Ordenamento'] == $key) {
-														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-													} else {
-														echo '<option value="' . $key . '">' . $row . '</option>';
-													}
-												}
-												?>
-											</select>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="form-footer col-md-3">
+						<div class="row">
+							<div class="form-footer col-md-4">
 							<label></label><br>
 								<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
 									<span class="glyphicon glyphicon-filter"></span> Filtrar
 								</button>
 							</div>
-							<div class="form-footer col-md-3">
+							<div class="form-footer col-md-4">
 							<label></label><br>
 								<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
 									<span class="glyphicon glyphicon-remove"> Fechar

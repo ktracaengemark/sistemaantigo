@@ -423,49 +423,14 @@
 				</div>
 				<div class="panel panel-<?php echo $panel; ?>">
 					<div class="panel-heading text-left">
-						<div class="row">				
-							<div class="col-md-6 text-left">
-								<label for="Ordenamento">Ordenamento:</label>
-								<div class="form-group btn-block">
-									<div class="row">
-										<div class="col-md-8">
-											<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-													id="Campo" name="Campo">
-												<?php
-												foreach ($select['Campo'] as $key => $row) {
-													if ($query['Campo'] == $key) {
-														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-													} else {
-														echo '<option value="' . $key . '">' . $row . '</option>';
-													}
-												}
-												?>
-											</select>
-										</div>
-										<div class="col-md-4">
-											<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-													id="Ordenamento" name="Ordenamento">
-												<?php
-												foreach ($select['Ordenamento'] as $key => $row) {
-													if ($query['Ordenamento'] == $key) {
-														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-													} else {
-														echo '<option value="' . $key . '">' . $row . '</option>';
-													}
-												}
-												?>
-											</select>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="form-footer col-md-3">
+						<div class="row">
+							<div class="form-footer col-md-4">
 							<label></label><br>
 								<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
 									<span class="glyphicon glyphicon-filter"></span> Filtrar
 								</button>
 							</div>
-							<div class="form-footer col-md-3">
+							<div class="form-footer col-md-4">
 							<label></label><br>
 								<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
 									<span class="glyphicon glyphicon-remove"> Fechar

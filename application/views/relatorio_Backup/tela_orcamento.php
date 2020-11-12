@@ -1,45 +1,81 @@
 <?php if ($msg) echo $msg; ?>
-<?php #echo form_open('relatorio/cobrancas', 'role="form"'); ?>
-<?php echo form_open($form_open_path, 'role="form"'); ?>	
-<div class="col-md-12">		
+<!--<?php #echo form_open('relatorio/comissao', 'role="form"'); ?>-->
+<?php echo form_open($form_open_path, 'role="form"'); ?>
+<div class="col-md-12 ">		
 	<?php echo validation_errors(); ?>
-	<div class="row">
+	<div class="row">	
 		<div class="col-md-12 ">
 			<div class="panel panel-<?php echo $panel; ?>">
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col-md-3 text-left">
-							<label><?php echo $titulo1;?></label>
+							<label><?php echo $titulo;?></label>
 							<div class="input-group">
 								<span class="input-group-btn">
 									<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
 										<span class="glyphicon glyphicon-search"></span> 
 									</button>
 								</span>
-								<input type="text" placeholder="Pesquisar Pedido" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
+								<input type="text" placeholder="Pesquisar Pedido" class="form-control Numero btn-sm" name="Orcamento" id="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
 							</div>
-						</div>	
-						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
-							<div class="col-md-3 text-left">	
-								<label>.</label>
+						</div>
+						<div class="col-md-3 text-left">
+							<label>.</label>
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
+										<span class="glyphicon glyphicon-search"></span> 
+									</button>
+								</span>
+								<?php if($TipoRD == 2) {?>	
+									<input type="text" placeholder="Pesquisar <?php echo $nome; ?>" class="form-control Numero btn-sm" name="<?php echo $nome; ?>" id="<?php echo $nome; ?>" value="<?php echo set_value($nome, $query[$nome]); ?>">
+									<input type="hidden" name="Fornecedor" id="Fornecedor" value="">
+								<?php }elseif($TipoRD == 1){ ?>	
+									<input type="text" placeholder="Pesquisar <?php echo $nome; ?>" class="form-control Numero btn-sm" name="<?php echo $nome; ?>" id="<?php echo $nome; ?>" value="<?php echo set_value($nome, $query[$nome]); ?>">
+									<input type="hidden" name="Cliente" id="Cliente" value="">
+								<?php } ?>
+							</div>
+						</div>
+						<?php if ($metodo == 1) { ?>
+							<input type="hidden" name="NomeAssociado" id="NomeAssociado" value=""/>		
+							<div class="col-md-3 text-left">
+								<label for="Ordenamento">Colaborador:</label>
 								<div class="input-group">
 									<span class="input-group-btn">
 										<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
 											<span class="glyphicon glyphicon-search"></span> 
 										</button>
 									</span>
-									<?php if($metodo == 2) {?>	
-										<input type="text" placeholder="Pesquisar <?php echo $nome; ?>" class="form-control Numero btn-sm" name="<?php echo $nome; ?>" id="<?php echo $nome; ?>" value="<?php echo set_value($nome, $query[$nome]); ?>">
-										<input type="hidden" name="Fornecedor" id="Fornecedor" value="">
-									<?php }elseif($metodo == 1){ ?>	
-										<input type="text" placeholder="Pesquisar <?php echo $nome; ?>" class="form-control Numero btn-sm" name="<?php echo $nome; ?>" id="<?php echo $nome; ?>" value="<?php echo set_value($nome, $query[$nome]); ?>">
-										<input type="hidden" name="Cliente" id="Cliente" value="">
-									<?php } ?>
+									<select data-placeholder="Selecione uma opção..." class="form-control" 
+											id="NomeUsuario" name="NomeUsuario">
+										<?php
+										foreach ($select['NomeUsuario'] as $key => $row) {
+											if ($query['NomeUsuario'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>	
+							</div>
+						<?php } else if ($metodo == 2) { ?>	
+							<input type="hidden" name="NomeUsuario" id="NomeUsuario" value="0"/>
+							<div class="col-md-3 text-left">
+								<label for="Ordenamento">Associado:</label>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
+											<span class="glyphicon glyphicon-search"></span> 
+										</button>
+									</span>
+									<input type="text" placeholder="Pesquisar Associado" class="form-control Numero btn-sm" name="NomeAssociado" id="NomeAssociado" value="<?php echo set_value('NomeAssociado', $query['NomeAssociado']); ?>">
 								</div>
-							</div>	
-						<?php }else{ ?>
-							<input type="hidden" name="Cliente" id="Cliente" value=""/>
-							<input type="hidden" name="Fornecedor" id="Fornecedor" value=""/>
+							</div>
+						<?php } else if ($metodo == 3) { ?>
+							<input type="hidden" name="NomeAssociado" id="NomeAssociado" value=""/>
+							<input type="hidden" name="NomeUsuario" id="NomeUsuario" value="0"/>
 						<?php } ?>
 						
 						<div class="col-md-3">
@@ -49,52 +85,61 @@
 									<span class="glyphicon glyphicon-filter"></span>
 								</button>
 							</div>
+							
+							<?php if ($print == 1) { ?>	
+								<div class="col-md-4">
+									<label>Imprimir</label>
+									<a href="<?php echo base_url() . $imprimir . $_SESSION['log']['idSis_Empresa']; ?>">
+										<button class="btn btn-<?php echo $panel; ?> btn-md btn-block" type="button">
+											<span class="glyphicon glyphicon-print"></span>
+										</button>
+									</a>
+								</div>
+							<?php } ?>
 							<?php if ($editar == 1) { ?>
-								<?php if ($print == 1) { ?>	
-									<div class="col-md-4">
-										<label>Imprimir</label>
-										<a href="<?php echo base_url() . $imprimirlista . $_SESSION['log']['idSis_Empresa']; ?>">
-											<button class="btn btn-<?php echo $panel; ?> btn-md btn-block" type="button">
-												<span class="glyphicon glyphicon-print"></span>
-											</button>
-										</a>
-									</div>
-								<?php } ?>	
 								<div class="col-md-4">
 									<label>Baixa</label>
-									<a href="<?php echo base_url() . $alterarparc . $_SESSION['log']['idSis_Empresa']; ?>">
+									<a href="<?php echo base_url() . $baixatodas . $_SESSION['log']['idSis_Empresa']; ?>">
 										<button class="btn btn-success btn-md btn-block" type="button">
 											<span class="glyphicon glyphicon-edit"></span>
 										</button>
 									</a>
 								</div>	
-							<?php } ?>	
+							<?php }elseif($editar == 2){ ?>
+								<div class="col-md-4">
+									<label>Tela de Baixa</label>
+									<a href="<?php echo base_url() . $alterar; ?>">
+										<button class="btn btn-danger btn-md btn-block" type="button">
+											<span class="glyphicon glyphicon-alert"></span>
+										</button>
+									</a>
+								</div>
+							<?php } ?>
 						</div>
 					</div>	
 				</div>
 			</div>
-		</div>	
+		</div>
 	</div>	
 	<div class="row">	
-		<div class="col-md-12 ">
+		<div class="col-md-12 ">		
 			<div style="overflow: auto; height: 550px; ">
 				<?php echo (isset($list1)) ? $list1 : FALSE ?>
 			</div>
 		</div>
 	</div>
-	
 </div>
+
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header bg-<?php echo $panel; ?>">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das <?php echo $titulo1; ?></h4>
+				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros das <?php echo $titulo; ?></h4>
 			</div>
 			<div class="modal-footer">
 				<div class="panel panel-<?php echo $panel; ?>">
 					<div class="panel-heading text-left">
-						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 						<div class="row">	
 							<div class="col-md-3">
 								<label for="CombinadoFrete">Combinado</label>
@@ -156,22 +201,56 @@
 									?>
 								</select>
 							</div>
-						</div>
-						<?php }else{ ?>
-							<input type="hidden" name="CombinadoFrete" id="CombinadoFrete" value="0"/>
-							<input type="hidden" name="AprovadoOrca" id="AprovadoOrca" value="0"/>
-							<input type="hidden" name="ConcluidoOrca" id="ConcluidoOrca" value="0"/>
-							<input type="hidden" name="QuitadoOrca" id="QuitadoOrca" value="0"/>
-						<?php } ?>
+						</div>	
 						<div class="row">
-							<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
-							<div class="col-md-3"></div>
-							<?php } ?>
+							<?php if ($metodo == 1) { ?>
+								<div class="col-md-3 text-left">
+								<input type="hidden" name="StatusComissaoOrca_Online" id="StatusComissaoOrca_Online" value="0"/>
+									<label for="StatusComissaoOrca">Status Comissão:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="StatusComissaoOrca" name="StatusComissaoOrca">
+										<?php
+										foreach ($select['StatusComissaoOrca'] as $key => $row) {
+											if ($query['StatusComissaoOrca'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+							<?php } else if ($metodo == 2) { ?>
+								<input type="hidden" name="StatusComissaoOrca" id="StatusComissaoOrca" value="0"/>
+								<div class="col-md-3 text-left">
+									<label for="StatusComissaoOrca_Online">Status Comissão Online:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="StatusComissaoOrca_Online" name="StatusComissaoOrca_Online">
+										<?php
+										foreach ($select['StatusComissaoOrca_Online'] as $key => $row) {
+											if ($query['StatusComissaoOrca_Online'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+							<?php } else if ($metodo == 3) { ?>
+								<div class="col-md-3 text-left">
+									<input type="hidden" name="StatusComissaoOrca" id="StatusComissaoOrca" value="0"/>
+									<input type="hidden" name="StatusComissaoOrca_Online" id="StatusComissaoOrca_Online" value="0"/>
+								</div>
+							<?php } ?>	
 							<div class="col-md-3 text-left">
+								<input type="hidden" name="Quitado" id="Quitado" value="0"/>
+								<!--
 								<label for="Quitado">Status das Parcelas</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 										id="Quitado" name="Quitado">
 									<?php
+									/*
 									foreach ($select['Quitado'] as $key => $row) {
 										if ($query['Quitado'] == $key) {
 											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -179,10 +258,11 @@
 											echo '<option value="' . $key . '">' . $row . '</option>';
 										}
 									}
+									*/
 									?>
 								</select>
+								-->
 							</div>
-							<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<div class="col-md-3">
 								<label for="FinalizadoOrca">Finalizado</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -213,16 +293,11 @@
 									?>
 								</select>
 							</div>
-							<?php }else{ ?>
-								<input type="hidden" name="FinalizadoOrca" id="FinalizadoOrca" value="0"/>
-								<input type="hidden" name="CanceladoOrca" id="CanceladoOrca" value="0"/>
-							<?php } ?>
 						</div>
 					</div>
 				</div>
 				<div class="panel panel-<?php echo $panel; ?>">
 					<div class="panel-heading text-left">	
-						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 						<div class="row">	
 							<div class="col-md-3">
 								<label for="Ordenamento">Compra</label>
@@ -268,14 +343,7 @@
 									}
 									?>
 								</select>
-							</div>
-						</div>
-						<?php }else{ ?>
-							<input type="hidden" name="Tipo_Orca" id="Tipo_Orca" value="0"/>
-							<input type="hidden" name="TipoFrete" id="TipoFrete" value="0"/>
-							<input type="hidden" name="AVAP" id="AVAP" value="0"/>
-						<?php } ?>
-						<div class="row">
+							</div>	
 							<div class="col-md-3">
 								<label for="Ordenamento">Forma de Pag.</label>
 								<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -291,6 +359,25 @@
 									?>
 								</select>
 							</div>
+							<!--
+							<div class="col-md-4">
+								<label for="Ordenamento">Entregador:</label>
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+										id="Entregador" name="Entregador">
+									<?php
+									foreach ($select['Entregador'] as $key => $row) {
+										if ($query['Entregador'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
+							-->
+						</div>
+						<div class="row">
 							<input type="hidden" name="idTab_TipoRD" id="idTab_TipoRD" value="<?php echo $TipoRD; ?>"/>
 							<div class="col-md-3 text-left">
 								<label for="Ordenamento">Tipo <?php echo $TipoFinanceiro; ?>:</label>
@@ -307,22 +394,6 @@
 									?>
 								</select>
 							</div>
-							<div class="col-md-3 text-left">
-								<label for="Modalidade">Modalidade:</label>
-								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-										id="Modalidade" name="Modalidade">
-									<?php
-									foreach ($select['Modalidade'] as $key => $row) {
-										if ($query['Modalidade'] == $key) {
-											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-										} else {
-											echo '<option value="' . $key . '">' . $row . '</option>';
-										}
-									}
-									?>
-								</select>
-							</div>
-							
 						</div>
 					</div>
 				</div>
@@ -349,7 +420,6 @@
 											name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
 								</div>
 							</div>
-							<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<div class="col-md-3">
 								<label for="DataInicio2">Entrega Inc.</label>
 								<div class="input-group DatePicker">
@@ -370,10 +440,10 @@
 											name="DataFim2" value="<?php echo set_value('DataFim2', $query['DataFim2']); ?>">
 								</div>
 							</div>
-						</div>	
+						</div>
 						<div class="row">
 							<div class="col-md-3">
-								<label for="DataInicio3">Vnc.Inc.</label>
+								<label for="DataInicio3">Vnc Inc.</label>
 								<div class="input-group DatePicker">
 									<span class="input-group-addon" disabled>
 										<span class="glyphicon glyphicon-calendar"></span>
@@ -383,7 +453,7 @@
 								</div>
 							</div>
 							<div class="col-md-3">
-								<label for="DataFim3">Vnc.Fim</label>
+								<label for="DataFim3">Vnc Fim</label>
 								<div class="input-group DatePicker">
 									<span class="input-group-addon" disabled>
 										<span class="glyphicon glyphicon-calendar"></span>
@@ -392,12 +462,6 @@
 											name="DataFim3" value="<?php echo set_value('DataFim3', $query['DataFim3']); ?>">
 								</div>
 							</div>
-							<?php }else{ ?>
-								<input type="hidden" name="DataInicio2" id="DataInicio2" value=""/>
-								<input type="hidden" name="DataFim2" id="DataFim2" value=""/>
-								<input type="hidden" name="DataInicio3" id="DataInicio3" value=""/>
-								<input type="hidden" name="DataFim3" id="DataFim3" value=""/>
-							<?php } ?>
 							<div class="col-md-3">
 								<label for="DataInicio4">Vnc.Prc.Inc.</label>
 								<div class="input-group DatePicker">
@@ -418,7 +482,7 @@
 											name="DataFim4" value="<?php echo set_value('DataFim4', $query['DataFim4']); ?>">
 								</div>
 							</div>
-						</div>
+						</div>	
 					</div>
 				</div>
 				<div class="panel panel-<?php echo $panel; ?>">
@@ -458,7 +522,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div>			
 							<div class="form-footer col-md-3">
 							<label></label><br>
 								<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
@@ -473,9 +537,37 @@
 							</div>
 						</div>
 					</div>
-				</div>							
+				</div>
+				<!--
+				<div class="panel panel-<?php echo $panel; ?>">
+					<div class="panel-heading text-left">
+						
+						<div class="row">	
+							<div class="col-md-12 text-left">
+								<label for="Ordenamento">Produtos:</label>
+								<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+										id="Produtos" name="Produtos">
+									<?php
+									foreach ($select['Produtos'] as $key => $row) {
+										if ($query['Produtos'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>								
+						</div>
+						
+					</div>		
+				</div>
+				-->
 			</div>
 		</div>									
 	</div>
-</div>
-</form>
+</div>																				
+
+
+
+

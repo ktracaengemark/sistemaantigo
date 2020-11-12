@@ -4,35 +4,35 @@
 			<div class="col-md-4">
 				<label for="DataFim">
 					<?php if($metodo == 2) {?>
-						Recebido
+						Entregues
 					<?php }else{?>	
-						Pago
+						Recebidos
 					<?php } ?>	
 				</label>
 				<div class="input-group">
-					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total Recebido" value="<?php echo $report->soma->somarecebido ?>">
+					<span class="input-group-addon">Prds</span>
+					<input type="text" class="form-control" disabled aria-label="Total Recebido" value="<?php echo $report->soma->somaentregue ?>">
 				</div>
 			</div>
 			<div class="col-md-4">
 				<label for="DataFim">
 					<?php if($metodo == 2) {?>
-						à Receber
+						à Entregar
 					<?php }else{?>		
-						à Pagar
+						à Receber
 					<?php } ?>	
 				</label>
 				<div class="input-group">
-					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total a Receber" value="<?php echo $report->soma->balanco ?>">
+					<span class="input-group-addon">Prds</span>
+					<input type="text" class="form-control" disabled aria-label="Total a Receber" value="<?php echo $report->soma->diferenca ?>">
 				</div>
 			</div>
 			<div class="col-md-4">
-				<label for="DataFim"><?php echo $titulo1; ?> Total:</label>
+				<label for="DataFim">Total <?php echo $titulo1; ?></label>
 				<div class="input-group">
-					<span class="input-group-addon">R$</span>
-					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somareceber ?>">
-					</div>
+					<span class="input-group-addon">Prds</span>
+					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somaentregar ?>">
+				</div>
 			</div>				
 		</div>	
 	</div>
@@ -43,7 +43,7 @@
 			<table class="table table-bordered table-condensed table-striped">	
 				<tfoot>
 					<tr>
-						<th colspan="3" class="active">Total de Parcelas: <?php echo $report->num_rows(); ?> resultado(s)</th>
+						<th colspan="3" class="active"><?php echo $report->num_rows(); ?> resultado(s)</th>
 					</tr>
 				</tfoot>
 			</table>            
@@ -51,9 +51,8 @@
 				<thead>
 					<tr>
 						<th class="active">Imp.</th>
-						<th class="active">Baixa</th>
+						<!--<th class="active">Baixa</th>-->
 						<th class="active">Cont.</th>
-						<th class="active">Pc</th>
 						<th class="active">Pedido</th>
 						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<th class="col-md-2 active"><?php echo $nome; ?></th>
@@ -71,17 +70,13 @@
 						<th class="active">DtPedido</th>
 						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<th class="active">DtEntrega</th>
-							<th class="active">DtVenc</th>
+							<!--<th class="active">DtVenc</th>-->
 						<?php } ?>
-						<th class="active">DtVencPrc</th>
-						<th class="active">Parc.R$</th>
-						<th class="active">Quitada</th>
-						<!--<th class="active">Dt.Pag</th>
-						<th class="active">Recebido</th>
-						<th class="active">Valor Recebido</th>
-						<th class="active">Data do Orç.</th>
-						<th class="active">Orç.</th>
-						<th class="active">Prod. Entr.?</th>-->						
+						<th class="active">Categoria</th>
+						<th class="active">Qtd</th>
+						<th class="active">Produto</th>
+						<th class="active">ValorR$</th>
+						<th class="active">Entregue</th>					
 					</tr>
 				</thead>
 				<tbody>
@@ -109,6 +104,7 @@
 										<span class="glyphicon glyphicon-print notclickable"></span>
 									</a>
 								</td>';
+							/*	
 							if($row['CanceladoOrca'] == "Não" && $row['Quitado'] == "Não"){	
 								echo '<td class="notclickable">
 										<a class="btn btn-md btn-success notclickable" href="' . base_url() . $edit . $row['idApp_Parcelas'] . '">
@@ -122,8 +118,8 @@
 										</a>
 									</td>';
 							}
-							echo '<td>' . $count . '</td>';	
-							echo '<td>' . $row['Parcela'] . '</td>';
+							*/
+							echo '<td>' . $count . '</td>';
 							echo '<td>' . $row['idApp_OrcaTrata'] . '- ' . $row['TipoFinanceiro'] . ' - ' . $row['Descricao'] . '</td>';
 							if($_SESSION['log']['idSis_Empresa'] != "5"){
 								echo '<td>' . $row['Nome' . $nome] . '</td>';
@@ -141,15 +137,13 @@
 							echo '<td>' . $row['DataOrca'] . '</td>';
 							if($_SESSION['log']['idSis_Empresa'] != "5"){
 								echo '<td>' . $row['DataEntregaOrca'] . '</td>';
-								echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
+								//echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
 							}
-							echo '<td>' . $row['DataVencimento'] . '</td>';
-							echo '<td class="text-left">' . $row['ValorParcela'] . '</td>';
-							echo '<td>' . $row['Quitado'] . '</td>';
-							#echo '<td>' . $row['DataPago'] . '</td>';
-							#echo '<td class="text-left">' . $row['ValorPago'] . '</td>';
-							#echo '<td class="text-left">R$ ' . $row['ValorPago'] . '</td>';
-							#echo '<td>' . $row['DataOrca'] . '</td>';
+							echo '<td class="text-left">' . $row['Catprod'] . '</td>';
+							echo '<td class="text-left">' . $row['QuantidadeProduto'] . '</td>';
+							echo '<td class="text-left">' . $row['NomeProduto'] . '</td>';
+							echo '<td class="text-left">' . $row['ValorProduto'] . '</td>';
+							echo '<td>' . $row['ConcluidoProduto'] . '</td>';
 						echo '</tr>';
 						$count++;
 					}
