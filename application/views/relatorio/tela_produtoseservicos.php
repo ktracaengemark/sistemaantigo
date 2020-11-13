@@ -124,7 +124,6 @@
 			</div>
 		</div>
 	</div>
-	
 </div>
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog modal-lg" role="document">

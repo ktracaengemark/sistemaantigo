@@ -29,7 +29,7 @@
 			<ul class="nav navbar-nav navbar-center">
 				<!--
 				<li>
-					<?php echo form_open(base_url() . 'empresacli/pesquisar', 'class="navbar-form navbar-left"'); ?>
+					<?php #echo form_open(base_url() . 'empresacli/pesquisar', 'class="navbar-form navbar-left"'); ?>
 					<div class="input-group">
 						<span class="input-group-btn">
 							<button class="btn btn-info" type="submit">
@@ -84,7 +84,7 @@
 						</button>
 						
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="<?php echo base_url() ?>pedidos/pedidos"><span class="glyphicon glyphicon-pencil"></span> Gestor de Receitas Dinâmico</a></li>
+							<li><a href="<?php echo base_url() ?>pedidos/pedidos"><span class="glyphicon glyphicon-pencil"></span> Gestor de Receitas Dinï¿½mico</a></li>
 							<?php if ($_SESSION['log']['idSis_Empresa'] == 5 ) { ?>
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>Orcatrata/cadastrar3"><span class="glyphicon glyphicon-plus"></span> Nova Receita</a></li>
@@ -92,15 +92,15 @@
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/admin"><span class="glyphicon glyphicon-list"></span> Menu</a></li>
 							<?php if ($_SESSION['log']['idSis_Empresa'] == 5 ) { ?>
-							<!--<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/orcamentoonline"><span class="glyphicon glyphicon-pencil"></span> Orçamentos Online</a></li>
+							<!--<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/orcamentoonline"><span class="glyphicon glyphicon-pencil"></span> Orï¿½amentos Online</a></li>
 							<li role="separator" class="divider"></li>							
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/produtosvendaonline"><span class="glyphicon glyphicon-pencil"></span> Produtos Vendidos Online</a></li>
 							<li role="separator" class="divider"></li>-->
 							<?php } else {?>
-							<!--<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/orcamentoonlineempresa"><span class="glyphicon glyphicon-pencil"></span> Orçamentos Online</a></li>
+							<!--<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/orcamentoonlineempresa"><span class="glyphicon glyphicon-pencil"></span> Orï¿½amentos Online</a></li>
 							<li role="separator" class="divider"></li>-->						
 							<?php } ?>
-							<!--<li><a href="<?php echo base_url() ?>relatorio/rankingreceitas"><span class="glyphicon glyphicon-equalizer"></span> Estatística das Receitas</a></li>-->
+							<!--<li><a href="<?php echo base_url() ?>relatorio/rankingreceitas"><span class="glyphicon glyphicon-equalizer"></span> Estatï¿½stica das Receitas</a></li>-->
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							<!--<li role="separator" class="divider"></li>							
 							<li><a href="<?php echo base_url() ?>relatorio/fiadorec"><span class="glyphicon glyphicon-usd"></span> Fiado das Vendas</a></li>
@@ -134,9 +134,9 @@
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/admin"><span class="glyphicon glyphicon-list"></span> Menu </a></li>
 							<!--<li role="separator" class="divider"></li>
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasdesp"><span class="glyphicon glyphicon-pencil"></span> Relatório das Despesas</a></li>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/parcelasdesp"><span class="glyphicon glyphicon-pencil"></span> Relatï¿½rio das Despesas</a></li>
 							<li role="separator" class="divider"></li>-->
-							<!--<li><a href="<?php echo base_url() ?>relatorio/rankingdespesas"><span class="glyphicon glyphicon-equalizer"></span> Estatística das Despesas</a></li>-->
+							<!--<li><a href="<?php echo base_url() ?>relatorio/rankingdespesas"><span class="glyphicon glyphicon-equalizer"></span> Estatï¿½stica das Despesas</a></li>-->
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 							<!--<li role="separator" class="divider"></li>							
 							<li><a href="<?php echo base_url() ?>relatorio/fiadodesp"><span class="glyphicon glyphicon-usd"></span> Fiado das Compras</a></li>
@@ -194,7 +194,7 @@
 							<li role="separator" class="divider"></li>
 							-->							
 							<?php if ($_SESSION['log']['idSis_Empresa'] != 5) { ?>	
-							<li><a href="<?php echo base_url() ?>relatorio/loginempresa"><span class="glyphicon glyphicon-pencil"></span> Administração</a></li>
+							<li><a href="<?php echo base_url() ?>relatorio/loginempresa"><span class="glyphicon glyphicon-pencil"></span> Administraï¿½ï¿½o</a></li>
 							<li role="separator" class="divider"></li>
 							<?php } ?>
 							<li><a href="<?php echo base_url() ?>relatorio/admin"><span class="glyphicon glyphicon-list"></span> Menu</a></li>

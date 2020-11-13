@@ -874,7 +874,15 @@ class Relatorio_model extends CI_Model {
         $data['Campo'] = (!$data['Campo']) ? 'PRC.DataProcedimento' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$filtro10 = ($data['ConcluidoProcedimento'] != '#') ? 'PRC.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
-        
+		
+		$filtro21 = ($data['idTab_TipoRD'] == 1) ? 'AND (OT.idTab_TipoRD = "1" OR F.idApp_Fornecedor = PRC.idApp_Fornecedor)' : FALSE;
+		$filtro22 = ($data['idTab_TipoRD'] == 2) ? 'AND (OT.idTab_TipoRD = "2" OR C.idApp_Cliente = PRC.idApp_Cliente)' : FALSE;
+		
+		$data['Orcamento'] = ($data['Orcamento']) ? ' AND PRC.idApp_OrcaTrata = ' . $data['Orcamento'] . '  ': FALSE;
+		$data['Cliente'] = ($data['Cliente']) ? ' AND PRC.idApp_Cliente = ' . $data['Cliente'] . '' : FALSE;
+		$data['Fornecedor'] = ($data['Fornecedor']) ? ' AND PRC.idApp_Fornecedor = ' . $data['Fornecedor'] . '' : FALSE;        
+		$filtro17 = ($data['NomeUsuario']) ? 'PRC.idSis_Usuario = "' . $data['NomeUsuario'] . '" AND ' : FALSE;		
+		
 		$query = $this->db->query('
             SELECT
 				PRC.idSis_Empresa,
@@ -883,8 +891,11 @@ class Relatorio_model extends CI_Model {
 				PRC.DataProcedimento,
 				PRC.ConcluidoProcedimento,
 				PRC.idApp_Cliente,
+				PRC.idApp_Fornecedor,
 				PRC.idApp_OrcaTrata,
-				CONCAT(IFNULL(C.idApp_Cliente,""), " - " ,IFNULL(C.NomeCliente,""), " - " ,IFNULL(C.CelularCliente,"")) AS NomeCliente,
+				OT.idTab_TipoRD,
+				CONCAT(IFNULL(C.NomeCliente,"")) AS NomeCliente,
+				CONCAT(IFNULL(F.NomeFornecedor,"")) AS NomeFornecedor,
 				U.idSis_Usuario,
 				U.Nome,
 				U.CpfUsuario
@@ -892,11 +903,17 @@ class Relatorio_model extends CI_Model {
 				App_Procedimento AS PRC
 					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PRC.idApp_OrcaTrata
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = PRC.idApp_Cliente
+					LEFT JOIN App_Fornecedor AS F ON F.idApp_Fornecedor = PRC.idApp_Fornecedor
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = PRC.idSis_Usuario
             WHERE
 				' . $filtro10 . '
-				PRC.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				(C.idApp_Cliente = PRC.idApp_Cliente OR OT.idApp_OrcaTrata = PRC.idApp_OrcaTrata)
+				' . $filtro17 . '
+				PRC.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+                ' . $filtro21 . ' 
+                ' . $filtro22 . '
+                ' . $data['Orcamento'] . '
+                ' . $data['Cliente'] . '
+                ' . $data['Fornecedor'] . '
                 ' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
 				' . $data['Ano'] . ' 
@@ -5583,7 +5600,8 @@ exit();*/
         }
 
         return $array;
-    }		
+    }
+	
 	public function select_produtos1() {
 		
         $query = $this->db->query('

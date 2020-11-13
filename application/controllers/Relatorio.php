@@ -3303,6 +3303,11 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
+            'Orcamento',
+			'idTab_TipoRD',
+            'Cliente',
+			'Fornecedor',
+			'NomeUsuario',			
 			'Dia',
 			'Mesvenc',
 			'Ano',
@@ -3311,6 +3316,12 @@ class Relatorio extends CI_Controller {
             'Campo',
         ), TRUE));
 
+		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
+		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
+		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];		
+		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
 
@@ -3331,11 +3342,11 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-        #$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+        $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
 		
-        $data['titulo'] = 'Procedimentos';
+        $data['titulo1'] = 'Procedimentos';
         //$data['titulo1'] = 'Vendidos';
 		$data['metodo'] = 2;
 		$data['form_open_path'] = 'relatorio/procedimentos2';
@@ -3353,7 +3364,12 @@ class Relatorio extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
-
+            
+			$data['bd']['Orcamento'] = $data['query']['Orcamento'];
+            $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
+            $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
@@ -3380,6 +3396,109 @@ class Relatorio extends CI_Controller {
 
     }
 
+    public function procedimentos1() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = quotes_to_entities($this->input->post(array(
+            'Orcamento',
+			'idTab_TipoRD',
+            'Cliente',
+			'Fornecedor',
+			'NomeUsuario',			
+			'Dia',
+			'Mesvenc',
+			'Ano',
+			'ConcluidoProcedimento',
+            'Ordenamento',
+            'Campo',
+        ), TRUE));
+
+		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
+		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
+		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];		
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+
+        $data['select']['ConcluidoProcedimento'] = array(
+			'#' => 'TODOS',
+            'N' => 'Não',
+            'S' => 'Sim',
+        );
+
+		$data['select']['Campo'] = array(
+			'PRC.DataProcedimento' => 'Data',
+            'PRC.idApp_Procedimento' => 'id',
+			'PRC.ConcluidoProcedimento' => 'Concl.',
+        );
+
+        $data['select']['Ordenamento'] = array(
+			'ASC' => 'Crescente',
+            'DESC' => 'Decrescente',
+        );
+
+        $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
+		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
+		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
+		
+        $data['titulo1'] = 'Procedimentos';
+        //$data['titulo1'] = 'Vendidos';
+		$data['metodo'] = 1;
+		$data['form_open_path'] = 'relatorio/procedimentos1';
+		$data['panel'] = 'danger';
+		$data['TipoFinanceiro'] = 'Despesas';
+		$data['TipoRD'] = 1;
+        $data['nome'] = 'Fornecedor';
+		$data['editar'] = 2;
+		$data['print'] = 1;
+		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
+		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
+		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
+		$data['edit'] = 'Orcatrata/baixadaparcelarec/';
+		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';		
+
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+            
+			$data['bd']['Orcamento'] = $data['query']['Orcamento'];
+            $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
+            $data['bd']['Cliente'] = $data['query']['Cliente'];
+            $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
+            $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
+			$data['bd']['Dia'] = $data['query']['Dia'];
+			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
+			$data['bd']['Ano'] = $data['query']['Ano'];
+			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+
+            $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list'] = $this->load->view('relatorio/list_procedimentos', $data, TRUE);
+            //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+        }
+
+        $this->load->view('relatorio/tela_procedimentos', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+	
     public function balanco() {
 
         if ($this->input->get('m') == 1)

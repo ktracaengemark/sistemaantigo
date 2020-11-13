@@ -238,7 +238,8 @@ class Procedimento extends CI_Controller {
                 }
 
                 #redirect(base_url() . 'relatorio/procedimento' . $data['msg']);
-				redirect(base_url() . 'agenda' . $data['msg']);
+				#redirect(base_url() . 'agenda' . $data['msg']);
+				redirect(base_url() . 'relatorio/admin' . $data['msg']);
                 exit();
             }
         }
