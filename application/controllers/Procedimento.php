@@ -754,7 +754,16 @@ class Procedimento extends CI_Controller {
         else
             $data['msg'] = '';
 
-
+		$this->load->model('Cliente_model');
+		
+		if ($id) {
+            $data['cliente']['idApp_Cliente'] = $id;
+			$_SESSION['Cliente'] = $data['cliente'] = $this->Cliente_model->get_cliente($id, TRUE);
+			$data['resumo'] = $this->Cliente_model->get_cliente($id);
+			$_SESSION['Cliente']['NomeCompleto'] = $data['resumo']['NomeCliente'];
+			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 12) ? substr($data['resumo']['NomeCliente'], 0, 12) : $data['resumo']['NomeCliente'];
+		}
+		
         //$_SESSION['OrcaTrata'] = $this->Procedimento_model->get_cliente($id, TRUE);
         //$_SESSION['OrcaTrata']['idApp_Cliente'] = $id;
         $data['aprovado'] = $this->Procedimento_model->list_orcamento($id, 'S', TRUE);

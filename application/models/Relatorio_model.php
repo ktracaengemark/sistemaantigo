@@ -285,7 +285,7 @@ class Relatorio_model extends CI_Model {
 		$data['Mespag'] = ($data['Mespag']) ? ' AND MONTH(PR.DataPago) = ' . $data['Mespag'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PR.DataVencimento) = ' . $data['Ano'] : FALSE;
 		$data['TipoFinanceiro'] = ($data['TipoFinanceiro']) ? ' AND TR.idTab_TipoFinanceiro = ' . $data['TipoFinanceiro'] : FALSE;
-		$data['idTab_TipoRD'] = ($data['idTab_TipoRD']) ? ' AND OT.idTab_TipoRD = ' . $data['idTab_TipoRD'] : FALSE;
+		$data['idTab_TipoRD'] = ($data['idTab_TipoRD']) ? ' AND OT.idTab_TipoRD = ' . $data['idTab_TipoRD'] . ' AND PRDS.idTab_TipoRD = ' . $data['idTab_TipoRD'] : FALSE;
 		$data['ObsOrca'] = ($data['ObsOrca']) ? ' AND OT.idApp_OrcaTrata = ' . $data['ObsOrca'] : FALSE;
 		$data['Orcarec'] = ($data['Orcarec']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcarec'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'PR.DataVencimento' : $data['Campo'];
@@ -341,6 +341,7 @@ class Relatorio_model extends CI_Model {
                 PR.Quitado,
 				PR.idTab_TipoRD,
 				PRDS.idApp_Produto,
+				PRDS.idTab_TipoRD,
 				PRDS.NomeProduto,
 				PRDS.ValorProduto,
 				PRDS.QtdProduto,
@@ -417,6 +418,7 @@ class Relatorio_model extends CI_Model {
             'SELECT
                 PR.ValorParcela,
 				PRDS.idApp_Produto,
+				PRDS.idTab_TipoRD,
 				PRDS.NomeProduto,
 				PRDS.ValorProduto,
 				PRDS.QtdProduto,
@@ -859,6 +861,72 @@ class Relatorio_model extends CI_Model {
             $query->soma->somaentrada = number_format($somaentrada, 2, ',', '.');
             $query->soma->balanco = number_format($balanco, 2, ',', '.');
 			
+            return $query;
+        }
+
+    }
+
+	public function list_procedimentos($data, $completo) {
+
+		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PRC.DataProcedimento) = ' . $data['Dia'] : FALSE;
+		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PRC.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
+		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PRC.DataProcedimento) = ' . $data['Ano'] : FALSE;
+        $data['Campo'] = (!$data['Campo']) ? 'PRC.DataProcedimento' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		$filtro10 = ($data['ConcluidoProcedimento'] != '#') ? 'PRC.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
+        
+		$query = $this->db->query('
+            SELECT
+				PRC.idSis_Empresa,
+				PRC.idApp_Procedimento,
+                PRC.Procedimento,
+				PRC.DataProcedimento,
+				PRC.ConcluidoProcedimento,
+				PRC.idApp_Cliente,
+				PRC.idApp_OrcaTrata,
+				CONCAT(IFNULL(C.idApp_Cliente,""), " - " ,IFNULL(C.NomeCliente,""), " - " ,IFNULL(C.CelularCliente,"")) AS NomeCliente,
+				U.idSis_Usuario,
+				U.Nome,
+				U.CpfUsuario
+            FROM
+				App_Procedimento AS PRC
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PRC.idApp_OrcaTrata
+					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = PRC.idApp_Cliente
+					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = PRC.idSis_Usuario
+            WHERE
+				' . $filtro10 . '
+				PRC.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				(C.idApp_Cliente = PRC.idApp_Cliente OR OT.idApp_OrcaTrata = PRC.idApp_OrcaTrata)
+                ' . $data['Dia'] . ' 
+				' . $data['Mesvenc'] . ' 
+				' . $data['Ano'] . ' 
+			
+            ORDER BY
+                ' . $data['Campo'] . ' 
+				' . $data['Ordenamento'] . '
+        ');
+        /*
+
+        #AND
+        #C.idApp_Cliente = PRC.idApp_Cliente
+
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            foreach ($query->result() as $row) {
+				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+
+            }
+
             return $query;
         }
 
@@ -1780,7 +1848,7 @@ class Relatorio_model extends CI_Model {
 				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 
 				OT.idTab_TipoRD = "1" AND
-				
+				APV.idTab_TipoRD = "1" AND
 				APV.ConcluidoProduto = "S"
 				' . $data['Produtos'] . '
 			GROUP BY
@@ -1807,7 +1875,8 @@ class Relatorio_model extends CI_Model {
 				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 
                 
-				OT.idTab_TipoRD = "2"
+				OT.idTab_TipoRD = "2" AND
+				APV.idTab_TipoRD = "2" 
 				' . $data['Produtos'] . '
 			GROUP BY
                 TP.idTab_Produtos

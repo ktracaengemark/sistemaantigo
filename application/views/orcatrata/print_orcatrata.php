@@ -1,6 +1,6 @@
 <?php if (isset($msg)) echo $msg; ?>
 
-<div class="col-sm-offset-2 col-md-8 ">	
+<div class="col-sm-offset-1 col-md-10 ">	
 	<?php echo form_open_multipart($form_open_path); ?>
 	<?php if ( !isset($evento) && isset($query)) { ?>
 		<?php if ($query['idApp_Cliente'] != 150001 && $query['idApp_Cliente'] != 1 && $query['idApp_Cliente'] != 0) { ?>
@@ -13,16 +13,19 @@
 							<span class="icon-bar"></span> 
 						</button>
 						
-						<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $query['idApp_Cliente']; ?>">
-							<?php echo '<small>' . $query['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '.</small>' ?> 
+						<a class="navbar-brand" href="<?php #echo base_url() . 'cliente/prontuario/' . $query['idApp_Cliente']; ?>">
+							<?php #echo '<small>' . $query['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '.</small>' ?> 
 						</a>
+						
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav navbar-center">
 							<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 								<div class="btn-group">
 									<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
-										<span class="glyphicon glyphicon-user"></span> Cliente <span class="caret"></span>
+										<span class="glyphicon glyphicon-user"></span>
+											<?php echo '<small>' . $query['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?>
+										<span class="caret"></span>
 									</button>
 									<ul class="dropdown-menu" role="menu">
 										<li>
@@ -103,8 +106,32 @@
 							<?php } ?>
 							<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 								<div class="btn-group">
+									<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+										<span class="glyphicon glyphicon-pencil"></span> Proc. <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li>
+											<a <?php if (preg_match("/procedimento\/listarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+												<a href="<?php echo base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+													<span class="glyphicon glyphicon-pencil"></span> Lista de Procedimentos
+												</a>
+											</a>
+										</li>
+										<li role="separator" class="divider"></li>
+										<li>
+											<a <?php if (preg_match("/procedimento\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+												<a href="<?php echo base_url() . 'procedimento/cadastrarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+													<span class="glyphicon glyphicon-plus"></span> Novo Procedimento
+												</a>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+								<div class="btn-group">
 									<a type="button" class="btn btn-md btn-default " href="<?php echo base_url() . 'orcatrata/alterar/' . $query['idApp_OrcaTrata']; ?>">
-										<span class="glyphicon glyphicon-edit"></span>
+										<span class="glyphicon glyphicon-edit"></span> Editar
 									</a>
 								</div>									
 							</li>
@@ -112,7 +139,7 @@
 								<div class="btn-group">
 									<a href="javascript:window.print()">
 										<button type="button" class="btn btn-md btn-default ">
-											<span class="glyphicon glyphicon-print"></span>Print
+											<span class="glyphicon glyphicon-print"></span> Imprimir
 										</button>
 									</a>
 								</div>									

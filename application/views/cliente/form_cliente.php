@@ -13,17 +13,20 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span> 
 							</button>
-							
-							<a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-								<?php echo '<small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '.</small>' ?> 
+							<!--
+							<a class="navbar-brand" href="<?php #echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+								<?php #echo '<small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '.</small>' ?>
 							</a>
+							-->
 						</div>
 						<div class="collapse navbar-collapse" id="myNavbar">
 							<ul class="nav navbar-nav navbar-center">
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
 										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
-											<span class="glyphicon glyphicon-user"></span> Cliente <span class="caret"></span>
+											<span class="glyphicon glyphicon-user"></span>
+												<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?> 
+											<span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
@@ -101,7 +104,31 @@
 										</ul>
 									</div>
 								</li>
-								<?php } ?>	
+								<?php } ?>
+								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group">
+										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+											<span class="glyphicon glyphicon-pencil"></span> Proc. <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a <?php if (preg_match("/procedimento\/listarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+													<a href="<?php echo base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-pencil"></span> Lista de Procedimentos
+													</a>
+												</a>
+											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a <?php if (preg_match("/procedimento\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'procedimento/cadastrarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-plus"></span> Novo Procedimento
+													</a>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>	
 							</ul>
 						</div>
 					  </div>
@@ -447,10 +474,12 @@
 							</div>
 
 							<br>
+							<input type="hidden" name="idSis_Empresa" value="<?php echo $query['idSis_Empresa']; ?>">
+							<input type="hidden" name="idApp_Cliente" value="<?php echo $query['idApp_Cliente']; ?>">
 							<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 							<div class="form-group">
 								<div class="row">
-									<input type="hidden" name="idApp_Cliente" value="<?php echo $query['idApp_Cliente']; ?>">
+									
 									<?php if ($metodo == 2) { ?>
 
 										<div class="col-md-6">

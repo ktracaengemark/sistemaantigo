@@ -89,7 +89,7 @@
 									</div>
 									<div class="form-group col-md-12 text-left">
 										<div class="row">		
-											<a  type="button" class="btn btn-md btn-warning btn-block" href="<?php echo base_url() ?>relatorio/balanco" role="button"> 
+											<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/balanco" role="button"> 
 												<span class="glyphicon glyphicon-usd"></span> Balanço
 											</a>
 										</div>	
@@ -107,7 +107,7 @@
 										</div>
 										<div class="form-group col-md-12 text-left">
 											<div class="row">		
-												<a type="button" class="btn btn-md btn-warning btn-block" href="<?php echo base_url() ?>relatorio/estoque" role="button"> 
+												<a type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/estoque" role="button"> 
 													<span class="glyphicon glyphicon-barcode"></span> Estoque
 												</a>
 											</div>	
@@ -156,7 +156,7 @@
 										<label for=""><h4><b>Procedimentos</b></h4></label>
 										<div class="form-group col-md-12 text-left">
 											<div class="row">										
-												<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
+												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/procedimentos2" role="button">
 													<span class="glyphicon glyphicon-pencil"></span> Procedimentos
 												</a>
 											</div>	
@@ -250,7 +250,7 @@
 									</div>
 									<div class="form-group col-md-12 text-left">
 										<div class="row">		
-											<a  type="button" class="btn btn-md btn-warning btn-block" href="<?php echo base_url() ?>relatorio/balanco" role="button"> 
+											<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/balanco" role="button"> 
 												<span class="glyphicon glyphicon-usd"></span> Balanço
 											</a>
 										</div>	
@@ -268,7 +268,7 @@
 										</div>
 										<div class="form-group col-md-12 text-left">
 											<div class="row">		
-												<a type="button" class="btn btn-md btn-warning btn-block" href="<?php echo base_url() ?>relatorio/estoque" role="button"> 
+												<a type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/estoque" role="button"> 
 													<span class="glyphicon glyphicon-barcode"></span> Estoque
 												</a>
 											</div>	
@@ -317,7 +317,7 @@
 										<label for=""><h4><b>Procedimentos</b></h4></label>
 										<div class="form-group col-md-12 text-left">
 											<div class="row">										
-												<a  type="button" class="btn btn-md btn-default btn-block" href="" role="button"> 
+												<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/procedimentos1" role="button">
 													<span class="glyphicon glyphicon-pencil"></span> Procedimentos
 												</a>
 											</div>	
