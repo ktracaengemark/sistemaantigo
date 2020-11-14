@@ -16,7 +16,7 @@
                         <th class="active">id <?php echo $nome; ?></th>
                         <th class="active"><?php echo $nome; ?></th>
                         <th class="active">Colaborador</th>
-                        <th class="active">id Prc</th>
+                        <!--<th class="active">id Prc</th>-->
                         <th class="active">Procedimento</th>
 						<th class="active">Data</th>
 						<th class="active">Concluída?</th>
@@ -99,11 +99,13 @@
 							}	
                             echo '<td>' . $row['Nome' . $nome] . '</td>';
                             echo '<td>' . $row['Nome'] . '</td>';
+							/*
 							echo '<td class="notclickable">
 									<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'procedimento/alterar/' . $row['idApp_Procedimento'] . '">
 										 ' . $row['idApp_Procedimento'] . '
 									</a>
 								</td>';
+								*/
                             #echo '<td>' . $row['idApp_Procedimento'] . '</td>';
                             echo '<td>' . $row['Procedimento'] . '</td>';
 							echo '<td>' . $row['DataProcedimento'] . '</td>';							
