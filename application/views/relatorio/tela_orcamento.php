@@ -107,7 +107,7 @@
 								</div>	
 							<?php }elseif($editar == 2){ ?>
 								<div class="col-md-4">
-									<label>Tela de Baixa</label>
+									<label>Baixa</label>
 									<a href="<?php echo base_url() . $alterar; ?>">
 										<button class="btn btn-danger btn-md btn-block" type="button">
 											<span class="glyphicon glyphicon-alert"></span>
