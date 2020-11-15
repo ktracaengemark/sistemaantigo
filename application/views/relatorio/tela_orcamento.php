@@ -98,7 +98,7 @@
 							<?php } ?>
 							<?php if ($editar == 1) { ?>
 								<div class="col-md-4">
-									<label>Baixa</label>
+									<label>Todas</label>
 									<a href="<?php echo base_url() . $baixatodas . $_SESSION['log']['idSis_Empresa']; ?>">
 										<button class="btn btn-success btn-md btn-block" type="button">
 											<span class="glyphicon glyphicon-edit"></span>
