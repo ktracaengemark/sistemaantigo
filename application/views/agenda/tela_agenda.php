@@ -43,7 +43,7 @@
 			<div class="input-group col-md-3">
 				<span class="input-group-btn">	
 					<div class=" btn btn-success" type="button" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
-						<span class="glyphicon glyphicon-chevron-up"></span> Fechar
+						<span class="glyphicon glyphicon-chevron-down"></span> Tarefas
 					</div>
 				</span>	
 					<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
@@ -334,7 +334,7 @@
 	
 		</form>		
 		
-		<div <?php echo $collapse; ?> id="Tarefas">	
+		<div <?php echo $collapse1; ?> id="Tarefas">	
 			<div class="panel-body">
 				<?php echo (isset($list1)) ? $list1 : FALSE ?>
 			</div>
