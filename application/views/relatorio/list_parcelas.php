@@ -39,7 +39,7 @@
 </div>	
 <div class="container-fluid">
 	<div class="row">
-		<div>
+		<div style="overflow: auto; height: 550px; ">
 			<table class="table table-bordered table-condensed table-striped">	
 				<tfoot>
 					<tr>

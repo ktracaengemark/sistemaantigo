@@ -77,9 +77,7 @@
 	</div>	
 	<div class="row">	
 		<div class="col-md-12 ">
-			<div style="overflow: auto; height: 550px; ">
 				<?php echo (isset($list1)) ? $list1 : FALSE ?>
-			</div>
 		</div>
 	</div>
 	
