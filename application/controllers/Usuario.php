@@ -785,6 +785,112 @@ class Usuario extends CI_Controller {
 
         $this->load->view('basico/footer');
     }
+
+    public function permissoes($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+       
+		$data['query'] = $this->input->post(array(
+			'idSis_Empresa',
+			'idSis_Usuario',
+			'DataEmUsuario',
+			'Cad_Orcam',
+			'Ver_Orcam',
+			'Edit_Orcam',
+			'Delet_Orcam',
+			'Cad_Prd',
+			'Ver_Prd',
+			'Edit_Prd',
+			'Delet_Prd',
+			'Rel_Orc',
+			'Rel_Pag',
+			'Rel_Prd',
+			'Rel_Prc',
+			'Rel_Com',
+			'Rel_Est',
+			'Bx_Orc',
+			'Bx_Pag',
+			'Bx_Prd',
+			'Bx_Prc',
+        ), TRUE);
+
+        if ($id) {
+            $data['query'] = $this->Usuario_model->get_usuario($id);
+        }
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        $this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');	
+
+        $data['select']['Cad_Orcam'] = $this->Basico_model->select_status_sn();
+        $data['select']['Ver_Orcam'] = $this->Basico_model->select_status_sn();
+        $data['select']['Edit_Orcam'] = $this->Basico_model->select_status_sn();
+        $data['select']['Delet_Orcam'] = $this->Basico_model->select_status_sn();
+        $data['select']['Cad_Prd'] = $this->Basico_model->select_status_sn();
+        $data['select']['Ver_Prd'] = $this->Basico_model->select_status_sn();
+        $data['select']['Edit_Prd'] = $this->Basico_model->select_status_sn();
+        $data['select']['Delet_Prd'] = $this->Basico_model->select_status_sn();
+        $data['select']['Rel_Orc'] = $this->Basico_model->select_status_sn();
+        $data['select']['Rel_Pag'] = $this->Basico_model->select_status_sn();
+        $data['select']['Rel_Prd'] = $this->Basico_model->select_status_sn();
+        $data['select']['Rel_Prc'] = $this->Basico_model->select_status_sn();
+        $data['select']['Rel_Com'] = $this->Basico_model->select_status_sn();
+        $data['select']['Rel_Est'] = $this->Basico_model->select_status_sn();
+        $data['select']['Bx_Orc'] = $this->Basico_model->select_status_sn();
+        $data['select']['Bx_Pag'] = $this->Basico_model->select_status_sn();
+        $data['select']['Bx_Prd'] = $this->Basico_model->select_status_sn();
+        $data['select']['Bx_Prc'] = $this->Basico_model->select_status_sn();
+		
+        $data['titulo'] = 'Permissões do Usuário';
+        $data['form_open_path'] = 'usuario/permissoes';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+        if ($data['query']['Cad_Orcam'])
+            $data['collapse'] = '';
+        else
+            $data['collapse'] = 'class="collapse"';
+
+        $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
+        $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('usuario/form_permissoes', $data);
+        } else {
+
+
+            $data['anterior'] = $this->Usuario_model->get_usuario($data['query']['idSis_Usuario']);
+            $data['campos'] = array_keys($data['query']);
+
+            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idSis_Usuario'], TRUE);
+
+            if ($data['auditoriaitem'] && $this->Usuario_model->update_usuario($data['query'], $data['query']['idSis_Usuario']) === FALSE) {
+                $data['msg'] = '?m=1';
+                redirect(base_url() . 'usuario/prontuario/' . $data['query']['idSis_Usuario'] . $data['msg']);
+                exit();
+            } else {
+
+                if ($data['auditoriaitem'] === FALSE) {
+                    $data['msg'] = '';
+                } else {
+                    $data['auditoria'] = $this->Basico_model->set_auditoriaempresa($data['auditoriaitem'], 'Sis_Usuario', 'UPDATE', $data['auditoriaitem']);
+                    $data['msg'] = '?m=1';
+                }
+
+                redirect(base_url() . 'usuario/prontuario/' . $data['query']['idSis_Usuario'] . $data['msg']);
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
 	
     public function excluir($id = FALSE) {
 
