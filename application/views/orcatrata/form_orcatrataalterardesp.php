@@ -1738,11 +1738,13 @@
 																<span class="glyphicon glyphicon-print"></span>										
 															</a>
 														</span>
-														<span class="input-group-btn">
-															<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-																<span class="glyphicon glyphicon-trash"></span>Exl
-															</button>
-														</span>
+														<?php if ($_SESSION['Usuario']['Delet_Orcam'] == "S" ) { ?>
+															<span class="input-group-btn">
+																<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+																	<span class="glyphicon glyphicon-trash"></span>Exl
+																</button>
+															</span>
+														<?php } ?>
 													</div>
 													<div class="col-md-12 alert alert-warning aguardar" role="alert" >
 														Aguarde um instante! Estamos processando sua solicitação!
@@ -1765,11 +1767,13 @@
 																			<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
 																		</button>
 																	</div>
-																	<div class="col-md-6 text-right">
-																		<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluirdesp/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
-																			<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
-																		</a>
-																	</div>
+																	<?php if ($_SESSION['Usuario']['Delet_Orcam'] == "S" ) { ?>
+																		<div class="col-md-6 text-right">
+																			<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluirdesp/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
+																				<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
+																			</a>
+																		</div>
+																	<?php } ?>
 																</div>
 															</div>
 														</div>

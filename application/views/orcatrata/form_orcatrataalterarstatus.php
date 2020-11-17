@@ -1426,11 +1426,13 @@
 																<span class="glyphicon glyphicon-print"></span>										
 															</a>
 														</span>
-														<span class="input-group-btn">	
-															<a class="btn btn-lg btn-warning" name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() . 'orcatrata/alterar2/' . $orcatrata['idApp_OrcaTrata']; ?>">
-																<span class="glyphicon glyphicon-edit"></span>Edit
-															</a>
-														</span>
+														<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
+															<span class="input-group-btn">	
+																<a class="btn btn-lg btn-warning" name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() . 'orcatrata/alterar2/' . $orcatrata['idApp_OrcaTrata']; ?>">
+																	<span class="glyphicon glyphicon-edit"></span>Edit
+																</a>
+															</span>
+														<?php } ?>
 													</div>	
 													<div class="col-md-12 alert alert-warning aguardar" role="alert" >
 														Aguarde um instante! Estamos processando sua solicitação!

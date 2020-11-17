@@ -173,11 +173,11 @@
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
-
-											<a class="btn btn-success" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>
-											
+											<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
+												<a class="btn btn-success" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+													<span class="glyphicon glyphicon-edit"></span> Editar Dados
+												</a>
+											<?php } ?>
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Entrega
 											</a>
@@ -254,11 +254,11 @@
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
-
-											<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>
-											
+											<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
+												<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+													<span class="glyphicon glyphicon-edit"></span> Editar Dados
+												</a>
+											<?php } ?>
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Entrega
 											</a>
@@ -334,10 +334,11 @@
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
-
-											<a class="btn btn-success" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>
+											<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
+												<a class="btn btn-success" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+													<span class="glyphicon glyphicon-edit"></span> Editar Dados
+												</a>
+											<?php } ?>
 											
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Entrega
@@ -416,10 +417,11 @@
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
-
-											<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>
+											<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
+												<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+													<span class="glyphicon glyphicon-edit"></span> Editar Dados
+												</a>
+											<?php } ?>
 											
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Entrega
@@ -496,10 +498,11 @@
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
-
-											<a class="btn btn-success" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>
+											<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
+												<a class="btn btn-success" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+													<span class="glyphicon glyphicon-edit"></span> Editar Dados
+												</a>
+											<?php } ?>
 											
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Entrega
@@ -576,10 +579,11 @@
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
-
-											<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>
+											<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
+												<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+													<span class="glyphicon glyphicon-edit"></span> Editar Dados
+												</a>
+											<?php } ?>
 											
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Entrega
@@ -656,10 +660,11 @@
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
-
-											<a class="btn btn-success" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>
+											<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
+												<a class="btn btn-success" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+													<span class="glyphicon glyphicon-edit"></span> Editar Dados
+												</a>
+											<?php } ?>
 											
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Entrega
@@ -736,10 +741,11 @@
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
-
-											<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>
+											<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
+												<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+													<span class="glyphicon glyphicon-edit"></span> Editar Dados
+												</a>
+											<?php } ?>
 											
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Entrega

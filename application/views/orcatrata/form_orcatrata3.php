@@ -1735,12 +1735,14 @@
 																<span class="glyphicon glyphicon-save"></span> Salvar
 															</button>														
 														</div>
+														
 														<div class="col-md-4 text-right">
 															<label></label>
 															<button  type="button" class="btn btn-md btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 																<span class="glyphicon glyphicon-trash"></span> Excluir
 															</button>
 														</div>
+														
 														<div class="col-md-12 alert alert-warning aguardar" role="alert" >
 															Aguarde um instante! Estamos processando sua solicitação!
 														</div>

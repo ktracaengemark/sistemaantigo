@@ -205,7 +205,7 @@ class Orcatrata extends CI_Controller {
 		$j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
-            if ($this->input->post('idTab_Servico' . $i)) {
+            if ($this->input->post('idTab_Servico' . $i) || $this->input->post('idTab_Valor_Servico' . $i)) {
                 $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
 				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
 				$data['servico'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Servico' . $i);
@@ -231,7 +231,7 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
 
-            if ($this->input->post('idTab_Produto' . $i)) {
+            if ($this->input->post('idTab_Produto' . $i) || $this->input->post('idTab_Valor_Produto' . $i)) {
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['produto'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Produto' . $i);
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
@@ -1065,7 +1065,7 @@ class Orcatrata extends CI_Controller {
 		$j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
-            if ($this->input->post('idTab_Servico' . $i)) {
+            if ($this->input->post('idTab_Servico' . $i) || $this->input->post('idTab_Valor_Servico' . $i)) {
                 $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
 				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
 				$data['servico'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Servico' . $i);
@@ -1091,7 +1091,7 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
 			
-            if ($this->input->post('idTab_Produto' . $i)) {
+            if ($this->input->post('idTab_Produto' . $i) || $this->input->post('idTab_Valor_Produto' . $i)) {
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['produto'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Produto' . $i);
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
@@ -1901,7 +1901,7 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
-            if ($this->input->post('idTab_Servico' . $i)) {
+            if ($this->input->post('idApp_Servico' . $i) || $this->input->post('idTab_Servico' . $i) || $this->input->post('idTab_Valor_Servico' . $i)) {
                 $data['servico'][$j]['idApp_Produto'] = $this->input->post('idApp_Servico' . $i);
                 $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
 				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
@@ -1928,7 +1928,7 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
 
-            if ($this->input->post('idTab_Produto' . $i)) {
+            if ($this->input->post('idApp_Produto' . $i) || $this->input->post('idTab_Produto' . $i) || $this->input->post('idTab_Valor_Produto' . $i)) {
                 $data['produto'][$j]['idApp_Produto'] = $this->input->post('idApp_Produto' . $i);
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['produto'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Produto' . $i);
@@ -3005,7 +3005,7 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
-            if ($this->input->post('idTab_Servico' . $i)) {
+            if ($this->input->post('idApp_Servico' . $i) || $this->input->post('idTab_Servico' . $i) || $this->input->post('idTab_Valor_Servico' . $i)) {
                 $data['servico'][$j]['idApp_Produto'] = $this->input->post('idApp_Servico' . $i);
                 $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
 				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
@@ -3032,7 +3032,7 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
 
-            if ($this->input->post('idTab_Produto' . $i)) {
+            if ($this->input->post('idApp_Produto' . $i) || $this->input->post('idTab_Produto' . $i) || $this->input->post('idTab_Valor_Produto' . $i)) {
                 $data['produto'][$j]['idApp_Produto'] = $this->input->post('idApp_Produto' . $i);
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['produto'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Produto' . $i);
@@ -4101,7 +4101,7 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
-            if ($this->input->post('idTab_Servico' . $i)) {
+            if ($this->input->post('idApp_Servico' . $i) || $this->input->post('idTab_Servico' . $i) || $this->input->post('idTab_Valor_Servico' . $i)) {
                 $data['servico'][$j]['idApp_Produto'] = $this->input->post('idApp_Servico' . $i);
                 $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
 				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
@@ -4128,7 +4128,7 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
 
-            if ($this->input->post('idTab_Produto' . $i)) {
+            if ($this->input->post('idApp_Produto' . $i) || $this->input->post('idTab_Produto' . $i) || $this->input->post('idTab_Valor_Produto' . $i)) {
                 $data['produto'][$j]['idApp_Produto'] = $this->input->post('idApp_Produto' . $i);
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['produto'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Produto' . $i);
@@ -5216,7 +5216,7 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
-            if ($this->input->post('idTab_Servico' . $i)) {
+            if ($this->input->post('idApp_Servico' . $i) || $this->input->post('idTab_Servico' . $i) || $this->input->post('idTab_Valor_Servico' . $i)) {
                 $data['servico'][$j]['idApp_Produto'] = $this->input->post('idApp_Servico' . $i);
                 $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
 				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
@@ -5243,7 +5243,7 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
 
-            if ($this->input->post('idTab_Produto' . $i)) {
+            if ($this->input->post('idApp_Produto' . $i) || $this->input->post('idTab_Produto' . $i) || $this->input->post('idTab_Valor_Produto' . $i)) {
                 $data['produto'][$j]['idApp_Produto'] = $this->input->post('idApp_Produto' . $i);
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['produto'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Produto' . $i);
@@ -6272,7 +6272,7 @@ class Orcatrata extends CI_Controller {
 		$j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
-            if ($this->input->post('idTab_Servico' . $i)) {
+            if ($this->input->post('idTab_Servico' . $i) || $this->input->post('idTab_Valor_Servico' . $i)) {
                 $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
 				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
 				$data['servico'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Servico' . $i);
@@ -6298,7 +6298,7 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
 			
-            if ($this->input->post('idTab_Produto' . $i)) {
+            if ($this->input->post('idTab_Produto' . $i) || $this->input->post('idTab_Valor_Produto' . $i)) {
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['produto'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Produto' . $i);
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
@@ -7161,7 +7161,7 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['SCount']; $i++) {
 
-            if ($this->input->post('idTab_Servico' . $i)) {
+            if ($this->input->post('idApp_Servico' . $i) || $this->input->post('idTab_Servico' . $i) || $this->input->post('idTab_Valor_Servico' . $i)) {
                 $data['servico'][$j]['idApp_Produto'] = $this->input->post('idApp_Servico' . $i);
                 $data['servico'][$j]['idTab_Produto'] = $this->input->post('idTab_Servico' . $i);
 				$data['servico'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Servico' . $i);
@@ -7188,7 +7188,7 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PCount']; $i++) {
 
-            if ($this->input->post('idTab_Produto' . $i)) {
+            if ($this->input->post('idApp_Produto' . $i) || $this->input->post('idTab_Produto' . $i) || $this->input->post('idTab_Valor_Produto' . $i)) {
                 $data['produto'][$j]['idApp_Produto'] = $this->input->post('idApp_Produto' . $i);
                 $data['produto'][$j]['idTab_Produto'] = $this->input->post('idTab_Produto' . $i);
 				$data['produto'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Produto' . $i);
