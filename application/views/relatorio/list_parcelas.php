@@ -51,7 +51,9 @@
 				<thead>
 					<tr>
 						<th class="active">Imp.</th>
-						<th class="active">Baixa</th>
+						<?php if ($_SESSION['Usuario']['Bx_Pag'] == "S") { ?>
+							<th class="active">Baixa</th>
+						<?php } ?>
 						<th class="active">Cont.</th>
 						<th class="active">Pc</th>
 						<th class="active">Pedido</th>
@@ -109,18 +111,20 @@
 										<span class="glyphicon glyphicon-print notclickable"></span>
 									</a>
 								</td>';
-							if($row['CanceladoOrca'] == "Não" && $row['Quitado'] == "Não"){	
-								echo '<td class="notclickable">
-										<a class="btn btn-md btn-success notclickable" href="' . base_url() . $edit . $row['idApp_Parcelas'] . '">
-											<span class="glyphicon glyphicon-ok notclickable"></span>
-										</a>
-									</td>';
-							}else{
-								echo '<td class="notclickable">
-										<a class="btn btn-md btn-danger notclickable">
-											<span class="glyphicon glyphicon-ok notclickable"></span>
-										</a>
-									</td>';
+							if ($_SESSION['Usuario']['Bx_Pag'] == "S") {
+								if($row['CanceladoOrca'] == "Não" && $row['Quitado'] == "Não"){	
+									echo '<td class="notclickable">
+											<a class="btn btn-md btn-success notclickable" href="' . base_url() . $edit . $row['idApp_Parcelas'] . '">
+												<span class="glyphicon glyphicon-ok notclickable"></span>
+											</a>
+										</td>';
+								}else{
+									echo '<td class="notclickable">
+											<a class="btn btn-md btn-danger notclickable">
+												<span class="glyphicon glyphicon-ok notclickable"></span>
+											</a>
+										</td>';
+								}
 							}
 							echo '<td>' . $count . '</td>';	
 							echo '<td>' . $row['Parcela'] . '</td>';

@@ -21,6 +21,16 @@
 								</a>
 							</li>
 							<li role="separator" class="divider"></li>
+							<?php if ($_SESSION['log']['idSis_Empresa'] == 5 ) { ?>
+								<li>
+									<a <?php if (preg_match("/usuario2\/permissoes\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
+										<a href="<?php echo base_url() . 'usuario2/permissoes/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
+											<span class="glyphicon glyphicon-edit"></span> Editar Permissões do Usuário
+										</a>
+									</a>
+								</li>
+								<li role="separator" class="divider"></li>
+							<?php } ?>
 							<li>
 								<a <?php if (preg_match("/usuario2\/alterarsenha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
 									<a href="<?php echo base_url() . 'usuario2/alterarsenha/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
