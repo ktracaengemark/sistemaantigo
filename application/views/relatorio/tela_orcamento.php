@@ -96,7 +96,7 @@
 									</a>
 								</div>
 							<?php } ?>
-							<?php if($_SESSION['Usuario']['Bx_Orc'] == "S") {?>
+							<?php if($_SESSION['Usuario']['Bx_Prd'] == "S" && $_SESSION['Usuario']['Bx_Pag'] == "S") {?>
 								<?php if ($editar == 1) { ?>
 									<div class="col-md-4">
 										<label>Todas</label>

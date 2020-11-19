@@ -31,7 +31,9 @@
 						<th class="active">Imp.</th>
 						<?php if($editar == 1) { ?>
 							<?php if($metodo == 3) { ?>
-								<th class="active">Baixa</th>
+								<?php if($_SESSION['Usuario']['Bx_Prd'] == "S" && $_SESSION['Usuario']['Bx_Pag'] == "S") {?>
+									<th class="active">Baixa</th>
+								<?php } ?>
 							<?php } ?>
 						<?php }elseif($editar == 2) {?>
 							<th class="active">Editar</th>
@@ -80,30 +82,32 @@
 									</a>
 									
 								</td>';
-							if($editar == 1){	
-								if($metodo == 3){
-									if($row['CanceladoOrca'] == "Não"){	
-										if($row['QuitadoOrca'] == "Sim" && $row['ConcluidoOrca'] == "Sim"){
-											echo '<td class="notclickable">
-													<a class="btn btn-md btn-danger notclickable">
-														<span class="glyphicon glyphicon-ok notclickable"></span>
-													</a>
-												</td>';
+							if($editar == 1){
+								if($_SESSION['Usuario']['Bx_Prd'] == "S" && $_SESSION['Usuario']['Bx_Pag'] == "S") {
+									if($metodo == 3){
+										if($row['CanceladoOrca'] == "Não"){	
+											if($row['QuitadoOrca'] == "Sim" && $row['ConcluidoOrca'] == "Sim"){
+												echo '<td class="notclickable">
+														<a class="btn btn-md btn-danger notclickable">
+															<span class="glyphicon glyphicon-ok notclickable"></span>
+														</a>
+													</td>';
+											}else{
+												echo '<td class="notclickable">
+														<a class="btn btn-md btn-success notclickable" href="' . base_url() . $baixa . $row['idApp_OrcaTrata'] . '">
+															<span class="glyphicon glyphicon-ok notclickable"></span>
+														</a>
+													</td>';
+											}
 										}else{
 											echo '<td class="notclickable">
-													<a class="btn btn-md btn-success notclickable" href="' . base_url() . $baixa . $row['idApp_OrcaTrata'] . '">
-														<span class="glyphicon glyphicon-ok notclickable"></span>
-													</a>
-												</td>';
+														<a class="btn btn-md btn-danger notclickable">
+															<span class="glyphicon glyphicon-ok notclickable"></span>
+														</a>
+													</td>';
 										}
-									}else{
-										echo '<td class="notclickable">
-													<a class="btn btn-md btn-danger notclickable">
-														<span class="glyphicon glyphicon-ok notclickable"></span>
-													</a>
-												</td>';
 									}
-								}
+								}	
 							}else if($editar == 2){
 								echo '<td class="notclickable">
 										<a class="btn btn-md btn-warning notclickable" href="' . base_url() . $edit . $row['idApp_OrcaTrata'] . '">
