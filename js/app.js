@@ -3691,6 +3691,8 @@ $(document).ready(function () {
     //Remove os campos adicionados dinamicamente
     $(".input_fields_wrap10").on("click",".remove_field10", function(e){ //user click on remove text
         $("#10div"+$(this).attr("id")).remove();
+        //após remover o campo refaz o cálculo do orçamento e total restante
+        calculaOrcamento();
     })
 	
     //Remove os campos adicionados dinamicamente das Categorias
