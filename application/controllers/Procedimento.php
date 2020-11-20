@@ -767,8 +767,10 @@ class Procedimento extends CI_Controller {
 		
         //$_SESSION['OrcaTrata'] = $this->Procedimento_model->get_cliente($id, TRUE);
         //$_SESSION['OrcaTrata']['idApp_Cliente'] = $id;
-        $data['aprovado'] = $this->Procedimento_model->list_orcamento($id, 'S', TRUE);
-        $data['naoaprovado'] = $this->Procedimento_model->list_orcamento($id, 'N', TRUE);
+        $data['concluido'] = $this->Procedimento_model->list_procedimento($id, 'S', TRUE);
+        $data['nao_concluido'] = $this->Procedimento_model->list_procedimento($id, 'N', TRUE);
+        $data['concluido_orc'] = $this->Procedimento_model->list_procedimento_orc($id, 'S', TRUE);
+        $data['nao_concluido_orc'] = $this->Procedimento_model->list_procedimento_orc($id, 'N', TRUE);
 
         //$data['aprovado'] = array();
         //$data['naoaprovado'] = array();

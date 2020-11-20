@@ -218,6 +218,90 @@ class Procedimento_model extends CI_Model {
         return $query[0];
     }
 
+    public function list_procedimento($id, $concluido, $completo) {
+
+        $query = $this->db->query('SELECT '
+            . 'PRC.idApp_Procedimento, '
+			. 'PRC.idApp_OrcaTrata, '
+            . 'PRC.DataProcedimento, '
+			. 'PRC.DataProcedimentoLimite, '
+			. 'PRC.ConcluidoProcedimento, '
+            . 'PRC.Procedimento '
+            . 'FROM '
+            . 'App_Procedimento AS PRC '
+            . 'WHERE '
+            . 'PRC.idApp_Cliente = ' . $id . ' AND '
+            . 'PRC.idApp_OrcaTrata = 0 AND '
+            . 'PRC.ConcluidoProcedimento = "' . $concluido . '" '
+            . 'ORDER BY '
+			. 'PRC.ConcluidoProcedimento ASC, '
+			. 'PRC.DataProcedimento DESC ');
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+          */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($completo === FALSE) {
+                return TRUE;
+            } else {
+
+                foreach ($query->result() as $row) {
+					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+                }
+                return $query;
+            }
+        }
+    }
+	
+    public function list_procedimento_orc($id, $concluido, $completo) {
+
+        $query = $this->db->query('SELECT '
+            . 'PRC.idApp_Procedimento, '
+			. 'PRC.idApp_OrcaTrata, '
+            . 'PRC.DataProcedimento, '
+			. 'PRC.DataProcedimentoLimite, '
+			. 'PRC.ConcluidoProcedimento, '
+            . 'PRC.Procedimento '
+            . 'FROM '
+            . 'App_Procedimento AS PRC '
+            . 'WHERE '
+            . 'PRC.idApp_Cliente = ' . $id . ' AND '
+            . 'PRC.idApp_OrcaTrata != 0 AND '
+            . 'PRC.ConcluidoProcedimento = "' . $concluido . '" '
+            . 'ORDER BY '
+			. 'PRC.ConcluidoProcedimento ASC, '
+			. 'PRC.DataProcedimento DESC ');
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+          */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($completo === FALSE) {
+                return TRUE;
+            } else {
+
+                foreach ($query->result() as $row) {
+					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+                }
+                return $query;
+            }
+        }
+    }
+	
     public function list_orcamento($id, $aprovado, $completo) {
 
         $query = $this->db->query('SELECT '
