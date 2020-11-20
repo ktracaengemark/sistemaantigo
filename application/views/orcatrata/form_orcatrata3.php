@@ -1395,12 +1395,14 @@
 																			</div>
 																		</div>
 																	</div>
+																	<!--
 																	<div class="col-md-1">
 																		<label><br></label><br>
 																		<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
 																			<span class="glyphicon glyphicon-trash"></span>
 																		</button>
 																	</div>
+																	-->
 																</div>
 															</div>
 														</div>

@@ -6,7 +6,7 @@
 			<?php echo form_open_multipart($form_open_path); ?>
 			<div class="panel panel-<?php echo $panel; ?>">
 				<div class="panel-heading">
-					<h4 class="text-center"><b><?php echo $titulo; ?> - <?php echo $orcatrata['idApp_OrcaTrata'] ?></b></h4>
+					<h4 class="text-center"><b>Colaborador: <?php echo $_SESSION['Orcatrata']['Nome'] ?> - <?php echo $titulo; ?> - <?php echo $orcatrata['idApp_OrcaTrata'] ?></b></h4>
 					<div style="overflow: auto; height: auto; ">
 						<div class="panel-group">
 							
@@ -861,13 +861,24 @@
 									</div>
 									<div>
 										<div class="row">
+											<input type="hidden" name="Modalidade" value="<?php echo $orcatrata['Modalidade'] ?>"/>
 											<div class="col-md-3">
 												<label>Dividido/ Mensal</label><br>
-												<h5 class="text-left"><b><?php echo '' . $_SESSION['Orcatrata']['Modalidade'] . '' ?></b></h5>
+												<span>
+													<?php 
+														if($orcatrata['Modalidade'] == "P") {
+															echo 'Dividido';
+														} elseif($orcatrata['Modalidade'] == "M"){
+															echo 'Mensal';
+														}else{
+															echo 'Mensal';
+														}
+													?>
+												</span>
+												<!--<h5 class="text-left"><b><?php #echo '' . $_SESSION['Orcatrata']['Modalidade'] . '' ?></b></h5>-->
 											</div>
 											<input type="hidden" name="QtdParcelasOrca" id="QtdParcelasOrca" value="<?php echo $orcatrata['QtdParcelasOrca'] ?>"/>
 											<input type="hidden" name="DataVencimentoOrca" id="DataVencimentoOrca"value="<?php echo $orcatrata['DataVencimentoOrca'] ?>"/>
-											<input type="hidden" name="Modalidade" value="<?php echo $orcatrata['Modalidade'] ?>"/>
 										</div>
 										<!--App_parcelasRec-->
 										<br>
@@ -958,6 +969,7 @@
 										
 									</div>
 								</div>
+								
 							</div>
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 								<br>
@@ -1080,12 +1092,14 @@
 																		</div>
 																	</div>
 																</div>
+																<!--
 																<div class="col-md-1">
 																	<label><br></label><br>
 																	<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
 																		<span class="glyphicon glyphicon-trash"></span>
 																	</button>
 																</div>
+																-->
 															</div>
 														</div>
 													</div>
@@ -1107,6 +1121,7 @@
 										</div>
 									</div>	
 								</div>
+								<br>
 							<?php } ?>
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 									<div id="CanceladoOrca" <?php echo $div['CanceladoOrca']; ?>>
@@ -1476,7 +1491,6 @@
 										<br>
 									</div>
 							<?php } ?>
-							<br>
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">

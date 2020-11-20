@@ -7,7 +7,7 @@
 			<?php echo form_open_multipart($form_open_path); ?>
 			<div class="panel panel-<?php echo $panel; ?>">
 				<div class="panel-heading">
-					<h4 class="text-center"><b><?php echo $titulo; ?> - <?php echo $orcatrata['idApp_OrcaTrata'] ?></b></h4>
+					<h4 class="text-center"><b>Colaborador: <?php echo $_SESSION['Orcatrata']['Nome'] ?> - <?php echo $titulo; ?> - <?php echo $orcatrata['idApp_OrcaTrata'] ?></b></h4>
 					<div style="overflow: auto; height: auto; ">
 						<div class="panel-group">
 							
@@ -1238,12 +1238,14 @@
 																		</select>
 																	</div>
 																	-->
+																	<!--
 																	<div class="col-md-1">
 																		<label><br></label><br>
 																		<button type="button" id="<?php echo $i ?>" class="remove_field21 btn btn-danger">
 																			<span class="glyphicon glyphicon-trash"></span>
 																		</button>
 																	</div>
+																	-->
 																</div>
 															</div>
 														</div>
@@ -1393,12 +1395,14 @@
 																		</div>
 																	</div>
 																</div>
+																<!--
 																<div class="col-md-1">
 																	<label><br></label><br>
 																	<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
 																		<span class="glyphicon glyphicon-trash"></span>
 																	</button>
 																</div>
+																-->
 															</div>
 														</div>
 													</div>
@@ -1420,6 +1424,7 @@
 										</div>
 									</div>	
 								</div>
+								<br>
 							<?php } ?>
 							<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 									<div id="CanceladoOrca" <?php echo $div['CanceladoOrca']; ?>>
@@ -1789,7 +1794,6 @@
 										<br>
 									</div>
 							<?php } ?>
-							<br>
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">

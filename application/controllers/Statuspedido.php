@@ -88,7 +88,7 @@ class Statuspedido extends CI_Controller {
             'QtdParcelasOrca',
             'DataVencimentoOrca',
             'ObsOrca',
-			#'Modalidade',
+			'Modalidade',
 			#'idTab_TipoRD',
 			'AVAP',
 			#'Tipo_Orca',
@@ -271,7 +271,7 @@ class Statuspedido extends CI_Controller {
 			$data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'barras');
             $data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'barras');
 			
-            #### Carrega os dados do cliente nas variáves de sessão ####
+			 #### Carrega os dados do cliente nas variáves de sessão ####
            # $this->load->model('Cliente_model');
             #$_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
            # $_SESSION['Cliente']['NomeCliente'] = (strlen($data['query']['NomeCliente']) > 12) ? substr($data['query']['NomeCliente'], 0, 12) : $data['query']['NomeCliente'];
