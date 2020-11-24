@@ -119,7 +119,7 @@
 										?>
 									</select>
 								</div>
-								<div class="col-md-2 text-left">
+								<div class="col-md-3 text-left">
 									<label for="Prioridade">Prioridade</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 											id="Prioridade" name="Prioridade">
@@ -134,7 +134,7 @@
 										?>
 									</select>
 								</div>
-								<div class="col-md-2 text-left">
+								<div class="col-md-3 text-left">
 									<label for="Statustarefa">StsTarefa</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 											id="Statustarefa" name="Statustarefa">
@@ -149,7 +149,7 @@
 										?>
 									</select>
 								</div>
-								
+								<!--
 								<div class="col-md-2 text-left">
 									<label for="SubPrioridade">SubPri</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
@@ -180,6 +180,7 @@
 										?>
 									</select>
 								</div>
+								-->
 								<!--
 								<div class="col-md-3 text-left">
 									<label for="ConcluidoProcedimento">St Tarefa</label>
@@ -214,6 +215,7 @@
 								</div>
 								-->
 							</div>
+							<!--
 							<div class="row">								
 								<div class="col-md-10 text-left">
 									<label for="Ordenamento">Tarefa:</label>
@@ -231,25 +233,86 @@
 									</select>
 								</div>
 							</div>
+							-->
 							<br>
 							<div class="row">
-								<div class="form-group col-md-3 text-left">
-									<div class="form-footer ">
-										<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
-											<span class="glyphicon glyphicon-filter"></span> Filtrar
-										</button>
+								<div class="col-md-3 text-left">
+									<label for="NomeUsuario">Quem Cadastrou?</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="NomeUsuario" name="NomeUsuario">
+										<?php
+										foreach ($select['NomeUsuario'] as $key => $row) {
+											if ($query['NomeUsuario'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								<div class="col-md-3 text-left">
+									<label for="Compartilhar">Quem Fazer?</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+											id="Compartilhar" name="Compartilhar">
+										<?php
+										foreach ($select['Compartilhar'] as $key => $row) {
+											if ($query['Compartilhar'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+							</div>
+							<br>
+							<div class="row text-left">
+								<div class="col-md-3">
+									<label for="DataInicio">Inciar (de:).</label>
+									<div class="input-group DatePicker">
+										<span class="input-group-addon" disabled>
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+												autofocus name="DataInicio" value="<?php echo set_value('DataInicio', $query['DataInicio']); ?>">
 									</div>
 								</div>
-								<div class="form-group col-md-3 text-left">
-									<div class="form-footer ">
-										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-											<span class="glyphicon glyphicon-remove"> Fechar
-										</button>
+								<div class="col-md-3">
+									<label for="DataFim">Iniciar (até:)</label>
+									<div class="input-group DatePicker">
+										<span class="input-group-addon" disabled>
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+												name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
+									</div>
+								</div>
+								<div class="col-md-3">
+									<label for="DataInicio2">Concl (de:)</label>
+									<div class="input-group DatePicker">
+										<span class="input-group-addon" disabled>
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+												name="DataInicio2" value="<?php echo set_value('DataInicio2', $query['DataInicio2']); ?>">
+									</div>
+								</div>
+								<div class="col-md-3">
+									<label for="DataFim2">Concl (até:)</label>
+									<div class="input-group DatePicker">
+										<span class="input-group-addon" disabled>
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+												name="DataFim2" value="<?php echo set_value('DataFim2', $query['DataFim2']); ?>">
 									</div>
 								</div>
 							</div>
+							<br>
 							<div class="row">	
-								<div class="col-md-12 text-left">
+								<div class="col-md-6 text-left">
 									<label for="Ordenamento">Ordenamento:</label>
 									<div class="form-group">
 										<div class="row">
@@ -267,7 +330,7 @@
 													?>
 												</select>
 											</div>
-											<div class="col-md-4">
+											<div class="col-md-6">
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
 														id="Ordenamento" name="Ordenamento">
 													<?php
@@ -284,6 +347,23 @@
 										</div>
 									</div>
 								</div>								
+							</div>
+							<br>
+							<div class="row">
+								<div class="form-group col-md-3 text-left">
+									<div class="form-footer ">
+										<button class="btn btn-warning btn-block" name="pesquisar" value="0" type="submit">
+											<span class="glyphicon glyphicon-filter"></span> Filtrar
+										</button>
+									</div>
+								</div>
+								<div class="form-group col-md-3 text-left">
+									<div class="form-footer ">
+										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+											<span class="glyphicon glyphicon-remove"> Fechar
+										</button>
+									</div>
+								</div>
 							</div>							
 							<!--
 							<div class="row">	
@@ -334,7 +414,7 @@
 	
 		</form>		
 		
-		<div <?php echo $collapse1; ?> id="Tarefas">	
+		<div <?php echo $collapse; ?> id="Tarefas">	
 			<div class="panel-body">
 				<?php echo (isset($list1)) ? $list1 : FALSE ?>
 			</div>

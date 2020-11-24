@@ -325,7 +325,7 @@ class Tarefa extends CI_Controller {
 
         if ($id) {
             #### App_Procedimento ####
-            $data['tarefa'] = $this->Tarefa_model->get_tarefa($id);
+            $_SESSION['Tarefa'] = $data['tarefa'] = $this->Tarefa_model->get_tarefa($id);
             $data['tarefa']['DataProcedimento'] = $this->basico->mascara_data($data['tarefa']['DataProcedimento'], 'barras');
             $data['tarefa']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['tarefa']['DataProcedimentoLimite'], 'barras');
 			#$data['tarefa']['Prioridade'] = $this->basico->prioridade($data['tarefa']['Prioridade'], '123');

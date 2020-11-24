@@ -43,6 +43,10 @@ class Agenda extends CI_Controller {
 			'NomeCliente',
 			'NomeEmpresa',
 			'NomeEmpresaCli',
+            'DataInicio',
+            'DataFim',
+			'DataInicio2',
+            'DataFim2',
 			'Dia',
 			'Mesvenc',
 			'Ano',
@@ -120,8 +124,10 @@ class Agenda extends CI_Controller {
         );		
 
 		$data['select']['Campo'] = array(
+			'P.idSis_Usuario' => 'Quem Cadastrou',
+			'P.Compartilhar' => 'Quem Fazer',
 			'P.DataProcedimento' => 'Data do Inicio',
-			'P.DataProcedimentoLimite' => 'Data do Fim',			
+			'P.DataProcedimentoLimite' => 'Data da Concl.',			
 			'P.Prioridade' => 'Sts.Tarefa',
 			'P.Categoria' => 'Categoria',
         );
@@ -191,7 +197,12 @@ class Agenda extends CI_Controller {
 			$data['bd']['SubPrioridade'] = $data['query']['SubPrioridade'];			
 			$data['bd']['Procedimento'] = $data['query']['Procedimento'];
 			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
+			$data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
 			$data['bd']['Categoria'] = $data['query']['Categoria'];
+			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+            $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
+            $data['bd']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
 			
             $data['report'] = $this->Agenda_model->list1_procedimento($data['bd'],TRUE);
 

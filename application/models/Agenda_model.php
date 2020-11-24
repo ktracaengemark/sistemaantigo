@@ -297,7 +297,7 @@ class Agenda_model extends CI_Model {
 				P.idSis_Usuario,
 				P.CpfUsuario,
 				P.CelularUsuario,
-				CONCAT(IFNULL(F.Abrev,""), " --- ", IFNULL(P.Nome,"")) AS NomeUsuario
+				CONCAT(IFNULL(P.Nome,"")) AS NomeUsuario
             FROM
                 Sis_Usuario AS P
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
@@ -305,7 +305,7 @@ class Agenda_model extends CI_Model {
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND 
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
-				F.Abrev ASC
+				P.Nome ASC
         ');
 
         $array = array();
@@ -322,7 +322,7 @@ class Agenda_model extends CI_Model {
         $query = $this->db->query('
             SELECT
 				P.idSis_Usuario,
-				CONCAT(IFNULL(F.Abrev,""), " --- ", IFNULL(P.Nome,"")) AS NomeUsuario
+				CONCAT(IFNULL(P.Nome,"")) AS NomeUsuario
             FROM
                 Sis_Usuario AS P
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
@@ -330,11 +330,12 @@ class Agenda_model extends CI_Model {
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY 
-				F.Abrev ASC
+				P.Nome ASC
         ');
 
         $array = array();
-        $array[50] = ':: Ninguém ::';
+        $array[0] = ':: Tudo ::';
+        $array[50] = ':: O Próprio ::';
         $array[51] = ':: Todos ::';
         foreach ($query->result() as $row) {
             $array[$row->idSis_Usuario] = $row->NomeUsuario;
@@ -633,6 +634,12 @@ class Agenda_model extends CI_Model {
 	
 	public function list1_procedimento($data, $completo) {
 	
+		$date_inicio_proc = ($data['DataInicio']) ? 'P.DataProcedimento >= "' . $data['DataInicio'] . '" AND ' : FALSE;
+		$date_fim_proc = ($data['DataFim']) ? 'P.DataProcedimento <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		
+		$date_inicio_limite = ($data['DataInicio2']) ? 'P.DataProcedimentoLimite >= "' . $data['DataInicio2'] . '" AND ' : FALSE;
+		$date_fim_limite = ($data['DataFim2']) ? 'P.DataProcedimentoLimite <= "' . $data['DataFim2'] . '" AND ' : FALSE;
+		
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
@@ -654,6 +661,8 @@ class Agenda_model extends CI_Model {
 		$data['ConcluidoSubProcedimento'] = ($data['ConcluidoSubProcedimento'] != '') ? ' AND SP.ConcluidoSubProcedimento = ' . $data['ConcluidoSubProcedimento'] : FALSE;
 		$data['Prioridade'] = ($data['Prioridade'] != '') ? ' AND P.Prioridade = ' . $data['Prioridade'] : FALSE;
 		$data['Procedimento'] = ($data['Procedimento']) ? ' AND P.idApp_Procedimento = ' . $data['Procedimento'] : FALSE;
+		$data['Compartilhar'] = ($data['Compartilhar']) ? ' AND P.Compartilhar = ' . $data['Compartilhar'] : FALSE;
+		$data['NomeUsuario'] = ($data['NomeUsuario']) ? ' AND P.idSis_Usuario = ' . $data['NomeUsuario'] : FALSE;
 
 		
 		$query = $this->db->query('
@@ -689,19 +698,25 @@ class Agenda_model extends CI_Model {
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
 					LEFT JOIN Tab_Categoria AS CT ON CT.idTab_Categoria = P.Categoria
             WHERE
+                ' . $date_inicio_proc . '
+                ' . $date_fim_proc . '
+                ' . $date_inicio_limite . '
+                ' . $date_fim_limite . '
 				' . $filtro6 . '
 				' . $filtro9 . '
-				' . $filtro10 . '
 				' . $filtro11 . '
-				' . $filtro12 . '
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				(P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ')) AND
+				(P.Compartilhar = "51" OR P.Compartilhar = ' . $_SESSION['log']['idSis_Usuario'] . ' OR P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '))) AND
+				P.Statustarefa != "3" AND
 				P.idApp_OrcaTrata = "0" AND
 				P.idApp_Cliente = "0" AND
 				P.idApp_Fornecedor = "0" 
-				' . $data['Procedimento'] . '
-            ORDER BY
+				' . $data['Compartilhar'] . '
+				' . $data['NomeUsuario'] . '
+			GROUP BY
+				P.idApp_Procedimento
+			ORDER BY
 				' . $data['Campo'] . '
 				' . $data['Ordenamento'] . ',				
 				P.DataProcedimento DESC,

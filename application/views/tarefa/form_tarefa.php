@@ -16,8 +16,8 @@
 			</div>	
 		</div>
 		-->
-		<div class="col-md-2"></div>
-		<div class="col-md-8 ">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 ">
 			<?php #echo validation_errors(); ?>
 
 			<div class="panel panel-<?php echo $panel; ?>">
@@ -47,79 +47,158 @@
 								<div class="row">
 									<div class="col-md-4">
 										<label  for="Procedimento">Tarefa:</label>
-										<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?> maxlength="40"
+										<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?> maxlength="200"
 												  name="Procedimento"><?php echo $tarefa['Procedimento']; ?></textarea>
-									<?php echo form_error('Procedimento'); ?>
-									</div>									
-									<div class="col-md-4">
-										<div class="row">
-											<div class="col-md-12 " >
-												<label for="Categoria">Categoria:</label>
-												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-														id="Categoria" name="Categoria">
-													<option value="">- Selec. Categoria -</option>	
-													<?php
-													foreach ($select['Categoria'] as $key => $row) {
-														if ($tarefa['Categoria'] == $key) {
-															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-														} else {
-															echo '<option value="' . $key . '">' . $row . '</option>';
+										<?php echo form_error('Procedimento'); ?>
+									</div>
+									<?php if ($metodo == 1) { ?>
+										<div class="col-md-4">
+											<div class="row">
+												<div class="col-md-12 " >
+													<label for="Categoria">Categoria:</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+															id="Categoria" name="Categoria">
+														<option value="">- Selec. Categoria -</option>	
+														<?php
+														foreach ($select['Categoria'] as $key => $row) {
+															if ($tarefa['Categoria'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
 														}
-													}
-													?>
-												</select>
+														?>
+													</select>
+													
+												</div>
+											</div>	
+											<div class="row">
+												<div class="col-md-12 text-left">
+													<label class="sr-only" for="Cadastrar">Cadastrar no BD</label>
+													<div class="btn-group" data-toggle="buttons">
+														<?php
+														foreach ($select['Cadastrar'] as $key => $row) {
+															if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
+
+															($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+															if ($cadastrar['Cadastrar'] == $key) {
+																echo ''
+																. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
+																. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																. '</label>'
+																;
+															} else {
+																echo ''
+																. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
+																. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																. 'autocomplete="off" value="' . $key . '" >' . $row
+																. '</label>'
+																;
+															}
+														}
+														?>
+
+													</div>
+													<?php echo form_error('Categoria'); ?>
+												</div>
+											</div>	
+											<div id="Cadastrar" <?php echo $div['Cadastrar']; ?>>	
+												<div class="row">											
+													<div class="col-md-6 text-left">
+														<a class="btn btn-md btn-info btn-block"   target="_blank" href="<?php echo base_url() ?>categoria2/cadastrar3/" role="button"> 
+															<span class="glyphicon glyphicon-plus"></span>Cat
+														</a>
+													</div>
 												
-											</div>
-										</div>	
-										<div class="row">
-											<div class="col-md-12 text-left">
-												<label class="sr-only" for="Cadastrar">Cadastrar no BD</label>
-												<div class="btn-group" data-toggle="buttons">
-													<?php
-													foreach ($select['Cadastrar'] as $key => $row) {
-														if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
-
-														($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-														if ($cadastrar['Cadastrar'] == $key) {
-															echo ''
-															. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
-															. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
-															. 'autocomplete="off" value="' . $key . '" checked>' . $row
-															. '</label>'
-															;
-														} else {
-															echo ''
-															. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
-															. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
-															. 'autocomplete="off" value="' . $key . '" >' . $row
-															. '</label>'
-															;
-														}
-													}
-													?>
-
+													<div class="col-md-6 text-left">
+														<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+																<span class="glyphicon glyphicon-refresh"></span>Rec.
+														</button>
+														<?php echo form_error('Cadastrar'); ?>
+													</div>											
 												</div>
-												<?php echo form_error('Categoria'); ?>
+											</div>	
+										</div>
+									<?php } elseif ($metodo == 2) { ?>
+										<?php if ($_SESSION['Tarefa']['idSis_Usuario'] == $_SESSION['log']['idSis_Usuario'] ) { ?>
+											<div class="col-md-4">
+												<div class="row">
+													<div class="col-md-12 " >
+														<label for="Categoria">Categoria:</label>
+														<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+																id="Categoria" name="Categoria">
+															<option value="">- Selec. Categoria -</option>	
+															<?php
+															foreach ($select['Categoria'] as $key => $row) {
+																if ($tarefa['Categoria'] == $key) {
+																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																} else {
+																	echo '<option value="' . $key . '">' . $row . '</option>';
+																}
+															}
+															?>
+														</select>
+														
+													</div>
+												</div>	
+												<div class="row">
+													<div class="col-md-12 text-left">
+														<label class="sr-only" for="Cadastrar">Cadastrar no BD</label>
+														<div class="btn-group" data-toggle="buttons">
+															<?php
+															foreach ($select['Cadastrar'] as $key => $row) {
+																if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
+
+																($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																if ($cadastrar['Cadastrar'] == $key) {
+																	echo ''
+																	. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
+																	. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																	. '</label>'
+																	;
+																} else {
+																	echo ''
+																	. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
+																	. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																	. 'autocomplete="off" value="' . $key . '" >' . $row
+																	. '</label>'
+																	;
+																}
+															}
+															?>
+
+														</div>
+														<?php echo form_error('Categoria'); ?>
+													</div>
+												</div>	
+												<div id="Cadastrar" <?php echo $div['Cadastrar']; ?>>	
+													<div class="row">											
+														<div class="col-md-6 text-left">
+															<a class="btn btn-md btn-info btn-block"   target="_blank" href="<?php echo base_url() ?>categoria2/cadastrar3/" role="button"> 
+																<span class="glyphicon glyphicon-plus"></span>Cat
+															</a>
+														</div>
+													
+														<div class="col-md-6 text-left">
+															<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+																	<span class="glyphicon glyphicon-refresh"></span>Rec.
+															</button>
+															<?php echo form_error('Cadastrar'); ?>
+														</div>											
+													</div>
+												</div>	
 											</div>
-										</div>	
-										<div id="Cadastrar" <?php echo $div['Cadastrar']; ?>>	
-											<div class="row">											
-												<div class="col-md-6 text-left">
-													<a class="btn btn-md btn-info btn-block"   target="_blank" href="<?php echo base_url() ?>categoria2/cadastrar3/" role="button"> 
-														<span class="glyphicon glyphicon-plus"></span>Cat
-													</a>
-												</div>
-											
-												<div class="col-md-6 text-left">
-													<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
-															<span class="glyphicon glyphicon-refresh"></span>Rec.
-													</button>
-													<?php echo form_error('Cadastrar'); ?>
-												</div>											
-											</div>
-										</div>	
-									</div>									
+										<?php } else { ?>
+											<input type="hidden" name="Categoria" id="Categoria" value="<?php echo $tarefa['Categoria']; ?>">
+											<input type="hidden" name="Cadastrar" id="Cadastrar" value="S">
+										<?php } ?>
+									<?php } ?>
+										
+									
 									<!--
 									<div class="col-md-2">
 										<label for="Procedimento">Tarefa:</label>
@@ -164,6 +243,34 @@
 									</div>
 								</div>	
 								<div class="row">
+									<div class="col-md-8" >
+										<div class="row">
+											<div class="col-md-6 text-left">
+												<label for="DataProcedimento">Iniciar em:</label>
+												<div class="input-group <?php echo $datepicker; ?>">
+													<span class="input-group-addon" disabled>
+														<span class="glyphicon glyphicon-calendar"></span>
+													</span>
+													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+														   autofocus name="DataProcedimento" value="<?php echo $tarefa['DataProcedimento']; ?>">
+													
+												</div>
+												<?php echo form_error('DataProcedimento'); ?>
+											</div>
+											<div class="col-md-6 text-left">
+												<label for="DataProcedimentoLimite">Concluir em:</label>
+												<div class="input-group <?php echo $datepicker; ?>">
+													<span class="input-group-addon" disabled>
+														<span class="glyphicon glyphicon-calendar"></span>
+													</span>
+													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+														   autofocus name="DataProcedimentoLimite" value="<?php echo $tarefa['DataProcedimentoLimite']; ?>">
+													
+												</div>
+												<?php echo form_error('DataProcedimentoLimite'); ?>
+											</div>
+										</div>
+									</div>
 									<div class="col-md-4 ">
 										<label for="Statustarefa">StatusTRF:</label>
 										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -179,36 +286,6 @@
 											}
 											?>
 										</select>
-									</div>
-									<div class="col-md-8" >
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-6 text-left">
-													<label for="DataProcedimento">Iniciar em:</label>
-													<div class="input-group <?php echo $datepicker; ?>">
-														<span class="input-group-addon" disabled>
-															<span class="glyphicon glyphicon-calendar"></span>
-														</span>
-														<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-															   autofocus name="DataProcedimento" value="<?php echo $tarefa['DataProcedimento']; ?>">
-														
-													</div>
-													<?php echo form_error('DataProcedimento'); ?>
-												</div>
-												<div class="col-md-6 text-left">
-													<label for="DataProcedimentoLimite">Concluir em:</label>
-													<div class="input-group <?php echo $datepicker; ?>">
-														<span class="input-group-addon" disabled>
-															<span class="glyphicon glyphicon-calendar"></span>
-														</span>
-														<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-															   autofocus name="DataProcedimentoLimite" value="<?php echo $tarefa['DataProcedimentoLimite']; ?>">
-														
-													</div>
-													<?php echo form_error('DataProcedimentoLimite'); ?>
-												</div>
-											</div>
-										</div>
 									</div>
 									<!--
 									<div class="col-md-2 form-inline">
@@ -244,26 +321,47 @@
 										</div>
 									</div>
 									-->
-									<!--
 									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
-									<div class="col-md-3 " >
-										<label for="Compartilhar">Compartilhar:</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-												id="Compartilhar" name="Compartilhar">
-												
-											<?php
-											foreach ($select['Compartilhar'] as $key => $row) {
-												if ($tarefa['Compartilhar'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											?>
-										</select>
-									</div>
+										<?php if ($metodo == 1) { ?>
+											<div class="col-md-4">
+												<label for="Compartilhar">Quem Fazer?</label>		
+												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+														id="Compartilhar" name="Compartilhar">
+														
+													<?php
+													foreach ($select['Compartilhar'] as $key => $row) {
+														if ($tarefa['Compartilhar'] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>
+												</select>
+											</div>
+										<?php } elseif ($metodo == 2){ ?>
+											<?php if ($_SESSION['Tarefa']['idSis_Usuario'] == $_SESSION['log']['idSis_Usuario'] ) { ?>	
+												<div class="col-md-4">
+													<label for="Compartilhar">Quem Fazer?</label>		
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+															id="Compartilhar" name="Compartilhar">
+															
+														<?php
+														foreach ($select['Compartilhar'] as $key => $row) {
+															if ($tarefa['Compartilhar'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+												</div>
+											<?php } else { ?>
+												<input type="hidden" name="Compartilhar" id="Compartilhar" value="<?php echo $tarefa['Compartilhar']; ?>">
+											<?php } ?>	
+										<?php } ?>	
 									<?php } ?>
-									-->
 								</div>
 							</div>	
 						</div>		
@@ -410,12 +508,14 @@
 														</div>
 													</div>
 													-->
+													<!--
 													<div class="col-md-1">
 														<label><br></label><br>
 														<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
 															<span class="glyphicon glyphicon-trash"></span>
 														</button>
 													</div>
+													-->
 												</div>
 											</div>	
 										</div>		
@@ -526,12 +626,13 @@
 									<span class="glyphicon glyphicon-save"></span> Salvar
 								</button>
 							</div>
-							<div class="col-md-6 text-right">
-								<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-									<span class="glyphicon glyphicon-trash"></span> Excluir
-								</button>
-							</div>
-
+							<?php if ($_SESSION['Tarefa']['idSis_Usuario'] == $_SESSION['log']['idSis_Usuario'] ) { ?>
+								<div class="col-md-6 text-right">
+									<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+										<span class="glyphicon glyphicon-trash"></span> Excluir
+									</button>
+								</div>
+							<?php } ?>
 							<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
@@ -574,6 +675,6 @@
 			</div>
 
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-1"></div>
 	</div>
 </div>	
