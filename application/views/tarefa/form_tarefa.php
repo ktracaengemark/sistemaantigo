@@ -40,7 +40,6 @@
 					<?php echo form_open_multipart($form_open_path); ?>
 
 					<!--App_Procedimento-->
-
 					<div class="form-group">
 						<div class="panel panel-info">
 							<div class="panel-heading">	
@@ -529,7 +528,7 @@
 
 									<div class="row">
 										<div class="col-md-4">
-											<a class="btn btn-xs btn-warning" onclick="adicionaSubProcedimento()">
+											<a class="btn btn-xs btn-warning" onclick="adicionaSubTarefa()">
 												<span class="glyphicon glyphicon-plus"></span> Adicionar Ação
 											</a>
 										</div>
@@ -578,7 +577,7 @@
 											<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
 												   name="DataConclusao" value="<?php echo $tarefa['DataConclusao']; ?>">
 											<span class="input-group-addon" disabled>
-												<span class="glyphicon glyphicon-calendar"></span>
+											<span class="glyphicon glyphicon-calendar"></span>
 											</span>
 										</div>
 									</div>

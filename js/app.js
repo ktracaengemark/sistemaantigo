@@ -1127,6 +1127,156 @@ function adicionaSubProcedimento() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
+						<div class="col-md-5">\
+							<label for="SubProcedimento'+pt+'">Ação:</label>\
+							<textarea class="form-control" id="SubProcedimento'+pt+'"\
+									  name="SubProcedimento'+pt+'"></textarea>\
+						</div>\
+						<div class="col-md-3">\
+							<label for="ConcluidoSubProcedimento">Concluido? </label><br>\
+							<div class="form-group">\
+								<div class="btn-group" data-toggle="buttons">\
+									<label class="btn btn-warning active" name="radio_ConcluidoSubProcedimento'+pt+'" id="radio_ConcluidoSubProcedimento'+pt+'N">\
+									<input type="radio" name="ConcluidoSubProcedimento'+pt+'" id="radiogeraldinamico"\
+										autocomplete="off" value="N" checked>Não\
+									</label>\
+									<label class="btn btn-default" name="radio_ConcluidoSubProcedimento'+pt+'" id="radio_ConcluidoSubProcedimento'+pt+'S">\
+									<input type="radio" name="ConcluidoSubProcedimento'+pt+'" id="radiogeraldinamico"\
+										autocomplete="off" value="S">Sim\
+									</label>\
+								</div>\
+							</div>\
+						</div>\
+						<input type="hidden" name="DataSubProcedimento'+pt+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
+						<div class="col-md-3">\
+							<label for="DataSubProcedimentoLimite'+pt+'">Concluído em:</label>\
+							<div class="input-group DatePicker">\
+								<span class="input-group-addon" disabled>\
+									<span class="glyphicon glyphicon-calendar"></span>\
+								</span>\
+								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
+									   name="DataSubProcedimentoLimite'+pt+'" value="">\
+							</div>\
+						</div>\
+						<div class="col-md-1">\
+							<label><br></label><br>\
+							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\
+								<span class="glyphicon glyphicon-trash"></span>\
+							</button>\
+						</div>\
+					</div>\
+				</div>\
+			</div>\
+        </div>'
+    ); //add input box
+    //habilita o botão de calendário após a geração dos campos dinâmicos
+    $('.DatePicker').datetimepicker(dateTimePickerOptions);
+
+    //get a reference to the select element
+    $select = $('#listadinamicad'+pt);
+
+    //request the JSON data and parse into the select element
+    $.ajax({
+        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=7',
+        dataType: 'JSON',
+        type: "GET",
+        success: function (data) {
+            //clear the current content of the select
+            $select.html('');
+            //iterate over the data and append a select option
+            //$select.append('<option value="">-- Selecione uma opção --</option>');
+            $.each(data, function (key, val) {
+                //alert(val.id);
+                if (val.id == chosen)
+                    $select.append('<option value="' + val.id + '" selected="selected">' + val.name + '</option>');
+                else
+                    $select.append('<option value="' + val.id + '">' + val.name + '</option>');
+            })
+        },
+        error: function () {
+            //alert('erro listadinamicaB');
+            //if there is an error append a 'none available' option
+            $select.html('<option id="-1">ERRO</option>');
+        }
+
+    });
+	
+    //get a reference to the select2 element
+    $select2 = $('#listadinamicae'+pt);	
+	
+    $.ajax({
+        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=10',
+        dataType: 'JSON',
+        type: "GET",
+        success: function (data) {
+            //clear the current content of the select2
+            $select2.html('');
+            //iterate over the data and append a select2 option
+            //$select2.append('<option value="">-- Selecione uma opção --</option>');
+            $.each(data, function (key, val) {
+                //alert(val.id);
+                if (val.id == chosen2)
+                    $select2.append('<option value="' + val.id + '" selected="selected">' + val.name + '</option>');
+                else
+                    $select2.append('<option value="' + val.id + '">' + val.name + '</option>');
+            })
+        },
+        error: function () {
+            //alert('erro listadinamicaB');
+            //if there is an error append a 'none available' option
+            $select2.html('<option id="-1">ERRO</option>');
+        }
+
+    });	
+	
+    //permite o uso de radio buttons nesse bloco dinâmico
+    $('input:radio[id="radiogeraldinamico"]').change(function() {
+
+        var value = $(this).val();
+        var name = $(this).attr("name");
+
+        //console.log(value + ' <<>> ' + name);
+
+        $('label[name="radio_' + name + '"]').removeClass();
+        $('label[name="radio_' + name + '"]').addClass("btn btn-default");
+        $('#radio_' + name + value).addClass("btn btn-warning active");
+        //$('#radiogeral'+ value).addClass("btn btn-warning active");
+
+    });	
+
+}
+
+function adicionaSubTarefa() {
+
+    var pt = $("#PTCount").val(); //initlal text box count
+
+    //alert( $("#SCount").val() );
+    pt++; //text box increment
+    $("#PTCount").val(pt);
+    //console.log(pt);
+
+    if (pt >= 2) {
+        //console.log( $("#listadinamicad"+(pt-1)).val() );
+        var chosen;
+        chosen = $("#listadinamicad"+(pt-1)).val();
+        //console.log( chosen + ' :: ' + pt );
+    }
+	
+    if (pt >= 2) {
+        //console.log( $("#listadinamicae"+(pt-1)).val() );
+        var chosen2;
+        chosen2 = $("#listadinamicae"+(pt-1)).val();
+        //console.log( chosen + ' :: ' + pt );
+    }	
+
+    //Captura a data do dia e carrega no campo correspondente
+    var currentDate = moment();
+
+    $(".input_fields_wrap3").append('\
+        <div class="form-group" id="3div'+pt+'">\
+			<div class="panel panel-info">\
+				<div class="panel-heading">\
+					<div class="row">\
 						<div class="col-md-3">\
 							<label for="SubProcedimento'+pt+'">Ação:</label>\
 							<textarea class="form-control" id="SubProcedimento'+pt+'"\

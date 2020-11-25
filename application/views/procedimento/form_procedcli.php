@@ -117,7 +117,7 @@
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
 										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
-											<span class="glyphicon glyphicon-pencil"></span> Proc. <span class="caret"></span>
+											<span class="glyphicon glyphicon-pencil"></span> SAC <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
@@ -156,26 +156,47 @@
 						<div class="panel-body">
 
 							<?php echo form_open_multipart($form_open_path); ?>
-
-							<!--<div class="panel-group" id="accordion8" role="tablist" aria-multiselectable="true">-->
+							<!--App_Procedimento-->
 							<div class="panel-group">	
 								<div class="panel panel-info">
 									<div class="panel-heading">
-										<div class="col-md-1"></div>
-										<div class="form-group text-left">
-											<div class="row">
-												<div class="col-md-6">
-													<label for="Procedimento">Procedimento:</label>
-													<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?>
-															  name="Procedimento"><?php echo $orcatrata['Procedimento']; ?></textarea>
+										<div class="row text-left">
+											<div class="col-md-6">
+												<label for="Procedimento">Procedimento:</label>
+												<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?>
+														  name="Procedimento"><?php echo $orcatrata['Procedimento']; ?></textarea>
+											</div>
+											<div class="col-md-3 text-left">
+												<label for="ConcluidoProcedimento">Concluído?</label><br>
+												<div class="btn-group" data-toggle="buttons">
+													<?php
+													foreach ($select['ConcluidoProcedimento'] as $key => $row) {
+														if (!$orcatrata['ConcluidoProcedimento'])$orcatrata['ConcluidoProcedimento'] = 'N';
+
+														($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+														if ($orcatrata['ConcluidoProcedimento'] == $key) {
+															echo ''
+															. '<label class="btn btn-warning active" name="ConcluidoProcedimento_' . $hideshow . '">'
+															. '<input type="radio" name="ConcluidoProcedimento" id="' . $hideshow . '" '
+															. 'autocomplete="off" value="' . $key . '" checked>' . $row
+															. '</label>'
+															;
+														} else {
+															echo ''
+															. '<label class="btn btn-default" name="ConcluidoProcedimento_' . $hideshow . '">'
+															. '<input type="radio" name="ConcluidoProcedimento" id="' . $hideshow . '" '
+															. 'autocomplete="off" value="' . $key . '" >' . $row
+															. '</label>'
+															;
+														}
+													}
+													?>
 												</div>
 											</div>
-										</div>
-										<div class="col-md-1"></div>
-										<div class="form-group text-left">
-											<div class="row">
+											<div id="ConcluidoProcedimento" <?php echo $div['ConcluidoProcedimento']; ?>>
 												<div class="col-md-3">
-													<label for="DataProcedimentoLimite">Dt. Retorno:</label>
+													<label for="DataProcedimentoLimite">Concluído em:</label>
 													<div class="input-group <?php echo $datepicker; ?>">
 														<span class="input-group-addon" disabled>
 															<span class="glyphicon glyphicon-calendar"></span>
@@ -184,38 +205,150 @@
 																name="DataProcedimentoLimite" value="<?php echo $orcatrata['DataProcedimentoLimite']; ?>">
 													</div>
 												</div>
-											</div>
+											</div>	
 										</div>
-										<div class="col-md-1"></div>
-										<div class="form-group text-left">
-											<div class="row">
-												<div class="col-md-3 form-inline">
-													<label for="ConcluidoProcedimento">Concluído?</label><br>
-													<div class="form-group">
-														<div class="btn-group" data-toggle="buttons">
-															<?php
-															foreach ($select['ConcluidoProcedimento'] as $key => $row) {
-																(!$orcatrata['ConcluidoProcedimento']) ? $orcatrata['ConcluidoProcedimento'] = 'N' : FALSE;
+									</div>
+								</div>
+							</div>
+					
+							<div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
+								<div class="panel panel-primary">
+									 <div class="panel-heading" role="tab" id="heading3" data-toggle="collapse" data-parent="#accordion3" data-target="#collapse3">
+										<h4 class="panel-title">
+											<a class="accordion-toggle">
+												<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+												Ações
+											</a>
+										</h4>
+									</div>
 
-																if ($orcatrata['ConcluidoProcedimento'] == $key) {
-																	echo ''
-																	. '<label class="btn btn-warning active" name="radiobutton_ConcluidoProcedimento" id="radiobutton_ConcluidoProcedimento' . $key . '">'
-																	. '<input type="radio" name="ConcluidoProcedimento" id="radiobutton" '
-																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																	. '</label>'
-																	;
-																} else {
-																	echo ''
-																	. '<label class="btn btn-default" name="radiobutton_ConcluidoProcedimento" id="radiobutton_ConcluidoProcedimento' . $key . '">'
-																	. '<input type="radio" name="ConcluidoProcedimento" id="radiobutton" '
-																	. 'autocomplete="off" value="' . $key . '" >' . $row
-																	. '</label>'
-																	;
-																}
-															}
-															?>
+									<div id="collapse3" class="panel-collapse" role="tabpanel" aria-labelledby="heading3" aria-expanded="false">
+										<div class="panel-body">
+
+											<input type="hidden" name="PTCount" id="PTCount" value="<?php echo $count['PTCount']; ?>"/>
+
+											<div class="input_fields_wrap3">
+
+											<?php
+											for ($i=1; $i <= $count['PTCount']; $i++) {
+											?>
+
+											<?php if ($metodo > 1) { ?>
+											<input type="hidden" name="idApp_SubProcedimento<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['idApp_SubProcedimento']; ?>"/>
+											<?php } ?>
+
+											<div class="form-group" id="3div<?php echo $i ?>">
+												<div class="panel panel-info">
+													<div class="panel-heading">			
+														<div class="row">																					
+															<!--
+															<div class="col-md-3">
+																<label for="Profissional<?php echo $i ?>">Profissional:</label>
+																<?php if ($i == 1) { ?>
+																<?php } ?>
+																<select data-placeholder="Selecione uma opção..." class="form-control"
+																		 id="listadinamicac<?php echo $i ?>" name="Profissional<?php echo $i ?>">
+																	<option value="">-- Selecione uma opção --</option>
+																	<?php
+																	foreach ($select['Profissional'] as $key => $row) {
+																		if ($procedtarefa[$i]['Profissional'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	?>
+																</select>
+															</div>
+															-->
+															<div class="col-md-5">
+																<label for="SubProcedimento<?php echo $i ?>">Ação:</label>
+																<textarea class="form-control" id="SubProcedimento<?php echo $i ?>" <?php echo $readonly; ?>
+																		  name="SubProcedimento<?php echo $i ?>"><?php echo $procedtarefa[$i]['SubProcedimento']; ?></textarea>
+															</div>
+															<!--
+															<div class="col-md-2">
+																<label for="Prioridade<?php echo $i ?>">Prioridade:</label>
+																<?php if ($i == 1) { ?>
+																<?php } ?>
+																<select data-placeholder="Selecione uma opção..." class="form-control" 
+																		 id="listadinamicad<?php echo $i ?>" name="Prioridade<?php echo $i ?>">
+																	
+																	<?php
+																	foreach ($select['Prioridade'] as $key => $row) {
+																		if ($procedtarefa[$i]['Prioridade'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	?>
+																</select>
+															</div>
+															-->															
+															<input type="hidden" name="DataSubProcedimento<?php echo $i ?>" id="DataSubProcedimento<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataSubProcedimento']; ?>">
+															<div class="col-md-3">
+																<label for="ConcluidoSubProcedimento">Concluído? </label><br>
+																<div class="form-group">
+																	<div class="btn-group" data-toggle="buttons">
+																		<?php
+																		foreach ($select['ConcluidoSubProcedimento'] as $key => $row) {
+																			(!$procedtarefa[$i]['ConcluidoSubProcedimento']) ? $procedtarefa[$i]['ConcluidoSubProcedimento'] = 'N' : FALSE;
+
+																			if ($procedtarefa[$i]['ConcluidoSubProcedimento'] == $key) {
+																				echo ''
+																				. '<label class="btn btn-warning active" name="radiobutton_ConcluidoSubProcedimento' . $i . '" id="radiobutton_ConcluidoSubProcedimento' . $i .  $key . '">'
+																				. '<input type="radio" name="ConcluidoSubProcedimento' . $i . '" id="radiobuttondinamico" '
+																				. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																				. '</label>'
+																				;
+																			} else {
+																				echo ''
+																				. '<label class="btn btn-default" name="radiobutton_ConcluidoSubProcedimento' . $i . '" id="radiobutton_ConcluidoSubProcedimento' . $i .  $key . '">'
+																				. '<input type="radio" name="ConcluidoSubProcedimento' . $i . '" id="radiobuttondinamico" '
+																				. 'autocomplete="off" value="' . $key . '" >' . $row
+																				. '</label>'
+																				;
+																			}
+																		}
+																		?>
+																	</div>
+																</div>
+															</div>
+															<div class="col-md-3">
+																<label for="DataSubProcedimentoLimite<?php echo $i ?>">Concluído em:</label>
+																<div class="input-group <?php echo $datepicker; ?>">
+																	<span class="input-group-addon" disabled>
+																		<span class="glyphicon glyphicon-calendar"></span>
+																	</span>															
+																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																		   name="DataSubProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataSubProcedimentoLimite']; ?>">
+																</div>
+															</div>
+															<!--
+															<div class="col-md-1">
+																<label><br></label><br>
+																<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
+																	<span class="glyphicon glyphicon-trash"></span>
+																</button>
+															</div>
+															-->
 														</div>
-													</div>
+													</div>	
+												</div>		
+											</div>
+
+											<?php
+											}
+											?>
+
+											</div>
+
+											<div class="row">
+												<div class="col-md-4">
+													<a class="btn btn-xs btn-warning" onclick="adicionaSubProcedimento()">
+														<span class="glyphicon glyphicon-plus"></span> Adicionar Ação
+													</a>
 												</div>
 											</div>
 										</div>

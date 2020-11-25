@@ -355,6 +355,7 @@ class Procedimento_model extends CI_Model {
     public function delete_orcatrata($id) {
 
         $query = $this->db->delete('App_Procedimento', array('idApp_Procedimento' => $id));
+        $query = $this->db->delete('App_SubProcedimento', array('idApp_Procedimento' => $id));
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;

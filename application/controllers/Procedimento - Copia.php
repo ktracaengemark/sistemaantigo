@@ -13,7 +13,7 @@ class Procedimento extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Procedimento_model', 'Tarefa_model', 'Usuario_model', 'Relatorio_model', 'Formapag_model', 'Cliente_model'));
+        $this->load->model(array('Basico_model', 'Procedimento_model', 'Usuario_model', 'Relatorio_model', 'Formapag_model', 'Cliente_model'));
         $this->load->driver('session');
 
         #load header view
@@ -469,25 +469,13 @@ class Procedimento extends CI_Controller {
 
         ), TRUE));
 
-        (!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
+        //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
+        //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
+
         //Data de hoje como default
         (!$data['orcatrata']['DataProcedimento']) ? $data['orcatrata']['DataProcedimento'] = date('d/m/Y H:i:s', time()) : FALSE;
 
-        $j = 1;
-        for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
-
-            if ($this->input->post('DataSubProcedimentoLimite' . $i) || $this->input->post('SubProcedimento' . $i)) {
-                $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->input->post('DataSubProcedimento' . $i);
-                $data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->input->post('DataSubProcedimentoLimite' . $i);
-				//$data['procedtarefa'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
-                //$data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
-				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
-				$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
-                $j++;
-            }
-
-        }
-        $data['count']['PTCount'] = $j - 1;		
+        //Fim do trecho de código que dá pra melhorar
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
@@ -496,26 +484,8 @@ class Procedimento extends CI_Controller {
 
 
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
-        $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
-		/*
-		$data['select']['Prioridade'] = array (
-            '1' => 'Alta',
-            '2' => 'Media',
-			'3' => 'Baixa',
-        );
-		$data['select']['Statustarefa'] = array (
-            '1' => 'A Fazer',
-            '2' => 'Fazendo',
-			'3' => 'Feito',
-        );
-		
-		$data['select']['Statussubtarefa'] = array (
-            '1' => 'A Fazer',
-            '2' => 'Fazendo',
-			'3' => 'Feito',
-        );			
-		*/
+
         $data['titulo'] = 'Cadastar Procedimento com Cliente';
         $data['form_open_path'] = 'procedimento/cadastrarproc';
         $data['readonly'] = '';
@@ -523,13 +493,6 @@ class Procedimento extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
 
-		(!$data['orcatrata']['ConcluidoProcedimento']) ? $data['orcatrata']['ConcluidoProcedimento'] = 'N' : FALSE;		
-		$data['radio'] = array(
-            'ConcluidoProcedimento' => $this->basico->radio_checked($data['orcatrata']['ConcluidoProcedimento'], 'Procedimento Concluido', 'NS'),
-        );
-        ($data['orcatrata']['ConcluidoProcedimento'] == 'S') ?
-            $data['div']['ConcluidoProcedimento'] = '' : $data['div']['ConcluidoProcedimento'] = 'style="display: none;"';
-		
 		/*
         if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorDev'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
             $data['orcamentoin'] = 'in';
@@ -585,20 +548,6 @@ class Procedimento extends CI_Controller {
             $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
             $data['orcatrata']['idApp_Procedimento'] = $this->Procedimento_model->set_orcatrata($data['orcatrata']);
-			
-            #### App_SubProcedimento ####
-            if (isset($data['procedtarefa'])) {
-                $max = count($data['procedtarefa']);
-                for($j=1;$j<=$max;$j++) {
-                    $data['procedtarefa'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-                    $data['procedtarefa'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-                    $data['procedtarefa'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-                    $data['procedtarefa'][$j]['idApp_Procedimento'] = $data['orcatrata']['idApp_Procedimento'];
-                    $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimento'], 'mysql');
-					$data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimentoLimite'], 'mysql');
-                }
-                $data['procedtarefa']['idApp_SubProcedimento'] = $this->Tarefa_model->set_procedtarefa($data['procedtarefa']);
-            }			
 
 /*
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -652,26 +601,7 @@ class Procedimento extends CI_Controller {
 
         ), TRUE));
 
-        (!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
 
-        $j = 1;
-        for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
-
-            if ($this->input->post('DataSubProcedimento' . $i) || $this->input->post('DataSubProcedimentoLimite' . $i) || $this->input->post('SubProcedimento' . $i)) {
-                $data['procedtarefa'][$j]['idApp_SubProcedimento'] = $this->input->post('idApp_SubProcedimento' . $i);
-                $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->input->post('DataSubProcedimento' . $i);
-                $data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->input->post('DataSubProcedimentoLimite' . $i);
-				//$data['procedtarefa'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
-                //$data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
-				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
-				$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
-                $j++;
-            }
-
-        }
-        $data['count']['PTCount'] = $j - 1;
-		
-		
         if ($id) {
             #### App_Procedimento ####
             $data['orcatrata'] = $this->Procedimento_model->get_orcatrata($id);
@@ -683,21 +613,7 @@ class Procedimento extends CI_Controller {
             $_SESSION['Cliente']['NomeCliente'] = (strlen($data['query']['NomeCliente']) > 12) ? substr($data['query']['NomeCliente'], 0, 12) : $data['query']['NomeCliente'];
 			#$_SESSION['log']['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
 
-            #### App_SubProcedimento ####
-            $data['procedtarefa'] = $this->Tarefa_model->get_procedtarefa($id);
-            if (count($data['procedtarefa']) > 0) {
-                $data['procedtarefa'] = array_combine(range(1, count($data['procedtarefa'])), array_values($data['procedtarefa']));
-                $data['count']['PTCount'] = count($data['procedtarefa']);
-
-                if (isset($data['procedtarefa'])) {
-
-                    for($j=1; $j <= $data['count']['PTCount']; $j++) {
-                        $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimento'], 'barras');
-						$data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimentoLimite'], 'barras');
-					}
-                }
-            }
-		}
+        }
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
@@ -705,38 +621,14 @@ class Procedimento extends CI_Controller {
         $this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
 
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
-        $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
-		/*
-		$data['select']['Prioridade'] = array (
-            '1' => 'Alta',
-            '2' => 'Media',
-			'3' => 'Baixa',
-        );
-		$data['select']['Statustarefa'] = array (
-            '1' => 'A Fazer',
-            '2' => 'Fazendo',
-			'3' => 'Feito',
-        );
-		$data['select']['Statussubtarefa'] = array (
-            '1' => 'A Fazer',
-            '2' => 'Fazendo',
-			'3' => 'Feito',
-        );
-		*/
+
         $data['titulo'] = 'Editar Procedimento com Cliente';
         $data['form_open_path'] = 'procedimento/alterarproc';
         $data['readonly'] = '';
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
-		
-		(!$data['orcatrata']['ConcluidoProcedimento']) ? $data['orcatrata']['ConcluidoProcedimento'] = 'N' : FALSE;		
-		$data['radio'] = array(
-            'ConcluidoProcedimento' => $this->basico->radio_checked($data['orcatrata']['ConcluidoProcedimento'], 'Procedimento Concluido', 'NS'),
-        );
-        ($data['orcatrata']['ConcluidoProcedimento'] == 'S') ?
-            $data['div']['ConcluidoProcedimento'] = '' : $data['div']['ConcluidoProcedimento'] = 'style="display: none;"';		
 
     /*
 		//if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
@@ -799,45 +691,16 @@ class Procedimento extends CI_Controller {
                 $data['orcatrata']['idApp_Procedimento'], TRUE);
             $data['update']['orcatrata']['bd'] = $this->Procedimento_model->update_orcatrata($data['orcatrata'], $data['orcatrata']['idApp_Procedimento']);
 
-            #### App_SubProcedimento ####
-            $data['update']['procedtarefa']['anterior'] = $this->Tarefa_model->get_procedtarefa($data['orcatrata']['idApp_Procedimento']);
-            if (isset($data['procedtarefa']) || (!isset($data['procedtarefa']) && isset($data['update']['procedtarefa']['anterior']) ) ) {
 
-                if (isset($data['procedtarefa']))
-                    $data['procedtarefa'] = array_values($data['procedtarefa']);
-                else
-                    $data['procedtarefa'] = array();
+/*
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //*******CORRIGIR -  ALTERAR PARA ENTRAR COM TODAS AS MUDANÇAS NA TABELA DE LOG*****
+            $data['campos'] = array_keys($data['query']);
+            $data['anterior'] = array();
+            //*******CORRIGIR -  ALTERAR PARA ENTRAR COM TODAS AS MUDANÇAS NA TABELA DE LOG*****
+//////////////////////////////////////////////////Dados Basicos/////////////////////////////////////////////////////////////////////////
+*/
 
-                //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
-                $data['update']['procedtarefa'] = $this->basico->tratamento_array_multidimensional($data['procedtarefa'], $data['update']['procedtarefa']['anterior'], 'idApp_SubProcedimento');
-
-                $max = count($data['update']['procedtarefa']['inserir']);
-                for($j=0;$j<$max;$j++) {
-                    $data['update']['procedtarefa']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-                    $data['update']['procedtarefa']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
-					$data['update']['procedtarefa']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-                    $data['update']['procedtarefa']['inserir'][$j]['idApp_Procedimento'] = $data['orcatrata']['idApp_Procedimento'];
-                    $data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimento'], 'mysql');
-					$data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimentoLimite'], 'mysql');
-                }
-
-                $max = count($data['update']['procedtarefa']['alterar']);
-                for($j=0;$j<$max;$j++) {
-                    $data['update']['procedtarefa']['alterar'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['update']['procedtarefa']['alterar'][$j]['DataSubProcedimento'], 'mysql');
-					$data['update']['procedtarefa']['alterar'][$j]['DataSubProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedtarefa']['alterar'][$j]['DataSubProcedimentoLimite'], 'mysql');
-                }
-
-                if (count($data['update']['procedtarefa']['inserir']))
-                    $data['update']['procedtarefa']['bd']['inserir'] = $this->Tarefa_model->set_procedtarefa($data['update']['procedtarefa']['inserir']);
-
-                if (count($data['update']['procedtarefa']['alterar']))
-                    $data['update']['procedtarefa']['bd']['alterar'] =  $this->Tarefa_model->update_procedtarefa($data['update']['procedtarefa']['alterar']);
-
-                if (count($data['update']['procedtarefa']['excluir']))
-                    $data['update']['procedtarefa']['bd']['excluir'] = $this->Tarefa_model->delete_procedtarefa($data['update']['procedtarefa']['excluir']);
-
-            }
-			
             //if ($data['idApp_Procedimento'] === FALSE) {
             //if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
             if ($data['auditoriaitem'] && !$data['update']['orcatrata']['bd']) {

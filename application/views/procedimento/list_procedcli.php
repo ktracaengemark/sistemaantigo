@@ -110,7 +110,7 @@
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
 										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
-											<span class="glyphicon glyphicon-pencil"></span> Proc. <span class="caret"></span>
+											<span class="glyphicon glyphicon-pencil"></span> SAC <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
@@ -149,10 +149,10 @@
 
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs" role="tablist">
-									<li role="presentation"><a href="#concluido" aria-controls="concluido" role="tab" data-toggle="tab">Concl S/Orç</a></li>
-									<li role="presentation"	class="active"><a href="#nao_concluido" aria-controls="nao_concluido" role="tab" data-toggle="tab">Não Concl S/Orç</a></li>
-									<li role="presentation"><a href="#concluido_orc" aria-controls="concluido_orc" role="tab" data-toggle="tab">Concl C/Orç</a></li>
-									<li role="presentation"><a href="#nao_concluido_orc" aria-controls="nao_concluido_orc" role="tab" data-toggle="tab">Não Concl C/Orç</a></li>
+									<li role="presentation"><a href="#concluido" aria-controls="concluido" role="tab" data-toggle="tab">Info/Recl.(Sim)</a></li>
+									<li role="presentation"	class="active"><a href="#nao_concluido" aria-controls="nao_concluido" role="tab" data-toggle="tab">Info/Recl.(Não)</a></li>
+									<li role="presentation"><a href="#concluido_orc" aria-controls="concluido_orc" role="tab" data-toggle="tab">C/Orç.(Sim)</a></li>
+									<li role="presentation"><a href="#nao_concluido_orc" aria-controls="nao_concluido_orc" role="tab" data-toggle="tab">C/Orç.(Não)</a></li>
 								</ul>
 
 								<!-- Tab panes -->
