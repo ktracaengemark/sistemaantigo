@@ -929,7 +929,7 @@ class Consulta extends CI_Controller {
 			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 12) ? substr($data['resumo']['NomeCliente'], 0, 12) : $data['resumo']['NomeCliente'];
 		}
 		
-        $data['titulo'] = 'Listar Consultas';
+		$data['titulo'] = 'Agenda : ';
         $data['panel'] = 'primary';
         $data['novo'] = '';
         $data['metodo'] = 4;

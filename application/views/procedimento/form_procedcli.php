@@ -3,8 +3,8 @@
 <div class="container-fluid">
 	<div class="row">
 		
-		<div class="col-md-2"></div>
-		<div class="col-md-8 ">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 ">
 			<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
 				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
 					<nav class="navbar navbar-inverse navbar-fixed" role="banner">
@@ -15,55 +15,54 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span> 
 							</button>
-							
+							<div class="navbar-form btn-group">
+								<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-user"></span>
+										<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?> 
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/cliente\/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-file"></span> Ver Dados do Cliente
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/cliente\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-edit"></span> Editar Dados do Cliente
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-user"></span> Contatos do Cliente
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/cliente\/alterarlogo\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
+											<a href="<?php echo base_url() . 'cliente/alterarlogo/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-edit"></span> Alterar Foto
+											</a>
+										</a>
+									</li>											
+								</ul>
+							</div>
+							<!--
 							<a class="navbar-brand" href="<?php #echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 								<?php #echo '<small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '</small>' ?> 
 							</a>
+							-->
 						</div>
 						<div class="collapse navbar-collapse" id="myNavbar">
 							<ul class="nav navbar-nav navbar-center">
-								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
-									<div class="btn-group">
-										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
-											<span class="glyphicon glyphicon-user"></span>
-												<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?> 
-											<span class="caret"></span>
-										</button>
-										<ul class="dropdown-menu" role="menu">
-											<li>
-												<a <?php if (preg_match("/cliente\/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-													<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-file"></span> Ver Dados do Cliente
-													</a>
-												</a>
-											</li>
-											<li role="separator" class="divider"></li>
-											<li>
-												<a <?php if (preg_match("/cliente\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-													<a href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-edit"></span> Editar Dados do Cliente
-													</a>
-												</a>
-											</li>
-											<li role="separator" class="divider"></li>
-											<li>
-												<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
-													<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-user"></span> Contatos do Cliente
-													</a>
-												</a>
-											</li>
-											<li role="separator" class="divider"></li>
-											<li>
-												<a <?php if (preg_match("/cliente\/alterarlogo\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
-													<a href="<?php echo base_url() . 'cliente/alterarlogo/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-edit"></span> Alterar Foto
-													</a>
-												</a>
-											</li>											
-										</ul>
-									</div>									
-								</li>
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
 										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
@@ -116,14 +115,14 @@
 								<?php } ?>
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
-										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+										<button type="button" class="btn btn-md btn-<?php echo $botao_sac;?>  dropdown-toggle" data-toggle="dropdown">
 											<span class="glyphicon glyphicon-pencil"></span> SAC <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
 												<a <?php if (preg_match("/procedimento\/listarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
 													<a href="<?php echo base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-pencil"></span> Lista de Procedimentos
+														<span class="glyphicon glyphicon-pencil"></span> Lista de Chamadas
 													</a>
 												</a>
 											</li>
@@ -131,7 +130,31 @@
 											<li>
 												<a <?php if (preg_match("/procedimento\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
 													<a href="<?php echo base_url() . 'procedimento/cadastrarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-plus"></span> Novo Procedimento
+														<span class="glyphicon glyphicon-plus"></span> Nova Chamada
+													</a>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group">
+										<button type="button" class="btn btn-md btn-<?php echo $botao_mark;?>  dropdown-toggle" data-toggle="dropdown">
+											<span class="glyphicon glyphicon-pencil"></span> Marketing <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a <?php if (preg_match("/procedimento\/listarcampanha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+													<a href="<?php echo base_url() . 'procedimento/listarcampanha/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-pencil"></span> Lista de Campanhas
+													</a>
+												</a>
+											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a <?php if (preg_match("/procedimento\/campanha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'procedimento/campanha/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-plus"></span> Nova Campanha
 													</a>
 												</a>
 											</li>
@@ -152,7 +175,7 @@
 
 					<div class="panel panel-<?php echo $panel; ?>">
 
-						<div class="panel-heading"><strong>Procedimento - </strong><?php echo $orcatrata['idApp_Procedimento'] ?></div>
+						<div class="panel-heading"><strong><?php echo $titulo; ?> </strong><?php echo $_SESSION['Cliente']['NomeCliente']; ?> - <?php echo $_SESSION['Cliente']['idApp_Cliente']; ?></div>
 						<div class="panel-body">
 
 							<?php echo form_open_multipart($form_open_path); ?>
@@ -161,12 +184,65 @@
 								<div class="panel panel-info">
 									<div class="panel-heading">
 										<div class="row text-left">
-											<div class="col-md-6">
-												<label for="Procedimento">Procedimento:</label>
-												<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?>
-														  name="Procedimento"><?php echo $orcatrata['Procedimento']; ?></textarea>
-											</div>
-											<div class="col-md-3 text-left">
+											<div class="col-md-3">	
+												<?php if($metodo == 1 || $metodo == 2) { ?>
+													<div class="row">	
+														<div class="col-md-12 " >
+															<label for="Sac">Sac: <?php echo $orcatrata['idApp_Procedimento']; ?></label>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="Sac" name="Sac">
+																<option value="">- Selec. Sac -</option>	
+																<?php
+																foreach ($select['Sac'] as $key => $row) {
+																	if ($orcatrata['Sac'] == $key) {
+																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																	} else {
+																		echo '<option value="' . $key . '">' . $row . '</option>';
+																	}
+																}
+																?>
+															</select>
+															<?php echo form_error('Sac'); ?>
+														</div>
+													</div>	
+												<?php } elseif($metodo == 3 || $metodo == 4) { ?>	
+													<div class="row">	
+														<div class="col-md-12 " >
+															<label for="Campanha">Marketing: <?php echo $orcatrata['idApp_Procedimento']; ?></label>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="Campanha" name="Campanha">
+																<option value="">- Selec. Campanha -</option>	
+																<?php
+																foreach ($select['Campanha'] as $key => $row) {
+																	if ($orcatrata['Campanha'] == $key) {
+																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																	} else {
+																		echo '<option value="' . $key . '">' . $row . '</option>';
+																	}
+																}
+																?>
+															</select>
+															<?php echo form_error('Campanha'); ?>
+														</div>
+													</div>	
+												<?php } ?>
+												<div class="row">
+													<div class="col-md-12">
+														<label for="Procedimento">Procedimento:</label>
+														<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?> name="Procedimento"><?php echo $orcatrata['Procedimento']; ?></textarea>
+														<?php echo form_error('Procedimento'); ?>		  
+													</div>
+												</div>
+											</div>		
+											<div class="col-md-3">
+												<label for="DataProcedimento">Cadastrado em:</label>
+												<div class="input-group <?php echo $datepicker; ?>">
+													<span class="input-group-addon" disabled>
+														<span class="glyphicon glyphicon-calendar"></span>
+													</span>
+													<input type="text" class="form-control Date" <?php echo $readonly; ?> readonly=""
+															name="DataProcedimento" value="<?php echo $orcatrata['DataProcedimento']; ?>">
+												</div>
+											</div>	
+											<div class="col-md-2 text-left">
 												<label for="ConcluidoProcedimento">Concluído?</label><br>
 												<div class="btn-group" data-toggle="buttons">
 													<?php
@@ -204,6 +280,7 @@
 														<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
 																name="DataProcedimentoLimite" value="<?php echo $orcatrata['DataProcedimentoLimite']; ?>">
 													</div>
+													<?php echo form_error('DataProcedimentoLimite'); ?>
 												</div>
 											</div>	
 										</div>
@@ -233,7 +310,7 @@
 											for ($i=1; $i <= $count['PTCount']; $i++) {
 											?>
 
-											<?php if ($metodo > 1) { ?>
+											<?php if ($metodo == 2 || $metodo == 4) { ?>
 											<input type="hidden" name="idApp_SubProcedimento<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['idApp_SubProcedimento']; ?>"/>
 											<?php } ?>
 
@@ -261,7 +338,7 @@
 																</select>
 															</div>
 															-->
-															<div class="col-md-5">
+															<div class="col-md-3">
 																<label for="SubProcedimento<?php echo $i ?>">Ação:</label>
 																<textarea class="form-control" id="SubProcedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																		  name="SubProcedimento<?php echo $i ?>"><?php echo $procedtarefa[$i]['SubProcedimento']; ?></textarea>
@@ -285,9 +362,18 @@
 																	?>
 																</select>
 															</div>
-															-->															
-															<input type="hidden" name="DataSubProcedimento<?php echo $i ?>" id="DataSubProcedimento<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataSubProcedimento']; ?>">
+															-->
 															<div class="col-md-3">
+																<label for="DataSubProcedimento<?php echo $i ?>">Cadastrado em:</label>
+																<div class="input-group <?php echo $datepicker; ?>">
+																	<span class="input-group-addon" disabled>
+																		<span class="glyphicon glyphicon-calendar"></span>
+																	</span>															
+																	<input type="text" class="form-control Date" <?php echo $readonly; ?> readonly=""
+																		   name="DataSubProcedimento<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataSubProcedimento']; ?>">
+																</div>
+															</div>
+															<div class="col-md-2">
 																<label for="ConcluidoSubProcedimento">Concluído? </label><br>
 																<div class="form-group">
 																	<div class="btn-group" data-toggle="buttons">
@@ -314,17 +400,8 @@
 																		?>
 																	</div>
 																</div>
-															</div>
-															<div class="col-md-3">
-																<label for="DataSubProcedimentoLimite<?php echo $i ?>">Concluído em:</label>
-																<div class="input-group <?php echo $datepicker; ?>">
-																	<span class="input-group-addon" disabled>
-																		<span class="glyphicon glyphicon-calendar"></span>
-																	</span>															
-																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																		   name="DataSubProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataSubProcedimentoLimite']; ?>">
-																</div>
-															</div>
+															</div>															
+															<input type="hidden" name="DataSubProcedimentoLimite<?php echo $i ?>" id="DataSubProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataSubProcedimentoLimite']; ?>">
 															<!--
 															<div class="col-md-1">
 																<label><br></label><br>
@@ -364,7 +441,7 @@
 									<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
 									<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 									<?php } ?>
-									<?php if ($metodo == 2) { ?>
+									<?php if ($metodo == 2 || $metodo == 4) { ?>
 									
 										<div class="col-md-6">
 											<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
@@ -409,7 +486,6 @@
 												<span class="glyphicon glyphicon-save"></span> Salvar
 											</button>
 										</div>
-
 									<?php } ?>
 								</div>
 							</div>
@@ -423,6 +499,6 @@
 			</div>
 
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-1"></div>
 	</div>
 </div>

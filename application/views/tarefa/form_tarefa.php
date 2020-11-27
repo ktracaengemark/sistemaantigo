@@ -70,7 +70,7 @@
 													</select>
 													
 												</div>
-											</div>	
+											</div>
 											<div class="row">
 												<div class="col-md-12 text-left">
 													<label class="sr-only" for="Cadastrar">Cadastrar no BD</label>

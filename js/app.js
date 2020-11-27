@@ -1127,12 +1127,22 @@ function adicionaSubProcedimento() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-5">\
+						<div class="col-md-3">\
 							<label for="SubProcedimento'+pt+'">Ação:</label>\
 							<textarea class="form-control" id="SubProcedimento'+pt+'"\
 									  name="SubProcedimento'+pt+'"></textarea>\
 						</div>\
 						<div class="col-md-3">\
+							<label for="DataSubProcedimento'+pt+'">Cadastrada em:</label>\
+							<div class="input-group DatePicker">\
+								<span class="input-group-addon" disabled>\
+									<span class="glyphicon glyphicon-calendar"></span>\
+								</span>\
+								<input type="text" class="form-control Date" readonly=""\
+									   name="DataSubProcedimento'+pt+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
 							<label for="ConcluidoSubProcedimento">Concluido? </label><br>\
 							<div class="form-group">\
 								<div class="btn-group" data-toggle="buttons">\
@@ -1147,17 +1157,7 @@ function adicionaSubProcedimento() {
 								</div>\
 							</div>\
 						</div>\
-						<input type="hidden" name="DataSubProcedimento'+pt+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
-						<div class="col-md-3">\
-							<label for="DataSubProcedimentoLimite'+pt+'">Concluído em:</label>\
-							<div class="input-group DatePicker">\
-								<span class="input-group-addon" disabled>\
-									<span class="glyphicon glyphicon-calendar"></span>\
-								</span>\
-								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
-									   name="DataSubProcedimentoLimite'+pt+'" value="">\
-							</div>\
-						</div>\
+						<input type="hidden" name="DataSubProcedimentoLimite'+pt+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 						<div class="col-md-1">\
 							<label><br></label><br>\
 							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\

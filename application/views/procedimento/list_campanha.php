@@ -107,7 +107,7 @@
 								<?php } ?>
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
-										<button type="button" class="btn btn-md btn-warning  dropdown-toggle" data-toggle="dropdown">
+										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
 											<span class="glyphicon glyphicon-pencil"></span> SAC <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
@@ -131,7 +131,7 @@
 								</li>
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
-										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+										<button type="button" class="btn btn-md btn-warning  dropdown-toggle" data-toggle="dropdown">
 											<span class="glyphicon glyphicon-pencil"></span> Marketing <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
@@ -171,30 +171,34 @@
 
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs" role="tablist">
-									<li role="presentation"><a style="color:green" href="#informacao_concl" aria-controls="informacao_concl" role="tab" data-toggle="tab">Informações <?php echo $informacao_concl->num_rows(); ?></a></li>
-									<li role="presentation"><a style="color:green" href="#elogio_concl" aria-controls="elogio_concl" role="tab" data-toggle="tab">Elogios <?php echo $elogio_concl->num_rows(); ?></a></li>
-									<li role="presentation"><a style="color:green" href="#reclamacao_concl" aria-controls="reclamacao_concl" role="tab" data-toggle="tab">Reclamações <?php echo $reclamacao_concl->num_rows(); ?></a></li>
-									<li role="presentation"	class="active"><a style="color:red" href="#informacao_nao_concl" aria-controls="informacao_nao_concl" role="tab" data-toggle="tab">Informações <?php echo $informacao_nao_concl->num_rows(); ?></a></li>
-									<li role="presentation"><a style="color:red" href="#elogio_nao_concl" aria-controls="elogio_nao_concl" role="tab" data-toggle="tab">Elogios <?php echo $elogio_nao_concl->num_rows(); ?></a></li>
-									<li role="presentation"><a style="color:red" href="#reclamacao_nao_concl" aria-controls="reclamacao_nao_concl" role="tab" data-toggle="tab">Reclamações <?php echo $reclamacao_nao_concl->num_rows(); ?> </a></li>
+									<li role="presentation"><a style="color:green" href="#atualizacao_concl" aria-controls="atualizacao_concl" role="tab" data-toggle="tab">Atualiz. <?php echo $atualizacao_concl->num_rows(); ?></a></li>
+									<li role="presentation"><a style="color:green" href="#pesquisa_concl" aria-controls="pesquisa_concl" role="tab" data-toggle="tab">Pesquisa <?php echo $pesquisa_concl->num_rows(); ?></a></li>
+									<li role="presentation"><a style="color:green" href="#retorno_concl" aria-controls="retorno_concl" role="tab" data-toggle="tab">Retorno <?php echo $retorno_concl->num_rows(); ?></a></li>
+									<li role="presentation"><a style="color:green" href="#promocao_concl" aria-controls="promocao_concl" role="tab" data-toggle="tab">Promoção <?php echo $promocao_concl->num_rows(); ?></a></li>
+									<li role="presentation"><a style="color:green" href="#felicitacao_concl" aria-controls="felicitacao_concl" role="tab" data-toggle="tab">Felicitacao <?php echo $felicitacao_concl->num_rows(); ?></a></li>
+									<li role="presentation"	class="active"><a style="color:red" href="#atualizacao_nao_concl" aria-controls="atualizacao_nao_concl" role="tab" data-toggle="tab">Atualiz. <?php echo $atualizacao_nao_concl->num_rows(); ?></a></li>
+									<li role="presentation"><a style="color:red" href="#pesquisa_nao_concl" aria-controls="pesquisa_nao_concl" role="tab" data-toggle="tab">Pesquisa <?php echo $pesquisa_nao_concl->num_rows(); ?></a></li>
+									<li role="presentation"><a style="color:red" href="#retorno_nao_concl" aria-controls="retorno_nao_concl" role="tab" data-toggle="tab">Retorno <?php echo $retorno_nao_concl->num_rows(); ?></a></li>
+									<li role="presentation"><a style="color:red" href="#promocao_nao_concl" aria-controls="promocao_nao_concl" role="tab" data-toggle="tab">Promocao <?php echo $promocao_nao_concl->num_rows(); ?></a></li>
+									<li role="presentation"><a style="color:red" href="#felicitacao_nao_concl" aria-controls="felicitacao_nao_concl" role="tab" data-toggle="tab">Felicitacao <?php echo $felicitacao_nao_concl->num_rows(); ?></a></li>
 								</ul>
 
 								<!-- Tab panes -->
 								<div class="tab-content">
 
-									<!-- informacao_concl -->
-									<div role="tabpanel" class="tab-pane " id="informacao_concl">
+									<!-- atualizacao_concl-->
+									<div role="tabpanel" class="tab-pane" id="atualizacao_concl">
 
 										<?php
-										if ($informacao_concl) {
+										if ($atualizacao_concl) {
 
-											foreach ($informacao_concl->result_array() as $row) {
+											foreach ($atualizacao_concl->result_array() as $row) {
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
 
-											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
+											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
 											
 											<!--	
@@ -238,19 +242,19 @@
 
 									</div>
 
-									<!-- informacao_nao_concl -->
-									<div role="tabpanel" class="tab-pane active" id="informacao_nao_concl">
+									<!-- atualizacao_nao_concl -->
+									<div role="tabpanel" class="tab-pane active" id="atualizacao_nao_concl">
 
 										<?php
-										if ($informacao_nao_concl) {
+										if ($atualizacao_nao_concl) {
 
-											foreach ($informacao_nao_concl->result_array() as $row) {
+											foreach ($atualizacao_nao_concl->result_array() as $row) {
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
 
-											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
+											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
 											<!--
 											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
@@ -292,19 +296,19 @@
 
 									</div>
 
-									<!-- elogio concl -->
-									<div role="tabpanel" class="tab-pane " id="elogio_concl">
+									<!-- pesquisa_concl-->
+									<div role="tabpanel" class="tab-pane" id="pesquisa_concl">
 
 										<?php
-										if ($elogio_concl) {
+										if ($pesquisa_concl) {
 
-											foreach ($elogio_concl->result_array() as $row) {
+											foreach ($pesquisa_concl->result_array() as $row) {
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
 
-											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
+											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
 											
 											<!--	
@@ -348,19 +352,19 @@
 
 									</div>
 
-									<!-- elogio não concl -->
-									<div role="tabpanel" class="tab-pane" id="elogio_nao_concl">
+									<!-- pesquisa_nao_concl -->
+									<div role="tabpanel" class="tab-pane" id="pesquisa_nao_concl">
 
 										<?php
-										if ($elogio_nao_concl) {
+										if ($pesquisa_nao_concl) {
 
-											foreach ($elogio_nao_concl->result_array() as $row) {
+											foreach ($pesquisa_nao_concl->result_array() as $row) {
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
 
-											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
+											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
 											<!--
 											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
@@ -402,19 +406,19 @@
 
 									</div>
 
-									<!-- elogio concl -->
-									<div role="tabpanel" class="tab-pane " id="reclamacao_concl">
+									<!-- retorno_concl-->
+									<div role="tabpanel" class="tab-pane" id="retorno_concl">
 
 										<?php
-										if ($reclamacao_concl) {
+										if ($retorno_concl) {
 
-											foreach ($reclamacao_concl->result_array() as $row) {
+											foreach ($retorno_concl->result_array() as $row) {
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
 
-											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
+											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
 											
 											<!--	
@@ -458,19 +462,239 @@
 
 									</div>
 
-									<!-- elogio não concl -->
-									<div role="tabpanel" class="tab-pane" id="reclamacao_nao_concl">
+									<!-- retorno_nao_concl -->
+									<div role="tabpanel" class="tab-pane" id="retorno_nao_concl">
 
 										<?php
-										if ($reclamacao_nao_concl) {
+										if ($retorno_nao_concl) {
 
-											foreach ($reclamacao_nao_concl->result_array() as $row) {
+											foreach ($retorno_nao_concl->result_array() as $row) {
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
 
-											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
+											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
+											</a>
+											<!--
+											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											</a>
+											-->
+											<br><br>
+
+											<h4>
+												<span class="glyphicon glyphicon-tags"></span> <b>Procd.:</b> <?php echo $row['idApp_Procedimento']; ?>
+											</h4>
+											<br>
+											<p>
+												<?php if ($row['DataProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Cadastrado em:</b> <?php echo $row['DataProcedimento']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Procedimento:</b> <?php echo nl2br($row['Procedimento']); ?>
+											</p>
+											<p>
+												<?php if ($row['ConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Concluído:</b> <?php echo $row['ConcluidoProcedimento']; ?>
+												<?php }?>
+											</p>
+											<p>
+												<?php if ($row['DataProcedimentoLimite']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php } ?>
+											</p>
+										</div>
+
+										<?php
+											}
+										} else {
+											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhum registro</b></div>';
+										}
+										?>
+
+									</div>
+
+									<!-- promocao_concl-->
+									<div role="tabpanel" class="tab-pane" id="promocao_concl">
+
+										<?php
+										if ($promocao_concl) {
+
+											foreach ($promocao_concl->result_array() as $row) {
+										?>
+
+										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
+
+											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
+											</a>
+											
+											<!--	
+											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											</a>
+											-->
+
+											<br><br>
+
+											<h4>
+												<span class="glyphicon glyphicon-tags"></span> <b>Procd.:</b> <?php echo $row['idApp_Procedimento']; ?>
+											</h4>
+											<br>
+											<p>
+												<?php if ($row['DataProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Cadastrado em:</b> <?php echo $row['DataProcedimento']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Procedimento:</b> <?php echo nl2br($row['Procedimento']); ?>
+											</p>
+											<p>
+												<?php if ($row['ConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Concluído:</b> <?php echo $row['ConcluidoProcedimento']; ?>
+												<?php }?>
+											</p>
+											<p>
+												<?php if ($row['DataProcedimentoLimite']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php } ?>
+											</p>
+										</div>
+
+										<?php
+											}
+										} else {
+											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhum registro</b></div>';
+										}
+										?>
+
+									</div>
+
+									<!-- promocao_nao_concl -->
+									<div role="tabpanel" class="tab-pane" id="promocao_nao_concl">
+
+										<?php
+										if ($promocao_nao_concl) {
+
+											foreach ($promocao_nao_concl->result_array() as $row) {
+										?>
+
+										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
+
+											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
+											</a>
+											<!--
+											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											</a>
+											-->
+											<br><br>
+
+											<h4>
+												<span class="glyphicon glyphicon-tags"></span> <b>Procd.:</b> <?php echo $row['idApp_Procedimento']; ?>
+											</h4>
+											<br>
+											<p>
+												<?php if ($row['DataProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Cadastrado em:</b> <?php echo $row['DataProcedimento']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Procedimento:</b> <?php echo nl2br($row['Procedimento']); ?>
+											</p>
+											<p>
+												<?php if ($row['ConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Concluído:</b> <?php echo $row['ConcluidoProcedimento']; ?>
+												<?php }?>
+											</p>
+											<p>
+												<?php if ($row['DataProcedimentoLimite']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php } ?>
+											</p>
+										</div>
+
+										<?php
+											}
+										} else {
+											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhum registro</b></div>';
+										}
+										?>
+
+									</div>
+
+									<!-- felicitacao_concl-->
+									<div role="tabpanel" class="tab-pane" id="felicitacao_concl">
+
+										<?php
+										if ($felicitacao_concl) {
+
+											foreach ($felicitacao_concl->result_array() as $row) {
+										?>
+
+										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
+
+											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
+											</a>
+											
+											<!--	
+											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											</a>
+											-->
+
+											<br><br>
+
+											<h4>
+												<span class="glyphicon glyphicon-tags"></span> <b>Procd.:</b> <?php echo $row['idApp_Procedimento']; ?>
+											</h4>
+											<br>
+											<p>
+												<?php if ($row['DataProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Cadastrado em:</b> <?php echo $row['DataProcedimento']; ?>
+												<?php } ?>
+											</p>
+											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Procedimento:</b> <?php echo nl2br($row['Procedimento']); ?>
+											</p>
+											<p>
+												<?php if ($row['ConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Concluído:</b> <?php echo $row['ConcluidoProcedimento']; ?>
+												<?php }?>
+											</p>
+											<p>
+												<?php if ($row['DataProcedimentoLimite']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php } ?>
+											</p>
+										</div>
+
+										<?php
+											}
+										} else {
+											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhum registro</b></div>';
+										}
+										?>
+
+									</div>
+
+									<!-- felicitacao_nao_concl -->
+									<div role="tabpanel" class="tab-pane" id="felicitacao_nao_concl">
+
+										<?php
+										if ($felicitacao_nao_concl) {
+
+											foreach ($felicitacao_nao_concl->result_array() as $row) {
+										?>
+
+										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
+
+											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
 											<!--
 											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
@@ -518,7 +742,6 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 		<div class="col-md-1"></div>
 	</div>	

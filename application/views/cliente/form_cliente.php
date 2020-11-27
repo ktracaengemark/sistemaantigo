@@ -2,7 +2,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
-		<div class="col-md-8 ">
+		<div class="col-md-8">
 			<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
 				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
 					<nav class="navbar navbar-inverse navbar-fixed" role="banner">

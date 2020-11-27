@@ -3,8 +3,8 @@
 <div class="container-fluid">
 	<div class="row">
 	
-		<div class="col-md-2"></div>
-		<div class="col-md-8 ">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 ">
 			<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
 				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
 					<nav class="navbar navbar-inverse navbar-fixed" role="banner">
@@ -15,48 +15,46 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span> 
 							</button>
-							
+							<div class="navbar-form btn-group">
+								<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-user"></span>
+										<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?> 
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/cliente\/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-file"></span> Ver Dados do Cliente
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/cliente\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-edit"></span> Editar Dados do Cliente
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-user"></span> Contatos do Cliente
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<!--
 							<a class="navbar-brand" href="<?php #echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 								<?php #echo '<small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '.</small>' ?> 
 							</a>
-							
+							-->
 						</div>
 						<div class="collapse navbar-collapse" id="myNavbar">
 							<ul class="nav navbar-nav navbar-center">
-								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
-									<div class="btn-group">
-										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
-											<span class="glyphicon glyphicon-user"></span>
-												<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?> 
-											<span class="caret"></span>
-										</button>
-										<ul class="dropdown-menu" role="menu">
-											<li>
-												<a <?php if (preg_match("/cliente\/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-													<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-file"></span> Ver Dados do Cliente
-													</a>
-												</a>
-											</li>
-											<li role="separator" class="divider"></li>
-											<li>
-												<a <?php if (preg_match("/cliente\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-													<a href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-edit"></span> Editar Dados do Cliente
-													</a>
-												</a>
-											</li>
-											<li role="separator" class="divider"></li>
-											<li>
-												<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
-													<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-user"></span> Contatos do Cliente
-													</a>
-												</a>
-											</li>
-										</ul>
-									</div>									
-								</li>
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
 										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
@@ -84,7 +82,7 @@
 								<?php if ($_SESSION['Cliente']['idSis_Empresa'] == $_SESSION['log']['idSis_Empresa'] ) { ?>
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
-										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+										<button type="button" class="btn btn-md btn-warning  dropdown-toggle" data-toggle="dropdown">
 											<span class="glyphicon glyphicon-usd"></span> Orçs. <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
@@ -110,13 +108,13 @@
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
 										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
-											<span class="glyphicon glyphicon-pencil"></span> Proc. <span class="caret"></span>
+											<span class="glyphicon glyphicon-pencil"></span> SAC <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
 												<a <?php if (preg_match("/procedimento\/listarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
 													<a href="<?php echo base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-pencil"></span> Lista de Procedimentos
+														<span class="glyphicon glyphicon-pencil"></span> Lista de Chamadas
 													</a>
 												</a>
 											</li>
@@ -124,7 +122,31 @@
 											<li>
 												<a <?php if (preg_match("/procedimento\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
 													<a href="<?php echo base_url() . 'procedimento/cadastrarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-plus"></span> Novo Procedimento
+														<span class="glyphicon glyphicon-plus"></span> Nova Chamada
+													</a>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group">
+										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+											<span class="glyphicon glyphicon-pencil"></span> Marketing <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a <?php if (preg_match("/procedimento\/listarcampanha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+													<a href="<?php echo base_url() . 'procedimento/listarcampanha/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-pencil"></span> Lista de Campanhas
+													</a>
+												</a>
+											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a <?php if (preg_match("/procedimento\/campanha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'procedimento/campanha/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-plus"></span> Nova Campanha
 													</a>
 												</a>
 											</li>
@@ -142,7 +164,7 @@
 				<div class="col-md-12 col-lg-12">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<?php echo '<strong>' . $_SESSION['Cliente']['NomeCompleto'] . '</strong> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '.</small>' ?>
+							<?php echo '<small>' . $titulo . '</small> <strong>' . $_SESSION['Cliente']['NomeCompleto'] . '</strong> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '.</small>' ?>
 						</div>
 						<div class="panel-body">
 
@@ -150,14 +172,16 @@
 
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs" role="tablist">
-									<!--<li role="presentation" class="active" ><a href="#combinado" aria-controls="combinado" role="tab" data-toggle="tab">Combinados</a></li>-->
-									<li role="presentation" ><a href="#naocombinado" aria-controls="naocombinado" role="tab" data-toggle="tab">Não Combinados</a></li>
-									<li role="presentation" ><a href="#anterior" aria-controls="anterior" role="tab" data-toggle="tab">Não Aprovados</a></li>
-									<li role="presentation" class="active" ><a href="#proxima" aria-controls="proxima" role="tab" data-toggle="tab">Aprovados</a></li>
-									<li role="presentation" ><a href="#finalizado" aria-controls="finalizado" role="tab" data-toggle="tab">Finalizado</a></li>
-									<!--<li role="presentation" ><a href="#naofinalizado" aria-controls="naofinalizado" role="tab" data-toggle="tab">Não Finalizado</a></li>-->
-									<li role="presentation" ><a href="#cancelado" aria-controls="cancelado" role="tab" data-toggle="tab">Cancelado</a></li>
-									<!--<li role="presentation" ><a href="#naocancelado" aria-controls="naocancelado" role="tab" data-toggle="tab">Não Cancelado</a></li>-->
+									<!--<li role="presentation" class="active" ><a style="color:green" href="#combinado" aria-controls="combinado" role="tab" data-toggle="tab">Combinados <?php #echo $combinado->num_rows(); ?></a></li>-->
+									<li role="presentation" ><a style="color:red" href="#naocombinado" aria-controls="naocombinado" role="tab" data-toggle="tab">Não Combinados <?php echo $naocombinado->num_rows(); ?></a></li>
+									<li role="presentation" ><a style="color:red" href="#anterior" aria-controls="anterior" role="tab" data-toggle="tab">Não Aprovados <?php echo $naoaprovado->num_rows(); ?></a></li>
+									<li role="presentation" class="active" ><a style="color:green" href="#proxima" aria-controls="proxima" role="tab" data-toggle="tab">Aprovados <?php echo $aprovado->num_rows(); ?></a></li>
+									<li role="presentation" ><a style="color:green" href="#finalizado" aria-controls="finalizado" role="tab" data-toggle="tab">Finalizado <?php echo $finalizado->num_rows(); ?></a></li>
+									<!--<li role="presentation" ><a style="color:red" href="#naofinalizado" aria-controls="naofinalizado" role="tab" data-toggle="tab">Não Finalizado <?php #echo $naofinalizado->num_rows(); ?></a></li>-->
+									<li role="presentation" ><a style="color:black" href="#cancelado" aria-controls="cancelado" role="tab" data-toggle="tab">Cancelado <?php echo $cancelado->num_rows(); ?></a></li>
+									<!--<li role="presentation" ><a style="color:black" href="#naocancelado" aria-controls="naocancelado" role="tab" data-toggle="tab">Não Cancelado <?php #echo $naocancelado->num_rows(); ?></a></li>-->
+									<li role="presentation"><a style="color:green" href="#concluido_orc" aria-controls="concluido_orc" role="tab" data-toggle="tab">Procedimentos <?php echo $concluido_orc->num_rows(); ?></a></li>
+									<li role="presentation"><a style="color:red" href="#nao_concluido_orc" aria-controls="nao_concluido_orc" role="tab" data-toggle="tab">Procedimentos <?php echo $nao_concluido_orc->num_rows(); ?></a></li>
 								</ul>
 
 								<!-- Tab panes -->
@@ -811,6 +835,127 @@
 										?>
 
 									</div>
+
+
+									<!-- Concluido-Orç -->
+									<div role="tabpanel" class="tab-pane " id="concluido_orc">
+
+										<?php
+										if ($concluido_orc) {
+
+											foreach ($concluido_orc->result_array() as $row) {
+										?>
+
+										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
+
+											<a class="btn btn-success" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Dados
+											</a>
+											
+											<!--	
+											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											</a>
+											-->
+
+											<br><br>
+
+											<h4>
+												<span class="glyphicon glyphicon-tags"></span> <b>Orçam.:</b> <?php echo $row['idApp_OrcaTrata']; ?><br>
+												<span class="glyphicon glyphicon-tags"></span> <b>Procd.:</b> <?php echo $row['idApp_Procedimento']; ?> 
+											</h4>
+											<br>
+											<p>
+												
+												<?php if ($row['DataProcedimentoLimite']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Retorno</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php } ?>
+
+											</p>											
+											<p>
+												
+												<?php if ($row['DataProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Cadastro</b> <?php echo $row['DataProcedimento']; ?>
+												<?php } ?>
+
+											</p>
+											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Procedimento:</b> <?php echo nl2br($row['Procedimento']); ?>
+											</p>
+											<p>
+												<?php if ($row['ConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Concluído:</b> <?php echo $row['ConcluidoProcedimento']; ?>
+												<?php }?>
+											</p>
+										</div>
+
+										<?php
+											}
+										} else {
+											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhum registro</b></div>';
+										}
+										?>
+
+									</div>
+
+									<!-- Não Concluido-Orç -->
+									<div role="tabpanel" class="tab-pane " id="nao_concluido_orc">
+
+										<?php
+										if ($nao_concluido_orc) {
+
+											foreach ($nao_concluido_orc->result_array() as $row) {
+										?>
+
+										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
+
+											<a class="btn btn-danger" href="<?php echo base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Dados
+											</a>
+											<!--
+											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+											</a>
+											-->
+											<br><br>
+
+											<h4>
+												<span class="glyphicon glyphicon-tags"></span> <b>Orçam.:</b> <?php echo $row['idApp_OrcaTrata']; ?><br>
+												<span class="glyphicon glyphicon-tags"></span> <b>Procd.:</b><?php echo $row['idApp_Procedimento']; ?>
+											</h4>
+											<br>
+											<p>
+												
+												<?php if ($row['DataProcedimentoLimite']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Retorno</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php } ?>
+
+											</p>											
+											<p>
+												
+												<?php if ($row['DataProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Cadastro</b> <?php echo $row['DataProcedimento']; ?>
+												<?php } ?>
+
+											</p>
+											<p>
+												<span class="glyphicon glyphicon-pencil"></span> <b>Procedimento:</b> <?php echo nl2br($row['Procedimento']); ?>
+											</p>
+											<p>
+												<?php if ($row['ConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-ok"></span> <b>Concluído:</b> <?php echo $row['ConcluidoProcedimento']; ?>
+												<?php }?>
+											</p>
+										</div>
+
+										<?php
+											}
+										} else {
+											echo '<br><div class="alert alert-info text-center" role="alert"><b>Nenhum registro</b></div>';
+										}
+										?>
+
+									</div>
 									
 								</div>
 							</div>
@@ -819,6 +964,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-1"></div>
 	</div>	
 </div>

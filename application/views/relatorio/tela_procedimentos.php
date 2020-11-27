@@ -9,14 +9,18 @@
 					<div class="row">
 						<div class="col-md-2 text-left">
 							<label><?php echo $titulo1;?></label>
-							<div class="input-group">
-								<span class="input-group-btn">
-									<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
-										<span class="glyphicon glyphicon-search"></span> 
-									</button>
-								</span>
-								<input type="text" placeholder="Pesquisar Pedido" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
-							</div>
+							<?php if($tipoproc == 1 || $tipoproc == 2) {?>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
+											<span class="glyphicon glyphicon-search"></span> 
+										</button>
+									</span>
+									<input type="text" placeholder="Pesquisar Pedido" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
+								</div>
+							<?php }elseif($tipoproc == 3 || $tipoproc == 4){ ?>	
+								<input type="hidden" name="Orcamento" id="Orcamento" value="">
+							<?php } ?>
 						</div>	
 						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<div class="col-md-2 text-left">	
@@ -27,7 +31,7 @@
 											<span class="glyphicon glyphicon-search"></span> 
 										</button>
 									</span>
-									<?php if($metodo == 2) {?>	
+									<?php if($metodo == 2) {?>
 										<input type="text" placeholder="Pesquisar <?php echo $nome; ?>" class="form-control Numero btn-sm" name="<?php echo $nome; ?>" id="<?php echo $nome; ?>" value="<?php echo set_value($nome, $query[$nome]); ?>">
 										<input type="hidden" name="Fornecedor" id="Fornecedor" value="">
 									<?php }elseif($metodo == 1){ ?>	

@@ -13,7 +13,7 @@ class Orcatrata extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Orcatrata_model', 'Pedidos_model', 'Usuario_model', 'Cliente_model', 'Fornecedor_model', 'Relatorio_model', 'Formapag_model'));
+        $this->load->model(array('Basico_model', 'Orcatrata_model', 'Procedimento_model', 'Pedidos_model', 'Usuario_model', 'Cliente_model', 'Fornecedor_model', 'Relatorio_model', 'Formapag_model'));
         $this->load->driver('session');
 
         #load header view
@@ -13243,6 +13243,10 @@ class Orcatrata extends CI_Controller {
         $data['naofinalizado'] = $this->Orcatrata_model->list_orcamentofinal($id, 'N', TRUE);
         $data['cancelado'] = $this->Orcatrata_model->list_orcamentocancel($id, 'S', TRUE);
         $data['naocancelado'] = $this->Orcatrata_model->list_orcamentocancel($id, 'N', TRUE);
+        $data['concluido_orc'] = $this->Procedimento_model->list_procedimento_orc($id, 'S', TRUE);
+        $data['nao_concluido_orc'] = $this->Procedimento_model->list_procedimento_orc($id, 'N', TRUE);
+		
+		$data['titulo'] = 'Orçamento : ';
 
         //$data['aprovado'] = array();
         //$data['naoaprovado'] = array();

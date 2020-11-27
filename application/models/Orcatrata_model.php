@@ -556,11 +556,11 @@ class Orcatrata_model extends CI_Model {
 		$permissao2 = ($_SESSION['FiltroAlteraParcela']['QuitadoOrca'] != "0" ) ? 'OT.QuitadoOrca = "' . $_SESSION['FiltroAlteraParcela']['QuitadoOrca'] . '" AND ' : FALSE;
 		$permissao4 = ($_SESSION['FiltroAlteraParcela']['Quitado'] != "0" ) ? 'PR.Quitado = "' . $_SESSION['FiltroAlteraParcela']['Quitado'] . '" AND ' : FALSE;
 
-		//$permissao10 = ($_SESSION['FiltroAlteraParcela']['FinalizadoOrca'] != "0" ) ? 'OT.FinalizadoOrca = "' . $_SESSION['FiltroAlteraParcela']['FinalizadoOrca'] . '" AND ' : FALSE;
-		//$permissao11 = ($_SESSION['FiltroAlteraParcela']['CanceladoOrca'] != "0" ) ? 'OT.CanceladoOrca = "' . $_SESSION['FiltroAlteraParcela']['CanceladoOrca'] . '" AND ' : FALSE;
+		$permissao10 = ($_SESSION['FiltroAlteraParcela']['FinalizadoOrca'] != "0" ) ? 'OT.FinalizadoOrca = "' . $_SESSION['FiltroAlteraParcela']['FinalizadoOrca'] . '" AND ' : FALSE;
+		$permissao11 = ($_SESSION['FiltroAlteraParcela']['CanceladoOrca'] != "0" ) ? 'OT.CanceladoOrca = "' . $_SESSION['FiltroAlteraParcela']['CanceladoOrca'] . '" AND ' : FALSE;
 		
-		$permissao10 = 'OT.FinalizadoOrca = "N" AND ';
-		$permissao11 = 'OT.CanceladoOrca = "N" AND ';
+		//$permissao10 = 'OT.FinalizadoOrca = "N" AND ';
+		//$permissao11 = 'OT.CanceladoOrca = "N" AND ';
 
 		$permissao7 = ($_SESSION['FiltroAlteraParcela']['Tipo_Orca'] != "0" ) ? 'OT.Tipo_Orca = "' . $_SESSION['FiltroAlteraParcela']['Tipo_Orca'] . '" AND ' : FALSE;
 		$permissao33 = ($_SESSION['FiltroAlteraParcela']['AVAP'] != "0" ) ? 'OT.AVAP = "' . $_SESSION['FiltroAlteraParcela']['AVAP'] . '" AND ' : FALSE;
@@ -683,6 +683,8 @@ class Orcatrata_model extends CI_Model {
                 ' . $date_fim_vnc . '
                 ' . $date_inicio_vnc_prc . '
                 ' . $date_fim_vnc_prc . '
+				OT.FinalizadoOrca = "N" AND 
+				OT.CanceladoOrca = "N" AND			
 				OT.idSis_Empresa = ' . $data . ' AND
 				PR.idSis_Empresa = ' . $data . '
 			GROUP BY
@@ -1876,9 +1878,7 @@ class Orcatrata_model extends CI_Model {
           echo "</pre>";
           exit();
           */
-        if ($query->num_rows() === 0) {
-            return FALSE;
-        } else {
+        
             if ($completo === FALSE) {
                 return TRUE;
             } else {
@@ -1900,7 +1900,7 @@ class Orcatrata_model extends CI_Model {
                 }
                 return $query;
             }
-        }
+        
     }
 	
     public function list_orcamento($id, $aprovado, $completo) {
@@ -1943,9 +1943,7 @@ class Orcatrata_model extends CI_Model {
           echo "</pre>";
           exit();
           */
-        if ($query->num_rows() === 0) {
-            return FALSE;
-        } else {
+       
             if ($completo === FALSE) {
                 return TRUE;
             } else {
@@ -1966,7 +1964,7 @@ class Orcatrata_model extends CI_Model {
                 }
                 return $query;
             }
-        }
+        
     }
 
     public function list_orcamentofinal($id, $finalizado, $completo) {
@@ -2006,9 +2004,7 @@ class Orcatrata_model extends CI_Model {
           echo "</pre>";
           exit();
           */
-        if ($query->num_rows() === 0) {
-            return FALSE;
-        } else {
+        
             if ($completo === FALSE) {
                 return TRUE;
             } else {
@@ -2029,7 +2025,7 @@ class Orcatrata_model extends CI_Model {
                 }
                 return $query;
             }
-        }
+        
     }
 
     public function list_orcamentocancel($id, $cancelado, $completo) {
@@ -2068,9 +2064,7 @@ class Orcatrata_model extends CI_Model {
           echo "</pre>";
           exit();
           */
-        if ($query->num_rows() === 0) {
-            return FALSE;
-        } else {
+       
             if ($completo === FALSE) {
                 return TRUE;
             } else {
@@ -2091,7 +2085,7 @@ class Orcatrata_model extends CI_Model {
                 }
                 return $query;
             }
-        }
+        
     }
 	
     public function list_orcatrataBKP($x) {
