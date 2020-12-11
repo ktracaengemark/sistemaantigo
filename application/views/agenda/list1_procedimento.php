@@ -27,7 +27,7 @@
 							<th class="active">Cnl.SbTF</th>-->
 							<th class="active">Cadastrou</th>
 							<th class="active">Fazer</th>
-							<th class="active">Sts.Trf</th>
+							<th class="active">Status</th>
 							<th class="active">Iniciar</th>
 							<th class="active">Concluir</th>
 						</tr>

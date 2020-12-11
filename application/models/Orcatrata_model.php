@@ -275,6 +275,8 @@ class Orcatrata_model extends CI_Model {
 				TAP.QtdProduto,
 				TAP.QtdIncrementoProduto,
 				TAP.DataValidadeProduto,
+				TAP.DataConcluidoProduto,
+				TAP.HoraConcluidoProduto,
 				TAP.ConcluidoProduto,
 				TAP.idTab_TipoRD,
 				TAP.ProfissionalProduto,
@@ -332,6 +334,8 @@ class Orcatrata_model extends CI_Model {
 				TAP.QtdCompraProduto,
 				TAP.ObsProduto,
 				TAP.DataValidadeProduto,
+				TAP.DataConcluidoProduto,
+				TAP.HoraConcluidoProduto,
 				TAP.HoraValidadeProduto,
 				TAP.ConcluidoProduto,
 				TAP.DevolvidoProduto,
@@ -434,6 +438,8 @@ class Orcatrata_model extends CI_Model {
 				TAP.QtdCompraProduto,
 				TAP.ObsProduto,
 				TAP.DataValidadeProduto,
+				TAP.DataConcluidoProduto,
+				TAP.HoraConcluidoProduto,
 				TAP.HoraValidadeProduto,
 				TAP.ConcluidoProduto,
 				TAP.DevolvidoProduto,
@@ -562,6 +568,7 @@ class Orcatrata_model extends CI_Model {
 		//$permissao10 = 'OT.FinalizadoOrca = "N" AND ';
 		//$permissao11 = 'OT.CanceladoOrca = "N" AND ';
 
+		$permissao5 = ($_SESSION['FiltroAlteraParcela']['Modalidade'] != "0" ) ? 'OT.Modalidade = "' . $_SESSION['FiltroAlteraParcela']['Modalidade'] . '" AND ' : FALSE;
 		$permissao7 = ($_SESSION['FiltroAlteraParcela']['Tipo_Orca'] != "0" ) ? 'OT.Tipo_Orca = "' . $_SESSION['FiltroAlteraParcela']['Tipo_Orca'] . '" AND ' : FALSE;
 		$permissao33 = ($_SESSION['FiltroAlteraParcela']['AVAP'] != "0" ) ? 'OT.AVAP = "' . $_SESSION['FiltroAlteraParcela']['AVAP'] . '" AND ' : FALSE;
 		$permissao34 = ($_SESSION['FiltroAlteraParcela']['TipoFrete'] != "0" ) ? 'OT.TipoFrete = "' . $_SESSION['FiltroAlteraParcela']['TipoFrete'] . '" AND ' : FALSE;
@@ -577,6 +584,9 @@ class Orcatrata_model extends CI_Model {
 		$permissao18 = ($_SESSION['FiltroAlteraParcela']['NomeAssociado'] != "" ) ? 'OT.Associado = "' . $_SESSION['FiltroAlteraParcela']['NomeAssociado'] . '" AND ' : FALSE;
 		$permissao12 = ($_SESSION['FiltroAlteraParcela']['StatusComissaoOrca'] != "0" ) ? 'OT.StatusComissaoOrca = "' . $_SESSION['FiltroAlteraParcela']['StatusComissaoOrca'] . '" AND ' : FALSE;
 		$permissao14 = ($_SESSION['FiltroAlteraParcela']['StatusComissaoOrca_Online'] != "0" ) ? 'OT.StatusComissaoOrca_Online = "' . $_SESSION['FiltroAlteraParcela']['StatusComissaoOrca_Online'] . '" AND ' : FALSE;
+		
+		$permissao60 = (!$_SESSION['FiltroAlteraParcela']['Campo']) ? 'OT.DataOrca' : $_SESSION['FiltroAlteraParcela']['Campo'];
+        $permissao61 = (!$_SESSION['FiltroAlteraParcela']['Ordenamento']) ? 'ASC' : $_SESSION['FiltroAlteraParcela']['Ordenamento'];
 
 		$query = $this->db->query('
             SELECT
@@ -618,6 +628,7 @@ class Orcatrata_model extends CI_Model {
 				OT.ValorComissao,
 				OT.QtdParcelasOrca,
 				OT.DataEntregaOrca,
+				OT.HoraEntregaOrca,
 				OT.DataVencimentoOrca,
 				OT.StatusComissaoOrca,
 				OT.StatusComissaoOrca_Online,
@@ -667,6 +678,7 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao12 . '
 				' . $permissao14 . '
 				' . $permissao6 . '
+				' . $permissao5 . '
 				' . $permissao7 . '
 				' . $permissao32 . '
 				' . $permissao33 . '
@@ -690,8 +702,8 @@ class Orcatrata_model extends CI_Model {
 			GROUP BY
                 OT.idApp_OrcaTrata	
             ORDER BY
-				OT.DataVencimentoOrca,
-				OT.idApp_OrcaTrata
+				' . $permissao60 . '
+				' . $permissao61 . '
 			LIMIT 100
 		');
         $query = $query->result_array();
@@ -811,6 +823,7 @@ class Orcatrata_model extends CI_Model {
 				OT.DataVencimentoOrca,
 				OT.StatusComissaoOrca,
 				OT.StatusComissaoOrca_Online,
+				OT.DataPagoComissaoOrca,
 				OT.idSis_Usuario,
 				OT.ObsOrca,
 				OT.Descricao,
@@ -1030,7 +1043,7 @@ class Orcatrata_model extends CI_Model {
 				OT.AVAP,
 				OT.TipoFrete,
 				OT.Modalidade,
-				DATE_FORMAT(OT.DataOrca, "%d/%m/%Y") AS DataOrca,
+				OT.DataOrca,
 				TR.TipoFinanceiro,
 				E.NomeEmpresa,
 				PR.idSis_Usuario,
@@ -1140,7 +1153,7 @@ class Orcatrata_model extends CI_Model {
 		$permissao34 = ($_SESSION['FiltroAlteraParcela']['TipoFrete'] != "0" ) ? 'OT.TipoFrete = "' . $_SESSION['FiltroAlteraParcela']['TipoFrete'] . '" AND ' : FALSE;
 		$permissao5 = ($_SESSION['FiltroAlteraParcela']['Modalidade'] != "0" ) ? 'OT.Modalidade = "' . $_SESSION['FiltroAlteraParcela']['Modalidade'] . '" AND ' : FALSE;
 		$permissao6 = ($_SESSION['FiltroAlteraParcela']['FormaPagamento'] != "0" ) ? 'OT.FormaPagamento = "' . $_SESSION['FiltroAlteraParcela']['FormaPagamento'] . '" AND ' : FALSE;
-		$permissao32 = ($_SESSION['FiltroAlteraParcela']['TipoFinanceiroD'] != "0" ) ? 'OT.TipoFinanceiro = "' . $_SESSION['FiltroAlteraParcela']['TipoFinanceiroD'] . '" AND ' : FALSE;
+		//$permissao32 = ($_SESSION['FiltroAlteraParcela']['TipoFinanceiroD'] != "0" ) ? 'OT.TipoFinanceiro = "' . $_SESSION['FiltroAlteraParcela']['TipoFinanceiroD'] . '" AND ' : FALSE;
 		
 		$permissao26 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
 		$permissao27 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "0" ) ? 'YEAR(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
@@ -1210,7 +1223,6 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao13 . '
 				' . $permissao30 . '
 				' . $permissao31 . '
-				' . $permissao32 . '
 				' . $permissao33 . '
 				' . $permissao34 . '
 				PR.idTab_TipoRD = "1"
@@ -1601,7 +1613,16 @@ class Orcatrata_model extends CI_Model {
     }	
 	
     public function get_procedimento($data) {
-		$query = $this->db->query('SELECT * FROM App_Procedimento WHERE idApp_OrcaTrata = ' . $data);
+		$query = $this->db->query('
+			SELECT 
+				PC.*,
+				US.*
+			FROM 
+				App_Procedimento AS PC
+					LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = PC.idSis_Usuario
+			WHERE 
+				PC.idApp_OrcaTrata = ' . $data . '
+		');
         $query = $query->result_array();
 
         return $query;
@@ -1864,7 +1885,7 @@ class Orcatrata_model extends CI_Model {
 			. 'OT.idApp_Cliente = ' . $id . ' AND '
 			. 'OT.idTab_TipoRD = "2" AND '
             . 'OT.CombinadoFrete = "' . $combinado . '" AND '
-            . 'OT.AprovadoOrca = "N" AND '
+            
             . 'OT.FinalizadoOrca = "N" AND '
 			. 'OT.CanceladoOrca = "N" '
             . 'ORDER BY '

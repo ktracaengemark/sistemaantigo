@@ -720,8 +720,6 @@ class Procedimento_model extends CI_Model {
                 C.Campanha
             FROM
                 Tab_Campanha AS C
-            WHERE
-				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
             ORDER BY
                 C.idTab_Campanha ASC
         ');

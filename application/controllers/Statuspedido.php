@@ -174,8 +174,17 @@ class Statuspedido extends CI_Controller {
 				$data['servico'][$j]['SubtotalQtdProduto'] = $this->input->post('SubtotalQtdServico' . $i);
                 $data['servico'][$j]['ObsProduto'] = $this->input->post('ObsServico' . $i);
 				$data['servico'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeServico' . $i);
+                $data['servico'][$j]['DataConcluidoProduto'] = $this->input->post('DataConcluidoServico' . $i);
+				$data['servico'][$j]['HoraConcluidoProduto'] = $this->input->post('HoraConcluidoServico' . $i);
                 $data['servico'][$j]['ConcluidoProduto'] = $this->input->post('ConcluidoServico' . $i);
 				$data['servico'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalServico' . $i);
+				
+				(!$data['servico'][$j]['ConcluidoProduto']) ? $data['servico'][$j]['ConcluidoProduto'] = 'N' : FALSE;
+				$data['radio'] = array(
+					'ConcluidoServico' . $j => $this->basico->radio_checked($data['servico'][$j]['ConcluidoProduto'], 'ConcluidoServico' . $j, 'NS'),
+				);
+				($data['servico'][$j]['ConcluidoProduto'] == 'S') ? $data['div']['ConcluidoServico' . $j] = '' : $data['div']['ConcluidoServico' . $j] = 'style="display: none;"';
+				
                 $j++;
             }
 
@@ -201,6 +210,8 @@ class Statuspedido extends CI_Controller {
 				$data['produto'][$j]['SubtotalQtdProduto'] = $this->input->post('SubtotalQtdProduto' . $i);
 				$data['produto'][$j]['ObsProduto'] = $this->input->post('ObsProduto' . $i);
 				$data['produto'][$j]['DataValidadeProduto'] = $this->input->post('DataValidadeProduto' . $i);
+                $data['produto'][$j]['DataConcluidoProduto'] = $this->input->post('DataConcluidoProduto' . $i);
+				$data['produto'][$j]['HoraConcluidoProduto'] = $this->input->post('HoraConcluidoProduto' . $i);
 				$data['produto'][$j]['Aux_App_Produto_1'] = $this->input->post('Aux_App_Produto_1' . $i);
 				$data['produto'][$j]['Aux_App_Produto_2'] = $this->input->post('Aux_App_Produto_2' . $i);
 				$data['produto'][$j]['Aux_App_Produto_3'] = $this->input->post('Aux_App_Produto_3' . $i);
@@ -212,6 +223,13 @@ class Statuspedido extends CI_Controller {
 				$data['produto'][$j]['CanceladoProduto'] = $this->input->post('CanceladoProduto' . $i);
 				$data['produto'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
 				$data['produto'][$j]['ProfissionalProduto'] = $this->input->post('ProfissionalProduto' . $i);
+				
+				(!$data['produto'][$j]['ConcluidoProduto']) ? $data['produto'][$j]['ConcluidoProduto'] = 'N' : FALSE;
+				$data['radio'] = array(
+					'ConcluidoProduto' . $j => $this->basico->radio_checked($data['produto'][$j]['ConcluidoProduto'], 'ConcluidoProduto' . $j, 'NS'),
+				);
+				($data['produto'][$j]['ConcluidoProduto'] == 'S') ? $data['div']['ConcluidoProduto' . $j] = '' : $data['div']['ConcluidoProduto' . $j] = 'style="display: none;"';
+				
 				$j++;
             }
         }
@@ -230,6 +248,13 @@ class Statuspedido extends CI_Controller {
                 $data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
 				$data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
+				$data['procedimento'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
+				
+				(!$data['procedimento'][$j]['ConcluidoProcedimento']) ? $data['procedimento'][$j]['ConcluidoProcedimento'] = 'N' : FALSE;
+				$data['radio'] = array(
+					'ConcluidoProcedimento' . $j => $this->basico->radio_checked($data['procedimento'][$j]['ConcluidoProcedimento'], 'ConcluidoProcedimento' . $j, 'NS'),
+				);
+				($data['procedimento'][$j]['ConcluidoProcedimento'] == 'S') ? $data['div']['ConcluidoProcedimento' . $j] = '' : $data['div']['ConcluidoProcedimento' . $j] = 'style="display: none;"';	
 
                 $j++;
             }
@@ -249,6 +274,13 @@ class Statuspedido extends CI_Controller {
                 $data['parcelasrec'][$j]['DataPago'] = $this->input->post('DataPago' . $i);
                 $data['parcelasrec'][$j]['Quitado'] = $this->input->post('Quitado' . $i);
 				//$data['parcelasrec'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
+				
+				(!$data['parcelasrec'][$j]['Quitado']) ? $data['parcelasrec'][$j]['Quitado'] = 'N' : FALSE;
+				$data['radio'] = array(
+					'Quitado' . $j => $this->basico->radio_checked($data['parcelasrec'][$j]['Quitado'], 'Quitado' . $j, 'NS'),
+				);
+				($data['parcelasrec'][$j]['Quitado'] == 'S') ? $data['div']['Quitado' . $j] = '' : $data['div']['Quitado' . $j] = 'style="display: none;"';				
+
 				$j++;
             }
         }
@@ -290,6 +322,14 @@ class Statuspedido extends CI_Controller {
 						$data['servico'][$j]['SubtotalComissaoProduto'] = ($data['servico'][$j]['ValorProduto'] * $data['servico'][$j]['QtdProduto'] * $data['servico'][$j]['ComissaoProduto'] /100);
 						$data['servico'][$j]['SubtotalQtdProduto'] = ($data['servico'][$j]['QtdIncrementoProduto'] * $data['servico'][$j]['QtdProduto']);
 						$data['servico'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeProduto'], 'barras');
+						$data['servico'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataConcluidoProduto'], 'barras');
+				
+						(!$data['servico'][$j]['ConcluidoProduto']) ? $data['servico'][$j]['ConcluidoProduto'] = 'N' : FALSE;
+						$data['radio'] = array(
+							'ConcluidoServico' . $j => $this->basico->radio_checked($data['servico'][$j]['ConcluidoProduto'], 'ConcluidoServico' . $j, 'NS'),
+						);
+						($data['servico'][$j]['ConcluidoProduto'] == 'S') ? $data['div']['ConcluidoServico' . $j] = '' : $data['div']['ConcluidoServico' . $j] = 'style="display: none;"';
+
 					}
                 }
             }
@@ -308,6 +348,14 @@ class Statuspedido extends CI_Controller {
 						$data['produto'][$j]['SubtotalComissaoProduto'] = ($data['produto'][$j]['ValorProduto'] * $data['produto'][$j]['QtdProduto'] * $data['produto'][$j]['ComissaoProduto'] /100);
 						$data['produto'][$j]['SubtotalQtdProduto'] = ($data['produto'][$j]['QtdIncrementoProduto'] * $data['produto'][$j]['QtdProduto']);
 						$data['produto'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['produto'][$j]['DataValidadeProduto'], 'barras');
+						$data['produto'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['produto'][$j]['DataConcluidoProduto'], 'barras');
+
+						(!$data['produto'][$j]['ConcluidoProduto']) ? $data['produto'][$j]['ConcluidoProduto'] = 'N' : FALSE;
+						$data['radio'] = array(
+							'ConcluidoProduto' . $j => $this->basico->radio_checked($data['produto'][$j]['ConcluidoProduto'], 'ConcluidoProduto' . $j, 'NS'),
+						);
+						($data['produto'][$j]['ConcluidoProduto'] == 'S') ? $data['div']['ConcluidoProduto' . $j] = '' : $data['div']['ConcluidoProduto' . $j] = 'style="display: none;"';
+
 						///esta linha deve ser retirada após correção dos nomes dos pedidos antigos///
 						$data['produto'][$j]['NomeProduto'] = $data['produto'][$j]['Produto'];
 					}
@@ -326,13 +374,18 @@ class Statuspedido extends CI_Controller {
                     for($j=1; $j <= $data['count']['PRCount']; $j++) {
                         $data['parcelasrec'][$j]['DataVencimento'] = $this->basico->mascara_data($data['parcelasrec'][$j]['DataVencimento'], 'barras');
                         $data['parcelasrec'][$j]['DataPago'] = $this->basico->mascara_data($data['parcelasrec'][$j]['DataPago'], 'barras');
+                    
+						$data['radio'] = array(
+							'Quitado' . $j => $this->basico->radio_checked($data['parcelasrec'][$j]['Quitado'], 'Quitado' . $j, 'NS'),
+						);
+						($data['parcelasrec'][$j]['Quitado'] == 'S') ? $data['div']['Quitado' . $j] = '' : $data['div']['Quitado' . $j] = 'style="display: none;"';
                     }
 
                 }
             }
 
             #### App_Procedimento ####
-            $data['procedimento'] = $this->Orcatrata_model->get_procedimento($id);
+            $_SESSION['Procedimento'] = $data['procedimento'] = $this->Orcatrata_model->get_procedimento($id);
             if (count($data['procedimento']) > 0) {
                 $data['procedimento'] = array_combine(range(1, count($data['procedimento'])), array_values($data['procedimento']));
                 $data['count']['PMCount'] = count($data['procedimento']);
@@ -342,6 +395,11 @@ class Statuspedido extends CI_Controller {
                     for($j=1; $j <= $data['count']['PMCount']; $j++) {
                         $data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'barras');
                         $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimentoLimite'], 'barras');
+						$_SESSION['Procedimento'][$j]['Nome'] = $data['procedimento'][$j]['Nome'];
+						$data['radio'] = array(
+							'ConcluidoProcedimento' . $j => $this->basico->radio_checked($data['procedimento'][$j]['ConcluidoProcedimento'], 'ConcluidoProcedimento' . $j, 'NS'),
+						);
+						($data['procedimento'][$j]['ConcluidoProcedimento'] == 'S') ? $data['div']['ConcluidoProcedimento' . $j] = '' : $data['div']['ConcluidoProcedimento' . $j] = 'style="display: none;"';
 					}
                 }
             }
@@ -764,6 +822,7 @@ class Statuspedido extends CI_Controller {
                     $data['update']['servico']['inserir'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
 					$data['update']['servico']['inserir'][$j]['idTab_TipoRD'] = "2";
 					$data['update']['servico']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeProduto'], 'mysql');
+					$data['update']['servico']['inserir'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataConcluidoProduto'], 'mysql');
 					$data['update']['servico']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorProduto']));
                     unset($data['update']['servico']['inserir'][$j]['SubtotalProduto']);
 					unset($data['update']['servico']['inserir'][$j]['SubtotalComissaoProduto']);
@@ -773,6 +832,21 @@ class Statuspedido extends CI_Controller {
 					} else {
 						$data['update']['servico']['inserir'][$j]['ConcluidoProduto'] = $data['update']['servico']['inserir'][$j]['ConcluidoProduto'];
 					}
+					if ($data['update']['servico']['inserir'][$j]['ConcluidoProduto'] == 'S') {
+						if(!$data['update']['servico']['inserir'][$j]['DataConcluidoProduto']){
+							$data['update']['servico']['inserir'][$j]['DataConcluidoProduto'] = $data['orcatrata']['DataEntregaOrca'];
+						}else{
+							$data['update']['servico']['inserir'][$j]['DataConcluidoProduto'] = $data['update']['servico']['inserir'][$j]['DataConcluidoProduto'];
+						}
+						if(!$data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'] || $data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'] == "00:00"){
+							$data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'] = $data['orcatrata']['HoraEntregaOrca'];
+						}else{
+							$data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'] = $data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'];
+						}
+					} else {
+						$data['update']['servico']['inserir'][$j]['DataConcluidoProduto'] = "0000-00-00";
+						$data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'] = "00:00";
+					}
 				}
 
                 $max = count($data['update']['servico']['alterar']);
@@ -781,6 +855,7 @@ class Statuspedido extends CI_Controller {
 					$data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
 					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
+					$data['update']['servico']['alterar'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataConcluidoProduto'], 'mysql');
 					$data['update']['servico']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['alterar'][$j]['ValorProduto']));
                     unset($data['update']['servico']['alterar'][$j]['SubtotalProduto']);
 					unset($data['update']['servico']['alterar'][$j]['SubtotalComissaoProduto']);
@@ -789,6 +864,21 @@ class Statuspedido extends CI_Controller {
 						$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = 'S';
 					} else {
 						$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = $data['update']['servico']['alterar'][$j]['ConcluidoProduto'];
+					}
+					if ($data['update']['servico']['alterar'][$j]['ConcluidoProduto'] == 'S') {
+						if(!$data['update']['servico']['alterar'][$j]['DataConcluidoProduto']){
+							$data['update']['servico']['alterar'][$j]['DataConcluidoProduto'] = $data['orcatrata']['DataEntregaOrca'];
+						}else{
+							$data['update']['servico']['alterar'][$j]['DataConcluidoProduto'] = $data['update']['servico']['alterar'][$j]['DataConcluidoProduto'];
+						}
+						if(!$data['update']['servico']['alterar'][$j]['HoraConcluidoProduto'] || $data['update']['servico']['alterar'][$j]['HoraConcluidoProduto'] == "00:00"){
+							$data['update']['servico']['alterar'][$j]['HoraConcluidoProduto'] = $data['orcatrata']['HoraEntregaOrca'];
+						}else{
+							$data['update']['servico']['alterar'][$j]['HoraConcluidoProduto'] = $data['update']['servico']['alterar'][$j]['HoraConcluidoProduto'];
+						}
+					} else {
+						$data['update']['servico']['alterar'][$j]['DataConcluidoProduto'] = "0000-00-00";
+						$data['update']['servico']['alterar'][$j]['HoraConcluidoProduto'] = "00:00";
 					}
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['servico']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
                 }
@@ -825,6 +915,7 @@ class Statuspedido extends CI_Controller {
                     $data['update']['produto']['inserir'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
 					$data['update']['produto']['inserir'][$j]['idTab_TipoRD'] = "2";
 					$data['update']['produto']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['produto']['inserir'][$j]['DataValidadeProduto'], 'mysql');
+					$data['update']['produto']['inserir'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['update']['produto']['inserir'][$j]['DataConcluidoProduto'], 'mysql');
 					$data['update']['produto']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['produto']['inserir'][$j]['ValorProduto']));
 					$data['update']['produto']['inserir'][$j]['ComissaoProduto'] = $data['update']['produto']['inserir'][$j]['ComissaoProduto'];
                     $data['update']['produto']['inserir'][$j]['NomeProduto'] = $data['update']['produto']['inserir'][$j]['NomeProduto'];
@@ -835,6 +926,21 @@ class Statuspedido extends CI_Controller {
 						$data['update']['produto']['inserir'][$j]['ConcluidoProduto'] = 'S';
 					} else {
 						$data['update']['produto']['inserir'][$j]['ConcluidoProduto'] = $data['update']['produto']['inserir'][$j]['ConcluidoProduto'];
+					}
+					if ($data['update']['produto']['inserir'][$j]['ConcluidoProduto'] == 'S') {
+						if(!$data['update']['produto']['inserir'][$j]['DataConcluidoProduto']){
+							$data['update']['produto']['inserir'][$j]['DataConcluidoProduto'] = $data['orcatrata']['DataEntregaOrca'];
+						}else{
+							$data['update']['produto']['inserir'][$j]['DataConcluidoProduto'] = $data['update']['produto']['inserir'][$j]['DataConcluidoProduto'];
+						}
+						if(!$data['update']['produto']['inserir'][$j]['HoraConcluidoProduto'] || $data['update']['produto']['inserir'][$j]['HoraConcluidoProduto'] == "00:00"){
+							$data['update']['produto']['inserir'][$j]['HoraConcluidoProduto'] = $data['orcatrata']['HoraEntregaOrca'];
+						}else{
+							$data['update']['produto']['inserir'][$j]['HoraConcluidoProduto'] = $data['update']['produto']['inserir'][$j]['HoraConcluidoProduto'];
+						}
+					} else {
+						$data['update']['produto']['inserir'][$j]['DataConcluidoProduto'] = "0000-00-00";
+						$data['update']['produto']['inserir'][$j]['HoraConcluidoProduto'] = "00:00";
 					}
 					if ($data['orcatrata']['DevolvidoOrca'] == 'S') { 
 						$data['update']['produto']['inserir'][$j]['DevolvidoProduto'] = 'S';
@@ -850,6 +956,7 @@ class Statuspedido extends CI_Controller {
 					$data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto'];
 					$data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'] = $data['update']['produto']['alterar'][$j]['Prod_Serv_Produto'];
 					$data['update']['produto']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['produto']['alterar'][$j]['DataValidadeProduto'], 'mysql');
+					$data['update']['produto']['alterar'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['update']['produto']['alterar'][$j]['DataConcluidoProduto'], 'mysql');
 					$data['update']['produto']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['produto']['alterar'][$j]['ValorProduto']));
 					$data['update']['produto']['alterar'][$j]['ComissaoProduto'] = $data['update']['produto']['alterar'][$j]['ComissaoProduto'];
                     $data['update']['produto']['alterar'][$j]['NomeProduto'] = $data['update']['produto']['alterar'][$j]['NomeProduto'];
@@ -858,8 +965,23 @@ class Statuspedido extends CI_Controller {
 					unset($data['update']['produto']['alterar'][$j]['SubtotalQtdProduto']);
 					if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
 						$data['update']['produto']['alterar'][$j]['ConcluidoProduto'] = 'S';
-					} else {	
+					} else {
 						$data['update']['produto']['alterar'][$j]['ConcluidoProduto'] = $data['update']['produto']['alterar'][$j]['ConcluidoProduto'];
+					}
+					if ($data['update']['produto']['alterar'][$j]['ConcluidoProduto'] == 'S') {
+						if(!$data['update']['produto']['alterar'][$j]['DataConcluidoProduto']){
+							$data['update']['produto']['alterar'][$j]['DataConcluidoProduto'] = $data['orcatrata']['DataEntregaOrca'];
+						}else{
+							$data['update']['produto']['alterar'][$j]['DataConcluidoProduto'] = $data['update']['produto']['alterar'][$j]['DataConcluidoProduto'];
+						}
+						if(!$data['update']['produto']['alterar'][$j]['HoraConcluidoProduto'] || $data['update']['produto']['alterar'][$j]['HoraConcluidoProduto'] == "00:00"){
+							$data['update']['produto']['alterar'][$j]['HoraConcluidoProduto'] = $data['orcatrata']['HoraEntregaOrca'];
+						}else{
+							$data['update']['produto']['alterar'][$j]['HoraConcluidoProduto'] = $data['update']['produto']['alterar'][$j]['HoraConcluidoProduto'];
+						}
+					} else {
+						$data['update']['produto']['alterar'][$j]['DataConcluidoProduto'] = "0000-00-00";
+						$data['update']['produto']['alterar'][$j]['HoraConcluidoProduto'] = "00:00";
 					}	
 					if ($data['orcatrata']['DevolvidoOrca'] == 'S') { 
 						$data['update']['produto']['alterar'][$j]['DevolvidoProduto'] = 'S';
@@ -916,6 +1038,15 @@ class Statuspedido extends CI_Controller {
 					} else {
 						$data['update']['parcelasrec']['inserir'][$j]['Quitado'] = $data['update']['parcelasrec']['inserir'][$j]['Quitado'];
 					}
+					if ($data['update']['parcelasrec']['inserir'][$j]['Quitado'] == 'S'){
+						if(!$data['update']['parcelasrec']['inserir'][$j]['DataPago']){
+							$data['update']['parcelasrec']['inserir'][$j]['DataPago'] = $data['update']['parcelasrec']['inserir'][$j]['DataVencimento'];
+						}else{
+							$data['update']['parcelasrec']['inserir'][$j]['DataPago'] = $data['update']['parcelasrec']['inserir'][$j]['DataPago'];
+						}
+					} else {
+						$data['update']['parcelasrec']['inserir'][$j]['DataPago'] = "0000-00-00";
+					}
 				}	
 
                 $max = count($data['update']['parcelasrec']['alterar']);
@@ -926,8 +1057,17 @@ class Statuspedido extends CI_Controller {
                     $data['update']['parcelasrec']['alterar'][$j]['DataPago'] = $this->basico->mascara_data($data['update']['parcelasrec']['alterar'][$j]['DataPago'], 'mysql');
 					if ($data['orcatrata']['QuitadoOrca'] == 'S') { 
 						$data['update']['parcelasrec']['alterar'][$j]['Quitado'] = 'S';
-					}else {
+					} else {
 						$data['update']['parcelasrec']['alterar'][$j]['Quitado'] = $data['update']['parcelasrec']['alterar'][$j]['Quitado'];
+					}
+					if ($data['update']['parcelasrec']['alterar'][$j]['Quitado'] == 'S'){
+						if(!$data['update']['parcelasrec']['alterar'][$j]['DataPago']){
+							$data['update']['parcelasrec']['alterar'][$j]['DataPago'] = $data['update']['parcelasrec']['alterar'][$j]['DataVencimento'];
+						}else{
+							$data['update']['parcelasrec']['alterar'][$j]['DataPago'] = $data['update']['parcelasrec']['alterar'][$j]['DataPago'];
+						}
+					} else {
+						$data['update']['parcelasrec']['alterar'][$j]['DataPago'] = "0000-00-00";
 					}
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['parcelasrec']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
 				}

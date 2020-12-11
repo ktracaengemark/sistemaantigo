@@ -1,7 +1,14 @@
 <div class="panel panel-<?php echo $panel; ?>">
 	<div class="panel-heading">
-		<div class="row">	
-			<div class="col-md-4">
+		<div class="row">
+			<div class="col-md-2">
+				<label for="DataFim">Contagem:</label>
+				<div class="input-group">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span>
+					<input type="text" class="form-control" disabled aria-label="Contagem" value="<?php echo $report->num_rows(); ?> Resultados">
+				</div>
+			</div>	
+			<div class="col-md-2">
 				<label for="DataFim">
 					<?php if($metodo == 2) {?>
 						Recebido
@@ -14,7 +21,7 @@
 					<input type="text" class="form-control" disabled aria-label="Total Recebido" value="<?php echo $report->soma->somarecebido ?>">
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<label for="DataFim">
 					<?php if($metodo == 2) {?>
 						à Receber
@@ -27,26 +34,19 @@
 					<input type="text" class="form-control" disabled aria-label="Total a Receber" value="<?php echo $report->soma->balanco ?>">
 				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-2">
 				<label for="DataFim"><?php echo $titulo1; ?> Total:</label>
 				<div class="input-group">
 					<span class="input-group-addon">R$</span>
 					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somareceber ?>">
-					</div>
+				</div>
 			</div>				
 		</div>	
 	</div>
 </div>	
 <div class="container-fluid">
 	<div class="row">
-		<div style="overflow: auto; height: 550px; ">
-			<table class="table table-bordered table-condensed table-striped">	
-				<tfoot>
-					<tr>
-						<th colspan="3" class="active">Total de Parcelas: <?php echo $report->num_rows(); ?> resultado(s)</th>
-					</tr>
-				</tfoot>
-			</table>            
+		<div style="overflow: auto; height: 550px; ">            
 			<table class="table table-bordered table-condensed table-striped">
 				<thead>
 					<tr>
@@ -73,11 +73,11 @@
 						<th class="active">DtPedido</th>
 						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<th class="active">DtEntrega</th>
-							<th class="active">DtVenc</th>
 						<?php } ?>
-						<th class="active">DtVencPrc</th>
+						<th class="active">Vencimento</th>
 						<th class="active">Parc.R$</th>
 						<th class="active">Quitada</th>
+						<th class="active">Pagamento</th>
 						<!--<th class="active">Dt.Pag</th>
 						<th class="active">Recebido</th>
 						<th class="active">Valor Recebido</th>
@@ -145,11 +145,11 @@
 							echo '<td>' . $row['DataOrca'] . '</td>';
 							if($_SESSION['log']['idSis_Empresa'] != "5"){
 								echo '<td>' . $row['DataEntregaOrca'] . '</td>';
-								echo '<td>' . $row['DataVencimentoOrca'] . '</td>';
 							}
 							echo '<td>' . $row['DataVencimento'] . '</td>';
 							echo '<td class="text-left">' . $row['ValorParcela'] . '</td>';
 							echo '<td>' . $row['Quitado'] . '</td>';
+							echo '<td>' . $row['DataPago'] . '</td>';
 							#echo '<td>' . $row['DataPago'] . '</td>';
 							#echo '<td class="text-left">' . $row['ValorPago'] . '</td>';
 							#echo '<td class="text-left">R$ ' . $row['ValorPago'] . '</td>';

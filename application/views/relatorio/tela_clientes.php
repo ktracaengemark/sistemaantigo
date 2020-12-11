@@ -46,7 +46,31 @@
 								</select>
 						</div>
 					</div>
-				</div>	
+				</div>
+				<div class="form-group">		
+					<div class="row text-left">
+						<div class="col-md-4">
+							<label for="DataInicio">Cadastro Inc.</label>
+							<div class="input-group DatePicker">
+								<span class="input-group-addon" disabled>
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+										autofocus name="DataInicio" value="<?php echo set_value('DataInicio', $query['DataInicio']); ?>">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<label for="DataFim">Cadastro Fim</label>
+							<div class="input-group DatePicker">
+								<span class="input-group-addon" disabled>
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+										name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="form-group">	
 					<div class="row text-left">
 						<div class="col-md-12">

@@ -49,7 +49,6 @@
 
 												
 												<input type="hidden" name="idApp_OrcaTrata<?php echo $i ?>" value="<?php echo $orcamento[$i]['idApp_OrcaTrata']; ?>"/>
-												
 												<div class="form-group" id="21div<?php echo $i ?>">
 													<div class="panel panel-warning">
 														<div class="panel-heading">
@@ -73,6 +72,16 @@
 																	<span><?php echo $orcamento[$i][$nomeusuario] ?></span>	
 																</div>
 																<div class="col-md-2">
+																	<label for="DataOrca">Pedido:</label>
+																	<div class="input-group DatePicker">
+																		<span class="input-group-addon" disabled>
+																			<span class="glyphicon glyphicon-calendar"></span>
+																		</span>
+																		<input type="text" class="form-control Date" readonly="" id="DataOrca<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																			   name="DataOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['DataOrca'] ?>">																
+																	</div>
+																</div>
+																<div class="col-md-2">
 																	<label for="DataEntregaOrca">Entrega:</label>
 																	<div class="input-group DatePicker">
 																		<span class="input-group-addon" disabled>
@@ -82,6 +91,7 @@
 																			   name="DataEntregaOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['DataEntregaOrca'] ?>">																
 																	</div>
 																</div>
+																<input type="hidden" name="HoraEntregaOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['HoraEntregaOrca']; ?>"/>
 																<div class="col-md-2">
 																	<label for="ValorTotalOrca">Valor:</label><br>
 																	<div class="input-group" id="txtHint">

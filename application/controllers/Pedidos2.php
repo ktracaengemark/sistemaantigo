@@ -253,7 +253,7 @@ class Pedidos2 extends CI_Controller {
         $data['titulo'] = 'Gestor de Pedidos Dinâmico';
         $data['form_open_path'] = 'Pedidos/pedidos';
 		$data['comissao'] = 'relatorio/comissao/';
-        $data['status'] = 'Statuspedido/alterarstatus/';
+        $data['status'] = 'Orcatrata/alterarstatus/';
 		$data['imprimir'] = 'OrcatrataPrintComissao/imprimir/';
         $data['nome'] = 'NomeColaborador';
         $data['readonly'] = '';

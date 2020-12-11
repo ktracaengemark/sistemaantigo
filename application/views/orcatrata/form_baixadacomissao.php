@@ -1,9 +1,7 @@
 <?php if (isset($msg)) echo $msg; ?>
 
-
 <div class="container-fluid">
 	<div class="row">
-
 		<div class="col-md-12 ">
 
 			<div class="row">
@@ -53,35 +51,34 @@
 														<div class="panel-heading">
 															<div class="row">
 																<div class="col-md-2">
-																	<label for="DataVencimentoOrca">Cont - Pedido - Local:</label><br>
+																	<label >Cont - Pedido - Local:</label><br>
 																	<span><?php echo $i ?>/<?php echo $count['PRCount'] ?>
 																		- <?php echo $orcamento[$i]['idApp_OrcaTrata'] ?>
 																		
-																		- <?php if($orcamento[$i]['Tipo_Orca'] == "O") {
+																		- <?php if($_SESSION['Orcamento'][$i]['Tipo_Orca'] == "O") {
 																					echo 'On Line';
-																				} elseif($orcamento[$i]['Tipo_Orca'] == "B"){
+																				} elseif($_SESSION['Orcamento'][$i]['Tipo_Orca'] == "B"){
 																					echo 'Na Loja';
 																				}else{
 																					echo 'Outros';
 																				}?>
-																	</span>
-																</div>
-																<div class="col-md-2">
+																	</span><br>
 																	<label><?php echo $nomeusuario; ?>:</label><br>
-																	<span><?php echo $orcamento[$i][$nomeusuario] ?></span>	
+																	<span><?php echo $_SESSION['Orcamento'][$i][$nomeusuario] ?></span>
 																</div>
+																<input type="hidden" name="DataVencimentoOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['DataVencimentoOrca']; ?>"/>
 																<div class="col-md-2">
-																	<label for="DataVencimentoOrca">Venc:</label>
+																	<label for="DataOrca">Receita</label>
 																	<div class="input-group DatePicker">
 																		<span class="input-group-addon" disabled>
 																			<span class="glyphicon glyphicon-calendar"></span>
 																		</span>
-																		<input type="text" class="form-control Date" readonly="" id="DataVencimentoOrca<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
-																			   name="DataVencimentoOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['DataVencimentoOrca'] ?>">																
+																		<input type="text" class="form-control Date" readonly="" id="DataOrca<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																			   name="DataOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['DataOrca'] ?>">																
 																	</div>
 																</div>
 																<div class="col-md-2">
-																	<label for="ValorRestanteOrca">Valor:</label><br>
+																	<label for="ValorRestanteOrca">Prd+Srv:</label><br>
 																	<div class="input-group" id="txtHint">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
 																		<input type="text" class="form-control Valor" readonly="" maxlength="10" placeholder="0,00" id="ValorRestanteOrca<?php echo $i ?>"
@@ -96,65 +93,48 @@
 																			   name="ValorComissao<?php echo $i ?>" value="<?php echo $orcamento[$i]['ValorComissao'] ?>">
 																	</div>
 																</div>
-																<?php if ($metodo == 1) { ?>
-																	<div class="col-md-2">
-																		<label for="StatusComissaoOrca">Pago NaLoja?</label><br>
-																		<div class="form-group">
-																			<div class="btn-group" data-toggle="buttons">
-																				<?php
-																				foreach ($select['StatusComissaoOrca'] as $key => $row) {
-																					(!$orcamento[$i]['StatusComissaoOrca']) ? $orcamento[$i]['StatusComissaoOrca'] = 'N' : FALSE;
-
-																					if ($orcamento[$i]['StatusComissaoOrca'] == $key) {
-																						echo ''
-																						. '<label class="btn btn-warning active" name="radiobutton_StatusComissaoOrca' . $i . '" id="radiobutton_StatusComissaoOrca' . $i .  $key . '">'
-																						. '<input type="radio" name="StatusComissaoOrca' . $i . '" id="radiobuttondinamico" '
-																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																						. '</label>'
-																						;
-																					} else {
-																						echo ''
-																						. '<label class="btn btn-default" name="radiobutton_StatusComissaoOrca' . $i . '" id="radiobutton_StatusComissaoOrca' . $i .  $key . '">'
-																						. '<input type="radio" name="StatusComissaoOrca' . $i . '" id="radiobuttondinamico" '
-																						. 'autocomplete="off" value="' . $key . '" >' . $row
-																						. '</label>'
-																						;
-																					}
+																<div class="col-md-2">
+																	<label for="<?php echo $statuscomissao; ?>">Pago?</label><br>
+																	<div class="form-group">
+																		<div class="btn-group" data-toggle="buttons">
+																			<?php
+																			foreach ($select[$statuscomissao] as $key => $row) {
+																				if (!$orcamento[$i][$statuscomissao])$orcamento[$i][$statuscomissao] = 'N';
+																				($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																				if ($orcamento[$i][$statuscomissao] == $key) {
+																					echo ''
+																					. '<label class="btn btn-warning active" name="' . $statuscomissao . $i . '_' . $hideshow . '">'
+																					. '<input type="radio" name="' . $statuscomissao . $i . '" id="' . $hideshow . '" '
+																					. 'onchange="carregaDataPagoComissaoOrca(this.value,this.name,'.$i.',1)" '
+																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																					. '</label>'
+																					;
+																				} else {
+																					echo ''
+																					. '<label class="btn btn-default" name="' . $statuscomissao . $i . '_' . $hideshow . '">'
+																					. '<input type="radio" name="' . $statuscomissao . $i . '" id="' . $hideshow . '" '
+																					. 'onchange="carregaDataPagoComissaoOrca(this.value,this.name,'.$i.',1)" '
+																					. 'autocomplete="off" value="' . $key . '" >' . $row
+																					. '</label>'
+																					;
 																				}
-																				?>
-																			</div>
+																			}
+																			?>
 																		</div>
 																	</div>
-																<?php } else if ($metodo == 2) { ?>
+																</div>
+																<div id="<?php echo $statuscomissao; ?><?php echo $i ?>" <?php echo $div[$statuscomissao . $i]; ?>>
 																	<div class="col-md-2">
-																		<label for="StatusComissaoOrca_Online">Pago OnLine?</label><br>
-																		<div class="form-group">
-																			<div class="btn-group" data-toggle="buttons">
-																				<?php
-																				foreach ($select['StatusComissaoOrca_Online'] as $key => $row) {
-																					(!$orcamento[$i]['StatusComissaoOrca_Online']) ? $orcamento[$i]['StatusComissaoOrca_Online'] = 'N' : FALSE;
-
-																					if ($orcamento[$i]['StatusComissaoOrca_Online'] == $key) {
-																						echo ''
-																						. '<label class="btn btn-warning active" name="radiobutton_StatusComissaoOrca_Online' . $i . '" id="radiobutton_StatusComissaoOrca_Online' . $i .  $key . '">'
-																						. '<input type="radio" name="StatusComissaoOrca_Online' . $i . '" id="radiobuttondinamico" '
-																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																						. '</label>'
-																						;
-																					} else {
-																						echo ''
-																						. '<label class="btn btn-default" name="radiobutton_StatusComissaoOrca_Online' . $i . '" id="radiobutton_StatusComissaoOrca_Online' . $i .  $key . '">'
-																						. '<input type="radio" name="StatusComissaoOrca_Online' . $i . '" id="radiobuttondinamico" '
-																						. 'autocomplete="off" value="' . $key . '" >' . $row
-																						. '</label>'
-																						;
-																					}
-																				}
-																				?>
-																			</div>
+																		<label for="DataPagoComissaoOrca">DataPago</label>
+																		<div class="input-group DatePicker">
+																			<span class="input-group-addon" disabled>
+																				<span class="glyphicon glyphicon-calendar"></span>
+																			</span>
+																			<input type="text" class="form-control Date" id="DataPagoComissaoOrca<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																				   name="DataPagoComissaoOrca<?php echo $i ?>" value="<?php echo $orcamento[$i]['DataPagoComissaoOrca'] ?>">																
 																		</div>
 																	</div>
-																<?php } ?>
+																</div>
 															</div>
 														</div>
 													</div>
@@ -175,7 +155,7 @@
 									<!--<input type="hidden" name="idSis_Empresa" value="<?php echo $_SESSION['log']['idSis_Empresa']; ?>">-->
 									<input type="hidden" name="idSis_Empresa" value="<?php echo $empresa['idSis_Empresa']; ?>">
 									
-									<div class="col-md-6 text-left">
+									<div class="col-md-4 text-left">
 										<label for="QuitadoComissão">Todas as Comissões Quitadas?</label><br>
 										<div class="btn-group" data-toggle="buttons">
 											<?php
@@ -202,7 +182,18 @@
 										</div>
 										<?php #echo form_error('QuitadoComissão'); ?>
 									</div>
-									<div class="col-md-6 text-right">
+									<div class="col-md-4 text-left">
+										<label for="DataPagoComissãoPadrao">Data do Pagamento Padrao</label>
+										<div class="input-group <?php echo $datepicker; ?>">
+											<span class="input-group-addon" disabled>
+												<span class="glyphicon glyphicon-calendar"></span>
+											</span>
+											<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+													id="DataPagoComissãoPadrao" name="DataPagoComissãoPadrao" value="<?php echo $query['DataPagoComissãoPadrao']; ?>">
+										</div>
+										<?php echo form_error('DataPagoComissãoPadrao'); ?>
+									</div>
+									<div class="col-md-4 text-right">
 										<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
 											<span class="glyphicon glyphicon-save"></span> Salvar
 										</button>
