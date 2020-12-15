@@ -2566,35 +2566,66 @@ function buscaValor1Tabelas(id, campo, tabela, num, campo2) {
 
             // executo este laço para acessar os itens do objeto javaScript
             for (i = 0; i < data.length; i++) {
+				if (id) {
+					if (data[i].id == id) {
+						$('#Escrever'+campo2+num).css("display","");
+						$('#Entregue'+campo2+num).css("display","");
+						//""ou posso usar assim, passando diretamente o qtdinc do id ""
+						$('#Nome'+campo2+num).val(data[i].nomeprod);
+						$('#Comissao'+campo2+num).val(data[i].comissaoprod);
+						$('#QtdIncremento'+campo2+num).val(data[i].qtdinc);
+						$('#Qtd'+campo2+num).val(data[i].qtdprod);
+						$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
+						$('#Prod_Serv_'+campo2+num).val(data[i].prod_serv);
+						$('#idTab_Valor_'+campo2+num).val(data[i].id_valor);
+						$('#DataConcluido'+campo2+num).val(currentDate.format('DD/MM/YYYY'));
+						$('#HoraConcluido'+campo2+num).val(currentDate.format('HH:mm'));
+						//console.log( data[i].comissaoprod +' valor da comissão do produto');
+						//carrega o valor no campo de acordo com a opção selecionada
+						$('#'+campo).val(data[i].valor);
 
-                if (data[i].id == id) {
-					
+						//if (tabela == area && $("#Qtd"+tabela+num).val()) {
+						if ($("#Qtd"+campo2+num).val()) {
+							calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2,$("#QtdIncremento"+campo2+num).val(),$("#Comissao"+campo2+num).val());
+							break;
+						}
+
+						//para cada valor carregado o orçamento é calculado/atualizado
+						//através da chamada de sua função
+						calculaOrcamento();
+						break;
+					}
+				}else{
+					$('#Escrever'+campo2+num).css("display","none");
+					$('#Entregue'+campo2+num).css("display","none");
 					//""ou posso usar assim, passando diretamente o qtdinc do id ""
-					$('#Nome'+campo2+num).val(data[i].nomeprod);
-					$('#Comissao'+campo2+num).val(data[i].comissaoprod);
-					$('#QtdIncremento'+campo2+num).val(data[i].qtdinc);
-					$('#Qtd'+campo2+num).val(data[i].qtdprod);
-					$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
-					$('#Prod_Serv_'+campo2+num).val(data[i].prod_serv);
-					$('#idTab_Valor_'+campo2+num).val(data[i].id_valor);
+					$('#Nome'+campo2+num).val("");
+					$('#Comissao'+campo2+num).val("0");
+					$('#QtdIncremento'+campo2+num).val("0");
+					$('#Qtd'+campo2+num).val("0");
+					$('#idTab_Produtos_'+campo2+num).val("0");
+					$('#Prod_Serv_'+campo2+num).val("0");
+					$('#idTab_Valor_'+campo2+num).val("0");
+					$('#DataConcluido'+campo2+num).val("00/00/0000");
+					$('#HoraConcluido'+campo2+num).val("00:00");
 					//console.log( data[i].comissaoprod +' valor da comissão do produto');
-                    //carrega o valor no campo de acordo com a opção selecionada
-                    $('#'+campo).val(data[i].valor);
+					//carrega o valor no campo de acordo com a opção selecionada
+					$('#'+campo).val("0");
 
-                    //if (tabela == area && $("#Qtd"+tabela+num).val()) {
-                    if ($("#Qtd"+campo2+num).val()) {
+					//if (tabela == area && $("#Qtd"+tabela+num).val()) {
+					if ($("#Qtd"+campo2+num).val()) {
 						calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2,$("#QtdIncremento"+campo2+num).val(),$("#Comissao"+campo2+num).val());
-                        break;
-                    }
-
-                    //para cada valor carregado o orçamento é calculado/atualizado
-                    //através da chamada de sua função
-                    calculaOrcamento();
-                    break;
-                }
-
+						break;
+					}
+				
+					//para cada valor carregado o orçamento é calculado/atualizado
+					//através da chamada de sua função
+					calculaOrcamento();
+					break;
+				}
+				
+				
             }//fim do laço
-
         }
     });//termina o ajax
 
@@ -2612,31 +2643,59 @@ function buscaValor2Tabelas(id, campo, tabela, num, campo2) {
 
             // executo este laço para acessar os itens do objeto javaScript
             for (i = 0; i < data.length; i++) {
-
-                if (data[i].id == id) {
+				if (id) {
+					if (data[i].id == id) {
+						$('#Escrever'+campo2+num).css("display","");
+						$('#Entregue'+campo2+num).css("display","");
+						//""ou posso usar assim, passando diretamente o qtdinc do id ""
+						$('#Nome'+campo2+num).val(data[i].nomeprod);
+						$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
+						$('#Prod_Serv_'+campo2+num).val(data[i].prod_serv);
+						$('#Comissao'+campo2+num).val(data[i].comissaoprod);
+						//console.log( data[i].id_produto );
 					
+						//carrega o valor no campo de acordo com a opção selecionada
+						$('#'+campo).val(data[i].valor);
+
+						//if (tabela == area && $("#Qtd"+tabela+num).val()) {
+						if ($("#Qtd"+campo2+num).val()) {
+							calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2,$("#QtdIncremento"+campo2+num).val(),$("#Comissao"+campo2+num).val());
+							break;
+						}
+
+						//para cada valor carregado o orçamento é calculado/atualizado
+						//através da chamada de sua função
+						calculaOrcamento();
+						break;
+					}
+				}else{
+					$('#Escrever'+campo2+num).css("display","none");
+					$('#Entregue'+campo2+num).css("display","none");
 					//""ou posso usar assim, passando diretamente o qtdinc do id ""
-					$('#Nome'+campo2+num).val(data[i].nomeprod);
-					$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
-					$('#Prod_Serv_'+campo2+num).val(data[i].prod_serv);
-					$('#Comissao'+campo2+num).val(data[i].comissaoprod);
-					//console.log( data[i].id_produto );
+					$('#Nome'+campo2+num).val("");
+					$('#Comissao'+campo2+num).val("0");
+					$('#QtdIncremento'+campo2+num).val("0");
+					$('#Qtd'+campo2+num).val("0");
+					$('#idTab_Produtos_'+campo2+num).val("0");
+					$('#Prod_Serv_'+campo2+num).val("0");
+					$('#idTab_Valor_'+campo2+num).val("0");
+					$('#DataConcluido'+campo2+num).val("00/00/0000");
+					$('#HoraConcluido'+campo2+num).val("00:00");
+					//console.log( data[i].comissaoprod +' valor da comissão do produto');
+					//carrega o valor no campo de acordo com a opção selecionada
+					$('#'+campo).val("0");
+
+					//if (tabela == area && $("#Qtd"+tabela+num).val()) {
+					if ($("#Qtd"+campo2+num).val()) {
+						calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2,$("#QtdIncremento"+campo2+num).val(),$("#Comissao"+campo2+num).val());
+						break;
+					}
 				
-                    //carrega o valor no campo de acordo com a opção selecionada
-                    $('#'+campo).val(data[i].valor);
-
-                    //if (tabela == area && $("#Qtd"+tabela+num).val()) {
-                    if ($("#Qtd"+campo2+num).val()) {
-                        calculaSubtotal($("#idTab_"+campo2+num).val(),$("#Qtd"+campo2+num).val(),num,'OUTRO',campo2,$("#QtdIncremento"+campo2+num).val(),$("#Comissao"+campo2+num).val());
-                        break;
-                    }
-
-                    //para cada valor carregado o orçamento é calculado/atualizado
-                    //através da chamada de sua função
-                    calculaOrcamento();
-                    break;
-                }
-
+					//para cada valor carregado o orçamento é calculado/atualizado
+					//através da chamada de sua função
+					calculaOrcamento();
+					break;
+				}
             }//fim do laço
 
         }
@@ -3131,12 +3190,13 @@ $(document).ready(function () {
     //adiciona campos dinamicamente dos Produtos Vendidos 
 	var pc = $("#PCount").val(); //initlal text box count
 	$(".add_field_button9").click(function(e){ //on add input button click
-        
+		
 		var negocio = $('#Negocio').val();
 		//console.log( negocio );
 		
 		if (negocio == 1) {
 			var endereco = 'q=90';
+			var tipo_orca = $('#Tipo_Orca').val();
 			//var escrita = 'readonly=""';
 			var escrita = '';
 			var buscavalor = 'buscaValor1Tabelas';
@@ -3144,6 +3204,7 @@ $(document).ready(function () {
 		}
 		if (negocio == 2) {
 			var endereco = 'q=20';
+			var tipo_orca = $('#Tipo_Orca').val();
 			var escrita = '';
 			var buscavalor = 'buscaValor2Tabelas';
 			var tblbusca = 'Produtos';
@@ -3163,19 +3224,19 @@ $(document).ready(function () {
 		
         pc++; //text box increment
         $("#PCount").val(pc);
-
+		//console.log($("#PCount").val(pc));
         $(".input_fields_wrap9").append('\
             <div class="form-group" id="9div'+pc+'">\
                 <div class="panel panel-warning">\
                     <div class="panel-heading">\
 						<div class="row">\
 							<div class="col-md-8">\
+								<input type="hidden" class="form-control" id="idTab_Valor_Produto'+pc+'" name="idTab_Valor_Produto'+pc+'" value="">\
+								<input type="hidden" class="form-control" id="idTab_Produtos_Produto'+pc+'" name="idTab_Produtos_Produto'+pc+'" value="">\
+								<input type="hidden" class="form-control" id="ComissaoProduto'+pc+'" name="ComissaoProduto'+pc+'" value="0.00">\
+								<input type="hidden" class="form-control" id="Prod_Serv_Produto'+pc+'" name="Prod_Serv_Produto'+pc+'" value="">\
+								<input type="hidden" class="form-control" id="NomeProduto'+pc+'" name="NomeProduto'+pc+'" value="">\
 								<div class="row">\
-									<input type="hidden" class="form-control" id="idTab_Valor_Produto'+pc+'" name="idTab_Valor_Produto'+pc+'" value="">\
-									<input type="hidden" class="form-control" id="idTab_Produtos_Produto'+pc+'" name="idTab_Produtos_Produto'+pc+'" value="">\
-									<input type="hidden" class="form-control" id="ComissaoProduto'+pc+'" name="ComissaoProduto'+pc+'" value="0.00">\
-									<input type="hidden" class="form-control" id="Prod_Serv_Produto'+pc+'" name="Prod_Serv_Produto'+pc+'" value="">\
-									<input type="hidden" class="form-control" id="NomeProduto'+pc+'" name="NomeProduto'+pc+'" value="">\
 									<div class="col-md-12">\
 										<label for="idTab_Produto">Produto '+pc+':</label><br>\
 										<select class="form-control Chosen" id="listadinamicab'+pc+'" name="idTab_Produto'+pc+'" onchange="'+buscavalor+'(this.value,this.name,\''+tblbusca+'\','+pc+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')">\
@@ -3183,64 +3244,58 @@ $(document).ready(function () {
 										</select>\
 									</div>\
 								</div>\
-								<div class="row">\
-									<div class="col-md-2">\
-										<label for="QtdProduto">Qtd.Item</label><br>\
-										<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto'+pc+'" placeholder="0"\
-											onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
-										   autofocus name="QtdProduto'+pc+'" value="1">\
-									</div>\
-									<div class="col-md-2">\
-										<label for="QtdIncrementoProduto">Qtd.Embl</label><br>\
-										<input type="text" class="form-control Numero" maxlength="10" id="QtdIncrementoProduto'+pc+'" placeholder="0" '+ escrita +' \
-											onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTDINC\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pc+',\'QTDINC\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
-										   name="QtdIncrementoProduto'+pc+'" value="1">\
-									</div>\
-									<input type="hidden" class="form-control" id="SubtotalComissaoProduto'+pc+'" name="SubtotalComissaoProduto'+pc+'" value="0.00">\
-									<div class="col-md-2">\
-										<label for="SubtotalQtdProduto">Sub.Qtd.Prod</label><br>\
-										<div id="txtHint">\
-											<input type="text" class="form-control Numero text-right" maxlength="10" readonly="" id="SubtotalQtdProduto'+pc+'"\
-												   name="SubtotalQtdProduto'+pc+'" value="">\
+								<div id="EscreverProduto'+pc+'" style="display:none">\
+									<div class="row">\
+										<div class="col-md-12">\
+											<label for="ObsProduto">Observacao</label><br>\
+											<input type="text" class="form-control" maxlength="200" placeholder="Observacao:" id="ObsProduto'+pc+'"\
+											   name="ObsProduto'+pc+'" value=""></input>\
 										</div>\
 									</div>\
-									<div class="col-md-3">\
-										<label for="ValorProduto">Valor da Embl</label><br>\
-										<div class="input-group id="txtHint">\
-											<span class="input-group-addon" id="basic-addon1">R$</span>\
-											<input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" \
-												onfocus="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'VP\',\'Produto\')"\
-												name="ValorProduto'+pc+'" value="">\
+									<div class="row">\
+										<div class="col-md-2">\
+											<label for="QtdProduto">Qtd.Item</label><br>\
+											<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto'+pc+'" placeholder="0"\
+												onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pc+',\'QTD\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
+											   autofocus name="QtdProduto'+pc+'" value="1">\
 										</div>\
-									</div>\
-									<div class="col-md-3">\
-										<label for="SubtotalProduto">Sub.Valor.Prod</label><br>\
-										<div class="input-group id="txtHint">\
-											<span class="input-group-addon" id="basic-addon1">R$</span>\
-											<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto'+pc+'"\
-												   name="SubtotalProduto'+pc+'" value="">\
+										<div class="col-md-2">\
+											<label for="QtdIncrementoProduto">Qtd.Embl</label><br>\
+											<input type="text" class="form-control Numero" maxlength="10" id="QtdIncrementoProduto'+pc+'" placeholder="0" '+ escrita +' \
+												onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'QTDINC\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeydown="calculaSubtotal(this.value,this.name,'+pc+',\'QTDINC\',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
+											   name="QtdIncrementoProduto'+pc+'" value="1">\
+										</div>\
+										<input type="hidden" class="form-control" id="SubtotalComissaoProduto'+pc+'" name="SubtotalComissaoProduto'+pc+'" value="0.00">\
+										<div class="col-md-2">\
+											<label for="SubtotalQtdProduto">Sub.Qtd.Prod</label><br>\
+											<div id="txtHint">\
+												<input type="text" class="form-control Numero text-right" maxlength="10" readonly="" id="SubtotalQtdProduto'+pc+'"\
+													   name="SubtotalQtdProduto'+pc+'" value="">\
+											</div>\
+										</div>\
+										<div class="col-md-3">\
+											<label for="ValorProduto">Valor da Embl</label><br>\
+											<div class="input-group id="txtHint">\
+												<span class="input-group-addon" id="basic-addon1">R$</span>\
+												<input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" \
+													onfocus="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')" onkeyup="calculaSubtotal(this.value,this.name,'+pc+',\'VP\',\'Produto\')"\
+													name="ValorProduto'+pc+'" value="">\
+											</div>\
+										</div>\
+										<div class="col-md-3">\
+											<label for="SubtotalProduto">Sub.Valor.Prod</label><br>\
+											<div class="input-group id="txtHint">\
+												<span class="input-group-addon" id="basic-addon1">R$</span>\
+												<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="SubtotalProduto'+pc+'" readonly=""\
+													   name="SubtotalProduto'+pc+'" value="">\
+											</div>\
 										</div>\
 									</div>\
 								</div>\
 							</div>\
-							<div class="col-md-2">\
+							<div class="col-md-4">\
 								<div class="row">\
-									<div class="col-md-12">\
-										<label for="ConcluidoProduto">Entregue? </label><br>\
-										<div class="btn-group" data-toggle="buttons">\
-											<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
-											<input type="radio" name="ConcluidoProduto'+pc+'" id="rdgrldnmc_prd"\
-												onchange="carregaEntreguePrd(this.value,this.name,'+pc+',0)" autocomplete="off" value="N" checked>Não\
-											</label>\
-											<label class="btn btn-default" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'S">\
-											<input type="radio" name="ConcluidoProduto'+pc+'" id="rdgrldnmc_prd"\
-												onchange="carregaEntreguePrd(this.value,this.name,'+pc+',0)" autocomplete="off" value="S" >Sim\
-											</label>\
-										</div>\
-									</div>\
-								</div>\
-								<div class="row">\
-									<div class="col-md-12 text-left">\
+									<div class="col-md-6 text-left">\
 										<label><br></label><br>\
 										<a href="#" id="'+pc+'" class="remove_field9 btn btn-danger"\
 												onclick="calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',1,'+pc+',\'CountMax\',0,\'ProdutoHidden\')">\
@@ -3248,30 +3303,43 @@ $(document).ready(function () {
 										</a>\
 									</div>\
 								</div>\
-							</div>\
-							<div class="col-md-2">\
-								<div id="ConcluidoProduto'+pc+'" style="display:none">\
+								<div id="EntregueProduto'+pc+'" style="display:none">\
 									<div class="row">\
-										<div class="col-md-12">\
-											<label for="DataConcluidoProduto">Data Entregue</label>\
-											<div class="input-group DatePicker">\
-												<span class="input-group-addon" disabled>\
-													<span class="glyphicon glyphicon-calendar"></span>\
-												</span>\
-												<input type="text" class="form-control Date" id="DataConcluidoProduto'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
-													   name="DataConcluidoProduto'+pc+'" value="">\
+										<div class="col-md-6">\
+											<label for="ConcluidoProduto">Entregue? </label><br>\
+											<div class="btn-group" data-toggle="buttons">\
+												<label class="btn btn-warning active" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'N">\
+												<input type="radio" name="ConcluidoProduto'+pc+'" id="rdgrldnmc_prd"\
+													onchange="carregaEntreguePrd(this.value,this.name,'+pc+',0)" autocomplete="off" value="N" checked>Não\
+												</label>\
+												<label class="btn btn-default" name="radio_ConcluidoProduto'+pc+'" id="radio_ConcluidoProduto'+pc+'S">\
+												<input type="radio" name="ConcluidoProduto'+pc+'" id="rdgrldnmc_prd"\
+													onchange="carregaEntreguePrd(this.value,this.name,'+pc+',0)" autocomplete="off" value="S" >Sim\
+												</label>\
 											</div>\
 										</div>\
 									</div>\
-									<div class="row">\
-										<div class="col-md-12">\
-											<label for="HoraConcluidoProduto">Hora Entregue</label>\
-											<div class="input-group TimePicker">\
-												<span class="input-group-addon" disabled>\
-													<span class="glyphicon glyphicon-time"></span>\
-												</span>\
-												<input type="text" class="form-control Time" id="HoraConcluidoProduto'+pc+'" maxlength="5" placeholder="HH:MM"\
-													   name="HoraConcluidoProduto'+pc+'" value="">\
+									<div id="ConcluidoProduto'+pc+'" style="display:none">\
+										<div class="row">\
+											<div class="col-md-6">\
+												<label for="DataConcluidoProduto">Data Entregue</label>\
+												<div class="input-group DatePicker">\
+													<span class="input-group-addon" disabled>\
+														<span class="glyphicon glyphicon-calendar"></span>\
+													</span>\
+													<input type="text" class="form-control Date" id="DataConcluidoProduto'+pc+'" maxlength="10" placeholder="DD/MM/AAAA"\
+														   name="DataConcluidoProduto'+pc+'" value="">\
+												</div>\
+											</div>\
+											<div class="col-md-6">\
+												<label for="HoraConcluidoProduto">Hora Entregue</label>\
+												<div class="input-group TimePicker">\
+													<span class="input-group-addon" disabled>\
+														<span class="glyphicon glyphicon-time"></span>\
+													</span>\
+													<input type="text" class="form-control Time" id="HoraConcluidoProduto'+pc+'" maxlength="5" placeholder="HH:MM"\
+														   name="HoraConcluidoProduto'+pc+'" value="">\
+												</div>\
 											</div>\
 										</div>\
 									</div>\
@@ -3289,18 +3357,19 @@ $(document).ready(function () {
 		//$('.TimePicker').datetimepicker(TimePickerOptions);
 		
 		//get a reference to the select element
-        $select = $('#listadinamicab'+pc);
-		
+
+		$select = $('#listadinamicab'+pc);
+
         //request the JSON data and parse into the select element
         $.ajax({
 			
 			//url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=90',
-			url: window.location.origin+ '/' + app + '/Getvalues_json.php?' + endereco,
+			url: window.location.origin+ '/' + app + '/Getvalues_json.php?' + endereco + "&tipo_orca=" + tipo_orca,
 			
 			dataType: 'JSON',
             type: "GET",
             success: function (data) {
-                //clear the current content of the select
+				//clear the current content of the select
                 $select.html('');
                 //iterate over the data and append a select option
                 $select.append('<option value="">-- Selecione uma opção --</option>');
@@ -3359,22 +3428,19 @@ $(document).ready(function () {
 		
 		//permite o uso de radio buttons nesse bloco dinâmico
 		$('input:radio[id="rdgrldnmc_prd"]').change(function() {
-
+			
 			var value_prd = $(this).val();
 			var name_prd = $(this).attr("name");
-
 			//console.log(value_prd + ' <<>> ' + name_prd);
-
 			$('label[name="radio_' + name_prd + '"]').removeClass();
 			$('label[name="radio_' + name_prd + '"]').addClass("btn btn-default");
 			$('#radio_' + name_prd + value_prd).addClass("btn btn-warning active");
-		
+			
 			if(value_prd == "S"){
 				$("#"+name_prd).css("display","");
 			}else{
 				$("#"+name_prd).css("display","none");
 			}
-
 		});
 
     });
@@ -3388,12 +3454,15 @@ $(document).ready(function () {
 		
 		if (negocio == 1) {
 			var endereco_serv = 'q=902';
+			var tipo_orca = $('#Tipo_Orca').val();
+			console.log( tipo_orca );
 			var escrita_serv = 'readonly=""';
 			var buscavalor_serv = 'buscaValor1Tabelas';
 			var tblbusca_serv = 'Valor';
 		}
 		if (negocio == 2) {
 			var endereco_serv = 'q=202';
+			var tipo_orca = $('#Tipo_Orca').val();
 			var escrita_serv = '';
 			var buscavalor_serv = 'buscaValor2Tabelas';
 			var tblbusca_serv = 'Produtos';
@@ -3410,12 +3479,12 @@ $(document).ready(function () {
 					<div class="panel-heading">\
 						<div class="row">\
 							<div class="col-md-8">\
+								<input type="hidden" class="form-control" id="idTab_Valor_Servico'+ps+'" name="idTab_Valor_Servico'+ps+'" value="">\
+								<input type="hidden" class="form-control" id="idTab_Produtos_Servico'+ps+'" name="idTab_Produtos_Servico'+ps+'" value="">\
+								<input type="hidden" class="form-control" id="ComissaoServico'+ps+'" name="ComissaoServico'+ps+'" value="">\
+								<input type="hidden" class="form-control" id="Prod_Serv_Servico'+ps+'" name="Prod_Serv_Servico'+ps+'" value="">\
+								<input type="hidden" class="form-control" id="NomeServico'+ps+'" name="NomeServico'+ps+'" value="">\
 								<div class="row">\
-									<input type="hidden" class="form-control" id="idTab_Valor_Servico'+ps+'" name="idTab_Valor_Servico'+ps+'" value="">\
-									<input type="hidden" class="form-control" id="idTab_Produtos_Servico'+ps+'" name="idTab_Produtos_Servico'+ps+'" value="">\
-									<input type="hidden" class="form-control" id="ComissaoServico'+ps+'" name="ComissaoServico'+ps+'" value="">\
-									<input type="hidden" class="form-control" id="Prod_Serv_Servico'+ps+'" name="Prod_Serv_Servico'+ps+'" value="">\
-									<input type="hidden" class="form-control" id="NomeServico'+ps+'" name="NomeServico'+ps+'" value="">\
 									<div class="col-md-12">\
 										<label for="idTab_Servico">Servico '+ps+':</label><br>\
 										<select class="form-control Chosen4" id="listadinamica'+ps+'"  name="idTab_Servico'+ps+'" onchange="'+buscavalor_serv+'(this.value,this.name,\''+tblbusca_serv+'\','+ps+',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')">\
@@ -3423,60 +3492,54 @@ $(document).ready(function () {
 										</select>\
 									</div>\
 								</div>\
-								<div class="row">\
-									<div class="col-md-2">\
-										<label for="QtdServico">Qtd</label><br>\
-										<input type="text" class="form-control Numero" maxlength="10" id="QtdServico'+ps+'" placeholder="0"\
-											onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
-											name="QtdServico'+ps+'" value="1">\
-									</div>\
-									<div class="col-md-4">\
-										<label for="ProfissionalServico'+ps+'">Profissional:</label>\
-										<select data-placeholder="Selecione uma opção..." class="form-control Chosen2"\
-												 id="listadinamica_prof'+ps+'" name="ProfissionalServico'+ps+'">\
-											<option value=""></option>\
-										</select>\
-									</div>\
-									<input type="hidden" class="form-control Numero" id="QtdIncrementoServico'+ps+'" name="QtdIncrementoServico'+ps+'" value="1">\
-									<input type="hidden" class="form-control" id="SubtotalComissaoServico'+ps+'" name="SubtotalComissaoServico'+ps+'" value="0.00">\
-									<input type="hidden" class="form-control Numero" id="SubtotalQtdServico'+ps+'" name="SubtotalQtdServico'+ps+'" value="">\
-									<div class="col-md-3">\
-										<label for="ValorServico">Valor do Serviço</label><br>\
-										<div class="input-group">\
-											<span class="input-group-addon" id="basic-addon1">R$</span>\
-											<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
-												onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'VP\',\'Servico\')" onchange="calculaSubtotal(this.value,this.name,'+ps+',\'VP\',\'Servico\')"\
-												name="ValorServico'+ps+'" value="">\
+								<div id="EscreverServico'+ps+'" style="display:none">\
+									<div class="row">\
+										<div class="col-md-12">\
+											<label for="ObsServico">Observacao</label><br>\
+											<input type="text" class="form-control " maxlength="200" id="ObsServico'+ps+'" placeholder="Observacao"\
+												name="ObsServico'+ps+'" value="">\
 										</div>\
 									</div>\
-									<div class="col-md-3">\
-										<label for="SubtotalServico">Sub.Valor.Serv.</label><br>\
-										<div class="input-group id="txtHint">\
-											<span class="input-group-addon" id="basic-addon1">R$</span>\
-											<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalServico'+ps+'"\
-												   name="SubtotalServico'+ps+'" value="">\
+									<div class="row">\
+										<div class="col-md-2">\
+											<label for="QtdServico">Qtd</label><br>\
+											<input type="text" class="form-control Numero" maxlength="10" id="QtdServico'+ps+'" placeholder="0"\
+												onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'QTD\',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
+												name="QtdServico'+ps+'" value="1">\
+										</div>\
+										<div class="col-md-4">\
+											<label for="ProfissionalServico'+ps+'">Profissional:</label>\
+											<select data-placeholder="Selecione uma opção..." class="form-control Chosen2"\
+													 id="listadinamica_prof'+ps+'" name="ProfissionalServico'+ps+'">\
+												<option value=""></option>\
+											</select>\
+										</div>\
+										<input type="hidden" class="form-control Numero" id="QtdIncrementoServico'+ps+'" name="QtdIncrementoServico'+ps+'" value="1">\
+										<input type="hidden" class="form-control" id="SubtotalComissaoServico'+ps+'" name="SubtotalComissaoServico'+ps+'" value="0.00">\
+										<input type="hidden" class="form-control Numero" id="SubtotalQtdServico'+ps+'" name="SubtotalQtdServico'+ps+'" value="">\
+										<div class="col-md-3">\
+											<label for="ValorServico">Valor do Serviço</label><br>\
+											<div class="input-group">\
+												<span class="input-group-addon" id="basic-addon1">R$</span>\
+												<input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" \
+													onkeyup="calculaSubtotal(this.value,this.name,'+ps+',\'VP\',\'Servico\')" onchange="calculaSubtotal(this.value,this.name,'+ps+',\'VP\',\'Servico\')"\
+													name="ValorServico'+ps+'" value="">\
+											</div>\
+										</div>\
+										<div class="col-md-3">\
+											<label for="SubtotalServico">Sub.Valor.Serv.</label><br>\
+											<div class="input-group id="txtHint">\
+												<span class="input-group-addon" id="basic-addon1">R$</span>\
+												<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalServico'+ps+'"\
+													   name="SubtotalServico'+ps+'" value="">\
+											</div>\
 										</div>\
 									</div>\
 								</div>\
 							</div>\
-							<div class="col-md-2">\
+							<div class="col-md-4">\
 								<div class="row">\
-									<div class="col-md-12">\
-										<label for="ConcluidoServico">Entregue? </label><br>\
-										<div class="btn-group" data-toggle="buttons">\
-											<label class="btn btn-warning active" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'N">\
-											<input type="radio" name="ConcluidoServico'+ps+'" id="rdgrldnmc_srv"\
-												onchange="carregaEntregueSrv(this.value,this.name,'+ps+',0)" autocomplete="off" value="N" checked>Não\
-											</label>\
-											<label class="btn btn-default" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'S">\
-											<input type="radio" name="ConcluidoServico'+ps+'" id="rdgrldnmc_srv"\
-												onchange="carregaEntregueSrv(this.value,this.name,'+ps+',0)" autocomplete="off" value="S" >Sim\
-											</label>\
-										</div>\
-									</div>\
-								</div>\
-								<div class="row">\
-									<div class="col-md-12 text-left">\
+									<div class="col-md-6 text-left">\
 										<label><br></label><br>\
 										<a href="#" id="'+ps+'" class="remove_field10 btn btn-danger"\
 											onclick="calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',1,'+ps+',\'CountMax2\',0,\'ServicoHidden\')">\
@@ -3484,30 +3547,43 @@ $(document).ready(function () {
 										</a>\
 									</div>\
 								</div>\
-							</div>\
-							<div class="col-md-2">\
-								<div id="ConcluidoServico'+ps+'" style="display:none">\
+								<div id="EntregueServico'+ps+'" style="display:none">\
 									<div class="row">\
-										<div class="col-md-12">\
-											<label for="DataConcluidoServico">Data Entregue</label>\
-											<div class="input-group DatePicker">\
-												<span class="input-group-addon" disabled>\
-													<span class="glyphicon glyphicon-calendar"></span>\
-												</span>\
-												<input type="text" class="form-control Date" id="DataConcluidoServico'+ps+'" maxlength="10" placeholder="DD/MM/AAAA"\
-													   name="DataConcluidoServico'+ps+'" value="">\
+										<div class="col-md-6">\
+											<label for="ConcluidoServico">Entregue? </label><br>\
+											<div class="btn-group" data-toggle="buttons">\
+												<label class="btn btn-warning active" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'N">\
+												<input type="radio" name="ConcluidoServico'+ps+'" id="rdgrldnmc_srv"\
+													onchange="carregaEntregueSrv(this.value,this.name,'+ps+',0)" autocomplete="off" value="N" checked>Não\
+												</label>\
+												<label class="btn btn-default" name="radio_ConcluidoServico'+ps+'" id="radio_ConcluidoServico'+ps+'S">\
+												<input type="radio" name="ConcluidoServico'+ps+'" id="rdgrldnmc_srv"\
+													onchange="carregaEntregueSrv(this.value,this.name,'+ps+',0)" autocomplete="off" value="S" >Sim\
+												</label>\
 											</div>\
 										</div>\
 									</div>\
-									<div class="row">\
-										<div class="col-md-12">\
-											<label for="HoraConcluidoServico">Hora Entregue</label>\
-											<div class="input-group TimePicker">\
-												<span class="input-group-addon" disabled>\
-													<span class="glyphicon glyphicon-time"></span>\
-												</span>\
-												<input type="text" class="form-control Time" id="HoraConcluidoServico'+ps+'" maxlength="5" placeholder="HH:MM"\
-													   name="HoraConcluidoServico'+ps+'" value="">\
+									<div id="ConcluidoServico'+ps+'" style="display:none">\
+										<div class="row">\
+											<div class="col-md-6">\
+												<label for="DataConcluidoServico">Data Entregue</label>\
+												<div class="input-group DatePicker">\
+													<span class="input-group-addon" disabled>\
+														<span class="glyphicon glyphicon-calendar"></span>\
+													</span>\
+													<input type="text" class="form-control Date" id="DataConcluidoServico'+ps+'" maxlength="10" placeholder="DD/MM/AAAA"\
+														   name="DataConcluidoServico'+ps+'" value="">\
+												</div>\
+											</div>\
+											<div class="col-md-6">\
+												<label for="HoraConcluidoServico">Hora Entregue</label>\
+												<div class="input-group TimePicker">\
+													<span class="input-group-addon" disabled>\
+														<span class="glyphicon glyphicon-time"></span>\
+													</span>\
+													<input type="text" class="form-control Time" id="HoraConcluidoServico'+ps+'" maxlength="5" placeholder="HH:MM"\
+														   name="HoraConcluidoServico'+ps+'" value="">\
+												</div>\
 											</div>\
 										</div>\
 									</div>\
@@ -3527,7 +3603,7 @@ $(document).ready(function () {
 
 		//request the JSON data and parse into the select element
         $.ajax({
-            url: window.location.origin+ '/' + app + '/Getvalues_json.php?' + endereco_serv,
+            url: window.location.origin+ '/' + app + '/Getvalues_json.php?' + endereco_serv + "&tipo_orca=" + tipo_orca,
             dataType: 'JSON',
             type: "GET",
             success: function (data) {

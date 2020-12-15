@@ -1884,6 +1884,7 @@
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
+										<input type="hidden" name="Tipo_Orca"  id="Tipo_Orca" value="<?php echo $orcatrata['Tipo_Orca']; ?>">
 										<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
 										<input type="hidden" name="Cadastrar" value="<?php echo $cadastrar['Cadastrar'] ?>">
 										<input type="hidden" name="idApp_Cliente" value="<?php echo $orcatrata['idApp_Cliente'] ?>">

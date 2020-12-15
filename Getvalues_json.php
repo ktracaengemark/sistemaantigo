@@ -441,7 +441,7 @@ elseif ($_GET['q'] == 23) {
 }
 
 elseif ($_GET['q'] == 90) {
-
+	$filtro1 = ($_GET['tipo_orca'] == "B") ? ' AND TPM.VendaBalcao = "S" AND V.VendaBalcaoPreco = "S"  ': ' AND TPM.VendaSite = "S" AND V.VendaSitePreco = "S"  ';
     $result = mysql_query('
             SELECT
                 V.idTab_Valor,
@@ -466,10 +466,9 @@ elseif ($_GET['q'] == 90) {
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 				P.idTab_Produtos = V.idTab_Produtos AND
 				TPM.Ativo = "S" AND
-				TPM.VendaBalcao = "S" AND
 				V.AtivoPreco = "S" AND
-				V.VendaBalcaoPreco = "S" AND
 				P.Prod_Serv = "P"
+				' . $filtro1 . '
 			ORDER BY
 				P.Prod_Serv ASC,
 				P.Nome_Prod ASC,
@@ -495,7 +494,7 @@ elseif ($_GET['q'] == 90) {
 }
 
 elseif ($_GET['q'] == 902) {
-
+	$filtro1 = ($_GET['tipo_orca'] == "B") ? ' AND TPM.VendaBalcao = "S" AND V.VendaBalcaoPreco = "S"  ': ' AND TPM.VendaSite = "S" AND V.VendaSitePreco = "S"  ';
     $result = mysql_query('
             SELECT
                 V.idTab_Valor,
@@ -518,10 +517,9 @@ elseif ($_GET['q'] == 902) {
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 				P.idTab_Produtos = V.idTab_Produtos AND
 				TPM.Ativo = "S" AND
-				TPM.VendaBalcao = "S" AND
 				V.AtivoPreco = "S" AND
-				V.VendaBalcaoPreco = "S" AND
 				P.Prod_Serv = "S"
+				' . $filtro1 . '
 			ORDER BY
 				P.Nome_Prod ASC
         ');

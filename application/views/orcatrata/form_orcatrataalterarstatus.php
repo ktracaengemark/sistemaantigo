@@ -1,7 +1,160 @@
 <?php if (isset($msg)) echo $msg; ?>
-<div class="col-md-12 ">
-	<div class="row">
+
 		<div class="col-md-12 col-lg-12">
+			<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
+				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 || $_SESSION['Cliente']['idApp_Cliente'] != 150001) { ?>
+					<nav class="navbar navbar-inverse navbar-fixed" role="banner">
+					  <div class="container-fluid">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span> 
+							</button>
+							<div class="navbar-form btn-group">
+								<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-user"></span>
+										<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?> 
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a <?php if (preg_match("/cliente\/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-file"></span> Ver Dados do Cliente
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/cliente\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+											<a href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-edit"></span> Editar Dados do Cliente
+											</a>
+										</a>
+									</li>
+									<li role="separator" class="divider"></li>
+									<li>
+										<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<span class="glyphicon glyphicon-user"></span> Contatos do Cliente
+											</a>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<!--
+							<a class="navbar-brand" href="<?php #echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+								<?php #echo '<small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '.</small>' ?> 
+							</a>
+							-->
+						</div>
+						<div class="collapse navbar-collapse" id="myNavbar">
+							<ul class="nav navbar-nav navbar-center">
+								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group">
+										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+											<span class="glyphicon glyphicon-calendar"></span> Agenda <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a <?php if (preg_match("/consulta\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+													<a href="<?php echo base_url() . 'consulta/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-calendar"></span> Lista de Agendamentos
+													</a>
+												</a>
+											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a <?php if (preg_match("/consulta\/cadastrar1\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'consulta/cadastrar1/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-plus"></span> Novo Agendamento
+													</a>
+												</a>
+											</li>
+										</ul>
+									</div>									
+								</li>								
+								<?php if ($_SESSION['Cliente']['idSis_Empresa'] == $_SESSION['log']['idSis_Empresa'] ) { ?>
+								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group">
+										<button type="button" class="btn btn-md btn-warning  dropdown-toggle" data-toggle="dropdown">
+											<span class="glyphicon glyphicon-usd"></span> Orçs. <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a <?php if (preg_match("/orcatrata\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+													<a href="<?php echo base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-usd"></span> Lista de Orçamentos
+													</a>
+												</a>
+											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a <?php if (preg_match("/orcatrata\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'orcatrata/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>" onclick="buscaEnderecoCliente(<?php echo $_SESSION['Cliente']['idApp_Cliente'];?>)">
+														<span class="glyphicon glyphicon-plus" ></span> Novo Orçamento
+													</a>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<?php } ?>
+								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group">
+										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+											<span class="glyphicon glyphicon-pencil"></span> SAC <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a <?php if (preg_match("/procedimento\/listarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+													<a href="<?php echo base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-pencil"></span> Lista de Chamadas
+													</a>
+												</a>
+											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a <?php if (preg_match("/procedimento\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'procedimento/cadastrarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-plus"></span> Nova Chamada
+													</a>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group">
+										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+											<span class="glyphicon glyphicon-pencil"></span> Marketing <span class="caret"></span>
+										</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<a <?php if (preg_match("/procedimento\/listarcampanha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+													<a href="<?php echo base_url() . 'procedimento/listarcampanha/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-pencil"></span> Lista de Campanhas
+													</a>
+												</a>
+											</li>
+											<li role="separator" class="divider"></li>
+											<li>
+												<a <?php if (preg_match("/procedimento\/campanha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'procedimento/campanha/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+														<span class="glyphicon glyphicon-plus"></span> Nova Campanha
+													</a>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>	
+							</ul>
+						</div>
+					  </div>
+					</nav>
+				<?php } ?>
+			<?php } ?>
 			<?php #echo validation_errors(); ?>
 			<?php echo form_open_multipart($form_open_path); ?>
 			<div class="panel panel-<?php echo $panel; ?>">
@@ -94,6 +247,13 @@
 																		</div>
 																	</div>
 																	<div class="row">
+																		<div class="col-md-12">
+																			<label for="ObsProduto">Observacao</label>
+																			<input type="text" class="form-control" readonly="" id="ObsProduto<?php echo $i ?>" maxlength="200" placeholder="Observacao"
+																					name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>"></input>
+																		</div>
+																	</div>
+																	<div class="row">
 																		<div class="col-md-2">
 																			<label for="QtdProduto">Qtd.Item</label>
 																			<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
@@ -131,34 +291,21 @@
 																		</div>
 																	</div>
 																</div>	
-																<div class="col-md-2">
+																<div class="col-md-4">
 																	<div class="row">
-																		<div class="col-md-12 text-left">
+																		<div class="col-md-6 text-left">
+																			<label><br></label><br>
+																			<button type="button" id="<?php echo $i ?>" class="btn btn-default">
+																				<span class="glyphicon glyphicon-trash"></span>
+																			</button>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col-md-6 text-left">
 																			<label for="ConcluidoProduto">Entregue? </label><br>
 																			<?php if ($_SESSION['Usuario']['Bx_Prd'] == "S") { ?>
 																				<div class="btn-group" data-toggle="buttons">
 																					<?php
-																					/*
-																					foreach ($select['ConcluidoProduto'] as $key => $row) {
-																						(!$produto[$i]['ConcluidoProduto']) ? $produto[$i]['ConcluidoProduto'] = 'N' : FALSE;
-
-																						if ($produto[$i]['ConcluidoProduto'] == $key) {
-																							echo ''
-																							. '<label class="btn btn-warning active" name="radiobutton_ConcluidoProduto' . $i . '" id="radiobutton_ConcluidoProduto' . $i .  $key . '">'
-																							. '<input type="radio" name="ConcluidoProduto' . $i . '" id="radiobuttondinamico" '
-																							. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																							. '</label>'
-																							;
-																						} else {
-																							echo ''
-																							. '<label class="btn btn-default" name="radiobutton_ConcluidoProduto' . $i . '" id="radiobutton_ConcluidoProduto' . $i .  $key . '">'
-																							. '<input type="radio" name="ConcluidoProduto' . $i . '" id="radiobuttondinamico" '
-																							. 'autocomplete="off" value="' . $key . '" >' . $row
-																							. '</label>'
-																							;
-																						}
-																					}
-																					*/
 																					foreach ($select['ConcluidoProduto'] as $key => $row) {
 																						if (!$produto[$i]['ConcluidoProduto'])$produto[$i]['ConcluidoProduto'] = 'N';
 																						($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
@@ -197,12 +344,10 @@
 																				</span>
 																			<?php } ?>
 																		</div>
-																	</div>	
-																</div>	
-																<div class="col-md-2">	
+																	</div>
 																	<div id="ConcluidoProduto<?php echo $i ?>" <?php echo $div['ConcluidoProduto' . $i]; ?>>
 																		<div class="row">
-																			<div class="col-md-12">
+																			<div class="col-md-6">
 																				<label for="DataConcluidoProduto">Data Entregue</label>
 																				<div class="input-group DatePicker">
 																					<span class="input-group-addon" disabled>
@@ -211,10 +356,8 @@
 																					<input type="text" class="form-control Date" id="DataConcluidoProduto<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
 																						   name="DataConcluidoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['DataConcluidoProduto'] ?>">
 																				</div>
-																			</div>
-																		</div>	
-																		<div class="row">	
-																			<div class="col-md-12">
+																			</div>	
+																			<div class="col-md-6">
 																				<label for="HoraConcluidoProduto">Hora Entregue:</label>
 																				<div class="input-group <?php echo $timepicker; ?>">
 																					<span class="input-group-addon">
@@ -272,6 +415,13 @@
 																		</div>
 																	</div>
 																	<div class="row">
+																		<div class="col-md-12">
+																			<label for="ObsServico">Observacao</label>
+																			<input type="text" class="form-control" readonly="" maxlength="10" id="ObsServico<?php echo $i ?>" placeholder="Observacao"
+																					 name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
+																		</div>
+																	</div>
+																	<div class="row">
 																		<div class="col-md-2">
 																			<label for="QtdServico">Qtd</label>
 																			<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0"
@@ -319,33 +469,21 @@
 																		</div>
 																	</div>
 																</div>
-																<div class="col-md-2">	
+																<div class="col-md-4">
 																	<div class="row">
-																		<div class="col-md-12 text-left">
+																		<div class="col-md-6 text-left">
+																			<label><br></label><br>
+																			<button type="button" id="<?php echo $i ?>" class="btn btn-default">
+																				<span class="glyphicon glyphicon-trash"></span>
+																			</button>
+																		</div>
+																	</div>	
+																	<div class="row">
+																		<div class="col-md-6 text-left">
 																			<label for="ConcluidoServico">Entregue? </label><br>
 																			<?php if ($_SESSION['Usuario']['Bx_Prd'] == "S") { ?>
 																				<div class="btn-group" data-toggle="buttons">
 																					<?php
-																					/*
-																					foreach ($select['ConcluidoServico'] as $key => $row) {
-																						(!$servico[$i]['ConcluidoProduto']) ? $servico[$i]['ConcluidoProduto'] = 'N' : FALSE;
-																						if ($servico[$i]['ConcluidoProduto'] == $key) {
-																							echo ''
-																							. '<label class="btn btn-warning active" name="radiobutton_ConcluidoServico' . $i . '" id="radiobutton_ConcluidoServico' . $i .  $key . '">'
-																							. '<input type="radio" name="ConcluidoServico' . $i . '" id="radiobuttondinamico" '
-																							. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																							. '</label>'
-																							;
-																						} else {
-																							echo ''
-																							. '<label class="btn btn-default" name="radiobutton_ConcluidoServico' . $i . '" id="radiobutton_ConcluidoServico' . $i .  $key . '">'
-																							. '<input type="radio" name="ConcluidoServico' . $i . '" id="radiobuttondinamico" '
-																							. 'autocomplete="off" value="' . $key . '" >' . $row
-																							. '</label>'
-																							;
-																						}
-																					}
-																					*/
 																					foreach ($select['ConcluidoServico'] as $key => $row) {
 																						if (!$servico[$i]['ConcluidoProduto'])$servico[$i]['ConcluidoProduto'] = 'N';
 																						($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
@@ -385,11 +523,9 @@
 																			<?php } ?>
 																		</div>
 																	</div>
-																</div>
-																<div class="col-md-2">
 																	<div id="ConcluidoServico<?php echo $i ?>" <?php echo $div['ConcluidoServico' . $i]; ?>>
 																		<div class="row">
-																			<div class="col-md-12">
+																			<div class="col-md-6">
 																				<label for="DataConcluidoServico">Data Entregue</label>
 																				<div class="input-group DatePicker">
 																					<span class="input-group-addon" disabled>
@@ -399,9 +535,7 @@
 																						   name="DataConcluidoServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataConcluidoProduto'] ?>">
 																				</div>
 																			</div>
-																		</div>	
-																		<div class="row">
-																			<div class="col-md-12">
+																			<div class="col-md-6">
 																				<label for="HoraConcluidoServico">Hora Entregue</label>
 																				<div class="input-group <?php echo $timepicker; ?>">
 																					<span class="input-group-addon">
@@ -1670,9 +1804,11 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">
 									<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
+									<input type="hidden" name="Tipo_Orca"  id="Tipo_Orca" value="<?php echo $orcatrata['Tipo_Orca']; ?>">
 									<input type="hidden" name="Cadastrar" value="<?php echo $cadastrar['Cadastrar'] ?>">
-									<input type="hidden" name="idApp_Cliente" value="<?php echo $orcatrata['idApp_Cliente'] ?>">
-									<!--<input type="hidden" name="Modalidade" value="<?php echo $orcatrata['Modalidade'] ?>">
+									<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
+									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $orcatrata['idApp_Cliente'] ?>">
+									<input type="hidden" name="Modalidade" value="<?php echo $orcatrata['Modalidade'] ?>">
 									<input type="hidden" name="BrindeOrca" value="<?php echo $orcatrata['BrindeOrca'] ?>">-->
 									<h4 class="mb-3"><b>Pedido</b></h4>
 									<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
@@ -1701,7 +1837,7 @@
 														</span>
 														<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
 															<span class="input-group-btn">	
-																<a class="btn btn-lg btn-warning" name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() . 'orcatrata/alterar2/' . $orcatrata['idApp_OrcaTrata']; ?>">
+																<a class="btn btn-lg btn-warning" name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() . 'orcatrata/alterar/' . $orcatrata['idApp_OrcaTrata']; ?>">
 																	<span class="glyphicon glyphicon-edit"></span>Edit
 																</a>
 															</span>
@@ -1777,5 +1913,3 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</div>

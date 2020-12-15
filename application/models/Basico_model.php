@@ -1238,7 +1238,7 @@ if (isset($data) && $data) {
     }
 
 	public function select_produtos3($data = FALSE) {
-
+		$filtro1 = ($data == "B") ? ' AND TPM.VendaBalcao = "S" AND V.VendaBalcaoPreco = "S"  ': ' AND TPM.VendaSite = "S" AND V.VendaSitePreco = "S"  ';
         if ($data === TRUE) {
             $array = $this->db->query('
             SELECT
@@ -1262,7 +1262,10 @@ if (isset($data) && $data) {
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 				P.idTab_Produtos = V.idTab_Produtos AND
+				TPM.Ativo = "S" AND
+				V.AtivoPreco = "S" AND
 				P.Prod_Serv = "P"
+				' . $filtro1 . '
 			ORDER BY
 				P.Prod_Serv ASC,
 				P.Nome_Prod ASC,
@@ -1271,7 +1274,7 @@ if (isset($data) && $data) {
 				TOP2.Opcao,
 				TOP1.Opcao,
 				V.ValorProduto
-    ');
+			');
         } else {
             $query = $this->db->query('
             SELECT
@@ -1295,7 +1298,10 @@ if (isset($data) && $data) {
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 				P.idTab_Produtos = V.idTab_Produtos AND
+				TPM.Ativo = "S" AND
+				V.AtivoPreco = "S" AND
 				P.Prod_Serv = "P"
+				' . $filtro1 . '
 			ORDER BY
 				P.Prod_Serv ASC,
 				P.Nome_Prod ASC,
@@ -1304,7 +1310,7 @@ if (isset($data) && $data) {
 				TOP2.Opcao,
 				TOP1.Opcao,
 				V.ValorProduto
-    ');
+			');
 
             $array = array();
             foreach ($query->result() as $row) {
@@ -1316,7 +1322,7 @@ if (isset($data) && $data) {
     }
 
 	public function select_servicos3($data = FALSE) {
-
+		$filtro1 = ($data == "B") ? ' AND TPM.VendaBalcao = "S" AND V.VendaBalcaoPreco = "S"  ': ' AND TPM.VendaSite = "S" AND V.VendaSitePreco = "S"  ';
         if ($data === TRUE) {
             $array = $this->db->query('
             SELECT
@@ -1338,10 +1344,13 @@ if (isset($data) && $data) {
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 				P.idTab_Produtos = V.idTab_Produtos AND
+				TPM.Ativo = "S" AND
+				V.AtivoPreco = "S" AND
 				P.Prod_Serv = "S"
+				' . $filtro1 . '
 			ORDER BY
 				P.Nome_Prod ASC
-    ');
+			');
         } else {
             $query = $this->db->query('
             SELECT
@@ -1363,10 +1372,13 @@ if (isset($data) && $data) {
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 				P.idTab_Produtos = V.idTab_Produtos AND
+				TPM.Ativo = "S" AND
+				V.AtivoPreco = "S" AND
 				P.Prod_Serv = "S"
+				' . $filtro1 . '
 			ORDER BY
 				P.Nome_Prod ASC
-    ');
+			');
 
             $array = array();
             foreach ($query->result() as $row) {
