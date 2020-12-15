@@ -3246,13 +3246,6 @@ $(document).ready(function () {
 								</div>\
 								<div id="EscreverProduto'+pc+'" style="display:none">\
 									<div class="row">\
-										<div class="col-md-12">\
-											<label for="ObsProduto">Observacao</label><br>\
-											<input type="text" class="form-control" maxlength="200" placeholder="Observacao:" id="ObsProduto'+pc+'"\
-											   name="ObsProduto'+pc+'" value=""></input>\
-										</div>\
-									</div>\
-									<div class="row">\
 										<div class="col-md-2">\
 											<label for="QtdProduto">Qtd.Item</label><br>\
 											<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto'+pc+'" placeholder="0"\
@@ -3289,6 +3282,13 @@ $(document).ready(function () {
 												<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" id="SubtotalProduto'+pc+'" readonly=""\
 													   name="SubtotalProduto'+pc+'" value="">\
 											</div>\
+										</div>\
+									</div>\
+									<div class="row">\
+										<div class="col-md-12">\
+											<label for="ObsProduto">Observacao</label><br>\
+											<input type="text" class="form-control" maxlength="200" placeholder="Observacao:" id="ObsProduto'+pc+'"\
+											   name="ObsProduto'+pc+'" value=""></input>\
 										</div>\
 									</div>\
 								</div>\
@@ -3494,13 +3494,6 @@ $(document).ready(function () {
 								</div>\
 								<div id="EscreverServico'+ps+'" style="display:none">\
 									<div class="row">\
-										<div class="col-md-12">\
-											<label for="ObsServico">Observacao</label><br>\
-											<input type="text" class="form-control " maxlength="200" id="ObsServico'+ps+'" placeholder="Observacao"\
-												name="ObsServico'+ps+'" value="">\
-										</div>\
-									</div>\
-									<div class="row">\
 										<div class="col-md-2">\
 											<label for="QtdServico">Qtd</label><br>\
 											<input type="text" class="form-control Numero" maxlength="10" id="QtdServico'+ps+'" placeholder="0"\
@@ -3533,6 +3526,13 @@ $(document).ready(function () {
 												<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalServico'+ps+'"\
 													   name="SubtotalServico'+ps+'" value="">\
 											</div>\
+										</div>\
+									</div>\
+									<div class="row">\
+										<div class="col-md-12">\
+											<label for="ObsServico">Observacao</label><br>\
+											<input type="text" class="form-control " maxlength="200" id="ObsServico'+ps+'" placeholder="Observacao"\
+												name="ObsServico'+ps+'" value="">\
 										</div>\
 									</div>\
 								</div>\

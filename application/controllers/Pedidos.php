@@ -310,7 +310,7 @@ class Pedidos extends CI_Controller {
 			if ($data['pesquisar']->num_rows() == 1) {
 				$info = $data['pesquisar']->result_array();
 				
-				redirect('statuspedido/alterarstatus/' . $info[0]['idApp_OrcaTrata'] );
+				redirect('orcatrata/alterarstatus/' . $info[0]['idApp_OrcaTrata'] );
 
 				exit();
 				

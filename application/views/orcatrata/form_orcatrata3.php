@@ -222,38 +222,8 @@
 																					?>
 																				</select>
 																			</div>
-																			<!--
-																			<div class="col-md-2">
-																				<label for="ProfissionalProduto<?php echo $i ?>">Profissional</label>
-																				<?php if ($i == 1) { ?>
-																				<?php } ?>
-																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-																						 id="listadinamica_prof_prod<?php echo $i ?>" name="ProfissionalProduto<?php echo $i ?>">
-																					<option value="">-- Sel.Profis. --</option>
-																					<?php
-																					/*
-																					foreach ($select['ProfissionalProduto'] as $key => $row) {
-																						(!$produto['ProfissionalProduto']) ? $produto['ProfissionalProduto'] = $_SESSION['log']['ProfissionalProduto']: FALSE;
-																						if ($produto[$i]['ProfissionalProduto'] == $key) {
-																							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																						} else {
-																							echo '<option value="' . $key . '">' . $row . '</option>';
-																						}
-																					}
-																					*/
-																					?>
-																				</select>
-																			</div>
-																			-->
 																		</div>
-																		<div id="EscreverProduto<?php echo $i ?>">
-																			<div class="row">
-																				<div class="col-md-12">
-																					<label for="ObsProduto">Observacao</label>
-																					<input type="text" class="form-control"  id="ObsProduto<?php echo $i ?>" maxlength="200" placeholder="Observacao"
-																							name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>"></input>
-																				</div>
-																			</div>	
+																		<div id="EscreverProduto<?php echo $i ?>">	
 																			<div class="row">
 																				<div class="col-md-2">
 																					<label for="QtdProduto">Qtd.Item</label>
@@ -289,6 +259,13 @@
 																						<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto<?php echo $i ?>"
 																							   name="SubtotalProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalProduto'] ?>">
 																					</div>
+																				</div>
+																			</div>
+																			<div class="row">
+																				<div class="col-md-12">
+																					<label for="ObsProduto">Observacao</label>
+																					<input type="text" class="form-control"  id="ObsProduto<?php echo $i ?>" maxlength="200" placeholder="Observacao"
+																							name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>"></input>
 																				</div>
 																			</div>
 																		</div>
@@ -439,14 +416,7 @@
 																				</select>
 																			</div>
 																		</div>
-																		<div id="EscreverServico<?php echo $i ?>">
-																			<div class="row">
-																				<div class="col-md-12">
-																					<label for="ObsServico">Observacao</label>
-																					<input type="text" class="form-control" maxlength="10" id="ObsServico<?php echo $i ?>" placeholder="Observacao"
-																							 name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
-																				</div>
-																			</div>	
+																		<div id="EscreverServico<?php echo $i ?>">	
 																			<div class="row">
 																				<div class="col-md-2">
 																					<label for="QtdServico">Qtd</label>
@@ -492,6 +462,13 @@
 																						<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalServico<?php echo $i ?>"
 																							   name="SubtotalServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalProduto'] ?>">
 																					</div>
+																				</div>
+																			</div>
+																			<div class="row">
+																				<div class="col-md-12">
+																					<label for="ObsServico">Observacao</label>
+																					<input type="text" class="form-control" maxlength="200" id="ObsServico<?php echo $i ?>" placeholder="Observacao"
+																							 name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
 																				</div>
 																			</div>
 																		</div>

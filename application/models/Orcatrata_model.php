@@ -96,11 +96,19 @@ class Orcatrata_model extends CI_Model {
 
     public function get_orcatrata($data) {
         $query = $this->db->query('
-			SELECT * 
+			SELECT 
+				OT.*,
+				C.*,
+				FP.*,
+				TF.*,
+				TF.idTab_TipoFinanceiro AS TipoFinanceiro,
+				TF.TipoFinanceiro AS NomeTipoFinanceiro,
+				SU.*
 			FROM 
 				App_OrcaTrata AS OT 
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = OT.idApp_Cliente
 					LEFT JOIN Tab_FormaPag AS FP ON FP.idTab_FormaPag = OT.FormaPagamento
+					LEFT JOIN Tab_TipoFinanceiro AS TF ON TF.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = OT.idSis_Usuario
 			WHERE 
 				idApp_OrcaTrata = ' . $data . '

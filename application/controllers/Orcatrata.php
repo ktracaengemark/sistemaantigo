@@ -5937,6 +5937,8 @@ class Orcatrata extends CI_Controller {
             $_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata($id);
             $data['orcatrata']['Tipo_Orca'] = $data['orcatrata']['Tipo_Orca'];
 			$data['orcatrata']['TipoFinanceiro'] = $data['orcatrata']['TipoFinanceiro'];
+			$data['orcatrata']['NomeTipoFinanceiro'] = $data['orcatrata']['NomeTipoFinanceiro'];
+			$data['orcatrata']['FormaPag'] = $data['orcatrata']['FormaPag'];
 			$data['orcatrata']['DataOrca'] = $this->basico->mascara_data($data['orcatrata']['DataOrca'], 'barras');
 			$data['orcatrata']['DataEntregaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntregaOrca'], 'barras');
             $data['orcatrata']['Descricao'] = $data['orcatrata']['Descricao'];
@@ -6398,7 +6400,19 @@ class Orcatrata extends CI_Controller {
 				$dias = floor($intervalo / (60 * 60 * 24));
 				$data['orcatrata']['PrazoEntrega'] = $dias;
 			}
-            
+			/*
+          echo '<br>';
+          echo "<pre>";
+          print_r($data['orcatrata']['TipoFinanceiro']);
+          echo '<br>';
+          print_r($data['orcatrata']['FormaPagamento']);
+          echo '<br>';
+          print_r($data['orcatrata']['TipoFrete']);
+          echo '<br>';
+          print_r($data['orcatrata']['AVAP']);
+          echo "</pre>";
+          exit ();
+		  */
 			#### APP_Cliente ####
 			if ($data['cadastrar']['AtualizaEndereco'] == 'S'){
 				$data['cliente']['CepCliente'] = $data['orcatrata']['Cep'];
@@ -9979,7 +9993,7 @@ class Orcatrata extends CI_Controller {
 		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
-		$data['edit'] = 'statuspedido/alterarstatus/';
+		$data['edit'] = 'orcatrata/alterarstatus/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
 
 		$data['collapse'] = '';	
@@ -10222,7 +10236,7 @@ class Orcatrata extends CI_Controller {
 		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
-		$data['edit'] = 'statuspedido/alterarstatus/';
+		$data['edit'] = 'orcatrata/alterarstatus/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
 
 		$data['collapse'] = '';	
@@ -10892,10 +10906,10 @@ class Orcatrata extends CI_Controller {
 		
 
         if ($id) {
+
 			#### Sis_Empresa ####
             $data['empresa'] = $this->Orcatrata_model->get_orcatrataalterar($id);
-
-
+			
             #### App_Parcelas ####
             $data['parcelasrec'] = $this->Orcatrata_model->get_alterarparcela($id);
             if (count($data['parcelasrec']) > 0) {
@@ -10994,14 +11008,15 @@ class Orcatrata extends CI_Controller {
         );
         ($data['query']['MostrarDataPagamento'] == 'S') ?
             $data['div']['MostrarDataPagamento'] = '' : $data['div']['MostrarDataPagamento'] = 'style="display: none;"';
-        /*
-          echo '<br>';
-          echo "<pre>";
-          print_r($data);
-          echo "</pre>";
-          exit ();
-        */
 
+		//$_SESSION['Query']['UltimaDataPagamento'] = $data['query']['DataPagamento'];
+		/*
+		echo '<br>';
+		echo "<pre>";
+		print_r($_SESSION['Query']['UltimaDataPagamento']);
+		echo "</pre>";
+		exit();
+		*/
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('orcatrata/form_alterarparcela', $data);
@@ -11021,7 +11036,9 @@ class Orcatrata extends CI_Controller {
 			$data['bd']['QuitadoOrca'] = $data['query']['QuitadoOrca'];
 			
 			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
-			$_SESSION['Query']['UltimaDataPagamento'] = $data['query']['DataPagamento'];			
+			
+			//$_SESSION['Query']['UltimaDataPagamento'] = $data['query']['UltimaDataPagamento'] = $data['query']['DataPagamento'];
+			
 			$data['query']['DataPagamento'] = $this->basico->mascara_data($data['query']['DataPagamento'], 'mysql');  
 			
             #### Sis_Empresa ####

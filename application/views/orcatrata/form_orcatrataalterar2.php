@@ -151,13 +151,6 @@
 																		</div>
 																		-->
 																		<div class="row">
-																			<div class="col-md-12">
-																				<label for="ObsProduto">Observacao</label>
-																				<input type="text" class="form-control"  id="ObsProduto<?php echo $i ?>" maxlength="200" placeholder="Observacao"
-																						name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>"></input>
-																			</div>
-																		</div>
-																		<div class="row">
 																			<div class="col-md-2">
 																				<label for="QtdProduto">Qtd.Item</label>
 																				<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
@@ -192,6 +185,13 @@
 																					<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto<?php echo $i ?>"
 																						   name="SubtotalProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalProduto'] ?>">
 																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-md-12">
+																				<label for="ObsProduto">Observacao</label>
+																				<input type="text" class="form-control"  id="ObsProduto<?php echo $i ?>" maxlength="200" placeholder="Observacao"
+																						name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>"></input>
 																			</div>
 																		</div>
 																	</div>
@@ -352,13 +352,6 @@
 																		</div>
 																		-->
 																		<div class="row">
-																			<div class="col-md-12">
-																				<label for="ObsServico">Observacao</label>
-																				<input type="text" class="form-control" maxlength="10" id="ObsServico<?php echo $i ?>" placeholder="Observacao"
-																						 name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
-																			</div>
-																		</div>
-																		<div class="row">
 																			<div class="col-md-2">
 																				<label for="QtdServico">Qtd</label>
 																				<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0"
@@ -403,6 +396,13 @@
 																					<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalServico<?php echo $i ?>"
 																						   name="SubtotalServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalProduto'] ?>">
 																				</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-md-12">
+																				<label for="ObsServico">Observacao</label>
+																				<input type="text" class="form-control" maxlength="200" id="ObsServico<?php echo $i ?>" placeholder="Observacao"
+																						 name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
 																			</div>
 																		</div>
 																	</div>

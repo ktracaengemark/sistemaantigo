@@ -383,7 +383,7 @@ class Relatorio extends CI_Controller {
 		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
-		$data['edit'] = 'statuspedido/alterarstatus/';
+		$data['edit'] = 'orcatrata/alterarstatus/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';		
 
         #run form validation
@@ -1085,7 +1085,7 @@ class Relatorio extends CI_Controller {
 		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
-		$data['edit'] = 'statuspedido/alterarstatus/';
+		$data['edit'] = 'orcatrata/alterarstatus/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';		
 
         #run form validation
@@ -1434,7 +1434,7 @@ class Relatorio extends CI_Controller {
 		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
-		$data['edit'] = 'statuspedido/alterarstatus/';
+		$data['edit'] = 'orcatrata/alterarstatus/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';		
 
         #run form validation
@@ -1787,7 +1787,7 @@ class Relatorio extends CI_Controller {
 		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
-		$data['edit'] = 'statuspedido/alterarstatus/';
+		$data['edit'] = 'orcatrata/alterarstatus/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';		
 
         #run form validation
@@ -2494,7 +2494,7 @@ class Relatorio extends CI_Controller {
 		$data['imprimir'] = 'OrcatrataPrint/imprimircomissao/';
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
-		$data['edit'] = 'statuspedido/alterarstatus/';
+		$data['edit'] = 'orcatrata/alterarstatus/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
 		
         #run form validation
@@ -2844,7 +2844,7 @@ class Relatorio extends CI_Controller {
 		$data['imprimir'] = 'OrcatrataPrint/imprimircomissao_online/';
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
-		$data['edit'] = 'statuspedido/alterarstatus/';
+		$data['edit'] = 'orcatrata/alterarstatus/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
 
         #run form validation

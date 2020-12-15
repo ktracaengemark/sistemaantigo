@@ -172,11 +172,15 @@
 										<div class="form-group">	
 											<div class="row">
 												<div class="col-md-4">
+													<input type="hidden" name="TipoFinanceiro" id="TipoFinanceiro" value="<?php echo $orcatrata['TipoFinanceiro']; ?>"/>
 													<label for="TipoFinanceiro">Tipo de Receita</label>
+													<input type="text" class="form-control" readonly="" value="<?php echo $orcatrata['NomeTipoFinanceiro']; ?>"/>
+													<!--
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 															id="TipoFinanceiro" name="TipoFinanceiro">
 														<option value="">-- Selecione uma opção --</option>
 														<?php
+														/*
 														foreach ($select['TipoFinanceiro'] as $key => $row) {
 															(!$orcatrata['TipoFinanceiro']) ? $orcatrata['TipoFinanceiro'] = '31' : FALSE;
 															if ($orcatrata['TipoFinanceiro'] == $key) {
@@ -185,8 +189,10 @@
 																echo '<option value="' . $key . '">' . $row . '</option>';
 															}
 														}
+														*/
 														?>
 													</select>
+													-->
 												</div>
 												<div class="col-md-4 text-left">
 													<label for="DataOrca">Data do Pedido</label>
@@ -247,13 +253,6 @@
 																		</div>
 																	</div>
 																	<div class="row">
-																		<div class="col-md-12">
-																			<label for="ObsProduto">Observacao</label>
-																			<input type="text" class="form-control" readonly="" id="ObsProduto<?php echo $i ?>" maxlength="200" placeholder="Observacao"
-																					name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>"></input>
-																		</div>
-																	</div>
-																	<div class="row">
 																		<div class="col-md-2">
 																			<label for="QtdProduto">Qtd.Item</label>
 																			<input type="text" class="form-control Numero" maxlength="10" id="QtdProduto<?php echo $i ?>" placeholder="0"
@@ -288,6 +287,13 @@
 																				<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalProduto<?php echo $i ?>"
 																					   name="SubtotalProduto<?php echo $i ?>" value="<?php echo $produto[$i]['SubtotalProduto'] ?>">
 																			</div>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col-md-12">
+																			<label for="ObsProduto">Observacao</label>
+																			<input type="text" class="form-control" readonly="" id="ObsProduto<?php echo $i ?>" maxlength="200" placeholder="Observacao"
+																					name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>"></input>
 																		</div>
 																	</div>
 																</div>	
@@ -415,13 +421,6 @@
 																		</div>
 																	</div>
 																	<div class="row">
-																		<div class="col-md-12">
-																			<label for="ObsServico">Observacao</label>
-																			<input type="text" class="form-control" readonly="" maxlength="10" id="ObsServico<?php echo $i ?>" placeholder="Observacao"
-																					 name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
-																		</div>
-																	</div>
-																	<div class="row">
 																		<div class="col-md-2">
 																			<label for="QtdServico">Qtd</label>
 																			<input type="text" class="form-control Numero" maxlength="10" id="QtdServico<?php echo $i ?>" placeholder="0"
@@ -466,6 +465,13 @@
 																				<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="SubtotalServico<?php echo $i ?>"
 																					   name="SubtotalServico<?php echo $i ?>" value="<?php echo $servico[$i]['SubtotalProduto'] ?>">
 																			</div>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col-md-12">
+																			<label for="ObsServico">Observacao</label>
+																			<input type="text" class="form-control" readonly="" maxlength="200" id="ObsServico<?php echo $i ?>" placeholder="Observacao"
+																					 name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
 																		</div>
 																	</div>
 																</div>
@@ -737,9 +743,23 @@
 									<h4 class="mb-3"><b>Entrega</b></h4>
 									<div class="row">
 										<div class="col-md-8 text-left">
+											<input type="hidden" name="TipoFrete" id="TipoFrete" value="<?php echo $orcatrata['TipoFrete']; ?>"/>
+											<label for="TipoFrete">Forma de Entrega</label>
+											<?php 
+												if($orcatrata['TipoFrete'] == 1){
+													$tipofrete = 'Retirar na Loja';
+												}elseif($orcatrata['TipoFrete'] == 2){
+													$tipofrete = 'Moto Boy';
+												}elseif($orcatrata['TipoFrete'] == 3){
+													$tipofrete = 'Correios';
+												}
+											?>
+											<input type="text" class="form-control" readonly="" value="<?php echo $tipofrete; ?>"/>
+											<!--				
 											<label for="TipoFrete">Forma de Entrega:</label><br>
 											<div class="btn-block" data-toggle="buttons">
 												<?php
+												/*
 												foreach ($select['TipoFrete'] as $key => $row) {
 													(!$orcatrata['TipoFrete']) ? $orcatrata['TipoFrete'] = '1' : FALSE;
 													#if (!$orcatrata['TipoFrete'])$orcatrata['TipoFrete'] = 1;
@@ -760,13 +780,27 @@
 														;
 													}
 												}
+												*/
 												?>
 											</div>
+											-->
 										</div>
 										<div class="col-md-4 text-left">
+											<input type="hidden" name="DetalhadaEntrega" id="DetalhadaEntrega" value="<?php echo $orcatrata['DetalhadaEntrega']; ?>"/>
+											<label for="DetalhadaEntrega">Personalizada</label>
+											<?php 
+												if($orcatrata['DetalhadaEntrega'] == "S"){
+													$detalhada = 'Sim';
+												}elseif($orcatrata['DetalhadaEntrega'] == "N"){
+													$detalhada = 'Não';
+												}
+											?>
+											<input type="text" class="form-control" readonly="" value="<?php echo $detalhada; ?>"/>
+											<!--				
 											<label for="DetalhadaEntrega">Personalizada?</label><br>
 											<div class="btn-group" data-toggle="buttons">
 												<?php
+												/*
 												foreach ($select['DetalhadaEntrega'] as $key => $row) {
 													if (!$orcatrata['DetalhadaEntrega']) $orcatrata['DetalhadaEntrega'] = 'N';
 
@@ -790,9 +824,11 @@
 														;
 													}
 												}
+												*/
 												?>
 											</div>
-											<?php echo form_error('DetalhadaEntrega'); ?>
+											<?php #echo form_error('DetalhadaEntrega'); ?>
+											-->
 										</div>
 									</div>
 									<br>
@@ -860,9 +896,21 @@
 										<div class="row ">
 											<div class="col-md-8 text-left"></div>
 											<div class="col-md-4 text-left">
+												<input type="hidden" name="AtualizaEndereco" id="AtualizaEndereco" value="<?php echo $cadastrar['AtualizaEndereco']; ?>"/>
+												<label for="AtualizaEndereco">Atualizar End.?</label>
+												<?php 
+													if($cadastrar['AtualizaEndereco'] == "S"){
+														$atualizar = 'Sim';
+													}elseif($cadastrar['AtualizaEndereco'] == "N"){
+														$atualizar = 'Não';
+													}
+												?>
+												<input type="text" class="form-control" readonly="" value="<?php echo $atualizar; ?>"/>
+												<!--
 												<label for="AtualizaEndereco">Atualizar End.?</label><br>
 												<div class="btn-group" data-toggle="buttons">
 													<?php
+													/*
 													foreach ($select['AtualizaEndereco'] as $key => $row) {
 														if (!$cadastrar['AtualizaEndereco'])$cadastrar['AtualizaEndereco'] = 'N';
 
@@ -884,8 +932,10 @@
 															;
 														}
 													}
+													*/
 													?>
 												</div>
+												-->
 											</div>
 										</div>
 										<br>
@@ -1007,12 +1057,17 @@
 												<div class="panel-heading">
 													<div class="row">
 														<div class="col-md-12">
+															<input type="hidden" name="FormaPagamento" id="FormaPagamento" value="<?php echo $orcatrata['FormaPagamento']; ?>"/>
+															<label for="FormaPagamento">Forma de Pagamento</label>
+															<input type="text" class="form-control" readonly="" value="<?php echo $orcatrata['FormaPag']; ?>"/>
+															<!--
 															<label for="FormaPagamento">Forma de Pagamento</label>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
 																	onchange="exibirTroco(this.value),dateDiff()"<?php echo $readonly; ?> readonly=''
 																	id="FormaPagamento" name="FormaPagamento">
 																<option value="">-- Selecione uma opção --</option>
 																<?php
+																/*
 																foreach ($select['FormaPagamento'] as $key => $row) {
 																	if ($orcatrata['FormaPagamento'] == $key) {
 																		echo'<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -1020,9 +1075,11 @@
 																		echo'<option value="' . $key . '">' . $row . '</option>';
 																	}
 																}
+																*/
 																?>
 															</select>
-															<?php echo form_error('FormaPagamento'); ?>
+															<?php #echo form_error('FormaPagamento'); ?>
+															-->
 														</div>																
 													</div>	
 												</div>
@@ -1034,9 +1091,23 @@
 												<div class="panel-heading">
 													<div class="row">
 														<div class="col-md-12 text-left">
+															<input type="hidden" name="AVAP" id="AVAP" value="<?php echo $orcatrata['AVAP']; ?>"/>
+															<label for="AVAP">Local do Pagamento</label>
+															<?php 
+																if($orcatrata['AVAP'] == "V"){
+																	$avap = 'Na Loja';
+																}elseif($orcatrata['AVAP'] == "O"){
+																	$avap = 'On Line';
+																}elseif($orcatrata['AVAP'] == "P"){
+																	$avap = 'Na Entrega';
+																}
+															?>
+															<input type="text" class="form-control" readonly="" value="<?php echo $avap; ?>"/>
+															<!--
 															<label for="AVAP">Pagamento:</label><br>
 															<div class="btn-block" data-toggle="buttons">
 																<?php
+																/*
 																foreach ($select['AVAP'] as $key => $row) {
 																	(!$orcatrata['AVAP']) ? $orcatrata['AVAP'] = 'V' : FALSE;
 																	#if (!$orcatrata['AVAP'])$orcatrata['AVAP'] = V;
@@ -1059,8 +1130,10 @@
 																		;
 																	}
 																}
+																*/
 																?>
 															</div>
+															-->
 														</div>
 													</div>
 												</div>

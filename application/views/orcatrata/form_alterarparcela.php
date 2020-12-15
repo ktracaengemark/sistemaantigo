@@ -238,17 +238,18 @@
 													</div>
 													<?php echo form_error('DataPagamento'); ?>
 												</div>
+												<!--
 												<div class="col-md-6 text-left">
 													<label for="UltimaDataPagamento">Ultima Data Utilizada</label>
-													<div class="input-group <?php echo $datepicker; ?>">
+													<div class="input-group <?php #echo $datepicker; ?>">
 														<span class="input-group-addon" disabled>
 															<span class="glyphicon glyphicon-calendar"></span>
 														</span>
 														<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
-																id="UltimaDataPagamento" name="UltimaDataPagamento" value="<?php echo $_SESSION['Query']['UltimaDataPagamento']; ?>">
+																id="UltimaDataPagamento" name="UltimaDataPagamento" value="<?php #echo $_SESSION['Query']['UltimaDataPagamento']; ?>">
 													</div>
-													<?php echo form_error('UltimaDataPagamento'); ?>
 												</div>
+												-->
 											</div>	
 										</div>
 									</div>
