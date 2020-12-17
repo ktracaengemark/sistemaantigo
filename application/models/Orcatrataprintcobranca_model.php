@@ -66,6 +66,8 @@ class Orcatrataprintcobranca_model extends CI_Model {
 		$permissao26 = ($_SESSION['FiltroAlteraParcela']['Mesvenc'] != "0" ) ? 'MONTH(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Mesvenc'] . '" AND ' : FALSE;
 		$permissao27 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "0" ) ? 'YEAR(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
 		$permissao25 = ($_SESSION['FiltroAlteraParcela']['Orcarec'] != "0" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcarec'] . '" AND ' : FALSE;
+		$permissao60 = (!$_SESSION['FiltroAlteraParcela']['Campo']) ? 'OT.idApp_OrcaTrata' : $_SESSION['FiltroAlteraParcela']['Campo'];
+        $permissao61 = (!$_SESSION['FiltroAlteraParcela']['Ordenamento']) ? 'ASC' : $_SESSION['FiltroAlteraParcela']['Ordenamento'];
 		
 		$query = $this->db->query(
             'SELECT
@@ -163,9 +165,8 @@ class Orcatrataprintcobranca_model extends CI_Model {
 			GROUP BY
                 OT.idApp_OrcaTrata
             ORDER BY
-				C.NomeCliente ASC,
-				F.NomeFornecedor ASC,
-				PR.DataVencimento ASC		
+				' . $permissao60 . '
+				' . $permissao61 . ' 		
         ');
         $query = $query->result_array();
 

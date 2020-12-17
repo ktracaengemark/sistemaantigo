@@ -190,6 +190,7 @@ class Fornecedor2 extends CI_Controller {
             'idApp_Fornecedor',
             'NomeFornecedor',
             'DataNascimento',
+			'DataCadastroFornecedor',
             'Atividade',
             'Telefone1',
             'Telefone2',
@@ -216,8 +217,10 @@ class Fornecedor2 extends CI_Controller {
         if ($id) {
             $data['query'] = $this->Fornecedor_model->get_fornecedor($id);
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
+            $data['query']['DataCadastroFornecedor'] = $this->basico->mascara_data($data['query']['DataCadastroFornecedor'], 'barras');
         }
-
+		
+		(!$data['query']['DataCadastroFornecedor']) ? $data['query']['DataCadastroFornecedor'] = date('d/m/Y', time()) : FALSE;
         #(!$data['query']['TipoFornec']) ? $data['query']['TipoFornec'] = 'P' : FALSE;
 		#(!$data['query']['VendaFornec']) ? $data['query']['VendaFornec'] = 'S' : FALSE;
 		
@@ -280,6 +283,7 @@ class Fornecedor2 extends CI_Controller {
 			$data['query']['EstadoFornecedor'] = trim(mb_strtoupper($data['query']['EstadoFornecedor'], 'ISO-8859-1'));
 			$data['query']['ReferenciaFornecedor'] = trim(mb_strtoupper($data['query']['ReferenciaFornecedor'], 'ISO-8859-1'));
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
+            $data['query']['DataCadastroFornecedor'] = $this->basico->mascara_data($data['query']['DataCadastroFornecedor'], 'mysql');
             $data['query']['Obs'] = nl2br($data['query']['Obs']);
             #$data['query']['TipoFornec'] = $data['query']['TipoFornec'];
 			$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];          

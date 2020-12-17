@@ -274,12 +274,17 @@
 						</div> 
 						<div class="form-group">
 							<div class="row">
-								<div class="col-md-10">
+								<div class="col-md-6">
 									<label for="Obs">OBS:</label>
 									<textarea class="form-control" id="Obs" <?php echo $readonly; ?>
 											  name="Obs"><?php echo $query['Obs']; ?></textarea>
 								</div>
-								<div class="col-md-2">
+								<div class="col-md-3">
+									<label for="DataCadastroFornecedor">Data do Cadastro:</label>
+									<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
+										   name="DataCadastroFornecedor" placeholder="DD/MM/AAAA" value="<?php echo $query['DataCadastroFornecedor']; ?>">
+								</div>
+								<div class="col-md-3">
 									<label for="Ativo">Ativo?</label><br>
 									<div class="form-group">
 										<div class="btn-group" data-toggle="buttons">

@@ -76,7 +76,9 @@
 						<th class="active">Qtd</th>
 						<th class="active">Produto</th>
 						<th class="active">ValorR$</th>
-						<th class="active">Entregue</th>					
+						<th class="active">Entregue</th>
+						<th class="active">DataEntr.</th>
+						<th class="active">HoraEntr.</th>					
 					</tr>
 				</thead>
 				<tbody>
@@ -144,6 +146,8 @@
 							echo '<td class="text-left">' . $row['NomeProduto'] . '</td>';
 							echo '<td class="text-left">' . $row['ValorProduto'] . '</td>';
 							echo '<td>' . $row['ConcluidoProduto'] . '</td>';
+							echo '<td>' . $row['DataConcluidoProduto'] . '</td>';
+							echo '<td>' . $row['HoraConcluidoProduto'] . '</td>';
 						echo '</tr>';
 						$count++;
 					}

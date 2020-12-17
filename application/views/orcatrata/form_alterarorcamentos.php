@@ -64,7 +64,9 @@
 																					echo 'Na Loja';
 																				}else{
 																					echo 'Outros';
-																				}?>
+																				}?><br>
+																		<?php echo $orcamento[$i]['idApp_' . $nome] ?> - 
+																		<?php echo $orcamento[$i]['Nome' . $nome] ?>
 																	</span>
 																</div>
 																<div class="col-md-2">

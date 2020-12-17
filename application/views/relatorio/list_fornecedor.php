@@ -27,6 +27,7 @@
 							<th class="active">Contatofornec</th>
 							<!--<th class="active">Sexo</th>-->
 							<th class="active">Relação</th>
+							<th class="active">Data Cadastro</th>
 						</tr>
 					</thead>
 
@@ -50,6 +51,7 @@
 								echo '<td>' . $row['NomeContatofornec'] . '</td>';
 								#echo '<td>' . $row['Sexo'] . '</td>';
 								echo '<td>' . $row['Relacao'] . '</td>';
+								echo '<td>' . $row['DataCadastroFornecedor'] . '</td>';
 							echo '</tr>';
 						}
 						?>

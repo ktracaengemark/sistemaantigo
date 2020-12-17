@@ -346,7 +346,8 @@ class Loginempresa extends CI_Controller {
 						$data['idApp_Agenda'] = $this->Loginempresa_model->set_agenda($data['agenda']);
 
 						$data['cliente'] = array(
-							'NomeCliente' => 'CLIENTE',
+							'NomeCliente' => 'CLIENTE DESCONHECIDO',
+							'DataCadastroCliente'=> date('Y-m-d', time()),
 							'idTab_Modulo' => "1",
 							'idSis_Usuario' => $data['idSis_Usuario'],
 							'idSis_Empresa' => $data['idSis_Empresa']
@@ -356,7 +357,8 @@ class Loginempresa extends CI_Controller {
 						$data['idApp_Cliente'] = $this->Loginempresa_model->set_cliente($data['cliente']);
 
 						$data['fornecedor'] = array(
-							'NomeFornecedor' => 'FORNECEDOR',
+							'NomeFornecedor' => 'FORNECEDOR DESCONHECIDO',
+							'DataCadastroFornecedor'=> date('Y-m-d', time()),
 							'idTab_Modulo' => "1",
 							'idSis_Usuario' => $data['idSis_Usuario'],
 							'idSis_Empresa' => $data['idSis_Empresa']
@@ -851,7 +853,8 @@ class Loginempresa extends CI_Controller {
 						$data['idApp_Agenda'] = $this->Loginempresa_model->set_agenda($data['agenda']);
 
 						$data['cliente'] = array(
-							'NomeCliente' => 'CLIENTE',
+							'NomeCliente' => 'CLIENTE DESCONHECIDO',
+							'DataCadastroCliente'=> date('Y-m-d', time()),
 							'idTab_Modulo' => "1",
 							'idSis_Usuario' => $data['idSis_Usuario'],
 							'idSis_Empresa' => $data['idSis_Empresa']
@@ -861,7 +864,8 @@ class Loginempresa extends CI_Controller {
 						$data['idApp_Cliente'] = $this->Loginempresa_model->set_cliente($data['cliente']);
 
 						$data['fornecedor'] = array(
-							'NomeFornecedor' => 'FORNECEDOR',
+							'NomeFornecedor' => 'FORNECEDOR DESCONHECIDO',
+							'DataCadastroFornecedor'=> date('Y-m-d', time()),
 							'idTab_Modulo' => "1",
 							'idSis_Usuario' => $data['idSis_Usuario'],
 							'idSis_Empresa' => $data['idSis_Empresa']

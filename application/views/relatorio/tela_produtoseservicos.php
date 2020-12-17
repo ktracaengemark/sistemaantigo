@@ -414,6 +414,27 @@
 							</div>
 						</div>	
 						<div class="row">
+							<div class="col-md-6"></div>
+							<div class="col-md-3">
+								<label for="DataInicio8">Data Entregue Prd Inc.</label>
+								<div class="input-group DatePicker">
+									<span class="input-group-addon" disabled>
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+											name="DataInicio8" value="<?php echo set_value('DataInicio8', $query['DataInicio8']); ?>">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<label for="DataFim8">Data Entregue Prd Fim</label>
+								<div class="input-group DatePicker">
+									<span class="input-group-addon" disabled>
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+											name="DataFim8" value="<?php echo set_value('DataFim8', $query['DataFim8']); ?>">
+								</div>
+							</div>
 								<input type="hidden" name="DataInicio3" id="DataInicio3" value=""/>
 								<input type="hidden" name="DataFim3" id="DataFim3" value=""/>
 								<input type="hidden" name="DataInicio4" id="DataInicio4" value=""/>

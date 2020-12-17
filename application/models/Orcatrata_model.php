@@ -593,11 +593,12 @@ class Orcatrata_model extends CI_Model {
 		$permissao12 = ($_SESSION['FiltroAlteraParcela']['StatusComissaoOrca'] != "0" ) ? 'OT.StatusComissaoOrca = "' . $_SESSION['FiltroAlteraParcela']['StatusComissaoOrca'] . '" AND ' : FALSE;
 		$permissao14 = ($_SESSION['FiltroAlteraParcela']['StatusComissaoOrca_Online'] != "0" ) ? 'OT.StatusComissaoOrca_Online = "' . $_SESSION['FiltroAlteraParcela']['StatusComissaoOrca_Online'] . '" AND ' : FALSE;
 		
-		$permissao60 = (!$_SESSION['FiltroAlteraParcela']['Campo']) ? 'OT.DataOrca' : $_SESSION['FiltroAlteraParcela']['Campo'];
+		$permissao60 = (!$_SESSION['FiltroAlteraParcela']['Campo']) ? 'OT.idApp_OrcaTrata' : $_SESSION['FiltroAlteraParcela']['Campo'];
         $permissao61 = (!$_SESSION['FiltroAlteraParcela']['Ordenamento']) ? 'ASC' : $_SESSION['FiltroAlteraParcela']['Ordenamento'];
 
 		$query = $this->db->query('
             SELECT
+				C.idApp_Cliente,
 				C.NomeCliente,
 				C.CelularCliente,
 				C.Telefone,
@@ -609,6 +610,7 @@ class Orcatrata_model extends CI_Model {
 				C.BairroCliente,
 				C.CidadeCliente,
 				C.EstadoCliente,
+				F.idApp_Fornecedor,
 				F.NomeFornecedor,
 				OT.idSis_Empresa,
 				OT.idApp_OrcaTrata,
@@ -1033,10 +1035,14 @@ class Orcatrata_model extends CI_Model {
 		$permissao27 = ($_SESSION['FiltroAlteraParcela']['Ano'] != "0" ) ? 'YEAR(PR.DataVencimento) = "' . $_SESSION['FiltroAlteraParcela']['Ano'] . '" AND ' : FALSE;
 		$permissao25 = ($_SESSION['FiltroAlteraParcela']['Orcarec'] != "0" ) ? 'OT.idApp_OrcaTrata = "' . $_SESSION['FiltroAlteraParcela']['Orcarec'] . '" AND ' : FALSE;
 		//$permissao5 = (($_SESSION['log']['idSis_Empresa'] != 5) && ($_SESSION['FiltroAlteraParcela']['NomeCliente'] != "0" )) ? 'OT.idApp_Cliente = "' . $_SESSION['FiltroAlteraParcela']['NomeCliente'] . '" AND ' : FALSE;
+		$permissao60 = (!$_SESSION['FiltroAlteraParcela']['Campo']) ? 'OT.idApp_OrcaTrata' : $_SESSION['FiltroAlteraParcela']['Campo'];
+        $permissao61 = (!$_SESSION['FiltroAlteraParcela']['Ordenamento']) ? 'ASC' : $_SESSION['FiltroAlteraParcela']['Ordenamento'];
 		
 		$query = $this->db->query('
 			SELECT
+				C.idApp_Cliente,
 				C.NomeCliente,
+				F.idApp_Fornecedor,
 				F.NomeFornecedor,
 				OT.idApp_OrcaTrata,
 				OT.idSis_Usuario,
@@ -1059,8 +1065,8 @@ class Orcatrata_model extends CI_Model {
 				PR.idApp_Parcelas,
 				PR.Parcela,
 				PR.idApp_OrcaTrata,
-				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "--", IFNULL(TR.TipoFinanceiro,""), "--", IFNULL(C.NomeCliente,""), "--", IFNULL(OT.Descricao,"")) AS Receita,
-				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "--", IFNULL(TR.TipoFinanceiro,""), "--", IFNULL(F.NomeFornecedor,""), "--", IFNULL(OT.Descricao,"")) AS Despesa,
+				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "--", IFNULL(TR.TipoFinanceiro,""), "--", IFNULL(C.idApp_Cliente,""), "--", IFNULL(C.NomeCliente,""), "--", IFNULL(OT.Descricao,"")) AS Receita,
+				CONCAT(IFNULL(PR.idApp_OrcaTrata,""), "--", IFNULL(TR.TipoFinanceiro,""), "--", IFNULL(F.idApp_Fornecedor,""), "--", IFNULL(F.NomeFornecedor,""), "--", IFNULL(OT.Descricao,"")) AS Despesa,
 				PR.ValorParcela,
 				PR.DataVencimento,
 				PR.ValorPago,
@@ -1103,9 +1109,8 @@ class Orcatrata_model extends CI_Model {
 				' . $permissao36 . '
 				PR.idSis_Empresa = ' . $data . '
 			ORDER BY
-				C.NomeCliente ASC,
-				F.NomeFornecedor ASC,
-				PR.DataVencimento  
+				' . $permissao60 . '
+				' . $permissao61 . ' 
 		');
         $query = $query->result_array();
           
