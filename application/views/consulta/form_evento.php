@@ -170,17 +170,17 @@
 												<div class="col-md-4">
 													<label for="Intervalo">Repetir a cada:</label><br>
 													<input type="text" class="form-control Numero" id="Intervalo" maxlength="3" placeholder="Ex: '5' dias."
-														   name="Intervalo" value="<?php echo $cadastrar['Intervalo'] ?>">
+														   name="Intervalo" value="<?php echo $query['Intervalo'] ?>">
 													<?php echo form_error('Intervalo'); ?>		
 												</div>
 												<div class="col-md-4 ">
-													<label for="Tempo">Tempo em:</label>
+													<label for="Tempo">.</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
 															id="Tempo" name="Tempo">
 														<!--<option value="">-- Selecione uma opção --</option>-->
 														<?php
 														foreach ($select['Tempo'] as $key => $row) {
-															if ($cadastrar['Tempo'] == $key) {
+															if ($query['Tempo'] == $key) {
 																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 															} else {
 																echo '<option value="' . $key . '">' . $row . '</option>';
@@ -192,7 +192,7 @@
 												<div class="col-md-4">
 													<label for="Periodo">Durante:</label><br>
 													<input type="text" class="form-control Numero" id="Periodo" maxlength="3" placeholder="Ex: '30' dias."
-														   name="Periodo" value="<?php echo $cadastrar['Periodo'] ?>">
+														   name="Periodo" value="<?php echo $query['Periodo'] ?>">
 													<?php echo form_error('Periodo'); ?>		
 												</div>
 												<?php echo form_error('Cadastrar'); ?>

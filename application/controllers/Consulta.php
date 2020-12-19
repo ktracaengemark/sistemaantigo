@@ -959,12 +959,6 @@ class Consulta extends CI_Controller {
 		$data['alterar'] = quotes_to_entities($this->input->post(array(
 			'Quais',
         ), TRUE));		
-		
-		//$repeticao = $this->input->get('repeticao');
-		//$quais = $this->input->get('quais');
-		//$dataini = $this->input->get('dataini');
-		//$dataini = DateTime::createFromFormat('d/m/Y', $dataini);
-		//$dataini = $dataini->format('Y-m-d');
 
 		if (!$id) {
             $data['msg'] = '?m=2';
@@ -978,21 +972,7 @@ class Consulta extends CI_Controller {
 			$dataini = $data['anterior']['DataInicio'];
 			
             $data['campos'] = array_keys($data['anterior']);
-			/*
-			echo '<br>';
-			echo "<pre>";
-			print_r($id);
-			echo '<br>';
-			print_r($data['alterar']['Quais']);
-			echo '<br>';
-			print_r($quais);
-			echo '<br>';
-			print_r($data['anterior']['Repeticao']);
-			echo '<br>';
-			print_r($data['anterior']['DataInicio']);
-			echo "</pre>";
-			exit();			
-			*/
+
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], NULL, $data['campos'], $data['anterior']['idApp_Consulta'], FALSE, TRUE);
             $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Consulta', 'DELETE', $data['auditoriaitem']);
 
@@ -1022,9 +1002,6 @@ class Consulta extends CI_Controller {
 		
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'Cadastrar',
-			'Intervalo',
-			'Periodo',
-			'Tempo',
         ), TRUE));
 		
         $data['query'] = quotes_to_entities($this->input->post(array(
@@ -1041,10 +1018,13 @@ class Consulta extends CI_Controller {
 			'Obs',
 			'idApp_Profissional',
 			'idTab_Status',
+			'Intervalo',
+			'Periodo',
+			'Tempo',
 		), TRUE));
 		
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'N' : FALSE;
- 		(!$data['cadastrar']['Tempo']) ? $data['cadastrar']['Tempo'] = '1' : FALSE;
+ 		(!$data['query']['Tempo']) ? $data['query']['Tempo'] = '1' : FALSE;
 
         if ($this->input->get('start') && $this->input->get('end')) {
             $data['query']['Data'] = date('d/m/Y', substr($this->input->get('start'), 0, -3));
@@ -1093,6 +1073,7 @@ class Consulta extends CI_Controller {
 		$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();       
 		$data['select']['Tempo'] = array (
             '1' => 'Dia(s)',
+            '4' => 'Semana(s)',
             '2' => 'Mês(s)',
 			'3' => 'Ano(s)',
         );
@@ -1120,34 +1101,9 @@ class Consulta extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('consulta/form_evento', $data);
         } else {
-		
-			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
-			$data['cadastrar']['Intervalo'] = $data['cadastrar']['Intervalo'];
-			$data['cadastrar']['Periodo'] = $data['cadastrar']['Periodo'];
-			$data['cadastrar']['Tempo'] = $data['cadastrar']['Tempo'];
-			
-        /*
-			echo count($data['select']['idApp_Agenda']);
-			
-			echo '<br>';
-			echo "<pre>";
-			print_r($data['cadastrar']['Cadastrar']);
-			echo "</pre>";
-			echo '<br>';
-			echo "<pre>";
-			print_r($data['cadastrar']['Intervalo']);
-			echo "</pre>";
-			
-			echo '<br>';
-			echo "<pre>";
-			print_r($data['cadastrar']['Tempo']);
-			echo "</pre>";
-			exit();
-        */			
-			
+
 			$data['query']['Tipo'] = 1;
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
-            #$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
             $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
 			//$data['query']['idTab_Status'] = 1;
             $data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
@@ -1161,7 +1117,6 @@ class Consulta extends CI_Controller {
 			$horaini_cad 	= $data['query']['HoraInicio'];
 			$horafim_cad 	= $data['query']['HoraFim'];
 			
-            #unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
 			unset($data['query']['Data'], $data['query']['Data2'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
 			
             $data['campos'] = array_keys($data['query']);
@@ -1186,21 +1141,33 @@ class Consulta extends CI_Controller {
 					$this->load->view('consulta/form_consulta', $data);
 				} else {
 					if ($data['cadastrar']['Cadastrar'] == 'S') {
-						$tipoperiodo = $data['cadastrar']['Tempo'];
+						$tipoperiodo = $data['query']['Tempo'];
 						if($tipoperiodo == 1){
+							$n = $data['query']['Intervalo']; //intervalo - a cada tantos dias
+							$periodo = $data['query']['Periodo']; //período das repetições - durante tantos dias
 							$ref = "day";
 						}elseif($tipoperiodo == 2){
+							$n = $data['query']['Intervalo']; //intervalo - a cada tantos dias
+							$periodo = $data['query']['Periodo']; //período das repetições - durante tantos dias
 							$ref = "month";
 						}elseif($tipoperiodo == 3){
+							$n = $data['query']['Intervalo']; //intervalo - a cada tantos dias
+							$periodo = $data['query']['Periodo']; //período das repetições - durante tantos dias
 							$ref = "Year";
+						}elseif($tipoperiodo == 4){
+							$n = $data['query']['Intervalo']*7; //intervalo - a cada tantos dias
+							$periodo = $data['query']['Periodo']*7; //período das repetições - durante tantos dias
+							$ref = "day";
 						}
-						$periodo = $data['cadastrar']['Periodo']; //período das repetições - durante tantos dias
-						$n = $data['cadastrar']['Intervalo']; //intervalo - a cada tantos dias
+
 						$qtd = ceil($periodo/$n);//numero de vezes que repete
 						
 						for($j=1; $j<$qtd; $j++) {
 							$data['repeticao'][$j] = array(
 								'Repeticao' 			=> $data['idApp_Consulta'],
+								'Intervalo' 			=> $data['query']['Intervalo'],
+								'Periodo' 				=> $data['query']['Periodo'],
+								'Tempo' 				=> $data['query']['Tempo'],
 								'idApp_Agenda' 			=> $data['query']['idApp_Agenda'],
 								'idApp_Cliente' 		=> $data['query']['idApp_Cliente'],
 								'Evento' 				=> $data['query']['Evento'],
@@ -1224,7 +1191,6 @@ class Consulta extends CI_Controller {
 					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Consulta', 'CREATE', $data['auditoriaitem']);
 					$data['msg'] = '?m=1';
 					
-					//redirect(base_url() . 'cliente/prontuario/' . $data['query']['idApp_Cliente'] . $data['msg'] . $data['redirect']);
 					redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
 					exit();
 				}	
@@ -1361,37 +1327,6 @@ class Consulta extends CI_Controller {
 			}else{
 				$diffim = '+' . $diferencafim;
 			}
-			
-			
-			/*
-			//$dataatualinicio = date('Y-m-d', strtotime($difinicio  .  'day',strtotime($_SESSION['Consulta']['DataInicio'])));
-			//$dataatualfim = date('Y-m-d', strtotime($diffim  .  'day',strtotime($_SESSION['Consulta']['DataFim'])));
-			
-			echo '<br>';
-			echo "<pre>";
-			print_r($_SESSION['Consulta']['DataInicio']);
-			echo '<br>';
-			print_r($_SESSION['Consulta']['DataFim']);
-			echo '<br>';
-			print_r($data1);
-			echo '<br>';
-			print_r($data2);
-			echo '<br>';
-			print_r($diferencainicio);
-			echo '<br>';
-			print_r($diferencafim);
-			echo '<br>';
-			print_r($difinicio);
-			echo '<br>';
-			print_r($diffim);
-			echo '<br>';
-			print_r($dataatualinicio);
-			echo '<br>';
-			print_r($dataatualfim);
-			echo "</pre>";
-			exit();		
-			*/		
-
 			
 			$dataini_alt 	= $this->basico->mascara_data($data['query']['Data'], 'mysql');
 			$datafim_alt 	= $this->basico->mascara_data($data['query']['Data2'], 'mysql');
