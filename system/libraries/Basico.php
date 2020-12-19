@@ -82,6 +82,28 @@ class Basico {
             return FALSE;
         }
     }
+	
+    function check_intervalo($data) {
+        if ($data) {
+            if ($data > 0)
+                return TRUE;
+            else
+                return FALSE;
+        } else {
+            return FALSE;
+        }
+    }
+	
+    function check_periodo($data) {
+        if ($data) {
+            if ($data > 1)
+                return TRUE;
+            else
+                return FALSE;
+        } else {
+            return FALSE;
+        }
+    }
 
     function check_periodo_hora($horafim, $horainicio) {
 
@@ -121,6 +143,18 @@ class Basico {
 		}else{
 			return TRUE;
 		}
+    }
+
+    function check_periodo_intervalo($periodo, $intervalo) {
+		if ($periodo>1 && $intervalo>0) {
+			if($periodo <= $intervalo){
+				return FALSE;
+			}else{
+				return TRUE;
+			}
+		} else {
+            return FALSE;
+        }	
     }
 	
     function calcula_idade($data) {

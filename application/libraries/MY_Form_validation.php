@@ -220,7 +220,27 @@ class MY_Form_validation extends CI_Form_validation {
 
         return $CI->basico->check_hour($data);
     }
+	
+    function valid_intervalo($data) {
+        $CI = & get_instance();
+        $CI->form_validation->set_message('valid_intervalo', '<b>%s</b> inválido. O Intervalo deve ser maior que 0.');
 
+        #$padrao = explode('/', $data);
+        $CI->load->library('basico');
+
+        return $CI->basico->check_intervalo($data);
+    }
+	
+    function valid_periodo($data) {
+        $CI = & get_instance();
+        $CI->form_validation->set_message('valid_periodo', '<b>%s</b> inválido. O Período deve ser maior que 1.');
+
+        #$padrao = explode('/', $data);
+        $CI->load->library('basico');
+
+        return $CI->basico->check_periodo($data);
+    }
+	
     /**
      * valid_period
      *
@@ -256,6 +276,24 @@ class MY_Form_validation extends CI_Form_validation {
         $CI->load->library('basico');
 
         return $CI->basico->check_periodo_data($datafim, $dataini);
+    }
+	
+    function valid_periodo_intervalo($periodo, $intervalo) {
+			/*	
+			echo '<br>';
+			echo "<pre>";
+			print_r($periodo);
+			echo '<br>';
+			print_r($intervalo);
+			echo "</pre>";
+			exit();
+			*/
+        $CI = & get_instance();
+        $CI->form_validation->set_message('valid_periodo_intervalo', '<b>%s</b> inválido. O Período deve ser maior que o Intervalo.');
+
+        $CI->load->library('basico');
+
+        return $CI->basico->check_periodo_intervalo($periodo, $intervalo);
     }
 
     /**

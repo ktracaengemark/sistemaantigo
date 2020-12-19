@@ -168,7 +168,7 @@
 											</div>
 											<div class="col-md-9 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
 												<div class="col-md-4">
-													<label for="Intervalo">Repetir a cada:</label><br>
+													<label for="Intervalo">Intervalo (a cada):</label><br>
 													<input type="text" class="form-control Numero" id="Intervalo" maxlength="3" placeholder="Ex: '5' dias."
 														   name="Intervalo" value="<?php echo $query['Intervalo'] ?>">
 													<?php echo form_error('Intervalo'); ?>		
@@ -190,7 +190,7 @@
 													</select>
 												</div>																
 												<div class="col-md-4">
-													<label for="Periodo">Durante:</label><br>
+													<label for="Periodo">Período (Durante):</label><br>
 													<input type="text" class="form-control Numero" id="Periodo" maxlength="3" placeholder="Ex: '30' dias."
 														   name="Periodo" value="<?php echo $query['Periodo'] ?>">
 													<?php echo form_error('Periodo'); ?>		

@@ -1024,7 +1024,6 @@ class Consulta extends CI_Controller {
 		), TRUE));
 		
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'N' : FALSE;
- 		(!$data['query']['Tempo']) ? $data['query']['Tempo'] = '1' : FALSE;
 
         if ($this->input->get('start') && $this->input->get('end')) {
             $data['query']['Data'] = date('d/m/Y', substr($this->input->get('start'), 0, -3));
@@ -1061,10 +1060,13 @@ class Consulta extends CI_Controller {
 		$this->form_validation->set_rules('idApp_Agenda', 'Agenda do Profissional', 'required|trim');
         
 		if ($data['cadastrar']['Cadastrar'] == 'S') {
-			$this->form_validation->set_rules('Intervalo', 'Intervalo', 'required|trim');
-			$this->form_validation->set_rules('Periodo', 'Período', 'required|trim');
+			//(!$data['query']['Intervalo']) ? $data['query']['Intervalo'] = '1' : FALSE;
+			//(!$data['query']['Periodo']) ? $data['query']['Periodo'] = '1' : FALSE;
+			(!$data['query']['Tempo']) ? $data['query']['Tempo'] = '1' : FALSE;
+			$this->form_validation->set_rules('Intervalo', 'Intervalo', 'required|trim|valid_intervalo');
+			$this->form_validation->set_rules('Periodo', 'Período', 'required|trim|valid_periodo|valid_periodo_intervalo[' . $data['query']['Intervalo'] . ']');
 			$this->form_validation->set_rules('Tempo', 'Tempo', 'required|trim');
-		}		
+		}
 		
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
 		#$data['select']['idSis_EmpresaFilial'] = $this->Empresafilial_model->select_empresafilial();
@@ -1073,9 +1075,9 @@ class Consulta extends CI_Controller {
 		$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();       
 		$data['select']['Tempo'] = array (
             '1' => 'Dia(s)',
-            '4' => 'Semana(s)',
-            '2' => 'Mês(s)',
-			'3' => 'Ano(s)',
+            '2' => 'Semana(s)',
+            '3' => 'Mês(s)',
+			'4' => 'Ano(s)',
         );
         $data['select']['option'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 
@@ -1101,7 +1103,11 @@ class Consulta extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('consulta/form_evento', $data);
         } else {
-
+			if ($data['cadastrar']['Cadastrar'] == 'N') {
+				$data['query']['Intervalo'] = 0;
+				$data['query']['Periodo'] = 0;
+				$data['query']['Tempo'] = 0;
+			}
 			$data['query']['Tipo'] = 1;
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
             $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
@@ -1143,23 +1149,21 @@ class Consulta extends CI_Controller {
 					if ($data['cadastrar']['Cadastrar'] == 'S') {
 						$tipoperiodo = $data['query']['Tempo'];
 						if($tipoperiodo == 1){
-							$n = $data['query']['Intervalo']; //intervalo - a cada tantos dias
-							$periodo = $data['query']['Periodo']; //período das repetições - durante tantos dias
+							$semana = 1;
 							$ref = "day";
 						}elseif($tipoperiodo == 2){
-							$n = $data['query']['Intervalo']; //intervalo - a cada tantos dias
-							$periodo = $data['query']['Periodo']; //período das repetições - durante tantos dias
-							$ref = "month";
-						}elseif($tipoperiodo == 3){
-							$n = $data['query']['Intervalo']; //intervalo - a cada tantos dias
-							$periodo = $data['query']['Periodo']; //período das repetições - durante tantos dias
-							$ref = "Year";
-						}elseif($tipoperiodo == 4){
-							$n = $data['query']['Intervalo']*7; //intervalo - a cada tantos dias
-							$periodo = $data['query']['Periodo']*7; //período das repetições - durante tantos dias
+							$semana = 7;
 							$ref = "day";
+						}elseif($tipoperiodo == 3){
+							$semana = 1;
+							$ref = "month";
+						}elseif($tipoperiodo == 4){
+							$semana = 1;
+							$ref = "Year";
 						}
-
+						
+						$n = $data['query']['Intervalo']; //intervalo - a cada tantos dias
+						$periodo = $data['query']['Periodo']; //período das repetições - durante tantos dias
 						$qtd = ceil($periodo/$n);//numero de vezes que repete
 						
 						for($j=1; $j<$qtd; $j++) {
@@ -1175,8 +1179,8 @@ class Consulta extends CI_Controller {
 								'idApp_Profissional' 	=> $data['query']['idApp_Profissional'],
 								'idTab_Status' 			=> $data['query']['idTab_Status'],
 								'Tipo' 					=> 1,
-								'DataInicio' 			=> date('Y-m-d', strtotime('+ ' . ($n*$j) .  $ref,strtotime($dataini_cad))) . ' ' . $horaini_cad,
-								'DataFim' 				=> date('Y-m-d', strtotime('+ ' . ($n*$j) . $ref,strtotime($datafim_cad))) . ' ' . $horafim_cad,
+								'DataInicio' 			=> date('Y-m-d', strtotime('+ ' . ($semana*$n*$j) .  $ref,strtotime($dataini_cad))) . ' ' . $horaini_cad,
+								'DataFim' 				=> date('Y-m-d', strtotime('+ ' . ($semana*$n*$j) . $ref,strtotime($datafim_cad))) . ' ' . $horafim_cad,
 								'idSis_Usuario' 		=> $_SESSION['log']['idSis_Usuario'],
 								'idSis_Empresa' 		=> $_SESSION['log']['idSis_Empresa'],
 								'idTab_Modulo' 			=> $_SESSION['log']['idTab_Modulo']
