@@ -36,6 +36,41 @@ class Consulta_model extends CI_Model {
 
         return $query[0];
     }
+	
+    public function get_consulta_posterior($id, $repeticao, $quais, $dia) {
+		
+		if($quais == 1){
+			$filtro = 'idApp_Consulta = ' . $id . '';
+		}elseif($quais == 2){
+			$filtro = 'idApp_Consulta = ' . $id . ' OR (Repeticao = ' . $repeticao . ' AND DataInicio <= "' . $dia . '")';
+		}elseif($quais == 3){
+			$filtro = 'idApp_Consulta = ' . $id . ' OR (Repeticao = ' . $repeticao . ' AND DataInicio >= "' . $dia . '")';
+		}elseif($quais == 4){
+			$filtro = 'idApp_Consulta = ' . $id . ' OR Repeticao = ' . $repeticao . '';
+		}
+		
+		$query = $this->db->query('
+			SELECT 
+				*
+			FROM 
+				App_Consulta
+			WHERE
+				' . $filtro . '
+		');
+		
+        /*
+			echo $this->db->last_query();
+          
+		  echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+          */
+		  
+        $query = $query->result_array();
+
+        return $query;
+    }	
 
     public function update_consulta($data, $id) {
 
@@ -55,8 +90,29 @@ class Consulta_model extends CI_Model {
             return TRUE;
     }
 
-    public function delete_consulta($data) {
-        $query = $this->db->delete('App_Consulta', array('idApp_Consulta' => $data));
+    public function delete_consulta($id, $repeticao, $quais, $dataini) {
+			/*
+			echo '<br>';
+			echo "<pre>";
+			print_r($id);
+			echo '<br>';
+			print_r($repeticao);
+			echo '<br>';
+			print_r($quais);
+			echo '<br>';
+			print_r($dataini);
+			echo "</pre>";
+			exit();
+			*/
+		if($quais == 4){
+			$query = $this->db->delete('App_Consulta', array('Repeticao' => $repeticao));
+		}elseif($quais == 3){
+			$query = $this->db->delete('App_Consulta', array('DataInicio' => $dataini));
+		}elseif($quais == 2){
+			$query = $this->db->delete('App_Consulta', array('DataInicio' => $dataini));
+		}else{
+			$query = $this->db->delete('App_Consulta', array('idApp_Consulta' => $id));
+		}
 
         if ($this->db->affected_rows() === 0)
             return FALSE;

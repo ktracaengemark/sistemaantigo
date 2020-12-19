@@ -100,6 +100,29 @@ class Basico {
         }
     }
 
+    function check_periodo_data($datafim, $dataini) {
+
+	
+		$data1 = DateTime::createFromFormat('d/m/Y', $dataini);
+		$data1 = $data1->format('Y-m-d');       
+		$data2 = DateTime::createFromFormat('d/m/Y', $datafim);
+		$data2 = $data2->format('Y-m-d');		
+			/*
+			echo '<br>';
+			echo "<pre>";
+			print_r($data2);
+			echo '<br>';
+			print_r($data1);
+			echo "</pre>";
+			exit();
+			*/
+		if(strtotime($data2) < strtotime($data1)){
+			return FALSE;
+		}else{
+			return TRUE;
+		}
+    }
+	
     function calcula_idade($data) {
 
         $from = new DateTime($data);

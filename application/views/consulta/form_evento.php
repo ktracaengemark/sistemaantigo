@@ -2,7 +2,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-sm-offset-3 col-md-6">
+		<div class="col-sm-offset-2 col-md-8">
 
 			<?php #echo validation_errors(); ?>
 
@@ -134,7 +134,93 @@
 										</div>
 									</div>
 								</div>
+								<?php if ($metodo == 1) { ?>
+									<div class="form-group col-md-12">
+										<div class="row text-left">
+											<div class="col-md-3 ">
+												<label for="Cadastrar">Repetir Agendamento?</label><br>
+												<div class="btn-group" data-toggle="buttons">
+													<?php
+													foreach ($select['Cadastrar'] as $key => $row) {
+														if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'N';
 
+														($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+														if ($cadastrar['Cadastrar'] == $key) {
+															echo ''
+															. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
+															. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+															. 'autocomplete="off" value="' . $key . '" checked>' . $row
+															. '</label>'
+															;
+														} else {
+															echo ''
+															. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
+															. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+															. 'autocomplete="off" value="' . $key . '" >' . $row
+															. '</label>'
+															;
+														}
+													}
+													?>
+
+												</div>
+											</div>
+											<div class="col-md-9 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+												<div class="col-md-4">
+													<label for="Intervalo">Repetir a cada:</label><br>
+													<input type="text" class="form-control Numero" id="Intervalo" maxlength="3" placeholder="Ex: '5' dias."
+														   name="Intervalo" value="<?php echo $cadastrar['Intervalo'] ?>">
+													<?php echo form_error('Intervalo'); ?>		
+												</div>
+												<div class="col-md-4 ">
+													<label for="Tempo">Tempo em:</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+															id="Tempo" name="Tempo">
+														<!--<option value="">-- Selecione uma opção --</option>-->
+														<?php
+														foreach ($select['Tempo'] as $key => $row) {
+															if ($cadastrar['Tempo'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+												</div>																
+												<div class="col-md-4">
+													<label for="Periodo">Durante:</label><br>
+													<input type="text" class="form-control Numero" id="Periodo" maxlength="3" placeholder="Ex: '30' dias."
+														   name="Periodo" value="<?php echo $cadastrar['Periodo'] ?>">
+													<?php echo form_error('Periodo'); ?>		
+												</div>
+												<?php echo form_error('Cadastrar'); ?>
+											</div>
+										</div>
+									</div>
+								<?php } else { ?>
+									<div class="form-group col-md-12">
+										<div class="row text-left">
+											<div class="col-md-4 ">
+												<label for="Quais">Alterar Quais?</label>
+												<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+														id="Quais" name="Quais">
+													<!--<option value="">-- Selecione uma opção --</option>-->
+													<?php
+													foreach ($select['Quais'] as $key => $row) {
+														if ($alterar['Quais'] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>
+												</select>
+											</div>
+										</div>
+									</div>
+								<?php } ?>
 								<div class="form-group">
 									<div class="row">
 										<input type="hidden" name="idApp_Consulta" value="<?php echo $query['idApp_Consulta']; ?>">
@@ -152,34 +238,38 @@
 													<span class="glyphicon glyphicon-trash"></span> Excluir
 												</button>
 											</div>
-
+											<!--
 											<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 												<div class="modal-dialog" role="document">
-													<div class="modal-content">
-														<div class="modal-header bg-danger">
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-															<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
-														</div>
-														<div class="modal-body">
-															<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
-																Esta operação é irreversível.</p>
-														</div>
-														<div class="modal-footer">
-															<div class="col-md-6 text-left">
-																<button type="button" class="btn btn-warning" data-dismiss="modal">
-																	<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
-																</button>
+													<form method="POST" action="">
+														<div class="modal-content">
+															<div class="modal-header bg-danger">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
 															</div>
-															<div class="col-md-6 text-right">
-																<a class="btn btn-danger" href="<?php echo base_url() . 'consulta/excluir/' . $query['idApp_Consulta'] ?>" role="button">
-																	<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
-																</a>
+															<div class="modal-body">
+																<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
+																	Esta operação é irreversível.</p>
+															</div>
+															<div class="modal-footer">
+																<div class="col-md-6 text-left">
+																	<button type="button" class="btn btn-warning" data-dismiss="modal">
+																		<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+																	</button>
+																</div>
+																
+																<div class="col-md-6 text-right">
+																	<a class="btn btn-danger" href="<?php echo base_url() . 'consulta/excluir/' . $query['idApp_Consulta'] . '?repeticao=' . $query['Repeticao'] . '&quais=' . $alterar['Quais'] . '&dataini=' . $query['Data']  ?>" role="button">
+																		<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
+																	</a>
+																</div>
+																
 															</div>
 														</div>
-													</div>
+													</form>
 												</div>
 											</div>
-
+											-->
 										<?php } else { ?>
 											<div class="col-md-6">
 												<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
@@ -197,5 +287,51 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog" role="document">
+		<form method="POST" action="../excluir/<?php echo $query['idApp_Consulta'];?>">
+			<div class="modal-content">
+				<div class="modal-header bg-danger">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
+				</div>
+				<div class="modal-body">
+					<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
+						Esta operação é irreversível.</p>
+				</div>
+				<div class="modal-footer">
+					<div class="col-md-4 text-left">
+						<label ></label><br>
+						<button type="button" class="btn btn-warning" data-dismiss="modal">
+							<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+						</button>
+					</div>
+					<div class="col-md-4 text-left">
+						<label for="Quais">Excluir Quais?</label>
+						<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+								id="Quais" name="Quais">
+							<!--<option value="">-- Selecione uma opção --</option>-->
+							<?php
+							foreach ($select['Quais'] as $key => $row) {
+								if ($alterar['Quais'] == $key) {
+									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+								} else {
+									echo '<option value="' . $key . '">' . $row . '</option>';
+								}
+							}
+							?>
+						</select>
+					</div>
+					<div class="col-md-4">
+					<label ></label><br>
+						<button class="btn btn-md btn-danger" id="inputDb" data-loading-text="Aguarde..." type="submit">
+							<span class="glyphicon glyphicon-trash"></span> Excluir
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 </div>

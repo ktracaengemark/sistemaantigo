@@ -233,13 +233,30 @@ class MY_Form_validation extends CI_Form_validation {
     function valid_periodo_hora($horafim, $horainicio) {
 
         $CI = & get_instance();
-        $CI->form_validation->set_message('valid_periodo_hora', '<b>%s</b> inválida. A data final deve ser maior que a inicial.');
+        $CI->form_validation->set_message('valid_periodo_hora', '<b>%s</b> inválida. A Hora final deve ser maior que a inicial.');
 
         $CI->load->library('basico');
 
         return $CI->basico->check_periodo_hora($horafim, $horainicio);
     }
+	
+    function valid_periodo_data($datafim, $dataini) {
+			/*	
+			echo '<br>';
+			echo "<pre>";
+			print_r($datafim);
+			echo '<br>';
+			print_r($dataini);
+			echo "</pre>";
+			exit();
+			*/
+        $CI = & get_instance();
+        $CI->form_validation->set_message('valid_periodo_data', '<b>%s</b> inválida. A data final deve ser maior ou igual que a inicial.');
 
+        $CI->load->library('basico');
+
+        return $CI->basico->check_periodo_data($datafim, $dataini);
+    }
 
     /**
      * valid_cep
