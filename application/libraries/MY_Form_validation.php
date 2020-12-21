@@ -221,6 +221,16 @@ class MY_Form_validation extends CI_Form_validation {
         return $CI->basico->check_hour($data);
     }
 	
+    function valid_prazo($data) {
+        $CI = & get_instance();
+        $CI->form_validation->set_message('valid_prazo', '<b>%s</b> inválido. O Prazo deve ser maior que 5.');
+
+        #$padrao = explode('/', $data);
+        $CI->load->library('basico');
+
+        return $CI->basico->check_prazo($data);
+    }
+	
     function valid_intervalo($data) {
         $CI = & get_instance();
         $CI->form_validation->set_message('valid_intervalo', '<b>%s</b> inválido. O Intervalo deve ser maior que 0.');
@@ -278,6 +288,42 @@ class MY_Form_validation extends CI_Form_validation {
         return $CI->basico->check_periodo_data($datafim, $dataini);
     }
 	
+    function valid_data_termino($datafim, $dataini) {
+			/*	
+			echo '<br>';
+			echo "<pre>";
+			print_r($datafim);
+			echo '<br>';
+			print_r($dataini);
+			echo "</pre>";
+			exit();
+			*/
+        $CI = & get_instance();
+        $CI->form_validation->set_message('valid_data_termino', '<b>%s</b> inválida. A data em que Termina deve ser maior que a Primeira Repetição.');
+
+        $CI->load->library('basico');
+
+        return $CI->basico->check_data_termino($datafim, $dataini);
+    }
+	
+    function valid_data_termino2($datafim, $dataini) {
+			/*	
+			echo '<br>';
+			echo "<pre>";
+			print_r($datafim);
+			echo '<br>';
+			print_r($dataini);
+			echo "</pre>";
+			exit();
+			*/
+        $CI = & get_instance();
+        $CI->form_validation->set_message('valid_data_termino2', '<b>%s</b> inválida. A data em que Termina deve ter duração menor que 2 anos.');
+
+        $CI->load->library('basico');
+
+        return $CI->basico->check_data_termino2($datafim, $dataini);
+    }
+			
     function valid_periodo_intervalo($periodo, $intervalo) {
 			/*	
 			echo '<br>';

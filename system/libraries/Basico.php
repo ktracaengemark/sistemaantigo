@@ -83,6 +83,17 @@ class Basico {
         }
     }
 	
+    function check_prazo($data) {
+        if ($data) {
+            if ($data > 5)
+                return TRUE;
+            else
+                return FALSE;
+        } else {
+            return FALSE;
+        }
+    }
+		
     function check_intervalo($data) {
         if ($data) {
             if ($data > 0)
@@ -96,7 +107,7 @@ class Basico {
 	
     function check_periodo($data) {
         if ($data) {
-            if ($data > 1)
+            if ($data > 0)
                 return TRUE;
             else
                 return FALSE;
@@ -124,7 +135,6 @@ class Basico {
 
     function check_periodo_data($datafim, $dataini) {
 
-	
 		$data1 = DateTime::createFromFormat('d/m/Y', $dataini);
 		$data1 = $data1->format('Y-m-d');       
 		$data2 = DateTime::createFromFormat('d/m/Y', $datafim);
@@ -142,6 +152,48 @@ class Basico {
 			return FALSE;
 		}else{
 			return TRUE;
+		}
+    }
+
+    function check_data_termino($datafim, $dataini) {
+
+		$data1 = DateTime::createFromFormat('d/m/Y', $dataini);
+		$data1 = $data1->format('Y-m-d');       
+		$data2 = DateTime::createFromFormat('d/m/Y', $datafim);
+		$data2 = $data2->format('Y-m-d');		
+		$diferenca = strtotime($data2) - strtotime($data1);
+		$dias = floor($diferenca / (60 * 60 * 24));
+		
+		if(strtotime($data2) > strtotime($data1)){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+    }
+
+    function check_data_termino2($datafim, $dataini) {
+
+		$data1 = DateTime::createFromFormat('d/m/Y', $dataini);
+		$data1 = $data1->format('Y-m-d');       
+		$data2 = DateTime::createFromFormat('d/m/Y', $datafim);
+		$data2 = $data2->format('Y-m-d');		
+		$diferenca = strtotime($data2) - strtotime($data1);
+		$dias = floor($diferenca / (60 * 60 * 24));
+			/*
+			echo '<br>';
+			echo "<pre>";
+			print_r($data1);
+			echo '<br>';
+			print_r($data2);
+			echo '<br>';
+			print_r($dias);
+			echo "</pre>";
+			exit();
+			*/
+		if($dias <= 730){
+			return TRUE;
+		}else{
+			return FALSE;
 		}
     }
 

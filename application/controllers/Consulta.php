@@ -1002,6 +1002,8 @@ class Consulta extends CI_Controller {
 		
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'Cadastrar',
+			'Prazo',
+			'DataMinima',
         ), TRUE));
 		
         $data['query'] = quotes_to_entities($this->input->post(array(
@@ -1021,6 +1023,9 @@ class Consulta extends CI_Controller {
 			'Intervalo',
 			'Periodo',
 			'Tempo',
+			'Tempo2',
+			'DataTermino',
+			'Recorrencias',
 		), TRUE));
 		
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'N' : FALSE;
@@ -1047,7 +1052,8 @@ class Consulta extends CI_Controller {
 		*/
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
+		
+		$this->form_validation->set_rules('Prazo', 'Prazo', 'trim|valid_prazo');
         $this->form_validation->set_rules('Data', 'Data Início', 'required|trim|valid_date');
         $this->form_validation->set_rules('Data2', 'Data Fim', 'required|trim|valid_date|valid_periodo_data[' . $data['query']['Data'] . ']');
 		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
@@ -1063,9 +1069,14 @@ class Consulta extends CI_Controller {
 			//(!$data['query']['Intervalo']) ? $data['query']['Intervalo'] = '1' : FALSE;
 			//(!$data['query']['Periodo']) ? $data['query']['Periodo'] = '1' : FALSE;
 			(!$data['query']['Tempo']) ? $data['query']['Tempo'] = '1' : FALSE;
+			(!$data['query']['Tempo']) ? $data['query']['Tempo2'] = '1' : FALSE;
 			$this->form_validation->set_rules('Intervalo', 'Intervalo', 'required|trim|valid_intervalo');
-			$this->form_validation->set_rules('Periodo', 'Período', 'required|trim|valid_periodo|valid_periodo_intervalo[' . $data['query']['Intervalo'] . ']');
+			$this->form_validation->set_rules('Periodo', 'Período', 'required|trim|valid_periodo');
+			//$this->form_validation->set_rules('Periodo', 'Período', 'required|trim|valid_periodo|valid_periodo_intervalo[' . $data['query']['Intervalo'] . ']');
 			$this->form_validation->set_rules('Tempo', 'Tempo', 'required|trim');
+			$this->form_validation->set_rules('Tempo', 'Tempo2', 'required|trim');
+			$this->form_validation->set_rules('DataMinima', 'Data Mínima:', 'trim|valid_date');
+			$this->form_validation->set_rules('DataTermino', 'Termina em:', 'required|trim|valid_date|valid_data_termino[' . $data['cadastrar']['DataMinima'] . ']|valid_data_termino2[' . $data['query']['Data'] . ']');
 		}
 		
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
@@ -1103,10 +1114,22 @@ class Consulta extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('consulta/form_evento', $data);
         } else {
+			/*
+			echo '<br>';
+			echo "<pre>";
+			print_r($data['cadastrar']['Cadastrar']);
+			echo '<br>';
+			print_r($data['cadastrar']['Prazo']);
+			echo "</pre>";
+			exit();
+			*/
 			if ($data['cadastrar']['Cadastrar'] == 'N') {
 				$data['query']['Intervalo'] = 0;
 				$data['query']['Periodo'] = 0;
 				$data['query']['Tempo'] = 0;
+				$data['query']['DataTermino'] = "0000-00-00";
+			}else{
+				$data['query']['DataTermino'] = $this->basico->mascara_data($data['query']['DataTermino'], 'mysql');
 			}
 			$data['query']['Tipo'] = 1;
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
@@ -1127,7 +1150,6 @@ class Consulta extends CI_Controller {
 			
             $data['campos'] = array_keys($data['query']);
             $data['anterior'] = array();
-
             $data['idApp_Consulta'] = $this->Consulta_model->set_consulta($data['query']);
 
             if ($data['idApp_Consulta'] === FALSE) {
@@ -1138,6 +1160,12 @@ class Consulta extends CI_Controller {
             } else {
 
 				$data['copiar']['Repeticao'] = $data['idApp_Consulta'];
+				if($data['cadastrar']['Cadastrar'] == 'S'){
+					$data['copiar']['Recorrencias'] = "1/" . $data['query']['Recorrencias'];
+				}else{
+					$data['copiar']['Recorrencias'] = "1/1";
+				}
+				
 				$data['update']['copiar']['bd'] = $this->Consulta_model->update_consulta($data['copiar'], $data['idApp_Consulta']);
 				
 				if ($data['update']['copiar']['bd'] === FALSE) {
@@ -1147,24 +1175,60 @@ class Consulta extends CI_Controller {
 					$this->load->view('consulta/form_consulta', $data);
 				} else {
 					if ($data['cadastrar']['Cadastrar'] == 'S') {
-						$tipoperiodo = $data['query']['Tempo'];
-						if($tipoperiodo == 1){
+						
+						$tipointervalo = $data['query']['Tempo'];
+						if($tipointervalo == 1){
 							$semana = 1;
 							$ref = "day";
-						}elseif($tipoperiodo == 2){
+							$dias = 1;
+						}elseif($tipointervalo == 2){
 							$semana = 7;
 							$ref = "day";
-						}elseif($tipoperiodo == 3){
+							$dias = 7;
+						}elseif($tipointervalo == 3){
 							$semana = 1;
 							$ref = "month";
-						}elseif($tipoperiodo == 4){
+							$dias = 31;
+						}elseif($tipointervalo == 4){
 							$semana = 1;
 							$ref = "Year";
+							$dias = 365;
+						}
+						
+						$tipoperiodo = $data['query']['Tempo2'];
+						if($tipoperiodo == 1){
+							$semana2 = 1;
+							$ref2 = "day";
+							$dias2 = 1;
+						}elseif($tipoperiodo == 2){
+							$semana2 = 7;
+							$ref2 = "day";
+							$dias2 = 7;
+						}elseif($tipoperiodo == 3){
+							$semana2 = 1;
+							$ref2 = "month";
+							$dias2 = 31;
+						}elseif($tipoperiodo == 4){
+							$semana2 = 1;
+							$ref2 = "Year";
+							$dias2 = 365;
 						}
 						
 						$n = $data['query']['Intervalo']; //intervalo - a cada tantos dias
 						$periodo = $data['query']['Periodo']; //período das repetições - durante tantos dias
-						$qtd = ceil($periodo/$n);//numero de vezes que repete
+						
+						$tipominimo = $n * $dias;
+						$tipotermino2 = $periodo * $dias2;
+						/*
+						$tipotermino = $periodo * $dias2;
+						if($tipotermino > 732){
+							$tipotermino2 = 732;
+						}else{
+							$tipotermino2 = $tipotermino;
+						}
+						*/
+						//$qtd = ceil($periodo/$n);//numero de vezes que repete
+						$qtd = ceil($tipotermino2/$tipominimo);//numero de vezes que repete
 						
 						for($j=1; $j<$qtd; $j++) {
 							$data['repeticao'][$j] = array(
@@ -1172,6 +1236,9 @@ class Consulta extends CI_Controller {
 								'Intervalo' 			=> $data['query']['Intervalo'],
 								'Periodo' 				=> $data['query']['Periodo'],
 								'Tempo' 				=> $data['query']['Tempo'],
+								'Tempo2' 				=> $data['query']['Tempo2'],
+								'DataTermino' 			=> $data['query']['DataTermino'],
+								'Recorrencias' 			=> ($j + 1) .  '/' . $data['query']['Recorrencias'],
 								'idApp_Agenda' 			=> $data['query']['idApp_Agenda'],
 								'idApp_Cliente' 		=> $data['query']['idApp_Cliente'],
 								'Evento' 				=> $data['query']['Evento'],

@@ -79,6 +79,126 @@ function dateDiff() {
 	$('#PrazoEntrega').val(days);
 }
 
+function dateTermina() {
+	
+	var intervalo = $('#Intervalo').val();
+	var periodo = $('#Periodo').val();
+	var escala1 = $('#Tempo').val();
+	var escala2 = $('#Tempo2').val();
+	if(escala1 == 1){
+		var ref = 'dia(s)';
+		var tempo = 1;
+	}else if(escala1 == 2){
+		var ref = 'semana(s)';
+		var tempo = 7;
+	}else if(escala1 == 3){
+		var ref = 'mês(es)';
+		var tempo = 31;
+	}else if(escala1 == 4){
+		var ref = 'ano(s)';
+		var tempo = 365;
+	}
+	if(escala2 == 1){
+		var ref2 = 'dia(s)';
+		var tempo2 = 1;
+	}else if(escala2 == 2){
+		var ref2 = 'semana(s)';
+		var tempo2 = 7;
+	}else if(escala2 == 3){
+		var ref2 = 'mês(es)';
+		var tempo2 = 31;
+	}else if(escala2 == 4){
+		var ref2 = 'ano(s)';
+		var tempo2 = 365;
+	}
+	var int_em_dias = intervalo * tempo;
+	var per_em_dias2 = periodo * tempo2;
+	var Recorrencias = Math.ceil(per_em_dias2/int_em_dias);
+	$('#Recorrencias').val(Recorrencias);
+	console.log('Recorrências: ' + Recorrencias + ' vezes');
+	/*
+	var per_em_dias = periodo * tempo2;
+	if(per_em_dias > 732){
+		per_em_dias2 = 732;
+	}else{
+		per_em_dias2 = per_em_dias;
+	}
+	*/
+	var dataorca = $('#Data').val();
+	var dataentregaorca = $('#Data2').val();
+	
+	// Digamos que este é o formato das suas datas
+	// data = '30/03/2019';
+	// Precisamos quebrar a string para retornar cada parte
+	const dataorcaSplit = dataorca.split('/');
+
+	const day = dataorcaSplit[0]; 
+	const month = dataorcaSplit[1];
+	const year = dataorcaSplit[2];
+	
+	const dataentregaorcaSplit = dataentregaorca.split('/');
+
+	const day2 = dataentregaorcaSplit[0]; 
+	const month2 = dataentregaorcaSplit[1]; 
+	const year2 = dataentregaorcaSplit[2]; 
+
+	// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
+	dataorca = new Date(year, month - 1, day);
+	dataentregaorca = new Date(year2, month2 - 1, day2);
+	
+	//Retorna a data no Formato dd/mm/AAAA
+	//var testededata = dataorca.toLocaleDateString();
+	
+	//calcula a data Mínima
+	var prazo_entrega = int_em_dias;
+	var data_entrega    = new Date(dataorca.getTime() + (prazo_entrega * 24 * 60 * 60 * 1000));
+	
+	var mes = (data_entrega.getMonth() + 1);
+	if(mes < 10){
+		var novo_mes = "0" + mes;
+	}else{
+		var novo_mes = mes;
+	}
+	var dia = (data_entrega.getDate());
+	if(dia < 10){
+		var novo_dia = "0" + dia;
+	}else{
+		var novo_dia = dia;
+	}
+	var data_aparente = novo_dia + "/" + novo_mes + "/" + data_entrega.getFullYear();
+	$('#DataMinima').val(data_aparente);
+	
+	//calcula a data Termino
+	var prazo_entrega2 = per_em_dias2;
+	var data_entrega2    = new Date(dataorca.getTime() + (prazo_entrega2 * 24 * 60 * 60 * 1000));
+	
+	var mes2 = (data_entrega2.getMonth() + 1);
+	if(mes2 < 10){
+		var novo_mes2 = "0" + mes2;
+	}else{
+		var novo_mes2 = mes2;
+	}
+	var dia2 = (data_entrega2.getDate());
+	if(dia2 < 10){
+		var novo_dia2 = "0" + dia2;
+	}else{
+		var novo_dia2 = dia2;
+	}
+	var data_aparente2 = novo_dia2 + "/" + novo_mes2 + "/" + data_entrega2.getFullYear();
+	$('#DataTermino').val(data_aparente2);
+
+	const now = new Date(); // Data de hoje
+	const past = dataorca; // Outra data no passado
+	const past2 = dataentregaorca; // Outra data no passado
+	const diff = Math.abs(past2.getTime() - past.getTime()); // Subtrai uma data pela outra
+	const days = Math.ceil(diff / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).
+
+	// Mostra a diferença em dias
+	//console.log('Prazo: ' + days + ' dias');	
+	$('#Prazo').val(days);
+	
+}
+
 function exibirentrega() {
 		$('.Exibir').hide();
 		$('.QtdSoma').hide();
@@ -4556,7 +4676,7 @@ $('#calendar').fullCalendar({
     eventAfterRender: function (event, element) {
 
         if (event.Evento == 1)
-            var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b>" + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional;
+            var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b>" + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Recorrencia:</b> " + event.Recorrencias;
         else {
 
             if (event.Paciente == 'D')

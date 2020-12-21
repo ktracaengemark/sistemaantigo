@@ -56,7 +56,8 @@ $result = mysql_query(
             C.Obs,
             C.idTab_Status,
             TC.TipoConsulta,
-            C.Evento
+            C.Evento,
+			C.Recorrencias
         FROM
             Sis_Usuario AS U 
 				LEFT JOIN App_Agenda AS A ON A.idSis_Usuario = U.idSis_Usuario,
@@ -95,6 +96,7 @@ while ($row = mysql_fetch_assoc($result)) {
 		#$profissional = utf8_encode($row['NomeUsuario']);
 		#$profissional = utf8_encode($row['idApp_Agenda']);
 		$profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
+        $recorrencias = mb_convert_encoding($row['Recorrencias'], "UTF-8", "ISO-8859-1");
 
 	}
 	else {
@@ -108,6 +110,7 @@ while ($row = mysql_fetch_assoc($result)) {
 			#$profissional = utf8_encode($row['NomeUsuario']);
 			#$profissional = utf8_encode($row['idApp_Agenda']);
 			$profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
+			$recorrencias = mb_convert_encoding($row['Recorrencias'], "UTF-8", "ISO-8859-1");
 
 			$telefone1 = mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1");
         }
@@ -126,6 +129,7 @@ while ($row = mysql_fetch_assoc($result)) {
 			#$profissional = utf8_encode($row['idApp_Agenda']);
 			#$profissional = utf8_encode($row['idSis_Usuario']);
             $profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
+			$recorrencias = mb_convert_encoding($row['Recorrencias'], "UTF-8", "ISO-8859-1");
 
 			#$telefone1 = utf8_encode($row['CelularCliente']);
             $telefone1 = mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1");
@@ -197,6 +201,7 @@ while ($row = mysql_fetch_assoc($result)) {
         'Paciente' => $row['Paciente'],
         #   'ContatoCliente' => $contatocliente,
         'Profissional' => $profissional,
+        'Recorrencias' => $recorrencias,
     );
 }
 
