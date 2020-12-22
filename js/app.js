@@ -178,11 +178,11 @@ function dateTermina() {
 	}
 	
 	var primeiraedit = primeira.toLocaleDateString();
-	console.log('Primeira Editada: ' + primeiraedit);
+	//console.log('Primeira Editada: ' + primeiraedit);
 	$('#DataMinima').val(primeiraedit);		
 	
 	var ultimaedit = ultima.toLocaleDateString();
-	console.log('Ultima Editada: ' + ultimaedit);
+	//console.log('Ultima Editada: ' + ultimaedit);
 	$('#DataTermino').val(ultimaedit);
 	
 	const primeiraeditSplit = primeiraedit.split('/');
@@ -192,7 +192,7 @@ function dateTermina() {
 
 	// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
 	primeiraedit = new Date(yearP, monthP - 1, dayP);	
-	console.log('Primeira Y-m-d: ' + primeiraedit);
+	//console.log('Primeira Y-m-d: ' + primeiraedit);
 	
 	const ultimaeditSplit = ultimaedit.split('/');
 	const dayU = ultimaeditSplit[0]; 
@@ -201,7 +201,7 @@ function dateTermina() {
 
 	// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
 	ultimaedit = new Date(yearU, monthU - 1, dayU);	
-	console.log('Ultimo Y-m-d: ' + ultimaedit);	
+	//console.log('Ultimo Y-m-d: ' + ultimaedit);	
 	
 	
 	const pastI = dataorca; // Outra data no passado
@@ -209,16 +209,16 @@ function dateTermina() {
 	const pastP = primeiraedit; // Outra data no passado
 	const diffP = Math.abs(pastP.getTime() - pastI.getTime()); // Subtrai uma data pela outra
 	const daysP = Math.ceil(diffP / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).	
-	console.log('Tempo Primeira: ' + daysP + ' dias');
+	//console.log('Tempo Primeira: ' + daysP + ' dias');
 	
 
 	const pastU = ultimaedit; // Outra data no passado
 	const diffU = Math.abs(pastU.getTime() - pastI.getTime()); // Subtrai uma data pela outra
 	const daysU = Math.ceil(diffU / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).	
-	console.log('Tempo Ultimo: ' + daysU + ' dias');	
+	//console.log('Tempo Ultimo: ' + daysU + ' dias');	
 	
 	var ocorrencias = Math.ceil(daysU/daysP);
-	console.log('Ocorrências: ' + ocorrencias + ' Vez(es)');
+	//console.log('Ocorrências: ' + ocorrencias + ' Vez(es)');
 	$('#Recorrencias').val(ocorrencias);
 
 }
@@ -4700,15 +4700,15 @@ $('#calendar').fullCalendar({
     eventAfterRender: function (event, element) {
 
         if (event.Evento == 1)
-            var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b>" + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Recorrencia:</b> " + event.Recorrencias + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
+            var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b>" + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencias + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
         else {
 
             if (event.Paciente == 'D')
                 var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b> " + event.Obs  + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Cliente: </b>" + event.title + "</b><br><b>Responsável:</b> " + event.subtitle + "<br><b>Tel.:</b> " + event.CelularCliente + 
-							"<br>\n\<b>Tipo: </b> " + event.TipoConsulta;
+							"<br>\n\<b>Tipo: </b> " + event.TipoConsulta + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencias + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
             else
                 var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b> " + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Cliente: </b>" + event.title + "<b> " + "<br><b>Tel.:</b> " + event.CelularCliente + 
-							"<br>\n\<b>Tipo: </b> " + event.TipoConsulta;
+							"<br>\n\<b>Tipo: </b> " + event.TipoConsulta + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencias + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
         }
 
 

@@ -46,6 +46,9 @@ class Consulta extends CI_Controller {
 
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'Cadastrar',
+			'Repetir',
+			'Prazo',
+			'DataMinima',
         ), TRUE));
 
         $data['query'] = quotes_to_entities($this->input->post(array(
@@ -65,7 +68,20 @@ class Consulta extends CI_Controller {
             'idApp_Profissional',
             'Procedimento',
             'Obs',
+			'Intervalo',
+			'Periodo',
+			'Tempo',
+			'Tempo2',
+			'DataTermino',
+			'Recorrencias',
                 ), TRUE));
+		
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+ 		(!$data['cadastrar']['Repetir']) ? $data['cadastrar']['Repetir'] = 'N' : FALSE;
+		//(!$data['query']['Intervalo']) ? $data['query']['Intervalo'] = '1' : FALSE;
+		//(!$data['query']['Periodo']) ? $data['query']['Periodo'] = '1' : FALSE;
+		(!$data['query']['Tempo']) ? $data['query']['Tempo'] = '1' : FALSE;
+		(!$data['query']['Tempo']) ? $data['query']['Tempo2'] = '1' : FALSE;		
 		
 		/*
         if ($idApp_Cliente) {
@@ -108,6 +124,16 @@ class Consulta extends CI_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
+		if ($data['cadastrar']['Repetir'] == 'S') {
+			$this->form_validation->set_rules('Intervalo', 'Intervalo', 'required|trim|valid_intervalo');
+			$this->form_validation->set_rules('Periodo', 'Período', 'required|trim|valid_periodo');
+			//$this->form_validation->set_rules('Periodo', 'Período', 'required|trim|valid_periodo|valid_periodo_intervalo[' . $data['query']['Intervalo'] . ']');
+			$this->form_validation->set_rules('Tempo', 'Tempo', 'required|trim');
+			$this->form_validation->set_rules('Tempo', 'Tempo2', 'required|trim');
+			$this->form_validation->set_rules('DataMinima', 'Data Mínima:', 'trim|valid_date');
+			$this->form_validation->set_rules('DataTermino', 'Termina em:', 'required|trim|valid_date|valid_data_termino[' . $data['cadastrar']['DataMinima'] . ']|valid_data_termino2[' . $data['query']['Data'] . ']');
+		}
+		
         $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
         $this->form_validation->set_rules('Data2', 'Data do Fim', 'required|trim|valid_date');
 		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
@@ -126,7 +152,14 @@ class Consulta extends CI_Controller {
 		#$data['resumo'] = $this->Clienteusuario_model->get_clienteusuario($data['query']['idApp_Cliente']);
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
-        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();		
+		$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+		$data['select']['Repetir'] = $this->Basico_model->select_status_sn();        
+		$data['select']['Tempo'] = array (
+            '1' => 'Dia(s)',
+            '2' => 'Semana(s)',
+            '3' => 'Mês(s)',
+			'4' => 'Ano(s)',
+        );		
 		$data['select']['idApp_Agenda'] = $this->Basico_model->select_agenda();
 		$data['select']['Status'] = $this->Basico_model->select_status();
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
@@ -159,15 +192,22 @@ class Consulta extends CI_Controller {
         $data['readonly'] = '';
         $data['disabled'] = '';
         $data['metodo'] = 1;
+        $data['alterarcliente'] = 1;
 
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+ 		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
-			
+		
+		$data['radio'] = array(
+            'Repetir' => $this->basico->radio_checked($data['cadastrar']['Repetir'], 'Repetir', 'NS'),
+        );
+        ($data['cadastrar']['Repetir'] == 'S') ?
+            $data['div']['Repetir'] = '' : $data['div']['Repetir'] = 'style="display: none;"';
+					
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
@@ -178,8 +218,59 @@ class Consulta extends CI_Controller {
             $this->load->view('consulta/form_consulta', $data);
         } else {
 
-			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
+		
+			$dataini_cad 	= $this->basico->mascara_data($data['query']['Data'], 'mysql');
+			$datafim_cad 	= $this->basico->mascara_data($data['query']['Data2'], 'mysql');
+			$horaini_cad 	= $data['query']['HoraInicio'];
+			$horafim_cad 	= $data['query']['HoraFim'];
 			
+			if ($data['cadastrar']['Repetir'] == 'N') {
+				$data['query']['Intervalo'] = 0;
+				$data['query']['Periodo'] = 0;
+				$data['query']['Tempo'] = 0;
+				$data['query']['Tempo2'] = 0;
+				$data['query']['DataTermino'] = $dataini_cad;
+			}else{
+				
+				$tipointervalo = $data['query']['Tempo'];
+				if($tipointervalo == 1){
+					$semana = 1;
+					$ref = "day";
+				}elseif($tipointervalo == 2){
+					$semana = 7;
+					$ref = "day";
+				}elseif($tipointervalo == 3){
+					$semana = 1;
+					$ref = "month";
+				}elseif($tipointervalo == 4){
+					$semana = 1;
+					$ref = "Year";
+				}
+				
+				$tipoperiodo = $data['query']['Tempo2'];
+				if($tipoperiodo == 1){
+					$semana2 = 1;
+					$ref2 = "day";
+				}elseif($tipoperiodo == 2){
+					$semana2 = 7;
+					$ref2 = "day";
+				}elseif($tipoperiodo == 3){
+					$semana2 = 1;
+					$ref2 = "month";
+				}elseif($tipoperiodo == 4){
+					$semana2 = 1;
+					$ref2 = "Year";
+				}
+				
+				$n = $data['query']['Intervalo']; //intervalo - a cada tantos dias
+				$periodo = $data['query']['Periodo']; //período das repetições - durante tantos dias
+				
+				$qtd = $data['query']['Recorrencias'];
+				$primeiraocorrencia = date('Y-m-d', strtotime('+ ' . ($semana*$n) .  $ref,strtotime($dataini_cad)));
+				$ultimaocorrencia = date('Y-m-d', strtotime('+ ' . ($semana*$n*($qtd - 1)) .  $ref,strtotime($dataini_cad)));				
+				
+			}
+
 			$data['query']['Tipo'] = 2;
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
             #$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
@@ -207,7 +298,55 @@ class Consulta extends CI_Controller {
                 $this->basico->erro($msg);
                 $this->load->view('consulta/form_consulta', $data);
             } else {
+				$data['copiar']['Repeticao'] = $data['idApp_Consulta'];
+				if($data['cadastrar']['Repetir'] == 'S'){
+					$data['copiar']['DataTermino'] = $ultimaocorrencia;
+					$data['copiar']['Recorrencias'] = "1/" . $qtd;
+				}else{
+					$data['copiar']['Recorrencias'] = "1/1";
+					//$data['copiar']['DataTermino'] = $dataini_cad;
+				}
+				
+				$data['update']['copiar']['bd'] = $this->Consulta_model->update_consulta($data['copiar'], $data['idApp_Consulta']);
+				
+				if ($data['update']['copiar']['bd'] === FALSE) {
+					$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
+					$this->basico->erro($msg);
+					$this->load->view('consulta/form_consulta', $data);
+				} else {
+					if ($data['cadastrar']['Repetir'] == 'S') {
+						for($j=1; $j<$qtd; $j++) {
+							$data['repeticao'][$j] = array(
+								'Repeticao' 			=> $data['idApp_Consulta'],
+								'Intervalo' 			=> $data['query']['Intervalo'],
+								'Periodo' 				=> $data['query']['Periodo'],
+								'Tempo' 				=> $data['query']['Tempo'],
+								'Tempo2' 				=> $data['query']['Tempo2'],
+								'DataTermino' 			=> $ultimaocorrencia,
+								//'DataTermino' 			=> $data['query']['DataTermino'],
+								'Recorrencias' 			=> ($j + 1) .  '/' . $data['query']['Recorrencias'],
+								'idApp_Agenda' 			=> $data['query']['idApp_Agenda'],
+								'idApp_Cliente' 		=> $data['query']['idApp_Cliente'],
+								//'Evento' 				=> $data['query']['Evento'],
+								'Obs' 					=> $data['query']['Obs'],
+								'idApp_Profissional' 	=> $data['query']['idApp_Profissional'],
+								'idTab_Status' 			=> $data['query']['idTab_Status'],
+								'Tipo' 					=> $data['query']['Tipo'],
+								'idTab_TipoConsulta' 	=> $data['query']['idTab_TipoConsulta'],
+								'Paciente' 				=> $data['query']['Paciente'],
+								'DataInicio' 			=> date('Y-m-d', strtotime('+ ' . ($semana*$n*$j) .  $ref,strtotime($dataini_cad))) . ' ' . $horaini_cad,
+								'DataFim' 				=> date('Y-m-d', strtotime('+ ' . ($semana*$n*$j) . $ref,strtotime($datafim_cad))) . ' ' . $horafim_cad,
+								'idSis_Usuario' 		=> $_SESSION['log']['idSis_Usuario'],
+								'idSis_Empresa' 		=> $_SESSION['log']['idSis_Empresa'],
+								'idTab_Modulo' 			=> $_SESSION['log']['idTab_Modulo']
+							);
+							$data['campos'] = array_keys($data['repeticao'][$j]);
+							$data['id_Repeticao'] = $this->Consulta_model->set_consulta($data['repeticao'][$j]);
+						}
+				
+					}
+				}	
                 $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Consulta'], FALSE);
                 $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Consulta', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
@@ -553,11 +692,15 @@ class Consulta extends CI_Controller {
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'Cadastrar',
         ), TRUE));
+		
+		$data['alterar'] = quotes_to_entities($this->input->post(array(
+			'Quais',
+        ), TRUE));
 
         $data['query'] = $this->input->post(array(
             #'idSis_Usuario',
 			'idApp_Consulta',
-            #'idApp_Agenda',
+            'idApp_Agenda',
             'idApp_Cliente',
             'Data',
             'Data2',
@@ -572,24 +715,28 @@ class Consulta extends CI_Controller {
 			'idTab_TipoConsulta',
                 ), TRUE);
 
-        /*
+ 		(!$data['alterar']['Quais']) ? $data['alterar']['Quais'] = 1 : FALSE;
+
 		if ($idApp_Cliente) {
             $data['query']['idApp_Cliente'] = $idApp_Cliente;
-            $_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
+			$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
+			$data['resumo'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
+			#$data['resumo'] = $this->Cliente_model->get_cliente($idApp_Cliente);
+			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 30) ? substr($data['resumo']['NomeCliente'], 0, 30) : $data['resumo']['NomeCliente'];
 		}
-		*/
 		
         if ($idApp_Consulta) {
             #$data['query']['idApp_Cliente'] = $idApp_Cliente;
-            $data['query'] = $this->Consulta_model->get_consulta($idApp_Consulta);
-
-            $dataini = explode(' ', $data['query']['DataInicio']);
+            $_SESSION['Consulta'] = $data['query'] = $this->Consulta_model->get_consulta($idApp_Consulta);
+            $_SESSION['Consulta']['DataTermino'] = $this->basico->mascara_data($_SESSION['Consulta']['DataTermino'], 'barras');
+			$dataini = explode(' ', $data['query']['DataInicio']);
             $datafim = explode(' ', $data['query']['DataFim']);
-
             $data['query']['Data'] = $this->basico->mascara_data($dataini[0], 'barras');
             $data['query']['Data2'] = $this->basico->mascara_data($datafim[0], 'barras');
 			$data['query']['HoraInicio'] = substr($dataini[1], 0, 5);
             $data['query']['HoraFim'] = substr($datafim[1], 0, 5);
+			$_SESSION['Consulta']['DataInicio'] = $dataini[0];
+            $_SESSION['Consulta']['DataFim'] = $datafim[0];
         }
         else {
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
@@ -600,18 +747,19 @@ class Consulta extends CI_Controller {
         if ($data['query']['DataFim'] < date('Y-m-d H:i:s', time())) {
             #$data['readonly'] = 'readonly';
             $data['readonly'] = '';
-            $data['datepicker'] = '';
-            $data['timepicker'] = '';
+            $data['datepicker'] = 'DatePicker';
+            $data['timepicker'] = 'TimePicker';
         } else {
             $data['readonly'] = '';
             $data['datepicker'] = 'DatePicker';
             $data['timepicker'] = 'TimePicker';
         }
 
-        #echo $data['query']['DataInicio'];
-        #$data['query']['idApp_Agenda'] = 1;
-
-
+		$data1 = DateTime::createFromFormat('d/m/Y', $data['query']['Data']);
+		$data1 = $data1->format('Y-m-d');       
+		$data2 = DateTime::createFromFormat('d/m/Y', $data['query']['Data2']);
+		$data2 = $data2->format('Y-m-d');	
+		
         #Ver uma solução melhor para este campo
         (!$data['query']['Paciente']) ? $data['query']['Paciente'] = 'R' : FALSE;
 
@@ -625,15 +773,15 @@ class Consulta extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
-        $this->form_validation->set_rules('Data2', 'Data Fim', 'required|trim|valid_date');
+        $this->form_validation->set_rules('Data2', 'Data Fim', 'required|trim|valid_date|valid_periodo_data[' . $data['query']['Data'] . ']');
 		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
-        #$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
-		$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour');
-        #$this->form_validation->set_rules('idTab_TipoConsulta', 'Tipo de Consulta', 'required|trim');
-        #$this->form_validation->set_rules('idApp_Profissional', 'Profissional', 'required|trim');
+        if(strtotime($data2) == strtotime($data1)){
+			$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
+		}else{
+			$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour');
+		}
 		$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
 		$this->form_validation->set_rules('idApp_Agenda', 'Profissional', 'required|trim');
-		#$this->form_validation->set_rules('idSis_EmpresaFilial', 'Unidade', 'required|trim');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');	
 
         if ($data['query']['Paciente'] == 'D')
@@ -649,27 +797,19 @@ class Consulta extends CI_Controller {
         $data['select']['Paciente'] = array (
             'R' => 'O Próprio',
             'D' => 'ContatoCliente',
+        );		
+		$data['select']['Quais'] = array (
+            '1' => 'Apenas Este',
+            '2' => 'Este e os Anteriores',
+			'3' => 'Este e os Posteriores',
+			'4' => 'Todas',
         );
 
-        #$data['resumo'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
-		
 		if ($_SESSION['log']['idSis_Empresa'] == 5) {
 			$data['resumo1'] = $this->Agenda_model->get_agenda($data['query']['idApp_Agenda']);
 			$_SESSION['Agenda']['Nome'] = (strlen($data['resumo1']['Nome']) > 30) ? substr($data['resumo1']['Nome'], 0, 30) : $data['resumo1']['Nome'];
 			$_SESSION['Agenda']['NomeEmpresa'] = (strlen($data['resumo1']['NomeEmpresa']) > 30) ? substr($data['resumo1']['NomeEmpresa'], 0, 30) : $data['resumo1']['NomeEmpresa'];
-		}		
-		
-		if ($idApp_Cliente) {
-            $data['query']['idApp_Cliente'] = $idApp_Cliente;
-			$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
-			$data['resumo'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
-			#$data['resumo'] = $this->Cliente_model->get_cliente($idApp_Cliente);
-			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 30) ? substr($data['resumo']['NomeCliente'], 0, 30) : $data['resumo']['NomeCliente'];
-		
-		
-		
 		}
-        //echo '<br><br><br><br>================================== '.$data['query']['idTab_Status'];
 
         $data['titulo'] = 'Editar Agendamento';
         $data['form_open_path'] = 'consulta/alterar';
@@ -677,6 +817,7 @@ class Consulta extends CI_Controller {
         #$data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
+        $data['alterarcliente'] = 1;
 
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		
@@ -696,20 +837,46 @@ class Consulta extends CI_Controller {
 				$this->load->view('consulta/form_consulta', $data);
 			}	
         } else {
-
-            #echo '<br><br><br><br>================================== '.$data['query']['idTab_Status'];
-            #exit();
-			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
+		
+			if($_SESSION['Consulta']['idApp_Cliente'] != $data['query']['idApp_Cliente']){
+				$data['query']['Repeticao'] = $data['query']['idApp_Consulta'];
+			}else{
+				$data['query']['Repeticao'] = $_SESSION['Consulta']['Repeticao'];
+			}
 			
             $data['query']['Tipo'] = 2;
 			$data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
-            #$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
 			$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
 			#$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
             //exit();
-
-            #unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
+            
+			$dataanteriorinicio = strtotime($_SESSION['Consulta']['DataInicio']);
+			$dataanteriorfim = strtotime($_SESSION['Consulta']['DataFim']);
+			
+			$dataposteriorinicio = strtotime($data1);
+			$dataposteriorfim = strtotime($data2);
+			
+			$diferencainicio = ($dataposteriorinicio - $dataanteriorinicio)/86400;
+			$diferencafim = ($dataposteriorfim - $dataanteriorfim)/86400;
+			
+			if($diferencainicio < 0){
+				$difinicio = $diferencainicio;
+			}else{
+				$difinicio = '+' . $diferencainicio;
+			}
+			
+			if($diferencafim < 0){
+				$diffim = $diferencafim;
+			}else{
+				$diffim = '+' . $diferencafim;
+			}
+			
+			$dataini_alt 	= $this->basico->mascara_data($data['query']['Data'], 'mysql');
+			$datafim_alt 	= $this->basico->mascara_data($data['query']['Data2'], 'mysql');
+			$horaini_alt 	= $data['query']['HoraInicio'];
+			$horafim_alt 	= $data['query']['HoraFim'];
+			
 			unset($data['query']['Data'], $data['query']['Data2'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
 			
             $data['anterior'] = $this->Consulta_model->get_consulta($data['query']['idApp_Consulta']);
@@ -717,9 +884,42 @@ class Consulta extends CI_Controller {
 
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_Consulta'], TRUE);
 
-            unset($_SESSION['Agenda']);
-
-            if ($data['auditoriaitem'] && $this->Consulta_model->update_consulta($data['query'], $data['query']['idApp_Consulta']) === FALSE) {
+			$data['update']['query']['bd'] = $this->Consulta_model->update_consulta($data['query'], $data['query']['idApp_Consulta']);
+			
+			$_SESSION['Repeticao'] = $data['repeticao'] = $this->Consulta_model->get_consulta_posterior($data['query']['idApp_Consulta'], $_SESSION['Consulta']['Repeticao'], $data['alterar']['Quais'], $dataini_alt);
+			
+			if (count($data['repeticao']) > 0) {
+				$data['repeticao'] = array_combine(range(1, count($data['repeticao'])), array_values($data['repeticao']));
+                $max = count($data['repeticao']);
+				if (isset($data['repeticao'])) {
+					for($j=1; $j <= $max; $j++) {
+						//pego a data original, de cada linha, e somo a diferença
+						$datainicial[$j] 								= explode(' ', $data['repeticao'][$j]['DataInicio']);
+						$datafinal[$j] 									= explode(' ', $data['repeticao'][$j]['DataFim']);
+						$dataoriginalinicio[$j] 						= $datainicial[$j][0];
+						$dataoriginalfim[$j] 							= $datafinal[$j][0];
+						$dataatualinicio[$j] 							= date('Y-m-d', strtotime($difinicio  .  'day',strtotime($dataoriginalinicio[$j])));
+						$dataatualfim[$j] 								= date('Y-m-d', strtotime($diffim  .  'day',strtotime($dataoriginalfim[$j])));
+						if($data['repeticao'][$j]['idApp_Consulta'] != $data['query']['idApp_Consulta']){
+							$data['repeticao'][$j]['DataInicio'] 		= $dataatualinicio[$j] . ' ' . $horaini_alt;
+							$data['repeticao'][$j]['DataFim'] 			= $dataatualfim[$j] . ' ' . $horafim_alt;
+						}
+						$data['repeticao'][$j]['Repeticao'] 			= $data['query']['Repeticao'];
+						$data['repeticao'][$j]['idApp_Agenda'] 			= $data['query']['idApp_Agenda'];
+						$data['repeticao'][$j]['idApp_Cliente'] 		= $data['query']['idApp_Cliente'];
+						$data['repeticao'][$j]['Obs'] 					= $data['query']['Obs'];
+						$data['repeticao'][$j]['idApp_Profissional'] 	= $data['query']['idApp_Profissional'];
+						$data['repeticao'][$j]['idTab_Status'] 			= $data['query']['idTab_Status'];
+						$data['repeticao'][$j]['idTab_TipoConsulta'] 	= $data['query']['idTab_TipoConsulta'];
+						
+						$data['update']['repeticao'][$j]['bd'] 			= $this->Consulta_model->update_consulta($data['repeticao'][$j], $data['repeticao'][$j]['idApp_Consulta']);
+					}
+				}
+			}
+			
+			unset($_SESSION['Agenda'], $_SESSION['Cliente'], $_SESSION['Consulta'], $_SESSION['Repeticao']);
+			
+            if ($data['auditoriaitem'] && $data['update']['query']['bd'] === FALSE) {
                 $data['msg'] = '?m=1';
                 redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
                 exit();
@@ -741,7 +941,7 @@ class Consulta extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-    public function alterar2($idApp_Cliente = FALSE, $idApp_Consulta = FALSE) {
+    public function alterar2($idApp_Cliente = NULL, $idApp_Consulta = FALSE) {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -750,10 +950,18 @@ class Consulta extends CI_Controller {
         else
             $data['msg'] = '';
 
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+		
+		$data['alterar'] = quotes_to_entities($this->input->post(array(
+			'Quais',
+        ), TRUE));
+
         $data['query'] = $this->input->post(array(
             #'idSis_Usuario',
 			'idApp_Consulta',
-            #'idApp_Agenda',
+            'idApp_Agenda',
             'idApp_Cliente',
             'Data',
             'Data2',
@@ -768,30 +976,27 @@ class Consulta extends CI_Controller {
 			'idTab_TipoConsulta',
                 ), TRUE);
 
-        /*
-		if ($idApp_Cliente) {
-            $data['query']['idApp_Cliente'] = $idApp_Cliente;
-            $_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
-		}
-		*/
+ 		(!$data['alterar']['Quais']) ? $data['alterar']['Quais'] = 1 : FALSE;
+
 		if ($idApp_Cliente) {
             $data['query']['idApp_Cliente'] = $idApp_Cliente;
 			$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
-			$data['resumo'] = $this->Cliente_model->get_cliente($idApp_Cliente);
-			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 12) ? substr($data['resumo']['NomeCliente'], 0, 12) : $data['resumo']['NomeCliente'];
+			$data['resumo'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
+			#$data['resumo'] = $this->Cliente_model->get_cliente($idApp_Cliente);
+			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 30) ? substr($data['resumo']['NomeCliente'], 0, 30) : $data['resumo']['NomeCliente'];
 		}
-
+		
         if ($idApp_Consulta) {
-            $data['query']['idApp_Cliente'] = $idApp_Cliente;
-            $data['query'] = $this->Consulta_model->get_consulta($idApp_Consulta);
-
+            $_SESSION['Consulta'] = $data['query'] = $this->Consulta_model->get_consulta($idApp_Consulta);
+            $_SESSION['Consulta']['DataTermino'] = $this->basico->mascara_data($_SESSION['Consulta']['DataTermino'], 'barras');
             $dataini = explode(' ', $data['query']['DataInicio']);
             $datafim = explode(' ', $data['query']['DataFim']);
-
             $data['query']['Data'] = $this->basico->mascara_data($dataini[0], 'barras');
             $data['query']['Data2'] = $this->basico->mascara_data($datafim[0], 'barras');
 			$data['query']['HoraInicio'] = substr($dataini[1], 0, 5);
             $data['query']['HoraFim'] = substr($datafim[1], 0, 5);
+			$_SESSION['Consulta']['DataInicio'] = $dataini[0];
+            $_SESSION['Consulta']['DataFim'] = $datafim[0];
         }
         else {
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
@@ -802,18 +1007,19 @@ class Consulta extends CI_Controller {
         if ($data['query']['DataFim'] < date('Y-m-d H:i:s', time())) {
             #$data['readonly'] = 'readonly';
             $data['readonly'] = '';
-            $data['datepicker'] = '';
-            $data['timepicker'] = '';
+            $data['datepicker'] = 'DatePicker';
+            $data['timepicker'] = 'TimePicker';
         } else {
             $data['readonly'] = '';
             $data['datepicker'] = 'DatePicker';
             $data['timepicker'] = 'TimePicker';
         }
 
-        #echo $data['query']['DataInicio'];
-        #$data['query']['idApp_Agenda'] = 1;
-
-
+		$data1 = DateTime::createFromFormat('d/m/Y', $data['query']['Data']);
+		$data1 = $data1->format('Y-m-d');       
+		$data2 = DateTime::createFromFormat('d/m/Y', $data['query']['Data2']);
+		$data2 = $data2->format('Y-m-d');	
+		
         #Ver uma solução melhor para este campo
         (!$data['query']['Paciente']) ? $data['query']['Paciente'] = 'R' : FALSE;
 
@@ -827,52 +1033,69 @@ class Consulta extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
-        $this->form_validation->set_rules('Data2', 'Data Fim', 'required|trim|valid_date');
+        $this->form_validation->set_rules('Data2', 'Data Fim', 'required|trim|valid_date|valid_periodo_data[' . $data['query']['Data'] . ']');
 		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
-        #$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
-		$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour');
-        #$this->form_validation->set_rules('idTab_TipoConsulta', 'Tipo de Consulta', 'required|trim');
-        #$this->form_validation->set_rules('idApp_Profissional', 'Profissional', 'required|trim');
+        if(strtotime($data2) == strtotime($data1)){
+			$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
+		}else{
+			$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour');
+		}
 		$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
-		$this->form_validation->set_rules('idApp_Agenda', 'Profissional', 'required|trim');
-		#$this->form_validation->set_rules('idSis_EmpresaFilial', 'Unidade', 'required|trim');
-
+		$this->form_validation->set_rules('idApp_Agenda', 'Profissional', 'required|trim');	
 
         if ($data['query']['Paciente'] == 'D')
             $this->form_validation->set_rules('idApp_ContatoCliente', 'ContatoCliente', 'required|trim');
-
+	
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['idApp_Agenda'] = $this->Basico_model->select_agenda();
-        $data['select']['Status'] = $this->Basico_model->select_status();
+		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();	
+		$data['select']['Status'] = $this->Basico_model->select_status();
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
         $data['select']['ContatoCliente'] = $this->Consulta_model->select_contatocliente_cliente($data['query']['idApp_Cliente']);
-		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
 		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresa4();
-		
         $data['select']['Paciente'] = array (
             'R' => 'O Próprio',
             'D' => 'ContatoCliente',
+        );		
+		$data['select']['Quais'] = array (
+            '1' => 'Apenas Este',
+            '2' => 'Este e os Anteriores',
+			'3' => 'Este e os Posteriores',
+			'4' => 'Todas',
         );
 
-        $data['resumo'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
-
-        //echo '<br><br><br><br>================================== '.$data['query']['idTab_Status'];
+		if ($_SESSION['log']['idSis_Empresa'] == 5) {
+			$data['resumo1'] = $this->Agenda_model->get_agenda($data['query']['idApp_Agenda']);
+			$_SESSION['Agenda']['Nome'] = (strlen($data['resumo1']['Nome']) > 30) ? substr($data['resumo1']['Nome'], 0, 30) : $data['resumo1']['Nome'];
+			$_SESSION['Agenda']['NomeEmpresa'] = (strlen($data['resumo1']['NomeEmpresa']) > 30) ? substr($data['resumo1']['NomeEmpresa'], 0, 30) : $data['resumo1']['NomeEmpresa'];
+		}
 
         $data['titulo'] = 'Editar Agendamento';
-        $data['form_open_path'] = 'consulta/alterar';
+        $data['form_open_path'] = 'consulta/alterar2';
         #$data['readonly'] = '';
         #$data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
+        $data['alterarcliente'] = 2;
+
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
 
         $data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('consulta/form_consulta2', $data);
+            if ($_SESSION['log']['idSis_Empresa'] == 5) {
+				$this->load->view('consulta/form_consulta0', $data);
+			} else {
+				$this->load->view('consulta/form_consulta', $data);
+			}	
         } else {
-
-            #echo '<br><br><br><br>================================== '.$data['query']['idTab_Status'];
-            #exit();
 
             $data['query']['Tipo'] = 2;
 			$data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
@@ -881,7 +1104,33 @@ class Consulta extends CI_Controller {
 			#$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
             //exit();
-
+            
+			$dataanteriorinicio = strtotime($_SESSION['Consulta']['DataInicio']);
+			$dataanteriorfim = strtotime($_SESSION['Consulta']['DataFim']);
+			
+			$dataposteriorinicio = strtotime($data1);
+			$dataposteriorfim = strtotime($data2);
+			
+			$diferencainicio = ($dataposteriorinicio - $dataanteriorinicio)/86400;
+			$diferencafim = ($dataposteriorfim - $dataanteriorfim)/86400;
+			
+			if($diferencainicio < 0){
+				$difinicio = $diferencainicio;
+			}else{
+				$difinicio = '+' . $diferencainicio;
+			}
+			
+			if($diferencafim < 0){
+				$diffim = $diferencafim;
+			}else{
+				$diffim = '+' . $diferencafim;
+			}
+			
+			$dataini_alt 	= $this->basico->mascara_data($data['query']['Data'], 'mysql');
+			$datafim_alt 	= $this->basico->mascara_data($data['query']['Data2'], 'mysql');
+			$horaini_alt 	= $data['query']['HoraInicio'];
+			$horafim_alt 	= $data['query']['HoraFim'];
+			
             #unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
 			unset($data['query']['Data'], $data['query']['Data2'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
 			
@@ -890,11 +1139,43 @@ class Consulta extends CI_Controller {
 
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_Consulta'], TRUE);
 
-            unset($_SESSION['Agenda']);
-
-            if ($data['auditoriaitem'] && $this->Consulta_model->update_consulta($data['query'], $data['query']['idApp_Consulta']) === FALSE) {
-                $data['msg'] = '?m=2';
-                redirect(base_url() . 'consulta/listar/' . $data['query']['idApp_Consulta'] . $data['msg']);
+			$data['update']['query']['bd'] = $this->Consulta_model->update_consulta($data['query'], $data['query']['idApp_Consulta']);
+			
+			$_SESSION['Repeticao'] = $data['repeticao'] = $this->Consulta_model->get_consulta_posterior($data['query']['idApp_Consulta'], $_SESSION['Consulta']['Repeticao'], $data['alterar']['Quais'], $dataini_alt);
+			
+			if (count($data['repeticao']) > 0) {
+				$data['repeticao'] = array_combine(range(1, count($data['repeticao'])), array_values($data['repeticao']));
+                $max = count($data['repeticao']);
+				if (isset($data['repeticao'])) {
+					for($j=1; $j <= $max; $j++) {
+						//pego a data original, de cada linha, e somo a diferença
+						$datainicial[$j] 								= explode(' ', $data['repeticao'][$j]['DataInicio']);
+						$datafinal[$j] 									= explode(' ', $data['repeticao'][$j]['DataFim']);
+						$dataoriginalinicio[$j] 						= $datainicial[$j][0];
+						$dataoriginalfim[$j] 							= $datafinal[$j][0];
+						$dataatualinicio[$j] 							= date('Y-m-d', strtotime($difinicio  .  'day',strtotime($dataoriginalinicio[$j])));
+						$dataatualfim[$j] 								= date('Y-m-d', strtotime($diffim  .  'day',strtotime($dataoriginalfim[$j])));
+						if($data['repeticao'][$j]['idApp_Consulta'] != $data['query']['idApp_Consulta']){
+							$data['repeticao'][$j]['DataInicio'] 		= $dataatualinicio[$j] . ' ' . $horaini_alt;
+							$data['repeticao'][$j]['DataFim'] 			= $dataatualfim[$j] . ' ' . $horafim_alt;
+						}
+						$data['repeticao'][$j]['idApp_Agenda'] 			= $data['query']['idApp_Agenda'];
+						$data['repeticao'][$j]['idApp_Cliente'] 		= $data['query']['idApp_Cliente'];
+						$data['repeticao'][$j]['Obs'] 					= $data['query']['Obs'];
+						$data['repeticao'][$j]['idApp_Profissional'] 	= $data['query']['idApp_Profissional'];
+						$data['repeticao'][$j]['idTab_Status'] 			= $data['query']['idTab_Status'];
+						$data['repeticao'][$j]['idTab_TipoConsulta'] 	= $data['query']['idTab_TipoConsulta'];
+						
+						$data['update']['repeticao'][$j]['bd'] 			= $this->Consulta_model->update_consulta($data['repeticao'][$j], $data['repeticao'][$j]['idApp_Consulta']);
+					}
+				}
+			}			
+			
+			unset($_SESSION['Agenda'], $_SESSION['Cliente'], $_SESSION['Consulta'], $_SESSION['Repeticao']);			
+			
+            if ($data['auditoriaitem'] && $data['update']['query']['bd'] === FALSE) {
+                $data['msg'] = '?m=1';
+                redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
                 exit();
             } else {
 
@@ -958,8 +1239,10 @@ class Consulta extends CI_Controller {
 
 		$data['alterar'] = quotes_to_entities($this->input->post(array(
 			'Quais',
-        ), TRUE));		
-
+        ), TRUE));
+		
+		$quais = $data['alterar']['Quais'];	
+		
 		if (!$id) {
             $data['msg'] = '?m=2';
             redirect(base_url() . 'agenda' . $data['msg']);
@@ -968,9 +1251,8 @@ class Consulta extends CI_Controller {
             $data['anterior'] = $this->Consulta_model->get_consulta($id);
 			
 			$repeticao = $data['anterior']['Repeticao'];
-			$quais = $data['alterar']['Quais'];
 			$dataini = $data['anterior']['DataInicio'];
-			
+
             $data['campos'] = array_keys($data['anterior']);
 
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], NULL, $data['campos'], $data['anterior']['idApp_Consulta'], FALSE, TRUE);
@@ -1134,7 +1416,7 @@ class Consulta extends CI_Controller {
 				$data['query']['Periodo'] = 0;
 				$data['query']['Tempo'] = 0;
 				$data['query']['Tempo2'] = 0;
-				$data['query']['DataTermino'] = "0000-00-00";
+				$data['query']['DataTermino'] = $dataini_cad;
 			}else{
 				
 				$tipointervalo = $data['query']['Tempo'];
@@ -1175,19 +1457,7 @@ class Consulta extends CI_Controller {
 				$ultimaocorrencia = date('Y-m-d', strtotime('+ ' . ($semana*$n*($qtd - 1)) .  $ref,strtotime($dataini_cad)));				
 				
 			}
-			/*
-			echo '<br>';
-			echo "<pre>";
-			print_r($data['cadastrar']['Repetir']);
-			echo '<br>';
-			print_r($qtd);
-			echo '<br>';
-			print_r($primeiraocorrencia);
-			echo '<br>';
-			print_r($ultimaocorrencia);
-			echo "</pre>";
-			exit();
-			*/
+
 			$data['query']['Tipo'] = 1;
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
             $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
@@ -1217,7 +1487,7 @@ class Consulta extends CI_Controller {
 					$data['copiar']['Recorrencias'] = "1/" . $qtd;
 				}else{
 					$data['copiar']['Recorrencias'] = "1/1";
-					$data['copiar']['DataTermino'] = $dataini_cad;
+					//$data['copiar']['DataTermino'] = $dataini_cad;
 				}
 				
 				$data['update']['copiar']['bd'] = $this->Consulta_model->update_consulta($data['copiar'], $data['idApp_Consulta']);
@@ -1245,7 +1515,7 @@ class Consulta extends CI_Controller {
 								'Obs' 					=> $data['query']['Obs'],
 								'idApp_Profissional' 	=> $data['query']['idApp_Profissional'],
 								'idTab_Status' 			=> $data['query']['idTab_Status'],
-								'Tipo' 					=> 1,
+								'Tipo' 					=> $data['query']['Tipo'],
 								'DataInicio' 			=> date('Y-m-d', strtotime('+ ' . ($semana*$n*$j) .  $ref,strtotime($dataini_cad))) . ' ' . $horaini_cad,
 								'DataFim' 				=> date('Y-m-d', strtotime('+ ' . ($semana*$n*$j) . $ref,strtotime($datafim_cad))) . ' ' . $horafim_cad,
 								'idSis_Usuario' 		=> $_SESSION['log']['idSis_Usuario'],
@@ -1303,7 +1573,7 @@ class Consulta extends CI_Controller {
 		
         if ($idApp_Consulta) {
             $_SESSION['Consulta'] = $data['query'] = $this->Consulta_model->get_consulta($idApp_Consulta);
-			$_SESSION['Consulta']['Repeticao'] = $repeticao = $data['query']['Repeticao'];
+            $_SESSION['Consulta']['DataTermino'] = $this->basico->mascara_data($_SESSION['Consulta']['DataTermino'], 'barras');
             $dataini = explode(' ', $data['query']['DataInicio']);
             $datafim = explode(' ', $data['query']['DataFim']);
             $data['query']['Data'] = $this->basico->mascara_data($dataini[0], 'barras');

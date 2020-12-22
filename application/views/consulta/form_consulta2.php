@@ -57,7 +57,7 @@
 							<ul class="nav navbar-nav navbar-center">
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
-										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
+										<button type="button" class="btn btn-md btn-warning  dropdown-toggle" data-toggle="dropdown">
 											<span class="glyphicon glyphicon-calendar"></span> Agenda <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
@@ -162,16 +162,13 @@
 
 			<div class="row">
 				
-				<div class="col-sm-offset-2 col-md-8">
+				<div class="col-sm-offset-1 col-md-10">
 					<?php #echo validation_errors(); ?>
 
 					<div class="panel panel-<?php echo $panel; ?>">
 
 						<div class="panel-heading">
 							<?php #echo $titulo; ?>
-							<strong>Cliente: </strong>
-							<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '.</small>' ?>
-							
 							<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>agenda" role="button">
 								<span class="glyphicon glyphicon-calendar"></span>Agenda
 							</a>
@@ -204,9 +201,13 @@
 														}
 														?>
 													</select>
-													
+													<?php echo form_error('idApp_Agenda'); ?>
 												</div>
-												<?php echo form_error('idApp_Agenda'); ?>
+												<div class="col-md-6">
+													<label >Cliente</label>
+													<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Cliente']['NomeCliente']; ?>">
+												</div>
+												
 												<!--
 												<div class="col-md-4">
 													<label for="idApp_Cliente">Cliente:*</label>

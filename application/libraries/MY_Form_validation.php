@@ -760,7 +760,7 @@ class MY_Form_validation extends CI_Form_validation {
             case UPLOAD_ERR_PARTIAL:
                 return $this->CI->lang->line('error_partial_upload');
             case UPLOAD_ERR_NO_FILE:
-                $line = $this->CI->lang->line('file_required');
+			$line = $this->CI->lang->line('file_required');
                 return sprintf($line, $this->_translate_fieldname($field));
             case UPLOAD_ERR_NO_TMP_DIR:
                 return $this->CI->lang->line('error_temp_dir');

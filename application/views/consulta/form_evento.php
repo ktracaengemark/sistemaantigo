@@ -252,7 +252,15 @@
 									</div>
 								<?php } else { ?>
 									<div class="form-group col-md-12">
-										<div class="row text-left">
+										<div class="row text-left">	
+											<div class="col-md-2">
+												<label>Ocorrência</label>
+												<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencias']; ?>">
+											</div>	
+											<div class="col-md-3">
+												<label>Termina em</label>
+												<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['DataTermino']; ?>">
+											</div>
 											<div class="col-md-4 ">
 												<label for="Quais">Alterar Quais?</label>
 												<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
@@ -340,6 +348,7 @@
 		</div>
 	</div>
 </div>
+<?php if ($metodo == 2) { ?>
 <div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 	<div class="modal-dialog" role="document">
 		<form method="POST" action="../excluir/<?php echo $query['idApp_Consulta'];?>">
@@ -349,40 +358,53 @@
 					<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
 				</div>
 				<div class="modal-body">
-					<p>Ao confirmar esta operação todos os dados serão excluídos permanentemente do sistema.
+					<p>Ao confirmar esta operação os dados serão excluídos permanentemente do sistema.
 						Esta operação é irreversível.</p>
 				</div>
 				<div class="modal-footer">
-					<div class="col-md-4 text-left">
-						<label ></label><br>
-						<button type="button" class="btn btn-warning" data-dismiss="modal">
-							<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
-						</button>
-					</div>
-					<div class="col-md-4 text-left">
-						<label for="Quais">Excluir Quais?</label>
-						<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-								id="Quais" name="Quais">
-							<!--<option value="">-- Selecione uma opção --</option>-->
-							<?php
-							foreach ($select['Quais'] as $key => $row) {
-								if ($alterar['Quais'] == $key) {
-									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-								} else {
-									echo '<option value="' . $key . '">' . $row . '</option>';
+					<div class="row text-left">	
+						<div class="col-md-3">
+							<label>Ocorrência</label>
+							<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencias']; ?>">
+						</div>	
+						<div class="col-md-4">
+							<label>Termina em</label>
+							<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['DataTermino']; ?>">
+						</div>
+						<div class="col-md-5 text-left">
+							<label for="Quais">Excluir Quais?</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+									id="Quais" name="Quais">
+								<!--<option value="">-- Selecione uma opção --</option>-->
+								<?php
+								foreach ($select['Quais'] as $key => $row) {
+									if ($alterar['Quais'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
 								}
-							}
-							?>
-						</select>
-					</div>
-					<div class="col-md-4">
-					<label ></label><br>
-						<button class="btn btn-md btn-danger" id="inputDb" data-loading-text="Aguarde..." type="submit">
-							<span class="glyphicon glyphicon-trash"></span> Excluir
-						</button>
+								?>
+							</select>
+						</div>
+					</div>	
+					<div class="row">	
+						<div class="col-md-6 text-left">
+							<label ></label><br>
+							<button type="button" class="btn btn-warning" data-dismiss="modal">
+								<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+							</button>
+						</div>
+						<div class="col-md-6">
+							<label ></label><br>
+							<button class="btn btn-md btn-danger" id="inputDb" data-loading-text="Aguarde..." type="submit">
+								<span class="glyphicon glyphicon-trash"></span> Excluir
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
+<?php } ?>

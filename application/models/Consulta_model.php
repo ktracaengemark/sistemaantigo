@@ -94,13 +94,9 @@ class Consulta_model extends CI_Model {
 		if($quais == 4){
 			$this->db->delete('App_Consulta', array('Repeticao' => $repeticao));
 		}elseif($quais == 3){
-			$this->db->where(array('Repeticao' => $repeticao));
-			$this->db->where(array('DataInicio >=' => $dataini));
-			$this->db->delete('App_Consulta');
+			$this->db->delete('App_Consulta', array('Repeticao' => $repeticao, 'DataInicio >=' => $dataini));
 		}elseif($quais == 2){
-			$this->db->where(array('Repeticao' => $repeticao));
-			$this->db->where(array('DataInicio <=' => $dataini));
-			$this->db->delete('App_Consulta');
+			$this->db->delete('App_Consulta', array('Repeticao' => $repeticao, 'DataInicio <=' => $dataini));
 		}else{
 			$this->db->delete('App_Consulta', array('idApp_Consulta' => $id));
 		}

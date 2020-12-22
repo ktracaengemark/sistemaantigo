@@ -88,6 +88,7 @@ while ($row = mysql_fetch_assoc($result)) {
     if ($row['Evento']) {
 
         $c = '_evento';
+		
         //(strlen(utf8_encode($row['Obs'])) > 20) ? $title = substr(utf8_encode($row['Obs']), 0, 20).'...' : $title = utf8_encode($row['Obs']);
         $title = mb_convert_encoding($row['Obs'], "UTF-8", "ISO-8859-1");
 		#$title = utf8_encode($row['NomeUsuario']);
@@ -100,8 +101,7 @@ while ($row = mysql_fetch_assoc($result)) {
         $recorrencias = mb_convert_encoding($row['Recorrencias'], "UTF-8", "ISO-8859-1");
         $datatermino = $row['DataTermino'];
 
-	}
-	else {
+	} else {
 
         $c = '/' . $row['idApp_Cliente'];
 
@@ -116,8 +116,7 @@ while ($row = mysql_fetch_assoc($result)) {
 			$datatermino = $row['DataTermino'];
 
 			$telefone1 = mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1");
-        }
-        else {
+        } else {
 
             #$title = utf8_encode($row['NomeCliente']);
             $title = mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1");
@@ -161,8 +160,7 @@ while ($row = mysql_fetch_assoc($result)) {
             else
                 $status = '#E4BEBD';
         }
-    }
-    else {
+    } else {
 
         //$url = 'consulta/alterar/'.$row['idApp_Paciente'].'/'.$row['idApp_Consulta'];
         $textColor = 'black';
