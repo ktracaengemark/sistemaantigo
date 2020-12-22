@@ -160,9 +160,7 @@ class Basico {
 		$data1 = DateTime::createFromFormat('d/m/Y', $dataini);
 		$data1 = $data1->format('Y-m-d');       
 		$data2 = DateTime::createFromFormat('d/m/Y', $datafim);
-		$data2 = $data2->format('Y-m-d');		
-		$diferenca = strtotime($data2) - strtotime($data1);
-		$dias = floor($diferenca / (60 * 60 * 24));
+		$data2 = $data2->format('Y-m-d');
 		
 		if(strtotime($data2) > strtotime($data1)){
 			return TRUE;

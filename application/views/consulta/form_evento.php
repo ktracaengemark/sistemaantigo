@@ -133,25 +133,27 @@
 									<div class="form-group col-md-12">
 										<div class="row text-left">
 											<div class="col-md-3 ">
-												<label for="Cadastrar">Repetir Agendamento?</label><br>
+												<label for="Repetir">Repetir Agendamento?</label><br>
 												<div class="btn-group" data-toggle="buttons">
 													<?php
-													foreach ($select['Cadastrar'] as $key => $row) {
-														if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'N';
+													foreach ($select['Repetir'] as $key => $row) {
+														if (!$cadastrar['Repetir']) $cadastrar['Repetir'] = 'N';
 
 														($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
-														if ($cadastrar['Cadastrar'] == $key) {
+														if ($cadastrar['Repetir'] == $key) {
 															echo ''
-															. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
-															. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+															. '<label class="btn btn-warning active" name="Repetir_' . $hideshow . '">'
+															. '<input type="radio" name="Repetir" id="' . $hideshow . '" '
+															. 'onchange="dateTermina()" '
 															. 'autocomplete="off" value="' . $key . '" checked>' . $row
 															. '</label>'
 															;
 														} else {
 															echo ''
-															. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
-															. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+															. '<label class="btn btn-default" name="Repetir_' . $hideshow . '">'
+															. '<input type="radio" name="Repetir" id="' . $hideshow . '" '
+															. 'onchange="dateTermina()" '
 															. 'autocomplete="off" value="' . $key . '" >' . $row
 															. '</label>'
 															;
@@ -161,7 +163,7 @@
 
 												</div>
 											</div>
-											<div class="col-md-9 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+											<div class="col-md-9 text-left" id="Repetir" <?php echo $div['Repetir']; ?>>
 												<div class="row">	
 													<div class="col-md-3">
 														<label for="Intervalo">Repetir a cada:</label><br>
@@ -220,6 +222,7 @@
 															?>
 														</select>
 													</div>
+													
 													<div class="col-md-4">	
 														<label for="DataTermino">Termina em: </label>												
 														<div class="input-group <?php echo $datepicker; ?>">
@@ -231,10 +234,11 @@
 														</div>
 														<?php echo form_error('DataTermino'); ?>	
 													</div>
+													
 												</div>	
 												<div class="row">
 													<div class="col-md-3">	
-														<label for="Recorrencias">Recorrencias: </label>												
+														<label for="Recorrencias">Ocorrências: </label>												
 														<div class="input-group">
 															<input type="text" class="form-control" 
 																   name="Recorrencias" id="Recorrencias" value="<?php echo $query['Recorrencias']; ?>" >
@@ -242,7 +246,7 @@
 														<?php echo form_error('Recorrencias'); ?>	
 													</div>
 												</div>	
-												<?php echo form_error('Cadastrar'); ?>
+												<?php echo form_error('Repetir'); ?>
 											</div>
 										</div>
 									</div>

@@ -91,29 +91,19 @@ class Consulta_model extends CI_Model {
     }
 
     public function delete_consulta($id, $repeticao, $quais, $dataini) {
-			/*
-			echo '<br>';
-			echo "<pre>";
-			print_r($id);
-			echo '<br>';
-			print_r($repeticao);
-			echo '<br>';
-			print_r($quais);
-			echo '<br>';
-			print_r($dataini);
-			echo "</pre>";
-			exit();
-			*/
 		if($quais == 4){
-			$query = $this->db->delete('App_Consulta', array('Repeticao' => $repeticao));
+			$this->db->delete('App_Consulta', array('Repeticao' => $repeticao));
 		}elseif($quais == 3){
-			$query = $this->db->delete('App_Consulta', array('DataInicio' => $dataini));
+			$this->db->where(array('Repeticao' => $repeticao));
+			$this->db->where(array('DataInicio >=' => $dataini));
+			$this->db->delete('App_Consulta');
 		}elseif($quais == 2){
-			$query = $this->db->delete('App_Consulta', array('DataInicio' => $dataini));
+			$this->db->where(array('Repeticao' => $repeticao));
+			$this->db->where(array('DataInicio <=' => $dataini));
+			$this->db->delete('App_Consulta');
 		}else{
-			$query = $this->db->delete('App_Consulta', array('idApp_Consulta' => $id));
+			$this->db->delete('App_Consulta', array('idApp_Consulta' => $id));
 		}
-
         if ($this->db->affected_rows() === 0)
             return FALSE;
         else

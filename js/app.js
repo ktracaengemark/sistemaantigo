@@ -79,124 +79,148 @@ function dateDiff() {
 	$('#PrazoEntrega').val(days);
 }
 
+function parseDate(texto) {
+  let dataDigitadaSplit = texto.split("/");
+
+  let dia = dataDigitadaSplit[0];
+  let mes = dataDigitadaSplit[1];
+  let ano = dataDigitadaSplit[2];
+
+
+  if (ano.length < 4 && parseInt(ano) < 50) {
+    ano = "20" + ano;
+  } else if (ano.length < 4 && parseInt(ano) >= 50) {
+    ano = "19" + ano;
+  }
+  ano = parseInt(ano);
+  mes = mes - 1;
+
+  return new Date(ano, mes, dia);
+}
+
+//Funcao das datas
+function addData() {
+	var dataDigitada = $('#Data').val();
+  //var dataDigitada = document.getElementById('Data').value;
+	console.log('Data teste: ' + dataDigitada);
+  //Pegar data Atual para somar
+  var currentDate = parseDate(dataDigitada);
+
+  //pegar data atual para exibir
+  var currentDate1 = new Date();
+
+  //Capturar Quantidade de meses
+  var meses = "1";
+  //Parse Int dos meses
+  var a = parseInt(meses);
+
+
+  //Adicionar meses 
+  currentDate.setMonth(currentDate.getMonth() + a);
+
+  //Trazer data Atual
+  currentDate1.setDate(currentDate1.getDate());
+
+
+
+  //Exibir data Atual
+  document.getElementById('data').value = currentDate1.toLocaleDateString();
+
+
+  //Exibir a data ja atualizada
+  document.getElementById('dataAtualizada').value = currentDate.toLocaleDateString();
+
+}
+
 function dateTermina() {
 	
-	var intervalo = $('#Intervalo').val();
-	var periodo = $('#Periodo').val();
-	var escala1 = $('#Tempo').val();
-	var escala2 = $('#Tempo2').val();
-	if(escala1 == 1){
-		var ref = 'dia(s)';
-		var tempo = 1;
-	}else if(escala1 == 2){
-		var ref = 'semana(s)';
-		var tempo = 7;
-	}else if(escala1 == 3){
-		var ref = 'mês(es)';
-		var tempo = 31;
-	}else if(escala1 == 4){
-		var ref = 'ano(s)';
-		var tempo = 365;
-	}
-	if(escala2 == 1){
-		var ref2 = 'dia(s)';
-		var tempo2 = 1;
-	}else if(escala2 == 2){
-		var ref2 = 'semana(s)';
-		var tempo2 = 7;
-	}else if(escala2 == 3){
-		var ref2 = 'mês(es)';
-		var tempo2 = 31;
-	}else if(escala2 == 4){
-		var ref2 = 'ano(s)';
-		var tempo2 = 365;
-	}
-	var int_em_dias = intervalo * tempo;
-	var per_em_dias2 = periodo * tempo2;
-	var Recorrencias = Math.ceil(per_em_dias2/int_em_dias);
-	$('#Recorrencias').val(Recorrencias);
-	console.log('Recorrências: ' + Recorrencias + ' vezes');
-	/*
-	var per_em_dias = periodo * tempo2;
-	if(per_em_dias > 732){
-		per_em_dias2 = 732;
-	}else{
-		per_em_dias2 = per_em_dias;
-	}
-	*/
 	var dataorca = $('#Data').val();
-	var dataentregaorca = $('#Data2').val();
-	
 	// Digamos que este é o formato das suas datas
 	// data = '30/03/2019';
 	// Precisamos quebrar a string para retornar cada parte
 	const dataorcaSplit = dataorca.split('/');
-
 	const day = dataorcaSplit[0]; 
 	const month = dataorcaSplit[1];
 	const year = dataorcaSplit[2];
-	
-	const dataentregaorcaSplit = dataentregaorca.split('/');
-
-	const day2 = dataentregaorcaSplit[0]; 
-	const month2 = dataentregaorcaSplit[1]; 
-	const year2 = dataentregaorcaSplit[2]; 
-
 	// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
 	dataorca = new Date(year, month - 1, day);
-	dataentregaorca = new Date(year2, month2 - 1, day2);
 	
-	//Retorna a data no Formato dd/mm/AAAA
-	//var testededata = dataorca.toLocaleDateString();
-	
-	//calcula a data Mínima
-	var prazo_entrega = int_em_dias;
-	var data_entrega    = new Date(dataorca.getTime() + (prazo_entrega * 24 * 60 * 60 * 1000));
-	
-	var mes = (data_entrega.getMonth() + 1);
-	if(mes < 10){
-		var novo_mes = "0" + mes;
-	}else{
-		var novo_mes = mes;
-	}
-	var dia = (data_entrega.getDate());
-	if(dia < 10){
-		var novo_dia = "0" + dia;
-	}else{
-		var novo_dia = dia;
-	}
-	var data_aparente = novo_dia + "/" + novo_mes + "/" + data_entrega.getFullYear();
-	$('#DataMinima').val(data_aparente);
-	
-	//calcula a data Termino
-	var prazo_entrega2 = per_em_dias2;
-	var data_entrega2    = new Date(dataorca.getTime() + (prazo_entrega2 * 24 * 60 * 60 * 1000));
-	
-	var mes2 = (data_entrega2.getMonth() + 1);
-	if(mes2 < 10){
-		var novo_mes2 = "0" + mes2;
-	}else{
-		var novo_mes2 = mes2;
-	}
-	var dia2 = (data_entrega2.getDate());
-	if(dia2 < 10){
-		var novo_dia2 = "0" + dia2;
-	}else{
-		var novo_dia2 = dia2;
-	}
-	var data_aparente2 = novo_dia2 + "/" + novo_mes2 + "/" + data_entrega2.getFullYear();
-	$('#DataTermino').val(data_aparente2);
+	var primeira = new Date(year, month - 1, day);
+	var ultima = new Date(year, month - 1, day);
+	//console.log('Data Inicial: ' + datainicial);
 
-	const now = new Date(); // Data de hoje
-	const past = dataorca; // Outra data no passado
-	const past2 = dataentregaorca; // Outra data no passado
-	const diff = Math.abs(past2.getTime() - past.getTime()); // Subtrai uma data pela outra
-	const days = Math.ceil(diff / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).
-
-	// Mostra a diferença em dias
-	//console.log('Prazo: ' + days + ' dias');	
-	$('#Prazo').val(days);
+	var intervalo = $('#Intervalo').val();
+	var inter_int = parseInt(intervalo);
+	var escala1 = $('#Tempo').val();	
 	
+	var periodo = $('#Periodo').val();
+	var peri_int = parseInt(periodo);
+	var escala2 = $('#Tempo2').val();
+	
+	if(escala1 == 1){
+		primeira.setDate(primeira.getDate()+inter_int);
+	}else if(escala1 == 2){
+		primeira.setDate(primeira.getDate()+(inter_int*7));
+	}else if(escala1 == 3){
+		primeira.setMonth(primeira.getMonth()+inter_int);
+	}else if(escala1 == 4){
+		primeira.setFullYear(primeira.getFullYear()+inter_int);
+	}
+	
+	if(escala2 == 1){
+		ultima.setDate(ultima.getDate()+peri_int);
+	}else if(escala2 == 2){
+		ultima.setDate(ultima.getDate()+(peri_int*7));
+	}else if(escala2 == 3){
+		ultima.setMonth(ultima.getMonth()+peri_int);
+	}else if(escala2 == 4){
+		ultima.setFullYear(ultima.getFullYear()+peri_int);
+	}
+	
+	var primeiraedit = primeira.toLocaleDateString();
+	console.log('Primeira Editada: ' + primeiraedit);
+	$('#DataMinima').val(primeiraedit);		
+	
+	var ultimaedit = ultima.toLocaleDateString();
+	console.log('Ultima Editada: ' + ultimaedit);
+	$('#DataTermino').val(ultimaedit);
+	
+	const primeiraeditSplit = primeiraedit.split('/');
+	const dayP = primeiraeditSplit[0]; 
+	const monthP = primeiraeditSplit[1]; 
+	const yearP = primeiraeditSplit[2]; 
+
+	// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
+	primeiraedit = new Date(yearP, monthP - 1, dayP);	
+	console.log('Primeira Y-m-d: ' + primeiraedit);
+	
+	const ultimaeditSplit = ultimaedit.split('/');
+	const dayU = ultimaeditSplit[0]; 
+	const monthU = ultimaeditSplit[1]; 
+	const yearU = ultimaeditSplit[2]; 
+
+	// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
+	ultimaedit = new Date(yearU, monthU - 1, dayU);	
+	console.log('Ultimo Y-m-d: ' + ultimaedit);	
+	
+	
+	const pastI = dataorca; // Outra data no passado
+	
+	const pastP = primeiraedit; // Outra data no passado
+	const diffP = Math.abs(pastP.getTime() - pastI.getTime()); // Subtrai uma data pela outra
+	const daysP = Math.ceil(diffP / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).	
+	console.log('Tempo Primeira: ' + daysP + ' dias');
+	
+
+	const pastU = ultimaedit; // Outra data no passado
+	const diffU = Math.abs(pastU.getTime() - pastI.getTime()); // Subtrai uma data pela outra
+	const daysU = Math.ceil(diffU / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).	
+	console.log('Tempo Ultimo: ' + daysU + ' dias');	
+	
+	var ocorrencias = Math.ceil(daysU/daysP);
+	console.log('Ocorrências: ' + ocorrencias + ' Vez(es)');
+	$('#Recorrencias').val(ocorrencias);
+
 }
 
 function exibirentrega() {
@@ -4676,7 +4700,7 @@ $('#calendar').fullCalendar({
     eventAfterRender: function (event, element) {
 
         if (event.Evento == 1)
-            var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b>" + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Recorrencia:</b> " + event.Recorrencias;
+            var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b>" + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Recorrencia:</b> " + event.Recorrencias + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
         else {
 
             if (event.Paciente == 'D')
