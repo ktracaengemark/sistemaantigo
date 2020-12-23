@@ -40,21 +40,37 @@
 		<div class="panel-heading">
 			
 			<?php echo form_open('agenda', 'role="form"'); ?>
-			<div class="input-group col-md-3">
-				<span class="input-group-btn">	
-					<div class=" btn btn-success" type="button" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
-						<span class="glyphicon glyphicon-chevron-down"></span> Tarefas
-					</div>
-				</span>	
-					<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
+				<?php if ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) { ?>
+					<div class="col-md-6 text-left">
+						<label class="sr-only" for="Ordenamento">Agenda dos Prof.:</label>
+						<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
+								id="Compartilhar" name="Compartilhar">
+							<?php
+							foreach ($select['Compartilhar'] as $key => $row) {
+								if ($query['Compartilhar'] == $key) {
+									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+								} else {
+									echo '<option value="' . $key . '">' . $row . '</option>';
+								}
+							}
+							?>
+						</select>
+					</div>	
+				<?php } ?>				
+				<div class="input-group col-md-6">
+					<span class="input-group-btn">	
+						<div class=" btn btn-success" type="button" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
+							<span class="glyphicon glyphicon-chevron-down"></span> Tarefas
+						</div>
+					</span>	
+						<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
+						<span class="input-group-btn">
+							<a class="btn btn-md btn-danger" href="<?php echo base_url() ?>tarefa/cadastrar" role="button"> 
+								<span class="glyphicon glyphicon-plus"></span> Nova
+							</a>
+						</span>
+						<?php } ?>
 					<span class="input-group-btn">
-						<a class="btn btn-md btn-danger" href="<?php echo base_url() ?>tarefa/cadastrar" role="button"> 
-							<span class="glyphicon glyphicon-plus"></span> Nova
-						</a>
-					</span>
-					<?php } ?>
-				<span class="input-group-btn">	
-					
 						<a type="button" class="btn btn-md btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 							<span class="glyphicon glyphicon-filter"></span> Filtrar
 						</a>
@@ -77,8 +93,10 @@
 							
 						</ul>
 						-->
-				</span>	
-			</div>
+					</span>	
+				</div>			
+
+				
 			<!--
 			<button  class="btn btn-md btn-info" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 				<span class="glyphicon glyphicon-filter"></span>Filtrar
@@ -119,11 +137,13 @@
 										?>
 									</select>
 								</div>
+								<!--
 								<div class="col-md-3 text-left">
 									<label for="Prioridade">Prioridade</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 											id="Prioridade" name="Prioridade">
 										<?php
+										/*
 										foreach ($select['Prioridade'] as $key => $row) {
 											if ($query['Prioridade'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -131,6 +151,7 @@
 												echo '<option value="' . $key . '">' . $row . '</option>';
 											}
 										}
+										*/
 										?>
 									</select>
 								</div>
@@ -139,6 +160,7 @@
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 											id="Statustarefa" name="Statustarefa">
 										<?php
+										/*
 										foreach ($select['Statustarefa'] as $key => $row) {
 											if ($query['Statustarefa'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -146,15 +168,17 @@
 												echo '<option value="' . $key . '">' . $row . '</option>';
 											}
 										}
+										*/
 										?>
 									</select>
 								</div>
-								<!--
+								
 								<div class="col-md-2 text-left">
 									<label for="SubPrioridade">SubPri</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 											id="SubPrioridade" name="SubPrioridade">
 										<?php
+										/*
 										foreach ($select['SubPrioridade'] as $key => $row) {
 											if ($query['SubPrioridade'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -162,6 +186,7 @@
 												echo '<option value="' . $key . '">' . $row . '</option>';
 											}
 										}
+										*/
 										?>
 									</select>
 								</div>
@@ -170,6 +195,7 @@
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 											id="Statussubtarefa" name="Statussubtarefa">
 										<?php
+										/*
 										foreach ($select['Statussubtarefa'] as $key => $row) {
 											if ($query['Statussubtarefa'] == $key) {
 												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -177,13 +203,14 @@
 												echo '<option value="' . $key . '">' . $row . '</option>';
 											}
 										}
+										*/
 										?>
 									</select>
 								</div>
 								-->
-								<!--
+								
 								<div class="col-md-3 text-left">
-									<label for="ConcluidoProcedimento">St Tarefa</label>
+									<label for="ConcluidoProcedimento">Concluído</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 											id="ConcluidoProcedimento" name="ConcluidoProcedimento">
 										<?php
@@ -197,7 +224,7 @@
 										?>
 									</select>
 								</div>
-								
+								<!--
 								<div class="col-md-3 text-left">
 									<label for="ConcluidoSubProcedimento">St SubTarefa</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
@@ -235,38 +262,50 @@
 							</div>
 							-->
 							<br>
-							<div class="row">
-								<div class="col-md-3 text-left">
-									<label for="NomeUsuario">Quem Cadastrou?</label>
-									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-											id="NomeUsuario" name="NomeUsuario">
-										<?php
-										foreach ($select['NomeUsuario'] as $key => $row) {
-											if ($query['NomeUsuario'] == $key) {
-												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-												echo '<option value="' . $key . '">' . $row . '</option>';
+							<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
+								<div class="row">
+									<!--
+									<div class="col-md-3 text-left">
+										<label for="NomeUsuario">Quem Cadastrou?</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+												id="NomeUsuario" name="NomeUsuario">
+											<?php
+											/*
+											foreach ($select['NomeUsuario'] as $key => $row) {
+												if ($query['NomeUsuario'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
 											}
-										}
-										?>
-									</select>
-								</div>
-								<div class="col-md-3 text-left">
-									<label for="Compartilhar">Quem Fazer?</label>
-									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-											id="Compartilhar" name="Compartilhar">
-										<?php
-										foreach ($select['Compartilhar'] as $key => $row) {
-											if ($query['Compartilhar'] == $key) {
-												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-												echo '<option value="' . $key . '">' . $row . '</option>';
+											*/
+											?>
+										</select>
+									</div>
+									
+									<div class="col-md-3 text-left">
+										<label for="Compartilhar">Quem Fazer?</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+												id="Compartilhar" name="Compartilhar">
+											<?php
+											/*
+											foreach ($select['Compartilhar'] as $key => $row) {
+												if ($query['Compartilhar'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
 											}
-										}
-										?>
-									</select>
+											*/
+											?>
+										</select>
+									</div>
+									-->
 								</div>
-							</div>
+							<?php }else { ?>
+								<input type="hidden" name="NomeUsuario" id="NomeUsuario" value="">
+								<input type="hidden" name="Compartilhar" id="Compartilhar" value="">
+							<?php } ?>
 							<br>
 							<div class="row text-left">
 								<div class="col-md-3">

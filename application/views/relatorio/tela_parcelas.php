@@ -421,58 +421,65 @@
 				</div>
 				<div class="panel panel-<?php echo $panel; ?>">
 					<div class="panel-heading text-left">
-						<div class="row">	
-							<div class="col-md-3">
-								<label for="Agrupar">Agrupar Por:</label>
-								<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-										id="Agrupar" name="Agrupar">
-									<?php
-									foreach ($select['Agrupar'] as $key => $row) {
-										if ($query['Agrupar'] == $key) {
-											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-										} else {
-											echo '<option value="' . $key . '">' . $row . '</option>';
+						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
+							<div class="row">	
+								<div class="col-md-3">
+									<label for="Agrupar">Agrupar Por:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+											id="Agrupar" name="Agrupar">
+										<?php
+										foreach ($select['Agrupar'] as $key => $row) {
+											if ($query['Agrupar'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
 										}
-									}
-									?>
-								</select>
-							</div>	
-							<div class="col-md-3">
-								<label for="Ultimo">Agrupar Pelo:</label>
-								<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-										id="Ultimo" name="Ultimo">
-									<?php
-									foreach ($select['Ultimo'] as $key => $row) {
-										if ($query['Ultimo'] == $key) {
-											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-										} else {
-											echo '<option value="' . $key . '">' . $row . '</option>';
+										?>
+									</select>
+								</div>	
+								<div class="col-md-3">
+									<label for="Ultimo">Agrupar Pelo:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+											id="Ultimo" name="Ultimo">
+										<?php
+										foreach ($select['Ultimo'] as $key => $row) {
+											if ($query['Ultimo'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
 										}
-									}
-									?>
-								</select>
-							</div>
-							<div class="col-md-3">
-								<label for="DataInicio6">Cad.Inicio</label>
-								<div class="input-group DatePicker">
-									<span class="input-group-addon" disabled>
-										<span class="glyphicon glyphicon-calendar"></span>
-									</span>
-									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
-											name="DataInicio6" value="<?php echo set_value('DataInicio6', $query['DataInicio6']); ?>">
+										?>
+									</select>
+								</div>
+								<div class="col-md-3">
+									<label for="DataInicio6">Cad.Inicio</label>
+									<div class="input-group DatePicker">
+										<span class="input-group-addon" disabled>
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+												name="DataInicio6" value="<?php echo set_value('DataInicio6', $query['DataInicio6']); ?>">
+									</div>
+								</div>
+								<div class="col-md-3">
+									<label for="DataFim6">Cad.Fim</label>
+									<div class="input-group DatePicker">
+										<span class="input-group-addon" disabled>
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
+												name="DataFim6" value="<?php echo set_value('DataFim6', $query['DataFim6']); ?>">
+									</div>
 								</div>
 							</div>
-							<div class="col-md-3">
-								<label for="DataFim6">Cad.Fim</label>
-								<div class="input-group DatePicker">
-									<span class="input-group-addon" disabled>
-										<span class="glyphicon glyphicon-calendar"></span>
-									</span>
-									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
-											name="DataFim6" value="<?php echo set_value('DataFim6', $query['DataFim6']); ?>">
-								</div>
-							</div>
-						</div>
+						<?php }else{ ?>
+							<input type="hidden" name="Agrupar" id="Agrupar" value=""/>
+							<input type="hidden" name="Ultimo" id="Ultimo" value=""/>
+							<input type="hidden" name="DataInicio6" id="DataInicio6" value=""/>
+							<input type="hidden" name="DataFim6" id="DataFim6" value=""/>
+						<?php } ?>						
 						<div class="row">				
 							<div class="col-md-6 text-left">
 								<label for="Ordenamento">Ordenamento:</label>

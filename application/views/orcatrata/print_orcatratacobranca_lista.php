@@ -14,11 +14,11 @@
 				<a type="button" class="btn btn-md btn-default " href="javascript:window.print()">
 					<span class="glyphicon glyphicon-print"></span>
 				</a>
-				
-				<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . $imprimirrecibo . $_SESSION['log']['idSis_Empresa']; ?>">
-					<span class="glyphicon glyphicon-pencil"></span> Versão Recibo
-				</a>
-				
+				<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
+					<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . $imprimirrecibo . $_SESSION['log']['idSis_Empresa']; ?>">
+						<span class="glyphicon glyphicon-pencil"></span> Versão Recibo
+					</a>
+				<?php } ?>
 			</div>
 		</div>
 		<!--

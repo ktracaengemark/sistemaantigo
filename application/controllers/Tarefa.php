@@ -78,7 +78,10 @@ class Tarefa extends CI_Controller {
         //Data de hoje como default
         (!$data['tarefa']['DataProcedimento']) ? $data['tarefa']['DataProcedimento'] = date('d/m/Y', time()) : FALSE;
 		#(!$data['tarefa']['DataProcedimentoLimite']) ? $data['tarefa']['DataProcedimentoLimite'] = date('d/m/Y', time()) : FALSE;
-		(!$data['tarefa']['Compartilhar']) ? $data['tarefa']['Compartilhar'] = '50' : FALSE;
+
+		($_SESSION['log']['idSis_Empresa'] == 5) ? $data['tarefa']['Compartilhar'] = $_SESSION['log']['idSis_Usuario'] : FALSE;
+
+		
 		
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
@@ -106,7 +109,7 @@ class Tarefa extends CI_Controller {
 		$this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'trim|valid_date');
         $this->form_validation->set_rules('DataProcedimentoLimite', 'Concluir em', 'trim|valid_date');
         $this->form_validation->set_rules('Categoria', 'Categoria', 'required|trim');
-		$this->form_validation->set_rules('Prioridade', 'Prioridade', 'required|trim');
+		//$this->form_validation->set_rules('Prioridade', 'Prioridade', 'required|trim');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
@@ -361,7 +364,7 @@ class Tarefa extends CI_Controller {
 		$this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'trim|valid_date');        
 		$this->form_validation->set_rules('DataProcedimentoLimite', 'Concluir em', 'trim|valid_date');
         $this->form_validation->set_rules('Categoria', 'Categoria', 'required|trim');
-		$this->form_validation->set_rules('Prioridade', 'Prioridade', 'required|trim');
+		//$this->form_validation->set_rules('Prioridade', 'Prioridade', 'required|trim');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();

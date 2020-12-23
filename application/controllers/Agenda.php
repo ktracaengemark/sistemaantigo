@@ -95,6 +95,7 @@ class Agenda extends CI_Controller {
 		$_SESSION['FiltroAlteraProcedimento']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 		$_SESSION['FiltroAlteraProcedimento']['NomeEmpresaCli'] = $data['query']['NomeEmpresaCli'];
         $_SESSION['log']['NomeUsuario'] = ($data['query']['NomeUsuario']) ? $data['query']['NomeUsuario'] : FALSE;
+        $_SESSION['log']['Compartilhar'] = ($data['query']['Compartilhar']) ? $data['query']['Compartilhar'] : FALSE;
         
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
@@ -124,11 +125,11 @@ class Agenda extends CI_Controller {
         );		
 
 		$data['select']['Campo'] = array(
-			'P.idSis_Usuario' => 'Quem Cadastrou',
 			'P.Compartilhar' => 'Quem Fazer',
+			'P.idSis_Usuario' => 'Quem Cadastrou',
 			'P.DataProcedimento' => 'Data do Inicio',
 			'P.DataProcedimentoLimite' => 'Data da Concl.',			
-			'P.Prioridade' => 'Sts.Tarefa',
+			'P.ConcluidoProcedimento' => 'Concluido',
 			'P.Categoria' => 'Categoria',
         );
 
@@ -205,13 +206,13 @@ class Agenda extends CI_Controller {
             $data['bd']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
 			
             $data['report'] = $this->Agenda_model->list1_procedimento($data['bd'],TRUE);
-
-            /*
-              echo "<pre>";
-              print_r($data['report']);
-              echo "</pre>";
-              exit();
-              */
+			/*
+			$_SESSION['Tarefas'] = $data['report']->num_rows();
+			echo "<pre>";
+			print_r($_SESSION['Tarefas']);
+			echo "</pre>";
+			exit();
+			*/
 
             $data['list1'] = $this->load->view('agenda/list1_procedimento', $data, TRUE);
             //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);

@@ -3408,21 +3408,37 @@ class Relatorio extends CI_Controller {
 			'1' => 'Último Pedido',
         );
 
-		$data['select']['Campo'] = array(
-            'OT.idApp_OrcaTrata' => 'id do Orçamento',
-			'OT.DataOrca' => 'Data do Orcamento',
-			'OT.DataEntregaOrca' => 'Data da Entrega',
-			'PR.Quitado' => 'Parc.Quit.',
-			'PR.DataVencimento' => 'Data do Venc.',
-			'OT.Modalidade' => 'Modalidade',
-            'OT.ValorOrca' => 'Valor',
-			'OT.TipoFinanceiro' => 'Tipo',
-			'OT.Tipo_Orca' => 'Compra',
-			'OT.TipoFrete' => 'Entrega',
-			'C.idApp_Cliente' => 'id do Cliente',
-			'C.NomeCliente' => 'Nome do Cliente',
-        );
-
+		if($_SESSION['log']['idSis_Empresa'] != 5){
+			$data['select']['Campo'] = array(
+				'OT.idApp_OrcaTrata' => 'id do Orçamento',
+				'OT.DataOrca' => 'Data do Orcamento',
+				'OT.DataEntregaOrca' => 'Data da Entrega',
+				'PR.Quitado' => 'Parc.Quit.',
+				'PR.DataVencimento' => 'Data do Venc.',
+				'OT.Modalidade' => 'Modalidade',
+				'OT.ValorOrca' => 'Valor',
+				'OT.TipoFinanceiro' => 'Tipo',
+				'OT.Tipo_Orca' => 'Compra',
+				'OT.TipoFrete' => 'Entrega',
+				'C.idApp_Cliente' => 'id do Cliente',
+				'C.NomeCliente' => 'Nome do Cliente',	
+				
+			);
+		}else{
+			$data['select']['Campo'] = array(
+				'OT.idApp_OrcaTrata' => 'id do Orçamento',
+				'OT.DataOrca' => 'Data do Orcamento',
+				'OT.DataEntregaOrca' => 'Data da Entrega',
+				'PR.Quitado' => 'Parc.Quit.',
+				'PR.DataVencimento' => 'Data do Venc.',
+				'OT.Modalidade' => 'Modalidade',
+				'OT.ValorOrca' => 'Valor',
+				'OT.TipoFinanceiro' => 'Tipo',
+				'OT.Tipo_Orca' => 'Compra',
+				'OT.TipoFrete' => 'Entrega',
+			);		
+		}
+		
         $data['select']['Ordenamento'] = array(
             'ASC' => 'Crescente',
             'DESC' => 'Decrescente',
@@ -3733,22 +3749,39 @@ class Relatorio extends CI_Controller {
 			'0' => 'Primeiro Pedido',			
 			'1' => 'Último Pedido',
         );
-
-		$data['select']['Campo'] = array(
-            'OT.idApp_OrcaTrata' => 'id do Orcamento',
-			'OT.DataOrca' => 'Data do Orcamento',
-			'OT.DataEntregaOrca' => 'Data da Entrega',
-			'PR.DataVencimento' => 'Data do Venc.',
-			'PR.Quitado' => 'Parc.Quit.',
-			'OT.Modalidade' => 'Modalidade',
-            'OT.ValorOrca' => 'Valor',
-			'OT.TipoFinanceiro' => 'Tipo',
-			'OT.Tipo_Orca' => 'Compra',
-			'OT.TipoFrete' => 'Entrega',
-			'F.idApp_Fornecedor' => 'id do Fornecedor',
-			'F.NomeFornecedor' => 'Nome do Fornecedor',
-        );
-
+		
+		if($_SESSION['log']['idSis_Empresa'] != 5){
+			$data['select']['Campo'] = array(
+				'OT.idApp_OrcaTrata' => 'id do Orcamento',
+				'OT.DataOrca' => 'Data do Orcamento',
+				'OT.DataEntregaOrca' => 'Data da Entrega',
+				'PR.DataVencimento' => 'Data do Venc.',
+				'PR.Quitado' => 'Parc.Quit.',
+				'OT.Modalidade' => 'Modalidade',
+				'OT.ValorOrca' => 'Valor',
+				'OT.TipoFinanceiro' => 'Tipo',
+				'OT.Tipo_Orca' => 'Compra',
+				'OT.TipoFrete' => 'Entrega',
+				'F.idApp_Fornecedor' => 'id do Fornecedor',
+				'F.NomeFornecedor' => 'Nome do Fornecedor',	
+			);
+		}else{
+			$data['select']['Campo'] = array(
+				'OT.idApp_OrcaTrata' => 'id do Orcamento',
+				'OT.DataOrca' => 'Data do Orcamento',
+				'OT.DataEntregaOrca' => 'Data da Entrega',
+				'PR.DataVencimento' => 'Data do Venc.',
+				'PR.Quitado' => 'Parc.Quit.',
+				'OT.Modalidade' => 'Modalidade',
+				'OT.ValorOrca' => 'Valor',
+				'OT.TipoFinanceiro' => 'Tipo',
+				'OT.Tipo_Orca' => 'Compra',
+				'OT.TipoFrete' => 'Entrega',
+			);
+		
+		}
+		
+		
         $data['select']['Ordenamento'] = array(
             'ASC' => 'Crescente',
             'DESC' => 'Decrescente',

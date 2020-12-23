@@ -196,130 +196,6 @@
 											<input type="hidden" name="Cadastrar" id="Cadastrar" value="S">
 										<?php } ?>
 									<?php } ?>
-										
-									
-									<!--
-									<div class="col-md-2">
-										<label for="Procedimento">Tarefa:</label>
-										<input type="text" class="form-control" id="Procedimento" <?php echo $readonly; ?> maxlength="20"
-											autofocus name="Procedimento" value="<?php echo $tarefa['Procedimento'] ?>">
-									
-									</div>								
-									
-									<div class="col-md-3">
-										<label for="ProfissionalProcedimento">Responsável da Procedimento:</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-												id="ProfissionalProcedimento" name="ProfissionalProcedimento">
-											<option value="">-- Selecione uma opção --</option>
-											<?php
-											foreach ($select['Profissional'] as $key => $row) {
-												if ($tarefa['ProfissionalProcedimento'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											?>
-										</select>
-									</div>
-									-->
-									<div class="col-md-4">
-										<label for="Prioridade">Prioridade:</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-												id="Prioridade" name="Prioridade">
-											<!--<option value="">-- Selecione uma opção --</option>-->
-											<?php
-											foreach ($select['Prioridade'] as $key => $row) {
-												if ($tarefa['Prioridade'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											?>
-										</select>
-										<?php echo form_error('Prioridade'); ?>
-									</div>
-								</div>	
-								<div class="row">
-									<div class="col-md-8" >
-										<div class="row">
-											<div class="col-md-6 text-left">
-												<label for="DataProcedimento">Iniciar em:</label>
-												<div class="input-group <?php echo $datepicker; ?>">
-													<span class="input-group-addon" disabled>
-														<span class="glyphicon glyphicon-calendar"></span>
-													</span>
-													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-														   autofocus name="DataProcedimento" value="<?php echo $tarefa['DataProcedimento']; ?>">
-													
-												</div>
-												<?php echo form_error('DataProcedimento'); ?>
-											</div>
-											<div class="col-md-6 text-left">
-												<label for="DataProcedimentoLimite">Concluir em:</label>
-												<div class="input-group <?php echo $datepicker; ?>">
-													<span class="input-group-addon" disabled>
-														<span class="glyphicon glyphicon-calendar"></span>
-													</span>
-													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-														   autofocus name="DataProcedimentoLimite" value="<?php echo $tarefa['DataProcedimentoLimite']; ?>">
-													
-												</div>
-												<?php echo form_error('DataProcedimentoLimite'); ?>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-4 ">
-										<label for="Statustarefa">StatusTRF:</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-												id="Statustarefa" name="Statustarefa">
-											<!--<option value="">-- Selecione uma opção --</option>-->
-											<?php
-											foreach ($select['Statustarefa'] as $key => $row) {
-												if ($tarefa['Statustarefa'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											?>
-										</select>
-									</div>
-									<!--
-									<div class="col-md-2 form-inline">
-										<label for="ConcluidoProcedimento">Tarefa Concl.?</label><br>
-										<div class="form-group">
-											<div class="btn-group" data-toggle="buttons">
-												<?php
-												foreach ($select['ConcluidoProcedimento'] as $key => $row) {
-													if (!$tarefa['ConcluidoProcedimento'])
-														$tarefa['ConcluidoProcedimento'] = 'N';
-
-													($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-													if ($tarefa['ConcluidoProcedimento'] == $key) {
-														echo ''
-														. '<label class="btn btn-warning active" name="ConcluidoProcedimento_' . $hideshow . '">'
-														. '<input type="radio" name="ConcluidoProcedimento" id="' . $hideshow . '" '
-														. 'autocomplete="off" value="' . $key . '" checked>' . $row
-														. '</label>'
-														;
-													} else {
-														echo ''
-														. '<label class="btn btn-default" name="ConcluidoProcedimento_' . $hideshow . '">'
-														. '<input type="radio" name="ConcluidoProcedimento" id="' . $hideshow . '" '
-														. 'autocomplete="off" value="' . $key . '" >' . $row
-														. '</label>'
-														;
-													}
-												}
-												?>
-
-											</div>
-										</div>
-									</div>
-									-->
 									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 										<?php if ($metodo == 1) { ?>
 											<div class="col-md-4">
@@ -361,6 +237,136 @@
 											<?php } ?>	
 										<?php } ?>	
 									<?php } ?>
+										
+									
+									<!--
+									<div class="col-md-2">
+										<label for="Procedimento">Tarefa:</label>
+										<input type="text" class="form-control" id="Procedimento" <?php echo $readonly; ?> maxlength="20"
+											autofocus name="Procedimento" value="<?php echo $tarefa['Procedimento'] ?>">
+									
+									</div>								
+									
+									<div class="col-md-3">
+										<label for="ProfissionalProcedimento">Responsável da Procedimento:</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+												id="ProfissionalProcedimento" name="ProfissionalProcedimento">
+											<option value="">-- Selecione uma opção --</option>
+											<?php
+											foreach ($select['Profissional'] as $key => $row) {
+												if ($tarefa['ProfissionalProcedimento'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>
+										</select>
+									</div>
+									-->
+									<!--
+									<div class="col-md-4">
+										<label for="Prioridade">Prioridade:</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+												id="Prioridade" name="Prioridade">
+											<option value="">-- Selecione uma opção --</option>
+											<?php
+											/*
+											foreach ($select['Prioridade'] as $key => $row) {
+												if ($tarefa['Prioridade'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											*/
+											?>
+										</select>
+										<?php echo form_error('Prioridade'); ?>
+									</div>
+									-->
+								</div>	
+								<div class="row">
+									<div class="col-md-8" >
+										<div class="row">
+											<div class="col-md-6 text-left">
+												<label for="DataProcedimento">Iniciar em:</label>
+												<div class="input-group <?php echo $datepicker; ?>">
+													<span class="input-group-addon" disabled>
+														<span class="glyphicon glyphicon-calendar"></span>
+													</span>
+													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+														   autofocus name="DataProcedimento" value="<?php echo $tarefa['DataProcedimento']; ?>">
+													
+												</div>
+												<?php echo form_error('DataProcedimento'); ?>
+											</div>
+											<div class="col-md-6 text-left">
+												<label for="DataProcedimentoLimite">Concluir em:</label>
+												<div class="input-group <?php echo $datepicker; ?>">
+													<span class="input-group-addon" disabled>
+														<span class="glyphicon glyphicon-calendar"></span>
+													</span>
+													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+														   autofocus name="DataProcedimentoLimite" value="<?php echo $tarefa['DataProcedimentoLimite']; ?>">
+													
+												</div>
+												<?php echo form_error('DataProcedimentoLimite'); ?>
+											</div>
+										</div>
+									</div>
+									<!--
+									<div class="col-md-4 ">
+										<label for="Statustarefa">StatusTRF:</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+												id="Statustarefa" name="Statustarefa">
+											<option value="">-- Selecione uma opção --</option>
+											<?php
+											/*
+											foreach ($select['Statustarefa'] as $key => $row) {
+												if ($tarefa['Statustarefa'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											*/
+											?>
+										</select>
+									</div>
+									-->
+									<div class="col-md-2 form-inline">
+										<label for="ConcluidoProcedimento">Tarefa Concl.?</label><br>
+										<div class="form-group">
+											<div class="btn-group" data-toggle="buttons">
+												<?php
+												foreach ($select['ConcluidoProcedimento'] as $key => $row) {
+													if (!$tarefa['ConcluidoProcedimento'])
+														$tarefa['ConcluidoProcedimento'] = 'N';
+
+													($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+													if ($tarefa['ConcluidoProcedimento'] == $key) {
+														echo ''
+														. '<label class="btn btn-warning active" name="ConcluidoProcedimento_' . $hideshow . '">'
+														. '<input type="radio" name="ConcluidoProcedimento" id="' . $hideshow . '" '
+														. 'autocomplete="off" value="' . $key . '" checked>' . $row
+														. '</label>'
+														;
+													} else {
+														echo ''
+														. '<label class="btn btn-default" name="ConcluidoProcedimento_' . $hideshow . '">'
+														. '<input type="radio" name="ConcluidoProcedimento" id="' . $hideshow . '" '
+														. 'autocomplete="off" value="' . $key . '" >' . $row
+														. '</label>'
+														;
+													}
+												}
+												?>
+
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>	
 						</div>		

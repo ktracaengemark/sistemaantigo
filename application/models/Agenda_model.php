@@ -334,9 +334,9 @@ class Agenda_model extends CI_Model {
         ');
 
         $array = array();
-        $array[0] = ':: Tudo ::';
-        $array[50] = ':: O Próprio ::';
-        $array[51] = ':: Todos ::';
+        $array[0] = ':: Todos ::';
+        //$array[50] = ':: O Próprio ::';
+        //$array[51] = ':: Todos ::';
         foreach ($query->result() as $row) {
             $array[$row->idSis_Usuario] = $row->NomeUsuario;
         }
@@ -643,7 +643,7 @@ class Agenda_model extends CI_Model {
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'P.DataProcedimento' : $data['Campo'];
+        $data['Campo'] = (!$data['Campo']) ? 'P.Compartilhar' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
 		$filtro5 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
 		$filtro8 = ($data['ConcluidoSubProcedimento']) ? 'SP.ConcluidoSubProcedimento = "' . $data['ConcluidoSubProcedimento'] . '" AND ' : FALSE;
@@ -662,8 +662,9 @@ class Agenda_model extends CI_Model {
 		$data['Prioridade'] = ($data['Prioridade'] != '') ? ' AND P.Prioridade = ' . $data['Prioridade'] : FALSE;
 		$data['Procedimento'] = ($data['Procedimento']) ? ' AND P.idApp_Procedimento = ' . $data['Procedimento'] : FALSE;
 		$data['Compartilhar'] = ($data['Compartilhar']) ? ' AND P.Compartilhar = ' . $data['Compartilhar'] : FALSE;
+		//$data['NomeUsuario'] = ($data['NomeUsuario']) ? ' AND P.Compartilhar = ' . $data['NomeUsuario'] : FALSE;
 		$data['NomeUsuario'] = ($data['NomeUsuario']) ? ' AND P.idSis_Usuario = ' . $data['NomeUsuario'] : FALSE;
-
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 || $_SESSION['log']['Permissao'] > 2 ) ? '(P.Compartilhar = ' . $_SESSION['log']['idSis_Usuario'] . ' OR P.Compartilhar = 0) AND ' : FALSE;
 		
 		$query = $this->db->query('
             SELECT
@@ -698,29 +699,27 @@ class Agenda_model extends CI_Model {
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
 					LEFT JOIN Tab_Categoria AS CT ON CT.idTab_Categoria = P.Categoria
             WHERE
-                ' . $date_inicio_proc . '
+                
+				' . $permissao . '
+				' . $date_inicio_proc . '
                 ' . $date_fim_proc . '
                 ' . $date_inicio_limite . '
                 ' . $date_fim_limite . '
 				' . $filtro6 . '
+				' . $filtro5 . '
 				' . $filtro9 . '
-				' . $filtro11 . '
 				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
 				(P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				(P.Compartilhar = "51" OR P.Compartilhar = ' . $_SESSION['log']['idSis_Usuario'] . ' OR P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '))) AND
-				P.Statustarefa != "3" AND
+				(P.Compartilhar = ' . $_SESSION['log']['idSis_Usuario'] . ' OR P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '))) AND
 				P.idApp_OrcaTrata = "0" AND
 				P.idApp_Cliente = "0" AND
 				P.idApp_Fornecedor = "0" 
 				' . $data['Compartilhar'] . '
-				' . $data['NomeUsuario'] . '
 			GROUP BY
 				P.idApp_Procedimento
 			ORDER BY
 				' . $data['Campo'] . '
-				' . $data['Ordenamento'] . ',				
-				P.DataProcedimento DESC,
-				P.Prioridade ASC
+				' . $data['Ordenamento'] . '
 
         ');
         /*
@@ -748,7 +747,9 @@ class Agenda_model extends CI_Model {
 				$row->SubPrioridade = $this->basico->prioridade($row->SubPrioridade, '123');
 				$row->Statustarefa = $this->basico->statustrf($row->Statustarefa, '123');
 				$row->Statussubtarefa = $this->basico->statustrf($row->Statussubtarefa, '123');
-				
+				if($row->Compartilhar == 0){
+					$row->Comp = '" TODOS "';
+				}
             }
 
             return $query;

@@ -35,7 +35,7 @@
 				</div>
 			</div>
 			<div class="col-md-2">
-				<label for="DataFim"><?php echo $titulo1; ?> Total:</label>
+				<label for="DataFim"><?php #echo $titulo1; ?> Total:</label>
 				<div class="input-group">
 					<span class="input-group-addon">R$</span>
 					<input type="text" class="form-control" disabled aria-label="Total de Entradas" value="<?php echo $report->soma->somareceber ?>">
