@@ -142,23 +142,25 @@
 								</div>
 							</div>
 						</div>
-					<?php } ?>	
-					<div class="row">			
-						<div class="col-md-12">
-							<div class="panel panel-warning">
-								<div class="panel-heading">
-									<a class="text-center" style="color: #B8860B" data-toggle="collapse" data-target="#Pagamento" aria-expanded="false" aria-controls="Pagamento">
-										<h5 class="text-left">Aguardando <b>Pagamento</b></h5>
-									</a>
-								</div>
-								<div <?php echo $collapse; ?> id="Pagamento">
-									<div class="panel-body">
-										<?php echo (isset($list_pagamento)) ? $list_pagamento : FALSE ?>
+					<?php } ?>
+					<?php if($_SESSION['Usuario']['Rel_Pag'] == "S") {?>	
+						<div class="row">			
+							<div class="col-md-12">
+								<div class="panel panel-warning">
+									<div class="panel-heading">
+										<a class="text-center" style="color: #B8860B" data-toggle="collapse" data-target="#Pagamento" aria-expanded="false" aria-controls="Pagamento">
+											<h5 class="text-left">Aguardando <b>Pagamento</b></h5>
+										</a>
+									</div>
+									<div <?php echo $collapse; ?> id="Pagamento">
+										<div class="panel-body">
+											<?php echo (isset($list_pagamento)) ? $list_pagamento : FALSE ?>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					<?php } ?>
 					<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 						<div class="row">	
 							<div class="col-md-12">

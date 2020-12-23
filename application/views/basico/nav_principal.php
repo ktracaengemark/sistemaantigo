@@ -85,7 +85,8 @@
 						
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="<?php echo base_url() ?>pedidos/pedidos"><span class="glyphicon glyphicon-pencil"></span> Gestor de Receitas Dinamico</a></li>
-							
+							<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>orcatrata/pedidos"><span class="glyphicon glyphicon-pencil"></span> Gestor de Receitas Statico</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>Orcatrata/cadastrar3"><span class="glyphicon glyphicon-plus"></span> Nova Receita</a></li>
 							
@@ -127,10 +128,8 @@
 						
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="<?php echo base_url() ?>despesas/despesas"><span class="glyphicon glyphicon-pencil"></span> Gestor de Despesas Dinamico</a></li>
-							
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>Orcatrata/cadastrardesp"><span class="glyphicon glyphicon-plus"></span> Nova Despesa</a></li>
-							
 							<li role="separator" class="divider"></li>
 							<li><a href="<?php echo base_url() ?>relatorio/admin"><span class="glyphicon glyphicon-list"></span> Menu </a></li>
 							<!--<li role="separator" class="divider"></li>
