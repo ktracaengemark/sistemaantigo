@@ -39,6 +39,7 @@ class Agenda extends CI_Controller {
 		$data['collapse1'] = 'class="collapse"';
 		
         $data['query'] = quotes_to_entities($this->input->post(array(
+			'NomeProfissional',
 			'NomeUsuario',
 			'NomeCliente',
 			'NomeEmpresa',
@@ -95,6 +96,7 @@ class Agenda extends CI_Controller {
 		$_SESSION['FiltroAlteraProcedimento']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 		$_SESSION['FiltroAlteraProcedimento']['NomeEmpresaCli'] = $data['query']['NomeEmpresaCli'];
         $_SESSION['log']['NomeUsuario'] = ($data['query']['NomeUsuario']) ? $data['query']['NomeUsuario'] : FALSE;
+        $_SESSION['log']['NomeProfissional'] = ($data['query']['NomeProfissional']) ? $data['query']['NomeProfissional'] : FALSE;
         $_SESSION['log']['Compartilhar'] = ($data['query']['Compartilhar']) ? $data['query']['Compartilhar'] : FALSE;
         
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -176,6 +178,7 @@ class Agenda extends CI_Controller {
 		$data['select']['NomeEmpresa'] = $this->Agenda_model->select_empresarec();
 		$data['select']['NomeEmpresaCli'] = $this->Agenda_model->select_empresaenv();
         $data['select']['NomeUsuario'] = $this->Agenda_model->select_usuario();
+        $data['select']['NomeProfissional'] = $this->Agenda_model->select_usuario();
 		$data['select']['Procedimento'] = $this->Agenda_model->select_tarefa();
 		$data['select']['Categoria'] = $this->Agenda_model->select_categoria();
 		$data['select']['Compartilhar'] = $this->Agenda_model->select_compartilhar();
@@ -199,6 +202,7 @@ class Agenda extends CI_Controller {
 			$data['bd']['Procedimento'] = $data['query']['Procedimento'];
 			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
 			$data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
+			$data['bd']['NomeProfissional'] = $data['query']['NomeProfissional'];
 			$data['bd']['Categoria'] = $data['query']['Categoria'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');

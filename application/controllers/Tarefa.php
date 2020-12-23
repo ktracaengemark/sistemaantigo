@@ -138,6 +138,7 @@ class Tarefa extends CI_Controller {
         $data['titulo'] = 'Cadastar Tarefa';
         $data['form_open_path'] = 'tarefa/cadastrar';
         $data['readonly'] = '';
+		$data['display'] = '';
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
@@ -329,7 +330,8 @@ class Tarefa extends CI_Controller {
         if ($id) {
             #### App_Procedimento ####
             $_SESSION['Tarefa'] = $data['tarefa'] = $this->Tarefa_model->get_tarefa($id);
-            $data['tarefa']['DataProcedimento'] = $this->basico->mascara_data($data['tarefa']['DataProcedimento'], 'barras');
+            
+			$data['tarefa']['DataProcedimento'] = $this->basico->mascara_data($data['tarefa']['DataProcedimento'], 'barras');
             $data['tarefa']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['tarefa']['DataProcedimentoLimite'], 'barras');
 			#$data['tarefa']['Prioridade'] = $this->basico->prioridade($data['tarefa']['Prioridade'], '123');
             #$data['tarefa']['DataRetorno'] = $this->basico->mascara_data($data['tarefa']['DataRetorno'], 'barras');
@@ -393,9 +395,14 @@ class Tarefa extends CI_Controller {
 
         $data['titulo'] = 'Editar Tarefa';
         $data['form_open_path'] = 'tarefa/alterar';
-        $data['readonly'] = '';
-        $data['disabled'] = '';
-        $data['panel'] = 'primary';
+        $data['readonly'] = 'readonly=""';
+        if($_SESSION['Tarefa']['Compartilhar'] == $_SESSION['log']['idSis_Usuario'] || $_SESSION['Tarefa']['idSis_Usuario'] == $_SESSION['log']['idSis_Usuario']){
+			$data['display'] = '';
+		}else{
+			$data['display'] = 'display:none';
+		}
+		$data['disabled'] = '';
+		$data['panel'] = 'primary';
         $data['metodo'] = 2;
 
         //if (isset($data['procedtarefa']) && ($data['procedtarefa'][0]['DataSubProcedimento'] || $data['procedtarefa'][0]['Profissional']))

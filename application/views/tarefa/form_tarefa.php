@@ -115,9 +115,9 @@
 														<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
 																<span class="glyphicon glyphicon-refresh"></span>Rec.
 														</button>
-														<?php echo form_error('Cadastrar'); ?>
 													</div>											
 												</div>
+												<?php echo form_error('Cadastrar'); ?>
 											</div>	
 										</div>
 									<?php } elseif ($metodo == 2) { ?>
@@ -186,8 +186,8 @@
 															<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
 																	<span class="glyphicon glyphicon-refresh"></span>Rec.
 															</button>
-															<?php echo form_error('Cadastrar'); ?>
-														</div>											
+														</div>
+														<?php echo form_error('Cadastrar'); ?>											
 													</div>
 												</div>	
 											</div>
@@ -335,7 +335,7 @@
 										</select>
 									</div>
 									-->
-									<div class="col-md-2 form-inline">
+									<div class="col-md-2 form-inline" style="<?php echo $display; ?>">
 										<label for="ConcluidoProcedimento">Tarefa Concl.?</label><br>
 										<div class="form-group">
 											<div class="btn-group" data-toggle="buttons">

@@ -40,29 +40,50 @@
 		<div class="panel-heading">
 			
 			<?php echo form_open('agenda', 'role="form"'); ?>
-				<?php if ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) { ?>
-					<div class="col-md-6 text-left">
-						<label class="sr-only" for="Ordenamento">Agenda dos Prof.:</label>
-						<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-								id="Compartilhar" name="Compartilhar">
-							<?php
-							foreach ($select['Compartilhar'] as $key => $row) {
-								if ($query['Compartilhar'] == $key) {
-									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-								} else {
-									echo '<option value="' . $key . '">' . $row . '</option>';
+				<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>				
+						<div class="col-md-4 text-left">
+							<label class="sr-only" for="Compartilhar">Quem Fazer</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" onchange="this.form.submit()"
+									id="Compartilhar" name="Compartilhar">
+								<?php
+								foreach ($select['Compartilhar'] as $key => $row) {
+									if ($query['Compartilhar'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
 								}
-							}
-							?>
-						</select>
-					</div>	
-				<?php } ?>				
-				<div class="input-group col-md-6">
+								?>
+							</select>
+						</div>
+						<div class="col-md-4 text-left">
+							<label  class="sr-only" for="NomeProfissional">Quem Cadastrou?</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" onchange="this.form.submit()"
+									id="NomeProfissional" name="NomeProfissional">
+								<?php
+								foreach ($select['NomeProfissional'] as $key => $row) {
+									if ($query['NomeProfissional'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+				<?php }else { ?>
+					<input type="hidden" name="NomeProfissional" id="NomeProfissional" value="">
+					<input type="hidden" name="Compartilhar" id="Compartilhar" value="">
+				<?php } ?>
+				
+				<div class="input-group col-md-4">
+					<!--
 					<span class="input-group-btn">	
 						<div class=" btn btn-success" type="button" data-toggle="collapse" data-target="#Tarefas" aria-expanded="false" aria-controls="Tarefas">
 							<span class="glyphicon glyphicon-chevron-down"></span> Tarefas
 						</div>
-					</span>	
+					</span>
+					-->
 						<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 						<span class="input-group-btn">
 							<a class="btn btn-md btn-danger" href="<?php echo base_url() ?>tarefa/cadastrar" role="button"> 
@@ -261,51 +282,6 @@
 								</div>
 							</div>
 							-->
-							<br>
-							<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
-								<div class="row">
-									<!--
-									<div class="col-md-3 text-left">
-										<label for="NomeUsuario">Quem Cadastrou?</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-												id="NomeUsuario" name="NomeUsuario">
-											<?php
-											/*
-											foreach ($select['NomeUsuario'] as $key => $row) {
-												if ($query['NomeUsuario'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											*/
-											?>
-										</select>
-									</div>
-									
-									<div class="col-md-3 text-left">
-										<label for="Compartilhar">Quem Fazer?</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-												id="Compartilhar" name="Compartilhar">
-											<?php
-											/*
-											foreach ($select['Compartilhar'] as $key => $row) {
-												if ($query['Compartilhar'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											*/
-											?>
-										</select>
-									</div>
-									-->
-								</div>
-							<?php }else { ?>
-								<input type="hidden" name="NomeUsuario" id="NomeUsuario" value="">
-								<input type="hidden" name="Compartilhar" id="Compartilhar" value="">
-							<?php } ?>
 							<br>
 							<div class="row text-left">
 								<div class="col-md-3">
