@@ -396,7 +396,7 @@ class Tarefa extends CI_Controller {
         $data['titulo'] = 'Editar Tarefa';
         $data['form_open_path'] = 'tarefa/alterar';
         $data['readonly'] = 'readonly=""';
-        if($_SESSION['Tarefa']['Compartilhar'] == $_SESSION['log']['idSis_Usuario'] || $_SESSION['Tarefa']['idSis_Usuario'] == $_SESSION['log']['idSis_Usuario']){
+        if($_SESSION['Tarefa']['idSis_Usuario'] == $_SESSION['log']['idSis_Usuario']){
 			$data['display'] = '';
 		}else{
 			$data['display'] = 'display:none';
