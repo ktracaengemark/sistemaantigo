@@ -93,7 +93,7 @@ class Tarefa extends CI_Controller {
 				$data['procedtarefa'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
                 $data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
 				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
-				#$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
+				$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
                 $j++;
             }
 
@@ -318,7 +318,7 @@ class Tarefa extends CI_Controller {
 				$data['procedtarefa'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
                 $data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
 				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
-				#$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
+				$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
                 $j++;
             }
 
@@ -330,33 +330,44 @@ class Tarefa extends CI_Controller {
         if ($id) {
             #### App_Procedimento ####
             $_SESSION['Tarefa'] = $data['tarefa'] = $this->Tarefa_model->get_tarefa($id);
-            
 			$data['tarefa']['DataProcedimento'] = $this->basico->mascara_data($data['tarefa']['DataProcedimento'], 'barras');
             $data['tarefa']['DataProcedimentoLimite'] = $this->basico->mascara_data($data['tarefa']['DataProcedimentoLimite'], 'barras');
+			//$data['tarefa']['NomeCategoria'] = $data['tarefa']['NomeCategoria'];
 			#$data['tarefa']['Prioridade'] = $this->basico->prioridade($data['tarefa']['Prioridade'], '123');
             #$data['tarefa']['DataRetorno'] = $this->basico->mascara_data($data['tarefa']['DataRetorno'], 'barras');
-            
-
+        /*
+		echo '<br>';
+        echo "<pre>";
+        echo '<br>';
+        print_r($data['tarefa']['idSis_Usuario']);
+        echo '<br>';
+        print_r($data['tarefa']['NomeCadastrou']);
+        echo '<br>';
+        print_r($data['tarefa']['Compartilhar']);
+        echo '<br>';
+        print_r($data['tarefa']['NomeCompartilhar']);
+        echo "</pre>";
+        exit ();            
+		*/
             #### Carrega os dados do cliente nas variáves de sessão ####
             #$this->load->model('Cliente_model');
             #$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($data['tarefa']['idApp_Cliente'], TRUE);
             #$_SESSION['log']['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
 
             #### App_SubProcedimento ####
-            $data['procedtarefa'] = $this->Tarefa_model->get_procedtarefa($id);
+            $_SESSION['Procedtarefa'] = $data['procedtarefa'] = $this->Tarefa_model->get_procedtarefa($id);
             if (count($data['procedtarefa']) > 0) {
                 $data['procedtarefa'] = array_combine(range(1, count($data['procedtarefa'])), array_values($data['procedtarefa']));
                 $data['count']['PTCount'] = count($data['procedtarefa']);
-
                 if (isset($data['procedtarefa'])) {
-
                     for($j=1; $j <= $data['count']['PTCount']; $j++) {
                         $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimento'], 'barras');
 						$data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimentoLimite'], 'barras');
+						$_SESSION['Procedtarefa'][$j]['Nome'] = $data['procedtarefa'][$j]['Nome'];
 					}
                 }
             }
-
+			
         }
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -372,7 +383,7 @@ class Tarefa extends CI_Controller {
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();        
         #$data['select']['Rotina'] = $this->Basico_model->select_status_sn();        
-        #$data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
+        $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['Compartilhar'] = $this->Procedimento_model->select_compartilhar();
 		$data['select']['Categoria'] = $this->Tarefa_model->select_categoria();
 		$data['select']['Prioridade'] = array (

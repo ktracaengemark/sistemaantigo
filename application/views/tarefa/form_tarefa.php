@@ -121,80 +121,12 @@
 											</div>	
 										</div>
 									<?php } elseif ($metodo == 2) { ?>
-										<?php if ($_SESSION['Tarefa']['idSis_Usuario'] == $_SESSION['log']['idSis_Usuario'] ) { ?>
-											<div class="col-md-4">
-												<div class="row">
-													<div class="col-md-12 " >
-														<label for="Categoria">Categoria:</label>
-														<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-																id="Categoria" name="Categoria">
-															<option value="">- Selec. Categoria -</option>	
-															<?php
-															foreach ($select['Categoria'] as $key => $row) {
-																if ($tarefa['Categoria'] == $key) {
-																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																} else {
-																	echo '<option value="' . $key . '">' . $row . '</option>';
-																}
-															}
-															?>
-														</select>
-														
-													</div>
-												</div>	
-												<div class="row">
-													<div class="col-md-12 text-left">
-														<label class="sr-only" for="Cadastrar">Cadastrar no BD</label>
-														<div class="btn-group" data-toggle="buttons">
-															<?php
-															foreach ($select['Cadastrar'] as $key => $row) {
-																if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
-
-																($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																if ($cadastrar['Cadastrar'] == $key) {
-																	echo ''
-																	. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
-																	. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
-																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																	. '</label>'
-																	;
-																} else {
-																	echo ''
-																	. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
-																	. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
-																	. 'autocomplete="off" value="' . $key . '" >' . $row
-																	. '</label>'
-																	;
-																}
-															}
-															?>
-
-														</div>
-														<?php echo form_error('Categoria'); ?>
-													</div>
-												</div>	
-												<div id="Cadastrar" <?php echo $div['Cadastrar']; ?>>	
-													<div class="row">											
-														<div class="col-md-6 text-left">
-															<a class="btn btn-md btn-info btn-block"   target="_blank" href="<?php echo base_url() ?>categoria2/cadastrar3/" role="button"> 
-																<span class="glyphicon glyphicon-plus"></span>Cat
-															</a>
-														</div>
-													
-														<div class="col-md-6 text-left">
-															<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
-																	<span class="glyphicon glyphicon-refresh"></span>Rec.
-															</button>
-														</div>
-														<?php echo form_error('Cadastrar'); ?>											
-													</div>
-												</div>	
-											</div>
-										<?php } else { ?>
-											<input type="hidden" name="Categoria" id="Categoria" value="<?php echo $tarefa['Categoria']; ?>">
+										<div class="col-md-4">
+											<input type="hidden" name="Categoria" id="Categoria" value="<?php echo $tarefa['Categoria']; ?>"/>
 											<input type="hidden" name="Cadastrar" id="Cadastrar" value="S">
-										<?php } ?>
+											<label for="Categoria">Categoria</label>
+											<input type="text" class="form-control" readonly="" value="<?php echo $tarefa['NomeCategoria']; ?>"/>
+										</div>
 									<?php } ?>
 									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 										<?php if ($metodo == 1) { ?>
@@ -215,26 +147,11 @@
 												</select>
 											</div>
 										<?php } elseif ($metodo == 2){ ?>
-											<?php if ($_SESSION['Tarefa']['idSis_Usuario'] == $_SESSION['log']['idSis_Usuario'] ) { ?>	
-												<div class="col-md-4">
-													<label for="Compartilhar">Quem Fazer?</label>		
-													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-															id="Compartilhar" name="Compartilhar">
-															
-														<?php
-														foreach ($select['Compartilhar'] as $key => $row) {
-															if ($tarefa['Compartilhar'] == $key) {
-																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-															} else {
-																echo '<option value="' . $key . '">' . $row . '</option>';
-															}
-														}
-														?>
-													</select>
-												</div>
-											<?php } else { ?>
-												<input type="hidden" name="Compartilhar" id="Compartilhar" value="<?php echo $tarefa['Compartilhar']; ?>">
-											<?php } ?>	
+											<div class="col-md-4">
+												<input type="hidden" name="Compartilhar" id="Compartilhar" value="<?php echo $tarefa['Compartilhar']; ?>"/>
+												<label for="Compartilhar">Quem Fazer</label>
+												<input type="text" class="form-control" readonly="" value="<?php echo $tarefa['NomeCompartilhar']; ?>"/>
+											</div>
 										<?php } ?>	
 									<?php } ?>
 										
@@ -422,28 +339,16 @@
 														</select>
 													</div>
 													-->
-													<div class="col-md-3">
-														<label for="SubProcedimento<?php echo $i ?>">Ação:</label>
+													<div class="col-md-4">
+														<!--<label for="SubProcedimento<?php echo $i ?>">Ação:</label>-->
+														<label for="SubProcedimento<?php echo $i ?>">
+															Ação <?php echo $i ?>: 
+															<?php if ($procedtarefa[$i]['idSis_Usuario']) { ?>
+																<?php echo $_SESSION['Procedtarefa'][$i]['Nome'];?>
+															<?php } ?>
+														</label>
 														<textarea class="form-control" id="SubProcedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																  name="SubProcedimento<?php echo $i ?>"><?php echo $procedtarefa[$i]['SubProcedimento']; ?></textarea>
-													</div>
-													<div class="col-md-2">
-														<label for="Prioridade<?php echo $i ?>">Prioridade:</label>
-														<?php if ($i == 1) { ?>
-														<?php } ?>
-														<select data-placeholder="Selecione uma opção..." class="form-control" 
-																 id="listadinamicad<?php echo $i ?>" name="Prioridade<?php echo $i ?>">
-															
-															<?php
-															foreach ($select['Prioridade'] as $key => $row) {
-																if ($procedtarefa[$i]['Prioridade'] == $key) {
-																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																} else {
-																	echo '<option value="' . $key . '">' . $row . '</option>';
-																}
-															}
-															?>
-														</select>
 													</div>
 													<div class="col-md-2">
 														<label for="DataSubProcedimento<?php echo $i ?>">Iniciar em:</label>
@@ -465,25 +370,6 @@
 																   name="DataSubProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataSubProcedimentoLimite']; ?>">
 														</div>
 													</div>
-													<div class="col-md-2">
-														<label for="Statussubtarefa<?php echo $i ?>">StatusAção:</label>
-														<?php if ($i == 1) { ?>
-														<?php } ?>
-														<select data-placeholder="Selecione uma opção..." class="form-control" 
-																 id="listadinamicad<?php echo $i ?>" name="Statussubtarefa<?php echo $i ?>">
-															
-															<?php
-															foreach ($select['Statussubtarefa'] as $key => $row) {
-																if ($procedtarefa[$i]['Statussubtarefa'] == $key) {
-																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																} else {
-																	echo '<option value="' . $key . '">' . $row . '</option>';
-																}
-															}
-															?>
-														</select>
-													</div>													
-													<!--
 													<div class="col-md-2">
 														<label for="ConcluidoSubProcedimento">Ação. Concl.? </label><br>
 														<div class="form-group">
@@ -512,7 +398,6 @@
 															</div>
 														</div>
 													</div>
-													-->
 													<!--
 													<div class="col-md-1">
 														<label><br></label><br>
@@ -631,7 +516,7 @@
 									<span class="glyphicon glyphicon-save"></span> Salvar
 								</button>
 							</div>
-							<?php if ($_SESSION['Tarefa']['idSis_Usuario'] == $_SESSION['log']['idSis_Usuario'] ) { ?>
+							<?php if ($tarefa['idSis_Usuario'] == $_SESSION['log']['idSis_Usuario'] ) { ?>
 								<div class="col-md-6 text-right">
 									<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 										<span class="glyphicon glyphicon-trash"></span> Excluir

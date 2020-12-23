@@ -1520,17 +1520,10 @@ function adicionaSubTarefa() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-3">\
+						<div class="col-md-4">\
 							<label for="SubProcedimento'+pt+'">Ação:</label>\
 							<textarea class="form-control" id="SubProcedimento'+pt+'"\
 									  name="SubProcedimento'+pt+'"></textarea>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="Prioridade'+pt+'">Prioridade:</label>\
-							<select data-placeholder="Selecione uma opção..." class="form-control"\
-									 id="listadinamicad'+pt+'" name="Prioridade'+pt+'">\
-								<option value="" checked>Baixa</option>\
-							</select>\
 						</div>\
 						<div class="col-md-2">\
 							<label for="DataSubProcedimento'+pt+'">Iniciar em:</label>\
@@ -1553,11 +1546,19 @@ function adicionaSubTarefa() {
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="Statussubtarefa'+pt+'">Sts.SubTrf:</label>\
-							<select data-placeholder="Selecione uma opção..." class="form-control"\
-									 id="listadinamicae'+pt+'" name="Statussubtarefa'+pt+'">\
-								<option value="" checked>Fazer</option>\
-							</select>\
+							<label for="ConcluidoSubProcedimento">Concluido? </label><br>\
+							<div class="form-group">\
+								<div class="btn-group" data-toggle="buttons">\
+									<label class="btn btn-warning active" name="radio_ConcluidoSubProcedimento'+pt+'" id="radio_ConcluidoSubProcedimento'+pt+'N">\
+									<input type="radio" name="ConcluidoSubProcedimento'+pt+'" id="radiogeraldinamico"\
+										autocomplete="off" value="N" checked>Não\
+									</label>\
+									<label class="btn btn-default" name="radio_ConcluidoSubProcedimento'+pt+'" id="radio_ConcluidoSubProcedimento'+pt+'S">\
+									<input type="radio" name="ConcluidoSubProcedimento'+pt+'" id="radiogeraldinamico"\
+										autocomplete="off" value="S">Sim\
+									</label>\
+								</div>\
+							</div>\
 						</div>\
 						<div class="col-md-1">\
 							<label><br></label><br>\

@@ -38,23 +38,75 @@ class Tarefa_model extends CI_Model {
     }
 
     public function get_tarefa($data) {
-        $query = $this->db->query('SELECT * FROM App_Procedimento WHERE idApp_Procedimento = ' . $data);
-        $query = $query->result_array();
-
-        /*
-        //echo $this->db->last_query();
+        $query = $this->db->query('
+			SELECT
+				PC.*,
+				CT.*,
+				CT.idTab_Categoria AS Categoria,
+				CT.Categoria AS NomeCategoria,
+				US.*,
+				US.idSis_Usuario AS Compartilhar,
+				US.Nome AS NomeCompartilhar,
+				USC.*,
+				USC.idSis_Usuario AS idSis_Usuario,
+				USC.Nome AS NomeCadastrou
+			FROM 
+				App_Procedimento AS PC
+					LEFT JOIN Tab_Categoria AS CT ON CT.idTab_Categoria = PC.Categoria
+					LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = PC.Compartilhar
+					LEFT JOIN Sis_Usuario AS USC ON USC.idSis_Usuario = PC.idSis_Usuario
+			WHERE 
+				PC.idApp_Procedimento = ' . $data . '
+		');
+		/*
+		foreach ($query->result_array() as $row) {
+			//$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
+			//$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+			//$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+			//$row->ConcluidoSubProcedimento = $this->basico->mascara_palavra_completa2($row->ConcluidoSubProcedimento, 'NS');
+			//$row->Prioridade = $this->basico->prioridade($row->Prioridade, '123');
+			//$row->SubPrioridade = $this->basico->prioridade($row->SubPrioridade, '123');
+			//$row->Statustarefa = $this->basico->statustrf($row->Statustarefa, '123');
+			//$row->Statussubtarefa = $this->basico->statustrf($row->Statussubtarefa, '123');
+			
+			if($row['Compartilhar'] == 0){
+				$row['Nome'] = '" TODOS "';
+			}
+			
+		}
+		*/
+		$query = $query->result_array();		
+		
+		/*
+        echo $this->db->last_query();
         echo '<br>';
         echo "<pre>";
+        print_r($row);
+        echo '<br>';
         print_r($query);
+        echo '<br>';
+        print_r($row['Compartilhar']);
+        echo '<br>';
+        print_r($row['Nome']);
         echo "</pre>";
         exit ();
         */
 
+		//return $row;
         return $query[0];
     }
 
     public function get_procedtarefa($data) {
-		$query = $this->db->query('SELECT * FROM App_SubProcedimento WHERE idApp_Procedimento = ' . $data);
+		$query = $this->db->query('
+			SELECT 
+				PC.*,
+				US.*
+			FROM 
+				App_SubProcedimento AS PC
+					LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = PC.idSis_Usuario
+			WHERE 
+				PC.idApp_Procedimento = ' . $data . '
+		');
         $query = $query->result_array();
 
         return $query;

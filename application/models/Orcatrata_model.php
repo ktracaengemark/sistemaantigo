@@ -61,7 +61,7 @@ class Orcatrata_model extends CI_Model {
     public function set_parcelas($data) {
 
         $query = $this->db->insert_batch('App_Parcelas', $data);
-
+		
         if ($this->db->affected_rows() === 0) {
             return FALSE;
         } else {
