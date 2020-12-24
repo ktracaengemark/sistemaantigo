@@ -1373,31 +1373,13 @@
 															<div class="col-md-3">
 																<input type="hidden" name="idSis_Usuario<?php echo $i ?>" id="idSis_Usuario<?php echo $i ?>" value="<?php echo $procedimento[$i]['idSis_Usuario'] ?>"/>
 																<label for="Procedimento<?php echo $i ?>">
-																	Procedimento <?php echo $i ?>: 
+																	Proced. <?php echo $i ?>:
 																	<?php if ($procedimento[$i]['idSis_Usuario']) { ?>
 																		<?php echo $_SESSION['Procedimento'][$i]['Nome'];?>
 																	<?php } ?>
 																</label>
 																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
-															</div>
-															<div class="col-md-2">
-																<label for="Prioridade<?php echo $i ?>">Prioridade:</label>
-																<?php if ($i == 1) { ?>
-																<?php } ?>
-																<select data-placeholder="Selecione uma opção..." class="form-control" 
-																		 id="listadinamicac<?php echo $i ?>" name="Prioridade<?php echo $i ?>">
-																	
-																	<?php
-																	foreach ($select['Prioridade'] as $key => $row) {
-																		if ($procedimento[$i]['Prioridade'] == $key) {
-																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																		} else {
-																			echo '<option value="' . $key . '">' . $row . '</option>';
-																		}
-																	}
-																	?>
-																</select>
 															</div>
 															<div class="col-md-2">
 																<label for="DataProcedimento<?php echo $i ?>">Data do Proced.:</label>
@@ -1452,15 +1434,27 @@
 																	</span>
 																<?php } ?>
 															</div>
-															<div class="col-md-2">
+															<div class="col-md-4">
 																<div id="ConcluidoProcedimento<?php echo $i ?>" <?php echo $div['ConcluidoProcedimento' . $i]; ?>>
-																	<label for="DataProcedimentoLimite<?php echo $i ?>">Data Concl</label>
-																	<div class="input-group <?php echo $datepicker; ?>">
-																		<span class="input-group-addon" disabled>
-																			<span class="glyphicon glyphicon-calendar"></span>
-																		</span>
-																		<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																			   name="DataProcedimentoLimite<?php echo $i ?>" id="DataProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimentoLimite']; ?>">
+																	<div class="col-md-6">
+																		<label for="DataProcedimentoLimite<?php echo $i ?>">Data Concl</label>
+																		<div class="input-group <?php echo $datepicker; ?>">
+																			<span class="input-group-addon" disabled>
+																				<span class="glyphicon glyphicon-calendar"></span>
+																			</span>
+																			<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																				   name="DataProcedimentoLimite<?php echo $i ?>" id="DataProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimentoLimite']; ?>">
+																		</div>
+																	</div>
+																	<div class="col-md-6">
+																		<label for="HoraProcedimento<?php echo $i ?>">Hora Concl</label>
+																		<div class="input-group <?php echo $timepicker; ?>">
+																			<span class="input-group-addon" disabled>
+																				<span class="glyphicon glyphicon-time"></span>
+																			</span>
+																			<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5" placeholder="HH:MM"
+																				   name="HoraProcedimento<?php echo $i ?>" id="HoraProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['HoraProcedimento']; ?>">
+																		</div>
 																	</div>
 																</div>
 															</div>

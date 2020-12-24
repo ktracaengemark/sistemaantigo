@@ -843,13 +843,16 @@ function carregaQuitado(value, name, i, cadastrar = 0) {
 
         if (!$("#DataProcedimentoLimite"+i).val()) {
             if (cadastrar == 1){
-				$("#DataProcedimentoLimite"+i).val($("#DataProcedimento"+i).val())
+				$("#DataProcedimentoLimite"+i).val($("#DataProcedimento"+i).val());
+				//$("#HoraProcedimento"+i).val(currentDate.format('HH:mm'));
 			}else{
 				$("#DataProcedimentoLimite"+i).val(currentDate.format('DD/MM/YYYY'));
+				//$("#HoraProcedimento"+i).val(currentDate.format('HH:mm'));
 			}  
         }
     }else{
         $("#DataProcedimentoLimite"+i).val("");
+        //$("#HoraProcedimento"+i).val("");
     }
 	
 }
@@ -1225,16 +1228,9 @@ function adicionaProcedimento() {
 				<div class="panel-heading">\
 					<div class="row">\
 						<div class="col-md-3">\
-							<label for="Procedimento'+pn+'">Procedimento:</label>\
+							<label for="Procedimento'+pn+'">Proced.:</label>\
 							<textarea class="form-control" id="Procedimento'+pn+'"\
 									  name="Procedimento'+pn+'"></textarea>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="Prioridade'+pn+'">Prioridade:</label>\
-							<select data-placeholder="Selecione uma opção..." class="form-control"\
-									 id="listadinamicac'+pn+'" name="Prioridade'+pn+'">\
-								<option value="" checked>Alta</option>\
-							</select>\
 						</div>\
 						<div class="col-md-2">\
 							<label for="DataProcedimento'+pn+'">Data do Proced.:</label>\
@@ -1242,8 +1238,18 @@ function adicionaProcedimento() {
 								<span class="input-group-addon" disabled>\
 									<span class="glyphicon glyphicon-calendar"></span>\
 								</span>\
-								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
+								<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA" readonly=""\
 									   name="DataProcedimento'+pn+'" id="DataProcedimento'+pn+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="HoraProcedimento'+pn+'">Hora Concl</label>\
+							<div class="input-group TimePicker">\
+								<span class="input-group-addon" disabled>\
+									<span class="glyphicon glyphicon-time"></span>\
+								</span>\
+								<input type="text" class="form-control Time" maxlength="5" placeholder="HH:MM" readonly=""\
+									   name="HoraProcedimento'+pn+'"  id="HoraProcedimento'+pn+'" value="'+currentDate.format('HH:mm')+'">\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
@@ -1266,7 +1272,7 @@ function adicionaProcedimento() {
 									<span class="input-group-addon" disabled>\
 										<span class="glyphicon glyphicon-calendar"></span>\
 									</span>\
-									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"\
+									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA" readonly=""\
 										   name="DataProcedimentoLimite'+pn+'"  id="DataProcedimentoLimite'+pn+'" value="">\
 								</div>\
 							</div>\

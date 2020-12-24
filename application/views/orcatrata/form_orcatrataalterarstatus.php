@@ -306,10 +306,25 @@
 																			</button>
 																		</div>
 																	</div>
+																	<?php 
+																		if($produto[$i]['ConcluidoProduto'] == "S") {
+																			$concprd[$i] = 'Sim';
+																			$readprd[$i] = 'readonly=""';
+																			//echo 'Sim';
+																		} elseif($produto[$i]['ConcluidoProduto'] == "N"){
+																			$concprd[$i] = 'Não';
+																			$readprd[$i] = '';
+																			//echo 'Não';
+																		}else{
+																			$concprd[$i] = 'Não';
+																			$readprd[$i] = '';
+																			//echo 'Não';
+																		}
+																	?>
 																	<div class="row">
 																		<div class="col-md-6 text-left">
 																			<label for="ConcluidoProduto">Entregue? </label><br>
-																			<?php if ($_SESSION['Usuario']['Bx_Prd'] == "S") { ?>
+																			<?php if ($_SESSION['Usuario']['Bx_Prd'] == "S" && $produto[$i]['ConcluidoProduto'] == "N") { ?>
 																				<div class="btn-group" data-toggle="buttons">
 																					<?php
 																					foreach ($select['ConcluidoProduto'] as $key => $row) {
@@ -337,17 +352,7 @@
 																				</div>
 																			<?php }else{ ?>
 																				<input type="hidden" name="ConcluidoProduto<?php echo $i ?>" id="ConcluidoProduto<?php echo $i ?>"  value="<?php echo $produto[$i]['ConcluidoProduto']; ?>"/>
-																				<span>
-																					<?php 
-																						if($produto[$i]['ConcluidoProduto'] == "S") {
-																								echo 'Sim';
-																						} elseif($produto[$i]['ConcluidoProduto'] == "N"){
-																							echo 'Não';
-																						}else{
-																							echo 'Não';
-																						}
-																					?>
-																				</span>
+																				<input type="text" class="form-control" readonly="" value="<?php echo $concprd[$i]; ?>"/>
 																			<?php } ?>
 																		</div>
 																	</div>
@@ -359,7 +364,7 @@
 																					<span class="input-group-addon" disabled>
 																						<span class="glyphicon glyphicon-calendar"></span>
 																					</span>
-																					<input type="text" class="form-control Date" id="DataConcluidoProduto<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																					<input type="text" class="form-control Date" <?php echo $readprd[$i]; ?> id="DataConcluidoProduto<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
 																						   name="DataConcluidoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['DataConcluidoProduto'] ?>">
 																				</div>
 																			</div>	
@@ -369,7 +374,7 @@
 																					<span class="input-group-addon">
 																						<span class="glyphicon glyphicon-time"></span>
 																					</span>
-																					<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5"  placeholder="HH:MM"
+																					<input type="text" class="form-control Time" <?php echo $readprd[$i]; ?> maxlength="5"  placeholder="HH:MM"
 																						   accept="" name="HoraConcluidoProduto<?php echo $i ?>" id="HoraConcluidoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['HoraConcluidoProduto']; ?>">
 																				</div>
 																			</div>
@@ -483,11 +488,26 @@
 																				<span class="glyphicon glyphicon-trash"></span>
 																			</button>
 																		</div>
-																	</div>	
+																	</div>
+																	<?php 
+																		if($servico[$i]['ConcluidoProduto'] == "S") {
+																			$concsrv[$i] = 'Sim';
+																			$readsrv[$i] = 'readonly=""';
+																			//echo 'Sim';
+																		} elseif($servico[$i]['ConcluidoProduto'] == "N"){
+																			$concsrv[$i] = 'Não';
+																			$readsrv[$i] = '';
+																			//echo 'Não';
+																		}else{
+																			$concsrv[$i] = 'Não';
+																			$readsrv[$i] = '';
+																			//echo 'Não';
+																		}
+																	?>
 																	<div class="row">
 																		<div class="col-md-6 text-left">
 																			<label for="ConcluidoServico">Entregue? </label><br>
-																			<?php if ($_SESSION['Usuario']['Bx_Prd'] == "S") { ?>
+																			<?php if ($_SESSION['Usuario']['Bx_Prd'] == "S" && $servico[$i]['ConcluidoProduto'] =="N") { ?>
 																				<div class="btn-group" data-toggle="buttons">
 																					<?php
 																					foreach ($select['ConcluidoServico'] as $key => $row) {
@@ -515,17 +535,7 @@
 																				</div>
 																			<?php }else{ ?>
 																				<input type="hidden" name="ConcluidoServico<?php echo $i ?>" id="ConcluidoServico<?php echo $i ?>"  value="<?php echo $servico[$i]['ConcluidoProduto']; ?>"/>
-																				<span>
-																					<?php 
-																						if($servico[$i]['ConcluidoProduto'] == "S") {
-																								echo 'Sim';
-																						} elseif($servico[$i]['ConcluidoProduto'] == "N"){
-																							echo 'Não';
-																						}else{
-																							echo 'Não';
-																						}
-																					?>
-																				</span>
+																				<input type="text" class="form-control" readonly="" value="<?php echo $concsrv[$i]; ?>"/>
 																			<?php } ?>
 																		</div>
 																	</div>
@@ -537,7 +547,7 @@
 																					<span class="input-group-addon" disabled>
 																						<span class="glyphicon glyphicon-calendar"></span>
 																					</span>
-																					<input type="text" class="form-control Date" id="DataConcluidoServico<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
+																					<input type="text" class="form-control Date" <?php echo $readsrv[$i]; ?> id="DataConcluidoServico<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA"
 																						   name="DataConcluidoServico<?php echo $i ?>" value="<?php echo $servico[$i]['DataConcluidoProduto'] ?>">
 																				</div>
 																			</div>
@@ -547,7 +557,7 @@
 																					<span class="input-group-addon">
 																						<span class="glyphicon glyphicon-time"></span>
 																					</span>
-																					<input type="text" class="form-control Time" <?php echo $readonly; ?> maxlength="5"  placeholder="HH:MM"
+																					<input type="text" class="form-control Time" <?php echo $readsrv[$i]; ?> maxlength="5"  placeholder="HH:MM"
 																						   accept="" name="HoraConcluidoServico<?php echo $i ?>" id="HoraConcluidoServico<?php echo $i ?>" value="<?php echo $servico[$i]['HoraConcluidoProduto']; ?>">
 																				</div>
 																			</div>
@@ -1244,9 +1254,24 @@
 																		   name="DataVencimento<?php echo $i ?>" readonly="" value="<?php echo $parcelasrec[$i]['DataVencimento'] ?>">																
 																</div>
 															</div>
+															<?php 
+																if($parcelasrec[$i]['Quitado'] == "S") {
+																	$concparc[$i] = 'Sim';
+																	$readparc[$i] = 'readonly=""';
+																	//echo 'Sim';
+																} elseif($parcelasrec[$i]['Quitado'] == "N"){
+																	$concparc[$i] = 'Não';
+																	$readparc[$i] = '';
+																	//echo 'Não';
+																}else{
+																	$concparc[$i] = 'Não';
+																	$readparc[$i] = '';
+																	//echo 'Não';
+																}
+															?>
 															<div class="col-md-2">
 																<label for="Quitado">Parc. Paga?</label><br>
-																<?php if ($_SESSION['Usuario']['Bx_Pag'] == "S") { ?>
+																<?php if ($_SESSION['Usuario']['Bx_Pag'] == "S" && $parcelasrec[$i]['Quitado'] == "N") { ?>
 																	<div class="btn-group" data-toggle="buttons">
 																		<?php
 																		/*
@@ -1296,14 +1321,7 @@
 																	</div>
 																<?php }else{ ?>
 																	<input type="hidden" name="Quitado<?php echo $i ?>" id="Quitado<?php echo $i ?>"  value="<?php echo $parcelasrec[$i]['Quitado']; ?>"/>
-																	<span><?php if($parcelasrec[$i]['Quitado'] == "S") {
-																					echo 'Sim';
-																				} elseif($parcelasrec[$i]['Quitado'] == "N"){
-																					echo 'Não';
-																				}else{
-																					echo 'Não';
-																				}?>
-																	</span>
+																	<input type="text" class="form-control" readonly="" value="<?php echo $concparc[$i]; ?>"/>
 																<?php } ?>
 															</div>
 															<div class="col-md-2">
@@ -1313,7 +1331,7 @@
 																		<span class="input-group-addon" disabled>
 																			<span class="glyphicon glyphicon-calendar"></span>
 																		</span>
-																		<input type="text" class="form-control Date" id="DataPago<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA" 
+																		<input type="text" class="form-control Date"  <?php echo $readparc[$i] ?> id="DataPago<?php echo $i ?>" maxlength="10" placeholder="DD/MM/AAAA" 
 																			   name="DataPago<?php echo $i ?>" value="<?php echo $parcelasrec[$i]['DataPago'] ?>">
 																		
 																	</div>
@@ -1364,31 +1382,13 @@
 															<div class="col-md-3">
 																<input type="hidden" name="idSis_Usuario<?php echo $i ?>" id="idSis_Usuario<?php echo $i ?>" value="<?php echo $procedimento[$i]['idSis_Usuario'] ?>"/>
 																<label for="Procedimento<?php echo $i ?>">
-																	Procedimento <?php echo $i ?>: 
+																	Proced. <?php echo $i ?>: 
 																	<?php if ($procedimento[$i]['idSis_Usuario']) { ?>
 																		<?php echo $_SESSION['Procedimento'][$i]['Nome'];?>
 																	<?php } ?>
 																</label>
-																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
+																<textarea class="form-control" id="Procedimento<?php echo $i ?>" readonly="" <?php echo $readonly; ?>
 																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
-															</div>
-															<div class="col-md-2">
-																<label for="Prioridade<?php echo $i ?>">Prioridade:</label>
-																<?php if ($i == 1) { ?>
-																<?php } ?>
-																<select data-placeholder="Selecione uma opção..." class="form-control" 
-																		 id="listadinamicac<?php echo $i ?>" name="Prioridade<?php echo $i ?>">
-																	
-																	<?php
-																	foreach ($select['Prioridade'] as $key => $row) {
-																		if ($procedimento[$i]['Prioridade'] == $key) {
-																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																		} else {
-																			echo '<option value="' . $key . '">' . $row . '</option>';
-																		}
-																	}
-																	?>
-																</select>
 															</div>
 															<div class="col-md-2">
 																<label for="DataProcedimento<?php echo $i ?>">Data do Proced.:</label>
@@ -1396,13 +1396,38 @@
 																	<span class="input-group-addon" disabled>
 																		<span class="glyphicon glyphicon-calendar"></span>
 																	</span>
-																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																	<input type="text" class="form-control Date" readonly="" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA" 
 																		   name="DataProcedimento<?php echo $i ?>" id="DataProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimento']; ?>">
 																</div>
 															</div>
+															<div class="col-md-2">
+																<label for="HoraProcedimento<?php echo $i ?>">Hora Concl</label>
+																<div class="input-group <?php echo $timepicker; ?>">
+																	<span class="input-group-addon" disabled>
+																		<span class="glyphicon glyphicon-time"></span>
+																	</span>
+																	<input type="text" class="form-control Time" readonly="" <?php echo $readonly; ?> maxlength="5" placeholder="HH:MM"
+																		   name="HoraProcedimento<?php echo $i ?>" id="HoraProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['HoraProcedimento']; ?>">
+																</div>
+															</div>
+															<?php 
+																if($procedimento[$i]['ConcluidoProcedimento'] == "S") {
+																	$concproc[$i] = 'Sim';
+																	$readproc[$i] = 'readonly=""';
+																	//echo 'Sim';
+																} elseif($procedimento[$i]['ConcluidoProcedimento'] == "N"){
+																	$concproc[$i] = 'Não';
+																	$readproc[$i] = 'readonly=""';
+																	//echo 'Não';
+																}else{
+																	$concproc[$i] = 'Não';
+																	$readproc[$i] = 'readonly=""';
+																	//echo 'Não';
+																}
+															?>
 															<div class="col-md-2 text-left">
 																<label for="ConcluidoProcedimento">Concluido? </label><br>
-																<?php if ($_SESSION['Usuario']['Bx_Prc'] == "S") { ?>
+																<?php if ($_SESSION['Usuario']['Bx_Prc'] == "S" && $procedimento[$i]['ConcluidoProcedimento'] == "N") { ?>
 																	<div class="btn-group" data-toggle="buttons">
 																		<?php
 																		foreach ($select['ConcluidoProcedimento'] as $key => $row) {
@@ -1430,17 +1455,7 @@
 																	</div>
 																<?php }else{ ?>
 																	<input type="hidden" name="ConcluidoProcedimento<?php echo $i ?>" id="ConcluidoProcedimento<?php echo $i ?>"  value="<?php echo $procedimento[$i]['ConcluidoProcedimento']; ?>"/>
-																	<span>
-																		<?php 
-																			if($procedimento[$i]['ConcluidoProcedimento'] == "S") {
-																					echo 'Sim';
-																			} elseif($procedimento[$i]['ConcluidoProcedimento'] == "N"){
-																				echo 'Não';
-																			}else{
-																				echo 'Não';
-																			}
-																		?>
-																	</span>
+																	<input type="text" class="form-control" readonly="" value="<?php echo $concproc[$i]; ?>"/>
 																<?php } ?>
 															</div>
 															<div class="col-md-2">
@@ -1450,17 +1465,19 @@
 																		<span class="input-group-addon" disabled>
 																			<span class="glyphicon glyphicon-calendar"></span>
 																		</span>
-																		<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																		<input type="text" class="form-control Date" <?php echo $readproc[$i]; ?> maxlength="10" placeholder="DD/MM/AAAA"
 																			   name="DataProcedimentoLimite<?php echo $i ?>" id="DataProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimentoLimite']; ?>">
 																	</div>
 																</div>
 															</div>
+															<!--
 															<div class="col-md-1">
 																<label><br></label><br>
 																<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
 																	<span class="glyphicon glyphicon-trash"></span>
 																</button>
-															</div>																
+															</div>
+															-->
 														</div>
 														<!--
 														<div class="row">

@@ -1678,6 +1678,7 @@ class Orcatrata_model extends CI_Model {
                 P.Procedimento,
 				P.DataProcedimento,
 				P.DataProcedimentoLimite,
+				P.HoraProcedimento,
 				P.ConcluidoProcedimento,
 				P.Categoria,
 				P.Prioridade,
@@ -1727,7 +1728,8 @@ class Orcatrata_model extends CI_Model {
 				P.idApp_Procedimento,
                 P.Procedimento,
 				P.DataProcedimento,
-				P.DataProcedimentoLimite,				
+				P.DataProcedimentoLimite,
+				P.HoraProcedimento,				
 				P.ConcluidoProcedimento
             FROM
 				App_Procedimento AS P

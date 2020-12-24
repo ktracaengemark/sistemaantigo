@@ -285,11 +285,11 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
             if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) || 
-					$this->input->post('Profissional' . $i) || $this->input->post('Prioridade' . $i) ||
-                    $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
+					$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
 				$data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
-                $data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
+                $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);
+                //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
 				#$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
                 $data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
@@ -1230,13 +1230,13 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
             if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
-				$this->input->post('Profissional' . $i) || $this->input->post('Prioridade' . $i) ||
-                    $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
+				$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);				
+                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
-                $data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
+                //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
 				$data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
 				$data['procedimento'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -2139,13 +2139,13 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
             if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
-				$this->input->post('Profissional' . $i) || $this->input->post('Prioridade' . $i) ||
-                    $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
+				$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);				
+                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
-                $data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
+                //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
 				$data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
 				$data['procedimento'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -3387,13 +3387,13 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
             if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
-				$this->input->post('Profissional' . $i) || $this->input->post('Prioridade' . $i) ||
-                    $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
+				$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);				
+                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
-                $data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
+                //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
 				$data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
 				$data['procedimento'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -4627,13 +4627,13 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
             if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
-				$this->input->post('Profissional' . $i) || $this->input->post('Prioridade' . $i) ||
-                    $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
+				$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);				
+                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
-                $data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
+                //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
 				$data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
 				$data['procedimento'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -5883,13 +5883,13 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
             if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
-				$this->input->post('Profissional' . $i) || $this->input->post('Prioridade' . $i) ||
-                    $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
+				$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);				
+                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
-                $data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
+                //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
 				$data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
 				$data['procedimento'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -7093,13 +7093,13 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
             if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
-				$this->input->post('Profissional' . $i) || $this->input->post('Prioridade' . $i) ||
-                    $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
+				$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);				
+                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
-                $data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
+                //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
 				$data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
 				$data['procedimento'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -8055,13 +8055,13 @@ class Orcatrata extends CI_Controller {
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
             if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
-				$this->input->post('Profissional' . $i) || $this->input->post('Prioridade' . $i) ||
-                    $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
+				$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);				
+                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
-                $data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
+                //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
 				$data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
 				$data['procedimento'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
@@ -13216,12 +13216,13 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) ||	$this->input->post('Prioridade' . $i) ||	$this->input->post('Statustarefa' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
+            if ($this->input->post('DataProcedimento' . $i) ||	$this->input->post('Statustarefa' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
                     $this->input->post('Procedimento' . $i) || $this->input->post('Categoria' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
-				$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
+                $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);
+				//$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
 				$data['procedimento'][$j]['Statustarefa'] = $this->input->post('Statustarefa' . $i);
                 $data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['Categoria'] = $this->input->post('Categoria' . $i);
@@ -13464,6 +13465,7 @@ class Orcatrata extends CI_Controller {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
 				$data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
                 $data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);

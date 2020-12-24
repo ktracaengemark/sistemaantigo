@@ -19,7 +19,7 @@
 									<div class="form-group col-md-12 text-left">
 										<div class="row">
 											<a  type="button" class="btn btn-md btn-default btn-block text-left" href="" role="button"> 
-												<span class="glyphicon glyphicon-pencil"></span> Compromissos
+												<span class="glyphicon glyphicon-pencil"></span> Relatório de Agendamentos
 											</a>											
 										</div>	
 									</div>
@@ -29,7 +29,7 @@
 									<div class="form-group col-md-12 text-left">
 										<div class="row">
 											<a  type="button" class="btn btn-md btn-default btn-block text-left" href="<?php echo base_url() ?>relatorio/tarefa" role="button"> 
-												<span class="glyphicon glyphicon-pencil"></span> Estatística
+												<span class="glyphicon glyphicon-pencil"></span> Relatório de Tarefas
 											</a>											
 										</div>	
 									</div>
