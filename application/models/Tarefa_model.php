@@ -41,6 +41,7 @@ class Tarefa_model extends CI_Model {
         $query = $this->db->query('
 			SELECT
 				PC.*,
+				PC.Compartilhar AS idCompartilhar,
 				CT.*,
 				CT.idTab_Categoria AS Categoria,
 				CT.Categoria AS NomeCategoria,

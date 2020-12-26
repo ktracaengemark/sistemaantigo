@@ -463,7 +463,9 @@ class Procedimento extends CI_Controller {
             'idApp_Procedimento',
             'idApp_Cliente',
             'DataProcedimento',
+            'HoraProcedimento',
 			'DataProcedimentoLimite',
+			'HoraProcedimentoLimite',
 			'Procedimento',
 			'ConcluidoProcedimento',
 			'Sac',
@@ -473,17 +475,26 @@ class Procedimento extends CI_Controller {
         (!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
         //Data de hoje como default
         (!$data['orcatrata']['DataProcedimento']) ? $data['orcatrata']['DataProcedimento'] = date('d/m/Y H:i:s', time()) : FALSE;
+        (!$data['orcatrata']['HoraProcedimento']) ? $data['orcatrata']['HoraProcedimento'] = date('H:i:s', time()) : FALSE;
 
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
             if ($this->input->post('DataSubProcedimentoLimite' . $i) || $this->input->post('SubProcedimento' . $i)) {
                 $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->input->post('DataSubProcedimento' . $i);
+                $data['procedtarefa'][$j]['HoraSubProcedimento'] = $this->input->post('HoraSubProcedimento' . $i);
                 $data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->input->post('DataSubProcedimentoLimite' . $i);
+                $data['procedtarefa'][$j]['HoraSubProcedimentoLimite'] = $this->input->post('HoraSubProcedimentoLimite' . $i);
 				//$data['procedtarefa'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
                 //$data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
 				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
 				$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
+				
+				(!$data['procedtarefa'][$j]['ConcluidoSubProcedimento']) ? $data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = 'N' : FALSE;
+				$data['radio'] = array(
+					'ConcluidoSubProcedimento' . $j => $this->basico->radio_checked($data['procedtarefa'][$j]['ConcluidoSubProcedimento'], 'ConcluidoSubProcedimento' . $j, 'NS'),
+				);
+				($data['procedtarefa'][$j]['ConcluidoSubProcedimento'] == 'S') ? $data['div']['ConcluidoSubProcedimento' . $j] = '' : $data['div']['ConcluidoSubProcedimento' . $j] = 'style="display: none;"';
                 $j++;
             }
 
@@ -497,8 +508,6 @@ class Procedimento extends CI_Controller {
         $this->form_validation->set_rules('Sac', 'Sac', 'required|trim');
 		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
 			$this->form_validation->set_rules('DataProcedimentoLimite', 'Concluído em:', 'required|trim|valid_date');
-		}else{
-			$data['orcatrata']['DataProcedimentoLimite'] = "00/00/0000";
 		}
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
@@ -589,6 +598,10 @@ class Procedimento extends CI_Controller {
             $this->load->view('procedimento/form_procedcli', $data);
         } else {
 
+			if($data['orcatrata']['ConcluidoProcedimento'] == "N"){
+				$data['orcatrata']['DataProcedimentoLimite'] = "00/00/0000";
+				$data['orcatrata']['HoraProcedimentoLimite'] = "00:00:00";
+			}
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_Procedimento ####
             $data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimento'], 'mysql');
@@ -659,6 +672,8 @@ class Procedimento extends CI_Controller {
             #'idApp_Cliente',
             'DataProcedimento',
 			'DataProcedimentoLimite',
+            'HoraProcedimento',
+			'HoraProcedimentoLimite',
 			'Procedimento',
 			'ConcluidoProcedimento',
 			'Sac',
@@ -674,10 +689,18 @@ class Procedimento extends CI_Controller {
                 $data['procedtarefa'][$j]['idApp_SubProcedimento'] = $this->input->post('idApp_SubProcedimento' . $i);
                 $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->input->post('DataSubProcedimento' . $i);
                 $data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->input->post('DataSubProcedimentoLimite' . $i);
+                $data['procedtarefa'][$j]['HoraSubProcedimento'] = $this->input->post('HoraSubProcedimento' . $i);
+                $data['procedtarefa'][$j]['HoraSubProcedimentoLimite'] = $this->input->post('HoraSubProcedimentoLimite' . $i);
 				//$data['procedtarefa'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
                 //$data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
 				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
 				$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
+				
+				(!$data['procedtarefa'][$j]['ConcluidoSubProcedimento']) ? $data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = 'N' : FALSE;
+				$data['radio'] = array(
+					'ConcluidoSubProcedimento' . $j => $this->basico->radio_checked($data['procedtarefa'][$j]['ConcluidoSubProcedimento'], 'ConcluidoSubProcedimento' . $j, 'NS'),
+				);
+				($data['procedtarefa'][$j]['ConcluidoSubProcedimento'] == 'S') ? $data['div']['ConcluidoSubProcedimento' . $j] = '' : $data['div']['ConcluidoSubProcedimento' . $j] = 'style="display: none;"';
                 $j++;
             }
 
@@ -706,7 +729,12 @@ class Procedimento extends CI_Controller {
 
                     for($j=1; $j <= $data['count']['PTCount']; $j++) {
                         $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimento'], 'barras');
-						$data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimentoLimite'], 'barras');
+						$data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimentoLimite'], 'barras');				
+						
+						$data['radio'] = array(
+							'ConcluidoSubProcedimento' . $j => $this->basico->radio_checked($data['procedtarefa'][$j]['ConcluidoSubProcedimento'], 'ConcluidoSubProcedimento' . $j, 'NS'),
+						);
+						($data['procedtarefa'][$j]['ConcluidoSubProcedimento'] == 'S') ? $data['div']['ConcluidoSubProcedimento' . $j] = '' : $data['div']['ConcluidoSubProcedimento' . $j] = 'style="display: none;"';
 					}
                 }
             }
@@ -851,7 +879,7 @@ class Procedimento extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
                     $data['update']['procedtarefa']['alterar'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['update']['procedtarefa']['alterar'][$j]['DataSubProcedimento'], 'mysql');
 					$data['update']['procedtarefa']['alterar'][$j]['DataSubProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedtarefa']['alterar'][$j]['DataSubProcedimentoLimite'], 'mysql');
-                }
+				}
 
                 if (count($data['update']['procedtarefa']['inserir']))
                     $data['update']['procedtarefa']['bd']['inserir'] = $this->Tarefa_model->set_procedtarefa($data['update']['procedtarefa']['inserir']);
@@ -904,6 +932,8 @@ class Procedimento extends CI_Controller {
             'idApp_Cliente',
             'DataProcedimento',
 			'DataProcedimentoLimite',
+            'HoraProcedimento',
+			'HoraProcedimentoLimite',
 			'Procedimento',
 			'ConcluidoProcedimento',
 			'Campanha',
@@ -913,6 +943,7 @@ class Procedimento extends CI_Controller {
         (!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
         //Data de hoje como default
         (!$data['orcatrata']['DataProcedimento']) ? $data['orcatrata']['DataProcedimento'] = date('d/m/Y H:i:s', time()) : FALSE;
+        (!$data['orcatrata']['HoraProcedimento']) ? $data['orcatrata']['HoraProcedimento'] = date('H:i:s', time()) : FALSE;
 
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
@@ -920,6 +951,8 @@ class Procedimento extends CI_Controller {
             if ($this->input->post('DataSubProcedimentoLimite' . $i) || $this->input->post('SubProcedimento' . $i)) {
                 $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->input->post('DataSubProcedimento' . $i);
                 $data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->input->post('DataSubProcedimentoLimite' . $i);
+                $data['procedtarefa'][$j]['HoraSubProcedimento'] = $this->input->post('HoraSubProcedimento' . $i);
+                $data['procedtarefa'][$j]['HoraSubProcedimentoLimite'] = $this->input->post('HoraSubProcedimentoLimite' . $i);
 				//$data['procedtarefa'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
                 //$data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
 				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
@@ -1096,6 +1129,8 @@ class Procedimento extends CI_Controller {
             #'idApp_Cliente',
             'DataProcedimento',
 			'DataProcedimentoLimite',
+            'HoraProcedimento',
+			'HoraProcedimentoLimite',
 			'Procedimento',
 			'ConcluidoProcedimento',
 			'Campanha',
@@ -1111,6 +1146,8 @@ class Procedimento extends CI_Controller {
                 $data['procedtarefa'][$j]['idApp_SubProcedimento'] = $this->input->post('idApp_SubProcedimento' . $i);
                 $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->input->post('DataSubProcedimento' . $i);
                 $data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->input->post('DataSubProcedimentoLimite' . $i);
+                $data['procedtarefa'][$j]['HoraSubProcedimento'] = $this->input->post('HoraSubProcedimento' . $i);
+                $data['procedtarefa'][$j]['HoraSubProcedimentoLimite'] = $this->input->post('HoraSubProcedimentoLimite' . $i);
 				//$data['procedtarefa'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
                 //$data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
 				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);

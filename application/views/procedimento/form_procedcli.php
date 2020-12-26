@@ -181,13 +181,13 @@
 							<?php echo form_open_multipart($form_open_path); ?>
 							<!--App_Procedimento-->
 							<div class="panel-group">	
-								<div class="panel panel-info">
+								<div class="panel panel-success">
 									<div class="panel-heading">
 										<div class="row text-left">
-											<div class="col-md-3">	
+												
 												<?php if($metodo == 1 || $metodo == 2) { ?>
-													<div class="row">	
-														<div class="col-md-12 " >
+														
+														<div class="col-md-3 " >
 															<label for="Sac">Sac: <?php echo $orcatrata['idApp_Procedimento']; ?></label>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="Sac" name="Sac">
 																<option value="">- Selec. Sac -</option>	
@@ -203,10 +203,10 @@
 															</select>
 															<?php echo form_error('Sac'); ?>
 														</div>
-													</div>	
+														
 												<?php } elseif($metodo == 3 || $metodo == 4) { ?>	
-													<div class="row">	
-														<div class="col-md-12 " >
+														
+														<div class="col-md-3 " >
 															<label for="Campanha">Marketing: <?php echo $orcatrata['idApp_Procedimento']; ?></label>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="Campanha" name="Campanha">
 																<option value="">- Selec. Campanha -</option>	
@@ -222,16 +222,18 @@
 															</select>
 															<?php echo form_error('Campanha'); ?>
 														</div>
-													</div>	
+														
 												<?php } ?>
-												<div class="row">
-													<div class="col-md-12">
-														<label for="Procedimento">Procedimento:</label>
-														<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?> name="Procedimento"><?php echo $orcatrata['Procedimento']; ?></textarea>
-														<?php echo form_error('Procedimento'); ?>		  
-													</div>
-												</div>
-											</div>		
+												
+												
+											
+											<div class="col-md-6">
+												<label for="Procedimento">Procedimento:</label>
+												<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?> readonly="" name="Procedimento"><?php echo $orcatrata['Procedimento']; ?></textarea>
+												<?php echo form_error('Procedimento'); ?>		  
+											</div>
+										</div>	
+										<div class="row">		
 											<div class="col-md-3">
 												<label for="DataProcedimento">Cadastrado em:</label>
 												<div class="input-group <?php echo $datepicker; ?>">
@@ -239,9 +241,19 @@
 														<span class="glyphicon glyphicon-calendar"></span>
 													</span>
 													<input type="text" class="form-control Date" <?php echo $readonly; ?> readonly=""
-															name="DataProcedimento" value="<?php echo $orcatrata['DataProcedimento']; ?>">
+															name="DataProcedimento" id="DataProcedimento" value="<?php echo $orcatrata['DataProcedimento']; ?>">
 												</div>
-											</div>	
+											</div>		
+											<div class="col-md-2">
+												<label for="HoraProcedimento">ÀS:</label>
+												<div class="input-group <?php echo $timepicker; ?>">
+													<span class="input-group-addon" disabled>
+														<span class="glyphicon glyphicon-time"></span>
+													</span>
+													<input type="text" class="form-control Time" <?php echo $readonly; ?> readonly=""
+															name="HoraProcedimento" id="HoraProcedimento" value="<?php echo $orcatrata['HoraProcedimento']; ?>">
+												</div>
+											</div>
 											<div class="col-md-2 text-left">
 												<label for="ConcluidoProcedimento">Concluído?</label><br>
 												<div class="btn-group" data-toggle="buttons">
@@ -255,6 +267,7 @@
 															echo ''
 															. '<label class="btn btn-warning active" name="ConcluidoProcedimento_' . $hideshow . '">'
 															. '<input type="radio" name="ConcluidoProcedimento" id="' . $hideshow . '" '
+															. 'onchange="carregaConcluido(this.value,this.name,0)" '
 															. 'autocomplete="off" value="' . $key . '" checked>' . $row
 															. '</label>'
 															;
@@ -262,6 +275,7 @@
 															echo ''
 															. '<label class="btn btn-default" name="ConcluidoProcedimento_' . $hideshow . '">'
 															. '<input type="radio" name="ConcluidoProcedimento" id="' . $hideshow . '" '
+															. 'onchange="carregaConcluido(this.value,this.name,0)" '
 															. 'autocomplete="off" value="' . $key . '" >' . $row
 															. '</label>'
 															;
@@ -277,13 +291,24 @@
 														<span class="input-group-addon" disabled>
 															<span class="glyphicon glyphicon-calendar"></span>
 														</span>
-														<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																name="DataProcedimentoLimite" value="<?php echo $orcatrata['DataProcedimentoLimite']; ?>">
+														<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA" readonly=""
+																name="DataProcedimentoLimite" id="DataProcedimentoLimite" value="<?php echo $orcatrata['DataProcedimentoLimite']; ?>">
 													</div>
 													<?php echo form_error('DataProcedimentoLimite'); ?>
+												</div>		
+												<div class="col-md-2">
+													<label for="HoraProcedimentoLimite">ÀS:</label>
+													<div class="input-group <?php echo $timepicker; ?>">
+														<span class="input-group-addon" disabled>
+															<span class="glyphicon glyphicon-time"></span>
+														</span>
+														<input type="text" class="form-control Time" <?php echo $readonly; ?> readonly=""
+																name="HoraProcedimentoLimite" id="HoraProcedimentoLimite" value="<?php echo $orcatrata['HoraProcedimentoLimite']; ?>">
+													</div>
 												</div>
-											</div>	
-										</div>
+											</div>
+										</div>	
+										
 									</div>
 								</div>
 							</div>
@@ -338,11 +363,13 @@
 																</select>
 															</div>
 															-->
-															<div class="col-md-3">
+															<div class="col-md-6">
 																<label for="SubProcedimento<?php echo $i ?>">Ação:</label>
-																<textarea class="form-control" id="SubProcedimento<?php echo $i ?>" <?php echo $readonly; ?>
+																<textarea class="form-control" id="SubProcedimento<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
 																		  name="SubProcedimento<?php echo $i ?>"><?php echo $procedtarefa[$i]['SubProcedimento']; ?></textarea>
 															</div>
+														</div>	
+														<div class="row">	
 															<!--
 															<div class="col-md-2">
 																<label for="Prioridade<?php echo $i ?>">Prioridade:</label>
@@ -363,7 +390,7 @@
 																</select>
 															</div>
 															-->
-															<div class="col-md-3">
+															<div class="col-md-2">
 																<label for="DataSubProcedimento<?php echo $i ?>">Cadastrado em:</label>
 																<div class="input-group <?php echo $datepicker; ?>">
 																	<span class="input-group-addon" disabled>
@@ -374,10 +401,21 @@
 																</div>
 															</div>
 															<div class="col-md-2">
+																<label for="HoraSubProcedimento<?php echo $i ?>">Às</label>
+																<div class="input-group <?php echo $timepicker; ?>">
+																	<span class="input-group-addon" disabled>
+																		<span class="glyphicon glyphicon-time"></span>
+																	</span>
+																	<input type="text" class="form-control Time" <?php echo $readonly; ?> readonly="" maxlength="5" placeholder="HH:MM"
+																		   name="HoraSubProcedimento<?php echo $i ?>" id="HoraSubProcedimento<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['HoraSubProcedimento']; ?>">
+																</div>
+															</div>
+															<div class="col-md-2">
 																<label for="ConcluidoSubProcedimento">Concluído? </label><br>
 																<div class="form-group">
 																	<div class="btn-group" data-toggle="buttons">
 																		<?php
+																		/*
 																		foreach ($select['ConcluidoSubProcedimento'] as $key => $row) {
 																			(!$procedtarefa[$i]['ConcluidoSubProcedimento']) ? $procedtarefa[$i]['ConcluidoSubProcedimento'] = 'N' : FALSE;
 
@@ -397,11 +435,58 @@
 																				;
 																			}
 																		}
+																		*/
+																		foreach ($select['ConcluidoSubProcedimento'] as $key => $row) {
+																			if (!$procedtarefa[$i]['ConcluidoSubProcedimento'])$procedtarefa[$i]['ConcluidoSubProcedimento'] = 'N';
+																			($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																			if ($procedtarefa[$i]['ConcluidoSubProcedimento'] == $key) {
+																				echo ''
+																				. '<label class="btn btn-warning active" name="ConcluidoSubProcedimento' . $i . '_' . $hideshow . '">'
+																				. '<input type="radio" name="ConcluidoSubProcedimento' . $i . '" id="' . $hideshow . '" '
+																				. 'onchange="carregaConclSubProc(this.value,this.name,'.$i.',0)" '
+																				. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																				. '</label>'
+																				;
+																			} else {
+																				echo ''
+																				. '<label class="btn btn-default" name="ConcluidoSubProcedimento' . $i . '_' . $hideshow . '">'
+																				. '<input type="radio" name="ConcluidoSubProcedimento' . $i . '" id="' . $hideshow . '" '
+																				. 'onchange="carregaConclSubProc(this.value,this.name,'.$i.',0)" '
+																				. 'autocomplete="off" value="' . $key . '" >' . $row
+																				. '</label>'
+																				;
+																			}
+																		}
 																		?>
 																	</div>
 																</div>
-															</div>															
-															<input type="hidden" name="DataSubProcedimentoLimite<?php echo $i ?>" id="DataSubProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataSubProcedimentoLimite']; ?>">
+															</div>
+															<div class="col-md-4">
+																<div id="ConcluidoSubProcedimento<?php echo $i ?>" <?php echo $div['ConcluidoSubProcedimento' . $i]; ?>>
+																	<div class="row">	
+																		<div class="col-md-6">
+																			<label for="DataSubProcedimentoLimite<?php echo $i ?>">Data Concl</label>
+																			<div class="input-group <?php echo $datepicker; ?>">
+																				<span class="input-group-addon" disabled>
+																					<span class="glyphicon glyphicon-calendar"></span>
+																				</span>
+																				<input type="text" class="form-control Date" <?php echo $readonly; ?> readonly="" maxlength="10" placeholder="DD/MM/AAAA"
+																					   name="DataSubProcedimentoLimite<?php echo $i ?>" id="DataSubProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataSubProcedimentoLimite']; ?>">
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<label for="HoraSubProcedimentoLimite<?php echo $i ?>">Hora Concl</label>
+																			<div class="input-group <?php echo $timepicker; ?>">
+																				<span class="input-group-addon" disabled>
+																					<span class="glyphicon glyphicon-time"></span>
+																				</span>
+																				<input type="text" class="form-control Time" <?php echo $readonly; ?> readonly="" maxlength="5" placeholder="HH:MM"
+																					   name="HoraSubProcedimentoLimite<?php echo $i ?>" id="HoraSubProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['HoraSubProcedimentoLimite']; ?>">
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
 															<!--
 															<div class="col-md-1">
 																<label><br></label><br>

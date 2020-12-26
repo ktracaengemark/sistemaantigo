@@ -335,17 +335,19 @@ class Tarefa extends CI_Controller {
 			//$data['tarefa']['NomeCategoria'] = $data['tarefa']['NomeCategoria'];
 			#$data['tarefa']['Prioridade'] = $this->basico->prioridade($data['tarefa']['Prioridade'], '123');
             #$data['tarefa']['DataRetorno'] = $this->basico->mascara_data($data['tarefa']['DataRetorno'], 'barras');
-        /*
+		/*
 		echo '<br>';
         echo "<pre>";
         echo '<br>';
-        print_r($data['tarefa']['idSis_Usuario']);
+        print_r($data['tarefa']);
         echo '<br>';
-        print_r($data['tarefa']['NomeCadastrou']);
-        echo '<br>';
-        print_r($data['tarefa']['Compartilhar']);
+        print_r($data['tarefa']['idCompartilhar']);
         echo '<br>';
         print_r($data['tarefa']['NomeCompartilhar']);
+        echo '<br>';
+        print_r($_SESSION['Tarefa']['idCompartilhar']);
+        echo '<br>';
+        print_r($_SESSION['Tarefa']['NomeCompartilhar']);
         echo "</pre>";
         exit ();            
 		*/
@@ -574,7 +576,7 @@ class Tarefa extends CI_Controller {
             #### App_Procedimento ####
             $data['tarefa']['ConcluidoProcedimento'] = "S";
             $data['tarefa']['DataProcedimentoLimite'] = date('Y-m-d', time());
-            $data['tarefa']['HoraProcedimentoLimite'] = date('H:m:i', time());
+            $data['tarefa']['HoraProcedimentoLimite'] = date('H:i:s', time());
 
             $data['update']['tarefa']['anterior'] = $this->Tarefa_model->get_tarefa($id);
             $data['update']['tarefa']['campos'] = array_keys($data['tarefa']);
@@ -610,7 +612,7 @@ class Tarefa extends CI_Controller {
 				for($j=0;$j<$max;$j++) {
                     $data['update']['procedtarefa']['alterar'][$j]['ConcluidoSubProcedimento'] = "S";
                     $data['update']['procedtarefa']['alterar'][$j]['DataSubProcedimentoLimite'] = date('Y-m-d', time());
-                    $data['update']['procedtarefa']['alterar'][$j]['HoraSubProcedimentoLimite'] = date('H:m:i', time());
+                    $data['update']['procedtarefa']['alterar'][$j]['HoraSubProcedimentoLimite'] = date('H:i:s', time());
                 }
                 if (count($data['update']['procedtarefa']['alterar']))
                     $data['update']['procedtarefa']['bd']['alterar'] =  $this->Tarefa_model->update_procedtarefa($data['update']['procedtarefa']['alterar']);

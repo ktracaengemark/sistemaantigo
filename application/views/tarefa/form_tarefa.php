@@ -41,7 +41,7 @@
 
 					<!--App_Procedimento-->
 					<div class="form-group">
-						<div class="panel panel-info">
+						<div class="panel panel-success">
 							<div class="panel-heading">	
 								<div class="row">
 									<div class="col-md-4">
@@ -147,10 +147,18 @@
 												</select>
 											</div>
 										<?php } elseif ($metodo == 2){ ?>
+													
 											<div class="col-md-4">
 												<input type="hidden" name="Compartilhar" id="Compartilhar" value="<?php echo $tarefa['Compartilhar']; ?>"/>
 												<label for="Compartilhar">Quem Fazer</label>
-												<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Tarefa']['NomeCompartilhar']; ?>"/>
+												<?php
+													if($_SESSION['Tarefa']['Compartilhar'] == 0){
+														$quemfazer = 'Todos';
+													}else{
+														$quemfazer = $_SESSION['Tarefa']['NomeCompartilhar'];
+													}
+												?>
+												<input type="text" class="form-control" readonly="" value="<?php echo $quemfazer; ?>"/>
 											</div>
 										<?php } ?>	
 									<?php } ?>

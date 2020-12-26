@@ -836,7 +836,24 @@ function carregaQuitado(value, name, i, cadastrar = 0) {
 
 }
 
- /*Carrega a Data e Hora da Entrega do Produto*/
+ /*Carrega a Data e Hora da Conclusão da Tarefa*/
+ function carregaConcluido(value, name, cadastrar = 0) {
+    if (value == "S") {
+		if (cadastrar == 1){
+			$("#DataProcedimentoLimite").val($("#DataProcedimento").val());
+			$("#HoraProcedimentoLimite").val($("#HoraProcedimento").val());
+		}else{
+			$("#DataProcedimentoLimite").val(currentDate.format('DD/MM/YYYY'));
+			$("#HoraProcedimentoLimite").val(currentDate.format('HH:mm'));
+		}
+    }else{
+        $("#DataProcedimentoLimite").val("");
+        $("#HoraProcedimentoLimite").val("");
+    }
+	
+}
+
+ /*Carrega a Data e Hora da Conclusão do procedimento*/
  function carregaConclProc(value, name, i, cadastrar = 0) {
 
     if (value == "S") {
@@ -853,6 +870,31 @@ function carregaQuitado(value, name, i, cadastrar = 0) {
     }else{
         $("#DataProcedimentoLimite"+i).val("");
         //$("#HoraProcedimento"+i).val("");
+    }
+	
+}
+
+ /*Carrega a Data e Hora da Entrega do Produto*/
+ function carregaConclSubProc(value, name, i, cadastrar = 0) {
+
+    if (value == "S") {
+        if (!$("#DataSubProcedimentoLimite"+i).val()) {
+            if (cadastrar == 1){
+				$("#DataSubProcedimentoLimite"+i).val($("#DataSubProcedimento"+i).val());
+			}else{
+				$("#DataSubProcedimentoLimite"+i).val(currentDate.format('DD/MM/YYYY'));
+			}  
+        }
+        if (!$("#HoraSubProcedimentoLimite"+i).val()) {
+            if (cadastrar == 1){
+				$("#HoraSubProcedimentoLimite"+i).val($("#HoraSubProcedimento"+i).val());
+			}else{
+				$("#HoraSubProcedimentoLimite"+i).val(currentDate.format('HH:mm'));
+			}  
+        }
+    }else{
+        $("#DataSubProcedimentoLimite"+i).val("");
+        $("#HoraSubProcedimentoLimite"+i).val("");
     }
 	
 }
@@ -1376,12 +1418,14 @@ function adicionaSubProcedimento() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-3">\
+						<div class="col-md-6">\
 							<label for="SubProcedimento'+pt+'">Ação:</label>\
 							<textarea class="form-control" id="SubProcedimento'+pt+'"\
 									  name="SubProcedimento'+pt+'"></textarea>\
 						</div>\
-						<div class="col-md-3">\
+					</div>\
+					<div class="row">\
+						<div class="col-md-2">\
 							<label for="DataSubProcedimento'+pt+'">Cadastrada em:</label>\
 							<div class="input-group DatePicker">\
 								<span class="input-group-addon" disabled>\
@@ -1392,21 +1436,56 @@ function adicionaSubProcedimento() {
 							</div>\
 						</div>\
 						<div class="col-md-2">\
+							<label for="HoraSubProcedimento'+pt+'">Às</label>\
+							<div class="input-group TimePicker">\
+								<span class="input-group-addon" disabled>\
+									<span class="glyphicon glyphicon-time"></span>\
+								</span>\
+								<input type="text" class="form-control Time" maxlength="5" placeholder="HH:MM" readonly=""\
+									   name="HoraSubProcedimento'+pt+'"  id="HoraSubProcedimento'+pt+'" value="'+currentDate.format('HH:mm')+'">\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
 							<label for="ConcluidoSubProcedimento">Concluido? </label><br>\
 							<div class="form-group">\
 								<div class="btn-group" data-toggle="buttons">\
 									<label class="btn btn-warning active" name="radio_ConcluidoSubProcedimento'+pt+'" id="radio_ConcluidoSubProcedimento'+pt+'N">\
-									<input type="radio" name="ConcluidoSubProcedimento'+pt+'" id="radiogeraldinamico"\
-										autocomplete="off" value="N" checked>Não\
+									<input type="radio" name="ConcluidoSubProcedimento'+pt+'" id="radiogeraldinamico_subproc"\
+										onchange="carregaConclSubProc(this.value,this.name,'+pt+',0)" autocomplete="off" value="N" checked>Não\
 									</label>\
 									<label class="btn btn-default" name="radio_ConcluidoSubProcedimento'+pt+'" id="radio_ConcluidoSubProcedimento'+pt+'S">\
-									<input type="radio" name="ConcluidoSubProcedimento'+pt+'" id="radiogeraldinamico"\
-										autocomplete="off" value="S">Sim\
+									<input type="radio" name="ConcluidoSubProcedimento'+pt+'" id="radiogeraldinamico_subproc"\
+										onchange="carregaConclSubProc(this.value,this.name,'+pt+',0)" autocomplete="off" value="S">Sim\
 									</label>\
 								</div>\
 							</div>\
 						</div>\
-						<input type="hidden" name="DataSubProcedimentoLimite'+pt+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
+						<div class="col-md-4">\
+							<div id="ConcluidoSubProcedimento'+pt+'" style="display:none">\
+								<div class="row">\
+									<div class="col-md-6">\
+										<label for="DataSubProcedimentoLimite'+pt+'">Data Concl</label>\
+										<div class="input-group DatePicker">\
+											<span class="input-group-addon" disabled>\
+												<span class="glyphicon glyphicon-calendar"></span>\
+											</span>\
+											<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA" readonly=""\
+												   name="DataSubProcedimentoLimite'+pt+'"  id="DataSubProcedimentoLimite'+pt+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
+										</div>\
+									</div>\
+									<div class="col-md-6">\
+										<label for="HoraSubProcedimentoLimite'+pt+'">Às</label>\
+										<div class="input-group TimePicker">\
+											<span class="input-group-addon" disabled>\
+												<span class="glyphicon glyphicon-time"></span>\
+											</span>\
+											<input type="text" class="form-control Time" maxlength="5" placeholder="HH:MM" readonly=""\
+												   name="HoraSubProcedimentoLimite'+pt+'"  id="HoraSubProcedimentoLimite'+pt+'" value="'+currentDate.format('HH:mm')+'">\
+										</div>\
+									</div>\
+								</div>\
+							</div>\
+						</div>\
 						<div class="col-md-1">\
 							<label><br></label><br>\
 							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\
@@ -1479,19 +1558,25 @@ function adicionaSubProcedimento() {
     });	
 	
     //permite o uso de radio buttons nesse bloco dinâmico
-    $('input:radio[id="radiogeraldinamico"]').change(function() {
+    $('input:radio[id="radiogeraldinamico_subproc"]').change(function() {
 
-        var value = $(this).val();
-        var name = $(this).attr("name");
+        var value_subproc = $(this).val();
+        var name_subproc = $(this).attr("name");
 
-        //console.log(value + ' <<>> ' + name);
+        //console.log(value_subproc + ' <<>> ' + name_subproc);
 
-        $('label[name="radio_' + name + '"]').removeClass();
-        $('label[name="radio_' + name + '"]').addClass("btn btn-default");
-        $('#radio_' + name + value).addClass("btn btn-warning active");
-        //$('#radiogeral'+ value).addClass("btn btn-warning active");
-
-    });	
+        $('label[name="radio_' + name_subproc + '"]').removeClass();
+        $('label[name="radio_' + name_subproc + '"]').addClass("btn btn-default");
+        $('#radio_' + name_subproc + value_subproc).addClass("btn btn-warning active");
+        //$('#radiogeral'+ value_subproc).addClass("btn btn-warning active");
+		
+		if(value_subproc == "S"){
+			$("#"+name_subproc).css("display","");
+		}else{
+			$("#"+name_subproc).css("display","none");
+		}
+		
+	});
 
 }
 
