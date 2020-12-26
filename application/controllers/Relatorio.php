@@ -7544,11 +7544,12 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['Campo'] = array(
-			'P.DataProcedimento' => 'Data Inicio',
-			'P.DataProcedimentoLimite' => 'Data Fim',			
+			'P.Compartilhar' => 'Quem Fazer',
+			'P.idSis_Usuario' => 'Quem Cadastrou',
+			'P.DataProcedimento' => 'Data do Inicio',
+			'P.DataProcedimentoLimite' => 'Data da Concl.',			
+			'P.ConcluidoProcedimento' => 'Concluido',
 			'P.Categoria' => 'Categoria',
-			'P.Prioridade' => 'Prioridade',
-			'P.Statustarefa' => 'Status TRF',
         );
 
         $data['select']['Ordenamento'] = array(

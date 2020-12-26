@@ -50,7 +50,7 @@
 								?>
 							</select>
 						</div>
-						
+						<!--
 						<div class="col-md-4">
 							<label for="Prioridade">Prior</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
@@ -110,10 +110,10 @@
 								}
 								?>
 							</select>
-						</div>						
-						<!--
+						</div>
+						-->
 						<div class="col-md-3">
-							<label for="ConcluidoProcedimento">St Tarefa</label>
+							<label for="ConcluidoProcedimento">Concluída?</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 									id="ConcluidoProcedimento" name="ConcluidoProcedimento">
 								<?php
@@ -127,6 +127,7 @@
 								?>
 							</select>
 						</div>
+						<!--
 						<div class="col-md-3">
 							<label for="ConcluidoSubProcedimento">St SubTarefa </label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"

@@ -363,7 +363,7 @@ class Tarefa extends CI_Controller {
                     for($j=1; $j <= $data['count']['PTCount']; $j++) {
                         $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimento'], 'barras');
 						$data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimentoLimite'], 'barras');
-						$_SESSION['Procedtarefa'][$j]['Nome'] = $data['procedtarefa'][$j]['Nome'];
+						$_SESSION['Procedtarefa'][$j]['NomeCadastrou'] = $data['procedtarefa'][$j]['NomeCadastrou'];
 					}
                 }
             }
@@ -407,7 +407,7 @@ class Tarefa extends CI_Controller {
         $data['titulo'] = 'Editar Tarefa';
         $data['form_open_path'] = 'tarefa/alterar';
         $data['readonly'] = 'readonly=""';
-        if($_SESSION['Tarefa']['idSis_Usuario'] == $_SESSION['log']['idSis_Usuario']){
+        if($_SESSION['Tarefa']['idSis_Usuario'] == $_SESSION['log']['idSis_Usuario'] || $_SESSION['Tarefa']['CelularCadastrou'] == $_SESSION['log']['CelularUsuario']){
 			$data['display'] = '';
 		}else{
 			$data['display'] = 'display:none';
@@ -545,10 +545,94 @@ class Tarefa extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'tarefa/listar/' . $data['msg']);
+				
+				unset($_SESSION['Tarefa'], $_SESSION['Procedtarefa']);
 				redirect(base_url() . 'agenda' . $data['msg']);
                 exit();
             }
         }
+
+        $this->load->view('basico/footer');
+
+    }
+
+    public function baixadatarefa($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+        ), TRUE));
+
+
+            ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+            #### App_Procedimento ####
+            $data['tarefa']['ConcluidoProcedimento'] = "S";
+            $data['tarefa']['DataProcedimentoLimite'] = date('Y-m-d', time());
+            $data['tarefa']['HoraProcedimentoLimite'] = date('H:m:i', time());
+
+            $data['update']['tarefa']['anterior'] = $this->Tarefa_model->get_tarefa($id);
+            $data['update']['tarefa']['campos'] = array_keys($data['tarefa']);
+            $data['update']['tarefa']['auditoriaitem'] = $this->basico->set_log(
+                $data['update']['tarefa']['anterior'],
+                $data['tarefa'],
+                $data['update']['tarefa']['campos'],
+                $id, TRUE);
+            $data['update']['tarefa']['bd'] = $this->Tarefa_model->update_tarefa($data['tarefa'], $id);
+			
+            #### App_SubProcedimento ####
+            $data['update']['procedtarefa']['alterar'] = $this->Tarefa_model->get_procedtarefa_posterior($id);
+			
+           
+		   
+		   if (isset($data['update']['procedtarefa']['alterar'])){
+
+				$max = count($data['update']['procedtarefa']['alterar']);
+				/*
+				echo '<br>';
+				echo "<pre>";
+				echo '<br>';
+				print_r($max);
+				echo '<br>';
+				print_r($data['update']['procedtarefa']['alterar']);
+				echo "</pre>";
+				exit (); 			
+				*/
+			                
+				
+				
+				
+				for($j=0;$j<$max;$j++) {
+                    $data['update']['procedtarefa']['alterar'][$j]['ConcluidoSubProcedimento'] = "S";
+                    $data['update']['procedtarefa']['alterar'][$j]['DataSubProcedimentoLimite'] = date('Y-m-d', time());
+                    $data['update']['procedtarefa']['alterar'][$j]['HoraSubProcedimentoLimite'] = date('H:m:i', time());
+                }
+                if (count($data['update']['procedtarefa']['alterar']))
+                    $data['update']['procedtarefa']['bd']['alterar'] =  $this->Tarefa_model->update_procedtarefa($data['update']['procedtarefa']['alterar']);
+            }
+			
+            if ($data['auditoriaitem'] && !$data['update']['tarefa']['bd']) {
+                $data['msg'] = '?m=2';
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+                $this->load->view('tarefa/form_tarefa', $data);
+            } else {
+
+                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Procedimento'], FALSE);
+                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Procedimento', 'CREATE', $data['auditoriaitem']);
+                $data['msg'] = '?m=1';
+
+                #redirect(base_url() . 'tarefa/listar/' . $data['msg']);
+				redirect(base_url() . 'agenda' . $data['msg']);
+                exit();
+            }
+      
 
         $this->load->view('basico/footer');
 

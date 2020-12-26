@@ -713,7 +713,8 @@ class Agenda_model extends CI_Model {
 				(P.Compartilhar = ' . $_SESSION['log']['idSis_Usuario'] . ' OR P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' ' . $permissao2 . '))) AND
 				P.idApp_OrcaTrata = "0" AND
 				P.idApp_Cliente = "0" AND
-				P.idApp_Fornecedor = "0" 
+				P.idApp_Fornecedor = "0" AND
+				P.ConcluidoProcedimento = "N"
 				' . $data['Compartilhar'] . '
 				' . $data['NomeProfissional'] . '
 			GROUP BY

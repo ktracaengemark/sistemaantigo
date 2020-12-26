@@ -13,10 +13,10 @@
 				<table class="table table-bordered table-condensed table-striped">								
 					<thead>
 						<tr>
-							<!--<th class="active">Excl</th>
-							<th class="active">Filt.</th>
+							<!--<th class="active">Filt.</th>-->
+							<th class="active">Baixa</th>
 							<th class="active">Edit</th>
-							<th class="active">Empresa</th>-->
+							<!--<th class="active">Excl</th>-->
 							<th class="active">Fazer</th>
 							<th class="active">Tarefa</th>
 							<th class="active">Categoria</th>
@@ -39,7 +39,7 @@
 						foreach ($report->result_array() as $row) {
 
 							#echo '<tr>';
-							echo '<tr class="clickable-row" data-href="' . base_url() . 'tarefa/alterar/' . $row['idApp_Procedimento'] . '">';
+							#echo '<tr class="clickable-row" data-href="' . base_url() . 'tarefa/alterar/' . $row['idApp_Procedimento'] . '">';
 							#echo '<tr class="clickable-row" data-href="' . base_url() . 'procedimento/alterar/' . $row['idApp_Procedimento'] . '">';
 							#echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterarprocedimento/' . $row['idSis_Empresa'] . '">';
 
@@ -50,17 +50,23 @@
 										</a>
 									</td>';
 								*/
-								/*
+								
+								
 								echo '<td class="notclickable">
-										<a class="btn btn-md btn-primary notclickable" href="' . base_url() . 'procedimento/alterar/' . $row['idApp_Procedimento'] . '">
+										<a class="btn btn-md btn-success notclickable" href="' . base_url() . 'tarefa/baixadatarefa/' . $row['idApp_Procedimento'] . '">
+											<span class="glyphicon glyphicon-ok notclickable"></span>
+										</a>
+									</td>';
+								echo '<td class="notclickable">
+										<a class="btn btn-md btn-primary notclickable" href="' . base_url() . 'tarefa/alterar/' . $row['idApp_Procedimento'] . '">
 											<span class="glyphicon glyphicon-edit notclickable"></span>
 										</a>
 									</td>';
-								*/	
+									
 								#echo '<td>' . $row['NomeEmpresa'] . '</td>';
 								/*
 								echo '<td class="notclickable">
-										<a class="btn btn-sm btn-danger notclickable" href="' . base_url() . 'tarefa/excluir/' . $row['idApp_Procedimento'] . '">
+										<a class="btn btn-md btn-danger notclickable" href="' . base_url() . 'tarefa/excluir/' . $row['idApp_Procedimento'] . '">
 											<span class="glyphicon glyphicon-trash notclickable"></span>
 										</a>
 									</td>';

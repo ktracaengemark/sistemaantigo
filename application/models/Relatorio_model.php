@@ -4732,9 +4732,9 @@ exit();*/
                 '(P.DataProcedimento >= "' . $data['DataInicio'] . '")';
         }
 		
-        $data['Campo'] = (!$data['Campo']) ? 'P.Categoria' : $data['Campo'];
+        $data['Campo'] = (!$data['Campo']) ? 'P.Compartilhar' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
-		#$filtro4 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
+		$filtro4 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
 		#$filtro5 = ($data['Prioridade']) ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;
 		#$filtro5 = ($data['ConcluidoProcedimento'] != '0') ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
         $filtro6 = ($data['Prioridade'] != '0') ? 'P.Prioridade = "' . $data['Prioridade'] . '" AND ' : FALSE;		
@@ -4750,6 +4750,9 @@ exit();*/
 		#$permissao1 = (($_SESSION['FiltroAlteraProcedimento']['Categoria'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Categoria'] != '' )) ? 'P.Categoria = "' . $_SESSION['FiltroAlteraProcedimento']['Categoria'] . '" AND ' : FALSE;
 		#$permissao2 = (($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != '' )) ? 'P.ConcluidoProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] . '" AND ' : FALSE;
 		#$permissao3 = (($_SESSION['FiltroAlteraProcedimento']['Prioridade'] != "0" ) && ($_SESSION['FiltroAlteraProcedimento']['Prioridade'] != '' )) ? 'P.Prioridade = "' . $_SESSION['FiltroAlteraProcedimento']['Prioridade'] . '" AND ' : FALSE;
+
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5) ? '(P.Compartilhar = ' . $_SESSION['log']['idSis_Usuario'] . ' OR P.Compartilhar = 0) AND ' : FALSE;
+		$permissao2 = ($_SESSION['log']['idSis_Empresa'] != 5) ? 'OR P.Compartilhar = 0' : FALSE;
 		
 		$query = $this->db->query('
             SELECT
@@ -4784,17 +4787,19 @@ exit();*/
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
 					LEFT JOIN Tab_Categoria AS CT ON CT.idTab_Categoria = P.Categoria
             WHERE
-				' . $filtro6 . '
+				' . $permissao . '
+				' . $filtro4 . '
 				' . $filtro9 . '
-				' . $filtro10 . '
-				' . $filtro11 . '
-				' . $filtro12 . '
 				(' . $consulta . ') AND
-				((U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
-				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ') OR
-				P.Compartilhar = ' . $_SESSION['log']['idSis_Usuario'] . ' OR
-				(P.Compartilhar = 51 AND P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '))
+				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
+				(P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				(P.Compartilhar = ' . $_SESSION['log']['idSis_Usuario'] . ' OR P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' ' . $permissao2 . '))) AND
+				P.idApp_OrcaTrata = "0" AND
+				P.idApp_Cliente = "0" AND
+				P.idApp_Fornecedor = "0" 
 				' . $data['Procedimento'] . '
+			GROUP BY
+				P.idApp_Procedimento
 			ORDER BY
 				P.Statustarefa,
 				P.Prioridade,
@@ -4830,7 +4835,11 @@ exit();*/
 				$row->Statustarefa = $this->basico->statustrf($row->Statustarefa, '123');
 				$row->Statussubtarefa = $this->basico->statustrf($row->Statussubtarefa, '123');
 				#$row->Rotina = $this->basico->mascara_palavra_completa($row->Rotina, 'NS');
-            }
+				if($row->Compartilhar == 0){
+					$row->Comp = 'Todos';
+				}
+			
+			}
             $query->soma = new stdClass();
             $query->soma->somatarefa = number_format($somatarefa, 2, ',', '.');
 

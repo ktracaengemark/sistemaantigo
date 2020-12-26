@@ -46,9 +46,11 @@ class Tarefa_model extends CI_Model {
 				CT.Categoria AS NomeCategoria,
 				US.*,
 				US.idSis_Usuario AS Compartilhar,
+				US.CelularUsuario AS CelularCompartilhou,
 				US.Nome AS NomeCompartilhar,
 				USC.*,
 				USC.idSis_Usuario AS idSis_Usuario,
+				USC.CelularUsuario AS CelularCadastrou,
 				USC.Nome AS NomeCadastrou
 			FROM 
 				App_Procedimento AS PC
@@ -100,10 +102,14 @@ class Tarefa_model extends CI_Model {
 		$query = $this->db->query('
 			SELECT 
 				PC.*,
-				US.*
+				USC.*,
+				USC.idSis_Usuario AS idSis_Usuario,
+				USC.CelularUsuario AS CelularCadastrou,
+				USC.Nome AS NomeCadastrou
+				
 			FROM 
 				App_SubProcedimento AS PC
-					LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = PC.idSis_Usuario
+					LEFT JOIN Sis_Usuario AS USC ON USC.idSis_Usuario = PC.idSis_Usuario
 			WHERE 
 				PC.idApp_Procedimento = ' . $data . '
 		');
@@ -112,6 +118,21 @@ class Tarefa_model extends CI_Model {
         return $query;
     }
 
+
+    public function get_procedtarefa_posterior($data) {
+		$query = $this->db->query('
+			SELECT 
+				PC.*
+			FROM 
+				App_SubProcedimento AS PC
+			WHERE 
+				PC.idApp_Procedimento = ' . $data . '
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }	
+	
     public function list_tarefa($id, $aprovado, $completo) {
 
         $query = $this->db->query('

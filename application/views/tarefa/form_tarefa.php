@@ -125,7 +125,7 @@
 											<input type="hidden" name="Categoria" id="Categoria" value="<?php echo $tarefa['Categoria']; ?>"/>
 											<input type="hidden" name="Cadastrar" id="Cadastrar" value="S">
 											<label for="Categoria">Categoria</label>
-											<input type="text" class="form-control" readonly="" value="<?php echo $tarefa['NomeCategoria']; ?>"/>
+											<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Tarefa']['NomeCategoria']; ?>"/>
 										</div>
 									<?php } ?>
 									<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
@@ -150,7 +150,7 @@
 											<div class="col-md-4">
 												<input type="hidden" name="Compartilhar" id="Compartilhar" value="<?php echo $tarefa['Compartilhar']; ?>"/>
 												<label for="Compartilhar">Quem Fazer</label>
-												<input type="text" class="form-control" readonly="" value="<?php echo $tarefa['NomeCompartilhar']; ?>"/>
+												<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Tarefa']['NomeCompartilhar']; ?>"/>
 											</div>
 										<?php } ?>	
 									<?php } ?>
@@ -344,7 +344,7 @@
 														<label for="SubProcedimento<?php echo $i ?>">
 															Ação <?php echo $i ?>: 
 															<?php if ($procedtarefa[$i]['idSis_Usuario']) { ?>
-																<?php echo $_SESSION['Procedtarefa'][$i]['Nome'];?>
+																<?php echo $_SESSION['Procedtarefa'][$i]['NomeCadastrou'];?>
 															<?php } ?>
 														</label>
 														<textarea class="form-control" id="SubProcedimento<?php echo $i ?>" <?php echo $readonly; ?>
@@ -516,7 +516,7 @@
 									<span class="glyphicon glyphicon-save"></span> Salvar
 								</button>
 							</div>
-							<?php if ($tarefa['idSis_Usuario'] == $_SESSION['log']['idSis_Usuario'] ) { ?>
+							<?php if ($_SESSION['Tarefa']['idSis_Usuario'] == $_SESSION['log']['idSis_Usuario'] || $_SESSION['Tarefa']['CelularCadastrou'] == $_SESSION['log']['CelularUsuario']) { ?>
 								<div class="col-md-6 text-right">
 									<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 										<span class="glyphicon glyphicon-trash"></span> Excluir

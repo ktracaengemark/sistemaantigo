@@ -25,11 +25,12 @@
 					
 					<tr>                       											
 						<th class="active">Nº</th>
+						<th class="active">Quem Fazer</th>
 						<th class="active">Categoria</th>
-						<th class="active">Prior</th>
-						<th class="active">StatusTRF</th>
+						<!--<th class="active">Prior</th>
+						<th class="active">StatusTRF</th>-->
 						<th class="active">Tarefa</th>
-						<!--<th class="active">Tarefa Concl.?</th>-->
+						<th class="active">Tarefa Concl.?</th>
 						<th class="active">Inicia em:</th>
 						<th class="active">Conc. em:</th>
 						<th class="active">SubPri</th>
@@ -38,6 +39,7 @@
 						<!--<th class="active">Ação Concl.?</th>-->
 						<th class="active">Inicio em:</th>
 						<th class="active">Fim em:</th>
+						<th class="active">Quem Cad</th>
 						
 					</tr>
 					
@@ -60,14 +62,14 @@
 					foreach ($report->result_array() as $row) {
 						
 						#echo '<tr>';
-						echo '<tr class="clickable-row" data-href="' . base_url() . 'tarefa/alterar2/' . $row['idApp_Procedimento'] . '">';
-							
+						echo '<tr class="clickable-row" data-href="' . base_url() . 'tarefa/alterar/' . $row['idApp_Procedimento'] . '">';
 							echo '<td>' . $row['idApp_Procedimento'] . '</td>';
+							echo '<td>' . $row['Comp'] . '</td>';
 							echo '<td>' . $row['Categoria'] . '</td>';
-							echo '<td>' . $row['Prioridade'] . '</td>';
-							echo '<td>' . $row['Statustarefa'] . '</td>';
+							#echo '<td>' . $row['Prioridade'] . '</td>';
+							#echo '<td>' . $row['Statustarefa'] . '</td>';
 							echo '<td>' . $row['Procedimento'] . '</td>';
-							#echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
+							echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
 							echo '<td>' . $row['DataProcedimento'] . '</td>';
 							echo '<td>' . $row['DataProcedimentoLimite'] . '</td>';
 							echo '<td>' . $row['SubPrioridade'] . '</td>';
@@ -76,6 +78,7 @@
 							#echo '<td>' . $row['ConcluidoSubProcedimento'] . '</td>';
 							echo '<td>' . $row['DataSubProcedimento'] . '</td>';
 							echo '<td>' . $row['DataSubProcedimentoLimite'] . '</td>';
+							echo '<td>' . $row['NomeUsuario'] . '</td>';
 							
 						echo '</tr>';
 						
