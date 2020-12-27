@@ -114,13 +114,13 @@
 																</div>
 															</div>															
 															<div class="col-md-2">
-																<label for="DataProcedimentoLimite<?php echo $i ?>">Concluir em:</label>
+																<label for="DataConcluidoProcedimento<?php echo $i ?>">Concluir em:</label>
 																<div class="input-group <?php echo $datepicker; ?>">
 																	<span class="input-group-addon" disabled>
 																		<span class="glyphicon glyphicon-calendar"></span>
 																	</span>
 																	<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																		   name="DataProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataProcedimentoLimite']; ?>">
+																		   name="DataConcluidoProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataConcluidoProcedimento']; ?>">
 																</div>
 															</div>
 															<!--

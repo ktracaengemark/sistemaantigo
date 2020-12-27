@@ -858,18 +858,18 @@ function carregaQuitado(value, name, i, cadastrar = 0) {
 
     if (value == "S") {
 
-        if (!$("#DataProcedimentoLimite"+i).val()) {
+        if (!$("#DataConcluidoProcedimento"+i).val()) {
             if (cadastrar == 1){
-				$("#DataProcedimentoLimite"+i).val($("#DataProcedimento"+i).val());
-				//$("#HoraProcedimento"+i).val(currentDate.format('HH:mm'));
+				$("#DataConcluidoProcedimento"+i).val($("#DataProcedimento"+i).val());
+				//$("#HoraConcluidoProcedimento"+i).val($("#HoraProcedimento"+i).val());
 			}else{
-				$("#DataProcedimentoLimite"+i).val(currentDate.format('DD/MM/YYYY'));
-				//$("#HoraProcedimento"+i).val(currentDate.format('HH:mm'));
+				$("#DataConcluidoProcedimento"+i).val(currentDate.format('DD/MM/YYYY'));
+				//$("#HoraConcluidoProcedimento"+i).val(currentDate.format('HH:mm'));
 			}  
         }
     }else{
-        $("#DataProcedimentoLimite"+i).val("");
-        //$("#HoraProcedimento"+i).val("");
+        $("#DataConcluidoProcedimento"+i).val("");
+        //$("#HoraConcluidoProcedimento"+i).val("");
     }
 	
 }
@@ -1309,13 +1309,13 @@ function adicionaProcedimento() {
 						</div>\
 						<div class="col-md-2">\
 							<div id="ConcluidoProcedimento'+pn+'" style="display:none">\
-								<label for="DataProcedimentoLimite'+pn+'">Data Concl</label>\
+								<label for="DataConcluidoProcedimento'+pn+'">Data Concl</label>\
 								<div class="input-group DatePicker">\
 									<span class="input-group-addon" disabled>\
 										<span class="glyphicon glyphicon-calendar"></span>\
 									</span>\
 									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA" readonly=""\
-										   name="DataProcedimentoLimite'+pn+'"  id="DataProcedimentoLimite'+pn+'" value="">\
+										   name="DataConcluidoProcedimento'+pn+'"  id="DataConcluidoProcedimento'+pn+'" value="">\
 								</div>\
 							</div>\
 						</div>\

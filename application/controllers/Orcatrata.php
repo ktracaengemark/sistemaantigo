@@ -284,10 +284,10 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) || 
+            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataConcluidoProcedimento' . $i) || 
 					$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-				$data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+				$data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->input->post('DataConcluidoProcedimento' . $i);
                 $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);
                 //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
 				#$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
@@ -899,7 +899,7 @@ class Orcatrata extends CI_Controller {
 					$data['procedimento'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
 					$data['procedimento'][$j]['Profissional'] = $_SESSION['log']['idSis_Usuario'];
                     $data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'mysql');
-                    $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimentoLimite'], 'mysql');
+                    $data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataConcluidoProcedimento'], 'mysql');
 
                 }
                 $data['procedimento']['idApp_Procedimento'] = $this->Orcatrata_model->set_procedimento($data['procedimento']);
@@ -1229,11 +1229,11 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
+            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataConcluidoProcedimento' . $i) ||
 				$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->input->post('DataConcluidoProcedimento' . $i);
                 $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
                 //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
@@ -1847,7 +1847,7 @@ class Orcatrata extends CI_Controller {
                     $data['procedimento'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     $data['procedimento'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
 					$data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'mysql');
-					$data['procedimento'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimentoLimite'], 'mysql');					
+					$data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataConcluidoProcedimento'], 'mysql');					
                 }
                 $data['procedimento']['idApp_Procedimento'] = $this->Orcatrata_model->set_procedimento($data['procedimento']);
             }
@@ -2138,11 +2138,11 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
+            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataConcluidoProcedimento' . $i) ||
 				$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->input->post('DataConcluidoProcedimento' . $i);
                 $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
                 //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
@@ -2331,7 +2331,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1; $j <= $data['count']['PMCount']; $j++) {
                         $data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'barras');
-                        $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimentoLimite'], 'barras');
+                        $data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataConcluidoProcedimento'], 'barras');
 						$_SESSION['Procedimento'][$j]['Nome'] = $data['procedimento'][$j]['Nome'];
                     
 						$data['radio'] = array(
@@ -3061,13 +3061,13 @@ class Orcatrata extends CI_Controller {
                     $data['update']['procedimento']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     $data['update']['procedimento']['inserir'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
 					$data['update']['procedimento']['inserir'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimento'], 'mysql');
-					$data['update']['procedimento']['inserir'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimentoLimite'], 'mysql');
+					$data['update']['procedimento']['inserir'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataConcluidoProcedimento'], 'mysql');
                 }
 
                 $max = count($data['update']['procedimento']['alterar']);
                 for($j=0;$j<$max;$j++) {
                     $data['update']['procedimento']['alterar'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimento'], 'mysql');
-                    $data['update']['procedimento']['alterar'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimentoLimite'], 'mysql');					
+                    $data['update']['procedimento']['alterar'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataConcluidoProcedimento'], 'mysql');					
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['procedimento']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
                 }
 
@@ -3386,11 +3386,11 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
+            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataConcluidoProcedimento' . $i) ||
 				$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->input->post('DataConcluidoProcedimento' . $i);
                 $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
                 //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
@@ -3572,7 +3572,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1; $j <= $data['count']['PMCount']; $j++) {
                         $data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'barras');
-                        $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimentoLimite'], 'barras');
+                        $data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataConcluidoProcedimento'], 'barras');
 						$_SESSION['Procedimento'][$j]['Nome'] = $data['procedimento'][$j]['Nome'];
 					
 						$data['radio'] = array(
@@ -4327,13 +4327,13 @@ class Orcatrata extends CI_Controller {
                     $data['update']['procedimento']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     $data['update']['procedimento']['inserir'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
 					$data['update']['procedimento']['inserir'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimento'], 'mysql');
-					$data['update']['procedimento']['inserir'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimentoLimite'], 'mysql');
+					$data['update']['procedimento']['inserir'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataConcluidoProcedimento'], 'mysql');
                 }
 
                 $max = count($data['update']['procedimento']['alterar']);
                 for($j=0;$j<$max;$j++) {
                     $data['update']['procedimento']['alterar'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimento'], 'mysql');
-                    $data['update']['procedimento']['alterar'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimentoLimite'], 'mysql');					
+                    $data['update']['procedimento']['alterar'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataConcluidoProcedimento'], 'mysql');					
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['procedimento']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
                 }
 
@@ -4626,11 +4626,11 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
+            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataConcluidoProcedimento' . $i) ||
 				$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->input->post('DataConcluidoProcedimento' . $i);
                 $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
                 //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
@@ -4817,7 +4817,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1; $j <= $data['count']['PMCount']; $j++) {
                         $data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'barras');
-                        $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimentoLimite'], 'barras');
+                        $data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataConcluidoProcedimento'], 'barras');
 						$_SESSION['Procedimento'][$j]['Nome'] = $data['procedimento'][$j]['Nome'];
                     
 						$data['radio'] = array(
@@ -5575,13 +5575,13 @@ class Orcatrata extends CI_Controller {
                     $data['update']['procedimento']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     $data['update']['procedimento']['inserir'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
 					$data['update']['procedimento']['inserir'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimento'], 'mysql');
-					$data['update']['procedimento']['inserir'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimentoLimite'], 'mysql');
+					$data['update']['procedimento']['inserir'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataConcluidoProcedimento'], 'mysql');
                 }
 
                 $max = count($data['update']['procedimento']['alterar']);
                 for($j=0;$j<$max;$j++) {
                     $data['update']['procedimento']['alterar'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimento'], 'mysql');
-                    $data['update']['procedimento']['alterar'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimentoLimite'], 'mysql');					
+                    $data['update']['procedimento']['alterar'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataConcluidoProcedimento'], 'mysql');					
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['procedimento']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
                 }
 
@@ -5882,11 +5882,11 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
+            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataConcluidoProcedimento' . $i) ||
 				$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->input->post('DataConcluidoProcedimento' . $i);
                 $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
                 //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
@@ -6039,7 +6039,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1; $j <= $data['count']['PMCount']; $j++) {
                         $data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'barras');
-                        $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimentoLimite'], 'barras');
+                        $data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataConcluidoProcedimento'], 'barras');
 						$_SESSION['Procedimento'][$j]['Nome'] = $data['procedimento'][$j]['Nome'];
 						$data['radio'] = array(
 							'ConcluidoProcedimento' . $j => $this->basico->radio_checked($data['procedimento'][$j]['ConcluidoProcedimento'], 'ConcluidoProcedimento' . $j, 'NS'),
@@ -6760,13 +6760,13 @@ class Orcatrata extends CI_Controller {
                     $data['update']['procedimento']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     $data['update']['procedimento']['inserir'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
 					$data['update']['procedimento']['inserir'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimento'], 'mysql');
-					$data['update']['procedimento']['inserir'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimentoLimite'], 'mysql');
+					$data['update']['procedimento']['inserir'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataConcluidoProcedimento'], 'mysql');
                 }
 
                 $max = count($data['update']['procedimento']['alterar']);
                 for($j=0;$j<$max;$j++) {
                     $data['update']['procedimento']['alterar'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimento'], 'mysql');
-                    $data['update']['procedimento']['alterar'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimentoLimite'], 'mysql');					
+                    $data['update']['procedimento']['alterar'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataConcluidoProcedimento'], 'mysql');					
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['procedimento']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
                 }
 
@@ -7092,11 +7092,11 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
+            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataConcluidoProcedimento' . $i) ||
 				$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->input->post('DataConcluidoProcedimento' . $i);
                 $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
                 //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
@@ -7735,7 +7735,7 @@ class Orcatrata extends CI_Controller {
                     $data['procedimento'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     $data['procedimento'][$j]['idApp_Fornecedor'] = $data['orcatrata']['idApp_Fornecedor'];
 					$data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'mysql');
-					$data['procedimento'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimentoLimite'], 'mysql');					
+					$data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataConcluidoProcedimento'], 'mysql');					
                 }
                 $data['procedimento']['idApp_Procedimento'] = $this->Orcatrata_model->set_procedimento($data['procedimento']);
             }
@@ -8054,11 +8054,11 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
+            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataConcluidoProcedimento' . $i) ||
 				$this->input->post('Profissional' . $i) || $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->input->post('DataConcluidoProcedimento' . $i);
                 $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);				
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
                 //$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
@@ -8222,7 +8222,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1; $j <= $data['count']['PMCount']; $j++) {
                         $data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'barras');
-                        $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimentoLimite'], 'barras');
+                        $data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataConcluidoProcedimento'], 'barras');
 						$_SESSION['Procedimento'][$j]['Nome'] = $data['procedimento'][$j]['Nome'];
                     
 						$data['radio'] = array(
@@ -8971,13 +8971,13 @@ class Orcatrata extends CI_Controller {
                     $data['update']['procedimento']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
                     $data['update']['procedimento']['inserir'][$j]['idApp_Fornecedor'] = $data['orcatrata']['idApp_Fornecedor'];
 					$data['update']['procedimento']['inserir'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimento'], 'mysql');
-					$data['update']['procedimento']['inserir'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimentoLimite'], 'mysql');
+					$data['update']['procedimento']['inserir'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataConcluidoProcedimento'], 'mysql');
                 }
 
                 $max = count($data['update']['procedimento']['alterar']);
                 for($j=0;$j<$max;$j++) {
                     $data['update']['procedimento']['alterar'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimento'], 'mysql');
-                    $data['update']['procedimento']['alterar'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimentoLimite'], 'mysql');					
+                    $data['update']['procedimento']['alterar'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataConcluidoProcedimento'], 'mysql');					
 					if ($data['orcatrata']['idApp_Fornecedor']) $data['update']['procedimento']['alterar'][$j]['idApp_Fornecedor'] = $data['orcatrata']['idApp_Fornecedor'];
                 }
 
@@ -13216,11 +13216,11 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) ||	$this->input->post('Statustarefa' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
+            if ($this->input->post('DataProcedimento' . $i) ||	$this->input->post('Statustarefa' . $i) || $this->input->post('DataConcluidoProcedimento' . $i) ||
                     $this->input->post('Procedimento' . $i) || $this->input->post('Categoria' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-                $data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+                $data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->input->post('DataConcluidoProcedimento' . $i);
                 $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);
 				//$data['procedimento'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
 				$data['procedimento'][$j]['Statustarefa'] = $this->input->post('Statustarefa' . $i);
@@ -13260,7 +13260,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1; $j <= $data['count']['PMCount']; $j++) {
                         $data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'barras');
-						$data['procedimento'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimentoLimite'], 'barras');
+						$data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataConcluidoProcedimento'], 'barras');
 						$_SESSION['Procedimento'][$j]['Nome'] = $data['procedimento'][$j]['Nome'];
                     
 						$data['radio'] = array(
@@ -13379,13 +13379,13 @@ class Orcatrata extends CI_Controller {
                     #$data['update']['procedimento']['inserir'][$j]['idSis_Empresa'] = $data['orcatrata']['idSis_Empresa'];
                     #$data['update']['procedimento']['inserir'][$j]['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
 					$data['update']['procedimento']['inserir'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimento'], 'mysql');
-					$data['update']['procedimento']['inserir'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimentoLimite'], 'mysql');
+					$data['update']['procedimento']['inserir'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataConcluidoProcedimento'], 'mysql');
                 }
 
                 $max = count($data['update']['procedimento']['alterar']);
                 for($j=0;$j<$max;$j++) {
                     $data['update']['procedimento']['alterar'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimento'], 'mysql');
-					$data['update']['procedimento']['alterar'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimentoLimite'], 'mysql');
+					$data['update']['procedimento']['alterar'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataConcluidoProcedimento'], 'mysql');
                 }
 
                 if (count($data['update']['procedimento']['inserir']))
@@ -13460,11 +13460,11 @@ class Orcatrata extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PMCount']; $i++) {
 
-            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataProcedimentoLimite' . $i) ||
+            if ($this->input->post('DataProcedimento' . $i) || $this->input->post('DataConcluidoProcedimento' . $i) ||
                     $this->input->post('Procedimento' . $i) || $this->input->post('ConcluidoProcedimento' . $i)) {
                 $data['procedimento'][$j]['idApp_Procedimento'] = $this->input->post('idApp_Procedimento' . $i);
                 $data['procedimento'][$j]['DataProcedimento'] = $this->input->post('DataProcedimento' . $i);
-				$data['procedimento'][$j]['DataProcedimentoLimite'] = $this->input->post('DataProcedimentoLimite' . $i);
+				$data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->input->post('DataConcluidoProcedimento' . $i);
                 $data['procedimento'][$j]['HoraProcedimento'] = $this->input->post('HoraProcedimento' . $i);
                 #$data['procedimento'][$j]['Profissional'] = $this->input->post('Profissional' . $i);
                 $data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
@@ -13502,7 +13502,7 @@ class Orcatrata extends CI_Controller {
 
                     for($j=1; $j <= $data['count']['PMCount']; $j++) {
                         $data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'barras');
-						$data['procedimento'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimentoLimite'], 'barras');
+						$data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataConcluidoProcedimento'], 'barras');
 						$_SESSION['Procedimento'][$j]['Nome'] = $data['procedimento'][$j]['Nome'];
                     
 						$data['radio'] = array(
@@ -13600,13 +13600,13 @@ class Orcatrata extends CI_Controller {
                     #$data['update']['procedimento']['inserir'][$j]['idSis_Empresa'] = $data['orcatrata']['idSis_Empresa'];
                     #$data['update']['procedimento']['inserir'][$j]['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
 					$data['update']['procedimento']['inserir'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimento'], 'mysql');
-					$data['update']['procedimento']['inserir'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimentoLimite'], 'mysql');
+					$data['update']['procedimento']['inserir'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataConcluidoProcedimento'], 'mysql');
                 }
 
                 $max = count($data['update']['procedimento']['alterar']);
                 for($j=0;$j<$max;$j++) {
                     $data['update']['procedimento']['alterar'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimento'], 'mysql');
-					$data['update']['procedimento']['alterar'][$j]['DataProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataProcedimentoLimite'], 'mysql');
+					$data['update']['procedimento']['alterar'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['alterar'][$j]['DataConcluidoProcedimento'], 'mysql');
                 }
 
                 if (count($data['update']['procedimento']['inserir']))
