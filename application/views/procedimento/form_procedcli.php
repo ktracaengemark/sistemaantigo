@@ -229,7 +229,7 @@
 											
 											<div class="col-md-6">
 												<label for="Procedimento">Procedimento:</label>
-												<textarea class="form-control" id="Procedimento" <?php echo $readonly; ?> readonly="" name="Procedimento"><?php echo $orcatrata['Procedimento']; ?></textarea>
+												<textarea class="form-control" id="Procedimento" <?php echo $readproc; ?> name="Procedimento"><?php echo $orcatrata['Procedimento']; ?></textarea>
 												<?php echo form_error('Procedimento'); ?>		  
 											</div>
 										</div>	
@@ -286,24 +286,24 @@
 											</div>
 											<div id="ConcluidoProcedimento" <?php echo $div['ConcluidoProcedimento']; ?>>
 												<div class="col-md-3">
-													<label for="DataProcedimentoLimite">Concluído em:</label>
+													<label for="DataConcluidoProcedimento">Concluído em:</label>
 													<div class="input-group <?php echo $datepicker; ?>">
 														<span class="input-group-addon" disabled>
 															<span class="glyphicon glyphicon-calendar"></span>
 														</span>
 														<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA" readonly=""
-																name="DataProcedimentoLimite" id="DataProcedimentoLimite" value="<?php echo $orcatrata['DataProcedimentoLimite']; ?>">
+																name="DataConcluidoProcedimento" id="DataConcluidoProcedimento" value="<?php echo $orcatrata['DataConcluidoProcedimento']; ?>">
 													</div>
-													<?php echo form_error('DataProcedimentoLimite'); ?>
+													<?php echo form_error('DataConcluidoProcedimento'); ?>
 												</div>		
 												<div class="col-md-2">
-													<label for="HoraProcedimentoLimite">ÀS:</label>
+													<label for="HoraConcluidoProcedimento">ÀS:</label>
 													<div class="input-group <?php echo $timepicker; ?>">
 														<span class="input-group-addon" disabled>
 															<span class="glyphicon glyphicon-time"></span>
 														</span>
 														<input type="text" class="form-control Time" <?php echo $readonly; ?> readonly=""
-																name="HoraProcedimentoLimite" id="HoraProcedimentoLimite" value="<?php echo $orcatrata['HoraProcedimentoLimite']; ?>">
+																name="HoraConcluidoProcedimento" id="HoraConcluidoProcedimento" value="<?php echo $orcatrata['HoraConcluidoProcedimento']; ?>">
 													</div>
 												</div>
 											</div>
@@ -465,23 +465,23 @@
 																<div id="ConcluidoSubProcedimento<?php echo $i ?>" <?php echo $div['ConcluidoSubProcedimento' . $i]; ?>>
 																	<div class="row">	
 																		<div class="col-md-6">
-																			<label for="DataSubProcedimentoLimite<?php echo $i ?>">Data Concl</label>
+																			<label for="DataConcluidoSubProcedimento<?php echo $i ?>">Data Concl</label>
 																			<div class="input-group <?php echo $datepicker; ?>">
 																				<span class="input-group-addon" disabled>
 																					<span class="glyphicon glyphicon-calendar"></span>
 																				</span>
 																				<input type="text" class="form-control Date" <?php echo $readonly; ?> readonly="" maxlength="10" placeholder="DD/MM/AAAA"
-																					   name="DataSubProcedimentoLimite<?php echo $i ?>" id="DataSubProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataSubProcedimentoLimite']; ?>">
+																					   name="DataConcluidoSubProcedimento<?php echo $i ?>" id="DataConcluidoSubProcedimento<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataConcluidoSubProcedimento']; ?>">
 																			</div>
 																		</div>
 																		<div class="col-md-6">
-																			<label for="HoraSubProcedimentoLimite<?php echo $i ?>">Hora Concl</label>
+																			<label for="HoraConcluidoSubProcedimento<?php echo $i ?>">Hora Concl</label>
 																			<div class="input-group <?php echo $timepicker; ?>">
 																				<span class="input-group-addon" disabled>
 																					<span class="glyphicon glyphicon-time"></span>
 																				</span>
 																				<input type="text" class="form-control Time" <?php echo $readonly; ?> readonly="" maxlength="5" placeholder="HH:MM"
-																					   name="HoraSubProcedimentoLimite<?php echo $i ?>" id="HoraSubProcedimentoLimite<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['HoraSubProcedimentoLimite']; ?>">
+																					   name="HoraConcluidoSubProcedimento<?php echo $i ?>" id="HoraConcluidoSubProcedimento<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['HoraConcluidoSubProcedimento']; ?>">
 																			</div>
 																		</div>
 																	</div>

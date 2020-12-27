@@ -98,7 +98,7 @@ class Procedimento_model extends CI_Model {
                 #. 'DataProcedimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
                 #. 'Procedimento like "%' . $data . '%" OR '
                 . 'DataProcedimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
-				. 'DataProcedimentoLimite = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
+				. 'DataConcluidoProcedimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
                 . 'Telefone1 like "%' . $data . '%" OR Telefone2 like "%' . $data . '%" OR Telefone3 like "%' . $data . '%") '
                 . 'ORDER BY Procedimento ASC ');
         /*
@@ -116,7 +116,7 @@ class Procedimento_model extends CI_Model {
             } else {
                 foreach ($query->result() as $row) {
                     $row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
-					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+					$row->DataConcluidoProcedimento = $this->basico->mascara_data($row->DataConcluidoProcedimento, 'barras');
                 }
 
                 return $query;
@@ -225,7 +225,7 @@ class Procedimento_model extends CI_Model {
             . 'PRC.idApp_Procedimento, '
 			. 'PRC.idApp_OrcaTrata, '
             . 'PRC.DataProcedimento, '
-			. 'PRC.DataProcedimentoLimite, '
+			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
 			. 'PRC.Campanha, '
 			. 'PRC.Sac, '
@@ -257,7 +257,7 @@ class Procedimento_model extends CI_Model {
 
                 foreach ($query->result() as $row) {
 					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
-					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+					$row->DataConcluidoProcedimento = $this->basico->mascara_data($row->DataConcluidoProcedimento, 'barras');
 					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
                 }
                 return $query;
@@ -271,7 +271,7 @@ class Procedimento_model extends CI_Model {
             . 'PRC.idApp_Procedimento, '
 			. 'PRC.idApp_OrcaTrata, '
             . 'PRC.DataProcedimento, '
-			. 'PRC.DataProcedimentoLimite, '
+			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
 			. 'PRC.Campanha, '
 			. 'PRC.Sac, '
@@ -301,7 +301,7 @@ class Procedimento_model extends CI_Model {
 
                 foreach ($query->result() as $row) {
 					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
-					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+					$row->DataConcluidoProcedimento = $this->basico->mascara_data($row->DataConcluidoProcedimento, 'barras');
 					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
                 }
 				
@@ -316,7 +316,7 @@ class Procedimento_model extends CI_Model {
             . 'PRC.idApp_Procedimento, '
 			. 'PRC.idApp_OrcaTrata, '
             . 'PRC.DataProcedimento, '
-			. 'PRC.DataProcedimentoLimite, '
+			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
 			. 'PRC.Sac, '
             . 'PRC.Procedimento '
@@ -344,7 +344,7 @@ class Procedimento_model extends CI_Model {
 
                 foreach ($query->result() as $row) {
 					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
-					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+					$row->DataConcluidoProcedimento = $this->basico->mascara_data($row->DataConcluidoProcedimento, 'barras');
 					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
                 }
                 return $query;
@@ -358,7 +358,7 @@ class Procedimento_model extends CI_Model {
             . 'PRC.idApp_Procedimento, '
 			. 'PRC.idApp_OrcaTrata, '
             . 'PRC.DataProcedimento, '
-			. 'PRC.DataProcedimentoLimite, '
+			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
 			. 'PRC.Sac, '
             . 'PRC.Procedimento '
@@ -386,7 +386,7 @@ class Procedimento_model extends CI_Model {
 
                 foreach ($query->result() as $row) {
 					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
-					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+					$row->DataConcluidoProcedimento = $this->basico->mascara_data($row->DataConcluidoProcedimento, 'barras');
 					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
                 }
                 return $query;
@@ -400,7 +400,7 @@ class Procedimento_model extends CI_Model {
             . 'PRC.idApp_Procedimento, '
 			. 'PRC.idApp_OrcaTrata, '
             . 'PRC.DataProcedimento, '
-			. 'PRC.DataProcedimentoLimite, '
+			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
             . 'PRC.Procedimento '
             . 'FROM '
@@ -427,7 +427,7 @@ class Procedimento_model extends CI_Model {
 
                 foreach ($query->result() as $row) {
 					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
-					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+					$row->DataConcluidoProcedimento = $this->basico->mascara_data($row->DataConcluidoProcedimento, 'barras');
 					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
                 }
                 return $query;
@@ -441,7 +441,7 @@ class Procedimento_model extends CI_Model {
             . 'OT.idApp_Procedimento, '
 			. 'OT.idApp_OrcaTrata, '
             . 'OT.DataProcedimento, '
-			. 'OT.DataProcedimentoLimite, '
+			. 'OT.DataConcluidoProcedimento, '
 			. 'OT.ConcluidoProcedimento, '
             . 'OT.Procedimento '
             . 'FROM '
@@ -468,7 +468,7 @@ class Procedimento_model extends CI_Model {
 
                 foreach ($query->result() as $row) {
 					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
-					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+					$row->DataConcluidoProcedimento = $this->basico->mascara_data($row->DataConcluidoProcedimento, 'barras');
 					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
                 }
                 return $query;
@@ -483,7 +483,7 @@ class Procedimento_model extends CI_Model {
 			. 'PRC.idApp_OrcaTrata, '
 			. 'PRC.Campanha, '
             . 'PRC.DataProcedimento, '
-			. 'PRC.DataProcedimentoLimite, '
+			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
             . 'PRC.Procedimento '
             . 'FROM '
@@ -510,7 +510,7 @@ class Procedimento_model extends CI_Model {
 
                 foreach ($query->result() as $row) {
 					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
-					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+					$row->DataConcluidoProcedimento = $this->basico->mascara_data($row->DataConcluidoProcedimento, 'barras');
 					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
                 }
                 return $query;
@@ -525,7 +525,7 @@ class Procedimento_model extends CI_Model {
 			. 'PRC.idApp_OrcaTrata, '
 			. 'PRC.Campanha, '
             . 'PRC.DataProcedimento, '
-			. 'PRC.DataProcedimentoLimite, '
+			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
             . 'PRC.Procedimento '
             . 'FROM '
@@ -552,7 +552,7 @@ class Procedimento_model extends CI_Model {
 
                 foreach ($query->result() as $row) {
 					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
-					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+					$row->DataConcluidoProcedimento = $this->basico->mascara_data($row->DataConcluidoProcedimento, 'barras');
 					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
                 }
                 return $query;
@@ -567,7 +567,7 @@ class Procedimento_model extends CI_Model {
 			. 'PRC.idApp_OrcaTrata, '
 			. 'PRC.Campanha, '
             . 'PRC.DataProcedimento, '
-			. 'PRC.DataProcedimentoLimite, '
+			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
             . 'PRC.Procedimento '
             . 'FROM '
@@ -594,7 +594,7 @@ class Procedimento_model extends CI_Model {
 
                 foreach ($query->result() as $row) {
 					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
-					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+					$row->DataConcluidoProcedimento = $this->basico->mascara_data($row->DataConcluidoProcedimento, 'barras');
 					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
                 }
                 return $query;
@@ -609,7 +609,7 @@ class Procedimento_model extends CI_Model {
 			. 'PRC.idApp_OrcaTrata, '
 			. 'PRC.Campanha, '
             . 'PRC.DataProcedimento, '
-			. 'PRC.DataProcedimentoLimite, '
+			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
             . 'PRC.Procedimento '
             . 'FROM '
@@ -636,7 +636,7 @@ class Procedimento_model extends CI_Model {
 
                 foreach ($query->result() as $row) {
 					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
-					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+					$row->DataConcluidoProcedimento = $this->basico->mascara_data($row->DataConcluidoProcedimento, 'barras');
 					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
                 }
                 return $query;
@@ -651,7 +651,7 @@ class Procedimento_model extends CI_Model {
 			. 'PRC.idApp_OrcaTrata, '
 			. 'PRC.Campanha, '
             . 'PRC.DataProcedimento, '
-			. 'PRC.DataProcedimentoLimite, '
+			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
             . 'PRC.Procedimento '
             . 'FROM '
@@ -678,7 +678,7 @@ class Procedimento_model extends CI_Model {
 
                 foreach ($query->result() as $row) {
 					$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
-					$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
+					$row->DataConcluidoProcedimento = $this->basico->mascara_data($row->DataConcluidoProcedimento, 'barras');
 					$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
                 }
                 return $query;

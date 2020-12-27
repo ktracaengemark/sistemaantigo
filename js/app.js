@@ -840,15 +840,15 @@ function carregaQuitado(value, name, i, cadastrar = 0) {
  function carregaConcluido(value, name, cadastrar = 0) {
     if (value == "S") {
 		if (cadastrar == 1){
-			$("#DataProcedimentoLimite").val($("#DataProcedimento").val());
-			$("#HoraProcedimentoLimite").val($("#HoraProcedimento").val());
+			$("#DataConcluidoProcedimento").val($("#DataProcedimento").val());
+			$("#HoraConcluidoProcedimento").val($("#HoraProcedimento").val());
 		}else{
-			$("#DataProcedimentoLimite").val(currentDate.format('DD/MM/YYYY'));
-			$("#HoraProcedimentoLimite").val(currentDate.format('HH:mm'));
+			$("#DataConcluidoProcedimento").val(currentDate.format('DD/MM/YYYY'));
+			$("#HoraConcluidoProcedimento").val(currentDate.format('HH:mm'));
 		}
     }else{
-        $("#DataProcedimentoLimite").val("");
-        $("#HoraProcedimentoLimite").val("");
+        $("#DataConcluidoProcedimento").val("");
+        $("#HoraConcluidoProcedimento").val("");
     }
 	
 }
@@ -878,23 +878,23 @@ function carregaQuitado(value, name, i, cadastrar = 0) {
  function carregaConclSubProc(value, name, i, cadastrar = 0) {
 
     if (value == "S") {
-        if (!$("#DataSubProcedimentoLimite"+i).val()) {
+        if (!$("#DataConcluidoSubProcedimento"+i).val()) {
             if (cadastrar == 1){
-				$("#DataSubProcedimentoLimite"+i).val($("#DataSubProcedimento"+i).val());
+				$("#DataConcluidoSubProcedimento"+i).val($("#DataSubProcedimento"+i).val());
 			}else{
-				$("#DataSubProcedimentoLimite"+i).val(currentDate.format('DD/MM/YYYY'));
+				$("#DataConcluidoSubProcedimento"+i).val(currentDate.format('DD/MM/YYYY'));
 			}  
         }
-        if (!$("#HoraSubProcedimentoLimite"+i).val()) {
+        if (!$("#HoraConcluidoSubProcedimento"+i).val()) {
             if (cadastrar == 1){
-				$("#HoraSubProcedimentoLimite"+i).val($("#HoraSubProcedimento"+i).val());
+				$("#HoraConcluidoSubProcedimento"+i).val($("#HoraSubProcedimento"+i).val());
 			}else{
-				$("#HoraSubProcedimentoLimite"+i).val(currentDate.format('HH:mm'));
+				$("#HoraConcluidoSubProcedimento"+i).val(currentDate.format('HH:mm'));
 			}  
         }
     }else{
-        $("#DataSubProcedimentoLimite"+i).val("");
-        $("#HoraSubProcedimentoLimite"+i).val("");
+        $("#DataConcluidoSubProcedimento"+i).val("");
+        $("#HoraConcluidoSubProcedimento"+i).val("");
     }
 	
 }
@@ -1464,23 +1464,23 @@ function adicionaSubProcedimento() {
 							<div id="ConcluidoSubProcedimento'+pt+'" style="display:none">\
 								<div class="row">\
 									<div class="col-md-6">\
-										<label for="DataSubProcedimentoLimite'+pt+'">Data Concl</label>\
+										<label for="DataConcluidoSubProcedimento'+pt+'">Data Concl</label>\
 										<div class="input-group DatePicker">\
 											<span class="input-group-addon" disabled>\
 												<span class="glyphicon glyphicon-calendar"></span>\
 											</span>\
 											<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA" readonly=""\
-												   name="DataSubProcedimentoLimite'+pt+'"  id="DataSubProcedimentoLimite'+pt+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
+												   name="DataConcluidoSubProcedimento'+pt+'"  id="DataConcluidoSubProcedimento'+pt+'" value="">\
 										</div>\
 									</div>\
 									<div class="col-md-6">\
-										<label for="HoraSubProcedimentoLimite'+pt+'">Às</label>\
+										<label for="HoraConcluidoSubProcedimento'+pt+'">Às</label>\
 										<div class="input-group TimePicker">\
 											<span class="input-group-addon" disabled>\
 												<span class="glyphicon glyphicon-time"></span>\
 											</span>\
 											<input type="text" class="form-control Time" maxlength="5" placeholder="HH:MM" readonly=""\
-												   name="HoraSubProcedimentoLimite'+pt+'"  id="HoraSubProcedimentoLimite'+pt+'" value="'+currentDate.format('HH:mm')+'">\
+												   name="HoraConcluidoSubProcedimento'+pt+'"  id="HoraConcluidoSubProcedimento'+pt+'" value="">\
 										</div>\
 									</div>\
 								</div>\

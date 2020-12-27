@@ -227,8 +227,8 @@
 												<?php }?>
 											</p>
 											<p>
-												<?php if ($row['DataProcedimentoLimite']) { ?>
-												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php if ($row['DataConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataConcluidoProcedimento']; ?>
 												<?php } ?>
 											</p>
 										</div>
@@ -281,8 +281,8 @@
 												<?php }?>
 											</p>
 											<p>
-												<?php if ($row['DataProcedimentoLimite']) { ?>
-												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php if ($row['DataConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataConcluidoProcedimento']; ?>
 												<?php } ?>
 											</p>
 										</div>
@@ -337,8 +337,8 @@
 												<?php }?>
 											</p>
 											<p>
-												<?php if ($row['DataProcedimentoLimite']) { ?>
-												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php if ($row['DataConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataConcluidoProcedimento']; ?>
 												<?php } ?>
 											</p>
 										</div>
@@ -391,8 +391,8 @@
 												<?php }?>
 											</p>
 											<p>
-												<?php if ($row['DataProcedimentoLimite']) { ?>
-												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php if ($row['DataConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataConcluidoProcedimento']; ?>
 												<?php } ?>
 											</p>
 										</div>
@@ -447,8 +447,8 @@
 												<?php }?>
 											</p>
 											<p>
-												<?php if ($row['DataProcedimentoLimite']) { ?>
-												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php if ($row['DataConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataConcluidoProcedimento']; ?>
 												<?php } ?>
 											</p>
 										</div>
@@ -501,8 +501,8 @@
 												<?php }?>
 											</p>
 											<p>
-												<?php if ($row['DataProcedimentoLimite']) { ?>
-												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php if ($row['DataConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataConcluidoProcedimento']; ?>
 												<?php } ?>
 											</p>
 										</div>
@@ -557,8 +557,8 @@
 												<?php }?>
 											</p>
 											<p>
-												<?php if ($row['DataProcedimentoLimite']) { ?>
-												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php if ($row['DataConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataConcluidoProcedimento']; ?>
 												<?php } ?>
 											</p>
 										</div>
@@ -611,8 +611,8 @@
 												<?php }?>
 											</p>
 											<p>
-												<?php if ($row['DataProcedimentoLimite']) { ?>
-												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php if ($row['DataConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataConcluidoProcedimento']; ?>
 												<?php } ?>
 											</p>
 										</div>
@@ -667,8 +667,8 @@
 												<?php }?>
 											</p>
 											<p>
-												<?php if ($row['DataProcedimentoLimite']) { ?>
-												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php if ($row['DataConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataConcluidoProcedimento']; ?>
 												<?php } ?>
 											</p>
 										</div>
@@ -721,8 +721,8 @@
 												<?php }?>
 											</p>
 											<p>
-												<?php if ($row['DataProcedimentoLimite']) { ?>
-												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataProcedimentoLimite']; ?>
+												<?php if ($row['DataConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Concluído em:</b> <?php echo $row['DataConcluidoProcedimento']; ?>
 												<?php } ?>
 											</p>
 										</div>
