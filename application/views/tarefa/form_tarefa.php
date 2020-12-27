@@ -151,14 +151,7 @@
 											<div class="col-md-4">
 												<input type="hidden" name="Compartilhar" id="Compartilhar" value="<?php echo $tarefa['Compartilhar']; ?>"/>
 												<label for="Compartilhar">Quem Fazer</label>
-												<?php
-													if($_SESSION['Tarefa']['Compartilhar'] == 0){
-														$quemfazer = 'Todos';
-													}else{
-														$quemfazer = $_SESSION['Tarefa']['NomeCompartilhar'];
-													}
-												?>
-												<input type="text" class="form-control" readonly="" value="<?php echo $quemfazer; ?>"/>
+												<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Tarefa']['NomeCompartilhar']; ?>"/>
 											</div>
 										<?php } ?>	
 									<?php } ?>

@@ -61,7 +61,7 @@ class Tarefa_model extends CI_Model {
 			WHERE 
 				PC.idApp_Procedimento = ' . $data . '
 		');
-		/*
+		
 		foreach ($query->result_array() as $row) {
 			//$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
 			//$row->DataProcedimentoLimite = $this->basico->mascara_data($row->DataProcedimentoLimite, 'barras');
@@ -73,12 +73,12 @@ class Tarefa_model extends CI_Model {
 			//$row->Statussubtarefa = $this->basico->statustrf($row->Statussubtarefa, '123');
 			
 			if($row['Compartilhar'] == 0){
-				$row['Nome'] = '" TODOS "';
+				$row['NomeCompartilhar'] = 'TODOS';
 			}
 			
 		}
-		*/
-		$query = $query->result_array();		
+		
+		//$query = $query->result_array();		
 		
 		/*
         echo $this->db->last_query();
@@ -86,17 +86,15 @@ class Tarefa_model extends CI_Model {
         echo "<pre>";
         print_r($row);
         echo '<br>';
-        print_r($query);
-        echo '<br>';
         print_r($row['Compartilhar']);
         echo '<br>';
-        print_r($row['Nome']);
+        print_r($row['NomeCompartilhar']);
         echo "</pre>";
         exit ();
-        */
+       */
 
-		//return $row;
-        return $query[0];
+		return $row;
+        //return $query[0];
     }
 
     public function get_procedtarefa($data) {
