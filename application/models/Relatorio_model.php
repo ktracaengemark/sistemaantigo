@@ -1730,12 +1730,17 @@ class Relatorio_model extends CI_Model {
 	
     public function list_balancoanual($data) {
 		$filtro4 = ($data['Quitado']) ? 'PR.Quitado = "' . $data['Quitado'] . '" AND ' : FALSE;
-        $permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
+        if(isset($data['Quitado']) && $data['Quitado'] == "S"){
+			$dataref = 'PR.DataPago';
+		}else{
+			$dataref = 'PR.DataVencimento';
+		}
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 		####################################################################
         #SOMATÓRIO DAS RECEITAS Pago DO ANO
         $somareceitas='';
         for ($i=1;$i<=12;$i++){
-            $somareceitas .= 'SUM(IF(PR.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+            $somareceitas .= 'SUM(IF(' . $dataref . ' BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
                 LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
         }
         $somareceitas = substr($somareceitas, 0 ,-2);
@@ -1757,18 +1762,18 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" AND
 				' . $filtro4 . '
-            	YEAR(PR.DataVencimento) = ' . $data['Ano']
+            	YEAR(' . $dataref . ') = ' . $data['Ano']
         );
 
         #$query['RecPago'] = $query['RecPago']->result_array();
         $query['RecPago'] = $query['RecPago']->result();
         $query['RecPago'][0]->Balancopago = 'Receitas';
-
+		
         ####################################################################
         #SOMATÓRIO DAS RECEITAS À Pagar DO ANO
         $somareceitaspagar='';
         for ($i=1;$i<=12;$i++){
-            $somareceitaspagar .= 'SUM(IF(PR.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+            $somareceitaspagar .= 'SUM(IF(' . $dataref . ' BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
                 LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
         }
         $somareceitaspagar = substr($somareceitaspagar, 0 ,-2);
@@ -1790,7 +1795,7 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" AND
 				' . $filtro4 . '
-            	YEAR(PR.DataVencimento) = ' . $data['Ano']
+            	YEAR(' . $dataref . ') = ' . $data['Ano']
         );
 
         #$query['RecPagar'] = $query['RecPagar']->result_array();
@@ -1801,7 +1806,7 @@ class Relatorio_model extends CI_Model {
         #SOMATÓRIO DAS RECEITAS Venc. DO ANO
         $somareceitasvenc='';
         for ($i=1;$i<=12;$i++){
-            $somareceitasvenc .= 'SUM(IF(PR.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+            $somareceitasvenc .= 'SUM(IF(' . $dataref . ' BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
                 LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
         }
         $somareceitasvenc = substr($somareceitasvenc, 0 ,-2);
@@ -1822,7 +1827,7 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_TipoRD = "2" AND
 				PR.idTab_TipoRD = "2" AND
 				' . $filtro4 . '
-            	YEAR(PR.DataVencimento) = ' . $data['Ano']
+            	YEAR(' . $dataref . ') = ' . $data['Ano']
         );
 
         #$query['RecVenc'] = $query['RecVenc']->result_array();
@@ -1834,7 +1839,7 @@ class Relatorio_model extends CI_Model {
         #SOMATÓRIO DAS DESPESAS PAGAS DO ANO
         $somadespesas='';
         for ($i=1;$i<=12;$i++){
-            $somadespesas .= 'SUM(IF(PR.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+            $somadespesas .= 'SUM(IF(' . $dataref . ' BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
                 LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
         }
         $somadespesas = substr($somadespesas, 0 ,-2);
@@ -1855,7 +1860,7 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_TipoRD = "1" AND
 				PR.idTab_TipoRD = "1" AND
 				' . $filtro4 . '				
-            	YEAR(PR.DataVencimento) = ' . $data['Ano']
+            	YEAR(' . $dataref . ') = ' . $data['Ano']
         );
 
         #$query['DesPago'] = $query['DesPago']->result_array();
@@ -1866,7 +1871,7 @@ class Relatorio_model extends CI_Model {
         #SOMATÓRIO DAS DESPESAS À PAGAR DO ANO
         $somadespesaspagar='';
         for ($i=1;$i<=12;$i++){
-            $somadespesaspagar .= 'SUM(IF(PR.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+            $somadespesaspagar .= 'SUM(IF(' . $dataref . ' BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
                 LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
         }
         $somadespesaspagar = substr($somadespesaspagar, 0 ,-2);
@@ -1887,7 +1892,7 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_TipoRD = "1" AND
 				PR.idTab_TipoRD = "1" AND
 				' . $filtro4 . '				
-            	YEAR(PR.DataVencimento) = ' . $data['Ano']
+            	YEAR(' . $dataref . ') = ' . $data['Ano']
         );
 
         #$query['DesPagar'] = $query['DesPagar']->result_array();
@@ -1898,7 +1903,7 @@ class Relatorio_model extends CI_Model {
         #SOMATÓRIO DAS DESPESAS Venc DO ANO
         $somadespesasvenc='';
         for ($i=1;$i<=12;$i++){
-            $somadespesasvenc .= 'SUM(IF(PR.DataVencimento BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
+            $somadespesasvenc .= 'SUM(IF(' . $dataref . ' BETWEEN "' . $data['Ano'] . '-' . $i . '-1" AND
                 LAST_DAY("' . $data['Ano'] . '-' . $i . '-1"), PR.ValorParcela, 0)) AS M' . $i . ', ';
         }
         $somadespesasvenc = substr($somadespesasvenc, 0 ,-2);
@@ -1919,7 +1924,7 @@ class Relatorio_model extends CI_Model {
 				OT.idTab_TipoRD = "1" AND
 				PR.idTab_TipoRD = "1" AND
 				' . $filtro4 . '
-            	YEAR(PR.DataVencimento) = ' . $data['Ano']
+            	YEAR(' . $dataref . ') = ' . $data['Ano']
         );
 
         #$query['DesVenc'] = $query['DesVenc']->result_array();
