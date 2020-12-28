@@ -146,7 +146,7 @@
 											<li>
 												<a <?php if (preg_match("/procedimento\/listarcampanha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
 													<a href="<?php echo base_url() . 'procedimento/listarcampanha/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-pencil"></span> Lista de Campanhas
+														<span class="glyphicon glyphicon-pencil"></span> Lista de Marketings
 													</a>
 												</a>
 											</li>
@@ -154,7 +154,7 @@
 											<li>
 												<a <?php if (preg_match("/procedimento\/campanha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
 													<a href="<?php echo base_url() . 'procedimento/campanha/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-plus"></span> Nova Campanha
+														<span class="glyphicon glyphicon-plus"></span> Nova Marketing
 													</a>
 												</a>
 											</li>
@@ -207,12 +207,12 @@
 												<?php } elseif($metodo == 3 || $metodo == 4) { ?>	
 														
 														<div class="col-md-3 " >
-															<label for="Campanha">Marketing: <?php echo $orcatrata['idApp_Procedimento']; ?></label>
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="Campanha" name="Campanha">
-																<option value="">- Selec. Campanha -</option>	
+															<label for="Marketing">Marketing: <?php echo $orcatrata['idApp_Procedimento']; ?></label>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="Marketing" name="Marketing">
+																<option value="">- Selec. Marketing -</option>	
 																<?php
-																foreach ($select['Campanha'] as $key => $row) {
-																	if ($orcatrata['Campanha'] == $key) {
+																foreach ($select['Marketing'] as $key => $row) {
+																	if ($orcatrata['Marketing'] == $key) {
 																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																	} else {
 																		echo '<option value="' . $key . '">' . $row . '</option>';
@@ -220,7 +220,7 @@
 																}
 																?>
 															</select>
-															<?php echo form_error('Campanha'); ?>
+															<?php echo form_error('Marketing'); ?>
 														</div>
 														
 												<?php } ?>
@@ -364,7 +364,12 @@
 															</div>
 															-->
 															<div class="col-md-6">
-																<label for="SubProcedimento<?php echo $i ?>">Ação:</label>
+																<label for="SubProcedimento<?php echo $i ?>">
+																	Ação <?php echo $i ?>: 
+																	<?php if ($procedtarefa[$i]['idSis_Usuario']) { ?>
+																		<?php echo $_SESSION['Procedtarefa'][$i]['NomeCadastrou'];?>
+																	<?php } ?>
+																</label>
 																<textarea class="form-control" id="SubProcedimento<?php echo $i ?>" <?php echo $readonly; ?> readonly=""
 																		  name="SubProcedimento<?php echo $i ?>"><?php echo $procedtarefa[$i]['SubProcedimento']; ?></textarea>
 															</div>

@@ -513,7 +513,7 @@ class Procedimento extends CI_Controller {
         $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Sac'] = array (
-            '1' => 'Informação',
+            '1' => 'Solicitação/Informação',
             '2' => 'Elogio',
 			'3' => 'Reclamação',
         );
@@ -711,7 +711,7 @@ class Procedimento extends CI_Controller {
 		
         if ($id) {
             #### App_Procedimento ####
-            $data['orcatrata'] = $this->Procedimento_model->get_orcatrata($id);
+            $_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Procedimento_model->get_orcatrata($id);
             $data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimento'], 'barras');
 			$data['orcatrata']['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataConcluidoProcedimento'], 'barras');
             #### Carrega os dados do cliente nas variáves de sessão ####
@@ -721,7 +721,7 @@ class Procedimento extends CI_Controller {
 			#$_SESSION['log']['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
 
             #### App_SubProcedimento ####
-            $data['procedtarefa'] = $this->Tarefa_model->get_procedtarefa($id);
+            $_SESSION['Procedtarefa'] = $data['procedtarefa'] = $this->Tarefa_model->get_procedtarefa($id);
             if (count($data['procedtarefa']) > 0) {
                 $data['procedtarefa'] = array_combine(range(1, count($data['procedtarefa'])), array_values($data['procedtarefa']));
                 $data['count']['PTCount'] = count($data['procedtarefa']);
@@ -730,7 +730,8 @@ class Procedimento extends CI_Controller {
 
                     for($j=1; $j <= $data['count']['PTCount']; $j++) {
                         $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimento'], 'barras');
-						$data['procedtarefa'][$j]['DataConcluidoSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataConcluidoSubProcedimento'], 'barras');				
+						$data['procedtarefa'][$j]['DataConcluidoSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataConcluidoSubProcedimento'], 'barras');
+						$_SESSION['Procedtarefa'][$j]['NomeCadastrou'] = $data['procedtarefa'][$j]['NomeCadastrou'];				
 						
 						$data['radio'] = array(
 							'ConcluidoSubProcedimento' . $j => $this->basico->radio_checked($data['procedtarefa'][$j]['ConcluidoSubProcedimento'], 'ConcluidoSubProcedimento' . $j, 'NS'),
@@ -756,7 +757,7 @@ class Procedimento extends CI_Controller {
         $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Sac'] = array (
-            '1' => 'Solicitação',
+            '1' => 'Solicitação/Informação',
             '2' => 'Elogio',
 			'3' => 'Reclamação',
         );
@@ -907,7 +908,8 @@ class Procedimento extends CI_Controller {
                 //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Procedimento'], FALSE);
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Procedimento', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
-
+				
+				unset($_SESSION['Orcatrata'], $_SESSION['Procedtarefa']);
                 redirect(base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 
 				exit();
@@ -938,7 +940,7 @@ class Procedimento extends CI_Controller {
 			'HoraConcluidoProcedimento',
 			'Procedimento',
 			'ConcluidoProcedimento',
-			'Campanha',
+			'Marketing',
 
         ), TRUE));
 
@@ -975,7 +977,7 @@ class Procedimento extends CI_Controller {
 
         #### App_Procedimento ####
         //$this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
-        $this->form_validation->set_rules('Campanha', 'Campanha', 'required|trim');
+        $this->form_validation->set_rules('Marketing', 'Marketing', 'required|trim');
 		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
 			$this->form_validation->set_rules('DataConcluidoProcedimento', 'Concluído em:', 'required|trim|valid_date');
 		}else{
@@ -985,7 +987,14 @@ class Procedimento extends CI_Controller {
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
-		$data['select']['Campanha'] = $this->Procedimento_model->select_campanha();
+		//$data['select']['Marketing'] = $this->Procedimento_model->select_campanha();
+		$data['select']['Marketing'] = array (
+            '1' => 'Atualização',
+            '2' => 'Pesquisa',
+			'3' => 'Chamada',
+            '4' => 'Promoções',
+			'5' => 'Felicitações',
+        );
 		/*
 		$data['select']['Prioridade'] = array (
             '1' => 'Alta',
@@ -1142,7 +1151,7 @@ class Procedimento extends CI_Controller {
 			'HoraConcluidoProcedimento',
 			'Procedimento',
 			'ConcluidoProcedimento',
-			'Campanha',
+			'Marketing',
 
         ), TRUE));
 
@@ -1176,7 +1185,7 @@ class Procedimento extends CI_Controller {
 		
         if ($id) {
             #### App_Procedimento ####
-            $data['orcatrata'] = $this->Procedimento_model->get_orcatrata($id);
+            $_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Procedimento_model->get_orcatrata($id);
             $data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimento'], 'barras');
 			$data['orcatrata']['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataConcluidoProcedimento'], 'barras');
             #### Carrega os dados do cliente nas variáves de sessão ####
@@ -1186,7 +1195,7 @@ class Procedimento extends CI_Controller {
 			#$_SESSION['log']['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
 
             #### App_SubProcedimento ####
-            $data['procedtarefa'] = $this->Tarefa_model->get_procedtarefa($id);
+            $_SESSION['Procedtarefa'] = $data['procedtarefa'] = $this->Tarefa_model->get_procedtarefa($id);
             if (count($data['procedtarefa']) > 0) {
                 $data['procedtarefa'] = array_combine(range(1, count($data['procedtarefa'])), array_values($data['procedtarefa']));
                 $data['count']['PTCount'] = count($data['procedtarefa']);
@@ -1196,6 +1205,7 @@ class Procedimento extends CI_Controller {
                     for($j=1; $j <= $data['count']['PTCount']; $j++) {
                         $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimento'], 'barras');
 						$data['procedtarefa'][$j]['DataConcluidoSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataConcluidoSubProcedimento'], 'barras');
+						$_SESSION['Procedtarefa'][$j]['NomeCadastrou'] = $data['procedtarefa'][$j]['NomeCadastrou'];
 
 						$data['radio'] = array(
 							'ConcluidoSubProcedimento' . $j => $this->basico->radio_checked($data['procedtarefa'][$j]['ConcluidoSubProcedimento'], 'ConcluidoSubProcedimento' . $j, 'NS'),
@@ -1210,7 +1220,7 @@ class Procedimento extends CI_Controller {
 
         #### App_Procedimento ####
         //$this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
-        $this->form_validation->set_rules('Campanha', 'Campanha', 'required|trim');
+        $this->form_validation->set_rules('Marketing', 'Marketing', 'required|trim');
 		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
 			$this->form_validation->set_rules('DataConcluidoProcedimento', 'Concluído em:', 'required|trim|valid_date');
 		}else{
@@ -1220,7 +1230,14 @@ class Procedimento extends CI_Controller {
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
-		$data['select']['Campanha'] = $this->Procedimento_model->select_campanha();
+		//$data['select']['Marketing'] = $this->Procedimento_model->select_campanha();
+		$data['select']['Marketing'] = array (
+            '1' => 'Atualização',
+            '2' => 'Pesquisa',
+			'3' => 'Chamada',
+            '4' => 'Promoções',
+			'5' => 'Felicitações',
+        );
 		/*
 		$data['select']['Prioridade'] = array (
             '1' => 'Alta',
@@ -1369,6 +1386,7 @@ class Procedimento extends CI_Controller {
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Procedimento', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
+				unset($_SESSION['Orcatrata'], $_SESSION['Procedtarefa']);
                 redirect(base_url() . 'procedimento/listarcampanha/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 
 				exit();

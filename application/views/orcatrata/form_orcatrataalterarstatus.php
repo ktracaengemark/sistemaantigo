@@ -1,7 +1,7 @@
 <?php if (isset($msg)) echo $msg; ?>
 
 		<div class="col-md-12 col-lg-12">
-			<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
+			<?php if ( !isset($evento) && $orcatrata['idApp_Cliente'] != 0) { ?>
 				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 || $_SESSION['Cliente']['idApp_Cliente'] != 150001) { ?>
 					<nav class="navbar navbar-inverse navbar-fixed" role="banner">
 					  <div class="container-fluid">
@@ -1896,8 +1896,8 @@
 									<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
 									<input type="hidden" name="Tipo_Orca"  id="Tipo_Orca" value="<?php echo $orcatrata['Tipo_Orca']; ?>">
 									<input type="hidden" name="Cadastrar" value="<?php echo $cadastrar['Cadastrar'] ?>">
-									<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
-									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $orcatrata['idApp_Cliente'] ?>">
+									<input type="hidden" name="idApp_Cliente" value="<?php echo $orcatrata['idApp_Cliente'] ?>">
+									<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
 									<input type="hidden" name="Modalidade" value="<?php echo $orcatrata['Modalidade'] ?>">
 									<input type="hidden" name="BrindeOrca" value="<?php echo $orcatrata['BrindeOrca'] ?>">-->
 									<h4 class="mb-3"><b>Pedido</b></h4>
@@ -1927,7 +1927,16 @@
 														</span>
 														<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
 															<span class="input-group-btn">	
-																<a class="btn btn-lg btn-warning" name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() . 'orcatrata/alterar/' . $orcatrata['idApp_OrcaTrata']; ?>">
+																<?php 
+																	if($orcatrata['idApp_Cliente'] == 0) { 
+																		$ref_alterar = 'alterar2';
+																	
+																	}else{
+																		$ref_alterar = 'alterar';
+																	}
+																?>
+																
+																<a class="btn btn-lg btn-warning" name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() . 'orcatrata/' . $ref_alterar . '/' . $orcatrata['idApp_OrcaTrata']; ?>">
 																	<span class="glyphicon glyphicon-edit"></span>Edit
 																</a>
 															</span>

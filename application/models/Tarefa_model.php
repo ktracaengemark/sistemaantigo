@@ -101,6 +101,7 @@ class Tarefa_model extends CI_Model {
 		$query = $this->db->query('
 			SELECT 
 				PC.*,
+				PC.idSis_Usuario,
 				USC.*,
 				USC.idSis_Usuario AS idSis_Usuario,
 				USC.CelularUsuario AS CelularCadastrou,
@@ -116,7 +117,6 @@ class Tarefa_model extends CI_Model {
 
         return $query;
     }
-
 
     public function get_procedtarefa_posterior($data) {
 		$query = $this->db->query('

@@ -1383,16 +1383,31 @@ class Relatorio_model extends CI_Model {
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PRC.DataProcedimento) = ' . $data['Ano'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'PRC.DataProcedimento' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+		
 		$filtro10 = ($data['ConcluidoProcedimento'] != '#') ? 'PRC.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
 		
 		$filtro21 = ($data['idTab_TipoRD'] == 1) ? 'AND (OT.idTab_TipoRD = "1" OR F.idApp_Fornecedor = PRC.idApp_Fornecedor)' : FALSE;
 		$filtro22 = ($data['idTab_TipoRD'] == 2) ? 'AND (OT.idTab_TipoRD = "2" OR C.idApp_Cliente = PRC.idApp_Cliente)' : FALSE;
 		
+		$data['idApp_Procedimento'] = ($data['idApp_Procedimento']) ? ' AND PRC.idApp_Procedimento = ' . $data['idApp_Procedimento'] . '  ': FALSE;		
+		$data['Sac'] = ($data['Sac']) ? ' AND PRC.Sac = ' . $data['Sac'] . '  ': FALSE;		
+		$data['Marketing'] = ($data['Marketing']) ? ' AND PRC.Marketing = ' . $data['Marketing'] . '  ': FALSE;
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND PRC.idApp_OrcaTrata = ' . $data['Orcamento'] . '  ': FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND PRC.idApp_Cliente = ' . $data['Cliente'] . '' : FALSE;
 		$data['Fornecedor'] = ($data['Fornecedor']) ? ' AND PRC.idApp_Fornecedor = ' . $data['Fornecedor'] . '' : FALSE;        
 		$filtro17 = ($data['NomeUsuario']) ? 'PRC.idSis_Usuario = "' . $data['NomeUsuario'] . '" AND ' : FALSE;		
 		
+		$data['TipoProcedimento'] = $data['TipoProcedimento'];
+		if($data['TipoProcedimento'] == 1){
+			$tipoprocedimento = '(PRC.idApp_OrcaTrata != 0 AND PRC.idApp_Cliente = 0 AND PRC.Sac = 0 AND PRC.Marketing = 0)';
+		}elseif($data['TipoProcedimento'] == 2){
+			$tipoprocedimento = '(PRC.idApp_OrcaTrata != 0 AND PRC.idApp_Fornecedor = 0 AND PRC.Sac = 0 AND PRC.Marketing = 0)';
+		}elseif($data['TipoProcedimento'] == 3){
+			$tipoprocedimento = '(PRC.idApp_OrcaTrata = 0 AND PRC.idApp_Cliente != 0 AND PRC.idApp_Fornecedor = 0 AND PRC.Sac != 0 AND PRC.Marketing = 0)';
+		}elseif($data['TipoProcedimento'] == 4){
+			$tipoprocedimento = '(PRC.idApp_OrcaTrata = 0 AND PRC.idApp_Cliente != 0 AND PRC.idApp_Fornecedor = 0 AND PRC.Sac = 0 AND PRC.Marketing != 0)';
+		}
+		  
 		$query = $this->db->query('
             SELECT
 				PRC.idSis_Empresa,
@@ -1403,6 +1418,8 @@ class Relatorio_model extends CI_Model {
 				PRC.idApp_Cliente,
 				PRC.idApp_Fornecedor,
 				PRC.idApp_OrcaTrata,
+				PRC.Sac,
+				PRC.Marketing,
 				OT.idTab_TipoRD,
 				CONCAT(IFNULL(C.NomeCliente,"")) AS NomeCliente,
 				CONCAT(IFNULL(F.NomeFornecedor,"")) AS NomeFornecedor,
@@ -1420,9 +1437,12 @@ class Relatorio_model extends CI_Model {
 				
 				' . $filtro10 . '
 				' . $filtro17 . '
-				PRC.idApp_OrcaTrata != "0" 
+				' . $tipoprocedimento . ' 
                 ' . $filtro21 . ' 
                 ' . $filtro22 . '
+                ' . $data['idApp_Procedimento'] . '
+                ' . $data['Sac'] . '
+                ' . $data['Marketing'] . '
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
                 ' . $data['Fornecedor'] . '
@@ -1434,17 +1454,6 @@ class Relatorio_model extends CI_Model {
                 ' . $data['Campo'] . ' 
 				' . $data['Ordenamento'] . '
         ');
-        /*
-
-        #AND
-        #C.idApp_Cliente = PRC.idApp_Cliente
-
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-        */
 
         if ($completo === FALSE) {
             return TRUE;
@@ -1453,9 +1462,36 @@ class Relatorio_model extends CI_Model {
             foreach ($query->result() as $row) {
 				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
 				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
-
+				
+				if($row->Sac == 1){
+					$row->Sac = 'Solicitação/Informação';
+				}elseif($row->Sac == 2){
+					$row->Sac = 'Elogio';
+				}elseif($row->Sac == 3){
+					$row->Sac = 'Reclamação';
+				}
+				
+				if($row->Marketing == 1){
+					$row->Marketing = 'Atualização';
+				}elseif($row->Marketing == 2){
+					$row->Marketing = 'Pesquisa';
+				}elseif($row->Marketing == 3){
+					$row->Marketing = 'Chamada';
+				}elseif($row->Marketing == 4){
+					$row->Marketing = 'Promoções';
+				}elseif($row->Marketing == 5){
+					$row->Marketing = 'Felicitações';
+				}
+				
             }
-
+          /*
+		  //echo $this->db->last_query();
+		  echo "<br>";
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+		  */
             return $query;
         }
 

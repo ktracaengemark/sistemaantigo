@@ -181,7 +181,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span> 
 					</button>
-					<a class="navbar-brand" href="<?php echo base_url() . 'statuspedido/alterarstatus/' . $query['idApp_OrcaTrata']; ?>">
+					<a class="navbar-brand" href="<?php echo base_url() . 'orcatrata/alterarstatus/' . $query['idApp_OrcaTrata']; ?>">
 						<span class="glyphicon glyphicon-edit"></span> Atualizar Status	"<?php echo $query['Tipo_Orca'];?>"									
 					</a>
 				</div>

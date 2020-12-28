@@ -8,7 +8,7 @@
 				<div class="panel-heading">
 					<div class="row">
 						<div class="col-md-2 text-left">
-							<label><?php echo $titulo1;?></label>
+							<label>id <?php echo $titulo1;?></label>
 							<?php if($tipoproc == 1 || $tipoproc == 2) {?>
 								<div class="input-group">
 									<span class="input-group-btn">
@@ -16,15 +16,48 @@
 											<span class="glyphicon glyphicon-search"></span> 
 										</button>
 									</span>
-									<input type="text" placeholder="Pesquisar Pedido" class="form-control Numero btn-sm" name="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
+									<input type="text" placeholder="Pesquisar <?php echo $titulo1;?>" class="form-control Numero btn-sm" name="Orcamento" id="Orcamento" value="<?php echo set_value('Orcamento', $query['Orcamento']); ?>">
 								</div>
-							<?php }elseif($tipoproc == 3 || $tipoproc == 4){ ?>	
+								<input type="hidden" name="idApp_Procedimento" id="idApp_Procedimento" value="">
+							<?php }elseif($tipoproc == 3 || $tipoproc == 4){ ?>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
+											<span class="glyphicon glyphicon-search"></span> 
+										</button>
+									</span>
+									<input type="text" placeholder="Pesquisar <?php echo $titulo1;?>" class="form-control Numero btn-sm" name="idApp_Procedimento" id="idApp_Procedimento" value="<?php echo set_value('idApp_Procedimento', $query['idApp_Procedimento']); ?>">
+								</div>
 								<input type="hidden" name="Orcamento" id="Orcamento" value="">
 							<?php } ?>
-						</div>	
+						</div>
+						<?php if($tipoproc == 3 || $tipoproc == 4){ ?>
+							<div class="col-md-3 text-left">
+								<label for="<?php echo $titulo1;?>">Tipo de <?php echo $titulo1;?>:</label>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
+											<span class="glyphicon glyphicon-search"></span> 
+										</button>
+									</span>
+									<select data-placeholder="Selecione uma opção..." class="form-control" 
+											id="<?php echo $titulo1;?>" name="<?php echo $titulo1;?>">
+										<?php
+										foreach ($select[$titulo1] as $key => $row) {
+											if ($query[$titulo1] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+							</div>
+						<?php } ?>
 						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<div class="col-md-2 text-left">	
-								<label>.</label>
+								<label for="Ordenamento"><?php echo $nome; ?>:</label>
 								<div class="input-group">
 									<span class="input-group-btn">
 										<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">

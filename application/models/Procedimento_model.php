@@ -227,7 +227,7 @@ class Procedimento_model extends CI_Model {
             . 'PRC.DataProcedimento, '
 			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
-			. 'PRC.Campanha, '
+			. 'PRC.Marketing, '
 			. 'PRC.Sac, '
             . 'PRC.Procedimento '
             . 'FROM '
@@ -235,7 +235,7 @@ class Procedimento_model extends CI_Model {
             . 'WHERE '
             . 'PRC.idApp_Cliente = ' . $id . ' AND '
             . 'PRC.idApp_OrcaTrata = 0 AND '
-            . 'PRC.Campanha = 0 AND '
+            . 'PRC.Marketing = 0 AND '
             . '(PRC.Sac = 0 OR PRC.Sac = 1) AND '
             . 'PRC.ConcluidoProcedimento = "' . $concluido . '" '
             . 'ORDER BY '
@@ -273,7 +273,7 @@ class Procedimento_model extends CI_Model {
             . 'PRC.DataProcedimento, '
 			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
-			. 'PRC.Campanha, '
+			. 'PRC.Marketing, '
 			. 'PRC.Sac, '
             . 'PRC.Procedimento '
             . 'FROM '
@@ -281,7 +281,7 @@ class Procedimento_model extends CI_Model {
             . 'WHERE '
             . 'PRC.idApp_Cliente = ' . $id . ' AND '
             . 'PRC.idApp_OrcaTrata = 0 AND '
-            . 'PRC.Campanha = 0 AND '
+            . 'PRC.Marketing = 0 AND '
             . '(PRC.Sac = 0 OR PRC.Sac = 1) AND '
             . 'PRC.ConcluidoProcedimento = "' . $concluido . '" '
             . 'ORDER BY '
@@ -408,7 +408,7 @@ class Procedimento_model extends CI_Model {
             . 'WHERE '
             . 'PRC.idApp_Cliente = ' . $id . ' AND '
             . 'PRC.idApp_OrcaTrata != 0 AND '
-            . 'PRC.Campanha = 0 AND '
+            . 'PRC.Marketing = 0 AND '
             . 'PRC.ConcluidoProcedimento = "' . $concluido . '" '
             . 'ORDER BY '
 			. 'PRC.ConcluidoProcedimento ASC, '
@@ -481,7 +481,7 @@ class Procedimento_model extends CI_Model {
         $query = $this->db->query('SELECT '
             . 'PRC.idApp_Procedimento, '
 			. 'PRC.idApp_OrcaTrata, '
-			. 'PRC.Campanha, '
+			. 'PRC.Marketing, '
             . 'PRC.DataProcedimento, '
 			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
@@ -491,7 +491,7 @@ class Procedimento_model extends CI_Model {
             . 'WHERE '
             . 'PRC.idApp_Cliente = ' . $id . ' AND '
             . 'PRC.idApp_OrcaTrata = 0 AND '
-            . 'PRC.Campanha = 1 AND '
+            . 'PRC.Marketing = 1 AND '
             . 'PRC.ConcluidoProcedimento = "' . $concluido . '" '
             . 'ORDER BY '
 			. 'PRC.ConcluidoProcedimento ASC, '
@@ -523,7 +523,7 @@ class Procedimento_model extends CI_Model {
         $query = $this->db->query('SELECT '
             . 'PRC.idApp_Procedimento, '
 			. 'PRC.idApp_OrcaTrata, '
-			. 'PRC.Campanha, '
+			. 'PRC.Marketing, '
             . 'PRC.DataProcedimento, '
 			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
@@ -533,7 +533,7 @@ class Procedimento_model extends CI_Model {
             . 'WHERE '
             . 'PRC.idApp_Cliente = ' . $id . ' AND '
             . 'PRC.idApp_OrcaTrata = 0 AND '
-            . 'PRC.Campanha = 2 AND '
+            . 'PRC.Marketing = 2 AND '
             . 'PRC.ConcluidoProcedimento = "' . $concluido . '" '
             . 'ORDER BY '
 			. 'PRC.ConcluidoProcedimento ASC, '
@@ -565,7 +565,7 @@ class Procedimento_model extends CI_Model {
         $query = $this->db->query('SELECT '
             . 'PRC.idApp_Procedimento, '
 			. 'PRC.idApp_OrcaTrata, '
-			. 'PRC.Campanha, '
+			. 'PRC.Marketing, '
             . 'PRC.DataProcedimento, '
 			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
@@ -575,7 +575,7 @@ class Procedimento_model extends CI_Model {
             . 'WHERE '
             . 'PRC.idApp_Cliente = ' . $id . ' AND '
             . 'PRC.idApp_OrcaTrata = 0 AND '
-            . 'PRC.Campanha = 3 AND '
+            . 'PRC.Marketing = 3 AND '
             . 'PRC.ConcluidoProcedimento = "' . $concluido . '" '
             . 'ORDER BY '
 			. 'PRC.ConcluidoProcedimento ASC, '
@@ -607,7 +607,7 @@ class Procedimento_model extends CI_Model {
         $query = $this->db->query('SELECT '
             . 'PRC.idApp_Procedimento, '
 			. 'PRC.idApp_OrcaTrata, '
-			. 'PRC.Campanha, '
+			. 'PRC.Marketing, '
             . 'PRC.DataProcedimento, '
 			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
@@ -617,7 +617,7 @@ class Procedimento_model extends CI_Model {
             . 'WHERE '
             . 'PRC.idApp_Cliente = ' . $id . ' AND '
             . 'PRC.idApp_OrcaTrata = 0 AND '
-            . 'PRC.Campanha = 4 AND '
+            . 'PRC.Marketing = 4 AND '
             . 'PRC.ConcluidoProcedimento = "' . $concluido . '" '
             . 'ORDER BY '
 			. 'PRC.ConcluidoProcedimento ASC, '
@@ -649,7 +649,7 @@ class Procedimento_model extends CI_Model {
         $query = $this->db->query('SELECT '
             . 'PRC.idApp_Procedimento, '
 			. 'PRC.idApp_OrcaTrata, '
-			. 'PRC.Campanha, '
+			. 'PRC.Marketing, '
             . 'PRC.DataProcedimento, '
 			. 'PRC.DataConcluidoProcedimento, '
 			. 'PRC.ConcluidoProcedimento, '
@@ -659,7 +659,7 @@ class Procedimento_model extends CI_Model {
             . 'WHERE '
             . 'PRC.idApp_Cliente = ' . $id . ' AND '
             . 'PRC.idApp_OrcaTrata = 0 AND '
-            . 'PRC.Campanha = 5 AND '
+            . 'PRC.Marketing = 5 AND '
             . 'PRC.ConcluidoProcedimento = "' . $concluido . '" '
             . 'ORDER BY '
 			. 'PRC.ConcluidoProcedimento ASC, '
@@ -716,17 +716,17 @@ class Procedimento_model extends CI_Model {
 	public function select_campanha() {
 		$query = $this->db->query('
             SELECT
-                C.idTab_Campanha,
-                C.Campanha
+                C.idTab_Marketing,
+                C.Marketing
             FROM
-                Tab_Campanha AS C
+                Tab_Marketing AS C
             ORDER BY
-                C.idTab_Campanha ASC
+                C.idTab_Marketing ASC
         ');
 
         $array = array();	
         foreach ($query->result() as $row) {
-            $array[$row->idTab_Campanha] = $row->Campanha;
+            $array[$row->idTab_Marketing] = $row->Marketing;
         }
 
         return $array;

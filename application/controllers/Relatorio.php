@@ -4579,6 +4579,9 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
+            'idApp_Procedimento',
+            'Sac',
+            'Marketing',
             'Orcamento',
 			'idTab_TipoRD',
             'Cliente',
@@ -4590,13 +4593,8 @@ class Relatorio extends CI_Controller {
 			'ConcluidoProcedimento',
             'Ordenamento',
             'Campo',
-        ), TRUE));
-
-		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
-		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
-		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
-		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
-		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];		
+            'TipoProcedimento',
+        ), TRUE));			
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
@@ -4605,6 +4603,22 @@ class Relatorio extends CI_Controller {
 			'#' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
+        );
+
+		$data['select']['Sac'] = array (
+            '0' => 'Todos',
+            '1' => 'Solicitação/Informação',
+            '2' => 'Elogio',
+			'3' => 'Reclamação',
+        );
+		
+		$data['select']['Marketing'] = array (
+            '0' => 'Todos',
+            '1' => 'Atualização',
+            '2' => 'Pesquisa',
+			'3' => 'Chamada',
+            '4' => 'Promoções',
+			'5' => 'Felicitações',
         );
 
 		$data['select']['Campo'] = array(
@@ -4621,8 +4635,11 @@ class Relatorio extends CI_Controller {
         $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
-		
-        $data['titulo1'] = 'Procedimentos';
+
+		$data['query']['TipoProcedimento'] = 1;
+		$data['query']['Sac'] = '';
+		$data['query']['Marketing'] = '';
+        $data['titulo1'] = 'Despesa';
 		$data['tipoproc'] = 1;
 		$data['metodo'] = 1;
 		$data['form_open_path'] = 'relatorio/procedimentos1';
@@ -4636,11 +4653,24 @@ class Relatorio extends CI_Controller {
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
 		$data['edit'] = 'Orcatrata/baixadaparcelarec/';
-		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';		
+		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
+
+		$_SESSION['FiltroAlteraParcela']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
+		$_SESSION['FiltroAlteraParcela']['Sac'] = $data['query']['Sac'];
+		$_SESSION['FiltroAlteraParcela']['Marketing'] = $data['query']['Marketing'];
+		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
+		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
+		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];
+		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
             
+			$data['bd']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
+			$data['bd']['Sac'] = $data['query']['Sac'];
+			$data['bd']['Marketing'] = $data['query']['Marketing'];
 			$data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
@@ -4652,6 +4682,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
+			$data['bd']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
 
             $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
 
@@ -4682,6 +4713,9 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
+            'idApp_Procedimento',
+            'Sac',
+            'Marketing',
             'Orcamento',
 			'idTab_TipoRD',
             'Cliente',
@@ -4693,13 +4727,8 @@ class Relatorio extends CI_Controller {
 			'ConcluidoProcedimento',
             'Ordenamento',
             'Campo',
-        ), TRUE));
-
-		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
-		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
-		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
-		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
-		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];		
+            'TipoProcedimento',
+        ), TRUE));		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
@@ -4708,6 +4737,22 @@ class Relatorio extends CI_Controller {
 			'#' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
+        );
+
+		$data['select']['Sac'] = array (
+            '0' => 'Todos',
+            '1' => 'Solicitação/Informação',
+            '2' => 'Elogio',
+			'3' => 'Reclamação',
+        );
+		
+		$data['select']['Marketing'] = array (
+            '0' => 'Todos',
+            '1' => 'Atualização',
+            '2' => 'Pesquisa',
+			'3' => 'Chamada',
+            '4' => 'Promoções',
+			'5' => 'Felicitações',
         );
 
 		$data['select']['Campo'] = array(
@@ -4724,8 +4769,11 @@ class Relatorio extends CI_Controller {
         $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
-		
-        $data['titulo1'] = 'Procedimentos';
+
+		$data['query']['TipoProcedimento'] = 2;
+		$data['query']['Sac'] = '';
+		$data['query']['Marketing'] = '';
+        $data['titulo1'] = 'Receita';
 		$data['tipoproc'] = 2;
 		$data['metodo'] = 2;
 		$data['form_open_path'] = 'relatorio/procedimentos2';
@@ -4739,11 +4787,24 @@ class Relatorio extends CI_Controller {
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
 		$data['edit'] = 'Orcatrata/baixadaparcelarec/';
-		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';		
+		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
+
+		$_SESSION['FiltroAlteraParcela']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
+		$_SESSION['FiltroAlteraParcela']['Sac'] = $data['query']['Sac'];
+		$_SESSION['FiltroAlteraParcela']['Marketing'] = $data['query']['Marketing'];
+		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
+		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
+		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];
+		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
             
+			$data['bd']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
+			$data['bd']['Sac'] = $data['query']['Sac'];
+			$data['bd']['Marketing'] = $data['query']['Marketing'];
 			$data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
@@ -4755,6 +4816,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
+			$data['bd']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
 
             $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
 
@@ -4785,6 +4847,9 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
+            'idApp_Procedimento',
+            'Sac',
+            'Marketing',
             'Orcamento',
 			'idTab_TipoRD',
             'Cliente',
@@ -4796,13 +4861,8 @@ class Relatorio extends CI_Controller {
 			'ConcluidoProcedimento',
             'Ordenamento',
             'Campo',
-        ), TRUE));
-
-		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
-		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
-		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
-		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
-		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];		
+            'TipoProcedimento',
+        ), TRUE));		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
@@ -4811,6 +4871,22 @@ class Relatorio extends CI_Controller {
 			'#' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
+        );
+
+		$data['select']['Sac'] = array (
+            '0' => 'Todos',
+            '1' => 'Solicitação/Informação',
+            '2' => 'Elogio',
+			'3' => 'Reclamação',
+        );
+		
+		$data['select']['Marketing'] = array (
+            '0' => 'Todos',
+            '1' => 'Atualização',
+            '2' => 'Pesquisa',
+			'3' => 'Chamada',
+            '4' => 'Promoções',
+			'5' => 'Felicitações',
         );
 
 		$data['select']['Campo'] = array(
@@ -4828,11 +4904,13 @@ class Relatorio extends CI_Controller {
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
 		
-        $data['titulo1'] = 'SAC';
+		$data['query']['TipoProcedimento'] = 3;
+		$data['query']['Marketing'] = '';		
+        $data['titulo1'] = 'Sac';
 		$data['tipoproc'] = 3;
 		$data['metodo'] = 2;
 		$data['form_open_path'] = 'relatorio/proc_sac';
-		$data['panel'] = 'info';
+		$data['panel'] = 'warning';
 		$data['TipoFinanceiro'] = 'Receitas';
 		$data['TipoRD'] = 0;
         $data['nome'] = 'Cliente';
@@ -4842,11 +4920,24 @@ class Relatorio extends CI_Controller {
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
 		$data['edit'] = 'Orcatrata/baixadaparcelarec/';
-		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';		
+		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
+
+		$_SESSION['FiltroAlteraParcela']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
+		$_SESSION['FiltroAlteraParcela']['Sac'] = $data['query']['Sac'];
+		$_SESSION['FiltroAlteraParcela']['Marketing'] = $data['query']['Marketing'];
+		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
+		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
+		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];
+		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
             
+			$data['bd']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
+			$data['bd']['Sac'] = $data['query']['Sac'];
+			$data['bd']['Marketing'] = $data['query']['Marketing'];
 			$data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
@@ -4858,6 +4949,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
+            $data['bd']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
 
             $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
 
@@ -4888,6 +4980,9 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
+            'idApp_Procedimento',
+            'Sac',
+            'Marketing',
             'Orcamento',
 			'idTab_TipoRD',
             'Cliente',
@@ -4899,13 +4994,8 @@ class Relatorio extends CI_Controller {
 			'ConcluidoProcedimento',
             'Ordenamento',
             'Campo',
-        ), TRUE));
-
-		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
-		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
-		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
-		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
-		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];		
+            'TipoProcedimento',
+        ), TRUE));		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
@@ -4914,6 +5004,22 @@ class Relatorio extends CI_Controller {
 			'#' => 'TODOS',
             'N' => 'Não',
             'S' => 'Sim',
+        );
+
+		$data['select']['Sac'] = array (
+            '0' => 'Todos',
+            '1' => 'Solicitação/Informação',
+            '2' => 'Elogio',
+			'3' => 'Reclamação',
+        );
+		
+		$data['select']['Marketing'] = array (
+            '0' => 'Todos',
+            '1' => 'Atualização',
+            '2' => 'Pesquisa',
+			'3' => 'Chamada',
+            '4' => 'Promoções',
+			'5' => 'Felicitações',
         );
 
 		$data['select']['Campo'] = array(
@@ -4930,12 +5036,14 @@ class Relatorio extends CI_Controller {
         $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
-		
+
+		$data['query']['TipoProcedimento'] = 4;
+		$data['query']['Sac'] = '';		
         $data['titulo1'] = 'Marketing';
 		$data['tipoproc'] = 4;
 		$data['metodo'] = 2;
 		$data['form_open_path'] = 'relatorio/proc_mark';
-		$data['panel'] = 'info';
+		$data['panel'] = 'success';
 		$data['TipoFinanceiro'] = 'Receitas';
 		$data['TipoRD'] = 0;
         $data['nome'] = 'Cliente';
@@ -4945,11 +5053,24 @@ class Relatorio extends CI_Controller {
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
 		$data['edit'] = 'Orcatrata/baixadaparcelarec/';
-		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';		
+		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
+
+		$_SESSION['FiltroAlteraParcela']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
+		$_SESSION['FiltroAlteraParcela']['Sac'] = $data['query']['Sac'];
+		$_SESSION['FiltroAlteraParcela']['Marketing'] = $data['query']['Marketing'];
+		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
+		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
+		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
+		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
+		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];
+		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
             
+			$data['bd']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
+			$data['bd']['Sac'] = $data['query']['Sac'];
+			$data['bd']['Marketing'] = $data['query']['Marketing'];
 			$data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
@@ -4961,6 +5082,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
+            $data['bd']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
 
             $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
 
