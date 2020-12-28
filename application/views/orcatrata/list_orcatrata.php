@@ -866,26 +866,22 @@
 											</h4>
 											<br>
 											<p>
-												
-												<?php if ($row['DataProcedimentoLimite']) { ?>
-												<span class="glyphicon glyphicon-calendar"></span> <b>Retorno</b> <?php echo $row['DataProcedimentoLimite']; ?>
-												<?php } ?>
-
+												<span class="glyphicon glyphicon-pencil"></span> <b>Procedimento:</b> <?php echo nl2br($row['Procedimento']); ?>
 											</p>											
 											<p>
-												
 												<?php if ($row['DataProcedimento']) { ?>
 												<span class="glyphicon glyphicon-calendar"></span> <b>Cadastro</b> <?php echo $row['DataProcedimento']; ?>
 												<?php } ?>
-
-											</p>
-											<p>
-												<span class="glyphicon glyphicon-pencil"></span> <b>Procedimento:</b> <?php echo nl2br($row['Procedimento']); ?>
 											</p>
 											<p>
 												<?php if ($row['ConcluidoProcedimento']) { ?>
 												<span class="glyphicon glyphicon-ok"></span> <b>Concluído:</b> <?php echo $row['ConcluidoProcedimento']; ?>
 												<?php }?>
+											</p>
+											<p>
+												<?php if ($row['DataConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data Conclusão</b> <?php echo $row['DataConcluidoProcedimento']; ?>
+												<?php } ?>
 											</p>
 										</div>
 
@@ -925,26 +921,22 @@
 											</h4>
 											<br>
 											<p>
-												
-												<?php if ($row['DataProcedimentoLimite']) { ?>
-												<span class="glyphicon glyphicon-calendar"></span> <b>Retorno</b> <?php echo $row['DataProcedimentoLimite']; ?>
-												<?php } ?>
-
+												<span class="glyphicon glyphicon-pencil"></span> <b>Procedimento:</b> <?php echo nl2br($row['Procedimento']); ?>
 											</p>											
 											<p>
-												
 												<?php if ($row['DataProcedimento']) { ?>
 												<span class="glyphicon glyphicon-calendar"></span> <b>Cadastro</b> <?php echo $row['DataProcedimento']; ?>
 												<?php } ?>
-
-											</p>
-											<p>
-												<span class="glyphicon glyphicon-pencil"></span> <b>Procedimento:</b> <?php echo nl2br($row['Procedimento']); ?>
 											</p>
 											<p>
 												<?php if ($row['ConcluidoProcedimento']) { ?>
 												<span class="glyphicon glyphicon-ok"></span> <b>Concluído:</b> <?php echo $row['ConcluidoProcedimento']; ?>
 												<?php }?>
+											</p>
+											<p>
+												<?php if ($row['DataConcluidoProcedimento']) { ?>
+												<span class="glyphicon glyphicon-calendar"></span> <b>Data Conclusão</b> <?php echo $row['DataConcluidoProcedimento']; ?>
+												<?php } ?>
 											</p>
 										</div>
 

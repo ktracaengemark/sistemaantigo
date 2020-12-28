@@ -153,7 +153,7 @@
 							<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
-										<a type="button" class="btn btn-md btn-default " href="<?php echo base_url() . 'orcatrata/alterar/' . $query['idApp_OrcaTrata']; ?>">
+										<a type="button" class="btn btn-md btn-default " href="<?php echo base_url() . 'orcatrata/alterarstatus//' . $query['idApp_OrcaTrata']; ?>">
 											<span class="glyphicon glyphicon-edit"></span> Editar
 										</a>
 									</div>									
