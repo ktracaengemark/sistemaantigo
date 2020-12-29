@@ -5263,6 +5263,9 @@ class Relatorio extends CI_Controller {
             'Campo',
 			'DataInicio',
             'DataFim',
+			'Dia',
+			'Mesvenc',
+			'Ano',
         ), TRUE));
 		
 		$config['base_url'] = base_url() . 'relatorio/clientes/';
@@ -5301,6 +5304,8 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
+		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
 		
 		$data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 
@@ -5315,6 +5320,9 @@ class Relatorio extends CI_Controller {
             $data['bd']['Campo'] = $data['query']['Campo'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+			$data['bd']['Dia'] = $data['query']['Dia'];
+			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
+			$data['bd']['Ano'] = $data['query']['Ano'];
 
             $data['report'] = $this->Relatorio_model->list_clientes($data['bd'],TRUE);
 
@@ -5425,6 +5433,11 @@ class Relatorio extends CI_Controller {
 			'Ativo',
             'Ordenamento',
             'Campo',
+			'DataInicio',
+            'DataFim',
+			'Dia',
+			'Mesvenc',
+			'Ano',
         ), TRUE));
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -5458,6 +5471,8 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
+		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
 		
 		$data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 
@@ -5470,6 +5485,11 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Ativo'] = $data['query']['Ativo'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
+			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+            $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+			$data['bd']['Dia'] = $data['query']['Dia'];
+			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
+			$data['bd']['Ano'] = $data['query']['Ano'];
 
             $data['report'] = $this->Relatorio_model->list_clientes($data['bd'],TRUE);
 

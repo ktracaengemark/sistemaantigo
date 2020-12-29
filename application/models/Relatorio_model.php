@@ -2916,7 +2916,11 @@ exit();*/
 	public function list_clientes($data, $completo, $limit = null, $offset = null) {
 
 		$date_inicio_orca = ($data['DataInicio']) ? 'C.DataCadastroCliente >= "' . $data['DataInicio'] . '" AND ' : FALSE;
-		$date_fim_orca = ($data['DataFim']) ? 'C.DataCadastroCliente <= "' . $data['DataFim'] . '" AND ' : FALSE;
+		$date_fim_orca = ($data['DataFim']) ? 'C.DataCadastroCliente <= "' . $data['DataFim'] . '" AND ' : FALSE;		
+		
+		$data['Dia'] = ($data['Dia']) ? ' AND DAY(C.DataNascimento) = ' . $data['Dia'] : FALSE;
+		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(C.DataNascimento) = ' . $data['Mesvenc'] : FALSE;
+		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(C.DataNascimento) = ' . $data['Ano'] : FALSE;
 		
         $data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
         $data['Campo'] = (!$data['Campo']) ? 'C.NomeCliente' : $data['Campo'];
@@ -2958,8 +2962,12 @@ exit();*/
 			WHERE
 				' . $date_inicio_orca . '
 				' . $date_fim_orca . '
+				' . $filtro10 . '
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
-				' . $data['NomeCliente'] . '
+				' . $data['NomeCliente'] . ' 
+				' . $data['Dia'] . ' 
+				' . $data['Mesvenc'] . '
+				' . $data['Ano'] . '
 
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
