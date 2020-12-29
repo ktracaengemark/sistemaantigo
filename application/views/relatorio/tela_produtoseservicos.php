@@ -20,7 +20,7 @@
 						</div>	
 						<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>
 							<div class="col-md-2 text-left">	
-								<label>.</label>
+								<label><?php echo $nome; ?></label>
 								<div class="input-group">
 									<span class="input-group-btn">
 										<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">

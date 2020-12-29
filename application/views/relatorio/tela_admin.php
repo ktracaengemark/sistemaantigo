@@ -154,7 +154,7 @@
 											<label for=""><h4><b>Procedimentos</b></h4></label>
 											<div class="form-group col-md-12 text-left">
 												<div class="row">										
-													<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/procedimentos2" role="button">
+													<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/proc_receitas" role="button">
 														<span class="glyphicon glyphicon-pencil"></span> Procedimentos
 													</a>
 												</div>	
@@ -327,7 +327,7 @@
 											<label for=""><h4><b>Procedimentos</b></h4></label>
 											<div class="form-group col-md-12 text-left">
 												<div class="row">										
-													<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/procedimentos1" role="button">
+													<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/proc_despesas" role="button">
 														<span class="glyphicon glyphicon-pencil"></span> Procedimentos
 													</a>
 												</div>	
@@ -355,23 +355,9 @@
 								<div class="row">
 									<div class="form-group col-md-12 text-left">																				
 										<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/clientes" role="button"> 
-											<span class="glyphicon glyphicon-user"></span> Clientes/lista
+											<span class="glyphicon glyphicon-user"></span> Clientes / Aniversariantes
 										</a>
 									</div>
-								</div>
-								<div class="row">
-									<div class="form-group col-md-12 text-left">																				
-										<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>cliente/pesquisar" role="button"> 
-											<span class="glyphicon glyphicon-user"></span> Clientes/Pesquisa
-										</a>
-									</div>
-								</div>
-								<div class="row">
-									<div class="form-group col-md-12 text-left">
-										<a  type="button" class="btn btn-md btn-default btn-block text-left" href="" role="button"> 
-											<span class="glyphicon glyphicon-user"></span> Aniversariantes
-										</a>											
-									</div>	
 								</div>
 								<div class="row">
 									<div class="form-group col-md-12 text-left">										
@@ -384,13 +370,6 @@
 									<div class="form-group col-md-12 text-left">										
 										<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/proc_mark" role="button">
 											<span class="glyphicon glyphicon-pencil"></span> Marketing
-										</a>
-									</div>	
-								</div>
-								<div class="row">
-									<div class="form-group col-md-12 text-left">										
-										<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/ultimopedido" role="button">
-											<span class="glyphicon glyphicon-pencil"></span> Último Pedido
 										</a>
 									</div>	
 								</div>
