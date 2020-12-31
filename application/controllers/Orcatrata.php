@@ -824,9 +824,7 @@ class Orcatrata extends CI_Controller {
 					$data['produto'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['produto'][$j]['ValorProduto']));
                     $data['produto'][$j]['ComissaoProduto'] = $data['produto'][$j]['ComissaoProduto'];
                     $data['produto'][$j]['NomeProduto'] = $data['produto'][$j]['NomeProduto'];
-                    unset($data['produto'][$j]['SubtotalProduto']);
-					unset($data['produto'][$j]['SubtotalComissaoProduto']);
-					unset($data['produto'][$j]['SubtotalQtdProduto']);
+					
 					if ($data['orcatrata']['ConcluidoOrca'] == 'S') {
 						$data['produto'][$j]['ConcluidoProduto'] = 'S';
 					}else{
@@ -843,6 +841,21 @@ class Orcatrata extends CI_Controller {
 						}else{
 							$data['produto'][$j]['HoraConcluidoProduto'] = $data['produto'][$j]['HoraConcluidoProduto'];
 						}
+						////inicio do desconto do estoque////
+						$data['get']['produto'][$j] = $this->Orcatrata_model->get_tab_produtos($data['produto'][$j]['idTab_Produtos_Produto']);
+						if($data['get']['produto'][$j]['ContarEstoque'] == "S"){
+							$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] - $data['produto'][$j]['SubtotalQtdProduto']);
+							if($diff_estoque[$j] <= 0){
+								$estoque[$j] = 0; 
+							}else{
+								$estoque[$j] = $diff_estoque[$j]; 
+							}
+							$data['update']['produto'][$j]['Estoque'] = $estoque[$j];
+							$data['update']['produto']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['produto'][$j], $data['produto'][$j]['idTab_Produtos_Produto']);
+							unset($diff_estoque[$j]);
+							unset($estoque[$j]);
+						}	
+						////fim do desconto do estoque////
 					}else{
 						$data['produto'][$j]['DataConcluidoProduto'] = "0000-00-00";
 						$data['produto'][$j]['HoraConcluidoProduto'] = "00:00";
@@ -852,6 +865,9 @@ class Orcatrata extends CI_Controller {
 					} else {
 						$data['produto'][$j]['DevolvidoProduto'] = $data['produto'][$j]['DevolvidoProduto'];
 					}
+                    unset($data['produto'][$j]['SubtotalProduto']);
+					unset($data['produto'][$j]['SubtotalComissaoProduto']);
+					unset($data['produto'][$j]['SubtotalQtdProduto']);
 				}
                 $data['produto']['idApp_Produto'] = $this->Orcatrata_model->set_produto($data['produto']);
             }
@@ -1721,6 +1737,7 @@ class Orcatrata extends CI_Controller {
             if (isset($data['servico'])) {
                 $max = count($data['servico']);
                 for($j=1;$j<=$max;$j++) {
+				
                     $data['servico'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['servico'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['servico'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -1730,9 +1747,7 @@ class Orcatrata extends CI_Controller {
 					$data['servico'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeProduto'], 'mysql');
 					$data['servico'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataConcluidoProduto'], 'mysql');
                     $data['servico'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorProduto']));
-                    unset($data['servico'][$j]['SubtotalProduto']);
-					unset($data['servico'][$j]['SubtotalComissaoProduto']);
-					unset($data['servico'][$j]['SubtotalQtdProduto']);
+					
 					if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
 						$data['servico'][$j]['ConcluidoProduto'] = 'S';
 					}else{
@@ -1749,10 +1764,29 @@ class Orcatrata extends CI_Controller {
 						}else{
 							$data['servico'][$j]['HoraConcluidoProduto'] = $data['servico'][$j]['HoraConcluidoProduto'];
 						}
+						////inicio do desconto do estoque////
+						$data['get']['servico'][$j] = $this->Orcatrata_model->get_tab_produtos($data['servico'][$j]['idTab_Produtos_Produto']);
+						if($data['get']['servico'][$j]['ContarEstoque'] == "S"){
+							$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] - $data['servico'][$j]['SubtotalQtdProduto']);
+							if($diff_estoque[$j] <= 0){
+								$estoque[$j] = 0; 
+							}else{
+								$estoque[$j] = $diff_estoque[$j]; 
+							}
+							$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+							$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['servico'][$j]['idTab_Produtos_Produto']);
+							unset($diff_estoque[$j]);
+							unset($estoque[$j]);
+						}	
+						////fim do desconto do estoque////
 					}else{
 						$data['servico'][$j]['DataConcluidoProduto'] = "0000-00-00";
 						$data['servico'][$j]['HoraConcluidoProduto'] = "00:00";
-					}	
+					}
+					
+                    unset($data['servico'][$j]['SubtotalProduto']);
+					unset($data['servico'][$j]['SubtotalComissaoProduto']);
+					unset($data['servico'][$j]['SubtotalQtdProduto']);	
 				}
                 $data['servico']['idApp_Produto'] = $this->Orcatrata_model->set_servico($data['servico']);
             }
@@ -1818,13 +1852,7 @@ class Orcatrata extends CI_Controller {
 
 					unset($data['produto'][$j]['SubtotalProduto']);
 					unset($data['produto'][$j]['SubtotalComissaoProduto']);
-					unset($data['produto'][$j]['SubtotalQtdProduto']);					
-					/*
-					echo '<br>';
-					echo "<pre>";
-					print_r($data['get']['produto'][$j]['Estoque']);
-					echo "</pre>";
-					*/
+					unset($data['produto'][$j]['SubtotalQtdProduto']);
 					
 				}
 				
@@ -2822,9 +2850,7 @@ class Orcatrata extends CI_Controller {
 					$data['update']['servico']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['servico']['inserir'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataConcluidoProduto'], 'mysql');
 					$data['update']['servico']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorProduto']));
-                    unset($data['update']['servico']['inserir'][$j]['SubtotalProduto']);
-					unset($data['update']['servico']['inserir'][$j]['SubtotalComissaoProduto']);
-					unset($data['update']['servico']['inserir'][$j]['SubtotalQtdProduto']);
+					
 					if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
 						$data['update']['servico']['inserir'][$j]['ConcluidoProduto'] = 'S';
 					} else {
@@ -2841,10 +2867,30 @@ class Orcatrata extends CI_Controller {
 						}else{
 							$data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'] = $data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'];
 						}
+						
+						////inicio do desconto do estoque////
+						$data['get']['servico'][$j] = $this->Orcatrata_model->get_tab_produtos($data['update']['servico']['inserir'][$j]['idTab_Produtos_Produto']);
+						if($data['get']['servico'][$j]['ContarEstoque'] == "S"){
+							$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] - $data['update']['servico']['inserir'][$j]['SubtotalQtdProduto']);
+							if($diff_estoque[$j] <= 0){
+								$estoque[$j] = 0; 
+							}else{
+								$estoque[$j] = $diff_estoque[$j]; 
+							}
+							$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+							$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['inserir'][$j]['idTab_Produtos_Produto']);
+							unset($diff_estoque[$j]);
+							unset($estoque[$j]);
+						}	
+						////fim do desconto do estoque////
 					} else {
 						$data['update']['servico']['inserir'][$j]['DataConcluidoProduto'] = "0000-00-00";
 						$data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'] = "00:00";
 					}
+					
+                    unset($data['update']['servico']['inserir'][$j]['SubtotalProduto']);
+					unset($data['update']['servico']['inserir'][$j]['SubtotalComissaoProduto']);
+					unset($data['update']['servico']['inserir'][$j]['SubtotalQtdProduto']);
 				}
 
                 $max = count($data['update']['servico']['alterar']);
@@ -2855,9 +2901,7 @@ class Orcatrata extends CI_Controller {
 					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['servico']['alterar'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataConcluidoProduto'], 'mysql');
 					$data['update']['servico']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['alterar'][$j]['ValorProduto']));
-                    unset($data['update']['servico']['alterar'][$j]['SubtotalProduto']);
-					unset($data['update']['servico']['alterar'][$j]['SubtotalComissaoProduto']);
-					unset($data['update']['servico']['alterar'][$j]['SubtotalQtdProduto']);
+					
 					if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
 						$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = 'S';
 					} else {
@@ -2878,8 +2922,115 @@ class Orcatrata extends CI_Controller {
 						$data['update']['servico']['alterar'][$j]['DataConcluidoProduto'] = "0000-00-00";
 						$data['update']['servico']['alterar'][$j]['HoraConcluidoProduto'] = "00:00";
 					}
-					if ($data['orcatrata']['idApp_Cliente']) $data['update']['servico']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
+					if ($data['orcatrata']['idApp_Cliente']) $data['update']['servico']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];
+					
+					$data['get']['servico_anterior'][$j] = $this->Orcatrata_model->get_produto_anterior($data['update']['servico']['alterar'][$j]['idApp_Produto']);
+					$data['get']['servico'][$j] = $this->Orcatrata_model->get_tab_produtos($data['get']['servico_anterior'][$j]['idTab_Produtos_Produto']);
+					$contar_estoque[$j]			= $data['get']['servico'][$j]['ContarEstoque'];
+					$estoque_antigo[$j] 		= $data['get']['servico'][$j]['Estoque'];
+					$id_app_produto[$j] 		= $data['update']['servico']['alterar'][$j]['idApp_Produto'];
+					$id_tab_produtos[$j] 		= $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
+					$estado_anterior[$j] 		= $data['get']['servico_anterior'][$j]['ConcluidoProduto'];
+					$qtd_anterior[$j]			= ($data['get']['servico_anterior'][$j]['QtdProduto'] * $data['get']['servico_anterior'][$j]['QtdIncrementoProduto']);
+					$estado_atual[$j] 			= $data['update']['servico']['alterar'][$j]['ConcluidoProduto'];
+					$qtd_atual[$j]				= $data['update']['servico']['alterar'][$j]['SubtotalQtdProduto'];
+					
+					if($contar_estoque[$j] == "S"){
+						if($estado_anterior[$j] == $estado_atual[$j]){
+							if($estado_anterior[$j] == "S"){
+								if($qtd_anterior[$j] != $qtd_atual[$j]){
+									$diff_qtd[$j] = $qtd_anterior[$j] - $qtd_atual[$j];
+									$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $diff_qtd[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
+									}else{
+										$estoque[$j] = $diff_estoque[$j]; 
+									}
+									$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+									$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);							
+									unset($diff_qtd[$j]);
+									unset($diff_estoque[$j]);
+									unset($estoque[$j]);							
+								}
+							}
+						}else{
+							if($estado_anterior[$j] == "N"){
+								$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] - $qtd_atual[$j]);
+								if($diff_estoque[$j] <= 0){
+									$estoque[$j] = 0; 
+								}else{
+									$estoque[$j] = $diff_estoque[$j]; 
+								}
+								$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+								$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);
+								//unset($qtd_servico[$j]);
+								unset($diff_estoque[$j]);
+								unset($estoque[$j]);						
+							}else{
+								if($qtd_anterior[$j] != $qtd_atual[$j]){
+									$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $qtd_atual[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
+									}else{
+										$estoque[$j] = $diff_estoque[$j]; 
+									}
+									$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+									$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);							
+									unset($diff_qtd[$j]);
+									unset($diff_estoque[$j]);
+									unset($estoque[$j]);
+								}else{
+									$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $qtd_anterior[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
+									}else{
+										$estoque[$j] = $diff_estoque[$j]; 
+									}
+									$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+									$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);
+									//unset($qtd_servico[$j]);
+									unset($diff_estoque[$j]);
+									unset($estoque[$j]);
+								}
+							}
+						}					
+                    }
+					
+                    unset($data['update']['servico']['alterar'][$j]['SubtotalProduto']);
+					unset($data['update']['servico']['alterar'][$j]['SubtotalComissaoProduto']);
+					unset($data['update']['servico']['alterar'][$j]['SubtotalQtdProduto']);					
                 }
+				
+                $max = count($data['update']['servico']['excluir']);
+                for($j=0;$j<$max;$j++) {
+					
+					$data['get']['servico_excluir'][$j] = $this->Orcatrata_model->get_produto_anterior($data['update']['servico']['excluir'][$j]);
+						
+					if($data['get']['servico_excluir'][$j]['ConcluidoProduto'] == "S"){	
+						////inicio do retorno para o estoque////
+						$data['get']['servico'][$j] = $this->Orcatrata_model->get_tab_produtos($data['get']['servico_excluir'][$j]['idTab_Produtos_Produto']);
+						
+						if($data['get']['servico'][$j]['ContarEstoque'] == "S"){
+							
+							$qtd_servico[$j] = ($data['get']['servico_excluir'][$j]['QtdProduto'] * $data['get']['servico_excluir'][$j]['QtdIncrementoProduto']);
+							$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $qtd_servico[$j]);
+							if($diff_estoque[$j] <= 0){
+								$estoque[$j] = 0; 
+							}else{
+								$estoque[$j] = $diff_estoque[$j]; 
+							}
+							$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+							$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['get']['servico_excluir'][$j]['idTab_Produtos_Produto']);
+							
+							unset($qtd_servico[$j]);
+							unset($diff_estoque[$j]);
+							unset($estoque[$j]);
+							
+						}	
+						////fim do retorno para o estoque////					
+					}	
+
+				}				
 
                 if (count($data['update']['servico']['inserir']))
                     $data['update']['servico']['bd']['inserir'] = $this->Orcatrata_model->set_servico($data['update']['servico']['inserir']);
@@ -3016,20 +3167,11 @@ class Orcatrata extends CI_Controller {
 							if($estado_anterior[$j] == "S"){
 								if($qtd_anterior[$j] != $qtd_atual[$j]){
 									$diff_qtd[$j] = $qtd_anterior[$j] - $qtd_atual[$j];
-									if($diff_qtd[$j] > 0){
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] - $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+									$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] + $diff_qtd[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
 									}else{
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] + $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+										$estoque[$j] = $diff_estoque[$j]; 
 									}
 									$data['update']['produto'][$j]['Estoque'] = $estoque[$j];
 									$data['update']['produto']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['produto'][$j], $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto']);							
@@ -3053,25 +3195,15 @@ class Orcatrata extends CI_Controller {
 								unset($estoque[$j]);						
 							}else{
 								if($qtd_anterior[$j] != $qtd_atual[$j]){
-									$diff_qtd[$j] = $qtd_anterior[$j] - $qtd_atual[$j];
-									if($diff_qtd[$j] > 0){
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] + $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+									$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] + $qtd_atual[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
 									}else{
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] - $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+										$estoque[$j] = $diff_estoque[$j]; 
 									}
 									$data['update']['produto'][$j]['Estoque'] = $estoque[$j];
 									$data['update']['produto']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['produto'][$j], $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto']);							
-									unset($diff_qtd[$j]);
+									//unset($diff_qtd[$j]);
 									unset($diff_estoque[$j]);
 									unset($estoque[$j]);
 								}else{
@@ -4220,9 +4352,6 @@ class Orcatrata extends CI_Controller {
 					$data['update']['servico']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['servico']['inserir'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataConcluidoProduto'], 'mysql');
 					$data['update']['servico']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorProduto']));
-                    unset($data['update']['servico']['inserir'][$j]['SubtotalProduto']);
-					unset($data['update']['servico']['inserir'][$j]['SubtotalComissaoProduto']);
-					unset($data['update']['servico']['inserir'][$j]['SubtotalQtdProduto']);
 					if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
 						$data['update']['servico']['inserir'][$j]['ConcluidoProduto'] = 'S';
 					} else {
@@ -4239,10 +4368,30 @@ class Orcatrata extends CI_Controller {
 						}else{
 							$data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'] = $data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'];
 						}
+						
+						////inicio do desconto do estoque////
+						$data['get']['servico'][$j] = $this->Orcatrata_model->get_tab_produtos($data['update']['servico']['inserir'][$j]['idTab_Produtos_Produto']);
+						if($data['get']['servico'][$j]['ContarEstoque'] == "S"){
+							$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] - $data['update']['servico']['inserir'][$j]['SubtotalQtdProduto']);
+							if($diff_estoque[$j] <= 0){
+								$estoque[$j] = 0; 
+							}else{
+								$estoque[$j] = $diff_estoque[$j]; 
+							}
+							$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+							$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['inserir'][$j]['idTab_Produtos_Produto']);
+							unset($diff_estoque[$j]);
+							unset($estoque[$j]);
+						}	
+						////fim do desconto do estoque////
 					} else {
 						$data['update']['servico']['inserir'][$j]['DataConcluidoProduto'] = "0000-00-00";
 						$data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'] = "00:00";
 					}
+					
+                    unset($data['update']['servico']['inserir'][$j]['SubtotalProduto']);
+					unset($data['update']['servico']['inserir'][$j]['SubtotalComissaoProduto']);
+					unset($data['update']['servico']['inserir'][$j]['SubtotalQtdProduto']);
 				}
 
                 $max = count($data['update']['servico']['alterar']);
@@ -4253,9 +4402,7 @@ class Orcatrata extends CI_Controller {
 					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['servico']['alterar'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataConcluidoProduto'], 'mysql');
 					$data['update']['servico']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['alterar'][$j]['ValorProduto']));
-                    unset($data['update']['servico']['alterar'][$j]['SubtotalProduto']);
-					unset($data['update']['servico']['alterar'][$j]['SubtotalComissaoProduto']);
-					unset($data['update']['servico']['alterar'][$j]['SubtotalQtdProduto']);
+					
 					if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
 						$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = 'S';
 					} else {
@@ -4277,7 +4424,114 @@ class Orcatrata extends CI_Controller {
 						$data['update']['servico']['alterar'][$j]['HoraConcluidoProduto'] = "00:00";
 					}
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['servico']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
-                }
+										
+					$data['get']['servico_anterior'][$j] = $this->Orcatrata_model->get_produto_anterior($data['update']['servico']['alterar'][$j]['idApp_Produto']);
+					$data['get']['servico'][$j] = $this->Orcatrata_model->get_tab_produtos($data['get']['servico_anterior'][$j]['idTab_Produtos_Produto']);
+					$contar_estoque[$j]			= $data['get']['servico'][$j]['ContarEstoque'];
+					$estoque_antigo[$j] 		= $data['get']['servico'][$j]['Estoque'];
+					$id_app_produto[$j] 		= $data['update']['servico']['alterar'][$j]['idApp_Produto'];
+					$id_tab_produtos[$j] 		= $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
+					$estado_anterior[$j] 		= $data['get']['servico_anterior'][$j]['ConcluidoProduto'];
+					$qtd_anterior[$j]			= ($data['get']['servico_anterior'][$j]['QtdProduto'] * $data['get']['servico_anterior'][$j]['QtdIncrementoProduto']);
+					$estado_atual[$j] 			= $data['update']['servico']['alterar'][$j]['ConcluidoProduto'];
+					$qtd_atual[$j]				= $data['update']['servico']['alterar'][$j]['SubtotalQtdProduto'];
+					
+					if($contar_estoque[$j] == "S"){
+						if($estado_anterior[$j] == $estado_atual[$j]){
+							if($estado_anterior[$j] == "S"){
+								if($qtd_anterior[$j] != $qtd_atual[$j]){
+									$diff_qtd[$j] = $qtd_anterior[$j] - $qtd_atual[$j];
+									$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $diff_qtd[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
+									}else{
+										$estoque[$j] = $diff_estoque[$j]; 
+									}
+									$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+									$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);							
+									unset($diff_qtd[$j]);
+									unset($diff_estoque[$j]);
+									unset($estoque[$j]);							
+								}
+							}
+						}else{
+							if($estado_anterior[$j] == "N"){
+								$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] - $qtd_atual[$j]);
+								if($diff_estoque[$j] <= 0){
+									$estoque[$j] = 0; 
+								}else{
+									$estoque[$j] = $diff_estoque[$j]; 
+								}
+								$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+								$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);
+								//unset($qtd_servico[$j]);
+								unset($diff_estoque[$j]);
+								unset($estoque[$j]);						
+							}else{
+								if($qtd_anterior[$j] != $qtd_atual[$j]){
+									$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $qtd_atual[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
+									}else{
+										$estoque[$j] = $diff_estoque[$j]; 
+									}
+									$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+									$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);							
+									unset($diff_qtd[$j]);
+									unset($diff_estoque[$j]);
+									unset($estoque[$j]);
+								}else{
+									$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $qtd_anterior[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
+									}else{
+										$estoque[$j] = $diff_estoque[$j]; 
+									}
+									$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+									$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);
+									//unset($qtd_servico[$j]);
+									unset($diff_estoque[$j]);
+									unset($estoque[$j]);
+								}
+							}
+						}					
+                    }                
+				
+                    unset($data['update']['servico']['alterar'][$j]['SubtotalProduto']);
+					unset($data['update']['servico']['alterar'][$j]['SubtotalComissaoProduto']);
+					unset($data['update']['servico']['alterar'][$j]['SubtotalQtdProduto']);
+				}
+				
+                $max = count($data['update']['servico']['excluir']);
+                for($j=0;$j<$max;$j++) {
+					
+					$data['get']['servico_excluir'][$j] = $this->Orcatrata_model->get_produto_anterior($data['update']['servico']['excluir'][$j]);
+						
+					if($data['get']['servico_excluir'][$j]['ConcluidoProduto'] == "S"){	
+						////inicio do retorno para o estoque////
+						$data['get']['servico'][$j] = $this->Orcatrata_model->get_tab_produtos($data['get']['servico_excluir'][$j]['idTab_Produtos_Produto']);
+						
+						if($data['get']['servico'][$j]['ContarEstoque'] == "S"){
+							
+							$qtd_servico[$j] = ($data['get']['servico_excluir'][$j]['QtdProduto'] * $data['get']['servico_excluir'][$j]['QtdIncrementoProduto']);
+							$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $qtd_servico[$j]);
+							if($diff_estoque[$j] <= 0){
+								$estoque[$j] = 0; 
+							}else{
+								$estoque[$j] = $diff_estoque[$j]; 
+							}
+							$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+							$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['get']['servico_excluir'][$j]['idTab_Produtos_Produto']);
+							
+							unset($qtd_servico[$j]);
+							unset($diff_estoque[$j]);
+							unset($estoque[$j]);
+							
+						}	
+						////fim do retorno para o estoque////					
+					}	
+
+				}
 
                 if (count($data['update']['servico']['inserir']))
                     $data['update']['servico']['bd']['inserir'] = $this->Orcatrata_model->set_servico($data['update']['servico']['inserir']);
@@ -4405,6 +4659,7 @@ class Orcatrata extends CI_Controller {
 					}
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['produto']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
 					
+					
 					$data['get']['produto_anterior'][$j] = $this->Orcatrata_model->get_produto_anterior($data['update']['produto']['alterar'][$j]['idApp_Produto']);
 					$data['get']['produto'][$j] = $this->Orcatrata_model->get_tab_produtos($data['get']['produto_anterior'][$j]['idTab_Produtos_Produto']);
 					$contar_estoque[$j]			= $data['get']['produto'][$j]['ContarEstoque'];
@@ -4420,20 +4675,11 @@ class Orcatrata extends CI_Controller {
 							if($estado_anterior[$j] == "S"){
 								if($qtd_anterior[$j] != $qtd_atual[$j]){
 									$diff_qtd[$j] = $qtd_anterior[$j] - $qtd_atual[$j];
-									if($diff_qtd[$j] > 0){
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] - $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+									$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] + $diff_qtd[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
 									}else{
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] + $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+										$estoque[$j] = $diff_estoque[$j]; 
 									}
 									$data['update']['produto'][$j]['Estoque'] = $estoque[$j];
 									$data['update']['produto']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['produto'][$j], $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto']);							
@@ -4457,25 +4703,15 @@ class Orcatrata extends CI_Controller {
 								unset($estoque[$j]);						
 							}else{
 								if($qtd_anterior[$j] != $qtd_atual[$j]){
-									$diff_qtd[$j] = $qtd_anterior[$j] - $qtd_atual[$j];
-									if($diff_qtd[$j] > 0){
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] + $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+									$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] + $qtd_atual[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
 									}else{
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] - $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+										$estoque[$j] = $diff_estoque[$j]; 
 									}
 									$data['update']['produto'][$j]['Estoque'] = $estoque[$j];
 									$data['update']['produto']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['produto'][$j], $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto']);							
-									unset($diff_qtd[$j]);
+									//unset($diff_qtd[$j]);
 									unset($diff_estoque[$j]);
 									unset($estoque[$j]);
 								}else{
@@ -6812,9 +7048,6 @@ class Orcatrata extends CI_Controller {
 					$data['update']['servico']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['servico']['inserir'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataConcluidoProduto'], 'mysql');
 					$data['update']['servico']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorProduto']));
-                    unset($data['update']['servico']['inserir'][$j]['SubtotalProduto']);
-					unset($data['update']['servico']['inserir'][$j]['SubtotalComissaoProduto']);
-					unset($data['update']['servico']['inserir'][$j]['SubtotalQtdProduto']);
 					if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
 						$data['update']['servico']['inserir'][$j]['ConcluidoProduto'] = 'S';
 					} else {
@@ -6831,10 +7064,30 @@ class Orcatrata extends CI_Controller {
 						}else{
 							$data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'] = $data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'];
 						}
+						
+						////inicio do desconto do estoque////
+						$data['get']['servico'][$j] = $this->Orcatrata_model->get_tab_produtos($data['update']['servico']['inserir'][$j]['idTab_Produtos_Produto']);
+						if($data['get']['servico'][$j]['ContarEstoque'] == "S"){
+							$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] - $data['update']['servico']['inserir'][$j]['SubtotalQtdProduto']);
+							if($diff_estoque[$j] <= 0){
+								$estoque[$j] = 0; 
+							}else{
+								$estoque[$j] = $diff_estoque[$j]; 
+							}
+							$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+							$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['inserir'][$j]['idTab_Produtos_Produto']);
+							unset($diff_estoque[$j]);
+							unset($estoque[$j]);
+						}	
+						////fim do desconto do estoque////
 					} else {
 						$data['update']['servico']['inserir'][$j]['DataConcluidoProduto'] = "0000-00-00";
 						$data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'] = "00:00";
 					}
+					
+                    unset($data['update']['servico']['inserir'][$j]['SubtotalProduto']);
+					unset($data['update']['servico']['inserir'][$j]['SubtotalComissaoProduto']);
+					unset($data['update']['servico']['inserir'][$j]['SubtotalQtdProduto']);
 				}
 
                 $max = count($data['update']['servico']['alterar']);
@@ -6845,9 +7098,7 @@ class Orcatrata extends CI_Controller {
 					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['servico']['alterar'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataConcluidoProduto'], 'mysql');
 					$data['update']['servico']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['alterar'][$j]['ValorProduto']));
-                    unset($data['update']['servico']['alterar'][$j]['SubtotalProduto']);
-					unset($data['update']['servico']['alterar'][$j]['SubtotalComissaoProduto']);
-					unset($data['update']['servico']['alterar'][$j]['SubtotalQtdProduto']);
+					
 					if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
 						$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = 'S';
 					} else {
@@ -6869,7 +7120,114 @@ class Orcatrata extends CI_Controller {
 						$data['update']['servico']['alterar'][$j]['HoraConcluidoProduto'] = "00:00";
 					}
 					if ($data['orcatrata']['idApp_Cliente']) $data['update']['servico']['alterar'][$j]['idApp_Cliente'] = $data['orcatrata']['idApp_Cliente'];					
-                }
+										
+					$data['get']['servico_anterior'][$j] = $this->Orcatrata_model->get_produto_anterior($data['update']['servico']['alterar'][$j]['idApp_Produto']);
+					$data['get']['servico'][$j] = $this->Orcatrata_model->get_tab_produtos($data['get']['servico_anterior'][$j]['idTab_Produtos_Produto']);
+					$contar_estoque[$j]			= $data['get']['servico'][$j]['ContarEstoque'];
+					$estoque_antigo[$j] 		= $data['get']['servico'][$j]['Estoque'];
+					$id_app_produto[$j] 		= $data['update']['servico']['alterar'][$j]['idApp_Produto'];
+					$id_tab_produtos[$j] 		= $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
+					$estado_anterior[$j] 		= $data['get']['servico_anterior'][$j]['ConcluidoProduto'];
+					$qtd_anterior[$j]			= ($data['get']['servico_anterior'][$j]['QtdProduto'] * $data['get']['servico_anterior'][$j]['QtdIncrementoProduto']);
+					$estado_atual[$j] 			= $data['update']['servico']['alterar'][$j]['ConcluidoProduto'];
+					$qtd_atual[$j]				= $data['update']['servico']['alterar'][$j]['SubtotalQtdProduto'];
+					
+					if($contar_estoque[$j] == "S"){
+						if($estado_anterior[$j] == $estado_atual[$j]){
+							if($estado_anterior[$j] == "S"){
+								if($qtd_anterior[$j] != $qtd_atual[$j]){
+									$diff_qtd[$j] = $qtd_anterior[$j] - $qtd_atual[$j];
+									$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $diff_qtd[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
+									}else{
+										$estoque[$j] = $diff_estoque[$j]; 
+									}
+									$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+									$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);							
+									unset($diff_qtd[$j]);
+									unset($diff_estoque[$j]);
+									unset($estoque[$j]);							
+								}
+							}
+						}else{
+							if($estado_anterior[$j] == "N"){
+								$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] - $qtd_atual[$j]);
+								if($diff_estoque[$j] <= 0){
+									$estoque[$j] = 0; 
+								}else{
+									$estoque[$j] = $diff_estoque[$j]; 
+								}
+								$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+								$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);
+								//unset($qtd_servico[$j]);
+								unset($diff_estoque[$j]);
+								unset($estoque[$j]);						
+							}else{
+								if($qtd_anterior[$j] != $qtd_atual[$j]){
+									$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $qtd_atual[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
+									}else{
+										$estoque[$j] = $diff_estoque[$j]; 
+									}
+									$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+									$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);							
+									unset($diff_qtd[$j]);
+									unset($diff_estoque[$j]);
+									unset($estoque[$j]);
+								}else{
+									$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $qtd_anterior[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
+									}else{
+										$estoque[$j] = $diff_estoque[$j]; 
+									}
+									$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+									$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);
+									//unset($qtd_servico[$j]);
+									unset($diff_estoque[$j]);
+									unset($estoque[$j]);
+								}
+							}
+						}					
+                    }
+					
+                    unset($data['update']['servico']['alterar'][$j]['SubtotalProduto']);
+					unset($data['update']['servico']['alterar'][$j]['SubtotalComissaoProduto']);
+					unset($data['update']['servico']['alterar'][$j]['SubtotalQtdProduto']);
+				}
+				
+                $max = count($data['update']['servico']['excluir']);
+                for($j=0;$j<$max;$j++) {
+					
+					$data['get']['servico_excluir'][$j] = $this->Orcatrata_model->get_produto_anterior($data['update']['servico']['excluir'][$j]);
+						
+					if($data['get']['servico_excluir'][$j]['ConcluidoProduto'] == "S"){	
+						////inicio do retorno para o estoque////
+						$data['get']['servico'][$j] = $this->Orcatrata_model->get_tab_produtos($data['get']['servico_excluir'][$j]['idTab_Produtos_Produto']);
+						
+						if($data['get']['servico'][$j]['ContarEstoque'] == "S"){
+							
+							$qtd_servico[$j] = ($data['get']['servico_excluir'][$j]['QtdProduto'] * $data['get']['servico_excluir'][$j]['QtdIncrementoProduto']);
+							$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $qtd_servico[$j]);
+							if($diff_estoque[$j] <= 0){
+								$estoque[$j] = 0; 
+							}else{
+								$estoque[$j] = $diff_estoque[$j]; 
+							}
+							$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+							$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['get']['servico_excluir'][$j]['idTab_Produtos_Produto']);
+							
+							unset($qtd_servico[$j]);
+							unset($diff_estoque[$j]);
+							unset($estoque[$j]);
+							
+						}	
+						////fim do retorno para o estoque////					
+					}	
+
+				}
 
                 if (count($data['update']['servico']['inserir']))
                     $data['update']['servico']['bd']['inserir'] = $this->Orcatrata_model->set_servico($data['update']['servico']['inserir']);
@@ -7014,26 +7372,16 @@ class Orcatrata extends CI_Controller {
 					$qtd_anterior[$j]			= ($data['get']['produto_anterior'][$j]['QtdProduto'] * $data['get']['produto_anterior'][$j]['QtdIncrementoProduto']);
 					$estado_atual[$j] 			= $data['update']['produto']['alterar'][$j]['ConcluidoProduto'];
 					$qtd_atual[$j]				= $data['update']['produto']['alterar'][$j]['SubtotalQtdProduto'];
-					
 					if($contar_estoque[$j] == "S"){
 						if($estado_anterior[$j] == $estado_atual[$j]){
 							if($estado_anterior[$j] == "S"){
 								if($qtd_anterior[$j] != $qtd_atual[$j]){
 									$diff_qtd[$j] = $qtd_anterior[$j] - $qtd_atual[$j];
-									if($diff_qtd[$j] > 0){
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] - $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+									$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] + $diff_qtd[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
 									}else{
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] + $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+										$estoque[$j] = $diff_estoque[$j]; 
 									}
 									$data['update']['produto'][$j]['Estoque'] = $estoque[$j];
 									$data['update']['produto']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['produto'][$j], $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto']);							
@@ -7057,25 +7405,15 @@ class Orcatrata extends CI_Controller {
 								unset($estoque[$j]);						
 							}else{
 								if($qtd_anterior[$j] != $qtd_atual[$j]){
-									$diff_qtd[$j] = $qtd_anterior[$j] - $qtd_atual[$j];
-									if($diff_qtd[$j] > 0){
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] + $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+									$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] + $qtd_atual[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
 									}else{
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] - $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+										$estoque[$j] = $diff_estoque[$j]; 
 									}
 									$data['update']['produto'][$j]['Estoque'] = $estoque[$j];
 									$data['update']['produto']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['produto'][$j], $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto']);							
-									unset($diff_qtd[$j]);
+									//unset($diff_qtd[$j]);
 									unset($diff_estoque[$j]);
 									unset($estoque[$j]);
 								}else{
@@ -8103,9 +8441,7 @@ class Orcatrata extends CI_Controller {
 					$data['servico'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataValidadeProduto'], 'mysql');
 					$data['servico'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['servico'][$j]['DataConcluidoProduto'], 'mysql');
                     $data['servico'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['servico'][$j]['ValorProduto']));
-                    unset($data['servico'][$j]['SubtotalProduto']);
-					unset($data['servico'][$j]['SubtotalComissaoProduto']);
-					unset($data['servico'][$j]['SubtotalQtdProduto']);
+					
 					if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
 						$data['servico'][$j]['ConcluidoProduto'] = 'S';
 					}else{
@@ -8122,10 +8458,29 @@ class Orcatrata extends CI_Controller {
 						}else{
 							$data['servico'][$j]['HoraConcluidoProduto'] = $data['servico'][$j]['HoraConcluidoProduto'];
 						}
+						////inicio do acrescimo do estoque////
+						$data['get']['servico'][$j] = $this->Orcatrata_model->get_tab_produtos($data['servico'][$j]['idTab_Produtos_Produto']);
+						if($data['get']['servico'][$j]['ContarEstoque'] == "S"){
+							$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $data['servico'][$j]['SubtotalQtdProduto']);
+							if($diff_estoque[$j] <= 0){
+								$estoque[$j] = 0; 
+							}else{
+								$estoque[$j] = $diff_estoque[$j]; 
+							}
+							$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+							$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['servico'][$j]['idTab_Produtos_Produto']);
+							unset($diff_estoque[$j]);
+							unset($estoque[$j]);
+						}	
+						////fim do acrescimo do estoque////
 					}else{
 						$data['servico'][$j]['DataConcluidoProduto'] = "0000-00-00";
 						$data['servico'][$j]['HoraConcluidoProduto'] = "00:00";
-					}	
+					}
+					
+                    unset($data['servico'][$j]['SubtotalProduto']);
+					unset($data['servico'][$j]['SubtotalComissaoProduto']);
+					unset($data['servico'][$j]['SubtotalQtdProduto']);	
 				}
                 $data['servico']['idApp_Produto'] = $this->Orcatrata_model->set_servico($data['servico']);
             }
@@ -9195,9 +9550,7 @@ class Orcatrata extends CI_Controller {
 					$data['update']['servico']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['servico']['inserir'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['update']['servico']['inserir'][$j]['DataConcluidoProduto'], 'mysql');
 					$data['update']['servico']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorProduto']));
-                    unset($data['update']['servico']['inserir'][$j]['SubtotalProduto']);
-					unset($data['update']['servico']['inserir'][$j]['SubtotalComissaoProduto']);
-					unset($data['update']['servico']['inserir'][$j]['SubtotalQtdProduto']);
+					
 					if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
 						$data['update']['servico']['inserir'][$j]['ConcluidoProduto'] = 'S';
 					} else {
@@ -9214,23 +9567,42 @@ class Orcatrata extends CI_Controller {
 						}else{
 							$data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'] = $data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'];
 						}
+						
+						////inicio do desconto do estoque////
+						$data['get']['servico'][$j] = $this->Orcatrata_model->get_tab_produtos($data['update']['servico']['inserir'][$j]['idTab_Produtos_Produto']);
+						if($data['get']['servico'][$j]['ContarEstoque'] == "S"){
+							$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $data['update']['servico']['inserir'][$j]['SubtotalQtdProduto']);
+							if($diff_estoque[$j] <= 0){
+								$estoque[$j] = 0; 
+							}else{
+								$estoque[$j] = $diff_estoque[$j]; 
+							}
+							$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+							$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['inserir'][$j]['idTab_Produtos_Produto']);
+							unset($diff_estoque[$j]);
+							unset($estoque[$j]);
+						}	
+						////fim do desconto do estoque////
 					} else {
 						$data['update']['servico']['inserir'][$j]['DataConcluidoProduto'] = "0000-00-00";
 						$data['update']['servico']['inserir'][$j]['HoraConcluidoProduto'] = "00:00";
 					}
+					
+                    unset($data['update']['servico']['inserir'][$j]['SubtotalProduto']);
+					unset($data['update']['servico']['inserir'][$j]['SubtotalComissaoProduto']);
+					unset($data['update']['servico']['inserir'][$j]['SubtotalQtdProduto']);
 				}
 
                 $max = count($data['update']['servico']['alterar']);
                 for($j=0;$j<$max;$j++) {
+				
                     $data['update']['servico']['alterar'][$j]['ProfissionalProduto'] = $data['update']['servico']['alterar'][$j]['ProfissionalProduto'];
 					$data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Valor_Produto'];
 					$data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'] = $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
 					$data['update']['servico']['alterar'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataValidadeProduto'], 'mysql');
 					$data['update']['servico']['alterar'][$j]['DataConcluidoProduto'] = $this->basico->mascara_data($data['update']['servico']['alterar'][$j]['DataConcluidoProduto'], 'mysql');
 					$data['update']['servico']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['alterar'][$j]['ValorProduto']));
-                    unset($data['update']['servico']['alterar'][$j]['SubtotalProduto']);
-					unset($data['update']['servico']['alterar'][$j]['SubtotalComissaoProduto']);
-					unset($data['update']['servico']['alterar'][$j]['SubtotalQtdProduto']);
+					
 					if ($data['orcatrata']['ConcluidoOrca'] == 'S') { 
 						$data['update']['servico']['alterar'][$j]['ConcluidoProduto'] = 'S';
 					} else {
@@ -9251,8 +9623,125 @@ class Orcatrata extends CI_Controller {
 						$data['update']['servico']['alterar'][$j]['DataConcluidoProduto'] = "0000-00-00";
 						$data['update']['servico']['alterar'][$j]['HoraConcluidoProduto'] = "00:00";
 					}
-					if ($data['orcatrata']['idApp_Fornecedor']) $data['update']['servico']['alterar'][$j]['idApp_Fornecedor'] = $data['orcatrata']['idApp_Fornecedor'];					
+					if ($data['orcatrata']['idApp_Fornecedor']) $data['update']['servico']['alterar'][$j]['idApp_Fornecedor'] = $data['orcatrata']['idApp_Fornecedor'];	
+										
+					$data['get']['servico_anterior'][$j] = $this->Orcatrata_model->get_produto_anterior($data['update']['servico']['alterar'][$j]['idApp_Produto']);
+					$data['get']['servico'][$j] = $this->Orcatrata_model->get_tab_produtos($data['get']['servico_anterior'][$j]['idTab_Produtos_Produto']);
+					$contar_estoque[$j]			= $data['get']['servico'][$j]['ContarEstoque'];
+					$estoque_antigo[$j] 		= $data['get']['servico'][$j]['Estoque'];
+					$id_app_produto[$j] 		= $data['update']['servico']['alterar'][$j]['idApp_Produto'];
+					$id_tab_produtos[$j] 		= $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto'];
+					$estado_anterior[$j] 		= $data['get']['servico_anterior'][$j]['ConcluidoProduto'];
+					$qtd_anterior[$j]			= ($data['get']['servico_anterior'][$j]['QtdProduto'] * $data['get']['servico_anterior'][$j]['QtdIncrementoProduto']);
+					$estado_atual[$j] 			= $data['update']['servico']['alterar'][$j]['ConcluidoProduto'];
+					$qtd_atual[$j]				= $data['update']['servico']['alterar'][$j]['SubtotalQtdProduto'];
+					
+					if($contar_estoque[$j] == "S"){
+						if($estado_anterior[$j] == $estado_atual[$j]){
+							if($estado_anterior[$j] == "S"){
+								if($qtd_anterior[$j] != $qtd_atual[$j]){
+									$diff_qtd[$j] = $qtd_anterior[$j] - $qtd_atual[$j];
+									$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] - $diff_qtd[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
+									}else{
+										$estoque[$j] = $diff_estoque[$j]; 
+									}
+									$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+									$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);							
+									unset($diff_qtd[$j]);
+									unset($diff_estoque[$j]);
+									unset($estoque[$j]);							
+								}
+							}
+						}else{
+							if($estado_anterior[$j] == "N"){
+								$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] + $qtd_atual[$j]);
+								if($diff_estoque[$j] <= 0){
+									$estoque[$j] = 0; 
+								}else{
+									$estoque[$j] = $diff_estoque[$j]; 
+								}
+								$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+								$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);
+								//unset($qtd_servico[$j]);
+								unset($diff_estoque[$j]);
+								unset($estoque[$j]);						
+							}else{
+								if($qtd_anterior[$j] != $qtd_atual[$j]){
+									$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] - $qtd_atual[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
+									}else{
+										$estoque[$j] = $diff_estoque[$j]; 
+									}
+									$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+									$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);							
+									unset($diff_qtd[$j]);
+									unset($diff_estoque[$j]);
+									unset($estoque[$j]);
+								}else{
+									$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] - $qtd_anterior[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
+									}else{
+										$estoque[$j] = $diff_estoque[$j]; 
+									}
+									$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+									$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['update']['servico']['alterar'][$j]['idTab_Produtos_Produto']);
+									//unset($qtd_servico[$j]);
+									unset($diff_estoque[$j]);
+									unset($estoque[$j]);
+								}
+							}
+						}					
+                    }
+					/*
+					echo '<br>';
+					echo "<pre>";
+					print_r($qtd_anterior[$j]);
+					echo '<br>';
+					print_r($qtd_atual[$j]);
+					echo '<br>';
+					print_r($diff_estoque[$j]);
+					echo "</pre>";
+					*/
+					
+                    unset($data['update']['servico']['alterar'][$j]['SubtotalProduto']);
+					unset($data['update']['servico']['alterar'][$j]['SubtotalComissaoProduto']);
+					unset($data['update']['servico']['alterar'][$j]['SubtotalQtdProduto']);					
                 }
+				//exit();
+                $max = count($data['update']['servico']['excluir']);
+                for($j=0;$j<$max;$j++) {
+					
+					$data['get']['servico_excluir'][$j] = $this->Orcatrata_model->get_produto_anterior($data['update']['servico']['excluir'][$j]);
+						
+					if($data['get']['servico_excluir'][$j]['ConcluidoProduto'] == "S"){	
+						////inicio do retorno para o estoque////
+						$data['get']['servico'][$j] = $this->Orcatrata_model->get_tab_produtos($data['get']['servico_excluir'][$j]['idTab_Produtos_Produto']);
+						
+						if($data['get']['servico'][$j]['ContarEstoque'] == "S"){
+							
+							$qtd_servico[$j] = ($data['get']['servico_excluir'][$j]['QtdProduto'] * $data['get']['servico_excluir'][$j]['QtdIncrementoProduto']);
+							$diff_estoque[$j] = ($data['get']['servico'][$j]['Estoque'] - $qtd_servico[$j]);
+							if($diff_estoque[$j] <= 0){
+								$estoque[$j] = 0; 
+							}else{
+								$estoque[$j] = $diff_estoque[$j]; 
+							}
+							$data['update']['servico'][$j]['Estoque'] = $estoque[$j];
+							$data['update']['servico']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['servico'][$j], $data['get']['servico_excluir'][$j]['idTab_Produtos_Produto']);
+							
+							unset($qtd_servico[$j]);
+							unset($diff_estoque[$j]);
+							unset($estoque[$j]);
+							
+						}	
+						////fim do retorno para o estoque////					
+					}	
+
+				}
 
                 if (count($data['update']['servico']['inserir']))
                     $data['update']['servico']['bd']['inserir'] = $this->Orcatrata_model->set_servico($data['update']['servico']['inserir']);
@@ -9394,20 +9883,11 @@ class Orcatrata extends CI_Controller {
 							if($estado_anterior[$j] == "S"){
 								if($qtd_anterior[$j] != $qtd_atual[$j]){
 									$diff_qtd[$j] = $qtd_anterior[$j] - $qtd_atual[$j];
-									if($diff_qtd[$j] > 0){
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] + $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+									$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] - $diff_qtd[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
 									}else{
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] - $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+										$estoque[$j] = $diff_estoque[$j]; 
 									}
 									$data['update']['produto'][$j]['Estoque'] = $estoque[$j];
 									$data['update']['produto']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['produto'][$j], $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto']);							
@@ -9431,21 +9911,11 @@ class Orcatrata extends CI_Controller {
 								unset($estoque[$j]);						
 							}else{
 								if($qtd_anterior[$j] != $qtd_atual[$j]){
-									$diff_qtd[$j] = $qtd_anterior[$j] - $qtd_atual[$j];
-									if($diff_qtd[$j] > 0){
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] - $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+									$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] - $qtd_atual[$j]);
+									if($diff_estoque[$j] <= 0){
+										$estoque[$j] = 0; 
 									}else{
-										$diff_estoque[$j] = ($data['get']['produto'][$j]['Estoque'] + $diff_qtd[$j]);
-										if($diff_estoque[$j] <= 0){
-											$estoque[$j] = 0; 
-										}else{
-											$estoque[$j] = $diff_estoque[$j]; 
-										}
+										$estoque[$j] = $diff_estoque[$j]; 
 									}
 									$data['update']['produto'][$j]['Estoque'] = $estoque[$j];
 									$data['update']['produto']['bd'] = $this->Orcatrata_model->update_tab_produtos_id($data['update']['produto'][$j], $data['update']['produto']['alterar'][$j]['idTab_Produtos_Produto']);							
