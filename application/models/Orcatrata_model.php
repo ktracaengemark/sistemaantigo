@@ -403,6 +403,20 @@ class Orcatrata_model extends CI_Model {
         return $query;
     }
 
+    public function get_produto_anterior($data) {
+		$query = $this->db->query('SELECT * FROM App_Produto WHERE idApp_Produto = ' . $data . '');
+        $query = $query->result_array();
+
+        return $query[0];
+    }
+	
+    public function get_tab_produtos($data) {
+		$query = $this->db->query('SELECT * FROM Tab_Produtos WHERE idTab_Produtos = ' . $data . '');
+        $query = $query->result_array();
+
+        return $query[0];
+    }
+
     public function get_produto_bkp($data) {
 		$query = $this->db->query('
 			SELECT * 
@@ -3397,6 +3411,14 @@ exit();*/
 
     }
 
+    public function update_tab_produtos_id($data, $id) {
+
+        unset($data['idTab_Produtos']);
+        $query = $this->db->update('Tab_Produtos', $data, array('idTab_Produtos' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+	
     public function update_parcelas($data) {
 
         $query = $this->db->update_batch('App_Parcelas', $data, 'idApp_Parcelas');

@@ -200,16 +200,24 @@
 																<div class="row">
 																	<div class="col-md-8">
 																		<div class="row">
-																			<input type="hidden" class="form-control " id="NomeProduto<?php echo $i ?>" name="NomeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['NomeProduto'] ?>">
+																			<!--<input type="hidden" class="form-control " id="NomeProduto<?php echo $i ?>" name="NomeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['NomeProduto'] ?>">-->
 																			<input type="hidden" class="form-control " id="idTab_Produtos_Produto<?php echo $i ?>" name="idTab_Produtos_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produtos_Produto'] ?>">
 																			<input type="hidden" class="form-control " id="Prod_Serv_Produto<?php echo $i ?>" name="Prod_Serv_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['Prod_Serv_Produto'] ?>">
 																			<input type="hidden" class="form-control " id="ComissaoProduto<?php echo $i ?>" name="ComissaoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ComissaoProduto'] ?>">			
+																			<input type="hidden" class="form-control " name="idTab_Produto<?php echo $i ?>" value="<?php echo $produto[$i]['idTab_Produto'] ?>">
+																			<div class="col-md-12">
+																				<label for="NomeProduto">Produto <?php echo $i ?></label>
+																				<input type="text" class="form-control text-left"  readonly="" id="NomeProduto<?php echo $i ?>"
+																					   name="NomeProduto<?php echo $i ?>" value="<?php echo $produto[$i]['NomeProduto'] ?>">
+																			</div>
+																			<!--
 																			<div class="col-md-12">
 																				<label for="idTab_Produto">Produto <?php echo $i ?></label>
 																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor2Tabelas(this.value,this.name,'Produtos',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
 																						 id="listadinamicab<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
 																					<option value="">-- Selecione uma opção --</option>
 																					<?php
+																					/*
 																					foreach ($select['Produto'] as $key => $row) {
 																						if ($produto[$i]['idTab_Produto'] == $key) {
 																							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -217,9 +225,11 @@
 																							echo '<option value="' . $key . '">' . $row . '</option>';
 																						}
 																					}
+																					*/
 																					?>
 																				</select>
 																			</div>
+																			-->
 																		</div>
 																		<div id="EscreverProduto<?php echo $i ?>">
 																			<div class="row">
@@ -389,18 +399,27 @@
 																			<input type="hidden" class="form-control " id="idTab_Produtos_Servico<?php echo $i ?>" name="idTab_Produtos_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Produtos_Produto'] ?>">
 																			<input type="hidden" class="form-control " id="Prod_Serv_Servico<?php echo $i ?>" name="Prod_Serv_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['Prod_Serv_Produto'] ?>">
 																			<input type="hidden" class="form-control " id="ComissaoServico<?php echo $i ?>" name="ComissaoServico<?php echo $i ?>" value="<?php echo $servico[$i]['ComissaoProduto'] ?>">
-																			<input type="hidden" class="form-control " id="NomeServico<?php echo $i ?>" name="NomeServico<?php echo $i ?>" value="<?php echo $servico[$i]['NomeProduto'] ?>">
+																			<!--<input type="hidden" class="form-control " id="NomeServico<?php echo $i ?>" name="NomeServico<?php echo $i ?>" value="<?php echo $servico[$i]['NomeProduto'] ?>">-->
+																			<input type="hidden" class="form-control " name="idTab_Servico<?php echo $i ?>" value="<?php echo $servico[$i]['idTab_Produto'] ?>">
+																			
+																			<div class="col-md-12">
+																				<label for="NomeServico">Serviço <?php echo $i ?>:</label>
+																				<input type="text" class="form-control " readonly="" id="NomeServico<?php echo $i ?>"
+																					   name="NomeServico<?php echo $i ?>" value="<?php echo $servico[$i]['NomeProduto'] ?>">
+																			</div>
+																			<!--
 																			<div class="col-md-12">
 																				<label for="idTab_Servico">Serviço <?php echo $i ?>:</label>
 																				<?php if ($i == 1) { ?>
-																				<!--<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>servico/cadastrar/servico" role="button">
+																				<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>servico/cadastrar/servico" role="button">
 																					<span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
-																				</a>-->
+																				</a>
 																				<?php } ?>
 																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor2Tabelas(this.value,this.name,'Produtos',<?php echo $i ?>,'Servico')" <?php echo $readonly; ?>
 																						id="listadinamica<?php echo $i ?>" name="idTab_Servico<?php echo $i ?>">																					
 																					<option value="">-- Selecione uma opção --</option>
 																					<?php
+																					/*
 																					foreach ($select['Servico'] as $key => $row) {
 																						if ($servico[$i]['idTab_Produto'] == $key) {
 																							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -408,9 +427,11 @@
 																							echo '<option value="' . $key . '">' . $row . '</option>';
 																						}
 																					}
+																					*/
 																					?>
 																				</select>
 																			</div>
+																			-->
 																		</div>
 																		<div id="EscreverServico<?php echo $i ?>">
 																			<div class="row">
