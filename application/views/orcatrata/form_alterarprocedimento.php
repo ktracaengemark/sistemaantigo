@@ -3,22 +3,15 @@
 
 <div class="container-fluid">
 	<div class="row">
-
-		<div class="col-md-1"></div>
-		<div class="col-md-10 ">
-
-			<div class="row">
-
-				<div class="col-md-12 col-lg-12">
+		<div class="col-md-12 ">
 				
 					<?php echo validation_errors(); ?>
 					<?php echo form_open_multipart($form_open_path); ?>
 
 					<div class="panel panel-<?php echo $panel; ?>">
 						<div class="panel-heading">
-							<?php echo $titulo; ?>
-							<a class="btn btn-md btn-info" href="<?php echo base_url() ?>agenda" role="button">
-								<span class="glyphicon glyphicon-calendar"></span> Agenda & Tarefas
+							<a class="btn btn-md btn-info" href="<?php echo base_url() ?>tarefa" role="button">
+								<span class="glyphicon glyphicon-pencil"></span> <?php echo $titulo; ?>
 							</a>
 						</div>
 						<div class="panel-body">
@@ -46,6 +39,27 @@
 													<div class="panel-heading">
 														<div class="row">
 															<div class="col-md-2">
+																<label for="Compartilhar<?php echo $i ?>">Quem Fazer:</label>
+																<select data-placeholder="Selecione uma opção..." class="form-control"
+																		 id="listadinamicac<?php echo $i ?>" name="Compartilhar<?php echo $i ?>">
+																	<!--<option value="">-- Selecione uma opção --</option>-->
+																	<?php
+																	foreach ($select['Compartilhar'] as $key => $row) {
+																		if ($procedimento[$i]['Compartilhar'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	?>
+																</select>
+															</div>
+															<div class="col-md-2">
+																<label for="Procedimento<?php echo $i ?>">Tarefa <?php echo $i ?>/<?php echo $count['PMCount'] ?>:</label>
+																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
+																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
+															</div>
+															<div class="col-md-2">
 																<label for="Categoria<?php echo $i ?>">Categoria:</label>
 
 																<select data-placeholder="Selecione uma opção..." class="form-control" 
@@ -54,47 +68,6 @@
 																	<?php
 																	foreach ($select['Categoria'] as $key => $row) {
 																		if ($procedimento[$i]['Categoria'] == $key) {
-																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																		} else {
-																			echo '<option value="' . $key . '">' . $row . '</option>';
-																		}
-																	}
-																	?>
-																</select>
-															</div>
-															<div class="col-md-2">
-																<label for="Procedimento<?php echo $i ?>">Tarefa <?php echo $i ?>:</label>
-																<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
-																		  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
-															</div>															
-															<div class="col-md-2">
-																<label for="Prioridade<?php echo $i ?>">Prioridade:</label>
-																<?php if ($i == 1) { ?>
-																<?php } ?>
-																<select data-placeholder="Selecione uma opção..." class="form-control" 
-																		 id="listadinamicac<?php echo $i ?>" name="Prioridade<?php echo $i ?>">
-																	
-																	<?php
-																	foreach ($select['Prioridade'] as $key => $row) {
-																		if ($procedimento[$i]['Prioridade'] == $key) {
-																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																		} else {
-																			echo '<option value="' . $key . '">' . $row . '</option>';
-																		}
-																	}
-																	?>
-																</select>
-															</div>
-															<div class="col-md-2">
-																<label for="Statustarefa<?php echo $i ?>">StatusTRF:</label>
-																<?php if ($i == 1) { ?>
-																<?php } ?>
-																<select data-placeholder="Selecione uma opção..." class="form-control" 
-																		 id="listadinamicac<?php echo $i ?>" name="Statustarefa<?php echo $i ?>">
-																	
-																	<?php
-																	foreach ($select['Statustarefa'] as $key => $row) {
-																		if ($procedimento[$i]['Statustarefa'] == $key) {
 																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																		} else {
 																			echo '<option value="' . $key . '">' . $row . '</option>';
@@ -123,7 +96,7 @@
 																		   name="DataConcluidoProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataConcluidoProcedimento']; ?>">
 																</div>
 															</div>
-															<!--
+															
 															<div class="col-md-2">
 																<label for="ConcluidoProcedimento">Concluído? </label><br>
 																<div class="form-group">
@@ -152,40 +125,7 @@
 																	</div>
 																</div>
 															</div>
-															
-															<div class="col-md-1">
-																<label><br></label><br>
-																<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
-																	<span class="glyphicon glyphicon-trash"></span>
-																</button>
-															</div>
-															-->
 														</div>
-														<!--
-														<div class="row">
-															<div class="col-md-9"></div>
-															
-															<div class="col-md-3">
-																<label for="idSis_Usuario<?php echo $i ?>">Profissional:</label>
-																<?php if ($i == 1) { ?>
-																<?php } ?>
-																<select data-placeholder="Selecione uma opção..." class="form-control" readonly=""
-																		 id="listadinamicac<?php echo $i ?>" name="idSis_Usuario<?php echo $i ?> readonly="" ">
-																	<option value="">-- Selecione uma opção --</option>
-																	<?php
-																	foreach ($select['idSis_Usuario'] as $key => $row) {
-																		if ($procedimento[$i]['idSis_Usuario'] == $key) {
-																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																		} else {
-																			echo '<option value="' . $key . '">' . $row . '</option>';
-																		}
-																	}
-																	?>
-																</select>
-															</div>
-															
-														</div>
-														-->
 													</div>
 												</div>
 											</div>
@@ -195,19 +135,7 @@
 											?>
 
 											</div>
-											<!--
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-4">
-														<a class="add_field_button3 btn btn btn-warning" onclick="adicionaProcedimento()">
-															<span class="glyphicon glyphicon-plus"></span> Adic. Procedimento
-														</a>
-													</div>
-												</div>
-											</div>
-											-->
 										</div>
-									
 									</div>
 								</div>
 							</div>														
@@ -317,9 +245,6 @@
 
 						</div>
 					</div>
-				</div>
-			</div>
 		</div>
-		<div class="col-md-1"></div>
 	</div>
 </div>

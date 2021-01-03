@@ -28,14 +28,14 @@
 			</figure>
 		</center>
 		<script type="text/javascript">
-			$('#ca-container').contentcarousel();
+			//$('#ca-container').contentcarousel();
 		</script>
 
 		<!--<h2 class="form-signin-heading text-center">Agenda <?php echo ucfirst($nome_modulo) ?></h2><h4><b>***** versão alpha *****</b></h4>-->
 
 		<!--
 		<label class="sr-only">Empresa</label>
-		<input type="text" id="inputText" class="form-control" placeholder="Empresa" autofocus name="idSis_Empresa" value="<?php echo set_value('idSis_Empresa'); ?>">
+		<input type="text" id="idSis_Empresa" class="form-control" placeholder="Empresa" autofocus name="idSis_Empresa" value="<?php echo set_value('idSis_Empresa'); ?>">
 		-->
 		<!--
 		<label class="sr-only">Empresa</label>
@@ -54,7 +54,7 @@
 		</select> 
 		<?php #echo form_error('idSis_Empresa'); ?>
 		<label class="sr-only">Usuário</label>
-		<input type="text" id="inputText" class="form-control" placeholder="Usuário ou E-mail" autofocus name="Usuario" value="<?php #echo set_value('Usuario'); ?>">	   
+		<input type="text" id="Usuario" class="form-control" placeholder="Usuário ou E-mail" autofocus name="Usuario" value="<?php #echo set_value('Usuario'); ?>">	   
 		<?php #echo form_error('Usuario'); ?>
 		<label class="sr-only">Senha</label>
 		<input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="Senha" value="">

@@ -253,7 +253,7 @@ class Usuario_model extends CI_Model {
     }
 
 	public function select_usuario($data = FALSE) {
-
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
         if ($data === TRUE) {
             $array = $this->db->query('					
             SELECT
@@ -262,8 +262,8 @@ class Usuario_model extends CI_Model {
             FROM
                 Sis_Usuario AS P
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
-            WHERE
-                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+            WHERE 
+				' . $permissao . '
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
 			ORDER BY 
 				F.Funcao ASC,
@@ -279,7 +279,7 @@ class Usuario_model extends CI_Model {
                 Sis_Usuario AS P
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
             WHERE
-                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				' . $permissao . '
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
 			ORDER BY 
 				F.Funcao ASC,
@@ -295,6 +295,51 @@ class Usuario_model extends CI_Model {
         return $array;
     }	
 
+	public function select_compartilhar($data = FALSE) {
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
+		$permissao2 = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? $array[0] = '::Todos::' : FALSE;
+        if ($data === TRUE) {
+            $array = $this->db->query('					
+            SELECT
+				P.idSis_Usuario,
+				CONCAT(IFNULL(P.Nome,""), " -- ", IFNULL(F.Funcao,"")) AS Nome
+            FROM
+                Sis_Usuario AS P
+					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
+            WHERE 
+				' . $permissao . '
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+			ORDER BY 
+				F.Funcao ASC,
+				P.Nome ASC
+			');
+					
+        } else {
+            $query = $this->db->query('
+            SELECT
+				P.idSis_Usuario,
+				CONCAT(IFNULL(P.Nome,""), " -- ", IFNULL(F.Funcao,"")) AS Nome
+            FROM
+                Sis_Usuario AS P
+					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
+            WHERE
+				' . $permissao . '
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
+			ORDER BY 
+				F.Funcao ASC,
+				P.Nome ASC
+			');
+            
+            $array = array();
+			$permissao;
+            foreach ($query->result() as $row) {
+                $array[$row->idSis_Usuario] = $row->Nome;
+            }
+        }
+
+        return $array;
+    }
+	
 	public function select_profissional1($data = FALSE) {
 
         if ($data === TRUE) {

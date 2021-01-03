@@ -127,10 +127,10 @@ class Agenda extends CI_Controller {
         );		
 
 		$data['select']['Campo'] = array(
-			'P.Compartilhar' => 'Quem Fazer',
-			'P.idSis_Usuario' => 'Quem Cadastrou',
 			'P.DataProcedimento' => 'Data do Inicio',
-			'P.DataProcedimentoLimite' => 'Data da Concl.',			
+			'P.DataProcedimentoLimite' => 'Data da Concl.',
+			'P.Compartilhar' => 'Quem Fazer',
+			'P.idSis_Usuario' => 'Quem Cadastrou',			
 			'P.ConcluidoProcedimento' => 'Concluido',
 			'P.Categoria' => 'Categoria',
         );

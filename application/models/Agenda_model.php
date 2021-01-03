@@ -643,7 +643,7 @@ class Agenda_model extends CI_Model {
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(P.DataProcedimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(P.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(P.DataProcedimento) = ' . $data['Ano'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'P.Compartilhar' : $data['Campo'];
+        $data['Campo'] = (!$data['Campo']) ? 'P.DataProcedimento' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'DESC' : $data['Ordenamento'];
 		$filtro5 = ($data['ConcluidoProcedimento']) ? 'P.ConcluidoProcedimento = "' . $data['ConcluidoProcedimento'] . '" AND ' : FALSE;
 		$filtro8 = ($data['ConcluidoSubProcedimento']) ? 'SP.ConcluidoSubProcedimento = "' . $data['ConcluidoSubProcedimento'] . '" AND ' : FALSE;

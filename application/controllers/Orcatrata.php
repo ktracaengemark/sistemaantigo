@@ -14440,7 +14440,8 @@ class Orcatrata extends CI_Controller {
                 $data['procedimento'][$j]['Procedimento'] = $this->input->post('Procedimento' . $i);
 				$data['procedimento'][$j]['Categoria'] = $this->input->post('Categoria' . $i);
 				$data['procedimento'][$j]['ConcluidoProcedimento'] = $this->input->post('ConcluidoProcedimento' . $i);
-				$data['procedimento'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
+				//$data['procedimento'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
+				$data['procedimento'][$j]['Compartilhar'] = $this->input->post('Compartilhar' . $i);
 				
 				(!$data['procedimento'][$j]['ConcluidoProcedimento']) ? $data['procedimento'][$j]['ConcluidoProcedimento'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -14474,7 +14475,7 @@ class Orcatrata extends CI_Controller {
                     for($j=1; $j <= $data['count']['PMCount']; $j++) {
                         $data['procedimento'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataProcedimento'], 'barras');
 						$data['procedimento'][$j]['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['procedimento'][$j]['DataConcluidoProcedimento'], 'barras');
-						$_SESSION['Procedimento'][$j]['Nome'] = $data['procedimento'][$j]['Nome'];
+						$_SESSION['Procedimento'][$j]['NomeCadastrou'] = $data['procedimento'][$j]['NomeCadastrou'];
                     
 						$data['radio'] = array(
 							'ConcluidoProcedimento' . $j => $this->basico->radio_checked($data['procedimento'][$j]['ConcluidoProcedimento'], 'ConcluidoProcedimento' . $j, 'NS'),
@@ -14495,6 +14496,7 @@ class Orcatrata extends CI_Controller {
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
+		$data['select']['Compartilhar'] = $this->Usuario_model->select_compartilhar();
 		$data['select']['Procedimento'] = $this->Basico_model->select_procedimento();
 		$data['select']['Categoria'] = $this->Basico_model->select_categoriatarefa();		
 		$data['select']['Prioridade'] = array (
@@ -14637,7 +14639,7 @@ class Orcatrata extends CI_Controller {
 
                 #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
 				#redirect(base_url() . 'relatorio/alterarprocedimento/' . $data['msg']);
-				redirect(base_url() . 'agenda' . $data['msg']);
+				redirect(base_url() . 'tarefa' . $data['msg']);
 
 				exit();
             }

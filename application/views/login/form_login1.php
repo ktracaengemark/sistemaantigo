@@ -13,7 +13,7 @@
 			</figure>
 		</center>
 		<script type="text/javascript">
-			$('#ca-container').contentcarousel();
+			//$('#ca-container').contentcarousel();
 		</script>
 		<script>
 			function mostrarSenha(){
@@ -49,7 +49,7 @@
 			</select> 
 			<?php echo form_error('idSis_Empresa'); ?>
 			<label class="sr-only">Celular</label>
-			<input type="text" id="inputText" maxlength="11" class="form-control" placeholder="Celular Pessoal (xx)999999999" autofocus name="CelularUsuario" value="<?php echo set_value('CelularUsuario'); ?>">	   
+			<input type="text" id="CelularUsuario" maxlength="11" class="form-control" placeholder="Celular Pessoal (xx)999999999" autofocus name="CelularUsuario" value="<?php echo set_value('CelularUsuario'); ?>">	   
 			<?php echo form_error('CelularUsuario'); ?>
 			<label class="sr-only">Senha</label>
 			<div class="input-group">

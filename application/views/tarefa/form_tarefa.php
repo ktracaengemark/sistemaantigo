@@ -30,8 +30,8 @@
 								<span class="glyphicon glyphicon-list"></span> Listar
 							</a>
 							-->
-							<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>agenda" role="button"> 
-								<span class="glyphicon glyphicon-calendar"></span> Agenda
+							<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>tarefa" role="button"> 
+								<span class="glyphicon glyphicon-calendar"></span> Tarefas
 							</a>
 						</div>					
 				</div>

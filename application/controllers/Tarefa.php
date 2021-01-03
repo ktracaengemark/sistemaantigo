@@ -32,7 +32,198 @@ class Tarefa extends CI_Controller {
         else
             $data['msg'] = '';
 
-        $this->load->view('tarefa/tela_index', $data);
+
+		$data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+		$data['collapse'] = '';	
+		$data['collapse1'] = 'class="collapse"';
+		
+        $data['query'] = quotes_to_entities($this->input->post(array(
+			'NomeProfissional',
+			'NomeUsuario',
+			'NomeCliente',
+			'NomeEmpresa',
+			'NomeEmpresaCli',
+            'DataInicio',
+            'DataFim',
+			'DataInicio2',
+            'DataFim2',
+			'Dia',
+			'Mesvenc',
+			'Ano',
+			'Diacli',
+			'Mesvenccli',
+			'Anocli',
+			'Diaemp',
+			'Mesvencemp',
+			'Anoemp',			
+			'ConcluidoProcedimento',
+			'ConcluidoSubProcedimento',
+			'Concluidocli',
+			'Concluidoemp',			
+            'Ordenamento',
+            'Campo',
+			'Prioridade',
+			'Statustarefa',
+			'Statussubtarefa',
+			'Procedimento',
+			'Compartilhar',
+			'Categoria',
+			'SubPrioridade',
+			
+        ), TRUE));
+
+        $_SESSION['FiltroAlteraProcedimento']['Dia'] = $data['query']['Dia'];
+        $_SESSION['FiltroAlteraProcedimento']['Mesvenc'] = $data['query']['Mesvenc'];
+        $_SESSION['FiltroAlteraProcedimento']['Ano'] = $data['query']['Ano'];
+		$_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+		$_SESSION['FiltroAlteraProcedimento']['ConcluidoSubProcedimento'] = $data['query']['ConcluidoSubProcedimento'];
+        $_SESSION['FiltroAlteraProcedimento']['Prioridade'] = $data['query']['Prioridade'];
+		$_SESSION['FiltroAlteraProcedimento']['Statustarefa'] = $data['query']['Statustarefa'];
+		$_SESSION['FiltroAlteraProcedimento']['Statussubtarefa'] = $data['query']['Statussubtarefa'];
+		$_SESSION['FiltroAlteraProcedimento']['SubPrioridade'] = $data['query']['SubPrioridade'];
+		$_SESSION['FiltroAlteraProcedimento']['Categoria'] = $data['query']['Categoria'];
+		$_SESSION['FiltroAlteraProcedimento']['Procedimento'] = $data['query']['Procedimento'];
+		$_SESSION['FiltroAlteraProcedimento']['Diacli'] = $data['query']['Diacli'];
+        $_SESSION['FiltroAlteraProcedimento']['Mesvenccli'] = $data['query']['Mesvenccli'];
+        $_SESSION['FiltroAlteraProcedimento']['Anocli'] = $data['query']['Anocli'];		
+		$_SESSION['FiltroAlteraProcedimento']['Concluidocli'] = $data['query']['Concluidocli'];
+		$_SESSION['FiltroAlteraProcedimento']['NomeCliente'] = $data['query']['NomeCliente'];		
+        $_SESSION['FiltroAlteraProcedimento']['Diaemp'] = $data['query']['Diaemp'];
+        $_SESSION['FiltroAlteraProcedimento']['Mesvencemp'] = $data['query']['Mesvencemp'];
+        $_SESSION['FiltroAlteraProcedimento']['Anoemp'] = $data['query']['Anoemp'];		
+		$_SESSION['FiltroAlteraProcedimento']['Concluidoemp'] = $data['query']['Concluidoemp'];			
+		$_SESSION['FiltroAlteraProcedimento']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
+		$_SESSION['FiltroAlteraProcedimento']['NomeEmpresaCli'] = $data['query']['NomeEmpresaCli'];
+        $_SESSION['log']['NomeUsuario'] = ($data['query']['NomeUsuario']) ? $data['query']['NomeUsuario'] : FALSE;
+        $_SESSION['log']['NomeProfissional'] = ($data['query']['NomeProfissional']) ? $data['query']['NomeProfissional'] : FALSE;
+        $_SESSION['log']['Compartilhar'] = ($data['query']['Compartilhar']) ? $data['query']['Compartilhar'] : FALSE;
+        
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+
+        $data['select']['ConcluidoProcedimento'] = array(
+			'0' => '::Todos::',
+			'S' => 'Sim',
+			'N' => 'Não',
+        );
+		
+        $data['select']['ConcluidoSubProcedimento'] = array(
+			'0' => '::Todos::',
+			'S' => 'Sim',
+			'N' => 'Não',
+        );		
+		
+        $data['select']['Concluidocli'] = array(
+			'0' => 'TODOS',
+			'S' => 'Sim',
+			'N' => 'Não',
+        );
+
+        $data['select']['Concluidoemp'] = array(
+			'0' => 'TODOS',
+			'S' => 'Sim',
+			'N' => 'Não',
+        );		
+
+		$data['select']['Campo'] = array(
+			'P.DataProcedimento' => 'Data do Inicio',
+			'P.DataProcedimentoLimite' => 'Data da Concl.',
+			'P.Compartilhar' => 'Quem Fazer',
+			'P.idSis_Usuario' => 'Quem Cadastrou',			
+			'P.ConcluidoProcedimento' => 'Concluido',
+			'P.Categoria' => 'Categoria',
+        );
+
+        $data['select']['Ordenamento'] = array(
+			'DESC' => 'Decrescente',
+			'ASC' => 'Crescente',
+        );
+		
+        $data['select']['Prioridade'] = array (
+            '0' => '::Todos::',
+			'1' => 'Alta',
+			'2' => 'Media',
+			'3' => 'Baixa',
+        );
+		
+        $data['select']['Statustarefa'] = array (
+            '0' => '::Todos::',
+			'1' => 'A Fazer',
+			'2' => 'Fazendo',
+			'3' => 'Feito',
+        );		
+		
+        $data['select']['SubPrioridade'] = array (
+            '0' => '::Todos::',
+			'1' => 'Alta',
+			'2' => 'Media',
+			'3' => 'Baixa',
+        );
+
+        $data['select']['Statussubtarefa'] = array (
+            '0' => '::Todos::',
+			'1' => 'A Fazer',
+			'2' => 'Fazendo',
+			'3' => 'Feito',
+        );		
+		        
+		$data['select']['Dia'] = $this->Tarefa_model->select_dia();
+		$data['select']['Mesvenc'] = $this->Tarefa_model->select_mes();
+		$data['select']['Diacli'] = $this->Tarefa_model->select_dia();
+		$data['select']['Mesvenccli'] = $this->Tarefa_model->select_mes();
+		$data['select']['Diaemp'] = $this->Tarefa_model->select_dia();
+		$data['select']['Mesvencemp'] = $this->Tarefa_model->select_mes();		
+		$data['select']['NomeCliente'] = $this->Tarefa_model->select_cliente();
+		$data['select']['NomeEmpresa'] = $this->Tarefa_model->select_empresarec();
+		$data['select']['NomeEmpresaCli'] = $this->Tarefa_model->select_empresaenv();
+        $data['select']['NomeUsuario'] = $this->Tarefa_model->select_usuario();
+        $data['select']['NomeProfissional'] = $this->Tarefa_model->select_usuario();
+		$data['select']['Procedimento'] = $this->Tarefa_model->select_tarefa();
+		$data['select']['Categoria'] = $this->Tarefa_model->select_categoria2();
+		$data['select']['Compartilhar'] = $this->Tarefa_model->select_compartilhar();
+		
+        $data['titulo1'] = 'Tarefas';
+
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+
+			$data['bd']['Dia'] = $data['query']['Dia'];
+			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
+			$data['bd']['Ano'] = $data['query']['Ano'];
+			$data['bd']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+			$data['bd']['ConcluidoSubProcedimento'] = $data['query']['ConcluidoSubProcedimento'];
+			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
+            $data['bd']['Campo'] = $data['query']['Campo'];
+			$data['bd']['Prioridade'] = $data['query']['Prioridade'];
+			$data['bd']['Statustarefa'] = $data['query']['Statustarefa'];
+			$data['bd']['Statussubtarefa'] = $data['query']['Statussubtarefa'];
+			$data['bd']['SubPrioridade'] = $data['query']['SubPrioridade'];			
+			$data['bd']['Procedimento'] = $data['query']['Procedimento'];
+			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
+			$data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
+			$data['bd']['NomeProfissional'] = $data['query']['NomeProfissional'];
+			$data['bd']['Categoria'] = $data['query']['Categoria'];
+			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
+            $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
+            $data['bd']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
+			
+            $data['report'] = $this->Tarefa_model->list1_procedimento($data['bd'],TRUE);
+			/*
+			$_SESSION['Tarefas'] = $data['report']->num_rows();
+			echo "<pre>";
+			print_r($_SESSION['Tarefas']);
+			echo "</pre>";
+			exit();
+			*/
+
+            $data['list1'] = $this->load->view('tarefa/list1_procedimento', $data, TRUE);
+            //$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+        }		
+
+		$this->load->view('tarefa/tela_tarefa', $data);        
+		//$this->load->view('tarefa/tela_index', $data);
 
         #load footer view
         $this->load->view('basico/footer');
@@ -245,7 +436,7 @@ class Tarefa extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'tarefa/listar/' . $data['msg']);
-				redirect(base_url() . 'agenda' . $data['msg']);
+				redirect(base_url() . 'tarefa' . $data['msg']);
                 exit();
             }
         }
@@ -549,7 +740,7 @@ class Tarefa extends CI_Controller {
                 #redirect(base_url() . 'tarefa/listar/' . $data['msg']);
 				
 				unset($_SESSION['Tarefa'], $_SESSION['Procedtarefa']);
-				redirect(base_url() . 'agenda' . $data['msg']);
+				redirect(base_url() . 'tarefa' . $data['msg']);
                 exit();
             }
         }
@@ -631,7 +822,7 @@ class Tarefa extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'tarefa/listar/' . $data['msg']);
-				redirect(base_url() . 'agenda' . $data['msg']);
+				redirect(base_url() . 'tarefa' . $data['msg']);
                 exit();
             }
       
@@ -938,7 +1129,7 @@ class Tarefa extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'tarefa/listar/' . $data['msg']);
-				redirect(base_url() . 'agenda/' . $data['msg']);
+				redirect(base_url() . 'tarefa/' . $data['msg']);
                 exit();
             //}
         //}

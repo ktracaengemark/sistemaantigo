@@ -1671,7 +1671,7 @@ class Orcatrata_model extends CI_Model {
     public function get_alterarprocedimento($data) {
 		
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
-		#$permissao1 = ($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != '0' ) ? 'P.ConcluidoProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] . '" AND ' : FALSE;
+		$permissao1 = ($_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] != '0' ) ? 'P.ConcluidoProcedimento = "' . $_SESSION['FiltroAlteraProcedimento']['ConcluidoProcedimento'] . '" AND ' : FALSE;
 		$permissao6 = ($_SESSION['FiltroAlteraProcedimento']['Prioridade'] != '0' ) ? 'P.Prioridade = "' . $_SESSION['FiltroAlteraProcedimento']['Prioridade'] . '" AND ' : FALSE;
 		$permissao7 = ($_SESSION['FiltroAlteraProcedimento']['Procedimento'] != '0' ) ? 'P.idApp_Procedimento = "' . $_SESSION['FiltroAlteraProcedimento']['Procedimento'] . '" AND ' : FALSE;
 		$permissao2 = ($_SESSION['FiltroAlteraProcedimento']['Mesvenc'] != "0" ) ? 'MONTH(P.DataProcedimento) = "' . $_SESSION['FiltroAlteraProcedimento']['Mesvenc'] . '" AND ' : FALSE;
@@ -1682,36 +1682,30 @@ class Orcatrata_model extends CI_Model {
 		
 		$query = $this->db->query('
 			SELECT
-				
-				U.CpfUsuario,
-				U.CelularUsuario,
-				P.idSis_Usuario,
-				P.idSis_Empresa,
-				P.idApp_Procedimento,
-                P.Procedimento,
-				P.DataProcedimento,
-				P.DataConcluidoProcedimento,
-				P.HoraProcedimento,
-				P.ConcluidoProcedimento,
-				P.Categoria,
-				P.Prioridade,
-				P.Statustarefa
+				P.*,
+				US.*,
+				US.idSis_Usuario AS Compartilhar,
+				US.CelularUsuario AS CelularCompartilhou,
+				US.Nome AS NomeCompartilhar,
+				USC.*,
+				USC.idSis_Usuario AS idSis_Usuario,
+				USC.CelularUsuario AS CelularCadastrou,
+				USC.Nome AS NomeCadastrou
             FROM
 				App_Procedimento AS P
-					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = P.idSis_Usuario
-					LEFT JOIN Sis_Usuario AS AU ON AU.idSis_Usuario = P.Compartilhar
+					LEFT JOIN Sis_Usuario AS USC ON USC.idSis_Usuario = P.idSis_Usuario
+					LEFT JOIN Sis_Usuario AS US ON US.idSis_Usuario = P.Compartilhar
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = P.idSis_Empresa
 					LEFT JOIN Tab_StatusSN AS SN ON SN.Abrev = P.ConcluidoProcedimento
 					LEFT JOIN Tab_Categoria AS CT ON CT.idTab_Categoria = P.Categoria
 			WHERE 
-				' . $permissao6 . '
-				' . $permissao7 . '
-				' . $permissao8 . '
-				' . $permissao9 . '
-				(U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
-				AU.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR	
-				P.Compartilhar = ' . $_SESSION['log']['idSis_Usuario'] . ' OR
-				(P.Compartilhar = 51 AND P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '))
+				' . $permissao1 . '	 
+				' . $permissao8 . '	
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND
+				P.idApp_OrcaTrata = "0" AND
+				P.idApp_Cliente = "0" AND
+				P.idApp_Fornecedor = "0" 
 			ORDER BY
 				P.DataProcedimento DESC,
 				P.Prioridade ASC,

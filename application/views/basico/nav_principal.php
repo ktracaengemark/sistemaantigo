@@ -58,10 +58,10 @@
 						</button>
 						
 						<ul class="dropdown-menu" role="menu">
-							<li><a class="dropdown-item" href="<?php echo base_url() ?>agenda"><span class="glyphicon glyphicon-pencil"></span> Tarefas & Agenda </a></li>
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>tarefa"><span class="glyphicon glyphicon-pencil"></span> Tarefas </a></li>
 							<li role="separator" class="divider"></li>
-							<!--<li><a class="dropdown-item" href="<?php echo base_url() ?>agenda"><span class="glyphicon glyphicon-calendar"></span> Agenda </a></li>
-							<li role="separator" class="divider"></li>-->
+							<li><a class="dropdown-item" href="<?php echo base_url() ?>agenda"><span class="glyphicon glyphicon-calendar"></span> Agenda </a></li>
+							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/admin"><span class="glyphicon glyphicon-list"></span> Menu </a></li>
 						</ul>
 					</div>							
