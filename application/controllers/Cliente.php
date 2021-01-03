@@ -1139,6 +1139,13 @@ class Cliente extends CI_Controller {
         else
             $data['msg'] = '';
 
+        if ($this->input->get('start') && $this->input->get('end')) {
+            //$data['start'] = substr($this->input->get('start'),0,-3);
+            //$data['end'] = substr($this->input->get('end'),0,-3);
+            $_SESSION['agenda']['HoraInicio'] = substr($this->input->get('start'),0,-3);
+            $_SESSION['agenda']['HoraFim'] = substr($this->input->get('end'),0,-3);
+        }		
+		
         $data['titulo'] = "Pesquisar Cliente";
         $data['novo'] = '';
 

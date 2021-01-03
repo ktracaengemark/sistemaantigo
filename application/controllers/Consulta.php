@@ -35,7 +35,7 @@ class Consulta extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-    public function cadastrar($idApp_Cliente = NULL) {
+    public function cadastrar($idApp_Cliente = NULL, $idApp_ContatoCliente = NULL) {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -93,25 +93,36 @@ class Consulta extends CI_Controller {
             $data['query']['idApp_Cliente'] = $idApp_Cliente;
             $_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
         }
+		*/
+		if ($idApp_Cliente) {
+            $data['query']['idApp_Cliente'] = $idApp_Cliente;
+			$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
+			$data['resumo'] = $this->Cliente_model->get_cliente($idApp_Cliente);
+			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 12) ? substr($data['resumo']['NomeCliente'], 0, 12) : $data['resumo']['NomeCliente'];
+		}		
 		
         if ($idApp_ContatoCliente) {
             $data['query']['idApp_ContatoCliente'] = $idApp_ContatoCliente;
             $data['query']['Paciente'] = 'D';
         }
 		
+		//// Uso esse método para cadastrar agendamentos escolhendo clientes no pesquisa clientes////
         if (isset($_SESSION['agenda']) && !$data['query']['HoraInicio'] && !$data['query']['HoraFim']) {
             $data['query']['Data'] = date('d/m/Y', $_SESSION['agenda']['HoraInicio']);
-            $data['query']['HoraInicio'] = date('H:i', $_SESSION['agenda']['HoraInicio']);
+            $data['query']['Data2'] = date('d/m/Y', $_SESSION['agenda']['HoraFim']);
+			$data['query']['HoraInicio'] = date('H:i', $_SESSION['agenda']['HoraInicio']);
             $data['query']['HoraFim'] = date('H:i', $_SESSION['agenda']['HoraFim']);
-        }
-		*/
+        }		
+		
+		/*
+		//// Uso esse método para cadastrar agendamentos escolhendo clientes no formulário////
 		if ($this->input->get('start') && $this->input->get('end')) {
             $data['query']['Data'] = date('d/m/Y', substr($this->input->get('start'), 0, -3));
             $data['query']['Data2'] = date('d/m/Y', substr($this->input->get('end'), 0, -3));
 			$data['query']['HoraInicio'] = date('H:i', substr($this->input->get('start'), 0, -3));
             $data['query']['HoraFim'] = date('H:i', substr($this->input->get('end'), 0, -3));
         }
-		
+		*/
         #Ver uma solução melhor para este campo
         (!$data['query']['Paciente']) ? $data['query']['Paciente'] = 'R' : FALSE;
 
@@ -192,7 +203,7 @@ class Consulta extends CI_Controller {
         $data['readonly'] = '';
         $data['disabled'] = '';
         $data['metodo'] = 1;
-        $data['alterarcliente'] = 1;
+        $data['alterarcliente'] = 2;
 
  		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		
@@ -408,7 +419,7 @@ class Consulta extends CI_Controller {
 
         if (isset($_SESSION['agenda']) && !$data['query']['HoraInicio'] && !$data['query']['HoraFim']) {
             $data['query']['Data'] = date('d/m/Y', $_SESSION['agenda']['HoraInicio']);
-            $data['query']['Data2'] = date('d/m/Y', substr($this->input->get('end'), 0, -3));
+            $data['query']['Data2'] = date('d/m/Y', $_SESSION['agenda']['HoraFim']);
 			$data['query']['HoraInicio'] = date('H:i', $_SESSION['agenda']['HoraInicio']);
             $data['query']['HoraFim'] = date('H:i', $_SESSION['agenda']['HoraFim']);
         }
@@ -817,7 +828,7 @@ class Consulta extends CI_Controller {
         #$data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
-        $data['alterarcliente'] = 1;
+        $data['alterarcliente'] = 2;
 
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		

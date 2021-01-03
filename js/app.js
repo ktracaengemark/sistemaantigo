@@ -4843,7 +4843,7 @@ $('#calendar').fullCalendar({
  * que surge ao clicar em algum slot de tempo vazio.
  */
 
-function redirecionar(x) {
+function redirecionar_Funcionando(x) {
 
     var re = new RegExp(/^.*\//);
     var start = moment($("#start").val());
@@ -4852,7 +4852,7 @@ function redirecionar(x) {
     window.location = re.exec(window.location.href) + url + '?start=' + start + '&end=' + end
 }
  
- function redirecionar4(x) {
+ function redirecionar(x) {
 
     var re = new RegExp(/^.*\//);
     var start = moment($("#start").val());

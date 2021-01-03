@@ -66,8 +66,8 @@
 										</li>
 										<li role="separator" class="divider"></li>
 										<li>
-											<a <?php if (preg_match("/consulta\/cadastrar1\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-												<a href="<?php echo base_url() . 'consulta/cadastrar1/' . $query['idApp_Cliente']; ?>">
+											<a <?php if (preg_match("/consulta\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+												<a href="<?php echo base_url() . 'consulta/cadastrar/' . $query['idApp_Cliente']; ?>">
 													<span class="glyphicon glyphicon-plus"></span> Novo Agendamento
 												</a>
 											</a>
