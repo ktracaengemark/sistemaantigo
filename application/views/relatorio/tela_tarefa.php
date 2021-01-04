@@ -128,7 +128,7 @@
 						</div>
 						-->
 						<div class="col-md-3">
-							<label for="ConcluidoProcedimento">Concluída?</label>
+							<label for="ConcluidoProcedimento">Concl. Tarefa?</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 									id="ConcluidoProcedimento" name="ConcluidoProcedimento">
 								<?php
