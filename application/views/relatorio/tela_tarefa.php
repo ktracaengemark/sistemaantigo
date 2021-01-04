@@ -1,5 +1,5 @@
 <?php if ($msg) echo $msg; ?>
-<div class="col-sm-offset-2 col-md-8 ">	
+<div class="col-sm-offset-1 col-md-10 ">	
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -26,7 +26,7 @@
 </div>
 <?php echo form_open('relatorio/tarefa', 'role="form"'); ?>
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-	<div class="modal-dialog modal-md" role="document">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header bg-danger">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -35,13 +35,28 @@
 			<div class="modal-footer">
 				<div class="form-group">	
 					<div class="row text-left">
-						<div class="col-md-4 text-left">
+						<div class="col-md-3 text-left">
 							<label for="Ordenamento">Categoria:</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
 									id="Categoria" name="Categoria">
 								<?php
 								foreach ($select['Categoria'] as $key => $row) {
 									if ($query['Categoria'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>	
+						<div class="col-md-3">
+							<label for="Agrupar">Agrupar Por:</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="Agrupar" name="Agrupar">
+								<?php
+								foreach ($select['Agrupar'] as $key => $row) {
+									if ($query['Agrupar'] == $key) {
 										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 									} else {
 										echo '<option value="' . $key . '">' . $row . '</option>';
@@ -127,9 +142,8 @@
 								?>
 							</select>
 						</div>
-						<!--
 						<div class="col-md-3">
-							<label for="ConcluidoSubProcedimento">St SubTarefa </label>
+							<label for="ConcluidoSubProcedimento">Concl. SubTarefa?</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 									id="ConcluidoSubProcedimento" name="ConcluidoSubProcedimento">
 								<?php
@@ -143,7 +157,6 @@
 								?>
 							</select>
 						</div>
-						-->
 					</div>
 					<div class="row">						
 						<div class="col-md-12 text-left">

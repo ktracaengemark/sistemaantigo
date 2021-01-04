@@ -33,10 +33,8 @@
 						<th class="active">Tarefa Concl.?</th>
 						<th class="active">Inicia em:</th>
 						<th class="active">Conc. em:</th>
-						<th class="active">SubPri</th>
-						<th class="active">SubSts</th>
 						<th class="active">SubTarefa</th>
-						<!--<th class="active">Ação Concl.?</th>-->
+						<th class="active">Ação Concl.?</th>
 						<th class="active">Inicio em:</th>
 						<th class="active">Fim em:</th>
 						<th class="active">Quem Cad</th>
@@ -51,6 +49,13 @@
 					$cliente = array ();
 					$valor = array();
 					$i = 0;
+					$cont_s_1 = 0;
+					$cont_n_1 = 0;
+					$cont_s_2 = 0;
+					$cont_n_2 = 0;
+					$cont_info_1 = 0;
+					$cont_info_2 = 0;
+					
 					$cont_fazer = 0;
 					$cont_fazendo = 0;
 					$cont_feito = 0;
@@ -72,10 +77,8 @@
 							echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
 							echo '<td>' . $row['DataProcedimento'] . '</td>';
 							echo '<td>' . $row['DataProcedimentoLimite'] . '</td>';
-							echo '<td>' . $row['SubPrioridade'] . '</td>';
-							echo '<td>' . $row['Statussubtarefa'] . '</td>';
 							echo '<td>' . $row['SubProcedimento'] . '</td>';
-							#echo '<td>' . $row['ConcluidoSubProcedimento'] . '</td>';
+							echo '<td>' . $row['ConcluidoSubProcedimento'] . '</td>';
 							echo '<td>' . $row['DataSubProcedimento'] . '</td>';
 							echo '<td>' . $row['DataSubProcedimentoLimite'] . '</td>';
 							echo '<td>' . $row['NomeUsuario'] . '</td>';
@@ -87,6 +90,22 @@
 						$cliente[$i] = $nomecliente;
 						$valor[$i] = $valorcliente;
 						$i = $i + 1;
+						
+						if($row['ConcluidoSubProcedimento'] == 'Sim')
+							$cont_s_2++;
+						else if ($row['ConcluidoSubProcedimento'] == 'Não')
+							$cont_n_2++;
+						else 
+							$cont_info_2++;
+						
+						if($row['ConcluidoProcedimento'] == 'Sim')
+							$cont_s_1++;
+						else if ($row['ConcluidoProcedimento'] == 'Não')
+							$cont_n_1++;
+						else 
+							$cont_info_1++;
+						
+
 						
 						if($row['Statussubtarefa'] == 'Fazer')
 							$cont_fazer++;
@@ -106,6 +125,16 @@
 						else 
 							$cont_nao_infor2++;
 					}
+					/*
+					echo "<pre>";
+					print_r($cont_s_2);
+					echo "<br>";
+					print_r($cont_n_2);
+					echo "<br>";
+					print_r($cont_info_2);
+					echo "</pre>";
+					exit();
+					*/
 					?>
 
 				</tbody>
@@ -146,12 +175,19 @@
 			  function drawChart() {
 
 				var data = google.visualization.arrayToDataTable([
-
+				/*
 				["StsTrf", "Quantidade", { role: "style" } ],
 				["Fazer", <?php echo $cont_fazer2; ?>, "#b87333"],
 				["Fazendo", <?php echo $cont_fazendo2; ?>, "silver"],
 				["Feito", <?php echo $cont_feito2; ?>, "silver"],
 				["Nao Inform", <?php echo $cont_nao_infor2; ?>, "color: #e5e4e2"]
+				*/
+				
+				["StsTrf", "Quantidade", { role: "style" } ],
+				["Concluído", <?php echo $cont_s_1; ?>, "#b87333"],
+				["Não_Concluído", <?php echo $cont_n_1; ?>, "silver"],
+				["Nao_Inform", <?php echo $cont_info_1; ?>, "color: #e5e4e2"]				
+				
 				]);
 
 				var options = {
@@ -170,12 +206,19 @@
 			  function drawChart() {
 
 				var data = google.visualization.arrayToDataTable([
-
+				/*
 				["StsSubTrf", "Quantidade", { role: "style" } ],
 				["Fazer", <?php echo $cont_fazer; ?>, "#b87333"],
 				["Fazendo", <?php echo $cont_fazendo; ?>, "silver"],
 				["Feito", <?php echo $cont_feito; ?>, "silver"],
 				["Nao Inform", <?php echo $cont_nao_infor; ?>, "color: #e5e4e2"]
+				*/
+				
+				["StsSubTrf", "Quantidade", { role: "style" } ],
+				["Concluído", <?php echo $cont_s_2; ?>, "#b87333"],
+				["Não_Concluído", <?php echo $cont_n_2; ?>, "silver"],
+				["Nao_Inform", <?php echo $cont_info_2; ?>, "color: #e5e4e2"]
+				
 				]);
 
 				var options = {

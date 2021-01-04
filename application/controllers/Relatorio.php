@@ -6864,6 +6864,7 @@ class Relatorio extends CI_Controller {
 			'SubPrioridade',
 			'Statustarefa',
 			'Statussubtarefa',
+			'Agrupar',
         ), TRUE));
 		/*
 		if (!$data['query']['DataInicio'])
@@ -6927,12 +6928,17 @@ class Relatorio extends CI_Controller {
 			'N' => 'Não',
 			'M' => 'Com SubTarefa',
         );
+		
+        $data['select']['Agrupar'] = array(
+			'0' => '::Nenhum::',			
+			'idApp_Procedimento' => 'Tarefa',
+        );
 
         $data['select']['Campo'] = array(
-			'P.Compartilhar' => 'Quem Fazer',
-			'P.idSis_Usuario' => 'Quem Cadastrou',
 			'P.DataProcedimento' => 'Data do Inicio',
-			'P.DataProcedimentoLimite' => 'Data da Concl.',			
+			'P.DataProcedimentoLimite' => 'Data da Concl.',	
+			'P.Compartilhar' => 'Quem Fazer',
+			'P.idSis_Usuario' => 'Quem Cadastrou',		
 			'P.ConcluidoProcedimento' => 'Concluido',
 			'P.Categoria' => 'Categoria',
         );
@@ -6970,6 +6976,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['SubPrioridade'] = $data['query']['SubPrioridade'];
 			$data['bd']['Statustarefa'] = $data['query']['Statustarefa'];
 			$data['bd']['Statussubtarefa'] = $data['query']['Statussubtarefa'];
+			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
 
             $data['report'] = $this->Relatorio_model->list_tarefa($data['bd'],TRUE);
 
