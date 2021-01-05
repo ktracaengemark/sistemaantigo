@@ -1008,6 +1008,18 @@ class Relatorio_model extends CI_Model {
 
 	public function list_procedimentos($data, $completo) {
 
+		$date_inicio_prc = ($data['DataInicio9']) ? 'PRC.DataProcedimento >= "' . $data['DataInicio9'] . '" AND ' : FALSE;
+		$date_fim_prc = ($data['DataFim9']) ? 'PRC.DataProcedimento <= "' . $data['DataFim9'] . '" AND ' : FALSE;
+		
+		$date_inicio_sub_prc = ($data['DataInicio10']) ? 'SPRC.DataSubProcedimento >= "' . $data['DataInicio10'] . '" AND ' : FALSE;
+		$date_fim_sub_prc = ($data['DataFim10']) ? 'SPRC.DataSubProcedimento <= "' . $data['DataFim10'] . '" AND ' : FALSE;
+
+		$hora_inicio_prc = ($data['HoraInicio9']) ? 'PRC.HoraProcedimento >= "' . $data['HoraInicio9'] . '" AND ' : FALSE;
+		$hora_fim_prc = ($data['HoraFim9']) ? 'PRC.HoraProcedimento <= "' . $data['HoraFim9'] . '" AND ' : FALSE;
+		
+		$hora_inicio_sub_prc = ($data['HoraInicio10']) ? 'SPRC.HoraSubProcedimento >= "' . $data['HoraInicio10'] . '" AND ' : FALSE;
+		$hora_fim_sub_prc = ($data['HoraFim10']) ? 'SPRC.HoraSubProcedimento <= "' . $data['HoraFim10'] . '" AND ' : FALSE;
+		
 		$data['Dia'] = ($data['Dia']) ? ' AND DAY(PRC.DataProcedimento) = ' . $data['Dia'] : FALSE;
 		$data['Mesvenc'] = ($data['Mesvenc']) ? ' AND MONTH(PRC.DataProcedimento) = ' . $data['Mesvenc'] : FALSE;
 		$data['Ano'] = ($data['Ano']) ? ' AND YEAR(PRC.DataProcedimento) = ' . $data['Ano'] : FALSE;
@@ -1076,8 +1088,15 @@ class Relatorio_model extends CI_Model {
 					LEFT JOIN App_Fornecedor AS F ON F.idApp_Fornecedor = PRC.idApp_Fornecedor
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = PRC.idSis_Usuario
             WHERE
+                ' . $date_inicio_prc . '
+                ' . $date_fim_prc . '
+                ' . $date_inicio_sub_prc . '
+                ' . $date_fim_sub_prc . '
+                ' . $hora_inicio_prc . '
+                ' . $hora_fim_prc . '
+                ' . $hora_inicio_sub_prc . '
+                ' . $hora_fim_sub_prc . '
 				PRC.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				
 				' . $filtro10 . '
 				' . $filtro17 . '
 				' . $tipoprocedimento . ' 
@@ -1089,9 +1108,6 @@ class Relatorio_model extends CI_Model {
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
                 ' . $data['Fornecedor'] . '
-                ' . $data['Dia'] . ' 
-				' . $data['Mesvenc'] . ' 
-				' . $data['Ano'] . '
 			' . $groupby . '
             ORDER BY
                 ' . $data['Campo'] . ' 

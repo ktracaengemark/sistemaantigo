@@ -2467,10 +2467,6 @@ class Relatorio extends CI_Controller {
             'DataFim6',
 			'DataInicio7',
             'DataFim7',
-			'DataInicio5',
-            'DataFim5',
-			'DataInicio6',
-            'DataFim6',
 			'Ordenamento',
             'Campo',
 			'ObsOrca',
@@ -3829,7 +3825,15 @@ class Relatorio extends CI_Controller {
 			'idTab_TipoRD',
             'Cliente',
 			'Fornecedor',
-			'NomeUsuario',			
+			'NomeUsuario',
+			'DataInicio9',
+            'DataFim9',
+			'DataInicio10',
+            'DataFim10',
+			'HoraInicio9',
+            'HoraFim9',
+			'HoraInicio10',
+            'HoraFim10',			
 			'Dia',
 			'Mesvenc',
 			'Ano',
@@ -3842,6 +3846,14 @@ class Relatorio extends CI_Controller {
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+		$this->form_validation->set_rules('DataInicio9', 'Data Início do Procedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim9', 'Data Fim do Procedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio10', 'Data Início do SubProcedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim10', 'Data Fim do SubProcedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('HoraInicio9', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim9', 'Hora Final', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraInicio10', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim10', 'Hora Final', 'trim|valid_hour');
 
         $data['select']['ConcluidoProcedimento'] = array(
 			'#' => 'TODOS',
@@ -3917,7 +3929,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
 
         #run form validation
-        if ($this->form_validation->run() !== TRUE) {
+        if ($this->form_validation->run() !== FALSE) {
             
 			$data['bd']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
 			$data['bd']['Sac'] = $data['query']['Sac'];
@@ -3935,6 +3947,14 @@ class Relatorio extends CI_Controller {
             $data['bd']['Campo'] = $data['query']['Campo'];
 			$data['bd']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
 			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
+			$data['bd']['DataInicio9'] = $this->basico->mascara_data($data['query']['DataInicio9'], 'mysql');
+            $data['bd']['DataFim9'] = $this->basico->mascara_data($data['query']['DataFim9'], 'mysql');
+			$data['bd']['DataInicio10'] = $this->basico->mascara_data($data['query']['DataInicio10'], 'mysql');
+            $data['bd']['DataFim10'] = $this->basico->mascara_data($data['query']['DataFim10'], 'mysql');
+			$data['bd']['HoraInicio9'] = $this->basico->mascara_data($data['query']['HoraInicio9'], 'mysql');
+            $data['bd']['HoraFim9'] = $this->basico->mascara_data($data['query']['HoraFim9'], 'mysql');
+			$data['bd']['HoraInicio10'] = $this->basico->mascara_data($data['query']['HoraInicio10'], 'mysql');
+            $data['bd']['HoraFim10'] = $this->basico->mascara_data($data['query']['HoraFim10'], 'mysql');
 
             $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
 
@@ -3972,7 +3992,15 @@ class Relatorio extends CI_Controller {
 			'idTab_TipoRD',
             'Cliente',
 			'Fornecedor',
-			'NomeUsuario',			
+			'NomeUsuario',
+			'DataInicio9',
+            'DataFim9',
+			'DataInicio10',
+            'DataFim10',
+			'HoraInicio9',
+            'HoraFim9',
+			'HoraInicio10',
+            'HoraFim10',			
 			'Dia',
 			'Mesvenc',
 			'Ano',
@@ -3985,6 +4013,14 @@ class Relatorio extends CI_Controller {
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+		$this->form_validation->set_rules('DataInicio9', 'Data Início do Procedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim9', 'Data Fim do Procedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio10', 'Data Início do SubProcedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim10', 'Data Fim do SubProcedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('HoraInicio9', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim9', 'Hora Final', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraInicio10', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim10', 'Hora Final', 'trim|valid_hour');
 
         $data['select']['ConcluidoProcedimento'] = array(
 			'#' => 'TODOS',
@@ -4060,7 +4096,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
 
         #run form validation
-        if ($this->form_validation->run() !== TRUE) {
+        if ($this->form_validation->run() !== FALSE) {
             
 			$data['bd']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
 			$data['bd']['Sac'] = $data['query']['Sac'];
@@ -4078,6 +4114,14 @@ class Relatorio extends CI_Controller {
             $data['bd']['Campo'] = $data['query']['Campo'];
 			$data['bd']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
 			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
+			$data['bd']['DataInicio9'] = $this->basico->mascara_data($data['query']['DataInicio9'], 'mysql');
+            $data['bd']['DataFim9'] = $this->basico->mascara_data($data['query']['DataFim9'], 'mysql');
+			$data['bd']['DataInicio10'] = $this->basico->mascara_data($data['query']['DataInicio10'], 'mysql');
+            $data['bd']['DataFim10'] = $this->basico->mascara_data($data['query']['DataFim10'], 'mysql');
+			$data['bd']['HoraInicio9'] = $this->basico->mascara_data($data['query']['HoraInicio9'], 'mysql');
+            $data['bd']['HoraFim9'] = $this->basico->mascara_data($data['query']['HoraFim9'], 'mysql');
+			$data['bd']['HoraInicio10'] = $this->basico->mascara_data($data['query']['HoraInicio10'], 'mysql');
+            $data['bd']['HoraFim10'] = $this->basico->mascara_data($data['query']['HoraFim10'], 'mysql');
 
             $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
 
@@ -4115,7 +4159,15 @@ class Relatorio extends CI_Controller {
 			'idTab_TipoRD',
             'Cliente',
 			'Fornecedor',
-			'NomeUsuario',			
+			'NomeUsuario',
+			'DataInicio9',
+            'DataFim9',
+			'DataInicio10',
+            'DataFim10',
+			'HoraInicio9',
+            'HoraFim9',
+			'HoraInicio10',
+            'HoraFim10',
 			'Dia',
 			'Mesvenc',
 			'Ano',
@@ -4128,6 +4180,14 @@ class Relatorio extends CI_Controller {
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+		$this->form_validation->set_rules('DataInicio9', 'Data Início do Procedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim9', 'Data Fim do Procedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio10', 'Data Início do SubProcedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim10', 'Data Fim do SubProcedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('HoraInicio9', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim9', 'Hora Final', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraInicio10', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim10', 'Hora Final', 'trim|valid_hour');
 
         $data['select']['ConcluidoProcedimento'] = array(
 			'#' => 'TODOS',
@@ -4201,7 +4261,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
 
         #run form validation
-        if ($this->form_validation->run() !== TRUE) {
+        if ($this->form_validation->run() !== FALSE) {
             
 			$data['bd']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
 			$data['bd']['Sac'] = $data['query']['Sac'];
@@ -4219,6 +4279,14 @@ class Relatorio extends CI_Controller {
             $data['bd']['Campo'] = $data['query']['Campo'];
             $data['bd']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
 			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
+			$data['bd']['DataInicio9'] = $this->basico->mascara_data($data['query']['DataInicio9'], 'mysql');
+            $data['bd']['DataFim9'] = $this->basico->mascara_data($data['query']['DataFim9'], 'mysql');
+			$data['bd']['DataInicio10'] = $this->basico->mascara_data($data['query']['DataInicio10'], 'mysql');
+            $data['bd']['DataFim10'] = $this->basico->mascara_data($data['query']['DataFim10'], 'mysql');
+			$data['bd']['HoraInicio9'] = $this->basico->mascara_data($data['query']['HoraInicio9'], 'mysql');
+            $data['bd']['HoraFim9'] = $this->basico->mascara_data($data['query']['HoraFim9'], 'mysql');
+			$data['bd']['HoraInicio10'] = $this->basico->mascara_data($data['query']['HoraInicio10'], 'mysql');
+            $data['bd']['HoraFim10'] = $this->basico->mascara_data($data['query']['HoraFim10'], 'mysql');
 
             $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
 
@@ -4256,7 +4324,15 @@ class Relatorio extends CI_Controller {
 			'idTab_TipoRD',
             'Cliente',
 			'Fornecedor',
-			'NomeUsuario',			
+			'NomeUsuario',
+			'DataInicio9',
+            'DataFim9',
+			'DataInicio10',
+            'DataFim10',
+			'HoraInicio9',
+            'HoraFim9',
+			'HoraInicio10',
+            'HoraFim10',			
 			'Dia',
 			'Mesvenc',
 			'Ano',
@@ -4269,6 +4345,14 @@ class Relatorio extends CI_Controller {
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+		$this->form_validation->set_rules('DataInicio9', 'Data Início do Procedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim9', 'Data Fim do Procedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio10', 'Data Início do SubProcedimento', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim10', 'Data Fim do SubProcedimento', 'trim|valid_date');
+		$this->form_validation->set_rules('HoraInicio9', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim9', 'Hora Final', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraInicio10', 'Hora Inicial', 'trim|valid_hour');
+		$this->form_validation->set_rules('HoraFim10', 'Hora Final', 'trim|valid_hour');
 
         $data['select']['ConcluidoProcedimento'] = array(
 			'#' => 'TODOS',
@@ -4342,7 +4426,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
 
         #run form validation
-        if ($this->form_validation->run() !== TRUE) {
+        if ($this->form_validation->run() !== FALSE) {
             
 			$data['bd']['idApp_Procedimento'] = $data['query']['idApp_Procedimento'];
 			$data['bd']['Sac'] = $data['query']['Sac'];
@@ -4360,6 +4444,14 @@ class Relatorio extends CI_Controller {
             $data['bd']['Campo'] = $data['query']['Campo'];
             $data['bd']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
 			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
+			$data['bd']['DataInicio9'] = $this->basico->mascara_data($data['query']['DataInicio9'], 'mysql');
+            $data['bd']['DataFim9'] = $this->basico->mascara_data($data['query']['DataFim9'], 'mysql');
+			$data['bd']['DataInicio10'] = $this->basico->mascara_data($data['query']['DataInicio10'], 'mysql');
+            $data['bd']['DataFim10'] = $this->basico->mascara_data($data['query']['DataFim10'], 'mysql');
+			$data['bd']['HoraInicio9'] = $this->basico->mascara_data($data['query']['HoraInicio9'], 'mysql');
+            $data['bd']['HoraFim9'] = $this->basico->mascara_data($data['query']['HoraFim9'], 'mysql');
+			$data['bd']['HoraInicio10'] = $this->basico->mascara_data($data['query']['HoraInicio10'], 'mysql');
+            $data['bd']['HoraFim10'] = $this->basico->mascara_data($data['query']['HoraFim10'], 'mysql');
 
             $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
 
