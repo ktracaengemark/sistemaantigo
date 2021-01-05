@@ -2,9 +2,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-	
-		<div class="col-md-1"></div>
-		<div class="col-md-10 ">
+		<div class="col-md-12 ">
 			<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
 				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
 					<nav class="navbar navbar-inverse navbar-fixed" role="banner">
@@ -160,7 +158,7 @@
 				<?php } ?>
 			<?php } ?>			
 			<div class="row">
-				<div class="col-md-12 col-lg-12">
+				<div class="col-sm-offset-1 col-md-10 ">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<?php echo '<small>' . $titulo . '</small> <strong>' . $_SESSION['Cliente']['NomeCompleto'] . '</strong> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?>
@@ -199,14 +197,10 @@
 
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
-											</a>
-											
-											<!--	
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											</a>	
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
-
 											<br><br>
 
 											<h4>
@@ -256,11 +250,9 @@
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
-											<!--
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
 											<br><br>
 
 											<h4>
@@ -309,14 +301,10 @@
 
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
-											</a>
-											
-											<!--	
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											</a>	
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
-
 											<br><br>
 
 											<h4>
@@ -366,11 +354,9 @@
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
-											<!--
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
 											<br><br>
 
 											<h4>
@@ -419,14 +405,10 @@
 
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
-											</a>
-											
-											<!--	
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											</a>	
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
-
 											<br><br>
 
 											<h4>
@@ -476,11 +458,9 @@
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
-											<!--
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
 											<br><br>
 
 											<h4>
@@ -529,14 +509,10 @@
 
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
-											</a>
-											
-											<!--	
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											</a>	
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
-
 											<br><br>
 
 											<h4>
@@ -586,11 +562,9 @@
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
-											<!--
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
 											<br><br>
 
 											<h4>
@@ -639,14 +613,10 @@
 
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
-											</a>
-											
-											<!--	
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											</a>	
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
-
 											<br><br>
 
 											<h4>
@@ -696,11 +666,9 @@
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
-											<!--
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
 											<br><br>
 
 											<h4>
@@ -743,6 +711,5 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-1"></div>
 	</div>	
 </div>

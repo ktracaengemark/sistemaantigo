@@ -2,9 +2,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-	
-		<div class="col-md-1"></div>
-		<div class="col-md-10 ">
+		<div class="col-md-12 ">
 			<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
 				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
 					<nav class="navbar navbar-inverse navbar-fixed" role="banner">
@@ -160,7 +158,7 @@
 				<?php } ?>
 			<?php } ?>			
 			<div class="row">
-				<div class="col-md-12 col-lg-12">
+				<div class="col-sm-offset-1 col-md-10 ">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<?php echo '<small>' . $titulo . '</small> <strong>' . $_SESSION['Cliente']['NomeCompleto'] . '</strong> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?>
@@ -171,10 +169,10 @@
 
 								<!-- Nav tabs -->
 								<ul class="nav nav-tabs" role="tablist">
-									<li role="presentation"><a style="color:green" href="#informacao_concl" aria-controls="informacao_concl" role="tab" data-toggle="tab">Informações <?php echo $informacao_concl->num_rows(); ?></a></li>
+									<li role="presentation"><a style="color:green" href="#informacao_concl" aria-controls="informacao_concl" role="tab" data-toggle="tab">Solicitações <?php echo $informacao_concl->num_rows(); ?></a></li>
 									<li role="presentation"><a style="color:green" href="#elogio_concl" aria-controls="elogio_concl" role="tab" data-toggle="tab">Elogios <?php echo $elogio_concl->num_rows(); ?></a></li>
 									<li role="presentation"><a style="color:green" href="#reclamacao_concl" aria-controls="reclamacao_concl" role="tab" data-toggle="tab">Reclamações <?php echo $reclamacao_concl->num_rows(); ?></a></li>
-									<li role="presentation"	class="active"><a style="color:red" href="#informacao_nao_concl" aria-controls="informacao_nao_concl" role="tab" data-toggle="tab">Informações <?php echo $informacao_nao_concl->num_rows(); ?></a></li>
+									<li role="presentation"	class="active"><a style="color:red" href="#informacao_nao_concl" aria-controls="informacao_nao_concl" role="tab" data-toggle="tab">Solicitações <?php echo $informacao_nao_concl->num_rows(); ?></a></li>
 									<li role="presentation"><a style="color:red" href="#elogio_nao_concl" aria-controls="elogio_nao_concl" role="tab" data-toggle="tab">Elogios <?php echo $elogio_nao_concl->num_rows(); ?></a></li>
 									<li role="presentation"><a style="color:red" href="#reclamacao_nao_concl" aria-controls="reclamacao_nao_concl" role="tab" data-toggle="tab">Reclamações <?php echo $reclamacao_nao_concl->num_rows(); ?> </a></li>
 								</ul>
@@ -195,14 +193,10 @@
 
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>
-											
-											<!--	
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											</a>	
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_sac/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
-
 											<br><br>
 
 											<h4>
@@ -252,11 +246,9 @@
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
-											<!--
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_sac/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
 											<br><br>
 
 											<h4>
@@ -305,14 +297,10 @@
 
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>
-											
-											<!--	
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											</a>	
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_sac/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
-
 											<br><br>
 
 											<h4>
@@ -362,11 +350,9 @@
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
-											<!--
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_sac/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
 											<br><br>
 
 											<h4>
@@ -415,14 +401,10 @@
 
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>
-											
-											<!--	
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											</a>	
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_sac/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
-
 											<br><br>
 
 											<h4>
@@ -472,11 +454,9 @@
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
-											<!--
-											<a class="btn btn-md btn-info" target="_blank" href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_sac/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
-											-->
 											<br><br>
 
 											<h4>
@@ -518,8 +498,6 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
-		<div class="col-md-1"></div>
 	</div>	
 </div>

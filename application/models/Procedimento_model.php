@@ -33,6 +33,14 @@ class Procedimento_model extends CI_Model {
         return $query[0];
     }
 
+    public function get_subprocedimento($data) {
+        $query = $this->db->query('SELECT * FROM App_SubProcedimento WHERE idApp_Procedimento = ' . $data);
+
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
     public function update_procedimento($data, $id) {
 
         unset($data['Id']);

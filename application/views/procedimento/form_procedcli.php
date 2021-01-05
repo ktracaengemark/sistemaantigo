@@ -2,9 +2,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-		
-		<div class="col-md-1"></div>
-		<div class="col-md-10 ">
+		<div class="col-md-12 ">
 			<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
 				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
 					<nav class="navbar navbar-inverse navbar-fixed" role="banner">
@@ -146,7 +144,7 @@
 											<li>
 												<a <?php if (preg_match("/procedimento\/listarcampanha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
 													<a href="<?php echo base_url() . 'procedimento/listarcampanha/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-pencil"></span> Lista de Marketings
+														<span class="glyphicon glyphicon-pencil"></span> Lista de Campanhas
 													</a>
 												</a>
 											</li>
@@ -154,7 +152,7 @@
 											<li>
 												<a <?php if (preg_match("/procedimento\/campanha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
 													<a href="<?php echo base_url() . 'procedimento/campanha/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-														<span class="glyphicon glyphicon-plus"></span> Nova Marketing
+														<span class="glyphicon glyphicon-plus"></span> Nova Campanha
 													</a>
 												</a>
 											</li>
@@ -170,7 +168,7 @@
 			
 			<div class="row">
 
-				<div class="col-md-12 col-lg-12">
+				<div class="col-sm-offset-1 col-md-10 ">
 					<?php echo validation_errors(); ?>
 
 					<div class="panel panel-<?php echo $panel; ?>">
@@ -181,57 +179,32 @@
 							<?php echo form_open_multipart($form_open_path); ?>
 							<!--App_Procedimento-->
 							<div class="panel-group">	
-								<div class="panel panel-success">
+								<div class="panel panel-<?php echo $panel2; ?>">
 									<div class="panel-heading">
 										<div class="row text-left">
-												
-												<?php if($metodo == 1 || $metodo == 2) { ?>
-														
-														<div class="col-md-3 " >
-															<label for="Sac">Sac: <?php echo $orcatrata['idApp_Procedimento']; ?></label>
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="Sac" name="Sac">
-																<option value="">- Selec. Sac -</option>	
-																<?php
-																foreach ($select['Sac'] as $key => $row) {
-																	if ($orcatrata['Sac'] == $key) {
-																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																	} else {
-																		echo '<option value="' . $key . '">' . $row . '</option>';
-																	}
-																}
-																?>
-															</select>
-															<?php echo form_error('Sac'); ?>
-														</div>
-														
-												<?php } elseif($metodo == 3 || $metodo == 4) { ?>	
-														
-														<div class="col-md-3 " >
-															<label for="Marketing">Marketing: <?php echo $orcatrata['idApp_Procedimento']; ?></label>
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="Marketing" name="Marketing">
-																<option value="">- Selec. Marketing -</option>	
-																<?php
-																foreach ($select['Marketing'] as $key => $row) {
-																	if ($orcatrata['Marketing'] == $key) {
-																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																	} else {
-																		echo '<option value="' . $key . '">' . $row . '</option>';
-																	}
-																}
-																?>
-															</select>
-															<?php echo form_error('Marketing'); ?>
-														</div>
-														
-												<?php } ?>
-												
-												
-											
-											<div class="col-md-6">
-												<label for="Procedimento">Procedimento:</label>
-												<textarea class="form-control" id="Procedimento" <?php echo $readproc; ?> name="Procedimento"><?php echo $orcatrata['Procedimento']; ?></textarea>
-												<?php echo form_error('Procedimento'); ?>		  
+											<div class="col-md-3 " >
+												<label for="<?php echo $titulo; ?>"><?php echo $titulo; ?>: <?php echo $orcatrata['idApp_Procedimento']; ?></label>
+												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="<?php echo $titulo; ?>" name="<?php echo $titulo; ?>">
+													<option value="">- Selec. <?php echo $titulo; ?> -</option>	
+													<?php
+													foreach ($select[$titulo] as $key => $row) {
+														if ($orcatrata[$titulo] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>
+												</select>
+												<?php echo form_error($titulo); ?>
 											</div>
+											<?php if($metodo == 1 || $metodo == 2) { ?>
+												<div class="col-md-6">
+													<label for="Procedimento">Solicitação:</label>
+													<textarea class="form-control" id="Procedimento" <?php echo $readproc; ?> name="Procedimento"><?php echo $orcatrata['Procedimento']; ?></textarea>
+													<?php echo form_error('Procedimento'); ?>		  
+												</div>
+											<?php } ?>
 										</div>	
 										<div class="row">		
 											<div class="col-md-3">
@@ -579,16 +552,11 @@
 									<?php } ?>
 								</div>
 							</div>
-
 							</form>
-
 						</div>
 					</div>
 				</div>
-
 			</div>
-
 		</div>
-		<div class="col-md-1"></div>
 	</div>
 </div>

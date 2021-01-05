@@ -176,8 +176,7 @@
 			</div>
 			<div class="modal-footer">
 				<div class="form-group">	
-					<div class="row">	
-																				
+					<div class="row">
 						<div class="col-md-3 text-left">
 							<label for="ConcluidoProcedimento">Concluido?</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
@@ -192,7 +191,24 @@
 								}
 								?>
 							</select>
+						</div>	
+						<div class="col-md-3 text-left">
+							<label for="Agrupar">Agrupar Por:</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="Agrupar" name="Agrupar">
+								<?php
+								foreach ($select['Agrupar'] as $key => $row) {
+									if ($query['Agrupar'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
 						</div>
+					</div>
+					<div class="row">	
 						<div class="col-md-3 text-left" >
 							<label for="Ordenamento">Dia:</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 

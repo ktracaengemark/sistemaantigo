@@ -1037,19 +1037,31 @@ class Relatorio_model extends CI_Model {
 		}elseif($data['TipoProcedimento'] == 4){
 			$tipoprocedimento = '(PRC.idApp_OrcaTrata = 0 AND PRC.idApp_Cliente != 0 AND PRC.idApp_Fornecedor = 0 AND PRC.Sac = 0 AND PRC.Marketing != 0)';
 		}
-		  
+		$groupby = ($data['Agrupar'] && $data['Agrupar'] != "0") ? 'GROUP BY PRC.' . $data['Agrupar'] . '' : FALSE;
+        /*
+		echo $this->db->last_query();
+		echo "<pre>";
+		print_r($groupby);
+		echo "</pre>";
+		exit();
+        */ 		
 		$query = $this->db->query('
             SELECT
 				PRC.idSis_Empresa,
 				PRC.idApp_Procedimento,
                 PRC.Procedimento,
 				PRC.DataProcedimento,
+				PRC.HoraProcedimento,
 				PRC.ConcluidoProcedimento,
 				PRC.idApp_Cliente,
 				PRC.idApp_Fornecedor,
 				PRC.idApp_OrcaTrata,
 				PRC.Sac,
 				PRC.Marketing,
+				SPRC.SubProcedimento,
+				SPRC.ConcluidoSubProcedimento,
+				SPRC.DataSubProcedimento,
+				SPRC.HoraSubProcedimento,
 				OT.idTab_TipoRD,
 				CONCAT(IFNULL(C.NomeCliente,"")) AS NomeCliente,
 				CONCAT(IFNULL(F.NomeFornecedor,"")) AS NomeFornecedor,
@@ -1058,6 +1070,7 @@ class Relatorio_model extends CI_Model {
 				U.CpfUsuario
             FROM
 				App_Procedimento AS PRC
+					LEFT JOIN App_SubProcedimento AS SPRC ON SPRC.idApp_Procedimento = PRC.idApp_Procedimento
 					LEFT JOIN App_OrcaTrata AS OT ON OT.idApp_OrcaTrata = PRC.idApp_OrcaTrata
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = PRC.idApp_Cliente
 					LEFT JOIN App_Fornecedor AS F ON F.idApp_Fornecedor = PRC.idApp_Fornecedor
@@ -1078,8 +1091,8 @@ class Relatorio_model extends CI_Model {
                 ' . $data['Fornecedor'] . '
                 ' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . ' 
-				' . $data['Ano'] . ' 
-			
+				' . $data['Ano'] . '
+			' . $groupby . '
             ORDER BY
                 ' . $data['Campo'] . ' 
 				' . $data['Ordenamento'] . '
@@ -1092,9 +1105,11 @@ class Relatorio_model extends CI_Model {
             foreach ($query->result() as $row) {
 				$row->DataProcedimento = $this->basico->mascara_data($row->DataProcedimento, 'barras');
 				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
+				$row->DataSubProcedimento = $this->basico->mascara_data($row->DataSubProcedimento, 'barras');
+				$row->ConcluidoSubProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoSubProcedimento, 'NS');
 				
 				if($row->Sac == 1){
-					$row->Sac = 'Solicitação/Informação';
+					$row->Sac = 'Solicitação';
 				}elseif($row->Sac == 2){
 					$row->Sac = 'Elogio';
 				}elseif($row->Sac == 3){
@@ -1106,7 +1121,7 @@ class Relatorio_model extends CI_Model {
 				}elseif($row->Marketing == 2){
 					$row->Marketing = 'Pesquisa';
 				}elseif($row->Marketing == 3){
-					$row->Marketing = 'Chamada';
+					$row->Marketing = 'Retorno';
 				}elseif($row->Marketing == 4){
 					$row->Marketing = 'Promoções';
 				}elseif($row->Marketing == 5){
@@ -4432,10 +4447,7 @@ exit();*/
 
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5) ? '(P.Compartilhar = ' . $_SESSION['log']['idSis_Usuario'] . ' OR P.Compartilhar = 0) AND ' : FALSE;
 		$permissao2 = ($_SESSION['log']['idSis_Empresa'] != 5) ? 'OR P.Compartilhar = 0' : FALSE;
-			
-			
-					
-		
+
 		$groupby = ($data['Agrupar'] != "0") ? 'GROUP BY P.' . $data['Agrupar'] . '' : FALSE;		
 		/*
 		echo $this->db->last_query();

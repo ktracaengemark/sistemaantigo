@@ -3837,6 +3837,7 @@ class Relatorio extends CI_Controller {
             'Ordenamento',
             'Campo',
             'TipoProcedimento',
+			'Agrupar',
         ), TRUE));			
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -3850,7 +3851,7 @@ class Relatorio extends CI_Controller {
 
 		$data['select']['Sac'] = array (
             '0' => 'Todos',
-            '1' => 'Solicitação/Informação',
+            '1' => 'Solicitação',
             '2' => 'Elogio',
 			'3' => 'Reclamação',
         );
@@ -3859,9 +3860,16 @@ class Relatorio extends CI_Controller {
             '0' => 'Todos',
             '1' => 'Atualização',
             '2' => 'Pesquisa',
-			'3' => 'Chamada',
+			'3' => 'Retorno',
             '4' => 'Promoções',
 			'5' => 'Felicitações',
+        );
+		
+        $data['select']['Agrupar'] = array(
+			'0' => '::Nenhum::',
+			'idApp_Procedimento' => 'Procedimento',
+			'idApp_OrcaTrata' => 'Orçamento',
+			'idApp_Fornecedor' => 'Fornecedor',
         );
 
 		$data['select']['Campo'] = array(
@@ -3926,6 +3934,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 			$data['bd']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
+			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
 
             $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
 
@@ -3971,6 +3980,7 @@ class Relatorio extends CI_Controller {
             'Ordenamento',
             'Campo',
             'TipoProcedimento',
+			'Agrupar',
         ), TRUE));		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -3984,7 +3994,7 @@ class Relatorio extends CI_Controller {
 
 		$data['select']['Sac'] = array (
             '0' => 'Todos',
-            '1' => 'Solicitação/Informação',
+            '1' => 'Solicitação',
             '2' => 'Elogio',
 			'3' => 'Reclamação',
         );
@@ -3993,11 +4003,18 @@ class Relatorio extends CI_Controller {
             '0' => 'Todos',
             '1' => 'Atualização',
             '2' => 'Pesquisa',
-			'3' => 'Chamada',
+			'3' => 'Retorno',
             '4' => 'Promoções',
 			'5' => 'Felicitações',
         );
-
+		
+        $data['select']['Agrupar'] = array(
+			'0' => '::Nenhum::',
+			'idApp_Procedimento' => 'Procedimento',
+			'idApp_OrcaTrata' => 'Orçamento',
+			'idApp_Cliente' => 'Cliente',
+        );
+		
 		$data['select']['Campo'] = array(
 			'PRC.DataProcedimento' => 'Data',
             'PRC.idApp_Procedimento' => 'id',
@@ -4060,6 +4077,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 			$data['bd']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
+			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
 
             $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
 
@@ -4105,6 +4123,7 @@ class Relatorio extends CI_Controller {
             'Ordenamento',
             'Campo',
             'TipoProcedimento',
+			'Agrupar',
         ), TRUE));		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -4118,7 +4137,7 @@ class Relatorio extends CI_Controller {
 
 		$data['select']['Sac'] = array (
             '0' => 'Todos',
-            '1' => 'Solicitação/Informação',
+            '1' => 'Solicitação',
             '2' => 'Elogio',
 			'3' => 'Reclamação',
         );
@@ -4127,11 +4146,17 @@ class Relatorio extends CI_Controller {
             '0' => 'Todos',
             '1' => 'Atualização',
             '2' => 'Pesquisa',
-			'3' => 'Chamada',
+			'3' => 'Retorno',
             '4' => 'Promoções',
 			'5' => 'Felicitações',
         );
-
+		
+        $data['select']['Agrupar'] = array(
+			'0' => '::Nenhum::',
+			'idApp_Procedimento' => 'Chamada',
+			'idApp_Cliente' => 'Cliente',
+        );
+		
 		$data['select']['Campo'] = array(
 			'PRC.DataProcedimento' => 'Data',
             'PRC.idApp_Procedimento' => 'id',
@@ -4193,6 +4218,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
             $data['bd']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
+			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
 
             $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
 
@@ -4238,6 +4264,7 @@ class Relatorio extends CI_Controller {
             'Ordenamento',
             'Campo',
             'TipoProcedimento',
+			'Agrupar',
         ), TRUE));		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -4251,7 +4278,7 @@ class Relatorio extends CI_Controller {
 
 		$data['select']['Sac'] = array (
             '0' => 'Todos',
-            '1' => 'Solicitação/Informação',
+            '1' => 'Solicitação',
             '2' => 'Elogio',
 			'3' => 'Reclamação',
         );
@@ -4260,11 +4287,17 @@ class Relatorio extends CI_Controller {
             '0' => 'Todos',
             '1' => 'Atualização',
             '2' => 'Pesquisa',
-			'3' => 'Chamada',
+			'3' => 'Retorno',
             '4' => 'Promoções',
 			'5' => 'Felicitações',
         );
-
+		
+        $data['select']['Agrupar'] = array(
+			'0' => '::Nenhum::',
+			'idApp_Procedimento' => 'Campanha',
+			'idApp_Cliente' => 'Cliente',
+        );
+		
 		$data['select']['Campo'] = array(
 			'PRC.DataProcedimento' => 'Data',
             'PRC.idApp_Procedimento' => 'id',
@@ -4326,6 +4359,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
             $data['bd']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
+			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
 
             $data['report'] = $this->Relatorio_model->list_procedimentos($data['bd'],TRUE);
 

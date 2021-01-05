@@ -20,9 +20,22 @@
                         <th class="active"><?php echo $nome; ?></th>
                         <th class="active">Colaborador</th>
                         <!--<th class="active">id Prc</th>-->
-                        <th class="active">Procedimento</th>
+						<?php if($query['TipoProcedimento'] != 4) { ?>
+							<?php if($query['TipoProcedimento'] == 1 || $query['TipoProcedimento'] == 2) { ?>
+								<th class="active">Procedimrnto</th>
+							<?php }elseif($query['TipoProcedimento'] == 3) { ?>	
+								<th class="active">Solicitação</th>
+							<?php } ?>
+						<?php } ?>
 						<th class="active">Data</th>
+						<th class="active">Hora</th>
 						<th class="active">Concluída?</th>
+						<?php if($query['TipoProcedimento'] == 3 || $query['TipoProcedimento'] == 4) { ?>
+							<th class="active">Ação</th>
+							<th class="active">Data</th>
+							<th class="active">Hora</th>
+							<th class="active">Concluída?</th>
+						<?php } ?>	
                     </tr>
                 </thead>
 
@@ -94,20 +107,20 @@
 								if(isset($row['idApp_' . $nome]) && $row['idApp_' . $nome] != 0){	
 									if(isset($row['idApp_OrcaTrata']) && $row['idApp_OrcaTrata'] != 0){
 										echo '<td class="notclickable">
-												<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'orcatrata/alterarstatus//' . $row['idApp_OrcaTrata'] . '">
+												<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'orcatrata/listar/' . $row['idApp_' . $nome] . '">
 													 ' . $row['idApp_' . $nome] . '
 												</a>
 											</td>';
 									}else{
 										if($query['TipoProcedimento'] == 3){
 											echo '<td class="notclickable">
-													<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] . '">
+													<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'procedimento/listarproc/' . $row['idApp_' . $nome] . '">
 														 ' . $row['idApp_' . $nome] . '
 													</a>
 												</td>';
 										}elseif($query['TipoProcedimento'] == 4){	
 											echo '<td class="notclickable">
-													<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] . '">
+													<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'procedimento/listarcampanha/' . $row['idApp_' . $nome] . '">
 														 ' . $row['idApp_' . $nome] . '
 													</a>
 												</td>';
@@ -146,9 +159,18 @@
 								</td>';
 								*/
                             #echo '<td>' . $row['idApp_Procedimento'] . '</td>';
-                            echo '<td>' . $row['Procedimento'] . '</td>';
-							echo '<td>' . $row['DataProcedimento'] . '</td>';							
+							if($query['TipoProcedimento'] != 4){
+								echo '<td>' . $row['Procedimento'] . '</td>';
+							}
+							echo '<td>' . $row['DataProcedimento'] . '</td>';
+							echo '<td>' . $row['HoraProcedimento'] . '</td>';							
 							echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
+							if($query['TipoProcedimento'] == 3 || $query['TipoProcedimento'] == 4) {
+								echo '<td>' . $row['SubProcedimento'] . '</td>';
+								echo '<td>' . $row['DataSubProcedimento'] . '</td>';
+								echo '<td>' . $row['HoraSubProcedimento'] . '</td>';							
+								echo '<td>' . $row['ConcluidoSubProcedimento'] . '</td>';
+							}
 
                         echo '</tr>';
                     }
