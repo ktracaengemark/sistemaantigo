@@ -409,6 +409,13 @@ class Orcatrata_model extends CI_Model {
 
         return $query[0];
     }
+
+    public function get_produto_estoque($data) {
+		$query = $this->db->query('SELECT * FROM App_Produto WHERE idApp_OrcaTrata = ' . $data . '');
+        $query = $query->result_array();
+
+        return $query;
+    }
 	
     public function get_tab_produtos($data) {
 		$query = $this->db->query('SELECT * FROM Tab_Produtos WHERE idTab_Produtos = ' . $data . '');
