@@ -1,12 +1,11 @@
 <?php if ($msg) echo $msg; ?>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-10">
+		<div class="col-md-12">
 			<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
 				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
 					<nav class="navbar navbar-inverse navbar-fixed" role="banner">
-					<div class="container-fluid">
+					  <div class="container-fluid">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 								<span class="icon-bar"></span>
@@ -43,19 +42,11 @@
 											</a>
 										</a>
 									</li>
-									<li role="separator" class="divider"></li>
-									<li>
-										<a <?php if (preg_match("/cliente\/alterarlogo\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
-											<a href="<?php echo base_url() . 'cliente/alterarlogo/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-												<span class="glyphicon glyphicon-edit"></span> Alterar Foto
-											</a>
-										</a>
-									</li>											
 								</ul>
 							</div>
 							<!--
 							<a class="navbar-brand" href="<?php #echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-								<?php #echo '<small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '.</small>' ?> 
+								<?php #echo '<small>' . $_SESSION['Cliente']['idApp_Cliente'] . '</small> - <small>' . $_SESSION['Cliente']['NomeCliente'] . '.</small>' ?>
 							</a>
 							-->
 						</div>
@@ -158,19 +149,17 @@
 											</li>
 										</ul>
 									</div>
-								</li>
+								</li>	
 							</ul>
 						</div>
-					</div>
+					  </div>
 					</nav>
 				<?php } ?>
 			<?php } ?>			
 			
 			<div class="row">
-				<div class="col-md-12 col-lg-12">
-
+				<div class="col-sm-offset-1 col-md-10 ">
 					<div class="panel panel-<?php echo $panel; ?>">
-
 						<div class="panel-heading">
 							<strong>Cliente: </strong>
 							<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '.</small>' ?>
@@ -427,10 +416,8 @@
 						</div>			
 					</div>		
 				</div>
-			</div>									
-			
+			</div>
 		</div>
-		<div class="col-md-1"></div>
 	</div>	
 </div>
 

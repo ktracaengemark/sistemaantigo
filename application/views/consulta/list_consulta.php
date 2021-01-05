@@ -1,10 +1,7 @@
 <?php if (isset($msg)) echo $msg; ?>
-
 <div class="container-fluid">
 	<div class="row">
-	
-		<div class="col-md-1"></div>
-		<div class="col-md-10 ">
+		<div class="col-md-12 ">
 			<?php if ( !isset($evento) && isset($_SESSION['Cliente'])) { ?>
 				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
 					<nav class="navbar navbar-inverse navbar-fixed" role="banner">
@@ -161,9 +158,7 @@
 			<?php } ?>			
 
 			<div class="row">
-			
-				<div class="col-md-12 col-lg-12">
-
+				<div class="col-sm-offset-1 col-md-10 ">
 					<div class="panel panel-<?php echo $panel; ?>">
 
 						<div class="panel-heading">
@@ -253,10 +248,8 @@
 						</div>			
 					</div>		
 				</div>
-			</div>									
-				
+			</div>
 		</div>
-		<div class="col-md-1"></div>
 	</div>	
 </div>
 

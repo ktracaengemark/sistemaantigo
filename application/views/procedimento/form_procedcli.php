@@ -167,7 +167,6 @@
 			<?php } ?>
 			
 			<div class="row">
-
 				<div class="col-sm-offset-1 col-md-10 ">
 					<?php echo validation_errors(); ?>
 
