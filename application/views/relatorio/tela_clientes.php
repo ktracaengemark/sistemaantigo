@@ -28,12 +28,14 @@
 				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Clientes</h4>
 			</div>
 			<div class="modal-footer">
+						<!--
 				<div class="form-group">
 					<div class="row text-left">
 						<div class="col-md-8">
 							<label for="NomeCliente">Cliente</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()" id="NomeCliente" autofocus name="NomeCliente">
 								<?php
+								/*
 								foreach ($select['NomeCliente'] as $key => $row) {
 									if ($query['NomeCliente'] == $key) {
 										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -41,25 +43,13 @@
 										echo '<option value="' . $key . '">' . $row . '</option>';
 									}
 								}
-								?>
-							</select>
-						</div>
-						<div class="col-md-4 text-left">
-							<label for="Ativo">Ativo?</label>
-							<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="Ativo" name="Ativo">
-								<?php
-								foreach ($select['Ativo'] as $key => $row) {
-									if ($query['Ativo'] == $key) {
-										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-									} else {
-										echo '<option value="' . $key . '">' . $row . '</option>';
-									}
-								}
+								*/
 								?>
 							</select>
 						</div>
 					</div>
 				</div>
+						-->
 				<div class="form-group">	
 					<div class="row text-left">
 						<div class="col-md-12">
@@ -128,6 +118,20 @@
 										<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
 												name="DataFim" value="<?php echo set_value('DataFim', $query['DataFim']); ?>">
 									</div>
+								</div>
+								<div class="col-md-4 text-left">
+									<label for="Ativo">Ativo?</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="Ativo" name="Ativo">
+										<?php
+										foreach ($select['Ativo'] as $key => $row) {
+											if ($query['Ativo'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
 								</div>
 							</div>
 						</div>

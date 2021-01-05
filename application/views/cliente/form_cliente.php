@@ -220,10 +220,12 @@
 											?>
 										</select>
 									</div>
+									<!--
 									<div class="col-md-3 text-left">
 										<label for="Cadastrar">Cadastrar Senha?</label>
 										<div class="btn-group" data-toggle="buttons">
 											<?php
+											/*
 											foreach ($select['Cadastrar'] as $key => $row) {
 												//if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
 												($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
@@ -244,10 +246,12 @@
 													;
 												}
 											}
+											*/
 											?>
 
 										</div>
 									</div>
+									-->
 								</div>
 							</div>
 							<div class="form-group">

@@ -5383,7 +5383,7 @@ class Relatorio extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'NomeCliente',
+            //'NomeCliente',
 			'Ativo',
             'Ordenamento',
             'Campo',
@@ -5429,7 +5429,7 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-        $data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
+        //$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
 		
@@ -5440,7 +5440,7 @@ class Relatorio extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
 
-            $data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+            //$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
 			$data['bd']['Ativo'] = $data['query']['Ativo'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
