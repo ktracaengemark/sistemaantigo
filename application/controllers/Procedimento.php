@@ -490,6 +490,7 @@ class Procedimento extends CI_Controller {
                 //$data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
 				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
 				$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
+                $data['procedtarefa'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
 				
 				(!$data['procedtarefa'][$j]['ConcluidoSubProcedimento']) ? $data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -701,6 +702,7 @@ class Procedimento extends CI_Controller {
                 //$data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
 				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
 				$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
+                $data['procedtarefa'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
 				
 				(!$data['procedtarefa'][$j]['ConcluidoSubProcedimento']) ? $data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -970,6 +972,7 @@ class Procedimento extends CI_Controller {
                 //$data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
 				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
 				$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
+                $data['procedtarefa'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
 				
 				(!$data['procedtarefa'][$j]['ConcluidoSubProcedimento']) ? $data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = 'N' : FALSE;
 				$data['radio'] = array(
@@ -1183,6 +1186,7 @@ class Procedimento extends CI_Controller {
                 //$data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
 				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
 				$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
+                $data['procedtarefa'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
 				
 				(!$data['procedtarefa'][$j]['ConcluidoSubProcedimento']) ? $data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = 'N' : FALSE;
 				$data['radio'] = array(
