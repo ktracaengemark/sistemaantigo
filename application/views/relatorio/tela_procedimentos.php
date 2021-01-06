@@ -32,7 +32,7 @@
 							<?php } ?>
 						</div>
 						<?php if($tipoproc == 3 || $tipoproc == 4){ ?>
-							<div class="col-md-3 text-left">
+							<div class="col-md-2 text-left">
 								<label for="<?php echo $titulo1;?>">Tipo de <?php echo $titulo1;?>:</label>
 								<div class="input-group">
 									<span class="input-group-btn">
@@ -78,16 +78,15 @@
 							<input type="hidden" name="Fornecedor" id="Fornecedor" value=""/>
 						<?php } ?>
 						<input type="hidden" name="idTab_TipoRD" id="idTab_TipoRD" value="<?php echo $TipoRD; ?>"/>
-						<div class="col-md-3 text-left">
-							<label for="Ordenamento">Colaborador:</label>
+						<div class="col-md-2 text-left">
+							<label for="NomeUsuario">Quem Cadastrou:</label>
 							<div class="input-group">
 								<span class="input-group-btn">
 									<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
 										<span class="glyphicon glyphicon-search"></span> 
 									</button>
 								</span>
-								<select data-placeholder="Selecione uma opção..." class="form-control" 
-										id="NomeUsuario" name="NomeUsuario">
+								<select data-placeholder="Selecione uma opção..." class="form-control" id="NomeUsuario" name="NomeUsuario">
 									<?php
 									foreach ($select['NomeUsuario'] as $key => $row) {
 										if ($query['NomeUsuario'] == $key) {
@@ -100,11 +99,36 @@
 								</select>
 							</div>	
 						</div>
+						<?php if($query['TipoProcedimento'] == 3) {?>
+							<div class="col-md-2 text-left">
+								<label for="Compartilhar">Quem Fazer:</label>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
+											<span class="glyphicon glyphicon-search"></span> 
+										</button>
+									</span>
+									<select data-placeholder="Selecione uma opção..." class="form-control" id="Compartilhar" name="Compartilhar">
+										<?php
+										foreach ($select['Compartilhar'] as $key => $row) {
+											if ($query['Compartilhar'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+							</div>
+						<?php }else{ ?>
+							<input type="hidden" name="Compartilhar" id="Compartilhar" value="">
+						<?php } ?>
 						<div class="col-md-2">
 							<div class="col-md-6">
 								<label>Filtros</label>
 								<button class="btn btn-warning btn-md btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-									<span class="glyphicon glyphicon-filter"></span>
+									<span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-filter"></span>
 								</button>
 							</div>
 							<?php if ($editar == 1) { ?>

@@ -163,10 +163,8 @@
 									<?php } ?>	
 									<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 										<div class="btn-group">
-											<a href="javascript:window.print()">
-												<button type="button" class="btn btn-md btn-default ">
-													<span class="glyphicon glyphicon-print"></span> Imprimir
-												</button>
+											<a type="button" class="btn btn-md btn-default " href="<?php echo base_url() . 'procedimento/imprimir_' . $imprimir . '/' . $query['idApp_Procedimento']; ?>">
+												<span class="glyphicon glyphicon-edit"></span> Versão Impressão
 											</a>
 										</div>									
 									</li>
@@ -213,6 +211,40 @@
 											</tr>
 										</tbody>
 									</table>
+									<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+									<?php if( isset($count['PMCount']) ) { ?>
+									<h3 class="text-left"><b>Ações</b></h3>
+
+									<table class="table table-bordered table-condensed table-striped">
+										<thead>
+											<tr>
+												<th class="col-md-2" scope="col">Ação</th>
+												<th class="col-md-2" scope="col">Data</th>
+												<th class="col-md-2" scope="col">Hora</th>
+											</tr>
+										</thead>
+
+										<tbody>
+
+											<?php
+											for ($i=1; $i <= $count['PMCount']; $i++) {
+												
+											?>
+
+											<tr>
+												<td class="col-md-2" scope="col"><?php echo $i ?>) <?php echo $subprocedimento[$i]['SubProcedimento'] ?></td>
+												<td class="col-md-2" scope="col"><?php echo $subprocedimento[$i]['DataSubProcedimento'] ?></td>
+												<td class="col-md-2" scope="col"><?php echo $subprocedimento[$i]['HoraSubProcedimento'] ?></td>
+											</tr>
+											
+											<?php
+											}
+											?>
+										</tbody>
+									</table>
+									<?php } else echo '<h3 class="text-left">S/Ações</h3>';{?>
+									<?php } ?>
+									<?php } ?>
 								</div>
 							</div>
 						</div>

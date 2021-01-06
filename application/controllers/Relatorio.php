@@ -3826,6 +3826,7 @@ class Relatorio extends CI_Controller {
             'Cliente',
 			'Fornecedor',
 			'NomeUsuario',
+			'Compartilhar',
 			'DataInicio9',
             'DataFim9',
 			'DataInicio10',
@@ -3898,6 +3899,7 @@ class Relatorio extends CI_Controller {
         $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
+		$data['select']['Compartilhar'] = $this->Relatorio_model->select_compartilhar();
 
 		$data['query']['TipoProcedimento'] = 1;
 		$data['query']['Sac'] = '';
@@ -3939,6 +3941,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['Cliente'] = $data['query']['Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
             $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
+			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
@@ -3993,6 +3996,7 @@ class Relatorio extends CI_Controller {
             'Cliente',
 			'Fornecedor',
 			'NomeUsuario',
+			'Compartilhar',
 			'DataInicio9',
             'DataFim9',
 			'DataInicio10',
@@ -4065,6 +4069,7 @@ class Relatorio extends CI_Controller {
         $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
+		$data['select']['Compartilhar'] = $this->Relatorio_model->select_compartilhar();
 
 		$data['query']['TipoProcedimento'] = 2;
 		$data['query']['Sac'] = '';
@@ -4106,6 +4111,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['Cliente'] = $data['query']['Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
             $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
+			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
@@ -4160,6 +4166,7 @@ class Relatorio extends CI_Controller {
             'Cliente',
 			'Fornecedor',
 			'NomeUsuario',
+			'Compartilhar',
 			'DataInicio9',
             'DataFim9',
 			'DataInicio10',
@@ -4221,6 +4228,8 @@ class Relatorio extends CI_Controller {
 			'PRC.DataProcedimento' => 'Data',
             'PRC.idApp_Procedimento' => 'id',
 			'PRC.ConcluidoProcedimento' => 'Concl.',
+			'PRC.idSis_Usuario' => 'Quem Cadastrou',
+			'PRC.Compartilhar' => 'Quem Fazer',
         );
 
         $data['select']['Ordenamento'] = array(
@@ -4231,6 +4240,7 @@ class Relatorio extends CI_Controller {
         $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
+		$data['select']['Compartilhar'] = $this->Relatorio_model->select_compartilhar();
 		
 		$data['query']['TipoProcedimento'] = 3;
 		$data['query']['Marketing'] = '';		
@@ -4271,6 +4281,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['Cliente'] = $data['query']['Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
             $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
+			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
 			$data['bd']['Ano'] = $data['query']['Ano'];
@@ -4325,6 +4336,7 @@ class Relatorio extends CI_Controller {
             'Cliente',
 			'Fornecedor',
 			'NomeUsuario',
+			'Compartilhar',
 			'DataInicio9',
             'DataFim9',
 			'DataInicio10',
@@ -4386,6 +4398,8 @@ class Relatorio extends CI_Controller {
 			'PRC.DataProcedimento' => 'Data',
             'PRC.idApp_Procedimento' => 'id',
 			'PRC.ConcluidoProcedimento' => 'Concl.',
+			'PRC.idSis_Usuario' => 'Quem Cadastrou',
+			'PRC.Compartilhar' => 'Quem Fazer',
         );
 
         $data['select']['Ordenamento'] = array(
@@ -4396,6 +4410,7 @@ class Relatorio extends CI_Controller {
         $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
+		$data['select']['Compartilhar'] = $this->Relatorio_model->select_compartilhar();
 
 		$data['query']['TipoProcedimento'] = 4;
 		$data['query']['Sac'] = '';		
@@ -4436,6 +4451,7 @@ class Relatorio extends CI_Controller {
             $data['bd']['Cliente'] = $data['query']['Cliente'];
             $data['bd']['Fornecedor'] = $data['query']['Fornecedor'];
             $data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
+			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
 			$data['bd']['Dia'] = $data['query']['Dia'];
 			$data['bd']['Mesvenc'] = $data['query']['Mesvenc'];
 			$data['bd']['Ano'] = $data['query']['Ano'];

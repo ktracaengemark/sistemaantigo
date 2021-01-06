@@ -1037,7 +1037,8 @@ class Relatorio_model extends CI_Model {
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND PRC.idApp_OrcaTrata = ' . $data['Orcamento'] . '  ': FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND PRC.idApp_Cliente = ' . $data['Cliente'] . '' : FALSE;
 		$data['Fornecedor'] = ($data['Fornecedor']) ? ' AND PRC.idApp_Fornecedor = ' . $data['Fornecedor'] . '' : FALSE;        
-		$filtro17 = ($data['NomeUsuario']) ? 'PRC.idSis_Usuario = "' . $data['NomeUsuario'] . '" AND ' : FALSE;		
+		$filtro17 = ($data['NomeUsuario']) ? 'PRC.idSis_Usuario = "' . $data['NomeUsuario'] . '" AND ' : FALSE;        
+		$filtro18 = ($data['Compartilhar']) ? 'PRC.Compartilhar = "' . $data['Compartilhar'] . '" AND ' : FALSE;		
 		
 		$data['TipoProcedimento'] = $data['TipoProcedimento'];
 		if($data['TipoProcedimento'] == 1){
@@ -1068,6 +1069,7 @@ class Relatorio_model extends CI_Model {
 				PRC.idApp_Cliente,
 				PRC.idApp_Fornecedor,
 				PRC.idApp_OrcaTrata,
+				PRC.Compartilhar,
 				PRC.Sac,
 				PRC.Marketing,
 				SPRC.SubProcedimento,
@@ -1078,8 +1080,10 @@ class Relatorio_model extends CI_Model {
 				CONCAT(IFNULL(C.NomeCliente,"")) AS NomeCliente,
 				CONCAT(IFNULL(F.NomeFornecedor,"")) AS NomeFornecedor,
 				U.idSis_Usuario,
-				U.Nome,
-				U.CpfUsuario
+				U.CpfUsuario,
+				U.Nome AS NomeUsuario,
+				AU.idSis_Usuario,
+				AU.Nome AS NomeCompartilhar
             FROM
 				App_Procedimento AS PRC
 					LEFT JOIN App_SubProcedimento AS SPRC ON SPRC.idApp_Procedimento = PRC.idApp_Procedimento
@@ -1087,6 +1091,7 @@ class Relatorio_model extends CI_Model {
 					LEFT JOIN App_Cliente AS C ON C.idApp_Cliente = PRC.idApp_Cliente
 					LEFT JOIN App_Fornecedor AS F ON F.idApp_Fornecedor = PRC.idApp_Fornecedor
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = PRC.idSis_Usuario
+					LEFT JOIN Sis_Usuario AS AU ON AU.idSis_Usuario = PRC.Compartilhar
             WHERE
                 ' . $date_inicio_prc . '
                 ' . $date_fim_prc . '
@@ -1099,6 +1104,7 @@ class Relatorio_model extends CI_Model {
 				PRC.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				' . $filtro10 . '
 				' . $filtro17 . '
+				' . $filtro18 . '
 				' . $tipoprocedimento . ' 
                 ' . $filtro21 . ' 
                 ' . $filtro22 . '
@@ -1123,6 +1129,10 @@ class Relatorio_model extends CI_Model {
 				$row->ConcluidoProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoProcedimento, 'NS');
 				$row->DataSubProcedimento = $this->basico->mascara_data($row->DataSubProcedimento, 'barras');
 				$row->ConcluidoSubProcedimento = $this->basico->mascara_palavra_completa($row->ConcluidoSubProcedimento, 'NS');
+				
+				if($row->Compartilhar == "0"){
+					$row->NomeCompartilhar = 'Todos';
+				}
 				
 				if($row->Sac == 1){
 					$row->Sac = 'Solicitação';
@@ -6113,14 +6123,15 @@ exit();*/
         $query = $this->db->query('
             SELECT
 				P.idSis_Usuario,
-				CONCAT(IFNULL(F.Funcao,""), " --- ", IFNULL(P.Nome,"")) AS NomeUsuario
+				CONCAT(IFNULL(P.Nome,"")) AS NomeUsuario
             FROM
                 Sis_Usuario AS P
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
-			ORDER BY F.Funcao ASC
+			ORDER BY 
+				P.Nome ASC
         ');
 
         $array = array();
@@ -6268,4 +6279,29 @@ exit();*/
         return $array;
     }	
 
+	public function select_compartilhar() {
+
+        $query = $this->db->query('
+            SELECT
+				P.idSis_Usuario,
+				CONCAT(IFNULL(P.Nome,"")) AS NomeUsuario
+            FROM
+                Sis_Usuario AS P
+					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY 
+				P.Nome ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idSis_Usuario] = $row->NomeUsuario;
+        }
+
+        return $array;
+    }
+	
 }

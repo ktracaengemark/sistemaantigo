@@ -204,6 +204,30 @@
 													<?php echo form_error('Procedimento'); ?>		  
 												</div>
 											<?php } ?>
+											<?php if ($metodo == 1) { ?>
+												<div class="col-md-3">
+													<label for="Compartilhar">Quem Fazer?</label>		
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
+															id="Compartilhar" name="Compartilhar">
+															
+														<?php
+														foreach ($select['Compartilhar'] as $key => $row) {
+															if ($orcatrata['Compartilhar'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+												</div>
+											<?php } elseif ($metodo == 2){ ?>
+												<div class="col-md-3">
+													<input type="hidden" name="Compartilhar" id="Compartilhar" value="<?php echo $orcatrata['Compartilhar']; ?>"/>
+													<label for="Compartilhar">Quem Fazer</label>
+													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Orcatrata']['NomeCompartilhar']; ?>"/>
+												</div>
+											<?php } ?>
 										</div>	
 										<div class="row">		
 											<div class="col-md-3">
@@ -510,12 +534,13 @@
 												<span class="glyphicon glyphicon-save"></span> Salvar
 											</button>
 										</div>
+										<!--
 										<div class="col-md-6 text-right">
 											<button  type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 												<span class="glyphicon glyphicon-trash"></span> Excluir
 											</button>
 										</div>
-
+										-->
 										<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">

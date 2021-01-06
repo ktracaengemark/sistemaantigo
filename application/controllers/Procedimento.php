@@ -469,6 +469,7 @@ class Procedimento extends CI_Controller {
 			'Procedimento',
 			'ConcluidoProcedimento',
 			'Sac',
+			'Compartilhar',
 
         ), TRUE));
 
@@ -511,6 +512,7 @@ class Procedimento extends CI_Controller {
 		}
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
+        $data['select']['Compartilhar'] = $this->Procedimento_model->select_compartilhar();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
 		$data['select']['Sac'] = array (
             '1' => 'Solicitação',
@@ -648,7 +650,7 @@ class Procedimento extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 //redirect(base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
-                redirect(base_url() . 'Procedimento/imprimir_sac/' . $data['orcatrata']['idApp_Procedimento'] . $data['msg']);
+                redirect(base_url() . 'Procedimento/tela_sac/' . $data['orcatrata']['idApp_Procedimento'] . $data['msg']);
 
 				exit();
             }
@@ -680,6 +682,7 @@ class Procedimento extends CI_Controller {
 			'Procedimento',
 			'ConcluidoProcedimento',
 			'Sac',
+			'Compartilhar',
 
         ), TRUE));
 
@@ -758,6 +761,7 @@ class Procedimento extends CI_Controller {
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
+        $data['select']['Compartilhar'] = $this->Procedimento_model->select_compartilhar();
 		$data['select']['Sac'] = array (
             '1' => 'Solicitação',
             '2' => 'Elogio',
@@ -914,7 +918,7 @@ class Procedimento extends CI_Controller {
 				
 				unset($_SESSION['Orcatrata'], $_SESSION['Procedtarefa']);
                 //redirect(base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
-                redirect(base_url() . 'Procedimento/imprimir_sac/' . $data['orcatrata']['idApp_Procedimento'] . $data['msg']);
+                redirect(base_url() . 'Procedimento/tela_sac/' . $data['orcatrata']['idApp_Procedimento'] . $data['msg']);
 
 				exit();
             }
@@ -945,6 +949,7 @@ class Procedimento extends CI_Controller {
 			'Procedimento',
 			'ConcluidoProcedimento',
 			'Marketing',
+			'Compartilhar',
 
         ), TRUE));
 
@@ -991,6 +996,7 @@ class Procedimento extends CI_Controller {
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
 		$data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
+        $data['select']['Compartilhar'] = $this->Procedimento_model->select_compartilhar();
 		//$data['select']['Marketing'] = $this->Procedimento_model->select_campanha();
 		$data['select']['Marketing'] = array (
             '1' => 'Atualização',
@@ -1126,7 +1132,7 @@ class Procedimento extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 //redirect(base_url() . 'procedimento/listarcampanha/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
-                redirect(base_url() . 'Procedimento/imprimir_campanha/' . $data['orcatrata']['idApp_Procedimento'] . $data['msg']);
+                redirect(base_url() . 'Procedimento/tela_campanha/' . $data['orcatrata']['idApp_Procedimento'] . $data['msg']);
 
 				exit();
             }
@@ -1158,6 +1164,7 @@ class Procedimento extends CI_Controller {
 			'Procedimento',
 			'ConcluidoProcedimento',
 			'Marketing',
+			'Compartilhar',
 
         ), TRUE));
 
@@ -1236,6 +1243,7 @@ class Procedimento extends CI_Controller {
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['idSis_Usuario'] = $this->Usuario_model->select_usuario();
+        $data['select']['Compartilhar'] = $this->Procedimento_model->select_compartilhar();
 		//$data['select']['Marketing'] = $this->Procedimento_model->select_campanha();
 		$data['select']['Marketing'] = array (
             '1' => 'Atualização',
@@ -1395,7 +1403,7 @@ class Procedimento extends CI_Controller {
 
 				unset($_SESSION['Orcatrata'], $_SESSION['Procedtarefa']);
                 //redirect(base_url() . 'procedimento/listarcampanha/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
-                redirect(base_url() . 'Procedimento/imprimir_campanha/' . $data['orcatrata']['idApp_Procedimento'] . $data['msg']);
+                redirect(base_url() . 'Procedimento/tela_campanha/' . $data['orcatrata']['idApp_Procedimento'] . $data['msg']);
 
 				exit();
             }
@@ -1523,6 +1531,71 @@ class Procedimento extends CI_Controller {
         $this->load->view('basico/footer');
     }
      
+	public function tela_sac($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        if ($id) {
+            #### App_OrcaTrata ####
+            $data['procedimento'] = $this->Procedimento_model->get_procedimento($id);
+            $data['procedimento']['DataProcedimento'] = $this->basico->mascara_data($data['procedimento']['DataProcedimento'], 'barras');
+
+            #### Carrega os dados do cliente nas variáves de sessão ####
+            $this->load->model('Cliente_model');
+			if($data['procedimento']['idApp_Cliente'] != 0 && $data['procedimento']['idApp_Cliente'] != 1){
+				//$data['cliente'] = $this->Cliente_model->get_cliente($data['procedimento']['idApp_Cliente'], TRUE);
+				$_SESSION['Cliente'] = $data['cliente'] = $this->Cliente_model->get_cliente($data['procedimento']['idApp_Cliente'], TRUE);
+				$_SESSION['Cliente']['NomeCliente'] = (strlen($data['cliente']['NomeCliente']) > 12) ? substr($data['cliente']['NomeCliente'], 0, 12) : $data['cliente']['NomeCliente'];
+			}
+			
+			//$data['usuario'] = $this->Usuario_model->get_usuario($data['procedimento']['idSis_Usuario'], TRUE);
+			$data['query'] = $this->Procedimento_model->get_procedimento($data['procedimento']['idApp_Procedimento'], TRUE);
+
+            #### App_Procedimento ####
+            $data['subprocedimento'] = $this->Procedimento_model->get_subprocedimento($id);
+            if (count($data['subprocedimento']) > 0) {
+                $data['subprocedimento'] = array_combine(range(1, count($data['subprocedimento'])), array_values($data['subprocedimento']));
+                $data['count']['PMCount'] = count($data['subprocedimento']);
+
+                if (isset($data['subprocedimento'])) {
+
+                    for($j=1; $j <= $data['count']['PMCount']; $j++)
+                        $data['subprocedimento'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['subprocedimento'][$j]['DataSubProcedimento'], 'barras');
+
+
+                }
+            }
+
+        }
+		
+        $data['titulo'] = 'Sac';
+        $data['form_open_path'] = 'Procedimento/tela_sac';
+        $data['panel2'] = 'warning';
+        $data['metodo'] = 1;
+        $data['alterar'] = 'proc';
+        $data['cor_sac'] = 'warning';
+        $data['cor_marketing'] = 'default';
+        $data['imprimir'] = 'sac';			
+
+        /*
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          #exit ();
+         */
+
+        $this->load->view('procedimento/tela_procedimento', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+     
 	public function imprimir_sac($id = FALSE) {
 
         if ($this->input->get('m') == 1)
@@ -1568,10 +1641,11 @@ class Procedimento extends CI_Controller {
         $data['titulo'] = 'Sac';
         $data['form_open_path'] = 'Procedimento/imprimir_sac';
         $data['panel2'] = 'warning';
-        $data['metodo'] = 1;
+        $data['metodo'] = 2;
         $data['alterar'] = 'proc';
         $data['cor_sac'] = 'warning';
-        $data['cor_marketing'] = 'default';		
+        $data['cor_marketing'] = 'default';
+        $data['imprimir'] = 'sac';			
 
         /*
           echo '<br>';
@@ -1582,6 +1656,81 @@ class Procedimento extends CI_Controller {
          */
 
         $this->load->view('procedimento/print_procedimento', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+   
+	public function tela_campanha($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        if ($id) {
+            #### App_OrcaTrata ####
+            $data['procedimento'] = $this->Procedimento_model->get_procedimento($id);
+            $data['procedimento']['DataProcedimento'] = $this->basico->mascara_data($data['procedimento']['DataProcedimento'], 'barras');
+			if($data['procedimento']['Marketing'] == 1){
+				$data['procedimento']['Marketing'] = 'Atualização';
+			}elseif($data['procedimento']['Marketing'] == 2){
+				$data['procedimento']['Marketing'] = 'Pesquisa';
+			}elseif($data['procedimento']['Marketing'] == 3){
+				$data['procedimento']['Marketing'] = 'Retorno';
+			}elseif($data['procedimento']['Marketing'] == 4){
+				$data['procedimento']['Marketing'] = 'Promoções';
+			}elseif($data['procedimento']['Marketing'] == 5){
+				$data['procedimento']['Marketing'] = 'Felicitações';
+			}
+            #### Carrega os dados do cliente nas variáves de sessão ####
+            $this->load->model('Cliente_model');
+			if($data['procedimento']['idApp_Cliente'] != 0 && $data['procedimento']['idApp_Cliente'] != 1){
+				//$data['cliente'] = $this->Cliente_model->get_cliente($data['procedimento']['idApp_Cliente'], TRUE);
+				$_SESSION['Cliente'] = $data['cliente'] = $this->Cliente_model->get_cliente($data['procedimento']['idApp_Cliente'], TRUE);
+				$_SESSION['Cliente']['NomeCliente'] = (strlen($data['cliente']['NomeCliente']) > 12) ? substr($data['cliente']['NomeCliente'], 0, 12) : $data['cliente']['NomeCliente'];
+			}
+			
+			//$data['usuario'] = $this->Usuario_model->get_usuario($data['procedimento']['idSis_Usuario'], TRUE);
+			$data['query'] = $this->Procedimento_model->get_procedimento($data['procedimento']['idApp_Procedimento'], TRUE);
+
+            #### App_Procedimento ####
+            $data['subprocedimento'] = $this->Procedimento_model->get_subprocedimento($id);
+            if (count($data['subprocedimento']) > 0) {
+                $data['subprocedimento'] = array_combine(range(1, count($data['subprocedimento'])), array_values($data['subprocedimento']));
+                $data['count']['PMCount'] = count($data['subprocedimento']);
+
+                if (isset($data['subprocedimento'])) {
+
+                    for($j=1; $j <= $data['count']['PMCount']; $j++)
+                        $data['subprocedimento'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['subprocedimento'][$j]['DataSubProcedimento'], 'barras');
+
+
+                }
+            }
+
+        }
+		
+        $data['titulo'] = 'Marketing';
+        $data['form_open_path'] = 'Procedimento/tela_campanha';
+        $data['panel2'] = 'success';
+        $data['metodo'] = 3;
+        $data['alterar'] = 'campanha';
+        $data['cor_sac'] = 'default';
+        $data['cor_marketing'] = 'warning';
+        $data['imprimir'] = 'campanha';			
+
+        /*
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          #exit ();
+         */
+
+        $this->load->view('procedimento/tela_procedimento', $data);
 
         $this->load->view('basico/footer');
 
@@ -1600,7 +1749,17 @@ class Procedimento extends CI_Controller {
             #### App_OrcaTrata ####
             $data['procedimento'] = $this->Procedimento_model->get_procedimento($id);
             $data['procedimento']['DataProcedimento'] = $this->basico->mascara_data($data['procedimento']['DataProcedimento'], 'barras');
-
+			if($data['procedimento']['Marketing'] == 1){
+				$data['procedimento']['Marketing'] = 'Atualização';
+			}elseif($data['procedimento']['Marketing'] == 2){
+				$data['procedimento']['Marketing'] = 'Pesquisa';
+			}elseif($data['procedimento']['Marketing'] == 3){
+				$data['procedimento']['Marketing'] = 'Retorno';
+			}elseif($data['procedimento']['Marketing'] == 4){
+				$data['procedimento']['Marketing'] = 'Promoções';
+			}elseif($data['procedimento']['Marketing'] == 5){
+				$data['procedimento']['Marketing'] = 'Felicitações';
+			}
             #### Carrega os dados do cliente nas variáves de sessão ####
             $this->load->model('Cliente_model');
 			if($data['procedimento']['idApp_Cliente'] != 0 && $data['procedimento']['idApp_Cliente'] != 1){
@@ -1632,10 +1791,11 @@ class Procedimento extends CI_Controller {
         $data['titulo'] = 'Marketing';
         $data['form_open_path'] = 'Procedimento/imprimir_campanha';
         $data['panel2'] = 'success';
-        $data['metodo'] = 1;
+        $data['metodo'] = 4;
         $data['alterar'] = 'campanha';
         $data['cor_sac'] = 'default';
-        $data['cor_marketing'] = 'warning';			
+        $data['cor_marketing'] = 'warning';
+        $data['imprimir'] = 'campanha';			
 
         /*
           echo '<br>';

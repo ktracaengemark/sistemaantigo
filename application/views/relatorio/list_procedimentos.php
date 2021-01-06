@@ -18,8 +18,10 @@
 						<?php } ?>
 						<th class="active">id <?php echo $nome; ?></th>
                         <th class="active"><?php echo $nome; ?></th>
-                        <th class="active">Colaborador</th>
-                        <!--<th class="active">id Prc</th>-->
+                        <th class="active">Quem_Cadastrou</th>
+						<?php if($query['TipoProcedimento'] == 3) { ?>
+							<th class="active">Quem_Fazer</th>
+						<?php } ?>	
 						<?php if($query['TipoProcedimento'] != 4) { ?>
 							<?php if($query['TipoProcedimento'] == 1 || $query['TipoProcedimento'] == 2) { ?>
 								<th class="active">Procedimrnto</th>
@@ -150,7 +152,10 @@
 								}		
 							}	
                             echo '<td>' . $row['Nome' . $nome] . '</td>';
-                            echo '<td>' . $row['Nome'] . '</td>';
+                            echo '<td>' . $row['NomeUsuario'] . '</td>';
+							if($query['TipoProcedimento'] == 3){	
+								echo '<td>' . $row['NomeCompartilhar'] . '</td>';
+							}	
 							/*
 							echo '<td class="notclickable">
 									<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'procedimento/alterar/' . $row['idApp_Procedimento'] . '">
