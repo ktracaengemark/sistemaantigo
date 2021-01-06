@@ -190,7 +190,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_sac/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>	
@@ -242,7 +245,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_sac/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
@@ -294,7 +300,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_sac/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>	
@@ -346,7 +355,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_sac/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
@@ -398,7 +410,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_sac/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>	
@@ -450,7 +465,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_sac/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>

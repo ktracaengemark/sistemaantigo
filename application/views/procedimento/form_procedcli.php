@@ -182,7 +182,7 @@
 									<div class="panel-heading">
 										<div class="row text-left">
 											<div class="col-md-3 " >
-												<label for="<?php echo $titulo; ?>"><?php echo $titulo; ?>: <?php echo $orcatrata['idApp_Procedimento']; ?></label>
+												<label for="<?php echo $titulo; ?>">Tipo de <?php echo $titulo; ?>: <?php echo $orcatrata['idApp_Procedimento']; ?></label>
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="<?php echo $titulo; ?>" name="<?php echo $titulo; ?>">
 													<option value="">- Selec. <?php echo $titulo; ?> -</option>	
 													<?php
@@ -197,20 +197,21 @@
 												</select>
 												<?php echo form_error($titulo); ?>
 											</div>
-											<?php if($metodo == 1 || $metodo == 2) { ?>
-												<div class="col-md-6">
-													<label for="Procedimento">Solicitação:</label>
-													<textarea class="form-control" id="Procedimento" <?php echo $readproc; ?> name="Procedimento"><?php echo $orcatrata['Procedimento']; ?></textarea>
-													<?php echo form_error('Procedimento'); ?>		  
-												</div>
-											<?php } ?>
+											
+											<div class="col-md-6">
+												<label for="Procedimento">Descrição do <?php echo $titulo; ?>:</label>
+												<textarea class="form-control" name="Procedimento" id="Procedimento" <?php echo $readproc; ?>><?php echo $orcatrata['Procedimento']; ?></textarea>
+												<?php echo form_error('Procedimento'); ?>		  
+											</div>
+											
+											<!--
 											<?php if ($metodo == 1) { ?>
 												<div class="col-md-3">
 													<label for="Compartilhar">Quem Fazer?</label>		
-													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-															id="Compartilhar" name="Compartilhar">
-															
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="Compartilhar" name="Compartilhar">
+														<option value="">- Selec. Quem Fazer-</option>	
 														<?php
+														/*
 														foreach ($select['Compartilhar'] as $key => $row) {
 															if ($orcatrata['Compartilhar'] == $key) {
 																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -218,6 +219,7 @@
 																echo '<option value="' . $key . '">' . $row . '</option>';
 															}
 														}
+														*/
 														?>
 													</select>
 												</div>
@@ -228,6 +230,24 @@
 													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Orcatrata']['NomeCompartilhar']; ?>"/>
 												</div>
 											<?php } ?>
+											-->
+											
+											<div class="col-md-3">
+												<label for="Compartilhar">Quem Fazer?</label>		
+												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="Compartilhar" name="Compartilhar">
+													<option value="">- Selec. Quem Fazer-</option>	
+													<?php
+													foreach ($select['Compartilhar'] as $key => $row) {
+														if ($orcatrata['Compartilhar'] == $key) {
+															echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+														} else {
+															echo '<option value="' . $key . '">' . $row . '</option>';
+														}
+													}
+													?>
+												</select>
+												<?php echo form_error('Compartilhar'); ?>
+											</div>	
 										</div>	
 										<div class="row">		
 											<div class="col-md-3">

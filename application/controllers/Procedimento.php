@@ -477,6 +477,7 @@ class Procedimento extends CI_Controller {
         //Data de hoje como default
         (!$data['orcatrata']['DataProcedimento']) ? $data['orcatrata']['DataProcedimento'] = date('d/m/Y H:i:s', time()) : FALSE;
         (!$data['orcatrata']['HoraProcedimento']) ? $data['orcatrata']['HoraProcedimento'] = date('H:i:s', time()) : FALSE;
+		(!$data['orcatrata']['Compartilhar']) ? $data['orcatrata']['Compartilhar'] = $_SESSION['log']['idSis_Usuario'] : FALSE;
 
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
@@ -508,6 +509,7 @@ class Procedimento extends CI_Controller {
         #### App_Procedimento ####
         $this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
         $this->form_validation->set_rules('Sac', 'Sac', 'required|trim');
+        $this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
 		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
 			$this->form_validation->set_rules('DataConcluidoProcedimento', 'Concluído em:', 'required|trim|valid_date');
 		}
@@ -688,6 +690,7 @@ class Procedimento extends CI_Controller {
         ), TRUE));
 
         (!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
+		(!$data['orcatrata']['Compartilhar']) ? $data['orcatrata']['Compartilhar'] = $_SESSION['log']['idSis_Usuario'] : FALSE;
 
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
@@ -754,6 +757,7 @@ class Procedimento extends CI_Controller {
         #### App_Procedimento ####
         $this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
         $this->form_validation->set_rules('Sac', 'Sac', 'required|trim');
+        $this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
 		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
 			$this->form_validation->set_rules('DataConcluidoProcedimento', 'Concluído em:', 'required|trim|valid_date');
 		}else{
@@ -959,7 +963,8 @@ class Procedimento extends CI_Controller {
         //Data de hoje como default
         (!$data['orcatrata']['DataProcedimento']) ? $data['orcatrata']['DataProcedimento'] = date('d/m/Y H:i:s', time()) : FALSE;
         (!$data['orcatrata']['HoraProcedimento']) ? $data['orcatrata']['HoraProcedimento'] = date('H:i:s', time()) : FALSE;
-
+		(!$data['orcatrata']['Compartilhar']) ? $data['orcatrata']['Compartilhar'] = $_SESSION['log']['idSis_Usuario'] : FALSE;
+		
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
@@ -990,6 +995,7 @@ class Procedimento extends CI_Controller {
         #### App_Procedimento ####
         //$this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
         $this->form_validation->set_rules('Marketing', 'Marketing', 'required|trim');
+        $this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
 		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
 			$this->form_validation->set_rules('DataConcluidoProcedimento', 'Concluído em:', 'required|trim|valid_date');
 		}else{
@@ -1172,6 +1178,7 @@ class Procedimento extends CI_Controller {
         ), TRUE));
 
         (!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
+		(!$data['orcatrata']['Compartilhar']) ? $data['orcatrata']['Compartilhar'] = $_SESSION['log']['idSis_Usuario'] : FALSE;
 
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
@@ -1238,6 +1245,7 @@ class Procedimento extends CI_Controller {
         #### App_Procedimento ####
         //$this->form_validation->set_rules('Procedimento', 'Procedimento', 'required|trim');
         $this->form_validation->set_rules('Marketing', 'Marketing', 'required|trim');
+        $this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
 		if($data['orcatrata']['ConcluidoProcedimento'] == "S"){
 			$this->form_validation->set_rules('DataConcluidoProcedimento', 'Concluído em:', 'required|trim|valid_date');
 		}else{

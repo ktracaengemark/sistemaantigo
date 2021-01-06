@@ -1082,6 +1082,8 @@ class Relatorio_model extends CI_Model {
 				U.idSis_Usuario,
 				U.CpfUsuario,
 				U.Nome AS NomeUsuario,
+				SU.idSis_Usuario,
+				SU.Nome AS NomeSubUsuario,
 				AU.idSis_Usuario,
 				AU.Nome AS NomeCompartilhar
             FROM
@@ -1092,6 +1094,7 @@ class Relatorio_model extends CI_Model {
 					LEFT JOIN App_Fornecedor AS F ON F.idApp_Fornecedor = PRC.idApp_Fornecedor
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = PRC.idSis_Usuario
 					LEFT JOIN Sis_Usuario AS AU ON AU.idSis_Usuario = PRC.Compartilhar
+					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = SPRC.idSis_Usuario
             WHERE
                 ' . $date_inicio_prc . '
                 ' . $date_fim_prc . '

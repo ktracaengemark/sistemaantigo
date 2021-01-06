@@ -194,7 +194,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>	
@@ -246,7 +249,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
@@ -298,7 +304,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>	
@@ -350,7 +359,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
@@ -402,7 +414,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>	
@@ -454,7 +469,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
@@ -506,7 +524,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>	
@@ -558,7 +579,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
@@ -610,7 +634,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>	
@@ -662,7 +689,10 @@
 										?>
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
-
+												
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-pencil"></span> Resumo
+											</a>
 											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>

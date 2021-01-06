@@ -99,31 +99,27 @@
 								</select>
 							</div>	
 						</div>
-						<?php if($query['TipoProcedimento'] == 3) {?>
-							<div class="col-md-2 text-left">
-								<label for="Compartilhar">Quem Fazer:</label>
-								<div class="input-group">
-									<span class="input-group-btn">
-										<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
-											<span class="glyphicon glyphicon-search"></span> 
-										</button>
-									</span>
-									<select data-placeholder="Selecione uma opção..." class="form-control" id="Compartilhar" name="Compartilhar">
-										<?php
-										foreach ($select['Compartilhar'] as $key => $row) {
-											if ($query['Compartilhar'] == $key) {
-												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-												echo '<option value="' . $key . '">' . $row . '</option>';
-											}
+						<div class="col-md-2 text-left">
+							<label for="Compartilhar">Quem Fazer:</label>
+							<div class="input-group">
+								<span class="input-group-btn">
+									<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
+										<span class="glyphicon glyphicon-search"></span> 
+									</button>
+								</span>
+								<select data-placeholder="Selecione uma opção..." class="form-control" id="Compartilhar" name="Compartilhar">
+									<?php
+									foreach ($select['Compartilhar'] as $key => $row) {
+										if ($query['Compartilhar'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+										} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
 										}
-										?>
-									</select>
-								</div>
+									}
+									?>
+								</select>
 							</div>
-						<?php }else{ ?>
-							<input type="hidden" name="Compartilhar" id="Compartilhar" value="">
-						<?php } ?>
+						</div>
 						<div class="col-md-2">
 							<div class="col-md-6">
 								<label>Filtros</label>
@@ -204,7 +200,7 @@
 						<div class="panel-heading text-left">
 							<div class="row">
 								<div class="col-md-3 text-left">
-									<label for="ConcluidoProcedimento">Concluido?</label>
+									<label for="ConcluidoProcedimento">Proc. de <?php echo $titulo1;?> Concl.?</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block"
 											id="ConcluidoProcedimento" name="ConcluidoProcedimento">
 										<?php
@@ -240,7 +236,7 @@
 						<div class="panel-heading text-left">
 							<div class="row">
 								<div class="col-md-3">
-									<label for="DataInicio9">Data Proc. Inc.</label>
+									<label for="DataInicio9">Data Proc. de <?php echo $titulo1;?> Inc.</label>
 									<div class="input-group DatePicker">
 										<span class="input-group-addon" disabled>
 											<span class="glyphicon glyphicon-calendar"></span>
@@ -250,7 +246,7 @@
 									</div>
 								</div>
 								<div class="col-md-3">
-									<label for="DataFim9">Data Proc. Fim</label>
+									<label for="DataFim9">Data Proc. de <?php echo $titulo1;?> Fim</label>
 									<div class="input-group DatePicker">
 										<span class="input-group-addon" disabled>
 											<span class="glyphicon glyphicon-calendar"></span>
@@ -260,7 +256,7 @@
 									</div>
 								</div>
 								<div class="col-md-3">
-									<label for="HoraInicio9">Hora Proc. Inc.</label>
+									<label for="HoraInicio9">Hora Proc. de <?php echo $titulo1;?> Inc.</label>
 									<div class="input-group TimePicker">
 										<span class="input-group-addon" disabled>
 											<span class="glyphicon glyphicon-time"></span>
@@ -270,7 +266,7 @@
 									</div>
 								</div>
 								<div class="col-md-3">
-									<label for="HoraFim9">Hora Proc. Fim</label>
+									<label for="HoraFim9">Hora Proc. de <?php echo $titulo1;?> Fim</label>
 									<div class="input-group TimePicker">
 										<span class="input-group-addon" disabled>
 											<span class="glyphicon glyphicon-time"></span>
@@ -283,7 +279,7 @@
 							<?php if ($query['TipoProcedimento'] == 3 || $query['TipoProcedimento'] == 4) { ?>
 								<div class="row">
 									<div class="col-md-3">
-										<label for="DataInicio10">Data Sub.Proc.Inc.</label>
+										<label for="DataInicio10">Data Ação de <?php echo $titulo1;?> Inc.</label>
 										<div class="input-group DatePicker">
 											<span class="input-group-addon" disabled>
 												<span class="glyphicon glyphicon-calendar"></span>
@@ -293,7 +289,7 @@
 										</div>
 									</div>
 									<div class="col-md-3">
-										<label for="DataFim10">Data Sub.Proc.Fim</label>
+										<label for="DataFim10">Data Ação de <?php echo $titulo1;?> Fim</label>
 										<div class="input-group DatePicker">
 											<span class="input-group-addon" disabled>
 												<span class="glyphicon glyphicon-calendar"></span>
@@ -303,7 +299,7 @@
 										</div>
 									</div>
 									<div class="col-md-3">
-										<label for="HoraInicio10">Hora Sub.Proc. Inc.</label>
+										<label for="HoraInicio10">Hora Ação de <?php echo $titulo1;?> Inc.</label>
 										<div class="input-group TimePicker">
 											<span class="input-group-addon" disabled>
 												<span class="glyphicon glyphicon-time"></span>
@@ -313,7 +309,7 @@
 										</div>
 									</div>
 									<div class="col-md-3">
-										<label for="HoraFim10">Hora Sub.Proc. Fim</label>
+										<label for="HoraFim10">Hora Ação de <?php echo $titulo1;?> Fim</label>
 										<div class="input-group TimePicker">
 											<span class="input-group-addon" disabled>
 												<span class="glyphicon glyphicon-time"></span>
