@@ -895,6 +895,7 @@ class Orcatrata extends CI_Controller {
             if (isset($data['procedimento'])) {
                 $max = count($data['procedimento']);
                 for($j=1;$j<=$max;$j++) {
+                    $data['procedimento'][$j]['TipoProcedimento'] = 2;
                     $data['procedimento'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['procedimento'][$j]['Compartilhar'] = $_SESSION['log']['idSis_Usuario'];
                     $data['procedimento'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -1929,6 +1930,7 @@ class Orcatrata extends CI_Controller {
             if (isset($data['procedimento'])) {
                 $max = count($data['procedimento']);
                 for($j=1;$j<=$max;$j++) {
+                    $data['procedimento'][$j]['TipoProcedimento'] = 2;
                     $data['procedimento'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['procedimento'][$j]['Compartilhar'] = $_SESSION['log']['idSis_Usuario'];
                     $data['procedimento'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -3485,6 +3487,7 @@ class Orcatrata extends CI_Controller {
 
                 $max = count($data['update']['procedimento']['inserir']);
                 for($j=0;$j<$max;$j++) {
+                    $data['update']['procedimento']['inserir'][$j]['TipoProcedimento'] = 2;
                     $data['update']['procedimento']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedimento']['inserir'][$j]['Compartilhar'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedimento']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -5092,6 +5095,7 @@ class Orcatrata extends CI_Controller {
 
                 $max = count($data['update']['procedimento']['inserir']);
                 for($j=0;$j<$max;$j++) {
+                    $data['update']['procedimento']['inserir'][$j]['TipoProcedimento'] = 2;
                     $data['update']['procedimento']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedimento']['inserir'][$j]['Compartilhar'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedimento']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -6385,6 +6389,7 @@ class Orcatrata extends CI_Controller {
 
                 $max = count($data['update']['procedimento']['inserir']);
                 for($j=0;$j<$max;$j++) {
+                    $data['update']['procedimento']['inserir'][$j]['TipoProcedimento'] = 2;
                     $data['update']['procedimento']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedimento']['inserir'][$j]['Compartilhar'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedimento']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -7887,6 +7892,7 @@ class Orcatrata extends CI_Controller {
 
                 $max = count($data['update']['procedimento']['inserir']);
                 for($j=0;$j<$max;$j++) {
+                    $data['update']['procedimento']['inserir'][$j]['TipoProcedimento'] = 2;
                     $data['update']['procedimento']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedimento']['inserir'][$j]['Compartilhar'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedimento']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -8948,6 +8954,7 @@ class Orcatrata extends CI_Controller {
             if (isset($data['procedimento'])) {
                 $max = count($data['procedimento']);
                 for($j=1;$j<=$max;$j++) {
+                    $data['procedimento'][$j]['TipoProcedimento'] = 1;
                     $data['procedimento'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['procedimento'][$j]['Compartilhar'] = $_SESSION['log']['idSis_Usuario'];
                     $data['procedimento'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -10526,6 +10533,7 @@ class Orcatrata extends CI_Controller {
 
                 $max = count($data['update']['procedimento']['inserir']);
                 for($j=0;$j<$max;$j++) {
+                    $data['update']['procedimento']['inserir'][$j]['TipoProcedimento'] = 1;
                     $data['update']['procedimento']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedimento']['inserir'][$j]['Compartilhar'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedimento']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
