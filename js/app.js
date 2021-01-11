@@ -902,15 +902,15 @@ function carregaQuitado(value, name, i, cadastrar = 0) {
         if (!$("#DataConcluidoProcedimento"+i).val()) {
             if (cadastrar == 1){
 				$("#DataConcluidoProcedimento"+i).val($("#DataProcedimento"+i).val());
-				//$("#HoraConcluidoProcedimento"+i).val($("#HoraProcedimento"+i).val());
+				$("#HoraConcluidoProcedimento"+i).val($("#HoraProcedimento"+i).val());
 			}else{
 				$("#DataConcluidoProcedimento"+i).val(currentDate.format('DD/MM/YYYY'));
-				//$("#HoraConcluidoProcedimento"+i).val(currentDate.format('HH:mm'));
+				$("#HoraConcluidoProcedimento"+i).val(currentDate.format('HH:mm'));
 			}  
         }
     }else{
         $("#DataConcluidoProcedimento"+i).val("");
-        //$("#HoraConcluidoProcedimento"+i).val("");
+        $("#HoraConcluidoProcedimento"+i).val("");
     }
 	
 }
@@ -1291,7 +1291,7 @@ function adicionaProcedimento() {
     if (pn >= 2) {
         //console.log( $("#listadinamicac"+(pn-1)).val() );
         var chosen;
-        chosen = $("#listadinamicac"+(pn-1)).val();
+        chosen = $("#listadinamica_comp"+(pn-1)).val();
         //console.log( chosen + ' :: ' + pn );
     }
 
@@ -1303,11 +1303,20 @@ function adicionaProcedimento() {
 			<div class="panel panel-warning">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-3">\
+						<div class="col-md-4">\
 							<label for="Procedimento'+pn+'">Proced.:</label>\
 							<textarea class="form-control" id="Procedimento'+pn+'"\
 									  name="Procedimento'+pn+'"></textarea>\
 						</div>\
+						<div class="col-md-4">\
+							<label for="Compartilhar'+pn+'">Quem Fazer:</label>\
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen3"\
+									 id="listadinamica_comp'+pn+'" name="Compartilhar'+pn+'">\
+								<option value=""></option>\
+							</select>\
+						</div>\
+					</div>\
+					<div class="row">\
 						<div class="col-md-2">\
 							<label for="DataProcedimento'+pn+'">Data do Proced.:</label>\
 							<div class="input-group DatePicker">\
@@ -1319,7 +1328,7 @@ function adicionaProcedimento() {
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="HoraProcedimento'+pn+'">Hora Concl</label>\
+							<label for="HoraProcedimento'+pn+'">Hora Proced.</label>\
 							<div class="input-group TimePicker">\
 								<span class="input-group-addon" disabled>\
 									<span class="glyphicon glyphicon-time"></span>\
@@ -1341,15 +1350,29 @@ function adicionaProcedimento() {
 								</label>\
 							</div>\
 						</div>\
-						<div class="col-md-2">\
-							<div id="ConcluidoProcedimento'+pn+'" style="display:none">\
-								<label for="DataConcluidoProcedimento'+pn+'">Data Concl</label>\
-								<div class="input-group DatePicker">\
-									<span class="input-group-addon" disabled>\
-										<span class="glyphicon glyphicon-calendar"></span>\
-									</span>\
-									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA" readonly=""\
-										   name="DataConcluidoProcedimento'+pn+'"  id="DataConcluidoProcedimento'+pn+'" value="">\
+						<div class="col-md-4">\
+							<div class="row">\
+								<div id="ConcluidoProcedimento'+pn+'" style="display:none">\
+									<div class="col-md-6">\
+										<label for="DataConcluidoProcedimento'+pn+'">Data Concl</label>\
+										<div class="input-group DatePicker">\
+											<span class="input-group-addon" disabled>\
+												<span class="glyphicon glyphicon-calendar"></span>\
+											</span>\
+											<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA" readonly=""\
+												   name="DataConcluidoProcedimento'+pn+'"  id="DataConcluidoProcedimento'+pn+'" value="">\
+										</div>\
+									</div>\
+									<div class="col-md-6">\
+										<label for="HoraConcluidoProcedimento'+pn+'">Hora Concl.</label>\
+										<div class="input-group TimePicker">\
+											<span class="input-group-addon" disabled>\
+												<span class="glyphicon glyphicon-time"></span>\
+											</span>\
+											<input type="text" class="form-control Time" maxlength="5" placeholder="HH:MM" readonly=""\
+												   name="HoraConcluidoProcedimento'+pn+'"  id="HoraConcluidoProcedimento'+pn+'" value="">\
+										</div>\
+									</div>\
 								</div>\
 							</div>\
 						</div>\
@@ -1367,34 +1390,40 @@ function adicionaProcedimento() {
     //habilita o botão de calendário após a geração dos campos dinâmicos
     $('.DatePicker').datetimepicker(dateTimePickerOptions);
 
-    //get a reference to the select element
-    $select = $('#listadinamicac'+pn);
+		
+	//get a reference to the select element
+	$select3 = $('#listadinamica_comp'+pn);
 
-    //request the JSON data and parse into the select element
-    $.ajax({
-        url: window.location.origin+ '/' + app + '/Getvalues_json.php?q=7',
-        dataType: 'JSON',
-        type: "GET",
-        success: function (data) {
-            //clear the current content of the select
-            $select.html('');
-            //iterate over the data and append a select option
-            //$select.append('<option value="" checked>Baixa</option>');
-            $.each(data, function (key, val) {
-                //alert(val.id);
-                if (val.id == chosen)
-                    $select.append('<option value="' + val.id + '" selected="selected">' + val.name + '</option>');
-                else
-                    $select.append('<option value="' + val.id + '">' + val.name + '</option>');
-            })
-        },
-        error: function () {
-            //alert('erro listadinamicaB');
-            //if there is an error append a 'none available' option
-            $select.html('<option id="-1">ERRO</option>');
-        }
+	//request the JSON data and parse into the select element
+	$.ajax({
+		url: window.location.origin+ '/' + app + '/Getvalues_json3.php?q=3',
+		dataType: 'JSON',
+		type: "GET",
+		success: function (data) {
+			//clear the current content of the select
+			$select3.html('');
+			//iterate over the data and append a select option
+			$select3.append('<option value="">-- Sel. Quem Fazer --</option>');
+			$.each(data, function (key, val) {
+				//alert(val.id);
+				$select3.append('<option value="' + val.id + '">' + val.name + '</option>');
+			})
+			$('.Chosen3').chosen({
+				disable_search_threshold: 10,
+				multiple_text: "Selecione uma ou mais opções",
+				single_text: "Selecione uma opção",
+				no_results_text: "Nenhum resultado para",
+				width: "100%"
+			});
+		},
+		error: function () {
+			//alert('erro listadinamicaB');
+			//if there is an error append a 'none available' option
+			$select3.html('<option id="-1">ERRO</option>');
+		}
 
-    });
+	});	
+
     //permite o uso de radio buttons nesse bloco dinâmico
     $('input:radio[id="rdgrldnmc_prm"]').change(function() {
 

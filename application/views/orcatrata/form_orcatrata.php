@@ -1508,7 +1508,7 @@
 														<div class="panel panel-success">
 															<div class="panel-heading">
 																<div class="row">
-																	<div class="col-md-3">
+																	<div class="col-md-4">
 																		<input type="hidden" name="idSis_Usuario<?php echo $i ?>" id="idSis_Usuario<?php echo $i ?>" value="<?php echo $procedimento[$i]['idSis_Usuario'] ?>"/>
 																		<label for="Procedimento<?php echo $i ?>">
 																			Proced. <?php echo $i ?>: 
@@ -1519,6 +1519,26 @@
 																		<textarea class="form-control" id="Procedimento<?php echo $i ?>" <?php echo $readonly; ?>
 																				  name="Procedimento<?php echo $i ?>"><?php echo $procedimento[$i]['Procedimento']; ?></textarea>
 																	</div>
+																	<div class="col-md-4">
+																		<label for="Compartilhar<?php echo $i ?>">Quem Fazer:</label>
+																		<?php if ($i == 1) { ?>
+																		<?php } ?>
+																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+																				 id="listadinamica_comp<?php echo $i ?>" name="Compartilhar<?php echo $i ?>">
+																			<option value="">-- Selecione uma opção --</option>
+																			<?php
+																			foreach ($select['Compartilhar'] as $key => $row) {
+																				if ($procedimento[$i]['Compartilhar'] == $key) {
+																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																				} else {
+																					echo '<option value="' . $key . '">' . $row . '</option>';
+																				}
+																			}
+																			?>
+																		</select>
+																	</div>
+																</div>
+																<div class="row">
 																	<div class="col-md-2">
 																		<label for="DataProcedimento<?php echo $i ?>">Data do Proced.:</label>
 																		<div class="input-group <?php echo $datepicker; ?>">
@@ -1582,16 +1602,28 @@
 																			</span>
 																		<?php } ?>
 																	</div>
-																	<div class="col-md-2">
-																		<div id="ConcluidoProcedimento<?php echo $i ?>" <?php echo $div['ConcluidoProcedimento' . $i]; ?>>
-																			<div class="col-md-6">
-																				<label for="DataConcluidoProcedimento<?php echo $i ?>">Data Concl</label>
-																				<div class="input-group <?php echo $datepicker; ?>">
-																					<span class="input-group-addon" disabled>
-																						<span class="glyphicon glyphicon-calendar"></span>
-																					</span>
-																					<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-																						   name="DataConcluidoProcedimento<?php echo $i ?>" id="DataConcluidoProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataConcluidoProcedimento']; ?>">
+																	<div class="col-md-4">
+																		<div class="row">
+																			<div id="ConcluidoProcedimento<?php echo $i ?>" <?php echo $div['ConcluidoProcedimento' . $i]; ?>>
+																				<div class="col-md-6">
+																					<label for="DataConcluidoProcedimento<?php echo $i ?>">Data Concl</label>
+																					<div class="input-group <?php echo $datepicker; ?>">
+																						<span class="input-group-addon" disabled>
+																							<span class="glyphicon glyphicon-calendar"></span>
+																						</span>
+																						<input type="text" class="form-control Date" readonly="" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+																							   name="DataConcluidoProcedimento<?php echo $i ?>" id="DataConcluidoProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['DataConcluidoProcedimento']; ?>">
+																					</div>
+																				</div>
+																				<div class="col-md-6">
+																					<label for="HoraConcluidoProcedimento<?php echo $i ?>">Hora Concl.</label>
+																					<div class="input-group <?php echo $timepicker; ?>">
+																						<span class="input-group-addon" disabled>
+																							<span class="glyphicon glyphicon-time"></span>
+																						</span>
+																						<input type="text" class="form-control Time" readonly="" <?php echo $readonly; ?> maxlength="5" placeholder="HH:MM"
+																							   name="HoraConcluidoProcedimento<?php echo $i ?>" id="HoraConcluidoProcedimento<?php echo $i ?>" value="<?php echo $procedimento[$i]['HoraConcluidoProcedimento']; ?>">
+																					</div>
 																				</div>
 																			</div>
 																		</div>

@@ -2,13 +2,13 @@
 
 session_start();
 
-$link = mysql_connect($_SESSION['db']['hostname'], $_SESSION['db']['username'], $_SESSION['db']['password']);
-if (!$link) {
+$link2 = mysql_connect($_SESSION['db']['hostname'], $_SESSION['db']['username'], $_SESSION['db']['password']);
+if (!$link2) {
     die('Não foi possível conectar: ' . mysql_error());
 }
 
-$db = mysql_select_db($_SESSION['db']['database'], $link);
-if (!$db) {
+$db2 = mysql_select_db($_SESSION['db']['database'], $link2);
+if (!$db2) {
     die('Não foi possível selecionar banco de dados: ' . mysql_error());
 }
 
@@ -167,5 +167,5 @@ elseif ($_GET['q'] == 98) {
 }
 
 echo json_encode($event_array2);
-mysql_close($link);
+mysql_close($link2);
 ?>
