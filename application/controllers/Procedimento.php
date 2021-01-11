@@ -605,17 +605,18 @@ class Procedimento extends CI_Controller {
             $this->load->view('procedimento/form_procedcli', $data);
         } else {
 
+            ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+            #### App_Procedimento ####
 			if($data['orcatrata']['ConcluidoProcedimento'] == "N"){
 				$data['orcatrata']['DataConcluidoProcedimento'] = "00/00/0000";
 				$data['orcatrata']['HoraConcluidoProcedimento'] = "00:00:00";
 			}
-            ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
-            #### App_Procedimento ####
             $data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimento'], 'mysql');
 			$data['orcatrata']['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataConcluidoProcedimento'], 'mysql');
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+            $data['orcatrata']['TipoProcedimento'] = 3;
             $data['orcatrata']['idApp_Procedimento'] = $this->Procedimento_model->set_orcatrata($data['orcatrata']);
 			
             #### App_SubProcedimento ####
@@ -625,6 +626,7 @@ class Procedimento extends CI_Controller {
                     $data['procedtarefa'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['procedtarefa'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['procedtarefa'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['procedtarefa'][$j]['TipoSubProcedimento'] = 3;
                     $data['procedtarefa'][$j]['idApp_Procedimento'] = $data['orcatrata']['idApp_Procedimento'];
                     $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimento'], 'mysql');
 					$data['procedtarefa'][$j]['DataConcluidoSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataConcluidoSubProcedimento'], 'mysql');
@@ -886,6 +888,7 @@ class Procedimento extends CI_Controller {
                     $data['update']['procedtarefa']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedtarefa']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['update']['procedtarefa']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['update']['procedtarefa']['inserir'][$j]['TipoSubProcedimento'] = 3;
                     $data['update']['procedtarefa']['inserir'][$j]['idApp_Procedimento'] = $data['orcatrata']['idApp_Procedimento'];
                     $data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimento'], 'mysql');
 					$data['update']['procedtarefa']['inserir'][$j]['DataConcluidoSubProcedimento'] = $this->basico->mascara_data($data['update']['procedtarefa']['inserir'][$j]['DataConcluidoSubProcedimento'], 'mysql');
@@ -1104,6 +1107,7 @@ class Procedimento extends CI_Controller {
 			$data['orcatrata']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['orcatrata']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			$data['orcatrata']['TipoProcedimento'] = 4;
             $data['orcatrata']['idApp_Procedimento'] = $this->Procedimento_model->set_orcatrata($data['orcatrata']);
 			
             #### App_SubProcedimento ####
@@ -1113,6 +1117,7 @@ class Procedimento extends CI_Controller {
                     $data['procedtarefa'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['procedtarefa'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['procedtarefa'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['procedtarefa'][$j]['TipoSubProcedimento'] = 4;
                     $data['procedtarefa'][$j]['idApp_Procedimento'] = $data['orcatrata']['idApp_Procedimento'];
                     $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimento'], 'mysql');
 					$data['procedtarefa'][$j]['DataConcluidoSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataConcluidoSubProcedimento'], 'mysql');
@@ -1377,6 +1382,7 @@ class Procedimento extends CI_Controller {
                     $data['update']['procedtarefa']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedtarefa']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['update']['procedtarefa']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+					$data['update']['procedtarefa']['inserir'][$j]['TipoSubProcedimento'] = 4;
                     $data['update']['procedtarefa']['inserir'][$j]['idApp_Procedimento'] = $data['orcatrata']['idApp_Procedimento'];
                     $data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimento'], 'mysql');
 					$data['update']['procedtarefa']['inserir'][$j]['DataConcluidoSubProcedimento'] = $this->basico->mascara_data($data['update']['procedtarefa']['inserir'][$j]['DataConcluidoSubProcedimento'], 'mysql');
@@ -1556,7 +1562,13 @@ class Procedimento extends CI_Controller {
             #### App_OrcaTrata ####
             $data['procedimento'] = $this->Procedimento_model->get_procedimento($id);
             $data['procedimento']['DataProcedimento'] = $this->basico->mascara_data($data['procedimento']['DataProcedimento'], 'barras');
-
+			if($data['procedimento']['Sac'] == 1){
+				$data['procedimento']['Sac'] = 'Solicitação';
+			}elseif($data['procedimento']['Sac'] == 2){
+				$data['procedimento']['Sac'] = 'Elogio';
+			}elseif($data['procedimento']['Sac'] == 3){
+				$data['procedimento']['Sac'] = 'Reclamação';
+			}
             #### Carrega os dados do cliente nas variáves de sessão ####
             $this->load->model('Cliente_model');
 			if($data['procedimento']['idApp_Cliente'] != 0 && $data['procedimento']['idApp_Cliente'] != 1){
@@ -1621,7 +1633,13 @@ class Procedimento extends CI_Controller {
             #### App_OrcaTrata ####
             $data['procedimento'] = $this->Procedimento_model->get_procedimento($id);
             $data['procedimento']['DataProcedimento'] = $this->basico->mascara_data($data['procedimento']['DataProcedimento'], 'barras');
-
+			if($data['procedimento']['Sac'] == 1){
+				$data['procedimento']['Sac'] = 'Solicitação';
+			}elseif($data['procedimento']['Sac'] == 2){
+				$data['procedimento']['Sac'] = 'Elogio';
+			}elseif($data['procedimento']['Sac'] == 3){
+				$data['procedimento']['Sac'] = 'Reclamação';
+			}
             #### Carrega os dados do cliente nas variáves de sessão ####
             $this->load->model('Cliente_model');
 			if($data['procedimento']['idApp_Cliente'] != 0 && $data['procedimento']['idApp_Cliente'] != 1){

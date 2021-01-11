@@ -41,7 +41,7 @@ if ($_GET['q']==1) {
 
 }
 
-if ($_GET['q']==100) {
+elseif  ($_GET['q']==100) {
 
     $result = mysql_query('
 		SELECT *
@@ -68,7 +68,7 @@ if ($_GET['q']==100) {
 
 }
 
-if ($_GET['q']==110) {
+elseif  ($_GET['q']==110) {
 
     $result = mysql_query('
 		SELECT *

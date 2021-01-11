@@ -17,7 +17,7 @@
 							<?php echo validation_errors(); ?>
 
 							<div class="panel panel-<?php echo $panel; ?>">
-								
+								<!--
 								<div class="panel-heading">
 									<strong>Cliente
 										<label for="idSis_Empresa" class="sr-only col-md-4">Empresa:</label>
@@ -25,6 +25,7 @@
 												id="idSis_Empresa" autofocus name="idSis_Empresa">
 
 											<?php
+											/*
 											foreach ($select['idSis_Empresa'] as $key => $row) {
 												if ($query['idSis_Empresa'] == $key) {
 													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -32,10 +33,12 @@
 													echo '<option value="' . $key . '">' . $row . '</option>';
 												}
 											}
+											*/
 											?>
 										</select>
 									</strong>
 								</div>
+								-->
 								<div class="panel-body">
 									<div class="form-group">
 										<div class="row">
@@ -352,14 +355,13 @@
 											</div>
 										</div>										
 									</div>
-
 									<br>
+									<input type="hidden" name="idSis_Empresa" value="<?php echo $query['idSis_Empresa']; ?>">
+									<input type="hidden" name="idApp_Cliente" value="<?php echo $query['idApp_Cliente']; ?>">
 									<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 									<div class="form-group">
 										<div class="row">
-											<input type="hidden" name="idApp_Cliente" value="<?php echo $query['idApp_Cliente']; ?>">
 											<?php if ($metodo == 2) { ?>
-
 												<div class="col-md-6">
 													<button class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." type="submit">
 														<span class="glyphicon glyphicon-save"></span> Salvar

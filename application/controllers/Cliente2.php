@@ -343,6 +343,7 @@ class Cliente2 extends CI_Controller {
             'Telefone2',
             'Telefone3',
 			'Ativo',
+			'Motivo',
 			'ClienteConsultor',
             'Sexo',
             'EnderecoCliente',
@@ -388,6 +389,7 @@ class Cliente2 extends CI_Controller {
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		$data['select']['Associado'] = $this->Basico_model->select_status_sn();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();
+		$data['select']['Motivo'] = $this->Basico_model->select_motivo();
 		$data['select']['ClienteConsultor'] = $this->Basico_model->select_status_sn();
 		$data['select']['Profissional'] = $this->Basico_model->select_profissional2();
 		$data['select']['idSis_Empresa'] = $this->Basico_model->select_empresacli();

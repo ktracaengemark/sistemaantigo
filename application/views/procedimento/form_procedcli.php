@@ -182,7 +182,7 @@
 									<div class="panel-heading">
 										<div class="row text-left">
 											<div class="col-md-3 " >
-												<label for="<?php echo $titulo; ?>">Tipo de <?php echo $titulo; ?>: <?php echo $orcatrata['idApp_Procedimento']; ?></label>
+												<label for="<?php echo $titulo; ?>">Tipo de <?php echo $titulo; ?>: </label>
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="<?php echo $titulo; ?>" name="<?php echo $titulo; ?>">
 													<option value="">- Selec. <?php echo $titulo; ?> -</option>	
 													<?php
@@ -199,7 +199,7 @@
 											</div>
 											
 											<div class="col-md-6">
-												<label for="Procedimento">Descrição do <?php echo $titulo; ?>:</label>
+												<label for="Procedimento">Relato do Cliente - <?php echo $titulo; ?> Nº <?php echo $orcatrata['idApp_Procedimento']; ?></label>
 												<textarea class="form-control" name="Procedimento" id="Procedimento" <?php echo $readproc; ?>><?php echo $orcatrata['Procedimento']; ?></textarea>
 												<?php echo form_error('Procedimento'); ?>		  
 											</div>
@@ -352,7 +352,7 @@
 											?>
 
 											<?php if ($metodo == 2 || $metodo == 4) { ?>
-											<input type="hidden" name="idApp_SubProcedimento<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['idApp_SubProcedimento']; ?>"/>
+											<input type="hidden" name="idApp_SubProcedimento<?php echo $i ?>" id="idApp_SubProcedimento<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['idApp_SubProcedimento']; ?>"/>
 											<?php } ?>
 
 											<div class="form-group" id="3div<?php echo $i ?>">
@@ -401,6 +401,7 @@
 																		 id="listadinamicad<?php echo $i ?>" name="Prioridade<?php echo $i ?>">
 																	
 																	<?php
+																	/*
 																	foreach ($select['Prioridade'] as $key => $row) {
 																		if ($procedtarefa[$i]['Prioridade'] == $key) {
 																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -408,6 +409,7 @@
 																			echo '<option value="' . $key . '">' . $row . '</option>';
 																		}
 																	}
+																	*/
 																	?>
 																</select>
 															</div>
@@ -419,7 +421,7 @@
 																		<span class="glyphicon glyphicon-calendar"></span>
 																	</span>															
 																	<input type="text" class="form-control Date" <?php echo $readonly; ?> readonly=""
-																		   name="DataSubProcedimento<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataSubProcedimento']; ?>">
+																		   name="DataSubProcedimento<?php echo $i ?>" id="DataSubProcedimento<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['DataSubProcedimento']; ?>">
 																</div>
 															</div>
 															<div class="col-md-2">

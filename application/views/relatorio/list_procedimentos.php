@@ -13,6 +13,8 @@
                 <thead>
                     <tr>
                         <th class="active">Quem_Cadastrou</th>
+						<th class="active">Data</th>
+						<th class="active">Hora</th>
 						<th class="active">id_<?php echo $titulo1; ?></th>
 						<?php if($query['TipoProcedimento'] == 3 || $query['TipoProcedimento'] == 4) { ?>
 							<th class="active">Tipo_de_<?php echo $titulo1; ?></th>
@@ -20,8 +22,6 @@
 						<th class="active">id_<?php echo $nome; ?></th>
                         <th class="active"><?php echo $nome; ?></th>
 						<th class="active">Descr_do_<?php echo $titulo1; ?></th>
-						<th class="active">Data</th>
-						<th class="active">Hora</th>
 						<th class="active">Quem_Fazer</th>
 						<th class="active">Concluída?</th>
 						<?php if($query['TipoProcedimento'] == 3 || $query['TipoProcedimento'] == 4) { ?>
@@ -52,6 +52,8 @@
 							//echo '<tr class="clickable-row" data-href="' . base_url() . 'procedimento/alterar/' . $row['idApp_Procedimento'] . '">';
 							
                             echo '<td>' . $row['NomeUsuario'] . '</td>';
+							echo '<td>' . $row['DataProcedimento'] . '</td>';
+							echo '<td>' . $row['HoraProcedimento'] . '</td>';
 							if($query['TipoProcedimento'] == 1 || $query['TipoProcedimento'] == 2) {
 								if(isset($row['idApp_OrcaTrata']) && $row['idApp_OrcaTrata'] != 0){
 									if($nome == "Cliente"){
@@ -156,9 +158,7 @@
 									</a>
 								</td>';
 								*/
-							echo '<td>' . $row['Procedimento'] . '</td>';
-							echo '<td>' . $row['DataProcedimento'] . '</td>';
-							echo '<td>' . $row['HoraProcedimento'] . '</td>';	
+							echo '<td>' . $row['Procedimento'] . '</td>';	
 							echo '<td>' . $row['NomeCompartilhar'] . '</td>';					
 							echo '<td>' . $row['ConcluidoProcedimento'] . '</td>';
 							if($query['TipoProcedimento'] == 3 || $query['TipoProcedimento'] == 4) {

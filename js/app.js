@@ -26,6 +26,47 @@ exibir();
 exibir_confirmar();	
 Aguardar();
 
+$(document).ready(function(){
+	$('#insert_form').on('submit', function(event){
+		//alert('ok');
+		event.preventDefault();
+		if($('#Novo_Motivo').val() == "" || $('#Desc_Motivo').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{		
+			//Receber os dados do formulário
+			var dados = $("#insert_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/cadastros/Motivo.php?', dados, function (retorna){
+			 //console.log(retorna);
+				if(retorna){
+				
+					//Limpar os campo
+					$('#insert_form')[0].reset();
+					
+					//Fechar a janela modal cadastrar
+					$('#addUsuarioModal').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					
+				}
+				
+			});
+			
+		}	
+	});
+});
+
+
 //Função que desabilita a Mensagem de Aguardar.
 function Aguardar () {
 	$('.aguardar').hide();
@@ -878,20 +919,13 @@ function carregaQuitado(value, name, i, cadastrar = 0) {
  function carregaConclSubProc(value, name, i, cadastrar = 0) {
 
     if (value == "S") {
-        if (!$("#DataConcluidoSubProcedimento"+i).val()) {
-            if (cadastrar == 1){
-				$("#DataConcluidoSubProcedimento"+i).val($("#DataSubProcedimento"+i).val());
-			}else{
-				$("#DataConcluidoSubProcedimento"+i).val(currentDate.format('DD/MM/YYYY'));
-			}  
-        }
-        if (!$("#HoraConcluidoSubProcedimento"+i).val()) {
-            if (cadastrar == 1){
-				$("#HoraConcluidoSubProcedimento"+i).val($("#HoraSubProcedimento"+i).val());
-			}else{
-				$("#HoraConcluidoSubProcedimento"+i).val(currentDate.format('HH:mm'));
-			}  
-        }
+		if (cadastrar == 1){
+			$("#DataConcluidoSubProcedimento"+i).val($("#DataSubProcedimento"+i).val());
+			$("#HoraConcluidoSubProcedimento"+i).val($("#HoraSubProcedimento"+i).val());
+		}else{
+			$("#DataConcluidoSubProcedimento"+i).val(currentDate.format('DD/MM/YYYY'));
+			$("#HoraConcluidoSubProcedimento"+i).val(currentDate.format('HH:mm'));
+		}
     }else{
         $("#DataConcluidoSubProcedimento"+i).val("");
         $("#HoraConcluidoSubProcedimento"+i).val("");
@@ -1168,7 +1202,7 @@ function adicionaTamanhos() {
     }
 
     //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
+    //var currentDate = moment();
 
     $(".input_fields_wrap30").append('\
         <div class="form-group" id="30div'+pc+'">\
@@ -1262,7 +1296,7 @@ function adicionaProcedimento() {
     }
 
     //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
+    //var currentDate = moment();
 
     $(".input_fields_wrap3").append('\
         <div class="form-group" id="3div'+pn+'">\
@@ -1411,7 +1445,7 @@ function adicionaSubProcedimento() {
     }	
 
     //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
+    //var currentDate = moment();
 
     $(".input_fields_wrap3").append('\
         <div class="form-group" id="3div'+pt+'">\
@@ -1432,7 +1466,7 @@ function adicionaSubProcedimento() {
 									<span class="glyphicon glyphicon-calendar"></span>\
 								</span>\
 								<input type="text" class="form-control Date" readonly=""\
-									   name="DataSubProcedimento'+pt+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
+									   name="DataSubProcedimento'+pt+'" id="DataSubProcedimento'+pt+'" value="'+currentDate.format('DD/MM/YYYY')+'">\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
@@ -1604,7 +1638,7 @@ function adicionaSubTarefa() {
     }	
 
     //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
+    //var currentDate = moment();
 
     $(".input_fields_wrap3").append('\
         <div class="form-group" id="3div'+pt+'">\
@@ -1756,7 +1790,7 @@ function adicionaValor() {
     }
 
     //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
+    //var currentDate = moment();
 
     $(".input_fields_wrap3").append('\
         <div class="form-group" id="3div'+pt+'">\
@@ -1833,7 +1867,7 @@ function adicionaValor2() {
     }
 
     //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
+    //var currentDate = moment();
 
     $(".input_fields_wrap3").append('\
         <div class="form-group" id="3div'+pt+'">\
@@ -1922,7 +1956,7 @@ function adiciona_atributo() {
     }
 	
     //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
+    //var currentDate = moment();
 
     $(".input_fields_wrap3").append('\
         <div class="form-group" id="3div'+pt+'">\
@@ -1992,7 +2026,7 @@ function adiciona_opcao() {
     //console.log(pt2);
 
     //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
+    //var currentDate = moment();
 
     $(".input_fields_wrap32").append('\
         <div class="form-group" id="32div'+pt2+'">\
@@ -2035,7 +2069,7 @@ function adiciona_opcao_select2() {
     }
 
     //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
+    //var currentDate = moment();
 
     $(".input_fields_wrap32").append('\
         <div class="form-group" id="32div'+pt2+'">\
@@ -2112,7 +2146,7 @@ function adiciona_item_promocao() {
     }
 
     //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
+    //var currentDate = moment();
 
     $(".input_fields_wrap3").append('\
         <div class="form-group" id="3div'+pt+'">\
@@ -2320,7 +2354,7 @@ function adiciona_item_promocao2() {
     }
 
     //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
+    //var currentDate = moment();
 
     $(".input_fields_wrap32").append('\
         <div class="form-group" id="32div'+pt2+'">\
@@ -2457,7 +2491,7 @@ function adiciona_item_promocao3() {
     }
 
     //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
+    //var currentDate = moment();
 
     $(".input_fields_wrap33").append('\
         <div class="form-group" id="33div'+pt3+'">\
@@ -2594,7 +2628,7 @@ function adiciona_item_promocao5() {
     }
 
     //Captura a data do dia e carrega no campo correspondente
-    var currentDate = moment();
+    //var currentDate = moment();
 
     $(".input_fields_wrap3").append('\
         <div class="form-group" id="3div'+pt+'">\
@@ -3117,7 +3151,7 @@ function adicionaParcelas() {
 	*/
     //Captura a data do dia e carrega no campo correspondente
     
-	var currentDate = moment();
+	//var currentDate = moment();
 	
     $(".input_fields_wrap21").append('\
 		<div class="form-group" id="21div'+pr+'">\

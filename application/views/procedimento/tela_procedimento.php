@@ -190,22 +190,20 @@
 									<table class="table table-bordered table-condensed table-striped">
 										<thead>
 											<tr>
-												<th class="col-md-2" scope="col"><?php echo $titulo; ?></th>
+												<?php if($metodo == 1 || $metodo == 3) { ?>
+													<th class="col-md-2" scope="col"><?php echo $titulo; ?></th>
+												<?php } ?>
+												<th class="col-md-2" scope="col">Relato</th>
 												<th class="col-md-2" scope="col">Data</th>
 												<th class="col-md-2" scope="col">Hora</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>	
-												<td>
-													<?php
-														if($metodo == 1 || $metodo == 2){
-															echo $procedimento['Procedimento'];
-														}else{
-															echo $procedimento['Marketing'];
-														}
-													?>
-												</td>
+											<tr>
+												<?php if($metodo == 1 || $metodo == 3) { ?>
+													<td><?php echo $procedimento[$titulo] ?></td>
+												<?php } ?>
+												<td><?php echo $procedimento['Procedimento'] ?></td>
 												<td><?php echo $procedimento['DataProcedimento'] ?></td>
 												<td><?php echo $procedimento['HoraProcedimento'] ?></td>
 											</tr>

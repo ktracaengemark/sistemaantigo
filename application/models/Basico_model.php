@@ -826,6 +826,27 @@ if (isset($data) && $data) {
 
         return $array;
     }
+
+    public function select_motivo() {
+
+        $query = $this->db->query('
+            SELECT
+                *
+            FROM
+                Tab_Motivo
+            WHERE
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+            ORDER BY
+                Motivo ASC
+        ');
+
+        $array = array();
+        foreach ($query->result() as $row) {
+			$array[$row->idTab_Motivo] = $row->Motivo;
+        }
+
+        return $array;
+    }
 	
 	public function select_orcatrata($data = FALSE) {
 

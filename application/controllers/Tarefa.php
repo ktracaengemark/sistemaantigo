@@ -269,8 +269,18 @@ class Tarefa extends CI_Controller {
         //Data de hoje como default
         (!$data['tarefa']['DataProcedimento']) ? $data['tarefa']['DataProcedimento'] = date('d/m/Y', time()) : FALSE;
 		#(!$data['tarefa']['DataProcedimentoLimite']) ? $data['tarefa']['DataProcedimentoLimite'] = date('d/m/Y', time()) : FALSE;
-
-		($_SESSION['log']['idSis_Empresa'] == 5) ? $data['tarefa']['Compartilhar'] = $_SESSION['log']['idSis_Usuario'] : FALSE;
+		if($_SESSION['log']['idSis_Empresa'] == 5){
+			$data['tarefa']['Compartilhar'] = $_SESSION['log']['idSis_Usuario'];
+		}else{
+			if(!$data['tarefa']['Compartilhar']){
+				$data['tarefa']['Compartilhar'] = $_SESSION['log']['idSis_Usuario'];
+			}else{
+				FALSE;
+			}
+		}
+			//($_SESSION['log']['idSis_Empresa'] == 5) ? $data['tarefa']['Compartilhar'] = $_SESSION['log']['idSis_Usuario'] : FALSE;
+			
+			//(!$data['tarefa']['Compartilhar']) ? $data['tarefa']['Compartilhar'] = $_SESSION['log']['idSis_Usuario'] : FALSE;
 
 		
 		
@@ -278,13 +288,14 @@ class Tarefa extends CI_Controller {
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
             if ($this->input->post('DataSubProcedimento' . $i) || $this->input->post('DataSubProcedimentoLimite' . $i) ||
-                    $this->input->post('Prioridade' . $i) || $this->input->post('Statussubtarefa' . $i) || $this->input->post('SubProcedimento' . $i)) {
+				$this->input->post('Prioridade' . $i) || $this->input->post('Statussubtarefa' . $i) || $this->input->post('SubProcedimento' . $i)) {
                 $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->input->post('DataSubProcedimento' . $i);
                 $data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->input->post('DataSubProcedimentoLimite' . $i);
 				$data['procedtarefa'][$j]['Prioridade'] = $this->input->post('Prioridade' . $i);
                 $data['procedtarefa'][$j]['Statussubtarefa'] = $this->input->post('Statussubtarefa' . $i);
 				$data['procedtarefa'][$j]['SubProcedimento'] = $this->input->post('SubProcedimento' . $i);
 				$data['procedtarefa'][$j]['ConcluidoSubProcedimento'] = $this->input->post('ConcluidoSubProcedimento' . $i);
+                $data['procedtarefa'][$j]['idSis_Usuario'] = $this->input->post('idSis_Usuario' . $i);
                 $j++;
             }
 
@@ -300,13 +311,16 @@ class Tarefa extends CI_Controller {
 		$this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'trim|valid_date');
         $this->form_validation->set_rules('DataProcedimentoLimite', 'Concluir em', 'trim|valid_date');
         $this->form_validation->set_rules('Categoria', 'Categoria', 'required|trim');
+		if($_SESSION['log']['idSis_Empresa'] != 5){
+			$this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
+		}	
 		//$this->form_validation->set_rules('Prioridade', 'Prioridade', 'required|trim');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         #$data['select']['Rotina'] = $this->Basico_model->select_status_sn();
-        #$data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
+        $data['select']['ConcluidoSubProcedimento'] = $this->Basico_model->select_status_sn();
         $data['select']['Compartilhar'] = $this->Procedimento_model->select_compartilhar();
 		$data['select']['Categoria'] = $this->Tarefa_model->select_categoria();
 		$data['select']['Prioridade'] = array (
@@ -391,6 +405,7 @@ class Tarefa extends CI_Controller {
 			$data['tarefa']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
 			$data['tarefa']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['tarefa']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+            $data['tarefa']['TipoProcedimento'] = 5;
             $data['tarefa']['idApp_Procedimento'] = $this->Tarefa_model->set_tarefa($data['tarefa']);
             /*
             echo count($data['servico']);
@@ -408,6 +423,7 @@ class Tarefa extends CI_Controller {
                     $data['procedtarefa'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['procedtarefa'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['procedtarefa'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['procedtarefa'][$j]['TipoSubProcedimento'] = 5;
                     $data['procedtarefa'][$j]['idApp_Procedimento'] = $data['tarefa']['idApp_Procedimento'];
                     $data['procedtarefa'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimento'], 'mysql');
 					$data['procedtarefa'][$j]['DataSubProcedimentoLimite'] = $this->basico->mascara_data($data['procedtarefa'][$j]['DataSubProcedimentoLimite'], 'mysql');
@@ -570,6 +586,9 @@ class Tarefa extends CI_Controller {
 		$this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'trim|valid_date');        
 		$this->form_validation->set_rules('DataProcedimentoLimite', 'Concluir em', 'trim|valid_date');
         $this->form_validation->set_rules('Categoria', 'Categoria', 'required|trim');
+		if($_SESSION['log']['idSis_Empresa'] != 5){
+			$this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
+		}
 		//$this->form_validation->set_rules('Prioridade', 'Prioridade', 'required|trim');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
@@ -692,6 +711,7 @@ class Tarefa extends CI_Controller {
                     $data['update']['procedtarefa']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedtarefa']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['update']['procedtarefa']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+					$data['update']['procedtarefa']['inserir'][$j]['TipoSubProcedimento'] = 5;
                     $data['update']['procedtarefa']['inserir'][$j]['idApp_Procedimento'] = $data['tarefa']['idApp_Procedimento'];
                     $data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimento'], 'mysql');
 					$data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimentoLimite'], 'mysql');
@@ -943,6 +963,9 @@ class Tarefa extends CI_Controller {
 		$this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'trim|valid_date');        
 		$this->form_validation->set_rules('DataProcedimentoLimite', 'Concluir em', 'trim|valid_date');      
         $this->form_validation->set_rules('Categoria', 'Categoria', 'required|trim');
+		if($_SESSION['log']['idSis_Empresa'] != 5){
+			$this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
+		}
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
@@ -1059,6 +1082,7 @@ class Tarefa extends CI_Controller {
                     $data['update']['procedtarefa']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['procedtarefa']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 					$data['update']['procedtarefa']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+					$data['update']['procedtarefa']['inserir'][$j]['TipoSubProcedimento'] = 5;
                     $data['update']['procedtarefa']['inserir'][$j]['idApp_Procedimento'] = $data['tarefa']['idApp_Procedimento'];
                     $data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimento'] = $this->basico->mascara_data($data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimento'], 'mysql');
 					$data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimentoLimite'] = $this->basico->mascara_data($data['update']['procedtarefa']['inserir'][$j]['DataSubProcedimentoLimite'], 'mysql');

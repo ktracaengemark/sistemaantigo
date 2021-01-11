@@ -3892,8 +3892,8 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['Ordenamento'] = array(
-			'ASC' => 'Crescente',
             'DESC' => 'Decrescente',
+			'ASC' => 'Crescente',
         );
 
         $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
@@ -4062,8 +4062,8 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['Ordenamento'] = array(
-			'ASC' => 'Crescente',
             'DESC' => 'Decrescente',
+			'ASC' => 'Crescente',
         );
 
         $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
@@ -4233,8 +4233,8 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['Ordenamento'] = array(
-			'ASC' => 'Crescente',
             'DESC' => 'Decrescente',
+			'ASC' => 'Crescente',
         );
 
         $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();
@@ -4403,8 +4403,8 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['Ordenamento'] = array(
-			'ASC' => 'Crescente',
             'DESC' => 'Decrescente',
+			'ASC' => 'Crescente',
         );
 
         $data['select']['NomeUsuario'] = $this->Relatorio_model->select_usuario();

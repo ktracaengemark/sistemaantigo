@@ -340,6 +340,7 @@
 														</select>
 													</div>
 													-->
+													<input type="hidden" name="idSis_Usuario<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['idSis_Usuario']; ?>"/>
 													<div class="col-md-4">
 														<!--<label for="SubProcedimento<?php echo $i ?>">Ação:</label>-->
 														<label for="SubProcedimento<?php echo $i ?>">
