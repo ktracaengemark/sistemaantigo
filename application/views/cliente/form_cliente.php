@@ -563,6 +563,32 @@
 											</button>											
 										</div>
 									<?php } ?>
+									
+									<div id="msgCadMotivoSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header bg-success text-center">
+													<h4 class="modal-title" id="visulUsuarioModalLabel">Motivo cadastrado com sucesso!</h4>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													  <span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<!--
+												<div class="modal-body">
+													Motivo cadastrado com sucesso!
+												</div>
+												-->
+												<div class="modal-footer">
+													<div class="col-md-6">	
+														<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+															<span class="glyphicon glyphicon-filter"></span> Fechar
+														</button>
+													</div>
+													<!--<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>-->
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<?php } ?>
@@ -608,24 +634,6 @@
 													</div>
 												</div>
 											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div id="msgCadMotivoSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header bg-success text-center">
-											<h5 class="modal-title" id="visulUsuarioModalLabel">Motivo</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											  <span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											Motivo cadastrado com sucesso!
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>
 										</div>
 									</div>
 								</div>

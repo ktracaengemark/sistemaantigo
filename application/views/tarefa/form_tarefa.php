@@ -56,7 +56,7 @@
 												<div class="col-md-12 " >
 													<label for="Categoria">Categoria:</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" 
-															id="Categoria" name="Categoria">
+															id="Categoria" autofocus name="Categoria">
 														<option value="">- Selec. Categoria -</option>	
 														<?php
 														foreach ($select['Categoria'] as $key => $row) {
@@ -163,32 +163,6 @@
 										<?php } ?>	
 									<?php } ?>
 										
-									
-									<!--
-									<div class="col-md-2">
-										<label for="Procedimento">Tarefa:</label>
-										<input type="text" class="form-control" id="Procedimento" <?php echo $readonly; ?> maxlength="20"
-											autofocus name="Procedimento" value="<?php echo $tarefa['Procedimento'] ?>">
-									
-									</div>								
-									
-									<div class="col-md-3">
-										<label for="ProfissionalProcedimento">Responsável da Procedimento:</label>
-										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-												id="ProfissionalProcedimento" name="ProfissionalProcedimento">
-											<option value="">-- Selecione uma opção --</option>
-											<?php
-											foreach ($select['Profissional'] as $key => $row) {
-												if ($tarefa['ProfissionalProcedimento'] == $key) {
-													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-												} else {
-													echo '<option value="' . $key . '">' . $row . '</option>';
-												}
-											}
-											?>
-										</select>
-									</div>
-									-->
 									<!--
 									<div class="col-md-4">
 										<label for="Prioridade">Prioridade:</label>
@@ -221,7 +195,7 @@
 														<span class="glyphicon glyphicon-calendar"></span>
 													</span>
 													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-														   autofocus name="DataProcedimento" value="<?php echo $tarefa['DataProcedimento']; ?>">
+														   name="DataProcedimento" value="<?php echo $tarefa['DataProcedimento']; ?>">
 													
 												</div>
 												<?php echo form_error('DataProcedimento'); ?>
@@ -233,7 +207,7 @@
 														<span class="glyphicon glyphicon-calendar"></span>
 													</span>
 													<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-														   autofocus name="DataProcedimentoLimite" value="<?php echo $tarefa['DataProcedimentoLimite']; ?>">
+														   name="DataProcedimentoLimite" value="<?php echo $tarefa['DataProcedimentoLimite']; ?>">
 													
 												</div>
 												<?php echo form_error('DataProcedimentoLimite'); ?>
@@ -564,6 +538,29 @@
 								</button>
 							</div>
 						<?php } ?>
+						<div id="msgCadCategoriaSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header bg-success text-center">
+										<h5 class="modal-title" id="visulUsuarioModalLabel">Categoria</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										  <span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										Categoria cadastrada com sucesso!
+									</div>
+									<div class="modal-footer">
+										<div class="col-md-6">	
+											<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+												<span class="glyphicon glyphicon-filter"></span> Fechar
+											</button>
+										</div>	
+										<!--<button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>-->
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<?php } ?>
 
@@ -607,30 +604,8 @@
 							</div>
 						</div>
 					</div>
-					
-					<div id="msgCadCategoriaSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header bg-success text-center">
-									<h5 class="modal-title" id="visulUsuarioModalLabel">Categoria</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									  <span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									Categoria cadastrada com sucesso!
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>
-								</div>
-							</div>
-						</div>
-					</div>
-
 				</div>
-
 			</div>
-
 		</div>
 		<div class="col-md-1"></div>
 	</div>

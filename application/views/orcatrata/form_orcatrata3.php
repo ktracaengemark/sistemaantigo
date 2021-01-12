@@ -114,7 +114,7 @@
 															<div class="col-md-4 text-left">
 																<label  for="idApp_Cliente">Cliente</label>
 																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value),dateDiff()" <?php echo $readonly; ?>
-																		id="idApp_Cliente" name="idApp_Cliente">
+																		id="idApp_Cliente" autofocus name="idApp_Cliente">
 																	<option value="">-- Sel. Cliente --</option>
 																	<?php
 																	foreach ($select['idApp_Cliente'] as $key => $row) {
@@ -579,7 +579,7 @@
 														<div class="row">
 															<div class="col-md-3 text-center">	
 																<a class="add_field_button9 btn btn-warning"
-																		autofocus onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
+																		onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
 																	<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Produtos
 																</a>
 															</div>
@@ -2061,6 +2061,31 @@
 							</div>
 						</div>
 					</div>
+					<div id="msgCadClienteSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header bg-success text-center">
+									<h4 class="modal-title" id="visulClienteModalLabel">Cliente Cadastrado com sucesso!</h4>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									  <span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<!--
+								<div class="modal-body">
+									Cliente cadastrado com sucesso!
+								</div>
+								-->
+								<div class="modal-footer">
+									<div class="col-md-6">	
+										<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+											<span class="glyphicon glyphicon-filter"></span> Fechar
+										</button>
+									</div>
+									<!--<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>-->
+								</div>
+							</div>
+						</div>
+					</div>	
 				</div>
 			</div>
 			</form>
@@ -2184,25 +2209,6 @@
 									</div>
 								</div>
 							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div id="msgCadClienteSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header bg-success text-center">
-							<h5 class="modal-title" id="visulClienteModalLabel">Cliente</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							  <span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							Cliente cadastrado com sucesso!
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>
 						</div>
 					</div>
 				</div>
