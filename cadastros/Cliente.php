@@ -5,7 +5,7 @@ include_once '../conexao.php';
 $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 $cliente0 = filter_var($dados['NomeCliente'], FILTER_SANITIZE_STRING);
-
+$sexo0 = filter_var($dados['Sexo'], FILTER_SANITIZE_STRING);
 $cep0 = filter_var($dados['CepCliente'], FILTER_SANITIZE_STRING);
 $endereco0 = filter_var($dados['EnderecoCliente'], FILTER_SANITIZE_STRING);
 $numero0 = filter_var($dados['NumeroCliente'], FILTER_SANITIZE_STRING);
@@ -15,10 +15,24 @@ $cidade0 = filter_var($dados['CidadeCliente'], FILTER_SANITIZE_STRING);
 $estado0 = filter_var($dados['EstadoCliente'], FILTER_SANITIZE_STRING);
 $referencia0 = filter_var($dados['ReferenciaCliente'], FILTER_SANITIZE_STRING);
 
-//$celular = filter_var($dados['CelularCliente'], FILTER_VALIDATE_INT);
-$celular = $dados['CelularCliente'];
-$cliente = trim(mb_strtoupper($cliente0, 'ISO-8859-1'));
+$data = $dados['DataNascimento'];
+        
+if (preg_match("/[0-9]{2,4}(\/|-)[0-9]{2,4}(\/|-)[0-9]{2,4}/", $data)) {
+	
+	if ($data) {
+		$data = DateTime::createFromFormat('d/m/Y', $data);
+		$data = $data->format('Y-m-d');
+	} else {
+		$data = NULL;
+	}
+}
 
+//$celular = filter_var($dados['CelularCliente'], FILTER_VALIDATE_INT);
+
+$celular = $dados['CelularCliente'];
+
+$cliente = trim(mb_strtoupper($cliente0, 'ISO-8859-1'));
+$sexo = trim(mb_strtoupper($sexo0, 'ISO-8859-1'));
 $cep = trim(mb_strtoupper($cep0, 'ISO-8859-1'));
 $endereco = trim(mb_strtoupper($endereco0, 'ISO-8859-1'));
 $numero = trim(mb_strtoupper($numero0, 'ISO-8859-1'));
@@ -82,7 +96,8 @@ if($cadastrar == 1){
 												idSis_Usuario_5, 
 												NomeCliente, 
 												CelularCliente,
-												
+												DataNascimento,
+												Sexo,
 												CepCliente,
 												EnderecoCliente,
 												NumeroCliente,
@@ -91,7 +106,6 @@ if($cadastrar == 1){
 												CidadeCliente,
 												EstadoCliente,
 												ReferenciaCliente,
-												
 												CodInterno, 
 												Codigo, 
 												DataCadastroCliente, 
@@ -105,7 +119,8 @@ if($cadastrar == 1){
 					'" .$row_resultado_usuario['idSis_Usuario']. "',
 					'" .$row_resultado_usuario['Nome']. "',
 					'" .$row_resultado_usuario['CelularUsuario']. "',
-					
+					'" .$data. "',
+					'" .$sexo. "',
 					'" .$cep. "',
 					'" .$endereco. "',
 					'" .$numero. "',
@@ -114,7 +129,6 @@ if($cadastrar == 1){
 					'" .$cidade. "',
 					'" .$estado. "',
 					'" .$referencia. "',
-					
 					'" .$CodInterno. "',
 					'" .$row_resultado_usuario['Codigo']. "',
 					'" .$DataCadastroCliente. "',
@@ -137,7 +151,18 @@ if($cadastrar == 1){
 	$Codigo = md5(time() . rand());
 	$DataCriacao = date('Y-m-d', time());
 	
-	$result_usuario = "INSERT INTO Sis_Usuario (idSis_Empresa, idTab_Modulo, NomeEmpresa, Nome, CelularUsuario, Codigo, DataCriacao, Usuario, Senha, Permissao, Inativo) VALUES (
+	$result_usuario = "INSERT INTO Sis_Usuario (idSis_Empresa, 
+												idTab_Modulo, 
+												NomeEmpresa, 
+												Nome, 
+												CelularUsuario, 
+												Codigo, 
+												DataCriacao, 
+												Usuario, 
+												Senha, 
+												Permissao, 
+												Inativo) 
+												VALUES (
 					'5',
 					'1',
 					'CONTA PESSOAL',
@@ -155,7 +180,10 @@ if($cadastrar == 1){
 	
 	if($id_usuario_5){
 	
-		$result_agenda = "INSERT INTO App_Agenda (idSis_Empresa, idSis_Usuario, NomeAgenda) VALUES (
+		$result_agenda = "INSERT INTO App_Agenda (idSis_Empresa, 
+												idSis_Usuario, 
+												NomeAgenda) 
+												VALUES (
 						'5',
 						'" .$id_usuario_5. "',
 						'Cliente'
@@ -192,7 +220,18 @@ if($cadastrar == 1){
 	$DataCadastroCliente = date('Y-m-d', time());
 	$Codigo = md5(time() . rand());
 	
-	$result_usuario = "INSERT INTO Sis_Usuario (idSis_Empresa, idTab_Modulo, NomeEmpresa, Nome, CelularUsuario, Codigo, DataCriacao, Usuario, Senha, Permissao, Inativo) VALUES (
+	$result_usuario = "INSERT INTO Sis_Usuario (idSis_Empresa, 
+												idTab_Modulo, 
+												NomeEmpresa, 
+												Nome, 
+												CelularUsuario, 
+												Codigo, 
+												DataCriacao, 
+												Usuario, 
+												Senha, 
+												Permissao, 
+												Inativo) 
+												VALUES (
 					'5',
 					'1',
 					'CONTA PESSOAL',
@@ -210,7 +249,10 @@ if($cadastrar == 1){
 	
 	if($id_usuario_5){
 	
-		$result_agenda = "INSERT INTO App_Agenda (idSis_Empresa, idSis_Usuario, NomeAgenda) VALUES (
+		$result_agenda = "INSERT INTO App_Agenda (idSis_Empresa, 
+												idSis_Usuario, 
+												NomeAgenda) 
+												VALUES (
 						'5',
 						'" .$id_usuario_5. "',
 						'Cliente'
@@ -224,7 +266,8 @@ if($cadastrar == 1){
 													idSis_Usuario_5, 
 													NomeCliente, 
 													CelularCliente,
-													
+													DataNascimento,
+													Sexo,
 													CepCliente,
 													EnderecoCliente,
 													NumeroCliente,
@@ -233,7 +276,6 @@ if($cadastrar == 1){
 													CidadeCliente,
 													EstadoCliente,
 													ReferenciaCliente,
-												
 													CodInterno, 
 													Codigo, 
 													DataCadastroCliente, 
@@ -247,7 +289,8 @@ if($cadastrar == 1){
 						'" .$id_usuario_5. "',
 						'" .$dados['NomeCliente']. "',
 						'" .$dados['CelularCliente']. "',
-						
+						'" .$data. "',
+						'" .$sexo. "',
 						'" .$cep. "',
 						'" .$endereco. "',
 						'" .$numero. "',
@@ -256,7 +299,6 @@ if($cadastrar == 1){
 						'" .$cidade. "',
 						'" .$estado. "',
 						'" .$referencia. "',
-						
 						'" .$CodInterno. "',
 						'" .$Codigo. "',
 						'" .$DataCadastroCliente. "',

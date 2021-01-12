@@ -2085,8 +2085,35 @@
 											<input name="NomeCliente" type="text" class="form-control" id="NomeCliente" maxlength="255" placeholder="Nome do Cliente">
 										</div>
 										<div class="col-md-3">
-											<label for="CelularCliente">Celular*</label>
+											<label for="CelularCliente">Celular: *</label>
 											<input type="text" class="form-control Celular" id="CelularCliente" maxlength="11" name="CelularCliente" placeholder="(XX)999999999">
+										</div>
+										<div class="col-md-3">
+											<label for="DataNascimento">Data do Aniversário:</label>
+											<input type="text" class="form-control Date" maxlength="10" name="DataNascimento" placeholder="DD/MM/AAAA">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-6 ">
+											<h4 class="mb-3">Sexo</h4>
+											<div class="col-md-3 mb-3 ">	
+												<div class="custom-control custom-radio">
+													<input type="radio" name="Sexo" class="custom-control-input "  id="Retirada" value="M">
+													<label class="custom-control-label" for="Masculino">Mas</label>
+												</div>
+											</div>
+											<div class="col-md-3 mb-3 ">	
+												<div class="custom-control custom-radio">
+													<input type="radio" name="Sexo" class="custom-control-input " id="Combinar" value="F">
+													<label class="custom-control-label" for="Feminino">Fem </label>
+												</div>
+											</div>
+											<div class="col-md-3 mb-3 ">
+												<div class="custom-control custom-radio">
+													<input type="radio" name="Sexo" class="custom-control-input " id="Correios" value="O">
+													<label class="custom-control-label" for="Outros">Outros</label>
+												</div>
+											</div>
 										</div>
 									</div>								
 								</div>
