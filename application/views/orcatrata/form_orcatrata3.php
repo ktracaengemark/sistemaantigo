@@ -2092,45 +2092,55 @@
 								</div>
 								<div class="form-group">
 									<div class="row">
-										<div class="col-md-3">
-											<label for="CepCliente">Cep:</label>
-											<input type="text" class="form-control Numero" id="CepCliente" maxlength="8" name="CepCliente">
-										</div>
-										<div class="col-md-6">
-											<label for="EnderecoCliente">Endreço:</label>
-											<input type="text" class="form-control" id="EnderecoCliente" maxlength="100" name="EnderecoCliente">
-										</div>
-										<div class="col-md-3">
-											<label for="NumeroCliente">Numero:</label>
-											<input type="text" class="form-control" id="NumeroCliente" maxlength="100" name="NumeroCliente">
-										</div>
-									</div>	
-									<div class="row">
-										<div class="col-md-3">
-											<label for="ComplementoCliente">Complemento:</label>
-											<input type="text" class="form-control" id="ComplementoCliente" maxlength="100" name="ComplementoCliente" >
-										</div>	
-										<div class="col-md-3">
-											<label for="BairroCliente">Bairro:</label>
-											<input type="text" class="form-control" id="BairroCliente" maxlength="100" name="BairroCliente" >
-										</div>
-										<div class="col-md-3">
-											<label for="CidadeCliente">Município:</label>
-											<input type="text" class="form-control" id="CidadeCliente" maxlength="100" name="CidadeCliente" >
-										</div>
-										<div class="col-md-3">
-											<label for="EstadoCliente">Estado:</label>
-											<input type="text" class="form-control" id="EstadoCliente" maxlength="2" name="EstadoCliente" >
-										</div>
-									</div>	
-									<div class="row">
-										<div class="col-md-3 ">
-											<label class="" for="ReferenciaCliente">Referencia:</label>
-											<textarea class="form-control " id="ReferenciaCliente" name="ReferenciaCliente"></textarea>
+										<div class="col-md-12 text-center">
+											<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#DadosComplementares" aria-expanded="false" aria-controls="DadosComplementares">
+												<span class="glyphicon glyphicon-menu-down"></span> Completar Dados
+											</button>
 										</div>
 									</div>
 								</div>
-								
+								<div class="collapse" id="DadosComplementares">
+									<div class="form-group">
+										<div class="row">
+											<div class="col-md-3">
+												<label for="CepCliente">Cep:</label>
+												<input type="text" class="form-control Numero" id="CepCliente" maxlength="8" name="CepCliente">
+											</div>
+											<div class="col-md-6">
+												<label for="EnderecoCliente">Endreço:</label>
+												<input type="text" class="form-control" id="EnderecoCliente" maxlength="100" name="EnderecoCliente">
+											</div>
+											<div class="col-md-3">
+												<label for="NumeroCliente">Numero:</label>
+												<input type="text" class="form-control" id="NumeroCliente" maxlength="100" name="NumeroCliente">
+											</div>
+										</div>	
+										<div class="row">
+											<div class="col-md-3">
+												<label for="ComplementoCliente">Complemento:</label>
+												<input type="text" class="form-control" id="ComplementoCliente" maxlength="100" name="ComplementoCliente" >
+											</div>	
+											<div class="col-md-3">
+												<label for="BairroCliente">Bairro:</label>
+												<input type="text" class="form-control" id="BairroCliente" maxlength="100" name="BairroCliente" >
+											</div>
+											<div class="col-md-3">
+												<label for="CidadeCliente">Município:</label>
+												<input type="text" class="form-control" id="CidadeCliente" maxlength="100" name="CidadeCliente" >
+											</div>
+											<div class="col-md-3">
+												<label for="EstadoCliente">Estado:</label>
+												<input type="text" class="form-control" id="EstadoCliente" maxlength="2" name="EstadoCliente" >
+											</div>
+										</div>	
+										<div class="row">
+											<div class="col-md-3 ">
+												<label class="" for="ReferenciaCliente">Referencia:</label>
+												<textarea class="form-control " id="ReferenciaCliente" name="ReferenciaCliente"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
 								<div class="form-group row">
 									<div class="col-sm-6">
 										<br>
