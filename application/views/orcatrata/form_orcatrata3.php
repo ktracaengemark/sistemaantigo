@@ -159,11 +159,15 @@
 																</div>
 															</div>
 															<div class="col-md-4 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-																<label for="Cadastrar">Cadastrar/Editar Cliente</label><br>
+																<label for="Cadastrar">Cadastrar Cliente</label><br>
+																<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addClienteModal">
+																	Cadastrar
+																</button>
+																<!--
 																<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>cliente2/cadastrar3/" role="button"> 
 																	<span class="glyphicon glyphicon-plus"></span> <span class="glyphicon glyphicon-edit"></span> Cliente
 																</a>
-																
+																-->
 																<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
 																		<span class="glyphicon glyphicon-refresh"></span>Recarregar
 																</button>
@@ -2056,10 +2060,136 @@
 								</div>							
 							</div>
 						</div>
-						</form>
 					</div>
 				</div>
 			</div>
+			</form>
+
+			<div id="addClienteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="addClienteModalLabel">Cadastrar Cliente</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<span id="msg-error-cliente"></span>
+							<form method="post" id="insert_cliente_form">
+								
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-6">
+											<label for="NomeCliente">Nome do Cliente: *</label>
+											<input name="NomeCliente" type="text" class="form-control" id="NomeCliente" maxlength="255" placeholder="Nome do Cliente">
+										</div>
+										<div class="col-md-3">
+											<label for="CelularCliente">Celular*</label>
+											<input type="text" class="form-control Celular" id="CelularCliente" maxlength="11" name="CelularCliente" placeholder="(XX)999999999">
+										</div>
+									</div>								
+								</div>
+								<div class="form-group">
+									<div class="row">
+										<div class="col-md-3">
+											<label for="CepCliente">Cep:</label>
+											<input type="text" class="form-control Numero" id="CepCliente" maxlength="8" name="CepCliente">
+										</div>
+										<div class="col-md-6">
+											<label for="EnderecoCliente">Endreço:</label>
+											<input type="text" class="form-control" id="EnderecoCliente" maxlength="100" name="EnderecoCliente">
+										</div>
+										<div class="col-md-3">
+											<label for="NumeroCliente">Numero:</label>
+											<input type="text" class="form-control" id="NumeroCliente" maxlength="100" name="NumeroCliente">
+										</div>
+									</div>	
+									<div class="row">
+										<div class="col-md-3">
+											<label for="ComplementoCliente">Complemento:</label>
+											<input type="text" class="form-control" id="ComplementoCliente" maxlength="100" name="ComplementoCliente" >
+										</div>	
+										<div class="col-md-3">
+											<label for="BairroCliente">Bairro:</label>
+											<input type="text" class="form-control" id="BairroCliente" maxlength="100" name="BairroCliente" >
+										</div>
+										<div class="col-md-3">
+											<label for="CidadeCliente">Município:</label>
+											<input type="text" class="form-control" id="CidadeCliente" maxlength="100" name="CidadeCliente" >
+										</div>
+										<div class="col-md-3">
+											<label for="EstadoCliente">Estado:</label>
+											<input type="text" class="form-control" id="EstadoCliente" maxlength="2" name="EstadoCliente" >
+										</div>
+									</div>	
+									<div class="row">
+										<div class="col-md-3 ">
+											<label class="" for="ReferenciaCliente">Referencia:</label>
+											<textarea class="form-control " id="ReferenciaCliente" name="ReferenciaCliente"></textarea>
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-group row">
+									<div class="col-sm-6">
+										<br>
+										<button type="submit" class="btn btn-success btn-block">
+											<span class="glyphicon glyphicon-plus"></span> Cadastrar
+										</button>
+										<!--<input type="submit" name="CadCliente" id="CadCliente" value="Cadastrar" class="btn btn-success">-->
+									</div>
+									<div class="col-sm-6">
+										<br>
+										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+											<span class="glyphicon glyphicon-remove"></span> Fechar
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div id="msgCadClienteSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header bg-success text-center">
+							<h5 class="modal-title" id="visulClienteModalLabel">Cliente</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							Cliente cadastrado com sucesso!
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div id="msgClienteExiste" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header bg-warning text-center">
+							<h5 class="modal-title" id="existeClienteModalLabel">Atenção</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							Este Celular já é Cadastrado!
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
+						</div>
+					</div>
+				</div>
+			</div>			
+			
 		</div>
 	</div>
 </div>

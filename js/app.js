@@ -103,6 +103,69 @@ $(document).ready(function(){
 			
 		}	
 	});
+	
+	$('#insert_cliente_form').on('submit', function(event){
+		//alert('ok');
+		event.preventDefault();
+		if($('#NomeCliente').val() == "" || $('#CelularCliente').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-cliente").html('<div class="alert alert-danger" role="alert">Necessário prencher Nome e Celular do Cliente!</div>');						
+		}else{		
+			
+			var celular = $('#CelularCliente').val();
+			var tamanho = celular.toString().length;
+			//console.log(tamanho);
+			
+			if( tamanho == 11 ) {	
+				
+				//Receber os dados do formulário
+				
+				var dados = $("#insert_cliente_form").serialize();
+				//console.log(dados);
+				
+				$.post(window.location.origin+ '/' + app + '/cadastros/Cliente.php?', dados, function (retorna){
+				 console.log(retorna);
+					if(retorna == 5){
+						//Limpar os campo
+						$('#insert_cliente_form')[0].reset();
+						
+						//Fechar a janela modal cadastrar
+						$('#addClienteModal').modal('hide');
+									
+						//Alerta de cadastro realizado com sucesso
+						//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+						$('#msgClienteExiste').modal('show');
+						
+						//Limpar mensagem de erro
+						$("#msg-error-cliente").html('');
+						
+						//listar_usuario(1, 50);
+					}else if(retorna == 1){
+						//Limpar os campo
+						$('#insert_cliente_form')[0].reset();
+						
+						//Fechar a janela modal cadastrar
+						$('#addClienteModal').modal('hide');
+									
+						//Alerta de cadastro realizado com sucesso
+						//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+						$('#msgCadClienteSucesso').modal('show');
+						
+						//Limpar mensagem de erro
+						$("#msg-error-cliente").html('');
+						
+						//listar_usuario(1, 50);
+					}else{
+						$("#msg-error-cliente").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Cliente!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+					}
+					
+				});
+			}else{
+				$("#msg-error-cliente").html('<div class="alert alert-danger" role="alert">O Celular deve conter 11 números!</div>');
+			}
+		}	
+	});	
+	
 });
 
 //Função que desabilita a Mensagem de Aguardar.
