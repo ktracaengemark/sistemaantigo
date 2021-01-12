@@ -87,6 +87,7 @@ class Motivo extends CI_Controller {
             $data['query']['Motivo'] = trim(mb_strtoupper($data['query']['Motivo'], 'ISO-8859-1'));
 			$data['query']['Desc_Motivo'] = trim(mb_strtoupper($data['query']['Desc_Motivo'], 'ISO-8859-1'));
 			#$data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));
+			$data['query']['Data_Cad_Motivo'] = date('Y-m-d H:i:s', time());
             $data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -125,11 +126,11 @@ class Motivo extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'idSis_Usuario',
+            #'idSis_Usuario',
 			'idTab_Motivo',
             'Motivo',
             'Desc_Motivo',
-			'idSis_Empresa',
+			#'idSis_Empresa',
                 ), TRUE));
 
 
@@ -170,8 +171,8 @@ class Motivo extends CI_Controller {
             $data['query']['Motivo'] = trim(mb_strtoupper($data['query']['Motivo'], 'ISO-8859-1'));
 			$data['query']['Desc_Motivo'] = trim(mb_strtoupper($data['query']['Desc_Motivo'], 'ISO-8859-1'));
 			#$data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));
-            $data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+            #$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 
             $data['anterior'] = $this->Motivo_model->get_motivo($data['query']['idTab_Motivo']);
             $data['campos'] = array_keys($data['query']);

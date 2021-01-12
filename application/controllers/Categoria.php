@@ -87,6 +87,7 @@ class Categoria extends CI_Controller {
             $data['query']['Categoria'] = trim(mb_strtoupper($data['query']['Categoria'], 'ISO-8859-1'));
 			#$data['query']['Abrev'] = trim(mb_strtoupper($data['query']['Abrev'], 'ISO-8859-1'));
 			#$data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));
+			$data['query']['Data_Cad_Categoria'] = date('Y-m-d H:i:s', time());
             $data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
@@ -125,11 +126,11 @@ class Categoria extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'idSis_Usuario',
+            #'idSis_Usuario',
 			'idTab_Categoria',
             'Categoria',
             #'Abrev',
-			'idSis_Empresa',
+			#'idSis_Empresa',
                 ), TRUE));
 
 
@@ -170,8 +171,8 @@ class Categoria extends CI_Controller {
             $data['query']['Categoria'] = trim(mb_strtoupper($data['query']['Categoria'], 'ISO-8859-1'));
 			#$data['query']['Abrev'] = trim(mb_strtoupper($data['query']['Abrev'], 'ISO-8859-1'));
 			#$data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));
-            $data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+            #$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+			#$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 
             $data['anterior'] = $this->Categoria_model->get_categoria($data['query']['idTab_Categoria']);
             $data['campos'] = array_keys($data['query']);
