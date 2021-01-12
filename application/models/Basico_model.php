@@ -831,7 +831,8 @@ if (isset($data) && $data) {
 
         $query = $this->db->query('
             SELECT
-                *
+                *,
+				CONCAT(Motivo, " --- ", Desc_Motivo) AS Motivo
             FROM
                 Tab_Motivo
             WHERE
