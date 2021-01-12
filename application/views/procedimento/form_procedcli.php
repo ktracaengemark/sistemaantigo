@@ -182,7 +182,7 @@
 									<div class="panel-heading">
 										<div class="row text-left">
 											<div class="col-md-3 " >
-												<label for="<?php echo $titulo; ?>">Tipo de <?php echo $titulo; ?>: </label>
+												<label for="<?php echo $titulo; ?>"><?php echo $titulo; ?> Nº <?php echo $orcatrata['idApp_Procedimento']; ?> - Tipo:</label>
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="<?php echo $titulo; ?>" name="<?php echo $titulo; ?>">
 													<option value="">- Selec. <?php echo $titulo; ?> -</option>	
 													<?php
@@ -199,7 +199,17 @@
 											</div>
 											
 											<div class="col-md-6">
-												<label for="Procedimento">Relato do Cliente - <?php echo $titulo; ?> Nº <?php echo $orcatrata['idApp_Procedimento']; ?></label>
+												<input type="hidden" name="idSis_Usuario" id="idSis_Usuario" value="<?php echo $orcatrata['idSis_Usuario']; ?>"/>
+												<?php 
+													if ($metodo == 1 || $metodo == 3) { 
+														$nomecadatrou = $_SESSION['log']['Nome'];
+													}elseif(isset($orcatrata['idSis_Usuario']) && ($metodo == 2 || $metodo == 4)){
+														$nomecadatrou = $_SESSION['Orcatrata']['NomeCadastrou'];
+													}else{
+														$nomecadatrou = false;
+													}
+												?>
+												<label for="Procedimento">Relato do Cliente - Cacastrado por : <?php echo $nomecadatrou; ?></label>
 												<textarea class="form-control" name="Procedimento" id="Procedimento" <?php echo $readproc; ?>><?php echo $orcatrata['Procedimento']; ?></textarea>
 												<?php echo form_error('Procedimento'); ?>		  
 											</div>
@@ -358,27 +368,7 @@
 											<div class="form-group" id="3div<?php echo $i ?>">
 												<div class="panel panel-info">
 													<div class="panel-heading">			
-														<div class="row">																					
-															<!--
-															<div class="col-md-3">
-																<label for="Profissional<?php echo $i ?>">Profissional:</label>
-																<?php if ($i == 1) { ?>
-																<?php } ?>
-																<select data-placeholder="Selecione uma opção..." class="form-control"
-																		 id="listadinamicac<?php echo $i ?>" name="Profissional<?php echo $i ?>">
-																	<option value="">-- Selecione uma opção --</option>
-																	<?php
-																	foreach ($select['Profissional'] as $key => $row) {
-																		if ($procedtarefa[$i]['Profissional'] == $key) {
-																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																		} else {
-																			echo '<option value="' . $key . '">' . $row . '</option>';
-																		}
-																	}
-																	?>
-																</select>
-															</div>
-															-->
+														<div class="row">
 															<input type="hidden" name="idSis_Usuario<?php echo $i ?>" id="idSis_Usuario<?php echo $i ?>" value="<?php echo $procedtarefa[$i]['idSis_Usuario']; ?>"/>
 															<div class="col-md-6">
 																<label for="SubProcedimento<?php echo $i ?>">

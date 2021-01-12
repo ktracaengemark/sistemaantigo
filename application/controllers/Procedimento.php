@@ -461,7 +461,8 @@ class Procedimento extends CI_Controller {
 		$data['orcatrata'] = quotes_to_entities($this->input->post(array(
             #### App_Procedimento ####
             'idApp_Procedimento',
-            'idApp_Cliente',
+            'idSis_Usuario',
+			'idApp_Cliente',
             'DataProcedimento',
             'HoraProcedimento',
 			'DataConcluidoProcedimento',
@@ -478,7 +479,8 @@ class Procedimento extends CI_Controller {
         (!$data['orcatrata']['DataProcedimento']) ? $data['orcatrata']['DataProcedimento'] = date('d/m/Y H:i:s', time()) : FALSE;
         (!$data['orcatrata']['HoraProcedimento']) ? $data['orcatrata']['HoraProcedimento'] = date('H:i:s', time()) : FALSE;
 		(!$data['orcatrata']['Compartilhar']) ? $data['orcatrata']['Compartilhar'] = $_SESSION['log']['idSis_Usuario'] : FALSE;
-
+		$data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+		
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
@@ -676,8 +678,8 @@ class Procedimento extends CI_Controller {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $data['orcatrata'] = quotes_to_entities($this->input->post(array(
             #### App_Procedimento ####
-            #'idSis_Usuario',
 			'idApp_Procedimento',
+            'idSis_Usuario',
             #Não há a necessidade de atualizar o valor do campo a seguir
             #'idApp_Cliente',
             'DataProcedimento',
@@ -726,7 +728,7 @@ class Procedimento extends CI_Controller {
             $_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Procedimento_model->get_orcatrata($id);
             $data['orcatrata']['DataProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataProcedimento'], 'barras');
 			$data['orcatrata']['DataConcluidoProcedimento'] = $this->basico->mascara_data($data['orcatrata']['DataConcluidoProcedimento'], 'barras');
-            #### Carrega os dados do cliente nas variáves de sessão ####
+			#### Carrega os dados do cliente nas variáves de sessão ####
             $this->load->model('Cliente_model');
             $_SESSION['Cliente'] = $data['query'] = $this->Cliente_model->get_cliente($data['orcatrata']['idApp_Cliente'], TRUE);
             $_SESSION['Cliente']['NomeCliente'] = (strlen($data['query']['NomeCliente']) > 12) ? substr($data['query']['NomeCliente'], 0, 12) : $data['query']['NomeCliente'];
@@ -950,6 +952,7 @@ class Procedimento extends CI_Controller {
 		$data['orcatrata'] = quotes_to_entities($this->input->post(array(
             #### App_Procedimento ####
             'idApp_Procedimento',
+            'idSis_Usuario',
             'idApp_Cliente',
             'DataProcedimento',
 			'DataConcluidoProcedimento',
@@ -967,6 +970,7 @@ class Procedimento extends CI_Controller {
         (!$data['orcatrata']['DataProcedimento']) ? $data['orcatrata']['DataProcedimento'] = date('d/m/Y H:i:s', time()) : FALSE;
         (!$data['orcatrata']['HoraProcedimento']) ? $data['orcatrata']['HoraProcedimento'] = date('H:i:s', time()) : FALSE;
 		(!$data['orcatrata']['Compartilhar']) ? $data['orcatrata']['Compartilhar'] = $_SESSION['log']['idSis_Usuario'] : FALSE;
+		$data['orcatrata']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 		
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
@@ -1167,8 +1171,8 @@ class Procedimento extends CI_Controller {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $data['orcatrata'] = quotes_to_entities($this->input->post(array(
             #### App_Procedimento ####
-            #'idSis_Usuario',
 			'idApp_Procedimento',
+            'idSis_Usuario',
             #Não há a necessidade de atualizar o valor do campo a seguir
             #'idApp_Cliente',
             'DataProcedimento',
