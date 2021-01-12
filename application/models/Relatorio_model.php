@@ -2970,6 +2970,7 @@ exit();*/
         $data['Campo'] = (!$data['Campo']) ? 'C.NomeCliente' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$filtro10 = ($data['Ativo'] != '#') ? 'C.Ativo = "' . $data['Ativo'] . '" AND ' : FALSE;
+		$filtro20 = ($data['Motivo'] != '0') ? 'C.Motivo = "' . $data['Motivo'] . '" AND ' : FALSE;
         #$q = ($_SESSION['log']['Permissao'] > 2) ? ' C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 		
 		if($limit)
@@ -2981,6 +2982,7 @@ exit();*/
                 C.NomeCliente,
 				C.Arquivo,
 				C.Ativo,
+				C.Motivo,
                 C.DataNascimento,
 				C.DataCadastroCliente,
                 C.CelularCliente,
@@ -2998,15 +3000,18 @@ exit();*/
 				C.RegistroFicha,
 				C.usuario,
 				C.senha,
-				C.CodInterno
+				C.CodInterno,
+				MT.Motivo
             FROM
 				App_Cliente AS C
                     LEFT JOIN Tab_Municipio AS M ON C.MunicipioCliente = M.idTab_Municipio
+                    LEFT JOIN Tab_Motivo AS MT ON  MT.idTab_Motivo = C.Motivo
 			
 			WHERE
 				' . $date_inicio_orca . '
 				' . $date_fim_orca . '
 				' . $filtro10 . '
+				' . $filtro20 . '
 				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
 				' . $data['Dia'] . ' 
 				' . $data['Mesvenc'] . '
@@ -6302,6 +6307,29 @@ exit();*/
         $array[0] = ':: Todos ::';
         foreach ($query->result() as $row) {
             $array[$row->idSis_Usuario] = $row->NomeUsuario;
+        }
+
+        return $array;
+    }
+
+	public function select_motivo() {
+
+        $query = $this->db->query('
+            SELECT
+				*,
+				CONCAT(IFNULL(Motivo,"")) AS Motivo
+            FROM
+                Tab_Motivo
+            WHERE
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY 
+				Motivo ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idTab_Motivo] = $row->Motivo;
         }
 
         return $array;

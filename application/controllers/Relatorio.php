@@ -5401,6 +5401,7 @@ class Relatorio extends CI_Controller {
         $data['query'] = quotes_to_entities($this->input->post(array(
             //'NomeCliente',
 			'Ativo',
+			'Motivo',
             'Ordenamento',
             'Campo',
 			'DataInicio',
@@ -5448,6 +5449,7 @@ class Relatorio extends CI_Controller {
         //$data['select']['NomeCliente'] = $this->Relatorio_model->select_cliente();
 		$data['select']['Dia'] = $this->Relatorio_model->select_dia();
 		$data['select']['Mesvenc'] = $this->Relatorio_model->select_mes();
+		$data['select']['Motivo'] = $this->Relatorio_model->select_motivo();
 		
 		$data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 
@@ -5458,6 +5460,7 @@ class Relatorio extends CI_Controller {
 
             //$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
 			$data['bd']['Ativo'] = $data['query']['Ativo'];
+			$data['bd']['Motivo'] = $data['query']['Motivo'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');

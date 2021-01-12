@@ -26,6 +26,7 @@
 						<th class="active">Cidade</th>
 						<!--<th class="active">E-mail</th>-->
 						<th class="active">Ativo?</th>
+						<th class="active">Motivo</th>
 						<th class="active">Cadastrado</th>
 						<th class="active">Login</th>
 						<!--<th class="active">Contato</th>
@@ -60,6 +61,7 @@
 						<td><?php echo $row['CidadeCliente'] ?></td>
 						<!--<td><?php #echo $row['Email'] ?></td>-->
 						<td><?php echo $row['Ativo'] ?></td>
+						<td><?php echo $row['Motivo'] ?></td>
 						<td><?php echo $row['DataCadastroCliente'] ?></td>
 						<td><?php echo $row['usuario'] ?></td>
 					</tr>						
