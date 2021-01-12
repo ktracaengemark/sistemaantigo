@@ -26,16 +26,17 @@ exibir();
 exibir_confirmar();	
 Aguardar();
 
+// Funções de cadastros auxiliares
 $(document).ready(function(){
-	$('#insert_form').on('submit', function(event){
+	$('#insert_motivo_form').on('submit', function(event){
 		//alert('ok');
 		event.preventDefault();
 		if($('#Novo_Motivo').val() == "" || $('#Desc_Motivo').val() == ""){
 			//Alerta de campo  vazio
-			$("#msg-error").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+			$("#msg-error-motivo").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
 		}else{		
 			//Receber os dados do formulário
-			var dados = $("#insert_form").serialize();
+			var dados = $("#insert_motivo_form").serialize();
 			//console.log(dados);
 			
 			$.post(window.location.origin+ '/' + app + '/cadastros/Motivo.php?', dados, function (retorna){
@@ -43,17 +44,55 @@ $(document).ready(function(){
 				if(retorna){
 				
 					//Limpar os campo
-					$('#insert_form')[0].reset();
+					$('#insert_motivo_form')[0].reset();
 					
 					//Fechar a janela modal cadastrar
-					$('#addUsuarioModal').modal('hide');
+					$('#addMotivoModal').modal('hide');
 								
 					//Alerta de cadastro realizado com sucesso
 					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
-					$('#msgCadSucesso').modal('show');
+					$('#msgCadMotivoSucesso').modal('show');
 					
 					//Limpar mensagem de erro
-					$("#msg-error").html('');
+					$("#msg-error-motivo").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					
+				}
+				
+			});
+			
+		}	
+	});
+	
+	$('#insert_categoria_form').on('submit', function(event){
+		//alert('ok');
+		event.preventDefault();
+		if($('#Novo_Categoria').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-categoria").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{		
+			//Receber os dados do formulário
+			var dados = $("#insert_categoria_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/cadastros/Categoria.php?', dados, function (retorna){
+			 //console.log(retorna);
+				if(retorna){
+				
+					//Limpar os campo
+					$('#insert_categoria_form')[0].reset();
+					
+					//Fechar a janela modal cadastrar
+					$('#addCategoriaModal').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadCategoriaSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-categoria").html('');
 					
 					//listar_usuario(1, 50);
 				}else{
@@ -65,7 +104,6 @@ $(document).ready(function(){
 		}	
 	});
 });
-
 
 //Função que desabilita a Mensagem de Aguardar.
 function Aguardar () {

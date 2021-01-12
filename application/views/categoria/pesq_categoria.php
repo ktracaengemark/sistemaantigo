@@ -1,6 +1,6 @@
 <?php if (isset($msg)) echo $msg; ?>
-
-		<div class="col-sm-offset-2 col-md-8 ">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
 			<?php echo validation_errors(); ?>
 
 			<div class="panel panel-primary">
@@ -11,20 +11,22 @@
 					<?php echo form_open($form_open_path, 'role="form"'); ?>
 						<div class="row">
 							<div class="col-md-4">
-								<label for="Motivo">Motivo:</label><br>
-								<input type="text" class="form-control" maxlength="45"
-									   autofocus name="Motivo" value="<?php echo $query['Motivo'] ?>">
+								<label for="Categoria">Categoria:</label><br>
+								<input type="text" class="form-control" maxlength="30"
+									   autofocus name="Categoria" value="<?php echo $query['Categoria'] ?>">
 							</div>
-							<div class="col-md-8">
-								<label for="Desc_Motivo">Descrição:</label><br>
-								<input type="text" class="form-control" maxlength="200"
-										name="Desc_Motivo" value="<?php echo $query['Desc_Motivo'] ?>">
+							<!--
+							<div class="col-md-3">
+								<label for="Abrev">Abrev.:</label><br>
+								<input type="text" class="form-control" maxlength="9"
+										name="Abrev" value="<?php echo $query['Abrev'] ?>">
 							</div>
+							-->
 						</div>
 						<br>
 						<div class="form-group">
 							<div class="row">
-								<input type="hidden" name="idTab_Motivo" value="<?php echo $query['idTab_Motivo']; ?>">
+								<input type="hidden" name="idTab_Categoria" value="<?php echo $query['idTab_Categoria']; ?>">
 								<?php if ($metodo == 2) { ?>
 
 									<div class="col-md-6">
@@ -57,7 +59,7 @@
 														</button>
 													</div>
 													<div class="col-md-6 text-right">
-														<a class="btn btn-danger" href="<?php echo base_url() . 'motivo/excluir/' . $query['idTab_Motivo'] ?>" role="button">
+														<a class="btn btn-danger" href="<?php echo base_url() . 'categoria/excluir/' . $query['idTab_Categoria'] ?>" role="button">
 															<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 														</a>
 													</div>
@@ -77,6 +79,8 @@
 						</div>
 						
 					</form>
+
+					<br>                
 					
 					<?php if (isset($list)) echo $list; ?>
 

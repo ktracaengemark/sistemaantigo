@@ -467,7 +467,7 @@
 										</div>
 										<div class="col-md-4 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
 											<label for="Cadastrar">Cadastrar/Editar Motivo</label><br>
-											<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addUsuarioModal">
+											<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addMotivoModal">
 												Cadastrar
 											</button>
 											
@@ -568,25 +568,24 @@
 							<?php } ?>
 							</form>
 
-							<div id="addUsuarioModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div id="addMotivoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title" id="addUsuarioModalLabel">Cadastrar Motivo</h5>
+											<h5 class="modal-title" id="addMotivoModalLabel">Cadastrar Motivo</h5>
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											  <span aria-hidden="true">&times;</span>
 											</button>
 										</div>
 										<div class="modal-body">
-											<span id="msg-error"></span>
-											<form method="post" id="insert_form">
+											<span id="msg-error-motivo"></span>
+											<form method="post" id="insert_motivo_form">
 												<div class="form-group row">
 													<label class="col-sm-2 col-form-label">Motivo</label>
 													<div class="col-sm-10">
 														<input name="Novo_Motivo" type="text" class="form-control" id="Novo_Motivo" placeholder="Motivo">
 													</div>
 												</div>
-												
 												<div class="form-group row">
 													<label class="col-sm-2 col-form-label">Descrição</label>
 													<div class="col-sm-10">
@@ -594,8 +593,18 @@
 													</div>
 												</div>
 												<div class="form-group row">
-													<div class="col-sm-10">
-														<input type="submit" name="CadUser" id="CadUser" value="Cadastrar" class="btn btn-success">
+													<div class="col-sm-6">
+														<br>
+														<button type="submit" class="btn btn-success btn-block">
+															<span class="glyphicon glyphicon-plus"></span> Cadastrar
+														</button>
+														<!--<input type="submit" name="CadMotivo" id="CadMotivo" value="Cadastrar" class="btn btn-success">-->
+													</div>
+													<div class="col-sm-6">
+														<br>
+														<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+															<span class="glyphicon glyphicon-remove"></span> Fechar
+														</button>
 													</div>
 												</div>
 											</form>
@@ -604,7 +613,7 @@
 								</div>
 							</div>
 							
-							<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div id="msgCadMotivoSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header bg-success text-center">
@@ -627,7 +636,7 @@
 								<div class="modal-dialog modal-lg" role="document">
 									<div class="modal-content">
 										<div class="modal-header bg-<?php echo $panel; ?>">
-											<h5 class="modal-title" id="addUsuarioModalLabel">Cadastrar Motivo</h5>
+											<h5 class="modal-title" id="addMotivoModalLabel">Cadastrar Motivo</h5>
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>

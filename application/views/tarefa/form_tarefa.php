@@ -104,16 +104,23 @@
 												</div>
 											</div>	
 											<div id="Cadastrar" <?php echo $div['Cadastrar']; ?>>	
-												<div class="row">											
+												<div class="row">
 													<div class="col-md-6 text-left">
+														<!--<label for="Cadastrar">Cadastrar/Editar Motivo</label><br>-->
+														<br>
+														<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addCategoriaModal">
+															<span class="glyphicon glyphicon-plus"></span>Cadastrar
+														</button>
+														<!--
 														<a class="btn btn-md btn-info btn-block"   target="_blank" href="<?php echo base_url() ?>categoria2/cadastrar3/" role="button"> 
 															<span class="glyphicon glyphicon-plus"></span>Cat
 														</a>
+														-->
 													</div>
-												
 													<div class="col-md-6 text-left">
+														<br>
 														<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
-																<span class="glyphicon glyphicon-refresh"></span>Rec.
+																<span class="glyphicon glyphicon-refresh"></span>Recarregar
 														</button>
 													</div>											
 												</div>
@@ -561,6 +568,64 @@
 					<?php } ?>
 
 					</form>
+
+					<div id="addCategoriaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="addCategoriaModalLabel">Cadastrar Categoria</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									  <span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<span id="msg-error-categoria"></span>
+									<form method="post" id="insert_categoria_form">
+										<div class="form-group row">
+											<label class="col-sm-2 col-form-label">Categoria</label>
+											<div class="col-sm-10">
+												<input name="Novo_Categoria" type="text" class="form-control" id="Novo_Categoria" placeholder="Categoria">
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-sm-6">
+												<br>
+												<button type="submit" class="btn btn-success btn-block">
+													<span class="glyphicon glyphicon-plus"></span> Cadastrar
+												</button>
+												<!--<input type="submit" class="btn btn-success btn-block" name="CadCtegoria" id="CadCtegoria" value="Cadastrar" >-->
+											</div>
+											<div class="col-sm-6">
+												<br>
+												<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+													<span class="glyphicon glyphicon-remove"></span> Fechar
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="msgCadCategoriaSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header bg-success text-center">
+									<h5 class="modal-title" id="visulUsuarioModalLabel">Categoria</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									  <span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									Categoria cadastrada com sucesso!
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>
+								</div>
+							</div>
+						</div>
+					</div>
 
 				</div>
 
