@@ -797,10 +797,10 @@ class Relatorio extends CI_Controller {
         $data['nome'] = 'Fornecedor';
 		$data['print'] = 2;
 		$data['imprimir'] = 'OrcatrataPrint/imprimirdesp/';
-		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
-		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
+		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistadesp/';
+		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirrecibodesp/';
 		$data['edit'] = 'Orcatrata/alterardesp/';
-		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';		
+		$data['alterarparc'] = 'Orcatrata/alterarparceladesp/';		
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
@@ -1572,10 +1572,10 @@ class Relatorio extends CI_Controller {
         $data['nome'] = 'Fornecedor';
 		$data['print'] = 2;
 		$data['imprimir'] = 'OrcatrataPrint/imprimirdesp/';
-		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
-		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
+		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistadesp/';
+		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirrecibodesp/';
 		$data['edit'] = 'Orcatrata/alterardesp/';
-		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';		
+		$data['alterarparc'] = 'Orcatrata/alterarparceladesp/';		
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
@@ -1960,8 +1960,8 @@ class Relatorio extends CI_Controller {
 		$data['TipoRD'] = 2;
         $data['nome'] = 'Cliente';
 		$data['print'] = 1;
-		$data['imprimir'] = 'OrcatrataPrint/imprimircomissao/';
-		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
+		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
+		$data['imprimirlista'] = 'OrcatrataPrint/imprimircomissao/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
 		$data['edit'] = 'orcatrata/alterarstatus/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
@@ -2345,8 +2345,8 @@ class Relatorio extends CI_Controller {
 		$data['TipoRD'] = 2;
         $data['nome'] = 'Cliente';
 		$data['print'] = 1;
-		$data['imprimir'] = 'OrcatrataPrint/imprimircomissao_online/';
-		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
+		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
+		$data['imprimirlista'] = 'OrcatrataPrint/imprimircomissao_online/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
 		$data['edit'] = 'orcatrata/alterarstatus/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
