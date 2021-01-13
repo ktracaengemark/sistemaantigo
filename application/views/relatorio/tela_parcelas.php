@@ -525,7 +525,7 @@
 							<div class="form-footer col-md-3">
 							<label></label><br>
 								<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-									<span class="glyphicon glyphicon-remove"> Fechar
+									<span class="glyphicon glyphicon-remove"></span> Fechar
 								</button>
 							</div>
 						</div>

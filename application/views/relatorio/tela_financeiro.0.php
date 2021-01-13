@@ -48,7 +48,7 @@
 							<div class="form-group col-md-3 text-left">
 								<div class="form-footer ">
 									<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-										<span class="glyphicon glyphicon-remove"> Fechar
+										<span class="glyphicon glyphicon-remove"></span> Fechar
 									</button>
 								</div>
 							</div>
@@ -171,7 +171,7 @@
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
 										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-											<span class="glyphicon glyphicon-remove"> Fechar
+											<span class="glyphicon glyphicon-remove"></span> Fechar
 										</button>
 									</div>
 								</div>
@@ -259,7 +259,7 @@
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
 										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-											<span class="glyphicon glyphicon-remove"> Fechar
+											<span class="glyphicon glyphicon-remove"></span> Fechar
 										</button>
 									</div>
 								</div>
@@ -341,7 +341,7 @@
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
 										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-											<span class="glyphicon glyphicon-remove"> Fechar
+											<span class="glyphicon glyphicon-remove"></span> Fechar
 										</button>
 									</div>
 								</div>
@@ -453,7 +453,7 @@
 							<div class="form-group col-md-3 text-left">
 								<div class="form-footer ">
 									<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-										<span class="glyphicon glyphicon-remove"> Fechar
+										<span class="glyphicon glyphicon-remove"></span> Fechar
 									</button>
 								</div>
 							</div>
@@ -559,7 +559,7 @@
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
 										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-											<span class="glyphicon glyphicon-remove"> Fechar
+											<span class="glyphicon glyphicon-remove"></span> Fechar
 										</button>
 									</div>
 								</div>
@@ -648,7 +648,7 @@
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
 										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-											<span class="glyphicon glyphicon-remove"> Fechar
+											<span class="glyphicon glyphicon-remove"></span> Fechar
 										</button>
 									</div>
 								</div>
@@ -731,7 +731,7 @@
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
 										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-											<span class="glyphicon glyphicon-remove"> Fechar
+											<span class="glyphicon glyphicon-remove"></span> Fechar
 										</button>
 									</div>
 								</div>
