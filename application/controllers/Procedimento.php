@@ -1141,7 +1141,7 @@ class Procedimento extends CI_Controller {
 		
         $data['titulo'] = 'Sac';
         $data['form_open_path'] = 'Procedimento/imprimir_lista_Sac';
-        $data['panel'] = 'info';
+        $data['panel'] = 'warning';
 		$data['metodo'] = 3;
 		$data['editar'] = 1;
 		$data['print'] = 1;
@@ -1931,7 +1931,7 @@ class Procedimento extends CI_Controller {
 		
         $data['titulo'] = 'Marketing';
         $data['form_open_path'] = 'Procedimento/imprimir_lista_Marketing';
-        $data['panel'] = 'info';
+        $data['panel'] = 'success';
 		$data['metodo'] = 4;
 		$data['editar'] = 1;
 		$data['print'] = 1;

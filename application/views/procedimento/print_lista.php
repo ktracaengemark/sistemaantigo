@@ -12,14 +12,18 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span> 
 				</button>
-				<a type="button" class="btn btn-md btn-default " href="javascript:window.print()">
-					<span class="glyphicon glyphicon-print"></span>
-				</a>
-				
-				<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . $imprimirlista . $_SESSION['log']['idSis_Empresa']; ?>">
-					<span class="glyphicon glyphicon-pencil"></span> Versão Lista
-				</a>
-				
+				<div class="navbar-form btn-group">
+					<a type="button" class="btn btn-md btn-default " href="javascript:window.print()">
+						<span class="glyphicon glyphicon-print"></span>
+					</a>
+				</div>
+				<!--
+				<div class="navbar-form btn-group">
+					<a type="button" class="btn btn-md btn-warning"  href="<?php echo base_url() . $imprimirlista . $_SESSION['log']['idSis_Empresa']; ?>">
+						<span class="glyphicon glyphicon-pencil"></span> Versão Lista
+					</a>
+				</div>
+				-->
 			</div>
 		</div>
 	  </div>
@@ -30,16 +34,19 @@
 				<table class="table table-bordered table-condensed table-striped">
 					<thead>
 						<tr>
-							<td class="col-md-3 text-left" scope="col"><?php echo ''  . $titulo . ': <strong>' . $procedimento[$i]['idApp_Procedimento'] . '</strong> - '
-																				. 'Tipo: <strong>'  . $procedimento[$i][$titulo] . '</strong>'
-																				. '<br>Cliente: <strong>' . $procedimento[$i]['NomeCliente'] . '</strong> - ' . $procedimento[$i]['idApp_Cliente'] . ''
-																			?></td>
-							<td class="col-md-3 text-left" scope="col"><?php echo '<strong>Relato:</strong> ' . $procedimento[$i]['Procedimento'] . ''
-																		?></td>
-							<td class="col-md-1 text-center" scope="col"><?php echo 'Data: <strong>'  . $procedimento[$i]['DataProcedimento'] . '</strong>'
-																				. '<br>Hora: <strong>'  . $procedimento[$i]['HoraProcedimento'] . '</strong>'
-																				. '<br><br>cont: <strong>'  . $i . '/' . $count['POCount'] . '</strong>'
-																			?></td>
+							<td class="col-md-3 text-left bg-<?php echo $panel; ?>" scope="col"><?php echo 'cont.: <strong>'  . $i . '/' . $count['POCount'] . '</strong> - 
+																											' . $titulo . ': <strong>' . $procedimento[$i]['idApp_Procedimento'] . '</strong> - 
+																											Tipo: <strong>'  . $procedimento[$i][$titulo] . '</strong>
+																											<br>Quem Cad.: <strong>'  . $procedimento[$i]['NomeUsuario'] . '</strong> 
+																											<br>Quem Fazer: <strong>'  . $procedimento[$i]['NomeCompartilhar'] . '</strong>'
+																								?></td>
+							<td class="col-md-3 text-left bg-<?php echo $panel; ?>" scope="col"><?php echo 'Cliente: <strong>' . $procedimento[$i]['NomeCliente'] . '</strong> - ' . $procedimento[$i]['idApp_Cliente'] . '
+																											<br><strong>Relato:</strong> ' . $procedimento[$i]['Procedimento'] . ''
+																								?></td>
+							<td class="col-md-1 text-center bg-<?php echo $panel; ?>" scope="col"><?php echo 'Data: <strong>'  . $procedimento[$i]['DataProcedimento'] . '</strong>
+																											 <br>Hora: <strong>'  . $procedimento[$i]['HoraProcedimento'] . '</strong>
+																											 <br>Concl.: <strong>'  . $procedimento[$i]['ConcluidoProcedimento'] . '</strong>'
+																								?></td>
 						</tr>
 					</thead>
 					<thead>

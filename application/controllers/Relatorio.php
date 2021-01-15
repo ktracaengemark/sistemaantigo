@@ -3902,8 +3902,8 @@ class Relatorio extends CI_Controller {
 		$data['select']['Compartilhar'] = $this->Relatorio_model->select_compartilhar();
 
 		$data['query']['TipoProcedimento'] = 1;
-		$data['query']['Sac'] = '';
-		$data['query']['Marketing'] = '';
+		$data['query']['Sac'] = 0;
+		$data['query']['Marketing'] = 0;
         $data['titulo1'] = 'Despesa';
 		$data['tipoproc'] = 1;
 		$data['metodo'] = 1;
@@ -3912,8 +3912,8 @@ class Relatorio extends CI_Controller {
 		$data['TipoFinanceiro'] = 'Despesas';
 		$data['TipoRD'] = 1;
         $data['nome'] = 'Fornecedor';
-		$data['editar'] = 2;
-		$data['print'] = 1;
+		$data['editar'] = 0;
+		$data['print'] = 0;
 		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
@@ -4072,8 +4072,8 @@ class Relatorio extends CI_Controller {
 		$data['select']['Compartilhar'] = $this->Relatorio_model->select_compartilhar();
 
 		$data['query']['TipoProcedimento'] = 2;
-		$data['query']['Sac'] = '';
-		$data['query']['Marketing'] = '';
+		$data['query']['Sac'] = 0;
+		$data['query']['Marketing'] = 0;
         $data['titulo1'] = 'Receita';
 		$data['tipoproc'] = 2;
 		$data['metodo'] = 2;
@@ -4082,8 +4082,8 @@ class Relatorio extends CI_Controller {
 		$data['TipoFinanceiro'] = 'Receitas';
 		$data['TipoRD'] = 2;
         $data['nome'] = 'Cliente';
-		$data['editar'] = 2;
-		$data['print'] = 1;
+		$data['editar'] = 0;
+		$data['print'] = 0;
 		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
@@ -4243,7 +4243,8 @@ class Relatorio extends CI_Controller {
 		$data['select']['Compartilhar'] = $this->Relatorio_model->select_compartilhar();
 		
 		$data['query']['TipoProcedimento'] = 3;
-		$data['query']['Marketing'] = '';		
+		$data['query']['Marketing'] = 0;
+		$data['query']['Fornecedor'] = 0;		
         $data['titulo1'] = 'Sac';
 		$data['tipoproc'] = 3;
 		$data['metodo'] = 2;
@@ -4268,7 +4269,20 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];
-		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
+		$_SESSION['FiltroAlteraParcela']['Compartilhar'] = $data['query']['Compartilhar'];
+		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
+		$_SESSION['FiltroAlteraParcela']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+        $_SESSION['FiltroAlteraParcela']['DataInicio9'] = $this->basico->mascara_data($data['query']['DataInicio9'], 'mysql');
+		$_SESSION['FiltroAlteraParcela']['DataFim9'] = $this->basico->mascara_data($data['query']['DataFim9'], 'mysql');
+        $_SESSION['FiltroAlteraParcela']['DataInicio10'] = $this->basico->mascara_data($data['query']['DataInicio10'], 'mysql');
+		$_SESSION['FiltroAlteraParcela']['DataFim10'] = $this->basico->mascara_data($data['query']['DataFim10'], 'mysql');
+        $_SESSION['FiltroAlteraParcela']['HoraInicio9'] = $data['query']['HoraInicio9'];
+		$_SESSION['FiltroAlteraParcela']['HoraFim9'] = $data['query']['HoraFim9'];
+        $_SESSION['FiltroAlteraParcela']['HoraInicio10'] = $data['query']['HoraInicio10'];
+		$_SESSION['FiltroAlteraParcela']['HoraFim10'] = $data['query']['HoraFim10'];
+		$_SESSION['FiltroAlteraParcela']['Agrupar'] = $data['query']['Agrupar'];
+		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
+		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];			
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
@@ -4413,7 +4427,8 @@ class Relatorio extends CI_Controller {
 		$data['select']['Compartilhar'] = $this->Relatorio_model->select_compartilhar();
 
 		$data['query']['TipoProcedimento'] = 4;
-		$data['query']['Sac'] = '';		
+		$data['query']['Sac'] = 0;
+		$data['query']['Fornecedor'] = 0;		
         $data['titulo1'] = 'Marketing';
 		$data['tipoproc'] = 4;
 		$data['metodo'] = 2;
@@ -4438,7 +4453,20 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['NomeUsuario'] = $data['query']['NomeUsuario'];
-		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];		
+		$_SESSION['FiltroAlteraParcela']['Compartilhar'] = $data['query']['Compartilhar'];
+		$_SESSION['FiltroAlteraParcela']['TipoProcedimento'] = $data['query']['TipoProcedimento'];
+		$_SESSION['FiltroAlteraParcela']['ConcluidoProcedimento'] = $data['query']['ConcluidoProcedimento'];
+        $_SESSION['FiltroAlteraParcela']['DataInicio9'] = $this->basico->mascara_data($data['query']['DataInicio9'], 'mysql');
+		$_SESSION['FiltroAlteraParcela']['DataFim9'] = $this->basico->mascara_data($data['query']['DataFim9'], 'mysql');
+        $_SESSION['FiltroAlteraParcela']['DataInicio10'] = $this->basico->mascara_data($data['query']['DataInicio10'], 'mysql');
+		$_SESSION['FiltroAlteraParcela']['DataFim10'] = $this->basico->mascara_data($data['query']['DataFim10'], 'mysql');
+        $_SESSION['FiltroAlteraParcela']['HoraInicio9'] = $data['query']['HoraInicio9'];
+		$_SESSION['FiltroAlteraParcela']['HoraFim9'] = $data['query']['HoraFim9'];
+        $_SESSION['FiltroAlteraParcela']['HoraInicio10'] = $data['query']['HoraInicio10'];
+		$_SESSION['FiltroAlteraParcela']['HoraFim10'] = $data['query']['HoraFim10'];
+		$_SESSION['FiltroAlteraParcela']['Agrupar'] = $data['query']['Agrupar'];
+		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
+		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];		
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {

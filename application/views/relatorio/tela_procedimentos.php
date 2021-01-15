@@ -383,8 +383,8 @@
 									<div class="form-group btn-block">
 										<div class="row">
 											<div class="col-md-4">
-												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-														id="Campo" name="Campo">
+												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+														id="Campo" name="Campo"><!--onchange="this.form.submit()" -->
 													<?php
 													foreach ($select['Campo'] as $key => $row) {
 														if ($query['Campo'] == $key) {
@@ -397,8 +397,8 @@
 												</select>
 											</div>
 											<div class="col-md-4">
-												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-														id="Ordenamento" name="Ordenamento">
+												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+														id="Ordenamento" name="Ordenamento"><!--onchange="this.form.submit()" -->
 													<?php
 													foreach ($select['Ordenamento'] as $key => $row) {
 														if ($query['Ordenamento'] == $key) {
