@@ -113,21 +113,21 @@
 								<?php } ?>
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
-										<button type="button" class="btn btn-md btn-<?php echo $botao_sac;?>  dropdown-toggle" data-toggle="dropdown">
+										<button type="button" class="btn btn-md btn-<?php echo $botao_Sac;?>  dropdown-toggle" data-toggle="dropdown">
 											<span class="glyphicon glyphicon-pencil"></span> SAC <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
-												<a <?php if (preg_match("/procedimento\/listarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
-													<a href="<?php echo base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<a <?php if (preg_match("/procedimento\/listar_Sac\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+													<a href="<?php echo base_url() . 'procedimento/listar_Sac/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 														<span class="glyphicon glyphicon-pencil"></span> Lista de Chamadas
 													</a>
 												</a>
 											</li>
 											<li role="separator" class="divider"></li>
 											<li>
-												<a <?php if (preg_match("/procedimento\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-													<a href="<?php echo base_url() . 'procedimento/cadastrarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<a <?php if (preg_match("/procedimento\/cadastrar_Sac\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'procedimento/cadastrar_Sac/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 														<span class="glyphicon glyphicon-plus"></span> Nova Chamada
 													</a>
 												</a>
@@ -142,16 +142,16 @@
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
-												<a <?php if (preg_match("/procedimento\/listarcampanha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
-													<a href="<?php echo base_url() . 'procedimento/listarcampanha/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<a <?php if (preg_match("/procedimento\/listar_Marketing\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+													<a href="<?php echo base_url() . 'procedimento/listar_Marketing/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 														<span class="glyphicon glyphicon-pencil"></span> Lista de Campanhas
 													</a>
 												</a>
 											</li>
 											<li role="separator" class="divider"></li>
 											<li>
-												<a <?php if (preg_match("/procedimento\/campanha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-													<a href="<?php echo base_url() . 'procedimento/campanha/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<a <?php if (preg_match("/procedimento\/cadastrar_Marketing\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'procedimento/cadastrar_Marketing/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 														<span class="glyphicon glyphicon-plus"></span> Nova Campanha
 													</a>
 												</a>

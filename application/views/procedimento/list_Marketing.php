@@ -110,16 +110,16 @@
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
-												<a <?php if (preg_match("/procedimento\/listarproc\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
-													<a href="<?php echo base_url() . 'procedimento/listarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<a <?php if (preg_match("/procedimento\/listar_Sac\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+													<a href="<?php echo base_url() . 'procedimento/listar_Sac/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 														<span class="glyphicon glyphicon-pencil"></span> Lista de Chamadas
 													</a>
 												</a>
 											</li>
 											<li role="separator" class="divider"></li>
 											<li>
-												<a <?php if (preg_match("/procedimento\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-													<a href="<?php echo base_url() . 'procedimento/cadastrarproc/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<a <?php if (preg_match("/procedimento\/cadastrar_Sac\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'procedimento/cadastrar_Sac/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 														<span class="glyphicon glyphicon-plus"></span> Nova Chamada
 													</a>
 												</a>
@@ -134,16 +134,16 @@
 										</button>
 										<ul class="dropdown-menu" role="menu">
 											<li>
-												<a <?php if (preg_match("/procedimento\/listarcampanha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
-													<a href="<?php echo base_url() . 'procedimento/listarcampanha/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<a <?php if (preg_match("/procedimento\/listar_Marketing\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+													<a href="<?php echo base_url() . 'procedimento/listar_Marketing/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 														<span class="glyphicon glyphicon-pencil"></span> Lista de Campanhas
 													</a>
 												</a>
 											</li>
 											<li role="separator" class="divider"></li>
 											<li>
-												<a <?php if (preg_match("/procedimento\/campanha\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
-													<a href="<?php echo base_url() . 'procedimento/campanha/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<a <?php if (preg_match("/procedimento\/cadastrar_Marketing\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+													<a href="<?php echo base_url() . 'procedimento/cadastrar_Marketing/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 														<span class="glyphicon glyphicon-plus"></span> Nova Campanha
 													</a>
 												</a>
@@ -195,13 +195,13 @@
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
 												
-											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-pencil"></span> Resumo
 											</a>
-											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterar_Marketing/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>	
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
 											<br><br>
@@ -250,13 +250,13 @@
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
 												
-											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-pencil"></span> Resumo
 											</a>
-											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterar_Marketing/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
 											<br><br>
@@ -305,13 +305,13 @@
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
 												
-											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-pencil"></span> Resumo
 											</a>
-											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterar_Marketing/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>	
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
 											<br><br>
@@ -360,13 +360,13 @@
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
 												
-											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-pencil"></span> Resumo
 											</a>
-											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterar_Marketing/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
 											<br><br>
@@ -415,13 +415,13 @@
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
 												
-											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-pencil"></span> Resumo
 											</a>
-											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterar_Marketing/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>	
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
 											<br><br>
@@ -470,13 +470,13 @@
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
 												
-											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-pencil"></span> Resumo
 											</a>
-											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterar_Marketing/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
 											<br><br>
@@ -525,13 +525,13 @@
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
 												
-											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-pencil"></span> Resumo
 											</a>
-											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterar_Marketing/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>	
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
 											<br><br>
@@ -580,13 +580,13 @@
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
 												
-											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-pencil"></span> Resumo
 											</a>
-											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterar_Marketing/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
 											<br><br>
@@ -635,13 +635,13 @@
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
 												
-											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-pencil"></span> Resumo
 											</a>
-											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterar_Marketing/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>	
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
 											<br><br>
@@ -690,13 +690,13 @@
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
 												
-											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-pencil"></span> Resumo
 											</a>
-											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] ?>" role="button">
+											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterar_Marketing/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Campanha
 											</a>
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_campanha/' . $row['idApp_Procedimento']; ?>" role="button">
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Marketing/' . $row['idApp_Procedimento']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
 											<br><br>

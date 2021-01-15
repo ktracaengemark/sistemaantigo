@@ -87,13 +87,13 @@
 							}elseif($query['TipoProcedimento'] == 3 || $query['TipoProcedimento'] == 4) {
 								if($query['TipoProcedimento'] == 3){
 									echo '<td class="notclickable">
-											<a class="btn btn-md btn-' . $panel . ' notclickable" href="' . base_url() . 'procedimento/alterarproc/' . $row['idApp_Procedimento'] . '">
+											<a class="btn btn-md btn-' . $panel . ' notclickable" href="' . base_url() . 'procedimento/tela_'.$titulo1.'/' . $row['idApp_Procedimento'] . '">
 												 ' . $row['idApp_Procedimento'] . '
 											</a>
 										</td>';
 								}elseif($query['TipoProcedimento'] == 4){
 									echo '<td class="notclickable">
-											<a class="btn btn-md btn-' . $panel . ' notclickable" href="' . base_url() . 'procedimento/alterarcampanha/' . $row['idApp_Procedimento'] . '">
+											<a class="btn btn-md btn-' . $panel . ' notclickable" href="' . base_url() . 'procedimento/tela_'.$titulo1.'/' . $row['idApp_Procedimento'] . '">
 												 ' . $row['idApp_Procedimento'] . '
 											</a>
 										</td>';
@@ -115,13 +115,13 @@
 									}else{
 										if($query['TipoProcedimento'] == 3){
 											echo '<td class="notclickable">
-													<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'procedimento/listarproc/' . $row['idApp_' . $nome] . '">
+													<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'procedimento/listar_Sac/' . $row['idApp_' . $nome] . '">
 														 ' . $row['idApp_' . $nome] . '
 													</a>
 												</td>';
 										}elseif($query['TipoProcedimento'] == 4){	
 											echo '<td class="notclickable">
-													<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'procedimento/listarcampanha/' . $row['idApp_' . $nome] . '">
+													<a class="btn btn-md btn-info notclickable" href="' . base_url() . 'procedimento/listar_Marketing/' . $row['idApp_' . $nome] . '">
 														 ' . $row['idApp_' . $nome] . '
 													</a>
 												</td>';

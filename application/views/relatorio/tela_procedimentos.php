@@ -78,6 +78,7 @@
 							<input type="hidden" name="Fornecedor" id="Fornecedor" value=""/>
 						<?php } ?>
 						<input type="hidden" name="idTab_TipoRD" id="idTab_TipoRD" value="<?php echo $TipoRD; ?>"/>
+
 						<div class="col-md-2 text-left">
 							<label for="NomeUsuario">Quem Cadastrou:</label>
 							<div class="input-group">
@@ -121,32 +122,34 @@
 							</div>
 						</div>
 						<div class="col-md-2">
-							<div class="col-md-6">
-								<label>Filtros</label>
-								<button class="btn btn-warning btn-md btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-									<span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-filter"></span>
-								</button>
-							</div>
-							<?php if ($editar == 1) { ?>
-								<?php if ($print == 1) { ?>	
+							<div class="row">
+								<div class="col-md-4">
+									<label>Filtros</label>
+									<button class="btn btn-warning btn-md btn-block" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
+										<span class="glyphicon glyphicon-filter"></span>
+									</button>
+								</div>
+								<?php if ($editar == 1) { ?>
+									<?php if ($print == 1) { ?>	
+										<div class="col-md-4">
+											<label>Imprimir</label>
+											<a href="<?php echo base_url() . $imprimirlista . $_SESSION['log']['idSis_Empresa']; ?>">
+												<button class="btn btn-<?php echo $panel; ?> btn-md btn-block" type="button">
+													<span class="glyphicon glyphicon-print"></span>
+												</button>
+											</a>
+										</div>
+									<?php } ?>	
 									<div class="col-md-4">
-										<label>Imprimir</label>
-										<a href="<?php echo base_url() . $imprimirlista . $_SESSION['log']['idSis_Empresa']; ?>">
-											<button class="btn btn-<?php echo $panel; ?> btn-md btn-block" type="button">
-												<span class="glyphicon glyphicon-print"></span>
+										<label>Editar</label>
+										<a href="<?php echo base_url() . $alterarparc . $_SESSION['log']['idSis_Empresa']; ?>">
+											<button class="btn btn-success btn-md btn-block" type="button">
+												<span class="glyphicon glyphicon-edit"></span>
 											</button>
 										</a>
-									</div>
-								<?php } ?>	
-								<div class="col-md-4">
-									<label>Baixa</label>
-									<a href="<?php echo base_url() . $alterarparc . $_SESSION['log']['idSis_Empresa']; ?>">
-										<button class="btn btn-success btn-md btn-block" type="button">
-											<span class="glyphicon glyphicon-edit"></span>
-										</button>
-									</a>
-								</div>	
-							<?php } ?>	
+									</div>	
+								<?php } ?>
+							</div>	
 						</div>
 					</div>	
 				</div>

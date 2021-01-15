@@ -368,14 +368,14 @@
 								</div>
 								<div class="row">
 									<div class="form-group col-md-12 text-left">										
-										<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/proc_sac" role="button">
+										<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/proc_Sac" role="button">
 											<span class="glyphicon glyphicon-pencil"></span> SAC
 										</a>
 									</div>	
 								</div>
 								<div class="row">
 									<div class="form-group col-md-12 text-left">										
-										<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/proc_mark" role="button">
+										<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/proc_Marketing" role="button">
 											<span class="glyphicon glyphicon-pencil"></span> Marketing
 										</a>
 									</div>	

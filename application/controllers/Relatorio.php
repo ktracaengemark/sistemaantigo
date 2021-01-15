@@ -4148,7 +4148,7 @@ class Relatorio extends CI_Controller {
 
     }
 
-    public function proc_sac() {
+    public function proc_Sac() {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -4247,15 +4247,15 @@ class Relatorio extends CI_Controller {
         $data['titulo1'] = 'Sac';
 		$data['tipoproc'] = 3;
 		$data['metodo'] = 2;
-		$data['form_open_path'] = 'relatorio/proc_sac';
+		$data['form_open_path'] = 'relatorio/proc_Sac';
 		$data['panel'] = 'warning';
 		$data['TipoFinanceiro'] = 'Receitas';
 		$data['TipoRD'] = 0;
         $data['nome'] = 'Cliente';
-		$data['editar'] = 2;
+		$data['editar'] = 1;
 		$data['print'] = 1;
 		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
-		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
+		$data['imprimirlista'] = 'Procedimento/imprimir_lista_Sac/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
 		$data['edit'] = 'Orcatrata/baixadaparcelarec/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';
@@ -4318,7 +4318,7 @@ class Relatorio extends CI_Controller {
 
     }
 
-    public function proc_mark() {
+    public function proc_Marketing() {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -4417,7 +4417,7 @@ class Relatorio extends CI_Controller {
         $data['titulo1'] = 'Marketing';
 		$data['tipoproc'] = 4;
 		$data['metodo'] = 2;
-		$data['form_open_path'] = 'relatorio/proc_mark';
+		$data['form_open_path'] = 'relatorio/proc_Marketing';
 		$data['panel'] = 'success';
 		$data['TipoFinanceiro'] = 'Receitas';
 		$data['TipoRD'] = 0;

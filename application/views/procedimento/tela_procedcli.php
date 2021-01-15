@@ -320,7 +320,7 @@
 							<?php
 							if (!$list) {
 							?>
-								<a class="btn btn-lg btn-warning" href="<?php echo base_url() ?>procedimento/cadastrarproc" role="button">
+								<a class="btn btn-lg btn-warning" href="<?php echo base_url() ?>procedimento/cadastrar_Sac" role="button">
 									<span class="glyphicon glyphicon-plus"></span> Cadastrar Novo Procedimento
 								</a>
 								<br><br>
