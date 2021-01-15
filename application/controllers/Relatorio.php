@@ -4252,7 +4252,7 @@ class Relatorio extends CI_Controller {
 		$data['TipoFinanceiro'] = 'Receitas';
 		$data['TipoRD'] = 0;
         $data['nome'] = 'Cliente';
-		$data['editar'] = 1;
+		$data['editar'] = 0;
 		$data['print'] = 1;
 		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
 		$data['imprimirlista'] = 'Procedimento/imprimir_lista_Sac/';
@@ -4422,10 +4422,10 @@ class Relatorio extends CI_Controller {
 		$data['TipoFinanceiro'] = 'Receitas';
 		$data['TipoRD'] = 0;
         $data['nome'] = 'Cliente';
-		$data['editar'] = 2;
+		$data['editar'] = 0;
 		$data['print'] = 1;
-		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
-		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
+		$data['imprimir'] = 'Procedimento/imprimir/';
+		$data['imprimirlista'] = 'Procedimento/imprimir_lista_Marketing/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
 		$data['edit'] = 'Orcatrata/baixadaparcelarec/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';

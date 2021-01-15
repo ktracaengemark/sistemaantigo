@@ -163,6 +163,13 @@
 									<?php } ?>	
 									<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 										<div class="btn-group">
+											<a type="button" class="btn btn-md btn-default " href="<?php echo base_url() . 'procedimento/tela_' . $imprimir . '/' . $query['idApp_Procedimento']; ?>">
+												<span class="glyphicon glyphicon-pencil"></span> Versão Completa
+											</a>
+										</div>									
+									</li>	
+									<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+										<div class="btn-group">
 											<a href="javascript:window.print()">
 												<button type="button" class="btn btn-md btn-default ">
 													<span class="glyphicon glyphicon-print"></span> Imprimir

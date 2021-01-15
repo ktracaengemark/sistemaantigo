@@ -50,20 +50,22 @@
 						</tr>
 					</thead>
 					<tbody>
-					
-					<?php for ($j=1; $j <= $count['PMCount']; $j++) { ?>
-						<?php 
-							if($procedimento[$i]['idApp_Procedimento'] == $subprocedimento[$j]['idApp_Procedimento']){
-						?>
-							<tr>
-								<td class="col-md-3" scope="col"><?php echo $subprocedimento[$j]['SubProcedimento'] ?></td>
-								<td class="col-md-3" scope="col"><?php echo $subprocedimento[$j]['DataSubProcedimento'] ?> - <?php echo $subprocedimento[$j]['HoraSubProcedimento'] ?></td>
-								<td class="col-md-1" scope="col"><?php echo $subprocedimento[$j]['ConcluidoSubProcedimento'] ?></td>									
-								
-							</tr>
-						<?php 
-						}
-						?>
+					<?php if( isset($count['PMCount']) ) { ?>
+						<?php for ($j=1; $j <= $count['PMCount']; $j++) { ?>
+							<?php 
+								if($procedimento[$i]['idApp_Procedimento'] == $subprocedimento[$j]['idApp_Procedimento']){
+							?>
+								<tr>
+									<td class="col-md-3" scope="col"><?php echo $subprocedimento[$j]['SubProcedimento'] ?></td>
+									<td class="col-md-3" scope="col"><?php echo $subprocedimento[$j]['DataSubProcedimento'] ?> - <?php echo $subprocedimento[$j]['HoraSubProcedimento'] ?></td>
+									<td class="col-md-1" scope="col"><?php echo $subprocedimento[$j]['ConcluidoSubProcedimento'] ?></td>									
+									
+								</tr>
+							<?php 
+							}
+							?>
+						<?php } ?>
+					<?php } else echo '<h3 class="text-center">Nenhuma Ação Realizada!</h3>';{?>
 					<?php } ?>
 					</tbody>					
 				</table>

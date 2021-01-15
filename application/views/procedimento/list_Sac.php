@@ -191,14 +191,14 @@
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
 												
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Resumida
+											</a>	
 											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
-												<span class="glyphicon glyphicon-pencil"></span> Resumo
+												<span class="glyphicon glyphicon-print"></span> Completa
 											</a>
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterar_Sac/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>	
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
-												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
 											<br><br>
 
@@ -246,14 +246,14 @@
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
 												
-											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
-												<span class="glyphicon glyphicon-pencil"></span> Resumo
-											</a>
-											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterar_Sac/' . $row['idApp_Procedimento'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>
 											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
-												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+												<span class="glyphicon glyphicon-print"></span> Resumida
+											</a>	
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Completa
+											</a>
+											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterar_Sac/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
 											<br><br>
 
@@ -301,14 +301,14 @@
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
 												
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Resumida
+											</a>	
 											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
-												<span class="glyphicon glyphicon-pencil"></span> Resumo
+												<span class="glyphicon glyphicon-print"></span> Completa
 											</a>
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterar_Sac/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>	
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
-												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
 											<br><br>
 
@@ -356,14 +356,14 @@
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
 												
-											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
-												<span class="glyphicon glyphicon-pencil"></span> Resumo
-											</a>
-											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterar_Sac/' . $row['idApp_Procedimento'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>
 											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
-												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+												<span class="glyphicon glyphicon-print"></span> Resumida
+											</a>	
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Completa
+											</a>
+											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterar_Sac/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
 											<br><br>
 
@@ -411,14 +411,14 @@
 
 										<div class="bs-callout bs-callout-success" id=callout-overview-not-both>
 												
+											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Resumida
+											</a>	
 											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
-												<span class="glyphicon glyphicon-pencil"></span> Resumo
+												<span class="glyphicon glyphicon-print"></span> Completa
 											</a>
 											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterar_Sac/' . $row['idApp_Procedimento'] ?>" role="button">
 												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>	
-											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
-												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
 											</a>
 											<br><br>
 
@@ -466,14 +466,14 @@
 
 										<div class="bs-callout bs-callout-danger" id=callout-overview-not-both>
 												
-											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
-												<span class="glyphicon glyphicon-pencil"></span> Resumo
-											</a>
-											<a class="btn btn-danger" href="<?php echo base_url() . 'procedimento/alterar_Sac/' . $row['idApp_Procedimento'] ?>" role="button">
-												<span class="glyphicon glyphicon-edit"></span> Editar Dados
-											</a>
 											<a class="btn btn-md btn-info" href="<?php echo base_url() . 'procedimento/imprimir_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
-												<span class="glyphicon glyphicon-print"></span> Versão para Impressão
+												<span class="glyphicon glyphicon-print"></span> Resumida
+											</a>	
+											<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'procedimento/tela_Sac/' . $row['idApp_Procedimento']; ?>" role="button">
+												<span class="glyphicon glyphicon-print"></span> Completa
+											</a>
+											<a class="btn btn-success" href="<?php echo base_url() . 'procedimento/alterar_Sac/' . $row['idApp_Procedimento'] ?>" role="button">
+												<span class="glyphicon glyphicon-edit"></span> Editar Dados
 											</a>
 											<br><br>
 

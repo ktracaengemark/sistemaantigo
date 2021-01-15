@@ -126,7 +126,7 @@
 											</li>
 											<li role="separator" class="divider"></li>
 											<li>
-												<a <?php if (preg_match("/procedimento\/cadastrar_Sac\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
+												<a <?php if (preg_match("/procedimento\/cadastrar_Sac_Sac\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/cadastrar1/    ?>>
 													<a href="<?php echo base_url() . 'procedimento/cadastrar_Sac/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 														<span class="glyphicon glyphicon-plus"></span> Nova Chamada
 													</a>
