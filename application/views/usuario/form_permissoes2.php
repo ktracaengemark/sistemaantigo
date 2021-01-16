@@ -209,6 +209,34 @@
 										</div>
 									</div>
 								</div>
+								<div class="col-md-3">
+									<label for="Rel_Com">Comissões?</label><br>
+									<div class="form-group">
+										<div class="btn-group" data-toggle="buttons">
+											<?php
+											foreach ($select['Rel_Com'] as $key => $row) {
+												(!$query['Rel_Com']) ? $query['Rel_Com'] = 'N' : FALSE;
+
+												if ($query['Rel_Com'] == $key) {
+													echo ''
+													. '<label class="btn btn-warning active" name="radiobutton_Rel_Com" id="radiobutton_Rel_Com' . $key . '">'
+													. '<input type="radio" name="Rel_Com" id="radiobutton" '
+													. 'autocomplete="off" value="' . $key . '" checked>' . $row
+													. '</label>'
+													;
+												} else {
+													echo ''
+													. '<label class="btn btn-default" name="radiobutton_Rel_Com" id="radiobutton_Rel_Com' . $key . '">'
+													. '<input type="radio" name="Rel_Com" id="radiobutton" '
+													. 'autocomplete="off" value="' . $key . '" >' . $row
+													. '</label>'
+													;
+												}
+											}
+											?>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

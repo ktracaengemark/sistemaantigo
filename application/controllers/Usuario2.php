@@ -477,6 +477,7 @@ class Usuario2 extends CI_Controller {
 			'Delet_Orcam',
 			'Rel_Pag',
 			'Bx_Pag',
+			'Rel_Com',
         ), TRUE);
 
         if ($id) {
@@ -491,6 +492,7 @@ class Usuario2 extends CI_Controller {
         $data['select']['Edit_Orcam'] = $this->Basico_model->select_status_sn();
         $data['select']['Delet_Orcam'] = $this->Basico_model->select_status_sn();
         $data['select']['Rel_Pag'] = $this->Basico_model->select_status_sn();
+        $data['select']['Rel_Com'] = $this->Basico_model->select_status_sn();
         $data['select']['Bx_Pag'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Permissões do Usuário';

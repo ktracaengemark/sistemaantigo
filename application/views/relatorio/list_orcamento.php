@@ -1,4 +1,4 @@
-<?php if($_SESSION['Usuario']['Rel_Pag'] == "S") {?>	
+	
 	<div class="panel panel-<?php echo $panel; ?>">
 		<div class="panel-heading">
 			<div class="row">
@@ -9,47 +9,52 @@
 						<input type="text" class="form-control" disabled aria-label="Contagem" value="<?php echo $report->num_rows(); ?> Resultados">
 					</div>
 				</div>
-				<div class="col-md-2">
-					<label for="DataFim">Extra:</label>
-					<div class="input-group">
-						<span class="input-group-addon">R$</span>
-						<input type="text" class="form-control" disabled aria-label="Orcamento" value="<?php echo $report->soma->somaextra; ?>">
+				<?php if($_SESSION['Usuario']['Rel_Pag'] == "S") {?>	
+					<div class="col-md-2">
+						<label for="DataFim">Extra:</label>
+						<div class="input-group">
+							<span class="input-group-addon">R$</span>
+							<input type="text" class="form-control" disabled aria-label="Orcamento" value="<?php echo $report->soma->somaextra; ?>">
+						</div>
 					</div>
-				</div>
-				<div class="col-md-2">
-					<label for="DataFim">Prod + Serv:</label>
-					<div class="input-group">
-						<span class="input-group-addon">R$</span>
-						<input type="text" class="form-control" disabled aria-label="Orcamento" value="<?php echo $report->soma->somarestante ?>">
+					<div class="col-md-2">
+						<label for="DataFim">Prod + Serv:</label>
+						<div class="input-group">
+							<span class="input-group-addon">R$</span>
+							<input type="text" class="form-control" disabled aria-label="Orcamento" value="<?php echo $report->soma->somarestante ?>">
+						</div>
 					</div>
-				</div>
-				<div class="col-md-2">
-					<label for="DataFim">Frete:</label>
-					<div class="input-group">
-						<span class="input-group-addon">R$</span>
-						<input type="text" class="form-control" disabled aria-label="Frete" value="<?php echo $report->soma->somafrete ?>">
+					<div class="col-md-2">
+						<label for="DataFim">Frete:</label>
+						<div class="input-group">
+							<span class="input-group-addon">R$</span>
+							<input type="text" class="form-control" disabled aria-label="Frete" value="<?php echo $report->soma->somafrete ?>">
+						</div>
 					</div>
-				</div>
-				<div class="col-md-2">
-					<label for="DataFim">Total:</label>
-					<div class="input-group">
-						<span class="input-group-addon">R$</span>
-						<input type="text" class="form-control" disabled aria-label="Total" value="<?php echo $report->soma->somatotal ?>">
+					<div class="col-md-2">
+						<label for="DataFim">Total:</label>
+						<div class="input-group">
+							<span class="input-group-addon">R$</span>
+							<input type="text" class="form-control" disabled aria-label="Total" value="<?php echo $report->soma->somatotal ?>">
+						</div>
 					</div>
-				</div>
+				<?php } ?>
 				<?php if($metodo == 1 || $metodo == 2) { ?>
-				<div class="col-md-2">
-					<label for="DataFim">Comissao:</label>
-					<div class="input-group">
-						<span class="input-group-addon">R$</span>
-						<input type="text" class="form-control" disabled aria-label="Comissao" value="<?php echo $report->soma->somacomissao ?>">
-					</div>
-				</div>
+					<?php if($_SESSION['Usuario']['Rel_Com'] == "S") {?>
+						<div class="col-md-2">
+							<label for="DataFim">Comissao:</label>
+							<div class="input-group">
+								<span class="input-group-addon">R$</span>
+								<input type="text" class="form-control" disabled aria-label="Comissao" value="<?php echo $report->soma->somacomissao ?>">
+							</div>
+						</div>
+					<?php } ?>	
 				<?php } ?>
 			</div>
 		</div>
 	</div>
-<?php } ?>	
+	
+
 <div class="container-fluid">
 	<div class="row">
 		<div style="overflow: auto; height: 550px; ">
@@ -76,8 +81,12 @@
 						<?php }elseif($editar == 2) {?>
 							<th class="active">Editar</th>
 						<?php } ?>
-						<th class="active">Cont.</th>							
+						<th class="active">Cont.</th>
 						<th class="active">Pedido</th>
+						
+						
+						<th class="active">Empresa</th>
+						
 						<th class="active"><?php echo $nome ?></th>
 						<th class="active">Tipo</th>
 						<?php if($_SESSION['Usuario']['Rel_Pag'] == "S") {?>
@@ -161,6 +170,10 @@
 							}	
 							echo '<td>' . $count . '</td>';
 							echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
+							
+							
+							echo '<td>' . $row['NomeEmpresa'] . '</td>';
+							
 							echo '<td>' . $row['Nome' . $nome] . '</td>';
 							echo '<td>' . $row['TipoFinanceiro'] . '</td>';
 							if($_SESSION['Usuario']['Rel_Pag'] == "S") {

@@ -41,6 +41,8 @@ class Relatorio_model extends CI_Model {
 		$date_inicio_pag_com = ($data['DataInicio7']) ? 'OT.DataPagoComissaoOrca >= "' . $data['DataInicio7'] . '" AND ' : FALSE;
 		$date_fim_pag_com = ($data['DataFim7']) ? 'OT.DataPagoComissaoOrca <= "' . $data['DataFim7'] . '" AND ' : FALSE;
 		
+		$data['idSis_Empresa'] = ($_SESSION['log']['idSis_Empresa'] != 5) ? ' OT.idSis_Empresa= ' . $_SESSION['log']['idSis_Empresa'] . '  ': ' OT.Tipo_Orca = "O" ';
+		
 		$data['Orcamento'] = ($data['Orcamento']) ? ' AND OT.idApp_OrcaTrata = ' . $data['Orcamento'] . '  ': FALSE;
 		$data['Cliente'] = ($data['Cliente']) ? ' AND OT.idApp_Cliente = ' . $data['Cliente'] . '' : FALSE;
 		$data['Fornecedor'] = ($data['Fornecedor']) ? ' AND OT.idApp_Fornecedor = ' . $data['Fornecedor'] . '' : FALSE;		
@@ -101,7 +103,17 @@ class Relatorio_model extends CI_Model {
 		}else{
 			$ultimopedido1 = FALSE;
 			$ultimopedido2 = FALSE;
-		}		
+		}
+		/*
+		//echo $this->db->last_query();
+          echo "<pre>";
+          print_r($data['metodo']);
+          echo "</pre>";
+          exit();
+		  */
+		$comissao1 = ($data['metodo'] == 1 && $_SESSION['Usuario']['Permissao_Comissao'] < 2 ) ? 'AND OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
+		$comissao2 = ($data['metodo'] == 2 && ($_SESSION['log']['idSis_Empresa'] == 5) ) ? 'AND OT.Associado = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
+		$comissao3 = ($data['metodo'] == 2 && $_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['Usuario']['Permissao_Comissao'] < 2 ) ? 'AND OT.Associado = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
         $query = $this->db->query('
             SELECT
                 CONCAT(IFNULL(C.idApp_Cliente,""), " - " ,IFNULL(C.NomeCliente,""), " - " ,IFNULL(C.CelularCliente,"") ) AS NomeCliente,
@@ -206,13 +218,16 @@ class Relatorio_model extends CI_Model {
 				' . $filtro14 . '
 				' . $filtro17 . '
 				' . $filtro18 . '
-				OT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				' . $data['idSis_Empresa'] . '
                 ' . $data['Orcamento'] . '
                 ' . $data['Cliente'] . '
                 ' . $data['Fornecedor'] . '
                 ' . $data['TipoFinanceiro'] . ' 
                 ' . $data['idTab_TipoRD'] . '
 				' . $ultimopedido2 . '
+				' . $comissao1 . '
+				' . $comissao2 . '
+				' . $comissao3 . '
 			' . $groupby . '
             ORDER BY
 				' . $data['Campo'] . '

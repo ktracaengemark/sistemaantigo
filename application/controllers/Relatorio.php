@@ -470,7 +470,8 @@ class Relatorio extends CI_Controller {
             $data['bd']['DataFim7'] = $this->basico->mascara_data($data['query']['DataFim7'], 'mysql');
 			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
 			$data['bd']['Ultimo'] = $data['query']['Ultimo'];
-			$data['bd']['nome'] = $data['query']['nome'];              
+			$data['bd']['nome'] = $data['query']['nome'];
+			$data['bd']['metodo'] = $data['metodo'];               
 			
 			//$data['report'] = $this->Relatorio_model->list1_comissao($data['bd'],TRUE);
 			$data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);
@@ -858,7 +859,8 @@ class Relatorio extends CI_Controller {
             $data['bd']['DataFim7'] = $this->basico->mascara_data($data['query']['DataFim7'], 'mysql');
 			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
 			$data['bd']['Ultimo'] = $data['query']['Ultimo'];
-			$data['bd']['nome'] = $data['query']['nome'];              
+			$data['bd']['nome'] = $data['query']['nome'];
+			$data['bd']['metodo'] = $data['metodo'];              
 			
 			//$data['report'] = $this->Relatorio_model->list1_comissao($data['bd'],TRUE);
 			$data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);
@@ -1247,6 +1249,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
 			$data['bd']['Ultimo'] = $data['query']['Ultimo'];
 			$data['bd']['nome'] = $data['query']['nome'];
+			$data['bd']['metodo'] = $data['metodo'];
 			
 			//$data['report'] = $this->Relatorio_model->list1_comissao($data['bd'],TRUE);
 			$data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);
@@ -1634,6 +1637,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
 			$data['bd']['Ultimo'] = $data['query']['Ultimo'];
 			$data['bd']['nome'] = $data['query']['nome'];
+			$data['bd']['metodo'] = $data['metodo'];
 			
 			//$data['report'] = $this->Relatorio_model->list1_comissao($data['bd'],TRUE);
 			$data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);
@@ -1959,7 +1963,11 @@ class Relatorio extends CI_Controller {
 		$data['TipoFinanceiro'] = 'Receitas';
 		$data['TipoRD'] = 2;
         $data['nome'] = 'Cliente';
-		$data['print'] = 1;
+		if($_SESSION['Usuario']['Permissao_Comissao'] == 3){
+			$data['print'] = 1;
+		}else{
+			$data['print'] = 0;
+		}	
 		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimircomissao/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
@@ -2023,7 +2031,8 @@ class Relatorio extends CI_Controller {
             $data['bd']['DataFim7'] = $this->basico->mascara_data($data['query']['DataFim7'], 'mysql');
 			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
 			$data['bd']['Ultimo'] = $data['query']['Ultimo'];
-			$data['bd']['nome'] = $data['query']['nome'];     
+			$data['bd']['nome'] = $data['query']['nome'];
+			$data['bd']['metodo'] = $data['metodo'];     
 			
 			//$data['report'] = $this->Relatorio_model->list1_comissao($data['bd'],TRUE);
 			$data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);
@@ -2344,7 +2353,11 @@ class Relatorio extends CI_Controller {
 		$data['TipoFinanceiro'] = 'Receitas';
 		$data['TipoRD'] = 2;
         $data['nome'] = 'Cliente';
-		$data['print'] = 1;
+		if($_SESSION['Usuario']['Permissao_Comissao'] == 3){
+			$data['print'] = 1;
+		}else{
+			$data['print'] = 0;
+		}
 		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
 		$data['imprimirlista'] = 'OrcatrataPrint/imprimircomissao_online/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
@@ -2409,6 +2422,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
 			$data['bd']['Ultimo'] = $data['query']['Ultimo'];
 			$data['bd']['nome'] = $data['query']['nome'];
+			$data['bd']['metodo'] = $data['metodo'];
 			
 			//$data['report'] = $this->Relatorio_model->list1_comissao($data['bd'],TRUE);
 			$data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);

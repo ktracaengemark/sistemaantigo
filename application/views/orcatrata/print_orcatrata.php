@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-md-12">	
 			<?php echo form_open_multipart($form_open_path); ?>
-			<?php if ( !isset($evento) && isset($query)) { ?>
+			<?php if ( !isset($evento) && isset($query) && ($_SESSION['log']['idSis_Empresa'] != 5 || $_SESSION['log']['idSis_Empresa'] == $orcatrata['idSis_Empresa'])) { ?>
 				<?php if ($query['idApp_Cliente'] != 150001 && $query['idApp_Cliente'] != 1 && $query['idApp_Cliente'] != 0) { ?>
 					<nav class="navbar navbar-inverse navbar-fixed" role="banner">
 						<div class="container-fluid">
@@ -215,7 +215,7 @@
 										<table class="table table-bordered table-condensed table-striped">
 											<tbody>
 												<tr>
-													<td class="col-md-4 text-center" scope="col"><img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Empresa']['Arquivo'] . ''; ?>" class="img-responsive" width='200'></td>
+													<td class="col-md-4 text-center" scope="col"><img alt="User Pic" src="<?php echo base_url() . '../'.$orcatrata['Site'].'/' . $orcatrata['idSis_Empresa'] . '/documentos/miniatura/' . $orcatrata['Arquivo'] . ''; ?>" class="img-responsive" width='200'></td>
 													<td class="col-md-8 text-center" scope="col"><h3><?php echo '<strong>' . $query['NomeEmpresa'] . '</strong>' ?></h3>
 													<h4>CNPJ:<?php echo '<strong>' . $orcatrata['Cnpj'] . '</strong>' ?></h4>
 													<h4>Endereço:<?php echo '<small>' . $orcatrata['EnderecoEmpresa'] . '</small> <small>' . $orcatrata['NumeroEmpresa'] . '</small> <small>' . $orcatrata['ComplementoEmpresa'] . '</small><br>
@@ -253,7 +253,7 @@
 													</tr>
 												</tbody>
 											</table>
-											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+											
 											<?php if( isset($count['PCount']) ) { ?>
 											<h3 class="text-left"><b>Produtos</b></h3>
 
@@ -289,11 +289,11 @@
 											</table>
 											<?php } else echo '<h3 class="text-left">S/Produtos</h3>';{?>
 											<?php } ?>
-											<?php } ?>
+											
 											
 											<!--<hr />-->
 											
-											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
+											
 											<?php if( isset($count['SCount']) ) { ?>							
 											<h3 class="text-left"><b>Serviços</b></h3>
 											<table class="table table-bordered table-condensed table-striped">
@@ -327,7 +327,7 @@
 											</table>
 											<?php } else echo '<h3 class="text-left">S/Serviços</h3>';{?>
 											<?php } ?>							
-											<?php } ?>
+											
 											<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>						
 											<h3 class="text-left"><b>Entrega</b>: <?php echo '<strong>' . $query['idApp_OrcaTrata'] . '</strong>' ?>
 											<?php if($orcatrata['idApp_Cliente'] != 0) { ?>

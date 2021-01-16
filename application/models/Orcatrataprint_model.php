@@ -88,8 +88,10 @@ class Orcatrataprint_model extends CI_Model {
 				OT.TipoFinanceiro,
 				OT.Tipo_Orca,
 				FP.FormaPag,				
-				EF.NomeEmpresa,
-				
+				EF.NomeEmpresa,	
+				EF.Site,
+				EF.idSis_Empresa,
+				EF.Arquivo,
 				EF.Cnpj,
 				EF.CepEmpresa,
 				EF.EnderecoEmpresa,

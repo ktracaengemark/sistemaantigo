@@ -817,15 +817,20 @@ class Usuario extends CI_Controller {
 			'Bx_Pag',
 			'Bx_Prd',
 			'Bx_Prc',
+			'Permissao_Comissao',
         ), TRUE);
 
+		(!$data['query']['Rel_Com']) ? $data['query']['Rel_Com'] = 'N' : FALSE;
+		
         if ($id) {
             $data['query'] = $this->Usuario_model->get_usuario($id);
         }
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         $this->form_validation->set_rules('DataEmUsuario', 'Data de Emissão', 'trim|valid_date');	
-
+		if($data['query']['Rel_Com'] == "S"){
+			$this->form_validation->set_rules('Permissao_Comissao', 'Permissão da Comissão', 'required|trim');
+		}
         $data['select']['Cad_Orcam'] = $this->Basico_model->select_status_sn();
         $data['select']['Ver_Orcam'] = $this->Basico_model->select_status_sn();
         $data['select']['Edit_Orcam'] = $this->Basico_model->select_status_sn();
@@ -844,6 +849,11 @@ class Usuario extends CI_Controller {
         $data['select']['Bx_Pag'] = $this->Basico_model->select_status_sn();
         $data['select']['Bx_Prd'] = $this->Basico_model->select_status_sn();
         $data['select']['Bx_Prc'] = $this->Basico_model->select_status_sn();
+		$data['select']['Permissao_Comissao'] = array (
+            '1' => '1-Retrita à Própria',
+            '2' => '2-Irrestrita s/Edição',
+			'3' => '3-Irrestrita c/Edição',
+        );
 		
         $data['titulo'] = 'Permissões do Usuário';
         $data['form_open_path'] = 'usuario/permissoes';
@@ -857,6 +867,15 @@ class Usuario extends CI_Controller {
         else
             $data['collapse'] = 'class="collapse"';
 
+				
+		$data['radio'] = array(
+            'Rel_Com' => $this->basico->radio_checked($data['query']['Rel_Com'], 'Comissão', 'NS'),
+        );
+		
+        ($data['query']['Rel_Com'] == 'S') ?
+            $data['div']['Rel_Com'] = '' : $data['div']['Rel_Com'] = 'style="display: none;"';
+			
+		
         $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
         $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
 

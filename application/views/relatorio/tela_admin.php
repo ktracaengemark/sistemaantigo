@@ -161,6 +161,8 @@
 											-->
 										</div>
 									<?php }?>	
+								<?php } ?>
+								<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>	
 									<?php if($_SESSION['Usuario']['Rel_Prc'] == "S") {?>	
 										<div class="col-md-12">											
 											<label for=""><h4><b>Procedimentos</b></h4></label>
@@ -173,25 +175,31 @@
 											</div>
 										</div>
 									<?php }?>	
+								<?php } ?>	
 									<?php if($_SESSION['Usuario']['Rel_Com'] == "S") {?>	
 										<div class="col-md-12">											
 											<label for=""><h4><b>Comissões</b></h4></label>
-											<div class="form-group col-md-12 text-left">
-												<div class="row">										
-													<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/comissao" role="button"> 
-														<span class="glyphicon glyphicon-usd"></span> NaLoja
-													</a>
-												</div>	
-											</div>
-											<div class="form-group col-md-12 text-left">
-												<div class="row">										
-													<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/comissao_online" role="button"> 
-														<span class="glyphicon glyphicon-usd"></span> OnLine
-													</a>
-												</div>	
-											</div>
+											<?php if($_SESSION['log']['idSis_Empresa'] != 5) {?>
+												<div class="form-group col-md-12 text-left">
+													<div class="row">										
+														<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/comissao" role="button"> 
+															<span class="glyphicon glyphicon-usd"></span> NaLoja
+														</a>
+													</div>	
+												</div>
+											<?php } ?>
+											<?php if($_SESSION['log']['idSis_Empresa'] == 5 || $_SESSION['Usuario']['Permissao_Comissao'] >= 2) {?>
+												<div class="form-group col-md-12 text-left">
+													<div class="row">										
+														<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/comissao_online" role="button"> 
+															<span class="glyphicon glyphicon-usd"></span> OnLine
+														</a>
+													</div>	
+												</div>
+											<?php }?>	
 										</div>
-									<?php }?>	
+									<?php }?>
+								<?php if($_SESSION['log']['idSis_Empresa'] != "5") {?>	
 									<?php if($_SESSION['Usuario']['Rel_Est'] == "S") {?>	
 										<div class="col-md-12">											
 											<label for=""><h4><b>Estatísticas</b></h4></label>

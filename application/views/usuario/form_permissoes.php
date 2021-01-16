@@ -430,32 +430,50 @@
 												</div>
 											</div>											
 											<div class="row">
-												<div class="col-md-3">
+												<div class="col-md-3 text-left">
 													<label for="Rel_Com">Comissões?</label><br>
-													<div class="form-group">
-														<div class="btn-group" data-toggle="buttons">
-															<?php
-															foreach ($select['Rel_Com'] as $key => $row) {
-																(!$query['Rel_Com']) ? $query['Rel_Com'] = 'N' : FALSE;
+													<div class="btn-group" data-toggle="buttons">
+														<?php
+														foreach ($select['Rel_Com'] as $key => $row) {
+															if (!$query['Rel_Com'])$query['Rel_Com'] = 'N';
 
-																if ($query['Rel_Com'] == $key) {
-																	echo ''
-																	. '<label class="btn btn-warning active" name="radiobutton_Rel_Com" id="radiobutton_Rel_Com' . $key . '">'
-																	. '<input type="radio" name="Rel_Com" id="radiobutton" '
-																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																	. '</label>'
-																	;
+															($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+															if ($query['Rel_Com'] == $key) {
+																echo ''
+																. '<label class="btn btn-warning active" name="Rel_Com_' . $hideshow . '">'
+																. '<input type="radio" name="Rel_Com" id="' . $hideshow . '" '
+																. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																. '</label>'
+																;
+															} else {
+																echo ''
+																. '<label class="btn btn-default" name="Rel_Com_' . $hideshow . '">'
+																. '<input type="radio" name="Rel_Com" id="' . $hideshow . '" '
+																. 'autocomplete="off" value="' . $key . '" >' . $row
+																. '</label>'
+																;
+															}
+														}
+														?>
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div id="Rel_Com" <?php echo $div['Rel_Com']; ?>>
+														<label for="Permissao_Comissao">Permissão da Comissão</label>		
+														<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" id="Permissao_Comissao" name="Permissao_Comissao">
+															<option value="">- Selec. Permissão-</option>	
+															<?php
+															foreach ($select['Permissao_Comissao'] as $key => $row) {
+																if ($query['Permissao_Comissao'] == $key) {
+																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																} else {
-																	echo ''
-																	. '<label class="btn btn-default" name="radiobutton_Rel_Com" id="radiobutton_Rel_Com' . $key . '">'
-																	. '<input type="radio" name="Rel_Com" id="radiobutton" '
-																	. 'autocomplete="off" value="' . $key . '" >' . $row
-																	. '</label>'
-																	;
+																	echo '<option value="' . $key . '">' . $row . '</option>';
 																}
 															}
 															?>
-														</div>
+														</select>
+														<?php echo form_error('Permissao_Comissao'); ?>
 													</div>
 												</div>
 												<div class="col-md-3">
@@ -484,7 +502,7 @@
 															}
 															?>
 														</div>
-													</div>
+													</div>	
 												</div>
 											</div>
 										</div>

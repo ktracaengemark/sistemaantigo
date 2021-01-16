@@ -39,39 +39,43 @@
 						<?php if ($metodo == 1) { ?>
 							<input type="hidden" name="NomeAssociado" id="NomeAssociado" value=""/>		
 							<div class="col-md-3 text-left">
-								<label for="Ordenamento">Colaborador:</label>
-								<div class="input-group">
-									<span class="input-group-btn">
-										<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
-											<span class="glyphicon glyphicon-search"></span> 
-										</button>
-									</span>
-									<select data-placeholder="Selecione uma opção..." class="form-control" 
-											id="NomeUsuario" name="NomeUsuario">
-										<?php
-										foreach ($select['NomeUsuario'] as $key => $row) {
-											if ($query['NomeUsuario'] == $key) {
-												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-												echo '<option value="' . $key . '">' . $row . '</option>';
+								<?php if ($_SESSION['Usuario']['Permissao_Comissao'] >= 2 ) { ?>
+									<label for="Ordenamento">Colaborador:</label>
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
+												<span class="glyphicon glyphicon-search"></span> 
+											</button>
+										</span>
+										<select data-placeholder="Selecione uma opção..." class="form-control" 
+												id="NomeUsuario" name="NomeUsuario">
+											<?php
+											foreach ($select['NomeUsuario'] as $key => $row) {
+												if ($query['NomeUsuario'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
 											}
-										}
-										?>
-									</select>
-								</div>	
+											?>
+										</select>
+									</div>
+								<?php } ?>	
 							</div>
 						<?php } else if ($metodo == 2) { ?>	
 							<input type="hidden" name="NomeUsuario" id="NomeUsuario" value="0"/>
 							<div class="col-md-3 text-left">
-								<label for="Ordenamento">Associado:</label>
-								<div class="input-group">
-									<span class="input-group-btn">
-										<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
-											<span class="glyphicon glyphicon-search"></span> 
-										</button>
-									</span>
-									<input type="text" placeholder="Pesquisar Associado" class="form-control Numero btn-sm" name="NomeAssociado" id="NomeAssociado" value="<?php echo set_value('NomeAssociado', $query['NomeAssociado']); ?>">
-								</div>
+								<?php if ($_SESSION['Usuario']['Permissao_Comissao'] >= 2 ) { ?>
+									<label for="Ordenamento">Associado:</label>
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button class="btn btn-<?php echo $panel; ?> btn-md" type="submit">
+												<span class="glyphicon glyphicon-search"></span> 
+											</button>
+										</span>
+										<input type="text" placeholder="Pesquisar Associado" class="form-control Numero btn-sm" name="NomeAssociado" id="NomeAssociado" value="<?php echo set_value('NomeAssociado', $query['NomeAssociado']); ?>">
+									</div>
+								<?php } ?>	
 							</div>
 						<?php } else if ($metodo == 3) { ?>
 							<input type="hidden" name="NomeAssociado" id="NomeAssociado" value=""/>
