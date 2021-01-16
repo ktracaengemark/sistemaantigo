@@ -1,11 +1,10 @@
 <?php if (isset($msg)) echo $msg; ?>
-
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12 ">	
 			<?php echo form_open_multipart($form_open_path); ?>
-			<?php if ( !isset($evento) && isset($query)) { ?>
-				<?php if ($query['idApp_Cliente'] != 150001 && $query['idApp_Cliente'] != 1 && $query['idApp_Cliente'] != 0) { ?>
+			<?php if ( !isset($evento) && $_SESSION['log']['idSis_Empresa'] != 5 && isset($_SESSION['Cliente'])) { ?>
+				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 150001 && $_SESSION['Cliente']['idApp_Cliente'] != 1 && $_SESSION['Cliente']['idApp_Cliente'] != 0) { ?>
 					<nav class="navbar navbar-inverse navbar-fixed" role="banner">
 						<div class="container-fluid">
 							<div class="navbar-header">

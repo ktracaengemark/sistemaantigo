@@ -8059,7 +8059,7 @@ class Orcatrata extends CI_Controller {
                 //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_OrcaTrata'], FALSE);
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_OrcaTrata', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
-				if($data['orcatrata']['idApp_Cliente'] == 0){
+				if($data['orcatrata']['idApp_Cliente'] == 0 || $_SESSION['log']['idSis_Empresa'] == 5){
 					redirect(base_url() . 'pedidos/pedidos/' . $data['msg']);
 				}else{
 					redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);

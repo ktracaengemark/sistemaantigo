@@ -2,8 +2,8 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<?php if ( !isset($evento) && isset($_SESSION['Cliente']) && ($metodo == 2 || $metodo == 3)) { ?>
-				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 1 ) { ?>
+			<?php if ( !isset($evento)&& $_SESSION['log']['idSis_Empresa'] != 5 && isset($_SESSION['Cliente']) && ($metodo == 2 || $metodo == 3)) { ?>
+				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 150001 && $_SESSION['Cliente']['idApp_Cliente'] != 1 && $_SESSION['Cliente']['idApp_Cliente'] != 0) { ?>
 					<nav class="navbar navbar-inverse navbar-fixed" role="banner">
 					  <div class="container-fluid">
 						<div class="navbar-header">
