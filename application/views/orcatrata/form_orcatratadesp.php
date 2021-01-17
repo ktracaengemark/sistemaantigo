@@ -160,10 +160,15 @@
 															</div>										
 															<div class="col-md-4 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
 																<label for="Cadastrar">Cadastrar/ Editar Forn.</label><br>
+																
+																<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addFornecedorModal">
+																	Cadastrar
+																</button>
+																<!--
 																<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>fornecedor2/cadastrar3/" role="button"> 
 																	<span class="glyphicon glyphicon-plus"></span> <span class="glyphicon glyphicon-edit"></span> Fornec
 																</a>
-																
+																-->
 																<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
 																		<span class="glyphicon glyphicon-refresh"></span> Recarregar
 																</button>
@@ -1951,7 +1956,7 @@
 									<div class="panel-heading">
 										<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
 										<input type="hidden" name="Tipo_Orca"  id="Tipo_Orca" value="<?php echo $orcatrata['Tipo_Orca']; ?>">
-										<!--<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">-->
+										<!--<input type="hidden" name="idApp_Fornecedor" value="<?php echo $_SESSION['Fornecedor']['idApp_Fornecedor']; ?>">-->
 										<h4 class="mb-3"><b>Despesa</b></h4>
 										<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 											<div class="row">
@@ -2074,12 +2079,153 @@
 											</div>
 										<?php } ?>
 									</div>
-								</div>							
+								</div>
+								<div id="msgCadFornecedorSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header bg-success text-center">
+												<h4 class="modal-title" id="visulFornecedorModalLabel">Fornecedor Cadastrado com sucesso!</h4>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												  <span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-footer">
+												<div class="col-md-6">	
+													<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+														<span class="glyphicon glyphicon-filter"></span> Fechar
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
-						</form>
 					</div>
 				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div id="addFornecedorModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addFornecedorModalLabel">Cadastrar Fornecedor</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-fornecedor"></span>
+				<form method="post" id="insert_fornecedor_form">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-6">
+								<label for="NomeFornecedor">Nome do Fornecedor: *</label>
+								<input name="NomeFornecedor" type="text" class="form-control" id="NomeFornecedor" maxlength="255" placeholder="Nome do Fornecedor">
+							</div>
+							<div class="col-md-3">
+								<label for="CelularFornecedor">Celular: *</label>
+								<input type="text" class="form-control Celular" id="CelularFornecedor" maxlength="11" name="CelularFornecedor" placeholder="(XX)999999999">
+							</div>
+							<div class="col-md-3">
+								<label for="DataNascimento">Data do Aniversário:</label>
+								<input type="text" class="form-control Date" maxlength="10" name="DataNascimento" placeholder="DD/MM/AAAA">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6 ">
+								<h4 class="mb-3">Sexo</h4>
+								<div class="col-md-3 mb-3 ">	
+									<div class="custom-control custom-radio">
+										<input type="radio" name="Sexo" class="custom-control-input "  id="Retirada" value="M">
+										<label class="custom-control-label" for="Masculino">Mas</label>
+									</div>
+								</div>
+								<div class="col-md-3 mb-3 ">	
+									<div class="custom-control custom-radio">
+										<input type="radio" name="Sexo" class="custom-control-input " id="Combinar" value="F">
+										<label class="custom-control-label" for="Feminino">Fem </label>
+									</div>
+								</div>
+								<div class="col-md-3 mb-3 ">
+									<div class="custom-control custom-radio">
+										<input type="radio" name="Sexo" class="custom-control-input " id="Correios" value="O">
+										<label class="custom-control-label" for="Outros">Outros</label>
+									</div>
+								</div>
+							</div>
+						</div>								
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#DadosComplementares" aria-expanded="false" aria-controls="DadosComplementares">
+									<span class="glyphicon glyphicon-menu-down"></span> Completar Dados
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="collapse" id="DadosComplementares">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-3">
+									<label for="CepFornecedor">Cep:</label>
+									<input type="text" class="form-control Numero" id="CepFornecedor" maxlength="8" name="CepFornecedor">
+								</div>
+								<div class="col-md-6">
+									<label for="EnderecoFornecedor">Endreço:</label>
+									<input type="text" class="form-control" id="EnderecoFornecedor" maxlength="100" name="EnderecoFornecedor">
+								</div>
+								<div class="col-md-3">
+									<label for="NumeroFornecedor">Numero:</label>
+									<input type="text" class="form-control" id="NumeroFornecedor" maxlength="100" name="NumeroFornecedor">
+								</div>
+							</div>	
+							<div class="row">
+								<div class="col-md-3">
+									<label for="ComplementoFornecedor">Complemento:</label>
+									<input type="text" class="form-control" id="ComplementoFornecedor" maxlength="100" name="ComplementoFornecedor" >
+								</div>	
+								<div class="col-md-3">
+									<label for="BairroFornecedor">Bairro:</label>
+									<input type="text" class="form-control" id="BairroFornecedor" maxlength="100" name="BairroFornecedor" >
+								</div>
+								<div class="col-md-3">
+									<label for="CidadeFornecedor">Município:</label>
+									<input type="text" class="form-control" id="CidadeFornecedor" maxlength="100" name="CidadeFornecedor" >
+								</div>
+								<div class="col-md-3">
+									<label for="EstadoFornecedor">Estado:</label>
+									<input type="text" class="form-control" id="EstadoFornecedor" maxlength="2" name="EstadoFornecedor" >
+								</div>
+							</div>	
+							<div class="row">
+								<div class="col-md-3 ">
+									<label class="" for="ReferenciaFornecedor">Referencia:</label>
+									<textarea class="form-control " id="ReferenciaFornecedor" name="ReferenciaFornecedor"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<br>
+							<button type="submit" class="btn btn-success btn-block">
+								<span class="glyphicon glyphicon-plus"></span> Cadastrar
+							</button>
+							<!--<input type="submit" name="CadFornecedor" id="CadFornecedor" value="Cadastrar" class="btn btn-success">-->
+						</div>
+						<div class="col-sm-6">
+							<br>
+							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+								<span class="glyphicon glyphicon-remove"></span> Fechar
+							</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

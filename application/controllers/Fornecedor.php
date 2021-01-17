@@ -228,7 +228,6 @@ class Fornecedor extends CI_Controller {
 		
 		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-        #$this->form_validation->set_rules('NomeFornecedor', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Fornecedor.NomeFornecedor.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
         $this->form_validation->set_rules('NomeFornecedor', 'Fornecedor', 'required|trim');
         #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
         #$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');

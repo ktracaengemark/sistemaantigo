@@ -28,6 +28,7 @@ Aguardar();
 
 // Funções de cadastros auxiliares
 $(document).ready(function(){
+	
 	$('#insert_motivo_form').on('submit', function(event){
 		//alert('ok');
 		event.preventDefault();
@@ -41,7 +42,7 @@ $(document).ready(function(){
 			
 			$.post(window.location.origin+ '/' + app + '/cadastros/Motivo.php?', dados, function (retorna){
 			 //console.log(retorna);
-				if(retorna){
+				if(retorna == 1){
 				
 					//Limpar os campo
 					$('#insert_motivo_form')[0].reset();
@@ -58,7 +59,7 @@ $(document).ready(function(){
 					
 					//listar_usuario(1, 50);
 				}else{
-					
+					$("#msg-error-motivo").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Motivo!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
 				}
 				
 			});
@@ -79,7 +80,7 @@ $(document).ready(function(){
 			
 			$.post(window.location.origin+ '/' + app + '/cadastros/Categoria.php?', dados, function (retorna){
 			 //console.log(retorna);
-				if(retorna){
+				if(retorna == 1){
 				
 					//Limpar os campo
 					$('#insert_categoria_form')[0].reset();
@@ -96,12 +97,51 @@ $(document).ready(function(){
 					
 					//listar_usuario(1, 50);
 				}else{
-					
+					$("#msg-error-categoria").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar a Categoria!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
 				}
 				
 			});
 			
 		}	
+	});
+	
+	$('#insert_atividade_form').on('submit', function(event){
+		//alert('ok');
+		event.preventDefault();
+		if($('#Novo_Atividade').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-atividade").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{		
+			//Receber os dados do formulário
+			var dados = $("#insert_atividade_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/cadastros/Atividade.php?', dados, function (retorna){
+			 //console.log(retorna);
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#insert_atividade_form')[0].reset();
+					
+					//Fechar a janela modal cadastrar
+					$('#addAtividadeModal').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadAtividadeSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-atividade").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-atividade").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar a Atividade!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}
+		
 	});
 	
 	$('#insert_cliente_form').on('submit', function(event){
@@ -124,7 +164,7 @@ $(document).ready(function(){
 				//console.log(dados);
 				
 				$.post(window.location.origin+ '/' + app + '/cadastros/Cliente.php?', dados, function (retorna){
-				 console.log(retorna);
+				 //console.log(retorna);
 					if(retorna == 5){
 						//Limpar os campo
 						$('#insert_cliente_form')[0].reset();
@@ -164,6 +204,54 @@ $(document).ready(function(){
 				$("#msg-error-cliente").html('<div class="alert alert-danger" role="alert">O Celular deve conter 11 números!</div>');
 			}
 		}	
+	});	
+	
+	$('#insert_fornecedor_form').on('submit', function(event){
+		//alert('ok');
+		event.preventDefault();
+		if($('#NomeFornecedor').val() == "" || $('#CelularFornecedor').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-fornecedor").html('<div class="alert alert-danger" role="alert">Necessário prencher Nome e Celular do Fornecedor!</div>');						
+		}else{		
+			
+			var celular = $('#CelularFornecedor').val();
+			var tamanho = celular.toString().length;
+			//console.log(tamanho);
+			
+			if( tamanho == 11 ) {	
+				
+				//Receber os dados do formulário
+				
+				var dados = $("#insert_fornecedor_form").serialize();
+				//console.log(dados);
+				
+				$.post(window.location.origin+ '/' + app + '/cadastros/Fornecedor.php?', dados, function (retorna){
+				 //console.log(retorna);
+					if(retorna == 1){
+						//Limpar os campo
+						$('#insert_fornecedor_form')[0].reset();
+						
+						//Fechar a janela modal cadastrar
+						$('#addFornecedorModal').modal('hide');
+									
+						//Alerta de cadastro realizado com sucesso
+						//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+						$('#msgCadFornecedorSucesso').modal('show');
+						
+						//Limpar mensagem de erro
+						$("#msg-error-fornecedor").html('');
+						
+						//listar_usuario(1, 50);
+					}else{
+						$("#msg-error-fornecedor").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Fornecedor!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+					}
+					
+				});
+			}else{
+				$("#msg-error-fornecedor").html('<div class="alert alert-danger" role="alert">O Celular deve conter 11 números!</div>');
+			}
+		}
+		
 	});	
 	
 });
