@@ -1,4 +1,4 @@
-<?php if ($msg) echo $msg; ?>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -167,6 +167,7 @@
 			
 			<div class="row">
 				<div class="col-sm-offset-1 col-md-10 ">
+				<?php if ($msg) echo $msg; ?>
 					<div class="panel panel-<?php echo $panel; ?>">
 						<div class="panel-heading">
 							<strong>Cliente: </strong>

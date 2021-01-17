@@ -57,6 +57,7 @@ class Fornecedor extends CI_Controller {
             'DataNascimento',
 			'DataCadastroFornecedor',
             'Atividade',
+            'CelularFornecedor',
             'Telefone1',
             'Telefone2',
             'Telefone3',
@@ -125,11 +126,11 @@ class Fornecedor extends CI_Controller {
         $data['sidebar'] = 'col-sm-3 col-md-2';
         $data['main'] = 'col-sm-7 col-md-8';        
 
-        $data['tela'] = $this->load->view('fornecedor/form_fornecedor1', $data, TRUE);
+        $data['tela'] = $this->load->view('fornecedor/form_fornecedor', $data, TRUE);
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('fornecedor/form_fornecedor1', $data);        
+            $this->load->view('fornecedor/form_fornecedor', $data);        
         } else {
 
 			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
@@ -158,7 +159,7 @@ class Fornecedor extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contatofornec com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('fornecedor/form_fornecedor1', $data);
+                $this->load->view('fornecedor/form_fornecedor', $data);
             } else {
 
                 $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Fornecedor'], FALSE);
@@ -192,6 +193,7 @@ class Fornecedor extends CI_Controller {
             'DataNascimento',
 			'DataCadastroFornecedor',
             'Atividade',
+            'CelularFornecedor',
             'Telefone1',
             'Telefone2',
             'Telefone3',

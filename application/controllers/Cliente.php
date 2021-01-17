@@ -139,7 +139,7 @@ class Cliente extends CI_Controller {
         $data['sidebar'] = 'col-sm-3 col-md-2';
         $data['main'] = 'col-sm-7 col-md-8';
 
-        $data['tela'] = $this->load->view('cliente/form_cliente2', $data, TRUE);
+        $data['tela'] = $this->load->view('cliente/form_cliente', $data, TRUE);
 		
 		$data['radio'] = array(
             'Ativo' => $this->basico->radio_checked($data['query']['Ativo'], 'Ativo', 'NS'),
