@@ -1,4 +1,4 @@
-<?php if ($msg) echo $msg; ?>
+
 <?php echo validation_errors(); ?> 
 	<?php echo form_open($form_open_path, 'role="form"'); ?>
 	<div class="col-md-1 "></div>
@@ -58,8 +58,15 @@
 				</div>
 			</div>
 		</div>
+		<?php if ($msg) {?>
+			<div class="row">
+				<div class="col-md-12">
+					<?php echo $msg; ?>
+				</div>
+			</div>
+		<?php } ?>
 		<div style="overflow: auto; height: 550px; ">
-			<div class="row">	
+			<div class="row">
 				<div class="col-md-12">
 					<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 						<div class="row">

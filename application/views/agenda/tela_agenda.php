@@ -1,4 +1,3 @@
-<?php if (isset($msg)) echo $msg; ?>
 
 <div id="fluxo" class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="fluxo" aria-hidden="true">
 	<div class="vertical-alignment-helper">
@@ -34,7 +33,9 @@
 	</div>
 </div>
 <div class="col-md-1"></div>
+
 <div class="col-md-10">
+	<?php if (isset($msg)) echo $msg; ?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<?php echo form_open('agenda', 'role="form"'); ?>		

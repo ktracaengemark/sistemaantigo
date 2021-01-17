@@ -1,4 +1,4 @@
-<?php if (isset($msg)) echo $msg; ?>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12 ">
@@ -155,16 +155,23 @@
 					  </div>
 					</nav>
 				<?php } ?>
-			<?php } ?>			
-
+			<?php } ?>
+			<?php if ($msg) {?>
+				<div class="row">
+					<div class="col-md-12">
+						<?php echo $msg; ?>
+					</div>
+				</div>
+			<?php } ?>
 			<div class="row">
 				<div class="col-sm-offset-1 col-md-10 ">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<?php echo '<small>' . $titulo . '</small> <strong>' . $_SESSION['Cliente']['NomeCompleto'] . '</strong> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '.</small>' ?>
+							
 						</div>
 						<div class="panel-body">
-
+							
 							<div>
 
 								<!-- Nav tabs -->
@@ -180,7 +187,7 @@
 									<li role="presentation"><a style="color:green" href="#concluido_orc" aria-controls="concluido_orc" role="tab" data-toggle="tab">Procedimentos <?php echo $concluido_orc->num_rows(); ?></a></li>
 									<li role="presentation"><a style="color:red" href="#nao_concluido_orc" aria-controls="nao_concluido_orc" role="tab" data-toggle="tab">Procedimentos <?php echo $nao_concluido_orc->num_rows(); ?></a></li>
 								</ul>
-
+								
 								<!-- Tab panes -->
 								<div class="tab-content">
 

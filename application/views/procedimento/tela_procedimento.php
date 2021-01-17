@@ -1,4 +1,4 @@
-<?php if (isset($msg)) echo $msg; ?>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12 ">	
@@ -187,7 +187,8 @@
 				
 			<div style="overflow: auto; height: auto; ">		
 				<div class="col-sm-offset-1 col-md-10 ">
-					<div class="row">	
+					<div class="row">
+					<?php if (isset($msg)) echo $msg; ?>
 						<div class="panel panel-<?php echo $panel2; ?>">
 							<div class="panel-heading">
 								<div class="panel-body">

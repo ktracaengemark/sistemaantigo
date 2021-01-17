@@ -1,7 +1,7 @@
-<?php if (isset($msg)) echo $msg; ?>
 
 <div class="col-md-1"></div>
 <div class="col-md-10">
+	
 	<?php echo validation_errors(); ?>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -33,7 +33,7 @@
 										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 									} else {
 										echo '<option value="' . $key . '">' . $row . '</option>';
-									}
+										}
 								}
 								?>
 							</select>
@@ -347,7 +347,7 @@
 								<div class="form-group col-md-3 text-left">
 									<div class="form-footer ">
 										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-											<span class="glyphicon glyphicon-remove"> Fechar
+											<span class="glyphicon glyphicon-remove"></span> Fechar
 										</button>
 									</div>
 								</div>
@@ -400,9 +400,10 @@
 		</div>
 	
 		</form>		
-		
+		<?php if (isset($msg)) echo $msg; ?>
 		<div <?php echo $collapse; ?> id="Tarefas">	
 			<div class="panel-body">
+				
 				<?php echo (isset($list1)) ? $list1 : FALSE ?>
 			</div>
 		</div>

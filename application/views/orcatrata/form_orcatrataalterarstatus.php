@@ -2,7 +2,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<?php if ( !isset($evento) && ($_SESSION['log']['idSis_Empresa'] != 5 || $_SESSION['log']['idSis_Empresa'] == $orcatrata['idSis_Empresa'])) { ?>
+			<?php if ( !isset($evento) && isset($query) && $query['idApp_Cliente'] != 0 && ($_SESSION['log']['idSis_Empresa'] != 5 || $_SESSION['log']['idSis_Empresa'] == $orcatrata['idSis_Empresa'])) { ?>
 				<?php if ($_SESSION['Cliente']['idApp_Cliente'] != 150001 && $_SESSION['Cliente']['idApp_Cliente'] != 1 && $_SESSION['Cliente']['idApp_Cliente'] != 0) { ?>
 					<nav class="navbar navbar-inverse navbar-fixed" role="banner">
 					  <div class="container-fluid">
@@ -1941,7 +1941,7 @@
 																<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
 																	<span class="input-group-btn">	
 																		<?php 
-																			if($orcatrata['idApp_Cliente'] == 0) { 
+																			if($orcatrata['idApp_Cliente'] == 0 || $orcatrata['idApp_Cliente'] == 1 || $orcatrata['idApp_Cliente'] == 150001 || $_SESSION['log']['idSis_Empresa'] == 5) { 
 																				$ref_alterar = 'alterar2';
 																			
 																			}else{

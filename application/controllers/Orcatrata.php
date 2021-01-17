@@ -608,30 +608,7 @@ class Orcatrata extends CI_Controller {
           echo "</pre>";
           exit ();
           */
-		$data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
-		$data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
 
-		$data['q5'] = $this->Orcatrata_model->list5_produtosvend(TRUE);
-		$data['list5'] = $this->load->view('orcatrata/list5_produtosvend', $data, TRUE);
-		
-		$data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
-		$data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
-
-		$data['q3'] = $this->Orcatrata_model->list3_produtosaluguel(TRUE);
-		$data['list3'] = $this->load->view('orcatrata/list3_produtosaluguel', $data, TRUE);
-		
-        $data['q6'] = $this->Orcatrata_model->list6_produtosaluguel(TRUE);
-        $data['list6'] = $this->load->view('orcatrata/list6_produtosaluguel', $data, TRUE);		
-
-		$data['q4'] = $this->Orcatrata_model->list4_receitasparc(TRUE);
-		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);
-
-		$data['q7'] = $this->Orcatrata_model->list7_combinar(TRUE);
-		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
-
-		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
-		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);
-		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             //if (1 == 1) {
@@ -1599,29 +1576,6 @@ class Orcatrata extends CI_Controller {
           exit ();
           */
 
-		$data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
-		$data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
-
-		$data['q5'] = $this->Orcatrata_model->list5_produtosvend(TRUE);
-		$data['list5'] = $this->load->view('orcatrata/list5_produtosvend', $data, TRUE);
-		
-		$data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
-		$data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
-
-		$data['q3'] = $this->Orcatrata_model->list3_produtosaluguel(TRUE);
-		$data['list3'] = $this->load->view('orcatrata/list3_produtosaluguel', $data, TRUE);
-		
-        $data['q6'] = $this->Orcatrata_model->list6_produtosaluguel(TRUE);
-        $data['list6'] = $this->load->view('orcatrata/list6_produtosaluguel', $data, TRUE);		
-
-		$data['q4'] = $this->Orcatrata_model->list4_receitasparc(TRUE);
-		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);
-
-		$data['q7'] = $this->Orcatrata_model->list7_combinar(TRUE);
-		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
-
-		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
-		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);		
 
 		$_SESSION['Empresa'] = $data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);
 		/*	 
@@ -2740,30 +2694,7 @@ class Orcatrata extends CI_Controller {
           echo "</pre>";
           exit ();
         */
-		$data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
-		$data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
 
-		$data['q5'] = $this->Orcatrata_model->list5_produtosvend(TRUE);
-		$data['list5'] = $this->load->view('orcatrata/list5_produtosvend', $data, TRUE);
-		
-		$data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
-		$data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
-
-		$data['q3'] = $this->Orcatrata_model->list3_produtosaluguel(TRUE);
-		$data['list3'] = $this->load->view('orcatrata/list3_produtosaluguel', $data, TRUE);
-		
-        $data['q6'] = $this->Orcatrata_model->list6_produtosaluguel(TRUE);
-        $data['list6'] = $this->load->view('orcatrata/list6_produtosaluguel', $data, TRUE);		
-
-		$data['q4'] = $this->Orcatrata_model->list4_receitasparc(TRUE);
-		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);
-
-		$data['q7'] = $this->Orcatrata_model->list7_combinar(TRUE);
-		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
-
-		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
-		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);
-		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('orcatrata/form_orcatrataalterar', $data);
@@ -4337,30 +4268,7 @@ class Orcatrata extends CI_Controller {
           echo "</pre>";
           exit ();
         */
-        $data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
-        $data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
 
-		$data['q5'] = $this->Orcatrata_model->list5_produtosvend(TRUE);
-		$data['list5'] = $this->load->view('orcatrata/list5_produtosvend', $data, TRUE);		
-		
-        $data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
-        $data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
-		
-        $data['q3'] = $this->Orcatrata_model->list3_produtosaluguel(TRUE);
-        $data['list3'] = $this->load->view('orcatrata/list3_produtosaluguel', $data, TRUE);
-
-        $data['q6'] = $this->Orcatrata_model->list6_produtosaluguel(TRUE);
-        $data['list6'] = $this->load->view('orcatrata/list6_produtosaluguel', $data, TRUE);
-		
-		$data['q4'] = $this->Orcatrata_model->list4_receitasparc(TRUE);
-		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);
-
-		$data['q7'] = $this->Orcatrata_model->list7_combinar(TRUE);
-		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
-
-		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
-		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);
-		
 		$data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);		
 		
         #run form validation
@@ -5926,30 +5834,7 @@ class Orcatrata extends CI_Controller {
           echo "</pre>";
           exit ();
         */
-        $data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
-        $data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
 
-		$data['q5'] = $this->Orcatrata_model->list5_produtosvend(TRUE);
-		$data['list5'] = $this->load->view('orcatrata/list5_produtosvend', $data, TRUE);		
-		
-        $data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
-        $data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
-		
-        $data['q3'] = $this->Orcatrata_model->list3_produtosaluguel(TRUE);
-        $data['list3'] = $this->load->view('orcatrata/list3_produtosaluguel', $data, TRUE);
-
-        $data['q6'] = $this->Orcatrata_model->list6_produtosaluguel(TRUE);
-        $data['list6'] = $this->load->view('orcatrata/list6_produtosaluguel', $data, TRUE);
-		
-		$data['q4'] = $this->Orcatrata_model->list4_receitasparc(TRUE);
-		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);
-
-		$data['q7'] = $this->Orcatrata_model->list7_combinar(TRUE);
-		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
-
-		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
-		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);
-		
 		$data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);		
 		
         #run form validation
@@ -7136,30 +7021,7 @@ class Orcatrata extends CI_Controller {
           echo "</pre>";
           exit ();
         */
-        $data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
-        $data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
 
-		$data['q5'] = $this->Orcatrata_model->list5_produtosvend(TRUE);
-		$data['list5'] = $this->load->view('orcatrata/list5_produtosvend', $data, TRUE);		
-		
-        $data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
-        $data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
-		
-        $data['q3'] = $this->Orcatrata_model->list3_produtosaluguel(TRUE);
-        $data['list3'] = $this->load->view('orcatrata/list3_produtosaluguel', $data, TRUE);
-
-        $data['q6'] = $this->Orcatrata_model->list6_produtosaluguel(TRUE);
-        $data['list6'] = $this->load->view('orcatrata/list6_produtosaluguel', $data, TRUE);
-		
-		$data['q4'] = $this->Orcatrata_model->list4_receitasparc(TRUE);
-		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);
-
-		$data['q7'] = $this->Orcatrata_model->list7_combinar(TRUE);
-		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
-
-		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
-		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);
-		
 		$data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);		
 		
         #run form validation
@@ -8059,7 +7921,7 @@ class Orcatrata extends CI_Controller {
                 //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_OrcaTrata'], FALSE);
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_OrcaTrata', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
-				if($data['orcatrata']['idApp_Cliente'] == 0 || $_SESSION['log']['idSis_Empresa'] == 5){
+				if($data['orcatrata']['idApp_Cliente'] == 0 || $orcatrata['idApp_Cliente'] == 1 || $orcatrata['idApp_Cliente'] == 150001 || $_SESSION['log']['idSis_Empresa'] == 5){
 					redirect(base_url() . 'pedidos/pedidos/' . $data['msg']);
 				}else{
 					redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
@@ -8643,30 +8505,7 @@ class Orcatrata extends CI_Controller {
           echo "</pre>";
           exit ();
           */
-
-		$data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
-		$data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
-
-		$data['q5'] = $this->Orcatrata_model->list5_produtosvend(TRUE);
-		$data['list5'] = $this->load->view('orcatrata/list5_produtosvend', $data, TRUE);
 		
-		$data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
-		$data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
-
-		$data['q3'] = $this->Orcatrata_model->list3_produtosaluguel(TRUE);
-		$data['list3'] = $this->load->view('orcatrata/list3_produtosaluguel', $data, TRUE);
-		
-        $data['q6'] = $this->Orcatrata_model->list6_produtosaluguel(TRUE);
-        $data['list6'] = $this->load->view('orcatrata/list6_produtosaluguel', $data, TRUE);		
-
-		$data['q4'] = $this->Orcatrata_model->list4_receitasparc(TRUE);
-		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);
-
-		$data['q7'] = $this->Orcatrata_model->list7_combinar(TRUE);
-		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
-
-		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
-		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);		
 
 		$_SESSION['Empresa'] = $data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);
 		/*	 
@@ -9795,30 +9634,7 @@ class Orcatrata extends CI_Controller {
           echo "</pre>";
           exit ();
         */
-        $data['q'] = $this->Orcatrata_model->list1_produtosvend(TRUE);
-        $data['list1'] = $this->load->view('orcatrata/list1_produtosvend', $data, TRUE);
 
-		$data['q5'] = $this->Orcatrata_model->list5_produtosvend(TRUE);
-		$data['list5'] = $this->load->view('orcatrata/list5_produtosvend', $data, TRUE);		
-		
-        $data['q2'] = $this->Orcatrata_model->list2_rankingfiado(TRUE);
-        $data['list2'] = $this->load->view('orcatrata/list2_rankingfiado', $data, TRUE);
-		
-        $data['q3'] = $this->Orcatrata_model->list3_produtosaluguel(TRUE);
-        $data['list3'] = $this->load->view('orcatrata/list3_produtosaluguel', $data, TRUE);
-
-        $data['q6'] = $this->Orcatrata_model->list6_produtosaluguel(TRUE);
-        $data['list6'] = $this->load->view('orcatrata/list6_produtosaluguel', $data, TRUE);
-		
-		$data['q4'] = $this->Orcatrata_model->list4_receitasparc(TRUE);
-		$data['list4'] = $this->load->view('orcatrata/list4_receitasparc', $data, TRUE);
-
-		$data['q7'] = $this->Orcatrata_model->list7_combinar(TRUE);
-		$data['list7'] = $this->load->view('orcatrata/list7_combinar', $data, TRUE);
-
-		$data['q8'] = $this->Orcatrata_model->list8_pagamentoonline(TRUE);
-		$data['list8'] = $this->load->view('orcatrata/list8_pagamentoonline', $data, TRUE);
-		
 		$data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);		
 		
         #run form validation

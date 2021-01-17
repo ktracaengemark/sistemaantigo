@@ -1,4 +1,4 @@
-<?php if (isset($msg)) echo $msg; ?>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">	
@@ -202,11 +202,17 @@
 					  </div>
 					</nav>
 				<?php } ?>
-			<?php } ?>			
+			<?php } ?>
+			<?php if ($msg) {?>
+				<div class="row">
+					<div class="col-md-12 ">
+						<?php echo $msg; ?>
+					</div>
+				</div>
+			<?php } ?>
 			<div class="row">
 				<div class="col-sm-offset-1 col-md-10 ">			
 					<?php echo validation_errors(); ?>
-						
 					<div style="overflow: auto; height: auto; ">		
 						<?php if($metodo == 1) { ?>
 							<div class="row">	
