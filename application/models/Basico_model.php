@@ -2106,6 +2106,7 @@ if (isset($data) && $data) {
     }	
 
 	public function select_categoriatarefa($data = FALSE) {
+		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;
 
         if ($data === TRUE) {
             $array = $this->db->query('
@@ -2116,9 +2117,8 @@ if (isset($data) && $data) {
                 Tab_Categoria AS C
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = C.idSis_Usuario
             WHERE
-				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
-				(C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' )
+				' . $permissao . '
+				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
             ORDER BY
                 C.Categoria ASC
 			');
@@ -2131,9 +2131,8 @@ if (isset($data) && $data) {
                 Tab_Categoria AS C
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = C.idSis_Usuario
             WHERE
-				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
-				(C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' )
+				' . $permissao . '
+				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
             ORDER BY
                 C.Categoria ASC
 			');

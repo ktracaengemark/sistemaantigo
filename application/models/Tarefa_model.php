@@ -315,9 +315,8 @@ class Tarefa_model extends CI_Model {
                 Tab_Categoria AS C
 					LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = C.idSis_Usuario
             WHERE
-				U.CelularUsuario = ' . $_SESSION['log']['CelularUsuario'] . ' OR
-				(C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' )
+				' . $permissao . '
+				C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
             ORDER BY
                 C.Categoria ASC
         ');
