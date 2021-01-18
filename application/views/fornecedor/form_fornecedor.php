@@ -95,7 +95,7 @@
 											</div>
 										</div>	
 										<div class="row">
-											<div class="col-md-6 text-left">
+											<div class="col-md-12 text-left">
 												<label class="sr-only" for="Cadastrar">Cadastrar no BD</label>
 												<div class="btn-group" data-toggle="buttons">
 													<?php
@@ -124,26 +124,34 @@
 
 												</div>
 											</div>
-											<div class="col-md-6 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-												
-												<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addAtividadeModal">
-													<span class="glyphicon glyphicon-plus"></span>Cadastrar
-												</button>
-												<!--
-												<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>atividade2/cadastrar3/" role="button"> 
-													<span class="glyphicon glyphicon-plus"></span>Ativ.
-												</a>
-												-->
-												<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
-														<span class="glyphicon glyphicon-refresh"></span>Ref.
-												</button>
-											<?php echo form_error('Cadastrar'); ?>	
+										</div>	
+										<div id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+											<div class="row text-left">
+												<div class="col-md-12">
+													<div class="row">	
+														<div class="col-md-6">	
+															<br>
+															<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addAtividadeModal">
+																<span class="glyphicon glyphicon-plus"></span>Cadastrar
+															</button>
+														</div>	
+															<!--
+															<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>atividade2/cadastrar3/" role="button"> 
+																<span class="glyphicon glyphicon-plus"></span>Ativ.
+															</a>
+															-->
+														<div class="col-md-6">		
+															<br>
+															<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+																<span class="glyphicon glyphicon-refresh"></span>Ref.
+															</button>
+														</div>
+													</div>	
+													<?php echo form_error('Cadastrar'); ?>
+												</div>	
 											</div>
-											
 										</div>
-										
 									</div>
-									
 								</div>	
 							</div>		
 														   
@@ -336,29 +344,6 @@
 													</div>
 												</div>
 											</div>
-										</div>
-										
-										<div id="msgCadAtividadeSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header bg-success text-center">
-														<h5 class="modal-title" id="visulUsuarioModalLabel">Atividade</h5>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														  <span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-													<div class="modal-body">
-														Atividade cadastrada com sucesso!
-													</div>
-													<div class="modal-footer">
-														<div class="col-md-6">	
-															<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
-																<span class="glyphicon glyphicon-filter"></span> Fechar
-															</button>
-														</div>	
-													</div>
-												</div>
-											</div>
 										</div>										
 										
 									<?php } else { ?>
@@ -368,6 +353,28 @@
 											</button>
 										</div>
 									<?php } ?>
+									<div id="msgCadAtividadeSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header bg-success text-center">
+													<h5 class="modal-title" id="visulUsuarioModalLabel">Atividade</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													  <span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													Atividade cadastrada com sucesso!
+												</div>
+												<div class="modal-footer">
+													<div class="col-md-6">	
+														<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+															<span class="glyphicon glyphicon-filter"></span> Fechar
+														</button>
+													</div>	
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<?php } ?>
