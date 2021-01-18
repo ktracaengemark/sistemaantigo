@@ -2077,9 +2077,12 @@
 								-->
 								<div class="modal-footer">
 									<div class="col-md-6">	
-										<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+										<button class="btn btn-success btn-block" name="botaoFechar2" id="botaoFechar2" onclick="DesabilitaBotaoFechar(this.name)" value="0" type="submit">
 											<span class="glyphicon glyphicon-filter"></span> Fechar
 										</button>
+										<div class="col-md-12 alert alert-warning aguardar2" role="alert" >
+											Aguarde um instante! Estamos processando sua solicitação!
+										</div>
 									</div>
 									<!--<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>-->
 								</div>
@@ -2089,150 +2092,151 @@
 				</div>
 			</div>
 			</form>
-
-			<div id="addClienteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="addClienteModalLabel">Cadastrar Cliente</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							  <span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<span id="msg-error-cliente"></span>
-							<form method="post" id="insert_cliente_form">
-								
-								<div class="form-group">
-									<div class="row">
-										<div class="col-md-6">
-											<label for="NomeCliente">Nome do Cliente: *</label>
-											<input name="NomeCliente" type="text" class="form-control" id="NomeCliente" maxlength="255" placeholder="Nome do Cliente">
-										</div>
-										<div class="col-md-3">
-											<label for="CelularCliente">Celular: *</label>
-											<input type="text" class="form-control Celular" id="CelularCliente" maxlength="11" name="CelularCliente" placeholder="(XX)999999999">
-										</div>
-										<div class="col-md-3">
-											<label for="DataNascimento">Data do Aniversário:</label>
-											<input type="text" class="form-control Date" maxlength="10" name="DataNascimento" placeholder="DD/MM/AAAA">
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-lg-6 ">
-											<h4 class="mb-3">Sexo</h4>
-											<div class="col-md-3 mb-3 ">	
-												<div class="custom-control custom-radio">
-													<input type="radio" name="Sexo" class="custom-control-input "  id="Retirada" value="M">
-													<label class="custom-control-label" for="Masculino">Mas</label>
-												</div>
-											</div>
-											<div class="col-md-3 mb-3 ">	
-												<div class="custom-control custom-radio">
-													<input type="radio" name="Sexo" class="custom-control-input " id="Combinar" value="F">
-													<label class="custom-control-label" for="Feminino">Fem </label>
-												</div>
-											</div>
-											<div class="col-md-3 mb-3 ">
-												<div class="custom-control custom-radio">
-													<input type="radio" name="Sexo" class="custom-control-input " id="Correios" value="O">
-													<label class="custom-control-label" for="Outros">Outros</label>
-												</div>
-											</div>
-										</div>
-									</div>								
-								</div>
-								<div class="form-group">
-									<div class="row">
-										<div class="col-md-12 text-center">
-											<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#DadosComplementares" aria-expanded="false" aria-controls="DadosComplementares">
-												<span class="glyphicon glyphicon-menu-down"></span> Completar Dados
-											</button>
-										</div>
-									</div>
-								</div>
-								<div class="collapse" id="DadosComplementares">
-									<div class="form-group">
-										<div class="row">
-											<div class="col-md-3">
-												<label for="CepCliente">Cep:</label>
-												<input type="text" class="form-control Numero" id="CepCliente" maxlength="8" name="CepCliente">
-											</div>
-											<div class="col-md-6">
-												<label for="EnderecoCliente">Endreço:</label>
-												<input type="text" class="form-control" id="EnderecoCliente" maxlength="100" name="EnderecoCliente">
-											</div>
-											<div class="col-md-3">
-												<label for="NumeroCliente">Numero:</label>
-												<input type="text" class="form-control" id="NumeroCliente" maxlength="100" name="NumeroCliente">
-											</div>
-										</div>	
-										<div class="row">
-											<div class="col-md-3">
-												<label for="ComplementoCliente">Complemento:</label>
-												<input type="text" class="form-control" id="ComplementoCliente" maxlength="100" name="ComplementoCliente" >
-											</div>	
-											<div class="col-md-3">
-												<label for="BairroCliente">Bairro:</label>
-												<input type="text" class="form-control" id="BairroCliente" maxlength="100" name="BairroCliente" >
-											</div>
-											<div class="col-md-3">
-												<label for="CidadeCliente">Município:</label>
-												<input type="text" class="form-control" id="CidadeCliente" maxlength="100" name="CidadeCliente" >
-											</div>
-											<div class="col-md-3">
-												<label for="EstadoCliente">Estado:</label>
-												<input type="text" class="form-control" id="EstadoCliente" maxlength="2" name="EstadoCliente" >
-											</div>
-										</div>	
-										<div class="row">
-											<div class="col-md-3 ">
-												<label class="" for="ReferenciaCliente">Referencia:</label>
-												<textarea class="form-control " id="ReferenciaCliente" name="ReferenciaCliente"></textarea>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="form-group row">
-									<div class="col-sm-6">
-										<br>
-										<button type="submit" class="btn btn-success btn-block">
-											<span class="glyphicon glyphicon-plus"></span> Cadastrar
-										</button>
-										<!--<input type="submit" name="CadCliente" id="CadCliente" value="Cadastrar" class="btn btn-success">-->
-									</div>
-									<div class="col-sm-6">
-										<br>
-										<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-											<span class="glyphicon glyphicon-remove"></span> Fechar
-										</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div id="msgClienteExiste" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header bg-warning text-center">
-							<h5 class="modal-title" id="existeClienteModalLabel">Atenção</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							  <span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							Este Celular já é Cadastrado!
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
-						</div>
-					</div>
-				</div>
-			</div>			
-			
 		</div>
 	</div>
 </div>
+
+<div id="addClienteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addClienteModalLabel">Cadastrar Cliente</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-cliente"></span>
+				<form method="post" id="insert_cliente_form">
+					
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-6">
+								<label for="NomeCliente">Nome do Cliente: *</label>
+								<input name="NomeCliente" type="text" class="form-control" id="NomeCliente" maxlength="255" placeholder="Nome do Cliente">
+							</div>
+							<div class="col-md-3">
+								<label for="CelularCliente">Celular: *</label>
+								<input type="text" class="form-control Celular" id="CelularCliente" maxlength="11" name="CelularCliente" placeholder="(XX)999999999">
+							</div>
+							<div class="col-md-3">
+								<label for="DataNascimento">Data do Aniversário:</label>
+								<input type="text" class="form-control Date" maxlength="10" name="DataNascimento" placeholder="DD/MM/AAAA">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6 ">
+								<h4 class="mb-3">Sexo</h4>
+								<div class="col-md-3 mb-3 ">	
+									<div class="custom-control custom-radio">
+										<input type="radio" name="Sexo" class="custom-control-input "  id="Retirada" value="M">
+										<label class="custom-control-label" for="Masculino">Mas</label>
+									</div>
+								</div>
+								<div class="col-md-3 mb-3 ">	
+									<div class="custom-control custom-radio">
+										<input type="radio" name="Sexo" class="custom-control-input " id="Combinar" value="F">
+										<label class="custom-control-label" for="Feminino">Fem </label>
+									</div>
+								</div>
+								<div class="col-md-3 mb-3 ">
+									<div class="custom-control custom-radio">
+										<input type="radio" name="Sexo" class="custom-control-input " id="Correios" value="O">
+										<label class="custom-control-label" for="Outros">Outros</label>
+									</div>
+								</div>
+							</div>
+						</div>								
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#DadosComplementares" aria-expanded="false" aria-controls="DadosComplementares">
+									<span class="glyphicon glyphicon-menu-down"></span> Completar Dados
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="collapse" id="DadosComplementares">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-3">
+									<label for="CepCliente">Cep:</label>
+									<input type="text" class="form-control Numero" id="CepCliente" maxlength="8" name="CepCliente">
+								</div>
+								<div class="col-md-6">
+									<label for="EnderecoCliente">Endreço:</label>
+									<input type="text" class="form-control" id="EnderecoCliente" maxlength="100" name="EnderecoCliente">
+								</div>
+								<div class="col-md-3">
+									<label for="NumeroCliente">Numero:</label>
+									<input type="text" class="form-control" id="NumeroCliente" maxlength="100" name="NumeroCliente">
+								</div>
+							</div>	
+							<div class="row">
+								<div class="col-md-3">
+									<label for="ComplementoCliente">Complemento:</label>
+									<input type="text" class="form-control" id="ComplementoCliente" maxlength="100" name="ComplementoCliente" >
+								</div>	
+								<div class="col-md-3">
+									<label for="BairroCliente">Bairro:</label>
+									<input type="text" class="form-control" id="BairroCliente" maxlength="100" name="BairroCliente" >
+								</div>
+								<div class="col-md-3">
+									<label for="CidadeCliente">Município:</label>
+									<input type="text" class="form-control" id="CidadeCliente" maxlength="100" name="CidadeCliente" >
+								</div>
+								<div class="col-md-3">
+									<label for="EstadoCliente">Estado:</label>
+									<input type="text" class="form-control" id="EstadoCliente" maxlength="2" name="EstadoCliente" >
+								</div>
+							</div>	
+							<div class="row">
+								<div class="col-md-3 ">
+									<label class="" for="ReferenciaCliente">Referencia:</label>
+									<textarea class="form-control " id="ReferenciaCliente" name="ReferenciaCliente"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">	
+						<div class="col-sm-6">
+							<br>
+							<button type="submit" class="btn btn-success btn-block" name="botaoCad" id="botaoCad" >
+								<span class="glyphicon glyphicon-plus"></span> Cadastrar
+							</button>
+						</div>
+						<div class="col-sm-6">
+							<br>
+							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFechar" id="botaoFechar">
+								<span class="glyphicon glyphicon-remove"></span> Fechar
+							</button>
+						</div>	
+						<div class="col-md-12 alert alert-warning aguardar1" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="msgClienteExiste" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-warning text-center">
+				<h5 class="modal-title" id="existeClienteModalLabel">Atenção</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				Este Celular já é Cadastrado!
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>			

@@ -367,9 +367,12 @@
 												</div>
 												<div class="modal-footer">
 													<div class="col-md-6">	
-														<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+														<button class="btn btn-success btn-block" name="botaoFechar2" id="botaoFechar2" onclick="DesabilitaBotaoFechar(this.name)" value="0" type="submit">
 															<span class="glyphicon glyphicon-filter"></span> Fechar
 														</button>
+														<div class="col-md-12 alert alert-warning aguardar2" role="alert" >
+															Aguarde um instante! Estamos processando sua solicitação!
+														</div>
 													</div>	
 												</div>
 											</div>
@@ -405,18 +408,21 @@
 							<input name="Novo_Atividade" type="text" class="form-control" id="Novo_Atividade" placeholder="Atividade">
 						</div>
 					</div>
-					<div class="form-group row">
+					<div class="form-group row">	
 						<div class="col-sm-6">
 							<br>
-							<button type="submit" class="btn btn-success btn-block">
+							<button type="submit" class="btn btn-success btn-block" name="botaoCad" id="botaoCad" >
 								<span class="glyphicon glyphicon-plus"></span> Cadastrar
 							</button>
 						</div>
 						<div class="col-sm-6">
 							<br>
-							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFechar" id="botaoFechar">
 								<span class="glyphicon glyphicon-remove"></span> Fechar
 							</button>
+						</div>	
+						<div class="col-md-12 alert alert-warning aguardar1" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
 					</div>
 				</form>

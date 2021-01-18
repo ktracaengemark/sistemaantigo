@@ -580,9 +580,12 @@
 												-->
 												<div class="modal-footer">
 													<div class="col-md-6">	
-														<button class="btn btn-success btn-block" name="pesquisar" value="0" type="submit">
+														<button class="btn btn-success btn-block" name="botaoFechar2" id="botaoFechar2" onclick="DesabilitaBotaoFechar(this.name)" value="0" type="submit">
 															<span class="glyphicon glyphicon-filter"></span> Fechar
 														</button>
+														<div class="col-md-12 alert alert-warning aguardar2" role="alert" >
+															Aguarde um instante! Estamos processando sua solicitação!
+														</div>
 													</div>
 													<!--<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>-->
 												</div>
@@ -593,55 +596,56 @@
 							</div>
 							<?php } ?>
 							</form>
-
-							<div id="addMotivoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="addMotivoModalLabel">Cadastrar Motivo</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											  <span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											<span id="msg-error-motivo"></span>
-											<form method="post" id="insert_motivo_form">
-												<div class="form-group row">
-													<label class="col-sm-2 col-form-label">Motivo</label>
-													<div class="col-sm-10">
-														<input name="Novo_Motivo" type="text" class="form-control" id="Novo_Motivo" placeholder="Motivo">
-													</div>
-												</div>
-												<div class="form-group row">
-													<label class="col-sm-2 col-form-label">Descrição</label>
-													<div class="col-sm-10">
-														<input name="Desc_Motivo" type="text" class="form-control" id="Desc_Motivo" placeholder="Descrição">
-													</div>
-												</div>
-												<div class="form-group row">
-													<div class="col-sm-6">
-														<br>
-														<button type="submit" class="btn btn-success btn-block">
-															<span class="glyphicon glyphicon-plus"></span> Cadastrar
-														</button>
-														<!--<input type="submit" name="CadMotivo" id="CadMotivo" value="Cadastrar" class="btn btn-success">-->
-													</div>
-													<div class="col-sm-6">
-														<br>
-														<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
-															<span class="glyphicon glyphicon-remove"></span> Fechar
-														</button>
-													</div>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
 						</div>
 					</div>							
 				</div>
 			</div>
 		</div>
 	</div>	
+</div>
+<div id="addMotivoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addMotivoModalLabel">Cadastrar Motivo</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-motivo"></span>
+				<form method="post" id="insert_motivo_form">
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Motivo</label>
+						<div class="col-sm-10">
+							<input name="Novo_Motivo" type="text" class="form-control" id="Novo_Motivo" placeholder="Motivo">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Descrição</label>
+						<div class="col-sm-10">
+							<input name="Desc_Motivo" type="text" class="form-control" id="Desc_Motivo" placeholder="Descrição">
+						</div>
+					</div>
+					<div class="form-group row">	
+						<div class="col-sm-6">
+							<br>
+							<button type="submit" class="btn btn-success btn-block" name="botaoCad" id="botaoCad" >
+								<span class="glyphicon glyphicon-plus"></span> Cadastrar
+							</button>
+						</div>
+						<div class="col-sm-6">
+							<br>
+							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFechar" id="botaoFechar">
+								<span class="glyphicon glyphicon-remove"></span> Fechar
+							</button>
+						</div>	
+						<div class="col-md-12 alert alert-warning aguardar1" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>

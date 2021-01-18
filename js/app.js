@@ -26,6 +26,27 @@ exibir();
 exibir_confirmar();	
 Aguardar();
 
+//Função que desabilita a Mensagem de Aguardar.
+function Aguardar () {
+	$('.aguardar').hide();
+	$('.aguardar1').hide();
+	$('.aguardar2').hide();
+	$('.exibir').show();
+	$('#botaoFechar2').show();
+}
+
+function exibir(){
+	
+	$('.Mostrar').show();
+	$('.NMostrar').hide();
+	
+}
+
+function exibir_confirmar(){
+	$('.Open').show();
+	$('.Close').hide();
+}
+
 // Funções de cadastros auxiliares
 $(document).ready(function(){
 	
@@ -35,7 +56,16 @@ $(document).ready(function(){
 		if($('#Novo_Motivo').val() == "" || $('#Desc_Motivo').val() == ""){
 			//Alerta de campo  vazio
 			$("#msg-error-motivo").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
-		}else{		
+		}else{
+			//Fechar o botão cadastrar
+			$('#botaoCad').hide();
+								
+			//Fechar o botão fechar
+			$('#botaoFechar').hide();
+			
+			//Abre o Aguardar
+			$('.aguardar1').show();	
+			
 			//Receber os dados do formulário
 			var dados = $("#insert_motivo_form").serialize();
 			//console.log(dados);
@@ -73,7 +103,16 @@ $(document).ready(function(){
 		if($('#Novo_Categoria').val() == ""){
 			//Alerta de campo  vazio
 			$("#msg-error-categoria").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
-		}else{		
+		}else{
+			//Fechar o botão cadastrar
+			$('#botaoCad').hide();
+								
+			//Fechar o botão fechar
+			$('#botaoFechar').hide();
+			
+			//Abre o Aguardar
+			$('.aguardar1').show();
+			
 			//Receber os dados do formulário
 			var dados = $("#insert_categoria_form").serialize();
 			//console.log(dados);
@@ -111,11 +150,20 @@ $(document).ready(function(){
 		if($('#Novo_Atividade').val() == ""){
 			//Alerta de campo  vazio
 			$("#msg-error-atividade").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
-		}else{		
+		}else{
+			//Fechar o botão cadastrar
+			$('#botaoCad').hide();
+								
+			//Fechar o botão fechar
+			$('#botaoFechar').hide();
+			
+			//Abre o Aguardar
+			$('.aguardar1').show();	
+					
 			//Receber os dados do formulário
 			var dados = $("#insert_atividade_form").serialize();
 			//console.log(dados);
-			
+
 			$.post(window.location.origin+ '/' + app + '/cadastros/Atividade.php?', dados, function (retorna){
 			 //console.log(retorna);
 				if(retorna == 1){
@@ -156,10 +204,17 @@ $(document).ready(function(){
 			var tamanho = celular.toString().length;
 			//console.log(tamanho);
 			
-			if( tamanho == 11 ) {	
+			if( tamanho == 11 ) {
+				//Fechar o botão cadastrar
+				$('#botaoCad').hide();
+									
+				//Fechar o botão fechar
+				$('#botaoFechar').hide();
+				
+				//Abre o Aguardar
+				$('.aguardar1').show();	
 				
 				//Receber os dados do formulário
-				
 				var dados = $("#insert_cliente_form").serialize();
 				//console.log(dados);
 				
@@ -218,10 +273,17 @@ $(document).ready(function(){
 			var tamanho = celular.toString().length;
 			//console.log(tamanho);
 			
-			if( tamanho == 11 ) {	
+			if( tamanho == 11 ) {
+				//Fechar o botão cadastrar
+				$('#botaoCad').hide();
+									
+				//Fechar o botão fechar
+				$('#botaoFechar').hide();
+				
+				//Abre o Aguardar
+				$('.aguardar1').show();	
 				
 				//Receber os dados do formulário
-				
 				var dados = $("#insert_fornecedor_form").serialize();
 				//console.log(dados);
 				
@@ -256,22 +318,12 @@ $(document).ready(function(){
 	
 });
 
-//Função que desabilita a Mensagem de Aguardar.
-function Aguardar () {
-	$('.aguardar').hide();
-	$('.exibir').show();
-}
-
-function exibir(){
+//Função que desabilita o botão fechar após 1 click, evitando mais de um envio de formulário.
+function DesabilitaBotaoFechar () {
 	
-	$('.Mostrar').show();
-	$('.NMostrar').hide();
-	
-}
+	$('#botaoFechar2').hide();
+	$('.aguardar2').show();
 
-function exibir_confirmar(){
-	$('.Open').show();
-	$('.Close').hide();
 }
 
 function dateDiff() {
@@ -798,6 +850,7 @@ var dateTimePickerOptions = {
     //minDate: moment(m + '/' + d + '/' + y),
     locale: 'pt-br'
 }
+
 
 //Função que desabilita o botão submit após 1 click, evitando mais de um envio de formulário.
 function DesabilitaBotao (valor) {
