@@ -1356,14 +1356,14 @@ class Loginempresa extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #set logout in database
-        if ($_SESSION['log'] && $m === TRUE) {
+        if ($_SESSION['log']['idSis_Empresa'] && $m === TRUE) {
             $this->Loginempresa_model->set_acesso($_SESSION['log']['idSis_Empresa'], 'LOGOUT');
         } else {
             if (!isset($_SESSION['log']['idSis_Empresa'])) {
                 $_SESSION['log']['idSis_Empresa'] = 1;
             }
             $this->Loginempresa_model->set_acesso($_SESSION['log']['idSis_Empresa'], 'TIMEOUT');
-            $data['msg'] = '?m=2';
+            $data['msg'] = '?m=3';
         }
 
         #clear de session data
@@ -1383,7 +1383,7 @@ class Loginempresa extends CI_Controller {
          *
          */
 
-        redirect(base_url() . 'loginempresa/' . $data['msg']);
+        redirect(base_url() . 'login/' . $data['msg']);
         #redirect('loginempresa');
     }
 

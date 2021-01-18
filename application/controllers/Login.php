@@ -73,6 +73,8 @@ class Login extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Usuário ativado com sucesso! Faça o login para acessar o sistema.</strong>', 'sucesso', TRUE, TRUE, TRUE);
         elseif ($this->input->get('m') == 5)
             $data['msg'] = $this->basico->msg('<strong>Link expirado.</strong>', 'erro', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 6)
+            $data['msg'] = $this->basico->msg('<strong>Faça Login, para acessar o sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
 
@@ -1678,7 +1680,7 @@ class Login extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         #set logout in database
-        if ($_SESSION['log'] && $m === TRUE) {
+        if ($_SESSION['log']['idSis_Usuario'] && $m === TRUE) {
             $this->Login_model->set_acesso($_SESSION['log']['idSis_Usuario'], 'LOGOUT');
         } else {
             if (!isset($_SESSION['log']['idSis_Usuario'])) {

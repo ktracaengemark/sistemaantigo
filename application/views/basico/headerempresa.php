@@ -1,25 +1,33 @@
 <?php
-/*
 #versão antiga do controle de sessão
-if (!isset($_SESSION['log'])) redirect('login/sair');
+//if (!isset($_SESSION['log'])) redirect('login/sair');
+if (!isset($_SESSION['log']['idSis_Empresa'])) redirect('loginempresa/sair/FALSE');
+$data['msg'] = '?m=6';
+//if (!isset($_SESSION['log']['idSis_Usuario'])) redirect('login'.$data['msg']);
+//if (!isset($_SESSION['log']['idSis_Usuario'])) redirect(base_url() . 'login' . $data['msg']);
 
-#tempo de sessão = 5 horas
-$tempo = 18000;
-#$tempo = 5;
+#tempo de sessão = 2 horas
+$tempo = 7200;
+//teste de 30 segundos
+//$tempo = 30;
 
 #controle de sessão
+/*
 if ( (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $tempo)) || !isset($_SESSION['log'])) {
     redirect('login/sair/FALSE');
 }
-$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 */
+if ((isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > $tempo)) || !isset($_SESSION['log']['idSis_Empresa'])) {
+    redirect('loginempresa/sair/FALSE');
+}
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
-        <!--<meta http-equiv="refresh" content="<?php echo $tempo+1; ?>;<?php echo base_url(); ?>loginempresa/sair/FALSE"/>-->
+        <meta http-equiv="refresh" content="<?php echo $tempo+1; ?>;<?php echo base_url(); ?>loginempresa/sair/FALSE"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
