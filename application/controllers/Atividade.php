@@ -84,6 +84,7 @@ class Atividade extends CI_Controller {
             $data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+			$data['query']['Data_Cad_Atividade'] = date('Y-m-d H:i:s', time());
 			
             $data['campos'] = array_keys($data['query']);
             $data['anterior'] = array();
