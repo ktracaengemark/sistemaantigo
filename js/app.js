@@ -31,8 +31,10 @@ function Aguardar () {
 	$('.aguardar').hide();
 	$('.aguardar1').hide();
 	$('.aguardar2').hide();
+	$('.aguardarsalvar').hide();
 	$('.exibir').show();
 	$('#botaoFechar2').show();
+	$('#botaoSalvar').show();
 }
 
 function exibir(){
@@ -319,11 +321,15 @@ $(document).ready(function(){
 });
 
 //Função que desabilita o botão fechar após 1 click, evitando mais de um envio de formulário.
-function DesabilitaBotaoFechar () {
-	
+function DesabilitaBotaoSalvar () {	
+	$('#botaoSalvar').hide();
+	$('.aguardarsalvar').show();
+}
+
+//Função que desabilita o botão fechar após 1 click, evitando mais de um envio de formulário.
+function DesabilitaBotaoFechar () {	
 	$('#botaoFechar2').hide();
 	$('.aguardar2').show();
-
 }
 
 function dateDiff() {
