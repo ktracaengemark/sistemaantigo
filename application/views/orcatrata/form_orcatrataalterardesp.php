@@ -1247,8 +1247,6 @@
 										<?php echo form_error('ValorTotalOrca');?>
 										<input type="hidden" name="PRCount" id="PRCount" value="<?php echo $count['PRCount']; ?>"/>
 										<div class="input_fields_wrap21">
-											<?php if(isset($_SESSION['Orcatrata']['valortotalorca']) && $_SESSION['Orcatrata']['valortotalorca'] > 0.00)  { ?>
-
 												<?php
 												for ($i=1; $i <= $count['PRCount']; $i++) {
 												?>
@@ -1399,9 +1397,6 @@
 												<?php
 												}
 												?>
-											<?php
-											}
-											?>
 										</div>
 										<div class="panel panel-warning">
 											<div class="panel-heading text-left">
