@@ -266,8 +266,7 @@
 													<h4 class="modal-title">Tem certeza que deseja Salvar?</h4>
 												</div>
 												<div class="modal-body">
-													<p>Ao confirmar esta operação todos os dados serão salvos no sistema.<br>
-														Esta operação é irreversível.</p>
+													<p>Ao confirmar esta operação todos os dados serão salvos no sistema.</p>
 												</div>
 												<div class="modal-footer">
 													<div class="col-md-6 text-left">
@@ -276,9 +275,12 @@
 														</button>
 													</div>
 													<div class="col-md-6 text-right">
-														<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
+														<button class="btn btn-lg btn-primary" name="botaoFechar2" id="botaoFechar2" onclick="DesabilitaBotaoFechar(this.name)" data-loading-text="Aguarde..." type="submit">
 															<span class="glyphicon glyphicon-save"></span> Salvar
 														</button>
+														<div class="col-md-12 alert alert-warning aguardar2" role="alert" >
+															Aguarde um instante! Estamos processando sua solicitação!
+														</div>
 													</div>
 												</div>
 											</div>
