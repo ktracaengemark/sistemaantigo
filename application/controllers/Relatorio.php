@@ -179,7 +179,7 @@ class Relatorio extends CI_Controller {
 			'nome',
         ), TRUE));
 
-/*		   
+		/*		   
 		if (!$data['query']['DataInicio'])
            $data['query']['DataInicio'] = date("d/m/Y", mktime(0,0,0,date('m'),date('d'),date('Y')));
    
@@ -188,7 +188,8 @@ class Relatorio extends CI_Controller {
 
 		if (!$data['query']['Ano'])
            $data['query']['Ano'] = date('Y', time());	   
-*/
+		*/
+		//$_SESSION['DataInicio'] = $data['query']['DataInicio'];
         $_SESSION['FiltroAlteraParcela']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
 		$_SESSION['FiltroAlteraParcela']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
         $_SESSION['FiltroAlteraParcela']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
@@ -238,9 +239,28 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
+		$_SESSION['FiltroAlteraParcela']['Agrupar'] = $data['query']['Agrupar'];
+		$_SESSION['FiltroAlteraParcela']['Ultimo'] = $data['query']['Ultimo'];
+		$_SESSION['FiltroAlteraParcela']['nome'] = $data['query']['nome'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
 		$_SESSION['Imprimir']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];		
+		
+		/*
+		if (!$data['query']['DataInicio'])
+			$data['query']['DataInicio'] = "01/01/2021";
+		*/
+		/*
+			if($_SESSION['DataInicio']){
+			$data['query']['DataInicio'] = $_SESSION['DataInicio'];
+		} 
+		
+		echo "<br>";
+		echo "<pre>";
+		print_r($_SESSION['DataInicio']);
+		echo "</pre>";
+		exit();		
+		*/
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         $this->form_validation->set_rules('DataInicio', 'Data Início do Pedido', 'trim|valid_date');
@@ -369,6 +389,7 @@ class Relatorio extends CI_Controller {
 			'OT.DataEntregaOrca' => 'Data da Entrega',
 			'C.idApp_Cliente' => 'id do Cliente',
 			'C.NomeCliente' => 'Nome do Cliente',
+			'C.DataCadastroCliente' => 'Data do Cadastro',
         );
 
         $data['select']['Ordenamento'] = array(
@@ -407,16 +428,22 @@ class Relatorio extends CI_Controller {
 		$data['TipoFinanceiro'] = 'Receitas';
 		$data['TipoRD'] = 2;
         $data['nome'] = 'Cliente';
-		$data['print'] = 2;
+		$data['print'] = 1;
 		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
-		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistarec/';
+		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistacliente/';
 		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
 		$data['edit'] = 'orcatrata/alterarstatus/';
 		$data['alterarparc'] = 'Orcatrata/alterarparcelarec/';		
 
         #run form validation
         if ($this->form_validation->run() !== FALSE) {
-
+		/*
+		echo "<br>";
+		echo "<pre>";
+		print_r($_SESSION['DataInicio']);
+		echo "</pre>";
+		exit();		
+		*/
             #$data['bd']['Pesquisa'] = $data['query']['Pesquisa'];
             $data['bd']['Orcamento'] = $data['query']['Orcamento'];
             $data['bd']['Cliente'] = $data['query']['Cliente'];
@@ -6232,6 +6259,7 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idTab_Promocao',
+            'idTab_Catprod',
 			'Produtos',
 			'ProdutoDerivado',
 			'CodProd',
@@ -6268,6 +6296,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
 		//$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_catprod();
 		$data['select']['Prodaux3'] = $this->Relatorio_model->select_catprod();
 		$data['select']['Prodaux4'] = $this->Relatorio_model->select_prodaux4();
 		$data['select']['TipoProduto'] = $this->Relatorio_model->select_tipoproduto();
@@ -6277,6 +6306,7 @@ class Relatorio extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 			$data['bd']['ProdutoDerivado'] = $data['query']['ProdutoDerivado'];
 			$data['bd']['CodProd'] = $data['query']['CodProd'];
 			$data['bd']['Categoria'] = $data['query']['Categoria'];
@@ -6583,6 +6613,7 @@ class Relatorio extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'Atributo',
+			'idTab_Catprod',
 			'Ordenamento',
             'Campo',
         ), TRUE));
@@ -6600,7 +6631,7 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-        //$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
+        $data['select']['idTab_Catprod'] = $this->Relatorio_model->select_catprod();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
@@ -6610,6 +6641,7 @@ class Relatorio extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 			$data['bd']['Atributo'] = $data['query']['Atributo'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];

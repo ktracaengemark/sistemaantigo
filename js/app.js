@@ -26,12 +26,31 @@ exibir();
 exibir_confirmar();	
 Aguardar();
 
+function codigo(){
+	//alert('ok codigo');
+	var categoria = $('#idTab_Catprod').val();
+	var produto = $('#idTab_Produto').val();	
+	var variacao1 = $('#Opcao_Atributo_1').val();
+	var variacao2 = $('#Opcao_Atributo_2').val();		
+	
+	$('#Cod_Prod').val(categoria + ':' + produto + ':' + variacao1 + ':' + variacao2);
+	/*
+	console.log(categoria);		
+	console.log(produto);		
+	console.log(variacao1);		
+	console.log(variacao2);
+	*/
+}
+
 //Função que desabilita a Mensagem de Aguardar.
 function Aguardar () {
 	$('.aguardar').hide();
 	$('.aguardar1').hide();
 	$('.aguardar2').hide();
 	$('.aguardarsalvar').hide();
+	$('.aguardarCatprod').hide();
+	$('.aguardarAtributo').hide();
+	$('.aguardarOpcao').hide();
 	$('.exibir').show();
 	$('#botaoFechar2').show();
 	$('#botaoSalvar').show();
@@ -317,6 +336,194 @@ $(document).ready(function(){
 		}
 		
 	});	
+	
+	$('#insert_catprod_form').on('submit', function(event){
+		//alert('ok');
+		event.preventDefault();
+		if($('#Novo_Catprod').val() == "" || $('#TipoCatprod').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-catprod").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{
+			//Fechar o botão cadastrar
+			$('#botaoCadCatprod').hide();
+								
+			//Fechar o botão fechar
+			$('#botaoFecharCatprod').hide();
+			
+			//Abre o Aguardar
+			$('.aguardarCatprod').show();	
+			
+			//Receber os dados do formulário
+			var dados = $("#insert_catprod_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/cadastros/Catprod.php?', dados, function (retorna){
+			 //console.log(retorna);
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#insert_catprod_form')[0].reset();
+					
+					//Fechar a janela modal cadastrar
+					$('#addCatprodModal').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-catprod").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-catprod").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar Categoria!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}	
+	});
+	
+	$('#insert_produto_form').on('submit', function(event){
+		//alert('ok');
+		event.preventDefault();
+		if($('#Novo_Produto').val() == "" || $('#idCat_Produto').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-produto").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{
+			//Fechar o botão cadastrar
+			$('#botaoCad').hide();
+								
+			//Fechar o botão fechar
+			$('#botaoFechar').hide();
+			
+			//Abre o Aguardar
+			$('.aguardar1').show();	
+			
+			//Receber os dados do formulário
+			var dados = $("#insert_produto_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/cadastros/Produto.php?', dados, function (retorna){
+			 //console.log(retorna);
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#insert_produto_form')[0].reset();
+					
+					//Fechar a janela modal cadastrar
+					$('#addProdutoModal').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-produto").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-produto").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Produto!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}	
+	});
+	
+	$('#insert_atributo_form').on('submit', function(event){
+		//alert('ok');
+		event.preventDefault();
+		if($('#Novo_Atributo').val() == "" || $('#idCat_Atributo').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-atributo").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{
+			//Fechar o botão cadastrar
+			$('#botaoCadAtributo').hide();
+								
+			//Fechar o botão fechar
+			$('#botaoFecharAtributo').hide();
+			
+			//Abre o Aguardar
+			$('.aguardarAtributo').show();	
+			
+			//Receber os dados do formulário
+			var dados = $("#insert_atributo_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/cadastros/Atributo.php?', dados, function (retorna){
+			 //console.log(retorna);
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#insert_atributo_form')[0].reset();
+					
+					//Fechar a janela modal cadastrar
+					$('#addAtributoModal').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-atributo").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-atributo").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar Atributo!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}	
+	});
+	
+	$('#insert_opcao_form').on('submit', function(event){
+		//alert('ok - Opcao');
+		event.preventDefault();
+		if($('#Novo_Opcao').val() == "" || $('#idAtributo_Opcao').val() == "" || $('#idCat_Opcao').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-opcao").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{
+			//Fechar o botão cadastrar
+			$('#botaoCadOpcao').hide();
+								
+			//Fechar o botão fechar
+			$('#botaoFecharOpcao').hide();
+			
+			//Abre o Aguardar
+			$('.aguardarOpcao').show();	
+			
+			//Receber os dados do formulário
+			var dados = $("#insert_opcao_form").serialize();
+			console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/cadastros/Opcao.php?', dados, function (retorna){
+			 console.log(retorna);
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#insert_opcao_form')[0].reset();
+					
+					//Fechar a janela modal cadastrar
+					$('#addOpcaoModal').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-opcao").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-opcao").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar Opção!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}	
+	});
 	
 });
 

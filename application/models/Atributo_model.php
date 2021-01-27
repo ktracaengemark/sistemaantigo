@@ -100,7 +100,16 @@ class Atributo_model extends CI_Model {
     }	
 	
     public function get_atributo($data) {
-        $query = $this->db->query('SELECT * FROM Tab_Atributo WHERE idTab_Atributo = ' . $data);
+        $query = $this->db->query('
+			SELECT 
+				TA.*,
+				TCP.*
+			FROM 
+				Tab_Atributo AS TA
+					LEFT JOIN Tab_Catprod AS TCP ON TCP.idTab_Catprod = TA.idTab_Catprod
+			WHERE 
+				TA.idTab_Atributo = ' . $data . '
+		');
         $query = $query->result_array();
 
         /*

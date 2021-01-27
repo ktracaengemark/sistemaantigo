@@ -15,6 +15,18 @@ class Produtos_model extends CI_Model {
 
     public function set_produtos($data) {
 
+        $query = $this->db->insert('Tab_Produtos', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+
+    public function set_produtos_Original($data) {
+
         $query = $this->db->insert('Tab_Produto', $data);
 
         if ($this->db->affected_rows() === 0) {
@@ -126,41 +138,39 @@ class Produtos_model extends CI_Model {
     public function get_produtos($data) {
         $query = $this->db->query('
 			SELECT  
+				TPS.*,
+				TCP.*,
 				TP.idTab_Produto,
 				TP.Produtos,
-				TP.idSis_Usuario,
-				TP.idSis_Empresa,
-				TP.idTab_Modulo,
-				TP.UnidadeProduto,
-				TP.TipoProduto,
-				TP.CodProd,
-				TP.CodBarra,
-				TP.Prodaux1,
-				TP.Prodaux2,
-				TP.Prodaux3,
-				TP.Prodaux4,
-				TP.Fornecedor,
-				TP.ValorCompraProduto,
-				TP.ValorProduto,
-				TP.ValorProdutoSite,
-				TP.Categoria,
-				TP.Prod_Serv,
+				TOP1.idTab_Opcao,
+				TOP1.Opcao AS Opcao1,
+				TOP2.idTab_Opcao,
+				TOP2.Opcao AS Opcao2
+			FROM 
+				Tab_Produtos AS TPS
+					LEFT JOIN Tab_Catprod AS TCP ON TCP.idTab_Catprod = TPS.idTab_Catprod
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TPS.idTab_Produto
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_2
+			WHERE 
+				TPS.idTab_Produtos = ' . $data
+		);
+        $query = $query->result_array();
+		
+        return $query[0];
+    }
+
+    public function get_produtos_original($data) {
+        $query = $this->db->query('
+			SELECT  
+				TP.*,
 				TPRS.Prod_Serv AS TipoProdServ,
-				TP.ProdutoProprio,
-				TP.Aprovado,
-				TP.Arquivo,
-				TP.Ativo,
-				TP.VendaBalcao,
-				TP.VendaSite,
-				TP.PesoProduto,
-				TP.Comissao,
-				TP.Desconto,
-				TP.Atributo_1,
-				TP.Atributo_2,
-				TP.Atributo_3,
+				TM.idTab_Modelo,
+				TM.Modelo,
 				CTP.Catprod
 			FROM 
 				Tab_Produto AS TP
+					LEFT JOIN Tab_Modelo AS TM ON TM.idTab_Modelo = TP.idTab_Modelo
 					LEFT JOIN Tab_Catprod AS CTP ON CTP.idTab_Catprod = TP.Prodaux3
 					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TP.Prod_Serv
 			WHERE 
@@ -178,7 +188,14 @@ class Produtos_model extends CI_Model {
         */
 
         return $query[0];
-    }
+    }	
+
+    public function get_modelo2($data) {
+		$query = $this->db->query('SELECT * FROM Tab_Modelo WHERE idTab_Modelo = ' . $data);
+        $query = $query->result_array();
+
+        return $query[0];
+    }	
 
     public function get_modelo($data) {
 		$query = $this->db->query('SELECT * FROM Tab_Produto WHERE idTab_Produto = ' . $data);
@@ -211,19 +228,33 @@ class Produtos_model extends CI_Model {
     public function get_atributos($data) {
 		$query = $this->db->query('
 			SELECT 
-				TAS.idTab_Atributo_Select,
-				TAS.idTab_Catprod,
-				TAS.idTab_Atributo
+				TA.*
+			FROM 
+				Tab_Atributo AS TA
+			WHERE 
+				TA.idTab_Catprod = ' . $data . '
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }	
+	
+    public function get_atributos2($data) {
+		$query = $this->db->query('
+			SELECT 
+				TAS.*,
+				TA.*
 			FROM 
 				Tab_Atributo_Select AS TAS
+					LEFT JOIN Tab_Atributo AS TA ON TA.idTab_Atributo = TAS.idTab_Atributo
 			WHERE 
 				TAS.idTab_Catprod = ' . $data . '
 		');
         $query = $query->result_array();
 
         return $query;
-    }	
-
+    }
+	
 	public function get_opcao_select($data, $item) {
 		$query = $this->db->query('
 			SELECT * 
@@ -341,6 +372,45 @@ class Produtos_model extends CI_Model {
 
         return $query;
     }	
+
+    public function get_derivados2($data) {
+		$query = $this->db->query('
+			SELECT  
+				TPS.idTab_Produtos,
+				TPS.idSis_Usuario,
+				TPS.idSis_Empresa,
+				TPS.Cat_Prod,
+				TPS.idTab_Modulo,
+				TPS.idTab_Modelo,
+				TPS.Mod_Prod,
+				TPS.Opcao_Atributo_1,
+				TPS.Opcao_Atributo_2,
+				TPS.idTab_Produto,
+				TPS.Nome_Prod,
+				TPS.Cod_Prod,
+				TPS.Arquivo,
+				TPS.Ativo,
+				TPS.VendaSite,
+				TPS.Tipo_Valor_Prod,
+				TPS.Valor_Produto,
+				TPS.Qtd_Prod_Desc,
+				TPS.Qtd_Prod_Incr,
+				TPS.Comissao,
+				TDS.Desconto,
+				TCP.Nome_Cor_Prod,
+				TTP.Nome_Tam_Prod
+			FROM 
+				Tab_Produtos AS TPS
+					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TPS.Tipo_Valor_Prod
+					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Opcao_Atributo_2
+			WHERE 
+				TPS.idTab_Modelo = ' . $data . '
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }	
 	
     public function list_produtos1($id, $aprovado, $completo) {
 
@@ -375,6 +445,63 @@ class Produtos_model extends CI_Model {
 
                     $row->TipoProduto = $this->get_tipoproduto($row->TipoProduto);
                 }
+                return $query;
+            }
+        }
+    }
+    
+	public function list_produtos($data, $x) {
+		
+		$data['idTab_Produto'] = ($data['idTab_Produto'] != 0) ? ' AND TPS.idTab_Produto = ' . $data['idTab_Produto'] : FALSE;
+			
+			/*
+			echo "<pre>";
+			print_r($data['idTab_Produto']);
+			echo "</pre>";
+			exit();
+			*/
+		
+		
+        $query = $this->db->query('
+			SELECT 
+				TPS.*,
+				TCT.*,
+				TP.*,
+				TOP1.Opcao AS Atributo1,
+				TOP2.Opcao AS Atributo2
+			FROM 
+				Tab_Produtos AS TPS
+					LEFT JOIN Tab_Catprod AS TCT ON TCT.idTab_Catprod = TPS.idTab_Catprod
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TPS.idTab_Produto
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_2
+			WHERE 
+                TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TPS.idTab_Catprod = ' . $data['idTab_Catprod'] . '
+				' . $data['idTab_Produto'] . '
+			ORDER BY  
+				TPS.idTab_Produtos ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
                 return $query;
             }
         }
@@ -429,6 +556,14 @@ class Produtos_model extends CI_Model {
     }
 	
     public function update_produtos($data, $id) {
+
+        unset($data['idTab_Produtos']);
+        $query = $this->db->update('Tab_Produtos', $data, array('idTab_Produtos' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+	
+    public function update_produtos_Original($data, $id) {
 
         unset($data['idTab_Produto']);
         $query = $this->db->update('Tab_Produto', $data, array('idTab_Produto' => $id));
@@ -559,6 +694,18 @@ class Produtos_model extends CI_Model {
     }	
 	
     public function delete_produtos($id) {
+
+		$query = $this->db->delete('Tab_Produtos', array('idTab_Produtos' => $id));
+        $query = $this->db->delete('Tab_Valor', array('idTab_Produtos' => $id));
+		
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+	
+    public function delete_produtos_original($id) {
 
         $query = $this->db->delete('Tab_Atributo_Select', array('idTab_Produto' => $id));
 		$query = $this->db->delete('Tab_Opcao_Select', array('idTab_Produto' => $id));

@@ -1070,6 +1070,86 @@ if (isset($data) && $data) {
 
         return $array;
     }
+
+	public function select_atributo($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+				P.*,
+				CONCAT(IFNULL(P.Atributo,"")) AS Atributo
+            FROM
+                Tab_Atributo AS P
+            WHERE
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.idTab_Catprod = ' . $data . '
+			ORDER BY 
+				P.Atributo ASC
+			');
+        } else {
+            $query = $this->db->query('
+            SELECT
+				P.*,
+				CONCAT(IFNULL(P.Atributo,"")) AS Atributo
+            FROM
+                Tab_Atributo AS P
+            WHERE
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.idTab_Catprod = ' . $data . '
+			ORDER BY 
+				P.Atributo ASC
+			');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Atributo] = $row->Atributo;
+            }
+        }
+
+        return $array;
+    }
+	
+	public function select_produto($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+				P.idTab_Produto,
+				P.idTab_Catprod,
+				P.Produtos,
+				CONCAT(IFNULL(P.Produtos,"")) AS Produtos
+            FROM
+                Tab_Produto AS P
+            WHERE
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.idTab_Catprod = ' . $data . '
+			ORDER BY 
+				P.Produtos ASC
+			');
+        } else {
+            $query = $this->db->query('
+            SELECT
+				P.idTab_Produto,
+				P.idTab_Catprod,
+				P.Produtos,
+				CONCAT(IFNULL(P.Produtos,"")) AS Produtos
+            FROM
+                Tab_Produto AS P
+            WHERE
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				P.idTab_Catprod = ' . $data . '
+			ORDER BY 
+				P.Produtos ASC
+			');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Produto] = $row->Produtos;
+            }
+        }
+
+        return $array;
+    }
 	
 	public function select_produto1($data = FALSE) {
 
@@ -1113,7 +1193,7 @@ if (isset($data) && $data) {
         return $array;
     }
 
-	public function select_produto($data = FALSE) {
+	public function select_produto_original($data = FALSE) {
 
         if ($data === TRUE) {
             $array = $this->db->query(
@@ -3459,7 +3539,7 @@ if (isset($data) && $data) {
             SELECT
 				TCAT.idTab_Catprod,
 				TCAT.TipoCatprod,
-                CONCAT(IFNULL(TPRS.Prod_Serv,""), " - " ,IFNULL(TCAT.Catprod,"")) AS Catprod
+                CONCAT(IFNULL(TCAT.Catprod,"")) AS Catprod
             FROM 
                 Tab_Catprod AS TCAT
 					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TCAT.TipoCatprod
@@ -3474,7 +3554,7 @@ if (isset($data) && $data) {
             SELECT
 				TCAT.idTab_Catprod,
 				TCAT.TipoCatprod,
-                CONCAT(IFNULL(TPRS.Prod_Serv,""), " - " ,IFNULL(TCAT.Catprod,"")) AS Catprod
+                CONCAT(IFNULL(TCAT.Catprod,"")) AS Catprod
             FROM 
                 Tab_Catprod AS TCAT
 					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TCAT.TipoCatprod
@@ -3576,7 +3656,7 @@ if (isset($data) && $data) {
         return $array;
     }	
 	
-	public function select_atributo($data = FALSE) {
+	public function select_atributo_original($data = FALSE) {
 	
         if ($data === TRUE) {
             $array = $this->db->query('
@@ -3906,6 +3986,205 @@ if (isset($data) && $data) {
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' 
 				' . $permissao2 . '
+			ORDER BY 
+				TOP.Opcao ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Opcao] = $row->Opcao;
+            }
+        }
+
+        return $array;
+    }	
+
+	public function select_opcao_select33($data = FALSE) {
+		
+		$permissao1 = isset($_SESSION['Atributos'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][1] : 'AND idTab_Atributo = "0"';
+		
+		
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+				P.idTab_Opcao_Select,
+				P.idTab_Opcao,
+				P.idTab_Produto,
+				P.Item_Atributo,
+				TOP.Opcao,
+				CONCAT(IFNULL(TOP.Opcao,"")) AS Opcao
+            FROM
+                Tab_Opcao_Select AS P
+					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Opcao = P.idTab_Opcao
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY 
+				TOP.Opcao ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+				P.idTab_Opcao_Select,
+				P.idTab_Opcao,
+				P.idTab_Produto,
+				P.Item_Atributo,
+				TOP.Opcao,
+				CONCAT(IFNULL(TOP.Opcao,"")) AS Opcao
+            FROM
+                Tab_Opcao_Select AS P
+					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Opcao = P.idTab_Opcao
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY 
+				TOP.Opcao ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Opcao] = $row->Opcao;
+            }
+        }
+
+        return $array;
+    }	
+	
+	public function select_opcao_select22($data = FALSE) {
+		
+		$permissao2 = isset($_SESSION['Atributos'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][2] : 'AND idTab_Atributo = "0"';
+		
+		
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+				P.idTab_Opcao_Select,
+				P.idTab_Opcao,
+				P.idTab_Produto,
+				P.Item_Atributo,
+				TOP.Opcao,
+				CONCAT(IFNULL(TOP.Opcao,"")) AS Opcao
+            FROM
+                Tab_Opcao_Select AS P
+					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Opcao = P.idTab_Opcao
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY 
+				TOP.Opcao ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+				P.idTab_Opcao_Select,
+				P.idTab_Opcao,
+				P.idTab_Produto,
+				P.Item_Atributo,
+				TOP.Opcao,
+				CONCAT(IFNULL(TOP.Opcao,"")) AS Opcao
+            FROM
+                Tab_Opcao_Select AS P
+					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Opcao = P.idTab_Opcao
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY 
+				TOP.Opcao ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Opcao] = $row->Opcao;
+            }
+        }
+
+        return $array;
+    }	
+	
+	public function select_opcao_atributo1($categoria = FALSE, $atributo = FALSE) {
+		 
+		//$permissao2 = isset($_SESSION['Atributos'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][2] : 'AND idTab_Atributo = "0"';
+		$opcao = ($atributo) ? 'AND TOP.idTab_Atributo = ' . $atributo : FALSE;
+			/*
+			echo $this->db->last_query();
+			echo '<br>';
+			echo "<pre>";
+			print_r($categoria);
+			echo '<br>';
+			print_r($atributo);
+			echo '<br>';
+			print_r($opcao);
+			echo "</pre>";
+			exit();
+			*/  
+        if ($categoria === TRUE) {
+            $array = $this->db->query('
+            SELECT
+				TOP.*,
+				CONCAT(IFNULL(TOP.Opcao,"")) AS Opcao
+            FROM
+                Tab_Opcao AS TOP
+            WHERE
+				TOP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TOP.idTab_Catprod = ' . $categoria . '
+				' . $opcao . '
+			ORDER BY 
+				TOP.Opcao ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+				TOP.*,
+				CONCAT(IFNULL(TOP.Opcao,"")) AS Opcao
+            FROM
+                Tab_Opcao AS TOP
+            WHERE
+				TOP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TOP.idTab_Catprod = ' . $categoria . '
+				' . $opcao . ' 
+			ORDER BY 
+				TOP.Opcao ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Opcao] = $row->Opcao;
+            }
+        }
+
+        return $array;
+    }	
+
+	public function select_opcao_atributo2($categoria = FALSE, $atributo = FALSE) {
+		
+		//$permissao1 = isset($_SESSION['Atributos'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][1] : 'AND idTab_Atributo = "0"';
+		$opcao = ($atributo) ? 'AND TOP.idTab_Atributo = ' . $atributo : FALSE;
+		
+        if ($categoria === TRUE) {
+            $array = $this->db->query('
+            SELECT
+				TOP.*,
+				CONCAT(IFNULL(TOP.Opcao,"")) AS Opcao
+            FROM
+                Tab_Opcao AS TOP
+            WHERE
+				TOP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TOP.idTab_Catprod = ' . $categoria . '
+				' . $opcao . '
+			ORDER BY 
+				TOP.Opcao ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+				TOP.*,
+				CONCAT(IFNULL(TOP.Opcao,"")) AS Opcao
+            FROM
+                Tab_Opcao AS TOP
+            WHERE
+				TOP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TOP.idTab_Catprod = ' . $categoria . '
+				' . $opcao . '
 			ORDER BY 
 				TOP.Opcao ASC
     ');

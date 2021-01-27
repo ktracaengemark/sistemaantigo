@@ -82,19 +82,29 @@
 										?>
 
 										<?php if ($metodo > 1) { ?>
-										<input type="hidden" name="idTab_Atributo_Select<?php echo $i ?>" value="<?php echo $atributo[$i]['idTab_Atributo_Select']; ?>"/>
+										
+											<input type="hidden" name="idTab_Atributo<?php echo $i ?>" value="<?php echo $atributo[$i]['idTab_Atributo']; ?>"/>
+										
 										<?php } ?>
-
+										
 										<div class="form-group" id="3div<?php echo $i ?>">
 											<div class="panel panel-info">
 												<div class="panel-heading">			
 													<div class="row">
+														<div class="col-md-6">
+															<label for="Atributo">Atributo <?php echo $i ?></label>
+																<input type="text" class="form-control" id="Atributo<?php echo $i ?>" maxlength="44"
+																	name="Atributo<?php echo $i ?>" value="<?php echo $atributo[$i]['Atributo'] ?>">
+														</div>
+														<!--
 														<div class="col-md-5">
+														
 															<label for="idTab_Atributo<?php echo $i ?>">Atributo <?php echo $i ?></label>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 																	 id="listadinamica3<?php echo $i ?>" name="idTab_Atributo<?php echo $i ?>">
 																<option value="">-- Selecione o Atributo --</option>
 																<?php
+																/*
 																foreach ($select['idTab_Atributo'] as $key => $row) {
 																	if ($atributo[$i]['idTab_Atributo'] == $key) {
 																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -102,16 +112,20 @@
 																		echo '<option value="' . $key . '">' . $row . '</option>';
 																	}
 																}
+																*/
 																?>
 															</select>
+															
 														</div>
+														-->
+														<!--
 														<div class="col-md-1">
 															<label><br></label><br>
 															<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
 																<span class="glyphicon glyphicon-trash"></span>
 															</button>
 														</div>
-														
+														-->
 													</div>
 												</div>	
 											</div>		
@@ -122,13 +136,13 @@
 										?>
 
 										</div>
-										
+										<!--
 										<div class="form-group">
 											<a class="btn btn-xs btn-danger" onclick="adiciona_atributo()">
 												<span class="glyphicon glyphicon-arrow-up"></span> Adiciona Atributo
 											</a>
 										</div>
-										
+										-->
 									</div>
 								</div>
 							</div>
@@ -153,12 +167,13 @@
 								<span class="glyphicon glyphicon-save"></span> Salvar
 							</button>
 						</div>
+						<!--
 						<div class="col-md-6 text-right">
 							<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 								<span class="glyphicon glyphicon-trash"></span> Excluir
 							</button>
 						</div>
-
+						-->
 						<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">

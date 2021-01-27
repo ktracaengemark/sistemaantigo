@@ -280,7 +280,7 @@
 										}
 									}
 									?>
-								</select>
+									</select>
 							</div>	
 							<div class="col-md-3">
 								<label for="CanceladoOrca">Cancelado</label>
@@ -425,8 +425,16 @@
 									<span class="input-group-addon" disabled>
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
+									<?php 
+										if(isset($_SESSION['DataInicio'])){
+											//$datainicio = $_SESSION['DataInicio'];
+											$datainicio = $this->basico->mascara_data($_SESSION['DataInicio'], 'barras');
+										}else{
+											$datainicio = $query['DataInicio'];
+										}
+									?>
 									<input type="text" class="form-control Date" maxlength="10" placeholder="DD/MM/AAAA"
-											autofocus name="DataInicio" value="<?php echo set_value('DataInicio', $query['DataInicio']); ?>">
+											autofocus name="DataInicio" value="<?php echo set_value('DataInicio', $datainicio); ?>">
 								</div>
 							</div>
 							<div class="col-md-3">

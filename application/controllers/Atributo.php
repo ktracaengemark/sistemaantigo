@@ -49,6 +49,7 @@ class Atributo extends CI_Controller {
 		
         $data['atributo'] = quotes_to_entities($this->input->post(array(
             #### Tab_Atributo ####
+            'idTab_Catprod',
             'idTab_Atributo',
             'Atributo',			
         ), TRUE));
@@ -57,10 +58,10 @@ class Atributo extends CI_Controller {
         //Fim do trecho de código que dá pra melhorar
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        #### Tab_Atributo ####
-
+		$this->form_validation->set_rules('idTab_Catprod', 'Produto', 'required|trim');
 		$this->form_validation->set_rules('Atributo', 'Atributo', 'required|trim');		
+			
+		$data['select']['idTab_Catprod'] = $this->Basico_model->select_catprod();
 		
         $data['titulo'] = 'Cadastrar';
         $data['form_open_path'] = 'atributo/cadastrar';
@@ -150,6 +151,7 @@ class Atributo extends CI_Controller {
 		
         $data['atributo'] = quotes_to_entities($this->input->post(array(
             #### Tab_Atributo ####
+            'idTab_Catprod',
             'idTab_Atributo',			
             'Atributo',
         ), TRUE));
@@ -159,10 +161,10 @@ class Atributo extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['POCount']; $i++) {
 
-            if ($this->input->post('Opcao' . $i) || $this->input->post('idTab_Atributo' . $i)) {
+            if ($this->input->post('idTab_Opcao' . $i) || $this->input->post('Opcao' . $i) || $this->input->post('idTab_Atributo' . $i)) {
 				$data['opcao'][$j]['idTab_Opcao'] = $this->input->post('idTab_Opcao' . $i);
                 $data['opcao'][$j]['idTab_Atributo'] = $this->input->post('idTab_Atributo' . $i);
-				$data['opcao'][$j]['idTab_Atributo'] = $this->input->post('idTab_Atributo' . $i);
+				//$data['opcao'][$j]['idTab_Atributo'] = $this->input->post('idTab_Atributo' . $i);
 				$data['opcao'][$j]['Opcao'] = $this->input->post('Opcao' . $i);
                 $j++;
             }
@@ -194,8 +196,10 @@ class Atributo extends CI_Controller {
         }
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-		$this->form_validation->set_rules('Atributo', 'Atributo', 'required|trim');
+		$this->form_validation->set_rules('idTab_Catprod', 'Produto', 'required|trim');
+		$this->form_validation->set_rules('Atributo', 'Atributo', 'required|trim');		
+			
+		$data['select']['idTab_Catprod'] = $this->Basico_model->select_catprod();
 		
 		#$data['select']['idTab_Atributo'] = $this->Basico_model->select_atributo($data['atributo']['idTab_Atributo']);
         
@@ -230,9 +234,9 @@ class Atributo extends CI_Controller {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Atributo ####
 			$data['atributo']['Atributo'] = trim(mb_strtoupper($data['atributo']['Atributo'], 'UTF-8'));
-			$data['atributo']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
-            $data['atributo']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-            $data['atributo']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+			//$data['atributo']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];             
+            //$data['atributo']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+            //$data['atributo']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			$data['update']['atributo']['anterior'] = $this->Atributo_model->get_atributo($data['atributo']['idTab_Atributo']);
             $data['update']['atributo']['campos'] = array_keys($data['atributo']);
             $data['update']['atributo']['auditoriaitem'] = $this->basico->set_log(
@@ -260,6 +264,7 @@ class Atributo extends CI_Controller {
 					$data['update']['opcao']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
                     $data['update']['opcao']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['opcao']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+                    $data['update']['opcao']['inserir'][$j]['idTab_Catprod'] = $data['atributo']['idTab_Catprod'];
                     $data['update']['opcao']['inserir'][$j]['idTab_Atributo'] = $data['atributo']['idTab_Atributo'];
                 }
 

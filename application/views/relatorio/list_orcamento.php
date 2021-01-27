@@ -84,6 +84,7 @@
 						<th class="active">Cont.</th>
 						<th class="active">Pedido</th>
 						
+						<!--<th class="active">Contagem</th>-->
 						
 						<th class="active">Empresa</th>
 						
@@ -171,6 +172,7 @@
 							echo '<td>' . $count . '</td>';
 							echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
 							
+							//echo '<td>' . $report->soma->contagem . '</td>';
 							
 							echo '<td>' . $row['NomeEmpresa'] . '</td>';
 							

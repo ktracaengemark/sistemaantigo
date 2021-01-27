@@ -23,7 +23,7 @@
 							<th class="active">Código</th>
 							<th class="active">Tipo</th>
 							<th class="active">Categoria</th>
-							<th class="active">Produtos Derivados</th>
+							<th class="active">Produto</th>
 						</tr>
 					</thead>
 
@@ -42,7 +42,7 @@
 						</td>
 						
 						<td class="notclickable">
-							<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'produtos/alterar3/' . $row['idTab_Produto'] . ''; ?>">
+							<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'produtos/alterar2/' . $row['idTab_Produtos'] . ''; ?>">
 								<span class="glyphicon glyphicon-edit notclickable"></span>
 							</a>
 						</td>						

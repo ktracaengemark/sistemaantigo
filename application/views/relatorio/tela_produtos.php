@@ -36,12 +36,12 @@
 				<div class="form-group">	
 					<div class="row text-left">
 						<div class="col-md-4">
-							<label for="Ordenamento">Categoria</label>
+							<label for="idTab_Catprod">Categoria</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-									id="Prodaux3" name="Prodaux3">
+									id="idTab_Catprod" name="idTab_Catprod">
 								<?php
-								foreach ($select['Prodaux3'] as $key => $row) {
-									if ($query['Prodaux3'] == $key) {
+								foreach ($select['idTab_Catprod'] as $key => $row) {
+									if ($query['idTab_Catprod'] == $key) {
 										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 									} else {
 										echo '<option value="' . $key . '">' . $row . '</option>';
@@ -235,7 +235,7 @@
 
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar4" role="button">
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar" role="button">
 							<span class="glyphicon glyphicon-plus"></span> Produtos
 						</a>
 					</div>	

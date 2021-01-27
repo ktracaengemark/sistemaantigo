@@ -424,7 +424,14 @@
 										</a>
 									</div>	
 								</div>
-								<label for=""><h4><b>Produtos, Serviços & Valores</b></h4></label>
+								<label for=""><h4><b>Produtos & Serviços</b></h4></label>
+								<div class="row">
+									<div class="form-group col-md-12 text-left">	
+										<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/produtos" role="button"> 
+											<span class="glyphicon glyphicon-gift"></span> Produtos & Serviços
+										</a>
+									</div>	
+								</div>
 								<div class="row">
 									<div class="form-group col-md-12 text-left">													
 										<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/catprod" role="button"> 
@@ -439,6 +446,7 @@
 										</a>
 									</div>	
 								</div>
+								<!--
 								<div class="row">
 									<div class="form-group col-md-12 text-left">		
 										<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/produtos2" role="button"> 
@@ -446,13 +454,8 @@
 										</a>
 									</div>	
 								</div>
-								<div class="row">
-									<div class="form-group col-md-12 text-left">	
-										<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/produtos" role="button"> 
-											<span class="glyphicon glyphicon-gift"></span> Produtos & Serviços Derivados
-										</a>
-									</div>	
-								</div>
+								-->
+								
 								<div class="row">
 									<div class="form-group col-md-12 text-left">													
 										<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/precopromocao" role="button"> 
@@ -467,6 +470,7 @@
 										</a>
 									</div>	
 								</div>
+								
 								<!--
 								<div class="form-group col-md-12 text-left">
 									<div class="row">													

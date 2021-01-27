@@ -3,9 +3,16 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Categoria</th>
+			<th>id</th>
+			<th>Categoria</th>
 			<th>Produto</th>
-            
+			<?php if ($_SESSION['Atributo'][1]['idTab_Atributo']) { ?>
+				<th><?php echo $_SESSION['Atributo'][1]['Atributo']; ?></th>										
+			<?php } ?>
+			<?php if ($_SESSION['Atributo'][2]['idTab_Atributo']) { ?>
+				<th><?php echo $_SESSION['Atributo'][2]['Atributo']; ?></th>										
+			<?php } ?>
+            <th>Codigo</th>
             <th></th>
         </tr>
     </thead>
@@ -17,12 +24,20 @@
             foreach ($q as $row)
             {
 
-                $url = base_url() . 'produtos/alterar/' . $row['idTab_Produto'];
+                $url = base_url() . 'produtos/alterar2/' . $row['idTab_Produtos'];
                 #$url = '';
 
                 echo '<tr class="clickable-row" data-href="' . $url . '">';
-                    echo '<td>' . $row['Prodaux3'] . '</td>';
+					echo '<td>' . $row['idTab_Produtos'] . '</td>';
+					echo '<td>' . $row['Catprod'] . '</td>';
 					echo '<td>' . $row['Produtos'] . '</td>';
+					if($_SESSION['Atributo'][1]['idTab_Atributo']){
+						echo '<td>' . $row['Atributo1'] . '</td>';
+					}
+					if($_SESSION['Atributo'][2]['idTab_Atributo']){
+						echo '<td>' . $row['Atributo2'] . '</td>';
+					}
+					echo '<td>' . $row['Cod_Prod'] . '</td>';
                     echo '<td></td>';
                 echo '</tr>';            
 

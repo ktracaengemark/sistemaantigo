@@ -286,6 +286,14 @@ class Relatorio_model extends CI_Model {
 					$row->Tipo_Orca = "Outros";
 				}				
 				
+				//$contagem = count($row->idApp_OrcaTrata);
+				/*
+				echo "<pre>";
+				print_r($contagem);
+				echo "</pre>";
+				exit();
+				*/
+				
 				$somaextra += $row->ValorExtraOrca;
 				$row->ValorExtraOrca = number_format($row->ValorExtraOrca, 2, ',', '.');
 				$somarestante += $row->ValorRestanteOrca;
@@ -338,6 +346,7 @@ class Relatorio_model extends CI_Model {
             $query->soma->somafrete = number_format($somafrete, 2, ',', '.');
             $query->soma->somatotal = number_format($somatotal, 2, ',', '.');
 			$query->soma->somacomissao = number_format($somacomissao, 2, ',', '.');
+			//$query->soma->contagem = number_format($contagem, 2, ',', '.');
 			/*
 			$query->soma->somadesconto = number_format($somadesconto, 2, ',', '.');
 			$query->soma->quantidade = number_format($quantidade);
@@ -3670,7 +3679,8 @@ exit();*/
 
 		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		$data['ProdutoDerivado'] = ($data['ProdutoDerivado']) ? ' AND TPS.idTab_Produtos = ' . $data['ProdutoDerivado'] : FALSE;
-		$data['Prodaux3'] = ($data['Prodaux3']) ? ' AND TP.Prodaux3 = ' . $data['Prodaux3'] : FALSE;
+		$data['idTab_Catprod'] = ($data['idTab_Catprod']) ? ' AND TPS.idTab_Catprod = ' . $data['idTab_Catprod'] : FALSE;
+		#$data['Prodaux3'] = ($data['Prodaux3']) ? ' AND TP.Prodaux3 = ' . $data['Prodaux3'] : FALSE;
 		#$data['TipoProduto'] = ($data['TipoProduto']) ? ' AND TTP.idTab_TipoProduto = ' . $data['TipoProduto'] : FALSE;
 		#$data['Prodaux1'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
 		#$data['Prodaux2'] = ($_SESSION['log']['NivelEmpresa'] >= 4  && $data['Prodaux2']) ? ' AND TP2.idTab_Prodaux2 = ' . $data['Prodaux2'] : FALSE;
@@ -3681,14 +3691,10 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-                TPS.idTab_Produtos,
-				TPS.Cod_Prod,
-				TPS.Arquivo,
-				TPS.Nome_Prod,
+                TPS.*,
 				TPRS.Prod_Serv,
 				TOP2.Opcao,
 				TOP1.Opcao,
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " ", IFNULL(TOP1.Opcao,""), " ", IFNULL(TOP2.Opcao,"")) AS Nome_Prod,
 				TP.idTab_Produto,
 				TP.TipoProduto,
 				TP.Produtos,
@@ -3697,18 +3703,19 @@ exit();*/
 				TP.PesoProduto,
 				TP.Ativo,
 				TP.VendaSite,
+				CONCAT(IFNULL(TP.Produtos,""), " ", IFNULL(TOP1.Opcao,""), " ", IFNULL(TOP2.Opcao,"")) AS Nome_Prod,
 				TCP.Catprod
             FROM
                 Tab_Produtos AS TPS
 					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TPS.idTab_Produto
-					LEFT JOIN Tab_Catprod AS TCP ON TCP.idTab_Catprod = TP.Prodaux3
-					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
-					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2
+					LEFT JOIN Tab_Catprod AS TCP ON TCP.idTab_Catprod = TPS.idTab_Catprod
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_2
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_1
 					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TPS.Prod_Serv
             WHERE
                 TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
-				' . $data['Prodaux3'] . '
+				' . $data['idTab_Catprod'] . '
 				' . $data['Produtos'] . '
 				' . $data['ProdutoDerivado'] . '
 			ORDER BY
@@ -4025,8 +4032,7 @@ exit();*/
             FROM
                 Tab_Catprod AS TPM
 					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TPM.TipoCatprod
-					LEFT JOIN Tab_Atributo_Select AS TAS ON TAS.idTab_Catprod = TPM.idTab_Catprod
-					LEFT JOIN Tab_Atributo AS TAT ON TAT.idTab_Atributo = TAS.idTab_Atributo
+					LEFT JOIN Tab_Atributo AS TAT ON TAT.idTab_Catprod = TPM.idTab_Catprod
 					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Atributo = TAT.idTab_Atributo
             WHERE
                 TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
@@ -4124,25 +4130,26 @@ exit();*/
     }
 
 	public function list_atributo($data, $completo) {
-	
+		
+		$data['idTab_Catprod'] = ($data['idTab_Catprod']) ? ' AND TPM.idTab_Catprod = ' . $data['idTab_Catprod'] : FALSE;
 		$data['Atributo'] = ($data['Atributo']) ? ' AND TPM.idTab_Atributo = ' . $data['Atributo'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'TPD.Produtos' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 
         $query = $this->db->query('
             SELECT
-                TPM.idTab_Atributo,
-				TPM.Atributo,
-				TPM.idSis_Empresa,
+                TPM.*,
+				TCP.*,
 				TOP.Opcao
             FROM
                 Tab_Atributo AS TPM
+					LEFT JOIN Tab_Catprod AS TCP ON TCP.idTab_Catprod = TPM.idTab_Catprod
 					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Atributo = TPM.idTab_Atributo
             WHERE
                 TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY
-				TPM.Atributo ASC,
-				TOP.Opcao ASC
+				TCP.Catprod ASC,
+				TPM.Atributo ASC
         ');
 
         /*

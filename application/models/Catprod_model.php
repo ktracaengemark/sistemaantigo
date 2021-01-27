@@ -41,6 +41,18 @@ class Catprod_model extends CI_Model {
 	
     public function set_atributo($data) {
 
+        $query = $this->db->insert_batch('Tab_Atributo', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+	
+    public function set_atributo_original($data) {
+
         $query = $this->db->insert_batch('Tab_Atributo_Select', $data);
 
         if ($this->db->affected_rows() === 0) {
@@ -50,7 +62,7 @@ class Catprod_model extends CI_Model {
             return $this->db->insert_id();
         }
     }
-
+	
     public function set_opcao($data) {
 
         $query = $this->db->insert_batch('Tab_Opcao', $data);
@@ -139,7 +151,7 @@ class Catprod_model extends CI_Model {
 		$query = $this->db->query('
 			SELECT * 
 			FROM 
-				Tab_Atributo_Select 
+				Tab_Atributo
 			WHERE 
 				idTab_Catprod = ' . $data . ' 
 		');
@@ -148,6 +160,19 @@ class Catprod_model extends CI_Model {
         return $query;
     }
 
+	public function get_atributo_original($data) {
+		$query = $this->db->query('
+			SELECT * 
+			FROM 
+				Tab_Atributo_Select 
+			WHERE 
+				idTab_Catprod = ' . $data . ' 
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
 	public function get_opcao($data) {
 		$query = $this->db->query('
 			SELECT * 
@@ -285,6 +310,13 @@ class Catprod_model extends CI_Model {
 
     public function update_atributo($data) {
 
+        $query = $this->db->update_batch('Tab_Atributo', $data, 'idTab_Atributo');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+	
+    public function update_atributo_original($data) {
+
         $query = $this->db->update_batch('Tab_Atributo_Select', $data, 'idTab_Atributo_Select');
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
@@ -305,6 +337,18 @@ class Catprod_model extends CI_Model {
     }	
 	
     public function delete_atributo($data) {
+
+        $this->db->where_in('idTab_Atributo', $data);
+        $this->db->delete('Tab_Atributo');
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+	
+    public function delete_atributo_original($data) {
 
         $this->db->where_in('idTab_Atributo_Select', $data);
         $this->db->delete('Tab_Atributo_Select');

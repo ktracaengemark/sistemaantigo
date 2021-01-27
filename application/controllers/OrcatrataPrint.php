@@ -13,7 +13,7 @@ class OrcatrataPrint extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
         #$this->load->library(array('basico', 'Basico_model', 'form_validation'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Orcatrata_model', 'OrcatrataPrint_model', 'Orcatrataprintcobranca_model', 'Orcatrataprintcomissao_model', 'Relatorio_model', 'Formapag_model' , 'Usuario_model' , 'Cliente_model' , 'Fornecedor_model'));
+        $this->load->model(array('Basico_model', 'Orcatrata_model', 'Orcatrataprint_model', 'Orcatrataprintcobranca_model', 'Orcatrataprintcomissao_model', 'Relatorio_model', 'Formapag_model' , 'Usuario_model' , 'Cliente_model' , 'Fornecedor_model'));
         $this->load->driver('session');
 
         #load header view
@@ -264,6 +264,92 @@ class OrcatrataPrint extends CI_Controller {
          */
 
         $this->load->view('orcatrata/print_orcatratadesp', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+
+    public function imprimirlistacliente($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';		
+		
+		$data['Imprimir']['DataInicio'] = ($_SESSION['FiltroAlteraParcela']['DataInicio']) ? $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio'], 'barras') : FALSE;
+		$data['Imprimir']['DataFim'] = ($_SESSION['FiltroAlteraParcela']['DataFim']) ? $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim'], 'barras') : FALSE;
+		$data['Imprimir']['DataInicio6'] = ($_SESSION['FiltroAlteraParcela']['DataInicio6']) ? $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio6'], 'barras') : FALSE;
+		$data['Imprimir']['DataFim6'] = ($_SESSION['FiltroAlteraParcela']['DataFim6']) ? $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataFim6'], 'barras') : FALSE;
+		
+		//$_SESSION['DataInicio'] = ($_SESSION['FiltroAlteraParcela']['DataInicio']) ? $this->basico->mascara_data($_SESSION['FiltroAlteraParcela']['DataInicio'], 'barras') : FALSE;
+		$_SESSION['DataInicio'] = ($_SESSION['FiltroAlteraParcela']['DataInicio']) ? $_SESSION['FiltroAlteraParcela']['DataInicio'] : FALSE;
+		
+		/*
+		echo '<br>';
+		echo "<pre>";
+		print_r($data['Imprimir']['DataInicio']);
+		echo "</pre>";
+		exit ();
+		*/
+		
+        if ($id) {
+            #### App_OrcaTrata ####
+            //$data['orcatrata'] = $this->Orcatrataprintcobranca_model->get_orcatrata_cliente($id);
+			$data['orcatrata'] = $this->Orcatrataprint_model->get_orcatrata_cliente($id);
+            if (count($data['orcatrata']) > 0) {
+                $data['orcatrata'] = array_combine(range(1, count($data['orcatrata'])), array_values($data['orcatrata']));
+                $data['count']['POCount'] = count($data['orcatrata']);           
+
+				if (isset($data['orcatrata'])) {
+
+                    for($j=1;$j<=$data['count']['POCount'];$j++) {
+						
+						$data['orcatrata'][$j]['idApp_OrcaTrata'] = $data['orcatrata'][$j]['idApp_OrcaTrata'];
+						$data['orcatrata'][$j]['DataCadastroCliente'] = $this->basico->mascara_data($data['orcatrata'][$j]['DataCadastroCliente'], 'barras');
+						$data['orcatrata'][$j]['DataOrca'] = $this->basico->mascara_data($data['orcatrata'][$j]['DataOrca'], 'barras');
+						$data['orcatrata'][$j]['DataPrazo'] = $this->basico->mascara_data($data['orcatrata'][$j]['DataPrazo'], 'barras');
+						$data['orcatrata'][$j]['DataConclusao'] = $this->basico->mascara_data($data['orcatrata'][$j]['DataConclusao'], 'barras');
+						$data['orcatrata'][$j]['DataRetorno'] = $this->basico->mascara_data($data['orcatrata'][$j]['DataRetorno'], 'barras');
+						$data['orcatrata'][$j]['DataQuitado'] = $this->basico->mascara_data($data['orcatrata'][$j]['DataQuitado'], 'barras');
+						$data['orcatrata'][$j]['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata'][$j]['DataEntradaOrca'], 'barras');
+						$data['orcatrata'][$j]['DataEntregaOrca'] = $this->basico->mascara_data($data['orcatrata'][$j]['DataEntregaOrca'], 'barras');
+						$data['orcatrata'][$j]['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata'][$j]['DataVencimentoOrca'], 'barras');
+						$data['orcatrata'][$j]['ValorTotalOrca'] = number_format(($data['orcatrata'][$j]['ValorTotalOrca']), 2, ',', '.');
+						$data['orcatrata'][$j]['ConcluidoOrca'] = $this->basico->mascara_palavra_completa($data['orcatrata'][$j]['ConcluidoOrca'], 'NS');
+						$data['orcatrata'][$j]['QuitadoOrca'] = $this->basico->mascara_palavra_completa($data['orcatrata'][$j]['QuitadoOrca'], 'NS');
+
+					}
+				}	
+			}
+			/*
+			  echo '<br>';
+			  echo "<pre>";
+			  print_r($data['orcatrata']);
+			  echo "</pre>";
+			  exit ();
+			  */
+
+        }
+
+        $data['titulo'] = 'Lista Clientes';
+        $data['form_open_path'] = 'OrcatrataPrint/imprimirlistacliente';
+        $data['panel'] = 'info';
+        $data['metodo'] = 1;
+		$data['imprimir'] = 'OrcatrataPrint/imprimir/';
+		$data['imprimirlista'] = 'OrcatrataPrint/imprimirlistacliente/';
+		$data['imprimirrecibo'] = 'OrcatrataPrint/imprimirreciborec/';
+		
+        /*
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          #exit ();
+         */
+
+        $this->load->view('orcatrata/print_orcatratacliente_lista', $data);
 
         $this->load->view('basico/footer');
 
