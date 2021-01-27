@@ -58,16 +58,6 @@ class Produtos extends CI_Controller {
             'idTab_Catprod',
         ), TRUE));
 
-
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        #### Tab_Produtos ####
-
-		$this->form_validation->set_rules('idTab_Catprod', 'Produto', 'required|trim');		
-		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
-		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
-
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();	
 		$data['select']['TipoCatprod'] = $this->Basico_model->select_prod_serv();	
 		$data['select']['idTab_Catprod'] = $this->Basico_model->select_catprod();
@@ -93,6 +83,16 @@ class Produtos extends CI_Controller {
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
 
+        
+		$data['q1'] = $this->Produtos_model->list_categoria($_SESSION['log'], TRUE);
+		$data['list1'] = $this->load->view('produtos/list_categoria', $data, TRUE);		
+		
+		
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$this->form_validation->set_rules('idTab_Catprod', 'Produto', 'required|trim');		
+		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
+		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');	
 		/*
           echo '<br>';
           echo "<pre>";
@@ -153,6 +153,7 @@ class Produtos extends CI_Controller {
 		
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'Cadastrar',
+			'TipoCatprod',
 			'idCat_Atributo',
 			'idCat_Opcao',
 			'idAtributo_Opcao',
@@ -242,7 +243,8 @@ class Produtos extends CI_Controller {
 		  
 		
 
-        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();	
+		$data['select']['TipoCatprod'] = $this->Basico_model->select_prod_serv();
 		$data['select']['idCat_Atributo'] = $this->Basico_model->select_catprod();
 		$data['select']['idCat_Opcao'] = $this->Basico_model->select_catprod();
 		$data['select']['idAtributo_Opcao'] = $this->Basico_model->select_atributo($_SESSION['Produtos']['idTab_Catprod']);	
@@ -273,6 +275,17 @@ class Produtos extends CI_Controller {
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';       
 
+		$data['q1'] = $this->Produtos_model->list_categoria($_SESSION['log'], TRUE);
+		$data['list1'] = $this->load->view('produtos/list_categoria', $data, TRUE);
+		
+		$data['q2'] = $this->Produtos_model->list_produto($data['produtos'], TRUE);
+		$data['list2'] = $this->load->view('produtos/list_produto', $data, TRUE);
+		
+		$data['q3'] = $this->Produtos_model->list_atributo($data['produtos'], TRUE);
+		$data['list3'] = $this->load->view('produtos/list_atributo', $data, TRUE);
+		
+		$data['q4'] = $this->Produtos_model->list_opcao($data['produtos'], TRUE);
+		$data['list4'] = $this->load->view('produtos/list_opcao', $data, TRUE);
 		
 		$data['q'] = $this->Produtos_model->list_produtos($_SESSION['Produtos'], TRUE);
 		$data['list'] = $this->load->view('produtos/list_produtos', $data, TRUE);			
@@ -358,6 +371,7 @@ class Produtos extends CI_Controller {
 		
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'Cadastrar',
+			'TipoCatprod',
 			'idCat_Atributo',
 			'idCat_Opcao',
 			'idAtributo_Opcao',
@@ -438,7 +452,8 @@ class Produtos extends CI_Controller {
 		  
 	
 
-        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();	
+		$data['select']['TipoCatprod'] = $this->Basico_model->select_prod_serv();
 		$data['select']['idCat_Atributo'] = $this->Basico_model->select_catprod();
 		$data['select']['idCat_Opcao'] = $this->Basico_model->select_catprod();
 		$data['select']['idAtributo_Opcao'] = $this->Basico_model->select_atributo($_SESSION['Produtos']['idTab_Catprod']);	
@@ -468,7 +483,18 @@ class Produtos extends CI_Controller {
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';       
-
+		
+		$data['q1'] = $this->Produtos_model->list_categoria($_SESSION['log'], TRUE);
+		$data['list1'] = $this->load->view('produtos/list_categoria', $data, TRUE);
+		
+		$data['q2'] = $this->Produtos_model->list_produto($data['produtos'], TRUE);
+		$data['list2'] = $this->load->view('produtos/list_produto', $data, TRUE);
+		
+		$data['q3'] = $this->Produtos_model->list_atributo($data['produtos'], TRUE);
+		$data['list3'] = $this->load->view('produtos/list_atributo', $data, TRUE);
+		
+		$data['q4'] = $this->Produtos_model->list_opcao($data['produtos'], TRUE);
+		$data['list4'] = $this->load->view('produtos/list_opcao', $data, TRUE);
 		
 		$data['q'] = $this->Produtos_model->list_produtos($data['produtos'], TRUE);
 		$data['list'] = $this->load->view('produtos/list_produtos', $data, TRUE);			
@@ -678,6 +704,17 @@ class Produtos extends CI_Controller {
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';       
 
+		$data['q1'] = $this->Produtos_model->list_categoria($_SESSION['log'], TRUE);
+		$data['list1'] = $this->load->view('produtos/list_categoria', $data, TRUE);
+		
+		$data['q2'] = $this->Produtos_model->list_produto($data['produtos'], TRUE);
+		$data['list2'] = $this->load->view('produtos/list_produto', $data, TRUE);
+		
+		$data['q3'] = $this->Produtos_model->list_atributo($data['produtos'], TRUE);
+		$data['list3'] = $this->load->view('produtos/list_atributo', $data, TRUE);
+		
+		$data['q4'] = $this->Produtos_model->list_opcao($data['produtos'], TRUE);
+		$data['list4'] = $this->load->view('produtos/list_opcao', $data, TRUE);
 		
 		$data['q'] = $this->Produtos_model->list_produtos($data['produtos'], TRUE);
 		$data['list'] = $this->load->view('produtos/list_produtos', $data, TRUE);			

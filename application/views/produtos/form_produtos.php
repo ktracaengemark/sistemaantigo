@@ -122,9 +122,9 @@
 													<div class="col-md-3">
 														<label for="idTab_Catprod">Categoria *</label>
 														<?php if ($metodo < 2) { ?>
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
+															<select data-placeholder="Selecione uma Categoria..." class="form-control Chosen" 
 																	id="idTab_Catprod" name="idTab_Catprod">
-																<option value="">-- Selecione uma opção --</option>
+																<option value="">-- Selecione uma Categoria --</option>
 																<?php
 																foreach ($select['idTab_Catprod'] as $key => $row) {
 																	if ($produtos['idTab_Catprod'] == $key) {
@@ -391,6 +391,7 @@
 						</div>
 					</div>
 				</form>
+				<?php if (isset($list1)) echo $list1; ?>
 			</div>
 		</div>
 	</div>
@@ -439,6 +440,7 @@
 						</div>
 					</div>
 				</form>
+				<?php if (isset($list3)) echo $list3; ?>
 			</div>
 		</div>
 	</div>
@@ -505,6 +507,7 @@
 						</div>
 					</div>
 				</form>
+				<?php if (isset($list4)) echo $list4; ?>
 			</div>
 		</div>
 	</div>
@@ -578,6 +581,7 @@
 						</div>
 					</div>
 				</form>
+				<?php if (isset($list2)) echo $list2; ?>
 			</div>
 		</div>
 	</div>

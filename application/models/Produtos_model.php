@@ -411,7 +411,179 @@ class Produtos_model extends CI_Model {
 
         return $query;
     }	
-	
+    
+	public function list_categoria($data, $x) {
+		
+		//$data['idSis_Empresa'] = ($data['idSis_Empresa'] != 0) ? ' AND TPS.idSis_Empresa = ' . $data['idSis_Empresa'] : FALSE;
+			
+			/*
+			echo "<pre>";
+			print_r($data['idSis_Empresa']);
+			echo "</pre>";
+			exit();
+			*/
+		
+		
+        $query = $this->db->query('
+			SELECT 
+				TCT.*,
+				TPSA.*
+			FROM 
+				Tab_Catprod AS TCT
+					LEFT JOIN Tab_Prod_Serv AS TPSA ON TPSA.Abrev_Prod_Serv = TCT.TipoCatprod
+			WHERE 
+                TCT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY  
+				TCT.Catprod ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+    
+	public function list_atributo($data, $x) {
+		
+		$data['idTab_Catprod'] = ($data['idTab_Catprod'] != 0) ? ' AND TA.idTab_Catprod = ' . $data['idTab_Catprod'] : FALSE;
+
+        $query = $this->db->query('
+			SELECT 
+				TA.*
+			FROM 
+				Tab_Atributo AS TA
+			WHERE 
+                TA.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+                ' . $data['idTab_Catprod'] . '
+			ORDER BY  
+				TA.Atributo ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+    
+	public function list_opcao($data, $x) {
+		
+		$data['idTab_Catprod'] = ($data['idTab_Catprod'] != 0) ? ' AND TOP.idTab_Catprod = ' . $data['idTab_Catprod'] : FALSE;
+
+        $query = $this->db->query('
+			SELECT 
+				TOP.*,
+				TA.*
+			FROM 
+				Tab_Opcao AS TOP
+					LEFT JOIN Tab_Atributo AS TA ON TA.idTab_Atributo = TOP.idTab_Atributo
+			WHERE 
+                TOP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+                ' . $data['idTab_Catprod'] . '
+			ORDER BY  
+				TA.Atributo ASC, 
+				TOP.Opcao ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+        
+	public function list_produto($data, $x) {
+		
+		$data['idTab_Catprod'] = ($data['idTab_Catprod'] != 0) ? ' AND TP.idTab_Catprod = ' . $data['idTab_Catprod'] : FALSE;
+
+        $query = $this->db->query('
+			SELECT 
+				TP.*
+			FROM 
+				Tab_Produto AS TP
+			WHERE 
+                TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+                ' . $data['idTab_Catprod'] . '
+			ORDER BY  
+				TP.Produtos ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+		
     public function list_produtos1($id, $aprovado, $completo) {
 
         $query = $this->db->query('
