@@ -173,7 +173,7 @@
 													
 													<?php if ($_SESSION['Atributo'][1]['idTab_Atributo']) { ?>
 														<label for="Opcao_Atributo_1"><?php echo $_SESSION['Atributo'][1]['Atributo']; ?></label>
-														<?php if ($metodo == 2) { ?>
+														<?php if ($metodo < 4) { ?>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="Opcao_Atributo_1" name="Opcao_Atributo_1" onchange="codigo()">
 																<option value="">-- Selecione uma opção --</option>
 																<?php
@@ -200,13 +200,11 @@
 												
 											<?php } ?>
 											
-											
-											
 											<?php if ($metodo >= 2) { ?>		
 												<div class="col-md-3">
 													<?php if ($_SESSION['Atributo'][2]['idTab_Atributo']) { ?>
 														<label for="Opcao_Atributo_2"><?php echo $_SESSION['Atributo'][2]['Atributo']; ?></label>
-														<?php if ($metodo == 2) { ?>
+														<?php if ($metodo < 4) { ?>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="Opcao_Atributo_2" name="Opcao_Atributo_2" onchange="codigo()">
 																<option value="">-- Selecione uma opção --</option>
 																<?php
@@ -341,7 +339,6 @@
 	</div>
 	
 </div>
-
 
 <div id="addCatprodModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">

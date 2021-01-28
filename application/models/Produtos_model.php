@@ -135,6 +135,21 @@ class Produtos_model extends CI_Model {
         }
     }	
 
+    public function get_produto($data) {
+		$query = $this->db->query('
+			SELECT
+				TP.*
+			FROM 
+				Tab_Produto AS TP
+			WHERE 
+				idTab_Produto = ' . $data . '
+		');
+        $query = $query->result_array();
+
+        //return $query;
+		return $query[0];
+    }
+	
     public function get_produtos($data) {
         $query = $this->db->query('
 			SELECT  
@@ -297,7 +312,7 @@ class Produtos_model extends CI_Model {
         return $query;
     }
 	
-    public function get_produto($data) {
+    public function get_produto_Original($data) {
 		$query = $this->db->query('SELECT * FROM Tab_Opcao_Select WHERE idTab_Produto = ' . $data);
         $query = $query->result_array();
 
@@ -318,11 +333,13 @@ class Produtos_model extends CI_Model {
 				TPS.idSis_Empresa,
 				TPS.Arquivo,
 				TPS.Nome_Prod,
+				TP.Produtos,
 				TOP2.Opcao,
 				TOP1.Opcao,
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,"")) AS NomeProduto
+				CONCAT(IFNULL(TP.Produtos,""), " - ",  IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,"")) AS NomeProduto
 			FROM 
 				Tab_Produtos AS TPS
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TPS.idTab_Produto
 					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2
 			WHERE 
@@ -727,6 +744,14 @@ class Produtos_model extends CI_Model {
         }
     }
 	
+    public function update_produto($data, $id) {
+
+        unset($data['idTab_Produto']);
+        $query = $this->db->update('Tab_Produto', $data, array('idTab_Produto' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+		
     public function update_produtos($data, $id) {
 
         unset($data['idTab_Produtos']);
@@ -772,7 +797,7 @@ class Produtos_model extends CI_Model {
 
     }	
 	
-    public function update_produto($data) {
+    public function update_produto_original($data) {
 		
         $query = $this->db->update_batch('Tab_Opcao_Select', $data, 'idTab_Opcao_Select');
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;

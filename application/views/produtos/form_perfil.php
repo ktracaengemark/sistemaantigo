@@ -17,7 +17,7 @@
 											<div class="col-md-12 ">
 												<div class="row">
 													<label>Produto:</label>
-													<a href="<?php echo base_url() . 'relatorio/produtos2/'; ?>">
+													<a href="<?php echo base_url() . 'relatorio/produtos/'; ?>">
 														<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Produtos']['Arquivo'] . ''; ?>" 
 														class="img-responsive" width='300'>
 													</a>

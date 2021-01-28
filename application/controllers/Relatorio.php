@@ -6260,15 +6260,9 @@ class Relatorio extends CI_Controller {
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idTab_Promocao',
             'idTab_Catprod',
-			'Produtos',
-			'ProdutoDerivado',
-			'CodProd',
+            'idTab_Produto',
+            'idTab_Produtos',
 			'TipoProduto',
-			'Prodaux1',
-			'Prodaux2',
-			'Prodaux3',
-			'Prodaux4',
-			'Categoria',
 			'Ordenamento',
             'Campo',
         ), TRUE));
@@ -6278,12 +6272,8 @@ class Relatorio extends CI_Controller {
 
 
         $data['select']['Campo'] = array(
-			'TPS.Nome_Prod' => 'Produto Derivado',
 			'TCP.Catprod' => 'Categoria',
-			#'TP.idTab_Produto' => 'id_Produto',
-			#'TP.TipoProduto' => 'V/C/A',
-			#'TP.CodProd' => 'Código',			
-			#'TP.Categoria' => 'Prod/Serv',
+			'TP.Produtos' => 'Produto',
         );
 
         $data['select']['Ordenamento'] = array(
@@ -6291,30 +6281,17 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 
-        $data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
-		$data['select']['ProdutoDerivado'] = $this->Relatorio_model->select_produtos1();
-		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
-		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		//$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
 		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_catprod();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_catprod();
-		$data['select']['Prodaux4'] = $this->Relatorio_model->select_prodaux4();
-		$data['select']['TipoProduto'] = $this->Relatorio_model->select_tipoproduto();
+		$data['select']['idTab_Produto'] = $this->Relatorio_model->select_produto();
+		$data['select']['idTab_Produtos'] = $this->Relatorio_model->select_produtos();
 
         $data['titulo'] = 'Produtos';
 
         #run form validation
         if ($this->form_validation->run() !== TRUE) {
-			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
-			$data['bd']['ProdutoDerivado'] = $data['query']['ProdutoDerivado'];
-			$data['bd']['CodProd'] = $data['query']['CodProd'];
-			$data['bd']['Categoria'] = $data['query']['Categoria'];
-			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
-			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
-			$data['bd']['Prodaux4'] = $data['query']['Prodaux4'];
-			$data['bd']['TipoProduto'] = $data['query']['TipoProduto'];
+			$data['bd']['idTab_Produto'] = $data['query']['idTab_Produto'];
+			$data['bd']['idTab_Produtos'] = $data['query']['idTab_Produtos'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 

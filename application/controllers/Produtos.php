@@ -1048,7 +1048,7 @@ class Produtos extends CI_Controller {
 		), TRUE);
 
         if ($id) {
-            $_SESSION['Produtos'] = $data['query'] = $this->Produtos_model->get_produtos($id, TRUE);
+            $_SESSION['Produtos'] = $data['query'] = $this->Produtos_model->get_produto($id, TRUE);
         }
 		
         if ($id)
@@ -1148,14 +1148,14 @@ class Produtos extends CI_Controller {
 					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
 					
 					$data['query']['Arquivo'] = $data['file']['Arquivo'];
-					$data['anterior'] = $this->Produtos_model->get_produtos($data['query']['idTab_Produto']);
+					$data['anterior'] = $this->Produtos_model->get_produto($data['query']['idTab_Produto']);
 					$data['campos'] = array_keys($data['query']);
 
 					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idTab_Produto'], TRUE);
 
-					if ($data['auditoriaitem'] && $this->Produtos_model->update_produtos($data['query'], $data['query']['idTab_Produto']) === FALSE) {
+					if ($data['auditoriaitem'] && $this->Produtos_model->update_produto($data['query'], $data['query']['idTab_Produto']) === FALSE) {
 						$data['msg'] = '?m=2';
-						redirect(base_url() . 'produtos/form_perfil/' . $data['query']['idTab_Produto'] . $data['msg']);
+						redirect(base_url() . 'produtos/alterarlogo/' . $data['query']['idTab_Produto'] . $data['msg']);
 						exit();
 					} else {
 
@@ -1177,7 +1177,7 @@ class Produtos extends CI_Controller {
 							$data['msg'] = '?m=1';
 						}
 
-						redirect(base_url() . 'relatorio/produtos2/' . $data['msg']);
+						redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
 						exit();
 					}				
 				}

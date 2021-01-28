@@ -3605,18 +3605,8 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-                TP.idTab_Produto,
-				TP.TipoProduto,
-				TP.CodProd,
-				TP.Prodaux3,
-				TP.Produtos,
-				TP.ValorProdutoSite,
-				TP.Comissao,
-				TP.PesoProduto,
-				TP.Arquivo,
-				TP.Ativo,
+                TP.*,
 				TPRS.Prod_Serv,
-				TP.VendaSite,
 				TCP.Catprod,
 				TTP.Abrev,
 				TTP.TipoProduto
@@ -3676,6 +3666,86 @@ exit();*/
     }
 	
 	public function list_produtos($data, $completo) {
+
+		$data['idTab_Catprod'] = ($data['idTab_Catprod']) ? ' AND TPS.idTab_Catprod = ' . $data['idTab_Catprod'] : FALSE;
+		$data['idTab_Produto'] = ($data['idTab_Produto']) ? ' AND TPS.idTab_Produto = ' . $data['idTab_Produto'] : FALSE;
+		$data['idTab_Produtos'] = ($data['idTab_Produtos']) ? ' AND TPS.idTab_Produtos = ' . $data['idTab_Produtos'] : FALSE;
+		$data['Campo'] = (!$data['Campo']) ? 'TCP.Catprod' : $data['Campo'];
+        $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
+
+        $query = $this->db->query('
+            SELECT
+                TPS.*,
+				TPS.Arquivo AS ArquivoProdutos,
+				TPRS.Prod_Serv,
+				TOP2.Opcao,
+				TOP1.Opcao,
+				TP.idTab_Produto,
+				TP.Produtos,
+				TP.Arquivo AS ArquivoProduto,
+				TP.Ativo,
+				CONCAT(IFNULL(TP.Produtos,""), " ", IFNULL(TOP1.Opcao,""), " ", IFNULL(TOP2.Opcao,"")) AS Nome_Prod,
+				TCP.Catprod
+            FROM
+                Tab_Produtos AS TPS
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TPS.idTab_Produto
+					LEFT JOIN Tab_Catprod AS TCP ON TCP.idTab_Catprod = TPS.idTab_Catprod
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_2
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TPS.Prod_Serv
+            WHERE
+                TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+				' . $data['idTab_Catprod'] . '
+				' . $data['idTab_Produto'] . '
+				' . $data['idTab_Produtos'] . '
+			ORDER BY
+				' . $data['Campo'] . '
+				' . $data['Ordenamento'] . ', 
+				TP.Produtos
+		
+        ');
+
+        /*
+        #AND
+        #P.idApp_Profissional = OT.idApp_Cliente
+
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            #$valor_produto=0;
+			#$somaorcamento=0;
+			#$somacomissao=0;
+            foreach ($query->result() as $row) {
+
+				#$valor_produto = $row->Valor_Cor_Prod * $row->Fator_Tam_Prod;
+				#$somaorcamento += $row->ValorRestanteOrca;
+				#$somacomissao += $row->ValorComissao;
+                #$row->Valor_Cor_Prod = number_format($row->Valor_Cor_Prod, 2, ',', '.');
+				#$row->Fator_Tam_Prod = number_format($row->Fator_Tam_Prod, 2, ',', '.');
+				#$row->Valor_Produto = number_format($row->Valor_Produto, 2, ',', '.');
+				#$valor_produto = number_format($valor_produto, 2, ',', '.');
+				
+            }
+            #$query->soma = new stdClass();
+			#$query->soma->valor_produto = number_format($valor_produto, 2, ',', '.');
+            #$query->soma->somaorcamento = number_format($somaorcamento, 2, ',', '.');
+			#$query->soma->somacomissao = number_format($somacomissao, 2, ',', '.');			
+			
+			
+            return $query;
+        }
+
+    }
+	
+	public function list_produtos_original($data, $completo) {
 
 		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		$data['ProdutoDerivado'] = ($data['ProdutoDerivado']) ? ' AND TPS.idTab_Produtos = ' . $data['ProdutoDerivado'] : FALSE;
@@ -5855,7 +5925,61 @@ exit();*/
         return $array;
     }
 		
+	public function select_produto() {
+		
+        $query = $this->db->query('
+            SELECT
+				TP.*,
+				CONCAT(IFNULL(TP.Produtos,"")) AS Produtos
+            FROM
+                Tab_Produto AS TP
+            WHERE
+				TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+            ORDER BY
+				Produtos ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idTab_Produto] = $row->Produtos;
+        }
+
+        return $array;
+    }
+		
 	public function select_produtos() {
+		
+        $query = $this->db->query('
+            SELECT
+                TPS.idTab_Produtos,
+				TP.idTab_Produto,
+				CAT.Catprod,
+				TOP2.Opcao,
+				TOP1.Opcao,
+				CONCAT(IFNULL(TP.Produtos,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TOP2.Opcao,"")) AS Produtos
+            FROM
+                Tab_Produtos AS TPS
+					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TPS.idTab_Produto
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_2
+					LEFT JOIN Tab_Catprod AS CAT ON CAT.idTab_Catprod = TPS.idTab_Catprod
+            WHERE
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+            ORDER BY
+				TP.Produtos ASC
+        ');
+
+        $array = array();
+        $array[0] = ':: Todos ::';
+        foreach ($query->result() as $row) {
+            $array[$row->idTab_Produtos] = $row->Produtos;
+        }
+
+        return $array;
+    }
+	
+	public function select_produtos_orig2() {
 		
         $query = $this->db->query('
             SELECT

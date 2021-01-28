@@ -432,6 +432,7 @@
 										</a>
 									</div>	
 								</div>
+								<!--
 								<div class="row">
 									<div class="form-group col-md-12 text-left">													
 										<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/catprod" role="button"> 
@@ -446,7 +447,6 @@
 										</a>
 									</div>	
 								</div>
-								<!--
 								<div class="row">
 									<div class="form-group col-md-12 text-left">		
 										<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/produtos2" role="button"> 
@@ -455,7 +455,6 @@
 									</div>	
 								</div>
 								-->
-								
 								<div class="row">
 									<div class="form-group col-md-12 text-left">													
 										<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/precopromocao" role="button"> 
