@@ -51,6 +51,7 @@ function Aguardar () {
 	$('.aguardarCatprod').hide();
 	$('.aguardarAtributo').hide();
 	$('.aguardarOpcao').hide();
+	$('.aguardarAlterarCatprod').hide();
 	$('.exibir').show();
 	$('#botaoFechar2').show();
 	$('#botaoSalvar').show();
@@ -524,6 +525,75 @@ $(document).ready(function(){
 			
 		}	
 	});
+
+	$('#alterarCatprod').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget)
+		var recipientid = button.data('whateverid')
+		var recipientcatprod = button.data('whatevercatprod')
+		//console.log(recipientcatprod);
+		var modal = $(this)
+		modal.find('.modal-title').text('id da Categoria: ' + recipientid)
+		modal.find('#id_Categoria').val(recipientid)
+		modal.find('#Catprod').val(recipientcatprod)
+	})
+	
+	$('#alterar_catprod_form').on('submit', function(event){
+		//alert('ok - Alterar Categoria do Produto');
+		
+		event.preventDefault();
+		var catprod = $('#Catprod').val();
+		//console.log(catprod);
+		//exit();
+		
+		if($('#Catprod').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-alterar-catprod").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{
+			
+			//Fechar a mensagem de erro
+			$('#msg-error-alterar-catprod').hide();
+			//Fechar o botão Alterar
+			$('#AlterarCatprod').hide();
+			//Fechar o botão Cancelar
+			$('#CancelarCatprod').hide();
+			//Abre o Aguardar
+			$('.aguardarAlterarCatprod').show();
+			//Fechar a janela modal alterar
+			$('#addCatprodModal').modal('hide');
+			
+			//Receber os dados do formulário
+			var dados = $("#alterar_catprod_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/edicoes/Catprod.php?', dados, function (retorna){
+			 
+				console.log(retorna);
+				
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#alterar_catprod_form')[0].reset();
+					
+					//Fechar a janela modal alterar
+					$('#alterarCatprod').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-alterar-catprod").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-alterar-catprod").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar a Categoria!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}
+		
+	});	
 	
 });
 

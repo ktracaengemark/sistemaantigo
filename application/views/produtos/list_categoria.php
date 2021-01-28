@@ -3,8 +3,10 @@
 <table class="table table-hover">
     <thead>
         <tr>
+			<th>id</th>
 			<th>Tipo</th>
 			<th>Categoria</th>
+			<th>Editar</th>
             <th></th>
         </tr>
     </thead>
@@ -18,11 +20,17 @@
             {
 
                 #$url = base_url() . 'produtos/alterar2/' . $row['idTab_Catprod'];
-                $url = '';
-
-                echo '<tr class="clickable-row" data-href="' . $url . '">';
+                //$url = '';
+                //echo '<tr class="clickable-row" data-href="' . $url . '">';
+				echo '<tr>';
+					echo '<td>' . $row['idTab_Catprod'] . '</td>';
 					echo '<td>' . $row['Prod_Serv'] . '</td>';
 					echo '<td>'. $cont . ') ' . $row['Catprod'] . '</td>';
+					echo '<td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#alterarCatprod" 
+									data-whateverid="' . $row['idTab_Catprod'] . '" data-whatevercatprod="' . $row['Catprod'] . '">
+									Editar
+								</button>
+							</td>';
                     echo '<td></td>';
                 echo '</tr>';            
 				
@@ -32,7 +40,6 @@
             
         }
         ?>
-
     </tbody>
     <tfoot>
         <tr>

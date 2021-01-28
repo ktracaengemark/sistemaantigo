@@ -40,12 +40,12 @@
 							?>
 						</td>
 						<td class="col-md-4 text-left" scope="col">
-							<?php if($Imprimir['DataInicio'] || $Imprimir['DataInicio']){ echo '<h4>Receita:</h4>';} ?>
+							<?php if($Imprimir['DataInicio'] || $Imprimir['DataFim']){ echo '<h4>Receita:</h4>';} ?>
 							<?php if($Imprimir['DataInicio']){ echo 'Inic <strong>'  . $Imprimir['DataInicio'] . '</strong> ';} ?>
 							<?php if($Imprimir['DataFim']){ echo 'Fim <strong>'  . $Imprimir['DataFim'] . '</strong> ';} ?>
 						</td>
 						<td class="col-md-4 text-left" scope="col">
-							<?php if($Imprimir['DataInicio6'] || $Imprimir['DataInicio6']){ echo '<h4>Cadastro:</h4>';} ?>
+							<?php if($Imprimir['DataInicio6'] || $Imprimir['DataFim6']){ echo '<h4>Cadastro:</h4>';} ?>
 							<?php if($Imprimir['DataInicio6']){ echo 'Inic <strong>'  . $Imprimir['DataInicio6'] . '</strong> ';} ?>
 							<?php if($Imprimir['DataFim6']){ echo 'Fim <strong>'  . $Imprimir['DataFim6'] . '</strong> ';} ?>
 						</td>
