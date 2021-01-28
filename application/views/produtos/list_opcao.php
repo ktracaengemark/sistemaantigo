@@ -3,8 +3,10 @@
 <table class="table table-hover">
     <thead>
         <tr>
+			<th>id</th>
 			<th>Atributo</th>
 			<th>Opcao</th>
+			<th>Editar</th>
             <th></th>
         </tr>
     </thead>
@@ -17,12 +19,18 @@
             foreach ($q4 as $row)
             {
 
-                #$url = base_url() . 'produtos/alterar2/' . $row['idTab_Catprod'];
-                $url = '';
-
-                echo '<tr class="clickable-row" data-href="' . $url . '">';
+                #$url = base_url() . 'produtos/alterar2/' . $row['idTab_Opcao'];
+                //$url = '';
+                //echo '<tr class="clickable-row" data-href="' . $url . '">';
+				echo '<tr>';
+					echo '<td>' . $row['idTab_Opcao'] . '</td>';
 					echo '<td>' . $cont . ') ' . $row['Atributo'] . '</td>';
 					echo '<td>' . $row['Opcao'] . '</td>';
+					echo '<td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#alterarOpcao" 
+									data-whateveridopcao="' . $row['idTab_Opcao'] . '" data-whateveropcao="' . $row['Opcao'] . '">
+									Editar
+								</button>
+							</td>';
                     echo '<td></td>';
                 echo '</tr>';            
 				

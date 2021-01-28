@@ -10,7 +10,7 @@ $categoria = filter_var($Dados['Catprod'], FILTER_SANITIZE_STRING);
 $categoria_maiuscula = trim(mb_strtoupper($categoria, 'ISO-8859-1'));
 
 $result_categoria = "UPDATE Tab_Catprod SET Catprod='$categoria_maiuscula' WHERE idTab_Catprod = '$id'";
-$resuultado_categoria = mysqli_query($conn, $result_categoria);
+$resultado_categoria = mysqli_query($conn, $result_categoria);
 
 if(mysqli_affected_rows($conn) != 0){
 	echo true;

@@ -27,7 +27,7 @@
 					echo '<td>' . $row['Prod_Serv'] . '</td>';
 					echo '<td>'. $cont . ') ' . $row['Catprod'] . '</td>';
 					echo '<td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#alterarCatprod" 
-									data-whateverid="' . $row['idTab_Catprod'] . '" data-whatevercatprod="' . $row['Catprod'] . '">
+									data-whateveridcatprod="' . $row['idTab_Catprod'] . '" data-whatevercatprod="' . $row['Catprod'] . '">
 									Editar
 								</button>
 							</td>';

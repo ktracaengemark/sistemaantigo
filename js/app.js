@@ -52,6 +52,9 @@ function Aguardar () {
 	$('.aguardarAtributo').hide();
 	$('.aguardarOpcao').hide();
 	$('.aguardarAlterarCatprod').hide();
+	$('.aguardarAlterarProduto').hide();
+	$('.aguardarAlterarAtributo').hide();
+	$('.aguardarAlterarOpcao').hide();
 	$('.exibir').show();
 	$('#botaoFechar2').show();
 	$('#botaoSalvar').show();
@@ -528,12 +531,12 @@ $(document).ready(function(){
 
 	$('#alterarCatprod').on('show.bs.modal', function (event) {
 		var button = $(event.relatedTarget)
-		var recipientid = button.data('whateverid')
+		var recipientidcatprod = button.data('whateveridcatprod')
 		var recipientcatprod = button.data('whatevercatprod')
 		//console.log(recipientcatprod);
 		var modal = $(this)
-		modal.find('.modal-title').text('id da Categoria: ' + recipientid)
-		modal.find('#id_Categoria').val(recipientid)
+		modal.find('.modal-title').text('id da Categoria: ' + recipientidcatprod)
+		modal.find('#id_Categoria').val(recipientidcatprod)
 		modal.find('#Catprod').val(recipientcatprod)
 	})
 	
@@ -567,7 +570,7 @@ $(document).ready(function(){
 			
 			$.post(window.location.origin+ '/' + app + '/edicoes/Catprod.php?', dados, function (retorna){
 			 
-				console.log(retorna);
+				//console.log(retorna);
 				
 				if(retorna == 1){
 				
@@ -587,6 +590,213 @@ $(document).ready(function(){
 					//listar_usuario(1, 50);
 				}else{
 					$("#msg-error-alterar-catprod").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar a Categoria!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}
+		
+	});	
+
+	$('#alterarProduto').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget)
+		var recipientidproduto = button.data('whateveridproduto')
+		var recipientproduto = button.data('whateverproduto')
+		//console.log(recipientproduto);
+		var modal = $(this)
+		modal.find('.modal-title').text('id do Produto: ' + recipientidproduto)
+		modal.find('#id_Produto').val(recipientidproduto)
+		modal.find('#Produtos').val(recipientproduto)
+	})
+	
+	$('#alterar_produto_form').on('submit', function(event){
+		//alert('ok - Alterar o Produto');
+		
+		event.preventDefault();
+		var produto = $('#Produtos').val();
+		//console.log(produto);
+		//exit();
+		
+		if($('#Produtos').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-alterar-produto").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{
+			
+			//Fechar a mensagem de erro
+			$('#msg-error-alterar-produto').hide();
+			//Fechar o botão Alterar
+			$('#AlterarProduto').hide();
+			//Fechar o botão Cancelar
+			$('#CancelarProduto').hide();
+			//Abre o Aguardar
+			$('.aguardarAlterarProduto').show();
+			//Fechar a janela modal alterar
+			$('#addProdutoModal').modal('hide');
+			
+			//Receber os dados do formulário
+			var dados = $("#alterar_produto_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/edicoes/Produto.php?', dados, function (retorna){
+			 
+				//console.log(retorna);
+				
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#alterar_produto_form')[0].reset();
+					
+					//Fechar a janela modal alterar
+					$('#alterarProduto').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-alterar-produto").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-alterar-produto").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Produto!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}
+		
+	});	
+
+	$('#alterarAtributo').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget)
+		var recipientidatributo = button.data('whateveridatributo')
+		var recipientatributo = button.data('whateveratributo')
+		//console.log(recipientatributo);
+		var modal = $(this)
+		modal.find('.modal-title').text('id do Atributo: ' + recipientidatributo)
+		modal.find('#id_Atributo').val(recipientidatributo)
+		modal.find('#Atributo').val(recipientatributo)
+	})
+	
+	$('#alterar_atributo_form').on('submit', function(event){
+		//alert('ok - Alterar o Atributo');
+		
+		event.preventDefault();
+		var atributo = $('#Atributo').val();
+		//console.log(atributo);
+		//exit();
+		
+		if($('#Atributo').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-alterar-atributo").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{
+			
+			//Fechar a mensagem de erro
+			$('#msg-error-alterar-atributo').hide();
+			//Fechar o botão Alterar
+			$('#AlterarAtributo').hide();
+			//Fechar o botão Cancelar
+			$('#CancelarAtributo').hide();
+			//Abre o Aguardar
+			$('.aguardarAlterarAtributo').show();
+			//Fechar a janela modal alterar
+			$('#addAtributoModal').modal('hide');
+			
+			//Receber os dados do formulário
+			var dados = $("#alterar_atributo_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/edicoes/Atributo.php?', dados, function (retorna){
+			 
+				//console.log(retorna);
+				
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#alterar_atributo_form')[0].reset();
+					
+					//Fechar a janela modal alterar
+					$('#alterarAtributo').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-alterar-atributo").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-alterar-atributo").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Atributo!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}
+		
+	});	
+
+	$('#alterarOpcao').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget)
+		var recipientidopcao = button.data('whateveridopcao')
+		var recipientopcao = button.data('whateveropcao')
+		//console.log(recipientopcao);
+		var modal = $(this)
+		modal.find('.modal-title').text('id da Opcao: ' + recipientidopcao)
+		modal.find('#id_Opcao').val(recipientidopcao)
+		modal.find('#Opcao').val(recipientopcao)
+	})
+	
+	$('#alterar_opcao_form').on('submit', function(event){
+		//alert('ok - Alterar a Opcao');
+		
+		event.preventDefault();
+		var opcao = $('#Opcao').val();
+		//console.log(opcao);
+		//exit();
+		
+		if($('#Opcao').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-alterar-opcao").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{
+			
+			//Fechar a mensagem de erro
+			$('#msg-error-alterar-opcao').hide();
+			//Fechar o botão Alterar
+			$('#AlterarOpcao').hide();
+			//Fechar o botão Cancelar
+			$('#CancelarOpcao').hide();
+			//Abre o Aguardar
+			$('.aguardarAlterarOpcao').show();
+			//Fechar a janela modal alterar
+			$('#addOpcaoModal').modal('hide');
+			
+			//Receber os dados do formulário
+			var dados = $("#alterar_opcao_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/edicoes/Opcao.php?', dados, function (retorna){
+			 
+				console.log(retorna);
+				
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#alterar_opcao_form')[0].reset();
+					
+					//Fechar a janela modal alterar
+					$('#alterarOpcao').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-alterar-opcao").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-alterar-opcao").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar a Opcao!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
 				}
 				
 			});
