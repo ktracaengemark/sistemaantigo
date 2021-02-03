@@ -11,7 +11,13 @@
 					<div class="col-md-12">
 						<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 							<span class="glyphicon glyphicon-filter"></span>Filtro de Produtos
-						</button>
+						</button>		
+						<a class="btn btn-sm btn-info " href="<?php echo base_url() ?>relatorio/precopromocao" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Lista de Preços
+						</a>		
+						<a class="btn btn-sm btn-info " href="<?php echo base_url() ?>relatorio/promocao" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Lista de Promoções
+						</a>
 						<!--
 						<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 							<span class="glyphicon glyphicon-plus"></span> Novo Produto

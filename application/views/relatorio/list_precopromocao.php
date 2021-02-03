@@ -49,9 +49,9 @@
 								</a>
 							</td>						
 							<!--<td><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>-->
-							<td><?php echo $row['Ativo'] ?></td>
-							<td><?php echo $row['VendaBalcao'] ?></td>
-							<td><?php echo $row['VendaSite'] ?></td>
+							<td><?php echo $row['AtivoPreco'] ?></td>
+							<td><?php echo $row['VendaBalcaoPreco'] ?></td>
+							<td><?php echo $row['VendaSitePreco'] ?></td>
 							<td><?php echo $row['idTab_Promocao'] ?></td>
 							<!--<td><?php echo $row['Promocao'] ?></td>
 							<td><?php echo $row['Descricao'] ?></td>-->

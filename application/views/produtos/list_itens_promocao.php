@@ -4,7 +4,7 @@
 			<tr>
 				<th>id_Valor</th>
 				<th>id_Produto</th>
-				<th>Tipo</th>
+				<th>Produto</th>
 				<th>Valor</th>
 				<th></th>
 			</tr>
@@ -12,9 +12,9 @@
 		<tbody>
 			<?php
 			$i=0;
-			if ($q_precos) {
+			if ($q_itens_promocao) {
 
-				foreach ($q_precos as $row)
+				foreach ($q_itens_promocao as $row)
 				{
 
 					$url = base_url() . 'produtos/tela/' . $row['idTab_Produtos'];
@@ -23,7 +23,7 @@
 					echo '<tr class="clickable-row" data-href="' . $url . '">';
 						echo '<td>' . $row['idTab_Valor'] . '</td>';
 						echo '<td>' . $row['idTab_Produtos'] . '</td>';
-						echo '<td>' . $row['Desconto'] . '</td>';
+						echo '<td>' . $row['Nome_Prod'] . '</td>';
 						echo '<td>' . $row['ValorProduto'] . '</td>';
 						echo '<td></td>';
 					echo '</tr>';            

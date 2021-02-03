@@ -134,6 +134,18 @@ class Produtos_model extends CI_Model {
             return $this->db->insert_id();
         }
     }	
+
+    public function set_promocao($data) {
+
+        $query = $this->db->insert('Tab_Promocao', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
 	
     public function set_item_promocao($data) {
 
@@ -441,7 +453,7 @@ class Produtos_model extends CI_Model {
         return $query;
     }	
 	
-	public function get_item_promocao($data, $desconto) {
+	public function get_item($data, $desconto) {
 		$query = $this->db->query('
 			SELECT * 
 			FROM 
@@ -449,6 +461,41 @@ class Produtos_model extends CI_Model {
 			WHERE 
 				idTab_Produtos = ' . $data . ' AND
 				Desconto = ' . $desconto . '
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }
+
+    public function get_promocao($data) {
+        $query = $this->db->query('
+			SELECT  
+				TPM.*
+			FROM 
+				Tab_Promocao AS TPM
+			WHERE 
+				TPM.idTab_Promocao = ' . $data . '
+		');
+        $query = $query->result_array();
+
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+        return $query[0];
+    }	
+
+	public function get_item_promocao($data, $desconto) {
+		$query = $this->db->query('
+			SELECT * 
+			FROM 
+				Tab_Valor 
+			WHERE 
+				idTab_Promocao = ' . $data . '
 		');
         $query = $query->result_array();
 
@@ -747,7 +794,8 @@ class Produtos_model extends CI_Model {
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TV.Desconto
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = TV.idTab_Promocao
 			WHERE 
-                TV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+                TV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TV.Desconto = "1" 
 				' . $data['idTab_Produtos'] . '
 			ORDER BY  
 				TDS.Desconto ASC,
@@ -777,8 +825,113 @@ class Produtos_model extends CI_Model {
             }
         }
     }
+    
+	public function list_precos_promocoes($data, $x) {
+		
+		$data['idTab_Produtos'] = ($data['idTab_Produtos'] != 0) ? ' AND TV.idTab_Produtos = ' . $data['idTab_Produtos'] : FALSE;
+			
+			/*
+			echo "<pre>";
+			print_r($data['Metodo']);
+			echo "</pre>";
+			exit();
+			*/
+		
+		
+        $query = $this->db->query('
+			SELECT 
+				TV.*,
+				TDS.*,
+				TPM.DataInicioProm,
+				TPM.DataFimProm,
+				TPM.Promocao,
+				TPM.Descricao
+			FROM 
+				Tab_Valor AS TV
+					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TV.Desconto
+					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = TV.idTab_Promocao
+			WHERE 
+                TV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TV.Desconto = "2"
+				' . $data['idTab_Produtos'] . '
+			ORDER BY  
+				TDS.Desconto ASC,
+				TPM.Promocao ASC 
+		');
 
-    public function lista_produtos($x) {
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+    
+	public function list_promocoes($data, $x) {
+		
+		//$data['idTab_Produtos'] = ($data['idTab_Produtos'] != 0) ? ' AND TV.idTab_Produtos = ' . $data['idTab_Produtos'] : FALSE;
+			
+			/*
+			echo "<pre>";
+			print_r($data['Metodo']);
+			echo "</pre>";
+			exit();
+			*/
+		
+		
+        $query = $this->db->query('
+			SELECT 
+				TPM.*
+			FROM 
+				Tab_Promocao AS TPM
+			WHERE 
+                TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TPM.Desconto = "2"
+			ORDER BY
+				TPM.Promocao ASC 
+		');
+
+       /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+
+	public function lista_produtos($x) {
 
 		#$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produto = ' . $data['Produtos'] : FALSE;
 		
@@ -800,6 +953,59 @@ class Produtos_model extends CI_Model {
 			ORDER BY 
 				T3.Prodaux3 ASC, 
 				TP.Produtos ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+    
+	public function list_itens_promocao($data, $x) {
+		
+		$data['idTab_Promocao'] = ($data['idTab_Promocao'] != 0) ? ' AND TV.idTab_Promocao = ' . $data['idTab_Promocao'] : FALSE;
+			
+			/*
+			echo "<pre>";
+			print_r($data['idTab_Promocao']);
+			echo "</pre>";
+			exit();
+			*/
+		
+		
+        $query = $this->db->query('
+			SELECT 
+				TV.*,
+				TPM.idTab_Promocao,
+				TPS.idTab_Produtos,
+				TPS.Nome_Prod
+			FROM 
+				Tab_Valor AS TV
+					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = TV.idTab_Promocao
+					LEFT JOIN Tab_Produtos AS TPS ON TPS.idTab_Produtos = TV.idTab_Produtos
+			WHERE 
+                TV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				' . $data['idTab_Promocao'] . '
+			ORDER BY  
+				TPS.Nome_Prod ASC 
 		');
 
         /*
@@ -899,6 +1105,14 @@ class Produtos_model extends CI_Model {
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }	
+	
+    public function update_promocao($data, $id) {
+
+        unset($data['idTab_Promocao']);
+        $query = $this->db->update('Tab_Promocao', $data, array('idTab_Promocao' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
 
     public function update_item_promocao($data) {
 

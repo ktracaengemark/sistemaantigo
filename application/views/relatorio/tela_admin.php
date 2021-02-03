@@ -458,14 +458,14 @@
 								<div class="row">
 									<div class="form-group col-md-12 text-left">													
 										<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/precopromocao" role="button"> 
-											<span class="glyphicon glyphicon-usd"></span> Preço & Comissão dos Produtos
+											<span class="glyphicon glyphicon-usd"></span> Preços
 										</a>
 									</div>	
 								</div>
 								<div class="row">
 									<div class="form-group col-md-12 text-left">													
 										<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/promocao" role="button"> 
-											<span class="glyphicon glyphicon-usd"></span> Preço & Comissão das Promoções
+											<span class="glyphicon glyphicon-usd"></span> Promoções
 										</a>
 									</div>	
 								</div>

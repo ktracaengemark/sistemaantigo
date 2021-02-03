@@ -32,15 +32,15 @@
 						<?php
 						foreach ($report->result_array() as $row) {?>
 
-					<!--<tr class="clickable-row" data-href="<?php echo base_url() . 'promocao/alterarlogo/' . $row['idTab_Promocao'] . ''; ?>">-->
+					<!--<tr class="clickable-row" data-href="<?php echo base_url() . 'promocao/alterarlogopromocao/' . $row['idTab_Promocao'] . ''; ?>">-->
 						<tr>	
 							<td class="notclickable">
-								<a class="notclickable" href="<?php echo base_url() . 'promocao/alterarlogo/' . $row['idTab_Promocao'] . ''; ?>">
+								<a class="notclickable" href="<?php echo base_url() . 'produtos/alterarlogopromocao/' . $row['idTab_Promocao'] . ''; ?>">
 									<img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'>
 								</a>
 							</td>
 							<td class="notclickable">
-								<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'promocao/alterar5/' . $row['idTab_Promocao'] . ''; ?>">
+								<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'produtos/tela_promocao/' . $row['idTab_Promocao'] . ''; ?>">
 									<span class="glyphicon glyphicon-edit notclickable"></span>
 								</a>
 							</td>						

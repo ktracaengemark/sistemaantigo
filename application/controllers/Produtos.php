@@ -142,6 +142,216 @@ class Produtos extends CI_Controller {
         $this->load->view('basico/footer');
     }
 	
+    public function tela($id = FALSE) {
+			
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+			'idCat_Atributo',
+			'idCat_Opcao',
+			'idAtributo_Opcao',
+			'idCat_Produto',
+			'Codigo',
+        ), TRUE));	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $data['produtos'] = quotes_to_entities($this->input->post(array(
+            #### Tab_Produtos ####
+            'idTab_Produtos',			
+            'idTab_Catprod', 
+            'idTab_Produto',
+			'Opcao_Atributo_1',
+			'Opcao_Atributo_2', 
+            'Cod_Prod',
+        ), TRUE));
+
+
+        if ($id) {
+            #### Tab_Produtos ####
+           $_SESSION['Produtos'] = $data['produtos'] = $this->Produtos_model->get_produtos($id);
+        
+            #### Tab_Atributo_Select ####
+            $_SESSION['Atributo'] = $data['atributo'] = $this->Produtos_model->get_atributos($_SESSION['Produtos']['idTab_Catprod']);
+            if (count($data['atributo']) > 0) {
+                $data['atributo'] = array_combine(range(1, count($data['atributo'])), array_values($data['atributo']));
+                $conta_atributos = count($data['atributo']);
+				/*
+				echo '<br>';
+				  echo "<pre>";
+				  print_r($conta_atributos);
+				  echo '<br>';
+				  echo "</pre>";
+				 */ 
+				if (isset($data['atributo'])) {
+					if ($conta_atributos >= 2) {
+						for($j=1; $j <= $conta_atributos; $j++){
+							$_SESSION['Atributo'][$j]['idTab_Atributo'] = $data['atributo'][$j]['idTab_Atributo'];
+							$_SESSION['Atributo'][$j]['Atributo'] = $data['atributo'][$j]['Atributo'];
+							/*
+							  echo '<br>';
+							  echo "<pre>";
+							  //print_r($conta_atributos);
+							  echo '<br>';
+							  print_r($_SESSION['Atributo'][$j]['idTab_Atributo']);
+							  echo '<br>';
+							  print_r($_SESSION['Atributo'][$j]['Atributo']);
+							  echo "</pre>";					
+							*/
+						}
+					}else{
+						for($j=1; $j <= $conta_atributos; $j++){
+							$_SESSION['Atributo'][1]['idTab_Atributo'] = $data['atributo'][$j]['idTab_Atributo'];
+							$_SESSION['Atributo'][1]['Atributo'] = $data['atributo'][$j]['Atributo'];
+						}
+						$_SESSION['Atributo'][2]['idTab_Atributo'] = FALSE;
+						$_SESSION['Atributo'][2]['Atributo'] = FALSE;
+					}
+				}
+				/*
+				$item_atributo = 1;	
+				foreach($data['atributo'] as $atributo_view){
+					$_SESSION['Atributo'][$item_atributo]['idTab_Atributo'] = $atributo_view['idTab_Atributo'];
+					$_SESSION['Atributo'][$item_atributo]['Atributo'] = $atributo_view['Atributo'];
+					$item_atributo++;
+				}
+				*/
+				
+            }else{
+				$_SESSION['Atributo'][1]['idTab_Atributo'] = FALSE;
+				$_SESSION['Atributo'][1]['Atributo'] = FALSE;
+				$_SESSION['Atributo'][2]['idTab_Atributo'] = FALSE;
+				$_SESSION['Atributo'][2]['Atributo'] = FALSE;
+			}		
+		
+		
+		}
+
+         // exit ();
+		
+		
+		//$data['cadastrar']['Codigo'] = $data['produtos']['idTab_Catprod'] . ':' . $data['produtos']['idTab_Produto'] . ':' . $data['produtos']['Opcao_Atributo_1'] . ':' . $data['produtos']['Opcao_Atributo_2'];
+		  
+	
+
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+		$data['select']['idCat_Atributo'] = $this->Basico_model->select_catprod();
+		$data['select']['idCat_Opcao'] = $this->Basico_model->select_catprod();
+		$data['select']['idAtributo_Opcao'] = $this->Basico_model->select_atributo($_SESSION['Produtos']['idTab_Catprod']);	
+		$data['select']['idTab_Catprod'] = $this->Basico_model->select_catprod();
+		$data['select']['idCat_Produto'] = $this->Basico_model->select_catprod();	
+		$data['select']['idTab_Produto'] = $this->Basico_model->select_produto($_SESSION['Produtos']['idTab_Catprod']);
+		$data['select']['Opcao_Atributo_1'] = $this->Basico_model->select_opcao_atributo1($_SESSION['Produtos']['idTab_Catprod'], $_SESSION['Atributo'][1]['idTab_Atributo']);
+		$data['select']['Opcao_Atributo_2'] = $this->Basico_model->select_opcao_atributo2($_SESSION['Produtos']['idTab_Catprod'], $_SESSION['Atributo'][2]['idTab_Atributo']);
+		
+        $data['titulo'] = 'Tela';
+        $data['form_open_path'] = 'produtos/tela';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 4;
+
+        $data['sidebar'] = 'col-sm-3 col-md-2';
+        $data['main'] = 'col-sm-7 col-md-8';
+
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';       
+
+		$data['q1'] = $this->Produtos_model->list_categoria($_SESSION['log'], TRUE);
+		$data['list1'] = $this->load->view('produtos/list_categoria', $data, TRUE);
+		
+		$data['q2'] = $this->Produtos_model->list_produto($data['produtos'], TRUE);
+		$data['list2'] = $this->load->view('produtos/list_produto', $data, TRUE);
+		
+		$data['q3'] = $this->Produtos_model->list_atributo($data['produtos'], TRUE);
+		$data['list3'] = $this->load->view('produtos/list_atributo', $data, TRUE);
+		
+		$data['q4'] = $this->Produtos_model->list_opcao($data['produtos'], TRUE);
+		$data['list4'] = $this->load->view('produtos/list_opcao', $data, TRUE);
+		
+		$data['q'] = $this->Produtos_model->list_produtos($data['produtos'], TRUE);
+		$data['list'] = $this->load->view('produtos/list_produtos', $data, TRUE);			
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$this->form_validation->set_rules('idTab_Catprod', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('idTab_Produto', 'Produto', 'required|trim');
+		$this->form_validation->set_rules('Cod_Prod', 'Código', 'required|trim|is_unique_by_id_empresa[Tab_Produtos.Cod_Prod.' . $data['produtos']['idTab_Produtos'] . '.idSis_Empresa.' . $_SESSION['Produtos']['idSis_Empresa'] . ']');
+		//$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');			
+		/*
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit ();
+          */
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('produtos/form_produtos', $data);
+        } else {
+			/*
+			echo '<br>';
+			echo "<pre>";
+			print_r($data['cadastrar']['Codigo']);
+			echo "</pre>";
+			exit ();
+			*/
+		
+			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];			
+
+            ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+            #### Tab_Produtos ####
+
+			$data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produtos']);
+            $data['update']['produtos']['campos'] = array_keys($data['produtos']);
+            $data['update']['produtos']['auditoriaitem'] = $this->basico->set_log(
+                $data['update']['produtos']['anterior'],
+                $data['produtos'],
+                $data['update']['produtos']['campos'],
+                $data['produtos']['idTab_Produtos'], TRUE);
+            $data['update']['produtos']['bd'] = $this->Produtos_model->update_produtos($data['produtos'], $data['produtos']['idTab_Produtos']);
+
+
+            //if ($data['idTab_Produtos'] === FALSE) {
+            //if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
+            if ($data['auditoriaitem'] && !$data['update']['produtos']['bd']) {
+                $data['msg'] = '?m=2';
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+                $this->load->view('produtos/form_produtos', $data);
+            } else {
+
+                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Produtos'], FALSE);
+                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produtos', 'CREATE', $data['auditoriaitem']);
+                $data['msg'] = '?m=1';
+
+                #redirect(base_url() . 'produtos/listar/' . $data['msg']);
+				//unset($data['cadastrar']['Codigo']);
+				//unset($_SESSION['Produtos']);
+                //unset($_SESSION['Atributos']);
+				//redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
+				redirect(base_url() . 'produtos/alterar2/' . $data['produtos']['idTab_Produtos'] . $data['msg']);
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+
+    }
+		
     public function alterar($id = FALSE) {
 			
         if ($this->input->get('m') == 1)
@@ -578,217 +788,7 @@ class Produtos extends CI_Controller {
         $this->load->view('basico/footer');
 
     }
-	
-    public function tela($id = FALSE) {
-			
-        if ($this->input->get('m') == 1)
-            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
-        elseif ($this->input->get('m') == 2)
-            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
-        else
-            $data['msg'] = '';
-		
-		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
-			'Cadastrar',
-			'idCat_Atributo',
-			'idCat_Opcao',
-			'idAtributo_Opcao',
-			'idCat_Produto',
-			'Codigo',
-        ), TRUE));	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        $data['produtos'] = quotes_to_entities($this->input->post(array(
-            #### Tab_Produtos ####
-            'idTab_Produtos',			
-            'idTab_Catprod', 
-            'idTab_Produto',
-			'Opcao_Atributo_1',
-			'Opcao_Atributo_2', 
-            'Cod_Prod',
-        ), TRUE));
 
-
-        if ($id) {
-            #### Tab_Produtos ####
-           $_SESSION['Produtos'] = $data['produtos'] = $this->Produtos_model->get_produtos($id);
-        
-            #### Tab_Atributo_Select ####
-            $_SESSION['Atributo'] = $data['atributo'] = $this->Produtos_model->get_atributos($_SESSION['Produtos']['idTab_Catprod']);
-            if (count($data['atributo']) > 0) {
-                $data['atributo'] = array_combine(range(1, count($data['atributo'])), array_values($data['atributo']));
-                $conta_atributos = count($data['atributo']);
-				/*
-				echo '<br>';
-				  echo "<pre>";
-				  print_r($conta_atributos);
-				  echo '<br>';
-				  echo "</pre>";
-				 */ 
-				if (isset($data['atributo'])) {
-					if ($conta_atributos >= 2) {
-						for($j=1; $j <= $conta_atributos; $j++){
-							$_SESSION['Atributo'][$j]['idTab_Atributo'] = $data['atributo'][$j]['idTab_Atributo'];
-							$_SESSION['Atributo'][$j]['Atributo'] = $data['atributo'][$j]['Atributo'];
-							/*
-							  echo '<br>';
-							  echo "<pre>";
-							  //print_r($conta_atributos);
-							  echo '<br>';
-							  print_r($_SESSION['Atributo'][$j]['idTab_Atributo']);
-							  echo '<br>';
-							  print_r($_SESSION['Atributo'][$j]['Atributo']);
-							  echo "</pre>";					
-							*/
-						}
-					}else{
-						for($j=1; $j <= $conta_atributos; $j++){
-							$_SESSION['Atributo'][1]['idTab_Atributo'] = $data['atributo'][$j]['idTab_Atributo'];
-							$_SESSION['Atributo'][1]['Atributo'] = $data['atributo'][$j]['Atributo'];
-						}
-						$_SESSION['Atributo'][2]['idTab_Atributo'] = FALSE;
-						$_SESSION['Atributo'][2]['Atributo'] = FALSE;
-					}
-				}
-				/*
-				$item_atributo = 1;	
-				foreach($data['atributo'] as $atributo_view){
-					$_SESSION['Atributo'][$item_atributo]['idTab_Atributo'] = $atributo_view['idTab_Atributo'];
-					$_SESSION['Atributo'][$item_atributo]['Atributo'] = $atributo_view['Atributo'];
-					$item_atributo++;
-				}
-				*/
-				
-            }else{
-				$_SESSION['Atributo'][1]['idTab_Atributo'] = FALSE;
-				$_SESSION['Atributo'][1]['Atributo'] = FALSE;
-				$_SESSION['Atributo'][2]['idTab_Atributo'] = FALSE;
-				$_SESSION['Atributo'][2]['Atributo'] = FALSE;
-			}		
-		
-		
-		}
-
-         // exit ();
-		
-		
-		//$data['cadastrar']['Codigo'] = $data['produtos']['idTab_Catprod'] . ':' . $data['produtos']['idTab_Produto'] . ':' . $data['produtos']['Opcao_Atributo_1'] . ':' . $data['produtos']['Opcao_Atributo_2'];
-		  
-	
-
-        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
-		$data['select']['idCat_Atributo'] = $this->Basico_model->select_catprod();
-		$data['select']['idCat_Opcao'] = $this->Basico_model->select_catprod();
-		$data['select']['idAtributo_Opcao'] = $this->Basico_model->select_atributo($_SESSION['Produtos']['idTab_Catprod']);	
-		$data['select']['idTab_Catprod'] = $this->Basico_model->select_catprod();
-		$data['select']['idCat_Produto'] = $this->Basico_model->select_catprod();	
-		$data['select']['idTab_Produto'] = $this->Basico_model->select_produto($_SESSION['Produtos']['idTab_Catprod']);
-		$data['select']['Opcao_Atributo_1'] = $this->Basico_model->select_opcao_atributo1($_SESSION['Produtos']['idTab_Catprod'], $_SESSION['Atributo'][1]['idTab_Atributo']);
-		$data['select']['Opcao_Atributo_2'] = $this->Basico_model->select_opcao_atributo2($_SESSION['Produtos']['idTab_Catprod'], $_SESSION['Atributo'][2]['idTab_Atributo']);
-		
-        $data['titulo'] = 'Tela';
-        $data['form_open_path'] = 'produtos/tela';
-        $data['readonly'] = '';
-        $data['disabled'] = '';
-        $data['panel'] = 'primary';
-        $data['metodo'] = 4;
-
-        $data['sidebar'] = 'col-sm-3 col-md-2';
-        $data['main'] = 'col-sm-7 col-md-8';
-
-        $data['datepicker'] = 'DatePicker';
-        $data['timepicker'] = 'TimePicker';
-
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
-		
-		$data['radio'] = array(
-            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
-        );
-        ($data['cadastrar']['Cadastrar'] == 'N') ?
-            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';       
-
-		$data['q1'] = $this->Produtos_model->list_categoria($_SESSION['log'], TRUE);
-		$data['list1'] = $this->load->view('produtos/list_categoria', $data, TRUE);
-		
-		$data['q2'] = $this->Produtos_model->list_produto($data['produtos'], TRUE);
-		$data['list2'] = $this->load->view('produtos/list_produto', $data, TRUE);
-		
-		$data['q3'] = $this->Produtos_model->list_atributo($data['produtos'], TRUE);
-		$data['list3'] = $this->load->view('produtos/list_atributo', $data, TRUE);
-		
-		$data['q4'] = $this->Produtos_model->list_opcao($data['produtos'], TRUE);
-		$data['list4'] = $this->load->view('produtos/list_opcao', $data, TRUE);
-		
-		$data['q'] = $this->Produtos_model->list_produtos($data['produtos'], TRUE);
-		$data['list'] = $this->load->view('produtos/list_produtos', $data, TRUE);			
-		
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-		$this->form_validation->set_rules('idTab_Catprod', 'Categoria', 'required|trim');
-		$this->form_validation->set_rules('idTab_Produto', 'Produto', 'required|trim');
-		$this->form_validation->set_rules('Cod_Prod', 'Código', 'required|trim|is_unique_by_id_empresa[Tab_Produtos.Cod_Prod.' . $data['produtos']['idTab_Produtos'] . '.idSis_Empresa.' . $_SESSION['Produtos']['idSis_Empresa'] . ']');
-		//$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');			
-		/*
-          echo '<br>';
-          echo "<pre>";
-          print_r($data);
-          echo "</pre>";
-          exit ();
-          */
-
-        #run form validation
-        if ($this->form_validation->run() === FALSE) {
-            $this->load->view('produtos/form_produtos', $data);
-        } else {
-			/*
-			echo '<br>';
-			echo "<pre>";
-			print_r($data['cadastrar']['Codigo']);
-			echo "</pre>";
-			exit ();
-			*/
-		
-			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];			
-
-            ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
-            #### Tab_Produtos ####
-
-			$data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produtos']);
-            $data['update']['produtos']['campos'] = array_keys($data['produtos']);
-            $data['update']['produtos']['auditoriaitem'] = $this->basico->set_log(
-                $data['update']['produtos']['anterior'],
-                $data['produtos'],
-                $data['update']['produtos']['campos'],
-                $data['produtos']['idTab_Produtos'], TRUE);
-            $data['update']['produtos']['bd'] = $this->Produtos_model->update_produtos($data['produtos'], $data['produtos']['idTab_Produtos']);
-
-
-            //if ($data['idTab_Produtos'] === FALSE) {
-            //if ($data['auditoriaitem'] && $this->Cliente_model->update_cliente($data['query'], $data['query']['idApp_Cliente']) === FALSE) {
-            if ($data['auditoriaitem'] && !$data['update']['produtos']['bd']) {
-                $data['msg'] = '?m=2';
-                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
-
-                $this->basico->erro($msg);
-                $this->load->view('produtos/form_produtos', $data);
-            } else {
-
-                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Produtos'], FALSE);
-                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produtos', 'CREATE', $data['auditoriaitem']);
-                $data['msg'] = '?m=1';
-
-                #redirect(base_url() . 'produtos/listar/' . $data['msg']);
-				//unset($data['cadastrar']['Codigo']);
-				//unset($_SESSION['Produtos']);
-                //unset($_SESSION['Atributos']);
-				//redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
-				redirect(base_url() . 'produtos/alterar2/' . $data['produtos']['idTab_Produtos'] . $data['msg']);
-                exit();
-            }
-        }
-
-        $this->load->view('basico/footer');
-
-    }
-	
     public function tela_precos($id = FALSE) {
 			
         if ($this->input->get('m') == 1)
@@ -901,7 +901,10 @@ class Produtos extends CI_Controller {
 		$data['list'] = $this->load->view('produtos/list_produtos', $data, TRUE);
 		*/
 		$data['q_precos'] = $this->Produtos_model->list_precos($data['produtos'], TRUE);
-		$data['list_precos'] = $this->load->view('produtos/list_precos', $data, TRUE);			
+		$data['list_precos'] = $this->load->view('produtos/list_precos', $data, TRUE);
+		
+		$data['q_precos_promocoes'] = $this->Produtos_model->list_precos_promocoes($data['produtos'], TRUE);
+		$data['list_precos_promocoes'] = $this->load->view('produtos/list_precos_promocoes', $data, TRUE);			
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 		//$this->form_validation->set_rules('idTab_Catprod', 'Categoria', 'required|trim');
@@ -1036,7 +1039,7 @@ class Produtos extends CI_Controller {
 			*/
 			
             #### Tab_Valor ####
-            $data['item_promocao'] = $this->Produtos_model->get_item_promocao($id, "1");
+            $data['item_promocao'] = $this->Produtos_model->get_item($id, "1");
             if (count($data['item_promocao']) > 0) {
                 $data['item_promocao'] = array_combine(range(1, count($data['item_promocao'])), array_values($data['item_promocao']));
                 $data['count']['PTCount'] = count($data['item_promocao']);
@@ -1135,7 +1138,7 @@ class Produtos extends CI_Controller {
             $data['update']['produtos']['bd'] = $this->Produtos_model->update_produtos($data['produtos'], $data['produtos']['idTab_Produtos']);
 			*/
             #### Tab_Valor ####
-            $data['update']['item_promocao']['anterior'] = $this->Produtos_model->get_item_promocao($data['produtos']['idTab_Produtos'], "1");
+            $data['update']['item_promocao']['anterior'] = $this->Produtos_model->get_item($data['produtos']['idTab_Produtos'], "1");
             if (isset($data['item_promocao']) || (!isset($data['item_promocao']) && isset($data['update']['item_promocao']['anterior']) ) ) {
 
                 if (isset($data['item_promocao']))
@@ -1198,6 +1201,116 @@ class Produtos extends CI_Controller {
         $this->load->view('basico/footer');
 
     }
+
+    public function cadastrar_promocao() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+			elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		/*
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+			'TipoCatprod',
+        ), TRUE));
+		*/
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $data['promocao'] = quotes_to_entities($this->input->post(array(
+            #### Tab_Promocao ####
+            'idTab_Promocao',  
+            'Promocao',  
+            'Descricao',
+        ), TRUE));
+
+        //$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();	
+		//$data['select']['TipoCatprod'] = $this->Basico_model->select_prod_serv();	
+		//$data['select']['idTab_Catprod'] = $this->Basico_model->select_catprod();
+		
+        $data['titulo'] = 'Cadastrar Promocao';
+        $data['form_open_path'] = 'produtos/cadastrar_promocao';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 1;
+
+        $data['sidebar'] = 'col-sm-3 col-md-2';
+        $data['main'] = 'col-sm-7 col-md-8';
+
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+		/*
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
+		*/
+        
+		$data['q_promocoes'] = $this->Produtos_model->list_promocoes($_SESSION['log'], TRUE);
+		$data['list_promocoes'] = $this->load->view('produtos/list_promocoes', $data, TRUE);		
+		
+		
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$this->form_validation->set_rules('Promocao', 'Titulo', 'required|trim');
+		$this->form_validation->set_rules('Descricao', 'Descrição', 'required|trim');
+		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
+		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		//$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');	
+		/*
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit ();
+          */
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('produtos/form_promocao', $data);
+        } else {
+			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+
+			#### Tab_Promocao ####
+			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
+			$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'UTF-8'));
+			$data['promocao']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];            
+            $data['promocao']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+            $data['promocao']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+            $data['promocao']['Desconto'] = 2;
+            $data['promocao']['idTab_Promocao'] = $this->Produtos_model->set_promocao($data['promocao']);
+            /*
+            echo count($data['servico']);
+            echo '<br>';
+            echo "<pre>";
+            print_r($data['servico']);
+            echo "</pre>";
+            exit ();
+            */
+
+            if ($data['idTab_Promocao'] === FALSE) {
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+                $this->load->view('produtos/form_promocao', $data);
+            } else {
+
+                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Produtos'], FALSE);
+                //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produtos', 'CREATE', $data['auditoriaitem']);
+                $data['msg'] = '?m=1';
+
+                #redirect(base_url() . 'produtos/listar/' . $data['msg']);
+				//redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
+				redirect(base_url() . 'produtos/tela_promocao/' . $data['promocao']['idTab_Promocao'] . $data['msg']);
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
 	
     public function tela_promocao($id = FALSE) {
 			
@@ -1207,7 +1320,7 @@ class Produtos extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-		
+		/*
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'Cadastrar',
 			'idCat_Atributo',
@@ -1216,56 +1329,99 @@ class Produtos extends CI_Controller {
 			'idCat_Produto',
 			'Codigo',
         ), TRUE));
-		
+		*/
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        $data['produtos'] = quotes_to_entities($this->input->post(array(
-            #### Tab_Produtos ####
-            'idTab_Produtos',			
-            //'idTab_Catprod', 
-            //'idTab_Produto',
+        $data['promocao'] = quotes_to_entities($this->input->post(array(
+            #### Tab_Promocao ####
+            'idTab_Promocao',			
+            'Promocao', 
+            'Descricao',
 			//'Opcao_Atributo_1',
 			//'Opcao_Atributo_2', 
             //'Cod_Prod',
         ), TRUE));
 
+		
+		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');		
+		
+        $j = 1;
+        for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
+            if ($this->input->post('ValorProduto' . $i)) {
+				$data['item_promocao'][$j]['idTab_Valor'] = $this->input->post('idTab_Valor' . $i);
+                $data['item_promocao'][$j]['QtdProdutoDesconto'] = $this->input->post('QtdProdutoDesconto' . $i);
+				$data['item_promocao'][$j]['QtdProdutoIncremento'] = $this->input->post('QtdProdutoIncremento' . $i);
+				$data['item_promocao'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
+				$data['item_promocao'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
+				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
+				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
+				$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
+				$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
+				$data['item_promocao'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
+                $j++;
+            }
+						
+        }
+        $data['count']['PTCount'] = $j - 1;		
+		
         if ($id) {
-            #### Tab_Produtos ####
-			$_SESSION['Produtos'] = $data['produtos'] = $this->Produtos_model->get_produtos($id);
-			
+            #### Tab_Promocao ####
+           $_SESSION['Promocao'] = $data['promocao'] = $this->Produtos_model->get_promocao($id);
+
+            #### Tab_Valor ####
+            $data['item_promocao'] = $this->Produtos_model->get_item_promocao($id, "2");
+            if (count($data['item_promocao']) > 0) {
+                $data['item_promocao'] = array_combine(range(1, count($data['item_promocao'])), array_values($data['item_promocao']));
+                $data['count']['PTCount'] = count($data['item_promocao']);
+				/*
+                if (isset($data['item_promocao'])) {
+
+                    for($j=1; $j <= $data['count']['PTCount']; $j++)
+						
+                }
+				*/				
+            }			
+		
+		
 		}
 		
-        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
-		$data['select']['idCat_Atributo'] = $this->Basico_model->select_catprod();
-		$data['select']['idCat_Opcao'] = $this->Basico_model->select_catprod();
-		$data['select']['idAtributo_Opcao'] = $this->Basico_model->select_atributo($_SESSION['Produtos']['idTab_Catprod']);	
-		$data['select']['idTab_Catprod'] = $this->Basico_model->select_catprod();
-		$data['select']['idCat_Produto'] = $this->Basico_model->select_catprod();	
+        //$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+		//$data['select']['idCat_Atributo'] = $this->Basico_model->select_catprod();
+		//$data['select']['idCat_Opcao'] = $this->Basico_model->select_catprod();
+		//$data['select']['idAtributo_Opcao'] = $this->Basico_model->select_atributo($_SESSION['Produtos']['idTab_Catprod']);	
+		//$data['select']['idTab_Catprod'] = $this->Basico_model->select_catprod();
+		//$data['select']['idCat_Produto'] = $this->Basico_model->select_catprod();	
 		//$data['select']['idTab_Produto'] = $this->Basico_model->select_produto($_SESSION['Produtos']['idTab_Catprod']);
 		//$data['select']['Opcao_Atributo_1'] = $this->Basico_model->select_opcao_atributo1($_SESSION['Produtos']['idTab_Catprod'], $_SESSION['Atributo'][1]['idTab_Atributo']);
 		//$data['select']['Opcao_Atributo_2'] = $this->Basico_model->select_opcao_atributo2($_SESSION['Produtos']['idTab_Catprod'], $_SESSION['Atributo'][2]['idTab_Atributo']);
 		
-        $data['titulo'] = 'Tela';
-        $data['form_open_path'] = 'produtos/tela_precos';
+		$data['select']['idTab_Produtos'] = $this->Basico_model->select_produto_promocao();
+		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();		
+		
+		
+        $data['titulo'] = 'Promoção';
+        $data['form_open_path'] = 'produtos/tela_promocao';
         $data['readonly'] = '';
         $data['disabled'] = '';
         $data['panel'] = 'primary';
-        $data['metodo'] = 6;
+        $data['metodo'] = 8;
 
         $data['sidebar'] = 'col-sm-3 col-md-2';
         $data['main'] = 'col-sm-7 col-md-8';
 
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
-
+		/*
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
-            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';       
-		
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+		*/
 		/*
 		$data['q1'] = $this->Produtos_model->list_categoria($_SESSION['log'], TRUE);
 		$data['list1'] = $this->load->view('produtos/list_categoria', $data, TRUE);
@@ -1281,49 +1437,95 @@ class Produtos extends CI_Controller {
 		
 		$data['q'] = $this->Produtos_model->list_produtos($data['produtos'], TRUE);
 		$data['list'] = $this->load->view('produtos/list_produtos', $data, TRUE);
-		*/
+		
 		$data['q_precos'] = $this->Produtos_model->list_precos($data['produtos'], TRUE);
 		$data['list_precos'] = $this->load->view('produtos/list_precos', $data, TRUE);			
+		*/
+		
+		$data['q_itens_promocao'] = $this->Produtos_model->list_itens_promocao($data['promocao'], TRUE);
+		$data['list_itens_promocao'] = $this->load->view('produtos/list_itens_promocao', $data, TRUE);
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-		//$this->form_validation->set_rules('idTab_Catprod', 'Categoria', 'required|trim');
-		$this->form_validation->set_rules('idTab_Produtos', 'Produto', 'required|trim');
+		$this->form_validation->set_rules('idTab_Promocao', 'Promocao', 'required|trim');
+		$this->form_validation->set_rules('Promocao', 'Titulo', 'required|trim');
+		$this->form_validation->set_rules('Descricao', 'Descrição', 'required|trim');
 		//$this->form_validation->set_rules('Cod_Prod', 'Código', 'required|trim|is_unique_by_id_empresa[Tab_Produtos.Cod_Prod.' . $data['produtos']['idTab_Produtos'] . '.idSis_Empresa.' . $_SESSION['Produtos']['idSis_Empresa'] . ']');
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('produtos/form_produtos', $data);
+            $this->load->view('produtos/form_promocao', $data);
         } else {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
-			/*
-			echo '<br>';
-			echo "<pre>";
-			print_r($data['cadastrar']['Codigo']);
-			echo "</pre>";
-			exit ();
-			*/
+
+            #### Tab_Promocao ####
+			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
+			$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'UTF-8'));
 			
-            #### Tab_Produtos ####
+			$data['update']['promocao']['anterior'] = $this->Produtos_model->get_promocao($data['promocao']['idTab_Promocao']);
+            $data['update']['promocao']['campos'] = array_keys($data['promocao']);
+            $data['update']['promocao']['auditoriaitem'] = $this->basico->set_log(
+                $data['update']['promocao']['anterior'],
+                $data['promocao'],
+                $data['update']['promocao']['campos'],
+                $data['promocao']['idTab_Promocao'], TRUE);
+            $data['update']['promocao']['bd'] = $this->Produtos_model->update_promocao($data['promocao'], $data['promocao']['idTab_Promocao']);
+			
+            #### Tab_Valor ####
+            $data['update']['item_promocao']['anterior'] = $this->Produtos_model->get_item_promocao($data['promocao']['idTab_Promocao'], "2");
+            if (isset($data['item_promocao']) || (!isset($data['item_promocao']) && isset($data['update']['item_promocao']['anterior']) ) ) {
 
-			$data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produtos']);
-            $data['update']['produtos']['campos'] = array_keys($data['produtos']);
-            $data['update']['produtos']['auditoriaitem'] = $this->basico->set_log(
-                $data['update']['produtos']['anterior'],
-                $data['produtos'],
-                $data['update']['produtos']['campos'],
-                $data['produtos']['idTab_Produtos'], TRUE);
-            $data['update']['produtos']['bd'] = $this->Produtos_model->update_produtos($data['produtos'], $data['produtos']['idTab_Produtos']);
+                if (isset($data['item_promocao']))
+                    $data['item_promocao'] = array_values($data['item_promocao']);
+                else
+                    $data['item_promocao'] = array();
 
-            if ($data['auditoriaitem'] && !$data['update']['produtos']['bd']) {
+                //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
+                $data['update']['item_promocao'] = $this->basico->tratamento_array_multidimensional($data['item_promocao'], $data['update']['item_promocao']['anterior'], 'idTab_Valor');
+
+                $max = count($data['update']['item_promocao']['inserir']);
+                for($j=0;$j<$max;$j++) {
+					$data['update']['item_promocao']['inserir'][$j]['Item_Promocao'] = "1";
+					$data['update']['item_promocao']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['inserir'][$j]['Convdesc'], 'UTF-8'));
+					$data['update']['item_promocao']['inserir'][$j]['Desconto'] = 2;
+					$data['update']['item_promocao']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+                    $data['update']['item_promocao']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+					$data['update']['item_promocao']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+                    //$data['update']['item_promocao']['inserir'][$j]['idTab_Produtos'] = $data['promocao']['idTab_Produtos'];
+                    $data['update']['item_promocao']['inserir'][$j]['idTab_Promocao'] = $data['promocao']['idTab_Promocao'];
+					//$data['update']['item_promocao']['inserir'][$j]['Prodaux3'] = $_SESSION['Promocao']['idTab_Catprod'];
+					//$data['update']['item_promocao']['inserir'][$j]['idTab_Modelo'] = $_SESSION['Promocao']['idTab_Produto'];
+					$data['update']['item_promocao']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ValorProduto']));
+					$data['update']['item_promocao']['inserir'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoVenda']));
+				}
+
+                $max = count($data['update']['item_promocao']['alterar']);
+                for($j=0;$j<$max;$j++) {
+					$data['update']['item_promocao']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ValorProduto']));
+					$data['update']['item_promocao']['alterar'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['alterar'][$j]['ComissaoVenda']));
+					$data['update']['item_promocao']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['item_promocao']['alterar'][$j]['Convdesc'], 'UTF-8'));
+				}
+
+                if (count($data['update']['item_promocao']['inserir']))
+                    $data['update']['item_promocao']['bd']['inserir'] = $this->Produtos_model->set_item_promocao($data['update']['item_promocao']['inserir']);
+
+                if (count($data['update']['item_promocao']['alterar']))
+                    $data['update']['item_promocao']['bd']['alterar'] =  $this->Produtos_model->update_item_promocao($data['update']['item_promocao']['alterar']);
+
+                if (count($data['update']['item_promocao']['excluir']))
+                    $data['update']['item_promocao']['bd']['excluir'] = $this->Produtos_model->delete_item_promocao($data['update']['item_promocao']['excluir']);
+
+            }
+				
+            if ($data['auditoriaitem'] && !$data['update']['promocao']['bd']) {
                 $data['msg'] = '?m=2';
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('produtos/form_produtos', $data);
+                $this->load->view('produtos/form_promocao', $data);
             } else {
 
                 $data['msg'] = '?m=1';
-				redirect(base_url() . 'produtos/alterar2/' . $data['produtos']['idTab_Produtos'] . $data['msg']);
+				redirect(base_url() . 'produtos/tela_promocao/' . $data['promocao']['idTab_Promocao'] . $data['msg']);
 				
                 exit();
             }
@@ -1904,6 +2106,165 @@ class Produtos extends CI_Controller {
 
 						//redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
 						redirect(base_url() . 'produtos/tela/' . $data['derivado']['idTab_Produtos'] . $data['msg']);
+						exit();
+					}				
+				}
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+	
+    public function alterarlogopromocao($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['promocao'] = $this->input->post(array(
+			'idTab_Promocao',
+        ), TRUE);
+		
+        $data['file'] = $this->input->post(array(
+            'idTab_Promocao',
+			'idSis_Empresa',
+            'Arquivo',
+		), TRUE);
+
+        if ($id) {
+            $_SESSION['Promocao'] = $data['promocao'] = $this->Produtos_model->get_promocao($id, TRUE);
+        }
+		
+        if ($id)
+            $data['file']['idTab_Promocao'] = $id;
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
+            
+			$data['file']['Arquivo'] = $this->basico->renomeiapromocao($_FILES['Arquivo']['name']);
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
+        }
+
+        $data['titulo'] = 'Alterar Foto';
+        $data['form_open_path'] = 'produtos/alterarlogopromocao';
+        $data['readonly'] = 'readonly';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            #load login view
+            $this->load->view('produtos/form_logo_promocao', $data);
+        }
+        else {
+
+            $config['upload_path'] = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/original/';
+            $config['max_size'] = 1000;
+            $config['allowed_types'] = ['jpg','jpeg','pjpeg','png','x-png'];
+            $config['file_name'] = $data['file']['Arquivo'];
+
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('Arquivo')) {
+                $data['msg'] = $this->basico->msg($this->upload->display_errors(), 'erro', FALSE, FALSE, FALSE);
+                $this->load->view('produtos/form_logo_promocao', $data);
+            }
+            else {
+			
+				$dir = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/original/';		
+				$foto = $data['file']['Arquivo'];
+				$diretorio = $dir.$foto;					
+				$dir2 = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/';
+
+				switch($_FILES['Arquivo']['type']):
+					case 'image/jpg';
+					case 'image/jpeg';
+					case 'image/pjpeg';
+				
+						list($largura, $altura, $tipo) = getimagesize($diretorio);
+						
+						$img = imagecreatefromjpeg($diretorio);
+
+						$thumb = imagecreatetruecolor(200, 200);
+						
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
+						
+						imagejpeg($thumb, $dir2 . $foto);
+						imagedestroy($img);
+						imagedestroy($thumb);				      
+					
+					break;					
+
+					case 'image/png':
+					case 'image/x-png';
+						
+						list($largura, $altura, $tipo) = getimagesize($diretorio);
+						
+						$img = imagecreatefrompng($diretorio);
+
+						$thumb = imagecreatetruecolor(200, 200);
+						
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
+						
+						imagejpeg($thumb, $dir2 . $foto);
+						imagedestroy($img);
+						imagedestroy($thumb);				      
+					
+					break;
+					
+				endswitch;			
+
+                $data['camposfile'] = array_keys($data['file']);
+				$data['file']['idSis_Empresa'] = $_SESSION['Empresa']['idSis_Empresa'];
+				$data['idSis_Arquivo'] = $this->Produtos_model->set_arquivo($data['file']);
+
+                if ($data['idSis_Arquivo'] === FALSE) {
+                    $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+                    $this->basico->erro($msg);
+                    $this->load->view('promocao/form_perfil', $data);
+                }
+				else {
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
+					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
+					
+					$data['promocao']['Arquivo'] = $data['file']['Arquivo'];
+					$data['anterior'] = $this->Produtos_model->get_promocao($data['promocao']['idTab_Promocao']);
+					$data['campos'] = array_keys($data['promocao']);
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['promocao'], $data['campos'], $data['promocao']['idTab_Promocao'], TRUE);
+
+					if ($data['auditoriaitem'] && $this->Produtos_model->update_promocao($data['promocao'], $data['promocao']['idTab_Promocao']) === FALSE) {
+						$data['msg'] = '?m=2';
+						redirect(base_url() . 'produtos/form_logo_promocao/' . $data['promocao']['idTab_Promocao'] . $data['msg']);
+						exit();
+					} else {
+
+						if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/original/' . $_SESSION['Promocao']['Arquivo'] . ''))
+							&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/original/' . $_SESSION['Promocao']['Arquivo'] . '')
+							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/original/fotopromocao.jpg'))){
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/original/' . $_SESSION['Promocao']['Arquivo'] . '');						
+						}
+						if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/' . $_SESSION['Promocao']['Arquivo'] . ''))
+							&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/' . $_SESSION['Promocao']['Arquivo'] . '')
+							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/fotopromocao.jpg'))){
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/' . $_SESSION['Promocao']['Arquivo'] . '');						
+						}						
+						
+						if ($data['auditoriaitem'] === FALSE) {
+							$data['msg'] = '';
+						} else {
+							$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Promocao', 'UPDATE', $data['auditoriaitem']);
+							$data['msg'] = '?m=1';
+						}
+
+						redirect(base_url() . 'produtos/tela_promocao/' . $data['promocao']['idTab_Promocao'] . $data['msg']);
 						exit();
 					}				
 				}

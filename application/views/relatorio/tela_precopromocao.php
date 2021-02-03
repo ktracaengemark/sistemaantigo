@@ -10,11 +10,19 @@
 				<div class="row text-left">	
 					<div class="col-md-12">
 						<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
-							<span class="glyphicon glyphicon-filter"></span>Filtro de Produtos
-						</button>
+							<span class="glyphicon glyphicon-filter"></span>Filtro de Preços
+						</button>		
+						<a class="btn btn-sm btn-info " href="<?php echo base_url() ?>relatorio/promocao" role="button">
+							<span class="glyphicon glyphicon-pencil"></span> Lista de Promoções
+						</a>		
+						<a class="btn btn-sm btn-info " href="<?php echo base_url() ?>relatorio/produtos" role="button">
+							<span class="glyphicon glyphicon-pencil"></span> Lista de Produtos
+						</a>
+						<!--
 						<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 							<span class="glyphicon glyphicon-plus"></span> Novo Preço de Venda
 						</button>
+						-->
 					</div>
 				</div>	
 			</div>			
@@ -177,13 +185,15 @@
 						</div>	
 					</div>
 					-->
+					<!--
 					<div class="form-group col-md-4">
 						<div class="form-footer">		
 							<button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 								<span class="glyphicon glyphicon-plus"></span> Novo Preço de Venda
 							</button>							
 						</div>	
-					</div>					
+					</div>
+					-->
 					<div class="form-group col-md-4">
 						<div class="form-footer ">
 							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
@@ -218,13 +228,15 @@
 						</button>
 					</div>
 				</div>
+				<!--
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar4" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Novo Preço de Venda
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>relatorio/produtos" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Novo Preço
 						</a>
 					</div>	
 				</div>
+				-->
 				<div class="form-group col-md-4">
 					<div class="form-footer ">
 						<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">

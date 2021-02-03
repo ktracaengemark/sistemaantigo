@@ -151,20 +151,11 @@ elseif ($_GET['q'] == 12) {
 
     $result = mysql_query('
             SELECT
-                TPS.idTab_Produtos,
-				TPS.idTab_Produto,
-				TOP2.Opcao,
-				TOP1.Opcao,				
-				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,""), " - ", IFNULL(TPS.Valor_Produto,"")) AS Nome_Prod,
-                TPS.Valor_Produto
+                TPS.*
             FROM 
-                Tab_Produtos AS TPS
-					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_1
-					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_2			
+                Tab_Produtos AS TPS		
             WHERE
-                TPS.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
-				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_1'] . '
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY
 				TPS.Nome_Prod ASC	
     ');

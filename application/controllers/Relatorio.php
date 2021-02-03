@@ -6421,9 +6421,6 @@ class Relatorio extends CI_Controller {
 
         $data['select']['Produtos'] = $this->Relatorio_model->select_produtos1();
 		$data['select']['Promocao'] = $this->Relatorio_model->select_promocao();
-		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
-		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
 		$data['select']['TipoProduto'] = $this->Relatorio_model->select_tipoproduto();
 
         $data['titulo'] = 'Promoçoes';
@@ -6475,7 +6472,6 @@ class Relatorio extends CI_Controller {
 
 
         $data['select']['Campo'] = array(
-			'TPM.Promocao' => 'Promocao',
 			'TPD.Nome_Prod' => 'Produtos',
         );
 
@@ -6485,9 +6481,6 @@ class Relatorio extends CI_Controller {
         );
 
         $data['select']['Produtos'] = $this->Relatorio_model->select_produtos1();
-		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
-		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
 		$data['select']['TipoProduto'] = $this->Relatorio_model->select_tipoproduto();
 
         $data['titulo'] = 'Preços das Promoçoes';

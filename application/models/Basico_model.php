@@ -1314,7 +1314,7 @@ if (isset($data) && $data) {
             FROM 
                 Tab_Produto 
             WHERE
-                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
+			idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '	AND
 				idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
     ');
         } else {
@@ -1764,6 +1764,42 @@ if (isset($data) && $data) {
 
         return $array;
     }	
+	
+	public function select_produto_promocao($data = FALSE) {
+		
+		//$permissao1 = isset($_SESSION['Promocao']['Mod_1']) ? 'AND TPS.idTab_Produto = ' . $_SESSION['Promocao']['Mod_1'] : 'AND TPS.idTab_Produto = "0"';
+        
+		if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+                TPS.*
+            FROM 
+                Tab_Produtos AS TPS
+            WHERE
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY
+				TPS.Nome_Prod ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+                TPS.*
+            FROM 
+                Tab_Produtos AS TPS			
+            WHERE
+				TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY
+				TPS.Nome_Prod ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Produtos] = $row->Nome_Prod;
+            }
+        }
+
+        return $array;
+    }
 	
 	public function select_prod_der($data = FALSE) {
 		
