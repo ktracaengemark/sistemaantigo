@@ -1,7 +1,5 @@
 <div style="overflow: auto; height: 550px; ">	
 	<div class="container-fluid">
-		
-
 			<div>
 				<table class="table table-bordered table-condensed table-striped">	
 					<tfoot>
@@ -25,6 +23,8 @@
 							<th class="active">Tipo</th>
 							<th class="active">Categoria</th>
 							<th class="active">Produto</th>
+							<th class="active">Var1</th>
+							<th class="active">Var2</th>
 						</tr>
 					</thead>
 
@@ -47,7 +47,7 @@
 						</td>
 						
 						<td class="notclickable">
-							<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'produtos/alterar2/' . $row['idTab_Produtos'] . ''; ?>">
+							<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'produtos/tela/' . $row['idTab_Produtos'] . ''; ?>">
 								<span class="glyphicon glyphicon-edit notclickable"></span>
 							</a>
 						</td>						
@@ -58,6 +58,8 @@
 						<td><?php echo $row['Prod_Serv'] ?></td>
 						<td><?php echo $row['Catprod'] ?></td>
 						<td><?php echo $row['Nome_Prod'] ?></td>
+						<td><?php echo $row['Opcao1'] ?></td>
+						<td><?php echo $row['Opcao2'] ?></td>
 						<?php } ?>						
 					</tbody>
 

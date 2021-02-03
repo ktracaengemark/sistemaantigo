@@ -21,12 +21,12 @@
 							<th class="active">Balcao</th>
 							<th class="active">Site</th>
 							<th class="active">Id</th>
-							<th class="active">Tipo</th>
 							<!--<th class="active">Titulo</th>
 							<th class="active">Descricao</th>-->
 							<th class="active">IdProd.</th>
 							<th class="active">Qtd.</th>
 							<th class="active">Produto</th>
+							<th class="active">Tipo</th>
 							<th class="active">Valor</th>
 							<th class="active">Comissao</th>
 						</tr>
@@ -44,7 +44,7 @@
 								</a>
 							</td>
 							<td class="notclickable">
-								<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'promocao/alterar4/' . $row['idTab_Promocao'] . ''; ?>">
+								<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'produtos/tela_precos/' . $row['idTab_Produtos'] . ''; ?>">
 									<span class="glyphicon glyphicon-edit notclickable"></span>
 								</a>
 							</td>						
@@ -53,12 +53,12 @@
 							<td><?php echo $row['VendaBalcao'] ?></td>
 							<td><?php echo $row['VendaSite'] ?></td>
 							<td><?php echo $row['idTab_Promocao'] ?></td>
-							<td><?php echo $row['Desconto'] ?></td>
 							<!--<td><?php echo $row['Promocao'] ?></td>
 							<td><?php echo $row['Descricao'] ?></td>-->
 							<td><?php echo $row['idTab_Produtos'] ?></td>
 							<td><?php echo $row['QtdProdutoIncremento'] ?></td>
 							<td><?php echo $row['Nome_Prod'] ?></td>
+							<td><?php echo $row['Desconto'] ?></td>
 							<td><?php echo number_format($row['ValorProduto'], 2, ',','.') ?></td>
 							<td><?php echo number_format($row['ComissaoVenda'], 2, ',','.') ?> %</td>
 						</tr>

@@ -3678,13 +3678,12 @@ exit();*/
                 TPS.*,
 				TPS.Arquivo AS ArquivoProdutos,
 				TPRS.Prod_Serv,
-				TOP2.Opcao,
-				TOP1.Opcao,
+				TOP2.Opcao AS Opcao2,
+				TOP1.Opcao AS Opcao1,
 				TP.idTab_Produto,
 				TP.Produtos,
 				TP.Arquivo AS ArquivoProduto,
 				TP.Ativo,
-				CONCAT(IFNULL(TP.Produtos,""), " ", IFNULL(TOP1.Opcao,""), " ", IFNULL(TOP2.Opcao,"")) AS Nome_Prod,
 				TCP.Catprod
             FROM
                 Tab_Produtos AS TPS
@@ -3976,14 +3975,14 @@ exit();*/
 				TV.QtdProdutoIncremento,
 				TOP2.Opcao,
 				TOP1.Opcao,
-				CONCAT(IFNULL(TPD.Nome_Prod,""), " ", IFNULL(TOP1.Opcao,""), " ", IFNULL(TOP2.Opcao,""), " ", IFNULL(TV.Convdesc,""), " - ", IFNULL(TV.QtdProdutoIncremento,""), " Unid.") AS Nome_Prod,
+				CONCAT(IFNULL(TPD.Nome_Prod,""), " ", IFNULL(TV.Convdesc,""), " - ", IFNULL(TV.QtdProdutoIncremento,""), " Unid.") AS Nome_Prod,
 				TDC.Desconto
             FROM
                 Tab_Promocao AS TPM
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Promocao = TPM.idTab_Promocao
 					LEFT JOIN Tab_Produtos AS TPD ON TPD.idTab_Produtos = TV.idTab_Produtos
-					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPD.Opcao_Atributo_1
-					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPD.Opcao_Atributo_2
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPD.Opcao_Atributo_2
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPD.Opcao_Atributo_1
 					LEFT JOIN Tab_Desconto AS TDC ON TDC.idTab_Desconto = TPM.Desconto					
             WHERE
                 TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
@@ -6019,11 +6018,11 @@ exit();*/
                 OB.idTab_Produtos,
 				TOP2.Opcao,
 				TOP1.Opcao,
-				CONCAT(IFNULL(OB.Nome_Prod,""), " - ", IFNULL(TOP2.Opcao,""), " - ", IFNULL(TOP1.Opcao,"")) AS Produtos
+				CONCAT(IFNULL(OB.Nome_Prod,"")) AS Produtos
             FROM
                 Tab_Produtos AS OB
-					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = OB.Opcao_Atributo_1
-					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = OB.Opcao_Atributo_2
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = OB.Opcao_Atributo_2
+					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = OB.Opcao_Atributo_1
             WHERE
 				OB.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				OB.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '

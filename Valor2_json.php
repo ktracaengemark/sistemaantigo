@@ -26,8 +26,8 @@ $result = mysql_query(
 			CONCAT(IFNULL(T.Nome_Prod,"")," - ",IFNULL(TOP1.Opcao,"")," - ",IFNULL(TOP2.Opcao,"")) AS NomeProduto
         FROM
             Tab_' . $_GET['tabela'] . ' AS T
-				LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = T.Opcao_Atributo_1
-				LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = T.Opcao_Atributo_2			
+				LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = T.Opcao_Atributo_2
+				LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = T.Opcao_Atributo_1			
         WHERE
 			T.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 			T.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '

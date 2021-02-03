@@ -37,15 +37,15 @@ $result = mysql_query(
 			TOP1.Opcao,
 			TDS.Desconto,
 			TPM.Promocao,
-			CONCAT(IFNULL(P.Nome_Prod,"")," - ",IFNULL(TOP1.Opcao,"")," - ",IFNULL(TOP2.Opcao,"")," - ",IFNULL(V.Convdesc,"")) AS NomeProduto
+			CONCAT(IFNULL(P.Nome_Prod,"")," - ",IFNULL(V.Convdesc,"")) AS NomeProduto
         FROM
             Tab_' . $_GET['tabela'] . ' AS V
 				LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 				LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
 				LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = V.idTab_Modelo
 				LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
-				LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_1
-				LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_2
+				LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_2
+				LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_1
         WHERE
 			V.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 			V.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '

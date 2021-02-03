@@ -134,7 +134,19 @@ class Produtos_model extends CI_Model {
             return $this->db->insert_id();
         }
     }	
+	
+    public function set_item_promocao($data) {
 
+        $query = $this->db->insert_batch('Tab_Valor', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+	
     public function get_produto($data) {
 		$query = $this->db->query('
 			SELECT
@@ -428,7 +440,21 @@ class Produtos_model extends CI_Model {
 
         return $query;
     }	
-    
+	
+	public function get_item_promocao($data, $desconto) {
+		$query = $this->db->query('
+			SELECT * 
+			FROM 
+				Tab_Valor 
+			WHERE 
+				idTab_Produtos = ' . $data . ' AND
+				Desconto = ' . $desconto . '
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
 	public function list_categoria($data, $x) {
 		
 		//$data['idSis_Empresa'] = ($data['idSis_Empresa'] != 0) ? ' AND TPS.idSis_Empresa = ' . $data['idSis_Empresa'] : FALSE;
@@ -669,7 +695,63 @@ class Produtos_model extends CI_Model {
 				TPS.idTab_Catprod = ' . $data['idTab_Catprod'] . '
 				' . $data['idTab_Produto'] . '
 			ORDER BY  
-				TPS.idTab_Produtos ASC 
+				TPS.Nome_Prod ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+    
+	public function list_precos($data, $x) {
+		
+		$data['idTab_Produtos'] = ($data['idTab_Produtos'] != 0) ? ' AND TV.idTab_Produtos = ' . $data['idTab_Produtos'] : FALSE;
+			
+			/*
+			echo "<pre>";
+			print_r($data['Metodo']);
+			echo "</pre>";
+			exit();
+			*/
+		
+		
+        $query = $this->db->query('
+			SELECT 
+				TV.*,
+				TDS.*,
+				TPM.DataInicioProm,
+				TPM.DataFimProm,
+				TPM.Promocao,
+				TPM.Descricao
+			FROM 
+				Tab_Valor AS TV
+					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TV.Desconto
+					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = TV.idTab_Promocao
+			WHERE 
+                TV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+				' . $data['idTab_Produtos'] . '
+			ORDER BY  
+				TDS.Desconto ASC,
+				TPM.Promocao ASC 
 		');
 
         /*
@@ -817,6 +899,13 @@ class Produtos_model extends CI_Model {
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }	
+
+    public function update_item_promocao($data) {
+
+        $query = $this->db->update_batch('Tab_Valor', $data, 'idTab_Valor');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }	
 	
     public function delete_valor($data) {
 
@@ -895,6 +984,18 @@ class Produtos_model extends CI_Model {
 		$query = $this->db->delete('Tab_Produtos', array('idTab_Produtos' => $id));
         $query = $this->db->delete('Tab_Valor', array('idTab_Produtos' => $id));
 		
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+	
+    public function delete_item_promocao($data) {
+
+        $this->db->where_in('idTab_Valor', $data);
+        $this->db->delete('Tab_Valor');
+
         if ($this->db->affected_rows() === 0) {
             return FALSE;
         } else {
