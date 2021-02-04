@@ -138,7 +138,7 @@ class Promocao extends CI_Controller {
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produtos', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
-				redirect(base_url() . 'promocao/tela_promocao/' . $data['promocao']['idTab_Promocao'] . $data['msg']);
+				redirect(base_url() . 'promocao/alterar/' . $data['promocao']['idTab_Promocao'] . $data['msg']);
                 exit();
             }
         }

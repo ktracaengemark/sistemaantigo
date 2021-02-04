@@ -64,9 +64,22 @@
 													<?php echo form_error('Nome_Prod'); ?>
 												</div>		
 												<div class="col-md-2">
+													<label for="Estoque">Estoque</label>
+													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['Estoque']; ?>">
+													<?php echo form_error('Estoque'); ?>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-1 " ></div>		
+												<div class="col-md-2">
 													<label for="Cod_Prod">Codigo *</label>
 													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['Cod_Prod']; ?>">
 													<?php echo form_error('Cod_Prod'); ?>
+												</div>		
+												<div class="col-md-2">
+													<label for="Cod_Barra">Codigo de Barra</label>
+													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['Cod_Barra']; ?>">
+													<?php echo form_error('Cod_Barra'); ?>
 												</div>
 											</div>
 										</div>
@@ -240,36 +253,39 @@
 											<div class="row">
 												<?php if ($metodo > 1) { ?>
 													<?php if ($metodo != 4 && $metodo != 6) { ?>
-														<div class="col-md-6">
-															<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
+														<div class="col-md-1"></div>
+														<div class="col-md-2">
+															<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
 																<span class="glyphicon glyphicon-save"></span> Salvar
 															</button>
 														</div>
 													<?php } ?>
 													<?php if ($metodo == 4) { ?>
-														<div class="col-md-3">
-															<a class="btn btn-warning" href="<?php echo base_url() . 'produtos/alterar2/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
+														<div class="col-md-1"></div>
+														<div class="col-md-2">
+															<a class="btn btn-warning btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/alterar2/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
 																<span class="glyphicon glyphicon-edit"></span> Editar Produto
 															</a>
 														</div>
-														<div class="col-md-3">
-															<a class="btn btn-success" href="<?php echo base_url() . 'produtos/tela_precos/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-usd"></span> Ver Preços e Promoções
+														<div class="col-md-2">
+															<a class="btn btn-success btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/tela_precos/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
+																<span class="glyphicon glyphicon-usd"></span> Preços e Promoções
 															</a>
 														</div>
 													<?php }elseif($metodo == 6){ ?>
-														<div class="col-md-3">
-															<a class="btn btn-warning" href="<?php echo base_url() . 'produtos/alterar_valor/' . $valor['idTab_Valor'] ?>" role="button">
-																<span class="glyphicon glyphicon-edit"></span> Editar Apenas este Preço
+														<div class="col-md-1"></div>
+														<div class="col-md-2">
+															<a class="btn btn-warning btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/alterar_valor/' . $valor['idTab_Valor'] ?>" role="button">
+																<span class="glyphicon glyphicon-edit"></span> Editar Apenas Este
 															</a>
 														</div>
-														<div class="col-md-3">
-															<a class="btn btn-warning" href="<?php echo base_url() . 'produtos/alterar_precos/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-edit"></span> Editar Todos os Preços
+														<div class="col-md-2">
+															<a class="btn btn-warning btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/alterar_precos/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
+																<span class="glyphicon glyphicon-edit"></span> Editar Todos
 															</a>
 														</div>
-														<div class="col-md-3">
-															<a class="btn btn-info" href="<?php echo base_url() . 'produtos/tela/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
+														<div class="col-md-2">
+															<a class="btn btn-info btn-block" name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/tela/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
 																<span class="glyphicon glyphicon-pencil"></span> Ver Produtos
 															</a>
 														</div>

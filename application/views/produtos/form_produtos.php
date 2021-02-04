@@ -42,83 +42,6 @@
 									<div class="panel-heading">
 										<?php if ($metodo < 4) { ?>
 											<div class="form-group">
-												<div class="row">
-													<div class="col-md-2 text-left">
-														<label for="Cadastrar">Encontrou?</label><br>
-														<div class="btn-group" data-toggle="buttons">
-															<?php
-																foreach ($select['Cadastrar'] as $key => $row) {
-																	if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
-																	
-																	($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-																	
-																	if ($cadastrar['Cadastrar'] == $key) {
-																		echo ''
-																		. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
-																		. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
-																		. 'onchange="codigo()" '
-																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																		. '</label>'
-																		;
-																		} else {
-																		echo ''
-																		. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
-																		. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
-																		. 'onchange="codigo()" '
-																		. 'autocomplete="off" value="' . $key . '" >' . $row
-																		. '</label>'
-																		;
-																	}
-																}
-															?>
-															
-														</div>
-													</div>
-													<div class="col-md-10 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-														<div class="row">
-															<div class="col-md-2 text-left">	
-																<label >Categoria</label><br>
-																<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCatprodModal">
-																	Cadastrar
-																</button>
-															</div>
-															<?php if ($metodo >= 2) { ?>
-																<div class="col-md-2 text-left">	
-																	<label >Produto Base</label><br>
-																	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addProdutoModal">
-																		Cadastrar
-																	</button>
-																</div>
-															<?php } ?>
-															<?php if ($metodo >= 2) { ?>
-																<div class="col-md-2 text-left">	
-																	<label >Atributos</label><br>
-																	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addAtributoModal">
-																		Cadastrar
-																	</button>
-																</div>	
-																<div class="col-md-2 text-left">
-																	<label >Opcoes</label><br>
-																	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addOpcaoModal">
-																		Cadastrar
-																	</button>
-																</div>
-															<?php } ?>	
-															<div class="col-md-2 text-left">
-																<label >Recarregar</label><br>
-																<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
-																	<span class="glyphicon glyphicon-refresh"></span>Recarregar
-																</button>
-															</div>	
-															<span id="msg"></span>
-														</div>	
-														<?php echo form_error('Cadastrar'); ?>
-													</div>
-												</div>
-											</div>
-										<?php } ?>
-										<?php if ($metodo < 4) { ?>
-											<div class="form-group">
 												<div class="row">	
 													<div class="col-md-3">
 														<label for="idTab_Catprod">Categoria *</label>
@@ -254,9 +177,22 @@
 														<?php echo form_error('Nome_Prod'); ?>
 													</div>		
 													<div class="col-md-2">
+														<label for="Estoque">Estoque</label>
+														<input type="text" class="form-control Numero" <?php echo $readonly ?> id="Estoque" name="Estoque" value="<?php echo $produtos['Estoque']; ?>">
+														<?php echo form_error('Estoque'); ?>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-1" ></div>		
+													<div class="col-md-2">
 														<label for="Cod_Prod">Codigo *</label>
 														<input type="text" class="form-control" readonly="" id="Cod_Prod" name="Cod_Prod" value="<?php echo $produtos['Cod_Prod']; ?>">
 														<?php echo form_error('Cod_Prod'); ?>
+													</div>		
+													<div class="col-md-2">
+														<label for="Cod_Barra">Codigo de Barras</label>
+														<input type="text" class="form-control" <?php echo $readonly ?> id="Cod_Barra" name="Cod_Barra" value="<?php echo $produtos['Cod_Barra']; ?>">
+														<?php echo form_error('Cod_Barra'); ?>
 													</div>
 												</div>
 											</div>	
@@ -290,7 +226,7 @@
 																		</div>
 																		<div class="col-md-2">
 																			<label for="Convdesc">Desc. Embal <?php echo $i ?></label>
-																			<textarea type="text" class="form-control"  id="Convdesc<?php echo $i ?>" <?php echo $readonly; ?>
+																			<textarea type="text" class="form-control"  id="Convdesc<?php echo $i ?>" 
 																					  name="Convdesc<?php echo $i ?>" value="<?php echo $valor[$i]['Convdesc']; ?>"><?php echo $valor[$i]['Convdesc']; ?></textarea>
 																		</div>
 																		<div class="col-md-1">
@@ -420,12 +356,15 @@
 														?>
 
 														</div>
-
+														<!--
 														<div class="form-group">
-															<a class="btn btn-xs btn-danger" onclick="adiciona_precos()">
-																<span class="glyphicon glyphicon-arrow-up"></span> Adiciona Preço de venda
-															</a>
+															<div class="col-md-2">
+																<a class="btn btn-md btn-danger btn-block" onclick="adiciona_precos()">
+																	<span class="glyphicon glyphicon-plus"></span> Adiciona Preço
+																</a>
+															</div>
 														</div>
+														-->
 													</div>
 												</div>
 											</div>
@@ -437,31 +376,44 @@
 											<div class="row">
 												<?php if ($metodo > 1) { ?>
 													<?php if ($metodo != 4 && $metodo != 6) { ?>
-														<div class="col-md-6">
-															<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
+														<div class="col-md-1"></div>
+														<div class="col-md-2">
+															<a class="btn btn-md btn-danger btn-block"  name="submeter2" id="submeter2" onclick="adiciona_precos()">
+																<span class="glyphicon glyphicon-plus"></span> Adiciona Preço
+															</a>
+														</div>
+														<div class="col-md-2">
+															<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
 																<span class="glyphicon glyphicon-save"></span> Salvar
 															</button>
 														</div>
 													<?php } ?>
 													<?php if ($metodo == 4) { ?>
-														<div class="col-md-3">
-															<a class="btn btn-warning" href="<?php echo base_url() . 'produtos/alterar2/' . $produtos['idTab_Produtos'] ?>" role="button">
+														<div class="col-md-1"></div>
+														<div class="col-md-2">
+															<a class="btn btn-warning btn-block" href="<?php echo base_url() . 'produtos/alterar2/' . $produtos['idTab_Produtos'] ?>" role="button">
 																<span class="glyphicon glyphicon-edit"></span> Editar Produto
 															</a>
 														</div>
-														<div class="col-md-3">
-															<a class="btn btn-success" href="<?php echo base_url() . 'produtos/tela_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-usd"></span> Ver Preços e Promoções
+														<div class="col-md-2">
+															<a class="btn btn-success btn-block" href="<?php echo base_url() . 'produtos/tela_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
+																<span class="glyphicon glyphicon-usd"></span> Preços e Promoções
 															</a>
 														</div>
 													<?php }elseif($metodo == 6){ ?>
-														<div class="col-md-3">
-															<a class="btn btn-warning" href="<?php echo base_url() . 'produtos/alterar_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-edit"></span> Editar Preço
+														<div class="col-md-1"></div>
+														<div class="col-md-2">
+															<a class="btn btn-danger btn-block" href="<?php echo base_url() . 'produtos/alterar_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
+																<span class="glyphicon glyphicon-edit"></span> Cad./Edit. Preço
 															</a>
 														</div>
-														<div class="col-md-3">
-															<a class="btn btn-info" href="<?php echo base_url() . 'produtos/tela/' . $produtos['idTab_Produtos'] ?>" role="button">
+														<div class="col-md-2">
+															<a class="btn btn-danger btn-block" href="<?php echo base_url() . 'promocao/cadastrar/' ?>" role="button">
+																<span class="glyphicon glyphicon-edit"></span> Cad./Edit. Promoção
+															</a>
+														</div>
+														<div class="col-md-2">
+															<a class="btn btn-info btn-block" href="<?php echo base_url() . 'produtos/tela/' . $produtos['idTab_Produtos'] ?>" role="button">
 																<span class="glyphicon glyphicon-pencil"></span> Ver Produtos
 															</a>
 														</div>
@@ -529,6 +481,84 @@
 													</div>
 												</div>
 												
+											</div>
+										<?php } ?>
+										<?php if ($metodo < 4) { ?>
+											<div class="form-group">
+												<div class="row">
+													<div class="col-md-1"></div>
+													<div class="col-md-2 text-left">
+														<label for="Cadastrar">Encontrou?</label><br>
+														<div class="btn-group" data-toggle="buttons">
+															<?php
+																foreach ($select['Cadastrar'] as $key => $row) {
+																	if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
+																	
+																	($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																	
+																	if ($cadastrar['Cadastrar'] == $key) {
+																		echo ''
+																		. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
+																		. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																		. 'onchange="codigo()" '
+																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																		. '</label>'
+																		;
+																		} else {
+																		echo ''
+																		. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
+																		. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																		. 'onchange="codigo()" '
+																		. 'autocomplete="off" value="' . $key . '" >' . $row
+																		. '</label>'
+																		;
+																	}
+																}
+															?>
+															
+														</div>
+													</div>
+													<div class="col-md-9 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+														<div class="row">
+															<div class="col-md-2 text-left">	
+																<label >Categoria</label><br>
+																<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCatprodModal">
+																	Cadastrar
+																</button>
+															</div>
+															<?php if ($metodo >= 2) { ?>
+																<div class="col-md-2 text-left">	
+																	<label >Produto Base</label><br>
+																	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addProdutoModal">
+																		Cadastrar
+																	</button>
+																</div>
+															<?php } ?>
+															<?php if ($metodo >= 2) { ?>
+																<div class="col-md-2 text-left">	
+																	<label >Atributos</label><br>
+																	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addAtributoModal">
+																		Cadastrar
+																	</button>
+																</div>	
+																<div class="col-md-2 text-left">
+																	<label >Opcoes</label><br>
+																	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addOpcaoModal">
+																		Cadastrar
+																	</button>
+																</div>
+															<?php } ?>	
+															<div class="col-md-2 text-left">
+																<label >Recarregar</label><br>
+																<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+																	<span class="glyphicon glyphicon-refresh"></span>Recarregar
+																</button>
+															</div>	
+															<span id="msg"></span>
+														</div>	
+														<?php echo form_error('Cadastrar'); ?>
+													</div>
+												</div>
 											</div>
 										<?php } ?>
 									</div>

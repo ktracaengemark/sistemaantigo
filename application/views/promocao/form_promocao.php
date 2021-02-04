@@ -55,7 +55,7 @@
 													<label for="Promocao">Título / Promoção:*</label><br>
 													<?php if ($metodo == 3) { ?>
 														<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Promocao']['Promocao']; ?>">
-													<?php }elseif ($metodo == 2) { ?>
+													<?php }else { ?>
 														<input type="text" class="form-control" maxlength="200" name="Promocao" id="Promocao" value="<?php echo $promocao['Promocao']; ?>">
 													<?php } ?>
 													<?php echo form_error('Promocao'); ?>
@@ -64,7 +64,7 @@
 													<label for="Descricao">Descrição:*</label><br>
 													<?php if ($metodo == 3) { ?>
 														<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Promocao']['Descricao']; ?>">
-													<?php }elseif ($metodo == 2) { ?>
+													<?php }else { ?>
 														<input type="text" class="form-control" maxlength="200" name="Descricao" id="Descricao" value="<?php echo $promocao['Descricao']; ?>">
 													<?php } ?>
 													<?php echo form_error('Descricao'); ?>
@@ -379,14 +379,7 @@
 														}
 														?>
 
-														</div>
-														<?php if ($metodo == 2) { ?>
-															<div class="form-group">
-																<a class="btn btn-xs btn-danger" onclick="adiciona_item_promocao()">
-																	<span class="glyphicon glyphicon-arrow-up"></span> Adiciona Itens 1
-																</a>
-															</div>
-														<?php } ?>	
+														</div>	
 													</div>
 												</div>
 											</div>
@@ -402,20 +395,29 @@
 												<?php } ?>
 												<?php if ($metodo > 1) { ?>
 													<?php if ($metodo == 3) { ?>
-														<div class="col-md-6">
-															<a class="btn btn-md btn-warning" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'promocao/alterar/' . $promocao['idTab_Promocao'] ?>" role="button">
+														<div class="col-md-1"></div>
+														<div class="col-md-2">
+															<a class="btn btn-md btn-warning btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'promocao/alterar/' . $promocao['idTab_Promocao'] ?>" role="button">
 																<span class="glyphicon glyphicon-edit"></span> Editar Promoçao
 															</a>
 														</div>
 													<?php }elseif ($metodo == 2) { ?>
-														<div class="col-md-6">
-															<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
+														<div class="col-md-1"></div>
+														<?php if ($metodo == 2) { ?>
+															<div class="col-md-2">
+																<a class="btn btn-md btn-danger btn-block" name="submeter5" id="submeter5" onclick="adiciona_item_promocao()">
+																	<span class="glyphicon glyphicon-plus"></span> Adiciona Produto
+																</a>
+															</div>
+														<?php } ?>
+														<div class="col-md-2">
+															<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
 																<span class="glyphicon glyphicon-save"></span> Salvar
 															</button>
 														</div>
-														<div class="col-md-6 text-right">
-															<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-																<span class="glyphicon glyphicon-trash"></span> Excluir
+														<div class="col-md-2 text-right">
+															<button  type="button" class="btn btn-md btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+																<span class="glyphicon glyphicon-trash"></span> Excluir Promoção
 															</button>
 														</div>
 													<?php } ?>	
@@ -431,7 +433,7 @@
 																</div>
 																<div class="modal-footer">
 																	<div class="col-md-6 text-left">
-																		<button type="button" class="btn btn-warning" data-dismiss="modal">
+																		<button type="button" class="btn btn-warning" onclick="DesabilitaBotao()" data-dismiss="modal" >
 																			<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
 																		</button>
 																	</div>
@@ -445,8 +447,9 @@
 														</div>
 													</div>
 												<?php } else { ?>
-													<div class="col-md-6">
-														<button class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." type="submit">
+													<div class="col-md-1"></div>
+													<div class="col-md-2">
+														<button class="btn btn-lg btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." type="submit">
 															<span class="glyphicon glyphicon-save"></span> Salvar
 														</button>
 													</div>

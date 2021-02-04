@@ -236,7 +236,9 @@ class Produtos_model extends CI_Model {
 			SELECT 
 				TV.*,
 				TPS.Nome_Prod,
-				TPS.Cod_Prod
+				TPS.Cod_Prod,
+				TPS.Cod_Barra,
+				TPS.Estoque
 			FROM 
 				Tab_Valor AS TV
 					LEFT JOIN Tab_Produtos AS TPS ON TPS.idTab_Produtos = TV.idTab_Produtos

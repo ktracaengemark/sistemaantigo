@@ -1,5 +1,5 @@
 <div style="overflow: auto; height: auto; ">
-	<h3>Promoções assosiados</h3>
+	<h3>Promocoes</h3>
 	<table class="table table-hover">
 		<thead>
 			<tr>
