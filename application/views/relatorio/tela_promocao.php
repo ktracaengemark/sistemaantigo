@@ -177,7 +177,7 @@
 				
 				<div class="form-group col-md-4 text-right">
 					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar_promocao" role="button">
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar" role="button">
 							<span class="glyphicon glyphicon-plus"></span> Nova Promocao
 						</a>
 					</div>	

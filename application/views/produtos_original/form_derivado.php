@@ -1,8 +1,16 @@
-<?php if ( !isset($evento) && isset($_SESSION['Empresa']) && isset($_SESSION['Promocao'])) { ?>
+<?php if ( !isset($evento) && isset($_SESSION['Empresa']) && isset($_SESSION['Derivados'])) { ?>			
+<?php
+/*	
+echo "<pre>";
+print_r($_SESSION['Derivados']['Arquivo']);
+echo "</pre>";
+exit();
+*/
+?>
 <div class="container-fluid">	
 	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
 			<div class="panel panel-<?php echo $panel; ?>">
 				<div class="panel-body">
 					<?php if (isset($msg)) echo $msg; ?>
@@ -15,18 +23,22 @@
 									<div class="col-md-6 ">	
 										<div class="row">
 											<div class="col-md-12 ">
-												<a href="<?php echo base_url() . 'produtos/tela_promocao/' . $_SESSION['Promocao']['idTab_Promocao']; ?>">
-													<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/' . $_SESSION['Promocao']['Arquivo'] . ''; ?>" 
-													class="img-responsive" width='300'>
-												</a>												
+												<div class="row">
+													<label>Produto:</label>
+													<a href="<?php echo base_url() . 'relatorio/produtos/'; ?>">
+														<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Derivados']['Arquivo'] . ''; ?>" 
+														class="img-responsive" width='300'>
+													</a>												
+												</div>
 											</div>
-										</div>
-										<div class="row">
+										</div>	
+										<div class="row">	
 											<div class="col-md-12">
-												<label for="Promocao">Promocao:</label>
-												<?php echo $_SESSION['Promocao']['Promocao']; ?>
+												<div class="row">
+													<?php echo '<strong>' . $_SESSION['Derivados']['NomeProduto'] . '</strong>' ?>
+												</div>
 											</div>
-										</div>
+										</div>	
 									</div>	
 									<div class="col-md-6 ">	
 										<div class="form-group">
@@ -47,7 +59,7 @@
 					<div class="form-group">
 						<div class="row">
 							<input type="hidden" name="idSis_Empresa" value="<?php echo $file['idSis_Empresa']; ?>">
-							<input type="hidden" name="idTab_Promocao" value="<?php echo $file['idTab_Promocao']; ?>">
+							<input type="hidden" name="idTab_Produtos" value="<?php echo $file['idTab_Produtos']; ?>">
 							<div class="col-md-6">                            
 								<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
 									<span class="glyphicon glyphicon-save"></span> Salvar
@@ -66,7 +78,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-1"></div>
 	</div>
 </div>
 <?php } ?>

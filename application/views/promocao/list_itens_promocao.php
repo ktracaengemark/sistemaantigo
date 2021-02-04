@@ -2,39 +2,29 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>id_Prom</th>
 				<th>id_Valor</th>
 				<th>id_Produto</th>
-				<th>Tipo</th>
+				<th>Produto</th>
 				<th>Valor</th>
-				<th>Promocao</th>
-				<th>Descricao</th>
-				<th>Dt.Inicio</th>
-				<th>Dt.Fim</th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php
 			$i=0;
-			if ($q_precos_promocoes) {
+			if ($q_itens_promocao) {
 
-				foreach ($q_precos_promocoes as $row)
+				foreach ($q_itens_promocao as $row)
 				{
 
-					$url = base_url() . 'promocao/tela_promocao/' . $row['idTab_Promocao'];
+					$url = base_url() . 'produtos/tela/' . $row['idTab_Produtos'];
 					//$url = '';
 
 					echo '<tr class="clickable-row" data-href="' . $url . '">';
-						echo '<td>' . $row['idTab_Promocao'] . '</td>';
 						echo '<td>' . $row['idTab_Valor'] . '</td>';
 						echo '<td>' . $row['idTab_Produtos'] . '</td>';
-						echo '<td>' . $row['Desconto'] . '</td>';
+						echo '<td>' . $row['Nome_Prod'] . '</td>';
 						echo '<td>' . $row['ValorProduto'] . '</td>';
-						echo '<td>' . $row['Promocao'] . '</td>';
-						echo '<td>' . $row['Descricao'] . '</td>';
-						echo '<td>' . $row['DataInicioProm'] . '</td>';
-						echo '<td>' . $row['DataFimProm'] . '</td>';
 						echo '<td></td>';
 					echo '</tr>';            
 
