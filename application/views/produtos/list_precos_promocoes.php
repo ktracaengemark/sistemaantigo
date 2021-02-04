@@ -1,12 +1,13 @@
 <div style="overflow: auto; height: auto; ">
+	<h3>Promocoes</h3>
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>id_Prom</th>
 				<th>id_Valor</th>
 				<th>id_Produto</th>
 				<th>Tipo</th>
 				<th>Valor</th>
+				<th>id_Prom</th>
 				<th>Promocao</th>
 				<th>Descricao</th>
 				<th>Dt.Inicio</th>
@@ -26,11 +27,11 @@
 					//$url = '';
 
 					echo '<tr class="clickable-row" data-href="' . $url . '">';
-						echo '<td>' . $row['idTab_Promocao'] . '</td>';
 						echo '<td>' . $row['idTab_Valor'] . '</td>';
 						echo '<td>' . $row['idTab_Produtos'] . '</td>';
 						echo '<td>' . $row['Desconto'] . '</td>';
 						echo '<td>' . $row['ValorProduto'] . '</td>';
+						echo '<td>' . $row['idTab_Promocao'] . '</td>';
 						echo '<td>' . $row['Promocao'] . '</td>';
 						echo '<td>' . $row['Descricao'] . '</td>';
 						echo '<td>' . $row['DataInicioProm'] . '</td>';
@@ -51,6 +52,7 @@
 			</tr>
 		</tfoot>
 	</table>
+	<hr>
 </div>
 
 

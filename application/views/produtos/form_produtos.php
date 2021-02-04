@@ -444,25 +444,25 @@
 														</div>
 													<?php } ?>
 													<?php if ($metodo == 4) { ?>
-														<div class="col-md-6">
+														<div class="col-md-3">
 															<a class="btn btn-warning" href="<?php echo base_url() . 'produtos/alterar2/' . $produtos['idTab_Produtos'] ?>" role="button">
 																<span class="glyphicon glyphicon-edit"></span> Editar Produto
 															</a>
 														</div>
-														<div class="col-md-6">
+														<div class="col-md-3">
 															<a class="btn btn-success" href="<?php echo base_url() . 'produtos/tela_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-usd"></span> Preços
+																<span class="glyphicon glyphicon-usd"></span> Ver Preços e Promoções
 															</a>
 														</div>
 													<?php }elseif($metodo == 6){ ?>
-														<div class="col-md-6">
+														<div class="col-md-3">
 															<a class="btn btn-warning" href="<?php echo base_url() . 'produtos/alterar_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-edit"></span> Editar Preços
+																<span class="glyphicon glyphicon-edit"></span> Editar Preço
 															</a>
 														</div>
-														<div class="col-md-6">
-															<a class="btn btn-success" href="<?php echo base_url() . 'produtos/tela/' . $produtos['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-pencil"></span> Produto
+														<div class="col-md-3">
+															<a class="btn btn-info" href="<?php echo base_url() . 'produtos/tela/' . $produtos['idTab_Produtos'] ?>" role="button">
+																<span class="glyphicon glyphicon-pencil"></span> Ver Produtos
 															</a>
 														</div>
 													<?php } ?>

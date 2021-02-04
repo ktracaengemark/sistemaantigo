@@ -193,24 +193,34 @@ class Promocao extends CI_Controller {
             if (count($data['item_promocao']) > 0) {
                 $data['item_promocao'] = array_combine(range(1, count($data['item_promocao'])), array_values($data['item_promocao']));
                 $data['count']['PTCount'] = count($data['item_promocao']);
-				/*
                 if (isset($data['item_promocao'])) {
 
-                    for($j=1; $j <= $data['count']['PTCount']; $j++)
+                    for($j=1; $j <= $data['count']['PTCount']; $j++){
+						$_SESSION['Item_Promocao'][$j] = $data['item_promocao'][$j];
+						$_SESSION['Item_Promocao'][$j]['ComissaoVenda'] = $data['item_promocao'][$j]['ComissaoVenda'];
+						$_SESSION['Item_Promocao'][$j]['VendaSitePreco'] = $data['item_promocao'][$j]['VendaSitePreco'];	 
+						/*
+						echo '<br>';
+						echo "<pre>";
+						print_r($_SESSION['Item_Promocao'][$j]);
+						echo "</pre>";
+						*/
+					}
 						
-                }
-				*/				
+                }				
             }			
 		
 		}
-
+		
+		//exit();
+		
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_produto_promocao();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();		
 		
 		
-        $data['titulo'] = 'Promoção';
+        $data['titulo'] = 'Editar Promoção';
         $data['form_open_path'] = 'promocao/alterar';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -356,24 +366,35 @@ class Promocao extends CI_Controller {
 		
         if ($id) {
             #### Tab_Promocao ####
-           $_SESSION['Promocao'] = $data['promocao'] = $this->Promocao_model->get_promocao($id);
+			$_SESSION['Promocao'] = $data['promocao'] = $this->Promocao_model->get_promocao($id);
 
             #### Tab_Valor ####
-            $data['item_promocao'] = $this->Promocao_model->get_item_promocao($id, "2");
+            $_SESSION['Item_Promocao'] = $data['item_promocao'] = $this->Promocao_model->get_item_promocao($id, "2");
             if (count($data['item_promocao']) > 0) {
                 $data['item_promocao'] = array_combine(range(1, count($data['item_promocao'])), array_values($data['item_promocao']));
                 $data['count']['PTCount'] = count($data['item_promocao']);
-				/*
+				
                 if (isset($data['item_promocao'])) {
 
-                    for($j=1; $j <= $data['count']['PTCount']; $j++)
+                    for($j=1; $j <= $data['count']['PTCount']; $j++){
+						$_SESSION['Item_Promocao'][$j] = $data['item_promocao'][$j];
+						$_SESSION['Item_Promocao'][$j]['ComissaoVenda'] = $data['item_promocao'][$j]['ComissaoVenda'];
+						$_SESSION['Item_Promocao'][$j]['VendaSitePreco'] = $data['item_promocao'][$j]['VendaSitePreco'];	 
+						/*
+						echo '<br>';
+						echo "<pre>";
+						print_r($_SESSION['Item_Promocao'][$j]);
+						echo "</pre>";
+						*/
+					}
 						
                 }
-				*/				
+								
             }			
 		
 		}
-
+		//exit();
+		
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_produto_promocao();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();

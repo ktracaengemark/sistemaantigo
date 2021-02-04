@@ -1,4 +1,5 @@
 <div style="overflow: auto; height: auto; ">
+	<h3>Preco</h3>
 	<table class="table table-hover">
 		<thead>
 			<tr>

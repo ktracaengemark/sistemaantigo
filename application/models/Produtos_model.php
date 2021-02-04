@@ -233,6 +233,23 @@ class Produtos_model extends CI_Model {
 	
     public function get_valor($data) {
 		$query = $this->db->query('
+			SELECT 
+				TV.*,
+				TPS.Nome_Prod,
+				TPS.Cod_Prod
+			FROM 
+				Tab_Valor AS TV
+					LEFT JOIN Tab_Produtos AS TPS ON TPS.idTab_Produtos = TV.idTab_Produtos
+			WHERE 
+				TV.idTab_Valor = ' . $data . ' 
+		');
+        $query = $query->result_array();
+
+        return $query[0];
+    }
+	
+    public function get_valor_original($data) {
+		$query = $this->db->query('
 			SELECT * 
 			FROM 
 				Tab_Valor 
@@ -921,8 +938,16 @@ class Produtos_model extends CI_Model {
         $query = $this->db->update_batch('Tab_Valor', $data, 'idTab_Valor');
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
-    }	
+    }
+	
+    public function update_valor1($data, $id) {
 
+        unset($data['idTab_Valor']);
+        $query = $this->db->update('Tab_Valor', $data, array('idTab_Valor' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
+	
     public function update_servico($data) {
 		
         $query = $this->db->update_batch('Tab_Atributo_Select', $data, 'idTab_Atributo_Select');

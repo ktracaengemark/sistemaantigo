@@ -231,13 +231,6 @@ class Produtos extends CI_Controller {
 		
 		}
 
-         // exit ();
-		
-		
-		//$data['cadastrar']['Codigo'] = $data['produtos']['idTab_Catprod'] . ':' . $data['produtos']['idTab_Produto'] . ':' . $data['produtos']['Opcao_Atributo_1'] . ':' . $data['produtos']['Opcao_Atributo_2'];
-		  
-	
-
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['idCat_Atributo'] = $this->Basico_model->select_catprod();
 		$data['select']['idCat_Opcao'] = $this->Basico_model->select_catprod();
@@ -935,30 +928,14 @@ class Produtos extends CI_Controller {
             $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
         else
             $data['msg'] = '';
-		/*
-		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
-			'Cadastrar',
-			'idCat_Atributo',
-			'idCat_Opcao',
-			'idAtributo_Opcao',
-			'idCat_Produto',
-			'Codigo',
-        ), TRUE));
-		*/
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		#### Tab_Produtos ####
         $data['produtos'] = quotes_to_entities($this->input->post(array(
-            #### Tab_Produtos ####
-            'idTab_Produtos',			
-            //'idTab_Catprod', 
-            //'idTab_Produto',
-			//'Opcao_Atributo_1',
-			//'Opcao_Atributo_2', 
-            //'Cod_Prod',
+            'idTab_Produtos',
         ), TRUE));
 
-		
-		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');		
-		
+		#### Tab_Valor ####
+		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
@@ -991,24 +968,16 @@ class Produtos extends CI_Controller {
 				/*
                 if (isset($data['valor'])) {
 
-                    for($j=1; $j <= $data['count']['PTCount']; $j++)
+                    for($j=1; $j <= $data['count']['PTCount']; $j++){
+					
+					}
 						
                 }
 				*/				
             }			
 		
-		
 		}
-		
-        //$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
-		//$data['select']['idCat_Atributo'] = $this->Basico_model->select_catprod();
-		//$data['select']['idCat_Opcao'] = $this->Basico_model->select_catprod();
-		//$data['select']['idAtributo_Opcao'] = $this->Basico_model->select_atributo($_SESSION['Produtos']['idTab_Catprod']);	
-		//$data['select']['idTab_Catprod'] = $this->Basico_model->select_catprod();
-		//$data['select']['idCat_Produto'] = $this->Basico_model->select_catprod();	
-		//$data['select']['idTab_Produto'] = $this->Basico_model->select_produto($_SESSION['Produtos']['idTab_Catprod']);
-		//$data['select']['Opcao_Atributo_1'] = $this->Basico_model->select_opcao_atributo1($_SESSION['Produtos']['idTab_Catprod'], $_SESSION['Atributo'][1]['idTab_Atributo']);
-		//$data['select']['Opcao_Atributo_2'] = $this->Basico_model->select_opcao_atributo2($_SESSION['Produtos']['idTab_Catprod'], $_SESSION['Atributo'][2]['idTab_Atributo']);
+
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();		
@@ -1026,39 +995,16 @@ class Produtos extends CI_Controller {
 
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
-		/*
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
-		
-		$data['radio'] = array(
-            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
-        );
-        ($data['cadastrar']['Cadastrar'] == 'N') ?
-            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
-		*/
-		/*
-		$data['q1'] = $this->Produtos_model->list_categoria($_SESSION['log'], TRUE);
-		$data['list1'] = $this->load->view('produtos/list_categoria', $data, TRUE);
-		
-		$data['q2'] = $this->Produtos_model->list_produto($data['produtos'], TRUE);
-		$data['list2'] = $this->load->view('produtos/list_produto', $data, TRUE);
-		
-		$data['q3'] = $this->Produtos_model->list_atributo($data['produtos'], TRUE);
-		$data['list3'] = $this->load->view('produtos/list_atributo', $data, TRUE);
-		
-		$data['q4'] = $this->Produtos_model->list_opcao($data['produtos'], TRUE);
-		$data['list4'] = $this->load->view('produtos/list_opcao', $data, TRUE);
-		
-		$data['q'] = $this->Produtos_model->list_produtos($data['produtos'], TRUE);
-		$data['list'] = $this->load->view('produtos/list_produtos', $data, TRUE);
-		*/
+
 		$data['q_precos'] = $this->Produtos_model->list_precos($data['produtos'], TRUE);
 		$data['list_precos'] = $this->load->view('produtos/list_precos', $data, TRUE);			
 		
+		$data['q_precos_promocoes'] = $this->Produtos_model->list_precos_promocoes($data['produtos'], TRUE);
+		$data['list_precos_promocoes'] = $this->load->view('produtos/list_precos_promocoes', $data, TRUE);
+		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-		//$this->form_validation->set_rules('idTab_Catprod', 'Categoria', 'required|trim');
 		$this->form_validation->set_rules('idTab_Produtos', 'Produto', 'required|trim');
-		//$this->form_validation->set_rules('Cod_Prod', 'Código', 'required|trim|is_unique_by_id_empresa[Tab_Produtos.Cod_Prod.' . $data['produtos']['idTab_Produtos'] . '.idSis_Empresa.' . $_SESSION['Produtos']['idSis_Empresa'] . ']');
-
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('produtos/form_produtos', $data);
@@ -1138,6 +1084,191 @@ class Produtos extends CI_Controller {
 
                 $data['msg'] = '?m=1';
 				redirect(base_url() . 'produtos/tela_precos/' . $data['produtos']['idTab_Produtos'] . $data['msg']);
+				
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+
+    }
+
+    public function tela_valor($id = FALSE) {
+			
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $data['valor'] = quotes_to_entities($this->input->post(array(
+            #### Tab_Valor ####
+            'idTab_Valor',
+        ), TRUE));
+
+
+        if ($id) {
+            #### Tab_Valor ####
+			$_SESSION['Valor'] = $data['valor'] = $this->Produtos_model->get_valor($id);
+		}
+
+		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();		
+		
+        $data['titulo'] = 'Tela Preço';
+        $data['form_open_path'] = 'produtos/tela_valor';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 6;
+
+        $data['sidebar'] = 'col-sm-3 col-md-2';
+        $data['main'] = 'col-sm-7 col-md-8';
+
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+
+		$data['q_precos'] = $this->Produtos_model->list_precos($_SESSION['Valor'], TRUE);
+		$data['list_precos'] = $this->load->view('produtos/list_precos', $data, TRUE);
+		
+		$data['q_precos_promocoes'] = $this->Produtos_model->list_precos_promocoes($_SESSION['Valor'], TRUE);
+		$data['list_precos_promocoes'] = $this->load->view('produtos/list_precos_promocoes', $data, TRUE);			
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$this->form_validation->set_rules('idTab_Valor', 'Produto', 'required|trim');
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('produtos/form_valor', $data);
+        } else {
+            ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+			/*
+			echo '<br>';
+			echo "<pre>";
+			print_r($data['cadastrar']['Codigo']);
+			echo "</pre>";
+			exit ();
+			*/
+			/*
+            #### Tab_Valor ####
+
+			$data['update']['valor']['anterior'] = $this->Produtos_model->get_valor($data['valor']['idTab_Valor']);
+            $data['update']['valor']['campos'] = array_keys($data['valor']);
+            $data['update']['valor']['auditoriaitem'] = $this->basico->set_log(
+                $data['update']['valor']['anterior'],
+                $data['valor'],
+                $data['update']['valor']['campos'],
+                $data['valor']['idTab_Valor'], TRUE);
+            $data['update']['valor']['bd'] = $this->Produtos_model->update_valor($data['valor'], $data['valor']['idTab_Valor']);
+			*/
+            if ($data['auditoriaitem'] && !$data['update']['valor']['bd']) {
+                $data['msg'] = '?m=2';
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+                $this->load->view('produtos/form_valor', $data);
+            } else {
+
+                $data['msg'] = '?m=1';
+				redirect(base_url() . 'produtos/tela_valor/' . $data['valor']['idTab_Valor'] . $data['msg']);
+				
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+
+    }
+
+    public function alterar_valor($id = FALSE) {
+			
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['valor'] = quotes_to_entities($this->input->post(array(
+            #### Tab_Valor ####
+            'idTab_Valor',			
+            'QtdProdutoDesconto', 
+            'QtdProdutoIncremento',
+			'ComissaoVenda',
+			'AtivoPreco', 
+            'VendaSitePreco',
+            'VendaBalcaoPreco',
+			'Convdesc',
+			'ValorProduto',
+        ), TRUE));
+
+        if ($id) {
+            #### Tab_Valor ####
+			$_SESSION['Valor'] = $data['valor'] = $this->Produtos_model->get_valor($id);
+		}
+
+		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();		
+		
+        $data['titulo'] = 'Alterar Preço';
+        $data['form_open_path'] = 'produtos/alterar_valor';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 7;
+
+        $data['sidebar'] = 'col-sm-3 col-md-2';
+        $data['main'] = 'col-sm-7 col-md-8';
+
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+
+		$data['q_precos'] = $this->Produtos_model->list_precos($_SESSION['Valor'], TRUE);
+		$data['list_precos'] = $this->load->view('produtos/list_precos', $data, TRUE);
+		
+		$data['q_precos_promocoes'] = $this->Produtos_model->list_precos_promocoes($_SESSION['Valor'], TRUE);
+		$data['list_precos_promocoes'] = $this->load->view('produtos/list_precos_promocoes', $data, TRUE);			
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$this->form_validation->set_rules('idTab_Valor', 'Produto', 'required|trim');
+		$this->form_validation->set_rules('ValorProduto', 'Valor', 'required|trim');
+
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('produtos/form_valor', $data);
+        } else {
+            ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
+			/*
+			echo '<br>';
+			echo "<pre>";
+			print_r($data['valor']);
+			echo "</pre>";
+			exit ();
+			*/
+            #### Tab_Valor ####
+			$data['update']['valor']['anterior'] = $this->Produtos_model->get_valor($data['valor']['idTab_Valor']);
+            $data['update']['valor']['campos'] = array_keys($data['valor']);
+            $data['update']['valor']['auditoriaitem'] = $this->basico->set_log(
+                $data['update']['valor']['anterior'],
+                $data['valor'],
+                $data['update']['valor']['campos'],
+                $data['valor']['idTab_Valor'], TRUE);
+            $data['update']['valor']['bd'] = $this->Produtos_model->update_valor1($data['valor'], $data['valor']['idTab_Valor']);
+			
+            if ($data['auditoriaitem'] && !$data['update']['valor']['bd']) {
+                $data['msg'] = '?m=2';
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+                $this->load->view('produtos/form_valor', $data);
+            } else {
+
+                $data['msg'] = '?m=1';
+				redirect(base_url() . 'produtos/tela_valor/' . $data['valor']['idTab_Valor'] . $data['msg']);
 				
                 exit();
             }
