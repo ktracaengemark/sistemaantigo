@@ -151,7 +151,8 @@ elseif ($_GET['q'] == 12) {
 
     $result = mysql_query('
             SELECT
-                TPS.*
+                TPS.*,
+				CONCAT(IFNULL(TPS.Nome_Prod,""), " - ", IFNULL(TPS.Cod_Barra,"")) AS Nome_Prod
             FROM 
                 Tab_Produtos AS TPS		
             WHERE
@@ -444,7 +445,7 @@ elseif ($_GET['q'] == 90) {
 				TOP1.Opcao,
 				TDS.Desconto,
 				TPM.Promocao,
-				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " UNID - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
+				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(P.Cod_Barra,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " UNID - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao

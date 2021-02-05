@@ -44,7 +44,7 @@
 								</a>
 							</td>
 							<td class="notclickable">
-								<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'produtos/tela_precos/' . $row['idTab_Produtos'] . ''; ?>">
+								<a class="btn btn-md btn-info notclickable" href="<?php echo base_url() . 'produtos/tela_valor/' . $row['idTab_Valor'] . ''; ?>">
 									<span class="glyphicon glyphicon-edit notclickable"></span>
 								</a>
 							</td>						

@@ -43,7 +43,8 @@
 										<?php if ($metodo < 4) { ?>
 											<div class="form-group">
 												<div class="row">	
-													<div class="col-md-3">
+													<div class="col-md-1"></div>
+													<div class="col-md-2">
 														<label for="idTab_Catprod">Categoria *</label>
 														<?php if ($metodo < 2) { ?>
 															<select data-placeholder="Selecione uma Categoria..." class="form-control Chosen" 
@@ -166,30 +167,27 @@
 														<a class="notclickable" href="<?php echo base_url() . 'produtos/alterarlogoderivado/' . $_SESSION['Produtos']['idTab_Produtos'] . ''; ?>">
 															<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Produtos']['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'>
 														</a>
-													</div>
-													<div class="col-md-2">
-														<label for="id">id_Produto</label>
-														<input type="text" class="form-control" readonly="" value="<?php echo $produtos['idTab_Produtos']; ?>">
 													</div>		
-													<div class="col-md-6">
+													<div class="col-md-4">
 														<label for="Nome_Prod">Nome Produto*</label>
 														<input type="text" class="form-control" readonly="" id="Nome_Prod" name="Nome_Prod" value="<?php echo $produtos['Nome_Prod']; ?>">
 														<?php echo form_error('Nome_Prod'); ?>
 													</div>		
-													<div class="col-md-2">
+													<div class="col-md-1">
 														<label for="Estoque">Estoque</label>
 														<input type="text" class="form-control Numero" <?php echo $readonly ?> id="Estoque" name="Estoque" value="<?php echo $produtos['Estoque']; ?>">
 														<?php echo form_error('Estoque'); ?>
 													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-1" ></div>		
+													<div class="col-md-1">
+														<label for="id">id_Produto</label>
+														<input type="text" class="form-control" readonly="" value="<?php echo $produtos['idTab_Produtos']; ?>">
+													</div>		
 													<div class="col-md-2">
 														<label for="Cod_Prod">Codigo *</label>
 														<input type="text" class="form-control" readonly="" id="Cod_Prod" name="Cod_Prod" value="<?php echo $produtos['Cod_Prod']; ?>">
 														<?php echo form_error('Cod_Prod'); ?>
 													</div>		
-													<div class="col-md-2">
+													<div class="col-md-3">
 														<label for="Cod_Barra">Codigo de Barras</label>
 														<input type="text" class="form-control" <?php echo $readonly ?> id="Cod_Barra" name="Cod_Barra" value="<?php echo $produtos['Cod_Barra']; ?>">
 														<?php echo form_error('Cod_Barra'); ?>
@@ -224,11 +222,6 @@
 																			<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto<?php echo $i ?>" placeholder="0"
 																					name="QtdProdutoDesconto<?php echo $i ?>" value="<?php echo $valor[$i]['QtdProdutoDesconto'] ?>">
 																		</div>
-																		<div class="col-md-2">
-																			<label for="Convdesc">Desc. Embal <?php echo $i ?></label>
-																			<textarea type="text" class="form-control"  id="Convdesc<?php echo $i ?>" 
-																					  name="Convdesc<?php echo $i ?>" value="<?php echo $valor[$i]['Convdesc']; ?>"><?php echo $valor[$i]['Convdesc']; ?></textarea>
-																		</div>
 																		<div class="col-md-1">
 																			<label for="QtdProdutoIncremento">QtdEmb<?php echo $i ?>:</label>
 																			<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento<?php echo $i ?>" placeholder="0"
@@ -242,9 +235,29 @@
 																					name="ValorProduto<?php echo $i ?>" value="<?php echo $valor[$i]['ValorProduto'] ?>">
 																			</div>
 																		</div>
+																		<div class="col-md-2">
+																			<label for="ComissaoVenda">Comissao<?php echo $i ?></label>
+																			<div class="input-group">
+																				<input type="text" class="form-control Valor text-right" id="ComissaoVenda<?php echo $i ?>" maxlength="10" placeholder="0,00"
+																					name="ComissaoVenda<?php echo $i ?>" value="<?php echo $valor[$i]['ComissaoVenda'] ?>">
+																				<span class="input-group-addon" id="basic-addon1">%</span>
+																			</div>
+																		</div>
+																		<div class="col-md-2">
+																			<label for="TempoDeEntrega">Tempo De Entrega<?php echo $i ?></label>
+																			<div class="input-group">
+																				<input type="text" class="form-control Numero text-right" id="TempoDeEntrega<?php echo $i ?>" maxlength="3" placeholder="0"
+																					name="TempoDeEntrega<?php echo $i ?>" value="<?php echo $valor[$i]['TempoDeEntrega'] ?>">
+																				<span class="input-group-addon" id="basic-addon1">Dia(s)</span>
+																			</div>
+																		</div>
+																		<div class="col-md-2">
+																			<label for="Convdesc">Desc. Embal <?php echo $i ?></label>
+																			<textarea type="text" class="form-control"  id="Convdesc<?php echo $i ?>" 
+																					  name="Convdesc<?php echo $i ?>" value="<?php echo $valor[$i]['Convdesc']; ?>"><?php echo $valor[$i]['Convdesc']; ?></textarea>
+																		</div>
 																	</div>
 																	<div class="row">
-																		<div class="col-md-1 text-left"></div>
 																		<div class="col-md-2">
 																			<label for="AtivoPreco">Ativo?</label><br>
 																			<div class="form-group">
@@ -329,14 +342,6 @@
 																				</div>
 																			</div>
 																		</div>
-																		<div class="col-md-2">
-																			<label for="ComissaoVenda">Comissao<?php echo $i ?>*</label>
-																			<div class="input-group">
-																				<input type="text" class="form-control Valor text-right" id="ComissaoVenda<?php echo $i ?>" maxlength="10" placeholder="0,00"
-																					name="ComissaoVenda<?php echo $i ?>" value="<?php echo $valor[$i]['ComissaoVenda'] ?>">
-																				<span class="input-group-addon" id="basic-addon1">%</span>
-																			</div>
-																		</div>
 																		<div class="col-md-2 text-right"></div>											
 																		<!--
 																		<div class="col-md-1 text-right">
@@ -377,11 +382,13 @@
 												<?php if ($metodo > 1) { ?>
 													<?php if ($metodo != 4 && $metodo != 6) { ?>
 														<div class="col-md-1"></div>
-														<div class="col-md-2">
-															<a class="btn btn-md btn-danger btn-block"  name="submeter2" id="submeter2" onclick="adiciona_precos()">
-																<span class="glyphicon glyphicon-plus"></span> Adiciona Preço
-															</a>
-														</div>
+														<?php if ($metodo == 7) { ?>
+															<div class="col-md-2">
+																<a class="btn btn-md btn-danger btn-block"  name="submeter2" id="submeter2" onclick="adiciona_precos()">
+																	<span class="glyphicon glyphicon-plus"></span> Adiciona Preço
+																</a>
+															</div>
+														<?php } ?>
 														<div class="col-md-2">
 															<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
 																<span class="glyphicon glyphicon-save"></span> Salvar
@@ -419,9 +426,9 @@
 														</div>
 													<?php } ?>
 													<?php if ($metodo == 2) { ?>	
-														<div class="col-md-6 text-right">
-															<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-																<span class="glyphicon glyphicon-trash"></span> Excluir
+														<div class="col-md-2 text-right">
+															<button  type="button" class="btn btn-md btn-danger btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+																<span class="glyphicon glyphicon-trash"></span> Excluir Produto
 															</button>
 														</div>
 													<?php } ?>
@@ -437,7 +444,7 @@
 																</div>
 																<div class="modal-footer">
 																	<div class="col-md-6 text-left">
-																		<button type="button" class="btn btn-warning" data-dismiss="modal">
+																		<button type="button" class="btn btn-warning" onclick="DesabilitaBotao()" data-dismiss="modal">
 																			<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
 																		</button>
 																	</div>
@@ -451,8 +458,9 @@
 														</div>
 													</div>
 													<?php } else { ?>
-													<div class="col-md-6">
-														<button class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." type="submit">
+													<div class="col-md-1"></div>
+													<div class="col-md-2">
+														<button class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." type="submit">
 															<span class="glyphicon glyphicon-save"></span> Salvar
 														</button>
 													</div>
@@ -480,7 +488,6 @@
 														</div>
 													</div>
 												</div>
-												
 											</div>
 										<?php } ?>
 										<?php if ($metodo < 4) { ?>

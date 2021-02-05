@@ -174,6 +174,7 @@ class Promocao extends CI_Controller {
 				$data['item_promocao'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
 				$data['item_promocao'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
+				$data['item_promocao'][$j]['TempoDeEntrega'] = $this->input->post('TempoDeEntrega' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
 				$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
 				$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
@@ -196,9 +197,7 @@ class Promocao extends CI_Controller {
                 if (isset($data['item_promocao'])) {
 
                     for($j=1; $j <= $data['count']['PTCount']; $j++){
-						$_SESSION['Item_Promocao'][$j] = $data['item_promocao'][$j];
-						$_SESSION['Item_Promocao'][$j]['ComissaoVenda'] = $data['item_promocao'][$j]['ComissaoVenda'];
-						$_SESSION['Item_Promocao'][$j]['VendaSitePreco'] = $data['item_promocao'][$j]['VendaSitePreco'];	 
+						$_SESSION['Item_Promocao'][$j] = $data['item_promocao'][$j];	 
 						/*
 						echo '<br>';
 						echo "<pre>";
@@ -354,6 +353,7 @@ class Promocao extends CI_Controller {
 				$data['item_promocao'][$j]['idTab_Produtos'] = $this->input->post('idTab_Produtos' . $i);
 				$data['item_promocao'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
+				$data['item_promocao'][$j]['TempoDeEntrega'] = $this->input->post('TempoDeEntrega' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
 				$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
 				$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
@@ -377,9 +377,7 @@ class Promocao extends CI_Controller {
                 if (isset($data['item_promocao'])) {
 
                     for($j=1; $j <= $data['count']['PTCount']; $j++){
-						$_SESSION['Item_Promocao'][$j] = $data['item_promocao'][$j];
-						$_SESSION['Item_Promocao'][$j]['ComissaoVenda'] = $data['item_promocao'][$j]['ComissaoVenda'];
-						$_SESSION['Item_Promocao'][$j]['VendaSitePreco'] = $data['item_promocao'][$j]['VendaSitePreco'];	 
+						$_SESSION['Item_Promocao'][$j] = $data['item_promocao'][$j];	 
 						/*
 						echo '<br>';
 						echo "<pre>";

@@ -53,30 +53,27 @@
 													<a class="notclickable" href="<?php echo $url ;?>">
 														<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Produtos']['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'>
 													</a>
-												</div>
-												<div class="col-md-2">
-													<label for="id">id_Produto</label>
-													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['idTab_Produtos']; ?>">
 												</div>		
-												<div class="col-md-6">
+												<div class="col-md-4">
 													<label for="Nome_Prod">Nome Produto*</label>
 													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['Nome_Prod']; ?>">
 													<?php echo form_error('Nome_Prod'); ?>
 												</div>		
-												<div class="col-md-2">
+												<div class="col-md-1">
 													<label for="Estoque">Estoque</label>
 													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['Estoque']; ?>">
 													<?php echo form_error('Estoque'); ?>
 												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-1 " ></div>		
+												<div class="col-md-1">
+													<label for="id">id_Produto</label>
+													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['idTab_Produtos']; ?>">
+												</div>		
 												<div class="col-md-2">
 													<label for="Cod_Prod">Codigo *</label>
 													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['Cod_Prod']; ?>">
 													<?php echo form_error('Cod_Prod'); ?>
 												</div>		
-												<div class="col-md-2">
+												<div class="col-md-3">
 													<label for="Cod_Barra">Codigo de Barra</label>
 													<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['Cod_Barra']; ?>">
 													<?php echo form_error('Cod_Barra'); ?>
@@ -97,15 +94,6 @@
 																		<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto" placeholder="0"
 																				name="QtdProdutoDesconto" value="<?php echo $valor['QtdProdutoDesconto'] ?>">
 																	<?php } ?>			
-																</div>
-																<div class="col-md-2">
-																	<label for="Convdesc">Desc. Embal </label>
-																	<?php if ($metodo == 6) { ?>
-																		<textarea type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['Convdesc']; ?>"><?php echo $_SESSION['Valor']['Convdesc']; ?></textarea>
-																	<?php }elseif ($metodo == 7) { ?>
-																		<textarea type="text" class="form-control"  id="Convdesc" <?php echo $readonly; ?>
-																				  name="Convdesc" value="<?php echo $valor['Convdesc']; ?>"><?php echo $valor['Convdesc']; ?></textarea>
-																	<?php } ?>
 																</div>
 																<div class="col-md-1">
 																	<label for="QtdProdutoIncremento">QtdEmb:</label>
@@ -128,9 +116,41 @@
 																		<?php } ?>
 																	</div>
 																</div>
+																<div class="col-md-2">
+																	<label for="ComissaoVenda">Comissao</label>
+																	<div class="input-group">
+																		<?php if ($metodo == 6) { ?>
+																			<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Valor']['ComissaoVenda'] ?>">
+																		<?php }elseif ($metodo == 7) { ?>
+																			<input type="text" class="form-control Valor text-right" id="ComissaoVenda" maxlength="10" placeholder="0,00"
+																				name="ComissaoVenda" value="<?php echo $valor['ComissaoVenda'] ?>">
+																		<?php } ?>
+																		<span class="input-group-addon" id="basic-addon1">%</span>
+																	</div>
+																</div>
+																<div class="col-md-2">
+																	<label for="TempoDeEntrega">Tempo De Entrega</label>
+																	<div class="input-group">
+																		<?php if ($metodo == 6) { ?>
+																			<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Valor']['TempoDeEntrega'] ?>">
+																		<?php }elseif ($metodo == 7) { ?>
+																			<input type="text" class="form-control Numero text-right" id="TempoDeEntrega" maxlength="3" placeholder="0"
+																				name="TempoDeEntrega" value="<?php echo $valor['TempoDeEntrega'] ?>">
+																		<?php } ?>
+																		<span class="input-group-addon" id="basic-addon1">Dia(s)</span>
+																	</div>
+																</div>
+																<div class="col-md-2">
+																	<label for="Convdesc">Desc. Embal </label>
+																	<?php if ($metodo == 6) { ?>
+																		<textarea type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Valor']['Convdesc']; ?>"><?php echo $_SESSION['Valor']['Convdesc']; ?></textarea>
+																	<?php }elseif ($metodo == 7) { ?>
+																		<textarea type="text" class="form-control"  id="Convdesc" <?php echo $readonly; ?>
+																				  name="Convdesc" value="<?php echo $valor['Convdesc']; ?>"><?php echo $valor['Convdesc']; ?></textarea>
+																	<?php } ?>
+																</div>
 															</div>
 															<div class="row">
-																<div class="col-md-1 text-left"></div>
 																<div class="col-md-2">
 																	<label for="AtivoPreco">Ativo?</label><br>
 																	<?php if ($metodo == 6) { ?>
@@ -226,18 +246,6 @@
 																			</div>
 																		</div>
 																	<?php } ?>
-																</div>
-																<div class="col-md-2">
-																	<label for="ComissaoVenda">Comissao*</label>
-																	<div class="input-group">
-																		<?php if ($metodo == 6) { ?>
-																			<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Valor']['ComissaoVenda'] ?>">
-																		<?php }elseif ($metodo == 7) { ?>
-																			<input type="text" class="form-control Valor text-right" id="ComissaoVenda" maxlength="10" placeholder="0,00"
-																				name="ComissaoVenda" value="<?php echo $valor['ComissaoVenda'] ?>">
-																		<?php } ?>
-																		<span class="input-group-addon" id="basic-addon1">%</span>
-																	</div>
 																</div>
 																<div class="col-md-2 text-right"></div>
 															</div>

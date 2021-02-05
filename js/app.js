@@ -2957,11 +2957,6 @@ function adiciona_precos() {
 								    name="QtdProdutoDesconto'+pt+'" value="1">\
 							</div>\
 						</div>\
-						<div class="col-md-2">\
-							<label for="Convdesc'+pt+'">Desc. Embal:</label>\
-							<textarea type="text" class="form-control" id="Convdesc'+pt+'"\
-									  name="Convdesc'+pt+'" value=""></textarea>\
-						</div>\
 						<div class="col-md-1">\
 							<label for="QtdProdutoIncremento">QtdEmb:</label><br>\
 							<div class="input-group">\
@@ -2977,9 +2972,29 @@ function adiciona_precos() {
 									name="ValorProduto'+pt+'" value="">\
 							</div>\
 						</div>\
+						<div class="col-md-2">\
+							<label for="ComissaoVenda'+pt+'">Comissao</label><br>\
+							<div class="input-group id="ComissaoVenda'+pt+'">\
+								<input type="text" class="form-control Valor text-right" id="ComissaoVenda'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ComissaoVenda'+pt+'" value="">\
+								<span class="input-group-addon" id="basic-addon1">%</span>\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="TempoDeEntrega'+pt+'">Tempo De Entrega</label><br>\
+							<div class="input-group id="TempoDeEntrega'+pt+'">\
+								<input type="text" class="form-control Numero text-right" id="TempoDeEntrega'+pt+'" maxlength="3" placeholder="0" \
+									name="TempoDeEntrega'+pt+'" value="">\
+								<span class="input-group-addon" id="basic-addon1">Dia(s)</span>\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="Convdesc'+pt+'">Desc. Embal:</label>\
+							<textarea type="text" class="form-control" id="Convdesc'+pt+'"\
+									  name="Convdesc'+pt+'" value=""></textarea>\
+						</div>\
 					</div>\
 					<div class="row">\
-						<div class="col-md-1 text-right"></div>\
 						<div class="col-md-2">\
 							<label for="AtivoPreco">Ativo?</label><br>\
 							<div class="form-group">\
@@ -3023,14 +3038,6 @@ function adiciona_precos() {
 										 autocomplete="off" value="S">Sim\
 									</label>\
 								</div>\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="ComissaoVenda'+pt+'">Comissao</label><br>\
-							<div class="input-group id="ComissaoVenda'+pt+'">\
-								<input type="text" class="form-control Valor text-right" id="ComissaoVenda'+pt+'" maxlength="10" placeholder="0,00" \
-									name="ComissaoVenda'+pt+'" value="">\
-								<span class="input-group-addon" id="basic-addon1">%</span>\
 							</div>\
 						</div>\
 						<div class="col-md-2 text-right"></div>\
@@ -3128,7 +3135,6 @@ function adiciona_precos() {
 	
 }
 
-
 function adiciona_item_promocao() {
 
     var pt = $("#PTCount").val(); //initlal text box count
@@ -3153,23 +3159,20 @@ function adiciona_item_promocao() {
 			<div class="panel panel-info">\
 				<div class="panel-heading">\
 					<div class="row">\
-						<div class="col-md-1">\
-							<label for="QtdProdutoDesconto">QtdPrd:</label><br>\
-							<div class="input-group">\
-								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto'+pt+'" placeholder="0"\
-								    name="QtdProdutoDesconto'+pt+'" value="1">\
-							</div>\
-						</div>\
 						<div class="col-md-6">\
 							<label for="idTab_Produtos">Item '+pt+':</label><br>\
 							<select class="form-control Chosen" id="listadinamicad'+pt+'" name="idTab_Produtos'+pt+'">\
 								<option value="">-- Selecione uma opção --</option>\
 							</select>\
 						</div>\
-						<div class="col-md-2">\
-							<label for="Convdesc'+pt+'">Desc. Embal:</label>\
-							<textarea type="text" class="form-control" id="Convdesc'+pt+'"\
-									  name="Convdesc'+pt+'" value=""></textarea>\
+					</div>\
+					<div class="row">\
+						<div class="col-md-1">\
+							<label for="QtdProdutoDesconto">QtdPrd:</label><br>\
+							<div class="input-group">\
+								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto'+pt+'" placeholder="0"\
+								    name="QtdProdutoDesconto'+pt+'" value="1">\
+							</div>\
 						</div>\
 						<div class="col-md-1">\
 							<label for="QtdProdutoIncremento">QtdEmb:</label><br>\
@@ -3186,9 +3189,29 @@ function adiciona_item_promocao() {
 									name="ValorProduto'+pt+'" value="">\
 							</div>\
 						</div>\
+						<div class="col-md-2">\
+							<label for="ComissaoVenda'+pt+'">Comissao</label><br>\
+							<div class="input-group id="ComissaoVenda'+pt+'">\
+								<input type="text" class="form-control Valor text-right" id="ComissaoVenda'+pt+'" maxlength="10" placeholder="0,00" \
+									name="ComissaoVenda'+pt+'" value="">\
+								<span class="input-group-addon" id="basic-addon1">%</span>\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="TempoDeEntrega'+pt+'">Tempo De Entrega</label><br>\
+							<div class="input-group id="TempoDeEntrega'+pt+'">\
+								<input type="text" class="form-control Numero text-right" id="TempoDeEntrega'+pt+'" maxlength="3" placeholder="0" \
+									name="TempoDeEntrega'+pt+'" value="">\
+								<span class="input-group-addon" id="basic-addon1">Dia(s)</span>\
+							</div>\
+						</div>\
+						<div class="col-md-2">\
+							<label for="Convdesc'+pt+'">Desc. Embal:</label>\
+							<textarea type="text" class="form-control" id="Convdesc'+pt+'"\
+									  name="Convdesc'+pt+'" value=""></textarea>\
+						</div>\
 					</div>\
 					<div class="row">\
-						<div class="col-md-1 text-right"></div>\
 						<div class="col-md-2">\
 							<label for="AtivoPreco">Ativo?</label><br>\
 							<div class="form-group">\
@@ -3232,14 +3255,6 @@ function adiciona_item_promocao() {
 										 autocomplete="off" value="S">Sim\
 									</label>\
 								</div>\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="ComissaoVenda'+pt+'">Comissao</label><br>\
-							<div class="input-group id="ComissaoVenda'+pt+'">\
-								<input type="text" class="form-control Valor text-right" id="ComissaoVenda'+pt+'" maxlength="10" placeholder="0,00" \
-									name="ComissaoVenda'+pt+'" value="">\
-								<span class="input-group-addon" id="basic-addon1">%</span>\
 							</div>\
 						</div>\
 						<div class="col-md-2 text-right"></div>\

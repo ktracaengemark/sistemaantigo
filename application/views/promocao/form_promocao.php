@@ -189,16 +189,7 @@
 														<div class="form-group" id="3div<?php echo $i ?>">
 															<div class="panel panel-info">
 																<div class="panel-heading">			
-																	<div class="row">																					
-																		<div class="col-md-1">
-																			<label for="QtdProdutoDesconto">QtdPrd <?php echo $i ?>:</label>
-																			<?php if ($metodo == 3) { ?>
-																				<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['QtdProdutoDesconto'] ?>">
-																			<?php }elseif ($metodo == 2) { ?>
-																			<input type="text" class="form-control Numero" maxlength="10"  placeholder="0"
-																				id="QtdProdutoDesconto<?php echo $i ?>"	name="QtdProdutoDesconto<?php echo $i ?>" value="<?php echo $item_promocao[$i]['QtdProdutoDesconto'] ?>">
-																			<?php } ?>
-																		</div>
+																	<div class="row">
 																		<div class="col-md-6">
 																			<label for="idTab_Produtos<?php echo $i ?>">Item <?php echo $i ?>*</label>
 																			<?php if ($metodo == 3) { ?>
@@ -219,14 +210,15 @@
 																					</select>
 																			<?php } ?>	
 																		</div>
-																		<div class="col-md-2">
-																			<label for="Convdesc">Desc. Embal <?php echo $i ?></label>
+																	</div>	
+																	<div class="row">																					
+																		<div class="col-md-1">
+																			<label for="QtdProdutoDesconto">QtdPrd <?php echo $i ?>:</label>
 																			<?php if ($metodo == 3) { ?>
-																				<textarea type="text" class="form-control" readonly="" <?php echo $readonly; ?>
-																					value="<?php echo $_SESSION['Item_Promocao'][$i]['Convdesc']; ?>"><?php echo $_SESSION['Item_Promocao'][$i]['Convdesc']; ?></textarea>
+																				<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['QtdProdutoDesconto'] ?>">
 																			<?php }elseif ($metodo == 2) { ?>
-																				<textarea type="text" class="form-control" <?php echo $readonly; ?>
-																					id="Convdesc<?php echo $i ?>" name="Convdesc<?php echo $i ?>" value="<?php echo $item_promocao[$i]['Convdesc']; ?>"><?php echo $item_promocao[$i]['Convdesc']; ?></textarea>
+																			<input type="text" class="form-control Numero" maxlength="10"  placeholder="0"
+																				id="QtdProdutoDesconto<?php echo $i ?>"	name="QtdProdutoDesconto<?php echo $i ?>" value="<?php echo $item_promocao[$i]['QtdProdutoDesconto'] ?>">
 																			<?php } ?>
 																		</div>
 																		<div class="col-md-1">
@@ -250,9 +242,42 @@
 																				<?php } ?>		
 																			</div>
 																		</div>
+																		<div class="col-md-2">
+																			<label for="ComissaoVenda">Comissao<?php echo $i ?>*</label>
+																			<div class="input-group">
+																			<?php if ($metodo == 3) { ?>
+																				<input type="text" class="form-control Valor text-right" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['ComissaoVenda'] ?>">
+																			<?php }elseif ($metodo == 2) { ?>	
+																				<input type="text" class="form-control Valor text-right" maxlength="10" placeholder="0,00" 
+																				id="ComissaoVenda<?php echo $i ?>" name="ComissaoVenda<?php echo $i ?>" value="<?php echo $item_promocao[$i]['ComissaoVenda'] ?>">
+																			<?php } ?>	
+																				<span class="input-group-addon" id="basic-addon1">%</span>
+																			</div>
+																		</div>
+																		<div class="col-md-2">
+																			<label for="TempoDeEntrega">Tempo De Entrega<?php echo $i ?></label>
+																			<div class="input-group">
+																			<?php if ($metodo == 3) { ?>
+																				<input type="text" class="form-control Numero text-right" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['TempoDeEntrega'] ?>">
+																			<?php }elseif ($metodo == 2) { ?>	
+																				<input type="text" class="form-control Numero text-right" maxlength="3" placeholder="0" 
+																				id="TempoDeEntrega<?php echo $i ?>" name="TempoDeEntrega<?php echo $i ?>" value="<?php echo $item_promocao[$i]['TempoDeEntrega'] ?>">
+																			<?php } ?>	
+																				<span class="input-group-addon" id="basic-addon1">Dia(s)</span>
+																			</div>
+																		</div>
+																		<div class="col-md-2">
+																			<label for="Convdesc">Desc. Embal <?php echo $i ?></label>
+																			<?php if ($metodo == 3) { ?>
+																				<textarea type="text" class="form-control" readonly="" <?php echo $readonly; ?>
+																					value="<?php echo $_SESSION['Item_Promocao'][$i]['Convdesc']; ?>"><?php echo $_SESSION['Item_Promocao'][$i]['Convdesc']; ?></textarea>
+																			<?php }elseif ($metodo == 2) { ?>
+																				<textarea type="text" class="form-control" <?php echo $readonly; ?>
+																					id="Convdesc<?php echo $i ?>" name="Convdesc<?php echo $i ?>" value="<?php echo $item_promocao[$i]['Convdesc']; ?>"><?php echo $item_promocao[$i]['Convdesc']; ?></textarea>
+																			<?php } ?>
+																		</div>
 																	</div>
 																	<div class="row">
-																		<div class="col-md-1 text-left"></div>
 																		<div class="col-md-2">
 																			<label for="AtivoPreco">Ativo?</label><br>
 																			<?php if ($metodo == 3) { ?>
@@ -348,18 +373,6 @@
 																					</div>
 																				</div>
 																			<?php } ?>
-																		</div>
-																		<div class="col-md-2">
-																			<label for="ComissaoVenda">Comissao<?php echo $i ?>*</label>
-																			<div class="input-group">
-																			<?php if ($metodo == 3) { ?>
-																				<input type="text" class="form-control Valor text-right" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['ComissaoVenda'] ?>">
-																			<?php }elseif ($metodo == 2) { ?>	
-																				<input type="text" class="form-control Valor text-right" maxlength="10" placeholder="0,00" 
-																				id="ComissaoVenda<?php echo $i ?>" name="ComissaoVenda<?php echo $i ?>" value="<?php echo $item_promocao[$i]['ComissaoVenda'] ?>">
-																			<?php } ?>	
-																				<span class="input-group-addon" id="basic-addon1">%</span>
-																			</div>
 																		</div>
 																		<div class="col-md-2 text-right"></div>											
 																		<?php if ($metodo == 2) { ?>
