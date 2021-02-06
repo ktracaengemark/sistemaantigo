@@ -236,6 +236,7 @@ class Produtos_model extends CI_Model {
 			SELECT 
 				TV.*,
 				TPS.Nome_Prod,
+				TPS.Arquivo,
 				TPS.Cod_Prod,
 				TPS.Cod_Barra,
 				TPS.Estoque

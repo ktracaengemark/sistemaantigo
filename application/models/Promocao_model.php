@@ -75,11 +75,14 @@ class Promocao_model extends CI_Model {
 
 	public function get_item_promocao($data, $desconto) {
 		$query = $this->db->query('
-			SELECT * 
+			SELECT 
+				TV.*,
+				TPS.Nome_Prod
 			FROM 
-				Tab_Valor 
+				Tab_Valor AS TV
+					LEFT JOIN Tab_Produtos AS TPS ON TPS.idTab_Produtos = TV.idTab_Produtos
 			WHERE 
-				idTab_Promocao = ' . $data . '
+				TV.idTab_Promocao = ' . $data . '
 		');
         $query = $query->result_array();
 

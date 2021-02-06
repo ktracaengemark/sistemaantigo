@@ -167,7 +167,8 @@ class Promocao extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
-            if ($this->input->post('ValorProduto' . $i)) {
+            if ($this->input->post('ValorProduto' . $i) && $this->input->post('idTab_Produtos' . $i) && 
+				$this->input->post('QtdProdutoDesconto' . $i) && $this->input->post('QtdProdutoIncremento' . $i)) {
 				$data['item_promocao'][$j]['idTab_Valor'] = $this->input->post('idTab_Valor' . $i);
                 $data['item_promocao'][$j]['QtdProdutoDesconto'] = $this->input->post('QtdProdutoDesconto' . $i);
 				$data['item_promocao'][$j]['QtdProdutoIncremento'] = $this->input->post('QtdProdutoIncremento' . $i);
@@ -377,7 +378,13 @@ class Promocao extends CI_Controller {
                 if (isset($data['item_promocao'])) {
 
                     for($j=1; $j <= $data['count']['PTCount']; $j++){
-						$_SESSION['Item_Promocao'][$j] = $data['item_promocao'][$j];	 
+						$_SESSION['Item_Promocao'][$j] = $data['item_promocao'][$j];
+						$_SESSION['Item_Promocao'][$j]['AtivoPreco'] = $this->basico->mascara_palavra_completa($data['item_promocao'][$j]['AtivoPreco'], 'NS');
+						$_SESSION['Item_Promocao'][$j]['VendaSitePreco'] = $this->basico->mascara_palavra_completa($data['item_promocao'][$j]['VendaSitePreco'], 'NS');
+						$_SESSION['Item_Promocao'][$j]['VendaBalcaoPreco'] = $this->basico->mascara_palavra_completa($data['item_promocao'][$j]['VendaBalcaoPreco'], 'NS');
+						if($data['item_promocao'][$j]['TempoDeEntrega'] == 0){
+							$_SESSION['Item_Promocao'][$j]['TempoDeEntrega'] = "Pronta Entrega";
+						}
 						/*
 						echo '<br>';
 						echo "<pre>";

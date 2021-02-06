@@ -51,7 +51,7 @@
 														}
 													?>
 													<a class="notclickable" href="<?php echo $url ;?>">
-														<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Produtos']['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'>
+														<img alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/produtos/miniatura/' . $_SESSION['Valor']['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'>
 													</a>
 												</div>		
 												<div class="col-md-4">

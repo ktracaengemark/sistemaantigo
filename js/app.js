@@ -3160,7 +3160,7 @@ function adiciona_item_promocao() {
 				<div class="panel-heading">\
 					<div class="row">\
 						<div class="col-md-6">\
-							<label for="idTab_Produtos">Item '+pt+':</label><br>\
+							<label for="idTab_Produtos">Item '+pt+'*:</label><br>\
 							<select class="form-control Chosen" id="listadinamicad'+pt+'" name="idTab_Produtos'+pt+'">\
 								<option value="">-- Selecione uma opção --</option>\
 							</select>\
@@ -3168,21 +3168,21 @@ function adiciona_item_promocao() {
 					</div>\
 					<div class="row">\
 						<div class="col-md-1">\
-							<label for="QtdProdutoDesconto">QtdPrd:</label><br>\
+							<label for="QtdProdutoDesconto">QtdPrd*:</label><br>\
 							<div class="input-group">\
 								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoDesconto'+pt+'" placeholder="0"\
 								    name="QtdProdutoDesconto'+pt+'" value="1">\
 							</div>\
 						</div>\
 						<div class="col-md-1">\
-							<label for="QtdProdutoIncremento">QtdEmb:</label><br>\
+							<label for="QtdProdutoIncremento">QtdEmb*:</label><br>\
 							<div class="input-group">\
 								<input type="text" class="form-control Numero" maxlength="10" id="QtdProdutoIncremento'+pt+'" placeholder="0"\
 								    name="QtdProdutoIncremento'+pt+'" value="1">\
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="ValorProduto'+pt+'">ValorEmbal</label><br>\
+							<label for="ValorProduto'+pt+'">ValorEmbal*:</label><br>\
 							<div class="input-group id="ValorProduto'+pt+'">\
 								<span class="input-group-addon" id="basic-addon1">R$</span>\
 								<input type="text" class="form-control Valor" id="ValorProduto'+pt+'" maxlength="10" placeholder="0,00" \
@@ -3190,7 +3190,7 @@ function adiciona_item_promocao() {
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="ComissaoVenda'+pt+'">Comissao</label><br>\
+							<label for="ComissaoVenda'+pt+'">Comissao:</label><br>\
 							<div class="input-group id="ComissaoVenda'+pt+'">\
 								<input type="text" class="form-control Valor text-right" id="ComissaoVenda'+pt+'" maxlength="10" placeholder="0,00" \
 									name="ComissaoVenda'+pt+'" value="">\
@@ -3198,7 +3198,7 @@ function adiciona_item_promocao() {
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="TempoDeEntrega'+pt+'">Tempo De Entrega</label><br>\
+							<label for="TempoDeEntrega'+pt+'">Tempo De Entrega:</label><br>\
 							<div class="input-group id="TempoDeEntrega'+pt+'">\
 								<input type="text" class="form-control Numero text-right" id="TempoDeEntrega'+pt+'" maxlength="3" placeholder="0" \
 									name="TempoDeEntrega'+pt+'" value="">\

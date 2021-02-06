@@ -191,9 +191,9 @@
 																<div class="panel-heading">			
 																	<div class="row">
 																		<div class="col-md-6">
-																			<label for="idTab_Produtos<?php echo $i ?>">Item <?php echo $i ?>*</label>
+																			<label for="idTab_Produtos<?php echo $i ?>">Item <?php echo $i ?>:*</label>
 																			<?php if ($metodo == 3) { ?>
-																				<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['idTab_Produtos'] ?>">
+																				<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['Nome_Prod'] ?>">
 																			<?php }elseif ($metodo == 2) { ?>
 																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 																						 id="listadinamicad<?php echo $i ?>" name="idTab_Produtos<?php echo $i ?>">
@@ -213,7 +213,7 @@
 																	</div>	
 																	<div class="row">																					
 																		<div class="col-md-1">
-																			<label for="QtdProdutoDesconto">QtdPrd <?php echo $i ?>:</label>
+																			<label for="QtdProdutoDesconto">QtdPrd*:</label>
 																			<?php if ($metodo == 3) { ?>
 																				<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['QtdProdutoDesconto'] ?>">
 																			<?php }elseif ($metodo == 2) { ?>
@@ -222,7 +222,7 @@
 																			<?php } ?>
 																		</div>
 																		<div class="col-md-1">
-																			<label for="QtdProdutoIncremento">QtdEmb<?php echo $i ?>:</label>
+																			<label for="QtdProdutoIncremento">QtdEmb*:</label>
 																			<?php if ($metodo == 3) { ?>
 																				<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['QtdProdutoIncremento'] ?>">
 																			<?php }elseif ($metodo == 2) { ?>
@@ -231,19 +231,19 @@
 																			<?php } ?>
 																		</div>
 																		<div class="col-md-2">
-																			<label for="ValorProduto">ValorEmbal <?php echo $i ?>*</label>
+																			<label for="ValorProduto">ValorEmbal*:</label>
 																			<div class="input-group">
 																				<span class="input-group-addon" id="basic-addon1">R$</span>
 																				<?php if ($metodo == 3) { ?>
-																					<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['ValorProduto'] ?>">
+																					<input type="text" class="form-control Valor text-left" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['ValorProduto'] ?>">
 																				<?php }elseif ($metodo == 2) { ?>	
-																				<input type="text" class="form-control Valor"  maxlength="10" placeholder="0,00"
+																				<input type="text" class="form-control Valor text-left"  maxlength="10" placeholder="0,00"
 																						id="ValorProduto<?php echo $i ?>" name="ValorProduto<?php echo $i ?>" value="<?php echo $item_promocao[$i]['ValorProduto'] ?>">
 																				<?php } ?>		
 																			</div>
 																		</div>
 																		<div class="col-md-2">
-																			<label for="ComissaoVenda">Comissao<?php echo $i ?>*</label>
+																			<label for="ComissaoVenda">Comissao:</label>
 																			<div class="input-group">
 																			<?php if ($metodo == 3) { ?>
 																				<input type="text" class="form-control Valor text-right" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['ComissaoVenda'] ?>">
@@ -255,10 +255,10 @@
 																			</div>
 																		</div>
 																		<div class="col-md-2">
-																			<label for="TempoDeEntrega">Tempo De Entrega<?php echo $i ?></label>
+																			<label for="TempoDeEntrega">Tempo De Entrega:</label>
 																			<div class="input-group">
 																			<?php if ($metodo == 3) { ?>
-																				<input type="text" class="form-control Numero text-right" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['TempoDeEntrega'] ?>">
+																				<input type="text" class="form-control text-right" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['TempoDeEntrega'] ?>">
 																			<?php }elseif ($metodo == 2) { ?>	
 																				<input type="text" class="form-control Numero text-right" maxlength="3" placeholder="0" 
 																				id="TempoDeEntrega<?php echo $i ?>" name="TempoDeEntrega<?php echo $i ?>" value="<?php echo $item_promocao[$i]['TempoDeEntrega'] ?>">
@@ -267,7 +267,7 @@
 																			</div>
 																		</div>
 																		<div class="col-md-2">
-																			<label for="Convdesc">Desc. Embal <?php echo $i ?></label>
+																			<label for="Convdesc">Desc. Embal:</label>
 																			<?php if ($metodo == 3) { ?>
 																				<textarea type="text" class="form-control" readonly="" <?php echo $readonly; ?>
 																					value="<?php echo $_SESSION['Item_Promocao'][$i]['Convdesc']; ?>"><?php echo $_SESSION['Item_Promocao'][$i]['Convdesc']; ?></textarea>
