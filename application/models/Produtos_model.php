@@ -761,11 +761,13 @@ class Produtos_model extends CI_Model {
 				TPM.DataInicioProm,
 				TPM.DataFimProm,
 				TPM.Promocao,
-				TPM.Descricao
+				TPM.Descricao,
+				TPS.Nome_Prod
 			FROM 
 				Tab_Valor AS TV
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TV.Desconto
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = TV.idTab_Promocao
+					LEFT JOIN Tab_Produtos AS TPS ON TPS.idTab_Produtos = TV.idTab_produtos
 			WHERE 
                 TV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TV.Desconto = "1" 
@@ -789,10 +791,20 @@ class Produtos_model extends CI_Model {
             if ($x === FALSE) {
                 return TRUE;
             } else {
-                #foreach ($query->result_array() as $row) {
-                #    $row->idApp_Profissional = $row->idApp_Profissional;
-                #    $row->NomeProfissional = $row->NomeProfissional;
-                #}
+                
+				foreach ($query->result() as $row) {
+					$row->AtivoPreco = $this->basico->mascara_palavra_completa($row->AtivoPreco, 'NS');
+					$row->VendaSitePreco = $this->basico->mascara_palavra_completa($row->VendaSitePreco, 'NS');
+					$row->VendaBalcaoPreco = $this->basico->mascara_palavra_completa($row->VendaBalcaoPreco, 'NS');
+					$row->ValorProduto = number_format($row->ValorProduto, 2, ',', '.');
+					$row->ComissaoVenda = number_format($row->ComissaoVenda, 2, ',', '.');
+					if($row->TempoDeEntrega == 0){
+						$row->TempoDeEntrega = "Pronta Entrega";
+					}else{
+						$row->TempoDeEntrega = $row->TempoDeEntrega . " Dia(s)";
+					}
+                }
+				
                 $query = $query->result_array();
                 return $query;
             }

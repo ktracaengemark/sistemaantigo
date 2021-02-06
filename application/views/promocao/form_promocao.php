@@ -6,8 +6,8 @@
 	<div class="panel panel-<?php echo $panel; ?>">
 		<div class="panel-heading">
 			<?php echo $titulo; ?>
-			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/precopromocao" role="button">
-				<span class="glyphicon glyphicon-search"></span> Lista de Preços
+			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/produtos" role="button">
+				<span class="glyphicon glyphicon-search"></span> Lista de Produtos
 			</a>
 			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/promocao" role="button">
 				<span class="glyphicon glyphicon-search"></span> Lista de Promocoes

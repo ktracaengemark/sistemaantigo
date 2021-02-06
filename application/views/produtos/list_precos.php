@@ -5,14 +5,14 @@
 			<tr>
 				<th>id_Valor</th>
 				<th>id_Produto</th>
+				<th>Produto</th>
 				<th>Tipo</th>
 				<th>Valor</th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
+				<th>Ativo</th>
+				<th>Balcao</th>
+				<th>Site</th>
+				<th>Comissão</th>
+				<th>Prazo</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,14 +29,14 @@
 					echo '<tr class="clickable-row" data-href="' . $url . '">';
 						echo '<td>' . $row['idTab_Valor'] . '</td>';
 						echo '<td>' . $row['idTab_Produtos'] . '</td>';
+						echo '<td>' . $row['Nome_Prod'] . '</td>';
 						echo '<td>' . $row['Desconto'] . '</td>';
-						echo '<td>' . $row['ValorProduto'] . '</td>';
-						echo '<td></td>';
-						echo '<td></td>';
-						echo '<td></td>';
-						echo '<td></td>';
-						echo '<td></td>';
-						echo '<td></td>';
+						echo '<td>R$ ' . $row['ValorProduto'] . '</td>';
+						echo '<td>' . $row['AtivoPreco'] . '</td>';
+						echo '<td>' . $row['VendaBalcaoPreco'] . '</td>';
+						echo '<td>' . $row['VendaSitePreco'] . '</td>';
+						echo '<td>' . $row['ComissaoVenda'] . '%</td>';
+						echo '<td>' . $row['TempoDeEntrega'] . '</td>';
 					echo '</tr>';            
 
 					$i++;

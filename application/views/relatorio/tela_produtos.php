@@ -1,6 +1,6 @@
 <?php if (isset($msg)) echo $msg; ?>
 
-<div class="col-sm-offset-1 col-md-10 ">		
+<div class="col-md-12 ">		
 	
 	<?php echo validation_errors(); ?>
 		
@@ -11,12 +11,14 @@
 					<div class="col-md-12">
 						<button  class="btn btn-sm btn-warning" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 							<span class="glyphicon glyphicon-filter"></span>Filtro de Produtos
-						</button>		
+						</button>
+						<!--
 						<a class="btn btn-sm btn-info " href="<?php echo base_url() ?>relatorio/precopromocao" role="button">
 							<span class="glyphicon glyphicon-plus"></span> Lista de Preços
-						</a>		
+						</a>
+						-->		
 						<a class="btn btn-sm btn-info " href="<?php echo base_url() ?>relatorio/promocao" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Lista de Promoções
+							<span class="glyphicon glyphicon-pencil"></span> Lista de Promoções
 						</a>
 						<!--
 						<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
@@ -95,11 +97,26 @@
 					</div>
 				</div>	
 				<div class="form-group">	
-					<div class="row text-left">
-						<div class="col-md-12">
+					<div class="row text-left">	
+						<div class="col-md-4">
+							<label for="Agrupar">Agrupar Por:</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="Agrupar" name="Agrupar">
+								<?php
+								foreach ($select['Agrupar'] as $key => $row) {
+									if ($query['Agrupar'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+						<div class="col-md-8">
 							<label for="Ordenamento">Ordenamento:</label>
 							<div class="row">
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 											id="Campo" name="Campo">
 										<?php
@@ -114,7 +131,7 @@
 									</select>
 								</div>
 
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 											id="Ordenamento" name="Ordenamento">
 										<?php

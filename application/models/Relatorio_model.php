@@ -3667,36 +3667,49 @@ exit();*/
 	
 	public function list_produtos($data, $completo) {
 
+		$groupby = (!$data['Agrupar']) ? FALSE : 'GROUP BY TPS.' . $data['Agrupar'] . '';
 		$data['idTab_Catprod'] = ($data['idTab_Catprod']) ? ' AND TPS.idTab_Catprod = ' . $data['idTab_Catprod'] : FALSE;
 		$data['idTab_Produto'] = ($data['idTab_Produto']) ? ' AND TPS.idTab_Produto = ' . $data['idTab_Produto'] : FALSE;
 		$data['idTab_Produtos'] = ($data['idTab_Produtos']) ? ' AND TPS.idTab_Produtos = ' . $data['idTab_Produtos'] : FALSE;
 		$data['Campo'] = (!$data['Campo']) ? 'TCP.Catprod' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
-
+		
         $query = $this->db->query('
             SELECT
                 TPS.*,
 				TPS.Arquivo AS ArquivoProdutos,
 				TPRS.Prod_Serv,
-				TOP2.Opcao AS Opcao2,
 				TOP1.Opcao AS Opcao1,
+				TOP2.Opcao AS Opcao2,
 				TP.idTab_Produto,
 				TP.Produtos,
 				TP.Arquivo AS ArquivoProduto,
 				TP.Ativo,
-				TCP.Catprod
+				TCP.Catprod,
+				TV.idTab_Valor,
+				TV.ValorProduto,
+				TV.ComissaoVenda,
+				TV.AtivoPreco,
+				TV.VendaBalcaoPreco,
+				TV.VendaSitePreco,
+				TV.idTab_Promocao,
+				TDS.idTab_Desconto,
+				TDS.Desconto
             FROM
                 Tab_Produtos AS TPS
 					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TPS.idTab_Produto
 					LEFT JOIN Tab_Catprod AS TCP ON TCP.idTab_Catprod = TPS.idTab_Catprod
-					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_2
 					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = TPS.Opcao_Atributo_1
+					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = TPS.Opcao_Atributo_2
 					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TPS.Prod_Serv
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produtos = TPS.idTab_Produtos
+					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TV.Desconto
             WHERE
                 TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
 				' . $data['idTab_Catprod'] . '
 				' . $data['idTab_Produto'] . '
 				' . $data['idTab_Produtos'] . '
+			' . $groupby . '
 			ORDER BY
 				' . $data['Campo'] . '
 				' . $data['Ordenamento'] . ', 
@@ -3705,9 +3718,6 @@ exit();*/
         ');
 
         /*
-        #AND
-        #P.idApp_Profissional = OT.idApp_Cliente
-
           echo $this->db->last_query();
           echo "<pre>";
           print_r($query);
@@ -3727,9 +3737,35 @@ exit();*/
 				#$valor_produto = $row->Valor_Cor_Prod * $row->Fator_Tam_Prod;
 				#$somaorcamento += $row->ValorRestanteOrca;
 				#$somacomissao += $row->ValorComissao;
-                #$row->Valor_Cor_Prod = number_format($row->Valor_Cor_Prod, 2, ',', '.');
-				#$row->Fator_Tam_Prod = number_format($row->Fator_Tam_Prod, 2, ',', '.');
-				#$row->Valor_Produto = number_format($row->Valor_Produto, 2, ',', '.');
+				if($row->idTab_Valor){
+					if($row->AtivoPreco == "S"){
+						if($row->VendaBalcaoPreco == "S"){
+							if($row->VendaSitePreco == "S"){
+								$row->AtivoPreco = "Balcao/Site";
+							}else{
+								$row->AtivoPreco = "Balcao";
+							}
+						}else{
+							if($row->VendaSitePreco == "S"){
+								$row->AtivoPreco = "Site";
+							}else{
+								$row->AtivoPreco = "Não";
+							}
+						}
+					}else{
+						$row->AtivoPreco = $this->basico->mascara_palavra_completa($row->AtivoPreco, 'NS');
+					}
+				}else{
+					$row->AtivoPreco = "";
+				}
+				if($row->ValorProduto != 0){
+					$row->ValorProduto = "R$" . number_format($row->ValorProduto, 2, ',', '.');
+				}
+				if($row->ComissaoVenda != 0.00){
+					$row->ComissaoVenda = number_format($row->ComissaoVenda, 2, ',', '.') . " %";
+				}else{
+					$row->ComissaoVenda = "";
+				}
 				#$valor_produto = number_format($valor_produto, 2, ',', '.');
 				
             }

@@ -11,11 +11,6 @@
 				<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/produtos" role="button">
 					<span class="glyphicon glyphicon-search"></span> Lista de Produtos
 				</a>
-				
-				<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/precopromocao" role="button">
-					<span class="glyphicon glyphicon-search"></span> Lista de Preços
-				</a>
-				
 				<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>produtos/cadastrar" role="button">
 					<span class="glyphicon glyphicon-plus"></span> Cadastrar Produto
 				</a>
@@ -109,7 +104,7 @@
 																	<div class="input-group">
 																		<span class="input-group-addon" id="basic-addon1">R$</span>
 																		<?php if ($metodo == 6) { ?>
-																			<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Valor']['ValorProduto'] ?>">
+																			<input type="text" class="form-control Valor text-left" readonly="" value="<?php echo $_SESSION['Valor']['ValorProduto'] ?>">
 																		<?php }elseif ($metodo == 7) { ?>
 																			<input type="text" class="form-control Valor" id="ValorProduto" maxlength="10" placeholder="0,00"
 																				name="ValorProduto" value="<?php echo $valor['ValorProduto'] ?>">
@@ -120,7 +115,7 @@
 																	<label for="ComissaoVenda">Comissao</label>
 																	<div class="input-group">
 																		<?php if ($metodo == 6) { ?>
-																			<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Valor']['ComissaoVenda'] ?>">
+																			<input type="text" class="form-control Valor text-right" readonly="" value="<?php echo $_SESSION['Valor']['ComissaoVenda'] ?>">
 																		<?php }elseif ($metodo == 7) { ?>
 																			<input type="text" class="form-control Valor text-right" id="ComissaoVenda" maxlength="10" placeholder="0,00"
 																				name="ComissaoVenda" value="<?php echo $valor['ComissaoVenda'] ?>">
@@ -132,7 +127,7 @@
 																	<label for="TempoDeEntrega">Tempo De Entrega</label>
 																	<div class="input-group">
 																		<?php if ($metodo == 6) { ?>
-																			<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Valor']['TempoDeEntrega'] ?>">
+																			<input type="text" class="form-control Numero text-right" readonly="" value="<?php echo $_SESSION['Valor']['TempoDeEntrega'] ?>">
 																		<?php }elseif ($metodo == 7) { ?>
 																			<input type="text" class="form-control Numero text-right" id="TempoDeEntrega" maxlength="3" placeholder="0"
 																				name="TempoDeEntrega" value="<?php echo $valor['TempoDeEntrega'] ?>">
