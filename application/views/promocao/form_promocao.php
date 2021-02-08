@@ -9,9 +9,11 @@
 			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/produtos" role="button">
 				<span class="glyphicon glyphicon-search"></span> Lista de Produtos
 			</a>
+			<!--
 			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/promocao" role="button">
 				<span class="glyphicon glyphicon-search"></span> Lista de Promocoes
 			</a>
+			-->
 			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>promocao/cadastrar" role="button">
 				<span class="glyphicon glyphicon-search"></span> Cadastrar Promoção
 			</a>

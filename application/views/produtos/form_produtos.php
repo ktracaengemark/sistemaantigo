@@ -11,11 +11,11 @@
 				<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/produtos" role="button">
 					<span class="glyphicon glyphicon-search"></span> Lista de Produtos
 				</a>
-				
+				<!--
 				<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/precopromocao" role="button">
 					<span class="glyphicon glyphicon-search"></span> Lista de Preços
 				</a>
-				
+				-->
 				<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>produtos/cadastrar" role="button">
 					<span class="glyphicon glyphicon-plus"></span> Cadastrar Produto
 				</a>

@@ -6266,6 +6266,7 @@ class Relatorio extends CI_Controller {
 			'Ordenamento',
             'Campo',
 			'Agrupar',
+			'Tipo',
         ), TRUE));
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -6273,7 +6274,9 @@ class Relatorio extends CI_Controller {
 
         $data['select']['Campo'] = array(
 			'TCP.Catprod' => 'Categoria',
-			'TP.Produtos' => 'Produto',
+			'TP.Produtos' => 'Produto Base',
+			'TPS.Nome_Prod' => 'Produtos',
+			'TV.idTab_Valor' => 'id_Preço',
         );
 
         $data['select']['Ordenamento'] = array(
@@ -6281,10 +6284,19 @@ class Relatorio extends CI_Controller {
             'DESC' => 'Decrescente',
         );
 		
-        $data['select']['Agrupar'] = array(
-			'0' => 'Preços',
-			'idTab_Produtos' => 'Produtos',
+        $data['select']['Tipo'] = array(
+			'0' => '::Todos::',
+			'1' => 'Preço',
+			'2' => 'Promoção',
         );
+		
+        $data['select']['Agrupar'] = array(
+			'0' => '::Todos::',
+			'1' => 'Produtos',
+			'2' => 'Produtos C/Preço',
+			'3' => 'Produtos C/Promocao',
+			'4' => 'Promoções',
+        );		
 		
 		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_catprod();
 		$data['select']['idTab_Produto'] = $this->Relatorio_model->select_produto();
@@ -6297,6 +6309,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 			$data['bd']['idTab_Produto'] = $data['query']['idTab_Produto'];
 			$data['bd']['idTab_Produtos'] = $data['query']['idTab_Produtos'];
+			$data['bd']['Tipo'] = $data['query']['Tipo'];
 			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];

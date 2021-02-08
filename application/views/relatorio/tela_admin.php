@@ -380,6 +380,13 @@
 									</div>
 								</div>
 								<div class="row">
+									<div class="form-group col-md-12 text-left">
+										<a  type="button" class="btn btn-md btn-default btn-block text-left" href="<?php echo base_url() ?>motivo/cadastrar" role="button"> 
+											<span class="glyphicon glyphicon-pencil"></span> Motivos do Inativo
+										</a>											
+									</div>	
+								</div>
+								<div class="row">
 									<div class="form-group col-md-12 text-left">										
 										<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/proc_Sac" role="button">
 											<span class="glyphicon glyphicon-pencil"></span> SAC
@@ -391,13 +398,6 @@
 										<a  type="button" class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/proc_Marketing" role="button">
 											<span class="glyphicon glyphicon-pencil"></span> Marketing
 										</a>
-									</div>	
-								</div>
-								<div class="row">
-									<div class="form-group col-md-12 text-left">
-										<a  type="button" class="btn btn-md btn-default btn-block text-left" href="<?php echo base_url() ?>motivo/cadastrar" role="button"> 
-											<span class="glyphicon glyphicon-pencil"></span> Motivos do Inativo
-										</a>											
 									</div>	
 								</div>
 								<?php if ($_SESSION['log']['idSis_Empresa'] == 2 ) { ?>	
@@ -454,7 +454,6 @@
 										</a>
 									</div>	
 								</div>
-								-->
 								<div class="row">
 									<div class="form-group col-md-12 text-left">													
 										<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/precopromocao" role="button"> 
@@ -462,6 +461,7 @@
 										</a>
 									</div>	
 								</div>
+								
 								<div class="row">
 									<div class="form-group col-md-12 text-left">													
 										<a class="btn btn-md btn-default btn-block" href="<?php echo base_url() ?>relatorio/promocao" role="button"> 
@@ -469,7 +469,7 @@
 										</a>
 									</div>	
 								</div>
-								
+								-->
 								<!--
 								<div class="form-group col-md-12 text-left">
 									<div class="row">													

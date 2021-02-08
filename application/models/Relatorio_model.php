@@ -3666,8 +3666,25 @@ exit();*/
     }
 	
 	public function list_produtos($data, $completo) {
-
-		$groupby = (!$data['Agrupar']) ? FALSE : 'GROUP BY TPS.' . $data['Agrupar'] . '';
+		
+		if(!$data['Agrupar']){
+			$groupby =  FALSE ;
+			$data['Desconto'] = FALSE;
+		}elseif($data['Agrupar'] == 1){
+			$groupby = 'GROUP BY TPS.idTab_Produtos';
+			$data['Desconto'] = FALSE;
+		}elseif($data['Agrupar'] == 2){
+			$groupby = 'GROUP BY TV.idTab_Valor';
+			$data['Desconto'] = 'AND TV.Desconto = "1"';
+		}elseif($data['Agrupar'] == 3){
+			$groupby = 'GROUP BY TV.idTab_Valor';
+			$data['Desconto'] = 'AND TV.Desconto = "2"';
+		}elseif($data['Agrupar'] == 4){
+			$groupby = 'GROUP BY TV.idTab_Promocao';
+			$data['Desconto'] = 'AND TV.Desconto = "2"';
+		}
+		
+		$data['Tipo'] = ($data['Tipo']) ? ' AND TV.Desconto = ' . $data['Tipo'] : FALSE;
 		$data['idTab_Catprod'] = ($data['idTab_Catprod']) ? ' AND TPS.idTab_Catprod = ' . $data['idTab_Catprod'] : FALSE;
 		$data['idTab_Produto'] = ($data['idTab_Produto']) ? ' AND TPS.idTab_Produto = ' . $data['idTab_Produto'] : FALSE;
 		$data['idTab_Produtos'] = ($data['idTab_Produtos']) ? ' AND TPS.idTab_Produtos = ' . $data['idTab_Produtos'] : FALSE;
@@ -3687,6 +3704,7 @@ exit();*/
 				TP.Ativo,
 				TCP.Catprod,
 				TV.idTab_Valor,
+				TV.Desconto,
 				TV.ValorProduto,
 				TV.ComissaoVenda,
 				TV.AtivoPreco,
@@ -3694,7 +3712,11 @@ exit();*/
 				TV.VendaSitePreco,
 				TV.idTab_Promocao,
 				TDS.idTab_Desconto,
-				TDS.Desconto
+				TDS.Desconto,
+				TPM.idTab_Promocao,
+				TPM.Promocao,
+				TPM.Descricao,
+				TPM.Arquivo AS ArquivoPromocao
             FROM
                 Tab_Produtos AS TPS
 					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TPS.idTab_Produto
@@ -3704,11 +3726,14 @@ exit();*/
 					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TPS.Prod_Serv
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produtos = TPS.idTab_Produtos
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TV.Desconto
+					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = TV.idTab_Promocao
             WHERE
-                TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+                TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				' . $data['Tipo'] . ' 
 				' . $data['idTab_Catprod'] . '
 				' . $data['idTab_Produto'] . '
 				' . $data['idTab_Produtos'] . '
+				' . $data['Desconto'] . '
 			' . $groupby . '
 			ORDER BY
 				' . $data['Campo'] . '
@@ -3737,6 +3762,9 @@ exit();*/
 				#$valor_produto = $row->Valor_Cor_Prod * $row->Fator_Tam_Prod;
 				#$somaorcamento += $row->ValorRestanteOrca;
 				#$somacomissao += $row->ValorComissao;
+				if($row->idTab_Promocao == 1){
+					$row->idTab_Promocao = "";
+				}
 				if($row->idTab_Valor){
 					if($row->AtivoPreco == "S"){
 						if($row->VendaBalcaoPreco == "S"){
@@ -3939,9 +3967,11 @@ exit();*/
         $query = $this->db->query('
             SELECT
                 TPM.*,
+                TDS.*,
 				SUM(TV.ValorProduto) AS SubTotal2
             FROM
                 Tab_Promocao AS TPM
+					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TPM.Desconto
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Promocao = TPM.idTab_Promocao
 					LEFT JOIN Tab_Produtos AS TPS ON TPS.idTab_Produtos = TV.idTab_Produtos
             WHERE
