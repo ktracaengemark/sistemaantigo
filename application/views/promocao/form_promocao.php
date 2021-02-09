@@ -223,27 +223,27 @@
 																<div class="panel-heading">
 																	<div class="row">
 																		<div class="col-md-12">
-																			<label for="Dia_Semana"><?php echo $_SESSION['Dia_Promocao'][$i]['Dia_Semana']; ?></label><br>
+																			<label for="Dia_Semana_Prom"><?php echo $_SESSION['Dia_Promocao'][$i]['Dia_Semana_Prom']; ?></label><br>
 																			<?php if ($metodo == 3) { ?>
-																				<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Dia_Promocao'][$i]['Aberto'] ?>">
+																				<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Dia_Promocao'][$i]['Aberto_Prom'] ?>">
 																			<?php }elseif ($metodo == 2) { ?>
 																				
 																					<div class="btn-group" data-toggle="buttons">
 																						<?php
-																						foreach ($select['Aberto'] as $key => $row) {
-																							(!$dia_promocao[$i]['Aberto']) ? $dia_promocao[$i]['Aberto'] = 'S' : FALSE;
+																						foreach ($select['Aberto_Prom'] as $key => $row) {
+																							(!$dia_promocao[$i]['Aberto_Prom']) ? $dia_promocao[$i]['Aberto_Prom'] = 'S' : FALSE;
 
-																							if ($dia_promocao[$i]['Aberto'] == $key) {
+																							if ($dia_promocao[$i]['Aberto_Prom'] == $key) {
 																								echo ''
-																								. '<label class="btn btn-warning active" name="radiobutton_Aberto' . $i . '" id="radiobutton_Aberto' . $i .  $key . '">'
-																								. '<input type="radio" name="Aberto' . $i . '" id="radiobuttondinamico" '
+																								. '<label class="btn btn-warning active" name="radiobutton_Aberto_Prom' . $i . '" id="radiobutton_Aberto_Prom' . $i .  $key . '">'
+																								. '<input type="radio" name="Aberto_Prom' . $i . '" id="radiobuttondinamico" '
 																								. 'autocomplete="off" value="' . $key . '" checked>' . $row
 																								. '</label>'
 																								;
 																							} else {
 																								echo ''
-																								. '<label class="btn btn-default" name="radiobutton_Aberto' . $i . '" id="radiobutton_Aberto' . $i .  $key . '">'
-																								. '<input type="radio" name="Aberto' . $i . '" id="radiobuttondinamico" '
+																								. '<label class="btn btn-default" name="radiobutton_Aberto_Prom' . $i . '" id="radiobutton_Aberto_Prom' . $i .  $key . '">'
+																								. '<input type="radio" name="Aberto_Prom' . $i . '" id="radiobuttondinamico" '
 																								. 'autocomplete="off" value="' . $key . '" >' . $row
 																								. '</label>'
 																								;

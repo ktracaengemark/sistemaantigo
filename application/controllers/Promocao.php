@@ -134,23 +134,23 @@ class Promocao extends CI_Controller {
                 $this->load->view('promocao/form_promocao', $data);
             } else {
 
-				$data['dia_promocao']['1']['Dia_Semana'] = "SEGUNDA";
-                $data['dia_promocao']['2']['Dia_Semana'] = "TERCA";
-                $data['dia_promocao']['3']['Dia_Semana'] = "QUARTA";
-                $data['dia_promocao']['4']['Dia_Semana'] = "QUINTA";
-                $data['dia_promocao']['5']['Dia_Semana'] = "SEXTA";
-                $data['dia_promocao']['6']['Dia_Semana'] = "SABADO";
-                $data['dia_promocao']['7']['Dia_Semana'] = "DOMINGO";
+				$data['dia_promocao']['1']['Dia_Semana_Prom'] = "SEGUNDA";
+                $data['dia_promocao']['2']['Dia_Semana_Prom'] = "TERCA";
+                $data['dia_promocao']['3']['Dia_Semana_Prom'] = "QUARTA";
+                $data['dia_promocao']['4']['Dia_Semana_Prom'] = "QUINTA";
+                $data['dia_promocao']['5']['Dia_Semana_Prom'] = "SEXTA";
+                $data['dia_promocao']['6']['Dia_Semana_Prom'] = "SABADO";
+                $data['dia_promocao']['7']['Dia_Semana_Prom'] = "DOMINGO";
 				
 				for($j=1; $j<=7; $j++) {
 					$data['dia_promocao'][$j] = array(
 						'idTab_Promocao' => $data['promocao']['idTab_Promocao'],
 						'idSis_Empresa' => $_SESSION['log']['idSis_Empresa'],
-						'id_Dia' => $j,
-						'Dia_Semana' => $data['dia_promocao'][$j]['Dia_Semana'],
-						'Aberto' => "S",
-						'Hora_Abre' => "00:00:00",
-						'Hora_Fecha' => "23:59:59"
+						'id_Dia_Prom' => $j,
+						'Dia_Semana_Prom' => $data['dia_promocao'][$j]['Dia_Semana_Prom'],
+						'Aberto_Prom' => "S",
+						'Hora_Abre_Prom' => "00:00:00",
+						'Hora_Fecha_Prom' => "23:59:59"
 					);
 					$data['campos'] = array_keys($data['dia_promocao'][$j]);
 					$data['idTab_Dia_Prom'] = $this->Promocao_model->set_dia_promocao($data['dia_promocao'][$j]);
@@ -216,7 +216,7 @@ class Promocao extends CI_Controller {
 
             if ($this->input->post('idTab_Dia_Prom' . $i)) {
 				$data['dia_promocao'][$j]['idTab_Dia_Prom'] = $this->input->post('idTab_Dia_Prom' . $i);
-				$data['dia_promocao'][$j]['Aberto'] = $this->input->post('Aberto' . $i);
+				$data['dia_promocao'][$j]['Aberto_Prom'] = $this->input->post('Aberto_Prom' . $i);
                 $j++;
             }
 						
@@ -278,7 +278,7 @@ class Promocao extends CI_Controller {
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['Aberto'] = $this->Basico_model->select_status_sn();
+		$data['select']['Aberto_Prom'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Editar Promoção';
         $data['form_open_path'] = 'promocao/alterar';
@@ -412,23 +412,23 @@ class Promocao extends CI_Controller {
 				
 				if(!$data['dia_promocao'] && !$data['update']['dia_promocao']['anterior']){
 			
-					$data['dia_promocao']['1']['Dia_Semana'] = "SEGUNDA";
-					$data['dia_promocao']['2']['Dia_Semana'] = "TERCA";
-					$data['dia_promocao']['3']['Dia_Semana'] = "QUARTA";
-					$data['dia_promocao']['4']['Dia_Semana'] = "QUINTA";
-					$data['dia_promocao']['5']['Dia_Semana'] = "SEXTA";
-					$data['dia_promocao']['6']['Dia_Semana'] = "SABADO";
-					$data['dia_promocao']['7']['Dia_Semana'] = "DOMINGO";
+					$data['dia_promocao']['1']['Dia_Semana_Prom'] = "SEGUNDA";
+					$data['dia_promocao']['2']['Dia_Semana_Prom'] = "TERCA";
+					$data['dia_promocao']['3']['Dia_Semana_Prom'] = "QUARTA";
+					$data['dia_promocao']['4']['Dia_Semana_Prom'] = "QUINTA";
+					$data['dia_promocao']['5']['Dia_Semana_Prom'] = "SEXTA";
+					$data['dia_promocao']['6']['Dia_Semana_Prom'] = "SABADO";
+					$data['dia_promocao']['7']['Dia_Semana_Prom'] = "DOMINGO";
 					
 					for($j=1; $j<=7; $j++) {
 						$data['dia_promocao'][$j] = array(
 							'idTab_Promocao' => $data['promocao']['idTab_Promocao'],
 							'idSis_Empresa' => $_SESSION['log']['idSis_Empresa'],
-							'id_Dia' => $j,
-							'Dia_Semana' => $data['dia_promocao'][$j]['Dia_Semana'],
-							'Aberto' => "S",
-							'Hora_Abre' => "00:00:00",
-							'Hora_Fecha' => "23:59:59"
+							'id_Dia_Prom' => $j,
+							'Dia_Semana_Prom' => $data['dia_promocao'][$j]['Dia_Semana_Prom'],
+							'Aberto_Prom' => "S",
+							'Hora_Abre_Prom' => "00:00:00",
+							'Hora_Fecha_Prom' => "23:59:59"
 						);
 						$data['campos'] = array_keys($data['dia_promocao'][$j]);
 						$data['idTab_Dia_Prom'] = $this->Promocao_model->set_dia_promocao($data['dia_promocao'][$j]);
@@ -513,7 +513,7 @@ class Promocao extends CI_Controller {
 
             if ($this->input->post('idTab_Dia_Prom' . $i)) {
 				$data['dia_promocao'][$j]['idTab_Dia_Prom'] = $this->input->post('idTab_Dia_Prom' . $i);
-				$data['dia_promocao'][$j]['Aberto'] = $this->input->post('Aberto' . $i);
+				$data['dia_promocao'][$j]['Aberto_Prom'] = $this->input->post('Aberto_Prom' . $i);
                 $j++;
             }
 						
@@ -565,7 +565,7 @@ class Promocao extends CI_Controller {
 
                     for($j=1; $j <= $data['count']['DiaCount']; $j++){
 						$_SESSION['Dia_Promocao'][$j] = $data['dia_promocao'][$j];
-						$_SESSION['Dia_Promocao'][$j]['Aberto'] = $this->basico->mascara_palavra_completa($data['dia_promocao'][$j]['Aberto'], 'NS');
+						$_SESSION['Dia_Promocao'][$j]['Aberto_Prom'] = $this->basico->mascara_palavra_completa($data['dia_promocao'][$j]['Aberto_Prom'], 'NS');
 						/*
 						echo '<br>';
 						echo "<pre>";
@@ -585,7 +585,7 @@ class Promocao extends CI_Controller {
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['Aberto'] = $this->Basico_model->select_status_sn();		
+		$data['select']['Aberto_Prom'] = $this->Basico_model->select_status_sn();		
 
         $data['titulo'] = 'Promoção';
         $data['form_open_path'] = 'promocao/tela_promocao';
