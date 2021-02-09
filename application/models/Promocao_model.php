@@ -51,6 +51,20 @@ class Promocao_model extends CI_Model {
         }
     }
 
+    public function set_dia_promocao($data) {
+
+        $query = $this->db->insert('Tab_Dia_Prom', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }	
+
     public function get_promocao($data) {
         $query = $this->db->query('
 			SELECT  
@@ -83,6 +97,20 @@ class Promocao_model extends CI_Model {
 					LEFT JOIN Tab_Produtos AS TPS ON TPS.idTab_Produtos = TV.idTab_Produtos
 			WHERE 
 				TV.idTab_Promocao = ' . $data . '
+		');
+        $query = $query->result_array();
+
+        return $query;
+    }
+
+	public function get_dia_promocao($data, $desconto) {
+		$query = $this->db->query('
+			SELECT 
+				TD.*
+			FROM 
+				Tab_Dia_Prom AS TD
+			WHERE 
+				TD.idTab_Promocao = ' . $data . '
 		');
         $query = $query->result_array();
 
@@ -242,6 +270,13 @@ class Promocao_model extends CI_Model {
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }	
+
+    public function update_dia_promocao($data) {
+
+        $query = $this->db->update_batch('Tab_Dia_Prom', $data, 'idTab_Dia_Prom');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }	
 	
     public function delete_item_promocao($data) {
 
@@ -255,11 +290,23 @@ class Promocao_model extends CI_Model {
         }
     }
 	
+    public function delete_dia_promocao($data) {
+
+        $this->db->where_in('idTab_Dia_Prom', $data);
+        $this->db->delete('Tab_Dia_Prom');
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+		
     public function delete_promocao($id) {
 
-
-        $query = $this->db->delete('Tab_Valor', array('idTab_Promocao' => $id));
         $query = $this->db->delete('Tab_Promocao', array('idTab_Promocao' => $id));
+        $query = $this->db->delete('Tab_Valor', array('idTab_Promocao' => $id));
+        $query = $this->db->delete('Tab_Dia_Prom', array('idTab_Promocao' => $id));
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;

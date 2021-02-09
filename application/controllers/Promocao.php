@@ -127,14 +127,36 @@ class Promocao extends CI_Controller {
             exit ();
             */
 
-            if ($data['idTab_Promocao'] === FALSE) {
+            if ($data['promocao']['idTab_Promocao'] === FALSE) {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
                 $this->load->view('promocao/form_promocao', $data);
             } else {
 
-                //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Produtos'], FALSE);
+				$data['dia_promocao']['1']['Dia_Semana'] = "SEGUNDA";
+                $data['dia_promocao']['2']['Dia_Semana'] = "TERCA";
+                $data['dia_promocao']['3']['Dia_Semana'] = "QUARTA";
+                $data['dia_promocao']['4']['Dia_Semana'] = "QUINTA";
+                $data['dia_promocao']['5']['Dia_Semana'] = "SEXTA";
+                $data['dia_promocao']['6']['Dia_Semana'] = "SABADO";
+                $data['dia_promocao']['7']['Dia_Semana'] = "DOMINGO";
+				
+				for($j=1; $j<=7; $j++) {
+					$data['dia_promocao'][$j] = array(
+						'idTab_Promocao' => $data['promocao']['idTab_Promocao'],
+						'idSis_Empresa' => $_SESSION['log']['idSis_Empresa'],
+						'id_Dia' => $j,
+						'Dia_Semana' => $data['dia_promocao'][$j]['Dia_Semana'],
+						'Aberto' => "S",
+						'Hora_Abre' => "00:00:00",
+						'Hora_Fecha' => "23:59:59"
+					);
+					$data['campos'] = array_keys($data['dia_promocao'][$j]);
+					$data['idTab_Dia_Prom'] = $this->Promocao_model->set_dia_promocao($data['dia_promocao'][$j]);
+				}				
+				
+				//$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Produtos'], FALSE);
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produtos', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
@@ -160,9 +182,12 @@ class Promocao extends CI_Controller {
             'idTab_Promocao',			
             'Promocao', 
             'Descricao',
+			'DataInicioProm',
+			'DataFimProm',
         ), TRUE));
 
-		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');		
+		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
+		(!$this->input->post('DiaCount')) ? $data['count']['DiaCount'] = 0 : $data['count']['DiaCount'] = $this->input->post('DiaCount');		
 		
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
@@ -184,13 +209,27 @@ class Promocao extends CI_Controller {
             }
 						
         }
-        $data['count']['PTCount'] = $j - 1;		
+        $data['count']['PTCount'] = $j - 1;
+		
+        $j = 1;
+        for ($i = 1; $i <= $data['count']['DiaCount']; $i++) {
+
+            if ($this->input->post('idTab_Dia_Prom' . $i)) {
+				$data['dia_promocao'][$j]['idTab_Dia_Prom'] = $this->input->post('idTab_Dia_Prom' . $i);
+				$data['dia_promocao'][$j]['Aberto'] = $this->input->post('Aberto' . $i);
+                $j++;
+            }
+						
+        }
+        $data['count']['DiaCount'] = $j - 1;		
 		
         if ($id) {
             #### Tab_Promocao ####
-           $_SESSION['Promocao'] = $data['promocao'] = $this->Promocao_model->get_promocao($id);
-
-            #### Tab_Valor ####
+			$_SESSION['Promocao'] = $data['promocao'] = $this->Promocao_model->get_promocao($id);
+			$_SESSION['Promocao']['DataInicioProm'] = $data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'barras');
+			$_SESSION['Promocao']['DataFimProm'] = $data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'barras');
+            
+			#### Tab_Valor ####
             $data['item_promocao'] = $this->Promocao_model->get_item_promocao($id, "2");
             if (count($data['item_promocao']) > 0) {
                 $data['item_promocao'] = array_combine(range(1, count($data['item_promocao'])), array_values($data['item_promocao']));
@@ -208,17 +247,38 @@ class Promocao extends CI_Controller {
 					}
 						
                 }				
+            }
+
+            #### Tab_Dia_Prom ####
+            $_SESSION['Dia_Promocao'] = $data['dia_promocao'] = $this->Promocao_model->get_dia_promocao($id, "2");
+            if (count($data['dia_promocao']) > 0) {
+                $data['dia_promocao'] = array_combine(range(1, count($data['dia_promocao'])), array_values($data['dia_promocao']));
+                $data['count']['DiaCount'] = count($data['dia_promocao']);
+				
+                if (isset($data['dia_promocao'])) {
+
+                    for($j=1; $j <= $data['count']['DiaCount']; $j++){
+						$_SESSION['Dia_Promocao'][$j] = $data['dia_promocao'][$j];
+						/*
+						echo '<br>';
+						echo "<pre>";
+						print_r($_SESSION['Dia_Promocao'][$j]);
+						echo "</pre>";
+						*/
+					}
+						
+                }
+								
             }			
 		
 		}
-		
 		//exit();
 		
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_produto_promocao();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();		
-		
+		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['Aberto'] = $this->Basico_model->select_status_sn();
 		
         $data['titulo'] = 'Editar Promoção';
         $data['form_open_path'] = 'promocao/alterar';
@@ -240,6 +300,8 @@ class Promocao extends CI_Controller {
 		$this->form_validation->set_rules('idTab_Promocao', 'Promocao', 'required|trim');
 		$this->form_validation->set_rules('Promocao', 'Titulo', 'required|trim');
 		$this->form_validation->set_rules('Descricao', 'Descrição', 'required|trim');
+		$this->form_validation->set_rules('DataInicioProm', 'Data do Inicio', 'required|trim|valid_date');
+		$this->form_validation->set_rules('DataFimProm', 'Data do Fim', 'required|trim|valid_date');
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -250,6 +312,8 @@ class Promocao extends CI_Controller {
             #### Tab_Promocao ####
 			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
 			$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'UTF-8'));
+			$data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'mysql');
+			$data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'mysql');
 			
 			$data['update']['promocao']['anterior'] = $this->Promocao_model->get_promocao($data['promocao']['idTab_Promocao']);
             $data['update']['promocao']['campos'] = array_keys($data['promocao']);
@@ -304,6 +368,75 @@ class Promocao extends CI_Controller {
                     $data['update']['item_promocao']['bd']['excluir'] = $this->Promocao_model->delete_item_promocao($data['update']['item_promocao']['excluir']);
 
             }
+			
+            #### Tab_Dia_Prom ####
+            $data['update']['dia_promocao']['anterior'] = $this->Promocao_model->get_dia_promocao($data['promocao']['idTab_Promocao'], "2");
+            /*
+			echo '<br>';
+			echo "<pre>";
+			if (!isset($data['dia_promocao'])){
+				print_r('Não existe 1');
+			}else{
+				print_r($data['dia_promocao']);
+			}
+			echo '<br>';
+			if (!$data['update']['dia_promocao']['anterior']){
+				print_r('Não existe 2');
+			}else{
+				print_r($data['update']['dia_promocao']['anterior']);
+			}	
+			echo "</pre>";
+			exit();
+			*/
+			if (isset($data['dia_promocao']) || (!isset($data['dia_promocao']) && isset($data['update']['dia_promocao']['anterior']) ) ) {
+
+                if (isset($data['dia_promocao']))
+                    $data['dia_promocao'] = array_values($data['dia_promocao']);
+                else
+                    $data['dia_promocao'] = array();
+
+                //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
+                $data['update']['dia_promocao'] = $this->basico->tratamento_array_multidimensional($data['dia_promocao'], $data['update']['dia_promocao']['anterior'], 'idTab_Dia_Prom');
+
+                $max = count($data['update']['dia_promocao']['alterar']);
+                for($j=0;$j<$max;$j++) {
+					/*
+					$data['update']['dia_promocao']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['dia_promocao']['alterar'][$j]['ValorProduto']));
+					$data['update']['dia_promocao']['alterar'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['dia_promocao']['alterar'][$j]['ComissaoVenda']));
+					$data['update']['dia_promocao']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['dia_promocao']['alterar'][$j]['Convdesc'], 'UTF-8'));
+					*/
+				}
+
+                if (count($data['update']['dia_promocao']['alterar']))
+                    $data['update']['dia_promocao']['bd']['alterar'] =  $this->Promocao_model->update_dia_promocao($data['update']['dia_promocao']['alterar']);
+				
+				if(!$data['dia_promocao'] && !$data['update']['dia_promocao']['anterior']){
+			
+					$data['dia_promocao']['1']['Dia_Semana'] = "SEGUNDA";
+					$data['dia_promocao']['2']['Dia_Semana'] = "TERCA";
+					$data['dia_promocao']['3']['Dia_Semana'] = "QUARTA";
+					$data['dia_promocao']['4']['Dia_Semana'] = "QUINTA";
+					$data['dia_promocao']['5']['Dia_Semana'] = "SEXTA";
+					$data['dia_promocao']['6']['Dia_Semana'] = "SABADO";
+					$data['dia_promocao']['7']['Dia_Semana'] = "DOMINGO";
+					
+					for($j=1; $j<=7; $j++) {
+						$data['dia_promocao'][$j] = array(
+							'idTab_Promocao' => $data['promocao']['idTab_Promocao'],
+							'idSis_Empresa' => $_SESSION['log']['idSis_Empresa'],
+							'id_Dia' => $j,
+							'Dia_Semana' => $data['dia_promocao'][$j]['Dia_Semana'],
+							'Aberto' => "S",
+							'Hora_Abre' => "00:00:00",
+							'Hora_Fecha' => "23:59:59"
+						);
+						$data['campos'] = array_keys($data['dia_promocao'][$j]);
+						$data['idTab_Dia_Prom'] = $this->Promocao_model->set_dia_promocao($data['dia_promocao'][$j]);
+					}			
+				
+				}
+				
+            }
 				
             if ($data['auditoriaitem'] && !$data['update']['promocao']['bd']) {
                 $data['msg'] = '?m=2';
@@ -339,10 +472,20 @@ class Promocao extends CI_Controller {
             'idTab_Promocao',			
             'Promocao', 
             'Descricao',
+			'DataInicioProm',
+			'DataFimProm',
         ), TRUE));
-
 		
-		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');		
+		$dia_da_semana = date('N');
+		/*
+		echo '<br>';
+		echo "<pre>";
+		print_r($dia_da_semana);
+		echo "</pre>";
+		exit();
+		*/
+		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
+		(!$this->input->post('DiaCount')) ? $data['count']['DiaCount'] = 0 : $data['count']['DiaCount'] = $this->input->post('DiaCount');		
 		
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
@@ -365,9 +508,24 @@ class Promocao extends CI_Controller {
         }
         $data['count']['PTCount'] = $j - 1;		
 		
+        $j = 1;
+        for ($i = 1; $i <= $data['count']['DiaCount']; $i++) {
+
+            if ($this->input->post('idTab_Dia_Prom' . $i)) {
+				$data['dia_promocao'][$j]['idTab_Dia_Prom'] = $this->input->post('idTab_Dia_Prom' . $i);
+				$data['dia_promocao'][$j]['Aberto'] = $this->input->post('Aberto' . $i);
+                $j++;
+            }
+						
+        }
+        $data['count']['DiaCount'] = $j - 1;		
+		
+		
         if ($id) {
             #### Tab_Promocao ####
 			$_SESSION['Promocao'] = $data['promocao'] = $this->Promocao_model->get_promocao($id);
+			$_SESSION['Promocao']['DataInicioProm'] = $data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'barras');
+			$_SESSION['Promocao']['DataFimProm'] = $data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'barras');
 
             #### Tab_Valor ####
             $_SESSION['Item_Promocao'] = $data['item_promocao'] = $this->Promocao_model->get_item_promocao($id, "2");
@@ -395,6 +553,29 @@ class Promocao extends CI_Controller {
 						
                 }
 								
+            }
+			
+            #### Tab_Dia_Prom ####
+            $_SESSION['Dia_Promocao'] = $data['dia_promocao'] = $this->Promocao_model->get_dia_promocao($id, "2");
+            if (count($data['dia_promocao']) > 0) {
+                $data['dia_promocao'] = array_combine(range(1, count($data['dia_promocao'])), array_values($data['dia_promocao']));
+                $data['count']['DiaCount'] = count($data['dia_promocao']);
+				
+                if (isset($data['dia_promocao'])) {
+
+                    for($j=1; $j <= $data['count']['DiaCount']; $j++){
+						$_SESSION['Dia_Promocao'][$j] = $data['dia_promocao'][$j];
+						$_SESSION['Dia_Promocao'][$j]['Aberto'] = $this->basico->mascara_palavra_completa($data['dia_promocao'][$j]['Aberto'], 'NS');
+						/*
+						echo '<br>';
+						echo "<pre>";
+						print_r($_SESSION['Dia_Promocao'][$j]);
+						echo "</pre>";
+						*/
+					}
+						
+                }
+								
             }			
 		
 		}
@@ -403,7 +584,8 @@ class Promocao extends CI_Controller {
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_produto_promocao();
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();		
+		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['Aberto'] = $this->Basico_model->select_status_sn();		
 
         $data['titulo'] = 'Promoção';
         $data['form_open_path'] = 'promocao/tela_promocao';
@@ -489,6 +671,32 @@ class Promocao extends CI_Controller {
                     $data['update']['item_promocao']['bd']['excluir'] = $this->Promocao_model->delete_item_promocao($data['update']['item_promocao']['excluir']);
 
             }
+			
+            #### Tab_Dia_Prom ####
+            $data['update']['dia_promocao']['anterior'] = $this->Promocao_model->get_dia_promocao($data['promocao']['idTab_Promocao'], "2");
+            if (isset($data['dia_promocao']) || (!isset($data['dia_promocao']) && isset($data['update']['dia_promocao']['anterior']) ) ) {
+
+                if (isset($data['dia_promocao']))
+                    $data['dia_promocao'] = array_values($data['dia_promocao']);
+                else
+                    $data['dia_promocao'] = array();
+
+                //faz o tratamento da variável multidimensional, que ira separar o que deve ser inserido, alterado e excluído
+                $data['update']['dia_promocao'] = $this->basico->tratamento_array_multidimensional($data['dia_promocao'], $data['update']['dia_promocao']['anterior'], 'idTab_Dia_Prom');
+
+                $max = count($data['update']['dia_promocao']['alterar']);
+                for($j=0;$j<$max;$j++) {
+					/*
+					$data['update']['dia_promocao']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['dia_promocao']['alterar'][$j]['ValorProduto']));
+					$data['update']['dia_promocao']['alterar'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['dia_promocao']['alterar'][$j]['ComissaoVenda']));
+					$data['update']['dia_promocao']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['dia_promocao']['alterar'][$j]['Convdesc'], 'UTF-8'));
+					*/
+				}
+
+                if (count($data['update']['dia_promocao']['alterar']))
+                    $data['update']['dia_promocao']['bd']['alterar'] =  $this->Promocao_model->update_dia_promocao($data['update']['dia_promocao']['alterar']);
+
+            }			
 				
             if ($data['auditoriaitem'] && !$data['update']['promocao']['bd']) {
                 $data['msg'] = '?m=2';
