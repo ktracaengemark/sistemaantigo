@@ -303,7 +303,7 @@
 													</div>	
 												</div>
 											</div>
-										
+											
 											<div class="col-md-12">
 												<div class="row">
 													<div class="panel-body">
@@ -619,6 +619,7 @@
 				<?php if (isset($list_promocoes)) echo $list_promocoes; ?>
 			<?php } elseif($metodo > 1) { ?>
 				<?php if (isset($list_itens_promocao)) echo $list_itens_promocao; ?>
+				<?php if (isset($list_promocoes)) echo $list_promocoes; ?>
 			<?php } ?>
 			</form>
 		</div>

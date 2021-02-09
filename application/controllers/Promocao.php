@@ -301,6 +301,9 @@ class Promocao extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
+		$data['q_promocoes'] = $this->Promocao_model->list_promocoes($_SESSION['log'], TRUE);
+		$data['list_promocoes'] = $this->load->view('promocao/list_promocoes', $data, TRUE);
+		
 		$data['q_itens_promocao'] = $this->Promocao_model->list_itens_promocao($data['promocao'], TRUE);
 		$data['list_itens_promocao'] = $this->load->view('promocao/list_itens_promocao', $data, TRUE);
 		
@@ -604,6 +607,9 @@ class Promocao extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
+		$data['q_promocoes'] = $this->Promocao_model->list_promocoes($_SESSION['log'], TRUE);
+		$data['list_promocoes'] = $this->load->view('promocao/list_promocoes', $data, TRUE);
+		
 		$data['q_itens_promocao'] = $this->Promocao_model->list_itens_promocao($data['promocao'], TRUE);
 		$data['list_itens_promocao'] = $this->load->view('promocao/list_itens_promocao', $data, TRUE);
 		

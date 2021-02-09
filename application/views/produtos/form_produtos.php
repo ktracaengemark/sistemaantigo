@@ -43,39 +43,16 @@
 										<?php if ($metodo < 4) { ?>
 											<div class="form-group">
 												<div class="row">	
-													<div class="col-md-1"></div>
-													<div class="col-md-2">
-														<label for="idTab_Catprod">Categoria *</label>
-														<?php if ($metodo < 2) { ?>
-															<select data-placeholder="Selecione uma Categoria..." class="form-control Chosen" 
-															id="idTab_Catprod" name="idTab_Catprod">
-																<option value="">-- Selecione uma Categoria --</option>
-																<?php
-																	foreach ($select['idTab_Catprod'] as $key => $row) {
-																		if ($produtos['idTab_Catprod'] == $key) {
-																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																			} else {
-																			echo '<option value="' . $key . '">' . $row . '</option>';
-																		}
-																	}
-																?>
-															</select>
-															<?php } else { ?>
-															<input type="hidden" id="idTab_Catprod" name="idTab_Catprod" value="<?php echo $_SESSION['Produtos']['idTab_Catprod']; ?>">
-															<input class="form-control"readonly="" value="<?php echo $_SESSION['Produtos']['Catprod']; ?>">
-														<?php } ?>
-														
-														<?php echo form_error('idTab_Catprod'); ?>
-													</div>
-													<div class="col-md-3">
-														<?php if ($metodo >= 2) { ?>
-															<label for="idTab_Produto">Produto Base*</label>
-															<?php if ($metodo < 4) { ?>
-																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="idTab_Produto" name="idTab_Produto" onchange="codigo(this.value,this.name)">
-																	<option value="">-- Selecione uma opção --</option>
+													<div class="col-md-12">
+														<div class="col-md-3">
+															<label for="idTab_Catprod">Categoria *</label>
+															<?php if ($metodo < 2) { ?>
+																<select data-placeholder="Selecione uma Categoria..." class="form-control Chosen" 
+																id="idTab_Catprod" name="idTab_Catprod">
+																	<option value="">-- Selecione uma Categoria --</option>
 																	<?php
-																		foreach ($select['idTab_Produto'] as $key => $row) {
-																			if ($produtos['idTab_Produto'] == $key) {
+																		foreach ($select['idTab_Catprod'] as $key => $row) {
+																			if ($produtos['idTab_Catprod'] == $key) {
 																				echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																				} else {
 																				echo '<option value="' . $key . '">' . $row . '</option>';
@@ -83,72 +60,96 @@
 																		}
 																	?>
 																</select>
-																<input type="hidden" id="Produtos" name="Produtos" value="<?php echo $_SESSION['Produtos']['Produtos']; ?>">
-																<?php }else{ ?>
-																<input type="hidden" id="idTab_Produto" name="idTab_Produto" value="<?php echo $_SESSION['Produtos']['idTab_Produto']; ?>">
-																<input class="form-control"readonly="" value="<?php echo $_SESSION['Produtos']['Produtos']; ?>">
+																<?php } else { ?>
+																<input type="hidden" id="idTab_Catprod" name="idTab_Catprod" value="<?php echo $_SESSION['Produtos']['idTab_Catprod']; ?>">
+																<input class="form-control"readonly="" value="<?php echo $_SESSION['Produtos']['Catprod']; ?>">
 															<?php } ?>
-															<?php echo form_error('idTab_Produto'); ?>
+															
+															<?php echo form_error('idTab_Catprod'); ?>
+														</div>
+														<div class="col-md-3">
+															<?php if ($metodo >= 2) { ?>
+																<label for="idTab_Produto">Produto Base*</label>
+																<?php if ($metodo < 4) { ?>
+																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="idTab_Produto" name="idTab_Produto" onchange="codigo(this.value,this.name)">
+																		<option value="">-- Selecione uma opção --</option>
+																		<?php
+																			foreach ($select['idTab_Produto'] as $key => $row) {
+																				if ($produtos['idTab_Produto'] == $key) {
+																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																					} else {
+																					echo '<option value="' . $key . '">' . $row . '</option>';
+																				}
+																			}
+																		?>
+																	</select>
+																	<input type="hidden" id="Produtos" name="Produtos" value="<?php echo $_SESSION['Produtos']['Produtos']; ?>">
+																	<?php }else{ ?>
+																	<input type="hidden" id="idTab_Produto" name="idTab_Produto" value="<?php echo $_SESSION['Produtos']['idTab_Produto']; ?>">
+																	<input class="form-control"readonly="" value="<?php echo $_SESSION['Produtos']['Produtos']; ?>">
+																<?php } ?>
+																<?php echo form_error('idTab_Produto'); ?>
+															<?php } ?>
+														</div>
+														<?php if ($metodo >= 2) { ?>
+															<div class="col-md-3">
+																<?php if ($_SESSION['Atributo'][1]['idTab_Atributo']) { ?>
+																	<label for="Opcao_Atributo_1"><?php echo $_SESSION['Atributo'][1]['Atributo']; ?></label>
+																	<?php if ($metodo < 4) { ?>
+																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="Opcao_Atributo_1" name="Opcao_Atributo_1" onchange="codigo(this.value,this.name)">
+																			<option value="">-- Selecione uma opção --</option>
+																			<?php
+																				foreach ($select['Opcao_Atributo_1'] as $key => $row) {
+																					if ($produtos['Opcao_Atributo_1'] == $key) {
+																						echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																						} else {
+																						echo '<option value="' . $key . '">' . $row . '</option>';
+																					}
+																				}
+																			?>
+																		</select>
+																		<?php echo form_error('Opcao_Atributo_1'); ?>
+																		<input type="hidden" id="Opcao1" name="Opcao1" value="<?php echo $_SESSION['Produtos']['Opcao1']; ?>">
+																		<?php }else{ ?>
+																		<input type="hidden" id="Opcao_Atributo_1" name="Opcao_Atributo_1" value="<?php echo $_SESSION['Produtos']['Opcao_Atributo_1']; ?>">
+																		<input class="form-control"readonly="" value="<?php echo $_SESSION['Produtos']['Opcao1']; ?>">
+																	<?php } ?>
+																	<?php }else{ ?>
+																	<label for="Opcao_Atributo_1">Não existe Atributo1</label>
+																	<input type="text" class="form-control"readonly="" name="Opcao_Atributo_1" id="Opcao_Atributo_1" value="0">
+																<?php } ?>
+															</div>
+														<?php } ?>
+														<?php if ($metodo >= 2) { ?>		
+															<div class="col-md-3">
+																<?php if ($_SESSION['Atributo'][2]['idTab_Atributo']) { ?>
+																	<label for="Opcao_Atributo_2"><?php echo $_SESSION['Atributo'][2]['Atributo']; ?></label>
+																	<?php if ($metodo < 4) { ?>
+																		<select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="Opcao_Atributo_2" name="Opcao_Atributo_2" onchange="codigo(this.value,this.name)">
+																			<option value="">-- Selecione uma opção --</option>
+																			<?php
+																				foreach ($select['Opcao_Atributo_2'] as $key => $row) {
+																					if ($produtos['Opcao_Atributo_2'] == $key) {
+																						echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																						} else {
+																						echo '<option value="' . $key . '">' . $row . '</option>';
+																					}
+																				}
+																			?>
+																		</select>
+																		<?php echo form_error('Opcao_Atributo_2'); ?>
+																		<input type="hidden" id="Opcao2" name="Opcao2" value="<?php echo $_SESSION['Produtos']['Opcao2']; ?>">
+																		<?php }else{ ?>
+																		<input type="hidden" id="Opcao_Atributo_2" name="Opcao_Atributo_2" value="<?php echo $_SESSION['Produtos']['Opcao_Atributo_2']; ?>">
+																		<input class="form-control"readonly="" value="<?php echo $_SESSION['Produtos']['Opcao2']; ?>">
+																	<?php } ?>
+																	<?php }else{ ?>
+																	<label for="Opcao_Atributo_2">Não existe Atributo2</label>
+																	<input type="text" class="form-control"readonly=""  name="Opcao_Atributo_2" id="Opcao_Atributo_2" value="0">
+																<?php } ?>
+															</div>
 														<?php } ?>
 													</div>
-													<?php if ($metodo >= 2) { ?>
-														<div class="col-md-3">
-															<?php if ($_SESSION['Atributo'][1]['idTab_Atributo']) { ?>
-																<label for="Opcao_Atributo_1"><?php echo $_SESSION['Atributo'][1]['Atributo']; ?></label>
-																<?php if ($metodo < 4) { ?>
-																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="Opcao_Atributo_1" name="Opcao_Atributo_1" onchange="codigo(this.value,this.name)">
-																		<option value="">-- Selecione uma opção --</option>
-																		<?php
-																			foreach ($select['Opcao_Atributo_1'] as $key => $row) {
-																				if ($produtos['Opcao_Atributo_1'] == $key) {
-																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																					} else {
-																					echo '<option value="' . $key . '">' . $row . '</option>';
-																				}
-																			}
-																		?>
-																	</select>
-																	<?php echo form_error('Opcao_Atributo_1'); ?>
-																	<input type="hidden" id="Opcao1" name="Opcao1" value="<?php echo $_SESSION['Produtos']['Opcao1']; ?>">
-																	<?php }else{ ?>
-																	<input type="hidden" id="Opcao_Atributo_1" name="Opcao_Atributo_1" value="<?php echo $_SESSION['Produtos']['Opcao_Atributo_1']; ?>">
-																	<input class="form-control"readonly="" value="<?php echo $_SESSION['Produtos']['Opcao1']; ?>">
-																<?php } ?>
-																<?php }else{ ?>
-																<label for="Opcao_Atributo_1">Não existe Atributo1</label>
-																<input type="text" class="form-control"readonly="" name="Opcao_Atributo_1" id="Opcao_Atributo_1" value="0">
-															<?php } ?>
-														</div>
-													<?php } ?>
-													<?php if ($metodo >= 2) { ?>		
-														<div class="col-md-3">
-															<?php if ($_SESSION['Atributo'][2]['idTab_Atributo']) { ?>
-																<label for="Opcao_Atributo_2"><?php echo $_SESSION['Atributo'][2]['Atributo']; ?></label>
-																<?php if ($metodo < 4) { ?>
-																	<select data-placeholder="Selecione uma opção..." class="form-control Chosen" id="Opcao_Atributo_2" name="Opcao_Atributo_2" onchange="codigo(this.value,this.name)">
-																		<option value="">-- Selecione uma opção --</option>
-																		<?php
-																			foreach ($select['Opcao_Atributo_2'] as $key => $row) {
-																				if ($produtos['Opcao_Atributo_2'] == $key) {
-																					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-																					} else {
-																					echo '<option value="' . $key . '">' . $row . '</option>';
-																				}
-																			}
-																		?>
-																	</select>
-																	<?php echo form_error('Opcao_Atributo_2'); ?>
-																	<input type="hidden" id="Opcao2" name="Opcao2" value="<?php echo $_SESSION['Produtos']['Opcao2']; ?>">
-																	<?php }else{ ?>
-																	<input type="hidden" id="Opcao_Atributo_2" name="Opcao_Atributo_2" value="<?php echo $_SESSION['Produtos']['Opcao_Atributo_2']; ?>">
-																	<input class="form-control"readonly="" value="<?php echo $_SESSION['Produtos']['Opcao2']; ?>">
-																<?php } ?>
-																<?php }else{ ?>
-																<label for="Opcao_Atributo_2">Não existe Atributo2</label>
-																<input type="text" class="form-control"readonly=""  name="Opcao_Atributo_2" id="Opcao_Atributo_2" value="0">
-															<?php } ?>
-														</div>
-													<?php } ?>
 												</div>
 											</div>
 											
@@ -343,14 +344,14 @@
 																			</div>
 																		</div>
 																		<div class="col-md-2 text-right"></div>											
-																		<!--
+																		
 																		<div class="col-md-1 text-right">
 																			<label><br></label><br>
 																			<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
 																				<span class="glyphicon glyphicon-trash"></span>
 																			</button>
 																		</div>
-																		-->
+																		
 																	</div>
 																</div>	
 															</div>		
@@ -379,191 +380,187 @@
 										
 										<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 											<div class="row">
-												<?php if ($metodo > 1) { ?>
-													<?php if ($metodo != 4 && $metodo != 6) { ?>
-														<div class="col-md-1"></div>
-														<?php if ($metodo == 7) { ?>
+												<div class="col-md-12">
+													<?php if ($metodo > 1) { ?>
+														<?php if ($metodo != 4 && $metodo != 6) { ?>
+															<?php if ($metodo == 7) { ?>
+																<div class="col-md-2">
+																<label >Adicionar Preço</label><br>
+																	<a class="btn btn-md btn-danger btn-block"  name="submeter2" id="submeter2" onclick="adiciona_precos()">
+																		<span class="glyphicon glyphicon-plus"></span> Adicionar
+																	</a>
+																</div>
+															<?php } ?>
 															<div class="col-md-2">
-																<a class="btn btn-md btn-danger btn-block"  name="submeter2" id="submeter2" onclick="adiciona_precos()">
-																	<span class="glyphicon glyphicon-plus"></span> Adiciona Preço
+																<label >Salvar Alterações.</label><br>
+																<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
+																	<span class="glyphicon glyphicon-save"></span> Salvar
+																</button>
+															</div>
+															<?php if ($metodo == 2) { ?>	
+																<div class="col-md-2">
+																	<label >Excluir.</label><br>
+																	<button  type="button" class="btn btn-md btn-danger btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+																		<span class="glyphicon glyphicon-trash"></span> Excluir
+																	</button>
+																</div>
+															<?php } ?>
+															<?php if ($metodo < 4) { ?>
+																<div class="col-md-2 text-left">
+																	<label for="Cadastrar">Encontrou?</label><br>
+																	<div class="btn-group" data-toggle="buttons">
+																		<?php
+																			foreach ($select['Cadastrar'] as $key => $row) {
+																				if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
+																				
+																				($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																				
+																				if ($cadastrar['Cadastrar'] == $key) {
+																					echo ''
+																					. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
+																					. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																					. 'onchange="codigo()" '
+																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																					. '</label>'
+																					;
+																					} else {
+																					echo ''
+																					. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
+																					. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																					. 'onchange="codigo()" '
+																					. 'autocomplete="off" value="' . $key . '" >' . $row
+																					. '</label>'
+																					;
+																				}
+																			}
+																		?>
+																		
+																	</div>
+																</div>
+																<div class="col-md-6 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+																	<div class="row">
+																		<div class="col-md-2 text-left">	
+																			<label >Categoria</label><br>
+																			<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addCatprodModal">
+																				Cad./Edit
+																			</button>
+																		</div>
+																		<?php if ($metodo >= 2) { ?>
+																			<div class="col-md-3 text-left">	
+																				<label >Produto Base</label><br>
+																				<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addProdutoModal">
+																					Cad./Edit
+																				</button>
+																			</div>
+																		<?php } ?>
+																		<?php if ($metodo >= 2) { ?>
+																			<div class="col-md-2 text-left">	
+																				<label >Atributos</label><br>
+																				<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addAtributoModal">
+																					Cad./Edit
+																				</button>
+																			</div>	
+																			<div class="col-md-2 text-left">
+																				<label >Opcoes</label><br>
+																				<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addOpcaoModal">
+																					Cad./Edit
+																				</button>
+																			</div>
+																		<?php } ?>	
+																		<div class="col-md-3 text-left">
+																			<label >Recarregar</label><br>
+																			<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+																				<span class="glyphicon glyphicon-refresh"></span>Recarregar
+																			</button>
+																		</div>	
+																		<span id="msg"></span>
+																	</div>	
+																	<?php echo form_error('Cadastrar'); ?>
+																</div>
+															<?php } ?>
+														<?php } ?>
+														<?php if ($metodo == 4) { ?>
+															<div class="col-md-2">
+																<a class="btn btn-warning btn-block" href="<?php echo base_url() . 'produtos/alterar2/' . $produtos['idTab_Produtos'] ?>" role="button">
+																	<span class="glyphicon glyphicon-edit"></span> Editar Produto
+																</a>
+															</div>
+															<div class="col-md-2">
+																<a class="btn btn-success btn-block" href="<?php echo base_url() . 'produtos/tela_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
+																	<span class="glyphicon glyphicon-usd"></span> Preços e Promoções
+																</a>
+															</div>
+														<?php }elseif($metodo == 6){ ?>
+															<div class="col-md-2">
+																<a class="btn btn-danger btn-block" href="<?php echo base_url() . 'produtos/alterar_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
+																	<span class="glyphicon glyphicon-edit"></span> Cad./Edit. Preço
+																</a>
+															</div>
+															<div class="col-md-2">
+																<a class="btn btn-danger btn-block" href="<?php echo base_url() . 'promocao/cadastrar/' ?>" role="button">
+																	<span class="glyphicon glyphicon-edit"></span> Cad./Edit. Promoção
+																</a>
+															</div>
+															<div class="col-md-2">
+																<a class="btn btn-info btn-block" href="<?php echo base_url() . 'produtos/tela/' . $produtos['idTab_Produtos'] ?>" role="button">
+																	<span class="glyphicon glyphicon-pencil"></span> Ver Produtos
 																</a>
 															</div>
 														<?php } ?>
+														<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+															<div class="modal-dialog" role="document">
+																<div class="modal-content">
+																	<div class="modal-header bg-danger">
+																		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																		<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
+																	</div>
+																	<div class="modal-body">
+																		<p>Ao confirmar a exclusão todos os dados serão excluídos do banco de dados. Esta operação é irreversível.</p>
+																	</div>
+																	<div class="modal-footer">
+																		<div class="col-md-6 text-left">
+																			<button type="button" class="btn btn-warning" onclick="DesabilitaBotao()" data-dismiss="modal">
+																				<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+																			</button>
+																		</div>
+																		<div class="col-md-6 text-right">
+																			<a class="btn btn-danger" href="<?php echo base_url() . 'produtos/excluir/' . $produtos['idTab_Produtos'] ?>" role="button">
+																				<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
+																			</a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<?php } else { ?>
 														<div class="col-md-2">
-															<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
+															<button class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." type="submit">
 																<span class="glyphicon glyphicon-save"></span> Salvar
 															</button>
 														</div>
 													<?php } ?>
-													<?php if ($metodo == 4) { ?>
-														<div class="col-md-1"></div>
-														<div class="col-md-2">
-															<a class="btn btn-warning btn-block" href="<?php echo base_url() . 'produtos/alterar2/' . $produtos['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-edit"></span> Editar Produto
-															</a>
-														</div>
-														<div class="col-md-2">
-															<a class="btn btn-success btn-block" href="<?php echo base_url() . 'produtos/tela_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-usd"></span> Preços e Promoções
-															</a>
-														</div>
-													<?php }elseif($metodo == 6){ ?>
-														<div class="col-md-1"></div>
-														<div class="col-md-2">
-															<a class="btn btn-danger btn-block" href="<?php echo base_url() . 'produtos/alterar_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-edit"></span> Cad./Edit. Preço
-															</a>
-														</div>
-														<div class="col-md-2">
-															<a class="btn btn-danger btn-block" href="<?php echo base_url() . 'promocao/cadastrar/' ?>" role="button">
-																<span class="glyphicon glyphicon-edit"></span> Cad./Edit. Promoção
-															</a>
-														</div>
-														<div class="col-md-2">
-															<a class="btn btn-info btn-block" href="<?php echo base_url() . 'produtos/tela/' . $produtos['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-pencil"></span> Ver Produtos
-															</a>
-														</div>
-													<?php } ?>
-													<?php if ($metodo == 2) { ?>	
-														<div class="col-md-2 text-right">
-															<button  type="button" class="btn btn-md btn-danger btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-																<span class="glyphicon glyphicon-trash"></span> Excluir Produto
-															</button>
-														</div>
-													<?php } ?>
-													<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+													<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
-																<div class="modal-header bg-danger">
-																	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																	<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
-																</div>
-																<div class="modal-body">
-																	<p>Ao confirmar a exclusão todos os dados serão excluídos do banco de dados. Esta operação é irreversível.</p>
+																<div class="modal-header bg-success text-center">
+																	<h4 class="modal-title" id="visulUsuarioModalLabel">Cadastrado realizado com sucesso!</h4>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
 																</div>
 																<div class="modal-footer">
-																	<div class="col-md-6 text-left">
-																		<button type="button" class="btn btn-warning" onclick="DesabilitaBotao()" data-dismiss="modal">
-																			<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+																	<div class="col-md-6">	
+																		<button class="btn btn-success btn-block" name="botaoFechar2" id="botaoFechar2" onclick="DesabilitaBotaoFechar(this.name)" value="0" type="submit">
+																			<span class="glyphicon glyphicon-filter"></span> Fechar
 																		</button>
+																		<div class="col-md-12 alert alert-warning aguardar2" role="alert" >
+																			Aguarde um instante! Estamos processando sua solicitação!
+																		</div>
 																	</div>
-																	<div class="col-md-6 text-right">
-																		<a class="btn btn-danger" href="<?php echo base_url() . 'produtos/excluir/' . $produtos['idTab_Produtos'] ?>" role="button">
-																			<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
-																		</a>
-																	</div>
+																	<!--<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>-->
 																</div>
 															</div>
 														</div>
-													</div>
-													<?php } else { ?>
-													<div class="col-md-1"></div>
-													<div class="col-md-2">
-														<button class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." type="submit">
-															<span class="glyphicon glyphicon-save"></span> Salvar
-														</button>
-													</div>
-												<?php } ?>
-												<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-													<div class="modal-dialog" role="document">
-														<div class="modal-content">
-															<div class="modal-header bg-success text-center">
-																<h4 class="modal-title" id="visulUsuarioModalLabel">Cadastrado realizado com sucesso!</h4>
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															</div>
-															<div class="modal-footer">
-																<div class="col-md-6">	
-																	<button class="btn btn-success btn-block" name="botaoFechar2" id="botaoFechar2" onclick="DesabilitaBotaoFechar(this.name)" value="0" type="submit">
-																		<span class="glyphicon glyphicon-filter"></span> Fechar
-																	</button>
-																	<div class="col-md-12 alert alert-warning aguardar2" role="alert" >
-																		Aguarde um instante! Estamos processando sua solicitação!
-																	</div>
-																</div>
-																<!--<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>-->
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										<?php } ?>
-										<?php if ($metodo < 4) { ?>
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-1"></div>
-													<div class="col-md-2 text-left">
-														<label for="Cadastrar">Encontrou?</label><br>
-														<div class="btn-group" data-toggle="buttons">
-															<?php
-																foreach ($select['Cadastrar'] as $key => $row) {
-																	if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
-																	
-																	($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-																	
-																	if ($cadastrar['Cadastrar'] == $key) {
-																		echo ''
-																		. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
-																		. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
-																		. 'onchange="codigo()" '
-																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																		. '</label>'
-																		;
-																		} else {
-																		echo ''
-																		. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
-																		. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
-																		. 'onchange="codigo()" '
-																		. 'autocomplete="off" value="' . $key . '" >' . $row
-																		. '</label>'
-																		;
-																	}
-																}
-															?>
-															
-														</div>
-													</div>
-													<div class="col-md-9 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-														<div class="row">
-															<div class="col-md-2 text-left">	
-																<label >Categoria</label><br>
-																<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCatprodModal">
-																	Cadastrar
-																</button>
-															</div>
-															<?php if ($metodo >= 2) { ?>
-																<div class="col-md-2 text-left">	
-																	<label >Produto Base</label><br>
-																	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addProdutoModal">
-																		Cadastrar
-																	</button>
-																</div>
-															<?php } ?>
-															<?php if ($metodo >= 2) { ?>
-																<div class="col-md-2 text-left">	
-																	<label >Atributos</label><br>
-																	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addAtributoModal">
-																		Cadastrar
-																	</button>
-																</div>	
-																<div class="col-md-2 text-left">
-																	<label >Opcoes</label><br>
-																	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addOpcaoModal">
-																		Cadastrar
-																	</button>
-																</div>
-															<?php } ?>	
-															<div class="col-md-2 text-left">
-																<label >Recarregar</label><br>
-																<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
-																	<span class="glyphicon glyphicon-refresh"></span>Recarregar
-																</button>
-															</div>	
-															<span id="msg"></span>
-														</div>	
-														<?php echo form_error('Cadastrar'); ?>
 													</div>
 												</div>
 											</div>

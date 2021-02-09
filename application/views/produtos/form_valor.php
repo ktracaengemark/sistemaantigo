@@ -254,109 +254,115 @@
 										
 										<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 											<div class="row">
-												<?php if ($metodo > 1) { ?>
-													<?php if ($metodo != 4 && $metodo != 6) { ?>
-														<div class="col-md-1"></div>
-														<div class="col-md-2">
-															<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
+												<div class="col-md-12">
+													<?php if ($metodo > 1) { ?>
+														<?php if ($metodo != 4 && $metodo != 6) { ?>
+															<div class="col-md-2">
+																<label >Salvar Alterações.</label><br>
+																<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
+																	<span class="glyphicon glyphicon-save"></span> Salvar
+																</button>
+															</div>
+														<?php } ?>
+														<?php if ($metodo == 4) { ?>
+															<div class="col-md-2">
+																<label >Editar Produto</label><br>
+																<a class="btn btn-warning btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/alterar2/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
+																	<span class="glyphicon glyphicon-edit"></span> Editar
+																</a>
+															</div>
+															<div class="col-md-2">
+																<a class="btn btn-success btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/tela_precos/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
+																	<span class="glyphicon glyphicon-usd"></span> Preços e Promoções
+																</a>
+															</div>
+														<?php }elseif($metodo == 6){ ?>
+															<div class="col-md-2">
+																<label >Apenas este Preço</label><br>
+																<a class="btn btn-warning btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/alterar_valor/' . $valor['idTab_Valor'] ?>" role="button">
+																	<span class="glyphicon glyphicon-edit"></span> Editar
+																</a>
+															</div>
+															<div class="col-md-2">
+																<label >Todos os Preços</label><br>
+																<a class="btn btn-warning btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/alterar_precos/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
+																	<span class="glyphicon glyphicon-edit"></span> Editar
+																</a>
+															</div>
+															<div class="col-md-2">
+																<label >Produtos Associados</label><br>
+																<a class="btn btn-info btn-block" name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/tela/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
+																	<span class="glyphicon glyphicon-pencil"></span> Ver Produtos
+																</a>
+															</div>
+														<?php } ?>
+														<?php if ($metodo == 2) { ?>	
+															<div class="col-md-6 text-right">
+																<label >Excluir</label><br>
+																<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+																	<span class="glyphicon glyphicon-trash"></span> Excluir
+																</button>
+															</div>
+														<?php } ?>
+														<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+															<div class="modal-dialog" role="document">
+																<div class="modal-content">
+																	<div class="modal-header bg-danger">
+																		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																		<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
+																	</div>
+																	<div class="modal-body">
+																		<p>Ao confirmar a exclusão todos os dados serão excluídos do banco de dados. Esta operação é irreversível.</p>
+																	</div>
+																	<div class="modal-footer">
+																		<div class="col-md-6 text-left">
+																			<button type="button" class="btn btn-warning" data-dismiss="modal">
+																				<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+																			</button>
+																		</div>
+																		<div class="col-md-6 text-right">
+																			<a class="btn btn-danger" href="<?php echo base_url() . 'produtos/excluir/' . $produtos['idTab_Produtos'] ?>" role="button">
+																				<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
+																			</a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<?php } else { ?>
+														<div class="col-md-6">
+															<label >Salvar</label><br>
+															<button class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." type="submit">
 																<span class="glyphicon glyphicon-save"></span> Salvar
 															</button>
 														</div>
 													<?php } ?>
-													<?php if ($metodo == 4) { ?>
-														<div class="col-md-1"></div>
-														<div class="col-md-2">
-															<a class="btn btn-warning btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/alterar2/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-edit"></span> Editar Produto
-															</a>
-														</div>
-														<div class="col-md-2">
-															<a class="btn btn-success btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/tela_precos/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-usd"></span> Preços e Promoções
-															</a>
-														</div>
-													<?php }elseif($metodo == 6){ ?>
-														<div class="col-md-1"></div>
-														<div class="col-md-2">
-															<a class="btn btn-warning btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/alterar_valor/' . $valor['idTab_Valor'] ?>" role="button">
-																<span class="glyphicon glyphicon-edit"></span> Editar Apenas Este
-															</a>
-														</div>
-														<div class="col-md-2">
-															<a class="btn btn-warning btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/alterar_precos/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-edit"></span> Editar Todos
-															</a>
-														</div>
-														<div class="col-md-2">
-															<a class="btn btn-info btn-block" name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/tela/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
-																<span class="glyphicon glyphicon-pencil"></span> Ver Produtos
-															</a>
-														</div>
-													<?php } ?>
-													<?php if ($metodo == 2) { ?>	
-														<div class="col-md-6 text-right">
-															<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-																<span class="glyphicon glyphicon-trash"></span> Excluir
-															</button>
-														</div>
-													<?php } ?>
-													<div class="modal fade bs-excluir-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+													<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
-																<div class="modal-header bg-danger">
-																	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																	<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
-																</div>
-																<div class="modal-body">
-																	<p>Ao confirmar a exclusão todos os dados serão excluídos do banco de dados. Esta operação é irreversível.</p>
+																<div class="modal-header bg-success text-center">
+																	<h4 class="modal-title" id="visulUsuarioModalLabel">Cadastrado realizado com sucesso!</h4>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
 																</div>
 																<div class="modal-footer">
-																	<div class="col-md-6 text-left">
-																		<button type="button" class="btn btn-warning" data-dismiss="modal">
-																			<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+																	<div class="col-md-6">	
+																		<button class="btn btn-success btn-block" name="botaoFechar2" id="botaoFechar2" onclick="DesabilitaBotaoFechar(this.name)" value="0" type="submit">
+																			<span class="glyphicon glyphicon-filter"></span> Fechar
 																		</button>
+																		<div class="col-md-12 alert alert-warning aguardar2" role="alert" >
+																			Aguarde um instante! Estamos processando sua solicitação!
+																		</div>
 																	</div>
-																	<div class="col-md-6 text-right">
-																		<a class="btn btn-danger" href="<?php echo base_url() . 'produtos/excluir/' . $produtos['idTab_Produtos'] ?>" role="button">
-																			<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
-																		</a>
-																	</div>
+																	<!--<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>-->
 																</div>
-															</div>
-														</div>
-													</div>
-													<?php } else { ?>
-													<div class="col-md-6">
-														<button class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." type="submit">
-															<span class="glyphicon glyphicon-save"></span> Salvar
-														</button>
-													</div>
-												<?php } ?>
-												<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-													<div class="modal-dialog" role="document">
-														<div class="modal-content">
-															<div class="modal-header bg-success text-center">
-																<h4 class="modal-title" id="visulUsuarioModalLabel">Cadastrado realizado com sucesso!</h4>
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															</div>
-															<div class="modal-footer">
-																<div class="col-md-6">	
-																	<button class="btn btn-success btn-block" name="botaoFechar2" id="botaoFechar2" onclick="DesabilitaBotaoFechar(this.name)" value="0" type="submit">
-																		<span class="glyphicon glyphicon-filter"></span> Fechar
-																	</button>
-																	<div class="col-md-12 alert alert-warning aguardar2" role="alert" >
-																		Aguarde um instante! Estamos processando sua solicitação!
-																	</div>
-																</div>
-																<!--<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>-->
 															</div>
 														</div>
 													</div>
 												</div>
-												
 											</div>
+										
 										<?php } ?>
 									</div>
 								</div>
