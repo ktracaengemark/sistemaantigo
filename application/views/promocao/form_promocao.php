@@ -211,48 +211,48 @@
 										</div>
 										-->			
 										<?php if ($metodo > 1) { ?>
-											<div class="col-md-12">
-												<div class="row">
-													<div class="col-md-2">
-														<div class="panel panel-default">
-															<div class="panel-heading">
-																<div class="row">
-																	<div class="col-md-12 text-left">
-																		<label for="TodoDiaProm">Todo Dia?</label><br>
-																		<?php if ($metodo == 3) { ?>
-																			<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Promocao']['TodoDiaProm'] ?>">
-																		<?php }elseif ($metodo == 2) { ?>
-																			<div class="btn-group" data-toggle="buttons">
-																				<?php
-																				foreach ($select['TodoDiaProm'] as $key => $row) {
-																					if (!$promocao['TodoDiaProm'])$promocao['TodoDiaProm'] = 'S';
+											<div class="col-md-2">
+												<div class="panel panel-default">
+													<div class="panel-heading">
+														<div class="row">
+															<div class="col-md-12 text-left">
+																<label for="TodoDiaProm">Todo Dia?</label><br>
+																<?php if ($metodo == 3) { ?>
+																	<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Promocao']['TodoDiaProm'] ?>">
+																<?php }elseif ($metodo == 2) { ?>
+																	<div class="btn-group" data-toggle="buttons">
+																		<?php
+																		foreach ($select['TodoDiaProm'] as $key => $row) {
+																			if (!$promocao['TodoDiaProm'])$promocao['TodoDiaProm'] = 'S';
 
-																					($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																			($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
-																					if ($promocao['TodoDiaProm'] == $key) {
-																						echo ''
-																						. '<label class="btn btn-warning active" name="TodoDiaProm_' . $hideshow . '">'
-																						. '<input type="radio" name="TodoDiaProm" id="' . $hideshow . '" '
-																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																						. '</label>'
-																						;
-																					} else {
-																						echo ''
-																						. '<label class="btn btn-default" name="TodoDiaProm_' . $hideshow . '">'
-																						. '<input type="radio" name="TodoDiaProm" id="' . $hideshow . '" '
-																						. 'autocomplete="off" value="' . $key . '" >' . $row
-																						. '</label>'
-																						;
-																					}
-																				}
-																				?>
-																			</div>
-																		<?php } ?>	
+																			if ($promocao['TodoDiaProm'] == $key) {
+																				echo ''
+																				. '<label class="btn btn-warning active" name="TodoDiaProm_' . $hideshow . '">'
+																				. '<input type="radio" name="TodoDiaProm" id="' . $hideshow . '" '
+																				. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																				. '</label>'
+																				;
+																			} else {
+																				echo ''
+																				. '<label class="btn btn-default" name="TodoDiaProm_' . $hideshow . '">'
+																				. '<input type="radio" name="TodoDiaProm" id="' . $hideshow . '" '
+																				. 'autocomplete="off" value="' . $key . '" >' . $row
+																				. '</label>'
+																				;
+																			}
+																		}
+																		?>
 																	</div>
-																</div>
+																<?php } ?>	
 															</div>
 														</div>
-													</div>	
+													</div>
+												</div>
+											</div>
+											<div class="col-md-10">
+												<div class="row">
 													<div id="TodoDiaProm" <?php echo $div['TodoDiaProm']; ?>>
 														<?php for ($i=1; $i <= $count['DiaCount']; $i++) { ?>
 															<div class="col-md-2">
