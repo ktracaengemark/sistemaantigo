@@ -184,6 +184,7 @@ class Promocao extends CI_Controller {
             'Descricao',
 			'DataInicioProm',
 			'DataFimProm',
+			'TodoDiaProm',
         ), TRUE));
 
 		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
@@ -278,7 +279,14 @@ class Promocao extends CI_Controller {
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['TodoDiaProm'] = $this->Basico_model->select_status_sn();
 		$data['select']['Aberto_Prom'] = $this->Basico_model->select_status_sn();
+				
+		$data['radio'] = array(
+            'TodoDiaProm' => $this->basico->radio_checked($data['promocao']['TodoDiaProm'], 'Todos os Dias', 'NS'),
+        );
+        ($data['promocao']['TodoDiaProm'] == 'N') ?
+            $data['div']['TodoDiaProm'] = '' : $data['div']['TodoDiaProm'] = 'style="display: none;"';		
 		
         $data['titulo'] = 'Editar Promoção';
         $data['form_open_path'] = 'promocao/alterar';
@@ -371,23 +379,7 @@ class Promocao extends CI_Controller {
 			
             #### Tab_Dia_Prom ####
             $data['update']['dia_promocao']['anterior'] = $this->Promocao_model->get_dia_promocao($data['promocao']['idTab_Promocao'], "2");
-            /*
-			echo '<br>';
-			echo "<pre>";
-			if (!isset($data['dia_promocao'])){
-				print_r('Não existe 1');
-			}else{
-				print_r($data['dia_promocao']);
-			}
-			echo '<br>';
-			if (!$data['update']['dia_promocao']['anterior']){
-				print_r('Não existe 2');
-			}else{
-				print_r($data['update']['dia_promocao']['anterior']);
-			}	
-			echo "</pre>";
-			exit();
-			*/
+
 			if (isset($data['dia_promocao']) || (!isset($data['dia_promocao']) && isset($data['update']['dia_promocao']['anterior']) ) ) {
 
                 if (isset($data['dia_promocao']))
@@ -400,6 +392,9 @@ class Promocao extends CI_Controller {
 
                 $max = count($data['update']['dia_promocao']['alterar']);
                 for($j=0;$j<$max;$j++) {
+					if($data['promocao']['TodoDiaProm'] == 'S'){
+						$data['update']['dia_promocao']['alterar'][$j]['Aberto_Prom'] = 'S';
+					}
 					/*
 					$data['update']['dia_promocao']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['dia_promocao']['alterar'][$j]['ValorProduto']));
 					$data['update']['dia_promocao']['alterar'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['dia_promocao']['alterar'][$j]['ComissaoVenda']));
@@ -474,6 +469,7 @@ class Promocao extends CI_Controller {
             'Descricao',
 			'DataInicioProm',
 			'DataFimProm',
+			'TodoDiaProm',
         ), TRUE));
 		
 		$dia_da_semana = date('N');
@@ -526,6 +522,7 @@ class Promocao extends CI_Controller {
 			$_SESSION['Promocao'] = $data['promocao'] = $this->Promocao_model->get_promocao($id);
 			$_SESSION['Promocao']['DataInicioProm'] = $data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'barras');
 			$_SESSION['Promocao']['DataFimProm'] = $data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'barras');
+			$_SESSION['Promocao']['TodoDiaProm'] = $this->basico->mascara_palavra_completa($data['promocao']['TodoDiaProm'], 'NS');
 
             #### Tab_Valor ####
             $_SESSION['Item_Promocao'] = $data['item_promocao'] = $this->Promocao_model->get_item_promocao($id, "2");
@@ -585,8 +582,15 @@ class Promocao extends CI_Controller {
 		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['TodoDiaProm'] = $this->Basico_model->select_status_sn();
 		$data['select']['Aberto_Prom'] = $this->Basico_model->select_status_sn();		
 
+		$data['radio'] = array(
+            'TodoDiaProm' => $this->basico->radio_checked($data['promocao']['TodoDiaProm'], 'Todos os Dias', 'NS'),
+        );
+        ($data['promocao']['TodoDiaProm'] == 'N') ?
+            $data['div']['TodoDiaProm'] = '' : $data['div']['TodoDiaProm'] = 'style="display: none;"';
+			
         $data['titulo'] = 'Promoção';
         $data['form_open_path'] = 'promocao/tela_promocao';
         $data['readonly'] = '';
