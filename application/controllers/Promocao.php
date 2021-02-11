@@ -50,7 +50,7 @@ class Promocao extends CI_Controller {
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			//'Cadastrar',
 			//'TipoCatprod',
-			'PTCount',
+			'PTCount2',
         ), TRUE));
 		
         $data['promocao'] = quotes_to_entities($this->input->post(array(
@@ -65,7 +65,7 @@ class Promocao extends CI_Controller {
 
  		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
 		(!$this->input->post('DiaCount')) ? $data['count']['DiaCount'] = 0 : $data['count']['DiaCount'] = $this->input->post('DiaCount');		
-		
+
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
@@ -86,8 +86,18 @@ class Promocao extends CI_Controller {
             }
 						
         }
-        $data['count']['PTCount'] = $j - 1;       
+        $data['count']['PTCount'] = $j - 1;
 
+		if (isset($data['item_promocao'])) {
+			if ($data['item_promocao']) {
+				$data['conta_produto'] = 1;
+			}else{
+				$data['conta_produto'] = 0;
+			}	
+		}else{
+			$data['conta_produto'] = 0;
+		}		
+		
 		if (1==1) {
 			
             for ($i = 1; $i <= 7; $i++) {
@@ -154,7 +164,7 @@ class Promocao extends CI_Controller {
 		$this->form_validation->set_rules('Descricao', 'Descrição', 'required|trim');
 		$this->form_validation->set_rules('DataInicioProm', 'Data do Inicio', 'required|trim|valid_date');
 		$this->form_validation->set_rules('DataFimProm', 'Data do Fim', 'required|trim|valid_date');
-		$this->form_validation->set_rules('PTCount', 'A promoção deve possuir , pelo menos, 1 produto!', 'trim|valid_promocao');	
+		$this->form_validation->set_rules('PTCount2', 'A promoção deve possuir , pelo menos, 1 produto!', 'trim|valid_promocao');	
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
 		//$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');	
@@ -170,6 +180,28 @@ class Promocao extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('promocao/form_promocao', $data);
         } else {
+			/*
+            if (isset($data['item_promocao'])) {
+				$max = count($data['item_promocao']);
+				echo '<br>';
+				echo "<pre>";
+				print_r($max);
+				echo "</pre>";				
+			}else{
+				echo '<br>';
+				echo "<pre>";
+				print_r('Não existem produtos');
+				echo "</pre>";			
+			}	
+			exit ();
+			*/
+			/*
+			echo '<br>';
+			echo "<pre>";
+			print_r($data['cadastrar']['PTCount2']);
+			echo "</pre>";
+			exit ();
+			*/
 			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
 
 			#### Tab_Promocao ####
@@ -281,7 +313,7 @@ class Promocao extends CI_Controller {
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			//'Cadastrar',
 			//'TipoCatprod',
-			'PTCount',
+			'PTCount2',
         ), TRUE));
 		
         $data['promocao'] = quotes_to_entities($this->input->post(array(
@@ -295,9 +327,9 @@ class Promocao extends CI_Controller {
         ), TRUE));
 
 		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
-		(!$this->input->post('DiaCount')) ? $data['count']['DiaCount'] = 0 : $data['count']['DiaCount'] = $this->input->post('DiaCount');		
-		
-        $j = 1;
+		(!$this->input->post('DiaCount')) ? $data['count']['DiaCount'] = 0 : $data['count']['DiaCount'] = $this->input->post('DiaCount');
+        
+		$j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
             if ($this->input->post('ValorProduto' . $i) && $this->input->post('idTab_Produtos' . $i) && 
@@ -318,7 +350,17 @@ class Promocao extends CI_Controller {
 						
         }
         $data['count']['PTCount'] = $j - 1;
-		
+
+		if (isset($data['item_promocao'])) {
+			if ($data['item_promocao']) {
+				$data['conta_produto'] = 1;
+			}else{
+				$data['conta_produto'] = 0;
+			}	
+		}else{
+			$data['conta_produto'] = 0;
+		}		
+
         $j = 1;
         for ($i = 1; $i <= $data['count']['DiaCount']; $i++) {
 
@@ -420,14 +462,21 @@ class Promocao extends CI_Controller {
 		$this->form_validation->set_rules('Descricao', 'Descrição', 'required|trim');
 		$this->form_validation->set_rules('DataInicioProm', 'Data do Inicio', 'required|trim|valid_date');
 		$this->form_validation->set_rules('DataFimProm', 'Data do Fim', 'required|trim|valid_date');
-		$this->form_validation->set_rules('PTCount', 'A promoção deve possuir , pelo menos, 1 produto!', 'trim|valid_promocao');
+		$this->form_validation->set_rules('PTCount2', 'A promoção deve possuir , pelo menos, 1 produto!', 'trim|valid_promocao');
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('promocao/form_promocao', $data);
         } else {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
-
+			/*
+			echo '<br>';
+			echo "<pre>";
+			print_r($data['cadastrar']['PTCount2']);
+			echo "</pre>";
+			exit ();			
+			*/
+			
             #### Tab_Promocao ####
 			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
 			$data['promocao']['Descricao'] = trim(mb_strtoupper($data['promocao']['Descricao'], 'UTF-8'));
@@ -613,7 +662,7 @@ class Promocao extends CI_Controller {
 		*/
 		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
 		(!$this->input->post('DiaCount')) ? $data['count']['DiaCount'] = 0 : $data['count']['DiaCount'] = $this->input->post('DiaCount');		
-		
+		$data['conta_produto'] = 0;
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 

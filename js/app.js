@@ -5521,7 +5521,7 @@ $(document).ready(function () {
 
     //Remove os campos adicionados dinamicamente
     $(".input_fields_wrap3").on("click",".remove_field3", function(e){ //user click on remove text
-        $("#3div"+$(this).attr("id")).remove();
+		$("#3div"+$(this).attr("id")).remove();
     })	
 	
     //Remove os campos adicionados dinamicamente

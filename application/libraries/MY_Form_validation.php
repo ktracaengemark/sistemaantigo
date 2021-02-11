@@ -133,7 +133,7 @@ class MY_Form_validation extends CI_Form_validation {
 
         $CI->form_validation->set_message('valid_promocao', '<b>%s</b>');
 
-		if (($data) < 1) {
+		if (($data) <= 0) {
 			return FALSE;
 		}
        

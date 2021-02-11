@@ -392,9 +392,7 @@
 											</div>
 										</div>
 										-->			
-											
-		
-										
+
 										<?php if ($metodo == 20) { ?>
 										<div class="col-md-10">
 											<div class="row">
@@ -455,7 +453,9 @@
 												<div class="panel-body">
 
 													<input type="hidden" name="PTCount" id="PTCount" value="<?php echo $count['PTCount']; ?>"/>
-													<?php echo form_error('PTCount'); ?>
+													<input type="hidden" name="PTCount2" id="PTCount2" value="<?php echo $conta_produto; ?>"/>
+													
+													<?php echo form_error('PTCount2'); ?>
 													
 													<div class="input_fields_wrap3">
 
