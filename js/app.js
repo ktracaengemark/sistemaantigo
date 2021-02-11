@@ -635,11 +635,27 @@ $(document).ready(function(){
 		var button = $(event.relatedTarget)
 		var recipientidproduto = button.data('whateveridproduto')
 		var recipientproduto = button.data('whateverproduto')
-		//console.log(recipientproduto);
+		var recipientvendasite = button.data('whatevervendasite')
+		var recipientvendabalcao = button.data('whatevervendabalcao')
+		//console.log(recipientvendasite);
 		var modal = $(this)
 		modal.find('.modal-title').text('id do Produto: ' + recipientidproduto)
 		modal.find('#id_Produto').val(recipientidproduto)
 		modal.find('#Produtos').val(recipientproduto)
+		if(recipientvendasite == 'S'){
+			//$("#VendaSite_Alterar_Sim").prop('checked', true);
+			modal.find('#VendaSite_Alterar_Sim').prop('checked', true);
+		}else if(recipientvendasite == 'N'){
+			//$("#VendaSite_Alterar_Nao").prop('checked', true);
+			modal.find('#VendaSite_Alterar_Nao').prop('checked', true);
+		}
+		if(recipientvendabalcao == 'S'){
+			//$("#VendaBalcao_Alterar_Sim").prop('checked', true);
+			modal.find('#VendaBalcao_Alterar_Sim').prop('checked', true);
+		}else if(recipientvendabalcao == 'N'){
+			//$("#VendaBalcao_Alterar_Nao").prop('checked', true);
+			modal.find('#VendaBalcao_Alterar_Nao').prop('checked', true);
+		}
 	})
 	
 	$('#alterar_produto_form').on('submit', function(event){
@@ -647,9 +663,8 @@ $(document).ready(function(){
 		
 		event.preventDefault();
 		var produto = $('#Produtos').val();
-		//console.log(produto);
-		//exit();
-		
+		//var vendasite = $('#VendaSite').val();
+		//console.log(vendasite);
 		if($('#Produtos').val() == ""){
 			//Alerta de campo  vazio
 			$("#msg-error-alterar-produto").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
@@ -3296,54 +3311,6 @@ function adiciona_item_promocao() {
 							<textarea type="text" class="form-control" id="Convdesc'+pt+'"\
 									  name="Convdesc'+pt+'" value=""></textarea>\
 						</div>\
-					</div>\
-					<div class="row">\
-						<div class="col-md-2">\
-							<label for="AtivoPreco">Ativo?</label><br>\
-							<div class="form-group">\
-								<div class="btn-group" data-toggle="buttons">\
-									<label class="btn btn-warning active" name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'N">\
-									<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
-										 autocomplete="off" value="N" checked>Não\
-									</label>\
-									<label class="btn btn-default" name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'S">\
-									<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
-										 autocomplete="off" value="S">Sim\
-									</label>\
-								</div>\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="VendaBalcaoPreco">VendaBalcao?</label><br>\
-							<div class="form-group">\
-								<div class="btn-group" data-toggle="buttons">\
-									<label class="btn btn-warning active" name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'N">\
-									<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
-										 autocomplete="off" value="N" checked>Não\
-									</label>\
-									<label class="btn btn-default" name="radio_VendaBalcaoPreco'+pt+'" id="radio_VendaBalcaoPreco'+pt+'S">\
-									<input type="radio" name="VendaBalcaoPreco'+pt+'" id="radiogeraldinamico"\
-										 autocomplete="off" value="S">Sim\
-									</label>\
-								</div>\
-							</div>\
-						</div>\
-						<div class="col-md-2">\
-							<label for="VendaSitePreco">VendaSite?</label><br>\
-							<div class="form-group">\
-								<div class="btn-group" data-toggle="buttons">\
-									<label class="btn btn-warning active" name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'N">\
-									<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
-										 autocomplete="off" value="N" checked>Não\
-									</label>\
-									<label class="btn btn-default" name="radio_VendaSitePreco'+pt+'" id="radio_VendaSitePreco'+pt+'S">\
-									<input type="radio" name="VendaSitePreco'+pt+'" id="radiogeraldinamico"\
-										 autocomplete="off" value="S">Sim\
-									</label>\
-								</div>\
-							</div>\
-						</div>\
-						<div class="col-md-2 text-right"></div>\
 						<div class="col-md-1 text-right">\
 							<label><br></label><br>\
 							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\
@@ -4557,6 +4524,18 @@ $(document).ready(function () {
         $('#radiobutton_' + name + value).addClass("btn btn-warning active");
 
     });
+	
+    //permite o uso de radio buttons em blocos dinâmicos
+    $('input:radio[id="VendaSite1"]').change(function() {
+
+        var value = $(this).val();
+        var name = $(this).attr("name");
+
+        $('label[name="radiobutton_' + name + '"]').removeClass();
+        $('label[name="radiobutton_' + name + '"]').addClass("btn btn-default");
+        $('#radiobutton_' + name + value).addClass("btn btn-warning active");
+
+    });	
 	
     //adiciona campos dinamicamente dos Produtos Vendidos 
 	var pc = $("#PCount").val(); //initlal text box count

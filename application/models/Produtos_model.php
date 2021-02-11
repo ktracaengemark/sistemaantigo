@@ -169,6 +169,7 @@ class Produtos_model extends CI_Model {
 				TCP.*,
 				TP.idTab_Produto,
 				TP.Produtos,
+				TP.VendaSite AS VendaSite_Produto,
 				TOP1.idTab_Opcao,
 				TOP1.Opcao AS Opcao1,
 				TOP2.idTab_Opcao,
@@ -236,6 +237,8 @@ class Produtos_model extends CI_Model {
 			SELECT 
 				TV.*,
 				TPS.Nome_Prod,
+				TPS.idTab_Produto,
+				TPS.idTab_Catprod,
 				TPS.Arquivo,
 				TPS.Cod_Prod,
 				TPS.Cod_Barra,
@@ -858,10 +861,58 @@ class Produtos_model extends CI_Model {
             if ($x === FALSE) {
                 return TRUE;
             } else {
-                #foreach ($query->result_array() as $row) {
-                #    $row->idApp_Profissional = $row->idApp_Profissional;
-                #    $row->NomeProfissional = $row->NomeProfissional;
-                #}
+                foreach ($query->result() as $row) {
+					$row->DataInicioProm = $this->basico->mascara_data($row->DataInicioProm, 'barras');
+					$row->DataFimProm = $this->basico->mascara_data($row->DataFimProm, 'barras');
+                }
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+    
+	public function list_promocoes($data, $x) {
+		
+		$data['idTab_Produtos'] = ($data['idTab_Produtos'] != 0) ? ' AND TV.idTab_Produtos = ' . $data['idTab_Produtos'] : FALSE;
+			/*
+			echo "<pre>";
+			print_r($data['Metodo']);
+			echo "</pre>";
+			exit();
+			*/
+        $query = $this->db->query('
+			SELECT 
+				TPM.*
+			FROM 
+				Tab_Promocao AS TPM
+					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Promocao = TPM.idTab_Promocao
+					LEFT JOIN Tab_Produtos AS TPS ON TPS.idTab_Produtos = TV.idTab_Produtos
+			WHERE 
+                TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				TV.Desconto = "2"
+				' . $data['idTab_Produtos'] . '
+			ORDER BY
+				TPM.Promocao ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                foreach ($query->result() as $row) {
+					$row->DataInicioProm = $this->basico->mascara_data($row->DataInicioProm, 'barras');
+					$row->DataFimProm = $this->basico->mascara_data($row->DataFimProm, 'barras');
+                }
                 $query = $query->result_array();
                 return $query;
             }

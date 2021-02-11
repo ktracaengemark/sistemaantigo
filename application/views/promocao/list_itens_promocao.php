@@ -18,7 +18,7 @@
 				foreach ($q_itens_promocao as $row)
 				{
 
-					$url = base_url() . 'produtos/tela_precos/' . $row['idTab_Produtos'];
+					$url = base_url() . 'produtos/tela/' . $row['idTab_Produtos'];
 					//$url = '';
 
 					echo '<tr class="clickable-row" data-href="' . $url . '">';

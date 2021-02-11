@@ -164,10 +164,10 @@ class Promocao_model extends CI_Model {
             if ($x === FALSE) {
                 return TRUE;
             } else {
-                #foreach ($query->result_array() as $row) {
-                #    $row->idApp_Profissional = $row->idApp_Profissional;
-                #    $row->NomeProfissional = $row->NomeProfissional;
-                #}
+                foreach ($query->result() as $row) {
+					$row->DataInicioProm = $this->basico->mascara_data($row->DataInicioProm, 'barras');
+					$row->DataFimProm = $this->basico->mascara_data($row->DataFimProm, 'barras');
+                }
                 $query = $query->result_array();
                 return $query;
             }

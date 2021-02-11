@@ -293,160 +293,6 @@
 												</div>
 											</div>
 										</div>
-												
-										<!--
-										<div class="row">	
-											
-											<div class="col-md-3 text-left">
-												<label for="ValorPromocao">Valor Promoção:</label><br>
-												<div class="input-group">
-													<span class="input-group-addon" id="basic-addon1">R$</span>
-													<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
-															name="ValorPromocao" value="<?php echo $promocao['ValorPromocao'] ?>">
-												</div>
-											</div>
-											
-											<div class="col-md-3 text-left">
-												<label for="Ativo">Preço Ativo?</label><br>
-												<div class="btn-group" data-toggle="buttons">
-													<?php
-													foreach ($select['Ativo'] as $key => $row) {
-														if (!$promocao['Ativo']) $promocao['Ativo'] = 'N';
-
-														($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-														if ($promocao['Ativo'] == $key) {
-															echo ''
-															. '<label class="btn btn-warning active" name="Ativo_' . $hideshow . '">'
-															. '<input type="radio" name="Ativo" id="' . $hideshow . '" '
-															. 'autocomplete="off" value="' . $key . '" checked>' . $row
-															. '</label>'
-															;
-														} else {
-															echo ''
-															. '<label class="btn btn-default" name="Ativo_' . $hideshow . '">'
-															. '<input type="radio" name="Ativo" id="' . $hideshow . '" '
-															. 'autocomplete="off" value="' . $key . '" >' . $row
-															. '</label>'
-															;
-														}
-													}
-													?>
-												</div>
-											</div>
-											<div class="col-md-3 text-left">
-												<label for="VendaBalcao">Aparecer no Balcão?</label><br>
-												<div class="btn-group" data-toggle="buttons">
-													<?php
-													foreach ($select['VendaBalcao'] as $key => $row) {
-														if (!$promocao['VendaBalcao']) $promocao['VendaBalcao'] = 'S';
-
-														($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-														if ($promocao['VendaBalcao'] == $key) {
-															echo ''
-															. '<label class="btn btn-warning active" name="VendaBalcao_' . $hideshow . '">'
-															. '<input type="radio" name="VendaBalcao" id="' . $hideshow . '" '
-															. 'autocomplete="off" value="' . $key . '" checked>' . $row
-															. '</label>'
-															;
-														} else {
-															echo ''
-															. '<label class="btn btn-default" name="VendaBalcao_' . $hideshow . '">'
-															. '<input type="radio" name="VendaBalcao" id="' . $hideshow . '" '
-															. 'autocomplete="off" value="' . $key . '" >' . $row
-															. '</label>'
-															;
-														}
-													}
-													?>
-												</div>
-											</div>
-											<div class="col-md-3 text-left">
-												<label for="VendaSite">Aparecer no Site?</label><br>
-												<div class="btn-group" data-toggle="buttons">
-													<?php
-													foreach ($select['VendaSite'] as $key => $row) {
-														if (!$promocao['VendaSite']) $promocao['VendaSite'] = 'S';
-
-														($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-														if ($promocao['VendaSite'] == $key) {
-															echo ''
-															. '<label class="btn btn-warning active" name="VendaSite_' . $hideshow . '">'
-															. '<input type="radio" name="VendaSite" id="' . $hideshow . '" '
-															. 'autocomplete="off" value="' . $key . '" checked>' . $row
-															. '</label>'
-															;
-														} else {
-															echo ''
-															. '<label class="btn btn-default" name="VendaSite_' . $hideshow . '">'
-															. '<input type="radio" name="VendaSite" id="' . $hideshow . '" '
-															. 'autocomplete="off" value="' . $key . '" >' . $row
-															. '</label>'
-															;
-														}
-													}
-													?>
-												</div>
-											</div>
-										</div>
-										-->			
-
-										<?php if ($metodo == 20) { ?>
-										<div class="col-md-10">
-											<div class="row">
-												<div id="TodoDiaProm" <?php echo $div['TodoDiaProm']; ?>>
-													<?php for ($i=1; $i <= $count['DiaCount']; $i++) { ?>
-														<div class="col-md-2">
-															<input type="hidden" name="DiaCount" id="DiaCount" value="<?php echo $count['DiaCount']; ?>"/>
-															<?php if ($metodo > 1) { ?>
-															<input type="hidden" name="idTab_Dia_Prom<?php echo $i ?>" value="<?php echo $dia_promocao[$i]['idTab_Dia_Prom']; ?>"/>
-															<?php } ?>
-															<div class="panel panel-default">
-																<div class="panel-heading">
-																	<div class="row">
-																		<div class="col-md-12">
-																			<label for="Dia_Semana_Prom"><?php echo $_SESSION['Dia_Promocao'][$i]['Dia_Semana_Prom']; ?></label><br>
-																			<?php if ($metodo == 3) { ?>
-																				<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Dia_Promocao'][$i]['Aberto_Prom'] ?>">
-																			<?php }elseif ($metodo == 2) { ?>
-																				
-																					<div class="btn-group" data-toggle="buttons">
-																						<?php
-																						foreach ($select['Aberto_Prom'] as $key => $row) {
-																							(!$dia_promocao[$i]['Aberto_Prom']) ? $dia_promocao[$i]['Aberto_Prom'] = 'S' : FALSE;
-
-																							if ($dia_promocao[$i]['Aberto_Prom'] == $key) {
-																								echo ''
-																								. '<label class="btn btn-warning active" name="radiobutton_Aberto_Prom' . $i . '" id="radiobutton_Aberto_Prom' . $i .  $key . '">'
-																								. '<input type="radio" name="Aberto_Prom' . $i . '" id="radiobuttondinamico" '
-																								. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																								. '</label>'
-																								;
-																							} else {
-																								echo ''
-																								. '<label class="btn btn-default" name="radiobutton_Aberto_Prom' . $i . '" id="radiobutton_Aberto_Prom' . $i .  $key . '">'
-																								. '<input type="radio" name="Aberto_Prom' . $i . '" id="radiobuttondinamico" '
-																								. 'autocomplete="off" value="' . $key . '" >' . $row
-																								. '</label>'
-																								;
-																							}
-																						}
-																						?>
-																					</div>
-																				
-																			<?php } ?>
-																		</div>
-																	</div>
-																</div>	
-															</div>
-														</div>
-													<?php } ?>
-												</div>	
-											</div>
-										</div>
-										<?php } ?>
 										
 										<div class="col-md-12">
 											<div class="row">
@@ -557,16 +403,26 @@
 																				id="Convdesc<?php echo $i ?>" name="Convdesc<?php echo $i ?>" value="<?php echo $item_promocao[$i]['Convdesc']; ?>"><?php echo $item_promocao[$i]['Convdesc']; ?></textarea>
 																		<?php } ?>
 																	</div>
+																	<?php if ($metodo != 3) { ?>
+																		<div class="col-md-1 text-right">
+																			<label><br></label><br>
+																			<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
+																				<span class="glyphicon glyphicon-trash"></span>
+																			</button>
+																		</div>
+																	<?php } ?>
 																</div>
+																<!--
 																<div class="row">
 																	<div class="col-md-2">
 																		<label for="AtivoPreco">Ativo?</label><br>
-																		<?php if ($metodo == 3) { ?>
+																		<?php /* if ($metodo == 3) { ?>
 																			<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['AtivoPreco'] ?>">
 																		<?php }else{ ?>
 																			<div class="form-group">
 																				<div class="btn-group" data-toggle="buttons">
 																					<?php
+																					
 																					foreach ($select['AtivoPreco'] as $key => $row) {
 																						(!$item_promocao[$i]['AtivoPreco']) ? $item_promocao[$i]['AtivoPreco'] = 'N' : FALSE;
 
@@ -650,21 +506,14 @@
 																							;
 																						}
 																					}
+																					
 																					?>
 																				</div>
 																			</div>
-																		<?php } ?>
+																		<?php } */?>
 																	</div>
-																	<div class="col-md-2 text-right"></div>											
-																	<?php if ($metodo != 3) { ?>
-																		<div class="col-md-1 text-right">
-																			<label><br></label><br>
-																			<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
-																				<span class="glyphicon glyphicon-trash"></span>
-																			</button>
-																		</div>
-																	<?php } ?>
 																</div>
+																-->
 															</div>	
 														</div>		
 													</div>
@@ -677,7 +526,114 @@
 												</div>
 											</div>
 										</div>
-										
+										<div class="form-group">	
+											<div class="row">
+												<div class="col-md-12">
+													<!--
+													<div class="col-md-3 text-left">
+														<label for="ValorPromocao">Valor Promoção:</label><br>
+														<div class="input-group">
+															<span class="input-group-addon" id="basic-addon1">R$</span>
+															<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
+																	name="ValorPromocao" value="<?php echo $promocao['ValorPromocao'] ?>">
+														</div>
+													</div>
+													<div class="col-md-3 text-left">
+														<label for="Ativo">Preço Ativo?</label><br>
+														<div class="btn-group" data-toggle="buttons">
+															<?php
+															foreach ($select['Ativo'] as $key => $row) {
+																if (!$promocao['Ativo']) $promocao['Ativo'] = 'N';
+
+																($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																if ($promocao['Ativo'] == $key) {
+																	echo ''
+																	. '<label class="btn btn-warning active" name="Ativo_' . $hideshow . '">'
+																	. '<input type="radio" name="Ativo" id="' . $hideshow . '" '
+																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																	. '</label>'
+																	;
+																} else {
+																	echo ''
+																	. '<label class="btn btn-default" name="Ativo_' . $hideshow . '">'
+																	. '<input type="radio" name="Ativo" id="' . $hideshow . '" '
+																	. 'autocomplete="off" value="' . $key . '" >' . $row
+																	. '</label>'
+																	;
+																}
+															}
+															?>
+														</div>
+													</div>
+													-->
+													<div class="col-md-2 text-left">
+														<label for="VendaBalcao">Balcão?</label><br>
+														<?php if ($metodo == 3) { ?>
+															<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Promocao']['VendaBalcao'] ?>">
+														<?php }else{ ?>
+															<div class="btn-group" data-toggle="buttons">
+																<?php
+																foreach ($select['VendaBalcao'] as $key => $row) {
+																	if (!$promocao['VendaBalcao']) $promocao['VendaBalcao'] = 'S';
+
+																	($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																	if ($promocao['VendaBalcao'] == $key) {
+																		echo ''
+																		. '<label class="btn btn-warning active" name="VendaBalcao_' . $hideshow . '">'
+																		. '<input type="radio" name="VendaBalcao" id="' . $hideshow . '" '
+																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																		. '</label>'
+																		;
+																	} else {
+																		echo ''
+																		. '<label class="btn btn-default" name="VendaBalcao_' . $hideshow . '">'
+																		. '<input type="radio" name="VendaBalcao" id="' . $hideshow . '" '
+																		. 'autocomplete="off" value="' . $key . '" >' . $row
+																		. '</label>'
+																		;
+																	}
+																}
+																?>
+															</div>
+														<?php } ?>	
+													</div>
+													<div class="col-md-2 text-left">
+														<label for="VendaSite">Site?</label><br>
+														<?php if ($metodo == 3) { ?>
+															<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Promocao']['VendaSite'] ?>">
+														<?php }else{ ?>
+															<div class="btn-group" data-toggle="buttons">
+																<?php
+																foreach ($select['VendaSite'] as $key => $row) {
+																	if (!$promocao['VendaSite']) $promocao['VendaSite'] = 'S';
+
+																	($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																	if ($promocao['VendaSite'] == $key) {
+																		echo ''
+																		. '<label class="btn btn-warning active" name="VendaSite_' . $hideshow . '">'
+																		. '<input type="radio" name="VendaSite" id="' . $hideshow . '" '
+																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																		. '</label>'
+																		;
+																	} else {
+																		echo ''
+																		. '<label class="btn btn-default" name="VendaSite_' . $hideshow . '">'
+																		. '<input type="radio" name="VendaSite" id="' . $hideshow . '" '
+																		. 'autocomplete="off" value="' . $key . '" >' . $row
+																		. '</label>'
+																		;
+																	}
+																}
+																?>
+															</div>
+														<?php } ?>	
+													</div>
+												</div>
+											</div>										
+										</div>
 										<?php if ($metodo > 1) { ?>
 											<input type="hidden" name="idTab_Promocao" id="idTab_Promocao" value="<?php echo $promocao['idTab_Promocao']; ?>">
 										<?php } ?>

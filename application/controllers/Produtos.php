@@ -171,7 +171,10 @@ class Produtos extends CI_Controller {
 		$data['list4'] = $this->load->view('produtos/list_opcao', $data, TRUE);
 		
 		$data['q'] = $this->Produtos_model->list_produtos($data['produtos'], TRUE);
-		$data['list'] = $this->load->view('produtos/list_produtos', $data, TRUE);			
+		$data['list'] = $this->load->view('produtos/list_produtos', $data, TRUE);
+		
+		$data['q_list_promocoes'] = $this->Produtos_model->list_promocoes($data['produtos'], TRUE);
+		$data['list_promocoes'] = $this->load->view('produtos/list_promocoes', $data, TRUE);		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 		$this->form_validation->set_rules('idTab_Catprod', 'Categoria', 'required|trim');
@@ -362,6 +365,8 @@ class Produtos extends CI_Controller {
 			'idAtributo_Opcao',
 			'idCat_Produto',
 			'Codigo',
+			'VendaSite_Cadastrar',
+			'VendaSite_Alterar',
         ), TRUE));	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $data['produtos'] = quotes_to_entities($this->input->post(array(
@@ -375,6 +380,7 @@ class Produtos extends CI_Controller {
             'Nome_Prod',
             'Cod_Barra',
             'Estoque',
+            'Produtos_Descricao',
         ), TRUE));
 
 
@@ -479,7 +485,7 @@ class Produtos extends CI_Controller {
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
-            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';       
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';			
 
 		$data['q1'] = $this->Produtos_model->list_categoria($_SESSION['log'], TRUE);
 		$data['list1'] = $this->load->view('produtos/list_categoria', $data, TRUE);
@@ -515,19 +521,10 @@ class Produtos extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('produtos/form_produtos', $data);
         } else {
-			/*
-			echo '<br>';
-			echo "<pre>";
-			print_r($data['cadastrar']['Codigo']);
-			echo "</pre>";
-			exit ();
-			*/
-		
-			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];			
-
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produtos ####
-
+			$data['produtos']['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Nome_Prod'], 'ISO-8859-1'));
+			$data['produtos']['Produtos_Descricao'] = trim(mb_strtoupper($data['produtos']['Produtos_Descricao'], 'ISO-8859-1'));
 			$data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produtos']);
             $data['update']['produtos']['campos'] = array_keys($data['produtos']);
             $data['update']['produtos']['auditoriaitem'] = $this->basico->set_log(
@@ -584,8 +581,10 @@ class Produtos extends CI_Controller {
 			'idAtributo_Opcao',
 			'idCat_Produto',
 			'Codigo',
+			'VendaSite_Cadastrar',
+			'VendaSite_Alterar',
         ), TRUE));	
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         $data['produtos'] = quotes_to_entities($this->input->post(array(
             #### Tab_Produtos ####
             'idTab_Produtos',			
@@ -597,13 +596,16 @@ class Produtos extends CI_Controller {
             'Nome_Prod',
             'Cod_Barra',
             'Estoque',
+            'Produtos_Descricao',
         ), TRUE));
 
-
+		//(!$data['cadastrar']['VendaSite1']) ? $data['cadastrar']['VendaSite1'] = $data['cadastrar']['VendaSite_Atual'] : FALSE;
+		
         if ($id) {
             #### Tab_Produtos ####
-           $_SESSION['Produtos'] = $data['produtos'] = $this->Produtos_model->get_produtos($id);
-        }
+			$_SESSION['Produtos'] = $data['produtos'] = $this->Produtos_model->get_produtos($id);
+			$data['cadastrar']['VendaSite1'] = $data['produtos']['VendaSite_Produto'];
+		}
 		#### Tab_Atributo_Select ####
 		$_SESSION['Atributo'] = $data['atributo'] = $this->Produtos_model->get_atributos($_SESSION['Produtos']['idTab_Catprod']);
 		$conta_atributos = count($data['atributo']);
@@ -658,7 +660,7 @@ class Produtos extends CI_Controller {
 			$_SESSION['Atributo'][2]['Atributo'] = FALSE;
 		}		
 
-        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();	
+        $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['TipoCatprod'] = $this->Basico_model->select_prod_serv();
 		$data['select']['idCat_Atributo'] = $this->Basico_model->select_catprod();
 		$data['select']['idCat_Opcao'] = $this->Basico_model->select_catprod();
@@ -688,8 +690,8 @@ class Produtos extends CI_Controller {
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
-            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';       
-		
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+
 		$data['q1'] = $this->Produtos_model->list_categoria($_SESSION['log'], TRUE);
 		$data['list1'] = $this->load->view('produtos/list_categoria', $data, TRUE);
 		
@@ -720,32 +722,14 @@ class Produtos extends CI_Controller {
 			}
 		}
 		
-		
-		/*
-          echo '<br>';
-          echo "<pre>";
-          print_r($data);
-          echo "</pre>";
-          exit ();
-          */
-
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('produtos/form_produtos', $data);
         } else {
-			/*
-			echo '<br>';
-			echo "<pre>";
-			print_r($data['cadastrar']['Codigo']);
-			echo "</pre>";
-			exit ();
-			*/
-		
-			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];			
-
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produtos ####
-
+			$data['produtos']['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Nome_Prod'], 'ISO-8859-1'));
+			$data['produtos']['Produtos_Descricao'] = trim(mb_strtoupper($data['produtos']['Produtos_Descricao'], 'ISO-8859-1'));
 			$data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produtos']);
             $data['update']['produtos']['campos'] = array_keys($data['produtos']);
             $data['update']['produtos']['auditoriaitem'] = $this->basico->set_log(
@@ -1061,6 +1045,7 @@ class Produtos extends CI_Controller {
 
                 $max = count($data['update']['valor']['alterar']);
                 for($j=0;$j<$max;$j++) {
+					$data['update']['valor']['alterar'][$j]['idTab_Modelo'] = $_SESSION['Produtos']['idTab_Produto'];
 					$data['update']['valor']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ValorProduto']));
 					$data['update']['valor']['alterar'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ComissaoVenda']));
 					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'UTF-8'));
@@ -1254,6 +1239,8 @@ class Produtos extends CI_Controller {
 			exit ();
 			*/
             #### Tab_Valor ####
+			$data['valor']['idTab_Modelo'] = $_SESSION['Valor']['idTab_Produto'];
+			$data['valor']['Prodaux3'] = $_SESSION['Valor']['idTab_Catprod'];
 			$data['valor']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ValorProduto']));
 			$data['valor']['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ComissaoVenda']));			
 			

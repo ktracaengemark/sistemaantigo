@@ -61,6 +61,8 @@ class Promocao extends CI_Controller {
 			'DataInicioProm',
 			'DataFimProm',
 			'TodoDiaProm',
+			'VendaSite',
+			'VendaBalcao',
         ), TRUE));
 
  		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
@@ -79,9 +81,9 @@ class Promocao extends CI_Controller {
 				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
 				$data['item_promocao'][$j]['TempoDeEntrega'] = $this->input->post('TempoDeEntrega' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
-				$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
-				$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
-				$data['item_promocao'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
+				//$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
+				//$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
+				//$data['item_promocao'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
                 $j++;
             }
 						
@@ -121,9 +123,11 @@ class Promocao extends CI_Controller {
 		//$data['select']['TipoCatprod'] = $this->Basico_model->select_prod_serv();	
 		//$data['select']['idTab_Catprod'] = $this->Basico_model->select_catprod();		
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_produto_promocao();
-		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();		
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
+		//$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
+		//$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
+		//$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();		
 		$data['select']['TodoDiaProm'] = $this->Basico_model->select_status_sn();
 		$data['select']['Aberto_Prom'] = $this->Basico_model->select_status_sn();
 				
@@ -302,6 +306,8 @@ class Promocao extends CI_Controller {
 			'DataInicioProm',
 			'DataFimProm',
 			'TodoDiaProm',
+			'VendaBalcao',
+			'VendaSite',
         ), TRUE));
 
 		(!$this->input->post('PTCount')) ? $data['count']['PTCount'] = 0 : $data['count']['PTCount'] = $this->input->post('PTCount');
@@ -320,9 +326,9 @@ class Promocao extends CI_Controller {
 				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
 				$data['item_promocao'][$j]['TempoDeEntrega'] = $this->input->post('TempoDeEntrega' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
-				$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
-				$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
-				$data['item_promocao'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
+				//$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
+				//$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
+				//$data['item_promocao'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
                 $j++;
             }
 						
@@ -403,9 +409,11 @@ class Promocao extends CI_Controller {
 		//exit();
 		
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_produto_promocao();
-		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
+		//$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
+		//$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
+		//$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['TodoDiaProm'] = $this->Basico_model->select_status_sn();
 		$data['select']['Aberto_Prom'] = $this->Basico_model->select_status_sn();
 				
@@ -440,7 +448,7 @@ class Promocao extends CI_Controller {
 		$this->form_validation->set_rules('Descricao', 'Descrição', 'required|trim');
 		$this->form_validation->set_rules('DataInicioProm', 'Data do Inicio', 'required|trim|valid_date');
 		$this->form_validation->set_rules('DataFimProm', 'Data do Fim', 'required|trim|valid_date');
-		$this->form_validation->set_rules('PTCount2', 'A promoção deve possuir , pelo menos, 1 produto!', 'trim|valid_promocao');
+		$this->form_validation->set_rules('PTCount2', 'A promoção deve possuir, pelo menos, 1 produto! Confira e Salve!', 'trim|valid_promocao');
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -621,6 +629,8 @@ class Promocao extends CI_Controller {
 			'DataInicioProm',
 			'DataFimProm',
 			'TodoDiaProm',
+			'VendaBalcao',
+			'VendaSite',
         ), TRUE));
 		
 		$dia_da_semana = date('N');
@@ -646,9 +656,9 @@ class Promocao extends CI_Controller {
 				$data['item_promocao'][$j]['ComissaoVenda'] = $this->input->post('ComissaoVenda' . $i);
 				$data['item_promocao'][$j]['TempoDeEntrega'] = $this->input->post('TempoDeEntrega' . $i);
 				$data['item_promocao'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
-				$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
-				$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
-				$data['item_promocao'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
+				//$data['item_promocao'][$j]['AtivoPreco'] = $this->input->post('AtivoPreco' . $i);
+				//$data['item_promocao'][$j]['VendaSitePreco'] = $this->input->post('VendaSitePreco' . $i);
+				//data['item_promocao'][$j]['VendaBalcaoPreco'] = $this->input->post('VendaBalcaoPreco' . $i);
                 $j++;
             }
 						
@@ -674,6 +684,8 @@ class Promocao extends CI_Controller {
 			$_SESSION['Promocao']['DataInicioProm'] = $data['promocao']['DataInicioProm'] = $this->basico->mascara_data($data['promocao']['DataInicioProm'], 'barras');
 			$_SESSION['Promocao']['DataFimProm'] = $data['promocao']['DataFimProm'] = $this->basico->mascara_data($data['promocao']['DataFimProm'], 'barras');
 			$_SESSION['Promocao']['TodoDiaProm'] = $this->basico->mascara_palavra_completa($data['promocao']['TodoDiaProm'], 'NS');
+			$_SESSION['Promocao']['VendaBalcao'] = $this->basico->mascara_palavra_completa($data['promocao']['VendaBalcao'], 'NS');
+			$_SESSION['Promocao']['VendaSite'] = $this->basico->mascara_palavra_completa($data['promocao']['VendaSite'], 'NS');
 
             #### Tab_Valor ####
             $_SESSION['Item_Promocao'] = $data['item_promocao'] = $this->Promocao_model->get_item_promocao($id, "2");
@@ -685,9 +697,9 @@ class Promocao extends CI_Controller {
 
                     for($j=1; $j <= $data['count']['PTCount']; $j++){
 						$_SESSION['Item_Promocao'][$j] = $data['item_promocao'][$j];
-						$_SESSION['Item_Promocao'][$j]['AtivoPreco'] = $this->basico->mascara_palavra_completa($data['item_promocao'][$j]['AtivoPreco'], 'NS');
-						$_SESSION['Item_Promocao'][$j]['VendaSitePreco'] = $this->basico->mascara_palavra_completa($data['item_promocao'][$j]['VendaSitePreco'], 'NS');
-						$_SESSION['Item_Promocao'][$j]['VendaBalcaoPreco'] = $this->basico->mascara_palavra_completa($data['item_promocao'][$j]['VendaBalcaoPreco'], 'NS');
+						//$_SESSION['Item_Promocao'][$j]['AtivoPreco'] = $this->basico->mascara_palavra_completa($data['item_promocao'][$j]['AtivoPreco'], 'NS');
+						//$_SESSION['Item_Promocao'][$j]['VendaSitePreco'] = $this->basico->mascara_palavra_completa($data['item_promocao'][$j]['VendaSitePreco'], 'NS');
+						//$_SESSION['Item_Promocao'][$j]['VendaBalcaoPreco'] = $this->basico->mascara_palavra_completa($data['item_promocao'][$j]['VendaBalcaoPreco'], 'NS');
 						if($data['item_promocao'][$j]['TempoDeEntrega'] == 0){
 							$_SESSION['Item_Promocao'][$j]['TempoDeEntrega'] = "Pronta Entrega";
 						}
@@ -730,9 +742,11 @@ class Promocao extends CI_Controller {
 		//exit();
 		
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_produto_promocao();
-		$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
-		$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();
+		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
+		//$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
+		//$data['select']['VendaSitePreco'] = $this->Basico_model->select_status_sn();
+		//$data['select']['VendaBalcaoPreco'] = $this->Basico_model->select_status_sn();
 		$data['select']['TodoDiaProm'] = $this->Basico_model->select_status_sn();
 		$data['select']['Aberto_Prom'] = $this->Basico_model->select_status_sn();		
 

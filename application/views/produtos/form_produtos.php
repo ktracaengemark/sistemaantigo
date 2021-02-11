@@ -178,7 +178,16 @@
 														<label for="Estoque">Estoque</label>
 														<input type="text" class="form-control Numero" <?php echo $readonly ?> id="Estoque" name="Estoque" value="<?php echo $produtos['Estoque']; ?>">
 														<?php echo form_error('Estoque'); ?>
+													</div>		
+													<div class="col-md-6">
+														<label for="Produtos_Descricao">Descrição</label>
+														<textarea type="text" class="form-control " <?php echo $readonly ?> id="Produtos_Descricao" name="Produtos_Descricao" 
+															maxlength="200" value="<?php echo $produtos['Produtos_Descricao']; ?>"><?php echo $produtos['Produtos_Descricao']; ?></textarea>
+														<?php echo form_error('Produtos_Descricao'); ?>
 													</div>
+												</div>	
+												<div class="row">
+													<div class="col-md-1"></div>
 													<div class="col-md-1">
 														<label for="id">id_Produto</label>
 														<input type="text" class="form-control" readonly="" value="<?php echo $produtos['idTab_Produtos']; ?>">
@@ -188,7 +197,7 @@
 														<input type="text" class="form-control" readonly="" id="Cod_Prod" name="Cod_Prod" value="<?php echo $produtos['Cod_Prod']; ?>">
 														<?php echo form_error('Cod_Prod'); ?>
 													</div>		
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label for="Cod_Barra">Codigo de Barras</label>
 														<input type="text" class="form-control" <?php echo $readonly ?> id="Cod_Barra" name="Cod_Barra" value="<?php echo $produtos['Cod_Barra']; ?>">
 														<?php echo form_error('Cod_Barra'); ?>
@@ -503,7 +512,7 @@
 															</div>
 															<div class="col-md-2">
 																<a class="btn btn-info btn-block" href="<?php echo base_url() . 'produtos/tela/' . $produtos['idTab_Produtos'] ?>" role="button">
-																	<span class="glyphicon glyphicon-pencil"></span> Ver Produtos
+																	<span class="glyphicon glyphicon-pencil"></span> Ver Produto
 																</a>
 															</div>
 														<?php } ?>
@@ -575,6 +584,7 @@
 			<?php if ($metodo < 6) { ?>
 				<?php if ($metodo >= 3) { ?>
 					<?php if (isset($list)) echo $list; ?>
+					<?php if (isset($list_promocoes)) echo $list_promocoes; ?>
 				<?php } ?>
 			<?php }elseif($metodo >= 6){ ?>	
 				<?php if (isset($list_precos)) echo $list_precos; ?>
@@ -633,13 +643,41 @@
 							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFecharCatprod" id="botaoFecharCatprod">
 								<span class="glyphicon glyphicon-remove"></span> Fechar
 							</button>
-						</div>	
+							</div>	
 						<div class="col-md-12 alert alert-warning aguardarCatprod" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
 					</div>
 				</form>
 				<?php if (isset($list1)) echo $list1; ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="alterarCatprod" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alterarCatprodLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="alterarCatprodLabel">Categoria</h4>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-alterar-catprod"></span>
+				<form method="post" id="alterar_catprod_form">
+					<div class="form-group">
+						<label for="Catprod" class="control-label">Categoria:</label>
+						<input type="text" class="form-control" name="Catprod" id="Catprod">
+					</div>
+					<input type="hidden" name="id_Categoria" id="id_Categoria">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" name="CancelarCatprod" id="CancelarCatprod" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="AlterarCatprod" id="AlterarCatprod" >Alterar</button>	
+						<div class="col-md-12 alert alert-warning aguardarAlterarCatprod" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -689,6 +727,34 @@
 					</div>
 				</form>
 				<?php if (isset($list3)) echo $list3; ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="alterarAtributo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alterarAtributoLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="alterarAtributoLabel">Atributo</h4>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-alterar-atributo"></span>
+				<form method="post" id="alterar_atributo_form">
+					<div class="form-group">
+						<label for="Atributo" class="control-label">Atributo:</label>
+						<input type="text" class="form-control" name="Atributo" id="Atributo">
+					</div>
+					<input type="hidden" name="id_Atributo" id="id_Atributo">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" name="CancelarAtributo" id="CancelarAtributo" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="AlterarAtributo" id="AlterarAtributo" >Alterar</button>	
+						<div class="col-md-12 alert alert-warning aguardarAlterarAtributo" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -761,6 +827,34 @@
 	</div>
 </div>
 
+<div id="alterarOpcao" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alterarOpcaoLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="alterarOpcaoLabel">Opcao</h4>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-alterar-opcao"></span>
+				<form method="post" id="alterar_opcao_form">
+					<div class="form-group">
+						<label for="Opcao" class="control-label">Opcao:</label>
+						<input type="text" class="form-control" name="Opcao" id="Opcao">
+					</div>
+					<input type="hidden" name="id_Opcao" id="id_Opcao">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" name="CancelarOpcao" id="CancelarOpcao" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="AlterarOpcao" id="AlterarOpcao" >Alterar</button>	
+						<div class="col-md-12 alert alert-warning aguardarAlterarOpcao" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div id="addProdutoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -803,6 +897,40 @@
 							<input name="Novo_Produto" type="text" class="form-control" id="Novo_Produto" placeholder="Produto">
 						</div>
 					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Balcao</label>
+						<div class="col-sm-10">
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="VendaBalcao_Cadastrar" class="custom-control-input " id="VendaBalcao_Cadastrar_Nao" value="N">
+									<label class="custom-control-label" for="Nao">Nao </label>
+								</div>
+							</div>
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="VendaBalcao_Cadastrar" class="custom-control-input "  id="VendaBalcao_Cadastrar_Sim" value="S" checked>
+									<label class="custom-control-label" for="Sim">Sim</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Site</label>
+						<div class="col-sm-10">
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="VendaSite_Cadastrar" class="custom-control-input " id="VendaSite_Cadastrar_Nao" value="N">
+									<label class="custom-control-label" for="Nao">Nao </label>
+								</div>
+							</div>
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="VendaSite_Cadastrar" class="custom-control-input "  id="VendaSite_Cadastrar_Sim" value="S" checked>
+									<label class="custom-control-label" for="Sim">Sim</label>
+								</div>
+							</div>
+						</div>
+					</div>
 					<!--
 						<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Descrição</label>
@@ -835,34 +963,6 @@
 	</div>
 </div>
 
-<div id="alterarCatprod" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alterarCatprodLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="alterarCatprodLabel">Categoria</h4>
-			</div>
-			<div class="modal-body">
-				<span id="msg-error-alterar-catprod"></span>
-				<form method="post" id="alterar_catprod_form">
-					<div class="form-group">
-						<label for="Catprod" class="control-label">Categoria:</label>
-						<input type="text" class="form-control" name="Catprod" id="Catprod">
-					</div>
-					<input type="hidden" name="id_Categoria" id="id_Categoria">
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" name="CancelarCatprod" id="CancelarCatprod" data-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-danger" name="AlterarCatprod" id="AlterarCatprod" >Alterar</button>	
-						<div class="col-md-12 alert alert-warning aguardarAlterarCatprod" role="alert" >
-							Aguarde um instante! Estamos processando sua solicitação!
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-
 <div id="alterarProduto" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alterarProdutoLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -873,71 +973,57 @@
 			<div class="modal-body">
 				<span id="msg-error-alterar-produto"></span>
 				<form method="post" id="alterar_produto_form">
+					<!--
 					<div class="form-group">
 						<label for="Produtos" class="control-label">Produto:</label>
 						<input type="text" class="form-control" name="Produtos" id="Produtos">
+					</div>
+					-->
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Produto</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="Produtos" id="Produtos">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Balcao</label>
+						<div class="col-sm-10">
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="VendaBalcao_Alterar" class="custom-control-input " id="VendaBalcao_Alterar_Nao" value="N" >
+									<label class="custom-control-label" for="Nao">Nao</label>
+								</div>
+							</div>
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="VendaBalcao_Alterar" class="custom-control-input "  id="VendaBalcao_Alterar_Sim" value="S" >
+									<label class="custom-control-label" for="Sim">Sim</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Site</label>
+						<div class="col-sm-10">
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="VendaSite_Alterar" class="custom-control-input " id="VendaSite_Alterar_Nao" value="N" >
+									<label class="custom-control-label" for="Nao">Nao</label>
+								</div>
+							</div>
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="VendaSite_Alterar" class="custom-control-input "  id="VendaSite_Alterar_Sim" value="S" >
+									<label class="custom-control-label" for="Sim">Sim</label>
+								</div>
+							</div>
+						</div>
 					</div>
 					<input type="hidden" name="id_Produto" id="id_Produto">
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" name="CancelarProduto" id="CancelarProduto" data-dismiss="modal">Cancelar</button>
 						<button type="submit" class="btn btn-danger" name="AlterarProduto" id="AlterarProduto" >Alterar</button>	
 						<div class="col-md-12 alert alert-warning aguardarAlterarProduto" role="alert" >
-							Aguarde um instante! Estamos processando sua solicitação!
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div id="alterarAtributo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alterarAtributoLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="alterarAtributoLabel">Atributo</h4>
-			</div>
-			<div class="modal-body">
-				<span id="msg-error-alterar-atributo"></span>
-				<form method="post" id="alterar_atributo_form">
-					<div class="form-group">
-						<label for="Atributo" class="control-label">Atributo:</label>
-						<input type="text" class="form-control" name="Atributo" id="Atributo">
-					</div>
-					<input type="hidden" name="id_Atributo" id="id_Atributo">
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" name="CancelarAtributo" id="CancelarAtributo" data-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-danger" name="AlterarAtributo" id="AlterarAtributo" >Alterar</button>	
-						<div class="col-md-12 alert alert-warning aguardarAlterarAtributo" role="alert" >
-							Aguarde um instante! Estamos processando sua solicitação!
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div id="alterarOpcao" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alterarOpcaoLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="alterarOpcaoLabel">Opcao</h4>
-			</div>
-			<div class="modal-body">
-				<span id="msg-error-alterar-opcao"></span>
-				<form method="post" id="alterar_opcao_form">
-					<div class="form-group">
-						<label for="Opcao" class="control-label">Opcao:</label>
-						<input type="text" class="form-control" name="Opcao" id="Opcao">
-					</div>
-					<input type="hidden" name="id_Opcao" id="id_Opcao">
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" name="CancelarOpcao" id="CancelarOpcao" data-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-danger" name="AlterarOpcao" id="AlterarOpcao" >Alterar</button>	
-						<div class="col-md-12 alert alert-warning aguardarAlterarOpcao" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
 					</div>
