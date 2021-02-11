@@ -1818,45 +1818,6 @@ function calculaTroco(entrada) {
 function adicionaDias(mod) {
     //alert();
 	
-	
-	//captura os valores dos campos indicados
-    //var resta = $("#ValorRestanteOrca").val();
-	//console.log(mod + ' - mod');
-	/*
-	var resta = $("#ValorTotalOrca").val();
-    var parcelas = $("#QtdParcelasOrca").val();
-    if(parcelas == 0){
-		parcelas = 1;
-	}
-	//$("#QtdParcelasOrca").val(parcelas);
-	var vencimento = $("#DataVencimentoOrca").val();
-
-    //valor de cada parcela
-	if(mod){
-		if(mod == "P"){
-			var parcorca = (resta.replace(".","").replace(",",".") / parcelas);
-		}else{
-			var parcorca = (resta.replace(".","").replace(",",".") / 1);
-		}	
-	}else{
-		var parcorca = (resta.replace(".","").replace(",",".") / parcelas);
-	}	
-	parcorca = mascaraValorReal(parcorca);
-	*/
-    //pega a data do primeiro vencimento e separa em dia, mês e ano
-    //var split = vencimento.split("/");
-
-    //define a data do primeiro vencimento no formato do momentjs
-    //var currentDate = moment(split[2]+'-'+split[1]+'-'+split[0]);
-
-    //console.log(currentDate.format('DD-MM-YYYY'));
-    //console.log(futureMonth.format('DD-MM-YYYY'));
-    //alert('>>v '+vencimento+'::d1 '+currentDate.format('DD/MM/YYYY')+'::d2 '+futureMonth.format('DD/MM/YYYY')+'::d3 '+futureMonthEnd.format('DD/MM/YYYY')+'<<');
-
-    //caso as parcelas já tenham sido geradas elas serão excluídas para que
-    //sejam geradas novas parcelas
-    
-	
 	$(".input_fields_dias").empty();
 
     //gera os campos de parcelas
@@ -1878,14 +1839,7 @@ function adicionaDias(mod) {
 		}else if(i == 7){
 			var dia_semana = 'DOMINGO';
 		}
-		/*
-        //calcula as datas das próximas parcelas
-        var futureMonth = moment(currentDate).add(i-1, 'M');
-        var futureMonthEnd = moment(futureMonth).endOf('month');
 
-        if(currentDate.date() != futureMonth.date() && futureMonth.isSame(futureMonthEnd.format('YYYY-MM-DD')))
-            futureMonth = futureMonth.add(i-1, 'd');
-		*/
         $(".input_fields_dias").append('\
             <div class="col-md-2">\
 				<div class="panel panel-warning">\
@@ -1895,11 +1849,11 @@ function adicionaDias(mod) {
 								<label for="Aberto_Prom">'+dia_semana+'</label><br>\
 								<div class="btn-group" data-toggle="buttons">\
 									<label class="btn btn-warning active" name="radio_Aberto_Prom'+i+'" id="radio_Aberto_Prom'+i+'N">\
-									<input type="radio" name="Aberto_Prom'+i+'" id="rdgrldnmc_cal_parc"\
+									<input type="radio" name="Aberto_Prom'+i+'" id="rdgrldnmc_add_dias"\
 										 autocomplete="off" value="N" checked>Não\
 									</label>\
 									<label class="btn btn-default" name="radio_Aberto_Prom'+i+'" id="radio_Aberto_Prom'+i+'S">\
-									<input type="radio" name="Aberto_Prom'+i+'" id="rdgrldnmc_cal_parc"\
+									<input type="radio" name="Aberto_Prom'+i+'" id="rdgrldnmc_add_dias"\
 										 autocomplete="off" value="S">Sim\
 									</label>\
 								</div>\
@@ -1915,22 +1869,22 @@ function adicionaDias(mod) {
     $('.DatePicker').datetimepicker(dateTimePickerOptions);
 
     //permite o uso de radio buttons nesse bloco dinâmico
-    $('input:radio[id="rdgrldnmc_cal_parc"]').change(function() {
+    $('input:radio[id="rdgrldnmc_add_dias"]').change(function() {
 
-        var value_prc = $(this).val();
-        var name_prc = $(this).attr("name");
+        var value_add_dias = $(this).val();
+        var name_add_dias = $(this).attr("name");
 
-        //console.log(value_prc + ' <<>> ' + name);
+        //console.log(value_add_dias + ' <<>> ' + name);
 
-        $('label[name="radio_' + name_prc + '"]').removeClass();
-        $('label[name="radio_' + name_prc + '"]').addClass("btn btn-default");
-        $('#radio_' + name_prc + value_prc).addClass("btn btn-warning active");
-        //$('#radiogeral'+ value_prc).addClass("btn btn-warning active");
+        $('label[name="radio_' + name_add_dias + '"]').removeClass();
+        $('label[name="radio_' + name_add_dias + '"]').addClass("btn btn-default");
+        $('#radio_' + name_add_dias + value_add_dias).addClass("btn btn-warning active");
+        //$('#radiogeral'+ value_add_dias).addClass("btn btn-warning active");
 		
-		if(value_prc == "S"){
-			$("#"+name_prc).css("display","");
+		if(value_add_dias == "S"){
+			$("#"+name_add_dias).css("display","");
 		}else{
-			$("#"+name_prc).css("display","none");
+			$("#"+name_add_dias).css("display","none");
 		}
 
     });
