@@ -63,8 +63,20 @@ class Promocao_model extends CI_Model {
             return $this->db->insert_id();
         }
 
-    }	
+    }
 
+    public function set_dia_promocao1($data) {
+
+        $query = $this->db->insert_batch('Tab_Dia_Prom', $data);
+		
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+	
     public function get_promocao($data) {
         $query = $this->db->query('
 			SELECT  
@@ -116,6 +128,13 @@ class Promocao_model extends CI_Model {
 
         return $query;
     }
+	
+    public function get_dia_promocao_posterior($data) {
+		$query = $this->db->query('SELECT * FROM Tab_Dia_Prom WHERE idTab_Promocao = ' . $data . ' AND Aberto_Prom = "N"');
+        $query = $query->result_array();
+
+        return $query;
+    }	
 	
 	public function list_promocoes($data, $x) {
 

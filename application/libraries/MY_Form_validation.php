@@ -128,6 +128,17 @@ class MY_Form_validation extends CI_Form_validation {
        
     }
 	
+    function valid_promocao($data) {
+        $CI = & get_instance();
+
+        $CI->form_validation->set_message('valid_promocao', '<b>%s</b>');
+
+		if (($data) < 1) {
+			return FALSE;
+		}
+       
+    }
+	
     function valid_brinde($data) {
         $CI = & get_instance();
 

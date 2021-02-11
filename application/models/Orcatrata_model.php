@@ -110,7 +110,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_FormaPag AS FP ON FP.idTab_FormaPag = OT.FormaPagamento
 					LEFT JOIN Tab_TipoFinanceiro AS TF ON TF.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = OT.idSis_Usuario
-			WHERE 
+					WHERE 
 				idApp_OrcaTrata = ' . $data . '
 		');
         $query = $query->result_array();
