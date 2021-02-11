@@ -180,28 +180,6 @@ class Promocao extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('promocao/form_promocao', $data);
         } else {
-			/*
-            if (isset($data['item_promocao'])) {
-				$max = count($data['item_promocao']);
-				echo '<br>';
-				echo "<pre>";
-				print_r($max);
-				echo "</pre>";				
-			}else{
-				echo '<br>';
-				echo "<pre>";
-				print_r('Não existem produtos');
-				echo "</pre>";			
-			}	
-			exit ();
-			*/
-			/*
-			echo '<br>';
-			echo "<pre>";
-			print_r($data['cadastrar']['PTCount2']);
-			echo "</pre>";
-			exit ();
-			*/
 			////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
 
 			#### Tab_Promocao ####
@@ -469,13 +447,6 @@ class Promocao extends CI_Controller {
             $this->load->view('promocao/form_promocao', $data);
         } else {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
-			/*
-			echo '<br>';
-			echo "<pre>";
-			print_r($data['cadastrar']['PTCount2']);
-			echo "</pre>";
-			exit ();			
-			*/
 			
             #### Tab_Promocao ####
 			$data['promocao']['Promocao'] = trim(mb_strtoupper($data['promocao']['Promocao'], 'UTF-8'));
