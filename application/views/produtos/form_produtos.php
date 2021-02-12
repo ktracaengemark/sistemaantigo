@@ -266,13 +266,21 @@
 																			<textarea type="text" class="form-control"  id="Convdesc<?php echo $i ?>" 
 																					  name="Convdesc<?php echo $i ?>" value="<?php echo $valor[$i]['Convdesc']; ?>"><?php echo $valor[$i]['Convdesc']; ?></textarea>
 																		</div>
+																		<div class="col-md-1 text-right">
+																			<label><br></label><br>
+																			<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
+																				<span class="glyphicon glyphicon-trash"></span>
+																			</button>
+																		</div>
 																	</div>
 																	<div class="row">
+																		<!--
 																		<div class="col-md-2">
 																			<label for="AtivoPreco">Ativo?</label><br>
 																			<div class="form-group">
 																				<div class="btn-group" data-toggle="buttons">
 																					<?php
+																					/*
 																					foreach ($select['AtivoPreco'] as $key => $row) {
 																						(!$valor[$i]['AtivoPreco']) ? $valor[$i]['AtivoPreco'] = 'N' : FALSE;
 
@@ -292,10 +300,12 @@
 																							;
 																						}
 																					}
+																					*/
 																					?>
 																				</div>
 																			</div>
 																		</div>
+																		-->
 																		<div class="col-md-2">
 																			<label for="VendaBalcaoPreco">VendaBalcao?</label><br>
 																			<div class="form-group">
@@ -352,15 +362,6 @@
 																				</div>
 																			</div>
 																		</div>
-																		<div class="col-md-2 text-right"></div>											
-																		
-																		<div class="col-md-1 text-right">
-																			<label><br></label><br>
-																			<button type="button" id="<?php echo $i ?>" class="remove_field3 btn btn-danger">
-																				<span class="glyphicon glyphicon-trash"></span>
-																			</button>
-																		</div>
-																		
 																	</div>
 																</div>	
 															</div>		
@@ -394,21 +395,21 @@
 														<?php if ($metodo != 4 && $metodo != 6) { ?>
 															<?php if ($metodo == 7) { ?>
 																<div class="col-md-2">
-																<label >Adicionar Preço</label><br>
+																<label >Preço</label><br>
 																	<a class="btn btn-md btn-danger btn-block"  name="submeter2" id="submeter2" onclick="adiciona_precos()">
 																		<span class="glyphicon glyphicon-plus"></span> Adicionar
 																	</a>
 																</div>
 															<?php } ?>
 															<div class="col-md-2">
-																<label >Salvar Alterações.</label><br>
+																<label >Alterações</label><br>
 																<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
 																	<span class="glyphicon glyphicon-save"></span> Salvar
 																</button>
 															</div>
 															<?php if ($metodo == 2) { ?>	
 																<div class="col-md-2">
-																	<label >Excluir.</label><br>
+																	<label >Produto</label><br>
 																	<button  type="button" class="btn btn-md btn-danger btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 																		<span class="glyphicon glyphicon-trash"></span> Excluir
 																	</button>
@@ -490,29 +491,35 @@
 														<?php } ?>
 														<?php if ($metodo == 4) { ?>
 															<div class="col-md-2">
+																<label >Produto</label><br>
 																<a class="btn btn-warning btn-block" href="<?php echo base_url() . 'produtos/alterar2/' . $produtos['idTab_Produtos'] ?>" role="button">
-																	<span class="glyphicon glyphicon-edit"></span> Editar Produto
+																	<span class="glyphicon glyphicon-edit"></span> Editar
 																</a>
 															</div>
 															<div class="col-md-2">
+																<label >Preços e Promoções</label><br>
 																<a class="btn btn-success btn-block" href="<?php echo base_url() . 'produtos/tela_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
-																	<span class="glyphicon glyphicon-usd"></span> Preços e Promoções
+																	<span class="glyphicon glyphicon-usd"></span> Ver
 																</a>
 															</div>
 														<?php }elseif($metodo == 6){ ?>
 															<div class="col-md-2">
+																<label >Preço</label><br>
 																<a class="btn btn-danger btn-block" href="<?php echo base_url() . 'produtos/alterar_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
-																	<span class="glyphicon glyphicon-edit"></span> Cad./Edit. Preço
+																	<span class="glyphicon glyphicon-edit"></span> Cadastrar / Editar
 																</a>
 															</div>
+															<!--
 															<div class="col-md-2">
-																<a class="btn btn-danger btn-block" href="<?php echo base_url() . 'promocao/cadastrar/' ?>" role="button">
+																<a class="btn btn-danger btn-block" href="<?php /*echo base_url() . 'promocao/cadastrar/' */?>" role="button">
 																	<span class="glyphicon glyphicon-edit"></span> Cad./Edit. Promoção
 																</a>
 															</div>
+															-->
 															<div class="col-md-2">
+																<label >Produto</label><br>
 																<a class="btn btn-info btn-block" href="<?php echo base_url() . 'produtos/tela/' . $produtos['idTab_Produtos'] ?>" role="button">
-																	<span class="glyphicon glyphicon-pencil"></span> Ver Produto
+																	<span class="glyphicon glyphicon-pencil"></span> Ver 
 																</a>
 															</div>
 														<?php } ?>
@@ -543,6 +550,7 @@
 														</div>
 														<?php } else { ?>
 														<div class="col-md-2">
+															<label >Alterações</label><br>
 															<button class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." type="submit">
 																<span class="glyphicon glyphicon-save"></span> Salvar
 															</button>

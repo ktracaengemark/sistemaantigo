@@ -146,6 +146,7 @@
 																</div>
 															</div>
 															<div class="row">
+																<!--
 																<div class="col-md-2">
 																	<label for="AtivoPreco">Ativo?</label><br>
 																	<?php if ($metodo == 6) { ?>
@@ -154,6 +155,7 @@
 																		<div class="form-group">
 																			<div class="btn-group" data-toggle="buttons">
 																				<?php
+																				/*
 																				foreach ($select['AtivoPreco'] as $key => $row) {
 																					(!$valor['AtivoPreco']) ? $valor['AtivoPreco'] = 'N' : FALSE;
 
@@ -173,11 +175,13 @@
 																						;
 																					}
 																				}
+																				*/
 																				?>
 																			</div>
 																		</div>
 																	<?php } ?>	
 																</div>
+																-->
 																<div class="col-md-2">
 																	<label for="VendaBalcaoPreco">VendaBalcao?</label><br>
 																	<?php if ($metodo == 6) { ?>

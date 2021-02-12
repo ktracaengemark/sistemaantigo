@@ -3094,23 +3094,14 @@ function adiciona_precos() {
 							<textarea type="text" class="form-control" id="Convdesc'+pt+'"\
 									  name="Convdesc'+pt+'" value=""></textarea>\
 						</div>\
+						<div class="col-md-1 text-right">\
+							<label><br></label><br>\
+							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\
+								<span class="glyphicon glyphicon-trash"></span>\
+							</button>\
+						</div>\
 					</div>\
 					<div class="row">\
-						<div class="col-md-2">\
-							<label for="AtivoPreco">Ativo?</label><br>\
-							<div class="form-group">\
-								<div class="btn-group" data-toggle="buttons">\
-									<label class="btn btn-warning active" name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'N">\
-									<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
-										 autocomplete="off" value="N" checked>Não\
-									</label>\
-									<label class="btn btn-default" name="radio_AtivoPreco'+pt+'" id="radio_AtivoPreco'+pt+'S">\
-									<input type="radio" name="AtivoPreco'+pt+'" id="radiogeraldinamico"\
-										 autocomplete="off" value="S">Sim\
-									</label>\
-								</div>\
-							</div>\
-						</div>\
 						<div class="col-md-2">\
 							<label for="VendaBalcaoPreco">VendaBalcao?</label><br>\
 							<div class="form-group">\
@@ -3140,13 +3131,6 @@ function adiciona_precos() {
 									</label>\
 								</div>\
 							</div>\
-						</div>\
-						<div class="col-md-2 text-right"></div>\
-						<div class="col-md-1 text-right">\
-							<label><br></label><br>\
-							<button type="button" id="'+pt+'" class="remove_field3 btn btn-danger">\
-								<span class="glyphicon glyphicon-trash"></span>\
-							</button>\
 						</div>\
 					</div>\
 				</div>\
