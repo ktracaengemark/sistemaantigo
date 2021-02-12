@@ -23,7 +23,7 @@ $result = mysql_query(
 			T.Prod_Serv,
 			TOP2.Opcao,
 			TOP1.Opcao,
-			CONCAT(IFNULL(T.Nome_Prod,"")," - ",IFNULL(TOP1.Opcao,"")," - ",IFNULL(TOP2.Opcao,"")) AS NomeProduto
+			CONCAT(IFNULL(T.Nome_Prod,"")) AS NomeProduto
         FROM
             Tab_' . $_GET['tabela'] . ' AS T
 				LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = T.Opcao_Atributo_2

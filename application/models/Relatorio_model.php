@@ -3706,11 +3706,13 @@ exit();*/
 				TV.idTab_Valor,
 				TV.Desconto,
 				TV.ValorProduto,
+				TV.Convdesc,
 				TV.ComissaoVenda,
 				TV.AtivoPreco,
 				TV.VendaBalcaoPreco,
 				TV.VendaSitePreco,
 				TV.idTab_Promocao,
+				TV.TempoDeEntrega,
 				TDS.idTab_Desconto,
 				TDS.Desconto,
 				TPM.idTab_Promocao,
@@ -3787,10 +3789,10 @@ exit();*/
 					$row->AtivoPreco = "";
 				}
 				if($row->ValorProduto != 0){
-					$row->ValorProduto = "R$" . number_format($row->ValorProduto, 2, ',', '.');
+					$row->ValorProduto = number_format($row->ValorProduto, 2, ',', '.');
 				}
 				if($row->ComissaoVenda != 0.00){
-					$row->ComissaoVenda = number_format($row->ComissaoVenda, 2, ',', '.') . " %";
+					$row->ComissaoVenda = number_format($row->ComissaoVenda, 2, ',', '.');
 				}else{
 					$row->ComissaoVenda = "";
 				}

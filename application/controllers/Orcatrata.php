@@ -214,6 +214,7 @@ class Orcatrata extends CI_Controller {
 				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
 				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
 				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+				$data['servico'][$j]['PrazoProduto'] = $this->input->post('PrazoServico' . $i);
                 $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
                 $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
 				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
@@ -247,7 +248,8 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Produto' . $i);
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
 				$data['produto'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Produto' . $i);
-                $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);                
+                $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);
+                $data['produto'][$j]['PrazoProduto'] = $this->input->post('PrazoProduto' . $i);                
 				$data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
@@ -1183,6 +1185,7 @@ class Orcatrata extends CI_Controller {
 				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
 				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
 				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+				$data['servico'][$j]['PrazoProduto'] = $this->input->post('PrazoServico' . $i);
                 $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
                 $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
 				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
@@ -1217,6 +1220,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
 				$data['produto'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Produto' . $i);
                 $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);
+                $data['produto'][$j]['PrazoProduto'] = $this->input->post('PrazoProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
 				$data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
@@ -2166,6 +2170,7 @@ class Orcatrata extends CI_Controller {
 				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
 				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
 				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+				$data['servico'][$j]['PrazoProduto'] = $this->input->post('PrazoServico' . $i);
                 $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
                 $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
 				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
@@ -2200,7 +2205,8 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['idTab_Valor_Produto'] = $this->input->post('idTab_Valor_Produto' . $i);
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
 				$data['produto'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Produto' . $i);
-                $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);                
+                $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);
+                $data['produto'][$j]['PrazoProduto'] = $this->input->post('PrazoProduto' . $i);                
 				$data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
@@ -2396,7 +2402,7 @@ class Orcatrata extends CI_Controller {
 						($data['produto'][$j]['ConcluidoProduto'] == 'S') ? $data['div']['ConcluidoProduto' . $j] = '' : $data['div']['ConcluidoProduto' . $j] = 'style="display: none;"';
 
 						///talvez tenha que retirar esta linha///
-						$data['produto'][$j]['NomeProduto'] = $data['produto'][$j]['Produto'];
+						//$data['produto'][$j]['NomeProduto'] = $data['produto'][$j]['Produto'];
 					}
 
                 }
@@ -3739,6 +3745,7 @@ class Orcatrata extends CI_Controller {
 				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
 				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
 				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+				$data['servico'][$j]['PrazoProduto'] = $this->input->post('PrazoServico' . $i);
                 $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
                 $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
 				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
@@ -3774,6 +3781,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
 				$data['produto'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Produto' . $i);
                 $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);
+                $data['produto'][$j]['PrazoProduto'] = $this->input->post('PrazoProduto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
@@ -3964,7 +3972,7 @@ class Orcatrata extends CI_Controller {
 						($data['produto'][$j]['ConcluidoProduto'] == 'S') ? $data['div']['ConcluidoProduto' . $j] = '' : $data['div']['ConcluidoProduto' . $j] = 'style="display: none;"';
 						
 						///esta linha deve ser retirada após correção dos nomes dos pedidos antigos///
-						$data['produto'][$j]['NomeProduto'] = $data['produto'][$j]['Produto'];
+						//$data['produto'][$j]['NomeProduto'] = $data['produto'][$j]['Produto'];
 					}
 
                 }
@@ -5304,6 +5312,7 @@ class Orcatrata extends CI_Controller {
 				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
 				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
 				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+				$data['servico'][$j]['PrazoProduto'] = $this->input->post('PrazoServico' . $i);
                 $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
                 $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
 				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
@@ -5339,6 +5348,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
 				$data['produto'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Produto' . $i);
                 $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);
+                $data['produto'][$j]['PrazoProduto'] = $this->input->post('PrazoProduto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
@@ -5532,7 +5542,7 @@ class Orcatrata extends CI_Controller {
 						($data['produto'][$j]['ConcluidoProduto'] == 'S') ? $data['div']['ConcluidoProduto' . $j] = '' : $data['div']['ConcluidoProduto' . $j] = 'style="display: none;"';
 
 						///esta linha deve ser retirada após correção dos nomes dos pedidos antigos///
-						$data['produto'][$j]['NomeProduto'] = $data['produto'][$j]['Produto'];
+						//$data['produto'][$j]['NomeProduto'] = $data['produto'][$j]['Produto'];
 					}
 
                 }
@@ -6544,6 +6554,7 @@ class Orcatrata extends CI_Controller {
 				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
 				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
 				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+				$data['servico'][$j]['PrazoProduto'] = $this->input->post('PrazoServico' . $i);
                 $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
                 $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
 				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
@@ -6579,6 +6590,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
 				$data['produto'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Produto' . $i);
                 $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);
+                $data['produto'][$j]['PrazoProduto'] = $this->input->post('PrazoProduto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
@@ -6752,7 +6764,7 @@ class Orcatrata extends CI_Controller {
 						($data['produto'][$j]['ConcluidoProduto'] == 'S') ? $data['div']['ConcluidoProduto' . $j] = '' : $data['div']['ConcluidoProduto' . $j] = 'style="display: none;"';
 
 						///esta linha deve ser retirada após correção dos nomes dos pedidos antigos///
-						$data['produto'][$j]['NomeProduto'] = $data['produto'][$j]['Produto'];
+						//$data['produto'][$j]['NomeProduto'] = $data['produto'][$j]['Produto'];
 					}
 
                 }
@@ -8101,6 +8113,7 @@ class Orcatrata extends CI_Controller {
 				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
 				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
 				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+				$data['servico'][$j]['PrazoProduto'] = $this->input->post('PrazoServico' . $i);
                 $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
                 $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
 				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
@@ -8135,6 +8148,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
 				$data['produto'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Produto' . $i);
                 $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);
+                $data['produto'][$j]['PrazoProduto'] = $this->input->post('PrazoProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
 				$data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
@@ -9129,6 +9143,7 @@ class Orcatrata extends CI_Controller {
 				$data['servico'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Servico' . $i);
 				$data['servico'][$j]['NomeProduto'] = $this->input->post('NomeServico' . $i);
 				$data['servico'][$j]['ComissaoProduto'] = $this->input->post('ComissaoServico' . $i);
+				$data['servico'][$j]['PrazoProduto'] = $this->input->post('PrazoServico' . $i);
                 $data['servico'][$j]['ValorProduto'] = $this->input->post('ValorServico' . $i);
                 $data['servico'][$j]['QtdProduto'] = $this->input->post('QtdServico' . $i);
 				$data['servico'][$j]['QtdIncrementoProduto'] = $this->input->post('QtdIncrementoServico' . $i);
@@ -9164,6 +9179,7 @@ class Orcatrata extends CI_Controller {
 				$data['produto'][$j]['idTab_Produtos_Produto'] = $this->input->post('idTab_Produtos_Produto' . $i);
 				$data['produto'][$j]['Prod_Serv_Produto'] = $this->input->post('Prod_Serv_Produto' . $i);
                 $data['produto'][$j]['ComissaoProduto'] = $this->input->post('ComissaoProduto' . $i);
+                $data['produto'][$j]['PrazoProduto'] = $this->input->post('PrazoProduto' . $i);
                 $data['produto'][$j]['ValorProduto'] = $this->input->post('ValorProduto' . $i);
 				$data['produto'][$j]['NomeProduto'] = $this->input->post('NomeProduto' . $i);
                 $data['produto'][$j]['QtdProduto'] = $this->input->post('QtdProduto' . $i);
@@ -9335,7 +9351,7 @@ class Orcatrata extends CI_Controller {
 						($data['produto'][$j]['ConcluidoProduto'] == 'S') ? $data['div']['ConcluidoProduto' . $j] = '' : $data['div']['ConcluidoProduto' . $j] = 'style="display: none;"';
 
 						///esta linha deve ser retirada após correção dos nomes dos pedidos antigos///
-						$data['produto'][$j]['NomeProduto'] = $data['produto'][$j]['Produto'];
+						//$data['produto'][$j]['NomeProduto'] = $data['produto'][$j]['Produto'];
 					}
 
                 }

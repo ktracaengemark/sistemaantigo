@@ -3895,6 +3895,7 @@ function buscaValor1Tabelas(id, campo, tabela, num, campo2) {
 						//""ou posso usar assim, passando diretamente o qtdinc do id ""
 						$('#Nome'+campo2+num).val(data[i].nomeprod);
 						$('#Comissao'+campo2+num).val(data[i].comissaoprod);
+						$('#Prazo'+campo2+num).val(data[i].prazoprod);
 						$('#QtdIncremento'+campo2+num).val(data[i].qtdinc);
 						$('#Qtd'+campo2+num).val(data[i].qtdprod);
 						$('#idTab_Produtos_'+campo2+num).val(data[i].id_produto);
@@ -4619,7 +4620,11 @@ $(document).ready(function () {
 										</div>\
 									</div>\
 									<div class="row">\
-										<div class="col-md-12">\
+										<div class="col-md-2">\
+											<label for="PrazoProduto">Prazo(Dias)</label><br>\
+											<input type="text" class="form-control Numero" maxlength="3" placeholder="0" id="PrazoProduto'+pc+'" name="PrazoProduto'+pc+'" value="0" >\
+										</div>\
+										<div class="col-md-10">\
 											<label for="ObsProduto">Observacao</label><br>\
 											<input type="text" class="form-control" maxlength="200" placeholder="Observacao:" id="ObsProduto'+pc+'"\
 											   name="ObsProduto'+pc+'" value=""></input>\
@@ -4863,7 +4868,11 @@ $(document).ready(function () {
 										</div>\
 									</div>\
 									<div class="row">\
-										<div class="col-md-12">\
+										<div class="col-md-2">\
+											<label for="PrazoServico">Prazo(Dias)</label><br>\
+											<input type="text" class="form-control Numero" maxlength="3" placeholder="0" id="PrazoServico'+ps+'" name="PrazoServico'+ps+'" value="0">\
+										</div>\
+										<div class="col-md-10">\
 											<label for="ObsServico">Observacao</label><br>\
 											<input type="text" class="form-control " maxlength="200" id="ObsServico'+ps+'" placeholder="Observacao"\
 												name="ObsServico'+ps+'" value="">\

@@ -293,7 +293,11 @@
 																				</div>
 																			</div>
 																			<div class="row">
-																				<div class="col-md-12">
+																				<div class="col-md-2">
+																					<label for="PrazoProduto">Prazo(Dias)</label>
+																					<input type="text" class="form-control Numero" readonly="" maxlength="3" placeholder="0" id="PrazoProduto<?php echo $i ?>" name="PrazoProduto<?php echo $i ?>" value="<?php echo $produto[$i]['PrazoProduto'] ?>">
+																				</div>
+																				<div class="col-md-10">
 																					<label for="ObsProduto">Observacao</label>
 																					<input type="text" class="form-control" readonly="" id="ObsProduto<?php echo $i ?>" maxlength="200" placeholder="Observacao"
 																							name="ObsProduto<?php echo $i ?>" value="<?php echo $produto[$i]['ObsProduto'] ?>"></input>
@@ -476,7 +480,11 @@
 																				</div>
 																			</div>
 																			<div class="row">
-																				<div class="col-md-12">
+																				<div class="col-md-2">
+																					<label for="PrazoServico">Prazo(Dias)</label>
+																					<input type="text" class="form-control Numero" readonly="" maxlength="3" placeholder="0"  id="PrazoServico<?php echo $i ?>" name="PrazoServico<?php echo $i ?>" value="<?php echo $servico[$i]['PrazoProduto'] ?>">
+																				</div>
+																				<div class="col-md-10">
 																					<label for="ObsServico">Observacao</label>
 																					<input type="text" class="form-control" readonly="" maxlength="200" id="ObsServico<?php echo $i ?>" placeholder="Observacao"
 																							 name="ObsServico<?php echo $i ?>" value="<?php echo $servico[$i]['ObsProduto'] ?>">
