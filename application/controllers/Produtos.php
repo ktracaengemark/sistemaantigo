@@ -13,7 +13,7 @@ class Produtos extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
       
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Produtos_model', 'Prodaux1_model', 'Prodaux2_model', 'Prodaux3_model', 'Prodaux4_model','Fornecedor_model', 'Fornecedor_model', 'Formapag_model', 'Relatorio_model'));
+        $this->load->model(array('Basico_model', 'Produtos_model', 'Fornecedor_model', 'Fornecedor_model', 'Formapag_model', 'Relatorio_model'));
         $this->load->driver('session');
 
         
@@ -523,8 +523,10 @@ class Produtos extends CI_Controller {
         } else {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produtos ####
+			
 			$data['produtos']['Nome_Prod'] = trim(mb_strtoupper($data['produtos']['Nome_Prod'], 'ISO-8859-1'));
 			$data['produtos']['Produtos_Descricao'] = trim(mb_strtoupper($data['produtos']['Produtos_Descricao'], 'ISO-8859-1'));
+			$data['produtos']['Prod_Serv'] = $_SESSION['Produtos']['TipoCatprod'];
 			$data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produtos']);
             $data['update']['produtos']['campos'] = array_keys($data['produtos']);
             $data['update']['produtos']['auditoriaitem'] = $this->basico->set_log(
