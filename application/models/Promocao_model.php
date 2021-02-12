@@ -167,6 +167,8 @@ class Promocao_model extends CI_Model {
                 foreach ($query->result() as $row) {
 					$row->DataInicioProm = $this->basico->mascara_data($row->DataInicioProm, 'barras');
 					$row->DataFimProm = $this->basico->mascara_data($row->DataFimProm, 'barras');
+					$row->VendaBalcao = $this->basico->mascara_palavra_completa($row->VendaBalcao, 'NS');
+					$row->VendaSite = $this->basico->mascara_palavra_completa($row->VendaSite, 'NS');
                 }
                 $query = $query->result_array();
                 return $query;
