@@ -48,14 +48,15 @@ class Promocao extends CI_Controller {
             $data['msg'] = '';
 		
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
-			//'Cadastrar',
+			'Cadastrar',
 			//'TipoCatprod',
 			'PTCount2',
         ), TRUE));
 		
         $data['promocao'] = quotes_to_entities($this->input->post(array(
             #### Tab_Promocao ####
-            'idTab_Promocao',  
+            'idTab_Promocao', 
+            'idTab_Catprom',  
             'Promocao',  
             'Descricao',
 			'DataInicioProm',
@@ -119,9 +120,9 @@ class Promocao extends CI_Controller {
 			
         }		
 		
-		//$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();	
-		//$data['select']['TipoCatprod'] = $this->Basico_model->select_prod_serv();	
-		//$data['select']['idTab_Catprod'] = $this->Basico_model->select_catprod();		
+		$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();	
+		//$data['select']['TipoCatprod'] = $this->Basico_model->select_prod_serv();
+		$data['select']['idTab_Catprom'] = $this->Basico_model->select_catprom();		
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_produto_promocao();
 		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
@@ -149,7 +150,7 @@ class Promocao extends CI_Controller {
 
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
-		/*
+		
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		
 		$data['radio'] = array(
@@ -157,7 +158,9 @@ class Promocao extends CI_Controller {
         );
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';		
-		*/
+
+		$data['q1'] = $this->Promocao_model->list_categoria($_SESSION['log'], TRUE);
+		$data['list1'] = $this->load->view('promocao/list_categoria', $data, TRUE);			
         
 		$data['q_promocoes'] = $this->Promocao_model->list_promocoes($_SESSION['log'], TRUE);
 		$data['list_promocoes'] = $this->load->view('promocao/list_promocoes', $data, TRUE);		
@@ -168,10 +171,9 @@ class Promocao extends CI_Controller {
 		$this->form_validation->set_rules('Descricao', 'Descrição', 'required|trim');
 		$this->form_validation->set_rules('DataInicioProm', 'Data do Inicio', 'required|trim|valid_date');
 		$this->form_validation->set_rules('DataFimProm', 'Data do Fim', 'required|trim|valid_date');
-		$this->form_validation->set_rules('PTCount2', 'A promoção deve possuir , pelo menos, 1 produto!', 'trim|valid_promocao');	
-		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
-		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		//$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');	
+		$this->form_validation->set_rules('PTCount2', 'A promoção deve possuir , pelo menos, 1 produto!', 'trim|valid_promocao');
+		$this->form_validation->set_rules('idTab_Catprom', 'Categoria', 'required|trim');	
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');	
 		/*
           echo '<br>';
           echo "<pre>";
@@ -293,14 +295,15 @@ class Promocao extends CI_Controller {
             $data['msg'] = '';
 		
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
-			//'Cadastrar',
+			'Cadastrar',
 			//'TipoCatprod',
 			'PTCount2',
         ), TRUE));
 		
         $data['promocao'] = quotes_to_entities($this->input->post(array(
             #### Tab_Promocao ####
-            'idTab_Promocao',			
+            'idTab_Promocao',
+            'idTab_Catprom',			
             'Promocao', 
             'Descricao',
 			'DataInicioProm',
@@ -408,7 +411,9 @@ class Promocao extends CI_Controller {
 		}
 		//exit();
 		
+		$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();	
 		$data['select']['idTab_Produtos'] = $this->Basico_model->select_produto_promocao();
+		$data['select']['idTab_Catprom'] = $this->Basico_model->select_catprom();
 		$data['select']['VendaBalcao'] = $this->Basico_model->select_status_sn();
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();
 		//$data['select']['AtivoPreco'] = $this->Basico_model->select_status_sn();
@@ -435,7 +440,18 @@ class Promocao extends CI_Controller {
 
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
-
+		
+ 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+			
+		$data['q1'] = $this->Promocao_model->list_categoria($_SESSION['log'], TRUE);
+		$data['list1'] = $this->load->view('promocao/list_categoria', $data, TRUE);			
+        
 		$data['q_promocoes'] = $this->Promocao_model->list_promocoes($_SESSION['log'], TRUE);
 		$data['list_promocoes'] = $this->load->view('promocao/list_promocoes', $data, TRUE);
 		
@@ -449,6 +465,8 @@ class Promocao extends CI_Controller {
 		$this->form_validation->set_rules('DataInicioProm', 'Data do Inicio', 'required|trim|valid_date');
 		$this->form_validation->set_rules('DataFimProm', 'Data do Fim', 'required|trim|valid_date');
 		$this->form_validation->set_rules('PTCount2', 'A promoção deve possuir, pelo menos, 1 produto! Confira e Salve!', 'trim|valid_promocao');
+		$this->form_validation->set_rules('idTab_Catprom', 'Categoria', 'required|trim');	
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {

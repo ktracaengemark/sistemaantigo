@@ -80,9 +80,11 @@ class Promocao_model extends CI_Model {
     public function get_promocao($data) {
         $query = $this->db->query('
 			SELECT  
-				TPM.*
+				TPM.*,
+				TCT.*
 			FROM 
 				Tab_Promocao AS TPM
+					LEFT JOIN Tab_Catprom AS TCT ON TCT.idTab_Catprom = TPM.idTab_Catprom
 			WHERE 
 				TPM.idTab_Promocao = ' . $data . '
 		');
@@ -135,14 +137,63 @@ class Promocao_model extends CI_Model {
 
         return $query;
     }	
-	
+
+	public function list_categoria($data, $x) {
+		
+		//$data['idSis_Empresa'] = ($data['idSis_Empresa'] != 0) ? ' AND TPS.idSis_Empresa = ' . $data['idSis_Empresa'] : FALSE;
+			
+			/*
+			echo "<pre>";
+			print_r($data['idSis_Empresa']);
+			echo "</pre>";
+			exit();
+			*/
+		
+		
+        $query = $this->db->query('
+			SELECT 
+				TCT.*
+			FROM 
+				Tab_Catprom AS TCT
+			WHERE 
+                TCT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			ORDER BY  
+				TCT.Catprom ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                #foreach ($query->result_array() as $row) {
+                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                #}
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+    	
 	public function list_promocoes($data, $x) {
 
         $query = $this->db->query('
 			SELECT 
-				TPM.*
+				TPM.*,
+				TCT.*
 			FROM 
 				Tab_Promocao AS TPM
+					LEFT JOIN Tab_Catprom AS TCT ON TCT.idTab_Catprom = TPM.idTab_Catprom
 			WHERE 
                 TPM.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				TPM.Desconto = "2"

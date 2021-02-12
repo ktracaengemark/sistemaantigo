@@ -3568,6 +3568,44 @@ if (isset($data) && $data) {
         return $array;
     }
 
+	public function select_catprom($data = FALSE) {
+	
+        if ($data === TRUE) {
+            $array = $this->db->query('
+            SELECT
+				TCAT.idTab_Catprom,
+				TCAT.TipoCatprom,
+                CONCAT(IFNULL(TCAT.Catprod,"")) AS Catprod
+            FROM 
+                Tab_Catprom AS TCAT
+            WHERE
+				TCAT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY 
+				TCAT.Catprom ASC
+    ');
+        } else {
+            $query = $this->db->query('
+            SELECT
+				TCAT.idTab_Catprom,
+				TCAT.TipoCatprom,
+                CONCAT(IFNULL(TCAT.Catprom,"")) AS Catprom
+            FROM 
+                Tab_Catprom AS TCAT
+            WHERE
+				TCAT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' 
+			ORDER BY 
+				TCAT.Catprom ASC
+    ');
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Catprom] = $row->Catprom;
+            }
+        }
+
+        return $array;
+    }
+
 	public function select_catprod($data = FALSE) {
 	
         if ($data === TRUE) {

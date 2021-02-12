@@ -54,6 +54,29 @@
 													<?php } ?>		
 												</div>
 												<div class="col-md-3">
+													<label for="idTab_Catprom">Categoria *</label>
+													<?php if ($metodo != 3) { ?>
+														<select data-placeholder="Selecione uma Categoria..." class="form-control Chosen" 
+														id="idTab_Catprom" name="idTab_Catprom">
+															<option value="">-- Selecione uma Categoria --</option>
+															<?php
+																foreach ($select['idTab_Catprom'] as $key => $row) {
+																	if ($promocao['idTab_Catprom'] == $key) {
+																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																		echo '<option value="' . $key . '">' . $row . '</option>';
+																	}
+																}
+															?>
+														</select>
+														<?php } else { ?>
+														<input type="hidden" id="idTab_Catprom" name="idTab_Catprom" value="<?php echo $_SESSION['Promocao']['idTab_Catprom']; ?>">
+														<input class="form-control"readonly="" value="<?php echo $_SESSION['Promocao']['Catprom']; ?>">
+													<?php } ?>
+													
+													<?php echo form_error('idTab_Catprom'); ?>
+												</div>
+												<div class="col-md-3">
 													<label for="Promocao">Título / Promoção:*</label><br>
 													<?php if ($metodo == 3) { ?>
 														<input type="text" class="form-control" readonly="" value="<?php echo $_SESSION['Promocao']['Promocao']; ?>">
@@ -71,7 +94,11 @@
 													<?php } ?>
 													<?php echo form_error('Descricao'); ?>
 												</div>
-												
+											</div>	
+										</div>
+										<div class="col-md-12">
+											<div class="form-group">
+												<div class="row">
 													<div class="col-md-2 text-left">
 														<label for="DataInicioProm">Data do Inicio</label>
 														<div class="input-group <?php echo $datepicker; ?>">
@@ -102,198 +129,192 @@
 														</div>
 														<?php echo form_error('DataFimProm'); ?>
 													</div>
-													
-											</div>	
-										</div>
-										
-										<div class="form-group">
+												</div>
+											</div>
 											<div class="row">
-												<div class="col-md-12">			
-													<div class="col-md-2">
-														<div class="panel panel-default">
-															<div class="panel-heading">
-																<div class="row">
-																	<div class="col-md-12 text-left">
-																		<label for="TodoDiaProm">Todo Dia?</label><br>
-																		<?php if ($metodo == 3) { ?>
-																			<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Promocao']['TodoDiaProm'] ?>">
-																		<?php }else{ ?>
-																			<div class="btn-group" data-toggle="buttons">
-																				<?php
-																				foreach ($select['TodoDiaProm'] as $key => $row) {
-																					if (!$promocao['TodoDiaProm'])$promocao['TodoDiaProm'] = 'S';
-																					if($metodo == 1){
-																						$funcao = 'onchange="adicionaDias(this.value)"';
-																					}else{
-																						$funcao = '';
-																					}
-
-																					($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-
-																					if ($promocao['TodoDiaProm'] == $key) {
-																						echo ''
-																						. '<label class="btn btn-warning active" name="TodoDiaProm_' . $hideshow . '">'
-																						. '<input type="radio" name="TodoDiaProm" id="' . $hideshow . '" '
-																						. '' . $funcao . ''
-																						. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																						. '</label>'
-																						;
-																					} else {
-																						echo ''
-																						. '<label class="btn btn-default" name="TodoDiaProm_' . $hideshow . '">'
-																						. '<input type="radio" name="TodoDiaProm" id="' . $hideshow . '" '
-																						. '' . $funcao . ''
-																						. 'autocomplete="off" value="' . $key . '" >' . $row
-																						. '</label>'
-																						;
-																					}
+												<div class="col-md-2">
+													<div class="panel panel-default">
+														<div class="panel-heading">
+															<div class="row">
+																<div class="col-md-12 text-left">
+																	<label for="TodoDiaProm">Todo Dia?</label><br>
+																	<?php if ($metodo == 3) { ?>
+																		<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Promocao']['TodoDiaProm'] ?>">
+																	<?php }else{ ?>
+																		<div class="btn-group" data-toggle="buttons">
+																			<?php
+																			foreach ($select['TodoDiaProm'] as $key => $row) {
+																				if (!$promocao['TodoDiaProm'])$promocao['TodoDiaProm'] = 'S';
+																				if($metodo == 1){
+																					$funcao = 'onchange="adicionaDias(this.value)"';
+																				}else{
+																					$funcao = '';
 																				}
-																				?>
-																			</div>
-																		<?php } ?>	
-																	</div>
+
+																				($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																				if ($promocao['TodoDiaProm'] == $key) {
+																					echo ''
+																					. '<label class="btn btn-warning active" name="TodoDiaProm_' . $hideshow . '">'
+																					. '<input type="radio" name="TodoDiaProm" id="' . $hideshow . '" '
+																					. '' . $funcao . ''
+																					. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																					. '</label>'
+																					;
+																				} else {
+																					echo ''
+																					. '<label class="btn btn-default" name="TodoDiaProm_' . $hideshow . '">'
+																					. '<input type="radio" name="TodoDiaProm" id="' . $hideshow . '" '
+																					. '' . $funcao . ''
+																					. 'autocomplete="off" value="' . $key . '" >' . $row
+																					. '</label>'
+																					;
+																				}
+																			}
+																			?>
+																		</div>
+																	<?php } ?>	
 																</div>
 															</div>
 														</div>
 													</div>
-													<?php if ($metodo == 1) { ?>
-														<div class="col-md-10">
-															<div class="row">
-																<div id="TodoDiaProm" <?php echo $div['TodoDiaProm']; ?>>
-																	<div class="input_fields_dias">
-																		<?php if(1 == 1) { ?>
-																			<?php
-																			for ($i=1; $i <= 7; $i++) {
-																				
-																				if ($i == 1){
-																					$dia_semana = 'SEGUNDA';
-																				}else if($i == 2){
-																					$dia_semana = 'TERCA';
-																				}else if($i == 3){
-																					$dia_semana = 'QUARTA';
-																				}else if($i == 4){
-																					$dia_semana = 'QUINTA';
-																				}else if($i == 5){
-																					$dia_semana = 'SEXTA';
-																				}else if($i == 6){
-																					$dia_semana = 'SABADO';
-																				}else if($i == 7){
-																					$dia_semana = 'DOMINGO';
-																				}
-																			?>
-																			<input type="hidden" name="DiaCount" id="DiaCount" value="<?php echo $count['DiaCount']; ?>"/>
+												</div>
+												<?php if ($metodo == 1) { ?>
+													<div class="col-md-10">
+														<div class="row">
+															<div id="TodoDiaProm" <?php echo $div['TodoDiaProm']; ?>>
+																<div class="input_fields_dias">
+																	<?php if(1 == 1) { ?>
+																		<?php
+																		for ($i=1; $i <= 7; $i++) {
+																			
+																			if ($i == 1){
+																				$dia_semana = 'SEGUNDA';
+																			}else if($i == 2){
+																				$dia_semana = 'TERCA';
+																			}else if($i == 3){
+																				$dia_semana = 'QUARTA';
+																			}else if($i == 4){
+																				$dia_semana = 'QUINTA';
+																			}else if($i == 5){
+																				$dia_semana = 'SEXTA';
+																			}else if($i == 6){
+																				$dia_semana = 'SABADO';
+																			}else if($i == 7){
+																				$dia_semana = 'DOMINGO';
+																			}
+																		?>
+																		<input type="hidden" name="DiaCount" id="DiaCount" value="<?php echo $count['DiaCount']; ?>"/>
 
-																			<?php if ($metodo > 1) { ?>
-																			<input type="hidden" name="idTab_Dia_Prom<?php echo $i ?>" value="<?php echo $dia_promocao[$i]['idTab_Dia_Prom']; ?>"/>
-																			<?php } ?>
-																			<div class="col-md-2">
-																				<div class="panel panel-warning">
-																					<div class="panel-heading">
-																						<div class="row">
-																							<div class="col-md-12">
-																								<?php if ($metodo == 3) { ?>
-																									<label for="Dia_Semana_Prom"><?php echo $_SESSION['Dia_Promocao'][$i]['Dia_Semana_Prom']; ?></label><br>
-																									<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Dia_Promocao'][$i]['Aberto_Prom'] ?>">
-																								<?php }else{ ?>
-																									<label for="Aberto_Prom"><?php echo $dia_semana; ?></label><br>
-																									<div class="btn-group" data-toggle="buttons">
-																										<?php
-																										foreach ($select['Aberto_Prom'] as $key => $row) {
-																											if (!$dia_promocao[$i]['Aberto_Prom'])$dia_promocao[$i]['Aberto_Prom'] = 'N';
-																											($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-																											if ($dia_promocao[$i]['Aberto_Prom'] == $key) {
-																												echo ''
-																												. '<label class="btn btn-warning active" name="Aberto_Prom' . $i . '_' . $hideshow . '">'
-																												. '<input type="radio" name="Aberto_Prom' . $i . '" id="' . $hideshow . '" '
-																												//. 'onchange="carregaAberto_Prom(this.value,this.name,'.$i.')" '
-																												. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																												. '</label>'
-																												;
-																											} else {
-																												echo ''
-																												. '<label class="btn btn-default" name="Aberto_Prom' . $i . '_' . $hideshow . '">'
-																												. '<input type="radio" name="Aberto_Prom' . $i . '" id="' . $hideshow . '" '
-																												//. 'onchange="carregaAberto_Prom(this.value,this.name,'.$i.')" '
-																												. 'autocomplete="off" value="' . $key . '" >' . $row
-																												. '</label>'
-																												;
-																											}
+																		<?php if ($metodo > 1) { ?>
+																		<input type="hidden" name="idTab_Dia_Prom<?php echo $i ?>" value="<?php echo $dia_promocao[$i]['idTab_Dia_Prom']; ?>"/>
+																		<?php } ?>
+																		<div class="col-md-2">
+																			<div class="panel panel-warning">
+																				<div class="panel-heading">
+																					<div class="row">
+																						<div class="col-md-12">
+																							<?php if ($metodo == 3) { ?>
+																								<label for="Dia_Semana_Prom"><?php echo $_SESSION['Dia_Promocao'][$i]['Dia_Semana_Prom']; ?></label><br>
+																								<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Dia_Promocao'][$i]['Aberto_Prom'] ?>">
+																							<?php }else{ ?>
+																								<label for="Aberto_Prom"><?php echo $dia_semana; ?></label><br>
+																								<div class="btn-group" data-toggle="buttons">
+																									<?php
+																									foreach ($select['Aberto_Prom'] as $key => $row) {
+																										if (!$dia_promocao[$i]['Aberto_Prom'])$dia_promocao[$i]['Aberto_Prom'] = 'N';
+																										($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																										if ($dia_promocao[$i]['Aberto_Prom'] == $key) {
+																											echo ''
+																											. '<label class="btn btn-warning active" name="Aberto_Prom' . $i . '_' . $hideshow . '">'
+																											. '<input type="radio" name="Aberto_Prom' . $i . '" id="' . $hideshow . '" '
+																											//. 'onchange="carregaAberto_Prom(this.value,this.name,'.$i.')" '
+																											. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																											. '</label>'
+																											;
+																										} else {
+																											echo ''
+																											. '<label class="btn btn-default" name="Aberto_Prom' . $i . '_' . $hideshow . '">'
+																											. '<input type="radio" name="Aberto_Prom' . $i . '" id="' . $hideshow . '" '
+																											//. 'onchange="carregaAberto_Prom(this.value,this.name,'.$i.')" '
+																											. 'autocomplete="off" value="' . $key . '" >' . $row
+																											. '</label>'
+																											;
 																										}
-																										?>
-																									</div>
-																								<?php } ?>
-																							</div>
+																									}
+																									?>
+																								</div>
+																							<?php } ?>
 																						</div>
 																					</div>
 																				</div>
 																			</div>
-
-																			<?php
-																			}
-																			?>
-																		<?php } ?>	
-																	</div>
-																</div>
-															</div>	
-														</div>												
-													<?php }elseif($metodo >= 2) {?>
-														<div class="col-md-10">
-															<div class="row">
-																<div id="TodoDiaProm" <?php echo $div['TodoDiaProm']; ?>>
-																	<?php for ($i=1; $i <= $count['DiaCount']; $i++) { ?>
-																		<div class="col-md-2">
-																			<input type="hidden" name="DiaCount" id="DiaCount" value="<?php echo $count['DiaCount']; ?>"/>
-																			<?php if ($metodo > 1) { ?>
-																			<input type="hidden" name="idTab_Dia_Prom<?php echo $i ?>" value="<?php echo $dia_promocao[$i]['idTab_Dia_Prom']; ?>"/>
-																			<?php } ?>
-																			<div class="panel panel-default">
-																				<div class="panel-heading">
-																					<div class="row">
-																						<div class="col-md-12">
-																							<label for="Dia_Semana_Prom"><?php echo $_SESSION['Dia_Promocao'][$i]['Dia_Semana_Prom']; ?></label><br>
-																							<?php if ($metodo == 3) { ?>
-																								<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Dia_Promocao'][$i]['Aberto_Prom'] ?>">
-																							<?php }elseif ($metodo == 2) { ?>
-																								
-																									<div class="btn-group" data-toggle="buttons">
-																										<?php
-																										foreach ($select['Aberto_Prom'] as $key => $row) {
-																											(!$dia_promocao[$i]['Aberto_Prom']) ? $dia_promocao[$i]['Aberto_Prom'] = 'S' : FALSE;
-
-																											if ($dia_promocao[$i]['Aberto_Prom'] == $key) {
-																												echo ''
-																												. '<label class="btn btn-warning active" name="radiobutton_Aberto_Prom' . $i . '" id="radiobutton_Aberto_Prom' . $i .  $key . '">'
-																												. '<input type="radio" name="Aberto_Prom' . $i . '" id="radiobuttondinamico" '
-																												. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																												. '</label>'
-																												;
-																											} else {
-																												echo ''
-																												. '<label class="btn btn-default" name="radiobutton_Aberto_Prom' . $i . '" id="radiobutton_Aberto_Prom' . $i .  $key . '">'
-																												. '<input type="radio" name="Aberto_Prom' . $i . '" id="radiobuttondinamico" '
-																												. 'autocomplete="off" value="' . $key . '" >' . $row
-																												. '</label>'
-																												;
-																											}
-																										}
-																										?>
-																									</div>
-																								
-																							<?php } ?>
-																						</div>
-																					</div>
-																				</div>	
-																			</div>
 																		</div>
-																	<?php } ?>
-																</div>	
+
+																		<?php
+																		}
+																		?>
+																	<?php } ?>	
+																</div>
 															</div>
+														</div>	
+													</div>												
+												<?php }elseif($metodo >= 2) {?>
+													<div class="col-md-10">
+														<div class="row">
+															<div id="TodoDiaProm" <?php echo $div['TodoDiaProm']; ?>>
+																<?php for ($i=1; $i <= $count['DiaCount']; $i++) { ?>
+																	<div class="col-md-2">
+																		<input type="hidden" name="DiaCount" id="DiaCount" value="<?php echo $count['DiaCount']; ?>"/>
+																		<?php if ($metodo > 1) { ?>
+																		<input type="hidden" name="idTab_Dia_Prom<?php echo $i ?>" value="<?php echo $dia_promocao[$i]['idTab_Dia_Prom']; ?>"/>
+																		<?php } ?>
+																		<div class="panel panel-default">
+																			<div class="panel-heading">
+																				<div class="row">
+																					<div class="col-md-12">
+																						<label for="Dia_Semana_Prom"><?php echo $_SESSION['Dia_Promocao'][$i]['Dia_Semana_Prom']; ?></label><br>
+																						<?php if ($metodo == 3) { ?>
+																							<input type="text" class="form-control text-left" readonly="" value="<?php echo $_SESSION['Dia_Promocao'][$i]['Aberto_Prom'] ?>">
+																						<?php }elseif ($metodo == 2) { ?>
+																							
+																								<div class="btn-group" data-toggle="buttons">
+																									<?php
+																									foreach ($select['Aberto_Prom'] as $key => $row) {
+																										(!$dia_promocao[$i]['Aberto_Prom']) ? $dia_promocao[$i]['Aberto_Prom'] = 'S' : FALSE;
+
+																										if ($dia_promocao[$i]['Aberto_Prom'] == $key) {
+																											echo ''
+																											. '<label class="btn btn-warning active" name="radiobutton_Aberto_Prom' . $i . '" id="radiobutton_Aberto_Prom' . $i .  $key . '">'
+																											. '<input type="radio" name="Aberto_Prom' . $i . '" id="radiobuttondinamico" '
+																											. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																											. '</label>'
+																											;
+																										} else {
+																											echo ''
+																											. '<label class="btn btn-default" name="radiobutton_Aberto_Prom' . $i . '" id="radiobutton_Aberto_Prom' . $i .  $key . '">'
+																											. '<input type="radio" name="Aberto_Prom' . $i . '" id="radiobuttondinamico" '
+																											. 'autocomplete="off" value="' . $key . '" >' . $row
+																											. '</label>'
+																											;
+																										}
+																									}
+																									?>
+																								</div>
+																							
+																						<?php } ?>
+																					</div>
+																				</div>
+																			</div>	
+																		</div>
+																	</div>
+																<?php } ?>
+															</div>	
 														</div>
-													<?php } ?>
-												</div>
+													</div>
+											<?php } ?>
 											</div>
 										</div>
-										
 										<div class="col-md-12">
 											<div class="row">
 												<div class="panel-body">
@@ -649,28 +670,32 @@
 													<?php if ($metodo > 1) { ?>
 														<?php if ($metodo == 3) { ?>
 															<!--<div class="col-md-1"></div>-->
-															<div class="col-md-2">
+															<div class="col-md-2">	
+																<label >Editar Promoçao</label><br>
 																<a class="btn btn-md btn-warning btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'promocao/alterar/' . $promocao['idTab_Promocao'] ?>" role="button">
-																	<span class="glyphicon glyphicon-edit"></span> Editar Promoçao
+																	<span class="glyphicon glyphicon-edit"></span> Editar
 																</a>
 															</div>
 														<?php }elseif ($metodo == 2) { ?>
 															<!--<div class="col-md-1"></div>-->
 															<?php if ($metodo == 2) { ?>
-																<div class="col-md-2">
+																<div class="col-md-2">	
+																	<label >Adicionar Produto</label><br>
 																	<a class="btn btn-md btn-danger btn-block" name="submeter5" id="submeter5" onclick="adiciona_item_promocao()">
-																		<span class="glyphicon glyphicon-plus"></span> Adiciona Produto
+																		<span class="glyphicon glyphicon-plus"></span> Adicionar
 																	</a>
 																</div>
 															<?php } ?>
-															<div class="col-md-2">
+															<div class="col-md-2">	
+																<label >Salvar Alteracoes</label><br>
 																<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
 																	<span class="glyphicon glyphicon-save"></span> Salvar
 																</button>
 															</div>
-															<div class="col-md-2 text-right">
+															<div class="col-md-2 text-left">	
+																<label >Excluir Promoção</label><br>
 																<button  type="button" class="btn btn-md btn-danger btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-																	<span class="glyphicon glyphicon-trash"></span> Excluir Promoção
+																	<span class="glyphicon glyphicon-trash"></span> Excluir
 																</button>
 															</div>
 														<?php } ?>	
@@ -701,17 +726,93 @@
 														</div>
 													<?php } else { ?>
 														<!--<div class="col-md-1"></div>-->
-														<div class="col-md-2">
+														<div class="col-md-2">	
+															<label >Adicionar Produto</label><br>
 															<a class="btn btn-md btn-danger btn-block" name="submeter5" id="submeter5" onclick="adiciona_item_promocao()">
-																<span class="glyphicon glyphicon-plus"></span> Adiciona Produto
+																<span class="glyphicon glyphicon-plus"></span> Adicionar 
 															</a>
 														</div>
-														<div class="col-md-2">
+														<div class="col-md-2">	
+															<label >Salvar Alteracoes</label><br>
 															<button class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." type="submit">
 																<span class="glyphicon glyphicon-save"></span> Salvar
 															</button>
 														</div>
 													<?php } ?>
+													<?php if ($metodo != 3) { ?>
+														<div class="col-md-2 text-left">
+															<label for="Cadastrar">Encontrou?</label><br>
+															<div class="btn-group" data-toggle="buttons">
+																<?php
+																	foreach ($select['Cadastrar'] as $key => $row) {
+																		if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
+																		
+																		($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																		
+																		if ($cadastrar['Cadastrar'] == $key) {
+																			echo ''
+																			. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
+																			. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																			. 'onchange="codigo()" '
+																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																			. '</label>'
+																			;
+																			} else {
+																			echo ''
+																			. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
+																			. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																			. 'onchange="codigo()" '
+																			. 'autocomplete="off" value="' . $key . '" >' . $row
+																			. '</label>'
+																			;
+																		}
+																	}
+																?>
+																
+															</div>
+														</div>
+														<div class="col-md-4 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+															<div class="row">
+																<div class="col-md-6 text-left">	
+																	<label >Categoria</label><br>
+																	<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addCatpromModal">
+																		Cad./Edit
+																	</button>
+																</div>	
+																<div class="col-md-6 text-left">
+																	<label >Recarregar</label><br>
+																	<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+																		<span class="glyphicon glyphicon-refresh"></span>Recarregar
+																	</button>
+																</div>	
+																<span id="msg"></span>
+															</div>	
+															<?php echo form_error('Cadastrar'); ?>
+														</div>
+													<?php } ?>	
+													<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header bg-success text-center">
+																	<h4 class="modal-title" id="visulUsuarioModalLabel">Cadastrado realizado com sucesso!</h4>
+																	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-footer">
+																	<div class="col-md-6">	
+																		<button class="btn btn-success btn-block" name="botaoFechar2" id="botaoFechar2" onclick="DesabilitaBotaoFechar(this.name)" value="0" type="submit">
+																			<span class="glyphicon glyphicon-filter"></span> Fechar
+																		</button>
+																		<div class="col-md-12 alert alert-warning aguardar2" role="alert" >
+																			Aguarde um instante! Estamos processando sua solicitação!
+																		</div>
+																	</div>
+																	<!--<button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>-->
+																</div>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -732,4 +833,96 @@
 			</form>
 		</div>
 	</div>
-</div>	
+</div>
+
+<div id="addCatpromModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addCatpromModalLabel">Cadastrar Categoria</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-catprom"></span>
+				<form method="post" id="insert_catprom_form">
+					<!--
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Tipo</label>
+						<div class="col-sm-10">
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+							id="TipoCatprom" name="TipoCatprom">
+								<option value="">-- Selecione uma opção --</option>
+								<?php
+									/*
+									foreach ($select['TipoCatprom'] as $key => $row) {
+										if ($cadastrar['TipoCatprom'] == $key) {
+											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+											echo '<option value="' . $key . '">' . $row . '</option>';
+										}
+									}
+									*/
+								?>
+							</select>
+						</div>	
+					</div>
+					-->
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Categoria</label>
+						<div class="col-sm-10">
+							<input name="Novo_Catprom" type="text" class="form-control" id="Novo_Catprom" placeholder="Nome da Categoria">
+						</div>
+					</div>
+					<div class="form-group row">	
+						<div class="col-sm-6">
+							<br>
+							<button type="submit" class="btn btn-success btn-block" name="botaoCadCatprom" id="botaoCadCatprom" >
+								<span class="glyphicon glyphicon-plus"></span> Cadastrar
+							</button>
+						</div>
+						<div class="col-sm-6">
+							<br>
+							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFecharCatprom" id="botaoFecharCatprom">
+								<span class="glyphicon glyphicon-remove"></span> Fechar
+							</button>
+							</div>	
+						<div class="col-md-12 alert alert-warning aguardarCatprom" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+				<?php if (isset($list1)) echo $list1; ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="alterarCatprom" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alterarCatpromLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="alterarCatpromLabel">Categoria</h4>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-alterar-catprom"></span>
+				<form method="post" id="alterar_catprom_form">
+					<div class="form-group">
+						<label for="Catprom" class="control-label">Categoria:</label>
+						<input type="text" class="form-control" name="Catprom" id="Catprom">
+					</div>
+					<input type="hidden" name="id_Categoria" id="id_Categoria">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" name="CancelarCatprom" id="CancelarCatprom" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="AlterarCatprom" id="AlterarCatprom" >Alterar</button>	
+						<div class="col-md-12 alert alert-warning aguardarAlterarCatprom" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -882,9 +882,11 @@ class Produtos_model extends CI_Model {
 			*/
         $query = $this->db->query('
 			SELECT 
-				TPM.*
+				TPM.*,
+				TCT.*
 			FROM 
 				Tab_Promocao AS TPM
+					LEFT JOIN Tab_Catprom AS TCT ON TCT.idTab_Catprom = TPM.idTab_Catprom
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Promocao = TPM.idTab_Promocao
 					LEFT JOIN Tab_Produtos AS TPS ON TPS.idTab_Produtos = TV.idTab_Produtos
 			WHERE 

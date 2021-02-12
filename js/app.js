@@ -81,9 +81,11 @@ function Aguardar () {
 	$('.aguardar1').hide();
 	$('.aguardar2').hide();
 	$('.aguardarsalvar').hide();
+	$('.aguardarCatprom').hide();
 	$('.aguardarCatprod').hide();
 	$('.aguardarAtributo').hide();
 	$('.aguardarOpcao').hide();
+	$('.aguardarAlterarCatprom').hide();
 	$('.aguardarAlterarCatprod').hide();
 	$('.aguardarAlterarProduto').hide();
 	$('.aguardarAlterarAtributo').hide();
@@ -374,6 +376,53 @@ $(document).ready(function(){
 		
 	});	
 	
+	$('#insert_catprom_form').on('submit', function(event){
+		//alert('ok');
+		event.preventDefault();
+		if($('#Novo_Catprom').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-catprom").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{
+			//Fechar o botão cadastrar
+			$('#botaoCadCatprom').hide();
+								
+			//Fechar o botão fechar
+			$('#botaoFecharCatprom').hide();
+			
+			//Abre o Aguardar
+			$('.aguardarCatprom').show();	
+			
+			//Receber os dados do formulário
+			var dados = $("#insert_catprom_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/cadastros/Catprom.php?', dados, function (retorna){
+			 //console.log(retorna);
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#insert_catprom_form')[0].reset();
+					
+					//Fechar a janela modal cadastrar
+					$('#addCatpromModal').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-catprom").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-catprom").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar Categoria!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}	
+	});
+	
 	$('#insert_catprod_form').on('submit', function(event){
 		//alert('ok');
 		event.preventDefault();
@@ -561,6 +610,75 @@ $(document).ready(function(){
 			
 		}	
 	});
+
+	$('#alterarCatprom').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget)
+		var recipientidcatprom = button.data('whateveridcatprom')
+		var recipientcatprom = button.data('whatevercatprom')
+		//console.log(recipientcatprom);
+		var modal = $(this)
+		modal.find('.modal-title').text('id da Categoria: ' + recipientidcatprom)
+		modal.find('#id_Categoria').val(recipientidcatprom)
+		modal.find('#Catprom').val(recipientcatprom)
+	})
+	
+	$('#alterar_catprom_form').on('submit', function(event){
+		//alert('ok - Alterar Categoria do Produto');
+		
+		event.preventDefault();
+		var catprom = $('#Catprom').val();
+		//console.log(catprom);
+		//exit();
+		
+		if($('#Catprom').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-alterar-catprom").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{
+			
+			//Fechar a mensagem de erro
+			$('#msg-error-alterar-catprom').hide();
+			//Fechar o botão Alterar
+			$('#AlterarCatprom').hide();
+			//Fechar o botão Cancelar
+			$('#CancelarCatprom').hide();
+			//Abre o Aguardar
+			$('.aguardarAlterarCatprom').show();
+			//Fechar a janela modal alterar
+			$('#addCatpromModal').modal('hide');
+			
+			//Receber os dados do formulário
+			var dados = $("#alterar_catprom_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/edicoes/Catprom.php?', dados, function (retorna){
+			 
+				//console.log(retorna);
+				
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#alterar_catprom_form')[0].reset();
+					
+					//Fechar a janela modal alterar
+					$('#alterarCatprom').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-alterar-catprom").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-alterar-catprom").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar a Categoria!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}
+		
+	});	
 
 	$('#alterarCatprod').on('show.bs.modal', function (event) {
 		var button = $(event.relatedTarget)

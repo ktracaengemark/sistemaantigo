@@ -4,6 +4,7 @@
 		<thead>
 			<tr>
 				<th>id_Prom</th>
+				<th>Categoria</th>
 				<th>Promocao</th>
 				<th>Descricao</th>
 				<th>Dt.Inicio</th>
@@ -26,6 +27,7 @@
 
 					echo '<tr class="clickable-row" data-href="' . $url . '">';
 						echo '<td>' . $row['idTab_Promocao'] . '</td>';
+						echo '<td>' . $row['Catprom'] . '</td>';
 						echo '<td>' . $row['Promocao'] . '</td>';
 						echo '<td>' . $row['Descricao'] . '</td>';
 						echo '<td>' . $row['DataInicioProm'] . '</td>';
