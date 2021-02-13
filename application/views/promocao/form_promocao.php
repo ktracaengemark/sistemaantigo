@@ -923,7 +923,9 @@
 				<form method="post" id="alterar_catprom_form">
 					<div class="form-group row">
 						<label for="Catprom" class="col-sm-2 col-form-label">Categoria:</label>
-						<input type="text" class="form-control" name="Catprom" id="Catprom">
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="Catprom" id="Catprom">
+						</div>
 					</div>
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Balcao</label>
