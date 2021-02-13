@@ -688,6 +688,40 @@
 							<input name="Novo_Catprod" type="text" class="form-control" id="Novo_Catprod" placeholder="Nome da Categoria">
 						</div>
 					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Balcao</label>
+						<div class="col-sm-10">
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Balcao_Catprod_Cadastrar" class="custom-control-input " id="Balcao_Catprod_Cadastrar_Nao" value="N">
+									<label class="custom-control-label" for="Nao">Nao </label>
+								</div>
+							</div>
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Balcao_Catprod_Cadastrar" class="custom-control-input "  id="Balcao_Catprod_Cadastrar_Sim" value="S" checked>
+									<label class="custom-control-label" for="Sim">Sim</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Site</label>
+						<div class="col-sm-10">
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Site_Catprod_Cadastrar" class="custom-control-input " id="Site_Catprod_Cadastrar_Nao" value="N">
+									<label class="custom-control-label" for="Nao">Nao </label>
+								</div>
+							</div>
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Site_Catprod_Cadastrar" class="custom-control-input "  id="Site_Catprod_Cadastrar_Sim" value="S" checked>
+									<label class="custom-control-label" for="Sim">Sim</label>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div class="form-group row">	
 						<div class="col-sm-6">
 							<br>
@@ -722,9 +756,43 @@
 			<div class="modal-body">
 				<span id="msg-error-alterar-catprod"></span>
 				<form method="post" id="alterar_catprod_form">
-					<div class="form-group">
-						<label for="Catprod" class="control-label">Categoria:</label>
+					<div class="form-group row">
+						<label for="Catprod" class="col-sm-2 col-form-label">Categoria:</label>
 						<input type="text" class="form-control" name="Catprod" id="Catprod">
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Balcao</label>
+						<div class="col-sm-10">
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Balcao_Catprod_Alterar" class="custom-control-input " id="Balcao_Catprod_Alterar_Nao" value="N" >
+									<label class="custom-control-label" for="Nao">Nao</label>
+								</div>
+							</div>
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Balcao_Catprod_Alterar" class="custom-control-input "  id="Balcao_Catprod_Alterar_Sim" value="S" >
+									<label class="custom-control-label" for="Sim">Sim</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Site</label>
+						<div class="col-sm-10">
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Site_Catprod_Alterar" class="custom-control-input " id="Site_Catprod_Alterar_Nao" value="N" >
+									<label class="custom-control-label" for="Nao">Nao</label>
+								</div>
+							</div>
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Site_Catprod_Alterar" class="custom-control-input "  id="Site_Catprod_Alterar_Sim" value="S" >
+									<label class="custom-control-label" for="Sim">Sim</label>
+								</div>
+							</div>
+						</div>
 					</div>
 					<input type="hidden" name="id_Categoria" id="id_Categoria">
 					<div class="modal-footer">

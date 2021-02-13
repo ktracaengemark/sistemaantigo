@@ -34,6 +34,7 @@
 								<?php } ?>
 								<th class="active">Tipo</th>
 								<?php if($query['Agrupar'] != 2) { ?>
+									<th class="active">CatProm</th>
 									<th class="active">id.Prom</th>
 									<th class="active">Im.Prom</th>
 									<th class="active">Titulo</th>
@@ -107,6 +108,7 @@
 									<?php } ?>
 									<td><?php echo $row['Desconto'] ?></td>
 									<?php if($query['Agrupar'] != 2) { ?>
+										<td><?php echo $row['Catprom'] ?></td>
 										<td><?php echo $row['idTab_Promocao'] ?></td>
 										<td class="notclickable">
 											<?php if($row['idTab_Desconto'] == 2) { ?>

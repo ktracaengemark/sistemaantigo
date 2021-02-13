@@ -14,7 +14,7 @@
 				<table class="table table-bordered table-condensed table-striped">
 
 					<thead>
-						<tr>                       																	
+						<tr>
 							<th class="active" scope="col">Foto</th>
 							<th class="active" scope="col">Editar</th>
 							<th class="active">Ativo</th>
@@ -22,6 +22,7 @@
 							<th class="active">Site</th>
 							<th class="active">Id</th>
 							<th class="active">Tipo</th>
+							<th class="active">Categoria</th>
 							<th class="active">Titulo</th>
 							<th class="active">Descricao</th>
 							<th class="active">Valor</th>
@@ -50,6 +51,7 @@
 							<td><?php echo $row['VendaSite'] ?></td>
 							<td><?php echo $row['idTab_Promocao'] ?></td>
 							<td><?php echo $row['Desconto'] ?></td>
+							<td><?php echo $row['Catprom'] ?></td>
 							<td><?php echo $row['Promocao'] ?></td>
 							<td><?php echo $row['Descricao'] ?></td>
 							<td>R$<?php echo $row['SubTotal2'] ?></td>

@@ -441,10 +441,10 @@ $(document).ready(function(){
 			
 			//Receber os dados do formulário
 			var dados = $("#insert_catprod_form").serialize();
-			//console.log(dados);
+			console.log(dados);
 			
 			$.post(window.location.origin+ '/' + app + '/cadastros/Catprod.php?', dados, function (retorna){
-			 //console.log(retorna);
+			 console.log(retorna);
 				if(retorna == 1){
 				
 					//Limpar os campo
@@ -684,11 +684,23 @@ $(document).ready(function(){
 		var button = $(event.relatedTarget)
 		var recipientidcatprod = button.data('whateveridcatprod')
 		var recipientcatprod = button.data('whatevercatprod')
+		var recipientsitecatprod = button.data('whateversitecatprod')
+		var recipientbalcaocatprod = button.data('whateverbalcaocatprod')
 		//console.log(recipientcatprod);
 		var modal = $(this)
 		modal.find('.modal-title').text('id da Categoria: ' + recipientidcatprod)
 		modal.find('#id_Categoria').val(recipientidcatprod)
 		modal.find('#Catprod').val(recipientcatprod)
+		if(recipientsitecatprod == 'S'){
+			modal.find('#Site_Catprod_Alterar_Sim').prop('checked', true);
+		}else if(recipientsitecatprod == 'N'){
+			modal.find('#Site_Catprod_Alterar_Nao').prop('checked', true);
+		}
+		if(recipientbalcaocatprod == 'S'){
+			modal.find('#Balcao_Catprod_Alterar_Sim').prop('checked', true);
+		}else if(recipientbalcaocatprod == 'N'){
+			modal.find('#Balcao_Catprod_Alterar_Nao').prop('checked', true);
+		}
 	})
 	
 	$('#alterar_catprod_form').on('submit', function(event){
@@ -717,11 +729,11 @@ $(document).ready(function(){
 			
 			//Receber os dados do formulário
 			var dados = $("#alterar_catprod_form").serialize();
-			//console.log(dados);
+			console.log(dados);
 			
 			$.post(window.location.origin+ '/' + app + '/edicoes/Catprod.php?', dados, function (retorna){
 			 
-				//console.log(retorna);
+				console.log(retorna);
 				
 				if(retorna == 1){
 				

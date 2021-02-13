@@ -3718,7 +3718,8 @@ exit();*/
 				TPM.idTab_Promocao,
 				TPM.Promocao,
 				TPM.Descricao,
-				TPM.Arquivo AS ArquivoPromocao
+				TPM.Arquivo AS ArquivoPromocao,
+                TCT.*
             FROM
                 Tab_Produtos AS TPS
 					LEFT JOIN Tab_Produto AS TP ON TP.idTab_Produto = TPS.idTab_Produto
@@ -3729,6 +3730,7 @@ exit();*/
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produtos = TPS.idTab_Produtos
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TV.Desconto
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = TV.idTab_Promocao
+					LEFT JOIN Tab_Catprom AS TCT ON TCT.idTab_Catprom = TPM.idTab_Catprom
             WHERE
                 TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 				' . $data['Tipo'] . ' 
@@ -3970,9 +3972,11 @@ exit();*/
             SELECT
                 TPM.*,
                 TDS.*,
+                TCT.*,
 				SUM(TV.ValorProduto) AS SubTotal2
             FROM
                 Tab_Promocao AS TPM
+					LEFT JOIN Tab_Catprom AS TCT ON TCT.idTab_Catprom = TPM.idTab_Catprom
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TPM.Desconto
 					LEFT JOIN Tab_Valor AS TV ON TV.idTab_Promocao = TPM.idTab_Promocao
 					LEFT JOIN Tab_Produtos AS TPS ON TPS.idTab_Produtos = TV.idTab_Produtos
