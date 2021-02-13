@@ -709,6 +709,9 @@ class Produtos extends CI_Controller {
 		$data['q'] = $this->Produtos_model->list_produtos($data['produtos'], TRUE);
 		$data['list'] = $this->load->view('produtos/list_produtos', $data, TRUE);			
 		
+		$data['q_list_promocoes'] = $this->Produtos_model->list_promocoes($data['produtos'], TRUE);
+		$data['list_promocoes'] = $this->load->view('produtos/list_promocoes', $data, TRUE);
+		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 		$this->form_validation->set_rules('idTab_Catprod', 'Categoria', 'required|trim');
 		$this->form_validation->set_rules('idTab_Produto', 'Produto', 'required|trim');

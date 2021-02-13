@@ -500,6 +500,7 @@ class Produtos_model extends CI_Model {
 			WHERE 
                 TCT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY  
+				TPSA.Prod_Serv ASC,  
 				TCT.Catprod ASC 
 		');
 
