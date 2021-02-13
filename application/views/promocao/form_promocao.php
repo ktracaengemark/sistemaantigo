@@ -847,32 +847,44 @@
 			<div class="modal-body">
 				<span id="msg-error-catprom"></span>
 				<form method="post" id="insert_catprom_form">
-					<!--
-					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Tipo</label>
-						<div class="col-sm-10">
-							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-							id="TipoCatprom" name="TipoCatprom">
-								<option value="">-- Selecione uma opção --</option>
-								<?php
-									/*
-									foreach ($select['TipoCatprom'] as $key => $row) {
-										if ($cadastrar['TipoCatprom'] == $key) {
-											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-											} else {
-											echo '<option value="' . $key . '">' . $row . '</option>';
-										}
-									}
-									*/
-								?>
-							</select>
-						</div>	
-					</div>
-					-->
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Categoria</label>
 						<div class="col-sm-10">
 							<input name="Novo_Catprom" type="text" class="form-control" id="Novo_Catprom" placeholder="Nome da Categoria">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Balcao</label>
+						<div class="col-sm-10">
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Balcao_Catprom_Cadastrar" class="custom-control-input " id="Balcao_Catprom_Cadastrar_Nao" value="N">
+									<label class="custom-control-label" for="Nao">Nao </label>
+								</div>
+							</div>
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Balcao_Catprom_Cadastrar" class="custom-control-input "  id="Balcao_Catprom_Cadastrar_Sim" value="S" checked>
+									<label class="custom-control-label" for="Sim">Sim</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Site</label>
+						<div class="col-sm-10">
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Site_Catprom_Cadastrar" class="custom-control-input " id="Site_Catprom_Cadastrar_Nao" value="N">
+									<label class="custom-control-label" for="Nao">Nao </label>
+								</div>
+							</div>
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Site_Catprom_Cadastrar" class="custom-control-input "  id="Site_Catprom_Cadastrar_Sim" value="S" checked>
+									<label class="custom-control-label" for="Sim">Sim</label>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="form-group row">	
@@ -909,9 +921,43 @@
 			<div class="modal-body">
 				<span id="msg-error-alterar-catprom"></span>
 				<form method="post" id="alterar_catprom_form">
-					<div class="form-group">
-						<label for="Catprom" class="control-label">Categoria:</label>
+					<div class="form-group row">
+						<label for="Catprom" class="col-sm-2 col-form-label">Categoria:</label>
 						<input type="text" class="form-control" name="Catprom" id="Catprom">
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Balcao</label>
+						<div class="col-sm-10">
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Balcao_Catprom_Alterar" class="custom-control-input " id="Balcao_Catprom_Alterar_Nao" value="N" >
+									<label class="custom-control-label" for="Nao">Nao</label>
+								</div>
+							</div>
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Balcao_Catprom_Alterar" class="custom-control-input "  id="Balcao_Catprom_Alterar_Sim" value="S" >
+									<label class="custom-control-label" for="Sim">Sim</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Site</label>
+						<div class="col-sm-10">
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Site_Catprom_Alterar" class="custom-control-input " id="Site_Catprom_Alterar_Nao" value="N" >
+									<label class="custom-control-label" for="Nao">Nao</label>
+								</div>
+							</div>
+							<div class="col-md-2 mb-3 ">	
+								<div class="custom-control custom-radio">
+									<input type="radio" name="Site_Catprom_Alterar" class="custom-control-input "  id="Site_Catprom_Alterar_Sim" value="S" >
+									<label class="custom-control-label" for="Sim">Sim</label>
+								</div>
+							</div>
+						</div>
 					</div>
 					<input type="hidden" name="id_Categoria" id="id_Categoria">
 					<div class="modal-footer">

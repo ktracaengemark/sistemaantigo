@@ -25,7 +25,8 @@
 						echo '<td>' . $row['idTab_Catprom'] . '</td>';
 						echo '<td>'. $cont . ') ' . $row['Catprom'] . '</td>';
 						echo '<td><button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#alterarCatprom" 
-										data-whateveridcatprom="' . $row['idTab_Catprom'] . '" data-whatevercatprom="' . $row['Catprom'] . '">
+										data-whateveridcatprom="' . $row['idTab_Catprom'] . '" data-whatevercatprom="' . $row['Catprom'] . '"
+										data-whateversitecatprom="' . $row['Site_Catprom'] . '" data-whateverbalcaocatprom="' . $row['Balcao_Catprom'] . '">
 										Editar
 									</button>
 								</td>';
