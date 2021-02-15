@@ -3713,6 +3713,8 @@ exit();*/
 				TV.VendaSitePreco,
 				TV.idTab_Promocao,
 				TV.TempoDeEntrega,
+				TV.QtdProdutoDesconto,
+				TV.QtdProdutoIncremento,
 				TDS.idTab_Desconto,
 				TDS.Desconto,
 				TPM.idTab_Promocao,

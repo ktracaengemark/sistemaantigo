@@ -42,8 +42,10 @@
 									<th class="active">Descricao</th>
 								<?php } ?>
 								<?php if($query['Agrupar'] != 4) { ?>
-									<th class="active">Preco</th>
 									<th class="active">DcPreco</th>
+									<th class="active">Qtd</th>
+									<th class="active">Embal</th>
+									<th class="active">Preco</th>
 									<th class="active">Comissao</th>
 									<th class="active">Tempo</th>
 									<th class="active">Ativo</th>
@@ -123,8 +125,10 @@
 										<td><?php echo $row['Descricao'] ?></td>
 									<?php } ?>
 									<?php if($query['Agrupar'] != 4) { ?>
-										<td>R$ <?php echo $row['ValorProduto'] ?></td>
 										<td><?php echo $row['Convdesc'] ?></td>
+										<td><?php echo $row['QtdProdutoDesconto'] ?>x</td>
+										<td><?php echo $row['QtdProdutoIncremento'] ?>unid</td>
+										<td>R$<?php echo $row['ValorProduto'] ?></td>
 										<td><?php echo $row['ComissaoVenda'] ?> %</td>
 										<td><?php echo $row['TempoDeEntrega'] ?> Dias</td>
 										<td><?php echo $row['AtivoPreco'] ?></td>

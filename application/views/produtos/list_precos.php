@@ -35,7 +35,7 @@
 						echo '<td>' . $row['idTab_Produtos'] . '</td>';
 						echo '<td>' . $row['Nome_Prod'] . '</td>';
 						echo '<td>' . $row['Desconto'] . '</td>';
-						echo '<td>' . $row['QtdProdutoDesconto'] . 'Unid</td>';
+						echo '<td>' . $row['QtdProdutoDesconto'] . 'x</td>';
 						echo '<td>' . $row['QtdProdutoIncremento'] . 'Unid</td>';
 						echo '<td>R$ ' . $row['ValorProduto'] . '</td>';
 						#echo '<td>' . $row['AtivoPreco'] . '</td>';
