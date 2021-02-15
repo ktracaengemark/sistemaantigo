@@ -21,15 +21,10 @@ $result = mysql_query(
 			T.Comissao,
 			T.Valor_Produto,
 			T.Prod_Serv,
-			TOP2.Opcao,
-			TOP1.Opcao,
 			CONCAT(IFNULL(T.Nome_Prod,"")) AS NomeProduto
         FROM
-            Tab_' . $_GET['tabela'] . ' AS T
-				LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = T.Opcao_Atributo_2
-				LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = T.Opcao_Atributo_1			
+            Tab_' . $_GET['tabela'] . ' AS T			
         WHERE
-			T.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 			T.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 ');
 

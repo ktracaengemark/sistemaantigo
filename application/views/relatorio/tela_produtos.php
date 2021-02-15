@@ -35,16 +35,32 @@
 </div>
 <?php echo form_open('relatorio/produtos', 'role="form"'); ?>
 <div class="modal fade bs-excluir-modal2-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-	<div class="modal-dialog modal-lg" role="document">
+	<div class="modal-dialog modal-md" role="document">
 		<div class="modal-content">
 			<div class="modal-header bg-danger">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title"><span class="glyphicon glyphicon-filter"></span> Filtros dos Produtos</h4>
 			</div>
 			<div class="modal-footer">
-				<div class="form-group">
+				<div class="form-group">	
 					<div class="row text-left">
+						<!-- onchange="this.form.submit()" usado para azer a pesquiso automaticamente -->
 						<div class="col-md-4">
+							<label for="idTab_Catprod">Categoria</label>
+							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+									id="idTab_Catprod" name="idTab_Catprod">
+								<?php
+								foreach ($select['idTab_Catprod'] as $key => $row) {
+									if ($query['idTab_Catprod'] == $key) {
+										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+									} else {
+										echo '<option value="' . $key . '">' . $row . '</option>';
+									}
+								}
+								?>
+							</select>
+						</div>
+						<div class="col-md-8">
 							<label for="idTab_Produto">Produto Base</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
 									id="idTab_Produto" name="idTab_Produto">
@@ -58,8 +74,12 @@
 								}
 								?>
 							</select>
-						</div>
-						<div class="col-md-8">
+						</div>						
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="row text-left">
+						<div class="col-md-12">
 							<label for="idTab_Produtos">Produtos</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
 									id="idTab_Produtos" name="idTab_Produtos">
@@ -78,23 +98,7 @@
 				</div>
 				<div class="form-group">	
 					<div class="row text-left">
-						<!-- onchange="this.form.submit()" usado para azer a pesquiso automaticamente -->
-						<div class="col-md-3">
-							<label for="idTab_Catprod">Categoria</label>
-							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-									id="idTab_Catprod" name="idTab_Catprod">
-								<?php
-								foreach ($select['idTab_Catprod'] as $key => $row) {
-									if ($query['idTab_Catprod'] == $key) {
-										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-									} else {
-										echo '<option value="' . $key . '">' . $row . '</option>';
-									}
-								}
-								?>
-							</select>
-						</div>
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<label for="Tipo">Tipo:</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 									id="Tipo" name="Tipo">
@@ -109,7 +113,7 @@
 								?>
 							</select>
 						</div>	
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<label for="Agrupar">Agrupar Por:</label>
 							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
 									id="Agrupar" name="Agrupar">
@@ -128,7 +132,7 @@
 				</div>	
 				<div class="form-group">	
 					<div class="row text-left">	
-						<div class="col-md-6">
+						<div class="col-md-8">
 							<label for="Ordenamento">Ordenamento:</label>
 							<div class="row">
 								<div class="col-md-6">
