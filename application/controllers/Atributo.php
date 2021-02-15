@@ -13,7 +13,7 @@ class Atributo extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
       
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Atributo_model', 'Prodaux1_model', 'Prodaux2_model', 'Prodaux3_model', 'Prodaux4_model', 'Fornecedor_model', 'Formapag_model', 'Relatorio_model'));
+        $this->load->model(array('Basico_model', 'Atributo_model', 'Prodaux1_model', 'Prodaux2_model', 'idTab_Catprod_model', 'Prodaux4_model', 'Fornecedor_model', 'Formapag_model', 'Relatorio_model'));
         $this->load->driver('session');
 
         

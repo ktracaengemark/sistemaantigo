@@ -1340,78 +1340,56 @@ if (isset($data) && $data) {
     }
 
 	public function select_produtos3($data = FALSE) {
-		$filtro1 = ($data == "B") ? ' AND TPM.VendaBalcao = "S" AND V.VendaBalcaoPreco = "S"  ': ' AND TPM.VendaSite = "S" AND V.VendaSitePreco = "S"  ';
+		$filtro1 = ($data == "B") ? ' AND V.VendaBalcaoPreco = "S"  ': ' AND V.VendaSitePreco = "S"  ';
         if ($data === TRUE) {
             $array = $this->db->query('
             SELECT
                 V.idTab_Valor,
+				V.idTab_Produtos,
                 V.ValorProduto,
 				V.QtdProdutoIncremento,
 				V.Convdesc,
-				TOP2.Opcao,
-				TOP1.Opcao,
 				TDS.Desconto,
 				TPM.Promocao,
-				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " Unid. - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
+				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(P.Cod_Barra,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " UNID - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
-					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
-					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = P.Prod_Serv
-					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_2
-					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_1					
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos				
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-				P.idTab_Produtos = V.idTab_Produtos AND
-				TPM.Ativo = "S" AND
-				V.AtivoPreco = "S" AND
 				P.Prod_Serv = "P"
 				' . $filtro1 . '
 			ORDER BY
-				P.Prod_Serv ASC,
-				P.Nome_Prod ASC,
 				TDS.Desconto ASC,
-				TPM.Promocao ASC,
-				TOP2.Opcao,
-				TOP1.Opcao,
-				V.ValorProduto
+				P.Nome_Prod ASC,
+				TPM.Promocao ASC
 			');
         } else {
             $query = $this->db->query('
             SELECT
                 V.idTab_Valor,
+				V.idTab_Produtos,
                 V.ValorProduto,
 				V.QtdProdutoIncremento,
 				V.Convdesc,
-				TOP2.Opcao,
-				TOP1.Opcao,
 				TDS.Desconto,
 				TPM.Promocao,
-				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " Unid. - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
+				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(P.Cod_Barra,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " UNID - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
-					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
-					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = P.Prod_Serv
-					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_2
-					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_1				
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos				
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-				P.idTab_Produtos = V.idTab_Produtos AND
-				TPM.Ativo = "S" AND
-				V.AtivoPreco = "S" AND
 				P.Prod_Serv = "P"
 				' . $filtro1 . '
 			ORDER BY
-				P.Prod_Serv ASC,
-				P.Nome_Prod ASC,
 				TDS.Desconto ASC,
-				TPM.Promocao ASC,
-				TOP2.Opcao,
-				TOP1.Opcao,
-				V.ValorProduto
+				P.Nome_Prod ASC,
+				TPM.Promocao ASC
 			');
 
             $array = array();
@@ -1424,62 +1402,56 @@ if (isset($data) && $data) {
     }
 
 	public function select_servicos3($data = FALSE) {
-		$filtro1 = ($data == "B") ? ' AND TPM.VendaBalcao = "S" AND V.VendaBalcaoPreco = "S"  ': ' AND TPM.VendaSite = "S" AND V.VendaSitePreco = "S"  ';
+		$filtro1 = ($data == "B") ? ' AND V.VendaBalcaoPreco = "S"  ': ' AND V.VendaSitePreco = "S"  ';
         if ($data === TRUE) {
             $array = $this->db->query('
             SELECT
                 V.idTab_Valor,
+				V.idTab_Produtos,
                 V.ValorProduto,
 				V.QtdProdutoIncremento,
-				TOP2.Opcao,
-				TOP1.Opcao,
+				V.Convdesc,
 				TDS.Desconto,
 				TPM.Promocao,
-				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$ ",  IFNULL(V.ValorProduto,"")) AS NomeProduto
+				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(P.Cod_Barra,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " UNID - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$ ",  IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
-					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
-					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_2
-					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_1					
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos				
             WHERE
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-				P.idTab_Produtos = V.idTab_Produtos AND
-				TPM.Ativo = "S" AND
-				V.AtivoPreco = "S" AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.Prod_Serv = "S"
 				' . $filtro1 . '
 			ORDER BY
-				P.Nome_Prod ASC
+				TDS.Desconto ASC,
+				P.Nome_Prod ASC,
+				TPM.Promocao ASC
 			');
         } else {
             $query = $this->db->query('
             SELECT
                 V.idTab_Valor,
+				V.idTab_Produtos,
                 V.ValorProduto,
 				V.QtdProdutoIncremento,
-				TOP2.Opcao,
-				TOP1.Opcao,
+				V.Convdesc,
 				TDS.Desconto,
 				TPM.Promocao,
-				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$ ",  IFNULL(V.ValorProduto,"")) AS NomeProduto
+				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(P.Cod_Barra,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " UNID - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$ ",  IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
 					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
-					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
-					LEFT JOIN Tab_Opcao AS TOP2 ON TOP2.idTab_Opcao = P.Opcao_Atributo_2
-					LEFT JOIN Tab_Opcao AS TOP1 ON TOP1.idTab_Opcao = P.Opcao_Atributo_1				
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos				
             WHERE
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-				P.idTab_Produtos = V.idTab_Produtos AND
-				TPM.Ativo = "S" AND
-				V.AtivoPreco = "S" AND
+				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.Prod_Serv = "S"
 				' . $filtro1 . '
 			ORDER BY
-				P.Nome_Prod ASC
+				TDS.Desconto ASC,
+				P.Nome_Prod ASC,
+				TPM.Promocao ASC
 			');
 
             $array = array();

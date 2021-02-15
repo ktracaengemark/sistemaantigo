@@ -49,7 +49,7 @@
 							<li role="separator" class="divider"></li>							
 							<li><a data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal4-sm"><span class="glyphicon glyphicon-plus"></span> Novo Produto</a></li>
 							<li role="separator" class="divider"></li>							
-							<li><a href="<?php echo base_url() ?>Prodaux3/cadastrar"><span class="glyphicon glyphicon-list-alt"></span> Lista de Categorias</a></li>						
+							<li><a href="<?php echo base_url() ?>idTab_Catprod/cadastrar"><span class="glyphicon glyphicon-list-alt"></span> Lista de Categorias</a></li>						
 						</ul>
 					</div>																					
 					<?php } ?>
@@ -255,16 +255,16 @@
 						</div>
 						<div class="row">									
 							<div class="col-md-3">
-								<label for="Prodaux3">Categoria</label>
+								<label for="idTab_Catprod">Categoria</label>
 									<a class="btn btn-xs btn-info" href="<?php echo base_url() ?>prodaux3/cadastrar" role="button"> 
 										<span class="glyphicon glyphicon-plus"></span> <b>Cat.</b>
 									</a>
 								<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-										id="Prodaux3" name="Prodaux3">
+										id="idTab_Catprod" name="idTab_Catprod">
 									<option value="">-- Selecione uma opção --</option>
 									<?php
-									foreach ($select['Prodaux3'] as $key => $row) {
-										if ($produtos['Prodaux3'] == $key) {
+									foreach ($select['idTab_Catprod'] as $key => $row) {
+										if ($produtos['idTab_Catprod'] == $key) {
 											echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 										} else {
 											echo '<option value="' . $key . '">' . $row . '</option>';
@@ -473,10 +473,10 @@
 					<div class="col-md-4">
 						<label for="Ordenamento">Categoria</label>
 						<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
-								id="Prodaux33" name="Prodaux33">
+								id="idTab_Catprod3" name="idTab_Catprod3">
 							<?php
-							foreach ($select['Prodaux33'] as $key => $row) {
-								if ($query['Prodaux33'] == $key) {
+							foreach ($select['idTab_Catprod3'] as $key => $row) {
+								if ($query['idTab_Catprod3'] == $key) {
 									echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 								} else {
 									echo '<option value="' . $key . '">' . $row . '</option>';

@@ -13,7 +13,7 @@ class Produtos2 extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
       
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Produtos_model', 'Prodaux1_model', 'Prodaux2_model', 'Prodaux3_model', 'Prodaux4_model', 'Fornecedor_model', 'Fornecedor_model', 'Formapag_model', 'Relatorio_model'));
+        $this->load->model(array('Basico_model', 'Produtos_model', 'Prodaux1_model', 'Prodaux2_model', 'idTab_Catprod_model', 'Prodaux4_model', 'Fornecedor_model', 'Fornecedor_model', 'Formapag_model', 'Relatorio_model'));
         $this->load->driver('session');
 
         
@@ -66,7 +66,7 @@ class Produtos2 extends CI_Controller {
             'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'Prodaux4',
 			'Ativo',
 			'VendaSite',			
@@ -100,7 +100,7 @@ class Produtos2 extends CI_Controller {
 
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('idTab_Catprod', 'Categoria', 'required|trim');
 		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
@@ -114,8 +114,8 @@ class Produtos2 extends CI_Controller {
 		$data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
-		$data['select']['Prodaux33'] = $this->Produtos_model->select_prodaux33();
+		$data['select']['idTab_Catprod'] = $this->idTab_Catprod_model->select_prodaux3();
+		$data['select']['idTab_Catprod3'] = $this->Produtos_model->select_prodaux33();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
@@ -273,7 +273,7 @@ class Produtos2 extends CI_Controller {
             'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'Prodaux4',
 			'Ativo',
 			'VendaSite',			
@@ -310,7 +310,7 @@ class Produtos2 extends CI_Controller {
 
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('idTab_Catprod', 'Categoria', 'required|trim');
 		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
@@ -324,8 +324,8 @@ class Produtos2 extends CI_Controller {
 		$data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
-		$data['select']['Prodaux33'] = $this->Produtos_model->select_prodaux33();
+		$data['select']['idTab_Catprod'] = $this->idTab_Catprod_model->select_prodaux3();
+		$data['select']['idTab_Catprod3'] = $this->Produtos_model->select_prodaux33();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
@@ -484,7 +484,7 @@ class Produtos2 extends CI_Controller {
             'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'Prodaux4',
 			'Ativo',
 			'VendaSite',			
@@ -521,7 +521,7 @@ class Produtos2 extends CI_Controller {
 
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('idTab_Catprod', 'Categoria', 'required|trim');
 		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
@@ -535,8 +535,8 @@ class Produtos2 extends CI_Controller {
 		$data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
-		$data['select']['Prodaux33'] = $this->Produtos_model->select_prodaux33();
+		$data['select']['idTab_Catprod'] = $this->idTab_Catprod_model->select_prodaux3();
+		$data['select']['idTab_Catprod3'] = $this->Produtos_model->select_prodaux33();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
@@ -695,7 +695,7 @@ class Produtos2 extends CI_Controller {
             'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'Prodaux4',
 			'Ativo',
 			'VendaSite',			
@@ -729,7 +729,7 @@ class Produtos2 extends CI_Controller {
 
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('idTab_Catprod', 'Categoria', 'required|trim');
 		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim');		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		#$this->form_validation->set_rules('CodProd', 'Código', 'trim|alpha_numeric_spaces|is_unique_duplo[Tab_Produto.CodProd.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
@@ -743,8 +743,8 @@ class Produtos2 extends CI_Controller {
 		$data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
-		$data['select']['Prodaux33'] = $this->Produtos_model->select_prodaux33();
+		$data['select']['idTab_Catprod'] = $this->idTab_Catprod_model->select_prodaux3();
+		$data['select']['idTab_Catprod3'] = $this->Produtos_model->select_prodaux33();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
@@ -902,7 +902,7 @@ class Produtos2 extends CI_Controller {
             'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'Prodaux4',
 			'Ativo',
 			'VendaSite',			
@@ -966,7 +966,7 @@ class Produtos2 extends CI_Controller {
 		
         #### Tab_Produto ####
 
-		$this->form_validation->set_rules('Prodaux3', 'Categoria', 'required|trim');
+		$this->form_validation->set_rules('idTab_Catprod', 'Categoria', 'required|trim');
 		$this->form_validation->set_rules('Produtos', 'Produto', 'required|trim'); 		
 		#$this->form_validation->set_rules('CodProd', 'Código', 'is_unique[Tab_Produto.CodProd]');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
@@ -979,7 +979,7 @@ class Produtos2 extends CI_Controller {
         $data['select']['UnidadeProduto'] = $this->Basico_model->select_unidadeproduto();
 		$data['select']['Prodaux1'] = $this->Prodaux1_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->idTab_Catprod_model->select_prodaux3();
 		$data['select']['Prodaux4'] = $this->Prodaux4_model->select_prodaux4();
 		$data['select']['Ativo'] = $this->Basico_model->select_status_sn();		
 		$data['select']['VendaSite'] = $this->Basico_model->select_status_sn();

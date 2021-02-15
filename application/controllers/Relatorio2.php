@@ -67,7 +67,7 @@ class Relatorio2 extends CI_Controller {
 			'TipoProduto',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'Categoria',
 			'Ordenamento',
             'Campo',
@@ -79,7 +79,7 @@ class Relatorio2 extends CI_Controller {
 
         $data['select']['Campo'] = array(
 			'TP.Produtos' => 'Produto',			
-			'TP3.Prodaux3' => 'Categoria',
+			'TP3.idTab_Catprod' => 'Categoria',
 			'TP.Prodaux2' => 'Tipo',			
 			'TP.Prodaux1' => 'Esp.',
 			'TP.TipoProduto' => 'V/C/A',
@@ -95,7 +95,7 @@ class Relatorio2 extends CI_Controller {
         $data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_prodaux3();
 		$data['select']['TipoProduto'] = $this->Relatorio_model->select_tipoproduto();
 
         $data['titulo'] = 'Produtos';
@@ -107,7 +107,7 @@ class Relatorio2 extends CI_Controller {
 			$data['bd']['Categoria'] = $data['query']['Categoria'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 			$data['bd']['TipoProduto'] = $data['query']['TipoProduto'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
@@ -147,7 +147,7 @@ class Relatorio2 extends CI_Controller {
             'DataFim',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'Ordenamento',
             'Campo',
         ), TRUE));
@@ -159,7 +159,7 @@ class Relatorio2 extends CI_Controller {
 
         $data['select']['Campo'] = array(
 			'TP.Produtos' => 'Produto',	
-			'TP.Prodaux3' => 'Categoria',
+			'TP.idTab_Catprod' => 'Categoria',
 			'TP.Prodaux2' => 'Tipo',
 			'TP.Prodaux1' => 'Esp.',
 			'TP.CodProd' => 'Código',
@@ -177,7 +177,7 @@ class Relatorio2 extends CI_Controller {
         $data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_prodaux3();
 
 
         $data['titulo'] = 'Relatório de Estoque';
@@ -191,7 +191,7 @@ class Relatorio2 extends CI_Controller {
 			$data['bd']['CodProd'] = $data['query']['CodProd'];			
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 

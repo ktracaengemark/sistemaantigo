@@ -169,7 +169,7 @@ class Relatorio extends CI_Controller {
 			'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'DataValidadeProduto',
 			'ConcluidoProduto',
 			'DevolvidoProduto',
@@ -232,7 +232,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['ConcluidoServico'] = $data['query']['ConcluidoServico'];
 		$_SESSION['FiltroAlteraParcela']['Prodaux1'] = $data['query']['Prodaux1'];
 		$_SESSION['FiltroAlteraParcela']['Prodaux2'] = $data['query']['Prodaux2'];
-		$_SESSION['FiltroAlteraParcela']['Prodaux3'] = $data['query']['Prodaux3'];
+		$_SESSION['FiltroAlteraParcela']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
@@ -411,7 +411,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_prodaux3();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
 		
 		$data['query']['nome'] = 'Cliente';
@@ -480,7 +480,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
@@ -584,7 +584,7 @@ class Relatorio extends CI_Controller {
 			'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'DataValidadeProduto',
 			'ConcluidoProduto',
 			'DevolvidoProduto',
@@ -646,7 +646,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['ConcluidoServico'] = $data['query']['ConcluidoServico'];
 		$_SESSION['FiltroAlteraParcela']['Prodaux1'] = $data['query']['Prodaux1'];
 		$_SESSION['FiltroAlteraParcela']['Prodaux2'] = $data['query']['Prodaux2'];
-		$_SESSION['FiltroAlteraParcela']['Prodaux3'] = $data['query']['Prodaux3'];
+		$_SESSION['FiltroAlteraParcela']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
@@ -806,7 +806,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_prodaux3();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
 		
 		$data['query']['nome'] = 'Fornecedor';
@@ -869,7 +869,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
@@ -973,7 +973,7 @@ class Relatorio extends CI_Controller {
 			'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'DataValidadeProduto',
 			'ConcluidoProduto',
 			'DevolvidoProduto',
@@ -1035,7 +1035,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['ConcluidoServico'] = $data['query']['ConcluidoServico'];
 		$_SESSION['FiltroAlteraParcela']['Prodaux1'] = $data['query']['Prodaux1'];
 		$_SESSION['FiltroAlteraParcela']['Prodaux2'] = $data['query']['Prodaux2'];
-		$_SESSION['FiltroAlteraParcela']['Prodaux3'] = $data['query']['Prodaux3'];
+		$_SESSION['FiltroAlteraParcela']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
@@ -1195,7 +1195,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_prodaux3();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
 		
 		$data['query']['nome'] = 'Cliente';
@@ -1258,7 +1258,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
@@ -1362,7 +1362,7 @@ class Relatorio extends CI_Controller {
 			'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'DataValidadeProduto',
 			'ConcluidoProduto',
 			'DevolvidoProduto',
@@ -1424,7 +1424,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['ConcluidoServico'] = $data['query']['ConcluidoServico'];
 		$_SESSION['FiltroAlteraParcela']['Prodaux1'] = $data['query']['Prodaux1'];
 		$_SESSION['FiltroAlteraParcela']['Prodaux2'] = $data['query']['Prodaux2'];
-		$_SESSION['FiltroAlteraParcela']['Prodaux3'] = $data['query']['Prodaux3'];
+		$_SESSION['FiltroAlteraParcela']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
@@ -1583,7 +1583,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_prodaux3();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
 		
 		$data['query']['nome'] = 'Fornecedor';
@@ -1646,7 +1646,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
@@ -1750,7 +1750,7 @@ class Relatorio extends CI_Controller {
 			'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'DataValidadeProduto',
 			'ConcluidoProduto',
 			'DevolvidoProduto',
@@ -1813,7 +1813,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['ConcluidoServico'] = $data['query']['ConcluidoServico'];
 		$_SESSION['FiltroAlteraParcela']['Prodaux1'] = $data['query']['Prodaux1'];
 		$_SESSION['FiltroAlteraParcela']['Prodaux2'] = $data['query']['Prodaux2'];
-		$_SESSION['FiltroAlteraParcela']['Prodaux3'] = $data['query']['Prodaux3'];
+		$_SESSION['FiltroAlteraParcela']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 		$_SESSION['FiltroAlteraParcela']['idTab_TipoRD'] = $data['query']['idTab_TipoRD'];
 		$_SESSION['FiltroAlteraParcela']['TipoFinanceiro'] = $data['query']['TipoFinanceiro'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
@@ -1974,7 +1974,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_prodaux3();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
 		
 		$data['query']['nome'] = 'Cliente';
@@ -2041,7 +2041,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
@@ -2145,7 +2145,7 @@ class Relatorio extends CI_Controller {
 			'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'DataValidadeProduto',
 			'ConcluidoProduto',
 			'DevolvidoProduto',
@@ -2209,7 +2209,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['ConcluidoServico'] = $data['query']['ConcluidoServico'];
 		$_SESSION['FiltroAlteraParcela']['Prodaux1'] = $data['query']['Prodaux1'];
 		$_SESSION['FiltroAlteraParcela']['Prodaux2'] = $data['query']['Prodaux2'];
-		$_SESSION['FiltroAlteraParcela']['Prodaux3'] = $data['query']['Prodaux3'];
+		$_SESSION['FiltroAlteraParcela']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 		$_SESSION['FiltroAlteraParcela']['Orcamento'] = $data['query']['Orcamento'];
 		$_SESSION['FiltroAlteraParcela']['Cliente'] = $data['query']['Cliente'];
 		$_SESSION['FiltroAlteraParcela']['Fornecedor'] = $data['query']['Fornecedor'];
@@ -2364,7 +2364,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_prodaux3();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
 		
 		$data['query']['nome'] = 'Cliente';
@@ -2431,7 +2431,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
@@ -4800,7 +4800,7 @@ class Relatorio extends CI_Controller {
         $data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		#$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		#$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		#$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		#$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_prodaux3();
 
 
         $data['titulo'] = 'Relatório de Estoque';
@@ -4848,7 +4848,7 @@ class Relatorio extends CI_Controller {
             'DataFim',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'Ordenamento',
             'Campo',
         ), TRUE));
@@ -4860,7 +4860,7 @@ class Relatorio extends CI_Controller {
 
         $data['select']['Campo'] = array(
 			'TP.Produtos' => 'Produto',	
-			'TP.Prodaux3' => 'Categoria',
+			'TP.idTab_Catprod' => 'Categoria',
 			'TP.Prodaux2' => 'Tipo',
 			'TP.Prodaux1' => 'Esp.',
 			'TP.CodProd' => 'Código',
@@ -4878,7 +4878,7 @@ class Relatorio extends CI_Controller {
         $data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_prodaux3();
 
 
         $data['titulo'] = 'Relatório de Estoque';
@@ -4892,7 +4892,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['CodProd'] = $data['query']['CodProd'];			
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 
@@ -6348,7 +6348,7 @@ class Relatorio extends CI_Controller {
 			'TipoProduto',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'Categoria',
 			'Ordenamento',
             'Campo',
@@ -6372,8 +6372,8 @@ class Relatorio extends CI_Controller {
         $data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		//$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_catprod();
+		//$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_catprod();
 		$data['select']['TipoProduto'] = $this->Relatorio_model->select_tipoproduto();
 
         $data['titulo'] = 'Produtos';
@@ -6385,7 +6385,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Categoria'] = $data['query']['Categoria'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 			$data['bd']['TipoProduto'] = $data['query']['TipoProduto'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
@@ -6561,7 +6561,7 @@ class Relatorio extends CI_Controller {
         //$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_prodaux3();
 		$data['select']['TipoProduto'] = $this->Relatorio_model->select_tipoproduto();
 
         $data['titulo'] = 'Categorias';
@@ -6623,7 +6623,7 @@ class Relatorio extends CI_Controller {
         $data['select']['idTab_Catprod'] = $this->Relatorio_model->select_catprod();
 		$data['select']['Prodaux1'] = $this->Relatorio_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatorio_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatorio_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatorio_model->select_prodaux3();
 		$data['select']['TipoProduto'] = $this->Relatorio_model->select_tipoproduto();
 
         $data['titulo'] = 'Categorias';

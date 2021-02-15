@@ -383,45 +383,6 @@ elseif ($_GET['q'] == 2) {
     
 }
 
-elseif ($_GET['q'] == 23) {
-
-    $result = mysql_query(
-            'SELECT
-                TPV.idTab_Produto,
-				CONCAT(IFNULL(TPV.CodProd,""), " - ", IFNULL(TPV.Produtos,""), " - ", IFNULL(TPV.UnidadeProduto,""), " - ",   
-						IFNULL(TP3.Prodaux3,""), " - ", IFNULL(TP1.Prodaux1,""), " - ", IFNULL(TP2.Prodaux2,""), " - ",  
-						IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
-				TPV.ValorProduto,
-				TPV.Categoria
-            FROM
-                Tab_Produto AS TPV
-					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = TPV.Fornecedor
-					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPV.Prodaux3
-					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPV.Prodaux2
-					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TPV.Prodaux1
-            WHERE
-                TPV.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				TPV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
-			ORDER BY  
-				TPV.CodProd ASC,
-				TPV.Categoria ASC,
-				TP3.Prodaux3,				
-				TPV.Produtos ASC,
-				TP1.Prodaux1,
-				TP2.Prodaux2
-    ');
-
-    while ($row = mysql_fetch_assoc($result)) {
-
-        $event_array[] = array(
-            'id' => $row['idTab_Produto'],
-            'name' => utf8_encode($row['NomeProduto']),
-            'value' => $row['ValorProduto'],
-        );
-    }
-
-}
-
 elseif ($_GET['q'] == 90) {
 	$filtro1 = ($_GET['tipo_orca'] == "B") ? ' AND V.VendaBalcaoPreco = "S"  ': ' AND V.VendaSitePreco = "S"  ';
     $result = mysql_query('
@@ -495,49 +456,6 @@ elseif ($_GET['q'] == 902) {
         $event_array[] = array(
             'id' => $row['idTab_Valor'],
 			'id_produto' => $row['idTab_Produtos'],
-            #'name' => utf8_encode($row['NomeProduto']),
-            #'name' => $row['NomeProduto'],
-            'name' => mb_convert_encoding($row['NomeProduto'], "UTF-8", "ISO-8859-1"),
-            'value' => $row['ValorProduto'],
-        );
-    }
-
-}
-
-elseif ($_GET['q'] == 9) {
-
-    $result = mysql_query(
-            'SELECT
-                V.idTab_Valor,
-                CONCAT(IFNULL(P.CodProd,""), " - ", IFNULL(P.Produtos,""), " - ", IFNULL(TCO.Convenio,""), " - ", IFNULL(V.Convdesc,""), " - R$ ", V.ValorProduto) AS NomeProduto,
-                V.ValorProduto,
-				P.Categoria
-            FROM
-                Tab_Valor AS V
-					LEFT JOIN Tab_Convenio AS TCO ON idTab_Convenio = V.Convenio
-					LEFT JOIN Tab_Produto AS P ON P.idTab_Produto = V.idTab_Produto
-					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = P.Fornecedor
-					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = P.Prodaux3
-					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
-					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = P.Prodaux1
-            WHERE
-				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
-				P.idTab_Produto = V.idTab_Produto
-			ORDER BY
-				P.TipoProduto DESC,
-				TP3.Prodaux3,				
-				P.Produtos ASC,				
-				P.Categoria ASC,
-				TP1.Prodaux1,
-				TP2.Prodaux2,
-				TFO.NomeFornecedor ASC'
-        );
-
-    while ($row = mysql_fetch_assoc($result)) {
-
-        $event_array[] = array(
-            'id' => $row['idTab_Valor'],
             #'name' => utf8_encode($row['NomeProduto']),
             #'name' => $row['NomeProduto'],
             'name' => mb_convert_encoding($row['NomeProduto'], "UTF-8", "ISO-8859-1"),
@@ -722,94 +640,6 @@ elseif ($_GET['q'] == 3) {
 
 }
 
-elseif ($_GET['q'] == 93) {
-//// daqui, eu pego A Categoria
-    $result = mysql_query('
-            SELECT
-				P.idTab_Prodaux3,
-				P.Prodaux3
-				
-            FROM
-                Tab_Prodaux3 AS P
-            WHERE
-                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '  
-			ORDER BY 
-				P.Prodaux3 ASC
-    ');
-
-    while ($row = mysql_fetch_assoc($result)) {
-
-        $event_array[] = array(
-            'id' => $row['idTab_Prodaux3'],
-            'name' => utf8_encode($row['Prodaux3']),
-        );
-    }
-
-}
-
-elseif ($_GET['q'] == 92) {
-//// daqui, Tipo/Cor, eu pego o Valor R$.....
-    $result = mysql_query('
-            SELECT
-				P.idTab_Prodaux2,
-				P.Prodaux2,
-				P.Prodaux3,
-				P3.Prodaux3,
-				CONCAT(IFNULL(P3.Prodaux3,""), " - ", IFNULL(P.Prodaux2,"")) AS Prodaux2
-            FROM
-                Tab_Prodaux2 AS P
-					LEFT JOIN Tab_Prodaux3 AS P3 ON P3.idTab_Prodaux3 = P.Prodaux3
-            WHERE
-                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.Prodaux3 = ' . $_SESSION['Produto']['Prodaux3'] . ' 
-			ORDER BY 
-				P3.Prodaux3 ASC,
-				P.Prodaux2 ASC
-    ');
-
-    while ($row = mysql_fetch_assoc($result)) {
-
-        $event_array[] = array(
-            'id' => $row['idTab_Prodaux2'],
-            'name' => utf8_encode($row['Prodaux2']),
-        );
-    }
-
-}
-
-elseif ($_GET['q'] == 91) {
-//// daqui, Esp/Tamanho, eu pego o Fator de Multiplicação
-    $result = mysql_query('
-            SELECT
-				P.idTab_Prodaux1,
-				P.Prodaux1,
-				P.Prodaux3,
-				P3.Prodaux3,
-				CONCAT(IFNULL(P3.Prodaux3,""), " - ", IFNULL(P.Prodaux1,"")) AS Prodaux1
-            FROM
-                Tab_Prodaux1 AS P
-					LEFT JOIN Tab_Prodaux3 AS P3 ON P3.idTab_Prodaux3 = P.Prodaux3
-            WHERE
-                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.Prodaux3 = ' . $_SESSION['Produto']['Prodaux3'] . ' 
-			ORDER BY 
-				P3.Prodaux3 ASC,
-				P.Prodaux1 ASC
-    ');
-
-    while ($row = mysql_fetch_assoc($result)) {
-
-        $event_array[] = array(
-            'id' => $row['idTab_Prodaux1'],
-            'name' => utf8_encode($row['Prodaux1']),
-        );
-    }
-
-}
-
 elseif ($_GET['q'] == 95) {
 //// daqui, Esp/Tamanho, eu pego o Fator de Multiplicação
     $result = mysql_query('
@@ -833,74 +663,6 @@ elseif ($_GET['q'] == 95) {
         $event_array[] = array(
             'id' => $row['idTab_Promocao'],
             'name' => utf8_encode($row['Promocao']),
-        );
-    }
-
-}
-
-elseif ($_GET['q'] == 98) {
-//// daqui, eu pegoo Tipo
-    $permissao1 = isset($_SESSION['Atributos'][1]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][1] : 'AND idTab_Atributo = "0"';
-	$result = mysql_query('
-            SELECT
-				P.idTab_Opcao_Select,
-				P.idTab_Opcao,
-				P.idTab_Produto,
-				P.Item_Atributo,
-				TOP.Opcao,
-				CONCAT(IFNULL(TOP.Opcao,"")) AS Opcao
-            FROM
-                Tab_Opcao_Select AS P
-					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Opcao = P.idTab_Opcao
-            WHERE
-                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . '  
-				' . $permissao1 . '
-			ORDER BY 
-				TOP.Opcao ASC
-				
-    ');
-
-    while ($row = mysql_fetch_assoc($result)) {
-
-        $event_array[] = array(
-            'id' => $row['idTab_Opcao'],
-            'name' => utf8_encode($row['Opcao']),
-        );
-    }
-
-}
-
-elseif ($_GET['q'] == 97) {
-//// daqui, eu pegoo Tipo
-    $permissao2 = isset($_SESSION['Atributos'][2]) ? 'AND idTab_Atributo = ' . $_SESSION['Atributos'][2] : 'AND idTab_Atributo = "0"';
-	$result = mysql_query('
-            SELECT
-				P.idTab_Opcao_Select,
-				P.idTab_Opcao,
-				P.idTab_Produto,
-				P.Item_Atributo,
-				TOP.Opcao,
-				CONCAT(IFNULL(TOP.Opcao,"")) AS Opcao
-            FROM
-                Tab_Opcao_Select AS P
-					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Opcao = P.idTab_Opcao
-            WHERE
-                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' 
-				' . $permissao2 . '
-			ORDER BY 
-				TOP.Opcao ASC
-				
-    ');
-
-    while ($row = mysql_fetch_assoc($result)) {
-
-        $event_array[] = array(
-            'id' => $row['idTab_Opcao'],
-            'name' => utf8_encode($row['Opcao']),
         );
     }
 
@@ -961,35 +723,6 @@ elseif ($_GET['q'] == 102) {
         $event_array[] = array(
             'id' => $row['idTab_Opcao'],
             'name' => utf8_encode($row['Opcao']),
-        );
-    } 
-    
-}
-
-elseif ($_GET['q'] == 105) {
-
-    $result = mysql_query('
-            SELECT
-                TAS.idTab_Atributo_Select,
-				TAS.idTab_Atributo,
-				TAS.idTab_Catprod,
-				TAT.Atributo,
-                CONCAT(IFNULL(TAT.Atributo,"")) AS Atributo
-            FROM 
-                Tab_Atributo_Select AS TAS
-					LEFT JOIN Tab_Atributo AS TAT ON TAT.idTab_Atributo = TAS.idTab_Atributo
-            WHERE
-				TAS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				TAS.idTab_Catprod = ' . $_SESSION['Produto']['Prodaux3'] . ' 
-			ORDER BY 
-				TAT.Atributo ASC	
-    ');
-
-    while ($row = mysql_fetch_assoc($result)) {
-
-        $event_array[] = array(
-            'id' => $row['idTab_Atributo'],
-            'name' => utf8_encode($row['Atributo']),
         );
     } 
     

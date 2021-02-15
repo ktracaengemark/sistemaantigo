@@ -510,7 +510,7 @@ class Promocao extends CI_Controller {
                     $data['update']['item_promocao']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['item_promocao']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['item_promocao']['inserir'][$j]['idTab_Promocao'] = $data['promocao']['idTab_Promocao'];
-					//$data['update']['item_promocao']['inserir'][$j]['Prodaux3'] = $_SESSION['Promocao']['idTab_Catprod'];
+					//$data['update']['item_promocao']['inserir'][$j]['idTab_Catprod'] = $_SESSION['Promocao']['idTab_Catprod'];
 					//$data['update']['item_promocao']['inserir'][$j]['idTab_Modelo'] = $_SESSION['Promocao']['idTab_Produto'];
 					$data['update']['item_promocao']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ValorProduto']));
 					$data['update']['item_promocao']['inserir'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoVenda']));
@@ -838,7 +838,7 @@ class Promocao extends CI_Controller {
                     $data['update']['item_promocao']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['item_promocao']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['item_promocao']['inserir'][$j]['idTab_Promocao'] = $data['promocao']['idTab_Promocao'];
-					//$data['update']['item_promocao']['inserir'][$j]['Prodaux3'] = $_SESSION['Promocao']['idTab_Catprod'];
+					//$data['update']['item_promocao']['inserir'][$j]['idTab_Catprod'] = $_SESSION['Promocao']['idTab_Catprod'];
 					//$data['update']['item_promocao']['inserir'][$j]['idTab_Modelo'] = $_SESSION['Promocao']['idTab_Produto'];
 					$data['update']['item_promocao']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ValorProduto']));
 					$data['update']['item_promocao']['inserir'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['item_promocao']['inserir'][$j]['ComissaoVenda']));

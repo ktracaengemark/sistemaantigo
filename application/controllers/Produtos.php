@@ -970,7 +970,7 @@ class Produtos extends CI_Controller {
 					$data['update']['valor']['inserir'][$j]['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
                     $data['update']['valor']['inserir'][$j]['idTab_Produtos'] = $data['produtos']['idTab_Produtos'];
                     $data['update']['valor']['inserir'][$j]['idTab_Promocao'] = 1;
-					$data['update']['valor']['inserir'][$j]['Prodaux3'] = $_SESSION['Produtos']['idTab_Catprod'];
+					$data['update']['valor']['inserir'][$j]['idTab_Catprod'] = $_SESSION['Produtos']['idTab_Catprod'];
 					$data['update']['valor']['inserir'][$j]['idTab_Modelo'] = $_SESSION['Produtos']['idTab_Produto'];
 					$data['update']['valor']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ValorProduto']));
 					$data['update']['valor']['inserir'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ComissaoVenda']));
@@ -1159,7 +1159,7 @@ class Produtos extends CI_Controller {
 			$data['valor']['Desconto'] = 1;
 			$data['valor']['idTab_Promocao'] = 1;
 			$data['valor']['idTab_Modelo'] = $_SESSION['Valor']['idTab_Produto'];
-			$data['valor']['Prodaux3'] = $_SESSION['Valor']['idTab_Catprod'];
+			$data['valor']['idTab_Catprod'] = $_SESSION['Valor']['idTab_Catprod'];
 			$data['valor']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ValorProduto']));
 			$data['valor']['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ComissaoVenda']));			
 			

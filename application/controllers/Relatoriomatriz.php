@@ -1034,7 +1034,7 @@ class Relatoriomatriz extends CI_Controller {
             'DataFim',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'Ordenamento',
             'Campo',
         ), TRUE));
@@ -1051,7 +1051,7 @@ class Relatoriomatriz extends CI_Controller {
 			'TP.Categoria' => 'Prod/Serv',
 			'TP.Prodaux1' => 'Aux1',
 			'TP.Prodaux2' => 'Aux2',
-			'TP.Prodaux3' => 'Categoria',
+			'TP.idTab_Catprod' => 'Categoria',
 
         );
 
@@ -1065,7 +1065,7 @@ class Relatoriomatriz extends CI_Controller {
         $data['select']['Produtos'] = $this->Relatoriomatriz_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatoriomatriz_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatoriomatriz_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatoriomatriz_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatoriomatriz_model->select_prodaux3();
 
 
         $data['titulo'] = 'Relatório de Estoque';
@@ -1078,7 +1078,7 @@ class Relatoriomatriz extends CI_Controller {
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 
@@ -1189,7 +1189,7 @@ class Relatoriomatriz extends CI_Controller {
             'DataFim',
             'Prodaux1',
             'Prodaux2',
-            'Prodaux3',
+            'idTab_Catprod',
             'Ordenamento',
             'Campo',
         ), TRUE));
@@ -1206,7 +1206,7 @@ class Relatoriomatriz extends CI_Controller {
             'TP.Categoria' => 'Prod/Serv',
             'TP.Prodaux1' => 'Aux1',
             'TP.Prodaux2' => 'Aux2',
-            'TP.Prodaux3' => 'Categoria',
+            'TP.idTab_Catprod' => 'Categoria',
 
         );
 
@@ -1218,7 +1218,7 @@ class Relatoriomatriz extends CI_Controller {
         $data['select']['Produtos'] = $this->Relatoriomatriz_model->select_produtos();
         $data['select']['Prodaux1'] = $this->Relatoriomatriz_model->select_prodaux1();
         $data['select']['Prodaux2'] = $this->Relatoriomatriz_model->select_prodaux2();
-        $data['select']['Prodaux3'] = $this->Relatoriomatriz_model->select_prodaux3();
+        $data['select']['idTab_Catprod'] = $this->Relatoriomatriz_model->select_prodaux3();
 
         $data['titulo'] = 'Relatório de Estoque';
 
@@ -1230,7 +1230,7 @@ class Relatoriomatriz extends CI_Controller {
             $data['bd']['Produtos'] = $data['query']['Produtos'];
             $data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
             $data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-            $data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+            $data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 
@@ -1345,7 +1345,7 @@ class Relatoriomatriz extends CI_Controller {
 			'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'AprovadoOrca',
 			'DataInicio',
             'DataFim',
@@ -1377,7 +1377,7 @@ class Relatoriomatriz extends CI_Controller {
 			'TPV.Produtos' => 'Produto',
 			'TPV.Prodaux1' => 'Aux1',
 			'TPV.Prodaux2' => 'Aux2',
-			'TPV.Prodaux3' => 'Categoria',
+			'TPV.idTab_Catprod' => 'Categoria',
 
         );
 
@@ -1390,7 +1390,7 @@ class Relatoriomatriz extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatoriomatriz_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatoriomatriz_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatoriomatriz_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatoriomatriz_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatoriomatriz_model->select_prodaux3();
 
         $data['titulo'] = 'Relatório de Produtos Vendidos';
 
@@ -1402,7 +1402,7 @@ class Relatoriomatriz extends CI_Controller {
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
@@ -1444,7 +1444,7 @@ class Relatoriomatriz extends CI_Controller {
 			'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'AprovadoOrca',
 			'DataInicio',
             'DataFim',
@@ -1474,7 +1474,7 @@ class Relatoriomatriz extends CI_Controller {
 			'TPV.Produtos' => 'Produto',
 			'TPV.Prodaux1' => 'Aux1',
 			'TPV.Prodaux2' => 'Aux2',
-			'TPV.Prodaux3' => 'Categoria',
+			'TPV.idTab_Catprod' => 'Categoria',
 
         );
 
@@ -1488,7 +1488,7 @@ class Relatoriomatriz extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatoriomatriz_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatoriomatriz_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatoriomatriz_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatoriomatriz_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatoriomatriz_model->select_prodaux3();
 
 		$data['titulo'] = 'Relatório de Produtos Devolvidos';
 
@@ -1500,7 +1500,7 @@ class Relatoriomatriz extends CI_Controller {
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
@@ -1863,7 +1863,7 @@ class Relatoriomatriz extends CI_Controller {
 			'Produtos',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'AprovadoDespesas',
             'DataInicio',
             'DataFim',
@@ -1898,7 +1898,7 @@ class Relatoriomatriz extends CI_Controller {
 			'TPB.Produtos' => 'Produto',
 			'TPB.Prodaux1' => 'Aux1',
 			'TPB.Prodaux2' => 'Aux2',
-			'TPB.Prodaux3' => 'Categoria',
+			'TPB.idTab_Catprod' => 'Categoria',
 
         );
 
@@ -1912,7 +1912,7 @@ class Relatoriomatriz extends CI_Controller {
 		$data['select']['Produtos'] = $this->Relatoriomatriz_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatoriomatriz_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatoriomatriz_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatoriomatriz_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatoriomatriz_model->select_prodaux3();
 
 
 
@@ -1926,7 +1926,7 @@ class Relatoriomatriz extends CI_Controller {
 			$data['bd']['Produtos'] = $data['query']['Produtos'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
 			$data['bd']['AprovadoDespesas'] = $data['query']['AprovadoDespesas'];
@@ -2964,7 +2964,7 @@ class Relatoriomatriz extends CI_Controller {
 			'CodProd',
 			'Prodaux1',
 			'Prodaux2',
-			'Prodaux3',
+			'idTab_Catprod',
 			'Categoria',
 			'Ordenamento',
             'Campo',
@@ -2981,7 +2981,7 @@ class Relatoriomatriz extends CI_Controller {
 			'TP.Categoria' => 'Prod/Serv',
 			'TP.Prodaux1' => 'Aux1',
 			'TP.Prodaux2' => 'Aux2',
-			'TP.Prodaux3' => 'Categoria',
+			'TP.idTab_Catprod' => 'Categoria',
 
         );
 
@@ -2993,7 +2993,7 @@ class Relatoriomatriz extends CI_Controller {
         $data['select']['Produtos'] = $this->Relatoriomatriz_model->select_produtos();
 		$data['select']['Prodaux1'] = $this->Relatoriomatriz_model->select_prodaux1();
 		$data['select']['Prodaux2'] = $this->Relatoriomatriz_model->select_prodaux2();
-		$data['select']['Prodaux3'] = $this->Relatoriomatriz_model->select_prodaux3();
+		$data['select']['idTab_Catprod'] = $this->Relatoriomatriz_model->select_prodaux3();
 
         $data['titulo'] = 'Produtos, Serviços e Valores';
 
@@ -3004,7 +3004,7 @@ class Relatoriomatriz extends CI_Controller {
 			$data['bd']['Categoria'] = $data['query']['Categoria'];
 			$data['bd']['Prodaux1'] = $data['query']['Prodaux1'];
 			$data['bd']['Prodaux2'] = $data['query']['Prodaux2'];
-			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
+			$data['bd']['idTab_Catprod'] = $data['query']['idTab_Catprod'];
             $data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 

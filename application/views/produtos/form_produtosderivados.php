@@ -66,14 +66,14 @@
 												</div>
 												<?php if ($metodo > 0) { ?>	
 													<div class="col-md-6">
-														<label for="Prodaux3">Categoria*:</label>								
+														<label for="idTab_Catprod">Categoria*:</label>								
 														<?php if ($metodo == 1) { ?>
 															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?> 
-																	id="Prodaux3" name="Prodaux3">
+																	id="idTab_Catprod" name="idTab_Catprod">
 																<option value="">-- Sel.uma Categoria --</option>
 																<?php
-																foreach ($select['Prodaux3'] as $key => $row) {
-																	if ($produtos['Prodaux3'] == $key) {
+																foreach ($select['idTab_Catprod'] as $key => $row) {
+																	if ($produtos['idTab_Catprod'] == $key) {
 																		echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 																	} else {
 																		echo '<option value="' . $key . '">' . $row . '</option>';
@@ -81,7 +81,7 @@
 																}
 																?>
 															</select>
-															<?php echo form_error('Prodaux3'); ?>
+															<?php echo form_error('idTab_Catprod'); ?>
 														<?php } else { ?>
 															<br>
 															<?php echo '<strong>" ' . $_SESSION['Produto']['Catprod'] . ' "</strong>' ?>
@@ -380,7 +380,7 @@
 					<div class="col-md-12">
 						<!--<input type="hidden" name="idTab_Produto" value="<?php echo $produtos['idTab_Produto']; ?>">-->
 						<?php if ($metodo > 1) { ?>
-							<input type="hidden" name="Prodaux3" value="<?php echo $_SESSION['Produto']['Prodaux3']; ?>">
+							<input type="hidden" name="idTab_Catprod" value="<?php echo $_SESSION['Produto']['idTab_Catprod']; ?>">
 						<?php } ?>
 						<?php if ($metodo > 1) { ?>
 

@@ -103,69 +103,6 @@ elseif ($_GET['q'] == 14) {
     
 }
 
-elseif ($_GET['q'] == 92) {
-//// daqui, Tipo/Cor, eu pego o Valor R$.....
-    $result = mysql_query('
-            SELECT
-				P.idTab_Prodaux2,
-				P.Prodaux2,
-				P.Prodaux3,
-				P3.Prodaux3,
-				CONCAT(IFNULL(P3.Prodaux3,""), " - ", IFNULL(P.Prodaux2,"")) AS Prodaux2
-            FROM
-                Tab_Prodaux2 AS P
-					LEFT JOIN Tab_Prodaux3 AS P3 ON P3.idTab_Prodaux3 = P.Prodaux3
-            WHERE
-                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.Prodaux3 = ' . $_SESSION['Produto']['Prodaux3'] . ' 
-			ORDER BY 
-				P3.Prodaux3 ASC,
-				P.Prodaux2 ASC
-    ');
-
-    while ($row = mysql_fetch_assoc($result)) {
-
-        $event_array[] = array(
-            'id' => $row['idTab_Prodaux2'],
-            'name' => utf8_encode($row['Prodaux2']),
-        );
-    }
-
-}
-
-elseif ($_GET['q'] == 98) {
-//// daqui, eu pegoo Tipo
-    $result = mysql_query('
-            SELECT
-				P.idTab_Opcao_Select,
-				P.idTab_Opcao,
-				P.idTab_Produto,
-				TOP.Opcao,
-				CONCAT(IFNULL(TOP.Opcao,"")) AS Opcao
-            FROM
-                Tab_Opcao_Select AS P
-					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Opcao = P.idTab_Opcao
-            WHERE
-                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idTab_Produto = ' . $_SESSION['Produto']['idTab_Produto'] . ' AND
-				P.Item_Atributo = "2"
-			ORDER BY 
-				TOP.Opcao ASC
-				
-    ');
-
-    while ($row = mysql_fetch_assoc($result)) {
-
-        $event_array[] = array(
-            'id' => $row['idTab_Opcao_Select'],
-            'name' => utf8_encode($row['Opcao']),
-        );
-    }
-
-}
-
 echo json_encode($event_array2);
 mysql_close($link2);
 ?>

@@ -401,7 +401,7 @@ class Loginempresa extends CI_Controller {
 								'Produtos' => 'PRODUTO TESTE',
 								'idTab_Modulo' => "1",
 								'VendaSite' => "S",
-								'Prodaux3' => $data['idTab_Catprod'],
+								'idTab_Catprod' => $data['idTab_Catprod'],
 								'idSis_Usuario' => $data['idSis_Usuario'],
 								'idSis_Empresa' => $data['idSis_Empresa']
 							);
@@ -461,7 +461,7 @@ class Loginempresa extends CI_Controller {
 											'idTab_Promocao' => $data['idTab_Promocao'],
 											'Item_Promocao' => "1",
 											'idTab_Produtos' => $data['idTab_Produtos'],
-											'Prodaux3' => $data['idTab_Catprod'],
+											'idTab_Catprod' => $data['idTab_Catprod'],
 											'idTab_Modelo' => $data['idTab_Produto'],
 											'ValorProduto' => '1.00',
 											'Convdesc' => $data['promocao']['Descricao'],
@@ -908,7 +908,7 @@ class Loginempresa extends CI_Controller {
 								'Produtos' => 'PRODUTO TESTE',
 								'idTab_Modulo' => "1",
 								'VendaSite' => "S",
-								'Prodaux3' => $data['idTab_Catprod'],
+								'idTab_Catprod' => $data['idTab_Catprod'],
 								'idSis_Usuario' => $data['idSis_Usuario'],
 								'idSis_Empresa' => $data['idSis_Empresa']
 							);
@@ -968,7 +968,7 @@ class Loginempresa extends CI_Controller {
 											'idTab_Promocao' => $data['idTab_Promocao'],
 											'Item_Promocao' => "1",
 											'idTab_Produtos' => $data['idTab_Produtos'],
-											'Prodaux3' => $data['idTab_Catprod'],
+											'idTab_Catprod' => $data['idTab_Catprod'],
 											'idTab_Modelo' => $data['idTab_Produto'],
 											'ValorProduto' => '1.00',
 											'Convdesc' => $data['promocao']['Descricao'],
