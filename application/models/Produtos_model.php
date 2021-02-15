@@ -797,7 +797,24 @@ class Produtos_model extends CI_Model {
             } else {
                 
 				foreach ($query->result() as $row) {
-					$row->AtivoPreco = $this->basico->mascara_palavra_completa($row->AtivoPreco, 'NS');
+					if($row->idTab_Valor){
+						if($row->VendaBalcaoPreco == "S"){
+							if($row->VendaSitePreco == "S"){
+								$row->AtivoPreco = "Balcao/Site";
+							}else{
+								$row->AtivoPreco = "Balcao";
+							}
+						}else{
+							if($row->VendaSitePreco == "S"){
+								$row->AtivoPreco = "Site";
+							}else{
+								$row->AtivoPreco = "Não";
+							}
+						}
+					}else{
+						$row->AtivoPreco = "Não";
+					}
+					//$row->AtivoPreco = $this->basico->mascara_palavra_completa($row->AtivoPreco, 'NS');
 					$row->VendaSitePreco = $this->basico->mascara_palavra_completa($row->VendaSitePreco, 'NS');
 					$row->VendaBalcaoPreco = $this->basico->mascara_palavra_completa($row->VendaBalcaoPreco, 'NS');
 					$row->ValorProduto = number_format($row->ValorProduto, 2, ',', '.');

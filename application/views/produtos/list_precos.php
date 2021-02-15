@@ -14,8 +14,9 @@
 				<th>Comissão</th>
 				<th>Tempo</th>
 				<th>Desc</th>
-				<th>Balcao</th>
-				<th>Site</th>
+				<th>Ativo</th>
+				<!--<th>Balcao</th>
+				<th>Site</th>-->
 			</tr>
 		</thead>
 		<tbody>
@@ -41,8 +42,9 @@
 						echo '<td>' . $row['ComissaoVenda'] . '%</td>';
 						echo '<td>' . $row['TempoDeEntrega'] . '</td>';
 						echo '<td>' . $row['Convdesc'] . '</td>';
-						echo '<td>' . $row['VendaBalcaoPreco'] . '</td>';
-						echo '<td>' . $row['VendaSitePreco'] . '</td>';
+						echo '<td>' . $row['AtivoPreco'] . '</td>';
+						//echo '<td>' . $row['VendaBalcaoPreco'] . '</td>';
+						//echo '<td>' . $row['VendaSitePreco'] . '</td>';
 					echo '</tr>';            
 
 					$i++;

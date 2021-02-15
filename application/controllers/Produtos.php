@@ -962,7 +962,7 @@ class Produtos extends CI_Controller {
 
                 $max = count($data['update']['valor']['inserir']);
                 for($j=0;$j<$max;$j++) {
-					$data['update']['valor']['inserir'][$j]['Item_Promocao'] = "1";
+					$data['update']['valor']['inserir'][$j]['Item_Promocao'] = 1;
 					$data['update']['valor']['inserir'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['inserir'][$j]['Convdesc'], 'UTF-8'));
 					$data['update']['valor']['inserir'][$j]['Desconto'] = 1;
 					$data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
@@ -978,6 +978,9 @@ class Produtos extends CI_Controller {
 
                 $max = count($data['update']['valor']['alterar']);
                 for($j=0;$j<$max;$j++) {
+					$data['update']['valor']['alterar'][$j]['Item_Promocao'] = 1;
+					$data['update']['valor']['alterar'][$j]['Desconto'] = 1;
+                    $data['update']['valor']['alterar'][$j]['idTab_Promocao'] = 1;
 					$data['update']['valor']['alterar'][$j]['idTab_Modelo'] = $_SESSION['Produtos']['idTab_Produto'];
 					$data['update']['valor']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ValorProduto']));
 					$data['update']['valor']['alterar'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ComissaoVenda']));
@@ -1152,6 +1155,9 @@ class Produtos extends CI_Controller {
 			exit ();
 			*/
             #### Tab_Valor ####
+			$data['valor']['Item_Promocao'] = "1";
+			$data['valor']['Desconto'] = 1;
+			$data['valor']['idTab_Promocao'] = 1;
 			$data['valor']['idTab_Modelo'] = $_SESSION['Valor']['idTab_Produto'];
 			$data['valor']['Prodaux3'] = $_SESSION['Valor']['idTab_Catprod'];
 			$data['valor']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ValorProduto']));

@@ -216,6 +216,23 @@ class Promocao_model extends CI_Model {
                 return TRUE;
             } else {
                 foreach ($query->result() as $row) {
+					if($row->idTab_Promocao){
+						if($row->VendaBalcao == "S"){
+							if($row->VendaSite == "S"){
+								$row->Ativo = "Balcao/Site";
+							}else{
+								$row->Ativo = "Balcao";
+							}
+						}else{
+							if($row->VendaSite == "S"){
+								$row->Ativo = "Site";
+							}else{
+								$row->Ativo = "Não";
+							}
+						}
+					}else{
+						$row->Ativo = "Não";
+					}
 					$row->DataInicioProm = $this->basico->mascara_data($row->DataInicioProm, 'barras');
 					$row->DataFimProm = $this->basico->mascara_data($row->DataFimProm, 'barras');
 					$row->VendaBalcao = $this->basico->mascara_palavra_completa($row->VendaBalcao, 'NS');

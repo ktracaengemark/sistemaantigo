@@ -24,6 +24,7 @@
 								<!--<th class="active">Tipo</th>-->
 								<th class="active">Categoria</th>
 								<th class="active">Produto</th>
+								<th class="active">Estoque</th>
 								<!--<th class="active">Var1</th>
 								<th class="active">Var2</th>-->
 							<?php } ?>
@@ -81,6 +82,7 @@
 									<!--<td><?php echo $row['Prod_Serv'] ?></td>-->
 									<td><?php echo $row['Catprod'] ?></td>
 									<td><?php echo $row['Nome_Prod'] ?></td>
+									<td><?php echo $row['Estoque'] ?></td>
 									<!--<td><?php #echo $row['Opcao1'] ?></td>
 									<td><?php #echo $row['Opcao2'] ?></td>-->
 								<?php } ?>
