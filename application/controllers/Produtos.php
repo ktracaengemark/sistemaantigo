@@ -971,7 +971,7 @@ class Produtos extends CI_Controller {
                     $data['update']['valor']['inserir'][$j]['idTab_Produtos'] = $data['produtos']['idTab_Produtos'];
                     $data['update']['valor']['inserir'][$j]['idTab_Promocao'] = 1;
 					$data['update']['valor']['inserir'][$j]['idTab_Catprod'] = $_SESSION['Produtos']['idTab_Catprod'];
-					$data['update']['valor']['inserir'][$j]['idTab_Modelo'] = $_SESSION['Produtos']['idTab_Produto'];
+					$data['update']['valor']['inserir'][$j]['idTab_Produto'] = $_SESSION['Produtos']['idTab_Produto'];
 					$data['update']['valor']['inserir'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ValorProduto']));
 					$data['update']['valor']['inserir'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ComissaoVenda']));
 				}
@@ -981,7 +981,7 @@ class Produtos extends CI_Controller {
 					$data['update']['valor']['alterar'][$j]['Item_Promocao'] = 1;
 					$data['update']['valor']['alterar'][$j]['Desconto'] = 1;
                     $data['update']['valor']['alterar'][$j]['idTab_Promocao'] = 1;
-					$data['update']['valor']['alterar'][$j]['idTab_Modelo'] = $_SESSION['Produtos']['idTab_Produto'];
+					$data['update']['valor']['alterar'][$j]['idTab_Produto'] = $_SESSION['Produtos']['idTab_Produto'];
 					$data['update']['valor']['alterar'][$j]['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ValorProduto']));
 					$data['update']['valor']['alterar'][$j]['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['alterar'][$j]['ComissaoVenda']));
 					$data['update']['valor']['alterar'][$j]['Convdesc'] = trim(mb_strtoupper($data['update']['valor']['alterar'][$j]['Convdesc'], 'UTF-8'));
@@ -1158,7 +1158,7 @@ class Produtos extends CI_Controller {
 			$data['valor']['Item_Promocao'] = "1";
 			$data['valor']['Desconto'] = 1;
 			$data['valor']['idTab_Promocao'] = 1;
-			$data['valor']['idTab_Modelo'] = $_SESSION['Valor']['idTab_Produto'];
+			$data['valor']['idTab_Produto'] = $_SESSION['Valor']['idTab_Produto'];
 			$data['valor']['idTab_Catprod'] = $_SESSION['Valor']['idTab_Catprod'];
 			$data['valor']['ValorProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ValorProduto']));
 			$data['valor']['ComissaoVenda'] = str_replace(',', '.', str_replace('.', '', $data['valor']['ComissaoVenda']));			

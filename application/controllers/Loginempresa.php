@@ -417,13 +417,13 @@ class Loginempresa extends CI_Controller {
 									'idSis_Usuario' => $data['idSis_Usuario'],
 									'idSis_Empresa' => $data['idSis_Empresa'],
 									'idTab_Modulo' => "1",
+									'idTab_Catprod' => $data['idTab_Catprod'],
 									'idTab_Produto' => $data['idTab_Produto'],
-									'idTab_Modelo' => $data['idTab_Produto'],
 									'Opcao_Atributo_1' => "0",
 									'Opcao_Atributo_2' => "0",
 									'Nome_Prod' => $data['produto']['Produtos'],
-									'Cod_Prod' => $data['idTab_Produto'].':0:0',
-									'VendaSite' => "N"
+									'Cod_Prod' => $data['idTab_Catprod'] . ':' . $data['idTab_Produto'] . ':0:0',
+									'VendaSite' => "S"
 								);
 								$data['campos'] = array_keys($data['produtos']);
 								$data['idTab_Produtos'] = $this->Loginempresa_model->set_produtos($data['produtos']);
@@ -431,174 +431,152 @@ class Loginempresa extends CI_Controller {
 								if ($data['idTab_Produtos'] === FALSE) {
 									$data['msg'] = '?m=2';
 									$this->load->view('loginempresa/form_registrar', $data);
-								} else {	
-									
-									$data['promocao'] = array(
-										'Promocao' => "Promocao ",
-										'Descricao' => "Descricao Promocao ",
+								} else {
+								
+									$data['valor'] = array(
 										'idSis_Usuario' => $data['idSis_Usuario'],
 										'idSis_Empresa' => $data['idSis_Empresa'],
 										'idTab_Modulo' => "1",
+										'idTab_Promocao' => "1",
+										'Item_Promocao' => "1",
+										'idTab_Produtos' => $data['idTab_Produtos'],
+										'idTab_Catprod' => $data['idTab_Catprod'],
+										'idTab_Produto' => $data['idTab_Produto'],
+										'ValorProduto' => '1.00',
 										'Desconto' => "1",
-										'Ativo' => "S",
-										'VendaBalcao' => "S",
-										'VendaSite' => "S",
-										'Cat_1' => $data['idTab_Catprod'],
-										'Mod_1' => $data['idTab_Produto']
+										'QtdProdutoDesconto' => "1",
+										'QtdProdutoIncremento' => "1"
 									);
-									$data['campos'] = array_keys($data['promocao']);
-									$data['idTab_Promocao'] = $this->Loginempresa_model->set_promocao($data['promocao']);
-									
-									if ($data['idTab_Promocao'] === FALSE) {
+									$data['campos'] = array_keys($data['valor']);
+									$data['idTab_Valor'] = $this->Loginempresa_model->set_valor($data['valor']);
+										
+									if ($data['idTab_Valor'] === FALSE) {
 										$data['msg'] = '?m=2';
 										$this->load->view('loginempresa/form_registrar', $data);
 									} else {
-									
-										$data['valor'] = array(
-											'idSis_Usuario' => $data['idSis_Usuario'],
-											'idSis_Empresa' => $data['idSis_Empresa'],
-											'idTab_Modulo' => "1",
-											'idTab_Promocao' => $data['idTab_Promocao'],
-											'Item_Promocao' => "1",
-											'idTab_Produtos' => $data['idTab_Produtos'],
-											'idTab_Catprod' => $data['idTab_Catprod'],
-											'idTab_Modelo' => $data['idTab_Produto'],
-											'ValorProduto' => '1.00',
-											'Convdesc' => $data['promocao']['Descricao'],
-											'Desconto' => "1",
-											'QtdProdutoDesconto' => "1",
-											'QtdProdutoIncremento' => "1"
-										);
-										$data['campos'] = array_keys($data['valor']);
-										$data['idTab_Valor'] = $this->Loginempresa_model->set_valor($data['valor']);
 											
-										if ($data['idTab_Valor'] === FALSE) {
-											$data['msg'] = '?m=2';
-											$this->load->view('loginempresa/form_registrar', $data);
-										} else {
-												
-											//início da criação o site da Empresa///
-											//este é o NOME do site escolhido na hora da criação da empresa!!
-											
-											$pasta = '../' .$data['query']['Site']. '';
+										//início da criação o site da Empresa///
+										//este é o NOME do site escolhido na hora da criação da empresa!!
+										
+										$pasta = '../' .$data['query']['Site']. '';
 
-											// checar se a pasta existe
-											if (!is_dir($pasta)){
-												//cria a pasta
-												mkdir($pasta, 0777);
-											
-												//este é o TAMPLATE do site escolhido na hora da criação da empresa!!
-												$tamplate = '../site2';				
-												if (is_dir($tamplate)){
-													foreach(scandir($tamplate) as $arquivo){
-														$caminho_arquivo = "$tamplate/$arquivo";
-														if(is_file($caminho_arquivo)){
-															//echo $caminho_arquivo . PHP_EOL;
-															/////copy($caminho_arquivo, "../nomedosite/$arquivo");
-															copy($caminho_arquivo, "../" .$data['query']['Site']. "/$arquivo");
-														}
+										// checar se a pasta existe
+										if (!is_dir($pasta)){
+											//cria a pasta
+											mkdir($pasta, 0777);
+										
+											//este é o TAMPLATE do site escolhido na hora da criação da empresa!!
+											$tamplate = '../site2';				
+											if (is_dir($tamplate)){
+												foreach(scandir($tamplate) as $arquivo){
+													$caminho_arquivo = "$tamplate/$arquivo";
+													if(is_file($caminho_arquivo)){
+														//echo $caminho_arquivo . PHP_EOL;
+														/////copy($caminho_arquivo, "../nomedosite/$arquivo");
+														copy($caminho_arquivo, "../" .$data['query']['Site']. "/$arquivo");
 													}
 												}
-
-												/////$nome_arquivo = "../nomedosite/configuracao.php";
-												$nome_arquivo = "../" .$data['query']['Site']. "/configuracao.php";
-												//echo $nome_arquivo;
-												$arquivo = fopen($nome_arquivo, 'r+');
-												fwrite($arquivo, '<?php' . PHP_EOL);
-												fwrite($arquivo, '//Dados da Empresa' . PHP_EOL);
-												fwrite($arquivo, '$idSis_Empresa = ' . $data['idSis_Empresa'] . ';'  . PHP_EOL);
-												fwrite($arquivo, 'define("IDSIS_EMPRESA", "'. $data['idSis_Empresa'] .'");');
-												fclose($arquivo);
 											}
-											//Fim da criação do site da empresa///
-									
-											$pasta1 = $_UP['pasta'] = '../'.$data['query']['Site'].'/'.$data['idSis_Empresa'].'/';
-											mkdir($pasta1, 0777);
-											
-											$pasta2 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/';
-											mkdir($pasta2, 0777);
-											
-											$pasta21 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/original/';
-											mkdir($pasta21, 0777);
-															
-											$pasta22 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/';
-											mkdir($pasta22, 0777);				
-											
-											$arquivo_origem21 = 'arquivos/imagens/empresas/1/documentos/miniatura/SuaLogo.jpg';
-											$arquivo_destino21 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/SuaLogo.jpg';
-											copy($arquivo_origem21, $arquivo_destino21);
-											
-											$arquivo_origem22 = 'arquivos/imagens/empresas/1/documentos/miniatura/icone.ico';
-											$arquivo_destino22 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/icone.ico';
-											copy($arquivo_origem22, $arquivo_destino22);
-											
-											$arquivo_origem23 = 'arquivos/imagens/empresas/1/documentos/miniatura/logo_nav.png';
-											$arquivo_destino23 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/logo_nav.png';
-											copy($arquivo_origem23, $arquivo_destino23);
-											
-											$arquivo_origem24 = 'arquivos/imagens/empresas/1/documentos/miniatura/slide.jpg';
-											$arquivo_destino24 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/slide.jpg';
-											copy($arquivo_origem24, $arquivo_destino24);				
-											
-											$pasta3 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/';
-											mkdir($pasta3, 0777);
-											
-											$pasta31 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/original/';
-											mkdir($pasta31, 0777);
-											
-											$pasta32 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/miniatura/';
-											mkdir($pasta32, 0777);				
 
-											$arquivo_origem3 = 'arquivos/imagens/empresas/1/usuarios/miniatura/SuaFoto.jpg';
-											$arquivo_destino3 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/miniatura/SuaFoto.jpg';
-											
-											copy($arquivo_origem3, $arquivo_destino3);				
-											
-											$pasta4 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/';
-											mkdir($pasta4, 0777);
-											
-											$pasta41 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/original/';
-											mkdir($pasta41, 0777);
-											
-											$pasta42 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/miniatura/';
-											mkdir($pasta42, 0777);				
-											
-											$arquivo_origem4 = 'arquivos/imagens/empresas/1/clientes/miniatura/Foto.jpg';
-											$arquivo_destino4 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/miniatura/Foto.jpg';
-											
-											copy($arquivo_origem4, $arquivo_destino4);
-											
-											$pasta5 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/';
-											mkdir($pasta5, 0777);
-											
-											$pasta51 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/original/';
-											mkdir($pasta51, 0777);
-											
-											$pasta52 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/miniatura/';
-											mkdir($pasta52, 0777);				
-											
-											$arquivo_origem5 = 'arquivos/imagens/empresas/1/produtos/miniatura/fotoproduto.jpg';
-											$arquivo_destino5 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/miniatura/fotoproduto.jpg';
-											
-											copy($arquivo_origem5, $arquivo_destino5);
-											
-											
-											$pasta6 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/';
-											mkdir($pasta6, 0777);
-											
-											$pasta61 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/original/';
-											mkdir($pasta61, 0777);
-											
-											$pasta62 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/miniatura/';
-											mkdir($pasta62, 0777);				
-											
-											$arquivo_origem6 = 'arquivos/imagens/empresas/1/promocao/miniatura/fotopromocao.jpg';
-											$arquivo_destino6 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/miniatura/fotopromocao.jpg';
-											
-											copy($arquivo_origem6, $arquivo_destino6);
-												
+											/////$nome_arquivo = "../nomedosite/configuracao.php";
+											$nome_arquivo = "../" .$data['query']['Site']. "/configuracao.php";
+											//echo $nome_arquivo;
+											$arquivo = fopen($nome_arquivo, 'r+');
+											fwrite($arquivo, '<?php' . PHP_EOL);
+											fwrite($arquivo, '//Dados da Empresa' . PHP_EOL);
+											fwrite($arquivo, '$idSis_Empresa = ' . $data['idSis_Empresa'] . ';'  . PHP_EOL);
+											fwrite($arquivo, 'define("IDSIS_EMPRESA", "'. $data['idSis_Empresa'] .'");');
+											fclose($arquivo);
 										}
-									}	
+										//Fim da criação do site da empresa///
+								
+										$pasta1 = $_UP['pasta'] = '../'.$data['query']['Site'].'/'.$data['idSis_Empresa'].'/';
+										mkdir($pasta1, 0777);
+										
+										$pasta2 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/';
+										mkdir($pasta2, 0777);
+										
+										$pasta21 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/original/';
+										mkdir($pasta21, 0777);
+														
+										$pasta22 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/';
+										mkdir($pasta22, 0777);				
+										
+										$arquivo_origem21 = 'arquivos/imagens/empresas/1/documentos/miniatura/SuaLogo.jpg';
+										$arquivo_destino21 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/SuaLogo.jpg';
+										copy($arquivo_origem21, $arquivo_destino21);
+										
+										$arquivo_origem22 = 'arquivos/imagens/empresas/1/documentos/miniatura/icone.ico';
+										$arquivo_destino22 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/icone.ico';
+										copy($arquivo_origem22, $arquivo_destino22);
+										
+										$arquivo_origem23 = 'arquivos/imagens/empresas/1/documentos/miniatura/logo_nav.png';
+										$arquivo_destino23 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/logo_nav.png';
+										copy($arquivo_origem23, $arquivo_destino23);
+										
+										$arquivo_origem24 = 'arquivos/imagens/empresas/1/documentos/miniatura/slide.jpg';
+										$arquivo_destino24 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/slide.jpg';
+										copy($arquivo_origem24, $arquivo_destino24);				
+										
+										$pasta3 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/';
+										mkdir($pasta3, 0777);
+										
+										$pasta31 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/original/';
+										mkdir($pasta31, 0777);
+										
+										$pasta32 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/miniatura/';
+										mkdir($pasta32, 0777);				
+
+										$arquivo_origem3 = 'arquivos/imagens/empresas/1/usuarios/miniatura/SuaFoto.jpg';
+										$arquivo_destino3 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/miniatura/SuaFoto.jpg';
+										
+										copy($arquivo_origem3, $arquivo_destino3);				
+										
+										$pasta4 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/';
+										mkdir($pasta4, 0777);
+										
+										$pasta41 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/original/';
+										mkdir($pasta41, 0777);
+										
+										$pasta42 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/miniatura/';
+										mkdir($pasta42, 0777);				
+										
+										$arquivo_origem4 = 'arquivos/imagens/empresas/1/clientes/miniatura/Foto.jpg';
+										$arquivo_destino4 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/miniatura/Foto.jpg';
+										
+										copy($arquivo_origem4, $arquivo_destino4);
+										
+										$pasta5 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/';
+										mkdir($pasta5, 0777);
+										
+										$pasta51 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/original/';
+										mkdir($pasta51, 0777);
+										
+										$pasta52 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/miniatura/';
+										mkdir($pasta52, 0777);				
+										
+										$arquivo_origem5 = 'arquivos/imagens/empresas/1/produtos/miniatura/fotoproduto.jpg';
+										$arquivo_destino5 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/miniatura/fotoproduto.jpg';
+										
+										copy($arquivo_origem5, $arquivo_destino5);
+										
+										
+										$pasta6 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/';
+										mkdir($pasta6, 0777);
+										
+										$pasta61 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/original/';
+										mkdir($pasta61, 0777);
+										
+										$pasta62 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/miniatura/';
+										mkdir($pasta62, 0777);				
+										
+										$arquivo_origem6 = 'arquivos/imagens/empresas/1/promocao/miniatura/fotopromocao.jpg';
+										$arquivo_destino6 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/miniatura/fotopromocao.jpg';
+										
+										copy($arquivo_origem6, $arquivo_destino6);
+											
+									}
+										
 								}
 							}		
 						}			
@@ -924,13 +902,13 @@ class Loginempresa extends CI_Controller {
 									'idSis_Usuario' => $data['idSis_Usuario'],
 									'idSis_Empresa' => $data['idSis_Empresa'],
 									'idTab_Modulo' => "1",
+									'idTab_Catprod' => $data['idTab_Catprod'],
 									'idTab_Produto' => $data['idTab_Produto'],
-									'idTab_Modelo' => $data['idTab_Produto'],
 									'Opcao_Atributo_1' => "0",
 									'Opcao_Atributo_2' => "0",
 									'Nome_Prod' => $data['produto']['Produtos'],
-									'Cod_Prod' => $data['idTab_Produto'].':0:0',
-									'VendaSite' => "N"
+									'Cod_Prod' => $data['idTab_Catprod'] . ':' . $data['idTab_Produto'] . ':0:0',
+									'VendaSite' => "S"
 								);
 								$data['campos'] = array_keys($data['produtos']);
 								$data['idTab_Produtos'] = $this->Loginempresa_model->set_produtos($data['produtos']);
@@ -940,172 +918,150 @@ class Loginempresa extends CI_Controller {
 									$this->load->view('loginempresa/form_registrar2', $data);
 								} else {	
 									
-									$data['promocao'] = array(
-										'Promocao' => "Promocao",
-										'Descricao' => "Descricao Promocao",
+									$data['valor'] = array(
 										'idSis_Usuario' => $data['idSis_Usuario'],
 										'idSis_Empresa' => $data['idSis_Empresa'],
 										'idTab_Modulo' => "1",
+										'idTab_Promocao' => "1",
+										'Item_Promocao' => "1",
+										'idTab_Produtos' => $data['idTab_Produtos'],
+										'idTab_Catprod' => $data['idTab_Catprod'],
+										'idTab_Produto' => $data['idTab_Produto'],
+										'ValorProduto' => '1.00',
 										'Desconto' => "1",
-										'Ativo' => "S",
-										'VendaBalcao' => "S",
-										'VendaSite' => "S",
-										'Cat_1' => $data['idTab_Catprod'],
-										'Mod_1' => $data['idTab_Produto']
+										'QtdProdutoDesconto' => "1",
+										'QtdProdutoIncremento' => "1"
 									);
-									$data['campos'] = array_keys($data['promocao']);
-									$data['idTab_Promocao'] = $this->Loginempresa_model->set_promocao($data['promocao']);
-									
-									if ($data['idTab_Promocao'] === FALSE) {
+									$data['campos'] = array_keys($data['valor']);
+									$data['idTab_Valor'] = $this->Loginempresa_model->set_valor($data['valor']);
+										
+									if ($data['idTab_Valor'] === FALSE) {
 										$data['msg'] = '?m=2';
 										$this->load->view('loginempresa/form_registrar2', $data);
 									} else {
-									
-										$data['valor'] = array(
-											'idSis_Usuario' => $data['idSis_Usuario'],
-											'idSis_Empresa' => $data['idSis_Empresa'],
-											'idTab_Modulo' => "1",
-											'idTab_Promocao' => $data['idTab_Promocao'],
-											'Item_Promocao' => "1",
-											'idTab_Produtos' => $data['idTab_Produtos'],
-											'idTab_Catprod' => $data['idTab_Catprod'],
-											'idTab_Modelo' => $data['idTab_Produto'],
-											'ValorProduto' => '1.00',
-											'Convdesc' => $data['promocao']['Descricao'],
-											'Desconto' => "1",
-											'QtdProdutoDesconto' => "1",
-											'QtdProdutoIncremento' => "1"
-										);
-										$data['campos'] = array_keys($data['valor']);
-										$data['idTab_Valor'] = $this->Loginempresa_model->set_valor($data['valor']);
 											
-										if ($data['idTab_Valor'] === FALSE) {
-											$data['msg'] = '?m=2';
-											$this->load->view('loginempresa/form_registrar2', $data);
-										} else {
-												
-											//início da criação o site da Empresa///
-											//este é o NOME do site escolhido na hora da criação da empresa!!
-											
-											$pasta = '../' .$data['query']['Site']. '';
+										//início da criação o site da Empresa///
+										//este é o NOME do site escolhido na hora da criação da empresa!!
+										
+										$pasta = '../' .$data['query']['Site']. '';
 
-											// checar se a pasta existe
-											if (!is_dir($pasta)){
-												//cria a pasta
-												mkdir($pasta, 0777);
-											
-												//este é o TAMPLATE do site escolhido na hora da criação da empresa!!
-												$tamplate = '../site2';				
-												if (is_dir($tamplate)){
-													foreach(scandir($tamplate) as $arquivo){
-														$caminho_arquivo = "$tamplate/$arquivo";
-														if(is_file($caminho_arquivo)){
-															//echo $caminho_arquivo . PHP_EOL;
-															/////copy($caminho_arquivo, "../nomedosite/$arquivo");
-															copy($caminho_arquivo, "../" .$data['query']['Site']. "/$arquivo");
-														}
+										// checar se a pasta existe
+										if (!is_dir($pasta)){
+											//cria a pasta
+											mkdir($pasta, 0777);
+										
+											//este é o TAMPLATE do site escolhido na hora da criação da empresa!!
+											$tamplate = '../site2';				
+											if (is_dir($tamplate)){
+												foreach(scandir($tamplate) as $arquivo){
+													$caminho_arquivo = "$tamplate/$arquivo";
+													if(is_file($caminho_arquivo)){
+														//echo $caminho_arquivo . PHP_EOL;
+														/////copy($caminho_arquivo, "../nomedosite/$arquivo");
+														copy($caminho_arquivo, "../" .$data['query']['Site']. "/$arquivo");
 													}
 												}
-
-												/////$nome_arquivo = "../nomedosite/configuracao.php";
-												$nome_arquivo = "../" .$data['query']['Site']. "/configuracao.php";
-												//echo $nome_arquivo;
-												$arquivo = fopen($nome_arquivo, 'r+');
-												fwrite($arquivo, '<?php' . PHP_EOL);
-												fwrite($arquivo, '//Dados da Empresa' . PHP_EOL);
-												fwrite($arquivo, '$idSis_Empresa = ' . $data['idSis_Empresa'] . ';'  . PHP_EOL);
-												fwrite($arquivo, 'define("IDSIS_EMPRESA", "'. $data['idSis_Empresa'] .'");');
-												fclose($arquivo);
 											}
-											//Fim da criação do site da empresa///
-									
-											$pasta1 = $_UP['pasta'] = '../'.$data['query']['Site'].'/'.$data['idSis_Empresa'].'/';
-											mkdir($pasta1, 0777);
-											
-											$pasta2 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/';
-											mkdir($pasta2, 0777);
-											
-											$pasta21 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/original/';
-											mkdir($pasta21, 0777);
-															
-											$pasta22 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/';
-											mkdir($pasta22, 0777);				
-											
-											$arquivo_origem21 = 'arquivos/imagens/empresas/1/documentos/miniatura/SuaLogo.jpg';
-											$arquivo_destino21 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/SuaLogo.jpg';
-											copy($arquivo_origem21, $arquivo_destino21);
-											
-											$arquivo_origem22 = 'arquivos/imagens/empresas/1/documentos/miniatura/icone.ico';
-											$arquivo_destino22 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/icone.ico';
-											copy($arquivo_origem22, $arquivo_destino22);
-											
-											$arquivo_origem23 = 'arquivos/imagens/empresas/1/documentos/miniatura/logo_nav.png';
-											$arquivo_destino23 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/logo_nav.png';
-											copy($arquivo_origem23, $arquivo_destino23);
-											
-											$arquivo_origem24 = 'arquivos/imagens/empresas/1/documentos/miniatura/slide.jpg';
-											$arquivo_destino24 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/slide.jpg';
-											copy($arquivo_origem24, $arquivo_destino24);				
-											
-											$pasta3 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/';
-											mkdir($pasta3, 0777);
-											
-											$pasta31 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/original/';
-											mkdir($pasta31, 0777);
-											
-											$pasta32 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/miniatura/';
-											mkdir($pasta32, 0777);				
 
-											$arquivo_origem3 = 'arquivos/imagens/empresas/1/usuarios/miniatura/SuaFoto.jpg';
-											$arquivo_destino3 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/miniatura/SuaFoto.jpg';
-											
-											copy($arquivo_origem3, $arquivo_destino3);				
-											
-											$pasta4 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/';
-											mkdir($pasta4, 0777);
-											
-											$pasta41 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/original/';
-											mkdir($pasta41, 0777);
-											
-											$pasta42 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/miniatura/';
-											mkdir($pasta42, 0777);				
-											
-											$arquivo_origem4 = 'arquivos/imagens/empresas/1/clientes/miniatura/Foto.jpg';
-											$arquivo_destino4 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/miniatura/Foto.jpg';
-											
-											copy($arquivo_origem4, $arquivo_destino4);
-											
-											$pasta5 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/';
-											mkdir($pasta5, 0777);
-											
-											$pasta51 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/original/';
-											mkdir($pasta51, 0777);
-											
-											$pasta52 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/miniatura/';
-											mkdir($pasta52, 0777);				
-											
-											$arquivo_origem5 = 'arquivos/imagens/empresas/1/produtos/miniatura/fotoproduto.jpg';
-											$arquivo_destino5 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/miniatura/fotoproduto.jpg';
-											
-											copy($arquivo_origem5, $arquivo_destino5);
-											
-											
-											$pasta6 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/';
-											mkdir($pasta6, 0777);
-											
-											$pasta61 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/original/';
-											mkdir($pasta61, 0777);
-											
-											$pasta62 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/miniatura/';
-											mkdir($pasta62, 0777);				
-											
-											$arquivo_origem6 = 'arquivos/imagens/empresas/1/promocao/miniatura/fotopromocao.jpg';
-											$arquivo_destino6 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/miniatura/fotopromocao.jpg';
-											
-											copy($arquivo_origem6, $arquivo_destino6);
-												
+											/////$nome_arquivo = "../nomedosite/configuracao.php";
+											$nome_arquivo = "../" .$data['query']['Site']. "/configuracao.php";
+											//echo $nome_arquivo;
+											$arquivo = fopen($nome_arquivo, 'r+');
+											fwrite($arquivo, '<?php' . PHP_EOL);
+											fwrite($arquivo, '//Dados da Empresa' . PHP_EOL);
+											fwrite($arquivo, '$idSis_Empresa = ' . $data['idSis_Empresa'] . ';'  . PHP_EOL);
+											fwrite($arquivo, 'define("IDSIS_EMPRESA", "'. $data['idSis_Empresa'] .'");');
+											fclose($arquivo);
 										}
-									}	
+										//Fim da criação do site da empresa///
+								
+										$pasta1 = $_UP['pasta'] = '../'.$data['query']['Site'].'/'.$data['idSis_Empresa'].'/';
+										mkdir($pasta1, 0777);
+										
+										$pasta2 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/';
+										mkdir($pasta2, 0777);
+										
+										$pasta21 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/original/';
+										mkdir($pasta21, 0777);
+														
+										$pasta22 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/';
+										mkdir($pasta22, 0777);				
+										
+										$arquivo_origem21 = 'arquivos/imagens/empresas/1/documentos/miniatura/SuaLogo.jpg';
+										$arquivo_destino21 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/SuaLogo.jpg';
+										copy($arquivo_origem21, $arquivo_destino21);
+										
+										$arquivo_origem22 = 'arquivos/imagens/empresas/1/documentos/miniatura/icone.ico';
+										$arquivo_destino22 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/icone.ico';
+										copy($arquivo_origem22, $arquivo_destino22);
+										
+										$arquivo_origem23 = 'arquivos/imagens/empresas/1/documentos/miniatura/logo_nav.png';
+										$arquivo_destino23 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/logo_nav.png';
+										copy($arquivo_origem23, $arquivo_destino23);
+										
+										$arquivo_origem24 = 'arquivos/imagens/empresas/1/documentos/miniatura/slide.jpg';
+										$arquivo_destino24 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/documentos/miniatura/slide.jpg';
+										copy($arquivo_origem24, $arquivo_destino24);				
+										
+										$pasta3 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/';
+										mkdir($pasta3, 0777);
+										
+										$pasta31 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/original/';
+										mkdir($pasta31, 0777);
+										
+										$pasta32 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/miniatura/';
+										mkdir($pasta32, 0777);				
+
+										$arquivo_origem3 = 'arquivos/imagens/empresas/1/usuarios/miniatura/SuaFoto.jpg';
+										$arquivo_destino3 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/usuarios/miniatura/SuaFoto.jpg';
+										
+										copy($arquivo_origem3, $arquivo_destino3);				
+										
+										$pasta4 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/';
+										mkdir($pasta4, 0777);
+										
+										$pasta41 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/original/';
+										mkdir($pasta41, 0777);
+										
+										$pasta42 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/miniatura/';
+										mkdir($pasta42, 0777);				
+										
+										$arquivo_origem4 = 'arquivos/imagens/empresas/1/clientes/miniatura/Foto.jpg';
+										$arquivo_destino4 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/miniatura/Foto.jpg';
+										
+										copy($arquivo_origem4, $arquivo_destino4);
+										
+										$pasta5 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/';
+										mkdir($pasta5, 0777);
+										
+										$pasta51 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/original/';
+										mkdir($pasta51, 0777);
+										
+										$pasta52 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/miniatura/';
+										mkdir($pasta52, 0777);				
+										
+										$arquivo_origem5 = 'arquivos/imagens/empresas/1/produtos/miniatura/fotoproduto.jpg';
+										$arquivo_destino5 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/miniatura/fotoproduto.jpg';
+										
+										copy($arquivo_origem5, $arquivo_destino5);
+										
+										
+										$pasta6 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/';
+										mkdir($pasta6, 0777);
+										
+										$pasta61 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/original/';
+										mkdir($pasta61, 0777);
+										
+										$pasta62 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/miniatura/';
+										mkdir($pasta62, 0777);				
+										
+										$arquivo_origem6 = 'arquivos/imagens/empresas/1/promocao/miniatura/fotopromocao.jpg';
+										$arquivo_destino6 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/promocao/miniatura/fotopromocao.jpg';
+										
+										copy($arquivo_origem6, $arquivo_destino6);
+											
+									}
+										
 								}
 							}		
 						}			
