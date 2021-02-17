@@ -305,19 +305,15 @@ class Promocao_model extends CI_Model {
 			SELECT 
 				TP.idTab_Promocao,
 				TP.Promocao,
-				T3.Prodaux3,
 				TV.ValorProduto
 			FROM 
 				Tab_Promocao AS TP
-				 LEFT JOIN Tab_Prodaux3 AS T3 ON T3.idTab_Prodaux3 = TP.Prodaux3
 				 LEFT JOIN Tab_Valor AS TV ON TV.idTab_Promocao = TP.idTab_Promocao
-				 
 			WHERE 
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
                 TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				TV.idTab_Promocao = TP.idTab_Promocao
-			ORDER BY 
-				T3.Prodaux3 ASC, 
+			ORDER BY  
 				TP.Promocao ASC 
 		');
 

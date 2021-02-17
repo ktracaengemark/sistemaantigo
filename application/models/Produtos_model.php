@@ -188,43 +188,6 @@ class Produtos_model extends CI_Model {
         return $query[0];
     }
 
-    public function get_produtos_original($data) {
-        $query = $this->db->query('
-			SELECT  
-				TP.*,
-				TPRS.Prod_Serv AS TipoProdServ,
-				TM.idTab_Modelo,
-				TM.Modelo,
-				CTP.Catprod
-			FROM 
-				Tab_Produto AS TP
-					LEFT JOIN Tab_Modelo AS TM ON TM.idTab_Modelo = TP.idTab_Modelo
-					LEFT JOIN Tab_Catprod AS CTP ON CTP.idTab_Catprod = TP.Prodaux3
-					LEFT JOIN Tab_Prod_Serv AS TPRS ON TPRS.Abrev_Prod_Serv = TP.Prod_Serv
-			WHERE 
-				TP.idTab_Produto = ' . $data
-		);
-        $query = $query->result_array();
-
-        /*
-        //echo $this->db->last_query();
-        echo '<br>';
-        echo "<pre>";
-        print_r($query);
-        echo "</pre>";
-        exit ();
-        */
-
-        return $query[0];
-    }	
-
-    public function get_modelo2($data) {
-		$query = $this->db->query('SELECT * FROM Tab_Modelo WHERE idTab_Modelo = ' . $data);
-        $query = $query->result_array();
-
-        return $query[0];
-    }	
-
     public function get_modelo($data) {
 		$query = $this->db->query('SELECT * FROM Tab_Produto WHERE idTab_Produto = ' . $data);
         $query = $query->result_array();
@@ -252,20 +215,6 @@ class Produtos_model extends CI_Model {
         $query = $query->result_array();
 
         return $query[0];
-    }
-	
-    public function get_valor_original($data) {
-		$query = $this->db->query('
-			SELECT * 
-			FROM 
-				Tab_Valor 
-			WHERE 
-				idTab_Modelo = ' . $data . ' AND
-				Desconto = "1"
-		');
-        $query = $query->result_array();
-
-        return $query;
     }
 
     public function get_servico($data) {
@@ -385,84 +334,6 @@ class Produtos_model extends CI_Model {
         //return $query;
 		return $query[0];
     }
-	
-    public function get_derivados($data) {
-		$query = $this->db->query('
-			SELECT  
-				TPS.idTab_Produtos,
-				TPS.idSis_Usuario,
-				TPS.idSis_Empresa,
-				TPS.Cat_Prod,
-				TPS.idTab_Modulo,
-				TPS.idTab_Modelo,
-				TPS.Mod_Prod,
-				TPS.Opcao_Atributo_1,
-				TPS.Opcao_Atributo_2,
-				TPS.idTab_Produto,
-				TPS.Nome_Prod,
-				TPS.Cod_Prod,
-				TPS.Arquivo,
-				TPS.Ativo,
-				TPS.VendaSite,
-				TPS.Tipo_Valor_Prod,
-				TPS.Valor_Produto,
-				TPS.Qtd_Prod_Desc,
-				TPS.Qtd_Prod_Incr,
-				TPS.Comissao,
-				TDS.Desconto,
-				TCP.Nome_Cor_Prod,
-				TTP.Nome_Tam_Prod
-			FROM 
-				Tab_Produtos AS TPS
-					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TPS.Tipo_Valor_Prod
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Opcao_Atributo_1
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Opcao_Atributo_2
-			WHERE 
-				TPS.idTab_Produto = ' . $data . '
-		');
-        $query = $query->result_array();
-
-        return $query;
-    }	
-
-    public function get_derivados2($data) {
-		$query = $this->db->query('
-			SELECT  
-				TPS.idTab_Produtos,
-				TPS.idSis_Usuario,
-				TPS.idSis_Empresa,
-				TPS.Cat_Prod,
-				TPS.idTab_Modulo,
-				TPS.idTab_Modelo,
-				TPS.Mod_Prod,
-				TPS.Opcao_Atributo_1,
-				TPS.Opcao_Atributo_2,
-				TPS.idTab_Produto,
-				TPS.Nome_Prod,
-				TPS.Cod_Prod,
-				TPS.Arquivo,
-				TPS.Ativo,
-				TPS.VendaSite,
-				TPS.Tipo_Valor_Prod,
-				TPS.Valor_Produto,
-				TPS.Qtd_Prod_Desc,
-				TPS.Qtd_Prod_Incr,
-				TPS.Comissao,
-				TDS.Desconto,
-				TCP.Nome_Cor_Prod,
-				TTP.Nome_Tam_Prod
-			FROM 
-				Tab_Produtos AS TPS
-					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = TPS.Tipo_Valor_Prod
-					LEFT JOIN Tab_Cor_Prod AS TCP ON TCP.idTab_Cor_Prod = TPS.Opcao_Atributo_1
-					LEFT JOIN Tab_Tam_Prod AS TTP ON TTP.idTab_Tam_Prod = TPS.Opcao_Atributo_2
-			WHERE 
-				TPS.idTab_Modelo = ' . $data . '
-		');
-        $query = $query->result_array();
-
-        return $query;
-    }	
 	
 	public function get_item($data, $desconto) {
 		$query = $this->db->query('
@@ -949,11 +820,9 @@ class Produtos_model extends CI_Model {
 			SELECT 
 				TP.idTab_Produto,
 				TP.Produtos,
-				T3.Prodaux3,
 				TV.ValorProduto
 			FROM 
 				Tab_Produto AS TP
-				 LEFT JOIN Tab_Prodaux3 AS T3 ON T3.idTab_Prodaux3 = TP.Prodaux3
 				 LEFT JOIN Tab_Valor AS TV ON TV.idTab_Produto = TP.idTab_Produto
 				 
 			WHERE 
@@ -961,7 +830,6 @@ class Produtos_model extends CI_Model {
                 TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				TV.idTab_Produto = TP.idTab_Produto
 			ORDER BY 
-				T3.Prodaux3 ASC, 
 				TP.Produtos ASC 
 		');
 
@@ -1155,112 +1023,11 @@ class Produtos_model extends CI_Model {
         }
     }
 
-    public function delete_produtos_original($id) {
-
-        $query = $this->db->delete('Tab_Atributo_Select', array('idTab_Produto' => $id));
-		$query = $this->db->delete('Tab_Opcao_Select', array('idTab_Produto' => $id));
-		$query = $this->db->delete('Tab_Produto', array('idTab_Produto' => $id));
-        $query = $this->db->delete('Tab_Valor', array('idTab_Modelo' => $id));
-        #$query = $this->db->delete('Tab_Cat_Prod', array('idTab_Produto' => $id));
-        $query = $this->db->delete('Tab_Cor_Prod', array('idTab_Produto' => $id));
-        $query = $this->db->delete('Tab_Tam_Prod', array('idTab_Produto' => $id));
-		$query = $this->db->delete('Tab_Produtos', array('idTab_Produto' => $id));
-		
-        if ($this->db->affected_rows() === 0) {
-            return FALSE;
-        } else {
-            return TRUE;
-        }
-    }
-
     public function get_tipoproduto($data) {
 		$query = $this->db->query('SELECT TipoProduto FROM Tab_TipoProduto WHERE idTab_TipoProduto = ' . $data);
         $query = $query->result_array();
 
         return (isset($query[0]['TipoProduto'])) ? $query[0]['TipoProduto'] : FALSE;
     }
-	
-	public function select_produtos($data = FALSE) {
 
-        if ($data === TRUE) {
-            $array = $this->db->query(
-            'SELECT
-                TPV.idTab_Produto,
-				CONCAT(IFNULL(TPV.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TPV.Produtos,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TPV.UnidadeProduto,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
-				TPV.ValorCompraProduto,
-				TPV.Categoria
-            FROM
-                Tab_Produto AS TPV
-					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = TPV.Fornecedor
-					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPV.Prodaux3
-					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPV.Prodaux2
-					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TPV.Prodaux1
-            WHERE
-                TPV.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				TPV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
-			ORDER BY  
-				TPV.CodProd ASC,
-				TPV.Categoria ASC,
-				TP3.Prodaux3,				
-				TPV.Produtos ASC,
-				TP1.Prodaux1,
-				TP2.Prodaux2 
-    ');
-        } else {
-            $query = $this->db->query(
-            'SELECT
-                TPV.idTab_Produto,
-				CONCAT(IFNULL(TPV.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(TPV.Produtos,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TPV.UnidadeProduto,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
-				TPV.ValorCompraProduto,
-				TPV.Categoria
-            FROM
-                Tab_Produto AS TPV
-					LEFT JOIN App_Fornecedor AS TFO ON TFO.idApp_Fornecedor = TPV.Fornecedor
-					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TPV.Prodaux3
-					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = TPV.Prodaux2
-					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = TPV.Prodaux1
-            WHERE
-                TPV.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-				TPV.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
-			ORDER BY  
-				TPV.CodProd ASC,
-				TPV.Categoria ASC,
-				TP3.Prodaux3,				
-				TPV.Produtos ASC,
-				TP1.Prodaux1,
-				TP2.Prodaux2 
-    ');
-
-            $array = array();
-            foreach ($query->result() as $row) {
-                $array[$row->idTab_Produto] = $row->NomeProduto;
-            }
-        }
-
-        return $array;
-    }	
-
-	public function select_prodaux33() {
-
-        $query = $this->db->query('
-            SELECT
-                P.idTab_Prodaux3,
-                P.Prodaux3
-            FROM
-                Tab_Prodaux3 AS P
-            WHERE
-                P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
-				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
-            ORDER BY
-                Prodaux3 ASC
-        ');
-
-        $array = array();
-        $array[0] = ':: Todos ::';
-        foreach ($query->result() as $row) {
-            $array[$row->idTab_Prodaux3] = $row->Prodaux3;
-        }
-
-        return $array;
-    }
 }
