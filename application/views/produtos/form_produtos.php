@@ -115,7 +115,7 @@
 																		<input class="form-control"readonly="" value="<?php echo $_SESSION['Produtos']['Opcao1']; ?>">
 																	<?php } ?>
 																	<?php }else{ ?>
-																	<label for="Opcao_Atributo_1">Não existe Atributo1</label>
+																	<label for="Opcao_Atributo_1">Não existe Variacao1</label>
 																	<input type="text" class="form-control"readonly="" name="Opcao_Atributo_1" id="Opcao_Atributo_1" value="0">
 																<?php } ?>
 															</div>
@@ -144,7 +144,7 @@
 																		<input class="form-control"readonly="" value="<?php echo $_SESSION['Produtos']['Opcao2']; ?>">
 																	<?php } ?>
 																	<?php }else{ ?>
-																	<label for="Opcao_Atributo_2">Não existe Atributo2</label>
+																	<label for="Opcao_Atributo_2">Não existe Variacao2</label>
 																	<input type="text" class="form-control"readonly=""  name="Opcao_Atributo_2" id="Opcao_Atributo_2" value="0">
 																<?php } ?>
 															</div>
@@ -465,7 +465,7 @@
 																		<?php } ?>
 																		<?php if ($metodo >= 2) { ?>
 																			<div class="col-md-2 text-left">	
-																				<label >Atributos</label><br>
+																				<label >Variacoes</label><br>
 																				<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addAtributoModal">
 																					Cad./Edit
 																				</button>
@@ -816,7 +816,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="addAtributoModalLabel">Cadastrar Atributo</h5>
+				<h5 class="modal-title" id="addAtributoModalLabel">Cadastrar Variacao</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -832,17 +832,19 @@
 						</div>	
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Atributo</label>
+						<label class="col-sm-2 col-form-label">Variacao</label>
 						<div class="col-sm-10">
-							<input name="Novo_Atributo" type="text" class="form-control" id="Novo_Atributo" placeholder="Atributo">
+							<input name="Novo_Atributo" type="text" class="form-control" id="Novo_Atributo" placeholder="Variacao">
 						</div>
 					</div>
 					<div class="form-group row">	
 						<div class="col-sm-6">
-							<br>
-							<button type="submit" class="btn btn-success btn-block" name="botaoCadAtributo" id="botaoCadAtributo" >
-								<span class="glyphicon glyphicon-plus"></span> Cadastrar
-							</button>
+							<?php if($Conta_Atributos < 2) { ?>
+								<br>
+								<button type="submit" class="btn btn-success btn-block" name="botaoCadAtributo" id="botaoCadAtributo" >
+									<span class="glyphicon glyphicon-plus"></span> Cadastrar
+								</button>
+							<?php } ?>
 						</div>
 						<div class="col-sm-6">
 							<br>
@@ -866,13 +868,13 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="alterarAtributoLabel">Atributo</h4>
+				<h4 class="modal-title" id="alterarAtributoLabel">Variacao</h4>
 			</div>
 			<div class="modal-body">
 				<span id="msg-error-alterar-atributo"></span>
 				<form method="post" id="alterar_atributo_form">
 					<div class="form-group">
-						<label for="Atributo" class="control-label">Atributo:</label>
+						<label for="Atributo" class="control-label">Variacao:</label>
 						<input type="text" class="form-control" name="Atributo" id="Atributo">
 					</div>
 					<input type="hidden" name="id_Atributo" id="id_Atributo">

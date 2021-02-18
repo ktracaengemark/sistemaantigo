@@ -75,23 +75,23 @@ class Produtos extends CI_Controller {
             $_SESSION['Atributo'] = $data['atributo'] = $this->Produtos_model->get_atributos($_SESSION['Produtos']['idTab_Catprod']);
             if (count($data['atributo']) > 0) {
                 $data['atributo'] = array_combine(range(1, count($data['atributo'])), array_values($data['atributo']));
-                $conta_atributos = count($data['atributo']);
+                $data['Conta_Atributos'] = count($data['atributo']);
 				/*
 				echo '<br>';
 				  echo "<pre>";
-				  print_r($conta_atributos);
+				  print_r($data['Conta_Atributos']);
 				  echo '<br>';
 				  echo "</pre>";
 				 */ 
 				if (isset($data['atributo'])) {
-					if ($conta_atributos >= 2) {
-						for($j=1; $j <= $conta_atributos; $j++){
+					if ($data['Conta_Atributos'] >= 2) {
+						for($j=1; $j <= $data['Conta_Atributos']; $j++){
 							$_SESSION['Atributo'][$j]['idTab_Atributo'] = $data['atributo'][$j]['idTab_Atributo'];
 							$_SESSION['Atributo'][$j]['Atributo'] = $data['atributo'][$j]['Atributo'];
 							/*
 							  echo '<br>';
 							  echo "<pre>";
-							  //print_r($conta_atributos);
+							  //print_r($data['Conta_Atributos']);
 							  echo '<br>';
 							  print_r($_SESSION['Atributo'][$j]['idTab_Atributo']);
 							  echo '<br>';
@@ -100,7 +100,7 @@ class Produtos extends CI_Controller {
 							*/
 						}
 					}else{
-						for($j=1; $j <= $conta_atributos; $j++){
+						for($j=1; $j <= $data['Conta_Atributos']; $j++){
 							$_SESSION['Atributo'][1]['idTab_Atributo'] = $data['atributo'][$j]['idTab_Atributo'];
 							$_SESSION['Atributo'][1]['Atributo'] = $data['atributo'][$j]['Atributo'];
 						}
@@ -392,26 +392,26 @@ class Produtos extends CI_Controller {
 		#### Tab_Atributo_Select ####
 		$_SESSION['Atributo'] = $data['atributo'] = $this->Produtos_model->get_atributos($_SESSION['Produtos']['idTab_Catprod']);
 		
-		$conta_atributos = count($data['atributo']);
+		$data['Conta_Atributos'] = count($data['atributo']);
 		if (count($data['atributo']) > 0) {
 			$data['atributo'] = array_combine(range(1, count($data['atributo'])), array_values($data['atributo']));
 			
 			/*
 			echo '<br>';
 			  echo "<pre>";
-			  print_r($conta_atributos);
+			  print_r($data['Conta_Atributos']);
 			  echo '<br>';
 			  echo "</pre>";
 			 */ 
 			if (isset($data['atributo'])) {
-				if ($conta_atributos >= 2) {
-					for($j=1; $j <= $conta_atributos; $j++){
+				if ($data['Conta_Atributos'] >= 2) {
+					for($j=1; $j <= $data['Conta_Atributos']; $j++){
 						$_SESSION['Atributo'][$j]['idTab_Atributo'] = $data['atributo'][$j]['idTab_Atributo'];
 						$_SESSION['Atributo'][$j]['Atributo'] = $data['atributo'][$j]['Atributo'];
 						/*
 						  echo '<br>';
 						  echo "<pre>";
-						  //print_r($conta_atributos);
+						  //print_r($data['Conta_Atributos']);
 						  echo '<br>';
 						  print_r($_SESSION['Atributo'][$j]['idTab_Atributo']);
 						  echo '<br>';
@@ -420,7 +420,7 @@ class Produtos extends CI_Controller {
 						*/
 					}
 				}else{
-					for($j=1; $j <= $conta_atributos; $j++){
+					for($j=1; $j <= $data['Conta_Atributos']; $j++){
 						$_SESSION['Atributo'][1]['idTab_Atributo'] = $data['atributo'][$j]['idTab_Atributo'];
 						$_SESSION['Atributo'][1]['Atributo'] = $data['atributo'][$j]['Atributo'];
 					}
@@ -508,10 +508,10 @@ class Produtos extends CI_Controller {
 		$this->form_validation->set_rules('Cod_Prod', 'Código', 'required|trim|is_unique_by_id_empresa[Tab_Produtos.Cod_Prod.' . $data['produtos']['idTab_Produtos'] . '.idSis_Empresa.' . $_SESSION['Produtos']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Cod_Barra', 'Código de Barra', 'trim|is_unique_by_id_empresa[Tab_Produtos.Cod_Barra.' . $data['produtos']['idTab_Produtos'] . '.idSis_Empresa.' . $_SESSION['Produtos']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
-		if($conta_atributos > 0){
-			if($conta_atributos == 1){
+		if($data['Conta_Atributos'] > 0){
+			if($data['Conta_Atributos'] == 1){
 				$this->form_validation->set_rules('Opcao_Atributo_1', $_SESSION['Atributo'][1]['Atributo'], 'required|trim');
-			}elseif($conta_atributos == 2){
+			}elseif($data['Conta_Atributos'] == 2){
 				$this->form_validation->set_rules('Opcao_Atributo_1', $_SESSION['Atributo'][1]['Atributo'], 'required|trim');
 				$this->form_validation->set_rules('Opcao_Atributo_2', $_SESSION['Atributo'][2]['Atributo'], 'required|trim');
 			}
@@ -610,26 +610,26 @@ class Produtos extends CI_Controller {
 		}
 		#### Tab_Atributo_Select ####
 		$_SESSION['Atributo'] = $data['atributo'] = $this->Produtos_model->get_atributos($_SESSION['Produtos']['idTab_Catprod']);
-		$conta_atributos = count($data['atributo']);
+		$data['Conta_Atributos'] = count($data['atributo']);
 		if (count($data['atributo']) > 0) {
 			$data['atributo'] = array_combine(range(1, count($data['atributo'])), array_values($data['atributo']));
 			
 			/*
 			echo '<br>';
 			  echo "<pre>";
-			  print_r($conta_atributos);
+			  print_r($data['Conta_Atributos']);
 			  echo '<br>';
 			  echo "</pre>";
 			 */ 
 			if (isset($data['atributo'])) {
-				if ($conta_atributos >= 2) {
-					for($j=1; $j <= $conta_atributos; $j++){
+				if ($data['Conta_Atributos'] >= 2) {
+					for($j=1; $j <= $data['Conta_Atributos']; $j++){
 						$_SESSION['Atributo'][$j]['idTab_Atributo'] = $data['atributo'][$j]['idTab_Atributo'];
 						$_SESSION['Atributo'][$j]['Atributo'] = $data['atributo'][$j]['Atributo'];
 						/*
 						  echo '<br>';
 						  echo "<pre>";
-						  //print_r($conta_atributos);
+						  //print_r($data['Conta_Atributos']);
 						  echo '<br>';
 						  print_r($_SESSION['Atributo'][$j]['idTab_Atributo']);
 						  echo '<br>';
@@ -638,7 +638,7 @@ class Produtos extends CI_Controller {
 						*/
 					}
 				}else{
-					for($j=1; $j <= $conta_atributos; $j++){
+					for($j=1; $j <= $data['Conta_Atributos']; $j++){
 						$_SESSION['Atributo'][1]['idTab_Atributo'] = $data['atributo'][$j]['idTab_Atributo'];
 						$_SESSION['Atributo'][1]['Atributo'] = $data['atributo'][$j]['Atributo'];
 					}
@@ -718,10 +718,10 @@ class Produtos extends CI_Controller {
 		$this->form_validation->set_rules('Cod_Prod', 'Código', 'required|trim|is_unique_by_id_empresa[Tab_Produtos.Cod_Prod.' . $data['produtos']['idTab_Produtos'] . '.idSis_Empresa.' . $_SESSION['Produtos']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Cod_Barra', 'Código de Barra', 'trim|is_unique_by_id_empresa[Tab_Produtos.Cod_Barra.' . $data['produtos']['idTab_Produtos'] . '.idSis_Empresa.' . $_SESSION['Produtos']['idSis_Empresa'] . ']');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');			
-		if($conta_atributos > 0){
-			if($conta_atributos == 1){
+		if($data['Conta_Atributos'] > 0){
+			if($data['Conta_Atributos'] == 1){
 				$this->form_validation->set_rules('Opcao_Atributo_1', $_SESSION['Atributo'][1]['Atributo'], 'required|trim');
-			}elseif($conta_atributos == 2){
+			}elseif($data['Conta_Atributos'] == 2){
 				$this->form_validation->set_rules('Opcao_Atributo_1', $_SESSION['Atributo'][1]['Atributo'], 'required|trim');
 				$this->form_validation->set_rules('Opcao_Atributo_2', $_SESSION['Atributo'][2]['Atributo'], 'required|trim');
 			}
