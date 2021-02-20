@@ -251,7 +251,7 @@
 															<div class="col-md-6">	
 																<label for="CadastrarResp">Responsavel</label><br>
 																<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addResponsavelModal">
-																	Cadastrar
+																	Cadastrar/ Editar
 																</button>
 															</div>	
 															<div class="col-md-6">	
@@ -706,7 +706,7 @@
 		</div>
 	</div>	
 </div>
-			
+
 <div id="addResponsavelModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -751,7 +751,7 @@
 								</div>
 								<div class="col-md-3 mb-3 ">
 									<div class="custom-control custom-radio">
-										<input type="radio" name="SexoResponsavel" class="custom-control-input " id="Correios" value="O" checked>
+										<input type="radio" name="SexoResponsavel" class="custom-control-input " id="Correios" value="O">
 										<label class="custom-control-label" for="Outros">Outros</label>
 									</div>
 								</div>
@@ -822,24 +822,6 @@
 	</div>
 </div>
 
-<div id="msgResponsavelExiste" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header bg-warning text-center">
-				<h5 class="modal-title" id="existeClienteModalLabel">Atenção</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				  <span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				Este Celular já é Cadastrado!
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
-			</div>
-		</div>
-	</div>
-</div>
 <div id="addMotivoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

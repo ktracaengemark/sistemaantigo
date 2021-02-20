@@ -81,6 +81,8 @@ function Aguardar () {
 	$('.aguardar1').hide();
 	$('.aguardar2').hide();
 	$('.aguardarsalvar').hide();
+	$('.aguardarResponsavel').hide();
+	$('.aguardarCliente').hide();
 	$('.aguardarCatprom').hide();
 	$('.aguardarCatprod').hide();
 	$('.aguardarAtributo').hide();
@@ -142,7 +144,7 @@ $(document).ready(function(){
 								
 					//Alerta de cadastro realizado com sucesso
 					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
-					$('#msgCadMotivoSucesso').modal('show');
+					$('#msgCadSucesso').modal('show');
 					
 					//Limpar mensagem de erro
 					$("#msg-error-motivo").html('');
@@ -253,26 +255,28 @@ $(document).ready(function(){
 	});
 	
 	$('#insert_cliente_form').on('submit', function(event){
-		//alert('ok');
+		//alert('ok');			
 		event.preventDefault();
+		
 		if($('#NomeCliente').val() == "" || $('#CelularCliente').val() == ""){
 			//Alerta de campo  vazio
-			$("#msg-error-cliente").html('<div class="alert alert-danger" role="alert">Necessário prencher Nome e Celular do Cliente!</div>');						
+			$("#msg-error-cliente").html('<div class="alert alert-danger" role="alert">Necessário prencher Nome e Celular!</div>');
 		}else{		
-			
+			//console.log($('#NomeCliente').val());
+			//console.log($('#CelularCliente').val());			
 			var celular = $('#CelularCliente').val();
 			var tamanho = celular.toString().length;
 			//console.log(tamanho);
 			
 			if( tamanho == 11 ) {
 				//Fechar o botão cadastrar
-				$('#botaoCad').hide();
+				$('#botaoCadCliente').hide();
 									
 				//Fechar o botão fechar
-				$('#botaoFechar').hide();
+				$('#botaoFecharCliente').hide();
 				
 				//Abre o Aguardar
-				$('.aguardar1').show();	
+				$('.aguardarCliente').show();	
 				
 				//Receber os dados do formulário
 				var dados = $("#insert_cliente_form").serialize();
@@ -287,9 +291,17 @@ $(document).ready(function(){
 						//Fechar a janela modal cadastrar
 						$('#addClienteModal').modal('hide');
 									
-						//Alerta de cadastro realizado com sucesso
-						//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+						//Alerta de Cliente existente 
 						$('#msgClienteExiste').modal('show');
+						
+						//Abre o botão cadastrar
+						$('#botaoCadCliente').show();
+											
+						//Abre o botão fechar
+						$('#botaoFecharCliente').show();
+						
+						//Fecha o Aguardar
+						$('.aguardarCliente').hide();
 						
 						//Limpar mensagem de erro
 						$("#msg-error-cliente").html('');
@@ -304,7 +316,7 @@ $(document).ready(function(){
 									
 						//Alerta de cadastro realizado com sucesso
 						//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
-						$('#msgCadClienteSucesso').modal('show');
+						$('#msgCadSucesso').modal('show');
 						
 						//Limpar mensagem de erro
 						$("#msg-error-cliente").html('');
@@ -318,7 +330,92 @@ $(document).ready(function(){
 			}else{
 				$("#msg-error-cliente").html('<div class="alert alert-danger" role="alert">O Celular deve conter 11 números!</div>');
 			}
-		}	
+			
+		}
+		
+		
+	});	
+	
+	$('#insert_responsavel_form').on('submit', function(event){
+		//alert('ok');
+		
+		event.preventDefault();
+		
+		if($('#NomeResponsavel').val() == "" || $('#CelularResponsavel').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-responsavel").html('<div class="alert alert-danger" role="alert">Necessário prencher Nome e Celular do Responsavel!</div>');						
+		}else{		
+			//console.log($('#NomeResponsavel').val());
+			//console.log($('#CelularResponsavel').val());
+			var celular = $('#CelularResponsavel').val();
+			var tamanho = celular.toString().length;
+			//console.log(tamanho);
+			
+			if( tamanho == 11 ) {
+				//Fechar o botão cadastrar
+				$('#botaoCadResponsavel').hide();
+									
+				//Fechar o botão fechar
+				$('#botaoFecharResponsavel').hide();
+				
+				//Abre o Aguardar
+				$('.aguardarResponsavel').show();	
+				
+				//Receber os dados do formulário
+				var dados = $("#insert_responsavel_form").serialize();
+				//console.log(dados);
+				
+				$.post(window.location.origin+ '/' + app + '/cadastros/Responsavel.php?', dados, function (retorna){
+				 //console.log(retorna);
+					if(retorna == 5){
+						//Limpar os campo
+						$('#insert_responsavel_form')[0].reset();
+						
+						//Fechar a janela modal cadastrar
+						$('#addResponsavelModal').modal('hide');
+									
+						//Alerta de Responsavel ja cadastrado
+						$('#msgResponsavelExiste').modal('show');
+						
+						//Abre o botão cadastrar
+						$('#botaoCadResponsavel').show();
+											
+						//Abre o botão fechar
+						$('#botaoFecharResponsavel').show();
+						
+						//Fecha o Aguardar
+						$('.aguardarResponsavel').hide();
+						
+						//Limpar mensagem de erro
+						$("#msg-error-responsavel").html('');
+						
+						//listar_usuario(1, 50);
+					}else if(retorna == 1){
+						//Limpar os campo
+						$('#insert_responsavel_form')[0].reset();
+						
+						//Fechar a janela modal cadastrar
+						$('#addResponsavelModal').modal('hide');
+									
+						//Alerta de cadastro realizado com sucesso
+						//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+						$('#msgCadSucesso').modal('show');
+						
+						//Limpar mensagem de erro
+						$("#msg-error-responsavel").html('');
+						
+						//listar_usuario(1, 50);
+					}else{
+						$("#msg-error-responsavel").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Responsavel!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+					}
+					
+				});
+			}else{
+				$("#msg-error-responsavel").html('<div class="alert alert-danger" role="alert">O Celular deve conter 11 números!</div>');
+			}
+			
+		}
+		
 	});	
 	
 	$('#insert_fornecedor_form').on('submit', function(event){

@@ -413,14 +413,14 @@
 
 										<div class="panel panel-primary">
 
-											<div class="panel-heading"><strong>Contato</strong></div>
+											<div class="panel-heading"><strong>Dependentes</strong></div>
 											<div class="panel-body">
 										
 												
 												<?php
 												if (!$list) {
 												?>
-													<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>contatocliente/cadastrar" role="button"> 
+													<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>clientedep/cadastrar" role="button"> 
 														<span class="glyphicon glyphicon-plus"></span> Cad.
 													</a>
 													<br><br>

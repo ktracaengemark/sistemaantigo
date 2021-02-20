@@ -2069,11 +2069,11 @@
 							</div>
 						</div>
 					</div>
-					<div id="msgCadClienteSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header bg-success text-center">
-									<h4 class="modal-title" id="visulClienteModalLabel">Cliente Cadastrado com sucesso!</h4>
+									<h4 class="modal-title" id="visulClienteModalLabel">Cadastrado com sucesso!</h4>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									  <span aria-hidden="true">&times;</span>
 									</button>
@@ -2210,17 +2210,17 @@
 					<div class="form-group row">	
 						<div class="col-sm-6">
 							<br>
-							<button type="submit" class="btn btn-success btn-block" name="botaoCad" id="botaoCad" >
+							<button type="submit" class="btn btn-success btn-block" name="botaoCadCliente" id="botaoCadCliente" >
 								<span class="glyphicon glyphicon-plus"></span> Cadastrar
 							</button>
 						</div>
 						<div class="col-sm-6">
 							<br>
-							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFechar" id="botaoFechar">
+							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFecharCliente" id="botaoFecharCliente">
 								<span class="glyphicon glyphicon-remove"></span> Fechar
 							</button>
 						</div>	
-						<div class="col-md-12 alert alert-warning aguardar1" role="alert" >
+						<div class="col-md-12 alert alert-warning aguardarCliente" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
 					</div>

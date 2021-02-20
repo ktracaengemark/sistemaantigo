@@ -58,14 +58,6 @@
 											</a>
 										</a>
 									</li>
-									<li role="separator" class="divider"></li>
-									<li>
-										<a <?php if (preg_match("/clientedep\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
-											<a href="<?php echo base_url() . 'cliente/clientedep/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-												<span class="glyphicon glyphicon-user"></span> Dependentes do Cliente
-											</a>
-										</a>
-									</li>
 								</ul>
 							</div>
 							<!--
@@ -413,14 +405,14 @@
 
 										<div class="panel panel-primary">
 
-											<div class="panel-heading"><strong>Contato</strong></div>
+											<div class="panel-heading"><strong>Pets</strong></div>
 											<div class="panel-body">
 										
 												
 												<?php
 												if (!$list) {
 												?>
-													<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>contatocliente/cadastrar" role="button"> 
+													<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>clientepet/cadastrar" role="button"> 
 														<span class="glyphicon glyphicon-plus"></span> Cad.
 													</a>
 													<br><br>
