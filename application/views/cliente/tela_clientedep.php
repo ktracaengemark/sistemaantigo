@@ -195,9 +195,9 @@
 						</div>
 						<div class="panel-body">				
 							<div style="overflow: auto; height: 500px; ">																											 
+								<!--
 								<div class="form-group">	
 									<div class="row">
-										
 										<div class=" col-md-6">	
 											<div class="row">	
 												<div class="col-sm-offset-2 col-md-10 " align="left"> 
@@ -207,7 +207,7 @@
 												</div>
 											</div>		
 										</div>
-										<!--
+										
 										<div class=" col-md-6">								
 											<table class="table table-user-information">
 												<tbody>
@@ -410,9 +410,9 @@
 												</tbody>
 											</table>
 										</div>
-										-->
 									</div>
 								</div>
+								-->
 								<div class="row">
 				
 									<div class="col-md-12 col-lg-12">

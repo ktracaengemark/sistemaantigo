@@ -469,4 +469,44 @@ class Cliente_model extends CI_Model {
         return $array;
     }	
 
+	public function select_relacao($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query('
+                SELECT 
+                    TR.idTab_Relacao,
+					TR.Tipo,
+                    CONCAT(IFNULL(TR.Relacao,"")) AS Relacao
+				FROM
+                    Tab_Relacao AS TR
+				WHERE
+					TR.Tipo = "PESSOAL"
+				ORDER BY 
+					TR.Relacao ASC
+			');
+
+        } else {
+            #$query = $this->db->query('SELECT  idTab_Relacao, Relacao FROM Tab_Relacao  WHERE idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario']);
+            $query = $this->db->query('
+                SELECT 
+                    TR.idTab_Relacao,
+					TR.Tipo,
+                    CONCAT(IFNULL(TR.Relacao,"")) AS Relacao
+				FROM
+                    Tab_Relacao AS TR
+				WHERE
+					TR.Tipo = "PESSOAL"
+				ORDER BY 
+					TR.Relacao ASC
+			');
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Relacao] = $row->Relacao;
+				#$array[$row->Relacao] = $row->Relacao;
+            }
+        }
+
+        return $array;
+    }
+
 }

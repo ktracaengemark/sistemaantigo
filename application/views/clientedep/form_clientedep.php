@@ -196,16 +196,13 @@
 										<label for="NomeClienteDep">Nome do Dependente: *</label>
 										<input type="text" class="form-control" id="NomeClienteDep" maxlength="255" <?php echo $readonly; ?>
 											   name="NomeClienteDep" autofocus value="<?php echo $query['NomeClienteDep']; ?>">
+										<?php echo form_error('NomeClienteDep'); ?> 
 									</div>
 									<div class="col-md-4">
 										<label for="DataNascimentoDep">Data de Nascimento:</label>
 										<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
 											   name="DataNascimentoDep" placeholder="DD/MM/AAAA" value="<?php echo $query['DataNascimentoDep']; ?>">
-									</div>						
-								</div>
-							</div>	
-							<div class="form-group">
-								<div class="row"> 
+									</div> 
 									<div class="col-md-4">
 										<label for="SexoDep">Sexo:</label>
 										<select data-placeholder="Selecione uma Opção..." class="form-control" <?php echo $readonly; ?>
@@ -221,6 +218,27 @@
 											}
 											?>   
 										</select>
+									</div>						
+								</div>
+							</div>	
+							<div class="form-group">
+								<div class="row">					
+									<div class="col-md-4">
+										<label for="RelacaoDep">Relação</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+												id="RelacaoDep" name="RelacaoDep">
+											<option value="">-- Selecione uma Relação --</option>
+											<?php
+											foreach ($select['RelacaoDep'] as $key => $row) {
+												if ($query['RelacaoDep'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>   
+										</select>
+										<?php echo form_error('RelacaoDep'); ?>           
 									</div>
 									<div class="col-md-4">
 										<label for="ObsDep">OBS:</label>

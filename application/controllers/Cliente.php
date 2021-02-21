@@ -53,6 +53,7 @@ class Cliente extends CI_Controller {
 			'CadastrarResp',
 			'Responsavel',
 			'idApp_Responsavel',
+			'RelacaoDep',
         ), TRUE));        
 		
 		$data['query'] = quotes_to_entities($this->input->post(array(
@@ -116,6 +117,7 @@ class Cliente extends CI_Controller {
 			'N' => 'Dependente',
 			'S' => 'Responsavel',
         );
+		$data['select']['RelacaoDep'] = $this->Cliente_model->select_relacao();
 		$data['select']['option'] = ($_SESSION['log']['Permissao'] <= 2) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
 		
         $data['titulo'] = 'Cadastrar Cliente';
@@ -173,6 +175,7 @@ class Cliente extends CI_Controller {
 			$this->form_validation->set_rules('CelularCliente', 'CelularCliente', 'required|trim|is_unique_duplo[App_Cliente.CelularCliente.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']|valid_celular');
         }else{
 			$this->form_validation->set_rules('idApp_Responsavel', 'Nome do Responsável', 'required|trim');
+			$this->form_validation->set_rules('RelacaoDep', 'Relação', 'required|trim');
 		}
 		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
 		$this->form_validation->set_rules('idSis_Empresa', 'Empresa', 'required|trim');
@@ -367,6 +370,7 @@ class Cliente extends CI_Controller {
 				$data['dependente']['NomeClienteDep'] = trim(mb_strtoupper($data['query']['NomeCliente'], 'ISO-8859-1'));
 				$data['dependente']['DataNascimentoDep'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
 				$data['dependente']['SexoDep'] = $data['query']['Sexo'];
+				$data['dependente']['RelacaoDep'] = $data['cadastrar']['RelacaoDep'];
 				$data['dependente']['idApp_Cliente'] = $data['cadastrar']['idApp_Responsavel'];
 				$data['dependente']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 				$data['dependente']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];

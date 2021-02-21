@@ -217,9 +217,26 @@
 																	?>
 																</select>
 																<?php echo form_error('idApp_Responsavel'); ?>
+															</div>					
+															<div class="col-md-4">
+																<label for="RelacaoDep">Relação</label>
+																<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+																		id="RelacaoDep" name="RelacaoDep">
+																	<option value="">-- Selecione uma Relação --</option>
+																	<?php
+																	foreach ($select['RelacaoDep'] as $key => $row) {
+																		if ($cadastrar['RelacaoDep'] == $key) {
+																			echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																		} else {
+																			echo '<option value="' . $key . '">' . $row . '</option>';
+																		}
+																	}
+																	?>   
+																</select>
+																<?php echo form_error('RelacaoDep'); ?>          
 															</div>	
 															<div class="col-md-4 text-left">
-																<label for="CadastrarResp">Encontrado?</label><br>
+																<label for="CadastrarResp">Encontrado Responsável?</label><br>
 																<div class="btn-group" data-toggle="buttons">
 																	<?php
 																	foreach ($select['CadastrarResp'] as $key => $row) {
