@@ -901,7 +901,7 @@ class Produtos_model extends CI_Model {
         unset($data['idTab_Valor']);
         $query = $this->db->update('Tab_Valor', $data, array('idTab_Valor' => $id));
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
-
+		
     }
 	
     public function update_servico($data) {

@@ -304,19 +304,6 @@ class Tarefa extends CI_Controller {
 
         //Fim do trecho de código que dá pra melhorar
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        #### App_Procedimento ####
-        $this->form_validation->set_rules('Procedimento', 'Tarefa', 'required|trim');
-		$this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'trim|valid_date');
-        $this->form_validation->set_rules('DataProcedimentoLimite', 'Concluir em', 'trim|valid_date');
-        $this->form_validation->set_rules('Categoria', 'Categoria', 'required|trim');
-		if($_SESSION['log']['idSis_Empresa'] != 5){
-			$this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
-		}	
-		//$this->form_validation->set_rules('Prioridade', 'Prioridade', 'required|trim');
-		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
-
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();
         #$data['select']['Rotina'] = $this->Basico_model->select_status_sn();
@@ -379,7 +366,22 @@ class Tarefa extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
+		$data['q_categoria'] = $this->Tarefa_model->list_categoria($_SESSION['log'], TRUE);
+		$data['list_categoria'] = $this->load->view('tarefa/list_categoria', $data, TRUE);
 
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #### App_Procedimento ####
+        $this->form_validation->set_rules('Procedimento', 'Tarefa', 'required|trim');
+		$this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'trim|valid_date');
+        $this->form_validation->set_rules('DataProcedimentoLimite', 'Concluir em', 'trim|valid_date');
+        $this->form_validation->set_rules('Categoria', 'Categoria', 'required|trim');
+		if($_SESSION['log']['idSis_Empresa'] != 5){
+			$this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
+		}	
+		//$this->form_validation->set_rules('Prioridade', 'Prioridade', 'required|trim');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+		
         /*
           echo '<br>';
           echo "<pre>";
@@ -390,12 +392,9 @@ class Tarefa extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            //if (1 == 1) {
             $this->load->view('tarefa/form_tarefa', $data);
         } else {
 
-			$data['cadastrar']['Cadastrar'] = $data['cadastrar']['Cadastrar'];
-			
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### App_Procedimento ####
             $data['tarefa']['DataProcedimento'] = $this->basico->mascara_data($data['tarefa']['DataProcedimento'], 'mysql');
@@ -579,19 +578,6 @@ class Tarefa extends CI_Controller {
 			
         }
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        #### App_Procedimento ####
-        $this->form_validation->set_rules('Procedimento', 'Tarefa', 'required|trim');
-		$this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'trim|valid_date');        
-		$this->form_validation->set_rules('DataProcedimentoLimite', 'Concluir em', 'trim|valid_date');
-        $this->form_validation->set_rules('Categoria', 'Categoria', 'required|trim');
-		if($_SESSION['log']['idSis_Empresa'] != 5){
-			$this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
-		}
-		//$this->form_validation->set_rules('Prioridade', 'Prioridade', 'required|trim');
-		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
-
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
         $data['select']['ConcluidoProcedimento'] = $this->Basico_model->select_status_sn();        
         #$data['select']['Rotina'] = $this->Basico_model->select_status_sn();        
@@ -659,6 +645,21 @@ class Tarefa extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
+		$data['q_categoria'] = $this->Tarefa_model->list_categoria($_SESSION['log'], TRUE);
+		$data['list_categoria'] = $this->load->view('tarefa/list_categoria', $data, TRUE);
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #### App_Procedimento ####
+        $this->form_validation->set_rules('Procedimento', 'Tarefa', 'required|trim');
+		$this->form_validation->set_rules('DataProcedimento', 'Iniciar em', 'trim|valid_date');        
+		$this->form_validation->set_rules('DataProcedimentoLimite', 'Concluir em', 'trim|valid_date');
+        $this->form_validation->set_rules('Categoria', 'Categoria', 'required|trim');
+		if($_SESSION['log']['idSis_Empresa'] != 5){
+			$this->form_validation->set_rules('Compartilhar', 'Quem Fazer', 'required|trim');
+		}
+		//$this->form_validation->set_rules('Prioridade', 'Prioridade', 'required|trim');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
         
         /*
           echo '<br>';

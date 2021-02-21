@@ -353,7 +353,7 @@
 											</button>
 										</div>
 									<?php } ?>
-									<div id="msgCadAtividadeSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header bg-success text-center">
@@ -390,6 +390,7 @@
 		<div class="col-md-2"></div>
 	</div>	
 </div>
+
 <div id="addAtividadeModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -422,6 +423,35 @@
 							</button>
 						</div>	
 						<div class="col-md-12 alert alert-warning aguardar1" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+					<?php if (isset($list_atividade)) echo $list_atividade; ?>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="alterarAtividade" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alterarAtividadeLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="alterarAtividadeLabel">Atividade</h4>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-alterar-atividade"></span>
+				<form method="post" id="alterar_atividade_form">
+					<div class="form-group">
+						<label for="AtividadeAlterar" class="control-label">Atividade:</label>
+						<input type="text" class="form-control" name="AtividadeAlterar" id="AtividadeAlterar">
+					</div>
+					<input type="hidden" name="id_Atividade" id="id_Atividade">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" name="CancelarAtividade" id="CancelarAtividade" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="AlterarAtividade" id="AlterarAtividade" >Alterar</button>	
+						<div class="col-md-12 alert alert-warning aguardarAlterarAtividade" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
 					</div>

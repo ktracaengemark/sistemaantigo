@@ -83,16 +83,7 @@ class Fornecedor extends CI_Controller {
 		(!$data['query']['DataCadastroFornecedor']) ? $data['query']['DataCadastroFornecedor'] = date('d/m/Y', time()) : FALSE;
 		(!$data['query']['TipoFornec']) ? $data['query']['TipoFornec'] = 'P' : FALSE;
 		(!$data['query']['VendaFornec']) ? $data['query']['VendaFornec'] = 'S' : FALSE;
-		
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        #$this->form_validation->set_rules('NomeFornecedor', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Fornecedor.NomeFornecedor.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('NomeFornecedor', 'Fornecedor', 'required|trim');
-        #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        #$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
-        #$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-		#$this->form_validation->set_rules('Atividade', 'Atividade', 'required|trim');
-		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
+			
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();		
         $data['select']['MunicipioFornecedor'] = $this->Basico_model->select_municipio();
@@ -128,6 +119,19 @@ class Fornecedor extends CI_Controller {
 
         $data['tela'] = $this->load->view('fornecedor/form_fornecedor', $data, TRUE);
 
+		$data['q_atividade'] = $this->Fornecedor_model->list_atividade($_SESSION['log'], TRUE);
+		$data['list_atividade'] = $this->load->view('fornecedor/list_atividade', $data, TRUE);
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #$this->form_validation->set_rules('NomeFornecedor', 'Nome do Responsável', 'required|trim|is_unique_duplo[App_Fornecedor.NomeFornecedor.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
+        $this->form_validation->set_rules('NomeFornecedor', 'Fornecedor', 'required|trim');
+        #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
+        #$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
+        #$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
+		#$this->form_validation->set_rules('Atividade', 'Atividade', 'required|trim');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');	
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('fornecedor/form_fornecedor', $data);        
@@ -225,15 +229,6 @@ class Fornecedor extends CI_Controller {
 		(!$data['query']['DataCadastroFornecedor']) ? $data['query']['DataCadastroFornecedor'] = date('d/m/Y', time()) : FALSE;
         #(!$data['query']['TipoFornec']) ? $data['query']['TipoFornec'] = 'P' : FALSE;
 		#(!$data['query']['VendaFornec']) ? $data['query']['VendaFornec'] = 'S' : FALSE;
-		
-		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        $this->form_validation->set_rules('NomeFornecedor', 'Fornecedor', 'required|trim');
-        #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        #$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
-        #$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-        #$this->form_validation->set_rules('Atividade', 'Atividade', 'required|trim'); 
-		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
 
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();		
         $data['select']['MunicipioFornecedor'] = $this->Basico_model->select_municipio();
@@ -267,6 +262,18 @@ class Fornecedor extends CI_Controller {
 
         $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
         $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
+
+		$data['q_atividade'] = $this->Fornecedor_model->list_atividade($_SESSION['log'], TRUE);
+		$data['list_atividade'] = $this->load->view('fornecedor/list_atividade', $data, TRUE);
+		
+		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        $this->form_validation->set_rules('NomeFornecedor', 'Fornecedor', 'required|trim');
+        #$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
+        #$this->form_validation->set_rules('Telefone1', 'Telefone1', 'required|trim');
+        #$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
+        #$this->form_validation->set_rules('Atividade', 'Atividade', 'required|trim'); 
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posiçao "Sim"', 'trim|valid_aprovado');		
         
         #run form validation
         if ($this->form_validation->run() === FALSE) {

@@ -87,6 +87,9 @@ function Aguardar () {
 	$('.aguardarCatprod').hide();
 	$('.aguardarAtributo').hide();
 	$('.aguardarOpcao').hide();
+	$('.aguardarAlterarMotivo').hide();
+	$('.aguardarAlterarCategoria').hide();
+	$('.aguardarAlterarAtividade').hide();
 	$('.aguardarAlterarCatprom').hide();
 	$('.aguardarAlterarCatprod').hide();
 	$('.aguardarAlterarProduto').hide();
@@ -191,7 +194,7 @@ $(document).ready(function(){
 								
 					//Alerta de cadastro realizado com sucesso
 					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
-					$('#msgCadCategoriaSucesso').modal('show');
+					$('#msgCadSucesso').modal('show');
 					
 					//Limpar mensagem de erro
 					$("#msg-error-categoria").html('');
@@ -238,7 +241,7 @@ $(document).ready(function(){
 								
 					//Alerta de cadastro realizado com sucesso
 					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
-					$('#msgCadAtividadeSucesso').modal('show');
+					$('#msgCadSucesso').modal('show');
 					
 					//Limpar mensagem de erro
 					$("#msg-error-atividade").html('');
@@ -707,6 +710,212 @@ $(document).ready(function(){
 			
 		}	
 	});
+
+	$('#alterarMotivo').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget)
+		var recipientidmotivo = button.data('whateveridmotivo')
+		var recipientmotivo = button.data('whatevermotivo')
+		var recipientdescmotivo = button.data('whateverdescmotivo')
+		//console.log(recipientmotivo);
+		var modal = $(this)
+		modal.find('.modal-title').text('id do Motivo: ' + recipientidmotivo)
+		modal.find('#id_Motivo').val(recipientidmotivo)
+		modal.find('#MotivoAlterar').val(recipientmotivo)
+		modal.find('#DescMotivoAlterar').val(recipientdescmotivo)
+	})
+	
+	$('#alterar_motivo_form').on('submit', function(event){
+		//alert('ok - Alterar o Motivo');
+		
+		event.preventDefault();
+		var motivo = $('#MotivoAlterar').val();
+		//console.log(motivo);
+		
+		if($('#MotivoAlterar').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-alterar-motivo").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{
+			
+			//Fechar a mensagem de erro
+			$('#msg-error-alterar-motivo').hide();
+			//Fechar o botão Alterar
+			$('#AlterarMotivo').hide();
+			//Fechar o botão Cancelar
+			$('#CancelarMotivo').hide();
+			//Abre o Aguardar
+			$('.aguardarAlterarMotivo').show();
+			//Fechar a janela modal alterar
+			$('#addMotivoModal').modal('hide');
+			
+			//Receber os dados do formulário
+			var dados = $("#alterar_motivo_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/edicoes/Motivo.php?', dados, function (retorna){
+			 
+				//console.log(retorna);
+				
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#alterar_motivo_form')[0].reset();
+					
+					//Fechar a janela modal alterar
+					$('#alterarMotivo').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-alterar-motivo").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-alterar-motivo").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Motivo!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}
+		
+	});	
+
+	$('#alterarCategoria').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget)
+		var recipientidcategoria = button.data('whateveridcategoria')
+		var recipientcategoria = button.data('whatevercategoria')
+		//console.log(recipientcategoria);
+		var modal = $(this)
+		modal.find('.modal-title').text('id do Categoria: ' + recipientidcategoria)
+		modal.find('#id_Categoria').val(recipientidcategoria)
+		modal.find('#CategoriaAlterar').val(recipientcategoria)
+	})
+	
+	$('#alterar_categoria_form').on('submit', function(event){
+		//alert('ok - Alterar o Categoria');
+		
+		event.preventDefault();
+		var categoria = $('#CategoriaAlterar').val();
+		//console.log(categoria);
+		
+		if($('#CategoriaAlterar').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-alterar-categoria").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{
+			
+			//Fechar a mensagem de erro
+			$('#msg-error-alterar-categoria').hide();
+			//Fechar o botão Alterar
+			$('#AlterarCategoria').hide();
+			//Fechar o botão Cancelar
+			$('#CancelarCategoria').hide();
+			//Abre o Aguardar
+			$('.aguardarAlterarCategoria').show();
+			//Fechar a janela modal alterar
+			$('#addCategoriaModal').modal('hide');
+			
+			//Receber os dados do formulário
+			var dados = $("#alterar_categoria_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/edicoes/Categoria.php?', dados, function (retorna){
+			 
+				//console.log(retorna);
+				
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#alterar_categoria_form')[0].reset();
+					
+					//Fechar a janela modal alterar
+					$('#alterarCategoria').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-alterar-categoria").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-alterar-categoria").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Categoria!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}
+		
+	});	
+
+	$('#alterarAtividade').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget)
+		var recipientidatividade = button.data('whateveridatividade')
+		var recipientatividade = button.data('whateveratividade')
+		//console.log(recipientatividade);
+		var modal = $(this)
+		modal.find('.modal-title').text('id do Atividade: ' + recipientidatividade)
+		modal.find('#id_Atividade').val(recipientidatividade)
+		modal.find('#AtividadeAlterar').val(recipientatividade)
+	})
+	
+	$('#alterar_atividade_form').on('submit', function(event){
+		//alert('ok - Alterar o Atividade');
+		
+		event.preventDefault();
+		var atividade = $('#AtividadeAlterar').val();
+		//console.log(atividade);
+		
+		if($('#AtividadeAlterar').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-alterar-atividade").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
+		}else{
+			
+			//Fechar a mensagem de erro
+			$('#msg-error-alterar-atividade').hide();
+			//Fechar o botão Alterar
+			$('#AlterarAtividade').hide();
+			//Fechar o botão Cancelar
+			$('#CancelarAtividade').hide();
+			//Abre o Aguardar
+			$('.aguardarAlterarAtividade').show();
+			//Fechar a janela modal alterar
+			$('#addAtividadeModal').modal('hide');
+			
+			//Receber os dados do formulário
+			var dados = $("#alterar_atividade_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/edicoes/Atividade.php?', dados, function (retorna){
+			 
+				//console.log(retorna);
+				
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#alterar_atividade_form')[0].reset();
+					
+					//Fechar a janela modal alterar
+					$('#alterarAtividade').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-alterar-atividade").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-alterar-atividade").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Atividade!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}
+		
+	});	
 
 	$('#alterarCatprom').on('show.bs.modal', function (event) {
 		var button = $(event.relatedTarget)

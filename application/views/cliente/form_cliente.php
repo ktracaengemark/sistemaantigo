@@ -589,9 +589,9 @@
 											</div>
 										</div>
 										<div class="col-md-4 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-											<label for="Cadastrar">Cadastrar/Editar Motivo</label><br>
+											<label for="Cadastrar">Motivo</label><br>
 											<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addMotivoModal">
-												Cadastrar
+												Cadastrar/Editar
 											</button>
 											
 											<!--
@@ -859,6 +859,7 @@
 		</div>
 	</div>
 </div>
+
 <div id="addMotivoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -897,6 +898,39 @@
 							</button>
 						</div>	
 						<div class="col-md-12 alert alert-warning aguardar1" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+				<?php if (isset($list_motivo)) echo $list_motivo; ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="alterarMotivo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alterarMotivoLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="alterarMotivoLabel">Motivo</h4>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-alterar-motivo"></span>
+				<form method="post" id="alterar_motivo_form">
+					<div class="form-group">
+						<label for="MotivoAlterar" class="control-label">Motivo:</label>
+						<input type="text" class="form-control" name="MotivoAlterar" id="MotivoAlterar">
+					</div>
+					<div class="form-group">
+						<label for="DescMotivoAlterar" class="control-label">Descricao:</label>
+						<input type="text" class="form-control" name="DescMotivoAlterar" id="DescMotivoAlterar">
+					</div>
+					<input type="hidden" name="id_Motivo" id="id_Motivo">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" name="CancelarMotivo" id="CancelarMotivo" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="AlterarMotivo" id="AlterarMotivo" >Alterar</button>	
+						<div class="col-md-12 alert alert-warning aguardarAlterarMotivo" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
 					</div>

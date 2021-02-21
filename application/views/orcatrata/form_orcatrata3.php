@@ -2149,7 +2149,7 @@
 								</div>
 								<div class="col-md-3 mb-3 ">
 									<div class="custom-control custom-radio">
-										<input type="radio" name="Sexo" class="custom-control-input " id="Correios" value="O">
+										<input type="radio" name="Sexo" class="custom-control-input " id="Correios" value="O" checked>
 										<label class="custom-control-label" for="Outros">Outros</label>
 									</div>
 								</div>

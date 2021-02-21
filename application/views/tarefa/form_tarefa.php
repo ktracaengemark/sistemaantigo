@@ -538,7 +538,7 @@
 								</button>
 							</div>
 						<?php } ?>
-						<div id="msgCadCategoriaSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header bg-success text-center">
@@ -574,6 +574,7 @@
 		<div class="col-md-1"></div>
 	</div>
 </div>
+
 <div id="addCategoriaModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -606,6 +607,35 @@
 							</button>
 						</div>	
 						<div class="col-md-12 alert alert-warning aguardar1" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+				<?php if (isset($list_categoria)) echo $list_categoria; ?>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="alterarCategoria" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="alterarCategoriaLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="alterarCategoriaLabel">Categoria</h4>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-alterar-categoria"></span>
+				<form method="post" id="alterar_categoria_form">
+					<div class="form-group">
+						<label for="CategoriaAlterar" class="control-label">Categoria:</label>
+						<input type="text" class="form-control" name="CategoriaAlterar" id="CategoriaAlterar">
+					</div>
+					<input type="hidden" name="id_Categoria" id="id_Categoria">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" name="CancelarCategoria" id="CancelarCategoria" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="AlterarCategoria" id="AlterarCategoria" >Alterar</button>	
+						<div class="col-md-12 alert alert-warning aguardarAlterarCategoria" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
 					</div>
