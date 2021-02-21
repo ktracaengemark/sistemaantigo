@@ -59,8 +59,6 @@ class Cliente extends CI_Controller {
             'idSis_Empresa',
 			'idSis_Usuario',
 			'idApp_Cliente',
-			//'Responsavel',
-			//'idApp_Responsavel',
             'NomeCliente',
             'DataNascimento',
 			'DataCadastroCliente',

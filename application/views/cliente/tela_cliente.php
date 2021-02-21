@@ -44,28 +44,32 @@
 									</li>
 									<li role="separator" class="divider"></li>
 									<li>
-										<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
-											<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<a <?php if (preg_match("/contatocliente\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'contatocliente/pesquisar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 												<span class="glyphicon glyphicon-user"></span> Contatos do Cliente
 											</a>
 										</a>
 									</li>
-									<li role="separator" class="divider"></li>
-									<li>
-										<a <?php if (preg_match("/clientepet\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
-											<a href="<?php echo base_url() . 'cliente/clientepet/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-												<span class="glyphicon glyphicon-user"></span> Pets do Cliente
+									<?php if ($_SESSION['Empresa']['CadastrarPet'] == 'S') { ?>
+										<li role="separator" class="divider"></li>
+										<li>
+											<a <?php if (preg_match("/clientepet\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+												<a href="<?php echo base_url() . 'clientepet/pesquisar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+													<span class="glyphicon glyphicon-user"></span> Pets do Cliente
+												</a>
 											</a>
-										</a>
-									</li>
-									<li role="separator" class="divider"></li>
-									<li>
-										<a <?php if (preg_match("/clientedep\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
-											<a href="<?php echo base_url() . 'cliente/clientedep/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-												<span class="glyphicon glyphicon-user"></span> Dependentes do Cliente
+										</li>
+									<?php } ?>	
+									<?php if ($_SESSION['Empresa']['CadastrarDep'] == 'S') { ?>	
+										<li role="separator" class="divider"></li>
+										<li>
+											<a <?php if (preg_match("/clientedep\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+												<a href="<?php echo base_url() . 'clientedep/pesquisar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+													<span class="glyphicon glyphicon-user"></span> Dependentes do Cliente
+												</a>
 											</a>
-										</a>
-									</li>
+										</li>
+									<?php } ?>	
 								</ul>
 							</div>
 							<!--

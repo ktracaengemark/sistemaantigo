@@ -221,6 +221,69 @@
 												</div>
 											</div>
 										</div>
+										<h3 class="text-left">Tipo de Empresa</h3>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-3 text-left">
+													<label for="CadastrarPet">Cadastra Pets?</label><br>
+													<div class="btn-group" data-toggle="buttons">
+														<?php
+														foreach ($select['CadastrarPet'] as $key => $row) {
+															if (!$query['CadastrarPet'])$query['CadastrarPet'] = 'N';
+
+															($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+															if ($query['CadastrarPet'] == $key) {
+																echo ''
+																. '<label class="btn btn-warning active" name="CadastrarPet_' . $hideshow . '">'
+																. '<input type="radio" name="CadastrarPet" id="' . $hideshow . '" '
+																. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																. '</label>'
+																;
+															} else {
+																echo ''
+																. '<label class="btn btn-default" name="CadastrarPet_' . $hideshow . '">'
+																. '<input type="radio" name="CadastrarPet" id="' . $hideshow . '" '
+																. 'autocomplete="off" value="' . $key . '" >' . $row
+																. '</label>'
+																;
+															}
+														}
+														?>
+													</div>
+												</div>
+												<div id="CadastrarPet" <?php echo $div['CadastrarPet']; ?>>
+													<div class="col-md-3 text-left">
+														<label for="CadastrarDep">Cadastra Dependentes?</label><br>
+														<div class="btn-group" data-toggle="buttons">
+															<?php
+															foreach ($select['CadastrarDep'] as $key => $row) {
+																if (!$query['CadastrarDep'])$query['CadastrarDep'] = 'N';
+
+																($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																if ($query['CadastrarDep'] == $key) {
+																	echo ''
+																	. '<label class="btn btn-warning active" name="CadastrarDep_' . $hideshow . '">'
+																	. '<input type="radio" name="CadastrarDep" id="' . $hideshow . '" '
+																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																	. '</label>'
+																	;
+																} else {
+																	echo ''
+																	. '<label class="btn btn-default" name="CadastrarDep_' . $hideshow . '">'
+																	. '<input type="radio" name="CadastrarDep" id="' . $hideshow . '" '
+																	. 'autocomplete="off" value="' . $key . '" >' . $row
+																	. '</label>'
+																	;
+																}
+															}
+															?>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
 										<h3 class="text-left">Dados do E-Comerce</h3>
 										<div class="form-group">
 											<div class="row">

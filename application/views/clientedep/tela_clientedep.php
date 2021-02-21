@@ -36,12 +36,32 @@
 									</li>
 									<li role="separator" class="divider"></li>
 									<li>
-										<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
-											<a href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<a <?php if (preg_match("/contatocliente\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+											<a href="<?php echo base_url() . 'contatocliente/pesquisar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
 												<span class="glyphicon glyphicon-user"></span> Contatos do Cliente
 											</a>
 										</a>
 									</li>
+									<?php if ($_SESSION['Empresa']['CadastrarPet'] == 'S') { ?>
+										<li role="separator" class="divider"></li>
+										<li>
+											<a <?php if (preg_match("/clientepet\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+												<a href="<?php echo base_url() . 'clientepet/pesquisar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+													<span class="glyphicon glyphicon-user"></span> Pets do Cliente
+												</a>
+											</a>
+										</li>
+									<?php } ?>	
+									<?php if ($_SESSION['Empresa']['CadastrarDep'] == 'S') { ?>	
+										<li role="separator" class="divider"></li>
+										<li>
+											<a <?php if (preg_match("/clientedep\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/consulta/   ?>>
+												<a href="<?php echo base_url() . 'clientedep/pesquisar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+													<span class="glyphicon glyphicon-user"></span> Dependentes do Cliente
+												</a>
+											</a>
+										</li>
+									<?php } ?>
 								</ul>
 							</div>
 							<!--
@@ -162,7 +182,7 @@
 					<div class="panel panel-primary">
 
 						<div class="panel-heading">
-						<strong>Contato do Cliente: <?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '.</small>' ?></strong>
+						<strong>Dependentes do Cliente: <?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>' . $_SESSION['Cliente']['idApp_Cliente'] . '.</small>' ?></strong>
 						</div>
 						<div class="panel-body">
 

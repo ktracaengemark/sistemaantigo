@@ -178,6 +178,8 @@ class Empresa extends CI_Controller {
 			'Atendimento',
 			'SobreNos',
 			'ValorMinimo',
+			'CadastrarPet',
+			'CadastrarDep',
         ), TRUE);
 				
 
@@ -187,25 +189,14 @@ class Empresa extends CI_Controller {
             $data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'barras');
         }
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        #$this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim|is_unique_duplo[Sis_Empresa.NomeAdmin.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
-        $this->form_validation->set_rules('NomeEmpresa', 'Nome da Empresa', 'required|trim');
-		$this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim');
-        #$this->form_validation->set_rules('Site', 'Site', 'trim|is_unique[Sis_Empresa.Site]');
-		$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
-        #$this->form_validation->set_rules('CelularAdmin', 'Celular', 'required|trim');
-        //$this->form_validation->set_rules('CelularAdmin', 'Celular do Admin', 'required|trim|is_unique_by_id_empresa[Sis_Empresa.CelularAdmin.' . $data['query']['idSis_Empresa'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
-		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
-        #$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
-        #$this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');		
-
         $data['select']['MunicipioEmpresa'] = $this->Basico_model->select_municipio();
 		$data['select']['CategoriaEmpresa'] = $this->Basico_model->select_categoriaempresa();
 		$data['select']['EComerce'] = $this->Basico_model->select_status_sn();
 		$data['select']['RetirarLoja'] = $this->Basico_model->select_status_sn();
 		$data['select']['MotoBoy'] = $this->Basico_model->select_status_sn();
 		$data['select']['Correios'] = $this->Basico_model->select_status_sn();
+		$data['select']['CadastrarPet'] = $this->Basico_model->select_status_sn();
+		$data['select']['CadastrarDep'] = $this->Basico_model->select_status_sn();
 		
 		$data['select']['NaLoja'] = $this->Basico_model->select_status_sn();
 		$data['select']['NaEntrega'] = $this->Basico_model->select_status_sn();
@@ -231,6 +222,20 @@ class Empresa extends CI_Controller {
         else
             $data['collapse'] = 'class="collapse"';
 
+		(!$data['query']['CadastrarPet']) ? $data['query']['CadastrarPet'] = 'N' : FALSE;
+        $data['radio'] = array(
+            'CadastrarPet' => $this->basico->radio_checked($data['query']['CadastrarPet'], 'E-Comerce', 'NS'),
+        );
+        ($data['query']['CadastrarPet'] == 'N') ?
+            $data['div']['CadastrarPet'] = '' : $data['div']['CadastrarPet'] = 'style="display: none;"';
+
+		(!$data['query']['CadastrarDep']) ? $data['query']['CadastrarDep'] = 'N' : FALSE;
+        $data['radio'] = array(
+            'CadastrarDep' => $this->basico->radio_checked($data['query']['CadastrarDep'], 'E-Comerce', 'NS'),
+        );
+        ($data['query']['CadastrarDep'] == 'N') ?
+            $data['div']['CadastrarDep'] = '' : $data['div']['CadastrarDep'] = 'style="display: none;"';
+			
 		(!$data['query']['EComerce']) ? $data['query']['EComerce'] = 'S' : FALSE;
         $data['radio'] = array(
             'EComerce' => $this->basico->radio_checked($data['query']['EComerce'], 'E-Comerce', 'NS'),
@@ -250,11 +255,27 @@ class Empresa extends CI_Controller {
         $data['sidebar'] = 'col-sm-3 col-md-2 sidebar';
         $data['main'] = 'col-sm-7 col-sm-offset-3 col-md-8 col-md-offset-2 main';
 
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #$this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim|is_unique_duplo[Sis_Empresa.NomeAdmin.DataNascimento.' . $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql') . ']');
+        $this->form_validation->set_rules('NomeEmpresa', 'Nome da Empresa', 'required|trim');
+		$this->form_validation->set_rules('NomeAdmin', 'NomeAdmin do Responsável', 'required|trim');
+        #$this->form_validation->set_rules('Site', 'Site', 'trim|is_unique[Sis_Empresa.Site]');
+		$this->form_validation->set_rules('DataNascimento', 'Data de Nascimento', 'trim|valid_date');
+        #$this->form_validation->set_rules('CelularAdmin', 'Celular', 'required|trim');
+        //$this->form_validation->set_rules('CelularAdmin', 'Celular do Admin', 'required|trim|is_unique_by_id_empresa[Sis_Empresa.CelularAdmin.' . $data['query']['idSis_Empresa'] . '.idSis_Empresa.' . $data['query']['idSis_Empresa'] . ']');
+		$this->form_validation->set_rules('Email', 'E-mail', 'trim|valid_email');
+        #$this->form_validation->set_rules('Senha', 'Senha', 'required|trim');
+        #$this->form_validation->set_rules('Confirma', 'Confirmar Senha', 'required|trim|matches[Senha]');		
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('empresa/form_empresa', $data);
         } else {
 
+			if($data['query']['CadastrarPet'] == 'S'){
+				$data['query']['CadastrarDep'] = 'N';
+			}
 			$data['query']['NomeEmpresa'] = trim(mb_strtoupper($data['query']['NomeEmpresa'], 'ISO-8859-1'));
             $data['query']['NomeAdmin'] = trim(mb_strtoupper($data['query']['NomeAdmin'], 'ISO-8859-1'));
             #$data['query']['Senha'] = md5($data['query']['Senha']);            
