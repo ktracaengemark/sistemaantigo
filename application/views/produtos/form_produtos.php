@@ -911,11 +911,11 @@
 						</div>	
 					</div>
 					<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Atributo</label>
+						<label class="col-sm-2 col-form-label">Variacao</label>
 						<div class="col-sm-10">
-							<select data-placeholder="Selecione uma opção..." class="form-control Chosen"
+							<select data-placeholder="Selecione uma Variacao..." class="form-control Chosen"
 							id="idAtributo_Opcao" name="idAtributo_Opcao">
-								<option value="">-- Selecione uma opção --</option>
+								<option value="">-- Selecione uma Variacao --</option>
 								<?php
 									foreach ($select['idAtributo_Opcao'] as $key => $row) {
 										if ($cadastrar['idAtributo_Opcao'] == $key) {

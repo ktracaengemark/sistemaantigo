@@ -21,7 +21,7 @@ $usuario 	= $_SESSION['log']['idSis_Usuario'];
 $empresa 	= $_SESSION['log']['idSis_Empresa'];
 $modulo 	= $_SESSION['log']['idTab_Modulo'];
 $datacad	= date('Y-m-d H:i:s', time());
-$query_usuario = "INSERT INTO Tab_Produto (Produtos, idTab_Catprod, VendaSite, VendaBalcao, idSis_Usuario, idSis_Empresa, idTab_Modulo, Data_Cad_Produto) VALUES ('$produto', '$catproduto', '$vendasite', '$vendabalcao', '$usuario', '$empresa', '$modulo', '$datacad')";
+$query_usuario = "INSERT INTO Tab_Produto (Produtos, idTab_Catprod, VendaSite, VendaBalcao, idSis_Usuario, idSis_Empresa, idTab_Modulo) VALUES ('$produto', '$catproduto', '$vendasite', '$vendabalcao', '$usuario', '$empresa', '$modulo')";
 mysqli_query($conn, $query_usuario);
 
 if(mysqli_insert_id($conn)){
