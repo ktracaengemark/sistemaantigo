@@ -13,7 +13,9 @@ if (!$db) {
 }
 
 #echo 'Conexão bem sucedida';
-
+$dataatual = date('Y-m-d', time());
+$dia_da_semana = date('N');
+	  
 if ($_GET['q']==1) {
 
     $result = mysql_query(
@@ -384,9 +386,27 @@ elseif ($_GET['q'] == 2) {
 }
 
 elseif ($_GET['q'] == 90) {
-	$filtro1 = ($_GET['tipo_orca'] == "B") ? ' AND ((V.Desconto = "1" AND V.VendaBalcaoPreco = "S") OR (V.Desconto = "2" AND TPM.VendaBalcao = "S"))  ': 
-												' AND ((V.Desconto = "1" AND V.VendaSitePreco = "S") OR (V.Desconto = "2" AND TPM.VendaSite = "S")) ';
-    $result = mysql_query('
+
+	$filtro1 = ($_GET['tipo_orca'] == "B") ? ' AND ((V.Desconto = "1" AND 
+													V.VendaBalcaoPreco = "S") OR 
+													(V.Desconto = "2" AND 
+													TPM.VendaBalcao = "S" AND 
+													TPM.DataInicioProm <= "' . $dataatual . '" AND 
+													TPM.DataFimProm >= "' . $dataatual . '" AND 
+													TD.id_Dia_Prom = ' . $dia_da_semana . ' AND 
+													TD.Aberto_Prom = "S")
+													)': 
+												' AND ((V.Desconto = "1" AND 
+													V.VendaSitePreco = "S") OR 
+													(V.Desconto = "2" AND 
+													TPM.VendaSite = "S" AND 
+													TPM.DataInicioProm <= "' . $dataatual . '" AND 
+													TPM.DataFimProm >= "' . $dataatual . '" AND
+													TD.id_Dia_Prom = ' . $dia_da_semana . ' AND 
+													TD.Aberto_Prom = "S")
+													)';
+    
+	$result = mysql_query('
             SELECT
                 V.idTab_Valor,
 				V.idTab_Produtos,
@@ -398,12 +418,16 @@ elseif ($_GET['q'] == 90) {
 				TPM.Promocao,
 				TPM.VendaBalcao,
 				TPM.VendaSite,
+				TPM.DataInicioProm,
+				TPM.DataFimProm,
+				TD.*,
 				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(P.Cod_Barra,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " UNID - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
-					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
-					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos				
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
+					LEFT JOIN Tab_Dia_Prom AS TD ON TD.idTab_Promocao = TPM.idTab_Promocao
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND 
 				P.Prod_Serv = "P"
@@ -428,9 +452,26 @@ elseif ($_GET['q'] == 90) {
 
 }
 
-elseif ($_GET['q'] == 902) {
-	$filtro1 = ($_GET['tipo_orca'] == "B") ? ' AND ((V.Desconto = "1" AND V.VendaBalcaoPreco = "S") OR (V.Desconto = "2" AND TPM.VendaBalcao = "S"))  ': 
-												' AND ((V.Desconto = "1" AND V.VendaSitePreco = "S") OR (V.Desconto = "2" AND TPM.VendaSite = "S")) ';
+elseif ($_GET['q'] == 902) {	
+
+	$filtro1 = ($_GET['tipo_orca'] == "B") ? ' AND ((V.Desconto = "1" AND 
+													V.VendaBalcaoPreco = "S") OR 
+													(V.Desconto = "2" AND 
+													TPM.VendaBalcao = "S" AND 
+													TPM.DataInicioProm <= "' . $dataatual . '" AND 
+													TPM.DataFimProm >= "' . $dataatual . '" AND
+													TD.id_Dia_Prom = ' . $dia_da_semana . ' AND 
+													TD.Aberto_Prom = "S")
+													)': 
+												' AND ((V.Desconto = "1" AND 
+													V.VendaSitePreco = "S") OR 
+													(V.Desconto = "2" AND 
+													TPM.VendaSite = "S" AND  
+													TPM.DataInicioProm <= "' . $dataatual . '" AND 
+													TPM.DataFimProm >= "' . $dataatual . '" AND
+													TD.id_Dia_Prom = ' . $dia_da_semana . ' AND 
+													TD.Aberto_Prom = "S")
+													)';
     $result = mysql_query('
             SELECT
                 V.idTab_Valor,
@@ -443,12 +484,16 @@ elseif ($_GET['q'] == 902) {
 				TPM.Promocao,
 				TPM.VendaBalcao,
 				TPM.VendaSite,
+				TPM.DataInicioProm,
+				TPM.DataFimProm,
+				TD.*,
 				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(P.Cod_Barra,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " UNID - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$ ",  IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
-					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
 					LEFT JOIN Tab_Desconto AS TDS ON TDS.idTab_Desconto = V.Desconto
-					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos				
+					LEFT JOIN Tab_Produtos AS P ON P.idTab_Produtos = V.idTab_Produtos
+					LEFT JOIN Tab_Promocao AS TPM ON TPM.idTab_Promocao = V.idTab_Promocao
+					LEFT JOIN Tab_Dia_Prom AS TD ON TD.idTab_Promocao = TPM.idTab_Promocao				
             WHERE
 				P.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
 				P.Prod_Serv = "S"
