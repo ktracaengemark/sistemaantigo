@@ -384,7 +384,8 @@ elseif ($_GET['q'] == 2) {
 }
 
 elseif ($_GET['q'] == 90) {
-	$filtro1 = ($_GET['tipo_orca'] == "B") ? ' AND V.VendaBalcaoPreco = "S"  ': ' AND V.VendaSitePreco = "S"  ';
+	$filtro1 = ($_GET['tipo_orca'] == "B") ? ' AND ((V.Desconto = "1" AND V.VendaBalcaoPreco = "S") OR (V.Desconto = "2" AND TPM.VendaBalcao = "S"))  ': 
+												' AND ((V.Desconto = "1" AND V.VendaSitePreco = "S") OR (V.Desconto = "2" AND TPM.VendaSite = "S")) ';
     $result = mysql_query('
             SELECT
                 V.idTab_Valor,
@@ -392,8 +393,11 @@ elseif ($_GET['q'] == 90) {
                 V.ValorProduto,
 				V.QtdProdutoIncremento,
 				V.Convdesc,
+				V.Desconto,
 				TDS.Desconto,
 				TPM.Promocao,
+				TPM.VendaBalcao,
+				TPM.VendaSite,
 				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(P.Cod_Barra,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " UNID - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$", IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
@@ -425,7 +429,8 @@ elseif ($_GET['q'] == 90) {
 }
 
 elseif ($_GET['q'] == 902) {
-	$filtro1 = ($_GET['tipo_orca'] == "B") ? ' AND V.VendaBalcaoPreco = "S"  ': ' AND V.VendaSitePreco = "S"  ';
+	$filtro1 = ($_GET['tipo_orca'] == "B") ? ' AND ((V.Desconto = "1" AND V.VendaBalcaoPreco = "S") OR (V.Desconto = "2" AND TPM.VendaBalcao = "S"))  ': 
+												' AND ((V.Desconto = "1" AND V.VendaSitePreco = "S") OR (V.Desconto = "2" AND TPM.VendaSite = "S")) ';
     $result = mysql_query('
             SELECT
                 V.idTab_Valor,
@@ -433,8 +438,11 @@ elseif ($_GET['q'] == 902) {
                 V.ValorProduto,
 				V.QtdProdutoIncremento,
 				V.Convdesc,
+				V.Desconto,
 				TDS.Desconto,
 				TPM.Promocao,
+				TPM.VendaBalcao,
+				TPM.VendaSite,
 				CONCAT(IFNULL(P.Nome_Prod,""), " - ", IFNULL(V.Convdesc,""), " - ", IFNULL(P.Cod_Barra,""), " - ", IFNULL(V.QtdProdutoIncremento,""), " UNID - ", IFNULL(TDS.Desconto,""), " - ", IFNULL(TPM.Promocao,""), " - R$ ",  IFNULL(V.ValorProduto,"")) AS NomeProduto
             FROM
                 Tab_Valor AS V
