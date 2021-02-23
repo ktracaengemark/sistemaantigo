@@ -498,7 +498,8 @@ class Cliente_model extends CI_Model {
 				FROM
 					App_ClienteDep					
 				WHERE
-					idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+					idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+					idApp_Cliente = ' . $data . '
 				ORDER BY 
 					NomeClienteDep ASC'
 			);
@@ -538,7 +539,8 @@ class Cliente_model extends CI_Model {
 				FROM
 					App_ClientePet
 				WHERE
-					idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+					idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+					idApp_Cliente = ' . $data . '
 				ORDER BY 
 					NomeClientePet ASC'
 			);
