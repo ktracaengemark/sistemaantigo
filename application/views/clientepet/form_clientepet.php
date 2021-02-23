@@ -207,7 +207,7 @@
 							<div class="form-group">
 								<div class="row"> 
 									<div class="col-md-4">
-										<label for="SexoPet">SexoPet:</label>
+										<label for="SexoPet">Sexo:</label>
 										<select data-placeholder="Selecione uma Opção..." class="form-control" <?php echo $readonly; ?>
 												id="SexoPet" name="SexoPet">
 											<option value="">-- Selecione uma opção --</option>
@@ -221,6 +221,26 @@
 											}
 											?>   
 										</select>
+									</div>
+									<div class="col-md-4">
+										<label for="EspeciePet">Especie: *</label>
+										<input type="text" class="form-control" id="EspeciePet" maxlength="255" <?php echo $readonly; ?>
+											   name="EspeciePet" value="<?php echo $query['EspeciePet']; ?>">
+									</div>
+									<div class="col-md-4">
+										<label for="RacaPet">Raca: *</label>
+										<input type="text" class="form-control" id="RacaPet" maxlength="255" <?php echo $readonly; ?>
+											   name="RacaPet" value="<?php echo $query['RacaPet']; ?>">
+									</div>
+									<div class="col-md-4">
+										<label for="PeloPet">Pelo: *</label>
+										<input type="text" class="form-control" id="PeloPet" maxlength="255" <?php echo $readonly; ?>
+											   name="PeloPet" value="<?php echo $query['PeloPet']; ?>">
+									</div>
+									<div class="col-md-4">
+										<label for="CorPet">Cor: *</label>
+										<input type="text" class="form-control" id="CorPet" maxlength="255" <?php echo $readonly; ?>
+											   name="CorPet" value="<?php echo $query['CorPet']; ?>">
 									</div>
 									<div class="col-md-4">
 										<label for="ObsPet">OBS:</label>

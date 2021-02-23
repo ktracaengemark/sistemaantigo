@@ -173,7 +173,7 @@
 									<div class="panel-heading">
 									<?php echo form_open_multipart($form_open_path); ?>
 										<div class="row">
-											<div class="col-md-6">
+											<div class="col-md-4">
 												<label for="idApp_Agenda">Profissional:*</label>
 												<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 														id="idApp_Agenda" name="idApp_Agenda">
@@ -192,7 +192,7 @@
 												<?php echo form_error('idApp_Agenda'); ?>
 											</div>
 											<?php if($alterarcliente == 1){?>	
-												<div class="col-md-6">
+												<div class="col-md-4">
 													<div class="row">
 														<div class="col-md-12 text-left">	
 															<label  for="idApp_Cliente">Cliente:</label>
@@ -256,10 +256,48 @@
 													</div>
 												</div>
 											<?php }elseif($alterarcliente == 2){?>	
-												<div class="col-md-6">
+												<div class="col-md-4">
 													<label >Cliente</label>
 													<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Cliente']['NomeCliente']; ?>">
 												</div>	
+											<?php } ?>
+											<?php if($_SESSION['Empresa']['CadastrarDep'] == "S"){?>
+												<div class="col-md-4 text-left">	
+													<label  for="idApp_ClienteDep">Dependente:</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+															id="idApp_ClienteDep" name="idApp_ClienteDep">
+														<option value="">-- Sel. Dependente --</option>
+														<?php
+														foreach ($select['idApp_ClienteDep'] as $key => $row) {
+															if ($query['idApp_ClienteDep'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+													<?php echo form_error('idApp_ClienteDep'); ?>
+												</div>
+											<?php } ?>
+											<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
+												<div class="col-md-4 text-left">	
+													<label  for="idApp_ClientePet">Pet:</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+															id="idApp_ClientePet" name="idApp_ClientePet">
+														<option value="">-- Sel. Pet --</option>
+														<?php
+														foreach ($select['idApp_ClientePet'] as $key => $row) {
+															if ($query['idApp_ClientePet'] == $key) {
+																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+															} else {
+																echo '<option value="' . $key . '">' . $row . '</option>';
+															}
+														}
+														?>
+													</select>
+													<?php echo form_error('idApp_ClientePet'); ?>
+												</div>
 											<?php } ?>
 										</div>
 										<div class="row">										

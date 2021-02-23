@@ -47,6 +47,8 @@ $result = mysql_query(
 			R.CelularCliente,
 			R.CpfCliente,
             D.NomeContatoCliente,
+            DEP.NomeClienteDep,
+            PET.NomeClientePet,
             U.Nome AS NomeUsuario,
 			U.Permissao,
             C.DataInicio,
@@ -66,6 +68,8 @@ $result = mysql_query(
 			App_Consulta AS C
                 LEFT JOIN App_Cliente AS R ON R.idApp_Cliente = C.idApp_Cliente
                 LEFT JOIN App_ContatoCliente AS D ON D.idApp_ContatoCliente = C.idApp_ContatoCliente
+                LEFT JOIN App_ClienteDep AS DEP ON DEP.idApp_ClienteDep = C.idApp_ClienteDep
+                LEFT JOIN App_ClientePet AS PET ON PET.idApp_ClientePet = C.idApp_ClientePet
                 
                 LEFT JOIN Tab_TipoConsulta AS TC ON TC.idTab_TipoConsulta = C.idTab_TipoConsulta
 				LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = C.idSis_Empresa
@@ -120,6 +124,8 @@ while ($row = mysql_fetch_assoc($result)) {
 
             #$title = utf8_encode($row['NomeCliente']);
             $title = mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1");
+            $titledep = mb_convert_encoding($row['NomeClienteDep'], "UTF-8", "ISO-8859-1");
+            $titlepet = mb_convert_encoding($row['NomeClientePet'], "UTF-8", "ISO-8859-1");
             #$title = $row['NomeCliente'];
             #'name' => mb_convert_encoding($row['NomeProduto'], "UTF-8", "ISO-8859-1"),
 
@@ -182,6 +188,8 @@ while ($row = mysql_fetch_assoc($result)) {
     $event_array[] = array(
         'id' => $row['idApp_Consulta'],
         'title' => $title,
+        'titledep' => $titledep,
+        'titlepet' => $titlepet,
         'subtitle' => $subtitle,
         'start' => str_replace('', 'T', $row['DataInicio']),
         'end' => str_replace('', 'T', $row['DataFim']),

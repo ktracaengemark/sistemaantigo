@@ -56,6 +56,8 @@ class Consulta extends CI_Controller {
 			'idApp_Consulta',
             'idApp_Agenda',
             'idApp_Cliente',
+            'idApp_ClienteDep',
+            'idApp_ClientePet',
 			'idSis_EmpresaFilial',
             'Data2',
 			'Data',
@@ -74,7 +76,7 @@ class Consulta extends CI_Controller {
 			'Tempo2',
 			'DataTermino',
 			'Recorrencias',
-                ), TRUE));
+		), TRUE));
 		
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
  		(!$data['cadastrar']['Repetir']) ? $data['cadastrar']['Repetir'] = 'N' : FALSE;
@@ -133,35 +135,7 @@ class Consulta extends CI_Controller {
         ($data['query']['Paciente'] == 'D') ?
             $data['div']['Paciente'] = '' : $data['div']['Paciente'] = 'style="display: none;"';
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-		if ($data['cadastrar']['Repetir'] == 'S') {
-			$this->form_validation->set_rules('Intervalo', 'Intervalo', 'required|trim|valid_intervalo');
-			$this->form_validation->set_rules('Periodo', 'Período', 'required|trim|valid_periodo');
-			//$this->form_validation->set_rules('Periodo', 'Período', 'required|trim|valid_periodo|valid_periodo_intervalo[' . $data['query']['Intervalo'] . ']');
-			$this->form_validation->set_rules('Tempo', 'Tempo', 'required|trim');
-			$this->form_validation->set_rules('Tempo', 'Tempo2', 'required|trim');
-			$this->form_validation->set_rules('DataMinima', 'Data Mínima:', 'trim|valid_date');
-			$this->form_validation->set_rules('DataTermino', 'Termina em:', 'required|trim|valid_date|valid_data_termino[' . $data['cadastrar']['DataMinima'] . ']|valid_data_termino2[' . $data['query']['Data'] . ']');
-		}
 		
-        $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
-        $this->form_validation->set_rules('Data2', 'Data do Fim', 'required|trim|valid_date');
-		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
-        #$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
-		$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour');
-        #$this->form_validation->set_rules('idTab_TipoConsulta', 'Tipo de Consulta', 'required|trim');
-        $this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
-		$this->form_validation->set_rules('idApp_Agenda', 'Profissional', 'required|trim');
-		#$this->form_validation->set_rules('idSis_EmpresaFilial', 'Unidade', 'required|trim');
-		
-/*
-        if ($data['query']['Paciente'] == 'D')
-            $this->form_validation->set_rules('idApp_ContatoCliente', 'ContatoCliente', 'required|trim');
-*/
-        #$data['resumo'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
-		#$data['resumo'] = $this->Clienteusuario_model->get_clienteusuario($data['query']['idApp_Cliente']);
-		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
 
 		$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['Repetir'] = $this->Basico_model->select_status_sn();        
@@ -175,6 +149,8 @@ class Consulta extends CI_Controller {
 		$data['select']['Status'] = $this->Basico_model->select_status();
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
         $data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
+        $data['select']['idApp_ClienteDep'] = $this->Cliente_model->select_clientedep($idApp_Cliente);
+        $data['select']['idApp_ClientePet'] = $this->Cliente_model->select_clientepet($idApp_Cliente);
 		#$data['select']['idSis_EmpresaFilial'] = $this->Empresafilial_model->select_empresafilial();
 		#$data['select']['ContatoCliente'] = $this->Consulta_model->select_contatocliente_cliente($data['query']['idApp_Cliente']);
 		
@@ -224,12 +200,41 @@ class Consulta extends CI_Controller {
 
         #$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
 
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+		if ($data['cadastrar']['Repetir'] == 'S') {
+			$this->form_validation->set_rules('Intervalo', 'Intervalo', 'required|trim|valid_intervalo');
+			$this->form_validation->set_rules('Periodo', 'Período', 'required|trim|valid_periodo');
+			//$this->form_validation->set_rules('Periodo', 'Período', 'required|trim|valid_periodo|valid_periodo_intervalo[' . $data['query']['Intervalo'] . ']');
+			$this->form_validation->set_rules('Tempo', 'Tempo', 'required|trim');
+			$this->form_validation->set_rules('Tempo', 'Tempo2', 'required|trim');
+			$this->form_validation->set_rules('DataMinima', 'Data Mínima:', 'trim|valid_date');
+			$this->form_validation->set_rules('DataTermino', 'Termina em:', 'required|trim|valid_date|valid_data_termino[' . $data['cadastrar']['DataMinima'] . ']|valid_data_termino2[' . $data['query']['Data'] . ']');
+		}
+		
+        $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
+        $this->form_validation->set_rules('Data2', 'Data do Fim', 'required|trim|valid_date');
+		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
+        #$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
+		$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour');
+        #$this->form_validation->set_rules('idTab_TipoConsulta', 'Tipo de Consulta', 'required|trim');
+        $this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
+		$this->form_validation->set_rules('idApp_Agenda', 'Profissional', 'required|trim');
+		#$this->form_validation->set_rules('idSis_EmpresaFilial', 'Unidade', 'required|trim');
+		
+/*
+        if ($data['query']['Paciente'] == 'D')
+            $this->form_validation->set_rules('idApp_ContatoCliente', 'ContatoCliente', 'required|trim');
+*/
+        #$data['resumo'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
+		#$data['resumo'] = $this->Clienteusuario_model->get_clienteusuario($data['query']['idApp_Cliente']);
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('consulta/form_consulta', $data);
         } else {
 
-		
 			$dataini_cad 	= $this->basico->mascara_data($data['query']['Data'], 'mysql');
 			$datafim_cad 	= $this->basico->mascara_data($data['query']['Data2'], 'mysql');
 			$horaini_cad 	= $data['query']['HoraInicio'];
@@ -281,7 +286,20 @@ class Consulta extends CI_Controller {
 				$ultimaocorrencia = date('Y-m-d', strtotime('+ ' . ($semana*$n*($qtd - 1)) .  $ref,strtotime($dataini_cad)));				
 				
 			}
-
+			if($_SESSION['Empresa']['CadastrarDep'] == "N"){
+				$data['query']['idApp_ClienteDep'] = 0;
+			}else{
+				if($data['query']['idApp_ClienteDep'] == ''){
+					$data['query']['idApp_ClienteDep'] = 0;
+				}
+			}
+			if($_SESSION['Empresa']['CadastrarPet'] == "N"){
+				$data['query']['idApp_ClientePet'] = 0;
+			}else{
+				if($data['query']['idApp_ClientePet'] == ''){
+					$data['query']['idApp_ClientePet'] = 0;
+				}
+			}
 			$data['query']['Tipo'] = 2;
             $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
             #$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
@@ -339,6 +357,8 @@ class Consulta extends CI_Controller {
 								'Recorrencias' 			=> ($j + 1) .  '/' . $data['query']['Recorrencias'],
 								'idApp_Agenda' 			=> $data['query']['idApp_Agenda'],
 								'idApp_Cliente' 		=> $data['query']['idApp_Cliente'],
+								'idApp_ClienteDep' 		=> $data['query']['idApp_ClienteDep'],
+								'idApp_ClientePet' 		=> $data['query']['idApp_ClientePet'],
 								//'Evento' 				=> $data['query']['Evento'],
 								'Obs' 					=> $data['query']['Obs'],
 								'idApp_Profissional' 	=> $data['query']['idApp_Profissional'],
@@ -713,6 +733,8 @@ class Consulta extends CI_Controller {
 			'idApp_Consulta',
             'idApp_Agenda',
             'idApp_Cliente',
+            'idApp_ClienteDep',
+            'idApp_ClientePet',
             'Data',
             'Data2',
 			'HoraInicio',
@@ -781,26 +803,12 @@ class Consulta extends CI_Controller {
         ($data['query']['Paciente'] == 'D') ?
             $data['div']['Paciente'] = '' : $data['div']['Paciente'] = 'style="display: none;"';
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
-        $this->form_validation->set_rules('Data2', 'Data Fim', 'required|trim|valid_date|valid_periodo_data[' . $data['query']['Data'] . ']');
-		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
-        if(strtotime($data2) == strtotime($data1)){
-			$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
-		}else{
-			$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour');
-		}
-		$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
-		$this->form_validation->set_rules('idApp_Agenda', 'Profissional', 'required|trim');
-		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');	
-
-        if ($data['query']['Paciente'] == 'D')
-            $this->form_validation->set_rules('idApp_ContatoCliente', 'ContatoCliente', 'required|trim');
 	
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['idApp_Agenda'] = $this->Basico_model->select_agenda();
-		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();	
+		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
+        $data['select']['idApp_ClienteDep'] = $this->Cliente_model->select_clientedep($idApp_Cliente);
+        $data['select']['idApp_ClientePet'] = $this->Cliente_model->select_clientepet($idApp_Cliente);	
 		$data['select']['Status'] = $this->Basico_model->select_status();
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
         $data['select']['ContatoCliente'] = $this->Consulta_model->select_contatocliente_cliente($data['query']['idApp_Cliente']);
@@ -840,6 +848,21 @@ class Consulta extends CI_Controller {
 
         $data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
 
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
+        $this->form_validation->set_rules('Data2', 'Data Fim', 'required|trim|valid_date|valid_periodo_data[' . $data['query']['Data'] . ']');
+		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
+        if(strtotime($data2) == strtotime($data1)){
+			$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
+		}else{
+			$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour');
+		}
+		$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
+		$this->form_validation->set_rules('idApp_Agenda', 'Profissional', 'required|trim');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');	
+        if ($data['query']['Paciente'] == 'D')
+            $this->form_validation->set_rules('idApp_ContatoCliente', 'ContatoCliente', 'required|trim');		
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             if ($_SESSION['log']['idSis_Empresa'] == 5) {
@@ -854,7 +877,20 @@ class Consulta extends CI_Controller {
 			}else{
 				$data['query']['Repeticao'] = $_SESSION['Consulta']['Repeticao'];
 			}
-			
+			if($_SESSION['Empresa']['CadastrarDep'] == "N"){
+				$data['query']['idApp_ClienteDep'] = 0;
+			}else{
+				if($data['query']['idApp_ClienteDep'] == ''){
+					$data['query']['idApp_ClienteDep'] = 0;
+				}
+			}
+			if($_SESSION['Empresa']['CadastrarPet'] == "N"){
+				$data['query']['idApp_ClientePet'] = 0;
+			}else{
+				if($data['query']['idApp_ClientePet'] == ''){
+					$data['query']['idApp_ClientePet'] = 0;
+				}
+			}			
             $data['query']['Tipo'] = 2;
 			$data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
 			$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
@@ -918,6 +954,8 @@ class Consulta extends CI_Controller {
 						$data['repeticao'][$j]['Repeticao'] 			= $data['query']['Repeticao'];
 						$data['repeticao'][$j]['idApp_Agenda'] 			= $data['query']['idApp_Agenda'];
 						$data['repeticao'][$j]['idApp_Cliente'] 		= $data['query']['idApp_Cliente'];
+						$data['repeticao'][$j]['idApp_ClienteDep'] 		= $data['query']['idApp_ClienteDep'];
+						$data['repeticao'][$j]['idApp_ClientePet'] 		= $data['query']['idApp_ClientePet'];
 						$data['repeticao'][$j]['Obs'] 					= $data['query']['Obs'];
 						$data['repeticao'][$j]['idApp_Profissional'] 	= $data['query']['idApp_Profissional'];
 						$data['repeticao'][$j]['idTab_Status'] 			= $data['query']['idTab_Status'];

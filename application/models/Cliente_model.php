@@ -472,6 +472,86 @@ class Cliente_model extends CI_Model {
         return $array;
     }
 	
+	public function select_clientedep($data = FALSE) {
+		
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+					idApp_ClienteDep,      
+					idApp_Cliente,
+					CONCAT(IFNULL(NomeClienteDep,"")) AS NomeClienteDep
+				FROM
+					App_ClienteDep					
+				WHERE
+					idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+					idApp_Cliente = ' . $data . '
+				ORDER BY 
+					NomeClienteDep ASC'
+			);
+					
+        } else {
+            $query = $this->db->query(
+				'SELECT                
+					idApp_ClienteDep,      
+					idApp_Cliente,
+					CONCAT(IFNULL(NomeClienteDep,"")) AS NomeClienteDep
+				FROM
+					App_ClienteDep					
+				WHERE
+					idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				ORDER BY 
+					NomeClienteDep ASC'
+			);
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idApp_ClienteDep] = $row->NomeClienteDep;
+            }
+        }
+
+        return $array;
+    }
+	
+	public function select_clientepet($data = FALSE) {
+		
+        if ($data === TRUE) {
+            $array = $this->db->query(					
+				'SELECT                
+					idApp_ClientePet,      
+					idApp_Cliente,
+					CONCAT(IFNULL(NomeClientePet,"")) AS NomeClientePet
+				FROM
+					App_ClientePet
+				WHERE
+					idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+					idApp_Cliente = ' . $data . '
+				ORDER BY 
+					NomeClientePet ASC'
+			);
+					
+        } else {
+            $query = $this->db->query(
+				'SELECT                
+					idApp_ClientePet,      
+					idApp_Cliente,
+					CONCAT(IFNULL(NomeClientePet,"")) AS NomeClientePet
+				FROM
+					App_ClientePet
+				WHERE
+					idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+				ORDER BY 
+					NomeClientePet ASC'
+			);
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idApp_ClientePet] = $row->NomeClientePet;
+            }
+        }
+
+        return $array;
+    }
+	
 	public function select_clienteonline($data = FALSE) {
 
         if ($data === TRUE) {
