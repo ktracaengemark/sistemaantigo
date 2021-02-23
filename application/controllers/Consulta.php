@@ -49,6 +49,7 @@ class Consulta extends CI_Controller {
 			'Repetir',
 			'Prazo',
 			'DataMinima',
+			'RelacaoDep',
         ), TRUE));
 
         $data['query'] = quotes_to_entities($this->input->post(array(
@@ -78,7 +79,7 @@ class Consulta extends CI_Controller {
 			'Recorrencias',
 		), TRUE));
 		
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+ 		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
  		(!$data['cadastrar']['Repetir']) ? $data['cadastrar']['Repetir'] = 'N' : FALSE;
 		//(!$data['query']['Intervalo']) ? $data['query']['Intervalo'] = '1' : FALSE;
 		//(!$data['query']['Periodo']) ? $data['query']['Periodo'] = '1' : FALSE;
@@ -149,8 +150,9 @@ class Consulta extends CI_Controller {
 		$data['select']['Status'] = $this->Basico_model->select_status();
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
         $data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
-        $data['select']['idApp_ClienteDep'] = $this->Cliente_model->select_clientedep($idApp_Cliente);
-        $data['select']['idApp_ClientePet'] = $this->Cliente_model->select_clientepet($idApp_Cliente);
+		$data['select']['RelacaoDep'] = $this->Cliente_model->select_relacao();
+        $data['select']['idApp_ClienteDep'] = $this->Cliente_model->select_clientedep($_SESSION['Cliente']['idApp_Cliente']);
+        $data['select']['idApp_ClientePet'] = $this->Cliente_model->select_clientepet($_SESSION['Cliente']['idApp_Cliente']);
 		#$data['select']['idSis_EmpresaFilial'] = $this->Empresafilial_model->select_empresafilial();
 		#$data['select']['ContatoCliente'] = $this->Consulta_model->select_contatocliente_cliente($data['query']['idApp_Cliente']);
 		
@@ -807,8 +809,8 @@ class Consulta extends CI_Controller {
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['idApp_Agenda'] = $this->Basico_model->select_agenda();
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
-        $data['select']['idApp_ClienteDep'] = $this->Cliente_model->select_clientedep($idApp_Cliente);
-        $data['select']['idApp_ClientePet'] = $this->Cliente_model->select_clientepet($idApp_Cliente);	
+        $data['select']['idApp_ClienteDep'] = $this->Cliente_model->select_clientedep($_SESSION['Cliente']['idApp_Cliente']);
+        $data['select']['idApp_ClientePet'] = $this->Cliente_model->select_clientepet($_SESSION['Cliente']['idApp_Cliente']);	
 		$data['select']['Status'] = $this->Basico_model->select_status();
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
         $data['select']['ContatoCliente'] = $this->Consulta_model->select_contatocliente_cliente($data['query']['idApp_Cliente']);
@@ -838,7 +840,7 @@ class Consulta extends CI_Controller {
         $data['metodo'] = 2;
         $data['alterarcliente'] = 2;
 
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+ 		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
@@ -861,7 +863,8 @@ class Consulta extends CI_Controller {
 		$this->form_validation->set_rules('idApp_Agenda', 'Profissional', 'required|trim');
 		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');	
         if ($data['query']['Paciente'] == 'D')
-            $this->form_validation->set_rules('idApp_ContatoCliente', 'ContatoCliente', 'required|trim');		
+            $this->form_validation->set_rules('idApp_ContatoCliente', 'ContatoCliente', 'required|trim');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');	
 		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
@@ -1012,6 +1015,8 @@ class Consulta extends CI_Controller {
 			'idApp_Consulta',
             'idApp_Agenda',
             'idApp_Cliente',
+            'idApp_ClienteDep',
+            'idApp_ClientePet',
             'Data',
             'Data2',
 			'HoraInicio',
@@ -1078,26 +1083,12 @@ class Consulta extends CI_Controller {
 
         ($data['query']['Paciente'] == 'D') ?
             $data['div']['Paciente'] = '' : $data['div']['Paciente'] = 'style="display: none;"';
-
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
-        $this->form_validation->set_rules('Data2', 'Data Fim', 'required|trim|valid_date|valid_periodo_data[' . $data['query']['Data'] . ']');
-		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
-        if(strtotime($data2) == strtotime($data1)){
-			$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
-		}else{
-			$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour');
-		}
-		$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
-		$this->form_validation->set_rules('idApp_Agenda', 'Profissional', 'required|trim');	
-
-        if ($data['query']['Paciente'] == 'D')
-            $this->form_validation->set_rules('idApp_ContatoCliente', 'ContatoCliente', 'required|trim');
 	
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['idApp_Agenda'] = $this->Basico_model->select_agenda();
-		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();	
+		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
+        $data['select']['idApp_ClienteDep'] = $this->Cliente_model->select_clientedep($_SESSION['Cliente']['idApp_Cliente']);
+        $data['select']['idApp_ClientePet'] = $this->Cliente_model->select_clientepet($_SESSION['Cliente']['idApp_Cliente']);	
 		$data['select']['Status'] = $this->Basico_model->select_status();
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
         $data['select']['ContatoCliente'] = $this->Consulta_model->select_contatocliente_cliente($data['query']['idApp_Cliente']);
@@ -1127,7 +1118,7 @@ class Consulta extends CI_Controller {
         $data['metodo'] = 2;
         $data['alterarcliente'] = 2;
 
- 		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+ 		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
@@ -1137,6 +1128,22 @@ class Consulta extends CI_Controller {
 
         $data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
 
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
+        $this->form_validation->set_rules('Data2', 'Data Fim', 'required|trim|valid_date|valid_periodo_data[' . $data['query']['Data'] . ']');
+		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
+        if(strtotime($data2) == strtotime($data1)){
+			$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
+		}else{
+			$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour');
+		}
+		$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
+		$this->form_validation->set_rules('idApp_Agenda', 'Profissional', 'required|trim');	
+        if ($data['query']['Paciente'] == 'D')
+            $this->form_validation->set_rules('idApp_ContatoCliente', 'ContatoCliente', 'required|trim');
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');			
+		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             if ($_SESSION['log']['idSis_Empresa'] == 5) {
@@ -1145,7 +1152,25 @@ class Consulta extends CI_Controller {
 				$this->load->view('consulta/form_consulta', $data);
 			}	
         } else {
-
+			if($_SESSION['Consulta']['idApp_Cliente'] != $data['query']['idApp_Cliente']){
+				$data['query']['Repeticao'] = $data['query']['idApp_Consulta'];
+			}else{
+				$data['query']['Repeticao'] = $_SESSION['Consulta']['Repeticao'];
+			}
+			if($_SESSION['Empresa']['CadastrarDep'] == "N"){
+				$data['query']['idApp_ClienteDep'] = 0;
+			}else{
+				if($data['query']['idApp_ClienteDep'] == ''){
+					$data['query']['idApp_ClienteDep'] = 0;
+				}
+			}
+			if($_SESSION['Empresa']['CadastrarPet'] == "N"){
+				$data['query']['idApp_ClientePet'] = 0;
+			}else{
+				if($data['query']['idApp_ClientePet'] == ''){
+					$data['query']['idApp_ClientePet'] = 0;
+				}
+			}
             $data['query']['Tipo'] = 2;
 			$data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
             #$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
@@ -1210,6 +1235,8 @@ class Consulta extends CI_Controller {
 						}
 						$data['repeticao'][$j]['idApp_Agenda'] 			= $data['query']['idApp_Agenda'];
 						$data['repeticao'][$j]['idApp_Cliente'] 		= $data['query']['idApp_Cliente'];
+						$data['repeticao'][$j]['idApp_ClienteDep'] 		= $data['query']['idApp_ClienteDep'];
+						$data['repeticao'][$j]['idApp_ClientePet'] 		= $data['query']['idApp_ClientePet'];
 						$data['repeticao'][$j]['Obs'] 					= $data['query']['Obs'];
 						$data['repeticao'][$j]['idApp_Profissional'] 	= $data['query']['idApp_Profissional'];
 						$data['repeticao'][$j]['idTab_Status'] 			= $data['query']['idTab_Status'];

@@ -201,11 +201,7 @@
 										<label for="DataNascimentoPet">Data de Nascimento:</label>
 										<input type="text" class="form-control Date" maxlength="10" <?php echo $readonly; ?>
 											   name="DataNascimentoPet" placeholder="DD/MM/AAAA" value="<?php echo $query['DataNascimentoPet']; ?>">
-									</div>						
-								</div>
-							</div>	
-							<div class="form-group">
-								<div class="row"> 
+									</div> 
 									<div class="col-md-4">
 										<label for="SexoPet">Sexo:</label>
 										<select data-placeholder="Selecione uma Opção..." class="form-control" <?php echo $readonly; ?>
@@ -221,7 +217,11 @@
 											}
 											?>   
 										</select>
-									</div>
+									</div>						
+								</div>
+							</div>	
+							<div class="form-group">
+								<div class="row">
 									<div class="col-md-4">
 										<label for="EspeciePet">Especie: *</label>
 										<input type="text" class="form-control" id="EspeciePet" maxlength="255" <?php echo $readonly; ?>

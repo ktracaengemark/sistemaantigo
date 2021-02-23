@@ -421,6 +421,100 @@ $(document).ready(function(){
 		
 	});	
 	
+	$('#insert_clientedep_form').on('submit', function(event){
+		//alert('ok');
+		event.preventDefault();
+		if($('#NomeClienteDep').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-clientedep").html('<div class="alert alert-danger" role="alert">Necessário prencher Nome do Dependente!</div>');						
+		}else{
+			//Fechar o botão cadastrar
+			$('#botaoCad').hide();
+								
+			//Fechar o botão fechar
+			$('#botaoFechar').hide();
+			
+			//Abre o Aguardar
+			$('.aguardar1').show();	
+			
+			//Receber os dados do formulário
+			var dados = $("#insert_clientedep_form").serialize();
+			console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/cadastros/ClienteDep.php?', dados, function (retorna){
+			 console.log(retorna);
+				if(retorna == 1){
+					//Limpar os campo
+					$('#insert_clientedep_form')[0].reset();
+					
+					//Fechar a janela modal cadastrar
+					$('#addClienteDepModal').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-clientedep").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-clientedep").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Dependente!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}
+		
+	});	
+	
+	$('#insert_clientepet_form').on('submit', function(event){
+		//alert('ok');
+		event.preventDefault();
+		if($('#NomeClientePet').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-clientepet").html('<div class="alert alert-danger" role="alert">Necessário prencher Nome do Pet!</div>');						
+		}else{
+			//Fechar o botão cadastrar
+			$('#botaoCad').hide();
+								
+			//Fechar o botão fechar
+			$('#botaoFechar').hide();
+			
+			//Abre o Aguardar
+			$('.aguardar1').show();	
+			
+			//Receber os dados do formulário
+			var dados = $("#insert_clientepet_form").serialize();
+			console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/cadastros/ClientePet.php?', dados, function (retorna){
+			 console.log(retorna);
+				if(retorna == 1){
+					//Limpar os campo
+					$('#insert_clientepet_form')[0].reset();
+					
+					//Fechar a janela modal cadastrar
+					$('#addClientePetModal').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-clientepet").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-clientepet").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Pet!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}
+		
+	});	
+	
 	$('#insert_fornecedor_form').on('submit', function(event){
 		//alert('ok');
 		event.preventDefault();
