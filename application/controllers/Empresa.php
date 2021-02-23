@@ -1130,11 +1130,13 @@ class Empresa extends CI_Controller {
         else
             $data['msg'] = '';
 
-        $this->Empresa_model->delete_empresa($id);
+        //$this->Empresa_model->delete_empresa($id);
+        $this->Empresa_model->delete_empresa_toda($id);
 
         $data['msg'] = '?m=1';
 
-		redirect(base_url() . 'agenda' . $data['msg']);
+		//redirect(base_url() . 'agenda' . $data['msg']);
+		redirect(base_url() . 'relatorio/empresas/' .  $data['msg']);
 		exit();
 
         $this->load->view('basico/footer');
