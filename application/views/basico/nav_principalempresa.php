@@ -31,8 +31,6 @@
 						</button>
 						<ul class="dropdown-menu" role="menu">							
 							<li><a href="<?php echo base_url() ?>relatorioempresa/funcionario"><span class="glyphicon glyphicon-user"></span> Funcionários </a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="<?php echo base_url() ?>relatorioempresa/colaboradoronline"><span class="glyphicon glyphicon-user"></span> Colaboradores Online </a></li>
 							<li role="separator" class="divider"></li>							
 							<li><a href="<?php echo base_url() ?>relatorioempresa/associado"><span class="glyphicon glyphicon-home"></span> Empresas Associadas </a></li>
 						</ul>
