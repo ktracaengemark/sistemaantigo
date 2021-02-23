@@ -3916,6 +3916,21 @@ exit();*/
 			foreach ($query->result() as $row) {
 				$row->ValorPromocao = number_format($row->ValorPromocao, 2, ',', '.');
 				$row->SubTotal2 = number_format($row->SubTotal2, 2, ',', '.');
+				
+				if($row->VendaBalcao == "S"){
+					if($row->VendaSite == "S"){
+						$row->Ativo = "Balcao/Site";
+					}else{
+						$row->Ativo = "Balcao";
+					}
+				}else{
+					if($row->VendaSite == "S"){
+						$row->Ativo = "Site";
+					}else{
+						$row->Ativo = "Não";
+					}
+				}
+				
             }
             return $query;
         }

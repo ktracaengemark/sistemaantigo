@@ -719,6 +719,9 @@ class Produtos_model extends CI_Model {
 			SELECT 
 				TV.*,
 				TDS.*,
+				TPM.Ativo AS AtivoPromocao,
+				TPM.VendaBalcao AS VendaBalcaoPromocao,
+				TPM.VendaSite AS VendaSitePromocao,
 				TPM.DataInicioProm,
 				TPM.DataFimProm,
 				TPM.Promocao,
@@ -753,6 +756,25 @@ class Produtos_model extends CI_Model {
                 foreach ($query->result() as $row) {
 					$row->DataInicioProm = $this->basico->mascara_data($row->DataInicioProm, 'barras');
 					$row->DataFimProm = $this->basico->mascara_data($row->DataFimProm, 'barras');
+					
+					if($row->idTab_Promocao){
+						if($row->VendaBalcaoPromocao == "S"){
+							if($row->VendaSitePromocao == "S"){
+								$row->AtivoPromocao = "Balcao/Site";
+							}else{
+								$row->AtivoPromocao = "Balcao";
+							}
+						}else{
+							if($row->VendaSitePromocao == "S"){
+								$row->AtivoPromocao = "Site";
+							}else{
+								$row->AtivoPromocao = "Não";
+							}
+						}
+					}else{
+						$row->AtivoPromocao = "Não";
+					}
+					
                 }
                 $query = $query->result_array();
                 return $query;
@@ -772,6 +794,9 @@ class Produtos_model extends CI_Model {
         $query = $this->db->query('
 			SELECT 
 				TPM.*,
+				TPM.Ativo AS AtivoPromocao,
+				TPM.VendaBalcao AS VendaBalcaoPromocao,
+				TPM.VendaSite AS VendaSitePromocao,
 				TCT.*
 			FROM 
 				Tab_Promocao AS TPM
@@ -805,6 +830,25 @@ class Produtos_model extends CI_Model {
 					$row->DataFimProm = $this->basico->mascara_data($row->DataFimProm, 'barras');
 					$row->VendaBalcao = $this->basico->mascara_palavra_completa($row->VendaBalcao, 'NS');
 					$row->VendaSite = $this->basico->mascara_palavra_completa($row->VendaSite, 'NS');
+					
+					if($row->idTab_Promocao){
+						if($row->VendaBalcaoPromocao == "S"){
+							if($row->VendaSitePromocao == "S"){
+								$row->AtivoPromocao = "Balcao/Site";
+							}else{
+								$row->AtivoPromocao = "Balcao";
+							}
+						}else{
+							if($row->VendaSitePromocao == "S"){
+								$row->AtivoPromocao = "Site";
+							}else{
+								$row->AtivoPromocao = "Não";
+							}
+						}
+					}else{
+						$row->AtivoPromocao = "Não";
+					}
+					
                 }
                 $query = $query->result_array();
                 return $query;

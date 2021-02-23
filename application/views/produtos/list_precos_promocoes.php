@@ -12,6 +12,7 @@
 				<th>Descricao</th>
 				<th>Dt.Inicio</th>
 				<th>Dt.Fim</th>
+				<th>Ativo</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -36,6 +37,7 @@
 						echo '<td>' . $row['Descricao'] . '</td>';
 						echo '<td>' . $row['DataInicioProm'] . '</td>';
 						echo '<td>' . $row['DataFimProm'] . '</td>';
+						echo '<td>' . $row['AtivoPromocao'] . '</td>';
 						echo '<td></td>';
 					echo '</tr>';            
 

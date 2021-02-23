@@ -18,8 +18,6 @@
 							<th class="active" scope="col">Foto</th>
 							<th class="active" scope="col">Editar</th>
 							<th class="active">Ativo</th>
-							<th class="active">Balcao</th>
-							<th class="active">Site</th>
 							<th class="active">Id</th>
 							<th class="active">Tipo</th>
 							<th class="active">Categoria</th>
@@ -47,8 +45,6 @@
 							</td>						
 							<!--<td><img  alt="User Pic" src="<?php echo base_url() . '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/promocao/miniatura/' . $row['Arquivo'] . ''; ?> "class="img-circle img-responsive" width='100'></td>-->
 							<td><?php echo $row['Ativo'] ?></td>
-							<td><?php echo $row['VendaBalcao'] ?></td>
-							<td><?php echo $row['VendaSite'] ?></td>
 							<td><?php echo $row['idTab_Promocao'] ?></td>
 							<td><?php echo $row['Desconto'] ?></td>
 							<td><?php echo $row['Catprom'] ?></td>
