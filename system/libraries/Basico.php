@@ -427,7 +427,7 @@ class Basico {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;
-		$data = rand() . '_' . 'arquivos' . '_' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '_' . $_SESSION['log']['idSis_Empresa'] . $extensao;
+		$data = 'arquivos' . '_' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '_' . $_SESSION['log']['idSis_Empresa'] . '_' . rand() . $extensao;
 		return $data;
     }
 
@@ -435,7 +435,7 @@ class Basico {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;
-		$data = rand() . '_' . 'arquivos' . '_' . $_SESSION['Arquivos']['idApp_OrcaTrata'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = 'arquivos' . '_' . $_SESSION['Arquivos']['idApp_OrcaTrata'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . '_' . rand() . $extensao;
 		return $data;
     }
 
