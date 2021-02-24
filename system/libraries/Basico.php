@@ -423,6 +423,22 @@ class Basico {
 		return strtolower($string);
 	}	
 
+    function nomeiaarquivos($data) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+		$data = rand() . '_' . 'arquivos' . '_' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '_' . $_SESSION['log']['idSis_Empresa'] . $extensao;
+		return $data;
+    }
+
+    function renomeiaarquivos($data) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+		$data = rand() . '_' . 'arquivos' . '_' . $_SESSION['Arquivos']['idApp_Arquivos'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		return $data;
+    }
+
     function renomeiaprodutos($data) {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);

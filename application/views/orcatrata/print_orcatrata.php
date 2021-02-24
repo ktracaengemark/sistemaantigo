@@ -103,6 +103,31 @@
 										</div>
 									</li>
 									<?php } ?>
+									<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
+										<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+											<div class="btn-group">
+												<a type="button" class="btn btn-md btn-default " href="<?php echo base_url() . 'orcatrata/alterarstatus/' . $query['idApp_OrcaTrata']; ?>">
+													<span class="glyphicon glyphicon-edit"></span> Editar
+												</a>
+											</div>									
+										</li>
+										<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+											<div class="btn-group">
+												<a type="button" class="btn btn-md btn-default " href="<?php echo base_url() . 'arquivos/cadastrar/' . $query['idApp_OrcaTrata']; ?>">
+													<span class="glyphicon glyphicon-edit"></span> Arquivos
+												</a>
+											</div>									
+										</li>
+									<?php } ?>	
+									<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+										<div class="btn-group">
+											<a href="javascript:window.print()">
+												<button type="button" class="btn btn-md btn-default ">
+													<span class="glyphicon glyphicon-print"></span> Imprimir
+												</button>
+											</a>
+										</div>									
+									</li>
 									<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 										<div class="btn-group">
 											<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
@@ -150,24 +175,6 @@
 												</li>
 											</ul>
 										</div>
-									</li>
-									<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
-										<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
-											<div class="btn-group">
-												<a type="button" class="btn btn-md btn-default " href="<?php echo base_url() . 'orcatrata/alterarstatus//' . $query['idApp_OrcaTrata']; ?>">
-													<span class="glyphicon glyphicon-edit"></span> Editar
-												</a>
-											</div>									
-										</li>
-									<?php } ?>	
-									<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
-										<div class="btn-group">
-											<a href="javascript:window.print()">
-												<button type="button" class="btn btn-md btn-default ">
-													<span class="glyphicon glyphicon-print"></span> Imprimir
-												</button>
-											</a>
-										</div>									
 									</li>
 								</ul>
 							</div>
