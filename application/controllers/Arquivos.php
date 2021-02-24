@@ -219,21 +219,21 @@ class Arquivos extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'idSis_Usuario',
+            //'idSis_Usuario',
 			'idApp_Arquivos',
             'Texto_Arquivos',
 			'Ativo_Arquivos',
-			'idSis_Empresa',
+			//'idSis_Empresa',
                 ), TRUE));
 
 
         if ($id){
-			$data['query'] = $this->Arquivos_model->get_arquivos($id);
+			$_SESSION['Query'] = $data['query'] = $this->Arquivos_model->get_arquivos($id);
 		}
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
-		$this->form_validation->set_rules('Texto_Arquivos', 'Texto do Slide', 'trim');
+		$this->form_validation->set_rules('Texto_Arquivos', 'Texto do Arquivo', 'trim');
 		
 		$data['select']['Ativo_Arquivos'] = $this->Basico_model->select_status_sn();
 
@@ -265,12 +265,10 @@ class Arquivos extends CI_Controller {
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('arquivos/form_texto_arquivos', $data);
         } else {
-
-           # $data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));			
 			$data['query']['Texto_Arquivos'] = $data['query']['Texto_Arquivos'];
             $data['query']['Ativo_Arquivos'] = $data['query']['Ativo_Arquivos'];
-			$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
-			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+			//$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+			//$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 
             $data['anterior'] = $this->Arquivos_model->get_arquivos($data['query']['idApp_Arquivos']);
             $data['campos'] = array_keys($data['query']);
@@ -290,7 +288,8 @@ class Arquivos extends CI_Controller {
                     $data['msg'] = '?m=1';
                 }
 
-                redirect(base_url() . 'relatorio/arquivos/' . $data['msg']);
+                //redirect(base_url() . 'relatorio/arquivos/' . $data['msg']);
+				redirect(base_url() . 'OrcatrataPrint/imprimir/' . $_SESSION['Query']['idApp_OrcaTrata'] . $data['msg']);
                 exit();
             }
         }
@@ -298,7 +297,7 @@ class Arquivos extends CI_Controller {
         $this->load->view('basico/footer');
     }
 		
-    public function alterar_slide($id = FALSE) {
+    public function alterar_arquivos($id = FALSE) {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -343,7 +342,7 @@ class Arquivos extends CI_Controller {
         }
 
         $data['titulo'] = 'Alterar Foto';
-        $data['form_open_path'] = 'arquivos/alterar_slide';
+        $data['form_open_path'] = 'arquivos/alterar_arquivos';
         $data['readonly'] = 'readonly';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
@@ -448,12 +447,12 @@ class Arquivos extends CI_Controller {
 
 						if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Arquivos']['Arquivos'] . ''))
 							&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Arquivos']['Arquivos'] . '')
-							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/slide.jpg'))){
+							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/arquivos.jpg'))){
 							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Arquivos']['Arquivos'] . '');						
 						}
 						if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Arquivos']['Arquivos'] . ''))
 							&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Arquivos']['Arquivos'] . '')
-							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/slide.jpg'))){
+							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/arquivos.jpg'))){
 							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Arquivos']['Arquivos'] . '');						
 						}						
 						
@@ -492,12 +491,12 @@ class Arquivos extends CI_Controller {
 			
 			if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Arquivos']['Arquivos'] . ''))
 				&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Arquivos']['Arquivos'] . '')
-				!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/slide.jpg'))){
+				!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/arquivos.jpg'))){
 				unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Arquivos']['Arquivos'] . '');						
 			}
 			if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Arquivos']['Arquivos'] . ''))
 				&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Arquivos']['Arquivos'] . '')
-				!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/slide.jpg'))){
+				!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/arquivos.jpg'))){
 				unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Arquivos']['Arquivos'] . '');						
 			}
 			

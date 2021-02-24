@@ -435,7 +435,7 @@ class Basico {
 		$extensao	= explode('.', $data);
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;
-		$data = rand() . '_' . 'arquivos' . '_' . $_SESSION['Arquivos']['idApp_Arquivos'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = rand() . '_' . 'arquivos' . '_' . $_SESSION['Arquivos']['idApp_OrcaTrata'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
 		return $data;
     }
 

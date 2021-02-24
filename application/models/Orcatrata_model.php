@@ -94,6 +94,48 @@ class Orcatrata_model extends CI_Model {
         }
     }
 
+    public function set_arquivos($data) {
+
+        $query = $this->db->insert('App_Arquivos', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+    }
+
+    public function set_arquivo($data) {
+
+        $query = $this->db->insert('Sis_Arquivo', $data);
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        }
+        else {
+            #return TRUE;
+            return $this->db->insert_id();
+        }
+
+    }
+	
+    public function get_arquivos($data) {
+        $query = $this->db->query('SELECT * FROM App_Arquivos WHERE idApp_Arquivos = ' . $data);
+        $query = $query->result_array();
+
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query[0];
+    }
+
     public function get_orcatrata($data) {
         $query = $this->db->query('
 			SELECT 
@@ -111,6 +153,29 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN Tab_TipoFinanceiro AS TF ON TF.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Sis_Usuario AS SU ON SU.idSis_Usuario = OT.idSis_Usuario
 					WHERE 
+				idApp_OrcaTrata = ' . $data . '
+		');
+        $query = $query->result_array();
+		
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
+
+        return $query[0];
+    }
+
+    public function get_orcatrata_arquivo($data) {
+        $query = $this->db->query('
+			SELECT 
+				OT.*
+			FROM 
+				App_OrcaTrata AS OT 
+			WHERE 
 				idApp_OrcaTrata = ' . $data . '
 		');
         $query = $query->result_array();
@@ -1890,7 +1955,14 @@ class Orcatrata_model extends CI_Model {
 
         return $query;
     }
+	
+    public function get_profissional($data) {
+		$query = $this->db->query('SELECT NomeProfissional FROM App_Profissional WHERE idApp_Profissional = ' . $data);
+        $query = $query->result_array();
 
+        return (isset($query[0]['NomeProfissional'])) ? $query[0]['NomeProfissional'] : FALSE;
+    }
+	
     public function list_orcamentocomb($id, $combinado, $completo) {
 
         $query = $this->db->query('SELECT '
@@ -2140,6 +2212,45 @@ class Orcatrata_model extends CI_Model {
             }
         
     }
+
+	public function list_arquivos($data, $completo) {
+
+        $query = $this->db->query('
+            SELECT
+                idApp_Arquivos,
+                idApp_OrcaTrata,
+				Arquivos,
+				Texto_Arquivos,
+				Ativo_Arquivos
+            FROM
+                App_Arquivos
+            WHERE
+                idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . ' AND
+				idApp_OrcaTrata = ' . $data['idApp_OrcaTrata']. '
+			ORDER BY
+				idApp_Arquivos		
+        ');
+
+        /*
+          echo $this->db->last_query();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+
+        if ($completo === FALSE) {
+            return TRUE;
+        } else {
+
+            foreach ($query->result() as $row) {
+
+            }
+
+            return $query;
+        }
+
+    }
 	
     public function update_orcatrata($data, $id) {
 
@@ -2269,6 +2380,14 @@ class Orcatrata_model extends CI_Model {
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
 
     }
+	
+    public function update_arquivos($data, $id) {
+
+        unset($data['idApp_Arquivos']);
+        $query = $this->db->update('App_Arquivos', $data, array('idApp_Arquivos' => $id));
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
 
     public function delete_servico($data) {
 
@@ -2353,11 +2472,15 @@ class Orcatrata_model extends CI_Model {
         }
     }
 
-    public function get_profissional($data) {
-		$query = $this->db->query('SELECT NomeProfissional FROM App_Profissional WHERE idApp_Profissional = ' . $data);
-        $query = $query->result_array();
+    public function delete_arquivos($id) {
 
-        return (isset($query[0]['NomeProfissional'])) ? $query[0]['NomeProfissional'] : FALSE;
+        $query = $this->db->delete('App_Arquivos', array('idApp_Arquivos' => $id));
+
+        if ($this->db->affected_rows() === 0) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
     }
 	
 }

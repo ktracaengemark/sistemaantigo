@@ -79,7 +79,7 @@
 								<?php if ($_SESSION['Cliente']['idSis_Empresa'] == $_SESSION['log']['idSis_Empresa'] ) { ?>
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
-										<button type="button" class="btn btn-md btn-warning  dropdown-toggle" data-toggle="dropdown">
+										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">
 											<span class="glyphicon glyphicon-usd"></span> Orçs. <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu" role="menu">
@@ -102,6 +102,29 @@
 									</div>
 								</li>
 								<?php } ?>
+								<?php if ($_SESSION['Usuario']['Edit_Orcam'] == "S" ) { ?>
+									<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+										<div class="btn-group">
+											<a type="button" class="btn btn-md btn-warning " href="<?php echo base_url() . 'orcatrata/alterarstatus/' . $orcatrata['idApp_OrcaTrata']; ?>">
+												<span class="glyphicon glyphicon-edit"></span> Editar
+											</a>
+										</div>									
+									</li>
+								<?php } ?>
+								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group">
+										<a type="button" class="btn btn-md btn-default " href="<?php echo base_url() . 'orcatrata/arquivos/' . $orcatrata['idApp_OrcaTrata']; ?>">
+											<span class="glyphicon glyphicon-picture"></span> Arquivos
+										</a>
+									</div>									
+								</li>	
+								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+									<div class="btn-group">
+										<a type="button" class="btn btn-md btn-default " href="<?php echo base_url() . 'orcatrataprint/imprimir/' . $orcatrata['idApp_OrcaTrata']; ?>">
+											<span class="glyphicon glyphicon-edit"></span> Impressão
+										</a>
+									</div>									
+								</li>
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
 										<button type="button" class="btn btn-md btn-default  dropdown-toggle" data-toggle="dropdown">

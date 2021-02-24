@@ -7936,7 +7936,7 @@ class Orcatrata extends CI_Controller {
                 //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_OrcaTrata'], FALSE);
                 //$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_OrcaTrata', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
-				if($data['orcatrata']['idApp_Cliente'] == 0 || $orcatrata['idApp_Cliente'] == 1 || $orcatrata['idApp_Cliente'] == 150001 || $_SESSION['log']['idSis_Empresa'] == 5){
+				if($data['orcatrata']['idApp_Cliente'] == 0 || $data['orcatrata']['idApp_Cliente'] == 1 || $data['orcatrata']['idApp_Cliente'] == 150001 || $_SESSION['log']['idSis_Empresa'] == 5){
 					redirect(base_url() . 'pedidos/pedidos/' . $data['msg']);
 				}else{
 					redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
@@ -7948,7 +7948,7 @@ class Orcatrata extends CI_Controller {
         $this->load->view('basico/footer');
 
     }
-	
+		
     public function cadastrardesp() {
 
         if ($this->input->get('m') == 1)
@@ -10558,6 +10558,541 @@ class Orcatrata extends CI_Controller {
         $this->load->view('basico/footer');
 
     }	
+
+	public function arquivos($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contatofornec com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+		/*
+        $data['orcatrata'] = quotes_to_entities($this->input->post(array(
+            'idSis_Empresa',
+			'idApp_Cliente',
+            'idApp_OrcaTrata',
+			'Tipo_Orca',
+        ), TRUE));
+		*/
+        if ($id) {
+			$_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata_arquivo($id);
+		}
+		/*
+			echo "<pre>";
+			print_r($data['orcatrata']);
+			echo "</pre>";
+			exit();
+        
+		if ($id) {
+            #### App_Arquivos ####
+            $data['arquivos'] = $this->Orcatrata_model->get_orcatrata_arquivo($id);
+            //$_SESSION['Arquivos'] = $data['arquivos'] = $this->Orcatrata_model->get_arquivos($id);		
+		}
+			
+			echo "<pre>";
+			print_r($data['arquivos']);
+			echo "</pre>";
+			exit();		
+			*/
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+        #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
+
+        $data['titulo'] = 'Arquivos';
+
+        #run form validation
+        if ($this->form_validation->run() !== TRUE) {
+			$data['bd']['idApp_OrcaTrata'] 	= $data['orcatrata']['idApp_OrcaTrata'];
+
+            $data['report'] = $this->Orcatrata_model->list_arquivos($data['bd'],TRUE);
+
+            /*
+              echo "<pre>";
+              print_r($data['report']);
+              echo "</pre>";
+              exit();
+              */
+
+            $data['list'] = $this->load->view('orcatrata/list_arquivos', $data, TRUE);
+
+        }
+
+        $this->load->view('orcatrata/tela_arquivos', $data);
+
+        $this->load->view('basico/footer');
+
+    }
+
+    public function cadastrar_arquivos($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['query'] = quotes_to_entities($this->input->post(array(
+			'idApp_Arquivos',
+            'Arquivos',
+			'Texto_Arquivos',
+			'Ativo_Arquivos',
+			'idSis_Usuario',
+			'idSis_Empresa',
+			'idApp_OrcaTrata',
+		), TRUE));
+		
+        $data['file'] = $this->input->post(array(
+			'idApp_Arquivos',
+			'idSis_Empresa',
+            'Arquivo',
+		), TRUE);
+
+        if ($id) {
+			$_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata($id);
+		}
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+		$data['select']['Ativo_Arquivos'] = $this->Basico_model->select_status_sn();
+		
+        if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
+            
+			$data['file']['Arquivo'] = $this->basico->nomeiaarquivos($_FILES['Arquivo']['name']);
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
+        }
+
+        $data['titulo'] = 'Alterar Foto';
+        $data['form_open_path'] = 'orcatrata/cadastrar_arquivos';
+        $data['readonly'] = 'readonly';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+ 		(!$data['query']['Ativo_Arquivos']) ? $data['query']['Ativo_Arquivos'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Ativo_Arquivos' => $this->basico->radio_checked($data['query']['Ativo_Arquivos'], 'Ativo_Arquivos', 'NS'),
+        );
+        ($data['query']['Ativo_Arquivos'] == 'S') ?
+            $data['div']['Ativo_Arquivos'] = '' : $data['div']['Ativo_Arquivos'] = 'style="display: none;"';		
+		
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            #load login view
+            $this->load->view('orcatrata/form_cad_arquivos', $data);
+        }
+        else {
+
+            $config['upload_path'] = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+            $config['max_size'] = 1000;
+            $config['allowed_types'] = ['jpg','jpeg','pjpeg','png','x-png'];
+            $config['file_name'] = $data['file']['Arquivo'];
+
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('Arquivo')) {
+                $data['msg'] = $this->basico->msg($this->upload->display_errors(), 'erro', FALSE, FALSE, FALSE);
+                $this->load->view('orcatrata/form_cad_arquivos', $data);
+            }
+            else {
+			
+				$dir = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';		
+				$foto = $data['file']['Arquivo'];
+				$diretorio = $dir.$foto;					
+				$dir2 = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+
+				switch($_FILES['Arquivo']['type']):
+					case 'image/jpg';
+					case 'image/jpeg';
+					case 'image/pjpeg';
+				
+						list($largura, $altura, $tipo) = getimagesize($diretorio);
+						
+						$img = imagecreatefromjpeg($diretorio);
+
+						$thumb = imagecreatetruecolor(600, 315);
+						
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 600, 315, $largura, $altura);
+						
+						imagejpeg($thumb, $dir2 . $foto);
+						imagedestroy($img);
+						imagedestroy($thumb);				      
+					
+					break;					
+
+					case 'image/png':
+					case 'image/x-png';
+						
+						list($largura, $altura, $tipo) = getimagesize($diretorio);
+						
+						$img = imagecreatefrompng($diretorio);
+
+						$thumb = imagecreatetruecolor(600, 315);
+						
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 600, 315, $largura, $altura);
+						
+						imagejpeg($thumb, $dir2 . $foto);
+						imagedestroy($img);
+						imagedestroy($thumb);				      
+					
+					break;
+					
+				endswitch;			
+				
+				$data['query']['Arquivos'] = $data['file']['Arquivo'];
+				$data['query']['Texto_Arquivos'] = $data['query']['Texto_Arquivos'];
+				$data['query']['Ativo_Arquivos'] = $data['query']['Ativo_Arquivos'];
+				$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+				$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+				$data['query']['idApp_OrcaTrata'] = $_SESSION['Orcatrata']['idApp_OrcaTrata'];
+
+				$data['campos'] = array_keys($data['query']);
+				$data['anterior'] = array();
+
+				$data['idApp_Arquivos'] = $this->Orcatrata_model->set_arquivos($data['query']);
+
+				if ($data['idApp_Arquivos'] === FALSE) {
+					$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+					$this->basico->erro($msg);
+					$this->load->view('orcatrata/form_cad_arquivos', $data);
+				}				
+
+				else {
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Arquivos'], FALSE);
+					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Arquivos', 'CREATE', $data['auditoriaitem']);
+					
+					$data['file']['idApp_Arquivos'] = $data['idApp_Arquivos'];					
+					$data['file']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+					$data['camposfile'] = array_keys($data['file']);
+					$data['idSis_Arquivo'] = $this->Orcatrata_model->set_arquivo($data['file']);
+
+					if ($data['idSis_Arquivo'] === FALSE) {
+						$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+						$this->basico->erro($msg);
+						$this->load->view('orcatrata/form_cad_arquivos', $data);
+					} 
+					else {
+
+						$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
+						$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);						
+
+						$data['msg'] = '?m=1';
+
+						#redirect(base_url() . 'relatorio/arquivos' . $data['msg']);
+						#redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Orcatrata']['idApp_Cliente'] . $data['msg']);
+						#redirect(base_url() . 'relatorio/parcelas/' . $data['msg']);
+						redirect(base_url() . 'Orcatrata/arquivos/' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . $data['msg']);
+						exit();
+					}				
+				}
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+	
+    public function alterar_texto($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['arquivos'] = quotes_to_entities($this->input->post(array(
+            //'idSis_Usuario',
+			'idApp_Arquivos',
+            'Texto_Arquivos',
+			'Ativo_Arquivos',
+			//'idSis_Empresa',
+                ), TRUE));
+
+
+        if ($id){
+			$_SESSION['Arquivos'] = $data['arquivos'] = $this->Orcatrata_model->get_arquivos($id);
+		}
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+		$this->form_validation->set_rules('Texto_Arquivos', 'Texto do Arquivo', 'trim');
+		
+		$data['select']['Ativo_Arquivos'] = $this->Basico_model->select_status_sn();
+
+        $data['titulo'] = 'Editar Slide';
+        $data['form_open_path'] = 'orcatrata/alterar_texto';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+        $data['button'] =
+                '
+                <button class="btn btn-sm btn-warning" name="pesquisar" value="0" type="submit">
+                    <span class="glyphicon glyphicon-edit"></span> Salvar Alteração
+                </button>
+        ';
+
+        $data['sidebar'] = 'col-sm-3 col-md-2';
+        $data['main'] = 'col-sm-7 col-md-8';
+
+ 		(!$data['arquivos']['Ativo_Arquivos']) ? $data['arquivos']['Ativo_Arquivos'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Ativo_Arquivos' => $this->basico->radio_checked($data['arquivos']['Ativo_Arquivos'], 'Ativo_Arquivos', 'NS'),
+        );
+        ($data['arquivos']['Ativo_Arquivos'] == 'S') ?
+            $data['div']['Ativo_Arquivos'] = '' : $data['div']['Ativo_Arquivos'] = 'style="display: none;"';
+			
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('orcatrata/form_texto_arquivos', $data);
+        } else {
+			$data['arquivos']['Texto_Arquivos'] = $data['arquivos']['Texto_Arquivos'];
+            $data['arquivos']['Ativo_Arquivos'] = $data['arquivos']['Ativo_Arquivos'];
+			//$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+			//$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+
+            $data['anterior'] = $this->Orcatrata_model->get_arquivos($data['arquivos']['idApp_Arquivos']);
+            $data['campos'] = array_keys($data['arquivos']);
+
+            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['arquivos'], $data['campos'], $data['arquivos']['idApp_Arquivos'], TRUE);
+
+            if ($data['auditoriaitem'] && $this->Orcatrata_model->update_arquivos($data['arquivos'], $data['arquivos']['idApp_Arquivos']) === FALSE) {
+                $data['msg'] = '?m=2';
+                redirect(base_url() . 'orcatrata/form_texto_arquivos' . $data['msg']);
+                exit();
+            } else {
+
+                if ($data['auditoriaitem'] === FALSE) {
+                    $data['msg'] = '';
+                } else {
+                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Arquivos', 'UPDATE', $data['auditoriaitem']);
+                    $data['msg'] = '?m=1';
+                }
+
+                //redirect(base_url() . 'relatorio/arquivos/' . $data['msg']);
+				redirect(base_url() . 'Orcatrata/arquivos/' . $_SESSION['Arquivos']['idApp_OrcaTrata'] . $data['msg']);
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+		
+    public function alterar_arquivos($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        $data['arquivos'] = quotes_to_entities($this->input->post(array(
+			'idApp_Arquivos',
+            'Texto_Arquivos',
+			'Ativo_Arquivos',
+		), TRUE));
+				
+        $data['file'] = $this->input->post(array(
+            'idApp_Arquivos',
+			'idSis_Empresa',
+            'Arquivo',
+		), TRUE);
+
+        if ($id) {
+            $_SESSION['Arquivos'] = $data['arquivos'] = $this->Orcatrata_model->get_arquivos($id, TRUE);
+			$data['file']['idApp_Arquivos'] = $id;
+		}
+		/*
+			echo "<pre>";
+			print_r($_SESSION['Arquivos']['idApp_OrcaTrata']);
+			echo "</pre>";
+			exit();
+		*/
+		
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+		$data['select']['Ativo_Arquivos'] = $this->Basico_model->select_status_sn();		
+		
+        if (isset($_FILES['Arquivo']) && $_FILES['Arquivo']['name']) {
+            
+			$data['file']['Arquivo'] = $this->basico->renomeiaarquivos($_FILES['Arquivo']['name']);
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'file_allowed_type[jpg, jpeg, gif, png]|file_size_max[1000]');
+        }
+        else {
+            $this->form_validation->set_rules('Arquivo', 'Arquivo', 'required');
+        }
+
+        $data['titulo'] = 'Alterar Foto';
+        $data['form_open_path'] = 'orcatrata/alterar_arquivos';
+        $data['readonly'] = 'readonly';
+        $data['panel'] = 'primary';
+        $data['metodo'] = 2;
+
+ 		(!$data['arquivos']['Ativo_Arquivos']) ? $data['arquivos']['Ativo_Arquivos'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Ativo_Arquivos' => $this->basico->radio_checked($data['arquivos']['Ativo_Arquivos'], 'Ativo_Arquivos', 'NS'),
+        );
+        ($data['arquivos']['Ativo_Arquivos'] == 'S') ?
+            $data['div']['Ativo_Arquivos'] = '' : $data['div']['Ativo_Arquivos'] = 'style="display: none;"';
+		
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            #load login view
+            $this->load->view('orcatrata/form_arquivos', $data);
+        }
+        else {
+
+            $config['upload_path'] = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';
+            $config['max_size'] = 1000;
+            $config['allowed_types'] = ['jpg','jpeg','pjpeg','png','x-png'];
+            $config['file_name'] = $data['file']['Arquivo'];
+
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('Arquivo')) {
+                $data['msg'] = $this->basico->msg($this->upload->display_errors(), 'erro', FALSE, FALSE, FALSE);
+                $this->load->view('orcatrata/form_arquivos', $data);
+            }
+            else {
+			
+				$dir = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/';		
+				$foto = $data['file']['Arquivo'];
+				$diretorio = $dir.$foto;					
+				$dir2 = '../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/';
+
+				switch($_FILES['Arquivo']['type']):
+					case 'image/jpg';
+					case 'image/jpeg';
+					case 'image/pjpeg';
+				
+						list($largura, $altura, $tipo) = getimagesize($diretorio);
+						
+						$img = imagecreatefromjpeg($diretorio);
+
+						$thumb = imagecreatetruecolor(600, 315);
+						
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 600, 315, $largura, $altura);
+						
+						imagejpeg($thumb, $dir2 . $foto);
+						imagedestroy($img);
+						imagedestroy($thumb);				      
+					
+					break;					
+
+					case 'image/png':
+					case 'image/x-png';
+						
+						list($largura, $altura, $tipo) = getimagesize($diretorio);
+						
+						$img = imagecreatefrompng($diretorio);
+
+						$thumb = imagecreatetruecolor(600, 315);
+						
+						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 600, 315, $largura, $altura);
+						
+						imagejpeg($thumb, $dir2 . $foto);
+						imagedestroy($img);
+						imagedestroy($thumb);				      
+					
+					break;
+					
+				endswitch;			
+
+                $data['camposfile'] = array_keys($data['file']);
+				$data['file']['idSis_Empresa'] = $_SESSION['Empresa']['idSis_Empresa'];
+				$data['idSis_Arquivo'] = $this->Orcatrata_model->set_arquivo($data['file']);
+
+                if ($data['idSis_Arquivo'] === FALSE) {
+                    $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+                    $this->basico->erro($msg);
+                    $this->load->view('orcatrata/form_arquivos', $data);
+                }
+				else {
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['file'], $data['camposfile'], $data['idSis_Arquivo'], FALSE);
+					$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'idSis_Arquivo', 'CREATE', $data['auditoriaitem']);
+					
+					$data['arquivos']['Arquivos'] = $data['file']['Arquivo'];
+					$data['arquivos']['Texto_Arquivos'] = $data['arquivos']['Texto_Arquivos'];
+					$data['arquivos']['Ativo_Arquivos'] = $data['arquivos']['Ativo_Arquivos'];
+					$data['anterior'] = $this->Orcatrata_model->get_arquivos($data['arquivos']['idApp_Arquivos']);
+					$data['campos'] = array_keys($data['arquivos']);
+
+					$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['arquivos'], $data['campos'], $data['arquivos']['idApp_Arquivos'], TRUE);
+
+					if ($data['auditoriaitem'] && $this->Orcatrata_model->update_arquivos($data['arquivos'], $data['arquivos']['idApp_Arquivos']) === FALSE) {
+						$data['msg'] = '?m=2';
+						redirect(base_url() . 'orcatrata/form_arquivos/' . $data['arquivos']['idApp_Arquivos'] . $data['msg']);
+						exit();
+					} else {
+
+						if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Arquivos']['Arquivos'] . ''))
+							&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Arquivos']['Arquivos'] . '')
+							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/arquivos.jpg'))){
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Arquivos']['Arquivos'] . '');						
+						}
+						if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Arquivos']['Arquivos'] . ''))
+							&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Arquivos']['Arquivos'] . '')
+							!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/arquivos.jpg'))){
+							unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Arquivos']['Arquivos'] . '');						
+						}						
+						
+						if ($data['auditoriaitem'] === FALSE) {
+							$data['msg'] = '';
+						} else {
+							$data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Arquivos', 'UPDATE', $data['auditoriaitem']);
+							$data['msg'] = '?m=1';
+						}
+
+						//redirect(base_url() . 'relatorio/site/' . $data['msg']);
+						redirect(base_url() . 'Orcatrata/arquivos/' . $_SESSION['Arquivos']['idApp_OrcaTrata'] . $data['msg']);
+						exit();
+					}				
+				}
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+
+	public function excluir_arquivos($id = FALSE) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+			if ($id) {
+				$_SESSION['Arquivos'] = $this->Orcatrata_model->get_arquivos($id, TRUE);
+			}		
+			$this->Orcatrata_model->delete_arquivos($id);
+
+			$data['msg'] = '?m=1';
+			
+			if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Arquivos']['Arquivos'] . ''))
+				&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Arquivos']['Arquivos'] . '')
+				!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/arquivos.jpg'))){
+				unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/original/' . $_SESSION['Arquivos']['Arquivos'] . '');						
+			}
+			if((null!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Arquivos']['Arquivos'] . ''))
+				&& (('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Arquivos']['Arquivos'] . '')
+				!==('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/arquivos.jpg'))){
+				unlink('../'.$_SESSION['log']['Site'].'/' . $_SESSION['Empresa']['idSis_Empresa'] . '/documentos/miniatura/' . $_SESSION['Arquivos']['Arquivos'] . '');						
+			}
+			
+			//redirect(base_url() . 'relatorio/arquivos/' . $data['msg']);
+			redirect(base_url() . 'Orcatrata/arquivos/' . $_SESSION['Arquivos']['idApp_OrcaTrata'] . $data['msg']);
+			exit();
+
+        $this->load->view('basico/footer');
+    }
 
     public function excluir($id = FALSE) {
 

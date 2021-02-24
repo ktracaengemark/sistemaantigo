@@ -213,6 +213,10 @@
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
 											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'Orcatrata/arquivos/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-picture"></span> Arquivos
+											</a>
 
 											<br><br>
 
@@ -294,6 +298,10 @@
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
 											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'Orcatrata/arquivos/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-picture"></span> Arquivos
+											</a>
 
 											<br><br>
 
@@ -374,6 +382,10 @@
 												
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
+											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'Orcatrata/arquivos/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-picture"></span> Arquivos
 											</a>
 											
 
@@ -458,6 +470,10 @@
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
 											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'Orcatrata/arquivos/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-picture"></span> Arquivos
+											</a>
 
 											<br><br>
 
@@ -538,6 +554,10 @@
 												
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
+											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'Orcatrata/arquivos/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-picture"></span> Arquivos
 											</a>
 
 											<br><br>
@@ -620,6 +640,10 @@
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
 											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'Orcatrata/arquivos/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-picture"></span> Arquivos
+											</a>
 
 											<br><br>
 
@@ -701,6 +725,10 @@
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
 											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'Orcatrata/arquivos/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-picture"></span> Arquivos
+											</a>
 
 											<br><br>
 
@@ -781,6 +809,10 @@
 												
 											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'OrcatrataPrint/imprimircobranca/' . $row['idApp_OrcaTrata']; ?>" role="button">
 												<span class="glyphicon glyphicon-print"></span> Versão Cobranca
+											</a>
+												
+											<a class="btn btn-md btn-info"  href="<?php echo base_url() . 'Orcatrata/arquivos/' . $row['idApp_OrcaTrata']; ?>" role="button">
+												<span class="glyphicon glyphicon-picture"></span> Arquivos
 											</a>
 
 											<br><br>
