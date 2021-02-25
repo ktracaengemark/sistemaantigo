@@ -4,8 +4,9 @@
 		<thead>
 			<tr>
 				<th>id</th>
-				<th>Atributo</th>
+				<th>Variacao</th>
 				<th>Editar</th>
+				<th>Apagar</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -29,6 +30,18 @@
 										Editar
 									</button>
 								</td>';
+						if($row['VariacaoUsada'] == "N"){		
+							echo '<td><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#excluirAtributo" 
+											data-whateveridatributo="' . $row['idTab_Atributo'] . '" data-whateveratributo="' . $row['Atributo'] . '">
+											Apagar
+										</button>
+									</td>';
+						}else{				
+							echo '<td><button type="button" class="btn btn-xs btn-success">
+											Usada
+										</button>
+									</td>';
+						}			
 						echo '<td></td>';
 					echo '</tr>';            
 					

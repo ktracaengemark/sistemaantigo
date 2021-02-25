@@ -449,12 +449,16 @@ class Produtos_model extends CI_Model {
 
         $query = $this->db->query('
 			SELECT 
-				TA.*
+				TA.*,
+				TOP.idTab_Opcao
 			FROM 
 				Tab_Atributo AS TA
+					LEFT JOIN Tab_Opcao AS TOP ON TOP.idTab_Atributo = TA.idTab_Atributo
 			WHERE 
                 TA.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
                 ' . $data['idTab_Catprod'] . '
+			GROUP BY
+				TA.idTab_Atributo
 			ORDER BY  
 				TA.Atributo ASC 
 		');
@@ -473,10 +477,18 @@ class Produtos_model extends CI_Model {
             if ($x === FALSE) {
                 return TRUE;
             } else {
-                #foreach ($query->result_array() as $row) {
-                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                foreach ($query->result() as $row) {
+                
+					if($row->idTab_Opcao){
+						$row->VariacaoUsada = "S";
+					}else{
+						$row->VariacaoUsada = "N";
+					}
+				
+				
+				#    $row->idApp_Profissional = $row->idApp_Profissional;
                 #    $row->NomeProfissional = $row->NomeProfissional;
-                #}
+                }
                 $query = $query->result_array();
                 return $query;
             }

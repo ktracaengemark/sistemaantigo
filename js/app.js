@@ -96,6 +96,7 @@ function Aguardar () {
 	$('.aguardarAlterarAtributo').hide();
 	$('.aguardarAlterarOpcao').hide();
 	$('.aguardarExcluirCatprod').hide();
+	$('.aguardarExcluirAtributo').hide();
 	$('.aguardarExcluirOpcao').hide();
 	$('.exibir').show();
 	$('#botaoFechar2').show();
@@ -1265,7 +1266,7 @@ $(document).ready(function(){
 		var recipientatributo = button.data('whateveratributo')
 		//console.log(recipientatributo);
 		var modal = $(this)
-		modal.find('.modal-title').text('id do Atributo: ' + recipientidatributo)
+		modal.find('.modal-title').text('id da Variacao: ' + recipientidatributo)
 		modal.find('#id_Atributo').val(recipientidatributo)
 		modal.find('#Atributo').val(recipientatributo)
 	})
@@ -1422,7 +1423,7 @@ $(document).ready(function(){
 			//Alerta de campo  vazio
 			$("#msg-error-excluir-catprod").html('<div class="alert alert-danger" role="alert">Necessário informar a Categoria!</div>');						
 		}else{
-			//$("#msg-error-excluir-catprod").html('<div class="alert alert-danger" role="alert">Categoria Informada!</div>');
+			//$("#msg-error-excluir-catprod").html('<div class="alert alert-success" role="alert">Categoria Informada!</div>');
 			
 			//Fechar a mensagem de erro
 			$('#msg-error-excluir-catprod').hide();
@@ -1496,7 +1497,7 @@ $(document).ready(function(){
 			//Alerta de campo  vazio
 			$("#msg-error-excluir-opcao").html('<div class="alert alert-danger" role="alert">Necessário Informar a Opcao!</div>');						
 		}else{
-			//$("#msg-error-excluir-opcao").html('<div class="alert alert-danger" role="alert">Opcao Informada!</div>');
+			//$("#msg-error-excluir-opcao").html('<div class="alert alert-success" role="alert">Opcao Informada!</div>');
 			
 			//Fechar a mensagem de erro
 			$('#msg-error-excluir-opcao').hide();
@@ -1540,6 +1541,82 @@ $(document).ready(function(){
 					$('#CancelarExcluirOpcao').show();
 					//Fecha o Aguardar
 					$('.aguardarExcluirOpcao').hide();				
+				
+				}
+				
+			});
+			
+		}
+		
+	});	
+
+	$('#excluirAtributo').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget)
+		var recipientidatributo = button.data('whateveridatributo')
+		var recipientatributo = button.data('whateveratributo')
+		//console.log(recipientatributo);
+		var modal = $(this)
+		modal.find('.modal-title').text('id da Variacao: ' + recipientidatributo)
+		modal.find('#id_ExcluirAtributo').val(recipientidatributo)
+		modal.find('#ExcluirAtributo').val(recipientatributo)
+	})
+	
+	$('#excluir_atributo_form').on('submit', function(event){
+		//alert('ok - Excluir o Atributo');
+		
+		event.preventDefault();
+		var atributo = $('#id_ExcluirAtributo').val();
+		//console.log(atributo);
+		//exit();
+		
+		if($('#id_ExcluirAtributo').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-excluir-atributo").html('<div class="alert alert-danger" role="alert">Necessário Informar o Atributo!</div>');						
+		}else{
+			//$("#msg-error-excluir-atributo").html('<div class="alert alert-success" role="alert">Atributo Informado!</div>');
+			
+			//Fechar a mensagem de erro
+			$('#msg-error-excluir-atributo').hide();
+			//Fechar o botão Excluir
+			$('#ExcluirAtributo').hide();
+			//Fechar o botão Cancelar
+			$('#CancelarExcluirAtributo').hide();
+			//Abre o Aguardar
+			$('.aguardarExcluirAtributo').show();
+			//Fechar a janela modal excluir
+			$('#addAtributoModal').modal('hide');
+			
+			//Receber os dados do formulário
+			var dados = $("#excluir_atributo_form").serialize();
+			console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/excluir/Atributo.php?', dados, function (retorna){
+			 
+				console.log(retorna);
+				
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#excluir_atributo_form')[0].reset();
+					
+					//Fechar a janela modal excluir
+					$('#excluirAtributo').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-excluir-atributo").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-excluir-atributo").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao Excluir a Variação!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				
+					//Abre o botão Cancelar
+					$('#CancelarExcluirAtributo').show();
+					//Fecha o Aguardar
+					$('.aguardarExcluirAtributo').hide();				
 				
 				}
 				

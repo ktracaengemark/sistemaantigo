@@ -1005,6 +1005,34 @@
 	</div>
 </div>
 
+<div id="excluirAtributo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="excluirAtributoLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="excluirAtributoLabel">Variacao</h4>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-excluir-atributo"></span>
+				<form method="post" id="excluir_atributo_form">
+					<div class="form-group">
+						<label for="ExcluirAtributo" class="control-label">Variacao:</label>
+						<input type="text" class="form-control" name="ExcluirAtributo" id="ExcluirAtributo" readonly="">
+					</div>
+					<input type="hidden" name="id_ExcluirAtributo" id="id_ExcluirAtributo">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" name="CancelarExcluirAtributo" id="CancelarExcluirAtributo" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="Excluirtributo" id="ExcluirAtributo" >Apagar</button>	
+						<div class="col-md-12 alert alert-warning aguardarExcluirAtributo" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div id="addOpcaoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

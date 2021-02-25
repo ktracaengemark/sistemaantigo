@@ -9,7 +9,7 @@ $id 	= filter_var($Dados['id_ExcluirOpcao'], FILTER_SANITIZE_NUMBER_INT);
 if(!empty($id)){
 
 	$result_opcao = "DELETE FROM Tab_Opcao WHERE idTab_Opcao = '$id'";
-	$resultado_categoria = mysqli_query($conn, $result_opcao);
+	$resultado_opcao = mysqli_query($conn, $result_opcao);
 
 	if(mysqli_affected_rows($conn)){
 		echo true;
