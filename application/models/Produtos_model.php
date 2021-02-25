@@ -569,6 +569,8 @@ class Produtos_model extends CI_Model {
 			WHERE 
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
                 ' . $data['idTab_Catprod'] . '
+			GROUP BY
+				TP.idTab_Produto
 			ORDER BY  
 				TP.Produtos ASC 
 		');

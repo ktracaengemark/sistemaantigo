@@ -17,6 +17,9 @@ if(!empty($id)){
 	$result_categoria = "DELETE FROM Tab_Catprod WHERE idTab_Catprod = '$id'";
 	$resultado_categoria = mysqli_query($conn, $result_categoria);
 
+	$result_produto = "DELETE FROM Tab_Produto WHERE idTab_Catprod = '$id'";
+	$resultado_produto = mysqli_query($conn, $result_produto);
+	
 	if(mysqli_affected_rows($conn)){
 		echo true;
 	}else{

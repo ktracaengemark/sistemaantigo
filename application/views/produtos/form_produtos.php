@@ -486,7 +486,7 @@
 																	<span class="glyphicon glyphicon-save"></span> Próximo Passo
 																</button>
 															</div>
-															<?php if ($usado['produto'] == "N" && ($metodo == 2 || $metodo == 3)) { ?>	
+															<?php if (isset($usado['produto']) && $usado['produto'] == "N" && ($metodo == 2 || $metodo == 3)) { ?>	
 																<div class="col-md-2">
 																	<label >Produto</label><br>
 																	<button  type="button" class="btn btn-md btn-danger btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
