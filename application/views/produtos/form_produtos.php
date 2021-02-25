@@ -893,6 +893,39 @@
 	</div>
 </div>
 
+<div id="excluirCatprod" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="excluirCatprodLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="excluirCatprodLabel">Categoria</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-excluir-catprod"></span>
+				<form method="post" id="excluir_catprod_form">
+					
+					<div class="form-group row">
+						<label for="Catprod_Excluir" class="col-sm-2 col-form-label">Categoria:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="Catprod_Excluir" id="Catprod_Excluir" readonly="">
+						</div>	
+					</div>
+					<input type="hidden" name="id_Categoria_Excluir" id="id_Categoria_Excluir">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" name="CancelarExcluirCatprod" id="CancelarExcluirCatprod" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="ExcluirCatprod" id="ExcluirCatprod" >Apagar</button>	
+						<div class="col-md-12 alert alert-warning aguardarExcluirCatprod" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div id="addAtributoModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">

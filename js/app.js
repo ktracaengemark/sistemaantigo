@@ -95,6 +95,7 @@ function Aguardar () {
 	$('.aguardarAlterarProduto').hide();
 	$('.aguardarAlterarAtributo').hide();
 	$('.aguardarAlterarOpcao').hide();
+	$('.aguardarExcluirCatprod').hide();
 	$('.exibir').show();
 	$('#botaoFechar2').show();
 	$('#botaoSalvar').show();
@@ -1387,6 +1388,83 @@ $(document).ready(function(){
 					//listar_usuario(1, 50);
 				}else{
 					$("#msg-error-alterar-opcao").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar a Opcao!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				}
+				
+			});
+			
+		}
+		
+	});	
+
+	$('#excluirCatprod').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget)
+		var recipientidcatprod = button.data('whateveridcatprod')
+		var recipientcatprod = button.data('whatevercatprod')
+		var recipientsitecatprod = button.data('whateversitecatprod')
+		var recipientbalcaocatprod = button.data('whateverbalcaocatprod')
+		//console.log(recipientcatprod);
+		var modal = $(this)
+		modal.find('.modal-title').text('id da Categoria: ' + recipientidcatprod)
+		modal.find('#id_Categoria_Excluir').val(recipientidcatprod)
+		modal.find('#Catprod_Excluir').val(recipientcatprod)
+	})
+	
+	$('#excluir_catprod_form').on('submit', function(event){
+		//alert('ok - Excluir Categoria do Produto');
+		
+		event.preventDefault();
+		var catprod = $('#id_Categoria_Excluir').val();
+		//console.log(catprod);
+		//exit();
+		
+		if($('#id_Categoria_Excluir').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-excluir-catprod").html('<div class="alert alert-danger" role="alert">Necessário informar a Categoria!</div>');						
+		}else{
+			//$("#msg-error-excluir-catprod").html('<div class="alert alert-danger" role="alert">Categoria Informada!</div>');
+			
+			//Fechar a mensagem de erro
+			$('#msg-error-excluir-catprod').hide();
+			//Fechar o botão Excluir
+			$('#ExcluirCatprod').hide();
+			//Fechar o botão Cancelar
+			$('#CancelarExcluirCatprod').hide();
+			//Abre o Aguardar
+			$('.aguardarExcluirCatprod').show();
+			//Fechar a janela modal excluir
+			$('#addCatprodModal').modal('hide');
+			
+			//Receber os dados do formulário
+			var dados = $("#excluir_catprod_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/excluir/Catprod.php?', dados, function (retorna){
+			 
+				//console.log(retorna);
+				
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#excluir_catprod_form')[0].reset();
+					
+					//Fechar a janela modal excluir
+					$('#excluirCatprod').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-excluir-catprod").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-excluir-catprod").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao Apagar a Categoria!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+				
+					//Abre o botão Cancelar
+					$('#CancelarExcluirCatprod').show();
+					//Fecha o Aguardar
+					$('.aguardarExcluirCatprod').hide();
 				}
 				
 			});

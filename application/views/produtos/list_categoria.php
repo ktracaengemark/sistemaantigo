@@ -7,6 +7,7 @@
 				<th>Tipo</th>
 				<th>Categoria</th>
 				<th>Editar</th>
+				<th>Apagar</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -32,6 +33,19 @@
 										Editar
 									</button>
 								</td>';
+						if($row['CategoriaUsada'] == "N"){		
+							echo '<td><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#excluirCatprod" 
+											data-whateveridcatprod="' . $row['idTab_Catprod'] . '" data-whatevercatprod="' . $row['Catprod'] . '" 
+											data-whateversitecatprod="' . $row['Site_Catprod'] . '" data-whateverbalcaocatprod="' . $row['Balcao_Catprod'] . '">
+											Apagar
+										</button>
+									</td>';
+						}else{
+							echo '<td><button type="button" class="btn btn-xs btn-success">
+											Usada
+										</button>
+									</td>';
+						}
 						echo '<td></td>';
 					echo '</tr>';            
 					

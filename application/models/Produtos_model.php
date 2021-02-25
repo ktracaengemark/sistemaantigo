@@ -397,12 +397,75 @@ class Produtos_model extends CI_Model {
         $query = $this->db->query('
 			SELECT 
 				TCT.*,
-				TPSA.*
+				TPSA.*,
+				TPS.idTab_Produtos
 			FROM 
 				Tab_Catprod AS TCT
 					LEFT JOIN Tab_Prod_Serv AS TPSA ON TPSA.Abrev_Prod_Serv = TCT.TipoCatprod
+					LEFT JOIN Tab_Produtos AS TPS ON TPS.idTab_Catprod = TCT.idTab_Catprod
 			WHERE 
                 TCT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			GROUP BY
+				TCT.idTab_Catprod
+			ORDER BY  
+				TPSA.Prod_Serv ASC,  
+				TCT.Catprod ASC 
+		');
+
+        /*
+          echo $this->db->last_query();
+          $query = $query->result_array();
+          echo "<pre>";
+          print_r($query);
+          echo "</pre>";
+          exit();
+        */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+            if ($x === FALSE) {
+                return TRUE;
+            } else {
+                foreach ($query->result() as $row) {
+					
+					if($row->idTab_Produtos){
+						$row->CategoriaUsada = "S";
+					}else{
+						$row->CategoriaUsada = "N";
+					}
+					
+				#    $row->idApp_Profissional = $row->idApp_Profissional;
+                #    $row->NomeProfissional = $row->NomeProfissional;
+                }
+                $query = $query->result_array();
+                return $query;
+            }
+        }
+    }
+
+	public function get_tab_produtos($data, $x) {
+		
+		//$data['idSis_Empresa'] = ($data['idSis_Empresa'] != 0) ? ' AND TPS.idSis_Empresa = ' . $data['idSis_Empresa'] : FALSE;
+			
+			/*
+			echo "<pre>";
+			print_r($data['idSis_Empresa']);
+			echo "</pre>";
+			exit();
+			*/
+		
+		
+        $query = $this->db->query('
+			SELECT
+				TPS.*,
+				TCT.*,
+				TPSA.*
+			FROM 
+				Tab_Produtos AS TPS 
+					LEFT JOIN Tab_Catprod AS TCT ON TCT.idTab_Catprod = TPS.idTab_Catprod
+					LEFT JOIN Tab_Prod_Serv AS TPSA ON TPSA.Abrev_Prod_Serv = TCT.TipoCatprod
+			WHERE
+                TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
 			ORDER BY  
 				TPSA.Prod_Serv ASC,  
 				TCT.Catprod ASC 
