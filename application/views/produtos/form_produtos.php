@@ -681,19 +681,19 @@
 			</div>
 			-->
 			<div class="modal-footer">
-				<div class="form-group col-md-4 text-left">
-					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Novo Produto
-						</a>
-					</div>	
-				</div>
 				<div class="form-group col-md-4">
 					<div class="form-footer ">
 						<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
 							<span class="glyphicon glyphicon-remove"></span> Fechar
 						</button>
 					</div>
+				</div>
+				<div class="form-group col-md-4 text-left">
+					<div class="form-footer">		
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Novo Produto
+						</a>
+					</div>	
 				</div>									
 			</div>
 		</div>
@@ -714,19 +714,19 @@
 			</div>
 			-->
 			<div class="modal-footer">
-				<div class="form-group col-md-4 text-left">
-					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Nova Promocao
-						</a>
-					</div>	
-				</div>
 				<div class="form-group col-md-4">
 					<div class="form-footer ">
 						<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
 							<span class="glyphicon glyphicon-remove"></span> Fechar
 						</button>
 					</div>
+				</div>
+				<div class="form-group col-md-4 text-left">
+					<div class="form-footer">		
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Nova Promocao
+						</a>
+					</div>	
 				</div>									
 			</div>
 		</div>
@@ -803,19 +803,19 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-group row">	
-						<div class="col-sm-6">
-							<br>
-							<button type="submit" class="btn btn-success btn-block" name="botaoCadCatprod" id="botaoCadCatprod" >
-								<span class="glyphicon glyphicon-plus"></span> Cadastrar
-							</button>
-						</div>
+					<div class="form-group row">
 						<div class="col-sm-6">
 							<br>
 							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFecharCatprod" id="botaoFecharCatprod">
 								<span class="glyphicon glyphicon-remove"></span> Fechar
 							</button>
-							</div>	
+						</div>	
+						<div class="col-sm-6">
+							<br>
+							<button type="submit" class="btn btn-success btn-block" name="botaoCadCatprod" id="botaoCadCatprod" >
+								<span class="glyphicon glyphicon-plus"></span> Cadastrar
+							</button>
+						</div>	
 						<div class="col-md-12 alert alert-warning aguardarCatprod" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -881,8 +881,8 @@
 					</div>
 					<input type="hidden" name="id_Categoria" id="id_Categoria">
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" name="CancelarCatprod" id="CancelarCatprod" data-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-danger" name="AlterarCatprod" id="AlterarCatprod" >Alterar</button>	
+						<button type="submit" class="btn btn-danger" name="AlterarCatprod" id="AlterarCatprod" >Alterar</button>
+						<button type="button" class="btn btn-primary" name="CancelarCatprod" id="CancelarCatprod" data-dismiss="modal">Cancelar</button>	
 						<div class="col-md-12 alert alert-warning aguardarAlterarCatprod" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -914,8 +914,8 @@
 					</div>
 					<input type="hidden" name="id_Categoria_Excluir" id="id_Categoria_Excluir">
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" name="CancelarExcluirCatprod" id="CancelarExcluirCatprod" data-dismiss="modal">Cancelar</button>
 						<button type="submit" class="btn btn-danger" name="ExcluirCatprod" id="ExcluirCatprod" >Apagar</button>	
+						<button type="button" class="btn btn-primary" name="CancelarExcluirCatprod" id="CancelarExcluirCatprod" data-dismiss="modal">Cancelar</button>
 						<div class="col-md-12 alert alert-warning aguardarExcluirCatprod" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -951,7 +951,13 @@
 							<input name="Novo_Atributo" type="text" class="form-control" id="Novo_Atributo" placeholder="Variacao">
 						</div>
 					</div>
-					<div class="form-group row">	
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<br>
+							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFecharAtributo" id="botaoFecharAtributo">
+								<span class="glyphicon glyphicon-remove"></span> Fechar
+							</button>
+						</div>	
 						<div class="col-sm-6">
 							<?php if($Conta_Atributos < 2) { ?>
 								<br>
@@ -959,12 +965,6 @@
 									<span class="glyphicon glyphicon-plus"></span> Cadastrar
 								</button>
 							<?php } ?>
-						</div>
-						<div class="col-sm-6">
-							<br>
-							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFecharAtributo" id="botaoFecharAtributo">
-								<span class="glyphicon glyphicon-remove"></span> Fechar
-							</button>
 						</div>	
 						<div class="col-md-12 alert alert-warning aguardarAtributo" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
@@ -993,8 +993,8 @@
 					</div>
 					<input type="hidden" name="id_Atributo" id="id_Atributo">
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" name="CancelarAtributo" id="CancelarAtributo" data-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-danger" name="AlterarAtributo" id="AlterarAtributo" >Alterar</button>	
+						<button type="submit" class="btn btn-danger" name="AlterarAtributo" id="AlterarAtributo" >Alterar</button>
+						<button type="button" class="btn btn-primary" name="CancelarAtributo" id="CancelarAtributo" data-dismiss="modal">Cancelar</button>	
 						<div class="col-md-12 alert alert-warning aguardarAlterarAtributo" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -1021,8 +1021,8 @@
 					</div>
 					<input type="hidden" name="id_ExcluirAtributo" id="id_ExcluirAtributo">
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" name="CancelarExcluirAtributo" id="CancelarExcluirAtributo" data-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-danger" name="Excluirtributo" id="ExcluirAtributo" >Apagar</button>	
+						<button type="submit" class="btn btn-danger" name="Excluirtributo" id="ExcluirAtributo" >Apagar</button>
+						<button type="button" class="btn btn-primary" name="CancelarExcluirAtributo" id="CancelarExcluirAtributo" data-dismiss="modal">Cancelar</button>	
 						<div class="col-md-12 alert alert-warning aguardarExcluirAtributo" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -1076,17 +1076,17 @@
 							<input name="Novo_Opcao" type="text" class="form-control" id="Novo_Opcao" placeholder="Opcao">
 						</div>
 					</div>
-					<div class="form-group row">	
-						<div class="col-sm-6">
-							<br>
-							<button type="submit" class="btn btn-success btn-block" name="botaoCadOpcao" id="botaoCadOpcao" >
-								<span class="glyphicon glyphicon-plus"></span> Cadastrar
-							</button>
-						</div>
+					<div class="form-group row">
 						<div class="col-sm-6">
 							<br>
 							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFecharOpcao" id="botaoFecharOpcao">
 								<span class="glyphicon glyphicon-remove"></span> Fechar
+							</button>
+						</div>	
+						<div class="col-sm-6">
+							<br>
+							<button type="submit" class="btn btn-success btn-block" name="botaoCadOpcao" id="botaoCadOpcao" >
+								<span class="glyphicon glyphicon-plus"></span> Cadastrar
 							</button>
 						</div>	
 						<div class="col-md-12 alert alert-warning aguardarOpcao" role="alert" >
@@ -1116,8 +1116,8 @@
 					</div>
 					<input type="hidden" name="id_Opcao" id="id_Opcao">
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" name="CancelarOpcao" id="CancelarOpcao" data-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-danger" name="AlterarOpcao" id="AlterarOpcao" >Alterar</button>	
+						<button type="submit" class="btn btn-danger" name="AlterarOpcao" id="AlterarOpcao" >Alterar</button>
+						<button type="button" class="btn btn-primary" name="CancelarOpcao" id="CancelarOpcao" data-dismiss="modal">Cancelar</button>	
 						<div class="col-md-12 alert alert-warning aguardarAlterarOpcao" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -1144,8 +1144,8 @@
 					</div>
 					<input type="hidden" name="id_ExcluirOpcao" id="id_ExcluirOpcao">
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" name="CancelarExcluirOpcao" id="CancelarExcluirOpcao" data-dismiss="modal">Cancelar</button>
 						<button type="submit" class="btn btn-danger" name="ExcluirOpcao" id="ExcluirOpcao" >Apagar</button>	
+						<button type="button" class="btn btn-primary" name="CancelarExcluirOpcao" id="CancelarExcluirOpcao" data-dismiss="modal">Cancelar</button>
 						<div class="col-md-12 alert alert-warning aguardarExcluirOpcao" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -1173,23 +1173,6 @@
 						<div class="col-sm-10">
 							<input type="hidden" name="idCat_Produto" id="idCat_Produto" value="<?php echo $_SESSION['Produtos']['idTab_Catprod']; ?>">
 							<input class="form-control"readonly="" value="<?php echo $_SESSION['Produtos']['Catprod']; ?>">
-							<!--
-								<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
-								id="idCat_Produto" name="idCat_Produto">
-								<option value="">-- Selecione uma opção --</option>
-								<?php
-									/*
-										foreach ($select['idCat_Produto'] as $key => $row) {
-										if ($cadastrar['idCat_Produto'] == $key) {
-										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-										} else {
-										echo '<option value="' . $key . '">' . $row . '</option>';
-										}
-										}
-									*/
-								?>
-								</select>
-							-->
 						</div>	
 					</div>
 					<div class="form-group row">
@@ -1232,25 +1215,17 @@
 							</div>
 						</div>
 					</div>
-					<!--
-						<div class="form-group row">
-						<label class="col-sm-2 col-form-label">Descrição</label>
-						<div class="col-sm-10">
-						<input name="Desc_Produto" type="text" class="form-control" id="Desc_Produto" placeholder="Descrição">
-						</div>
-						</div>
-					-->
-					<div class="form-group row">	
-						<div class="col-sm-6">
-							<br>
-							<button type="submit" class="btn btn-success btn-block" name="botaoCad" id="botaoCad" >
-								<span class="glyphicon glyphicon-plus"></span> Cadastrar
-							</button>
-						</div>
+					<div class="form-group row">
 						<div class="col-sm-6">
 							<br>
 							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFechar" id="botaoFechar">
 								<span class="glyphicon glyphicon-remove"></span> Fechar
+							</button>
+						</div>	
+						<div class="col-sm-6">
+							<br>
+							<button type="submit" class="btn btn-success btn-block" name="botaoCad" id="botaoCad" >
+								<span class="glyphicon glyphicon-plus"></span> Cadastrar
 							</button>
 						</div>	
 						<div class="col-md-12 alert alert-warning aguardar1" role="alert" >
@@ -1274,12 +1249,6 @@
 			<div class="modal-body">
 				<span id="msg-error-alterar-produto"></span>
 				<form method="post" id="alterar_produto_form">
-					<!--
-					<div class="form-group">
-						<label for="Produtos" class="control-label">Produto:</label>
-						<input type="text" class="form-control" name="Produtos" id="Produtos">
-					</div>
-					-->
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">Produto</label>
 						<div class="col-sm-10">
@@ -1322,9 +1291,39 @@
 					</div>
 					<input type="hidden" name="id_Produto" id="id_Produto">
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" name="CancelarProduto" id="CancelarProduto" data-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-danger" name="AlterarProduto" id="AlterarProduto" >Alterar</button>	
+						<button type="submit" class="btn btn-danger" name="AlterarProduto" id="AlterarProduto" >Alterar</button>
+						<button type="button" class="btn btn-primary" name="CancelarProduto" id="CancelarProduto" data-dismiss="modal">Cancelar</button>	
 						<div class="col-md-12 alert alert-warning aguardarAlterarProduto" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="excluirProduto" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="excluirProdutoLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="excluirProdutoLabel">Produto</h4>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-excluir-produto"></span>
+				<form method="post" id="excluir_produto_form">
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">Produto</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="ExcluirProdutos" id="ExcluirProdutos" readonly="">
+						</div>
+					</div>
+					<input type="hidden" name="id_ExcluirProduto" id="id_ExcluirProduto">
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-danger" name="ExcluirProduto" id="ExcluirProduto" >Apagar</button>
+						<button type="button" class="btn btn-primary" name="CancelarExcluirProduto" id="CancelarExcluirProduto" data-dismiss="modal">Cancelar</button>	
+						<div class="col-md-12 alert alert-warning aguardarExcluirProduto" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
 					</div>

@@ -666,6 +666,57 @@
 													<!--<input type="hidden" name="idTab_Valor" value="<?php echo $item_promocao['idTab_Valor']; ?>">
 													<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 													<?php } ?>
+													<?php if ($metodo != 3) { ?>
+														<div class="col-md-2 text-left">
+															<label for="Cadastrar">Encontrou?</label><br>
+															<div class="btn-group" data-toggle="buttons">
+																<?php
+																	foreach ($select['Cadastrar'] as $key => $row) {
+																		if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
+																		
+																		($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																		
+																		if ($cadastrar['Cadastrar'] == $key) {
+																			echo ''
+																			. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
+																			. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																			. 'onchange="codigo()" '
+																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																			. '</label>'
+																			;
+																			} else {
+																			echo ''
+																			. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
+																			. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
+																			. 'onchange="codigo()" '
+																			. 'autocomplete="off" value="' . $key . '" >' . $row
+																			. '</label>'
+																			;
+																		}
+																	}
+																?>
+																
+															</div>
+														</div>
+														<div class="col-md-4 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+															<div class="row">
+																<div class="col-md-6 text-left">	
+																	<label >Categoria</label><br>
+																	<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addCatpromModal">
+																		Cad./Edit
+																	</button>
+																</div>	
+																<div class="col-md-6 text-left">
+																	<label >Recarregar</label><br>
+																	<button class="btn btn-md btn-warning btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+																		<span class="glyphicon glyphicon-refresh"></span>Recarregar
+																	</button>
+																</div>	
+																<span id="msg"></span>
+															</div>	
+															<?php echo form_error('Cadastrar'); ?>
+														</div>
+													<?php } ?>
 													<?php if ($metodo > 1) { ?>
 														<?php if ($metodo == 3) { ?>
 															<!--<div class="col-md-1"></div>-->
@@ -737,57 +788,6 @@
 																<span class="glyphicon glyphicon-save"></span> Salvar
 															</button>
 														</div>
-													<?php } ?>
-													<?php if ($metodo != 3) { ?>
-														<div class="col-md-2 text-left">
-															<label for="Cadastrar">Encontrou?</label><br>
-															<div class="btn-group" data-toggle="buttons">
-																<?php
-																	foreach ($select['Cadastrar'] as $key => $row) {
-																		if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
-																		
-																		($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
-																		
-																		if ($cadastrar['Cadastrar'] == $key) {
-																			echo ''
-																			. '<label class="btn btn-warning active" name="Cadastrar_' . $hideshow . '">'
-																			. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
-																			. 'onchange="codigo()" '
-																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																			. '</label>'
-																			;
-																			} else {
-																			echo ''
-																			. '<label class="btn btn-default" name="Cadastrar_' . $hideshow . '">'
-																			. '<input type="radio" name="Cadastrar" id="' . $hideshow . '" '
-																			. 'onchange="codigo()" '
-																			. 'autocomplete="off" value="' . $key . '" >' . $row
-																			. '</label>'
-																			;
-																		}
-																	}
-																?>
-																
-															</div>
-														</div>
-														<div class="col-md-4 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-															<div class="row">
-																<div class="col-md-6 text-left">	
-																	<label >Categoria</label><br>
-																	<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addCatpromModal">
-																		Cad./Edit
-																	</button>
-																</div>	
-																<div class="col-md-6 text-left">
-																	<label >Recarregar</label><br>
-																	<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
-																		<span class="glyphicon glyphicon-refresh"></span>Recarregar
-																	</button>
-																</div>	
-																<span id="msg"></span>
-															</div>	
-															<?php echo form_error('Cadastrar'); ?>
-														</div>
 													<?php } ?>	
 													<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
@@ -848,19 +848,19 @@
 			</div>
 			-->
 			<div class="modal-footer">
-				<div class="form-group col-md-4 text-left">
-					<div class="form-footer">		
-						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar" role="button">
-							<span class="glyphicon glyphicon-plus"></span> Nova Promocao
-						</a>
-					</div>	
-				</div>
 				<div class="form-group col-md-4">
 					<div class="form-footer ">
 						<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
 							<span class="glyphicon glyphicon-remove"></span> Fechar
 						</button>
 					</div>
+				</div>
+				<div class="form-group col-md-4 text-left">
+					<div class="form-footer">		
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Nova Promocao
+						</a>
+					</div>	
 				</div>									
 			</div>
 		</div>
@@ -919,19 +919,19 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-group row">	
-						<div class="col-sm-6">
-							<br>
-							<button type="submit" class="btn btn-success btn-block" name="botaoCadCatprom" id="botaoCadCatprom" >
-								<span class="glyphicon glyphicon-plus"></span> Cadastrar
-							</button>
-						</div>
+					<div class="form-group row">
 						<div class="col-sm-6">
 							<br>
 							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFecharCatprom" id="botaoFecharCatprom">
 								<span class="glyphicon glyphicon-remove"></span> Fechar
 							</button>
-							</div>	
+						</div>	
+						<div class="col-sm-6">
+							<br>
+							<button type="submit" class="btn btn-success btn-block" name="botaoCadCatprom" id="botaoCadCatprom" >
+								<span class="glyphicon glyphicon-plus"></span> Cadastrar
+							</button>
+						</div>	
 						<div class="col-md-12 alert alert-warning aguardarCatprom" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -998,6 +998,36 @@
 						<button type="button" class="btn btn-primary" name="CancelarCatprom" id="CancelarCatprom" data-dismiss="modal">Cancelar</button>
 						<button type="submit" class="btn btn-danger" name="AlterarCatprom" id="AlterarCatprom" >Alterar</button>	
 						<div class="col-md-12 alert alert-warning aguardarAlterarCatprom" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="excluirCatprom" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="excluirCatpromLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="excluirCatpromLabel">Categoria</h4>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-excluir-catprom"></span>
+				<form method="post" id="excluir_catprom_form">
+					<div class="form-group row">
+						<label for="ExcluirCatprom" class="col-sm-2 col-form-label">Categoria:</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="ExcluirCatprom" id="ExcluirCatprom" readonly="">
+						</div>
+					</div>
+					<input type="hidden" name="id_ExcluirCategoria" id="id_ExcluirCategoria">
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" name="CancelarExcluirCatprom" id="CancelarExcluirCatprom" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="ExcluirCatprom" id="ExcluirCatprom" >Apagar</button>	
+						<div class="col-md-12 alert alert-warning aguardarExcluirCatprom" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
 					</div>

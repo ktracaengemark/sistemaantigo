@@ -160,7 +160,7 @@ class Produtos_model extends CI_Model {
 
         //return $query;
 		return $query[0];
-    }
+		}
 	
     public function get_produtos($data) {
         $query = $this->db->query('
@@ -561,9 +561,11 @@ class Produtos_model extends CI_Model {
 
         $query = $this->db->query('
 			SELECT 
-				TP.*
+				TP.*,
+				TPS.idTab_Produtos
 			FROM 
 				Tab_Produto AS TP
+					LEFT JOIN Tab_Produtos AS TPS ON TPS.idTab_Produto = TP.idTab_Produto
 			WHERE 
                 TP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
                 ' . $data['idTab_Catprod'] . '
@@ -585,10 +587,17 @@ class Produtos_model extends CI_Model {
             if ($x === FALSE) {
                 return TRUE;
             } else {
-                #foreach ($query->result_array() as $row) {
-                #    $row->idApp_Profissional = $row->idApp_Profissional;
-                #    $row->NomeProfissional = $row->NomeProfissional;
-                #}
+                foreach ($query->result() as $row) {
+                
+					if($row->idTab_Produtos){
+						$row->ProdutoUsada = "S";
+					}else{
+						$row->ProdutoUsada = "N";
+					}
+				
+					#$row->idApp_Profissional = $row->idApp_Profissional;
+					#$row->NomeProfissional = $row->NomeProfissional;
+                }
                 $query = $query->result_array();
                 return $query;
             }

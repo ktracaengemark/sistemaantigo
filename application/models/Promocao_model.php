@@ -152,11 +152,15 @@ class Promocao_model extends CI_Model {
 		
         $query = $this->db->query('
 			SELECT 
-				TCT.*
+				TCT.*,
+				PRM.idTab_Promocao
 			FROM 
 				Tab_Catprom AS TCT
+					LEFT JOIN Tab_Promocao AS PRM ON PRM.idTab_Catprom = TCT.idTab_Catprom
 			WHERE 
                 TCT.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+			GROUP BY
+				TCT.idTab_Catprom
 			ORDER BY  
 				TCT.Catprom ASC 
 		');
@@ -175,10 +179,16 @@ class Promocao_model extends CI_Model {
             if ($x === FALSE) {
                 return TRUE;
             } else {
-                #foreach ($query->result_array() as $row) {
-                #    $row->idApp_Profissional = $row->idApp_Profissional;
-                #    $row->NomeProfissional = $row->NomeProfissional;
-                #}
+                foreach ($query->result() as $row) {
+                
+					if($row->idTab_Promocao){
+						$row->CategoriaUsada = "S";
+					}else{
+						$row->CategoriaUsada = "N";
+					}
+					#$row->idApp_Profissional = $row->idApp_Profissional;
+					#$row->NomeProfissional = $row->NomeProfissional;
+                }
                 $query = $query->result_array();
                 return $query;
             }
