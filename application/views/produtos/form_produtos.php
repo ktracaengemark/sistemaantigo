@@ -881,8 +881,8 @@
 					</div>
 					<input type="hidden" name="id_Categoria" id="id_Categoria">
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger" name="AlterarCatprod" id="AlterarCatprod" >Alterar</button>
-						<button type="button" class="btn btn-primary" name="CancelarCatprod" id="CancelarCatprod" data-dismiss="modal">Cancelar</button>	
+						<button type="button" class="btn btn-primary" name="CancelarCatprod" id="CancelarCatprod" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="AlterarCatprod" id="AlterarCatprod" >Alterar</button>	
 						<div class="col-md-12 alert alert-warning aguardarAlterarCatprod" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -914,8 +914,8 @@
 					</div>
 					<input type="hidden" name="id_Categoria_Excluir" id="id_Categoria_Excluir">
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger" name="ExcluirCatprod" id="ExcluirCatprod" >Apagar</button>	
 						<button type="button" class="btn btn-primary" name="CancelarExcluirCatprod" id="CancelarExcluirCatprod" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="ExcluirCatprod" id="ExcluirCatprod" >Apagar</button>	
 						<div class="col-md-12 alert alert-warning aguardarExcluirCatprod" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -993,8 +993,8 @@
 					</div>
 					<input type="hidden" name="id_Atributo" id="id_Atributo">
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger" name="AlterarAtributo" id="AlterarAtributo" >Alterar</button>
-						<button type="button" class="btn btn-primary" name="CancelarAtributo" id="CancelarAtributo" data-dismiss="modal">Cancelar</button>	
+						<button type="button" class="btn btn-primary" name="CancelarAtributo" id="CancelarAtributo" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="AlterarAtributo" id="AlterarAtributo" >Alterar</button>	
 						<div class="col-md-12 alert alert-warning aguardarAlterarAtributo" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -1021,8 +1021,8 @@
 					</div>
 					<input type="hidden" name="id_ExcluirAtributo" id="id_ExcluirAtributo">
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger" name="Excluirtributo" id="ExcluirAtributo" >Apagar</button>
-						<button type="button" class="btn btn-primary" name="CancelarExcluirAtributo" id="CancelarExcluirAtributo" data-dismiss="modal">Cancelar</button>	
+						<button type="button" class="btn btn-primary" name="CancelarExcluirAtributo" id="CancelarExcluirAtributo" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="Excluirtributo" id="ExcluirAtributo" >Apagar</button>	
 						<div class="col-md-12 alert alert-warning aguardarExcluirAtributo" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -1116,8 +1116,8 @@
 					</div>
 					<input type="hidden" name="id_Opcao" id="id_Opcao">
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger" name="AlterarOpcao" id="AlterarOpcao" >Alterar</button>
-						<button type="button" class="btn btn-primary" name="CancelarOpcao" id="CancelarOpcao" data-dismiss="modal">Cancelar</button>	
+						<button type="button" class="btn btn-primary" name="CancelarOpcao" id="CancelarOpcao" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="AlterarOpcao" id="AlterarOpcao" >Alterar</button>	
 						<div class="col-md-12 alert alert-warning aguardarAlterarOpcao" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -1144,8 +1144,8 @@
 					</div>
 					<input type="hidden" name="id_ExcluirOpcao" id="id_ExcluirOpcao">
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger" name="ExcluirOpcao" id="ExcluirOpcao" >Apagar</button>	
 						<button type="button" class="btn btn-primary" name="CancelarExcluirOpcao" id="CancelarExcluirOpcao" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="ExcluirOpcao" id="ExcluirOpcao" >Apagar</button>	
 						<div class="col-md-12 alert alert-warning aguardarExcluirOpcao" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -1291,8 +1291,8 @@
 					</div>
 					<input type="hidden" name="id_Produto" id="id_Produto">
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger" name="AlterarProduto" id="AlterarProduto" >Alterar</button>
-						<button type="button" class="btn btn-primary" name="CancelarProduto" id="CancelarProduto" data-dismiss="modal">Cancelar</button>	
+						<button type="button" class="btn btn-primary" name="CancelarProduto" id="CancelarProduto" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="AlterarProduto" id="AlterarProduto" >Alterar</button>	
 						<div class="col-md-12 alert alert-warning aguardarAlterarProduto" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
@@ -1321,8 +1321,8 @@
 					</div>
 					<input type="hidden" name="id_ExcluirProduto" id="id_ExcluirProduto">
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-danger" name="ExcluirProduto" id="ExcluirProduto" >Apagar</button>
-						<button type="button" class="btn btn-primary" name="CancelarExcluirProduto" id="CancelarExcluirProduto" data-dismiss="modal">Cancelar</button>	
+						<button type="button" class="btn btn-primary" name="CancelarExcluirProduto" id="CancelarExcluirProduto" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-danger" name="ExcluirProduto" id="ExcluirProduto" >Apagar</button>	
 						<div class="col-md-12 alert alert-warning aguardarExcluirProduto" role="alert" >
 							Aguarde um instante! Estamos processando sua solicitação!
 						</div>
