@@ -188,6 +188,39 @@ class Produtos_model extends CI_Model {
         return $query[0];
     }
 
+    public function get_app_produto($data) {
+		$query = $this->db->query('
+			SELECT
+				TAP.*
+			FROM 
+				App_Produto AS TAP
+			WHERE 
+				TAP.idSis_Empresa = ' . $data['idSis_Empresa'] . ' AND
+				TAP.idTab_Produtos_Produto = ' . $data['idTab_Produtos'] . '
+		');
+        $query = $query->result_array();
+
+        //return $query[0];
+		return $query;
+    }
+
+    public function get_tab_valor($data) {
+		$query = $this->db->query('
+			SELECT
+				TV.*
+			FROM 
+				Tab_Valor AS TV
+			WHERE 
+				TV.idSis_Empresa = ' . $data['idSis_Empresa'] . ' AND
+				TV.idTab_Produtos = ' . $data['idTab_Produtos'] . ' AND
+				TV.Desconto = "2"
+		');
+        $query = $query->result_array();
+
+        //return $query[0];
+		return $query;
+    }
+		
     public function get_modelo($data) {
 		$query = $this->db->query('SELECT * FROM Tab_Produto WHERE idTab_Produto = ' . $data);
         $query = $query->result_array();

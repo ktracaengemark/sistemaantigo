@@ -389,6 +389,40 @@ class Produtos extends CI_Controller {
            $_SESSION['Produtos'] = $data['produtos'] = $this->Produtos_model->get_produtos($id);
 
 		}
+		if (isset($_SESSION['Produtos'])){
+			#### Busca Se o produto já foi usado###
+			$data['usado'] = $this->Produtos_model->get_app_produto($_SESSION['Produtos']);
+			if (isset($data['usado'])){
+				$max_produto = count($data['usado']);
+				if($max_produto >= 1){
+					$data['usado']['produto'] = "S";
+				}else{
+					$data['usado']['produto'] = "N";
+				}
+			}
+			#### Busca Se o produto pertence a promoções###
+			$data['promocao'] = $this->Produtos_model->get_tab_valor($_SESSION['Produtos']);
+			if (isset($data['promocao'])){
+				$max_promocao = count($data['promocao']);
+				if($max_promocao >= 1){
+					$data['promocao']['produto'] = "S";
+				}else{
+					$data['promocao']['produto'] = "N";
+				}
+			}	
+		}
+		/*
+		echo '<br>';
+		echo "<pre>";
+		print_r($max_produto);
+		echo '<br>';
+		print_r($data['usado']['produto']);
+		echo '<br>';
+		print_r($max_promocao);
+		echo '<br>';
+		print_r($data['promocao']['produto']);
+		echo "</pre>";
+		*/
 		#### Tab_Atributo_Select ####
 		$_SESSION['Atributo'] = $data['atributo'] = $this->Produtos_model->get_atributos($_SESSION['Produtos']['idTab_Catprod']);
 		
@@ -608,6 +642,40 @@ class Produtos extends CI_Controller {
 			$_SESSION['Produtos'] = $data['produtos'] = $this->Produtos_model->get_produtos($id);
 			$data['cadastrar']['VendaSite1'] = $data['produtos']['VendaSite_Produto'];
 		}
+		if (isset($_SESSION['Produtos'])){
+			#### Busca Se o produto já foi usado###
+			$data['usado'] = $this->Produtos_model->get_app_produto($_SESSION['Produtos']);
+			if (isset($data['usado'])){
+				$max_produto = count($data['usado']);
+				if($max_produto >= 1){
+					$data['usado']['produto'] = "S";
+				}else{
+					$data['usado']['produto'] = "N";
+				}
+			}
+			#### Busca Se o produto pertence a promoções###
+			$data['promocao'] = $this->Produtos_model->get_tab_valor($_SESSION['Produtos']);
+			if (isset($data['promocao'])){
+				$max_promocao = count($data['promocao']);
+				if($max_promocao >= 1){
+					$data['promocao']['produto'] = "S";
+				}else{
+					$data['promocao']['produto'] = "N";
+				}
+			}	
+		}
+		/*
+		echo '<br>';
+		echo "<pre>";
+		print_r($max_produto);
+		echo '<br>';
+		print_r($data['usado']['produto']);
+		echo '<br>';
+		print_r($max_promocao);
+		echo '<br>';
+		print_r($data['promocao']['produto']);
+		echo "</pre>";		
+		*/
 		#### Tab_Atributo_Select ####
 		$_SESSION['Atributo'] = $data['atributo'] = $this->Produtos_model->get_atributos($_SESSION['Produtos']['idTab_Catprod']);
 		$data['Conta_Atributos'] = count($data['atributo']);

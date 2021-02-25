@@ -15,10 +15,16 @@
 				<a class="btn btn-sm btn-warning" href="<?php echo base_url() ?>relatorio/precopromocao" role="button">
 					<span class="glyphicon glyphicon-search"></span> Lista de Preços
 				</a>
-				-->
 				<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>produtos/cadastrar" role="button">
 					<span class="glyphicon glyphicon-plus"></span> Cadastrar Produto
 				</a>
+				-->
+				<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".produto">
+					<span class="glyphicon glyphicon-plus"></span> Novo Produto
+				</button>
+				<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".promocao">
+					<span class="glyphicon glyphicon-plus"></span> Nova Promoção
+				</button>
 			<?php } ?>
 		</div>
 		
@@ -393,28 +399,6 @@
 												<div class="col-md-12">
 													<?php if ($metodo > 1) { ?>
 														<?php if ($metodo != 4 && $metodo != 6) { ?>
-															<?php if ($metodo == 7) { ?>
-																<div class="col-md-2">
-																<label >Preço</label><br>
-																	<a class="btn btn-md btn-danger btn-block"  name="submeter2" id="submeter2" onclick="adiciona_precos()">
-																		<span class="glyphicon glyphicon-plus"></span> Adicionar
-																	</a>
-																</div>
-															<?php } ?>
-															<div class="col-md-2">
-																<label >Alterações</label><br>
-																<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
-																	<span class="glyphicon glyphicon-save"></span> Salvar
-																</button>
-															</div>
-															<?php if ($metodo == 2) { ?>	
-																<div class="col-md-2">
-																	<label >Produto</label><br>
-																	<button  type="button" class="btn btn-md btn-danger btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
-																		<span class="glyphicon glyphicon-trash"></span> Excluir
-																	</button>
-																</div>
-															<?php } ?>
 															<?php if ($metodo < 4) { ?>
 																<div class="col-md-2 text-left">
 																	<label for="Cadastrar">Encontrou?</label><br>
@@ -479,13 +463,35 @@
 																		<?php } ?>	
 																		<div class="col-md-3 text-left">
 																			<label >Recarregar</label><br>
-																			<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+																			<button class="btn btn-md btn-warning btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
 																				<span class="glyphicon glyphicon-refresh"></span>Recarregar
 																			</button>
 																		</div>	
 																		<span id="msg"></span>
 																	</div>	
 																	<?php echo form_error('Cadastrar'); ?>
+																</div>
+															<?php } ?>
+															<?php if ($metodo == 7) { ?>
+																<div class="col-md-2">
+																<label >Preço</label><br>
+																	<a class="btn btn-md btn-danger btn-block"  name="submeter2" id="submeter2" onclick="adiciona_precos()">
+																		<span class="glyphicon glyphicon-plus"></span> Adicionar
+																	</a>
+																</div>
+															<?php } ?>
+															<div class="col-md-2">
+																<label >Alterações</label><br>
+																<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
+																	<span class="glyphicon glyphicon-save"></span> Próximo Passo
+																</button>
+															</div>
+															<?php if ($usado['produto'] == "N" && ($metodo == 2 || $metodo == 3)) { ?>	
+																<div class="col-md-2">
+																	<label >Produto</label><br>
+																	<button  type="button" class="btn btn-md btn-danger btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+																		<span class="glyphicon glyphicon-trash"></span> Excluir
+																	</button>
 																</div>
 															<?php } ?>
 														<?php } ?>
@@ -531,7 +537,14 @@
 																		<h4 class="modal-title">Tem certeza que deseja excluir?</h4>
 																	</div>
 																	<div class="modal-body">
-																		<p>Ao confirmar a exclusão todos os dados serão excluídos do banco de dados. Esta operação é irreversível.</p>
+																		<?php if ($promocao['produto'] == "S") { ?>
+																			<p>* Este Produto ainda não foi comercializado, mas pertence a(s) Promoção(s) apresentada(s) abaixo.</p>
+																			<p>* Antes de Excluir o Produto, Reveja a(s) promoção(s).</p>
+																		<?php } else { ?>
+																			<p>* Este Produto ainda não foi comercializado e não pertence a nenhuma Promoção.</p>
+																			<p>* Ao confirmar esta exclusão todos os dados serão excluídos do banco de dados.</p>
+																			<p>* Esta operação é irreversível.</p>
+																		<?php } ?>
 																	</div>
 																	<div class="modal-footer">
 																		<div class="col-md-6 text-left">
@@ -539,22 +552,18 @@
 																				<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
 																			</button>
 																		</div>
-																		<div class="col-md-6 text-right">
-																			<a class="btn btn-danger" href="<?php echo base_url() . 'produtos/excluir/' . $produtos['idTab_Produtos'] ?>" role="button">
-																				<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
-																			</a>
-																		</div>
+																		<?php if ($promocao['produto'] == "N") { ?>
+																			<div class="col-md-6 text-right">
+																				<a class="btn btn-danger" href="<?php echo base_url() . 'produtos/excluir/' . $produtos['idTab_Produtos'] ?>" role="button">
+																					<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
+																				</a>
+																			</div>
+																		<?php } ?>
 																	</div>
 																</div>
 															</div>
 														</div>
-														<?php } else { ?>
-														<div class="col-md-2">
-															<label >Alterações</label><br>
-															<button class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." type="submit">
-																<span class="glyphicon glyphicon-save"></span> Salvar
-															</button>
-														</div>
+													<?php } else { ?>
 														<div class="col-md-2 text-left">
 															<label for="Cadastrar">Encontrou?</label><br>
 															<div class="btn-group" data-toggle="buttons">
@@ -586,23 +595,29 @@
 																
 															</div>
 														</div>
-														<div class="col-md-6 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
+														<div class="col-md-4 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
 															<div class="row">
-																<div class="col-md-2 text-left">	
+																<div class="col-md-6 text-left">	
 																	<label >Categoria</label><br>
 																	<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addCatprodModal">
 																		Cad./Edit
 																	</button>
 																</div>	
-																<div class="col-md-3 text-left">
+																<div class="col-md-6 text-left">
 																	<label >Recarregar</label><br>
-																	<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+																	<button class="btn btn-md btn-warning btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
 																		<span class="glyphicon glyphicon-refresh"></span>Recarregar
 																	</button>
 																</div>	
 																<span id="msg"></span>
 															</div>	
 															<?php echo form_error('Cadastrar'); ?>
+														</div>
+														<div class="col-md-2">
+															<label >Alterações</label><br>
+															<button class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." type="submit">
+																<span class="glyphicon glyphicon-save"></span> Próximo Passo
+															</button>
 														</div>
 													<?php } ?>
 													<div id="msgCadSucesso" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -648,6 +663,72 @@
 				<?php if (isset($list_precos_promocoes)) echo $list_precos_promocoes; ?>
 			<?php } ?>
 			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade produto" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-danger">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Evite cadastrar Produtos REPETIDOS!<br>
+										"Pesquise" os Produtos Cadastradas!</h4>
+			</div>
+			<!--
+			<div class="modal-body">
+				<p>Pesquise os Produtos Cadastrados!!</p>
+			</div>
+			-->
+			<div class="modal-footer">
+				<div class="form-group col-md-4 text-left">
+					<div class="form-footer">		
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>produtos/cadastrar" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Novo Produto
+						</a>
+					</div>	
+				</div>
+				<div class="form-group col-md-4">
+					<div class="form-footer ">
+						<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove"></span> Fechar
+						</button>
+					</div>
+				</div>									
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade promocao" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-danger">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Evite cadastrar Promoções REPETIDOS!<br>
+										"Pesquise" as Promoções Cadastradas!</h4>
+			</div>
+			<!--
+			<div class="modal-body">
+				<p>Pesquise os Produtos Cadastrados!!</p>
+			</div>
+			-->
+			<div class="modal-footer">
+				<div class="form-group col-md-4 text-left">
+					<div class="form-footer">		
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Nova Promocao
+						</a>
+					</div>	
+				</div>
+				<div class="form-group col-md-4">
+					<div class="form-footer ">
+						<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove"></span> Fechar
+						</button>
+					</div>
+				</div>									
+			</div>
 		</div>
 	</div>
 </div>

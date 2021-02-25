@@ -13,10 +13,9 @@
 			<a class="btn btn-sm btn-info" href="<?php echo base_url() ?>relatorio/promocao" role="button">
 				<span class="glyphicon glyphicon-search"></span> Lista de Promocoes
 			</a>
-			
-			<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>promocao/cadastrar" role="button">
-				<span class="glyphicon glyphicon-search"></span> Cadastrar Promoção
-			</a>
+			<button  class="btn btn-sm btn-danger" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".promocao">
+				<span class="glyphicon glyphicon-plus"></span> Nova Promoção
+			</button>
 		</div>			
 		<div class="panel-body">
 
@@ -831,6 +830,39 @@
 				<?php if (isset($list_promocoes)) echo $list_promocoes; ?>
 			<?php } ?>
 			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade promocao" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-danger">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">Evite cadastrar Promoções REPETIDOS!<br>
+										"Pesquise" as Promoções Cadastradas!</h4>
+			</div>
+			<!--
+			<div class="modal-body">
+				<p>Pesquise os Produtos Cadastrados!!</p>
+			</div>
+			-->
+			<div class="modal-footer">
+				<div class="form-group col-md-4 text-left">
+					<div class="form-footer">		
+						<a class="btn btn-danger btn-block" href="<?php echo base_url() ?>promocao/cadastrar" role="button">
+							<span class="glyphicon glyphicon-plus"></span> Nova Promocao
+						</a>
+					</div>	
+				</div>
+				<div class="form-group col-md-4">
+					<div class="form-footer ">
+						<button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove"></span> Fechar
+						</button>
+					</div>
+				</div>									
+			</div>
 		</div>
 	</div>
 </div>
