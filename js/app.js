@@ -96,6 +96,7 @@ function Aguardar () {
 	$('.aguardarAlterarAtributo').hide();
 	$('.aguardarAlterarOpcao').hide();
 	$('.aguardarExcluirCatprod').hide();
+	$('.aguardarExcluirOpcao').hide();
 	$('.exibir').show();
 	$('#botaoFechar2').show();
 	$('#botaoSalvar').show();
@@ -777,10 +778,10 @@ $(document).ready(function(){
 			
 			//Receber os dados do formulário
 			var dados = $("#insert_opcao_form").serialize();
-			console.log(dados);
+			//console.log(dados);
 			
 			$.post(window.location.origin+ '/' + app + '/cadastros/Opcao.php?', dados, function (retorna){
-			 console.log(retorna);
+			 //console.log(retorna);
 				if(retorna == 1){
 				
 					//Limpar os campo
@@ -1465,6 +1466,81 @@ $(document).ready(function(){
 					$('#CancelarExcluirCatprod').show();
 					//Fecha o Aguardar
 					$('.aguardarExcluirCatprod').hide();
+				}
+				
+			});
+			
+		}
+		
+	});	
+
+	$('#excluirOpcao').on('show.bs.modal', function (event) {
+		var button = $(event.relatedTarget)
+		var recipientidopcao = button.data('whateveridopcao')
+		var recipientopcao = button.data('whateveropcao')
+		//console.log(recipientopcao);
+		var modal = $(this)
+		modal.find('.modal-title').text('id da Opcao: ' + recipientidopcao)
+		modal.find('#id_ExcluirOpcao').val(recipientidopcao)
+		modal.find('#ExcluirOpcao').val(recipientopcao)
+	})
+	
+	$('#excluir_opcao_form').on('submit', function(event){
+		//alert('ok - Excluir a Opcao');
+		
+		event.preventDefault();
+		var opcao = $('#id_ExcluirOpcao').val();
+		//console.log(opcao);
+		
+		if($('#id_ExcluirOpcao').val() == ""){
+			//Alerta de campo  vazio
+			$("#msg-error-excluir-opcao").html('<div class="alert alert-danger" role="alert">Necessário Informar a Opcao!</div>');						
+		}else{
+			//$("#msg-error-excluir-opcao").html('<div class="alert alert-danger" role="alert">Opcao Informada!</div>');
+			
+			//Fechar a mensagem de erro
+			$('#msg-error-excluir-opcao').hide();
+			//Fechar o botão Excluir
+			$('#ExcluirOpcao').hide();
+			//Fechar o botão Cancelar
+			$('#CancelarExcluirOpcao').hide();
+			//Abre o Aguardar
+			$('.aguardarExcluirOpcao').show();
+			//Fechar a janela modal excluir
+			$('#addOpcaoModal').modal('hide');
+			
+			//Receber os dados do formulário
+			var dados = $("#excluir_opcao_form").serialize();
+			//console.log(dados);
+			
+			$.post(window.location.origin+ '/' + app + '/excluir/Opcao.php?', dados, function (retorna){
+			 
+				console.log(retorna);
+				
+				if(retorna == 1){
+				
+					//Limpar os campo
+					$('#excluir_opcao_form')[0].reset();
+					
+					//Fechar a janela modal excluir
+					$('#excluirOpcao').modal('hide');
+								
+					//Alerta de cadastro realizado com sucesso
+					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+					$('#msgCadSucesso').modal('show');
+					
+					//Limpar mensagem de erro
+					$("#msg-error-excluir-opcao").html('');
+					
+					//listar_usuario(1, 50);
+				}else{
+					$("#msg-error-excluir-opcao").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao Apagar a Opcao!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+
+					//Abre o botão Cancelar
+					$('#CancelarExcluirOpcao').show();
+					//Fecha o Aguardar
+					$('.aguardarExcluirOpcao').hide();				
+				
 				}
 				
 			});

@@ -2,20 +2,22 @@
 
 include_once '../conexao.php';
 
-$Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+$Dados 	= filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-$id = filter_var($Dados['id_Opcao'], FILTER_SANITIZE_STRING);
-$opcao = filter_var($Dados['Opcao'], FILTER_SANITIZE_STRING);
+$id 	= filter_var($Dados['id_ExcluirOpcao'], FILTER_SANITIZE_NUMBER_INT);
 
-$opcao_maiuscula = trim(mb_strtoupper($opcao, 'ISO-8859-1'));
+if(!empty($id)){
 
-$result_opcao = "UPDATE Tab_Opcao SET Opcao='$opcao_maiuscula' WHERE idTab_Opcao = '$id'";
-$resultado_opcao = mysqli_query($conn, $result_opcao);
+	$result_opcao = "DELETE FROM Tab_Opcao WHERE idTab_Opcao = '$id'";
+	$resultado_categoria = mysqli_query($conn, $result_opcao);
 
-if(mysqli_affected_rows($conn) != 0){
-	echo true;
+	if(mysqli_affected_rows($conn)){
+		echo true;
+	}else{
+		echo false;
+	}
 }else{
 	echo false;
-}
-unset($id, $opcao);
+}	
+unset($id, $Dados);
 mysqli_close($conn);

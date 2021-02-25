@@ -7,6 +7,7 @@
 				<th>Atributo</th>
 				<th>Opcao</th>
 				<th>Editar</th>
+				<th>Apagar</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -31,6 +32,18 @@
 										Editar
 									</button>
 								</td>';
+						if($row['OpcaoUsada'] == "N"){
+							echo '<td><button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#excluirOpcao" 
+											data-whateveridopcao="' . $row['idTab_Opcao'] . '" data-whateveropcao="' . $row['Opcao'] . '">
+											Apagar
+										</button>
+									</td>';
+						}else{	
+							echo '<td><button type="button" class="btn btn-xs btn-success">
+											Usado
+										</button>
+									</td>';
+						}			
 						echo '<td></td>';
 					echo '</tr>';            
 					

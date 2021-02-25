@@ -442,58 +442,6 @@ class Produtos_model extends CI_Model {
             }
         }
     }
-
-	public function get_tab_produtos($data, $x) {
-		
-		//$data['idSis_Empresa'] = ($data['idSis_Empresa'] != 0) ? ' AND TPS.idSis_Empresa = ' . $data['idSis_Empresa'] : FALSE;
-			
-			/*
-			echo "<pre>";
-			print_r($data['idSis_Empresa']);
-			echo "</pre>";
-			exit();
-			*/
-		
-		
-        $query = $this->db->query('
-			SELECT
-				TPS.*,
-				TCT.*,
-				TPSA.*
-			FROM 
-				Tab_Produtos AS TPS 
-					LEFT JOIN Tab_Catprod AS TCT ON TCT.idTab_Catprod = TPS.idTab_Catprod
-					LEFT JOIN Tab_Prod_Serv AS TPSA ON TPSA.Abrev_Prod_Serv = TCT.TipoCatprod
-			WHERE
-                TPS.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
-			ORDER BY  
-				TPSA.Prod_Serv ASC,  
-				TCT.Catprod ASC 
-		');
-
-        /*
-          echo $this->db->last_query();
-          $query = $query->result_array();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-        */
-        if ($query->num_rows() === 0) {
-            return FALSE;
-        } else {
-            if ($x === FALSE) {
-                return TRUE;
-            } else {
-                #foreach ($query->result_array() as $row) {
-                #    $row->idApp_Profissional = $row->idApp_Profissional;
-                #    $row->NomeProfissional = $row->NomeProfissional;
-                #}
-                $query = $query->result_array();
-                return $query;
-            }
-        }
-    }
     
 	public function list_atributo($data, $x) {
 		
@@ -542,13 +490,19 @@ class Produtos_model extends CI_Model {
         $query = $this->db->query('
 			SELECT 
 				TOP.*,
-				TA.*
+				TA.*,
+				TPS1.Opcao_Atributo_1,
+				TPS2.Opcao_Atributo_2
 			FROM 
 				Tab_Opcao AS TOP
 					LEFT JOIN Tab_Atributo AS TA ON TA.idTab_Atributo = TOP.idTab_Atributo
+					LEFT JOIN Tab_Produtos AS TPS1 ON TPS1.Opcao_Atributo_1 = TOP.idTab_Opcao
+					LEFT JOIN Tab_Produtos AS TPS2 ON TPS2.Opcao_Atributo_2 = TOP.idTab_Opcao
 			WHERE 
                 TOP.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
                 ' . $data['idTab_Catprod'] . '
+			GROUP BY
+				TOP.idTab_Opcao
 			ORDER BY  
 				TA.Atributo ASC, 
 				TOP.Opcao ASC 
@@ -568,10 +522,21 @@ class Produtos_model extends CI_Model {
             if ($x === FALSE) {
                 return TRUE;
             } else {
-                #foreach ($query->result_array() as $row) {
-                #    $row->idApp_Profissional = $row->idApp_Profissional;
+                foreach ($query->result() as $row) {
+                
+					if($row->Opcao_Atributo_1){
+						$row->OpcaoUsada = "S";
+					}else{
+						if($row->Opcao_Atributo_2){
+							$row->OpcaoUsada = "S";
+						}else{
+							$row->OpcaoUsada = "N";
+						}
+					}
+				
+				#    $row->idApp_Profissional = $row->idApp_Profissional;
                 #    $row->NomeProfissional = $row->NomeProfissional;
-                #}
+                }
                 $query = $query->result_array();
                 return $query;
             }
