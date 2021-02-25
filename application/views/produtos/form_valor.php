@@ -42,7 +42,7 @@
 														if($metodo == 6) { 
 															$url = '';
 														}elseif($metodo == 7){
-															$url = base_url() . 'produtos/alterarlogoderivado/' . $_SESSION['Produtos']['idTab_Produtos'];
+															$url = base_url() . 'produtos/alterarlogoderivado/' . $_SESSION['Valor']['idTab_Produtos'];
 														}
 													?>
 													<a class="notclickable" href="<?php echo $url ;?>">
