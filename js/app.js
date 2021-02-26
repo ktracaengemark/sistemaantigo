@@ -1181,11 +1181,11 @@ $(document).ready(function(){
 			
 			//Receber os dados do formulário
 			var dados = $("#excluir_catprod_form").serialize();
-			console.log(dados);
+			//console.log(dados);
 			
 			$.post(window.location.origin+ '/' + app + '/cadastros/excluir/Catprod.php?', dados, function (retorna){
 			 
-				console.log(retorna);
+				//console.log(retorna);
 				
 				if(retorna == 1){
 				
