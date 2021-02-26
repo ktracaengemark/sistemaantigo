@@ -216,9 +216,6 @@
 					</div>
 				</div>
 			<?php } ?>
-			
-			
-			
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<div class="panel panel-<?php echo $panel; ?>">

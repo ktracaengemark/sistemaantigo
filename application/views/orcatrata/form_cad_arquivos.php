@@ -4,7 +4,6 @@
 		<div class="col-md-12">
 			<?php echo validation_errors(); ?>
 			<?php echo form_open_multipart($form_open_path); ?>
-
 			<?php if ( !isset($evento) && isset($orcatrata) && ($_SESSION['log']['idSis_Empresa'] != 5 || $_SESSION['log']['idSis_Empresa'] == $orcatrata['idSis_Empresa'])) { ?>
 				<?php if ($orcatrata['idApp_Cliente'] != 150001 && $orcatrata['idApp_Cliente'] != 1 && $orcatrata['idApp_Cliente'] != 0) { ?>
 					<nav class="navbar navbar-inverse navbar-fixed" role="banner">
@@ -217,7 +216,6 @@
 					</div>
 				</div>
 			<?php } ?>
-	
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
 				<div class="panel panel-<?php echo $panel; ?>">
@@ -225,7 +223,11 @@
 						<?php if (isset($msg)) echo $msg; ?>
 						<div class="panel panel-info">
 							<div class="panel-heading">	
-								<h4><b>Orcamento: <?php echo $_SESSION['Orcatrata']['idApp_OrcaTrata'] ?></b></h4>					
+								<h4>
+									<b>
+										Orcamento: <?php echo $_SESSION['Orcatrata']['idApp_OrcaTrata'] ?>
+									</b>
+								</h4>					
 								<div class="row">
 									<div class="col-md-6 ">	
 										<!--
