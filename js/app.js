@@ -932,7 +932,7 @@ $(document).ready(function(){
 		var modal = $(this)
 		modal.find('.modal-title').text('id da Categoria: ' + recipientidcatprom)
 		modal.find('#id_ExcluirCategoria').val(recipientidcatprom)
-		modal.find('#ExcluirCatprom').val(recipientcatprom)
+		modal.find('#Catprom_Excluir').val(recipientcatprom)
 	})
 	
 	$('#excluir_catprom_form').on('submit', function(event){

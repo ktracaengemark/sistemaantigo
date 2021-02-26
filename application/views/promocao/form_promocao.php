@@ -1018,9 +1018,9 @@
 				<span id="msg-error-excluir-catprom"></span>
 				<form method="post" id="excluir_catprom_form">
 					<div class="form-group row">
-						<label for="ExcluirCatprom" class="col-sm-2 col-form-label">Categoria:</label>
+						<label for="Catprom_Excluir" class="col-sm-2 col-form-label">Categoria:</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="ExcluirCatprom" id="ExcluirCatprom" readonly="">
+							<input type="text" class="form-control" name="Catprom_Excluir" id="Catprom_Excluir" readonly="">
 						</div>
 					</div>
 					<input type="hidden" name="id_ExcluirCategoria" id="id_ExcluirCategoria">
