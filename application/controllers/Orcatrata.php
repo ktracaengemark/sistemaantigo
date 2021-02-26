@@ -10576,7 +10576,7 @@ class Orcatrata extends CI_Controller {
         ), TRUE));
 		*/
         if ($id) {
-			$_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata_arquivo($id);
+			$_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata($id);
 		}
 		/*
 			echo "<pre>";
@@ -10815,7 +10815,8 @@ class Orcatrata extends CI_Controller {
         if ($id){
 			$_SESSION['Arquivos'] = $data['arquivos'] = $this->Orcatrata_model->get_arquivos($id);
 		}
-
+		$_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata($_SESSION['Arquivos']['idApp_OrcaTrata']);
+		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
 		$this->form_validation->set_rules('Texto_Arquivos', 'Texto do Arquivo', 'trim');
@@ -10907,6 +10908,7 @@ class Orcatrata extends CI_Controller {
             $_SESSION['Arquivos'] = $data['arquivos'] = $this->Orcatrata_model->get_arquivos($id, TRUE);
 			$data['file']['idApp_Arquivos'] = $id;
 		}
+		$_SESSION['Orcatrata'] = $data['orcatrata'] = $this->Orcatrata_model->get_orcatrata($_SESSION['Arquivos']['idApp_OrcaTrata']);
 		/*
 			echo "<pre>";
 			print_r($_SESSION['Arquivos']['idApp_OrcaTrata']);
