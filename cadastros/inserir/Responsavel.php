@@ -1,21 +1,21 @@
 <?php
 
-include_once '../conexao.php';
+include_once '../../conexao.php';
 
 $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-$cliente0 = filter_var($dados['NomeCliente'], FILTER_SANITIZE_STRING);
-$sexo0 = filter_var($dados['Sexo'], FILTER_SANITIZE_STRING);
-$cep0 = filter_var($dados['CepCliente'], FILTER_SANITIZE_STRING);
-$endereco0 = filter_var($dados['EnderecoCliente'], FILTER_SANITIZE_STRING);
-$numero0 = filter_var($dados['NumeroCliente'], FILTER_SANITIZE_STRING);
-$complemento0 = filter_var($dados['ComplementoCliente'], FILTER_SANITIZE_STRING);
-$bairro0 = filter_var($dados['BairroCliente'], FILTER_SANITIZE_STRING);
-$cidade0 = filter_var($dados['CidadeCliente'], FILTER_SANITIZE_STRING);
-$estado0 = filter_var($dados['EstadoCliente'], FILTER_SANITIZE_STRING);
-$referencia0 = filter_var($dados['ReferenciaCliente'], FILTER_SANITIZE_STRING);
+$cliente0 = filter_var($dados['NomeResponsavel'], FILTER_SANITIZE_STRING);
+$sexo0 = filter_var($dados['SexoResponsavel'], FILTER_SANITIZE_STRING);
+$cep0 = filter_var($dados['CepResponsavel'], FILTER_SANITIZE_STRING);
+$endereco0 = filter_var($dados['EnderecoResponsavel'], FILTER_SANITIZE_STRING);
+$numero0 = filter_var($dados['NumeroResponsavel'], FILTER_SANITIZE_STRING);
+$complemento0 = filter_var($dados['ComplementoResponsavel'], FILTER_SANITIZE_STRING);
+$bairro0 = filter_var($dados['BairroResponsavel'], FILTER_SANITIZE_STRING);
+$cidade0 = filter_var($dados['CidadeResponsavel'], FILTER_SANITIZE_STRING);
+$estado0 = filter_var($dados['EstadoResponsavel'], FILTER_SANITIZE_STRING);
+$referencia0 = filter_var($dados['ReferenciaResponsavel'], FILTER_SANITIZE_STRING);
 
-$data = $dados['DataNascimento'];
+$data = $dados['DataNascimentoResponsavel'];
         
 if (preg_match("/[0-9]{2,4}(\/|-)[0-9]{2,4}(\/|-)[0-9]{2,4}/", $data)) {
 	
@@ -27,9 +27,9 @@ if (preg_match("/[0-9]{2,4}(\/|-)[0-9]{2,4}(\/|-)[0-9]{2,4}/", $data)) {
 	}
 }
 
-//$celular = filter_var($dados['CelularCliente'], FILTER_VALIDATE_INT);
+//$celular = filter_var($dados['CelularResponsavel'], FILTER_VALIDATE_INT);
 
-$celular = $dados['CelularCliente'];
+$celular = $dados['CelularResponsavel'];
 
 $cliente = trim(mb_strtoupper($cliente0, 'ISO-8859-1'));
 $sexo = trim(mb_strtoupper($sexo0, 'ISO-8859-1'));
@@ -48,11 +48,11 @@ $modulo 	= $_SESSION['log']['idTab_Modulo'];
 $datacad	= date('Y-m-d H:i:s', time());
 
 
-$result_usuario = "SELECT * FROM Sis_Usuario WHERE CelularUsuario='". $dados['CelularCliente'] ."' AND idSis_Empresa = '5'";
+$result_usuario = "SELECT * FROM Sis_Usuario WHERE CelularUsuario='". $dados['CelularResponsavel'] ."' AND idSis_Empresa = '5'";
 $resultado_usuario = mysqli_query($conn, $result_usuario);
 $row_resultado_usuario = mysqli_fetch_array($resultado_usuario, MYSQLI_ASSOC);
 
-$result_cliente = "SELECT * FROM App_Cliente WHERE CelularCliente='". $dados['CelularCliente'] ."' AND idSis_Empresa = '" .$empresa. "'";
+$result_cliente = "SELECT * FROM App_Cliente WHERE CelularCliente='". $dados['CelularResponsavel'] ."' AND idSis_Empresa = '" .$empresa. "'";
 $resultado_cliente = mysqli_query($conn, $result_cliente);
 $row_resultado_cliente = mysqli_fetch_array($resultado_cliente, MYSQLI_ASSOC);
 
@@ -214,8 +214,8 @@ if($cadastrar == 1){
 }elseif($cadastrar == 4){
 	//Não Encontrou o Usuario e Não Encontrou o Cliente!!Então Cadastra os Dois
 
-	$dados['NomeCliente'] = trim(mb_strtoupper($dados['NomeCliente'], 'ISO-8859-1'));
-	$senha = md5($dados['CelularCliente']);
+	$dados['NomeResponsavel'] = trim(mb_strtoupper($dados['NomeResponsavel'], 'ISO-8859-1'));
+	$senha = md5($dados['CelularResponsavel']);
 	$CodInterno = md5(time() . rand());
 	$DataCadastroCliente = date('Y-m-d', time());
 	$Codigo = md5(time() . rand());
@@ -235,11 +235,11 @@ if($cadastrar == 1){
 					'5',
 					'1',
 					'CONTA PESSOAL',
-					'" .$dados['NomeCliente']. "',
-					'" .$dados['CelularCliente']. "',
+					'" .$dados['NomeResponsavel']. "',
+					'" .$dados['CelularResponsavel']. "',
 					'" .$Codigo. "',
 					'" .$DataCadastroCliente. "',
-					'" .$dados['CelularCliente']. "',
+					'" .$dados['CelularResponsavel']. "',
 					'" .$senha. "',
 					'3',
 					'0'
@@ -287,8 +287,8 @@ if($cadastrar == 1){
 						'1',
 						'" .$usuario. "',
 						'" .$id_usuario_5. "',
-						'" .$dados['NomeCliente']. "',
-						'" .$dados['CelularCliente']. "',
+						'" .$dados['NomeResponsavel']. "',
+						'" .$dados['CelularResponsavel']. "',
 						'" .$data. "',
 						'" .$sexo. "',
 						'" .$cep. "',
@@ -303,7 +303,7 @@ if($cadastrar == 1){
 						'" .$Codigo. "',
 						'" .$DataCadastroCliente. "',
 						'L',
-						'" .$dados['CelularCliente']. "',
+						'" .$dados['CelularResponsavel']. "',
 						'" .$senha. "'
 						)";
 		$resultado_cliente = mysqli_query($conn, $result_cliente);

@@ -2,7 +2,7 @@
 
 //session_start();
 
-include_once '../conexao.php';
+include_once '../../conexao.php';
 /*
 $servidor = $_SESSION['db']['hostname'];
 $usuario = $_SESSION['db']['username'];

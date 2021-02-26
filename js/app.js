@@ -148,7 +148,7 @@ $(document).ready(function(){
 				var dados = $("#insert_cliente_form").serialize();
 				//console.log(dados);
 				
-				$.post(window.location.origin+ '/' + app + '/cadastros/Cliente.php?', dados, function (retorna){
+				$.post(window.location.origin+ '/' + app + '/cadastros/inserir/Cliente.php?', dados, function (retorna){
 				 //console.log(retorna);
 					if(retorna == 5){
 						//Limpar os campo
@@ -231,7 +231,7 @@ $(document).ready(function(){
 				var dados = $("#insert_responsavel_form").serialize();
 				//console.log(dados);
 				
-				$.post(window.location.origin+ '/' + app + '/cadastros/Responsavel.php?', dados, function (retorna){
+				$.post(window.location.origin+ '/' + app + '/cadastros/inserir/Responsavel.php?', dados, function (retorna){
 				 //console.log(retorna);
 					if(retorna == 5){
 						//Limpar os campo
@@ -304,7 +304,7 @@ $(document).ready(function(){
 			var dados = $("#insert_clientedep_form").serialize();
 			console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/cadastros/ClienteDep.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/inserir/ClienteDep.php?', dados, function (retorna){
 			 console.log(retorna);
 				if(retorna == 1){
 					//Limpar os campo
@@ -351,7 +351,7 @@ $(document).ready(function(){
 			var dados = $("#insert_clientepet_form").serialize();
 			console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/cadastros/ClientePet.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/inserir/ClientePet.php?', dados, function (retorna){
 			 console.log(retorna);
 				if(retorna == 1){
 					//Limpar os campo
@@ -404,7 +404,7 @@ $(document).ready(function(){
 				var dados = $("#insert_fornecedor_form").serialize();
 				//console.log(dados);
 				
-				$.post(window.location.origin+ '/' + app + '/cadastros/Fornecedor.php?', dados, function (retorna){
+				$.post(window.location.origin+ '/' + app + '/cadastros/inserir/Fornecedor.php?', dados, function (retorna){
 				 //console.log(retorna);
 					if(retorna == 1){
 						//Limpar os campo
@@ -453,7 +453,7 @@ $(document).ready(function(){
 			var dados = $("#insert_motivo_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/cadastros/Motivo.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/inserir/Motivo.php?', dados, function (retorna){
 			 //console.log(retorna);
 				if(retorna == 1){
 				
@@ -520,7 +520,7 @@ $(document).ready(function(){
 			var dados = $("#alterar_motivo_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/edicoes/Motivo.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/alterar/Motivo.php?', dados, function (retorna){
 			 
 				//console.log(retorna);
 				
@@ -570,7 +570,7 @@ $(document).ready(function(){
 			var dados = $("#insert_categoria_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/cadastros/Categoria.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/inserir/Categoria.php?', dados, function (retorna){
 			 //console.log(retorna);
 				if(retorna == 1){
 				
@@ -635,7 +635,7 @@ $(document).ready(function(){
 			var dados = $("#alterar_categoria_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/edicoes/Categoria.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/alterar/Categoria.php?', dados, function (retorna){
 			 
 				//console.log(retorna);
 				
@@ -685,7 +685,7 @@ $(document).ready(function(){
 			var dados = $("#insert_atividade_form").serialize();
 			//console.log(dados);
 
-			$.post(window.location.origin+ '/' + app + '/cadastros/Atividade.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/inserir/Atividade.php?', dados, function (retorna){
 			 //console.log(retorna);
 				if(retorna == 1){
 				
@@ -751,7 +751,7 @@ $(document).ready(function(){
 			var dados = $("#alterar_atividade_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/edicoes/Atividade.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/alterar/Atividade.php?', dados, function (retorna){
 			 
 				//console.log(retorna);
 				
@@ -801,7 +801,7 @@ $(document).ready(function(){
 			var dados = $("#insert_catprom_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/cadastros/Catprom.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/inserir/Catprom.php?', dados, function (retorna){
 			 //console.log(retorna);
 				if(retorna == 1){
 				
@@ -886,7 +886,7 @@ $(document).ready(function(){
 			var dados = $("#alterar_catprom_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/edicoes/Catprom.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/alterar/Catprom.php?', dados, function (retorna){
 			 
 				//console.log(retorna);
 				
@@ -963,7 +963,7 @@ $(document).ready(function(){
 			var dados = $("#excluir_catprom_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/excluir/Catprom.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/excluir/Catprom.php?', dados, function (retorna){
 			 
 				//console.log(retorna);
 				
@@ -1020,7 +1020,7 @@ $(document).ready(function(){
 			var dados = $("#insert_catprod_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/cadastros/Catprod.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/inserir/Catprod.php?', dados, function (retorna){
 			 //console.log(retorna);
 				if(retorna == 1){
 				
@@ -1105,7 +1105,7 @@ $(document).ready(function(){
 			var dados = $("#alterar_catprod_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/edicoes/Catprod.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/alterar/Catprod.php?', dados, function (retorna){
 			 
 				//console.log(retorna);
 				
@@ -1181,11 +1181,11 @@ $(document).ready(function(){
 			
 			//Receber os dados do formulário
 			var dados = $("#excluir_catprod_form").serialize();
-			//console.log(dados);
+			console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/excluir/Catprod.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/excluir/Catprod.php?', dados, function (retorna){
 			 
-				//console.log(retorna);
+				console.log(retorna);
 				
 				if(retorna == 1){
 				
@@ -1239,7 +1239,7 @@ $(document).ready(function(){
 			var dados = $("#insert_produto_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/cadastros/Produto.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/inserir/Produto.php?', dados, function (retorna){
 			 //console.log(retorna);
 				if(retorna == 1){
 				
@@ -1326,7 +1326,7 @@ $(document).ready(function(){
 			var dados = $("#alterar_produto_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/edicoes/Produto.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/alterar/Produto.php?', dados, function (retorna){
 			 
 				//console.log(retorna);
 				
@@ -1402,7 +1402,7 @@ $(document).ready(function(){
 			var dados = $("#excluir_produto_form").serialize();
 			console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/excluir/Produto.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/excluir/Produto.php?', dados, function (retorna){
 			 
 				console.log(retorna);
 				
@@ -1459,7 +1459,7 @@ $(document).ready(function(){
 			var dados = $("#insert_atributo_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/cadastros/Atributo.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/inserir/Atributo.php?', dados, function (retorna){
 			 //console.log(retorna);
 				if(retorna == 1){
 				
@@ -1532,7 +1532,7 @@ $(document).ready(function(){
 			var dados = $("#alterar_atributo_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/edicoes/Atributo.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/alterar/Atributo.php?', dados, function (retorna){
 			 
 				//console.log(retorna);
 				
@@ -1608,7 +1608,7 @@ $(document).ready(function(){
 			var dados = $("#excluir_atributo_form").serialize();
 			console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/excluir/Atributo.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/excluir/Atributo.php?', dados, function (retorna){
 			 
 				console.log(retorna);
 				
@@ -1665,7 +1665,7 @@ $(document).ready(function(){
 			var dados = $("#insert_opcao_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/cadastros/Opcao.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/inserir/Opcao.php?', dados, function (retorna){
 			 //console.log(retorna);
 				if(retorna == 1){
 				
@@ -1738,7 +1738,7 @@ $(document).ready(function(){
 			var dados = $("#alterar_opcao_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/edicoes/Opcao.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/alterar/Opcao.php?', dados, function (retorna){
 			 
 				console.log(retorna);
 				
@@ -1813,7 +1813,7 @@ $(document).ready(function(){
 			var dados = $("#excluir_opcao_form").serialize();
 			//console.log(dados);
 			
-			$.post(window.location.origin+ '/' + app + '/excluir/Opcao.php?', dados, function (retorna){
+			$.post(window.location.origin+ '/' + app + '/cadastros/excluir/Opcao.php?', dados, function (retorna){
 			 
 				console.log(retorna);
 				
