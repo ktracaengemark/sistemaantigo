@@ -120,7 +120,7 @@
 								</li>	
 								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
 									<div class="btn-group">
-										<a type="button" class="btn btn-md btn-default " href="<?php echo base_url() . 'orcatrataprint/imprimir/' . $orcatrata['idApp_OrcaTrata']; ?>">
+										<a type="button" class="btn btn-md btn-default " href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $orcatrata['idApp_OrcaTrata']; ?>">
 											<span class="glyphicon glyphicon-edit"></span> Impressão
 										</a>
 									</div>									
