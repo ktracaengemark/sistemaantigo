@@ -1696,7 +1696,7 @@
 													<h4 class="mb-3"><b>Status do Pedido</b></h4>
 													<div class="row">
 														<div class="col-md-3">
-															<div class="panel panel-primary">
+															<div class="panel panel-danger">
 																<div class="panel-heading">
 																	<div class="row">
 																		<div class="col-md-12 text-left">
@@ -2135,7 +2135,7 @@
 														</div>
 													
 														<div class="col-md-3">
-															<div class="panel panel-primary">
+															<div class="panel panel-default">
 																<div class="panel-heading">
 																	<div class="row">
 																		<div class="col-md-12 text-left">

@@ -71,9 +71,9 @@
 					<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="panel panel-primary">
+								<div class="panel panel-danger">
 									<div class="panel-heading">
-										<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Combinar" aria-expanded="false" aria-controls="Combinar">
+										<a class="text-center" style="color: #DC143C" data-toggle="collapse" data-target="#Combinar" aria-expanded="false" aria-controls="Combinar">
 											<h5 class="text-left">Aguardando <b>Combinar com o Cliente</b></h5>
 										</a>
 									</div>
@@ -87,10 +87,10 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="panel panel-primary">
+								<div class="panel panel-warning">
 									<div class="panel-heading">
-										<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Aprovar" aria-expanded="false" aria-controls="Aprovar">
-											<h5 class="text-left">Aguardando <b>Aprovação do Cliente</b></h5>
+										<a class="text-center" style="color: #DAA520" data-toggle="collapse" data-target="#Aprovar" aria-expanded="false" aria-controls="Aprovar">
+											<h5 class="text-left">Aguardando <b>Aprovação</b></h5>
 										</a>
 									</div>
 									<div <?php echo $collapse; ?> id="Aprovar">
@@ -171,9 +171,9 @@
 					<?php if ($_SESSION['log']['idSis_Empresa'] != 5 ) { ?>
 						<div class="row">	
 							<div class="col-md-12">
-								<div class="panel panel-primary">
+								<div class="panel panel-default">
 									<div class="panel-heading">
-										<a class="text-center" style="color: #FFFFFF" data-toggle="collapse" data-target="#Cancelados" aria-expanded="false" aria-controls="Cancelados">
+										<a class="text-center" style="color: #000000" data-toggle="collapse" data-target="#Cancelados" aria-expanded="false" aria-controls="Cancelados">
 											<h5 class="text-left"><b>Cancelados</b></h5>
 										</a>
 									</div>
