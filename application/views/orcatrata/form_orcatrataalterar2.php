@@ -1663,7 +1663,14 @@
 													<div id="FinalizadoOrca" <?php echo $div['FinalizadoOrca']; ?>>
 														<div id="CombinadoFrete" <?php echo $div['CombinadoFrete']; ?>>
 															<div class="col-md-3">
-																<div class="panel panel-info">
+																<?php
+																	if($_SESSION['Orcatrata']['AprovadoOrca'] == "S"){
+																		$cor2 = 'info';
+																	}else{
+																		$cor2 = 'warning';
+																	}
+																?>
+																<div class="panel panel-<?php echo $cor2; ?>">
 																	<div class="panel-heading">
 																		<div class="row">
 																			<div class="col-md-12 text-left">

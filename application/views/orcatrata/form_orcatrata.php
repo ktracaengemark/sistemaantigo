@@ -1779,7 +1779,7 @@
 														<div id="FinalizadoOrca" <?php echo $div['FinalizadoOrca']; ?>>
 															<div id="CombinadoFrete" <?php echo $div['CombinadoFrete']; ?>>
 																<div class="col-md-3">
-																	<div class="panel panel-info">
+																	<div class="panel panel-warning">
 																		<div class="panel-heading">
 																			<div class="row">
 																				<div class="col-md-12 text-left">
