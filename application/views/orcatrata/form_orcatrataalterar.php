@@ -2055,7 +2055,7 @@
 															<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
 															<?php } ?>
 															<?php if ($metodo == 2) { ?>
-
+															
 																<div class="btn-block">
 																	<span class="input-group-btn">
 																		<!--
@@ -2068,15 +2068,17 @@
 																		</button>
 																	</span>
 																	<span class="input-group-btn">
-																		<a class="btn btn-lg btn-info" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $orcatrata['idApp_OrcaTrata']; ?>">
+																		<a class="btn btn-lg btn-info " name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() . 'OrcatrataPrint/imprimir/' . $orcatrata['idApp_OrcaTrata']; ?>">
 																			<span class="glyphicon glyphicon-print"></span>										
 																		</a>
 																	</span>
-																	<span class="input-group-btn">	
-																		<a class="btn btn-lg btn-warning" name="submeter5" id="submeter5" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." href="<?php echo base_url() . 'orcatrata/alterarstatus/' . $orcatrata['idApp_OrcaTrata']; ?>">
-																			<span class="glyphicon glyphicon-pencil"></span>Stt
-																		</a>
-																	</span>
+																	<?php if ($_SESSION['Usuario']['Delet_Orcam'] == "S" ) { ?>
+																		<span class="input-group-btn">
+																			<button  type="button" class="btn btn-lg btn-danger" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
+																				<span class="glyphicon glyphicon-trash"></span>Exc
+																			</button>
+																		</span>
+																	<?php } ?>	
 																</div>
 																<div class="col-md-12 alert alert-warning aguardar" role="alert" >
 																	Aguarde um instante! Estamos processando sua solicitação!
@@ -2099,11 +2101,13 @@
 																						<span class="glyphicon glyphicon-ban-circle"></span> Cancelar
 																					</button>
 																				</div>
-																				<div class="col-md-6 text-right">
-																					<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluir/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
-																						<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
-																					</a>
-																				</div>
+																				<?php if ($_SESSION['Usuario']['Delet_Orcam'] == "S" ) { ?>
+																					<div class="col-md-6 text-right">
+																						<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluir/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
+																							<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
+																						</a>
+																					</div>
+																				<?php } ?>	
 																			</div>
 																		</div>
 																	</div>
