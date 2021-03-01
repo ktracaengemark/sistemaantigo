@@ -38,6 +38,7 @@ $result = mysql_query(
 			U.CelularUsuario,
 			U.idSis_Empresa AS EmpresaUsu,
 			U.NomeEmpresa AS NomeEmpresaUsu,
+			U.Permissao,
 			C.idApp_Consulta,
 			C.idSis_Empresa AS EmpresaCon,
             C.idApp_Cliente,
@@ -49,8 +50,6 @@ $result = mysql_query(
             D.NomeContatoCliente,
             DEP.NomeClienteDep,
             PET.NomeClientePet,
-            U.Nome AS NomeUsuario,
-			U.Permissao,
             C.DataInicio,
             C.DataFim,
             C.Procedimento,
@@ -62,27 +61,23 @@ $result = mysql_query(
 			C.Recorrencias,
 			C.DataTermino
         FROM
-            Sis_Usuario AS U 
-				LEFT JOIN App_Agenda AS A ON A.idSis_Usuario = U.idSis_Usuario,
-				
 			App_Consulta AS C
+				LEFT JOIN App_Agenda AS A ON A.idApp_Agenda = C.idApp_Agenda
+				LEFT JOIN Sis_Usuario AS U ON U.idSis_Usuario = A.idSis_Usuario 
                 LEFT JOIN App_Cliente AS R ON R.idApp_Cliente = C.idApp_Cliente
                 LEFT JOIN App_ContatoCliente AS D ON D.idApp_ContatoCliente = C.idApp_ContatoCliente
                 LEFT JOIN App_ClienteDep AS DEP ON DEP.idApp_ClienteDep = C.idApp_ClienteDep
                 LEFT JOIN App_ClientePet AS PET ON PET.idApp_ClientePet = C.idApp_ClientePet
-                
                 LEFT JOIN Tab_TipoConsulta AS TC ON TC.idTab_TipoConsulta = C.idTab_TipoConsulta
 				LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = C.idSis_Empresa
         WHERE
-			A.idApp_Agenda = C.idApp_Agenda AND
-			((
-				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
-				' . $query . ' 
+			((C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
+				' . $query . '
 				' . $permissao . '
 				' . $permissao3 . ' ) 
 				' . $permissao1 . '
 				' . $permissao4 . '
-				)
+			)
 		ORDER BY 
 			C.DataInicio ASC'
 );
@@ -94,11 +89,11 @@ while ($row = mysql_fetch_assoc($result)) {
         $c = '_evento';
 		
         //(strlen(utf8_encode($row['Obs'])) > 20) ? $title = substr(utf8_encode($row['Obs']), 0, 20).'...' : $title = utf8_encode($row['Obs']);
-        $title = mb_convert_encoding($row['Obs'], "UTF-8", "ISO-8859-1");
+        $title = 'Prof: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1") . ' - Obs: ' . mb_convert_encoding($row['Obs'], "UTF-8", "ISO-8859-1");
+        $titlecliente = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
 		#$title = utf8_encode($row['NomeUsuario']);
 		#$title = utf8_encode($row['idSis_Usuario']);
-		$subtitle = mb_convert_encoding($row['NomeUsuario'], "UTF-8", "ISO-8859-1");
-
+		$subtitle = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
 		#$profissional = utf8_encode($row['NomeUsuario']);
 		#$profissional = utf8_encode($row['idApp_Agenda']);
 		$profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
@@ -110,36 +105,33 @@ while ($row = mysql_fetch_assoc($result)) {
         $c = '/' . $row['idApp_Cliente'];
 
         if ($row['Paciente'] == 'D') {
-            $title = mb_convert_encoding($row['NomeContatoCliente'], "UTF-8", "ISO-8859-1");
-            $subtitle = mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1");
-
+            $title = 'Prf: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1") . ' - Cli: ' . mb_convert_encoding($row['NomeContatoCliente'], "UTF-8", "ISO-8859-1");
+            $titlecliente = mb_convert_encoding($row['NomeContatoCliente'], "UTF-8", "ISO-8859-1");
+			$subtitle = mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1");
 			#$profissional = utf8_encode($row['NomeUsuario']);
 			#$profissional = utf8_encode($row['idApp_Agenda']);
 			$profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
 			$recorrencias = mb_convert_encoding($row['Recorrencias'], "UTF-8", "ISO-8859-1");
 			$datatermino = $row['DataTermino'];
-
 			$telefone1 = mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1");
         } else {
 
             #$title = utf8_encode($row['NomeCliente']);
-            $title = mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1");
-            $titledep = mb_convert_encoding($row['NomeClienteDep'], "UTF-8", "ISO-8859-1");
+            $title = 'Prf: ' . mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1") . ' - Cli: ' . mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1");
+            $titlecliente = mb_convert_encoding($row['NomeCliente'], "UTF-8", "ISO-8859-1");
+			$titledep = mb_convert_encoding($row['NomeClienteDep'], "UTF-8", "ISO-8859-1");
             $titlepet = mb_convert_encoding($row['NomeClientePet'], "UTF-8", "ISO-8859-1");
             #$title = $row['NomeCliente'];
             #'name' => mb_convert_encoding($row['NomeProduto'], "UTF-8", "ISO-8859-1"),
-
 			#$title = utf8_encode($row['NomeUsuario']);
 			#$subtitle = utf8_encode($row['NomeUsuario']);
-            $subtitle = mb_convert_encoding($row['NomeUsuario'], "UTF-8", "ISO-8859-1");
-
+            $subtitle = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
 			#$profissional = utf8_encode($row['NomeUsuario']);
 			#$profissional = utf8_encode($row['idApp_Agenda']);
 			#$profissional = utf8_encode($row['idSis_Usuario']);
             $profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
 			$recorrencias = mb_convert_encoding($row['Recorrencias'], "UTF-8", "ISO-8859-1");
 			$datatermino = $row['DataTermino'];
-
 			#$telefone1 = utf8_encode($row['CelularCliente']);
             $telefone1 = mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1");
 
@@ -188,6 +180,7 @@ while ($row = mysql_fetch_assoc($result)) {
     $event_array[] = array(
         'id' => $row['idApp_Consulta'],
         'title' => $title,
+        'titlecliente' => $titlecliente,
         'titledep' => $titledep,
         'titlepet' => $titlepet,
         'subtitle' => $subtitle,
