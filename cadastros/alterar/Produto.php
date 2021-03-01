@@ -5,7 +5,7 @@ include_once '../../conexao.php';
 $Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 $id = filter_var($Dados['id_Produto'], FILTER_SANITIZE_STRING);
-$produto = filter_var($Dados['Produtos'], FILTER_SANITIZE_STRING);
+$produto = filter_var($Dados['AlterarProdutos'], FILTER_SANITIZE_STRING);
 $vendasite = filter_var($Dados['VendaSite_Alterar'], FILTER_SANITIZE_STRING);
 $vendabalcao = filter_var($Dados['VendaBalcao_Alterar'], FILTER_SANITIZE_STRING);
 

@@ -52,7 +52,7 @@ function codigo(id, tabela){
 	$('#Nome_Prod').val(nomeproduto + ' ' + opcao1 + ' ' + opcao2);
 
     $.ajax({
-		url: window.location.origin+ '/' + app + '/pesquisas/Pesquisa.php?q='+ tabela +'&id=' + id,
+		url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Pesquisa.php?q='+ tabela +'&id=' + id,
         dataType: "json",
         success: function (data) {
 			if(tabela == "idTab_Produto"){
@@ -1282,7 +1282,7 @@ $(document).ready(function(){
 		var modal = $(this)
 		modal.find('.modal-title').text('id do Produto: ' + recipientidproduto)
 		modal.find('#id_Produto').val(recipientidproduto)
-		modal.find('#Produtos').val(recipientproduto)
+		modal.find('#AlterarProdutos').val(recipientproduto)
 		if(recipientvendasite == 'S'){
 			//$("#VendaSite_Alterar_Sim").prop('checked', true);
 			modal.find('#VendaSite_Alterar_Sim').prop('checked', true);
@@ -1303,10 +1303,10 @@ $(document).ready(function(){
 		//alert('ok - Alterar o Produto');
 		
 		event.preventDefault();
-		var produto = $('#Produtos').val();
+		var produto = $('#AlterarProdutos').val();
 		//var vendasite = $('#VendaSite').val();
 		//console.log(vendasite);
-		if($('#Produtos').val() == ""){
+		if($('#AlterarProdutos').val() == ""){
 			//Alerta de campo  vazio
 			$("#msg-error-alterar-produto").html('<div class="alert alert-danger" role="alert">Necessário prencher todos os campos!</div>');						
 		}else{
