@@ -480,12 +480,6 @@
 																	</a>
 																</div>
 															<?php } ?>
-															<div class="col-md-2">
-																<label >Alterações</label><br>
-																<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
-																	<span class="glyphicon glyphicon-save"></span> Próximo Passo
-																</button>
-															</div>
 															<?php if (isset($usado['produto']) && $usado['produto'] == "N" && ($metodo == 2 || $metodo == 3)) { ?>	
 																<div class="col-md-2">
 																	<label >Produto</label><br>
@@ -494,6 +488,12 @@
 																	</button>
 																</div>
 															<?php } ?>
+															<div class="col-md-2">
+																<label >Alterações</label><br>
+																<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
+																	<span class="glyphicon glyphicon-save"></span> Próximo Passo
+																</button>
+															</div>
 														<?php } ?>
 														<?php if ($metodo == 4) { ?>
 															<div class="col-md-2">
