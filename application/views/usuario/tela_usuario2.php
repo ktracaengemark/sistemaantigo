@@ -23,6 +23,14 @@
 							<li role="separator" class="divider"></li>
 							<?php if ($_SESSION['log']['idSis_Empresa'] == 5 ) { ?>
 								<li>
+									<a <?php if (preg_match("/usuario2\/associadoalterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
+										<a href="<?php echo base_url() . 'usuario2/associadoalterar/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
+											<span class="glyphicon glyphicon-edit"></span> Editar Dados do Usuário
+										</a>
+									</a>
+								</li>
+								<li role="separator" class="divider"></li>
+								<li>
 									<a <?php if (preg_match("/usuario2\/permissoes\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
 										<a href="<?php echo base_url() . 'usuario2/permissoes/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
 											<span class="glyphicon glyphicon-edit"></span> Editar Permissões do Usuário
@@ -42,7 +50,7 @@
 							<li>
 								<a <?php if (preg_match("/usuario2\/alterarconta\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
 									<a href="<?php echo base_url() . 'usuario2/alterarconta/' . $_SESSION['Usuario']['idSis_Usuario']; ?>">
-										<span class="glyphicon glyphicon-edit"></span> Editar Conta
+										<span class="glyphicon glyphicon-edit"></span> Editar Conta Comissão
 									</a>
 								</a>
 							</li>

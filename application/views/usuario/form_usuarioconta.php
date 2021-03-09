@@ -37,13 +37,19 @@
 											<div class="col-md-8">
 												<label for="Nome">Nome do Usuário:</label>
 												<input type="text" class="form-control" id="Nome" maxlength="45" readonly=''
-														autofocus name="Nome"  value="<?php echo $query['Nome']; ?>">
+														 name="Nome"  value="<?php echo $query['Nome']; ?>">
 												<?php echo form_error('Nome'); ?>
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="row">
+											<div class="col-md-4">
+												<label for="Conta">Chave PIX / Conta:</label>
+												<input type="text" class="form-control" id="Conta" maxlength="100"
+														autofocus name="Conta"  value="<?php echo $query['Conta']; ?>">
+												<?php echo form_error('Conta'); ?>
+											</div>
 											<div class="col-md-4">
 												<label for="Banco">Banco:</label>
 												<input type="text" class="form-control" id="Banco" maxlength="100"
@@ -55,12 +61,6 @@
 												<input type="text" class="form-control" id="Agencia" maxlength="100" 
 														 name="Agencia"  value="<?php echo $query['Agencia']; ?>">
 												<?php echo form_error('Agencia'); ?>
-											</div>
-											<div class="col-md-4">
-												<label for="Conta">Conta:</label>
-												<input type="text" class="form-control" id="Conta" maxlength="100"
-														 name="Conta"  value="<?php echo $query['Conta']; ?>">
-												<?php echo form_error('Conta'); ?>
 											</div>
 										</div>
 									</div>
