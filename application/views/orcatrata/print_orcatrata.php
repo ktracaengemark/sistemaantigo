@@ -236,7 +236,15 @@
 													<h5>Colab.:<?php echo '<strong>' . $usuario['Nome'] . '</strong>' ?></h5>
 																					
 													
-													<h4 class="text-center">Orçamento<?php echo ' - <strong>' . $query['idApp_OrcaTrata'] . '</strong>' ?> </h4>
+													<h4 class="text-center">
+														Orçamento<?php
+																	if($query['Tipo_Orca'] == "B"){
+																		echo ' - <strong>' . $query['idApp_OrcaTrata'] . '</strong> - Balcão';
+																	}elseif($query['Tipo_Orca'] == "O"){
+																		echo ' - <strong>' . $query['idApp_OrcaTrata'] . '</strong> - Online';
+																	}
+																?> 
+													</h4>
 													
 													</td>
 												</tr>

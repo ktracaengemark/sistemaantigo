@@ -185,7 +185,7 @@
 					<?php echo form_open_multipart($form_open_path); ?>
 					<div class="panel panel-<?php echo $panel; ?>">
 						<div class="panel-heading">
-							<h4 class="text-center"><b>Colaborador: <?php echo $_SESSION['Orcatrata']['Nome'] ?> - <?php echo $titulo; ?> - <?php echo $orcatrata['idApp_OrcaTrata'] ?></b></h4>
+							<h4 class="text-center"><b>Colaborador: <?php echo $_SESSION['Orcatrata']['Nome'] ?></b></h4>
 							<div style="overflow: auto; height: auto; ">
 								<div class="panel-group">
 									
@@ -194,7 +194,16 @@
 												<input type="hidden" name="Negocio" id="Negocio" value="1"/>
 												<input type="hidden" name="Empresa" id="Empresa" value="<?php echo $_SESSION['log']['idSis_Empresa']; ?>"/>
 												<input type="hidden" name="NivelEmpresa" id="NivelEmpresa" value="<?php echo $_SESSION['log']['NivelEmpresa']; ?>"/>
-												<h4 class="mb-3"><b>Alterar Status da Receita</b></h4>
+												<h4 class="mb-3">
+														<b>Editar Status Receita</b> - Nº <?php echo $orcatrata['idApp_OrcaTrata'] ?> - 
+																					<?php 
+																						if($orcatrata['Tipo_Orca'] == "B"){
+																							echo 'Balcão';
+																						} elseif($orcatrata['Tipo_Orca'] == "O"){
+																							echo 'OnLine';
+																						}
+																					?>
+													</h4>
 												<div class="form-group">	
 													<div class="row">
 														<div class="col-md-4">
