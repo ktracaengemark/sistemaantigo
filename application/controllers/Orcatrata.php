@@ -80,6 +80,10 @@ class Orcatrata extends CI_Controller {
 			'ValorDev',
 			'QtdPrdOrca',
 			'QtdSrvOrca',
+			'PrazoProdutos',
+			'PrazoServicos',
+			'PrazoProdServ',
+			'PrazoCorreios',
             'ValorEntradaOrca',
 			'ValorDinheiro',
 			'ValorTroco',
@@ -199,6 +203,8 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['ValorComissao']) ? $data['orcatrata']['ValorComissao'] = '0.00' : FALSE;
 		(!$data['orcatrata']['QtdPrdOrca']) ? $data['orcatrata']['QtdPrdOrca'] = '0' : FALSE;
 		(!$data['orcatrata']['QtdSrvOrca']) ? $data['orcatrata']['QtdSrvOrca'] = '0' : FALSE;
+		(!$data['orcatrata']['PrazoProdutos']) ? $data['orcatrata']['PrazoProdutos'] = '0' : FALSE;
+		(!$data['orcatrata']['PrazoServicos']) ? $data['orcatrata']['PrazoServicos'] = '0' : FALSE;
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
 		//(!$data['orcatrata']['ValorExtraOrca']) ? $data['orcatrata']['ValorExtraOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['ValorSomaOrca']) ? $data['orcatrata']['ValorSomaOrca'] = '0.00' : FALSE;
@@ -1107,6 +1113,10 @@ class Orcatrata extends CI_Controller {
 			'ValorDev',
 			'QtdPrdOrca',
 			'QtdSrvOrca',
+			'PrazoProdutos',
+			'PrazoServicos',
+			'PrazoProdServ',
+			'PrazoCorreios',
             'ValorEntradaOrca',
 			'ValorDinheiro',
 			'ValorTroco',
@@ -1192,6 +1202,8 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['ValorComissao']) ? $data['orcatrata']['ValorComissao'] = '0.00' : FALSE;
 		(!$data['orcatrata']['QtdPrdOrca']) ? $data['orcatrata']['QtdPrdOrca'] = '0' : FALSE;
 		(!$data['orcatrata']['QtdSrvOrca']) ? $data['orcatrata']['QtdSrvOrca'] = '0' : FALSE;
+		(!$data['orcatrata']['PrazoProdutos']) ? $data['orcatrata']['PrazoProdutos'] = '0' : FALSE;
+		(!$data['orcatrata']['PrazoServicos']) ? $data['orcatrata']['PrazoServicos'] = '0' : FALSE;
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
 		//(!$data['orcatrata']['ValorFrete']) ? $data['orcatrata']['ValorFrete'] = '0.00' : FALSE;
 		//(!$data['orcatrata']['ValorExtraOrca']) ? $data['orcatrata']['ValorExtraOrca'] = '0.00' : FALSE;
@@ -2166,6 +2178,10 @@ class Orcatrata extends CI_Controller {
 			'ValorComissao',
 			'QtdPrdOrca',
 			'QtdSrvOrca',
+			'PrazoProdutos',
+			'PrazoServicos',
+			'PrazoProdServ',
+			'PrazoCorreios',
 			'ValorDev',
             'ValorEntradaOrca',
 			'ValorDinheiro',
@@ -3733,6 +3749,10 @@ class Orcatrata extends CI_Controller {
 			'ValorComissao',
 			'QtdPrdOrca',
 			'QtdSrvOrca',
+			'PrazoProdutos',
+			'PrazoServicos',
+			'PrazoProdServ',
+			'PrazoCorreios',
 			'ValorDev',
             'ValorEntradaOrca',
 			'ValorDinheiro',
@@ -5351,6 +5371,10 @@ class Orcatrata extends CI_Controller {
 			'ValorComissao',
 			'QtdPrdOrca',
 			'QtdSrvOrca',
+			'PrazoProdutos',
+			'PrazoServicos',
+			'PrazoProdServ',
+			'PrazoCorreios',
 			'ValorDev',
             'ValorEntradaOrca',
 			'ValorDinheiro',
@@ -6592,6 +6616,10 @@ class Orcatrata extends CI_Controller {
 			'ValorComissao',
 			'QtdPrdOrca',
 			'QtdSrvOrca',
+			'PrazoProdutos',
+			'PrazoServicos',
+			'PrazoProdServ',
+			'PrazoCorreios',
 			'ValorDev',
             'ValorEntradaOrca',
 			'ValorDinheiro',
@@ -8144,6 +8172,10 @@ class Orcatrata extends CI_Controller {
 			'ValorDev',
 			'QtdPrdOrca',
 			'QtdSrvOrca',
+			'PrazoProdutos',
+			'PrazoServicos',
+			'PrazoProdServ',
+			'PrazoCorreios',
             'ValorEntradaOrca',
 			'ValorDinheiro',
 			'ValorTroco',
@@ -8225,6 +8257,8 @@ class Orcatrata extends CI_Controller {
 		(!$data['orcatrata']['ValorComissao']) ? $data['orcatrata']['ValorComissao'] = '0.00' : FALSE;
 		(!$data['orcatrata']['QtdPrdOrca']) ? $data['orcatrata']['QtdPrdOrca'] = '0' : FALSE;
 		(!$data['orcatrata']['QtdSrvOrca']) ? $data['orcatrata']['QtdSrvOrca'] = '0' : FALSE;
+		(!$data['orcatrata']['PrazoProdutos']) ? $data['orcatrata']['PrazoProdutos'] = '0' : FALSE;
+		(!$data['orcatrata']['PrazoServicos']) ? $data['orcatrata']['PrazoServicos'] = '0' : FALSE;
 		(!$data['orcatrata']['ValorDev']) ? $data['orcatrata']['ValorDev'] = '0.00' : FALSE;
 		//(!$data['orcatrata']['ValorExtraOrca']) ? $data['orcatrata']['ValorExtraOrca'] = '0.00' : FALSE;
 		(!$data['orcatrata']['ValorSomaOrca']) ? $data['orcatrata']['ValorSomaOrca'] = '0.00' : FALSE;
@@ -9203,6 +9237,10 @@ class Orcatrata extends CI_Controller {
 			'ValorComissao',
 			'QtdPrdOrca',
 			'QtdSrvOrca',
+			'PrazoProdutos',
+			'PrazoServicos',
+			'PrazoProdServ',
+			'PrazoCorreios',
 			'ValorDev',
             'ValorEntradaOrca',
 			'ValorDinheiro',

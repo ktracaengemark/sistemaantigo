@@ -2216,19 +2216,34 @@ function buscaEnderecoFornecedor(id) {
 	
 }
 
+function valorTipoFrete(valor, nome) {
+	console.log(valor + ' Tipo de entrega');
+	$('#ValorTipoFrete').val(valor);
+	if(valor == 1 || valor == 2){
+		$('#PrazoCorreios').val('0');
+		$('#ValorFrete').val('');
+	}
+	calculaPrazoEntrega();
+	calculaTotal();
+	calculaTroco();
+	calculaParcelas();
+}
+
 function Procuraendereco() {
 	//alert('Procuraendereco - funcionando');
+	
+	var tipofrete=$('#ValorTipoFrete').val();
 	var Dados=$(this).serialize();
 	var CepDestino=$('#Cep').val();
 	var CepOrigem=$('#CepOrigem').val();
-	//console.log(CepOrigem);
+	console.log(tipofrete + ' Tipo de entrega');
 	$.ajax({
 		url: 'https://viacep.com.br/ws/'+CepDestino+'/json/',
 		method:'get',
 		dataType:'json',
 		data: Dados,
 		success:function(Dados){
-			//console.log(Dados);
+			console.log(Dados);
 			$('.ResultCep').html('').append('<div>'+Dados.logradouro+','+Dados.bairro+'-'+Dados.localidade+'-'+Dados.uf+'</div>');			
 			//$('#Cep').val(CepDestino);
 			$('#Logradouro').val(Dados.logradouro);
@@ -2244,9 +2259,16 @@ function Procuraendereco() {
 			$('#Cep').val('');
 		}
 	});
+	
+	if(tipofrete == 3){
+		LoadFrete();
+	}
+	
 }
 
+/*Atualiza o Prazo de Entrega do Correios e o valor do frete no Orcatrata */
 function LoadFrete() {
+	var prazo_prodserv = $('#PrazoProdServ').val();
 	var dataorca = $('#DataOrca').val();
 		const dataorcaSplit = dataorca.split('/');
 		const day = dataorcaSplit[0]; 
@@ -2285,11 +2307,18 @@ function LoadFrete() {
 				Codigo: Codigo,
 				Diametro: Diametro},
 		success:function(data){
-			//console.log(data);
+			console.log(data);
 			$('.ResultadoPrecoPrazo').html(data);
 			
-			var prazo_entrega = $('#prazo_entrega').val();
+			var prazo_correios = $('#prazo_correios').val();
+			
+			var prazo_entrega =  -(-prazo_prodserv -prazo_correios);
+			$('#PrazoCorreios').val(prazo_correios);
 			$('#PrazoEntrega').val(prazo_entrega);
+			
+			console.log(prazo_prodserv);
+			console.log(prazo_correios);
+			console.log(prazo_entrega);
 			
 			var valor_frete2 = $('#valor_frete').val();
 			$('#ValorFrete').val(valor_frete2);
@@ -2337,6 +2366,10 @@ function LoadFrete() {
 			
 			$('#Cep').val(CepDestino);
 			
+			calculaTotal();
+			calculaTroco();
+			calculaParcelas();
+			
 		}, beforeSend: function(){
 		
 		}, error: function(jqXHR, textStatus, errorThrown){
@@ -2347,6 +2380,176 @@ function LoadFrete() {
 			$('#Cep').val('');
 		}
 	});
+	
+}
+
+/*Atualiza o Prazo de Entrega dos Produtos no Orcatrata (campo = PrazoProduto, soma = QtdSoma, somaproduto = ProdutoSoma)*/
+function calculaPrazoProdutos(campo, soma, somaproduto, excluir, produtonum, countmax, adicionar, hidden) {
+	//alert('calculaPrazoProdutos');
+	prazoprodutos = 0;
+    i = j = 1;
+
+    if(excluir == 1){
+        for(k=0; k<$("#"+countmax).val(); k++) {
+            /*
+            if(($("#"+hidden+i).val()))
+                console.log('>> existe '+$("#"+campo+i).val()+' <> '+hidden+' <> '+produtonum+' <> '+$("#"+somaproduto).html()+' <<>> '+i+' '+k);
+            else
+                console.log('>> não '+$("#"+campo+i).val()+' <> '+hidden+' <> '+produtonum+' <> '+$("#"+somaproduto).html()+' <<>> '+i+' '+k);
+            */
+            if(i != produtonum && ($("#"+campo+i).val())) {
+                prazoproduto = parseInt($("#"+campo+i).val());
+				console.log(prazoproduto + ' - Prazo de cada produto');
+				if(prazoproduto >= prazoprodutos){
+					prazoprodutos = prazoproduto;
+				}else{
+					prazoprodutos = prazoprodutos;
+				}
+				j++;
+            }
+            i++;
+        }
+    }
+    else {
+        if(adicionar)
+            $("#"+countmax).val((parseInt($("#"+countmax).val())+1));
+
+        for(k=1; k<=$("#"+countmax).val(); k++) {
+            if($("#"+campo+k).val()) {
+                prazoproduto = parseInt($("#"+campo+k).val());
+				console.log(prazoproduto + ' - Prazo de cada produto');
+				if(prazoproduto >= prazoprodutos){
+					prazoprodutos = prazoproduto;
+				}else{
+					prazoprodutos = prazoprodutos;
+				}
+				j++;
+            }
+            //j++;
+        }
+    }
+	
+	console.log(prazoprodutos + ' - Prazo Total dos produtos');
+
+	$("#PrazoProdutos").val(prazoprodutos);
+	
+    console.log('>> ' + $("#PrazoProdutos").val());
+	
+	if(prazoprodutos >= 1){
+		$('.PrazoProdutos').show();
+	}else{
+		$('.PrazoProdutos').hide();
+	}
+	
+	calculaOrcamento();
+	//break;
+}
+
+/*Atualiza o Prazo de Entrega dos Serviços no Orcatrata (campo = PrazoServico, soma = QtdSoma, somaproduto = ServicoSoma)*/
+function calculaPrazoServicos(campo, soma, somaproduto, excluir, produtonum, countmax, adicionar, hidden) {
+	//alert('calculaPrazoServicos');
+	prazoservicos = 0;
+    i = j = 1;
+
+    if(excluir == 1){
+        for(k=0; k<$("#"+countmax).val(); k++) {
+            /*
+            if(($("#"+hidden+i).val()))
+                console.log('>> existe '+$("#"+campo+i).val()+' <> '+hidden+' <> '+produtonum+' <> '+$("#"+somaproduto).html()+' <<>> '+i+' '+k);
+            else
+                console.log('>> não '+$("#"+campo+i).val()+' <> '+hidden+' <> '+produtonum+' <> '+$("#"+somaproduto).html()+' <<>> '+i+' '+k);
+            */
+            if(i != produtonum && ($("#"+campo+i).val())) {
+                prazoservico = parseInt($("#"+campo+i).val());
+				console.log(prazoservico + ' - Prazo de cada produto');
+				if(prazoservico >= prazoservicos){
+					prazoservicos = prazoservico;
+				}else{
+					prazoservicos = prazoservicos;
+				}
+				j++;
+            }
+            i++;
+        }
+    }
+    else {
+        if(adicionar)
+            $("#"+countmax).val((parseInt($("#"+countmax).val())+1));
+
+        for(k=1; k<=$("#"+countmax).val(); k++) {
+            if($("#"+campo+k).val()) {
+                prazoservico = parseInt($("#"+campo+k).val());
+				console.log(prazoservico + ' - Prazo de cada produto');
+				if(prazoservico >= prazoservicos){
+					prazoservicos = prazoservico;
+				}else{
+					prazoservicos = prazoservicos;
+				}
+				j++;
+            }
+            //j++;
+        }
+    }
+	
+	console.log(prazoservicos + ' - Prazo Total dos servicos');
+
+	$("#PrazoServicos").val(prazoservicos);
+	
+    console.log('>> ' + $("#PrazoServicos").val());
+	
+	if(prazoservicos >= 1){
+		$('.PrazoServicos').show();
+	}else{
+		$('.PrazoServicos').hide();
+	}
+	
+	calculaOrcamento();
+	//break;	
+}
+
+/*Atualiza o Prazo de Entrega Total no Orcatrata */
+function calculaPrazoEntrega() {
+	//alert('calculaPrazoEntrega');
+	
+	var prazo_prodserv = $('#PrazoProdServ').val();	
+	if($('#PrazoCorreios').val()){
+		var prazo_correios = $('#PrazoCorreios').val();
+	}else{
+		var prazo_correios = 0;
+	}
+	
+	var prazo_entrega =  -(-prazo_prodserv -prazo_correios);
+	
+	$('#PrazoEntrega').val(prazo_entrega);
+
+	var dataorca = $('#DataOrca').val();
+		const dataorcaSplit = dataorca.split('/');
+		const day = dataorcaSplit[0]; 
+		const month = dataorcaSplit[1];
+		const year = dataorcaSplit[2];
+	var datapedido = new Date(year, month - 1, day);
+	
+	//var d = new Date();
+	var d = new Date(datapedido);
+	var data_entrega    = new Date(d.getTime() + (prazo_entrega * 24 * 60 * 60 * 1000));
+	
+	var mes = (data_entrega.getMonth() + 1);
+	if(mes < 10){
+		var novo_mes = "0" + mes;
+	}else{
+		var novo_mes = mes;
+	}
+	
+	var dia = (data_entrega.getDate());
+	if(dia < 10){
+		var novo_dia = "0" + dia;
+	}else{
+		var novo_dia = dia;
+	}
+	
+	var data_aparente = novo_dia + "/" + novo_mes + "/" + data_entrega.getFullYear();
+	$('#DataEntregaOrca').val(data_aparente);	
+	
 	
 }
 
@@ -2442,7 +2645,7 @@ function DesabilitaBotaoExcluir (valor) {
     }
 }
 
-/*Atualiza o somatório do Qtd no Orcatrata*/
+/*Atualiza o somatório do Qtd de Produtos no Orcatrata*/
 function calculaQtdSoma(campo, soma, somaproduto, excluir, produtonum, countmax, adicionar, hidden) {
 
     qtdsoma = 0;
@@ -2487,7 +2690,7 @@ function calculaQtdSoma(campo, soma, somaproduto, excluir, produtonum, countmax,
 	}
 }
 
-/*Atualiza o somatório do Qtd Devolvido no Orcatrata*/
+/*Atualiza o somatório do Qtd Serviços no Orcatrata*/
 function calculaQtdSomaDev(campo, soma, somaproduto, excluir, produtonum, countmax, adicionar, hidden) {
 
     qtdsoma = 0;
@@ -2903,9 +3106,6 @@ function adicionaDias(mod) {
 	
 	
 }
-
-
-
 
 /*
 $(document).on('focus',".input_fields_parcelas", function(){
@@ -5122,10 +5322,12 @@ function calculaOrcamento() {
 	var subtotalservico = 0.00;
 	var subtotalcomissaoservico = 0.00;
 	var subtotalqtdservico = 0.00;
+	var prazoservicos = 0.00;
 	
 	var subtotal = 0.00;
 	var subtotalcomissao = 0.00;
 	var subtotalqtd = 0.00;
+	var prazoprodutos = 0.00;
 	
     //variável incrementadora
     var i = 0;
@@ -5140,6 +5342,16 @@ function calculaOrcamento() {
 			subtotalservico += parseFloat($('#SubtotalServico'+i).val().replace(".","").replace(",","."));
 			subtotalcomissaoservico += parseFloat($('#SubtotalComissaoServico'+i).val());
 			subtotalqtdservico += parseFloat($('#SubtotalQtdServico'+i).val().replace(".","").replace(",","."));
+			
+			prazoservico = parseFloat($('#PrazoServico'+i).val().replace(".","").replace(",","."));
+			
+			console.log(prazoservico + ' - Prazo de cada servico');
+			
+			if(prazoservico >= prazoservicos){
+				prazoservicos = prazoservico;
+			}else{
+				prazoservicos = prazoservicos;
+			}
 			//incrementa a variável i
         }
 		i++;
@@ -5155,9 +5367,25 @@ function calculaOrcamento() {
 			//subtotalcomissao += parseFloat($('#SubtotalComissaoProduto'+i).val().replace(".","").replace(",","."));
 			subtotalcomissao += parseFloat($('#SubtotalComissaoProduto'+i).val());
 			subtotalqtd += parseFloat($('#SubtotalQtdProduto'+i).val().replace(".","").replace(",","."));
+			
+			prazoproduto = parseFloat($('#PrazoProduto'+i).val().replace(".","").replace(",","."));
+			
+			console.log(prazoproduto + ' - Parzo de cada produto');
+			
+			if(prazoproduto >= prazoprodutos){
+				prazoprodutos = prazoproduto;
+			}else{
+				prazoprodutos = prazoprodutos;
+			}
+			
 		}
 		i++;
+		
+		
     }
+	console.log(prazoprodutos + ' - Parzo Total dos produtos');
+	console.log(prazoservicos + ' - Prazo Total dos servicos');
+
 	//console.log(subtotalcomissao + ' - Total Comissão produto');
     //calcula o subtotal, configurando para duas casas decimais e trocando o
     //ponto para o vírgula como separador de casas decimais
@@ -5165,7 +5393,9 @@ function calculaOrcamento() {
 	subtotal = mascaraValorReal(subtotal);
 	//subtotalcomissao = mascaraValorReal(subtotalcomissao);
 	subtotalqtd1 = subtotalqtd;
+	prazoprodutos1 = prazoprodutos;
 	subtotalqtd2 = subtotalqtdservico;
+	prazoservicos1 = prazoservicos;
 	//console.log(subtotalqtd1 + ' - Quantidade Total de produtos');
 	//console.log(subtotalqtd2 + ' - Quantidade Total de servicos');
 	//console.log(subtotal + ' - Valor Total de produtos');
@@ -5180,8 +5410,17 @@ function calculaOrcamento() {
 	$('#ValorComissao').val(valorcomissao);
 	
 	$('#QtdPrdOrca').val(subtotalqtd1);
+	$('#PrazoProdutos').val(prazoprodutos1);
 	
 	$('#QtdSrvOrca').val(subtotalqtd2);
+	$('#PrazoServicos').val(prazoservicos1);
+	
+	if(prazoprodutos1 >= prazoservicos1){
+		$('#PrazoProdServ').val(prazoprodutos1);
+	}else{
+		$('#PrazoProdServ').val(prazoservicos1);
+	}
+	calculaPrazoEntrega();
     calculaResta($("#ValorEntradaOrca").val());
 	calculaTotal($("#ValorEntradaOrca").val());
 }
@@ -5619,7 +5858,9 @@ $(document).ready(function () {
 									<div class="row">\
 										<div class="col-md-2">\
 											<label for="PrazoProduto">Prazo(Dias)</label><br>\
-											<input type="text" class="form-control Numero" maxlength="3" placeholder="0" id="PrazoProduto'+pc+'" name="PrazoProduto'+pc+'" value="0" >\
+											<input type="text" class="form-control Numero" maxlength="3" placeholder="0" id="PrazoProduto'+pc+'"\
+												onkeyup="calculaPrazoProdutos(\'PrazoProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')"\
+												name="PrazoProduto'+pc+'" value="0" >\
 										</div>\
 										<div class="col-md-10">\
 											<label for="ObsProduto">Observacao</label><br>\
@@ -5867,7 +6108,9 @@ $(document).ready(function () {
 									<div class="row">\
 										<div class="col-md-2">\
 											<label for="PrazoServico">Prazo(Dias)</label><br>\
-											<input type="text" class="form-control Numero" maxlength="3" placeholder="0" id="PrazoServico'+ps+'" name="PrazoServico'+ps+'" value="0">\
+											<input type="text" class="form-control Numero" maxlength="3" placeholder="0" id="PrazoServico'+ps+'"\
+												onkeyup="calculaPrazoServicos(\'PrazoServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')"\
+												name="PrazoServico'+ps+'" value="0" >\
 										</div>\
 										<div class="col-md-10">\
 											<label for="ObsServico">Observacao</label><br>\
