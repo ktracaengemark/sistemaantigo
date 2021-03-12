@@ -124,7 +124,7 @@
 																	</div>
 																</div>
 																<div class="col-md-2">
-																	<label for="TempoDeEntrega">Tempo De Entrega</label>
+																	<label for="TempoDeEntrega">Prazo De Entrega</label>
 																	<div class="input-group">
 																		<?php if ($metodo == 6) { ?>
 																			<input type="text" class="form-control Numero text-right" readonly="" value="<?php echo $_SESSION['Valor']['TempoDeEntrega'] ?>">
@@ -276,19 +276,20 @@
 																</a>
 															</div>
 															<div class="col-md-2">
+																<label >Preço, Prazo e Promoção</label><br>
 																<a class="btn btn-success btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/tela_precos/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
-																	<span class="glyphicon glyphicon-usd"></span> Preços e Promoções
+																	<span class="glyphicon glyphicon-usd"></span> Ver
 																</a>
 															</div>
 														<?php }elseif($metodo == 6){ ?>
 															<div class="col-md-2">
-																<label >Apenas este Preço</label><br>
+																<label >Este Preço e Prazo</label><br>
 																<a class="btn btn-warning btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/alterar_valor/' . $valor['idTab_Valor'] ?>" role="button">
 																	<span class="glyphicon glyphicon-edit"></span> Editar
 																</a>
 															</div>
 															<div class="col-md-2">
-																<label >Todos os Preços</label><br>
+																<label >Todos os Preços e Prazos</label><br>
 																<a class="btn btn-warning btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" href="<?php echo base_url() . 'produtos/alterar_precos/' . $_SESSION['Valor']['idTab_Produtos'] ?>" role="button">
 																	<span class="glyphicon glyphicon-edit"></span> Editar
 																</a>

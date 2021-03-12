@@ -260,7 +260,7 @@
 																			</div>
 																		</div>
 																		<div class="col-md-2">
-																			<label for="TempoDeEntrega">Tempo De Entrega<?php echo $i ?></label>
+																			<label for="TempoDeEntrega">Prazo De Entrega<?php echo $i ?></label>
 																			<div class="input-group">
 																				<input type="text" class="form-control Numero text-right" id="TempoDeEntrega<?php echo $i ?>" maxlength="3" placeholder="0"
 																					name="TempoDeEntrega<?php echo $i ?>" value="<?php echo $valor[$i]['TempoDeEntrega'] ?>">
@@ -474,7 +474,7 @@
 															<?php } ?>
 															<?php if ($metodo == 7) { ?>
 																<div class="col-md-2">
-																<label >Preço</label><br>
+																<label >Preço e Prazo</label><br>
 																	<a class="btn btn-md btn-danger btn-block"  name="submeter2" id="submeter2" onclick="adiciona_precos()">
 																		<span class="glyphicon glyphicon-plus"></span> Adicionar
 																	</a>
@@ -503,14 +503,14 @@
 																</a>
 															</div>
 															<div class="col-md-2">
-																<label >Preços e Promoções</label><br>
+																<label >Preço, Prazo e Promoção</label><br>
 																<a class="btn btn-success btn-block" href="<?php echo base_url() . 'produtos/tela_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
 																	<span class="glyphicon glyphicon-usd"></span> Ver
 																</a>
 															</div>
 														<?php }elseif($metodo == 6){ ?>
 															<div class="col-md-2">
-																<label >Preço</label><br>
+																<label >Preços e Prazos</label><br>
 																<a class="btn btn-danger btn-block" href="<?php echo base_url() . 'produtos/alterar_precos/' . $produtos['idTab_Produtos'] ?>" role="button">
 																	<span class="glyphicon glyphicon-edit"></span> Cadastrar / Editar
 																</a>
