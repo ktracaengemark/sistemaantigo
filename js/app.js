@@ -302,10 +302,10 @@ $(document).ready(function(){
 			
 			//Receber os dados do formulário
 			var dados = $("#insert_clientedep_form").serialize();
-			console.log(dados);
+			//console.log(dados);
 			
 			$.post(window.location.origin+ '/' + app + '/cadastros/inserir/ClienteDep.php?', dados, function (retorna){
-			 console.log(retorna);
+			 //console.log(retorna);
 				if(retorna == 1){
 					//Limpar os campo
 					$('#insert_clientedep_form')[0].reset();
@@ -349,10 +349,10 @@ $(document).ready(function(){
 			
 			//Receber os dados do formulário
 			var dados = $("#insert_clientepet_form").serialize();
-			console.log(dados);
+			//console.log(dados);
 			
 			$.post(window.location.origin+ '/' + app + '/cadastros/inserir/ClientePet.php?', dados, function (retorna){
-			 console.log(retorna);
+			 //console.log(retorna);
 				if(retorna == 1){
 					//Limpar os campo
 					$('#insert_clientepet_form')[0].reset();
@@ -1400,11 +1400,11 @@ $(document).ready(function(){
 			
 			//Receber os dados do formulário
 			var dados = $("#excluir_produto_form").serialize();
-			console.log(dados);
+			//console.log(dados);
 			
 			$.post(window.location.origin+ '/' + app + '/cadastros/excluir/Produto.php?', dados, function (retorna){
 			 
-				console.log(retorna);
+				//console.log(retorna);
 				
 				if(retorna == 1){
 				
@@ -1606,11 +1606,11 @@ $(document).ready(function(){
 			
 			//Receber os dados do formulário
 			var dados = $("#excluir_atributo_form").serialize();
-			console.log(dados);
+			//console.log(dados);
 			
 			$.post(window.location.origin+ '/' + app + '/cadastros/excluir/Atributo.php?', dados, function (retorna){
 			 
-				console.log(retorna);
+				//console.log(retorna);
 				
 				if(retorna == 1){
 				
@@ -1740,7 +1740,7 @@ $(document).ready(function(){
 			
 			$.post(window.location.origin+ '/' + app + '/cadastros/alterar/Opcao.php?', dados, function (retorna){
 			 
-				console.log(retorna);
+				//console.log(retorna);
 				
 				if(retorna == 1){
 				
@@ -1815,7 +1815,7 @@ $(document).ready(function(){
 			
 			$.post(window.location.origin+ '/' + app + '/cadastros/excluir/Opcao.php?', dados, function (retorna){
 			 
-				console.log(retorna);
+				//console.log(retorna);
 				
 				if(retorna == 1){
 				
@@ -1864,41 +1864,6 @@ function DesabilitaBotaoFechar () {
 	$('.aguardar2').show();
 }
 
-function dateDiff() {
-	
-	var dataorca = $('#DataOrca').val();
-	var dataentregaorca = $('#DataEntregaOrca').val();
-	
-	// Digamos que este é o formato das suas datas
-	// data = '30/03/2019';
-	// Precisamos quebrar a string para retornar cada parte
-	const dataorcaSplit = dataorca.split('/');
-
-	const day = dataorcaSplit[0]; 
-	const month = dataorcaSplit[1];
-	const year = dataorcaSplit[2];
-	
-	const dataentregaorcaSplit = dataentregaorca.split('/');
-
-	const day2 = dataentregaorcaSplit[0]; 
-	const month2 = dataentregaorcaSplit[1]; 
-	const year2 = dataentregaorcaSplit[2]; 
-
-// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
-	dataorca = new Date(year, month - 1, day);
-	dataentregaorca = new Date(year2, month2 - 1, day2);
-	
-	const now = new Date(); // Data de hoje
-	const past = dataorca; // Outra data no passado
-	const past2 = dataentregaorca; // Outra data no passado
-	const diff = Math.abs(past2.getTime() - past.getTime()); // Subtrai uma data pela outra
-	const days = Math.ceil(diff / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).
-
-	// Mostra a diferença em dias
-	//console.log('Prazo de entrega: ' + days + ' dias');	
-	$('#PrazoEntrega').val(days);
-}
-
 function parseDate(texto) {
   let dataDigitadaSplit = texto.split("/");
 
@@ -1922,7 +1887,7 @@ function parseDate(texto) {
 function addData() {
 	var dataDigitada = $('#Data').val();
   //var dataDigitada = document.getElementById('Data').value;
-	console.log('Data teste: ' + dataDigitada);
+	//console.log('Data teste: ' + dataDigitada);
   //Pegar data Atual para somar
   var currentDate = parseDate(dataDigitada);
 
@@ -2216,7 +2181,46 @@ function buscaEnderecoFornecedor(id) {
 	
 }
 
+function dateDiff() {
+	
+	var dataorca = $('#DataOrca').val();
+	var dataentregaorca = $('#DataEntregaOrca').val();
+	
+	// Digamos que este é o formato das suas datas
+	// data = '30/03/2019';
+	// Precisamos quebrar a string para retornar cada parte
+	const dataorcaSplit = dataorca.split('/');
+
+	const day = dataorcaSplit[0]; 
+	const month = dataorcaSplit[1];
+	const year = dataorcaSplit[2];
+	
+	const dataentregaorcaSplit = dataentregaorca.split('/');
+
+	const day2 = dataentregaorcaSplit[0]; 
+	const month2 = dataentregaorcaSplit[1]; 
+	const year2 = dataentregaorcaSplit[2]; 
+
+// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
+	dataorca = new Date(year, month - 1, day);
+	dataentregaorca = new Date(year2, month2 - 1, day2);
+	
+	const now = new Date(); // Data de hoje
+	const past = dataorca; // Outra data no passado
+	const past2 = dataentregaorca; // Outra data no passado
+	const diff = Math.abs(past2.getTime() - past.getTime()); // Subtrai uma data pela outra
+	const days = Math.ceil(diff / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).
+
+	// Mostra a diferença em dias
+	//console.log('Prazo de entrega: ' + days + ' dias');	
+	$('#PrazoEntrega').val(days);
+}
+
 function valorTipoFrete(valor, nome) {
+	//alert('valorTipoFrete - funcionando');
+	var caminho = $('#Caminho').val();
+	//console.log(caminho + ' Caminho valorTipoFrete');
+	
 	//console.log(valor + ' Tipo de entrega');
 	$('#ValorTipoFrete').val(valor);
 	if(valor == 1 || valor == 2){
@@ -2253,21 +2257,26 @@ function Procuraendereco() {
 			$('#Cidade').val(Dados.localidade);
 			$('#Estado').val(Dados.uf);
 			$('#Referencia').val('');
+	
+			if(tipofrete == 3){
+				LoadFrete();
+			}		
+		
 		},
 		error:function(Dados){
-			alert('Cep não encontrado. Tente Novamente');
-			$('#Cep').val('');
+			alert('Cep não encontrado. Confira o Cep e Tente Novamente');
+			$('#Cep').val(CepDestino);
 		}
 	});
-	
-	if(tipofrete == 3){
-		LoadFrete();
-	}
 	
 }
 
 /*Atualiza o Prazo de Entrega do Correios e o valor do frete no Orcatrata */
 function LoadFrete() {
+	//var caminho = '../';
+	var caminho = $('#Caminho').val();
+	//console.log(caminho + ' Caminho LoadFrete');
+	
 	var prazo_prodserv = $('#PrazoProdServ').val();
 	var dataorca = $('#DataOrca').val();
 		const dataorcaSplit = dataorca.split('/');
@@ -2290,7 +2299,8 @@ function LoadFrete() {
 	var Diametro = $('#Diametro').val();
 
 	$.ajax({
-		url: '../calcula-frete_model.php',
+		url: caminho + 'calcula-frete_model.php',
+		//url: '../calcula-frete_model.php',
 		type:'POST',
 		dataType:'html',
 		cache: false,
@@ -2364,11 +2374,11 @@ function LoadFrete() {
 				//window.location = 'entrega.php';
 			}
 			
-			$('#Cep').val(CepDestino);
-			
 			calculaTotal();
 			calculaTroco();
 			calculaParcelas();
+			
+			$('#Cep').val(CepDestino);
 			
 		}, beforeSend: function(){
 		
@@ -2376,8 +2386,9 @@ function LoadFrete() {
 			//console.log('Erro');
 			$('#msg').html('<p style="color: #FF0000">Erro ao realizar o Cálculo!!</p>');
 			//window.location = 'entrega.php';
-			alert('Erro ao calcular. Tente Novamente');
-			$('#Cep').val('');
+			alert('Erro ao calcular. Confirme o Cep e Tente Novamente');
+			$('#Cep').val(CepDestino);
+			
 		}
 	});
 	
@@ -2399,7 +2410,7 @@ function calculaPrazoProdutos(campo, soma, somaproduto, excluir, produtonum, cou
             */
             if(i != produtonum && ($("#"+campo+i).val())) {
                 prazoproduto = parseInt($("#"+campo+i).val());
-				console.log(prazoproduto + ' - Prazo de cada produto');
+				//console.log(prazoproduto + ' - Prazo de cada produto');
 				if(prazoproduto >= prazoprodutos){
 					prazoprodutos = prazoproduto;
 				}else{
@@ -2417,7 +2428,7 @@ function calculaPrazoProdutos(campo, soma, somaproduto, excluir, produtonum, cou
         for(k=1; k<=$("#"+countmax).val(); k++) {
             if($("#"+campo+k).val()) {
                 prazoproduto = parseInt($("#"+campo+k).val());
-				console.log(prazoproduto + ' - Prazo de cada produto');
+				//console.log(prazoproduto + ' - Prazo de cada produto');
 				if(prazoproduto >= prazoprodutos){
 					prazoprodutos = prazoproduto;
 				}else{
@@ -2429,11 +2440,11 @@ function calculaPrazoProdutos(campo, soma, somaproduto, excluir, produtonum, cou
         }
     }
 	
-	console.log(prazoprodutos + ' - Prazo Total dos produtos');
+	//console.log(prazoprodutos + ' - Prazo Total dos produtos');
 
 	$("#PrazoProdutos").val(prazoprodutos);
 	
-    console.log('>> ' + $("#PrazoProdutos").val());
+    //console.log('>> ' + $("#PrazoProdutos").val());
 	
 	if(prazoprodutos >= 1){
 		$('.PrazoProdutos').show();
@@ -2461,7 +2472,7 @@ function calculaPrazoServicos(campo, soma, somaproduto, excluir, produtonum, cou
             */
             if(i != produtonum && ($("#"+campo+i).val())) {
                 prazoservico = parseInt($("#"+campo+i).val());
-				console.log(prazoservico + ' - Prazo de cada produto');
+				//console.log(prazoservico + ' - Prazo de cada produto');
 				if(prazoservico >= prazoservicos){
 					prazoservicos = prazoservico;
 				}else{
@@ -2479,7 +2490,7 @@ function calculaPrazoServicos(campo, soma, somaproduto, excluir, produtonum, cou
         for(k=1; k<=$("#"+countmax).val(); k++) {
             if($("#"+campo+k).val()) {
                 prazoservico = parseInt($("#"+campo+k).val());
-				console.log(prazoservico + ' - Prazo de cada produto');
+				//console.log(prazoservico + ' - Prazo de cada produto');
 				if(prazoservico >= prazoservicos){
 					prazoservicos = prazoservico;
 				}else{
@@ -2491,11 +2502,11 @@ function calculaPrazoServicos(campo, soma, somaproduto, excluir, produtonum, cou
         }
     }
 	
-	console.log(prazoservicos + ' - Prazo Total dos servicos');
+	//console.log(prazoservicos + ' - Prazo Total dos servicos');
 
 	$("#PrazoServicos").val(prazoservicos);
 	
-    console.log('>> ' + $("#PrazoServicos").val());
+    //console.log('>> ' + $("#PrazoServicos").val());
 	
 	if(prazoservicos >= 1){
 		$('.PrazoServicos').show();

@@ -450,6 +450,7 @@ class Orcatrata extends CI_Controller {
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
+        $data['caminho'] = '../../';
 
 		
 		if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorDev'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
@@ -1473,6 +1474,7 @@ class Orcatrata extends CI_Controller {
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
+        $data['caminho'] = '../';
 
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';
@@ -2628,6 +2630,7 @@ class Orcatrata extends CI_Controller {
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
+        $data['caminho'] = '../../';
 
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';		
@@ -4239,6 +4242,7 @@ class Orcatrata extends CI_Controller {
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
+        $data['caminho'] = '../../';
 
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';		
@@ -5831,6 +5835,7 @@ class Orcatrata extends CI_Controller {
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
+        $data['caminho'] = '../../';
 
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';		
@@ -7032,6 +7037,7 @@ class Orcatrata extends CI_Controller {
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
+        $data['caminho'] = '../../';
 
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';		
@@ -8535,6 +8541,7 @@ class Orcatrata extends CI_Controller {
         $data['disabled'] = '';
         $data['panel'] = 'danger';
         $data['metodo'] = 1;
+        $data['caminho'] = '../';
 
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';
@@ -9698,6 +9705,7 @@ class Orcatrata extends CI_Controller {
         $data['disabled'] = '';
         $data['panel'] = 'danger';
         $data['metodo'] = 2;
+        $data['caminho'] = '../../';
 
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';		

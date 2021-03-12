@@ -1,8 +1,8 @@
 <?php if (isset($msg)) echo $msg; ?>
 
-<div class="col-md-11">
+<div class="col-md-12">
 	<div class="row">
-		<div class="col-md-12 col-lg-12">
+		<div class="col-sm-offset-1 col-md-11 ">
 			<?php #echo validation_errors(); ?>
 			<?php echo form_open_multipart($form_open_path); ?>
 			<div class="panel panel-<?php echo $panel; ?>">
@@ -622,6 +622,7 @@
 																					</div>
 																				</div>	
 																			</div>
+																			<input type="hidden" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
 																			<div class="col-md-6">	
 																				<!--<label for="ValorOrca">Valor em Produtos:</label><br>-->
 																				<div class="input-group" id="txtHint">
@@ -642,7 +643,6 @@
 																						   
 																				</div>
 																			</div>
-																			<input type="hidden" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
 																		</div>	
 																	</div>
 																</div>
@@ -816,11 +816,6 @@
 													(!$orcatrata['TipoFrete']) ? $orcatrata['TipoFrete'] = '1' : FALSE;
 													#if (!$orcatrata['TipoFrete'])$orcatrata['TipoFrete'] = 1;
 													($key == '1') ? $hideshow = 'hideradio' : $hideshow = 'showradio';
-													if($key == '2'){
-														$key_TipoFrete = '2';
-													}elseif($key == '3'){
-														$key_TipoFrete = '3';
-													}
 													if ($orcatrata['TipoFrete'] == $key) {
 														echo ''
 														. '<label class="btn btn-default active" name="radio" id="radio' . $key . '">'
@@ -874,6 +869,7 @@
 										</div>
 									</div>
 									<br>
+									<input type="hidden" id="Caminho" name="Caminho" value="<?php echo $caminho; ?>">
 									<div id="TipoFrete" <?php echo $div['TipoFrete']; ?>>
 
 										<input type="hidden" name="CepOrigem" id="CepOrigem" placeholder="CepOrigem" value="<?php echo $_SESSION['Empresa']['CepEmpresa'];?>">
@@ -890,7 +886,7 @@
 									
 										<div class="row ">
 											<div class="col-md-2 mb-3 ">	
-												<label >Buscar Correios</label>
+												<label >Busca Correios</label>
 												<!--<button class=" form-control btn btn-lg btn-success" type="button" onclick="Procuraendereco(), LoadFrete(), calculaTotal(), calculaParcelas()" >Buscar</button>-->
 												<button class=" form-control btn btn-lg btn-success" type="button" onclick="Procuraendereco()" >Buscar/Calcular</button>
 											</div>
@@ -1034,17 +1030,23 @@
 														<div class="panel-heading">
 															<div class="row">
 																<div class="col-md-6 mb-3">
-																	<label for="PrazoProdServ">PrazoProdServ (Dias)</label>
-																	<input type="text" class="form-control " id="PrazoProdServ" maxlength="100" <?php echo $readonly; ?>
-																			onkeyup="calculaPrazoEntrega()"
-																		   name="PrazoProdServ" value="<?php echo $orcatrata['PrazoProdServ']; ?>">
+																	<label for="PrazoProdServ">Prazo Loja</label>
+																	<div  class="input-group" id="txtHint">
+																		<input type="text" class="form-control " id="PrazoProdServ" maxlength="100" <?php echo $readonly; ?>
+																				onkeyup="calculaPrazoEntrega()"
+																			   name="PrazoProdServ" value="<?php echo $orcatrata['PrazoProdServ']; ?>">
+																		<span class="input-group-addon" id="basic-addon1">Dias</span>	   
+																	</div>
 																</div>
 																<span class="ResultadoPrecoPrazo "></span>
 																<div class="col-md-6 mb-3">
-																	<label for="PrazoCorreios">PrazoCorreios (Dias)</label>
-																	<input type="text" class="form-control " id="PrazoCorreios" maxlength="100" readonly=""
+																	<label for="PrazoCorreios">Prazo Correios</label>
+																	<div  class="input-group" id="txtHint">
+																		<input type="text" class="form-control " id="PrazoCorreios" maxlength="100" readonly=""
 																			onkeyup="calculaPrazoEntrega()"
-																		   name="PrazoCorreios" value="<?php echo $orcatrata['PrazoCorreios']; ?>">
+																			name="PrazoCorreios" value="<?php echo $orcatrata['PrazoCorreios']; ?>">
+																		<span class="input-group-addon" id="basic-addon1">Dias</span>   
+																	</div>
 																</div>
 															</div>	
 														</div>
@@ -1057,9 +1059,12 @@
 												<div class="panel-heading">
 													<div class="row">
 														<div class="col-md-6 mb-3">
-															<label for="PrazoEntrega">PrazoTotal (Dias)</label>
-															<input type="text" class="form-control " id="PrazoEntrega" maxlength="100" <?php echo $readonly; ?> readonly=""
-																   name="PrazoEntrega" value="<?php echo $orcatrata['PrazoEntrega']; ?>">
+															<label for="PrazoEntrega">Prazo Total</label>
+															<div  class="input-group" id="txtHint">
+																<input type="text" class="form-control " id="PrazoEntrega" maxlength="100" <?php echo $readonly; ?> readonly=""
+																	   name="PrazoEntrega" value="<?php echo $orcatrata['PrazoEntrega']; ?>">
+																<span class="input-group-addon" id="basic-addon1">Dias</span> 
+															</div>
 														</div>
 														<div class="col-md-6 mb-3">
 															<label for="DataEntregaOrca">Data da Entrega</label>
