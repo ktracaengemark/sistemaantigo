@@ -5345,7 +5345,7 @@ function calculaOrcamento() {
 			
 			prazoservico = parseFloat($('#PrazoServico'+i).val().replace(".","").replace(",","."));
 			
-			console.log(prazoservico + ' - Prazo de cada servico');
+			//console.log(prazoservico + ' - Prazo de cada servico');
 			
 			if(prazoservico >= prazoservicos){
 				prazoservicos = prazoservico;
@@ -5370,7 +5370,7 @@ function calculaOrcamento() {
 			
 			prazoproduto = parseFloat($('#PrazoProduto'+i).val().replace(".","").replace(",","."));
 			
-			console.log(prazoproduto + ' - Parzo de cada produto');
+			//console.log(prazoproduto + ' - Parzo de cada produto');
 			
 			if(prazoproduto >= prazoprodutos){
 				prazoprodutos = prazoproduto;
@@ -5383,8 +5383,8 @@ function calculaOrcamento() {
 		
 		
     }
-	console.log(prazoprodutos + ' - Parzo Total dos produtos');
-	console.log(prazoservicos + ' - Prazo Total dos servicos');
+	//console.log(prazoprodutos + ' - Parzo Total dos produtos');
+	//console.log(prazoservicos + ' - Prazo Total dos servicos');
 
 	//console.log(subtotalcomissao + ' - Total Comissão produto');
     //calcula o subtotal, configurando para duas casas decimais e trocando o
@@ -6032,7 +6032,7 @@ $(document).ready(function () {
 		if (negocio == 1) {
 			var endereco_serv = 'q=902';
 			var tipo_orca = $('#Tipo_Orca').val();
-			console.log( tipo_orca );
+			//console.log( tipo_orca );
 			var escrita_serv = 'readonly=""';
 			var buscavalor_serv = 'buscaValor1Tabelas';
 			var tblbusca_serv = 'Valor';
