@@ -909,6 +909,7 @@
 											</div>
 											<br>
 											<input type="hidden" id="Caminho" name="Caminho" value="<?php echo $caminho; ?>">
+											<input type="hidden" id="TaxaEntrega" name="TaxaEntrega" value="<?php echo $_SESSION['Empresa']['TaxaEntrega'] ?>">
 											<div id="TipoFrete" <?php echo $div['TipoFrete']; ?>>
 											
 												<input type="hidden" name="CepOrigem" id="CepOrigem" placeholder="CepOrigem" value="<?php echo $_SESSION['Empresa']['CepEmpresa'];?>">

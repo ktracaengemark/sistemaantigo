@@ -2219,13 +2219,18 @@ function dateDiff() {
 function valorTipoFrete(valor, nome) {
 	//alert('valorTipoFrete - funcionando');
 	var caminho = $('#Caminho').val();
+	var taxaentrega = $('#TaxaEntrega').val();
+	var taxaentrega1 = taxaentrega.replace('.',',');
+	//console.log(taxaentrega1 + ' TaxaEntrega');
 	//console.log(caminho + ' Caminho valorTipoFrete');
-	
 	//console.log(valor + ' Tipo de entrega');
 	$('#ValorTipoFrete').val(valor);
-	if(valor == 1 || valor == 2){
+	if(valor == 1){
 		$('#PrazoCorreios').val('0');
 		$('#ValorFrete').val('');
+	}else if(valor == 2){
+		$('#PrazoCorreios').val('0');
+		$('#ValorFrete').val(taxaentrega1);
 	}
 	calculaPrazoEntrega();
 	calculaTotal();

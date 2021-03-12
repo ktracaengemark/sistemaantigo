@@ -870,6 +870,7 @@
 									</div>
 									<br>
 									<input type="hidden" id="Caminho" name="Caminho" value="<?php echo $caminho; ?>">
+									<input type="hidden" id="TaxaEntrega" name="TaxaEntrega" value="<?php echo $_SESSION['Empresa']['TaxaEntrega'] ?>">
 									<div id="TipoFrete" <?php echo $div['TipoFrete']; ?>>
 
 										<input type="hidden" name="CepOrigem" id="CepOrigem" placeholder="CepOrigem" value="<?php echo $_SESSION['Empresa']['CepEmpresa'];?>">
@@ -1101,7 +1102,7 @@
 																<input type="text" class="form-control Valor" id="ValorFrete" maxlength="10" placeholder="0,00" 
 																	   data-toggle="collapse" onkeyup="calculaParcelas(),calculaTotal(this.value),calculaTroco()" onchange="calculaParcelas(),calculaTroco()" onkeydown="calculaParcelas(),calculaTroco()"
 																		data-target="#Parcelas" aria-expanded="false" aria-controls="Parcelas"
-																	   name="ValorFrete" value="<?php echo $orcatrata['ValorFrete'] ?>">
+																	   name="ValorFrete" value="<?php echo $orcatrata['ValorFrete']; ?>">
 															</div>
 														</div>
 													</div>	

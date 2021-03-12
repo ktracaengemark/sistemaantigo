@@ -1,7 +1,7 @@
 <?php if (isset($msg)) echo $msg; ?>
 <div class="col-md-12 ">
 	<div class="row">
-		<div class="col-md-12 col-lg-12">
+		<div class="col-sm-offset-1 col-md-11 ">
 			<?php #echo validation_errors(); ?>
 			<?php echo form_open_multipart($form_open_path); ?>
 			<div class="panel panel-<?php echo $panel; ?>">
@@ -831,6 +831,7 @@
 									</div>
 									<br>
 									<input type="hidden" id="Caminho" name="Caminho" value="<?php echo $caminho; ?>">
+									<input type="hidden" id="TaxaEntrega" name="TaxaEntrega" value="<?php echo $_SESSION['Empresa']['TaxaEntrega'] ?>">
 									<div id="TipoFrete" <?php echo $div['TipoFrete']; ?>>
 									
 										<input type="hidden" name="CepOrigem" id="CepOrigem" placeholder="CepOrigem" value="<?php echo $_SESSION['Empresa']['CepEmpresa'];?>">
