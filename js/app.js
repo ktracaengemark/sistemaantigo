@@ -2217,7 +2217,7 @@ function buscaEnderecoFornecedor(id) {
 }
 
 function valorTipoFrete(valor, nome) {
-	console.log(valor + ' Tipo de entrega');
+	//console.log(valor + ' Tipo de entrega');
 	$('#ValorTipoFrete').val(valor);
 	if(valor == 1 || valor == 2){
 		$('#PrazoCorreios').val('0');
@@ -2236,14 +2236,14 @@ function Procuraendereco() {
 	var Dados=$(this).serialize();
 	var CepDestino=$('#Cep').val();
 	var CepOrigem=$('#CepOrigem').val();
-	console.log(tipofrete + ' Tipo de entrega');
+	//console.log(tipofrete + ' Tipo de entrega');
 	$.ajax({
 		url: 'https://viacep.com.br/ws/'+CepDestino+'/json/',
 		method:'get',
 		dataType:'json',
 		data: Dados,
 		success:function(Dados){
-			console.log(Dados);
+			//console.log(Dados);
 			$('.ResultCep').html('').append('<div>'+Dados.logradouro+','+Dados.bairro+'-'+Dados.localidade+'-'+Dados.uf+'</div>');			
 			//$('#Cep').val(CepDestino);
 			$('#Logradouro').val(Dados.logradouro);
@@ -2307,7 +2307,7 @@ function LoadFrete() {
 				Codigo: Codigo,
 				Diametro: Diametro},
 		success:function(data){
-			console.log(data);
+			//console.log(data);
 			$('.ResultadoPrecoPrazo').html(data);
 			
 			var prazo_correios = $('#prazo_correios').val();
@@ -2316,9 +2316,9 @@ function LoadFrete() {
 			$('#PrazoCorreios').val(prazo_correios);
 			$('#PrazoEntrega').val(prazo_entrega);
 			
-			console.log(prazo_prodserv);
-			console.log(prazo_correios);
-			console.log(prazo_entrega);
+			//console.log(prazo_prodserv);
+			//console.log(prazo_correios);
+			//console.log(prazo_entrega);
 			
 			var valor_frete2 = $('#valor_frete').val();
 			$('#ValorFrete').val(valor_frete2);
