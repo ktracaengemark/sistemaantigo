@@ -178,6 +178,7 @@ class Empresa extends CI_Controller {
 			'Atendimento',
 			'SobreNos',
 			'ValorMinimo',
+			'TaxaEntrega',
 			'CadastrarPet',
 			'CadastrarDep',
         ), TRUE);
@@ -281,6 +282,7 @@ class Empresa extends CI_Controller {
             #$data['query']['Senha'] = md5($data['query']['Senha']);            
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
 			$data['query']['ValorMinimo'] = str_replace(',', '.', str_replace('.', '', $data['query']['ValorMinimo']));
+			$data['query']['TaxaEntrega'] = str_replace(',', '.', str_replace('.', '', $data['query']['TaxaEntrega']));
             #$data['query']['Obs'] = nl2br($data['query']['Obs']);
             #$data['query']['Empresa'] = $_SESSION['log']['idSis_Empresa'];
 

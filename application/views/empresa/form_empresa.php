@@ -605,6 +605,21 @@
 														</div>
 													</div>
 												</div>
+											</div>
+											<div class="form-group">
+												<div class="row">
+													<div class="col-md-3">
+														<h3 class="text-left">Taxa de Entrega:</h3>
+													</div>
+													<div class="col-md-3">
+														<label for="TaxaEntrega">A Partir de:</label><br>
+														<div class="input-group">
+															<span class="input-group-addon" id="basic-addon1">R$</span>
+															<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
+																	name="TaxaEntrega" value="<?php echo $query['TaxaEntrega'] ?>">
+														</div>
+													</div>
+												</div>
 											</div>											
 										</div>
 									</div>
