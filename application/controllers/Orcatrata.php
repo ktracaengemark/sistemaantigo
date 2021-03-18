@@ -711,7 +711,16 @@ class Orcatrata extends CI_Controller {
 				$intervalo = strtotime($data2)-strtotime($data1); 
 				$dias = floor($intervalo / (60 * 60 * 24));
 				$data['orcatrata']['PrazoEntrega'] = $dias;
+			}			
+			$data['orcatrata']['ValorFatura'] = $data['orcatrata']['ValorTotalOrca'];
+			
+			if($data['orcatrata']['AVAP'] == "O" && ($data['orcatrata']['FormaPagamento'] == "1" || $data['orcatrata']['FormaPagamento'] == "2" || $data['orcatrata']['FormaPagamento'] == "3")){
+				$data['orcatrata']['ValorGateway'] = ($data['orcatrata']['ValorFatura'] * 0.04) + 0.40;
+			}else{
+				$data['orcatrata']['ValorGateway'] = 0.00;
 			}
+			$data['orcatrata']['ValorEmpresa'] = $data['orcatrata']['ValorFatura'] - $data['orcatrata']['ValorComissao'] - $data['orcatrata']['ValorGateway'];
+			
             $data['orcatrata']['idApp_OrcaTrata'] = $this->Orcatrata_model->set_orcatrata($data['orcatrata']);
 
 			#### APP_Cliente ####
@@ -1752,7 +1761,28 @@ class Orcatrata extends CI_Controller {
 				$intervalo = strtotime($data2)-strtotime($data1); 
 				$dias = floor($intervalo / (60 * 60 * 24));
 				$data['orcatrata']['PrazoEntrega'] = $dias;
-			}	
+			}
+			$data['orcatrata']['ValorFatura'] = $data['orcatrata']['ValorTotalOrca'];
+			
+			if($data['orcatrata']['AVAP'] == "O" && ($data['orcatrata']['FormaPagamento'] == "1" || $data['orcatrata']['FormaPagamento'] == "2" || $data['orcatrata']['FormaPagamento'] == "3")){
+				$data['orcatrata']['ValorGateway'] = ($data['orcatrata']['ValorFatura'] * 0.04) + 0.40;
+			}else{
+				$data['orcatrata']['ValorGateway'] = 0.00;
+			}
+			$data['orcatrata']['ValorEmpresa'] = $data['orcatrata']['ValorFatura'] - $data['orcatrata']['ValorComissao'] - $data['orcatrata']['ValorGateway'];			
+			/*
+			  echo '<br>';
+			  echo "<pre>";
+			  print_r($data['orcatrata']['ValorFatura']);
+			  echo '<br>';
+			  print_r($data['orcatrata']['ValorGateway']);
+			  echo '<br>';
+			  print_r($data['orcatrata']['ValorComissao']);
+			  echo '<br>';
+			  print_r($data['orcatrata']['ValorEmpresa']);
+			  echo "</pre>";
+			  exit ();		
+			*/
 		
 			$data['orcatrata']['idApp_OrcaTrata'] = $this->Orcatrata_model->set_orcatrata($data['orcatrata']);
             
@@ -2946,7 +2976,15 @@ class Orcatrata extends CI_Controller {
 				$intervalo = strtotime($data2)-strtotime($data1); 
 				$dias = floor($intervalo / (60 * 60 * 24));
 				$data['orcatrata']['PrazoEntrega'] = $dias;
+			}			
+			$data['orcatrata']['ValorFatura'] = $data['orcatrata']['ValorTotalOrca'];
+			
+			if($data['orcatrata']['AVAP'] == "O" && ($data['orcatrata']['FormaPagamento'] == "1" || $data['orcatrata']['FormaPagamento'] == "2" || $data['orcatrata']['FormaPagamento'] == "3")){
+				$data['orcatrata']['ValorGateway'] = ($data['orcatrata']['ValorFatura'] * 0.04) + 0.40;
+			}else{
+				$data['orcatrata']['ValorGateway'] = 0.00;
 			}
+			$data['orcatrata']['ValorEmpresa'] = $data['orcatrata']['ValorFatura'] - $data['orcatrata']['ValorComissao'] - $data['orcatrata']['ValorGateway'];
 			/*
             $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
             $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
@@ -4555,7 +4593,15 @@ class Orcatrata extends CI_Controller {
 				$intervalo = strtotime($data2)-strtotime($data1); 
 				$dias = floor($intervalo / (60 * 60 * 24));
 				$data['orcatrata']['PrazoEntrega'] = $dias;
+			}			
+			$data['orcatrata']['ValorFatura'] = $data['orcatrata']['ValorTotalOrca'];
+			
+			if($data['orcatrata']['AVAP'] == "O" && ($data['orcatrata']['FormaPagamento'] == "1" || $data['orcatrata']['FormaPagamento'] == "2" || $data['orcatrata']['FormaPagamento'] == "3")){
+				$data['orcatrata']['ValorGateway'] = ($data['orcatrata']['ValorFatura'] * 0.04) + 0.40;
+			}else{
+				$data['orcatrata']['ValorGateway'] = 0.00;
 			}
+			$data['orcatrata']['ValorEmpresa'] = $data['orcatrata']['ValorFatura'] - $data['orcatrata']['ValorComissao'] - $data['orcatrata']['ValorGateway'];
 			/*
             $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
             $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
@@ -6112,7 +6158,15 @@ class Orcatrata extends CI_Controller {
 				$intervalo = strtotime($data2)-strtotime($data1); 
 				$dias = floor($intervalo / (60 * 60 * 24));
 				$data['orcatrata']['PrazoEntrega'] = $dias;
+			}			
+			$data['orcatrata']['ValorFatura'] = $data['orcatrata']['ValorTotalOrca'];
+			
+			if($data['orcatrata']['AVAP'] == "O" && ($data['orcatrata']['FormaPagamento'] == "1" || $data['orcatrata']['FormaPagamento'] == "2" || $data['orcatrata']['FormaPagamento'] == "3")){
+				$data['orcatrata']['ValorGateway'] = ($data['orcatrata']['ValorFatura'] * 0.04) + 0.40;
+			}else{
+				$data['orcatrata']['ValorGateway'] = 0.00;
 			}
+			$data['orcatrata']['ValorEmpresa'] = $data['orcatrata']['ValorFatura'] - $data['orcatrata']['ValorComissao'] - $data['orcatrata']['ValorGateway'];
 			/*
             $data['update']['orcatrata']['anterior'] = $this->Orcatrata_model->get_orcatrata($data['orcatrata']['idApp_OrcaTrata']);
             $data['update']['orcatrata']['campos'] = array_keys($data['orcatrata']);
@@ -7351,7 +7405,15 @@ class Orcatrata extends CI_Controller {
 				$intervalo = strtotime($data2)-strtotime($data1); 
 				$dias = floor($intervalo / (60 * 60 * 24));
 				$data['orcatrata']['PrazoEntrega'] = $dias;
+			}			
+			$data['orcatrata']['ValorFatura'] = $data['orcatrata']['ValorTotalOrca'];
+			
+			if($data['orcatrata']['AVAP'] == "O" && ($data['orcatrata']['FormaPagamento'] == "1" || $data['orcatrata']['FormaPagamento'] == "2" || $data['orcatrata']['FormaPagamento'] == "3")){
+				$data['orcatrata']['ValorGateway'] = ($data['orcatrata']['ValorFatura'] * 0.04) + 0.40;
+			}else{
+				$data['orcatrata']['ValorGateway'] = 0.00;
 			}
+			$data['orcatrata']['ValorEmpresa'] = $data['orcatrata']['ValorFatura'] - $data['orcatrata']['ValorComissao'] - $data['orcatrata']['ValorGateway'];
 			/*
           echo '<br>';
           echo "<pre>";
