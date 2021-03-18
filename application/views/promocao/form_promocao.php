@@ -402,7 +402,7 @@
 																		</div>
 																	</div>
 																	<div class="col-md-2">
-																		<label for="TempoDeEntrega">Tempo De Entrega:</label>
+																		<label for="TempoDeEntrega">Prazo De Entrega:</label>
 																		<div class="input-group">
 																		<?php if ($metodo == 3) { ?>
 																			<input type="text" class="form-control text-right" readonly="" value="<?php echo $_SESSION['Item_Promocao'][$i]['TempoDeEntrega'] ?>">
@@ -731,21 +731,21 @@
 															<?php if ($metodo == 2) { ?>
 																<div class="col-md-2">	
 																	<label >Adicionar Produto</label><br>
-																	<a class="btn btn-md btn-danger btn-block" name="submeter5" id="submeter5" onclick="adiciona_item_promocao()">
+																	<a class="btn btn-md btn-warning btn-block" name="submeter5" id="submeter5" onclick="adiciona_item_promocao()">
 																		<span class="glyphicon glyphicon-plus"></span> Adicionar
 																	</a>
 																</div>
 															<?php } ?>
-															<div class="col-md-2">	
-																<label >Salvar Alteracoes</label><br>
-																<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
-																	<span class="glyphicon glyphicon-save"></span> Salvar
-																</button>
-															</div>
 															<div class="col-md-2 text-left">	
 																<label >Excluir Promoção</label><br>
 																<button  type="button" class="btn btn-md btn-danger btn-block" name="submeter2" id="submeter2" onclick="DesabilitaBotao(this.name)" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal-sm">
 																	<span class="glyphicon glyphicon-trash"></span> Excluir
+																</button>
+															</div>
+															<div class="col-md-2">	
+																<label >Salvar Alterações</label><br>
+																<button type="submit" class="btn btn-md btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name)" data-loading-text="Aguarde..." >
+																	<span class="glyphicon glyphicon-save"></span> Próximo Passo
 																</button>
 															</div>
 														<?php } ?>	

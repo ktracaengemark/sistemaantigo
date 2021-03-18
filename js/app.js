@@ -4496,7 +4496,7 @@ function adiciona_item_promocao() {
 							</div>\
 						</div>\
 						<div class="col-md-2">\
-							<label for="TempoDeEntrega'+pt+'">Tempo De Entrega:</label><br>\
+							<label for="TempoDeEntrega'+pt+'">Prazo De Entrega:</label><br>\
 							<div class="input-group id="TempoDeEntrega'+pt+'">\
 								<input type="text" class="form-control Numero text-right" id="TempoDeEntrega'+pt+'" maxlength="3" placeholder="0" \
 									name="TempoDeEntrega'+pt+'" value="">\

@@ -181,6 +181,7 @@ class Empresa extends CI_Controller {
 			'TaxaEntrega',
 			'CadastrarPet',
 			'CadastrarDep',
+			'TipoBoleto',
         ), TRUE);
 				
 
@@ -198,7 +199,10 @@ class Empresa extends CI_Controller {
 		$data['select']['Correios'] = $this->Basico_model->select_status_sn();
 		$data['select']['CadastrarPet'] = $this->Basico_model->select_status_sn();
 		$data['select']['CadastrarDep'] = $this->Basico_model->select_status_sn();
-		
+		$data['select']['TipoBoleto'] = array(
+			'L' => 'Da Loja',
+			'P' => 'Pag Seguro',
+        );
 		$data['select']['NaLoja'] = $this->Basico_model->select_status_sn();
 		$data['select']['NaEntrega'] = $this->Basico_model->select_status_sn();
 		$data['select']['OnLine'] = $this->Basico_model->select_status_sn();
@@ -250,6 +254,13 @@ class Empresa extends CI_Controller {
         );
         ($data['query']['OnLine'] == 'S') ?
             $data['div']['OnLine'] = '' : $data['div']['OnLine'] = 'style="display: none;"';			
+		
+		(!$data['query']['Boleto']) ? $data['query']['Boleto'] = 'S' : FALSE;
+        $data['radio'] = array(
+            'Boleto' => $this->basico->radio_checked($data['query']['Boleto'], 'Boleto', 'NS'),
+        );
+        ($data['query']['Boleto'] == 'S') ?
+            $data['div']['Boleto'] = '' : $data['div']['Boleto'] = 'style="display: none;"';		
 		
         $data['nav_secundario'] = $this->load->view('empresa/nav_secundario', $data, TRUE);
 
@@ -490,7 +501,7 @@ class Empresa extends CI_Controller {
         else
             $data['msg'] = '';
 
-        $data['query'] = $this->input->post(array(
+		$data['query'] = $this->input->post(array(
 			'idSis_Empresa',
         ), TRUE);
 		

@@ -4,8 +4,8 @@
 <div class="container-fluid">
 	<div class="row">
 	
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
 			<?php echo form_open_multipart($form_open_path); ?>
 			<div class="panel panel-primary">
 				
@@ -224,7 +224,7 @@
 										<h3 class="text-left">Tipo de Empresa</h3>
 										<div class="form-group">
 											<div class="row">
-												<div class="col-md-3 text-left">
+												<div class="col-md-2 text-left">
 													<label for="CadastrarPet">Cadastra Pets?</label><br>
 													<div class="btn-group" data-toggle="buttons">
 														<?php
@@ -320,10 +320,10 @@
 										<div id="EComerce" <?php echo $div['EComerce']; ?>>
 											<div class="form-group">
 												<div class="row">
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<h3 class="text-left">Entrega:</h3>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label for="RetirarLoja">Retirar na Loja?</label><br>
 														<div class="form-group">
 															<div class="btn-group" data-toggle="buttons">
@@ -351,7 +351,7 @@
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label for="MotoBoy">Moto Boy?</label><br>
 														<div class="form-group">
 															<div class="btn-group" data-toggle="buttons">
@@ -379,7 +379,7 @@
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label for="Correios">Correios?</label><br>
 														<div class="form-group">
 															<div class="btn-group" data-toggle="buttons">
@@ -411,10 +411,10 @@
 											</div>
 											<div class="form-group">
 												<div class="row">
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<h3 class="text-left">Pagamento:</h3>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label for="NaLoja">NaLoja?</label><br>
 														<div class="form-group">
 															<div class="btn-group" data-toggle="buttons">
@@ -442,7 +442,7 @@
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label for="NaEntrega">NaEntrega?</label><br>
 														<div class="form-group">
 															<div class="btn-group" data-toggle="buttons">
@@ -470,7 +470,7 @@
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3 text-left">
+													<div class="col-md-2 text-left">
 														<label for="OnLine">OnLine?</label><br>
 														<div class="btn-group" data-toggle="buttons">
 															<?php
@@ -502,38 +502,10 @@
 											</div>
 											<div id="OnLine" <?php echo $div['OnLine']; ?>>
 												<div class="row">
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<h3 class="text-left">OnLine:</h3>
 													</div>
-													<div class="col-md-3">
-														<label for="Boleto">Boleto?</label><br>
-														<div class="form-group">
-															<div class="btn-group" data-toggle="buttons">
-																<?php
-																foreach ($select['Boleto'] as $key => $row) {
-																	(!$query['Boleto']) ? $query['Boleto'] = 'S' : FALSE;
-
-																	if ($query['Boleto'] == $key) {
-																		echo ''
-																		. '<label class="btn btn-warning active" name="radiobutton_Boleto" id="radiobutton_Boleto' . $key . '">'
-																		. '<input type="radio" name="Boleto" id="radiobutton" '
-																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																		. '</label>'
-																		;
-																	} else {
-																		echo ''
-																		. '<label class="btn btn-default" name="radiobutton_Boleto" id="radiobutton_Boleto' . $key . '">'
-																		. '<input type="radio" name="Boleto" id="radiobutton" '
-																		. 'autocomplete="off" value="' . $key . '" >' . $row
-																		. '</label>'
-																		;
-																	}
-																}
-																?>
-															</div>
-														</div>
-													</div>
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label for="Debito">Debito?</label><br>
 														<div class="form-group">
 															<div class="btn-group" data-toggle="buttons">
@@ -561,7 +533,7 @@
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label for="Cartao">Cartao?</label><br>
 														<div class="form-group">
 															<div class="btn-group" data-toggle="buttons">
@@ -589,14 +561,72 @@
 															</div>
 														</div>
 													</div>
+													<div class="col-md-2">
+														<label for="Boleto">Boleto?</label><br>
+														<div class="btn-group" data-toggle="buttons">
+															<?php
+															foreach ($select['Boleto'] as $key => $row) {
+																if (!$query['Boleto'])$query['Boleto'] = 'S';
+
+																($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																if ($query['Boleto'] == $key) {
+																	echo ''
+																	. '<label class="btn btn-warning active" name="Boleto_' . $hideshow . '">'
+																	. '<input type="radio" name="Boleto" id="' . $hideshow . '" '
+																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																	. '</label>'
+																	;
+																} else {
+																	echo ''
+																	. '<label class="btn btn-default" name="Boleto_' . $hideshow . '">'
+																	. '<input type="radio" name="Boleto" id="' . $hideshow . '" '
+																	. 'autocomplete="off" value="' . $key . '" >' . $row
+																	. '</label>'
+																	;
+																}
+															}
+															?>
+														</div>
+													</div>
+													<div id="Boleto" <?php echo $div['Boleto']; ?>>
+														<div class="col-md-3">
+															<label for="TipoBoleto">Tipo do Boleto?</label><br>
+															<div class="form-group">
+																<div class="btn-group" data-toggle="buttons">
+																	<?php
+																	foreach ($select['TipoBoleto'] as $key => $row) {
+																		(!$query['TipoBoleto']) ? $query['TipoBoleto'] = 'L' : FALSE;
+
+																		if ($query['TipoBoleto'] == $key) {
+																			echo ''
+																			. '<label class="btn btn-warning active" name="radiobutton_TipoBoleto" id="radiobutton_TipoBoleto' . $key . '">'
+																			. '<input type="radio" name="TipoBoleto" id="radiobutton" '
+																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																			. '</label>'
+																			;
+																		} else {
+																			echo ''
+																			. '<label class="btn btn-default" name="radiobutton_TipoBoleto" id="radiobutton_TipoBoleto' . $key . '">'
+																			. '<input type="radio" name="TipoBoleto" id="radiobutton" '
+																			. 'autocomplete="off" value="' . $key . '" >' . $row
+																			. '</label>'
+																			;
+																		}
+																	}
+																	?>
+																</div>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
 											<div class="form-group">
 												<div class="row">
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<h3 class="text-left">Valor Mínimo:</h3>
 													</div>
-													<div class="col-md-3">
+													<div class="col-md-2">
 														<label for="ValorMinimo">A Partir de:</label><br>
 														<div class="input-group">
 															<span class="input-group-addon" id="basic-addon1">R$</span>
@@ -605,22 +635,22 @@
 														</div>
 													</div>
 												</div>
-											</div>
-											<div class="form-group">
-												<div class="row">
-													<div class="col-md-3">
-														<h3 class="text-left">Taxa de Entrega:</h3>
-													</div>
-													<div class="col-md-3">
-														<label for="TaxaEntrega">A Partir de:</label><br>
-														<div class="input-group">
-															<span class="input-group-addon" id="basic-addon1">R$</span>
-															<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
-																	name="TaxaEntrega" value="<?php echo $query['TaxaEntrega'] ?>">
-														</div>
+											</div>											
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-2">
+													<h3 class="text-left">Entrega:</h3>
+												</div>
+												<div class="col-md-2">
+													<label for="TaxaEntrega">Taxa de Entrega:</label><br>
+													<div class="input-group">
+														<span class="input-group-addon" id="basic-addon1">R$</span>
+														<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
+																name="TaxaEntrega" value="<?php echo $query['TaxaEntrega'] ?>">
 													</div>
 												</div>
-											</div>											
+											</div>
 										</div>
 									</div>
 								</div>
