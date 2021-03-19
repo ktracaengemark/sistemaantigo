@@ -182,6 +182,10 @@ class Empresa extends CI_Controller {
 			'CadastrarPet',
 			'CadastrarDep',
 			'TipoBoleto',
+			'BancoEmpresa',
+			'AgenciaEmpresa',
+			'ContaEmpresa',
+			'PixEmpresa',
         ), TRUE);
 				
 

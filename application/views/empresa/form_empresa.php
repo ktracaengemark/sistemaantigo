@@ -652,6 +652,40 @@
 												</div>
 											</div>
 										</div>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-2">
+													<h3 class="text-left">Conta:</h3>
+												</div>	
+												<div class="col-md-3">
+													<label for="BancoEmpresa">Banco:</label>
+													<input type="text" class="form-control" maxlength="100"
+														   name="BancoEmpresa" value="<?php echo $query['BancoEmpresa']; ?>">
+												</div>												
+												<div class="col-md-3">
+													<label for="AgenciaEmpresa">Agencia:</label>
+													<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
+														   name="AgenciaEmpresa" value="<?php echo $query['AgenciaEmpresa']; ?>">
+												</div>
+												<div class="col-md-3">
+													<label for="ContaEmpresa">Conta:</label>
+													<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
+														   name="ContaEmpresa" value="<?php echo $query['ContaEmpresa']; ?>">
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-2">
+													<h3 class="text-left">Chave:</h3>
+												</div>	
+												<div class="col-md-3">
+													<label for="PixEmpresa">Pix:</label>
+													<input type="text" class="form-control" maxlength="100"
+														   name="PixEmpresa" value="<?php echo $query['PixEmpresa']; ?>">
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
