@@ -79,7 +79,7 @@
 				</div>	
 				<div class="row">	
 					<div class="col-md-12 form-group">
-						<div  style="overflow:auto; height:auto; "> 
+						<div  style="overflow:auto; height:470px; "> 
 								<table id="calendar" class="table table-condensed table-striped "></table>
 						</div>
 					</div>
