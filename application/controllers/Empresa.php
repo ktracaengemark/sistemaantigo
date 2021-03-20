@@ -186,6 +186,7 @@ class Empresa extends CI_Controller {
 			'AgenciaEmpresa',
 			'ContaEmpresa',
 			'PixEmpresa',
+			'CashBackAtivo',
         ), TRUE);
 				
 
@@ -214,6 +215,8 @@ class Empresa extends CI_Controller {
 		$data['select']['Boleto'] = $this->Basico_model->select_status_sn();
 		$data['select']['Debito'] = $this->Basico_model->select_status_sn();
 		$data['select']['Cartao'] = $this->Basico_model->select_status_sn();
+		
+		$data['select']['CashBackAtivo'] = $this->Basico_model->select_status_sn();
         #$data['select']['Sexo'] = $this->Basico_model->select_sexo();
 		#$data['select']['Empresa'] = $this->Basico_model->select_status_sn();
 		#$data['select']['Inativo'] = $this->Basico_model->select_inativo();

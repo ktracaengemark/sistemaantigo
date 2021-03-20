@@ -221,9 +221,11 @@
 												</div>
 											</div>
 										</div>
-										<h3 class="text-left">Tipo de Empresa</h3>
 										<div class="form-group">
 											<div class="row">
+												<div class="col-md-2">
+													<h3 class="text-left">Cadastro:</h3>
+												</div>
 												<div class="col-md-2 text-left">
 													<label for="CadastrarPet">Cadastra Pets?</label><br>
 													<div class="btn-group" data-toggle="buttons">
@@ -280,6 +282,21 @@
 															}
 															?>
 														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-2">
+													<h3 class="text-left">Entrega:</h3>
+												</div>
+												<div class="col-md-2">
+													<label for="TaxaEntrega">Taxa de Entrega:</label><br>
+													<div class="input-group">
+														<span class="input-group-addon" id="basic-addon1">R$</span>
+														<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
+																name="TaxaEntrega" value="<?php echo $query['TaxaEntrega'] ?>">
 													</div>
 												</div>
 											</div>
@@ -635,56 +652,76 @@
 														</div>
 													</div>
 												</div>
-											</div>											
-										</div>
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-2">
-													<h3 class="text-left">Entrega:</h3>
-												</div>
-												<div class="col-md-2">
-													<label for="TaxaEntrega">Taxa de Entrega:</label><br>
-													<div class="input-group">
-														<span class="input-group-addon" id="basic-addon1">R$</span>
-														<input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
-																name="TaxaEntrega" value="<?php echo $query['TaxaEntrega'] ?>">
+											</div>
+											<div class="form-group">
+												<div class="row">
+													<div class="col-md-2">
+														<h3 class="text-left">Conta:</h3>
+													</div>	
+													<div class="col-md-3">
+														<label for="BancoEmpresa">Banco:</label>
+														<input type="text" class="form-control" maxlength="100"
+															   name="BancoEmpresa" value="<?php echo $query['BancoEmpresa']; ?>">
+													</div>												
+													<div class="col-md-3">
+														<label for="AgenciaEmpresa">Agencia:</label>
+														<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
+															   name="AgenciaEmpresa" value="<?php echo $query['AgenciaEmpresa']; ?>">
+													</div>
+													<div class="col-md-3">
+														<label for="ContaEmpresa">Conta:</label>
+														<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
+															   name="ContaEmpresa" value="<?php echo $query['ContaEmpresa']; ?>">
 													</div>
 												</div>
 											</div>
-										</div>
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-2">
-													<h3 class="text-left">Conta:</h3>
-												</div>	
-												<div class="col-md-3">
-													<label for="BancoEmpresa">Banco:</label>
-													<input type="text" class="form-control" maxlength="100"
-														   name="BancoEmpresa" value="<?php echo $query['BancoEmpresa']; ?>">
-												</div>												
-												<div class="col-md-3">
-													<label for="AgenciaEmpresa">Agencia:</label>
-													<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
-														   name="AgenciaEmpresa" value="<?php echo $query['AgenciaEmpresa']; ?>">
-												</div>
-												<div class="col-md-3">
-													<label for="ContaEmpresa">Conta:</label>
-													<input type="text" class="form-control" maxlength="100" <?php echo $readonly; ?>
-														   name="ContaEmpresa" value="<?php echo $query['ContaEmpresa']; ?>">
+											<div class="form-group">
+												<div class="row">
+													<div class="col-md-2">
+														<h3 class="text-left">Chave:</h3>
+													</div>	
+													<div class="col-md-3">
+														<label for="PixEmpresa">Pix:</label>
+														<input type="text" class="form-control" maxlength="100"
+															   name="PixEmpresa" value="<?php echo $query['PixEmpresa']; ?>">
+													</div>
 												</div>
 											</div>
-										</div>
-										<div class="form-group">
-											<div class="row">
-												<div class="col-md-2">
-													<h3 class="text-left">Chave:</h3>
-												</div>	
-												<div class="col-md-3">
-													<label for="PixEmpresa">Pix:</label>
-													<input type="text" class="form-control" maxlength="100"
-														   name="PixEmpresa" value="<?php echo $query['PixEmpresa']; ?>">
+											<div class="form-group">
+												<div class="row">
+													<div class="col-md-2">
+														<h3 class="text-left">CashBack:</h3>
+													</div>
+													<div class="col-md-3">
+														<label for="CashBackAtivo">Ativo?</label><br>
+														<div class="form-group">
+															<div class="btn-group" data-toggle="buttons">
+																<?php
+																foreach ($select['CashBackAtivo'] as $key => $row) {
+																	(!$query['CashBackAtivo']) ? $query['CashBackAtivo'] = 'N' : FALSE;
+
+																	if ($query['CashBackAtivo'] == $key) {
+																		echo ''
+																		. '<label class="btn btn-warning active" name="radiobutton_CashBackAtivo" id="radiobutton_CashBackAtivo' . $key . '">'
+																		. '<input type="radio" name="CashBackAtivo" id="radiobutton" '
+																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																		. '</label>'
+																		;
+																	} else {
+																		echo ''
+																		. '<label class="btn btn-default" name="radiobutton_CashBackAtivo" id="radiobutton_CashBackAtivo' . $key . '">'
+																		. '<input type="radio" name="CashBackAtivo" id="radiobutton" '
+																		. 'autocomplete="off" value="' . $key . '" >' . $row
+																		. '</label>'
+																		;
+																	}
+																}
+																?>
+															</div>
+														</div>
+													</div>
 												</div>
-											</div>
+											</div>											
 										</div>
 									</div>
 								</div>
