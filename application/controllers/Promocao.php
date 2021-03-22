@@ -993,21 +993,23 @@ class Promocao extends CI_Controller {
 					
 					break;					
 
-					case 'image/png':
+					case 'image/png';
 					case 'image/x-png';
-						
-						list($largura, $altura, $tipo) = getimagesize($diretorio);
-						
-						$img = imagecreatefrompng($diretorio);
 
-						$thumb = imagecreatetruecolor(200, 200);
+						list($width, $height) = getimagesize($diretorio);
+						$newwidth = 200;
+						$newheight = 200;
+
+						$thumb = imagecreatetruecolor($newwidth, $newheight);
+						imagealphablending($thumb, false);
+						imagesavealpha($thumb, true);
+						$source = imagecreatefrompng($diretorio);
+						imagealphablending($source, true);
+						imagecopyresampled($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+						imagepng($thumb, $dir2 . $foto);
+						imagedestroy($thumb);
+						imagedestroy($source);						
 						
-						imagecopyresampled($thumb, $img, 0, 0, 0, 0, 200, 200, $largura, $altura);
-						
-						imagejpeg($thumb, $dir2 . $foto);
-						imagedestroy($img);
-						imagedestroy($thumb);				      
-					
 					break;
 					
 				endswitch;			
