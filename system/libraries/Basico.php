@@ -530,9 +530,28 @@ class Basico {
 		$extensao	= end($extensao);
 		$extensao	= '.' . $extensao;
         //$data = 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
-		$data = rand() . '_' . 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . '_' . rand() . $extensao;
 		return $data;
     }	
+	
+    function renomeiaclientepet($data) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+        //$data = 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = 'clientepet' . '_' . $_SESSION['ClientePet']['idApp_ClientePet'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . '_' . rand() . $extensao;
+		return $data;
+    }
+	
+    function renomeiaclientedep($data) {
+		$extensao	= explode('.', $data);
+		$extensao	= end($extensao);
+		$extensao	= '.' . $extensao;
+        //$data = 'cliente' . '_' . $_SESSION['Cliente']['idApp_Cliente'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . $extensao;
+		$data = 'clientedep' . '_' . $_SESSION['ClienteDep']['idApp_ClienteDep'] . '_' . $_SESSION['Empresa']['idSis_Empresa'] . '_' . rand() . $extensao;
+		return $data;
+    }
+
 	
     function renomeiaempresa1($data, $path) {
 		$extensao	= explode('.', $data);
