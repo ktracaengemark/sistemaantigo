@@ -546,6 +546,11 @@ class Loginempresa extends CI_Controller {
 										
 										copy($arquivo_origem4, $arquivo_destino4);
 										
+										$arquivo_origem4pet = 'arquivos/imagens/empresas/1/clientes/miniatura/pata.png';
+										$arquivo_destino4pet = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/miniatura/pata.png';
+										
+										copy($arquivo_origem4pet, $arquivo_destino4pet);
+										
 										$pasta5 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/';
 										mkdir($pasta5, 0777);
 										
@@ -1030,6 +1035,11 @@ class Loginempresa extends CI_Controller {
 										$arquivo_destino4 = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/miniatura/Foto.jpg';
 										
 										copy($arquivo_origem4, $arquivo_destino4);
+										
+										$arquivo_origem4pet = 'arquivos/imagens/empresas/1/clientes/miniatura/pata.png';
+										$arquivo_destino4pet = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/clientes/miniatura/pata.png';
+										
+										copy($arquivo_origem4pet, $arquivo_destino4pet);
 										
 										$pasta5 = $_UP['pasta'] = '../'.$data['query']['Site'].'/' .$data['idSis_Empresa'].'/produtos/';
 										mkdir($pasta5, 0777);
