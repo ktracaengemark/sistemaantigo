@@ -126,6 +126,7 @@ class Relatorio extends CI_Controller {
 			'DataVencimentoOrca',
 			//'NomeCliente',
 			'NomeUsuario',
+			'NomeEmpresa',
 			'NomeFornecedor',
 			'Dia',
 			'Ano',
@@ -240,6 +241,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['nome'] = $data['query']['nome'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
+		$_SESSION['FiltroAlteraParcela']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 		$_SESSION['Imprimir']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];		
 		
 		/*
@@ -406,6 +408,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Orcades'] = $this->Relatorio_model->select_orcades();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
+		$data['select']['NomeEmpresa'] = $this->Relatorio_model->select_empresa();
 		
 		$data['query']['nome'] = 'Cliente';
         $data['titulo'] = 'Receitas';
@@ -489,7 +492,8 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
 			$data['bd']['Ultimo'] = $data['query']['Ultimo'];
 			$data['bd']['nome'] = $data['query']['nome'];
-			$data['bd']['metodo'] = $data['metodo'];               
+			$data['bd']['metodo'] = $data['metodo'];
+			$data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];               
 			
 			//$data['report'] = $this->Relatorio_model->list1_comissao($data['bd'],TRUE);
 			$data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);
@@ -532,6 +536,7 @@ class Relatorio extends CI_Controller {
 			'DataVencimentoOrca',
 			//'NomeCliente',
 			'NomeUsuario',
+			'NomeEmpresa',
 			'NomeFornecedor',
 			'Dia',
 			'Ano',
@@ -642,6 +647,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
+		$_SESSION['FiltroAlteraParcela']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 		$_SESSION['Imprimir']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -792,6 +798,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Orcades'] = $this->Relatorio_model->select_orcades();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
+		$data['select']['NomeEmpresa'] = $this->Relatorio_model->select_empresa();
 		
 		$data['query']['nome'] = 'Fornecedor';
         $data['titulo'] = 'Despesas';
@@ -869,7 +876,8 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
 			$data['bd']['Ultimo'] = $data['query']['Ultimo'];
 			$data['bd']['nome'] = $data['query']['nome'];
-			$data['bd']['metodo'] = $data['metodo'];              
+			$data['bd']['metodo'] = $data['metodo'];
+			$data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];              
 			
 			//$data['report'] = $this->Relatorio_model->list1_comissao($data['bd'],TRUE);
 			$data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);
@@ -912,6 +920,7 @@ class Relatorio extends CI_Controller {
 			'DataVencimentoOrca',
 			//'NomeCliente',
 			'NomeUsuario',
+			'NomeEmpresa',
 			'NomeFornecedor',
 			'Dia',
 			'Ano',
@@ -1022,6 +1031,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
+		$_SESSION['FiltroAlteraParcela']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 		$_SESSION['Imprimir']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -1172,6 +1182,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Orcades'] = $this->Relatorio_model->select_orcades();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
+		$data['select']['NomeEmpresa'] = $this->Relatorio_model->select_empresa();
 		
 		$data['query']['nome'] = 'Cliente';
         $data['titulo'] = 'Baixa das Receitas';
@@ -1250,6 +1261,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Ultimo'] = $data['query']['Ultimo'];
 			$data['bd']['nome'] = $data['query']['nome'];
 			$data['bd']['metodo'] = $data['metodo'];
+			$data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 			
 			//$data['report'] = $this->Relatorio_model->list1_comissao($data['bd'],TRUE);
 			$data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);
@@ -1292,6 +1304,7 @@ class Relatorio extends CI_Controller {
 			'DataVencimentoOrca',
 			//'NomeCliente',
 			'NomeUsuario',
+			'NomeEmpresa',
 			'NomeFornecedor',
 			'Dia',
 			'Ano',
@@ -1402,6 +1415,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
+		$_SESSION['FiltroAlteraParcela']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 		$_SESSION['Imprimir']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -1551,6 +1565,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Orcades'] = $this->Relatorio_model->select_orcades();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
+		$data['select']['NomeEmpresa'] = $this->Relatorio_model->select_empresa();
 		
 		$data['query']['nome'] = 'Fornecedor';
         $data['titulo'] = 'Baixa das Despesas';
@@ -1629,6 +1644,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Ultimo'] = $data['query']['Ultimo'];
 			$data['bd']['nome'] = $data['query']['nome'];
 			$data['bd']['metodo'] = $data['metodo'];
+			$data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 			
 			//$data['report'] = $this->Relatorio_model->list1_comissao($data['bd'],TRUE);
 			$data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);
@@ -1671,6 +1687,7 @@ class Relatorio extends CI_Controller {
 			'DataVencimentoOrca',
 			//'NomeCliente',
 			'NomeUsuario',
+			'NomeEmpresa',
 			'NomeFornecedor',
 			'Dia',
 			'Ano',
@@ -1782,6 +1799,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
+		$_SESSION['FiltroAlteraParcela']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 		$_SESSION['Imprimir']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -1933,6 +1951,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Orcades'] = $this->Relatorio_model->select_orcades();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
+		$data['select']['NomeEmpresa'] = $this->Relatorio_model->select_empresa();
 		
 		$data['query']['nome'] = 'Cliente';
 		$data['form_open_path'] = 'relatorio/comissao';
@@ -2014,7 +2033,8 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Agrupar'] = $data['query']['Agrupar'];
 			$data['bd']['Ultimo'] = $data['query']['Ultimo'];
 			$data['bd']['nome'] = $data['query']['nome'];
-			$data['bd']['metodo'] = $data['metodo'];     
+			$data['bd']['metodo'] = $data['metodo'];
+			$data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];     
 			
 			//$data['report'] = $this->Relatorio_model->list1_comissao($data['bd'],TRUE);
 			$data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);
@@ -2054,6 +2074,7 @@ class Relatorio extends CI_Controller {
 			'idApp_OrcaTrata',
 			'NomeAssociado',
 			'idSis_Usuario',
+			'NomeEmpresa',
 			'DataVencimentoOrca',
 			//'NomeCliente',
 			'NomeUsuario',
@@ -2167,6 +2188,7 @@ class Relatorio extends CI_Controller {
 		$_SESSION['FiltroAlteraParcela']['Modalidade'] = $data['query']['Modalidade'];
 		$_SESSION['FiltroAlteraParcela']['Campo'] = $data['query']['Campo'];
 		$_SESSION['FiltroAlteraParcela']['Ordenamento'] = $data['query']['Ordenamento'];
+		$_SESSION['FiltroAlteraParcela']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 		$_SESSION['Imprimir']['idApp_OrcaTrata'] = $data['query']['idApp_OrcaTrata'];		
 		
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
@@ -2314,6 +2336,7 @@ class Relatorio extends CI_Controller {
 		$data['select']['Orcades'] = $this->Relatorio_model->select_orcades();
 		$data['select']['Produtos'] = $this->Relatorio_model->select_produtos();
 		$data['select']['TipoFrete'] = $this->Relatorio_model->select_tipofrete();
+		$data['select']['NomeEmpresa'] = $this->Relatorio_model->select_empresa();
 		
 		$data['query']['nome'] = 'Cliente';
 		$data['form_open_path'] = 'relatorio/comissao_online';
@@ -2396,6 +2419,7 @@ class Relatorio extends CI_Controller {
 			$data['bd']['Ultimo'] = $data['query']['Ultimo'];
 			$data['bd']['nome'] = $data['query']['nome'];
 			$data['bd']['metodo'] = $data['metodo'];
+			$data['bd']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 			
 			//$data['report'] = $this->Relatorio_model->list1_comissao($data['bd'],TRUE);
 			$data['report'] = $this->Relatorio_model->list_orcamento($data['bd'],TRUE);

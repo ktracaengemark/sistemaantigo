@@ -68,8 +68,8 @@ class Relatorio_model extends CI_Model {
 		$filtro10 = ($data['FinalizadoOrca']) ? 'OT.FinalizadoOrca = "' . $data['FinalizadoOrca'] . '" AND ' : FALSE;
 		$filtro11 = ($data['CanceladoOrca']) ? 'OT.CanceladoOrca = "' . $data['CanceladoOrca'] . '" AND ' : FALSE;
 		$filtro13 = ($data['CombinadoFrete']) ? 'OT.CombinadoFrete = "' . $data['CombinadoFrete'] . '" AND ' : FALSE;
-		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND PR.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;		
-
+		$permissao = ($data['metodo'] == 3 && $_SESSION['log']['idSis_Empresa'] == 5 ) ? 'OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND PR.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;		
+		$permissao2 = ($data['NomeEmpresa']) ? 'OT.idSis_Empresa = "' . $data['NomeEmpresa'] . '" AND ' : FALSE;
 		$filtro17 = ($data['NomeUsuario']) ? 'OT.idSis_Usuario = "' . $data['NomeUsuario'] . '" AND ' : FALSE;
 		$filtro18 = ($data['NomeAssociado']) ? 'OT.Associado = "' . $data['NomeAssociado'] . '" AND ' : FALSE;
 		$filtro12 = ($data['StatusComissaoOrca']) ? 'OT.StatusComissaoOrca = "' . $data['StatusComissaoOrca'] . '" AND ' : FALSE;
@@ -112,9 +112,10 @@ class Relatorio_model extends CI_Model {
           exit();
 		  */
 		$comissao1 = ($data['metodo'] == 1 && $_SESSION['Usuario']['Permissao_Comissao'] < 2 ) ? 'AND OT.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
-		$comissao2 = ($data['metodo'] == 2 && ($_SESSION['log']['idSis_Empresa'] == 5) ) ? 'AND OT.Associado = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
+		$comissao2 = ($data['metodo'] == 2 && $_SESSION['log']['idSis_Empresa'] == 5 ) ? 'AND OT.Associado = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
 		$comissao3 = ($data['metodo'] == 2 && $_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['Usuario']['Permissao_Comissao'] < 2 ) ? 'AND OT.Associado = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
-        $query = $this->db->query('
+        
+		$query = $this->db->query('
             SELECT
                 CONCAT(IFNULL(C.idApp_Cliente,""), " - " ,IFNULL(C.NomeCliente,""), " - " ,IFNULL(C.CelularCliente,"") ) AS NomeCliente,
                 CONCAT(IFNULL(F.idApp_Fornecedor,""), " - " ,IFNULL(F.NomeFornecedor,"")) AS NomeFornecedor,
@@ -202,6 +203,7 @@ class Relatorio_model extends CI_Model {
                 ' . $date_inicio_pag_com . '
                 ' . $date_fim_pag_com . '
 				' . $permissao . '
+				' . $permissao2 . '
 				' . $filtro1 . '
 				' . $filtro2 . '
 				' . $filtro3 . '
@@ -5185,6 +5187,33 @@ exit();*/
         return $array;
     }
 
+	public function select_empresa() {
+
+        $query = $this->db->query('
+            SELECT
+                SE.idSis_Empresa,
+				SE.NomeEmpresa
+            FROM
+                Sis_Empresa AS SE
+					LEFT JOIN App_OrcaTrata AS OT ON OT.idSis_Empresa = SE.idSis_Empresa
+            WHERE
+				SE.idSis_Empresa != "1" AND 
+				SE.idSis_Empresa != "5" AND
+				OT.Tipo_Orca = "O" AND
+				OT.Associado = ' . $_SESSION['log']['idSis_Usuario'] . ' 
+            ORDER BY
+                SE.NomeEmpresa ASC
+        ');
+
+        $array = array();
+        $array[0] = '::Todos::';
+        foreach ($query->result() as $row) {
+			$array[$row->idSis_Empresa] = $row->NomeEmpresa;
+        }
+
+        return $array;
+    }
+	
 	public function select_fornecedor() {
 
         $query = $this->db->query('
