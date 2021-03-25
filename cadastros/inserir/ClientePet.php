@@ -11,6 +11,7 @@ $especiepet0 = filter_var($dados['EspeciePet'], FILTER_SANITIZE_STRING);
 $racapet0 = filter_var($dados['RacaPet'], FILTER_SANITIZE_STRING);
 $pelopet0 = filter_var($dados['PeloPet'], FILTER_SANITIZE_STRING);
 $corpet0 = filter_var($dados['CorPet'], FILTER_SANITIZE_STRING);
+$portepet0 = filter_var($dados['PortePet'], FILTER_SANITIZE_STRING);
 $obspet0 = filter_var($dados['ObsPet'], FILTER_SANITIZE_STRING);
 
 $datanascimento = $dados['DataNascimentoPet'];
@@ -31,6 +32,7 @@ $especiepet = trim(mb_strtoupper($especiepet0, 'ISO-8859-1'));
 $racapet = trim(mb_strtoupper($racapet0, 'ISO-8859-1'));
 $pelopet = trim(mb_strtoupper($pelopet0, 'ISO-8859-1'));
 $corpet = trim(mb_strtoupper($corpet0, 'ISO-8859-1'));
+$portepet = trim(mb_strtoupper($portepet0, 'ISO-8859-1'));
 $obspet = trim(mb_strtoupper($obspet0, 'ISO-8859-1'));
 
 $usuario 	= $_SESSION['log']['idSis_Usuario'];
@@ -51,6 +53,7 @@ $result_clientepet = "INSERT INTO App_ClientePet (
 													RacaPet,
 													PeloPet,
 													CorPet,
+													PortePet,
 													ObsPet
 												) 
 												VALUES (
@@ -65,6 +68,7 @@ $result_clientepet = "INSERT INTO App_ClientePet (
 													'" .$racapet. "',
 													'" .$pelopet. "',
 													'" .$corpet. "',
+													'" .$portepet. "',
 													'" .$obspet. "'
 												)";
 $resultado_clientepet = mysqli_query($conn, $result_clientepet);

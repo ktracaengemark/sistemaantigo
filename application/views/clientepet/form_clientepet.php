@@ -203,7 +203,7 @@
 											   name="DataNascimentoPet" placeholder="DD/MM/AAAA" value="<?php echo $query['DataNascimentoPet']; ?>">
 									</div> 
 									<div class="col-md-4">
-										<label for="SexoPet">Sexo:</label>
+										<label for="SexoPet">Gênero:</label>
 										<select data-placeholder="Selecione uma Opção..." class="form-control" <?php echo $readonly; ?>
 												id="SexoPet" name="SexoPet">
 											<option value="">-- Selecione uma opção --</option>
@@ -224,22 +224,63 @@
 								<div class="row">
 									<div class="col-md-4">
 										<label for="EspeciePet">Especie: *</label>
-										<input type="text" class="form-control" id="EspeciePet" maxlength="255" <?php echo $readonly; ?>
+										<input type="text" class="form-control" id="EspeciePet" maxlength="45" <?php echo $readonly; ?>
 											   name="EspeciePet" value="<?php echo $query['EspeciePet']; ?>">
 									</div>
 									<div class="col-md-4">
 										<label for="RacaPet">Raca: *</label>
-										<input type="text" class="form-control" id="RacaPet" maxlength="255" <?php echo $readonly; ?>
+										<input type="text" class="form-control" id="RacaPet" maxlength="45" <?php echo $readonly; ?>
 											   name="RacaPet" value="<?php echo $query['RacaPet']; ?>">
+									</div> 
+									<div class="col-md-4">
+										<label for="PeloPet">Pelo:</label>
+										<select data-placeholder="Selecione uma Opção..." class="form-control" 
+												id="PeloPet" name="PeloPet">
+											<option value="">-- Selecione uma opção --</option>
+											<?php
+											foreach ($select['PeloPet'] as $key => $row) {
+												if ($query['PeloPet'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>   
+										</select>
 									</div>
+									<!--
 									<div class="col-md-4">
 										<label for="PeloPet">Pelo: *</label>
-										<input type="text" class="form-control" id="PeloPet" maxlength="255" <?php echo $readonly; ?>
+										<input type="text" class="form-control" id="PeloPet" maxlength="45" <?php echo $readonly; ?>
 											   name="PeloPet" value="<?php echo $query['PeloPet']; ?>">
 									</div>
+									--> 
+									<div class="col-md-4">
+										<label for="PortePet">Porte:</label>
+										<select data-placeholder="Selecione uma Opção..." class="form-control" 
+												id="PortePet" name="PortePet">
+											<option value="">-- Selecione uma opção --</option>
+											<?php
+											foreach ($select['PortePet'] as $key => $row) {
+												if ($query['PortePet'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>   
+										</select>
+									</div>
+									<!--
+									<div class="col-md-4">
+										<label for="PortePet">Porte: *</label>
+										<input type="text" class="form-control" id="PortePet" maxlength="45" <?php echo $readonly; ?>
+											   name="PortePet" value="<?php echo $query['PortePet']; ?>">
+									</div>
+									-->
 									<div class="col-md-4">
 										<label for="CorPet">Cor: *</label>
-										<input type="text" class="form-control" id="CorPet" maxlength="255" <?php echo $readonly; ?>
+										<input type="text" class="form-control" id="CorPet" maxlength="45" <?php echo $readonly; ?>
 											   name="CorPet" value="<?php echo $query['CorPet']; ?>">
 									</div>
 									<div class="col-md-4">
@@ -247,6 +288,10 @@
 										<textarea class="form-control" id="ObsPet" <?php echo $readonly; ?>
 												  name="ObsPet"><?php echo $query['ObsPet']; ?></textarea>
 									</div>
+								</div>
+							</div>	
+							<div class="form-group">
+								<div class="row">
 									<div class="col-md-2">
 										<label for="AtivoPet">AtivoPet?</label><br>
 										<div class="form-group">

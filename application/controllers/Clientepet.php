@@ -60,15 +60,35 @@ class Clientepet extends CI_Controller {
             'RacaPet',
             'PeloPet',
             'CorPet',
+            'PortePet',
             'ObsPet',
                         ), TRUE));
 
         //echo '<br><br><br><br><br>==========================================='.$data['query']['StatusVidaPet']='V';
 
-		$data['select']['SexoPet'] = $this->Basico_model->select_sexo();
+		//$data['select']['SexoPet'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVidaPet'] = $this->Clientepet_model->select_status_vida();
 		$data['select']['AtivoPet'] = $this->Basico_model->select_status_sn();
-		
+		$data['select']['SexoPet'] = array(
+			'O' => '',
+			'M' => 'MACHO',
+			'F' => 'FÊMEA',
+        );
+		$data['select']['PeloPet'] = array (
+            '0' => '',
+            '1' => 'CURTO',
+            '2' => 'MÉDIO',
+			'3' => 'LONGO',
+			'4' => 'CACHEADO',
+        );		
+		$data['select']['PortePet'] = array (
+            '0' => '',
+            '1' => 'MINI',
+            '2' => 'PEQUENO',
+			'3' => 'MÉDIO',
+			'4' => 'GRANDE',
+			'5' => 'GIGANTE',
+        );		
 		$data['titulo'] = 'Contatos e Responsáveis';
         $data['form_open_path'] = 'clientepet/cadastrar';
         $data['readonly'] = '';
@@ -94,6 +114,7 @@ class Clientepet extends CI_Controller {
             $data['query']['RacaPet'] = trim(mb_strtoupper($data['query']['RacaPet'], 'ISO-8859-1'));
             $data['query']['PeloPet'] = trim(mb_strtoupper($data['query']['PeloPet'], 'ISO-8859-1'));
             $data['query']['CorPet'] = trim(mb_strtoupper($data['query']['CorPet'], 'ISO-8859-1'));
+            $data['query']['PortePet'] = trim(mb_strtoupper($data['query']['PortePet'], 'ISO-8859-1'));
 			$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -141,6 +162,7 @@ class Clientepet extends CI_Controller {
             'RacaPet',
             'PeloPet',
             'CorPet',
+            'PortePet',
             'ObsPet',
 			'AtivoPet',
                 ), TRUE);
@@ -151,10 +173,29 @@ class Clientepet extends CI_Controller {
             //$_SESSION['ClientePet']['idApp_ClientePet'] = $id;
         }
 		
-		$data['select']['SexoPet'] = $this->Basico_model->select_sexo();
+		//$data['select']['SexoPet'] = $this->Basico_model->select_sexo();
         $data['select']['StatusVidaPet'] = $this->Clientepet_model->select_status_vida();      
 		$data['select']['AtivoPet'] = $this->Basico_model->select_status_sn();
-		
+		$data['select']['SexoPet'] = array(
+			'O' => '',
+			'M' => 'MACHO',
+			'F' => 'FÊMEA',
+        );
+		$data['select']['PeloPet'] = array (
+            '0' => '',
+            '1' => 'CURTO',
+            '2' => 'MÉDIO',
+			'3' => 'LONGO',
+			'4' => 'CACHEADO',
+        );		
+		$data['select']['PortePet'] = array (
+            '0' => '',
+            '1' => 'MINI',
+            '2' => 'PEQUENO',
+			'3' => 'MÉDIO',
+			'4' => 'GRANDE',
+			'5' => 'GIGANTE',
+        );
 		$data['titulo'] = 'Editar Dados';
         $data['form_open_path'] = 'clientepet/alterar';
         $data['readonly'] = '';
@@ -180,6 +221,7 @@ class Clientepet extends CI_Controller {
             $data['query']['RacaPet'] = trim(mb_strtoupper($data['query']['RacaPet'], 'ISO-8859-1'));
             $data['query']['PeloPet'] = trim(mb_strtoupper($data['query']['PeloPet'], 'ISO-8859-1'));
             $data['query']['CorPet'] = trim(mb_strtoupper($data['query']['CorPet'], 'ISO-8859-1'));
+            $data['query']['PortePet'] = trim(mb_strtoupper($data['query']['PortePet'], 'ISO-8859-1'));
             //$data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 			$data['query']['idApp_ClientePet'] = $_SESSION['ClientePet']['idApp_ClientePet'];
 

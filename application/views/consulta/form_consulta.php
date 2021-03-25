@@ -814,17 +814,17 @@
 									<input type="text" class="form-control Date" maxlength="10" name="DataNascimentoPet" placeholder="DD/MM/AAAA">
 								</div>
 								<div class="col-lg-3 ">
-									<h4 class="mb-3">Sexo</h4>
+									<h4 class="mb-3">Gênero</h4>
 									<div class="col-md-6 mb-3 ">	
 										<div class="custom-control custom-radio">
 											<input type="radio" name="SexoPet" class="custom-control-input "  id="Retirada" value="M" checked>
-											<label class="custom-control-label" for="Masculino">Mas</label>
+											<label class="custom-control-label" for="Masculino">MACHO</label>
 										</div>
 									</div>
 									<div class="col-md-6 mb-3 ">	
 										<div class="custom-control custom-radio">
 											<input type="radio" name="SexoPet" class="custom-control-input " id="Combinar" value="F">
-											<label class="custom-control-label" for="Feminino">Fem </label>
+											<label class="custom-control-label" for="Feminino">FÊMEA</label>
 										</div>
 									</div>
 								</div>
@@ -839,16 +839,58 @@
 									<label for="RacaPet">Raca: *</label>
 									<input name="RacaPet" type="text" class="form-control" id="RacaPet" maxlength="45" placeholder="Raca do Pet">
 								</div>
+								<div class="col-md-3 text-left">
+									<label for="PeloPet">Pelo?</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control"
+											id="PeloPet" name="PeloPet">
+										<option value="">-- Selecione uma opção --</option>
+										<?php
+										foreach ($select['PeloPet'] as $key => $row) {
+											if ($cadastrar['PeloPet'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								<!--
 								<div class="col-md-3">
 									<label for="PeloPet">Pelo: *</label>
 									<input name="PeloPet" type="text" class="form-control" id="PeloPet" maxlength="45" placeholder="Pelo do Pet">
 								</div>
+								-->
+								<div class="col-md-3 text-left">
+									<label for="PortePet">Porte?</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control"
+											id="PortePet" name="PortePet">
+										<option value="">-- Selecione uma opção --</option>
+										<?php
+										foreach ($select['PortePet'] as $key => $row) {
+											if ($cadastrar['PortePet'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								<!--
+								<div class="col-md-3">
+									<label for="PortePet">Porte: *</label>
+									<input name="PortePet" type="text" class="form-control" id="PortePet" maxlength="45" placeholder="Porte do Pet">
+								</div>
+								-->
+							</div>
+							<div class="row">
 								<div class="col-md-3">
 									<label for="CorPet">Cor: *</label>
 									<input name="CorPet" type="text" class="form-control" id="CorPet" maxlength="45" placeholder="Cor do Pet">
 								</div>
-							</div>
-							<div class="row">
+								<div class="col-md-3">
+								</div>
 								<div class="col-md-6">
 									<label for="ObsPet">Obs: *</label>
 									<input name="ObsPet" type="text" class="form-control" id="ObsPet" maxlength="255" placeholder="Observacao">

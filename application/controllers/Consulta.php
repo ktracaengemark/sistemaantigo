@@ -50,6 +50,8 @@ class Consulta extends CI_Controller {
 			'Prazo',
 			'DataMinima',
 			'RelacaoDep',
+			'PeloPet',
+			'PortePet',
         ), TRUE));
 
         $data['query'] = quotes_to_entities($this->input->post(array(
@@ -137,7 +139,21 @@ class Consulta extends CI_Controller {
             $data['div']['Paciente'] = '' : $data['div']['Paciente'] = 'style="display: none;"';
 
 		
-
+		$data['select']['PeloPet'] = array (
+            '0' => '',
+            '1' => 'Curto',
+            '2' => 'Médio',
+			'3' => 'Longo',
+			'4' => 'Cacheado',
+        );		
+		$data['select']['PortePet'] = array (
+            '0' => '',
+            '1' => 'Mini',
+            '2' => 'Pequeno',
+			'3' => 'Médio',
+			'4' => 'Grande',
+			'5' => 'Gigante',
+        );
 		$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['Repetir'] = $this->Basico_model->select_status_sn();        
 		$data['select']['Tempo'] = array (
@@ -724,6 +740,8 @@ class Consulta extends CI_Controller {
 
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'Cadastrar',
+			'PeloPet',
+			'PortePet',
         ), TRUE));
 		
 		$data['alterar'] = quotes_to_entities($this->input->post(array(
@@ -805,7 +823,22 @@ class Consulta extends CI_Controller {
         ($data['query']['Paciente'] == 'D') ?
             $data['div']['Paciente'] = '' : $data['div']['Paciente'] = 'style="display: none;"';
 
-	
+		
+		$data['select']['PeloPet'] = array (
+            '0' => '',
+            '1' => 'CURTO',
+            '2' => 'MÉDIO',
+			'3' => 'LONGO',
+			'4' => 'CACHEADO',
+        );		
+		$data['select']['PortePet'] = array (
+            '0' => '',
+            '1' => 'MINI',
+            '2' => 'PEQUENO',
+			'3' => 'MÉDIO',
+			'4' => 'GRANDE',
+			'5' => 'GIGANTE',
+        );	
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['idApp_Agenda'] = $this->Basico_model->select_agenda();
 		$data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
