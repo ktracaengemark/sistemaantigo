@@ -25,6 +25,7 @@ exibirentrega();
 exibir();
 exibir_confirmar();	
 Aguardar();
+clientePet();
 
 function codigo(id, tabela){
 	//alert('ok codigo');
@@ -117,8 +118,41 @@ function exibir_confirmar(){
 	$('.Close').hide();
 }
 
+
 // Funções de cadastros auxiliares
 $(document).ready(function(){
+	
+	$('#addPet').on('click', function(event){
+		//alert('addPet');			
+		
+		var id_cliente =  $('#idApp_Cliente').val();
+		$('#id_Cliente').val(id_cliente);
+
+		console.log(id_cliente);
+		//Limpar mensagem de erro
+		//$("#addClientePetModalLabel").html('<div class="alert alert-warning" role="alert">Pet do Cliente: '+id_cliente+'</div>');		
+		
+		event.preventDefault();
+		
+		$.ajax({
+			url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Cliente.php?id=' + id_cliente,
+			dataType: "json",
+			success: function (data) {
+			
+				var idcliente = data[0]['id'];
+				var nomecliente = data[0]['nome'];
+				var celularcliente = data[0]['celular'];
+				
+				$("#addClientePetModalLabel").html('<div class="alert alert-warning" role="alert">Cadsatrar Pet do(a) Cliente: '+idcliente+ '<br>Nome: ' + nomecliente + '<br>Celular: ' + celularcliente + '</div>');
+				
+			},
+			error:function(data){
+				$("#addClientePetModalLabel").html('<div class="alert alert-warning" role="alert">Nenhum Cliente Selecionado!</div>');
+			}
+			
+		});	
+		
+	});
 	
 	$('#insert_cliente_form').on('submit', function(event){
 		//alert('ok');			
@@ -333,47 +367,65 @@ $(document).ready(function(){
 	
 	$('#insert_clientepet_form').on('submit', function(event){
 		//alert('ok');
+		var id_cliente =  $('#idApp_Cliente').val();
+		$('#id_Cliente').val(id_cliente);
+
+		console.log(id_cliente);
+		//Limpar mensagem de erro
+		$("#msg-error-clientepet").html('');
+		
 		event.preventDefault();
-		if($('#NomeClientePet').val() == ""){
-			//Alerta de campo  vazio
-			$("#msg-error-clientepet").html('<div class="alert alert-danger" role="alert">Necessário prencher Nome do Pet!</div>');						
+		if(id_cliente == "" || id_cliente == "0"){
+			console.log($('#id_Cliente').val());
+			$("#msg-error-clientepet").html('<div class="alert alert-danger" role="alert">Cliente Não informado!</div>');						
 		}else{
-			//Fechar o botão cadastrar
-			$('#botaoCad').hide();
-								
-			//Fechar o botão fechar
-			$('#botaoFechar').hide();
+			//Limpar mensagem de erro
+			$("#msg-error-clientepet").html('');
 			
-			//Abre o Aguardar
-			$('.aguardar1').show();	
-			
-			//Receber os dados do formulário
-			var dados = $("#insert_clientepet_form").serialize();
-			//console.log(dados);
-			
-			$.post(window.location.origin+ '/' + app + '/cadastros/inserir/ClientePet.php?', dados, function (retorna){
-			 //console.log(retorna);
-				if(retorna == 1){
-					//Limpar os campo
-					$('#insert_clientepet_form')[0].reset();
-					
-					//Fechar a janela modal cadastrar
-					$('#addClientePetModal').modal('hide');
-								
-					//Alerta de cadastro realizado com sucesso
-					//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
-					$('#msgCadSucesso').modal('show');
-					
-					//Limpar mensagem de erro
-					$("#msg-error-clientepet").html('');
-					
-					//listar_usuario(1, 50);
-				}else{
-					$("#msg-error-clientepet").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Pet!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
-				}
+			console.log($('#id_Cliente').val());
+			if($('#NomeClientePet').val() == ""){
+				//Alerta de campo  vazio
+				$("#msg-error-clientepet").html('<div class="alert alert-danger" role="alert">Necessário prencher Nome do Pet!</div>');						
+			}else{
+				//Fechar o botão cadastrar
+				$('#botaoCad').hide();
+									
+				//Fechar o botão fechar
+				$('#botaoFechar').hide();
 				
-			});
-			
+				//Abre o Aguardar
+				$('.aguardar1').show();	
+				
+				//Receber os dados do formulário
+				var dados = $("#insert_clientepet_form").serialize();
+				console.log(dados);
+				
+				$.post(window.location.origin+ '/' + app + '/cadastros/inserir/ClientePet.php?', dados, function (retorna){
+				 console.log(retorna);
+					
+					if(retorna == 1){
+						//Limpar os campo
+						$('#insert_clientepet_form')[0].reset();
+						
+						//Fechar a janela modal cadastrar
+						$('#addClientePetModal').modal('hide');
+									
+						//Alerta de cadastro realizado com sucesso
+						//$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>'); 
+						$('#msgCadSucesso').modal('show');
+						
+						//Limpar mensagem de erro
+						$("#msg-error-clientepet").html('');
+						
+						//listar_usuario(1, 50);
+					}else{
+						$("#msg-error-clientepet").html('<div class="alert alert-danger" role="alert">Ocorreu um erro ao cadastrar o Pet!<br>Entre em contato com o Suporte Técnico do Sistema.</div>');
+					}
+					
+					
+				});
+				
+			}
 		}
 		
 	});	
@@ -1851,6 +1903,40 @@ $(document).ready(function(){
 	});	
 	
 });
+
+function clientePet(id){
+	//alert('carregando clientepets: ' + id);
+	var id_cliente = $('#idApp_Cliente').val();
+	console.log(id_cliente);
+	console.log(id);
+
+	if(id_cliente) {
+		//console.log(id);
+		
+		$('#idApp_ClientePet').hide();
+		/*
+		$('.carregando').show();
+		*/
+		$.getJSON('../cadastros/pesquisar/ClientePet.php?search=',{idApp_Cliente: id_cliente, ajax: 'true'}, function(j){
+			//console.log(idApp_Cliente);
+			//console.log(j.length);
+			
+			//console.log(j);
+			
+			var options = '<option value="">-- Sel. Pet --</option>';	
+			for (var i = 0; i < j.length; i++) {
+				options += '<option value="' + j[i].id_ClientePet + '">' + j[i].nome_ClientePet + '</option>';
+			}	
+			$('#idApp_ClientePet').html(options).show();
+			//$('.carregando').hide();
+			//console.log(options);
+		});
+		
+	} else {
+		$('#idApp_ClientePet').html('<option value="">– Selecione um Cliente –</option>');
+	}
+
+}
 
 //Função que desabilita o botão fechar após 1 click, evitando mais de um envio de formulário.
 function DesabilitaBotaoSalvar () {	
@@ -5690,6 +5776,7 @@ $("#first-choice").change(function () {
 
 });
 
+//Funções dos produtos do formulário de receiras e despesas
 $(document).ready(function () {
 
     $(".Date").mask("99/99/9999");
@@ -6875,6 +6962,7 @@ $(document).ready(function () {
         locale: 'pt-br'
     });
 });
+
 $('#datepickerinline').datetimepicker({
     tooltips: {
         today: 'Hoje',
@@ -6905,7 +6993,6 @@ $('#datepickerinline').datetimepicker({
     //defaultDate: '2015-01-01',
     locale: 'pt-br'
 });
-
 
 $("#datepickerinline").on("dp.change", function (e) {
     var d = new Date(e.date);
@@ -7220,7 +7307,8 @@ function redirecionar_Funcionando(x) {
     var re = new RegExp(/^.*\//);
     var start = moment($("#start").val());
     var end = moment($("#end").val());
-    (x == 1) ? url = 'consulta/cadastrar_evento' : url = 'cliente/pesquisar';
+    //(x == 1) ? url = 'consulta/cadastrar_evento' : url = 'cliente/pesquisar';
+    (x == 1) ? url = 'consulta/cadastrar_evento' : url = 'consulta/cadastrar2';
     window.location = re.exec(window.location.href) + url + '?start=' + start + '&end=' + end
 }
 

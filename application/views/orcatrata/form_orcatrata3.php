@@ -113,7 +113,7 @@
 														<div class="row">
 															<div class="col-md-4 text-left">
 																<label  for="idApp_Cliente">Cliente</label>
-																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value),dateDiff()" <?php echo $readonly; ?>
+																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value),dateDiff(),clientePet(this.value)" <?php echo $readonly; ?>
 																		id="idApp_Cliente" autofocus name="idApp_Cliente">
 																	<option value="">-- Sel. Cliente --</option>
 																	<?php
@@ -124,10 +124,16 @@
 																		} else {
 																			echo '<option value="' . $key . '">' . $row . '</option>';
 																		}
-																		}
+																	}
 																	?>
 																</select>
 																<?php echo form_error('idApp_Cliente'); ?>
+															</div>
+															<div class="col-md-4 text-left">
+																<label  for="idApp_ClientePet">Pet</label>
+																<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_ClientePet" name="idApp_ClientePet">
+																	<option value="<?php echo $orcatrata['idApp_ClientePet']; ?>"></option>
+																</select>
 															</div>
 															<div class="col-md-2 text-left">
 																<label for="Cadastrar">Cliente Encontrado?</label><br>
@@ -159,18 +165,42 @@
 																</div>
 															</div>
 															<div class="col-md-4 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-																<label for="Cadastrar">Cadastrar Cliente</label><br>
-																<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addClienteModal">
-																	Cadastrar
-																</button>
-																<!--
-																<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>cliente2/cadastrar3/" role="button"> 
-																	<span class="glyphicon glyphicon-plus"></span> <span class="glyphicon glyphicon-edit"></span> Cliente
-																</a>
-																-->
-																<button class="btn btn-md btn-primary"  id="inputDb" data-loading-text="Aguarde..." type="submit">
-																		<span class="glyphicon glyphicon-refresh"></span>Recarregar
-																</button>
+																<div class="row">	
+																	<div class="col-md-4 text-left">	
+																		<label for="Cadastrar">Cliente</label><br>
+																		<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addClienteModal">
+																			<span class="glyphicon glyphicon-plus"></span>Cadastrar
+																		</button>
+																	</div>
+																	<?php if ($_SESSION['Empresa']['CadastrarPet'] == "S") { ?>
+																		<div class="col-md-4 text-left">
+																			<label >Pet</label><br>
+																			<button type="button" class="btn btn-success btn-block" id="addPet" data-toggle="modal" data-target="#addClientePetModal" >
+																				<span class="glyphicon glyphicon-plus"></span>Cadastrar
+																			</button>
+																		</div>
+																	<?php }else{ ?>	
+																		<?php if ($_SESSION['Empresa']['CadastrarDep'] == "S") { ?>
+																			<div class="col-md-4 text-left">
+																				<label >Dependente</label><br>
+																				<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addClienteDepModal">
+																					<span class="glyphicon glyphicon-plus"></span>Cadastrar
+																				</button>
+																			</div>
+																		<?php } ?>
+																	<?php } ?>	
+																	<!--
+																	<a class="btn btn-md btn-info"   target="_blank" href="<?php echo base_url() ?>cliente2/cadastrar3/" role="button"> 
+																		<span class="glyphicon glyphicon-plus"></span> <span class="glyphicon glyphicon-edit"></span> Cliente
+																	</a>
+																	-->
+																	<div class="col-md-4 text-left">
+																		<label >Recarregar</label><br>
+																		<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
+																				<span class="glyphicon glyphicon-refresh"></span>Recarregar
+																		</button>
+																	</div>	
+																</div>	
 																<?php echo form_error('Cadastrar'); ?>
 															</div>
 														</div>
@@ -1847,7 +1877,7 @@
 																							<?php
 																							foreach ($select['ConcluidoOrca'] as $key => $row) {
 																								if (!$orcatrata['ConcluidoOrca'])$orcatrata['ConcluidoOrca'] = 'N';
-
+																								
 																								($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
 																								if ($orcatrata['ConcluidoOrca'] == $key) {
@@ -2298,4 +2328,231 @@
 			</div>
 		</div>
 	</div>
-</div>			
+</div>
+
+<?php if ($_SESSION['Empresa']['CadastrarPet'] == "S") { ?>
+	<div id="addClientePetModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="modal-title" id="addClientePetModalLabel"></span>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<span id="msg-error-clientepet"></span>
+					<form method="post" id="insert_clientepet_form">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-6">
+									<label for="NomeClientePet">Nome do Pet: *</label>
+									<input name="NomeClientePet" type="text" class="form-control" id="NomeClientePet" maxlength="255" placeholder="Nome do Pet">
+								</div>
+								<div class="col-md-3">
+									<label for="DataNascimentoPet">Data de Nascimento:</label>
+									<input type="text" class="form-control Date" maxlength="10" name="DataNascimentoPet" placeholder="DD/MM/AAAA">
+								</div>
+								<div class="col-lg-3 ">
+									<h4 class="mb-3">Gênero</h4>
+									<div class="row">
+										<div class="col-md-6 mb-3 ">	
+											<div class="custom-control custom-radio">
+												<input type="radio" name="SexoPet" class="custom-control-input "  id="Retirada" value="M" checked>
+												<label class="custom-control-label" for="Masculino">MACHO</label>
+											</div>
+										</div>
+										<div class="col-md-6 mb-3 ">	
+											<div class="custom-control custom-radio">
+												<input type="radio" name="SexoPet" class="custom-control-input " id="Combinar" value="F">
+												<label class="custom-control-label" for="Feminino">FÊMEA</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<input type="hidden" name="id_Cliente" id="id_Cliente" value="<?php echo $orcatrata['idApp_Cliente']; ?>" >
+							</div>
+							<div class="row">
+								<div class="col-md-3">
+									<label for="EspeciePet">Especie: *</label>
+									<input name="EspeciePet" type="text" class="form-control" id="EspeciePet" maxlength="45" placeholder="Especie do Pet">
+								</div>
+								<div class="col-md-3">
+									<label for="RacaPet">Raca: *</label>
+									<input name="RacaPet" type="text" class="form-control" id="RacaPet" maxlength="45" placeholder="Raca do Pet">
+								</div>
+								<div class="col-md-3 text-left">
+									<label for="PeloPet">Pelo?</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control"
+											id="PeloPet" name="PeloPet">
+										<option value="">-- Selecione uma opção --</option>
+										<?php
+										foreach ($select['PeloPet'] as $key => $row) {
+											if ($cadastrar['PeloPet'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								<!--
+								<div class="col-md-3">
+									<label for="PeloPet">Pelo: *</label>
+									<input name="PeloPet" type="text" class="form-control" id="PeloPet" maxlength="45" placeholder="Pelo do Pet">
+								</div>
+								-->
+								<div class="col-md-3 text-left">
+									<label for="PortePet">Porte?</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control"
+											id="PortePet" name="PortePet">
+										<option value="">-- Selecione uma opção --</option>
+										<?php
+										foreach ($select['PortePet'] as $key => $row) {
+											if ($cadastrar['PortePet'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+								<!--
+								<div class="col-md-3">
+									<label for="PortePet">Porte: *</label>
+									<input name="PortePet" type="text" class="form-control" id="PortePet" maxlength="45" placeholder="Porte do Pet">
+								</div>
+								-->
+							</div>
+							<div class="row">
+								<div class="col-md-3">
+									<label for="CorPet">Cor: *</label>
+									<input name="CorPet" type="text" class="form-control" id="CorPet" maxlength="45" placeholder="Cor do Pet">
+								</div>
+								<div class="col-md-3">
+								</div>
+								<div class="col-md-6">
+									<label for="ObsPet">Obs: *</label>
+									<input name="ObsPet" type="text" class="form-control" id="ObsPet" maxlength="255" placeholder="Observacao">
+								</div>
+							</div>								
+						</div>
+						<div class="form-group row">	
+							<div class="col-sm-6">
+								<br>
+								<button type="submit" class="btn btn-success btn-block" name="botaoCad" id="botaoCad" >
+									<span class="glyphicon glyphicon-plus"></span> Cadastrar
+								</button>
+							</div>
+							<div class="col-sm-6">
+								<br>
+								<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFechar" id="botaoFechar">
+									<span class="glyphicon glyphicon-remove"></span> Fechar
+								</button>
+							</div>	
+							<div class="col-md-12 alert alert-warning aguardar1" role="alert" >
+								Aguarde um instante! Estamos processando sua solicitação!
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php }else{ ?>
+	<?php if ($_SESSION['Empresa']['CadastrarDep'] == "S") { ?>
+		<div id="addClienteDepModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="addClienteDepModalLabel">Cadastrar Dependente</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<span id="msg-error-clientedep"></span>
+						<form method="post" id="insert_clientedep_form">
+							<div class="form-group">
+								<div class="row">
+									<div class="col-md-6">
+										<label for="NomeClienteDep">Nome do Dependente: *</label>
+										<input name="NomeClienteDep" type="text" class="form-control" id="NomeClienteDep" maxlength="255" placeholder="Nome do Dependente">
+									</div>
+									<div class="col-md-3">
+										<label for="DataNascimentoDep">Data de Nascimento:</label>
+										<input type="text" class="form-control Date" maxlength="10" name="DataNascimentoDep" placeholder="DD/MM/AAAA">
+									</div>
+									<div class="col-lg-3 ">
+										<h4 class="mb-3">Sexo</h4>
+										<div class="col-md-4 mb-3 ">	
+											<div class="custom-control custom-radio">
+												<input type="radio" name="SexoDep" class="custom-control-input "  id="Retirada" value="M">
+												<label class="custom-control-label" for="Masculino">Mas</label>
+											</div>
+										</div>
+										<div class="col-md-4 mb-3 ">	
+											<div class="custom-control custom-radio">
+												<input type="radio" name="SexoDep" class="custom-control-input " id="Combinar" value="F">
+												<label class="custom-control-label" for="Feminino">Fem </label>
+											</div>
+										</div>
+										<div class="col-md-4 mb-3 ">
+											<div class="custom-control custom-radio">
+												<input type="radio" name="SexoDep" class="custom-control-input " id="Correios" value="O" checked>
+												<label class="custom-control-label" for="Outros">Outros</label>
+											</div>
+										</div>
+									</div>
+									<input type="hidden" name="id_Cliente" id="id_Cliente" value="<?php echo $orcatrata['idApp_Cliente']; ?>" >
+								</div>
+								<div class="row">					
+									<div class="col-md-6">
+										<label for="RelacaoDep">Relação</label>
+										<select data-placeholder="Selecione uma opção..." class="form-control"
+												id="RelacaoDep" name="RelacaoDep">
+											<option value="">-- Selecione uma Relação --</option>
+											<?php
+											foreach ($select['RelacaoDep'] as $key => $row) {
+												if ($cadastrar['RelacaoDep'] == $key) {
+													echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+												} else {
+													echo '<option value="' . $key . '">' . $row . '</option>';
+												}
+											}
+											?>   
+										</select>
+										<?php echo form_error('RelacaoDep'); ?>           
+									</div>
+									<div class="col-md-6">
+										<label for="ObsDep">Obs: *</label>
+										<input name="ObsDep" type="text" class="form-control" id="ObsDep" maxlength="255" placeholder="Observacao">
+									</div>
+								</div>								
+							</div>
+							<div class="form-group row">	
+								<div class="col-sm-6">
+									<br>
+									<button type="submit" class="btn btn-success btn-block" name="botaoCad" id="botaoCad" >
+										<span class="glyphicon glyphicon-plus"></span> Cadastrar
+									</button>
+								</div>
+								<div class="col-sm-6">
+									<br>
+									<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFechar" id="botaoFechar">
+										<span class="glyphicon glyphicon-remove"></span> Fechar
+									</button>
+								</div>	
+								<div class="col-md-12 alert alert-warning aguardar1" role="alert" >
+									Aguarde um instante! Estamos processando sua solicitação!
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
+<?php } ?>

@@ -196,7 +196,7 @@
 													<div class="row">
 														<div class="col-md-12 text-left">	
 															<label  for="idApp_Cliente">Cliente:</label>
-															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+															<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaEnderecoCliente(this.value),clientePet(this.value)"
 																	id="idApp_Cliente" name="idApp_Cliente">
 																<option value="">-- Sel. Cliente --</option>
 																<?php
@@ -211,12 +211,14 @@
 															</select>
 															<?php echo form_error('idApp_Cliente'); ?>
 														</div>
-													</div>	
+													</div>
+													<!--
 													<div class="row">
 														<div class="col-md-5 text-left">
 															<label class="sr-only" for="Cadastrar">Cadastrar no BD</label>
 															<div class="btn-group" data-toggle="buttons">
 																<?php
+																/*
 																foreach ($select['Cadastrar'] as $key => $row) {
 																	if (!$cadastrar['Cadastrar']) $cadastrar['Cadastrar'] = 'S';
 
@@ -238,8 +240,8 @@
 																		;
 																	}
 																}
+																*/
 																?>
-
 															</div>
 														</div>
 																											
@@ -254,13 +256,8 @@
 															<?php echo form_error('Cadastrar'); ?>
 														</div>
 													</div>
+													-->
 												</div>
-											<?php }elseif($alterarcliente == 2){?>	
-												<div class="col-md-4">
-													<label >Cliente</label>
-													<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Cliente']['NomeCliente']; ?>">
-												</div>	
-											<?php } ?>
 											<?php if($_SESSION['Empresa']['CadastrarDep'] == "S"){?>
 												<div class="col-md-4 text-left">	
 													<label  for="idApp_ClienteDep">Dependente:</label>
@@ -281,12 +278,20 @@
 												</div>
 											<?php } ?>
 											<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
+												<div class="col-md-4 text-left">
+													<label  for="idApp_ClientePet">Pet</label>
+													<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_ClientePet" name="idApp_ClientePet">
+														<option value="<?php echo $query['idApp_ClientePet']; ?>"></option>
+													</select>
+												</div>
+												<!--
 												<div class="col-md-4 text-left">	
 													<label  for="idApp_ClientePet">Pet:</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
 															id="idApp_ClientePet" name="idApp_ClientePet">
 														<option value="">-- Sel. Pet --</option>
 														<?php
+														/*
 														foreach ($select['idApp_ClientePet'] as $key => $row) {
 															if ($query['idApp_ClientePet'] == $key) {
 																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
@@ -294,16 +299,62 @@
 																echo '<option value="' . $key . '">' . $row . '</option>';
 															}
 														}
+														*/
 														?>
 													</select>
 													<?php echo form_error('idApp_ClientePet'); ?>
 												</div>
+												-->
+											<?php } ?>
+											<?php }elseif($alterarcliente == 2){?>	
+												<div class="col-md-4">
+													<label >Cliente</label>
+													<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Cliente']['NomeCliente']; ?>">
+												</div>
+												<?php if($_SESSION['Empresa']['CadastrarDep'] == "S"){?>
+													<div class="col-md-4 text-left">	
+														<label  for="idApp_ClienteDep">Dependente:</label>
+														<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																id="idApp_ClienteDep" name="idApp_ClienteDep">
+															<option value="">-- Sel. Dependente --</option>
+															<?php
+															foreach ($select['idApp_ClienteDep'] as $key => $row) {
+																if ($query['idApp_ClienteDep'] == $key) {
+																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																} else {
+																	echo '<option value="' . $key . '">' . $row . '</option>';
+																}
+															}
+															?>
+														</select>
+														<?php echo form_error('idApp_ClienteDep'); ?>
+													</div>
+												<?php } ?>
+												<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
+													<div class="col-md-4 text-left">	
+														<label  for="idApp_ClientePet">Pet:</label>
+														<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
+																id="idApp_ClientePet" name="idApp_ClientePet">
+															<option value="">-- Sel. Pet --</option>
+															<?php
+															foreach ($select['idApp_ClientePet'] as $key => $row) {
+																if ($query['idApp_ClientePet'] == $key) {
+																	echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+																} else {
+																	echo '<option value="' . $key . '">' . $row . '</option>';
+																}
+															}
+															?>
+														</select>
+														<?php echo form_error('idApp_ClientePet'); ?>
+													</div>
+												<?php } ?>	
 											<?php } ?>
 										</div>
 										
 										<div class="row">
 											<div class="col-md-4 text-left">
-												<label for="Cadastrar">Encontrou?</label><br>
+												<label for="Cadastrar">Encontrou Cliente?</label><br>
 												<div class="btn-group" data-toggle="buttons">
 													<?php
 													foreach ($select['Cadastrar'] as $key => $row) {
@@ -332,17 +383,23 @@
 												</div>
 											</div>											
 											<div class="col-md-8 text-left" id="Cadastrar" <?php echo $div['Cadastrar']; ?>>
-												<div class="row">
+												<div class="row">	
+													<div class="col-md-4 text-left">	
+														<label for="Cadastrar">Cliente</label><br>
+														<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addClienteModal">
+															<span class="glyphicon glyphicon-plus"></span>Cadastrar
+														</button>
+													</div>
 													<?php if ($_SESSION['Empresa']['CadastrarPet'] == "S") { ?>
-														<div class="col-md-3 text-left">
+														<div class="col-md-4 text-left">
 															<label >Pet</label><br>
-															<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addClientePetModal">
+															<button type="button" class="btn btn-success btn-block" id="addPet" data-toggle="modal" data-target="#addClientePetModal">
 																<span class="glyphicon glyphicon-plus"></span>Cadastrar
 															</button>
 														</div>
 													<?php }else{ ?>	
 														<?php if ($_SESSION['Empresa']['CadastrarDep'] == "S") { ?>
-															<div class="col-md-3 text-left">
+															<div class="col-md-4 text-left">
 																<label >Dependente</label><br>
 																<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addClienteDepModal">
 																	<span class="glyphicon glyphicon-plus"></span>Cadastrar
@@ -350,7 +407,7 @@
 															</div>
 														<?php } ?>
 													<?php } ?>	
-													<div class="col-md-3 text-left">
+													<div class="col-md-4 text-left">
 														<label >Recarregar</label><br>
 														<button class="btn btn-md btn-primary btn-block"  id="inputDb" data-loading-text="Aguarde..." type="submit">
 																<span class="glyphicon glyphicon-refresh"></span>Recarregar
@@ -790,12 +847,158 @@
 	</div>
 </div>
 <?php } ?>
+
+<div id="addClienteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addClienteModalLabel">Cadastrar Cliente</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<span id="msg-error-cliente"></span>
+				<form method="post" id="insert_cliente_form">
+					
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-6">
+								<label for="NomeCliente">Nome do Cliente: *</label>
+								<input name="NomeCliente" type="text" class="form-control" id="NomeCliente" maxlength="255" placeholder="Nome do Cliente">
+							</div>
+							<div class="col-md-3">
+								<label for="CelularCliente">Celular: *</label>
+								<input type="text" class="form-control Celular" id="CelularCliente" maxlength="11" name="CelularCliente" placeholder="(XX)999999999">
+							</div>
+							<div class="col-md-3">
+								<label for="DataNascimento">Data do Aniversário:</label>
+								<input type="text" class="form-control Date" maxlength="10" name="DataNascimento" placeholder="DD/MM/AAAA">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6 ">
+								<h4 class="mb-3">Sexo</h4>
+								<div class="col-md-3 mb-3 ">	
+									<div class="custom-control custom-radio">
+										<input type="radio" name="Sexo" class="custom-control-input "  id="Retirada" value="M">
+										<label class="custom-control-label" for="Masculino">Mas</label>
+									</div>
+								</div>
+								<div class="col-md-3 mb-3 ">	
+									<div class="custom-control custom-radio">
+										<input type="radio" name="Sexo" class="custom-control-input " id="Combinar" value="F">
+										<label class="custom-control-label" for="Feminino">Fem </label>
+									</div>
+								</div>
+								<div class="col-md-3 mb-3 ">
+									<div class="custom-control custom-radio">
+										<input type="radio" name="Sexo" class="custom-control-input " id="Correios" value="O" checked>
+										<label class="custom-control-label" for="Outros">Outros</label>
+									</div>
+								</div>
+							</div>
+						</div>								
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-12 text-center">
+								<button class="btn btn-info" type="button" data-toggle="collapse" data-target="#DadosComplementares" aria-expanded="false" aria-controls="DadosComplementares">
+									<span class="glyphicon glyphicon-menu-down"></span> Completar Dados
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="collapse" id="DadosComplementares">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-md-3">
+									<label for="CepCliente">Cep:</label>
+									<input type="text" class="form-control Numero" id="CepCliente" maxlength="8" name="CepCliente">
+								</div>
+								<div class="col-md-6">
+									<label for="EnderecoCliente">Endreço:</label>
+									<input type="text" class="form-control" id="EnderecoCliente" maxlength="100" name="EnderecoCliente">
+								</div>
+								<div class="col-md-3">
+									<label for="NumeroCliente">Numero:</label>
+									<input type="text" class="form-control" id="NumeroCliente" maxlength="100" name="NumeroCliente">
+								</div>
+							</div>	
+							<div class="row">
+								<div class="col-md-3">
+									<label for="ComplementoCliente">Complemento:</label>
+									<input type="text" class="form-control" id="ComplementoCliente" maxlength="100" name="ComplementoCliente" >
+								</div>	
+								<div class="col-md-3">
+									<label for="BairroCliente">Bairro:</label>
+									<input type="text" class="form-control" id="BairroCliente" maxlength="100" name="BairroCliente" >
+								</div>
+								<div class="col-md-3">
+									<label for="CidadeCliente">Município:</label>
+									<input type="text" class="form-control" id="CidadeCliente" maxlength="100" name="CidadeCliente" >
+								</div>
+								<div class="col-md-3">
+									<label for="EstadoCliente">Estado:</label>
+									<input type="text" class="form-control" id="EstadoCliente" maxlength="2" name="EstadoCliente" >
+								</div>
+							</div>	
+							<div class="row">
+								<div class="col-md-3 ">
+									<label class="" for="ReferenciaCliente">Referencia:</label>
+									<textarea class="form-control " id="ReferenciaCliente" name="ReferenciaCliente"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row">	
+						<div class="col-sm-6">
+							<br>
+							<button type="submit" class="btn btn-success btn-block" name="botaoCadCliente" id="botaoCadCliente" >
+								<span class="glyphicon glyphicon-plus"></span> Cadastrar
+							</button>
+						</div>
+						<div class="col-sm-6">
+							<br>
+							<button type="button" class="btn btn-primary btn-block" data-dismiss="modal" name="botaoFecharCliente" id="botaoFecharCliente">
+								<span class="glyphicon glyphicon-remove"></span> Fechar
+							</button>
+						</div>	
+						<div class="col-md-12 alert alert-warning aguardarCliente" role="alert" >
+							Aguarde um instante! Estamos processando sua solicitação!
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="msgClienteExiste" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-warning text-center">
+				<h5 class="modal-title" id="existeClienteModalLabel">Atenção</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				Este Celular já é Cadastrado!
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <?php if ($_SESSION['Empresa']['CadastrarPet'] == "S") { ?>
 	<div id="addClientePetModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="addClientePetModalLabel">Cadastrar Pet</h5>
+					<span class="modal-title" id="addClientePetModalLabel"></span>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					  <span aria-hidden="true">&times;</span>
 					</button>
@@ -815,32 +1018,52 @@
 								</div>
 								<div class="col-lg-3 ">
 									<h4 class="mb-3">Gênero</h4>
-									<div class="col-md-6 mb-3 ">	
-										<div class="custom-control custom-radio">
-											<input type="radio" name="SexoPet" class="custom-control-input "  id="Retirada" value="M" checked>
-											<label class="custom-control-label" for="Masculino">MACHO</label>
+									<div class="row">
+										<div class="col-md-6 mb-3 ">	
+											<div class="custom-control custom-radio">
+												<input type="radio" name="SexoPet" class="custom-control-input "  id="Retirada" value="M" checked>
+												<label class="custom-control-label" for="Masculino">MACHO</label>
+											</div>
 										</div>
-									</div>
-									<div class="col-md-6 mb-3 ">	
-										<div class="custom-control custom-radio">
-											<input type="radio" name="SexoPet" class="custom-control-input " id="Combinar" value="F">
-											<label class="custom-control-label" for="Feminino">FÊMEA</label>
+										<div class="col-md-6 mb-3 ">	
+											<div class="custom-control custom-radio">
+												<input type="radio" name="SexoPet" class="custom-control-input " id="Combinar" value="F">
+												<label class="custom-control-label" for="Feminino">FÊMEA</label>
+											</div>
 										</div>
-									</div>
+									</div>	
 								</div>
 								<input type="hidden" name="id_Cliente" id="id_Cliente" value="<?php echo $query['idApp_Cliente']; ?>" >
 							</div>
 							<div class="row">
+								<!--
 								<div class="col-md-3">
 									<label for="EspeciePet">Especie: *</label>
 									<input name="EspeciePet" type="text" class="form-control" id="EspeciePet" maxlength="45" placeholder="Especie do Pet">
 								</div>
+								-->
+								<div class="col-md-3 text-left">
+									<label for="EspeciePet">Especie:</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control"
+											id="EspeciePet" name="EspeciePet">
+										<option value="">-- Selecione uma opção --</option>
+										<?php
+										foreach ($select['EspeciePet'] as $key => $row) {
+											if ($cadastrar['EspeciePet'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
 								<div class="col-md-3">
-									<label for="RacaPet">Raca: *</label>
+									<label for="RacaPet">Raca:</label>
 									<input name="RacaPet" type="text" class="form-control" id="RacaPet" maxlength="45" placeholder="Raca do Pet">
 								</div>
 								<div class="col-md-3 text-left">
-									<label for="PeloPet">Pelo?</label>
+									<label for="PeloPet">Pelo:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control"
 											id="PeloPet" name="PeloPet">
 										<option value="">-- Selecione uma opção --</option>
@@ -862,7 +1085,7 @@
 								</div>
 								-->
 								<div class="col-md-3 text-left">
-									<label for="PortePet">Porte?</label>
+									<label for="PortePet">Porte:</label>
 									<select data-placeholder="Selecione uma opção..." class="form-control"
 											id="PortePet" name="PortePet">
 										<option value="">-- Selecione uma opção --</option>
@@ -886,13 +1109,13 @@
 							</div>
 							<div class="row">
 								<div class="col-md-3">
-									<label for="CorPet">Cor: *</label>
+									<label for="CorPet">Cor:</label>
 									<input name="CorPet" type="text" class="form-control" id="CorPet" maxlength="45" placeholder="Cor do Pet">
 								</div>
 								<div class="col-md-3">
 								</div>
 								<div class="col-md-6">
-									<label for="ObsPet">Obs: *</label>
+									<label for="ObsPet">Obs:</label>
 									<input name="ObsPet" type="text" class="form-control" id="ObsPet" maxlength="255" placeholder="Observacao">
 								</div>
 							</div>								

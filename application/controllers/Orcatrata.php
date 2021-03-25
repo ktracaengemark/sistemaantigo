@@ -1096,6 +1096,8 @@ class Orcatrata extends CI_Controller {
 			'QuitadoParcelas',
 			'Cadastrar',
 			'AtualizaEndereco',
+			'PeloPet',
+			'PortePet',
         ), TRUE));
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 		$data['orcatrata'] = quotes_to_entities($this->input->post(array(
@@ -1103,6 +1105,7 @@ class Orcatrata extends CI_Controller {
             'idApp_OrcaTrata',
 			'Tipo_Orca',
             'idApp_Cliente',
+            'idApp_ClientePet',
             'DataOrca',
 			'HoraOrca',
 			'DataPrazo',
@@ -1399,41 +1402,22 @@ class Orcatrata extends CI_Controller {
 
         //Fim do trecho de código que dá pra melhorar
 
-        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
-
-        #### App_OrcaTrata ####
+		$data['select']['PeloPet'] = array (
+            '0' => '',
+            '1' => 'CURTO',
+            '2' => 'MÉDIO',
+			'3' => 'LONGO',
+			'4' => 'CACHEADO',
+        );		
+		$data['select']['PortePet'] = array (
+            '0' => '',
+            '1' => 'MINI',
+            '2' => 'PEQUENO',
+			'3' => 'MÉDIO',
+			'4' => 'GRANDE',
+			'5' => 'GIGANTE',
+        );		
 		
-		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
-			if($data['diferenca'] < 0.00){
-				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
-				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
-			}elseif($data['diferenca'] > 0.00){
-				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
-				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
-				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
-			}
-		}
-		if ($data['valortotalorca'] <= 0.00 ) {
-			$this->form_validation->set_rules('BrindeOrca', 'Se quiser Permitir Total = 0,00, então coloque a chave na posição "Sim".<br>Com o Total = 0,00, as parcelas geradas não serão salvas.', 'trim|valid_brinde');
-		}
-		
-		if ($_SESSION['log']['NivelEmpresa'] >= '4' && $data['orcatrata']['Cli_Forn_Orca'] == "S") {
-			$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
-			$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
-		} else {
-			$data['cadastrar']['Cadastrar'] = 'S';
-		}
-		$this->form_validation->set_rules('DataOrca', 'Data do Orçamento', 'required|trim|valid_date');
-		$this->form_validation->set_rules('AVAP', 'À Vista ou À Prazo', 'required|trim');
-		$this->form_validation->set_rules('FormaPagamento', 'Forma de Pagamento', 'required|trim');
-		if ($_SESSION['log']['NivelEmpresa'] >= '4') {
-			$this->form_validation->set_rules('TipoFrete', 'Forma de Entrega', 'required|trim');
-		}
-		//$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas Tem que ser maior que "0" ', 'required|trim|valid_qtdparcelas');
-		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas Tem que ser maior que "0" ', 'required|trim');
-		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');
-
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
 		$data['select']['AtualizaEndereco'] = $this->Basico_model->select_status_sn();
 		$data['select']['DetalhadaEntrega'] = $this->Basico_model->select_status_sn();
@@ -1656,7 +1640,6 @@ class Orcatrata extends CI_Controller {
           exit ();
           */
 
-
 		$_SESSION['Empresa'] = $data['empresa'] = $this->Basico_model->get_end_empresa($_SESSION['log']['idSis_Empresa'], TRUE);
 		/*	 
 		echo '<br>';
@@ -1666,6 +1649,42 @@ class Orcatrata extends CI_Controller {
 		exit ();
 		*/
         #run form validation
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+        #### App_OrcaTrata ####
+		
+		if(isset($data['diferenca']) && $data['orcatrata']['Modalidade'] == "P"){
+			if($data['diferenca'] < 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' menor, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_maior');	
+			}elseif($data['diferenca'] > 0.00){
+				$data['diferenca'] = number_format($data['diferenca'],2,",",".");
+				$data['diferenca'] = str_replace('.', ',', str_replace('.', ',', $data['diferenca']));
+				$this->form_validation->set_rules('ValorTotalOrca', 'O Total do Pedido é  R$ ' . $data['diferenca'] . ' maior, que a Soma dos Valores das Parcelas!', 'trim|valid_soma_menor');
+			}
+		}
+		if ($data['valortotalorca'] <= 0.00 ) {
+			$this->form_validation->set_rules('BrindeOrca', 'Se quiser Permitir Total = 0,00, então coloque a chave na posição "Sim".<br>Com o Total = 0,00, as parcelas geradas não serão salvas.', 'trim|valid_brinde');
+		}
+		
+		if ($_SESSION['log']['NivelEmpresa'] >= '4' && $data['orcatrata']['Cli_Forn_Orca'] == "S") {
+			$this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
+			$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');
+		} else {
+			$data['cadastrar']['Cadastrar'] = 'S';
+		}
+		$this->form_validation->set_rules('DataOrca', 'Data do Orçamento', 'required|trim|valid_date');
+		$this->form_validation->set_rules('AVAP', 'À Vista ou À Prazo', 'required|trim');
+		$this->form_validation->set_rules('FormaPagamento', 'Forma de Pagamento', 'required|trim');
+		if ($_SESSION['log']['NivelEmpresa'] >= '4') {
+			$this->form_validation->set_rules('TipoFrete', 'Forma de Entrega', 'required|trim');
+		}
+		//$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas Tem que ser maior que "0" ', 'required|trim|valid_qtdparcelas');
+		$this->form_validation->set_rules('QtdParcelasOrca', 'Qtd de Parcelas Tem que ser maior que "0" ', 'required|trim');
+		$this->form_validation->set_rules('DataVencimentoOrca', 'Data do 1ºVenc.', 'required|trim|valid_date');		
+		
         if ($this->form_validation->run() === FALSE) {
             //if (1 == 1) {
             $this->load->view('orcatrata/form_orcatrata3', $data);
