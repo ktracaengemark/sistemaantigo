@@ -7,7 +7,6 @@ var y = date.getFullYear();
 var n = date.toISOString();
 var tam = n.length - 5;
 var agora = n.substring(0, tam);
-
 //sequencia de comandos necessária para estrair a pasta raiz do endereço,
 //ou seja, qual módulo está sendo utilizado (ex: salao, odonto, etc)
 app = window.location.pathname;
@@ -26,6 +25,7 @@ exibir();
 exibir_confirmar();	
 Aguardar();
 clientePet();
+//Agenda();
 
 function codigo(id, tabela){
 	//alert('ok codigo');
@@ -2081,6 +2081,141 @@ function addData() {
 
 }
 
+function ocorrencias(repetir = null) {
+	if(repetir){
+		if(repetir == 'N'){
+			$('#Recorrencias').val('1');
+			$('#Intervalo').val('');
+			$('#Tempo').val('1');
+			$('#Periodo').val('');
+			$('#Tempo2').val('1');
+		}
+	}
+	var datainicial = $('#Data').val();
+	// Digamos que este é o formato das suas datas
+	// data = '30/03/2019';
+	// Precisamos quebrar a string para retornar cada parte
+	const datainicialSplit = datainicial.split('/');
+	const day = datainicialSplit[0]; 
+	const month = datainicialSplit[1];
+	const year = datainicialSplit[2];
+	// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
+	datainicial = new Date(year, month - 1, day);
+	
+	var primeira = new Date(year, month - 1, day);
+	var ultima = new Date(year, month - 1, day);
+	var datatermino = new Date(year, month - 1, day);
+	//console.log('Data Inicial: ' + datainicial);
+
+	var intervalo = $('#Intervalo').val();
+	var inter_int = parseInt(intervalo);
+	var escala1 = $('#Tempo').val();	
+	
+	var periodo = $('#Periodo').val();
+	var peri_int = parseInt(periodo);
+	var escala2 = $('#Tempo2').val();
+	
+	if(escala1 == 1){
+		primeira.setDate(primeira.getDate()+inter_int);
+	}else if(escala1 == 2){
+		primeira.setDate(primeira.getDate()+(inter_int*7));
+	}else if(escala1 == 3){
+		primeira.setMonth(primeira.getMonth()+inter_int);
+	}else if(escala1 == 4){
+		primeira.setFullYear(primeira.getFullYear()+inter_int);
+	}
+	
+	if(escala2 == 1){
+		ultima.setDate(ultima.getDate()+peri_int);
+	}else if(escala2 == 2){
+		ultima.setDate(ultima.getDate()+(peri_int*7));
+	}else if(escala2 == 3){
+		ultima.setMonth(ultima.getMonth()+peri_int);
+	}else if(escala2 == 4){
+		ultima.setFullYear(ultima.getFullYear()+peri_int);
+	}
+	
+	var primeiraedit = primeira.toLocaleDateString();
+	//console.log('Primeira Editada: ' + primeiraedit);
+	$('#DataMinima').val(primeiraedit);		
+	
+	var ultimaedit = ultima.toLocaleDateString();
+	//console.log('Ultima Editada: ' + ultimaedit);
+	//$('#DataTermino').val(ultimaedit);
+	
+	const primeiraeditSplit = primeiraedit.split('/');
+	const dayP = primeiraeditSplit[0]; 
+	const monthP = primeiraeditSplit[1]; 
+	const yearP = primeiraeditSplit[2]; 
+
+	// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
+	primeiraedit = new Date(yearP, monthP - 1, dayP);	
+	//console.log('Primeira Y-m-d: ' + primeiraedit);
+	
+	const ultimaeditSplit = ultimaedit.split('/');
+	const dayU = ultimaeditSplit[0]; 
+	const monthU = ultimaeditSplit[1]; 
+	const yearU = ultimaeditSplit[2]; 
+
+	// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
+	ultimaedit = new Date(yearU, monthU - 1, dayU);	
+	//console.log('Ultimo Y-m-d: ' + ultimaedit);	
+	
+	
+	const pastI = datainicial; // Outra data no passado
+	
+	const pastP = primeiraedit; // Outra data no passado
+	const diffP = Math.abs(pastP.getTime() - pastI.getTime()); // Subtrai uma data pela outra
+	const daysP = Math.ceil(diffP / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).	
+	//console.log('Tempo Primeira: ' + daysP + ' dias');
+	
+
+	const pastU = ultimaedit; // Outra data no passado
+	const diffU = Math.abs(pastU.getTime() - pastI.getTime()); // Subtrai uma data pela outra
+	const daysU = Math.ceil(diffU / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).	
+	//console.log('Tempo Ultimo: ' + daysU + ' dias');	
+	
+	//var ocorrencias = Math.ceil(daysU/daysP);
+	//console.log('Ocorrências: ' + ocorrencias + ' Vez(es)');
+	//$('#Recorrencias').val(ocorrencias);
+	
+	var ocorrencias = $('#Recorrencias').val();
+	
+	if(escala1 == 1){
+		datatermino.setDate(datatermino.getDate()+(inter_int*(ocorrencias - 1)));
+	}else if(escala1 == 2){
+		datatermino.setDate(datatermino.getDate()+(inter_int*7*(ocorrencias - 1)));
+	}else if(escala1 == 3){
+		datatermino.setMonth(datatermino.getMonth()+(inter_int*(ocorrencias - 1)));
+	}else if(escala1 == 4){
+		datatermino.setFullYear(datatermino.getFullYear()+(inter_int*(ocorrencias - 1)));
+	}		
+	
+	var dataterminoedit = datatermino.toLocaleDateString();
+	//console.log('DataTermino : ' + dataterminoedit);
+	$('#DataTermino').val(dataterminoedit);	
+	
+	
+	const dataterminoeditSplit = dataterminoedit.split('/');
+	const dayT = dataterminoeditSplit[0]; 
+	const monthT = dataterminoeditSplit[1]; 
+	const yearT = dataterminoeditSplit[2]; 
+
+	// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
+	dataterminoedit = new Date(yearT, monthT - 1, dayT);	
+	//console.log('datatermino Y-m-d: ' + dataterminoedit);	
+	
+	const pastT = dataterminoedit; // Outra data no passado
+	const diffT = Math.abs(pastT.getTime() - pastI.getTime()); // Subtrai uma data pela outra
+	const daysT = Math.ceil(diffT / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).	
+	//const daysT = (daysT + 1); // Somo o dia de início.
+	var durante = daysT + 1;
+	//console.log('DataT : ' + daysT + ' dias');
+	//console.log('Periodo(Durante) : ' + durante + ' dias');	
+	$('#Periodo').val(durante);
+	$('#Tempo2').val('1');
+}
+
 function dateTermina() {
 	
 	var datainicial = $('#Data').val();
@@ -3218,7 +3353,6 @@ function calculaTroco(entrada) {
     $('#ValorTroco').val(resta);
 
 }
-
 
 /*
  * Função responsável por calcular as parcelas do orçamento em função do dados
@@ -7304,7 +7438,7 @@ $('#Posicao').chosen({
     width: "100%"
 });
 $('#calendar').fullCalendar({
-    header: {
+	header: {
         left: 'prev,next today',
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
@@ -7322,10 +7456,8 @@ $('#calendar').fullCalendar({
 	//showNonCurrentDates: false,
 	fixedWeekCount: false,
     firstDay: '0',
-	//minTime: '07:00',
-    //maxTime: '21:00',
     scrollTime: '06:00',
-	//minTime: '00:00',
+	minTime: '00:00',
     maxTime: '24:00',
     nowIndicator: true,
     selectable: true,
