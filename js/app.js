@@ -118,7 +118,6 @@ function exibir_confirmar(){
 	$('.Close').hide();
 }
 
-
 // Funções de cadastros auxiliares
 $(document).ready(function(){
 	
@@ -148,6 +147,84 @@ $(document).ready(function(){
 			},
 			error:function(data){
 				$("#addClientePetModalLabel").html('<div class="alert alert-warning" role="alert">Nenhum Cliente Selecionado!</div>');
+			}
+			
+		});	
+		
+	});
+	
+	$('#idApp_ClientePet').on('change', function(event){
+		//alert('idApp_ClientePet');			
+		
+		var id_pet =  $('#idApp_ClientePet').val();
+
+		//console.log(id_pet);	
+		
+		event.preventDefault();
+		
+		$.ajax({
+			url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Pet.php?id=' + id_pet,
+			dataType: "json",
+			success: function (data) {
+			
+				var id 			= data[0]['id'];
+				var nome 		= data[0]['nome'];
+				var nascimento 	= data[0]['nascimento'];
+				var sexo 		= data[0]['sexo'];
+				var especie 	= data[0]['especie'];
+				var raca 		= data[0]['raca'];
+				var pelo 		= data[0]['pelo'];
+				var cor 		= data[0]['cor'];
+				var porte 		= data[0]['porte'];
+				var obs 		= data[0]['obs'];
+				
+				if(especie == 0 || especie == ''){
+					var especiepet = 'N.I.';
+				}else if(especie == 1){
+					var especiepet = 'CÃO';
+				}else if(especie == 2){
+					var especiepet = 'GATO';
+				}else if(especie == 3){
+					var especiepet = 'AVE';
+				}else{
+					var especiepet = 'N.I.';
+				}
+				
+				if(porte == 0 || porte == ''){
+					var portepet = 'N.I.';
+				}else if(porte == 1){
+					var portepet = 'MINI';
+				}else if(porte == 2){
+					var portepet = 'PEQUENO';
+				}else if(porte == 3){
+					var portepet = 'MÉDIO';
+				}else if(porte == 4){
+					var portepet = 'GRANDE';
+				}else if(porte == 5){
+					var portepet = 'GIGANTE';
+				}else{
+					var portepet = 'N.I.';
+				}
+				
+				if(pelo == 0 || pelo == ''){
+					var pelopet = 'N.I.';
+				}else if(pelo == 1){
+					var pelopet = 'CURTO';
+				}else if(pelo == 2){
+					var pelopet = 'MÉDIO';
+				}else if(pelo == 3){
+					var pelopet = 'LONGO';
+				}else if(pelo == 4){
+					var pelopet = 'CACHEADO';
+				}else{
+					var pelopet = 'N.I.';
+				}
+				
+				$("#Pet").html('<div class="alert alert-warning" role="alert">' + nome + '/ ' + especiepet + '/ ' + portepet + '/<br>' + raca + '/ ' + pelopet + '</div>');
+				
+			},
+			error:function(data){
+				$("#Pet").html('<div class="alert alert-warning" role="alert">Nenhum Pet Selecionado!</div>');
 			}
 			
 		});	
@@ -1906,6 +1983,7 @@ $(document).ready(function(){
 
 function clientePet(id){
 	//alert('carregando clientepets: ' + id);
+	$("#Pet").html('');
 	var id_cliente = $('#idApp_Cliente').val();
 	console.log(id_cliente);
 	console.log(id);
@@ -2005,19 +2083,20 @@ function addData() {
 
 function dateTermina() {
 	
-	var dataorca = $('#Data').val();
+	var datainicial = $('#Data').val();
 	// Digamos que este é o formato das suas datas
 	// data = '30/03/2019';
 	// Precisamos quebrar a string para retornar cada parte
-	const dataorcaSplit = dataorca.split('/');
-	const day = dataorcaSplit[0]; 
-	const month = dataorcaSplit[1];
-	const year = dataorcaSplit[2];
+	const datainicialSplit = datainicial.split('/');
+	const day = datainicialSplit[0]; 
+	const month = datainicialSplit[1];
+	const year = datainicialSplit[2];
 	// Agora podemos inicializar o objeto Date, lembrando que o mês começa em 0, então fazemos -1.
-	dataorca = new Date(year, month - 1, day);
+	datainicial = new Date(year, month - 1, day);
 	
 	var primeira = new Date(year, month - 1, day);
 	var ultima = new Date(year, month - 1, day);
+	var datatermino = new Date(year, month - 1, day);
 	//console.log('Data Inicial: ' + datainicial);
 
 	var intervalo = $('#Intervalo').val();
@@ -2054,7 +2133,7 @@ function dateTermina() {
 	
 	var ultimaedit = ultima.toLocaleDateString();
 	//console.log('Ultima Editada: ' + ultimaedit);
-	$('#DataTermino').val(ultimaedit);
+	//$('#DataTermino').val(ultimaedit);
 	
 	const primeiraeditSplit = primeiraedit.split('/');
 	const dayP = primeiraeditSplit[0]; 
@@ -2075,7 +2154,7 @@ function dateTermina() {
 	//console.log('Ultimo Y-m-d: ' + ultimaedit);	
 	
 	
-	const pastI = dataorca; // Outra data no passado
+	const pastI = datainicial; // Outra data no passado
 	
 	const pastP = primeiraedit; // Outra data no passado
 	const diffP = Math.abs(pastP.getTime() - pastI.getTime()); // Subtrai uma data pela outra
@@ -2092,6 +2171,20 @@ function dateTermina() {
 	//console.log('Ocorrências: ' + ocorrencias + ' Vez(es)');
 	$('#Recorrencias').val(ocorrencias);
 
+	if(escala1 == 1){
+		datatermino.setDate(datatermino.getDate()+(inter_int*(ocorrencias - 1)));
+	}else if(escala1 == 2){
+		datatermino.setDate(datatermino.getDate()+(inter_int*7*(ocorrencias - 1)));
+	}else if(escala1 == 3){
+		datatermino.setMonth(datatermino.getMonth()+(inter_int*(ocorrencias - 1)));
+	}else if(escala1 == 4){
+		datatermino.setFullYear(datatermino.getFullYear()+(inter_int*(ocorrencias - 1)));
+	}		
+	
+	var dataterminoedit = datatermino.toLocaleDateString();
+	//console.log('DataTermino : ' + dataterminoedit);
+	$('#DataTermino').val(dataterminoedit);	
+	
 }
 
 function exibirentrega() {

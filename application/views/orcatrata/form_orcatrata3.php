@@ -134,6 +134,7 @@
 																<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_ClientePet" name="idApp_ClientePet">
 																	<option value="<?php echo $orcatrata['idApp_ClientePet']; ?>"></option>
 																</select>
+																<span class="modal-title" id="Pet"></span>
 															</div>
 															<div class="col-md-2 text-left">
 																<label for="Cadastrar">Cliente Encontrado?</label><br>
