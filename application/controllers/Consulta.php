@@ -2209,6 +2209,7 @@ class Consulta extends CI_Controller {
  		(!$data['cadastrar']['Repetir']) ? $data['cadastrar']['Repetir'] = 'N' : FALSE;
 		//(!$data['query']['Intervalo']) ? $data['query']['Intervalo'] = '1' : FALSE;
 		//(!$data['query']['Periodo']) ? $data['query']['Periodo'] = '1' : FALSE;
+		(!$data['query']['Recorrencias']) ? $data['query']['Recorrencias'] = '1' : FALSE;
 		(!$data['query']['Tempo']) ? $data['query']['Tempo'] = '1' : FALSE;
 		(!$data['query']['Tempo']) ? $data['query']['Tempo2'] = '1' : FALSE;
 
