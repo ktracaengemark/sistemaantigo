@@ -42,6 +42,8 @@ class Agenda extends CI_Controller {
 			'NomeProfissional',
 			'NomeUsuario',
 			'NomeCliente',
+			'NomeClientePet',
+			'NomeClienteDep',
 			'NomeEmpresa',
 			'NomeEmpresaCli',
             'DataInicio',
@@ -88,14 +90,17 @@ class Agenda extends CI_Controller {
         $_SESSION['FiltroAlteraProcedimento']['Mesvenccli'] = $data['query']['Mesvenccli'];
         $_SESSION['FiltroAlteraProcedimento']['Anocli'] = $data['query']['Anocli'];		
 		$_SESSION['FiltroAlteraProcedimento']['Concluidocli'] = $data['query']['Concluidocli'];
-		$_SESSION['FiltroAlteraProcedimento']['NomeCliente'] = $data['query']['NomeCliente'];		
+		$_SESSION['FiltroAlteraProcedimento']['NomeCliente'] = $data['query']['NomeCliente'];
+		$_SESSION['FiltroAlteraProcedimento']['NomeClientePet'] = $data['query']['NomeClientePet'];
+		$_SESSION['FiltroAlteraProcedimento']['NomeClienteDep'] = $data['query']['NomeClienteDep'];		
         $_SESSION['FiltroAlteraProcedimento']['Diaemp'] = $data['query']['Diaemp'];
         $_SESSION['FiltroAlteraProcedimento']['Mesvencemp'] = $data['query']['Mesvencemp'];
         $_SESSION['FiltroAlteraProcedimento']['Anoemp'] = $data['query']['Anoemp'];		
 		$_SESSION['FiltroAlteraProcedimento']['Concluidoemp'] = $data['query']['Concluidoemp'];			
 		$_SESSION['FiltroAlteraProcedimento']['NomeEmpresa'] = $data['query']['NomeEmpresa'];
 		$_SESSION['FiltroAlteraProcedimento']['NomeEmpresaCli'] = $data['query']['NomeEmpresaCli'];
-        $_SESSION['log']['NomeUsuario'] = ($data['query']['NomeUsuario']) ? $data['query']['NomeUsuario'] : FALSE;
+		$_SESSION['FiltroAlteraProcedimento']['NomeUsuario'] = $data['query']['NomeUsuario'];
+        //$_SESSION['log']['NomeUsuario'] = ($data['query']['NomeUsuario']) ? $data['query']['NomeUsuario'] : FALSE;
         $_SESSION['log']['NomeProfissional'] = ($data['query']['NomeProfissional']) ? $data['query']['NomeProfissional'] : FALSE;
         $_SESSION['log']['Compartilhar'] = ($data['query']['Compartilhar']) ? $data['query']['Compartilhar'] : FALSE;
         
@@ -175,6 +180,8 @@ class Agenda extends CI_Controller {
 		$data['select']['Diaemp'] = $this->Agenda_model->select_dia();
 		$data['select']['Mesvencemp'] = $this->Agenda_model->select_mes();		
 		$data['select']['NomeCliente'] = $this->Agenda_model->select_cliente();
+		$data['select']['NomeClientePet'] = $this->Agenda_model->select_clientepet();
+		$data['select']['NomeClienteDep'] = $this->Agenda_model->select_clientedep();
 		$data['select']['NomeEmpresa'] = $this->Agenda_model->select_empresarec();
 		$data['select']['NomeEmpresaCli'] = $this->Agenda_model->select_empresaenv();
         $data['select']['NomeUsuario'] = $this->Agenda_model->select_usuario();
@@ -201,6 +208,9 @@ class Agenda extends CI_Controller {
 			$data['bd']['SubPrioridade'] = $data['query']['SubPrioridade'];			
 			$data['bd']['Procedimento'] = $data['query']['Procedimento'];
 			$data['bd']['Compartilhar'] = $data['query']['Compartilhar'];
+			$data['bd']['NomeCliente'] = $data['query']['NomeCliente'];
+			$data['bd']['NomeClienteDep'] = $data['query']['NomeClienteDep'];
+			$data['bd']['NomeClientePet'] = $data['query']['NomeClientePet'];
 			$data['bd']['NomeUsuario'] = $data['query']['NomeUsuario'];
 			$data['bd']['NomeProfissional'] = $data['query']['NomeProfissional'];
 			$data['bd']['Categoria'] = $data['query']['Categoria'];

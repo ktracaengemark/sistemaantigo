@@ -234,12 +234,10 @@
 											<?php } ?>
 											<?php if($_SESSION['Empresa']['CadastrarPet'] == "S"){?>
 													
-													<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $query['idApp_ClientePet']; ?>" />
-													
 													<div class="col-md-4 text-left">
 														<label  for="idApp_ClientePet">Pet</label>
 														<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_ClientePet" name="idApp_ClientePet">
-															<option value=""></option>
+															<option value="<?php echo $query['idApp_ClientePet']; ?>"></option>
 														</select>
 														<span class="modal-title" id="Pet"></span>
 													</div>

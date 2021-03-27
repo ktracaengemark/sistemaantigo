@@ -461,7 +461,7 @@ class Agenda_model extends CI_Model {
         $query = $this->db->query('
             SELECT
                 C.idApp_Cliente,
-                CONCAT(IFNULL(C.NomeCliente, ""), " --- ", IFNULL(C.CelularCliente, ""), " --- ", IFNULL(C.Telefone2, ""), " --- ", IFNULL(C.Telefone3, "")) As NomeCliente
+                CONCAT(IFNULL(C.NomeCliente, ""), " | ", IFNULL(C.CelularCliente, ""), " || ", IFNULL(C.Telefone2, ""), " ||| ", IFNULL(C.Telefone3, "")) As NomeCliente
             FROM
                 App_Cliente AS C
 
@@ -473,7 +473,7 @@ class Agenda_model extends CI_Model {
         ');
 
         $array = array();
-        $array[0] = 'TODOS';
+        $array[0] = '::Todos::';
         foreach ($query->result() as $row) {
 			$array[$row->idApp_Cliente] = $row->NomeCliente;
         }
@@ -481,6 +481,54 @@ class Agenda_model extends CI_Model {
         return $array;
     }
 
+    public function select_clientepet() {
+
+        $query = $this->db->query('
+            SELECT
+                C.idApp_ClientePet,
+                CONCAT(IFNULL(C.NomeClientePet, ""), " | ", IFNULL(C.EspeciePet, "")) As NomeClientePet
+            FROM
+                App_ClientePet AS C
+
+            WHERE
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+            ORDER BY
+                C.NomeClientePet ASC
+        ');
+
+        $array = array();
+        $array[0] = '::Todos::';
+        foreach ($query->result() as $row) {
+			$array[$row->idApp_ClientePet] = $row->NomeClientePet;
+        }
+
+        return $array;
+    }
+
+    public function select_clientedep() {
+
+        $query = $this->db->query('
+            SELECT
+                C.idApp_ClienteDep,
+                CONCAT(IFNULL(C.NomeClienteDep, "")) As NomeClienteDep
+            FROM
+                App_ClienteDep AS C
+
+            WHERE
+                C.idSis_Empresa = ' . $_SESSION['log']['idSis_Empresa'] . '
+            ORDER BY
+                C.NomeClienteDep ASC
+        ');
+
+        $array = array();
+        $array[0] = '::Todos::';
+        foreach ($query->result() as $row) {
+			$array[$row->idApp_ClienteDep] = $row->NomeClienteDep;
+        }
+
+        return $array;
+    }
+		
     public function select_categoria() {
 		
 		$permissao = ($_SESSION['log']['idSis_Empresa'] == 5 ) ? 'C.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . ' AND ' : FALSE;

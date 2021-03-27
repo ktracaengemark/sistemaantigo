@@ -641,7 +641,17 @@ class Consulta extends CI_Controller {
 		
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('consulta/form_consulta', $data);
+            
+			/*
+			echo '<br>';
+			echo "<pre>";
+			print_r('id_Cliente: ' . $data['query']['idApp_Cliente']);
+			echo '<br>';
+			print_r('id_Pet: ' . $data['query']['idApp_ClientePet']);
+			echo "</pre>";
+			exit();			
+			*/
+			$this->load->view('consulta/form_consulta', $data);
         } else {
 
 			$dataini_cad 	= $this->basico->mascara_data($data['query']['Data'], 'mysql');
@@ -763,6 +773,390 @@ class Consulta extends CI_Controller {
 								'Tempo2' 				=> $data['query']['Tempo2'],
 								'DataTermino' 			=> $ultimaocorrencia,
 								//'DataTermino' 			=> $data['query']['DataTermino'],
+								'Recorrencias' 			=> ($j + 1) .  '/' . $data['query']['Recorrencias'],
+								'idApp_Agenda' 			=> $data['query']['idApp_Agenda'],
+								'idApp_Cliente' 		=> $data['query']['idApp_Cliente'],
+								'idApp_ClienteDep' 		=> $data['query']['idApp_ClienteDep'],
+								'idApp_ClientePet' 		=> $data['query']['idApp_ClientePet'],
+								//'Evento' 				=> $data['query']['Evento'],
+								'Obs' 					=> $data['query']['Obs'],
+								'idApp_Profissional' 	=> $data['query']['idApp_Profissional'],
+								'idTab_Status' 			=> $data['query']['idTab_Status'],
+								'Tipo' 					=> $data['query']['Tipo'],
+								'idTab_TipoConsulta' 	=> $data['query']['idTab_TipoConsulta'],
+								'Paciente' 				=> $data['query']['Paciente'],
+								'DataInicio' 			=> date('Y-m-d', strtotime('+ ' . ($semana*$n*$j) .  $ref,strtotime($dataini_cad))) . ' ' . $horaini_cad,
+								'DataFim' 				=> date('Y-m-d', strtotime('+ ' . ($semana*$n*$j) . $ref,strtotime($datafim_cad))) . ' ' . $horafim_cad,
+								'idSis_Usuario' 		=> $_SESSION['log']['idSis_Usuario'],
+								'idSis_Empresa' 		=> $_SESSION['log']['idSis_Empresa'],
+								'idTab_Modulo' 			=> $_SESSION['log']['idTab_Modulo']
+							);
+							$data['campos'] = array_keys($data['repeticao'][$j]);
+							$data['id_Repeticao'] = $this->Consulta_model->set_consulta($data['repeticao'][$j]);
+						}
+				
+					}
+				}	
+                $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Consulta'], FALSE);
+                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Consulta', 'CREATE', $data['auditoriaitem']);
+                $data['msg'] = '?m=1';
+
+                //redirect(base_url() . 'cliente/prontuario/' . $data['query']['idApp_Cliente'] . $data['msg'] . $data['redirect']);
+                redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+                exit();
+            }
+        }
+
+        $this->load->view('basico/footer');
+    }
+
+    public function cadastrar2_Funcionando($idApp_Cliente = NULL, $idApp_ContatoCliente = NULL) {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
+			'Cadastrar',
+			'Repetir',
+			'Prazo',
+			'DataMinima',
+			'RelacaoDep',
+			'PeloPet',
+			'PortePet',
+			'EspeciePet',
+        ), TRUE));
+
+        $data['query'] = quotes_to_entities($this->input->post(array(
+            'idSis_Usuario',
+			'idApp_Consulta',
+            'idApp_Agenda',
+            'idApp_Cliente',
+            'idApp_ClienteDep',
+            'idApp_ClientePet',
+			'idSis_EmpresaFilial',
+            'Data2',
+			'Data',
+            'HoraInicio',
+            'HoraFim',
+            'Paciente',
+			'idTab_Status',
+            'idTab_TipoConsulta',
+            'idApp_ContatoCliente',
+            'idApp_Profissional',
+            'Procedimento',
+            'Obs',
+			'Intervalo',
+			'Periodo',
+			'Tempo',
+			'Tempo2',
+			'DataTermino',
+			'Recorrencias',
+		), TRUE));
+		/*
+		$data['orcatrata'] = quotes_to_entities($this->input->post(array(
+            #### App_OrcaTrata ####
+            'idApp_OrcaTrata',
+            'idApp_Cliente',
+            'idApp_ClientePet',
+            'ObsOrca',
+        ), TRUE));		
+		*/
+ 		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
+ 		(!$data['cadastrar']['Repetir']) ? $data['cadastrar']['Repetir'] = 'N' : FALSE;
+		//(!$data['query']['Intervalo']) ? $data['query']['Intervalo'] = '1' : FALSE;
+		//(!$data['query']['Periodo']) ? $data['query']['Periodo'] = '1' : FALSE;
+		(!$data['query']['Recorrencias']) ? $data['query']['Recorrencias'] = '1' : FALSE;
+		(!$data['query']['Tempo']) ? $data['query']['Tempo'] = '1' : FALSE;
+		(!$data['query']['Tempo']) ? $data['query']['Tempo2'] = '1' : FALSE;		
+		
+		/*
+        if ($idApp_Cliente) {
+            $data['query']['idApp_Cliente'] = $idApp_Cliente;
+            $_SESSION['Cliente'] = $this->Clienteusuario_model->get_clienteusuario($idApp_Cliente, TRUE);
+        }
+		
+		if ($idApp_Cliente) {
+            $data['query']['idApp_Cliente'] = $idApp_Cliente;
+            $_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
+        }
+		*/
+		if ($idApp_Cliente) {
+            $data['query']['idApp_Cliente'] = $idApp_Cliente;
+			$_SESSION['Cliente'] = $this->Cliente_model->get_cliente($idApp_Cliente, TRUE);
+			$data['resumo'] = $this->Cliente_model->get_cliente($idApp_Cliente);
+			$_SESSION['Cliente']['NomeCliente'] = (strlen($data['resumo']['NomeCliente']) > 12) ? substr($data['resumo']['NomeCliente'], 0, 12) : $data['resumo']['NomeCliente'];
+		}		
+		
+        if ($idApp_ContatoCliente) {
+            $data['query']['idApp_ContatoCliente'] = $idApp_ContatoCliente;
+            $data['query']['Paciente'] = 'D';
+        }
+		
+		/*
+		//// Uso esse método para cadastrar agendamentos escolhendo clientes no pesquisa clientes////
+        if (isset($_SESSION['agenda']) && !$data['query']['HoraInicio'] && !$data['query']['HoraFim']) {
+            $data['query']['Data'] = date('d/m/Y', $_SESSION['agenda']['HoraInicio']);
+            $data['query']['Data2'] = date('d/m/Y', $_SESSION['agenda']['HoraFim']);
+			$data['query']['HoraInicio'] = date('H:i', $_SESSION['agenda']['HoraInicio']);
+            $data['query']['HoraFim'] = date('H:i', $_SESSION['agenda']['HoraFim']);
+        }
+		*/		
+		
+		//// Uso esse método para cadastrar agendamentos escolhendo clientes no formulário////
+		if ($this->input->get('start') && $this->input->get('end')) {
+            $data['query']['Data'] = date('d/m/Y', substr($this->input->get('start'), 0, -3));
+            $data['query']['Data2'] = date('d/m/Y', substr($this->input->get('end'), 0, -3));
+			$data['query']['HoraInicio'] = date('H:i', substr($this->input->get('start'), 0, -3));
+            $data['query']['HoraFim'] = date('H:i', substr($this->input->get('end'), 0, -3));
+        }
+		
+        #Ver uma solução melhor para este campo
+        (!$data['query']['Paciente']) ? $data['query']['Paciente'] = 'R' : FALSE;
+
+        $data['radio'] = array(
+            'Paciente' => $this->basico->radio_checked($data['query']['Paciente'], 'Paciente', 'RD'),
+        );
+
+        ($data['query']['Paciente'] == 'D') ?
+            $data['div']['Paciente'] = '' : $data['div']['Paciente'] = 'style="display: none;"';
+
+		
+		$data['select']['EspeciePet'] = array (
+            '0' => '',
+            '1' => 'CÃO',
+            '2' => 'GATO',
+			'3' => 'AVE',
+        );		
+		$data['select']['PeloPet'] = array (
+            '0' => '',
+            '1' => 'CURTO',
+            '2' => 'MÉDIO',
+			'3' => 'LONGO',
+			'4' => 'CACHEADO',
+        );		
+		$data['select']['PortePet'] = array (
+            '0' => '',
+            '1' => 'MINI',
+            '2' => 'PEQUENO',
+			'3' => 'MÉDIO',
+			'4' => 'GRANDE',
+			'5' => 'GIGANTE',
+        );
+		$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+		$data['select']['Repetir'] = $this->Basico_model->select_status_sn();        
+		$data['select']['Tempo'] = array (
+            '1' => 'Dia(s)',
+            '2' => 'Semana(s)',
+            '3' => 'Mês(s)',
+			'4' => 'Ano(s)',
+        );		
+		$data['select']['idApp_Agenda'] = $this->Basico_model->select_agenda();
+		$data['select']['Status'] = $this->Basico_model->select_status();
+        $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
+        $data['select']['idApp_Cliente'] = $this->Cliente_model->select_cliente();
+		$data['select']['RelacaoDep'] = $this->Cliente_model->select_relacao();
+        //$data['select']['idApp_ClienteDep'] = $this->Cliente_model->select_clientedep($_SESSION['Cliente']['idApp_Cliente']);
+        //$data['select']['idApp_ClientePet'] = $this->Cliente_model->select_clientepet($_SESSION['Cliente']['idApp_Cliente']);
+		#$data['select']['idSis_EmpresaFilial'] = $this->Empresafilial_model->select_empresafilial();
+		#$data['select']['ContatoCliente'] = $this->Consulta_model->select_contatocliente_cliente($data['query']['idApp_Cliente']);
+		
+        #echo $data['query']['idApp_Agenda'] . ' ' . $_SESSION['log']['idSis_Usuario'];
+        #$data['query']['idApp_Agenda'] = ($_SESSION['log']['Permissao'] > 2) ? $_SESSION['log']['idSis_Usuario'] : FALSE;
+
+        /*
+        echo count($data['select']['idApp_Agenda']);
+        echo '<br>';
+        echo "<pre>";
+        print_r($data['select']['idApp_Agenda']);
+        echo "</pre>";
+        #exit();
+        */
+
+        $data['select']['option'] = ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) ? '<option value="">-- Sel. um Prof. --</option>' : FALSE;
+/*
+        $data['select']['Paciente'] = array (
+            'R' => 'O Próprio',
+            'D' => 'ContatoCliente',
+        );
+*/
+        $data['titulo'] = 'Agendamento';
+        $data['form_open_path'] = 'consulta/cadastrar2';
+        $data['panel'] = 'primary';
+        $data['readonly'] = '';
+        $data['disabled'] = '';
+        $data['metodo'] = 1;
+        $data['alterarcliente'] = 1;
+
+ 		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+		
+		$data['radio'] = array(
+            'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
+        );
+        ($data['cadastrar']['Cadastrar'] == 'N') ?
+            $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
+		
+		$data['radio'] = array(
+            'Repetir' => $this->basico->radio_checked($data['cadastrar']['Repetir'], 'Repetir', 'NS'),
+        );
+        ($data['cadastrar']['Repetir'] == 'S') ?
+            $data['div']['Repetir'] = '' : $data['div']['Repetir'] = 'style="display: none;"';
+					
+        $data['datepicker'] = 'DatePicker';
+        $data['timepicker'] = 'TimePicker';
+
+        #$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+
+		if ($data['cadastrar']['Repetir'] == 'S') {
+			$this->form_validation->set_rules('Intervalo', 'Intervalo', 'required|trim|valid_intervalo');
+			$this->form_validation->set_rules('Periodo', 'Período', 'required|trim|valid_periodo');
+			//$this->form_validation->set_rules('Periodo', 'Período', 'required|trim|valid_periodo|valid_periodo_intervalo[' . $data['query']['Intervalo'] . ']');
+			$this->form_validation->set_rules('Tempo', 'Tempo', 'required|trim');
+			$this->form_validation->set_rules('Tempo', 'Tempo2', 'required|trim');
+			$this->form_validation->set_rules('DataMinima', 'Data Mínima:', 'trim|valid_date');
+			$this->form_validation->set_rules('DataTermino', 'Termina em:', 'required|trim|valid_date|valid_data_termino[' . $data['cadastrar']['DataMinima'] . ']|valid_data_termino2[' . $data['query']['Data'] . ']');
+		}
+		
+        $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
+        $this->form_validation->set_rules('Data2', 'Data do Fim', 'required|trim|valid_date');
+		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
+        #$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour|valid_periodo_hora[' . $data['query']['HoraInicio'] . ']');
+		$this->form_validation->set_rules('HoraFim', 'Hora Final', 'required|trim|valid_hour');
+        #$this->form_validation->set_rules('idTab_TipoConsulta', 'Tipo de Consulta', 'required|trim');
+        $this->form_validation->set_rules('idApp_Cliente', 'Cliente', 'required|trim');
+		$this->form_validation->set_rules('idApp_Agenda', 'Profissional', 'required|trim');
+		#$this->form_validation->set_rules('idSis_EmpresaFilial', 'Unidade', 'required|trim');
+		
+/*
+        if ($data['query']['Paciente'] == 'D')
+            $this->form_validation->set_rules('idApp_ContatoCliente', 'ContatoCliente', 'required|trim');
+*/
+        #$data['resumo'] = $this->Cliente_model->get_cliente($data['query']['idApp_Cliente']);
+		#$data['resumo'] = $this->Clienteusuario_model->get_clienteusuario($data['query']['idApp_Cliente']);
+		$this->form_validation->set_rules('Cadastrar', 'Após Recarregar, Retorne a chave para a posição "Sim"', 'trim|valid_aprovado');		
+		
+        #run form validation
+        if ($this->form_validation->run() === FALSE) {
+            
+			/*
+			echo '<br>';
+			echo "<pre>";
+			print_r('id_Cliente: ' . $data['query']['idApp_Cliente']);
+			echo '<br>';
+			print_r('id_Pet: ' . $data['query']['idApp_ClientePet']);
+			echo "</pre>";
+			exit();			
+			*/
+			$this->load->view('consulta/form_consulta', $data);
+        } else {
+
+			$dataini_cad 	= $this->basico->mascara_data($data['query']['Data'], 'mysql');
+			$datafim_cad 	= $this->basico->mascara_data($data['query']['Data2'], 'mysql');
+			$horaini_cad 	= $data['query']['HoraInicio'];
+			$horafim_cad 	= $data['query']['HoraFim'];
+			
+			if ($data['cadastrar']['Repetir'] == 'N') {
+				$data['query']['Intervalo'] = 0;
+				$data['query']['Periodo'] = 0;
+				$data['query']['Tempo'] = 0;
+				$data['query']['Tempo2'] = 0;
+				$data['query']['DataTermino'] = $dataini_cad;
+			}else{
+				
+				$tipointervalo = $data['query']['Tempo'];
+				if($tipointervalo == 1){
+					$semana = 1;
+					$ref = "day";
+				}elseif($tipointervalo == 2){
+					$semana = 7;
+					$ref = "day";
+				}elseif($tipointervalo == 3){
+					$semana = 1;
+					$ref = "month";
+				}elseif($tipointervalo == 4){
+					$semana = 1;
+					$ref = "Year";
+				}
+				
+				$data['query']['DataTermino'] = $this->basico->mascara_data($data['query']['DataTermino'], 'mysql');
+				$n = $data['query']['Intervalo']; //intervalo - a cada tantos dias
+				$qtd = $data['query']['Recorrencias'];				
+				
+			}
+			if($_SESSION['Empresa']['CadastrarDep'] == "N"){
+				$data['query']['idApp_ClienteDep'] = 0;
+			}else{
+				if($data['query']['idApp_ClienteDep'] == ''){
+					$data['query']['idApp_ClienteDep'] = 0;
+				}
+			}
+			if($_SESSION['Empresa']['CadastrarPet'] == "N"){
+				$data['query']['idApp_ClientePet'] = 0;
+			}else{
+				if($data['query']['idApp_ClientePet'] == ''){
+					$data['query']['idApp_ClientePet'] = 0;
+				}
+			}
+			$data['query']['Tipo'] = 2;
+            $data['query']['DataInicio'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraInicio'];
+            #$data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
+            $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data2'], 'mysql') . ' ' . $data['query']['HoraFim'];
+            //$data['query']['idTab_Status'] = 1;
+            $data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
+			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
+			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+
+            $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
+
+            #unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
+			unset($data['query']['Data'], $data['query']['Data2'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
+			
+            $data['campos'] = array_keys($data['query']);
+            $data['anterior'] = array();
+
+            $data['idApp_Consulta'] = $this->Consulta_model->set_consulta($data['query']);
+
+            unset($_SESSION['Agenda']);
+
+            if ($data['idApp_Consulta'] === FALSE) {
+                $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+                $this->basico->erro($msg);
+                $this->load->view('consulta/form_consulta', $data);
+            } else {
+				$data['copiar']['Repeticao'] = $data['idApp_Consulta'];
+				if($data['cadastrar']['Repetir'] == 'S'){
+					//$data['copiar']['DataTermino'] = $ultimaocorrencia;
+					$data['copiar']['DataTermino'] = $data['query']['DataTermino'];;
+					$data['copiar']['Recorrencias'] = "1/" . $qtd;
+				}else{
+					$data['copiar']['Recorrencias'] = "1/1";
+					//$data['copiar']['DataTermino'] = $dataini_cad;
+				}
+				
+				$data['update']['copiar']['bd'] = $this->Consulta_model->update_consulta($data['copiar'], $data['idApp_Consulta']);
+				
+				if ($data['update']['copiar']['bd'] === FALSE) {
+					$msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
+
+					$this->basico->erro($msg);
+					$this->load->view('consulta/form_consulta', $data);
+				} else {
+					if ($data['cadastrar']['Repetir'] == 'S') {
+						for($j=1; $j<$qtd; $j++) {
+							$data['repeticao'][$j] = array(
+								'Repeticao' 			=> $data['idApp_Consulta'],
+								'Intervalo' 			=> $data['query']['Intervalo'],
+								'Periodo' 				=> $data['query']['Periodo'],
+								'Tempo' 				=> $data['query']['Tempo'],
+								'Tempo2' 				=> $data['query']['Tempo2'],
+								//'DataTermino' 			=> $ultimaocorrencia,
+								'DataTermino' 			=> $data['query']['DataTermino'],
 								'Recorrencias' 			=> ($j + 1) .  '/' . $data['query']['Recorrencias'],
 								'idApp_Agenda' 			=> $data['query']['idApp_Agenda'],
 								'idApp_Cliente' 		=> $data['query']['idApp_Cliente'],

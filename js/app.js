@@ -118,6 +118,82 @@ function exibir_confirmar(){
 	$('.Close').hide();
 }
 
+function buscaPet(){
+		//var id_pet = $('#idApp_ClientePet').val();
+		var id_pet = $('#Hidden_idApp_ClientePet').val();
+		console.log("executa safado");	
+		console.log("id do pet" + id_pet);
+		event.preventDefault();
+		
+		$.ajax({
+			url: window.location.origin+ '/' + app + '/cadastros/pesquisar/Pet.php?id=' + id_pet,
+			dataType: "json",
+			success: function (data) {
+			
+				var id 			= data[0]['id'];
+				var nome 		= data[0]['nome'];
+				var nascimento 	= data[0]['nascimento'];
+				var sexo 		= data[0]['sexo'];
+				var especie 	= data[0]['especie'];
+				var raca 		= data[0]['raca'];
+				var pelo 		= data[0]['pelo'];
+				var cor 		= data[0]['cor'];
+				var porte 		= data[0]['porte'];
+				var obs 		= data[0]['obs'];
+				
+				if(especie == 0 || especie == ''){
+					var especiepet = 'N.I.';
+				}else if(especie == 1){
+					var especiepet = 'CÃO';
+				}else if(especie == 2){
+					var especiepet = 'GATO';
+				}else if(especie == 3){
+					var especiepet = 'AVE';
+				}else{
+					var especiepet = 'N.I.';
+				}
+				
+				if(porte == 0 || porte == ''){
+					var portepet = 'N.I.';
+				}else if(porte == 1){
+					var portepet = 'MINI';
+				}else if(porte == 2){
+					var portepet = 'PEQUENO';
+				}else if(porte == 3){
+					var portepet = 'MÉDIO';
+				}else if(porte == 4){
+					var portepet = 'GRANDE';
+				}else if(porte == 5){
+					var portepet = 'GIGANTE';
+				}else{
+					var portepet = 'N.I.';
+				}
+				
+				if(pelo == 0 || pelo == ''){
+					var pelopet = 'N.I.';
+				}else if(pelo == 1){
+					var pelopet = 'CURTO';
+				}else if(pelo == 2){
+					var pelopet = 'MÉDIO';
+				}else if(pelo == 3){
+					var pelopet = 'LONGO';
+				}else if(pelo == 4){
+					var pelopet = 'CACHEADO';
+				}else{
+					var pelopet = 'N.I.';
+				}
+				
+				$("#Pet").html('<p>' + especiepet + '/ ' + portepet + '/ ' + raca + '/ ' + pelopet + '</p>');
+				//$("#Pet").html('<div class="alert alert-warning" role="alert">' + nome + '/ ' + especiepet + '/ ' + portepet + '/<br>' + raca + '/ ' + pelopet + '</div>');
+				
+			},
+			error:function(data){
+				$("#Pet").html('<p >Nenhum Pet Selecionado!</p>');
+			}
+			
+		});	
+}
+
 // Funções de cadastros auxiliares
 $(document).ready(function(){
 	
@@ -220,11 +296,11 @@ $(document).ready(function(){
 					var pelopet = 'N.I.';
 				}
 				
-				$("#Pet").html('<div class="alert alert-warning" role="alert">' + nome + '/ ' + especiepet + '/ ' + portepet + '/<br>' + raca + '/ ' + pelopet + '</div>');
+				$("#Pet").html('<p>' + especiepet + '/ ' + portepet + '/ ' + raca + '/ ' + pelopet + '</p>');
 				
 			},
 			error:function(data){
-				$("#Pet").html('<div class="alert alert-warning" role="alert">Nenhum Pet Selecionado!</div>');
+				$("#Pet").html('<p >Nenhum Pet Selecionado!</p>');
 			}
 			
 		});	
@@ -1987,7 +2063,11 @@ function clientePet(id){
 	var id_cliente = $('#idApp_Cliente').val();
 	console.log(id_cliente);
 	console.log(id);
-
+	
+	console.log(' <br>oioioioi<br> ');
+		
+	console.log('<br> >>>>>'+ $('#Hidden_idApp_ClientePet').val());
+	
 	if(id_cliente) {
 		//console.log(id);
 		
@@ -2000,10 +2080,25 @@ function clientePet(id){
 			//console.log(j.length);
 			
 			//console.log(j);
-			
+
+			/*		
+			foreach ($select['idApp_ClientePet'] as $key => $row) {
+				if ($query['idApp_ClientePet'] == $key) {
+					echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+				} else {
+					echo '<option value="' . $key . '">' . $row . '</option>';
+				}
+			}			
+			*/			
 			var options = '<option value="">-- Sel. Pet --</option>';	
 			for (var i = 0; i < j.length; i++) {
-				options += '<option value="' + j[i].id_ClientePet + '">' + j[i].nome_ClientePet + '</option>';
+				if (j[i].id_ClientePet == $('#Hidden_idApp_ClientePet').val()) {
+					options += '<option value="' + j[i].id_ClientePet + '" selected="selected">' + j[i].nome_ClientePet + '</option>';
+					buscaPet();
+				} else {
+					options += '<option value="' + j[i].id_ClientePet + '">' + j[i].nome_ClientePet + '</option>';
+				}
+				//options += '<option value="' + j[i].id_ClientePet + '">' + j[i].nome_ClientePet + '</option>';
 			}	
 			$('#idApp_ClientePet').html(options).show();
 			//$('.carregando').hide();
@@ -6031,6 +6126,7 @@ $(document).ready(function () {
         }
     });
 
+	
     $("[data-toggle='tooltip']").tooltip();
 
     $('input:radio[id="radio"]').change(function() {

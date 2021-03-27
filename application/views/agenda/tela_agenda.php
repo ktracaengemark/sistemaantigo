@@ -1,4 +1,74 @@
 
+<div class="col-md-12">
+	<?php if (isset($msg)) echo $msg; ?>
+	<?php echo form_open('agenda', 'role="form"'); ?>
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<div class="row">		
+				<?php if ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) { ?>
+				<div class="col-md-4 text-left">
+					<label class="" for="Ordenamento">Profissional:</label><br>
+					<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()" id="NomeUsuario" name="NomeUsuario">
+						<?php
+						foreach ($select['NomeUsuario'] as $key => $row) {
+							if ($query['NomeUsuario'] == $key) {
+								echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+							} else {
+								echo '<option value="' . $key . '">' . $row . '</option>';
+							}
+						}
+						?>
+					</select>
+				</div>
+				<div class="col-md-4 text-left">
+					<label class="" for="Ordenamento">Cliente:</label><br>
+					<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()" id="NomeCliente" name="NomeCliente">
+						<?php
+						foreach ($select['NomeCliente'] as $key => $row) {
+							if ($query['NomeCliente'] == $key) {
+								echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+							} else {
+								echo '<option value="' . $key . '">' . $row . '</option>';
+							}
+						}
+						?>
+					</select>
+				</div>	
+				<?php } ?>
+				<!--
+				<div class=" btn btn-success" type="button" data-toggle="collapse" data-target="#Agenda" aria-expanded="false" aria-controls="Agenda">
+					<span class="glyphicon glyphicon-chevron-up"></span> Agenda
+				</div>
+				-->
+				<div class="col-md-4 text-left">	
+					<label class="" for="Ordenamento">Calendário</label><br>
+					<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#Calendario" aria-expanded="false" aria-controls="Calendario">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<div <?php echo $collapse; ?> id="Agenda">
+			
+				<div <?php echo $collapse1; ?> id="Calendario">
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4 form-group text-center" id="datepickerinline" >
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+				</div>	
+				<div class="row">	
+					<div class="col-md-12 form-group">
+						<div  style="overflow:auto; height:520px; "> 
+								<table id="calendar" class="table table-condensed table-striped "></table>
+						</div>
+					</div>
+				</div>
+			
+		</div>	
+	</div>
+</div>
 <div id="fluxo" class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="fluxo" aria-hidden="true">
 	<div class="vertical-alignment-helper">
 		<div class="modal-dialog modal-sm vertical-align-center">
@@ -32,60 +102,3 @@
 		</div>
 	</div>
 </div>
-<div class="col-md-1"></div>
-
-<div class="col-md-10">
-	<?php if (isset($msg)) echo $msg; ?>
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<?php echo form_open('agenda', 'role="form"'); ?>		
-			<?php if ($_SESSION['log']['idSis_Empresa'] != 5 && $_SESSION['log']['Permissao'] <= 2 ) { ?>	
-				
-			<div class="col-md-6 text-left">
-				<label class="sr-only" for="Ordenamento">Agenda dos Prof.:</label>
-				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
-						id="NomeUsuario" name="NomeUsuario">
-					<?php
-					foreach ($select['NomeUsuario'] as $key => $row) {
-						if ($query['NomeUsuario'] == $key) {
-							echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-						} else {
-							echo '<option value="' . $key . '">' . $row . '</option>';
-						}
-					}
-					?>
-				</select>
-			</div>	
-			<?php } ?>
-			<!--
-			<div class=" btn btn-success" type="button" data-toggle="collapse" data-target="#Agenda" aria-expanded="false" aria-controls="Agenda">
-				<span class="glyphicon glyphicon-chevron-up"></span> Agenda
-			</div>
-			-->
-			<div class=" btn btn-info" type="button" data-toggle="collapse" data-target="#Calendario" aria-expanded="false" aria-controls="Calendario">
-				<span class="glyphicon glyphicon-calendar"></span> Calendário
-			</div>
-			
-		</div>
-		<div <?php echo $collapse; ?> id="Agenda">
-			<div class="panel-body">
-				<div <?php echo $collapse1; ?> id="Calendario">
-					<div class="row">
-						<div class="col-md-4"></div>
-						<div class="col-md-4 form-group text-center" id="datepickerinline" >
-						</div>
-						<div class="col-md-4"></div>
-					</div>
-				</div>	
-				<div class="row">	
-					<div class="col-md-12 form-group">
-						<div  style="overflow:auto; height:470px; "> 
-								<table id="calendar" class="table table-condensed table-striped "></table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>	
-	</div>
-</div>
-<div class="col-md-1"></div>

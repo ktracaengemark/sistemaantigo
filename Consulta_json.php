@@ -18,7 +18,8 @@ if (!$db) {
 
 //Acho que as próximas linhas são redundantes, verificar
 
-$query = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'AND A.idSis_Usuario = ' . $_SESSION['log']['NomeUsuario'] . '  ' : FALSE;	
+$query = ($_SESSION['FiltroAlteraProcedimento']['NomeUsuario'] && isset($_SESSION['FiltroAlteraProcedimento']['NomeUsuario'])) ? 'AND A.idSis_Usuario = ' . $_SESSION['FiltroAlteraProcedimento']['NomeUsuario'] . '  ' : FALSE;	
+$query3 = ($_SESSION['FiltroAlteraProcedimento']['NomeCliente'] && isset($_SESSION['FiltroAlteraProcedimento']['NomeCliente'])) ? 'AND C.idApp_Cliente = ' . $_SESSION['FiltroAlteraProcedimento']['NomeCliente'] . '  ' : FALSE;
 #$query2 = ($_SESSION['log']['NomeUsuario'] && isset($_SESSION['log']['NomeUsuario'])) ? 'C.idApp_Cliente = ' . $_SESSION['log']['NomeUsuario'] . ' AND ' : FALSE;
 																				
 $permissao = ($_SESSION['log']['Permissao'] >= 3 ) ? 'AND A.idSis_Usuario = ' . $_SESSION['log']['idSis_Usuario'] . '  ' : FALSE;
@@ -73,6 +74,7 @@ $result = mysql_query(
         WHERE
 			((C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' 
 				' . $query . '
+				' . $query3 . '
 				' . $permissao . '
 				' . $permissao3 . ' ) 
 				' . $permissao1 . '

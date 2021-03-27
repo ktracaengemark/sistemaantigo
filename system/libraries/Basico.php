@@ -162,7 +162,7 @@ class Basico {
 		$data2 = DateTime::createFromFormat('d/m/Y', $datafim);
 		$data2 = $data2->format('Y-m-d');
 		
-		if(strtotime($data2) > strtotime($data1)){
+		if(strtotime($data2) >= strtotime($data1)){
 			return TRUE;
 		}else{
 			return FALSE;
