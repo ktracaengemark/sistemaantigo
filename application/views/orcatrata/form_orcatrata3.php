@@ -647,14 +647,13 @@
 																		<br>
 																		<div class="row">	
 																			<div class="col-md-12">
-																				<input type="hidden" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
 																				<div class="row">
 																					<div class="col-md-4 text-left">	
 																						<b>Produtos: </b> 
 																					</div>
 																					<div class="col-md-8">
 																						<div  id="txtHint">
-																							<input type="text" class="form-control text-right Numero" id="QtdPrdOrca" maxlength="10" readonly=""
+																							<input type="text" class="form-control text-left Numero" id="QtdPrdOrca" maxlength="10" readonly=""
 																								   name="QtdPrdOrca" value="<?php echo $orcatrata['QtdPrdOrca'] ?>">
 																						</div>
 																					</div>
@@ -667,7 +666,7 @@
 																						<!--<label for="ValorOrca">Sub Produtos:</label><br>-->
 																						<div class="input-group" id="txtHint">
 																							<span class="input-group-addon" id="basic-addon1">R$</span>
-																							<input type="text" class="form-control text-right Valor" id="ValorOrca" maxlength="10" placeholder="0,00" readonly=""
+																							<input type="text" class="form-control text-left Valor" id="ValorOrca" maxlength="10" placeholder="0,00" readonly=""
 																								   onkeyup="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)" onchange="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)"
 																								   name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
 																						</div>
@@ -680,7 +679,7 @@
 																					<div class="col-md-8">
 																						<div  class="input-group" id="txtHint">
 																							<span class="input-group-addon" id="basic-addon1">Dias</span>
-																							<input type="text" class="form-control text-right Numero"  readonly=""
+																							<input type="text" class="form-control text-left Numero"  readonly=""
 																								   name="PrazoProdutos" id="PrazoProdutos" value="<?php echo $orcatrata['PrazoProdutos'] ?>">
 																								   
 																						</div>
@@ -729,7 +728,7 @@
 																			</div>
 																			<div class="col-md-8">
 																				<div  id="txtHint">
-																					<input type="text" class="form-control text-right Numero" id="QtdSrvOrca" maxlength="10" readonly=""
+																					<input type="text" class="form-control text-left Numero" id="QtdSrvOrca" maxlength="10" readonly=""
 																						   name="QtdSrvOrca" value="<?php echo $orcatrata['QtdSrvOrca'] ?>">
 																						   
 																				</div>
@@ -742,7 +741,7 @@
 																			<div class="col-md-8">
 																				<div class="input-group" id="txtHint">
 																					<span class="input-group-addon" id="basic-addon1">R$</span>
-																					<input type="text" class="form-control text-right Valor" id="ValorDev" maxlength="10" placeholder="0,00" readonly=""
+																					<input type="text" class="form-control text-left Valor" id="ValorDev" maxlength="10" placeholder="0,00" readonly=""
 																						   onkeyup="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)" onchange="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)"
 																						   name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
 																				</div>
@@ -755,7 +754,7 @@
 																			<div class="col-md-8">
 																				<div  class="input-group" id="txtHint">
 																					<span class="input-group-addon" id="basic-addon1">Dias</span>
-																					<input type="text" class="form-control text-right Numero"  readonly=""
+																					<input type="text" class="form-control text-left Numero"  readonly=""
 																						   name="PrazoServicos" id="PrazoServicos" value="<?php echo $orcatrata['PrazoServicos'] ?>">
 																						   
 																				</div>
@@ -764,6 +763,7 @@
 																	</div>
 																</div>
 															</div>
+															<input type="hidden" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
 														</div>
 													</div>
 												</div>

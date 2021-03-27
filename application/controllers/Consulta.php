@@ -288,28 +288,10 @@ class Consulta extends CI_Controller {
 					$semana = 1;
 					$ref = "Year";
 				}
-				
-				$tipoperiodo = $data['query']['Tempo2'];
-				if($tipoperiodo == 1){
-					$semana2 = 1;
-					$ref2 = "day";
-				}elseif($tipoperiodo == 2){
-					$semana2 = 7;
-					$ref2 = "day";
-				}elseif($tipoperiodo == 3){
-					$semana2 = 1;
-					$ref2 = "month";
-				}elseif($tipoperiodo == 4){
-					$semana2 = 1;
-					$ref2 = "Year";
-				}
-				
+
 				$n = $data['query']['Intervalo']; //intervalo - a cada tantos dias
-				$periodo = $data['query']['Periodo']; //período das repetições - durante tantos dias
-				
 				$qtd = $data['query']['Recorrencias'];
-				$primeiraocorrencia = date('Y-m-d', strtotime('+ ' . ($semana*$n) .  $ref,strtotime($dataini_cad)));
-				$ultimaocorrencia = date('Y-m-d', strtotime('+ ' . ($semana*$n*($qtd - 1)) .  $ref,strtotime($dataini_cad)));				
+				$data['query']['DataTermino'] = $this->basico->mascara_data($data['query']['DataTermino'], 'mysql');				
 				
 			}
 			if($_SESSION['Empresa']['CadastrarDep'] == "N"){
@@ -355,7 +337,7 @@ class Consulta extends CI_Controller {
             } else {
 				$data['copiar']['Repeticao'] = $data['idApp_Consulta'];
 				if($data['cadastrar']['Repetir'] == 'S'){
-					$data['copiar']['DataTermino'] = $ultimaocorrencia;
+					$data['copiar']['DataTermino'] = $data['query']['DataTermino'];
 					$data['copiar']['Recorrencias'] = "1/" . $qtd;
 				}else{
 					$data['copiar']['Recorrencias'] = "1/1";
@@ -378,8 +360,7 @@ class Consulta extends CI_Controller {
 								'Periodo' 				=> $data['query']['Periodo'],
 								'Tempo' 				=> $data['query']['Tempo'],
 								'Tempo2' 				=> $data['query']['Tempo2'],
-								'DataTermino' 			=> $ultimaocorrencia,
-								//'DataTermino' 			=> $data['query']['DataTermino'],
+								'DataTermino' 			=> $data['query']['DataTermino'],
 								'Recorrencias' 			=> ($j + 1) .  '/' . $data['query']['Recorrencias'],
 								'idApp_Agenda' 			=> $data['query']['idApp_Agenda'],
 								'idApp_Cliente' 		=> $data['query']['idApp_Cliente'],
@@ -681,28 +662,10 @@ class Consulta extends CI_Controller {
 					$semana = 1;
 					$ref = "Year";
 				}
-				
-				$tipoperiodo = $data['query']['Tempo2'];
-				if($tipoperiodo == 1){
-					$semana2 = 1;
-					$ref2 = "day";
-				}elseif($tipoperiodo == 2){
-					$semana2 = 7;
-					$ref2 = "day";
-				}elseif($tipoperiodo == 3){
-					$semana2 = 1;
-					$ref2 = "month";
-				}elseif($tipoperiodo == 4){
-					$semana2 = 1;
-					$ref2 = "Year";
-				}
-				
+
 				$n = $data['query']['Intervalo']; //intervalo - a cada tantos dias
-				$periodo = $data['query']['Periodo']; //período das repetições - durante tantos dias
-				
 				$qtd = $data['query']['Recorrencias'];
-				$primeiraocorrencia = date('Y-m-d', strtotime('+ ' . ($semana*$n) .  $ref,strtotime($dataini_cad)));
-				$ultimaocorrencia = date('Y-m-d', strtotime('+ ' . ($semana*$n*($qtd - 1)) .  $ref,strtotime($dataini_cad)));				
+				$data['query']['DataTermino'] = $this->basico->mascara_data($data['query']['DataTermino'], 'mysql');
 				
 			}
 			if($_SESSION['Empresa']['CadastrarDep'] == "N"){
@@ -748,7 +711,7 @@ class Consulta extends CI_Controller {
             } else {
 				$data['copiar']['Repeticao'] = $data['idApp_Consulta'];
 				if($data['cadastrar']['Repetir'] == 'S'){
-					$data['copiar']['DataTermino'] = $ultimaocorrencia;
+					$data['copiar']['DataTermino'] = $data['query']['DataTermino'];
 					$data['copiar']['Recorrencias'] = "1/" . $qtd;
 				}else{
 					$data['copiar']['Recorrencias'] = "1/1";
@@ -771,8 +734,7 @@ class Consulta extends CI_Controller {
 								'Periodo' 				=> $data['query']['Periodo'],
 								'Tempo' 				=> $data['query']['Tempo'],
 								'Tempo2' 				=> $data['query']['Tempo2'],
-								'DataTermino' 			=> $ultimaocorrencia,
-								//'DataTermino' 			=> $data['query']['DataTermino'],
+								'DataTermino' 			=> $data['query']['DataTermino'],
 								'Recorrencias' 			=> ($j + 1) .  '/' . $data['query']['Recorrencias'],
 								'idApp_Agenda' 			=> $data['query']['idApp_Agenda'],
 								'idApp_Cliente' 		=> $data['query']['idApp_Cliente'],
