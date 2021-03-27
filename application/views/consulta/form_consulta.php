@@ -350,7 +350,7 @@
 									<?php echo form_error('Cadastrar'); ?>
 								</div>
 							</div>
-							
+							<br>
 							<div class="row">
 								<div class="col-md-4 text-left">
 									<div class="panel panel-warning">
@@ -372,20 +372,7 @@
 															   name="Data" id="Data" value="<?php echo $query['Data']; ?>" onchange="ocorrencias()" onkeyup="ocorrencias()">
 													</div>
 													<?php echo form_error('Data'); ?>
-												</div>		
-												<div class="col-md-6">	
-													<label for="Data2">Data Fim : </label>												
-													<div class="input-group <?php echo $datepicker; ?>">
-														<span class="input-group-addon" disabled>
-															<span class="glyphicon glyphicon-calendar"></span>
-														</span>
-														<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
-															   name="Data2" id="Data2" value="<?php echo $query['Data2']; ?>">
-													</div>
-													<?php echo form_error('Data2'); ?>
-												</div>
-											</div>	
-											<div class="row">	
+												</div>	
 												<div class="col-md-6">
 													<label for="Hora">Dàs :</label>
 													<div class="input-group <?php echo $timepicker; ?>">
@@ -396,6 +383,19 @@
 															   accept=""name="HoraInicio" value="<?php echo $query['HoraInicio']; ?>">
 													</div>
 													<?php echo form_error('HoraInicio'); ?>
+												</div>
+											</div>	
+											<div class="row">		
+												<div class="col-md-6">	
+													<label for="Data2">Data Fim : </label>												
+													<div class="input-group <?php echo $datepicker; ?>">
+														<span class="input-group-addon" disabled>
+															<span class="glyphicon glyphicon-calendar"></span>
+														</span>
+														<input type="text" class="form-control Date" <?php echo $readonly; ?> maxlength="10" placeholder="DD/MM/AAAA"
+															   name="Data2" id="Data2" value="<?php echo $query['Data2']; ?>">
+													</div>
+													<?php echo form_error('Data2'); ?>
 												</div>
 												<div class="col-md-6">		
 													<label for="Hora">Às :</label>
