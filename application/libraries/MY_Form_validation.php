@@ -252,6 +252,16 @@ class MY_Form_validation extends CI_Form_validation {
         return $CI->basico->check_intervalo($data);
     }
 	
+    function valid_repetir($data) {
+        $CI = & get_instance();
+        $CI->form_validation->set_message('valid_repetir', '<b>%s</b> inválido. Para Gerar Repetições, ponha a chave no Sim.');
+
+        #$padrao = explode('/', $data);
+        $CI->load->library('basico');
+
+        return $CI->basico->check_repetir($data);
+    }
+	
     function valid_periodo($data) {
         $CI = & get_instance();
         $CI->form_validation->set_message('valid_periodo', '<b>%s</b> inválido. O Período deve ser maior que 1.');

@@ -43,12 +43,19 @@ $result = mysql_query(
 ');
 
 if ($_GET['tabela']) {
-
+	if ($_GET['recorrencias']) {
+		$recorrencias = $_GET['recorrencias'];
+	}else{
+		$recorrencias = 1;
+	}
     while ($row = mysql_fetch_assoc($result)) {
-
+		$valorinteiro = $row['ValorProduto'];
+		$valordividido = $row['ValorProduto']/$recorrencias;
+		$valordividido = number_format($valordividido, 2, ",", ".");
         $event_array[] = array(
             'id' => $row['idTab_' . $_GET['tabela']],
-            'valor' => str_replace(".", ",", $row['ValorProduto']),
+            //'valor' => str_replace(".", ",", $row['ValorProduto']),
+			'valor' => str_replace(".", ",", $valordividido),
 			'comissaoprod' => $row['ComissaoVenda'],
 			'prazoprod' => $row['TempoDeEntrega'],
 			'nomeprod' => $row['NomeProduto'],

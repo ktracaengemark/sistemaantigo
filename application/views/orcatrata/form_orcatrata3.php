@@ -106,6 +106,7 @@
 												<?php } ?>
 											</div>
 										</div>
+										<input type="hidden" id="Caminho2" name="Caminho2" value="<?php echo $caminho2; ?>">
 										<div <?php echo $visivel; ?>>
 											<div id="Cli_Forn_Orca" <?php echo $div['Cli_Forn_Orca']; ?>>	
 												<div class="row">

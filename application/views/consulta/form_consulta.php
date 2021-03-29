@@ -188,6 +188,7 @@
 									</select>
 									<?php echo form_error('idApp_Agenda'); ?>
 								</div>
+								<input type="hidden" id="Caminho2" name="Caminho2" value="<?php echo $caminho2; ?>">
 								<?php if($alterarcliente == 1){?>	
 									<div class="col-md-4">
 										<div class="row">
@@ -447,6 +448,7 @@
 															?>
 
 														</div>
+														<?php echo form_error('Repetir'); ?>
 													</div>
 													<div class="col-md-4">	
 														<label for="Recorrencias">Ocorrências: </label>
@@ -517,7 +519,6 @@
 																<?php echo form_error('DataTermino'); ?>	
 															</div>
 														</div>
-														<?php echo form_error('Repetir'); ?>
 													</div>
 												</div>
 											</div>
@@ -530,7 +531,7 @@
 												<div class="row text-left">	
 													<div class="col-md-4">
 														<label>Ocorrência</label>
-														<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencias']; ?>">
+														<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencia']; ?>">
 													</div>	
 													<div class="col-md-4">
 														<label>Termina em</label>
@@ -560,9 +561,115 @@
 								<div class="col-md-4 text-left">
 									<div class="panel panel-warning">
 										<div class="panel-heading">
-											<div class="row">
-												<div class="col-md-8 form-inline text-left">
-													<label for="idTab_TipoConsulta">Tipo:</label><br>
+											<?php if ($metodo == 1) { ?>
+												<div class="row">
+													<div class="col-md-4 ">
+														<label for="Vincular">Vincular O.S.?</label><br>
+														<div class="btn-group" data-toggle="buttons">
+															<?php
+															foreach ($select['Vincular'] as $key => $row) {
+																if (!$cadastrar['Vincular']) $cadastrar['Vincular'] = 'N';
+
+																($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																if ($cadastrar['Vincular'] == $key) {
+																	echo ''
+																	. '<label class="btn btn-warning active" name="Vincular_' . $hideshow . '">'
+																	. '<input type="radio" name="Vincular" id="' . $hideshow . '" '
+																	. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																	. '</label>'
+																	;
+																} else {
+																	echo ''
+																	. '<label class="btn btn-default" name="Vincular_' . $hideshow . '">'
+																	. '<input type="radio" name="Vincular" id="' . $hideshow . '" '
+																	. 'autocomplete="off" value="' . $key . '" >' . $row
+																	. '</label>'
+																	;
+																}
+															}
+															?>
+														</div>
+													</div>
+													<div id="Vincular" <?php echo $div['Vincular']; ?>>
+														<div class="col-md-4 ">
+															<label for="NovaOS">Nova O.S.?</label><br>
+															<div class="btn-group" data-toggle="buttons">
+																<?php
+																foreach ($select['NovaOS'] as $key => $row) {
+																	if (!$cadastrar['NovaOS']) $cadastrar['NovaOS'] = 'N';
+
+																	($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																	if ($cadastrar['NovaOS'] == $key) {
+																		echo ''
+																		. '<label class="btn btn-warning active" name="NovaOS_' . $hideshow . '">'
+																		. '<input type="radio" name="NovaOS" id="' . $hideshow . '" '
+																		. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																		. '</label>'
+																		;
+																	} else {
+																		echo ''
+																		. '<label class="btn btn-default" name="NovaOS_' . $hideshow . '">'
+																		. '<input type="radio" name="NovaOS" id="' . $hideshow . '" '
+																		. 'autocomplete="off" value="' . $key . '" >' . $row
+																		. '</label>'
+																		;
+																	}
+																}
+																?>
+															</div>
+														</div>
+														<div id="NovaOS" <?php echo $div['NovaOS']; ?>>
+															<div class="col-md-4 ">
+																<label for="PorConsulta">Uma/Ocorren.?</label><br>
+																<div class="btn-group" data-toggle="buttons">
+																	<?php
+																	foreach ($select['PorConsulta'] as $key => $row) {
+																		if (!$cadastrar['PorConsulta']) $cadastrar['PorConsulta'] = 'N';
+
+																		($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																		if ($cadastrar['PorConsulta'] == $key) {
+																			echo ''
+																			. '<label class="btn btn-warning active" name="PorConsulta_' . $hideshow . '">'
+																			. '<input type="radio" name="PorConsulta" id="' . $hideshow . '" '
+																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																			. '</label>'
+																			;
+																		} else {
+																			echo ''
+																			. '<label class="btn btn-default" name="PorConsulta_' . $hideshow . '">'
+																			. '<input type="radio" name="PorConsulta" id="' . $hideshow . '" '
+																			. 'autocomplete="off" value="' . $key . '" >' . $row
+																			. '</label>'
+																			;
+																		}
+																	}
+																	?>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<br>
+											<?php }else{ ?>
+												<h4 class="mb-3">
+													Pergunta 1:
+													<br> Existe OS vinculada?
+													<br> Se:(Sim), Criar Botão para o caminho da OS.
+													<br>Se:(Não), Criar Botão para gerar nova OS.
+													<br>Pergunta 2:
+													<br>Existem Repetições?
+													<br>Se:(Sim), Botão para gera apenas 1(uma) OS.
+													<br>Se:(Não), Botão para gerar "n" novas OS.
+												</h4>
+												<br>
+												
+											<?php } ?>
+											<div class="row">	
+												<div class="col-md-6 form-inline text-left">
+													<label for="idTab_TipoConsulta">Agendamento de:</label><br>
 													<div class="btn-block" data-toggle="buttons">
 														<?php
 														foreach ($select['TipoConsulta'] as $key => $row) {
@@ -588,7 +695,6 @@
 													</div>
 												</div>
 											</div>
-											<br>
 											<div class="row">
 												<div class="col-md-12 text-left">
 													<label for="idTab_Status">Status:</label><br>
@@ -617,7 +723,7 @@
 														?>
 													</div>
 												</div>
-											</div>	
+											</div>
 										</div>	
 									</div>	
 								</div>			
@@ -729,7 +835,7 @@
 					<div class="row text-left">	
 						<div class="col-md-3">
 							<label>Ocorrência</label>
-							<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencias']; ?>">
+							<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencia']; ?>">
 						</div>	
 						<div class="col-md-4">
 							<label>Termina em</label>

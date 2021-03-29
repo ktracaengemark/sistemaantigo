@@ -183,7 +183,7 @@ function buscaPet(){
 					var pelopet = 'N.I.';
 				}
 				
-				$("#Pet").html('<p>' + especiepet + '/ ' + portepet + '/ ' + raca + '/ ' + pelopet + '</p>');
+				$("#Pet").html('<p>' + especiepet + '/ ' + raca + '/ ' + portepet + '/ ' + pelopet + '</p>');
 				//$("#Pet").html('<div class="alert alert-warning" role="alert">' + nome + '/ ' + especiepet + '/ ' + portepet + '/<br>' + raca + '/ ' + pelopet + '</div>');
 				
 			},
@@ -296,7 +296,7 @@ $(document).ready(function(){
 					var pelopet = 'N.I.';
 				}
 				
-				$("#Pet").html('<p>' + especiepet + '/ ' + portepet + '/ ' + raca + '/ ' + pelopet + '</p>');
+				$("#Pet").html('<p>' + especiepet + '/ ' + raca + '/ ' + portepet + '/ ' + pelopet + '</p>');
 				
 			},
 			error:function(data){
@@ -2057,16 +2057,22 @@ $(document).ready(function(){
 	
 });
 
-function clientePet(id){
+function clientePet(id = null){
 	//alert('carregando clientepets: ' + id);
+	
 	$("#Pet").html('');
+
 	var id_cliente = $('#idApp_Cliente').val();
+	
+	var caminho2 = $('#Caminho2').val();
+	console.log(caminho2);
+	//var caminho2 = '../../';
 	console.log(id_cliente);
 	console.log(id);
 	
 	console.log(' <br>oioioioi<br> ');
 		
-	console.log('<br> >>>>>'+ $('#Hidden_idApp_ClientePet').val());
+	console.log('<br> Hidden_idApp_ClientePet = '+ $('#Hidden_idApp_ClientePet').val());
 	
 	if(id_cliente) {
 		//console.log(id);
@@ -2075,7 +2081,7 @@ function clientePet(id){
 		/*
 		$('.carregando').show();
 		*/
-		$.getJSON('../cadastros/pesquisar/ClientePet.php?search=',{idApp_Cliente: id_cliente, ajax: 'true'}, function(j){
+		$.getJSON(caminho2 + 'cadastros/pesquisar/ClientePet.php?search=',{idApp_Cliente: id_cliente, ajax: 'true'}, function(j){
 			//console.log(idApp_Cliente);
 			//console.log(j.length);
 			
@@ -5497,11 +5503,11 @@ function adiciona_item_promocao5() {
  * @returns {decimal}
  */
 
-function buscaValor1Tabelas(id, campo, tabela, num, campo2) {
-
+function buscaValor1Tabelas(id, campo, tabela, num, campo2, recorrencias) {
+	console.log('recorrencia no busca valor = ' +recorrencias);
     $.ajax({
         // url para o arquivo json.php
-        url: window.location.origin + "/" + app + "/Valor1_json.php?tabela=" + tabela + "&campo2=" + campo2,
+        url: window.location.origin + "/" + app + "/Valor1_json.php?tabela=" + tabela + "&campo2=" + campo2 + "&recorrencias=" + recorrencias,
         // dataType json
         dataType: "json",
         // função para de sucesso
@@ -6188,6 +6194,9 @@ $(document).ready(function () {
 	var pc = $("#PCount").val(); //initlal text box count
 	$(".add_field_button9").click(function(e){ //on add input button click
 		
+        var recorrencias = $('#Recorrencias').val();
+		console.log('Recorrencias no produto = ' + recorrencias);
+		
 		var negocio = $('#Negocio').val();
 		//console.log( negocio );
 		
@@ -6236,7 +6245,7 @@ $(document).ready(function () {
 								<div class="row">\
 									<div class="col-md-12">\
 										<label for="idTab_Produto">Produto '+pc+':</label><br>\
-										<select class="form-control Chosen" id="listadinamicab'+pc+'" name="idTab_Produto'+pc+'" onchange="'+buscavalor+'(this.value,this.name,\''+tblbusca+'\','+pc+',\'Produto\'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')">\
+										<select class="form-control Chosen" id="listadinamicab'+pc+'" name="idTab_Produto'+pc+'" onchange="'+buscavalor+'(this.value,this.name,\''+tblbusca+'\','+pc+',\'Produto\','+recorrencias+'),calculaQtdSoma(\'QtdProduto\',\'QtdSoma\',\'ProdutoSoma\',0,0,\'CountMax\',0,\'ProdutoHidden\')">\
 											<option value="">-- Selecione uma opção --</option>\
 										</select>\
 									</div>\
@@ -6451,7 +6460,8 @@ $(document).ready(function () {
 	//adiciona campos dinamicamente dos Serviços 
     var ps = $("#SCount").val(); //initlal text box count
 	$(".add_field_button10").click(function(e){ //on add input button click
-        
+        var recorrencias = $('#Recorrencias').val();
+		console.log('Recorrencias no serviço = ' + recorrencias);
 		var negocio = $('#Negocio').val();
 		//console.log( negocio );
 		
@@ -6490,7 +6500,7 @@ $(document).ready(function () {
 								<div class="row">\
 									<div class="col-md-12">\
 										<label for="idTab_Servico">Servico '+ps+':</label><br>\
-										<select class="form-control Chosen4" id="listadinamica'+ps+'"  name="idTab_Servico'+ps+'" onchange="'+buscavalor_serv+'(this.value,this.name,\''+tblbusca_serv+'\','+ps+',\'Servico\'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')">\
+										<select class="form-control Chosen4" id="listadinamica'+ps+'"  name="idTab_Servico'+ps+'" onchange="'+buscavalor_serv+'(this.value,this.name,\''+tblbusca_serv+'\','+ps+',\'Servico\','+recorrencias+'),calculaQtdSomaDev(\'QtdServico\',\'QtdSomaDev\',\'ServicoSoma\',0,0,\'CountMax2\',0,\'ServicoHidden\')">\
 											<option value="">-- Selecione uma opção --</option>\
 										</select>\
 									</div>\
@@ -7564,15 +7574,15 @@ $('#calendar').fullCalendar({
     eventAfterRender: function (event, element) {
 
         if (event.Evento == 1){
-            var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b>" + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencias + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
+            var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b>" + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencia + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
         }else{
 
             if (event.Paciente == 'D'){
                 var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b> " + event.Obs  + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Cliente: </b>" + event.titlecliente + "</b><br><b>Responsável:</b> " + event.subtitle + "<br><b>Tel.:</b> " + event.CelularCliente + 
-							"<br>\n\<b>Tipo: </b> " + event.TipoConsulta + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencias + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
+							"<br>\n\<b>Tipo: </b> " + event.TipoConsulta + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencia + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
             }else{
                 var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b> " + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Cliente: </b>" + event.titlecliente + "<b> " + "<br><b>Tel.:</b> " + event.CelularCliente + "<b> " + "<br><b>Depend.:</b> " + event.titledep + "<b> " + "<br><b>Pet:</b> " + event.titlepet +  
-							"<br>\n\<b>Tipo: </b> " + event.TipoConsulta + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencias + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
+							"<br>\n\<b>Tipo: </b> " + event.TipoConsulta + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencia + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
 			}
 		}
         $(element).tooltip({

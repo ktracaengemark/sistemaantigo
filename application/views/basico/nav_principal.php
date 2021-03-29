@@ -63,6 +63,8 @@
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>agenda"><span class="glyphicon glyphicon-calendar"></span> Agenda </a></li>
 							<li role="separator" class="divider"></li>
 							<li><a class="dropdown-item" href="<?php echo base_url() ?>relatorio/admin"><span class="glyphicon glyphicon-list"></span> Menu </a></li>
+							<!--<li role="separator" class="divider"></li>
+							<li><a href="<?php echo base_url() ?>Consulta/alterar_recorrencia"><span class="glyphicon glyphicon-plus"></span> Alterar Recorencias</a></li>-->
 						</ul>
 					</div>							
 				</li>						

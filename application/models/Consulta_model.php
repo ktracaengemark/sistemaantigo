@@ -36,6 +36,58 @@ class Consulta_model extends CI_Model {
 
         return $query[0];
     }
+
+    public function get_consulta_orca($data) {
+        $query = $this->db->query('
+			SELECT * 
+			FROM 
+				App_Consulta
+			WHERE 
+				idApp_Consulta = ' . $data
+		);
+		
+        $query = $query->result_array();
+
+        return $query[0];
+    }
+
+    public function get_consultas($data) {
+        $query = $this->db->query('
+			SELECT * 
+			FROM 
+				App_Consulta
+			WHERE 
+				Repeticao = ' . $data . '
+			ORDER BY
+				idApp_Consulta ASC
+		');
+		
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
+    public function get_recorrencia() {
+        $query = $this->db->query('
+			SELECT 
+				idApp_Consulta,
+				Recorrencias,
+				Recorrencia
+			FROM 
+				App_Consulta
+		');
+		
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
+    public function update_procedimento($data) {
+
+        $query = $this->db->update_batch('App_Consulta', $data, 'idApp_Consulta');
+        return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
+
+    }
 	
     public function get_consulta_posterior($id, $repeticao, $quais, $dia) {
 		

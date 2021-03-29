@@ -104,6 +104,17 @@ class Basico {
             return FALSE;
         }
     }
+		
+    function check_repetir($data) {
+        if ($data) {
+            if ($data == 'S')
+                return TRUE;
+            else
+                return FALSE;
+        } else {
+            return FALSE;
+        }
+    }
 	
     function check_periodo($data) {
         if ($data) {

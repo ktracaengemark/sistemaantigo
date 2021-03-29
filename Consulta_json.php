@@ -59,7 +59,7 @@ $result = mysql_query(
             C.idTab_Status,
             TC.TipoConsulta,
             C.Evento,
-			C.Recorrencias,
+			C.Recorrencia,
 			C.DataTermino
         FROM
 			App_Consulta AS C
@@ -99,7 +99,7 @@ while ($row = mysql_fetch_assoc($result)) {
 		#$profissional = utf8_encode($row['NomeUsuario']);
 		#$profissional = utf8_encode($row['idApp_Agenda']);
 		$profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
-        $recorrencias = mb_convert_encoding($row['Recorrencias'], "UTF-8", "ISO-8859-1");
+        $recorrencia = mb_convert_encoding($row['Recorrencia'], "UTF-8", "ISO-8859-1");
         $datatermino = $row['DataTermino'];
 
 	} else {
@@ -113,7 +113,7 @@ while ($row = mysql_fetch_assoc($result)) {
 			#$profissional = utf8_encode($row['NomeUsuario']);
 			#$profissional = utf8_encode($row['idApp_Agenda']);
 			$profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
-			$recorrencias = mb_convert_encoding($row['Recorrencias'], "UTF-8", "ISO-8859-1");
+			$recorrencia = mb_convert_encoding($row['Recorrencia'], "UTF-8", "ISO-8859-1");
 			$datatermino = $row['DataTermino'];
 			$telefone1 = mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1");
         } else {
@@ -132,7 +132,7 @@ while ($row = mysql_fetch_assoc($result)) {
 			#$profissional = utf8_encode($row['idApp_Agenda']);
 			#$profissional = utf8_encode($row['idSis_Usuario']);
             $profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
-			$recorrencias = mb_convert_encoding($row['Recorrencias'], "UTF-8", "ISO-8859-1");
+			$recorrencia = mb_convert_encoding($row['Recorrencia'], "UTF-8", "ISO-8859-1");
 			$datatermino = $row['DataTermino'];
 			#$telefone1 = utf8_encode($row['CelularCliente']);
             $telefone1 = mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1");
@@ -206,7 +206,7 @@ while ($row = mysql_fetch_assoc($result)) {
         'Paciente' => $row['Paciente'],
         #   'ContatoCliente' => $contatocliente,
         'Profissional' => $profissional,
-        'Recorrencias' => $recorrencias,
+        'Recorrencia' => $recorrencia,
         'DataTermino' => $datatermino,
     );
 }

@@ -215,7 +215,7 @@
 												<div class="row text-left">	
 													<div class="col-md-4">
 														<label>Ocorrência</label>
-														<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencias']; ?>">
+														<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencia']; ?>">
 													</div>	
 													<div class="col-md-4">
 														<label>Termina em</label>
@@ -363,7 +363,7 @@
 					<div class="row text-left">	
 						<div class="col-md-3">
 							<label>Ocorrência</label>
-							<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencias']; ?>">
+							<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['Recorrencia']; ?>">
 						</div>	
 						<div class="col-md-4">
 							<label>Termina em</label>

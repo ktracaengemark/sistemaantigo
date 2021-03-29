@@ -191,7 +191,31 @@ class Orcatrata_model extends CI_Model {
 
         return $query[0];
     }
+	
+    public function get_orcatratas($data) {
+        $query = $this->db->query('
+			SELECT *
+			FROM 
+				App_OrcaTrata
+			WHERE 
+				RepeticaoOrca = ' . $data . '
+			ORDER BY
+				idApp_OrcaTrata ASC
+		');
+        $query = $query->result_array();
+		
+        /*
+        //echo $this->db->last_query();
+        echo '<br>';
+        echo "<pre>";
+        print_r($query);
+        echo "</pre>";
+        exit ();
+        */
 
+        return $query;
+    }
+	
     public function get_orcatrata_baixa($data) {
         $query = $this->db->query('
 			SELECT * 
@@ -1312,7 +1336,7 @@ class Orcatrata_model extends CI_Model {
 					LEFT JOIN App_Fornecedor AS C ON C.idApp_Fornecedor = OT.idApp_Fornecedor
 					LEFT JOIN Tab_TipoFinanceiro AS TR ON TR.idTab_TipoFinanceiro = OT.TipoFinanceiro
 					LEFT JOIN Sis_Empresa AS E ON E.idSis_Empresa = PR.idSis_Empresa
-			WHERE 
+					WHERE 
 				' . $permissao . '
                 ' . $date_inicio_orca . '
                 ' . $date_fim_orca . '
@@ -2268,10 +2292,9 @@ class Orcatrata_model extends CI_Model {
 	
     public function update_orcatrata($data, $id) {
 
-        unset($data['idApp_OrcaTrata']);
+        unset($data['Id']);
         $query = $this->db->update('App_OrcaTrata', $data, array('idApp_OrcaTrata' => $id));
         return ($this->db->affected_rows() === 0) ? FALSE : TRUE;
-
     }
 
     public function update_cliente($data, $id) {

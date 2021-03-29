@@ -1,3 +1,4 @@
+
 <?php if (isset($msg)) echo $msg; ?>
 <div class="container-fluid">
 	<div class="row">	
@@ -169,10 +170,11 @@
 									
 										<div class="panel panel-success">
 											<div class="panel-heading">
+												<input type="hidden" id="Recorrencias" name="Recorrencias" value="<?php echo $Recorrencias; ?>" />
 												<input type="hidden" name="Negocio" id="Negocio" value="1"/>
 												<input type="hidden" name="Empresa" id="Empresa" value="<?php echo $_SESSION['log']['idSis_Empresa']; ?>"/>
 												<input type="hidden" name="NivelEmpresa" id="NivelEmpresa" value="<?php echo $_SESSION['log']['NivelEmpresa']; ?>"/>
-												<h4 class="mb-3"><b>Receita</b></h4>
+												<h4 class="mb-3"><b>Receita | Será Replicada em <?php echo $Recorrencias; ?> O.S.</b></h4>
 												<div class="form-group">	
 													<div class="row">
 														<div class="col-md-4">
@@ -233,14 +235,25 @@
 														</div>
 													</div>
 												</div>
+												<input type="hidden" id="Caminho2" name="Caminho2" value="<?php echo $caminho2; ?>">
 												<div <?php echo $visivel; ?>>
-														<div class="row">
-															<div class="col-md-12">
-																<h4 class="text-left"><b>Cliente</b>: <?php echo '' . $_SESSION['Cliente']['NomeCliente'] . '' ?> - <?php echo '' . $_SESSION['Cliente']['idApp_Cliente'] . '' ?></h4>
-															</div>
+													<div class="row">
+														<div class="col-md-4">
+															<label >Cliente</label>
+															<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Cliente']['NomeCliente']; ?>">
 														</div>
+														<input type="hidden" id="Hidden_idApp_ClientePet" name="Hidden_idApp_ClientePet" value="<?php echo $orcatrata['idApp_ClientePet']; ?>" />
+														
+														<div class="col-md-4 text-left">
+															<label  for="idApp_ClientePet">Pet</label>
+															<select data-placeholder="Selecione uma opção..." class="form-control" id="idApp_ClientePet" name="idApp_ClientePet">
+																<option value=""></option>
+															</select>
+															<span class="modal-title" id="Pet"></span>
+														</div>
+														
+													</div>
 												</div>
-											
 												<?php if ($_SESSION['log']['NivelEmpresa'] >= 4 ) { ?>
 													<div id="Prd_Srv_Orca" <?php echo $div['Prd_Srv_Orca']; ?>>	
 														<h5 class="mb-3"><b>Produtos & Serviços</b></h5>
@@ -2115,7 +2128,7 @@
 											<div class="panel-heading">
 												<input type="hidden" name="idApp_OrcaTrata" value="<?php echo $orcatrata['idApp_OrcaTrata']; ?>">
 												<input type="hidden" name="Tipo_Orca"  id="Tipo_Orca" value="<?php echo $orcatrata['Tipo_Orca']; ?>">
-												<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
+												<input type="hidden" name="idApp_Cliente" id="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>">
 												<h4 class="mb-3"><b>Pedido</b></h4>
 												<?php $data1 = new DateTime(); $data2 = new DateTime($_SESSION['log']['DataDeValidade']); if (($data2 > $data1) || ($_SESSION['log']['idSis_Empresa'] == 5))  { ?>
 													<div class="row">

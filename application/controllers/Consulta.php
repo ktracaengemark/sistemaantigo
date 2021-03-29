@@ -80,6 +80,7 @@ class Consulta extends CI_Controller {
 			'Tempo2',
 			'DataTermino',
 			'Recorrencias',
+			'Recorrencia',
 		), TRUE));
 		
  		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
@@ -338,9 +339,9 @@ class Consulta extends CI_Controller {
 				$data['copiar']['Repeticao'] = $data['idApp_Consulta'];
 				if($data['cadastrar']['Repetir'] == 'S'){
 					$data['copiar']['DataTermino'] = $data['query']['DataTermino'];
-					$data['copiar']['Recorrencias'] = "1/" . $qtd;
+					$data['copiar']['Recorrencia'] = "1/" . $qtd;
 				}else{
-					$data['copiar']['Recorrencias'] = "1/1";
+					$data['copiar']['Recorrencia'] = "1/1";
 					//$data['copiar']['DataTermino'] = $dataini_cad;
 				}
 				
@@ -361,7 +362,8 @@ class Consulta extends CI_Controller {
 								'Tempo' 				=> $data['query']['Tempo'],
 								'Tempo2' 				=> $data['query']['Tempo2'],
 								'DataTermino' 			=> $data['query']['DataTermino'],
-								'Recorrencias' 			=> ($j + 1) .  '/' . $data['query']['Recorrencias'],
+								'Recorrencias' 			=> $data['query']['Recorrencias'],
+								'Recorrencia' 			=> ($j + 1) .  '/' . $data['query']['Recorrencias'],
 								'idApp_Agenda' 			=> $data['query']['idApp_Agenda'],
 								'idApp_Cliente' 		=> $data['query']['idApp_Cliente'],
 								'idApp_ClienteDep' 		=> $data['query']['idApp_ClienteDep'],
@@ -410,6 +412,9 @@ class Consulta extends CI_Controller {
 		$data['cadastrar'] = quotes_to_entities($this->input->post(array(
 			'Cadastrar',
 			'Repetir',
+			'Vincular',
+			'NovaOS',
+			'PorConsulta',
 			'Prazo',
 			'DataMinima',
 			'RelacaoDep',
@@ -443,10 +448,15 @@ class Consulta extends CI_Controller {
 			'Tempo2',
 			'DataTermino',
 			'Recorrencias',
+			'Recorrencia',
+			'OS',
 		), TRUE));
 		
  		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;
  		(!$data['cadastrar']['Repetir']) ? $data['cadastrar']['Repetir'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['Vincular']) ? $data['cadastrar']['Vincular'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['NovaOS']) ? $data['cadastrar']['NovaOS'] = 'N' : FALSE;
+ 		(!$data['cadastrar']['PorConsulta']) ? $data['cadastrar']['PorConsulta'] = 'N' : FALSE;
 		//(!$data['query']['Intervalo']) ? $data['query']['Intervalo'] = '1' : FALSE;
 		//(!$data['query']['Periodo']) ? $data['query']['Periodo'] = '1' : FALSE;
 		(!$data['query']['Recorrencias']) ? $data['query']['Recorrencias'] = '1' : FALSE;
@@ -527,7 +537,10 @@ class Consulta extends CI_Controller {
 			'5' => 'GIGANTE',
         );
 		$data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
-		$data['select']['Repetir'] = $this->Basico_model->select_status_sn();        
+		$data['select']['Repetir'] = $this->Basico_model->select_status_sn(); 
+		$data['select']['Vincular'] = $this->Basico_model->select_status_sn();
+		$data['select']['NovaOS'] = $this->Basico_model->select_status_sn();
+		$data['select']['PorConsulta'] = $this->Basico_model->select_status_sn();        
 		$data['select']['Tempo'] = array (
             '1' => 'Dia(s)',
             '2' => 'Semana(s)',
@@ -570,6 +583,7 @@ class Consulta extends CI_Controller {
         $data['disabled'] = '';
         $data['metodo'] = 1;
         $data['alterarcliente'] = 1;
+        $data['caminho2'] = '../';
 
  		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		
@@ -584,7 +598,25 @@ class Consulta extends CI_Controller {
         );
         ($data['cadastrar']['Repetir'] == 'S') ?
             $data['div']['Repetir'] = '' : $data['div']['Repetir'] = 'style="display: none;"';
-					
+			
+		$data['radio'] = array(
+            'Vincular' => $this->basico->radio_checked($data['cadastrar']['Vincular'], 'Vincular', 'NS'),
+        );
+        ($data['cadastrar']['Vincular'] == 'S') ?
+            $data['div']['Vincular'] = '' : $data['div']['Vincular'] = 'style="display: none;"';
+		
+		$data['radio'] = array(
+            'NovaOS' => $this->basico->radio_checked($data['cadastrar']['NovaOS'], 'NovaOS', 'NS'),
+        );
+        ($data['cadastrar']['NovaOS'] == 'S') ?
+            $data['div']['NovaOS'] = '' : $data['div']['NovaOS'] = 'style="display: none;"';
+		
+		$data['radio'] = array(
+            'PorConsulta' => $this->basico->radio_checked($data['cadastrar']['PorConsulta'], 'PorConsulta', 'NS'),
+        );
+        ($data['cadastrar']['PorConsulta'] == 'S') ?
+            $data['div']['PorConsulta'] = '' : $data['div']['PorConsulta'] = 'style="display: none;"';
+		
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
@@ -600,8 +632,11 @@ class Consulta extends CI_Controller {
 			$this->form_validation->set_rules('Tempo', 'Tempo2', 'required|trim');
 			$this->form_validation->set_rules('DataMinima', 'Data Mínima:', 'trim|valid_date');
 			$this->form_validation->set_rules('DataTermino', 'Termina em:', 'required|trim|valid_date|valid_data_termino[' . $data['cadastrar']['DataMinima'] . ']|valid_data_termino2[' . $data['query']['Data'] . ']');
+		}else{
+			if($data['query']['Recorrencias'] > 1){
+				$this->form_validation->set_rules('Repetir', 'Repetir', 'valid_repetir');
+			}
 		}
-		
         $this->form_validation->set_rules('Data', 'Data', 'required|trim|valid_date');
         $this->form_validation->set_rules('Data2', 'Data do Fim', 'required|trim|valid_date');
 		$this->form_validation->set_rules('HoraInicio', 'Hora Inicial', 'required|trim|valid_hour');
@@ -690,7 +725,20 @@ class Consulta extends CI_Controller {
             $data['query']['idSis_Usuario'] = $_SESSION['log']['idSis_Usuario'];
 			$data['query']['idSis_Empresa'] = $_SESSION['log']['idSis_Empresa'];
 			$data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-
+			if($data['cadastrar']['Vincular'] == "N"){
+				$data['query']['OS'] = "0";
+			}else{
+				if($data['cadastrar']['NovaOS'] == "N"){
+					$data['query']['OS'] = "1";
+				}else{
+					if($data['cadastrar']['PorConsulta'] == "N"){
+						$data['query']['OS'] = "1";
+					}else{
+						$data['query']['OS'] = $data['query']['Recorrencias'];
+					}
+				}
+			}
+			
             $data['redirect'] = '&gtd=' . $this->basico->mascara_data($data['query']['Data'], 'mysql');
 
             #unset($data['query']['Data'], $data['query']['HoraInicio'], $data['query']['HoraFim']);
@@ -709,12 +757,15 @@ class Consulta extends CI_Controller {
                 $this->basico->erro($msg);
                 $this->load->view('consulta/form_consulta', $data);
             } else {
+				
+				$_SESSION['Copiar']['Repeticao'] = $data['idApp_Consulta'];
 				$data['copiar']['Repeticao'] = $data['idApp_Consulta'];
+				
 				if($data['cadastrar']['Repetir'] == 'S'){
 					$data['copiar']['DataTermino'] = $data['query']['DataTermino'];
-					$data['copiar']['Recorrencias'] = "1/" . $qtd;
+					$data['copiar']['Recorrencia'] = "1/" . $qtd;
 				}else{
-					$data['copiar']['Recorrencias'] = "1/1";
+					$data['copiar']['Recorrencia'] = "1/1";
 					//$data['copiar']['DataTermino'] = $dataini_cad;
 				}
 				
@@ -735,7 +786,9 @@ class Consulta extends CI_Controller {
 								'Tempo' 				=> $data['query']['Tempo'],
 								'Tempo2' 				=> $data['query']['Tempo2'],
 								'DataTermino' 			=> $data['query']['DataTermino'],
-								'Recorrencias' 			=> ($j + 1) .  '/' . $data['query']['Recorrencias'],
+								'Recorrencias' 			=> $data['query']['Recorrencias'],
+								'Recorrencia' 			=> ($j + 1) .  '/' . $data['query']['Recorrencias'],
+								'OS' 					=> $data['query']['OS'],
 								'idApp_Agenda' 			=> $data['query']['idApp_Agenda'],
 								'idApp_Cliente' 		=> $data['query']['idApp_Cliente'],
 								'idApp_ClienteDep' 		=> $data['query']['idApp_ClienteDep'],
@@ -764,8 +817,23 @@ class Consulta extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 //redirect(base_url() . 'cliente/prontuario/' . $data['query']['idApp_Cliente'] . $data['msg'] . $data['redirect']);
-                redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
-                exit();
+				if($data['cadastrar']['Vincular'] == 'S'){	
+					if($data['cadastrar']['NovaOS'] == 'S'){
+						if($data['cadastrar']['PorConsulta'] == 'S'){
+							//Gera O.S. Replicadas pelo número de ocorrências
+							redirect(base_url() . 'orcatrata/cadastrar/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+						}else{
+							//Gera uma única O.S.
+							redirect(base_url() . 'orcatrata/cadastrar/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+						}
+					}else{
+						//Busca na lista de O.S. do cliente 
+						redirect(base_url() . 'orcatrata/listar/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+					}
+				}else{
+					redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+				}
+				exit();
             }
         }
 
@@ -1489,6 +1557,8 @@ class Consulta extends CI_Controller {
 			'Cadastrar',
 			'PeloPet',
 			'PortePet',
+			'Vincular',
+			'NovaOS',
         ), TRUE));
 		
 		$data['alterar'] = quotes_to_entities($this->input->post(array(
@@ -1619,6 +1689,7 @@ class Consulta extends CI_Controller {
         $data['panel'] = 'primary';
         $data['metodo'] = 2;
         $data['alterarcliente'] = 2;
+        $data['caminho2'] = '../../';
 
  		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		
@@ -2165,6 +2236,7 @@ class Consulta extends CI_Controller {
 			'Tempo2',
 			'DataTermino',
 			'Recorrencias',
+			'Recorrencia',
 		), TRUE));
 		
  		(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'N' : FALSE;
@@ -2324,9 +2396,9 @@ class Consulta extends CI_Controller {
 				if($data['cadastrar']['Repetir'] == 'S'){
 					//$data['copiar']['DataTermino'] = $ultimaocorrencia;
 					$data['copiar']['DataTermino'] = $data['query']['DataTermino'];
-					$data['copiar']['Recorrencias'] = "1/" . $qtd;
+					$data['copiar']['Recorrencia'] = "1/" . $qtd;
 				}else{
-					$data['copiar']['Recorrencias'] = "1/1";
+					$data['copiar']['Recorrencia'] = "1/1";
 					//$data['copiar']['DataTermino'] = $dataini_cad;
 				}
 				
@@ -2348,7 +2420,8 @@ class Consulta extends CI_Controller {
 								'Tempo2' 				=> $data['query']['Tempo2'],
 								//'DataTermino' 			=> $ultimaocorrencia,
 								'DataTermino' 			=> $data['query']['DataTermino'],
-								'Recorrencias' 			=> ($j + 1) .  '/' . $data['query']['Recorrencias'],
+								'Recorrencias' 			=> $data['query']['Recorrencias'],
+								'Recorrencia' 			=> ($j + 1) .  '/' . $data['query']['Recorrencias'],
 								'idApp_Agenda' 			=> $data['query']['idApp_Agenda'],
 								'idApp_Cliente' 		=> $data['query']['idApp_Cliente'],
 								'Evento' 				=> $data['query']['Evento'],
@@ -2763,6 +2836,53 @@ class Consulta extends CI_Controller {
             }
         }
 
+        $this->load->view('basico/footer');
+    }
+
+    public function alterar_recorrencia() {
+
+        if ($this->input->get('m') == 1)
+            $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
+        elseif ($this->input->get('m') == 2)
+            $data['msg'] = $this->basico->msg('<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>', 'erro', TRUE, TRUE, TRUE);
+        else
+            $data['msg'] = '';
+
+        
+				#### App_Consulta ####
+				$data['anterior'] = $this->Consulta_model->get_recorrencia();
+				if (isset($data['anterior'])){
+				
+					$max = count($data['anterior']);
+					for($j=0;$j<$max;$j++) {
+						
+						$dataini[$j] 		= explode('/', $data['anterior'][$j]['Recorrencias']);
+						$recorrencia[$j]	 = $dataini[$j][0];
+						if(isset($dataini[$j][1])){
+							$recorrencias[$j]	 = $dataini[$j][1];
+							$data['anterior'][$j]['Recorrencia'] = $dataini[$j][1];
+						}else{
+							$data['anterior'][$j]['Recorrencia']	 = 1;
+							
+						}
+					}
+					
+					if (count($data['anterior']))
+						$data['update']['anterior']['bd'] =  $this->Consulta_model->update_procedimento($data['anterior']);
+					/*
+					echo '<br>';
+					echo "<pre>";
+					echo '<br>';
+					print_r($data['update']['anterior']['bd']);
+					echo "</pre>";	
+					*/	
+				}        
+
+        //exit();
+            
+		redirect(base_url() . 'agenda' . $data['msg'] . $data['redirect']);
+		exit();
+			
         $this->load->view('basico/footer');
     }
 
