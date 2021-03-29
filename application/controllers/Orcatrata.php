@@ -1325,18 +1325,7 @@ class Orcatrata extends CI_Controller {
 								$data['update']['parcelas']['baixa']['idApp_Produto'] = $this->Orcatrata_model->set_parcelas($data['update']['parcelas']['baixa']);
 							}
 							
-						}	
-						
-						
-
-						/*	
-						echo '<br>';
-						echo "<pre>";
-						print_r($data['id_Repeticao']);
-						echo '<br>';
-						print_r($data['update']['produto']['baixa']);
-						echo "</pre>";
-						*/
+						}
 					}
 				}
 				
@@ -1351,7 +1340,6 @@ class Orcatrata extends CI_Controller {
 						$data['idApp_OrcaTrata'][$j] = $data['update']['orcamentos'][$j]['idApp_OrcaTrata'];
 					}
 				}
-				
 				if ($cont_consultas > 0) {
 					for($k=0;$k<$cont_consultas;$k++) {
 						if($cont_consultas == $cont_orcamentos){
@@ -1360,26 +1348,29 @@ class Orcatrata extends CI_Controller {
 							$data['update']['consultas'][$k]['idApp_OrcaTrata'] = $data['idApp_OrcaTrata']['0'];
 						}
 						$data['update']['consultas']['bd'][$k] = $this->Consulta_model->update_consulta($data['update']['consultas'][$k], $data['update']['consultas'][$k]['idApp_Consulta']);
-						
-						/*
-						echo '<br>';
-						echo "<pre>";
-						//print_r($cont_consultas);
-						echo '<br>';
-						print_r($data['update']['consultas']['bd'][$k]);
-						echo '<br>';
-						print_r($data['update']['consultas'][$k]['idApp_Consulta']);
-						echo '<br>';
-						print_r($data['update']['consultas'][$k]);
-						echo "</pre>";
-						*/
 					}				
 				}
 				
-
+				if ($cont_consultas > 0) {
+					for($k=0;$k<$cont_consultas;$k++) {
+						$dataini[$k]	= explode(' ', $data['update']['consultas'][$k]['DataInicio']);
+						$dia[$k]	 	= $dataini[$k][0];
+						$hora[$k]	 	= $dataini[$k][1];
+					}
+				}
 				
-				//exit ();
-				
+				if ($cont_orcamentos > 0) {
+					for($j=0;$j<$cont_orcamentos;$j++) {
+						if($cont_consultas == $cont_orcamentos){
+							$data['update']['orcamentos'][$j]['DataEntregaOrca'] = $dia[$j];
+							$data['update']['orcamentos'][$j]['HoraEntregaOrca'] = $hora[$j];
+						}else{
+							$data['update']['orcamentos'][$j]['DataEntregaOrca'] = $dia['0'];
+							$data['update']['orcamentos'][$j]['HoraEntregaOrca'] = $hora['0'];
+						}
+						$data['update']['orcamentos']['bd'][$j] = $this->Orcatrata_model->update_orcatrata($data['update']['orcamentos'][$j], $data['update']['orcamentos'][$j]['idApp_OrcaTrata']);
+					}				
+				}
 				
 				////Fim da Criação das Repetições///////				
 

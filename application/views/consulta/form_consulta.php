@@ -654,6 +654,10 @@
 												</div>
 												<br>
 											<?php }else{ ?>
+												
+												<a class="col-md-4 btn btn-sm btn-warning" href="<?php echo base_url() ?>orcatrata/alterarstatus/<?php echo $_SESSION['Consulta']['idApp_OrcaTrata'];?>" role="button">
+													<span class="glyphicon glyphicon-pencil"></span>O.S.
+												</a>
 												<h4 class="mb-3">
 													Pergunta 1:
 													<br> Existe OS vinculada?
