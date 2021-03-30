@@ -824,10 +824,10 @@ class Consulta extends CI_Controller {
 					if($data['cadastrar']['NovaOS'] == 'S'){
 						if($data['cadastrar']['PorConsulta'] == 'S'){
 							//Gera O.S. Replicadas pelo número de ocorrências
-							redirect(base_url() . 'orcatrata/cadastrar/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+							redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
 						}else{
 							//Gera uma única O.S.
-							redirect(base_url() . 'orcatrata/cadastrar/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
+							redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['idApp_Consulta'] . $data['msg']);
 						}
 					}else{
 						//Busca na lista de O.S. do cliente 
@@ -1923,11 +1923,11 @@ class Consulta extends CI_Controller {
 						if($data['cadastrar']['PorConsulta'] == 'S'){
 							//Gera O.S. Replicadas pelo número de ocorrências
 							unset($_SESSION['Agenda'], $_SESSION['Cliente'], $_SESSION['Consulta'], $_SESSION['Consultas_Repet'], $_SESSION['Repeticao']);
-							redirect(base_url() . 'orcatrata/cadastrar/' . $data['query']['idApp_Cliente'] . '/' . $data['query']['idApp_Consulta'] . $data['msg']);
+							redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['query']['idApp_Consulta'] . $data['msg']);
 						}else{
 							//Gera uma única O.S.
 							unset($_SESSION['Agenda'], $_SESSION['Cliente'], $_SESSION['Consulta'], $_SESSION['Consultas_Repet'], $_SESSION['Repeticao']);
-							redirect(base_url() . 'orcatrata/cadastrar/' . $data['query']['idApp_Cliente'] . '/' . $data['query']['idApp_Consulta'] . $data['msg']);
+							redirect(base_url() . 'orcatrata/cadastrarrepet/' . $data['query']['idApp_Cliente'] . '/' . $data['query']['idApp_Consulta'] . $data['msg']);
 						}
 					}else{
 						//Busca na lista de O.S. do cliente

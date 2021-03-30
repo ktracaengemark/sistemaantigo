@@ -2,7 +2,7 @@
 
 <div class="col-md-12 ">
 	<div class="row">
-		<div class="col-sm-offset-1 col-md-11 ">
+		<div class="col-md-12">
 			<?php #echo validation_errors(); ?>
 			<?php echo form_open_multipart($form_open_path); ?>
 			<div class="panel panel-<?php echo $panel; ?>">
@@ -601,95 +601,95 @@
 												<div class="panel panel-default">
 													<div class="panel-heading">
 														<div class="row">
-															<div class="col-md-3 text-center">	
-																<a class="add_field_button9 btn btn-warning"
-																		autofocus onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
-																	<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Produtos
-																</a>
-															</div>
-															<!--
-															<div class="col-md-3 text-center">	
-																
-																<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma; ?></span></b>
-															</div>
-															-->
-															<div class="col-md-3 text-center">
-																<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma; ?></span></b><br />
-															</div>
-															<div class="col-md-6">
+															<div class="col-md-4 text-left">
 																<div class="panel panel-warning">
 																	<div class="panel-heading">
 																		<div class="row">
-																			<div class="col-md-6">
+																			<div class="col-md-4 text-left">
+																				<b>Linhas: <span id="ProdutoSoma"><?php echo $ProdutoSoma; ?></span></b><br />
+																			</div>
+																			<div class="col-md-8 text-center">	
+																				<a class="add_field_button9 btn btn-warning btn-block"
+																						onclick="calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)">
+																					<span class="glyphicon glyphicon-plus"></span> Adi.Produtos
+																				</a>
+																			</div>
+																			<!--
+																			<div class="col-md-3 text-center">	
+																				
+																				<b>Produtos: <span id="QtdSoma"><?php echo $QtdSoma; ?></span></b>
+																			</div>
+																			-->
+																		</div>
+																		<br>
+																		<div class="row">	
+																			<div class="col-md-12">
 																				<div class="row">
 																					<div class="col-md-4 text-left">	
 																						<b>Produtos: </b> 
 																					</div>
 																					<div class="col-md-8">
 																						<div  id="txtHint">
-																							<input type="text" class="form-control text-right Numero" id="QtdPrdOrca" maxlength="10" readonly=""
+																							<input type="text" class="form-control text-left Numero" id="QtdPrdOrca" maxlength="10" readonly=""
 																								   name="QtdPrdOrca" value="<?php echo $orcatrata['QtdPrdOrca'] ?>">
+																						</div>
+																					</div>
+																				</div>	
+																				<div class="row">	
+																					<div class="col-md-4 text-left">	
+																						<b>Valor:</b> 
+																					</div>	
+																					<div class="col-md-8">	
+																						<!--<label for="ValorOrca">Sub Produtos:</label><br>-->
+																						<div class="input-group" id="txtHint">
+																							<span class="input-group-addon" id="basic-addon1">R$</span>
+																							<input type="text" class="form-control text-left Valor" id="ValorOrca" maxlength="10" placeholder="0,00" readonly=""
+																								   onkeyup="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)" onchange="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)"
+																								   name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
+																						</div>
+																					</div>
+																				</div>	
+																				<div class="row">	
+																					<div class="col-md-4 text-left">	
+																						<b>Prazo:</b> 
+																					</div>
+																					<div class="col-md-8">
+																						<div  class="input-group" id="txtHint">
+																							<span class="input-group-addon" id="basic-addon1">Dias</span>
+																							<input type="text" class="form-control text-left Numero"  readonly=""
+																								   name="PrazoProdutos" id="PrazoProdutos" value="<?php echo $orcatrata['PrazoProdutos'] ?>">
 																								   
 																						</div>
 																					</div>
 																				</div>
 																			</div>
-																			<input type="hidden" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
-																			<div class="col-md-6">
-																				<!--<label for="ValorOrca">Valor em Produtos:</label><br>-->
-																				<div class="input-group" id="txtHint">
-																					<span class="input-group-addon" id="basic-addon1">R$</span>
-																					<input type="text" class="form-control text-right Valor" id="ValorOrca" maxlength="10" placeholder="0,00" readonly=""
-																						   onkeyup="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)" onchange="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)"
-																						   name="ValorOrca" value="<?php echo $orcatrata['ValorOrca'] ?>">
-																				</div>
-																			</div>	
-																			<div class="col-md-2 text-left">	
-																				<b>Prazo:</b> 
+																			<!--
+																			<div class="col-md-3 text-center">
+																				<label></label>
+																				<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>relatorio2/produtos2" role="button"> 
+																					<span class="glyphicon glyphicon-plus"></span> Novo/ Editar/ Estoque
+																				</a>
 																			</div>
-																			<div class="col-md-4">
-																				<div  class="input-group" id="txtHint">
-																					<input type="text" class="form-control text-right Numero"  readonly=""
-																						   name="PrazoProdutos" id="PrazoProdutos" value="<?php echo $orcatrata['PrazoProdutos'] ?>">
-																					<span class="input-group-addon" id="basic-addon1">Dias</span>
-																						   
-																				</div>
-																			</div>
-																		</div>	
+																			-->
+																		</div>
 																	</div>
 																</div>
 															</div>
-															<!--
-															<div class="col-md-3 text-center">
-																<label></label>
-																<a class="btn btn-md btn-danger" target="_blank" href="<?php echo base_url() ?>relatorio2/produtos2" role="button"> 
-																	<span class="glyphicon glyphicon-plus"></span> Novo/ Editar/ Estoque
-																</a>
-															</div>
-															-->
-														</div>
-													</div>
-												</div>
-												<br>																														
-												<div class="panel panel-default">
-													<div class="panel-heading text-left">
-														<div class="row">
-															
-															<div class="col-md-3 text-center">
-																
-																<a class="add_field_button10  btn btn-danger" 
-																		onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
-																	<span class="glyphicon glyphicon-arrow-up"></span> Adicionar Serviços
-																</a>
-																
-															</div>
-															
-															<div class="col-md-3 text-center">	
-																<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
-															</div>
-															<div class="col-md-6">
+															<div class="col-md-4 text-left">
 																<div class="panel panel-danger">
 																	<div class="panel-heading">
+																		<div class="row">
+																			<div class="col-md-4 text-left">	
+																				<b>Linhas: <span id="ServicoSoma"><?php echo $ServicoSoma ?></span></b><br />
+																			</div>
+																			<div class="col-md-8 text-center">
+																				<a class="add_field_button10  btn btn-danger btn-block" 
+																						onclick="calculaQtdSomaDev('QtdServico','QtdSomaDev','ServicoSoma',0,0,'CountMax2',1,0)">
+																					<span class="glyphicon glyphicon-plus"></span> Adicionar Serviços
+																				</a>
+																			</div>
+																		</div>
+																		<br>
 																		<div class="row">
 																			<!--
 																			<div class="col-md-6">
@@ -700,43 +700,47 @@
 																				</div>
 																			</div>
 																			-->
-																			<div class="col-md-6">
-																				<div class="row">
-																					<div class="col-md-4 text-left">	
-																						<b>Serviços: </b> 
-																					</div>
-																					<div class="col-md-8">
-																						<div  id="txtHint">
-																							<input type="text" class="form-control text-right Numero" id="QtdSrvOrca" maxlength="10" readonly=""
-																								   name="QtdSrvOrca" value="<?php echo $orcatrata['QtdSrvOrca'] ?>">
-																								   
-																						</div>
-																					</div>
-																				</div>
+																			<div class="col-md-4 text-left">	
+																				<b>Serviços: </b> 
 																			</div>
-																			<div class="col-md-6">
-																				<div class="input-group" id="txtHint">
-																					<span class="input-group-addon" id="basic-addon1">R$</span>
-																					<input type="text" class="form-control text-right Valor" id="ValorDev" maxlength="10" placeholder="0,00" readonly=""
-																						   onkeyup="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)" onchange="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)"
-																						   name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
-																				</div>
-																			</div>
-																			<div class="col-md-2 text-left">	
-																				<b>Prazo:</b> 
-																			</div>
-																			<div class="col-md-4">
-																				<div  class="input-group" id="txtHint">
-																					<input type="text" class="form-control text-right Numero"  readonly=""
-																						   name="PrazoServicos" id="PrazoServicos" value="<?php echo $orcatrata['PrazoServicos'] ?>">
-																					<span class="input-group-addon" id="basic-addon1">Dias</span>
+																			<div class="col-md-8">
+																				<div  id="txtHint">
+																					<input type="text" class="form-control text-left Numero" id="QtdSrvOrca" maxlength="10" readonly=""
+																						   name="QtdSrvOrca" value="<?php echo $orcatrata['QtdSrvOrca'] ?>">
 																						   
 																				</div>
 																			</div>
 																		</div>	
-																	</div>		
-																</div>			
+																		<div class="row">	
+																			<div class="col-md-4 text-left">	
+																				<b>Valor:</b> 
+																			</div>	
+																			<div class="col-md-8">
+																				<div class="input-group" id="txtHint">
+																					<span class="input-group-addon" id="basic-addon1">R$</span>
+																					<input type="text" class="form-control text-left Valor" id="ValorDev" maxlength="10" placeholder="0,00" readonly=""
+																						   onkeyup="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)" onchange="calculaResta(this.value),calculaTotal(this.value),calculaTroco(this.value)"
+																						   name="ValorDev" value="<?php echo $orcatrata['ValorDev'] ?>">
+																				</div>
+																			</div>
+																		</div>	
+																		<div class="row">	
+																			<div class="col-md-4 text-left">	
+																				<b>Prazo:</b> 
+																			</div>
+																			<div class="col-md-8">
+																				<div  class="input-group" id="txtHint">
+																					<span class="input-group-addon" id="basic-addon1">Dias</span>
+																					<input type="text" class="form-control text-left Numero"  readonly=""
+																						   name="PrazoServicos" id="PrazoServicos" value="<?php echo $orcatrata['PrazoServicos'] ?>">
+																						   
+																				</div>
+																			</div>
+																		</div>				
+																	</div>
+																</div>
 															</div>
+															<input type="hidden" name="ValorComissao" id="ValorComissao" value="<?php echo $orcatrata['ValorComissao'] ?>">
 														</div>
 													</div>
 												</div>

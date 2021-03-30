@@ -891,7 +891,7 @@
 							<div id="DeletarOS" <?php echo $div['DeletarOS']; ?>>
 								<div class="row ">	
 									<div class="col-md-12 ">
-										<h4 for="DeletarOS"><span class="glyphicon glyphicon-alert"></span> Atenção!! As O.S. vinculadas aos agendamentos, também serão apagadas?</h4>
+										<h4 for="DeletarOS"><span class="glyphicon glyphicon-alert"></span> Atenção!! As O.S. vinculadas aos agendamentos selecionados, também serão apagadas?</h4>
 									</div>
 								</div>
 							</div>

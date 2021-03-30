@@ -13,6 +13,7 @@
 							
 								<div class="panel panel-success">
 									<div class="panel-heading">
+										<input type="hidden" id="Recorrencias" name="Recorrencias" value="<?php echo $Recorrencias; ?>" />
 										<input type="hidden" name="Negocio" id="Negocio" value="1"/>
 										<input type="hidden" name="Empresa" id="Empresa" value="<?php echo $_SESSION['log']['idSis_Empresa']; ?>"/>
 										<input type="hidden" name="NivelEmpresa" id="NivelEmpresa" value="<?php echo $_SESSION['log']['NivelEmpresa']; ?>"/>
@@ -248,7 +249,7 @@
 																		<div class="row">
 																			<div class="col-md-12">
 																				<label for="idTab_Produto">Produto <?php echo $i ?></label>
-																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor1Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto')" <?php echo $readonly; ?>
+																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor1Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Produto',<?php echo $Recorrencias; ?>)" <?php echo $readonly; ?>
 																						 id="listadinamicab<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
 																					<option value="">-- Selecione uma opção --</option>
 																					<?php
@@ -447,7 +448,7 @@
 																					<span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
 																				</a>-->
 																				<?php } ?>
-																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor1Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Servico')" <?php echo $readonly; ?>
+																				<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="buscaValor1Tabelas(this.value,this.name,'Valor',<?php echo $i ?>,'Servico',<?php echo $Recorrencias; ?>)" <?php echo $readonly; ?>
 																						id="listadinamica<?php echo $i ?>" name="idTab_Servico<?php echo $i ?>">																					
 																					<option value="">-- Selecione uma opção --</option>
 																					<?php

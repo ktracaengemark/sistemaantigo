@@ -38,7 +38,7 @@ class Orcatrata extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-    public function cadastrar($idApp_Cliente = NULL, $idApp_Consulta = NULL) {
+    public function cadastrarrepet($idApp_Cliente = NULL, $idApp_Consulta = NULL) {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -474,13 +474,13 @@ class Orcatrata extends CI_Controller {
         );
 		
         $data['titulo'] = 'Nova Receita';
-        $data['form_open_path'] = 'orcatrata/cadastrar';
+        $data['form_open_path'] = 'orcatrata/cadastrarrepet';
         $data['readonly'] = '';
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
         $data['caminho'] = '../../';
-        $data['caminho2'] = '../../';
+        $data['caminho2'] = '../';
 		$data['Recorrencias'] = $_SESSION['Consulta']['OS'];
 		
 		if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorDev'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
@@ -653,7 +653,7 @@ class Orcatrata extends CI_Controller {
 			echo "</pre>";
 			exit ();
 			*/
-            $this->load->view('orcatrata/form_orcatrata', $data);
+            $this->load->view('orcatrata/form_orcatratarepet', $data);
         } else {
 
 			$data['cadastrar']['QuitadoParcelas'] = $data['cadastrar']['QuitadoParcelas'];
@@ -777,7 +777,7 @@ class Orcatrata extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('orcatrata/form_orcatrata', $data);
+                $this->load->view('orcatrata/form_orcatratarepet', $data);
 			} else {
 			
 				#### APP_Cliente ####
@@ -1384,7 +1384,7 @@ class Orcatrata extends CI_Controller {
         $this->load->view('basico/footer');
     }
 
-    public function cadastrarrepet($idApp_Cliente = NULL) {
+    public function cadastrar($idApp_Cliente = NULL) {
 
         if ($this->input->get('m') == 1)
             $data['msg'] = $this->basico->msg('<strong>Informações salvas com sucesso</strong>', 'sucesso', TRUE, TRUE, TRUE);
@@ -1406,6 +1406,8 @@ class Orcatrata extends CI_Controller {
             'idApp_OrcaTrata',
 			'Tipo_Orca',
             'idApp_Cliente',
+			'idApp_ClientePet',
+			'idApp_ClienteDep',
             'DataOrca',
 			'HoraOrca',
 			'DataPrazo',
@@ -1791,12 +1793,14 @@ class Orcatrata extends CI_Controller {
         );
 		
         $data['titulo'] = 'Nova Receita';
-        $data['form_open_path'] = 'orcatrata/cadastrarrepet';
+        $data['form_open_path'] = 'orcatrata/cadastrar';
         $data['readonly'] = '';
         $data['disabled'] = '';
         $data['panel'] = 'primary';
         $data['metodo'] = 1;
         $data['caminho'] = '../../';
+        $data['caminho2'] = '../../';
+		$data['Recorrencias'] = 1;
 
 		
 		if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorDev'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
@@ -1967,7 +1971,7 @@ class Orcatrata extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             //if (1 == 1) {
-            $this->load->view('orcatrata/form_orcatratarepet', $data);
+            $this->load->view('orcatrata/form_orcatrata', $data);
         } else {
 
 			$data['cadastrar']['QuitadoParcelas'] = $data['cadastrar']['QuitadoParcelas'];
@@ -2076,7 +2080,7 @@ class Orcatrata extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('orcatrata/form_orcatratarepet', $data);
+                $this->load->view('orcatrata/form_orcatrata', $data);
 			} else {
 			
 				#### APP_Cliente ####
@@ -2820,6 +2824,7 @@ class Orcatrata extends CI_Controller {
         $data['metodo'] = 1;
         $data['caminho'] = '../';
         $data['caminho2'] = '../';
+		$data['Recorrencias'] = 1;
 
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';

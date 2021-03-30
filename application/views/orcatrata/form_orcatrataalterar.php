@@ -174,7 +174,7 @@
 													<input type="hidden" name="Empresa" id="Empresa" value="<?php echo $_SESSION['log']['idSis_Empresa']; ?>"/>
 													<input type="hidden" name="NivelEmpresa" id="NivelEmpresa" value="<?php echo $_SESSION['log']['NivelEmpresa']; ?>"/>
 													<h4 class="mb-3">
-														<b>Editar Receita/ Dividida em <?php echo $Recorrencias; ?> Recorrencias</b> - Nº <?php echo $orcatrata['idApp_OrcaTrata'] ?> - 
+														<b>Editar Receita | Nº <?php echo $orcatrata['idApp_OrcaTrata'] ?> - 
 																					<?php 
 																						if($orcatrata['Tipo_Orca'] == "B"){
 																							echo 'Balcão';
