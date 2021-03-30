@@ -623,7 +623,7 @@
 														<div id="NovaOS" <?php echo $div['NovaOS']; ?>>
 															<div class="col-md-4 ">
 																<?php if ($porconsulta == "S") { ?>
-																	<label for="PorConsulta">O.S.Por/Ocorren.?</label><br>
+																	<label for="PorConsulta">1.OS.Por/Ocor?</label><br>
 																	<div class="btn-group" data-toggle="buttons">
 																		<?php
 																		foreach ($select['PorConsulta'] as $key => $row) {
