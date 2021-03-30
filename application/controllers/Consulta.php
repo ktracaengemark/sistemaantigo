@@ -12,7 +12,7 @@ class Consulta extends CI_Controller {
         #load libraries
         $this->load->helper(array('form', 'url', 'date', 'string'));
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Consulta_model', 'Empresafilial_model', 'Cliente_model', 'Agenda_model'));
+        $this->load->model(array('Basico_model', 'Consulta_model', 'Orcatrata_model', 'Empresafilial_model', 'Cliente_model', 'Agenda_model'));
         $this->load->driver('session');
 
         #load header view
@@ -585,7 +585,10 @@ class Consulta extends CI_Controller {
         $data['alterarcliente'] = 1;
         $data['caminho2'] = '../';
 		$data['vincular'] = 'S';
- 		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
+ 		$data['vincular'] = 'S';
+		$data['porconsulta'] = 'S';
+		
+		//(!$data['cadastrar']['Cadastrar']) ? $data['cadastrar']['Cadastrar'] = 'S' : FALSE;       
 		
 		$data['radio'] = array(
             'Cadastrar' => $this->basico->radio_checked($data['cadastrar']['Cadastrar'], 'Cadastrar', 'NS'),
@@ -1565,6 +1568,7 @@ class Consulta extends CI_Controller {
 		
 		$data['alterar'] = quotes_to_entities($this->input->post(array(
 			'Quais',
+			'DeletarOS',
         ), TRUE));
 
         $data['query'] = $this->input->post(array(
@@ -1588,6 +1592,7 @@ class Consulta extends CI_Controller {
                 ), TRUE);
 
  		(!$data['alterar']['Quais']) ? $data['alterar']['Quais'] = 1 : FALSE;
+ 		(!$data['alterar']['DeletarOS']) ? $data['alterar']['DeletarOS'] = 'S' : FALSE;
  		(!$data['cadastrar']['Vincular']) ? $data['cadastrar']['Vincular'] = 'N' : FALSE;
  		(!$data['cadastrar']['NovaOS']) ? $data['cadastrar']['NovaOS'] = 'N' : FALSE;
  		(!$data['cadastrar']['PorConsulta']) ? $data['cadastrar']['PorConsulta'] = 'N' : FALSE;
@@ -1613,6 +1618,7 @@ class Consulta extends CI_Controller {
 			$_SESSION['Consulta']['DataInicio'] = $dataini[0];
             $_SESSION['Consulta']['DataFim'] = $datafim[0];
 			
+			$_SESSION['Consultas_zero'] = $data['consultas_zero'] = $this->Consulta_model->get_consultas_zero($_SESSION['Consulta']['idApp_OrcaTrata'], TRUE);
             $_SESSION['Consultas_Repet'] = $data['consultas_repet'] = $this->Consulta_model->get_consultas_repet($_SESSION['Consulta']['Repeticao']);
 			
 		}
@@ -1621,8 +1627,20 @@ class Consulta extends CI_Controller {
             $data['query']['DataFim'] = $this->basico->mascara_data($data['query']['Data'], 'mysql') . ' ' . $data['query']['HoraFim'];
         }
 		
-		$count_repet = count($_SESSION['Consultas_Repet']);
-
+		$data['count_zero'] = count($_SESSION['Consultas_zero']);
+		$data['count_repet'] = count($_SESSION['Consultas_Repet']);
+        /*
+		echo '<br>';
+          echo "<pre>";
+		  
+          print_r('contagem orca = ' . $data['count_zero']);
+		  echo '<br>';
+          print_r('contagem repeticao = ' . $data['count_repet']);
+          echo "</pre>";
+          exit ();
+		*/		
+		
+		
         if ($data['query']['DataFim'] < date('Y-m-d H:i:s', time())) {
             #$data['readonly'] = 'readonly';
             $data['readonly'] = '';
@@ -1666,6 +1684,7 @@ class Consulta extends CI_Controller {
 			'5' => 'GIGANTE',
         );	
         $data['select']['Cadastrar'] = $this->Basico_model->select_status_sn();
+		$data['select']['DeletarOS'] = $this->Basico_model->select_status_sn();
 		$data['select']['Vincular'] = $this->Basico_model->select_status_sn();
 		$data['select']['NovaOS'] = $this->Basico_model->select_status_sn();
 		$data['select']['PorConsulta'] = $this->Basico_model->select_status_sn();
@@ -1705,7 +1724,7 @@ class Consulta extends CI_Controller {
 
 		if(isset($_SESSION['Consulta']['idApp_OrcaTrata']) && ($_SESSION['Consulta']['idApp_OrcaTrata'] == 0 || $_SESSION['Consulta']['idApp_OrcaTrata'] == "")){
 			$data['vincular'] = 'S';
-			if($count_repet == 0){
+			if($data['count_repet'] == 0){
 				$data['porconsulta'] = 'S';
 			}else{
 				$data['porconsulta'] = 'N';
@@ -1727,6 +1746,13 @@ class Consulta extends CI_Controller {
         ($data['cadastrar']['Cadastrar'] == 'N') ?
             $data['div']['Cadastrar'] = '' : $data['div']['Cadastrar'] = 'style="display: none;"';
 			
+			
+		$data['radio'] = array(
+            'DeletarOS' => $this->basico->radio_checked($data['alterar']['DeletarOS'], 'DeletarOS', 'NS'),
+        );
+        ($data['alterar']['DeletarOS'] == 'N') ?
+            $data['div']['DeletarOS'] = 'style="display: none;"' : $data['div']['DeletarOS'] = '';			
+
 		$data['radio'] = array(
             'Vincular' => $this->basico->radio_checked($data['cadastrar']['Vincular'], 'Vincular', 'NS'),
         );
@@ -2248,31 +2274,54 @@ class Consulta extends CI_Controller {
 
 		$data['alterar'] = quotes_to_entities($this->input->post(array(
 			'Quais',
+			'DeletarOS',
         ), TRUE));
 		
 		$quais = $data['alterar']['Quais'];	
+		$deletaros = $data['alterar']['DeletarOS'];
 		
 		if (!$id) {
             $data['msg'] = '?m=2';
             redirect(base_url() . 'agenda' . $data['msg']);
         } else {
 
-            $data['anterior'] = $this->Consulta_model->get_consulta($id);
+			$data['anterior'] = $this->Consulta_model->get_consulta($id);
 			
 			$repeticao = $data['anterior']['Repeticao'];
 			$dataini = $data['anterior']['DataInicio'];
+			
+			$_SESSION['Repeticao'] 	= $this->Consulta_model->get_consulta_repeticao($id, $repeticao, $quais, $dataini);
+			$count_delete_orca		= count($_SESSION['Repeticao']);
 
             $data['campos'] = array_keys($data['anterior']);
 
             $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], NULL, $data['campos'], $data['anterior']['idApp_Consulta'], FALSE, TRUE);
             $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Consulta', 'DELETE', $data['auditoriaitem']);
 
-            $this->Consulta_model->delete_consulta($id, $repeticao, $quais, $dataini);
-
-            $data['msg'] = '?m=1';
-
-            redirect(base_url() . 'agenda' . $data['msg']);
-            exit();
+			$data['delete']['consulta'] = $this->Consulta_model->delete_consulta($id, $repeticao, $quais, $dataini);
+			
+			if($deletaros == "S"){
+				if($count_delete_orca > 0){
+					for($j=0; $j < $count_delete_orca; $j++) {
+						$_SESSION['Consultas_Zero'][$j] = $this->Consulta_model->get_consultas_zero($_SESSION['Repeticao'][$j]['idApp_OrcaTrata']);
+						$data['count_zero'][$j]	= count($_SESSION['Consultas_Zero'][$j]);
+						if($data['count_zero'][$j] == 0){
+							$data['delete_orcatrata'][$j] = $this->Orcatrata_model->delete_orcatrata($_SESSION['Repeticao'][$j]['idApp_OrcaTrata']);
+						}
+					}
+					$data['msg'] = '?m=1';
+					redirect(base_url() . 'agenda' . $data['msg']);
+					exit();
+				}else{
+					$data['msg'] = '?m=1';
+					redirect(base_url() . 'agenda' . $data['msg']);
+					exit();
+				}
+			}else{
+				$data['msg'] = '?m=1';
+				redirect(base_url() . 'agenda' . $data['msg']);
+				exit();
+			}
         }
 
         $this->load->view('basico/footer');

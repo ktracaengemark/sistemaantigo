@@ -839,22 +839,63 @@
 							<label>Termina em</label>
 							<input class="form-control"<?php echo $readonly; ?> readonly="" value="<?php echo $_SESSION['Consulta']['DataTermino']; ?>">
 						</div>
-						<div class="col-md-5 text-left">
-							<label for="Quais">Excluir Quais?</label>
-							<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-									id="Quais" name="Quais">
-								<!--<option value="">-- Selecione uma opção --</option>-->
-								<?php
-								foreach ($select['Quais'] as $key => $row) {
-									if ($alterar['Quais'] == $key) {
-										echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-									} else {
-										echo '<option value="' . $key . '">' . $row . '</option>';
-									}
-								}
-								?>
-							</select>
-						</div>
+						<div class="col-md-5 text-left">	
+							<div class="row ">	
+								<div class="col-md-12 text-left">
+									<label for="Quais">Apagar Quais Agendamentos?</label>
+									<select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+											id="Quais" name="Quais">
+										<!--<option value="">-- Selecione uma opção --</option>-->
+										<?php
+										foreach ($select['Quais'] as $key => $row) {
+											if ($alterar['Quais'] == $key) {
+												echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+											} else {
+												echo '<option value="' . $key . '">' . $row . '</option>';
+											}
+										}
+										?>
+									</select>
+								</div>
+							</div>	
+							<div class="row ">	
+								<div class="col-md-12 ">
+									<label for="DeletarOS">Apagar O.S.Vinculas?</label><br>
+									<div class="btn-group" data-toggle="buttons">
+										<?php
+										foreach ($select['DeletarOS'] as $key => $row) {
+											if (!$alterar['DeletarOS']) $alterar['DeletarOS'] = 'S';
+
+											($key == 'N') ? $hideshow = 'hideradio' : $hideshow = 'showradio';
+
+											if ($alterar['DeletarOS'] == $key) {
+												echo ''
+												. '<label class="btn btn-warning active" name="DeletarOS_' . $hideshow . '">'
+												. '<input type="radio" name="DeletarOS" id="' . $hideshow . '" '
+												. 'autocomplete="off" value="' . $key . '" >' . $row
+												. '</label>'
+												;
+											} else {
+												echo ''
+												. '<label class="btn btn-default" name="DeletarOS_' . $hideshow . '">'
+												. '<input type="radio" name="DeletarOS" id="' . $hideshow . '" '
+												. 'autocomplete="off" value="' . $key . '" checked>' . $row
+												. '</label>'
+												;
+											}
+										}
+										?>
+									</div>
+								</div>
+							</div>
+							<div id="DeletarOS" <?php echo $div['DeletarOS']; ?>>
+								<div class="row ">	
+									<div class="col-md-12 ">
+										<h4 for="DeletarOS"><span class="glyphicon glyphicon-alert"></span> Atenção!! As O.S. vinculadas aos agendamentos, também serão apagadas?</h4>
+									</div>
+								</div>
+							</div>
+						</div>	
 					</div>	
 					<div class="row">	
 						<div class="col-md-6 text-left">

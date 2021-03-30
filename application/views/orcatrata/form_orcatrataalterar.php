@@ -2171,11 +2171,17 @@
 																					</button>
 																				</div>
 																				<?php if ($_SESSION['Usuario']['Delet_Orcam'] == "S" ) { ?>
-																					<div class="col-md-6 text-right">
-																						<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluir/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
-																							<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
-																						</a>
-																					</div>
+																					<?php if ($count_orca == 0 ) { ?>	
+																						<div class="col-md-6 text-right">
+																							<a class="btn btn-danger" name="submeter3" id="submeter3" onclick="DesabilitaBotaoExcluir(this.name)" href="<?php echo base_url() . 'orcatrata/excluir/' . $orcatrata['idApp_OrcaTrata'] ?>" role="button">
+																								<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
+																							</a>
+																						</div>
+																					<?php }else{ ?>	
+																						<div class="col-md-6 text-left">
+																							<span class="glyphicon glyphicon-alert" name="submeter3" id="submeter3" ></span> Atenção! <br>Este Orçamento está vinculado a um agendamento e não pode ser apagado por aqui!
+																						</div>
+																					<?php } ?>	
 																				<?php } ?>	
 																			</div>
 																		</div>

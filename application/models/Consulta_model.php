@@ -43,14 +43,71 @@ class Consulta_model extends CI_Model {
 			FROM 
 				App_Consulta
 			WHERE 
-				idApp_Consulta = ' . $data
+				idApp_OrcaTrata = ' . $data
 		);
 		
         $query = $query->result_array();
 
-        return $query[0];
+        return $query;
     }
 
+    public function get_consulta_repeticao($id, $repeticao, $quais, $dataini) {
+
+		if($quais == 4){
+			$query = $this->db->query('
+				SELECT idApp_Consulta, Repeticao, idApp_OrcaTrata
+				FROM App_Consulta WHERE Repeticao = ' . $repeticao . '	
+			');
+		}elseif($quais == 3){
+			$query = $this->db->query('
+				SELECT idApp_Consulta, Repeticao, idApp_OrcaTrata 
+				FROM App_Consulta WHERE Repeticao = ' . $repeticao . '	AND DataInicio >= "' . $dataini . '"	
+			');
+		}elseif($quais == 2){
+			$query = $this->db->query('
+				SELECT idApp_Consulta, Repeticao, idApp_OrcaTrata 
+				FROM App_Consulta WHERE Repeticao = ' . $repeticao . '	AND DataInicio <= "' . $dataini . '"	
+			');
+		}else{
+			$query = $this->db->query('
+				SELECT idApp_Consulta, Repeticao, idApp_OrcaTrata 
+				FROM App_Consulta WHERE idApp_Consulta = ' . $id . '	
+			');
+		}
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
+    public function get_consultas_orca($data) {
+        $query = $this->db->query('
+			SELECT * 
+			FROM 
+				App_Consulta
+			WHERE 
+				idApp_OrcaTrata = ' . $data
+		);
+		
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
+    public function get_consultas_zero($data) {
+        $query = $this->db->query('
+			SELECT * 
+			FROM 
+				App_Consulta
+			WHERE 
+				idApp_OrcaTrata = ' . $data . ' AND
+				idApp_OrcaTrata != 0 
+		');
+		
+        $query = $query->result_array();
+
+        return $query;
+    }
+	
     public function get_consultas($data) {
         $query = $this->db->query('
 			SELECT * 
