@@ -66,6 +66,23 @@ class Consulta_model extends CI_Model {
 
         return $query;
     }
+
+    public function get_consultas_repet($data) {
+        $query = $this->db->query('
+			SELECT * 
+			FROM 
+				App_Consulta
+			WHERE 
+				Repeticao = ' . $data . ' AND
+				idApp_OrcaTrata != 0
+			ORDER BY
+				idApp_Consulta ASC
+		');
+		
+        $query = $query->result_array();
+
+        return $query;
+    }
 	
     public function get_recorrencia() {
         $query = $this->db->query('

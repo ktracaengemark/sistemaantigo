@@ -561,8 +561,8 @@
 								<div class="col-md-4 text-left">
 									<div class="panel panel-warning">
 										<div class="panel-heading">
-											<?php if ($metodo == 1) { ?>
-												<div class="row">
+											<div class="row">
+												<?php if ($vincular == "S") { ?>
 													<div class="col-md-4 ">
 														<label for="Vincular">Vincular O.S.?</label><br>
 														<div class="btn-group" data-toggle="buttons">
@@ -622,55 +622,49 @@
 														</div>
 														<div id="NovaOS" <?php echo $div['NovaOS']; ?>>
 															<div class="col-md-4 ">
-																<label for="PorConsulta">Uma/Ocorren.?</label><br>
-																<div class="btn-group" data-toggle="buttons">
-																	<?php
-																	foreach ($select['PorConsulta'] as $key => $row) {
-																		if (!$cadastrar['PorConsulta']) $cadastrar['PorConsulta'] = 'N';
+																<?php if ($porconsulta == "S") { ?>
+																	<label for="PorConsulta">Por/Ocorren.?</label><br>
+																	<div class="btn-group" data-toggle="buttons">
+																		<?php
+																		foreach ($select['PorConsulta'] as $key => $row) {
+																			if (!$cadastrar['PorConsulta']) $cadastrar['PorConsulta'] = 'N';
 
-																		($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																			($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
-																		if ($cadastrar['PorConsulta'] == $key) {
-																			echo ''
-																			. '<label class="btn btn-warning active" name="PorConsulta_' . $hideshow . '">'
-																			. '<input type="radio" name="PorConsulta" id="' . $hideshow . '" '
-																			. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																			. '</label>'
-																			;
-																		} else {
-																			echo ''
-																			. '<label class="btn btn-default" name="PorConsulta_' . $hideshow . '">'
-																			. '<input type="radio" name="PorConsulta" id="' . $hideshow . '" '
-																			. 'autocomplete="off" value="' . $key . '" >' . $row
-																			. '</label>'
-																			;
+																			if ($cadastrar['PorConsulta'] == $key) {
+																				echo ''
+																				. '<label class="btn btn-warning active" name="PorConsulta_' . $hideshow . '">'
+																				. '<input type="radio" name="PorConsulta" id="' . $hideshow . '" '
+																				. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																				. '</label>'
+																				;
+																			} else {
+																				echo ''
+																				. '<label class="btn btn-default" name="PorConsulta_' . $hideshow . '">'
+																				. '<input type="radio" name="PorConsulta" id="' . $hideshow . '" '
+																				. 'autocomplete="off" value="' . $key . '" >' . $row
+																				. '</label>'
+																				;
+																			}
 																		}
-																	}
-																	?>
-																</div>
+																		?>
+																	</div>
+																<?php }else{ ?>
+																	<label for="PorConsulta">Gerar 1 OS</label>
+																<?php } ?>
 															</div>
 														</div>
 													</div>
-												</div>
-												<br>
-											<?php }else{ ?>
-												
-												<a class="col-md-4 btn btn-sm btn-warning" href="<?php echo base_url() ?>orcatrata/alterarstatus/<?php echo $_SESSION['Consulta']['idApp_OrcaTrata'];?>" role="button">
-													<span class="glyphicon glyphicon-pencil"></span>O.S.
-												</a>
-												<h4 class="mb-3">
-													Pergunta 1:
-													<br> Existe OS vinculada?
-													<br> Se:(Sim), Criar Botão para o caminho da OS.
-													<br>Se:(Não), Criar Botão para gerar nova OS.
-													<br>Pergunta 2:
-													<br>Existem Repetições?
-													<br>Se:(Sim), Botão para gera apenas 1(uma) OS.
-													<br>Se:(Não), Botão para gerar "n" novas OS.
-												</h4>
-												<br>
-												
-											<?php } ?>
+												<?php }else{ ?>
+													<div class="col-md-4 ">
+														<label for="NovaOS">O.S.Vinculada</label><br>
+														<a class="btn btn-md btn-warning btn-block" href="<?php echo base_url() ?>orcatrata/alterarstatus/<?php echo $_SESSION['Consulta']['idApp_OrcaTrata'];?>" role="button">
+															<span class="glyphicon glyphicon-pencil"></span>O.S.
+														</a>
+													</div>
+												<?php } ?>
+											</div>
+											<br>
 											<div class="row">	
 												<div class="col-md-6 form-inline text-left">
 													<label for="idTab_TipoConsulta">Agendamento de:</label><br>

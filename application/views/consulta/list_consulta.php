@@ -193,7 +193,7 @@
 													$row['NomePaciente'] = '<b>ContatoCliente</b> - ' . $row['NomeContatoCliente'] : 
 													$row['NomePaciente'] = 'O Próprio ';
 												
-												echo '<div data-href="' . base_url() . 'consulta/alterar2/' . $row['idApp_Cliente'] . '/' . $row['idApp_Consulta'] . '" '
+												echo '<div data-href="' . base_url() . 'consulta/alterar/' . $row['idApp_Cliente'] . '/' . $row['idApp_Consulta'] . '" '
 												. 'class="clickable-row bs-callout bs-callout-' . $this->basico->tipo_status_cor($row['idTab_Status']) . '">';
 												echo '<h4><b>Status: ' . $row['Status'] . '</b></h4>';
 												echo '<p><b>Data:</b> ' . $this->basico->mascara_data($row['DataInicio'][0], 'barras') . ' '
@@ -225,7 +225,7 @@
 													$row['NomePaciente'] = '<b>ContatoCliente</b> - ' . $row['NomeContatoCliente'] : 
 													$row['NomePaciente'] = 'O Próprio ';
 												
-												echo '<div data-href="' . base_url() . 'consulta/alterar2/' . $row['idApp_Cliente'] . '/' . $row['idApp_Consulta'] . '" '
+												echo '<div data-href="' . base_url() . 'consulta/alterar/' . $row['idApp_Cliente'] . '/' . $row['idApp_Consulta'] . '" '
 												. 'class="clickable-row bs-callout bs-callout-' . $this->basico->tipo_status_cor($row['idTab_Status']) . '">';
 												echo '<h4><b>Status: ' . $row['Status'] . '</b></h4>';
 												echo '<p><b>Data:</b> ' . $this->basico->mascara_data($row['DataInicio'][0], 'barras') . ' '
