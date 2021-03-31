@@ -1926,41 +1926,41 @@
 																							<?php } ?>
 																						</div>
 																						<div id="ConcluidoOrca" <?php echo $div['ConcluidoOrca']; ?>>
-																							
-																							<div class="col-md-6 text-left">
-																								<label for="StatusProdutos">Todas as OS?</label><br>
-																								<div class="btn-group" data-toggle="buttons">
-																									<?php
-																									foreach ($select['StatusProdutos'] as $key => $row) {
-																										if (!$cadastrar['StatusProdutos'])$cadastrar['StatusProdutos'] = 'N';
+																							<div <?php echo $textoEntregues; ?>>
+																								<div class="col-md-6 text-left">
+																									<label for="StatusProdutos">Todas as OS?</label><br>
+																									<div class="btn-group" data-toggle="buttons">
+																										<?php
+																										foreach ($select['StatusProdutos'] as $key => $row) {
+																											if (!$cadastrar['StatusProdutos'])$cadastrar['StatusProdutos'] = 'N';
 
-																										($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																											($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
-																										if ($cadastrar['StatusProdutos'] == $key) {
-																											echo ''
-																											. '<label class="btn btn-warning active" name="StatusProdutos_' . $hideshow . '">'
-																											. '<input type="radio" name="StatusProdutos" id="' . $hideshow . '" '
-																											. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																											. '</label>'
-																											;
-																										} else {
-																											echo ''
-																											. '<label class="btn btn-default" name="StatusProdutos_' . $hideshow . '">'
-																											. '<input type="radio" name="StatusProdutos" id="' . $hideshow . '" '
-																											. 'autocomplete="off" value="' . $key . '" >' . $row
-																											. '</label>'
-																											;
+																											if ($cadastrar['StatusProdutos'] == $key) {
+																												echo ''
+																												. '<label class="btn btn-warning active" name="StatusProdutos_' . $hideshow . '">'
+																												. '<input type="radio" name="StatusProdutos" id="' . $hideshow . '" '
+																												. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																												. '</label>'
+																												;
+																											} else {
+																												echo ''
+																												. '<label class="btn btn-default" name="StatusProdutos_' . $hideshow . '">'
+																												. '<input type="radio" name="StatusProdutos" id="' . $hideshow . '" '
+																												. 'autocomplete="off" value="' . $key . '" >' . $row
+																												. '</label>'
+																												;
+																											}
 																										}
-																									}
-																									?>
+																										?>
+																									</div>
+																								</div>
+																								<div id="StatusProdutos" <?php echo $div['StatusProdutos']; ?>>
+																									<div <?php echo $textoEntregues; ?> class="col-md-12">
+																										<h4><span class="glyphicon glyphicon-alert"></span> Atenção!! + <?php echo $vinculadas; ?> Vinculada(s).<br>Todas os Produtos, de todas as O.S. vinculadas a esta, receberão o status de Entregue="Sim"!</h4>
+																									</div>
 																								</div>
 																							</div>
-																							<div id="StatusProdutos" <?php echo $div['StatusProdutos']; ?>>
-																								<div <?php echo $textoEntregues; ?> class="col-md-12">
-																									<h4><span class="glyphicon glyphicon-alert"></span> Atenção!! + <?php echo $vinculadas; ?> Vinculada(s).<br>Todas os Produtos, de todas as O.S. vinculadas a esta, receberão o status de Entregue="Sim"!</h4>
-																								</div>
-																							</div>
-																							
 																						</div>
 																					</div>
 																					<div class="row">		
@@ -2009,45 +2009,47 @@
 																							<?php } ?>
 																						</div>
 																						<div id="QuitadoOrca" <?php echo $div['QuitadoOrca']; ?>>
-																							
-																							<div class="col-md-6 text-left">
-																								<label for="StatusParcelas">Todas as OS?</label><br>
-																								<div class="btn-group" data-toggle="buttons">
-																									<?php
-																									foreach ($select['StatusParcelas'] as $key => $row) {
-																										if (!$cadastrar['StatusParcelas'])$cadastrar['StatusParcelas'] = 'N';
+																							<div <?php echo $textoPagas; ?> >
+																								<div class="col-md-6 text-left">
+																									<label for="StatusParcelas">Todas as OS?</label><br>
+																									<div class="btn-group" data-toggle="buttons">
+																										<?php
+																										foreach ($select['StatusParcelas'] as $key => $row) {
+																											if (!$cadastrar['StatusParcelas'])$cadastrar['StatusParcelas'] = 'N';
 
-																										($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																											($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
-																										if ($cadastrar['StatusParcelas'] == $key) {
-																											echo ''
-																											. '<label class="btn btn-warning active" name="StatusParcelas_' . $hideshow . '">'
-																											. '<input type="radio" name="StatusParcelas" id="' . $hideshow . '" '
-																											. 'autocomplete="off" value="' . $key . '" checked>' . $row
-																											. '</label>'
-																											;
-																										} else {
-																											echo ''
-																											. '<label class="btn btn-default" name="StatusParcelas_' . $hideshow . '">'
-																											. '<input type="radio" name="StatusParcelas" id="' . $hideshow . '" '
-																											. 'autocomplete="off" value="' . $key . '" >' . $row
-																											. '</label>'
-																											;
+																											if ($cadastrar['StatusParcelas'] == $key) {
+																												echo ''
+																												. '<label class="btn btn-warning active" name="StatusParcelas_' . $hideshow . '">'
+																												. '<input type="radio" name="StatusParcelas" id="' . $hideshow . '" '
+																												. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																												. '</label>'
+																												;
+																											} else {
+																												echo ''
+																												. '<label class="btn btn-default" name="StatusParcelas_' . $hideshow . '">'
+																												. '<input type="radio" name="StatusParcelas" id="' . $hideshow . '" '
+																												. 'autocomplete="off" value="' . $key . '" >' . $row
+																												. '</label>'
+																												;
+																											}
 																										}
-																									}
-																									?>
+																										?>
+																									</div>
 																								</div>
-																							</div>
-																							<div id="StatusParcelas" <?php echo $div['StatusParcelas']; ?>>
-																								<div <?php echo $textoPagas; ?> class="col-md-12">
-																									<h4><span class="glyphicon glyphicon-alert"></span> Atenção!! + <?php echo $vinculadas; ?> Vinculada(s).<br>Todas as parcelas, de todas as O.S. vinculadas a esta, receberão o status de Paga="Sim"!</h4>
+																								<div id="StatusParcelas" <?php echo $div['StatusParcelas']; ?>>
+																									<div <?php echo $textoPagas; ?> class="col-md-12">
+																										<h4><span class="glyphicon glyphicon-alert"></span> Atenção!! + <?php echo $vinculadas; ?> Vinculada(s).<br>Todas as parcelas, de todas as O.S. vinculadas a esta, receberão o status de Paga="Sim"!</h4>
+																									</div>
 																								</div>
-																							</div>
+																								</div>
 																						</div>	
 																					</div>
 																				</div>
 																			</div>
 																		</div>
+																	
 																	</div>
 																</div>
 															</div>
@@ -2157,7 +2159,8 @@
 														</div>
 													</div>
 													<?php } ?>
-													<div class="col-md-3 text-right">
+													<div class="col-md-6"></div>
+													<div class="col-md-3 text-center">
 														<?php if ($metodo > 1) { ?>
 														<!--<input type="hidden" name="idApp_Procedimento" value="<?php echo $procedimento['idApp_Procedimento']; ?>">
 														<input type="hidden" name="idApp_ParcelasRec" value="<?php echo $parcelasrec['idApp_ParcelasRec']; ?>">-->
@@ -2201,14 +2204,14 @@
 																Aguarde um instante! Estamos processando sua solicitação!
 															</div>
 														<?php } else { ?>
-															<div class="col-md-6 text-left">
+															<div class="col-md-12 text-left">
 																<label></label>
 																<!--
 																<button class="btn btn-lg btn-primary" id="inputDb" data-loading-text="Aguarde..." type="submit">
 																	<span class="glyphicon glyphicon-save"></span> Salvar
 																</button>
 																-->
-																<button type="submit" class="btn btn-lg btn-primary" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)" data-loading-text="Aguarde..." value="1" >
+																<button type="submit" class="btn btn-lg btn-primary btn-block" name="submeter" id="submeter" onclick="DesabilitaBotao(this.name),calculaQtdSoma('QtdProduto','QtdSoma','ProdutoSoma',0,0,'CountMax',1,0)" data-loading-text="Aguarde..." value="1" >
 																	<span class="glyphicon glyphicon-save"></span> Salvar
 																</button>														
 															</div>

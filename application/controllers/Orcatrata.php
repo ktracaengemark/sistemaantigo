@@ -485,7 +485,16 @@ class Orcatrata extends CI_Controller {
         $data['metodo'] = 1;
         $data['caminho'] = '../../';
         $data['caminho2'] = '../';
-		$data['Recorrencias'] = $_SESSION['Consulta']['OS'];
+		$data['Recorrencias'] = $_SESSION['Consulta']['OS'];		
+		
+		$data['vinculadas'] = $_SESSION['Consulta']['OS'] - 1;
+        if ($data['vinculadas'] > 0){
+			$data['textoEntregues'] = '';
+            $data['textoPagas'] = '';
+		}else{
+            $data['textoEntregues'] = 'style="display: none;"';
+            $data['textoPagas'] = 'style="display: none;"';
+		}
 		
 		if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorDev'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
             $data['orcamentoin'] = 'in';
@@ -621,7 +630,7 @@ class Orcatrata extends CI_Controller {
         $data['radio'] = array(
             'ConcluidoOrca' => $this->basico->radio_checked($data['orcatrata']['ConcluidoOrca'], 'Orçamento Concluido', 'NS'),
         );
-        ($data['orcatrata']['ConcluidoOrca'] == 'N') ?
+        ($data['orcatrata']['ConcluidoOrca'] == 'S') ?
             $data['div']['ConcluidoOrca'] = '' : $data['div']['ConcluidoOrca'] = 'style="display: none;"';
 
 			
@@ -713,10 +722,11 @@ class Orcatrata extends CI_Controller {
             $data['orcatrata']['DataQuitado'] = $this->basico->mascara_data($data['orcatrata']['DataQuitado'], 'mysql');
 			$data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'mysql');
 			$data['orcatrata']['Tipo_Orca'] = "B";
-			
+			/*
 			if ($data['cadastrar']['StatusParcelas'] == 'S'){
 				$data['orcatrata']['QuitadoOrca'] = "S";
-			}	
+			}
+			*/
 			if ($data['orcatrata']['FinalizadoOrca'] == 'S'){
 					$data['orcatrata']['AprovadoOrca'] = "S";
 					$data['orcatrata']['CombinadoFrete'] = "S";
@@ -1872,7 +1882,16 @@ class Orcatrata extends CI_Controller {
         $data['metodo'] = 1;
         $data['caminho'] = '../../';
         $data['caminho2'] = '../../';
-		$data['Recorrencias'] = 1;
+		$data['Recorrencias'] = 1;		
+		
+		$data['vinculadas'] = 0;
+        if ($data['vinculadas'] > 0){
+			$data['textoEntregues'] = '';
+            $data['textoPagas'] = '';
+		}else{
+            $data['textoEntregues'] = 'style="display: none;"';
+            $data['textoPagas'] = 'style="display: none;"';
+		}
 
 		
 		if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorDev'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
@@ -2922,6 +2941,15 @@ class Orcatrata extends CI_Controller {
         $data['caminho'] = '../';
         $data['caminho2'] = '../';
 		$data['Recorrencias'] = 1;
+		
+		$data['vinculadas'] = 0;
+        if ($data['vinculadas'] > 0){
+			$data['textoEntregues'] = '';
+            $data['textoPagas'] = '';
+		}else{
+            $data['textoEntregues'] = 'style="display: none;"';
+            $data['textoPagas'] = 'style="display: none;"';
+		}
 
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';
@@ -3022,7 +3050,7 @@ class Orcatrata extends CI_Controller {
         $data['radio'] = array(
             'ConcluidoOrca' => $this->basico->radio_checked($data['orcatrata']['ConcluidoOrca'], 'Produtos Entregues', 'NS'),
         );
-        ($data['orcatrata']['ConcluidoOrca'] == 'N') ?
+        ($data['orcatrata']['ConcluidoOrca'] == 'S') ?
             $data['div']['ConcluidoOrca'] = '' : $data['div']['ConcluidoOrca'] = 'style="display: none;"';
 
 			
@@ -4145,7 +4173,16 @@ class Orcatrata extends CI_Controller {
         $data['metodo'] = 2;
         $data['caminho'] = '../../';
         $data['caminho2'] = '../../';
-		$data['Recorrencias'] = 1;
+		$data['Recorrencias'] = 1;		
+		
+		$data['vinculadas'] = 0;
+        if ($data['vinculadas'] > 0){
+			$data['textoEntregues'] = '';
+            $data['textoPagas'] = '';
+		}else{
+            $data['textoEntregues'] = 'style="display: none;"';
+            $data['textoPagas'] = 'style="display: none;"';
+		}
 		
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';		
@@ -8469,7 +8506,7 @@ class Orcatrata extends CI_Controller {
 			$data['orcatrata']['DataEntradaOrca'] = $this->basico->mascara_data($data['orcatrata']['DataEntradaOrca'], 'barras');
             $data['orcatrata']['DataVencimentoOrca'] = $this->basico->mascara_data($data['orcatrata']['DataVencimentoOrca'], 'barras');
 
-			$_SESSION['Orcatratas'] = $data['orcatratas'] = $this->Orcatrata_model->get_orcatratas($_SESSION['Orcatrata']['RepeticaoOrca']);
+			$_SESSION['Orcatratas'] = $data['orcatratas'] = $this->Orcatrata_model->get_orcatratas_repet($_SESSION['Orcatrata']['RepeticaoOrca']);
 			
             #### Carrega os dados do cliente nas variáves de sessão ####
 			if($data['orcatrata']['idApp_Cliente'] != 0){
@@ -8636,15 +8673,13 @@ class Orcatrata extends CI_Controller {
 			$data['vinculadas'] = $data['count_orcatratas'] - 1;
 		}
 
-        if ($data['vinculadas'] > 0)
-            $data['textoEntregues'] = '';
-        else
-            $data['textoEntregues'] = 'style="display: none;"';
-
-        if ($data['vinculadas'] > 0)
+		if ($data['vinculadas'] > 0){
+			$data['textoEntregues'] = '';
             $data['textoPagas'] = '';
-        else
-            $data['textoPagas'] = 'style="display: none;"';		
+		}else{
+            $data['textoEntregues'] = 'style="display: none;"';
+            $data['textoPagas'] = 'style="display: none;"';
+		}		
 
         //if ($data['orcatrata']['ValorOrca'] || $data['orcatrata']['ValorEntradaOrca'] || $data['orcatrata']['ValorRestanteOrca'])
         if ($data['count']['SCount'] > 0 || $data['count']['PCount'] > 0)
@@ -9891,6 +9926,17 @@ class Orcatrata extends CI_Controller {
         $data['panel'] = 'danger';
         $data['metodo'] = 1;
         $data['caminho'] = '../';
+		
+		$data['Recorrencias'] = 1;		
+		
+		$data['vinculadas'] = 0;
+        if ($data['vinculadas'] > 0){
+			$data['textoEntregues'] = '';
+            $data['textoPagas'] = '';
+		}else{
+            $data['textoEntregues'] = 'style="display: none;"';
+            $data['textoPagas'] = 'style="display: none;"';
+		}
 
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';
@@ -11076,7 +11122,18 @@ class Orcatrata extends CI_Controller {
         $data['disabled'] = '';
         $data['panel'] = 'danger';
         $data['metodo'] = 2;
-        $data['caminho'] = '../../';
+        $data['caminho'] = '../../';		
+		
+		$data['Recorrencias'] = 1;		
+		
+		$data['vinculadas'] = 0;
+        if ($data['vinculadas'] > 0){
+			$data['textoEntregues'] = '';
+            $data['textoPagas'] = '';
+		}else{
+            $data['textoEntregues'] = 'style="display: none;"';
+            $data['textoPagas'] = 'style="display: none;"';
+		}
 
 		$data['collapse'] = '';	
 		$data['collapse1'] = 'class="collapse"';		
