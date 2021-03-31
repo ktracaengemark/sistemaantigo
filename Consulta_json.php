@@ -61,6 +61,7 @@ $result = mysql_query(
             C.Evento,
 			C.Recorrencia,
 			C.DataTermino,
+			C.Repeticao,
 			C.idApp_OrcaTrata
         FROM
 			App_Consulta AS C
@@ -101,6 +102,7 @@ while ($row = mysql_fetch_assoc($result)) {
 		#$profissional = utf8_encode($row['idApp_Agenda']);
 		$profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
         $recorrencia = mb_convert_encoding($row['Recorrencia'], "UTF-8", "ISO-8859-1");
+        $repeticao = $row['Repeticao'];
         $datatermino = $row['DataTermino'];
         $OS = $row['idApp_OrcaTrata'];
 
@@ -116,6 +118,7 @@ while ($row = mysql_fetch_assoc($result)) {
 			#$profissional = utf8_encode($row['idApp_Agenda']);
 			$profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
 			$recorrencia = mb_convert_encoding($row['Recorrencia'], "UTF-8", "ISO-8859-1");
+			$repeticao = $row['Repeticao'];
 			$datatermino = $row['DataTermino'];
 			$OS = $row['idApp_OrcaTrata'];
 			$telefone1 = mb_convert_encoding($row['CelularCliente'], "UTF-8", "ISO-8859-1");
@@ -136,6 +139,7 @@ while ($row = mysql_fetch_assoc($result)) {
 			#$profissional = utf8_encode($row['idSis_Usuario']);
             $profissional = mb_convert_encoding($row['NomeProfissional'], "UTF-8", "ISO-8859-1");
 			$recorrencia = mb_convert_encoding($row['Recorrencia'], "UTF-8", "ISO-8859-1");
+			$repeticao = $row['Repeticao'];
 			$datatermino = $row['DataTermino'];
 			$OS = $row['idApp_OrcaTrata'];
 			#$telefone1 = utf8_encode($row['CelularCliente']);
@@ -211,6 +215,7 @@ while ($row = mysql_fetch_assoc($result)) {
         #   'ContatoCliente' => $contatocliente,
         'Profissional' => $profissional,
         'Recorrencia' => $recorrencia,
+        'Repeticao' => $repeticao,
         'DataTermino' => $datatermino,
         'OS' => $OS,
     );

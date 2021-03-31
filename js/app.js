@@ -7580,15 +7580,15 @@ $('#calendar').fullCalendar({
     eventAfterRender: function (event, element) {
 
         if (event.Evento == 1){
-            var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b>" + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencia + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
+            var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b>" + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencia + " <b> - </b> " + event.Repeticao + "<br>\n\<b>Termina em:</b> " + event.DataTermino;
         }else{
 
             if (event.Paciente == 'D'){
                 var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b> " + event.Obs  + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Cliente: </b>" + event.titlecliente + "</b><br><b>Responsável:</b> " + event.subtitle + "<br><b>Tel.:</b> " + event.CelularCliente + 
-							"<br>\n\<b>Tipo: </b> " + event.TipoConsulta + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencia + "<br><b>Termina em:</b> " + event.DataTermino + "<br><b>OS:</b> " + event.OS;
+							"<br>\n\<b>Tipo: </b> " + event.TipoConsulta + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencia + " <b> - </b> " + event.Repeticao + "<br><b>Termina em:</b> " + event.DataTermino + "<br><b>OS:</b> " + event.OS;
             }else{
                 var title = "<b>Empresa:</b> " + event.NomeEmpresaEmp + "<br>\n\<b>Evento: </b> " + event.Obs + "<br>\n\<b>Prof.:</b> " + event.Profissional + "<br>\n\<b>Cliente: </b>" + event.titlecliente + "<b> " + "<br><b>Tel.:</b> " + event.CelularCliente + "<b> " + "<br><b>Depend.:</b> " + event.titledep + "<b> " + "<br><b>Pet:</b> " + event.titlepet +  
-							"<br>\n\<b>Tipo: </b> " + event.TipoConsulta + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencia + "<br><b>Termina em:</b> " + event.DataTermino + "<br><b>OS:</b> " + event.OS;
+							"<br>\n\<b>Tipo: </b> " + event.TipoConsulta + "<br>\n\<b>Ocorrência:</b> " + event.Recorrencia + " <b> - </b> " + event.Repeticao + "<br><b>Termina em:</b> " + event.DataTermino + "<br><b>OS:</b> " + event.OS;
 			}
 		}
         $(element).tooltip({
