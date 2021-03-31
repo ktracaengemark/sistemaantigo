@@ -1882,15 +1882,15 @@
 																			<div class="panel panel-warning">
 																				<div class="panel-heading">																						
 																					<div class="row">
-																						<div class="col-md-12 text-left">
-																							<label for="ConcluidoOrca">Prds & Srvs. Entregues?</label><br>
+																						<div class="col-md-6 text-left">
+																							<label for="ConcluidoOrca">Prds Entregues?</label><br>
 																							<?php if ($_SESSION['Usuario']['Bx_Prd'] == "S") { ?>
 																								<div class="btn-group" data-toggle="buttons">
 																									<?php
 																									foreach ($select['ConcluidoOrca'] as $key => $row) {
 																										if (!$orcatrata['ConcluidoOrca'])$orcatrata['ConcluidoOrca'] = 'N';
 
-																										($key == 'N') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+																										($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
 
 																										if ($orcatrata['ConcluidoOrca'] == $key) {
 																											echo ''
@@ -1924,6 +1924,43 @@
 																									?>
 																								</span>
 																							<?php } ?>
+																						</div>
+																						<div id="ConcluidoOrca" <?php echo $div['ConcluidoOrca']; ?>>
+																							
+																							<div class="col-md-6 text-left">
+																								<label for="StatusProdutos">Todas as OS?</label><br>
+																								<div class="btn-group" data-toggle="buttons">
+																									<?php
+																									foreach ($select['StatusProdutos'] as $key => $row) {
+																										if (!$cadastrar['StatusProdutos'])$cadastrar['StatusProdutos'] = 'N';
+
+																										($key == 'S') ? $hideshow = 'showradio' : $hideshow = 'hideradio';
+
+																										if ($cadastrar['StatusProdutos'] == $key) {
+																											echo ''
+																											. '<label class="btn btn-warning active" name="StatusProdutos_' . $hideshow . '">'
+																											. '<input type="radio" name="StatusProdutos" id="' . $hideshow . '" '
+																											. 'autocomplete="off" value="' . $key . '" checked>' . $row
+																											. '</label>'
+																											;
+																										} else {
+																											echo ''
+																											. '<label class="btn btn-default" name="StatusProdutos_' . $hideshow . '">'
+																											. '<input type="radio" name="StatusProdutos" id="' . $hideshow . '" '
+																											. 'autocomplete="off" value="' . $key . '" >' . $row
+																											. '</label>'
+																											;
+																										}
+																									}
+																									?>
+																								</div>
+																							</div>
+																							<div id="StatusProdutos" <?php echo $div['StatusProdutos']; ?>>
+																								<div <?php echo $textoEntregues; ?> class="col-md-12">
+																									<h4><span class="glyphicon glyphicon-alert"></span> Atenção!! + <?php echo $vinculadas; ?> Vinculada(s).<br>Todas os Produtos, de todas as O.S. vinculadas a esta, receberão o status de Entregue="Sim"!</h4>
+																								</div>
+																							</div>
+																							
 																						</div>
 																					</div>
 																					<div class="row">		
@@ -2003,7 +2040,7 @@
 																							</div>
 																							<div id="StatusParcelas" <?php echo $div['StatusParcelas']; ?>>
 																								<div <?php echo $textoPagas; ?> class="col-md-12">
-																									<h4><span class="glyphicon glyphicon-alert"></span> Atenção!! + <?php echo $vinculadas; ?> Vinculada(s).<br>Todas as parcelas, de todas as O.S. vinculadas a esta, receberão o status de Paga!</h4>
+																									<h4><span class="glyphicon glyphicon-alert"></span> Atenção!! + <?php echo $vinculadas; ?> Vinculada(s).<br>Todas as parcelas, de todas as O.S. vinculadas a esta, receberão o status de Paga="Sim"!</h4>
 																								</div>
 																							</div>
 																						</div>	
