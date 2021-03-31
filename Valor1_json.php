@@ -50,7 +50,7 @@ if ($_GET['tabela']) {
 	}
     while ($row = mysql_fetch_assoc($result)) {
 		$qtdincinteiro	= $row['QtdProdutoIncremento'];
-		$qtdincdividido	= $qtdincinteiro/$recorrencias;
+		$qtdincdividido	= intval($qtdincinteiro/$recorrencias);
 		if($qtdincdividido < 1){
 			$qtdinccorrigido = 1;
 		}else{

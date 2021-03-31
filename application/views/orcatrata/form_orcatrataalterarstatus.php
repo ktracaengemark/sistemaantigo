@@ -2001,7 +2001,11 @@
 																									?>
 																								</div>
 																							</div>
-																							
+																							<div id="StatusParcelas" <?php echo $div['StatusParcelas']; ?>>
+																								<div <?php echo $textoPagas; ?> class="col-md-12">
+																									<h4><span class="glyphicon glyphicon-alert"></span> Atenção!! + <?php echo $vinculadas; ?> Vinculada(s).<br>Todas as parcelas, de todas as O.S. vinculadas a esta, receberão o status de Paga!</h4>
+																								</div>
+																							</div>
 																						</div>	
 																					</div>
 																				</div>
